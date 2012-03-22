@@ -43,10 +43,12 @@ $wgResourceModules['ext.WikidataRepo'] = array(
 // register classes ---------------------------------------------------------
 $wgAutoloadClasses['WikidataContentHandler'] = $dir . 'WikidataContentHandler.php';
 $wgAutoloadClasses['WikidataContent'] = $dir . 'WikidataContent.php';
+$wgAutoloadClasses['ApiQueryWikidataProp'] = $dir . 'ApiQueryWikidataProp.php';
 
 // register hooks and handlers ---------------------------------------------------------
 define('CONTENT_MODEL_WIKIDATA', 'wikidata');
 $wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikidataContentHandler';
+$wgAPIPropModules['wikidata'] = 'ApiQueryWikidataProp';
 
 // configuration defaults ---------------------------------------------------------
 $wgWikidataSerialisationFormat = 'application/json'; # alternative: application/vnd.php.serialized
