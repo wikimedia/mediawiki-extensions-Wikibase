@@ -1,13 +1,30 @@
 <?php
 class WikidataContent extends Content {
 
+    const TYPE_TEXT = 'text';
+    const TYPE_SCALAR = 'scalar'; # unit, precision, point-in-time
+    const TYPE_DATE = 'date';
+    const TYPE_TERM = 'term'; # lang, pronunciation
+    const TYPE_ENTITY_REF = 'ref';
+
+    const PROP_LABEL = 'label';
+    const PROP_DESCRIPTION = 'description';
+    const PROP_ALIAS = 'alias';
+
+    public function __construct( $data ) {
+        parent::__construct( CONTENT_MODEL_WIKIDATA );
+
+        #TODO: assert $data is an array!
+        $this->mData = $data;
+    }
+
     /**
      * @return String a string representing the content in a way useful for building a full text search index.
      *         If no useful representation exists, this method returns an empty string.
      */
     public function getTextForSearchIndex()
     {
-        // TODO: Implement getTextForSearchIndex() method.
+        return ''; #TODO: recursively collect all values from all properties.
     }
 
     /**
@@ -16,7 +33,7 @@ class WikidataContent extends Content {
      */
     public function getWikitextForTransclusion()
     {
-        // TODO: Implement getWikitextForTransclusion() method.
+        return false;
     }
 
     /**
@@ -27,7 +44,7 @@ class WikidataContent extends Content {
      */
     public function getTextForSummary($maxlength = 250)
     {
-        // TODO: Implement getTextForSummary() method.
+        return $this->getDescription();
     }
 
     /**
@@ -39,7 +56,7 @@ class WikidataContent extends Content {
      */
     public function getNativeData()
     {
-        // TODO: Implement getNativeData() method.
+        return $this->mData;
     }
 
     /**
@@ -49,7 +66,7 @@ class WikidataContent extends Content {
      */
     public function getSize()
     {
-        // TODO: Implement getSize() method.
+        return strlen( serialize( $this->mData) ); #TODO: keep and reuse value, content object is immutable!
     }
 
     /**
@@ -61,7 +78,7 @@ class WikidataContent extends Content {
      */
     public function isCountable($hasLinks = null)
     {
-        // TODO: Implement isCountable() method.
+        return !empty( $this->mData[ WikidataContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
     }
 
     /**
@@ -72,6 +89,55 @@ class WikidataContent extends Content {
      */
     public function getParserOutput(Title $title = null, $revId = null, ParserOptions $options = NULL)
     {
-        // TODO: Implement getParserOutput() method.
+        // TODO: generate sensible HTML!
+
+        $serialized = print_r( $this->getNativeData(), true );
+        $html = '<pre class="wikidata-data">' . htmlspecialchars( $serialized ) . '</pre>';
+        $po = new ParserOutput( $html );
+
+        return $po;
+
+    }
+
+    #=================================================================================================================
+
+    public function getPropertyNames( ) {
+        //TODO: implement
+    }
+
+    public function getSystemPropertyNames( ) {
+        //TODO: implement
+    }
+
+    public function getEditorialPropertyNames( ) {
+        //TODO: implement
+    }
+
+    public function getStatementPropertyNames( ) {
+        //TODO: implement
+    }
+
+    public function getPropertyMultilang( $name, $languages = null ) {
+        //TODO: implement
+    }
+
+    public function getProperty( $name, $languag = null ) {
+        //TODO: implement
+    }
+
+    public function getPropertyType( $name ) {
+        //TODO: implement
+    }
+
+    public function isStatementProperty( $name ) {
+        //TODO: implement
+    }
+
+    public function getDescription( $lang = null ) {
+        //TODO: implement
+    }
+
+    public function getLabel( $lang = null ) {
+        //TODO: implement
     }
 }
