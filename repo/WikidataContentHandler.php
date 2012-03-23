@@ -1,6 +1,21 @@
 <?php
 class WikidataContentHandler extends ContentHandler {
 
+    public function __construct() {
+        $formats = array(
+            'application/json',
+            'application/vnd.php.serialized' #FIXME: find out what mime type the api uses for serialized php objects
+        );
+
+        parent::__construct( CONTENT_MODEL_WIKIDATA, $formats );
+    }
+
+    public function getDefaultFormat() {
+        global $wgWikidataSerialisationFormat;
+
+        return $wgWikidataSerialisationFormat;
+    }
+
     /**
      * @param WikidataContent $content
      * @param null|String $format

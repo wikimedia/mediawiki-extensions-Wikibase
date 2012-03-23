@@ -81,6 +81,11 @@ class WikidataContent extends Content {
         return !empty( $this->mData[ WikidataContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
     }
 
+    public function isEmpty()
+    {
+        return empty( $this->mData );
+    }
+
     /**
      * @param null|Title $title
      * @param null $revId

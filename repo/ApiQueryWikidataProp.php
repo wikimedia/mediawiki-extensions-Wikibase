@@ -29,7 +29,7 @@ class ApiQueryWikidataProp extends ApiQueryBase {
         $result = $this->getResult();
         #FIXME: handle indexed items correctly, especially multiple statuements for a single property, or multiple aliases for a single language!
 
-        $page = new WikiPage( $title ); # XXX: use a cached copy?
+        $page = WikiPage::factory( $title ); # XXX: use a cached copy?
         $content = $page->getContent();
         $data =  array();
 
