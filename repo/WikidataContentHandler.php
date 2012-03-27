@@ -1,6 +1,12 @@
 <?php
 class WikidataContentHandler extends ContentHandler {
 
+    public function getDifferenceEngine(IContextSource $context, $old = 0, $new = 0, $rcid = 0,
+                                        $refreshCache = false, $unhide = false) {
+
+        return new WikidataDifferenceEngine($context, $old, $new, $rcid, $refreshCache, $unhide);
+    }
+
     public function __construct() {
         $formats = array(
             'application/json',
@@ -48,9 +54,11 @@ class WikidataContentHandler extends ContentHandler {
 
         if ( !$format ) $format = $wgWikidataSerialisationFormat;
 
-        if ( $format == 'application/vnd.php.serialized' ) $data = unserialize( $blob );
-        else if ( $format == 'application/json' ) $data = json_decode( $blob );
+        if ( $format == 'application/vnd.php.serialized' ) $data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
+        else if ( $format == 'application/json' ) $data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
         else throw new MWException( "serialization format $format is not supported for Wikidata content model" );
+
+        if ( $data === false || $data === null ) throw new MWContentSerializationException("failed to deserialize");
 
         return new WikidataContent( $data );
     }
@@ -63,4 +71,15 @@ class WikidataContentHandler extends ContentHandler {
         $data = array();
         return new WikidataContent( $data );
     }
+}
+
+class WikidataDifferenceEngine extends DifferenceEngine {
+
+    function generateContentDiffBody( Content $old, Content $new ) {
+        $otext = print_r( $old->getNativeData(), true );
+        $ntext = print_r( $new->getNativeData(), true );
+
+        return $this->generateTextDiffBody( $otext, $ntext );
+    }
+
 }
