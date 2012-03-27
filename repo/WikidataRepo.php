@@ -42,6 +42,7 @@ $wgResourceModules['ext.WikidataRepo'] = array(
 
 // register classes ---------------------------------------------------------
 $wgAutoloadClasses['WikidataContentHandler'] = $dir . 'WikidataContentHandler.php';
+$wgAutoloadClasses['WikidataDifferenceEngine'] = $dir . 'WikidataContentHandler.php';
 $wgAutoloadClasses['WikidataContent'] = $dir . 'WikidataContent.php';
 $wgAutoloadClasses['ApiQueryWikidataProp'] = $dir . 'ApiQueryWikidataProp.php';
 

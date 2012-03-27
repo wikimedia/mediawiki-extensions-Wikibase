@@ -96,8 +96,20 @@ class WikidataContent extends Content {
     {
         // TODO: generate sensible HTML!
 
-        $serialized = print_r( $this->getNativeData(), true );
-        $html = '<pre class="wikidata-data">' . htmlspecialchars( $serialized ) . '</pre>';
+        $flat = WikidataContentHandler::flattenArray( $this->getNativeData() );
+
+        $html = '';
+
+        foreach ( $flat as $k => $v ) {
+            $html .= "\t\t";
+            $html .= Html::openElement( 'tr' );
+            $html .= Html::element( 'td', null, $k );
+            $html .= Html::element( 'td', null, $v );
+            $html .= Html::closeElement( 'tr' );
+            $html .= "\n";
+        }
+
+        $html = Html::rawElement('table', array('class' => 'wikitable'), $html);
         $po = new ParserOutput( $html );
 
         return $po;
