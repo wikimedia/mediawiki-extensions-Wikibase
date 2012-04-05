@@ -18,6 +18,13 @@ class WikidataContentHandler extends ContentHandler {
 		parent::__construct( CONTENT_MODEL_WIKIDATA, $formats );
 	}
 
+    public function createArticle( Title $title ) {
+//        $this->checkModelName( $title->getContentModelName() );
+
+        $article = new WikidataPage( $title );
+        return $article;
+    }
+
 	public function getDefaultFormat() {
 		global $wgWikidataSerialisationFormat;
 

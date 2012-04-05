@@ -45,6 +45,7 @@ $wgAutoloadClasses['WikidataContentHandler'] = $dir . 'WikidataContentHandler.ph
 $wgAutoloadClasses['WikidataDifferenceEngine'] = $dir . 'WikidataContentHandler.php';
 $wgAutoloadClasses['WikidataContent'] = $dir . 'WikidataContent.php';
 $wgAutoloadClasses['ApiQueryWikidataProp'] = $dir . 'ApiQueryWikidataProp.php';
+$wgAutoloadClasses['WikidataPage'] = $dir . 'WikidataPage.php';
 
 // register hooks and handlers ---------------------------------------------------------
 define('CONTENT_MODEL_WIKIDATA', 'wikidata');
