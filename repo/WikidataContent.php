@@ -112,6 +112,14 @@ class WikidataContent extends Content {
         $html = Html::rawElement('table', array('class' => 'wikitable'), $html);
         $po = new ParserOutput( $html );
 
+        $labels = array(
+            "de" => $title->getText() . " in German",
+            "en" => $title->getText() . " in English"
+        );
+
+        $label_update = new WikidataLabelTableUpdate( $title, $labels );
+        $po->addSecondaryDataUpdate( $label_update );
+
         return $po;
 
     }
@@ -156,5 +164,22 @@ class WikidataContent extends Content {
 
     public function getLabel( $lang = null ) {
         //TODO: implement
+    }
+}
+
+class WikidataLabelTableUpdate extends SecondaryDataUpdate {
+    public function __construct( Title $title, $labels ) {
+        $this->title = $title;
+        $this->labels = $labels;
+    }
+
+    /**
+     * Perform update.
+     */
+    public function doUpdate() {
+        $s = $this->title->getDBkey() . ": " . json_encode( $this->labels );
+        $s .= "\n";
+
+        file_put_contents( "/tmp/updatetest.txt", $s, FILE_APPEND );
     }
 }
