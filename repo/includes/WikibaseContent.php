@@ -1,10 +1,16 @@
 <?php
-/**
- * @file
- * @ingroup Wikidata
- */
 
-class WikidataContent extends Content {
+/**
+ * Structured data content.
+ *
+ * @since 0.1
+ *
+ * @file WikibaseContent.php
+ * @ingroup Wikibase
+ *
+ * @licence GNU GPL v2+
+ */
+class WikibaseContent extends Content {
 
     const TYPE_TEXT = 'text';
     const TYPE_SCALAR = 'scalar'; # unit, precision, point-in-time
@@ -27,8 +33,7 @@ class WikidataContent extends Content {
      * @return String a string representing the content in a way useful for building a full text search index.
      *         If no useful representation exists, this method returns an empty string.
      */
-    public function getTextForSearchIndex()
-    {
+    public function getTextForSearchIndex() {
         return ''; #TODO: recursively collect all values from all properties.
     }
 
@@ -36,8 +41,7 @@ class WikidataContent extends Content {
      * @return String the wikitext to include when another page includes this  content, or false if the content is not
      *         includable in a wikitext page.
      */
-    public function getWikitextForTransclusion()
-    {
+    public function getWikitextForTransclusion() {
         return false;
     }
 
@@ -47,9 +51,8 @@ class WikidataContent extends Content {
      * @param int $maxlength maximum length of the summary text
      * @return String the summary text
      */
-    public function getTextForSummary( $maxlength = 250 )
-    {
-        return $this->getDescription();
+    public function getTextForSummary( $maxlength = 250 ) {
+        return $this->getDescription(); // FIXME: missing arg
     }
 
     /**
@@ -59,8 +62,7 @@ class WikidataContent extends Content {
      * @return mixed the native representation of the content. Could be a string, a nested array
      *         structure, an object, a binary blob... anything, really.
      */
-    public function getNativeData()
-    {
+    public function getNativeData() {
         return $this->mData;
     }
 
@@ -69,8 +71,7 @@ class WikidataContent extends Content {
      *
      * @return int
      */
-    public function getSize()
-    {
+    public function getSize()  {
         return strlen( serialize( $this->mData ) ); #TODO: keep and reuse value, content object is immutable!
     }
 
@@ -81,13 +82,11 @@ class WikidataContent extends Content {
      * @param $hasLinks Bool: if it is known whether this content contains links, provide this information here,
      *                        to avoid redundant parsing to find out.
      */
-    public function isCountable( $hasLinks = null )
-    {
-        return !empty( $this->mData[ WikidataContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
+    public function isCountable( $hasLinks = null ) {
+        return !empty( $this->mData[ WikibaseContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
     }
 
-    public function isEmpty()
-    {
+    public function isEmpty()  {
         return empty( $this->mData );
     }
 
@@ -97,8 +96,7 @@ class WikidataContent extends Content {
      * @param null|ParserOptions $options
      * @return ParserOutput
      */
-    public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL )
-    {
+    public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL )  {
         global $wgLang;
 
         // FIXME: StubUserLang::_unstub() not yet called in certain cases, dummy call to init Language object to $wgLang
@@ -116,7 +114,7 @@ class WikidataContent extends Content {
             "en" => $title->getText() . " in English"
         );
 
-        $label_update = new WikidataLabelTableUpdate( $title, $labels );
+        $label_update = new WikibaseLabelTableUpdate( $title, $labels );
         $po->addSecondaryDataUpdate( $label_update );
 
         return $po;
@@ -159,7 +157,7 @@ class WikidataContent extends Content {
         // debug output
         $htmlTable = '';
         $data = $this->getNativeData();
-        $flat = WikidataContentHandler::flattenArray( $data );
+        $flat = WikibaseContentHandler::flattenArray( $data );
         foreach ( $flat as $k => $v ) {
             $htmlTable .= "\t\t";
             $htmlTable .= Html::openElement( 'tr' );
@@ -248,7 +246,8 @@ class WikidataContent extends Content {
     }
 }
 
-class WikidataLabelTableUpdate extends SecondaryDataUpdate {
+class WikibaseLabelTableUpdate extends SecondaryDataUpdate {
+
     public function __construct( Title $title, $labels ) {
         $this->title = $title;
         $this->labels = $labels;
@@ -263,4 +262,5 @@ class WikidataLabelTableUpdate extends SecondaryDataUpdate {
 
         file_put_contents( "/tmp/updatetest.txt", $s, FILE_APPEND );
     }
+
 }

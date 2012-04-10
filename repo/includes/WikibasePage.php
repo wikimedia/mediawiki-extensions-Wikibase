@@ -1,21 +1,22 @@
 <?php
-/**
- * @file
- * @ingroup Wikidata
- */
 
 /**
- * Class for the data view pages.
- * 
+ * Class representing a Wikibase page.
+ *
  * @since 0.1
+ *
+ * @file WikibasePage.php
+ * @ingroup Wikibase
+ *
+ * @licence GNU GPL v2+
  */
-class WikidataPage extends Article {
+class WikibasePage extends Article {
 
     public function view() {
         global $wgOut;
         $contentObject = $this->getContentObject();
         $arrayContent = $contentObject->getNativeData();
-        $content = new WikidataContent( $arrayContent );
+        $content = new WikibaseContent( $arrayContent );
         $parserOutput = $content->getParserOutput( $this->getTitle() );
         $wgOut->addHTML( $parserOutput->getText() );
     }

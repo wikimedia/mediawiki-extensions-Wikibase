@@ -3,7 +3,7 @@
  * Timeline List-Module for the MediaWiki web API. Invoke with list=timeline
  */
 
-class ApiQueryWikidataProp extends ApiQueryBase {
+class ApiQueryWikibaseProp extends ApiQueryBase {
 
 
     public function __construct( $query, $moduleName, $prefix = 'wd' ) {
@@ -18,11 +18,11 @@ class ApiQueryWikidataProp extends ApiQueryBase {
         foreach ( $titles as $t ) {
             $path = array( 'query', 'pages', $t->getArticleID(), $this->getModuleName() );
 
-            $this->addWikidataForPage( $t, $path, $params );
+            $this->addWikibaseForPage( $t, $path, $params );
         }
     }
 
-    public function addWikidataForPage( Title $title, $path, $params ) {
+    public function addWikibaseForPage( Title $title, $path, $params ) {
         $props = $params['prop'];
         $langs = $params['lang'];
 
