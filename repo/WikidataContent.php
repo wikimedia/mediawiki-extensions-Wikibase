@@ -106,6 +106,19 @@ class WikidataContent extends Content {
 
         $html = $this->generateHtml( $wgLang );
         $po = new ParserOutput( $html );
+		
+		
+		//$html = Html::rawElement('table', array('class' => 'wikitable'), $html);
+        //$po = new ParserOutput( $html );
+
+        $labels = array(
+            "de" => $title->getText() . " in German",
+            "en" => $title->getText() . " in English"
+        );
+
+        $label_update = new WikidataLabelTableUpdate( $title, $labels );
+        $po->addSecondaryDataUpdate( $label_update );
+
         return $po;
     }
 
@@ -159,19 +172,6 @@ class WikidataContent extends Content {
         $html .= $htmlTable;
 
         return $html;
-        $html = Html::rawElement('table', array('class' => 'wikitable'), $html);
-        $po = new ParserOutput( $html );
-
-        $labels = array(
-            "de" => $title->getText() . " in German",
-            "en" => $title->getText() . " in English"
-        );
-
-        $label_update = new WikidataLabelTableUpdate( $title, $labels );
-        $po->addSecondaryDataUpdate( $label_update );
-
-        return $po;
-
     }
 
     #=================================================================================================================

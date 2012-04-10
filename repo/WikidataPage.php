@@ -16,7 +16,7 @@ class WikidataPage extends Article {
         $contentObject = $this->getContentObject();
         $arrayContent = $contentObject->getNativeData();
         $content = new WikidataContent( $arrayContent );
-        $parserOutput = $content->getParserOutput();
+        $parserOutput = $content->getParserOutput( $this->getTitle() );
         $wgOut->addHTML( $parserOutput->getText() );
     }
 	
