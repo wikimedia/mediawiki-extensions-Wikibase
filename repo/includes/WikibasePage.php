@@ -19,6 +19,9 @@ class WikibasePage extends Article {
         $content = new WikibaseContent( $arrayContent );
         $parserOutput = $content->getParserOutput( $this->getTitle() );
         $wgOut->addHTML( $parserOutput->getText() );
+		
+		// make sure required client sided resources will be loaded:
+		$wgOut->addModules( 'wikibase' );	
     }
 	
 }

@@ -76,13 +76,16 @@ $moduleTemplate = array(
 	'remoteExtPath' => 'Wikibase/resources',
 );
 
-$wgResourceModules['wdr.exampleName'] = $moduleTemplate + array(
+$wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
-		'wdr.exampleName.js',
+		'wikibase.js',
+		'wikibase.ui.js'
 	),
+	/*
 	'styles' => array(
-		'wdr.exampleName.css',
+		'wikibase.exampleName.css',
 	),
+	 */
 	'dependencies' => array(
 	),
 );
