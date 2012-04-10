@@ -28,6 +28,9 @@ class WBCSettings {
 	 */
 	protected static function getDefaultSettings() {
 		return array(
+			'namespaces' => array( NS_MAIN ),
+			'sort' => 'none',
+			'sortPrepend' => false,
 		);
 	}
 

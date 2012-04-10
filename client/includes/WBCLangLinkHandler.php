@@ -3,7 +3,7 @@
 /**
  * Handles language links.
  * TODO: stylize
- * TODO: get rid of list duplication
+ * TODO: get rid of code duplication (both logic and array defs)
  * TODO: do we really want to refresh this on re-render? push updates from the repo seem to make more sense
  *
  * @since 0.1
@@ -18,11 +18,11 @@ class WBCLangLangHandler {
 	protected static $cache = array();
 
 	public static function onParserBeforeTidy( Parser &$parser, &$text ) {
-		global $wgLanguageCode, $wgWikidataClientNamespaces;
+		global $wgLanguageCode;
 
 		$title = $parser->getTitle();
 
-		if($parser->getOptions()->getInterfaceMessage() || !in_array( $title->getNamespace(), $wgWikidataClientNamespaces ) ) {
+		if($parser->getOptions()->getInterfaceMessage() || !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
 			return true;
 		}
 
@@ -110,8 +110,7 @@ class WBCLangLangHandler {
 	 * @version	Copied from InterlanguageExtension rev 114818
 	 */
 	protected static function sortLinks( &$a ) {
-		global $wgWikidataClientSort;
-		switch( $wgWikidataClientSort ) {
+		switch( WBCSettings::get( 'sort' ) ) {
 			case 'code':
 				usort($a, 'WikidataClientHooks::compareCode');
 				break;
@@ -139,7 +138,6 @@ class WBCLangLangHandler {
 	 * @version	Copied from InterlanguageExtension rev 114818
 	 */
 	protected static function compareAlphabetic($a, $b) {
-		global $wgWikidataClientSortPrepend;
 		static $order = array(
 			'ace', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
 			'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'bm', 'bn',
@@ -177,8 +175,10 @@ class WBCLangLangHandler {
 
 		if($a == $b) return 0;
 
-		if(!$orderMerged && isset($wgWikidataClientSortPrepend) && is_array($wgWikidataClientSortPrepend)) {
-			$order = array_merge($wgWikidataClientSortPrepend, $order);
+		$sortPrepend = WBCSettings::get( 'sortPrepend' );
+
+		if( !$orderMerged && is_array( $sortPrepend ) ) {
+			$order = array_merge( $sortPrepend, $order);
 		}
 		$orderMerged = true;
 
@@ -196,7 +196,6 @@ class WBCLangLangHandler {
 	 * @version	Copied from InterlanguageExtension rev 114818
 	 */
 	protected static function compareAlphabeticRevised($a, $b) {
-		global $wgWikidataClientSortPrepend;
 		static $order = array(
 			'ace', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
 			'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'id', 'ms',
@@ -234,8 +233,10 @@ class WBCLangLangHandler {
 
 		if($a == $b) return 0;
 
-		if(!$orderMerged && isset($wgWikidataClientSortPrepend) && is_array($wgWikidataClientSortPrepend)) {
-			$order = array_merge($wgWikidataClientSortPrepend, $order);
+		$sortPrepend = WBCSettings::get( 'sortPrepend' );
+
+		if( !$orderMerged && is_array( $sortPrepend ) ) {
+			$order = array_merge( $sortPrepend, $order );
 		}
 		$orderMerged = true;
 
