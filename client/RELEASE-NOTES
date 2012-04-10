@@ -1,0 +1,13 @@
+These are the release notes for the Wikibase Client extension.
+	
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Wikibase_Client
+Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataClient.git;a=blob;f=RELEASE-NOTES
+
+
+
+=== Version 0.1 ===
+(dev)
+
+Initial release with these features:
+
+* ...

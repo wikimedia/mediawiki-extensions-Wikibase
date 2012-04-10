@@ -1,0 +1,35 @@
+These is the install file for the Wikibase Client extension.
+
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Wikibase_Client
+Latest version of the install file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataClient.git;a=blob;f=INSTALL
+
+
+== Requirements ==
+
+Wikibase Client requires:
+
+* MediaWiki 1.20 or above
+* PHP 5.3 or above
+* MySQL
+
+== Download ==
+
+TODO
+
+== Installation ==
+
+Once you have downloaded the code, place the ''WikibaseClient'' directory within your MediaWiki 'extensions' directory.
+Then add the following code to your [[Manual:LocalSettings.php|LocalSettings.php]] file:
+
+# Wikibase
+require_once( "$IP/extensions/WikibaseClient/WikibaseClient.php" );
+
+== Configuration ==
+
+Configuration of Reviews is done by assigning to $egWBCSettings in your
+[[Manual:LocalSettings.php|LocalSettings.php]] file, AFTER the inclusion of the
+extension. The options are listed below and their default is set in the Wikibase settings file:
+https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataClient.git;a=blob;f=Wikibase.settings.php
+You should NOT modify the settings file, but can have a look at it to get an idea of
+how to use the settings, in case the below descriptions do not suffice.
+
