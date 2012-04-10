@@ -53,9 +53,12 @@ $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php'
 $wgAutoloadClasses['WBCHooks'] 						= $dir . 'WikibaseClient.hooks.php';
 $wgAutoloadClasses['WBCSettings'] 					= $dir . 'WikibaseClient.settings.php';
 
+$wgAutoloadClasses['WBCLangLangHandler'] 			= $dir . 'WBCLangLangHandler.php';
+
+
 
 // Hooks
-$wgHooks['ParserBeforeTidy'][] 						= 'WBCHooks::parserBeforeTidy';
+$wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLangHandler::onParserBeforeTidy';
 
 
 
