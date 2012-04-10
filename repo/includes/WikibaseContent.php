@@ -135,8 +135,17 @@ class WikibaseContent extends Content {
         if ( $description === null ) {
             $description = '';
         }
+        
+        $html .= Html::openElement( 'span', array( 'class' => 'wb-label-container' ) );
         $html .= Html::element( 'h1', null, $label );
+        $html .= Html::element( 'span', array( 'id' => 'wb-label-edit-container' ) );
+        $html .= Html::closeElement('span');
+        
+        $html .= Html::openElement( 'span', array( 'class' => 'wb-description-container' ) );
         $html .= Html::element( 'p', null, $description );
+        $html .= Html::element( 'span', array( 'id' => 'wb-description-edit-container' ) );
+        $html .= Html::closeElement('span');
+        
         $html .= Html::element( 'hr', null, null );
         $htmlTable = '';
 
