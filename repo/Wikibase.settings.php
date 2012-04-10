@@ -5,7 +5,7 @@
  * More info can be found at https://www.mediawiki.org/wiki/Extension:Wikibase#Settings
  *
  * NOTICE:
- * Changing one of these settings can be done by assigning to $egWDSettings,
+ * Changing one of these settings can be done by assigning to $egWBSettings,
  * AFTER the inclusion of the extension itself.
  *
  * @since 0.1
@@ -16,7 +16,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WDRSettings {
+class WBSettings {
 
 	/**
 	 * Returns the default values for the settings.
@@ -47,7 +47,7 @@ class WDRSettings {
 		if ( $settings === false ) {
 			$settings = array_merge(
 				self::getDefaultSettings(),
-				$GLOBALS['egWDSettings']
+				$GLOBALS['egWBSettings']
 			);
 		}
 

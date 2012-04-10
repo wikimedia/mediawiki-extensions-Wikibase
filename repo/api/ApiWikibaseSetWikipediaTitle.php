@@ -1,19 +1,18 @@
 <?php
 
 /**
- * API module to get the data for a single Wikibase item.
+ * API module to associate an artcile on a Wikipedia with a Wikibase item.
  *
  * @since 0.1
  *
- * @file ApiWikibaseGetItem.php
+ * @file ApiWikibaseSetWikipediaTitle.php
  * @ingroup Wikibase
  * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiWikibaseGetItem extends ApiBase {
-
+class ApiWikibaseSetWikipediaTitle extends ApiBase {
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -54,7 +53,7 @@ class ApiWikibaseGetItem extends ApiBase {
 
 	public function getDescription() {
 		return array(
-			'API module to get the data for a single Wikibase item.'
+			'API module get the data for a single Wikibase item.'
 		);
 	}
 

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * API module to get the data for a single Wikibase item.
+ * API module to obtain the Wikibase ids of one or more pages on a Wikipedia.
  *
  * @since 0.1
  *
- * @file ApiWikibaseGetItem.php
+ * @file ApiWikibaseGetItemId.php
  * @ingroup Wikibase
  * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiWikibaseGetItem extends ApiBase {
+class ApiWikibaseGetItemId extends ApiBase {
 
 
 	/**
@@ -41,20 +41,21 @@ class ApiWikibaseGetItem extends ApiBase {
 			),
 			'language' => array(
 				ApiBase::PARAM_TYPE => array(),
+				ApiBase::PARAM_REQUIRED => true,
 			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
-			'id' => 'The ID of the item to get the data from',
-			'language' => 'Language code of the language in which labels should be returned',
+			'title' => 'The title of the Wikipedia page',
+			'language' => 'Language code of the Wikipedia the title belongs to',
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to get the data for a single Wikibase item.'
+			'API module to obtain the Wikibase ids of one or more pages on a Wikipedia.'
 		);
 	}
 
@@ -65,10 +66,8 @@ class ApiWikibaseGetItem extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitem&id=42',
-			'api.php?action=wbgetitem&id=42&language=en',
-			'api.php?action=wbgetitem&id=4|2',
-			'api.php?action=wbgetitem&id=4|2&language=en',
+			'api.php?action=wbgetitemid&title=Wikimedia&language=en',
+			'api.php?action=wbgetitem&title=Wikimedia|Wikipedia&language=en',
 		);
 	}
 
