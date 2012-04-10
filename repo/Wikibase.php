@@ -96,4 +96,4 @@ define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' );
 $wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikibaseContentHandler';
 
 
-$egWDSettings = array();
+$egWBSettings = array();
