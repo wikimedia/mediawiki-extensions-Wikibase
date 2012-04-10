@@ -11,6 +11,9 @@
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner at wikimedia.de >
+ * @author Daniel Kinzler
  */
 
 /**
@@ -51,6 +54,7 @@ $wgExtensionMessagesFiles['Wikibase'] 				= $dir . 'Wikibase.i18n.php';
 
 // Autoloading
 $wgAutoloadClasses['WBSettings'] 					= $dir . 'Wikibase.settings.php';
+$wgAutoloadClasses['WikibaseHooks'] 				= $dir . 'Wikibase.hooks.php';
 
 // api
 $wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
@@ -73,6 +77,12 @@ $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
 $wgAPIModules['wbassociatearticle'] 				= 'ApiWikibaseSetWikipediaTitle';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
 $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
+
+
+
+// Hooks
+$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
+$wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 
 
 
