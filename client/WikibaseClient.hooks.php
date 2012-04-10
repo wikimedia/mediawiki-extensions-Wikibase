@@ -6,7 +6,8 @@
  * @ingroup Extensions
  */
 
-class WikidataClientHooks {
+class WBCHooks {
+
 	protected static $cache = array();
 
 	public static function parserBeforeTidy( &$parser, &$text ) {
