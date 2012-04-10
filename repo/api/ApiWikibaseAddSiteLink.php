@@ -1,12 +1,12 @@
 <?php
 
 /**
- * API module to remove an associated string alias with a Wikibase item.
+ * API module to associate a string sitelink with a Wikibase item.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
- * @file ApiWikibaseRemoveAlias.php
+ * @file ApiWikibaseAddSiteLink.php
  * @ingroup Wikibase
  * @ingroup API
  *
@@ -14,7 +14,7 @@
  * @author John Erling Blad < jeblad@gmail.com >
  */
 
-class ApiWikibaseRemoveAlias extends ApiBase {
+class ApiWikibaseAddSiteLink extends ApiBase {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -36,15 +36,17 @@ class ApiWikibaseRemoveAlias extends ApiBase {
 		$this->result = $this->getResult();
 		
 		// TODO: implement
+		$result = $this->getResult();
+		$success = false;
 		
 		// If we are testing we add some dummy data
 		// TODO: Remove this when we go into production
 		if ( WBSettings::get( 'apiInTest' ) && isset($params['test']) ) {
-			$this->result->addValue( array( 'wbremovealias' ), 'result', 'Success', true );
-			$this->result->addValue( array( 'wbremovealias' ), 'pageid', 12, true );
-			$this->result->addValue( array( 'wbremovealias' ), 'title', 'q7', true );
-			$this->result->addValue( array( 'wbremovealias' ), 'oldrevid', 123, true );
-			$this->result->addValue( array( 'wbremovealias' ), 'newrevid', 456, true );
+			$this->result->addValue( array( 'wbaddsitelink' ), 'result', 'Success', true );
+			$this->result->addValue( array( 'wbaddsitelink' ), 'pageid', 12, true );
+			$this->result->addValue( array( 'wbaddsitelink' ), 'title', 'q7', true );
+			$this->result->addValue( array( 'wbaddsitelink' ), 'oldrevid', 123, true );
+			$this->result->addValue( array( 'wbaddsitelink' ), 'newrevid', 456, true );
 		}
 	}
 
@@ -66,7 +68,7 @@ class ApiWikibaseRemoveAlias extends ApiBase {
 				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'alias' => array(
+			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
@@ -79,14 +81,14 @@ class ApiWikibaseRemoveAlias extends ApiBase {
 		return array(
 			'id' => 'The ID of the item to associate the page with',
 			'language' => 'Language code of the wikipedia on which the page resides',
-			'alias' => 'String used as an alternate title of the page',
+			'title' => 'String used as an alternate title of the page',
 			'test' => 'Add some dummy data for testing purposes', // TODO: Remove this when we go into production
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to remove the associated alias on a string form from a Wikibase item.'
+			'API module to associate a site link on a string form with a Wikibase item.'
 		);
 	}
 
@@ -97,15 +99,15 @@ class ApiWikibaseRemoveAlias extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbremovealias&id=42&language=en&alias=Wikimedia'
-				=> 'Removes the string "Wikimedia" for page with id "42" as an alias in English language',
-			'api.php?action=wbremovealias&id=42&language=en&alias=Wikimedia&test'
-				=> 'Fake a remove of the alias, always returns the same values',
+			'api.php?action=wbaddsitelink&id=42&language=en&sitelink=Wikimedia'
+				=> 'Set the string "Wikimedia" for page with id "42" as an sitelink in English language',
+			'api.php?action=wbremovesitelink&id=42&language=en&sitelink=Wikimedia&test'
+				=> 'Fake an add of site link, always returns the same values',
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbremovealias';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbaddsitelink';
 	}
 
 	public function getVersion() {
