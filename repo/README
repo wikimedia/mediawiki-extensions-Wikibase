@@ -1,11 +1,11 @@
 These is the readme file for the Wikibase extension.
 
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Wikibase
-Latest version of the readme file: http://svn.wikimedia.org/viewvc/mediawiki/trunk/extensions/EducationProgram/README?view=co
+Latest version of the readme file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git;a=blob;f=README
 
 == About ==
 
-Education Program is a MediaWiki extension...
+Wikibase is a MediaWiki extension that acts as a structured data repository.
 
 === Feature overview ===
 
