@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to associate an artcile on a Wikipedia with a Wikibase item.
+ * API module to associate an artcile on a wiki with a Wikibase item.
  *
  * @since 0.1
  *
@@ -37,8 +37,8 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'language' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+			'wiki' => array(
+				ApiBase::PARAM_TYPE => array(), // TODO: wiki list
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
@@ -54,7 +54,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 	public function getParamDescription() {
 		return array(
 			'id' => 'The ID of the item to associate the page with',
-			'language' => 'Language code of the wikipedia on which the page resides',
+			'wiki' => 'An identifier for the wiki on which the page resides',
 			'title' => 'Title of the page to associate',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
 		);
@@ -62,7 +62,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 	public function getDescription() {
 		return array(
-			'API module to associate an artcile on a Wikipedia with a Wikibase item.'
+			'API module to associate an artcile on a wiki with a Wikibase item.'
 		);
 	}
 
@@ -73,8 +73,8 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbassociatearticle&id=42&language=en&title=Wikimedia',
-			'api.php?action=wbassociatearticle&id=42&language=en&title=Wikimedia&badge=', // TODO
+			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia',
+			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&badge=', // TODO
 		);
 	}
 
