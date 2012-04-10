@@ -5,14 +5,14 @@
  *
  * @since 0.1
  *
- * @file ApiWikibaseSetWikipediaTitle.php
+ * @file ApiWikibaseAssociateArticle.php
  * @ingroup Wikibase
  * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiWikibaseSetWikipediaTitle extends ApiBase {
+class ApiWikibaseAssociateArticle extends ApiBase {
 
 	/**
 	 * Main method. Does the actual work and sets the result.

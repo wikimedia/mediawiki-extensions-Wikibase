@@ -45,30 +45,32 @@ $dir = dirname( __FILE__ ) . '/';
 
 
 // i18n
-$wgExtensionMessagesFiles['Wikibase'] 			= $dir . 'Wikibase.i18n.php';
+$wgExtensionMessagesFiles['Wikibase'] 				= $dir . 'Wikibase.i18n.php';
 
 
 
 // Autoloading
-$wgAutoloadClasses['WBSettings'] 				= $dir . 'Wikibase.settings.php';
+$wgAutoloadClasses['WBSettings'] 					= $dir . 'Wikibase.settings.php';
 
 // api
-$wgAutoloadClasses['ApiQueryWikibaseProp'] 		= $dir . 'api/ApiQueryWikibaseProp.php'; // TODO
-$wgAutoloadClasses['ApiWikibaseGetItem'] 		= $dir . 'api/ApiWikibaseGetItem.php';
+$wgAutoloadClasses['ApiQueryWikibaseProp'] 			= $dir . 'api/ApiQueryWikibaseProp.php'; // TODO
+$wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
+$wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'api/ApiWikibaseGetItemId.php';
+$wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAssociateArticle.php';
 
 // includes
-$wgAutoloadClasses['WikibaseContentHandler'] 	= $dir . 'includes/WikibaseContentHandler.php';
-$wgAutoloadClasses['WikibaseDifferenceEngine'] 	= $dir . 'includes/WikibaseDifferenceEngine.php';
-$wgAutoloadClasses['WikibaseContent'] 			= $dir . 'includes/WikibaseContent.php';
-$wgAutoloadClasses['WikibasePage'] 				= $dir . 'includes/WikibasePage.php';
+$wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
+$wgAutoloadClasses['WikibaseDifferenceEngine'] 		= $dir . 'includes/WikibaseDifferenceEngine.php';
+$wgAutoloadClasses['WikibaseContent'] 				= $dir . 'includes/WikibaseContent.php';
+$wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 
 
 
 // API module registration
-$wgAPIPropModules['wikidata'] 					= 'ApiQueryWikibaseProp'; // TODO
-$wgAPIPropModules['wbgetitem'] 					= 'ApiWikibaseGetItem';
-$wgAPIPropModules['wbgetitemid'] 				= 'ApiWikibaseGetItemId';
-$wgAPIPropModules['wbsetwikipediatitle'] 		= 'ApiWikibaseSetWikipediaTitle';
+$wgAPIPropModules['wikidata'] 						= 'ApiQueryWikibaseProp'; // TODO
+$wgAPIPropModules['wbgetitem'] 						= 'ApiWikibaseGetItem';
+$wgAPIPropModules['wbgetitemid'] 					= 'ApiWikibaseGetItemId';
+$wgAPIPropModules['wbassociatearticle'] 			= 'ApiWikibaseSetWikipediaTitle';
 
 
 
