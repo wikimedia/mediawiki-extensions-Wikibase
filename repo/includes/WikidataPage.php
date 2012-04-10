@@ -1,13 +1,14 @@
 <?php
-/**
- * @file
- * @ingroup Wikidata
- */
 
 /**
- * Class for the data view pages.
- * 
+ *
+ *
  * @since 0.1
+ *
+ * @file WikidataPage.settings.php
+ * @ingroup WikidataRepo
+ *
+ * @licence GNU GPL v2+
  */
 class WikidataPage extends Article {
 

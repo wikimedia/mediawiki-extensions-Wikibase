@@ -1,61 +1,98 @@
 <?php
+
 /**
- * @file
- * @ingroup Wikidata
+ * Initialization file for the WikidataRepo extension.
+ * Note: the name WikidataRepo is still suceptive to change, so it and links using it might later be changed.
+ *
+ * Documentation:	 		https://www.mediawiki.org/wiki/Extension:WikidataRepo
+ * Support					https://www.mediawiki.org/wiki/Extension_talk:WikidataRepo
+ * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
+ *
+ * @file WikidataRepo.php
+ * @ingroup WikidataRepo
+ *
+ * @licence GNU GPL v2+
  */
 
-// safeguard ---------------------------------------------------------
+/**
+ * This documentation group collects source code files belonging to WikidataRepo.
+ *
+ * @defgroup WikidataRepo WikidataRepo
+ */
+
 if ( !defined( 'MEDIAWIKI' ) ) {
-        echo( "This file is an extension to the MediaWiki software and cannot be used standalone.\n" );
-        die( 1 );
+	die( 'Not an entry point.' );
 }
 
-// credits ---------------------------------------------------------
-$WikidataRepoVersion = 0.1;
+if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
+	die( '<b>Error:</b> WikidataRepo requires MediaWiki 1.20 or above.' );
+}
+
+define( 'WDR_VERSION', '0.1 alpha' );
 
 $wgExtensionCredits['other'][] = array(
-        'path' => __FILE__,
-        'name' => 'WikidataRepo',
-        'author' => 'Daniel Kinzler for Hallo Welt Medienwerkstatt',
-        'url' => 'http://mediawiki.org/wiki/Extension:WikidataRepo',
-        'descriptionmsg' => 'wikidatarepo-desc',
-        'version' => $WikidataRepoVersion,
+	'path' => __FILE__,
+	'name' => 'Wikidata Repo',
+	'version' => WDR_VERSION,
+	'author' => array(
+		'The Wikidata team', // TODO: link?
+	),
+	'url' => 'https://www.mediawiki.org/wiki/Extension:Wikidata_Repo',
+	'descriptionmsg' => 'wikidatarepo-desc'
 );
 
-// register resources ---------------------------------------------------------
 $dir = dirname( __FILE__ ) . '/';
-$wgExtensionMessagesFiles['WikidataRepo'] = $dir . 'WikidataRepo.i18n.php';
 
-$wgResourceModules['ext.WikidataRepo'] = array(
-        // JavaScript and CSS styles. To combine multiple file, just list them as an array.
-        'scripts' => 'WikidataRepo.js',
-        'styles' => 'WikidataRepo.css',
 
-        // When your module is loaded, these messages will be available to mediaWiki.msg()
-        //'messages' => array( 'myextension-hello-world', 'myextension-goodbye-world' ),
 
-        // If your scripts need code from other modules, list their identifiers as dependencies
-        // and ResourceLoader will make sure they're loaded before you.
-        // You don't need to manually list 'mediawiki' or 'jquery', which are always loaded.
-        //'dependencies' => array( 'jquery.ui.datepicker' ),
+// i18n
+$wgExtensionMessagesFiles['WikidataRepo'] 		= $dir . 'WikidataRepo.i18n.php';
 
-        // ResourceLoader needs to know where your files are; specify your
-        // subdir relative to "extensions" or $wgExtensionAssetsPath
-        'localBasePath' => 'WikidataRepo',
-        'remoteExtPath' => 'WikidataRepo',
-);
 
-// register classes ---------------------------------------------------------
-$wgAutoloadClasses['WikidataContentHandler'] = $dir . 'WikidataContentHandler.php';
-$wgAutoloadClasses['WikidataDifferenceEngine'] = $dir . 'WikidataContentHandler.php';
-$wgAutoloadClasses['WikidataContent'] = $dir . 'WikidataContent.php';
-$wgAutoloadClasses['ApiQueryWikidataProp'] = $dir . 'ApiQueryWikidataProp.php';
-$wgAutoloadClasses['WikidataPage'] = $dir . 'WikidataPage.php';
 
-// register hooks and handlers ---------------------------------------------------------
-define('CONTENT_MODEL_WIKIDATA', 'wikidata');
-$wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikidataContentHandler';
+// Autoloading
+$wgAutoloadClasses['WDRSettings'] 				= $dir . 'WikidataRepo.settings.php';
+
+// api
+$wgAutoloadClasses['ApiQueryWikidataProp'] 		= $dir . 'api/ApiQueryWikidataProp.php';
+
+// includes
+$wgAutoloadClasses['WikidataContentHandler'] 	= $dir . 'includes/WikidataContentHandler.php';
+$wgAutoloadClasses['WikidataDifferenceEngine'] 	= $dir . 'includes/WikidataDifferenceEngine.php';
+$wgAutoloadClasses['WikidataContent'] 			= $dir . 'includes/WikidataContent.php';
+$wgAutoloadClasses['WikidataPage'] 				= $dir . 'includes/WikidataPage.php';
+
+
+
+// API module registration
 $wgAPIPropModules['wikidata'] = 'ApiQueryWikidataProp';
 
-// configuration defaults ---------------------------------------------------------
-$wgWikidataSerialisationFormat = 'application/json'; # alternative: application/vnd.php.serialized
+
+
+// Resource loader modules
+$moduleTemplate = array(
+	'localBasePath' => dirname( __FILE__ ) . '/resources',
+	'remoteExtPath' => 'WikidataRepo/resources',
+);
+
+$wgResourceModules['wdr.exampleName'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wdr.exampleName.js',
+	),
+	'styles' => array(
+		'wdr.exampleName.css',
+	),
+	'dependencies' => array(
+	),
+);
+
+unset( $moduleTemplate );
+
+
+
+// register hooks and handlers
+define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' );
+$wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikidataContentHandler';
+
+
+$egWDRSettings = array();
