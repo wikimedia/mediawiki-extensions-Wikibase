@@ -24,23 +24,15 @@ class ApiWikibaseGetItemId extends ApiBase {
 		// TODO: implement
 	}
 
-	public function needsToken() {
-		return true;
-	}
-
-	public function mustBePosted() {
-		return true;
-	}
-
 	public function getAllowedParams() {
 		return array(
 			'id' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true,
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => array(),
+				ApiBase::PARAM_TYPE => array(), // TODO: language code list
 				ApiBase::PARAM_REQUIRED => true,
 			),
 		);

@@ -34,26 +34,35 @@ class ApiWikibaseSetWikipediaTitle extends ApiBase {
 	public function getAllowedParams() {
 		return array(
 			'id' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => array(),
+				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_REQUIRED => true,
+			),
+			'title' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => true,
+			),
+			'badge' => array(
+				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
-			'id' => 'The ID of the item to get the data from',
-			'language' => 'Language code of the language in which labels should be returned',
+			'id' => 'The ID of the item to associate the page with',
+			'language' => 'Language code of the wikipedia on which the page resides',
+			'title' => 'Title of the page to associate',
+			'badge' => 'Badge to give to the page, ie "good" or "featured"',
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module get the data for a single Wikibase item.'
+			'API module to associate an artcile on a Wikipedia with a Wikibase item.'
 		);
 	}
 
@@ -64,10 +73,8 @@ class ApiWikibaseSetWikipediaTitle extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitem&id=42',
-			'api.php?action=wbgetitem&id=42&language=en',
-			'api.php?action=wbgetitem&id=4|2',
-			'api.php?action=wbgetitem&id=4|2&language=en',
+			'api.php?action=wbsetwikipediatitle&id=42&language=en&title=Wikimedia',
+			'api.php?action=wbsetwikipediatitle&id=42&language=en&title=Wikimedia&badge=', // TODO
 		);
 	}
 
