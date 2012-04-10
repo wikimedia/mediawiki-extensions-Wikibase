@@ -23,8 +23,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
-	die( '<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.' );
+if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c because version_compare() works in confusing ways.
+	die( '<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.' );
 }
 
 define( 'WDR_VERSION', '0.1 alpha' );
@@ -53,7 +53,8 @@ $wgExtensionMessagesFiles['Wikibase'] 			= $dir . 'Wikibase.i18n.php';
 $wgAutoloadClasses['WBSettings'] 				= $dir . 'Wikibase.settings.php';
 
 // api
-$wgAutoloadClasses['ApiQueryWikibaseProp'] 		= $dir . 'api/ApiQueryWikibaseProp.php';
+$wgAutoloadClasses['ApiQueryWikibaseProp'] 		= $dir . 'api/ApiQueryWikibaseProp.php'; // TODO
+$wgAutoloadClasses['ApiWikibaseGetItem'] 		= $dir . 'api/ApiWikibaseGetItem.php';
 
 // includes
 $wgAutoloadClasses['WikibaseContentHandler'] 	= $dir . 'includes/WikibaseContentHandler.php';
@@ -64,7 +65,8 @@ $wgAutoloadClasses['WikibasePage'] 				= $dir . 'includes/WikibasePage.php';
 
 
 // API module registration
-$wgAPIPropModules['wikidata'] = 'ApiQueryWikibaseProp';
+$wgAPIPropModules['wikidata'] = 'ApiQueryWikibaseProp'; // TODO
+$wgAPIPropModules['wikibase'] = 'ApiQueryWikibaseProp';
 
 
 
