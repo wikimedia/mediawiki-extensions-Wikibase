@@ -8,6 +8,11 @@
 if ( !defined( 'MEDIAWIKI' ) ) {
         echo( "This file is an extension to the MediaWiki software and cannot be used standalone.\n" );
         die( 1 );
+	die( 'Not an entry point.' );
+}
+
+if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c because version_compare() works in confusing ways.
+	die( '<b>Error:</b> WikidataRepo requires MediaWiki 1.19 or above.' );
 }
 
 // credits ---------------------------------------------------------
