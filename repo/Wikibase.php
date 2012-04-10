@@ -53,7 +53,6 @@ $wgExtensionMessagesFiles['Wikibase'] 				= $dir . 'Wikibase.i18n.php';
 $wgAutoloadClasses['WBSettings'] 					= $dir . 'Wikibase.settings.php';
 
 // api
-$wgAutoloadClasses['ApiQueryWikibaseProp'] 			= $dir . 'api/ApiQueryWikibaseProp.php'; // TODO
 $wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'api/ApiWikibaseGetItemId.php';
 $wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAssociateArticle.php';
@@ -67,7 +66,6 @@ $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 
 
 // API module registration
-$wgAPIPropModules['wikidata'] 						= 'ApiQueryWikibaseProp'; // TODO
 $wgAPIPropModules['wbgetitem'] 						= 'ApiWikibaseGetItem';
 $wgAPIPropModules['wbgetitemid'] 					= 'ApiWikibaseGetItemId';
 $wgAPIPropModules['wbassociatearticle'] 			= 'ApiWikibaseSetWikipediaTitle';
