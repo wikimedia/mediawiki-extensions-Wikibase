@@ -66,9 +66,9 @@ $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 
 
 // API module registration
-$wgAPIPropModules['wbgetitem'] 						= 'ApiWikibaseGetItem';
-$wgAPIPropModules['wbgetitemid'] 					= 'ApiWikibaseGetItemId';
-$wgAPIPropModules['wbassociatearticle'] 			= 'ApiWikibaseSetWikipediaTitle';
+$wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
+$wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
+$wgAPIModules['wbassociatearticle'] 				= 'ApiWikibaseSetWikipediaTitle';
 
 
 
