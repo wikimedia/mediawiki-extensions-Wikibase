@@ -27,12 +27,12 @@ if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c becaus
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.' );
 }
 
-define( 'WDR_VERSION', '0.1 alpha' );
+define( 'WB_VERSION', '0.1 alpha' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
 	'name' => 'Wikibase',
-	'version' => WDR_VERSION,
+	'version' => WB_VERSION,
 	'author' => array(
 		'The Wikidata team', // TODO: link?
 	),
@@ -65,8 +65,10 @@ $wgAutoloadClasses['WikibasePage'] 				= $dir . 'includes/WikibasePage.php';
 
 
 // API module registration
-$wgAPIPropModules['wikidata'] = 'ApiQueryWikibaseProp'; // TODO
-$wgAPIPropModules['wbgetitem'] = 'ApiWikibaseGetItem';
+$wgAPIPropModules['wikidata'] 					= 'ApiQueryWikibaseProp'; // TODO
+$wgAPIPropModules['wbgetitem'] 					= 'ApiWikibaseGetItem';
+$wgAPIPropModules['wbgetitemid'] 				= 'ApiWikibaseGetItemId';
+$wgAPIPropModules['wbsetwikipediatitle'] 		= 'ApiWikibaseSetWikipediaTitle';
 
 
 
@@ -99,4 +101,4 @@ define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' );
 $wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikibaseContentHandler';
 
 
-$egWDSettings = array();
+$egWBSettings = array();

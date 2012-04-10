@@ -33,7 +33,7 @@ class WikibaseContentHandler extends ContentHandler {
 	}
 
 	public function getDefaultFormat() {
-		return WDRSettings::get( 'serializationFormat' );
+		return WBSettings::get( 'serializationFormat' );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class WikibaseContentHandler extends ContentHandler {
 	public function serialize( Content $content, $format = null ) {
 
 		if ( is_null( $format ) ) {
-			$format = WDRSettings::get( 'serializationFormat' );
+			$format = WBSettings::get( 'serializationFormat' );
 		}
 
 		#FIXME: assert $content is a WikibaseContent instance
@@ -66,7 +66,7 @@ class WikibaseContentHandler extends ContentHandler {
 	 */
 	public function unserialize( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
-			$format = WDRSettings::get( 'serializationFormat' );
+			$format = WBSettings::get( 'serializationFormat' );
 		}
 
 		if ( $format == 'application/vnd.php.serialized' ) $data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
