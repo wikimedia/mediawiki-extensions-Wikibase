@@ -1,15 +1,19 @@
 <?php
+
 /**
- * @file
- * @ingroup Wikidata
+ * Class representing a Wikibase page.
+ *
+ * @since 0.1
+ *
+ * @file WikibaseContentHandler.php
+ * @ingroup Wikibase
+ *
+ * @licence GNU GPL v2+
  */
-
-require_once("includes/diff/DairikiDiff.php"); #FIXME: using private stuff from Dairiki!
-
-class WikidataContentHandler extends ContentHandler {
+class WikibaseContentHandler extends ContentHandler {
 
 	public function getDifferenceEngine( IContextSource $context, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false 	) {
-		return new WikidataDifferenceEngine( $context, $old, $new, $rcid, $refreshCache, $unhide );
+		return new WikibaseDifferenceEngine( $context, $old, $new, $rcid, $refreshCache, $unhide );
 	}
 
 	public function __construct() {
@@ -24,7 +28,7 @@ class WikidataContentHandler extends ContentHandler {
 	public function createArticle( Title $title ) {
 		//$this->checkModelName( $title->getContentModelName() );
 
-		$article = new WikidataPage( $title );
+		$article = new WikibasePage( $title );
 		return $article;
 	}
 
@@ -44,12 +48,12 @@ class WikidataContentHandler extends ContentHandler {
 			$format = WDRSettings::get( 'serializationFormat' );
 		}
 
-		#FIXME: assert $content is a WikidataContent instance
+		#FIXME: assert $content is a WikibaseContent instance
 		$data = $content->getNativeData();
 
 		if ( $format == 'application/vnd.php.serialized' ) $blob = serialize( $data );
 		else if ( $format == 'application/json' ) $blob = json_encode( $data );
-		else throw new MWException( "serialization format $format is not supported for Wikidata content model" );
+		else throw new MWException( "serialization format $format is not supported for Wikibase content model" );
 
 		return $blob;
 	}
@@ -58,7 +62,7 @@ class WikidataContentHandler extends ContentHandler {
 	 * @param $blob String
 	 * @param null|String $format
 	 *
-	 * @return WikidataContent
+	 * @return WikibaseContent
 	 */
 	public function unserialize( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
@@ -67,18 +71,18 @@ class WikidataContentHandler extends ContentHandler {
 
 		if ( $format == 'application/vnd.php.serialized' ) $data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
 		else if ( $format == 'application/json' ) $data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
-		else throw new MWException( "serialization format $format is not supported for Wikidata content model" );
+		else throw new MWException( "serialization format $format is not supported for Wikibase content model" );
 
 		if ( $data === false || $data === null ) throw new MWContentSerializationException("failed to deserialize");
 
-		return new WikidataContent( $data );
+		return new WikibaseContent( $data );
 	}
 
 	/**
-	 * @return WikidataContent
+	 * @return WikibaseContent
 	 */
 	public function emptyContent() {
-		return new WikidataContent( array() );
+		return new WikibaseContent( array() );
 	}
 
 	public static function flattenArray( $a, $prefix = '', &$into = null ) {
@@ -92,7 +96,7 @@ class WikidataContentHandler extends ContentHandler {
 			}
 
 			if ( is_array( $v ) ) {
-				WikidataContentHandler::flattenArray( $v, "$prefix$k | ", $into );
+				WikibaseContentHandler::flattenArray( $v, "$prefix$k | ", $into );
 			} else {
 				$into[ "$prefix$k" ] = $v;
 			}

@@ -1,17 +1,17 @@
 <?php
 
 /**
- * File defining the settings for the WikidataRepo extension.
- * More info can be found at https://www.mediawiki.org/wiki/Extension:WikidataRepo#Settings
+ * File defining the settings for the Wikibase extension.
+ * More info can be found at https://www.mediawiki.org/wiki/Extension:Wikibase#Settings
  *
  * NOTICE:
- * Changing one of these settings can be done by assigning to $egWDRSettings,
+ * Changing one of these settings can be done by assigning to $egWDSettings,
  * AFTER the inclusion of the extension itself.
  *
  * @since 0.1
  *
- * @file WikidataRepo.settings.php
- * @ingroup WikidataRepo
+ * @file Wikibase.settings.php
+ * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -47,7 +47,7 @@ class WDRSettings {
 		if ( $settings === false ) {
 			$settings = array_merge(
 				self::getDefaultSettings(),
-				$GLOBALS['egWDRSettings']
+				$GLOBALS['egWDSettings']
 			);
 		}
 

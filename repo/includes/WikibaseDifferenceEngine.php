@@ -1,6 +1,16 @@
 <?php
 
-class WikidataDifferenceEngine extends DifferenceEngine {
+/**
+ * Difference engine for structured data.
+ *
+ * @since 0.1
+ *
+ * @file WikibaseDifferenceEngine.php
+ * @ingroup Wikibase
+ *
+ * @licence GNU GPL v2+
+ */
+class WikibaseDifferenceEngine extends DifferenceEngine {
 
 	function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
 		parent::__construct($context, $old, $new, $rcid, $refreshCache, $unhide);
@@ -11,8 +21,8 @@ class WikidataDifferenceEngine extends DifferenceEngine {
 	function generateContentDiff( Content $old, Content $new ) {
 		wfProfileIn( __METHOD__ );
 
-		$aold = WikidataContentHandler::flattenArray( $old->getNativeData() );
-		$anew = WikidataContentHandler::flattenArray( $new->getNativeData() );
+		$aold = WikibaseContentHandler::flattenArray( $old->getNativeData() );
+		$anew = WikibaseContentHandler::flattenArray( $new->getNativeData() );
 
 		$keys = array_unique( array_merge( array_keys( $aold ), array_keys( $anew ) ) );
 
@@ -22,6 +32,7 @@ class WikidataDifferenceEngine extends DifferenceEngine {
 			$lold = empty( $aold[$k] ) ? null : array( $k . ": " . $aold[$k] );
 			$lnew = empty( $anew[$k] ) ? null : array( $k . ": " . $anew[$k] );
 
+			// FIXME: use sane formatting
 			if ( !$lold && $lnew ) $e = new _DiffOp_Add( $lnew );
 			else if ( $lold && !$lnew ) $e = new _DiffOp_Delete( $lold );
 			else if ( $aold[$k] !== $anew[$k] ) $e = new _DiffOp_Change( $lold, $lnew );
