@@ -56,6 +56,8 @@ $wgAutoloadClasses['WBSettings'] 					= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'api/ApiWikibaseGetItemId.php';
 $wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAssociateArticle.php';
+$wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
+$wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
 
 // includes
 $wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
@@ -69,6 +71,8 @@ $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 $wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
 $wgAPIModules['wbassociatearticle'] 				= 'ApiWikibaseSetWikipediaTitle';
+$wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
+$wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
 
 
 

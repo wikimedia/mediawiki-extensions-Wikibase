@@ -1,18 +1,18 @@
 <?php
 
 /**
- * API module to associate an artcile on a Wikipedia with a Wikibase item.
+ * API module to set a label for a Wikibase item.
  *
  * @since 0.1
  *
- * @file ApiWikibaseAssociateArticle.php
+ * @file ApiWikibaseSetLabel.php
  * @ingroup Wikibase
  * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiWikibaseAssociateArticle extends ApiBase {
+class ApiWikibaseSetLabel extends ApiBase {
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -41,28 +41,24 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_TYPE => array(), // TODO: language code list
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'title' => array(
+			'label' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
-			),
-			'badge' => array(
-				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
-			'id' => 'The ID of the item to associate the page with',
-			'language' => 'Language code of the wikipedia on which the page resides',
-			'title' => 'Title of the page to associate',
-			'badge' => 'Badge to give to the page, ie "good" or "featured"',
+			'id' => 'The ID of the item to set a label for',
+			'language' => 'Language the label is in',
+			'label' => 'The value to set for the label',
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to associate an artcile on a Wikipedia with a Wikibase item.'
+			'API module to set a label for a Wikibase item.'
 		);
 	}
 
@@ -73,8 +69,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbassociatearticle&id=42&language=en&title=Wikimedia',
-			'api.php?action=wbassociatearticle&id=42&language=en&title=Wikimedia&badge=', // TODO
+			'api.php?action=wbsetlabel&id=42&language=en&label=Wikipedia',
 		);
 	}
 
