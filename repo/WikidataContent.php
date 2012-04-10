@@ -94,26 +94,66 @@ class WikidataContent extends Content {
      */
     public function getParserOutput(Title $title = null, $revId = null, ParserOptions $options = NULL)
     {
-        // TODO: generate sensible HTML!
+        global $wgLang;
 
-        $flat = WikidataContentHandler::flattenArray( $this->getNativeData() );
+        // FIXME: StubUserLang::_unstub() not yet called in certain cases, dummy call to init Language object to $wgLang
+        $wgLang->getCode();
 
-        $html = '';
-
-        foreach ( $flat as $k => $v ) {
-            $html .= "\t\t";
-            $html .= Html::openElement( 'tr' );
-            $html .= Html::element( 'td', null, $k );
-            $html .= Html::element( 'td', null, $v );
-            $html .= Html::closeElement( 'tr' );
-            $html .= "\n";
-        }
-
-        $html = Html::rawElement('table', array('class' => 'wikitable'), $html);
+        $html = $this->generateHtml( $wgLang );
         $po = new ParserOutput( $html );
-
         return $po;
+    }
 
+    /**
+     * @param null|Language $lang
+     * @return String
+     */
+    private function generateHtml( Language $lang = null ) {
+        // TODO: generate sensible HTML!
+        $html = '';
+        $label =  $this->getLabel( $lang );
+        if ( $label === null ) {
+            $label = '';
+        }
+        $description =  $this->getDescription( $lang );
+        if ( $description === null ) {
+            $description = '';
+        }
+        $html .= Html::element( 'h1', null, $label );
+        $html .= Html::element( 'p', null, $description );
+        $html .= Html::element( 'hr', null, null );
+        $htmlTable = '';
+
+        foreach ( $this->getTitles( $lang ) AS $language => $value ) {
+            $htmlTable .= "\t\t";
+            $htmlTable .= Html::openElement( 'tr' );
+            $htmlTable .= Html::element( 'td', null, $language );
+            $htmlTable .= Html::openElement ( 'td' );
+            $link = 'http://'.$language.'.wikipedia.org/'.$value;
+            $htmlTable .= Html::element( 'a', array( 'href' => $link ), $value );
+            $htmlTable .= Html::closeElement( 'td' );
+            $htmlTable .= Html::closeElement( 'tr' );
+            $htmlTable .= "\n";
+        }
+        $htmlTable = Html::rawElement( 'table', array( 'class' => 'wikitable'), $htmlTable );
+        $html .= $htmlTable;
+
+        // debug output
+        $htmlTable = '';
+        $data = $this->getNativeData();
+        $flat = WikidataContentHandler::flattenArray( $data );
+        foreach ( $flat as $k => $v ) {
+            $htmlTable .= "\t\t";
+            $htmlTable .= Html::openElement( 'tr' );
+            $htmlTable .= Html::element( 'td', null, $k );
+            $htmlTable .= Html::element( 'td', null, $v );
+            $htmlTable .= Html::closeElement( 'tr' );
+            $htmlTable .= "\n";
+        }
+        $htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
+        $html .= $htmlTable;
+
+        return $html;
     }
 
     #=================================================================================================================
@@ -138,7 +178,7 @@ class WikidataContent extends Content {
         //TODO: implement
     }
 
-    public function getProperty( $name, $languag = null ) {
+    public function getProperty( $name, $lang = null ) {
         //TODO: implement
     }
 
@@ -150,11 +190,42 @@ class WikidataContent extends Content {
         //TODO: implement
     }
 
-    public function getDescription( $lang = null ) {
-        //TODO: implement
+    /**
+     * @param Language $lang
+     * @return String|null description
+     */
+    public function getDescription( Language $lang ) {
+        $data = $this->getNativeData();
+        if ( !isset( $data['description'][$lang->getCode()] ) ) {
+            return null;
+        } else {
+            return $data['description'][$lang->getCode()]['value'];
+        }
     }
 
-    public function getLabel( $lang = null ) {
-        //TODO: implement
+    /**
+     * @param Language $lang
+     * @return String|null label
+     */
+    public function getLabel( Language $lang ) {
+        $data = $this->getNativeData();
+        if ( !isset( $data['label'][$lang->getCode()] ) ) {
+            return null;
+        } else {
+            return $data['label'][$lang->getCode()]['value'];
+        }
+    }
+
+    /**
+     * @param Language $lang
+     * @return array titles (languageCode => value)
+     */
+    public function getTitles ( Language $lang ) {
+        $data = $this->getNativeData();
+        $titles = array();
+        foreach ( $data['titles'] as $langCode => $title ) {
+            $titles[$langCode] = $title['value'];
+        }
+        return $titles;
     }
 }

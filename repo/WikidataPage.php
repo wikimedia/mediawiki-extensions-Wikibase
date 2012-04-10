@@ -12,7 +12,9 @@ class WikidataPage extends Article {
         global $wgOut;
         $contentObject = $this->getContentObject();
         $arrayContent = $contentObject->getNativeData();
-        $wgOut->addElement( 'pre', array(),print_r( $arrayContent, true ) );
+        $content = new WikidataContent( $arrayContent );
+        $parserOutput = $content->getParserOutput();
+        $wgOut->addHTML( $parserOutput->getText() );
     }
 
 }
