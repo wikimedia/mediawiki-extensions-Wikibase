@@ -59,7 +59,7 @@ $wgAutoloadClasses['WBCLangLangHandler'] 			= $dir . 'WBCLangLangHandler.php';
 
 // Hooks
 $wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLangHandler::onParserBeforeTidy';
-
+$wgHooks['UnitTestsList'][] 						= 'WBCHooks::registerUnitTests';
 
 
 // Resource loader modules
