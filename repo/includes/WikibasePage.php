@@ -13,15 +13,18 @@
 class WikibasePage extends Article {
 
     public function view() {
-        global $wgOut;
+        global $wgOut, $wgLang;
+        $wgLang->getCode();
+        
         $contentObject = $this->getContentObject();
         $arrayContent = $contentObject->getNativeData();
         $content = new WikibaseContent( $arrayContent );
         $parserOutput = $content->getParserOutput( $this->getTitle() );
         $wgOut->addHTML( $parserOutput->getText() );
+        $wgOut->setHTMLTitle( $wgOut->msg( 'pagetitle' )->rawParams( Sanitizer::stripAllTags( $content->getLabel( $wgLang ) ) ) );
 		
 		// make sure required client sided resources will be loaded:
-		$wgOut->addModules( 'wikibase' );	
+		$wgOut->addModules( 'wikibase' );
     }
 	
 }
