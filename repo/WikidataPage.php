@@ -1,11 +1,14 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: H
- * Date: 05.04.12
- * To change this template use File | Settings | File Templates.
+ * @file
+ * @ingroup Wikidata
  */
 
+/**
+ * Class for the data view pages.
+ * 
+ * @since 0.1
+ */
 class WikidataPage extends Article {
 
     public function view() {
@@ -16,5 +19,5 @@ class WikidataPage extends Article {
         $parserOutput = $content->getParserOutput();
         $wgOut->addHTML( $parserOutput->getText() );
     }
-
+	
 }

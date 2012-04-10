@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file
+ * @ingroup Wikidata
+ */
+
 class WikidataContent extends Content {
 
     const TYPE_TEXT = 'text';
@@ -42,7 +47,7 @@ class WikidataContent extends Content {
      * @param int $maxlength maximum length of the summary text
      * @return String the summary text
      */
-    public function getTextForSummary($maxlength = 250)
+    public function getTextForSummary( $maxlength = 250 )
     {
         return $this->getDescription();
     }
@@ -66,7 +71,7 @@ class WikidataContent extends Content {
      */
     public function getSize()
     {
-        return strlen( serialize( $this->mData) ); #TODO: keep and reuse value, content object is immutable!
+        return strlen( serialize( $this->mData ) ); #TODO: keep and reuse value, content object is immutable!
     }
 
     /**
@@ -76,7 +81,7 @@ class WikidataContent extends Content {
      * @param $hasLinks Bool: if it is known whether this content contains links, provide this information here,
      *                        to avoid redundant parsing to find out.
      */
-    public function isCountable($hasLinks = null)
+    public function isCountable( $hasLinks = null )
     {
         return !empty( $this->mData[ WikidataContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
     }
@@ -92,7 +97,7 @@ class WikidataContent extends Content {
      * @param null|ParserOptions $options
      * @return ParserOutput
      */
-    public function getParserOutput(Title $title = null, $revId = null, ParserOptions $options = NULL)
+    public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL )
     {
         global $wgLang;
 
@@ -158,19 +163,19 @@ class WikidataContent extends Content {
 
     #=================================================================================================================
 
-    public function getPropertyNames( ) {
+    public function getPropertyNames() {
         //TODO: implement
     }
 
-    public function getSystemPropertyNames( ) {
+    public function getSystemPropertyNames() {
         //TODO: implement
     }
 
-    public function getEditorialPropertyNames( ) {
+    public function getEditorialPropertyNames() {
         //TODO: implement
     }
 
-    public function getStatementPropertyNames( ) {
+    public function getStatementPropertyNames() {
         //TODO: implement
     }
 
@@ -220,7 +225,7 @@ class WikidataContent extends Content {
      * @param Language $lang
      * @return array titles (languageCode => value)
      */
-    public function getTitles ( Language $lang ) {
+    public function getTitles( Language $lang ) {
         $data = $this->getNativeData();
         $titles = array();
         foreach ( $data['titles'] as $langCode => $title ) {

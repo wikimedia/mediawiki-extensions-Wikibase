@@ -1,11 +1,16 @@
 <?php
+/**
+ * @file
+ * @ingroup Wikidata
+ */
+
 require_once("includes/diff/DairikiDiff.php"); #FIXME: using private stuff from Dairiki!
 
 class WikidataContentHandler extends ContentHandler {
 
-	public function getDifferenceEngine(IContextSource $context, $old = 0, $new = 0, $rcid = 0,
-										$refreshCache = false, $unhide = false) {
-
+	public function getDifferenceEngine(
+			IContextSource $context, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false
+	) {
 		return new WikidataDifferenceEngine($context, $old, $new, $rcid, $refreshCache, $unhide);
 	}
 
@@ -18,12 +23,12 @@ class WikidataContentHandler extends ContentHandler {
 		parent::__construct( CONTENT_MODEL_WIKIDATA, $formats );
 	}
 
-    public function createArticle( Title $title ) {
-//        $this->checkModelName( $title->getContentModelName() );
+	public function createArticle( Title $title ) {
+		//$this->checkModelName( $title->getContentModelName() );
 
-        $article = new WikidataPage( $title );
-        return $article;
-    }
+		$article = new WikidataPage( $title );
+		return $article;
+	}
 
 	public function getDefaultFormat() {
 		global $wgWikidataSerialisationFormat;
@@ -36,7 +41,7 @@ class WikidataContentHandler extends ContentHandler {
 	 * @param null|String $format
 	 * @return String
 	 */
-	public function serialize(Content $content, $format = null)
+	public function serialize( Content $content, $format = null )
 	{
 		global $wgWikidataSerialisationFormat;
 
@@ -57,7 +62,7 @@ class WikidataContentHandler extends ContentHandler {
 	 * @param null|String $format
 	 * @return WikidataContent
 	 */
-	public function unserialize($blob, $format = null)
+	public function unserialize( $blob, $format = null )
 	{
 		global $wgWikidataSerialisationFormat;
 
@@ -81,90 +86,90 @@ class WikidataContentHandler extends ContentHandler {
 		return new WikidataContent( $data );
 	}
 
-    public static function flattenArray( $a, $prefix = '', &$into = null) {
-        if ( $into === null ) $into = array();
+	public static function flattenArray( $a, $prefix = '', &$into = null) {
+		if ( $into === null ) $into = array();
 
-        foreach ( $a as $k => $v ) {
-            if ( is_object( $v ) ) {
-                $v = get_object_vars( $v );
-            }
+		foreach ( $a as $k => $v ) {
+			if ( is_object( $v ) ) {
+				$v = get_object_vars( $v );
+			}
 
-            if ( is_array( $v ) ) {
-                WikidataContentHandler::flattenArray( $v, "$prefix$k | ", $into );
-            } else {
-                $into[ "$prefix$k" ] = $v;
-            }
-        }
+			if ( is_array( $v ) ) {
+				WikidataContentHandler::flattenArray( $v, "$prefix$k | ", $into );
+			} else {
+				$into[ "$prefix$k" ] = $v;
+			}
+		}
 
-        return $into;
-    }
+		return $into;
+	}
 }
 
 class WikidataDifferenceEngine extends DifferenceEngine {
-    function __construct($context = null, $old = 0, $new = 0, $rcid = 0,
-                         $refreshCache = false, $unhide = false)
-    {
-        parent::__construct($context, $old, $new, $rcid, $refreshCache, $unhide);
+	function __construct(
+			$context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false
+	) {
+		parent::__construct($context, $old, $new, $rcid, $refreshCache, $unhide);
 
-        $this->mRefreshCache = true; #FIXME: debug only!
-    }
-
-    function generateContentDiff( Content $old, Content $new ) {
-        wfProfileIn( __METHOD__ );
-
-        $aold = WikidataContentHandler::flattenArray( $old->getNativeData() );
-        $anew = WikidataContentHandler::flattenArray( $new->getNativeData() );
-
-        $keys = array_unique( array_merge( array_keys( $aold ), array_keys( $anew ) ) );
-
-        $edits = array();
-
-        foreach ( $keys as $k ) {
-            $lold = empty( $aold[$k] ) ? null : array( $k . ": " . $aold[$k] );
-            $lnew = empty( $anew[$k] ) ? null : array( $k . ": " . $anew[$k] );
-
-            if ( !$lold && $lnew ) $e = new _DiffOp_Add( $lnew );
-            else if ( $lold && !$lnew ) $e = new _DiffOp_Delete( $lold );
-            else if ( $aold[$k] !== $anew[$k] ) $e = new _DiffOp_Change( $lold, $lnew );
-            else $e = new _DiffOp_Copy( $lold );
-
-            $edits[] = $e;
-        }
-
-        $res = new DiffResult( $edits );
-
-        wfProfileOut( __METHOD__ );
-        return $res;
-    }
-
-    function generateContentDiffBody( Content $old, Content $new ) {
-        global $wgContLang;
-
-        wfProfileIn( __METHOD__ );
-
-        $res = $this->generateContentDiff( $old, $new );
-
-        $formatter = new TableDiffFormatter();
-        $difftext = $wgContLang->unsegmentForDiff( $formatter->format( $res ) ) .
-
-        wfProfileOut( __METHOD__ );
-
-        return $difftext;
+		$this->mRefreshCache = true; #FIXME: debug only!
 	}
 
-    /*
-    function generateContentDiffBody( Content $old, Content $new ) {
-        $only_in_old = WikidataDifferenceEngine::arrayRecursiveDiff( $old->getNativeData(), $new->getNativeData() );
-        $only_in_new = WikidataDifferenceEngine::arrayRecursiveDiff( $new->getNativeData(), $old->getNativeData() );
+	function generateContentDiff( Content $old, Content $new ) {
+		wfProfileIn( __METHOD__ );
 
-        $left = Html::element('pre', null, print_r( $only_in_old, true ) );
-        $right = Html::element('pre', null, print_r( $only_in_new, true ) );
+		$aold = WikidataContentHandler::flattenArray( $old->getNativeData() );
+		$anew = WikidataContentHandler::flattenArray( $new->getNativeData() );
 
-        return ...;
-    }
-    */
+		$keys = array_unique( array_merge( array_keys( $aold ), array_keys( $anew ) ) );
 
-    /*
+		$edits = array();
+
+		foreach ( $keys as $k ) {
+			$lold = empty( $aold[$k] ) ? null : array( $k . ": " . $aold[$k] );
+			$lnew = empty( $anew[$k] ) ? null : array( $k . ": " . $anew[$k] );
+
+			if ( !$lold && $lnew ) $e = new _DiffOp_Add( $lnew );
+			else if ( $lold && !$lnew ) $e = new _DiffOp_Delete( $lold );
+			else if ( $aold[$k] !== $anew[$k] ) $e = new _DiffOp_Change( $lold, $lnew );
+			else $e = new _DiffOp_Copy( $lold );
+
+			$edits[] = $e;
+		}
+
+		$res = new DiffResult( $edits );
+
+		wfProfileOut( __METHOD__ );
+		return $res;
+	}
+
+	function generateContentDiffBody( Content $old, Content $new ) {
+		global $wgContLang;
+
+		wfProfileIn( __METHOD__ );
+
+		$res = $this->generateContentDiff( $old, $new );
+
+		$formatter = new TableDiffFormatter();
+		$difftext = $wgContLang->unsegmentForDiff( $formatter->format( $res ) ) .
+
+		wfProfileOut( __METHOD__ );
+
+		return $difftext;
+	}
+
+	/*
+	function generateContentDiffBody( Content $old, Content $new ) {
+		$only_in_old = WikidataDifferenceEngine::arrayRecursiveDiff( $old->getNativeData(), $new->getNativeData() );
+		$only_in_new = WikidataDifferenceEngine::arrayRecursiveDiff( $new->getNativeData(), $old->getNativeData() );
+
+		$left = Html::element('pre', null, print_r( $only_in_old, true ) );
+		$right = Html::element('pre', null, print_r( $only_in_new, true ) );
+
+		return ...;
+	}
+	*/
+
+	/*
 	protected static function arrayRecursiveDiff($aArray1, $aArray2) {
 		$aReturn = array();
 
