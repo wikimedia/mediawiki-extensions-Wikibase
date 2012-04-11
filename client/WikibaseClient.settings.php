@@ -35,7 +35,7 @@ class WBCSettings {
 	}
 
 	/**
-	 * Retruns an array with all settings after making sure they are
+	 * Returns an array with all settings after making sure they are
 	 * initialized (ie set settings have been merged with the defaults).
 	 * setting name (string) => setting value (mixed)
 	 *

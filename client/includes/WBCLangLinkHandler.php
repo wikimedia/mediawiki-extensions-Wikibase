@@ -11,9 +11,10 @@
  * @file WBCLangLangHandler.php
  * @ingroup WikibaseClient
  *
- * @licence GNU GPL v2+
+ * @licence	GNU GPL v2+
+ * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
-class WBCLangLangHandler {
+class WBCLangLinkHandler {
 
 	protected static $cache = array();
 
@@ -22,38 +23,38 @@ class WBCLangLangHandler {
 
 		$title = $parser->getTitle();
 
-		if($parser->getOptions()->getInterfaceMessage() || !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
+		if( $parser->getOptions()->getInterfaceMessage() || !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
 			return true;
 		}
 
 		$db_title = $title->getDBkey();
-		if(isset(self::$cache[$db_title])) {
+		if( isset( self::$cache[$db_title] ) ) {
 			$links = self::$cache[$db_title];
 		} else {
-			$links = self::getLinks($db_title);
+			$links = self::getLinks( $db_title );
 
-			//If there was an error while getting links, we use the current links
-			if($links === false) {
+			// If there was an error while getting links, we use the current links.
+			if( $links === false ) {
 				$links = self::readLinksFromDB( wfGetDB( DB_SLAVE ), $title->getArticleID() );
 			}
 
 			self::$cache[$db_title] = $links;
 		}
 
-		//Remove the link to the site language
+		// Remove the link to the site language.
 		unset($links[$wgLanguageCode]);
 
-		//If a link exists in wikitext, override wikidata link to the same language
-		//TODO: ability to remove a link without replacing it
+		// If a link exists in wikitext, override wikidata link to the same language.
+		// TODO: ability to remove a link without replacing it.
 		$out = $parser->getOutput();
-		foreach($out->mLanguageLinks as $v) {
-			unset($links[self::getCodeFromLink($v)]);
+		foreach( $out->mLanguageLinks as $link ) {
+			unset( $links[self::getCodeFromLink( $link )] );
 		}
 
-		//Pack the links properly
-		foreach($links as $k => $v) {
+		// Pack the links properly.
+		foreach( $links as $lang => $link ) {
 			//TODO: use a function?
-			$out->mLanguageLinks[] = "$k:$v";
+			$out->mLanguageLinks[] = "$lang:$link";
 		}
 
 		//Sort the links
@@ -65,8 +66,8 @@ class WBCLangLangHandler {
 	/**
 	 * Get language code from a link in ParserOutput::mLanguageLinks
 	 */
-	protected static function getCodeFromLink($link) {
-		return substr($link, 0, strpos($link, ':'));
+	protected static function getCodeFromLink( $link ) {
+		return substr( $link, 0, strpos( $link, ':' ) );
 	}
 
 	/**
@@ -76,8 +77,8 @@ class WBCLangLangHandler {
 	protected static function getLinks( $db_title ) {
 		$dir = dirname(__FILE__) . '/';
 		$file = "$dir/test/$db_title.json";
-		if(file_exists($file)) {
-			return get_object_vars(json_decode(file_get_contents($file)));
+		if( file_exists( $file ) ) {
+			return get_object_vars( json_decode( file_get_contents( $file ) ) );
 		} else {
 			return false;
 		}
@@ -112,13 +113,13 @@ class WBCLangLangHandler {
 	protected static function sortLinks( &$a ) {
 		switch( WBCSettings::get( 'sort' ) ) {
 			case 'code':
-				usort($a, 'WikidataClientHooks::compareCode');
+				usort($a, 'WBCLangLinkHandler::compareCode');
 				break;
 			case 'alphabetic':
-				usort($a, 'WikidataClientHooks::compareAlphabetic');
+				usort($a, 'WBCLangLinkHandler::compareAlphabetic');
 				break;
 			case 'alphabetic_revised':
-				usort($a, 'WikidataClientHooks::compareAlphabeticRevised');
+				usort($a, 'WBCLangLinkHandler::compareAlphabeticRevised');
 				break;
 		}
 	}
@@ -128,6 +129,7 @@ class WBCLangLangHandler {
 	 * @version	Copied from InterlanguageExtension rev 114818
 	 */
 	protected static function compareCode($a, $b) {
+		//TODO: implement sortPrepend
 		return strcmp(self::getCodeFromLink($a), self::getCodeFromLink($b));
 	}
 

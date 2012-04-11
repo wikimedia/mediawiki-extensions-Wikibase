@@ -20,11 +20,11 @@
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
-	die( 'Not an entry point.' );
+	die( "Not an entry point.\n" );
 }
 
 if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c because version_compare() works in confusing ways.
-	die( '<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.' );
+	die( "<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.\n" );
 }
 
 define( 'WBC_VERSION', '0.1 alpha' );
@@ -47,20 +47,14 @@ $dir = dirname( __FILE__ ) . '/';
 // i18n
 $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php';
 
-
-
 // Autoloading
 $wgAutoloadClasses['WBCHooks'] 						= $dir . 'WikibaseClient.hooks.php';
 $wgAutoloadClasses['WBCSettings'] 					= $dir . 'WikibaseClient.settings.php';
-
-$wgAutoloadClasses['WBCLangLangHandler'] 			= $dir . 'WBCLangLangHandler.php';
-
-
+$wgAutoloadClasses['WBCLangLinkHandler'] 			= $dir . 'includes/WBCLangLinkHandler.php';
 
 // Hooks
-$wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLangHandler::onParserBeforeTidy';
+$wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
 $wgHooks['UnitTestsList'][] 						= 'WBCHooks::registerUnitTests';
-
 
 // Resource loader modules
 $moduleTemplate = array(
@@ -70,12 +64,5 @@ $moduleTemplate = array(
 
 unset( $moduleTemplate );
 
-
-
 $egWBCSettings = array();
-
-// TODO: migrate to settings array
-$wgWikidataClientNamespaces = array( NS_MAIN );
-$wgWikidataClientSort = 'none';
-$wgWikidataClientSortPrepend = false;
 
