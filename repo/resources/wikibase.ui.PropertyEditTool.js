@@ -77,9 +77,10 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._valueToolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject );
 		
 		// use toolbar events to control the editable value:
-		this._valueToolbar.onActionEdit   = function(){ this._editableValue.startEditing(); };
-		this._valueToolbar.onActionSave   = function(){ this._editableValue.stopEditing( true ); };
-		this._valueToolbar.onActionCancel = function(){ this._editableValue.stopEditing( false ); };
+		var self = this;
+		this._valueToolbar.onActionEdit   = function(){ self._editableValue.startEditing(); };
+		this._valueToolbar.onActionSave   = function(){ self._editableValue.stopEditing( true ); };
+		this._valueToolbar.onActionCancel = function(){ self._editableValue.stopEditing( false ); };
 	},
 	
 	destroy: function() {
@@ -97,6 +98,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @var string
 	 */
 	getPropertyName: function() {
-		return this._subject.children( '.wb-property-container-key' )[0].title();
+		return $( this._subject.children( '.wb-property-container-key' )[0] ).attr( 'title' );
 	}
 };
