@@ -21,7 +21,8 @@ class WikibasePage extends Article {
         $content = new WikibaseContent( $arrayContent );
         $parserOutput = $content->getParserOutput( $this->getTitle() );
         $wgOut->addHTML( $parserOutput->getText() );
-        $wgOut->setHTMLTitle( $wgOut->msg( 'pagetitle' )->rawParams( Sanitizer::stripAllTags( $content->getLabel( $wgLang ) ) ) );
+        $wgOut->setPageTitle( $content->getLabel( $wgLang ) );
+        //$wgOut->setHTMLTitle( $wgOut->msg( 'pagetitle' )->rawParams( Sanitizer::stripAllTags( $content->getLabel( $wgLang ) ) ) );
 		
 		// make sure required client sided resources will be loaded:
 		$wgOut->addModules( 'wikibase' );

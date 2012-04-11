@@ -16,6 +16,6 @@
 	.find( '.wb-property-container' )
 	.each( function() {
 		new window.wikibase.ui.PropertyEditTool( this );
-	} )
+	} );
 
 } )( jQuery );
