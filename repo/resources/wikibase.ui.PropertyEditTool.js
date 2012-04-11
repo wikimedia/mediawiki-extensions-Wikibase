@@ -26,24 +26,16 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	UI_CLASS: 'wb-ui-propertyedittool',
 	
 	/**
-	 * Element the popup is related to.
+	 * Element the edit tool is related to.
 	 * @var jQuery
 	 */
 	_subject: null,
 	
 	/**
-	 * Name of the property
-	 * @var string
+	 * The editable value for the properties data value
+	 * @var wikibase.ui.PropertyEditTool.EditableValue
 	 */
-	_key: null,
-	
-	_val: null,
-	
-	/**
-	 * Element holding the properties value which will also hold the edit box when initialized.
-	 * @var jQuery
-	 */
-	_jPropValue: null,
+	_editableValue: null,
 		
 	/**
 	 * Initializes the edit form for the given element.
@@ -56,82 +48,40 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		}
 		this._subject = $( subject );
 		this._subject.addClass( this.UI_CLASS + '-subject' );
-		
-		this._jPropValue = $( this._subject.children( '.wb-property-container-value' )[0] );
-		
-		//this._insertEditBoxForValue();
-		//this._removeEditBoxForValue( true );
+				
+		this._initEditToolForValue();
+		//this._removeEditToolForLabel( true );
 		
 		new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject );
 	},
 	
 	/**
-	 * @todo: not clear yet whether this should be implemented. This would be neded if
+	 * @todo: not decided yet whether this should be implemented. This would be neded if
 	 *        label and value can be editied parallel, not if both get their own "edit"
 	 *        button though (in this case other stuff has to be refactored probably).
 	 */	
-	_insertEditBoxForLabel: function() { },
-	
-	_insertEditBoxForValue: function() {
-		this._insertEditBox( this._jPropValue );
+	_initEditToolForLabel: function() {
+		//this._editableLabel = ...
 	},
 	
-	/**
-	 * Initializes the input box as sub element of a given element and uses the elements content
-	 * as initial text.
-	 * 
-	 * @todo: perhaps, at a later point, we want to have an own class for the edit box(es) to handle
-	 *        different kinds of snaks and in general.
-	 * 
-	 * @param jQuery parent
-	 */
-	_insertEditBox: function( parent ) {
-		initText = parent.text();
+	_initEditToolForValue: function() {
+		value = $( this._subject.children( '.wb-property-container-value' )[0] );
+		this._editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue( value );
 		
-		inputBox = $( '<input/>', {
-			'class': this.UI_CLASS + '-edit-box',
-			'type': 'text',
-			'name': this._key,
-			'value': initText
-		} );
+		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
+		//       with the actual value perhaps.
+		this._valueToolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject );
 		
-		parent.text( '' );
-		parent.append( inputBox );
-		
-		// store original text value from before input box insertion:
-		inputBox.data( this.UI_CLASS + '-edit-box-initial-value', initText );
-		
-		this._jPropValue = parent;
-	},
-	
-	_removeEditBoxForValue: function( keepValue ) {
-		this._removeEditBox( this._jPropValue, keepValue );
-	},
-	
-	/**
-	 * Destroys the edit box and displays text again instead.
-	 * 
-	 * @param bool keepValue if true the boxes text will be displayed, otherwise the text before
-	 *        initialization will be displayed
-	 */
-	_removeEditBox: function( parent, keepValue ) {
-		inputBox = $( parent.children( '.' + this.UI_CLASS + '-edit-box' )[0] );
-		
-		$value = ( ! keepValue )
-			? inputBox.data( this.UI_CLASS + '-edit-box-initial-value' )
-			: inputBox.attr( 'value' );
-		
-		inputBox.empty().remove();
-		
-		parent.text( $value );
+		// use toolbar events to control the editable value:
+		this._valueToolbar.onActionEdit   = function(){ this._editableValue.startEditing(); };
+		this._valueToolbar.onActionSave   = function(){ this._editableValue.stopEditing( true ); };
+		this._valueToolbar.onActionCancel = function(){ this._editableValue.stopEditing( false ); };
 	},
 	
 	destroy: function() {
+		//this._editableLabel.destroy();
+		this._editableValue.destroy();
 		// TODO
-	},
-	
-	save: function() {
-		
 	},
 	
 	/**
