@@ -18,3 +18,17 @@
     margin: 0;
 }
 
+.firstHeading {
+	border-bottom: 0 !important;
+	line-height: 1em !important;
+	margin-bottom: 0 !important;
+}
+
+.firstHeading div {
+	font-size: 0.5em;
+}
+
+.wb-property-container-value {
+	background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) no-repeat;
+	padding: 5px 0 0 35px;
+}
