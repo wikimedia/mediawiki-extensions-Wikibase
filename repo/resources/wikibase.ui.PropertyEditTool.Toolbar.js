@@ -28,42 +28,83 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * Class which marks the toolbar within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittoolbar',
+	
+	_subject: null,
 			
 	/**
 	 * Initializes the edit toolbar for the given element.
 	 * This should normally be called directly by the constructor.
 	 */
 	_init: function( parent ) {
-		if( this._subject !== null ) {
+		if( this._parent !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
-		this.appendTo( $( parent ) );
+		
+		this._parent = parent;
+		this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )] );
+
 	},
 	
-	/**
-	 * Appends the element as last child to a parent element.
-	 * @param jQuery parent
-	 */
-	appendTo: function( parent ) {
-		// TODO (this is just a dummy)
-        this._createEditButton().appendTo( parent );
+	_buildToolbar: function( content ) {
+		if (this._subject != null) {
+			this._subject.empty();
+		}
+		
+		this._subject = $( '<div/>', {
+			'class': this.UI_CLASS,
+		}).appendTo( this._parent );
+		
+		this._subject.append( "[" );
+		
+		for( var i in content ) {
+			if( i != 0 ) {
+				this._subject.append( "|" );
+			}
+			this._subject.append( $( '<span/>' ).append( content[i] ) );
+		}
+		
+		this._subject.append( "]" );
 	},
 
-    _actionEdit: function() {
+    _actionEdit: function( event ) {
         if( this.onActionEdit != null && !this.onActionEdit() ) { // callback
             // cancel edit
             return false;
         }
-
+        this._buildToolbar(
+        	[
+        	 	this._createButton( this.UI_CLASS + '-save-link', window.mw.msg( 'wikibase-save' ), this._actionSave ),
+                this._createButton( this.UI_CLASS + '-cancel-link', window.mw.msg( 'wikibase-cancel' ), this._actionCancel )
+            ]
+        );
     },
-
-    _createEditButton: function() {
-        var self = this;
+    
+    _actionSave: function( event ) {
+        if( this.onActionSave != null && !this.onActionSave() ) { // callback
+            // cancel save
+            return false;
+        }
+        // TODO: do the API call to save the label
+        
+        this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )] );
+    },
+    
+    _actionCancel: function( event ) {
+        if( this.onActionCancel != null && !this.onActionCancel() ) { // callback
+            // cancel cancel
+            return false;
+        }
+        
+        this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )] );
+    },
+    
+    _createButton: function( cClass, text, callback ) {
         return $( '<a/>', {
-            'class': this.UI_CLASS + '-edit-link',
-            text: window.mw.msg( 'wikibase-edit' ),
-            click: function(){ self._actionEdit(); }
+            'class': cClass,
+            text: text,
+            href: 'javascript:;',
+            click: jQuery.proxy( callback, this )
         } );
     },
 
@@ -79,10 +120,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * Callback called after the 'edit' button was pressed.
 	 * If the callback returns false, the action will be cancelled.
 	 */
-	onActionEdit: function() {
-        alert(1);
-        return true;
-    },
+	onActionEdit: null,
 	
 	/**
 	 * Callback called after the 'save' button was pressed.
@@ -95,4 +133,4 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * If the callback returns false, the action will be cancelled.
 	 */
 	onActionCancel: null
-}
+};

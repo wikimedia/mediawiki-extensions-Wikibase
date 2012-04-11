@@ -108,7 +108,7 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'dependencies' => array(
 	),
 	'messages' => array(
-		'cancel',
+		'wikibase-cancel',
 		'wikibase-edit',
 		'wikibase-save'
 	)

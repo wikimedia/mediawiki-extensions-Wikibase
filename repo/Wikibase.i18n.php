@@ -15,9 +15,11 @@ $messages = array();
 
 /** English
  * @author Daniel Kinzler
+ * @author Tobias Gritschacher
  */
 $messages['en'] = array(
         'wikibase-desc' => 'Structured data repository',
 		'wikibase-edit' => 'edit',
 		'wikibase-save' => 'save',
+		'wikibase-cancel' => 'cancel',
 );
