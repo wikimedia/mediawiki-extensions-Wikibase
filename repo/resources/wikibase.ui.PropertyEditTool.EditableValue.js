@@ -66,11 +66,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
-		alert('startEditing');
 		if( this.isInEditMode() ) {
 			return false;			
 		}
-		initText = this._subject.text();
+		initText = $.trim( this._subject.text() );
 		
 		inputBox = $( '<input/>', {
 			'class': this.UI_CLASS,
@@ -104,7 +103,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		
 		$value = ( ! save )
 			? initialValue
-			: inputBox.attr( 'value' );
+			: $.trim( inputBox.attr( 'value' ) );
 		
 		inputBox.empty().remove(); // remove input interface		
 		this._subject.text( $value );

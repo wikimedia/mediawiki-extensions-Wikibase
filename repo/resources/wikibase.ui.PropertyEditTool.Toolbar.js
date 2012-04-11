@@ -8,7 +8,8 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
- * @author ...
+ * @author H. Snater
+ * @author Tobias Gritschacher
  */
 
 /**
@@ -52,65 +53,70 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		this._parent = parent;
 		
 		this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )] );
-
 	},
 	
-	_buildToolbar: function( content ) {
+	/**
+	 * Creates the toolbar with an array of buttons which will be displayed separated by "|"
+	 * 
+	 * @param buttons
+	 */
+	_buildToolbar: function( buttons ) {
 		if (this._subject != null) {
 			this._subject.empty();
 		}
 		
 		this._subject = $( '<div/>', {
-			'class': this.UI_CLASS,
-		}).appendTo( this._parent );
+			'class': this.UI_CLASS
+		} );
 		
-		this._subject.append( "[" );
+		this._subject
+		.appendTo( this._parent )
+		.append( "[" );
 		
-		for( var i in content ) {
+		for( var i in buttons ) {
 			if( i != 0 ) {
 				this._subject.append( "|" );
 			}
-			this._subject.append( content[i] );
+			this._subject.append( buttons[i] );
 		}
 		
 		this._subject.append( "]" );
 	},
-
+	
     _actionEdit: function( event ) {
-        if( this.onActionEdit != null && !this.onActionEdit() ) { // callback
+        if( this.onActionEdit !== null && this.onActionEdit() === false ) { // callback
             // cancel edit
             return false;
         }
-        this._buildToolbar(
-        	[
-        	 	this._createButton( this.UI_CLASS + '-save-link', window.mw.msg( 'wikibase-save' ), this._actionSave ),
-                this._createButton( this.UI_CLASS + '-cancel-link', window.mw.msg( 'wikibase-cancel' ), this._actionCancel )
-            ]
-        );
+        this._buildToolbar( [
+			this._createButton( this.UI_CLASS + '-save-link', window.mw.msg( 'wikibase-save' ), this._actionSave ),
+			this._createButton( this.UI_CLASS + '-cancel-link', window.mw.msg( 'wikibase-cancel' ), this._actionCancel )
+        ] );
     },
     
     _actionSave: function( event ) {
-        if( this.onActionSave != null && !this.onActionSave() ) { // callback
+        if( this.onActionSave !== null && this.onActionSave() === false ) { // callback
             // cancel save
             return false;
         }
-        // TODO: do the API call to save the label
-        
-        this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )] );
+        this._buildToolbar( [
+			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )
+		] );
     },
     
     _actionCancel: function( event ) {
-        if( this.onActionCancel != null && !this.onActionCancel() ) { // callback
+        if( this.onActionCancel !== null && this.onActionCancel() === false ) { // callback
             // cancel cancel
             return false;
         }
-        
-        this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )] );
+        this._buildToolbar( [
+			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )
+		] );
     },
     
-    _createButton: function( cClass, text, callback ) {
+    _createButton: function( buttonClass, text, callback ) {
         return $( '<a/>', {
-            'class': cClass,
+            'class': buttonClass,
             text: text,
             href: 'javascript:;',
             click: jQuery.proxy( callback, this )
