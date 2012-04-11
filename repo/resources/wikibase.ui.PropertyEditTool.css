@@ -14,10 +14,6 @@
     margin-right: .3em;
 }
 
-#contentSub, #contentSub2 {
-    margin: 0;
-}
-
 .firstHeading {
 	border-bottom: 0 !important;
 	line-height: 1em !important;
@@ -26,6 +22,10 @@
 
 .firstHeading div {
 	font-size: 0.5em;
+}
+
+.wb-property-container {
+	margin-top:-1em;
 }
 
 .wb-property-container-value {
