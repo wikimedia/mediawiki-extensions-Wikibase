@@ -30,32 +30,28 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getAllowedParams() {
 		return array(
-			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+			'wiki' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
+				ApiBase::PARAM_ISMULTI => true,
 			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
-			'title' => 'The title of the Wikipedia page',
-			'language' => 'Language code of the Wikipedia the title belongs to',
+			'title' => 'The title of the wiki page',
+			'wiki' => 'Wiki identifier',
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to obtain the Wikibase ids of one or more pages on a Wikipedia.'
+			'API module to obtain the Wikibase ids of one or more pages on the specified wiki.'
 		);
 	}
 
@@ -66,10 +62,10 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitemid&title=Wikimedia&language=en'
-				=> 'Get item for page "Wikimedia" with english language',
-			'api.php?action=wbgetitemid&title=Wikimedia|Wikipedia&language=en'
-				=> 'Get item for page "Wikimedia" or "Wikipedia" with english language',
+			'api.php?action=wbgetitemid&wiki=en&title=Berlin'
+				=> 'Get item id for page "Berlin" on the wiki identifierd by "en"',
+			'api.php?action=wbgetitemid&wiki=en&title=Berlin|Foobar'
+				=> 'Get item id for the pages "Berlin" and "Foobar" on the wiki identifierd by "en"',
 		);
 	}
 	

@@ -43,7 +43,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'wiki' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: wiki list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
