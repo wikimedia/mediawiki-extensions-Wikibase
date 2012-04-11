@@ -52,7 +52,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		
 		this._parent = parent;
 		
-		this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )] );
+		this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )] );
 	},
 	
 	/**
@@ -67,10 +67,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		
 		this._subject = $( '<div/>', {
 			'class': this.UI_CLASS
-		} );
-		
-		this._subject
-		.appendTo( this._parent )
+		} )		
 		.append( "[" );
 		
 		for( var i in buttons ) {
@@ -78,39 +75,56 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 				this._subject.append( "|" );
 			}
 			this._subject.append( buttons[i] );
-		}
-		
+		}		
 		this._subject.append( "]" );
+		
+		// if this is a right-to-left language, prepend the toolbar
+		// FIXME: there might be a nicer way to check for this, also this might be language settings
+		//        and context related later!
+		if( $( 'body' ).hasClass( 'rtl' ) ) {
+			this._parent.prepend( this._subject );
+		} else {
+			this._parent.append( this._subject );
+		}
 	},
 	
-    _actionEdit: function( event ) {
+	/**
+	 * Triggers the tool bars 'edit' command
+	 */
+    doEdit: function( event ) {
         if( this.onActionEdit !== null && this.onActionEdit() === false ) { // callback
             // cancel edit
             return false;
         }
         this._buildToolbar( [
-			this._createButton( this.UI_CLASS + '-save-link', window.mw.msg( 'wikibase-save' ), this._actionSave ),
-			this._createButton( this.UI_CLASS + '-cancel-link', window.mw.msg( 'wikibase-cancel' ), this._actionCancel )
+			this._createButton( this.UI_CLASS + '-save-link', window.mw.msg( 'wikibase-save' ), this.doSave ),
+			this._createButton( this.UI_CLASS + '-cancel-link', window.mw.msg( 'wikibase-cancel' ), this.doCancel )
         ] );
     },
     
-    _actionSave: function( event ) {
+	/**
+	 * Triggers the tool bars 'save' command
+	 */
+    doSave: function( event ) {
         if( this.onActionSave !== null && this.onActionSave() === false ) { // callback
             // cancel save
             return false;
         }
         this._buildToolbar( [
-			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )
+			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )
 		] );
     },
     
-    _actionCancel: function( event ) {
+	/**
+	 * Triggers the tool bars 'cancel' command
+	 */
+    doCancel: function( event ) {
         if( this.onActionCancel !== null && this.onActionCancel() === false ) { // callback
             // cancel cancel
             return false;
         }
         this._buildToolbar( [
-			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )
+			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )
 		] );
     },
     

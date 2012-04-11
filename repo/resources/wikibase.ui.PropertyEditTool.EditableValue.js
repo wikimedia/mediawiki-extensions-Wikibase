@@ -50,11 +50,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
-		this._subject = $( subject );		
+		this._subject = $( subject );
 	},
 	
 	destroy: function() {
-		// TODO
+		// TODO implement on demand
 	},
 	
 	/**
@@ -76,7 +76,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'class': this.UI_CLASS,
 			'type': 'text',
 			'name': this._key,
-			'value': initText
+			'value': initText,
+			'placeholder': '' /* todo: placeholder text */
 		} );
 		
 		this._subject.text( '' );
@@ -129,11 +130,21 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * 
 	 * @return string
 	 */
-	getValue: function() {
+	getValue: function() {		
 		if ( this.isInEditMode() ) {
-			return $.trim ( $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' ) );
+			var value = $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
 		} else {
-			return $.trim( this._subject.text() );
+			var value = this._subject.text();
 		}
+		return $.trim( value );
+	},
+	
+	/**
+	 * Returns true if there is currently no value assigned
+	 *
+	 * @return bool
+	 */
+	isEmpty: function() {
+		return this.getValue() === '';
 	}
 };

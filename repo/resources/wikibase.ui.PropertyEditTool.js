@@ -55,7 +55,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._subject = $( subject );
 		this._subject.addClass( this.UI_CLASS + '-subject' );
 				
-		this._initEditToolForValue();		
+		this._initEditToolForValue();
 	},
 	
 	/*
@@ -69,7 +69,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	*/
    
 	_initEditToolForValue: function() {
-		value = $( this._subject.children( '.wb-property-container-value' )[0] );
+		value = this._getValueElem();
 		this._editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue( value );
 		
 		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
@@ -81,6 +81,19 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._valueToolbar.onActionEdit   = function(){ self._editableValue.startEditing(); };
 		this._valueToolbar.onActionSave   = function(){ self._editableValue.stopEditing( true ); };
 		this._valueToolbar.onActionCancel = function(){ self._editableValue.stopEditing( false ); };
+		
+		if( this._editableValue.isEmpty() ) {
+			// enable editing from the beginning if there is no value yet!
+			this._valueToolbar.doEdit();
+		}
+	},
+	
+	/**
+	 * Returns the node representing the properties value.
+	 * @return jQuery
+	 */
+	_getValueElem: function() {
+		return $( this._subject.children( '.wb-property-container-value' )[0] );
 	},
 	
 	destroy: function() {
