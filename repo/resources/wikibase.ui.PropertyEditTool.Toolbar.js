@@ -62,8 +62,8 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 */
 	_buildToolbar: function( buttons ) {
 		if (this._subject != null) {
-			this._subject.empty();
-		}
+			this._subject.empty().remove();
+		}		
 		
 		this._subject = $( '<div/>', {
 			'class': this.UI_CLASS
