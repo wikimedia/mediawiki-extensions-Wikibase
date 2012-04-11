@@ -2,4 +2,6 @@
  * Style for 'Wikibase' property edit tools
  */
 
- 
+.wb-ui-propertyedittoolbar a {
+	padding: 0px .15em;
+}

@@ -36,6 +36,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @var wikibase.ui.PropertyEditTool.EditableValue
 	 */
 	_editableValue: null,
+	
+	/**
+	 * The toolbar for editing the properties value
+	 * @var: window.wikibase.ui.PropertyEditTool.Toolbar
+	 */
+	_valueToolbar: null,
 		
 	/**
 	 * Initializes the edit form for the given element.
@@ -49,20 +55,19 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._subject = $( subject );
 		this._subject.addClass( this.UI_CLASS + '-subject' );
 				
-		this._initEditToolForValue();
-		//this._removeEditToolForLabel( true );
-		
+		this._initEditToolForValue();		
 	},
 	
-	/**
+	/*
 	 * @todo: not decided yet whether this should be implemented. This would be neded if
 	 *        label and value can be editied parallel, not if both get their own "edit"
 	 *        button though (in this case other stuff has to be refactored probably).
-	 */	
+	 */	/*
 	_initEditToolForLabel: function() {
 		//this._editableLabel = ...
 	},
-	
+	*/
+   
 	_initEditToolForValue: function() {
 		value = $( this._subject.children( '.wb-property-container-value' )[0] );
 		this._editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue( value );

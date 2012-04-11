@@ -28,9 +28,17 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * Class which marks the toolbar within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittoolbar',
-	
+
+	/**
+	 * @var jQuery
+	 */
 	_subject: null,
-			
+	
+	/**
+	 * @var jQuery
+	 */
+	_parent: null,
+	
 	/**
 	 * Initializes the edit toolbar for the given element.
 	 * This should normally be called directly by the constructor.
