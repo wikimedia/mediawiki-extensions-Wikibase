@@ -121,5 +121,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	isInEditMode: function() {
 		return this._isInEditMode;
+	},
+	
+	/**
+	 * Returns the current value
+	 * 
+	 * @return string
+	 */
+	getValue: function() {
+		// TODO return the current value
 	}
 };
