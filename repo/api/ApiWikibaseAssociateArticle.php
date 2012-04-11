@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to associate an artcile on a Wikipedia with a Wikibase item.
+ * API module to associate an article on a Wikipedia with a Wikibase item.
  *
  * @since 0.1
  *
