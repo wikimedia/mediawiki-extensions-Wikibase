@@ -25,7 +25,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar = function( appendTo ) {
 window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	/**
 	 * @const
-	 * Class which marks a popup within the site html.
+	 * Class which marks the toolbar within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittoolbar',
 			
@@ -47,10 +47,26 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 */
 	appendTo: function( parent ) {
 		// TODO (this is just a dummy)
-		$( '<div>TEST</div>' )
-		.appendTo( parent );
+        this._createEditButton().appendTo( parent );
 	},
-	
+
+    _actionEdit: function() {
+        if( this.onActionEdit != null && !this.onActionEdit() ) { // callback
+            // cancel edit
+            return false;
+        }
+
+    },
+
+    _createEditButton: function() {
+        var self = this;
+        return $( '<a/>', {
+            'class': this.UI_CLASS + '-edit-link',
+            text: window.mw.msg( 'wikibase-edit' ),
+            click: function(){ self._actionEdit(); }
+        } );
+    },
+
 	destroy: function() {
 		// TODO
 	},
@@ -63,7 +79,10 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * Callback called after the 'edit' button was pressed.
 	 * If the callback returns false, the action will be cancelled.
 	 */
-	onActionEdit: null,
+	onActionEdit: function() {
+        alert(1);
+        return true;
+    },
 	
 	/**
 	 * Callback called after the 'save' button was pressed.

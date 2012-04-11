@@ -21,7 +21,7 @@ window.wikibase.ui.PropertyEditTool = function( subject ) {
 window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * @const
-	 * Class which marks a popup within the site html.
+	 * Class which marks a edit tool ui within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittool',
 	
@@ -62,7 +62,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		//this._insertEditBoxForValue();
 		//this._removeEditBoxForValue( true );
 		
-		//new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject );
+		new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject );
 	},
 	
 	/**
@@ -145,4 +145,4 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	getPropertyName: function() {
 		return this._subject.children( '.wb-property-container-key' )[0].title();
 	}
-}
+};
