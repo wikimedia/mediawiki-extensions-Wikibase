@@ -18,4 +18,6 @@ $messages = array();
  */
 $messages['en'] = array(
         'wikibase-desc' => 'Structured data repository',
+		'wikibase-edit' => 'edit',
+		'wikibase-save' => 'save',
 );

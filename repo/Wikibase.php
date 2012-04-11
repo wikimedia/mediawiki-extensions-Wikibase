@@ -95,6 +95,11 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	 */
 	'dependencies' => array(
 	),
+	'messages' => array(
+		'cancel',
+		'wikibase-edit',
+		'wikibase-save'
+	)
 );
 
 unset( $moduleTemplate );
