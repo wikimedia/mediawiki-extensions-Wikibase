@@ -11,6 +11,9 @@
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner at wikimedia.de >
+ * @author Daniel Kinzler
  */
 
 /**
@@ -51,12 +54,14 @@ $wgExtensionMessagesFiles['Wikibase'] 				= $dir . 'Wikibase.i18n.php';
 
 // Autoloading
 $wgAutoloadClasses['WBSettings'] 					= $dir . 'Wikibase.settings.php';
+$wgAutoloadClasses['WikibaseHooks'] 				= $dir . 'Wikibase.hooks.php';
 
 // api
-$wgAutoloadClasses['ApiQueryWikibaseProp'] 			= $dir . 'api/ApiQueryWikibaseProp.php'; // TODO
 $wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'api/ApiWikibaseGetItemId.php';
 $wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAssociateArticle.php';
+$wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
+$wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
 
 // includes
 $wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
@@ -67,10 +72,17 @@ $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 
 
 // API module registration
-$wgAPIPropModules['wikidata'] 						= 'ApiQueryWikibaseProp'; // TODO
-$wgAPIPropModules['wbgetitem'] 						= 'ApiWikibaseGetItem';
-$wgAPIPropModules['wbgetitemid'] 					= 'ApiWikibaseGetItemId';
-$wgAPIPropModules['wbassociatearticle'] 			= 'ApiWikibaseSetWikipediaTitle';
+$wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
+$wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
+$wgAPIModules['wbassociatearticle'] 				= 'ApiWikibaseSetWikipediaTitle';
+$wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
+$wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
+
+
+
+// Hooks
+$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
+$wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 
 
 
