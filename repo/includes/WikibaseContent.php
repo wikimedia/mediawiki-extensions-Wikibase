@@ -140,8 +140,7 @@ class WikibaseContent extends Content {
         $html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
 		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
         $html .= Html::closeElement('div');
-        
-        $html .= Html::element( 'hr', null, null );
+
         $htmlTable = '';
 
         foreach ( $this->getTitles( $lang ) AS $language => $value ) {

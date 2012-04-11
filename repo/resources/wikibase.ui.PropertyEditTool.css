@@ -2,7 +2,19 @@
  * Style for 'Wikibase' property edit tools
  */
 
+.wb-ui-propertyedittoolbar {
+    display: inline;
+}
+
 .wb-ui-propertyedittoolbar a {
-	padding: 0px .15em;
+    padding: 0px .15em;
+}
+
+.wb-property-container-value {
+    margin-right: .3em;
+}
+
+#contentSub, #contentSub2 {
+    margin: 0;
 }
 
