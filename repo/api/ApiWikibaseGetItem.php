@@ -32,7 +32,8 @@ class ApiWikibaseGetItem extends ApiBase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_ISMULTI => true,
 			),
 		);
 	}
@@ -40,7 +41,8 @@ class ApiWikibaseGetItem extends ApiBase {
 	public function getParamDescription() {
 		return array(
 			'id' => 'The ID of the item to get the data from',
-			'language' => 'Language code of the language in which labels should be returned',
+			'language' => 'By default the internationalized values are returned in all available languages.
+						This parameter allows filtering these down to one or more languages by providing their language codes.',
 		);
 	}
 
@@ -59,6 +61,7 @@ class ApiWikibaseGetItem extends ApiBase {
 		return array(
 			'api.php?action=wbgetitem&id=42',
 			'api.php?action=wbgetitem&id=42&language=en',
+			'api.php?action=wbgetitem&id=42&language=en|de',
 			'api.php?action=wbgetitem&id=4|2',
 			'api.php?action=wbgetitem&id=4|2&language=en',
 		);
