@@ -42,6 +42,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		}
 		
 		this._parent = parent;
+		
 		this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this._actionEdit )] );
 
 	},
@@ -61,7 +62,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 			if( i != 0 ) {
 				this._subject.append( "|" );
 			}
-			this._subject.append( $( '<span/>' ).append( content[i] ) );
+			this._subject.append( content[i] );
 		}
 		
 		this._subject.append( "]" );

@@ -52,7 +52,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._initEditToolForValue();
 		//this._removeEditToolForLabel( true );
 		
-		new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject );
 	},
 	
 	/**

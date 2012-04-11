@@ -66,6 +66,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
+		alert('startEditing');
 		if( this.isInEditMode() ) {
 			return false;			
 		}
