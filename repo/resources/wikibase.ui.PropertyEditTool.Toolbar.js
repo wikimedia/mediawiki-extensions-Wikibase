@@ -95,4 +95,4 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * If the callback returns false, the action will be cancelled.
 	 */
 	onActionCancel: null
-}
+};
