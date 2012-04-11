@@ -13,18 +13,12 @@
 /**
  * Module for 'Wikibase' extensions user interface functionality.
  */
-window.wikibase.ui.PropertyEditTool = function( subject ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject );
-	}
+window.wikibase.ui.HeadingEditTool = function( subject ) {
+	window.wikibase.ui.PropertyEditTool.call( this, subject );
 };
-window.wikibase.ui.PropertyEditTool.prototype = {
-	/**
-	 * @const
-	 * Class which marks a edit tool ui within the site html.
-	 */
-	UI_CLASS: 'wb-ui-propertyedittool',
-	
+
+window.wikibase.ui.HeadingEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
+$.extend( window.wikibase.ui.HeadingEditTool.prototype, {	
 	/**
 	 * Element the edit tool is related to.
 	 * @var jQuery
@@ -44,7 +38,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	_valueToolbar: null,
 		
 	/**
-	 * Initializes the edit form for the given element.
+	 * Initializes the edit form for the given h1 with 'firstHeading' class, basically the page title.
 	 * This should normally be called directly by the constructor.
 	 */
 	_init: function( subject ) {
@@ -55,21 +49,11 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._subject = $( subject );
 		this._subject.addClass( this.UI_CLASS + '-subject' );
 				
-		this._initEditToolForValue();		
+		this._initEditToolForValue();
 	},
 	
-	/*
-	 * @todo: not decided yet whether this should be implemented. This would be neded if
-	 *        label and value can be editied parallel, not if both get their own "edit"
-	 *        button though (in this case other stuff has to be refactored probably).
-	 */	/*
-	_initEditToolForLabel: function() {
-		//this._editableLabel = ...
-	},
-	*/
-   
 	_initEditToolForValue: function() {
-		value = $( this._subject.children( '.wb-property-container-value' )[0] );
+		value = $( this._subject.children( 'h1.firstHeading span' )[0] );
 		this._editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue( value );
 		
 		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
@@ -83,21 +67,10 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._valueToolbar.onActionCancel = function(){ self._editableValue.stopEditing( false ); };
 	},
 	
-	destroy: function() {
-		this._valueToolbar.destroy();
-		this._editableValue.destroy();
-		// TODO
-	},
-	
 	/**
-	 * Returns the related properties title
-	 *
-	 * @todo: perhaps at a later point we want to have a getProperty() method instead to return
-	 *        a proper object describing the property. Also considering different kinds of snaks.
-	 * 
-	 * @var string
+	 * Returns 'label'
 	 */
 	getPropertyName: function() {
-		return $( this._subject.children( '.wb-property-container-key' )[0] ).attr( 'title' );
+		return 'label';
 	}
-};
+} );
