@@ -27,7 +27,7 @@ if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c becaus
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.\n" );
 }
 
-define( 'WBC_VERSION', '0.1 alpha' );
+define( 'WBC_VERSION', '0.2 alpha' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
@@ -46,14 +46,19 @@ $dir = dirname( __FILE__ ) . '/';
 
 // i18n
 $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php';
+$wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
 
 // Autoloading
 $wgAutoloadClasses['WBCHooks'] 						= $dir . 'WikibaseClient.hooks.php';
 $wgAutoloadClasses['WBCSettings'] 					= $dir . 'WikibaseClient.settings.php';
 $wgAutoloadClasses['WBCLangLinkHandler'] 			= $dir . 'includes/WBCLangLinkHandler.php';
+$wgAutoloadClasses['WBCNoLangLinkHandler'] 			= $dir . 'includes/WBCNoLangLinkHandler.php';
 
 // Hooks
 $wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
+$wgHooks['ParserFirstCallInit'][]					= 'WBCNoLangLinkHandler::onParserFirstCallInit';
+$wgHooks['MagicWordwgVariableIDs'][]				= 'WBCNoLangLinkHandler::onMagicWordwgVariableIDs';
+$wgHooks['ParserGetVariableValueSwitch'][]			= 'WBCNoLangLinkHandler::onParserGetVariableValueSwitch';
 $wgHooks['UnitTestsList'][] 						= 'WBCHooks::registerUnitTests';
 
 // Resource loader modules

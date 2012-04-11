@@ -5,10 +5,11 @@
  * TODO: stylize
  * TODO: get rid of code duplication (both logic and array defs)
  * TODO: do we really want to refresh this on re-render? push updates from the repo seem to make more sense
+ * TODO: Should we sort the links if we don't display them? Several cases: links disabled per namespace, links disabled by parser function/magic word, no links on the server.
  *
  * @since 0.1
  *
- * @file WBCLangLangHandler.php
+ * @file WBCLangLinkHandler.php
  * @ingroup WikibaseClient
  *
  * @licence	GNU GPL v2+
@@ -45,22 +46,41 @@ class WBCLangLinkHandler {
 		unset($links[$wgLanguageCode]);
 
 		// If a link exists in wikitext, override wikidata link to the same language.
-		// TODO: ability to remove a link without replacing it.
 		$out = $parser->getOutput();
-		foreach( $out->mLanguageLinks as $link ) {
-			unset( $links[self::getCodeFromLink( $link )] );
+
+		$nei = self::getNEI( $out );
+		if( array_key_exists( '*', $nei ) ) {
+			$links = array();
+		} else {
+			$links = array_diff_key( $links, $nei );
 		}
 
-		// Pack the links properly.
+		// Pack the links properly into mLanguageLinks.
 		foreach( $links as $lang => $link ) {
-			//TODO: use a function?
-			$out->mLanguageLinks[] = "$lang:$link";
+			$out->addLanguageLink( "$lang:$link" );
 		}
 
 		//Sort the links
 		self::sortLinks( $out->mLanguageLinks );
 
 		return true;
+	}
+
+	/**
+	 * Get no_external_interlang parser property.
+	 *
+	 * @return Array Empty array if not set.
+	 */
+	public static function getNEI( ParserOutput $out ) {
+		$nei = $out->getProperty( 'no_external_interlang' );
+
+		if( empty( $nei ) ) {
+			$nei = array();
+		} else {
+			$nei = unserialize( $nei );
+		}
+
+		return $nei;
 	}
 
 	/**
