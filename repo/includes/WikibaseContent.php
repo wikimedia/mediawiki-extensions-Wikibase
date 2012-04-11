@@ -52,7 +52,8 @@ class WikibaseContent extends Content {
      * @return String the summary text
      */
     public function getTextForSummary( $maxlength = 250 ) {
-        return $this->getDescription(); // FIXME: missing arg
+        global $wgLang;
+	return $this->getDescription( $wgLang ); 
     }
 
     /**
