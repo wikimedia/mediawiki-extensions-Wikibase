@@ -2,6 +2,7 @@
 
 /**
  * API module to set a description for a Wikibase item.
+ * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
@@ -13,6 +14,10 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ApiWikibaseSetDescription extends ApiBase {
+
+	public function __construct( $main, $action ) {
+		parent::__construct( $main, $action );
+	}
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -69,9 +74,15 @@ class ApiWikibaseSetDescription extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetdescription&id=42&language=en&description=An encyclopedia that everyone can edit',
+			'api.php?action=wbsetdescription&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit'
+				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "42" as a decription in English language',
 		);
 	}
+	
+   	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#SetDescription';
+	}
+	
 
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';

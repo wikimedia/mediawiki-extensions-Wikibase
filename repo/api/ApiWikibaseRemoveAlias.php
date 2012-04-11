@@ -1,20 +1,21 @@
 <?php
 
 /**
- * API module to set a label for a Wikibase item.
+ * API module to remove an associated string alias with a Wikibase item.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
- * @file ApiWikibaseSetLabel.php
+ * @file ApiWikibaseRemoveAlias.php
  * @ingroup Wikibase
  * @ingroup API
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetLabel extends ApiBase {
-	
+
+class ApiWikibaseRemoveAlias extends ApiBase {
+
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
 	}
@@ -43,10 +44,10 @@ class ApiWikibaseSetLabel extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => array(), // TODO: language code list
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'label' => array(
+			'alias' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
@@ -55,15 +56,15 @@ class ApiWikibaseSetLabel extends ApiBase {
 
 	public function getParamDescription() {
 		return array(
-			'id' => 'The ID of the item to set a label for',
-			'language' => 'Language the label is in',
-			'label' => 'The value to set for the label',
+			'id' => 'The ID of the item to associate the page with',
+			'language' => 'Language code of the wikipedia on which the page resides',
+			'alias' => 'String used as an alternate title of the page',
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to set a label for a Wikibase item.'
+			'API module to remove the associated alias on a string form from a Wikibase item.'
 		);
 	}
 
@@ -74,15 +75,15 @@ class ApiWikibaseSetLabel extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia'
-				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language',
+			'api.php?action=wbremovealias&id=42&language=en&alias=Wikimedia'
+				=> 'Removes the string "Wikimedia" for page with id "42" as an alias in English language',
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/API:Wikidata#SetLabel';
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#RemoveAlias';
 	}
-	
+
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

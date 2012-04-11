@@ -1,20 +1,20 @@
 <?php
 
 /**
- * API module to set a label for a Wikibase item.
+ * API module to associate two articles through language links in the Wikibase item.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
- * @file ApiWikibaseSetLabel.php
+ * @file ApiWikibaseSetWikipediaTitle.php
  * @ingroup Wikibase
  * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiWikibaseSetLabel extends ApiBase {
-	
+class ApiWikibaseLinkArticles extends ApiBase {
+
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
 	}
@@ -38,15 +38,19 @@ class ApiWikibaseSetLabel extends ApiBase {
 
 	public function getAllowedParams() {
 		return array(
-			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
+			'language-from' => array(
+				ApiBase::PARAM_TYPE => array(), // TODO: language code list
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+			'title-from' => array(
+				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'label' => array(
+			'language-to' => array(
+				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_REQUIRED => true,
+			),
+			'title-to' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
@@ -55,15 +59,16 @@ class ApiWikibaseSetLabel extends ApiBase {
 
 	public function getParamDescription() {
 		return array(
-			'id' => 'The ID of the item to set a label for',
-			'language' => 'Language the label is in',
-			'label' => 'The value to set for the label',
+			'language-from' => 'Language code of the external page it is linked from',
+			'title-from' => 'Title of the page it is linked from',
+			'language-to' => 'Language code of the external page it is linked to',
+			'title-to' => 'Title of the page it is linked to',
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to set a label for a Wikibase item.'
+			'API module to associate two articles on external Mediawiki pages with a Wikibase item.'
 		);
 	}
 
@@ -74,15 +79,15 @@ class ApiWikibaseSetLabel extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia'
-				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language',
+			'api.php?action=wblinkarticles&language-from=en&title-from=Norway&language-to=no&title-to=Norge'
+				=> 'Set link from title "Norway" for page in English Wikipedia to "Norge" in Norwegian Wikipedia', // TODO: Still references Wikipedia
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/API:Wikidata#SetLabel';
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#LinkArticles';
 	}
-	
+
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

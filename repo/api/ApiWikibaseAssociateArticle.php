@@ -2,6 +2,7 @@
 
 /**
  * API module to associate an article on a wiki with a Wikibase item.
+ * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
@@ -13,6 +14,10 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ApiWikibaseAssociateArticle extends ApiBase {
+
+	public function __construct( $main, $action ) {
+		parent::__construct( $main, $action );
+	}
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -73,10 +78,17 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia',
-			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&badge=', // TODO
+			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia'
+				=> 'Set title "Wikimedia" for page with id "42" at English Wikipedia', // TODO: Still references Wikipedia
+			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&badge='
+				=> 'Set title "Wikimedia" for page with id "42" at English Wikipedia and with a badge', // TODO: Still references Wikipedia
 		);
 	}
+	
+    public function getHelpUrls() {
+    	return 'https://www.mediawiki.org/wiki/API:Wikidata#AssociateArticle';
+    }
+	
 
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
