@@ -69,7 +69,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.isInEditMode() ) {
 			return false;			
 		}
-		initText = $.trim( this._subject.text() );
+
+		initText = this.getValue();
 		
 		inputBox = $( '<input/>', {
 			'class': this.UI_CLASS,
@@ -83,8 +84,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		
 		// store original text value from before input box insertion:
 		inputBox.data( this.UI_CLASS + '-initial-value', initText );
-		
-		this._isInEditMode = true;
+
+        this._isInEditMode = true;
 		return true;
 	},
 	
@@ -102,8 +103,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		initialValue = inputBox.data( this.UI_CLASS + '-initial-value' );
 		
 		$value = ( ! save )
-			? initialValue
-			: $.trim( inputBox.attr( 'value' ) );
+				? initialValue
+				: this.getValue();
 		
 		inputBox.empty().remove(); // remove input interface		
 		this._subject.text( $value );
@@ -129,6 +130,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return string
 	 */
 	getValue: function() {
-		// TODO return the current value
+		if ( this.isInEditMode() ) {
+			return $.trim ( $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' ) );
+		} else {
+			return $.trim( this._subject.text() );
+		}
 	}
 };
