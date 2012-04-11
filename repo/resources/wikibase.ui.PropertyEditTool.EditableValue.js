@@ -77,7 +77,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'type': 'text',
 			'name': this._key,
 			'value': initText,
-			'placeholder': '' /* todo: placeholder text */
+			'placeholder': this.inputPlaceholder
 		} );
 		
 		this._subject.text( '' );
@@ -146,5 +146,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	isEmpty: function() {
 		return this.getValue() === '';
-	}
+	},
+	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
+	/**
+	 * Allows to define a default value appearing in the input box in case there is no value given
+	 * @var string
+	 */
+	inputPlaceholder: ''
 };
