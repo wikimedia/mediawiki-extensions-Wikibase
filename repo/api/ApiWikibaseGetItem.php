@@ -14,6 +14,10 @@
  */
 class ApiWikibaseGetItem extends ApiBase {
 
+	public function __construct( $main, $action ) {
+		parent::__construct( $main, $action );
+	}
+
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -59,14 +63,21 @@ class ApiWikibaseGetItem extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitem&id=42',
-			'api.php?action=wbgetitem&id=42&language=en',
-			'api.php?action=wbgetitem&id=42&language=en|de',
-			'api.php?action=wbgetitem&id=4|2',
-			'api.php?action=wbgetitem&id=4|2&language=en',
+			'api.php?action=wbgetitem&id=42'
+				=> 'Get item number 42 with default (user?) language',
+            'api.php?action=wbgetitem&id=42&language=en'
+				=> 'Get item number 42 with english language',
+            'api.php?action=wbgetitem&id=4|2'
+				=> 'Get item number 4 and 2 with default (user?) language',
+            'api.php?action=wbgetitem&id=4|2&language=en'
+				=> 'Get item number 4 and 2 with enlish language',
 		);
 	}
 
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#GetItem';
+	}
+	
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

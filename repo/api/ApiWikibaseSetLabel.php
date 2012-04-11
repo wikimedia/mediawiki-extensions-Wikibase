@@ -2,6 +2,7 @@
 
 /**
  * API module to set a label for a Wikibase item.
+ * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
@@ -13,6 +14,10 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ApiWikibaseSetLabel extends ApiBase {
+	
+	public function __construct( $main, $action ) {
+		parent::__construct( $main, $action );
+	}
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -69,10 +74,15 @@ class ApiWikibaseSetLabel extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetlabel&id=42&language=en&label=Wikipedia',
+			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia'
+				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language',
 		);
 	}
 
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#SetLabel';
+	}
+	
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

@@ -14,6 +14,10 @@
  */
 class ApiWikibaseGetItemId extends ApiBase {
 
+	public function __construct( $main, $action ) {
+		parent::__construct( $main, $action );
+	}
+
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -58,9 +62,15 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitemid&title=Wikimedia&language=en',
-			'api.php?action=wbgetitem&title=Wikimedia|Wikipedia&language=en',
+			'api.php?action=wbgetitemid&title=Wikimedia&language=en'
+				=> 'Get item for page "Wikimedia" with english language',
+			'api.php?action=wbgetitemid&title=Wikimedia|Wikipedia&language=en'
+				=> 'Get item for page "Wikimedia" or "Wikipedia" with english language',
 		);
+	}
+	
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#GetItemId';
 	}
 
 	public function getVersion() {
