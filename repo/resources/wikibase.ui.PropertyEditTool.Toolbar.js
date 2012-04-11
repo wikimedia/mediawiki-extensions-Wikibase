@@ -47,7 +47,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 */
 	appendTo: function( parent ) {
 		// TODO (this is just a dummy)
-		$( '<div>TEST</div>' )
+		$( '<div/>' )
 		.appendTo( parent );
 	},
 	

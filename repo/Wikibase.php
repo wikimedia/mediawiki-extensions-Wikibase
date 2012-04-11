@@ -86,13 +86,12 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase.ui.js',
 		'wikibase.ui.PropertyEditTool.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.js',
 		'wikibase.startup.js'
 	),
-	/*
 	'styles' => array(
-		'wikibase.exampleName.css',
+		'wikibase.ui.PropertyEditTool.css',
 	),
-	 */
 	'dependencies' => array(
 	),
 	'messages' => array(
