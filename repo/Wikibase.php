@@ -77,13 +77,16 @@ $wgAPIPropModules['wbassociatearticle'] 			= 'ApiWikibaseSetWikipediaTitle';
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' => 'Wikibase/resources',
+	'remoteExtPath' => 'WikidataRepo/resources',
 );
 
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
-	'scripts' => array(
+	'scripts' => array(	
 		'wikibase.js',
-		'wikibase.ui.js'
+		'wikibase.ui.js',
+		'wikibase.ui.PropertyEditTool.js',
+		'wikibase.ui.PropertyEditTool.Toolbar.js',
+		'wikibase.startup.js'
 	),
 	/*
 	'styles' => array(

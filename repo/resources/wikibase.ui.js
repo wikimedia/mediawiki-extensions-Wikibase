@@ -1,5 +1,5 @@
 /**
- * JavasSript for user interface related stuff
+ * JavasSript for user interface related stuff of the 'Wikibase' extension.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
@@ -7,7 +7,7 @@
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
- * @author Daniel Werner < daniel.werner at wikimedia.de >
+ * @author Daniel Werner
  */
 
 /**

@@ -136,15 +136,15 @@ class WikibaseContent extends Content {
             $description = '';
         }
         
-        $html .= Html::openElement( 'span', array( 'class' => 'wb-label-container' ) );
-        $html .= Html::element( 'h1', null, $label );
-        $html .= Html::element( 'span', array( 'id' => 'wb-label-edit-container' ) );
-        $html .= Html::closeElement('span');
+        $html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
+        $html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'label' ) );
+		$html .= Html::element( 'h1', array( 'class' => 'wb-property-container-value'), $label );
+        $html .= Html::closeElement('div');
         
-        $html .= Html::openElement( 'span', array( 'class' => 'wb-description-container' ) );
-        $html .= Html::element( 'p', null, $description );
-        $html .= Html::element( 'span', array( 'id' => 'wb-description-edit-container' ) );
-        $html .= Html::closeElement('span');
+        $html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
+        $html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
+		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
+        $html .= Html::closeElement('div');
         
         $html .= Html::element( 'hr', null, null );
         $htmlTable = '';
