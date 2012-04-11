@@ -32,7 +32,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 		);

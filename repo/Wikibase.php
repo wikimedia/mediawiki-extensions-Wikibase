@@ -30,6 +30,11 @@ if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c becaus
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.' );
 }
 
+// TODO: enable
+//if ( !array_key_exists( 'CountryNames', $wgAutoloadClasses ) ) { // No version constant to check against :/
+//	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:CLDR">CLDR</a> extension.' );
+//}
+
 define( 'WB_VERSION', '0.1 alpha' );
 
 $wgExtensionCredits['other'][] = array(
@@ -68,6 +73,7 @@ $wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseConten
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 		= $dir . 'includes/WikibaseDifferenceEngine.php';
 $wgAutoloadClasses['WikibaseContent'] 				= $dir . 'includes/WikibaseContent.php';
 $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
+$wgAutoloadClasses['WikibaseUtils'] 				= $dir . 'includes/WikibaseUtils.php';
 
 
 
