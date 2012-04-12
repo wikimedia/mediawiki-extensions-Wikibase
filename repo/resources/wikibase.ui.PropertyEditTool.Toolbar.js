@@ -58,7 +58,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	/**
 	 * Creates the toolbar with an array of buttons which will be displayed separated by "|"
 	 * 
-	 * @param buttons
+	 * @param buttons array with button elements from the _createButton method
 	 */
 	_buildToolbar: function( buttons ) {
 		if (this._subject != null) {
@@ -128,6 +128,13 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		] );
     },
     
+    /**
+     * Creates a button for the toolbar
+     * @param buttonClass css class used for this button
+     * @param text the label of the button
+     * @param callback the function called when the button is pressed
+     * @returns the button as jquery element
+     */
     _createButton: function( buttonClass, text, callback ) {
         return $( '<a/>', {
             'class': buttonClass,

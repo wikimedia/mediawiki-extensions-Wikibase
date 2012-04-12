@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.js
+ * @file wikibase.ui.PropertyEditTool.EditableValue.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -40,6 +40,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @var bool
 	 */
 	_isInEditMode: false,
+	
+	/**
+	 * The toolbar controling the editable value
+	 * @var: window.wikibase.ui.PropertyEditTool.Toolbar
+	 */
+	_toolbar: null,
 			
 	/**
 	 * Initializes the editable value.
@@ -51,6 +57,25 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
+		this._initToolbar();
+	},
+	
+	_initToolbar: function() {		
+		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
+		//       with the actual value perhaps.
+		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject.parent() );
+
+		// use toolbar events to control the editable value:
+		var self = this;
+		this._toolbar.onActionEdit   = function(){ self.startEditing(); };
+		//this._toolbar.onActionEdit   = jQuery.proxy( this.startEditing, this );
+		this._toolbar.onActionSave   = function(){ self.stopEditing( true ); };
+		this._toolbar.onActionCancel = function(){ self.stopEditing( false ); };
+		
+		if( this.isEmpty() ) {
+			// enable editing from the beginning if there is no value yet!
+			this._toolbar.doEdit();
+		}
 	},
 	
 	destroy: function() {
@@ -77,7 +102,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'type': 'text',
 			'name': this._key,
 			'value': initText,
-			'placeholder': this.inputPlaceholder
+			'placeholder': this.inputPlaceholder,
+			'keypress': jQuery.proxy( this.keyPressed, this ),
+			'keyup': jQuery.proxy( this.keyPressed, this )	// for escape key browser compability
 		} );
 		
 		this._subject.text( '' );
@@ -87,7 +114,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		inputBox.data( this.UI_CLASS + '-initial-value', initText );
 
         this._isInEditMode = true;
+        inputBox.focus();
 		return true;
+	},
+	
+	/**
+	 * Called when a key is pressed inside the input box
+	 * 
+	 */
+	keyPressed: function( event ) {
+		if( event.which == 13 ) {
+			this._toolbar.doSave();
+		} else if( event.which == 27 ) {
+			this._toolbar.doCancel();
+		}
 	},
 	
 	/**
@@ -131,10 +171,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return string
 	 */
 	getValue: function() {		
-		if ( this.isInEditMode() ) {
-			var value = $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
+		var value = '';
+		if( this.isInEditMode() ) {
+			value = $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
 		} else {
-			var value = this._subject.text();
+			value = this._subject.text();
 		}
 		return $.trim( value );
 	},
