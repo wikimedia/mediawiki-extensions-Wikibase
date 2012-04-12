@@ -33,16 +33,13 @@
 	float:right;
 }
 
-.firstHeading {
-	display:inline-block;
-}
-
 .firstHeading div {
 	font-size: 0.5em;
 }
 
 .wb-property-container {
-	margin-top:-1em;
+	display:inline-block;
+	margin-top:.3em;
 }
 
 .ltr .wb-property-container-value {
@@ -53,4 +50,8 @@
 .rtl .wb-property-container-value {
 	background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
 	padding: 5px 35px 0 0;
+}
+
+.mw-jump, #contentSub {
+	display:none;
 }
