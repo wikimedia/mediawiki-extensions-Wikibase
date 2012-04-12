@@ -80,11 +80,11 @@ class ApiWikibaseGetItem extends ApiBase {
 		return array(
 			'api.php?action=wbgetitem&id=42'
 				=> 'Get item number 42 with default (user?) language',
-            'api.php?action=wbgetitem&id=42&language=en'
+			'api.php?action=wbgetitem&id=42&language=en'
 				=> 'Get item number 42 with english language',
-            'api.php?action=wbgetitem&id=4|2'
+			'api.php?action=wbgetitem&id=4|2'
 				=> 'Get item number 4 and 2 with default (user?) language',
-            'api.php?action=wbgetitem&id=4|2&language=en'
+			'api.php?action=wbgetitem&id=4|2&language=en'
 				=> 'Get item number 4 and 2 with enlish language',
 
 			'api.php?action=wbgetitem&wiki=en&title=Berlin&language=en'

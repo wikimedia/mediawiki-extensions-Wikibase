@@ -85,9 +85,9 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 		);
 	}
 	
-    public function getHelpUrls() {
-    	return 'https://www.mediawiki.org/wiki/API:Wikidata#AssociateArticle';
-    }
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#AssociateArticle';
+	}
 	
 
 	public function getVersion() {
