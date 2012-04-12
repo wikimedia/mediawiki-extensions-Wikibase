@@ -13,8 +13,13 @@
  */
 class WikibaseContentHandler extends ContentHandler {
 
-	public function getDifferenceEngine( IContextSource $context, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false 	) {
-		return new WikibaseDifferenceEngine( $context, $old, $new, $rcid, $refreshCache, $unhide );
+	/**
+	 * FIXME: bad method name
+	 *
+	 * @return WikibaseContent
+	 */
+	public function emptyContent() {
+		return new WikibaseContent( array() );
 	}
 
 	public function __construct() {
@@ -27,10 +32,7 @@ class WikibaseContentHandler extends ContentHandler {
 	}
 
 	public function createArticle( Title $title ) {
-		//$this->checkModelName( $title->getContentModelName() );
-
-		$article = new WikibasePage( $title );
-		return $article;
+		return new WikibasePage( $title );
 	}
 
 	public function getDefaultFormat() {
@@ -95,13 +97,6 @@ class WikibaseContentHandler extends ContentHandler {
 		}
 
 		return new WikibaseContent( $data );
-	}
-
-	/**
-	 * @return WikibaseContent
-	 */
-	public function emptyContent() {
-		return new WikibaseContent( array() );
 	}
 
 	public static function flattenArray( $a, $prefix = '', &$into = null ) {
