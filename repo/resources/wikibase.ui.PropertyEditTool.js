@@ -36,12 +36,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @var wikibase.ui.PropertyEditTool.EditableValue
 	 */
 	_editableValue: null,
-	
-	/**
-	 * The toolbar for editing the properties value
-	 * @var: window.wikibase.ui.PropertyEditTool.Toolbar
-	 */
-	_valueToolbar: null,
 		
 	/**
 	 * Initializes the edit form for the given element.
@@ -72,21 +66,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		value = this._getValueElem();
 		this._editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue( value );
 		this._editableValue.inputPlaceholder = this.getPropertyName(); // todo: show a label, not the property id
-		
-		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
-		//       with the actual value perhaps.
-		this._valueToolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject );
-		
-		// use toolbar events to control the editable value:
-		var self = this;
-		this._valueToolbar.onActionEdit   = function(){ self._editableValue.startEditing(); };
-		this._valueToolbar.onActionSave   = function(){ self._editableValue.stopEditing( true ); };
-		this._valueToolbar.onActionCancel = function(){ self._editableValue.stopEditing( false ); };
-		
-		if( this._editableValue.isEmpty() ) {
-			// enable editing from the beginning if there is no value yet!
-			this._valueToolbar.doEdit();
-		}
 	},
 	
 	/**
