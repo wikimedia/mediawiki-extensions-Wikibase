@@ -39,9 +39,9 @@ class WikibaseContentHandler extends ContentHandler {
 
 	/**
 	 * @param Content $content
-	 * @param null|String $format
+	 * @param null|string $format
 	 *
-	 * @return String
+	 * @return string
 	 */
 	public function serialize( Content $content, $format = null ) {
 
@@ -52,16 +52,24 @@ class WikibaseContentHandler extends ContentHandler {
 		#FIXME: assert $content is a WikibaseContent instance
 		$data = $content->getNativeData();
 
-		if ( $format == 'application/vnd.php.serialized' ) $blob = serialize( $data );
-		else if ( $format == 'application/json' ) $blob = json_encode( $data );
-		else throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+		switch ( $format ) {
+			case 'application/vnd.php.serialized':
+				$blob = serialize( $data );
+				break;
+			case 'application/json':
+				$blob = json_encode( $data );
+				break;
+			default:
+				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+				break;
+		}
 
 		return $blob;
 	}
 
 	/**
-	 * @param $blob String
-	 * @param null|String $format
+	 * @param string $blob
+	 * @param null|string $format
 	 *
 	 * @return WikibaseContent
 	 */
@@ -70,11 +78,21 @@ class WikibaseContentHandler extends ContentHandler {
 			$format = WBSettings::get( 'serializationFormat' );
 		}
 
-		if ( $format == 'application/vnd.php.serialized' ) $data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
-		else if ( $format == 'application/json' ) $data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
-		else throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+		switch ( $format ) {
+			case 'application/vnd.php.serialized':
+				$data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
+				break;
+			case 'application/json':
+				$data = json_decode( $blob ); #FIXME: suppress notice on failed serialization!
+				break;
+			default:
+				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+				break;
+		}
 
-		if ( $data === false || $data === null ) throw new MWContentSerializationException("failed to deserialize");
+		if ( $data === false || $data === null ) {
+			throw new MWContentSerializationException( 'failed to deserialize' );
+		}
 
 		return new WikibaseContent( $data );
 	}
