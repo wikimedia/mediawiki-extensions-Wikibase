@@ -29,6 +29,9 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		// add class specific to this ui element:
 		this._subject.addClass( 'wb-ui-headingedittool' );
+		if( $( 'body' ).hasClass( 'rtl' ) ) {
+			this._getValueElem().addClass( 'wb-ui-rtl' );
+		}
 	},
 	
 	/**
