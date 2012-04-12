@@ -25,6 +25,12 @@ class ApiWikibaseGetItem extends ApiBase {
 	 * @since 0.1
 	 */
 	public function execute() {
+		$params = $this->extractRequestParams();
+
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['wiki'] ) && isset( $params['title '] ) ) ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+		}
+
 		// TODO: implement
 	}
 
@@ -32,7 +38,13 @@ class ApiWikibaseGetItem extends ApiBase {
 		return array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true,
+				ApiBase::PARAM_ISMULTI => true,
+			),
+			'wiki' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
+			),
+			'title' => array(
+				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'language' => array(
@@ -47,6 +59,8 @@ class ApiWikibaseGetItem extends ApiBase {
 			'id' => 'The ID of the item to get the data from',
 			'language' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
+			'title' => 'The title of the corresponding wiki page',
+			'wiki' => 'Identifier for the wiki on which the corresponding page resides',
 		);
 	}
 
@@ -58,6 +72,7 @@ class ApiWikibaseGetItem extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
 		) );
 	}
 
@@ -71,6 +86,11 @@ class ApiWikibaseGetItem extends ApiBase {
 				=> 'Get item number 4 and 2 with default (user?) language',
             'api.php?action=wbgetitem&id=4|2&language=en'
 				=> 'Get item number 4 and 2 with enlish language',
+
+			'api.php?action=wbgetitem&wiki=en&title=Berlin&language=en'
+				=> 'Get the item associated to page Berlin on the wiki identified by "en"',
+			'api.php?action=wbgetitem&wiki=en&title=Berlin|Foobar&language=en'
+				=> 'Get the items associated to pages Berlin and Foobar on the wiki identified by "en"',
 		);
 	}
 

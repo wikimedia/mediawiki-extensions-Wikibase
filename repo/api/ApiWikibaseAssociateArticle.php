@@ -43,7 +43,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'wiki' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: wiki list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
@@ -79,9 +79,9 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia'
-				=> 'Set title "Wikimedia" for page with id "42" at English Wikipedia', // TODO: Still references Wikipedia
+				=> 'Set title "Wikimedia" for English page with id "42"',
 			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&badge='
-				=> 'Set title "Wikimedia" for page with id "42" at English Wikipedia and with a badge', // TODO: Still references Wikipedia
+				=> 'Set title "Wikimedia" for English page with id "42" and with a badge',
 		);
 	}
 	
