@@ -31,6 +31,7 @@ class WBCSettings {
 			'namespaces' => array( NS_MAIN ),
 			'sort' => 'none',
 			'sortPrepend' => false,
+			'alwaysSort' => false,
 		);
 	}
 
