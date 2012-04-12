@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to associate an article on a wiki with a Wikibase item.
+ * API module to associate a page on a site with a Wikibase item.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -25,7 +25,28 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 	 * @since 0.1
 	 */
 	public function execute() {
-		// TODO: implement
+		$params = $this->extractRequestParams();
+
+		$success = false;
+
+		$content = Article::newFromTitle(
+			Title::newFromText( 'q' . $params['id'] ),
+			$this->getContext()
+		)->getContentObject();
+
+		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
+			/* WikibaseItem */ $item = $content->getItem();
+			$success = $item->addSiteLink( $params['wiki'], $params['title'] );
+		}
+		else {
+			// TODO: error message
+		}
+
+		$this->getResult()->addValue(
+			null,
+			'success',
+			$success
+		);
 	}
 
 	public function needsToken() {
@@ -42,7 +63,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'wiki' => array(
+			'wiki' => array( // TODO: change to "site"
 				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),

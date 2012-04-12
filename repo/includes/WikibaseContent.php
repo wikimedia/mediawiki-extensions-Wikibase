@@ -13,6 +13,10 @@
  */
 class WikibaseContent extends Content {
 
+	/**
+	 * @since 0.1
+	 * @var WikibaseItem
+	 */
 	protected $item;
 	
 	public function __construct( array $data ) {
@@ -95,23 +99,11 @@ class WikibaseContent extends Content {
 		// TODO: use $options->getTargetLanguage() ?
 		$wgLang->getCode();
 
-		$html = $this->generateHtml( $wgLang );
-		$po = new ParserOutput( $html );
-		
-		
-		//$html = Html::rawElement('table', array('class' => 'wikitable'), $html);
-		//$po = new ParserOutput( $html );
+		$parserOutput = new ParserOutput( $this->generateHtml( $wgLang ) );
 
-		$labels = array(
-			"de" => $title->getText() . " in German",
-			"en" => $title->getText() . " in English"
-		);
+		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this->item, $title ) );
 
-		// TODO
-//		$label_update = new WikibaseLabelTableUpdate( $title, $labels );
-//		$po->addSecondaryDataUpdate( $label_update );
-
-		return $po;
+		return $parserOutput;
 	}
 
 	/**

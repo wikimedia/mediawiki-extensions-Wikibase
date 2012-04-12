@@ -31,6 +31,10 @@ class ApiWikibaseGetItem extends ApiBase {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
+//		if ( !isset( $params['id'] ) ) {
+//			$params['id'] = WikibaseItem::getIdForSiteLink( $params['wiki'], $params['title '] );
+//		}
+
 		// TODO: implement
 	}
 
@@ -40,7 +44,7 @@ class ApiWikibaseGetItem extends ApiBase {
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_ISMULTI => true,
 			),
-			'wiki' => array(
+			'wiki' => array( // TODO: change to "site"
 				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
 			),
 			'title' => array(

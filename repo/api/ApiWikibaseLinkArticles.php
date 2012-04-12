@@ -39,7 +39,7 @@ class ApiWikibaseLinkArticles extends ApiBase {
 	public function getAllowedParams() {
 		return array(
 			'language-from' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title-from' => array(
@@ -47,7 +47,7 @@ class ApiWikibaseLinkArticles extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'language-to' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title-to' => array(

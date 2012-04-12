@@ -30,7 +30,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getAllowedParams() {
 		return array(
-			'wiki' => array(
+			'wiki' => array( // TODO: change to "site"
 				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),

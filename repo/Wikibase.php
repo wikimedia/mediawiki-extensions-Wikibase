@@ -78,8 +78,7 @@ $wgAutoloadClasses['WikibaseContent'] 				= $dir . 'includes/WikibaseContent.php
 $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 $wgAutoloadClasses['WikibaseUtils'] 				= $dir . 'includes/WikibaseUtils.php';
 $wgAutoloadClasses['WikibaseItem'] 					= $dir . 'includes/WikibaseItem.php';
-$wgAutoloadClasses['WikibaseMultilangUpdate'] 		= $dir . 'includes/WikibaseMultilangUpdate.php';
-$wgAutoloadClasses['WikibaseSiteLinkUpdate'] 		= $dir . 'includes/WikibaseSiteLinkUpdate.php';
+$wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseItemStructuredSave.php';
 
 
 
@@ -126,8 +125,8 @@ unset( $moduleTemplate );
 
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' );
-$wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikibaseContentHandler';
+define( 'CONTENT_MODEL_WIKIBASE', 'wikidata' );
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
 
 $egWBSettings = array();
