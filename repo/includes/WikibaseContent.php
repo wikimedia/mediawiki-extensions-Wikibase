@@ -13,21 +13,12 @@
  */
 class WikibaseContent extends Content {
 
-	const TYPE_TEXT = 'text';
-	const TYPE_SCALAR = 'scalar'; # unit, precision, point-in-time
-	const TYPE_DATE = 'date';
-	const TYPE_TERM = 'term'; # lang, pronunciation
-	const TYPE_ENTITY_REF = 'ref';
-
-	const PROP_LABEL = 'label';
-	const PROP_DESCRIPTION = 'description';
-	const PROP_ALIAS = 'alias';
-
-	public function __construct( $data ) {
+	protected $item;
+	
+	public function __construct( array $data ) {
 		parent::__construct( CONTENT_MODEL_WIKIDATA );
-
-		#TODO: assert $data is an array!
-		$this->mData = $data;
+		$this->data = $data;
+		$this->item = WikibaseItem::newFromArray( $data );
 	}
 
 	/**
@@ -64,7 +55,7 @@ class WikibaseContent extends Content {
 	 *		 structure, an object, a binary blob... anything, really.
 	 */
 	public function getNativeData() {
-		return $this->mData;
+		return $this->data;
 	}
 
 	/**
@@ -73,7 +64,7 @@ class WikibaseContent extends Content {
 	 * @return int
 	 */
 	public function getSize()  {
-		return strlen( serialize( $this->mData ) ); #TODO: keep and reuse value, content object is immutable!
+		return strlen( serialize( $this->data ) ); #TODO: keep and reuse value, content object is immutable!
 	}
 
 	/**
@@ -84,11 +75,11 @@ class WikibaseContent extends Content {
 	 *						to avoid redundant parsing to find out.
 	 */
 	public function isCountable( $hasLinks = null ) {
-		return !empty( $this->mData[ WikibaseContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
+		return !empty( $this->data[ WikibaseContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
 	}
 
 	public function isEmpty()  {
-		return empty( $this->mData );
+		return empty( $this->data );
 	}
 
 	/**
@@ -124,17 +115,19 @@ class WikibaseContent extends Content {
 	}
 
 	/**
+	 * TODO: we sure we want to do this here? I'd expect to do this in some kind of view action...
+	 *
 	 * @param null|Language $lang
 	 * @return String
 	 */
 	private function generateHtml( Language $lang = null ) {
 		// TODO: generate sensible HTML!
 		$html = '';
-		$label =  $this->getLabel( $lang );
+		$label =  $this->item->getLabel( $lang );
 		if ( $label === null ) {
 			$label = '';
 		}
-		$description =  $this->getDescription( $lang );
+		$description =  $this->item->getDescription( $lang );
 		if ( $description === null ) {
 			$description = '';
 		}
@@ -143,7 +136,7 @@ class WikibaseContent extends Content {
 		$html .= Html::element( 'hr', null, null );
 		$htmlTable = '';
 
-		foreach ( $this->getTitles( $lang ) AS $language => $value ) {
+		foreach ( $this->item->getTitles( $lang ) AS $language => $value ) {
 			$htmlTable .= "\t\t";
 			$htmlTable .= Html::openElement( 'tr' );
 			$htmlTable .= Html::element( 'td', null, $language );

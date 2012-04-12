@@ -10,9 +10,42 @@
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
+ * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class WikibaseItem {
+
+	const TYPE_TEXT = 'text';
+	const TYPE_SCALAR = 'scalar'; # unit, precision, point-in-time
+	const TYPE_DATE = 'date';
+	const TYPE_TERM = 'term'; # lang, pronunciation
+	const TYPE_ENTITY_REF = 'ref';
+
+	const PROP_LABEL = 'label';
+	const PROP_DESCRIPTION = 'description';
+	const PROP_ALIAS = 'alias';
+
+	protected $data;
+
+	/**
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 */
+	protected function __construct( array $data ) {
+		$this->data = $data;
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return WikibaseItem
+	 */
+	public static function newFromArray( array $data ) {
+		return new static( $data );
+	}
 
 	public function getPropertyNames() {
 		//TODO: implement
@@ -51,7 +84,7 @@ class WikibaseItem {
 	 * @return String|null description
 	 */
 	public function getDescription( Language $lang ) {
-		$data = $this->getNativeData();
+		$data = $this->data;
 		if ( !isset( $data['description'][$lang->getCode()] ) ) {
 			return null;
 		} else {
@@ -64,7 +97,7 @@ class WikibaseItem {
 	 * @return String|null label
 	 */
 	public function getLabel( Language $lang ) {
-		$data = $this->getNativeData();
+		$data = $this->data;
 		if ( !isset( $data['label'][$lang->getCode()] ) ) {
 			return null;
 		} else {
@@ -77,7 +110,7 @@ class WikibaseItem {
 	 * @return array titles (languageCode => value)
 	 */
 	public function getTitles( Language $lang ) {
-		$data = $this->getNativeData();
+		$data = $this->data;
 		$titles = array();
 		foreach ( $data['titles'] as $langCode => $title ) {
 			$titles[$langCode] = $title['value'];

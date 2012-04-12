@@ -85,7 +85,7 @@ class WikibaseContentHandler extends ContentHandler {
 				$data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
 				break;
 			case 'application/json':
-				$data = json_decode( $blob ); #FIXME: suppress notice on failed serialization!
+				$data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
 				break;
 			default:
 				throw new MWException( "serialization format $format is not supported for Wikibase content model" );

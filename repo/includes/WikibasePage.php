@@ -13,15 +13,16 @@
 class WikibasePage extends Article {
 
 	public function view() {
-		global $wgOut;
 		$contentObject = $this->getContentObject();
 		$arrayContent = $contentObject->getNativeData();
 		$content = new WikibaseContent( $arrayContent );
 		$parserOutput = $content->getParserOutput( $this->getTitle() );
-		$wgOut->addHTML( $parserOutput->getText() );
+
+		$out = $this->getContext()->getOutput();
+		$out->addHTML( $parserOutput->getText() );
 		
 		// make sure required client sided resources will be loaded:
-		$wgOut->addModules( 'wikibase' );	
+		$out->addModules( 'wikibase' );
 	}
 	
 }
