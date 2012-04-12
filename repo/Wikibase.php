@@ -68,7 +68,7 @@ $wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAsso
 $wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'api/ApiWikibaseLinkArticles.php';
 $wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
-$wgAutoloadClasses['ApiWikibaseAddAlias'] 		= $dir . 'api/ApiWikibaseAddAlias.php';
+$wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
 $wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
 
 // includes
