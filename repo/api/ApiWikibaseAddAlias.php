@@ -44,7 +44,7 @@ class ApiWikibaseAddAlias extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'alias' => array(

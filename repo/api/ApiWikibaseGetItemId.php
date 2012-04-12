@@ -29,8 +29,8 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getAllowedParams() {
 		return array(
-			'wiki' => array( // TODO: change to "site"
-				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
+			'site' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
@@ -43,14 +43,14 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getParamDescription() {
 		return array(
-			'title' => 'The title of the wiki page',
-			'wiki' => 'Wiki identifier',
+			'title' => 'The title of the page',
+			'site' => 'Site identifier',
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to obtain the Wikibase ids of one or more pages on the specified wiki.'
+			'API module to obtain the Wikibase ids of one or more pages on the specified site.'
 		);
 	}
 
@@ -61,10 +61,10 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitemid&wiki=en&title=Berlin'
-				=> 'Get item id for page "Berlin" on the wiki identifierd by "en"',
-			'api.php?action=wbgetitemid&wiki=en&title=Berlin|Foobar'
-				=> 'Get item id for the pages "Berlin" and "Foobar" on the wiki identifierd by "en"',
+			'api.php?action=wbgetitemid&site=en&title=Berlin'
+				=> 'Get item id for page "Berlin" on the site identifierd by "en"',
+			'api.php?action=wbgetitemid&site=en&title=Berlin|Foobar'
+				=> 'Get item id for the pages "Berlin" and "Foobar" on the site identifierd by "en"',
 		);
 	}
 	

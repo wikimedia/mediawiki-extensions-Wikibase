@@ -38,7 +38,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			/* WikibaseItem */ $item = $content->getItem();
-			$success = $item->addSiteLink( $params['wiki'], $params['title'] );
+			$success = $item->addSiteLink( $params['site'], $params['title'] );
 
 			if ( $success ) {
 				$content->setItem( $item );
@@ -74,8 +74,8 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'wiki' => array( // TODO: change to "site"
-				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
+			'site' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
@@ -95,7 +95,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 	public function getParamDescription() {
 		return array(
 			'id' => 'The ID of the item to associate the page with',
-			'wiki' => 'An identifier for the wiki on which the page resides',
+			'site' => 'An identifier for the site on which the page resides',
 			'title' => 'Title of the page to associate',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
 			'summary' => 'Summary for the edit',
@@ -115,11 +115,11 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia'
+			'api.php?action=wbassociatearticle&id=42&site=en&title=Wikimedia'
 				=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&summary=World domination will be mine soon!'
+			'api.php?action=wbassociatearticle&id=42&site=en&title=Wikimedia&summary=World domination will be mine soon!'
 			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
-			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&badge='
+			'api.php?action=wbassociatearticle&id=42&site=en&title=Wikimedia&badge='
 				=> 'Set title "Wikimedia" for English page with id "42" and with a badge',
 		);
 	}
