@@ -68,7 +68,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// use toolbar events to control the editable value:
 		var self = this;
 		this._toolbar.onActionEdit   = function(){ self.startEditing(); };
-		//this._toolbar.onActionEdit   = jQuery.proxy( this.startEditing, this );
 		this._toolbar.onActionSave   = function(){ self.stopEditing( true ); };
 		this._toolbar.onActionCancel = function(){ self.stopEditing( false ); };
 		
