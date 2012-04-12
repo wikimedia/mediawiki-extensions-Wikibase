@@ -6,16 +6,16 @@
 
 
 -- Secondary storage.
--- Links wiki+title pairs to item ids.
-CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_wiki (
-  ipw_item_id                INT unsigned        NOT NULL, -- Id of the item
-  ipw_wiki_id                VARCHAR(255)        NOT NULL, -- Wiki identifier
-  ipw_wiki_page              VARCHAR(255)        NOT NULL, -- Title of the page
+-- Links site+title pairs to item ids.
+CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (
+  ips_item_id                INT unsigned        NOT NULL, -- Id of the item
+  ips_site_id                VARCHAR(255)        NOT NULL, -- Site identifier
+  ips_site_page              VARCHAR(255)        NOT NULL, -- Title of the page
 ) /*$wgDBTableOptions*/;
 
-CREATE UNIQUE INDEX /*i*/ipw_item_wiki_page ON /*_*/wb_items_per_wiki (ipw_wiki_id, ipw_wiki_page);
-CREATE INDEX /*i*/ipw_wiki_page ON /*_*/wb_items_per_wiki (ipw_wiki_page);
-CREATE INDEX /*i*/ipw_item_id ON /*_*/wb_items_per_wiki (ipw_item_id);
+CREATE UNIQUE INDEX /*i*/ips_item_site_page ON /*_*/wb_items_per_site (ips_site_id, ips_site_page);
+CREATE INDEX /*i*/ips_site_page ON /*_*/wb_items_per_site (ips_site_page);
+CREATE INDEX /*i*/ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 
 
 -- Secondary storage.
@@ -27,6 +27,6 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_texts_per_lang (
   tpl_description            VARCHAR(255)        NOT NULL, -- Item description text
 ) /*$wgDBTableOptions*/;
 
-CREATE UNIQUE INDEX /*i*/tpl_item_id_language ON /*_*/wb_texts_per_lang (tpl_item_id, tpl_language);
+CREATE UNIQUE INDEX /*i*/tpl_item_id_lang ON /*_*/wb_texts_per_lang (tpl_item_id, tpl_language);
 CREATE INDEX /*i*/tpl_language ON /*_*/wb_texts_per_lang (tpl_language);
 CREATE INDEX /*i*/tpl_label ON /*_*/wb_texts_per_lang (tpl_label); -- TODO: might not be needed

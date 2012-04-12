@@ -2,6 +2,7 @@
 
 /**
  * Class representing a Wikibase page.
+ * TODO: describe exact purpose - how does this relate to WikibasePage?
  *
  * @since 0.1
  *

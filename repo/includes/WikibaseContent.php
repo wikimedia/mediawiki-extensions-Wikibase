@@ -2,6 +2,7 @@
 
 /**
  * Structured data content.
+ * TODO: describe exact purpose
  *
  * @since 0.1
  *
@@ -115,8 +116,9 @@ class WikibaseContent extends Content {
 			"en" => $title->getText() . " in English"
 		);
 
-		$label_update = new WikibaseLabelTableUpdate( $title, $labels );
-		$po->addSecondaryDataUpdate( $label_update );
+		// TODO
+//		$label_update = new WikibaseLabelTableUpdate( $title, $labels );
+//		$po->addSecondaryDataUpdate( $label_update );
 
 		return $po;
 	}
@@ -173,95 +175,5 @@ class WikibaseContent extends Content {
 		return $html;
 	}
 
-	#=================================================================================================================
-
-	public function getPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getSystemPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getEditorialPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getStatementPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getPropertyMultilang( $name, $languages = null ) {
-		//TODO: implement
-	}
-
-	public function getProperty( $name, $lang = null ) {
-		//TODO: implement
-	}
-
-	public function getPropertyType( $name ) {
-		//TODO: implement
-	}
-
-	public function isStatementProperty( $name ) {
-		//TODO: implement
-	}
-
-	/**
-	 * @param Language $lang
-	 * @return String|null description
-	 */
-	public function getDescription( Language $lang ) {
-		$data = $this->getNativeData();
-		if ( !isset( $data['description'][$lang->getCode()] ) ) {
-			return null;
-		} else {
-			return $data['description'][$lang->getCode()]['value'];
-		}
-	}
-
-	/**
-	 * @param Language $lang
-	 * @return String|null label
-	 */
-	public function getLabel( Language $lang ) {
-		$data = $this->getNativeData();
-		if ( !isset( $data['label'][$lang->getCode()] ) ) {
-			return null;
-		} else {
-			return $data['label'][$lang->getCode()]['value'];
-		}
-	}
-
-	/**
-	 * @param Language $lang
-	 * @return array titles (languageCode => value)
-	 */
-	public function getTitles( Language $lang ) {
-		$data = $this->getNativeData();
-		$titles = array();
-		foreach ( $data['titles'] as $langCode => $title ) {
-			$titles[$langCode] = $title['value'];
-		}
-		return $titles;
-	}
 }
 
-class WikibaseLabelTableUpdate extends SecondaryDataUpdate {
-
-	public function __construct( Title $title, $labels ) {
-		$this->title = $title;
-		$this->labels = $labels;
-	}
-
-	/**
-	 * Perform update.
-	 */
-	public function doUpdate() {
-		$s = $this->title->getDBkey() . ": " . json_encode( $this->labels );
-		$s .= "\n";
-
-		file_put_contents( "/tmp/updatetest.txt", $s, FILE_APPEND );
-	}
-
-}
