@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.js
+ * @file wikibase.ui.PropertyEditTool.EditableValue.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -77,7 +77,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'type': 'text',
 			'name': this._key,
 			'value': initText,
-			'placeholder': this.inputPlaceholder
+			'placeholder': this.inputPlaceholder,
+			'keypress': jQuery.proxy( this.keyPressed, this ),
+			'keyup': jQuery.proxy( this.keyPressed, this )	// for browser compability
 		} );
 		
 		this._subject.text( '' );
@@ -87,7 +89,22 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		inputBox.data( this.UI_CLASS + '-initial-value', initText );
 
         this._isInEditMode = true;
+        inputBox.focus();
 		return true;
+	},
+	
+	/**
+	 * Called when a key is pressed inside the input box
+	 * 
+	 */
+	keyPressed: function( event ) {
+		if( event.which == 13 ) {
+			//TODO: call doSave()
+			//this.stopEditing( true );
+		} else if( event.which == 27 ) {
+			//TODO: call doCancel()
+			//this.stopEditing( false );
+		}
 	},
 	
 	/**
@@ -131,10 +148,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return string
 	 */
 	getValue: function() {		
+		var value = '';
 		if ( this.isInEditMode() ) {
-			var value = $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
+			value = $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
 		} else {
-			var value = this._subject.text();
+			value = this._subject.text();
 		}
 		return $.trim( value );
 	},
