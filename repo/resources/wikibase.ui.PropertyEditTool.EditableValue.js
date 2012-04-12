@@ -64,7 +64,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
 		//       with the actual value perhaps.
 		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject.parent() );
-		
+
 		// use toolbar events to control the editable value:
 		var self = this;
 		this._toolbar.onActionEdit   = function(){ self.startEditing(); };

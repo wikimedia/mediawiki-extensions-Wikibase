@@ -64,8 +64,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
    
 	_initEditToolForValue: function() {
 		value = this._getValueElem();
-		this._editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue( value );
-		this._editableValue.inputPlaceholder = this.getPropertyName(); // todo: show a label, not the property id
+		this._editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue();
+
+		// todo: show a label, not the property id:
+		this._editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
+
+		this._editableValue._init( value );
 	},
 	
 	/**

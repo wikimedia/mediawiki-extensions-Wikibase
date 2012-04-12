@@ -22,4 +22,6 @@ $messages['en'] = array(
 		'wikibase-edit' => 'edit',
 		'wikibase-save' => 'save',
 		'wikibase-cancel' => 'cancel',
+		'wikibase-label-edit-placeholder' => 'enter label',
+		'wikibase-description-edit-placeholder' => 'enter description'
 );
