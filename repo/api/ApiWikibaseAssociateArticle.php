@@ -29,14 +29,25 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 		$success = false;
 
-		$content = Article::newFromTitle(
+		$article = Article::newFromTitle(
 			Title::newFromText( 'q' . $params['id'] ),
 			$this->getContext()
-		)->getContentObject();
+		);
+
+		$content = $article->getContentObject();
 
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			/* WikibaseItem */ $item = $content->getItem();
 			$success = $item->addSiteLink( $params['wiki'], $params['title'] );
+
+			if ( $success ) {
+				$content->setItem( $item );
+
+				$article->getPage()->doEditContent( $content, $params['summary'] );
+			}
+			else {
+				// TODO: error message
+			}
 		}
 		else {
 			// TODO: error message
@@ -49,13 +60,13 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 		);
 	}
 
-	public function needsToken() {
-		return true;
-	}
-
-	public function mustBePosted() {
-		return true;
-	}
+//	public function needsToken() {
+//		return true;
+//	}
+//
+//	public function mustBePosted() {
+//		return true;
+//	}
 
 	public function getAllowedParams() {
 		return array(
@@ -74,6 +85,10 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 			'badge' => array(
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
+			'summary' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_DFLT => __CLASS__, // TODO
+			),
 		);
 	}
 
@@ -83,6 +98,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 			'wiki' => 'An identifier for the wiki on which the page resides',
 			'title' => 'Title of the page to associate',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
+			'summary' => 'Summary for the edit',
 		);
 	}
 
@@ -101,6 +117,8 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 		return array(
 			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia'
 				=> 'Set title "Wikimedia" for English page with id "42"',
+			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&summary=World domination will be mine soon!'
+			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
 			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&badge='
 				=> 'Set title "Wikimedia" for English page with id "42" and with a badge',
 		);

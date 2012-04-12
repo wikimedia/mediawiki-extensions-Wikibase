@@ -15,17 +15,19 @@
  */
 class WikibaseItem {
 
-	const TYPE_TEXT = 'text';
-	const TYPE_SCALAR = 'scalar'; # unit, precision, point-in-time
-	const TYPE_DATE = 'date';
-	const TYPE_TERM = 'term'; # lang, pronunciation
-	const TYPE_ENTITY_REF = 'ref';
-
-	const PROP_LABEL = 'label';
-	const PROP_DESCRIPTION = 'description';
-	const PROP_ALIAS = 'alias';
-
+	/**
+	 * @var array
+	 */
 	protected $data;
+
+	/**
+	 * Id of the item (the 42 in q42 used as page name and in exports).
+	 * Integer when set. False when not initialized. Null when the item is new and unsaved.
+	 *
+	 * @since 0.1
+	 * @var integer|false|null
+	 */
+	protected $id = false;
 
 	/**
 	 * @since 0.1
@@ -48,6 +50,29 @@ class WikibaseItem {
 	}
 
 	/**
+	 * Get an array representing the WikibaseItem as they are
+	 * stored in the article table and can be passed to newFromArray.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		$data = $this->data;
+
+		if ( is_null( $this->getId() ) ) {
+			if ( array_key_exists( 'entity', $data ) ) {
+				unset( $data['entity'] );
+			}
+		}
+		else {
+			$data['entity'] = 'q' . $this->getId();
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Returns the id of the item or null if it is not in the datastore yet.
 	 *
 	 * @since 0.1
@@ -55,14 +80,18 @@ class WikibaseItem {
 	 * @return integer|null
 	 */
 	public function getId() {
-		// TODO
+		if ( $this->id === false ) {
+			$this->id = array_key_exists( 'entity', $this->data ) ? substr( $this->data['entity'], 1 ) : null;
+		}
+
+		return $this->id;
 	}
 
 	/**
 	 * @param integer $id
 	 */
 	protected function setId( $id ) {
-
+		$this->id = $id;
 	}
 
 	/**

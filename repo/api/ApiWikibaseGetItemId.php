@@ -18,7 +18,6 @@ class ApiWikibaseGetItemId extends ApiBase {
 		parent::__construct( $main, $action );
 	}
 
-
 	/**
 	 * Main method. Does the actual work and sets the result.
 	 *

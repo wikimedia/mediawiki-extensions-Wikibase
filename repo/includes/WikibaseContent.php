@@ -20,9 +20,31 @@ class WikibaseContent extends Content {
 	protected $item;
 	
 	public function __construct( array $data ) {
-		parent::__construct( CONTENT_MODEL_WIKIDATA );
+		parent::__construct( CONTENT_MODEL_WIKIBASE );
 		$this->data = $data;
 		$this->item = WikibaseItem::newFromArray( $data );
+	}
+
+	/**
+	 * Returns the WikibaseItem part of this WikibaseContent.
+	 *
+	 * @since 0.1
+	 *
+	 * @return WikibaseItem $item
+	 */
+	public function getItem() {
+		return $this->item;
+	}
+
+	/**
+	 * Sets the WikibaseItem part of this WikibaseContent.
+	 *
+	 * @since 0.1
+	 *
+	 * @param WikibaseItem $item
+	 */
+	public function setItem( WikibaseItem $item ) {
+		$this->item = $item;
 	}
 
 	/**

@@ -28,7 +28,7 @@ class WikibaseContentHandler extends ContentHandler {
 			'application/vnd.php.serialized' #FIXME: find out what mime type the api uses for serialized php objects
 		);
 
-		parent::__construct( CONTENT_MODEL_WIKIDATA, $formats );
+		parent::__construct( CONTENT_MODEL_WIKIBASE, $formats );
 	}
 
 	public function createArticle( Title $title ) {
