@@ -105,7 +105,7 @@ class WikibaseItem {
 	 * @return boolean Success indicator
 	 */
 	public function structuredSave( $articleId ) {
-		$success = $this->insetIfNeeded( $articleId );
+		$success = $this->save( $articleId );
 
 		if ( $success ) {
 			$dbw = wfGetDB( DB_MASTER );
@@ -134,7 +134,7 @@ class WikibaseItem {
 
 		$fields = array();
 
-		if ( is_null( $this->item->getId() ) ) {
+		if ( is_null( $this->getId() ) ) {
 			$fields['item_page_id'] = $articleId;
 
 			$success = $dbw->insert(
