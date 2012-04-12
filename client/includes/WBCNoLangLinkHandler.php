@@ -50,7 +50,7 @@ class WBCNoLangLinkHandler {
 		$langs = array_flip( $langs );
 
 		$out = $parser->getOutput();
-		$nei = WBCLangLinkHandler::getNEI( $out );
+		$nei = WBCLangLinkHandler::getNoExternalInterlang( $out );
 		$nei += $langs;
 		$out->setProperty( 'no_external_interlang', serialize( $nei ) );
 

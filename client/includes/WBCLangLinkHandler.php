@@ -2,8 +2,6 @@
 
 /**
  * Handles language links.
- * TODO: stylize
- * TODO: get rid of code duplication (both logic and array defs)
  * TODO: do we really want to refresh this on re-render? push updates from the repo seem to make more sense
  * TODO: Should we sort the links if we don't display them? Several cases: links disabled per namespace, links disabled by parser function/magic word, no links on the server.
  *
@@ -18,12 +16,14 @@
 class WBCLangLinkHandler {
 
 	protected static $cache = array();
+	protected static $sort_order = false;
 
 	public static function onParserBeforeTidy( Parser &$parser, &$text ) {
 		global $wgLanguageCode;
 
 		$title = $parser->getTitle();
 
+		//TODO: alwaysSort
 		if( $parser->getOptions()->getInterfaceMessage() || !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
 			return true;
 		}
@@ -42,16 +42,16 @@ class WBCLangLinkHandler {
 			self::$cache[$db_title] = $links;
 		}
 
-		// Remove the link to the site language.
-		unset($links[$wgLanguageCode]);
-
 		// If a link exists in wikitext, override wikidata link to the same language.
 		$out = $parser->getOutput();
 
-		$nei = self::getNEI( $out );
+		$nei = self::getNoExternalInterlang( $out );
 		if( array_key_exists( '*', $nei ) ) {
 			$links = array();
 		} else {
+			// Always remove the link to the site language.
+			unset( $links[$wgLanguageCode] );
+
 			$links = array_diff_key( $links, $nei );
 		}
 
@@ -71,7 +71,7 @@ class WBCLangLinkHandler {
 	 *
 	 * @return Array Empty array if not set.
 	 */
-	public static function getNEI( ParserOutput $out ) {
+	public static function getNoExternalInterlang( ParserOutput $out ) {
 		$nei = $out->getProperty( 'no_external_interlang' );
 
 		if( empty( $nei ) ) {
@@ -95,8 +95,8 @@ class WBCLangLinkHandler {
 	 * @return Array of links, empty array for no links, false for failure.
 	 */
 	protected static function getLinks( $db_title ) {
-		$dir = dirname(__FILE__) . '/';
-		$file = "$dir/test/$db_title.json";
+		$dir = dirname( __FILE__ ) . '/';
+		$file = "$dir/../test/$db_title.json";
 		if( file_exists( $file ) ) {
 			return get_object_vars( json_decode( file_get_contents( $file ) ) );
 		} else {
@@ -131,36 +131,8 @@ class WBCLangLinkHandler {
 	 * @version	Copied from InterlanguageExtension rev 114818
 	 */
 	protected static function sortLinks( &$a ) {
-		switch( WBCSettings::get( 'sort' ) ) {
-			case 'code':
-				usort($a, 'WBCLangLinkHandler::compareCode');
-				break;
-			case 'alphabetic':
-				usort($a, 'WBCLangLinkHandler::compareAlphabetic');
-				break;
-			case 'alphabetic_revised':
-				usort($a, 'WBCLangLinkHandler::compareAlphabeticRevised');
-				break;
-		}
-	}
-
-	/**
-	 * Compare two interlanguage links by order of alphabet, based on language code.
-	 * @version	Copied from InterlanguageExtension rev 114818
-	 */
-	protected static function compareCode($a, $b) {
-		//TODO: implement sortPrepend
-		return strcmp(self::getCodeFromLink($a), self::getCodeFromLink($b));
-	}
-
-	/**
-	 * Compare two interlanguage links by order of alphabet, based on local language.
-	 *
-	 * List from http://meta.wikimedia.org/w/index.php?title=Interwiki_sorting_order&oldid=2022604#By_order_of_alphabet.2C_based_on_local_language
-	 * @version	Copied from InterlanguageExtension rev 114818
-	 */
-	protected static function compareAlphabetic($a, $b) {
-		static $order = array(
+		// http://meta.wikimedia.org/w/index.php?title=Interwiki_sorting_order&oldid=2022604#By_order_of_alphabet.2C_based_on_local_language
+		static $order_alphabetic = array(
 			'ace', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
 			'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'bm', 'bn',
 			'zh-min-nan', 'nan', 'map-bms', 'ba', 'be', 'be-x-old', 'bh', 'bcl',
@@ -190,35 +162,9 @@ class WBCLangLinkHandler {
 			'vls', 'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea',
 			'bat-smg', 'zh', 'zh-tw', 'zh-cn',
 		);
-		static $orderMerged = false;
 
-		$a = self::getCodeFromLink($a);
-		$b = self::getCodeFromLink($b);
-
-		if($a == $b) return 0;
-
-		$sortPrepend = WBCSettings::get( 'sortPrepend' );
-
-		if( !$orderMerged && is_array( $sortPrepend ) ) {
-			$order = array_merge( $sortPrepend, $order);
-		}
-		$orderMerged = true;
-
-		$a=array_search($a, $order);
-		$b=array_search($b, $order);
-
-		return ($a>$b)?1:(($a<$b)?-1:0);
-	}
-
-	/**
-	 * Compare two interlanguage links by order of alphabet, based on local language (by first
-	 * word).
-	 *
-	 * List from http://meta.wikimedia.org/w/index.php?title=Interwiki_sorting_order&oldid=2022604#By_order_of_alphabet.2C_based_on_local_language_.28by_first_word.29
-	 * @version	Copied from InterlanguageExtension rev 114818
-	 */
-	protected static function compareAlphabeticRevised($a, $b) {
-		static $order = array(
+		// http://meta.wikimedia.org/w/index.php?title=Interwiki_sorting_order&oldid=2022604#By_order_of_alphabet.2C_based_on_local_language_.28by_first_word.29
+		static $order_alphabetic_revised = array(
 			'ace', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
 			'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'id', 'ms',
 			'bm', 'bn', 'zh-min-nan', 'nan', 'map-bms', 'jv', 'su', 'ba', 'be',
@@ -248,24 +194,56 @@ class WBCLangLinkHandler {
 			'vls', 'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea',
 			'bat-smg', 'zh', 'zh-tw', 'zh-cn',
 		);
-		static $orderMerged = false;
 
-		$a = self::getCodeFromLink($a);
-		$b = self::getCodeFromLink($b);
+		$sort = WBCSettings::get( 'sort' );
 
-		if($a == $b) return 0;
+		// Prepare the sorting array.
+		if( self::$sort_order === false ) {
+			switch( $sort ) {
+				case 'code':
+					self::$sort_order = $order_alphabetic;
+					sort( self::$sort_order );
+					break;
+				case 'alphabetic':
+					self::$sort_order = $order_alphabetic;
+					break;
+				case 'alphabetic_revised':
+					self::$sort_order = $order_alphabetic_revised;
+					break;
+				case 'none':
+				default:
+					// If we encounter an unknown sort setting, just do nothing, for we are kind and generous.
+					return;
+					break;
+			}
 
-		$sortPrepend = WBCSettings::get( 'sortPrepend' );
+			$sortPrepend = WBCSettings::get( 'sortPrepend' );
+			if( is_array( $sortPrepend ) ) {
+				self::$sort_order = array_unique( array_merge( $sortPrepend, self::$sort_order ) );
+			}
+			self::$sort_order = array_flip( self::$sort_order );
 
-		if( !$orderMerged && is_array( $sortPrepend ) ) {
-			$order = array_merge( $sortPrepend, $order );
 		}
-		$orderMerged = true;
 
-		$a=array_search($a, $order);
-		$b=array_search($b, $order);
+		usort( $a, 'WBCLangLinkHandler::compareLinks' );
+	}
 
-		return ($a>$b)?1:(($a<$b)?-1:0);
+	/**
+	 * usort() callback function, compares the links on the basis of self::$sort_order
+	 */
+	protected static function compareLinks( $a, $b ) {
+		$a = self::getCodeFromLink( $a );
+		$b = self::getCodeFromLink( $b );
+
+		if( $a == $b ) return 0;
+
+		// If we encounter an unknown language, which may happen if the sort table is not updated, we move it to the bottom.
+		$a = self::$sort_order[$a];
+		if( $a === null ) $a = 999999;
+		$b = self::$sort_order[$b];
+		if( $b === null ) $b = 999999;
+
+		return ( $a > $b )? 1: ( ( $a < $b )? -1: 0 );
 	}
 
 }
