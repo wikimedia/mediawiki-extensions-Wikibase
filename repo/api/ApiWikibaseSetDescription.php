@@ -29,11 +29,11 @@ class ApiWikibaseSetDescription extends ApiBase {
 	}
 
 	public function needsToken() {
-		return true;
+		return !WBSettings::get( 'apiInDebug' );
 	}
 
 	public function mustBePosted() {
-		return true;
+		return !WBSettings::get( 'apiInDebug' );
 	}
 
 	public function getAllowedParams() {

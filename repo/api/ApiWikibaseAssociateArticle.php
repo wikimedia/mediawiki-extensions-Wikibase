@@ -30,7 +30,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 		$success = false;
 
 		$article = Article::newFromTitle(
-			Title::newFromText( 'q' . $params['id'] ),
+			Title::newFromText( 'Data:Q' . $params['id'] ),
 			$this->getContext()
 		);
 
@@ -60,13 +60,13 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 		);
 	}
 
-//	public function needsToken() {
-//		return true;
-//	}
-//
-//	public function mustBePosted() {
-//		return true;
-//	}
+	public function needsToken() {
+		return !WBSettings::get( 'apiInDebug' );
+	}
+
+	public function mustBePosted() {
+		return !WBSettings::get( 'apiInDebug' );
+	}
 
 	public function getAllowedParams() {
 		return array(

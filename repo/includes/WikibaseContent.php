@@ -2,7 +2,10 @@
 
 /**
  * Structured data content.
+ *
  * TODO: describe exact purpose
+ * TODO: don't we want to have a context here? would seem so since we are creating HTML
+ * TODO: do we actually want to create HTML here?
  *
  * @since 0.1
  *
@@ -70,7 +73,7 @@ class WikibaseContent extends Content {
 	 * @return String the summary text
 	 */
 	public function getTextForSummary( $maxlength = 250 ) {
-		return $this->getDescription(); // FIXME: missing arg
+		return $this->item->getDescription( $GLOBALS['wgLang'] );
 	}
 
 	/**

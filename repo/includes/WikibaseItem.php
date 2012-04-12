@@ -134,6 +134,8 @@ class WikibaseItem {
 
 		$fields = array();
 
+		$success = true;
+
 		if ( is_null( $this->getId() ) ) {
 			$fields['item_page_id'] = $articleId;
 
