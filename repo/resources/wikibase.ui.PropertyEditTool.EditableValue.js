@@ -46,6 +46,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @var: window.wikibase.ui.PropertyEditTool.Toolbar
 	 */
 	_toolbar: null,
+	
+	/**
+	 * 
+	 */
+	_inputBox: null,
 			
 	/**
 	 * Initializes the editable value.
@@ -74,6 +79,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
 			this._toolbar.doEdit();
+			this.removeFocus();
 		}
 	},
 	
@@ -106,14 +112,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'keyup': jQuery.proxy( this.keyPressed, this )	// for escape key browser compability
 		} );
 		
+		this._inputBox = inputBox;
+		
 		this._subject.text( '' );
-		this._subject.append( inputBox );
+		this._subject.append( this._inputBox );
 		
 		// store original text value from before input box insertion:
-		inputBox.data( this.UI_CLASS + '-initial-value', initText );
+		this._inputBox.data( this.UI_CLASS + '-initial-value', initText );
 
         this._isInEditMode = true;
-        inputBox.focus();
+        this.setFocus();
 		return true;
 	},
 	
@@ -162,6 +170,24 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	isInEditMode: function() {
 		return this._isInEditMode;
+	},
+	
+	/**
+	 * Sets the focus to the inputbox
+	 */
+	setFocus: function() {
+		if( this._inputBox !== null ) {
+			this._inputBox.focus();
+		}
+	},
+	
+	/**
+	 * Removes the focus from the inputbox
+	 */
+	removeFocus: function() {
+		if( this._inputBox !== null ) {
+			this._inputBox.blur();
+		}
 	},
 	
 	/**
