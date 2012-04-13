@@ -71,11 +71,12 @@ $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDes
 $wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
 $wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
 $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'api/ApiWikibaseModifyItem.php';
+$wgAutoloadClasses['ApiWikibaseAddSiteLink'] 		= $dir . 'api/ApiWikibaseAddSiteLink.php';
+$wgAutoloadClasses['ApiWikibaseRemoveSiteLink'] 	= $dir . 'api/ApiWikibaseRemoveSiteLink.php';
 //$wgAutoloadClasses['ApiWikibaseQueryDescriptions'] 	= $dir . 'api/ApiWikibaseQueryDescriptions.php';
 //$wgAutoloadClasses['ApiWikibaseQueryLabels'] 		= $dir . 'api/ApiWikibaseQueryLabels.php';
 //$wgAutoloadClasses['ApiWikibaseQueryAliases'] 		= $dir . 'api/ApiWikibaseQueryAliases.php';
-$wgAutoloadClasses['ApiWikibaseAddSiteLink'] 		= $dir . 'api/ApiWikibaseAddSiteLink.php';
-$wgAutoloadClasses['ApiWikibaseRemoveSiteLink'] 	= $dir . 'api/ApiWikibaseRemoveSiteLink.php';
+
 
 
 // includes
