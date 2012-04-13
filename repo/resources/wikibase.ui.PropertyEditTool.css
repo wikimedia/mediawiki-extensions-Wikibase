@@ -55,3 +55,11 @@
 .mw-jump, #contentSub {
 	display:none;
 }
+
+.tipsy-ne {
+	padding-top:12px;
+}
+
+.tipsy-ne .tipsy-arrow {
+	background-image:url(images/tipsy-arrow-n.gif);
+}

@@ -39,6 +39,11 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * @var jQuery
 	 */
 	_parent: null,
+
+	/**
+	 * @var jQuery reference to tooltip element
+	 */
+	_tooltip: null,
 	
 	/**
 	 * Initializes the edit toolbar for the given element.
@@ -51,7 +56,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		}
 		
 		this._parent = parent;
-		
+
 		this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )] );
 	},
 	
@@ -60,16 +65,20 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * 
 	 * @param buttons array with button elements from the _createButton method
 	 */
-	_buildToolbar: function( buttons ) {
+	_buildToolbar: function( buttons, tooltipMessage ) {
 		if (this._subject != null) {
 			this._subject.empty().remove();
-		}		
-		
+		}
+
 		this._subject = $( '<div/>', {
 			'class': this.UI_CLASS
-		} )		
-		.append( "[" );
-		
+		} );
+
+		if ( tooltipMessage ) {
+			this._tooltip = new window.wikibase.ui.PropertyEditTool.Tooltip( this._subject, tooltipMessage );
+		}
+		this._subject.append( "[" );
+
 		for( var i in buttons ) {
 			if( i != 0 ) {
 				this._subject.append( "|" );
@@ -99,7 +108,8 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
         this._buildToolbar( [
 			this._createButton( this.UI_CLASS + '-save-link', window.mw.msg( 'wikibase-save' ), this.doSave ),
 			this._createButton( this.UI_CLASS + '-cancel-link', window.mw.msg( 'wikibase-cancel' ), this.doCancel )
-        ] );
+        ], 'wikibase-edit-tooltip-message' ); // TODO: implement message according to subject (label or description)
+		this._tooltip.show( true );
     },
     
 	/**
@@ -110,6 +120,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
             // cancel save
             return false;
         }
+		this._tooltip.destroy( true );
         this._buildToolbar( [
 			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )
 		] );
@@ -123,6 +134,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
             // cancel cancel
             return false;
         }
+		this._tooltip.destroy( true );
         this._buildToolbar( [
 			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )
 		] );
