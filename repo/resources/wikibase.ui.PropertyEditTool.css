@@ -2,7 +2,7 @@
  * Style for 'Wikibase' property edit tools
  */
 
-.wb-ui-propertyedittoolbar {
+.wb-ui-propertyedittoolbar, .wb-ui-propertyedittoolbar-group {
     display: inline;
 }
 
@@ -32,7 +32,7 @@
 	float:right;
 }
 
-.firstHeading div {
+h1.firstHeading .wb-ui-propertyedittoolbar {
 	font-size: 0.5em;
 }
 
