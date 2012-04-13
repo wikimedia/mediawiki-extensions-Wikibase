@@ -38,7 +38,16 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 			if ( $success ) {
 				$content->setItem( $item );
-				$status = $page->doEditContent( $content, $params['summary'] );
+
+				$status = $page->doEditContent(
+					$content,
+					$params['summary'],
+					EDIT_UPDATE | EDIT_AUTOSUMMARY,
+					false,
+					$this->getUser(),
+					'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
+				);
+
 				$success = $status->isOk();
 			}
 			else {

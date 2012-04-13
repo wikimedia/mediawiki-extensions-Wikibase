@@ -294,24 +294,22 @@ class WikibaseItem {
 	 * @return boolean Success indicator
 	 */
 	public function addSiteLink( $siteId, $pageName, $update = true ) {
-		if ( !array_key_exists( 'titles', $this->data ) ) {
-			$this->data['titles'] = array();
+		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
+			$this->data['links'][$siteId] = array();
 		}
 
-		if ( !array_key_exists( $siteId, $this->data['titles'] ) ) {
-			$this->data['titles'][$siteId] = array();
-		}
-
-		$success = $update || !array_key_exists( $siteId, $this->data['titles'][$siteId] );
+		$success = $update || !array_key_exists( $siteId, $this->data['links'][$siteId] );
 
 		if ( $success ) {
-			$this->data['titles'][$siteId][$siteId] = array(
+			$this->data['links'][$siteId] = array(
 				'site' => $siteId,
 				'title' => $pageName
 			);
 		}
 
 		return $success;
+
+		// TODO: verify the link is allowed (ie no other item already links here)
 
 //		$dbw = wfGetDB( DB_MASTER );
 //

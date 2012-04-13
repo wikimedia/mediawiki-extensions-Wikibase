@@ -42,7 +42,7 @@ final class WikibaseUtils {
 		static $ids = false;
 
 		if ( $ids === false ) {
-			$ids = array_keys( EPSettings::get( 'siteIdentifiers' ) );
+			$ids = array_keys( WBSettings::get( 'siteIdentifiers' ) );
 		}
 
 		return $ids;
@@ -60,7 +60,7 @@ final class WikibaseUtils {
 	 * @return string|false
 	 */
 	public static function getSiteUrl( $siteId, $pageTitle = '' ) {
-		$ids = EPSettings::get( 'siteIdentifiers' );
+		$ids = WBSettings::get( 'siteIdentifiers' );
 
 		if ( !array_key_exists( $siteId, $ids ) ) {
 			return false;
