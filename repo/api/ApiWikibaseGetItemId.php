@@ -11,6 +11,7 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 class ApiWikibaseGetItemId extends ApiBase {
 
@@ -69,7 +70,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 	}
 	
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/API:Wikidata#wbgetitemid';
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#getitemid';
 	}
 
 	public function getVersion() {

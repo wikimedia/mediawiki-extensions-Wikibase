@@ -64,18 +64,13 @@ $wgAutoloadClasses['WikibaseHooks'] 				= $dir . 'Wikibase.hooks.php';
 // api
 $wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAssociateArticle.php';
 $wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'api/ApiWikibaseLinkArticles.php';
 $wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
 $wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
 $wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
 $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'api/ApiWikibaseModifyItem.php';
-$wgAutoloadClasses['ApiWikibaseAddSiteLink'] 		= $dir . 'api/ApiWikibaseAddSiteLink.php';
-$wgAutoloadClasses['ApiWikibaseRemoveSiteLink'] 	= $dir . 'api/ApiWikibaseRemoveSiteLink.php';
-//$wgAutoloadClasses['ApiWikibaseQueryDescriptions'] 	= $dir . 'api/ApiWikibaseQueryDescriptions.php';
-//$wgAutoloadClasses['ApiWikibaseQueryLabels'] 		= $dir . 'api/ApiWikibaseQueryLabels.php';
-//$wgAutoloadClasses['ApiWikibaseQueryAliases'] 		= $dir . 'api/ApiWikibaseQueryAliases.php';
+$wgAutoloadClasses['ApiWikibaseSiteLink'] 			= $dir . 'api/ApiWikibaseSiteLink.php';
 
 
 
