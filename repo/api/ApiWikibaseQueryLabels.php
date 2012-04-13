@@ -63,18 +63,17 @@ class ApiWikibaseQueryLabels extends ApiQueryBase {
 		$this->result = $this->getResult();
 		
 		$labels = array();
-		$result = $this->getResult();
 		
 		// TODO: Stuff to be added later
 		
 		if ( count( $labels ) ) {
 			# Add any remaining properties to the results
-			$this->addItemLabels( $result, $currentPage, $labels );
+			$this->addItemLabels( $this->result, $currentPage, $labels );
 		}
 	
 		// If we are testing we add some dummy data
 		// TODO: Remove this when we go into production
-		if ( isset($params['test']) ) {
+		if ( WBSettings::get( 'apiInTest' ) && isset($params['test']) ) {
 			$list = array(
 				array('language'=>'da', 'label'=>'Testing nummer'),
 				array('language'=>'de', 'label'=>'Testen zahl'),
@@ -92,10 +91,10 @@ class ApiWikibaseQueryLabels extends ApiQueryBase {
 				}
 			}
 			$this->result->setIndexedTagName($list, 'l');
-			$result->addValue( array( 'query', 'pages', 123 ), 'pageid', 123, true );
-			$result->addValue( array( 'query', 'pages', 123 ), 'ns', 0, true );
-			$result->addValue( array( 'query', 'pages', 123 ), 'title', 'q7', true );
-			$this->addItemLabels( $result, 123, $list );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'pageid', 123, true );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'ns', 0, true );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'title', 'q7', true );
+			$this->addItemLabels( $this->result, 123, $list );
 		}
 		$this->result->setIndexedTagName_internal( array( 'query', 'pages' ), 'page' );
 	}

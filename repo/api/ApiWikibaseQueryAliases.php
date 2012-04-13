@@ -45,7 +45,7 @@ class ApiWikibaseQueryAliases extends ApiQueryBase {
 
 	private $limit;
 	private $fld_language = false,
-			$fld_wiki = false,
+			$fld_site = false,
 			$fld_alias = false;
 
 	public function __construct( $query, $moduleName ) {
@@ -58,14 +58,13 @@ class ApiWikibaseQueryAliases extends ApiQueryBase {
 		$prop = array_flip( $params['prop'] );
 
 		$this->fld_language = isset( $prop['language'] );
-		$this->fld_wiki = isset( $prop['wiki'] );
+		$this->fld_site = isset( $prop['site'] );
 		$this->fld_alias = isset( $prop['alias'] );
 
 		$this->limit = $params['limit'];
 		$this->result = $this->getResult();
 		
 		$aliases = array();
-		$result = $this->getResult();
 		
 		// TODO: Stuff to be added later
 		
@@ -76,31 +75,31 @@ class ApiWikibaseQueryAliases extends ApiQueryBase {
 	
 		// If we are testing we add some dummy data
 		// TODO: Remove this when we go into production
-		if ( isset($params['test']) ) {
+		if ( WBSettings::get( 'apiInTest' ) && isset($params['test']) ) {
 			$list = array(
-				array('language'=>'da', 'wiki'=>'wikipedia', 'alias'=>'Testing nummer'),
-				array('language'=>'de', 'wiki'=>'wikipedia', 'alias'=>'Testen zahl'),
-				array('language'=>'en', 'wiki'=>'wikipedia', 'alias'=>'Testing number'),
-				array('language'=>'no', 'wiki'=>'wikipedia', 'alias'=>'Testing tall'),
-				array('language'=>'nn', 'wiki'=>'wikipedia', 'alias'=>'Testing tal'),
-				array('language'=>'sv', 'wiki'=>'wikipedia', 'alias'=>'Testing tal'),
+				array('language'=>'da', 'site'=>'wikipedia', 'alias'=>'Testing nummer'),
+				array('language'=>'de', 'site'=>'wikipedia', 'alias'=>'Testen zahl'),
+				array('language'=>'en', 'site'=>'wikipedia', 'alias'=>'Testing number'),
+				array('language'=>'no', 'site'=>'wikipedia', 'alias'=>'Testing tall'),
+				array('language'=>'nn', 'site'=>'wikipedia', 'alias'=>'Testing tal'),
+				array('language'=>'sv', 'site'=>'wikipedia', 'alias'=>'Testing tal'),
 			);
 			for ($i=0, $l = count($list); $i<$l; $i++) {
 				if ( !$this->fld_language ) {
 					unset($list[$i]['language']);
 				}
-				if ( !$this->fld_wiki ) {
-					unset($list[$i]['wiki']);
+				if ( !$this->fld_site ) {
+					unset($list[$i]['site']);
 				}
 				if ( !$this->fld_alias ) {
 					unset($list[$i]['alias']);
 				}
 			}
 			$this->result->setIndexedTagName($list, 'a');
-			$result->addValue( array( 'query', 'pages', 123 ), 'pageid', 123, true );
-			$result->addValue( array( 'query', 'pages', 123 ), 'ns', 0, true );
-			$result->addValue( array( 'query', 'pages', 123 ), 'title', 'q7', true );
-			$this->addItemAliases( $result, 123, $list );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'pageid', 123, true );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'ns', 0, true );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'title', 'q7', true );
+			$this->addItemAliases( $this->result, 123, $list );
 		}
 		$this->result->setIndexedTagName_internal( array( 'query', 'pages' ), 'page' );
 	}
@@ -141,10 +140,10 @@ class ApiWikibaseQueryAliases extends ApiQueryBase {
 			'test' => array(
 			),
 			'prop' => array(
-				ApiBase::PARAM_DFLT => 'language|alias',
+				ApiBase::PARAM_DFLT => 'language|site|alias',
 				ApiBase::PARAM_TYPE => array(
 					'language',
-					'wiki',
+					'site',
 					'alias'
 				),
 				ApiBase::PARAM_ISMULTI => true
@@ -160,7 +159,7 @@ class ApiWikibaseQueryAliases extends ApiQueryBase {
 			'prop' => array(
 				'Which properties to get',
 				' language     - Adds the language for this label',
-				' wiki         - Adds the wiki (site) for this label',
+				' site         - Adds the site for this label',
 				' alias        - Adds the actual string for this alias',
 			),
 		);
@@ -172,9 +171,9 @@ class ApiWikibaseQueryAliases extends ApiQueryBase {
 
 	public function getExamples() {
 		return array(
-			'api.php?action=query&list=wbaliases&wbaprop=language|wiki|alias'
+			'api.php?action=query&list=wbaliases&wbaprop=language|site|alias'
 				=> 'Get the list of aliases for each of the Wikibase items',
-			'api.php?action=query&list=wbaliases&wbaprop=language|wiki|alias&wbatest'
+			'api.php?action=query&list=wbaliases&wbaprop=language|site|alias&wbatest'
 				=> 'Get the list of aliases for each of the Wikibase items and add some dummydata for testing'
 		);
 	}

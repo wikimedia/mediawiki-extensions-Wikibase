@@ -63,7 +63,6 @@ class ApiWikibaseQueryDescriptions extends ApiQueryBase {
 		$this->result = $this->getResult();
 		
 		$descriptions = array();
-		$result = $this->getResult();
 		
 		// TODO: Stuff to be added later
 		
@@ -74,7 +73,7 @@ class ApiWikibaseQueryDescriptions extends ApiQueryBase {
 	
 		// If we are testing we add some dummy data
 		// TODO: Remove this when we go into production
-		if ( isset($params['test']) ) {
+		if ( WBSettings::get( 'apiInTest' ) && isset($params['test']) ) {
 			$list = array(
 				array('language'=>'da', 'description'=>'Testing en to tre'),
 				array('language'=>'de', 'description'=>'Testen ein zwei drei'),
@@ -92,10 +91,10 @@ class ApiWikibaseQueryDescriptions extends ApiQueryBase {
 				}
 			}
 			$this->result->setIndexedTagName($list, 'd');
-			$result->addValue( array( 'query', 'pages', 123 ), 'pageid', 123, true );
-			$result->addValue( array( 'query', 'pages', 123 ), 'ns', 0, true );
-			$result->addValue( array( 'query', 'pages', 123 ), 'title', 'q7', true );
-			$this->addItemDescriptions( $result, 123, $list );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'pageid', 123, true );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'ns', 0, true );
+			$this->result->addValue( array( 'query', 'pages', 123 ), 'title', 'q7', true );
+			$this->addItemDescriptions( $this->result, 123, $list );
 		}
 		$this->result->setIndexedTagName_internal( array( 'query', 'pages' ), 'page' );
 	}
