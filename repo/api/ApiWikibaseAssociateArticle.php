@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to associate an article on a wiki with a Wikibase item.
+ * API module to associate a page on a site with a Wikibase item.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -25,15 +25,47 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 	 * @since 0.1
 	 */
 	public function execute() {
-		// TODO: implement
+		$params = $this->extractRequestParams();
+
+		$success = false;
+
+		$article = Article::newFromTitle(
+			Title::newFromText( 'Data:Q' . $params['id'] ),
+			$this->getContext()
+		);
+
+		$content = $article->getContentObject();
+
+		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
+			/* WikibaseItem */ $item = $content->getItem();
+			$success = $item->addSiteLink( $params['site'], $params['title'] );
+
+			if ( $success ) {
+				$content->setItem( $item );
+
+				$article->getPage()->doEditContent( $content, $params['summary'] );
+			}
+			else {
+				// TODO: error message
+			}
+		}
+		else {
+			// TODO: error message
+		}
+
+		$this->getResult()->addValue(
+			null,
+			'success',
+			$success
+		);
 	}
 
 	public function needsToken() {
-		return true;
+		return !WBSettings::get( 'apiInDebug' );
 	}
 
 	public function mustBePosted() {
-		return true;
+		return !WBSettings::get( 'apiInDebug' );
 	}
 
 	public function getAllowedParams() {
@@ -42,8 +74,8 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'wiki' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
+			'site' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
@@ -53,15 +85,20 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 			'badge' => array(
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
+			'summary' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_DFLT => __CLASS__, // TODO
+			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
 			'id' => 'The ID of the item to associate the page with',
-			'wiki' => 'An identifier for the wiki on which the page resides',
+			'site' => 'An identifier for the site on which the page resides',
 			'title' => 'Title of the page to associate',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
+			'summary' => 'Summary for the edit',
 		);
 	}
 
@@ -78,16 +115,18 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia'
+			'api.php?action=wbassociatearticle&id=42&site=en&title=Wikimedia'
 				=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbassociatearticle&id=42&wiki=en&title=Wikimedia&badge='
+			'api.php?action=wbassociatearticle&id=42&site=en&title=Wikimedia&summary=World domination will be mine soon!'
+			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
+			'api.php?action=wbassociatearticle&id=42&site=en&title=Wikimedia&badge='
 				=> 'Set title "Wikimedia" for English page with id "42" and with a badge',
 		);
 	}
 	
-    public function getHelpUrls() {
-    	return 'https://www.mediawiki.org/wiki/API:Wikidata#AssociateArticle';
-    }
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#AssociateArticle';
+	}
 	
 
 	public function getVersion() {

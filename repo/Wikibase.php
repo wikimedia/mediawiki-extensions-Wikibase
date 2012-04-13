@@ -77,6 +77,8 @@ $wgAutoloadClasses['WikibaseDifferenceEngine'] 		= $dir . 'includes/WikibaseDiff
 $wgAutoloadClasses['WikibaseContent'] 				= $dir . 'includes/WikibaseContent.php';
 $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 $wgAutoloadClasses['WikibaseUtils'] 				= $dir . 'includes/WikibaseUtils.php';
+$wgAutoloadClasses['WikibaseItem'] 					= $dir . 'includes/WikibaseItem.php';
+$wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseItemStructuredSave.php';
 
 
 
@@ -137,6 +139,7 @@ unset( $moduleTemplate );
 
 // register hooks and handlers
 define( 'CONTENT_MODEL_WIKIBASE', 'wikidata' );
+define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' ); // TODO: remove
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
 

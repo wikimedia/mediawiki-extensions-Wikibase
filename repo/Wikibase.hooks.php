@@ -24,10 +24,10 @@ final class WikibaseHooks {
 	 * @return true
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
-//		$updater->addExtensionTable(
-//			'',
-//			dirname( __FILE__ ) . '/sql/Wikibase.sql'
-//		);
+		$updater->addExtensionTable(
+			'wb_items_per_site',
+			dirname( __FILE__ ) . '/sql/Wikibase.sql'
+		);
 
 		return true;
 	}

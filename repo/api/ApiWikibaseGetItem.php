@@ -27,9 +27,13 @@ class ApiWikibaseGetItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['wiki'] ) && isset( $params['title '] ) ) ) ) {
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title '] ) ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
+
+//		if ( !isset( $params['id'] ) ) {
+//			$params['id'] = WikibaseItem::getIdForSiteLink( $params['wiki'], $params['title '] );
+//		}
 
 		// TODO: implement
 	}
@@ -40,8 +44,8 @@ class ApiWikibaseGetItem extends ApiBase {
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_ISMULTI => true,
 			),
-			'wiki' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getWikiIdentifiers(),
+			'site' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
@@ -59,8 +63,8 @@ class ApiWikibaseGetItem extends ApiBase {
 			'id' => 'The ID of the item to get the data from',
 			'language' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
-			'title' => 'The title of the corresponding wiki page',
-			'wiki' => 'Identifier for the wiki on which the corresponding page resides',
+			'title' => 'The title of the corresponding page',
+			'site' => 'Identifier for the site on which the corresponding page resides',
 		);
 	}
 
@@ -80,17 +84,17 @@ class ApiWikibaseGetItem extends ApiBase {
 		return array(
 			'api.php?action=wbgetitem&id=42'
 				=> 'Get item number 42 with default (user?) language',
-            'api.php?action=wbgetitem&id=42&language=en'
+			'api.php?action=wbgetitem&id=42&language=en'
 				=> 'Get item number 42 with english language',
-            'api.php?action=wbgetitem&id=4|2'
+			'api.php?action=wbgetitem&id=4|2'
 				=> 'Get item number 4 and 2 with default (user?) language',
-            'api.php?action=wbgetitem&id=4|2&language=en'
+			'api.php?action=wbgetitem&id=4|2&language=en'
 				=> 'Get item number 4 and 2 with enlish language',
 
-			'api.php?action=wbgetitem&wiki=en&title=Berlin&language=en'
-				=> 'Get the item associated to page Berlin on the wiki identified by "en"',
-			'api.php?action=wbgetitem&wiki=en&title=Berlin|Foobar&language=en'
-				=> 'Get the items associated to pages Berlin and Foobar on the wiki identified by "en"',
+			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
+				=> 'Get the item associated to page Berlin on the site identified by "en"',
+			'api.php?action=wbgetitem&site=en&title=Berlin|Foobar&language=en'
+				=> 'Get the items associated to pages Berlin and Foobar on the site identified by "en"',
 		);
 	}
 
