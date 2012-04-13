@@ -25,7 +25,7 @@ class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( WikibaseItem $item, array $params ) {
+	protected function modifyItem( WikibaseItem &$item, array $params ) {
 		$item->setDescription( $params['language'], $params['description'] );
 
 		return true;

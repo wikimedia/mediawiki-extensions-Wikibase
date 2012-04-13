@@ -88,15 +88,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		return array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true,
 			),
 			'site' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
-				ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
 			),
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',

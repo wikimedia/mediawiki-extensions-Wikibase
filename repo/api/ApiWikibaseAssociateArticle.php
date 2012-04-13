@@ -16,49 +16,17 @@
 class ApiWikibaseAssociateArticle extends ApiWikibaseModifyItem {
 
 	/**
-	 * Main method. Does the actual work and sets the result.
+	 * Actually modify the item.
 	 *
 	 * @since 0.1
+	 *
+	 * @param WikibaseItem $item
+	 * @param array $params
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function execute() {
-		$params = $this->extractRequestParams();
-
-		$success = false;
-
-		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
-		$content = $page->getContent();
-
-		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
-			/* WikibaseItem */ $item = $content->getItem();
-			$success = $item->addSiteLink( $params['site'], $params['title'], !$params['noupdate'] );
-
-			if ( $success ) {
-				$content->setItem( $item );
-
-				$status = $page->doEditContent(
-					$content,
-					$params['summary'],
-					EDIT_UPDATE | EDIT_AUTOSUMMARY,
-					false,
-					$this->getUser(),
-					'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
-				);
-
-				$success = $status->isOk();
-			}
-			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-link-exists' ), 'link-exists' );
-			}
-		}
-		else {
-			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
-		}
-
-		$this->getResult()->addValue(
-			null,
-			'success',
-			(int)$success
-		);
+	protected function modifyItem( WikibaseItem &$item, array $params ) {
+		return $item->addSiteLink( $params['site'], $params['title'], !$params['noupdate'] );
 	}
 
 	public function getPossibleErrors() {

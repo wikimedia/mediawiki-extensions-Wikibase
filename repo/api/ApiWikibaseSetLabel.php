@@ -25,7 +25,7 @@ class ApiWikibaseSetLabel extends ApiWikibaseModifyItem {
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( WikibaseItem $item, array $params ) {
+	protected function modifyItem( WikibaseItem &$item, array $params ) {
 		$item->setLabel( $params['language'], $params['label'] );
 
 		return true;
