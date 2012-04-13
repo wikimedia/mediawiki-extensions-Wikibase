@@ -18,7 +18,7 @@
 }
 
 .firstHeading {
-	border-bottom: 0 !important;
+	border-bottom: 0;
 	line-height: 1em !important;
 	margin-bottom: 0 !important;
 }
@@ -28,16 +28,11 @@
 	display:inline-block;
 }
 
-.wb-ui-rtl {
-	float:right;
-}
-
 h1.firstHeading .wb-ui-propertyedittoolbar {
 	font-size: 0.5em;
 }
 
 .wb-property-container {
-	display:inline-block;
 	margin-top:.3em;
 }
 
@@ -47,7 +42,8 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 }
 
 .rtl .wb-property-container-value {
-	background-image: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png);
+	background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
+	padding: 5px 35px 0 0; /* css Janus does not convert padding in every browser */
 }
 
 .mw-jump, #contentSub {
