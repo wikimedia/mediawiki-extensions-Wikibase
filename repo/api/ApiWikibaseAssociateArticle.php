@@ -29,12 +29,12 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 		$success = false;
 
-		$article = Article::newFromTitle(
-			Title::newFromText( 'Data:Q' . $params['id'] ),
+		$page = Article::newFromTitle(
+			Title::newFromText( 'Data:Q' . $params['id'] ), // TODO
 			$this->getContext()
-		);
+		)->getPage();
 
-		$content = $article->getContentObject();
+		$content = $page->getContent();
 
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			/* WikibaseItem */ $item = $content->getItem();
@@ -42,8 +42,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 			if ( $success ) {
 				$content->setItem( $item );
-
-				$article->getPage()->doEditContent( $content, $params['summary'] );
+				$page->doEditContent( $content, $params['summary'] );
 			}
 			else {
 				// TODO: error message

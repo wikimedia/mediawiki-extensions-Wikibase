@@ -24,7 +24,6 @@ class WikibaseContent extends Content {
 	
 	public function __construct( array $data ) {
 		parent::__construct( CONTENT_MODEL_WIKIBASE );
-		$this->data = $data;
 		$this->item = WikibaseItem::newFromArray( $data );
 	}
 
@@ -84,7 +83,7 @@ class WikibaseContent extends Content {
 	 *		 structure, an object, a binary blob... anything, really.
 	 */
 	public function getNativeData() {
-		return $this->data;
+		return $this->item->toArray();
 	}
 
 	/**
@@ -93,28 +92,37 @@ class WikibaseContent extends Content {
 	 * @return int
 	 */
 	public function getSize()  {
-		return strlen( serialize( $this->data ) ); #TODO: keep and reuse value, content object is immutable!
+		return strlen( serialize( $this->item->toArray() ) ); #TODO: keep and reuse value, content object is immutable!
 	}
 
 	/**
 	 * Returns true if this content is countable as a "real" wiki page, provided
 	 * that it's also in a countable location (e.g. a current revision in the main namespace).
 	 *
-	 * @param $hasLinks Bool: if it is known whether this content contains links, provide this information here,
+	 * @param boolean $hasLinks: if it is known whether this content contains links, provide this information here,
 	 *						to avoid redundant parsing to find out.
+	 * @return boolean
 	 */
 	public function isCountable( $hasLinks = null ) {
-		return !empty( $this->data[ WikibaseContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
+		// TODO: implement
+		return false;
+		//return !empty( $this->data[ WikibaseContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
 	}
 
+	/**
+	 * @return boolean
+	 */
 	public function isEmpty()  {
-		return empty( $this->data );
+		// TODO: might want to have better handling for this.
+		$data = $this->item->toArray();
+		return empty( $data );
 	}
 
 	/**
 	 * @param null|Title $title
 	 * @param null $revId
 	 * @param null|ParserOptions $options
+	 *
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL )  {
@@ -133,6 +141,7 @@ class WikibaseContent extends Content {
 
 	/**
 	 * TODO: we sure we want to do this here? I'd expect to do this in some kind of view action...
+	 * TODO: we can't just point to $lang.wikipedia!
 	 *
 	 * @param null|Language $lang
 	 * @return String
