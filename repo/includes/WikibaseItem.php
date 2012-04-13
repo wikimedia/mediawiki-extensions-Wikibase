@@ -266,32 +266,46 @@ class WikibaseItem {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function addSiteLink( $siteId, $pageName, $update = false ) {
-		// TODO: update blob
-
-		$dbw = wfGetDB( DB_MASTER );
-
-		if ( $update ) {
-			$this->removeSiteLink( $siteId, $pageName );
-		}
-		else {
-			$exists = $dbw->selectRow(
-				'wb_items_per_site',
-				array( 'ips_item_id' ),
-				$this->getSiteLinkConds( $siteId, $pageName ),
-				__METHOD__
-			) !== false;
-
-			if ( $exists ) {
-				return false;
-			}
+	public function addSiteLink( $siteId, $pageName, $update = true ) {
+		if ( !array_key_exists( 'titles', $this->data ) ) {
+			$this->data['titles'] = array();
 		}
 
-		return $dbw->insert(
-			'wb_items_per_site',
-			$this->getSiteLinkConds( $siteId, $pageName ),
-			__METHOD__
-		);
+		if ( !array_key_exists( $siteId, $this->data['titles'] ) ) {
+			$this->data['titles'][$siteId] = array();
+		}
+
+		$success = $update || !array_key_exists( 'TODO', $this->data['titles'][$siteId] );
+
+		if ( $success ) {
+			$this->data['titles'][$siteId]['TODO'] = $pageName;
+		}
+
+		return $success;
+
+//		$dbw = wfGetDB( DB_MASTER );
+//
+//		if ( $update ) {
+//			$this->removeSiteLink( $siteId, $pageName );
+//		}
+//		else {
+//			$exists = $dbw->selectRow(
+//				'wb_items_per_site',
+//				array( 'ips_item_id' ),
+//				$this->getSiteLinkConds( $siteId, $pageName ),
+//				__METHOD__
+//			) !== false;
+//
+//			if ( $exists ) {
+//				return false;
+//			}
+//		}
+//
+//		return $dbw->insert(
+//			'wb_items_per_site',
+//			$this->getSiteLinkConds( $siteId, $pageName ),
+//			__METHOD__
+//		);
 	}
 
 	/**
@@ -326,13 +340,13 @@ class WikibaseItem {
 	public function removeSiteLink( $siteId, $pageName ) {
 		// TODO: update blob
 
-		$dbw = wfGetDB( DB_MASTER );
-
-		return $dbw->delete(
-			'wb_items_per_site',
-			$this->getSiteLinkConds( $siteId, $pageName ),
-			__METHOD__
-		);
+//		$dbw = wfGetDB( DB_MASTER );
+//
+//		return $dbw->delete(
+//			'wb_items_per_site',
+//			$this->getSiteLinkConds( $siteId, $pageName ),
+//			__METHOD__
+//		);
 	}
 
 	public function getPropertyNames() {

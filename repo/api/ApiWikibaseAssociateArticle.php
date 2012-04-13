@@ -29,12 +29,8 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 		$success = false;
 
-		$article = Article::newFromTitle(
-			Title::newFromText( 'Data:Q' . $params['id'] ),
-			$this->getContext()
-		);
-
-		$content = $article->getContentObject();
+		$page = new WikiPage( Title::newFromText( 'Data:Q' . $params['id'] ) ); // TODO
+		$content = $page->getContent();
 
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			/* WikibaseItem */ $item = $content->getItem();
@@ -42,8 +38,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 			if ( $success ) {
 				$content->setItem( $item );
-
-				$article->getPage()->doEditContent( $content, $params['summary'] );
+				$page->doEditContent( $content, $params['summary'] );
 			}
 			else {
 				// TODO: error message
@@ -125,7 +120,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 	}
 	
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/API:Wikidata#AssociateArticle';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbassociatearticle';
 	}
 	
 

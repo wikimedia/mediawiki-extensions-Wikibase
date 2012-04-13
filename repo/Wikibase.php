@@ -70,6 +70,10 @@ $wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.p
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
 $wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
 $wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
+$wgAutoloadClasses['ApiWikibaseQueryDescriptions'] 	= $dir . 'api/ApiWikibaseQueryDescriptions.php';
+$wgAutoloadClasses['ApiWikibaseQueryLabels'] 		= $dir . 'api/ApiWikibaseQueryLabels.php';
+$wgAutoloadClasses['ApiWikibaseQueryAliases'] 		= $dir . 'api/ApiWikibaseQueryAliases.php';
+
 
 // includes
 $wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
@@ -91,6 +95,10 @@ $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
 $wgAPIModules['wbaddalias'] 						= 'ApiWikibaseAddAlias';
 $wgAPIModules['wbremovealias'] 						= 'ApiWikibaseRemoveAlias';
+
+$wgAPIListModules['wbdescriptions'] 				= 'ApiWikibaseQueryDescriptions';
+$wgAPIListModules['wblabels'] 						= 'ApiWikibaseQueryLabels';
+$wgAPIListModules['wbaliases'] 						= 'ApiWikibaseQueryAliases';
 
 
 

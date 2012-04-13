@@ -69,7 +69,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 	}
 	
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/API:Wikidata#GetItemId';
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#wbgetitemid';
 	}
 
 	public function getVersion() {
