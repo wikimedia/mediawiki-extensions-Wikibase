@@ -1,5 +1,5 @@
 /**
- * JavasSript for edit commands for 'Wikibase' property edit tool
+ * JavasSript for toolbars for 'Wikibase' property editing.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
@@ -18,22 +18,17 @@
  * 
  * @param jQuery parent
  */
-window.wikibase.ui.PropertyEditTool.Toolbar = function( appendTo ) {
-	if( typeof appendTo != 'undefined' ) {
-		this._init( appendTo );
+window.wikibase.ui.PropertyEditTool.Toolbar = function( parent ) {
+	if( typeof parent != 'undefined' ) {
+		this._init( parent );
 	}
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	/**
 	 * @const
-	 * Class which marks the toolbar within the site html.
+	 * Class which marks the element within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittoolbar',
-
-	/**
-	 * @var jQuery
-	 */
-	_subject: null,
 	
 	/**
 	 * @var jQuery
@@ -41,132 +36,232 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	_parent: null,
 	
 	/**
+	 * @var jQuery
+	 */
+	_elem: null,
+	
+	/**
+	 * @var Array
+	 */
+	_items: null,
+	
+	/**
 	 * Initializes the edit toolbar for the given element.
 	 * This should normally be called directly by the constructor.
+	 * 
+	 * @param parent the element holding the toolbar
 	 */
 	_init: function( parent ) {
 		if( this._parent !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
-		
+		this._items = new Array();
 		this._parent = parent;
+		this.draw(); // draw first to have toolbar wrapper
+		this._initToolbar();
+	},
+	
+	_initToolbar: function() {
 		
-		this._buildToolbar( [this._createButton(this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )] );
 	},
 	
 	/**
-	 * Creates the toolbar with an array of buttons which will be displayed separated by "|"
-	 * 
-	 * @param buttons array with button elements from the _createButton method
+	 * Function for (re)rendering the element
 	 */
-	_buildToolbar: function( buttons ) {
-		if (this._subject != null) {
-			this._subject.empty().remove();
-		}		
-		
-		this._subject = $( '<div/>', {
+	draw: function() {
+		this._drawToolbar();
+		this._drawToolbarElements();
+	},
+	
+	/**
+	 * Draws the toolbar element itself without its content
+	 */
+	_drawToolbar: function() {		
+		if( this._elem !== null ) {
+			this._elem.children().detach();
+			this._elem.remove();
+		}
+		this._elem = $( '<div/>', {
 			'class': this.UI_CLASS
-		} )		
+		} );
+		
+		/*
 		.append( "[" );
 		
 		for( var i in buttons ) {
 			if( i != 0 ) {
-				this._subject.append( "|" );
+				this._elem.append( "|" );
 			}
-			this._subject.append( buttons[i] );
+			this._elem.append( buttons[i] );
 		}		
-		this._subject.append( "]" );
-		
+		this._elem.append( "]" );
+		*/
+	   
 		// if this is a right-to-left language, prepend the toolbar
 		// FIXME: there might be a nicer way to check for this, also this might be language settings
 		//        and context related later!
 		if( $( 'body' ).hasClass( 'rtl' ) ) {
-			this._parent.prepend( this._subject );
+			this._parent.prepend( this._elem );
 		} else {
-			this._parent.append( this._subject );
+			this._parent.append( this._elem );
 		}
 	},
 	
 	/**
-	 * Triggers the tool bars 'edit' command
+	 * Draws the toolbar elements like buttons and labels
 	 */
-    doEdit: function( event ) {
-        if( this.onActionEdit !== null && this.onActionEdit() === false ) { // callback
-            // cancel edit
-            return false;
-        }
-        this._buildToolbar( [
-			this._createButton( this.UI_CLASS + '-save-link', window.mw.msg( 'wikibase-save' ), this.doSave ),
-			this._createButton( this.UI_CLASS + '-cancel-link', window.mw.msg( 'wikibase-cancel' ), this.doCancel )
-        ] );
-    },
-    
+	_drawToolbarElements: function() {
+		for( var i in this._items ) {
+			this._elem.append( this._items[i]._elem );
+		}
+	},
+	
 	/**
-	 * Triggers the tool bars 'save' command
+	 * This will add a toolbar element, e.g. a label or a button to the toolbar at the given index.
 	 */
-    doSave: function( event ) {
-        if( this.onActionSave !== null && this.onActionSave() === false ) { // callback
-            // cancel save
-            return false;
-        }
-        this._buildToolbar( [
-			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )
-		] );
-    },
-    
+	addElement: function( elem, index ) {
+		// TODO: add index functionality!
+		//this._elem.append( elem._elem );
+		this._items.push( elem );		
+		this.draw();
+	},
+	
 	/**
-	 * Triggers the tool bars 'cancel' command
+	 * Removes an element from the toolbar
+	 * @param elem the element to remove
+	 * @return bool false if element isn't part of this element
 	 */
-    doCancel: function( event ) {
-        if( this.onActionCancel !== null && this.onActionCancel() === false ) { // callback
-            // cancel cancel
-            return false;
-        }
-        this._buildToolbar( [
-			this._createButton( this.UI_CLASS + '-edit-link', window.mw.msg( 'wikibase-edit' ), this.doEdit )
-		] );
-    },
-    
-    /**
-     * Creates a button for the toolbar
-     * @param buttonClass css class used for this button
-     * @param text the label of the button
-     * @param callback the function called when the button is pressed
-     * @returns the button as jquery element
-     */
-    _createButton: function( buttonClass, text, callback ) {
-        return $( '<a/>', {
-            'class': buttonClass,
-            text: text,
-            href: 'javascript:;',
-            click: jQuery.proxy( callback, this )
-        } );
-    },
+	removeElement: function( elem ) {
+		$index = $.inArray( elem, this._items );
+		if( $index === -1 ) {
+			return false;
+		}
+		this._items.splice( $index, 1 );
+		
+		//elem._elem.detach(); // only detach so it still can be attached somewhere else!
+		// TODO check whether this is even part of the toolbar!
+		this.draw();
+	},
 
 	destroy: function() {
 		// TODO
+	}
+};
+
+/**
+ * Represents a group of toolbar elements within a toolbar
+ */
+window.wikibase.ui.PropertyEditTool.Toolbar.Group = function( editableValue ) {
+	window.wikibase.ui.PropertyEditTool.Toolbar.call( this, editableValue );
+};
+window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
+$.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
+	
+	UI_CLASS: 'wb-ui-propertyedittoolbar-group',
+	
+	_drawToolbarElements: function() {
+		for( var i in this._items ) {
+			if( i != 0 ) {
+				this._elem.append( '|' );
+			}
+			this._elem.append( this._items[i]._elem );
+		}
+		
+		this._elem
+		.prepend( '[' )
+		.append( ']' );
+	}
+	
+} );
+
+/**
+ * Extends the basic toolbar with buttons essential for editing stuff.
+ * Basically '[edit]' which gets expanded to '[cancel|save]' when hit.
+ * This also interacts with an editable value.
+ */
+window.wikibase.ui.PropertyEditTool.EditToolbar = function( editableValue ) {
+	window.wikibase.ui.PropertyEditTool.Toolbar.call( this, editableValue );
+};
+window.wikibase.ui.PropertyEditTool.EditToolbar.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
+$.extend( window.wikibase.ui.PropertyEditTool.EditToolbar.prototype, {
+	
+	/**
+	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
+	 */
+	btnEdit: null,
+	
+	/**
+	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
+	 */
+	btnCancel: null,
+	
+	/**
+	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
+	 */
+	btnSave: null,
+	
+	/**
+	 * @var window.wikibase.ui.PropertyEditTool.EditableValue
+	 */
+	_editableValue: null,
+	
+	/**
+	 * @param window.wikibase.ui.PropertyEditTool.EditableValue editableValue the editable value
+	 *        the toolbar should interact with.
+	 */
+	_init: function( editableValue ) {
+		// the toolbar is placed besides the editable value itself:
+		var parent = editableValue._subject.parent();
+		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this, parent );
+		
+		this._editableValue = editableValue;
+	},	
+	
+	_initToolbar: function() {
+		// call prototypes base function to append toolbar itself:
+		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._initToolbar.call( this );
+		
+		// now create the buttons we need for basic editing:
+		var button = window.wikibase.ui.PropertyEditTool.Toolbar.Button;
+		
+		this.btnEdit = new button( window.mw.msg( 'wikibase-edit' ) );
+		this.btnEdit.onAction = this._editActionHandler();
+		
+		this.btnCancel = new button( window.mw.msg( 'wikibase-cancel' ) );
+		this.btnCancel.onAction = this._cancelActionHandler();
+
+		this.btnSave = new button( window.mw.msg( 'wikibase-save' ) );
+		this.btnSave.onAction = this._saveActionHandler();
+		
+		// add 'edit' button only for now:
+		this.addElement( this.btnEdit );
 	},
 	
-	///////////
-	// EVENTS:
-	///////////
-
-	/**
-	 * Callback called after the 'edit' button was pressed.
-	 * If the callback returns false, the action will be cancelled.
-	 */
-	onActionEdit: null,
+	_editActionHandler: function() {
+		return $.proxy( function(){
+			this._editableValue.startEditing();
+			this.removeElement( this.btnEdit );
+			this.addElement( this.btnCancel );
+			this.addElement( this.btnSave );
+		}, this );
+	},	
+	_cancelActionHandler: function() {
+		return $.proxy( function() {
+			this._leaveAction( false );
+		}, this );
+	},	
+	_saveActionHandler: function() {
+		return $.proxy( function() {
+			this._leaveAction( true );
+		}, this );
+	},
 	
-	/**
-	 * Callback called after the 'save' button was pressed.
-	 * If the callback returns false, the action will be cancelled.
-	 */
-	onActionSave: null,
+	_leaveAction: function( save ) {
+		this._editableValue.stopEditing( save );
+		this.removeElement( this.btnCancel );
+		this.removeElement( this.btnSave );
+		this.addElement( this.btnEdit );		
+	}
 	
-	/**
-	 * Callback called after the 'cancel' button was pressed.
-	 * If the callback returns false, the action will be cancelled.
-	 */
-	onActionCancel: null
-};
+} );

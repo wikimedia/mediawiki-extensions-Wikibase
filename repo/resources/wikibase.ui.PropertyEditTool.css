@@ -6,8 +6,11 @@
     display: inline;
 }
 
-.wb-ui-propertyedittoolbar a {
+.wb-ui-propertyedittoolbar-button {
     padding:0 .15em;
+}
+.wb-ui-propertyedittoolbar-button-disabled {
+	color: grey;
 }
 
 .wb-ui-propertyedittoolbar, .wb-property-container-value {

@@ -36,17 +36,23 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_subject: null,
 	
 	/**
-	 * this is true if the input interface is initialized at the time.
+	 * This is true if the input interface is initialized at the time.
 	 * @var bool
 	 */
 	_isInEditMode: false,
+	
+	/**
+	 * Holds the input element in case this is in edit mode
+	 * @var null|jQuery
+	 */
+	_inputElem: null,
 	
 	/**
 	 * The toolbar controling the editable value
 	 * @var: window.wikibase.ui.PropertyEditTool.Toolbar
 	 */
 	_toolbar: null,
-			
+	
 	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
@@ -60,21 +66,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._initToolbar();
 	},
 	
-	_initToolbar: function() {		
+	_initToolbar: function() {
 		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
 		//       with the actual value perhaps.
-		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject.parent() );
-
-		// use toolbar events to control the editable value:
-		var self = this;
-		this._toolbar.onActionEdit   = function(){ self.startEditing(); };
-		//this._toolbar.onActionEdit   = jQuery.proxy( this.startEditing, this );
-		this._toolbar.onActionSave   = function(){ self.stopEditing( true ); };
-		this._toolbar.onActionCancel = function(){ self.stopEditing( false ); };
+		this._toolbar = new window.wikibase.ui.PropertyEditTool.EditToolbar( this );
 		
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
-			this._toolbar.doEdit();
+			this._toolbar.btnEdit.doAction();
 		}
 	},
 	
@@ -95,38 +94,59 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			return false;			
 		}
 
-		initText = this.getValue();
+		var initText = this.getValue();
 		
-		inputBox = $( '<input/>', {
+		this._inputElem = $( '<input/>', {
 			'class': this.UI_CLASS,
 			'type': 'text',
 			'name': this._key,
 			'value': initText,
 			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this.keyPressed, this ),
-			'keyup': jQuery.proxy( this.keyPressed, this )	// for escape key browser compability
+			'keypress': jQuery.proxy( this._inputRegistered, this ),
+			'keyup': jQuery.proxy( this._inputRegistered, this )	// for escape key browser compability
 		} );
 		
 		this._subject.text( '' );
-		this._subject.append( inputBox );
+		this._subject.append( this._inputElem );
 		
 		// store original text value from before input box insertion:
-		inputBox.data( this.UI_CLASS + '-initial-value', initText );
+		this._inputElem.data( this.UI_CLASS + '-initial-value', initText );
 
         this._isInEditMode = true;
-        inputBox.focus();
+		
+		this._inputRegistered(); // do this after setting _isInEditMode !
+        this._inputElem.focus();
+		
+		if( ! this.validate( initText ) ) {
+			// TODO: disable buttons!!!
+		}
+		
 		return true;
 	},
 	
 	/**
-	 * Called when a key is pressed inside the input box
-	 * 
+	 * Called when the input changes in general for example on its initialization when setting
+	 * its initial value.
 	 */
-	keyPressed: function( event ) {
+	_inputRegistered: function() {
+		var disableSave = this.isEmpty();
+		var disableCancel = disableSave || ( this.getInitialValue() === '' )
+		
+		this._toolbar.btnSave.setDisabled( disableSave );
+		this._toolbar.btnCancel.setDisabled( disableCancel );
+	},
+	
+	/**
+	 * Called when a key is pressed inside the input interface
+	 */
+	_keyPressed: function( event ) {
+		this._inputRegistered();
+		
 		if( event.which == 13 ) {
-			this._toolbar.doSave();
-		} else if( event.which == 27 ) {
-			this._toolbar.doCancel();
+			this._toolbar.btnSave.doAction();
+		}
+		else if( event.which == 27 ) {
+			this._toolbar.btnCancel.doAction();
 		}
 	},
 	
@@ -140,14 +160,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( ! this.isInEditMode() ) {
 			return false;			
 		}
-		inputBox = $( this._subject.children( '.' + this.UI_CLASS )[0] );
-		initialValue = inputBox.data( this.UI_CLASS + '-initial-value' );
+		var initialValue = this.getInitialValue();
 		
-		$value = ( ! save )
-				? initialValue
-				: this.getValue();
+		var $value = save ? this.getValue() : initialValue;
 		
-		inputBox.empty().remove(); // remove input interface		
+		this._inputElem.empty().remove(); // remove input interface
+		this._inputElem = null;
 		this._subject.text( $value );
 		
 		this._isInEditMode = false;
@@ -181,12 +199,36 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 	
 	/**
+	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
+	 * If its not in edit mode, the current value will be returned.
+	 * @return string
+	 */
+	getInitialValue: function() {
+		if( ! this.isInEditMode() ) {
+			return this._subject.text();
+		}
+		return this._inputElem.data( this.UI_CLASS + '-initial-value' );
+	},
+	
+	/**
 	 * Returns true if there is currently no value assigned
 	 *
 	 * @return bool
 	 */
 	isEmpty: function() {
 		return this.getValue() === '';
+	},
+	
+	/**
+	 * Velidates whether a certain value would be valid for this editable value.
+	 * 
+	 * @todo: we might want to move this into a class describing the property/snak later.
+	 * 
+	 * @param string text
+	 * @return bool
+	 */
+	validate: function( value ) {
+		return $.trim( value ) !== '';
 	},
 	
 	/////////////////
