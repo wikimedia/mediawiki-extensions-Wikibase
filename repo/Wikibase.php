@@ -73,6 +73,7 @@ $wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAl
 $wgAutoloadClasses['ApiWikibaseQueryDescriptions'] 	= $dir . 'api/ApiWikibaseQueryDescriptions.php';
 $wgAutoloadClasses['ApiWikibaseQueryLabels'] 		= $dir . 'api/ApiWikibaseQueryLabels.php';
 $wgAutoloadClasses['ApiWikibaseQueryAliases'] 		= $dir . 'api/ApiWikibaseQueryAliases.php';
+$wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'api/ApiWikibaseModifyItem.php';
 
 
 // includes

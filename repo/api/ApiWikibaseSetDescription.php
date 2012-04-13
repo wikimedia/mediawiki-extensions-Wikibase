@@ -13,54 +13,26 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiWikibaseSetDescription extends ApiBase {
-
-	public function __construct( $main, $action ) {
-		parent::__construct( $main, $action );
-	}
+class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 
 	/**
-	 * @var ApiResult
-	 */
-	private $result;
-	
-	/**
-	 * Main method. Does the actual work and sets the result.
+	 * Actually modify the item.
 	 *
 	 * @since 0.1
+	 *
+	 * @param WikibaseItem $item
+	 * @param array $params
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function execute() {
-		$params = $this->extractRequestParams();
-		
-		$this->result = $this->getResult();
-		
-		// TODO: implement
-		
-		// If we are testing we add some dummy data
-		// TODO: Remove this when we go into production
-		if ( WBSettings::get( 'apiInTest' ) && isset($params['test']) ) {
-			$this->result->addValue( array( 'wbsetdescription' ), 'result', 'Success', true );
-			$this->result->addValue( array( 'wbsetdescription' ), 'pageid', 12, true );
-			$this->result->addValue( array( 'wbsetdescription' ), 'title', 'q7', true );
-			$this->result->addValue( array( 'wbsetdescription' ), 'oldrevid', 123, true );
-			$this->result->addValue( array( 'wbsetdescription' ), 'newrevid', 456, true );
-		}
-	}
+	protected function modifyItem( WikibaseItem $item, array $params ) {
+		$item->setDescription( $params['language'], $params['description'] );
 
-	public function needsToken() {
-		return !WBSettings::get( 'apiInDebug' );
-	}
-
-	public function mustBePosted() {
-		return !WBSettings::get( 'apiInDebug' );
+		return true;
 	}
 
 	public function getAllowedParams() {
-		return array(
-			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true,
-			),
+		return array_merge( parent::getAllowedParams(), array(
 			'language' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
@@ -71,16 +43,16 @@ class ApiWikibaseSetDescription extends ApiBase {
 			),
 			'test' => array( // TODO: Remove this when we go into production
 			),
-		);
+		) );
 	}
 
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'id' => 'The ID of the item to set a description for',
 			'description' => 'Language the description is in',
 			'label' => 'The value to set for the description',
 			'test' => 'Add some dummy data for testing purposes', // TODO: Remove this when we go into production
-		);
+		) );
 	}
 
 	public function getDescription() {

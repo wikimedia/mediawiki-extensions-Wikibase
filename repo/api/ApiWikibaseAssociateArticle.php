@@ -13,11 +13,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiWikibaseAssociateArticle extends ApiBase {
-
-	public function __construct( $main, $action ) {
-		parent::__construct( $main, $action );
-	}
+class ApiWikibaseAssociateArticle extends ApiWikibaseModifyItem {
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -29,7 +25,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 		$success = false;
 
-		$page = new WikiPage( Title::newFromText( 'Data:Q' . $params['id'] ) ); // TODO
+		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
 		$content = $page->getContent();
 
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
@@ -67,33 +63,12 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
 			array( 'code' => 'link-exists', 'info' => 'An article on the specified wiki is already linked' ),
 		) );
 	}
 
-	public function needsToken() {
-		return !WBSettings::get( 'apiInDebug' );
-	}
-
-	public function mustBePosted() {
-		return !WBSettings::get( 'apiInDebug' );
-	}
-
 	public function getAllowedParams() {
-		return array(
-			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'site' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'title' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
+		return array_merge( parent::getAllowedParams(), array(
 			'badge' => array(
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
@@ -105,18 +80,16 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false,
 			),
-		);
+		) );
 	}
 
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'id' => 'The ID of the item to associate the page with',
-			'site' => 'An identifier for the site on which the page resides',
-			'title' => 'Title of the page to associate',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
 			'summary' => 'Summary for the edit',
 			'noupdate' => 'Indicates that if a link to the specified site already exists, it should not be updated to use the provided page',
-		);
+		) );
 	}
 
 	public function getDescription() {

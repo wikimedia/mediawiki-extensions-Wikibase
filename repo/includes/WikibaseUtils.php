@@ -69,4 +69,17 @@ final class WikibaseUtils {
 		return str_replace( '$1', $pageTitle, $ids[$siteId] );
 	}
 
+	/**
+	 * Returns the WikiPage object for the item with provided id.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $itemId
+	 *
+	 * @return WikiPage
+	 */
+	public static function getWikiPageForId( $itemId ) {
+		return new WikiPage( Title::newFromText( 'Data:Q' . $itemId ) ); // TODO
+	}
+
 }

@@ -283,6 +283,36 @@ class WikibaseItem {
 	}
 
 	/**
+	 * Sets the value for the label in a certain value.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $langCode
+	 * @param string $value
+	 */
+	public function setLabel( $langCode, $value ) {
+		$this->data['label'][$langCode] = array(
+			'language' => $langCode,
+			'value' => $value,
+		);
+	}
+
+	/**
+	 * Sets the value for the description in a certain value.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $langCode
+	 * @param string $value
+	 */
+	public function setDescription( $langCode, $value ) {
+		$this->data['description'][$langCode] = array(
+			'language' => $langCode,
+			'value' => $value,
+		);
+	}
+
+	/**
 	 * Adds a site link.
 	 *
 	 * @since 0.1
