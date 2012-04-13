@@ -34,8 +34,29 @@ class WikibaseItem {
 	 *
 	 * @param array $data
 	 */
-	protected function __construct( array $data ) {
+	protected function __construct( array $data, $clean = false ) {
 		$this->data = $data;
+
+		if ( $clean ) {
+			// TODO: should be moved out of constructor
+			$this->cleanStructure();
+		}
+	}
+
+	/**
+	 * Cleans the internal array structure.
+	 * This consists of adding elements the code expects to be present later on
+	 * and migrating or removing elements after changes to the structure are made.
+	 * Should typically be called before using any of the other methods.
+	 *
+	 * @since 0.1
+	 */
+	public function cleanStructure() {
+		foreach ( array( 'links', 'label', 'description' ) as $field ) {
+			if ( !array_key_exists( $field, $this->data ) ) {
+				$this->data[$field] = array();
+			}
+		}
 	}
 
 	/**
@@ -46,7 +67,7 @@ class WikibaseItem {
 	 * @return WikibaseItem
 	 */
 	public static function newFromArray( array $data ) {
-		return new static( $data );
+		return new static( $data, true );
 	}
 
 	/**
@@ -180,8 +201,7 @@ class WikibaseItem {
 			__METHOD__
 		);
 
-		// TODO
-		foreach ( array() as $siteId => $pageName ) {
+		foreach ( $this->getSiteLinks() as $siteId => $pageName ) {
 			$success = $dbw->insert(
 				'wb_items_per_site',
 				array_merge(
@@ -198,7 +218,14 @@ class WikibaseItem {
 		return $success;
 	}
 
-	// TODO
+	/**
+	 * Saves the fields that have per-language values, such as the labels and descriptions.
+	 * This info is saved in wb_texts_per_lang.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean Success indicator
+	 */
 	protected function saveMultilangFields() {
 		$dbw = wfGetDB( DB_MASTER );
 
@@ -395,13 +422,8 @@ class WikibaseItem {
 	 * @return string|false
 	 */
 	public function getDescription( $langCode ) {
-		$data = $this->data;
-
-		if ( !isset( $data['description'][$langCode] ) ) {
-			return null;
-		} else {
-			return $data['description'][$langCode]['value'];
-		}
+		return array_key_exists( $langCode, $this->data['description'] )
+			? $this->data['description'][$langCode]['value'] : false;
 	}
 
 	/**
@@ -415,13 +437,8 @@ class WikibaseItem {
 	 * @return string|false
 	 */
 	public function getLabel( $langCode ) {
-		$data = $this->data;
-
-		if ( !isset( $data['label'][$langCode] ) ) {
-			return null;
-		} else {
-			return $data['label'][$langCode]['value'];
-		}
+		return array_key_exists( $langCode, $this->data['label'] )
+			? $this->data['label'][$langCode]['value'] : false;
 	}
 
 	/**
@@ -433,11 +450,9 @@ class WikibaseItem {
 	 * @return array
 	 */
 	public function getSiteLinks() {
-		$data = $this->data;
-
 		$titles = array();
 
-		foreach ( $data['links'] as $siteId => $linkData ) {
+		foreach ( $this->data['links'] as $siteId => $linkData ) {
 			$titles[$siteId] = $linkData['title'];
 		}
 

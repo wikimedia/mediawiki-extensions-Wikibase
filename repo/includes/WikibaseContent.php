@@ -147,48 +147,59 @@ class WikibaseContent extends Content {
 	 * @return String
 	 */
 	private function generateHtml( Language $lang = null ) {
-		// TODO: generate sensible HTML!
+		$item = $this->item;
 		$html = '';
-		$label =  $this->item->getLabel( $lang );
-		if ( $label === null ) {
-			$label = '';
+
+		$label = $item->getLabel( $lang->getCode() );
+
+		$html .= Html::element(
+			'h1',
+			null,
+			$label === false ? '' : $label
+		);
+
+		$description = $item->getDescription( $lang->getCode() );
+
+		$html .= Html::element(
+			'p',
+			null,
+			$description === false ? '' : $description
+		);
+
+		$html .= '<hr />';
+
+		$html .= Html::openElement( 'table', array( 'class' => 'wikitable' ) );
+
+		foreach ( $item->getSiteLinks() AS $siteId => $title ) {
+			$html .= '<tr>';
+
+			$html .= Html::element( 'td', array(), $siteId );
+
+			$html .= '<td>';
+			$html .= Html::element(
+				'a',
+				array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
+				$title
+			);
+			$html .= '</td>';
+
+			$html .= '</tr>';
 		}
-		$description =  $this->item->getDescription( $lang );
-		if ( $description === null ) {
-			$description = '';
-		}
-		$html .= Html::element( 'h1', null, $label );
-		$html .= Html::element( 'p', null, $description );
-		$html .= Html::element( 'hr', null, null );
+
+		$html .= Html::closeElement( 'table' );
+
 		$htmlTable = '';
 
-		foreach ( $this->item->getTitles( $lang ) AS $language => $value ) {
-			$htmlTable .= "\t\t";
-			$htmlTable .= Html::openElement( 'tr' );
-			$htmlTable .= Html::element( 'td', null, $language );
-			$htmlTable .= Html::openElement ( 'td' );
-			$link = 'http://'.$language.'.wikipedia.org/'.$value;
-			$htmlTable .= Html::element( 'a', array( 'href' => $link ), $value );
-			$htmlTable .= Html::closeElement( 'td' );
-			$htmlTable .= Html::closeElement( 'tr' );
-			$htmlTable .= "\n";
-		}
-		$htmlTable = Html::rawElement( 'table', array( 'class' => 'wikitable'), $htmlTable );
-		$html .= $htmlTable;
-
-		// debug output
-		$htmlTable = '';
-		$data = $this->getNativeData();
-		$flat = WikibaseContentHandler::flattenArray( $data );
-		foreach ( $flat as $k => $v ) {
-			$htmlTable .= "\t\t";
+		// TODO: implement real ui instead of debug code
+		foreach ( WikibaseContentHandler::flattenArray( $item->toArray() ) as $k => $v ) {
 			$htmlTable .= Html::openElement( 'tr' );
 			$htmlTable .= Html::element( 'td', null, $k );
 			$htmlTable .= Html::element( 'td', null, $v );
 			$htmlTable .= Html::closeElement( 'tr' );
-			$htmlTable .= "\n";
 		}
+
 		$htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
+
 		$html .= $htmlTable;
 
 		return $html;
