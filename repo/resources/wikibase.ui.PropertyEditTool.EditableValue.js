@@ -69,11 +69,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_initToolbar: function() {
 		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
 		//       with the actual value perhaps.
-		this._toolbar = new window.wikibase.ui.PropertyEditTool.EditToolbar( this );
+		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject.parent() );
+		
+		// give the toolbar a edit group with basic edit commands:
+		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup( this );
+		this._toolbar.addElement( editGroup );
+		this._toolbar.editGroup = editGroup // remember this
 		
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
-			this._toolbar.btnEdit.doAction();
+			this._toolbar.editGroup.btnEdit.doAction();
 		}
 	},
 	
@@ -102,8 +107,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'name': this._key,
 			'value': initText,
 			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._inputRegistered, this ),
-			'keyup': jQuery.proxy( this._inputRegistered, this )	// for escape key browser compability
+			'keypress': jQuery.proxy( this._keyPressed, this ),
+			'keyup': jQuery.proxy( this._keyPressed, this )	// for escape key browser compability
 		} );
 		
 		this._subject.text( '' );
@@ -132,8 +137,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var disableSave = this.isEmpty();
 		var disableCancel = disableSave || ( this.getInitialValue() === '' )
 		
-		this._toolbar.btnSave.setDisabled( disableSave );
-		this._toolbar.btnCancel.setDisabled( disableCancel );
+		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
+		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
+		//this._toolbar.draw();
 	},
 	
 	/**
@@ -143,10 +149,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._inputRegistered();
 		
 		if( event.which == 13 ) {
-			this._toolbar.btnSave.doAction();
+			this._toolbar.editGroup.btnSave.doAction();
 		}
 		else if( event.which == 27 ) {
-			this._toolbar.btnCancel.doAction();
+			this._toolbar.editGroup.btnCancel.doAction();
 		}
 	},
 	

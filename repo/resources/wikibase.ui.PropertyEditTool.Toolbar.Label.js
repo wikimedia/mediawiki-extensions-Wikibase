@@ -32,8 +32,6 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	 */
 	_elem: null,
 	
-	_name: '',
-	
 	/**
 	 * Initializes the ui element.
 	 * This should normally be called directly by the constructor.
@@ -44,7 +42,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 			this.destroy();
 		}
 		this._initElem( text );
-		this._name = text;
+		//this._text = text; // for debugging
 	},
 	
 	_initElem: function( text ) {
