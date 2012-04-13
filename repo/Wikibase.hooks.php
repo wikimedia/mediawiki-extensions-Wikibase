@@ -56,7 +56,7 @@ final class WikibaseHooks {
 	 */
 	public static function onPageContentLanguage( $title, &$pageLang, $wgLang ) {
 		global $wgNamespaceContentModels;
-		if( $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE) {
+		if( $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE ) {
 			$pageLang = $wgLang;
 		}
 		return true;
