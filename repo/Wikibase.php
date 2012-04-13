@@ -68,11 +68,11 @@ $wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAsso
 $wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'api/ApiWikibaseLinkArticles.php';
 $wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
-$wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
-$wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
-$wgAutoloadClasses['ApiWikibaseQueryDescriptions'] 	= $dir . 'api/ApiWikibaseQueryDescriptions.php';
-$wgAutoloadClasses['ApiWikibaseQueryLabels'] 		= $dir . 'api/ApiWikibaseQueryLabels.php';
-$wgAutoloadClasses['ApiWikibaseQueryAliases'] 		= $dir . 'api/ApiWikibaseQueryAliases.php';
+$wgAutoloadClasses['ApiWikibaseAddSiteLink'] 		= $dir . 'api/ApiWikibaseAddSiteLink.php';
+$wgAutoloadClasses['ApiWikibaseRemoveSiteLink'] 	= $dir . 'api/ApiWikibaseRemoveSiteLink.php';
+//$wgAutoloadClasses['ApiWikibaseQueryDescriptions'] 	= $dir . 'api/ApiWikibaseQueryDescriptions.php';
+//$wgAutoloadClasses['ApiWikibaseQueryLabels'] 		= $dir . 'api/ApiWikibaseQueryLabels.php';
+//$wgAutoloadClasses['ApiWikibaseQueryAliases'] 		= $dir . 'api/ApiWikibaseQueryAliases.php';
 
 
 // includes
@@ -93,12 +93,12 @@ $wgAPIModules['wbassociatearticle'] 				= 'ApiWikibaseAssociateArticle';
 $wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
 $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
-$wgAPIModules['wbaddalias'] 						= 'ApiWikibaseAddAlias';
-$wgAPIModules['wbremovealias'] 						= 'ApiWikibaseRemoveAlias';
+$wgAPIModules['wbaddsitelink'] 						= 'ApiWikibaseAddSiteLink';
+$wgAPIModules['wbremovesitelink'] 					= 'ApiWikibaseRemoveSiteLink';
 
-$wgAPIListModules['wbdescriptions'] 				= 'ApiWikibaseQueryDescriptions';
-$wgAPIListModules['wblabels'] 						= 'ApiWikibaseQueryLabels';
-$wgAPIListModules['wbaliases'] 						= 'ApiWikibaseQueryAliases';
+//$wgAPIListModules['wbdescriptions'] 				= 'ApiWikibaseQueryDescriptions';
+//$wgAPIListModules['wblabels'] 						= 'ApiWikibaseQueryLabels';
+//$wgAPIListModules['wbaliases'] 						= 'ApiWikibaseQueryAliases';
 
 
 
