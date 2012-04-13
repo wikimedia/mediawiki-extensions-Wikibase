@@ -29,11 +29,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 		$success = false;
 
-		$page = Article::newFromTitle(
-			Title::newFromText( 'Data:Q' . $params['id'] ), // TODO
-			$this->getContext()
-		)->getPage();
-
+		$page = new WikiPage( Title::newFromText( 'Data:Q' . $params['id'] ) ); // TODO
 		$content = $page->getContent();
 
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {

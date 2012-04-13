@@ -275,9 +275,13 @@ class WikibaseItem {
 			$this->data['titles'][$siteId] = array();
 		}
 
-		if ( $update || !array_key_exists( 'TODO', $this->data['titles'][$siteId] ) ) {
+		$success = $update || !array_key_exists( 'TODO', $this->data['titles'][$siteId] );
+
+		if ( $success ) {
 			$this->data['titles'][$siteId]['TODO'] = $pageName;
 		}
+
+		return $success;
 
 //		$dbw = wfGetDB( DB_MASTER );
 //
