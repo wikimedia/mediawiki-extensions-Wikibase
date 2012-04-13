@@ -68,8 +68,12 @@ $wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAsso
 $wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'api/ApiWikibaseLinkArticles.php';
 $wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
-$wgAutoloadClasses['ApiWikibaseAddAlias'] 		= $dir . 'api/ApiWikibaseAddAlias.php';
+$wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
 $wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
+$wgAutoloadClasses['ApiWikibaseQueryDescriptions'] 	= $dir . 'api/ApiWikibaseQueryDescriptions.php';
+$wgAutoloadClasses['ApiWikibaseQueryLabels'] 		= $dir . 'api/ApiWikibaseQueryLabels.php';
+$wgAutoloadClasses['ApiWikibaseQueryAliases'] 		= $dir . 'api/ApiWikibaseQueryAliases.php';
+
 
 // includes
 $wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
@@ -77,6 +81,8 @@ $wgAutoloadClasses['WikibaseDifferenceEngine'] 		= $dir . 'includes/WikibaseDiff
 $wgAutoloadClasses['WikibaseContent'] 				= $dir . 'includes/WikibaseContent.php';
 $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 $wgAutoloadClasses['WikibaseUtils'] 				= $dir . 'includes/WikibaseUtils.php';
+$wgAutoloadClasses['WikibaseItem'] 					= $dir . 'includes/WikibaseItem.php';
+$wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseItemStructuredSave.php';
 
 
 
@@ -90,12 +96,16 @@ $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
 $wgAPIModules['wbaddalias'] 						= 'ApiWikibaseAddAlias';
 $wgAPIModules['wbremovealias'] 						= 'ApiWikibaseRemoveAlias';
 
+$wgAPIListModules['wbdescriptions'] 				= 'ApiWikibaseQueryDescriptions';
+$wgAPIListModules['wblabels'] 						= 'ApiWikibaseQueryLabels';
+$wgAPIListModules['wbaliases'] 						= 'ApiWikibaseQueryAliases';
+
 
 
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
-
+$wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 
 
 // Resource loader modules
@@ -109,6 +119,7 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase.js',
 		'wikibase.ui.js',
 		'wikibase.ui.PropertyEditTool.js',
+		'wikibase.ui.PropertyEditTool.Tooltip.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Group.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Label.js',
@@ -118,9 +129,11 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase.startup.js'
 	),
 	'styles' => array(
-		'wikibase.ui.PropertyEditTool.css',
+		'../../../skins/common/shared.css',
+		'wikibase.ui.PropertyEditTool.css'
 	),
 	'dependencies' => array(
+		'jquery.tipsy'
 	),
 	'messages' => array(
 		'wikibase-cancel',
@@ -136,8 +149,9 @@ unset( $moduleTemplate );
 
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' );
-$wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikibaseContentHandler';
+define( 'CONTENT_MODEL_WIKIBASE', 'wikidata' );
+define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' ); // TODO: remove
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
 
 $egWBSettings = array();

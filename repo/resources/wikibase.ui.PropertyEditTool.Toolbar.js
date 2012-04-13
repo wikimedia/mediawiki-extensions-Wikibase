@@ -86,14 +86,15 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 			'class': this.UI_CLASS
 		} );
 	   
-		// if this is a right-to-left language, prepend the toolbar
-		// FIXME: there might be a nicer way to check for this, also this might be language settings
-		//        and context related later!
+		// TODO: check whether this is the proper way of doing the rtl thing
+		this._parent.append( this._elem );
+		/*
 		if( $( 'body' ).hasClass( 'rtl' ) ) {
 			this._parent.prepend( this._elem );
 		} else {
 			this._parent.append( this._elem );
 		}
+		*/
 	},
 	
 	/**

@@ -179,6 +179,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// any change at all compared to initial value?
 		return initialValue !== $value;
 	},
+
+	/**
+	 * just doing a test api call
+	 */
+	doApiCall: function() {
+		mw.loader.using( 'mediawiki.api', function() {
+			var localApi = new mw.Api();
+			localApi.post( { action: 'query', meta: 'userinfo' }, { ok: function() { console.log( arguments ); } } );
+		} );
+	},
 	
 	/**
 	 * Returns whether the input interface is loaded currently

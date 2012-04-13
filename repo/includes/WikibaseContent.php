@@ -138,7 +138,7 @@ class WikibaseContent extends Content {
         
         $html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
         $html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
-		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
+        $html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
         $html .= Html::closeElement('div');
 
         $htmlTable = '';
@@ -148,7 +148,7 @@ class WikibaseContent extends Content {
             $htmlTable .= Html::openElement( 'tr' );
             $htmlTable .= Html::element( 'td', null, $language );
             $htmlTable .= Html::openElement ( 'td' );
-            $link = 'http://'.$language.'.wikipedia.org/'.$value;
+            $link = 'http://'.$language.'.wikipedia.org/wiki/'.$value;
             $htmlTable .= Html::element( 'a', array( 'href' => $link ), $value );
             $htmlTable .= Html::closeElement( 'td' );
             $htmlTable .= Html::closeElement( 'tr' );

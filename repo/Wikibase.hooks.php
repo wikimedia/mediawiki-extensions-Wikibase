@@ -24,10 +24,10 @@ final class WikibaseHooks {
 	 * @return true
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
-//		$updater->addExtensionTable(
-//			'',
-//			dirname( __FILE__ ) . '/sql/Wikibase.sql'
-//		);
+		$updater->addExtensionTable(
+			'wb_items_per_site',
+			dirname( __FILE__ ) . '/sql/Wikibase.sql'
+		);
 
 		return true;
 	}
@@ -47,6 +47,18 @@ final class WikibaseHooks {
 
 		//$files[] = $testDir . '.php';
 
+		return true;
+	}
+
+	/**
+	 * In Wikidata namespace, page content language is the same as the current user language.
+	 * @author	Nikola Smolenski
+	 */
+	public static function onPageContentLanguage( $title, &$pageLang, $wgLang ) {
+		global $wgNamespaceContentModels;
+		if( $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE ) {
+			$pageLang = $wgLang;
+		}
 		return true;
 	}
 

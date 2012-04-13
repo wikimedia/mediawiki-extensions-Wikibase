@@ -28,7 +28,12 @@ class WBSettings {
 	 */
 	protected static function getDefaultSettings() {
 		return array(
-			'serializationFormat' => 'application/json', // alternative: application/vnd.php.serialized
+			// alternative: application/vnd.php.serialized
+			'serializationFormat' => 'application/json',
+
+			// Disables token and post requirements in the API to
+			// facilitate testing, do not turn on in production!
+			'apiInDebug' => false,
 		);
 	}
 

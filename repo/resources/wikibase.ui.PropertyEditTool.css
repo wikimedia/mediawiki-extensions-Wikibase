@@ -23,10 +23,6 @@
 	margin-bottom: 0 !important;
 }
 
-.mw-content-rtl .wb-property-container-key, .mw-content-rtl .wb-property-container-value {
-	float:right;
-}
-
 .mw-content-rtl .wb-ui-propertyedittoolbar {
 	padding-top:5px;
 	display:inline-block;
@@ -36,24 +32,32 @@
 	float:right;
 }
 
-.firstHeading {
-	display:inline-block;
-}
-
 .firstHeading div {
 	font-size: 0.5em;
 }
 
 .wb-property-container {
-	margin-top:-1em;
+	display:inline-block;
+	margin-top:.3em;
 }
 
-.ltr .wb-property-container-value {
+.wb-property-container-value {
 	background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) left  no-repeat;
 	padding: 5px 0 0 35px;
 }
 
 .rtl .wb-property-container-value {
-	background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
-	padding: 5px 35px 0 0;
+	background-image: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png);
+}
+
+.mw-jump, #contentSub {
+	display:none;
+}
+
+.tipsy-ne {
+	padding-top:12px;
+}
+
+.tipsy-ne .tipsy-arrow {
+	background-image:url(images/tipsy-arrow-n.gif);
 }

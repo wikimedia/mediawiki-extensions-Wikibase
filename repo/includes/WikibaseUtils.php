@@ -32,13 +32,13 @@ final class WikibaseUtils {
 	}
 
 	/**
-	 * Returns the identifiers of the wikis supported by the Wikibase instance.
+	 * Returns the identifiers of the sites supported by the Wikibase instance.
 	 *
 	 * @since 0.1
 	 *
 	 * @return array
 	 */
-	public static function getWikiIdentifiers() {
+	public static function getSiteIdentifiers() {
 		return array(
 			// TODO: figure out how to best do this.
 			// Should probably be a setting, since we do not want to force WP stuff.
