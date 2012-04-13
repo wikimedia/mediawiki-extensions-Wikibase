@@ -138,7 +138,7 @@ class WikibaseContent extends Content {
         
         $html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
         $html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
-		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
+        $html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
         $html .= Html::closeElement('div');
 
         $htmlTable = '';
