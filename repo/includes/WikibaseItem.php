@@ -237,16 +237,25 @@ class WikibaseItem {
 			__METHOD__
 		);
 
-		// TODO
-		foreach ( array() as $siteId => $pageName ) {
+		$descriptions = $this->getDescriptions();
+		$labels = $this->getLabels();
+
+		foreach ( array_unique( array_merge( array_keys( $descriptions ), array_keys( $labels ) ) ) as $langCode ) {
+			$fieldValues = array( 'tpl_language' => $langCode );
+
+			if ( array_key_exists( $langCode, $descriptions ) ) {
+				$fieldValues['tpl_description'] = $descriptions[$langCode];
+			}
+
+			if ( array_key_exists( $langCode, $labels ) ) {
+				$fieldValues['tpl_label'] = $labels[$langCode];
+			}
+
 			$success = $dbw->insert(
 				'wb_texts_per_lang',
 				array_merge(
 					$idField,
-					array(
-						'ips_site_id' => $siteId,
-						'ips_site_page' => $pageName,
-					)
+					$fieldValues
 				),
 				__METHOD__
 			) && $success;
@@ -310,6 +319,40 @@ class WikibaseItem {
 			'language' => $langCode,
 			'value' => $value,
 		);
+	}
+
+	public function getDescriptions( array $languages = null ) {
+		return $this->getMultilangTexts( 'description', $languages );
+	}
+
+	public function getLabels( array $languages = null ) {
+		return $this->getMultilangTexts( 'label', $languages );
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @param string $fieldKey
+	 * @paran array|null $languages
+	 *
+	 * @return array
+	 */
+	protected function getMultilangTexts( $fieldKey, array $languages = null ) {
+		$textList = $this->data[$fieldKey];
+
+		if ( !is_null( $languages ) ) {
+			$textList = array_filter( $textList, function( $textData ) use ( $languages ) {
+				return in_array( $textData['language'], $languages );
+			} );
+		}
+
+		$texts = array();
+
+		foreach ( $textList as $languageCode => $textData ) {
+			$texts[$languageCode] = $textData['value'];
+		}
+
+		return $texts;
 	}
 
 	/**
