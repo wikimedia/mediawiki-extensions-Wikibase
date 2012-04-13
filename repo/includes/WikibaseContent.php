@@ -3,10 +3,6 @@
 /**
  * Structured data content.
  *
- * TODO: describe exact purpose
- * TODO: don't we want to have a context here? would seem so since we are creating HTML
- * TODO: do we actually want to create HTML here?
- *
  * @since 0.1
  *
  * @file WikibaseContent.php
@@ -16,167 +12,113 @@
  */
 class WikibaseContent extends Content {
 
-	/**
-	 * @since 0.1
-	 * @var WikibaseItem
-	 */
-	protected $item;
-	
-	public function __construct( array $data ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE );
-		$this->item = WikibaseItem::newFromArray( $data );
-	}
+    const TYPE_TEXT = 'text';
+    const TYPE_SCALAR = 'scalar'; # unit, precision, point-in-time
+    const TYPE_DATE = 'date';
+    const TYPE_TERM = 'term'; # lang, pronunciation
+    const TYPE_ENTITY_REF = 'ref';
 
-	/**
-	 * Returns the WikibaseItem part of this WikibaseContent.
-	 *
-	 * @since 0.1
-	 *
-	 * @return WikibaseItem $item
-	 */
-	public function getItem() {
-		return $this->item;
-	}
+    const PROP_LABEL = 'label';
+    const PROP_DESCRIPTION = 'description';
+    const PROP_ALIAS = 'alias';
 
-	/**
-	 * Sets the WikibaseItem part of this WikibaseContent.
-	 *
-	 * @since 0.1
-	 *
-	 * @param WikibaseItem $item
-	 */
-	public function setItem( WikibaseItem $item ) {
-		$this->item = $item;
-	}
     public function __construct( $data ) {
-        parent::__construct( CONTENT_MODEL_WIKIBASE );
+        parent::__construct( CONTENT_MODEL_WIKIDATA );
 
-	/**
-	 * @return String a string representing the content in a way useful for building a full text search index.
-	 *		 If no useful representation exists, this method returns an empty string.
-	 */
-	public function getTextForSearchIndex() {
-		return ''; #TODO: recursively collect all values from all properties.
-	}
+        #TODO: assert $data is an array!
+        $this->mData = $data;
+    }
 
-	/**
-	 * @return String the wikitext to include when another page includes this  content, or false if the content is not
-	 *		 includable in a wikitext page.
-	 */
-	public function getWikitextForTransclusion() {
-		return false;
-	}
+    /**
+     * @return String a string representing the content in a way useful for building a full text search index.
+     *         If no useful representation exists, this method returns an empty string.
+     */
+    public function getTextForSearchIndex() {
+        return ''; #TODO: recursively collect all values from all properties.
+    }
 
-	/**
-	 * Returns a textual representation of the content suitable for use in edit summaries and log messages.
-	 *
-	 * @param int $maxlength maximum length of the summary text
-	 * @return String the summary text
-	 */
-	public function getTextForSummary( $maxlength = 250 ) {
-		return $this->item->getDescription( $GLOBALS['wgLang'] );
-	}
+    /**
+     * @return String the wikitext to include when another page includes this  content, or false if the content is not
+     *         includable in a wikitext page.
+     */
+    public function getWikitextForTransclusion() {
+        return false;
+    }
 
-	/**
-	 * Returns native represenation of the data. Interpretation depends on the data model used,
-	 * as given by getDataModel().
-	 *
-	 * @return mixed the native representation of the content. Could be a string, a nested array
-	 *		 structure, an object, a binary blob... anything, really.
-	 */
-	public function getNativeData() {
-		return $this->item->toArray();
-	}
+    /**
+     * Returns a textual representation of the content suitable for use in edit summaries and log messages.
+     *
+     * @param int $maxlength maximum length of the summary text
+     * @return String the summary text
+     */
+    public function getTextForSummary( $maxlength = 250 ) {
+        return $this->getDescription(); // FIXME: missing arg
+    }
 
-	/**
-	 * returns the content's nominal size in bogo-bytes.
-	 *
-	 * @return int
-	 */
-	public function getSize()  {
-		return strlen( serialize( $this->item->toArray() ) ); #TODO: keep and reuse value, content object is immutable!
-	}
+    /**
+     * Returns native represenation of the data. Interpretation depends on the data model used,
+     * as given by getDataModel().
+     *
+     * @return mixed the native representation of the content. Could be a string, a nested array
+     *         structure, an object, a binary blob... anything, really.
+     */
+    public function getNativeData() {
+        return $this->mData;
+    }
 
-	/**
-	 * Returns true if this content is countable as a "real" wiki page, provided
-	 * that it's also in a countable location (e.g. a current revision in the main namespace).
-	 *
-	 * @param boolean $hasLinks: if it is known whether this content contains links, provide this information here,
-	 *						to avoid redundant parsing to find out.
-	 * @return boolean
-	 */
-	public function isCountable( $hasLinks = null ) {
-		// TODO: implement
-		return false;
-		//return !empty( $this->data[ WikibaseContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
-	}
+    /**
+     * returns the content's nominal size in bogo-bytes.
+     *
+     * @return int
+     */
+    public function getSize()  {
+        return strlen( serialize( $this->mData ) ); #TODO: keep and reuse value, content object is immutable!
+    }
 
-	/**
-	 * @return boolean
-	 */
-	public function isEmpty()  {
-		// TODO: might want to have better handling for this.
-		$data = $this->item->toArray();
-		return empty( $data );
-	}
+    /**
+     * Returns true if this content is countable as a "real" wiki page, provided
+     * that it's also in a countable location (e.g. a current revision in the main namespace).
+     *
+     * @param $hasLinks Bool: if it is known whether this content contains links, provide this information here,
+     *                        to avoid redundant parsing to find out.
+     */
+    public function isCountable( $hasLinks = null ) {
+        return !empty( $this->mData[ WikibaseContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
+    }
 
-	/**
-	 * @param null|Title $title
-	 * @param null $revId
-	 * @param null|ParserOptions $options
-	 *
-	 * @return ParserOutput
-	 */
-	public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL )  {
-		global $wgLang;
+    public function isEmpty()  {
+        return empty( $this->mData );
+    }
 
-		// FIXME: StubUserLang::_unstub() not yet called in certain cases, dummy call to init Language object to $wgLang
-		// TODO: use $options->getTargetLanguage() ?
-		$wgLang->getCode();
+    /**
+     * @param null|Title $title
+     * @param null $revId
+     * @param null|ParserOptions $options
+     * @return ParserOutput
+     */
+    public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL )  {
+        global $wgLang;
 
-		$parserOutput = new ParserOutput( $this->generateHtml( $wgLang ) );
+        // FIXME: StubUserLang::_unstub() not yet called in certain cases, dummy call to init Language object to $wgLang
+        $wgLang->getCode();
 
-		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this->item, $title ) );
+        $html = $this->generateHtml( $wgLang );
+        $po = new ParserOutput( $html );
+		
+		
+		//$html = Html::rawElement('table', array('class' => 'wikitable'), $html);
+        //$po = new ParserOutput( $html );
 
-		return $parserOutput;
-	}
+        $labels = array(
+            "de" => $title->getText() . " in German",
+            "en" => $title->getText() . " in English"
+        );
 
-	/**
-	 * TODO: we sure we want to do this here? I'd expect to do this in some kind of view action...
-	 * TODO: we can't just point to $lang.wikipedia!
-	 *
-	 * @param null|Language $lang
-	 * @return String
-	 */
-	private function generateHtml( Language $lang = null ) {
-		// TODO: generate sensible HTML!
-		$html = '';
-		$label =  $this->item->getLabel( $lang );
-		if ( $label === null ) {
-			$label = '';
-		}
-		$description =  $this->item->getDescription( $lang );
-		if ( $description === null ) {
-			$description = '';
-		}
-		$html .= Html::element( 'h1', null, $label );
-		$html .= Html::element( 'p', null, $description );
-		$html .= Html::element( 'hr', null, null );
-		$htmlTable = '';
+        $label_update = new WikibaseLabelTableUpdate( $title, $labels );
+        $po->addSecondaryDataUpdate( $label_update );
 
-		foreach ( $this->item->getTitles( $lang ) AS $language => $value ) {
-			$htmlTable .= "\t\t";
-			$htmlTable .= Html::openElement( 'tr' );
-			$htmlTable .= Html::element( 'td', null, $language );
-			$htmlTable .= Html::openElement ( 'td' );
-			$link = 'http://'.$language.'.wikipedia.org/'.$value;
-			$htmlTable .= Html::element( 'a', array( 'href' => $link ), $value );
-			$htmlTable .= Html::closeElement( 'td' );
-			$htmlTable .= Html::closeElement( 'tr' );
-			$htmlTable .= "\n";
-		}
-		$htmlTable = Html::rawElement( 'table', array( 'class' => 'wikitable'), $htmlTable );
-		$html .= $htmlTable;
+        return $po;
+    }
 
     /**
      * @param null|Language $lang
@@ -201,8 +143,127 @@ class WikibaseContent extends Content {
 
         $htmlTable = '';
 
-		return $html;
-	}
+        foreach ( $this->getTitles( $lang ) AS $language => $value ) {
+            $htmlTable .= "\t\t";
+            $htmlTable .= Html::openElement( 'tr' );
+            $htmlTable .= Html::element( 'td', null, $language );
+            $htmlTable .= Html::openElement ( 'td' );
+            $link = 'http://'.$language.'.wikipedia.org/wiki/'.$value;
+            $htmlTable .= Html::element( 'a', array( 'href' => $link ), $value );
+            $htmlTable .= Html::closeElement( 'td' );
+            $htmlTable .= Html::closeElement( 'tr' );
+            $htmlTable .= "\n";
+        }
+        $htmlTable = Html::rawElement( 'table', array( 'class' => 'wikitable'), $htmlTable );
+        $html .= $htmlTable;
 
+        // debug output
+        $htmlTable = '';
+        $data = $this->getNativeData();
+        $flat = WikibaseContentHandler::flattenArray( $data );
+        foreach ( $flat as $k => $v ) {
+            $htmlTable .= "\t\t";
+            $htmlTable .= Html::openElement( 'tr' );
+            $htmlTable .= Html::element( 'td', null, $k );
+            $htmlTable .= Html::element( 'td', null, $v );
+            $htmlTable .= Html::closeElement( 'tr' );
+            $htmlTable .= "\n";
+        }
+        $htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
+        $html .= $htmlTable;
+
+        return $html;
+    }
+
+    #=================================================================================================================
+
+    public function getPropertyNames() {
+        //TODO: implement
+    }
+
+    public function getSystemPropertyNames() {
+        //TODO: implement
+    }
+
+    public function getEditorialPropertyNames() {
+        //TODO: implement
+    }
+
+    public function getStatementPropertyNames() {
+        //TODO: implement
+    }
+
+    public function getPropertyMultilang( $name, $languages = null ) {
+        //TODO: implement
+    }
+
+    public function getProperty( $name, $lang = null ) {
+        //TODO: implement
+    }
+
+    public function getPropertyType( $name ) {
+        //TODO: implement
+    }
+
+    public function isStatementProperty( $name ) {
+        //TODO: implement
+    }
+
+    /**
+     * @param Language $lang
+     * @return String|null description
+     */
+    public function getDescription( Language $lang ) {
+        $data = $this->getNativeData();
+        if ( !isset( $data['description'][$lang->getCode()] ) ) {
+            return null;
+        } else {
+            return $data['description'][$lang->getCode()]['value'];
+        }
+    }
+
+    /**
+     * @param Language $lang
+     * @return String|null label
+     */
+    public function getLabel( Language $lang ) {
+        $data = $this->getNativeData();
+        if ( !isset( $data['label'][$lang->getCode()] ) ) {
+            return null;
+        } else {
+            return $data['label'][$lang->getCode()]['value'];
+        }
+    }
+
+    /**
+     * @param Language $lang
+     * @return array titles (languageCode => value)
+     */
+    public function getTitles( Language $lang ) {
+        $data = $this->getNativeData();
+        $titles = array();
+        foreach ( $data['titles'] as $langCode => $title ) {
+            $titles[$langCode] = $title['value'];
+        }
+        return $titles;
+    }
 }
 
+class WikibaseLabelTableUpdate extends SecondaryDataUpdate {
+
+    public function __construct( Title $title, $labels ) {
+        $this->title = $title;
+        $this->labels = $labels;
+    }
+
+    /**
+     * Perform update.
+     */
+    public function doUpdate() {
+        $s = $this->title->getDBkey() . ": " . json_encode( $this->labels );
+        $s .= "\n";
+
+        file_put_contents( "/tmp/updatetest.txt", $s, FILE_APPEND );
+    }
+
+}
