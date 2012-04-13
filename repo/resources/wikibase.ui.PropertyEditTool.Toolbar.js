@@ -87,9 +87,6 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		}		
 		this._subject.append( "]" );
 		
-		// if this is a right-to-left language, prepend the toolbar
-		// FIXME: there might be a nicer way to check for this, also this might be language settings
-		//        and context related later!
 		this._parent.append( this._subject );
 	},
 	

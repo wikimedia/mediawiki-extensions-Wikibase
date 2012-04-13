@@ -95,7 +95,7 @@ $wgAPIModules['wbremovealias'] 						= 'ApiWikibaseRemoveAlias';
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
-
+$wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 
 
 // Resource loader modules
@@ -136,8 +136,8 @@ unset( $moduleTemplate );
 
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' );
-$wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikibaseContentHandler';
+define( 'CONTENT_MODEL_WIKIBASE', 'wikidata' );
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
 
 $egWBSettings = array();

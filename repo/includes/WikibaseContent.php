@@ -23,7 +23,7 @@ class WikibaseContent extends Content {
     const PROP_ALIAS = 'alias';
 
     public function __construct( $data ) {
-        parent::__construct( CONTENT_MODEL_WIKIDATA );
+        parent::__construct( CONTENT_MODEL_WIKIBASE );
 
         #TODO: assert $data is an array!
         $this->mData = $data;
