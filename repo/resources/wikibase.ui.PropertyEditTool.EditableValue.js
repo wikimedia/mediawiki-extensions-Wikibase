@@ -154,6 +154,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				? initialValue
 				: this.getValue();
 		
+		/*
+		if( save ) {
+			this.doApiCall();
+		}
+		*/
+		
 		inputBox.empty().remove(); // remove input interface		
 		this._subject.text( $value );
 		
@@ -161,6 +167,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		
 		// any change at all compared to initial value?
 		return initialValue !== $value;
+	},
+
+	/**
+	 * just doing a test api call
+	 */
+	doApiCall: function() {
+		mw.loader.using( 'mediawiki.api', function() {
+			var localApi = new mw.Api();
+			localApi.post( { action: 'query', meta: 'userinfo' }, { ok: function() { console.log( arguments ); } } );
+		} );
 	},
 	
 	/**
