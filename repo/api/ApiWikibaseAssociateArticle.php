@@ -120,7 +120,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 	}
 	
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/API:Wikidata#AssociateArticle';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbassociatearticle';
 	}
 	
 

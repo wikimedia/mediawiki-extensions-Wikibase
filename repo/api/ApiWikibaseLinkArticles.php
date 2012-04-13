@@ -85,7 +85,7 @@ class ApiWikibaseLinkArticles extends ApiBase {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/API:Wikidata#LinkArticles';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wblinkarticles';
 	}
 
 	public function getVersion() {
