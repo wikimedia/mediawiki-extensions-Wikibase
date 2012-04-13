@@ -275,10 +275,13 @@ class WikibaseItem {
 			$this->data['titles'][$siteId] = array();
 		}
 
-		$success = $update || !array_key_exists( 'TODO', $this->data['titles'][$siteId] );
+		$success = $update || !array_key_exists( $siteId, $this->data['titles'][$siteId] );
 
 		if ( $success ) {
-			$this->data['titles'][$siteId]['TODO'] = $pageName;
+			$this->data['titles'][$siteId][$siteId] = array(
+				'site' => $siteId,
+				'title' => $pageName
+			);
 		}
 
 		return $success;
@@ -382,41 +385,62 @@ class WikibaseItem {
 	}
 
 	/**
-	 * @param Language $lang
-	 * @return String|null description
+	 * Returns the description of the item in the language with the provided code,
+	 * or false in cases there is none in this language.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $langCode
+	 *
+	 * @return string|false
 	 */
-	public function getDescription( Language $lang ) {
+	public function getDescription( $langCode ) {
 		$data = $this->data;
-		if ( !isset( $data['description'][$lang->getCode()] ) ) {
+
+		if ( !isset( $data['description'][$langCode] ) ) {
 			return null;
 		} else {
-			return $data['description'][$lang->getCode()]['value'];
+			return $data['description'][$langCode]['value'];
 		}
 	}
 
 	/**
-	 * @param Language $lang
-	 * @return String|null label
+	 * Returns the label of the item in the language with the provided code,
+	 * or false in cases there is none in this language.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $langCode
+	 *
+	 * @return string|false
 	 */
-	public function getLabel( Language $lang ) {
+	public function getLabel( $langCode ) {
 		$data = $this->data;
-		if ( !isset( $data['label'][$lang->getCode()] ) ) {
+
+		if ( !isset( $data['label'][$langCode] ) ) {
 			return null;
 		} else {
-			return $data['label'][$lang->getCode()]['value'];
+			return $data['label'][$langCode]['value'];
 		}
 	}
 
 	/**
-	 * @param Language $lang
-	 * @return array titles (languageCode => value)
+	 * Returns the site links in an associative array with the following format:
+	 * site id (str) => page title (str)
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
 	 */
-	public function getTitles( Language $lang ) {
+	public function getSiteLinks() {
 		$data = $this->data;
+
 		$titles = array();
-		foreach ( $data['titles'] as $langCode => $title ) {
-			$titles[$langCode] = $title['value'];
+
+		foreach ( $data['links'] as $siteId => $linkData ) {
+			$titles[$siteId] = $linkData['title'];
 		}
+
 		return $titles;
 	}
 

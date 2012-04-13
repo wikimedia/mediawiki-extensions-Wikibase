@@ -34,25 +34,33 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			/* WikibaseItem */ $item = $content->getItem();
-			$success = $item->addSiteLink( $params['site'], $params['title'] );
+			$success = $item->addSiteLink( $params['site'], $params['title'], !$params['noupdate'] );
 
 			if ( $success ) {
 				$content->setItem( $item );
-				$page->doEditContent( $content, $params['summary'] );
+				$status = $page->doEditContent( $content, $params['summary'] );
+				$success = $status->isOk();
 			}
 			else {
-				// TODO: error message
+				$this->dieUsage( wfMsg( 'wikibase-api-link-exists' ), 'link-exists' );
 			}
 		}
 		else {
-			// TODO: error message
+			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
 		}
 
 		$this->getResult()->addValue(
 			null,
 			'success',
-			$success
+			(int)$success
 		);
+	}
+
+	public function getPossibleErrors() {
+		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
+			array( 'code' => 'link-exists', 'info' => 'An article on the specified wiki is already linked' ),
+		) );
 	}
 
 	public function needsToken() {
@@ -84,6 +92,10 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_DFLT => __CLASS__, // TODO
 			),
+			'noupdate' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false,
+			),
 		);
 	}
 
@@ -94,6 +106,7 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 			'title' => 'Title of the page to associate',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
 			'summary' => 'Summary for the edit',
+			'noupdate' => 'Indicates that if a link to the specified site already exists, it should not be updated to use the provided page',
 		);
 	}
 
@@ -101,11 +114,6 @@ class ApiWikibaseAssociateArticle extends ApiBase {
 		return array(
 			'API module to associate an artcile on a wiki with a Wikibase item.'
 		);
-	}
-
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-		) );
 	}
 
 	protected function getExamples() {
