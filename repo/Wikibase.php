@@ -88,16 +88,10 @@ $wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseIte
 // API module registration
 $wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
-$wgAPIModules['wbassociatearticle'] 				= 'ApiWikibaseAssociateArticle';
 $wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
 $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
-$wgAPIModules['wbaddsitelink'] 						= 'ApiWikibaseAddSiteLink';
-$wgAPIModules['wbremovesitelink'] 					= 'ApiWikibaseRemoveSiteLink';
-
-//$wgAPIListModules['wbdescriptions'] 				= 'ApiWikibaseQueryDescriptions';
-//$wgAPIListModules['wblabels'] 						= 'ApiWikibaseQueryLabels';
-//$wgAPIListModules['wbaliases'] 						= 'ApiWikibaseQueryAliases';
+$wgAPIModules['wbsitelink'] 						= 'ApiWikibaseSiteLink';
 
 
 

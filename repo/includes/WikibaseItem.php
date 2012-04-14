@@ -439,7 +439,13 @@ class WikibaseItem {
 	 * @return boolean Success indicator
 	 */
 	public function removeSiteLink( $siteId, $pageName ) {
-		// TODO: update blob
+		$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId]['title'] === $pageName;
+
+		if ( $success ) {
+			unset( $this->data['links'][$siteId] );
+		}
+
+		return $success;
 
 //		$dbw = wfGetDB( DB_MASTER );
 //

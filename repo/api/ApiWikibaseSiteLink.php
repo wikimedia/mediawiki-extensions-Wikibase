@@ -4,8 +4,6 @@
  * API module to associate a page on a site with a Wikibase item or remove an already made such association.
  * Requires API write mode to be enabled.
  *
- * TODO: putting add and remove in one module did not make sense after all, so pull appart again...
- *
  * @since 0.1
  *
  * @file ApiWikibaseSiteLink.php
@@ -29,7 +27,12 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		return $item->addSiteLink( $params['site'], $params['title'], !$params['noupdate'] );
+		if ( $params['change'] === 'add' ) {
+			return $item->addSiteLink( $params['site'], $params['title'], !$params['noupdate'] );
+		}
+		else {
+			return $item->removeSiteLink( $params['site'], $params['title'] );
+		}
 	}
 
 	public function getPossibleErrors() {
@@ -43,9 +46,17 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 			'badge' => array(
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
-			'summary' => array(
+			'id' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_REQUIRED => true,
+			),
+			'site' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_REQUIRED => true,
+			),
+			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_DFLT => __CLASS__, // TODO
+				ApiBase::PARAM_REQUIRED => true,
 			),
 			'noupdate' => array(
 				ApiBase::PARAM_TYPE => 'boolean',
