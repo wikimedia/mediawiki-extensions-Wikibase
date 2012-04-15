@@ -42,8 +42,6 @@ class ApiWikibaseSetLabel extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'test' => array( // TODO: Remove this when we go into production
-			),
 		) );
 	}
 
@@ -52,7 +50,6 @@ class ApiWikibaseSetLabel extends ApiWikibaseModifyItem {
 			'id' => 'The ID of the item to set a label for',
 			'language' => 'Language the label is in',
 			'label' => 'The value to set for the label',
-			'test' => 'Add some dummy data for testing purposes', // TODO: Remove this when we go into production
 		) );
 	}
 
@@ -71,8 +68,6 @@ class ApiWikibaseSetLabel extends ApiWikibaseModifyItem {
 		return array(
 			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia'
 				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language',
-			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia&test'
-				=> 'Fake a set description, always returns the same values',
 		);
 	}
 

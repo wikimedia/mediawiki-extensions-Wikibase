@@ -42,8 +42,6 @@ class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'test' => array( // TODO: Remove this when we go into production
-			),
 		) );
 	}
 
@@ -52,7 +50,6 @@ class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 			'id' => 'The ID of the item to set a description for',
 			'description' => 'Language the description is in',
 			'label' => 'The value to set for the description',
-			'test' => 'Add some dummy data for testing purposes', // TODO: Remove this when we go into production
 		) );
 	}
 
@@ -71,8 +68,6 @@ class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 		return array(
 			'api.php?action=wbsetdescription&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "42" as a decription in English language',
-			'api.php?action=wbsetdescription&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit&test'
-				=> 'Fake a set description, always returns the same values',
 		);
 	}
 	
