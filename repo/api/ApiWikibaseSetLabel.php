@@ -2,6 +2,7 @@
 
 /**
  * API module to set a label for a Wikibase item.
+ * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
@@ -11,49 +12,48 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetLabel extends ApiBase {
+class ApiWikibaseSetLabel extends ApiWikibaseModifyItem {
 
 	/**
-	 * Main method. Does the actual work and sets the result.
+	 * Actually modify the item.
 	 *
 	 * @since 0.1
+	 *
+	 * @param WikibaseItem $item
+	 * @param array $params
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function execute() {
-		// TODO: implement
-	}
+	protected function modifyItem( WikibaseItem &$item, array $params ) {
+		$item->setLabel( $params['language'], $params['label'] );
 
-	public function needsToken() {
-		return true;
-	}
-
-	public function mustBePosted() {
 		return true;
 	}
 
 	public function getAllowedParams() {
-		return array(
-			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true,
-			),
+		return array_merge( parent::getAllowedParams(), array(
 			'language' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'label' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-		);
+			'test' => array( // TODO: Remove this when we go into production
+			),
+		) );
 	}
 
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'id' => 'The ID of the item to set a label for',
 			'language' => 'Language the label is in',
 			'label' => 'The value to set for the label',
-		);
+			'test' => 'Add some dummy data for testing purposes', // TODO: Remove this when we go into production
+		) );
 	}
 
 	public function getDescription() {
@@ -69,10 +69,17 @@ class ApiWikibaseSetLabel extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetlabel&id=42&language=en&label=Wikipedia',
+			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia'
+				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language',
+			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia&test'
+				=> 'Fake a set description, always returns the same values',
 		);
 	}
 
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsetlabel';
+	}
+	
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

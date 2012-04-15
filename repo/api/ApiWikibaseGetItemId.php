@@ -11,9 +11,13 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 class ApiWikibaseGetItemId extends ApiBase {
 
+	public function __construct( $main, $action ) {
+		parent::__construct( $main, $action );
+	}
 
 	/**
 	 * Main method. Does the actual work and sets the result.
@@ -26,28 +30,28 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getAllowedParams() {
 		return array(
-			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
+			'site' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_REQUIRED => true,
+			),
+			'title' => array(
+				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 				ApiBase::PARAM_ISMULTI => true,
-			),
-			'language' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
-				ApiBase::PARAM_REQUIRED => true,
 			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
-			'title' => 'The title of the Wikipedia page',
-			'language' => 'Language code of the Wikipedia the title belongs to',
+			'title' => 'The title of the page',
+			'site' => 'Site identifier',
 		);
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to obtain the Wikibase ids of one or more pages on a Wikipedia.'
+			'API module to obtain the Wikibase ids of one or more pages on the specified site.'
 		);
 	}
 
@@ -58,9 +62,15 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitemid&title=Wikimedia&language=en',
-			'api.php?action=wbgetitem&title=Wikimedia|Wikipedia&language=en',
+			'api.php?action=wbgetitemid&site=en&title=Berlin'
+				=> 'Get item id for page "Berlin" on the site identifierd by "en"',
+			'api.php?action=wbgetitemid&site=en&title=Berlin|Foobar'
+				=> 'Get item id for the pages "Berlin" and "Foobar" on the site identifierd by "en"',
 		);
+	}
+	
+	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/API:Wikidata#getitemid';
 	}
 
 	public function getVersion() {

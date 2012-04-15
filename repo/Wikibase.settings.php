@@ -28,7 +28,18 @@ class WBSettings {
 	 */
 	protected static function getDefaultSettings() {
 		return array(
-			'serializationFormat' => 'application/json', // alternative: application/vnd.php.serialized
+			// alternative: application/vnd.php.serialized
+			'serializationFormat' => 'application/json',
+
+			// Disables token and post requirements in the API to
+			// facilitate testing, do not turn on in production!
+			'apiInDebug' => false,
+
+			'siteIdentifiers' => array(
+				'en' => 'https://en.wikipedia.org/wiki/$1',
+				'de' => 'https://de.wikipedia.org/wiki/$1',
+				'nl' => 'https://nl.wikipedia.org/wiki/$1',
+			),
 		);
 	}
 

@@ -30,6 +30,11 @@ if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c becaus
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.' );
 }
 
+// TODO: enable
+//if ( !array_key_exists( 'CountryNames', $wgAutoloadClasses ) ) { // No version constant to check against :/
+//	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:CLDR">CLDR</a> extension.' );
+//}
+
 define( 'WB_VERSION', '0.1 alpha' );
 
 $wgExtensionCredits['other'][] = array(
@@ -59,24 +64,34 @@ $wgAutoloadClasses['WikibaseHooks'] 				= $dir . 'Wikibase.hooks.php';
 // api
 $wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAssociateArticle.php';
+$wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'api/ApiWikibaseLinkArticles.php';
 $wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
+$wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
+$wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
+$wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'api/ApiWikibaseModifyItem.php';
+$wgAutoloadClasses['ApiWikibaseSiteLink'] 			= $dir . 'api/ApiWikibaseSiteLink.php';
+
+
 
 // includes
 $wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 		= $dir . 'includes/WikibaseDifferenceEngine.php';
 $wgAutoloadClasses['WikibaseContent'] 				= $dir . 'includes/WikibaseContent.php';
 $wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
+$wgAutoloadClasses['WikibaseUtils'] 				= $dir . 'includes/WikibaseUtils.php';
+$wgAutoloadClasses['WikibaseItem'] 					= $dir . 'includes/WikibaseItem.php';
+$wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseItemStructuredSave.php';
 
 
 
 // API module registration
 $wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
-$wgAPIModules['wbassociatearticle'] 				= 'ApiWikibaseSetWikipediaTitle';
-$wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
+$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
 $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
+$wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
+$wgAPIModules['wbsitelink'] 						= 'ApiWikibaseSiteLink';
 
 
 
@@ -111,8 +126,9 @@ unset( $moduleTemplate );
 
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' );
-$wgContentHandlers[CONTENT_MODEL_WIKIDATA] = 'WikibaseContentHandler';
+define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
+define( 'CONTENT_MODEL_WIKIDATA', 'wikibase' ); // TODO: remove
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
 
 $egWBSettings = array();

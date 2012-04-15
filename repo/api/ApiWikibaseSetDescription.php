@@ -2,6 +2,7 @@
 
 /**
  * API module to set a description for a Wikibase item.
+ * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
@@ -11,49 +12,48 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetDescription extends ApiBase {
+class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 
 	/**
-	 * Main method. Does the actual work and sets the result.
+	 * Actually modify the item.
 	 *
 	 * @since 0.1
+	 *
+	 * @param WikibaseItem $item
+	 * @param array $params
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function execute() {
-		// TODO: implement
-	}
+	protected function modifyItem( WikibaseItem &$item, array $params ) {
+		$item->setDescription( $params['language'], $params['description'] );
 
-	public function needsToken() {
-		return true;
-	}
-
-	public function mustBePosted() {
 		return true;
 	}
 
 	public function getAllowedParams() {
-		return array(
-			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true,
-			),
+		return array_merge( parent::getAllowedParams(), array(
 			'language' => array(
-				ApiBase::PARAM_TYPE => array(), // TODO: language code list
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'description' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-		);
+			'test' => array( // TODO: Remove this when we go into production
+			),
+		) );
 	}
 
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'id' => 'The ID of the item to set a description for',
 			'description' => 'Language the description is in',
 			'label' => 'The value to set for the description',
-		);
+			'test' => 'Add some dummy data for testing purposes', // TODO: Remove this when we go into production
+		) );
 	}
 
 	public function getDescription() {
@@ -69,9 +69,17 @@ class ApiWikibaseSetDescription extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetdescription&id=42&language=en&description=An encyclopedia that everyone can edit',
+			'api.php?action=wbsetdescription&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit'
+				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "42" as a decription in English language',
+			'api.php?action=wbsetdescription&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit&test'
+				=> 'Fake a set description, always returns the same values',
 		);
 	}
+	
+   	public function getHelpUrls() {
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsetdescription';
+	}
+	
 
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
