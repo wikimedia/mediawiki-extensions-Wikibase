@@ -41,6 +41,17 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 		) );
 	}
 
+	/**
+	 * Make sure the required parameters are provided and that they are valid.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $params
+	 */
+	protected function validateParameters( array $params ) {
+		// Noop
+	}
+
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
 			'badge' => array(
