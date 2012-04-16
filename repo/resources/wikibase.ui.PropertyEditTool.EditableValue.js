@@ -110,8 +110,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'name': this._key,
 			'value': initText,
 			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._keyPressed, this ),
-			'keyup': jQuery.proxy( this._keyPressed, this )	// for escape key browser compability
+			'keypress': jQuery.proxy( this._keyPressed, this ), // todo: this shouldn't be used, keyup should work fine!
+			'keyup': jQuery.proxy( this._keyPressed, this ),	// for escape key browser compability
+			'focus': jQuery.proxy( this._onFocus, this ),
+			'blur': jQuery.proxy( this._onBlur, this )
 		} );
 		
 		this._subject.text( '' );
@@ -153,6 +155,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		else if( event.which == 27 ) {
 			this._toolbar.editGroup.btnCancel.doAction();
 		}
+	},
+	
+	_onFocus: function( event ) {
+		this._toolbar.editGroup.tooltip.show( true );
+	},
+	_onBlur: function( event ) {
+		this._toolbar.editGroup.tooltip.hide();
 	},
 	
 	/**

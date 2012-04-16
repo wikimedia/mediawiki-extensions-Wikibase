@@ -36,8 +36,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	/**
 	 * @var boolean used to determine if tooltip message is currently visible or not
 	 */
-	_isVisible: null,
-
+	_isVisible: false,
+	
+	_permanent: false,
+	
 	/**
 	 * Initializes the tooltip for the given element.
 	 * This should normally be called directly by the constructor.
@@ -45,9 +47,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	 * @param jQuery parent element
 	 */
 	_initElem: function( tooltipMessage ) {
-
 		// default tipsy configuration
-		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined) {
+		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
 			this._tipsyConfig = {
 				gravity: 'ne'
 			};
@@ -61,33 +62,50 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 			'gravity': this._tipsyConfig.gravity,
 			'trigger': 'manual'
 		} );
-		elem.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
-		elem.on( 'mouseout', jQuery.proxy( function() { this.hide(); }, this ) );
 
 		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, elem );
+		
+		this._toggleEvents( true );
+	},
+	
+	_toggleEvents: function( activate ) {
+		if ( activate ) {
+			this._elem.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
+			this._elem.on( 'mouseout', jQuery.proxy( function() { this.hide(); }, this ) );
+		} else {
+			this._elem.off( 'mouseover' );
+			this._elem.off( 'mouseout' );
+		}
 	},
 
 	/**
 	 * show tooltip
 	 *
-	 * @param boolean toggle between hover and manual (fixed)
+	 * @param boolean permanent whether tooltip should be displayed permanently until hide() is being
+	 *        called explicitly. false by default.
 	 */
-	show: function() {
+	show: function( permanent ) {
 		if ( !this._isVisible ) {
-			$(this._elem.children()[0]).tipsy( 'show' );
+			$( this._elem.children()[0] ).tipsy( 'show' );
 			this._isVisible = true;
+		}
+		if( permanent === true ) {
+			this._toggleEvents( false );
+			this._permanent = true;
 		}
 	},
 
 	/**
 	 * hide tooltip
-	 *
-	 * @param boolean toggle between hover and manual (fixed)
 	 */
-	hide: function() {
-		if ( this._isVisible ) {
-			$(this._elem.children()[0]).tipsy( 'hide' );
-			this._isVisible = false;
+	hide: function( ) {
+		if ( this._permanent && typeof this._elem.data( 'events' ) == 'undefined' || !this._permanent ) {
+			this._permanent = false;
+			this._toggleEvents( true );
+			if ( this._isVisible ) {
+				$( this._elem.children()[0] ).tipsy( 'hide' );
+				this._isVisible = false;
+			}
 		}
 	},
 
