@@ -79,8 +79,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
 			this._toolbar.editGroup.btnEdit.doAction();
+			this.removeFocus(); // but don't set focus there for now
 		}
 	},
+	
+	
 	
 	destroy: function() {
 		// TODO implement on demand
@@ -120,11 +123,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
         this._isInEditMode = true;
 		
 		this._inputRegistered(); // do this after setting _isInEditMode !
-        this._inputElem.focus();
-		
-		if( ! this.validate( initText ) ) {
-			// TODO: disable buttons!!!
-		}
+        this.setFocus();
 		
 		return true;
 	},
@@ -135,7 +134,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_inputRegistered: function() {
 		var disableSave = this.isEmpty();
-		var disableCancel = disableSave || ( this.getInitialValue() === '' )
+		var disableCancel = disableSave || ( ! this.validate( this.getInitialValue() ) );
 		
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
@@ -178,6 +177,24 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		
 		// any change at all compared to initial value?
 		return initialValue !== $value;
+	},
+	
+	/**
+	 * Sets the focus to the input interface
+	 */
+	setFocus: function() {
+		if( this._inputElem !== null ) {
+			this._inputElem.focus();
+		}
+	},
+	
+	/**
+	 * Removes the focus from the input interface
+	 */
+	removeFocus: function() {
+		if( this._inputElem !== null ) {
+			this._inputElem.blur();
+		}
 	},
 
 	/**

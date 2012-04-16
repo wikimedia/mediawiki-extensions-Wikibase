@@ -39,12 +39,47 @@ final class WikibaseUtils {
 	 * @return array
 	 */
 	public static function getSiteIdentifiers() {
-		return array(
-			// TODO: figure out how to best do this.
-			// Should probably be a setting, since we do not want to force WP stuff.
-			// Still might be good to have a WP list somewhere.
-			'en', 'de', 'nl'
-		);
+		static $ids = false;
+
+		if ( $ids === false ) {
+			$ids = array_keys( WBSettings::get( 'siteIdentifiers' ) );
+		}
+
+		return $ids;
+	}
+
+	/**
+	 * Returns the full url for the specified site.
+	 * A page can also be provided, which is then added to the url.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $siteId
+	 * @param string $pageTitle
+	 *
+	 * @return string|false
+	 */
+	public static function getSiteUrl( $siteId, $pageTitle = '' ) {
+		$ids = WBSettings::get( 'siteIdentifiers' );
+
+		if ( !array_key_exists( $siteId, $ids ) ) {
+			return false;
+		}
+
+		return str_replace( '$1', $pageTitle, $ids[$siteId] );
+	}
+
+	/**
+	 * Returns the WikiPage object for the item with provided id.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $itemId
+	 *
+	 * @return WikiPage
+	 */
+	public static function getWikiPageForId( $itemId ) {
+		return new WikiPage( Title::newFromText( 'Data:Q' . $itemId ) ); // TODO
 	}
 
 }
