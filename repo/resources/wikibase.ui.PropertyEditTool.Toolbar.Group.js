@@ -13,8 +13,8 @@
 /**
  * Represents a group of toolbar elements within a toolbar
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Group = function( editableValue ) {
-	window.wikibase.ui.PropertyEditTool.Toolbar.call( this, editableValue );
+window.wikibase.ui.PropertyEditTool.Toolbar.Group = function( toolbar ) {
+	window.wikibase.ui.PropertyEditTool.Toolbar.call( this, toolbar );
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
 $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
@@ -37,17 +37,29 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 	
 	_drawToolbarElements: function() {
 		for( var i in this._items ) {
-			if( i != 0 ) {
+			if( this.displayGroupSeparators && i != 0 ) {
 				this._elem.append( '|' );
 			}
 			this._elem.append( this._items[i]._elem );
 		}
 		
-		this._elem
-		.prepend( '[' )
-		.append( ']' );
-	}
+		if( this.displayGroupSeparators ) {
+			this._elem
+			.prepend( '[' )
+			.append( ']' );
+		}
+	},
 	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
+	/**
+	 * Defines whether the group should be displayed with separators "|" between ach items. In that case
+	 * everything will also be wrapped within "[" and "]".
+	 * @var bool
+	 */
+	displayGroupSeparators: true
 } );
 
 /**
@@ -86,11 +98,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 */
 	tooltip: null,
 	
+	innerGroup: null,
+	
 	/**
 	 * @param window.wikibase.ui.PropertyEditTool.EditableValue editableValue the editable value
 	 *        the toolbar should interact with.
 	 */
 	_init: function( editableValue ) {
+		//this._items = new Array();
+		
 		// the toolbar is placed besides the editable value itself:
 		var parent = editableValue._subject.parent();
 		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this, parent );
@@ -102,16 +118,20 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		// call prototypes base function to append toolbar itself:
 		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._initToolbar.call( this );
 		
+		// create a group inside the group so we can separate the tooltip visually
+		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group( [] );
+		this.addElement( this.innerGroup );
+		
+		var tipsyConfig = {
+			'gravity': 'ne'
+		};
+		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( 'specific message (to be inserted)', tipsyConfig );
+		
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.PropertyEditTool.Toolbar.Button;
 		
 		this.btnEdit = new button( window.mw.msg( 'wikibase-edit' ) );
 		this.btnEdit.onAction = this._editActionHandler();
-
-		var tipsyConfig = {
-			'gravity': 'ne'
-		};
-		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( 'specific message (to be inserted)', tipsyConfig );
 		
 		this.btnCancel = new button( window.mw.msg( 'wikibase-cancel' ) );
 		this.btnCancel.onAction = this._cancelActionHandler();
@@ -120,23 +140,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		this.btnSave.onAction = this._saveActionHandler();
 		
 		// add 'edit' button only for now:
-		this.addElement( this.btnEdit );
+		this.innerGroup.addElement( this.btnEdit );
 	},
 	
 	_editActionHandler: function() {
 		return $.proxy( function(){
 			this._editableValue.startEditing();
-			this.removeElement( this.btnEdit );
-			this.addElement( this.tooltip );
-			this.addElement( this.btnSave );
-			this.addElement( this.btnCancel );
+			this.addElement( this.tooltip, 0 );
+			this.innerGroup.removeElement( this.btnEdit );
+			this.innerGroup.addElement( this.btnSave );
+			this.innerGroup.addElement( this.btnCancel );
 		}, this );
 	},	
 	_cancelActionHandler: function() {
 		return $.proxy( function() {
 			this._leaveAction( false );
 		}, this );
-	},	
+	},
 	_saveActionHandler: function() {
 		return $.proxy( function() {
 			this._leaveAction( true );
@@ -145,10 +165,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	
 	_leaveAction: function( save ) {
 		this._editableValue.stopEditing( save );
-		this.removeElement( this.btnSave );
-		this.removeElement( this.btnCancel );
 		this.removeElement( this.tooltip );
-		this.addElement( this.btnEdit );		
-	}
+		this.innerGroup.removeElement( this.btnSave );
+		this.innerGroup.removeElement( this.btnCancel );
+		this.innerGroup.addElement( this.btnEdit );		
+	},
 	
+	/**
+	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.displayGroupSeparators
+	 */	
+	displayGroupSeparators: false
 } );

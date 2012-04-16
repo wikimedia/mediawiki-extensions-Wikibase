@@ -49,7 +49,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * Initializes the edit toolbar for the given element.
 	 * This should normally be called directly by the constructor.
 	 * 
-	 * @param parent the element holding the toolbar
+	 * @param jQuery parent the element holding the toolbar
 	 */
 	_init: function( parent ) {
 		if( this._parent !== null ) {
@@ -109,19 +109,23 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	/**
 	 * This will add a toolbar element, e.g. a label or a button to the toolbar at the given index.
 	 * 
-	 * @param elem
-	 * @param index TODO: not implemented yet
+	 * @param Object elem toolbar content element (e.g. a group, button or label).
+	 * @param index where to add the element. 0 will 
 	 */
 	addElement: function( elem, index ) {
-		// TODO: add index functionality!
-		//this._elem.append( elem._elem );
-		this._items.push( elem );		
-		this.draw(); // TODO: make this more efficient
+		if( typeof index == 'undefined' ) {
+			// add elem as last one
+			this._items.push( elem );
+		} else {
+			// add elem at certain index
+			this._items.splice( index, 0, elem);
+		}
+		this.draw(); // TODO: could be more efficient when just adding one element
 	},
 	
 	/**
 	 * Removes an element from the toolbar
-	 * @param elem the element to remove
+	 * @param Object elem the element to remove
 	 * @return bool false if element isn't part of this element
 	 */
 	removeElement: function( elem ) {
@@ -131,7 +135,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		}
 		this._items.splice( $index, 1 );
 		
-		this.draw(); // TODO: make this more efficient
+		this.draw(); // TODO: could be more efficient when just removing one element
 	},
 
 	destroy: function() {
