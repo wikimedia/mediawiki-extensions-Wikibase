@@ -104,7 +104,7 @@ $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' => end( explode( '/', dirname( __FILE__ ) ) ) . '/resources' ,
+	'remoteExtPath' => ( ( string ) end  ( explode( DIRECTORY_SEPERATOR, dirname( __FILE__ ) ) ) ) . '/resources'
 );
 
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
