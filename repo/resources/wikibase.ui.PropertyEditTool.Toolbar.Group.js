@@ -13,13 +13,24 @@
 /**
  * Represents a group of toolbar elements within a toolbar
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Group = function( toolbar ) {
-	window.wikibase.ui.PropertyEditTool.Toolbar.call( this, toolbar );
+window.wikibase.ui.PropertyEditTool.Toolbar.Group = function( elements ) {
+	window.wikibase.ui.PropertyEditTool.Toolbar.call( this, elements );
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
 $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 	
 	UI_CLASS: 'wb-ui-propertyedittoolbar-group',
+	
+	/**
+	 * @param Array elements collection of elements within the group. This can be a empty array as well,
+	 *        further elements can be added with addElement().
+	 */
+	_init: function( elements ) {
+		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this, null );
+		if( $.isArray( elements ) ) {
+			this._items = elements;
+		}
+	},	
 	
 	_drawToolbar: function() {
 		if( this._elem === null ) {
@@ -105,12 +116,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 *        the toolbar should interact with.
 	 */
 	_init: function( editableValue ) {
-		//this._items = new Array();
-		
-		// the toolbar is placed besides the editable value itself:
-		var parent = editableValue._subject.parent();
-		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this, parent );
-		
+		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype._init.call( this );
 		this._editableValue = editableValue;
 	},	
 	
@@ -119,7 +125,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._initToolbar.call( this );
 		
 		// create a group inside the group so we can separate the tooltip visually
-		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group( [] );
+		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group( null );
 		this.addElement( this.innerGroup );
 		
 		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( 'specific message (to be inserted)' );

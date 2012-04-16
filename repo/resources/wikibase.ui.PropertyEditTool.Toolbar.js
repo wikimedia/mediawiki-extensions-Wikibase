@@ -62,9 +62,10 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		this._initToolbar();
 	},
 	
-	_initToolbar: function() {
-		
-	},
+	/**
+	 * Initializes elements within the toolbar if any should be there from the beginning.
+	 */
+	_initToolbar: function() {},
 	
 	/**
 	 * Function for (re)rendering the element
