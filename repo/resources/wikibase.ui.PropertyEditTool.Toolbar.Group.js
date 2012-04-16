@@ -80,6 +80,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 * @var window.wikibase.ui.PropertyEditTool.EditableValue
 	 */
 	_editableValue: null,
+
+	/**
+	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip
+	 */
+	tooltip: null,
 	
 	/**
 	 * @param window.wikibase.ui.PropertyEditTool.EditableValue editableValue the editable value
@@ -102,6 +107,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		
 		this.btnEdit = new button( window.mw.msg( 'wikibase-edit' ) );
 		this.btnEdit.onAction = this._editActionHandler();
+
+		var tipsyConfig = {
+			'gravity': 'ne'
+		};
+		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( 'specific message (to be inserted)', tipsyConfig );
 		
 		this.btnCancel = new button( window.mw.msg( 'wikibase-cancel' ) );
 		this.btnCancel.onAction = this._cancelActionHandler();
@@ -117,6 +127,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		return $.proxy( function(){
 			this._editableValue.startEditing();
 			this.removeElement( this.btnEdit );
+			this.addElement( this.tooltip );
 			this.addElement( this.btnCancel );
 			this.addElement( this.btnSave );
 		}, this );
@@ -136,6 +147,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		this._editableValue.stopEditing( save );
 		this.removeElement( this.btnCancel );
 		this.removeElement( this.btnSave );
+		this.removeElement( this.tooltip );
 		this.addElement( this.btnEdit );		
 	}
 	
