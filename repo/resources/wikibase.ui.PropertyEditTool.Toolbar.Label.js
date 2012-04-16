@@ -92,7 +92,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 		}		
 		if( this.isDisabled() == disable ) {
 			// no point in disabling/enabling if this is the current state
-			return false
+			return false;
 		}
 		var cls = this.UI_CLASS + '-disabled';
 		

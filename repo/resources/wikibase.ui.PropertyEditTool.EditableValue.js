@@ -74,7 +74,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// give the toolbar a edit group with basic edit commands:
 		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup( this );
 		this._toolbar.addElement( editGroup );
-		this._toolbar.editGroup = editGroup // remember this
+		this._toolbar.editGroup = editGroup; // remember this
 		
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
@@ -135,7 +135,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_inputRegistered: function() {
 		var disableSave = this.isEmpty();
-		var disableCancel = disableSave || ( this.getInitialValue() === '' )
+		var disableCancel = disableSave || ( this.getInitialValue() === '' );
 		
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );

@@ -61,7 +61,7 @@ window.wikibase.ui.PropertyEditTool.Tooltip.prototype = {
 	 * @param: String message to be displayed within the tooltip
 	 */
 	_buildTooltip: function() {
-		console.log('_buildTooltip: '+this._message)
+		console.log('_buildTooltip: '+this._message);
 		this._tooltip = $( '<span/>', {
 			'class': 'mw-help-field-hint',
 			'title': this._message,
@@ -120,4 +120,4 @@ window.wikibase.ui.PropertyEditTool.Tooltip.prototype = {
 		this._tooltip.tipsy( 'hide' );
 	}
 
-}
+};
