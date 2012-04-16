@@ -133,8 +133,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * its initial value.
 	 */
 	_inputRegistered: function() {
-		var disableSave = this.isEmpty();
-		var disableCancel = disableSave || ( ! this.validate( this.getInitialValue() ) );
+		var disableSave = this.isEmpty() || ( this.getInitialValue() === this.getValue() );
+		var disableCancel = this.isEmpty() || ( ! this.validate( this.getInitialValue() ) );
 		
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );

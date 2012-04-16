@@ -122,10 +122,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group( [] );
 		this.addElement( this.innerGroup );
 		
-		var tipsyConfig = {
-			'gravity': 'ne'
-		};
-		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( 'specific message (to be inserted)', tipsyConfig );
+		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( 'specific message (to be inserted)' );
 		
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.PropertyEditTool.Toolbar.Button;
@@ -146,10 +143,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	_editActionHandler: function() {
 		return $.proxy( function(){
 			this._editableValue.startEditing();
-			this.addElement( this.tooltip, 0 );
+			this.addElement( this.tooltip, 0 ); // add tooltip before edit commands
 			this.innerGroup.removeElement( this.btnEdit );
 			this.innerGroup.addElement( this.btnSave );
 			this.innerGroup.addElement( this.btnCancel );
+			//this.tooltip.show();
 		}, this );
 	},	
 	_cancelActionHandler: function() {
@@ -168,7 +166,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		this.removeElement( this.tooltip );
 		this.innerGroup.removeElement( this.btnSave );
 		this.innerGroup.removeElement( this.btnCancel );
-		this.innerGroup.addElement( this.btnEdit );		
+		this.innerGroup.addElement( this.btnEdit );
 	},
 	
 	/**

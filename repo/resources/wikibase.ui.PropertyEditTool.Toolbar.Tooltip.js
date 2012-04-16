@@ -42,12 +42,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	_initElem: function( tooltipMessage ) {
 		if ( this._tipsyConfig == null ) {
 			this._tipsyConfig = {
-				gravity: 'w',
+				gravity: 'ne',
 				trigger: 'hover'
 			};
 		}
 		if ( typeof this._tipsyConfig.gravity == undefined ) {
-			this._tipsyConfig.gravity = 'w';
+			this._tipsyConfig.gravity = 'ne';
 		}
 		if ( typeof this._tipsyConfig.trigger == undefined ) {
 			this._tipsyConfig.trigger = 'hover';
@@ -88,7 +88,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	 *
 	 * @param boolean toggle between hover and manual (fixed)
 	 */
-	show: function( toggleEvents ) {
+	showTooltip: function( toggleEvents ) {
 		this._elem.tipsy('show');
 		//if ( toggleEvents ) this._toggleEvents();
 	},
@@ -98,18 +98,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	 *
 	 * @param boolean toggle between hover and manual (fixed)
 	 */
-	hide: function( toggleEvents ) {
+	hideTooltip: function( toggleEvents ) {
 		this._elem.tipsy('hide');
 		//if ( toggleEvents ) this._toggleEvents();
 	},
-
-	/**
-	 * destroy tooltip
-	 */
+	
 	destroy: function() {
 		if ( this._elem ) {
 			this._elem.tipsy( 'hide' );
 		}
+		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype.destroy.call( this );
 	}
 
 } );
