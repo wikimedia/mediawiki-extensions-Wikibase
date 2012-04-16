@@ -24,6 +24,9 @@ class WikibasePage extends Article {
 		
 		// make sure required client sided resources will be loaded:
 		$out->addModules( 'wikibase' );
+		
+		// overwrite page title
+		$out->setPageTitle( $content->getItem()->getLabel( $this->getContext()->getLanguage()->getCode() ) );
 	}
 	
 }

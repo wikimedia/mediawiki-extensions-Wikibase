@@ -150,23 +150,13 @@ class WikibaseContent extends Content {
 		$item = $this->item;
 		$html = '';
 
-		$label = $item->getLabel( $lang->getCode() );
-
-		$html .= Html::element(
-			'h1',
-			null,
-			$label === false ? '' : $label
-		);
-
 		$description = $item->getDescription( $lang->getCode() );
-
-		$html .= Html::element(
-			'p',
-			null,
-			$description === false ? '' : $description
-		);
-
-		$html .= '<hr />';
+		
+		// even if description is false, we want it in any case!
+		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
+		$html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
+		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
+		$html .= Html::closeElement('div');		
 
 		$html .= Html::openElement( 'table', array( 'class' => 'wikitable' ) );
 
@@ -184,7 +174,7 @@ class WikibaseContent extends Content {
 			$html .= '</td>';
 
 			$html .= '</tr>';
-		}
+		}		
 
 		$html .= Html::closeElement( 'table' );
 
