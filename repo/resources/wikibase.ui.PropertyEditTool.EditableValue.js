@@ -54,6 +54,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_toolbar: null,
 	
 	/**
+	 * Holds the parameters for the current API call
+	 * @var Object
+	 */
+	_apiCall: null,
+	
+	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
 	 */
@@ -74,7 +80,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// give the toolbar a edit group with basic edit commands:
 		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup( this );
 		this._toolbar.addElement( editGroup );
-		this._toolbar.editGroup = editGroup // remember this
+		this._toolbar.editGroup = editGroup; // remember this
 		
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
@@ -175,6 +181,26 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		
 		this._isInEditMode = false;
 		
+		console.log( this._subject );
+		
+		if( save ) {
+			this._apiCall = {
+				action: "wbsetlabel", 
+				language: wgUserLanguage, 
+				label: this.getValue(), 
+				id: mw.config.values.wbItemId
+			};
+			/*
+			this._apiCall = {
+				action: 'wbsetdescription', 
+				language: wgUserLanguage, 
+				description: this.getValue(), 
+				id: mw.config.values.wbItemId
+			};
+			*/
+			this.doApiLoad();
+		}
+		
 		// any change at all compared to initial value?
 		return initialValue !== $value;
 	},
@@ -196,15 +222,39 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._inputElem.blur();
 		}
 	},
-
+	
 	/**
-	 * just doing a test api call
+	 * load the mediawiki JS for APIs 
+	 */
+	doApiLoad: function() {
+		mw.loader.using( 'mediawiki.api', jQuery.proxy( this.doApiCall, this ) );
+	},
+	
+	/**
+	 * makes the API call with the parameters stored in this._apiCall
 	 */
 	doApiCall: function() {
-		mw.loader.using( 'mediawiki.api', function() {
-			var localApi = new mw.Api();
-			localApi.post( { action: 'query', meta: 'userinfo' }, { ok: function() { console.log( arguments ); } } );
+		console.log( this._apiCall );
+		
+		var localApi = new mw.Api();
+		localApi.post( this._apiCall, {
+			ok: jQuery.proxy( this.apiCallOk, this ),
+			err: jQuery.proxy( this.apiCallErr, this )
 		} );
+	},
+	
+	/**
+	 * handle return of successful API call
+	 */
+	apiCallOk: function() { 
+		console.log( arguments ); 
+	},
+	
+	/**
+	 * handle error of unsuccessful API call
+	 */
+	apiCallErr: function() { 
+		console.log( arguments ); 
 	},
 	
 	/**

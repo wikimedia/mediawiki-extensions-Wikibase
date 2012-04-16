@@ -27,6 +27,9 @@ class WikibasePage extends Article {
 		
 		// overwrite page title
 		$out->setPageTitle( $content->getItem()->getLabel( $this->getContext()->getLanguage()->getCode() ) );
+		
+		// hand over the itemId to JS
+		$out->addJsConfigVars( 'wbItemId', $content->getItem()->getId() );
 	}
 	
 }
