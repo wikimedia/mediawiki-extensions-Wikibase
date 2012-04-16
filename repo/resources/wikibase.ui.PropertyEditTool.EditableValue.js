@@ -54,12 +54,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_toolbar: null,
 	
 	/**
-	 * Holds the parameters for the current API call
-	 * @var Object
-	 */
-	_apiCall: null,
-	
-	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
 	 */
@@ -193,21 +187,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		console.log( this._subject );
 		
 		if( save ) {
-			this._apiCall = {
-				action: "wbsetlabel", 
-				language: wgUserLanguage, 
-				label: this.getValue(), 
-				id: mw.config.values.wbItemId
-			};
-			/*
-			this._apiCall = {
-				action: 'wbsetdescription', 
-				language: wgUserLanguage, 
-				description: this.getValue(), 
-				id: mw.config.values.wbItemId
-			};
-			*/
-			this.doApiLoad();
+			this.storeValue();
 		}
 		
 		// any change at all compared to initial value?
@@ -233,36 +213,40 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 	
 	/**
-	 * load the mediawiki JS for APIs 
+	 * Stores the current value in the database
 	 */
-	doApiLoad: function() {
-		mw.loader.using( 'mediawiki.api', jQuery.proxy( this.doApiCall, this ) );
+	storeValue: function() {
+		var apiCall = this.getApiCallParams();
+		
+		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
+			console.log( apiCall );
+
+			var localApi = new mw.Api();
+			localApi.post( apiCall, {
+				ok: jQuery.proxy( this._apiCallOk, this ),
+				err: jQuery.proxy( this._apiCallErr, this )
+			} );
+		}, this ) );
 	},
 	
 	/**
-	 * makes the API call with the parameters stored in this._apiCall
+	 * Returns the neccessary parameters for a api call to store the value.
 	 */
-	doApiCall: function() {
-		console.log( this._apiCall );
-		
-		var localApi = new mw.Api();
-		localApi.post( this._apiCall, {
-			ok: jQuery.proxy( this.apiCallOk, this ),
-			err: jQuery.proxy( this.apiCallErr, this )
-		} );
+	getApiCallParams: function() {
+		return {};
 	},
 	
 	/**
 	 * handle return of successful API call
 	 */
-	apiCallOk: function() { 
+	_apiCallOk: function() { 
 		console.log( arguments ); 
 	},
 	
 	/**
 	 * handle error of unsuccessful API call
 	 */
-	apiCallErr: function() { 
+	_apiCallErr: function() { 
 		console.log( arguments ); 
 	},
 	
@@ -349,6 +333,15 @@ window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibas
 $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-label-input-help-message' );
+	},
+	
+	getApiCallParams: function() {
+		return {
+			action: "wbsetlabel",
+			language: window.wgUserLanguage,
+			label: this.getValue(),
+			id: window.mw.config.values.wbItemId
+		};
 	}
 } );
 
@@ -360,5 +353,14 @@ window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.w
 $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-description-input-help-message' );
+	},
+	
+	getApiCallParams: function() {
+		return {
+			action: 'wbsetdescription', 
+			language: wgUserLanguage, 
+			description: this.getValue(), 
+			id: mw.config.values.wbItemId
+		};
 	}
 } );
