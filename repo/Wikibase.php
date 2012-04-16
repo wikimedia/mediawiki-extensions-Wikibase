@@ -64,15 +64,14 @@ $wgAutoloadClasses['WikibaseHooks'] 				= $dir . 'Wikibase.hooks.php';
 // api
 $wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseAssociateArticle'] 	= $dir . 'api/ApiWikibaseAssociateArticle.php';
 $wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'api/ApiWikibaseLinkArticles.php';
 $wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
 $wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
 $wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
-$wgAutoloadClasses['ApiWikibaseQueryDescriptions'] 	= $dir . 'api/ApiWikibaseQueryDescriptions.php';
-$wgAutoloadClasses['ApiWikibaseQueryLabels'] 		= $dir . 'api/ApiWikibaseQueryLabels.php';
-$wgAutoloadClasses['ApiWikibaseQueryAliases'] 		= $dir . 'api/ApiWikibaseQueryAliases.php';
+$wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'api/ApiWikibaseModifyItem.php';
+$wgAutoloadClasses['ApiWikibaseSiteLink'] 			= $dir . 'api/ApiWikibaseSiteLink.php';
+
 
 
 // includes
@@ -89,16 +88,10 @@ $wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseIte
 // API module registration
 $wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
-$wgAPIModules['wbassociatearticle'] 				= 'ApiWikibaseAssociateArticle';
 $wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
 $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
-$wgAPIModules['wbaddalias'] 						= 'ApiWikibaseAddAlias';
-$wgAPIModules['wbremovealias'] 						= 'ApiWikibaseRemoveAlias';
-
-$wgAPIListModules['wbdescriptions'] 				= 'ApiWikibaseQueryDescriptions';
-$wgAPIListModules['wblabels'] 						= 'ApiWikibaseQueryLabels';
-$wgAPIListModules['wbaliases'] 						= 'ApiWikibaseQueryAliases';
+$wgAPIModules['wbsitelink'] 						= 'ApiWikibaseSiteLink';
 
 
 
@@ -149,8 +142,8 @@ unset( $moduleTemplate );
 
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIBASE', 'wikidata' );
-define( 'CONTENT_MODEL_WIKIDATA', 'wikidata' ); // TODO: remove
+define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
+define( 'CONTENT_MODEL_WIKIDATA', 'wikibase' ); // TODO: remove
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
 

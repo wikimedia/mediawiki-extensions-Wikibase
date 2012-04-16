@@ -32,8 +32,8 @@ CREATE INDEX /*i*/ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 CREATE TABLE IF NOT EXISTS /*_*/wb_texts_per_lang (
   tpl_item_id                INT unsigned        NOT NULL, -- Id of the item
   tpl_language               VARCHAR(255)        NOT NULL, -- Language code
-  tpl_label                  VARCHAR(255)        NOT NULL, -- Item label text
-  tpl_description            VARCHAR(255)        NOT NULL -- Item description text
+  tpl_label                  VARCHAR(255)        NULL, -- Item label text
+  tpl_description            VARCHAR(255)        NULL -- Item description text
 ) /*$wgDBTableOptions*/;
 
 CREATE UNIQUE INDEX /*i*/tpl_item_id_lang ON /*_*/wb_texts_per_lang (tpl_item_id, tpl_language);
