@@ -18,7 +18,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Group = function( toolbar ) {
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
 $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
-	
+
 	UI_CLASS: 'wb-ui-propertyedittoolbar-group',
 	
 	_drawToolbar: function() {
@@ -112,7 +112,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this, parent );
 		
 		this._editableValue = editableValue;
-	},	
+	},
 	
 	_initToolbar: function() {
 		// call prototypes base function to append toolbar itself:
@@ -147,9 +147,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 			this.innerGroup.removeElement( this.btnEdit );
 			this.innerGroup.addElement( this.btnSave );
 			this.innerGroup.addElement( this.btnCancel );
-			//this.tooltip.show();
+			this.tooltip.show();
 		}, this );
-	},	
+	},
 	_cancelActionHandler: function() {
 		return $.proxy( function() {
 			this._leaveAction( false );
@@ -163,6 +163,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	
 	_leaveAction: function( save ) {
 		this._editableValue.stopEditing( save );
+		this.tooltip.hide();
 		this.removeElement( this.tooltip );
 		this.innerGroup.removeElement( this.btnSave );
 		this.innerGroup.removeElement( this.btnCancel );
@@ -171,6 +172,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	
 	/**
 	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.displayGroupSeparators
-	 */	
+	 */
 	displayGroupSeparators: false
 } );

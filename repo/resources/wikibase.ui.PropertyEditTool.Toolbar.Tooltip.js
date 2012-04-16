@@ -34,23 +34,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	_tipsyConfig: null,
 
 	/**
+	 * @var boolean used to determine if tooltip message is currently visible or not
+	 */
+	_isVisible: null,
+
+	/**
 	 * Initializes the tooltip for the given element.
 	 * This should normally be called directly by the constructor.
 	 *
 	 * @param jQuery parent element
 	 */
 	_initElem: function( tooltipMessage ) {
-		if ( this._tipsyConfig == null ) {
+
+		// default tipsy configuration
+		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined) {
 			this._tipsyConfig = {
-				gravity: 'ne',
-				trigger: 'hover'
+				gravity: 'ne'
 			};
-		}
-		if ( typeof this._tipsyConfig.gravity == undefined ) {
-			this._tipsyConfig.gravity = 'ne';
-		}
-		if ( typeof this._tipsyConfig.trigger == undefined ) {
-			this._tipsyConfig.trigger = 'hover';
 		}
 
 		var elem = $( '<span/>', {
@@ -59,38 +59,24 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 			style: 'display:inline'
 		} ).tipsy( {
 			'gravity': this._tipsyConfig.gravity,
-			'trigger': this._tipsyConfig.trigger
+			'trigger': 'manual'
 		} );
+		elem.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
+		elem.on( 'mouseout', jQuery.proxy( function() { this.hide(); }, this ) );
 
 		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, elem );
 	},
-
-	/**
-	 * toogle tooltip to react on hover events or not
-	 */
-	/*
-	_toggleEvents: function() {
-		console.log('_toggleEvents: ');
-		console.log(this._tooltip.data('events'));
-		if ( typeof this._tooltip.data( 'events' ) == 'undefined' ) {
-			this._tooltip.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
-			this._tooltip.on( 'mouseout', jQuery.proxy( function() { this.hide(); }, this ) );
-		} else {
-			this._tooltip.off( 'mouseover' );
-			this._tooltip.off( 'mouseout' );
-		}
-		console.log(typeof this._tooltip.data('events'));
-	},
-	*/
 
 	/**
 	 * show tooltip
 	 *
 	 * @param boolean toggle between hover and manual (fixed)
 	 */
-	showTooltip: function( toggleEvents ) {
-		this._elem.tipsy('show');
-		//if ( toggleEvents ) this._toggleEvents();
+	show: function() {
+		if ( !this._isVisible ) {
+			$(this._elem.children()[0]).tipsy( 'show' );
+			this._isVisible = true;
+		}
 	},
 
 	/**
@@ -98,11 +84,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	 *
 	 * @param boolean toggle between hover and manual (fixed)
 	 */
-	hideTooltip: function( toggleEvents ) {
-		this._elem.tipsy('hide');
-		//if ( toggleEvents ) this._toggleEvents();
+	hide: function() {
+		if ( this._isVisible ) {
+			$(this._elem.children()[0]).tipsy( 'hide' );
+			this._isVisible = false;
+		}
 	},
-	
+
 	destroy: function() {
 		if ( this._elem ) {
 			this._elem.tipsy( 'hide' );
