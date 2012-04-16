@@ -125,8 +125,8 @@ class WikibaseItem {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function structuredSave( $articleId ) {
-		$success = $this->save( $articleId );
+	public function structuredSave( /* $articleId */ ) {
+		$success = $this->save( /* $articleId */ );
 
 		if ( $success ) {
 			$dbw = wfGetDB( DB_MASTER );
@@ -150,7 +150,7 @@ class WikibaseItem {
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function save( $articleId ) {
+	protected function save( /* $articleId */ ) {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$fields = array();
@@ -158,7 +158,8 @@ class WikibaseItem {
 		$success = true;
 
 		if ( is_null( $this->getId() ) ) {
-			$fields['item_page_id'] = $articleId;
+			$fields['item_id'] = null; // This is needed to have at least one field.
+			//$fields['item_page_id'] = $articleId;
 
 			$success = $dbw->insert(
 				'wb_items',
@@ -362,16 +363,18 @@ class WikibaseItem {
 	 *
 	 * @param integer $siteId
 	 * @param string $pageName
-	 * @param boolean $update If a link to this site already exists, update it?
+	 * @param string $updateType
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function addSiteLink( $siteId, $pageName, $update = true ) {
+	public function addSiteLink( $siteId, $pageName, $updateType = 'set' ) {
 		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
 			$this->data['links'][$siteId] = array();
 		}
 
-		$success = $update || !array_key_exists( $siteId, $this->data['links'][$siteId] );
+		$success =
+			!( ( $updateType === 'add' && array_key_exists( $siteId, $this->data['links'][$siteId] ) )
+			|| ( $updateType === 'update' && !array_key_exists( $siteId, $this->data['links'][$siteId] ) ) );
 
 		if ( $success ) {
 			$this->data['links'][$siteId] = array(
