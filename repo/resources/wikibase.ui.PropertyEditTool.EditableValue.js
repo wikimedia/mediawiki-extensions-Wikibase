@@ -253,6 +253,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 	
 	/**
+	 * Returns a short information about how the input should be inserted by the user.
+	 */
+	getInputHelpMessage: function() {
+		return 'my message';
+	},
+	
+	/**
 	 * Returns true if there is currently no value assigned
 	 *
 	 * @return bool
@@ -283,3 +290,25 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	inputPlaceholder: ''
 };
+
+
+window.wikibase.ui.PropertyEditTool.EditableLabel = function( subject ) {
+	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
+};
+window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
+$.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
+	getInputHelpMessage: function() {
+		return window.mw.msg( 'wikibase-label-input-help-message' );
+	}
+} );
+
+
+window.wikibase.ui.PropertyEditTool.EditableDescription = function( subject ) {
+	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
+};
+window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
+$.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
+	getInputHelpMessage: function() {
+		return window.mw.msg( 'wikibase-description-input-help-message' );
+	}
+} );

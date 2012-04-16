@@ -120,8 +120,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 *        the toolbar should interact with.
 	 */
 	_init: function( editableValue ) {
-		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype._init.call( this );
 		this._editableValue = editableValue;
+		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype._init.call( this );
 	},
 	
 	_initToolbar: function() {
@@ -132,7 +132,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group( null );
 		this.addElement( this.innerGroup );
 		
-		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( 'specific message (to be inserted)' );
+		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );
 		
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.PropertyEditTool.Toolbar.Button;
