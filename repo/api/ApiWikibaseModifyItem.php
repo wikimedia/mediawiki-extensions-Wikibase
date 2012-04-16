@@ -52,7 +52,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		$success = false;
 
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = WikibaseItem::getIdForSiteLink( $params['wiki'], $params['title'] );
+			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
