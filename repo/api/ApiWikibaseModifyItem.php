@@ -27,6 +27,19 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	protected abstract function modifyItem( WikibaseItem &$item, array $params );
 
 	/**
+	 * Make sure the required parameters are provided and that they are valid.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $params
+	 */
+	protected function validateParameters( array $params ) {
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+		}
+	}
+
+	/**
 	 * Main method. Does the actual work and sets the result.
 	 *
 	 * @since 0.1
@@ -34,7 +47,17 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
+		$this->validateParameters( $params );
+
 		$success = false;
+
+		if ( !isset( $params['id'] ) ) {
+			$params['id'] = WikibaseItem::getIdForSiteLink( $params['wiki'], $params['title'] );
+
+			if ( $params['id'] === false ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+			}
+		}
 
 		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
 		$content = $page->getContent();
