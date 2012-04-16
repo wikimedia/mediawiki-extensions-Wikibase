@@ -8,11 +8,12 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
 
 /**
  * Represents a label within a wikibase.ui.PropertyEditTool.Toolbar toolbar
- * 
+ *
  * @param jQuery parent
  */
 window.wikibase.ui.PropertyEditTool.Toolbar.Label = function( appendTo ) {
@@ -36,20 +37,22 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	 * Initializes the ui element.
 	 * This should normally be called directly by the constructor.
 	 */
-	_init: function( text ) {
+	_init: function( content ) {
 		if( this._parent !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
-		this._initElem( text );
+		this._initElem( content );
 		//this._text = text; // for debugging
 	},
 	
-	_initElem: function( text ) {
+	_initElem: function( content ) {
+		if ( typeof content == String ) {
+			content = $.trim( content );
+		}
 		this._elem = $( '<span/>', {
-            'class': this.UI_CLASS,
-            text: text
-        } );
+			'class': this.UI_CLASS
+		} ).append( content );
 	},
 
 	destroy: function() {
@@ -57,19 +60,23 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	},
 	
 	/**
-	 * sets the buttons text
-	 * @param string text
+	 * sets the label's content
+	 * @param string|object content
 	 */
-	setText: function( text ) {
-		this._elem.text( $.trim( text ) );
+	setContent: function( content ) {
+		this._elem.empty();
+		if ( typeof content == String ) {
+			content = $.trim( content );
+		}
+		this._elem.append( content );
 	},
 	
 	/**
-	 * returns the buttons text
-	 * @return string
+	 * returns the labels's content
+	 * @return text|object contents
 	 */
-	getText: function() {
-		return this._elem.text();
+	getContent: function() {
+		var content = this._elem.contents()[0];
 	},
 	
 	/**
