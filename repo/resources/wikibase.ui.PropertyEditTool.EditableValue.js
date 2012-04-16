@@ -332,7 +332,7 @@ window.wikibase.ui.PropertyEditTool.EditableLabel = function( subject ) {
 window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-label-input-help-message' );
+		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
 	},
 	
 	getApiCallParams: function() {
@@ -340,7 +340,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 			action: "wbsetlabel",
 			language: window.wgUserLanguage,
 			label: this.getValue(),
-			id: window.mw.config.values.wbItemId
+			id: window.mw.config.get( 'wbItemId' )
 		};
 	}
 } );
@@ -352,7 +352,7 @@ window.wikibase.ui.PropertyEditTool.EditableDescription = function( subject ) {
 window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-description-input-help-message' );
+		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
 	},
 	
 	getApiCallParams: function() {

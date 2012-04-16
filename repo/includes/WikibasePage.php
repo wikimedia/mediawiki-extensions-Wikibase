@@ -16,6 +16,7 @@ class WikibasePage extends Article {
 	// TODO: either this is a bug and should not happen, or we should add handling for this here (MessageContent messages are not parsed ATM).
 	public function view() {
 		$content = $this->getContentObject();
+		$contentLang = $this->getContext()->getLanguage()->getCode();
 
 		$parserOutput = $content->getParserOutput( $this->getTitle() );
 
@@ -26,10 +27,11 @@ class WikibasePage extends Article {
 		$out->addModules( 'wikibase' );
 		
 		// overwrite page title
-		$out->setPageTitle( $content->getItem()->getLabel( $this->getContext()->getLanguage()->getCode() ) );
+		$out->setPageTitle( $content->getItem()->getLabel( $contentLang ) );
 		
 		// hand over the itemId to JS
 		$out->addJsConfigVars( 'wbItemId', $content->getItem()->getId() );
+		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLang ) );
 	}
 	
 }
