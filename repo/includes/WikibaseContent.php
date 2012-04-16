@@ -122,10 +122,11 @@ class WikibaseContent extends Content {
 	 * @param null|Title $title
 	 * @param null $revId
 	 * @param null|ParserOptions $options
+	 * @param boolean $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL )  {
+	public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL, $generateHtml = true )  {
 		global $wgLang;
 
 		// FIXME: StubUserLang::_unstub() not yet called in certain cases, dummy call to init Language object to $wgLang
