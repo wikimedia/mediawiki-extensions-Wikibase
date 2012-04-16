@@ -128,8 +128,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 			this._editableValue.startEditing();
 			this.removeElement( this.btnEdit );
 			this.addElement( this.tooltip );
-			this.addElement( this.btnCancel );
 			this.addElement( this.btnSave );
+			this.addElement( this.btnCancel );
 		}, this );
 	},	
 	_cancelActionHandler: function() {
@@ -145,8 +145,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	
 	_leaveAction: function( save ) {
 		this._editableValue.stopEditing( save );
-		this.removeElement( this.btnCancel );
 		this.removeElement( this.btnSave );
+		this.removeElement( this.btnCancel );
 		this.removeElement( this.tooltip );
 		this.addElement( this.btnEdit );		
 	}
