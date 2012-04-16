@@ -23,5 +23,7 @@ $messages['en'] = array(
 		'wikibase-save' => 'save',
 		'wikibase-cancel' => 'cancel',
 		'wikibase-label-edit-placeholder' => 'enter label',
-		'wikibase-description-edit-placeholder' => 'enter description'
+		'wikibase-description-edit-placeholder' => 'enter description',
+		'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
+		'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
 );

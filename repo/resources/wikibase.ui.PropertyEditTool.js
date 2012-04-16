@@ -63,13 +63,13 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	*/
    
 	_initEditToolForValue: function() {
-		value = this._getValueElem();
-		this._editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue();
+		var x =  this.getEditableValuePrototype();
+		this._editableValue = new x();
 
 		// todo: show a label, not the property id:
 		this._editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
 
-		this._editableValue._init( value );
+		this._editableValue._init( this._getValueElem() );
 	},
 	
 	/**
@@ -96,5 +96,13 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 */
 	getPropertyName: function() {
 		return $( this._subject.children( '.wb-property-container-key' )[0] ).attr( 'title' );
+	},
+
+	/**
+	 * defines which editable value should be used for this.
+	 * @return Object
+	 */
+	getEditableValuePrototype: function() {
+		return window.wikibase.ui.PropertyEditTool.EditableDescription;
 	}
 };

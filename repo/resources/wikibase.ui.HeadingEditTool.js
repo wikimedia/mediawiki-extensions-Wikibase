@@ -44,5 +44,9 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 	 */
 	getPropertyName: function() {
 		return 'label';
+	},
+	
+	getEditableValuePrototype: function() {
+		return window.wikibase.ui.PropertyEditTool.EditableLabel
 	}
 } );

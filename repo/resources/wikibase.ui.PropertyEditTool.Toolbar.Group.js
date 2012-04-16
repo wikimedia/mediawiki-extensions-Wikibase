@@ -109,6 +109,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 */
 	tooltip: null,
 	
+	/**
+	 * Inner group needed to visually separate tooltip and edit buttons, this one holds the edit buttons.
+	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Group
+	 */
 	innerGroup: null,
 	
 	/**
@@ -116,8 +120,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 *        the toolbar should interact with.
 	 */
 	_init: function( editableValue ) {
-		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype._init.call( this );
 		this._editableValue = editableValue;
+		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype._init.call( this );
 	},
 	
 	_initToolbar: function() {
@@ -128,7 +132,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group( null );
 		this.addElement( this.innerGroup );
 		
-		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( 'specific message (to be inserted)' );
+		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );
 		
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.PropertyEditTool.Toolbar.Button;
@@ -148,12 +152,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	
 	_editActionHandler: function() {
 		return $.proxy( function(){
-			this._editableValue.startEditing();
 			this.addElement( this.tooltip, 0 ); // add tooltip before edit commands
 			this.innerGroup.removeElement( this.btnEdit );
 			this.innerGroup.addElement( this.btnSave );
 			this.innerGroup.addElement( this.btnCancel );
-			this.tooltip.show();
+			this._editableValue.startEditing();
 		}, this );
 	},
 	_cancelActionHandler: function() {
