@@ -50,5 +50,5 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 		return window.wikibase.ui.PropertyEditTool.EditableLabel;
 	},
 	
-	allowsMultipleValues: true
+	allowsMultipleValues: false
 } );

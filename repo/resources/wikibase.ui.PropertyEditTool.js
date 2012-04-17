@@ -121,7 +121,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @return Object
 	 */
 	getEditableValuePrototype: function() {
-		return window.wikibase.ui.PropertyEditTool.EditableDescription;
+		return window.wikibase.ui.PropertyEditTool.EditableValue;
 	},
 	
 	/////////////////

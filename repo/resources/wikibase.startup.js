@@ -15,7 +15,12 @@
 	$( 'body' )
 	.find( '.wb-property-container' )
 	.each( function() {
-		new window.wikibase.ui.PropertyEditTool( this );
+		// TODO: Make this nicer when we have implemented a JS class for properties
+		if( $( this ).children( '.wb-property-container-key' ).attr( 'title') == 'description' ) {
+			new window.wikibase.ui.DescriptionEditTool( this );
+		} else {
+			new window.wikibase.ui.PropertyEditTool( this );
+		}
 	} );
 	
 	// add an edit tool for the main label. This will be integrated into the heading nicely:
