@@ -46,10 +46,14 @@ class ApiWikibaseSetLabel extends ApiWikibaseModifyItem {
 	}
 
 	public function getParamDescription() {
-		return array_merge( parent::getAllowedParams(), array(
+		return array_merge( parent::getParamDescription(), array(
 			'id' => 'The ID of the item to set a label for',
-			'language' => 'Language the label is in',
-			'label' => 'The value to set for the label',
+			'language' => array( 'Language the label is in',
+				"Use together with 'label'."
+			),
+			'label' => array( 'The value to set for the label',
+				"Use together with 'language'."
+			),
 		) );
 	}
 
