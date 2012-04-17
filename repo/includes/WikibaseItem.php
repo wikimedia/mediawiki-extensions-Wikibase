@@ -13,9 +13,10 @@
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseItem {
+class WikibaseItem extends WikibaseEntity {
 
 	/**
+	 * @since 0.1
 	 * @var array
 	 */
 	protected $data;
@@ -30,17 +31,18 @@ class WikibaseItem {
 	protected $id = false;
 
 	/**
+	 * Constructor.
+	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
+	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $data
 	 */
-	protected function __construct( array $data, $clean = false ) {
-		$this->data = $data;
+	public function __construct( array $data ) {
+		parent::__construct();
 
-		if ( $clean ) {
-			// TODO: should be moved out of constructor
-			$this->cleanStructure();
-		}
+		$this->data = $data;
 	}
 
 	/**
@@ -57,17 +59,6 @@ class WikibaseItem {
 				$this->data[$field] = array();
 			}
 		}
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @param array $data
-	 *
-	 * @return WikibaseItem
-	 */
-	public static function newFromArray( array $data ) {
-		return new static( $data, true );
 	}
 
 	/**
@@ -109,38 +100,6 @@ class WikibaseItem {
 	}
 
 	/**
-	 * @param integer $id
-	 */
-	protected function setId( $id ) {
-		$this->id = $id;
-	}
-
-	/**
-	 * Saves the item in a structured fashion, including both relational and denormalized storage.
-	 * Basically does all the storage except the blob in the page table.
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $articleId
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function structuredSave( /* $articleId */ ) {
-		$success = $this->save( /* $articleId */ );
-
-		if ( $success ) {
-			$dbw = wfGetDB( DB_MASTER );
-
-			$dbw->begin();
-			$this->saveSiteLinks();
-			$this->saveMultilangFields();
-			$dbw->commit();
-		}
-
-		return $success;
-	}
-
-	/**
 	 * Saves the primary fields in the wb_items table.
 	 * If the item does not exist yet (ie the id is null), it will be inserted, and the id will be set.
 	 *
@@ -150,14 +109,14 @@ class WikibaseItem {
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function save( /* $articleId */ ) {
+	public function save( /* $articleId */ ) {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$fields = array();
 
 		$success = true;
 
-		if ( is_null( $this->getId() ) ) {
+		if ( $this->hasId() ) {
 			$fields['item_id'] = null; // This is needed to have at least one field.
 			//$fields['item_page_id'] = $articleId;
 
@@ -184,85 +143,26 @@ class WikibaseItem {
 	}
 
 	/**
-	 * Saves the links to other sites (for example which article on which Wikipedia corresponds to this item).
-	 * This info is saved in wb_items_per_site.
+	 * Sets the ID.
+	 * Should only be set to something determined by the store and not by the user (to avoid duplicate IDs).
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean Success indicator
+	 * @param integer $id
 	 */
-	protected function saveSiteLinks() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$idField = array( 'ips_item_id' => $this->getId() );
-
-		$success = $dbw->delete(
-			'wb_items_per_site',
-			$idField,
-			__METHOD__
-		);
-
-		foreach ( $this->getSiteLinks() as $siteId => $pageName ) {
-			$success = $dbw->insert(
-				'wb_items_per_site',
-				array_merge(
-					$idField,
-					array(
-						'ips_site_id' => $siteId,
-						'ips_site_page' => $pageName,
-					)
-				),
-				__METHOD__
-			) && $success;
-		}
-
-		return $success;
+	protected function setId( $id ) {
+		$this->id = $id;
 	}
 
 	/**
-	 * Saves the fields that have per-language values, such as the labels and descriptions.
-	 * This info is saved in wb_texts_per_lang.
+	 * Returns if the item has an ID set or not.
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean Success indicator
+	 * @return boolean
 	 */
-	protected function saveMultilangFields() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$idField = array( 'tpl_item_id' => $this->getId() );
-
-		$success = $dbw->delete(
-			'wb_texts_per_lang',
-			$idField,
-			__METHOD__
-		);
-
-		$descriptions = $this->getDescriptions();
-		$labels = $this->getLabels();
-
-		foreach ( array_unique( array_merge( array_keys( $descriptions ), array_keys( $labels ) ) ) as $langCode ) {
-			$fieldValues = array( 'tpl_language' => $langCode );
-
-			if ( array_key_exists( $langCode, $descriptions ) ) {
-				$fieldValues['tpl_description'] = $descriptions[$langCode];
-			}
-
-			if ( array_key_exists( $langCode, $labels ) ) {
-				$fieldValues['tpl_label'] = $labels[$langCode];
-			}
-
-			$success = $dbw->insert(
-				'wb_texts_per_lang',
-				array_merge(
-					$idField,
-					$fieldValues
-				),
-				__METHOD__
-			) && $success;
-		}
-
-		return $success;
+	public function hasId() {
+		return !is_null( $this->id );
 	}
 
 	/**
@@ -537,6 +437,224 @@ class WikibaseItem {
 		}
 
 		return $titles;
+	}
+
+	/**
+	 * @return String a string representing the content in a way useful for building a full text search index.
+	 *		 If no useful representation exists, this method returns an empty string.
+	 */
+	public function getTextForSearchIndex() {
+		return ''; #TODO: recursively collect all values from all properties.
+	}
+
+	/**
+	 * @return String the wikitext to include when another page includes this  content, or false if the content is not
+	 *		 includable in a wikitext page.
+	 */
+	public function getWikitextForTransclusion() {
+		return false;
+	}
+
+	/**
+	 * Returns a textual representation of the content suitable for use in edit summaries and log messages.
+	 *
+	 * @param int $maxlength maximum length of the summary text
+	 * @return String the summary text
+	 */
+	public function getTextForSummary( $maxlength = 250 ) {
+		return $this->getDescription( $GLOBALS['wgLang'] );
+	}
+
+	/**
+	 * Returns native represenation of the data. Interpretation depends on the data model used,
+	 * as given by getDataModel().
+	 *
+	 * @return mixed the native representation of the content. Could be a string, a nested array
+	 *		 structure, an object, a binary blob... anything, really.
+	 */
+	public function getNativeData() {
+		return $this->toArray();
+	}
+
+	/**
+	 * returns the content's nominal size in bogo-bytes.
+	 *
+	 * @return int
+	 */
+	public function getSize()  {
+		return strlen( serialize( $this->toArray() ) ); #TODO: keep and reuse value, content object is immutable!
+	}
+
+	/**
+	 * Returns true if this content is countable as a "real" wiki page, provided
+	 * that it's also in a countable location (e.g. a current revision in the main namespace).
+	 *
+	 * @param boolean $hasLinks: if it is known whether this content contains links, provide this information here,
+	 *						to avoid redundant parsing to find out.
+	 * @return boolean
+	 */
+	public function isCountable( $hasLinks = null ) {
+		// TODO: implement
+		return false;
+		//return !empty( $this->data[ WikibaseContent::PROP_DESCRIPTION ] ); #TODO: better/more methods
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isEmpty()  {
+		// TODO: might want to have better handling for this.
+		// What does it mean for an item to be empty?
+		// Certainly not the current check as it can have elements that are empty arrays, making base array non-empty.
+		$data = $this->toArray();
+		return empty( $data );
+	}
+
+	/**
+	 * @param null|Title $title
+	 * @param null $revId
+	 * @param null|ParserOptions $options
+	 * @param boolean $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL, $generateHtml = true )  {
+		global $wgLang;
+
+		// FIXME: StubUserLang::_unstub() not yet called in certain cases, dummy call to init Language object to $wgLang
+		// TODO: use $options->getTargetLanguage() ?
+		$wgLang->getCode();
+
+		$parserOutput = new ParserOutput( $this->generateHtml( $wgLang ) );
+
+		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $title ) );
+
+		return $parserOutput;
+	}
+
+	/**
+	 * TODO: we sure we want to do this here? I'd expect to do this in some kind of view action...
+	 * TODO: we can't just point to $lang.wikipedia!
+	 *
+	 * @param null|Language $lang
+	 * @return String
+	 */
+	private function generateHtml( Language $lang = null ) {
+		$html = '';
+
+		$description = $this->getDescription( $lang->getCode() );
+
+		// even if description is false, we want it in any case!
+		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
+		$html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
+		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
+		$html .= Html::closeElement('div');
+
+		$html .= Html::openElement( 'table', array( 'class' => 'wikitable' ) );
+
+		foreach ( $this->getSiteLinks() AS $siteId => $title ) {
+			$html .= '<tr>';
+
+			$html .= Html::element( 'td', array(), $siteId );
+
+			$html .= '<td>';
+			$html .= Html::element(
+				'a',
+				array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
+				$title
+			);
+			$html .= '</td>';
+
+			$html .= '</tr>';
+		}
+
+		$html .= Html::closeElement( 'table' );
+
+		$htmlTable = '';
+
+		// TODO: implement real ui instead of debug code
+		foreach ( WikibaseContentHandler::flattenArray( $this->toArray() ) as $k => $v ) {
+			$htmlTable .= Html::openElement( 'tr' );
+			$htmlTable .= Html::element( 'td', null, $k );
+			$htmlTable .= Html::element( 'td', null, $v );
+			$htmlTable .= Html::closeElement( 'tr' );
+		}
+
+		$htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
+
+		$html .= $htmlTable;
+
+		return $html;
+	}
+
+	/**
+	 * Returns the WikiPage for the item or false if there is none.
+	 *
+	 * @since 0.1
+	 *
+	 * @return WikiPage|false
+	 */
+	public function getWikiPage() {
+		return $this->hasId() ? self::getWikiPageForId( $this->getId() ) : false;
+	}
+
+	/**
+	 * Returns the Title for the item or false if there is none.
+	 *
+	 * @since 0.1
+	 *
+	 * @return Title|false
+	 */
+	public function getTitle() {
+		return $this->hasId() ? self::getTitleForId( $this->getId() ) : false;
+	}
+
+	/**
+	 * Returns the WikiPage object for the item with provided id.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $itemId
+	 *
+	 * @return WikiPage
+	 */
+	public static function getWikiPageForId( $itemId ) {
+		return new WikiPage( self::getTitleForId( $itemId ) );
+	}
+
+	/**
+	 * Returns the Title object for the item with provided id.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $itemId
+	 *
+	 * @return Title
+	 */
+	public static function getTitleForId( $itemId ) {
+		return Title::newFromText( 'Data:Q' . $itemId ); // TODO
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return WikibaseItem
+	 */
+	public static function newFromArray( array $data ) {
+		$item = new static( $data, true );
+		$item->cleanStructure();
+		return $item;
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @return WikibaseItem
+	 */
+	public static function newEmpty() {
+		return self::newFromArray( array() );
 	}
 
 }

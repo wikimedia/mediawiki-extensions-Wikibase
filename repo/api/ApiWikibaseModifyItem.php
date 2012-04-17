@@ -68,10 +68,10 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 
 		if ( isset( $params['id'] ) && $params['id'] !== false ) {
-			$page = WikibaseUtils::getWikiPageForId( $params['id'] );
+			$page = WikibaseItem::getWikiPageForId( $params['id'] );
 
 			if ( $page->exists() ) {
-				$content = $page->getContent();
+				$item = $page->getContent();
 			}
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
@@ -79,30 +79,26 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 		else {
 			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
-			$item = WikibaseItem::newFromArray( array() );
-			$success = $item->structuredSave();
+			$item = WikibaseItem::newEmpty();
+			$success = $item->save();
 
 			if ( $success ) {
-				$page = WikibaseUtils::getWikiPageForId( $item->getId() );
-				$content = new WikibaseContent( array( 'entity' => $item->getId() ) );
+				$page = $item->getWikiPage();
 			}
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
 			}
 		}
 
-		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
-			$item = $content->getItem();
-
+		if ( $item->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			$success = $this->modifyItem( $item, $params );
 
 			if ( $success ) {
-				$content->setItem( $item );
 				// TODO: only does update
 				$status = $page->doEditContent(
-					$content,
+					$item,
 					$params['summary'],
-					EDIT_UPDATE | EDIT_AUTOSUMMARY,
+					EDIT_AUTOSUMMARY,
 					false,
 					$this->getUser(),
 					'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
