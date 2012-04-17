@@ -159,10 +159,13 @@ class WikibaseContent extends Content {
 		$html .= Html::closeElement( 'div' );
 
 		$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-languagelinks' ) );
-		if( count( $item->getSiteLinks() ) == 0 ) {
+		
+		if( ! (bool)$item->getSiteLinks() ) {
+			// no site links available for this item
 			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
 		} else {
 			$html .= Html::openElement( 'dl', array( 'class' => 'wb-languagelinks-list' ) );
+			
 			foreach( $item->getSiteLinks() AS $siteId => $title ) {
 				$html .= Html::element( 'dt', array( 'id' => 'wb-languagelinks-language-' . $siteId ), $siteId );
 				$html .= Html::openElement( 'dd', array( 'id' => 'wb-languagelinks-link-' . $siteId ) );
@@ -177,6 +180,7 @@ class WikibaseContent extends Content {
 					'class' => 'wb-languagelinks-toolbar-container'
 				) );
 			}
+			$html .= Html::closeElement( 'dl' );
 		}
 
 		$htmlTable = '';

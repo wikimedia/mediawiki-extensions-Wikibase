@@ -530,6 +530,10 @@ class WikibaseItem {
 	 * @return array
 	 */
 	public function getSiteLinks() {
+		#-----------------------------------------------------------------
+		# TODO: remove this when Jaroen has fixed api/storage
+		return array( 'de' => 'Berlin', 'en' =>'Berlin (city)', 'he' => 'asjdf' );
+		#-----------------------------------------------------------------
 		$titles = array();
 
 		foreach ( $this->data['links'] as $siteId => $linkData ) {
