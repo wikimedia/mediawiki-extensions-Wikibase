@@ -44,29 +44,29 @@ class ApiWikibaseGetItem extends ApiBase {
 
 		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
 		$content = $page->getContent(); // TODO: The call to getContent is not implemented (?)
-		
+
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			$item = $content->getItem();
-			
+
 			$sitelinks = $item->getSiteLinks();
 			$this->getResult()->addValue(
-			 	'page', 
+				'page',
 				'sitelinks',
 				(int)$success
 			);
-			
+
 			$languages = WikibaseUtils::getLanguageCodes();
-			
+
 			$labels = $item->getLabels($languages); // TODO: Set specific languages
 			$this->getResult()->addValue(
-			 	'page', 
+				'page',
 				'labels',
 				$labels
 			);
-			
+
 			$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
 			$this->getResult()->addValue(
-			 	'page', 
+				'page',
 				'descriptions',
 				$descriptions
 			);
@@ -132,18 +132,18 @@ class ApiWikibaseGetItem extends ApiBase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitem&id=42'
-				=> 'Get item number 42 with default (user?) language',
+			=> 'Get item number 42 with default (user?) language',
 			'api.php?action=wbgetitem&id=42&language=en'
-				=> 'Get item number 42 with english language',
+			=> 'Get item number 42 with english language',
 			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
-				=> 'Get the item associated to page Berlin on the site identified by "en"',
+			=> 'Get the item associated to page Berlin on the site identified by "en"',
 		);
 	}
 
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetitem';
 	}
-	
+
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}
