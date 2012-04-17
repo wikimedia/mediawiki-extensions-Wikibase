@@ -56,7 +56,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'link' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', ''remove' ),
+				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 		) );
