@@ -157,26 +157,26 @@ class WikibaseContent extends Content {
 		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
 		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
 		$html .= Html::closeElement( 'div' );
-
+				
 		$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-languagelinks' ) );
-		if( count( $item->getSiteLinks() ) == 0 ) {
+		
+		if( ! (bool)$item->getSiteLinks() ) {
+			// no site links available for this item
 			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
 		} else {
 			$html .= Html::openElement( 'dl', array( 'class' => 'wb-languagelinks-list' ) );
+			
 			foreach( $item->getSiteLinks() AS $siteId => $title ) {
-				$html .= Html::element( 'dt', array( 'id' => 'wb-languagelinks-language-' . $siteId ), $siteId );
-				$html .= Html::openElement( 'dd', array( 'id' => 'wb-languagelinks-link-' . $siteId ) );
+				$html .= Html::element( 'dt', array( 'class' => 'wb-languagelinks-language-' . $siteId ), $siteId );
+				$html .= Html::openElement( 'dd', array( 'class' => 'wb-languagelinks-link-' . $siteId ) );
 				$html .= Html::element(
 					'a',
 					array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
 					$title
 				);
 				$html .= Html::closeElement( 'dd' );
-				$html .= Html::element( 'span', array(
-					'id' => 'wb-languagelinks-toolbar-'.$siteId,
-					'class' => 'wb-languagelinks-toolbar-container'
-				) );
 			}
+			$html .= Html::closeElement( 'dl' );
 		}
 
 		$htmlTable = '';
