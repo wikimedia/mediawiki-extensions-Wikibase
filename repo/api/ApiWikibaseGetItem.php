@@ -19,7 +19,6 @@ class ApiWikibaseGetItem extends ApiBase {
 		parent::__construct( $main, $action );
 	}
 
-
 	/**
 	 * Main method. Does the actual work and sets the result.
 	 *
@@ -32,25 +31,69 @@ class ApiWikibaseGetItem extends ApiBase {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
-//		if ( !isset( $params['id'] ) ) {
-//			$params['id'] = WikibaseItem::getIdForSiteLink( $params['wiki'], $params['title '] );
-//		}
+		$success = false;
 
-		// TODO: implement
+		if ( !isset( $params['id'] ) ) {
+			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
+
+			if ( $params['id'] === false ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+			}
+		}
+
+		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
+		$content = $page->getContent(); // TODO: The call to getContent is not implemented (?)
+		
+		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
+			$item = $content->getItem();
+			
+			$sitelinks = $item->getSiteLinks();
+			$this->getResult()->addValue(
+			 	'page', 
+				'sitelinks',
+				(int)$success
+			);
+			
+			$languages = WikibaseUtils::getLanguageCodes();
+			
+			$labels = $item->getLabels($languages); // TODO: Set specific languages
+			$this->getResult()->addValue(
+			 	'page', 
+				'labels',
+				$labels
+			);
+			
+			$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
+			$this->getResult()->addValue(
+			 	'page', 
+				'descriptions',
+				$descriptions
+			);
+			$success = true;
+		}
+		else {
+			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
+		}
+
+		$this->getResult()->addValue(
+			null,
+			'success',
+			(int)$success
+		);
 	}
 
 	public function getAllowedParams() {
 		return array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_ISMULTI => true,
+				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 			'site' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_ISMULTI => true,
+				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 			'language' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
@@ -87,15 +130,20 @@ class ApiWikibaseGetItem extends ApiBase {
 				=> 'Get item number 42 with default (user?) language',
 			'api.php?action=wbgetitem&id=42&language=en'
 				=> 'Get item number 42 with english language',
+/*
+			// takes multiple values without using plural form
 			'api.php?action=wbgetitem&id=4|2'
 				=> 'Get item number 4 and 2 with default (user?) language',
+			// takes multiple values without using plural form
 			'api.php?action=wbgetitem&id=4|2&language=en'
 				=> 'Get item number 4 and 2 with english language',
-
 			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
 				=> 'Get the item associated to page Berlin on the site identified by "en"',
+/*
+			// takes multiple values without using plural form
 			'api.php?action=wbgetitem&site=en&title=Berlin|Foobar&language=en'
 				=> 'Get the items associated to pages Berlin and Foobar on the site identified by "en"',
+*/
 		);
 	}
 
