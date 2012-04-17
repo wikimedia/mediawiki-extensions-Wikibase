@@ -2,6 +2,7 @@
 
 /**
  * API module to get the data for a single Wikibase item.
+ * //TODO: Should this be renamed to QueryItem to conform with API naming conventions?
  *
  * @since 0.1
  *
@@ -28,15 +29,51 @@ class ApiWikibaseGetItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title '] ) ) ) ) {
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
 //		if ( !isset( $params['id'] ) ) {
-//			$params['id'] = WikibaseItem::getIdForSiteLink( $params['wiki'], $params['title '] );
+//			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 //		}
 
 		// TODO: implement
+		// What follows is a sketch of the implementation (author: Nikola)
+		if ( !isset( $params['id'] ) ) {
+			$this->dieUsage( 'Right now the API only supports the ID, this error should be removed.' );
+		}
+
+		$result = $this->getResult();
+
+		$ids = $params['id'];
+		foreach( $ids as $id ) {
+			try {
+				$item = self::getItemFromId( $id );
+			} catch( MWException $e ) {
+				$msg = $e->getMessage();
+				$this->dieUsage( wfMsg( $msg ), $msg );
+			}
+
+			$result->addValue( array( 'query', 'ids', 'id' . $id ), 'data', $item );
+		}
+	}
+
+	/**
+	 */
+	public static function getItemFromId( $id ) {
+		$title = Title::newFromID($id);
+		if( $title === null ) {
+			throw new MWException( 'wikibase-api-unknown-id' );
+		}
+
+		$article = new Article( $title );
+		$content = $article->getContentObject();
+
+		if( $content->mModelName !== 'wikidata' ) {
+			throw new MWException( 'wikibase-api-unknown-model' );
+		}
+
+		return $content->mData;
 	}
 
 	public function getAllowedParams() {
