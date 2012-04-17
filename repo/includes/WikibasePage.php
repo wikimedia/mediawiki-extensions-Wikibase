@@ -27,10 +27,10 @@ class WikibasePage extends Article {
 		$out->addModules( 'wikibase' );
 		
 		// overwrite page title
-		$out->setPageTitle( $content->getItem()->getLabel( $contentLang ) );
+		$out->setPageTitle( $content->getLabel( $contentLang ) );
 		
 		// hand over the itemId to JS
-		$out->addJsConfigVars( 'wbItemId', $content->getItem()->getId() );
+		$out->addJsConfigVars( 'wbItemId', $content->getId() );
 		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLang ) );
 	}
 	
