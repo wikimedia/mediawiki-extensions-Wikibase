@@ -430,10 +430,6 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return array
 	 */
 	public function getSiteLinks() {
-		#-----------------------------------------------------------------
-		# TODO: remove this when Jaroen has fixed api/storage
-		return array( 'de' => 'Berlin', 'en' =>'Berlin (city)', 'he' => 'asjdf' );
-		#-----------------------------------------------------------------
 		$titles = array();
 
 		foreach ( $this->data['links'] as $siteId => $linkData ) {
@@ -547,32 +543,33 @@ class WikibaseItem extends WikibaseEntity {
 		$html = '';
 
 		$description = $this->getDescription( $lang->getCode() );
-
+		
 		// even if description is false, we want it in any case!
 		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
-		$html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
-		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
-		$html .= Html::closeElement('div');
-
-		$html .= Html::openElement( 'table', array( 'class' => 'wikitable' ) );
-
-		foreach ( $this->getSiteLinks() AS $siteId => $title ) {
-			$html .= '<tr>';
-
-			$html .= Html::element( 'td', array(), $siteId );
-
-			$html .= '<td>';
-			$html .= Html::element(
-				'a',
-				array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
-				$title
-			);
-			$html .= '</td>';
-
-			$html .= '</tr>';
+		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
+		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
+		$html .= Html::closeElement( 'div' );
+				
+		$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-languagelinks' ) );
+		
+		if( ! (bool)$this->getSiteLinks() ) {
+			// no site links available for this item
+			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
+		} else {
+			$html .= Html::openElement( 'dl', array( 'class' => 'wb-languagelinks-list' ) );
+			
+			foreach( $this->getSiteLinks() AS $siteId => $title ) {
+				$html .= Html::element( 'dt', array( 'class' => 'wb-languagelinks-language-' . $siteId ), $siteId );
+				$html .= Html::openElement( 'dd', array( 'class' => 'wb-languagelinks-link-' . $siteId ) );
+				$html .= Html::element(
+					'a',
+					array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
+					$title
+				);
+				$html .= Html::closeElement( 'dd' );
+			}
+			$html .= Html::closeElement( 'dl' );
 		}
-
-		$html .= Html::closeElement( 'table' );
 
 		$htmlTable = '';
 
