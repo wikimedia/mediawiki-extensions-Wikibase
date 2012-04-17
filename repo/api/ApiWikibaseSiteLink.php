@@ -27,11 +27,11 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		if ( $params['change'] === 'add' ) {
-			return $item->addSiteLink( $params['site'], $params['title'], !$params['noupdate'] );
+		if ( $params['change'] === 'remove' ) {
+			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			return $item->removeSiteLink( $params['site'], $params['title'] );
+			return $item->addSiteLink( $params['linksite'], $params['linktitle'], !$params['link'] );
 		}
 	}
 
@@ -46,24 +46,16 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 			'badge' => array(
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
-			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'site' => array(
+			'linksite' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'title' => array(
+			'linktitle' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'noupdate' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false,
-			),
-			'change' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'remove' ),
+			'link' => array(
+				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 		) );
@@ -71,11 +63,11 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 
 	public function getParamDescription() {
 		return array_merge( parent::getAllowedParams(), array(
-			'id' => 'The ID of the item to associate the page with',
+			'linksite' => 'The identifier of the site on which the article to link resides',
+			'linktitle' => 'The title of the article to link',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
 			'summary' => 'Summary for the edit',
-			'noupdate' => 'Indicates that if a link to the specified site already exists, it should not be updated to use the provided page',
-			'change' => 'Inidcates if you are adding or removing the link',
+			'link' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
 		) );
 	}
 

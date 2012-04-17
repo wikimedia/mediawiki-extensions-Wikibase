@@ -98,27 +98,45 @@ $wgAPIModules['wbsitelink'] 						= 'ApiWikibaseSiteLink';
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
-
+$wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 
 
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' => 'Wikibase/resources',
+	'remoteExtPath' => preg_replace( '%^.*[/\\\](.+)$%', '$1', dirname( __FILE__ ) ) . '/resources'
 );
 
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
-	'scripts' => array(
+	'scripts' => array(	
 		'wikibase.js',
-		'wikibase.ui.js'
+		'wikibase.ui.js',
+		'wikibase.ui.PropertyEditTool.js',
+		'wikibase.ui.PropertyEditTool.Toolbar.js',
+		'wikibase.ui.PropertyEditTool.Toolbar.Group.js',
+		'wikibase.ui.PropertyEditTool.Toolbar.Label.js',
+		'wikibase.ui.PropertyEditTool.Toolbar.Button.js',
+		'wikibase.ui.PropertyEditTool.Toolbar.Tooltip.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.js',
+		'wikibase.ui.HeadingEditTool.js',
+		'wikibase.startup.js'
 	),
-	/*
 	'styles' => array(
-		'wikibase.exampleName.css',
+		'../../../skins/common/shared.css',
+		'wikibase.ui.PropertyEditTool.css'
 	),
-	 */
 	'dependencies' => array(
+		'jquery.tipsy'
 	),
+	'messages' => array(
+		'wikibase-cancel',
+		'wikibase-edit',
+		'wikibase-save',
+		'wikibase-label-edit-placeholder',
+		'wikibase-description-edit-placeholder',
+		'wikibase-label-input-help-message',
+		'wikibase-description-input-help-message'
+	)
 );
 
 unset( $moduleTemplate );

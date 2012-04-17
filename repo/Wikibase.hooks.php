@@ -50,4 +50,16 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * In Wikidata namespace, page content language is the same as the current user language.
+	 * @author	Nikola Smolenski
+	 */
+	public static function onPageContentLanguage( $title, &$pageLang, $wgLang ) {
+		global $wgNamespaceContentModels;
+		if( $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE ) {
+			$pageLang = $wgLang;
+		}
+		return true;
+	}
+
 }

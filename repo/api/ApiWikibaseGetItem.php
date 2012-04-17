@@ -136,8 +136,7 @@ class ApiWikibaseGetItem extends ApiBase {
 				=> 'Get item number 4 and 2 with default (user?) language',
 			// takes multiple values without using plural form
 			'api.php?action=wbgetitem&id=4|2&language=en'
-				=> 'Get item number 4 and 2 with enlish language',
-*/
+				=> 'Get item number 4 and 2 with english language',
 			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
 				=> 'Get the item associated to page Berlin on the site identified by "en"',
 /*

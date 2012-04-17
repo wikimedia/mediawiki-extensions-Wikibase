@@ -47,8 +47,14 @@ class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 
 	public function getParamDescription() {
 		return array_merge( parent::getAllowedParams(), array(
+<<<<<<< HEAD
 			'description' => 'Language the description is in',
 			'label' => 'The value to set for the description',
+=======
+			'id' => 'The ID of the item to set a description for',
+			'language' => 'Language the description is in',
+			'description' => 'The value to set for the description',
+>>>>>>> Erroneous name of two arguments, switching them
 		) );
 	}
 
