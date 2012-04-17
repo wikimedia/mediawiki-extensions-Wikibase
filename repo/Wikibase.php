@@ -61,17 +61,6 @@ $wgExtensionMessagesFiles['Wikibase'] 				= $dir . 'Wikibase.i18n.php';
 $wgAutoloadClasses['WBSettings'] 					= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 				= $dir . 'Wikibase.hooks.php';
 
-// api
-$wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'api/ApiWikibaseGetItem.php';
-$wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'api/ApiWikibaseLinkArticles.php';
-$wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'api/ApiWikibaseSetLabel.php';
-$wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'api/ApiWikibaseSetDescription.php';
-$wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'api/ApiWikibaseAddAlias.php';
-$wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'api/ApiWikibaseRemoveAlias.php';
-$wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'api/ApiWikibaseModifyItem.php';
-$wgAutoloadClasses['ApiWikibaseSiteLink'] 			= $dir . 'api/ApiWikibaseSiteLink.php';
-
 // includes
 $wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 		= $dir . 'includes/WikibaseDifferenceEngine.php';
@@ -85,6 +74,16 @@ $wgAutoloadClasses['WikibaseItemView'] 				= $dir . 'includes/WikibaseItemView.p
 $wgAutoloadClasses['WikibaseViewItemAction'] 		= $dir . 'includes/actions/WikibaseViewItemAction.php';
 $wgAutoloadClasses['WikibaseEditItemAction'] 		= $dir . 'includes/actions/WikibaseEditItemAction.php';
 
+// includes/api
+$wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'includes/api/ApiWikibaseGetItem.php';
+$wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'includes/api/ApiWikibaseGetItemId.php';
+$wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'includes/api/ApiWikibaseLinkArticles.php';
+$wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'includes/api/ApiWikibaseSetLabel.php';
+$wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'includes/api/ApiWikibaseSetDescription.php';
+$wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'includes/api/ApiWikibaseAddAlias.php';
+$wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'includes/api/ApiWikibaseRemoveAlias.php';
+$wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibaseModifyItem.php';
+$wgAutoloadClasses['ApiWikibaseSiteLink'] 			= $dir . 'includes/api/ApiWikibaseSiteLink.php';
 
 // API module registration
 $wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
