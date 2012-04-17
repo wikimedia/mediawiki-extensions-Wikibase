@@ -26,7 +26,7 @@ $messages['en'] = array(
 		'wikibase-description-edit-placeholder' => 'enter description',
 		'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 		'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
-		'wikibase-languageLinks' => 'Language Links',
-		'wikibase-languageLinks-add' => 'add language link',
-		'wikibase-langaugeLinks-empty' => 'No language links currently defined.'
+		'wikibase-languagelinks' => 'Wikipedia Pages linked to this item',
+		'wikibase-languagelinks-add' => 'add a link to a Wikipedia page',
+		'wikibase-languagelinks-empty' => 'No Wikipedia pages linked to this item yet.'
 );
