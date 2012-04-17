@@ -18,7 +18,7 @@ $messages = array();
  * @author Tobias Gritschacher
  */
 $messages['en'] = array(
-        'wikibase-desc' => 'Structured data repository',
+		'wikibase-desc' => 'Structured data repository',
 		'wikibase-edit' => 'edit',
 		'wikibase-save' => 'save',
 		'wikibase-cancel' => 'cancel',
@@ -26,4 +26,7 @@ $messages['en'] = array(
 		'wikibase-description-edit-placeholder' => 'enter description',
 		'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 		'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
+		'wikibase-languagelinks' => 'Wikipedia Pages linked to this item',
+		'wikibase-languagelinks-add' => 'add a link to a Wikipedia page',
+		'wikibase-languagelinks-empty' => 'No Wikipedia pages linked to this item yet.'
 );

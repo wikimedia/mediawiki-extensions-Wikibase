@@ -100,7 +100,6 @@ $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 
-
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
