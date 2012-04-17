@@ -124,6 +124,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'id-xor-wikititle', 'info' => 'Needs an id or a combination of a site and wikititle' ),
+			array( 'code' => 'add-with-id', 'info' => 'Can not add with an item id' ),
+			array( 'code' => 'add-exists', 'info' => 'Can not add to an existing item' ),
+			array( 'code' => 'no-such-item-link', 'info' => 'Could not find an existing item for this link' ),
+			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
+			array( 'code' => 'create-failed', 'info' => 'Attempted creation of new item failed' ),
 			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
 		) );
 	}
