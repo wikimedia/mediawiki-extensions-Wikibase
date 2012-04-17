@@ -142,7 +142,6 @@ class WikibaseContent extends Content {
 
 	/**
 	 * TODO: we sure we want to do this here? I'd expect to do this in some kind of view action...
-	 * TODO: we can't just point to $lang.wikipedia!
 	 *
 	 * @param null|Language $lang
 	 * @return String
@@ -155,29 +154,32 @@ class WikibaseContent extends Content {
 		
 		// even if description is false, we want it in any case!
 		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
-		$html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
-		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
-		$html .= Html::closeElement('div');		
+		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
+		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
+		$html .= Html::closeElement( 'div' );
 
-		$html .= Html::openElement( 'table', array( 'class' => 'wikitable' ) );
+		$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-languageLinks' ) );
+		if( count( $item->getSiteLinks() ) == 0 ) {
+			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-langaugeLinks-empty' ) );
+		} else {
+			$html .= Html::openElement( 'dl', array( 'class' => 'wb-languageLinks-list' ) );
+			foreach( $item->getSiteLinks() AS $siteId => $title ) {
+				$html .= Html::element( 'dt', array( 'id' => 'wb-languageLinks-language-'.$siteId ), $siteId );
+				$html .= Html::openElement( 'dd', array( 'id' => 'wb-languageLinks-link-'.$siteId ) );
+				$html .= Html::element(
+					'a',
+					array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
+					$title
+				);
+				$html .= Html::closeElement( 'dd' );
+				$html .= Html::element( 'span', array(
+					'id' => 'wb-languageLinks-toolbar-'.$siteId,
+					'class' => 'wb-languageLinks-toolbar-container'
+				) );
+			}
+		}
+		$html .= Html::element( 'div', array( 'class' => 'wb-languageLinks-add-container' ) );
 
-		foreach ( $item->getSiteLinks() AS $siteId => $title ) {
-			$html .= '<tr>';
-
-			$html .= Html::element( 'td', array(), $siteId );
-
-			$html .= '<td>';
-			$html .= Html::element(
-				'a',
-				array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
-				$title
-			);
-			$html .= '</td>';
-
-			$html .= '</tr>';
-		}		
-
-		$html .= Html::closeElement( 'table' );
 
 		$htmlTable = '';
 
