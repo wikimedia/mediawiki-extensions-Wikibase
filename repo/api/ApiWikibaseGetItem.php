@@ -2,6 +2,7 @@
 
 /**
  * API module to get the data for a single Wikibase item.
+ * //TODO: Should this be renamed to QueryItem to conform with API naming conventions?
  *
  * @since 0.1
  *
@@ -33,13 +34,18 @@ class ApiWikibaseGetItem extends ApiBase {
 
 		$success = false;
 
+		// TODO: implement
+		// What follows is a sketch of the implementation (author: Nikola)
 		if ( !isset( $params['id'] ) ) {
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
+
+			$result->addValue( array( 'query', 'ids', 'id' . $id ), 'data', $item );
 		}
+	}
 
 		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
 		$content = $page->getContent();
@@ -126,6 +132,12 @@ class ApiWikibaseGetItem extends ApiBase {
 		) );
 	}
 
+	protected function getExamples() {
+		return array(
+			'api.php?action=wbgetitem&id=42'
+				=> 'Get item number 42 with default (user?) language',
+			'api.php?action=wbgetitem&id=42&language=en'
+				=> 'Get item number 42 with english language',
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitem&id=42'
