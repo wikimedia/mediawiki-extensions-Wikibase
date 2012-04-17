@@ -35,7 +35,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * The editable value for the properties data value
 	 * @var wikibase.ui.PropertyEditTool.EditableValue
 	 */
-	_editableValue: null,
+	_editableValues: null,
 		
 	/**
 	 * Initializes the edit form for the given element.
@@ -46,10 +46,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
+		this._editableValues = new Array();
+		
 		this._subject = $( subject );
 		this._subject.addClass( this.UI_CLASS + '-subject' );
 				
-		this._initEditToolForValue();
+		this._initEditToolForValues();
 	},
 	
 	/*
@@ -62,22 +64,38 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	*/
    
-	_initEditToolForValue: function() {
-		var x =  this.getEditableValuePrototype();
-		this._editableValue = new x();
-
-		// todo: show a label, not the property id:
-		this._editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
-
-		this._editableValue._init( this._getValueElem() );
+	_initEditToolForValues: function() {	   
+		var allValues = this._getValueElems();
+		
+		if( ! this.allowsMultipleValues ) {
+			allValues = $( allValues[0] );
+		}
+		
+		var self = this;
+		allValues.each( function() {
+			self._initSingleValue( this );
+		} );
 	},
 	
 	/**
-	 * Returns the node representing the properties value.
+	 * Takes care of initialization of a single value
+	 * @param jQuery valueElem
+	 */
+	_initSingleValue: function( valueElem ) {
+		var editableValue = new ( this.getEditableValuePrototype() )();
+		
+		editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
+		editableValue._init( valueElem );
+		
+		this._editableValues.push( editableValue );
+	},
+	
+	/**
+	 * Returns the nodes representing the properties values.
 	 * @return jQuery
 	 */
-	_getValueElem: function() {
-		return $( this._subject.children( '.wb-property-container-value' )[0] );
+	_getValueElems: function() {
+		return this._subject.children( '.wb-property-container-value' );
 	},
 	
 	destroy: function() {
@@ -104,5 +122,15 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 */
 	getEditableValuePrototype: function() {
 		return window.wikibase.ui.PropertyEditTool.EditableDescription;
-	}
+	},
+	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
+	/**
+	 * If true, the tool will manage several editable values and offer a remove and add command
+	 * @var bool
+	 */
+	allowsMultipleValues: true
 };

@@ -32,10 +32,10 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 	},
 	
 	/**
-	 * @see wikibase.ui.PropertyEditTool._getValueElem()
+	 * @see wikibase.ui.PropertyEditTool._getValueElems()
 	 */
-	_getValueElem: function() {
-		return $( this._subject.children( 'h1.firstHeading span' )[0] );
+	_getValueElems: function() {
+		return this._subject.children( 'h1.firstHeading span' );
 	},
 	
 	/**
@@ -48,5 +48,7 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 	
 	getEditableValuePrototype: function() {
 		return window.wikibase.ui.PropertyEditTool.EditableLabel;
-	}
+	},
+	
+	allowsMultipleValues: true
 } );
