@@ -92,7 +92,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	
 	/**
 	 * Returns the nodes representing the properties values.
-	 * @return jQuery
+	 * @return jQuery|Array
 	 */
 	_getValueElems: function() {
 		return this._subject.children( '.wb-property-container-value' );

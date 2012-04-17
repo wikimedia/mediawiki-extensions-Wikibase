@@ -119,8 +119,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'name': this._key,
 			'value': initText,
 			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._keyPressed, this ), // todo: this shouldn't be used, keyup should work fine!
-			'keyup': jQuery.proxy( this._keyPressed, this ),	// for escape key browser compability
+			'keypress': jQuery.proxy( this._keyPressed, this ), // TODO: this shouldn't be used, keyup should work fine!
+			'keyup': jQuery.proxy( this._keyPressed, this ),	//       we have both for escape key browser compability
 			'focus': jQuery.proxy( this._onFocus, this ),
 			'blur': jQuery.proxy( this._onBlur, this )
 		} );
@@ -149,7 +149,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
-		//this._toolbar.draw();
 	},
 
 	/**

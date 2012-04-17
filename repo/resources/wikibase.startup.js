@@ -25,5 +25,7 @@
 	
 	// add an edit tool for the main label. This will be integrated into the heading nicely:
 	new window.wikibase.ui.HeadingEditTool( $( '#firstHeading' ) );
-
+	
+	// edit tool for site links:
+	new window.wikibase.ui.SiteLinksEditTool( $( '.wb-languagelinks-list' ) );
 } )( jQuery );
