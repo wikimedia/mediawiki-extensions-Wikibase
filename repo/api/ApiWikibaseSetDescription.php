@@ -46,9 +46,10 @@ class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 	}
 
 	public function getParamDescription() {
-		return array_merge( parent::getAllowedParams(), array(
-			'description' => 'Language the description is in',
-			'label' => 'The value to set for the description',
+		return array_merge( parent::getParamDescription(), array(
+			'id' => 'The ID of the item to set a description for',
+			'language' => 'Language the description is in',
+			'description' => 'The value to set for the description',
 		) );
 	}
 
@@ -67,8 +68,6 @@ class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
 		return array(
 			'api.php?action=wbsetdescription&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "42" as a decription in English language',
-			'api.php?action=wbsetdescription&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit&test'
-				=> 'Fake a set description, always returns the same values',
 		);
 	}
 	
