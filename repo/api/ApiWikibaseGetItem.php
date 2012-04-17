@@ -43,37 +43,36 @@ class ApiWikibaseGetItem extends ApiBase {
 
 		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
 		$content = $page->getContent(); // TODO: The call to getContent is not implemented (?)
-		
-		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
-			$item = $content->getItem();
-			
-			$sitelinks = $item->getSiteLinks();
-			$this->getResult()->addValue(
-			 	'page', 
-				'sitelinks',
-				(int)$success
-			);
-			
-			$languages = WikibaseUtils::getLanguageCodes();
-			
-			$labels = $item->getLabels($languages); // TODO: Set specific languages
-			$this->getResult()->addValue(
-			 	'page', 
-				'labels',
-				$labels
-			);
-			
-			$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
-			$this->getResult()->addValue(
-			 	'page', 
-				'descriptions',
-				$descriptions
-			);
-			$success = true;
-		}
-		else {
+
+		if ( $content->getModelName() !== CONTENT_MODEL_WIKIBASE ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
 		}
+
+		$item = $content->getItem();
+
+		$sitelinks = $item->getSiteLinks();
+		$this->getResult()->addValue(
+			'page', 
+			'sitelinks',
+			(int)$success
+		);
+
+		$languages = WikibaseUtils::getLanguageCodes();
+
+		$labels = $item->getLabels($languages); // TODO: Set specific languages
+		$this->getResult()->addValue(
+			'page',
+			'labels',
+			$labels
+		);
+
+		$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
+		$this->getResult()->addValue(
+			'page',
+			'descriptions',
+			$descriptions
+		);
+		$success = true;
 
 		$this->getResult()->addValue(
 			null,
@@ -107,8 +106,12 @@ class ApiWikibaseGetItem extends ApiBase {
 			'id' => 'The ID of the item to get the data from',
 			'language' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
-			'title' => 'The title of the corresponding page',
-			'site' => 'Identifier for the site on which the corresponding page resides',
+			'title' => array( 'The title of the corresponding page',
+				"Use together with 'site'."
+			),
+			'site' => array( 'Identifier for the site on which the corresponding page resides',
+				"Use together with 'title'."
+			),
 		);
 	}
 
@@ -127,30 +130,18 @@ class ApiWikibaseGetItem extends ApiBase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitem&id=42'
-				=> 'Get item number 42 with default (user?) language',
+			=> 'Get item number 42 with default (user?) language',
 			'api.php?action=wbgetitem&id=42&language=en'
-				=> 'Get item number 42 with english language',
-/*
-			// takes multiple values without using plural form
-			'api.php?action=wbgetitem&id=4|2'
-				=> 'Get item number 4 and 2 with default (user?) language',
-			// takes multiple values without using plural form
-			'api.php?action=wbgetitem&id=4|2&language=en'
-				=> 'Get item number 4 and 2 with english language',
+			=> 'Get item number 42 with english language',
 			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
-				=> 'Get the item associated to page Berlin on the site identified by "en"',
-/*
-			// takes multiple values without using plural form
-			'api.php?action=wbgetitem&site=en&title=Berlin|Foobar&language=en'
-				=> 'Get the items associated to pages Berlin and Foobar on the site identified by "en"',
-*/
+			=> 'Get the item associated to page Berlin on the site identified by "en"',
 		);
 	}
 
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetitem';
 	}
-	
+
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

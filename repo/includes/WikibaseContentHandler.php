@@ -2,7 +2,6 @@
 
 /**
  * Class representing a Wikibase page.
- * TODO: describe exact purpose - how does this relate to WikibasePage?
  *
  * @since 0.1
  *
@@ -16,10 +15,10 @@ class WikibaseContentHandler extends ContentHandler {
 	/**
 	 * FIXME: bad method name
 	 *
-	 * @return WikibaseContent
+	 * @return WikibaseItem
 	 */
 	public function makeEmptyContent() {
-		return new WikibaseContent( array() );
+		return WikibaseItem::newEmpty();
 	}
 
 	public function __construct() {
@@ -31,10 +30,11 @@ class WikibaseContentHandler extends ContentHandler {
 		parent::__construct( CONTENT_MODEL_WIKIBASE, $formats );
 	}
 
-	public function createArticle( Title $title ) {
-		return new WikibasePage( $title );
-	}
-
+	/**
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
 	public function getDefaultFormat() {
 		return WBSettings::get( 'serializationFormat' );
 	}
@@ -69,11 +69,18 @@ class WikibaseContentHandler extends ContentHandler {
 		return $blob;
 	}
 
+	public function getActionOverrides() {
+		return array(
+			'view' => 'WikibaseViewItemAction',
+			'edit' => 'WikibaseEditItemAction',
+		);
+	}
+
 	/**
 	 * @param string $blob
 	 * @param null|string $format
 	 *
-	 * @return WikibaseContent
+	 * @return WikibaseItem
 	 */
 	public function unserializeContent( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
@@ -96,7 +103,7 @@ class WikibaseContentHandler extends ContentHandler {
 			throw new MWContentSerializationException( 'failed to deserialize' );
 		}
 
-		return new WikibaseContent( $data );
+		return WikibaseItem::newFromArray( $data );
 	}
 
 	public static function flattenArray( $a, $prefix = '', &$into = null ) {
