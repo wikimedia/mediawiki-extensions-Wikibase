@@ -56,7 +56,9 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	},
 
 	destroy: function() {
-		// TODO
+		if ( this._elem != null ) {
+			this._elem.remove();
+		}
 	},
 	
 	/**

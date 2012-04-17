@@ -99,9 +99,9 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	
 	destroy: function() {
-		this._valueToolbar.destroy();
-		this._editableValue.destroy();
-		// TODO
+		if ( this._editableValue != null ) {
+			//this._editableValue.destroy();
+		}
 	},
 	
 	/**

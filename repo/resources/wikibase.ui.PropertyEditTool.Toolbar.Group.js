@@ -60,6 +60,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 			.append( ']' );
 		}
 	},
+
+	destroy: function() {
+		window.wikibase.ui.PropertyEditTool.Toolbar.prototype.destroy.call( this );
+	},
 	
 	/////////////////
 	// CONFIGURABLE:
@@ -98,6 +102,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
 	 */
 	btnSave: null,
+
+	/**
+	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
+	 */
+	btnRemove: null,
 	
 	/**
 	 * @var window.wikibase.ui.PropertyEditTool.EditableValue
@@ -145,17 +154,29 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 
 		this.btnSave = new button( window.mw.msg( 'wikibase-save' ) );
 		this.btnSave.onAction = this._saveActionHandler();
-		
+
 		// add 'edit' button only for now:
 		this.innerGroup.addElement( this.btnEdit );
+
+		if ( this.displayRemoveButton ) {
+			this.btnRemove = new button( window.mw.msg( 'wikibase-remove' ) );
+			this.btnRemove.onAction = this._removeActionHandler();
+			this.innerGroup.addElement( this.btnRemove );
+		}
 	},
 	
 	_editActionHandler: function() {
 		return $.proxy( function(){
 			this.addElement( this.tooltip, 0 ); // add tooltip before edit commands
 			this.innerGroup.removeElement( this.btnEdit );
+			if ( this.displayRemoveButton ) {
+				this.innerGroup.removeElement( this.btnRemove );
+			}
 			this.innerGroup.addElement( this.btnSave );
 			this.innerGroup.addElement( this.btnCancel );
+			if ( this.displayRemoveButton ) {
+				this.innerGroup.addElement( this.btnRemove );
+			}
 			this._editableValue.startEditing();
 		}, this );
 	},
@@ -169,6 +190,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 			this._leaveAction( true );
 		}, this );
 	},
+	_removeActionHandler: function() {
+		return $.proxy( function() {
+			this._editableValue.remove();
+		}, this );
+	},
 	
 	_leaveAction: function( save ) {
 		this._editableValue.stopEditing( save );
@@ -176,11 +202,46 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		this.removeElement( this.tooltip );
 		this.innerGroup.removeElement( this.btnSave );
 		this.innerGroup.removeElement( this.btnCancel );
+		if ( this.displayRemoveButton ) {
+			this.innerGroup.removeElement( this.btnRemove );
+		}
 		this.innerGroup.addElement( this.btnEdit );
+		if ( this.displayRemoveButton ) {
+			this.innerGroup.addElement( this.btnRemove );
+		}
 	},
-	
+
+	destroy: function() {
+		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype.destroy.call( this );
+		if ( this.innerGroup != null ) {
+			this.innerGroup.destroy();
+		}
+		if ( this.tooltip != null ) {
+			this.tooltip.destroy();
+		}
+		if ( this.btnEdit != null ) {
+			this.btnEdit.destroy();
+		}
+		if ( this.btnCancel != null ) {
+			this.btnCancel.destroy();
+		}
+		if ( this.btnSave != null ) {
+			this.btnSave.destroy();
+		}
+		if ( this.btnRemove != null ) {
+			this.btnRemove.destroy();
+		}
+	},
+
+
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
 	/**
 	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.displayGroupSeparators
 	 */
-	displayGroupSeparators: false
+	displayGroupSeparators: false,
+
+	displayRemoveButton: false
 } );

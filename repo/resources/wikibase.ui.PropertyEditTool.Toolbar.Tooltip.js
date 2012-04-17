@@ -112,9 +112,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 
 	destroy: function() {
 		if ( this._elem ) {
-			this._elem.tipsy( 'hide' );
+			if ( this._isVisible ) {
+				this.hide();
+			}
+			this._elem.remove();
 		}
-		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype.destroy.call( this );
 	}
 
 } );

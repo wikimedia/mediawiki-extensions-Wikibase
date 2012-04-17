@@ -140,6 +140,13 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	},
 
 	destroy: function() {
-		// TODO
+		if ( this._items != null ) {
+			for( var i in this._items ) {
+				this._items[i].destroy();
+			}
+		}
+		if ( this._elem != null ) {
+			this._elem.remove();
+		}
 	}
 };

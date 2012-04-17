@@ -28,5 +28,6 @@ $messages['en'] = array(
 		'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
 		'wikibase-languagelinks' => 'Wikipedia Pages linked to this item',
 		'wikibase-languagelinks-add' => 'add a link to a Wikipedia page',
-		'wikibase-languagelinks-empty' => 'No Wikipedia pages linked to this item yet.'
+		'wikibase-languagelinks-empty' => 'No Wikipedia pages linked to this item yet.',
+		'wikibase-remove' => 'remove'
 );
