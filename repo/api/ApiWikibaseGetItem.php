@@ -42,7 +42,7 @@ class ApiWikibaseGetItem extends ApiBase {
 		}
 
 		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
-		$content = $page->getContent(); // TODO: The call to getContent is not implemented (?)
+		$content = $page->getContent();
 		
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			$item = $content->getItem();
