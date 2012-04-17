@@ -57,6 +57,8 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
+			array( 'code' => 'no-such-item', 'info' => 'There are no such item to be found' ),
 		) );
 	}
 
