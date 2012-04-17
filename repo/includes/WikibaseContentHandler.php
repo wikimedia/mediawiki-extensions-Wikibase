@@ -31,10 +31,11 @@ class WikibaseContentHandler extends ContentHandler {
 		parent::__construct( CONTENT_MODEL_WIKIBASE, $formats );
 	}
 
-	public function createArticle( Title $title ) {
-		return new WikibasePage( $title );
-	}
-
+	/**
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
 	public function getDefaultFormat() {
 		return WBSettings::get( 'serializationFormat' );
 	}

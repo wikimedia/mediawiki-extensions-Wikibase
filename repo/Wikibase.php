@@ -143,7 +143,6 @@ unset( $moduleTemplate );
 
 // register hooks and handlers
 define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
-define( 'CONTENT_MODEL_WIKIDATA', 'wikibase' ); // TODO: remove
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
 
