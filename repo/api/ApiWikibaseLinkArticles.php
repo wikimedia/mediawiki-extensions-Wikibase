@@ -95,7 +95,7 @@ class ApiWikibaseLinkArticles extends ApiWikibaseModifyItem {
 				"Use together with 'site-to'."
 			),
 			'noupdate' => 'Indicates that if a link to the specified site already exists, it should not be updated to use the provided page',
-			//'change' => 'Inidcates if you are adding or removing the link',
+			//'change' => 'Indicates if you are adding or removing the link',
 		) );
 	}
 

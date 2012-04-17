@@ -27,7 +27,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		if ( $params['change'] === 'drop' || $params['change'] === 'remove' || $params['change'] === 'remove' ) {
+		if ( $params['change'] === 'remove') {
 			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
@@ -37,6 +37,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			// is this in use?
 			array( 'code' => 'link-exists', 'info' => 'An article on the specified wiki is already linked' ),
 		) );
 	}
@@ -55,7 +56,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'link' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'drop', 'remove', 'delete' ),
+				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', ''remove' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 		) );
