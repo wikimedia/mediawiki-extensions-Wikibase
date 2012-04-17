@@ -5,7 +5,7 @@
  *
  * @since 0.1
  *
- * @file DeleteEducation.php
+ * @file DeleteAllTheDatas.php
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -61,5 +61,5 @@ class DeleteAllTheDatas extends Maintenance {
 
 }
 
-$maintClass = 'DeleteEducation';
+$maintClass = 'DeleteAllTheDatas';
 require_once( RUN_MAINTENANCE_IF_MAIN );

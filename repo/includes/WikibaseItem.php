@@ -93,7 +93,7 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	public function getId() {
 		if ( $this->id === false ) {
-			$this->id = array_key_exists( 'entity', $this->data ) ? substr( $this->data['entity'], 1 ) : null;
+			$this->id = array_key_exists( 'entity', $this->data ) ? (int)substr( $this->data['entity'], 1 ) : null;
 		}
 
 		return $this->id;
@@ -116,7 +116,7 @@ class WikibaseItem extends WikibaseEntity {
 
 		$success = true;
 
-		if ( $this->hasId() ) {
+		if ( !$this->hasId() ) {
 			$fields['item_id'] = null; // This is needed to have at least one field.
 			//$fields['item_page_id'] = $articleId;
 
@@ -134,7 +134,7 @@ class WikibaseItem extends WikibaseEntity {
 			$success = $dbw->update(
 				'wb_items',
 				$fields,
-				array( 'item_page_id' => $this->getId() ),
+				array( 'item_id' => $this->getId() ),
 				__METHOD__
 			);
 		}
@@ -162,7 +162,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return boolean
 	 */
 	public function hasId() {
-		return !is_null( $this->id );
+		return !is_null( $this->getId() );
 	}
 
 	/**
@@ -261,7 +261,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $siteId
+	 * @param string $siteId
 	 * @param string $pageName
 	 * @param string $updateType
 	 *

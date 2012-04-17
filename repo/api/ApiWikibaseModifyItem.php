@@ -84,6 +84,10 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 			if ( $success ) {
 				$page = $item->getWikiPage();
+
+				if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+					$item->addSiteLink( $params['site'], $params['title'] );
+				}
 			}
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
@@ -94,7 +98,6 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$success = $this->modifyItem( $item, $params );
 
 			if ( $success ) {
-				// TODO: only does update
 				$status = $page->doEditContent(
 					$item,
 					$params['summary'],
@@ -116,6 +119,14 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			'success',
 			(int)$success
 		);
+
+		if ( $success ) {
+			$this->getResult()->addValue(
+				'item',
+				'id',
+				$item->getId()
+			);
+		}
 	}
 
 	public function getPossibleErrors() {
