@@ -25,7 +25,38 @@ class ApiWikibaseGetItemId extends ApiBase {
 	 * @since 0.1
 	 */
 	public function execute() {
-		// TODO: implement
+		$params = $this->extractRequestParams();
+
+		$success = false;
+
+		if ( !isset( $params['id'] ) ) {
+			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
+
+			if ( $params['id'] === false ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+			}
+		}
+
+		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
+		$content = $page->getContent();
+		
+		// must know if this is a legal content model
+		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
+			$this->getResult()->addValue(
+			 	'id',
+				$params['id']
+			);
+			$success = true;
+		}
+		else {
+			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
+		}
+
+		$this->getResult()->addValue(
+			null,
+			'success',
+			(int)$success
+		);
 	}
 
 	public function getAllowedParams() {
@@ -37,7 +68,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
-				ApiBase::PARAM_ISMULTI => true,
+				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 		);
 	}
@@ -57,6 +88,8 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
+			array( 'code' => 'no-such-item', 'info' => 'There are no such item to be found' ),
 		) );
 	}
 
@@ -64,8 +97,6 @@ class ApiWikibaseGetItemId extends ApiBase {
 		return array(
 			'api.php?action=wbgetitemid&site=en&title=Berlin'
 				=> 'Get item id for page "Berlin" on the site identifierd by "en"',
-			'api.php?action=wbgetitemid&site=en&title=Berlin|Foobar'
-				=> 'Get item id for the pages "Berlin" and "Foobar" on the site identifierd by "en"',
 		);
 	}
 	
