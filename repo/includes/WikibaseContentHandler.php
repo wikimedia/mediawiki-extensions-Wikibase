@@ -18,7 +18,7 @@ class WikibaseContentHandler extends ContentHandler {
 	 *
 	 * @return WikibaseContent
 	 */
-	public function emptyContent() {
+	public function makeEmptyContent() {
 		return new WikibaseContent( array() );
 	}
 
@@ -45,7 +45,7 @@ class WikibaseContentHandler extends ContentHandler {
 	 *
 	 * @return string
 	 */
-	public function serialize( Content $content, $format = null ) {
+	public function serializeContent( Content $content, $format = null ) {
 
 		if ( is_null( $format ) ) {
 			$format = WBSettings::get( 'serializationFormat' );
@@ -75,7 +75,7 @@ class WikibaseContentHandler extends ContentHandler {
 	 *
 	 * @return WikibaseContent
 	 */
-	public function unserialize( $blob, $format = null ) {
+	public function unserializeContent( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
 			$format = WBSettings::get( 'serializationFormat' );
 		}
