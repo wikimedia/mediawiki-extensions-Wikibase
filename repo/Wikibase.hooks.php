@@ -10,6 +10,7 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @authorNikola Smolenski
  */
 final class WikibaseHooks {
 
@@ -52,13 +53,24 @@ final class WikibaseHooks {
 
 	/**
 	 * In Wikidata namespace, page content language is the same as the current user language.
-	 * @author	Nikola Smolenski
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageContentLanguage
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $title
+	 * @param Language $pageLanguage
+	 * @param Language $language
+	 *
+	 * @return true
 	 */
-	public static function onPageContentLanguage( $title, &$pageLang, $wgLang ) {
+	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, Language $language ) {
 		global $wgNamespaceContentModels;
-		if( $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE ) {
-			$pageLang = $wgLang;
+
+		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
+			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE ) {
+			$pageLanguage = $language;
 		}
+
 		return true;
 	}
 
