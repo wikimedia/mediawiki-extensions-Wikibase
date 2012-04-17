@@ -63,11 +63,10 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	}
 
 	public function getParamDescription() {
-		return array_merge( parent::getAllowedParams(), array(
+		return array_merge( parent::getParamDescription(), array(
 			'linksite' => 'The identifier of the site on which the article to link resides',
 			'linktitle' => 'The title of the article to link',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
-			'summary' => 'Summary for the edit',
 			'link' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
 		) );
 	}
