@@ -108,7 +108,7 @@ class ApiWikibaseLinkArticles extends ApiWikibaseModifyItem {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wblinkarticles&site-from=en&title-from=Norway&site-to=no&title-to=Norge'
-				=> array( 'Set link from title "Norway" for page in English Wikipedia to "Norge" in Norwegian Wikipedia.', // TODO: Still references Wikipedia
+				=> array( 'Set link from title "Norway" for page in English Wikipedia to "Norge" in Norwegian Wikipedia.',
 					"Actual form and type for 'site' is not final."
 				),
 			);
