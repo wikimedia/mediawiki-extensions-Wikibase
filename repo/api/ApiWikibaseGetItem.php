@@ -2,7 +2,6 @@
 
 /**
  * API module to get the data for a single Wikibase item.
- * //TODO: Should this be renamed to QueryItem to conform with API naming conventions?
  *
  * @since 0.1
  *
@@ -28,7 +27,7 @@ class ApiWikibaseGetItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title '] ) ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
@@ -107,8 +106,12 @@ class ApiWikibaseGetItem extends ApiBase {
 			'id' => 'The ID of the item to get the data from',
 			'language' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
-			'title' => 'The title of the corresponding page',
-			'site' => 'Identifier for the site on which the corresponding page resides',
+			'title' => array( 'The title of the corresponding page',
+				"Use together with 'site'."
+			),
+			'site' => array( 'Identifier for the site on which the corresponding page resides',
+				"Use together with 'title'."
+			),
 		);
 	}
 
@@ -127,29 +130,18 @@ class ApiWikibaseGetItem extends ApiBase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitem&id=42'
-				=> 'Get item number 42 with default (user?) language',
+			=> 'Get item number 42 with default (user?) language',
 			'api.php?action=wbgetitem&id=42&language=en'
-				=> 'Get item number 42 with english language',
-/*
-			// takes multiple values without using plural form
-			'api.php?action=wbgetitem&id=4|2'
-				=> 'Get item number 4 and 2 with default (user?) language',
-			// takes multiple values without using plural form
-			'api.php?action=wbgetitem&id=4|2&language=en'
-				=> 'Get item number 4 and 2 with english language',
+			=> 'Get item number 42 with english language',
 			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
-				=> 'Get the item associated to page Berlin on the site identified by "en"',
-			// takes multiple values without using plural form
-			'api.php?action=wbgetitem&site=en&title=Berlin|Foobar&language=en'
-				=> 'Get the items associated to pages Berlin and Foobar on the site identified by "en"',
-*/
+			=> 'Get the item associated to page Berlin on the site identified by "en"',
 		);
 	}
 
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetitem';
 	}
-	
+
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

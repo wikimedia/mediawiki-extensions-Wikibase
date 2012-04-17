@@ -16,10 +16,10 @@ class WikibaseContentHandler extends ContentHandler {
 	/**
 	 * FIXME: bad method name
 	 *
-	 * @return WikibaseContent
+	 * @return WikibaseItem
 	 */
 	public function emptyContent() {
-		return new WikibaseContent( array() );
+		return WikibaseItem::newEmpty();
 	}
 
 	public function __construct() {
@@ -31,10 +31,11 @@ class WikibaseContentHandler extends ContentHandler {
 		parent::__construct( CONTENT_MODEL_WIKIBASE, $formats );
 	}
 
-	public function createArticle( Title $title ) {
-		return new WikibasePage( $title );
-	}
-
+	/**
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
 	public function getDefaultFormat() {
 		return WBSettings::get( 'serializationFormat' );
 	}
@@ -73,7 +74,7 @@ class WikibaseContentHandler extends ContentHandler {
 	 * @param string $blob
 	 * @param null|string $format
 	 *
-	 * @return WikibaseContent
+	 * @return WikibaseItem
 	 */
 	public function unserialize( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
@@ -96,7 +97,7 @@ class WikibaseContentHandler extends ContentHandler {
 			throw new MWContentSerializationException( 'failed to deserialize' );
 		}
 
-		return new WikibaseContent( $data );
+		return WikibaseItem::newFromArray( $data );
 	}
 
 	public static function flattenArray( $a, $prefix = '', &$into = null ) {

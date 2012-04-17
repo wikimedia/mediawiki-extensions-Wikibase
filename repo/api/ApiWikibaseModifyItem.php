@@ -68,10 +68,10 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 
 		if ( isset( $params['id'] ) && $params['id'] !== false ) {
-			$page = WikibaseUtils::getWikiPageForId( $params['id'] );
+			$page = WikibaseItem::getWikiPageForId( $params['id'] );
 
 			if ( $page->exists() ) {
-				$content = $page->getContent();
+				$item = $page->getContent();
 			}
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
@@ -79,30 +79,29 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 		else {
 			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
-			$item = WikibaseItem::newFromArray( array() );
-			$success = $item->structuredSave();
+			$item = WikibaseItem::newEmpty();
+			$success = $item->save();
 
 			if ( $success ) {
-				$page = WikibaseUtils::getWikiPageForId( $item->getId() );
-				$content = new WikibaseContent( array( 'entity' => $item->getId() ) );
+				$page = $item->getWikiPage();
+
+				if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+					$item->addSiteLink( $params['site'], $params['title'] );
+				}
 			}
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
 			}
 		}
 
-		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
-			$item = $content->getItem();
-
+		if ( $item->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			$success = $this->modifyItem( $item, $params );
 
 			if ( $success ) {
-				$content->setItem( $item );
-				// TODO: only does update
 				$status = $page->doEditContent(
-					$content,
+					$item,
 					$params['summary'],
-					EDIT_UPDATE | EDIT_AUTOSUMMARY,
+					EDIT_AUTOSUMMARY,
 					false,
 					$this->getUser(),
 					'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
@@ -120,10 +119,24 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			'success',
 			(int)$success
 		);
+
+		if ( $success ) {
+			$this->getResult()->addValue(
+				'item',
+				'id',
+				$item->getId()
+			);
+		}
 	}
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
+			array( 'code' => 'add-with-id', 'info' => 'Can not add with an item id' ),
+			array( 'code' => 'add-exists', 'info' => 'Can not add to an existing item' ),
+			array( 'code' => 'no-such-item-link', 'info' => 'Could not find an existing item for this link' ),
+			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
+			array( 'code' => 'create-failed', 'info' => 'Attempted creation of new item failed' ),
 			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
 		) );
 	}
@@ -160,10 +173,16 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 	public function getParamDescription() {
 		return array(
-			'id' => 'The ID of the item',
-			'site' => 'An identifier for the site on which the page resides',
-			'title' => 'Title of the page to associate',
-			'summary' => 'Summary for the edit',
+			'id' => array( 'The ID of the item.',
+				"Use either 'id' or 'site' and 'title' together."
+			),
+			'site' => array( 'An identifier for the site on which the page resides.',
+				"Use together with 'title'."
+			),
+			'title' => array( 'Title of the page to associate.',
+				"Use together with 'site'."
+			),
+			'summary' => 'Summary for the edit.',
 		);
 	}
 

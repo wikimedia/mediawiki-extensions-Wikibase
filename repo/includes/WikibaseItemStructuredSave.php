@@ -48,7 +48,101 @@ class WikibaseItemStructuredSave extends SecondaryDataUpdate {
 	 * @since 0.1
 	 */
 	public function doUpdate() {
-		$this->item->structuredSave( $this->title->getArticleID() );
+		$success = $this->item->save( /* $articleId */ );
+
+		if ( $success ) {
+			$dbw = wfGetDB( DB_MASTER );
+
+			$dbw->begin();
+			$this->saveSiteLinks();
+			$this->saveMultilangFields();
+			$dbw->commit();
+		}
+
+		return $success;
+	}
+
+
+	/**
+	 * Saves the links to other sites (for example which article on which Wikipedia corresponds to this item).
+	 * This info is saved in wb_items_per_site.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean Success indicator
+	 */
+	protected function saveSiteLinks() {
+		$dbw = wfGetDB( DB_MASTER );
+
+		$idField = array( 'ips_item_id' => $this->item->getId() );
+
+		$success = $dbw->delete(
+			'wb_items_per_site',
+			$idField,
+			__METHOD__
+		);
+
+		foreach ( $this->item->getSiteLinks() as $siteId => $pageName ) {
+			$success = $dbw->insert(
+				'wb_items_per_site',
+				array_merge(
+					$idField,
+					array(
+						'ips_site_id' => $siteId,
+						'ips_site_page' => $pageName,
+					)
+				),
+				__METHOD__
+			) && $success;
+		}
+
+		return $success;
+	}
+
+	/**
+	 * Saves the fields that have per-language values, such as the labels and descriptions.
+	 * This info is saved in wb_texts_per_lang.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean Success indicator
+	 */
+	protected function saveMultilangFields() {
+		$dbw = wfGetDB( DB_MASTER );
+
+		$idField = array( 'tpl_item_id' => $this->item->getId() );
+
+		$success = $dbw->delete(
+			'wb_texts_per_lang',
+			$idField,
+			__METHOD__
+		);
+
+		$descriptions = $this->item->getDescriptions();
+		$labels = $this->item->getLabels();
+
+		foreach ( array_unique( array_merge( array_keys( $descriptions ), array_keys( $labels ) ) ) as $langCode ) {
+			$fieldValues = array( 'tpl_language' => $langCode );
+
+			if ( array_key_exists( $langCode, $descriptions ) ) {
+				$fieldValues['tpl_description'] = $descriptions[$langCode];
+			}
+
+			if ( array_key_exists( $langCode, $labels ) ) {
+				$fieldValues['tpl_label'] = $labels[$langCode];
+			}
+
+			$success = $dbw->insert(
+				'wb_texts_per_lang',
+				array_merge(
+					$idField,
+					$fieldValues
+				),
+				__METHOD__
+			) && $success;
+		}
+
+		return $success;
 	}
 
 }
