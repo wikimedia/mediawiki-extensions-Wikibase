@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_items (
 -- Links site+title pairs to item ids.
 CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (
   ips_item_id                INT unsigned        NOT NULL, -- Id of the item
-  ips_site_id                VARCHAR(255)        NOT NULL, -- Site identifier
+  ips_site_id                VARBINARY(32)       NOT NULL, -- Site identifier
   ips_site_page              VARCHAR(255)        NOT NULL -- Title of the page
 ) /*$wgDBTableOptions*/;
 
@@ -31,7 +31,7 @@ CREATE INDEX /*i*/ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 -- Holds internationalized texts (such as label and description)
 CREATE TABLE IF NOT EXISTS /*_*/wb_texts_per_lang (
   tpl_item_id                INT unsigned        NOT NULL, -- Id of the item
-  tpl_language               VARCHAR(255)        NOT NULL, -- Language code
+  tpl_language               VARBINARY(32)       NOT NULL, -- Language code
   tpl_label                  VARCHAR(255)        NULL, -- Item label text
   tpl_description            VARCHAR(255)        NULL -- Item description text
 ) /*$wgDBTableOptions*/;
