@@ -27,7 +27,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		if ( $params['change'] === 'remove' ) {
+		if ( $params['change'] === 'drop' || $params['change'] === 'remove' || $params['change'] === 'remove' ) {
 			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
@@ -55,7 +55,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'link' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
+				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'drop', 'remove', 'delete' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 		) );
@@ -81,7 +81,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 		return array(
 			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia&summary=World domination will be mine soon!'
+			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
 			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
 			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia&badge='
 			=> 'Set title "Wikimedia" for English page with id "42" and with a badge',
