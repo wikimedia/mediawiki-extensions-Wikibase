@@ -114,6 +114,7 @@ class ApiWikibaseGetItem extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
 			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
 			array( 'code' => 'no-such-item', 'info' => 'There are no such item to be found' ),
 		) );
