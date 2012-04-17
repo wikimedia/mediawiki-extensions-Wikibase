@@ -27,11 +27,11 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		if ( $params['change'] === 'add' ) {
-			return $item->addSiteLink( $params['linksite'], $params['linktitle'], !$params['noupdate'] );
+		if ( $params['change'] === 'remove' ) {
+			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
+			return $item->addSiteLink( $params['linksite'], $params['linktitle'], !$params['link'] );
 		}
 	}
 
@@ -58,10 +58,6 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'item' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set' ),
-				ApiBase::PARAM_DFLT => 'update',
-			),
 		) );
 	}
 
@@ -71,7 +67,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 			'linktitle' => 'The title of the article to link',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
 			'summary' => 'Summary for the edit',
-			'link' => 'Indicates if you are adding or removing the link',
+			'link' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
 		) );
 	}
 

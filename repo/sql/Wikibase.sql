@@ -7,8 +7,8 @@
 
 -- Links items to articles
 CREATE TABLE IF NOT EXISTS /*_*/wb_items (
-  item_id                    INT unsigned        NOT NULL auto_increment PRIMARY KEY,
-  item_page_id               INT unsigned        NOT NULL -- Foreign key on page.page_id
+  item_id                    INT unsigned        NOT NULL auto_increment PRIMARY KEY
+  --item_page_id               INT unsigned        NOT NULL -- Foreign key on page.page_id
 ) /*$wgDBTableOptions*/;
 
 
