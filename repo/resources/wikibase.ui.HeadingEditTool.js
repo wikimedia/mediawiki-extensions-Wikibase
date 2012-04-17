@@ -47,6 +47,6 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 	},
 	
 	getEditableValuePrototype: function() {
-		return window.wikibase.ui.PropertyEditTool.EditableLabel
+		return window.wikibase.ui.PropertyEditTool.EditableLabel;
 	}
 } );

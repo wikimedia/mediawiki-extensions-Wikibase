@@ -64,11 +64,17 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
   	// defining selectors for elements being tested
   	$labelElementSelector = "css=h1#firstHeading > span";
   	$editLinkSelector = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > 
-  						div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+  						div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > 
+  						a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+  	$saveLinkDisabledSelector = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar >
+  								div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > 
+  								span.wb-ui-propertyedittoolbar-button-disabled:nth-child(1)";
   	$saveLinkSelector = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > 
-  						div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(2)";
+  						div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > 
+  						a.wb-ui-propertyedittoolbar-button:nth-child(1)";
   	$cancelLinkSelector = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > 
-  						div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+  						div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > 
+  						a.wb-ui-propertyedittoolbar-button:nth-child(2)";
   	$valueInputFieldSelector = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevalue";
   	
   	// doing the test stuff
@@ -77,7 +83,7 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
   	$this->assertFalse( $this->is_element_present( $valueInputFieldSelector ) );
   	$this->get_element( $editLinkSelector )->click();
   	$this->assertTrue( $this->is_element_present( $valueInputFieldSelector ) );
-  	$this->get_element( $saveLinkSelector )->assert_text( "save" );
+  	$this->get_element( $saveLinkDisabledSelector )->assert_text( "save" );
   	$this->get_element( $cancelLinkSelector )->assert_text( "cancel" );
   	$this->get_element( $valueInputFieldSelector )->assert_value( $this->targetItem );
   	$this->get_element( $valueInputFieldSelector )->clear();
@@ -101,11 +107,17 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
   	// defining selectors for elements beeing tested
   	$descriptionElementSelector = "css=div.wb-ui-propertyedittool-subject > span.wb-property-container-value";
   	$editLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > 
-  						div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+  						div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > 
+  						a.wb-ui-propertyedittoolbar-button:nth-child(1)";
   	$saveLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > 
-  						div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(2)";
+  						div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > 
+  						a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+  	$saveLinkDisabledSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
+  								div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > 
+  								span.wb-ui-propertyedittoolbar-button:nth-child(1)";
   	$cancelLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > 
-  						div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+  						div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > 
+  						a.wb-ui-propertyedittoolbar-button:nth-child(2)";
   	$valueInputFieldSelector = "css=div.wb-ui-propertyedittool-subject > span > input.wb-ui-propertyedittoolbar-editablevalue";
   	
   	// doing the test stuff
@@ -115,7 +127,7 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
   	$this->get_element( $editLinkSelector )->click();
   	$this->assertTrue( $this->is_element_present( $valueInputFieldSelector ) );
   	$this->get_element( $valueInputFieldSelector )->assert_value( $this->targetDescription );
-  	$this->get_element( $saveLinkSelector )->assert_text( "save" );
+  	$this->get_element( $saveLinkDisabledSelector )->assert_text( "save" );
   	$this->get_element( $cancelLinkSelector )->assert_text( "cancel" );
   	$this->get_element( $valueInputFieldSelector )->clear();
   	$this->get_element( $valueInputFieldSelector )->send_keys( $changedDescription );
