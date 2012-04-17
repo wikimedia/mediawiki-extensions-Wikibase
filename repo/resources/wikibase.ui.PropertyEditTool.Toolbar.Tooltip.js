@@ -50,7 +50,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 		// default tipsy configuration
 		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
 			this._tipsyConfig = {
-				gravity: 'ne'
+				gravity: ( document.documentElement.dir == 'rtl' ) ? 'nw' : 'ne'
 			};
 		}
 

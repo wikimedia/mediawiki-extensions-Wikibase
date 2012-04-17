@@ -3,18 +3,19 @@
  */
 
 .wb-ui-propertyedittoolbar, .wb-ui-propertyedittoolbar-group {
-    display: inline;
+	display: inline-block;
 }
 
 .wb-ui-propertyedittoolbar-button {
     padding:0 .15em;
 }
+
 .wb-ui-propertyedittoolbar-button-disabled {
 	color: grey;
 }
 
 .wb-ui-propertyedittoolbar, .wb-property-container-value {
-    margin:0 .3em;
+	margin:0 .3em;
 }
 
 .firstHeading {
@@ -50,10 +51,15 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 	display:none;
 }
 
-.tipsy-ne {
+.tipsy-ne, .tipsy-nw {
 	padding-top:12px;
 }
 
-.tipsy-ne .tipsy-arrow {
+.tipsy-ne .tipsy-arrow, .tipsy-nw .tipsy-arrow {
 	background-image:url(images/tipsy-arrow-n.gif);
+}
+
+.mw-help-field-hint {
+	height:11px;
+	width:11px;
 }
