@@ -2,7 +2,6 @@
 
 /**
  * API module to get the data for a single Wikibase item.
- * //TODO: Should this be renamed to QueryItem to conform with API naming conventions?
  *
  * @since 0.1
  *
@@ -29,65 +28,73 @@ class ApiWikibaseGetItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title '] ) ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
-//		if ( !isset( $params['id'] ) ) {
-//			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
-//		}
+		$success = false;
 
-		// TODO: implement
-		// What follows is a sketch of the implementation (author: Nikola)
 		if ( !isset( $params['id'] ) ) {
-			$this->dieUsage( 'Right now the API only supports the ID, this error should be removed.' );
-		}
+			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
-		$result = $this->getResult();
-
-		$ids = $params['id'];
-		foreach( $ids as $id ) {
-			try {
-				$item = self::getItemFromId( $id );
-			} catch( MWException $e ) {
-				$msg = $e->getMessage();
-				$this->dieUsage( wfMsg( $msg ), $msg );
+			if ( $params['id'] === false ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
-
-			$result->addValue( array( 'query', 'ids', 'id' . $id ), 'data', $item );
-		}
-	}
-
-	/**
-	 */
-	public static function getItemFromId( $id ) {
-		$title = Title::newFromID($id);
-		if( $title === null ) {
-			throw new MWException( 'wikibase-api-unknown-id' );
 		}
 
-		$article = new Article( $title );
-		$content = $article->getContentObject();
-
-		if( $content->mModelName !== 'wikidata' ) {
-			throw new MWException( 'wikibase-api-unknown-model' );
+		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
+		$content = $page->getContent(); // TODO: The call to getContent is not implemented (?)
+		
+		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
+			$item = $content->getItem();
+			
+			$sitelinks = $item->getSiteLinks();
+			$this->getResult()->addValue(
+			 	'page', 
+				'sitelinks',
+				(int)$success
+			);
+			
+			$languages = WikibaseUtils::getLanguageCodes();
+			
+			$labels = $item->getLabels($languages); // TODO: Set specific languages
+			$this->getResult()->addValue(
+			 	'page', 
+				'labels',
+				$labels
+			);
+			
+			$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
+			$this->getResult()->addValue(
+			 	'page', 
+				'descriptions',
+				$descriptions
+			);
+			$success = true;
+		}
+		else {
+			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
 		}
 
-		return $content->mData;
+		$this->getResult()->addValue(
+			null,
+			'success',
+			(int)$success
+		);
 	}
 
 	public function getAllowedParams() {
 		return array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_ISMULTI => true,
+				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 			'site' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_ISMULTI => true,
+				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 			'language' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
@@ -101,8 +108,12 @@ class ApiWikibaseGetItem extends ApiBase {
 			'id' => 'The ID of the item to get the data from',
 			'language' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
-			'title' => 'The title of the corresponding page',
-			'site' => 'Identifier for the site on which the corresponding page resides',
+			'title' => array( 'The title of the corresponding page',
+				"Use together with 'site'."
+			),
+			'site' => array( 'Identifier for the site on which the corresponding page resides',
+				"Use together with 'title'."
+			),
 		);
 	}
 
@@ -124,15 +135,8 @@ class ApiWikibaseGetItem extends ApiBase {
 				=> 'Get item number 42 with default (user?) language',
 			'api.php?action=wbgetitem&id=42&language=en'
 				=> 'Get item number 42 with english language',
-			'api.php?action=wbgetitem&id=4|2'
-				=> 'Get item number 4 and 2 with default (user?) language',
-			'api.php?action=wbgetitem&id=4|2&language=en'
-				=> 'Get item number 4 and 2 with english language',
-
 			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
 				=> 'Get the item associated to page Berlin on the site identified by "en"',
-			'api.php?action=wbgetitem&site=en&title=Berlin|Foobar&language=en'
-				=> 'Get the items associated to pages Berlin and Foobar on the site identified by "en"',
 		);
 	}
 

@@ -27,7 +27,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		if ( $params['change'] === 'remove' ) {
+		if ( $params['change'] === 'remove') {
 			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
@@ -37,6 +37,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			// is this in use?
 			array( 'code' => 'link-exists', 'info' => 'An article on the specified wiki is already linked' ),
 		) );
 	}
@@ -62,11 +63,10 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	}
 
 	public function getParamDescription() {
-		return array_merge( parent::getAllowedParams(), array(
+		return array_merge( parent::getParamDescription(), array(
 			'linksite' => 'The identifier of the site on which the article to link resides',
 			'linktitle' => 'The title of the article to link',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
-			'summary' => 'Summary for the edit',
 			'link' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
 		) );
 	}
@@ -81,7 +81,7 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 		return array(
 			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia&summary=World domination will be mine soon!'
+			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
 			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
 			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia&badge='
 			=> 'Set title "Wikimedia" for English page with id "42" and with a badge',

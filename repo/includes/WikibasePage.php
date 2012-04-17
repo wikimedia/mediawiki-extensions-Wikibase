@@ -12,7 +12,7 @@
  */
 class WikibasePage extends Article {
 
-	// TODO: currently we are getting stuff that is not WikibaseContent here sometimes, such as MessageContent when viewing non-existing page.
+	// TODO: currently we are getting stuff that is not WikibaseItem here sometimes, such as MessageContent when viewing non-existing page.
 	// TODO: either this is a bug and should not happen, or we should add handling for this here (MessageContent messages are not parsed ATM).
 	public function view() {
 		$content = $this->getContentObject();
@@ -27,10 +27,10 @@ class WikibasePage extends Article {
 		$out->addModules( 'wikibase' );
 		
 		// overwrite page title
-		$out->setPageTitle( $content->getItem()->getLabel( $contentLang ) );
+		$out->setPageTitle( $content->getLabel( $contentLang ) );
 		
 		// hand over the itemId to JS
-		$out->addJsConfigVars( 'wbItemId', $content->getItem()->getId() );
+		$out->addJsConfigVars( 'wbItemId', $content->getId() );
 		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLang ) );
 	}
 	
