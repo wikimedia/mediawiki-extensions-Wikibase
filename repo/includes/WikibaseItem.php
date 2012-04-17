@@ -525,66 +525,12 @@ class WikibaseItem extends WikibaseEntity {
 		// TODO: use $options->getTargetLanguage() ?
 		$wgLang->getCode();
 
-		$parserOutput = new ParserOutput( $this->generateHtml( $wgLang ) );
+		$itemView = new WikibaseItemView( $this );
+		$parserOutput = new ParserOutput( $itemView->getHTML( $wgLang ) );
 
 		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $title ) );
 
 		return $parserOutput;
-	}
-
-	/**
-	 * TODO: we sure we want to do this here? I'd expect to do this in some kind of view action...
-	 * TODO: we can't just point to $lang.wikipedia!
-	 *
-	 * @param null|Language $lang
-	 * @return String
-	 */
-	private function generateHtml( Language $lang = null ) {
-		$html = '';
-
-		$description = $this->getDescription( $lang->getCode() );
-
-		// even if description is false, we want it in any case!
-		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
-		$html .= HTML::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
-		$html .= HTML::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
-		$html .= Html::closeElement('div');
-
-		$html .= Html::openElement( 'table', array( 'class' => 'wikitable' ) );
-
-		foreach ( $this->getSiteLinks() AS $siteId => $title ) {
-			$html .= '<tr>';
-
-			$html .= Html::element( 'td', array(), $siteId );
-
-			$html .= '<td>';
-			$html .= Html::element(
-				'a',
-				array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
-				$title
-			);
-			$html .= '</td>';
-
-			$html .= '</tr>';
-		}
-
-		$html .= Html::closeElement( 'table' );
-
-		$htmlTable = '';
-
-		// TODO: implement real ui instead of debug code
-		foreach ( WikibaseContentHandler::flattenArray( $this->toArray() ) as $k => $v ) {
-			$htmlTable .= Html::openElement( 'tr' );
-			$htmlTable .= Html::element( 'td', null, $k );
-			$htmlTable .= Html::element( 'td', null, $v );
-			$htmlTable .= Html::closeElement( 'tr' );
-		}
-
-		$htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
-
-		$html .= $htmlTable;
-
-		return $html;
 	}
 
 	/**

@@ -80,7 +80,7 @@ $wgAutoloadClasses['WikibaseUtils'] 				= $dir . 'includes/WikibaseUtils.php';
 $wgAutoloadClasses['WikibaseItem'] 					= $dir . 'includes/WikibaseItem.php';
 $wgAutoloadClasses['WikibaseEntity'] 				= $dir . 'includes/WikibaseEntity.php';
 $wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseItemStructuredSave.php';
-
+$wgAutoloadClasses['WikibaseItemView'] 				= $dir . 'includes/WikibaseItemView.php';
 
 
 // API module registration

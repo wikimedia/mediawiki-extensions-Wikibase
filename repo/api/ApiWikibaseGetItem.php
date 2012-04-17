@@ -52,7 +52,7 @@ class ApiWikibaseGetItem extends ApiBase {
 			$this->getResult()->addValue(
 				'page',
 				'sitelinks',
-				(int)$success
+				$sitelinks
 			);
 
 			$languages = WikibaseUtils::getLanguageCodes();
