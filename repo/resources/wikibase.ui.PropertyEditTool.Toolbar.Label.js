@@ -72,11 +72,12 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	},
 	
 	/**
+	 * TODO: implement getter on demand
 	 * returns the labels's content
-	 * @return text|object contents
+	 * @return jQuery contents
 	 */
 	getContent: function() {
-		var content = this._elem.contents()[0];
+		// TODO: implement getter
 	},
 	
 	/**
