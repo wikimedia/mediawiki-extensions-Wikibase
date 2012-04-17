@@ -134,7 +134,8 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase-label-edit-placeholder',
 		'wikibase-description-edit-placeholder',
 		'wikibase-label-input-help-message',
-		'wikibase-description-input-help-message'
+		'wikibase-description-input-help-message',
+		'wikibase-remove'
 	)
 );
 

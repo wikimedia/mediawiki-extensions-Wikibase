@@ -75,35 +75,44 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup( this );
 		this._toolbar.addElement( editGroup );
 		this._toolbar.editGroup = editGroup; // remember this
-		
+
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
 			this._toolbar.editGroup.btnEdit.doAction();
 			this.removeFocus(); // but don't set focus there for now
 		}
 	},
-	
-	
-	
-	destroy: function() {
-		// TODO implement on demand
+
+	remove: function() {
+		// TODO API call
+		this.destroy();
+		this._subject.remove();
 	},
-	
+
+	destroy: function() {
+		if( this._toolbar != null) {
+			this._toolbar.destroy();
+		}
+		if( this._inputElem != null ) {
+			this._inputElem.remove();
+		}
+	},
+
 	/**
 	 * By calling this, the editable value will be made editable for the user.
 	 * Call stopEditing() to save or cancel the editing process.
 	 * Basically this initializes the input box as sub element of the subject and uses the
 	 * elements content as initial text.
-	 * 
+	 *
 	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
 		if( this.isInEditMode() ) {
-			return false;			
+			return false;
 		}
 
 		var initText = this.getValue();
-		
+
 		this._inputElem = $( '<input/>', {
 			'class': this.UI_CLASS,
 			'type': 'text',
@@ -115,21 +124,21 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'focus': jQuery.proxy( this._onFocus, this ),
 			'blur': jQuery.proxy( this._onBlur, this )
 		} );
-		
+
 		this._subject.text( '' );
 		this._subject.append( this._inputElem );
-		
+
 		// store original text value from before input box insertion:
 		this._inputElem.data( this.UI_CLASS + '-initial-value', initText );
 
         this._isInEditMode = true;
-		
+
 		this._inputRegistered(); // do this after setting _isInEditMode !
         this.setFocus();
-		
+
 		return true;
 	},
-	
+
 	/**
 	 * Called when the input changes in general for example on its initialization when setting
 	 * its initial value.
@@ -137,18 +146,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_inputRegistered: function() {
 		var disableSave = this.isEmpty() || ( this.getInitialValue() === this.getValue() );
 		var disableCancel = this.isEmpty() || ( ! this.validate( this.getInitialValue() ) );
-		
+
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
 		//this._toolbar.draw();
 	},
-	
+
 	/**
 	 * Called when a key is pressed inside the input interface
 	 */
 	_keyPressed: function( event ) {
 		this._inputRegistered();
-		
+
 		if( event.which == 13 ) {
 			this._toolbar.editGroup.btnSave.doAction();
 		}
@@ -156,44 +165,42 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._toolbar.editGroup.btnCancel.doAction();
 		}
 	},
-	
+
 	_onFocus: function( event ) {
 		this._toolbar.editGroup.tooltip.show( true );
 	},
 	_onBlur: function( event ) {
 		this._toolbar.editGroup.tooltip.hide();
 	},
-	
+
 	/**
 	 * Destroys the edit box and displays the original text or the inputs new value.
-	 * 
+	 *
 	 * @param bool save whether to save the new user given value
 	 * @return bool whether the value has changed compared to the original value
 	 */
 	stopEditing: function( save ) {
 		if( ! this.isInEditMode() ) {
-			return false;			
+			return false;
 		}
 		var initialValue = this.getInitialValue();
-		
+
 		var $value = save ? this.getValue() : initialValue;
-		
+
 		this._inputElem.empty().remove(); // remove input interface
 		this._inputElem = null;
 		this._subject.text( $value );
-		
+
 		this._isInEditMode = false;
-		
-		console.log( this._subject );
-		
+
 		if( save ) {
 			this.storeValue();
 		}
-		
+
 		// any change at all compared to initial value?
 		return initialValue !== $value;
 	},
-	
+
 	/**
 	 * Sets the focus to the input interface
 	 */
@@ -202,7 +209,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._inputElem.focus();
 		}
 	},
-	
+
 	/**
 	 * Removes the focus from the input interface
 	 */
@@ -211,13 +218,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._inputElem.blur();
 		}
 	},
-	
+
 	/**
 	 * Stores the current value in the database
 	 */
 	storeValue: function() {
 		var apiCall = this.getApiCallParams();
-		
+
 		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
 			console.log( apiCall );
 
@@ -228,43 +235,43 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			} );
 		}, this ) );
 	},
-	
+
 	/**
 	 * Returns the neccessary parameters for a api call to store the value.
 	 */
 	getApiCallParams: function() {
 		return {};
 	},
-	
+
 	/**
 	 * handle return of successful API call
 	 */
-	_apiCallOk: function() { 
-		console.log( arguments ); 
+	_apiCallOk: function() {
+		console.log( arguments );
 	},
-	
+
 	/**
 	 * handle error of unsuccessful API call
 	 */
-	_apiCallErr: function() { 
-		console.log( arguments ); 
+	_apiCallErr: function() {
+		console.log( arguments );
 	},
-	
+
 	/**
 	 * Returns whether the input interface is loaded currently
-	 * 
+	 *
 	 * @return bool
 	 */
 	isInEditMode: function() {
 		return this._isInEditMode;
 	},
-	
+
 	/**
 	 * Returns the current value
-	 * 
+	 *
 	 * @return string
 	 */
-	getValue: function() {		
+	getValue: function() {
 		var value = '';
 		if( this.isInEditMode() ) {
 			value = $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
@@ -273,7 +280,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		return $.trim( value );
 	},
-	
+
 	/**
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
 	 * If its not in edit mode, the current value will be returned.
@@ -285,14 +292,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		return this._inputElem.data( this.UI_CLASS + '-initial-value' );
 	},
-	
+
 	/**
 	 * Returns a short information about how the input should be inserted by the user.
 	 */
 	getInputHelpMessage: function() {
 		return 'my message';
 	},
-	
+
 	/**
 	 * Returns true if there is currently no value assigned
 	 *
@@ -301,19 +308,19 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	isEmpty: function() {
 		return this.getValue() === '';
 	},
-	
+
 	/**
 	 * Velidates whether a certain value would be valid for this editable value.
-	 * 
+	 *
 	 * @todo: we might want to move this into a class describing the property/snak later.
-	 * 
+	 *
 	 * @param string text
 	 * @return bool
 	 */
 	validate: function( value ) {
 		return $.trim( value ) !== '';
 	},
-	
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
@@ -334,7 +341,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
 	},
-	
+
 	getApiCallParams: function() {
 		return {
 			action: "wbsetlabel",
@@ -354,12 +361,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
 	},
-	
+
 	getApiCallParams: function() {
 		return {
-			action: 'wbsetdescription', 
-			language: wgUserLanguage, 
-			description: this.getValue(), 
+			action: 'wbsetdescription',
+			language: wgUserLanguage,
+			description: this.getValue(),
 			id: mw.config.values.wbItemId
 		};
 	}

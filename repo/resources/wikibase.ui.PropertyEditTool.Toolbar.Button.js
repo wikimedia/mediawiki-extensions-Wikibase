@@ -41,7 +41,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype, {
 	},
 
 	destroy: function() {
-		// TODO
+		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype.destroy.call( this );
+		if ( this._elem != null ) {
+			this._elem.remove();
+		}
 	},
 	
 	/**
