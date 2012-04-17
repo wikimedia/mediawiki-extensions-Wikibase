@@ -57,7 +57,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 		var elem = $( '<span/>', {
 			'class': 'mw-help-field-hint',
 			title: tooltipMessage,
-			style: 'display:inline'
+			style: 'display:inline',
+			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css) */
 		} ).tipsy( {
 			'gravity': this._tipsyConfig.gravity,
 			'trigger': 'manual'
