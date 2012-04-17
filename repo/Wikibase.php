@@ -75,12 +75,15 @@ $wgAutoloadClasses['ApiWikibaseSiteLink'] 			= $dir . 'api/ApiWikibaseSiteLink.p
 // includes
 $wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 		= $dir . 'includes/WikibaseDifferenceEngine.php';
-$wgAutoloadClasses['WikibasePage'] 					= $dir . 'includes/WikibasePage.php';
 $wgAutoloadClasses['WikibaseUtils'] 				= $dir . 'includes/WikibaseUtils.php';
 $wgAutoloadClasses['WikibaseItem'] 					= $dir . 'includes/WikibaseItem.php';
 $wgAutoloadClasses['WikibaseEntity'] 				= $dir . 'includes/WikibaseEntity.php';
 $wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseItemStructuredSave.php';
+$wgAutoloadClasses['WikibaseItemView'] 				= $dir . 'includes/WikibaseItemView.php';
 
+// includes/actions
+$wgAutoloadClasses['WikibaseViewItemAction'] 		= $dir . 'includes/actions/WikibaseViewItemAction.php';
+$wgAutoloadClasses['WikibaseEditItemAction'] 		= $dir . 'includes/actions/WikibaseEditItemAction.php';
 
 
 // API module registration
@@ -143,7 +146,6 @@ unset( $moduleTemplate );
 
 // register hooks and handlers
 define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
-define( 'CONTENT_MODEL_WIKIDATA', 'wikibase' ); // TODO: remove
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
 

@@ -510,82 +510,26 @@ class WikibaseItem extends WikibaseEntity {
 		return empty( $data );
 	}
 
+
 	/**
-	 * @param null|Title $title
+	 * Returns a ParserOutput object containing the HTML.
+	 *
+	 * @since 0.1
+	 *
+	 * @param IContextSource $context
 	 * @param null $revId
 	 * @param null|ParserOptions $options
-	 * @param boolean $generateHtml
+	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL, $generateHtml = true )  {
-		global $wgLang;
+	public function getParserOutput( IContextSource $context, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+		$itemView = new WikibaseItemView( $this, $context );
+		$parserOutput = new ParserOutput( $itemView->getHTML() );
 
-		// FIXME: StubUserLang::_unstub() not yet called in certain cases, dummy call to init Language object to $wgLang
-		// TODO: use $options->getTargetLanguage() ?
-		$wgLang->getCode();
-
-		$parserOutput = new ParserOutput( $this->generateHtml( $wgLang ) );
-
-		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $title ) );
+		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $context->getTitle() ) );
 
 		return $parserOutput;
-	}
-
-	/**
-	 * TODO: we sure we want to do this here? I'd expect to do this in some kind of view action...
-	 * TODO: we can't just point to $lang.wikipedia!
-	 *
-	 * @param null|Language $lang
-	 * @return String
-	 */
-	private function generateHtml( Language $lang = null ) {
-		$html = '';
-
-		$description = $this->getDescription( $lang->getCode() );
-		
-		// even if description is false, we want it in any case!
-		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
-		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
-		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
-		$html .= Html::closeElement( 'div' );
-				
-		$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-languagelinks' ) );
-		
-		if( ! (bool)$this->getSiteLinks() ) {
-			// no site links available for this item
-			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
-		} else {
-			$html .= Html::openElement( 'dl', array( 'class' => 'wb-languagelinks-list' ) );
-			
-			foreach( $this->getSiteLinks() AS $siteId => $title ) {
-				$html .= Html::element( 'dt', array( 'class' => 'wb-languagelinks-language-' . $siteId ), $siteId );
-				$html .= Html::openElement( 'dd', array( 'class' => 'wb-languagelinks-link-' . $siteId ) );
-				$html .= Html::element(
-					'a',
-					array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
-					$title
-				);
-				$html .= Html::closeElement( 'dd' );
-			}
-			$html .= Html::closeElement( 'dl' );
-		}
-
-		$htmlTable = '';
-
-		// TODO: implement real ui instead of debug code
-		foreach ( WikibaseContentHandler::flattenArray( $this->toArray() ) as $k => $v ) {
-			$htmlTable .= Html::openElement( 'tr' );
-			$htmlTable .= Html::element( 'td', null, $k );
-			$htmlTable .= Html::element( 'td', null, $v );
-			$htmlTable .= Html::closeElement( 'tr' );
-		}
-
-		$htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
-
-		$html .= $htmlTable;
-
-		return $html;
 	}
 
 	/**
