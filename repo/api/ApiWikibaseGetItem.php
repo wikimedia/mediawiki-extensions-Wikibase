@@ -19,7 +19,6 @@ class ApiWikibaseGetItem extends ApiBase {
 		parent::__construct( $main, $action );
 	}
 
-
 	/**
 	 * Main method. Does the actual work and sets the result.
 	 *
@@ -45,36 +44,35 @@ class ApiWikibaseGetItem extends ApiBase {
 		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
 		$content = $page->getContent(); // TODO: The call to getContent is not implemented (?)
 
-		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
-			$item = $content->getItem();
-
-			$sitelinks = $item->getSiteLinks();
-			$this->getResult()->addValue(
-				'page',
-				'sitelinks',
-				$sitelinks
-			);
-
-			$languages = WikibaseUtils::getLanguageCodes();
-
-			$labels = $item->getLabels($languages); // TODO: Set specific languages
-			$this->getResult()->addValue(
-				'page',
-				'labels',
-				$labels
-			);
-
-			$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
-			$this->getResult()->addValue(
-				'page',
-				'descriptions',
-				$descriptions
-			);
-			$success = true;
-		}
-		else {
+		if ( $content->getModelName() !== CONTENT_MODEL_WIKIBASE ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
 		}
+
+		$item = $content->getItem();
+
+		$sitelinks = $item->getSiteLinks();
+		$this->getResult()->addValue(
+			'page', 
+			'sitelinks',
+			(int)$success
+		);
+
+		$languages = WikibaseUtils::getLanguageCodes();
+
+		$labels = $item->getLabels($languages); // TODO: Set specific languages
+		$this->getResult()->addValue(
+			'page',
+			'labels',
+			$labels
+		);
+
+		$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
+		$this->getResult()->addValue(
+			'page',
+			'descriptions',
+			$descriptions
+		);
+		$success = true;
 
 		$this->getResult()->addValue(
 			null,
