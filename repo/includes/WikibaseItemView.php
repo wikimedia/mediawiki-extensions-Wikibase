@@ -11,7 +11,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseItemView /* extends ContextSourse */ {
+class WikibaseItemView extends ContextSource {
 
 	/**
 	 * @since 0.1
@@ -31,7 +31,7 @@ class WikibaseItemView /* extends ContextSourse */ {
 		$this->item = $item;
 
 		if ( !is_null( $context ) ) {
-			// $this->setContext( $context );
+			$this->setContext( $context );
 		}
 	}
 
@@ -40,14 +40,12 @@ class WikibaseItemView /* extends ContextSourse */ {
 	 *
 	 * @since 0.1
 	 *
-	 * @param null|Language $lang
-	 *
 	 * @return string
 	 */
-	public function getHTML( Language $lang = null ) {
+	public function getHTML() {
 		$html = '';
 
-		$description = $this->item->getDescription( $lang->getCode() );
+		$description = $this->item->getDescription( $this->getLanguage()->getCode() );
 
 		// even if description is false, we want it in any case!
 		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );

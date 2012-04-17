@@ -510,25 +510,24 @@ class WikibaseItem extends WikibaseEntity {
 		return empty( $data );
 	}
 
+
 	/**
-	 * @param null|Title $title
+	 * Returns a ParserOutput object containing the HTML.
+	 *
+	 * @since 0.1
+	 *
+	 * @param IContextSource $context
 	 * @param null $revId
 	 * @param null|ParserOptions $options
-	 * @param boolean $generateHtml
+	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( Title $title = null, $revId = null, ParserOptions $options = NULL, $generateHtml = true )  {
-		global $wgLang;
+	public function getParserOutput( IContextSource $context, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+		$itemView = new WikibaseItemView( $this, $context );
+		$parserOutput = new ParserOutput( $itemView->getHTML() );
 
-		// FIXME: StubUserLang::_unstub() not yet called in certain cases, dummy call to init Language object to $wgLang
-		// TODO: use $options->getTargetLanguage() ?
-		$wgLang->getCode();
-
-		$itemView = new WikibaseItemView( $this );
-		$parserOutput = new ParserOutput( $itemView->getHTML( $wgLang ) );
-
-		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $title ) );
+		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $context->getTitle() ) );
 
 		return $parserOutput;
 	}

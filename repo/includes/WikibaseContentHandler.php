@@ -2,7 +2,6 @@
 
 /**
  * Class representing a Wikibase page.
- * TODO: describe exact purpose - how does this relate to WikibasePage?
  *
  * @since 0.1
  *
@@ -68,6 +67,13 @@ class WikibaseContentHandler extends ContentHandler {
 		}
 
 		return $blob;
+	}
+
+	public function getActionOverrides() {
+		return array(
+			'view' => 'WikibaseViewItemAction',
+			'edit' => 'WikibaseEditItemAction',
+		);
 	}
 
 	/**
