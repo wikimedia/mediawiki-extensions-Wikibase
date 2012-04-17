@@ -1,3 +1,20 @@
+/**
+ * JavasSript for managing editable representation of site links.
+ * @see https://www.mediawiki.org/wiki/Extension:Wikibase
+ * 
+ * @since 0.1
+ * @file wikibase.ui.PropertyEditTool.EditableValue.js
+ * @ingroup Wikibase
+ *
+ * @licence GNU GPL v2+
+ * @author H. Snater
+ */
+
+/**
+ * Serves the input interface for a site link, extends EditableValue.
+ * 
+ * @param jQuery subject
+ */
 window.wikibase.ui.PropertyEditTool.EditableSiteLink = function( subject ) {
 	window.wikibase.ui.PropertyEditTool.EditableSiteLink.call( this, subject );
 };

@@ -118,6 +118,9 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase.ui.PropertyEditTool.Toolbar.Button.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Tooltip.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.js',
+		'wikibase.ui.PropertyEditTool.EditableDescription.js',
+		'wikibase.ui.PropertyEditTool.EditableLabel.js',
+		'wikibase.ui.PropertyEditTool.EditableSiteLink.js',
 		'wikibase.ui.HeadingEditTool.js',
 		'wikibase.startup.js'
 	),

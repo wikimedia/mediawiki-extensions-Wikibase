@@ -1,5 +1,5 @@
 /**
- * JavasSript for edit commands for 'Wikibase' property edit tool
+ * JavasSript for managing editable representation of property values.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
@@ -14,7 +14,7 @@
  * Serves the input interface for a value like a property value and also takes care of the conversion
  * between the pure html representation and the interface itself in both directions
  * 
- * @param jQuery parent
+ * @param jQuery subject
  */
 window.wikibase.ui.PropertyEditTool.EditableValue = function( subject ) {
 	if( typeof subject != 'undefined' ) {
@@ -331,43 +331,3 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	inputPlaceholder: ''
 };
-
-
-window.wikibase.ui.PropertyEditTool.EditableLabel = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
-};
-window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
-	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
-	},
-
-	getApiCallParams: function() {
-		return {
-			action: "wbsetlabel",
-			language: window.wgUserLanguage,
-			label: this.getValue(),
-			id: window.mw.config.get( 'wbItemId' )
-		};
-	}
-} );
-
-
-window.wikibase.ui.PropertyEditTool.EditableDescription = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
-};
-window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
-	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
-	},
-
-	getApiCallParams: function() {
-		return {
-			action: 'wbsetdescription',
-			language: wgUserLanguage,
-			description: this.getValue(),
-			id: mw.config.values.wbItemId
-		};
-	}
-} );
