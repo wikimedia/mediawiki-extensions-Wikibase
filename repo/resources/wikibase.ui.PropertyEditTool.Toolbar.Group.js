@@ -158,9 +158,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		// add 'edit' button only for now:
 		this.innerGroup.addElement( this.btnEdit );
 
+		// initialize remove button:
+		this.btnRemove = new button( window.mw.msg( 'wikibase-remove' ) );
+		this.btnRemove.onAction = this._removeActionHandler();
 		if ( this.displayRemoveButton ) {
-			this.btnRemove = new button( window.mw.msg( 'wikibase-remove' ) );
-			this.btnRemove.onAction = this._removeActionHandler();
 			this.innerGroup.addElement( this.btnRemove );
 		}
 	},
@@ -233,7 +234,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		}
 	},
 
-
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
@@ -242,6 +242,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.displayGroupSeparators
 	 */
 	displayGroupSeparators: false,
-
+	
+	/**
+	 * If this is set to true, the edit toolbar will add a button 'remove' besides the 'edit' command.
+	 * @var bool
+	 */
 	displayRemoveButton: false
 } );

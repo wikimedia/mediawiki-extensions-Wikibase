@@ -26,9 +26,9 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 */
 	_getValueElems: function() {
 		var pairs = new Array();
-		var dds = this._subject.children( 'dt' );
+		var dtNodes = this._subject.children( 'dt' );
 		
-		dds.each( function() {
+		dtNodes.each( function() {
 			// add dd's as well
 			var pair = $( this ).add( $( this ).next( 'dd' ) );
 			pairs.push( pair );
@@ -37,7 +37,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 	
 	getEditableValuePrototype: function() {
-		return window.wikibase.ui.PropertyEditTool.EditableDescription;
+		return window.wikibase.ui.PropertyEditTool.EditableSiteLink;
 	},
 	
 	allowsMultipleValues: true

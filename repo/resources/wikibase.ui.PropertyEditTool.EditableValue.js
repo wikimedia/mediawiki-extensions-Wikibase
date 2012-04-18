@@ -69,7 +69,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_initToolbar: function() {
 		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
 		//       with the actual value perhaps.
-		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject.parent() );
+		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._getToolbarParent() );
 		
 		// give the toolbar a edit group with basic edit commands:
 		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup( this );
@@ -81,6 +81,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._toolbar.editGroup.btnEdit.doAction();
 			this.removeFocus(); // but don't set focus there for now
 		}
+	},
+	
+	/**
+	 * Returns the node the toolbar should be appended to
+	 */
+	_getToolbarParent: function() {
+		return this._subject.parent();
 	},
 
 	remove: function() {
