@@ -26,10 +26,13 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
+		// TODO: this should really set up an alternate access method
 		if ( $params['change'] === 'remove') {
+			// TODO: Check if this is going to be defined
 			return $item->removeAlias( $params['alias'], $params['language'] );
 		}
 		else {
+			// TODO: Check if this is going to be defined
 			return $item->addAlias( $params['alias'], $params['language'], $params['change'] );
 		}
 	}
@@ -37,7 +40,7 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			// is this in use?
-			array( 'code' => 'alias-exists', 'info' => 'An aalias is already defined' ),
+			array( 'code' => 'alias-exists', 'info' => 'An alias is already defined' ),
 		) );
 	}
 
@@ -66,21 +69,17 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 
 	public function getDescription() {
 		return array(
-		//TODO: update these
-			'API module to associate an artcile on a wiki with a Wikibase item or remove an already made such association.'
+			'API module to associate an alias with a Wikibase item or remove an already made such association.'
 		);
 	}
 
 	protected function getExamples() {
 		return array(
-		//TODO: update these
-			'api.php?action=wbalias&id=42&site=en&title=Wikimedia'
+			'api.php?action=wbalias&id=42&language=en&alias=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbalias&id=42&site=en&title=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
+			'api.php?action=wbalias&id=42&language=en&alias=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
 			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
-			'api.php?action=wbalias&id=42&site=en&title=Wikimedia&badge='
-			=> 'Set title "Wikimedia" for English page with id "42" and with a badge',
-			'api.php?action=wbalias&id=42&site=en&title=Wikimedia'
+			'api.php?action=wbalias&id=42&language=en&alias=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
 		);
 	}
