@@ -148,7 +148,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_inputRegistered: function() {
 		var disableSave = this.isEmpty() || ( this.getInitialValue() === this.getValue() );
-		var disableCancel = this.isEmpty() || ( ! this.validate( this.getInitialValue() ) );
+		var disableCancel = ( this.isEmpty() && this.getInitialValue() === '' ) || ( ! this.validate( this.getInitialValue() ) );
 
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
@@ -191,9 +191,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		this._inputElem.empty().remove(); // remove input interface
 		this._inputElem = null;
-		this._subject.text( $value );
-
+		
 		this._isInEditMode = false;
+		this.setValue( $value );
 
 		if( save ) {
 			this.storeValue();
@@ -269,6 +269,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
+	 * // TODO: should return an object representing the properties value
 	 * Returns the current value
 	 *
 	 * @return string
@@ -282,6 +283,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		return $.trim( value );
 	},
+	
+	/**
+	 * Sets a value
+	 */
+	setValue: function( value ) {
+		this._subject.text( value );
+	},
 
 	/**
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
@@ -290,7 +298,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	getInitialValue: function() {
 		if( ! this.isInEditMode() ) {
-			return this._subject.text();
+			return this.getValue();
 		}
 		return this._inputElem.data( this.UI_CLASS + '-initial-value' );
 	},
