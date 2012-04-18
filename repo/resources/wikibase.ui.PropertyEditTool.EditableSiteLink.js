@@ -32,10 +32,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	},
 	
 	_getToolbarParent: function() {
-		// append toolbar to <dd> node
-		return $( this._subject[1] );
+		// append toolbar to new td
+		return $( this._subject[1] ).parent().append( $( '<td/>' ) );
 	},
-   
+	
 	getApiCallParams: function() {
 		return {
 			action: 'wbsetdescription',

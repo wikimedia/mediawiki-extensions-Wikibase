@@ -27,5 +27,5 @@
 	} );
 	
 	// edit tool for site links:
-	new window.wikibase.ui.SiteLinksEditTool( $( '.wb-languagelinks-list' ) );
+	new window.wikibase.ui.SiteLinksEditTool( $( 'table.wb-languagelinks' ) );
 } )( jQuery );

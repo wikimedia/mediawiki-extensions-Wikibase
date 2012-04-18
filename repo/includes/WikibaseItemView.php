@@ -10,6 +10,7 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author H. Snater
  */
 class WikibaseItemView extends ContextSource {
 
@@ -61,33 +62,33 @@ class WikibaseItemView extends ContextSource {
 			// no site links available for this item
 			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
 		} else {
-			$html .= Html::openElement( 'dl', array( 'class' => 'wb-languagelinks-list' ) );
+			$html .= Html::openElement( 'table', array( 'class' => 'wb-languagelinks' ) );
 			
 			foreach( $siteLinks as $siteId => $title ) {
-				$html .= Html::element( 'dt', array( 'class' => 'wb-languagelinks-language-' . $siteId ), $siteId );
-				$html .= Html::openElement( 'dd', array( 'class' => 'wb-languagelinks-link-' . $siteId ) );
+				$html .= Html::openElement( 'tr' );
+				$html .= Html::element( 'td', array( 'class' => 'wb-languagelinks-site-' . $siteId ), $siteId );
+				$html .= Html::openElement( 'td', array( 'class' => 'wb-languagelinks-link-' . $siteId ) );
 				$html .= Html::element(
 					'a',
 					array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
 					$title
 				);
-				$html .= Html::closeElement( 'dd' );
+				$html .= Html::closeElement( 'td' );
+				$html .= Html::closeElement( 'tr' );
 			}
-			$html .= Html::closeElement( 'dl' );
+			$html .= Html::closeElement( 'table' );
 		}
 
-		$htmlTable = '';
-
 		// TODO: implement real ui instead of debug code
+		$html .= Html::element( 'div', array( 'style' => 'clear:both;' ) );
+		$htmlTable = '';
 		foreach ( WikibaseContentHandler::flattenArray( $this->item->toArray() ) as $k => $v ) {
 			$htmlTable .= Html::openElement( 'tr' );
 			$htmlTable .= Html::element( 'td', null, $k );
 			$htmlTable .= Html::element( 'td', null, $v );
 			$htmlTable .= Html::closeElement( 'tr' );
 		}
-
 		$htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
-
 		$html .= $htmlTable;
 
 		return $html;

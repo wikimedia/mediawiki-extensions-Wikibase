@@ -127,11 +127,11 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase.startup.js'
 	),
 	'styles' => array(
-		'../../../skins/common/shared.css',
 		'wikibase.ui.PropertyEditTool.css'
 	),
 	'dependencies' => array(
-		'jquery.tipsy'
+		'jquery.tipsy',
+		'mediawiki.legacy.shared'
 	),
 	'messages' => array(
 		'wikibase-cancel',
