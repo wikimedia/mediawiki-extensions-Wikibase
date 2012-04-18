@@ -107,7 +107,6 @@ class ApiWikibaseGetItem extends ApiBase {
 		return array(
 			'api.php?action=wbgetitem&id=42'
 			=> 'Get item number 42',
-			=> 'Get item number 42 with english language',
 			'api.php?action=wbgetitem&site=en&title=Berlin'
 			=> 'Get the item associated to page Berlin on the site identified by "en"',
 		);
