@@ -182,6 +182,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			'title' => array( 'Title of the page to associate.',
 				"Use together with 'site'."
 			),
+			'item' => 'Indicates if you are changing the content of the item',
 			'summary' => 'Summary for the edit.',
 		);
 	}
