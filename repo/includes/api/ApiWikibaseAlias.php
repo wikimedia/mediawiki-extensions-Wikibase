@@ -30,11 +30,11 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 		/*
 		if ( $params['change'] === 'remove') {
 			// TODO: Check if this is going to be defined
-			return $item->removeAlias( $params['alias'], $params['language'] );
+			return $item->removeAlias( $params['label'], $params['language'] );
 		}
 		else {
 			// TODO: Check if this is going to be defined
-			return $item->addAlias( $params['alias'], $params['language'], $params['change'] );
+			return $item->addAlias( $params['label'], $params['language'], $params['alias'] );
 		}
 		*/
 		return false;
@@ -49,14 +49,11 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
-			'badge' => array(
-				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
-			),
-			'alias' => array(
+			'label' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'change' => array(
+			'alias' => array(
 				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
@@ -65,8 +62,8 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
-			'alias' => 'The identifier of the site on which the article to link resides',
-			'change' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
+			'label' => 'The identifier of the site on which the article to link resides',
+			'alias' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
 		) );
 	}
 
@@ -78,11 +75,11 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbalias&id=42&language=en&alias=Wikimedia'
+			'api.php?action=wbalias&id=42&language=en&label=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbalias&id=42&language=en&alias=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
+			'api.php?action=wbalias&id=42&language=en&label=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
 			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
-			'api.php?action=wbalias&id=42&language=en&alias=Wikimedia'
+			'api.php?action=wbalias&id=42&language=en&label=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
 		);
 	}
