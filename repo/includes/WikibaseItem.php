@@ -555,6 +555,21 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * @since 0.1
+	 * @see Content::copy
+	 * @return WikibaseItem
+	 */
+	public function copy() {
+		$array = array();
+
+		foreach ( $this->toArray() as $key => $value ) {
+			$array[$key] = is_object( $value ) ? clone $value : $value;
+		}
+
+		return new self( $array );
+	}
+
+	/**
 	 * Returns the WikiPage object for the item with provided id.
 	 *
 	 * @since 0.1
