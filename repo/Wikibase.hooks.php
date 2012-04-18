@@ -59,11 +59,11 @@ final class WikibaseHooks {
 	 *
 	 * @param Title $title
 	 * @param Language $pageLanguage
-	 * @param Language $language
+	 * @param Language|StubUserLang $language
 	 *
 	 * @return true
 	 */
-	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, Language $language ) {
+	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
 
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
