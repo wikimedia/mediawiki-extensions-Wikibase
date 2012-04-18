@@ -30,23 +30,30 @@ class WikibaseViewItemAction extends FormlessAction {
 	 */
 	public function onView() {
 		$content = $this->getContext()->getWikiPage()->getContent();
-		$contentLangCode = $this->getLanguage()->getCode();
 
-		$parserOutput = $content->getParserOutput( $this->getContext() );
+		if ( is_null( $content ) ) {
+			// TODO: show ui for editing an empty item that does not have an ID yet.
+		}
+		else {
+			// TODO: switch on type of content.
+			$contentLangCode = $this->getLanguage()->getCode();
 
-		$out = $this->getOutput();
+			$parserOutput = $content->getParserOutput( $this->getContext() );
 
-		$out->addHTML( $parserOutput->getText() );
+			$out = $this->getOutput();
 
-		// make sure required client sided resources will be loaded:
-		$out->addModules( 'wikibase' );
+			$out->addHTML( $parserOutput->getText() );
 
-		// overwrite page title
-		$out->setPageTitle( $content->getLabel( $contentLangCode ) );
+			// make sure required client sided resources will be loaded:
+			$out->addModules( 'wikibase' );
 
-		// hand over the itemId to JS
-		$out->addJsConfigVars( 'wbItemId', $content->getId() );
-		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLangCode ) );
+			// overwrite page title
+			$out->setPageTitle( $content->getLabel( $contentLangCode ) );
+
+			// hand over the itemId to JS
+			$out->addJsConfigVars( 'wbItemId', $content->getId() );
+			$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLangCode ) );
+		}
 
 		return '';
 	}
