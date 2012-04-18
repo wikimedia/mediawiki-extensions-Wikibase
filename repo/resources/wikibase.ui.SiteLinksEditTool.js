@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
+ * @author H. Snater
  */
 
 /**
@@ -26,13 +27,10 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 */
 	_getValueElems: function() {
 		var pairs = new Array();
-		var dtNodes = this._subject.children( 'dt' );
-		
-		dtNodes.each( function() {
-			// add dd's as well
-			var pair = $( this ).add( $( this ).next( 'dd' ) );
-			pairs.push( pair );
-		} );
+		var tdNodes = $( 'td', this._subject );
+		for( var i = 0; i < tdNodes.length; i += 2 ) {
+			pairs.push( $( tdNodes[i] ).add( $( $( tdNodes[i] ).next( 'td' ) ) ) );
+		}
 		return pairs;
 	},
 	
