@@ -15,13 +15,9 @@
 /**
  * Gives basic edit toolbar functionality, serves the "[edit]" button as well as the "[cancel|save]"
  * buttons and other related stuff.
- * 
- * @param jQuery parent
  */
-window.wikibase.ui.PropertyEditTool.Toolbar = function( parent ) {
-	if( typeof parent != 'undefined' ) {
-		this._init( parent );
-	}
+window.wikibase.ui.PropertyEditTool.Toolbar = function() {
+	this._init();
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	/**
@@ -36,6 +32,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	_parent: null,
 	
 	/**
+	 * The toolbar element in the dom
 	 * @var jQuery
 	 */
 	_elem: null,
@@ -48,16 +45,14 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	/**
 	 * Initializes the edit toolbar for the given element.
 	 * This should normally be called directly by the constructor.
-	 * 
-	 * @param jQuery parent the element holding the toolbar
 	 */
-	_init: function( parent ) {
-		if( this._parent !== null ) {
+	_init: function() {
+		if( this._elem !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
 		this._items = new Array();
-		this._parent = parent;
+		//this._parent = parent;
 		this.draw(); // draw first to have toolbar wrapper
 		this._initToolbar();
 	},
@@ -75,27 +70,31 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		this._drawToolbarElements();
 	},
 	
+	appendTo: function( elem ) { // TODO: integrate the whole prototype with jQuery somehow
+		if( this._elem === null ) {
+			this.draw(); // this will generate the toolbar
+		}
+		this._elem.appendTo( elem );
+		this._parent = this._elem.parent();
+	},
+	
 	/**
 	 * Draws the toolbar element itself without its content
 	 */
-	_drawToolbar: function() {		
+	_drawToolbar: function() {
+		var parent = null;
 		if( this._elem !== null ) {
 			this._elem.children().detach(); // only detach so elements can be attached somewhere else
 			this._elem.remove();
+			parent = this._elem.parent();
 		}
 		this._elem = $( '<div/>', {
 			'class': this.UI_CLASS
 		} );
-	   
-		// TODO: check whether this is the proper way of doing the rtl thing
-		this._parent.append( this._elem );
-		/*
-		if( $( 'body' ).hasClass( 'rtl' ) ) {
-			this._parent.prepend( this._elem );
-		} else {
-			this._parent.append( this._elem );
+	   	
+		if( parent !== null ) { // if not known yet, appendTo() wasn't called so far
+			parent.append( this._elem );
 		}
-		*/
 	},
 	
 	/**
@@ -140,12 +139,12 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	},
 
 	destroy: function() {
-		if ( this._items != null ) {
+		if( this._items !== null ) {
 			for( var i in this._items ) {
 				this._items[i].destroy();
 			}
 		}
-		if ( this._elem != null ) {
+		if( this._elem !== null ) {
 			this._elem.remove();
 		}
 	}

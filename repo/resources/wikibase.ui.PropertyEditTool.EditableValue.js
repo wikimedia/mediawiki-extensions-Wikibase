@@ -9,16 +9,18 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+"use strict";
 
 /**
  * Serves the input interface for a value like a property value and also takes care of the conversion
  * between the pure html representation and the interface itself in both directions
  * 
  * @param jQuery subject
+ * @param wikibase.ui.PropertyEditTool.Toolbar toolbar
  */
-window.wikibase.ui.PropertyEditTool.EditableValue = function( subject ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject );
+window.wikibase.ui.PropertyEditTool.EditableValue = function( subject, toolbar ) {
+	if( typeof subject != 'undefined' && typeof toolbar != 'undefined' ) {
+		this._init( subject, toolbar );
 	}
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
@@ -56,26 +58,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
+	 * 
+	* @param jQuery subject
+	* @param wikibase.ui.PropertyEditTool.Toolbar toolbar shouldn't be initialized yet
 	 */
-	_init: function( subject ) {
+	_init: function( subject, toolbar ) {
 		if( this._subject !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._initToolbar();
-	},
-	
-	_initToolbar: function() {
-		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
-		//       with the actual value perhaps.
-		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._getToolbarParent() );
+		this._toolbar = toolbar;
 		
-		// give the toolbar a edit group with basic edit commands:
-		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup( this );
-		this._toolbar.addElement( editGroup );
-		this._toolbar.editGroup = editGroup; // remember this
-
+		this._toolbar.appendTo( this._getToolbarParent() );
+		
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
 			this._toolbar.editGroup.btnEdit.doAction();

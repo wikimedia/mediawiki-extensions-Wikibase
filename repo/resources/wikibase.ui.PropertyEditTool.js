@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
+"use strict";
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.
@@ -84,10 +85,39 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	_initSingleValue: function( valueElem ) {
 		var editableValue = new ( this.getEditableValuePrototype() )();
 		
+		// message to be displayed for empty input:
 		editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
-		editableValue._init( valueElem );
+		
+		var editableValueToolbar = this._initSingleValueToolbar( editableValue );
+		
+		// initialiye editable value and give appropriate toolbar on the way:
+		editableValue._init( valueElem, editableValueToolbar );
 		
 		this._editableValues.push( editableValue );
+	},
+	
+	/**
+	 * Initializes the toolbar for a single editable value
+	 */
+	_initSingleValueToolbar: function( editableValue ) {
+		var toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
+		
+		// give the toolbar a edit group with basic edit commands:
+		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup();
+		editGroup.displayRemoveButton = this.allowsMultipleValues; // remove button if we have a list
+		editGroup._init( editableValue );
+		
+		toolbar.addElement( editGroup );
+		toolbar.editGroup = editGroup; // remember this
+		
+		return toolbar;
+	},
+	
+	/**
+	 * Returns the node the toolbar should be appended to
+	 */
+	_getToolbarParent: function( value ) {
+		return value.parent();
 	},
 	
 	/**
