@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to get the data for a single Wikibase item.
+ * API module to get the link sites for a single Wikibase item.
  *
  * @since 0.1
  *
@@ -10,7 +10,6 @@
  * @ingroup API
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class ApiWikibaseGetItem extends ApiBase {
@@ -57,23 +56,6 @@ class ApiWikibaseGetItem extends ApiBase {
 			(int)$success
 		);
 
-		$languages = WikibaseUtils::getLanguageCodes();
-
-		$labels = $item->getLabels($languages); // TODO: Set specific languages
-		$this->getResult()->addValue(
-			'page',
-			'labels',
-			$labels
-		);
-
-		$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
-		$this->getResult()->addValue(
-			'page',
-			'descriptions',
-			$descriptions
-		);
-		$success = true;
-
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -94,18 +76,12 @@ class ApiWikibaseGetItem extends ApiBase {
 				ApiBase::PARAM_TYPE => 'string',
 				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
-			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
-				ApiBase::PARAM_ISMULTI => true,
-			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
 			'id' => 'The ID of the item to get the data from',
-			'language' => 'By default the internationalized values are returned in all available languages.
-						This parameter allows filtering these down to one or more languages by providing their language codes.',
 			'title' => array( 'The title of the corresponding page',
 				"Use together with 'site'."
 			),
@@ -130,16 +106,15 @@ class ApiWikibaseGetItem extends ApiBase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitem&id=42'
-			=> 'Get item number 42 with default (user?) language',
-			'api.php?action=wbgetitem&id=42&language=en'
+			=> 'Get item number 42',
 			=> 'Get item number 42 with english language',
-			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
+			'api.php?action=wbgetitem&site=en&title=Berlin'
 			=> 'Get the item associated to page Berlin on the site identified by "en"',
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetitem';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetlinksites';
 	}
 
 	public function getVersion() {
