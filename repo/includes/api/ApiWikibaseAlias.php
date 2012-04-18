@@ -27,6 +27,7 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
 		// TODO: this should really set up an alternate access method
+		/*
 		if ( $params['change'] === 'remove') {
 			// TODO: Check if this is going to be defined
 			return $item->removeAlias( $params['alias'], $params['language'] );
@@ -35,6 +36,8 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 			// TODO: Check if this is going to be defined
 			return $item->addAlias( $params['alias'], $params['language'], $params['change'] );
 		}
+		*/
+		return false;
 	}
 
 	public function getPossibleErrors() {
