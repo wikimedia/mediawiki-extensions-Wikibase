@@ -43,6 +43,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 		// must know if this is a legal content model
 		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			$this->getResult()->addValue(
+				null,
 			 	'id',
 				$params['id']
 			);
