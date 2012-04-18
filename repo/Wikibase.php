@@ -83,7 +83,7 @@ $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'includes/api/ApiWikib
 $wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'includes/api/ApiWikibaseAddAlias.php';
 $wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'includes/api/ApiWikibaseRemoveAlias.php';
 $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibaseModifyItem.php';
-$wgAutoloadClasses['ApiWikibaseSiteLink'] 			= $dir . 'includes/api/ApiWikibaseSiteLink.php';
+$wgAutoloadClasses['ApiWikibaseLinkSite'] 			= $dir . 'includes/api/ApiWikibaseLinkSite.php';
 
 // API module registration
 $wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
@@ -91,7 +91,7 @@ $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
 $wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
 $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
-$wgAPIModules['wbsitelink'] 						= 'ApiWikibaseSiteLink';
+$wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
 
 
 
