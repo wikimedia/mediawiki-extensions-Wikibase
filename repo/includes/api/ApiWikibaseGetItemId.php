@@ -37,7 +37,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 			}
 		}
 
-		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
+		$page = WikibaseItem::getWikiPageForId( $params['id'] );
 		$content = $page->getContent();
 		
 		// must know if this is a legal content model
