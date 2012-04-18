@@ -22,15 +22,16 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	
 	/**
 	 * @see wikibase.ui.PropertyEditTool._getValueElems()
+	 * @return jQuery[]
 	 */
 	_getValueElems: function() {
-		var pairs = new $();
+		var pairs = new Array();
 		var dds = this._subject.children( 'dt' );
 		
 		dds.each( function() {
 			// add dd's as well
 			var pair = $( this ).add( $( this ).next( 'dd' ) );
-			pairs = pairs.add( pair );
+			pairs.push( pair );
 		} );
 		return pairs;
 	},

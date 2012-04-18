@@ -64,7 +64,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	*/
    
-	_initEditToolForValues: function() {	   
+	_initEditToolForValues: function() {
 		var allValues = this._getValueElems();
 		
 		if( ! this.allowsMultipleValues ) {
@@ -72,8 +72,8 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		}
 		
 		var self = this;
-		allValues.each( function() {
-			self._initSingleValue( this );
+		$.each( allValues, function( index, item ) {
+			self._initSingleValue( item );
 		} );
 	},
 	
@@ -91,8 +91,9 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	
 	/**
-	 * Returns the nodes representing the properties values.
-	 * @return jQuery|Array
+	 * Returns the nodes representing the properties values. This can also return an array of jQuery
+	 * objects if the value is represented by several nodes not sharing a mutual parent.
+	 * @return jQuery|jQuery[]
 	 */
 	_getValueElems: function() {
 		return this._subject.children( '.wb-property-container-value' );
