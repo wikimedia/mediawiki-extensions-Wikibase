@@ -18,12 +18,12 @@ $messages = array();
  * @author Tobias Gritschacher
  */
 $messages['en'] = array(
-        'wikibase-desc' => 'Structured data repository',
-		'wikibase-edit' => 'edit',
-		'wikibase-save' => 'save',
-		'wikibase-cancel' => 'cancel',
-		'wikibase-label-edit-placeholder' => 'enter label',
-		'wikibase-description-edit-placeholder' => 'enter description',
-		'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
-		'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
+	'wikibase-desc' => 'Structured data repository',
+	'wikibase-edit' => 'edit',
+	'wikibase-save' => 'save',
+	'wikibase-cancel' => 'cancel',
+	'wikibase-label-edit-placeholder' => 'enter label',
+	'wikibase-description-edit-placeholder' => 'enter description',
+	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
+	'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
 );
