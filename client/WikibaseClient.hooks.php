@@ -21,7 +21,7 @@ final class WBCHooks {
 	 *
 	 * @param array $files
 	 *
-	 * @return true
+	 * @return bool
 	 */
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/test/';
