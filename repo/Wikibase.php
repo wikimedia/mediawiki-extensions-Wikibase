@@ -99,6 +99,8 @@ $wgAPIModules['wbsitelink'] 						= 'ApiWikibaseSiteLink';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
+$wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTestModules';
+
 
 
 // Resource loader modules

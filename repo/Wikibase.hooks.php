@@ -74,4 +74,15 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	public static function onResourceLoaderTestModules( array &$testModules, ResourceLoader &$resourceLoader ) {
+		$testModules['qunit']['ext.wikibase.tests'] = array(
+			'scripts' => array( 'tests/qunit/wikibase.tests.js' ),
+			'dependencies' => array(),
+			'localBasePath' => dirname( __FILE__ ),
+			'remoteExtPath' => 'Wikibase',
+		);
+
+		return true;
+	}
+
 }
