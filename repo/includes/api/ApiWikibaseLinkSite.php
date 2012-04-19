@@ -71,7 +71,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			'linktitle' => 'The title of the article to link',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
 			'link' => array('Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
-				'The argument "item" works as an alias for "link".',
+				'The argument "item" works as an alias for "item".',
 			),
 		) );
 	}

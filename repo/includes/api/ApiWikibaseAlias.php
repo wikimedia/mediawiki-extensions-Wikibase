@@ -13,7 +13,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseAlias extends ApiWikibaseModifyItem {
+class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
 
 	/**
 	 * Actually modify the item.
@@ -26,6 +26,15 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
+		/*
+		 * // TODO: Set as remove if there is no input value
+		if ( !isset($params['alias']) || ) {
+			$params['alias'] = $params['item'];
+		}
+		*/
+		if ( !isset($params['alias']) ) {
+			$params['alias'] = $params['item'];
+		}
 		// TODO: this should really set up an alternate access method
 		/*
 		if ( $params['change'] === 'remove') {
@@ -62,8 +71,10 @@ class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
-			'label' => 'The identifier of the site on which the article to link resides',
-			'alias' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
+			'label' => 'The label to use as an alternate name for the page in Wikidata',
+			'alias' => array('Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
+				'The argument "item" works as an alias for "item".',
+			),
 		) );
 	}
 
