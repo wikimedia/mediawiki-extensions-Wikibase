@@ -429,7 +429,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return array
 	 */
-	public function getLinkSites() {
+	public function getSiteLinks() {
 		$titles = array();
 
 		foreach ( $this->data['links'] as $siteId => $linkData ) {
