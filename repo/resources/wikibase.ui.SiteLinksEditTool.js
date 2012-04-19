@@ -26,12 +26,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @return jQuery[]
 	 */
 	_getValueElems: function() {
-		var pairs = new Array();
-		var tdNodes = $( 'td', this._subject );
-		for( var i = 0; i < tdNodes.length; i += 2 ) {
-			pairs.push( $( tdNodes[i] ).add( $( $( tdNodes[i] ).next( 'td' ) ) ) );
-		}
-		return pairs;
+		return this._subject.find( 'tr' );
 	},
 	
 	getEditableValuePrototype: function() {

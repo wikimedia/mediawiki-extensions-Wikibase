@@ -33,9 +33,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	
 	_getToolbarParent: function() {
 		// append toolbar to new td
-		return $( this._subject[1] ).parent().append( $( '<td/>' ) );
+		return $( '<td/>' ).appendTo( this._subject );
 	},
-	
+
 	getApiCallParams: function( removeValue ) {
 		if ( removeValue === true ) {
 			console.log('remove');

@@ -46,7 +46,8 @@ class WikibaseViewItemAction extends FormlessAction {
 
 		// hand over the itemId to JS
 		$out->addJsConfigVars( 'wbItemId', $content->getId() );
-		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLangCode ) );
+		// TODO: make this configurable rather than using the language array here:
+		$out->addJsConfigVars( 'wbSiteLinks', Language::fetchLanguageName( $contentLangCode ) );
 
 		return '';
 	}
