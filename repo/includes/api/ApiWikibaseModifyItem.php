@@ -56,7 +56,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		$success = false;
 
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = WikibaseItem::getIdForLinkSite( $params['site'], $params['title'] );
+			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
 			if ( $params['id'] === false && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
@@ -86,7 +86,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				$page = $item->getWikiPage();
 
 				if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-					$item->addLinkSite( $params['site'], $params['title'] );
+					$item->addSiteLink( $params['site'], $params['title'] );
 				}
 			}
 			else {
