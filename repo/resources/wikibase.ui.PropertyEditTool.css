@@ -1,5 +1,12 @@
 /**
  * Style for 'Wikibase' property edit tools
+ *
+ * @since 0.1
+ * @file wikibase.js
+ * @ingroup Wikibase
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater
  */
 
 .wb-ui-propertyedittoolbar, .wb-ui-propertyedittoolbar-group {
@@ -60,7 +67,7 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 }
 
 .tipsy-ne .tipsy-arrow, .tipsy-nw .tipsy-arrow {
-	background-image:url(images/tipsy-arrow-n.gif);
+	background:url(images/tipsy.png) -13px -1px;
 }
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
@@ -69,3 +76,17 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 	height:11px;
 	width:11px;
 }
+
+table.wb-languagelinks {
+	border:1px solid #5DC9F4;
+}
+	table.wb-languagelinks td {
+		padding:2px 4px;
+		margin:0;
+	}
+	table.wb-languagelinks tr:hover td {
+		background-color:#5DC9F4;
+	}
+	table.wb-languagelinks .uneven td {
+		background:#D6F3FF;
+	}
