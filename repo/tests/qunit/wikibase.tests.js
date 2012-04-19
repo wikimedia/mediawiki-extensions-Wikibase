@@ -7,7 +7,7 @@
 		expect(1);
 
 		function theAnswerToLifeTheUniverseAndEverything() {
-			return 42;
+			return 23;
 		}
 
 		var matches = theAnswerToLifeTheUniverseAndEverything() === 42;
