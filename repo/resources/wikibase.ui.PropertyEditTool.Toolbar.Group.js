@@ -13,23 +13,18 @@
 /**
  * Represents a group of toolbar elements within a toolbar
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Group = function( elements ) {
-	window.wikibase.ui.PropertyEditTool.Toolbar.call( this, elements );
+window.wikibase.ui.PropertyEditTool.Toolbar.Group = function() {
+	this._init()
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
 $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 
 	UI_CLASS: 'wb-ui-propertyedittoolbar-group',
 	
-	/**
-	 * @param Array elements collection of elements within the group. This can be a empty array as well,
-	 *        further elements can be added with addElement().
-	 */
+	_elem: null, // TODO: Override this because draw() in parent will initialize it! Overthink inheritance model/constructor
+	
 	_init: function( elements ) {
-		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this, null );
-		if( $.isArray( elements ) ) {
-			this._items = elements;
-		}
+		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this );
 	},	
 	
 	_drawToolbar: function() {
@@ -83,10 +78,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
  * This also interacts with a given editable value.
  */
 window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup = function( editableValue ) {
-	window.wikibase.ui.PropertyEditTool.Toolbar.Group.call( this, editableValue );
+	if( typeof editableValue != 'undefined' ) {
+		this._init();
+	}
+	//window.wikibase.ui.PropertyEditTool.Toolbar.Group.call( this );
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar.Group();
 $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
+	
+	_elem: null, // TODO: Override this because draw() in parent will initialize it! Overthink inheritance model/constructor
 	
 	/**
 	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
@@ -130,6 +130,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	 */
 	_init: function( editableValue ) {
 		this._editableValue = editableValue;
+		
 		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype._init.call( this );
 	},
 	
@@ -138,7 +139,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._initToolbar.call( this );
 		
 		// create a group inside the group so we can separate the tooltip visually
-		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group( null );
+		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group();
 		this.addElement( this.innerGroup );
 		
 		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );

@@ -11,6 +11,9 @@
  */
 ( function( $ ) {
 	
+	// add an edit tool for the main label. This will be integrated into the heading nicely:
+	new window.wikibase.ui.HeadingEditTool( $( '#firstHeading' ) );
+	
 	// add an edit tool for all properties in the data grid view:
 	$( 'body' )
 	.find( '.wb-property-container' )
@@ -22,9 +25,6 @@
 			new window.wikibase.ui.PropertyEditTool( this );
 		}
 	} );
-	
-	// add an edit tool for the main label. This will be integrated into the heading nicely:
-	new window.wikibase.ui.HeadingEditTool( $( '#firstHeading' ) );
 	
 	// edit tool for site links:
 	new window.wikibase.ui.SiteLinksEditTool( $( 'table.wb-languagelinks' ) );
