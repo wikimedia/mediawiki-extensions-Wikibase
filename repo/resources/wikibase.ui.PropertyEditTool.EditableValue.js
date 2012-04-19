@@ -88,6 +88,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	remove: function() {
 		// TODO API call
+		this.doApiCall( true );
 		this.destroy();
 		this._subject.remove();
 	},
@@ -196,7 +197,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this.setValue( $value );
 
 		if( save ) {
-			this.storeValue();
+			this.doApiCall( false );
 		}
 
 		// any change at all compared to initial value?
@@ -222,10 +223,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * Stores the current value in the database
+	 * Does the actual API call
+	 * @param bool removeValue whether to make the remove or the save call to the API
 	 */
-	storeValue: function() {
-		var apiCall = this.getApiCallParams();
+	doApiCall: function( removeValue ) {
+		var apiCall = this.getApiCallParams( removeValue );
 
 		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
 			console.log( apiCall );
@@ -237,6 +239,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			} );
 		}, this ) );
 	},
+
 
 	/**
 	 * Returns the neccessary parameters for a api call to store the value.

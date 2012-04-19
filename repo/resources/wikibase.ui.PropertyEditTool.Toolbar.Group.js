@@ -14,7 +14,7 @@
  * Represents a group of toolbar elements within a toolbar
  */
 window.wikibase.ui.PropertyEditTool.Toolbar.Group = function() {
-	this._init()
+	this._init();
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
 $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {

@@ -36,12 +36,25 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return $( this._subject[1] ).parent().append( $( '<td/>' ) );
 	},
 	
-	getApiCallParams: function() {
-		return {
-			action: 'wbsetdescription',
-			language: wgUserLanguage,
-			description: this.getValue(),
-			id: mw.config.values.wbItemId
-		};
+	getApiCallParams: function( removeValue ) {
+		if ( removeValue === true ) {
+			console.log('remove');
+			return {
+				action: 'wbsitelink',
+				id: mw.config.values.wbItemId,
+				link: 'add',
+				linksite: '',
+				linktitle: ''
+			};
+		} else {
+			console.log('save');
+			return {
+				action: 'wbsitelink',
+				id: mw.config.values.wbItemId,
+				link: 'remove',
+				linksite: '',
+				linktitle: ''
+			};
+		}
 	}
 } );
