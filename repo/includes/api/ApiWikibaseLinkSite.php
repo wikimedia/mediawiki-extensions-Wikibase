@@ -34,7 +34,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			return $item->addLinkSite( $params['linksite'], $params['linktitle'], $params['link'] );
+			return $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
 		}
 	}
 
