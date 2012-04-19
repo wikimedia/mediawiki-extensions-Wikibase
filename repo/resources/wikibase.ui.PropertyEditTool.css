@@ -78,15 +78,15 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 }
 
 table.wb-languagelinks {
-	border:1px solid #5DC9F4;
+	border:1px solid #AAAAAA;
 }
 	table.wb-languagelinks td {
 		padding:2px 4px;
 		margin:0;
 	}
 	table.wb-languagelinks tr:hover td {
-		background-color:#5DC9F4;
+		background-color:#D6F3FF;
 	}
 	table.wb-languagelinks .uneven td {
-		background:#D6F3FF;
+		background:#F9F9F9;
 	}
