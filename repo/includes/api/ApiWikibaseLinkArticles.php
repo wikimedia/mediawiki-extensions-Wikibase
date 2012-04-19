@@ -31,7 +31,7 @@ class ApiWikibaseLinkArticles extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		return $item->addSiteLink( $params['site_to'], $params['title_to'], !$params['noupdate'] );
+		return $item->addLinkSite( $params['site_to'], $params['title_to'], !$params['noupdate'] );
 	}
 
 	public function getPossibleErrors() {

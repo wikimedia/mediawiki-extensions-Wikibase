@@ -176,7 +176,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return false|integer
 	 */
-	public static function getIdForSiteLink( $siteId, $pageName ) {
+	public static function getIdForLinkSite( $siteId, $pageName ) {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$result = $dbr->selectRow(
@@ -267,7 +267,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function addSiteLink( $siteId, $pageName, $updateType = 'set' ) {
+	public function addLinkSite( $siteId, $pageName, $updateType = 'set' ) {
 		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
 			$this->data['links'][$siteId] = array();
 		}
@@ -290,13 +290,13 @@ class WikibaseItem extends WikibaseEntity {
 //		$dbw = wfGetDB( DB_MASTER );
 //
 //		if ( $update ) {
-//			$this->removeSiteLink( $siteId, $pageName );
+//			$this->removeLInkSite( $siteId, $pageName );
 //		}
 //		else {
 //			$exists = $dbw->selectRow(
 //				'wb_items_per_site',
 //				array( 'ips_item_id' ),
-//				$this->getSiteLinkConds( $siteId, $pageName ),
+//				$this->getLinkSiteConds( $siteId, $pageName ),
 //				__METHOD__
 //			) !== false;
 //
@@ -307,7 +307,7 @@ class WikibaseItem extends WikibaseEntity {
 //
 //		return $dbw->insert(
 //			'wb_items_per_site',
-//			$this->getSiteLinkConds( $siteId, $pageName ),
+//			$this->getLinkSiteConds( $siteId, $pageName ),
 //			__METHOD__
 //		);
 	}
@@ -323,7 +323,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return array
 	 */
-	protected function getSiteLinkConds( $siteId, $pageName ) {
+	protected function getLinkSiteConds( $siteId, $pageName ) {
 		return array(
 			'ips_item_id' => $this->getId(),
 			'ips_site_id' => $siteId,
@@ -341,7 +341,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function removeSiteLink( $siteId, $pageName ) {
+	public function removeLinkSite( $siteId, $pageName ) {
 		$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId]['title'] === $pageName;
 
 		if ( $success ) {
@@ -354,7 +354,7 @@ class WikibaseItem extends WikibaseEntity {
 //
 //		return $dbw->delete(
 //			'wb_items_per_site',
-//			$this->getSiteLinkConds( $siteId, $pageName ),
+//			$this->getLinkSiteConds( $siteId, $pageName ),
 //			__METHOD__
 //		);
 	}
@@ -552,6 +552,21 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	public function getTitle() {
 		return $this->hasId() ? self::getTitleForId( $this->getId() ) : false;
+	}
+
+	/**
+	 * @since 0.1
+	 * @see Content::copy
+	 * @return WikibaseItem
+	 */
+	public function copy() {
+		$array = array();
+
+		foreach ( $this->toArray() as $key => $value ) {
+			$array[$key] = is_object( $value ) ? clone $value : $value;
+		}
+
+		return new self( $array );
 	}
 
 	/**

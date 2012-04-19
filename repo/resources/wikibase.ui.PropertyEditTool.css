@@ -53,10 +53,10 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 	padding: 5px 0 0 35px;
 }
 
-.rtl .wb-property-container-value {
+/* @noflip */ .rtl .wb-property-container-value {
 	background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
-	padding: 5px 35px 0 0; /* css Janus does not convert padding in every browser */
-}
+	padding: 5px 35px 0 0;
+} /* css Janus does not convert padding in every browser */
 
 .mw-jump, #contentSub {
 	display:none;

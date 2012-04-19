@@ -56,7 +56,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		$success = false;
 
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
+			$params['id'] = WikibaseItem::getIdForLinkSite( $params['site'], $params['title'] );
 
 			if ( $params['id'] === false && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
@@ -68,6 +68,16 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 
 		if ( isset( $params['id'] ) && $params['id'] !== false ) {
+		
+			$this->getResult()->addValue(
+				null,
+				'item',
+				array(
+					'id',
+					$item->getId()
+				)
+			);
+			
 			$page = WikibaseItem::getWikiPageForId( $params['id'] );
 
 			if ( $page->exists() ) {
@@ -86,7 +96,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				$page = $item->getWikiPage();
 
 				if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-					$item->addSiteLink( $params['site'], $params['title'] );
+					$item->addLinkSite( $params['site'], $params['title'] );
 				}
 			}
 			else {
@@ -119,14 +129,6 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			'success',
 			(int)$success
 		);
-
-		if ( $success ) {
-			$this->getResult()->addValue(
-				'item',
-				'id',
-				$item->getId()
-			);
-		}
 	}
 
 	public function getPossibleErrors() {
@@ -182,6 +184,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			'title' => array( 'Title of the page to associate.',
 				"Use together with 'site'."
 			),
+			'item' => 'Indicates if you are changing the content of the item',
 			'summary' => 'Summary for the edit.',
 		);
 	}

@@ -6,7 +6,7 @@
  *
  * @since 0.1
  *
- * @file ApiWikibaseSiteLink.php
+ * @file ApiWikibaseLinkSite.php
  * @ingroup Wikibase
  * @ingroup API
  *
@@ -14,7 +14,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
+class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 
 	/**
 	 * Actually modify the item.
@@ -27,11 +27,14 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		if ( $params['change'] === 'remove') {
-			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
+		if ( !isset($params['link']) ) {
+			$params['link'] = $params['item'];
+		}
+		if ( $params['link'] === 'remove') {
+			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			return $item->addSiteLink( $params['linksite'], $params['linktitle'], !$params['link'] );
+			return $item->addLinkSite( $params['linksite'], $params['linktitle'], $params['link'] );
 		}
 	}
 
@@ -67,7 +70,9 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 			'linksite' => 'The identifier of the site on which the article to link resides',
 			'linktitle' => 'The title of the article to link',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
-			'link' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
+			'link' => array('Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
+				'The argument "item" works as an alias for "item".',
+			),
 		) );
 	}
 
@@ -79,19 +84,19 @@ class ApiWikibaseSiteLink extends ApiWikibaseModifyItem {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia'
+			'api.php?action=wblinksite&id=42&site=en&title=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
+			'api.php?action=wblinksite&id=42&site=en&title=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
 			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
-			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia&badge='
+			'api.php?action=wblinksite&id=42&site=en&title=Wikimedia&badge='
 			=> 'Set title "Wikimedia" for English page with id "42" and with a badge',
-			'api.php?action=wbsitelink&id=42&site=en&title=Wikimedia'
+			'api.php?action=wblinksite&id=42&site=en&title=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsitelink';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wblinksite';
 	}
 
 

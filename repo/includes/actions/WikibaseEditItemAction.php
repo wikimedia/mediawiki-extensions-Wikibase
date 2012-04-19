@@ -29,7 +29,14 @@ class WikibaseEditItemAction extends FormlessAction {
 	 * @see FormlessAction::onView()
 	 */
 	public function onView() {
-		// TODO
+		$content = $this->getContext()->getWikiPage()->getContent();
+
+		if ( is_null( $content ) ) {
+			// TODO: redirect to create special
+		}
+		else {
+			// TODO: switch on type of content
+		}
 
 		return 'TODO: edit UI';
 	}
