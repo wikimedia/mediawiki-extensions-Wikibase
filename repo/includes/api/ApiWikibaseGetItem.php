@@ -42,36 +42,27 @@ class ApiWikibaseGetItem extends ApiBase {
 		}
 
 		$page = WikibaseItem::getWikiPageForId( $params['id'] );
-		$content = $page->getContent();
 
-		if ( $content->getModelName() !== CONTENT_MODEL_WIKIBASE ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
+		if ( $page->exists() ) {
+			$item = $page->getContent();
 		}
-
-		$item = $content->getItem();
-
-		$sitelinks = $item->getSiteLinks();
-		$this->getResult()->addValue(
-			'page', 
-			'sitelinks',
-			(int)$success
-		);
+		else {
+			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
+		}
 
 		$languages = WikibaseUtils::getLanguageCodes();
 
-		$labels = $item->getLabels($languages); // TODO: Set specific languages
 		$this->getResult()->addValue(
+			null,
 			'page',
-			'labels',
-			$labels
+			array(
+			 	'id' => $params['id'],
+				'sitelinks' => $item->getSiteLinks(),
+				'descriptions' => $item->getDescriptions($languages),
+				'labels' => $item->getLabels($languages),
+			)
 		);
-
-		$descriptions = $item->getDescriptions($languages); // TODO: Set specific languages
-		$this->getResult()->addValue(
-			'page',
-			'descriptions',
-			$descriptions
-		);
+		
 		$success = true;
 
 		$this->getResult()->addValue(
@@ -124,6 +115,7 @@ class ApiWikibaseGetItem extends ApiBase {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
+			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
 		) );
 	}
 

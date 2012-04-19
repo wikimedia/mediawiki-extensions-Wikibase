@@ -68,6 +68,16 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 
 		if ( isset( $params['id'] ) && $params['id'] !== false ) {
+		
+			$this->getResult()->addValue(
+				null,
+				'item',
+				array(
+					'id',
+					$item->getId()
+				)
+			);
+			
 			$page = WikibaseItem::getWikiPageForId( $params['id'] );
 
 			if ( $page->exists() ) {
@@ -119,14 +129,6 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			'success',
 			(int)$success
 		);
-
-		if ( $success ) {
-			$this->getResult()->addValue(
-				'item',
-				'id',
-				$item->getId()
-			);
-		}
 	}
 
 	public function getPossibleErrors() {
