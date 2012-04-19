@@ -176,7 +176,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return false|integer
 	 */
-	public static function getIdForLinkSite( $siteId, $pageName ) {
+	public static function getIdForSiteLink( $siteId, $pageName ) {
 		$dbr = wfGetDB( DB_SLAVE );
 
 		$result = $dbr->selectRow(
@@ -267,7 +267,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function addLinkSite( $siteId, $pageName, $updateType = 'set' ) {
+	public function addSiteLink( $siteId, $pageName, $updateType = 'set' ) {
 		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
 			$this->data['links'][$siteId] = array();
 		}
