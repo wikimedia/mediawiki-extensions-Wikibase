@@ -49,7 +49,7 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		$this->get_element( "id=searchButton" )->click();
 		$this->get_element( "css=span.toctext" )->click();
 		$this->get_element( "css=img.thumbimage" )->click();
-		$this->get_element( "css=span" )->assert_text( "ftezwtFile:ZLB-Berliner Ansichten-Januar.jpg" );
+		$this->get_element( "css=span" )->assert_text( "File:ZLB-Berliner Ansichten-Januar.jpg" );
 		$this->assert_title( "File:ZLB-Berliner Ansichten-Januar.jpg - Wikipedia, the free encyclopedia" );
 	}
 	
