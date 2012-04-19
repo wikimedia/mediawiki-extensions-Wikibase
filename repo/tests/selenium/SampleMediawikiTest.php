@@ -29,8 +29,6 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		// For a local driver
 		$this->driver = WebDriver_Driver::InitAtLocal("4444", "firefox");
 
-		//$this->targetItem = "Berlin";
-		//$this->targetDescription = "A central-asian country";
 		$this->targetUseLang = "en";
 		$this->targetUrl = "http://localhost/mediawiki/index.php?title=Data:q7" . "&uselang=" . $this->targetUseLang;
 	}
@@ -46,8 +44,13 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 	
 	public function testExample() {
 		$this->set_implicit_wait(3000);
-		$this->load("http://www.google.com");
-		$this->assert_title("Google");
+		$this->load("http://en.wikipedia.org");
+		$this->get_element( "id=searchInput" )->send_keys( "Berlin" );
+		$this->get_element( "id=searchButton" )->click();
+		$this->get_element( "css=span.toctext" )->click();
+		$this->get_element( "css=img.thumbimage" )->click();
+		$this->get_element( "css=span" )->assert_text( "ftezwtFile:ZLB-Berliner Ansichten-Januar.jpg" );
+		$this->assert_title( "File:ZLB-Berliner Ansichten-Januar.jpg - Wikipedia, the free encyclopedia" );
 	}
 	
 	public function testWikidataPageTitle() {
@@ -108,8 +111,6 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		$this->get_element( $saveLinkSelector )->click();
 		$this->get_element( $labelElementSelector )->assert_text( $changedLabel );
 	}
-
-
 
 	public function testWikidataDescriptionUI() {
 		// defining selectors for elements beeing tested
