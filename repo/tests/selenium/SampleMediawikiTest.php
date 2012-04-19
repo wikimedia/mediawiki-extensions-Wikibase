@@ -42,17 +42,6 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 	
-	public function testExample() {
-		$this->set_implicit_wait(3000);
-		$this->load("http://en.wikipedia.org");
-		$this->get_element( "id=searchInput" )->send_keys( "Berlin" );
-		$this->get_element( "id=searchButton" )->click();
-		$this->get_element( "css=span.toctext" )->click();
-		$this->get_element( "css=img.thumbimage" )->click();
-		$this->get_element( "css=span" )->assert_text( "File:ZLB-Berliner Ansichten-Januar.jpg" );
-		$this->assert_title( "File:ZLB-Berliner Ansichten-Januar.jpg - Wikipedia, the free encyclopedia" );
-	}
-	
 	public function testWikidataPageTitle() {
 		$this->set_implicit_wait( 5000 );
 		$this->load( $this->targetUrl );
