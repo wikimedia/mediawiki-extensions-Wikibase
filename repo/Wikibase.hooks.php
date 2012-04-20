@@ -44,9 +44,9 @@ final class WikibaseHooks {
 	 * @return true
 	 */
 	public static function registerUnitTests( array &$files ) {
-		$testDir = dirname( __FILE__ ) . '/test/';
+		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
 
-		//$files[] = $testDir . '.php';
+		$files[] = $testDir . 'WikibaseItemTests.php';
 
 		return true;
 	}
@@ -59,17 +59,28 @@ final class WikibaseHooks {
 	 *
 	 * @param Title $title
 	 * @param Language $pageLanguage
-	 * @param Language $language
+	 * @param Language|StubUserLang $language
 	 *
 	 * @return true
 	 */
-	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, Language $language ) {
+	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
 
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE ) {
 			$pageLanguage = $language;
 		}
+
+		return true;
+	}
+
+	public static function onResourceLoaderTestModules( array &$testModules, ResourceLoader &$resourceLoader ) {
+		$testModules['qunit']['ext.wikibase.tests'] = array(
+			'scripts' => array( 'tests/qunit/wikibase.tests.js' ),
+			'dependencies' => array(),
+			'localBasePath' => dirname( __FILE__ ),
+			'remoteExtPath' => 'Wikibase',
+		);
 
 		return true;
 	}

@@ -37,20 +37,24 @@ class ApiWikibaseGetItemId extends ApiBase {
 			}
 		}
 
-		$page = WikibaseUtils::getWikiPageForId( $params['id'] );
-		$content = $page->getContent();
-		
-		// must know if this is a legal content model
-		if ( $content->getModelName() === CONTENT_MODEL_WIKIBASE ) {
-			$this->getResult()->addValue(
-			 	'id',
-				$params['id']
-			);
-			$success = true;
+		$page = WikibaseItem::getWikiPageForId( $params['id'] );
+
+		if ( $page->exists() ) {
+			$item = $page->getContent();
 		}
 		else {
-			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
+			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
 		}
+		
+		$this->getResult()->addValue(
+			null,
+			'page',
+			array(
+			 	'id' => $params['id']
+			)
+		);
+		
+		$success = true;
 
 		$this->getResult()->addValue(
 			null,

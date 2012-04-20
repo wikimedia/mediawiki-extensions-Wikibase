@@ -122,9 +122,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 		if ( $success ) {
 			$this->getResult()->addValue(
+				null,
 				'item',
-				'id',
-				$item->getId()
+				array(
+					'id',
+					$item->getId()
+				)
 			);
 		}
 	}
@@ -182,6 +185,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			'title' => array( 'Title of the page to associate.',
 				"Use together with 'site'."
 			),
+			'item' => 'Indicates if you are changing the content of the item',
 			'summary' => 'Summary for the edit.',
 		);
 	}
