@@ -121,7 +121,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	},
 	_cancelActionHandler: function() {
 		return $.proxy( function() {
-			this._leaveAction( false );
+			if( this._editableValue.isPending() ) {
+				( this._removeActionHandler() )();
+			} else {
+				this._leaveAction( false );
+			}
 		}, this );
 	},
 	_saveActionHandler: function() {

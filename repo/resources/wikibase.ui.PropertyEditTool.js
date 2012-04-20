@@ -73,7 +73,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		
 		if( this.allowsMultipleValues ) {
 			// only add 'add' button if we can have several values
-			this._toolbar.btnAdd = new window.wikibase.ui.PropertyEditTool.Toolbar.Button( window.mw.msg( 'wikibase-edit' ) );
+			this._toolbar.btnAdd = new window.wikibase.ui.PropertyEditTool.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
 			this._toolbar.btnAdd.onAction = $.proxy( function() {
 				this.enterNewValue();
 			}, this );
@@ -118,6 +118,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Takes care of initialization of a single value
 	 * @param jQuery valueElem
+	 * @return wikibase.ui.PropertyEditTool.EditableValue the initialized value
 	 */
 	_initSingleValue: function( valueElem ) {
 		var editableValue = new ( this.getEditableValuePrototype() )();
@@ -130,7 +131,8 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		// initialiye editable value and give appropriate toolbar on the way:
 		editableValue._init( valueElem, editableValueToolbar );
 		
-		this._editableValues.push( editableValue );
+		this._editableValues.push( editableValue );		
+		return editableValue;
 	},
 	
 	/**

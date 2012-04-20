@@ -38,10 +38,13 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 	
 	enterNewValue: function() {
-		var newValueElem = $( '<tr><td>a</td><td>b</td></tr>' );
+		var newValueElem = $( '<tr> <td>AA</td> <td></td> </tr>' );
+		newValueElem.addClass( 'wb-pending-value' );
 		
 		this._subject.append( newValueElem );
-		this._initSingleValue( newValueElem );
+		var newValue = this._initSingleValue( newValueElem );
+		newValue.startEditing();
+		newValue.setFocus();
 	},
 	
 	getEditableValuePrototype: function() {
