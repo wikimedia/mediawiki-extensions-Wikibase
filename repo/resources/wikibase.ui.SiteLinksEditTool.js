@@ -22,12 +22,26 @@ window.wikibase.ui.SiteLinksEditTool = function( subject ) {
 window.wikibase.ui.SiteLinksEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
 $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	
+	_getToolbarParent: function() {
+		// take content (table), put it into a div and also add the toolbar into the div
+		var newParent = $( '<div/>' );
+		newParent.insertAfter( this._subject );
+		return newParent.append( this._subject );
+	},
+	
 	/**
 	 * @see wikibase.ui.PropertyEditTool._getValueElems()
 	 * @return jQuery[]
 	 */
 	_getValueElems: function() {
 		return this._subject.find( 'tr' );
+	},
+	
+	enterNewValue: function() {
+		var newValueElem = $( '<tr><td>a</td><td>b</td></tr>' );
+		
+		this._subject.append( newValueElem );
+		this._initSingleValue( newValueElem );
 	},
 	
 	getEditableValuePrototype: function() {

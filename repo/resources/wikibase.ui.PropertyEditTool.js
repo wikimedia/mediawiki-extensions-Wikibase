@@ -33,6 +33,13 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	_subject: null,
 	
 	/**
+	 * Contains the toolbar for the edit tool itself, not for its values or null if it doesn't have
+	 * one.
+	 * @var wikibase.ui.PropertyEditTool.Toolbar
+	 */
+	_toolbar: null,
+	
+	/**
 	 * The editable value for the properties data value
 	 * @var wikibase.ui.PropertyEditTool.EditableValue
 	 */
@@ -53,6 +60,36 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._subject.addClass( this.UI_CLASS + '-subject' );
 				
 		this._initEditToolForValues();
+		this._initToolbar();
+	},
+	
+	/**
+	 * Initializes a toolbar for the whole property edit tool. By default this is just a command
+	 * to add more values.
+	 * @return wikibase.ui.PropertyEditTool.Toolbar
+	 */
+	_initToolbar: function() {
+		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
+		
+		if( this.allowsMultipleValues ) {
+			// only add 'add' button if we can have several values
+			this._toolbar.btnAdd = new window.wikibase.ui.PropertyEditTool.Toolbar.Button( window.mw.msg( 'wikibase-edit' ) );
+			this._toolbar.btnAdd.onAction = $.proxy( function() {
+				this.enterNewValue();
+			}, this );
+
+			this._toolbar.addElement( this._toolbar.btnAdd );
+		}
+		
+		this._toolbar.appendTo( this._getToolbarParent() );
+	},
+	
+	/**
+	 * Returns the node the toolbar should be appended to
+	 * @return jQuery
+	 */
+	_getToolbarParent: function() {
+		return this._subject;
 	},
 	
 	/*
@@ -88,7 +125,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		// message to be displayed for empty input:
 		editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
 		
-		var editableValueToolbar = this._initSingleValueToolbar( editableValue );
+		var editableValueToolbar = this._buildSingleValueToolbar( editableValue );
 		
 		// initialiye editable value and give appropriate toolbar on the way:
 		editableValue._init( valueElem, editableValueToolbar );
@@ -97,9 +134,10 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	
 	/**
-	 * Initializes the toolbar for a single editable value
+	 * Builds the toolbar for a single editable value
+	 * @return wikibase.ui.PropertyEditTool.Toolbar
 	 */
-	_initSingleValueToolbar: function( editableValue ) {
+	_buildSingleValueToolbar: function( editableValue ) {
 		var toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
 		
 		// give the toolbar a edit group with basic edit commands:
@@ -111,13 +149,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		toolbar.editGroup = editGroup; // remember this
 		
 		return toolbar;
-	},
-	
-	/**
-	 * Returns the node the toolbar should be appended to
-	 */
-	_getToolbarParent: function( value ) {
-		return value.parent();
 	},
 	
 	/**
@@ -133,6 +164,14 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		if ( this._editableValue != null ) {
 			//this._editableValue.destroy();
 		}
+	},
+	
+	/**
+	 * Allows to enter a new value, the input interface will be available but the process can still
+	 * be cancelled.
+	 */
+	enterNewValue: function() {
+		
 	},
 	
 	/**
