@@ -66,7 +66,10 @@ class WikibaseItemView extends ContextSource {
 
 			$i = 0;
 			foreach( $siteLinks as $siteId => $title ) {
-				$html .= Html::openElement( 'tr', array( 'class' => ( $i++ % 2 ) ? 'even' : 'uneven' ) );
+				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+				$html .= Html::openElement( 'tr', array(
+					'class' => 'wb-language-links-' . $siteId . ' ' . $alternatingClass )
+				);
 				$html .= Html::element( 'td', array( 'class' => 'wb-languagelinks-site-' . $siteId ), $siteId );
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-languagelinks-link-' . $siteId ) );
 				$html .= Html::element(

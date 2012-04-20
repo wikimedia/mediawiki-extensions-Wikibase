@@ -131,6 +131,7 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	),
 	'dependencies' => array(
 		'jquery.tipsy',
+		'jquery.ui.autocomplete',
 		'mediawiki.legacy.shared'
 	),
 	'messages' => array(
