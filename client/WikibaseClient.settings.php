@@ -18,24 +18,12 @@
  */
 class WBCSettings {
 
-	protected $settings = false;
-
 	/**
-	 * Returns the default values for the settings.
-	 * setting name (string) => setting value (mixed)
-	 *
+	 * Build version of the settings.
 	 * @since 0.1
-	 *
-	 * @return array
+	 * @var boolean
 	 */
-	protected static function getDefaultSettings() {
-		return array(
-			'namespaces' => array( NS_MAIN ),
-			'sort' => 'none',
-			'sortPrepend' => false,
-			'alwaysSort' => false,
-		);
-	}
+	protected $settings = false;
 
 	/**
 	 * Returns an array with all settings after making sure they are
@@ -79,6 +67,7 @@ class WBCSettings {
 
 	/**
 	 * Builds the settings if needed.
+	 * This includes merging the set settings over the default ones.
 	 *
 	 * @since 0.1
 	 */
@@ -123,6 +112,23 @@ class WBCSettings {
 	 */
 	public static function get( $settingName ) {
 		return self::singleton()->getSetting( $settingName );
+	}
+
+	/**
+	 * Returns the default values for the settings.
+	 * setting name (string) => setting value (mixed)
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	protected static function getDefaultSettings() {
+		return array(
+			'namespaces' => array( NS_MAIN ),
+			'sort' => 'none',
+			'sortPrepend' => false,
+			'alwaysSort' => false,
+		);
 	}
 
 }
