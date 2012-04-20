@@ -225,6 +225,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		if( save ) {
 			this.doApiCall( false );
+			this._pending = false;
+		}
+		else if( this.isPending() ) {
+			// not yet existing value, no state to go back to
+			this.remove();
 		}
 
 		// any change at all compared to initial value?
