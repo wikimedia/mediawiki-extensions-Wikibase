@@ -89,7 +89,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	remove: function() {
 		// TODO API call
 		this.destroy();
-		this._subject.remove();
+		this._subject.empty().remove();
 	},
 
 	destroy: function() {
@@ -113,42 +113,61 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.isInEditMode() ) {
 			return false;
 		}
-
-		var initText = this.getValue();
-
-		this._inputElem = $( '<input/>', {
-			'class': this.UI_CLASS,
-			'type': 'text',
-			'name': this._key,
-			'value': initText,
-			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._keyPressed, this ), // TODO: this shouldn't be used, keyup should work fine!
-			'keyup': jQuery.proxy( this._keyPressed, this ),	//       we have both for escape key browser compability
-			'focus': jQuery.proxy( this._onFocus, this ),
-			'blur': jQuery.proxy( this._onBlur, this )
-		} );
-
-		this._subject.text( '' );
-		this._subject.append( this._inputElem );
-
+		this._inputElem = this._buildInputElement();
 		// store original text value from before input box insertion:
-		this._inputElem.data( this.UI_CLASS + '-initial-value', initText );
+		this._inputElem.data( this.UI_CLASS + '-initial-value', this.getValue() );
+		
+		var inputParent = this._getValueContainer();
+		inputParent.text( '' );
+		this._inputElem.appendTo( inputParent );
 
         this._isInEditMode = true;
 
-		this._inputRegistered(); // do this after setting _isInEditMode !
+		this._onInputRegistered(); // do this after setting _isInEditMode !
         this.setFocus();
 
 		return true;
+	},
+	
+	/**
+	 * returns the input element for editing
+	 * @return jQuery
+	 */
+	_buildInputElement: function() {
+		return $( '<input/>', {
+			'class': this.UI_CLASS,
+			'type': 'text',
+			'name': this._key,
+			'value': this.getValue(),
+			'placeholder': this.inputPlaceholder,
+			'keypress': jQuery.proxy( this._onKeyPressed, this ), // TODO: this shouldn't be used, keyup should work fine!
+			'keyup': jQuery.proxy( this._onKeyPressed, this ),	//       we have both for escape key browser compability
+			'focus': jQuery.proxy( this._onFocus, this ),
+			'blur': jQuery.proxy( this._onBlur, this )
+		} );
+	},
+	
+	/**
+	 * Returns the node holding the value. This node will also hold the input box when in edit mode.
+	 * @return jQuery
+	 */
+	_getValueContainer: function() {
+		return this._subject;
 	},
 
 	/**
 	 * Called when the input changes in general for example on its initialization when setting
 	 * its initial value.
 	 */
-	_inputRegistered: function() {
-		var disableSave = this.isEmpty() || ( this.getInitialValue() === this.getValue() );
-		var disableCancel = ( this.isEmpty() && this.getInitialValue() === '' ) || ( ! this.validate( this.getInitialValue() ) );
+	_onInputRegistered: function() {
+		var value = this.getValue();
+		var isInvalid = !this.validate( value );
+		
+		// can't save if invalid input OR same as before
+		var disableSave = isInvalid || ( this.getInitialValue() === value );
+		
+		// can't cancel if empty before
+		var disableCancel = this.getInitialValue() === '';
 
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
@@ -157,8 +176,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * Called when a key is pressed inside the input interface
 	 */
-	_keyPressed: function( event ) {
-		this._inputRegistered();
+	_onKeyPressed: function( event ) {
+		this._onInputRegistered();
 
 		if( event.which == 13 ) {
 			this._toolbar.editGroup.btnSave.doAction();
@@ -277,9 +296,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	getValue: function() {
 		var value = '';
 		if( this.isInEditMode() ) {
-			value = $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
+			value = $( this._getValueContainer().children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
 		} else {
-			value = this._subject.text();
+			value = this._getValueContainer().text();
 		}
 		return $.trim( value );
 	},
@@ -288,7 +307,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Sets a value
 	 */
 	setValue: function( value ) {
-		this._subject.text( value );
+		this._getValueContainer().text( value );
 	},
 
 	/**

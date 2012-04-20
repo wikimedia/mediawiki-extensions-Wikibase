@@ -22,7 +22,7 @@ window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype = new window.wiki
 $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 
 	//getInputHelpMessage: function() {
-	//	return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
+	//	return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbSiteLinks') );
 	//},
 	
 	_initToolbar: function() {
@@ -34,6 +34,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	_getToolbarParent: function() {
 		// append toolbar to new td
 		return $( '<td/>' ).appendTo( this._subject );
+	},
+	
+	_getValueContainer: function() {
+		return $( this._subject.find( 'td' )[1] );
 	},
 
 	getApiCallParams: function() {

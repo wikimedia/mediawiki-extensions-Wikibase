@@ -22,7 +22,7 @@ window.wikibase.ui.PropertyEditTool.EditableDescription = function( subject ) {
 window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
+		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbSiteLinks') );
 	},
 
 	getApiCallParams: function() {
