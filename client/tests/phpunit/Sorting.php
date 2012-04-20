@@ -1846,7 +1846,7 @@ class WikibaseSortingTests extends MediaWikiTestCase {
 			"bat-smg:Vikipedėjė",
 			"zh:维基百科",
 		);
-		array_shuffle( $a );
+		shuffle( $a );
 		return $a;
 	}
 
