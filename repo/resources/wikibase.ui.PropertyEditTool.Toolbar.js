@@ -130,11 +130,11 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * @return bool false if element isn't part of this element
 	 */
 	removeElement: function( elem ) {
-		$index = $.inArray( elem, this._items );
-		if( $index === -1 ) {
+		var index = $.inArray( elem, this._items );
+		if( index === -1 ) {
 			return false;
 		}
-		this._items.splice( $index, 1 );
+		this._items.splice( index, 1 );
 		
 		this.draw(); // TODO: could be more efficient when just removing one element
 	},

@@ -115,9 +115,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 			}
 			this.innerGroup.addElement( this.btnSave );
 			this.innerGroup.addElement( this.btnCancel );
-			if ( this.displayRemoveButton ) {
-				this.innerGroup.addElement( this.btnRemove );
-			}
+			
 			this._editableValue.startEditing();
 		}, this );
 	},
