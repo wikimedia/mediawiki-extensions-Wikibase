@@ -55,18 +55,22 @@ class WikibaseItemView extends ContextSource {
 		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
 		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
 		$html .= Html::closeElement( 'div' );
-				
-		$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-languagelinks' ) );
 		
 		if( empty( $siteLinks ) ) {
 			// no site links available for this item
 			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
 		} else {
 			$html .= Html::openElement( 'table', array( 'class' => 'wb-languagelinks', 'cellspacing' => '0' ) );
+			$html .= Html::openElement( 'tr' );
+			$html .= Html::element( 'th', array( 'colspan' => '2' ), wfMessage( 'wikibase-languagelinks' ) );
+			$html .= Html::closeElement( 'tr' );
 
 			$i = 0;
 			foreach( $siteLinks as $siteId => $title ) {
-				$html .= Html::openElement( 'tr', array( 'class' => ( $i++ % 2 ) ? 'even' : 'uneven' ) );
+				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+				$html .= Html::openElement( 'tr', array(
+					'class' => 'wb-language-links-' . $siteId . ' ' . $alternatingClass )
+				);
 				$html .= Html::element( 'td', array( 'class' => 'wb-languagelinks-site-' . $siteId ), $siteId );
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-languagelinks-link-' . $siteId ) );
 				$html .= Html::element(

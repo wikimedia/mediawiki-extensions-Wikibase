@@ -41,24 +41,41 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return $( this._subject.find( 'td' )[1] );
 	},
 
+	_buildInputElement: function() {
+		var inputElement = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInputElement.call( this );
+		inputElement.autocomplete( {
+			source:	$.proxy( function( request, suggest ) {
+				var siteId = this._subject.attr('class').match(/wb-language-links-\w+/)[0].split('-').pop();
+				var apiLink = 'http://' + siteId + '.wikipedia.org/w/api.php'; // TODO store api references in config and acquire by site id
+				$.getJSON( apiLink + '?callback=?', {
+					action: 'opensearch',
+					search: request.term,
+					namespace: 0,
+					suggest: ''
+				}, function( data ) {
+					suggest( data[1] ); // pass array of returned values to callback
+				} );
+			}, this )
+		} );
+		return inputElement;
+	},
+
 	getApiCallParams: function( removeValue ) {
 		if ( removeValue === true ) {
-			console.log('remove');
 			return {
-				action: 'wbsitelink',
-				id: mw.config.values.wbItemId,
-				link: 'add',
-				linksite: '',
-				linktitle: ''
-			};
-		} else {
-			console.log('save');
-			return {
-				action: 'wbsitelink',
+				action: 'wblinksite',
 				id: mw.config.values.wbItemId,
 				link: 'remove',
-				linksite: '',
-				linktitle: ''
+				linksite: $(this._subject.children()[0]).text(),
+				linktitle: this.getValue()
+			};
+		} else {
+			return {
+				action: 'wblinksite',
+				id: mw.config.values.wbItemId,
+				link: 'set',
+				linksite: $(this._subject.children()[0]).text(),
+				linktitle: this.getValue()
 			};
 		}
 	}
