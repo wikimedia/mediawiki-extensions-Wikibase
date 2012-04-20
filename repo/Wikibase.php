@@ -93,8 +93,6 @@ $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
 $wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
 
-
-
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
@@ -115,6 +113,7 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase.ui.PropertyEditTool.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Group.js',
+		'wikibase.ui.PropertyEditTool.Toolbar.EditGroup.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Label.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Button.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Tooltip.js',
