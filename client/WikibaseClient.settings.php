@@ -18,6 +18,8 @@
  */
 class WBCSettings {
 
+	protected $settings = false;
+
 	/**
 	 * Returns the default values for the settings.
 	 * setting name (string) => setting value (mixed)
@@ -31,6 +33,7 @@ class WBCSettings {
 			'namespaces' => array( NS_MAIN ),
 			'sort' => 'none',
 			'sortPrepend' => false,
+			'alwaysSort' => false,
 		);
 	}
 
@@ -43,17 +46,49 @@ class WBCSettings {
 	 *
 	 * @return array
 	 */
-	public static function getSettings() {
-		static $settings = false;
+	public function getSettings() {
+		$this->buildSettings();
+		return $this->settings;
+	}
 
-		if ( $settings === false ) {
-			$settings = array_merge(
+	/**
+	 * Returns an instance of the settings class.
+	 *
+	 * @since 0.1
+	 *
+	 * @return WBCSettings
+	 */
+	public static function singleton() {
+		static $instance = false;
+
+		if ( $instance === false ) {
+			$instance = new self();
+		}
+
+		return $instance;
+	}
+
+	/**
+	 * Does a lazy rebuild of the settings.
+	 *
+	 * @since 0.1
+	 */
+	public function rebuildSettings() {
+		$this->settings = false;
+	}
+
+	/**
+	 * Builds the settings if needed.
+	 *
+	 * @since 0.1
+	 */
+	protected function buildSettings() {
+		if ( $this->settings === false ) {
+			$this->settings = array_merge(
 				self::getDefaultSettings(),
 				$GLOBALS['egWBCSettings']
 			);
 		}
-
-		return $settings;
 	}
 
 	/**
@@ -66,14 +101,28 @@ class WBCSettings {
 	 * @throws MWException
 	 * @return mixed
 	 */
-	public static function get( $settingName ) {
-		$settings = self::getSettings();
+	public function getSetting( $settingName ) {
+		$this->buildSettings();
 
-		if ( !array_key_exists( $settingName, $settings ) ) {
+		if ( !array_key_exists( $settingName, $this->settings ) ) {
 			throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
 		}
 
-		return $settings[$settingName];
+		return $this->settings[$settingName];
+	}
+
+	/**
+	 * Gets the value of the specified setting.
+	 * Shortcut to calling getSetting on the singleton instance of the settings class.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $settingName
+	 *
+	 * @return mixed
+	 */
+	public static function get( $settingName ) {
+		return self::singleton()->getSetting( $settingName );
 	}
 
 }
