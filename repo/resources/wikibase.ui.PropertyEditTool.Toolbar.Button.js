@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+"use strict";
 
 /**
  * Represents a button within a wikibase.ui.PropertyEditTool.Toolbar toolbar

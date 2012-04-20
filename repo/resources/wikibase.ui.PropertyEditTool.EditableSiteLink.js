@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
+"use strict";
 
 /**
  * Serves the input interface for a site link, extends EditableValue.

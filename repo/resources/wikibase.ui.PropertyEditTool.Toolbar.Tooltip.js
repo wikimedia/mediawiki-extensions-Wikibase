@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
+"use strict";
 
 /**
  * Represents a tooltip within a wikibase.ui.PropertyEditTool.Toolbar toolbar

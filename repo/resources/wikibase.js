@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
+"use strict";
 window.wikibase = new( function() {
 	
 } )();

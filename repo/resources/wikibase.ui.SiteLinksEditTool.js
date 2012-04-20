@@ -10,6 +10,7 @@
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  * @author H. Snater
  */
+"use strict";
 
 /**
  * Module for 'Wikibase' extensions user interface functionality for editing the site links of an item.

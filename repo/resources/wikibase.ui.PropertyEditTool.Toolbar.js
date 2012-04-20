@@ -11,6 +11,7 @@
  * @author H. Snater
  * @author Tobias Gritschacher
  */
+"use strict";
 
 /**
  * Gives basic edit toolbar functionality, serves the "[edit]" button as well as the "[cancel|save]"

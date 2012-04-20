@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+"use strict";
 
 /**
  * Represents a group of toolbar elements within a toolbar

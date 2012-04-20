@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
+"use strict";
 ( function( $ ) {
 	
 	// add an edit tool for the main label. This will be integrated into the heading nicely:

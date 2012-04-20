@@ -10,6 +10,7 @@
  * @author Daniel Werner
  * @author H. Snater
  */
+"use strict";
 
 /**
  * Represents a label within a wikibase.ui.PropertyEditTool.Toolbar toolbar

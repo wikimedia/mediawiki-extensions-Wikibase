@@ -10,6 +10,7 @@
  * @author Daniel Werner
  * @author Tobias Gritschacher
  */
+"use strict";
 
 /**
  * Serves the input interface for an item label, extends EditableValue.

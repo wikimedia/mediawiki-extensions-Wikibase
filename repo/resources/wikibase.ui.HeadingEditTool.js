@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
+"use strict";
 
 /**
  * Module for 'Wikibase' extensions user interface functionality for editing the heading representing
