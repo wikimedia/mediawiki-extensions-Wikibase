@@ -23,7 +23,7 @@ window.wikibase.ui.PropertyEditTool.EditableLabel = function( subject ) {
 window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbSiteLinks') );
+		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
 	getApiCallParams: function() {

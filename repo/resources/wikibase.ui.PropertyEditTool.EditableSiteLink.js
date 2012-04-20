@@ -23,7 +23,7 @@ window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype = new window.wiki
 $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 
 	//getInputHelpMessage: function() {
-	//	return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbSiteLinks') );
+	//	return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
 	//},
 	
 	_initToolbar: function() {
