@@ -103,7 +103,16 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 */
 	_drawToolbarElements: function() {
 		for( var i in this._items ) {
+			if( this.renderItemSeparators && i != 0 ) {
+				this._elem.append( '|' );
+			}
 			this._elem.append( this._items[i]._elem );
+		}
+		
+		if( this.renderItemSeparators ) {
+			this._elem
+			.prepend( '[' )
+			.append( ']' );
 		}
 	},
 	
@@ -148,5 +157,17 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		if( this._elem !== null ) {
 			this._elem.remove();
 		}
-	}
+	},
+	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
+	/**
+	 * Defines whether the toolbar should be displayed with separators "|" between each item. In that
+	 * case everything will also be wrapped within "[" and "]".
+	 * This is particulary interesting for wikibase.ui.PropertyEditTool.Toolbar.Group toolbar groups
+	 * @var bool
+	 */
+	renderItemSeparators: false
 };

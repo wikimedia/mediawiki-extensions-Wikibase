@@ -70,6 +70,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 */
 	_initToolbar: function() {
 		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
+		this._toolbar.renderItemSeparators = true;
 		
 		if( this.allowsMultipleValues ) {
 			// only add 'add' button if we can have several values
