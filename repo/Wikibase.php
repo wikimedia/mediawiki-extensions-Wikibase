@@ -77,21 +77,23 @@ $wgAutoloadClasses['WikibaseEditItemAction'] 		= $dir . 'includes/actions/Wikiba
 // includes/api
 $wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'includes/api/ApiWikibaseGetItem.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'includes/api/ApiWikibaseGetItemId.php';
+$wgAutoloadClasses['ApiWikibaseGetLinkSites'] 		= $dir . 'includes/api/ApiWikibaseGetLinkSites.php';
 $wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'includes/api/ApiWikibaseLinkArticles.php';
 $wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'includes/api/ApiWikibaseSetLabel.php';
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'includes/api/ApiWikibaseSetDescription.php';
-$wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'includes/api/ApiWikibaseAddAlias.php';
-$wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'includes/api/ApiWikibaseRemoveAlias.php';
 $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibaseModifyItem.php';
 $wgAutoloadClasses['ApiWikibaseLinkSite'] 			= $dir . 'includes/api/ApiWikibaseLinkSite.php';
+$wgAutoloadClasses['ApiWikibaseAlias'] 				= $dir . 'includes/api/ApiWikibaseAlias.php';
 
 // API module registration
 $wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
-$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
 $wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
+$wgAPIModules['wbgetlinksites'] 					= 'ApiWikibaseGetLinkSites';
 $wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
+$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
+$wgAPIModules['wbalias'] 							= 'ApiWikibaseAlias';
 
 
 
