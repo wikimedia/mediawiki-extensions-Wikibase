@@ -135,6 +135,8 @@ class WBSettings {
 				'en' => 'https://en.wikipedia.org/wiki/$1',
 				'de' => 'https://de.wikipedia.org/wiki/$1',
 				'nl' => 'https://nl.wikipedia.org/wiki/$1',
+				'nn' => 'https://nn.wikipedia.org/wiki/$1',
+				'no' => 'https://no.wikipedia.org/wiki/$1',
 			),
 		);
 	}
