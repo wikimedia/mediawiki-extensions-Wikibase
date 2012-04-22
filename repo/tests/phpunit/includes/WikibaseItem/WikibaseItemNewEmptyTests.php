@@ -153,6 +153,10 @@ class WikibaseItemNewEmptyTests extends MediaWikiTestCase {
 		$str = 'This is an description';
 		$len = 8;
 		
+		$this->markTestSkipped(
+			'The getSystemPropertyNames is not implemented yet.'
+		);
+		
 		$this->assertInternalType(
 			'string',
 			$GLOBALS['wgLang'],
