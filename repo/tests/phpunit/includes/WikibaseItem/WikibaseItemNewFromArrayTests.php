@@ -14,7 +14,7 @@
  * @author John Erling Blad < jeblad@gmail.com >
  * 
  */
-class WikibaseItemTests extends MediaWikiTestCase {
+class WikibaseItemNewFromArrayTests extends MediaWikiTestCase {
 	
 	/**
 	 * Enter description here ...
@@ -27,7 +27,6 @@ class WikibaseItemTests extends MediaWikiTestCase {
 	 */
 	protected function setUp() {
 		$this->item = WikibaseItem::newFromArray( array( 'entity' => 'q42' ) );
-		fwrite(STDOUT, __METHOD__ . "\n");
 	}
 	
 	/**

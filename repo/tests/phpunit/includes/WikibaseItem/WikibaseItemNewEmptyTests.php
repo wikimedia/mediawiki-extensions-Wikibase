@@ -14,7 +14,7 @@
  * @author John Erling Blad < jeblad@gmail.com >
  * 
  */
-class WikibaseItemTests extends MediaWikiTestCase {
+class WikibaseItemNewEmptyTests extends MediaWikiTestCase {
 	
 	/**
 	 * Enter description here ...
@@ -27,7 +27,6 @@ class WikibaseItemTests extends MediaWikiTestCase {
 	 */
 	protected function setUp() {
 		$this->item = WikibaseItem::newEmpty();
-		fwrite(STDOUT, __METHOD__ . "\n");
 	}
 	
 	/**
@@ -40,7 +39,7 @@ class WikibaseItemTests extends MediaWikiTestCase {
 			'After creating an empty WikibaseItem it should be a WikibaseItem'
 		);
 		$this->assertFalse(
-			$item->hasId(),
+			$this->item->hasId(),
 			'Calling hasID on a new empty WikibaseItem after creating it should return false'
 		);
 		$this->assertEquals(
@@ -101,7 +100,7 @@ class WikibaseItemTests extends MediaWikiTestCase {
 			$this->item->setDescription( $key, $val );
 		}
 		foreach ($arr as $key => $val) {
-			$this->this->assertEquals(
+			$this->assertEquals(
 				$val,
 				$this->item->getDescription( $key ),
 				'Testing setDescription-getDescription pair with "{$key} => {$val}" a new empty WikibaseItem after creating the item'

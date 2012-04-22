@@ -18,6 +18,12 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	
 	/**
 	 * Enter description here ...
+	 * @var WikibaseContentHandler
+	 */
+	protected $ch;
+	
+	/**
+	 * Enter description here ...
 	 * @var WikibaseItem
 	 */
 	protected $item;
@@ -26,17 +32,15 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * This is to set up the environment
 	 */
 	protected function setUp() {
-		$contentHandler = new WikibaseContentHandler();
-		$this->item = $contentHandler->unserializeContent( $input,'application/json' );
-		fwrite(STDOUT, __METHOD__ . "\n");
+		$this->ch = new WikibaseContentHandler();
 	}
 	
 	/**
 	 * This is to make sure the unserializeContent method work approx as it should with the provided data
 	 * @dataProvider provideBasicData
-	 * @depends testNewFromArray
 	 */
 	public function testUnserializeContent( $input, array $labels, array $descriptions, array $languages = null ) {
+		$this->item = $this->ch->unserializeContent( $input,'application/json' );
 		$this->assertInstanceOf(
 			'WikibaseItem',
 			$this->item,
@@ -49,6 +53,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testGetLabels( $input, array $labels, array $descriptions, array $languages = null ) {
+		$this->item = $this->ch->unserializeContent( $input,'application/json' );
 		$this->assertEquals(
 			$labels,
 			$this->item->getLabels( $languages ),
@@ -61,6 +66,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testGetDescriptions( $input, array $labels, array $descriptions, array $languages = null ) {
+		$this->item = $this->ch->unserializeContent( $input,'application/json' );
 		$this->assertEquals(
 			$descriptions,
 			$this->item->getDescriptions( $languages ),
@@ -74,6 +80,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testCopy( $input ) {
+		$this->item = $this->ch->unserializeContent( $input,'application/json' );
 		$copy = $this->item->copy();
 		$this->assertInstanceOf(
 			'WikibaseItem',
@@ -94,6 +101,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testCleanStructure( $input, array $labels, array $descriptions, array $languages = null ) {
+		$this->item = $this->ch->unserializeContent( $input,'application/json' );
 		$this->item->cleanStructure();
 		$this->assertInstanceOf(
 			'WikibaseItem',
