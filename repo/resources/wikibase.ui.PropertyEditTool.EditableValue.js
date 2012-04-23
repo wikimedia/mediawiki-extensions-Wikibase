@@ -51,9 +51,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	
 	/**
 	 * The toolbar controling the editable value
-	 * @var: window.wikibase.ui.PropertyEditTool.Toolbar
+	 * @var window.wikibase.ui.PropertyEditTool.Toolbar
 	 */
 	_toolbar: null,
+	
+	/**
+	 * If this is true, it means that the value has not been stored to the database at all. So if
+	 * in edit mode and pressing cancel, the element will be removed
+	 * @var bool
+	 */
+	_pending: false,
 	
 	/**
 	 * Initializes the editable value.
@@ -68,9 +75,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._toolbar = toolbar;
-		
+		this._toolbar = toolbar;				
 		this._toolbar.appendTo( this._getToolbarParent() );
+		
+		this._pending = this._subject.hasClass( 'wb-pending-value' );
 		
 		if( this.isEmpty() ) {
 			// enable editing from the beginning if there is no value yet!
@@ -167,8 +175,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// can't save if invalid input OR same as before
 		var disableSave = isInvalid || ( this.getInitialValue() === value );
 		
-		// can't cancel if empty before
-		var disableCancel = this.getInitialValue() === '';
+		// can't cancel if empty before except the edit is pending (then it will be removed)
+		var disableCancel = !this.isPending() && this.getInitialValue() === '';
 
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
@@ -217,6 +225,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		if( save ) {
 			this.doApiCall( false );
+			this._pending = false;
+		}
+		else if( this.isPending() ) {
+			// not yet existing value, no state to go back to
+			this.remove();
 		}
 
 		// any change at all compared to initial value?
@@ -288,6 +301,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	isInEditMode: function() {
 		return this._isInEditMode;
+	},
+	
+	/**
+	 * Returns true if the value is in edit mode and not stored in the database yet.
+	 */
+	isPending: function() {
+		return this._pending;
 	},
 
 	/**

@@ -16,18 +16,46 @@
  * Module for 'Wikibase' extensions user interface functionality for editing the site links of an item.
  */
 window.wikibase.ui.SiteLinksEditTool = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.call( this, subject );
+	if( typeof subject != 'undefined' ) {
+		this._init( subject );
+	}
 };
 
 window.wikibase.ui.SiteLinksEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
 $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
+
+	_init: function( subject ) {
+		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
+		
+		// add colspan+1 because of toolbar td's:
+		var th = this._subject.find( 'th' );
+		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
+	},
+
+	_getToolbarParent: function() {
+		// take content (table), put it into a div and also add the toolbar into the div
+		var newParent = $( '<div/>' );
+		newParent.insertAfter( this._subject );
+		return newParent.append( this._subject );
+	},
 	
 	/**
 	 * @see wikibase.ui.PropertyEditTool._getValueElems()
 	 * @return jQuery[]
 	 */
 	_getValueElems: function() {
-		return this._subject.find( 'tr' );
+		// select all rows but not heading!
+		return this._subject.find( 'tr:not(:has(th))' );
+	},
+	
+	enterNewValue: function() {
+		var newValueElem = $( '<tr> <td>AA</td> <td></td> </tr>' );
+		newValueElem.addClass( 'wb-pending-value' );
+		
+		this._subject.append( newValueElem );
+		var newValue = this._initSingleValue( newValueElem );
+		newValue.startEditing();
+		newValue.setFocus();
 	},
 	
 	getEditableValuePrototype: function() {

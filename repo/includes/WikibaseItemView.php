@@ -55,14 +55,15 @@ class WikibaseItemView extends ContextSource {
 		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
 		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
 		$html .= Html::closeElement( 'div' );
-				
-		$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-languagelinks' ) );
 		
 		if( empty( $siteLinks ) ) {
 			// no site links available for this item
 			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
 		} else {
 			$html .= Html::openElement( 'table', array( 'class' => 'wb-languagelinks', 'cellspacing' => '0' ) );
+			$html .= Html::openElement( 'tr' );
+			$html .= Html::element( 'th', array( 'colspan' => '2' ), wfMessage( 'wikibase-languagelinks' ) );
+			$html .= Html::closeElement( 'tr' );
 
 			$i = 0;
 			foreach( $siteLinks as $siteId => $title ) {
@@ -82,8 +83,8 @@ class WikibaseItemView extends ContextSource {
 			}
 			$html .= Html::closeElement( 'table' );
 		}
-
-		// TODO: implement real ui instead of debug code
+		
+		/*
 		$html .= Html::element( 'div', array( 'style' => 'clear:both;' ) );
 		$htmlTable = '';
 		foreach ( WikibaseContentHandler::flattenArray( $this->item->toArray() ) as $k => $v ) {
@@ -94,7 +95,7 @@ class WikibaseItemView extends ContextSource {
 		}
 		$htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
 		$html .= $htmlTable;
-
+		 */
 		return $html;
 	}
 

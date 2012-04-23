@@ -41,21 +41,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 			this._elem.empty();
 		}
 	},
-	
-	_drawToolbarElements: function() {
-		for( var i in this._items ) {
-			if( this.displayGroupSeparators && i != 0 ) {
-				this._elem.append( '|' );
-			}
-			this._elem.append( this._items[i]._elem );
-		}
-		
-		if( this.displayGroupSeparators ) {
-			this._elem
-			.prepend( '[' )
-			.append( ']' );
-		}
-	},
 
 	destroy: function() {
 		window.wikibase.ui.PropertyEditTool.Toolbar.prototype.destroy.call( this );
@@ -66,9 +51,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 	/////////////////
 
 	/**
-	 * Defines whether the group should be displayed with separators "|" between ach items. In that case
-	 * everything will also be wrapped within "[" and "]".
-	 * @var bool
+	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.renderItemSeparators
 	 */
-	displayGroupSeparators: true
+	renderItemSeparators: true
 } );
