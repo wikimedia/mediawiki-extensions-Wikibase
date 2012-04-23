@@ -46,7 +46,10 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
 
-		$files[] = $testDir . 'WikibaseItemTests.php';
+		$files[] = $testDir . 'includes/WikibaseItem/WikibaseItemTests.php';
+        $files[] = $testDir . 'includes/WikibaseItem/WikibaseItemNewEmptyTests.php';
+        $files[] = $testDir . 'includes/WikibaseItem/WikibaseItemNewFromArrayTests.php';
+        $files[] = $testDir . 'includes/WikibaseItem/WikibaseItemContentHandlerTests.php';
 
 		return true;
 	}
