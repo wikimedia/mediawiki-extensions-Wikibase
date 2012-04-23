@@ -1,41 +1,35 @@
 <?php
+require_once 'selenium_tests_config.php';
 require_once 'SeleniumTestCase.php';
 
-//class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
-class SampleMediawikiTest extends SeleniumTestCase {
-	protected $targetUseLang;
+class LabelAndDescriptionUITest extends SeleniumTestCase {
 	protected $targetUrl;
 
 	public function setUp() {
-		// Choose one of the following
-
-		// For tests running at Sauce Labs
-		/*
-		$this->driver = WebDriver_Driver::InitAtSauce("tobijat", "6699c982-dd18-4e00-91ef-3d5a57b86402", "WINDOWS", "firefox", "3.6");
-		$sauce_job_name = get_class($this);
-		$this->driver->set_sauce_context("name", $sauce_job_name);
-		*/
-		// For a mock driver (for debugging)
-		//     $this->driver = new WebDriver_MockDriver();
-		//     define('kFestDebug', true);
-
-		// For a local driver
 		$this->driver = WebDriver_Driver::InitAtLocal("4444", "firefox");
 
-		$this->targetUseLang = "en";
-		$this->targetUrl = "http://localhost/mediawiki/index.php?title=Data:q7" . "&uselang=" . $this->targetUseLang;
+		//$itemId = $this->createNewWikidataItem("Demo Item");
+		$itemId = $this->createNewWikidataItem();
+		$this->setItemDescription( $itemId, "demo description" );
+		$this->assertTrue( is_numeric( $itemId ) );
+		$this->targetUrl = WIKI_URL."/index.php?title=Data:q$itemId" . "&uselang=" . WIKI_USELANG;
 	}
 	
-	public function testWikidataPageTitle() {
+	/**
+	 * Tests the Heading and the Title of the page
+	 */
+	public function testPageTitle() {
 		$this->set_implicit_wait( 5000 );
 		$this->load( $this->targetUrl );
 		
 		$itemLabel = $this->get_element( "css=h1#firstHeading > span" )->get_text();
-		
 		$this->assertRegExp( "/".$itemLabel."/", $this->driver->get_title() );
 	}
 
-	public function testWikidataLabelUI() {
+	/**
+	 * Tests the functionality of the UI for displaying and editing the label
+	 */
+	public function testLabelUI() {
 		// defining selectors for elements being tested
 		$labelElementSelector = "css=h1#firstHeading > span";
 		$editLinkSelector = "css=h1#firstHeading > 
@@ -107,7 +101,10 @@ class SampleMediawikiTest extends SeleniumTestCase {
 		$this->assertRegExp( "/".$targetLabel."/", $this->driver->get_title() );
 	}
 
-	public function testWikidataDescriptionUI() {
+	/*
+	 * Tests the functionality of the UI for displaying and editing the description
+	 */
+	public function testDescriptionUI() {
 		// defining selectors for elements beeing tested
 		$descriptionElementSelector = "css=div.wb-ui-propertyedittool-subject > span.wb-property-container-value";
 		$editLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
