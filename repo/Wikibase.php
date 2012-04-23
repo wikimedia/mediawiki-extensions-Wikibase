@@ -150,10 +150,13 @@ unset( $moduleTemplate );
 define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
 
-$wgExtraNamespaces[100] = 'Data';
-$wgExtraNamespaces[101] = 'Data_talk';
+define( 'WB_NS_DATA', 100 );
+define( 'WB_NS_DATA_TALK', 101 );
 
-$wgNamespaceContentModels[100] = CONTENT_MODEL_WIKIBASE;
+$wgExtraNamespaces[WB_NS_DATA] = 'Data';
+$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
+
+$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE;
 
 
 $egWBSettings = array();

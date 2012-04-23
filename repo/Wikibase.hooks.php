@@ -46,10 +46,7 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
 
-		$files[] = $testDir . 'includes/WikibaseItem/WikibaseItemTests.php';
-        $files[] = $testDir . 'includes/WikibaseItem/WikibaseItemNewEmptyTests.php';
-        $files[] = $testDir . 'includes/WikibaseItem/WikibaseItemNewFromArrayTests.php';
-        $files[] = $testDir . 'includes/WikibaseItem/WikibaseItemContentHandlerTests.php';
+		$files[] = $testDir . 'WikibaseItemTests.php';
 
 		return true;
 	}
@@ -114,7 +111,7 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function onAbortMove( Title $oldTitle, Title $newTitle, User $user, &$error, $reason ) {
-		$nss = array( EP_NS_COURSE, EP_NS_INSTITUTION, EP_NS_COURSE_TALK, EP_NS_INSTITUTION_TALK );
+		$nss = array( WB_NS_DATA );
 		$allowed = !in_array( $oldTitle->getNamespace(), $nss ) && !in_array( $newTitle->getNamespace(), $nss );
 
 		if ( !$allowed ) {
@@ -122,24 +119,6 @@ final class WikibaseHooks {
 		}
 
 		return $allowed;
-	}
-
-	/**
-	 * For extensions adding their own namespaces or altering the defaults.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CanonicalNamespaces
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $list
-	 *
-	 * @return boolean
-	 */
-	public static function onCanonicalNamespaces( array &$list ) {
-		$list[EP_NS_COURSE] = 'Course';
-		$list[EP_NS_INSTITUTION] = 'Institution';
-		$list[EP_NS_COURSE_TALK] = 'Course_talk';
-		$list[EP_NS_INSTITUTION_TALK] = 'Institution_talk';
-		return true;
 	}
 
 }
