@@ -177,9 +177,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	/////////////////
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.displayGroupSeparators
+	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.renderItemSeparators
 	 */
-	displayGroupSeparators: false,
+	renderItemSeparators: false,
 	
 	/**
 	 * If this is set to true, the edit toolbar will add a button 'remove' besides the 'edit' command.

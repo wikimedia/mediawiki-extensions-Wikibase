@@ -83,8 +83,8 @@ class WikibaseItemView extends ContextSource {
 			}
 			$html .= Html::closeElement( 'table' );
 		}
-
-		// TODO: implement real ui instead of debug code
+		
+		/*
 		$html .= Html::element( 'div', array( 'style' => 'clear:both;' ) );
 		$htmlTable = '';
 		foreach ( WikibaseContentHandler::flattenArray( $this->item->toArray() ) as $k => $v ) {
@@ -95,7 +95,7 @@ class WikibaseItemView extends ContextSource {
 		}
 		$htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
 		$html .= $htmlTable;
-
+		 */
 		return $html;
 	}
 

@@ -1,57 +1,35 @@
 <?php
+require_once 'selenium_tests_config.php';
+require_once 'SeleniumTestCase.php';
 
-require_once 'WebDriver.php';
-require_once 'WebDriver/Driver.php';
-require_once 'WebDriver/MockDriver.php';
-require_once 'WebDriver/WebElement.php';
-require_once 'WebDriver/MockElement.php';
-
-class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
-	protected $driver;
-	protected $targetItem;
-	protected $targetDescription;
-	protected $targetUseLang;
+class LabelAndDescriptionUITest extends SeleniumTestCase {
 	protected $targetUrl;
 
 	public function setUp() {
-		// Choose one of the following
-
-		// For tests running at Sauce Labs
-		/*
-		$this->driver = WebDriver_Driver::InitAtSauce("tobijat", "6699c982-dd18-4e00-91ef-3d5a57b86402", "WINDOWS", "firefox", "3.6");
-		$sauce_job_name = get_class($this);
-		$this->driver->set_sauce_context("name", $sauce_job_name);
-		*/
-		// For a mock driver (for debugging)
-		//     $this->driver = new WebDriver_MockDriver();
-		//     define('kFestDebug', true);
-
-		// For a local driver
 		$this->driver = WebDriver_Driver::InitAtLocal("4444", "firefox");
 
-		$this->targetUseLang = "en";
-		$this->targetUrl = "http://localhost/mediawiki/index.php?title=Data:q7" . "&uselang=" . $this->targetUseLang;
-	}
-
-	// Forward calls to main driver
-	public function __call($name, $arguments) {
-		if (method_exists($this->driver, $name)) {
-			return call_user_func_array(array($this->driver, $name), $arguments);
-		} else {
-			throw new Exception("Tried to call nonexistent method $name with arguments:\n" . print_r($arguments, true));
-		}
+		//$itemId = $this->createNewWikidataItem("Demo Item");
+		$itemId = $this->createNewWikidataItem();
+		$this->setItemDescription( $itemId, "demo description" );
+		$this->assertTrue( is_numeric( $itemId ) );
+		$this->targetUrl = WIKI_URL."/index.php?title=Data:q$itemId" . "&uselang=" . WIKI_USELANG;
 	}
 	
-	public function testWikidataPageTitle() {
+	/**
+	 * Tests the Heading and the Title of the page
+	 */
+	public function testPageTitle() {
 		$this->set_implicit_wait( 5000 );
 		$this->load( $this->targetUrl );
 		
 		$itemLabel = $this->get_element( "css=h1#firstHeading > span" )->get_text();
-		
 		$this->assertRegExp( "/".$itemLabel."/", $this->driver->get_title() );
 	}
 
-	public function testWikidataLabelUI() {
+	/**
+	 * Tests the functionality of the UI for displaying and editing the label
+	 */
+	public function testLabelUI() {
 		// defining selectors for elements being tested
 		$labelElementSelector = "css=h1#firstHeading > span";
 		$editLinkSelector = "css=h1#firstHeading > 
@@ -88,9 +66,12 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		$this->get_element( $editLinkSelector )->click();
 		$this->assertTrue( $this->is_element_present( $valueInputFieldSelector ) );
 		$this->get_element( $saveLinkDisabledSelector )->assert_text( "save" );
+		$this->assertFalse( $this->is_element_present( $saveLinkSelector ) );
 		$this->get_element( $cancelLinkSelector )->assert_text( "cancel" );
 		$this->get_element( $valueInputFieldSelector )->assert_value( $targetLabel );
 		$this->get_element( $valueInputFieldSelector )->clear();
+		$this->get_element( $saveLinkDisabledSelector )->assert_text( "save" );
+		$this->assertFalse( $this->is_element_present( $saveLinkSelector ) );
 		$this->get_element( $valueInputFieldSelector )->send_keys( $changedLabel );
 		$this->get_element( $cancelLinkSelector )->click();
 		$this->get_element( $labelElementSelector )->assert_text( $targetLabel );
@@ -98,10 +79,32 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		$this->get_element( $valueInputFieldSelector )->clear();
 		$this->get_element( $valueInputFieldSelector )->send_keys( $changedLabel );
 		$this->get_element( $saveLinkSelector )->click();
+		$this->waitForAjax();
 		$this->get_element( $labelElementSelector )->assert_text( $changedLabel );
+		$this->reload();
+		$this->get_element( $labelElementSelector )->assert_text( $changedLabel );
+		$this->assertRegExp( "/".$changedLabel."/", $this->driver->get_title() );
+		$this->get_element( $editLinkSelector )->assert_text( "edit" );
+		$this->get_element( $editLinkSelector )->click();
+		$this->assertTrue( $this->is_element_present( $valueInputFieldSelector ) );
+		$this->get_element( $valueInputFieldSelector )->assert_value( $changedLabel );
+		$this->get_element( $cancelLinkSelector )->click();
+		$this->get_element( $labelElementSelector )->assert_text( $changedLabel );
+		$this->get_element( $editLinkSelector )->assert_text( "edit" );
+		$this->get_element( $editLinkSelector )->click();
+		$this->get_element( $valueInputFieldSelector )->clear();
+		$this->get_element( $valueInputFieldSelector )->send_keys( $targetLabel );
+		$this->get_element( $saveLinkSelector )->click();
+		$this->waitForAjax();
+		$this->reload();
+		$this->get_element( $labelElementSelector )->assert_text( $targetLabel );
+		$this->assertRegExp( "/".$targetLabel."/", $this->driver->get_title() );
 	}
 
-	public function testWikidataDescriptionUI() {
+	/*
+	 * Tests the functionality of the UI for displaying and editing the description
+	 */
+	public function testDescriptionUI() {
 		// defining selectors for elements beeing tested
 		$descriptionElementSelector = "css=div.wb-ui-propertyedittool-subject > span.wb-property-container-value";
 		$editLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
@@ -131,8 +134,11 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue( $this->is_element_present( $valueInputFieldSelector ) );
 		$this->get_element( $valueInputFieldSelector )->assert_value( $targetDescription );
 		$this->get_element( $saveLinkDisabledSelector )->assert_text( "save" );
+		$this->assertFalse( $this->is_element_present( $saveLinkSelector ) );
 		$this->get_element( $cancelLinkSelector )->assert_text( "cancel" );
 		$this->get_element( $valueInputFieldSelector )->clear();
+		$this->get_element( $saveLinkDisabledSelector )->assert_text( "save" );
+		$this->assertFalse( $this->is_element_present( $saveLinkSelector ) );
 		$this->get_element( $valueInputFieldSelector )->send_keys( $changedDescription );
 		$this->get_element( $cancelLinkSelector )->click();
 		$this->get_element( $descriptionElementSelector )->assert_text( $targetDescription );
@@ -141,6 +147,24 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		$this->get_element( $valueInputFieldSelector )->send_keys( $changedDescription );
 		$this->get_element( $saveLinkSelector )->click();
 		$this->get_element( $descriptionElementSelector )->assert_text( $changedDescription );
+		$this->waitForAjax();
+		$this->reload();
+		$this->get_element( $descriptionElementSelector )->assert_text( $changedDescription );
+		$this->get_element( $editLinkSelector )->assert_text( "edit" );
+		$this->get_element( $editLinkSelector )->click();
+		$this->assertTrue( $this->is_element_present( $valueInputFieldSelector ) );
+		$this->get_element( $valueInputFieldSelector )->assert_value( $changedDescription );
+		$this->get_element( $cancelLinkSelector )->click();
+		$this->get_element( $descriptionElementSelector )->assert_text( $changedDescription );		
+		$this->get_element( $editLinkSelector )->assert_text( "edit" );
+		$this->get_element( $editLinkSelector )->click();
+		$this->get_element( $valueInputFieldSelector )->clear();
+		$this->get_element( $valueInputFieldSelector )->send_keys( $targetDescription );
+		$this->get_element( $saveLinkSelector )->click();
+		$this->get_element( $descriptionElementSelector )->assert_text( $targetDescription );
+		$this->waitForAjax();
+		$this->reload();
+		$this->get_element( $descriptionElementSelector )->assert_text( $targetDescription );
 	}
 
 	public function tearDown() {
