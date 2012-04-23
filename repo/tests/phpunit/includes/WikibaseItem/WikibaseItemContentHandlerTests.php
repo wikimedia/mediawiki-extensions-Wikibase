@@ -32,7 +32,15 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * This is to set up the environment
 	 */
 	protected function setUp() {
+  		parent::setUp();
 		$this->ch = new WikibaseContentHandler();
+	}
+	
+  	/**
+	 * This is to tear down the environment
+	 */
+	function tearDown() {
+		parent::tearDown();
 	}
 	
 	/**

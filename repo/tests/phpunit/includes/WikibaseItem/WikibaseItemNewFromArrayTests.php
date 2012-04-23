@@ -26,7 +26,15 @@ class WikibaseItemNewFromArrayTests extends MediaWikiTestCase {
 	 * This is to set up the environment
 	 */
 	protected function setUp() {
+  		parent::setUp();
 		$this->item = WikibaseItem::newFromArray( array( 'entity' => 'q42' ) );
+	}
+	
+  	/**
+	 * This is to tear down the environment
+	 */
+	function tearDown() {
+		parent::tearDown();
 	}
 	
 	/**

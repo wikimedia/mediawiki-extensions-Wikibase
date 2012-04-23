@@ -16,7 +16,19 @@
  */
 class WikibaseItemTests extends MediaWikiTestCase {
 
-	// this class have no setup
+	/**
+	 * This is to set up the environment
+	 */
+	protected function setUp() {
+  		parent::setUp();
+	}
+	
+  	/**
+	 * This is to tear down the environment
+	 */
+	function tearDown() {
+		parent::tearDown();
+	}
 	
 	/**
 	 * Tests @see WikibaseItem::getIdForSiteLink
@@ -70,54 +82,90 @@ class WikibaseItemTests extends MediaWikiTestCase {
 		);
 		*/
 		
+	/**
+	 * Tests @see WikibaseItem::getPropertyNames
+	 * @Stub
+	 */
 	public function testGetPropertyNames() {
 		$this->markTestSkipped(
 			'The getPropertyNames is not implemented yet.'
 		);
 	}
 
+	/**
+	 * Tests @see WikibaseItem::getSystemPropertyNames
+	 * @Stub
+	 */
 	public function testGetSystemPropertyNames() {
 		$this->markTestSkipped(
 			'The getSystemPropertyNames is not implemented yet.'
 		);
 	}
 
+	/**
+	 * Tests @see WikibaseItem::getEditorialPropertyNames
+	 * @Stub
+	 */
 	public function testGetEditorialPropertyNames() {
 		$this->markTestSkipped(
 			'The getEditorialPropertyNames is not implemented yet.'
 		);
 	}
 
+	/**
+	 * Tests @see WikibaseItem::getStatementPropertyNames
+	 * @Stub
+	 */
 	public function testGetStatementPropertyNames() {
 		$this->markTestSkipped(
 			'The getStatementPropertyNames is not implemented yet.'
 		);
 	}
 
+	/**
+	 * Tests @see WikibaseItem::getPropertyMultilang
+	 * @Stub
+	 */
 	public function testGetPropertyMultilang() {
 		$this->markTestSkipped(
 			'The getPropertyMultilang is not implemented yet.'
 		);
 	}
 
+	/**
+	 * Tests @see WikibaseItem::getProperty
+	 * @Stub
+	 */
 	public function testGetProperty() {
 		$this->markTestSkipped(
 			'The getProperty is not implemented yet.'
 		);
 	}
 
+	/**
+	 * Tests @see WikibaseItem::getPropertyType
+	 * @Stub
+	 */
 	public function testGetPropertyType() {
 		$this->markTestSkipped(
 			'The getPropertyType is not implemented yet.'
 		);
 	}
 
+	/**
+	 * Tests @see WikibaseItem::isStatementProperty
+	 * @Stub
+	 */
 	public function testIsStatementProperty() {
 		$this->markTestSkipped(
 			'The isStatementProperty is not implemented yet.'
 		);
 	}
 
+	/**
+	 * Tests @see WikibaseItem::getTextForSearchIndex
+	 * @Stub
+	 */
 	public function testGetTextForSearchIndex() {
 		$this->markTestSkipped(
 			'The isStatementProperty is not implemented yet.'
