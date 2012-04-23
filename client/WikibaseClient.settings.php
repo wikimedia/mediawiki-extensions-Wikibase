@@ -125,6 +125,7 @@ class WBCSettings {
 	protected static function getDefaultSettings() {
 		return array(
 			'namespaces' => array( NS_MAIN ),
+			'source' => array( 'dir' => dirname(__FILE__) . "/tests" ),
 			'sort' => 'none',
 			'sortPrepend' => false,
 			'alwaysSort' => false,
