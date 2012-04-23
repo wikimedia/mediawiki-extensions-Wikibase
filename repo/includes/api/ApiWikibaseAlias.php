@@ -13,7 +13,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
+class ApiWikibaseAlias extends ApiWikibaseModifyItem {
 
 	/**
 	 * Actually modify the item.
