@@ -85,6 +85,14 @@ $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibase
 $wgAutoloadClasses['ApiWikibaseLinkSite'] 			= $dir . 'includes/api/ApiWikibaseLinkSite.php';
 $wgAutoloadClasses['ApiWikibaseAlias'] 				= $dir . 'includes/api/ApiWikibaseAlias.php';
 
+// includes/specials
+$wgAutoloadClasses['SpecialCreateItem'] 			= $dir . 'includes/specials/SpecialCreateItem.php';
+$wgAutoloadClasses['SpecialItemByTitle'] 			= $dir . 'includes/specials/SpecialItemByTitle.php';
+$wgAutoloadClasses['SpecialItemResolver'] 			= $dir . 'includes/specials/SpecialItemResolver.php';
+$wgAutoloadClasses['SpecialItemByLabel'] 			= $dir . 'includes/specials/SpecialItemByLabel.php';
+
+
+
 // API module registration
 $wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
@@ -94,6 +102,13 @@ $wgAPIModules['wbgetlinksites'] 					= 'ApiWikibaseGetLinkSites';
 $wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
 $wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
 $wgAPIModules['wbalias'] 							= 'ApiWikibaseAlias';
+
+
+
+// Special page registration
+$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
+$wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
 
 
