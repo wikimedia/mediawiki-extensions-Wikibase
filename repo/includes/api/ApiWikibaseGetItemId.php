@@ -36,22 +36,11 @@ class ApiWikibaseGetItemId extends ApiBase {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 		}
-
-		$page = WikibaseItem::getWikiPageForId( $params['id'] );
-
-		if ( $page->exists() ) {
-			$item = $page->getContent();
-		}
-		else {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
-		}
 		
 		$this->getResult()->addValue(
 			null,
-			'page',
-			array(
-			 	'id' => $params['id']
-			)
+			'item',
+			array( 'id' => $params['id'] )
 		);
 		
 		$success = true;
@@ -72,15 +61,20 @@ class ApiWikibaseGetItemId extends ApiBase {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
-				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
-			'title' => 'The title of the page',
-			'site' => 'Site identifier',
+			'title' => array(
+				'The title of the external page that is used as an reference for the internal page.',
+				'Must be used together with the identifier for the site where the page resides.'
+			),
+			'site' => array(
+				'Site identifier for the external page that is used as an reference for the internal page.',
+				'Must be used together with the title from the site where the page resides.'
+			),
 		);
 	}
 
@@ -92,7 +86,6 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
 			array( 'code' => 'no-such-item', 'info' => 'There are no such item to be found' ),
 		) );
 	}
