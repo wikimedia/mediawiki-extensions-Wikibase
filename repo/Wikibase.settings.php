@@ -145,7 +145,38 @@ class WBSettings {
 			// facilitate testing, do not turn on in production!
 			'apiInDebug' => false,
 
+
 			'siteIdentifiers' => $siteIdentifiers,
+
+			/*
+			// The client sites.
+			// They are grouped, each group has a 'sites' element which is an array holding the identifiers.
+			// It also can hold defaultSiteUrlPath and defaultSiteFilePath overriding the global default.
+			// Each element in the 'sites' array contains the identifier for the site (which should be unique!)
+			// pointing to the url of the site, or an array with the url (element: site) and optionally
+			// the filepath and urlpath, using these words as keys.
+			'siteIdentifiers' => array(
+				'wikipedia' => array(
+					'sites' => array(
+						'en' => 'https://en.wikipedia.org',
+						'de' => 'https://de.wikipedia.org',
+						'nl' => 'https://nl.wikipedia.org',
+						'foobar' => array( 'site' => 'https://www.foo.bar/', 'filepath' => '/folder/', 'urlpath' => '/wikiname/$1' ),
+					),
+				),
+				'stuff' => array(
+					'sites' => array(
+						'stuff-en' => 'https://en.wikipedia.org',
+						'stuff-de' => 'https://de.wikipedia.org',
+					),
+					'defaultSiteUrlPath' => '/stuffwiki/$1',
+					'defaultSiteFilePath' => '/somepath/',
+				),
+			),
+
+			'defaultSiteUrlPath' => '/wiki/$1',
+			'defaultSiteFilePath' => '/w/',
+			*/
 		);
 	}
 

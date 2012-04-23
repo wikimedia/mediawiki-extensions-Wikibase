@@ -102,6 +102,7 @@ $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 $wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTestModules';
+$wgHooks['AbortMove'][]								= 'WikibaseHooks::onAbortMove';
 
 
 
@@ -145,11 +146,17 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 
 unset( $moduleTemplate );
 
-
-
 // register hooks and handlers
 define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
+
+define( 'WB_NS_DATA', 100 );
+define( 'WB_NS_DATA_TALK', 101 );
+
+$wgExtraNamespaces[WB_NS_DATA] = 'Data';
+$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
+
+$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE;
 
 
 $egWBSettings = array();

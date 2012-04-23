@@ -25,5 +25,6 @@ $messages['en'] = array(
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-edit-placeholder' => 'enter description',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
-	'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
+	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-move-error' => 'Pages in the data namespace cannot be moved, and nothing can be moved into it.',
 );
