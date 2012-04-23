@@ -25,7 +25,7 @@ class DeleteAllTheDatas extends Maintenance {
 	}
 
 	public function execute() {
-		echo "Are you really really sure you want to delete all the WIkibase date?? If so, type YES\n";
+		echo "Are you really really sure you want to delete all the Wikibase data?? If so, type YES\n";
 
 		if ( $this->readconsole() !== 'YES' ) {
 			return;
