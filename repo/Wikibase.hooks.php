@@ -22,7 +22,7 @@ final class WikibaseHooks {
 	 *
 	 * @param DatabaseUpdater $updater
 	 *
-	 * @return true
+	 * @return boolean
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$updater->addExtensionTable(
@@ -41,7 +41,7 @@ final class WikibaseHooks {
 	 *
 	 * @param array $files
 	 *
-	 * @return true
+	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
@@ -64,7 +64,7 @@ final class WikibaseHooks {
 	 * @param Language $pageLanguage
 	 * @param Language|StubUserLang $language
 	 *
-	 * @return true
+	 * @return boolean
 	 */
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
@@ -77,6 +77,17 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Add new javascript testing modules. This is called after the addition of MediaWiki core test suites.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $testModules
+	 * @param ResourceLoader $resourceLoader
+	 *
+	 * @return boolean
+	 */
 	public static function onResourceLoaderTestModules( array &$testModules, ResourceLoader &$resourceLoader ) {
 		$testModules['qunit']['ext.wikibase.tests'] = array(
 			'scripts' => array( 'tests/qunit/wikibase.tests.js' ),
@@ -85,6 +96,49 @@ final class WikibaseHooks {
 			'remoteExtPath' => 'Wikibase',
 		);
 
+		return true;
+	}
+
+	/**
+	 * Allows canceling the move of one title to another.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/AbortMove
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $oldTitle
+	 * @param Title $newTitle
+	 * @param User $user
+	 * @param string $error
+	 * @param string $reason
+	 *
+	 * @return boolean
+	 */
+	public static function onAbortMove( Title $oldTitle, Title $newTitle, User $user, &$error, $reason ) {
+		$nss = array( EP_NS_COURSE, EP_NS_INSTITUTION, EP_NS_COURSE_TALK, EP_NS_INSTITUTION_TALK );
+		$allowed = !in_array( $oldTitle->getNamespace(), $nss ) && !in_array( $newTitle->getNamespace(), $nss );
+
+		if ( !$allowed ) {
+			$error = wfMsg( 'wikibase-move-error' );
+		}
+
+		return $allowed;
+	}
+
+	/**
+	 * For extensions adding their own namespaces or altering the defaults.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CanonicalNamespaces
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $list
+	 *
+	 * @return boolean
+	 */
+	public static function onCanonicalNamespaces( array &$list ) {
+		$list[EP_NS_COURSE] = 'Course';
+		$list[EP_NS_INSTITUTION] = 'Institution';
+		$list[EP_NS_COURSE_TALK] = 'Course_talk';
+		$list[EP_NS_INSTITUTION_TALK] = 'Institution_talk';
 		return true;
 	}
 
