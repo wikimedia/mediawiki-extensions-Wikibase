@@ -66,8 +66,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
 	 * 
-	* @param jQuery subject
-	* @param wikibase.ui.PropertyEditTool.Toolbar toolbar shouldn't be initialized yet
+	 * @param jQuery subject
+	 * @param wikibase.ui.PropertyEditTool.Toolbar toolbar shouldn't be initialized yet
 	 */
 	_init: function( subject, toolbar ) {
 		if( this._subject !== null ) {
@@ -129,12 +129,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var inputParent = this._getValueContainer();
 		inputParent.text( '' );
 		this._inputElem.appendTo( inputParent );
-
+		
         this._isInEditMode = true;
-
+		
 		this._onInputRegistered(); // do this after setting _isInEditMode !
         this.setFocus();
-
+		
 		return true;
 	},
 	
@@ -177,7 +177,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		
 		// can't cancel if empty before except the edit is pending (then it will be removed)
 		var disableCancel = !this.isPending() && this.getInitialValue() === '';
-
+		
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
 	},
@@ -187,7 +187,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_onKeyPressed: function( event ) {
 		this._onInputRegistered();
-
+		
 		if( event.which == 13 ) {
 			this._toolbar.editGroup.btnSave.doAction();
 		}
@@ -272,9 +272,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}, this ) );
 	},
 
-
 	/**
-	 * Returns the neccessary parameters for a api call to store the value.
+	 * Returns the neccessary parameters for an api call to store the value.
 	 */
 	getApiCallParams: function() {
 		return {};

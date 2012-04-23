@@ -66,7 +66,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 				action: 'wblinksite',
 				id: mw.config.values.wbItemId,
 				link: 'remove',
-				linksite: $(this._subject.children()[0]).text(),
+				linksite: $( this._subject.children()[0] ).text(),
 				linktitle: this.getValue()
 			};
 		} else {
@@ -74,7 +74,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 				action: 'wblinksite',
 				id: mw.config.values.wbItemId,
 				link: 'set',
-				linksite: $(this._subject.children()[0]).text(),
+				linksite: $( this._subject.children()[0] ).text(),
 				linktitle: this.getValue()
 			};
 		}
