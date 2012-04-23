@@ -123,6 +123,20 @@ class WBSettings {
 	 * @return array
 	 */
 	protected static function getDefaultSettings() {
+		// Read all the interlanguage links
+		// This should be cached by Interwiki class depending on $wgInterwikiCache so probably no need to cache here.
+		$api = new ApiMain( new FauxRequest( array( 'action' => 'query', 'meta' => 'siteinfo', 'siprop' => 'interwikimap', 'format' => 'php' ) ) );
+		$api->execute();
+		$api_response = $api->getResult()->getData();
+
+		$interwikis = $api_response['query']['interwikimap'];
+		$siteIdentifiers = array();
+		foreach( $interwikis as $k => $interwiki ) {
+			if( isset( $interwiki['language'] ) ) {
+				$siteIdentifiers[$interwiki['prefix']] = $interwiki['url'];
+			}
+		}
+
 		return array(
 			// alternative: application/vnd.php.serialized
 			'serializationFormat' => 'application/json',
@@ -131,13 +145,7 @@ class WBSettings {
 			// facilitate testing, do not turn on in production!
 			'apiInDebug' => false,
 
-			'siteIdentifiers' => array(
-				'en' => 'https://en.wikipedia.org/wiki/$1',
-				'de' => 'https://de.wikipedia.org/wiki/$1',
-				'nl' => 'https://nl.wikipedia.org/wiki/$1',
-				'nn' => 'https://nn.wikipedia.org/wiki/$1',
-				'no' => 'https://no.wikipedia.org/wiki/$1',
-			),
+			'siteIdentifiers' => $siteIdentifiers,
 		);
 	}
 
