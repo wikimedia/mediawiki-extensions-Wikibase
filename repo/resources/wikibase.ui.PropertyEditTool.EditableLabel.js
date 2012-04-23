@@ -30,7 +30,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 		return {
 			action: "wbsetlabel",
 			language: window.wgUserLanguage,
-			label: this.getValue(),
+			label: this.getValue().toString(),
 			id: window.mw.config.get( 'wbItemId' )
 		};
 	}

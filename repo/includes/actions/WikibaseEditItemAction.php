@@ -37,7 +37,6 @@ class WikibaseEditItemAction extends FormlessAction {
 		else {
 			// TODO: switch on type of content
 		}
-
 		return 'TODO: edit UI';
 	}
 

@@ -30,7 +30,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 		return {
 			action: 'wbsetdescription',
 			language: wgUserLanguage,
-			description: this.getValue(),
+			description: this.getValue().toString(),
 			id: mw.config.values.wbItemId
 		};
 	}
