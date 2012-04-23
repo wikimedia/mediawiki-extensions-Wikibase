@@ -99,6 +99,20 @@ class SampleMediawikiTest extends PHPUnit_Framework_TestCase {
 		$this->get_element( $valueInputFieldSelector )->send_keys( $changedLabel );
 		$this->get_element( $saveLinkSelector )->click();
 		$this->get_element( $labelElementSelector )->assert_text( $changedLabel );
+		$this->get_element( $editLinkSelector )->assert_text( "edit" );
+		$this->get_element( $editLinkSelector )->click();
+		$this->assertTrue( $this->is_element_present( $valueInputFieldSelector ) );
+		$this->get_element( $valueInputFieldSelector )->assert_value( $changedLabel );
+		$this->get_element( $cancelLinkSelector )->click();
+		$this->get_element( $labelElementSelector )->assert_text( $changedLabel );
+		$this->reload();
+		$this->get_element( $labelElementSelector )->assert_text( $changedLabel );
+		$this->get_element( $editLinkSelector )->assert_text( "edit" );
+		$this->get_element( $editLinkSelector )->click();
+		$this->get_element( $valueInputFieldSelector )->clear();
+		$this->get_element( $valueInputFieldSelector )->send_keys( $targetLabel );
+		$this->get_element( $saveLinkSelector )->click();
+		$this->get_element( $labelElementSelector )->assert_text( $targetLabel );
 	}
 
 	public function testWikidataDescriptionUI() {
