@@ -69,7 +69,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
 
-		if ( !isset( $params['id'] && $params['create']) ) {
+		if ( !isset( $params['id']) && $params['create'] ) {
 			// now we should never be here
 			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
 			$item = WikibaseItem::newEmpty();
