@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Some common functions for Selenium Tests of the WikibaseRepo
+ *
+ * @licence GNU GPL v2+
+ * @author Tobias Gritschacher < tobias.gritschacher at wikimedia.de >
+ */
+
 require_once 'WebDriver.php';
 require_once 'WebDriver/Driver.php';
 require_once 'WebDriver/MockDriver.php';
@@ -41,7 +48,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * Makes a call to the API to create a new Item
-	 * @param String $item The item's Title/Label
+	 * @param String $item The item's Title/Label. If this parameter is not set a random item will be created.
 	 */
 	public function createNewWikidataItem( $item = "" ) {
 		if( !$item ) {
@@ -77,6 +84,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 		);
 
 		$result = $this->doCurlApiCall( $params );
+		$this->assertEquals( 1, $result["success"] );
 		return $result["success"];
 	}
 	
