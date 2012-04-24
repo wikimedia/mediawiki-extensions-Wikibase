@@ -17,9 +17,9 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject );
+window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( editableValue, subject ) {
+	if( typeof editableValue != 'undefined' && typeof subject != 'undefined' ) {
+		this._init( editableValue, subject );
 	}
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
@@ -28,7 +28,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Class which marks the element within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittoolbar-editablevaluepiece',
-	
+
+	/**
+	 * Reference to parent editableValue
+	 * @var wikibase.ui.PropertyEditTool.EditableValue
+	 */
+	_editableValue: null,
+
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
 	 * box in case it is activated for edit.
@@ -54,12 +60,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * 
 	 * @param jQuery subject
 	 */
-	_init: function( subject ) {
+	_init: function( editableValue, subject ) {
 		if( this._subject !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
 		this._subject = $( subject );
+		this._editableValue = editableValue;
 	},
 
 	destroy: function() {
@@ -87,7 +94,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		var inputParent = this._getValueContainer();
 		inputParent.text( '' );
 		this._inputElem.appendTo( inputParent );
-		
+
+		if ( this.autoExpand ) {
+			var ruler = $( '<span/>', {
+				'class': 'ruler'
+			} );
+			this._inputElem.after( ruler );
+		}
+
         this._isInEditMode = true;
 		
 		this._onInputRegistered(); // do this after setting _isInEditMode !
@@ -109,6 +123,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'placeholder': this.inputPlaceholder,
 			'keypress': jQuery.proxy( this._onKeyPressed, this ), // TODO: this shouldn't be used, keyup should work fine!
 			'keyup':    jQuery.proxy( this._onKeyPressed, this ), //       we have both for escape key browser compability
+			'keydown':  jQuery.proxy( this._onKeyDown, this ),
 			'focus':    jQuery.proxy( this._onFocus, this ),
 			'blur':     jQuery.proxy( this._onBlur, this )
 		} );
@@ -131,19 +146,45 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			return false; // cancel
 		}
 	},
-	
+
+	_expand: function() {
+		if ( this.autoExpand ) {
+			var ruler = this._subject.find( '.ruler' );
+			//console.log( '"'+ this._inputElem.attr( 'value' ).replace(/ /g, '&nbsp;') + '"');
+			ruler.html( this._inputElem.attr( 'value' ).replace(/ /g, '&nbsp;') );
+			var inputWidth = parseInt( this._inputElem.width() );
+
+			//if ( this._inputElem.width() > $('#content').width() ) {
+			//	this._inputElem.css( 'width', $('#content').width() + 'px' );
+			//}
+
+			this._inputElem.css( 'width', ( parseInt( ruler.width() ) + 25 ) + 'px' ); // TODO better resize mechanism (maybe by temporarily replacing text input)
+			if ( typeof this._editableValue._toolbar._items[0].tooltip._tipsy.$tip != 'undefined' ) {
+				var tooltipLeft = parseInt( this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left' ) );
+				this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left', ( tooltipLeft + parseInt( this._inputElem.width() ) - inputWidth ) + 'px' );
+			}
+		}
+	},
+
 	/**
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
 		this._onInputRegistered(); // TODO: do not fire this if input hasn't changed
-		
+		this._expand();
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
+	_onKeyDown: function( event ) {
+		if( this.onKeyDown !== null && this.onKeyDown( event ) === false ) { // callback
+			return false; // cancel
+		}
+	},
+
 	_onFocus: function( event ) {
+		this._expand();
 		if( this.onFocus !== null ) {
 			this.onFocus( event ); // callback
 		}
@@ -268,6 +309,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 */
 	inputPlaceholder: '',
 
+	/**
+	 * when true, automatically expands width of input element according to containing text
+	 * @var bool
+	 */
+	autoExpand: false,
+
 	///////////
 	// EVENTS:
 	///////////
@@ -279,6 +326,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	onInputRegistered: null,
 	
 	onKeyPressed: null,
+
+	onKeyDown: null,
 	
 	onFocus: null,
 	

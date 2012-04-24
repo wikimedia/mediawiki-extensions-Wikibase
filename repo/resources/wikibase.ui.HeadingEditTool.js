@@ -30,6 +30,8 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		// add class specific to this ui element:
 		this._subject.addClass( 'wb-ui-headingedittool' );
+		// let input element expand automatically according to input text
+		this._editableValues[0]._interfaces[0].autoExpand = true;
 	},
 	
 	/**
