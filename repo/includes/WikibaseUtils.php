@@ -49,6 +49,28 @@ final class WikibaseUtils {
 	}
 
 	/**
+	 * Returns the index of the identifiers for the sites supported by the Wikibase instance.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public static function getIndexSites() {
+		static $idx = false;
+
+		if ( $idx === false ) {
+			$num = 0;
+			$idx = array();
+			foreach (self::getSiteIdentifiers() as $key) {
+				$idx[$key] = $num++;
+			}
+			print_r($idx);
+		}
+
+		return $idx;
+	}
+
+	/**
 	 * Returns the full url for the specified site.
 	 * A page can also be provided, which is then added to the url.
 	 *

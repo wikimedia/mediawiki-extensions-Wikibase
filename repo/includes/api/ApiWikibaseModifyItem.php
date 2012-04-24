@@ -64,7 +64,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 
 		if ( $params['id'] !== false && $params['item'] === 'add' ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists' );
+			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
 
 		if ( isset( $params['id'] ) && $params['id'] !== false ) {
@@ -114,6 +114,13 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
 		}
 
+		// this saves unconditionally if we had a success so far
+		// it could be interesting to avoid storing if the item is in fact not changed
+		// or if the saves could be queued somehow
+		if ($success) {
+			$success = $this->save();
+		}
+		
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -125,8 +132,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				null,
 				'item',
 				array(
-					'id',
-					$item->getId()
+					'id' => $item->getId()
 				)
 			);
 		}
