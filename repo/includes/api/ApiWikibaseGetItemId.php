@@ -30,6 +30,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 		$success = false;
 
 		// our bail out if we can't identify an existing item
+		/*
 		if ( !isset( $params['id'] ) && !isset( $params['site'] ) && !isset( $params['title'] ) ) {
 			$item = WikibaseItem::newEmpty();
 			$success = $item->save();
@@ -44,6 +45,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
+		*/
 		
 		// normally 'id' should not exist here and the test should always return true
 		// but as we have broken the normal thread in the previous clause this can be skipped

@@ -51,10 +51,28 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		$this->validateParameters( $params );
-
 		$success = false;
 
+		// TODO: Start of bailout
+		// our bail out if we can't identify an existing item
+		if ( !isset( $params['id'] ) && !isset( $params['site'] ) && !isset( $params['title'] ) ) {
+			$item = WikibaseItem::newEmpty();
+			// we need a save to get an item id
+			$success = $item->save();
+			$params['id'] = $item->getId();
+			if (!$success) {
+				// a little bit odd error message
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+			}
+		}
+		// because we commented out the required parameters we must test manually
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+		}
+		//TODO: End of bailout
+
+		$this->validateParameters( $params );
+		
 		if ( !isset( $params['id'] ) ) {
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
@@ -78,6 +96,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			}
 		}
 		else {
+			// now we should never be here
 			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
 			$item = WikibaseItem::newEmpty();
 			//$success = $item->save();
