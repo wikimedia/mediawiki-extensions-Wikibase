@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to set a description for a Wikibase item.
+ * API module to set the language attributes for a Wikibase item.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -14,7 +14,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetDescription extends ApiWikibaseModifyItem {
+class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
