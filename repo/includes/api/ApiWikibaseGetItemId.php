@@ -30,8 +30,10 @@ class ApiWikibaseGetItemId extends ApiBase {
 		$success = false;
 
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
-
+			$idx = WikibaseUtils::getIndexSites();
+			$params['id'] = WikibaseItem::getIdForSiteLink(
+				$idx[$params['site']],
+				$params['title'] );
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
