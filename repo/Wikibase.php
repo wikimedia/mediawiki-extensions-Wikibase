@@ -108,9 +108,9 @@ $wgAPIModules['wbalias'] 							= 'ApiWikibaseAlias';
 
 
 // Special page registration
-$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
-$wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
+//$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+//$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
+//$wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
 
 
