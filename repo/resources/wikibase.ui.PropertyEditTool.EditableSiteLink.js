@@ -42,13 +42,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	_buildInterfaces: function( subject ) {
 		var interfaces = new Array();
 		var tableCells = subject.children( 'td' );
+		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
 		
 		// interface for choosing the source site:
-		interfaces.siteId = new wikibase.ui.PropertyEditTool.EditableValue.Interface( tableCells[0], this );
+		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );
 		interfaces.push( interfaces.siteId );
 		
 		// interface for choosing a page (from the source site):
-		interfaces.pageName = new wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface( tableCells[1], this );
+		interfaces.pageName = new ev.WikiPageInterface( tableCells[1], this );
 		interfaces.push( interfaces.pageName );
 		
 		return interfaces;
