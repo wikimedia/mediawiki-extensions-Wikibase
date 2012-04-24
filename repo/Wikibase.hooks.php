@@ -47,6 +47,10 @@ final class WikibaseHooks {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
 
 		$files[] = $testDir . 'WikibaseItemTests.php';
+		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemTests.php';
+		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemNewEmptyTests.php';
+		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemNewFromArrayTests.php';
+		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemContentHandlerTests.php';
 
 		return true;
 	}
