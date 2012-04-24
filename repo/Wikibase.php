@@ -77,15 +77,15 @@ $wgAutoloadClasses['WikibaseViewItemAction'] 		= $dir . 'includes/actions/Wikiba
 $wgAutoloadClasses['WikibaseEditItemAction'] 		= $dir . 'includes/actions/WikibaseEditItemAction.php';
 
 // includes/api
-$wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'includes/api/ApiWikibaseGetItem.php';
+$wgAutoloadClasses['ApiWikibaseGetItems'] 			= $dir . 'includes/api/ApiWikibaseGetItems.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'includes/api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseGetLinkSites'] 		= $dir . 'includes/api/ApiWikibaseGetLinkSites.php';
-$wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'includes/api/ApiWikibaseLinkArticles.php';
-$wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'includes/api/ApiWikibaseSetLabel.php';
+$wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 		= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
+//$wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'includes/api/ApiWikibaseLinkArticles.php';
+$wgAutoloadClasses['ApiWikibaseSetLanguageAttribute'] = $dir . 'includes/api/ApiWikibaseSetLanguageAttribute.php';
 $wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'includes/api/ApiWikibaseSetDescription.php';
 $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibaseModifyItem.php';
 $wgAutoloadClasses['ApiWikibaseLinkSite'] 			= $dir . 'includes/api/ApiWikibaseLinkSite.php';
-$wgAutoloadClasses['ApiWikibaseAlias'] 				= $dir . 'includes/api/ApiWikibaseAlias.php';
+$wgAutoloadClasses['ApiWikibaseSetAlias'] 				= $dir . 'includes/api/ApiWikibaseSetAlias.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialCreateItem'] 			= $dir . 'includes/specials/SpecialCreateItem.php';
@@ -96,14 +96,14 @@ $wgAutoloadClasses['SpecialItemByLabel'] 			= $dir . 'includes/specials/SpecialI
 
 
 // API module registration
-$wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
+$wgAPIModules['wbgetitems'] 						= 'ApiWikibaseGetItems';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
-$wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
+$wgAPIModules['wbsetlanguageattribute'] 			= 'ApiWikibaseSetLanguageAttribute';
 $wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
-$wgAPIModules['wbgetlinksites'] 					= 'ApiWikibaseGetLinkSites';
+$wgAPIModules['wbgetsitelinks'] 					= 'ApiWikibaseGetSiteLinks';
 $wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
-$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
-$wgAPIModules['wbalias'] 							= 'ApiWikibaseAlias';
+//$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
+$wgAPIModules['wbalias'] 							= 'ApiWikibaseSetAlias';
 
 
 
