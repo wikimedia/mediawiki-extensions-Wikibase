@@ -85,7 +85,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				}
 			}
 			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed-1' );
 			}
 		}
 		elseif ( isset( $params['id'] ) && $params['id'] !== false ) {
@@ -99,7 +99,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			}
 		}
 		else {
-			$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+			$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed-2' );
 		}
 
 		if ( $item->getModelName() === CONTENT_MODEL_WIKIBASE ) {
