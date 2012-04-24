@@ -62,7 +62,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$params['id'] = $item->getId();
 			if (!$success) {
 				// a little bit odd error message
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item-additional' );
 			}
 		}
 		// because we commented out the required parameters we must test manually
