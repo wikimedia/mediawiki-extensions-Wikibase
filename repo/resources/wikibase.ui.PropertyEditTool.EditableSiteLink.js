@@ -47,6 +47,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		// interface for choosing the source site:
 		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );
 		interfaces.push( interfaces.siteId );
+		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
 		
 		// interface for choosing a page (from the source site):
 		interfaces.pageName = new ev.WikiPageInterface( tableCells[1], this );

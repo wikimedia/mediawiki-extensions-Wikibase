@@ -47,6 +47,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @var bool
 	 */
 	_isInEditMode: false,
+	
+	/**
+	 * If true, the input interface will be loaded on startEditing(), otherwise the value will remain
+	 * uneditable.
+	 * @var bool
+	 */
+	_isActive: true,
 
 	/**
 	 * Holds the input element in case this is in edit mode
@@ -87,7 +94,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
-		if( this.isInEditMode() ) {
+		if( this.isInEditMode() || !this.isActive() ) {
 			return false;
 		}
 		
@@ -326,6 +333,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	
 	/**
 	 * Returns true if the interface is disabled.
+	 * 
 	 * @return bool
 	 */
 	isDisabled: function() {
@@ -335,6 +343,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Disables or enables the element. Disabled is still visible but will be presented differently
 	 * and might behave differently in some cases.
+	 * 
 	 * @param bool disable true for disabling, false for enabling the element
 	 * @return bool whether the state was changed or not.
 	 */
@@ -351,6 +360,30 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 				this._enableInputelement();
 			}
 		}
+	},
+	
+	/**
+	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
+	 * interface will not be made available on startEditing()
+	 * 
+	 * @return bool
+	 */
+	isActive: function() {
+		return this._isActive;
+	},
+	
+	/**
+	 * Sets the interface active or inactive. If inactive, the interface will not be made available
+	 * when startEditing() is called. If called to deactivate the interface but still in edit mode,
+	 * the edit mode will be closed without saving.
+	 * 
+	 * @return bool whether the state was changed or not.
+	 */
+	setActive: function( active ) {		
+		if( !active && this.isInEditMode() ) {
+			this.stopEditing( false );
+		}
+		this._isActive = active;
 	},
 	
 	_disableInputElement: function() {
