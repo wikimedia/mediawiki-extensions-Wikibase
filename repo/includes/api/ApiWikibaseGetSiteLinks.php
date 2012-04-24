@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to get the data for a single Wikibase item.
+ * API module to get the link sites for a single Wikibase item.
  *
  * @since 0.1
  *
@@ -10,10 +10,9 @@
  * @ingroup API
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetItem extends ApiBase {
+class ApiWikibaseGetSiteLinks extends ApiBase {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -27,7 +26,7 @@ class ApiWikibaseGetItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title '] ) ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
@@ -42,29 +41,25 @@ class ApiWikibaseGetItem extends ApiBase {
 		}
 
 		$page = WikibaseItem::getWikiPageForId( $params['id'] );
-
 		if ( $page->exists() ) {
+			// as long as getWikiPageForId only returns ids for legal items this holds
 			$item = $page->getContent();
+			$this->getResult()->addValue(
+				null,
+				'item',
+				array(
+				 	'id' => $params['id'],
+					'sitelinks' => $item->getSiteLinks(),
+				)
+			);
 		}
 		else {
+			// not  sure about this, its not conforming with other calls
 			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
 		}
 
-		$languages = WikibaseUtils::getLanguageCodes();
-
-		$this->getResult()->addValue(
-			null,
-			'page',
-			array(
-			 	'id' => $params['id'],
-				'sitelinks' => $item->getSiteLinks(),
-				'descriptions' => $item->getDescriptions($languages),
-				'labels' => $item->getLabels($languages),
-			)
-		);
-		
 		$success = true;
-
+		
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -76,18 +71,12 @@ class ApiWikibaseGetItem extends ApiBase {
 		return array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 			'site' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				/*ApiBase::PARAM_ISMULTI => true,*/
-			),
-			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
-				ApiBase::PARAM_ISMULTI => true,
 			),
 		);
 	}
@@ -95,8 +84,6 @@ class ApiWikibaseGetItem extends ApiBase {
 	public function getParamDescription() {
 		return array(
 			'id' => 'The ID of the item to get the data from',
-			'language' => 'By default the internationalized values are returned in all available languages.
-						This parameter allows filtering these down to one or more languages by providing their language codes.',
 			'title' => array( 'The title of the corresponding page',
 				"Use together with 'site'."
 			),
@@ -116,22 +103,21 @@ class ApiWikibaseGetItem extends ApiBase {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
 			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
+			array( 'code' => 'no-such-item', 'info' => 'Could not find an existing item' ),
 		) );
 	}
 
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitem&id=42'
-			=> 'Get item number 42 with default (user?) language',
-			'api.php?action=wbgetitem&id=42&language=en'
-			=> 'Get item number 42 with english language',
-			'api.php?action=wbgetitem&site=en&title=Berlin&language=en'
+			=> 'Get item number 42',
+			'api.php?action=wbgetitem&site=en&title=Berlin'
 			=> 'Get the item associated to page Berlin on the site identified by "en"',
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetitem';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetlinksites';
 	}
 
 	public function getVersion() {
