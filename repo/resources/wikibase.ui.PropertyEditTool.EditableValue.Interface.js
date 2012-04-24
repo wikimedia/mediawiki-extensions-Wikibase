@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.EditableValue.Piece.js
+ * @file wikibase.ui.PropertyEditTool.EditableValue.Interface.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -17,12 +17,12 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.Piece = function( subject ) {
+window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject ) {
 	if( typeof subject != 'undefined' ) {
 		this._init( subject );
 	}
 };
-window.wikibase.ui.PropertyEditTool.EditableValue.Piece.prototype = {
+window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * @const
 	 * Class which marks the element within the site html.

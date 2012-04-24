@@ -64,10 +64,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_pending: false,
 	
 	/**
-	 * Array holding all the pieces which are part of the value.
-	 * @var wikibase.ui.PropertyEditTool.EditableValue.Piece[]
+	 * Array holding all the interfaces which are part of the editable value.
+	 * @var wikibase.ui.PropertyEditTool.EditableValue.Interface[]
 	 */
-	_pieces: null,
+	_interfaces: null,
 	
 	/**
 	 * Initializes the editable value.
@@ -84,7 +84,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._subject = $( subject );
 		this._pending = this._subject.hasClass( 'wb-pending-value' );		
 		
-		this._initPieces();
+		this._initInterfaces();
 		
 		this._toolbar = toolbar;
 		this._toolbar.appendTo( this._getToolbarParent() );
@@ -97,43 +97,42 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 	
 	/**
-	 * initializes the pieces handled by this editable value.
+	 * initializes the interfaces handled by this editable value.
 	 */
-	_initPieces: function() {
-		var pieces = this._buildPieces( this._subject );
-		$.each( pieces, $.proxy( function( index, elem ) {
-			elem = this._configSinglePiece( elem );
+	_initInterfaces: function() {
+		var interfaces = this._buildInterfaces( this._subject );
+		$.each( interfaces, $.proxy( function( index, elem ) {
+			this._configSingleInterface( elem );
 		}, this ) );
-		this._pieces = pieces;
+		this._interfaces = interfaces;
 	},
 	
 	/**
-	 * Function analysing the subject and splitting it into all the input interface pieces needed by
-	 * the editable value.
+	 * Function analysing the subject and splitting it into all the input interfaces needed by the
+	 * editable value.
 	 * 
-	 * @return wikibase.ui.PropertyEditTool.EditableValue.Piece[]
+	 * @return wikibase.ui.PropertyEditTool.EditableValue.Interface[]
 	 */
-	_buildPieces: function( subject ) {
-		var pieces = new Array();
-		pieces.push( new wikibase.ui.PropertyEditTool.EditableValue.Piece( subject ) );
-		return pieces;
+	_buildInterfaces: function( subject ) {
+		var interfaces = new Array();
+		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.Interface( subject ) );
+		return interfaces;
 	},
 	
 	/**
-	 * Does the initialization for a single editable value piece. Basically this will bind the used
+	 * Does the initialization for a single editable value interface. Basically this will bind the used
 	 * events and set needed options.
 	 * 
-	 * @param wikibase.ui.PropertyEditTool.EditableValue.Piece piece
-	 * @return wikibase.ui.PropertyEditTool.EditableValue.Piece
+	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
 	 */
-	_configSinglePiece: function( piece ) {
+	_configSingleInterface: function( singleInterface ) {
 		var self = this;		
-		piece.onFocus =           function() { self._pieceHandler_onFocus() };
-		piece.onBlur =            function() { self._pieceHandler_onBlur() };
-		piece.onKeyPressed =      function( event ) { self._pieceHandler_onKeyPressed( event ) };
-		piece.onInputRegistered = function( event ) { self._pieceHandler_onInputRegistered( event ) };
-		
-		return piece;
+		singleInterface.onFocus = function(){ self._interfaceHandler_onFocus() };
+		singleInterface.onBlur = function(){ self._interfaceHandler_onBlur() };
+		singleInterface.onKeyPressed =
+				function( event ){ self._interfaceHandler_onKeyPressed( event ) };
+		singleInterface.onInputRegistered =
+				function( event ){ self._interfaceHandler_onInputRegistered( event ) };
 	},
 	
 	/**
@@ -157,7 +156,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this._toolbar != null) {
 			this._toolbar.destroy();
 		}
-		$.each( this._pieces, function( index, elem ) {
+		$.each( this._interfaces, function( index, elem ) {
 			elem.destroy();
 		} );
 	},
@@ -176,7 +175,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
         this._isInEditMode = true;
 		
-		$.each( this._pieces, function( index, elem ) {
+		$.each( this._interfaces, function( index, elem ) {
 			elem.startEditing();
 		} );
 		
@@ -195,11 +194,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		var changed = false;
 		
-		$.each( this._pieces, function( index, elem ) {
+		$.each( this._interfaces, function( index, elem ) {
 			changed = changed || elem.stopEditing( save );
 		} );
 		
-		// out of edit mode after pieces are closed:
+		// out of edit mode after interfaces are converted back to HTML:
 		this._isInEditMode = false;
 		
 		if( save ) {
@@ -221,7 +220,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	setFocus: function() {
 		if( this.isInEditMode() ) {
-			this._pieces[0].setFocus();
+			this._interfaces[0].setFocus();
 		}
 	},
 
@@ -230,7 +229,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	removeFocus: function() {
 		if( this.isInEditMode() ) {
-			this._pieces[0].removeFocus();
+			this._interfaces[0].removeFocus();
 		}
 	},
 
@@ -299,7 +298,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	getValue: function() {
 		var result = [];
-		$.each( this._pieces, function( index, elem ) {
+		$.each( this._interfaces, function( index, elem ) {
 			result.push( elem.getValue() );
 		} );
 		return result;
@@ -316,7 +315,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			value = [ value ];
 		}
 		$.each( value, function( index, val ) {
-			this._pieces[ index ].setValue( val );
+			this._interfaces[ index ].setValue( val );
 		} );
 	},
 
@@ -333,7 +332,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		
 		var result = [];
 		
-		$.each( this._pieces, function( index, elem ) {
+		$.each( this._interfaces, function( index, elem ) {
 			result.push( elem.getInitialValue() );
 		} );
 		
@@ -355,8 +354,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool
 	 */
 	isEmpty: function() {
-		for( var i in this._pieces ) {
-			if( ! this._pieces[ i ].isEmpty() ) {
+		for( var i in this._interfaces ) {
+			if( ! this._interfaces[ i ].isEmpty() ) {
 				return false;
 			}
 		}
@@ -373,34 +372,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	validate: function( value ) {
 		for( var i in value ) {
-			if( ! this._pieces[ i ].validate( value[ i ] ) ) {
+			if( ! this._interfaces[ i ].validate( value[ i ] ) ) {
 				return false;
 			}
 		}
 		return true;
-	},
-	
-	_pieceHandler_onInputRegistered: function() {
-		var value = this.getValue();
-		var isInvalid = !this.validate( value );
-		
-		// can't save if invalid input OR same as before
-		var disableSave = isInvalid || this.valueCompare( this.getInitialValue(), value );
-		
-		// can't cancel if empty before except the edit is pending (then it will be removed)
-		var disableCancel = !this.isPending() && this.valueCompare( this.getInitialValue(), null );
-		
-		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
-		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
-	},
-
-	_pieceHandler_onKeyPressed: function( event ) {		
-		if( event.which == 13 ) {
-			this._toolbar.editGroup.btnSave.doAction();
-		}
-		else if( event.which == 27 ) {
-			this._toolbar.editGroup.btnCancel.doAction();
-		}
 	},
 	
 	/**
@@ -436,11 +412,34 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		return true;
 	},
+	
+	_interfaceHandler_onInputRegistered: function() {
+		var value = this.getValue();
+		var isInvalid = !this.validate( value );
+		
+		// can't save if invalid input OR same as before
+		var disableSave = isInvalid || this.valueCompare( this.getInitialValue(), value );
+		
+		// can't cancel if empty before except the edit is pending (then it will be removed)
+		var disableCancel = !this.isPending() && this.valueCompare( this.getInitialValue(), null );
+		
+		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
+		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
+	},
 
-	_pieceHandler_onFocus: function( event ) {
+	_interfaceHandler_onKeyPressed: function( event ) {		
+		if( event.which == 13 ) {
+			this._toolbar.editGroup.btnSave.doAction();
+		}
+		else if( event.which == 27 ) {
+			this._toolbar.editGroup.btnCancel.doAction();
+		}
+	},
+
+	_interfaceHandler_onFocus: function( event ) {
 		this._toolbar.editGroup.tooltip.show( true );
 	},
-	_pieceHandler_onBlur: function( event ) {
+	_interfaceHandler_onBlur: function( event ) {
 		this._toolbar.editGroup.tooltip.hide();
 	},
 
