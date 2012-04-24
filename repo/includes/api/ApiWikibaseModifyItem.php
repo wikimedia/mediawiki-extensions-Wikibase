@@ -53,7 +53,9 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 		$success = false;
 
-		$this->validateParameters( $params );
+		if (!$params['create']) {
+			$this->validateParameters( $params );
+		}
 		
 		if ( !isset( $params['id'] ) ) { // create is for development
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
