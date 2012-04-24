@@ -129,6 +129,7 @@ $moduleTemplate = array(
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.js',
+		'wikibase.Client.js',
 		'wikibase.ui.js',
 		'wikibase.ui.PropertyEditTool.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.js',
@@ -155,7 +156,8 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'dependencies' => array(
 		'jquery.tipsy',
 		'jquery.ui.autocomplete',
-		'mediawiki.legacy.shared'
+		'mediawiki.legacy.shared',
+		'mediawiki.Title'
 	),
 	'messages' => array(
 		'wikibase-cancel',

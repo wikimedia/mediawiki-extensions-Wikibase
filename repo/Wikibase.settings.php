@@ -136,7 +136,7 @@ class WBSettings {
 				$siteIdentifiers[$interwiki['prefix']] = $interwiki['url'];
 			}
 		}
-
+		
 		return array(
 			// alternative: application/vnd.php.serialized
 			'serializationFormat' => 'application/json',
