@@ -30,6 +30,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	UI_CLASS: 'wb-ui-propertyedittoolbar-tooltip',
 
 	/**
+	 * tipsy element
+	 * @var Tipsy
+	 */
+	_tipsy: null,
+
+	/**
 	 * @var Object tipsy tooltip configuration vars
 	 */
 	_tipsyConfig: null,
@@ -55,7 +61,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 			};
 		}
 
-		var elem = $( '<span/>', {
+		var tooltip = $( '<span/>', {
 			'class': 'mw-help-field-hint',
 			title: tooltipMessage,
 			style: 'display:inline',
@@ -65,7 +71,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 			'trigger': 'manual'
 		} );
 
-		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, elem );
+		this._tipsy = tooltip.data( 'tipsy' );
+
+		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, tooltip );
 		
 		this._toggleEvents( true );
 	},

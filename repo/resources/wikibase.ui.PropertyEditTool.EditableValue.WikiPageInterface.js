@@ -18,15 +18,15 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
+window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface = function( subject, editableValue ) {
+	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.prototype, {
 	
 	_buildInputElement: function() {
 		// get basic input box:
-		var inputElement = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInputElement.call( this );
+		var inputElement = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
 		
 		// extend input element with autocomplete:
 		inputElement.autocomplete( {
@@ -52,15 +52,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.pr
 	},
 	
 	_getValueContainer: function() {
-		return $( this._subject.find( 'td' )[1] );
+		return $( this._subject );
 	},
 	
 	stopEditing: function( save ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.stopEditing.call( this, save );
 		
 		var container = $( this._subject.children()[1] );
 		var title = container.text();
-		var siteId = this._subject.attr('class').match(/wb-language-links-\w+/)[0].split('-').pop();
+		var siteId = this._subject.attr('class').match(/wb-languagelinks-link-\w+/)[0].split('-').pop();
 		
 		container.html( $( '<a/>', {
 			href: 'http://' + siteId + '.wikipedia.org/wiki/' + title, // TODO store link references in config
