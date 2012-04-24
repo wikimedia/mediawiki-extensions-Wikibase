@@ -65,6 +65,7 @@ class ApiWikibaseGetItems extends ApiBase {
 		foreach ($params['ids'] as $id) {
 			WikibaseItem::getWikiPageForId( $id );
 			if ($page->exists()) {
+				// as long as getWikiPageForId only returns ids for legal items this holds
 				$item = $page->getContent();
 				$this->getResult()->addValue(
 					'items',
@@ -133,6 +134,7 @@ class ApiWikibaseGetItems extends ApiBase {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item ids or the titles of a corresponding page and the identifier for the wiki this page is on' ),
 			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
+			array( 'code' => 'no-such-item', 'info' => 'Could not find an existing item' ),
 		) );
 	}
 
