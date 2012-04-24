@@ -38,19 +38,26 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		this._toolbar.editGroup.displayRemoveButton = true;
 		this._toolbar.draw();
 	},
-	
+
 	_buildInterfaces: function( subject ) {
 		var interfaces = new Array();
 		var tableCells = subject.children( 'td' );
-		
+
 		// interface for choosing the source site:
 		interfaces.siteId = new wikibase.ui.PropertyEditTool.EditableValue.Interface( tableCells[0], this );
 		interfaces.push( interfaces.siteId );
-		
+
 		// interface for choosing a page (from the source site):
+		var siteId = this._subject.attr('class').match(/wb-language-links-\w+/)[0].split('-').pop();
+		var apiLink = 'http://' + siteId + '.wikipedia.org/w/api.php'; // TODO store site ids and api references in config and acquire by site id
 		interfaces.pageName = new wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface( tableCells[1], this );
+		interfaces.pageName.setAjax( apiLink, {
+			action: 'opensearch',
+			namespace: 0,
+			suggest: ''
+		} );
 		interfaces.push( interfaces.pageName );
-		
+
 		return interfaces;
 	},
 
