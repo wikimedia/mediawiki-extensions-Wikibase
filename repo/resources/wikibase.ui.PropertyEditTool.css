@@ -117,3 +117,12 @@ table.wb-languagelinks {
 	font-family:inherit;
 	font-size:inherit;
 }
+
+.wb-ui-propertyedittoolbar-editablevalueinterface-validsiteid {
+	color: green;
+	font-weight: bold;
+}
+
+.wb-ui-propertyedittoolbar-editablevalueinterface-invalidsiteid {
+	color: red;
+}

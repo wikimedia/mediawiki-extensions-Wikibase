@@ -47,6 +47,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @var bool
 	 */
 	_isInEditMode: false,
+	
+	/**
+	 * If true, the input interface will be loaded on startEditing(), otherwise the value will remain
+	 * uneditable.
+	 * @var bool
+	 */
+	_isActive: true,
 
 	/**
 	 * Holds the input element in case this is in edit mode
@@ -87,17 +94,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
-		if( this.isInEditMode() ) {
+		if( this.isInEditMode() || !this.isActive() ) {
 			return false;
 		}
-		this._inputElem = this._buildInputElement();
-		// store original text value from before input box insertion:
-		this._inputElem.data( this.UI_CLASS + '-initial-value', this.getValue() );
 		
-		var inputParent = this._getValueContainer();
-		inputParent.text( '' );
-		this._inputElem.appendTo( inputParent );
+		// initializes the input element into the DOM and removes the html representation
+		this._initInputElement();
 
+		// auto expand dummy element to messure text lenght:
 		if ( this.autoExpand ) {
 			var ruler = $( '<span/>', {
 				'class': 'ruler'
@@ -111,6 +115,24 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
         this.setFocus();
 		
 		return true;
+	},
+	
+	/**
+	 * Initializes the input element and appends it into the DOM when needed.
+	 */
+	_initInputElement: function() {
+		this._inputElem = this._buildInputElement();
+		if( this.isDisabled() ) {
+			// disable element properly if disabled from before edit mode
+			this._disableInputElement();
+		}
+		
+		// store original text value from before input box insertion:
+		this._inputElem.data( this.UI_CLASS + '-initial-value', this.getValue() );
+		
+		var inputParent = this._getValueContainer();
+		inputParent.text( '' );
+		this._inputElem.appendTo( inputParent );
 	},
 	
 	/**
@@ -302,7 +324,74 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Sets a value
 	 */
 	setValue: function( value ) {
-		this._getValueContainer().text( value );
+		if( this.isInEditMode() ) {
+			this._inputElem.attr( 'value', value );
+		} else {
+			this._getValueContainer().text( value );
+		}
+	},
+	
+	/**
+	 * Returns true if the interface is disabled.
+	 * 
+	 * @return bool
+	 */
+	isDisabled: function() {
+		return this._subject.hasClass( this.UI_CLASS + '-disabled' );
+	},
+	
+	/**
+	 * Disables or enables the element. Disabled is still visible but will be presented differently
+	 * and might behave differently in some cases.
+	 * 
+	 * @param bool disable true for disabling, false for enabling the element
+	 * @return bool whether the state was changed or not.
+	 */
+	setDisabled: function( disable ) {
+		// TODO!
+		if( disable ) {
+			this._subject.addClass( this.UI_CLASS + '-disabled' );			
+			if( this.isInEditMode() ) {
+				this._disableInputElement();
+			}
+		} else {
+			this._subject.removeClass( this.UI_CLASS + '-disabled' );
+			if( this.isInEditMode() ) {
+				this._enableInputelement();
+			}
+		}
+	},
+	
+	/**
+	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
+	 * interface will not be made available on startEditing()
+	 * 
+	 * @return bool
+	 */
+	isActive: function() {
+		return this._isActive;
+	},
+	
+	/**
+	 * Sets the interface active or inactive. If inactive, the interface will not be made available
+	 * when startEditing() is called. If called to deactivate the interface but still in edit mode,
+	 * the edit mode will be closed without saving.
+	 * 
+	 * @return bool whether the state was changed or not.
+	 */
+	setActive: function( active ) {		
+		if( !active && this.isInEditMode() ) {
+			this.stopEditing( false );
+		}
+		this._isActive = active;
+	},
+	
+	_disableInputElement: function() {
+		this._inputElem.attr( 'disabled', 'true' );
+	},
+	
+	_enableInputelement: function() {
+		this._inputElem.removeAttr( 'disabled' );
 	},
 
 	/**
@@ -347,7 +436,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	inputPlaceholder: '',
 
 	/**
-	 * when true, automatically expands width of input element according to containing text
+	 * When true, automatically expands width of input element according to containing text
 	 * @var bool
 	 */
 	autoExpand: false,
