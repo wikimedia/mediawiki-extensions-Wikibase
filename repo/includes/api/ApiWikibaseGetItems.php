@@ -63,7 +63,7 @@ class ApiWikibaseGetItems extends ApiBase {
 		);
 		
 		foreach ($params['ids'] as $id) {
-			WikibaseItem::getWikiPageForId( $id );
+			$page = WikibaseItem::getWikiPageForId( $id );
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				$item = $page->getContent();
