@@ -42,7 +42,6 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-
 		$languages = WikibaseUtils::getLanguageCodes();
 		$num_labels = count($item->getLabels($languages));
 		$num_descriptions = count($item->getDescriptions($languages));
