@@ -53,31 +53,15 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 		$success = false;
 
-		// TODO: Start of bailout
-		// our bail out if we can't identify an existing item
-		if ( !isset( $params['id'] ) && !isset( $params['site'] ) && !isset( $params['title'] ) ) {
-			$item = WikibaseItem::newEmpty();
-			// we need a save to get an item id
-			$success = $item->save();
-			$params['id'] = $item->getId();
-			if (!$success) {
-				// a little bit odd error message
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item-additional' );
-			}
-		}
-		// because we commented out the required parameters we must test manually
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
-		}
-		//TODO: End of bailout
-
 		$this->validateParameters( $params );
 		
-		if ( !isset( $params['id'] ) ) {
+		if ( !isset( $params['id'] ) ) { // create is for development
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
+			if (!$params['create']) {
 			if ( $params['id'] === false && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
+			}
 			}
 		}
 
@@ -85,21 +69,11 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
 
-		if ( isset( $params['id'] ) && $params['id'] !== false ) {
-			$page = WikibaseItem::getWikiPageForId( $params['id'] );
-
-			if ( $page->exists() ) {
-				$item = $page->getContent();
-			}
-			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
-			}
-		}
-		else {
+		if ( !isset( $params['id'] && $params['create']) ) {
 			// now we should never be here
 			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
 			$item = WikibaseItem::newEmpty();
-			//$success = $item->save();
+			$success = $item->save();
 
 			if ( $success ) {
 				$page = $item->getWikiPage();
@@ -111,6 +85,19 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
 			}
+		}
+		elseif ( isset( $params['id'] ) && $params['id'] !== false ) {
+			$page = WikibaseItem::getWikiPageForId( $params['id'] );
+
+			if ( $page->exists() ) {
+				$item = $page->getContent();
+			}
+			else {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
+			}
+		}
+		else {
+			$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
 		}
 
 		if ( $item->getModelName() === CONTENT_MODEL_WIKIBASE ) {
@@ -179,6 +166,9 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 	public function getAllowedParams() {
 		return array(
+			'create' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+			),
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
