@@ -12,7 +12,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetLinkSites extends ApiBase {
+class ApiWikibaseGetSiteLinks extends ApiBase {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -41,23 +41,23 @@ class ApiWikibaseGetLinkSites extends ApiBase {
 		}
 
 		$page = WikibaseItem::getWikiPageForId( $params['id'] );
-
 		if ( $page->exists() ) {
+			// as long as getWikiPageForId only returns ids for legal items this holds
 			$item = $page->getContent();
+			$this->getResult()->addValue(
+				null,
+				'item',
+				array(
+				 	'id' => $params['id'],
+					'sitelinks' => $item->getSiteLinks(),
+				)
+			);
 		}
 		else {
+			// not  sure about this, its not conforming with other calls
 			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
 		}
 
-		$this->getResult()->addValue(
-			null,
-			'page',
-			array(
-			 	'id' => $params['id'],
-				'sitelinks' => $item->getSiteLinks(),
-			)
-		);
-		
 		$success = true;
 		
 		$this->getResult()->addValue(
@@ -71,14 +71,12 @@ class ApiWikibaseGetLinkSites extends ApiBase {
 		return array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 			'site' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				/*ApiBase::PARAM_ISMULTI => true,*/
 			),
 		);
 	}
@@ -105,7 +103,8 @@ class ApiWikibaseGetLinkSites extends ApiBase {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
 			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
-			) );
+			array( 'code' => 'no-such-item', 'info' => 'Could not find an existing item' ),
+		) );
 	}
 
 	protected function getExamples() {
