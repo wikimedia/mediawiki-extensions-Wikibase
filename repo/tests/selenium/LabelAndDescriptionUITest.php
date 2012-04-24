@@ -52,7 +52,7 @@ class LabelAndDescriptionUITest extends SeleniumTestCase {
 								div.wb-ui-propertyedittoolbar-group > 
 								div.wb-ui-propertyedittoolbar-group >
 								a.wb-ui-propertyedittoolbar-button:nth-child(2)";
-		$valueInputFieldSelector = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevalue";
+		$valueInputFieldSelector = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevaluepiece";
 		 
 		$targetLabel = $this->get_element( $labelElementSelector )->get_text();
 		$changedLabel = $targetLabel."_foo";
@@ -128,7 +128,7 @@ class LabelAndDescriptionUITest extends SeleniumTestCase {
 		$cancelLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
 		div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group >
 		a.wb-ui-propertyedittoolbar-button:nth-child(2)";
-		$valueInputFieldSelector = "css=div.wb-ui-propertyedittool-subject > span > input.wb-ui-propertyedittoolbar-editablevalue";
+		$valueInputFieldSelector = "css=div.wb-ui-propertyedittool-subject > span > input.wb-ui-propertyedittoolbar-editablevaluepiece";
 		
 		// doing the test stuff
 		// no description should be there for a newly created item and the input box should be displayed instantly 
