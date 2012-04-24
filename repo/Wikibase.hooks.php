@@ -22,7 +22,7 @@ final class WikibaseHooks {
 	 *
 	 * @param DatabaseUpdater $updater
 	 *
-	 * @return true
+	 * @return boolean
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$updater->addExtensionTable(
@@ -41,12 +41,16 @@ final class WikibaseHooks {
 	 *
 	 * @param array $files
 	 *
-	 * @return true
+	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
 
 		$files[] = $testDir . 'WikibaseItemTests.php';
+		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemTests.php';
+		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemNewEmptyTests.php';
+		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemNewFromArrayTests.php';
+		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemContentHandlerTests.php';
 
 		return true;
 	}
@@ -61,7 +65,7 @@ final class WikibaseHooks {
 	 * @param Language $pageLanguage
 	 * @param Language|StubUserLang $language
 	 *
-	 * @return true
+	 * @return boolean
 	 */
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
@@ -74,6 +78,17 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Add new javascript testing modules. This is called after the addition of MediaWiki core test suites.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $testModules
+	 * @param ResourceLoader $resourceLoader
+	 *
+	 * @return boolean
+	 */
 	public static function onResourceLoaderTestModules( array &$testModules, ResourceLoader &$resourceLoader ) {
 		$testModules['qunit']['ext.wikibase.tests'] = array(
 			'scripts' => array( 'tests/qunit/wikibase.tests.js' ),
@@ -83,6 +98,31 @@ final class WikibaseHooks {
 		);
 
 		return true;
+	}
+
+	/**
+	 * Allows canceling the move of one title to another.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/AbortMove
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $oldTitle
+	 * @param Title $newTitle
+	 * @param User $user
+	 * @param string $error
+	 * @param string $reason
+	 *
+	 * @return boolean
+	 */
+	public static function onAbortMove( Title $oldTitle, Title $newTitle, User $user, &$error, $reason ) {
+		$nss = array( WB_NS_DATA );
+		$allowed = !in_array( $oldTitle->getNamespace(), $nss ) && !in_array( $newTitle->getNamespace(), $nss );
+
+		if ( !$allowed ) {
+			$error = wfMsg( 'wikibase-move-error' );
+		}
+
+		return $allowed;
 	}
 
 }

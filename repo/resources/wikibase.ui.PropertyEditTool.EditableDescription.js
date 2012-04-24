@@ -28,7 +28,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 
 	getApiCallParams: function() {
 		return {
-			action: 'wbsetdescription',
+			action: 'wbsetlanguageattribute',
 			language: wgUserLanguage,
 			description: this.getValue().toString(),
 			id: mw.config.values.wbItemId

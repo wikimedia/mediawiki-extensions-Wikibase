@@ -29,29 +29,35 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 		$success = false;
 
+		// our bail out if we can't identify an existing item
+		if ( !isset( $params['id'] ) && !isset( $params['site'] ) && !isset( $params['title'] ) ) {
+			$item = WikibaseItem::newEmpty();
+			$success = $item->save();
+			$params['id'] = $item->getId();
+			if (!$success) {
+				// a little bit odd error message
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+			}
+		}
+		
+		// because we commented out the required parameters we must test manually
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+		}
+		
+		// normally 'id' should not exist here and the test should always return true
+		// but as we have broken the normal thread in the previous clause this can be skipped
 		if ( !isset( $params['id'] ) ) {
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
-
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 		}
-
-		$page = WikibaseItem::getWikiPageForId( $params['id'] );
-
-		if ( $page->exists() ) {
-			$item = $page->getContent();
-		}
-		else {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
-		}
 		
 		$this->getResult()->addValue(
 			null,
-			'page',
-			array(
-			 	'id' => $params['id']
-			)
+			'item',
+			array( 'id' => $params['id'] )
 		);
 		
 		$success = true;
@@ -67,20 +73,25 @@ class ApiWikibaseGetItemId extends ApiBase {
 		return array(
 			'site' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
-				ApiBase::PARAM_REQUIRED => true,
+				//ApiBase::PARAM_REQUIRED => true,
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-				/*ApiBase::PARAM_ISMULTI => true,*/
+				//ApiBase::PARAM_REQUIRED => true,
 			),
 		);
 	}
 
 	public function getParamDescription() {
 		return array(
-			'title' => 'The title of the page',
-			'site' => 'Site identifier',
+			'title' => array(
+				'The title of the external page that is used as an reference for the internal page.',
+				'Must be used together with the identifier for the site where the page resides.'
+			),
+			'site' => array(
+				'Site identifier for the external page that is used as an reference for the internal page.',
+				'Must be used together with the title from the site where the page resides.'
+			),
 		);
 	}
 
@@ -92,7 +103,6 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
 			array( 'code' => 'no-such-item', 'info' => 'There are no such item to be found' ),
 		) );
 	}
