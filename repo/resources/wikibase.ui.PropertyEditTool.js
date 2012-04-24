@@ -174,7 +174,24 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * be cancelled.
 	 */
 	enterNewValue: function() {
+		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
+		newValueElem.addClass( 'wb-pending-value' );
 		
+		this._subject.append( newValueElem );
+		var newValue = this._initSingleValue( newValueElem );
+		
+		//newValue._toolbar.editGroup.btnEdit.doAction();
+		//newValue.startEditing();
+		newValue.setFocus();
+	},
+	
+	/**
+	 * Creates the DOM structure for a new empty value which can be appended to the list of values.
+	 * 
+	 * @return jQuery
+	 */
+	_newEmptyValueDOM: function() {
+		return $( '<span/>' );
 	},
 	
 	/**

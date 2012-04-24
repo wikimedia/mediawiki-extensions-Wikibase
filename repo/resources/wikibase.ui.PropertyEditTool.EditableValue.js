@@ -89,10 +89,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._toolbar = toolbar;
 		this._toolbar.appendTo( this._getToolbarParent() );
 		
-		if( this.isEmpty() ) {
-			// enable editing from the beginning if there is no value yet!
+		if( this.isEmpty() || this.isPending() ) {
+			// enable editing from the beginning if there is no value yet or pending value...
 			this._toolbar.editGroup.btnEdit.doAction();
-			this.removeFocus(); // but don't set focus there for now
+			this.removeFocus(); // ...but don't set focus there for now
 		}
 	},
 	
@@ -148,7 +148,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	remove: function() {
 		// TODO API call
 		this.doApiCall( true );
-		this.destroy();
+		//this.destroy(); // no need to destroy this proberly since we remove anything for real!
 		this._subject.empty().remove();
 	},
 
@@ -192,6 +192,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( ! this.isInEditMode() ) {
 			return false;
 		}
+		if( !save && this.isPending() ) {
+			// not yet existing value, no state to go back to
+			this.remove();
+			return false;
+		}
+		
 		var changed = false;
 		
 		$.each( this._interfaces, function( index, elem ) {
@@ -205,10 +211,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this.doApiCall( false );
 			this._pending = false; // might have to move this to API call error/success handling
 			this._subject.removeClass( 'wb-pending-value' );
-		}
-		else if( this.isPending() ) {
-			// not yet existing value, no state to go back to
-			this.remove();
 		}
 		
 		// any change at all compared to initial value?

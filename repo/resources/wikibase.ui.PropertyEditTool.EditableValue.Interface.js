@@ -27,7 +27,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @const
 	 * Class which marks the element within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar-editablevaluepiece',
+	UI_CLASS: 'wb-ui-propertyedittoolbar-editablevalueinterface',
 	
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input

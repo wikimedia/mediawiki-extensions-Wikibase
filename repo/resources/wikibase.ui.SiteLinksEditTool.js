@@ -48,14 +48,8 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		return this._subject.find( 'tr:not(:has(th))' );
 	},
 	
-	enterNewValue: function() {
-		var newValueElem = $( '<tr> <td>AA</td> <td></td> </tr>' );
-		newValueElem.addClass( 'wb-pending-value' );
-		
-		this._subject.append( newValueElem );
-		var newValue = this._initSingleValue( newValueElem );
-		newValue.startEditing();
-		newValue.setFocus();
+	_newEmptyValueDOM: function() {
+		return $( '<tr> <td></td> <td></td> </tr>' );
 	},
 	
 	getEditableValuePrototype: function() {
