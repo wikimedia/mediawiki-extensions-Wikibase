@@ -45,8 +45,8 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 }
 	h1.firstHeading input {
 		font-family:inherit;
-		font-size:1.2em;
-		border:none;
+		font-size:inherit;
+		/*border:none;*/
 	}
 
 .wb-property-container {
@@ -83,19 +83,25 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 }
 
 table.wb-languagelinks {
-	border:1px solid #5dc9f4;
+	/*border:1px solid #5dc9f4;*/
 	margin-top:2em;
 }
 	table.wb-languagelinks th, table.wb-languagelinks td {
-		padding:2px 4px;
+		padding:6px 4px;
 		margin:0;
+		border-bottom:1px dashed #000;
 	}
 	table.wb-languagelinks th {
-		background-color:#D6F3FF;
+		/*background-color:#D6F3FF;*/
 		text-align:left;
+		font-size:1.6em;
+		color:#000000;
+		font-weight:normal;
+		padding-bottom:8px;
 	}
 	table.wb-languagelinks tr:hover td {
-		background-color:#5dc9f4;
+		/*background-color:#5dc9f4;*/
+		background-color:#D6F3FF;
 	}
 	table.wb-languagelinks .uneven td {
 		background:#F9F9F9;
