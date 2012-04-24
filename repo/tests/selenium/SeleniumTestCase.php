@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Some common functions for Selenium Tests of the WikibaseRepo
+ *
+ * @licence GNU GPL v2+
+ * @author Tobias Gritschacher < tobias.gritschacher at wikimedia.de >
+ */
+
 require_once 'WebDriver.php';
 require_once 'WebDriver/Driver.php';
 require_once 'WebDriver/MockDriver.php';

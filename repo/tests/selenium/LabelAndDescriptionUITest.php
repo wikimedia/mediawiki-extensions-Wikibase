@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * Selenium Tests for the Description and Label UI
+ *
+ * @licence GNU GPL v2+
+ * @author Tobias Gritschacher < tobias.gritschacher at wikimedia.de >
+ */
+
 require_once 'selenium_tests_config.php';
 require_once 'SeleniumTestCase.php';
 
