@@ -5,7 +5,7 @@
  *
  * @since 0.1
  *
- * @file DeleteAllTheDatas.php
+ * @file DeleteAllData.php
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -16,10 +16,10 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 
 require_once $basePath . '/maintenance/Maintenance.php';
 
-class DeleteAllTheDatas extends Maintenance {
+class DeleteAllData extends Maintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Delete the Wikipedia Education Program data';
+		$this->mDescription = 'Delete the Wikidata data';
 
 		parent::__construct();
 	}
@@ -61,5 +61,5 @@ class DeleteAllTheDatas extends Maintenance {
 
 }
 
-$maintClass = 'DeleteAllTheDatas';
+$maintClass = 'DeleteAllData';
 require_once( RUN_MAINTENANCE_IF_MAIN );

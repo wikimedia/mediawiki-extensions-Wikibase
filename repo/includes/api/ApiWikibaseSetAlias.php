@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to associate an alias with a label from a Wikibase item or remove an already made such association.
+ * API module to set an alias with a label for a Wikibase item or remove an already made such association.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -16,6 +16,24 @@
 class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
 
 	/**
+	 * Make sure the required parameters are provided and that they are valid.
+	 * This overrides the base class
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $params
+	 */
+	protected function validateParameters( array $params ) {
+		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-alias-incomplete' ), 'alias-incomplete' );
+		}
+
+		if ( isset( $params['id'] ) && $params['item'] === 'add' ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-add-with-id' ), 'add-with-id' );
+		}
+	}
+	
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
@@ -26,55 +44,44 @@ class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		/*
-		 * // TODO: Set as remove if there is no input value
-		if ( !isset($params['alias']) || ) {
-			$params['alias'] = $params['item'];
-		}
-		*/
-		if ( !isset($params['alias']) ) {
-			$params['alias'] = $params['item'];
-		}
-		// TODO: this should really set up an alternate access method
-		/*
-		if ( $params['change'] === 'remove') {
-			// TODO: Check if this is going to be defined
-			return $item->removeAlias( $params['label'], $params['language'] );
+		$success = false;
+		if ($params['item'] === 'remove') {
+			$success = $item->removeAlias( $params['site'], $params['title'] );
 		}
 		else {
-			// TODO: Check if this is going to be defined
-			return $item->addAlias( $params['label'], $params['language'], $params['alias'] );
+			$success = $item->addSiteLink( $params['site'], $params['title'], $params['item'] );
+			if (!$success) {
+				switch ($params['item']) {
+					case 'update':
+						$this->dieUsage( wfMsg( 'wikibase-api-alias-not-found' ), 'alias-not-found' );
+						break;
+					case 'add':
+						$this->dieUsage( wfMsg( 'wikibase-api-alias-found' ), 'alias-found' );
+						break;
+					default:
+						$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+				}
+			}
 		}
-		*/
-		return false;
+		return $success;
 	}
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			// is this in use?
-			array( 'code' => 'alias-exists', 'info' => 'An alias is already defined' ),
+			array( 'code' => 'alias-incomplete', 'info' => 'Can not find a definition of the alias for the item' ),
+			array( 'code' => 'alias-not-found', 'info' => 'Can not find any previous alias in the item' ),
+			array( 'code' => 'alias-found', 'info' => 'Found a previous alias in the item' ),
+			array( 'code' => 'not-recognized', 'info' => 'Directive is not recognized' ),
 		) );
 	}
 
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
-			'label' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'alias' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
-				ApiBase::PARAM_REQUIRED => true,
-			),
 		) );
 	}
 
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
-			'label' => 'The label to use as an alternate name for the page in Wikidata',
-			'alias' => array('Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
-				'The argument "item" works as an alias for "item".',
-			),
 		) );
 	}
 

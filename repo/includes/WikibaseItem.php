@@ -222,16 +222,36 @@ class WikibaseItem extends WikibaseEntity {
 		);
 	}
 
+	/**
+	 * Get descriptions for an item
+	 * 
+	 * @since 0.1
+	 * 
+	 * @param array|null $languages note that an empty array gives descriptions for no languages whil a null pointer gives all
+	 * 
+	 * @return array found descriptions in given languages
+	 */
 	public function getDescriptions( array $languages = null ) {
 		return $this->getMultilangTexts( 'description', $languages );
 	}
 
+	/**
+	 * @since 0.1
+	 * 
+	 * Get labels for an item
+	 * 
+	 * @param array|null $languages note that an empty array gives labels for no languages whil a null pointer gives all
+	 * 
+	 * @return array found labels in given languages
+	 */
 	public function getLabels( array $languages = null ) {
 		return $this->getMultilangTexts( 'label', $languages );
 	}
 
 	/**
 	 * @since 0.1
+	 * 
+	 * Get texts from an item with a field specifier
 	 *
 	 * @param string $fieldKey
 	 * @paran array|null $languages

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- colors don't work on Windows! -->
+<phpunit bootstrap="./bootstrap.php"
+         colors="true"
+         backupGlobals="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false"
+         strict="true"
+		 verbose="true">
+	<testsuites>
+		<testsuite name="includes">
+			<directory>includes</directory>
+		</testsuite>
+		<testsuite name="WikibaseItem">
+			<file>includes/WikibaseItem/WikibaseItemTests.php</file>
+			<file>includes/WikibaseItem/WikibaseItemNewEmptyTests.php</file>
+			<file>includes/WikibaseItem/WikibaseItemNewFromArrayTests.php</file>
+			<file>includes/WikibaseItem/WikibaseItemContentHandlerTests.php</file>
+		</testsuite>
+	</testsuites>
+	<groups>
+		<exclude>
+			<group>Utility</group>
+			<group>Broken</group>
+			<group>ParserFuzz</group>
+			<group>Stub</group>
+		</exclude>
+	</groups>
+</phpunit>

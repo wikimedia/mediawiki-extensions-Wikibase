@@ -54,6 +54,8 @@ $dir = dirname( __FILE__ ) . '/';
 
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 				= $dir . 'Wikibase.i18n.php';
+$wgExtensionMessagesFiles['WikibaseAlias'] 			= $dir . 'Wikibase.i18n.alias.php';
+$wgExtensionMessagesFiles['WikibaseNS'] 			= $dir . 'Wikibase.i18n.ns.php';
 
 
 
@@ -75,29 +77,47 @@ $wgAutoloadClasses['WikibaseViewItemAction'] 		= $dir . 'includes/actions/Wikiba
 $wgAutoloadClasses['WikibaseEditItemAction'] 		= $dir . 'includes/actions/WikibaseEditItemAction.php';
 
 // includes/api
-$wgAutoloadClasses['ApiWikibaseGetItem'] 			= $dir . 'includes/api/ApiWikibaseGetItem.php';
+$wgAutoloadClasses['ApiWikibaseGetItems'] 			= $dir . 'includes/api/ApiWikibaseGetItems.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'includes/api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'includes/api/ApiWikibaseLinkArticles.php';
-$wgAutoloadClasses['ApiWikibaseSetLabel'] 			= $dir . 'includes/api/ApiWikibaseSetLabel.php';
-$wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'includes/api/ApiWikibaseSetDescription.php';
-$wgAutoloadClasses['ApiWikibaseAddAlias'] 			= $dir . 'includes/api/ApiWikibaseAddAlias.php';
-$wgAutoloadClasses['ApiWikibaseRemoveAlias'] 		= $dir . 'includes/api/ApiWikibaseRemoveAlias.php';
+$wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 		= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
+//$wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'includes/api/ApiWikibaseLinkArticles.php';
+$wgAutoloadClasses['ApiWikibaseSetLanguageAttribute'] = $dir . 'includes/api/ApiWikibaseSetLanguageAttribute.php';
+//$wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'includes/api/ApiWikibaseSetDescription.php';
 $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibaseModifyItem.php';
 $wgAutoloadClasses['ApiWikibaseLinkSite'] 			= $dir . 'includes/api/ApiWikibaseLinkSite.php';
+$wgAutoloadClasses['ApiWikibaseSetAlias'] 				= $dir . 'includes/api/ApiWikibaseSetAlias.php';
+
+// includes/specials
+$wgAutoloadClasses['SpecialCreateItem'] 			= $dir . 'includes/specials/SpecialCreateItem.php';
+$wgAutoloadClasses['SpecialItemByTitle'] 			= $dir . 'includes/specials/SpecialItemByTitle.php';
+$wgAutoloadClasses['SpecialItemResolver'] 			= $dir . 'includes/specials/SpecialItemResolver.php';
+$wgAutoloadClasses['SpecialItemByLabel'] 			= $dir . 'includes/specials/SpecialItemByLabel.php';
+
+
 
 // API module registration
-$wgAPIModules['wbgetitem'] 							= 'ApiWikibaseGetItem';
+$wgAPIModules['wbgetitems'] 						= 'ApiWikibaseGetItems';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
-$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
-$wgAPIModules['wbsetlabel'] 						= 'ApiWikibaseSetLabel';
-$wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
+$wgAPIModules['wbsetlanguageattribute'] 			= 'ApiWikibaseSetLanguageAttribute';
+//$wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
+$wgAPIModules['wbgetsitelinks'] 					= 'ApiWikibaseGetSiteLinks';
 $wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
+//$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
+$wgAPIModules['wbalias'] 							= 'ApiWikibaseSetAlias';
+
+
+
+// Special page registration
+//$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+//$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
+//$wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 $wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTestModules';
+$wgHooks['AbortMove'][]								= 'WikibaseHooks::onAbortMove';
 
 
 // Resource loader modules
@@ -151,11 +171,17 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 
 unset( $moduleTemplate );
 
-
-
 // register hooks and handlers
 define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
+
+define( 'WB_NS_DATA', 100 );
+define( 'WB_NS_DATA_TALK', 101 );
+
+$wgExtraNamespaces[WB_NS_DATA] = 'Data';
+$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
+
+$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE;
 
 
 $egWBSettings = array();
