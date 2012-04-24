@@ -80,7 +80,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		else {
 			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
 			$item = WikibaseItem::newEmpty();
-			$success = $item->save();
+			//$success = $item->save();
 
 			if ( $success ) {
 				$page = $item->getWikiPage();
@@ -118,7 +118,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		// it could be interesting to avoid storing if the item is in fact not changed
 		// or if the saves could be queued somehow
 		if ($success) {
-			$success = $this->save();
+			$success = $item->save();
 		}
 		
 		$this->getResult()->addValue(
