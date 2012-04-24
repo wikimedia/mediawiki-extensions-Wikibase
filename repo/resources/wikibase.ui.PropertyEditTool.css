@@ -87,15 +87,14 @@ table.wb-languagelinks {
 	margin-top:2em;
 }
 	table.wb-languagelinks th, table.wb-languagelinks td {
-		padding:6px 4px;
-		margin:0;
-		border-bottom:1px dashed #000;
+		border-bottom: 1px solid #ccc;
+		margin: 0;
+		padding: 0.2em 0.4em;
 	}
 	table.wb-languagelinks th {
 		/*background-color:#D6F3FF;*/
 		text-align:left;
-		font-size:1.6em;
-		color:#000000;
+		font-size:1.25em;
 		font-weight:normal;
 		padding-bottom:8px;
 	}
@@ -105,4 +104,7 @@ table.wb-languagelinks {
 	}
 	table.wb-languagelinks .uneven td {
 		background:#F9F9F9;
+	}
+	table.wb-languagelinks .even td {
+		background:#ececec;
 	}
