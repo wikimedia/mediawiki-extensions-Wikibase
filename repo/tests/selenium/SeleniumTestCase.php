@@ -49,6 +49,8 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	/**
 	 * Makes a call to the API to create a new Item
 	 * @param String $item The item's Title/Label. If this parameter is not set a random item will be created.
+	 * TODO: for now we have to make 2 API calls: one for creating a new item without label by calling wbgetitemid
+	 * and one for setting the label
 	 */
 	public function createNewWikidataItem( $item = "" ) {
 		if( !$item ) {
@@ -56,17 +58,25 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 		}
 		$params = array(
 				"format" => "json",
-				"action" => "wbsetlabel",
-				"site" => WIKI_USELANG,
-				"title" => $item,
-				"item" => "set",
-				"language" => WIKI_USELANG,
-				"label" => $item
+				"action" => "wbgetitemid"
 				);
 
 		$result = $this->doCurlApiCall( $params );
 		$this->assertTrue( isset($result["item"][1] ));
-		return $result["item"][1];
+		$itemId = $result["item"][1];
+		
+		$params = array(
+				"format" => "json",
+				"action" => "wbsetlanguageattribute",
+				"id" => $itemId,
+				"language" => WIKI_USELANG,
+				"label" => $item
+		);
+		
+		$result = $this->doCurlApiCall( $params );
+		$this->assertEquals( 1, $result["success"] );
+		
+		return $itemId;
 	}
 	
 	/**
@@ -76,9 +86,8 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	public function setItemDescription( $itemId, $description ) {
 		$params = array(
 				"format" => "json",
-				"action" => "wbsetdescription",
+				"action" => "wbsetlanguageattribute",
 				"id" => $itemId,
-				"item" => "set",
 				"language" => WIKI_USELANG,
 				"description" => $description
 		);

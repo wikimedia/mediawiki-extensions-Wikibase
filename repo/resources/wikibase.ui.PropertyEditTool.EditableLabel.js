@@ -28,7 +28,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 
 	getApiCallParams: function() {
 		return {
-			action: "wbsetlabel",
+			action: "wbsetlanguageattribute",
 			language: window.wgUserLanguage,
 			label: this.getValue().toString(),
 			id: window.mw.config.get( 'wbItemId' )
