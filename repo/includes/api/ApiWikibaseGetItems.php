@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API module to get the data for a single Wikibase item.
+ * API module to get the data for one or more Wikibase items.
  *
  * @since 0.1
  *
