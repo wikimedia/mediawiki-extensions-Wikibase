@@ -19,7 +19,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class DeleteAllTheDatas extends Maintenance {
 
 	public function __construct() {
-		$this->mDescription = 'Delete the Wikipedia Education Program data';
+		$this->mDescription = 'Delete the Wikidata data';
 
 		parent::__construct();
 	}
