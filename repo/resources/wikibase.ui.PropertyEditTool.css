@@ -45,8 +45,8 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 }
 	h1.firstHeading input {
 		font-family:inherit;
-		font-size:1.2em;
-		border:none;
+		font-size:inherit;
+		/*border:none;*/
 	}
 
 .wb-property-container {

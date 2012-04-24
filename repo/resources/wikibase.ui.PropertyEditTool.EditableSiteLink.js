@@ -61,7 +61,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 				}, $.proxy( function( data ) {
 					this._currentResults = data[1];
 					suggest( data[1] ); // pass array of returned values to callback
+					this._onInputRegistered();
 				}, this ) );
+			}, this ),
+			close: $.proxy( function( event, ui ) {
+				this._onInputRegistered();
 			}, this )
 		} );
 		return inputElement;
