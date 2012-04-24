@@ -29,7 +29,18 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 		$success = false;
 
+		// our bail out if we can't identify an existing item
+		if ( !isset( $params['id'] ) && !isset( $params['site'] ) && !isset( $params['title'] ) ) {
+			$item = WikibaseItem::newEmpty();
+			$success = $item->save();
+			$params['id'] = $item->getId();
+			if (!$success) {
+				// a little bit odd error message
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+			}
+		}
 		// normally 'id' should not exist here and the test should always return true
+		// but as we have broken the normal thread in the previous clause this can be skipped
 		if ( !isset( $params['id'] ) ) {
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 			if ( $params['id'] === false ) {
