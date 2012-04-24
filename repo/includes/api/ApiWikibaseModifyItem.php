@@ -114,6 +114,13 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
 		}
 
+		// this saves unconditionally if we had a success so far
+		// it could be interesting to avoid storing if the item is in fact not changed
+		// or if the saves could be queued somehow
+		if ($success) {
+			$success = $this->save();
+		}
+		
 		$this->getResult()->addValue(
 			null,
 			'success',
