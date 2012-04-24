@@ -31,7 +31,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.pr
 		// extend input element with autocomplete:
 		inputElement.autocomplete( {
 			source: $.proxy( function( request, suggest ) {
-				var siteId = this._subject.attr('class').match(/wb-language-links-\w+/)[0].split('-').pop();
+				var siteId = this._subject.attr('class').match(/wb-languagelinks-link-\w+/)[0].split('-').pop();
 				var apiLink = 'http://' + siteId + '.wikipedia.org/w/api.php'; // TODO store api references in config and acquire by site id
 				$.getJSON( apiLink + '?callback=?', {
 					action: 'opensearch',
