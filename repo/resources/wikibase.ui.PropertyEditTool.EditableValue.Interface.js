@@ -41,23 +41,25 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @var jQuery
 	 */
 	_subject: null,
-	
+
 	/**
 	 * This is true if the input interface is initialized at the time.
 	 * @var bool
 	 */
 	_isInEditMode: false,
-	
+
 	/**
 	 * Holds the input element in case this is in edit mode
 	 * @var null|jQuery
 	 */
 	_inputElem: null,
-	
+
+	_currentWidth: null,
+
 	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
-	 * 
+	 *
 	 * @param jQuery subject
 	 */
 	_init: function( subject, editableValue ) {
@@ -67,6 +69,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		}
 		this._subject = $( subject );
 		this._editableValue = editableValue;
+		this._currentWidth = 0;
 	},
 
 	destroy: function() {
@@ -122,7 +125,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'value': this.getValue(),
 			'placeholder': this.inputPlaceholder,
 			'keypress': jQuery.proxy( this._onKeyPressed, this ), // TODO: this shouldn't be used, keyup should work fine!
-			'keyup':    jQuery.proxy( this._onKeyPressed, this ), //       we have both for escape key browser compability
+			'keyup':    jQuery.proxy( this._onKeyUp, this ), //       we have both for escape key browser compability
 			'keydown':  jQuery.proxy( this._onKeyDown, this ),
 			'focus':    jQuery.proxy( this._onFocus, this ),
 			'blur':     jQuery.proxy( this._onBlur, this )
@@ -150,19 +153,46 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	_expand: function() {
 		if ( this.autoExpand ) {
 			var ruler = this._subject.find( '.ruler' );
-			//console.log( '"'+ this._inputElem.attr( 'value' ).replace(/ /g, '&nbsp;') + '"');
-			ruler.html( this._inputElem.attr( 'value' ).replace(/ /g, '&nbsp;') );
-			var inputWidth = parseInt( this._inputElem.width() );
+			//console.log( '"'+ this._inputElem.attr( 'value' ).replace( / /g, '&nbsp;') + '"' );
 
-			//if ( this._inputElem.width() > $('#content').width() ) {
-			//	this._inputElem.css( 'width', $('#content').width() + 'px' );
-			//}
+			var currentValue = this._inputElem.val();
+			if ( currentValue == '' ) {
+				currentValue = this._inputElem.attr( 'placeholder' );
+			}
+			ruler.html( currentValue.replace( / /g, '&nbsp;' ).replace( /</g, '&lt;' ) ); // TODO prevent insane HTML from being placed in the ruler
+			var inputWidth = this._inputElem.width();
 
-			this._inputElem.css( 'width', ( parseInt( ruler.width() ) + 25 ) + 'px' ); // TODO better resize mechanism (maybe by temporarily replacing text input)
+			// get max width
+			var maxWidth = this._subject.parent().width();
+
+			// get new current width
+			this._subject.parent().css( 'display', 'inline-block' );
+			var currentWidth = this._subject.parent().width();
+			this._subject.parent().css( 'display', 'block' );
+
+			//console.log(maxWidth);
+			//console.log(currentWidth);
+			//console.log(this._inputElem.width());
+			/*
+			if ( currentWidth > maxWidth && !(ruler.width() < maxWidth) ) {
+				this._inputElem.css( 'width', maxWidth - 1 );
+			} else {
+				this._inputElem.css( 'width', ( ruler.width() + 25 ) + 'px' );
+			}*/
+
+			// TODO use additional parent element to measer width of (input + toolbar)
+			if ( this._inputElem.width() > this._subject.parent().width() - 250 && !(ruler.width() < this._subject.parent().width() - 250) ) {
+				this._inputElem.css( 'width', this._subject.parent().width() - 249 );
+			} else {
+				this._inputElem.css( 'width', ( ruler.width() + 25 ) + 'px' ); // TODO better resize mechanism (maybe by temporarily replacing text input)
+			}
+
+
 			if ( typeof this._editableValue._toolbar._items[0].tooltip._tipsy.$tip != 'undefined' ) {
 				var tooltipLeft = parseInt( this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left' ) );
-				this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left', ( tooltipLeft + parseInt( this._inputElem.width() ) - inputWidth ) + 'px' );
+				this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left', ( tooltipLeft + this._inputElem.width() - inputWidth ) + 'px' );
 			}
+
 		}
 	},
 
@@ -170,6 +200,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
+		this._onInputRegistered(); // TODO: do not fire this if input hasn't changed
+		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
+			return false; // cancel
+		}
+	},
+
+	_onKeyUp: function( event ) {
 		this._onInputRegistered(); // TODO: do not fire this if input hasn't changed
 		this._expand();
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
