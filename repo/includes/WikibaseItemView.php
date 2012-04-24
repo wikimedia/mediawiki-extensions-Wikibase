@@ -61,9 +61,11 @@ class WikibaseItemView extends ContextSource {
 			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
 		} else {
 			$html .= Html::openElement( 'table', array( 'class' => 'wb-languagelinks', 'cellspacing' => '0' ) );
+			$html .= Html::openElement( 'thead' );
 			$html .= Html::openElement( 'tr' );
 			$html .= Html::element( 'th', array( 'colspan' => '2' ), wfMessage( 'wikibase-languagelinks' ) );
 			$html .= Html::closeElement( 'tr' );
+			$html .= Html::closeElement( 'thead' );
 
 			$i = 0;
 			foreach( $siteLinks as $siteId => $title ) {

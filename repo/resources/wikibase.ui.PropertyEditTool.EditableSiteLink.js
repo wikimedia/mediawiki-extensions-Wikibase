@@ -71,6 +71,17 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return inputElement;
 	},
 
+	stopEditing: function( save ) {
+		window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
+		var container = $( this._subject.children()[1] );
+		var title = container.text();
+		var siteId = this._subject.attr('class').match(/wb-language-links-\w+/)[0].split('-').pop();
+		container.html( $( '<a/>', {
+			href: 'http://' + siteId + '.wikipedia.org/wiki/' + title, // TODO store link references in config
+			text: title
+		} ) );
+	},
+
 	/**
 	 * validate current input
 	 * @param String current input value
