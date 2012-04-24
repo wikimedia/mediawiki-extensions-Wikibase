@@ -115,7 +115,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_buildInterfaces: function( subject ) {
 		var interfaces = new Array();
-		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.Interface( subject ) );
+		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.Interface( subject, this ) );
 		return interfaces;
 	},
 	

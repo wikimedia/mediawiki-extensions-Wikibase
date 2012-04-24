@@ -18,8 +18,8 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.call( this, subject );
+window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface = function( subject, editableValue ) {
+	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.prototype, {

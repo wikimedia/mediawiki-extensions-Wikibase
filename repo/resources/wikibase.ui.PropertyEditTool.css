@@ -46,7 +46,10 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 	h1.firstHeading input {
 		font-family:inherit;
 		font-size:inherit;
-		/*border:none;*/
+		border:none;
+		border-bottom:1px solid black;
+		outline: none;
+
 	}
 
 .wb-property-container {
@@ -108,3 +111,9 @@ table.wb-languagelinks {
 	table.wb-languagelinks .even td {
 		background:#ececec;
 	}
+
+.ruler {
+	display:none;
+	font-family:inherit;
+	font-size:inherit;
+}

@@ -44,11 +44,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		var tableCells = subject.children( 'td' );
 		
 		// interface for choosing the source site:
-		interfaces.siteId = new wikibase.ui.PropertyEditTool.EditableValue.Interface( tableCells[0] );
+		interfaces.siteId = new wikibase.ui.PropertyEditTool.EditableValue.Interface( tableCells[0], this );
 		interfaces.push( interfaces.siteId );
 		
 		// interface for choosing a page (from the source site):
-		interfaces.pageName = new wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface( tableCells[1] );
+		interfaces.pageName = new wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface( tableCells[1], this );
 		interfaces.push( interfaces.pageName );
 		
 		return interfaces;
