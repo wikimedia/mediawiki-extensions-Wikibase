@@ -63,6 +63,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 					this._onInputRegistered();
 				}, this )
 			} );
+		} else if ( this._resultSet !== null ) {
+			inputElement.autocomplete( {
+				source: this._currentResults,
+				close: $.proxy( function( event, ui ) {
+					this._onInputRegistered();
+				}, this )
+			} );
 		}
 		return inputElement;
 	},
@@ -75,6 +82,22 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	setAjax: function( url, ajaxParams ) {
 		this._url = url;
 		this._ajaxParams = ajaxParams;
+	},
+
+	/**
+	 * update url for AJAX auto-completion requests
+	 * @param url
+	 */
+	setUrl: function( url ) {
+		this._url = url;
+	},
+
+	/**
+	 * set set of results that may be chosen from
+	 * @param Array resultSet
+	 */
+	setResultSet: function( resultSet ) {
+		this._currentResults = resultSet;
 	},
 
 	/**

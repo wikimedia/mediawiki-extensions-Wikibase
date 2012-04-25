@@ -72,7 +72,7 @@ window.wikibase.Client.prototype = {
 			'link': url,
 			'text': siteTitle
 		} );
-	}
+	},
 	
 	/**
 	 * Does the encoding for a site so it can be used within the url to the site.

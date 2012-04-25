@@ -231,7 +231,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	_onKeyUp: function( event ) {
 		this._onInputRegistered(); // TODO: do not fire this if input hasn't changed
 		this._expand();
-		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
+		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
@@ -452,6 +452,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	onInputRegistered: null,
 	
 	onKeyPressed: null,
+
+	onKeyUp: null,
 
 	onKeyDown: null,
 	
