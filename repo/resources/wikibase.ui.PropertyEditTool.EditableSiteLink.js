@@ -48,19 +48,19 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );
 		interfaces.push( interfaces.siteId );
 		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
-		
+
 		// interface for choosing a page (from the source site):
-		var siteId = 'en'; // TODO get site id from config or from site input when adding
-		if ( this._subject.attr('class').match(/wb-language-links-link-\w+/) !== null ) {
-			siteId = this._subject.attr('class').match(/wb-language-links-\w+/)[0].split('-').pop();
-		}
-		var apiLink = 'http://' + siteId + '.wikipedia.org/w/api.php'; // TODO store site ids and api references in config and acquire by site id
 		interfaces.pageName = new ev.WikiPageInterface( tableCells[1], this );
-		interfaces.pageName.setAjax( apiLink, {
+		interfaces.pageName.ajaxParams = {
 			action: 'opensearch',
 			namespace: 0,
 			suggest: ''
-		} );
+		};
+		// url can only be set when site id is known (when adding a site link, url will be passed on that event)
+		if ( this._subject.attr('class').match(/wb-language-links-\w+/) !== null ) {
+			var siteId = this._subject.attr('class').match(/wb-language-links-\w+/)[0].split('-').pop();
+			interfaces.pageName.url = wikibase.getClient( siteId ).getApi();
+		}
 		interfaces.push( interfaces.pageName );
 
 		return interfaces;

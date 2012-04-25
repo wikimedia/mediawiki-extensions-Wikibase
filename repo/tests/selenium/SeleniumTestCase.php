@@ -63,7 +63,6 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 				);
 
 		$result = $this->doCurlApiCall( $params );
-//		var_dump($result);
 		$this->assertTrue( isset($result["item"]["id"] ));
 		$itemId = $result["item"]["id"];
 		
