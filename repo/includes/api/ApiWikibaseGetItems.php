@@ -37,12 +37,12 @@ class ApiWikibaseGetItems extends ApiBase {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {
 				foreach ($params['titles'] as $title) {
-					$params['ids'] = WikibaseItem::getIdForSiteLink( $params['sites'], $title );
+					$params['ids'][] = WikibaseItem::getIdForSiteLink( $params['sites'], $title );
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				foreach ($params['sites'] as $site) {
-					$params['ids'] = WikibaseItem::getIdForSiteLink( $sites, $params['titles'] );
+					$params['ids'][] = WikibaseItem::getIdForSiteLink( $sites, $params['titles'] );
 				}
 			}
 			else {
@@ -63,7 +63,7 @@ class ApiWikibaseGetItems extends ApiBase {
 		);
 		
 		foreach ($params['ids'] as $id) {
-			WikibaseItem::getWikiPageForId( $id );
+			$page = WikibaseItem::getWikiPageForId( $id );
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				$item = $page->getContent();
@@ -140,17 +140,17 @@ class ApiWikibaseGetItems extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitem&ids=42'
+			'api.php?action=wbgetitems&ids=42'
 			=> 'Get item number 42 with default (user?) language',
-			'api.php?action=wbgetitem&ids=42&language=en'
+			'api.php?action=wbgetitems&ids=42&language=en'
 			=> 'Get item number 42 with english language',
-			'api.php?action=wbgetitem&sites=en&titles=Berlin&language=en'
+			'api.php?action=wbgetitems&sites=en&titles=Berlin&language=en'
 			=> 'Get the item associated to page Berlin on the site identified by "en"',
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetitem';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetitems';
 	}
 
 	public function getVersion() {

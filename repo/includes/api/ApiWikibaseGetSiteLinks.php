@@ -26,8 +26,9 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title '] ) ) ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+			$msg = 'id-xor-wikititle ' . $params['site'] . ' ' . $params['title '];
+			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), $msg);
 		}
 
 		$success = false;
@@ -109,9 +110,9 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitem&id=42'
+			'api.php?action=wbgetsitelinks&id=42'
 			=> 'Get item number 42',
-			'api.php?action=wbgetitem&site=en&title=Berlin'
+			'api.php?action=wbgesitelinks&site=en&title=Berlin'
 			=> 'Get the item associated to page Berlin on the site identified by "en"',
 		);
 	}

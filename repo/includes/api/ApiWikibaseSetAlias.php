@@ -24,7 +24,7 @@ class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
-		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+		if ( !isset( $params['site'] ) && !isset( $params['title'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-alias-incomplete' ), 'alias-incomplete' );
 		}
 
@@ -93,17 +93,17 @@ class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbalias&id=42&language=en&label=Wikimedia'
+			'api.php?action=wbsetalias&id=42&language=en&label=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbalias&id=42&language=en&label=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
+			'api.php?action=wbsetalias&id=42&language=en&label=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
 			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
-			'api.php?action=wbalias&id=42&language=en&label=Wikimedia'
+			'api.php?action=wbsetalias&id=42&language=en&label=Wikimedia'
 			=> 'Set title "Wikimedia" for English page with id "42"',
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbalias';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsetalias';
 	}
 
 

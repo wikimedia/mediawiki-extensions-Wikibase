@@ -53,17 +53,13 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 		$success = false;
 
-		if (!$params['create']) {
-			$this->validateParameters( $params );
-		}
+		$this->validateParameters( $params );
 		
 		if ( !isset( $params['id'] ) ) { // create is for development
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
-			if (!$params['create']) {
 			if ( $params['id'] === false && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
-			}
 			}
 		}
 
@@ -71,24 +67,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
 
-		if ( !isset( $params['id']) && $params['create'] ) {
-			// now we should never be here
-			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
-			$item = WikibaseItem::newEmpty();
-			$success = $item->save();
-
-			if ( $success ) {
-				$page = $item->getWikiPage();
-
-				if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-					$item->addSiteLink( $params['site'], $params['title'] );
-				}
-			}
-			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
-			}
-		}
-		elseif ( isset( $params['id'] ) && $params['id'] !== false ) {
+		if ( isset( $params['id'] ) && $params['id'] !== false ) {
 			$page = WikibaseItem::getWikiPageForId( $params['id'] );
 
 			if ( $page->exists() ) {
@@ -99,13 +78,26 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			}
 		}
 		else {
-			$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+			// now we should never be here
+			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
+			$item = WikibaseItem::newEmpty();
+			$success = $item->save();
+
+			if ( $success ) {
+				if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+					$item->addSiteLink( $params['site'], $params['title'] );
+				}
+			}
+			else {
+				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed-1' );
+			}
 		}
 
 		if ( $item->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			$success = $this->modifyItem( $item, $params );
 
 			if ( $success ) {
+				$page = $item->getWikiPage();
 				$status = $page->doEditContent(
 					$item,
 					$params['summary'],
