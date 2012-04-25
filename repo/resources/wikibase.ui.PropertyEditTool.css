@@ -124,11 +124,6 @@ table.wb-sitelinks {
 	font-size:inherit;
 }
 
-.wb-ui-propertyedittoolbar-editablevalueinterface-validsiteid {
-	color: green;
-	font-weight: bold;
-}
-
-.wb-ui-propertyedittoolbar-editablevalueinterface-invalidsiteid {
-	color: red;
+.wb-ui-propertyedittoolbar-editablevalueinterface-disabled input {
+	background-color: #eee;
 }
