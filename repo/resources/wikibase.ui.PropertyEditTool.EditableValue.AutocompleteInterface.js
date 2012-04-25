@@ -100,3 +100,4 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	ajaxParams: null
 
 } );
+
