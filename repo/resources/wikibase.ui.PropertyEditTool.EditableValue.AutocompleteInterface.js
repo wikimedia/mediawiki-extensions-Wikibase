@@ -23,18 +23,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototyp
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype, {
 
 	/**
-	 * url the AJAX request will point to
-	 * @var String
-	 */
-	_url: null,
-
-	/**
-	 * additional params for the AJAX request
-	 * @var Object
-	 */
-	_ajaxParams: null,
-
-	/**
 	 * current result set of strings used for validation
 	 * @var Array
 	 */
@@ -42,7 +30,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 
 	_init: function( subject, editableValue ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject, editableValue );
-		this._ajaxParams = {};
 	},
 
 	_buildInputElement: function() {
@@ -50,10 +37,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		var inputElement = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
 
 		// extend input element with autocomplete:
-		if ( this._url !== null ) {
+		if ( this.ajaxParams !== null ) {
 			inputElement.autocomplete( {
 				source: $.proxy( function( request, suggest ) {
-					$.getJSON( this._url + '?callback=?', $.extend( {}, this._ajaxParams, { 'search': request.term } ), $.proxy( function( data ) {
+					$.getJSON( this.url + '?callback=?', $.extend( {}, this.ajaxParams, { 'search': request.term } ), $.proxy( function( data ) {
 						this._currentResults = data[1];
 						suggest( data[1] ); // pass array of returned values to callback
 						this._onInputRegistered();
@@ -72,24 +59,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 			} );
 		}
 		return inputElement;
-	},
-
-	/**
-	 * set and enable using AJAX for auto-completion
-	 * @param String url
-	 * @param Object ajaxParams
-	 */
-	setAjax: function( url, ajaxParams ) {
-		this._url = url;
-		this._ajaxParams = ajaxParams;
-	},
-
-	/**
-	 * update url for AJAX auto-completion requests
-	 * @param url
-	 */
-	setUrl: function( url ) {
-		this._url = url;
 	},
 
 	/**
@@ -115,5 +84,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 			}
 		}
 		return false;
-	}
+	},
+
+
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
+	/**
+	 * url the AJAX request will point to
+	 * @var String
+	 */
+	url: null,
+
+	/**
+	 * additional params for the AJAX request
+	 * @var Object
+	 */
+	ajaxParams: null
+
 } );
