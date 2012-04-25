@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
 "use strict";
 
@@ -18,50 +19,50 @@
  * @param jQuery subject
  */
 window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface = function( subject, editableValue ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
+	window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.apply( this, arguments );
 };
-window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
+window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 	
 	_resolvedSiteName: null,
 	
 	_initInputElement: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement.call( this );
+		var arrayClients = [];
+
+		this.onKeyDown = function( event ) {
+			// when hitting tab, select the first element of the current result set an jump into title input box
+			if ( event.keyCode == 9 ) {
+				var widget = this._inputElem.autocomplete( 'widget' );
+				widget.data( 'menu' ).activate( event, widget.children().filter(':first') );
+				widget.data( 'menu' ).select( event );
+			}
+		}
+
+		for ( var siteId in mw.config.get('wbSiteDetails') ) {
+			arrayClients.push(  mw.config.get( 'wbSiteDetails' )[ siteId ].shortName + ' (' + siteId + ')' );
+		}
+		this.setResultSet( arrayClients );
+
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 		
 		this._resolvedSiteName = $( '<span/>', {
 			'class': this.UI_CLASS + '-siteid'
-		} )
+		} );
 		this._inputElem.after( this._resolvedSiteName );
 	},
 	
 	_onInputRegistered: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._onInputRegistered.call( this );
-		var text, clsToAdd, clsToRemove;
-		
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._onInputRegistered.call( this );
+		var siteId = this._getSiteIdFromValue();
 		var isValid = this.validate( this.getValue() );
-		if( isValid ) {
-			text = "Deutschland"; // TODO use global variable with site links here
-			clsToAdd = '-validsiteid';
-			clsToRemove = '-invalidsiteid';
-		} else {
-			text = '???';
-			clsToAdd = '-invalidsiteid';
-			clsToRemove = '-validsiteid';
+		if ( isValid ) {
+			this._editableValue._interfaces[1].setUrl( wikibase.getClient( this._getSiteIdFromValue() ).getApi() );
 		}
 		this._editableValue._interfaces.pageName.setDisabled( !isValid );
-		this._resolvedSiteName.text( text );		
-		this._resolvedSiteName.addClass( this.UI_CLASS + clsToAdd );
-		this._resolvedSiteName.removeClass( this.UI_CLASS + clsToRemove );
 	},
-	
-	/**
-	 * Returns true if the value is a vaid site id
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface
-	 * 
-	 * @param string text
-	 * @return bool
-	 */
-	validate: function( value ) {
-		return $.trim( value ) === 'de' // TODO use global variable with site links here!
+
+	_getSiteIdFromValue: function() {
+		return this.getValue().replace( /[^(]+\(([^()]+)\)/, '$1' );
 	}
+
 } );
