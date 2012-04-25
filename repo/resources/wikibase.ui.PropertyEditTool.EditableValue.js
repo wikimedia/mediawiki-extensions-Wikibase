@@ -374,7 +374,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	validate: function( value ) {
 		for( var i in value ) {
-			if( ! this._interfaces[ i ].validate( value[ i ] ) ) {
+			var iInterface = this._interfaces[ i ];
+			// don't validate if it isn't active since it should be valid anyhow
+			// TODO re-evaluate better implementation
+			if( iInterface.isActive() && ! iInterface.validate( value[ i ] ) ) {
 				return false;
 			}
 		}
