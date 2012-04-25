@@ -118,6 +118,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	
 	/**
 	 * Takes care of initialization of a single value
+	 * 
 	 * @param jQuery valueElem
 	 * @return wikibase.ui.PropertyEditTool.EditableValue the initialized value
 	 */
@@ -138,6 +139,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	
 	/**
 	 * Builds the toolbar for a single editable value
+	 * 
 	 * @return wikibase.ui.PropertyEditTool.Toolbar
 	 */
 	_buildSingleValueToolbar: function( editableValue ) {
@@ -157,6 +159,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Returns the nodes representing the properties values. This can also return an array of jQuery
 	 * objects if the value is represented by several nodes not sharing a mutual parent.
+	 * 
 	 * @return jQuery|jQuery[]
 	 */
 	_getValueElems: function() {
@@ -178,10 +181,14 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		newValueElem.addClass( 'wb-pending-value' );
 		
 		this._subject.append( newValueElem );
-		var newValue = this._initSingleValue( newValueElem );
+		var newValue = this._initSingleValue( newValueElem );		
+				
+		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
-		//newValue._toolbar.editGroup.btnEdit.doAction();
-		//newValue.startEditing();
+		newValue.onStopEditing = $.proxy( function() {
+			this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
+		}, this );		
+		
 		newValue.setFocus();
 	},
 	
@@ -208,6 +215,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 
 	/**
 	 * defines which editable value should be used for this.
+	 * 
 	 * @return Object
 	 */
 	getEditableValuePrototype: function() {

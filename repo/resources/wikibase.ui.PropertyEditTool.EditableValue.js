@@ -127,14 +127,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_configSingleInterface: function( singleInterface ) {
 		var self = this;		
-		singleInterface.onFocus = function(){ self._interfaceHandler_onFocus() };
-		singleInterface.onBlur = function(){ self._interfaceHandler_onBlur() };
+		singleInterface.onFocus = function(){self._interfaceHandler_onFocus()};
+		singleInterface.onBlur = function(){self._interfaceHandler_onBlur()};
 		singleInterface.onKeyPressed =
-			function( event ) { self._interfaceHandler_onKeyPressed( event ) };
+			function( event ) {self._interfaceHandler_onKeyPressed( event )};
 		singleInterface.onKeyUp = // ESC key does not react onKeyPressed but on onKeyUp
-			function( event ) { self._interfaceHandler_onKeyPressed( event ) };
+			function( event ) {self._interfaceHandler_onKeyPressed( event )};
 		singleInterface.onInputRegistered =
-				function( event ){ self._interfaceHandler_onInputRegistered( event ) };
+				function( event ){self._interfaceHandler_onInputRegistered( event )};
 	},
 	
 	/**
@@ -194,10 +194,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( ! this.isInEditMode() ) {
 			return false;
 		}
+		if( this.onStopEditing( save ) === false ) { // callback
+			return false; // cancel
+		}
 		if( !save && this.isPending() ) {
 			// not yet existing value, no state to go back to
 			this.remove();
 			return false;
+			// do not call afterStopEditing() here!
 		}
 		
 		var changed = false;
@@ -209,10 +213,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// out of edit mode after interfaces are converted back to HTML:
 		this._isInEditMode = false;
 		
+		var wasPending = this.isPending();
 		if( save ) {
 			this.doApiCall( false );
 			this._pending = false; // might have to move this to API call error/success handling
 			this._subject.removeClass( 'wb-pending-value' );
+		}
+		
+		if( this.afterStopEditing( save, changed, wasPending ) === false ) { // callback
+			return false; // cancel
 		}
 		
 		// any change at all compared to initial value?
@@ -404,7 +413,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 					return false;
 				}
 			}
-			
 			return true;
 		}
 		
@@ -448,5 +456,32 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 	_interfaceHandler_onBlur: function( event ) {
 		this._toolbar.editGroup.tooltip.hide();
-	}
+	},
+	
+	///////////
+	// EVENTS:
+	///////////
+	
+	/**
+	 * Callback called when the edit process is going to be ended. If the callback returns false, the
+	 * process will be cancelled.
+	 *
+	 * @param bool save whether the result should be saved. If false, the editing will be cancelled
+	 *        without saving.
+	 * @return bool whether to go on with the stop editing.
+	 */
+	onStopEditing: function( save ) {return true},
+	
+	/**
+	 * Callback called after the editing process is finished. At this point the element is not in
+	 * edit mode anymore.
+	 * This will not be called in case the element was just created, still pending, and the editing
+	 * process was cancelled.
+	 * 
+	 * @param bool save whether the result will be saved. If true, the result is sent to the API
+	 *        already and the internal value is changed to the new value.
+	 * @param bool changed whether the value was changed during the editing process.
+	 * @param bool wasPending whether the element was pending before the edit.
+	 */
+	afterStopEditing: function( save, changed, wasPending ) {return true}
 };

@@ -448,6 +448,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Callback called when the input changes in general for example on its initialization when
 	 * setting its initial value.
+	 * @var Function|null
 	 */
 	onInputRegistered: null,
 	
