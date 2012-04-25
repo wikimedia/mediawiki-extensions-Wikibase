@@ -1,5 +1,5 @@
 /**
- * JavasSript for a part of an editable property value
+ * JavasSript for a part of an editable property value offering auto complete functionality
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
@@ -12,7 +12,7 @@
 "use strict";
 
 /**
- * Serves an autocomplete supported input interface
+ * Serves an autocomplete supported input interface as part of an EditableValue
  *
  * @param jQuery subject
  */
@@ -88,13 +88,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	/////////////////
 
 	/**
-	 * url the AJAX request will point to
+	 * url the AJAX request will point to (if ajax should be used to define a result set)
 	 * @var String
 	 */
 	url: null,
 
 	/**
-	 * additional params for the AJAX request
+	 * additional params for the AJAX request (if ajax should be used to define a result set)
 	 * @var Object
 	 */
 	ajaxParams: null
