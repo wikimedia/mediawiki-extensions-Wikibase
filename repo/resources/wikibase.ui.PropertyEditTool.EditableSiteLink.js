@@ -45,8 +45,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
 		
 		// interface for choosing the source site:
-		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );
-		interfaces.push( interfaces.siteId );
+		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );		
 		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
 		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
 
@@ -61,29 +60,45 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			suggest: ''
 		};
 		
-		// url can only be set when site id is known (when adding a site link, url will be passed on that event)
-		if ( this._subject.attr('class').match(/wb-sitelinks-[\w-]+/) !== null ) {
-			var siteId = this._subject.attr('class').match(/wb-sitelinks-[\w-]+/)[0].split('-').pop();
-			if( wikibase.hasClient( siteId ) ) {
-				interfaces.pageName.url = wikibase.getClient( siteId ).getApi();
-			}
-		}
+		interfaces.push( interfaces.siteId );
 		interfaces.push( interfaces.pageName );
-
 		return interfaces;
 	},
 	
 	_interfaceHandler_onInputRegistered: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this );
 		
+		var idInterface = this._interfaces.siteId;
+		var pageInterface = this._interfaces.pageName;
+		
 		// set up necessary communication between both interfaces:
-		var client = this._interfaces.siteId.getSelectedClient();
-		if( client !== this._interfaces.pageName.getClient() && client !== null ) {
-			// FIXME: this has to be done on this._interfaces.siteId.onInputRegistered only but that
+		var client = idInterface.getSelectedClient();
+		if( client !== pageInterface.getClient() && client !== null ) {
+			// FIXME: this has to be done on idInterface.onInputRegistered only but that
 			//        is not really possible with the current 'event' system since this function is
 			//        registered there.
-			this._interfaces.pageName.setClient( client );
+			pageInterface.setClient( client );
+			
+			// change class names:
+			// FIXME: removing all class names is a bit extreme here! Removes pending and even/uneven
+			//        classes!
+			var siteId = idInterface.getSelectedSiteId();
+
+			this._subject
+			.removeClass() // remove all classes
+			.addClass( 'wb-sitelinks-' + siteId );
+
+			idInterface._getValueContainer()
+			.removeClass() // remove all classes
+			.addClass( 'wb-sitelinks-site-' + siteId );
+
+			pageInterface._getValueContainer()
+			.removeClass() // remove all classes
+			.addClass( 'wb-sitelinks-link-' + siteId );
 		}
+		
+		// only enable client page selector if there is a valid client id selected
+		pageInterface.setDisabled( ! idInterface.isValid() );
 	},
 
 	_getToolbarParent: function() {

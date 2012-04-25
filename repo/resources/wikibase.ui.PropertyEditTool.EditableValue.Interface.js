@@ -414,7 +414,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	isEmpty: function() {
 		return this.getValue() === '';
 	},
-
+	
+	/**
+	 * Returns whether the current value is valid
+	 */
+	isValid: function() {
+		return this.validate( this.getValue );
+	},
+	
 	/**
 	 * Velidates whether a certain value would be valid for this editable value.
 	 *

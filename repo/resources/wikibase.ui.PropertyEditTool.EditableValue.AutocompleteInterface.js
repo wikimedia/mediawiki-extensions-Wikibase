@@ -30,6 +30,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 
 	_init: function( subject, editableValue ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject, editableValue );
+		this._currentResults = new Array();
 	},
 
 	_buildInputElement: function() {
@@ -77,9 +78,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @param String value
 	 */
 	validate: function( value ) {
-		if ( this._currentResults === null ) {
-			return false;
+		for( var i in this._currentResults ) {
+			if( $.trim( this._currentResults[i] ) === $.trim( value ) ) {
+				return true;
+			}
 		}
+		return false
 	},
 
 

@@ -49,21 +49,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.
 	getClient: function( client ) {
 		return this._client;		
 	},
-	
-	/*
-	stopEditing: function( save ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.stopEditing.call( this, save );
-
-		var title = this._subject.text();
-		if ( this._subject.attr('class').match(/wb-sitelinks-link-[\w-]+/) !== null ) {
-			var siteId = this._subject.attr('class').replace(/wb-sitelinks-link-([\w-]+)/, '$1');
-			this._subject.html( $( '<a/>', {
-				href: 'http://' + siteId + '.wikipedia.org/wiki/' + title, // TODO store link references in config
-				text: title
-			} ) );
-		}
-	},
-	*/
 
 	/**
 	 * validate input

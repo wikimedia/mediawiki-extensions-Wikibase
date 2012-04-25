@@ -48,19 +48,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 	},
-	
-	_onInputRegistered: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._onInputRegistered.call( this );
-		var siteId = this.getSelectedSiteId();
-		var isValid = this.validate( this.getValue() );
-		/*
-		if ( isValid && wikibase.hasClient( siteId ) ) {
-			this._editableValue._interfaces.pageName.url = wikibase.getClient( siteId ).getApi();
-		}
-		*/
-		this._editableValue._interfaces.pageName.setDisabled( !isValid );
-	},
-
 
 	/**
 	 * Returns the selected client site Id
@@ -69,6 +56,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 */
 	getSelectedSiteId: function() {
 		var value = this.getValue();
+		if( ! this.isInEditMode() ) {
+			return this._getSiteIdFromString( value );
+		}		
 		for( var i in this._currentResults ) {
 			if(
 				   value == this._currentResults[i].client.getId()
@@ -102,6 +92,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		// check whether current input is in the list of values returned by the wikis API
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
 		return ( this.getSelectedSiteId() === null ) ? false : true;
+	},
+	
+	_getSiteIdFromString: function( text ) {
+		return text.replace( /^.+\(\s*(.+)\s*\)\s*/, '$1' );
 	}
 
 } );
