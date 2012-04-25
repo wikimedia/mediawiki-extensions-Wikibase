@@ -58,12 +58,12 @@ class WikibaseItemView extends ContextSource {
 		
 		if( empty( $siteLinks ) ) {
 			// no site links available for this item
-			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-languagelinks-empty' ) );
+			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-sitelinks-empty' ) );
 		} else {
-			$html .= Html::openElement( 'table', array( 'class' => 'wb-languagelinks', 'cellspacing' => '0' ) );
+			$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks', 'cellspacing' => '0' ) );
 			$html .= Html::openElement( 'thead' );
 			$html .= Html::openElement( 'tr' );
-			$html .= Html::element( 'th', array( 'colspan' => '2' ), wfMessage( 'wikibase-languagelinks' ) );
+			$html .= Html::element( 'th', array( 'colspan' => '2' ), wfMessage( 'wikibase-sitelinks' ) );
 			$html .= Html::closeElement( 'tr' );
 			$html .= Html::closeElement( 'thead' );
 
@@ -71,10 +71,14 @@ class WikibaseItemView extends ContextSource {
 			foreach( $siteLinks as $siteId => $title ) {
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 				$html .= Html::openElement( 'tr', array(
-					'class' => 'wb-language-links-' . $siteId . ' ' . $alternatingClass )
+					'class' => 'wb-sitelinks-' . $siteId . ' ' . $alternatingClass )
 				);
-				$html .= Html::element( 'td', array( 'class' => 'wb-languagelinks-site-' . $siteId ), $siteId );
-				$html .= Html::openElement( 'td', array( 'class' => 'wb-languagelinks-link-' . $siteId ) );
+				$html .= Html::element(
+						'td', array( 'class' => 'wb-sitelinks-site-' . $siteId ),
+						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
+						Language::fetchLanguageName( $siteId ) . ' (' . $siteId . ')'
+				);
+				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link-' . $siteId ) );
 				$html .= Html::element(
 					'a',
 					array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),

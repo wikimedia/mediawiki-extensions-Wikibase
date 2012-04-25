@@ -85,30 +85,30 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 	width:11px;
 }
 
-table.wb-languagelinks {
+table.wb-sitelinks {
 	/*border:1px solid #5dc9f4;*/
 	margin-top:2em;
 }
-	table.wb-languagelinks th, table.wb-languagelinks td {
+	table.wb-sitelinks th, table.wb-sitelinks td {
 		border-bottom: 1px solid #ccc;
 		margin: 0;
 		padding: 0.2em 0.4em;
 	}
-	table.wb-languagelinks th {
+	table.wb-sitelinks th {
 		/*background-color:#D6F3FF;*/
 		text-align:left;
 		font-size:1.25em;
 		font-weight:normal;
 		padding-bottom:8px;
 	}
-	table.wb-languagelinks tr:hover td {
+	table.wb-sitelinks tr:hover td {
 		/*background-color:#5dc9f4;*/
 		background-color:#D6F3FF;
 	}
-	table.wb-languagelinks .uneven td {
+	table.wb-sitelinks .uneven td {
 		background:#F9F9F9;
 	}
-	table.wb-languagelinks .even td {
+	table.wb-sitelinks .even td {
 		background:#ececec;
 	}
 
