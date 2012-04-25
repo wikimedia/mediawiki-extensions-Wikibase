@@ -86,6 +86,10 @@ class ApiWikibaseSetItem extends ApiBase {
 		return !WBSettings::get( 'apiInDebug' );
 	}
 
+	public function isWriteMode() {
+		return true;
+	}
+	
 	public function getAllowedParams() {
 		return array(
 			'data' => array(
