@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+"use strict";
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.

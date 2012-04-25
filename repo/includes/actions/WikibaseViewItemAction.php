@@ -53,6 +53,36 @@ class WikibaseViewItemAction extends FormlessAction {
 			// hand over the itemId to JS
 			$out->addJsConfigVars( 'wbItemId', $content->getId() );
 			$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLangCode ) );
+			
+			// TODO get this from the configuration after its implemented:
+			$dummySiteDetails = array(
+				'en' => array(
+					'shortName' => 'English',
+					'name' => 'English Wikipedia',
+					'pageUrl' => 'http://en.wikipedia.org/wiki/$1',
+					'apiUrl' => 'http://en.wikipedia.org/w/api.php' // NOTE: we might better have an internal API module instead of using the site APIs directly
+				),
+				'de' => array(
+					'shortName' => 'German', // name in users language
+					'name' => 'German Wikipedia', // name in users language
+					'pageUrl' => 'http://de.wikipedia.org/wiki/$1',
+					'apiUrl' => 'http://de.wikipedia.org/w/api.php'
+				),
+				'he' => array(
+					'shortName' => 'Hebrew',
+					'name' => 'Hebrew Wikipedia',
+					'pageUrl' => 'http://he.wikipedia.org/wiki/$1',
+					'apiUrl' => 'http://he.wikipedia.org/w/api.php'
+				),
+				'ja' => array(
+					'shortName' => 'Japanese',
+					'name' => 'Japanese Wikipedia',
+					'pageUrl' => 'http://ja.wikipedia.org/wiki/$1',
+					'apiUrl' => 'http://ja.wikipedia.org/w/api.php'
+				)
+			);
+			
+			$out->addJsConfigVars( 'wbSiteDetails', $dummySiteDetails );
 		}
 
 		return '';

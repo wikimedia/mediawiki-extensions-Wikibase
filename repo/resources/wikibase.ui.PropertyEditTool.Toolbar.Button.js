@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+"use strict";
 
 /**
  * Represents a button within a wikibase.ui.PropertyEditTool.Toolbar toolbar
@@ -41,7 +42,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype, {
 	},
 
 	destroy: function() {
-		// TODO
+		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype.destroy.call( this );
+		if ( this._elem != null ) {
+			this._elem.remove();
+		}
 	},
 	
 	/**

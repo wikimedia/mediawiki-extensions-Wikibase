@@ -1,20 +1,32 @@
 /**
  * Style for 'Wikibase' property edit tools
+ *
+ * @since 0.1
+ * @file wikibase.js
+ * @ingroup Wikibase
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater
  */
 
 .wb-ui-propertyedittoolbar, .wb-ui-propertyedittoolbar-group {
-    display: inline;
+	display: inline-block;
 }
 
 .wb-ui-propertyedittoolbar-button {
     padding:0 .15em;
 }
+
 .wb-ui-propertyedittoolbar-button-disabled {
 	color: grey;
 }
 
 .wb-ui-propertyedittoolbar, .wb-property-container-value {
-    margin:0 .3em;
+	margin:0 .3em;
+}
+
+h1 .wb-ui-propertyedittoolbar {
+	margin:0; /* reset margin for currently a white space is automatically inserted right after the heading text */
 }
 
 .firstHeading {
@@ -31,6 +43,14 @@
 h1.firstHeading .wb-ui-propertyedittoolbar {
 	font-size: 0.5em;
 }
+	h1.firstHeading input {
+		font-family:inherit;
+		font-size:inherit;
+		border:none;
+		border-bottom:1px solid black;
+		outline: none;
+
+	}
 
 .wb-property-container {
 	margin-top:.3em;
@@ -50,10 +70,54 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 	display:none;
 }
 
-.tipsy-ne {
+.tipsy-ne, .tipsy-nw {
 	padding-top:12px;
 }
 
-.tipsy-ne .tipsy-arrow {
-	background-image:url(images/tipsy-arrow-n.gif);
+.tipsy-ne .tipsy-arrow, .tipsy-nw .tipsy-arrow {
+	background:url(images/tipsy.png) -13px -1px;
+}
+
+/* TODO find nicer way to hack Webkit browsers to display tooltip image */
+.mw-help-field-hint {
+	text-decoration:none;
+	height:11px;
+	width:11px;
+}
+
+table.wb-sitelinks {
+	/*border:1px solid #5dc9f4;*/
+	margin-top:2em;
+}
+	table.wb-sitelinks th, table.wb-sitelinks td {
+		border-bottom: 1px solid #ccc;
+		margin: 0;
+		padding: 0.2em 0.4em;
+	}
+	table.wb-sitelinks th {
+		/*background-color:#D6F3FF;*/
+		text-align:left;
+		font-size:1.25em;
+		font-weight:normal;
+		padding-bottom:8px;
+	}
+	table.wb-sitelinks tr:hover td {
+		/*background-color:#5dc9f4;*/
+		background-color:#D6F3FF;
+	}
+	table.wb-sitelinks .uneven td {
+		background:#F9F9F9;
+	}
+	table.wb-sitelinks .even td {
+		background:#ececec;
+	}
+
+.ruler {
+	display:none;
+	font-family:inherit;
+	font-size:inherit;
+}
+
+.wb-ui-propertyedittoolbar-editablevalueinterface-disabled input {
+	background-color: #eee;
 }

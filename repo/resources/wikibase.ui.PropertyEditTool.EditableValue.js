@@ -1,5 +1,5 @@
 /**
- * JavasSript for edit commands for 'Wikibase' property edit tool
+ * JavasSript for managing editable representation of property values.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
@@ -9,16 +9,19 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+"use strict";
 
 /**
- * Serves the input interface for a value like a property value and also takes care of the conversion
- * between the pure html representation and the interface itself in both directions
+ * Manages several editable value pieces which act as converters between the pure html input and the
+ * input interface. Also does the API call to store new and modify existing values as well as the
+ * removal of stored values.
  * 
- * @param jQuery parent
+ * @param jQuery subject
+ * @param wikibase.ui.PropertyEditTool.Toolbar toolbar
  */
-window.wikibase.ui.PropertyEditTool.EditableValue = function( subject ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject );
+window.wikibase.ui.PropertyEditTool.EditableValue = function( subject, toolbar ) {
+	if( typeof subject != 'undefined' && typeof toolbar != 'undefined' ) {
+		this._init( subject, toolbar );
 	}
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
@@ -49,178 +52,199 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	
 	/**
 	 * The toolbar controling the editable value
-	 * @var: window.wikibase.ui.PropertyEditTool.Toolbar
+	 * @var window.wikibase.ui.PropertyEditTool.Toolbar
 	 */
 	_toolbar: null,
 	
 	/**
+	 * If this is true, it means that the value has not been stored to the database at all. So if
+	 * in edit mode and pressing cancel, the element will be removed
+	 * @var bool
+	 */
+	_pending: false,
+	
+	/**
+	 * Array holding all the interfaces which are part of the editable value.
+	 * @var wikibase.ui.PropertyEditTool.EditableValue.Interface[]
+	 */
+	_interfaces: null,
+	
+	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
+	 * 
+	 * @param jQuery subject
+	 * @param wikibase.ui.PropertyEditTool.Toolbar toolbar shouldn't be initialized yet
 	 */
-	_init: function( subject ) {
+	_init: function( subject, toolbar ) {
 		if( this._subject !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._initToolbar();
-	},
-	
-	_initToolbar: function() {
-		// TODO: If we want a separate toolbar for the label, we have to append and group the toolbar
-		//       with the actual value perhaps.
-		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar( this._subject.parent() );
+		this._pending = this._subject.hasClass( 'wb-pending-value' );		
 		
-		// give the toolbar a edit group with basic edit commands:
-		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup( this );
-		this._toolbar.addElement( editGroup );
-		this._toolbar.editGroup = editGroup; // remember this
+		this._initInterfaces();
 		
-		if( this.isEmpty() ) {
-			// enable editing from the beginning if there is no value yet!
+		this._toolbar = toolbar;
+		this._toolbar.appendTo( this._getToolbarParent() );
+		
+		if( this.isEmpty() || this.isPending() ) {
+			// enable editing from the beginning if there is no value yet or pending value...
 			this._toolbar.editGroup.btnEdit.doAction();
-			this.removeFocus(); // but don't set focus there for now
+			this.removeFocus(); // ...but don't set focus there for now
 		}
 	},
 	
-	
-	
-	destroy: function() {
-		// TODO implement on demand
+	/**
+	 * initializes the interfaces handled by this editable value.
+	 */
+	_initInterfaces: function() {
+		var interfaces = this._buildInterfaces( this._subject );
+		$.each( interfaces, $.proxy( function( index, elem ) {
+			this._configSingleInterface( elem );
+		}, this ) );
+		this._interfaces = interfaces;
 	},
 	
+	/**
+	 * Function analysing the subject and splitting it into all the input interfaces needed by the
+	 * editable value.
+	 * 
+	 * @return wikibase.ui.PropertyEditTool.EditableValue.Interface[]
+	 */
+	_buildInterfaces: function( subject ) {
+		var interfaces = new Array();
+		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.Interface( subject, this ) );
+		return interfaces;
+	},
+	
+	/**
+	 * Does the initialization for a single editable value interface. Basically this will bind the used
+	 * events and set needed options.
+	 * 
+	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
+	 */
+	_configSingleInterface: function( singleInterface ) {
+		var self = this;		
+		singleInterface.onFocus = function(){ self._interfaceHandler_onFocus() };
+		singleInterface.onBlur = function(){ self._interfaceHandler_onBlur() };
+		singleInterface.onKeyPressed =
+				function( event ){ self._interfaceHandler_onKeyPressed( event ) };
+		singleInterface.onInputRegistered =
+				function( event ){ self._interfaceHandler_onInputRegistered( event ) };
+	},
+	
+	/**
+	 * Returns the node the toolbar should be appended to
+	 */
+	_getToolbarParent: function() {
+		return this._subject.parent();
+	},
+	
+	/**
+	 * Removes the value from the dom as well as from the data store via the API
+	 */
+	remove: function() {
+		// TODO API call
+		this.doApiCall( true );
+		//this.destroy(); // no need to destroy this proberly since we remove anything for real!
+		this._subject.empty().remove();
+	},
+
+	destroy: function() {
+		if( this._toolbar != null) {
+			this._toolbar.destroy();
+		}
+		$.each( this._interfaces, function( index, elem ) {
+			elem.destroy();
+		} );
+	},
+
 	/**
 	 * By calling this, the editable value will be made editable for the user.
 	 * Call stopEditing() to save or cancel the editing process.
 	 * Basically this initializes the input box as sub element of the subject and uses the
 	 * elements content as initial text.
-	 * 
+	 *
 	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
 		if( this.isInEditMode() ) {
-			return false;			
+			return false;
 		}
-
-		var initText = this.getValue();
-		
-		this._inputElem = $( '<input/>', {
-			'class': this.UI_CLASS,
-			'type': 'text',
-			'name': this._key,
-			'value': initText,
-			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._keyPressed, this ), // todo: this shouldn't be used, keyup should work fine!
-			'keyup': jQuery.proxy( this._keyPressed, this ),	// for escape key browser compability
-			'focus': jQuery.proxy( this._onFocus, this ),
-			'blur': jQuery.proxy( this._onBlur, this )
-		} );
-		
-		this._subject.text( '' );
-		this._subject.append( this._inputElem );
-		
-		// store original text value from before input box insertion:
-		this._inputElem.data( this.UI_CLASS + '-initial-value', initText );
-
         this._isInEditMode = true;
 		
-		this._inputRegistered(); // do this after setting _isInEditMode !
-        this.setFocus();
+		$.each( this._interfaces, function( index, elem ) {
+			elem.startEditing();
+		} );
 		
 		return true;
 	},
-	
-	/**
-	 * Called when the input changes in general for example on its initialization when setting
-	 * its initial value.
-	 */
-	_inputRegistered: function() {
-		var disableSave = this.isEmpty() || ( this.getInitialValue() === this.getValue() );
-		var disableCancel = this.isEmpty() || ( ! this.validate( this.getInitialValue() ) );
-		
-		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
-		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
-		//this._toolbar.draw();
-	},
-	
-	/**
-	 * Called when a key is pressed inside the input interface
-	 */
-	_keyPressed: function( event ) {
-		this._inputRegistered();
-		
-		if( event.which == 13 ) {
-			this._toolbar.editGroup.btnSave.doAction();
-		}
-		else if( event.which == 27 ) {
-			this._toolbar.editGroup.btnCancel.doAction();
-		}
-	},
-	
-	_onFocus: function( event ) {
-		this._toolbar.editGroup.tooltip.show( true );
-	},
-	_onBlur: function( event ) {
-		this._toolbar.editGroup.tooltip.hide();
-	},
-	
+
 	/**
 	 * Destroys the edit box and displays the original text or the inputs new value.
-	 * 
+	 *
 	 * @param bool save whether to save the new user given value
 	 * @return bool whether the value has changed compared to the original value
 	 */
 	stopEditing: function( save ) {
 		if( ! this.isInEditMode() ) {
-			return false;			
+			return false;
 		}
-		var initialValue = this.getInitialValue();
+		if( !save && this.isPending() ) {
+			// not yet existing value, no state to go back to
+			this.remove();
+			return false;
+		}
 		
-		var $value = save ? this.getValue() : initialValue;
+		var changed = false;
 		
-		this._inputElem.empty().remove(); // remove input interface
-		this._inputElem = null;
-		this._subject.text( $value );
+		$.each( this._interfaces, function( index, elem ) {
+			changed = elem.stopEditing( save ) || changed;
+		} );
 		
+		// out of edit mode after interfaces are converted back to HTML:
 		this._isInEditMode = false;
 		
-		console.log( this._subject );
-		
 		if( save ) {
-			this.storeValue();
+			this.doApiCall( false );
+			this._pending = false; // might have to move this to API call error/success handling
+			this._subject.removeClass( 'wb-pending-value' );
 		}
 		
 		// any change at all compared to initial value?
-		return initialValue !== $value;
+		return changed;
 	},
-	
+
 	/**
 	 * Sets the focus to the input interface
 	 */
 	setFocus: function() {
-		if( this._inputElem !== null ) {
-			this._inputElem.focus();
+		if( this.isInEditMode() ) {
+			this._interfaces[0].setFocus();
 		}
 	},
-	
+
 	/**
 	 * Removes the focus from the input interface
 	 */
 	removeFocus: function() {
-		if( this._inputElem !== null ) {
-			this._inputElem.blur();
+		if( this.isInEditMode() ) {
+			this._interfaces[0].removeFocus();
 		}
 	},
-	
+
 	/**
-	 * Stores the current value in the database
+	 * Does the actual API call
+	 * @param bool removeValue whether to make the remove or the save call to the API
 	 */
-	storeValue: function() {
-		var apiCall = this.getApiCallParams();
+	doApiCall: function( removeValue ) {
+		var apiCall = this.getApiCallParams( removeValue );
 		
 		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
 			console.log( apiCall );
-
+			
 			var localApi = new mw.Api();
 			localApi.post( apiCall, {
 				ok: jQuery.proxy( this._apiCallOk, this ),
@@ -228,31 +252,31 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			} );
 		}, this ) );
 	},
-	
+
 	/**
-	 * Returns the neccessary parameters for a api call to store the value.
+	 * Returns the neccessary parameters for an api call to store the value.
 	 */
 	getApiCallParams: function() {
 		return {};
 	},
-	
+
 	/**
 	 * handle return of successful API call
 	 */
-	_apiCallOk: function() { 
-		console.log( arguments ); 
+	_apiCallOk: function() {
+		console.log( arguments );
 	},
-	
+
 	/**
 	 * handle error of unsuccessful API call
 	 */
-	_apiCallErr: function() { 
-		console.log( arguments ); 
+	_apiCallErr: function() {
+		console.log( arguments );
 	},
-	
+
 	/**
 	 * Returns whether the input interface is loaded currently
-	 * 
+	 *
 	 * @return bool
 	 */
 	isInEditMode: function() {
@@ -260,60 +284,170 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 	
 	/**
-	 * Returns the current value
+	 * Returns true if the value is in edit mode and not stored in the database yet.
 	 * 
-	 * @return string
+	 * @return bool
 	 */
-	getValue: function() {		
-		var value = '';
-		if( this.isInEditMode() ) {
-			value = $( this._subject.children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
-		} else {
-			value = this._subject.text();
-		}
-		return $.trim( value );
+	isPending: function() {
+		return this._pending;
+	},
+
+	/**
+	 * Returns the current value
+	 * // TODO: should return an object representing the properties value
+	 *
+	 * @return Array
+	 */
+	getValue: function() {
+		var result = [];
+		$.each( this._interfaces, function( index, elem ) {
+			result.push( elem.getValue() );
+		} );
+		return result;
 	},
 	
+	/**
+	 * Sets a value
+	 * // TODO: should take an object representing a properties value
+	 * 
+	 * @param Array|string value
+	 */
+	setValue: function( value ) {
+		if( ! $.isArray( value ) ) {
+			value = [ value ];
+		}
+		$.each( value, function( index, val ) {
+			this._interfaces[ index ].setValue( val );
+		} );
+	},
+
 	/**
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
 	 * If its not in edit mode, the current value will be returned.
-	 * @return string
+	 * 
+	 * @return Array
 	 */
 	getInitialValue: function() {
 		if( ! this.isInEditMode() ) {
-			return this._subject.text();
+			return this.getValue();
 		}
-		return this._inputElem.data( this.UI_CLASS + '-initial-value' );
+		
+		var result = [];
+		
+		$.each( this._interfaces, function( index, elem ) {
+			result.push( elem.getInitialValue() );
+		} );
+		
+		return result;
 	},
-	
+
 	/**
 	 * Returns a short information about how the input should be inserted by the user.
+	 * 
+	 * @return string
 	 */
 	getInputHelpMessage: function() {
-		return 'my message';
+		return '';
 	},
-	
+
 	/**
 	 * Returns true if there is currently no value assigned
 	 *
 	 * @return bool
 	 */
 	isEmpty: function() {
-		return this.getValue() === '';
+		for( var i in this._interfaces ) {
+			if( ! this._interfaces[ i ].isEmpty() ) {
+				return false;
+			}
+		}
+		return true;
 	},
-	
+
 	/**
 	 * Velidates whether a certain value would be valid for this editable value.
-	 * 
-	 * @todo: we might want to move this into a class describing the property/snak later.
-	 * 
-	 * @param string text
+	 *
+	 * @todo: we might want to move this into a prototype describing the property/snak later.
+	 *
+	 * @param Array value
 	 * @return bool
 	 */
 	validate: function( value ) {
-		return $.trim( value ) !== '';
+		for( var i in value ) {
+			var iInterface = this._interfaces[ i ];
+			// don't validate if it isn't active since it should be valid anyhow
+			// TODO re-evaluate better implementation
+			if( iInterface.isActive() && ! iInterface.validate( value[ i ] ) ) {
+				return false;
+			}
+		}
+		return true;
 	},
 	
+	/**
+	 * Helper function to compares two values returned by getValue() or getInitialValue() as long as
+	 * we work with arrays instead of proper objects here.
+	 * 
+	 * @todo: make this deprecated as soon as we use objects representing property values...
+	 * 
+	 * @param Array value1
+	 * @param Array|null value2 if null, this will check whether value1 is empty
+	 * @return bool
+	 */
+	valueCompare: function( value1, value2 ) {
+		if( value2 === null ) {
+			// check for empty value1			
+			for( var i in value1 ) {
+				if( $.trim( value1[ i ] ) !== '' ) {
+					return false;
+				}
+			}
+			
+			return true;
+		}
+		
+		// check for equal arrays with same entries in same order
+		if( value1.length !== value2.length ) {
+			return false;
+		}
+		for( var i in value1 ) {
+			if( $.trim( value1[ i ] ) !== $.trim( value2[ i ] ) ) {
+				return false;
+			}
+		}
+		return true;
+	},
+	
+	_interfaceHandler_onInputRegistered: function() {
+		var value = this.getValue();
+		var isInvalid = !this.validate( value );
+		
+		// can't save if invalid input OR same as before
+		var disableSave = isInvalid || this.valueCompare( this.getInitialValue(), value );
+		
+		// can't cancel if empty before except the edit is pending (then it will be removed)
+		var disableCancel = !this.isPending() && this.valueCompare( this.getInitialValue(), null );
+		
+		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
+		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
+	},
+
+	_interfaceHandler_onKeyPressed: function( event ) {		
+		if( event.which == 13 ) {
+			this._toolbar.editGroup.btnSave.doAction();
+		}
+		else if( event.which == 27 ) {
+			this._toolbar.editGroup.btnCancel.doAction();
+		}
+	},
+
+	_interfaceHandler_onFocus: function( event ) {
+		this._toolbar.editGroup.tooltip.show( true );
+	},
+	_interfaceHandler_onBlur: function( event ) {
+		this._toolbar.editGroup.tooltip.hide();
+	},
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
@@ -324,43 +458,3 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	inputPlaceholder: ''
 };
-
-
-window.wikibase.ui.PropertyEditTool.EditableLabel = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
-};
-window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
-	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
-	},
-	
-	getApiCallParams: function() {
-		return {
-			action: "wbsetlabel",
-			language: window.wgUserLanguage,
-			label: this.getValue(),
-			id: window.mw.config.get( 'wbItemId' )
-		};
-	}
-} );
-
-
-window.wikibase.ui.PropertyEditTool.EditableDescription = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
-};
-window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
-	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
-	},
-	
-	getApiCallParams: function() {
-		return {
-			action: 'wbsetdescription', 
-			language: wgUserLanguage, 
-			description: this.getValue(), 
-			id: mw.config.values.wbItemId
-		};
-	}
-} );

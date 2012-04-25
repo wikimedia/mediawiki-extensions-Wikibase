@@ -114,15 +114,12 @@ $wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
 //$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 //$wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
-
-
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 $wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTestModules';
 $wgHooks['AbortMove'][]								= 'WikibaseHooks::onAbortMove';
-
 
 
 // Resource loader modules
@@ -132,34 +129,49 @@ $moduleTemplate = array(
 );
 
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
-	'scripts' => array(	
+	'scripts' => array(
 		'wikibase.js',
+		'wikibase.Client.js',
 		'wikibase.ui.js',
 		'wikibase.ui.PropertyEditTool.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Group.js',
+		'wikibase.ui.PropertyEditTool.Toolbar.EditGroup.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Label.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Button.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.Tooltip.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js',
+		'wikibase.ui.PropertyEditTool.EditableDescription.js',
+		'wikibase.ui.PropertyEditTool.EditableLabel.js',
+		'wikibase.ui.PropertyEditTool.EditableSiteLink.js',
 		'wikibase.ui.HeadingEditTool.js',
+		'wikibase.ui.DescriptionEditTool.js',
+		'wikibase.ui.SiteLinksEditTool.js',
 		'wikibase.startup.js'
 	),
 	'styles' => array(
-		'../../../skins/common/shared.css',
 		'wikibase.ui.PropertyEditTool.css'
 	),
 	'dependencies' => array(
-		'jquery.tipsy'
+		'jquery.tipsy',
+		'jquery.ui.autocomplete',
+		'mediawiki.legacy.shared',
+		'mediawiki.Title'
 	),
 	'messages' => array(
 		'wikibase-cancel',
 		'wikibase-edit',
 		'wikibase-save',
+		'wikibase-add',
 		'wikibase-label-edit-placeholder',
 		'wikibase-description-edit-placeholder',
 		'wikibase-label-input-help-message',
-		'wikibase-description-input-help-message'
+		'wikibase-description-input-help-message',
+		'wikibase-remove'
 	)
 );
 

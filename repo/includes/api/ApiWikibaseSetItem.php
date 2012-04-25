@@ -119,7 +119,7 @@ class ApiWikibaseSetItem extends ApiBase {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsetitem';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetitem';
 	}
 
 

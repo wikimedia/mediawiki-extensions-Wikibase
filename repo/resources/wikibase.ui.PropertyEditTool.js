@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
+"use strict";
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.
@@ -32,10 +33,17 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	_subject: null,
 	
 	/**
+	 * Contains the toolbar for the edit tool itself, not for its values or null if it doesn't have
+	 * one.
+	 * @var wikibase.ui.PropertyEditTool.Toolbar
+	 */
+	_toolbar: null,
+	
+	/**
 	 * The editable value for the properties data value
 	 * @var wikibase.ui.PropertyEditTool.EditableValue
 	 */
-	_editableValue: null,
+	_editableValues: null,
 		
 	/**
 	 * Initializes the edit form for the given element.
@@ -46,10 +54,43 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
+		this._editableValues = new Array();
+		
 		this._subject = $( subject );
 		this._subject.addClass( this.UI_CLASS + '-subject' );
 				
-		this._initEditToolForValue();
+		this._initEditToolForValues();
+		this._initToolbar();
+	},
+	
+	/**
+	 * Initializes a toolbar for the whole property edit tool. By default this is just a command
+	 * to add more values.
+	 * @return wikibase.ui.PropertyEditTool.Toolbar
+	 */
+	_initToolbar: function() {
+		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
+		this._toolbar.renderItemSeparators = true;
+		
+		if( this.allowsMultipleValues ) {
+			// only add 'add' button if we can have several values
+			this._toolbar.btnAdd = new window.wikibase.ui.PropertyEditTool.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
+			this._toolbar.btnAdd.onAction = $.proxy( function() {
+				this.enterNewValue();
+			}, this );
+
+			this._toolbar.addElement( this._toolbar.btnAdd );
+		}
+		
+		this._toolbar.appendTo( this._getToolbarParent() );
+	},
+	
+	/**
+	 * Returns the node the toolbar should be appended to
+	 * @return jQuery
+	 */
+	_getToolbarParent: function() {
+		return this._subject;
 	},
 	
 	/*
@@ -62,28 +103,95 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	*/
    
-	_initEditToolForValue: function() {
-		var x =  this.getEditableValuePrototype();
-		this._editableValue = new x();
-
-		// todo: show a label, not the property id:
-		this._editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
-
-		this._editableValue._init( this._getValueElem() );
+	_initEditToolForValues: function() {
+		var allValues = this._getValueElems();
+		
+		if( ! this.allowsMultipleValues ) {
+			allValues = $( allValues[0] );
+		}
+		
+		var self = this;
+		$.each( allValues, function( index, item ) {
+			self._initSingleValue( item );
+		} );
 	},
 	
 	/**
-	 * Returns the node representing the properties value.
-	 * @return jQuery
+	 * Takes care of initialization of a single value
+	 * @param jQuery valueElem
+	 * @return wikibase.ui.PropertyEditTool.EditableValue the initialized value
 	 */
-	_getValueElem: function() {
-		return $( this._subject.children( '.wb-property-container-value' )[0] );
+	_initSingleValue: function( valueElem ) {
+		var editableValue = new ( this.getEditableValuePrototype() )();
+		
+		// message to be displayed for empty input:
+		editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
+		
+		var editableValueToolbar = this._buildSingleValueToolbar( editableValue );
+		
+		// initialiye editable value and give appropriate toolbar on the way:
+		editableValue._init( valueElem, editableValueToolbar );
+		
+		this._editableValues.push( editableValue );		
+		return editableValue;
+	},
+	
+	/**
+	 * Builds the toolbar for a single editable value
+	 * @return wikibase.ui.PropertyEditTool.Toolbar
+	 */
+	_buildSingleValueToolbar: function( editableValue ) {
+		var toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
+		
+		// give the toolbar a edit group with basic edit commands:
+		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup();
+		editGroup.displayRemoveButton = this.allowsMultipleValues; // remove button if we have a list
+		editGroup._init( editableValue );
+		
+		toolbar.addElement( editGroup );
+		toolbar.editGroup = editGroup; // remember this
+		
+		return toolbar;
+	},
+	
+	/**
+	 * Returns the nodes representing the properties values. This can also return an array of jQuery
+	 * objects if the value is represented by several nodes not sharing a mutual parent.
+	 * @return jQuery|jQuery[]
+	 */
+	_getValueElems: function() {
+		return this._subject.children( '.wb-property-container-value' );
 	},
 	
 	destroy: function() {
-		this._valueToolbar.destroy();
-		this._editableValue.destroy();
-		// TODO
+		if ( this._editableValue != null ) {
+			//this._editableValue.destroy();
+		}
+	},
+	
+	/**
+	 * Allows to enter a new value, the input interface will be available but the process can still
+	 * be cancelled.
+	 */
+	enterNewValue: function() {
+		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
+		newValueElem.addClass( 'wb-pending-value' );
+		
+		this._subject.append( newValueElem );
+		var newValue = this._initSingleValue( newValueElem );
+		
+		//newValue._toolbar.editGroup.btnEdit.doAction();
+		//newValue.startEditing();
+		newValue.setFocus();
+	},
+	
+	/**
+	 * Creates the DOM structure for a new empty value which can be appended to the list of values.
+	 * 
+	 * @return jQuery
+	 */
+	_newEmptyValueDOM: function() {
+		return $( '<span/>' );
 	},
 	
 	/**
@@ -103,6 +211,16 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @return Object
 	 */
 	getEditableValuePrototype: function() {
-		return window.wikibase.ui.PropertyEditTool.EditableDescription;
-	}
+		return window.wikibase.ui.PropertyEditTool.EditableValue;
+	},
+	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
+	/**
+	 * If true, the tool will manage several editable values and offer a remove and add command
+	 * @var bool
+	 */
+	allowsMultipleValues: true
 };

@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
+"use strict";
 
 /**
  * Represents a tooltip within a wikibase.ui.PropertyEditTool.Toolbar toolbar
@@ -27,6 +28,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	 * Class which marks the tooltip within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittoolbar-tooltip',
+
+	/**
+	 * tipsy element
+	 * @var Tipsy
+	 */
+	_tipsy: null,
 
 	/**
 	 * @var Object tipsy tooltip configuration vars
@@ -50,20 +57,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 		// default tipsy configuration
 		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
 			this._tipsyConfig = {
-				gravity: 'ne'
+				gravity: ( document.documentElement.dir == 'rtl' ) ? 'nw' : 'ne'
 			};
 		}
 
-		var elem = $( '<span/>', {
+		var tooltip = $( '<span/>', {
 			'class': 'mw-help-field-hint',
 			title: tooltipMessage,
-			style: 'display:inline'
+			style: 'display:inline',
+			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css) */
 		} ).tipsy( {
 			'gravity': this._tipsyConfig.gravity,
 			'trigger': 'manual'
 		} );
 
-		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, elem );
+		this._tipsy = tooltip.data( 'tipsy' );
+
+		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, tooltip );
 		
 		this._toggleEvents( true );
 	},
@@ -111,9 +121,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 
 	destroy: function() {
 		if ( this._elem ) {
-			this._elem.tipsy( 'hide' );
+			if ( this._isVisible ) {
+				this.hide();
+			}
+			this._elem.remove();
 		}
-		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype.destroy.call( this );
 	}
 
 } );

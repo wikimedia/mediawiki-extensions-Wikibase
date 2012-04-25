@@ -140,7 +140,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	}
 	
    	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsetlanguageattribute';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetlanguageattribute';
 	}
 	
 

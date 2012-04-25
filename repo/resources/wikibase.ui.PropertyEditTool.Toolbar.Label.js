@@ -10,6 +10,7 @@
  * @author Daniel Werner
  * @author H. Snater
  */
+"use strict";
 
 /**
  * Represents a label within a wikibase.ui.PropertyEditTool.Toolbar toolbar
@@ -56,7 +57,9 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	},
 
 	destroy: function() {
-		// TODO
+		if ( this._elem != null ) {
+			this._elem.remove();
+		}
 	},
 	
 	/**
@@ -72,11 +75,12 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	},
 	
 	/**
+	 * TODO: implement getter on demand
 	 * returns the labels's content
-	 * @return text|object contents
+	 * @return jQuery contents
 	 */
 	getContent: function() {
-		var content = this._elem.contents()[0];
+		// TODO: implement getter
 	},
 	
 	/**

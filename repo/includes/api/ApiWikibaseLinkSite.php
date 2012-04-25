@@ -34,9 +34,6 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			// TODO: unify function name across files
-			// TODO: add a link modify function, or change this function to also know to modify links
-			//return $item->addLinkSite( $params['linksite'], $params['linktitle'], $params['link'] );
 			return $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
 		}
 	}
@@ -99,7 +96,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wblinksite';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wblinksite';
 	}
 
 

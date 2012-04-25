@@ -9,6 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
+"use strict";
 
 /**
  * Module for 'Wikibase' extensions user interface functionality for editing the heading representing
@@ -29,13 +30,15 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		// add class specific to this ui element:
 		this._subject.addClass( 'wb-ui-headingedittool' );
+		// let input element expand automatically according to input text
+		this._editableValues[0]._interfaces[0].autoExpand = true;
 	},
 	
 	/**
-	 * @see wikibase.ui.PropertyEditTool._getValueElem()
+	 * @see wikibase.ui.PropertyEditTool._getValueElems()
 	 */
-	_getValueElem: function() {
-		return $( this._subject.children( 'h1.firstHeading span' )[0] );
+	_getValueElems: function() {
+		return this._subject.children( 'h1.firstHeading span' );
 	},
 	
 	/**
@@ -47,6 +50,8 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 	},
 	
 	getEditableValuePrototype: function() {
-		return window.wikibase.ui.PropertyEditTool.EditableLabel
-	}
+		return window.wikibase.ui.PropertyEditTool.EditableLabel;
+	},
+	
+	allowsMultipleValues: false
 } );

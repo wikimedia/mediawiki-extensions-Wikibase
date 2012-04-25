@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Maintenance scrtip for deleting all Wikibase data.
+ * Maintenance script for deleting all Wikibase data.
  *
  * @since 0.1
  *
