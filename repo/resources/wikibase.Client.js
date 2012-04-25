@@ -74,9 +74,9 @@ window.wikibase.Client.prototype = {
 	 * @return jQuery link to the site
 	 */
 	getLinkTo: function( pageTitle ) {
-		var url = this.getLinkTo( pageTitle );
-		$( '<a/>', {
-			'link': url,
+		var url = this.getUrlTo( pageTitle );
+		return $( '<a/>', {
+			'href': url,
 			'text': pageTitle
 		} );
 	},

@@ -51,13 +51,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
 
 		// interface for choosing a page (from the source site):
-		interfaces.pageName = new ev.ClientPageInterface( tableCells[1], this );
+		interfaces.pageName = new ev.ClientPageInterface(
+				tableCells[1], this, interfaces.siteId.getSelectedClient()
+		);
 		interfaces.pageName.inputPlaceholder = mw.msg( 'wikibase-sitelink-page-edit-placeholder' );
 		interfaces.pageName.ajaxParams = {
 			action: 'opensearch',
 			namespace: 0,
 			suggest: ''
 		};
+		
 		// url can only be set when site id is known (when adding a site link, url will be passed on that event)
 		if ( this._subject.attr('class').match(/wb-sitelinks-[\w-]+/) !== null ) {
 			var siteId = this._subject.attr('class').match(/wb-sitelinks-[\w-]+/)[0].split('-').pop();
@@ -68,6 +71,19 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		interfaces.push( interfaces.pageName );
 
 		return interfaces;
+	},
+	
+	_interfaceHandler_onInputRegistered: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this );
+		
+		// set up necessary communication between both interfaces:
+		var client = this._interfaces.siteId.getSelectedClient();
+		if( client !== this._interfaces.pageName.getClient() && client !== null ) {
+			// FIXME: this has to be done on this._interfaces.siteId.onInputRegistered only but that
+			//        is not really possible with the current 'event' system since this function is
+			//        registered there.
+			this._interfaces.pageName.setClient( client );
+		}
 	},
 
 	_getToolbarParent: function() {
