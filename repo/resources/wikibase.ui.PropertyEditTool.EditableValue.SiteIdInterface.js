@@ -27,7 +27,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	_resolvedSiteName: null,
 	
 	_initInputElement: function() {
-		var arrayClients = [];
+		var clientList = [];
 
 		this.onKeyDown = function( event ) {
 			// when hitting tab, select the first element of the current result set an jump into title input box
@@ -38,10 +38,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 			}
 		}
 
-		for ( var siteId in mw.config.get('wbSiteDetails') ) {
-			arrayClients.push(  mw.config.get( 'wbSiteDetails' )[ siteId ].shortName + ' (' + siteId + ')' );
+		for ( var siteId in wikibase.getClients() ) {
+			var client = wikibase.getClient( siteId );
+			clientList.push( client.getShortName() + ' (' + client.getId() + ')' );
 		}
-		this.setResultSet( arrayClients );
+		this.setResultSet( clientList );
 
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 		

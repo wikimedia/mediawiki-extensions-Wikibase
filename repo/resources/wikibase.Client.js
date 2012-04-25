@@ -20,6 +20,13 @@ window.wikibase.Client = function( siteDetails ) {
 window.wikibase.Client.prototype = {
 	
 	/**
+	 * Returns the clients id.
+	 */
+	getId: function() {
+		return this._siteDetails.id;
+	},
+	
+	/**
 	 * Returns the full name of the client. This will return the name in the users language.
 	 * 
 	 * @param string
