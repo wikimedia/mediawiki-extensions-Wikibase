@@ -50,15 +50,29 @@ window.wikibase.Client.prototype = {
 	},
 	
 	/**
-	 * Returns the link to a site of the client.
+	 * Returns the url to a site of the client. To get a full html ready link, use getLinkTo().
 	 * 
-	 * @param string site title of the site within the client
+	 * @param string siteTitle title of the site within the client
 	 * @return string
 	 */
-	getLinkTo: function( site ) {
-		site = this._urlEncodeSite( $.trim( site ) );
-		return this._siteDetails.pageUrl.replace( /\$1/g, site )
+	getUrlTo: function( siteTitle ) {
+		siteTitle = this._urlEncodeSite( $.trim( siteTitle ) );
+		return this._siteDetails.pageUrl.replace( /\$1/g, siteTitle );
 	},
+	
+	/**
+	 * Returns a html link to a site of the client. To get the url only, use getUrlTo().
+	 * 
+	 * @param string site title of the site within the client
+	 * @return jQuery link to the site
+	 */
+	getLinkTo: function( siteTitle ) {
+		var url = this.getLinkTo( siteTitle );
+		$( '<a/>', {
+			'link': url,
+			'text': siteTitle
+		} );
+	}
 	
 	/**
 	 * Does the encoding for a site so it can be used within the url to the site.
