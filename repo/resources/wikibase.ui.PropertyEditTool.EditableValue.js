@@ -130,7 +130,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		singleInterface.onFocus = function(){ self._interfaceHandler_onFocus() };
 		singleInterface.onBlur = function(){ self._interfaceHandler_onBlur() };
 		singleInterface.onKeyPressed =
-				function( event ){ self._interfaceHandler_onKeyPressed( event ) };
+			function( event ) { self._interfaceHandler_onKeyPressed( event ) };
+		singleInterface.onKeyUp = // ESC key does not react onKeyPressed but on onKeyUp
+			function( event ) { self._interfaceHandler_onKeyPressed( event ) };
 		singleInterface.onInputRegistered =
 				function( event ){ self._interfaceHandler_onInputRegistered( event ) };
 	},
