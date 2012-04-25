@@ -201,7 +201,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var changed = false;
 		
 		$.each( this._interfaces, function( index, elem ) {
-			changed = changed || elem.stopEditing( save );
+			changed = elem.stopEditing( save ) || changed;
 		} );
 		
 		// out of edit mode after interfaces are converted back to HTML:
