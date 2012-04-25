@@ -22,6 +22,14 @@ window.wikibase.ui.PropertyEditTool.EditableDescription = function( subject ) {
 };
 window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
+	
+	_buildInterfaces: function( subject ) {
+		var interfaces = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInterfaces.call( this, subject );
+		interfaces[0].inputPlaceholder = mw.msg( 'wikibase-description-edit-placeholder' );
+		
+		return interfaces;
+	},
+	
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
 	},
