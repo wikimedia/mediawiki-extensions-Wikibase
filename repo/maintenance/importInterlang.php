@@ -54,17 +54,28 @@ class importInterlang extends Maintenance {
 
 	protected function createItem( $lang, $link ) {
 		$link = self::niceLink( $link );
-		$label = self::makeLabel( $link );
 
-		$api_response = $this->callAPI( $this->api . "?action=wbsetlabel&format=php&item=add&site=" . urlencode( $lang ) . "&title=" . urlencode( $link ) . "&language=" . urlencode( $lang ) . "&label=" . urlencode( $label ) );
+		$api_response = $this->callAPI( $this->api . "?action=wbgetitemid&format=php&site=" . urlencode( $lang ) . "&title=" . urlencode( $link ) );
 		if( isset( $api_response['error'] ) ) {
-			if( $api_response['error']['code'] == 'add-exists' ) {
-				return $api_response['error']['item']['id'];
-			} else {
+			if( $api_response['error']['code'] !== 'no-such-item' ) {
 				throw new MWException( "Error: " . $api_response['error']['info'] . "\n" );
 			}
+		} else {
+			if( isset( $api_response['success'] ) && $api_response['success'] ) {
+				$this->addLink( $lang, $link, $api_response['item']['id'] );
+				return $api_response['item']['id'];
+			} else {
+				throw new MWException( "Error: no success\n" );
+			}
+		}
+
+		// We only reach this if we have received an error, and the error was no-such-item
+		$api_response = $this->callAPI( $this->api . "?action=wbsetitem&data=%7B%7D&format=php" );
+		if( isset( $api_response['error'] ) ) {
+			throw new MWException( "Error: " . $api_response['error']['info'] . "\n" );
 		}
 		if( isset( $api_response['success'] ) && $api_response['success'] ) {
+			$this->addLink( $lang, $link, $api_response['item']['id'] );
 			return $api_response['item']['id'];
 		} else {
 			throw new MWException( "Error: no success\n" );
@@ -75,12 +86,12 @@ class importInterlang extends Maintenance {
 		$link = self::niceLink( $link );
 		$label = self::makeLabel( $link );
 
-		$api_response = $this->callAPI( $this->api . "?action=wblinksite&format=php&link=update&id=" . urlencode( $id ) . "&linksite=" . urlencode( $lang ) . "&linktitle=" . urlencode( $link ) );
+		$api_response = $this->callAPI( $this->api . "?action=wblinksite&format=php&link=add&id=" . urlencode( $id ) . "&linksite=" . urlencode( $lang ) . "&linktitle=" . urlencode( $link ) );
 		if( isset( $api_response['error'] ) ) {
 			throw new MWException( "Error: " . $api_response['error']['info'] . "\n" );
 		}
 
-		$api_response = $this->callAPI( $this->api . "?action=wbsetlabel&format=php&item=update&id=" . urlencode( $id ) . "&language=" . urlencode( $lang ) . "&label=" . urlencode( $label ) );
+		$api_response = $this->callAPI( $this->api . "?action=wbsetlanguageattribute&format=php&item=set&id=" . urlencode( $id ) . "&language=" . urlencode( $lang ) . "&label=" . urlencode( $label ) );
 		if( isset( $api_response['error'] ) ) {
 			throw new MWException( "Error: " . $api_response['error']['info'] . "\n" );
 		}
