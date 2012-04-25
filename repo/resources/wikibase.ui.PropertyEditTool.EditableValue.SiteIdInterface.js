@@ -56,7 +56,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		var siteId = this._getSiteIdFromValue();
 		var isValid = this.validate( this.getValue() );
 		if ( isValid ) {
-			this._editableValue._interfaces[1].setUrl( wikibase.getClient( this._getSiteIdFromValue() ).getApi() );
+			this._editableValue._interfaces[1].url = wikibase.getClient( this._getSiteIdFromValue() ).getApi();
 		}
 		this._editableValue._interfaces.pageName.setDisabled( !isValid );
 	},
