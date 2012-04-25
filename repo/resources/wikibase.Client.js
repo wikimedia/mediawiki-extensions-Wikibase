@@ -70,14 +70,14 @@ window.wikibase.Client.prototype = {
 	/**
 	 * Returns a html link to a site of the client. To get the url only, use getUrlTo().
 	 * 
-	 * @param string site title of the site within the client
+	 * @param string pageTitle title of the site within the client
 	 * @return jQuery link to the site
 	 */
-	getLinkTo: function( siteTitle ) {
-		var url = this.getLinkTo( siteTitle );
+	getLinkTo: function( pageTitle ) {
+		var url = this.getLinkTo( pageTitle );
 		$( '<a/>', {
 			'link': url,
-			'text': siteTitle
+			'text': pageTitle
 		} );
 	},
 	
@@ -85,12 +85,12 @@ window.wikibase.Client.prototype = {
 	 * Does the encoding for a site so it can be used within the url to the site.
 	 * This should propably be over written in case the client is not a MediaWiki installation.
 	 * 
-	 * @param siteTitle string
+	 * @param string pageTitle
 	 * @return string
 	 */
-	_urlEncodeSite: function( siteTitle ) {
-		var mwSite = new mw.Title( siteTitle );
-		return mw.util.wikiUrlencode( mwSite.getPrefixedDb() );
+	_urlEncodeSite: function( pageTitle ) {
+		var mwPage = new mw.Title( pageTitle );
+		return mw.util.wikiUrlencode( mwPage.getPrefixedDb() );
 	}
 
 };
