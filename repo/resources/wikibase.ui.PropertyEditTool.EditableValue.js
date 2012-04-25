@@ -478,10 +478,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * This will not be called in case the element was just created, still pending, and the editing
 	 * process was cancelled.
 	 * 
-	 * @param bool save whether the result will be saved. If true, the result is sent to the API
+	 * @param bool saved whether the result will be saved. If true, the result is sent to the API
 	 *        already and the internal value is changed to the new value.
 	 * @param bool changed whether the value was changed during the editing process.
 	 * @param bool wasPending whether the element was pending before the edit.
 	 */
-	afterStopEditing: function( save, changed, wasPending ) {return true}
+	afterStopEditing: function( saved, changed, wasPending ) {return true}
 };

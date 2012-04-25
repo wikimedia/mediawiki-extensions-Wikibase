@@ -175,6 +175,8 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Allows to enter a new value, the input interface will be available but the process can still
 	 * be cancelled.
+	 * 
+	 * @return newValue wikibase.ui.PropertyEditTool.EditableValue
 	 */
 	enterNewValue: function() {
 		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
@@ -185,11 +187,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 				
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
-		newValue.onStopEditing = $.proxy( function() {
+		newValue.onStopEditing = $.proxy( function( save ) {
 			this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
 		}, this );		
 		
 		newValue.setFocus();
+		return newValue;
 	},
 	
 	/**
@@ -216,7 +219,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * defines which editable value should be used for this.
 	 * 
-	 * @return Object
+	 * @return window.wikibase.ui.PropertyEditTool.EditableValue
 	 */
 	getEditableValuePrototype: function() {
 		return window.wikibase.ui.PropertyEditTool.EditableValue;

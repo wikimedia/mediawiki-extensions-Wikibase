@@ -74,6 +74,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		// append toolbar to new td
 		return $( '<td/>' ).appendTo( this._subject );
 	},
+	
+	stopEditing: function( save ) {
+		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
+		
+		// make sure the interface for entering the clients id can't be edited after created
+		this._interfaces.siteId.setActive( this.isPending() );
+		
+		return changed;
+	},
 
 	getApiCallParams: function( removeValue ) {
 		if ( removeValue === true ) {
