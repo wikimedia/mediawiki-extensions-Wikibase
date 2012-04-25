@@ -29,7 +29,7 @@ window.wikibase = new( function() {
 	 */
 	this.getClient = function( clientId ) {
 		var client = mw.config.get('wbSiteDetails')[ clientId ];
-		if( typeof clientId == 'undefined' ) {
+		if( typeof client == 'undefined' ) {
 			return null;
 		}
 		return new window.wikibase.Client( client );
