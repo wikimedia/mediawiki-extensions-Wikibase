@@ -158,6 +158,10 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		return !WBSettings::get( 'apiInDebug' );
 	}
 
+	public function isWriteMode() {
+		return !WBSettings::get( 'apiInDebug' );
+	}
+	
 	public function getAllowedParams() {
 		return array(
 			'create' => array(

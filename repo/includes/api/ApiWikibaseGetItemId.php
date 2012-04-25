@@ -55,12 +55,13 @@ class ApiWikibaseGetItemId extends ApiBase {
 	public function getAllowedParams() {
 		return array(
 			'site' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
-				ApiBase::PARAM_REQUIRED => true,
+				//ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_REQUIRED => true
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
+				ApiBase::PARAM_REQUIRED => true
 			),
 		);
 	}
