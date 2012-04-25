@@ -51,7 +51,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
 
 		// interface for choosing a page (from the source site):
-		interfaces.pageName = new ev.WikiPageInterface( tableCells[1], this );
+		interfaces.pageName = new ev.ClientPageInterface( tableCells[1], this );
 		interfaces.pageName.inputPlaceholder = mw.msg( 'wikibase-sitelink-page-edit-placeholder' );
 		interfaces.pageName.ajaxParams = {
 			action: 'opensearch',

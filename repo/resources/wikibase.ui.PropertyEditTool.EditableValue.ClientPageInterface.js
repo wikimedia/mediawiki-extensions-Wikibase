@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.EditableValue.WikiBaseInterface.js
+ * @file wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -17,11 +17,11 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface = function( subject, editableValue, url, ajaxParams ) {
+window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface = function( subject, editableValue, url, ajaxParams ) {
 	window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.apply( this, arguments );
 };
-window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.prototype, {
+window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
+$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.prototype, {
 
 	stopEditing: function( save ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.stopEditing.call( this, save );
