@@ -26,7 +26,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
 		
-		if ( !( isset( $params['label'] ) || isset( $params['description'] ) ) ) {
+		if ( !isset( $params['label'] ) && !isset( $params['description'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-label-or-description' ), 'label-or-description' );
 		}
 	}
@@ -47,28 +47,40 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		$num_descriptions = count($item->getDescriptions($languages));
 		switch ($params['item']) {
 			case 'update':
-				if ((!$num_labels && isset($params['label']))) {
-					$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
+				if ( isset($params['label']) ) {
+					if (!$num_labels) {
+						$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
+					}
+					$item->setLabel( $params['language'], $params['label'] );
 				}
-				$item->setLabel( $params['language'], $params['label'] );
-				if ((!$num_descriptions && isset($params['description']))) {
-					$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
+				if (isset($params['description'])) {
+					if (!$num_descriptions) {
+						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
+					}
+					$item->setDescription( $params['language'], $params['description'] );
 				}
-				$item->setDescription( $params['language'], $params['description'] );
 				break;
 			case 'add':
-				if (($num_labels && isset($params['label']))) {
-					$this->dieUsage( wfMsg( 'wikibase-api-label-found' ), 'label-found' );
+				if (isset($params['label'])) {
+					if ($num_labels) {
+						$this->dieUsage( wfMsg( 'wikibase-api-label-found' ), 'label-found' );
+					}
+					$item->setLabel( $params['language'], $params['label'] );
 				}
-				$item->setLabel( $params['language'], $params['label'] );
-				if (($num_descriptions && isset($params['description']))) {
-					$this->dieUsage( wfMsg( 'wikibase-api-description-found' ), 'description-found' );
+				if (isset($params['description'])) {
+					if ($num_descriptions) {
+						$this->dieUsage( wfMsg( 'wikibase-api-description-found' ), 'description-found' );
+					}
+					$item->setDescription( $params['language'], $params['description'] );
 				}
-				$item->setDescription( $params['language'], $params['description'] );
 				break;
 			case 'set':
-				$item->setLabel( $params['language'], $params['label'] );
-				$item->setDescription( $params['language'], $params['description'] );
+				if (isset($params['label'])) {
+					$item->setLabel( $params['language'], $params['label'] );
+				}
+				if (isset($params['description'])) {
+					$item->setDescription( $params['language'], $params['description'] );
+				}
 				break;
 			default:
 				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
@@ -118,11 +130,11 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia'
+			'api.php?action=wbsetlanguageattribute&id=42&language=en&label=Wikimedia'
 				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language',
-			'api.php?action=wbsetdescription&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit'
+			'api.php?action=wbsetlanguageattribute&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "42" as a decription in English language',
-			'api.php?action=wbsetlabel&id=42&language=en&label=Wikimedia'
+			'api.php?action=wbsetlanguageattribute&id=42&language=en&label=Wikimedia&description=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'Set the string "Wikimedia" for page with id "42" as a label, and the string "An encyclopedia that everyone can edit" as a decription in English language',
 		);
 	}

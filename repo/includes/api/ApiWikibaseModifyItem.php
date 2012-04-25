@@ -51,11 +51,11 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		$this->validateParameters( $params );
-
 		$success = false;
 
-		if ( !isset( $params['id'] ) ) {
+		$this->validateParameters( $params );
+		
+		if ( !isset( $params['id'] ) ) { // create is for development
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
 			if ( $params['id'] === false && $params['item'] === 'update' ) {
@@ -78,19 +78,18 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			}
 		}
 		else {
+			// now we should never be here
 			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
 			$item = WikibaseItem::newEmpty();
-			//$success = $item->save();
+			$success = $item->save();
 
 			if ( $success ) {
-				$page = $item->getWikiPage();
-
 				if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 					$item->addSiteLink( $params['site'], $params['title'] );
 				}
 			}
 			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed-1' );
 			}
 		}
 
@@ -98,6 +97,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$success = $this->modifyItem( $item, $params );
 
 			if ( $success ) {
+				$page = $item->getWikiPage();
 				$status = $page->doEditContent(
 					$item,
 					$params['summary'],
@@ -160,6 +160,9 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 	public function getAllowedParams() {
 		return array(
+			'create' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+			),
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),

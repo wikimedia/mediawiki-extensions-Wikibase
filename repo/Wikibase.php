@@ -86,6 +86,7 @@ $wgAutoloadClasses['ApiWikibaseSetLanguageAttribute'] = $dir . 'includes/api/Api
 $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibaseModifyItem.php';
 $wgAutoloadClasses['ApiWikibaseLinkSite'] 			= $dir . 'includes/api/ApiWikibaseLinkSite.php';
 $wgAutoloadClasses['ApiWikibaseSetAlias'] 				= $dir . 'includes/api/ApiWikibaseSetAlias.php';
+$wgAutoloadClasses['ApiWikibaseSetItem'] 				= $dir . 'includes/api/ApiWikibaseSetItem.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialCreateItem'] 			= $dir . 'includes/specials/SpecialCreateItem.php';
@@ -103,7 +104,8 @@ $wgAPIModules['wbsetlanguageattribute'] 			= 'ApiWikibaseSetLanguageAttribute';
 $wgAPIModules['wbgetsitelinks'] 					= 'ApiWikibaseGetSiteLinks';
 $wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
 //$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
-$wgAPIModules['wbalias'] 							= 'ApiWikibaseSetAlias';
+$wgAPIModules['wbsetalias'] 							= 'ApiWikibaseSetAlias';
+$wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
 
 
 
