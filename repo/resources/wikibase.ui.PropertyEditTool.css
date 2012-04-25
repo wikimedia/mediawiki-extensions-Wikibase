@@ -107,6 +107,12 @@ table.wb-sitelinks {
 	table.wb-sitelinks .even td {
 		background:#ececec;
 	}
+	table.wb-sitelinks tfoot tr:hover td {
+		background-color:transparent;
+	}
+	table.wb-sitelinks tfoot td {
+		border:none;
+	}
 
 .ruler {
 	display:none;

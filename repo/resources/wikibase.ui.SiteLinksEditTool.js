@@ -26,7 +26,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 
 	_init: function( subject ) {
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
-		
+
 		// add colspan+1 because of toolbar td's:
 		var th = this._subject.find( 'th' );
 		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
@@ -34,11 +34,14 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 
 	_getToolbarParent: function() {
 		// take content (table), put it into a div and also add the toolbar into the div
-		var newParent = $( '<div/>' );
-		newParent.insertAfter( this._subject );
-		return newParent.append( this._subject );
+		return $( '<td/>', { colspan: '3' } )
+			.appendTo( $( '<tr/>' )
+				.appendTo( $( '<tfoot/>' )
+					.appendTo( this._subject )
+				)
+			);
 	},
-	
+
 	/**
 	 * @see wikibase.ui.PropertyEditTool._getValueElems()
 	 * @return jQuery[]
@@ -47,7 +50,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		// select all rows but not heading!
 		return this._subject.find( 'tr:not(:has(th))' );
 	},
-	
+
 	_newEmptyValueDOM: function() {
 		return $( '<tr> <td></td> <td></td> </tr>' );
 	},

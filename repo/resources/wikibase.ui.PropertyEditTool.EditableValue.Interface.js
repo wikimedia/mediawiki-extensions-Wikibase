@@ -146,8 +146,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'name': this._key,
 			'value': this.getValue(),
 			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._onKeyPressed, this ), // TODO: this shouldn't be used, keyup should work fine!
-			'keyup':    jQuery.proxy( this._onKeyUp, this ), //       we have both for escape key browser compability
+			'keypress': jQuery.proxy( this._onKeyPressed, this ),
+			'keyup':    jQuery.proxy( this._onKeyUp, this ),
 			'keydown':  jQuery.proxy( this._onKeyDown, this ),
 			'focus':    jQuery.proxy( this._onFocus, this ),
 			'blur':     jQuery.proxy( this._onBlur, this )
