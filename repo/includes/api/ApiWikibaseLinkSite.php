@@ -96,7 +96,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wblinksite';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wblinksite';
 	}
 
 

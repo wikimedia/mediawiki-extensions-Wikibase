@@ -70,7 +70,7 @@ class ApiWikibaseGetItem extends ApiBase {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsearchbyname';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsearchbyname';
 	}
 
 	public function getVersion() {

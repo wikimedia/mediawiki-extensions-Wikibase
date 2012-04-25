@@ -94,7 +94,7 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	}
 	
    	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbdeletelanguageattribute';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbdeletelanguageattribute';
 	}
 	
 
