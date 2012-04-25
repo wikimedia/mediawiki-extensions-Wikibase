@@ -2,10 +2,7 @@
 
 /**
  * Handles language links.
- * TODO: stylize
- * TODO: get rid of code duplication (both logic and array defs)
  * TODO: do we really want to refresh this on re-render? push updates from the repo seem to make more sense
- * TODO: Should we sort the links if we don't display them? Several cases: links disabled per namespace, links disabled by parser function/magic word, no links on the server.
  *
  * @since 0.1
  *
@@ -18,49 +15,61 @@
 class WBCLangLinkHandler {
 
 	protected static $cache = array();
+	protected static $sort_order = false;
 
 	public static function onParserBeforeTidy( Parser &$parser, &$text ) {
 		global $wgLanguageCode;
 
-		$title = $parser->getTitle();
-
-		if( $parser->getOptions()->getInterfaceMessage() || !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
+		// If this is an interface message, we don't do anything.
+		if( $parser->getOptions()->getInterfaceMessage() ) {
 			return true;
 		}
 
-		$db_title = $title->getDBkey();
-		if( isset( self::$cache[$db_title] ) ) {
-			$links = self::$cache[$db_title];
-		} else {
-			$links = self::getLinks( $db_title );
+		// If we don't support the namespace, we maybe sort the links, but don't do anything else.
+		$title = $parser->getTitle();
+		if( !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
+			self::maybeSortLinks( $parser->getOutput()->mLanguageLinks );
+			return true;
+		}
 
-			// If there was an error while getting links, we use the current links.
+		// If all the languages are suppressed, we do the same.
+		$out = $parser->getOutput();
+		$nei = self::getNoExternalInterlang( $out );
+		if( array_key_exists( '*', $nei ) ) {
+			self::maybeSortLinks( $out->mLanguageLinks );
+			return true;
+		}
+
+		// Here we finally get the links...
+		$title_text = $title->getFullText();
+		if( isset( self::$cache[$title_text] ) ) {
+			// ...from the local cache if there is one...
+			$links = self::$cache[$title_text];
+		} else {
+			// ...or from the external storage.
+			$links = self::getLinks( $title_text );
+
+			// If there was an error while getting links, we use the current links...
 			if( $links === false ) {
 				$links = self::readLinksFromDB( wfGetDB( DB_SLAVE ), $title->getArticleID() );
 			}
 
-			self::$cache[$db_title] = $links;
+			// ...and write them to the cache.
+			self::$cache[$title_text] = $links;
 		}
 
-		// Remove the link to the site language.
-		unset($links[$wgLanguageCode]);
+		// Always remove the link to the site language.
+		unset( $links[$wgLanguageCode] );
 
-		// If a link exists in wikitext, override wikidata link to the same language.
-		$out = $parser->getOutput();
-
-		$nei = self::getNEI( $out );
-		if( array_key_exists( '*', $nei ) ) {
-			$links = array();
-		} else {
-			$links = array_diff_key( $links, $nei );
-		}
+		// Remove the links specified by noexternalinterlang parser function.
+		$links = array_diff_key( $links, $nei );
 
 		// Pack the links properly into mLanguageLinks.
 		foreach( $links as $lang => $link ) {
-			$out->addLanguageLink( "$lang:$link" );
+			$out->addLanguageLink( $lang . ':' . $link );
 		}
 
-		//Sort the links
+		// Sort the links, always.
 		self::sortLinks( $out->mLanguageLinks );
 
 		return true;
@@ -71,7 +80,7 @@ class WBCLangLinkHandler {
 	 *
 	 * @return Array Empty array if not set.
 	 */
-	public static function getNEI( ParserOutput $out ) {
+	public static function getNoExternalInterlang( ParserOutput $out ) {
 		$nei = $out->getProperty( 'no_external_interlang' );
 
 		if( empty( $nei ) ) {
@@ -94,9 +103,53 @@ class WBCLangLinkHandler {
 	 * Get the list of links for a title.
 	 * @return Array of links, empty array for no links, false for failure.
 	 */
-	protected static function getLinks( $db_title ) {
-		$dir = dirname(__FILE__) . '/';
-		$file = "$dir/test/$db_title.json";
+	protected static function getLinks( $title_text ) {
+		$source = WBCSettings::get( 'source' );
+		if( isset( $source['api'] ) ) {
+			return self::getLinksFromApi( $title_text, $source['api'] );
+		} elseif( isset( $source['dir'] ) ) {
+			return self::getLinksFromFile( $title_text, $source['dir'] );
+		} else {
+			return array();
+		}
+	}
+
+	/**
+	 * Get the list of links for a title from an API.
+	 * @return Array of links, empty array for no links, false for failure.
+	 */
+	protected static function getLinksFromApi( $title_text, $api ) {
+		global $wgLanguageCode;
+
+		$url = $api .
+			"?action=wbgetsitelinks&format=php&site=" . $wgLanguageCode . "&title=" . urlencode( $title_text );
+		$api_response = Http::get( $url );
+		$api_response = unserialize( $api_response );
+
+		if( !is_array( $api_response ) || isset( $api_response['error'] ) ) {
+			return false;
+		}
+
+		$links = $api_response['item']['sitelinks'];
+
+		// Convert the links to the return format.
+		// This is no longer necessary since API format changed, but it will probably change again.
+		/*
+		$res = array();
+		foreach( $links as $link ) {
+			$res[$link['site']] = $link['title'];
+		}
+		*/
+
+		return $links;
+	}
+
+	/**
+	 * Get the list of links for a title from a file. This would generally be used for testing.
+	 * @return Array of links, empty array for no links, false for failure.
+	 */
+	protected static function getLinksFromFile( $title_text, $dir ) {
+		$file = "$dir/$title_text.json";
 		if( file_exists( $file ) ) {
 			return get_object_vars( json_decode( file_get_contents( $file ) ) );
 		} else {
@@ -107,9 +160,9 @@ class WBCLangLinkHandler {
 	/**
 	 * Read interlanguage links from a database, and return them in the same format as getLinks()
 	 *
-	 * @param	$dbr - Database.
-	 * @param	$articleid - ID of the article whose links should be returned.
-	 * @returns	The array with the links. If there are no links, an empty array is returned.
+	 * @param	$dbr DatabaseBase
+	 * @param	$articleid int ID of the article whose links should be returned.
+	 * @return	array The array with the links. If there are no links, an empty array is returned.
 	 * @version	Copied from InterlanguageExtension rev 114818
 	 */
 	protected static function readLinksFromDB( $dbr, $articleid ) {
@@ -117,7 +170,7 @@ class WBCLangLinkHandler {
 			array( 'langlinks' ),
 			array( 'll_lang', 'll_title' ),
 			array( 'll_from' => $articleid ),
-			__FUNCTION__
+			__METHOD__
 		);
 		$a = array();
 		foreach( $res as $row ) {
@@ -127,145 +180,126 @@ class WBCLangLinkHandler {
 	}
 
 	/**
+	 * Sort an array of links in-place iff alwaysSort option is turned on.
+	 */
+	protected static function maybeSortLinks( &$a ) {
+		if( WBCSettings::get( 'alwaysSort' ) ) {
+			self::sortLinks( $a );
+		}
+	}
+
+	/**
 	 * Sort an array of links in-place
 	 * @version	Copied from InterlanguageExtension rev 114818
 	 */
-	protected static function sortLinks( &$a ) {
-		switch( WBCSettings::get( 'sort' ) ) {
-			case 'code':
-				usort($a, 'WBCLangLinkHandler::compareCode');
-				break;
-			case 'alphabetic':
-				usort($a, 'WBCLangLinkHandler::compareAlphabetic');
-				break;
-			case 'alphabetic_revised':
-				usort($a, 'WBCLangLinkHandler::compareAlphabeticRevised');
-				break;
-		}
-	}
-
-	/**
-	 * Compare two interlanguage links by order of alphabet, based on language code.
-	 * @version	Copied from InterlanguageExtension rev 114818
-	 */
-	protected static function compareCode($a, $b) {
-		//TODO: implement sortPrepend
-		return strcmp(self::getCodeFromLink($a), self::getCodeFromLink($b));
-	}
-
-	/**
-	 * Compare two interlanguage links by order of alphabet, based on local language.
-	 *
-	 * List from http://meta.wikimedia.org/w/index.php?title=Interwiki_sorting_order&oldid=2022604#By_order_of_alphabet.2C_based_on_local_language
-	 * @version	Copied from InterlanguageExtension rev 114818
-	 */
-	protected static function compareAlphabetic($a, $b) {
-		static $order = array(
-			'ace', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
-			'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'bm', 'bn',
-			'zh-min-nan', 'nan', 'map-bms', 'ba', 'be', 'be-x-old', 'bh', 'bcl',
-			'bi', 'bar', 'bo', 'bs', 'br', 'bg', 'bxr', 'ca', 'cv', 'ceb', 'cs',
-			'ch', 'cbk-zam', 'ny', 'sn', 'tum', 'cho', 'co', 'cy', 'da', 'dk',
-			'pdc', 'de', 'dv', 'nv', 'dsb', 'dz', 'mh', 'et', 'el', 'eml', 'en',
-			'myv', 'es', 'eo', 'ext', 'eu', 'ee', 'fa', 'hif', 'fo', 'fr', 'fy',
-			'ff', 'fur', 'ga', 'gv', 'gd', 'gl', 'gan', 'ki', 'glk', 'gu',
-			'got', 'hak', 'xal', 'ko', 'ha', 'haw', 'hy', 'hi', 'ho', 'hsb',
-			'hr', 'io', 'ig', 'ilo', 'bpy', 'id', 'ia', 'ie', 'iu', 'ik', 'os',
-			'xh', 'zu', 'is', 'it', 'he', 'jv', 'kl', 'kn', 'kr', 'pam', 'krc',
-			'ka', 'ks', 'csb', 'kk', 'kw', 'rw', 'ky', 'rn', 'sw', 'kv', 'kg',
-			'ht', 'ku', 'kj', 'lad', 'lbe', 'lo', 'la', 'lv', 'lb', 'lt', 'lij',
-			'li', 'ln', 'jbo', 'lg', 'lmo', 'hu', 'mk', 'mg', 'ml', 'mt', 'mi',
-			'mr', 'arz', 'mzn', 'ms', 'cdo', 'mwl', 'mdf', 'mo', 'mn', 'mus',
-			'my', 'nah', 'na', 'fj', 'nl', 'nds-nl', 'cr', 'ne', 'new', 'ja',
-			'nap', 'ce', 'pih', 'no', 'nb', 'nn', 'nrm', 'nov', 'ii', 'oc',
-			'mhr', 'or', 'om', 'ng', 'hz', 'uz', 'pa', 'pi', 'pag', 'pnb',
-			'pap', 'ps', 'km', 'pcd', 'pms', 'tpi', 'nds', 'pl', 'tokipona',
-			'tp', 'pnt', 'pt', 'aa', 'kaa', 'crh', 'ty', 'ksh', 'ro', 'rmy',
-			'rm', 'qu', 'ru', 'sah', 'se', 'sm', 'sa', 'sg', 'sc', 'sco', 'stq',
-			'st', 'tn', 'sq', 'scn', 'si', 'simple', 'sd', 'ss', 'sk', 'cu',
-			'sl', 'szl', 'so', 'ckb', 'srn', 'sr', 'sh', 'su', 'fi', 'sv', 'tl',
-			'ta', 'kab', 'roa-tara', 'tt', 'te', 'tet', 'th', 'ti', 'tg', 'to',
-			'chr', 'chy', 've', 'tr', 'tk', 'tw', 'udm', 'bug', 'uk', 'ur',
-			'ug', 'za', 'vec', 'vi', 'vo', 'fiu-vro', 'wa', 'zh-classical',
-			'vls', 'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea',
-			'bat-smg', 'zh', 'zh-tw', 'zh-cn',
+	public static function sortLinks( &$a ) {
+		// http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename&oldid=3398113
+		static $order_alphabetic = array(
+			'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc', 'roa-rup', 'frp', 'as', 'ast', 'gn',
+			'av', 'ay', 'az', 'bm', 'bn', 'bjn', 'zh-min-nan', 'nan', 'map-bms', 'ba', 'be', 'be-x-old', 'bh', 'bcl',
+			'bi', 'bg', 'bar', 'bo', 'bs', 'br', 'bxr', 'ca', 'cv', 'ceb', 'cs', 'ch', 'cbk-zam', 'ny', 'sn', 'tum',
+			'cho', 'co', 'cy', 'da', 'dk', 'pdc', 'de', 'dv', 'nv', 'dsb', 'dz', 'mh', 'et', 'el', 'eml', 'en', 'myv',
+			'es', 'eo', 'ext', 'eu', 'ee', 'fa', 'hif', 'fo', 'fr', 'fy', 'ff', 'fur', 'ga', 'gv', 'gag', 'gd', 'gl',
+			'gan', 'ki', 'glk', 'gu', 'got', 'hak', 'xal', 'ko', 'ha', 'haw', 'hy', 'hi', 'ho', 'hsb', 'hr', 'io',
+			'ig', 'ilo', 'bpy', 'id', 'ia', 'ie', 'iu', 'ik', 'os', 'xh', 'zu', 'is', 'it', 'he', 'jv', 'kl', 'kn',
+			'kr', 'pam', 'krc', 'ka', 'ks', 'csb', 'kk', 'kw', 'rw', 'rn', 'sw', 'kv', 'kg', 'ht', 'ku', 'kj', 'ky',
+			'mrj', 'lad', 'lbe', 'lez', 'lo', 'ltg', 'la', 'lv', 'lb', 'lt', 'lij', 'li', 'ln', 'jbo', 'lg', 'lmo',
+			'hu', 'mk', 'mg', 'ml', 'mt', 'mi', 'mr', 'xmf', 'arz', 'mzn', 'ms', 'cdo', 'mwl', 'mdf', 'mo', 'mn',
+			'mus', 'my', 'nah', 'na', 'fj', 'nl', 'nds-nl', 'cr', 'ne', 'new', 'ja', 'nap', 'ce', 'frr', 'pih', 'no',
+			'nb', 'nn', 'nrm', 'nov', 'ii', 'oc', 'mhr', 'or', 'om', 'ng', 'hz', 'uz', 'pa', 'pi', 'pfl', 'pag', 'pnb',
+			'pap', 'ps', 'koi', 'km', 'pcd', 'pms', 'tpi', 'nds', 'pl', 'tokipona', 'tp', 'pnt', 'pt', 'aa', 'kaa',
+			'crh', 'ty', 'ksh', 'ro', 'rmy', 'rm', 'qu', 'rue', 'ru', 'sah', 'se', 'sm', 'sa', 'sg', 'sc', 'sco',
+			'stq', 'st', 'nso', 'tn', 'sq', 'scn', 'si', 'simple', 'sd', 'ss', 'sk', 'sl', 'cu', 'szl', 'so',
+			'ckb', 'srn', 'sr', 'sh', 'su', 'fi', 'sv', 'tl', 'ta', 'shi', 'kab', 'roa-tara', 'tt', 'te', 'tet',
+			'th', 'ti', 'tg', 'to', 'chr', 'chy', 've', 'tr', 'tk', 'tw', 'udm', 'bug', 'uk', 'ur', 'ug', 'za',
+			'vec', 'vep', 'vi', 'vo', 'fiu-vro', 'wa', 'zh-classical', 'vls', 'war', 'wo', 'wuu', 'ts', 'yi',
+			'yo', 'zh-yue', 'diq', 'zea', 'bat-smg', 'zh', 'zh-tw', 'zh-cn',
 		);
-		static $orderMerged = false;
 
-		$a = self::getCodeFromLink($a);
-		$b = self::getCodeFromLink($b);
+		// http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename-firstword&oldid=3395404
+		static $order_alphabetic_revised = array(
+			'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc', 'roa-rup', 'frp', 'as', 'ast',
+			'gn', 'av', 'ay', 'az', 'bjn', 'id', 'ms', 'bm', 'bn', 'zh-min-nan', 'nan', 'map-bms', 'jv', 'su',
+			'ba', 'be', 'be-x-old', 'bh', 'bcl', 'bi', 'bar', 'bo', 'bs', 'br', 'bug', 'bg', 'bxr', 'ca', 'ceb',
+			'cv', 'cs', 'ch', 'cbk-zam', 'ny', 'sn', 'tum', 'cho', 'co', 'cy', 'da', 'dk', 'pdc', 'de', 'dv', 'nv',
+			'dsb', 'na', 'dz', 'mh', 'et', 'el', 'eml', 'en', 'myv', 'es', 'eo', 'ext', 'eu', 'ee', 'fa', 'hif',
+			'fo', 'fr', 'fy', 'ff', 'fur', 'ga', 'gv', 'sm', 'gag', 'gd', 'gl', 'gan', 'ki', 'glk', 'gu', 'got',
+			'hak', 'xal', 'ko', 'ha', 'haw', 'hy', 'hi', 'ho', 'hsb', 'hr', 'io', 'ig', 'ilo', 'bpy', 'ia', 'ie',
+			'iu', 'ik', 'os', 'xh', 'zu', 'is', 'it', 'he', 'kl', 'kn', 'kr', 'pam', 'ka', 'ks', 'csb', 'kk', 'kw',
+			'rw', 'ky', 'rn', 'mrj', 'sw', 'kv', 'kg', 'ht', 'ku', 'kj', 'lad', 'lbe', 'lez', 'lo', 'la', 'ltg',
+			'lv', 'to', 'lb', 'lt', 'lij', 'li', 'ln', 'jbo', 'lg', 'lmo', 'hu', 'mk', 'mg', 'ml', 'krc', 'mt',
+			'mi', 'mr', 'xmf', 'arz', 'mzn', 'cdo', 'mwl', 'koi', 'mdf', 'mo', 'mn', 'mus', 'my', 'nah', 'fj',
+			'nl', 'nds-nl', 'cr', 'ne', 'new', 'ja', 'nap', 'ce', 'frr', 'pih', 'no', 'nb', 'nn', 'nrm', 'nov',
+			'ii', 'oc', 'mhr', 'or', 'om', 'ng', 'hz', 'uz', 'pa', 'pi', 'pfl', 'pag', 'pnb', 'pap', 'ps', 'km',
+			'pcd', 'pms', 'nds', 'pl', 'pnt', 'pt', 'aa', 'kaa', 'crh', 'ty', 'ksh', 'ro', 'rmy', 'rm', 'qu', 'ru',
+			'rue', 'sah', 'se', 'sa', 'sg', 'sc', 'sco', 'stq', 'st', 'nso', 'tn', 'sq', 'scn', 'si', 'simple', 'sd',
+			'ss', 'sk', 'sl', 'cu', 'szl', 'so', 'ckb', 'srn', 'sr', 'sh', 'fi', 'sv', 'tl', 'ta', 'shi', 'kab',
+			'roa-tara', 'tt', 'te', 'tet', 'th', 'vi', 'ti', 'tg', 'tpi', 'tokipona', 'tp', 'chr', 'chy', 've', 'tr',
+			'tk', 'tw', 'udm', 'uk', 'ur', 'ug', 'za', 'vec', 'vep', 'vo', 'fiu-vro', 'wa', 'zh-classical', 'vls',
+			'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea', 'bat-smg', 'zh', 'zh-tw', 'zh-cn',
+		);
 
-		if($a == $b) return 0;
+		wfProfileIn( __METHOD__ );
 
-		$sortPrepend = WBCSettings::get( 'sortPrepend' );
+		// Prepare the sorting array.
+		if( self::$sort_order === false ) {
+			$sort = WBCSettings::get( 'sort' );
+			switch( $sort ) {
+				case 'code':
+					self::$sort_order = $order_alphabetic;
+					sort( self::$sort_order );
+					break;
+				case 'alphabetic':
+					self::$sort_order = $order_alphabetic;
+					break;
+				case 'alphabetic_revised':
+					self::$sort_order = $order_alphabetic_revised;
+					break;
+				case 'none':
+				default:
+					wfProfileOut( __METHOD__ );
+					// If we encounter an unknown sort setting, just do nothing, for we are kind and generous.
+					return;
+			}
 
-		if( !$orderMerged && is_array( $sortPrepend ) ) {
-			$order = array_merge( $sortPrepend, $order);
+			$sortPrepend = WBCSettings::get( 'sortPrepend' );
+			if( is_array( $sortPrepend ) ) {
+				self::$sort_order = array_unique( array_merge( $sortPrepend, self::$sort_order ) );
+			}
+			self::$sort_order = array_flip( self::$sort_order );
+
 		}
-		$orderMerged = true;
 
-		$a=array_search($a, $order);
-		$b=array_search($b, $order);
+		// Prepare the array for sorting.
+		foreach( $a as $k => $langlink ) {
+			$a[$k] = explode( ':', $langlink, 2 );
+		}
 
-		return ($a>$b)?1:(($a<$b)?-1:0);
+		usort( $a, 'WBCLangLinkHandler::compareLinks' );
+
+		// Restore the sorted array.
+		foreach( $a as $k => $langlink ) {
+			$a[$k] = implode( ':', $langlink );
+		}
+		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * Compare two interlanguage links by order of alphabet, based on local language (by first
-	 * word).
-	 *
-	 * List from http://meta.wikimedia.org/w/index.php?title=Interwiki_sorting_order&oldid=2022604#By_order_of_alphabet.2C_based_on_local_language_.28by_first_word.29
-	 * @version	Copied from InterlanguageExtension rev 114818
+	 * usort() callback function, compares the links on the basis of self::$sort_order
 	 */
-	protected static function compareAlphabeticRevised($a, $b) {
-		static $order = array(
-			'ace', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc',
-			'roa-rup', 'frp', 'as', 'ast', 'gn', 'av', 'ay', 'az', 'id', 'ms',
-			'bm', 'bn', 'zh-min-nan', 'nan', 'map-bms', 'jv', 'su', 'ba', 'be',
-			'be-x-old', 'bh', 'bcl', 'bi', 'bar', 'bo', 'bs', 'br', 'bug', 'bg',
-			'bxr', 'ca', 'ceb', 'cv', 'cs', 'ch', 'cbk-zam', 'ny', 'sn', 'tum',
-			'cho', 'co', 'cy', 'da', 'dk', 'pdc', 'de', 'dv', 'nv', 'dsb', 'na',
-			'dz', 'mh', 'et', 'el', 'eml', 'en', 'myv', 'es', 'eo', 'ext', 'eu',
-			'ee', 'fa', 'hif', 'fo', 'fr', 'fy', 'ff', 'fur', 'ga', 'gv', 'sm',
-			'gd', 'gl', 'gan', 'ki', 'glk', 'gu', 'got', 'hak', 'xal', 'ko',
-			'ha', 'haw', 'hy', 'hi', 'ho', 'hsb', 'hr', 'io', 'ig', 'ilo',
-			'bpy', 'ia', 'ie', 'iu', 'ik', 'os', 'xh', 'zu', 'is', 'it', 'he',
-			'kl', 'kn', 'kr', 'pam', 'ka', 'ks', 'csb', 'kk', 'kw', 'rw', 'ky',
-			'rn', 'sw', 'kv', 'kg', 'ht', 'ku', 'kj', 'lad', 'lbe', 'lo', 'la',
-			'lv', 'to', 'lb', 'lt', 'lij', 'li', 'ln', 'jbo', 'lg', 'lmo', 'hu',
-			'mk', 'mg', 'ml', 'krc', 'mt', 'mi', 'mr', 'arz', 'mzn', 'cdo',
-			'mwl', 'mdf', 'mo', 'mn', 'mus', 'my', 'nah', 'fj', 'nl', 'nds-nl',
-			'cr', 'ne', 'new', 'ja', 'nap', 'ce', 'pih', 'no', 'nb', 'nn',
-			'nrm', 'nov', 'ii', 'oc', 'mhr', 'or', 'om', 'ng', 'hz', 'uz', 'pa',
-			'pi', 'pag', 'pnb', 'pap', 'ps', 'km', 'pcd', 'pms', 'nds', 'pl',
-			'pnt', 'pt', 'aa', 'kaa', 'crh', 'ty', 'ksh', 'ro', 'rmy', 'rm',
-			'qu', 'ru', 'sah', 'se', 'sa', 'sg', 'sc', 'sco', 'stq', 'st', 'tn',
-			'sq', 'scn', 'si', 'simple', 'sd', 'ss', 'sk', 'sl', 'cu', 'szl',
-			'so', 'ckb', 'srn', 'sr', 'sh', 'fi', 'sv', 'tl', 'ta', 'kab',
-			'roa-tara', 'tt', 'te', 'tet', 'th', 'vi', 'ti', 'tg', 'tpi',
-			'tokipona', 'tp', 'chr', 'chy', 've', 'tr', 'tk', 'tw', 'udm', 'uk',
-			'ur', 'ug', 'za', 'vec', 'vo', 'fiu-vro', 'wa', 'zh-classical',
-			'vls', 'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea',
-			'bat-smg', 'zh', 'zh-tw', 'zh-cn',
-		);
-		static $orderMerged = false;
+	protected static function compareLinks( $a, $b ) {
+		$a = $a[0];
+		$b = $b[0];
 
-		$a = self::getCodeFromLink($a);
-		$b = self::getCodeFromLink($b);
+		if( $a == $b ) return 0;
 
-		if($a == $b) return 0;
+		// If we encounter an unknown language, which may happen if the sort table is not updated, we move it to the bottom.
+		$a = self::$sort_order[$a];
+		if( $a === null ) $a = 999999;
+		$b = self::$sort_order[$b];
+		if( $b === null ) $b = 999999;
 
-		$sortPrepend = WBCSettings::get( 'sortPrepend' );
-
-		if( !$orderMerged && is_array( $sortPrepend ) ) {
-			$order = array_merge( $sortPrepend, $order );
-		}
-		$orderMerged = true;
-
-		$a=array_search($a, $order);
-		$b=array_search($b, $order);
-
-		return ($a>$b)?1:(($a<$b)?-1:0);
+		return ( $a > $b )? 1: ( ( $a < $b )? -1: 0 );
 	}
 
 }
