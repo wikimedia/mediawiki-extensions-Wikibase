@@ -83,6 +83,12 @@ class importInterlang extends Maintenance {
 	}
 
 	protected function addLink( $lang, $link, $id ) {
+		// If a link is empty (which is a valid MediaWiki interlanguage link), fail silently.
+		if( $link === "" ) {
+			$this->maybePrint( "Skipping empty link." );
+			return;
+		}
+
 		$link = self::niceLink( $link );
 		$label = self::makeLabel( $link );
 
