@@ -446,15 +446,5 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 	_interfaceHandler_onBlur: function( event ) {
 		this._toolbar.editGroup.tooltip.hide();
-	},
-
-	/////////////////
-	// CONFIGURABLE:
-	/////////////////
-
-	/**
-	 * Allows to define a default value appearing in the input box in case there is no value given
-	 * @var string
-	 */
-	inputPlaceholder: ''
+	}
 };

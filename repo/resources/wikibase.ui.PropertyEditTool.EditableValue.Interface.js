@@ -178,7 +178,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			//console.log( '"'+ this._inputElem.attr( 'value' ).replace( / /g, '&nbsp;') + '"' );
 
 			var currentValue = this._inputElem.val();
-			if ( currentValue == '' ) {
+			if ( currentValue === '' ) {
 				currentValue = this._inputElem.attr( 'placeholder' );
 			}
 			ruler.html( currentValue.replace( / /g, '&nbsp;' ).replace( /</g, '&lt;' ) ); // TODO prevent insane HTML from being placed in the ruler
