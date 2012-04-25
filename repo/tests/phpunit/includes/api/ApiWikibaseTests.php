@@ -13,6 +13,7 @@
  * @author John Erling Blad < jeblad@gmail.com >
  * 
  * @group Database
+ * @group medium
  */
 class ApiWikibaseTests extends ApiTestCase {
 
@@ -21,12 +22,13 @@ class ApiWikibaseTests extends ApiTestCase {
 	 */
 	protected $input, $index;
 
-	function setUp() {
+	public function setUp() {
 		parent::setUp();
 		//$this->doLogin();	
-		$this->index = array();	
 		$this->input = array(
-		array('data' => '{
+		array(
+		'id' => 1,
+		'data' => '{
 			"links": {
 				"de": { "site": "de", "title": "Berlin" },
 				"en": { "site": "en", "title": "Berlin" },
@@ -46,7 +48,9 @@ class ApiWikibaseTests extends ApiTestCase {
 				"nn" : { "language": "nn", "value": "Hovudstad og delstat i Forbundsrepublikken Tyskland." }
 			}
 		}'),
-		array('data' => '{
+		array(
+		'id' => 2,
+		'data' => '{
 			"links": {
 				"de": { "site": "de", "title": "London" },
 				"en": { "site": "en", "title": "London" },
@@ -66,7 +70,9 @@ class ApiWikibaseTests extends ApiTestCase {
 				"nn" : { "language": "nn", "value": "Hovudstad i England og Storbritannia." }
 			}
 		}'),
-		array('data' => '{
+		array(
+		'id' => 3,
+		'data' => '{
 			"links": {
 				"de": { "site": "de", "title": "Oslo" },
 				"en": { "site": "en", "title": "Oslo" },
@@ -89,21 +95,21 @@ class ApiWikibaseTests extends ApiTestCase {
 		
 	}
 	
-	function tearDown() {
+	public function tearDown() {
 		// there should be some way to remove the item under test
 	}
 	
 	/**
 	 * @group API
 	 */
-	function testSetItem() {
-		$idx = 0;
+	public function testSetItem() {
 		foreach ($this->input as $item) {
 			$data = $this->doApiRequest( array(
 				'action' => 'wbsetitem',
 				'data' => $item['data'],
 			) );
-			print_r($item['data']);
+			$this->assertArrayHasKey( 'success', $data[0],
+				"Must have an 'success' key in the result from the API" );
 			$this->assertArrayHasKey( 'item', $data[0],
 				"Must have an 'items' key in the result from the API" );
 			$this->assertArrayHasKey( 'id', $data[0]['item'],
@@ -114,36 +120,172 @@ class ApiWikibaseTests extends ApiTestCase {
 				"Must have an 'labels' key in the 'item' result from the API" );
 			$this->assertArrayHasKey( 'descriptions', $data[0]['item'],
 				"Must have an 'descriptions' key in the 'item' result from the API" );
-			$item['id'] = $data[0]['item']['id'];
-			$this->index["{$item->id}"] = $idx++; // not quite sure what the index will be if id is zero
+			// we should store and reuse but its thrown away on each iteration
+			$this->assertEquals( $item['id'], $data[0]['item']['id'],
+				"Must have an 'id' key in the 'item' result from the API that is equal to the expected" );
+		}
+	}
+		
+	/**
+	 * @group API
+	 */
+	public function testGetItemId() {
+		$data = $this->doApiRequest( array(
+			'action' => 'wbgetitemid',
+			'site' => 'no',
+			'title' => 'London',
+		) );
+		$this->assertArrayHasKey( 'success', $data[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'item', $data[0],
+			"Must have an 'item' key in the result from the API" );
+		$this->assertArrayHasKey( 'id', $data[0]['item'],
+			"Must have an 'id' key in the 'item' result from the API" );
+	}
+	
+	/**
+	 * @group API
+	 */
+	public function testGetItems1() {
+		foreach ($this->input as $item) {
+			$data = $this->doApiRequest( array(
+				'action' => 'wbgetitems',
+				'ids' => "{$item['id']}",
+			) );
+			$this->assertArrayHasKey( 'success', $data[0],
+				"Must have an 'success' key in the result from the API" );
+			$this->assertArrayHasKey( 'items', $data[0],
+				"Must have an 'items' key in the result from the API" );
+			$this->assertArrayHasKey( "{$item['id']}", $data[0]['items'],
+				"Must have an '{$item['id']}' key in the 'items' result from the API" );
+			$this->assertArrayHasKey( 'id', $data[0]['items']["{$item['id']}"],
+				"Must have an 'id' key in the '{$item['id']}' result from the API" );
+			$this->assertArrayHasKey( 'sitelinks', $data[0]['items']["{$item['id']}"],
+				"Must have an 'sitelinks' key in the '{$item['id']}' result from the API" );
+			$this->assertArrayHasKey( 'labels', $data[0]['items']["{$item['id']}"],
+				"Must have an 'labels' key in the '{$item['id']}' result from the API" );
+			$this->assertArrayHasKey( 'descriptions', $data[0]['items']["{$item['id']}"],
+				"Must have an 'descriptions' key in the '{$item['id']}' result from the API" );
 		}
 	}
 	
 	/**
 	 * @group API
 	 */
-	function testGetItemId() {
-		$data = $this->doApiRequest( array(
-			'action' => 'wbgetitemid',
-			'site' => 'no',
-			'title' => 'London',
-		) );
-		print_r($data);
-		$this->assertArrayHasKey( 'item', $data[0],
-			"Must have an 'item' key in the result from the API" );
-		$this->assertArrayHasKey( 'id', $data[0]['item'],
-			"Must have an 'id' key in the 'item' result from the API" );
-		$this->assertEquals( 1, $data[0]['item']['id'],
-			"Must have an 'id' key in the 'item' result from the API that is 1" );
-		if (isset($item->index[$data[0]['item']['id']])) {
-			if (isset($item->input[$item->index[$data[0]['item']['id']]])) {
-				if ($item->input[$item->index[$data[0]['item']['id']]['id']] !== $data[0]['item']['id']) {
-					$item->fail("Didn't found the original object");
-				}
-			}
+	public function testGetItems2() {
+		$ids = array();
+		foreach ($this->input as $item) {
+			array_push($ids, "{$item['id']}");
 		}
+		$data = $this->doApiRequest( array(
+			'action' => 'wbgetitems',
+			'ids' => join($ids, '|')
+		) );
+		$this->assertArrayHasKey( 'success', $data[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'items', $data[0],
+			"Must have an 'items' key in the result from the API" );
+		$this->assertCount( 3, $data[0]['items'],
+			"Must have a number of count of 3 in the 'items' result from the API" );
 	}
 	
+	/**
+	 * @group API
+	 * @dataProvider providerSiteTitle1
+	 */
+	public function testLinkSite1( $id, $site, $title, $linksite, $linktitle ) {
+		$data = $this->doApiRequest( array(
+			'action' => 'wblinksite',
+			'id' => $id,
+			'linksite' => $linksite,
+			'linktitle' => $linktitle,
+			'link' => 'set',
+		) );
+		//print_r($data);
+		$this->assertArrayHasKey( 'success', $data[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'item', $data[0],
+			"Must have an 'item' key in the result from the API" );
+	}
+
+	public function providerSiteTitle1() {
+		return array(
+			array( 1, 'nn', 'Berlin', 'da', 'Berlin' ),
+			array( 2, 'en', 'London', 'fi', 'London' ),
+			array( 3, 'no', 'Oslo', 'nl', 'Oslo' ),
+		);
+	}
+	
+	/**
+	 * @group API
+	 * @dataProvider providerSiteTitle1
+	 */
+	public function testGetItems3( $id, $site, $title, $linksite, $linktitle ) {
+		
+		$data = $this->doApiRequest( array(
+			'action' => 'wbgetitems',
+			'sites' => $linksite,
+			'titles' => $linktitle,
+		) );
+		$this->assertArrayHasKey( 'success', $data[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'items', $data[0],
+			"Must have an 'items' key in the result from the API" );
+		$this->assertCount( 1, $data[0]['items'],
+			"Must have a number of count of 1 in the 'items' result from the API" );
+		$this->assertArrayHasKey( 'id', $data[0]['items']["{$id}"],
+			"Must have an '{$id}' key in the 'items' result from the API" );
+		$this->assertEquals( "{$id}", $data[0]['items']["{$id}"]['id'],
+			"Must have a number '{$id}' in the 'id' result from the API" );
+	}
+
+	/**
+	 * @group API
+	 * @dataProvider providerSiteTitle1
+	 */
+	public function testGetItems4( $id, $site, $title, $linksite, $linktitle ) {
+		
+		$data = $this->doApiRequest( array(
+			'action' => 'wbgetitems',
+			'sites' => $site,
+			'titles' => $title,
+		) );
+		$this->assertArrayHasKey( 'success', $data[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'items', $data[0],
+			"Must have an 'items' key in the result from the API" );
+		$this->assertCount( 1, $data[0]['items'],
+			"Must have a number of count of 1 in the 'items' result from the API" );
+	}
+	
+	/**
+	 * @group API
+	 * @dataProvider providerSiteTitle2
+	 */
+	public function testLinkSite2( $id, $site, $title, $linksite, $linktitle, $badge ) {
+		$data = $this->doApiRequest( array(
+			'action' => 'wblinksite',
+			'site' => $site,
+			'title' => $title,
+			'linksite' => $linksite,
+			'linktitle' => $linktitle,
+			'badge' => $badge,
+			'link' => 'set',
+		) );
+		//print_r($data);
+		$this->assertArrayHasKey( 'success', $data[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'item', $data[0],
+			"Must have an 'item' key in the result from the API" );
+	}
+
+	public function providerSiteTitle2() {
+		return array(
+			array( 1, 'nn', 'Berlin', 'sv', 'Berlin', 1 ),
+			array( 2, 'en', 'London', 'nl', 'London', 2 ),
+			array( 3, 'no', 'Oslo', 'da', 'Oslo', 3 ),
+		);
+	}
 	
 	/**
 	 * Check that we have the help link

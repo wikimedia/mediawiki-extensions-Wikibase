@@ -7,7 +7,7 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          stopOnFailure="false"
-         strict="true"
+         strict="false"
 		 verbose="true">
 	<testsuites>
 		<testsuite name="includes">
