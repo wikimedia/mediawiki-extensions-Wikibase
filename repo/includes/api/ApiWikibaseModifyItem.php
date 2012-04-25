@@ -159,7 +159,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	}
 
 	public function isWriteMode() {
-		return true;
+		return !WBSettings::get( 'apiInDebug' );
 	}
 	
 	public function getAllowedParams() {
