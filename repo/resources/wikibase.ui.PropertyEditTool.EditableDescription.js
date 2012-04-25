@@ -31,7 +31,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 			action: 'wbsetlanguageattribute',
 			language: wgUserLanguage,
 			description: this.getValue().toString(),
-			id: mw.config.values.wbItemId
+			id: mw.config.values.wbItemId,
+			item: 'set'
 		};
 	}
 } );

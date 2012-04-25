@@ -92,7 +92,8 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 				"action" => "wbsetlanguageattribute",
 				"id" => $itemId,
 				"language" => WIKI_USELANG,
-				"description" => $description
+				"description" => $description,
+				"item" => "set"
 		);
 
 		$result = $this->doCurlApiCall( $params );

@@ -31,7 +31,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 			action: "wbsetlanguageattribute",
 			language: window.wgUserLanguage,
 			label: this.getValue().toString(),
-			id: window.mw.config.get( 'wbItemId' )
+			id: window.mw.config.get( 'wbItemId' ),
+			item: 'set'
 		};
 	}
 } );
