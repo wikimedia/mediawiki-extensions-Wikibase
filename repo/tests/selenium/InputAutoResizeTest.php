@@ -35,8 +35,7 @@ class InputAutoResizeTest extends SeleniumTestCase {
 		div.wb-ui-propertyedittoolbar-group >
 		a.wb-ui-propertyedittoolbar-button:nth-child(1)";
 		$valueInputField = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevalueinterface";
-		
-		//$targetLabel = $this->get_element( $labelElementSelector )->get_text();
+		$valueInputFieldRuler = "css=h1#firstHeading > span > span.ruler";
 		
 		$this->get_element( $editLabelLink )->click();
 		$initialInputValue = $this->get_element( $valueInputField )->get_value();
