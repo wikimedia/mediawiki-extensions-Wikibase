@@ -58,19 +58,22 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 		}
 		$params = array(
 				"format" => "json",
-				"action" => "wbgetitemid"
+				"action" => "wbsetitem",
+				"data" => "{}"
 				);
 
 		$result = $this->doCurlApiCall( $params );
-		$this->assertTrue( isset($result["item"][1] ));
-		$itemId = $result["item"][1];
+//		var_dump($result);
+		$this->assertTrue( isset($result["item"]["id"] ));
+		$itemId = $result["item"]["id"];
 		
 		$params = array(
 				"format" => "json",
 				"action" => "wbsetlanguageattribute",
 				"id" => $itemId,
 				"language" => WIKI_USELANG,
-				"label" => $item
+				"label" => $item,
+				"item" => "set"
 		);
 		
 		$result = $this->doCurlApiCall( $params );

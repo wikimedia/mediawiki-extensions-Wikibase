@@ -78,11 +78,6 @@ class TooltipUITest extends SeleniumTestCase {
 
 	public function tearDown() {
 		if ($this->driver) {
-			if ($this->hasFailed()) {
-				$this->driver->set_sauce_context("passed", false);
-			} else {
-				$this->driver->set_sauce_context("passed", true);
-			}
 			$this->driver->quit();
 		}
 		parent::tearDown();

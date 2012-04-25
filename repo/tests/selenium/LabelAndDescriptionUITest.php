@@ -60,7 +60,7 @@ class LabelAndDescriptionUITest extends SeleniumTestCase {
 								div.wb-ui-propertyedittoolbar-group > 
 								div.wb-ui-propertyedittoolbar-group >
 								a.wb-ui-propertyedittoolbar-button:nth-child(2)";
-		$valueInputFieldSelector = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevaluepiece";
+		$valueInputFieldSelector = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevalueinterface";
 		 
 		$targetLabel = $this->get_element( $labelElementSelector )->get_text();
 		$changedLabel = $targetLabel."_foo";
@@ -136,7 +136,7 @@ class LabelAndDescriptionUITest extends SeleniumTestCase {
 		$cancelLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
 		div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group >
 		a.wb-ui-propertyedittoolbar-button:nth-child(2)";
-		$valueInputFieldSelector = "css=div.wb-ui-propertyedittool-subject > span > input.wb-ui-propertyedittoolbar-editablevaluepiece";
+		$valueInputFieldSelector = "css=div.wb-ui-propertyedittool-subject > span > input.wb-ui-propertyedittoolbar-editablevalueinterface";
 		
 		// doing the test stuff
 		// no description should be there for a newly created item and the input box should be displayed instantly 
@@ -196,11 +196,6 @@ class LabelAndDescriptionUITest extends SeleniumTestCase {
 
 	public function tearDown() {
 		if ($this->driver) {
-			if ($this->hasFailed()) {
-				$this->driver->set_sauce_context("passed", false);
-			} else {
-				$this->driver->set_sauce_context("passed", true);
-			}
 			$this->driver->quit();
 		}
 		parent::tearDown();
