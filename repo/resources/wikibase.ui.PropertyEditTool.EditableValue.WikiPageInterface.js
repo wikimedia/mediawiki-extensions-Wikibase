@@ -34,6 +34,19 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.WikiPageInterface.pr
 				text: title
 			} ) );
 		}
+	},
+
+	/**
+	 * validate input
+	 * @param String value
+	 */
+	validate: function( value ) {
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
+		for ( var i in this._currentResults ) {
+			if ( value === this._currentResults[i] ) {
+				return true;
+			}
+		}
 	}
 
 } );

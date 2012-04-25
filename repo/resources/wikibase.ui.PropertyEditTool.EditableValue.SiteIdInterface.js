@@ -24,8 +24,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface = function( su
 window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 	
-	_resolvedSiteName: null,
-	
 	_initInputElement: function() {
 		var arrayClients = [];
 
@@ -44,25 +42,44 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		this.setResultSet( arrayClients );
 
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
-		
-		this._resolvedSiteName = $( '<span/>', {
-			'class': this.UI_CLASS + '-siteid'
-		} );
-		this._inputElem.after( this._resolvedSiteName );
 	},
 	
 	_onInputRegistered: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._onInputRegistered.call( this );
 		var siteId = this._getSiteIdFromValue();
 		var isValid = this.validate( this.getValue() );
-		if ( isValid ) {
+		if ( isValid && wikibase.hasClient( this._getSiteIdFromValue() ) ) {
 			this._editableValue._interfaces[1].url = wikibase.getClient( this._getSiteIdFromValue() ).getApi();
 		}
 		this._editableValue._interfaces.pageName.setDisabled( !isValid );
 	},
 
+
+	/**
+	 * extract the site id from an input value
+	 * @return String siteId
+	 */
 	_getSiteIdFromValue: function() {
 		return this.getValue().replace( /[^(]+\(([^()]+)\)/, '$1' );
+	},
+
+	/**
+	 * validate input
+	 * @param String value
+	 */
+	validate: function( value ) {
+		// check whether current input is in the list of values returned by the wikis API
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
+		for ( var i in this._currentResults ) {
+			// value might be site id or language name TODO access client objects
+			var check = this._currentResults[i].match(/^([^(]+) \(([^)]+)\)$/);
+			for (var j in check ) {
+				if ( value === check[j] ) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 } );

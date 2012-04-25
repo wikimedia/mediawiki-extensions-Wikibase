@@ -57,6 +57,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 					this._onInputRegistered();
 				}, this )
 			} );
+			inputElement.on( 'keyup', $.proxy( function( event ) {
+				this._onInputRegistered();
+			}, this ) );
 		}
 		return inputElement;
 	},
@@ -74,16 +77,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @param String value
 	 */
 	validate: function( value ) {
-		// check whether current input is in the list of values returned by the wikis API
 		if ( this._currentResults === null ) {
 			return false;
 		}
-		for ( var i in this._currentResults ) {
-			if ( value === this._currentResults[i] ) {
-				return true;
-			}
-		}
-		return false;
 	},
 
 
