@@ -57,9 +57,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			suggest: ''
 		};
 		// url can only be set when site id is known (when adding a site link, url will be passed on that event)
-		if ( this._subject.attr('class').match(/wb-language-links-\w+/) !== null ) {
-			var siteId = this._subject.attr('class').match(/wb-language-links-\w+/)[0].split('-').pop();
-			interfaces.pageName.url = wikibase.getClient( siteId ).getApi();
+		if ( this._subject.attr('class').match(/wb-sitelinks-[\w-]+/) !== null ) {
+			var siteId = this._subject.attr('class').match(/wb-sitelinks-[\w-]+/)[0].split('-').pop();
+			if( wikibase.hasClient( siteId ) ) {
+				interfaces.pageName.url = wikibase.getClient( siteId ).getApi();
+			}
 		}
 		interfaces.push( interfaces.pageName );
 
