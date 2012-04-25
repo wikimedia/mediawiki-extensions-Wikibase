@@ -38,7 +38,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 
 		for ( var siteId in wikibase.getClients() ) {
 			var client = wikibase.getClient( siteId );
-			clientList.push( client.getShortName() + ' (' + client.getId() + ')' );
+			clientList.push( { 'label': client.getName() + ' (' + client.getId() + ')', 'value': client.getShortName() + ' (' + client.getId() + ')', 'client': client } );
 		}
 		this.setResultSet( clientList );
 
@@ -47,10 +47,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	
 	_onInputRegistered: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._onInputRegistered.call( this );
-		var siteId = this._getSiteIdFromValue();
+		var siteId = this._getSiteId();
 		var isValid = this.validate( this.getValue() );
-		if ( isValid && wikibase.hasClient( this._getSiteIdFromValue() ) ) {
-			this._editableValue._interfaces[1].url = wikibase.getClient( this._getSiteIdFromValue() ).getApi();
+		if ( isValid && wikibase.hasClient( this._getSiteId() ) ) {
+			this._editableValue._interfaces[1].url = wikibase.getClient( this._getSiteId() ).getApi();
 		}
 		this._editableValue._interfaces.pageName.setDisabled( !isValid );
 	},
@@ -60,8 +60,17 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 * extract the site id from an input value
 	 * @return String siteId
 	 */
-	_getSiteIdFromValue: function() {
-		return this.getValue().replace( /[^(]+\(([^()]+)\)/, '$1' );
+	_getSiteId: function() {
+		var value = this.getValue();
+		for ( var i in this._currentResults ) {
+			if ( value == this._currentResults[i].client.getId()
+				|| value == this._currentResults[i].client.getShortName()
+				|| value == this._currentResults[i].value
+				) {
+				return this._currentResults[i].client.getId();
+			}
+		}
+		return null;
 	},
 
 	/**
@@ -71,16 +80,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	validate: function( value ) {
 		// check whether current input is in the list of values returned by the wikis API
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
-		for ( var i in this._currentResults ) {
-			// value might be site id or language name TODO access client objects
-			var check = this._currentResults[i].match(/^([^(]+) \(([^)]+)\)$/);
-			for (var j in check ) {
-				if ( value === check[j] ) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return ( this._getSiteId() === null ) ? false : true;
 	}
 
 } );
