@@ -27,12 +27,26 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	_initInputElement: function() {
 		var clientList = [];
 
-		this.onKeyDown = function( event ) {
-			// when hitting tab, select the first element of the current result set an jump into title input box
-			if ( event.keyCode == 9 ) {
-				var widget = this._inputElem.autocomplete( 'widget' );
-				widget.data( 'menu' ).activate( event, widget.children().filter(':first') );
-				widget.data( 'menu' ).select( event );
+		/**
+		 * when leaving the input box, set displayed value to from any allowed input value to correct display value
+		 *
+		 * @param event
+		 */
+		this.onBlur = function( event ) {
+			var widget = this._inputElem.autocomplete( 'widget' );
+			if ( this.getSelectedSiteId() !== null ) {
+				/*
+				 loop through complete result set since the autocomplete widget's narrowed result set
+				 is not reliable / too slow; e.g. do not do this:
+				 widget.data( 'menu' ).activate( event, widget.children().filter(':first') );
+				 this._inputElem.val( widget.data( 'menu' ).active.data( 'item.autocomplete' ).value );
+				*/
+				$.each( this._currentResults, $.proxy( function( index, element ) {
+					if ( element.client.getId() == this.getSelectedSiteId() ) {
+						this._inputElem.val(element.value );
+					}
+				}, this ) )
+				this._onInputRegistered();
 			}
 		}
 
@@ -50,7 +64,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	},
 
 	/**
-	 * Returns the selected client site Id
+	 * Returns the selected client site Id from currently specified value
 	 * 
 	 * @return string|null siteId or null if no valid selection has been made yet.
 	 */

@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
 "use strict";
 
@@ -61,7 +62,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 */
 	_inputElem: null,
 
+	/**
+	 * when adding characters to the input value, the previous value is stored to be able to check whether instant
+	 * on change operations have to be performed
+	 * @var String
+	 */
+	_previousValue: null,
+
 	_currentWidth: null,
+
 
 	/**
 	 * Initializes the editable value.
@@ -109,10 +118,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this._inputElem.after( ruler );
 		}
 
-        this._isInEditMode = true;
+		this._isInEditMode = true;
 		
 		this._onInputRegistered(); // do this after setting _isInEditMode !
-        this.setFocus();
+		this.setFocus();
 		
 		return true;
 	},
@@ -146,11 +155,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'name': this._key,
 			'value': this.getValue(),
 			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._onKeyPressed, this ),
-			'keyup':    jQuery.proxy( this._onKeyUp, this ),
-			'keydown':  jQuery.proxy( this._onKeyDown, this ),
-			'focus':    jQuery.proxy( this._onFocus, this ),
-			'blur':     jQuery.proxy( this._onBlur, this )
+			'keypress': $.proxy( this._onKeyPressed, this ),
+			'keyup':    $.proxy( this._onKeyUp, this ),
+			'keydown':  $.proxy( this._onKeyDown, this ),
+			'focus':    $.proxy( this._onFocus, this ),
+			'blur':     $.proxy( this._onBlur, this ),
+			'change':   $.proxy( this._onChange, this )
 		} );
 	},
 	
@@ -167,6 +177,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * its initial value.
 	 */
 	_onInputRegistered: function() {
+		this._previousValue = this._inputElem.val();
 		if( this.onInputRegistered !== null && this.onInputRegistered() === false ) { // callback
 			return false; // cancel
 		}
@@ -222,14 +233,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
-		this._onInputRegistered(); // TODO: do not fire this if input hasn't changed
+		this._previousValue = this._inputElem.val();
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
 	_onKeyUp: function( event ) {
-		this._onInputRegistered(); // TODO: do not fire this if input hasn't changed
+		if ( this._inputElem.val() != this._previousValue ) {
+			this._onInputRegistered();
+		}
 		this._expand();
 		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
 			return false; // cancel
@@ -248,9 +261,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this.onFocus( event ); // callback
 		}
 	},
+
 	_onBlur: function( event ) {
 		if( this.onBlur !== null ) {
 			this.onBlur( event ); // callback
+		}
+	},
+
+	_onChange: function( event ) {
+		if( this.onChange !== null ) {
+			this.onChange( event ); // callback
 		}
 	},
 
@@ -467,5 +487,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	
 	onFocus: null,
 	
-	onBlur: null
+	onBlur: null,
+
+	onChange: null
 };

@@ -15,10 +15,10 @@ class LabelAndDescriptionUITest extends SeleniumTestCase {
 	protected $targetItemId;
 
 	public function setUp() {
-		$this->driver = WebDriver_Driver::InitAtLocal( "4444", "firefox" );
+		$this->driver = WebDriver_Driver::InitAtLocal( "4444", SELENIUM_BROWSER );
 		$this->targetItemId = $this->createNewWikidataItem(); // create random item
 		$this->assertTrue( is_numeric( $this->targetItemId ) );
-		$this->targetUrl = WIKI_URL."/index.php?title=Data:q$this->targetItemId" . "&uselang=" . WIKI_USELANG;
+		$this->targetUrl = SELENIUM_WIKI_URL."/index.php?title=Data:q$this->targetItemId" . "&uselang=" . SELENIUM_WIKI_USELANG;
 		$this->set_implicit_wait( 1000 );
 	}
 	
