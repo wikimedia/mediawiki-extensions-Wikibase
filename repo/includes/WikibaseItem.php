@@ -223,6 +223,48 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * Remove label for a specific language in an item
+	 * 
+	 * @since 0.1
+	 * 
+	 * @param array|null $languages note that an empty array removes labels for no languages while a null pointer removes all
+	 */
+	public function removeLabel( $language ) {
+		$this->removeMultilangTexts( 'label', array($language) );
+	}
+
+	/**
+	 * Remove descriptions for a specific language in an item
+	 * 
+	 * @since 0.1
+	 * 
+	 * @param array|null $languages note that an empty array removes descriptions for no languages while a null pointer removes all
+	 */
+	public function removeDescription( $languages ) {
+		$this->removeMultilangTexts( 'description', array($language) );
+	}
+
+	/**
+	 * Remove the value with a field specifier
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $fieldKey
+	 * @param array|null $languages
+	 */
+	protected function removeMultilangTexts( $fieldKey, array $languages = null ) {
+		if ( !is_null( $languages ) ) {
+			unset($this->data[$fieldKey]);
+			$this->data[$fieldKey] = array();
+		}
+		else {
+			foreach ($languages as $lang) {
+				unset($this->data[$fieldKey][$lang]);
+			}
+		}
+	}
+
+	/**
 	 * Get descriptions for an item
 	 * 
 	 * @since 0.1
@@ -240,7 +282,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * 
 	 * Get labels for an item
 	 * 
-	 * @param array|null $languages note that an empty array gives labels for no languages whil a null pointer gives all
+	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
 	 * 
 	 * @return array found labels in given languages
 	 */
@@ -254,7 +296,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * Get texts from an item with a field specifier
 	 *
 	 * @param string $fieldKey
-	 * @paran array|null $languages
+	 * @param array|null $languages
 	 *
 	 * @return array
 	 */
@@ -288,14 +330,22 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return boolean Success indicator
 	 */
 	public function addSiteLink( $siteId, $pageName, $updateType = 'set' ) {
+		/*
 		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
 			$this->data['links'][$siteId] = array();
 		}
+		*/
 
+		/*
 		$success =
 			!( ( $updateType === 'add' && array_key_exists( $siteId, $this->data['links'][$siteId] ) )
 			|| ( $updateType === 'update' && !array_key_exists( $siteId, $this->data['links'][$siteId] ) ) );
-
+			*/
+		$success =
+			( $updateType === 'add' && !array_key_exists( $siteId, $this->data['links'] ) )
+			|| ( $updateType === 'update' && array_key_exists( $siteId, $this->data['links'] ) )
+			|| ( $updateType === 'set' );
+			
 		if ( $success ) {
 			$this->data['links'][$siteId] = array(
 				'site' => $siteId,
