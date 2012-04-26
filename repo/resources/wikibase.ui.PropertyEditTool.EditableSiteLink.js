@@ -105,13 +105,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	
 	/**
 	 * Helper function to remove a css class matching a regular expression.
+	 * 
+	 * @param subject jQuery
+	 * @param RegExp classNameRegex
 	 */
-	_removeClassByRegex: function( subject, classNameRegExp ) {
+	_removeClassByRegex: function( subject, classNameRegex ) {
 		if ( typeof subject.attr( 'class' ) == 'undefined' ) {
 			return
 		}
 		$.each( subject.attr( 'class' ).split( ' ' ), $.proxy( function( index, className ) {
-			if ( className.match( classNameRegExp ) ) {
+			if ( className.match( classNameRegex ) ) {
 				subject.removeClass( className );
 			}
 		}, this ) );

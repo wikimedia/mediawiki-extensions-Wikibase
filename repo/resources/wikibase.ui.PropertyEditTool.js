@@ -41,7 +41,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	
 	/**
 	 * The editable value for the properties data value
-	 * @var wikibase.ui.PropertyEditTool.EditableValue
+	 * @var wikibase.ui.PropertyEditTool.EditableValue[]
 	 */
 	_editableValues: null,
 		
@@ -133,8 +133,31 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		// initialiye editable value and give appropriate toolbar on the way:
 		editableValue._init( valueElem, editableValueToolbar );
 		
+		editableValue.onAfterRemove = $.proxy( function() {
+			var elemIndex = this.getIndexOf( editableValue );			
+			
+			// remove EditableValue from list of managed values:
+			this._editableValues.splice( elemIndex, 1 );
+			
+			if( elemIndex >= this._editableValues.length ) {
+				elemIndex = -1; // element removed from end
+			}	
+			this._onRefreshView( elemIndex );
+		}, this );
+		
 		this._editableValues.push( editableValue );		
 		return editableValue;
+	},
+	
+	/**
+	 * returns the index of an EditableValue within this collection. If the element is not part of
+	 * this, -1 will be returned
+	 * 
+	 * @param wikibase.ui.PropertyEditTool.EditableValue elem
+	 * @return int
+	 */
+	getIndexOf: function( element ) {
+		return $.inArray( element, this._editableValues );
 	},
 	
 	/**
@@ -189,10 +212,32 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		
 		newValue.onStopEditing = $.proxy( function( save ) {
 			this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
+			newValue.onStopEditing = null;
 		}, this );		
 		
+		this._onRefreshView( this.getIndexOf( newValue ) );
 		newValue.setFocus();
 		return newValue;
+	},
+	
+	/**
+	 * Called when the view changes, for example if elements are removed or added in case this is a
+	 * view allowing multiple values.
+	 * 
+	 * @param int fromIndex the index of the value in this._editableValues which triggered the
+	 *        refresh request (because of insertion or deletion). This is -1 if an element was
+	 *        removed at the end of the view.
+	 */
+	_onRefreshView: function( fromIndex ) {
+		if( fromIndex < 0 ) {
+			return; // element at the end was removed, no update requiredy
+		}
+		for( var i = fromIndex; i < this._editableValues.length; i++ ) {
+			var isEven = ( i % 2 ) != 0;			
+			this._editableValues[ i ]._subject
+			.addClass( isEven ? 'even' : 'uneven' )
+			.removeClass( isEven ? 'uneven' : 'even' );			
+		};
 	},
 	
 	/**
