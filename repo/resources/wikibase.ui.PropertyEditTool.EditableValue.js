@@ -85,7 +85,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._pending = this._subject.hasClass( 'wb-pending-value' );		
 		
 		this._initInterfaces();
-		
+
 		this._toolbar = toolbar;
 		this._toolbar.appendTo( this._getToolbarParent() );
 		
@@ -179,12 +179,22 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.isInEditMode() ) {
 			return false;
 		}
-        this._isInEditMode = true;
+		this._isInEditMode = true;
 		
 		$.each( this._interfaces, function( index, elem ) {
 			elem.startEditing();
 		} );
-		
+
+		if ( this._toolbar.editGroup.tooltip !== null ) {
+			/*
+			FIXME: tooltip needs to recalculate its horizontal position after input elements have been placed inside
+			the DOM; but show() has already been called on initialization, so the tooltip is marked as visible (which
+			is necessary since the tooltip should be permanently shown on some occasions)
+			 */
+			this._toolbar.editGroup.tooltip.hide();
+			this._toolbar.editGroup.tooltip.show();
+		}
+
 		return true;
 	},
 

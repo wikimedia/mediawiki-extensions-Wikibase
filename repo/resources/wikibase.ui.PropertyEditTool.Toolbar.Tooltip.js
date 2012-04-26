@@ -30,8 +30,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	UI_CLASS: 'wb-ui-propertyedittoolbar-tooltip',
 
 	/**
-	 * tipsy element
-	 * @var Tipsy
+	 * @var Tipsy tipsy tooltip element
 	 */
 	_tipsy: null,
 
@@ -41,10 +40,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	_tipsyConfig: null,
 
 	/**
-	 * @var boolean used to determine if tooltip message is currently visible or not
+	 * @var bool used to determine if tooltip message is currently visible or not
 	 */
 	_isVisible: false,
-	
+
+	/**
+	 * @var bool used to determine if tooltip should react on hovering or not
+	 */
 	_permanent: false,
 	
 	/**
@@ -77,7 +79,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 		
 		this._toggleEvents( true );
 	},
-	
+
+	/**
+	 * toogle tooltip events to achive a permanent state or hover functionality
+	 *
+	 * @param bool activate
+	 */
 	_toggleEvents: function( activate ) {
 		if ( activate ) {
 			this._elem.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
@@ -96,7 +103,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	 */
 	show: function( permanent ) {
 		if ( !this._isVisible ) {
-			$( this._elem.children()[0] ).tipsy( 'show' );
+			this._tipsy.show();
 			this._isVisible = true;
 		}
 		if( permanent === true ) {
@@ -108,15 +115,24 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	/**
 	 * hide tooltip
 	 */
-	hide: function( ) {
+	hide: function() {
 		if ( this._permanent && typeof this._elem.data( 'events' ) == 'undefined' || !this._permanent ) {
 			this._permanent = false;
 			this._toggleEvents( true );
 			if ( this._isVisible ) {
-				$( this._elem.children()[0] ).tipsy( 'hide' );
+				this._tipsy.hide();
 				this._isVisible = false;
 			}
 		}
+	},
+
+	/**
+	 * set where the tooltip message shall appear
+	 *
+	 * @param String gravity
+	 */
+	setGravity: function( gravity ) {
+		this._tipsy.options.gravity = gravity;
 	},
 
 	destroy: function() {

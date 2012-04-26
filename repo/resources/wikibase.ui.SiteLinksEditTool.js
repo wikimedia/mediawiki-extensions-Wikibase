@@ -41,6 +41,12 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
 	},
 
+	_buildSingleValueToolbar: function( editableValue ) {
+		var toolbar = window.wikibase.ui.PropertyEditTool.prototype._buildSingleValueToolbar.call( this, editableValue );
+		toolbar.editGroup.tooltip.setGravity( 'nw' );
+		return toolbar;
+	},
+
 	_getToolbarParent: function() {
 		// take content (table), put it into a div and also add the toolbar into the div
 		return $( '<td/>', { colspan: '3' } )
