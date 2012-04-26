@@ -15,15 +15,20 @@
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : dirname( __FILE__ ) . '/../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
+require_once $basePath . '/includes/Exception.php';
+
+class importInterlangException extends MWException {}
 
 class importInterlang extends Maintenance {
 	protected $api;
 	protected $verbose = false;
+	protected $ignore_errors = false;
 
 	public function __construct() {
-		$this->mDescription = 'Import interlanguage links in Wikidata.\n\nThe links may be created by extractInterlang.sql';
+		$this->mDescription = "Import interlanguage links in Wikidata.\n\nThe links may be created by extractInterlang.sql";
 
 		$this->addOption( 'verbose', "Print API requests and responses" );
+		$this->addOption( 'ignore-errors', "Ignore API errors" );
 		$this->addArg( 'lang', "Language code of the base wiki", true );
 		$this->addArg( 'filename', "File with interlanguage links", true );
 		$this->addArg( 'api', "Base API url", true );
@@ -33,6 +38,7 @@ class importInterlang extends Maintenance {
 
 	public function execute() {
 		$this->verbose = (bool)$this->getOption( 'verbose' );
+		$this->ignore_errors = (bool)$this->getOption( 'ignore-errors' );
 		$lang = $this->getArg( 0 );
 		$filename = $this->getArg( 1 );
 		$this->api = $this->getArg( 2 );
@@ -41,12 +47,18 @@ class importInterlang extends Maintenance {
 		fgets( $file ); // We don't need the first line with column names.
 		$current = ""; $current_id = false;
 		while( $link = fgetcsv( $file, 0, "\t" ) ) {
-			if( $link[0] !== $current ) {
-				$current = $link[0];
-				$this->maybePrint( "New item: $current" );
-				$current_id = $this->createItem( $lang, $current );
+			try {
+				if( $link[0] !== $current ) {
+					$current = $link[0];
+					$this->maybePrint( "New item: $current" );
+					$current_id = $this->createItem( $lang, $current );
+				}
+				$this->addLink( $link[1], $link[2], $current_id );
+			} catch( importInterlangException $e ) {
+				if( !$this->ignore_errors ) {
+					throw $e;
+				}
 			}
-			$this->addLink( $link[1], $link[2], $current_id );
 		}
 
 		echo "Done!\n";
@@ -58,27 +70,27 @@ class importInterlang extends Maintenance {
 		$api_response = $this->callAPI( $this->api . "?action=wbgetitemid&format=php&site=" . urlencode( $lang ) . "&title=" . urlencode( $link ) );
 		if( isset( $api_response['error'] ) ) {
 			if( $api_response['error']['code'] !== 'no-such-item' ) {
-				throw new MWException( "Error: " . $api_response['error']['info'] . "\n" );
+				throw new importInterlangException( "Error: " . $api_response['error']['info'] . "\n" );
 			}
 		} else {
 			if( isset( $api_response['success'] ) && $api_response['success'] ) {
 				$this->addLink( $lang, $link, $api_response['item']['id'] );
 				return $api_response['item']['id'];
 			} else {
-				throw new MWException( "Error: no success\n" );
+				throw new importInterlangException( "Error: no success\n" );
 			}
 		}
 
 		// We only reach this if we have received an error, and the error was no-such-item
 		$api_response = $this->callAPI( $this->api . "?action=wbsetitem&data=%7B%7D&format=php" );
 		if( isset( $api_response['error'] ) ) {
-			throw new MWException( "Error: " . $api_response['error']['info'] . "\n" );
+			throw new importInterlangException( "Error: " . $api_response['error']['info'] . "\n" );
 		}
 		if( isset( $api_response['success'] ) && $api_response['success'] ) {
 			$this->addLink( $lang, $link, $api_response['item']['id'] );
 			return $api_response['item']['id'];
 		} else {
-			throw new MWException( "Error: no success\n" );
+			throw new importInterlangException( "Error: no success\n" );
 		}
 	}
 
@@ -94,12 +106,12 @@ class importInterlang extends Maintenance {
 
 		$api_response = $this->callAPI( $this->api . "?action=wblinksite&format=php&link=add&id=" . urlencode( $id ) . "&linksite=" . urlencode( $lang ) . "&linktitle=" . urlencode( $link ) );
 		if( isset( $api_response['error'] ) ) {
-			throw new MWException( "Error: " . $api_response['error']['info'] . "\n" );
+			throw new importInterlangException( "Error: " . $api_response['error']['info'] . "\n" );
 		}
 
 		$api_response = $this->callAPI( $this->api . "?action=wbsetlanguageattribute&format=php&item=set&id=" . urlencode( $id ) . "&language=" . urlencode( $lang ) . "&label=" . urlencode( $label ) );
 		if( isset( $api_response['error'] ) ) {
-			throw new MWException( "Error: " . $api_response['error']['info'] . "\n" );
+			throw new importInterlangException( "Error: " . $api_response['error']['info'] . "\n" );
 		}
 	}
 
@@ -111,6 +123,7 @@ class importInterlang extends Maintenance {
 		$api_response = Http::post( $url );
 		$api_response = unserialize( $api_response );
 		$this->maybePrint( $api_response );
+		throw new importInterlangException( "Error: API returned invalid response\n" );
 		return $api_response;
 	}
 
@@ -129,11 +142,13 @@ class importInterlang extends Maintenance {
 	}
 
 	/**
-	 * Print a string, array or object if --verbose option is set.
+	 * Print a scalar, array or object if --verbose option is set.
 	 */
 	protected function maybePrint( $a ) {
 		if( $this->verbose ) {
-			if( is_scalar( $a ) ) {
+			if( is_bool( $a ) ) {
+				echo $a? "true\n": "false\n";
+			} elseif( is_scalar( $a ) ) {
 				echo $a . (substr( $a, -1 ) != "\n"? "\n": "");
 			} else {
 				print_r( $a );
