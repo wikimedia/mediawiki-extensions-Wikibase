@@ -127,6 +127,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return changed;
 	},
 
+	getInputHelpMessage: function() {
+		return window.mw.msg( 'wikibase-sitelinks-input-help-message' );
+	},
+
 	getApiCallParams: function( removeValue ) {
 		if ( removeValue === true ) {
 			return {

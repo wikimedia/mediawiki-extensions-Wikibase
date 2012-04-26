@@ -173,6 +173,7 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase-sitelink-page-edit-placeholder',
 		'wikibase-label-input-help-message',
 		'wikibase-description-input-help-message',
+		'wikibase-sitelinks-input-help-message',
 		'wikibase-remove'
 	)
 );
