@@ -29,11 +29,7 @@ class InputAutoResizeTest extends SeleniumTestCase {
 	public function testInputAutoResize() {
 		$this->load( $this->targetUrl );
 		
-		$editLabelLink = "css=h1#firstHeading >
-		div.wb-ui-propertyedittoolbar >
-		div.wb-ui-propertyedittoolbar-group >
-		div.wb-ui-propertyedittoolbar-group >
-		a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$editLabelLink = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
 		$valueInputField = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevalueinterface";
 		$valueInputFieldRuler = "css=h1#firstHeading > span > span.ruler";
 		

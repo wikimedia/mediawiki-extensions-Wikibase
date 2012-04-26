@@ -40,26 +40,10 @@ class LabelAndDescriptionUITest extends SeleniumTestCase {
 		
 		// defining selectors for elements being tested
 		$labelElementSelector = "css=h1#firstHeading > span";
-		$editLinkSelector = "css=h1#firstHeading > 
-							div.wb-ui-propertyedittoolbar >
-							div.wb-ui-propertyedittoolbar-group > 
-							div.wb-ui-propertyedittoolbar-group >
-							a.wb-ui-propertyedittoolbar-button:nth-child(1)";
-		$saveLinkDisabledSelector = "css=h1#firstHeading > 
-									div.wb-ui-propertyedittoolbar >
-									div.wb-ui-propertyedittoolbar-group > 
-									div.wb-ui-propertyedittoolbar-group >
-									span.wb-ui-propertyedittoolbar-button-disabled:nth-child(1)";
-		$saveLinkSelector = "css=h1#firstHeading > 
-							div.wb-ui-propertyedittoolbar >
-							div.wb-ui-propertyedittoolbar-group > 
-							div.wb-ui-propertyedittoolbar-group >
-							a.wb-ui-propertyedittoolbar-button:nth-child(1)";
-		$cancelLinkSelector = "css=h1#firstHeading > 
-								div.wb-ui-propertyedittoolbar >
-								div.wb-ui-propertyedittoolbar-group > 
-								div.wb-ui-propertyedittoolbar-group >
-								a.wb-ui-propertyedittoolbar-button:nth-child(2)";
+		$editLinkSelector = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$saveLinkDisabledSelector = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > span.wb-ui-propertyedittoolbar-button-disabled:nth-child(1)";
+		$saveLinkSelector = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$cancelLinkSelector = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(2)";
 		$valueInputFieldSelector = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevalueinterface";
 		 
 		$targetLabel = $this->get_element( $labelElementSelector )->get_text();
@@ -121,21 +105,11 @@ class LabelAndDescriptionUITest extends SeleniumTestCase {
 		
 		// defining selectors for elements beeing tested
 		$descriptionElementSelector = "css=div.wb-ui-propertyedittool-subject > span.wb-property-container-value";
-		$editLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
-		div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group >
-		a.wb-ui-propertyedittoolbar-button:nth-child(1)";
-		$saveLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
-		div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group >
-		a.wb-ui-propertyedittoolbar-button:nth-child(1)";
-		$saveLinkDisabledSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
-		div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group >
-		span.wb-ui-propertyedittoolbar-button:nth-child(1)";
-		$cancelLinkDisabledSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
-		div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group >
-		span.wb-ui-propertyedittoolbar-button:nth-child(2)";
-		$cancelLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >
-		div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group >
-		a.wb-ui-propertyedittoolbar-button:nth-child(2)";
+		$editLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$saveLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$saveLinkDisabledSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > span.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$cancelLinkDisabledSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > span.wb-ui-propertyedittoolbar-button:nth-child(2)";
+		$cancelLinkSelector = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(2)";
 		$valueInputFieldSelector = "css=div.wb-ui-propertyedittool-subject > span > input.wb-ui-propertyedittoolbar-editablevalueinterface";
 		
 		// doing the test stuff
