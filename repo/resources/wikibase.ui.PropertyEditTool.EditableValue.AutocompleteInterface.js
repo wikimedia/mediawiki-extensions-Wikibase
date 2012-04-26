@@ -85,6 +85,17 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		}
 		return false
 	},
+		
+	_disableInputElement: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._disableInputElement.call( this );
+		this._inputElem.autocomplete( "disable" );
+		this._inputElem.autocomplete( "close" );
+	},
+	
+	_enableInputelement: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputelement.call( this );
+		this._inputElem.autocomplete( "enable" );
+	},
 
 
 	/////////////////

@@ -362,6 +362,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		}
 	},
 	
+	_disableInputElement: function() {
+		this._inputElem.attr( 'disabled', 'true' );
+	},
+	
+	_enableInputelement: function() {
+		this._inputElem.removeAttr( 'disabled' );
+	},
+	
 	/**
 	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
 	 * interface will not be made available on startEditing()
@@ -384,14 +392,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this.stopEditing( false );
 		}
 		this._isActive = active;
-	},
-	
-	_disableInputElement: function() {
-		this._inputElem.attr( 'disabled', 'true' );
-	},
-	
-	_enableInputelement: function() {
-		this._inputElem.removeAttr( 'disabled' );
 	},
 
 	/**
@@ -419,7 +419,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Returns whether the current value is valid
 	 */
 	isValid: function() {
-		return this.validate( this.getValue );
+		return this.validate( this.getValue() );
 	},
 	
 	/**

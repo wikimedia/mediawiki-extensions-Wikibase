@@ -90,8 +90,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			
 			this._removeClassByRegex( pageInterface._getValueContainer(), /^wb-sitelinks-link-.+/ );
 			pageInterface._getValueContainer().addClass( 'wb-sitelinks-site-' + siteId );
-			
-			this._resetCss( this._subject.parent() );
 		}
 		
 		// only enable client page selector if there is a valid client id selected
@@ -118,15 +116,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 				subject.removeClass( className );
 			}
 		}, this ) );
-	},
-
-	_resetCss: function( parent ) {
-		var tableRows = $( parent.parents( 'table' )[0] ).find( 'tr' );
-		tableRows.each( function( index, node ) {
-			if ( index != tableRows.length - 1 ) {
-				$( node ).addClass( ( index % 2 ) ? 'uneven' : 'even' );
-			}
-		} );
 	},
 
 	stopEditing: function( save ) {
