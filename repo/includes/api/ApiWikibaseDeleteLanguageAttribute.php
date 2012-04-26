@@ -16,21 +16,6 @@
 class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 
 	/**
-	 * Make sure the required parameters are provided and that they are valid.
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $params
-	 */
-	protected function validateParameters( array $params ) {
-		parent::validateParameters( $params );
-		
-		if ( !isset( $params['label'] ) && !isset( $params['description'] ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-label-or-description' ), 'label-or-description' );
-		}
-	}
-
-	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
@@ -42,9 +27,30 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
 		$languages = WikibaseUtils::getLanguageCodes();
-		$num_labels = count($item->getLabels($languages));
-		$num_descriptions = count($item->getDescriptions($languages));
-		return true;
+		$labels = $item->getLabels();
+		$descriptions = $item->getDescriptions();
+		$success = false;
+		foreach ($params['attribute'] as $attr) {
+			switch ($attr) {
+				case 'label':
+					if ( !isset($labels[$params['language']]) ) {
+						$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
+					}
+					$item->removeLabel( $params['language'] );
+					$success = $success || true;
+					break;
+				case 'description':
+					if ( !isset($descriptions[$params['language']]) ) {
+						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
+					}
+					$item->removeDescription( $params['language'] );
+					$success = $success || true;
+					break;
+				default:
+					$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+			}
+		}
+		return $success;
 	}
 
 	public function getAllowedParams() {
@@ -54,7 +60,7 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'attribute' => array(
-				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => array( 'label', 'description'),
 				ApiBase::PARAM_REQUIRED => true,
 				ApiBase::PARAM_ISMULTI => true,
 			),
@@ -65,7 +71,7 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 		return array_merge( parent::getParamDescription(), array(
 			'language' => 'Language the description is in',
 			'attribute' => array('The type of attribute to delete',
-					'One of ("label", "description")'
+					'One of ("label", "description")')
 		) );
 	}
 
@@ -77,11 +83,8 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'label-or-description', 'info' => 'Use either or both of label and/or description, but not noen of them' ),
 			array( 'code' => 'label-not-found', 'info' => 'Can not find any previous label in the item' ),
 			array( 'code' => 'description-not-found', 'info' => 'Can not find any previous description in the item' ),
-			array( 'code' => 'label-found', 'info' => 'Found a previous label in the item' ),
-			array( 'code' => 'description-found', 'info' => 'Found a previous description in the item' ),
 			array( 'code' => 'not-recognized', 'info' => 'Directive is not recognized' ),
 			) );
 	}
