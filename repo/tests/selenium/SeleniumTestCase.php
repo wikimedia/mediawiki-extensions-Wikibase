@@ -18,6 +18,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	protected $driver;
 	
 	public function __construct() {
+		//$this->driver = WebDriver_Driver::InitAtLocal( "4444", SELENIUM_BROWSER );
 	}
 	
 	// Forward calls to main driver
@@ -70,7 +71,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 				"format" => "json",
 				"action" => "wbsetlanguageattribute",
 				"id" => $itemId,
-				"language" => WIKI_USELANG,
+				"language" => SELENIUM_WIKI_USELANG,
 				"label" => $item,
 				"item" => "set"
 		);
@@ -90,7 +91,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 				"format" => "json",
 				"action" => "wbsetlanguageattribute",
 				"id" => $itemId,
-				"language" => WIKI_USELANG,
+				"language" => SELENIUM_WIKI_USELANG,
 				"description" => $description,
 				"item" => "set"
 		);
@@ -107,7 +108,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	private function doCurlApiCall( $params ) {
 		$params_string = http_build_query( $params );
 		$ch = curl_init();
-		curl_setopt( $ch, CURLOPT_URL, WIKI_URL."/api.php" );
+		curl_setopt( $ch, CURLOPT_URL, SELENIUM_WIKI_URL."/api.php" );
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $params_string );
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 		$this->assertNotNUll( $result = json_decode( curl_exec( $ch ), true ) );
