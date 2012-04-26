@@ -263,8 +263,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var apiCall = this.getApiCallParams( removeValue );
 		
 		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
-			console.log( apiCall );
-			
 			var localApi = new mw.Api();
 			localApi.post( apiCall, {
 				ok: jQuery.proxy( this._apiCallOk, this ),
@@ -284,14 +282,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * handle return of successful API call
 	 */
 	_apiCallOk: function() {
-		console.log( arguments );
+		//console.log( arguments );
 	},
 
 	/**
 	 * handle error of unsuccessful API call
 	 */
 	_apiCallErr: function() {
-		console.log( arguments );
+		//console.log( arguments );
 	},
 
 	/**

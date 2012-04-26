@@ -1,4 +1,5 @@
 <?php
 
-define( "WIKI_URL", "http://localhost/mediawiki" );
-define( "WIKI_USELANG", "en" );
+define( "SELENIUM_WIKI_URL", "http://localhost/mediawiki" );
+define( "SELENIUM_WIKI_USELANG", "en" );
+define( "SELENIUM_BROWSER", "internet explorer" ); // "firefox" || "chrome" || "internet explorer" || "opera"

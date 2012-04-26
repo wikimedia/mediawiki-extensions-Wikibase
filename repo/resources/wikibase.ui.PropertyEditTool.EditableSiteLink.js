@@ -79,10 +79,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			//        registered there.
 			pageInterface.setClient( client );
 			
+			var siteId = idInterface.getSelectedSiteId();
+			
 			// change class names:
-			this._removeClass( this._subject, /^wb-sitelinks-.+/ );
-			this._removeClass( idInterface._getValueContainer(), /^wb-sitelinks-site-.+/ );
-			this._removeClass( pageInterface._getValueContainer(), /^wb-sitelinks-link-.+/ );
+			this._removeClassByRegex( this._subject, /^wb-sitelinks-.+/ );
+			this._subject.addClass( 'wb-sitelinks-' + siteId );
+			
+			this._removeClassByRegex( idInterface._getValueContainer(), /^wb-sitelinks-site-.+/ );
+			idInterface._getValueContainer().addClass( 'wb-sitelinks-' + siteId );
+			
+			this._removeClassByRegex( pageInterface._getValueContainer(), /^wb-sitelinks-link-.+/ );
+			pageInterface._getValueContainer().addClass( 'wb-sitelinks-site-' + siteId );
+			
 			this._resetCss( this._subject.parent() );
 		}
 		
@@ -94,15 +102,19 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		// append toolbar to new td
 		return $( '<td/>' ).appendTo( this._subject );
 	},
-
-	_removeClass: function( subject, classNameRegExp ) {
-		if ( typeof subject.attr( 'class' ) != 'undefined' ) {
-			$.each( subject.attr( 'class' ).split( ' ' ), $.proxy( function( index, className ) {
-				if ( className.search( classNameRegExp ) != -1 ) {
-					subject.removeClass( className );
-				}
-			}, this ) );
+	
+	/**
+	 * Helper function to remove a css class matching a regular expression.
+	 */
+	_removeClassByRegex: function( subject, classNameRegExp ) {
+		if ( typeof subject.attr( 'class' ) == 'undefined' ) {
+			return
 		}
+		$.each( subject.attr( 'class' ).split( ' ' ), $.proxy( function( index, className ) {
+			if ( className.match( classNameRegExp ) ) {
+				subject.removeClass( className );
+			}
+		}, this ) );
 	},
 
 	_resetCss: function( parent ) {
