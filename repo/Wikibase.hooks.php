@@ -51,6 +51,8 @@ final class WikibaseHooks {
 		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemNewEmptyTests.php';
 		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemNewFromArrayTests.php';
 		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemContentHandlerTests.php';
+		
+		$files[] = $testDir . 'WikidataRepo/api/ApiWikibaseTests.php';
 
 		return true;
 	}
