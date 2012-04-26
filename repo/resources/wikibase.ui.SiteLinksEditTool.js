@@ -23,6 +23,15 @@ window.wikibase.ui.SiteLinksEditTool = function( subject ) {
 
 window.wikibase.ui.SiteLinksEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
 $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
+	/**
+	 * Shared prototype for editable site links managed by an instance of this. This allows to
+	 * directly manipulate some of all of the values properties as long as they are not overwritten
+	 * explicitly.
+	 * @see getEditableValuePrototype()
+	 * @var Function constructor for window.wikibase.ui.PropertyEditTool.EditableSiteLink
+	 *      basically.
+	 */
+	_editableValuesProto: null,
 
 	_init: function( subject ) {
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
@@ -41,6 +50,13 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 				)
 			);
 	},
+	
+	_initEditToolForValues: function() {
+		window.wikibase.ui.PropertyEditTool.prototype._initEditToolForValues.call( this );
+		
+		// make sure selecting a language in EditableSiteLink only offers languages not yet chosen
+		this._editableValuesProto.prototype.ignoredSiteLinks = this.getRepresentedSites();
+	},
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool._getValueElems()
@@ -56,8 +72,65 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 	
 	getEditableValuePrototype: function() {
-		return window.wikibase.ui.PropertyEditTool.EditableSiteLink;
+		// TODO: this system might be useful in other prototypes based on PropertyEditTool, implement
+		//       this in PropertyEditTool directly perhaps.
+		if( this._editableValuesProto !== null ) {
+			return this._editableValuesProto;
+		}
+		var basePrototype = window.wikibase.ui.PropertyEditTool.EditableSiteLink;
+		
+		this._editableValuesProto = function() { basePrototype.apply( this, arguments ) };
+		this._editableValuesProto.prototype = new basePrototype();
+		this._editableValuesProto.prototype.ignoredSiteLinks = this.getRepresentedSites();
+		
+		return this._editableValuesProto;
 	},
 	
+	_editableValueHandler_onAfterRemove: function( editableValue ) {
+		window.wikibase.ui.PropertyEditTool.prototype._editableValueHandler_onAfterRemove.call( this, editableValue );
+		
+		// remove only site used by removed site link from list of ignored sites:
+		var removedSite = editableValue.siteIdInterface.getSelectedClient();
+		if( removedSite !== null ) {
+			var index = $.inArray( removedSite, this._editableValuesProto.prototype.ignoredSiteLinks );
+			if( index > -1 ) {
+				this._editableValuesProto.prototype.ignoredSiteLinks.splice( index, 1 );
+			}
+		}
+	},	
+	_newValueHandler_onStopEditing: function( newValue, save ) {
+		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_onStopEditing.call( this, newValue, save );		
+		if( save ) {
+			// add chosen site to list of sites which can not be chosen by other editable site links
+			var addedSite = newValue.siteIdInterface.getSelectedClient();
+			this._editableValuesProto.prototype.ignoredSiteLinks.push( addedSite );
+		}
+	},
+	
+	/**
+	 * Returns a list of sites already represented with a value.
+	 * 
+	 * @return wikibase.Client[]
+	 */
+	getRepresentedSites: function() {
+		var sites = new Array();
+		
+		for( var i in this._editableValues ) {
+			var editableSiteLink = this._editableValues[ i ];
+			var site = editableSiteLink.siteIdInterface.getSelectedClient();
+			if( site !== null ) {
+				sites.push( site );
+			}
+		}
+		return sites;
+	},
+	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+	
+	/**
+	 * @see window.wikibase.ui.PropertyEditTool.prototype.allowsMultipleValues
+	 */
 	allowsMultipleValues: true
 } );

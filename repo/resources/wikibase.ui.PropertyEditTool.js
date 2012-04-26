@@ -103,7 +103,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	*/
    
+   /**
+	* Collects all values represented within the DOM already and initializes EditableValue instances
+	* for them.
+	*/
 	_initEditToolForValues: function() {
+		// gets the DOM nodes representing EditableValue
 		var allValues = this._getValueElems();
 		
 		if( ! this.allowsMultipleValues ) {
@@ -133,20 +138,28 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		// initialiye editable value and give appropriate toolbar on the way:
 		editableValue._init( valueElem, editableValueToolbar );
 		
-		editableValue.onAfterRemove = $.proxy( function() {
-			var elemIndex = this.getIndexOf( editableValue );			
-			
-			// remove EditableValue from list of managed values:
-			this._editableValues.splice( elemIndex, 1 );
-			
-			if( elemIndex >= this._editableValues.length ) {
-				elemIndex = -1; // element removed from end
-			}	
-			this._onRefreshView( elemIndex );
-		}, this );
+		var self = this;
+		editableValue.onAfterRemove = function() {
+			self._editableValueHandler_onAfterRemove( editableValue );
+		};
 		
 		this._editableValues.push( editableValue );		
 		return editableValue;
+	},
+	
+	/**
+	 * Called whenever an editable value managed by this was removed.
+	 */
+	_editableValueHandler_onAfterRemove: function( editableValue ) {
+		var elemIndex = this.getIndexOf( editableValue );			
+
+		// remove EditableValue from list of managed values:
+		this._editableValues.splice( elemIndex, 1 );
+
+		if( elemIndex >= this._editableValues.length ) {
+			elemIndex = -1; // element removed from end
+		}	
+		this._onRefreshView( elemIndex );
 	},
 	
 	/**
@@ -210,14 +223,22 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 				
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
-		newValue.onStopEditing = $.proxy( function( save ) {
-			this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
-			newValue.onStopEditing = null;
-		}, this );		
+		var self = this;
+		newValue.onStopEditing = function( save ) {
+			self._newValueHandler_onStopEditing( newValue, save );
+			newValue.onStopEditing = null; // make sure handler is only called once!
+		};		
 		
 		this._onRefreshView( this.getIndexOf( newValue ) );
 		newValue.setFocus();
 		return newValue;
+	},
+	
+	/**
+	 * Handler called only the first time a new value was added and saved or cancelled.
+	 */
+	_newValueHandler_onStopEditing: function( newValue, save ) {
+		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item		
 	},
 	
 	/**

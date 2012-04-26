@@ -13,8 +13,8 @@
 "use strict";
 
 /**
- * Serves the input interface to write a site code to select, this will validate whether the site
- * code is existing and will display the full site name if it is.
+ * Serves the input interface to write a site code or to selectone. This will also validate whether
+ * the site code is existing and will display the full site name if it is.
  * 
  * @param jQuery subject
  */
@@ -25,8 +25,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = ne
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 	
 	_initInputElement: function() {
-		var clientList = [];
-
 		/**
 		 * when leaving the input box, set displayed value to from any allowed input value to correct display value
 		 *
@@ -49,18 +47,42 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				this._onInputRegistered();
 			}
 		}
-
+		
+		this._initClientList();		
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
+	},
+	
+	/**
+	 * Builds a list of clients allowed to choose from
+	 */
+	_initClientList: function() {
+		var clientList = [];
+		
+		// make sure to allow choosing the currently selected site id even if it is in the list of
+		// sites to ignore. This makes sense since it is selected already and it should be possible
+		// to select it again.
+		var ignoredSites = this.ignoredSiteLinks.slice();
+		var ownSite = this.getSelectedClient();
+		if( ownSite !== null ) {
+			var ownSiteIndex = $.inArray( ownSite, ignoredSites );
+			if( ownSiteIndex > -1 ) {
+				ignoredSites.splice( ownSiteIndex, 1 );
+			}
+		}
+		
+		// find out which site ids should be selectable and add them as auto selct choice
 		for ( var siteId in wikibase.getClients() ) {
 			var client = wikibase.getClient( siteId );
-			clientList.push( {
-				'label': client.getName() + ' (' + client.getId() + ')',
-				'value': client.getShortName() + ' (' + client.getId() + ')',
-				'client': client } // additional reference to client object for validation
-			);
+			
+			if( $.inArray( client, ignoredSites ) == -1 ) {
+				clientList.push( {
+					'label': client.getName() + ' (' + client.getId() + ')',
+					'value': client.getShortName() + ' (' + client.getId() + ')',
+					'client': client // additional reference to client object for validation
+				} );
+			}
 		}
 		this.setResultSet( clientList );
-
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 	},
 
 	/**
@@ -110,6 +132,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	
 	_getSiteIdFromString: function( text ) {
 		return text.replace( /^.+\(\s*(.+)\s*\)\s*/, '$1' );
-	}
-
+	},
+	
+	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+	
+	/**
+	 * Allows to specify an array with clients which should not be allowed to choose
+	 */
+	ignoredSiteLinks: null
 } );
