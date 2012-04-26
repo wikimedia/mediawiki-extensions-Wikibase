@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.EditableValue.Interface.js
+ * @file wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -24,10 +24,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface = function( su
 window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 	
-	_resolvedSiteName: null,
-	
 	_initInputElement: function() {
-		var arrayClients = [];
+		var clientList = [];
 
 		this.onKeyDown = function( event ) {
 			// when hitting tab, select the first element of the current result set an jump into title input box
@@ -38,31 +36,66 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 			}
 		}
 
-		for ( var siteId in mw.config.get('wbSiteDetails') ) {
-			arrayClients.push(  mw.config.get( 'wbSiteDetails' )[ siteId ].shortName + ' (' + siteId + ')' );
+		for ( var siteId in wikibase.getClients() ) {
+			var client = wikibase.getClient( siteId );
+			clientList.push( {
+				'label': client.getName() + ' (' + client.getId() + ')',
+				'value': client.getShortName() + ' (' + client.getId() + ')',
+				'client': client } // additional reference to client object for validation
+			);
 		}
-		this.setResultSet( arrayClients );
+		this.setResultSet( clientList );
 
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
-		
-		this._resolvedSiteName = $( '<span/>', {
-			'class': this.UI_CLASS + '-siteid'
-		} );
-		this._inputElem.after( this._resolvedSiteName );
-	},
-	
-	_onInputRegistered: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._onInputRegistered.call( this );
-		var siteId = this._getSiteIdFromValue();
-		var isValid = this.validate( this.getValue() );
-		if ( isValid ) {
-			this._editableValue._interfaces[1].url = wikibase.getClient( this._getSiteIdFromValue() ).getApi();
-		}
-		this._editableValue._interfaces.pageName.setDisabled( !isValid );
 	},
 
-	_getSiteIdFromValue: function() {
-		return this.getValue().replace( /[^(]+\(([^()]+)\)/, '$1' );
+	/**
+	 * Returns the selected client site Id
+	 * 
+	 * @return string|null siteId or null if no valid selection has been made yet.
+	 */
+	getSelectedSiteId: function() {
+		var value = this.getValue();
+		if( ! this.isInEditMode() ) {
+			return this._getSiteIdFromString( value );
+		}		
+		for( var i in this._currentResults ) {
+			if(
+				   value == this._currentResults[i].client.getId()
+				|| value == this._currentResults[i].client.getShortName()
+				|| value == this._currentResults[i].value
+			) {
+				return this._currentResults[i].client.getId();
+			}
+		}
+		return null;
+	},
+	
+	/**
+	 * Returns the selected client
+	 * 
+	 * @return wikibase.Client
+	 */
+	getSelectedClient: function() {
+		var siteId = this.getSelectedSiteId();
+		if( siteId === null ) {
+			return null;
+		}
+		return wikibase.getClient( siteId );
+	},
+
+	/**
+	 * validate input
+	 * @param String value
+	 */
+	validate: function( value ) {
+		// check whether current input is in the list of values returned by the wikis API
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
+		return ( this.getSelectedSiteId() === null ) ? false : true;
+	},
+	
+	_getSiteIdFromString: function( text ) {
+		return text.replace( /^.+\(\s*(.+)\s*\)\s*/, '$1' );
 	}
 
 } );

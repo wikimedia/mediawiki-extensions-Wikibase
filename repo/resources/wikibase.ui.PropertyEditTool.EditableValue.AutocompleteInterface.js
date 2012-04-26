@@ -1,5 +1,5 @@
 /**
- * JavasSript for a part of an editable property value
+ * JavasSript for a part of an editable property value offering auto complete functionality
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
@@ -12,7 +12,7 @@
 "use strict";
 
 /**
- * Serves an autocomplete supported input interface
+ * Serves an autocomplete supported input interface as part of an EditableValue
  *
  * @param jQuery subject
  */
@@ -30,6 +30,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 
 	_init: function( subject, editableValue ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject, editableValue );
+		this._currentResults = new Array();
 	},
 
 	_buildInputElement: function() {
@@ -57,6 +58,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 					this._onInputRegistered();
 				}, this )
 			} );
+			inputElement.on( 'keyup', $.proxy( function( event ) {
+				this._onInputRegistered();
+			}, this ) );
 		}
 		return inputElement;
 	},
@@ -74,16 +78,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @param String value
 	 */
 	validate: function( value ) {
-		// check whether current input is in the list of values returned by the wikis API
-		if ( this._currentResults === null ) {
-			return false;
-		}
-		for ( var i in this._currentResults ) {
-			if ( value === this._currentResults[i] ) {
+		for( var i in this._currentResults ) {
+			if( $.trim( this._currentResults[i] ) === $.trim( value ) ) {
 				return true;
 			}
 		}
-		return false;
+		return false
 	},
 
 
@@ -92,15 +92,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	/////////////////
 
 	/**
-	 * url the AJAX request will point to
+	 * url the AJAX request will point to (if ajax should be used to define a result set)
 	 * @var String
 	 */
 	url: null,
 
 	/**
-	 * additional params for the AJAX request
+	 * additional params for the AJAX request (if ajax should be used to define a result set)
 	 * @var Object
 	 */
 	ajaxParams: null
 
 } );
+

@@ -169,6 +169,8 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase-add',
 		'wikibase-label-edit-placeholder',
 		'wikibase-description-edit-placeholder',
+		'wikibase-sitelink-site-edit-placeholder',
+		'wikibase-sitelink-page-edit-placeholder',
 		'wikibase-label-input-help-message',
 		'wikibase-description-input-help-message',
 		'wikibase-remove'

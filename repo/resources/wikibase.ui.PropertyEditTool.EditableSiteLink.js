@@ -45,32 +45,74 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
 		
 		// interface for choosing the source site:
-		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );
-		interfaces.push( interfaces.siteId );
+		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );		
 		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
+		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
 
 		// interface for choosing a page (from the source site):
-		interfaces.pageName = new ev.WikiPageInterface( tableCells[1], this );
+		interfaces.pageName = new ev.ClientPageInterface(
+				tableCells[1], this, interfaces.siteId.getSelectedClient()
+		);
+		interfaces.pageName.inputPlaceholder = mw.msg( 'wikibase-sitelink-page-edit-placeholder' );
 		interfaces.pageName.ajaxParams = {
 			action: 'opensearch',
 			namespace: 0,
 			suggest: ''
 		};
-		// url can only be set when site id is known (when adding a site link, url will be passed on that event)
-		if ( this._subject.attr('class').match(/wb-sitelinks-[\w-]+/) !== null ) {
-			var siteId = this._subject.attr('class').match(/wb-sitelinks-[\w-]+/)[0].split('-').pop();
-			if( wikibase.hasClient( siteId ) ) {
-				interfaces.pageName.url = wikibase.getClient( siteId ).getApi();
-			}
-		}
+		
+		interfaces.push( interfaces.siteId );
 		interfaces.push( interfaces.pageName );
-
 		return interfaces;
+	},
+	
+	_interfaceHandler_onInputRegistered: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this );
+		
+		var idInterface = this._interfaces.siteId;
+		var pageInterface = this._interfaces.pageName;
+		
+		// set up necessary communication between both interfaces:
+		var client = idInterface.getSelectedClient();
+		if( client !== pageInterface.getClient() && client !== null ) {
+			// FIXME: this has to be done on idInterface.onInputRegistered only but that
+			//        is not really possible with the current 'event' system since this function is
+			//        registered there.
+			pageInterface.setClient( client );
+			
+			// change class names:
+			// FIXME: removing all class names is a bit extreme here! Removes pending and even/uneven
+			//        classes!
+			var siteId = idInterface.getSelectedSiteId();
+
+			this._subject
+			.removeClass() // remove all classes
+			.addClass( 'wb-sitelinks-' + siteId );
+
+			idInterface._getValueContainer()
+			.removeClass() // remove all classes
+			.addClass( 'wb-sitelinks-site-' + siteId );
+
+			pageInterface._getValueContainer()
+			.removeClass() // remove all classes
+			.addClass( 'wb-sitelinks-link-' + siteId );
+		}
+		
+		// only enable client page selector if there is a valid client id selected
+		pageInterface.setDisabled( ! idInterface.isValid() );
 	},
 
 	_getToolbarParent: function() {
 		// append toolbar to new td
 		return $( '<td/>' ).appendTo( this._subject );
+	},
+	
+	stopEditing: function( save ) {
+		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
+		
+		// make sure the interface for entering the clients id can't be edited after created
+		this._interfaces.siteId.setActive( this.isPending() );
+		
+		return changed;
 	},
 
 	getApiCallParams: function( removeValue ) {

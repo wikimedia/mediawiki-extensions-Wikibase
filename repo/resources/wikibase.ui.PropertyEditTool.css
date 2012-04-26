@@ -46,10 +46,6 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 	h1.firstHeading input {
 		font-family:inherit;
 		font-size:inherit;
-		border:none;
-		border-bottom:1px solid black;
-		outline: none;
-
 	}
 
 .wb-property-container {
@@ -111,6 +107,12 @@ table.wb-sitelinks {
 	table.wb-sitelinks .even td {
 		background:#ececec;
 	}
+	table.wb-sitelinks tfoot tr:hover td {
+		background-color:transparent;
+	}
+	table.wb-sitelinks tfoot td {
+		border:none;
+	}
 
 .ruler {
 	display:none;
@@ -118,11 +120,6 @@ table.wb-sitelinks {
 	font-size:inherit;
 }
 
-.wb-ui-propertyedittoolbar-editablevalueinterface-validsiteid {
-	color: green;
-	font-weight: bold;
-}
-
-.wb-ui-propertyedittoolbar-editablevalueinterface-invalidsiteid {
-	color: red;
+.wb-ui-propertyedittoolbar-editablevalueinterface-disabled input {
+	background-color: #eee;
 }

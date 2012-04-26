@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.js
+ * @file wikibase.ui.PropertyEditTool.Toolbar.Button.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

@@ -146,8 +146,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'name': this._key,
 			'value': this.getValue(),
 			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._onKeyPressed, this ), // TODO: this shouldn't be used, keyup should work fine!
-			'keyup':    jQuery.proxy( this._onKeyUp, this ), //       we have both for escape key browser compability
+			'keypress': jQuery.proxy( this._onKeyPressed, this ),
+			'keyup':    jQuery.proxy( this._onKeyUp, this ),
 			'keydown':  jQuery.proxy( this._onKeyDown, this ),
 			'focus':    jQuery.proxy( this._onFocus, this ),
 			'blur':     jQuery.proxy( this._onBlur, this )
@@ -178,7 +178,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			//console.log( '"'+ this._inputElem.attr( 'value' ).replace( / /g, '&nbsp;') + '"' );
 
 			var currentValue = this._inputElem.val();
-			if ( currentValue == '' ) {
+			if ( currentValue === '' ) {
 				currentValue = this._inputElem.attr( 'placeholder' );
 			}
 			ruler.html( currentValue.replace( / /g, '&nbsp;' ).replace( /</g, '&lt;' ) ); // TODO prevent insane HTML from being placed in the ruler
@@ -414,7 +414,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	isEmpty: function() {
 		return this.getValue() === '';
 	},
-
+	
+	/**
+	 * Returns whether the current value is valid
+	 */
+	isValid: function() {
+		return this.validate( this.getValue );
+	},
+	
 	/**
 	 * Velidates whether a certain value would be valid for this editable value.
 	 *
@@ -448,6 +455,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Callback called when the input changes in general for example on its initialization when
 	 * setting its initial value.
+	 * @var Function|null
 	 */
 	onInputRegistered: null,
 	
