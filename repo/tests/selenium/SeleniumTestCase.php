@@ -18,7 +18,6 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	protected $driver;
 	
 	public function __construct() {
-		//$this->driver = WebDriver_Driver::InitAtLocal( "4444", SELENIUM_BROWSER );
 	}
 	
 	// Forward calls to main driver
@@ -36,10 +35,13 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	 */
 	public function waitForAjax( $timeout = 10 ) {
 		$tries = 0;
+		if( SELENIUM_BROWSER == "chrome" ) {
+			sleep( 1 ); // TODO: in chrome it seems that jQuery.active does not work, so make an extra sleep
+		}
 		while( true ) {
 			$jsReturnString = $this->driver->execute_js_sync( "return jQuery.active;", array() );
 			$jsReturnArray = json_decode( trim( $jsReturnString["body"] ), true );
-			$jsReturnValue = $jsReturnArray["value"];			
+			$jsReturnValue = $jsReturnArray["value"];
 			if( $jsReturnValue == 0 || $tries++ >= $timeout ) {
 				break;
 			}
