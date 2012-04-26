@@ -58,6 +58,9 @@ class importInterlang extends Maintenance {
 				if( !$this->ignore_errors ) {
 					throw $e;
 				}
+				if( $this->verbose ) {
+					echo "Error: " . $e->getMessage() . "\n";
+				}
 			}
 		}
 
@@ -70,27 +73,27 @@ class importInterlang extends Maintenance {
 		$api_response = $this->callAPI( $this->api . "?action=wbgetitemid&format=php&site=" . urlencode( $lang ) . "&title=" . urlencode( $link ) );
 		if( isset( $api_response['error'] ) ) {
 			if( $api_response['error']['code'] !== 'no-such-item' ) {
-				throw new importInterlangException( "Error: " . $api_response['error']['info'] . "\n" );
+				throw new importInterlangException( $api_response['error']['info'] );
 			}
 		} else {
 			if( isset( $api_response['success'] ) && $api_response['success'] ) {
 				$this->addLink( $lang, $link, $api_response['item']['id'] );
 				return $api_response['item']['id'];
 			} else {
-				throw new importInterlangException( "Error: no success\n" );
+				throw new importInterlangException( "no success" );
 			}
 		}
 
 		// We only reach this if we have received an error, and the error was no-such-item
 		$api_response = $this->callAPI( $this->api . "?action=wbsetitem&data=%7B%7D&format=php" );
 		if( isset( $api_response['error'] ) ) {
-			throw new importInterlangException( "Error: " . $api_response['error']['info'] . "\n" );
+			throw new importInterlangException( $api_response['error']['info'] );
 		}
 		if( isset( $api_response['success'] ) && $api_response['success'] ) {
 			$this->addLink( $lang, $link, $api_response['item']['id'] );
 			return $api_response['item']['id'];
 		} else {
-			throw new importInterlangException( "Error: no success\n" );
+			throw new importInterlangException( "no success" );
 		}
 	}
 
@@ -106,12 +109,12 @@ class importInterlang extends Maintenance {
 
 		$api_response = $this->callAPI( $this->api . "?action=wblinksite&format=php&link=add&id=" . urlencode( $id ) . "&linksite=" . urlencode( $lang ) . "&linktitle=" . urlencode( $link ) );
 		if( isset( $api_response['error'] ) ) {
-			throw new importInterlangException( "Error: " . $api_response['error']['info'] . "\n" );
+			throw new importInterlangException( $api_response['error']['info'] );
 		}
 
 		$api_response = $this->callAPI( $this->api . "?action=wbsetlanguageattribute&format=php&item=set&id=" . urlencode( $id ) . "&language=" . urlencode( $lang ) . "&label=" . urlencode( $label ) );
 		if( isset( $api_response['error'] ) ) {
-			throw new importInterlangException( "Error: " . $api_response['error']['info'] . "\n" );
+			throw new importInterlangException( $api_response['error']['info'] );
 		}
 	}
 
@@ -123,7 +126,9 @@ class importInterlang extends Maintenance {
 		$api_response = Http::post( $url );
 		$api_response = unserialize( $api_response );
 		$this->maybePrint( $api_response );
-		throw new importInterlangException( "Error: API returned invalid response\n" );
+		if( empty( $api_response ) ) {
+			throw new importInterlangException( "API returned invalid response" );
+		}
 		return $api_response;
 	}
 
