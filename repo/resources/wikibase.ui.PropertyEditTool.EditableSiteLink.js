@@ -80,21 +80,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			pageInterface.setClient( client );
 			
 			// change class names:
-			// FIXME: removing all class names is a bit extreme here! Removes pending and even/uneven
-			//        classes!
-			var siteId = idInterface.getSelectedSiteId();
-
-			this._subject
-			.removeClass() // remove all classes
-			.addClass( 'wb-sitelinks-' + siteId );
-
-			idInterface._getValueContainer()
-			.removeClass() // remove all classes
-			.addClass( 'wb-sitelinks-site-' + siteId );
-
-			pageInterface._getValueContainer()
-			.removeClass() // remove all classes
-			.addClass( 'wb-sitelinks-link-' + siteId );
+			this._removeClass( this._subject, /^wb-sitelinks-.+/ );
+			this._removeClass( idInterface._getValueContainer(), /^wb-sitelinks-site-.+/ );
+			this._removeClass( pageInterface._getValueContainer(), /^wb-sitelinks-link-.+/ );
+			this._resetCss( this._subject.parent() );
 		}
 		
 		// only enable client page selector if there is a valid client id selected
@@ -105,7 +94,26 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		// append toolbar to new td
 		return $( '<td/>' ).appendTo( this._subject );
 	},
-	
+
+	_removeClass: function( subject, classNameRegExp ) {
+		if ( typeof subject.attr( 'class' ) != 'undefined' ) {
+			$.each( subject.attr( 'class' ).split( ' ' ), $.proxy( function( index, className ) {
+				if ( className.search( classNameRegExp ) != -1 ) {
+					subject.removeClass( className );
+				}
+			}, this ) );
+		}
+	},
+
+	_resetCss: function( parent ) {
+		var tableRows = $( parent.parents( 'table' )[0] ).find( 'tr' );
+		tableRows.each( function( index, node ) {
+			if ( index != tableRows.length - 1 ) {
+				$( node ).addClass( ( index % 2 ) ? 'uneven' : 'even' );
+			}
+		} );
+	},
+
 	stopEditing: function( save ) {
 		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
 		

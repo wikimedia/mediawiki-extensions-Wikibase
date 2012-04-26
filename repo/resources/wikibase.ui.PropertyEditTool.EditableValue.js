@@ -143,6 +143,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_getToolbarParent: function() {
 		return this._subject.parent();
 	},
+
+	/**
+	 * reset css classes (e.g. of table rows when adding or removing)
+	 * (parent needs to be passed since original node has to be removed when resetting)
+	 * @param jQuery parent
+	 */
+	_resetCss: function( parent ) { },
 	
 	/**
 	 * Removes the value from the dom as well as from the data store via the API
@@ -151,7 +158,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// TODO API call
 		this.doApiCall( true );
 		//this.destroy(); // no need to destroy this proberly since we remove anything for real!
+		var parent = this._subject.parent();
 		this._subject.empty().remove();
+		this._resetCss( parent );
 	},
 
 	destroy: function() {
