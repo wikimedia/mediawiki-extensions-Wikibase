@@ -57,6 +57,20 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		// make sure selecting a language in EditableSiteLink only offers languages not yet chosen
 		this._editableValuesProto.prototype.ignoredSiteLinks = this.getRepresentedSites();
 	},
+	
+	/**
+	 * Full when all languages are represented within
+	 * 
+	 * @see wikibase.ui.PropertyEditTool.isFull()
+	 */
+	isFull: function() {
+		var allSites = wikibase.getClients();
+		var usedSites = this.getRepresentedSites();
+		
+		// FIXME: in case we have sites in the DB which were removed at some point, this check will
+		//        return true for isFull() too early! Make an array diff instead!
+		return usedSites.length >= Object.keys( allSites ).length;
+	},
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool._getValueElems()

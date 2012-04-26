@@ -78,11 +78,50 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			this._toolbar.btnAdd.onAction = $.proxy( function() {
 				this.enterNewValue();
 			}, this );
+			// enable button only if this is not full yet!
+			var self = this;
+			this._toolbar.btnAdd.setDisabled( true );
+			this._toolbar.btnAdd.setDisabled = function( disable ) {
+				if( disable === false && self.isFull() ) {
+					return false; // full, don't enable 'add' button!
+				}
+				return window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype.setDisabled.call( this, disable );
+			}
+			this._toolbar.btnAdd.setDisabled( false );
 
 			this._toolbar.addElement( this._toolbar.btnAdd );
 		}
 		
 		this._toolbar.appendTo( this._getToolbarParent() );
+	},
+	
+	/**
+	 * Returns whether further values can be added
+	 * 
+	 * @return bool
+	 */
+	isFull: function() {
+		if( this.allowsMultipleValues ) {
+			return true;
+		} else {
+			return this._editableValues === null || this._editableValues.length < 1;
+		}
+	},
+	
+	/**
+	 * Returns whether the tool is in edit mode currently. This is true if any of the values managed
+	 * by this is in edit mode currently.
+	 *
+	 * @return bool
+	 */
+	isInEditMode: function() {
+		// is in edit mode if any of the editable values is in edit mode
+		for( var i in this._editableValues ) {
+			if( this._editableValues[ i ].isInEditMode() ) {
+				return true;
+			}
+		}
+		return false;
 	},
 	
 	/**
@@ -160,6 +199,9 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			elemIndex = -1; // element removed from end
 		}	
 		this._onRefreshView( elemIndex );
+		
+		// enables 'add' button again if it was disabled because of full list:
+		this._toolbar.btnAdd.setDisabled( this.isInEditMode() );
 	},
 	
 	/**
