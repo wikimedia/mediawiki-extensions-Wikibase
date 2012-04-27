@@ -41,7 +41,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	
 	/**
 	 * The editable value for the properties data value
-	 * @var wikibase.ui.PropertyEditTool.EditableValue
+	 * @var wikibase.ui.PropertyEditTool.EditableValue[]
 	 */
 	_editableValues: null,
 		
@@ -78,11 +78,50 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			this._toolbar.btnAdd.onAction = $.proxy( function() {
 				this.enterNewValue();
 			}, this );
+			// enable button only if this is not full yet!
+			var self = this;
+			this._toolbar.btnAdd.setDisabled( true );
+			this._toolbar.btnAdd.setDisabled = function( disable ) {
+				if( disable === false && self.isFull() ) {
+					return false; // full, don't enable 'add' button!
+				}
+				return window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype.setDisabled.call( this, disable );
+			}
+			this._toolbar.btnAdd.setDisabled( false );
 
 			this._toolbar.addElement( this._toolbar.btnAdd );
 		}
 		
 		this._toolbar.appendTo( this._getToolbarParent() );
+	},
+	
+	/**
+	 * Returns whether further values can be added
+	 * 
+	 * @return bool
+	 */
+	isFull: function() {
+		if( this.allowsMultipleValues ) {
+			return true;
+		} else {
+			return this._editableValues === null || this._editableValues.length < 1;
+		}
+	},
+	
+	/**
+	 * Returns whether the tool is in edit mode currently. This is true if any of the values managed
+	 * by this is in edit mode currently.
+	 *
+	 * @return bool
+	 */
+	isInEditMode: function() {
+		// is in edit mode if any of the editable values is in edit mode
+		for( var i in this._editableValues ) {
+			if( this._editableValues[ i ].isInEditMode() ) {
+				return true;
+			}
+		}
+		return false;
 	},
 	
 	/**
@@ -103,7 +142,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	*/
    
+   /**
+	* Collects all values represented within the DOM already and initializes EditableValue instances
+	* for them.
+	*/
 	_initEditToolForValues: function() {
+		// gets the DOM nodes representing EditableValue
 		var allValues = this._getValueElems();
 		
 		if( ! this.allowsMultipleValues ) {
@@ -133,8 +177,42 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		// initialiye editable value and give appropriate toolbar on the way:
 		editableValue._init( valueElem, editableValueToolbar );
 		
+		var self = this;
+		editableValue.onAfterRemove = function() {
+			self._editableValueHandler_onAfterRemove( editableValue );
+		};
+		
 		this._editableValues.push( editableValue );		
 		return editableValue;
+	},
+	
+	/**
+	 * Called whenever an editable value managed by this was removed.
+	 */
+	_editableValueHandler_onAfterRemove: function( editableValue ) {
+		var elemIndex = this.getIndexOf( editableValue );			
+
+		// remove EditableValue from list of managed values:
+		this._editableValues.splice( elemIndex, 1 );
+
+		if( elemIndex >= this._editableValues.length ) {
+			elemIndex = -1; // element removed from end
+		}	
+		this._onRefreshView( elemIndex );
+		
+		// enables 'add' button again if it was disabled because of full list:
+		this._toolbar.btnAdd.setDisabled( this.isInEditMode() );
+	},
+	
+	/**
+	 * returns the index of an EditableValue within this collection. If the element is not part of
+	 * this, -1 will be returned
+	 * 
+	 * @param wikibase.ui.PropertyEditTool.EditableValue elem
+	 * @return int
+	 */
+	getIndexOf: function( element ) {
+		return $.inArray( element, this._editableValues );
 	},
 	
 	/**
@@ -187,12 +265,42 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 				
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
-		newValue.onStopEditing = $.proxy( function( save ) {
-			this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
-		}, this );		
+		var self = this;
+		newValue.onStopEditing = function( save ) {
+			self._newValueHandler_onStopEditing( newValue, save );
+			newValue.onStopEditing = null; // make sure handler is only called once!
+		};		
 		
+		this._onRefreshView( this.getIndexOf( newValue ) );
 		newValue.setFocus();
 		return newValue;
+	},
+	
+	/**
+	 * Handler called only the first time a new value was added and saved or cancelled.
+	 */
+	_newValueHandler_onStopEditing: function( newValue, save ) {
+		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item		
+	},
+	
+	/**
+	 * Called when the view changes, for example if elements are removed or added in case this is a
+	 * view allowing multiple values.
+	 * 
+	 * @param int fromIndex the index of the value in this._editableValues which triggered the
+	 *        refresh request (because of insertion or deletion). This is -1 if an element was
+	 *        removed at the end of the view.
+	 */
+	_onRefreshView: function( fromIndex ) {
+		if( fromIndex < 0 ) {
+			return; // element at the end was removed, no update requiredy
+		}
+		for( var i = fromIndex; i < this._editableValues.length; i++ ) {
+			var isEven = ( i % 2 ) != 0;			
+			this._editableValues[ i ]._subject
+			.addClass( isEven ? 'even' : 'uneven' )
+			.removeClass( isEven ? 'uneven' : 'even' );			
+		};
 	},
 	
 	/**

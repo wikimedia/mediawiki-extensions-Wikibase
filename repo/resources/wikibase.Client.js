@@ -2,6 +2,8 @@
  * JavasSript giving information about a client of the 'Wikibase' extension.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
+ * @todo: Rename this, "client" might be irritating since these sites don't have to be clients
+ * 
  * @since 0.1
  * @file wikibase.Client.js
  * @ingroup Wikibase
@@ -12,7 +14,7 @@
 "use strict";
 
 /**
- * Offers information about a client of the local Wikibase installation.
+ * Offers information about a site known to the local Wikibase installation.
  */
 window.wikibase.Client = function( siteDetails ) {
 	this._siteDetails = siteDetails;

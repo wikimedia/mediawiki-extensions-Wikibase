@@ -85,7 +85,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._pending = this._subject.hasClass( 'wb-pending-value' );		
 		
 		this._initInterfaces();
-		
+
 		this._toolbar = toolbar;
 		this._toolbar.appendTo( this._getToolbarParent() );
 		
@@ -127,8 +127,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_configSingleInterface: function( singleInterface ) {
 		var self = this;		
-		singleInterface.onFocus = function(){self._interfaceHandler_onFocus()};
-		singleInterface.onBlur = function(){self._interfaceHandler_onBlur()};
+		singleInterface.onFocus = function( event ){self._interfaceHandler_onFocus( event )};
+		singleInterface.onBlur = function( event ){self._interfaceHandler_onBlur( event )};
 		singleInterface.onKeyPressed =
 			function( event ) {self._interfaceHandler_onKeyPressed( event )};
 		singleInterface.onKeyUp = // ESC key does not react onKeyPressed but on onKeyUp
@@ -143,13 +143,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_getToolbarParent: function() {
 		return this._subject.parent();
 	},
-
-	/**
-	 * reset css classes (e.g. of table rows when adding or removing)
-	 * (parent needs to be passed since original node has to be removed when resetting)
-	 * @param jQuery parent
-	 */
-	_resetCss: function( parent ) { },
 	
 	/**
 	 * Removes the value from the dom as well as from the data store via the API
@@ -157,10 +150,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	remove: function() {
 		// TODO API call
 		this.doApiCall( true );
-		//this.destroy(); // no need to destroy this proberly since we remove anything for real!
-		var parent = this._subject.parent();
+		//this.destroy(); // no need to destroy this proberly since we remove anything for real! FIXME: really??
 		this._subject.empty().remove();
-		this._resetCss( parent );
+		
+		if( this.onAfterRemove !== null ) {
+			this.onAfterRemove() // callback
+		}
 	},
 
 	destroy: function() {
@@ -184,12 +179,22 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.isInEditMode() ) {
 			return false;
 		}
-        this._isInEditMode = true;
+		this._isInEditMode = true;
 		
 		$.each( this._interfaces, function( index, elem ) {
 			elem.startEditing();
 		} );
-		
+
+		if ( this._toolbar.editGroup.tooltip !== null ) {
+			/*
+			FIXME: tooltip needs to recalculate its horizontal position after input elements have been placed inside
+			the DOM; but show() has already been called on initialization, so the tooltip is marked as visible (which
+			is necessary since the tooltip should be permanently shown on some occasions)
+			 */
+			this._toolbar.editGroup.tooltip.hide();
+			this._toolbar.editGroup.tooltip.show();
+		}
+
 		return true;
 	},
 
@@ -203,7 +208,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( ! this.isInEditMode() ) {
 			return false;
 		}
-		if( this.onStopEditing( save ) === false ) { // callback
+		if( this.onStopEditing !== null && this.onStopEditing( save ) === false ) { // callback
 			return false; // cancel
 		}
 		if( !save && this.isPending() ) {
@@ -229,7 +234,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._subject.removeClass( 'wb-pending-value' );
 		}
 		
-		if( this.afterStopEditing( save, changed, wasPending ) === false ) { // callback
+		if( this.afterStopEditing !== null && this.afterStopEditing( save, changed, wasPending ) === false ) { // callback
 			return false; // cancel
 		}
 		
@@ -476,8 +481,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param bool save whether the result should be saved. If false, the editing will be cancelled
 	 *        without saving.
 	 * @return bool whether to go on with the stop editing.
+	 * 
+	 * @example function( save ) {return true}
 	 */
-	onStopEditing: function( save ) {return true},
+	onStopEditing: null,
 	
 	/**
 	 * Callback called after the editing process is finished. At this point the element is not in
@@ -489,6 +496,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 *        already and the internal value is changed to the new value.
 	 * @param bool changed whether the value was changed during the editing process.
 	 * @param bool wasPending whether the element was pending before the edit.
+	 * 
+	 * @example function( saved, changed, wasPending ) {return true}
 	 */
-	afterStopEditing: function( saved, changed, wasPending ) {return true}
+	afterStopEditing: null,
+	
+	/**
+	 * Callback called after the element was removed
+	 */
+	onAfterRemove: null
 };

@@ -22,6 +22,17 @@ window.wikibase.ui.PropertyEditTool.EditableSiteLink = function( subject ) {
 };
 window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
+	/**
+	 * The part of the editable site link representing the site the selected page belongs to
+	 * @var wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface
+	 */
+	siteIdInterface: null,
+	
+	/**
+	 * The part of the editable site link representing the link to the site
+	 * @var wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface
+	 */
+	pageNameInterface: null,
 
 	/**
 	 * current results received from the api
@@ -39,6 +50,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		this._toolbar.draw();
 	},
 
+	_initInterfaces: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._initInterfaces.call( this );
+		// make interfaces available for public since they contain interesting data:
+		this.siteIdInterface = this._interfaces.siteId;
+		this.pageNameInterface = this._interfaces.pageName;
+	},
+
 	_buildInterfaces: function( subject ) {
 		var interfaces = new Array();
 		var tableCells = subject.children( 'td' );
@@ -48,6 +66,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );		
 		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
 		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
+		interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
 
 		// interface for choosing a page (from the source site):
 		interfaces.pageName = new ev.ClientPageInterface(
@@ -90,8 +109,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			
 			this._removeClassByRegex( pageInterface._getValueContainer(), /^wb-sitelinks-link-.+/ );
 			pageInterface._getValueContainer().addClass( 'wb-sitelinks-site-' + siteId );
-			
-			this._resetCss( this._subject.parent() );
 		}
 		
 		// only enable client page selector if there is a valid client id selected
@@ -105,27 +122,27 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	
 	/**
 	 * Helper function to remove a css class matching a regular expression.
+	 * 
+	 * @param subject jQuery
+	 * @param RegExp classNameRegex
 	 */
-	_removeClassByRegex: function( subject, classNameRegExp ) {
+	_removeClassByRegex: function( subject, classNameRegex ) {
 		if ( typeof subject.attr( 'class' ) == 'undefined' ) {
 			return
 		}
 		$.each( subject.attr( 'class' ).split( ' ' ), $.proxy( function( index, className ) {
-			if ( className.match( classNameRegExp ) ) {
+			if ( className.match( classNameRegex ) ) {
 				subject.removeClass( className );
 			}
 		}, this ) );
 	},
-
-	_resetCss: function( parent ) {
-		var tableRows = $( parent.parents( 'table' )[0] ).find( 'tr' );
-		tableRows.each( function( index, node ) {
-			if ( index != tableRows.length - 1 ) {
-				$( node ).addClass( ( index % 2 ) ? 'uneven' : 'even' );
-			}
-		} );
+	
+	startEditing: function() {
+		// set ignored site links again since they could have changed
+		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
+		window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
 	},
-
+	
 	stopEditing: function( save ) {
 		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
 		
@@ -133,6 +150,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		this._interfaces.siteId.setActive( this.isPending() );
 		
 		return changed;
+	},
+
+	getInputHelpMessage: function() {
+		return window.mw.msg( 'wikibase-sitelinks-input-help-message' );
 	},
 
 	getApiCallParams: function( removeValue ) {
@@ -153,5 +174,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 				linktitle: this.getValue()
 			};
 		}
-	}
+	},
+	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+	
+	/**
+	 * Allows to specify an array with clients which should not be allowed to choose
+	 */
+	ignoredSiteLinks: null
 } );

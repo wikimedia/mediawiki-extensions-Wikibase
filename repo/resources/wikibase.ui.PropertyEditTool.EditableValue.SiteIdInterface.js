@@ -13,8 +13,8 @@
 "use strict";
 
 /**
- * Serves the input interface to write a site code to select, this will validate whether the site
- * code is existing and will display the full site name if it is.
+ * Serves the input interface to write a site code or to selectone. This will also validate whether
+ * the site code is existing and will display the full site name if it is.
  * 
  * @param jQuery subject
  */
@@ -25,32 +25,68 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = ne
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 	
 	_initInputElement: function() {
-		var clientList = [];
-
-		this.onKeyDown = function( event ) {
-			// when hitting tab, select the first element of the current result set an jump into title input box
-			if ( event.keyCode == 9 ) {
-				var widget = this._inputElem.autocomplete( 'widget' );
-				widget.data( 'menu' ).activate( event, widget.children().filter(':first') );
-				widget.data( 'menu' ).select( event );
+		/**
+		 * when leaving the input box, set displayed value to from any allowed input value to correct display value
+		 *
+		 * @param event
+		 */
+		this.onBlur = function( event ) {
+			var widget = this._inputElem.autocomplete( 'widget' );
+			if ( this.getSelectedSiteId() !== null ) {
+				/*
+				 loop through complete result set since the autocomplete widget's narrowed result set
+				 is not reliable / too slow; e.g. do not do this:
+				 widget.data( 'menu' ).activate( event, widget.children().filter(':first') );
+				 this._inputElem.val( widget.data( 'menu' ).active.data( 'item.autocomplete' ).value );
+				*/
+				$.each( this._currentResults, $.proxy( function( index, element ) {
+					if ( element.client.getId() == this.getSelectedSiteId() ) {
+						this._inputElem.val(element.value );
+					}
+				}, this ) )
+				this._onInputRegistered();
 			}
 		}
-
+		
+		this._initClientList();		
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
+	},
+	
+	/**
+	 * Builds a list of clients allowed to choose from
+	 */
+	_initClientList: function() {
+		var clientList = [];
+		
+		// make sure to allow choosing the currently selected site id even if it is in the list of
+		// sites to ignore. This makes sense since it is selected already and it should be possible
+		// to select it again.
+		var ignoredSites = this.ignoredSiteLinks.slice();
+		var ownSite = this.getSelectedClient();
+		if( ownSite !== null ) {
+			var ownSiteIndex = $.inArray( ownSite, ignoredSites );
+			if( ownSiteIndex > -1 ) {
+				ignoredSites.splice( ownSiteIndex, 1 );
+			}
+		}
+		
+		// find out which site ids should be selectable and add them as auto selct choice
 		for ( var siteId in wikibase.getClients() ) {
 			var client = wikibase.getClient( siteId );
-			clientList.push( {
-				'label': client.getName() + ' (' + client.getId() + ')',
-				'value': client.getShortName() + ' (' + client.getId() + ')',
-				'client': client } // additional reference to client object for validation
-			);
+			
+			if( $.inArray( client, ignoredSites ) == -1 ) {
+				clientList.push( {
+					'label': client.getName() + ' (' + client.getId() + ')',
+					'value': client.getShortName() + ' (' + client.getId() + ')',
+					'client': client // additional reference to client object for validation
+				} );
+			}
 		}
 		this.setResultSet( clientList );
-
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 	},
 
 	/**
-	 * Returns the selected client site Id
+	 * Returns the selected client site Id from currently specified value
 	 * 
 	 * @return string|null siteId or null if no valid selection has been made yet.
 	 */
@@ -96,6 +132,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	
 	_getSiteIdFromString: function( text ) {
 		return text.replace( /^.+\(\s*(.+)\s*\)\s*/, '$1' );
-	}
-
+	},
+	
+	
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+	
+	/**
+	 * Allows to specify an array with clients which should not be allowed to choose
+	 */
+	ignoredSiteLinks: null
 } );

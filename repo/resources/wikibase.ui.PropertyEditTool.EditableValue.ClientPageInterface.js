@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author H. Snater
+ * @author Daniel Werner
  */
 "use strict";
 
@@ -42,8 +43,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.
 		if( typeof client !== 'object' ) {
 			return;
 		}
+		if( this._client !== null && this._client.getId() === client.getId() ) {
+			return; // no change
+		}
+		
 		this.url = client.getApi();
 		this._client = client;
+				
+		this._currentResults = [] // empty current suggestions...		
+		if( this.isInEditMode() ) {
+			this._inputElem.autocomplete( "search" ); // ...and get new suggestions
+			
+			/* // TODO: this should be done after "search" is finished, apparently, there is no callback for that currently...
+			if( ! this.isValid() ) {
+				this.setValue( '' );
+			}
+			*/
+		}
 	},
 	
 	getClient: function( client ) {
