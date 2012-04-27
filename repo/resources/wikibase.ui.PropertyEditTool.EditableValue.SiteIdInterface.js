@@ -46,6 +46,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				}, this ) )
 				this._onInputRegistered();
 			}
+			this._editableValue._toolbar.editGroup.tooltip.hide();
 		}
 		
 		this._initClientList();		

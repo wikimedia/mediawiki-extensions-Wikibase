@@ -75,7 +75,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 		this._tipsy = tooltip.data( 'tipsy' );
 
 		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, tooltip );
-		
+
+		// reposition tooltip when resizing the browser window
+		$( window ).on( 'resize', $.proxy( function() {
+			if ( this._isVisible ) {
+				this.hide(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
+				this.show();
+			}
+		}, this ) );
+
 		this._toggleEvents( true );
 	},
 
