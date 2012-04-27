@@ -161,6 +161,7 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'mediawiki.Title'
 	),
 	'messages' => array(
+		'wikibase-sitelinks',
 		'wikibase-cancel',
 		'wikibase-edit',
 		'wikibase-save',

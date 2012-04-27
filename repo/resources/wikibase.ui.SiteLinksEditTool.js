@@ -164,3 +164,16 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 */
 	allowsMultipleValues: true
 } );
+
+/**
+ * Returns the basic DOM structure sufficient for a new wikibase.ui.SiteLinksEditTool
+ * 
+ * @return jQuery
+ */
+window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
+	return $(
+			'<table class="wb-sitelinks" cellspacing="0"><thead><th colspan="2">' +
+			mw.msg( 'wikibase-sitelinks' ) +
+			'</th></thead><tbody></tbody></table>'
+	);
+}

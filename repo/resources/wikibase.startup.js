@@ -28,5 +28,17 @@
 	} );
 	
 	// edit tool for site links:
-	new window.wikibase.ui.SiteLinksEditTool( $( 'table.wb-sitelinks' ) );
+	
+	// if there are no site links yet, we have to create the table for it to initialize the ui
+	// without css this is not required, so we build it here manually
+	$( '.wb-sitelinks-empty' )
+	.each( function() {
+		$( this ).replaceWith( wikibase.ui.SiteLinksEditTool.getEmptyStructure() )
+	} );
+	
+	$( 'table.wb-sitelinks' ).each( function() {
+		// actual initialization
+		new window.wikibase.ui.SiteLinksEditTool( $( this ) );
+	} );
+	
 } )( jQuery );
