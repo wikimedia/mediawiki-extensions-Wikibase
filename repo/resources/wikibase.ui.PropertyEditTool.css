@@ -91,14 +91,15 @@ table.wb-sitelinks {
 	table.wb-sitelinks th, table.wb-sitelinks td {
 		border-bottom: 1px solid #ccc;
 		margin: 0;
-		padding: 0.2em 0.4em;
+		padding: 0 0.4em;
+		height: 2.2em; /* steady height when input boxes are inserted compared with padding usage */
+		
 	}
 	table.wb-sitelinks th {
 		/*background-color:#D6F3FF;*/
 		text-align:left;
 		font-size:1.25em;
-		font-weight:normal;
-		padding-bottom:8px;
+		font-weight:normal;		
 	}
 	table.wb-sitelinks tr:hover td {
 		/*background-color:#5dc9f4;*/
