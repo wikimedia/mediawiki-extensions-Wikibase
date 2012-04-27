@@ -118,8 +118,8 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 			}
 		}
 	},	
-	_newValueHandler_onStopEditing: function( newValue, save ) {
-		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_onStopEditing.call( this, newValue, save );		
+	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
+		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_afterStopEditing.call( this, newValue, save );		
 		if( save ) {
 			// add chosen site to list of sites which can not be chosen by other editable site links
 			var addedSite = newValue.siteIdInterface.getSelectedClient();
