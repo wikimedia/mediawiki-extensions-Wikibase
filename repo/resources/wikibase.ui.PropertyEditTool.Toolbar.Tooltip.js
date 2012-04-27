@@ -58,9 +58,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	_initElem: function( tooltipMessage ) {
 		// default tipsy configuration
 		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
-			this._tipsyConfig = {
-				gravity: ( document.documentElement.dir == 'rtl' ) ? 'nw' : 'ne'
-			};
+			this._tipsyConfig = {};
+			this.setGravity( 'ne' );
 		}
 
 		var tooltip = $( '<span/>', {
@@ -132,7 +131,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	 * @param String gravity
 	 */
 	setGravity: function( gravity ) {
-		this._tipsy.options.gravity = gravity;
+		// flip horizontal direction in rtl language
+		if ( document.documentElement.dir == 'rtl' ) {
+			if ( gravity.search( /e/ ) != -1) {
+				gravity = gravity.replace( /e/g, 'w' );
+			} else {
+				gravity = gravity.replace( /w/g, 'e' );
+			}
+		}
+		this._tipsyConfig.gravity = gravity;
+		if ( this._tipsy != null ) {
+			this._tipsy.options.gravity = gravity;
+		}
 	},
 
 	destroy: function() {
