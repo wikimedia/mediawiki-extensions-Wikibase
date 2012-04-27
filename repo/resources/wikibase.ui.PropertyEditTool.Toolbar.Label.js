@@ -15,11 +15,11 @@
 /**
  * Represents a label within a wikibase.ui.PropertyEditTool.Toolbar toolbar
  *
- * @param jQuery parent
+ * @param string|jQuery content
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Label = function( appendTo ) {
-	if( typeof appendTo != 'undefined' ) {
-		this._init( appendTo );
+window.wikibase.ui.PropertyEditTool.Toolbar.Label = function( content ) {
+	if( typeof content != 'undefined' ) {
+		this._init( content );
 	}
 };
 window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
@@ -37,6 +37,8 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	/**
 	 * Initializes the ui element.
 	 * This should normally be called directly by the constructor.
+	 * 
+	 * @param string|jQuery content
 	 */
 	_init: function( content ) {
 		if( this._parent !== null ) {
@@ -63,12 +65,13 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	},
 	
 	/**
-	 * sets the label's content
-	 * @param string|object content
+	 * Sets the label's content
+	 * 
+	 * @param string|jQuery content
 	 */
 	setContent: function( content ) {
 		this._elem.empty();
-		if ( typeof content == String ) {
+		if ( typeof content == 'string' ) {
 			content = $.trim( content );
 		}
 		this._elem.append( content );
@@ -77,6 +80,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	/**
 	 * TODO: implement getter on demand
 	 * returns the labels's content
+	 * 
 	 * @return jQuery contents
 	 */
 	getContent: function() {
@@ -85,6 +89,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	
 	/**
 	 * Returns true if the element is disabled.
+	 * 
 	 * @return bool
 	 */
 	isDisabled: function() {
@@ -94,6 +99,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
 	/**
 	 * Disables or enables the element. Disabled is still visible but will be presented differently
 	 * and might behave differently in some cases.
+	 * 
 	 * @param bool disable true for disabling, false for enabling the element
 	 * @return bool whether the state was changed or not.
 	 */
