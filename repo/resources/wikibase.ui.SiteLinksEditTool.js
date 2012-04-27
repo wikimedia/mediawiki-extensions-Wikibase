@@ -20,7 +20,6 @@ window.wikibase.ui.SiteLinksEditTool = function( subject ) {
 		this._init( subject );
 	}
 };
-
 window.wikibase.ui.SiteLinksEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
 $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	/**
@@ -34,10 +33,15 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	_editableValuesProto: null,
 
 	_init: function( subject ) {
-		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
-
 		// add colspan+1 because of toolbar td's:
-		var th = this._subject.find( 'th' );
+		var th = subject.find( 'th' );
+		th.append( '&nbsp;' );
+		th.append( $( '<span/>', {
+			'class': this.UI_CLASS + '-counter'
+		} ) );
+		
+		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
+		
 		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
 	},
 	
@@ -67,7 +71,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._initEditToolForValues.call( this );
 		
 		// make sure selecting a language in EditableSiteLink only offers languages not yet chosen
-		this._editableValuesProto.prototype.ignoredSiteLinks = this.getRepresentedSites();
+		this.getEditableValuePrototype().prototype.ignoredSiteLinks = this.getRepresentedSites();
 	},
 	
 	/**

@@ -61,6 +61,9 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 				
 		this._initEditToolForValues();
 		this._initToolbar();
+		
+		// call for first rendering of additional stuff of the view:
+		this._onRefreshView( 0 );
 	},
 	
 	/**
@@ -312,7 +315,10 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * Handler called only the first time a new value was added and saved or cancelled.
 	 */
 	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
-		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item		
+		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
+		if( save ) {
+			this._onRefreshView( $.inArray( newValue, this._editableValues ) );
+		}
 	},
 	
 	/**
@@ -324,15 +330,50 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 *        removed at the end of the view.
 	 */
 	_onRefreshView: function( fromIndex ) {
+		// Initialize counter where required:
+		this._updateCounters();
+		
+		// set 'even' and 'uneven' css classes to containing values:
 		if( fromIndex < 0 ) {
 			return; // element at the end was removed, no update requiredy
 		}
 		for( var i = fromIndex; i < this._editableValues.length; i++ ) {
-			var isEven = ( i % 2 ) != 0;			
+			var isEven = ( i % 2 ) != 0;
 			this._editableValues[ i ]._subject
 			.addClass( isEven ? 'even' : 'uneven' )
-			.removeClass( isEven ? 'uneven' : 'even' );			
+			.removeClass( isEven ? 'uneven' : 'even' );
 		};
+	},
+	
+	/**
+	 * This will refresh all counters which display the number of values managed by this.
+	 */
+	_updateCounters: function() {
+		var counterElems = this._getCounterNodes();
+		if( counterElems !== null && counterElems.length > 0 ) {
+			this._getCounterNodes().text( this._getFormattedCounterText() );
+		}
+	},
+	
+	/**
+	 * Returns nodes which should serve as counters, displaying the number of nodes.
+	 * 
+	 * @return jQuery
+	 */
+	_getCounterNodes: function() {
+		return this._subject.find( '.' + this.UI_CLASS + '-counter' );
+	},
+	
+	/**
+	 * Returns a formatted string with the number of elements.
+	 * 
+	 * @return string
+	 */
+	_getFormattedCounterText: function() {
+		var numberOfValues = this.getValues().length;
+		return ( numberOfValues != 1 )
+				? '(' + numberOfValues + ')'
+				: '';
 	},
 	
 	/**
@@ -342,6 +383,27 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 */
 	_newEmptyValueDOM: function() {
 		return $( '<span/>' );
+	},
+	
+	/**
+	 * Returns all EditableValue objects managed by this.
+	 * 
+	 * @param bool getPendingValues if set to true, also pending values not yet stored will be returned.
+	 * @return wikibase.ui.PropertyEditTool.EditableValue
+	 */
+	getValues: function( getPendingValues ) {
+		if( getPendingValues ) {
+			return this._editableValues.splice();
+		}
+		
+		var values = new Array();
+		$.each( this._editableValues, function( index, elem ) {
+			// don't collect pending elements
+			if( ! elem.isPending() ) {
+				values.push( elem );
+			}
+		} );
+		return values;
 	},
 	
 	/**
