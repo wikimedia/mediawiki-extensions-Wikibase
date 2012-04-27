@@ -43,10 +43,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 					if ( element.client.getId() == this.getSelectedSiteId() ) {
 						this._inputElem.val(element.value );
 					}
-				}, this ) )
+				}, this ) );
 				this._onInputRegistered();
 			}
-		}
+		};
 		
 		this._initClientList();		
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );

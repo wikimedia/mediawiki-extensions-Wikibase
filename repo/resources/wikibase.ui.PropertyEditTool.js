@@ -86,7 +86,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 					return false; // full, don't enable 'add' button!
 				}
 				return window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype.setDisabled.call( this, disable );
-			}
+			};
 			this._toolbar.btnAdd.setDisabled( false );
 
 			this._toolbar.addElement( this._toolbar.btnAdd );

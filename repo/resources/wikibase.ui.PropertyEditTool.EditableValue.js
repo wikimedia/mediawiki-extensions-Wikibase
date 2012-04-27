@@ -127,14 +127,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_configSingleInterface: function( singleInterface ) {
 		var self = this;		
-		singleInterface.onFocus = function( event ){self._interfaceHandler_onFocus( event )};
-		singleInterface.onBlur = function( event ){self._interfaceHandler_onBlur( event )};
+		singleInterface.onFocus = function( event ){self._interfaceHandler_onFocus( event );};
+		singleInterface.onBlur = function( event ){self._interfaceHandler_onBlur( event );};
 		singleInterface.onKeyPressed =
-			function( event ) {self._interfaceHandler_onKeyPressed( event )};
+			function( event ) {self._interfaceHandler_onKeyPressed( event );};
 		singleInterface.onKeyUp = // ESC key does not react onKeyPressed but on onKeyUp
-			function( event ) {self._interfaceHandler_onKeyPressed( event )};
+			function( event ) {self._interfaceHandler_onKeyPressed( event );};
 		singleInterface.onInputRegistered =
-				function( event ){self._interfaceHandler_onInputRegistered( event )};
+				function( event ){self._interfaceHandler_onInputRegistered( event );};
 	},
 	
 	/**
@@ -154,7 +154,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._subject.empty().remove();
 		
 		if( this.onAfterRemove !== null ) {
-			this.onAfterRemove() // callback
+			this.onAfterRemove(); // callback
 		}
 	},
 
