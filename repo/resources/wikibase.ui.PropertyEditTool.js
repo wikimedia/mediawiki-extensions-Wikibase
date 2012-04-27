@@ -76,9 +76,8 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		if( this.allowsMultipleValues ) {
 			// toolbar group for buttons:
 			this._toolbar.lblFull = new window.wikibase.ui.PropertyEditTool.Toolbar.Label(
-					window.mw.msg( 'wikibase-propertyedittool-full' )
+					'&nbsp;- ' + window.mw.msg( 'wikibase-propertyedittool-full' )
 			);
-			//this._toolbar.lblFull.setDisabled( true );
 			
 			// only add 'add' button if we can have several values
 			this._toolbar.btnAdd = new window.wikibase.ui.PropertyEditTool.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
@@ -95,8 +94,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 				if( ! disable && self.isFull() ) {
 					// full list, don't enable 'add' button, show hint
 					self._toolbar.addElement( self._toolbar.lblFull );
-					self._toolbar.innerGroup.removeElement( self._toolbar.btnAdd );
-					return false;
+					disable = true;
 				}
 				if( ! disable && self.isInAddMode() ) {					
 					disable = true; // still adding new value, don't enable 'add' button!
@@ -104,7 +102,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 				if( disable == false ) {
 					// enabled, label with 'full' message not required
 					self._toolbar.removeElement( self._toolbar.lblFull );
-					self._toolbar.innerGroup.addElement( self._toolbar.btnAdd );
 				}
 				return window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype.setDisabled.call( this, disable );
 			};
