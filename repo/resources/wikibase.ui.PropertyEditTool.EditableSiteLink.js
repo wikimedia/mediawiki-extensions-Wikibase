@@ -157,21 +157,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	},
 
 	getApiCallParams: function( removeValue ) {
+		var linkValues = this.getValue();
+		var siteId = this.siteIdInterface.getSelectedSiteId();
 		if ( removeValue === true ) {
 			return {
 				action: 'wblinksite',
 				id: mw.config.values.wbItemId,
 				link: 'remove',
-				linksite: $( this._subject.children()[0] ).text(),
-				linktitle: this.getValue()
+				linksite: siteId,
+				linktitle: linkValues[1]
 			};
 		} else {
 			return {
 				action: 'wblinksite',
 				id: mw.config.values.wbItemId,
 				link: 'set',
-				linksite: $( this._subject.children()[0] ).text(),
-				linktitle: this.getValue()
+				linksite: siteId,
+				linktitle: linkValues[1]
 			};
 		}
 	},
