@@ -70,26 +70,45 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 */
 	_initToolbar: function() {
 		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
-		this._toolbar.renderItemSeparators = true;
+		this._toolbar.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group();
+		this._toolbar.addElement( this._toolbar.innerGroup );
 		
 		if( this.allowsMultipleValues ) {
+			// toolbar group for buttons:
+			this._toolbar.lblFull = new window.wikibase.ui.PropertyEditTool.Toolbar.Label(
+					window.mw.msg( 'wikibase-propertyedittool-full' )
+			);
+			//this._toolbar.lblFull.setDisabled( true );
+			
 			// only add 'add' button if we can have several values
 			this._toolbar.btnAdd = new window.wikibase.ui.PropertyEditTool.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
 			this._toolbar.btnAdd.onAction = $.proxy( function() {
 				this.enterNewValue();
 			}, this );
-			// enable button only if this is not full yet!
+			
+			this._toolbar.innerGroup.addElement( this._toolbar.btnAdd );
+			
+			// enable button only if this is not full yet, overwrite function directly	
 			var self = this;
-			this._toolbar.btnAdd.setDisabled( true );
 			this._toolbar.btnAdd.setDisabled = function( disable ) {
-				if( disable === false && ( self.isFull() || self.isInAddMode() ) ) {
-					return false; // full or still adding new value, don't enable 'add' button!
+				var isFull = self.isFull();
+				if( ! disable && self.isFull() ) {
+					// full list, don't enable 'add' button, show hint
+					self._toolbar.addElement( self._toolbar.lblFull );
+					self._toolbar.innerGroup.removeElement( self._toolbar.btnAdd );
+					return false;
+				}
+				if( ! disable && self.isInAddMode() ) {					
+					disable = true; // still adding new value, don't enable 'add' button!
+				}
+				if( disable == false ) {
+					// enabled, label with 'full' message not required
+					self._toolbar.removeElement( self._toolbar.lblFull );
+					self._toolbar.innerGroup.addElement( self._toolbar.btnAdd );
 				}
 				return window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype.setDisabled.call( this, disable );
 			};
-			this._toolbar.btnAdd.setDisabled( false );
-
-			this._toolbar.addElement( this._toolbar.btnAdd );
+			this._toolbar.btnAdd.setDisabled( false ); // will run the code above
 		}
 		
 		this._toolbar.appendTo( this._getToolbarParent() );

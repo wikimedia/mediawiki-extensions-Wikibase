@@ -40,6 +40,12 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		var th = this._subject.find( 'th' );
 		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
 	},
+	
+	_initToolbar: function() {
+		window.wikibase.ui.PropertyEditTool.prototype._initToolbar.call( this );
+		// change message appearing when all language links are represented within the list
+		this._toolbar.lblFull.setContent( window.mw.msg( 'wikibase-sitelinksedittool-full' ) );
+	},
 
 	_buildSingleValueToolbar: function( editableValue ) {
 		var toolbar = window.wikibase.ui.PropertyEditTool.prototype._buildSingleValueToolbar.call( this, editableValue );

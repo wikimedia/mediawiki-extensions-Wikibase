@@ -86,8 +86,8 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		var parent = null;
 		if( this._elem !== null ) {
 			this._elem.children().detach(); // only detach so elements can be attached somewhere else
-			this._elem.remove();
 			parent = this._elem.parent();
+			this._elem.remove(); // remove element after parent is known
 		}
 		this._elem = $( '<div/>', {
 			'class': this.UI_CLASS
@@ -102,14 +102,16 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * Draws the toolbar elements like buttons and labels
 	 */
 	_drawToolbarElements: function() {
-		for( var i in this._items ) {
+		var i = -1;
+		for( i in this._items ) {
 			if( this.renderItemSeparators && i != 0 ) {
 				this._elem.append( '|' );
 			}
 			this._elem.append( this._items[i]._elem );
 		}
 		
-		if( this.renderItemSeparators ) {
+		// only render brackets if we have any content
+		if( this.renderItemSeparators && i > -1 ) {
 			this._elem
 			.prepend( '[' )
 			.append( ']' );
@@ -120,7 +122,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * This will add a toolbar element, e.g. a label or a button to the toolbar at the given index.
 	 * 
 	 * @param Object elem toolbar content element (e.g. a group, button or label).
-	 * @param index where to add the element. 0 will 
+	 * @param index where to add the element.
 	 */
 	addElement: function( elem, index ) {
 		if( typeof index == 'undefined' ) {
@@ -135,17 +137,37 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	
 	/**
 	 * Removes an element from the toolbar
+	 * 
 	 * @param Object elem the element to remove
 	 * @return bool false if element isn't part of this element
 	 */
 	removeElement: function( elem ) {
-		var index = $.inArray( elem, this._items );
-		if( index === -1 ) {
+		var index = this.getIndexOf( elem );
+		if( index < 0 ) {
 			return false;
 		}
 		this._items.splice( index, 1 );
 		
 		this.draw(); // TODO: could be more efficient when just removing one element
+		return true;
+	},
+	
+	/**
+	 * Returns whether the given element is represented within the toolbar.
+	 * 
+	 * @return bool
+	 */
+	hasElement: function( elem ) {
+		return this.getIndexOf( elem ) > -1;
+	},
+	
+	/**
+	 * returns the index of an element within the toolbar, -1 in case the element is not represented.
+	 * 
+	 * @return int
+	 */
+	getIndexOf: function( elem ) {
+		return $.inArray( elem, this._items );
 	},
 
 	destroy: function() {

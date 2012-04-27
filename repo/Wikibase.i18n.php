@@ -33,5 +33,7 @@ $messages['en'] = array(
 	'wikibase-sitelinks-add' => 'add a link to a Wikipedia page',
 	'wikibase-sitelinks-empty' => 'No Wikipedia pages linked to this item yet.',
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a Wikipedia article.',
-	'wikibase-remove' => 'remove'
+	'wikibase-remove' => 'remove',
+	'wikibase-propertyedittool-full' => 'List of values is complete.',
+	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 );

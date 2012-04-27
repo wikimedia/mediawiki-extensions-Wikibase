@@ -13,10 +13,12 @@
 	display: inline-block;
 }
 
+.wb-ui-propertyedittoolbar-label,
 .wb-ui-propertyedittoolbar-button {
     padding:0 .15em;
 }
 
+.wb-ui-propertyedittoolbar-label-disabled,
 .wb-ui-propertyedittoolbar-button-disabled {
 	color: grey;
 }

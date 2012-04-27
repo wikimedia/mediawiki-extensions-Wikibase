@@ -172,7 +172,9 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase-label-input-help-message',
 		'wikibase-description-input-help-message',
 		'wikibase-sitelinks-input-help-message',
-		'wikibase-remove'
+		'wikibase-remove',
+		'wikibase-propertyedittool-full',
+		'wikibase-sitelinksedittool-full',
 	)
 );
 
