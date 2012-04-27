@@ -62,6 +62,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 				this._onInputRegistered();
 			}, this ) );
 		}
+
+		// make autocomplete results list strech from the right side of the input box in rtl
+		if ( document.documentElement.dir == 'rtl' ) {
+			inputElement.data( 'autocomplete' ).options.position.my = 'right top';
+			inputElement.data( 'autocomplete' ).options.position.at = 'right bottom';
+		}
+
+		// since results list does not reposition automatically on resize, just close it
+		$( window ).on( 'resize', $.proxy( function() {
+			this._inputElem.data( 'autocomplete' ).close( {} );
+		}, this ) );
+
 		return inputElement;
 	},
 

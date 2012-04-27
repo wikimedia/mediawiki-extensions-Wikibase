@@ -1,7 +1,7 @@
 
 ( function () {
 
-	module( 'ext.wikibase', QUnit.newMwEnvironment() );
+	module( 'wikibase', QUnit.newMwEnvironment() );
 
 	test( '-- NaNNaN!', function() {
 		expect(1);
@@ -18,7 +18,7 @@
 		);
 	} );
 
-	test( '-- NaNNaN!', function() {
+	test( '-- NaNNaN! (2)', function() {
 		expect(1);
 
 		equal(

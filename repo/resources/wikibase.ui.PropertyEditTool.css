@@ -13,15 +13,15 @@
 	display: inline-block;
 }
 
-.wb-ui-propertyedittoolbar-label,
-.wb-ui-propertyedittoolbar-button {
-    padding:0 .15em;
-}
-
-.wb-ui-propertyedittoolbar-label-disabled,
-.wb-ui-propertyedittoolbar-button-disabled {
-	color: grey;
-}
+	.wb-ui-propertyedittoolbar-label,
+	.wb-ui-propertyedittoolbar-button {
+		padding: 0.15em;
+	}
+	
+		.wb-ui-propertyedittoolbar-label-disabled,
+		.wb-ui-propertyedittoolbar-button-disabled {
+			color: grey;
+		}
 
 .wb-ui-propertyedittoolbar, .wb-property-container-value {
 	margin:0 .3em;
@@ -42,6 +42,10 @@ h1 .wb-ui-propertyedittoolbar {
 	display:inline-block;
 }
 
+.mw-content-rtl .ui-autocomplete-loading { /* set AJAX spinner to left of the autocomplete input box in rtl */
+	background-position:left center;
+}
+
 h1.firstHeading .wb-ui-propertyedittoolbar {
 	font-size: 0.5em;
 }
@@ -53,16 +57,14 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 .wb-property-container {
 	margin-top:.3em;
 }
-
-.wb-property-container-value {
-	background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) left  no-repeat;
-	padding: 5px 0 0 35px;
-}
-
-/* @noflip */ .rtl .wb-property-container-value {
-	background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
-	padding: 5px 35px 0 0;
-} /* css Janus does not convert padding in every browser */
+	.wb-property-container-value {
+		background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) left  no-repeat;
+		padding: 5px 0 0 35px;
+	}
+	/* @noflip */ .rtl .wb-property-container-value {
+		background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
+		padding: 5px 35px 0 0;
+	} /* css Janus does not convert padding in every browser */
 
 .mw-jump, #contentSub {
 	display:none;
@@ -71,10 +73,9 @@ h1.firstHeading .wb-ui-propertyedittoolbar {
 .tipsy-ne, .tipsy-nw {
 	padding-top:12px;
 }
-
-.tipsy-ne .tipsy-arrow, .tipsy-nw .tipsy-arrow {
-	background:url(images/tipsy.png) -13px -1px;
-}
+	.tipsy-ne .tipsy-arrow, .tipsy-nw .tipsy-arrow {
+		background:url(images/tipsy.png) -13px -1px;
+	}
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
 .mw-help-field-hint {
@@ -122,6 +123,9 @@ table.wb-sitelinks {
 	font-size:inherit;
 }
 
+td .wb-ui-propertyedittoolbar-editablevalueinterface {
+	width: 100%;
+}
 .wb-ui-propertyedittoolbar-editablevalueinterface-disabled input {
 	background-color: #eee;
 }
