@@ -92,11 +92,15 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function onResourceLoaderTestModules( array &$testModules, ResourceLoader &$resourceLoader ) {
-		$testModules['qunit']['ext.wikibase.tests'] = array(
-			'scripts' => array( 'tests/qunit/wikibase.tests.js' ),
-			'dependencies' => array(),
+		$testModules['qunit']['wikibase.tests'] = array(
+			'scripts' => array(
+				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.Toolbar.tests.js'
+			),
+			'dependencies' => array( 'wikibase' ),
 			'localBasePath' => dirname( __FILE__ ),
-			'remoteExtPath' => 'Wikibase',
+			'remoteExtPath' => 'WikidataRepo',
 		);
 
 		return true;

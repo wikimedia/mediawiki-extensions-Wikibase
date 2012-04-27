@@ -61,7 +61,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._initEditToolForValues.call( this );
 		
 		// make sure selecting a language in EditableSiteLink only offers languages not yet chosen
-		this._editableValuesProto.prototype.ignoredSiteLinks = this.getRepresentedSites();
+		this.getEditableValuePrototype().prototype.ignoredSiteLinks = this.getRepresentedSites();
 	},
 	
 	/**
