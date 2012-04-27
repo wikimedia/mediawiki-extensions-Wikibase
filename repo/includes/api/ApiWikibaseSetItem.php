@@ -86,6 +86,10 @@ class ApiWikibaseSetItem extends ApiBase {
 		return !WBSettings::get( 'apiInDebug' );
 	}
 
+	public function isWriteMode() {
+		return !WBSettings::get( 'apiInDebug' );
+	}
+	
 	public function getAllowedParams() {
 		return array(
 			'data' => array(
@@ -119,7 +123,7 @@ class ApiWikibaseSetItem extends ApiBase {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsetitem';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetitem';
 	}
 
 

@@ -43,36 +43,39 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
 		$languages = WikibaseUtils::getLanguageCodes();
-		$num_labels = count($item->getLabels($languages));
-		$num_descriptions = count($item->getDescriptions($languages));
+		$labels = $item->getLabels();
+		$descriptions = $item->getDescriptions();
+		$success = false;
 		switch ($params['item']) {
 			case 'update':
 				if ( isset($params['label']) ) {
-					if (!$num_labels) {
+					if ( !isset($labels[$params['language']]) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
 					}
 					$item->setLabel( $params['language'], $params['label'] );
 				}
-				if (isset($params['description'])) {
-					if (!$num_descriptions) {
+				if ( isset($params['description']) ) {
+					if ( !isset($descriptions[$params['language']]) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
 					}
 					$item->setDescription( $params['language'], $params['description'] );
 				}
+				$success = true;
 				break;
 			case 'add':
-				if (isset($params['label'])) {
-					if ($num_labels) {
+				if ( isset($params['label']) ) {
+					if ( isset($labels[$params['language']]) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-label-found' ), 'label-found' );
 					}
 					$item->setLabel( $params['language'], $params['label'] );
 				}
-				if (isset($params['description'])) {
-					if ($num_descriptions) {
+				if ( isset($params['description']) ) {
+					if ( isset($descriptions[$params['language']]) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-description-found' ), 'description-found' );
 					}
 					$item->setDescription( $params['language'], $params['description'] );
 				}
+				$success = true;
 				break;
 			case 'set':
 				if (isset($params['label'])) {
@@ -81,11 +84,12 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 				if (isset($params['description'])) {
 					$item->setDescription( $params['language'], $params['description'] );
 				}
+				$success = true;
 				break;
 			default:
 				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
 		}
-		return true;
+		return $success;
 	}
 
 	public function getAllowedParams() {
@@ -140,7 +144,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	}
 	
    	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsetlanguageattribute';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetlanguageattribute';
 	}
 	
 

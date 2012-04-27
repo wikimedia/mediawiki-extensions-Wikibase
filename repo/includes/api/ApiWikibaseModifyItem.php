@@ -37,10 +37,11 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
-
+/*
 		if ( isset( $params['id'] ) && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-with-id' ), 'add-with-id' );
 		}
+		*/
 	}
 
 	/**
@@ -62,11 +63,11 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
 			}
 		}
-
+/*
 		if ( $params['id'] !== false && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
-
+*/
 		if ( isset( $params['id'] ) && $params['id'] !== false ) {
 			$page = WikibaseItem::getWikiPageForId( $params['id'] );
 
@@ -158,6 +159,10 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		return !WBSettings::get( 'apiInDebug' );
 	}
 
+	public function isWriteMode() {
+		return !WBSettings::get( 'apiInDebug' );
+	}
+	
 	public function getAllowedParams() {
 		return array(
 			'create' => array(

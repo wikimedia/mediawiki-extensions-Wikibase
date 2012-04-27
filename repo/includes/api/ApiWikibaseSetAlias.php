@@ -103,7 +103,7 @@ class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbsetalias';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetalias';
 	}
 
 

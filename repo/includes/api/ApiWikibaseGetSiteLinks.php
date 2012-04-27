@@ -118,7 +118,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikidata/API#wbgetlinksites';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbgetlinksites';
 	}
 
 	public function getVersion() {

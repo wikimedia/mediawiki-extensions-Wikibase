@@ -80,13 +80,12 @@ $wgAutoloadClasses['WikibaseEditItemAction'] 		= $dir . 'includes/actions/Wikiba
 $wgAutoloadClasses['ApiWikibaseGetItems'] 			= $dir . 'includes/api/ApiWikibaseGetItems.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'includes/api/ApiWikibaseGetItemId.php';
 $wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 		= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
-//$wgAutoloadClasses['ApiWikibaseLinkArticles'] 		= $dir . 'includes/api/ApiWikibaseLinkArticles.php';
 $wgAutoloadClasses['ApiWikibaseSetLanguageAttribute'] = $dir . 'includes/api/ApiWikibaseSetLanguageAttribute.php';
-//$wgAutoloadClasses['ApiWikibaseSetDescription'] 	= $dir . 'includes/api/ApiWikibaseSetDescription.php';
+$wgAutoloadClasses['ApiWikibaseDeleteLanguageAttribute'] = $dir . 'includes/api/ApiWikibaseDeleteLanguageAttribute.php';
 $wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibaseModifyItem.php';
 $wgAutoloadClasses['ApiWikibaseLinkSite'] 			= $dir . 'includes/api/ApiWikibaseLinkSite.php';
-$wgAutoloadClasses['ApiWikibaseSetAlias'] 				= $dir . 'includes/api/ApiWikibaseSetAlias.php';
-$wgAutoloadClasses['ApiWikibaseSetItem'] 				= $dir . 'includes/api/ApiWikibaseSetItem.php';
+$wgAutoloadClasses['ApiWikibaseSetAlias'] 			= $dir . 'includes/api/ApiWikibaseSetAlias.php';
+$wgAutoloadClasses['ApiWikibaseSetItem'] 			= $dir . 'includes/api/ApiWikibaseSetItem.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialCreateItem'] 			= $dir . 'includes/specials/SpecialCreateItem.php';
@@ -100,11 +99,10 @@ $wgAutoloadClasses['SpecialItemByLabel'] 			= $dir . 'includes/specials/SpecialI
 $wgAPIModules['wbgetitems'] 						= 'ApiWikibaseGetItems';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
 $wgAPIModules['wbsetlanguageattribute'] 			= 'ApiWikibaseSetLanguageAttribute';
-//$wgAPIModules['wbsetdescription'] 					= 'ApiWikibaseSetDescription';
+$wgAPIModules['wbdeletelanguageattribute'] 			= 'ApiWikibaseDeleteLanguageAttribute';
 $wgAPIModules['wbgetsitelinks'] 					= 'ApiWikibaseGetSiteLinks';
 $wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
-//$wgAPIModules['wblinkarticles'] 					= 'ApiWikibaseLinkArticles';
-$wgAPIModules['wbsetalias'] 							= 'ApiWikibaseSetAlias';
+$wgAPIModules['wbsetalias'] 						= 'ApiWikibaseSetAlias';
 $wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
 
 
