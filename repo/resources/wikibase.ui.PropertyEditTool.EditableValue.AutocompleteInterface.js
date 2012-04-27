@@ -95,7 +95,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 				return true;
 			}
 		}
-		return false
+		return false;
 	},
 		
 	_disableInputElement: function() {

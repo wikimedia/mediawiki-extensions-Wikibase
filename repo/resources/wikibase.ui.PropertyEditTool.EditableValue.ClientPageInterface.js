@@ -50,7 +50,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.
 		this.url = client.getApi();
 		this._client = client;
 				
-		this._currentResults = [] // empty current suggestions...		
+		this._currentResults = []; // empty current suggestions...		
 		if( this.isInEditMode() ) {
 			this._inputElem.autocomplete( "search" ); // ...and get new suggestions
 			

@@ -82,11 +82,11 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			var self = this;
 			this._toolbar.btnAdd.setDisabled( true );
 			this._toolbar.btnAdd.setDisabled = function( disable ) {
-				if( disable === false && self.isFull() ) {
-					return false; // full, don't enable 'add' button!
+				if( disable === false && ( self.isFull() || self.isInAddMode() ) ) {
+					return false; // full or still adding new value, don't enable 'add' button!
 				}
 				return window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype.setDisabled.call( this, disable );
-			}
+			};
 			this._toolbar.btnAdd.setDisabled( false );
 
 			this._toolbar.addElement( this._toolbar.btnAdd );
@@ -118,6 +118,22 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		// is in edit mode if any of the editable values is in edit mode
 		for( var i in this._editableValues ) {
 			if( this._editableValues[ i ].isInEditMode() ) {
+				return true;
+			}
+		}
+		return false;
+	},
+	
+	/**
+	 * Returns whether the tool is in edit mode for adding a new value right now.
+	 * 
+	 * @return bool
+	 */
+	isInAddMode: function() {
+		// most likely that the last item is pending, so start to check there
+		for( var i = this._editableValues.length; i--; i >= 0 ) {
+			var editableValue = this._editableValues[ i ];
+			if( editableValue.isInEditMode() && editableValue.isPending() ) {
 				return true;
 			}
 		}
@@ -201,7 +217,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._onRefreshView( elemIndex );
 		
 		// enables 'add' button again if it was disabled because of full list:
-		this._toolbar.btnAdd.setDisabled( this.isInEditMode() );
+		this._toolbar.btnAdd.setDisabled( this.isInAddMode() );
 	},
 	
 	/**
@@ -266,8 +282,8 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
 		var self = this;
-		newValue.onStopEditing = function( save ) {
-			self._newValueHandler_onStopEditing( newValue, save );
+		newValue.afterStopEditing = function( save, changed, wasPending ) {
+			self._newValueHandler_afterStopEditing( newValue, save, changed, wasPending );
 			newValue.onStopEditing = null; // make sure handler is only called once!
 		};		
 		
@@ -279,7 +295,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Handler called only the first time a new value was added and saved or cancelled.
 	 */
-	_newValueHandler_onStopEditing: function( newValue, save ) {
+	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
 		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item		
 	},
 	
