@@ -64,22 +64,6 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 	},
 	
 	/**
-	 * sets the buttons text
-	 * @param string text
-	 */
-	setText: function( text ) {
-		this._elem.text( text );
-	},
-	
-	/**
-	 * returns the buttons text
-	 * @return string
-	 */
-	getText: function() {
-		return this._elem.text();
-	},
-	
-	/**
 	 * Disables or enables the button
 	 * @param bool disabled true for disabling, false for enabling the button.
 	 *        If the button is disabled, it can't be clicked.
@@ -88,7 +72,7 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 		if( this.isDisabled() == disable ) {
 			return false;
 		}
-		var text = this.getText();
+		var text = this.getContent();
 		var oldElem = this._elem;
 		
 		if( disable ) {

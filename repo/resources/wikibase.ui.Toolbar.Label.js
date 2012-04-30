@@ -78,13 +78,21 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	},
 	
 	/**
-	 * TODO: implement getter on demand
-	 * returns the labels's content
+	 * returns the labels content. If only text was set as content, a string will be returned, if
+	 * HTML nodes were set, this will return a jQuery object.
 	 * 
-	 * @return jQuery contents
+	 * @return jQuery|string
 	 */
 	getContent: function() {
-		// TODO: implement getter
+		var contents = this._elem.contents();
+		
+		if( contents.length == 1 && contents[0].nodeType === 3 ) {
+			// return the text
+			return contents.text();
+		} else {
+			// return jQuery object
+			return contents;
+		}
 	},
 	
 	/**
