@@ -17,12 +17,10 @@
 window.wikibase.ui.PropertyEditTool.Toolbar.Group = function() {
 	this._init();
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
+window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = Object.create( window.wikibase.ui.PropertyEditTool.Toolbar.prototype );
 $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 
 	UI_CLASS: 'wb-ui-propertyedittoolbar-group',
-	
-	_elem: null, // TODO: Override this because draw() in parent will initialize it! Overthink inheritance model/constructor
 	
 	_init: function( elements ) {
 		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this );
