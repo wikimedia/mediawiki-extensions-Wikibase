@@ -18,9 +18,9 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject, editableValue ) {
-	if( typeof subject != 'undefined' && typeof editableValue != 'undefined' ) {
-		this._init( subject, editableValue );
+window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject ) {
+	if( typeof subject != 'undefined' ) {
+		this._init( subject );
 	}
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
@@ -29,12 +29,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Class which marks the element within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittoolbar-editablevalueinterface',
-
-	/**
-	 * Reference to parent editableValue
-	 * @var wikibase.ui.PropertyEditTool.EditableValue
-	 */
-	_editableValue: null,
 
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
@@ -78,13 +72,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 *
 	 * @param jQuery subject
 	 */
-	_init: function( subject, editableValue ) {
+	_init: function( subject ) {
 		if( this._subject !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._editableValue = editableValue;
 		this._currentWidth = 0;
 	},
 

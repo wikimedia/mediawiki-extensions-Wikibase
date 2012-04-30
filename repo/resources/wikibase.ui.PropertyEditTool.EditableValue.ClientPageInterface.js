@@ -18,7 +18,7 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface = function( subject, editableValue, client ) {
+window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface = function( subject, client ) {
 	window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.apply( this, arguments );
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
@@ -34,8 +34,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.
 	 * 
 	 * @param client wikibase.Client as source for the page suggestions
 	 */
-	_init: function( subject, editableValue, client ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.apply( this, arguments );		
+	_init: function( subject, client ) {
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.apply( this, arguments );
 		this.setClient( client );
 	},
 	
