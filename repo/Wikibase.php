@@ -130,14 +130,32 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.js',
 		'wikibase.Site.js',
+	)
+);
+
+$wgResourceModules['wikibase.ui.Toolbar'] = $moduleTemplate + array(
+	'scripts' => array(
 		'wikibase.ui.js',
+		'wikibase.ui.Toolbar.js',
+		'wikibase.ui.Toolbar.Group.js',
+		'wikibase.ui.Toolbar.Label.js',
+		'wikibase.ui.Toolbar.Button.js',
+		'wikibase.ui.Toolbar.Tooltip.js'
+	),
+	'styles' => array(
+		'wikibase.ui.Toolbar.css'
+	),
+	'dependencies' => array(
+		'jquery.tipsy',
+		'mediawiki.legacy.shared'
+	)
+);
+
+$wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.ui.js',
+		'wikibase.ui.Toolbar.EditGroup.js', // related to EditableValue, see todo in file
 		'wikibase.ui.PropertyEditTool.js',
-		'wikibase.ui.PropertyEditTool.Toolbar.js',
-		'wikibase.ui.PropertyEditTool.Toolbar.Group.js',
-		'wikibase.ui.PropertyEditTool.Toolbar.EditGroup.js',
-		'wikibase.ui.PropertyEditTool.Toolbar.Label.js',
-		'wikibase.ui.PropertyEditTool.Toolbar.Button.js',
-		'wikibase.ui.PropertyEditTool.Toolbar.Tooltip.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js',
@@ -149,15 +167,15 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase.ui.HeadingEditTool.js',
 		'wikibase.ui.DescriptionEditTool.js',
 		'wikibase.ui.SiteLinksEditTool.js',
-		'wikibase.startup.js'
+		'wikibase.startup.js' // should probably be adjusted for more moduldarity
 	),
 	'styles' => array(
 		'wikibase.ui.PropertyEditTool.css'
 	),
 	'dependencies' => array(
-		'jquery.tipsy',
+		'wikibase',
+		'wikibase.ui.Toolbar',
 		'jquery.ui.autocomplete',
-		'mediawiki.legacy.shared',
 		'mediawiki.Title'
 	),
 	'messages' => array(

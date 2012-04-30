@@ -35,7 +35,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Contains the toolbar for the edit tool itself, not for its values or null if it doesn't have
 	 * one.
-	 * @var wikibase.ui.PropertyEditTool.Toolbar
+	 * @var wikibase.ui.Toolbar
 	 */
 	_toolbar: null,
 	
@@ -69,21 +69,21 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Initializes a toolbar for the whole property edit tool. By default this is just a command
 	 * to add more values.
-	 * @return wikibase.ui.PropertyEditTool.Toolbar
+	 * @return wikibase.ui.Toolbar
 	 */
 	_initToolbar: function() {
-		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
-		this._toolbar.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group();
+		this._toolbar = new window.wikibase.ui.Toolbar();
+		this._toolbar.innerGroup = new window.wikibase.ui.Toolbar.Group();
 		this._toolbar.addElement( this._toolbar.innerGroup );
 		
 		if( this.allowsMultipleValues ) {
 			// toolbar group for buttons:
-			this._toolbar.lblFull = new window.wikibase.ui.PropertyEditTool.Toolbar.Label(
+			this._toolbar.lblFull = new window.wikibase.ui.Toolbar.Label(
 					'&nbsp;- ' + window.mw.msg( 'wikibase-propertyedittool-full' )
 			);
 			
 			// only add 'add' button if we can have several values
-			this._toolbar.btnAdd = new window.wikibase.ui.PropertyEditTool.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
+			this._toolbar.btnAdd = new window.wikibase.ui.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
 			this._toolbar.btnAdd.onAction = $.proxy( function() {
 				this.enterNewValue();
 			}, this );
@@ -106,7 +106,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 					// enabled, label with 'full' message not required
 					self._toolbar.removeElement( self._toolbar.lblFull );
 				}
-				return window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype.setDisabled.call( this, disable );
+				return window.wikibase.ui.Toolbar.Button.prototype.setDisabled.call( this, disable );
 			};
 			this._toolbar.btnAdd.setDisabled( false ); // will run the code above
 		}
@@ -253,13 +253,13 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Builds the toolbar for a single editable value
 	 * 
-	 * @return wikibase.ui.PropertyEditTool.Toolbar
+	 * @return wikibase.ui.Toolbar
 	 */
 	_buildSingleValueToolbar: function( editableValue ) {
-		var toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
+		var toolbar = new window.wikibase.ui.Toolbar();
 		
 		// give the toolbar a edit group with basic edit commands:
-		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup();
+		var editGroup = new window.wikibase.ui.Toolbar.EditGroup();
 		editGroup.displayRemoveButton = this.allowsMultipleValues; // remove button if we have a list
 		editGroup._init( editableValue );
 		

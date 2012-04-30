@@ -17,7 +17,7 @@
  * removal of stored values.
  * 
  * @param jQuery subject
- * @param wikibase.ui.PropertyEditTool.Toolbar toolbar
+ * @param wikibase.ui.Toolbar toolbar
  */
 window.wikibase.ui.PropertyEditTool.EditableValue = function( subject, toolbar ) {
 	if( typeof subject != 'undefined' && typeof toolbar != 'undefined' ) {
@@ -29,7 +29,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @const
 	 * Class which marks the element within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar-editablevalue',
+	UI_CLASS: 'wb-ui-propertyedittool-editablevalue',
 	
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
@@ -52,7 +52,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	
 	/**
 	 * The toolbar controling the editable value
-	 * @var window.wikibase.ui.PropertyEditTool.Toolbar
+	 * @var window.wikibase.ui.Toolbar
 	 */
 	_toolbar: null,
 	
@@ -74,7 +74,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * This should normally be called directly by the constructor.
 	 * 
 	 * @param jQuery subject
-	 * @param wikibase.ui.PropertyEditTool.Toolbar toolbar shouldn't be initialized yet
+	 * @param wikibase.ui.Toolbar toolbar shouldn't be initialized yet
 	 */
 	_init: function( subject, toolbar ) {
 		if( this._subject !== null ) {

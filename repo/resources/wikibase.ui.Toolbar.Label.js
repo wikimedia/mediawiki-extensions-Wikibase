@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.Label.js
+ * @file wikibase.ui.Toolbar.Label.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -13,21 +13,21 @@
 "use strict";
 
 /**
- * Represents a label within a wikibase.ui.PropertyEditTool.Toolbar toolbar
+ * Represents a label within a wikibase.ui.Toolbar toolbar
  *
  * @param string|jQuery content
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Label = function( content ) {
+window.wikibase.ui.Toolbar.Label = function( content ) {
 	if( typeof content != 'undefined' ) {
 		this._init( content );
 	}
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype = {
+window.wikibase.ui.Toolbar.Label.prototype = {
 	/**
 	 * @const
 	 * Class which marks the ui element within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar-label',
+	UI_CLASS: 'wb-ui-toolbar-label',
 
 	/**
 	 * @var jQuery

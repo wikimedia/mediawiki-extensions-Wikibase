@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.js
+ * @file wikibase.ui.Toolbar.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -17,15 +17,15 @@
  * Gives basic edit toolbar functionality, serves the "[edit]" button as well as the "[cancel|save]"
  * buttons and other related stuff.
  */
-window.wikibase.ui.PropertyEditTool.Toolbar = function() {
+window.wikibase.ui.Toolbar = function() {
 	this._init();
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
+window.wikibase.ui.Toolbar.prototype = {
 	/**
 	 * @const
 	 * Class which marks the element within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar',
+	UI_CLASS: 'wb-ui-toolbar',
 	
 	/**
 	 * @var jQuery
@@ -188,7 +188,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	/**
 	 * Defines whether the toolbar should be displayed with separators "|" between each item. In that
 	 * case everything will also be wrapped within "[" and "]".
-	 * This is particulary interesting for wikibase.ui.PropertyEditTool.Toolbar.Group toolbar groups
+	 * This is particulary interesting for wikibase.ui.Toolbar.Group toolbar groups
 	 * @var bool
 	 */
 	renderItemSeparators: false

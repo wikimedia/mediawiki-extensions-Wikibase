@@ -45,7 +45,7 @@ class WikibaseViewItemAction extends FormlessAction {
 			$out->addHTML( $parserOutput->getText() );
 
 			// make sure required client sided resources will be loaded:
-			$out->addModules( 'wikibase' );
+			$out->addModules( 'wikibase.ui.PropertyEditTool' );
 
 			// overwrite page title
 			$out->setPageTitle( $content->getLabel( $contentLangCode ) );

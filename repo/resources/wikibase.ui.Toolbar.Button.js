@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.Button.js
+ * @file wikibase.ui.Toolbar.Button.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -12,20 +12,20 @@
 "use strict";
 
 /**
- * Represents a button within a wikibase.ui.PropertyEditTool.Toolbar toolbar
+ * Represents a button within a wikibase.ui.Toolbar toolbar
  * 
  * @param jQuery parent
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Button = function( text ) {
-	window.wikibase.ui.PropertyEditTool.Toolbar.Label.call( this, text );
+window.wikibase.ui.Toolbar.Button = function( text ) {
+	window.wikibase.ui.Toolbar.Label.call( this, text );
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar.Label();
-$.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype, {
+window.wikibase.ui.Toolbar.Button.prototype = new window.wikibase.ui.Toolbar.Label();
+$.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 	/**
 	 * @const
 	 * Class which marks the toolbar button within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar-button',
+	UI_CLASS: 'wb-ui-toolbar-button',
 
 	/**
 	 * @var jQuery
@@ -42,7 +42,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype, {
 	},
 
 	destroy: function() {
-		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype.destroy.call( this );
+		window.wikibase.ui.Toolbar.Label.prototype.destroy.call( this );
 		if ( this._elem != null ) {
 			this._elem.remove();
 		}
@@ -93,7 +93,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype, {
 		
 		if( disable ) {
 			// create a disabled label instead of a link
-			window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, text );
+			window.wikibase.ui.Toolbar.Label.prototype._initElem.call( this, text );
 		}
 		else {
 			this._initElem( text );
@@ -103,7 +103,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Button.prototype, {
 		oldElem.replaceWith( this._elem );
 		
 		// call prototypes disable function:
-		return window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype.setDisabled.call( this, disable );
+		return window.wikibase.ui.Toolbar.Label.prototype.setDisabled.call( this, disable );
 	},
 	
 	///////////

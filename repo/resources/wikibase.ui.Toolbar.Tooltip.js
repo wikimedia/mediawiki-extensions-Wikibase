@@ -12,22 +12,22 @@
 "use strict";
 
 /**
- * Represents a tooltip within a wikibase.ui.PropertyEditTool.Toolbar toolbar
+ * Represents a tooltip within a wikibase.ui.Toolbar toolbar
  *
  * @param String tooltip message
  * @param Object tipsy tooltip configuration vars
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip = function( tooltipMessage, tipsyConfig ) {
+window.wikibase.ui.Toolbar.Tooltip = function( tooltipMessage, tipsyConfig ) {
 	this._tipsyConfig = tipsyConfig;
-	window.wikibase.ui.PropertyEditTool.Toolbar.Label.call( this, tooltipMessage );
+	window.wikibase.ui.Toolbar.Label.call( this, tooltipMessage );
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar.Label();
-$.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
+window.wikibase.ui.Toolbar.Tooltip.prototype = new window.wikibase.ui.Toolbar.Label();
+$.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
 	/**
 	 * @const
 	 * Class which marks the tooltip within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar-tooltip',
+	UI_CLASS: 'wb-ui-toolbar-tooltip',
 
 	/**
 	 * @var Tipsy tipsy tooltip element
@@ -74,7 +74,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 
 		this._tipsy = tooltip.data( 'tipsy' );
 
-		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, tooltip );
+		window.wikibase.ui.Toolbar.Label.prototype._initElem.call( this, tooltip );
 
 		// reposition tooltip when resizing the browser window
 		$( window ).on( 'resize', $.proxy( function() {

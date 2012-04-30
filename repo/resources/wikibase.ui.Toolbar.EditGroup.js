@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.EditGroup.js
+ * @file wikibase.ui.Toolbar.EditGroup.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -18,32 +18,32 @@
  * 
  * @todo might be worth refactoring this so it won't require the editableValue as parameter.
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup = function( editableValue ) {
+window.wikibase.ui.Toolbar.EditGroup = function( editableValue ) {
 	if( typeof editableValue != 'undefined' ) {
 		this._init();
 	}
-	//window.wikibase.ui.PropertyEditTool.Toolbar.Group.call( this );
+	//window.wikibase.ui.Toolbar.Group.call( this );
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype = Object.create( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype );
-$.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
+window.wikibase.ui.Toolbar.EditGroup.prototype = Object.create( window.wikibase.ui.Toolbar.Group.prototype );
+$.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	
 	/**
-	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
+	 * @var window.wikibase.ui.Toolbar.Button
 	 */
 	btnEdit: null,
 	
 	/**
-	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
+	 * @var window.wikibase.ui.Toolbar.Button
 	 */
 	btnCancel: null,
 	
 	/**
-	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
+	 * @var window.wikibase.ui.Toolbar.Button
 	 */
 	btnSave: null,
 
 	/**
-	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
+	 * @var window.wikibase.ui.Toolbar.Button
 	 */
 	btnRemove: null,
 	
@@ -53,13 +53,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	_editableValue: null,
 
 	/**
-	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip
+	 * @var window.wikibase.ui.Toolbar.Tooltip
 	 */
 	tooltip: null,
 	
 	/**
 	 * Inner group needed to visually separate tooltip and edit buttons, this one holds the edit buttons.
-	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Group
+	 * @var window.wikibase.ui.Toolbar.Group
 	 */
 	innerGroup: null,
 	
@@ -70,21 +70,21 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	_init: function( editableValue ) {
 		this._editableValue = editableValue;
 		
-		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype._init.call( this );
+		window.wikibase.ui.Toolbar.Group.prototype._init.call( this );
 	},
 	
 	_initToolbar: function() {
 		// call prototypes base function to append toolbar itself:
-		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._initToolbar.call( this );
+		window.wikibase.ui.Toolbar.prototype._initToolbar.call( this );
 		
 		// create a group inside the group so we can separate the tooltip visually
-		this.innerGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.Group();
+		this.innerGroup = new window.wikibase.ui.Toolbar.Group();
 		this.addElement( this.innerGroup );
 		
-		this.tooltip = new window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );
+		this.tooltip = new window.wikibase.ui.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );
 		
 		// now create the buttons we need for basic editing:
-		var button = window.wikibase.ui.PropertyEditTool.Toolbar.Button;
+		var button = window.wikibase.ui.Toolbar.Button;
 		
 		this.btnEdit = new button( window.mw.msg( 'wikibase-edit' ) );
 		this.btnEdit.onAction = this._editActionHandler();
@@ -151,7 +151,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	},
 
 	destroy: function() {
-		window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype.destroy.call( this );
+		window.wikibase.ui.Toolbar.Group.prototype.destroy.call( this );
 		if ( this.innerGroup != null ) {
 			this.innerGroup.destroy();
 		}
@@ -177,7 +177,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
 	/////////////////
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.renderItemSeparators
+	 * @see window.wikibase.ui.Toolbar.Group.renderItemSeparators
 	 */
 	renderItemSeparators: false,
 	
