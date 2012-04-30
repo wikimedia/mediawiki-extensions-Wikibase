@@ -16,7 +16,7 @@
  *
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface = function( subject, editableValue ) {
+window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface = function( subject ) {
 	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
@@ -29,7 +29,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	_currentResults: null,
 
 	_init: function( subject, editableValue ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject, editableValue );
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 		this._currentResults = new Array();
 	},
 

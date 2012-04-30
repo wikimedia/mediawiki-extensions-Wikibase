@@ -18,27 +18,27 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface = function( subject, editableValue ) {
+window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface = function( subject ) {
 	window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.apply( this, arguments );
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 	
 	_initInputElement: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 		/**
 		 * when leaving the input box, set displayed value to from any allowed input value to correct display value
 		 *
 		 * @param event
 		 */
-		this.onBlur = function( event ) {
-			var widget = this._inputElem.autocomplete( 'widget' );
+		this._inputElem.on( 'blur', $.proxy( function( event ) {
 			if ( this.getSelectedSiteId() !== null ) {
 				/*
 				 loop through complete result set since the autocomplete widget's narrowed result set
 				 is not reliable / too slow; e.g. do not do this:
 				 widget.data( 'menu' ).activate( event, widget.children().filter(':first') );
 				 this._inputElem.val( widget.data( 'menu' ).active.data( 'item.autocomplete' ).value );
-				*/
+				 */
 				$.each( this._currentResults, $.proxy( function( index, element ) {
 					if ( element.site.getId() == this.getSelectedSiteId() ) {
 						this._inputElem.val(element.value );
@@ -46,13 +46,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				}, this ) );
 				this._onInputRegistered();
 			}
-			this._editableValue._toolbar.editGroup.tooltip.hide();
-		};
-		
-		this._initSiteList();		
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
+		}, this ) );
+		this._initSiteList();
 	},
-	
+
 	/**
 	 * Builds a list of sites allowed to choose from
 	 */

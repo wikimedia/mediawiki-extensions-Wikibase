@@ -96,7 +96,9 @@ final class WikibaseHooks {
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.Toolbar.tests.js'
+				'tests/qunit/wikibase.ui.PropertyEditTool.Toolbar.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js'
 			),
 			'dependencies' => array( 'wikibase' ),
 			'localBasePath' => dirname( __FILE__ ),

@@ -18,7 +18,7 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface = function( subject, editableValue, site ) {
+window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface = function( subject, site ) {
 	window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.apply( this, arguments );
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
@@ -34,7 +34,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 	 * 
 	 * @param site wikibase.Site as source for the page suggestions
 	 */
-	_init: function( subject, editableValue, site ) {
+	_init: function( subject, site ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.apply( this, arguments );		
 		this.setSite( site );
 	},

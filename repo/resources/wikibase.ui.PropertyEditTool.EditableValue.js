@@ -161,10 +161,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	destroy: function() {
 		if( this._toolbar != null) {
 			this._toolbar.destroy();
+			this._toolbar = null;
 		}
-		$.each( this._interfaces, function( index, elem ) {
-			elem.destroy();
-		} );
+		if( this._elem instanceof Array ) {
+			$.each( this._interfaces, function( index, elem ) {
+				elem.destroy();
+			} );
+			this._interfaces = null;
+		}
 	},
 
 	/**
@@ -192,7 +196,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			is necessary since the tooltip should be permanently shown on some occasions)
 			 */
 			this._toolbar.editGroup.tooltip.hide();
-			this._toolbar.editGroup.tooltip.show();
+			this._toolbar.editGroup.tooltip.show( true );
 		}
 
 		return true;
@@ -339,9 +343,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( ! $.isArray( value ) ) {
 			value = [ value ];
 		}
-		$.each( value, function( index, val ) {
+		$.each( value, $.proxy( function( index, val ) {
 			this._interfaces[ index ].setValue( val );
-		} );
+		}, this ) );
 	},
 
 	/**
