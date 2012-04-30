@@ -73,6 +73,9 @@ if( ! Object.create ) {
 	 * https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/create
 	 * 
 	 * Object.create support for old browsers (IE < 9, FF < 4, Opera < 11.60)
+	 *
+	 * @param Object o
+	 * @return Object
 	 */
     Object.create = function( o ) {
         if( arguments.length > 1 ) {
