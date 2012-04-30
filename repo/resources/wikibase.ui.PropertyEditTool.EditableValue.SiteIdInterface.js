@@ -25,6 +25,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = ne
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 	
 	_initInputElement: function() {
+		this._initSiteList();
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 		/**
 		 * when leaving the input box, set displayed value to from any allowed input value to correct display value
@@ -47,7 +48,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				this._onInputRegistered();
 			}
 		}, this ) );
-		this._initSiteList();
 	},
 
 	/**
