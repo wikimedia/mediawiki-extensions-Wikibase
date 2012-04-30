@@ -22,10 +22,8 @@ window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup = function( editableValue 
 	}
 	//window.wikibase.ui.PropertyEditTool.Toolbar.Group.call( this );
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar.Group();
+window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype = Object.create( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype );
 $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup.prototype, {
-	
-	_elem: null, // TODO: Override this because draw() in parent will initialize it! Overthink inheritance model/constructor
 	
 	/**
 	 * @var window.wikibase.ui.PropertyEditTool.Toolbar.Button
