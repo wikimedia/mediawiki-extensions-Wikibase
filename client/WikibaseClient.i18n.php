@@ -19,3 +19,7 @@ $messages = array();
 $messages['en'] = array(
 	'wbc-desc' => 'Client for the Wikibase extension',
 );
+
+$messages['qqq'] = array(
+	'wbc-desc' => '{{desc}}',
+);
