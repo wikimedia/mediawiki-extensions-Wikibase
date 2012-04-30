@@ -15,6 +15,8 @@
  * Extends the basic toolbar group element with buttons essential for editing stuff.
  * Basically '[edit]' which gets expanded to '[cancel|save]' when hit.
  * This also interacts with a given editable value.
+ * 
+ * @todo might be worth refactoring this so it won't require the editableValue as parameter.
  */
 window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup = function( editableValue ) {
 	if( typeof editableValue != 'undefined' ) {

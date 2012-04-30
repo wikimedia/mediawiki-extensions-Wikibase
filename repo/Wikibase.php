@@ -129,7 +129,7 @@ $moduleTemplate = array(
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.js',
-		'wikibase.Client.js',
+		'wikibase.Site.js',
 		'wikibase.ui.js',
 		'wikibase.ui.PropertyEditTool.js',
 		'wikibase.ui.PropertyEditTool.Toolbar.js',
@@ -141,7 +141,7 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 		'wikibase.ui.PropertyEditTool.EditableValue.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js',
-		'wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableDescription.js',
 		'wikibase.ui.PropertyEditTool.EditableLabel.js',

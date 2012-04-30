@@ -12,57 +12,59 @@
 "use strict";
 window.wikibase = new( function() {
 	/**
-	 * Will hold a list of all the clients after getClients() was called. This will cache the result.
-	 * @var wikibase.Client[]
+	 * Will hold a list of all the sites after getSites() was called. This will cache the result.
+	 * @var wikibase.Site[]
 	 */
-	this._clientList = null;
+	this._siteList = null;
 	
 	/**
-	 * Returns an array with all the known clients.
+	 * Returns an array with all the known sites.
 	 * 
-	 * @return wikibase.Client[]
+	 * @return wikibase.Site[]
 	 */
-	this.getClients = function() {
-		if( this._clientList !== null ) {
+	this.getSites = function() {
+		if( this._siteList !== null ) {
 			// get cached list since this can be an expensive job to do
-			return this._clientList;
+			return this._siteList;
 		}
 		
-		var clientsDetails = mw.config.get('wbSiteDetails');
-		this._clientList = {};
+		// get all the details about all the sites:
+		var sitesDetails = mw.config.get( 'wbSiteDetails' );
+		this._siteList = {};
 		
-		for( var clientId in clientsDetails ) {
-			var client = clientsDetails[ clientId ];
-			client.id = clientId;
-			this._clientList[ clientId ] =  new window.wikibase.Client( client );
+		for( var siteId in sitesDetails ) {
+			var site = sitesDetails[ siteId ];
+			site.id = siteId;
+			this._siteList[ siteId ] =  new window.wikibase.Site( site );
 		}
 		
-		return this._clientList;
+		return this._siteList;
 	}
 	
 	/**
-	 * Returns whether the Wikibase installation knows a client (site) with a certain ID.
+	 * Returns whether the Wikibase installation knows a site with a certain ID.
 	 * 
 	 * @return bool
 	 */
-	this.hasClient = function ( siteId ) {
-		return this.getClient( siteId ) !== null;
+	this.hasSite = function ( siteId ) {
+		return this.getSite( siteId ) !== null;
 	};
 	
 	/**
-	 * Returns an Client object with details about a client by the clients site ID. If there is no site
-	 * related to the given ID, null will be returned.
+	 * Returns a wikibase.Site object with details about a site by the sites site ID. If there is no
+	 * site related to the given ID, null will be returned.
 	 * 
-	 * @return wikibase.Client|null
+	 * @param int siteId
+	 * @return wikibase.Site|null
 	 */
-	this.getClient = function( clientId ) {
-		var clients = this.getClients();
-		var client = clients[ clientId ];
+	this.getSite = function( siteId ) {
+		var sites = this.getSites();
+		var site = sites[ siteId ];
 		
-		if( typeof client == 'undefined' ) {
+		if( typeof site == 'undefined' ) {
 			return null;
 		}
-		return client;
+		return site;
 	}
 	
 } )();

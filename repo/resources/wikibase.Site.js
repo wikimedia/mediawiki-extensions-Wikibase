@@ -1,11 +1,9 @@
 /**
- * JavasSript giving information about a client of the 'Wikibase' extension.
+ * JavasSript giving information about a site of the 'Wikibase' extension.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
- * @todo: Rename this, "client" might be irritating since these sites don't have to be clients
- * 
  * @since 0.1
- * @file wikibase.Client.js
+ * @file wikibase.Site.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -16,20 +14,20 @@
 /**
  * Offers information about a site known to the local Wikibase installation.
  */
-window.wikibase.Client = function( siteDetails ) {
+window.wikibase.Site = function( siteDetails ) {
 	this._siteDetails = siteDetails;
 }
-window.wikibase.Client.prototype = {
+window.wikibase.Site.prototype = {
 	
 	/**
-	 * Returns the clients id.
+	 * Returns the sites id.
 	 */
 	getId: function() {
 		return this._siteDetails.id;
 	},
 	
 	/**
-	 * Returns the full name of the client. This will return the name in the users language.
+	 * Returns the full name of the site. This will return the name in the users language.
 	 * 
 	 * @param string
 	 */
@@ -38,7 +36,7 @@ window.wikibase.Client.prototype = {
 	},
 	
 	/**
-	 * Returns the short name of the client. This will return the name in the users language.
+	 * Returns the short name of the site. This will return the name in the users language.
 	 * 
 	 * @param string
 	 */
@@ -50,7 +48,7 @@ window.wikibase.Client.prototype = {
 	 * Returns the link to the API
 	 * 
 	 * @note: this might not be necessary later since we might want to do only API call to the
-	 *        base wiki which will handle the calls to the clients.
+	 *        base wiki which will handle the calls to the sites.
 	 *        
 	 * @return string
 	 */
@@ -59,9 +57,9 @@ window.wikibase.Client.prototype = {
 	},
 	
 	/**
-	 * Returns the url to a site of the client. To get a full html ready link, use getLinkTo().
+	 * Returns the url to a site of the site. To get a full html ready link, use getLinkTo().
 	 * 
-	 * @param string siteTitle title of the site within the client
+	 * @param string siteTitle title of the site within the site
 	 * @return string
 	 */
 	getUrlTo: function( siteTitle ) {
@@ -70,9 +68,9 @@ window.wikibase.Client.prototype = {
 	},
 	
 	/**
-	 * Returns a html link to a site of the client. To get the url only, use getUrlTo().
+	 * Returns a html link to a site of the site. To get the url only, use getUrlTo().
 	 * 
-	 * @param string pageTitle title of the site within the client
+	 * @param string pageTitle title of the site within the site
 	 * @return jQuery link to the site
 	 */
 	getLinkTo: function( pageTitle ) {
@@ -85,7 +83,7 @@ window.wikibase.Client.prototype = {
 	
 	/**
 	 * Does the encoding for a site so it can be used within the url to the site.
-	 * This should propably be over written in case the client is not a MediaWiki installation.
+	 * This should propably be over written in case the site is not a MediaWiki installation.
 	 * 
 	 * @param string pageTitle
 	 * @return string
