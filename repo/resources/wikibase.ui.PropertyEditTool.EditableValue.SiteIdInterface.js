@@ -25,7 +25,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = ne
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 	
 	_initInputElement: function() {
-		this._initClientList();		
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 		/**
 		 * when leaving the input box, set displayed value to from any allowed input value to correct display value
@@ -41,26 +40,27 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				 this._inputElem.val( widget.data( 'menu' ).active.data( 'item.autocomplete' ).value );
 				 */
 				$.each( this._currentResults, $.proxy( function( index, element ) {
-					if ( element.client.getId() == this.getSelectedSiteId() ) {
+					if ( element.site.getId() == this.getSelectedSiteId() ) {
 						this._inputElem.val(element.value );
 					}
 				}, this ) );
 				this._onInputRegistered();
 			}
 		}, this ) );
+		this._initSiteList();
 	},
 
 	/**
-	 * Builds a list of clients allowed to choose from
+	 * Builds a list of sites allowed to choose from
 	 */
-	_initClientList: function() {
-		var clientList = [];
+	_initSiteList: function() {
+		var siteList = [];
 		
 		// make sure to allow choosing the currently selected site id even if it is in the list of
 		// sites to ignore. This makes sense since it is selected already and it should be possible
 		// to select it again.
 		var ignoredSites = this.ignoredSiteLinks.slice();
-		var ownSite = this.getSelectedClient();
+		var ownSite = this.getSelectedSite();
 		if( ownSite !== null ) {
 			var ownSiteIndex = $.inArray( ownSite, ignoredSites );
 			if( ownSiteIndex > -1 ) {
@@ -69,22 +69,22 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		}
 		
 		// find out which site ids should be selectable and add them as auto selct choice
-		for ( var siteId in wikibase.getClients() ) {
-			var client = wikibase.getClient( siteId );
+		for ( var siteId in wikibase.getSites() ) {
+			var site = wikibase.getSite( siteId );
 			
-			if( $.inArray( client, ignoredSites ) == -1 ) {
-				clientList.push( {
-					'label': client.getName() + ' (' + client.getId() + ')',
-					'value': client.getShortName() + ' (' + client.getId() + ')',
-					'client': client // additional reference to client object for validation
+			if( $.inArray( site, ignoredSites ) == -1 ) {
+				siteList.push( {
+					'label': site.getName() + ' (' + site.getId() + ')',
+					'value': site.getShortName() + ' (' + site.getId() + ')',
+					'site': site // additional reference to site object for validation
 				} );
 			}
 		}
-		this.setResultSet( clientList );
+		this.setResultSet( siteList );
 	},
 
 	/**
-	 * Returns the selected client site Id from currently specified value
+	 * Returns the selected sites site Id from currently specified value.
 	 * 
 	 * @return string|null siteId or null if no valid selection has been made yet.
 	 */
@@ -95,27 +95,27 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		}		
 		for( var i in this._currentResults ) {
 			if(
-				   value == this._currentResults[i].client.getId()
-				|| value == this._currentResults[i].client.getShortName()
+				   value == this._currentResults[i].site.getId()
+				|| value == this._currentResults[i].site.getShortName()
 				|| value == this._currentResults[i].value
 			) {
-				return this._currentResults[i].client.getId();
+				return this._currentResults[i].site.getId();
 			}
 		}
 		return null;
 	},
 	
 	/**
-	 * Returns the selected client
+	 * Returns the selected site
 	 * 
-	 * @return wikibase.Client
+	 * @return wikibase.Site
 	 */
-	getSelectedClient: function() {
+	getSelectedSite: function() {
 		var siteId = this.getSelectedSiteId();
 		if( siteId === null ) {
 			return null;
 		}
-		return wikibase.getClient( siteId );
+		return wikibase.getSite( siteId );
 	},
 
 	/**
@@ -138,7 +138,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	/////////////////
 	
 	/**
-	 * Allows to specify an array with clients which should not be allowed to choose
+	 * Allows to specify an array with sites which should not be allowed to choose
 	 */
 	ignoredSiteLinks: null
 } );

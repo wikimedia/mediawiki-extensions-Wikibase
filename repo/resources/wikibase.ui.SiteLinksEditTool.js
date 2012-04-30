@@ -80,7 +80,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.isFull()
 	 */
 	isFull: function() {
-		var allSites = wikibase.getClients();
+		var allSites = wikibase.getSites();
 		var usedSites = this.getRepresentedSites();
 		
 		// FIXME: in case we have sites in the DB which were removed at some point, this check will
@@ -120,7 +120,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._editableValueHandler_onAfterRemove.call( this, editableValue );
 		
 		// remove only site used by removed site link from list of ignored sites:
-		var removedSite = editableValue.siteIdInterface.getSelectedClient();
+		var removedSite = editableValue.siteIdInterface.getSelectedSite();
 		if( removedSite !== null ) {
 			var index = $.inArray( removedSite, this._editableValuesProto.prototype.ignoredSiteLinks );
 			if( index > -1 ) {
@@ -132,7 +132,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_afterStopEditing.call( this, newValue, save );		
 		if( save ) {
 			// add chosen site to list of sites which can not be chosen by other editable site links
-			var addedSite = newValue.siteIdInterface.getSelectedClient();
+			var addedSite = newValue.siteIdInterface.getSelectedSite();
 			this._editableValuesProto.prototype.ignoredSiteLinks.push( addedSite );
 		}
 	},
@@ -140,14 +140,14 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	/**
 	 * Returns a list of sites already represented with a value.
 	 * 
-	 * @return wikibase.Client[]
+	 * @return wikibase.Site[]
 	 */
 	getRepresentedSites: function() {
 		var sites = new Array();
 		
 		for( var i in this._editableValues ) {
 			var editableSiteLink = this._editableValues[ i ];
-			var site = editableSiteLink.siteIdInterface.getSelectedClient();
+			var site = editableSiteLink.siteIdInterface.getSelectedSite();
 			if( site !== null ) {
 				sites.push( site );
 			}

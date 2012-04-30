@@ -30,7 +30,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	
 	/**
 	 * The part of the editable site link representing the link to the site
-	 * @var wikibase.ui.PropertyEditTool.EditableValue.ClientPageInterface
+	 * @var wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface
 	 */
 	pageNameInterface: null,
 
@@ -69,8 +69,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
 
 		// interface for choosing a page (from the source site):
-		interfaces.pageName = new ev.ClientPageInterface(
-				tableCells[1], interfaces.siteId.getSelectedClient()
+		interfaces.pageName = new ev.SitePageInterface(
+				tableCells[1], interfaces.siteId.getSelectedSite()
 		);
 		interfaces.pageName.inputPlaceholder = mw.msg( 'wikibase-sitelink-page-edit-placeholder' );
 		interfaces.pageName.ajaxParams = {
@@ -91,12 +91,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		var pageInterface = this._interfaces.pageName;
 		
 		// set up necessary communication between both interfaces:
-		var client = idInterface.getSelectedClient();
-		if( client !== pageInterface.getClient() && client !== null ) {
+		var site = idInterface.getSelectedSite();
+		if( site !== pageInterface.getSite() && site !== null ) {
 			// FIXME: this has to be done on idInterface.onInputRegistered only but that
 			//        is not really possible with the current 'event' system since this function is
 			//        registered there.
-			pageInterface.setClient( client );
+			pageInterface.setSite( site );
 			
 			var siteId = idInterface.getSelectedSiteId();
 			
@@ -111,7 +111,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			pageInterface._getValueContainer().addClass( 'wb-sitelinks-site-' + siteId );
 		}
 		
-		// only enable client page selector if there is a valid client id selected
+		// only enable site page selector if there is a valid site id selected
 		pageInterface.setDisabled( ! idInterface.isValid() );
 	},
 
@@ -146,7 +146,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	stopEditing: function( save ) {
 		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
 		
-		// make sure the interface for entering the clients id can't be edited after created
+		// make sure the interface for entering the sites id can't be edited after created
 		this._interfaces.siteId.setActive( this.isPending() );
 		
 		return changed;
@@ -183,7 +183,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	/////////////////
 	
 	/**
-	 * Allows to specify an array with clients which should not be allowed to choose
+	 * Allows to specify an array with sites which should not be allowed to choose
 	 */
 	ignoredSiteLinks: null
 } );

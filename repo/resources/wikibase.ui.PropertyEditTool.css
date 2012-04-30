@@ -9,27 +9,10 @@
  * @author H. Snater
  */
 
-.wb-ui-propertyedittoolbar, .wb-ui-propertyedittoolbar-group {
-	display: inline-block;
-}
-
-	.wb-ui-propertyedittoolbar-label,
-	.wb-ui-propertyedittoolbar-button {
-		padding: 0.15em;
-	}
-	
-		.wb-ui-propertyedittoolbar-label-disabled,
-		.wb-ui-propertyedittoolbar-button-disabled {
-			color: grey;
-		}
-
-.wb-ui-propertyedittoolbar, .wb-property-container-value {
+.wb-ui-toolbar, .wb-property-container-value {
 	margin:0 .3em;
 }
 
-h1 .wb-ui-propertyedittoolbar {
-	margin:0; /* reset margin for currently a white space is automatically inserted right after the heading text */
-}
 
 .firstHeading {
 	border-bottom: 0;
@@ -37,16 +20,11 @@ h1 .wb-ui-propertyedittoolbar {
 	margin-bottom: 0 !important;
 }
 
-.mw-content-rtl .wb-ui-propertyedittoolbar {
-	padding-top:5px;
-	display:inline-block;
-}
-
 .mw-content-rtl .ui-autocomplete-loading { /* set AJAX spinner to left of the autocomplete input box in rtl */
 	background-position:left center;
 }
 
-h1.firstHeading .wb-ui-propertyedittoolbar {
+h1.firstHeading .wb-ui-toolbar {
 	font-size: 0.5em;
 }
 	h1.firstHeading input {
@@ -124,9 +102,9 @@ table.wb-sitelinks {
 	font-size:inherit;
 }
 
-td .wb-ui-propertyedittoolbar-editablevalueinterface {
+td .wb-ui-propertyedittool-editablevalueinterface {
 	width: 100%;
 }
-.wb-ui-propertyedittoolbar-editablevalueinterface-disabled input {
+.wb-ui-propertyedittool-editablevalueinterface-disabled input {
 	background-color: #eee;
 }
