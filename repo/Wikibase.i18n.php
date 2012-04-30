@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Internationalization file for the Wikibase extension.
  *
@@ -31,4 +30,8 @@ $messages['en'] = array(
 		'wikibase-sitelinks-add' => 'add a link to a Wikipedia page',
 		'wikibase-sitelinks-empty' => 'No Wikipedia pages linked to this item yet.',
 		'wikibase-remove' => 'remove'
+);
+
+$messages['qqq'] = array(
+		'wikibase-desc' => '{{desc}}',
 );
