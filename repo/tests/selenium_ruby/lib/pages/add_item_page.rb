@@ -11,6 +11,7 @@ class AddItemPage
                                       'data'=>'{}'})
     result = JSON.parse(postData.body)
     item_id = result['item']['id']
+    
     # puts result
     
     postData = Net::HTTP.post_form(URI.parse('http://localhost/mediawiki/api.php'), 
@@ -22,7 +23,7 @@ class AddItemPage
                                           'item'=>'set'})
     result = JSON.parse(postData.body)
     # puts result      
-    puts result['success']
+    # puts result['success']
       
     return item_id
   end

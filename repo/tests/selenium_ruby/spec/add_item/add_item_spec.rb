@@ -1,15 +1,9 @@
-
 require 'spec_helper'
-require 'net/http'
-require 'uri'
-require 'json'
 
-describe "Check for labels" do
-  context "Check for firstHeading" do
-    it "should check for firstHeading" do 
-      item_id = visit_page(AddItemPage).create_new_item("mytestitem")
-      # puts item_id
-      end
+describe "Create a new item" do
+  context "Check for correct itemID" do
+    it "should check for correct itemID" do 
+      AddItemPage.new(@browser).create_new_item("mytestitem").should be_true
     end
-    
-  end      
+  end
+end
