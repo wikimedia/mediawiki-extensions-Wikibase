@@ -111,11 +111,9 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $articleId
-	 *
 	 * @return boolean Success indicator
 	 */
-	public function save( /* $articleId */ ) {
+	public function save() {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$fields = array();
@@ -124,7 +122,6 @@ class WikibaseItem extends WikibaseEntity {
 
 		if ( !$this->hasId() ) {
 			$fields['item_id'] = null; // This is needed to have at least one field.
-			//$fields['item_page_id'] = $articleId;
 
 			$success = $dbw->insert(
 				'wb_items',
@@ -295,7 +292,6 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	protected function removeMultilangTexts( $fieldKey, array $languages = null ) {
 		if ( !is_null( $languages ) ) {
-			unset( $this->data[$fieldKey] );
 			$this->data[$fieldKey] = array();
 		}
 		else {
@@ -468,38 +464,6 @@ class WikibaseItem extends WikibaseEntity {
 //			$this->getLinkSiteConds( $siteId, $pageName ),
 //			__METHOD__
 //		);
-	}
-
-	public function getPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getSystemPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getEditorialPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getStatementPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getPropertyMultilang( $name, $languages = null ) {
-		//TODO: implement
-	}
-
-	public function getProperty( $name, $lang = null ) {
-		//TODO: implement
-	}
-
-	public function getPropertyType( $name ) {
-		//TODO: implement
-	}
-
-	public function isStatementProperty( $name ) {
-		//TODO: implement
 	}
 
 	/**
