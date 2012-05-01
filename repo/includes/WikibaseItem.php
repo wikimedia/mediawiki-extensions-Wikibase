@@ -220,14 +220,14 @@ class WikibaseItem extends WikibaseEntity {
 			$conds['tpl_description'] = $description;
 		}
 
-		$items = $dbr->selectRow(
+		$items = $dbr->select(
 			'wb_texts_per_lang',
-			array( 'ips_item_id' ),
+			array( 'tpl_item_id' ),
 			$conds,
 			__METHOD__
 		);
 
-		return array_map( function( $item ) { return $item->ips_item_id; }, iterator_to_array( $items ) );
+		return array_map( function( $item ) { return $item->tpl_item_id; }, iterator_to_array( $items ) );
 	}
 
 	/**

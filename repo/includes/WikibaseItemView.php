@@ -105,4 +105,13 @@ class WikibaseItemView extends ContextSource {
 		return $html;
 	}
 
+	/**
+	 * Display the item using the set context.
+	 *
+	 * @since 0.1
+	 */
+	public function display() {
+		$this->getOutput()->addHTML( $this->getHTML() );
+	}
+
 }

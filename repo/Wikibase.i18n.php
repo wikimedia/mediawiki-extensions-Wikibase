@@ -17,21 +17,25 @@ $messages = array();
  * @author Tobias Gritschacher
  */
 $messages['en'] = array(
-		'wikibase-desc' => 'Structured data repository',
-		'wikibase-edit' => 'edit',
-		'wikibase-save' => 'save',
-		'wikibase-cancel' => 'cancel',
-		'wikibase-add' => 'add',
-		'wikibase-label-edit-placeholder' => 'enter label',
-		'wikibase-description-edit-placeholder' => 'enter description',
-		'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
-		'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
-		'wikibase-sitelinks' => 'Wikipedia Pages linked to this item',
-		'wikibase-sitelinks-add' => 'add a link to a Wikipedia page',
-		'wikibase-sitelinks-empty' => 'No Wikipedia pages linked to this item yet.',
-		'wikibase-remove' => 'remove'
+	'wikibase-desc' => 'Structured data repository',
+	'wikibase-edit' => 'edit',
+	'wikibase-save' => 'save',
+	'wikibase-cancel' => 'cancel',
+	'wikibase-add' => 'add',
+	'wikibase-label-edit-placeholder' => 'enter label',
+	'wikibase-description-edit-placeholder' => 'enter description',
+	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
+	'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
+	'wikibase-sitelinks' => 'Wikipedia Pages linked to this item',
+	'wikibase-sitelinks-add' => 'add a link to a Wikipedia page',
+	'wikibase-sitelinks-empty' => 'No Wikipedia pages linked to this item yet.',
+	'wikibase-remove' => 'remove',
+
+	// Special pages
+	'special-itembytitle' => 'Item by title',
+	'special-itembylabel' => 'Item by label',
 );
 
 $messages['qqq'] = array(
-		'wikibase-desc' => '{{desc}}',
+	'wikibase-desc' => '{{desc}}',
 );
