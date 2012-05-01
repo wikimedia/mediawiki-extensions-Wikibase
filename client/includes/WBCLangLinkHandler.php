@@ -13,7 +13,6 @@
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
 class WBCLangLinkHandler {
-
 	protected static $cache = array();
 	protected static $sort_order = false;
 
@@ -41,6 +40,7 @@ class WBCLangLinkHandler {
 		}
 
 		// Here we finally get the links...
+		// NOTE: Instead of getFullText(), we need to get a normalized title, and the server should use a locale-aware normalization function yet to be written which has the same output
 		$title_text = $title->getFullText();
 		if( isset( self::$cache[$title_text] ) ) {
 			// ...from the local cache if there is one...
