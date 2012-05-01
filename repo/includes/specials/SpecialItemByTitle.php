@@ -35,9 +35,19 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
-		$item = false; // TODO
+		if ( $this->subPage === '' ) {
+			// TODO
+		}
 
-		if ( $item === false ) {
+		$parts = explode( '/', $this->subPage, 2 );
+
+		if ( count( $parts ) != 2 ) {
+			// TODO
+		}
+
+		$item = WikibaseItem::getFromSiteLink( $parts[0], $parts[1] );
+
+		if ( is_null( $item ) ) {
 			// TODO
 		}
 		else {

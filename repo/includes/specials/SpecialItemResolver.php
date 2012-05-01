@@ -79,6 +79,7 @@ abstract class SpecialItemResolver extends UnlistedSpecialPage {
 	 */
 	protected function displayItem( WikibaseItem $item ) {
 		// TODO
+		$this->getOutput()->addHTML( json_encode( $item->toArray() ) );
 	}
 
 }

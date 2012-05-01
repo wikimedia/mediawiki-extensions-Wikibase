@@ -35,7 +35,18 @@ class SpecialItemByLabel extends SpecialItemResolver {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
-		$items = array(); // TODO
+		if ( $this->subPage === '' ) {
+			// TODO
+		}
+
+		// TODO: document that the label cannot have slashes (or pick other separator)
+		$parts = explode( '/', $this->subPage, 3 );
+
+		if ( count( $parts ) == 1 ) {
+			// TODO
+		}
+
+		$items = call_user_func_array( 'WikibaseItem::getFromLabel', $parts );
 
 		if ( empty( $items ) ) {
 			// TODO
