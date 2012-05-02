@@ -82,7 +82,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._pending = this._subject.hasClass( 'wb-pending-value' );		
+		this._pending = this._subject.hasClass( 'wb-pending-value' );
 		
 		this._initInterfaces();
 
@@ -163,12 +163,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._toolbar.destroy();
 			this._toolbar = null;
 		}
-		if( this._elem instanceof Array ) {
-			$.each( this._interfaces, function( index, elem ) {
-				elem.destroy();
-			} );
-			this._interfaces = null;
-		}
+		this.stopEditing( false );
 	},
 
 	/**
@@ -234,7 +229,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var wasPending = this.isPending();
 		if( save ) {
 			this.doApiCall( false );
-			this._pending = false; // might have to move this to API call error/success handling
+			this._pending = false; // TODO: might have to move this to API call error/success handling when implemented
 			this._subject.removeClass( 'wb-pending-value' );
 		}
 		

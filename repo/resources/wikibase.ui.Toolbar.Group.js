@@ -22,7 +22,7 @@ $.extend( window.wikibase.ui.Toolbar.Group.prototype, {
 
 	UI_CLASS: 'wb-ui-toolbar-group',
 	
-	_init: function( elements ) {
+	_init: function() {
 		window.wikibase.ui.Toolbar.prototype._init.call( this );
 	},	
 	

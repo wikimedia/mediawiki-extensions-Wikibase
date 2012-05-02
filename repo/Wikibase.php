@@ -109,8 +109,8 @@ $wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
 
 // Special page registration
 //$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-//$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
-//$wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
+$wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
+$wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
