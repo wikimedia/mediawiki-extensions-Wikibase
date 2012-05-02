@@ -14,11 +14,10 @@
 
 /**
  * Serves the input interface for a site link, extends EditableValue.
- *
- * @param jQuery subject
+ * @see window.wikibase.ui.PropertyEditTool.EditableValue
  */
-window.wikibase.ui.PropertyEditTool.EditableSiteLink = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
+window.wikibase.ui.PropertyEditTool.EditableSiteLink = function( subject, toolbar ) {
+	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject, toolbar );
 };
 window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
