@@ -44,6 +44,7 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 	
 	/**
 	 * @see wikibase.ui.PropertyEditTool.getPropertyName()
+	 * 
 	 * @return string 'label'
 	 */
 	getPropertyName: function() {

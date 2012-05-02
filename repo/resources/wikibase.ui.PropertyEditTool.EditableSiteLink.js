@@ -184,6 +184,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	
 	/**
 	 * Allows to specify an array with sites which should not be allowed to choose
+	 * @var wikibase.Site[]
 	 */
 	ignoredSiteLinks: null
 } );
