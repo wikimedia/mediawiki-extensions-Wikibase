@@ -78,7 +78,10 @@ abstract class SpecialItemResolver extends UnlistedSpecialPage {
 	 * @param WikibaseItem $item
 	 */
 	protected function displayItem( WikibaseItem $item ) {
-		// TODO
+		$view = new WikibaseItemView( $item, $this->getContext() );
+		$view->display();
+
+		$this->getOutput()->setPageTitle( $item->getLabel( $this->getLanguage()->getCode() ) );
 	}
 
 }

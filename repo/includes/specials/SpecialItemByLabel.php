@@ -35,16 +35,28 @@ class SpecialItemByLabel extends SpecialItemResolver {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
-		$items = array(); // TODO
-
-		if ( empty( $items ) ) {
-			// TODO
+		if ( $this->subPage === '' ) {
+			// TODO: display a message that the user needs to provide language+label and possibly some fancy input UI
 		}
-		elseif ( count( $items ) !== 1 ) {
-			$this->displayDisambiguationPage( $items );
+
+		// TODO: document that the label cannot have slashes (or pick other separator)
+		$parts = explode( '/', $this->subPage, 3 );
+
+		if ( count( $parts ) == 1 ) {
+			// TODO: display a message that the user needs to provide  the label and possibly some fancy input UI
 		}
 		else {
-			$this->displayItem( $items[0] );
+			$items = call_user_func_array( 'WikibaseItem::getFromLabel', $parts );
+
+			if ( empty( $items ) ) {
+				// TODO: display that there are no matching items and possibly some fancy input UI
+			}
+			elseif ( count( $items ) !== 1 ) {
+				$this->displayDisambiguationPage( $items );
+			}
+			else {
+				$this->displayItem( $items[0] );
+			}
 		}
 	}
 

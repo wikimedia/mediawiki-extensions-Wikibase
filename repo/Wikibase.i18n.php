@@ -24,8 +24,10 @@ $messages['en'] = array(
 	'wikibase-add' => 'add',
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-edit-placeholder' => 'enter description',
+
 	'wikibase-sitelink-site-edit-placeholder' => 'specify site',
 	'wikibase-sitelink-page-edit-placeholder' => 'specify page',
+
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
 	'wikibase-sitelinks' => 'Wikipedia Pages linked to this item',
@@ -35,6 +37,10 @@ $messages['en'] = array(
 	'wikibase-remove' => 'remove',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
+
+	// Special pages
+	'special-itembytitle' => 'Item by title',
+	'special-itembylabel' => 'Item by label',
 );
 
 /** Message documentation (Message documentation) */

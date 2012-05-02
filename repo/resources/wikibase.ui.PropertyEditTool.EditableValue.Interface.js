@@ -327,21 +327,41 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		var value = '';
 		if( this.isInEditMode() ) {
 			value = $( this._getValueContainer().children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
+			value = this.normalize( value );
 		} else {
 			value = this._getValueContainer().text();
+			// if already set, the value should be normalized already
 		}
-		return $.trim( value );
+		return value;
 	},
 	
 	/**
-	 * Sets a value
+	 * Sets a value.
+	 * Returns the value really set in the end. This string can be different from the given value
+	 * since it will go through some normalization first.
+	 * 
+	 * @return string
 	 */
 	setValue: function( value ) {
+		// make sure the value is sufficient
+		value = this.normalize( value );
+		
 		if( this.isInEditMode() ) {
 			this._inputElem.attr( 'value', value );
 		} else {
 			this._getValueContainer().text( value );
 		}
+		return value;
+	},
+	
+	/**
+	 * Normalizes a string so it is sufficient for setting it as value for this interface.
+	 * This will be done automatically when using setValue().
+	 * 
+	 * @return string
+	 */
+	normalize: function( value ) {
+		return $.trim( value );
 	},
 	
 	/**
@@ -442,7 +462,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @return bool
 	 */
 	validate: function( value ) {
-		return $.trim( value ) !== '';
+		return this.normalize( value ) !== '';
 	},
 
 	/////////////////

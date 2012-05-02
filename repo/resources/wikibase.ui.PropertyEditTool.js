@@ -396,7 +396,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * Returns all EditableValue objects managed by this.
 	 * 
 	 * @param bool getPendingValues if set to true, also pending values not yet stored will be returned.
-	 * @return wikibase.ui.PropertyEditTool.EditableValue
+	 * @return wikibase.ui.PropertyEditTool.EditableValue[]
 	 */
 	getValues: function( getPendingValues ) {
 		if( getPendingValues ) {

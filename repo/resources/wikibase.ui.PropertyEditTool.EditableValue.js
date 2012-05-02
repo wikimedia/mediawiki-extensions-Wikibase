@@ -229,7 +229,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var wasPending = this.isPending();
 		if( save ) {
 			this.doApiCall( false );
-			this._pending = false; // might have to move this to API call error/success handling
+			this._pending = false; // TODO: might have to move this to API call error/success handling when implemented
 			this._subject.removeClass( 'wb-pending-value' );
 		}
 		

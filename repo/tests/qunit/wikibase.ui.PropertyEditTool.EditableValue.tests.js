@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author H. Snater
+ * @author Daniel Werner
  */
 'use strict';
 
@@ -106,9 +107,39 @@
 		);
 
 		equal(
+			this.editableValue.stopEditing( false ),
+			false,
+			"stopped edit mode, don't save value"
+		);
+
+		ok(
+			this.editableValue.getValue()[0] != this.strings['valid'][0],
+			'value not saved after leaving edit mode without saving value'
+		);
+
+		equal(
 			this.editableValue.stopEditing(),
 			false,
-			'stopped edit mode'
+			'stop edit mode again'
+		);
+
+		equal(
+			this.editableValue.startEditing(),
+			true,
+			'started edit mode'
+		);
+
+		this.editableValue.setValue( this.strings['valid'][0] );
+
+		ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['valid'][0],
+			'changed value'
+		);
+
+		equal(
+			this.editableValue.stopEditing( true ),
+			true,
+			'stopped edit mode, save'
 		);
 
 		equal(
@@ -128,6 +159,12 @@
 			this.editableValue.startEditing(),
 			true,
 			'started edit mode'
+		);
+
+		equal(
+			this.editableValue.startEditing(),
+			false,
+			'try to start edit mode again'
 		);
 
 		equal(
