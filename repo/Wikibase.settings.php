@@ -123,9 +123,9 @@ class WBSettings {
 	 * @return array
 	 */
 	protected static function getDefaultSettings() {
-		
+
+		// FIXME: this is not nice - we should not mix in API calls with the static configuration
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-		
 			// Read all the interlanguage links
 			// This should be cached by Interwiki class depending on $wgInterwikiCache so probably no need to cache here.
 			$api = new ApiMain( new FauxRequest( array( 'action' => 'query', 'meta' => 'siteinfo', 'siprop' => 'interwikimap', 'format' => 'php' ) ) );
@@ -149,14 +149,14 @@ class WBSettings {
 			// pointing to the url of the site, or an array with the url (element: site) and optionally
 			// the filepath and urlpath, using these words as keys.
 			$siteIdentifiers = array(
-						'en' => 'https://en.wikipedia.org',
-						'de' => 'https://de.wikipedia.org',
-						'nl' => 'https://nl.wikipedia.org',
-						'fi' => 'https://fi.wikipedia.org',
-						'da' => 'https://da.wikipedia.org',
-						'no' => 'https://no.wikipedia.org',
-						'nn' => 'https://nn.wikipedia.org',
-						'sv' => 'https://sv.wikipedia.org',
+				'en' => 'https://en.wikipedia.org',
+				'de' => 'https://de.wikipedia.org',
+				'nl' => 'https://nl.wikipedia.org',
+				'fi' => 'https://fi.wikipedia.org',
+				'da' => 'https://da.wikipedia.org',
+				'no' => 'https://no.wikipedia.org',
+				'nn' => 'https://nn.wikipedia.org',
+				'sv' => 'https://sv.wikipedia.org',
 			);
 			
 		}
