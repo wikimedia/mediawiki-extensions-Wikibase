@@ -46,50 +46,50 @@ $messages['qqq'] = array(
  * @author Kghbln
  */
 $messages['de'] = array(
-	'wikibase-desc' => 'Erm�glicht ein Repositorium strukturierter Daten',
+	'wikibase-desc' => 'Ermöglicht ein Repositorium strukturierter Daten',
 	'wikibase-edit' => 'bearbeiten',
 	'wikibase-save' => 'speichern',
 	'wikibase-cancel' => 'abbrechen',
-	'wikibase-add' => 'hinzuf�gen',
+	'wikibase-add' => 'hinzufügen',
 	'wikibase-label-edit-placeholder' => 'Bezeichnung eingeben',
 	'wikibase-description-edit-placeholder' => 'Beschreibung eingeben',
-	'wikibase-label-input-help-message' => 'Gib den Namen f�r diesen Datensatz in $1 an.',
+	'wikibase-label-input-help-message' => 'Gib den Namen für diesen Datensatz in $1 an.',
 	'wikibase-description-input-help-message' => 'Gib eine kurze Beschreibung in $1 an.',
-	'wikibase-sitelinks' => 'Seiten in der Wikipedia, die mit diesem Datenelement verkn�pft sind',
-	'wikibase-sitelinks-add' => 'f�ge eine Verkn�pfung zu einer Seite in der Wikipedia hinzu',
-	'wikibase-sitelinks-empty' => 'Bislang sind keine Seiten in der Wikipedia mit diesem Datenelement verkn�pft.',
+	'wikibase-sitelinks' => 'Seiten in der Wikipedia, die mit diesem Datenelement verknüpft sind',
+	'wikibase-sitelinks-add' => 'füge eine Verknüpfung zu einer Seite in der Wikipedia hinzu',
+	'wikibase-sitelinks-empty' => 'Bislang sind keine Seiten in der Wikipedia mit diesem Datenelement verknüpft.',
 	'wikibase-remove' => 'entfernen',
 );
 
-/** German (formal address) (?Deutsch (Sie-Form)?)
+/** German (formal address) (‪Deutsch (Sie-Form)‬)
  * @author Kghbln
  */
 $messages['de-formal'] = array(
-	'wikibase-label-input-help-message' => 'Geben Sie den Namen f�r diesen Datensatz in $1 an.',
+	'wikibase-label-input-help-message' => 'Geben Sie den Namen für diesen Datensatz in $1 an.',
 	'wikibase-description-input-help-message' => 'Geben Sie eine kurze Beschreibung in $1 an.',
-	'wikibase-sitelinks-add' => 'f�gen Sie eine Verkn�pfung zu einer Seite in der Wikipedia hinzu',
+	'wikibase-sitelinks-add' => 'fügen Sie eine Verknüpfung zu einer Seite in der Wikipedia hinzu',
 );
 
 /** Lower Sorbian (Dolnoserbski)
  * @author Michawiki
  */
 $messages['dsb'] = array(
-	'wikibase-desc' => 'Repozitorium strukturerowanych datow',
-	'wikibase-edit' => 'wobzelas',
-	'wikibase-save' => 'skladowas',
-	'wikibase-cancel' => 'psetergnus',
-	'wikibase-add' => 'psidas',
-	'wikibase-label-edit-placeholder' => 'pomjenjenje zap�das',
-	'wikibase-description-edit-placeholder' => 'wopisanje zap�das',
-	'wikibase-label-input-help-message' => 'Zap�daj me tos teje datoweje sajzby w $1.',
-	'wikibase-description-input-help-message' => 'Zap�daj krotke wopisanje w $1.',
-	'wikibase-sitelinks' => 'Boki Wikipedije, k�tare� su z tos tym elementom zwezane.',
-	'wikibase-sitelinks-add' => 'w�tkaz bokoju Wikipedije psidas',
-	'wikibase-sitelinks-empty' => 'A� donenta �edne boki Wikipedije njejsu zwezane z tos tym elementom.',
-	'wikibase-remove' => 'w�tp�ras',
+	'wikibase-desc' => 'Repozitorium strukturěrowanych datow',
+	'wikibase-edit' => 'wobźěłaś',
+	'wikibase-save' => 'składowaś',
+	'wikibase-cancel' => 'pśetergnuś',
+	'wikibase-add' => 'pśidaś',
+	'wikibase-label-edit-placeholder' => 'pomjenjenje zapódaś',
+	'wikibase-description-edit-placeholder' => 'wopisanje zapódaś',
+	'wikibase-label-input-help-message' => 'Zapódaj mě toś teje datoweje sajźby w $1.',
+	'wikibase-description-input-help-message' => 'Zapódaj krotke wopisanje w $1.',
+	'wikibase-sitelinks' => 'Boki Wikipedije, kótarež su z toś tym elementom zwězane.',
+	'wikibase-sitelinks-add' => 'wótkaz bokoju Wikipedije pśidaś',
+	'wikibase-sitelinks-empty' => 'Až doněnta žedne boki Wikipedije njejsu zwězane z toś tym elementom.',
+	'wikibase-remove' => 'wótpóraś',
 );
 
-/** Spanish (Espa�ol)
+/** Spanish (Español)
  * @author Armando-Martin
  */
 $messages['es'] = array(
@@ -97,33 +97,33 @@ $messages['es'] = array(
 	'wikibase-edit' => 'editar',
 	'wikibase-save' => 'guardar',
 	'wikibase-cancel' => 'cancelar',
-	'wikibase-add' => 'a�adir',
+	'wikibase-add' => 'añadir',
 	'wikibase-label-edit-placeholder' => 'introducir la etiqueta',
-	'wikibase-description-edit-placeholder' => 'introducir una descripci�n',
-	'wikibase-label-input-help-message' => 'Introducir el t�tulo de este conjunto de datos en  $1.',
-	'wikibase-description-input-help-message' => 'Introducir una breve descripci�n en  $1.',
-	'wikibase-sitelinks' => 'P�ginas de Wikipedia enlazadas a este art�culo',
-	'wikibase-sitelinks-add' => 'Agregar un enlace a una p�gina de Wikipedia',
-	'wikibase-sitelinks-empty' => 'No hay todav�a ninguna p�gina de Wikipedia enlazada a este art�culo.',
+	'wikibase-description-edit-placeholder' => 'introducir una descripción',
+	'wikibase-label-input-help-message' => 'Introducir el título de este conjunto de datos en  $1.',
+	'wikibase-description-input-help-message' => 'Introducir una breve descripción en  $1.',
+	'wikibase-sitelinks' => 'Páginas de Wikipedia enlazadas a este artículo',
+	'wikibase-sitelinks-add' => 'Agregar un enlace a una página de Wikipedia',
+	'wikibase-sitelinks-empty' => 'No hay todavía ninguna página de Wikipedia enlazada a este artículo.',
 	'wikibase-remove' => 'eliminar',
 );
 
-/** French (Fran�ais)
+/** French (Français)
  * @author Wyz
  */
 $messages['fr'] = array(
-	'wikibase-desc' => 'R�f�rentiel de donn�es structur�es',
+	'wikibase-desc' => 'Référentiel de données structurées',
 	'wikibase-edit' => 'modifier',
 	'wikibase-save' => 'enregistrer',
 	'wikibase-cancel' => 'annuler',
 	'wikibase-add' => 'ajouter',
-	'wikibase-label-edit-placeholder' => 'saisir �tiquette',
+	'wikibase-label-edit-placeholder' => 'saisir étiquette',
 	'wikibase-description-edit-placeholder' => 'saisir description',
-	'wikibase-label-input-help-message' => 'Saisissez le titre de ces donn�es d�finies dans $1.',
+	'wikibase-label-input-help-message' => 'Saisissez le titre de ces données définies dans $1.',
 	'wikibase-description-input-help-message' => 'Saisissez une courte description dans $1.',
-	'wikibase-sitelinks' => 'Pages Wikip�dia li�es � cet �l�ment',
-	'wikibase-sitelinks-add' => 'ajouter un lien � une page de Wikip�dia',
-	'wikibase-sitelinks-empty' => 'Aucune page de Wikip�dia li�e � cet �l�ment pour l�instant.',
+	'wikibase-sitelinks' => 'Pages Wikipédia liées à cet élément',
+	'wikibase-sitelinks-add' => 'ajouter un lien à une page de Wikipédia',
+	'wikibase-sitelinks-empty' => 'Aucune page de Wikipédia liée à cet élément pour l’instant.',
 	'wikibase-remove' => 'retirer',
 );
 
@@ -132,69 +132,69 @@ $messages['fr'] = array(
  */
 $messages['hsb'] = array(
 	'wikibase-desc' => 'Repozitorij strukturowanych datow',
-	'wikibase-edit' => 'wobdzelac',
-	'wikibase-save' => 'skladowac',
-	'wikibase-cancel' => 'pretorhnyc',
-	'wikibase-add' => 'pridac',
-	'wikibase-label-edit-placeholder' => 'pomjenowanje zapodac',
-	'wikibase-description-edit-placeholder' => 'wopisanje zapodac',
-	'wikibase-label-input-help-message' => 'Zapodaj mjeno tuteje datoweje sadzby w $1.',
-	'wikibase-description-input-help-message' => 'Zapodaj kr�tke wopisanje w $1.',
-	'wikibase-sitelinks' => 'Strony Wikipedije, kotre� su z tutym elementom zwjazane.',
-	'wikibase-sitelinks-add' => 'wotkaz stronje Wikipedije pridac',
-	'wikibase-sitelinks-empty' => 'Dotal �ane strony Wikipedije z tutym elementom zwjazane njejsu.',
-	'wikibase-remove' => 'wotstronic',
+	'wikibase-edit' => 'wobdźěłać',
+	'wikibase-save' => 'składować',
+	'wikibase-cancel' => 'přetorhnyć',
+	'wikibase-add' => 'přidać',
+	'wikibase-label-edit-placeholder' => 'pomjenowanje zapodać',
+	'wikibase-description-edit-placeholder' => 'wopisanje zapodać',
+	'wikibase-label-input-help-message' => 'Zapodaj mjeno tuteje datoweje sadźby w $1.',
+	'wikibase-description-input-help-message' => 'Zapodaj krótke wopisanje w $1.',
+	'wikibase-sitelinks' => 'Strony Wikipedije, kotrež su z tutym elementom zwjazane.',
+	'wikibase-sitelinks-add' => 'wotkaz stronje Wikipedije přidać',
+	'wikibase-sitelinks-empty' => 'Dotal žane strony Wikipedije z tutym elementom zwjazane njejsu.',
+	'wikibase-remove' => 'wotstronić',
 );
 
-/** Icelandic (�slenska)
- * @author Sn�var
+/** Icelandic (Íslenska)
+ * @author Snævar
  */
 $messages['is'] = array(
-	'wikibase-desc' => 'Skipulag�ur gagna�j�nn',
+	'wikibase-desc' => 'Skipulagður gagnaþjónn',
 	'wikibase-edit' => 'breyta',
 	'wikibase-save' => 'vista',
-	'wikibase-cancel' => 'h�tta vi�',
-	'wikibase-add' => 'b�ta vi�',
-	'wikibase-label-edit-placeholder' => 'b�ta vi� merki',
-	'wikibase-description-edit-placeholder' => 'b�ta vi� l�singu',
-	'wikibase-label-input-help-message' => 'Sl��u inn titil � �essum g�gnum � $1.',
-	'wikibase-description-input-help-message' => 'Sl��u inn stutta l�singu � $1.',
-	'wikibase-sitelinks' => 'Wikipedia s��ur sem tengja � �ennan hlut',
-	'wikibase-sitelinks-add' => 'b�ta vi� tengli � Wikipedia s��u',
-	'wikibase-sitelinks-empty' => 'Engar Wikipedia s��ur tengja � �ennan hlut enn��.',
-	'wikibase-remove' => 'fjarl�gja',
+	'wikibase-cancel' => 'hætta við',
+	'wikibase-add' => 'bæta við',
+	'wikibase-label-edit-placeholder' => 'bæta við merki',
+	'wikibase-description-edit-placeholder' => 'bæta við lýsingu',
+	'wikibase-label-input-help-message' => 'Sláðu inn titil á þessum gögnum í $1.',
+	'wikibase-description-input-help-message' => 'Sláðu inn stutta lýsingu í $1.',
+	'wikibase-sitelinks' => 'Wikipedia síður sem tengja á þennan hlut',
+	'wikibase-sitelinks-add' => 'bæta við tengli á Wikipedia síðu',
+	'wikibase-sitelinks-empty' => 'Engar Wikipedia síður tengja á þennan hlut ennþá.',
+	'wikibase-remove' => 'fjarlægja',
 );
 
-/** Luxembourgish (L�tzebuergesch)
+/** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
 $messages['lb'] = array(
-	'wikibase-edit' => '�nneren',
-	'wikibase-save' => 'sp�icheren',
+	'wikibase-edit' => 'änneren',
+	'wikibase-save' => 'späicheren',
 	'wikibase-cancel' => 'ofbriechen',
-	'wikibase-add' => 'derb�isetzen',
+	'wikibase-add' => 'derbäisetzen',
 	'wikibase-description-edit-placeholder' => 'Beschreiwung aginn',
-	'wikibase-sitelinks-add' => 'e Link op eng Wikipedia-S�it derb�isetzen',
+	'wikibase-sitelinks-add' => 'e Link op eng Wikipedia-Säit derbäisetzen',
 	'wikibase-remove' => 'ewechhuelen',
 );
 
-/** Macedonian (??????????)
+/** Macedonian (Македонски)
  * @author Bjankuloski06
  */
 $messages['mk'] = array(
-	'wikibase-desc' => '????????? ?? ????????????? ????????',
-	'wikibase-edit' => '?????',
-	'wikibase-save' => '???????',
-	'wikibase-cancel' => '??????',
-	'wikibase-add' => '?????',
-	'wikibase-label-edit-placeholder' => '??????? ??????',
-	'wikibase-description-edit-placeholder' => '??????? ????',
-	'wikibase-label-input-help-message' => '??????? ?? ???????? ?? ??????????? ???? ?? $1.',
-	'wikibase-description-input-help-message' => '??????? ?????? ???? ?? $1.',
-	'wikibase-sitelinks' => '???????? ?? ?????????? ???????? ?? ???? ??????.',
-	'wikibase-sitelinks-add' => '????? ????? ?? ???????? ?? ??????????',
-	'wikibase-sitelinks-empty' => '?????? ???? ???????? ?? ?????????? ???????? ?? ???? ??????.',
-	'wikibase-remove' => '????????',
+	'wikibase-desc' => 'Складиште на структурирани податоци',
+	'wikibase-edit' => 'уреди',
+	'wikibase-save' => 'зачувај',
+	'wikibase-cancel' => 'откажи',
+	'wikibase-add' => 'додај',
+	'wikibase-label-edit-placeholder' => 'внесете натпис',
+	'wikibase-description-edit-placeholder' => 'внесете опис',
+	'wikibase-label-input-help-message' => 'Внесете го насловот на податочниот збир во $1.',
+	'wikibase-description-input-help-message' => 'Внесете краток опис за $1.',
+	'wikibase-sitelinks' => 'Страници од Википедија поврзани со оваа ставка.',
+	'wikibase-sitelinks-add' => 'додај врска до страница од Википедија',
+	'wikibase-sitelinks-empty' => 'Досега нема страници од Википедија поврзани со оваа ставка.',
+	'wikibase-remove' => 'отстрани',
 );
 
 /** Dutch (Nederlands)
@@ -212,43 +212,43 @@ $messages['nl'] = array(
 	'wikibase-remove' => 'verwijderen',
 );
 
-/** Portuguese (Portugu�s)
+/** Portuguese (Português)
  * @author Malafaya
  */
 $messages['pt'] = array(
-	'wikibase-desc' => 'Reposit�rio de dados estruturados',
+	'wikibase-desc' => 'Repositório de dados estruturados',
 	'wikibase-edit' => 'editar',
 	'wikibase-save' => 'gravar',
 	'wikibase-cancel' => 'cancelar',
 	'wikibase-add' => 'adicionar',
 	'wikibase-label-edit-placeholder' => 'introduza etiqueta',
-	'wikibase-description-edit-placeholder' => 'introduza descri��o',
-	'wikibase-label-input-help-message' => 'Introduza o t�tulo deste conjunto de dados em  $1.',
-	'wikibase-description-input-help-message' => 'Insira uma curta descri��o em  $1 .',
-	'wikibase-sitelinks' => 'P�ginas da Wikip�dia ligadas a este item',
-	'wikibase-sitelinks-add' => 'adicionar uma liga��o para uma p�gina da Wikip�dia',
-	'wikibase-sitelinks-empty' => 'Nenhuma p�gina da Wikip�dia liga a este item ainda.',
+	'wikibase-description-edit-placeholder' => 'introduza descrição',
+	'wikibase-label-input-help-message' => 'Introduza o título deste conjunto de dados em  $1.',
+	'wikibase-description-input-help-message' => 'Insira uma curta descrição em  $1 .',
+	'wikibase-sitelinks' => 'Páginas da Wikipédia ligadas a este item',
+	'wikibase-sitelinks-add' => 'adicionar uma ligação para uma página da Wikipédia',
+	'wikibase-sitelinks-empty' => 'Nenhuma página da Wikipédia liga a este item ainda.',
 	'wikibase-remove' => 'remover',
 );
 
-/** Russian (???????)
+/** Russian (Русский)
  * @author Kaganer
- * @author ????????? ???????
+ * @author Александр Сигачёв
  */
 $messages['ru'] = array(
-	'wikibase-desc' => '????????? ????????????????? ??????',
-	'wikibase-edit' => '?????????????',
-	'wikibase-save' => '?????????',
-	'wikibase-cancel' => '????????',
-	'wikibase-add' => '????????',
-	'wikibase-label-edit-placeholder' => '??????? ?????',
-	'wikibase-description-edit-placeholder' => '??????? ????????',
-	'wikibase-label-input-help-message' => '??????? ???????? ????? ?????? ?????? ? $1.',
-	'wikibase-description-input-help-message' => '??????? ??????? ???????? ? $1.',
-	'wikibase-sitelinks' => '???????? ?????????, ??????????? ?? ???? ???????',
-	'wikibase-sitelinks-add' => '???????? ?????? ?? ???????? ?????????',
-	'wikibase-sitelinks-empty' => '?? ???? ???????? ????????? ??? ?? ????????? ????.',
-	'wikibase-remove' => '??????',
+	'wikibase-desc' => 'Хранилище структурированных данных',
+	'wikibase-edit' => 'редактировать',
+	'wikibase-save' => 'сохранить',
+	'wikibase-cancel' => 'отменить',
+	'wikibase-add' => 'добавить',
+	'wikibase-label-edit-placeholder' => 'введите метку',
+	'wikibase-description-edit-placeholder' => 'введите описание',
+	'wikibase-label-input-help-message' => 'Введите название этого набора данных в $1.',
+	'wikibase-description-input-help-message' => 'Введите краткое описание в $1.',
+	'wikibase-sitelinks' => 'Страницы Википедии, ссылающиеся на этот элемент',
+	'wikibase-sitelinks-add' => 'добавить ссылку на страницу Википедии',
+	'wikibase-sitelinks-empty' => 'Ни одна страница Википедии ещё не ссылается сюда.',
+	'wikibase-remove' => 'убрать',
 );
 
 /** Swedish (Svenska)
@@ -259,24 +259,24 @@ $messages['sv'] = array(
 	'wikibase-edit' => 'redigera',
 	'wikibase-save' => 'spara',
 	'wikibase-cancel' => 'avbryt',
-	'wikibase-add' => 'l�gg till',
+	'wikibase-add' => 'lägg till',
 	'wikibase-label-edit-placeholder' => 'ange etikett',
 	'wikibase-description-edit-placeholder' => 'ange beskrivning',
-	'wikibase-label-input-help-message' => 'Ange titeln p� detta datat i  $1 .',
+	'wikibase-label-input-help-message' => 'Ange titeln på detta datat i  $1 .',
 	'wikibase-description-input-help-message' => 'Ange en kort beskrivning i  $1.',
-	'wikibase-sitelinks' => 'Wikipedia-sidor som �r l�nkade till det h�r objektet',
-	'wikibase-sitelinks-add' => 'l�gg till en l�nk till en Wikipedia-sida',
-	'wikibase-sitelinks-empty' => 'Inga Wikipedia-sidor l�nkade till det h�r objektet �nnu.',
+	'wikibase-sitelinks' => 'Wikipedia-sidor som är länkade till det här objektet',
+	'wikibase-sitelinks-add' => 'lägg till en länk till en Wikipedia-sida',
+	'wikibase-sitelinks-empty' => 'Inga Wikipedia-sidor länkade till det här objektet ännu.',
 	'wikibase-remove' => 'ta bort',
 );
 
-/** Tamil (?????)
+/** Tamil (தமிழ்)
  * @author Logicwiki
  */
 $messages['ta'] = array(
-	'wikibase-edit' => '????',
-	'wikibase-save' => '????',
-	'wikibase-cancel' => '????? ????',
-	'wikibase-add' => '????',
-	'wikibase-remove' => '??????',
+	'wikibase-edit' => 'தொகு',
+	'wikibase-save' => 'சேமி',
+	'wikibase-cancel' => 'ரத்து செய்',
+	'wikibase-add' => 'சேர்',
+	'wikibase-remove' => 'நீக்கு',
 );
