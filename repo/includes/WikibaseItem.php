@@ -227,10 +227,10 @@ class WikibaseItem extends WikibaseEntity {
 	 * 
 	 * @since 0.1
 	 * 
-	 * @param array|null $languages note that an empty array removes labels for no languages while a null pointer removes all
+	 * @param string|array $languages note that an empty array removes labels for no languages while a null pointer removes all
 	 */
-	public function removeLabel( $language ) {
-		$this->removeMultilangTexts( 'label', array($language) );
+	public function removeLabel( $languages = array() ) {
+		$this->removeMultilangTexts( 'label', (array)$languages );
 	}
 
 	/**
@@ -238,10 +238,10 @@ class WikibaseItem extends WikibaseEntity {
 	 * 
 	 * @since 0.1
 	 * 
-	 * @param array|null $languages note that an empty array removes descriptions for no languages while a null pointer removes all
+	 * @param string|array $languages note that an empty array removes descriptions for no languages while a null pointer removes all
 	 */
-	public function removeDescription( $languages ) {
-		$this->removeMultilangTexts( 'description', array($language) );
+	public function removeDescription( $languages = array() ) {
+		$this->removeMultilangTexts( 'description', (array)$languages );
 	}
 
 	/**
@@ -254,12 +254,12 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	protected function removeMultilangTexts( $fieldKey, array $languages = null ) {
 		if ( !is_null( $languages ) ) {
-			unset($this->data[$fieldKey]);
+			unset( $this->data[$fieldKey] );
 			$this->data[$fieldKey] = array();
 		}
 		else {
-			foreach ($languages as $lang) {
-				unset($this->data[$fieldKey][$lang]);
+			foreach ( $languages as $lang ) {
+				unset( $this->data[$fieldKey][$lang] );
 			}
 		}
 	}

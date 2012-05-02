@@ -55,7 +55,7 @@ $dir = dirname( __FILE__ ) . '/';
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 				= $dir . 'Wikibase.i18n.php';
 $wgExtensionMessagesFiles['WikibaseAlias'] 			= $dir . 'Wikibase.i18n.alias.php';
-$wgExtensionMessagesFiles['WikibaseNS'] 			= $dir . 'Wikibase.i18n.ns.php';
+$wgExtensionMessagesFiles['WikibaseNS'] 			= $dir . 'Wikibase.i18n.namespaces.php';
 
 
 
