@@ -9,80 +9,94 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-"use strict";
+'use strict';
+
 
 ( function () {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.Interface', QUnit.newMwEnvironment() );
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.Interface', {
+		setup: function() {
+			this.node = $( '<div/>', { id: 'subject' } );
+			this.evInterface = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( this.node );
+			this.strings = {
+				valid: [ 'test', 'test 2' ],
+				invalid: [ '' ]
+			};
 
-	var node = $( '<div/>', { id: 'subject' } );
-	var evInterface = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( node );
+			equal(
+				this.evInterface._subject.length,
+				1,
+				'has subject'
+			);
 
-	var strings = {
-		valid: [ 'test', 'test 2' ],
-		invalid: [ '' ]
-	};
+			ok(
+				this.evInterface._subject[0] == this.node[0],
+				'validated subject'
+			);
 
-	var setup = null;
+			ok(
+				this.evInterface._getValueContainer()[0] == this.node[0],
+				'validated subject as container'
+			);
+
+		},
+		teardown: function() {
+			this.evInterface.destroy();
+
+			equal(
+				$( this.evInterface._getValueContainer()[0] ).children().length,
+				0,
+				'no input element'
+			);
+
+			this.evInterface = null;
+			this.node = null;
+			this.strings = null;
+		}
+	} );
 
 
-	test( 'setup', function() {
+	test( 'initial check', function() {
 
 		equal(
-			evInterface._subject.length,
-			1,
-			'has subject'
-		);
-
-		ok(
-			evInterface._subject[0] == node[0],
-			'validated subject'
-		);
-
-		ok(
-			evInterface._getValueContainer()[0] == node[0],
-			'validated subject as container'
-		);
-
-		equal(
-			evInterface.isInEditMode(),
+			this.evInterface.isInEditMode(),
 			false,
 			'not in edit mode'
 		);
 
 		equal(
-			evInterface.isEmpty(),
+			this.evInterface.isEmpty(),
 			true,
 			'value is empty'
 		);
 
 		equal(
-			evInterface.isValid(),
+			this.evInterface.isValid(),
 			false,
 			'input invalid'
 		);
 
 		equal(
-			evInterface.isActive(),
+			this.evInterface.isActive(),
 			true,
 			'is active'
 		);
 
 		equal(
-			evInterface.validate( strings['invalid'][0] ),
+			this.evInterface.validate( this.strings['invalid'][0] ),
 			false,
 			'empty value would be invalid'
 		);
 
 		equal(
-			evInterface.validate( strings['valid'][0] ),
+			this.evInterface.validate( this.strings['valid'][0] ),
 			true,
 			'some string would be valid'
 		);
 
-		evInterface.destroy();
+		this.evInterface.destroy();
 
 		equal(
-			$( evInterface._getValueContainer()[0] ).children().length,
+			$( this.evInterface._getValueContainer()[0] ).children().length,
 			0,
 			'no input element'
 		);
@@ -93,77 +107,77 @@
 	test( 'edit', function() {
 
 		equal(
-			evInterface.startEditing(),
+			this.evInterface.startEditing(),
 			true,
 			'start editing'
 		);
 
 		equal(
-			evInterface.isInEditMode(),
+			this.evInterface.isInEditMode(),
 			true,
 			'is in edit mode'
 		);
 
 		ok(
-			$( evInterface._getValueContainer()[0] ).children()[0] == evInterface._inputElem[0],
+			$( this.evInterface._getValueContainer()[0] ).children()[0] == this.evInterface._inputElem[0],
 			'attached input element to subject node'
 		);
 
-		evInterface.setValue( strings['valid'][0] );
+		this.evInterface.setValue( this.strings['valid'][0] );
 
 		ok(
-			evInterface.getValue() == strings['valid'][0],
+			this.evInterface.getValue() == this.strings['valid'][0],
 			'value change'
 		);
 
 		equal(
-			evInterface.isEmpty(),
+			this.evInterface.isEmpty(),
 			false,
 			'input is not empty'
 		);
 
 		equal(
-			evInterface.isValid(),
+			this.evInterface.isValid(),
 			true,
 			'input is valid'
 		);
 
 		equal(
-			evInterface.stopEditing(),
+			this.evInterface.stopEditing(),
 			false,
 			'stop editing'
 		);
 
 		equal(
-			$( evInterface._getValueContainer()[0] ).children().length,
+			$( this.evInterface._getValueContainer()[0] ).children().length,
 			0,
 			'removed input element'
 		);
 
-		evInterface.setValue( strings['valid'][1] );
+		this.evInterface.setValue( this.strings['valid'][1] );
 
 		equal(
-			evInterface.startEditing(),
+			this.evInterface.startEditing(),
 			true,
 			'start editing'
 		);
 
-		evInterface.setValue( strings['valid'][0] );
+		this.evInterface.setValue( this.strings['valid'][0] );
 
 		ok(
-			evInterface.getValue() == strings['valid'][0],
+			this.evInterface.getValue() == this.strings['valid'][0],
 			'value change'
 		);
 
 		ok(
-			evInterface.getInitialValue() == strings['valid'][1],
+			this.evInterface.getInitialValue() == this.strings['valid'][1],
 			'validating initial value'
 		);
 
-		evInterface.destroy();
+		this.evInterface.destroy();
 
 		equal(
-			$( evInterface._getValueContainer()[0] ).children().length,
+			$( this.evInterface._getValueContainer()[0] ).children().length,
 			0,
 			'no input element'
 		);
@@ -174,78 +188,70 @@
 	test( 'state changes', function() {
 
 		equal(
-			evInterface.isActive(),
+			this.evInterface.isActive(),
 			true,
 			'is active'
 		);
 
 		equal(
-			evInterface.isInEditMode(),
+			this.evInterface.isInEditMode(),
 			false,
 			'is in edit mode'
 		);
 
 		equal(
-			evInterface.startEditing(),
+			this.evInterface.startEditing(),
 			true,
 			'start editing'
 		);
 
-		evInterface.setDisabled( true );
+		this.evInterface.setDisabled( true );
 		equal(
-			evInterface.isDisabled(),
+			this.evInterface.isDisabled(),
 			true,
 			'disable'
 		);
 		ok(
-			evInterface._inputElem.attr( 'disabled' ),
+			this.evInterface._inputElem.attr( 'disabled' ),
 			true,
 			'input element is disabled'
 		);
 
-		evInterface.setDisabled( false );
+		this.evInterface.setDisabled( false );
 		equal(
-			evInterface.isDisabled(),
+			this.evInterface.isDisabled(),
 			false,
 			'enabled'
 		);
 		ok(
-			typeof evInterface._inputElem.attr( 'disabled' ) == 'undefined',
+			typeof this.evInterface._inputElem.attr( 'disabled' ) == 'undefined',
 			'input element is not disabled'
 		);
 
-		evInterface.setActive( false );
+		this.evInterface.setActive( false );
 		equal(
-			evInterface.isActive(),
+			this.evInterface.isActive(),
 			false,
 			'deactivated'
 		);
 
 		equal(
-			evInterface.isInEditMode(),
+			this.evInterface.isInEditMode(),
 			false,
 			'is not in edit mode'
 		);
 
 		equal(
-			$( evInterface._getValueContainer()[0] ).children().length,
+			$( this.evInterface._getValueContainer()[0] ).children().length,
 			0,
 			'removed input element'
 		);
 
-		evInterface.setActive( true );
+		this.evInterface.setActive( true );
 		equal(
-			evInterface.isActive(),
+			this.evInterface.isActive(),
 			true,
 			'activated'
-		);
-
-		evInterface.destroy();
-
-		equal(
-			$( evInterface._getValueContainer()[0] ).children().length,
-			0,
-			'no input element'
 		);
 
 	} );

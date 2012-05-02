@@ -82,7 +82,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._pending = this._subject.hasClass( 'wb-pending-value' );		
+		this._pending = this._subject.hasClass( 'wb-pending-value' );
 		
 		this._initInterfaces();
 
@@ -163,12 +163,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._toolbar.destroy();
 			this._toolbar = null;
 		}
-		if( this._elem instanceof Array ) {
-			$.each( this._interfaces, function( index, elem ) {
-				elem.destroy();
-			} );
-			this._interfaces = null;
-		}
+		this.stopEditing( false );
 	},
 
 	/**

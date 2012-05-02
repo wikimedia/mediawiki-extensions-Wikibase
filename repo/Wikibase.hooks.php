@@ -96,11 +96,16 @@ final class WikibaseHooks {
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.Toolbar.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js'
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js'
 			),
-			'dependencies' => array( 'wikibase' ),
+			'dependencies' => array(
+				'wikibase',
+				'wikibase.ui.Toolbar',
+				'wikibase.ui.PropertyEditTool'
+			),
 			'localBasePath' => dirname( __FILE__ ),
 			'remoteExtPath' => 'WikidataRepo',
 		);

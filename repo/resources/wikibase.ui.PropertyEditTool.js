@@ -280,8 +280,15 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	
 	destroy: function() {
-		if ( this._editableValue != null ) {
-			//this._editableValue.destroy();
+		if ( this._editableValues instanceof Array ) {
+			$.each( this._editableValues, function( index, editableValue ) {
+				editableValue.destroy();
+			} );
+			this._editableValues = null;
+		}
+		if ( this._toolbar !== null ) {
+			this._toolbar.destroy();
+			this._toolbar = null;
 		}
 	},
 	
@@ -393,7 +400,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 */
 	getValues: function( getPendingValues ) {
 		if( getPendingValues ) {
-			return this._editableValues.splice();
+			return this._editableValues.slice();
 		}
 		
 		var values = new Array();
