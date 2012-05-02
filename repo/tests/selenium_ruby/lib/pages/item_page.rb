@@ -3,8 +3,7 @@ class ItemPage
 
   # page_url "http://localhost/mediawiki/index.php/Data:q#{@item_id}"
   # page_url "http://localhost/mediawiki/index.php/Data:q" + item_id
-  # page_url "http://localhost/mediawiki/index.php/Data:q10"
-  page_url "http://208.80.153.239/w/index.php/Data:Q500"
+  page_url "http://localhost/mediawiki/index.php/Data:q10"
   # page_url "http://localhost/mediawiki/index.php/Data:q" + @item_id
 
   # page title
