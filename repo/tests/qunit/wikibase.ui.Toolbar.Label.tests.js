@@ -118,7 +118,7 @@
 			'still enabled'
 		);
 
-		this.label.beforeDisable = null;
+		this.label.beforeDisable = function() {	return true; };
 
 		equal(
 			this.label.setDisabled(),
@@ -138,7 +138,7 @@
 			'still disabled'
 		);
 
-		this.label.beforeEnable = null;
+		this.label.beforeEnable = function() {	return true; };
 
 		equal(
 			this.label.setDisabled( false ),
