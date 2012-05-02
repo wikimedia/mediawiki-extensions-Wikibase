@@ -95,8 +95,10 @@ final class WikibaseHooks {
 		$testModules['qunit']['wikibase.tests'] = array(
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/wikibase.Site.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
