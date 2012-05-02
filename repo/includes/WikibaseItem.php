@@ -31,6 +31,12 @@ class WikibaseItem extends WikibaseEntity {
 	protected $id = false;
 
 	/**
+	 * @since 0.1
+	 * @var WikiPage|false
+	 */
+	protected $wikiPage = false;
+
+	/**
 	 * Constructor.
 	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
 	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
@@ -105,11 +111,9 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $articleId
-	 *
 	 * @return boolean Success indicator
 	 */
-	public function save( /* $articleId */ ) {
+	public function save() {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$fields = array();
@@ -118,7 +122,6 @@ class WikibaseItem extends WikibaseEntity {
 
 		if ( !$this->hasId() ) {
 			$fields['item_id'] = null; // This is needed to have at least one field.
-			//$fields['item_page_id'] = $articleId;
 
 			$success = $dbw->insert(
 				'wb_items',
@@ -193,6 +196,41 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * Get the ids of the items corresponding to the provided language and label pair.
+	 * A description can also be provided, in which case only the id of the item with
+	 * that description will be returned (as only element in the array).
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $language
+	 * @param string $label
+	 * @param string|null $description
+	 *
+	 * @return array of integer
+	 */
+	public static function getIdsForLabel( $language, $label, $description = null ) {
+		$dbr = wfGetDB( DB_SLAVE );
+
+		$conds = array(
+			'tpl_language' => $language,
+			'tpl_label' => $label
+		);
+
+		if ( !is_null( $description ) ) {
+			$conds['tpl_description'] = $description;
+		}
+
+		$items = $dbr->select(
+			'wb_texts_per_lang',
+			array( 'tpl_item_id' ),
+			$conds,
+			__METHOD__
+		);
+
+		return array_map( function( $item ) { return $item->tpl_item_id; }, iterator_to_array( $items ) );
+	}
+
+	/**
 	 * Sets the value for the label in a certain value.
 	 *
 	 * @since 0.1
@@ -254,7 +292,6 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	protected function removeMultilangTexts( $fieldKey, array $languages = null ) {
 		if ( !is_null( $languages ) ) {
-			unset( $this->data[$fieldKey] );
 			$this->data[$fieldKey] = array();
 		}
 		else {
@@ -429,38 +466,6 @@ class WikibaseItem extends WikibaseEntity {
 //		);
 	}
 
-	public function getPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getSystemPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getEditorialPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getStatementPropertyNames() {
-		//TODO: implement
-	}
-
-	public function getPropertyMultilang( $name, $languages = null ) {
-		//TODO: implement
-	}
-
-	public function getProperty( $name, $lang = null ) {
-		//TODO: implement
-	}
-
-	public function getPropertyType( $name ) {
-		//TODO: implement
-	}
-
-	public function isStatementProperty( $name ) {
-		//TODO: implement
-	}
-
 	/**
 	 * Returns the description of the item in the language with the provided code,
 	 * or false in cases there is none in this language.
@@ -603,28 +608,6 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
-	 * Returns the WikiPage for the item or false if there is none.
-	 *
-	 * @since 0.1
-	 *
-	 * @return WikiPage|false
-	 */
-	public function getWikiPage() {
-		return $this->hasId() ? self::getWikiPageForId( $this->getId() ) : false;
-	}
-
-	/**
-	 * Returns the Title for the item or false if there is none.
-	 *
-	 * @since 0.1
-	 *
-	 * @return Title|false
-	 */
-	public function getTitle() {
-		return $this->hasId() ? self::getTitleForId( $this->getId() ) : false;
-	}
-
-	/**
 	 * @since 0.1
 	 * @see Content::copy
 	 * @return WikibaseItem
@@ -637,6 +620,91 @@ class WikibaseItem extends WikibaseEntity {
 		}
 
 		return new self( $array );
+	}
+
+	/**
+	 * Returns the WikiPage for the item or false if there is none.
+	 *
+	 * @since 0.1
+	 *
+	 * @return WikiPage|false
+	 */
+	public function getWikiPage() {
+		if ( $this->wikiPage === false ) {
+			$this->wikiPage = $this->hasId() ? self::getWikiPageForId( $this->getId() ) : false;
+		}
+
+		return $this->wikiPage;
+	}
+
+	/**
+	 * Returns the Title for the item or false if there is none.
+	 *
+	 * @since 0.1
+	 *
+	 * @return Title|false
+	 */
+	public function getTitle() {
+		$wikiPage = $this->getWikiPage();
+		return $wikiPage === false ? false : $wikiPage->getTitle();
+	}
+
+	/**
+	 * Get the item with the provided id, or null if there is no such item.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $itemId
+	 *
+	 * @return Content|null
+	 */
+	public static function getFromId( $itemId ) {
+		// TODO: since we already did the trouble of getting a WikiPage here,
+		// we probably want to keep a copy of it in the Content object.
+		return self::getWikiPageForId( $itemId )->getContent();
+	}
+
+	/**
+	 * Get the item corresponding to the provided site and title pair, or null if there is no such item.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $siteId
+	 * @param string $pageName
+	 *
+	 * @return Content|null
+	 */
+	public static function getFromSiteLink( $siteId, $pageName ) {
+		$id = self::getIdForSiteLink( $siteId, $pageName );
+		return $id === false ? null : self::getFromId( $id );
+	}
+
+	/**
+	 * Get the items corresponding to the provided language and label pair.
+	 * A description can also be provided, in which case only the item with
+	 * that description will be returned (as only element in the array).
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $language
+	 * @param string $label
+	 * @param string|null $description
+	 *
+	 * @return array of WikibaseItem
+	 */
+	public static function getFromLabel( $language, $label, $description = null ) {
+		$ids = self::getIdsForLabel( $language, $label, $description );
+		$items = array();
+
+		foreach ( $ids as $id ) {
+			$item = self::getFromId( $id );
+
+			if ( !is_null( $item ) ) {
+				$items[] = $item;
+			}
+		}
+
+		return $items;
 	}
 
 	/**
