@@ -58,7 +58,7 @@ class WikibaseItemView extends ContextSource {
 		
 		if( empty( $siteLinks ) ) {
 			// no site links available for this item
-			$html .= Html::element( 'div', array(), wfMessage( 'wikibase-sitelinks-empty' ) );
+			$html .= Html::element( 'div', array( 'class' => 'wb-sitelinks-empty' ), wfMessage( 'wikibase-sitelinks-empty' ) );
 		} else {
 			$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks', 'cellspacing' => '0' ) );
 			$html .= Html::openElement( 'thead' );

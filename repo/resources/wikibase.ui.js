@@ -11,7 +11,12 @@
  */
 "use strict";
 
+// allow to use this module if the main wikibase module is not required for some reason.
+window.wikibase = window.wikibase || {};
+
 /**
  * Module for 'Wikibase' extensions user interface functionality.
+ * @var Object
  */
-window.wikibase.ui = {};
+window.wikibase.ui = window.wikibase.ui || {}; // make sure this won't override when loading two ui
+                                               // modules in parallel without loading base module.

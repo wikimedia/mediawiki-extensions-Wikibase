@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
 "use strict";
 
@@ -17,9 +18,9 @@
  * 
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject, editableValue ) {
-	if( typeof subject != 'undefined' && typeof editableValue != 'undefined' ) {
-		this._init( subject, editableValue );
+window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject ) {
+	if( typeof subject != 'undefined' ) {
+		this._init( subject );
 	}
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
@@ -27,13 +28,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @const
 	 * Class which marks the element within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar-editablevalueinterface',
-
-	/**
-	 * Reference to parent editableValue
-	 * @var wikibase.ui.PropertyEditTool.EditableValue
-	 */
-	_editableValue: null,
+	UI_CLASS: 'wb-ui-propertyedittool-editablevalueinterface',
 
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
@@ -61,7 +56,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 */
 	_inputElem: null,
 
+	/**
+	 * when adding characters to the input value, the previous value is stored to be able to check whether instant
+	 * on change operations have to be performed
+	 * @var String
+	 */
+	_previousValue: null,
+
 	_currentWidth: null,
+
 
 	/**
 	 * Initializes the editable value.
@@ -69,13 +72,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 *
 	 * @param jQuery subject
 	 */
-	_init: function( subject, editableValue ) {
+	_init: function( subject ) {
 		if( this._subject !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._editableValue = editableValue;
 		this._currentWidth = 0;
 	},
 
@@ -109,10 +111,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this._inputElem.after( ruler );
 		}
 
-        this._isInEditMode = true;
+		this._isInEditMode = true;
 		
 		this._onInputRegistered(); // do this after setting _isInEditMode !
-        this.setFocus();
+		this.setFocus();
 		
 		return true;
 	},
@@ -146,11 +148,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'name': this._key,
 			'value': this.getValue(),
 			'placeholder': this.inputPlaceholder,
-			'keypress': jQuery.proxy( this._onKeyPressed, this ), // TODO: this shouldn't be used, keyup should work fine!
-			'keyup':    jQuery.proxy( this._onKeyUp, this ), //       we have both for escape key browser compability
-			'keydown':  jQuery.proxy( this._onKeyDown, this ),
-			'focus':    jQuery.proxy( this._onFocus, this ),
-			'blur':     jQuery.proxy( this._onBlur, this )
+			'keypress': $.proxy( this._onKeyPressed, this ),
+			'keyup':    $.proxy( this._onKeyUp, this ),
+			'keydown':  $.proxy( this._onKeyDown, this ),
+			'focus':    $.proxy( this._onFocus, this ),
+			'blur':     $.proxy( this._onBlur, this ),
+			'change':   $.proxy( this._onChange, this )
 		} );
 	},
 	
@@ -167,6 +170,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * its initial value.
 	 */
 	_onInputRegistered: function() {
+		this._previousValue = this._inputElem.val();
 		if( this.onInputRegistered !== null && this.onInputRegistered() === false ) { // callback
 			return false; // cancel
 		}
@@ -178,7 +182,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			//console.log( '"'+ this._inputElem.attr( 'value' ).replace( / /g, '&nbsp;') + '"' );
 
 			var currentValue = this._inputElem.val();
-			if ( currentValue == '' ) {
+			if ( currentValue === '' ) {
 				currentValue = this._inputElem.attr( 'placeholder' );
 			}
 			ruler.html( currentValue.replace( / /g, '&nbsp;' ).replace( /</g, '&lt;' ) ); // TODO prevent insane HTML from being placed in the ruler
@@ -222,14 +226,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
-		this._onInputRegistered(); // TODO: do not fire this if input hasn't changed
+		this._previousValue = this._inputElem.val();
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
 	_onKeyUp: function( event ) {
-		this._onInputRegistered(); // TODO: do not fire this if input hasn't changed
+		if ( this._inputElem.val() != this._previousValue ) {
+			this._onInputRegistered();
+		}
 		this._expand();
 		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
 			return false; // cancel
@@ -248,9 +254,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this.onFocus( event ); // callback
 		}
 	},
+
 	_onBlur: function( event ) {
 		if( this.onBlur !== null ) {
 			this.onBlur( event ); // callback
+		}
+	},
+
+	_onChange: function( event ) {
+		if( this.onChange !== null ) {
+			this.onChange( event ); // callback
 		}
 	},
 
@@ -314,21 +327,41 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		var value = '';
 		if( this.isInEditMode() ) {
 			value = $( this._getValueContainer().children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
+			value = this.normalize( value );
 		} else {
 			value = this._getValueContainer().text();
+			// if already set, the value should be normalized already
 		}
-		return $.trim( value );
+		return value;
 	},
 	
 	/**
-	 * Sets a value
+	 * Sets a value.
+	 * Returns the value really set in the end. This string can be different from the given value
+	 * since it will go through some normalization first.
+	 * 
+	 * @return string
 	 */
 	setValue: function( value ) {
+		// make sure the value is sufficient
+		value = this.normalize( value );
+		
 		if( this.isInEditMode() ) {
 			this._inputElem.attr( 'value', value );
 		} else {
 			this._getValueContainer().text( value );
 		}
+		return value;
+	},
+	
+	/**
+	 * Normalizes a string so it is sufficient for setting it as value for this interface.
+	 * This will be done automatically when using setValue().
+	 * 
+	 * @return string
+	 */
+	normalize: function( value ) {
+		return $.trim( value );
 	},
 	
 	/**
@@ -362,6 +395,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		}
 	},
 	
+	_disableInputElement: function() {
+		this._inputElem.attr( 'disabled', 'true' );
+	},
+	
+	_enableInputelement: function() {
+		this._inputElem.removeAttr( 'disabled' );
+	},
+	
 	/**
 	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
 	 * interface will not be made available on startEditing()
@@ -385,14 +426,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		}
 		this._isActive = active;
 	},
-	
-	_disableInputElement: function() {
-		this._inputElem.attr( 'disabled', 'true' );
-	},
-	
-	_enableInputelement: function() {
-		this._inputElem.removeAttr( 'disabled' );
-	},
 
 	/**
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
@@ -414,7 +447,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	isEmpty: function() {
 		return this.getValue() === '';
 	},
-
+	
+	/**
+	 * Returns whether the current value is valid
+	 */
+	isValid: function() {
+		return this.validate( this.getValue() );
+	},
+	
 	/**
 	 * Velidates whether a certain value would be valid for this editable value.
 	 *
@@ -422,7 +462,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @return bool
 	 */
 	validate: function( value ) {
-		return $.trim( value ) !== '';
+		return this.normalize( value ) !== '';
 	},
 
 	/////////////////
@@ -448,6 +488,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Callback called when the input changes in general for example on its initialization when
 	 * setting its initial value.
+	 * @var Function|null
 	 */
 	onInputRegistered: null,
 	
@@ -459,5 +500,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	
 	onFocus: null,
 	
-	onBlur: null
+	onBlur: null,
+
+	onChange: null
 };

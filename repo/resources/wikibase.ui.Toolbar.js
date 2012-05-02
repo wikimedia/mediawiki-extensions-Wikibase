@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.js
+ * @file wikibase.ui.Toolbar.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -17,15 +17,15 @@
  * Gives basic edit toolbar functionality, serves the "[edit]" button as well as the "[cancel|save]"
  * buttons and other related stuff.
  */
-window.wikibase.ui.PropertyEditTool.Toolbar = function() {
+window.wikibase.ui.Toolbar = function() {
 	this._init();
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
+window.wikibase.ui.Toolbar.prototype = {
 	/**
 	 * @const
 	 * Class which marks the element within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar',
+	UI_CLASS: 'wb-ui-toolbar',
 	
 	/**
 	 * @var jQuery
@@ -86,8 +86,8 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 		var parent = null;
 		if( this._elem !== null ) {
 			this._elem.children().detach(); // only detach so elements can be attached somewhere else
-			this._elem.remove();
 			parent = this._elem.parent();
+			this._elem.remove(); // remove element after parent is known
 		}
 		this._elem = $( '<div/>', {
 			'class': this.UI_CLASS
@@ -102,14 +102,16 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * Draws the toolbar elements like buttons and labels
 	 */
 	_drawToolbarElements: function() {
-		for( var i in this._items ) {
+		var i = -1;
+		for( i in this._items ) {
 			if( this.renderItemSeparators && i != 0 ) {
 				this._elem.append( '|' );
 			}
 			this._elem.append( this._items[i]._elem );
 		}
 		
-		if( this.renderItemSeparators ) {
+		// only render brackets if we have any content
+		if( this.renderItemSeparators && i > -1 ) {
 			this._elem
 			.prepend( '[' )
 			.append( ']' );
@@ -120,7 +122,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	 * This will add a toolbar element, e.g. a label or a button to the toolbar at the given index.
 	 * 
 	 * @param Object elem toolbar content element (e.g. a group, button or label).
-	 * @param index where to add the element. 0 will 
+	 * @param index where to add the element (use negative values to specify the position from the end).
 	 */
 	addElement: function( elem, index ) {
 		if( typeof index == 'undefined' ) {
@@ -135,17 +137,37 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	
 	/**
 	 * Removes an element from the toolbar
+	 * 
 	 * @param Object elem the element to remove
 	 * @return bool false if element isn't part of this element
 	 */
 	removeElement: function( elem ) {
-		var index = $.inArray( elem, this._items );
-		if( index === -1 ) {
+		var index = this.getIndexOf( elem );
+		if( index < 0 ) {
 			return false;
 		}
 		this._items.splice( index, 1 );
 		
 		this.draw(); // TODO: could be more efficient when just removing one element
+		return true;
+	},
+	
+	/**
+	 * Returns whether the given element is represented within the toolbar.
+	 * 
+	 * @return bool
+	 */
+	hasElement: function( elem ) {
+		return this.getIndexOf( elem ) > -1;
+	},
+	
+	/**
+	 * returns the index of an element within the toolbar, -1 in case the element is not represented.
+	 * 
+	 * @return int
+	 */
+	getIndexOf: function( elem ) {
+		return $.inArray( elem, this._items );
 	},
 
 	destroy: function() {
@@ -153,9 +175,11 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 			for( var i in this._items ) {
 				this._items[i].destroy();
 			}
+			this._items = null;
 		}
 		if( this._elem !== null ) {
 			this._elem.remove();
+			this._elem = null;
 		}
 	},
 	
@@ -166,7 +190,7 @@ window.wikibase.ui.PropertyEditTool.Toolbar.prototype = {
 	/**
 	 * Defines whether the toolbar should be displayed with separators "|" between each item. In that
 	 * case everything will also be wrapped within "[" and "]".
-	 * This is particulary interesting for wikibase.ui.PropertyEditTool.Toolbar.Group toolbar groups
+	 * This is particulary interesting for wikibase.ui.Toolbar.Group toolbar groups
 	 * @var bool
 	 */
 	renderItemSeparators: false

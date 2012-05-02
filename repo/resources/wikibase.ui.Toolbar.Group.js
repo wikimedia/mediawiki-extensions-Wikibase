@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Toolbar.js
+ * @file wikibase.ui.Toolbar.Group.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -14,18 +14,16 @@
 /**
  * Represents a group of toolbar elements within a toolbar
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Group = function() {
+window.wikibase.ui.Toolbar.Group = function() {
 	this._init();
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar();
-$.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
+window.wikibase.ui.Toolbar.Group.prototype = Object.create( window.wikibase.ui.Toolbar.prototype );
+$.extend( window.wikibase.ui.Toolbar.Group.prototype, {
 
-	UI_CLASS: 'wb-ui-propertyedittoolbar-group',
+	UI_CLASS: 'wb-ui-toolbar-group',
 	
-	_elem: null, // TODO: Override this because draw() in parent will initialize it! Overthink inheritance model/constructor
-	
-	_init: function( elements ) {
-		window.wikibase.ui.PropertyEditTool.Toolbar.prototype._init.call( this );
+	_init: function() {
+		window.wikibase.ui.Toolbar.prototype._init.call( this );
 	},	
 	
 	_drawToolbar: function() {
@@ -43,7 +41,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 	},
 
 	destroy: function() {
-		window.wikibase.ui.PropertyEditTool.Toolbar.prototype.destroy.call( this );
+		window.wikibase.ui.Toolbar.prototype.destroy.call( this );
 	},
 	
 	/////////////////
@@ -51,7 +49,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Group.prototype, {
 	/////////////////
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.Toolbar.Group.renderItemSeparators
+	 * @see window.wikibase.ui.Toolbar.Group.renderItemSeparators
 	 */
 	renderItemSeparators: true
 } );

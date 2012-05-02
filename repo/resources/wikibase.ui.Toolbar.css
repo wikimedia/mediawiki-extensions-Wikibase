@@ -1,0 +1,34 @@
+/**
+ * Style for 'Wikibase' toolbar
+ *
+ * @since 0.1
+ * @file wikibase.js
+ * @ingroup Wikibase
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater
+ * @author Daniel Werner
+ */
+
+.wb-ui-toolbar, .wb-ui-toolbar-group {
+	display: inline-block;
+}
+
+	.wb-ui-toolbar-label,
+	.wb-ui-toolbar-button {
+		padding: 0.15em;
+	}
+	
+		.wb-ui-toolbar-label-disabled,
+		.wb-ui-toolbar-button-disabled {
+			color: grey;
+		}
+
+.wb-ui-toolbar, .wb-property-container-value {
+	margin: 0.3em;
+}
+
+.mw-content-rtl .wb-ui-toolbar {
+	padding-top: 5px;
+	display: inline-block;
+}

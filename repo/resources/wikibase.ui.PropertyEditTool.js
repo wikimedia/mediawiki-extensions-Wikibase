@@ -35,13 +35,13 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Contains the toolbar for the edit tool itself, not for its values or null if it doesn't have
 	 * one.
-	 * @var wikibase.ui.PropertyEditTool.Toolbar
+	 * @var wikibase.ui.Toolbar
 	 */
 	_toolbar: null,
 	
 	/**
 	 * The editable value for the properties data value
-	 * @var wikibase.ui.PropertyEditTool.EditableValue
+	 * @var wikibase.ui.PropertyEditTool.EditableValue[]
 	 */
 	_editableValues: null,
 		
@@ -61,28 +61,102 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 				
 		this._initEditToolForValues();
 		this._initToolbar();
+		
+		// call for first rendering of additional stuff of the view:
+		this._onRefreshView( 0 );
 	},
 	
 	/**
 	 * Initializes a toolbar for the whole property edit tool. By default this is just a command
 	 * to add more values.
-	 * @return wikibase.ui.PropertyEditTool.Toolbar
+	 * @return wikibase.ui.Toolbar
 	 */
 	_initToolbar: function() {
-		this._toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
-		this._toolbar.renderItemSeparators = true;
+		this._toolbar = new window.wikibase.ui.Toolbar();
+		this._toolbar.innerGroup = new window.wikibase.ui.Toolbar.Group();
+		this._toolbar.addElement( this._toolbar.innerGroup );
 		
 		if( this.allowsMultipleValues ) {
+			// toolbar group for buttons:
+			this._toolbar.lblFull = new window.wikibase.ui.Toolbar.Label(
+					'&nbsp;- ' + window.mw.msg( 'wikibase-propertyedittool-full' )
+			);
+			
 			// only add 'add' button if we can have several values
-			this._toolbar.btnAdd = new window.wikibase.ui.PropertyEditTool.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
+			this._toolbar.btnAdd = new window.wikibase.ui.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
 			this._toolbar.btnAdd.onAction = $.proxy( function() {
 				this.enterNewValue();
 			}, this );
-
-			this._toolbar.addElement( this._toolbar.btnAdd );
+			
+			this._toolbar.innerGroup.addElement( this._toolbar.btnAdd );
+			
+			// enable button only if this is not full yet, overwrite function directly	
+			var self = this;
+			this._toolbar.btnAdd.setDisabled = function( disable ) {
+				var isFull = self.isFull();
+				if( ! disable && self.isFull() ) {
+					// full list, don't enable 'add' button, show hint
+					self._toolbar.addElement( self._toolbar.lblFull );
+					disable = true;
+				}
+				if( ! disable && self.isInAddMode() ) {					
+					disable = true; // still adding new value, don't enable 'add' button!
+				}
+				if( disable == false ) {
+					// enabled, label with 'full' message not required
+					self._toolbar.removeElement( self._toolbar.lblFull );
+				}
+				return window.wikibase.ui.Toolbar.Button.prototype.setDisabled.call( this, disable );
+			};
+			this._toolbar.btnAdd.setDisabled( false ); // will run the code above
 		}
 		
 		this._toolbar.appendTo( this._getToolbarParent() );
+	},
+	
+	/**
+	 * Returns whether further values can be added
+	 * 
+	 * @return bool
+	 */
+	isFull: function() {
+		if( this.allowsMultipleValues ) {
+			return true;
+		} else {
+			return this._editableValues === null || this._editableValues.length < 1;
+		}
+	},
+	
+	/**
+	 * Returns whether the tool is in edit mode currently. This is true if any of the values managed
+	 * by this is in edit mode currently.
+	 *
+	 * @return bool
+	 */
+	isInEditMode: function() {
+		// is in edit mode if any of the editable values is in edit mode
+		for( var i in this._editableValues ) {
+			if( this._editableValues[ i ].isInEditMode() ) {
+				return true;
+			}
+		}
+		return false;
+	},
+	
+	/**
+	 * Returns whether the tool is in edit mode for adding a new value right now.
+	 * 
+	 * @return bool
+	 */
+	isInAddMode: function() {
+		// most likely that the last item is pending, so start to check there
+		for( var i = this._editableValues.length; i--; i >= 0 ) {
+			var editableValue = this._editableValues[ i ];
+			if( editableValue.isInEditMode() && editableValue.isPending() ) {
+				return true;
+			}
+		}
+		return false;
 	},
 	
 	/**
@@ -103,7 +177,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	*/
    
+   /**
+	* Collects all values represented within the DOM already and initializes EditableValue instances
+	* for them.
+	*/
 	_initEditToolForValues: function() {
+		// gets the DOM nodes representing EditableValue
 		var allValues = this._getValueElems();
 		
 		if( ! this.allowsMultipleValues ) {
@@ -118,6 +197,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	
 	/**
 	 * Takes care of initialization of a single value
+	 * 
 	 * @param jQuery valueElem
 	 * @return wikibase.ui.PropertyEditTool.EditableValue the initialized value
 	 */
@@ -132,19 +212,54 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		// initialiye editable value and give appropriate toolbar on the way:
 		editableValue._init( valueElem, editableValueToolbar );
 		
+		var self = this;
+		editableValue.onAfterRemove = function() {
+			self._editableValueHandler_onAfterRemove( editableValue );
+		};
+		
 		this._editableValues.push( editableValue );		
 		return editableValue;
 	},
 	
 	/**
+	 * Called whenever an editable value managed by this was removed.
+	 */
+	_editableValueHandler_onAfterRemove: function( editableValue ) {
+		var elemIndex = this.getIndexOf( editableValue );			
+
+		// remove EditableValue from list of managed values:
+		this._editableValues.splice( elemIndex, 1 );
+
+		if( elemIndex >= this._editableValues.length ) {
+			elemIndex = -1; // element removed from end
+		}	
+		this._onRefreshView( elemIndex );
+		
+		// enables 'add' button again if it was disabled because of full list:
+		this._toolbar.btnAdd.setDisabled( this.isInAddMode() );
+	},
+	
+	/**
+	 * returns the index of an EditableValue within this collection. If the element is not part of
+	 * this, -1 will be returned
+	 * 
+	 * @param wikibase.ui.PropertyEditTool.EditableValue elem
+	 * @return int
+	 */
+	getIndexOf: function( element ) {
+		return $.inArray( element, this._editableValues );
+	},
+	
+	/**
 	 * Builds the toolbar for a single editable value
-	 * @return wikibase.ui.PropertyEditTool.Toolbar
+	 * 
+	 * @return wikibase.ui.Toolbar
 	 */
 	_buildSingleValueToolbar: function( editableValue ) {
-		var toolbar = new window.wikibase.ui.PropertyEditTool.Toolbar();
+		var toolbar = new window.wikibase.ui.Toolbar();
 		
 		// give the toolbar a edit group with basic edit commands:
-		var editGroup = new window.wikibase.ui.PropertyEditTool.Toolbar.EditGroup();
+		var editGroup = new window.wikibase.ui.Toolbar.EditGroup();
 		editGroup.displayRemoveButton = this.allowsMultipleValues; // remove button if we have a list
 		editGroup._init( editableValue );
 		
@@ -157,6 +272,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Returns the nodes representing the properties values. This can also return an array of jQuery
 	 * objects if the value is represented by several nodes not sharing a mutual parent.
+	 * 
 	 * @return jQuery|jQuery[]
 	 */
 	_getValueElems: function() {
@@ -164,25 +280,107 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 	
 	destroy: function() {
-		if ( this._editableValue != null ) {
-			//this._editableValue.destroy();
+		if ( this._editableValues instanceof Array ) {
+			$.each( this._editableValues, function( index, editableValue ) {
+				editableValue.destroy();
+			} );
+			this._editableValues = null;
+		}
+		if ( this._toolbar !== null ) {
+			this._toolbar.destroy();
+			this._toolbar = null;
 		}
 	},
 	
 	/**
 	 * Allows to enter a new value, the input interface will be available but the process can still
 	 * be cancelled.
+	 * 
+	 * @return newValue wikibase.ui.PropertyEditTool.EditableValue
 	 */
 	enterNewValue: function() {
 		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
 		newValueElem.addClass( 'wb-pending-value' );
 		
 		this._subject.append( newValueElem );
-		var newValue = this._initSingleValue( newValueElem );
+		var newValue = this._initSingleValue( newValueElem );		
+				
+		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
-		//newValue._toolbar.editGroup.btnEdit.doAction();
-		//newValue.startEditing();
+		var self = this;
+		newValue.afterStopEditing = function( save, changed, wasPending ) {
+			self._newValueHandler_afterStopEditing( newValue, save, changed, wasPending );
+			newValue.onStopEditing = null; // make sure handler is only called once!
+		};		
+		
+		this._onRefreshView( this.getIndexOf( newValue ) );
 		newValue.setFocus();
+		return newValue;
+	},
+	
+	/**
+	 * Handler called only the first time a new value was added and saved or cancelled.
+	 */
+	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
+		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
+		if( save ) {
+			this._onRefreshView( $.inArray( newValue, this._editableValues ) );
+		}
+	},
+	
+	/**
+	 * Called when the view changes, for example if elements are removed or added in case this is a
+	 * view allowing multiple values.
+	 * 
+	 * @param int fromIndex the index of the value in this._editableValues which triggered the
+	 *        refresh request (because of insertion or deletion). This is -1 if an element was
+	 *        removed at the end of the view.
+	 */
+	_onRefreshView: function( fromIndex ) {
+		// Initialize counter where required:
+		this._updateCounters();
+		
+		// set 'even' and 'uneven' css classes to containing values:
+		if( fromIndex < 0 ) {
+			return; // element at the end was removed, no update requiredy
+		}
+		for( var i = fromIndex; i < this._editableValues.length; i++ ) {
+			var isEven = ( i % 2 ) != 0;
+			this._editableValues[ i ]._subject
+			.addClass( isEven ? 'even' : 'uneven' )
+			.removeClass( isEven ? 'uneven' : 'even' );
+		};
+	},
+	
+	/**
+	 * This will refresh all counters which display the number of values managed by this.
+	 */
+	_updateCounters: function() {
+		var counterElems = this._getCounterNodes();
+		if( counterElems !== null && counterElems.length > 0 ) {
+			this._getCounterNodes().text( this._getFormattedCounterText() );
+		}
+	},
+	
+	/**
+	 * Returns nodes which should serve as counters, displaying the number of nodes.
+	 * 
+	 * @return jQuery
+	 */
+	_getCounterNodes: function() {
+		return this._subject.find( '.' + this.UI_CLASS + '-counter' );
+	},
+	
+	/**
+	 * Returns a formatted string with the number of elements.
+	 * 
+	 * @return string
+	 */
+	_getFormattedCounterText: function() {
+		var numberOfValues = this.getValues().length;
+		return ( numberOfValues != 1 )
+				? '(' + numberOfValues + ')'
+				: '';
 	},
 	
 	/**
@@ -192,6 +390,27 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 */
 	_newEmptyValueDOM: function() {
 		return $( '<span/>' );
+	},
+	
+	/**
+	 * Returns all EditableValue objects managed by this.
+	 * 
+	 * @param bool getPendingValues if set to true, also pending values not yet stored will be returned.
+	 * @return wikibase.ui.PropertyEditTool.EditableValue[]
+	 */
+	getValues: function( getPendingValues ) {
+		if( getPendingValues ) {
+			return this._editableValues.slice();
+		}
+		
+		var values = new Array();
+		$.each( this._editableValues, function( index, elem ) {
+			// don't collect pending elements
+			if( ! elem.isPending() ) {
+				values.push( elem );
+			}
+		} );
+		return values;
 	},
 	
 	/**
@@ -208,7 +427,8 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 
 	/**
 	 * defines which editable value should be used for this.
-	 * @return Object
+	 * 
+	 * @return window.wikibase.ui.PropertyEditTool.EditableValue
 	 */
 	getEditableValuePrototype: function() {
 		return window.wikibase.ui.PropertyEditTool.EditableValue;

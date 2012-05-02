@@ -35,10 +35,13 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	 */
 	public function waitForAjax( $timeout = 10 ) {
 		$tries = 0;
+		if( SELENIUM_BROWSER == "chrome" ) {
+			sleep( 1 ); // TODO: in chrome it seems that jQuery.active does not work, so make an extra sleep
+		}
 		while( true ) {
 			$jsReturnString = $this->driver->execute_js_sync( "return jQuery.active;", array() );
 			$jsReturnArray = json_decode( trim( $jsReturnString["body"] ), true );
-			$jsReturnValue = $jsReturnArray["value"];			
+			$jsReturnValue = $jsReturnArray["value"];
 			if( $jsReturnValue == 0 || $tries++ >= $timeout ) {
 				break;
 			}
@@ -70,7 +73,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 				"format" => "json",
 				"action" => "wbsetlanguageattribute",
 				"id" => $itemId,
-				"language" => WIKI_USELANG,
+				"language" => SELENIUM_WIKI_USELANG,
 				"label" => $item,
 				"item" => "set"
 		);
@@ -90,7 +93,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 				"format" => "json",
 				"action" => "wbsetlanguageattribute",
 				"id" => $itemId,
-				"language" => WIKI_USELANG,
+				"language" => SELENIUM_WIKI_USELANG,
 				"description" => $description,
 				"item" => "set"
 		);
@@ -107,7 +110,7 @@ class SeleniumTestCase extends PHPUnit_Framework_TestCase {
 	private function doCurlApiCall( $params ) {
 		$params_string = http_build_query( $params );
 		$ch = curl_init();
-		curl_setopt( $ch, CURLOPT_URL, WIKI_URL."/api.php" );
+		curl_setopt( $ch, CURLOPT_URL, SELENIUM_WIKI_URL."/api.php" );
 		curl_setopt( $ch, CURLOPT_POSTFIELDS, $params_string );
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 		$this->assertNotNUll( $result = json_decode( curl_exec( $ch ), true ) );

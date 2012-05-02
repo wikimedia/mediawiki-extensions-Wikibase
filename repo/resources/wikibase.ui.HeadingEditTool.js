@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.js
+ * @file wikibase.ui.HeadingEditTool.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -30,8 +30,9 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		// add class specific to this ui element:
 		this._subject.addClass( 'wb-ui-headingedittool' );
-		// let input element expand automatically according to input text
-		this._editableValues[0]._interfaces[0].autoExpand = true;
+		
+		// Todo: think about auto expand feature and fix it
+		this._editableValues[0]._interfaces[0].autoExpand = false;
 	},
 	
 	/**
@@ -43,6 +44,7 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 	
 	/**
 	 * @see wikibase.ui.PropertyEditTool.getPropertyName()
+	 * 
 	 * @return string 'label'
 	 */
 	getPropertyName: function() {

@@ -45,7 +45,7 @@ class WikibaseViewItemAction extends FormlessAction {
 			$out->addHTML( $parserOutput->getText() );
 
 			// make sure required client sided resources will be loaded:
-			$out->addModules( 'wikibase' );
+			$out->addModules( 'wikibase.ui.PropertyEditTool' );
 
 			// overwrite page title
 			$out->setPageTitle( $content->getLabel( $contentLangCode ) );
@@ -57,26 +57,26 @@ class WikibaseViewItemAction extends FormlessAction {
 			// TODO get this from the configuration after its implemented:
 			$dummySiteDetails = array(
 				'en' => array(
-					'shortName' => 'English',
-					'name' => 'English Wikipedia',
+					'shortName' => Language::fetchLanguageName( 'en' ),
+					'name' => Language::fetchLanguageName( 'en' ) . ' Wikipedia',
 					'pageUrl' => 'http://en.wikipedia.org/wiki/$1',
 					'apiUrl' => 'http://en.wikipedia.org/w/api.php' // NOTE: we might better have an internal API module instead of using the site APIs directly
 				),
 				'de' => array(
-					'shortName' => 'German', // name in users language
-					'name' => 'German Wikipedia', // name in users language
+					'shortName' => Language::fetchLanguageName( 'de' ), // name in users language, this is just a hack as well!
+					'name' => Language::fetchLanguageName( 'de' ) . ' Wikipedia',
 					'pageUrl' => 'http://de.wikipedia.org/wiki/$1',
 					'apiUrl' => 'http://de.wikipedia.org/w/api.php'
 				),
 				'he' => array(
-					'shortName' => 'Hebrew',
-					'name' => 'Hebrew Wikipedia',
+					'shortName' => Language::fetchLanguageName( 'he' ),
+					'name' => Language::fetchLanguageName( 'he' ) . ' Wikipedia',
 					'pageUrl' => 'http://he.wikipedia.org/wiki/$1',
 					'apiUrl' => 'http://he.wikipedia.org/w/api.php'
 				),
 				'ja' => array(
-					'shortName' => 'Japanese',
-					'name' => 'Japanese Wikipedia',
+					'shortName' => Language::fetchLanguageName( 'ja' ),
+					'name' => Language::fetchLanguageName( 'ja' ) . ' Wikipedia',
 					'pageUrl' => 'http://ja.wikipedia.org/wiki/$1',
 					'apiUrl' => 'http://ja.wikipedia.org/w/api.php'
 				)

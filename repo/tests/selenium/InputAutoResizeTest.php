@@ -15,11 +15,11 @@ class InputAutoResizeTest extends SeleniumTestCase {
 	protected $targetItemId;
 
 	public function setUp() {
-		$this->driver = WebDriver_Driver::InitAtLocal( "4444", "firefox" );
+		$this->driver = WebDriver_Driver::InitAtLocal( "4444", SELENIUM_BROWSER );
 		$this->targetItemId = $this->createNewWikidataItem( "Test Item" );
 		$this->setItemDescription( $this->targetItemId, "Some description for testing." );
 		$this->assertTrue( is_numeric( $this->targetItemId ) );
-		$this->targetUrl = WIKI_URL."/index.php?title=Data:q$this->targetItemId" . "&uselang=" . WIKI_USELANG;
+		$this->targetUrl = SELENIUM_WIKI_URL."/index.php?title=Data:q$this->targetItemId" . "&uselang=" . SELENIUM_WIKI_USELANG;
 		$this->set_implicit_wait( 1000 );
 	}
 	
@@ -29,14 +29,9 @@ class InputAutoResizeTest extends SeleniumTestCase {
 	public function testInputAutoResize() {
 		$this->load( $this->targetUrl );
 		
-		$editLabelLink = "css=h1#firstHeading >
-		div.wb-ui-propertyedittoolbar >
-		div.wb-ui-propertyedittoolbar-group >
-		div.wb-ui-propertyedittoolbar-group >
-		a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$editLabelLink = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
 		$valueInputField = "css=h1#firstHeading > span > input.wb-ui-propertyedittoolbar-editablevalueinterface";
-		
-		//$targetLabel = $this->get_element( $labelElementSelector )->get_text();
+		$valueInputFieldRuler = "css=h1#firstHeading > span > span.ruler";
 		
 		$this->get_element( $editLabelLink )->click();
 		$initialInputValue = $this->get_element( $valueInputField )->get_value();

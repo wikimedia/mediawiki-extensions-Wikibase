@@ -17,7 +17,7 @@
  * removal of stored values.
  * 
  * @param jQuery subject
- * @param wikibase.ui.PropertyEditTool.Toolbar toolbar
+ * @param wikibase.ui.Toolbar toolbar
  */
 window.wikibase.ui.PropertyEditTool.EditableValue = function( subject, toolbar ) {
 	if( typeof subject != 'undefined' && typeof toolbar != 'undefined' ) {
@@ -29,7 +29,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @const
 	 * Class which marks the element within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar-editablevalue',
+	UI_CLASS: 'wb-ui-propertyedittool-editablevalue',
 	
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
@@ -52,7 +52,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	
 	/**
 	 * The toolbar controling the editable value
-	 * @var window.wikibase.ui.PropertyEditTool.Toolbar
+	 * @var window.wikibase.ui.Toolbar
 	 */
 	_toolbar: null,
 	
@@ -74,7 +74,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * This should normally be called directly by the constructor.
 	 * 
 	 * @param jQuery subject
-	 * @param wikibase.ui.PropertyEditTool.Toolbar toolbar shouldn't be initialized yet
+	 * @param wikibase.ui.Toolbar toolbar shouldn't be initialized yet
 	 */
 	_init: function( subject, toolbar ) {
 		if( this._subject !== null ) {
@@ -82,10 +82,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._pending = this._subject.hasClass( 'wb-pending-value' );		
+		this._pending = this._subject.hasClass( 'wb-pending-value' );
 		
 		this._initInterfaces();
-		
+
 		this._toolbar = toolbar;
 		this._toolbar.appendTo( this._getToolbarParent() );
 		
@@ -127,12 +127,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_configSingleInterface: function( singleInterface ) {
 		var self = this;		
-		singleInterface.onFocus = function(){ self._interfaceHandler_onFocus() };
-		singleInterface.onBlur = function(){ self._interfaceHandler_onBlur() };
+		singleInterface.onFocus = function( event ){self._interfaceHandler_onFocus( event );};
+		singleInterface.onBlur = function( event ){self._interfaceHandler_onBlur( event );};
 		singleInterface.onKeyPressed =
-				function( event ){ self._interfaceHandler_onKeyPressed( event ) };
+			function( event ) {self._interfaceHandler_onKeyPressed( event );};
+		singleInterface.onKeyUp = // ESC key does not react onKeyPressed but on onKeyUp
+			function( event ) {self._interfaceHandler_onKeyPressed( event );};
 		singleInterface.onInputRegistered =
-				function( event ){ self._interfaceHandler_onInputRegistered( event ) };
+				function( event ){self._interfaceHandler_onInputRegistered( event );};
 	},
 	
 	/**
@@ -148,17 +150,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	remove: function() {
 		// TODO API call
 		this.doApiCall( true );
-		//this.destroy(); // no need to destroy this proberly since we remove anything for real!
+		//this.destroy(); // no need to destroy this proberly since we remove anything for real! FIXME: really??
 		this._subject.empty().remove();
+		
+		if( this.onAfterRemove !== null ) {
+			this.onAfterRemove(); // callback
+		}
 	},
 
 	destroy: function() {
 		if( this._toolbar != null) {
 			this._toolbar.destroy();
+			this._toolbar = null;
 		}
-		$.each( this._interfaces, function( index, elem ) {
-			elem.destroy();
-		} );
+		this.stopEditing( false );
 	},
 
 	/**
@@ -173,12 +178,22 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.isInEditMode() ) {
 			return false;
 		}
-        this._isInEditMode = true;
+		this._isInEditMode = true;
 		
 		$.each( this._interfaces, function( index, elem ) {
 			elem.startEditing();
 		} );
-		
+
+		if ( this._toolbar.editGroup.tooltip !== null ) {
+			/*
+			FIXME: tooltip needs to recalculate its horizontal position after input elements have been placed inside
+			the DOM; but show() has already been called on initialization, so the tooltip is marked as visible (which
+			is necessary since the tooltip should be permanently shown on some occasions)
+			 */
+			this._toolbar.editGroup.tooltip.hide();
+			this._toolbar.editGroup.tooltip.show( true );
+		}
+
 		return true;
 	},
 
@@ -192,10 +207,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( ! this.isInEditMode() ) {
 			return false;
 		}
+		if( this.onStopEditing !== null && this.onStopEditing( save ) === false ) { // callback
+			return false; // cancel
+		}
 		if( !save && this.isPending() ) {
 			// not yet existing value, no state to go back to
 			this.remove();
 			return false;
+			// do not call afterStopEditing() here!
 		}
 		
 		var changed = false;
@@ -207,10 +226,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// out of edit mode after interfaces are converted back to HTML:
 		this._isInEditMode = false;
 		
+		var wasPending = this.isPending();
 		if( save ) {
 			this.doApiCall( false );
-			this._pending = false; // might have to move this to API call error/success handling
+			this._pending = false; // TODO: might have to move this to API call error/success handling when implemented
 			this._subject.removeClass( 'wb-pending-value' );
+		}
+		
+		if( this.afterStopEditing !== null && this.afterStopEditing( save, changed, wasPending ) === false ) { // callback
+			return false; // cancel
 		}
 		
 		// any change at all compared to initial value?
@@ -243,8 +267,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var apiCall = this.getApiCallParams( removeValue );
 		
 		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
-			console.log( apiCall );
-			
 			var localApi = new mw.Api();
 			localApi.post( apiCall, {
 				ok: jQuery.proxy( this._apiCallOk, this ),
@@ -264,14 +286,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * handle return of successful API call
 	 */
 	_apiCallOk: function() {
-		console.log( arguments );
+		//console.log( arguments );
 	},
 
 	/**
 	 * handle error of unsuccessful API call
 	 */
 	_apiCallErr: function() {
-		console.log( arguments );
+		//console.log( arguments );
 	},
 
 	/**
@@ -316,9 +338,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( ! $.isArray( value ) ) {
 			value = [ value ];
 		}
-		$.each( value, function( index, val ) {
+		$.each( value, $.proxy( function( index, val ) {
 			this._interfaces[ index ].setValue( val );
-		} );
+		}, this ) );
 	},
 
 	/**
@@ -402,7 +424,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 					return false;
 				}
 			}
-			
 			return true;
 		}
 		
@@ -447,14 +468,40 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_interfaceHandler_onBlur: function( event ) {
 		this._toolbar.editGroup.tooltip.hide();
 	},
-
-	/////////////////
-	// CONFIGURABLE:
-	/////////////////
-
+	
+	///////////
+	// EVENTS:
+	///////////
+	
 	/**
-	 * Allows to define a default value appearing in the input box in case there is no value given
-	 * @var string
+	 * Callback called when the edit process is going to be ended. If the callback returns false, the
+	 * process will be cancelled.
+	 *
+	 * @param bool save whether the result should be saved. If false, the editing will be cancelled
+	 *        without saving.
+	 * @return bool whether to go on with the stop editing.
+	 * 
+	 * @example function( save ) {return true}
 	 */
-	inputPlaceholder: ''
+	onStopEditing: null,
+	
+	/**
+	 * Callback called after the editing process is finished. At this point the element is not in
+	 * edit mode anymore.
+	 * This will not be called in case the element was just created, still pending, and the editing
+	 * process was cancelled.
+	 * 
+	 * @param bool saved whether the result will be saved. If true, the result is sent to the API
+	 *        already and the internal value is changed to the new value.
+	 * @param bool changed whether the value was changed during the editing process.
+	 * @param bool wasPending whether the element was pending before the edit.
+	 * 
+	 * @example function( saved, changed, wasPending ) {return true}
+	 */
+	afterStopEditing: null,
+	
+	/**
+	 * Callback called after the element was removed
+	 */
+	onAfterRemove: null
 };

@@ -12,26 +12,25 @@
 "use strict";
 
 /**
- * Represents a tooltip within a wikibase.ui.PropertyEditTool.Toolbar toolbar
+ * Represents a tooltip within a wikibase.ui.Toolbar toolbar
  *
  * @param String tooltip message
  * @param Object tipsy tooltip configuration vars
  */
-window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip = function( tooltipMessage, tipsyConfig ) {
+window.wikibase.ui.Toolbar.Tooltip = function( tooltipMessage, tipsyConfig ) {
 	this._tipsyConfig = tipsyConfig;
-	window.wikibase.ui.PropertyEditTool.Toolbar.Label.call( this, tooltipMessage );
+	window.wikibase.ui.Toolbar.Label.call( this, tooltipMessage );
 };
-window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype = new window.wikibase.ui.PropertyEditTool.Toolbar.Label();
-$.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
+window.wikibase.ui.Toolbar.Tooltip.prototype = new window.wikibase.ui.Toolbar.Label();
+$.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
 	/**
 	 * @const
 	 * Class which marks the tooltip within the site html.
 	 */
-	UI_CLASS: 'wb-ui-propertyedittoolbar-tooltip',
+	UI_CLASS: 'wb-ui-toolbar-tooltip',
 
 	/**
-	 * tipsy element
-	 * @var Tipsy
+	 * @var Tipsy tipsy tooltip element
 	 */
 	_tipsy: null,
 
@@ -41,10 +40,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	_tipsyConfig: null,
 
 	/**
-	 * @var boolean used to determine if tooltip message is currently visible or not
+	 * @var bool used to determine if tooltip message is currently visible or not
 	 */
 	_isVisible: false,
-	
+
+	/**
+	 * @var bool used to determine if tooltip should react on hovering or not
+	 */
 	_permanent: false,
 	
 	/**
@@ -56,9 +58,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	_initElem: function( tooltipMessage ) {
 		// default tipsy configuration
 		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
-			this._tipsyConfig = {
-				gravity: ( document.documentElement.dir == 'rtl' ) ? 'nw' : 'ne'
-			};
+			this._tipsyConfig = {};
+			this.setGravity( 'ne' );
 		}
 
 		var tooltip = $( '<span/>', {
@@ -73,11 +74,24 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 
 		this._tipsy = tooltip.data( 'tipsy' );
 
-		window.wikibase.ui.PropertyEditTool.Toolbar.Label.prototype._initElem.call( this, tooltip );
-		
+		window.wikibase.ui.Toolbar.Label.prototype._initElem.call( this, tooltip );
+
+		// reposition tooltip when resizing the browser window
+		$( window ).on( 'resize', $.proxy( function() {
+			if ( this._isVisible ) {
+				this.hide(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
+				this.show();
+			}
+		}, this ) );
+
 		this._toggleEvents( true );
 	},
-	
+
+	/**
+	 * toogle tooltip events to achive a permanent state or hover functionality
+	 *
+	 * @param bool activate
+	 */
 	_toggleEvents: function( activate ) {
 		if ( activate ) {
 			this._elem.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
@@ -96,7 +110,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	 */
 	show: function( permanent ) {
 		if ( !this._isVisible ) {
-			$( this._elem.children()[0] ).tipsy( 'show' );
+			this._tipsy.show();
 			this._isVisible = true;
 		}
 		if( permanent === true ) {
@@ -108,14 +122,34 @@ $.extend( window.wikibase.ui.PropertyEditTool.Toolbar.Tooltip.prototype, {
 	/**
 	 * hide tooltip
 	 */
-	hide: function( ) {
+	hide: function() {
 		if ( this._permanent && typeof this._elem.data( 'events' ) == 'undefined' || !this._permanent ) {
 			this._permanent = false;
 			this._toggleEvents( true );
 			if ( this._isVisible ) {
-				$( this._elem.children()[0] ).tipsy( 'hide' );
+				this._tipsy.hide();
 				this._isVisible = false;
 			}
+		}
+	},
+
+	/**
+	 * set where the tooltip message shall appear
+	 *
+	 * @param String gravity
+	 */
+	setGravity: function( gravity ) {
+		// flip horizontal direction in rtl language
+		if ( document.documentElement.dir == 'rtl' ) {
+			if ( gravity.search( /e/ ) != -1) {
+				gravity = gravity.replace( /e/g, 'w' );
+			} else {
+				gravity = gravity.replace( /w/g, 'e' );
+			}
+		}
+		this._tipsyConfig.gravity = gravity;
+		if ( this._tipsy != null ) {
+			this._tipsy.options.gravity = gravity;
 		}
 	},
 

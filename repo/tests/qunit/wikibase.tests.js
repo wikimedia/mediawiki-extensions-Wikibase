@@ -1,31 +1,46 @@
+/**
+ * QUnit tests for input interface component of property edit tool
+ * @see https://www.mediawiki.org/wiki/Extension:Wikibase
+ *
+ * @since 0.1
+ * @file wikibase.ui.PropertyEditTool.EditableValue.tests.js
+ * @ingroup Wikibase
+ *
+ * @licence GNU GPL v2+
+ * @author H. Snater
+ */
+'use strict';
+
 
 ( function () {
+	module( 'wikibase', QUnit.newMwEnvironment() );
 
-	module( 'ext.wikibase', QUnit.newMwEnvironment() );
+	test( 'basic', function() {
 
-	test( '-- NaNNaN!', function() {
-		expect(1);
-
-		function theAnswerToLifeTheUniverseAndEverything() {
-			return 23;
-		}
-
-		var matches = theAnswerToLifeTheUniverseAndEverything() === 42;
+		expect( 4 );
 
 		ok(
-			matches,
-			'woho!'
+			window.wikibase instanceof Object,
+			'initiated wikibase object'
 		);
-	} );
 
-	test( '-- NaNNaN!', function() {
-		expect(1);
+		ok(
+			window.wikibase.getSites() instanceof Object,
+			'gettings sites resturns object'
+		);
 
 		equal(
-			Array(10).join( 'ohai' - 42 ) + ' batman!',
-			'NaNNaNNaNNaNNaNNaNNaNNaNNaN batman!',
-			'O_o'
+			window.wikibase.getSite( 'xy' ),
+			null,
+			'trying to get invalid site returns null'
 		);
+
+		equal(
+			window.wikibase.hasSite( 'xy' ),
+			false,
+			'trying to check for invalid site returns false'
+		);
+
 	} );
 
-}());
+}() );

@@ -15,7 +15,7 @@ class TooltipUITest extends SeleniumTestCase {
 	protected $targetItemId;
 
 	public function setUp() {
-		$this->driver = WebDriver_Driver::InitAtLocal( "4444", "firefox" );
+		$this->driver = WebDriver_Driver::InitAtLocal( "4444", SELENIUM_BROWSER );
 		$this->targetItemId = $this->createNewWikidataItem( "Test Item" );
 		$this->setItemDescription( $this->targetItemId, "Some description for testing." );
 		$this->assertTrue( is_numeric( $this->targetItemId ) );
@@ -30,36 +30,12 @@ class TooltipUITest extends SeleniumTestCase {
 		$this->load( $this->targetUrl );
 		
 		// defining selectors for elements being tested
-		$editLabelTooltip= "css=h1#firstHeading > 
-							div.wb-ui-propertyedittoolbar >
-							div.wb-ui-propertyedittoolbar-group > 
-							span.wb-ui-propertyedittoolbar-tooltip >
-							span.mw-help-field-hint";
-		$editLabelLink = "css=h1#firstHeading > 
-						div.wb-ui-propertyedittoolbar >
-						div.wb-ui-propertyedittoolbar-group > 
-						div.wb-ui-propertyedittoolbar-group >
-						a.wb-ui-propertyedittoolbar-button:nth-child(1)";
-		$cancelEditLabelLink = "css=h1#firstHeading >
-							div.wb-ui-propertyedittoolbar >
-							div.wb-ui-propertyedittoolbar-group >
-							div.wb-ui-propertyedittoolbar-group >
-							a.wb-ui-propertyedittoolbar-button:nth-child(2)";
-		$editDescriptionTooltip= "css=div.wb-ui-propertyedittool-subject > 
-							div.wb-ui-propertyedittoolbar >
-							div.wb-ui-propertyedittoolbar-group > 
-							span.wb-ui-propertyedittoolbar-tooltip >
-							span.mw-help-field-hint";
-		$editDescriptionLink = "css=div.wb-ui-propertyedittool-subject > 
-							div.wb-ui-propertyedittoolbar >
-							div.wb-ui-propertyedittoolbar-group > 
-							div.wb-ui-propertyedittoolbar-group >
-							a.wb-ui-propertyedittoolbar-button:nth-child(1)";
-		$cancelEditDescriptionLink = "css=div.wb-ui-propertyedittool-subject > 
-								div.wb-ui-propertyedittoolbar >
-								div.wb-ui-propertyedittoolbar-group > 
-								div.wb-ui-propertyedittoolbar-group >
-								a.wb-ui-propertyedittoolbar-button:nth-child(2)";
+		$editLabelTooltip= "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > span.wb-ui-propertyedittoolbar-tooltip > span.mw-help-field-hint";
+		$editLabelLink = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$cancelEditLabelLink = "css=h1#firstHeading > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(2)";
+		$editDescriptionTooltip= "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > span.wb-ui-propertyedittoolbar-tooltip > span.mw-help-field-hint";
+		$editDescriptionLink = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar > div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(1)";
+		$cancelEditDescriptionLink = "css=div.wb-ui-propertyedittool-subject > div.wb-ui-propertyedittoolbar >div.wb-ui-propertyedittoolbar-group > div.wb-ui-propertyedittoolbar-group > a.wb-ui-propertyedittoolbar-button:nth-child(2)";
 		
 		// doing the test stuff
 		$this->assertFalse( $this->is_element_present( $editLabelTooltip ) );
