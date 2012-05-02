@@ -122,7 +122,7 @@ window.wikibase.ui.Toolbar.prototype = {
 	 * This will add a toolbar element, e.g. a label or a button to the toolbar at the given index.
 	 * 
 	 * @param Object elem toolbar content element (e.g. a group, button or label).
-	 * @param index where to add the element.
+	 * @param index where to add the element (use negative values to specify the position from the end).
 	 */
 	addElement: function( elem, index ) {
 		if( typeof index == 'undefined' ) {
@@ -175,9 +175,11 @@ window.wikibase.ui.Toolbar.prototype = {
 			for( var i in this._items ) {
 				this._items[i].destroy();
 			}
+			this._items = null;
 		}
 		if( this._elem !== null ) {
 			this._elem.remove();
+			this._elem = null;
 		}
 	},
 	

@@ -15,6 +15,6 @@
 $namespaceNames = array();
 
 $namespaceNames['en'] = array(
-	WB_NS_DATA     	  	=> 'Data',
-	WB_NS_DATA  		=> 'Data_talk',
+	WB_NS_DATA      => 'Data',
+	WB_NS_DATA_TALK => 'Data_talk',
 );

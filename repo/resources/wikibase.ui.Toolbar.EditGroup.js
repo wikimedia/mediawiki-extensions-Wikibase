@@ -154,21 +154,27 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		window.wikibase.ui.Toolbar.Group.prototype.destroy.call( this );
 		if ( this.innerGroup != null ) {
 			this.innerGroup.destroy();
+			this.innerGroup = null;
 		}
 		if ( this.tooltip != null ) {
 			this.tooltip.destroy();
+			this.tooltip = null;
 		}
 		if ( this.btnEdit != null ) {
 			this.btnEdit.destroy();
+			this.btnEdit = null;
 		}
 		if ( this.btnCancel != null ) {
 			this.btnCancel.destroy();
+			this.btnCancel = null;
 		}
 		if ( this.btnSave != null ) {
 			this.btnSave.destroy();
+			this.btnSave = null;
 		}
 		if ( this.btnRemove != null ) {
 			this.btnRemove.destroy();
+			this.btnRemove = null;
 		}
 	},
 
