@@ -21,12 +21,13 @@ final class WBCHooks {
 	 *
 	 * @param array $files
 	 *
-	 * @return true
+	 * @return bool
 	 */
 	public static function registerUnitTests( array &$files ) {
-		$testDir = dirname( __FILE__ ) . '/test/';
+		$testDir = dirname( __FILE__ ) . '/tests';
 
-		//$files[] = $testDir . '.php';
+		$files[] = $testDir . '/phpunit/General.php';
+		$files[] = $testDir . '/phpunit/Sorting.php';
 
 		return true;
 	}

@@ -27,7 +27,7 @@ class WBCLangLinkHandler {
 		// If we don't support the namespace, we maybe sort the links, but don't do anything else.
 		$title = $parser->getTitle();
 		if( !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
-			self::maybeSortLinks( $parser->getOutput()->mLanguageLinks );
+			self::maybeSortLinks( $parser->getOutput()->getLanguageLinks() );
 			return true;
 		}
 
@@ -35,7 +35,7 @@ class WBCLangLinkHandler {
 		$out = $parser->getOutput();
 		$nei = self::getNoExternalInterlang( $out );
 		if( array_key_exists( '*', $nei ) ) {
-			self::maybeSortLinks( $out->mLanguageLinks );
+			self::maybeSortLinks( $out->getLanguageLinks() );
 			return true;
 		}
 
@@ -65,12 +65,16 @@ class WBCLangLinkHandler {
 		$links = array_diff_key( $links, $nei );
 
 		// Pack the links properly into mLanguageLinks.
+		$old_links = $out->getLanguageLinks();
 		foreach( $links as $lang => $link ) {
-			$out->addLanguageLink( $lang . ':' . $link );
+			$new_link = $lang . ':' . $link;
+			if( !in_array( $new_link, $old_links ) ) {
+				$out->addLanguageLink( $new_link );
+			}
 		}
 
 		// Sort the links, always.
-		self::sortLinks( $out->mLanguageLinks );
+		self::sortLinks( $out->getLanguageLinks() );
 
 		return true;
 	}
@@ -107,6 +111,8 @@ class WBCLangLinkHandler {
 		$source = WBCSettings::get( 'source' );
 		if( isset( $source['api'] ) ) {
 			return self::getLinksFromApi( $title_text, $source['api'] );
+		} elseif( isset( $source['var'] ) ) {
+			return self::getLinksFromVar( $title_text, $source['var'] );
 		} elseif( isset( $source['dir'] ) ) {
 			return self::getLinksFromFile( $title_text, $source['dir'] );
 		} else {
@@ -142,6 +148,14 @@ class WBCLangLinkHandler {
 		*/
 
 		return $links;
+	}
+
+	/**
+	 * Get the list of links for a title from a variable. This would generally be used for testing.
+	 * @return Array of links, empty array for no links, false for failure.
+	 */
+	protected static function getLinksFromVar( $title_text, $var ) {
+		return isset( $var[$title_text] )? $var[$title_text]: false;
 	}
 
 	/**
@@ -301,6 +315,7 @@ class WBCLangLinkHandler {
 				break;
 			case 'none':
 			default:
+				self::$sort_order = false;
 				return false;
 		}
 
@@ -311,6 +326,13 @@ class WBCLangLinkHandler {
 		self::$sort_order = array_flip( self::$sort_order );
 
 		return true;
+	}
+
+	/**
+	 * Clears the local cache.
+	 */
+	public static function clearCache() {
+		self::$cache = array();
 	}
 
 }
