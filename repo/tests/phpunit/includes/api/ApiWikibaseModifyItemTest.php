@@ -28,12 +28,17 @@
 abstract class ApiWikibaseModifyItemTest extends ApiTestCase {
 
 	/**
+	 * @var WikibaseItem
+	 */
+	protected $item;
+
+	/**
 	 * This is to set up the environment.
 	 */
 	public function setUp() {
 		parent::setUp();
 
-
+		// TODO: set item
 	}
 
 	/**

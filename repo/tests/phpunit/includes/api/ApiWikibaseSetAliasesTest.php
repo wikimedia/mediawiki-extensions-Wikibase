@@ -36,28 +36,13 @@
  */
 class ApiWikibaseSetAliasesTest extends ApiWikibaseModifyItemTest {
 
-	/**
-	 * This is to set up the environment.
-	 */
-	public function setUp() {
-		parent::setUp();
-	}
-
-	/**
-	 * This is to tear down the environment.
-	 */
-	public function tearDown() {
-		parent::tearDown();
-	}
-
 	public function testSetAliases() {
-		$first = $this->doApiRequest( array(
-			'action' => 'wblinksite',
-			'id' => $id,
-			'linksite' => $linksite,
-			'linktitle' => $linktitle,
-			'link' => $op, // this is an odd name
+		$apiResponse = $this->doApiRequest( array(
+			'action' => 'wbsetaliases',
+			// TODO
 		) );
+
+		// TODO
 	}
 
 }
