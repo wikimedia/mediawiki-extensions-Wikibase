@@ -13,6 +13,8 @@
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.
+ *
+ * @since 0.1
  */
 window.wikibase.ui.PropertyEditTool = function( subject ) {
 	if( typeof subject != 'undefined' ) {
@@ -295,23 +297,27 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Allows to enter a new value, the input interface will be available but the process can still
 	 * be cancelled.
-	 * 
+	 *
+	 * @param value Object optional, initial value
 	 * @return newValue wikibase.ui.PropertyEditTool.EditableValue
 	 */
-	enterNewValue: function() {
+	enterNewValue: function( value ) {
 		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
 		newValueElem.addClass( 'wb-pending-value' );
 		
 		this._subject.append( newValueElem );
-		var newValue = this._initSingleValue( newValueElem );		
-				
+		var newValue = this._initSingleValue( newValueElem );
+
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
 		var self = this;
 		newValue.afterStopEditing = function( save, changed, wasPending ) {
 			self._newValueHandler_afterStopEditing( newValue, save, changed, wasPending );
 			newValue.onStopEditing = null; // make sure handler is only called once!
-		};		
+		};
+		if( value ) {
+			newValue.setValue( value );
+		}
 		
 		this._onRefreshView( this.getIndexOf( newValue ) );
 		newValue.setFocus();

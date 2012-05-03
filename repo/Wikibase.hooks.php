@@ -98,6 +98,7 @@ final class WikibaseHooks {
 				'tests/qunit/wikibase.Site.tests.js',
 				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
 				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
+				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',

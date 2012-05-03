@@ -55,7 +55,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 		this.url = site.getApi();
 		this._site = site;
 				
-		this._currentResults = []; // empty current suggestions...		
+		this._currentResults = []; // empty current suggestions...
 		if( this.isInEditMode() ) {
 			this._inputElem.autocomplete( "search" ); // ...and get new suggestions
 			
@@ -63,7 +63,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 			if( ! this.isValid() ) {
 				this.setValue( '' );
 			}
-			*/		   
+			*/
 		}
 	},
 	
@@ -73,33 +73,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 	 * @return wikibase.Site
 	 */
 	getSite: function() {
-		return this._site;		
+		return this._site;
 	},
 
-	/**
-	 * validate input
-	 * 
-	 * @param String value
-	 */
-	validate: function( value ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
-		for ( var i in this._currentResults ) {
-			if ( value === this._currentResults[i] ) {
-				return true;
-			}
-		}
-	},
-	
-	setValue: function( value ) {
-		if( this.isInEditMode() ) {
-			this._inputElem.attr( 'value', value );
-		} else {
-			this._getValueContainer()
-			.empty()
-			.append( // insert link to site in site
-				this._site.getLinkTo( value )
-			);
-		}
+	_setValue_inNonEditMode: function( value ) {
+		this._getValueContainer()
+		.empty()
+		.append( // insert link to site in site
+			this._site.getLinkTo( value )
+		);
 	}
-
 } );

@@ -141,7 +141,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	startEditing: function() {
 		// set ignored site links again since they could have changed
 		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
+		return window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
 	},
 	
 	stopEditing: function( save ) {
