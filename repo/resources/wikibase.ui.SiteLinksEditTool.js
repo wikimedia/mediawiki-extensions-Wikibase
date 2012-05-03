@@ -53,7 +53,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 
 	_buildSingleValueToolbar: function( editableValue ) {
 		var toolbar = window.wikibase.ui.PropertyEditTool.prototype._buildSingleValueToolbar.call( this, editableValue );
-		toolbar.editGroup.tooltip.setGravity( 'nw' );
+		toolbar.editGroup.tooltip.setGravity( 'se' );
 		return toolbar;
 	},
 
