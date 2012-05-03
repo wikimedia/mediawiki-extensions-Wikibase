@@ -27,8 +27,8 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 		$params = $this->extractRequestParams();
 
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$msg = 'id-xor-wikititle ' . $params['site'] . ' ' . $params['title '];
-			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), $msg);
+			//$msg = 'id-xor-wikititle ' . $params['site'] . ' ' . $params['title '];
+			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
 		$success = false;
@@ -102,9 +102,9 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
-			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
-			array( 'code' => 'no-such-item', 'info' => 'Could not find an existing item' ),
+			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
+			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
+			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
 		) );
 	}
 
