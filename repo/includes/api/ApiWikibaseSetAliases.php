@@ -1,19 +1,19 @@
 <?php
 
 /**
- * API module to set an alias with a label for a Wikibase item or remove an already made such association.
+ * API module to set the aliases for a Wikibase item.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
  *
- * @file ApiWikibaseAlias.php
+ * @file ApiWikibaseAliases.php
  * @ingroup Wikibase
  * @ingroup API
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
+class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 
 	/**
 	 * Make sure the required parameters are provided and that they are valid.

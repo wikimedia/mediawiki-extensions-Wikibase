@@ -53,45 +53,45 @@ $dir = dirname( __FILE__ ) . '/';
 
 
 // i18n
-$wgExtensionMessagesFiles['Wikibase'] 				= $dir . 'Wikibase.i18n.php';
-$wgExtensionMessagesFiles['WikibaseAlias'] 			= $dir . 'Wikibase.i18n.alias.php';
-$wgExtensionMessagesFiles['WikibaseNS'] 			= $dir . 'Wikibase.i18n.namespaces.php';
+$wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
+$wgExtensionMessagesFiles['WikibaseAlias'] 	= $dir . 'Wikibase.i18n.alias.php';
+$wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php';
 
 
 
 // Autoloading
-$wgAutoloadClasses['WBSettings'] 					= $dir . 'Wikibase.settings.php';
-$wgAutoloadClasses['WikibaseHooks'] 				= $dir . 'Wikibase.hooks.php';
+$wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
+$wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['WikibaseContentHandler'] 		= $dir . 'includes/WikibaseContentHandler.php';
-$wgAutoloadClasses['WikibaseDifferenceEngine'] 		= $dir . 'includes/WikibaseDifferenceEngine.php';
-$wgAutoloadClasses['WikibaseUtils'] 				= $dir . 'includes/WikibaseUtils.php';
-$wgAutoloadClasses['WikibaseItem'] 					= $dir . 'includes/WikibaseItem.php';
-$wgAutoloadClasses['WikibaseEntity'] 				= $dir . 'includes/WikibaseEntity.php';
-$wgAutoloadClasses['WikibaseItemStructuredSave'] 	= $dir . 'includes/WikibaseItemStructuredSave.php';
-$wgAutoloadClasses['WikibaseItemView'] 				= $dir . 'includes/WikibaseItemView.php';
+$wgAutoloadClasses['WikibaseContentHandler'] 			= $dir . 'includes/WikibaseContentHandler.php';
+$wgAutoloadClasses['WikibaseDifferenceEngine'] 			= $dir . 'includes/WikibaseDifferenceEngine.php';
+$wgAutoloadClasses['WikibaseUtils'] 					= $dir . 'includes/WikibaseUtils.php';
+$wgAutoloadClasses['WikibaseItem'] 						= $dir . 'includes/WikibaseItem.php';
+$wgAutoloadClasses['WikibaseEntity'] 					= $dir . 'includes/WikibaseEntity.php';
+$wgAutoloadClasses['WikibaseItemStructuredSave'] 		= $dir . 'includes/WikibaseItemStructuredSave.php';
+$wgAutoloadClasses['WikibaseItemView'] 					= $dir . 'includes/WikibaseItemView.php';
 
 // includes/actions
-$wgAutoloadClasses['WikibaseViewItemAction'] 		= $dir . 'includes/actions/WikibaseViewItemAction.php';
-$wgAutoloadClasses['WikibaseEditItemAction'] 		= $dir . 'includes/actions/WikibaseEditItemAction.php';
+$wgAutoloadClasses['WikibaseViewItemAction'] 			= $dir . 'includes/actions/WikibaseViewItemAction.php';
+$wgAutoloadClasses['WikibaseEditItemAction'] 			= $dir . 'includes/actions/WikibaseEditItemAction.php';
 
 // includes/api
-$wgAutoloadClasses['ApiWikibaseGetItems'] 			= $dir . 'includes/api/ApiWikibaseGetItems.php';
-$wgAutoloadClasses['ApiWikibaseGetItemId'] 			= $dir . 'includes/api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 		= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
-$wgAutoloadClasses['ApiWikibaseSetLanguageAttribute'] = $dir . 'includes/api/ApiWikibaseSetLanguageAttribute.php';
-$wgAutoloadClasses['ApiWikibaseDeleteLanguageAttribute'] = $dir . 'includes/api/ApiWikibaseDeleteLanguageAttribute.php';
-$wgAutoloadClasses['ApiWikibaseModifyItem'] 		= $dir . 'includes/api/ApiWikibaseModifyItem.php';
-$wgAutoloadClasses['ApiWikibaseLinkSite'] 			= $dir . 'includes/api/ApiWikibaseLinkSite.php';
-$wgAutoloadClasses['ApiWikibaseSetAlias'] 			= $dir . 'includes/api/ApiWikibaseSetAlias.php';
-$wgAutoloadClasses['ApiWikibaseSetItem'] 			= $dir . 'includes/api/ApiWikibaseSetItem.php';
+$wgAutoloadClasses['ApiWikibaseGetItems'] 				= $dir . 'includes/api/ApiWikibaseGetItems.php';
+$wgAutoloadClasses['ApiWikibaseGetItemId'] 				= $dir . 'includes/api/ApiWikibaseGetItemId.php';
+$wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 			= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
+$wgAutoloadClasses['ApiWikibaseSetLanguageAttribute'] 	= $dir . 'includes/api/ApiWikibaseSetLanguageAttribute.php';
+$wgAutoloadClasses['ApiWikibaseDeleteLanguageAttribute']= $dir . 'includes/api/ApiWikibaseDeleteLanguageAttribute.php';
+$wgAutoloadClasses['ApiWikibaseModifyItem'] 			= $dir . 'includes/api/ApiWikibaseModifyItem.php';
+$wgAutoloadClasses['ApiWikibaseLinkSite'] 				= $dir . 'includes/api/ApiWikibaseLinkSite.php';
+$wgAutoloadClasses['ApiWikibaseSetAliases'] 			= $dir . 'includes/api/ApiWikibaseSetAliases.php';
+$wgAutoloadClasses['ApiWikibaseSetItem'] 				= $dir . 'includes/api/ApiWikibaseSetItem.php';
 
 // includes/specials
-$wgAutoloadClasses['SpecialCreateItem'] 			= $dir . 'includes/specials/SpecialCreateItem.php';
-$wgAutoloadClasses['SpecialItemByTitle'] 			= $dir . 'includes/specials/SpecialItemByTitle.php';
-$wgAutoloadClasses['SpecialItemResolver'] 			= $dir . 'includes/specials/SpecialItemResolver.php';
-$wgAutoloadClasses['SpecialItemByLabel'] 			= $dir . 'includes/specials/SpecialItemByLabel.php';
+$wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
+$wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
+$wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
+$wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/SpecialItemByLabel.php';
 
 
 
