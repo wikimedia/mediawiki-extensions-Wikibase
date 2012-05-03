@@ -176,6 +176,26 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * Load the item data from the database, overriding the data currently set.
+	 *
+	 * @since 0.1
+	 *
+	 * @throws MWException
+	 */
+	public function reload() {
+		if ( !$this->isNew() ) {
+			$item = self::getFromId( $this->getId() );
+
+			if ( is_null( $item ) ) {
+				throw new MWException( 'Attempt to reload item failed because it could not be obtained from the db.' );
+			}
+			else {
+				$this->data = $item->toArray();
+			}
+		}
+	}
+
+	/**
 	 * Removes the item.
 	 *
 	 * @since 0.1
@@ -676,7 +696,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return int
 	 */
 	public function getSize()  {
-		return strlen( serialize( $this->toArray() ) ); #TODO: keep and reuse value, content object is immutable!
+		return strlen( serialize( $this->getNativeData() ) ); #TODO: keep and reuse value, content object is immutable!
 	}
 
 	/**
