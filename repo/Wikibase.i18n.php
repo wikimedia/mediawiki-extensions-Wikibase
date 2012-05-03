@@ -41,6 +41,9 @@ $messages['en'] = array(
 	// Special pages
 	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
+
+	// API errors
+	'wikibase-api-aliases-invalid-list' => 'You need to either provide the set parameter xor the add or remove parameters',
 );
 
 /** Message documentation (Message documentation) */

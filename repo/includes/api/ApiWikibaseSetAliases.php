@@ -27,7 +27,7 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
 
-		if ( ( isset( $params['add'] ) || isset( $params['remove'] ) ) XOR isset( $params['set'] ) ) {
+		if ( !( ( isset( $params['add'] ) || isset( $params['remove'] ) ) XOR isset( $params['set'] ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-aliases-invalid-list' ), 'aliases-invalid-list' );
 		}
 	}
@@ -44,15 +44,15 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
 		if ( isset( $params['set'] ) ) {
-			$item->setAliases( $params['set'] );
+			$item->setAliases( $params['language'], $params['set'] );
 		}
 
 		if ( isset( $params['remove'] ) ) {
-			$item->removeAliases( $params['remove'] );
+			$item->removeAliases( $params['language'], $params['remove'] );
 		}
 
 		if ( isset( $params['add'] ) ) {
-			$item->addAliases( $params['add'] );
+			$item->addAliases( $params['language'], $params['add'] );
 		}
 
 		return true;
@@ -60,10 +60,7 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'alias-incomplete', 'info' => 'Can not find a definition of the alias for the item' ),
-			array( 'code' => 'alias-not-found', 'info' => 'Can not find any previous alias in the item' ),
-			array( 'code' => 'alias-found', 'info' => 'Found a previous alias in the item' ),
-			array( 'code' => 'not-recognized', 'info' => 'Directive is not recognized' ),
+			array( 'code' => 'aliases-invalid-list', 'info' => 'You need to either provide the set parameter xor the add or remove parameters' ),
 		) );
 	}
 
@@ -105,6 +102,14 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 
 	protected function getExamples() {
 		return array(
+			'api.php?action=wbsetaliases&language=en&id=1&set=Foo|Bar'
+				=> 'Set the English labels for the item with id 1 to Foo and Bar',
+
+			'api.php?action=wbsetaliases&language=en&id=1&add=Foo|Bar'
+				=> 'Add Foo and Bar to the list of English labels for the item with id 1',
+
+			'api.php?action=wbsetaliases&language=en&id=1&set=Foo|Bar'
+				=> 'Remove Foo and Bar from the list of English labels for the item with id 1',
 		);
 	}
 

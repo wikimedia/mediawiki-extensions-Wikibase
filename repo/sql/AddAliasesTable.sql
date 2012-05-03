@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_aliases (
   alias_text                 VARCHAR(255)        NOT NULL -- The alias text
 ) /*$wgDBTableOptions*/;
 
+CREATE UNIQUE INDEX /*i*/wb_aliases ON /*_*/wb_aliases (alias_item_id, alias_language, alias_text);
 CREATE INDEX /*i*/wb_alias_item_id ON /*_*/wb_aliases (alias_item_id);
 CREATE INDEX /*i*/wb_alias_language ON /*_*/wb_aliases (alias_language);
 CREATE INDEX /*i*/wb_alias_text ON /*_*/wb_aliases (alias_text);

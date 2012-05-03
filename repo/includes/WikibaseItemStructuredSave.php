@@ -169,7 +169,7 @@ class WikibaseItemStructuredSave extends SecondaryDataUpdate {
 		foreach ( $this->item->getAllAliases() as $languageCode => $aliases ) {
 			foreach ( $aliases as $alias ) {
 				$success = $dbw->insert(
-					'wb_items_per_site',
+					'wb_aliases',
 					array_merge(
 						$idField,
 						array(
