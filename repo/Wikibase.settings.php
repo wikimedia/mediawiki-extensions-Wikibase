@@ -90,11 +90,14 @@ class WBSettings {
 	 * @throws MWException
 	 * @return mixed
 	 */
-	public function getSetting( $settingName ) {
+	public function getSetting( $settingName, $default=null ) {
 		$this->buildSettings();
 
 		if ( !array_key_exists( $settingName, $this->settings ) ) {
-			throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
+			if ($default === null) {
+				throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
+			}
+			return $default;
 		}
 
 		return $this->settings[$settingName];
@@ -110,8 +113,8 @@ class WBSettings {
 	 *
 	 * @return mixed
 	 */
-	public static function get( $settingName ) {
-		return self::singleton()->getSetting( $settingName );
+	public static function get( $settingName, $default=null ) {
+		return self::singleton()->getSetting( $settingName, $default );
 	}
 
 	/**
