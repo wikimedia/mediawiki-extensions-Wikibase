@@ -50,6 +50,24 @@ $wgExtensionCredits['other'][] = array(
 
 $dir = dirname( __FILE__ ) . '/';
 
+// rights
+// names should be according to other naming scheme
+$wgGroupPermissions['wbeditor']['item-add']			= true;
+$wgGroupPermissions['wbeditor']['item-update']		= true;
+$wgGroupPermissions['wbeditor']['item-set']			= true;
+$wgGroupPermissions['wbeditor']['item-delete']		= true; // could be called remove
+$wgGroupPermissions['wbeditor']['alias-add']		= true;
+$wgGroupPermissions['wbeditor']['alias-update']		= true;
+$wgGroupPermissions['wbeditor']['alias-set']		= true;
+$wgGroupPermissions['wbeditor']['alias-delete']		= true; // could be called remove
+$wgGroupPermissions['wbeditor']['site-link-add']	= true;
+$wgGroupPermissions['wbeditor']['site-link-update']	= true;
+$wgGroupPermissions['wbeditor']['site-link-set']	= true;
+$wgGroupPermissions['wbeditor']['site-link-delete']	= true; // could be called remove
+$wgGroupPermissions['wbeditor']['lang-attr-add']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-update']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-set']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-delete']	= true; // could be called remove
 
 
 // i18n
@@ -213,3 +231,8 @@ $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE;
 
 
 $egWBSettings = array();
+// default settings
+$egWBSettings['apiDebugWithRights'] = true;
+$egWBSettings['apiDebugWithTokens'] = true;
+$egWBSettings['apiDebugWithPost'] = false;
+$egWBSettings['apiDebugWithWrite'] = true;
