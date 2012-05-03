@@ -95,6 +95,11 @@ $wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/Special
 
 
 
+// tests
+$wgAutoloadClasses['ApiWikibaseModifyItemTest'] 		= $dir . 'tests/phpunit/includes/api/ApiWikibaseModifyItemTest.php';
+
+
+
 // API module registration
 $wgAPIModules['wbgetitems'] 						= 'ApiWikibaseGetItems';
 $wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
