@@ -58,13 +58,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 	/**
 	 * when adding characters to the input value, the previous value is stored to be able to check whether instant
-	 * on change operations have to be performed
+	 * on change operations have to be performed.
 	 * @var String
 	 */
 	_previousValue: null,
 
 	_currentWidth: null,
-
 
 	/**
 	 * Initializes the editable value.
@@ -167,10 +166,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 	/**
 	 * Called when the input changes in general for example on its initialization when setting
-	 * its initial value.
+	 * its initial value or on setValue() while in edit mode.
 	 */
 	_onInputRegistered: function() {
-		this._previousValue = this._inputElem.val();
+		//this._previousValue = this._inputElem.val();
 		if( this.onInputRegistered !== null && this.onInputRegistered() === false ) { // callback
 			return false; // cancel
 		}
@@ -226,15 +225,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
-		this._previousValue = this._inputElem.val();
+		this._previousValue = this.getValue() // remember current value before key changes text
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
 	_onKeyUp: function( event ) {
-		if ( this._inputElem.val() != this._previousValue ) {
-			this._onInputRegistered();
+		if ( this._previousValue !== this.getValue() ) {
+			this._onInputRegistered(); // only called if input really changed
 		}
 		this._expand();
 		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
@@ -326,7 +325,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	getValue: function() {
 		var value = '';
 		if( this.isInEditMode() ) {
-			value = $( this._getValueContainer().children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
+			value = this._inputElem.val();
 			value = this.normalize( value );
 		} else {
 			value = this._getValueContainer().text();
@@ -339,19 +338,44 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Sets a value.
 	 * Returns the value really set in the end. This string can be different from the given value
 	 * since it will go through some normalization first.
-	 * 
-	 * @return string
+	 *
+	 * @param string value
+	 * @return string same as value but normalized
 	 */
 	setValue: function( value ) {
 		// make sure the value is sufficient
 		value = this.normalize( value );
+		var oldVal = this.getValue();
+
+		if( value === oldVal ) {
+			// nothing changed
+			return value;
+		}
 		
 		if( this.isInEditMode() ) {
-			this._inputElem.attr( 'value', value );
+			this._setValue_inEditMode( value );
 		} else {
-			this._getValueContainer().text( value );
+			this._setValue_inNonEditMode( value );
 		}
+
+		this._onInputRegistered(); // new input
 		return value;
+	},
+
+	/**
+	 * Called by setValue() if the value has to be injected into the input interface in edit mode.
+	 */
+	_setValue_inEditMode: function( value ) {
+		this._inputElem.attr( 'value', value );
+	},
+
+	/**
+	 * Called by setValue() if the value has to be injected into the static DOM nodes, not into input elements.
+	 * @param value
+	 * @private
+	 */
+	_setValue_inNonEditMode: function( value ) {
+		this._getValueContainer().text( value );
 	},
 	
 	/**
