@@ -30,6 +30,11 @@ final class WikibaseHooks {
 			dirname( __FILE__ ) . '/sql/Wikibase.sql'
 		);
 
+		$updater->addExtensionTable(
+			'wb_aliases',
+			dirname( __FILE__ ) . '/sql/AddAliasTable.sql'
+		);
+
 		return true;
 	}
 

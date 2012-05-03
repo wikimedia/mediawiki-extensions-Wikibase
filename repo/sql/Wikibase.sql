@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_items (
 
 
 
--- Secondary storage.
+-- Derived storage.
 -- Links site+title pairs to item ids.
 CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (
   ips_item_id                INT unsigned        NOT NULL, -- Id of the item
@@ -27,7 +27,7 @@ CREATE INDEX /*i*/ips_item_id ON /*_*/wb_items_per_site (ips_item_id);
 
 
 
--- Secondary storage.
+-- Derived storage.
 -- Holds internationalized texts (such as label and description)
 CREATE TABLE IF NOT EXISTS /*_*/wb_texts_per_lang (
   tpl_item_id                INT unsigned        NOT NULL, -- Id of the item
@@ -39,3 +39,13 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_texts_per_lang (
 CREATE UNIQUE INDEX /*i*/tpl_item_id_lang ON /*_*/wb_texts_per_lang (tpl_item_id, tpl_language);
 CREATE INDEX /*i*/tpl_language ON /*_*/wb_texts_per_lang (tpl_language);
 CREATE INDEX /*i*/tpl_label ON /*_*/wb_texts_per_lang (tpl_label); -- TODO: might not be needed
+
+
+
+-- Derived storage.
+-- Holds the aliases for the items.
+CREATE TABLE IF NOT EXISTS /*_*/wb_aliases (
+  alias_item_id              INT unsigned        NOT NULL, -- Id of the item
+  alias_language             VARBINARY(32)       NOT NULL, -- Language code
+  alias_text                 VARCHAR(255)        NOT NULL -- The alias text
+) /*$wgDBTableOptions*/;
