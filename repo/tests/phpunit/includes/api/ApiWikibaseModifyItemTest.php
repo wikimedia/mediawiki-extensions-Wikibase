@@ -30,7 +30,7 @@ abstract class ApiWikibaseModifyItemTest extends ApiTestCase {
 	/**
 	 * @var WikibaseItem
 	 */
-	protected $item;
+	protected static $item = false;
 
 	/**
 	 * This is to set up the environment.
@@ -38,15 +38,17 @@ abstract class ApiWikibaseModifyItemTest extends ApiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->item = WikibaseItem::newEmpty();
-		$this->item->save();
+		if ( self::$item === false ) {
+			self::$item = WikibaseItem::newEmpty();
+			self::$item->save();
+		}
 	}
 
 	/**
 	 * This is to tear down the environment.
 	 */
 	public function tearDown() {
-		$this->item->remove();
+		//self::$item->remove();
 
 		parent::tearDown();
 	}
