@@ -82,7 +82,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	destroy: function() {
-		if( this._isInEditMode ) {
+		if( this.isInEditMode() ) {
 			this.stopEditing( false );
 		}
 	},

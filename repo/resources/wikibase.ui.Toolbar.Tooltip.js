@@ -159,7 +159,10 @@ $.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
 				this.hide();
 			}
 			this._elem.remove();
+			this._elem = null;
 		}
+		this._tipsyConfig = null;
+		this.tipsy = null;
 	}
 
 } );
