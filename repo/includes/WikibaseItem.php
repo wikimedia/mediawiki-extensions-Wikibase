@@ -316,6 +316,18 @@ class WikibaseItem extends WikibaseEntity {
  	}
 
 	/**
+	 * Returns all the aliases for the item.
+	 * The result is an array with language codes pointing to an array of aliases in the language they specify.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getAllAliases() {
+		return $this->data['aliases'];
+	}
+
+	/**
 	 * Sets the aliases for the item in the language with the specified code.
 	 *
 	 * @since 0.1

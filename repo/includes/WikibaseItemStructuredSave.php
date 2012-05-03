@@ -57,6 +57,7 @@ class WikibaseItemStructuredSave extends SecondaryDataUpdate {
 			$dbw->begin();
 			$this->saveSiteLinks();
 			$this->saveMultilangFields();
+			$this->saveAliases();
 			$dbw->commit();
 		}
 
@@ -141,6 +142,44 @@ class WikibaseItemStructuredSave extends SecondaryDataUpdate {
 				),
 				__METHOD__
 			) && $success;
+		}
+
+		return $success;
+	}
+
+	/**
+	 * Saves the aliases.
+	 * This info is saved in wb_aliases.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean Success indicator
+	 */
+	protected function saveAliases() {
+		$dbw = wfGetDB( DB_MASTER );
+
+		$idField = array( 'alias_item_id' => $this->item->getId() );
+
+		$success = $dbw->delete(
+			'wb_aliases',
+			$idField,
+			__METHOD__
+		);
+
+		foreach ( $this->item->getAllAliases() as $languageCode => $aliases ) {
+			foreach ( $aliases as $alias ) {
+				$success = $dbw->insert(
+					'wb_items_per_site',
+					array_merge(
+						$idField,
+						array(
+							'alias_language' => $languageCode,
+							'alias_text' => $alias,
+						)
+					),
+					__METHOD__
+				) && $success;
+			}
 		}
 
 		return $success;
