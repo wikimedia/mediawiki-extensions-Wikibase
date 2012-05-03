@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Check functionality of add/edit/remove sitelinks" do
-=begin
+
   context "Check for site links UI" do
     it "should check for site links" do
       visit_page(ItemPage)
@@ -12,6 +12,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       # TODO: implement tests for sitelinks
     end
   end
-=end
+
 end
 
