@@ -8,6 +8,7 @@ describe "Check functionality of edit label" do
       @current_page.itemLabelSpan.should be_true
       current_label = @current_page.itemLabelSpan
       changed_label = current_label + "_fooo"
+      @browser.title.include? current_label
       @current_page.itemLabelSpan.should == current_label
       @current_page.editLabelLink?.should be_true
       @current_page.cancelLabelLink?.should be_false
@@ -32,6 +33,7 @@ describe "Check functionality of edit label" do
       # TODO: is there a better method for reloading?
       visit_page(ItemPage)
       @current_page.itemLabelSpan.should == changed_label
+      @browser.title.include? changed_label
       @current_page.editLabelLink
       @current_page.labelInputField.clear
       @current_page.labelInputField = current_label
@@ -41,6 +43,7 @@ describe "Check functionality of edit label" do
       # TODO: is there a better method for reloading?
       visit_page(ItemPage)
       @current_page.itemLabelSpan.should == current_label
+      @browser.title.include? current_label
     end
   end
 end

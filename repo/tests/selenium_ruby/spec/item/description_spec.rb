@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Check functionality of edit description" do
 
   context "Check for item description UI" do
-    it "should check for edit descriptio" do
+    it "should check for edit description" do
       visit_page(ItemPage)
       @current_page.itemDescriptionSpan.should be_true
       current_description = @current_page.itemDescriptionSpan
