@@ -75,20 +75,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 	getSite: function() {
 		return this._site;		
 	},
-
-	/**
-	 * validate input
-	 * 
-	 * @param String value
-	 */
-	validate: function( value ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
-		for ( var i in this._currentResults ) {
-			if ( value === this._currentResults[i] ) {
-				return true;
-			}
-		}
-	},
 	
 	setValue: function( value ) {
 		if( this.isInEditMode() ) {
