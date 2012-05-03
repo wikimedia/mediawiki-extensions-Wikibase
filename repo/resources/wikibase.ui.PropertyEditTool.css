@@ -48,12 +48,8 @@ h1.firstHeading .wb-ui-toolbar {
 	display:none;
 }
 
-.tipsy-ne, .tipsy-nw {
-	padding-top:12px;
-}
-	.tipsy-ne .tipsy-arrow, .tipsy-nw .tipsy-arrow {
-		background:url(images/tipsy.png) -13px -1px;
-	}
+
+/********** TOOLTIP **********/
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
 .mw-help-field-hint {
@@ -61,6 +57,23 @@ h1.firstHeading .wb-ui-toolbar {
 	height:11px;
 	width:11px;
 }
+
+.tipsy-ne, .tipsy-nw {
+	padding-top:12px;
+}
+	.tipsy-ne .tipsy-arrow, .tipsy-nw .tipsy-arrow {
+		background:url(images/tipsy.png) -13px -1px;
+	}
+
+	.tipsy-se .tipsy-arrow, .tipsy-sw .tipsy-arrow {
+		background:url(images/tipsy.png) -13px -26px;
+		bottom:-12px;
+	}
+
+/********** /TOOLTIP **********/
+
+
+/********** SITE LINKS TABLE **********/
 
 table.wb-sitelinks {
 	/*border:1px solid #5dc9f4;*/
@@ -95,6 +108,9 @@ table.wb-sitelinks {
 	table.wb-sitelinks tfoot td {
 		border:none;
 	}
+
+/********** /SITE LINKS TABLE **********/
+
 
 .ruler {
 	display:none;

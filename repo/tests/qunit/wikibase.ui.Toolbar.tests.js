@@ -1,5 +1,5 @@
 /**
- * QUnit tests for property edit tool
+ * QUnit tests for toolbar component
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1

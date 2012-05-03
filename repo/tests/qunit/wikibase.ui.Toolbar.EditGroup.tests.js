@@ -1,9 +1,9 @@
 /**
- * QUnit tests for editable value component of property edit tool
+ * QUnit tests for toolbar edit group
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.EditableValue.tests.js
+ * @file wikibase.ui.Toolbar.EditGroup.tests.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
