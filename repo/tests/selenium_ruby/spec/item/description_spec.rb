@@ -4,25 +4,9 @@ describe "Check functionality of edit description" do
 
   context "Check for item description UI" do
     it "should check for edit description" do
-      initial_description = generate_random_string(20)
       visit_page(ItemPage)
-      @current_page.descriptionInputField.should be_true
-      @current_page.editDescriptionLink?.should be_false
-      @current_page.saveDescriptionLinkDisabled?.should be_true
-      @current_page.cancelDescriptionLinkDisabled?.should be_true
-      @current_page.descriptionInputField.clear
-      @current_page.descriptionInputField = initial_description
-      @current_page.saveDescriptionLink?.should be_true
-      @current_page.descriptionInputField = initial_description
-      @current_page.saveDescriptionLink
-      ajax_wait
-      # TODO: is there a better method for reloading?
-      visit_page(ItemPage)
-      @current_page.itemDescriptionSpan.should == initial_description
-
       @current_page.itemDescriptionSpan.should be_true
       current_description = @current_page.itemDescriptionSpan
-      current_description.should == initial_description
       changed_description = current_description + " Adding something."
       @current_page.itemDescriptionSpan.should == current_description
       @current_page.editDescriptionLink?.should be_true

@@ -24,6 +24,7 @@ class RubySelenium
 
   # do API request to set a label for an item
   def self.set_item_label(item_label=generate_random_string(10), language=WIKI_USELANG)
+    create_new_item
     postData = Net::HTTP.post_form(URI.parse('http://localhost/mediawiki/api.php'),
     {'format'=>'json',
       'action'=>'wbsetlanguageattribute',
@@ -36,6 +37,7 @@ class RubySelenium
 
   # do API request to set a description for an item
   def self.set_item_description(item_description=generate_random_string(20), language=WIKI_USELANG)
+    create_new_item
     postData = Net::HTTP.post_form(URI.parse('http://localhost/mediawiki/api.php'),
     {'format'=>'json',
       'action'=>'wbsetlanguageattribute',
@@ -49,18 +51,12 @@ class RubySelenium
   # creates a new item and returns the URL for that item
   def self.get_new_item_url
     create_new_item
-    # TODO: set label and description before tests?
-    # set_item_label()
-    # set_item_description()
     item_url = WIKI_URL + "/Data:q" + @item_id + "?uselang=" + WIKI_USELANG
     return item_url
   end
 
   def self.get_item_id
-    if !@item_id
-      create_new_item
-    end
-    return @item_id
+    return create_new_item
   end
 
   # creates a random string
