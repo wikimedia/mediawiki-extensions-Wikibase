@@ -62,10 +62,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
 		
 		// interface for choosing the source site:
-		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );		
-		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
+		interfaces.siteId = new ev.SiteIdInterface();
 		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
 		interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
+		interfaces.siteId._init( tableCells[0] );
+
+		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
 
 		// interface for choosing a page (from the source site):
 		interfaces.pageName = new ev.SitePageInterface(

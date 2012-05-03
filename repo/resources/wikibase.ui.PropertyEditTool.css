@@ -66,8 +66,7 @@ h1.firstHeading .wb-ui-toolbar {
 	}
 
 	.tipsy-se .tipsy-arrow, .tipsy-sw .tipsy-arrow {
-		background:url(images/tipsy.png) -13px -26px;
-		bottom:-12px;
+		background:url(images/tipsy.png) -14px -26px;
 	}
 
 /********** /TOOLTIP **********/
