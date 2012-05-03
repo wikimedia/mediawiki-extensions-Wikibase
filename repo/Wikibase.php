@@ -102,7 +102,7 @@ $wgAPIModules['wbsetlanguageattribute'] 			= 'ApiWikibaseSetLanguageAttribute';
 $wgAPIModules['wbdeletelanguageattribute'] 			= 'ApiWikibaseDeleteLanguageAttribute';
 $wgAPIModules['wbgetsitelinks'] 					= 'ApiWikibaseGetSiteLinks';
 $wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
-$wgAPIModules['wbsetalias'] 						= 'ApiWikibaseSetAlias';
+$wgAPIModules['wbsetaliases'] 						= 'ApiWikibaseSetAliases';
 $wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
 
 

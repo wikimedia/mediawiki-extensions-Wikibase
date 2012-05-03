@@ -11,6 +11,7 @@
  * @ingroup API
  *
  * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
@@ -24,12 +25,10 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
-		if ( !isset( $params['site'] ) && !isset( $params['title'] ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-alias-incomplete' ), 'alias-incomplete' );
-		}
+		parent::validateParameters( $params );
 
-		if ( isset( $params['id'] ) && $params['item'] === 'add' ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-add-with-id' ), 'add-with-id' );
+		if ( ( isset( $params['add'] ) || isset( $params['remove'] ) ) XOR isset( $params['set'] ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-aliases-invalid-list' ), 'aliases-invalid-list' );
 		}
 	}
 	
@@ -44,26 +43,19 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		$success = false;
-		if ($params['item'] === 'remove') {
-			$success = $item->removeAlias( $params['site'], $params['title'] );
+		if ( isset( $params['set'] ) ) {
+			$item->setAliases( $params['set'] );
 		}
-		else {
-			$success = $item->addSiteLink( $params['site'], $params['title'], $params['item'] );
-			if (!$success) {
-				switch ($params['item']) {
-					case 'update':
-						$this->dieUsage( wfMsg( 'wikibase-api-alias-not-found' ), 'alias-not-found' );
-						break;
-					case 'add':
-						$this->dieUsage( wfMsg( 'wikibase-api-alias-found' ), 'alias-found' );
-						break;
-					default:
-						$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
-				}
-			}
+
+		if ( isset( $params['remove'] ) ) {
+			$item->removeAliases( $params['remove'] );
 		}
-		return $success;
+
+		if ( isset( $params['add'] ) ) {
+			$item->addAliases( $params['add'] );
+		}
+
+		return true;
 	}
 
 	public function getPossibleErrors() {
@@ -77,33 +69,47 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
+			'add' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_ISMULTI => true,
+			),
+			'remove' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_ISMULTI => true,
+			),
+			'set' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_ISMULTI => true,
+			),
+			'language' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_REQUIRED => true,
+			),
 		) );
 	}
 
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
+			'add' => 'List of aliases to add',
+			'remove' => 'List of aliases to remove',
+			'set' => 'A list of aliases that will replace the current list',
+			'language' => 'The language of which to set the aliases',
 		) );
 	}
 
 	public function getDescription() {
 		return array(
-			'API module to associate an alias with a Wikibase item or remove an already made such association.'
+			'API module to set the aliases for a Wikibase item.'
 		);
 	}
 
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetalias&id=42&language=en&label=Wikimedia'
-			=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wbsetalias&id=42&language=en&label=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
-			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
-			'api.php?action=wbsetalias&id=42&language=en&label=Wikimedia'
-			=> 'Set title "Wikimedia" for English page with id "42"',
 		);
 	}
 
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetalias';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetaliases';
 	}
 
 
