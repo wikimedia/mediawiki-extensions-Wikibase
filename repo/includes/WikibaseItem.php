@@ -60,7 +60,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @since 0.1
 	 */
 	public function cleanStructure() {
-		foreach ( array( 'links', 'label', 'description' ) as $field ) {
+		foreach ( array( 'links', 'label', 'description', 'aliases' ) as $field ) {
 			if ( !array_key_exists( $field, $this->data ) ) {
 				$this->data[$field] = array();
 			}
@@ -299,6 +299,68 @@ class WikibaseItem extends WikibaseEntity {
 				unset( $this->data[$fieldKey][$lang] );
 			}
 		}
+	}
+
+	/**
+	 * Returns the aliases for the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 *
+	 * @return array
+	 */
+	public function getAliases( $languageCode ) {
+		return array_key_exists( $languageCode, $this->data['aliases'] ) ?
+			$this->data['aliases'][$languageCode] : array();
+ 	}
+
+	/**
+	 * Sets the aliases for the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function setAliases( $languageCode, array $aliases ) {
+		$this->data['aliases'][$languageCode] = $aliases;
+	}
+
+	/**
+	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function addAliases( $languageCode, array $aliases ) {
+		$this->setAliases(
+			$languageCode,
+			array_unique( array_merge(
+				$this->getAliases( $languageCode ),
+				$aliases
+			) )
+		);
+	}
+
+	/**
+	 * Removed the provided aliases from the aliases list of the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function removeAliases( $languageCode, array $aliases ) {
+		$this->setAliases(
+			$languageCode,
+			array_diff(
+				$this->getAliases( $languageCode ),
+				$aliases
+			)
+		);
 	}
 
 	/**

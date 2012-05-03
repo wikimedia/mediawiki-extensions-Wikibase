@@ -2,6 +2,7 @@
 
 /**
  * Represents an update to the structured storage for a single WikibaseItem.
+ * TODO: we could keep track of actual changes in a lot of cases, and so be able to do less (expensive) queries to update.
  *
  * @since 0.1
  *
