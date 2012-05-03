@@ -13,7 +13,7 @@
 ( function( $ ) {
 	
 	// add an edit tool for the main label. This will be integrated into the heading nicely:
-	new window.wikibase.ui.HeadingEditTool( $( '#firstHeading' ) );
+	new window.wikibase.ui.LabelEditTool( $( '#firstHeading' ) );
 	
 	// add an edit tool for all properties in the data grid view:
 	$( 'body' )

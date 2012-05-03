@@ -1,9 +1,9 @@
 /**
- * QUnit tests for tooltip
+ * QUnit tests for tooltip component
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file wikibase.ui.Toolbar.Label.js
+ * @file wikibase.ui.Toolbar.Tooltip.tests.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

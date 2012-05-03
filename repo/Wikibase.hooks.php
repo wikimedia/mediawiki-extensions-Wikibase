@@ -96,6 +96,8 @@ final class WikibaseHooks {
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
 				'tests/qunit/wikibase.Site.tests.js',
+				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
+				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js',

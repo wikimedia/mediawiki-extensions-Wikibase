@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
- * @file wikibase.ui.HeadingEditTool.js
+ * @file wikibase.ui.LabelEditTool.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -15,12 +15,12 @@
  * Module for 'Wikibase' extensions user interface functionality for editing the heading representing
  * an items label.
  */
-window.wikibase.ui.HeadingEditTool = function( subject ) {
+window.wikibase.ui.LabelEditTool = function( subject ) {
 	window.wikibase.ui.PropertyEditTool.call( this, subject );
 };
 
-window.wikibase.ui.HeadingEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
-$.extend( window.wikibase.ui.HeadingEditTool.prototype, {
+window.wikibase.ui.LabelEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
+$.extend( window.wikibase.ui.LabelEditTool.prototype, {
 	/**
 	 * Initializes the edit form for the given h1 with 'firstHeading' class, basically the page title.
 	 * This should normally be called directly by the constructor.
@@ -29,7 +29,7 @@ $.extend( window.wikibase.ui.HeadingEditTool.prototype, {
 		// call prototypes _init():
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		// add class specific to this ui element:
-		this._subject.addClass( 'wb-ui-headingedittool' );
+		this._subject.addClass( 'wb-ui-labeledittool' );
 		
 		// Todo: think about auto expand feature and fix it
 		this._editableValues[0]._interfaces[0].autoExpand = false;
