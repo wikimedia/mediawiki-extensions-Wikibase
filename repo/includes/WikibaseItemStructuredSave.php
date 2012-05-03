@@ -49,19 +49,13 @@ class WikibaseItemStructuredSave extends SecondaryDataUpdate {
 	 * @since 0.1
 	 */
 	public function doUpdate() {
-		$success = $this->item->save( /* $articleId */ );
+		$dbw = wfGetDB( DB_MASTER );
 
-		if ( $success ) {
-			$dbw = wfGetDB( DB_MASTER );
-
-			$dbw->begin();
-			$this->saveSiteLinks();
-			$this->saveMultilangFields();
-			$this->saveAliases();
-			$dbw->commit();
-		}
-
-		return $success;
+		$dbw->begin();
+		$this->saveSiteLinks();
+		$this->saveMultilangFields();
+		$this->saveAliases();
+		$dbw->commit();
 	}
 
 

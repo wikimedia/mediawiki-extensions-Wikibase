@@ -584,6 +584,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	 * @Depends testSetItem
 	 */
 	public function testDeleteLanguageAttributeDescription( $id, $site, $title, $language ) {
+		// FIXME: $attribute is not set!
 		$this->deleteLanguageAttribute( $id, $site, $title, $language, $attribute, 'description' );
 	}
 	

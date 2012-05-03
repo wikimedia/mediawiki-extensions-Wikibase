@@ -19,14 +19,14 @@ class WikibaseItemTests extends MediaWikiTestCase {
 	/**
 	 * This is to set up the environment
 	 */
-	protected function setUp() {
+	public function setUp() {
   		parent::setUp();
 	}
 	
   	/**
 	 * This is to tear down the environment
 	 */
-	function tearDown() {
+	public function tearDown() {
 		parent::tearDown();
 	}
 	

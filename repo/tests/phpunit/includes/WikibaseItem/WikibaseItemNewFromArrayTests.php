@@ -46,9 +46,9 @@ class WikibaseItemNewFromArrayTests extends MediaWikiTestCase {
 			$this->item,
 			'After creating a WikibaseItem with an entity "q42" it should still be a WikibaseItem'
 		);
-		$this->assertTrue(
-			$this->item->hasId(),
-			'Calling hasID on a new WikibaseItem after creating it with an entity "q42" should return true'
+		$this->assertFalse(
+			$this->item->isNew(),
+			'Calling isNew on a new WikibaseItem after creating it with an entity "q42" should return false'
 		);
 		$this->assertInstanceOf(
 			'Title',

@@ -113,14 +113,14 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function save() {
+	protected function relationalSave() {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$fields = array();
 
 		$success = true;
 
-		if ( !$this->hasId() ) {
+		if ( $this->isNew() ) {
 			$fields['item_id'] = null; // This is needed to have at least one field.
 
 			$success = $dbw->insert(
@@ -146,6 +146,36 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * Saves the item.
+	 * If the item does not exist yet, it will be created (ie an ID will be fetched and a new page in the data NS created).
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $summary
+	 * @param null|User $user
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function save( $summary = '', User $user = null ) {
+		$success = $this->relationalSave();
+
+		if ( $success ) {
+			$status = $this->getWikiPage()->doEditContent(
+				$this,
+				$summary,
+				EDIT_AUTOSUMMARY,
+				false,
+				$user,
+				'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
+			);
+
+			$success = $status->isOk();
+		}
+
+		return $success;
+	}
+
+	/**
 	 * Sets the ID.
 	 * Should only be set to something determined by the store and not by the user (to avoid duplicate IDs).
 	 *
@@ -164,8 +194,8 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean
 	 */
-	public function hasId() {
-		return !is_null( $this->getId() );
+	public function isNew() {
+		return is_null( $this->getId() );
 	}
 
 	/**
@@ -611,7 +641,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return String the summary text
 	 */
 	public function getTextForSummary( $maxlength = 250 ) {
-		return $this->getDescription( $GLOBALS['wgLang'] );
+		return $this->getDescription( $GLOBALS['wgLang']->getCode() );
 	}
 
 	/**
@@ -705,7 +735,7 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
-			$this->wikiPage = $this->hasId() ? self::getWikiPageForId( $this->getId() ) : false;
+			$this->wikiPage = $this->isNew() ? false : self::getWikiPageForId( $this->getId() );
 		}
 
 		return $this->wikiPage;

@@ -46,9 +46,9 @@ class WikibaseItemNewEmptyTests extends MediaWikiTestCase {
 			$this->item,
 			'After creating an empty WikibaseItem it should be a WikibaseItem'
 		);
-		$this->assertFalse(
-			$this->item->hasId(),
-			'Calling hasID on a new empty WikibaseItem after creating it should return false'
+		$this->assertTrue(
+			$this->item->isNew(),
+			'Calling isNew on a new empty WikibaseItem after creating it should return true'
 		);
 		$this->assertEquals(
 			null,
