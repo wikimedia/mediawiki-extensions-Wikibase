@@ -38,14 +38,43 @@ abstract class ApiWikibaseModifyItemTest extends ApiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		// TODO: set item
+		$this->item = WikibaseItem::newEmpty();
+		$this->item->save();
 	}
 
 	/**
 	 * This is to tear down the environment.
 	 */
 	public function tearDown() {
+		$this->item->remove();
+
 		parent::tearDown();
+	}
+
+	protected function assertSuccess( array $apiResponse ) {
+		$this->assertArrayHasKey(
+			'success',
+			$apiResponse,
+			"Must have an 'success' key in the result from the API"
+		);
+
+		$this->assertEquals(
+			'1',
+			$apiResponse['success'],
+			"The success indicator must be 1"
+		);
+
+		$this->assertArrayHasKey(
+			'item',
+			$apiResponse,
+			"Must have an 'item' key in the result from the API"
+		);
+
+		$this->assertArrayHasKey(
+			'id',
+			$apiResponse['item'],
+			"Must have an 'id' key in the item elements part of the result from the API"
+		);
 	}
 
 }

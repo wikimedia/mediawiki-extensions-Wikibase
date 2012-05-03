@@ -176,6 +176,21 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * Removes the item.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $summary
+	 * @param null|User $user
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function remove( $summary = '', User $user = null ) {
+		// TODO
+		return true;
+	}
+
+	/**
 	 * Sets the ID.
 	 * Should only be set to something determined by the store and not by the user (to avoid duplicate IDs).
 	 *

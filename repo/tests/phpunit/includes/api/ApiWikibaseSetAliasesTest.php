@@ -36,13 +36,49 @@
  */
 class ApiWikibaseSetAliasesTest extends ApiWikibaseModifyItemTest {
 
-	public function testSetAliases() {
+	public function paramProvider() {
+		return array(
+			// lang code, list name, list values, expected result
+			array( 'en', 'set', 'Foo|bar', 'Foo|bar' ),
+			array( 'en', 'set', 'Foo|bar|baz', 'Foo|bar|baz' ),
+			array( 'en', 'add', 'Foo|bar', 'Foo|bar|baz' ),
+			array( 'en', 'add', 'Foo|spam', 'Foo|bar|baz|spam' ),
+			array( 'en', 'add', 'ohi', 'Foo|bar|baz|spam|ohi' ),
+
+			array( 'de', 'add', 'ohi', 'ohi' ),
+			array( 'de', 'set', 'ohi|ohi|spam|spam', 'ohi|spam' ),
+
+			array( 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
+			array( 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
+			array( 'en', 'remove', 'Foo|bar|baz|o_O', 'spam' ),
+			array( 'en', 'add', 'o_O', 'spam|o_O' ),
+			array( 'en', 'set', 'o_O', 'o_O' ),
+			array( 'en', 'remove', 'o_O', '' ),
+		);
+	}
+
+	/**
+	 * @dataProvider paramProvider
+	 */
+	public function testSetAliases( $langCode, $param, $value, $expected ) {
 		$apiResponse = $this->doApiRequest( array(
 			'action' => 'wbsetaliases',
-			// TODO
+			'language' => $langCode,
+			$param => $value
 		) );
 
-		// TODO
+		$this->assertSuccess( $apiResponse );
+
+		$expected = $expected === '' ? array() : explode( '|', $expected );
+		$actual = $this->item->getAliases( $langCode );
+
+		asort( $expected );
+		asort( $actual );
+
+		$this->assertEquals(
+			$expected,
+			$actual
+		);
 	}
 
 }
