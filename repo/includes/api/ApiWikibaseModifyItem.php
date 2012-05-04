@@ -26,20 +26,31 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 */
 	protected abstract function modifyItem( WikibaseItem &$item, array $params );
 	
+	/**
+	 * Check the rights for the user accessing the module, that is a subclass of this one.
+	 * 
+	 * @param $title Title object where the item is stored
+	 * @param $user User doing the action
+	 * @param $params array of arguments for the module, passed for ModifyItem
+	 * @param $mod null|String name of the module, usually not set
+	 * @param $op null|String operation that is about to be done, usually not set
+	 * @return array of errors reported from the static getPermissionsError
+	 */
 	protected abstract function getPermissionsErrorInternal( $title, $user, array $params, $module=null, $op=null );
 
 	/**
-	 * @param $title Title
+	 * Check the rights for the user accessing the module, module name and operation comes from the actual subclass.
+	 * 
+	 * @param $title Title object where the item is stored
 	 * @param $user User doing the action
-	 * @param $token String
-	 * @return array
+	 * @param $mod null|String name of the module, usually not set
+	 * @param $op null|String operation that is about to be done, usually not set
+	 * @return array of errors reported from the static getPermissionsError
 	 */
 	protected static function getPermissionsError( $title, $user, $mod=null, $op=null ) {
 		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
-		
-		//print(">>> " . "($mod:$op)" . (is_string($mod) ? "{$mod}-{$op}" : $op). " <<<\n");
 		
 		// Check permissions
 		return $title->getUserPermissionsErrors(
@@ -63,7 +74,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		if ( isset( $params['id'] ) && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-with-id' ), 'add-with-id' );
 		}
-		*/
+*/
 	}
 
 	/**
@@ -185,6 +196,10 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 	}
 
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
@@ -198,18 +213,37 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		) );
 	}
 
+	/**
+	 * Returns whether this module requires a Token to execute
+	 * @return bool
+	 */
 	public function needsToken() {
 		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens' ) : true ;
 	}
 
+	/**
+	 * Indicates whether this module must be called with a POST request
+	 * @return bool
+	 */
 	public function mustBePosted() {
 		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithPost' ) : true ;
 	}
 
+	/**
+	 * Indicates whether this module requires write mode
+	 * @return bool
+	 */
 	public function isWriteMode() {
 		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithWrite' ) : true ;
 	}
 	
+	/**
+	 * Returns an array of allowed parameters (parameter name) => (default
+	 * value) or (parameter name) => (array with PARAM_* constants as keys)
+	 * Don't call this function directly: use getFinalParams() to allow
+	 * hooks to modify parameters as needed.
+	 * @return array|bool
+	 */
 	public function getAllowedParams() {
 		return array(
 			'create' => array(
@@ -236,6 +270,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		);
 	}
 
+	/**
+	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
+	 * needed.
+	 *
+	 * @return array|bool False on no parameter descriptions
+	 */
 	public function getParamDescription() {
 		return array(
 			'id' => array( 'The ID of the item.',
