@@ -4,7 +4,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for site links UI" do
     it "should check for site links" do
-      visit_page(ItemPage)
+      visit_page(SitelinksItemPage)
       @current_page.sitelinksTable?.should be_true
       @current_page.addSitelinkLink?.should be_true
       @current_page.siteLinkCounter?.should be_true
