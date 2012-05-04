@@ -21,9 +21,6 @@
  *
  * @ingroup Wikibase
  * @ingroup Test
- *
- * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
  * 
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -33,6 +30,12 @@
  * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
+ *
+ * @group Wikibase
+ * @group WikibaseAPI
+ *
+ * @licence GNU GPL v2+
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 class ApiWikibaseTests extends ApiTestCase {
 	
