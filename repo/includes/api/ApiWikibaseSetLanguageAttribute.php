@@ -110,7 +110,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		$this->getResult()->addValue(
 			null,
 			'labels',
-			array( $language => $label )
+			array( $language => $item->getLabel( $language ) )
 		);
 		return ;
 	}
@@ -121,7 +121,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		$this->getResult()->addValue(
 			null,
 			'descriptions',
-			array( $language => $description )
+			array( $language => $item->getDescription( $language ) )
 		);
 		return ;
 	}
