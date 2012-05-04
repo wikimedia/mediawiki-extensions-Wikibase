@@ -25,11 +25,5 @@ class EmptyItemPage < RubySelenium
   link(:saveDescriptionLinkDisabled, :css => "div.wb-ui-descriptionedittool > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button:nth-child(1)")
   link(:cancelDescriptionLinkDisabled, :css => "div.wb-ui-descriptionedittool > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button:nth-child(2)")
   link(:saveDescriptionLink, :css => "div.wb-ui-descriptionedittool > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
-      
-  # language links UI
-  table(:sitelinksTable, :class => "wb-sitelinks")
-  link(:addSitelinkLink, :css => "table.wb-sitelinks > tfoot > tr > td > div.wb-ui-toolbar > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
-  # element(:siteLinkTableHead, :th, :xpath => "//table[@class='wb-sitelinks']/thead/tr/th")
-  span(:siteLinkCounter, :class => "wb-ui-propertyedittool-counter")
-  # cell(:siteIdCell, :xpath => "//table[@class='wb-sitelinks']/tbody/tr[1]/td[1]")
+
 end

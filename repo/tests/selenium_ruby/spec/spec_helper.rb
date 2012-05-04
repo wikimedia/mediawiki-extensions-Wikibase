@@ -45,8 +45,10 @@ def ajax_wait
     sleep 1
   end
   while (script = @browser.execute_script("return jQuery.active")) == 1 do
+    # puts script
     sleep(1.0/3)
   end
+  # puts script
   return true
 end
 
