@@ -29,7 +29,7 @@ class ApiWikibaseSetItem extends ApiBase {
 		$success = false;
 		
 		// lacks error checking
-		$item = WikibaseItem::newFromArray( json_decode( $params['data'] ) );
+		$item = WikibaseItem::newFromArray( json_decode( $params['data'], true ) );
 		$success = $item->save();
 
 		if ( !$success ) {
