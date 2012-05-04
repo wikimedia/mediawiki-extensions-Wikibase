@@ -9,6 +9,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
       @current_page.addSitelinkLink?.should be_true
       @current_page.siteLinkCounter?.should be_true
       
+      puts @current_page.siteLinkCounter
+      
       
       # @current_page.siteIdCell?.should be_true
 
