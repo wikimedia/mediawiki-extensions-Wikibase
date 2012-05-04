@@ -110,48 +110,44 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 */
 	getSelectedSiteId: function() {
 		var value = this.getValue();
-		if ( this.validate( value ) ) {
-			if( !this.isInEditMode() ) {
-				return this._getSiteIdFromString( value );
-			} else {
-				return this.getSiteIdByValue( value );
-			}
-		}
-		return null;
+		return this.getSiteIdByValue( value );
 	},
 	
 	/**
-	 * trys to get a site id by analyzing a given string
+	 * Tries to get a site id by analyzing a given string
 	 *
 	 * @param String value
 	 */
 	getSiteIdByValue: function( value ) {
+		// normalize value first (trim and stuff)
+		value = this.normalize( value );
+
 		for( var i in this._currentResults ) {
-			if(    value == this._currentResults[i].site.getId()
-				|| value == this._currentResults[i].site.getShortName()
-				|| value == this._currentResults[i].value
-				|| value == this._currentResults[i].label
-				) {
-				return this._currentResults[i].site.getId();
+			var currentItem = this._currentResults[i];
+			if(    value == currentItem.site.getId()
+				|| value == currentItem.site.getShortName()
+				|| value == currentItem.value
+				|| value == currentItem.label
+			) {
+				return currentItem.site.getId();
 			}
 		}
 		return null;
 	},
 
 	/**
-	 * validate input
-	 * @param String value
+	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.Interface
 	 */
 	validate: function( value ) {
 		// check whether current input is in the list of values returned by the wikis API
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
 		return this.getSiteIdByValue( value ) !== null;
 	},
-	
-	_getSiteIdFromString: function( text ) {
-		return text.replace( /^.+\(\s*(.+)\s*\)\s*/, '$1' );
+/*
+	normalize: function( value ) {
+		value = window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.normalize.call( this, value );
+		return value;
 	},
-	
+*/
 	
 	/////////////////
 	// CONFIGURABLE:
