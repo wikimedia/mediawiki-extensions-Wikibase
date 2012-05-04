@@ -22,7 +22,6 @@ class SitelinksItemPage < ItemPage
   # unordered_list(:siteIdAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all'][1]")
   # unordered_list(:pageAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all'][2]")
   # cell(:siteIdCell, :xpath => "//table[@class='wb-sitelinks']/tbody/tr[1]/td[1]")
-  
   def getNumberOfSitelinksFromCounter
     scanned = siteLinkCounter.scan(/\(([^)]+)\)/)
     integerValue = scanned[0][0].to_i()
@@ -56,6 +55,12 @@ class SitelinksItemPage < ItemPage
       # puts count
     end
     return count-2
+  end
+
+  def wait_until_page_loaded
+    wait_until do
+      sitelinksTable?
+    end
   end
 
 end
