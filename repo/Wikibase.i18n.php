@@ -41,11 +41,37 @@ $messages['en'] = array(
 	// Special pages
 	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
+
+	// API error messages
+	'wikibase-api-no-such-item' => 'There are no such item to be found',
+	'wikibase-api-no-token' => 'There are no token given',
+	'wikibase-api-no-data' => 'It is not found any data to operate upon',
+	'wikibase-api-cant-edit' => 'The logged in user is not allowed to edit',
+	'wikibase-api-no-permissions' => 'The logged in user does have sufficient rights',
+	'wikibase-api-id-xor-wikititle' => 'Either provide the item ids or a site-title pair for a corresponding page',
+	'wikibase-api-no-such-item' => 'Could not find an existing item',
+	'wikibase-api-no-such-item-id' => 'Could not find an existing item for this id',
+	'wikibase-api-link-exists' => 'An article on the specified wiki is already linked',
+	'wikibase-api-add-with-id' => 'Can not add with the id of an existing item',
+	'wikibase-api-add-exists' => 'Can not add to an existing item',
+	'wikibase-api-no-such-item-link' => 'Could not find an existing item for this link',
+	'wikibase-api-create-failed' => 'Attempted creation of new item failed',
+	'wikibase-api-invalid-contentmodel' => 'The content model of the page on which the item is stored is invalid',
+	'wikibase-api-alias-incomplete' => 'Can not find a definition of the alias for the item',
+	'wikibase-api-alias-not-found' => 'Can not find any previous alias in the item',
+	'wikibase-api-alias-found' => 'Found a previous alias in the item',
+	'wikibase-api-not-recognized' => 'Directive is not recognized',
+	'wikibase-api-label-or-description' => 'Use either or both of label and/or description, but not noen of them',
+	'wikibase-api-label-not-found' => 'Can not find any previous label in the item',
+	'wikibase-api-description-not-found' => 'Can not find any previous description in the item',
+	'wikibase-api-label-found' => 'Found a previous label in the item',
+	'wikibase-api-description-found' => 'Found a previous description in the item',
 );
 
 /** Message documentation (Message documentation) */
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc}}',
+	'wikibase-api-no-such-item' => 'Error message when there are no item to be found for the given combination of arguments'
 );
 
 /** German (Deutsch)
@@ -216,6 +242,48 @@ $messages['nl'] = array(
 	'wikibase-sitelinks' => "Wikipedia-pagina's gekoppeld aan dit item",
 	'wikibase-sitelinks-empty' => "Er zijn nog geen Wikipedia-pagina's gekoppeld aan dit item.",
 	'wikibase-remove' => 'verwijderen',
+);
+
+/** Norwegian (Norsk bokmål)
+ * @author jeblad
+ */
+$messages['no'] = array(
+	'wikibase-desc' => 'Strukturert datalager',
+	'wikibase-edit' => 'rediger',
+	'wikibase-save' => 'lagre',
+	'wikibase-cancel' => 'avdryt',
+	'wikibase-add' => 'legg til',
+	'wikibase-label-edit-placeholder' => 'lag etikett',
+	'wikibase-description-edit-placeholder' => 'lag beskrivelse',
+	'wikibase-label-input-help-message' => 'Legg til etikett for datasettet i $1.',
+	'wikibase-description-input-help-message' => 'Legg til en kort beskrivelse for datasettet i $1.',
+	'wikibase-sitelinks' => 'Sider på Wikipedia som er lenket til denne item',
+	'wikibase-sitelinks-add' => 'legg til en lenke til en side på Wikipedia',
+	'wikibase-sitelinks-empty' => 'Ingen sider på Wikipedia lenker til denne item.',
+	'wikibase-remove' => 'fjern',
+	'wikibase-api-no-such-item' => 'Kan ikke finne noen slik item',
+	'wikibase-api-no-token' => 'Det er ikke gitt noe token',
+	'wikibase-api-no-data' => 'Det er ikke gitt noe data som kan prosesseres',
+	'wikibase-api-cant-edit' => 'Den innlogede brukeren har ikke lo til å redigere',
+	'wikibase-api-no-permissions' => 'Den innloggede brukeren har ikke tilstrekkelige rettigheter',
+	'wikibase-api-id-xor-wikititle' => 'Enten oppgi id\'er for items eller par av nettsted og titler for tilsvarende sider',
+	'wikibase-api-no-such-item' => 'Det finnes ingen slik item',
+	'wikibase-api-no-such-item-id' => 'Kan ikke finne en eksisterende item for denne id',
+	'wikibase-api-link-exists' => 'En artikkel på den spesifiserte wikien er allerede lenket',
+	'wikibase-api-add-with-id' => 'Kan ikke legge til når det finnes en id for et eksisterende item',
+	'wikibase-api-add-exists' => 'Kan ikke legge til et eksisterende item',
+	'wikibase-api-no-such-item-link' => 'Kan ikke finne en eksisterende item for denne lenken',
+	'wikibase-api-create-failed' => 'Forsøk på å skape et nytt item feilet',
+	'wikibase-api-invalid-contentmodel' => 'Innholdsmodellen for siden hvor denne item er lagret er ugyldig',
+	'wikibase-api-alias-incomplete' => 'Kan ikke finne en definisjon for alias for denne item',
+	'wikibase-api-alias-not-found' => 'Kan ikke finne noe tidligere alias i item',
+	'wikibase-api-alias-found' => 'Fant et tidligere alias i item',
+	'wikibase-api-not-recognized' => 'Denne operasjonen ble ikke gjenkjent',
+	'wikibase-api-label-or-description' => 'Bruk enten en eller begge av etikett og/eller beskrivelse, men ikke ingen av dem',
+	'wikibase-api-label-not-found' => 'Kan ikke finne noen tidligere etikett i item',
+	'wikibase-api-description-not-found' => 'Kan ikke finne noen tidligere beskrivelse i item',
+	'wikibase-api-label-found' => 'Fant en tidligere etikett i item',
+	'wikibase-api-description-found' => 'Fant en tidligere beskrivelse i item',
 );
 
 /** Portuguese (Português)
