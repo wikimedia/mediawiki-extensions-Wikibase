@@ -85,8 +85,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return interfaces;
 	},
 	
-	_interfaceHandler_onInputRegistered: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this );
+	_interfaceHandler_onInputRegistered: function( relatedInterface ) {
+		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
 		
 		var idInterface = this._interfaces.siteId;
 		var pageInterface = this._interfaces.pageName;
@@ -141,7 +141,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	startEditing: function() {
 		// set ignored site links again since they could have changed
 		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
+		return window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
 	},
 	
 	stopEditing: function( save ) {
