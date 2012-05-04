@@ -237,12 +237,15 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @param string $langCode
 	 * @param string $value
+	 * @return string new value that is stored
 	 */
 	public function setLabel( $langCode, $value ) {
+		// TODO: Add cleanup code to be run before saving anything
 		$this->data['label'][$langCode] = array(
 			'language' => $langCode,
 			'value' => $value,
 		);
+		return $value;
 	}
 
 	/**
@@ -252,12 +255,15 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @param string $langCode
 	 * @param string $value
+	 * @return string new value that is stored
 	 */
 	public function setDescription( $langCode, $value ) {
+		// TODO: Add cleanup code to be run before saving anything
 		$this->data['description'][$langCode] = array(
 			'language' => $langCode,
 			'value' => $value,
 		);
+		return $value;
 	}
 
 	/**

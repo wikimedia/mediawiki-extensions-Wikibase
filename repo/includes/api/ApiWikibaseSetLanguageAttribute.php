@@ -117,11 +117,18 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	protected function setItemLabel( WikibaseItem &$item, $language, $label ) {
 		// TODO: Normalize
-		$item->setLabel( $language, $label );
+		$value = $item->setLabel( $language, $label );
+		if ( $label !== $value ) {
+			$this->getResult()->addValue(
+				null,
+				'normalized',
+				array( 'from' => $label, 'to' => $value )
+			);
+		}
 		$this->getResult()->addValue(
 			null,
 			'labels',
-			array( $language => $item->getLabel( $language ) )
+			array( $language => $value )
 		);
 		return ;
 	}
@@ -136,11 +143,18 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	protected function setItemDescription( WikibaseItem &$item, $language, $description ) {
 		// TODO: Normalize
-		$item->setDescription( $language, $description );
+		$value = $item->setDescription( $language, $description );
+		if ( $description !== $value ) {
+			$this->getResult()->addValue(
+				null,
+				'normalized',
+				array( 'from' => $description, 'to' => $value )
+			);
+		}
 		$this->getResult()->addValue(
 			null,
 			'descriptions',
-			array( $language => $item->getDescription( $language ) )
+			array( $language => $value )
 		);
 		return ;
 	}
