@@ -17,6 +17,19 @@
 class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 
 	/**
+	 * Check the rights
+	 * 
+	 * @param $title Title
+	 * @param $user User doing the action
+	 * @param $token String
+	 * @return array
+	 */
+	protected function getPermissionsErrorInternal( $title, $user, array $params, $mod=null, $op=null ) {
+		// at this point $params['link'] should be a copy of $params['item'] unless none exist
+		return parent::getPermissionsError( $title, $user, 'site-link', $params['link'] );
+	}
+	
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
@@ -30,7 +43,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 		if ( !isset($params['link']) ) {
 			$params['link'] = $params['item'];
 		}
-		if ( $params['link'] === 'remove') {
+		if ( isset($params['link']) && $params['link'] === 'remove') {
 			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
 		else {
@@ -41,7 +54,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			// is this in use?
-			array( 'code' => 'link-exists', 'info' => 'An article on the specified wiki is already linked' ),
+			array( 'code' => 'link-exists', 'info' => wfMsg( 'wikibase-api-link-exists' ) ),
 		) );
 	}
 

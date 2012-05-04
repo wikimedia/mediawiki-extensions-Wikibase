@@ -16,6 +16,18 @@
 class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 
 	/**
+	 * Check the rights
+	 * 
+	 * @param $title Title
+	 * @param $user User doing the action
+	 * @param $token String
+	 * @return array
+	 */
+	protected function getPermissionsErrorInternal( $title, $user, array $params, $mod=null, $op=null ) {
+		return parent::getPermissionsError( $title, $user, 'lang-attr', 'delete' );
+	}
+	
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
@@ -83,9 +95,9 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'label-not-found', 'info' => 'Can not find any previous label in the item' ),
-			array( 'code' => 'description-not-found', 'info' => 'Can not find any previous description in the item' ),
-			array( 'code' => 'not-recognized', 'info' => 'Directive is not recognized' ),
+			array( 'code' => 'label-not-found', 'info' => wfMsg( 'wikibase-api-label-not-found' ) ),
+			array( 'code' => 'description-not-found', 'info' =>  wfMsg( 'wikibase-api-description-not-found' ) ),
+			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
 			) );
 	}
 

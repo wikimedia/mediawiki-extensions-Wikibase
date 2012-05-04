@@ -87,7 +87,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'no-such-item', 'info' => 'There are no such item to be found' ),
+			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
 		) );
 	}
 

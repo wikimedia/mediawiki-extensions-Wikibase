@@ -262,6 +262,7 @@ class WikibaseItem extends WikibaseEntity {
 
 	/**
 	 * Remove label for a specific language in an item
+	 * TODO: Check the call syntx
 	 * 
 	 * @since 0.1
 	 * 
@@ -273,13 +274,14 @@ class WikibaseItem extends WikibaseEntity {
 
 	/**
 	 * Remove descriptions for a specific language in an item
+	 * TODO: Check the call syntx
 	 * 
 	 * @since 0.1
 	 * 
 	 * @param string|array $languages note that an empty array removes descriptions for no languages while a null pointer removes all
 	 */
-	public function removeDescription( $languages = array() ) {
-		$this->removeMultilangTexts( 'description', (array)$languages );
+	public function removeDescription( $language ) {
+		$this->removeMultilangTexts( 'description', array($language) );
 	}
 
 	/**

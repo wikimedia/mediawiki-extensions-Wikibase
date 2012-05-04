@@ -16,6 +16,18 @@
 class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
 
 	/**
+	 * Check the rights
+	 * 
+	 * @param $title Title
+	 * @param $user User doing the action
+	 * @param $token String
+	 * @return array
+	 */
+	protected function getPermissionsErrorInternal( $title, $user, array $params, $mod=null, $op=null ) {
+		return parent::getPermissionsError( $title, $user, 'alias', $params['item'] );
+	}
+	
+	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 * This overrides the base class
 	 *
@@ -68,10 +80,10 @@ class ApiWikibaseSetAlias extends ApiWikibaseModifyItem {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'alias-incomplete', 'info' => 'Can not find a definition of the alias for the item' ),
-			array( 'code' => 'alias-not-found', 'info' => 'Can not find any previous alias in the item' ),
-			array( 'code' => 'alias-found', 'info' => 'Found a previous alias in the item' ),
-			array( 'code' => 'not-recognized', 'info' => 'Directive is not recognized' ),
+			array( 'code' => 'alias-incomplete', 'info' => wfMsg( 'wikibase-api-alias-incomplete' ) ),
+			array( 'code' => 'alias-not-found', 'info' => wfMsg( 'wikibase-api-alias-not-found' ) ),
+			array( 'code' => 'alias-found', 'info' => wfMsg( 'wikibase-api-alias-found' ) ),
+			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
 		) );
 	}
 

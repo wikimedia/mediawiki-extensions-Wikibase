@@ -25,7 +25,29 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @return boolean Success indicator
 	 */
 	protected abstract function modifyItem( WikibaseItem &$item, array $params );
+	
+	protected abstract function getPermissionsErrorInternal( $title, $user, array $params, $module=null, $op=null );
 
+	/**
+	 * @param $title Title
+	 * @param $user User doing the action
+	 * @param $token String
+	 * @return array
+	 */
+	protected static function getPermissionsError( $title, $user, $mod=null, $op=null ) {
+		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
+			return null;
+		}
+		
+		//print(">>> " . "($mod:$op)" . (is_string($mod) ? "{$mod}-{$op}" : $op). " <<<\n");
+		
+		// Check permissions
+		return $title->getUserPermissionsErrors(
+			is_string($mod) ? "{$mod}-{$op}" : $op,
+			$user
+		);
+	}
+	
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
@@ -51,10 +73,26 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
+		$user = $this->getUser();
+
+		$success = false;
+
+		// This is really already done with needsToken()
+		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
+			$this->dieUsageMsg( 'sessionfailure' );
+		}
+		
+		if ( !$user->isAllowed( 'edit' ) ) {
+			$this->dieUsageMsg( 'cantedit' );
+		}
 
 		$success = false;
 
 		$this->validateParameters( $params );
+		
+		if ( !isset($params['summary']) ) {
+			$params['summary'] = 'dummy';
+		}
 		
 		if ( !isset( $params['id'] ) ) { // create is for development
 			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
@@ -99,6 +137,14 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 			if ( $success ) {
 				$page = $item->getWikiPage();
+				
+				$errors = $this->getPermissionsErrorInternal( $page->getTitle(), $this->getUser(), $params );
+				if ( count( $errors ) ) {
+					// this could be redesigned into something more usefull
+					//print_r($errors);
+					$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
+				}
+				
 				$status = $page->doEditContent(
 					$item,
 					$params['summary'],
@@ -141,26 +187,27 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
-			array( 'code' => 'add-with-id', 'info' => 'Can not add with an item id' ),
-			array( 'code' => 'add-exists', 'info' => 'Can not add to an existing item' ),
-			array( 'code' => 'no-such-item-link', 'info' => 'Could not find an existing item for this link' ),
-			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
-			array( 'code' => 'create-failed', 'info' => 'Attempted creation of new item failed' ),
-			array( 'code' => 'invalid-contentmodel', 'info' => 'The content model of the page on which the item is stored is invalid' ),
+			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
+			array( 'code' => 'add-with-id', 'info' => wfMsg( 'wikibase-api-add-with-id' ) ),
+			array( 'code' => 'add-exists', 'info' => wfMsg( 'wikibase-api-add-exists' ) ),
+			array( 'code' => 'no-such-item-link', 'info' => wfMsg( 'wikibase-api-no-such-item-link' ) ),
+			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
+			array( 'code' => 'create-failed', 'info' => wfMsg( 'wikibase-api-create-failed' ) ),
+			array( 'code' => 'invalid-contentmodel', 'info' => wfMsg( 'wikibase-api-invalid-contentmodel' ) ),
+			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
 		) );
 	}
 
 	public function needsToken() {
-		return !WBSettings::get( 'apiInDebug' );
+		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens' ) : true ;
 	}
 
 	public function mustBePosted() {
-		return !WBSettings::get( 'apiInDebug' );
+		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithPost' ) : true ;
 	}
 
 	public function isWriteMode() {
-		return !WBSettings::get( 'apiInDebug' );
+		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithWrite' ) : true ;
 	}
 	
 	public function getAllowedParams() {
@@ -185,6 +232,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set' ),
 				ApiBase::PARAM_DFLT => 'update',
 			),
+			'token' => null,
 		);
 	}
 
@@ -201,6 +249,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			),
 			'item' => 'Indicates if you are changing the content of the item',
 			'summary' => 'Summary for the edit.',
+			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
 		);
 	}
 

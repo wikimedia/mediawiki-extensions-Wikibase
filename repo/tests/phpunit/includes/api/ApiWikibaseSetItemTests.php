@@ -3,18 +3,8 @@
 /**
  * Tests for the ApiWikibase class.
  * 
- * The tests are using "Database" to get its own set of temporal tables.
- * This is nice so we avoid poisoning an existing database.
- * 
- * The tests are using "medium" so they are able to run alittle longer before they are killed.
- * Without this they will be killed after 1 second, but the setup of the tables takes so long
- * time that the first few tests get killed.
- * 
- * The tests are doing some assumptions on the id numbers. If the database isn't empty when
- * when its filled with test items the ids will most likely get out of sync and the tests will
- * fail. It seems impossible to store the item ids back somehow and at the same time not being
- * dependant on some magically correct solution. That is we could use GetItemId but then we
- * would imply that this module in fact is correct.
+ * This testset only checks the validity of the calls and correct handling of tokens and users.
+ * Note that we creates an empty database and then starts manipulating testusers.
  *
  * @file
  * @since 0.1
@@ -36,28 +26,13 @@
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiWikibaseTests extends ApiTestCase {
+class ApiWikibaseSetItemTests extends ApiTestCase {
 	
 	protected static $top = 0;
-	protected $mytoken;
-
+	
 	function setUp() {
-		//global $wgContLang, $wgAuth, $wgMemc, $wgRequest, $wgUser, $wgServer;
+		global $wgUser;
 		parent::setUp();
-		/*
-		self::$users = array(
-			'wbeditor' => new ApiTestUser(
-				'Apitestwbeditor',
-				'Api Test WBeditor',
-				'api_test_wbeditor@example.com',
-				array( 'wbeditor' )
-			)
-		);
-		*/
-		//$wgUser->addGroup( 'wbeditor' );
-		//$wgUser->saveSettings();
-		#$data = $this->doLogin();
-		//print_r($data);
 		
 		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
 				'Apitesteditor',
@@ -82,92 +57,60 @@ class ApiWikibaseTests extends ApiTestCase {
 			'lgpassword' => self::$users['wbeditor']->password
 			),
 			$data );
-		//print_r($data);
-		//exit;
 	}
 
-	public function providerSetItem() {
-		$idx = ApiWikibaseTests::$top;
-		return array(
-			array(
-				++$idx,
-				'{
-					"links": {
-						"de": { "site": "de", "title": "Berlin" },
-						"en": { "site": "en", "title": "Berlin" },
-						"no": { "site": "no", "title": "Berlin" },
-						"nn": { "site": "nn", "title": "Berlin" }
-					},
-					"label": {
-						"de": { "language": "de", "value": "Berlin" },
-						"en": { "language": "en", "value": "Berlin" },
-						"no": { "language": "no", "value": "Berlin" },
-						"nn": { "language": "nn", "value": "Berlin" }
-					},				
-					"description": { 
-						"de" : { "language": "de", "value": "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland." },
-						"en" : { "language": "en", "value": "Capital city and a federated state of the Federal Republic of Germany." },
-						"no" : { "language": "no", "value": "Hovedsted og delstat og i Forbundsrepublikken Tyskland." },
-						"nn" : { "language": "nn", "value": "Hovudstad og delstat i Forbundsrepublikken Tyskland." }
-					}
-				}'),
-			array(
-				++$idx,
-				'{
-					"links": {
-						"de": { "site": "de", "title": "London" },
-						"en": { "site": "en", "title": "London" },
-						"no": { "site": "no", "title": "London" },
-						"nn": { "site": "nn", "title": "London" }
-					},
-					"label": {
-						"de": { "language": "de", "value": "London" },
-						"en": { "language": "en", "value": "London" },
-						"no": { "language": "no", "value": "London" },
-						"nn": { "language": "nn", "value": "London" }
-					},				
-					"description": { 
-						"de" : { "language": "de", "value": "Hauptstadt Englands und des Vereinigten Königreiches." },
-						"en" : { "language": "en", "value": "Capital city of England and the United Kingdom." },
-						"no" : { "language": "no", "value": "Hovedsted i England og Storbritannia." },
-						"nn" : { "language": "nn", "value": "Hovudstad i England og Storbritannia." }
-					}
-				}'),
-			array(
-				++$idx,
-				'{
-					"links": {
-						"de": { "site": "de", "title": "Oslo" },
-						"en": { "site": "en", "title": "Oslo" },
-						"no": { "site": "no", "title": "Oslo" },
-						"nn": { "site": "nn", "title": "Oslo" }
-					},
-					"label": {
-						"de": { "language": "de", "value": "Oslo" },
-						"en": { "language": "en", "value": "Oslo" },
-						"no": { "language": "no", "value": "Oslo" },
-						"nn": { "language": "nn", "value": "Oslo" }
-					},				
-					"description": { 
-						"de" : { "language": "de", "value": "Hauptstadt der Norwegen." },
-						"en" : { "language": "en", "value": "Capital city in Norway." },
-						"no" : { "language": "no", "value": "Hovedsted i Norge." },
-						"nn" : { "language": "nn", "value": "Hovudstad i Noreg." }
-					}
-				}')
-		);
+	function getTokens() {
+		return $this->getTokenList( self::$users['sysop'] );
 	}
 	
 	/**
-	 * Testing SetItem first as this is central to be able to test the rest of the functions.
-	 * We also build the items for the rest of the tests here.
-	 * 
 	 * @group API
-	 * @dataProvider providerSetItem
+	 * @dataProvider provideSetItemIdDataOp
 	 */
-	public function testSetItem( $id, $data ) {
+	function testSetItemGetToken( $id, $op, $data ) {
+		$data = $this->doApiRequest(
+			array(
+				'action' => 'wbsetitem',
+				'gettoken' => '' ),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+		$this->assertEquals( 34, strlen( $data[0]["wbsetitem"]["setitemtoken"] ) );
+	}
+
+	/**
+	 * Attempting to set item without a token should give a UsageException with
+	 * error message:
+	 *   "The token parameter must be set"
+	 *
+	 * @group API
+	 * @dataProvider provideSetItemIdDataOp
+	 * @expectedException UsageException
+	 */
+	function testSetItemWithNoToken( $id, $op, $data ) {
+		$this->doApiRequest(
+			array(
+				'action' => 'wbsetitem',
+				'reason' => 'Some reason',
+				'data' => $data
+				),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+	}
+
+	/**
+	 * @group API
+	 * @depends testSetItemGetToken
+	 * @depends testSetItemWithNoToken
+	 * @dataProvider provideSetItemIdDataOp
+	 */
+	function testSetItemGetTokenSetData( $id, $op, $data ) {
+		$req = array();
 		if (WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true) {
-			$data = $this->doApiRequest(
+			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
 					'gettoken' => '' ),
@@ -175,66 +118,32 @@ class ApiWikibaseTests extends ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-		//print_r($data);
-			$token = $data[0]['wbsetitem']['setitemtoken'];
-			$first = $this->doApiRequest( array(
-					'action' => 'wbsetitem',
-				'item' => 'set',
-					'data' => $data,
-					'token' => $token
-				),
-				null,
-				false,
-				self::$users['wbeditor']->user );
-		//print_r($first[0]);
-		}
-		else {
-			$first = $this->doApiRequest( array(
-					'action' => 'wbsetitem',
-				'item' => 'set',
-				'reason' => 'Some reason',
-					'data' => $data
-				),
-				null,
-				false,
-				self::$users['wbeditor']->user );
 			
+			$req['token'] = $first[0]['wbsetitem']['setitemtoken'];
 		}
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the first call to the API" );
-		$this->assertArrayHasKey( 'item', $first[0],
-			"Must have an 'items' key in the result from the first call to the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['item'],
-			"Must have an 'id' key in the 'item' result from the first call to the API" );
-		$this->assertArrayHasKey( 'sitelinks', $first[0]['item'],
-			"Must have an 'sitelinks' key in the 'item' result from the first call to the API" );
-		$this->assertArrayHasKey( 'labels', $first[0]['item'],
-			"Must have an 'labels' key in the 'item' result from the first call to the API" );
-		$this->assertArrayHasKey( 'descriptions', $first[0]['item'],
-			"Must have an 'descriptions' key in the 'item' result from the first call to the API" );
+		
+		$req = array_merge( $req, array(
+				'action' => 'wbsetitem',
+				'summary' => 'Some reason',
+				'data' => $data,
+				'item' => $op ) );
+		
+		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+		$this->assertArrayHasKey( 'success', $second[0],
+			"Must have an 'success' key in the second result from the API" );
+		$this->assertArrayHasKey( 'item', $second[0],
+			"Must have an 'item' key in the second result from the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['item'],
+			"Must have an 'id' key in the 'item' from the second result from the API" );
+		$this->assertArrayHasKey( 'sitelinks', $second[0]['item'],
+			"Must have an 'sitelinks' key in the 'item' result from the second call to the API" );
+		$this->assertArrayHasKey( 'labels', $second[0]['item'],
+			"Must have an 'labels' key in the 'item' result from the second call to the API" );
+		$this->assertArrayHasKey( 'descriptions', $second[0]['item'],
+			"Must have an 'descriptions' key in the 'item' result from the second call to the API" );
 		// we should store and reuse but its thrown away on each iteration
-		$this->assertEquals( $id, $first[0]['item']['id'],
-			"Must have an 'id' key in the 'item' result from the first call to the API that is equal to the expected" );
-		//print_r($first);
-		//exit;
-	}
-	
-	public function providerGetItemId() {
-		$idx = ApiWikibaseTests::$top;
-		return array(
-			array( ++$idx, 'de', 'Berlin'),
-			array( $idx, 'en', 'Berlin'),
-			array( $idx, 'no', 'Berlin'),
-			array( $idx, 'nn', 'Berlin'),
-			array( ++$idx, 'de', 'London'),
-			array( $idx, 'en', 'London'),
-			array( $idx, 'no', 'London'),
-			array( $idx, 'nn', 'London'),
-			array( ++$idx, 'de', 'Oslo'),
-			array( $idx, 'en', 'Oslo'),
-			array( $idx, 'no', 'Oslo'),
-			array( $idx, 'nn', 'Oslo'),
-		);
+		$this->assertEquals( $id, $second[0]['item']['id'],
+			"Must have an 'id' key in the 'item' result from the second call to the API that is equal to the expected" );
 	}
 	
 	/**
@@ -242,11 +151,10 @@ class ApiWikibaseTests extends ApiTestCase {
 	 * This is really a fast lookup without reparsing the stringified item.
 	 * 
 	 * @group API
-	 * @Depends testSetItem
+	 * @Depends testSetItemGetTokenSetData
 	 * @dataProvider providerGetItemId
-	 * @group Broken
 	 */
-	public function testGetItemId($id, $site, $title) {
+	public function testGetItemId( $id, $site, $title ) {
 		$first = $this->doApiRequest( array(
 			'action' => 'wbgetitemid',
 			'site' => $site,
@@ -262,25 +170,15 @@ class ApiWikibaseTests extends ApiTestCase {
 			"Must have the value '{$id}' for the 'id' in the result from the API" );
 	}
 	
-	public function providerGetItems() {
-		$idx = ApiWikibaseTests::$top;
-		return array(
-			array( ++$idx ),
-			array( ++$idx ),
-			array( ++$idx ),
-		);
-	}
-	
 	/**
 	 * Testing if we can get individual complete stringified items if we do lookup with single ids.
 	 * Note that this makes assumptions about which ids they have been assigned.
 	 * 
 	 * @group API
-	 * @dataProvider providerGetItems
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @dataProvider provideSetItemIdDataOp
+	 * @Depends testSetItemGetTokenSetData
 	 */
-	public function testGetItems( $id ) {
+	public function testGetItems( $id, $op, $data ) {
 		$first = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
 			'ids' => "{$id}",
@@ -305,8 +203,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	 * Testing if we can get all the complete stringified items if we do lookup with multiple ids.
 	 * 
 	 * @group API
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testGetItemsMultiple() {
 		$first = $this->doApiRequest( array(
@@ -327,8 +224,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider providerGetItemId
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testGetItemsSiteTitle($id, $site, $title) {
 		$first = $this->doApiRequest( array(
@@ -352,15 +248,6 @@ class ApiWikibaseTests extends ApiTestCase {
 			"Must have an 'descriptions' key in the '{$id}' result from the API" );
 	}
 	
-	public function providerLinkSiteId() {
-		$idx = ApiWikibaseTests::$top;
-		return array(
-			array( ++$idx, 'nn', 'Berlin', 'fi', 'Berlin', 1 ),
-			array( ++$idx, 'en', 'London', 'fi', 'London', 2 ),
-			array( ++$idx, 'no', 'Oslo', 'fi', 'Oslo', 3 ),
-		);
-	}
-		
 	/**
 	 * This tests are entering links to sites by giving 'id' for the fiorst lookup, then setting 'linksite' and 'linktitle'.
 	 * In these cases the ids returned should also match up with the ids from the provider.
@@ -368,7 +255,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider providerLinkSiteId
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSiteIdAdd( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'add' );
@@ -377,8 +264,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLinkSiteId
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSiteIdUpdate( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'update' );
@@ -387,15 +273,28 @@ class ApiWikibaseTests extends ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLinkSiteId
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSiteIdSet( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'set' );
 	}
 
 	public function linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
-		$first = $this->doApiRequest( array(
+		$req = array();
+		if (WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true) {
+			$data = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'gettoken' => '' ),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			//print_r($data[0]);
+			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
+		}
+		
+		$req = array_merge( $req, array(
 			'action' => 'wblinksite',
 			'id' => $id,
 			'linksite' => $linksite,
@@ -403,6 +302,7 @@ class ApiWikibaseTests extends ApiTestCase {
 			'link' => $op, // this is an odd name
 		) );
 		
+		$first = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the first call to the API" );
 		$this->assertArrayHasKey( 'item', $first[0],
@@ -451,15 +351,6 @@ class ApiWikibaseTests extends ApiTestCase {
 			"Must have the value '{$id}' for the 'id' in the result from the third call to the API" );
 	}
 
-	public function providerLinkSitePair() {
-		$idx = ApiWikibaseTests::$top;
-		return array(
-			array( ++$idx, 'nn', 'Berlin', 'sv', 'Berlin', 1 ),
-			array( ++$idx, 'en', 'London', 'sv', 'London', 2 ),
-			array( ++$idx, 'no', 'Oslo', 'sv', 'Oslo', 3 ),
-		);
-	}
-		
 	/**
 	 * This tests are entering links to sites by giving 'site' and 'title' pairs instead of id, then setting 'linksite' and 'linktitle'.
 	 * In these cases the ids returned should also match up with the ids from the provider.
@@ -467,8 +358,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider providerLinkSitePair
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSitePairAdd( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'add' );
@@ -477,8 +367,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLinkSitePair
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSitePairUpdate( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'update' );
@@ -487,23 +376,38 @@ class ApiWikibaseTests extends ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLinkSitePair
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSitePairSet( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'set' );
 	}
 
 	public function linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
-		$first = $this->doApiRequest( array(
+		$req = array();
+		if (WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true) {
+			$data = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'gettoken' => '' ),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			//print_r($data[0]);
+			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
+		}
+		
+		$req = array_merge( $req, array(
 			'action' => 'wblinksite',
 			'site' => $site,
 			'title' => $title,
 			'linksite' => $linksite,
 			'linktitle' => $linktitle,
 			'badge' => $badge,
-			'link' => $op,
+			'link' => $op, // this is an odd name
 		) );
+		
+		$first = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the first call to the API" );
@@ -557,23 +461,13 @@ class ApiWikibaseTests extends ApiTestCase {
 		
 	}
 
-	public function providerLabelDescription() {
-		$idx = ApiWikibaseTests::$top;
-		return array(
-			array( ++$idx, 'nn', 'Berlin', 'da', 'Berlin', 'Hovedstad i Tyskland' ),
-			array( ++$idx, 'nn', 'London', 'da', 'London', 'Hovedstad i England' ),
-			array( ++$idx, 'nn', 'Oslo', 'da', 'Oslo', 'Hovedstad i Norge' ),
-		);
-	}
-	
 	/**
 	 * This tests if the site links for the items can be found by using 'id' from the provider.
 	 * That is the updating should not have moved them around or deleted old content.
 	 * 
 	 * @group API
 	 * @dataProvider providerLabelDescription
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testSetLanguageAttributeAdd( $id, $site, $title, $language, $label, $description ) {
 		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'add' );
@@ -582,8 +476,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLabelDescription
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testSetLanguageAttributeUpdate( $id, $site, $title, $language, $label, $description ) {
 		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'update' );
@@ -592,8 +485,7 @@ class ApiWikibaseTests extends ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLabelDescription
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testSetLanguageAttributeSet( $id, $site, $title, $language, $label, $description ) {
 		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'set' );
@@ -601,7 +493,21 @@ class ApiWikibaseTests extends ApiTestCase {
 	
 	public function setLanguageAttribute( $id, $site, $title, $language, $label, $description, $op ) {
 		
-		$first = $this->doApiRequest( array(
+		$req = array();
+		if (WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true) {
+			$data = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'gettoken' => '' ),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			//print_r($data[0]);
+			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
+		}
+		
+		$req = array_merge( $req, array(
 			'action' => 'wbsetlanguageattribute',
 			'id' => $id,
 			'label' => $label,
@@ -609,6 +515,8 @@ class ApiWikibaseTests extends ApiTestCase {
 			'language' => $language,
 			'item' => $op
 		) );
+		
+		$first = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
@@ -649,23 +557,13 @@ class ApiWikibaseTests extends ApiTestCase {
 		
 	}
 	
-	public function providerRemoveLabelDescription() {
-		$idx = ApiWikibaseTests::$top;
-		return array(
-			array( ++$idx, 'nn', 'Berlin', 'da' ),
-			array( ++$idx, 'nn', 'London', 'da' ),
-			array( ++$idx, 'nn', 'Oslo', 'da' ),
-		);
-	}
-	
 	/**
 	 * This tests if the site links for the items can be found by using 'id' from the provider.
 	 * That is the updating should not have moved them around or deleted old content.
 	 * 
 	 * @group API
 	 * @dataProvider providerRemoveLabelDescription
-	 * @Depends testSetItem
-	 * @group Broken
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testDeleteLanguageAttributeLabel( $id, $site, $title, $language ) {
 		$this->deleteLanguageAttribute( $id, $site, $title, $language, 'label' );
@@ -673,9 +571,8 @@ class ApiWikibaseTests extends ApiTestCase {
 	
 	/**
 	 * @group API
-	 * @group Broken
 	 * @dataProvider providerRemoveLabelDescription
-	 * @Depends testSetItem
+	 * @Depends testSetItemGetTokenSetData
 	 */
 	public function testDeleteLanguageAttributeDescription( $id, $site, $title, $language ) {
 		$this->deleteLanguageAttribute( $id, $site, $title, $language, 'description' );
@@ -683,13 +580,28 @@ class ApiWikibaseTests extends ApiTestCase {
 	
 	public function deleteLanguageAttribute( $id, $site, $title, $language, $op ) {
 		
-		$first = $this->doApiRequest( array(
+		$req = array();
+		if (WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true) {
+			$data = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'gettoken' => '' ),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			//print_r($data[0]);
+			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
+		}
+		
+		$req = array_merge( $req, array(
 			'action' => 'wbdeletelanguageattribute',
 			'id' => $id,
 			'language' => $language,
 			'attribute' => $op,
-			//'item' => $op
 		) );
+		
+		$first = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
@@ -725,43 +637,139 @@ class ApiWikibaseTests extends ApiTestCase {
 	}
 	
 	/**
-	 * TODO: Implement this
-	 * Check that we have the help link
-	 * @group ApiHelp
-	 * @group Broken
+	 * Just provide the actions to test the API calls
 	 */
-	public function testGetHelpUrls() {
-		
-		$first = $this->doApiRequest( array(
-			'action' => 'help',
-			'modules' => 'wbgetitemid',
-		) );
-		
-		return;
-		//print_r($first);
-		return;
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result in the second call to the API" );
-		
-		return;
-		
-		$this->assertIsInternal( 'array', $first,
-			"Must be an array as the main structure" );
-		$this->assertInternalType(
-			'string',
-			$first,
-			'Checking getHelpUrls for a valid string.'
-		);
-		$this->assertRegExp(
-			'/^(http|https):/i',
-			$first,
-			'Checking getHelpUrls for a valid protocol.'
-		);
-		$this->assertRegExp(
-			'/\/\/[^\.]+\.[^\.]+\.[^\.]+\//i',
-			$first,
-			'Checking getHelpUrls for something that looks vaguely like a domain.'
+	function provideSetItemIdDataOp() {
+		$idx = self::$top;
+		return array(
+			array(
+				++$idx,
+				'add',
+				'{
+					"links": {
+						"de": { "site": "de", "title": "Berlin" },
+						"en": { "site": "en", "title": "Berlin" },
+						"no": { "site": "no", "title": "Berlin" },
+						"nn": { "site": "nn", "title": "Berlin" }
+					},
+					"label": {
+						"de": { "language": "de", "value": "Berlin" },
+						"en": { "language": "en", "value": "Berlin" },
+						"no": { "language": "no", "value": "Berlin" },
+						"nn": { "language": "nn", "value": "Berlin" }
+					},				
+					"description": { 
+						"de" : { "language": "de", "value": "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland." },
+						"en" : { "language": "en", "value": "Capital city and a federated state of the Federal Republic of Germany." },
+						"no" : { "language": "no", "value": "Hovedsted og delstat og i Forbundsrepublikken Tyskland." },
+						"nn" : { "language": "nn", "value": "Hovudstad og delstat i Forbundsrepublikken Tyskland." }
+					}
+				}'
+			),
+			array(
+				++$idx,
+				'add',
+				'{
+					"links": {
+						"de": { "site": "de", "title": "London" },
+						"en": { "site": "en", "title": "London" },
+						"no": { "site": "no", "title": "London" },
+						"nn": { "site": "nn", "title": "London" }
+					},
+					"label": {
+						"de": { "language": "de", "value": "London" },
+						"en": { "language": "en", "value": "London" },
+						"no": { "language": "no", "value": "London" },
+						"nn": { "language": "nn", "value": "London" }
+					},				
+					"description": { 
+						"de" : { "language": "de", "value": "Hauptstadt Englands und des Vereinigten Königreiches." },
+						"en" : { "language": "en", "value": "Capital city of England and the United Kingdom." },
+						"no" : { "language": "no", "value": "Hovedsted i England og Storbritannia." },
+						"nn" : { "language": "nn", "value": "Hovudstad i England og Storbritannia." }
+					}
+				}'
+			),
+			array(
+				++$idx,
+				'add',
+				'{
+					"links": {
+						"de": { "site": "de", "title": "Oslo" },
+						"en": { "site": "en", "title": "Oslo" },
+						"no": { "site": "no", "title": "Oslo" },
+						"nn": { "site": "nn", "title": "Oslo" }
+					},
+					"label": {
+						"de": { "language": "de", "value": "Oslo" },
+						"en": { "language": "en", "value": "Oslo" },
+						"no": { "language": "no", "value": "Oslo" },
+						"nn": { "language": "nn", "value": "Oslo" }
+					},				
+					"description": { 
+						"de" : { "language": "de", "value": "Hauptstadt der Norwegen." },
+						"en" : { "language": "en", "value": "Capital city in Norway." },
+						"no" : { "language": "no", "value": "Hovedsted i Norge." },
+						"nn" : { "language": "nn", "value": "Hovudstad i Noreg." }
+					}
+				}'
+			),
 		);
 	}
-}
 	
+	public function providerGetItemId() {
+		$idx = self::$top;
+		return array(
+			array( ++$idx, 'de', 'Berlin'),
+			array( $idx, 'en', 'Berlin'),
+			array( $idx, 'no', 'Berlin'),
+			array( $idx, 'nn', 'Berlin'),
+			array( ++$idx, 'de', 'London'),
+			array( $idx, 'en', 'London'),
+			array( $idx, 'no', 'London'),
+			array( $idx, 'nn', 'London'),
+			array( ++$idx, 'de', 'Oslo'),
+			array( $idx, 'en', 'Oslo'),
+			array( $idx, 'no', 'Oslo'),
+			array( $idx, 'nn', 'Oslo'),
+		);
+	}
+	
+	public function providerLinkSiteId() {
+		$idx = self::$top;
+		return array(
+			array( ++$idx, 'nn', 'Berlin', 'fi', 'Berlin', 1 ),
+			array( ++$idx, 'en', 'London', 'fi', 'London', 2 ),
+			array( ++$idx, 'no', 'Oslo', 'fi', 'Oslo', 3 ),
+		);
+	}
+	
+	public function providerLinkSitePair() {
+		$idx = self::$top;
+		return array(
+			array( ++$idx, 'nn', 'Berlin', 'sv', 'Berlin', 1 ),
+			array( ++$idx, 'en', 'London', 'sv', 'London', 2 ),
+			array( ++$idx, 'no', 'Oslo', 'sv', 'Oslo', 3 ),
+		);
+	}
+	
+	public function providerLabelDescription() {
+		$idx = self::$top;
+		return array(
+			array( ++$idx, 'nn', 'Berlin', 'da', 'Berlin', 'Hovedstad i Tyskland' ),
+			array( ++$idx, 'nn', 'London', 'da', 'London', 'Hovedstad i England' ),
+			array( ++$idx, 'nn', 'Oslo', 'da', 'Oslo', 'Hovedstad i Norge' ),
+		);
+	}
+	
+	public function providerRemoveLabelDescription() {
+		$idx = self::$top;
+		return array(
+			array( ++$idx, 'nn', 'Berlin', 'de' ),
+			array( ++$idx, 'nn', 'London', 'de' ),
+			array( ++$idx, 'nn', 'Oslo', 'de' ),
+		);
+	}
+	
+	
+}
