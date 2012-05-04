@@ -128,7 +128,7 @@ $wgHooks['AbortMove'][]								= 'WikibaseHooks::onAbortMove';
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' => preg_replace( '%^.*[/\\\](.+)$%', '$1', dirname( __FILE__ ) ) . '/resources'
+	'remoteExtPath' => 'Wikibase/resources'
 );
 
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
