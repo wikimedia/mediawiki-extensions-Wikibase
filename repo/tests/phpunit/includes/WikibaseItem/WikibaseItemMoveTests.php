@@ -14,7 +14,7 @@
  * @author John Erling Blad < jeblad@gmail.com >
  *
  */
-class WikibaseItemTests extends MediaWikiTestCase {
+class WikibaseItemMoveTests extends MediaWikiTestCase {
 
 	/**
 	 * @var WikibaseItem
@@ -38,13 +38,6 @@ class WikibaseItemTests extends MediaWikiTestCase {
 		$title = Title::newFromText( 'wbmovetest' );
 		$this->page =  new WikiPage( $title );
 		$this->page->doEditContent( new WikitextContent( 'foobar' ), 'test' );
-	}
-
-	/**
-	 * This is to tear down the environment
-	 */
-	public function tearDown() {
-		parent::tearDown();
 	}
 
 	/**

@@ -24,6 +24,7 @@ $messages['en'] = array(
 	'wikibase-add' => 'add',
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-edit-placeholder' => 'enter description',
+	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
 	'wikibase-sitelink-site-edit-placeholder' => 'specify site',
 	'wikibase-sitelink-page-edit-placeholder' => 'specify page',
