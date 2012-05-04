@@ -116,6 +116,7 @@ final class WikibaseHooks {
 				'tests/qunit/wikibase.ui.Toolbar.Tooltip.tests.js'
 			),
 			'dependencies' => array(
+				'wikibase.tests.qunit.testrunner',
 				'wikibase',
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool'

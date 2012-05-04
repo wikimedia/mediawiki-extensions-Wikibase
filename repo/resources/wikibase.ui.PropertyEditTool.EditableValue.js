@@ -411,8 +411,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * we work with arrays instead of proper objects here.
 	 * 
 	 * @todo: make this deprecated as soon as we use objects representing property values...
-	 *
-	 * @static
 	 * 
 	 * @param Array value1
 	 * @param Array|null value2 if null, this will check whether value1 is empty

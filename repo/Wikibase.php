@@ -133,6 +133,14 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	)
 );
 
+$wgResourceModules['wikibase.tests.qunit.testrunner'] = $moduleTemplate + array(
+	'scripts' => '../tests/qunit/data/testrunner.js',
+	'dependencies' => array(
+		'mediawiki.tests.qunit.testrunner',
+	),
+	'position' => 'top'
+);
+
 $wgResourceModules['wikibase.ui.Toolbar'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.ui.js',

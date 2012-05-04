@@ -13,7 +13,7 @@
 
 
 ( function () {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.Interface', {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.Interface', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } );
 			this.evInterface = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( this.node );
@@ -52,7 +52,7 @@
 			this.node = null;
 			this.strings = null;
 		}
-	} );
+	} ) );
 
 
 	test( 'initial check', function() {

@@ -13,7 +13,7 @@
 
 
 ( function () {
-	module( 'wikibase', QUnit.newMwEnvironment() );
+	module( 'wikibase', window.QUnit.newWbEnvironment() );
 
 	test( 'basic', function() {
 

@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.DescriptionEditTool', {
+	module( 'wikibase.ui.DescriptionEditTool', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.node = $( '<div/>', { text: 'Text' } );
 			this.subject = new window.wikibase.ui.DescriptionEditTool( this.node );
@@ -38,7 +38,7 @@
 			this.h1 = null;
 		}
 
-	} );
+	} ) );
 
 
 	test( 'basic check', function() {

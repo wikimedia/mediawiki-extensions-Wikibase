@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface', {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } ).append( $( 'a', { text: 'Link' } ) );
 			this.siteDetails = {
@@ -59,7 +59,7 @@
 			this.siteDetails = null;
 			this.sites = null;
 		}
-	} );
+	} ) );
 
 
 	test( 'basic', function() {

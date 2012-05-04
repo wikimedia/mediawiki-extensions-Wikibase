@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.Toolbar', {
+	module( 'wikibase.ui.Toolbar', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.toolbar = new window.wikibase.ui.Toolbar();
 
@@ -46,7 +46,7 @@
 
 		}
 
-	} );
+	} ) );
 
 
 	test( 'fill and remove', function() {

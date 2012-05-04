@@ -11,9 +11,8 @@
  */
 'use strict';
 
-
 ( function() {
-	module( 'wikibase.ui.LabelEditTool', {
+	module( 'wikibase.ui.LabelEditTool', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.h1 = $( '<h1/>', { 'id': 'firstHeading', 'class': 'firstHeading' } );
 			this.span = $( '<span/>', { text: 'Text' } ).appendTo( this.h1 );
@@ -45,7 +44,7 @@
 			this.h1 = null;
 		}
 
-	} );
+	} ) );
 
 
 	test( 'basic check', function() {
