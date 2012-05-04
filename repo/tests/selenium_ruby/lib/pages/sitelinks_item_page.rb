@@ -14,11 +14,14 @@ class SitelinksItemPage < ItemPage
   span(:sitelinksSaveLinkDisabled, :class => "wb-ui-toolbar-button-disabled")
   unordered_list(:siteIdAutocompleteList, :class => "ui-autocomplete", :index => 0)
   unordered_list(:pageAutocompleteList, :class => "ui-autocomplete", :index => 1)
-  link(:saveSitelinkLink, :css => "table.wb-sitelinks > tbody > tr > td:nth-child(3) > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
-  link(:cancelSitelinkLink, :css => "table.wb-sitelinks > tbody > tr > td:nth-child(3) > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
+  # link(:saveSitelinkLink, :css => "table.wb-sitelinks > tbody > tr > td:nth-child(3) > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
+  # link(:cancelSitelinkLink, :css => "table.wb-sitelinks > tbody > tr > td:nth-child(3) > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
+  link(:saveSitelinkLink, :text => "save")
+  link(:cancelSitelinkLink, :text => "cancel")
   # unordered_list(:siteIdAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all'][1]")
   # unordered_list(:pageAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all'][2]")
   # cell(:siteIdCell, :xpath => "//table[@class='wb-sitelinks']/tbody/tr[1]/td[1]")
+  
   def getNumberOfSitelinksFromCounter
     scanned = siteLinkCounter.scan(/\(([^)]+)\)/)
     integerValue = scanned[0][0].to_i()
