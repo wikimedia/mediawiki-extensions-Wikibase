@@ -18,6 +18,7 @@ class SitelinksItemPage < ItemPage
   # link(:cancelSitelinkLink, :css => "table.wb-sitelinks > tbody > tr > td:nth-child(3) > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
   link(:saveSitelinkLink, :text => "save")
   link(:cancelSitelinkLink, :text => "cancel")
+  link(:removeSitelinkLink, :text => "remove")
   # unordered_list(:siteIdAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all'][1]")
   # unordered_list(:pageAutocompleteList, :xpath => "//ul[@class='ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all'][2]")
   # cell(:siteIdCell, :xpath => "//table[@class='wb-sitelinks']/tbody/tr[1]/td[1]")

@@ -99,10 +99,25 @@ describe "Check functionality of add/edit/remove sitelinks" do
         count = count+1
         if count!=1
           @current_page.getNumberOfSitelinksFromCounter.should == count
-        end 
+        end
       end
       @current_page.countExistingSitelinks.should == count
-      
+    end
+  end
+
+  context "Check for removing multiple site link UI" do
+    it "should check if removing multiple sitelink works" do
+      visit_page(SitelinksItemPage)
+      numExistingSitelinks = @current_page.countExistingSitelinks
+      @current_page.removeSitelinkLink?.should be_true
+      for i in 1..numExistingSitelinks
+        @current_page.removeSitelinkLink?.should be_true
+        @current_page.removeSitelinkLink
+        ajax_wait
+        @current_page.countExistingSitelinks.should == (numExistingSitelinks-i)
+      end
+      visit_page(SitelinksItemPage)
+      @current_page.countExistingSitelinks.should == 0
     end
   end
 
