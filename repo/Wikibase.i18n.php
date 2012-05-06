@@ -59,12 +59,19 @@ $messages['be-tarask'] = array(
 	'wikibase-add' => 'дадаць',
 	'wikibase-label-edit-placeholder' => 'увядзіце метку',
 	'wikibase-description-edit-placeholder' => 'увядзіце апісаньне',
+	'wikibase-sitelink-site-edit-placeholder' => 'пазначце сайт',
+	'wikibase-sitelink-page-edit-placeholder' => 'пазначце старонку',
 	'wikibase-label-input-help-message' => 'Увядзіце назву гэтага набору зьвестак у $1.',
 	'wikibase-description-input-help-message' => 'Увядзіце кароткае апісаньне ў $1.',
 	'wikibase-sitelinks' => 'Старонкі Вікіпэдыі, што спасылаюцца на гэты аб’ект',
 	'wikibase-sitelinks-add' => 'дадаць спасылку да старонкі Вікіпэдыі',
 	'wikibase-sitelinks-empty' => 'Ніводная старонка Вікіпэдыі дагэтуль не спасылаецца на аб’ект.',
+	'wikibase-sitelinks-input-help-message' => 'Дадайце спасылку на артыкул у Вікіпэдыі.',
 	'wikibase-remove' => 'выдаліць',
+	'wikibase-propertyedittool-full' => 'Сьпіс значэньняў выкананы.',
+	'wikibase-sitelinksedittool-full' => 'Спасылкі на старонкі ёсьць ужо для ўсіх вядомых сайтаў.',
+	'special-itembytitle' => 'Аб’ект паводле назвы',
+	'special-itembylabel' => 'Аб’ект паводле меткі',
 );
 
 /** German (Deutsch)
@@ -114,12 +121,19 @@ $messages['dsb'] = array(
 	'wikibase-add' => 'pśidaś',
 	'wikibase-label-edit-placeholder' => 'pomjenjenje zapódaś',
 	'wikibase-description-edit-placeholder' => 'wopisanje zapódaś',
+	'wikibase-sitelink-site-edit-placeholder' => 'sedło pódaś',
+	'wikibase-sitelink-page-edit-placeholder' => 'bok pódaś',
 	'wikibase-label-input-help-message' => 'Zapódaj mě toś teje datoweje sajźby w $1.',
 	'wikibase-description-input-help-message' => 'Zapódaj krotke wopisanje w $1.',
 	'wikibase-sitelinks' => 'Boki Wikipedije, kótarež su z toś tym elementom zwězane',
 	'wikibase-sitelinks-add' => 'wótkaz bokoju Wikipedije pśidaś',
 	'wikibase-sitelinks-empty' => 'Až doněnta žedne boki Wikipedije njejsu zwězane z toś tym elementom.',
+	'wikibase-sitelinks-input-help-message' => 'Póstaj wótkaz k nastawkoju Wikipedije.',
 	'wikibase-remove' => 'wótpóraś',
+	'wikibase-propertyedittool-full' => 'Lisćina gódnotow jo dopołna.',
+	'wikibase-sitelinksedittool-full' => 'Wótkaze k bokam su južo za wšykne znate sedła nastajone.',
+	'special-itembytitle' => 'Zapisk pó titelu',
+	'special-itembylabel' => 'Zapisk pó pomjenjenju',
 );
 
 /** Spanish (Español)
@@ -310,6 +324,7 @@ $messages['nl'] = array(
 	'wikibase-sitelinks-add' => 'verwijzing toevoegen naar een Wikipediapagina',
 	'wikibase-sitelinks-empty' => "Er zijn nog geen {{SITENAME}}-pagina's gekoppeld aan dit item.",
 	'wikibase-remove' => 'verwijderen',
+	'wikibase-propertyedittool-full' => 'De lijst met waarden is compleet.',
 );
 
 /** Portuguese (Português)
