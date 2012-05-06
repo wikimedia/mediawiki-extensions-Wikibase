@@ -45,7 +45,7 @@ $messages['be-tarask'] = array(
 $messages['de'] = array(
 	'wbc-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
 	'wbc-editlinks' => 'Links bearbeiten',
-	'wbc-editlinkstitle' => 'Sprachübergreifende Links bearbeiten',
+	'wbc-editlinkstitle' => 'Sprachenübergreifende Links bearbeiten',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -99,6 +99,13 @@ $messages['hsb'] = array(
 	'wbc-desc' => 'Klient za rozšěrjenje Wikibase',
 	'wbc-editlinks' => 'Wotkazy wobdźěłać',
 	'wbc-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
+);
+
+/** Interlingua (Interlingua)
+ * @author McDutchie
+ */
+$messages['ia'] = array(
+	'wbc-editlinkstitle' => 'Modificar ligamines interlingua',
 );
 
 /** Icelandic (Íslenska)
