@@ -364,7 +364,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	_updateCounters: function() {
 		var counterElems = this._getCounterNodes();
 		if( counterElems !== null && counterElems.length > 0 ) {
-			this._getCounterNodes().text( this._getFormattedCounterText() );
+			this._getCounterNodes().empty().append( this._getFormattedCounterText() );
 		}
 	},
 	
@@ -380,13 +380,29 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Returns a formatted string with the number of elements.
 	 * 
-	 * @return string
+	 * @return jQuery
 	 */
 	_getFormattedCounterText: function() {
+		var out = $();
 		var numberOfValues = this.getValues().length;
-		return ( numberOfValues != 1 )
-				? '(' + numberOfValues + ')'
-				: '';
+		var pendingValues = this.getPendingValues();
+
+		out = out.add( document.createTextNode( '(' + numberOfValues ) );
+
+		if( pendingValues.length > 0 ) {
+			out = out.add( '<span/>', {
+				'class': this.UI_CLASS + '-counter-pending',
+				'title': mw.msg( 'wikibase-propertyedittool-counter-pending-tooltip', pendingValues.length )
+			} )
+			.append( '+' + pendingValues.length )
+			.tipsy( {
+				'gravity': 'ne'
+			} );
+		}
+
+		out = out.add( document.createTextNode( ')' ) );
+
+		return out;
 	},
 	
 	/**

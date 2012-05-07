@@ -48,6 +48,12 @@ h1.firstHeading .wb-ui-toolbar {
 	display:none;
 }
 
+.wb-ui-propertyedittool-counter-pending {
+	margin-left: .25em;
+	color: #57aec0;
+	font-weight: bold;
+}
+
 
 /********** TOOLTIP **********/
 

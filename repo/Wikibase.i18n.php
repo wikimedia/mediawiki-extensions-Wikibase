@@ -34,6 +34,7 @@ $messages['en'] = array(
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 
 	// Special pages

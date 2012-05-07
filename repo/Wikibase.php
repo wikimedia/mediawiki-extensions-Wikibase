@@ -184,7 +184,8 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase',
 		'wikibase.ui.Toolbar',
 		'jquery.ui.autocomplete',
-		'mediawiki.Title'
+		'mediawiki.Title',
+		'mediawiki.jqueryMsg' // for {{plural}} and {{gender}} support in messages
 	),
 	'messages' => array(
 		'wikibase-sitelinks',
@@ -201,6 +202,7 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase-sitelinks-input-help-message',
 		'wikibase-remove',
 		'wikibase-propertyedittool-full',
+		'wikibase-propertyedittool-counter-pending-tooltip',
 		'wikibase-sitelinksedittool-full',
 	)
 );
