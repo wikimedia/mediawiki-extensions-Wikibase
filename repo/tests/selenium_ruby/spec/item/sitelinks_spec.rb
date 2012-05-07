@@ -18,7 +18,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       @current_page.addSitelinkLink
       @current_page.siteIdInputField.should be_true
       @current_page.pageInputField.should be_true
-      @current_page.sitelinksSaveLinkDisabled.should be_true
+      @current_page.saveSitelinkLinkDisabled.should be_true
       @current_page.cancelSitelinkLink?.should be_true
       @current_page.cancelSitelinkLink
 
@@ -72,8 +72,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
     end
   end
 
-  context "Check for adding multiple site link UI" do
-    it "should check if adding multiple sitelink works" do
+  context "Check for adding multiple site links UI" do
+    it "should check if adding multiple sitelinks works" do
       count = 1
       sitelinks = [["de", "Ber"], ["ja", "Ber"], ["he", "Ber"]]
       visit_page(SitelinksItemPage)
@@ -106,6 +106,36 @@ describe "Check functionality of add/edit/remove sitelinks" do
         end
       end
       @current_page.countExistingSitelinks.should == count
+    end
+  end
+
+  context "Check for editing site links UI" do
+    it "should check if editing sitelinks works" do
+      visit_page(SitelinksItemPage)
+      @current_page.wait_until_page_loaded
+      @current_page.editSitelinkLink
+      @current_page.saveSitelinkLinkDisabled?.should be_true
+      @current_page.cancelSitelinkLink?.should be_true
+      @current_page.pageInputField_element.enabled?.should be_true
+      current_page = @current_page.pageInputField
+      new_page = "Ber"
+      @current_page.pageInputField = new_page
+      @current_page.wait_until do
+        (@current_page.pageInputFieldLoading? == false)
+      end
+      @current_page.pageInputField_element.send_keys :arrow_down
+      @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 1).click
+      @current_page.saveSitelinkLinkDisabled?.should be_true
+      @current_page.pageInputField_element.send_keys :arrow_down
+      @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 3).click
+      @current_page.editSitelinkAutocompleteList_element.visible?.should be_false
+      @current_page.saveSitelinkLink?.should be_true
+      @current_page.saveSitelinkLink
+      ajax_wait
+      visit_page(SitelinksItemPage)
+      @current_page.wait_until_page_loaded
+      @current_page.editSitelinkLink
+      @current_page.pageInputField.should_not == current_page
     end
   end
 
