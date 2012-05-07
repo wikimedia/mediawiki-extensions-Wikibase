@@ -19,8 +19,8 @@
  * @param jQuery subject
  */
 window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject );
+	if( arguments.length > 0 ) {
+		this._init.apply( this, arguments );
 	}
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
