@@ -143,6 +143,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			}
 		}
 
+		$this->getResult()->addValue(
+			null,
+			'item',
+			array()
+		);
+		
 		if ( $item->getModelName() === CONTENT_MODEL_WIKIBASE ) {
 			$success = $this->modifyItem( $item, $params );
 
@@ -187,11 +193,8 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 		if ( $success ) {
 			$this->getResult()->addValue(
-				null,
 				'item',
-				array(
-					'id' => $item->getId()
-				)
+				'id', $item->getId()
 			);
 		}
 	}
