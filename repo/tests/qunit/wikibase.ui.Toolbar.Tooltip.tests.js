@@ -12,7 +12,7 @@
 'use strict';
 
 ( function() {
-	module( 'wikibase.ui.Toolbar.Tooltip', {
+	module( 'wikibase.ui.Toolbar.Tooltip', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 
 			this.tooltip = new window.wikibase.ui.Toolbar.Tooltip( 'Text' );
@@ -45,7 +45,7 @@
 			);
 		}
 
-	} );
+	} ) );
 
 	test( 'show and hide', function() {
 

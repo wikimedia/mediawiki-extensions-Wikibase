@@ -12,7 +12,7 @@
 'use strict';
 
 ( function () {
-	module( 'wikibase.ui.Toolbar.Label', {
+	module( 'wikibase.ui.Toolbar.Label', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 
 			this.label = new window.wikibase.ui.Toolbar.Label( 'Text' );
@@ -33,7 +33,7 @@
 			);
 		}
 
-	} );
+	} ) );
 
 	test( 'set and get content', function() {
 

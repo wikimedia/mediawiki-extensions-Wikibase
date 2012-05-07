@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.Toolbar.EditGroup', {
+	module( 'wikibase.ui.Toolbar.EditGroup', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			var node = $( '<div/>', { id: 'subject' } );
 			$( '<div/>', { id: 'parent' } ).append( node );
@@ -71,7 +71,7 @@
 			this.editableValue = null;
 
 		}
-	} );
+	} ) );
 
 
 	test( 'init check', function() {

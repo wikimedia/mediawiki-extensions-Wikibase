@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.PropertyEditTool', {
+	module( 'wikibase.ui.PropertyEditTool', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.node = $( '<div/>' );
 			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( this.node );
@@ -54,7 +54,7 @@
 			this.propertyEditTool = null;
 		}
 
-	} );
+	} ) );
 
 	test( 'initial check', function() {
 

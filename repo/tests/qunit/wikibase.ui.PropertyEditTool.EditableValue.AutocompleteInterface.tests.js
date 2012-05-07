@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface', {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } );
 			this.autocomplete = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface( this.node );
@@ -38,7 +38,7 @@
 			this.node = null;
 		}
 
-	} );
+	} ) );
 
 
 	test( 'basic check', function() {

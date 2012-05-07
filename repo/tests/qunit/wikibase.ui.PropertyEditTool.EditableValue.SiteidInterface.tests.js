@@ -13,31 +13,31 @@
 
 
 ( function() {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface', {
+
+	var config = {
+		'wbSiteDetails': {
+			en: {
+				apiUrl: 'http://en.wikipedia.org/w/api.php',
+				id: 'en',
+				name: 'English Wikipedia',
+				pageUrl: 'http://en.wikipedia.org/wiki/$1',
+				shortName: 'English'
+			},
+			de: {
+				apiUrl: 'http://de.wikipedia.org/w/api.php',
+				id: 'de',
+				name: 'Deutsche Wikipedia',
+				pageUrl: 'http://de.wikipedia.org/wiki/$1',
+				shortName: 'Deutsch'
+			}
+		}
+	};
+
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface', window.QUnit.newWbEnvironment( config, null, {
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } );
-
-			mw.config.set( 'wbSiteDetails', {
-				en: {
-					apiUrl: 'http://en.wikipedia.org/w/api.php',
-					id: 'en',
-					name: 'English Wikipedia',
-					pageUrl: 'http://en.wikipedia.org/wiki/$1',
-					shortName: 'English'
-				},
-				de: {
-					apiUrl: 'http://de.wikipedia.org/w/api.php',
-					id: 'de',
-					name: 'Deutsche Wikipedia',
-					pageUrl: 'http://de.wikipedia.org/wiki/$1',
-					shortName: 'Deutsch'
-				}
-			} );
 			this.siteIds = ['en', 'de'];
 			this.subject = new window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface();
-
-
-
 		},
 		teardown: function() {
 			this.subject.destroy();
@@ -51,7 +51,7 @@
 			this.node = null;
 			this.subject = null;
 		}
-	} );
+	} ) );
 
 
 	test( 'init input', function() {

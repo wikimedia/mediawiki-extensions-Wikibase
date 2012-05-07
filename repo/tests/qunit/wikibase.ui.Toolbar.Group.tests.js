@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.Toolbar.Group', {
+	module( 'wikibase.ui.Toolbar.Group', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.subject = new window.wikibase.ui.Toolbar.Group();
 
@@ -33,7 +33,7 @@
 
 			this.subject = null;
 		}
-	} );
+	} ) );
 
 
 	test( 'basic', function() {

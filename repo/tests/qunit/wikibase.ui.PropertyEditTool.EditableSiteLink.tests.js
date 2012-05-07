@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.PropertyEditTool.EditableSiteLink', {
+	module( 'wikibase.ui.PropertyEditTool.EditableSiteLink', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.node = $( '<tr/>', { id: 'subject' } );
 			this.node.append( $( '<td/>', { 'class': 'child' } ) );
@@ -55,7 +55,7 @@
 			this.strings = null;
 		}
 
-	} );
+	} ) );
 
 
 	test( 'check init', function() {

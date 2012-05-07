@@ -13,7 +13,7 @@
 
 
 ( function () {
-	module( 'wikibase.Site', {
+	module( 'wikibase.Site', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.siteDetails = {
 				apiUrl: 'http://en.wikipedia.org/w/api.php',
@@ -36,7 +36,7 @@
 			this.siteDetails = null;
 		}
 
-	} );
+	} ) );
 
 
 	test( 'check init', function() {

@@ -41,7 +41,7 @@ end
 
 def ajax_wait
   # TODO: forced sleep for chrome & opera ('cause jQuery.active not working) is not that nice => investigate other possibilities
-  if ($target_browser == "chrome") || ($target_browser == "opera")
+  if ($target_browser == "chrome") || ($target_browser == "opera") || ($target_browser == "ie")
     sleep 1
   end
   while (script = @browser.execute_script("return jQuery.active")) == 1 do

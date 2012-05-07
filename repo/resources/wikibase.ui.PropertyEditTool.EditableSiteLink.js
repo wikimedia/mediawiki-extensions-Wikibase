@@ -85,8 +85,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return interfaces;
 	},
 	
-	_interfaceHandler_onInputRegistered: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this );
+	_interfaceHandler_onInputRegistered: function( relatedInterface ) {
+		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
 		
 		var idInterface = this._interfaces.siteId;
 		var pageInterface = this._interfaces.pageName;
