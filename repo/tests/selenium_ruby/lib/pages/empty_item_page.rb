@@ -2,7 +2,6 @@ require 'ruby_selenium'
 
 class EmptyItemPage < RubySelenium
   include PageObject
-  
   page_url self.get_new_item_url
   # self.set_item_label
   
