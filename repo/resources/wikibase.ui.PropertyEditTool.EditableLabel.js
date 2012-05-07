@@ -43,10 +43,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	getApiCallParams: function() {
 		return {
 			action: "wbsetlanguageattribute",
-			language: window.wgUserLanguage,
+			language: window.mw.config.get( 'wgUserLanguage' ),
 			label: this.getValue().toString(),
 			id: window.mw.config.get( 'wbItemId' ),
-			item: 'set'
+			item: 'set',
+			token: window.mw.config.get( 'wbEditToken' )
 		};
 	}
 } );

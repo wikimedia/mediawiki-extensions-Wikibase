@@ -160,22 +160,17 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	getApiCallParams: function( removeValue ) {
 		var linkValues = this.getValue();
 		var siteId = this.siteIdInterface.getSelectedSiteId();
+		var params = {
+			action: 'wblinksite',
+			id: window.mw.config.get( 'wbItemId' ),
+			linksite: siteId,
+			linktitle: linkValues[1],
+			token: window.mw.config.get( 'wbEditToken' )
+		};
 		if ( removeValue === true ) {
-			return {
-				action: 'wblinksite',
-				id: mw.config.values.wbItemId,
-				link: 'remove',
-				linksite: siteId,
-				linktitle: linkValues[1]
-			};
+			return $.extend( params, { link: 'remove' } );
 		} else {
-			return {
-				action: 'wblinksite',
-				id: mw.config.values.wbItemId,
-				link: 'set',
-				linksite: siteId,
-				linktitle: linkValues[1]
-			};
+			return $.extend( params, { link: 'set' } );
 		}
 	},
 	

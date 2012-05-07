@@ -37,10 +37,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	getApiCallParams: function() {
 		return {
 			action: 'wbsetlanguageattribute',
-			language: wgUserLanguage,
+			language: window.mw.config.get( 'wgUserLanguage' ),
 			description: this.getValue().toString(),
-			id: mw.config.values.wbItemId,
-			item: 'set'
+			id: window.mw.config.get( 'wbItemId' ),
+			item: 'set',
+			token: window.mw.config.get( 'wbEditToken' )
 		};
 	}
 } );

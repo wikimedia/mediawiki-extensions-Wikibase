@@ -53,6 +53,9 @@ class WikibaseViewItemAction extends FormlessAction {
 			// hand over the itemId to JS
 			$out->addJsConfigVars( 'wbItemId', $content->getId() );
 			$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLangCode ) );
+
+			// retrieve edit token
+			$out->addJsConfigVars( 'wbEditToken', $this->getUser()->getEditToken() );
 			
 			// TODO get this from the configuration after its implemented:
 			$dummySiteDetails = array(
