@@ -66,6 +66,15 @@ $messages['es'] = array(
 	'wbc-editlinkstitle' => 'Editar enlaces de interlengua',
 );
 
+/** Persian (فارسی)
+ * @author ZxxZxxZ
+ */
+$messages['fa'] = array(
+	'wbc-desc' => 'سرویس‌گیرنده برای افزونهٔ ویکی‌بیس',
+	'wbc-editlinks' => 'ویرایش پیوندها',
+	'wbc-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
+);
+
 /** French (Français)
  * @author Gomoko
  * @author Wyz
@@ -81,6 +90,8 @@ $messages['fr'] = array(
  */
 $messages['gl'] = array(
 	'wbc-desc' => 'Cliente para a extensión Wikibase',
+	'wbc-editlinks' => 'Editar as ligazóns',
+	'wbc-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
 );
 
 /** Swiss German (Alemannisch)
@@ -115,6 +126,15 @@ $messages['is'] = array(
 	'wbc-desc' => 'Biðlari fyrir Wikibase viðbótina',
 	'wbc-editlinks' => 'Breyta tenglum',
 	'wbc-editlinkstitle' => 'Breyta tungumálatenglum',
+);
+
+/** Italian (Italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'wbc-desc' => "Client per l'estensione Wikibase",
+	'wbc-editlinks' => 'Modifica collegamenti',
+	'wbc-editlinkstitle' => 'Modifica collegamenti interlingua',
 );
 
 /** Japanese (日本語)
