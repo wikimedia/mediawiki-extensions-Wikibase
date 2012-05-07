@@ -162,6 +162,31 @@ $messages['es'] = array(
 	'special-itembylabel' => 'Artículo por etiqueta',
 );
 
+/** Persian (فارسی)
+ * @author ZxxZxxZ
+ */
+$messages['fa'] = array(
+	'wikibase-desc' => 'داده‌های ساخت‌یافتهٔ مخزن',
+	'wikibase-edit' => 'ویرایش',
+	'wikibase-save' => 'ذخیره',
+	'wikibase-cancel' => 'انصراف',
+	'wikibase-add' => 'افزودن',
+	'wikibase-label-edit-placeholder' => 'واردکردن برچسب',
+	'wikibase-description-edit-placeholder' => 'واردکردن توضیحات',
+	'wikibase-sitelink-site-edit-placeholder' => 'مشخص‌کردن وب‌گاه',
+	'wikibase-sitelink-page-edit-placeholder' => 'مشخص‌کردن صفحه',
+	'wikibase-label-input-help-message' => 'واردکردن عنوان این مجموعه داده‌ها در $1.',
+	'wikibase-description-input-help-message' => 'توضیحات کوتاهی در $1 وارد کنید.',
+	'wikibase-sitelinks' => 'صفحه‌هایی از ویکی‌پدیا که به این آیتم پیوند دارند',
+	'wikibase-sitelinks-add' => 'افزودن پیوند به یک صفحه از ویکی‌پدیا',
+	'wikibase-sitelinks-empty' => 'هیچ صفحه‌ای از ویکی‌پدیا به این آیتم پیوند ندارد.',
+	'wikibase-sitelinks-input-help-message' => 'تنظیم یک لینک به مقاله‌ای از ویکی‌پدیا.',
+	'wikibase-remove' => 'حذف',
+	'wikibase-propertyedittool-full' => 'فهرست مقادیر کامل است.',
+	'special-itembytitle' => 'آیتم بر اساس عنوان',
+	'special-itembylabel' => 'آیتم بر اساس برچسب',
+);
+
 /** French (Français)
  * @author Gomoko
  * @author Wyz
@@ -174,12 +199,19 @@ $messages['fr'] = array(
 	'wikibase-add' => 'ajouter',
 	'wikibase-label-edit-placeholder' => 'saisir étiquette',
 	'wikibase-description-edit-placeholder' => 'saisir description',
+	'wikibase-sitelink-site-edit-placeholder' => 'spécifier le site',
+	'wikibase-sitelink-page-edit-placeholder' => 'spécifier la page',
 	'wikibase-label-input-help-message' => 'Saisissez le titre de ces données définies dans $1.',
 	'wikibase-description-input-help-message' => 'Saisissez une courte description dans $1.',
 	'wikibase-sitelinks' => 'Pages Wikipédia liées à cet élément',
 	'wikibase-sitelinks-add' => 'ajouter un lien vers une page de Wikipédia',
 	'wikibase-sitelinks-empty' => "Aucune page de Wikipédia n'est encore liée à cet élément.",
+	'wikibase-sitelinks-input-help-message' => 'Mettre un lien vers un article de Wikipédia.',
 	'wikibase-remove' => 'retirer',
+	'wikibase-propertyedittool-full' => 'La liste des valeurs est complète.',
+	'wikibase-sitelinksedittool-full' => 'Les liens vers les pages sont déjà définis pour tous les sites connus.',
+	'special-itembytitle' => 'Article par titre',
+	'special-itembylabel' => 'Article par étiquette',
 );
 
 /** Swiss German (Alemannisch)
@@ -251,6 +283,19 @@ $messages['is'] = array(
 	'wikibase-sitelinksedittool-full' => 'Tenglar á síður eru þegar virkir fyrir öll þekkt vefsvæði.',
 	'special-itembytitle' => 'Hlutur eftir titli',
 	'special-itembylabel' => 'Hlutur eftir merki',
+);
+
+/** Italian (Italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'wikibase-edit' => 'modifica',
+	'wikibase-save' => 'salva',
+	'wikibase-cancel' => 'annulla',
+	'wikibase-add' => 'aggiungi',
+	'wikibase-label-edit-placeholder' => 'inserisci etichetta',
+	'wikibase-description-edit-placeholder' => 'inserisci descrizione',
+	'wikibase-remove' => 'rimuovi',
 );
 
 /** Japanese (日本語)
