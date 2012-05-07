@@ -52,6 +52,13 @@ class ApiWikibaseGetItemId extends ApiBase {
 		);
 	}
 
+	/**
+	 * Returns an array of allowed parameters (parameter name) => (default
+	 * value) or (parameter name) => (array with PARAM_* constants as keys)
+	 * Don't call this function directly: use getFinalParams() to allow
+	 * hooks to modify parameters as needed.
+	 * @return array|bool
+	 */
 	public function getAllowedParams() {
 		return array(
 			'site' => array(
@@ -66,6 +73,12 @@ class ApiWikibaseGetItemId extends ApiBase {
 		);
 	}
 
+	/**
+	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
+	 * needed.
+	 *
+	 * @return array|bool False on no parameter descriptions
+	 */
 	public function getParamDescription() {
 		return array(
 			'title' => array(
@@ -79,18 +92,30 @@ class ApiWikibaseGetItemId extends ApiBase {
 		);
 	}
 
+	/**
+	 * Returns the description string for this module
+	 * @return mixed string or array of strings
+	 */
 	public function getDescription() {
 		return array(
 			'API module to obtain the Wikibase ids of one or more pages on the specified site.'
 		);
 	}
 
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
 		) );
 	}
 
+	/**
+	 * Returns usage examples for this module. Return false if no examples are available.
+	 * @return bool|string|array
+	 */
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitemid&site=en&title=Berlin'
@@ -98,10 +123,17 @@ class ApiWikibaseGetItemId extends ApiBase {
 		);
 	}
 	
+	/**
+	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
+	 */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/API:Wikibase#getitemid';
 	}
 
+	/**
+	 * Returns a string that identifies the version of this class.
+	 * @return string
+	 */
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

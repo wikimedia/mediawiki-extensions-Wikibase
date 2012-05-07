@@ -21,11 +21,11 @@ class ApiWikibaseSetItem extends ApiBase {
 	/**
 	 * Check the rights
 	 * 
-	 * @param $title Title
+	 * @param $title Title object where the item is stored
 	 * @param $user User doing the action
-	 * @param $action String
-	 * @param $params String|Array|Null
-	 * @return array
+	 * @param $mod null|String name of the module, usually not set
+	 * @param $op null|String operation that is about to be done, usually not set
+	 * @return array of errors reported from the static getPermissionsError
 	 */
 	protected static function getPermissionsError( $title, $user, $mod='item', $op='add' ) {
 		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
@@ -76,7 +76,6 @@ class ApiWikibaseSetItem extends ApiBase {
 		// lacks error checking
 		$ch = new WikibaseContentHandler();
 		$item = $ch->unserializeContent( $params['data'],'application/json' );
-		//$item->cleanStructure();
 		$success = $item->save();
 		
 		if ( $success ) {
@@ -120,6 +119,10 @@ class ApiWikibaseSetItem extends ApiBase {
 		);
 	}
 	
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'no-token', 'info' => wfMsg( 'wikibase-api-no-token' ) ),
@@ -129,18 +132,37 @@ class ApiWikibaseSetItem extends ApiBase {
 		) );
 	}
 
+	/**
+	 * Returns whether this module requires a Token to execute
+	 * @return bool
+	 */
 	public function needsToken() {
 		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true ;
 	}
 
+	/**
+	 * Indicates whether this module must be called with a POST request
+	 * @return bool
+	 */
 	public function mustBePosted() {
 		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithPost', false ) : true ;
 	}
 
+	/**
+	 * Indicates whether this module requires write mode
+	 * @return bool
+	 */
 	public function isWriteMode() {
 		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithWrite', false ) : true ;
 	}
 	
+	/**
+	 * Returns an array of allowed parameters (parameter name) => (default
+	 * value) or (parameter name) => (array with PARAM_* constants as keys)
+	 * Don't call this function directly: use getFinalParams() to allow
+	 * hooks to modify parameters as needed.
+	 * @return array|bool
+	 */
 	public function getAllowedParams() {
 		return array(
 			'data' => array(
@@ -160,6 +182,12 @@ class ApiWikibaseSetItem extends ApiBase {
 		);
 	}
 
+	/**
+	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
+	 * needed.
+	 *
+	 * @return array|bool False on no parameter descriptions
+	 */
 	public function getParamDescription() {
 		return array(
 			'data' => array( 'The serialized object that is used as the data source.',
@@ -172,12 +200,20 @@ class ApiWikibaseSetItem extends ApiBase {
 		);
 	}
 
+	/**
+	 * Returns the description string for this module
+	 * @return mixed string or array of strings
+	 */
 	public function getDescription() {
 		return array(
 			'API module to create a new Wikibase item and modify it with serialised information.'
 		);
 	}
 
+	/**
+	 * Returns usage examples for this module. Return false if no examples are available.
+	 * @return bool|string|array
+	 */
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbsetitem&data={}'
@@ -187,11 +223,17 @@ class ApiWikibaseSetItem extends ApiBase {
 		);
 	}
 
+	/**
+	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
+	 */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetitem';
 	}
 
-
+	/**
+	 * Returns a string that identifies the version of this class.
+	 * @return string
+	 */
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}
