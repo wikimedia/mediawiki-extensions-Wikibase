@@ -124,6 +124,9 @@ describe "Check functionality of add/edit/remove sitelinks" do
         (@current_page.pageInputFieldLoading? == false)
       end
       @current_page.pageInputField_element.send_keys :arrow_down
+      @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 1).click
+      @current_page.saveSitelinkLinkDisabled?.should be_true
+      @current_page.pageInputField_element.send_keys :arrow_down
       @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 3).click
       @current_page.editSitelinkAutocompleteList_element.visible?.should be_false
       @current_page.saveSitelinkLink?.should be_true
