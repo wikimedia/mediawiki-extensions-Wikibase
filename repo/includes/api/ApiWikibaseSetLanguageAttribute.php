@@ -120,13 +120,13 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		$value = $item->setLabel( $language, $label );
 		if ( $label !== $value ) {
 			$this->getResult()->addValue(
-				null,
+				'item',
 				'normalized',
-				array( 'from' => $label, 'to' => $value )
+				array( array( 'from' => $label, 'to' => $value ) )
 			);
 		}
 		$this->getResult()->addValue(
-			null,
+			'item',
 			'labels',
 			array( $language => $value )
 		);
@@ -146,13 +146,13 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		$value = $item->setDescription( $language, $description );
 		if ( $description !== $value ) {
 			$this->getResult()->addValue(
-				null,
+				'item',
 				'normalized',
 				array( 'from' => $description, 'to' => $value )
 			);
 		}
 		$this->getResult()->addValue(
-			null,
+			'item',
 			'descriptions',
 			array( $language => $value )
 		);
