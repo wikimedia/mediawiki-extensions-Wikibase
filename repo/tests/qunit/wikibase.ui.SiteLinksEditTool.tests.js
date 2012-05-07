@@ -63,7 +63,7 @@
 
 	test( 'adding a new editable site link', function() {
 
-		var initialValue = [ 'de', 'Berlin' ];
+		var initialValue = [ 'Deutsche Wikipedia (de)', 'Berlin' ];
 		var newValue = this.subject.enterNewValue( initialValue );
 
 		equal(

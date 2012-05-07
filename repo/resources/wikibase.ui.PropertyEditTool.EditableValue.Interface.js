@@ -331,16 +331,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			value = this._getValueContainer().text();
 			// if already set, the value should be normalized already
 		}
-		return value;
+		// normalize in case we display a different variation from the actual normalized value
+		return this.normalize( value );
 	},
 	
 	/**
 	 * Sets a value.
 	 * Returns the value really set in the end. This string can be different from the given value
 	 * since it will go through some normalization first.
+	 * Won't change the value and return in case it was invalid.
 	 *
 	 * @param string value
-	 * @return string same as value but normalized
+	 * @return string|null same as value but normalized, null in case the value was invalid
 	 */
 	setValue: function( value ) {
 		// make sure the value is sufficient
@@ -381,8 +383,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Normalizes a string so it is sufficient for setting it as value for this interface.
 	 * This will be done automatically when using setValue().
+	 * In case the given value is invalid, null will be returned.
 	 * 
-	 * @return string
+	 * @return string|null
 	 */
 	normalize: function( value ) {
 		return $.trim( value );
@@ -454,6 +457,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
 	 * If its not in edit mode, the current value will be returned.
+	 *
 	 * @return string
 	 */
 	getInitialValue: function() {
@@ -474,6 +478,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	
 	/**
 	 * Returns whether the current value is valid
+	 *
+	 * @return bool
 	 */
 	isValid: function() {
 		return this.validate( this.getValue() );
@@ -486,7 +492,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @return bool
 	 */
 	validate: function( value ) {
-		return this.normalize( value ) !== '';
+		var normalized = this.normalize( value );
+		return  typeof( value ) == 'string' && normalized !== '';
 	},
 
 	/////////////////

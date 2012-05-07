@@ -91,7 +91,7 @@
 
 		equal(
 			this.subject.setValue( this.subject._currentResults[1].label ),
-			this.subject._currentResults[1].label ,
+			this.subject.normalize( this.subject._currentResults[1].label ),
 			'set value to input option label'
 		);
 
@@ -103,7 +103,7 @@
 
 		equal(
 			this.subject.setValue( this.subject._currentResults[0].value ),
-			this.subject._currentResults[0].value ,
+			this.subject.normalize( this.subject._currentResults[0].label ),
 			'set value to input option value'
 		);
 
@@ -141,10 +141,22 @@
 			'no site id slected'
 		);
 
+		// set this to valid value
+		this.subject.setValue( wikibase.getSite( this.siteIds[0] ).getId() ),
+
 		equal(
-			this.subject.setValue( wikibase.getSite( this.siteIds[1] ).getId() ),
-			wikibase.getSite( this.siteIds[1] ).getId(),
-			'set value to blacklisted site id'
+			this.subject.isValid(),
+			true,
+			'current value is valid'
+		);
+
+		// for next test, do this the hard way since setValue() would reject invalid value (value in blacklist)
+		this.subject._inputElem.val( wikibase.getSite( this.siteIds[1] ).getId() )
+
+		equal(
+			this.subject.isValid(),
+			false,
+			'value set to blacklisted site id should be invalid'
 		);
 
 		equal(

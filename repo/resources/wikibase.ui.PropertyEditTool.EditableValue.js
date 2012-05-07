@@ -220,7 +220,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var changed = false;
 		
 		$.each( this._interfaces, function( index, elem ) {
-			changed = elem.stopEditing( save ) || changed;
+				changed = elem.stopEditing( save ) || changed;
 		} );
 		
 		// out of edit mode after interfaces are converted back to HTML:
@@ -409,16 +409,21 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * Helper function to compares two values returned by getValue() or getInitialValue() as long as
 	 * we work with arrays instead of proper objects here.
+	 * When comparing the values, this will also do an normalization on the values before comparing
+	 * them, so even though they are not exactly the same perhaps, they stillh ave the same meaning
+	 * and true will be returned.
 	 * 
 	 * @todo: make this deprecated as soon as we use objects representing property values...
-	 *
-	 * @static
 	 * 
 	 * @param Array value1
 	 * @param Array|null value2 if null, this will check whether value1 is empty
 	 * @return bool
 	 */
 	valueCompare: function( value1, value2 ) {
+		if( value1.length !== this._interfaces.length ) {
+			return false; // there has to be one value for each interface!
+		}
+
 		if( value2 === null ) {
 			// check for empty value1
 			for( var i in value1 ) {
@@ -428,13 +433,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			}
 			return true;
 		}
-		
+
 		// check for equal arrays with same entries in same order
 		if( value1.length !== value2.length ) {
 			return false;
 		}
 		for( var i in value1 ) {
-			if( $.trim( value1[ i ] ) !== $.trim( value2[ i ] ) ) {
+			// normalize first:
+			var val1 = this._interfaces[ i ].normalize( value1[ i ] );
+			var val2 = this._interfaces[ i ].normalize( value2[ i ] );
+
+			if( val1 !== val2 ) {
 				return false;
 			}
 		}
