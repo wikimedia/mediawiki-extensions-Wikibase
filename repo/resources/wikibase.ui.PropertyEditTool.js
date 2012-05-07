@@ -418,6 +418,22 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		} );
 		return values;
 	},
+
+	/**
+	 * This will just return all pending values.
+	 * See getValues() for getting all values or only values not pending.
+	 *
+	 * @return wikibase.ui.PropertyEditTool.EditableValue[]
+	 */
+	getPendingValues: function() {
+		var values = new Array();
+		$.each( this._editableValues, function( index, elem ) {
+			if( elem.isPending() ) {
+				values.push( elem );
+			}
+		} );
+		return values;
+	},
 	
 	/**
 	 * Returns the related properties title

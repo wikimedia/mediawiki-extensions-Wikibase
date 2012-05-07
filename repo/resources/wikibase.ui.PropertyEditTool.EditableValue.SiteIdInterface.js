@@ -151,7 +151,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		}
 		return null;
 	},
-
 	
 	/////////////////
 	// CONFIGURABLE:

@@ -175,6 +175,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		}
 	},
 
+	/**
+	 * Functionality for dynamically expanding the input fields size.
+	 *
+	 * @todo: This is not used currenty but basically works. One problem remaining is considering the max width.
+	 */
 	_expand: function() {
 		if ( this.autoExpand ) {
 			var ruler = this._subject.find( '.ruler' );

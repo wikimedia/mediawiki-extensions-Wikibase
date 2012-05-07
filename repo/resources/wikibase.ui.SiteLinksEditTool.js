@@ -124,10 +124,17 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		if( removedSite !== null ) {
 			var index = $.inArray( removedSite, this._editableValuesProto.prototype.ignoredSiteLinks );
 			if( index > -1 ) {
+				// remove site link from ignored site links shared by all values managed by this:
 				this._editableValuesProto.prototype.ignoredSiteLinks.splice( index, 1 );
+
+				var pendingValues = this.getPendingValues();
+				for( var i in pendingValues ) {
+					// re-init site link list for value in edit mode currently
+					pendingValues[ i ].siteIdInterface._initSiteList();
+				}
 			}
 		}
-	},	
+	},
 	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
 		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_afterStopEditing.call( this, newValue, save );		
 		if( save ) {

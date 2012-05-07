@@ -83,6 +83,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 */
 	setResultSet: function( resultSet ) {
 		this._currentResults = resultSet;
+		if( this.isInEditMode() ) {
+			// set this again if in edit mode, so autocomplete also updates
+			this._inputElem.autocomplete( 'option', 'source', resultSet );
+		}
 	},
 
 	/**
