@@ -42,6 +42,9 @@ class WikibaseViewItemAction extends FormlessAction {
 
 			$out = $this->getOutput();
 
+			// make css available when JavaScript is disabled
+			$out->addModuleStyles( array( 'wikibase.common' ) );
+
 			$out->addHTML( $parserOutput->getText() );
 
 			// make sure required client sided resources will be loaded:

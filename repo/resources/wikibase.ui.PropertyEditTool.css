@@ -2,27 +2,13 @@
  * Style for 'Wikibase' property edit tools
  *
  * @since 0.1
- * @file wikibase.js
+ * @file wikibase.ui.PropertyEditTool.css
  * @ingroup Wikibase
  *
  * @license GNU GPL v2+
  * @author H. Snater
  */
 
-.wb-ui-toolbar, .wb-property-container-value {
-	margin:0 .3em;
-}
-
-
-.firstHeading {
-	border-bottom: 0;
-	line-height: 1em !important;
-	margin-bottom: 0 !important;
-}
-
-.mw-content-rtl .ui-autocomplete-loading { /* set AJAX spinner to left of the autocomplete input box in rtl */
-	background-position:left center;
-}
 
 h1.firstHeading .wb-ui-toolbar {
 	font-size: 0.5em;
@@ -32,20 +18,12 @@ h1.firstHeading .wb-ui-toolbar {
 		font-size:inherit;
 	}
 
-.wb-property-container {
-	margin-top:.3em;
+.wb-ui-toolbar, .wb-property-container-value {
+	margin:0 .3em;
 }
-	.wb-property-container-value {
-		background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) left  no-repeat;
-		padding: 5px 0 0 35px;
-	}
-	/* @noflip */ .rtl .wb-property-container-value {
-		background: url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
-		padding: 5px 35px 0 0;
-	} /* css Janus does not convert padding in every browser */
 
-.mw-jump, #contentSub {
-	display:none;
+.mw-content-rtl .ui-autocomplete-loading { /* set AJAX spinner to left of the autocomplete input box in rtl */
+	background-position:left center;
 }
 
 .wb-ui-propertyedittool-counter-pending {
@@ -76,46 +54,6 @@ h1.firstHeading .wb-ui-toolbar {
 	}
 
 /********** /TOOLTIP **********/
-
-
-/********** SITE LINKS TABLE **********/
-
-table.wb-sitelinks {
-	/*border:1px solid #5dc9f4;*/
-	margin-top:2em;
-}
-	table.wb-sitelinks th, table.wb-sitelinks td {
-		border-bottom: 1px solid #ccc;
-		margin: 0;
-		padding: 0 0.4em;
-		height: 2.2em; /* steady height when input boxes are inserted compared with padding usage */
-		
-	}
-	table.wb-sitelinks th {
-		/*background-color:#D6F3FF;*/
-		text-align:left;
-		font-size:1.25em;
-		font-weight:normal;		
-	}
-	table.wb-sitelinks tr:hover td {
-		/*background-color:#5dc9f4;*/
-		background-color:#D6F3FF;
-	}
-	table.wb-sitelinks .uneven td {
-		background:#F9F9F9;
-	}
-	table.wb-sitelinks .even td {
-		background:#ececec;
-	}
-	table.wb-sitelinks tfoot tr:hover td {
-		background-color:transparent;
-	}
-	table.wb-sitelinks tfoot td {
-		border:none;
-	}
-
-/********** /SITE LINKS TABLE **********/
-
 
 .ruler {
 	display:none;
