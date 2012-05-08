@@ -161,6 +161,15 @@ $messages['mk'] = array(
 	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
 );
 
+/** Dutch (Nederlands)
+ * @author Siebrand
+ */
+$messages['nl'] = array(
+	'wbc-desc' => 'Client voor de uitbreiding Wikibase',
+	'wbc-editlinks' => 'Verwijzingen bewerken',
+	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
+);
+
 /** Portuguese (Português)
  * @author Malafaya
  */
@@ -185,6 +194,15 @@ $messages['ru'] = array(
 	'wbc-desc' => 'Клиент для расширения Wikibase',
 	'wbc-editlinks' => 'Редактировать ссылки',
 	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
+);
+
+/** Serbian (Cyrillic script) (‪Српски (ћирилица)‬)
+ * @author Nikola Smolenski
+ */
+$messages['sr-ec'] = array(
+	'wbc-desc' => 'Клијент за Викибаза проширење',
+	'wbc-editlinks' => 'Измени везе',
+	'wbc-editlinkstitle' => 'Измени међујезичке везе',
 );
 
 /** Swedish (Svenska)
