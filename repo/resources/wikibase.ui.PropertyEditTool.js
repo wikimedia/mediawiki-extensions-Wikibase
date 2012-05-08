@@ -311,8 +311,8 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
 		var self = this;
-		newValue.afterStopEditing = function( save, changed, wasPending ) {
-			self._newValueHandler_afterStopEditing( newValue, save, changed, wasPending );
+		newValue.onAfterStopEditing = function( save, wasPending ) {
+			self._newValueHandler_onAfterStopEditing( newValue, save, wasPending );
 			newValue.onStopEditing = null; // make sure handler is only called once!
 		};
 		if( value ) {
@@ -327,7 +327,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Handler called only the first time a new value was added and saved or cancelled.
 	 */
-	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
+	_newValueHandler_onAfterStopEditing: function( newValue, save, wasPending ) {
 		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
 		if( save ) {
 			this._onRefreshView( $.inArray( newValue, this._editableValues ) );

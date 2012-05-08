@@ -144,8 +144,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
 	},
 	
-	stopEditing: function( save ) {
-		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
+	stopEditing: function( save, afterStopEditing ) {
+		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save, afterStopEditing );
 		
 		// make sure the interface for entering the sites id can't be edited after created
 		this._interfaces.siteId.setActive( this.isPending() );

@@ -220,6 +220,9 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase-remove',
 		'wikibase-propertyedittool-full',
 		'wikibase-sitelinksedittool-full',
+		'wikibase-error-save-generic',
+		'wikibase-error-save-connection',
+		'wikibase-error-save-timeout'
 	)
 );
 

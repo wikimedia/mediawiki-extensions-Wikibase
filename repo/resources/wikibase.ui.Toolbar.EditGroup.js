@@ -136,18 +136,20 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	},
 	
 	_leaveAction: function( save ) {
-		this._editableValue.stopEditing( save );
-		this.tooltip.hide();
-		this.removeElement( this.tooltip );
-		this.innerGroup.removeElement( this.btnSave );
-		this.innerGroup.removeElement( this.btnCancel );
-		if ( this.displayRemoveButton ) {
-			this.innerGroup.removeElement( this.btnRemove );
-		}
-		this.innerGroup.addElement( this.btnEdit );
-		if ( this.displayRemoveButton ) {
-			this.innerGroup.addElement( this.btnRemove );
-		}
+		this._editableValue.stopEditing( save, $.proxy( function() {
+			this.tooltip.hide();
+			this.removeElement( this.tooltip );
+			this.innerGroup.removeElement( this.btnSave );
+			this.innerGroup.removeElement( this.btnCancel );
+			if ( this.displayRemoveButton ) {
+				this.innerGroup.removeElement( this.btnRemove );
+			}
+			this.innerGroup.addElement( this.btnEdit );
+			if ( this.displayRemoveButton ) {
+				this.innerGroup.addElement( this.btnRemove );
+			}
+		}, this ) );
+
 	},
 
 	destroy: function() {

@@ -38,6 +38,10 @@ $messages['en'] = array(
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 
+	'wikibase-error-save-generic' => 'An error occurred while trying to save your changes. Your changes could not be stored.',
+	'wikibase-error-save-connection' => 'Your changes could not be stored. Please check your internet connection.',
+	'wikibase-error-save-timeout' => 'We are experiencing technical difficulties. Your changes could not be stored.',
+
 	// Special pages
 	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
