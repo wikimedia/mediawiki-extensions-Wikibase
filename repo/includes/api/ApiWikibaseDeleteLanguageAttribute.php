@@ -16,6 +16,21 @@
 class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 
 	/**
+	 * Check the rights for the user accessing this module.
+	 * This is called from ModifyItem.
+	 * 
+	 * @param $title Title object where the item is stored
+	 * @param $user User doing the action
+	 * @param $params array of arguments for the module, passed for ModifyItem
+	 * @param $mod null|String name of the module, usually not set
+	 * @param $op null|String operation that is about to be done, usually not set
+	 * @return array of errors reported from the static getPermissionsError
+	 */
+	protected function getPermissionsErrorInternal( $title, $user, array $params, $mod=null, $op=null ) {
+		return parent::getPermissionsError( $title, $user, 'lang-attr', 'delete' );
+	}
+	
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
@@ -53,6 +68,13 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 		return $success;
 	}
 
+	/**
+	 * Returns an array of allowed parameters (parameter name) => (default
+	 * value) or (parameter name) => (array with PARAM_* constants as keys)
+	 * Don't call this function directly: use getFinalParams() to allow
+	 * hooks to modify parameters as needed.
+	 * @return array|bool
+	 */
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
 			'language' => array(
@@ -67,6 +89,12 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 		) );
 	}
 
+	/**
+	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
+	 * needed.
+	 *
+	 * @return array|bool False on no parameter descriptions
+	 */
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
 			'language' => 'Language the description is in',
@@ -75,20 +103,32 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 		) );
 	}
 
+	/**
+	 * Returns the description string for this module
+	 * @return mixed string or array of strings
+	 */
 	public function getDescription() {
 		return array(
 			'API module to set a label and a description for a Wikibase item.'
 		);
 	}
 
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'label-not-found', 'info' => 'Can not find any previous label in the item' ),
-			array( 'code' => 'description-not-found', 'info' => 'Can not find any previous description in the item' ),
-			array( 'code' => 'not-recognized', 'info' => 'Directive is not recognized' ),
+			array( 'code' => 'label-not-found', 'info' => wfMsg( 'wikibase-api-label-not-found' ) ),
+			array( 'code' => 'description-not-found', 'info' =>  wfMsg( 'wikibase-api-description-not-found' ) ),
+			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
 			) );
 	}
 
+	/**
+	 * Returns usage examples for this module. Return false if no examples are available.
+	 * @return bool|string|array
+	 */
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbdeletelanguageattribute&id=42&language=en&attribute=label'
@@ -96,11 +136,18 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 		);
 	}
 	
-   	public function getHelpUrls() {
+	/**
+	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
+	 */
+	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbdeletelanguageattribute';
 	}
 	
 
+	/**
+	 * Returns a string that identifies the version of this class.
+	 * @return string
+	 */
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}
