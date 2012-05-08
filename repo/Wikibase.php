@@ -128,7 +128,9 @@ $wgHooks['AbortMove'][]								= 'WikibaseHooks::onAbortMove';
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' => 'Wikibase/resources'
+	// since 'WikidataRepo' extension was renamed to 'Wikibase', the directory should be renamed in the git repo first
+	// after that this 'weird' regex can be removed
+	'remoteExtPath' =>  preg_replace( '%^.*[/\\\](.+)$%', '$1', dirname( __FILE__ ) ) . '/resources'
 );
 
 // common styles independent from JavaScript being enabled or disabled
