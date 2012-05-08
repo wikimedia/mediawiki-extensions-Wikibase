@@ -109,7 +109,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		}
 		var basePrototype = window.wikibase.ui.PropertyEditTool.EditableSiteLink;
 		
-		this._editableValuesProto = function() { basePrototype.apply( this, arguments ) };
+		this._editableValuesProto = function() { basePrototype.apply( this, arguments ); };
 		this._editableValuesProto.prototype = new basePrototype();
 		this._editableValuesProto.prototype.ignoredSiteLinks = this.getRepresentedSites();
 		
@@ -183,4 +183,4 @@ window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
 			mw.msg( 'wikibase-sitelinks' ) +
 			'</th></thead><tbody></tbody></table>'
 	);
-}
+};

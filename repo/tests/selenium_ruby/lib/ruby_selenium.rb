@@ -51,6 +51,8 @@ class RubySelenium
 
   # creates a new item and returns the URL for that item
   def self.get_new_item_url
+    # @item_id = '700'
+    
     create_new_item
     item_url = WIKI_URL + "index.php/Data:q" + @item_id + "?uselang=" + WIKI_USELANG
     return item_url

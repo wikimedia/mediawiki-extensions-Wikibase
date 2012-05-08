@@ -16,7 +16,7 @@ class SitelinksItemPage < ItemPage
   span(:saveSitelinkLinkDisabled, :class => "wb-ui-toolbar-button-disabled")
   unordered_list(:siteIdAutocompleteList, :class => "ui-autocomplete", :index => 0)
   unordered_list(:pageAutocompleteList, :class => "ui-autocomplete", :index => 1)
-  unordered_list(:editSitelinkAutocompleteList, :class => "ui-autocomplete")
+  unordered_list(:editSitelinkAutocompleteList, :class => "ui-autocomplete", :index => 0)
   # link(:saveSitelinkLink, :css => "table.wb-sitelinks > tbody > tr > td:nth-child(3) > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
   # link(:cancelSitelinkLink, :css => "table.wb-sitelinks > tbody > tr > td:nth-child(3) > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
   link(:saveSitelinkLink, :text => "save")

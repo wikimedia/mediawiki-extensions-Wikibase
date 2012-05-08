@@ -31,7 +31,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 			var value = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
 			value = value.replace( /\s+/g, ' ' ); // make sure we don't ever allow several spaces in the items label
 			return value;
-		}
+		};
 		
 		return interfaces;
 	},

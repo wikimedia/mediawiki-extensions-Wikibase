@@ -39,7 +39,7 @@ window.wikibase = new( function() {
 		}
 		
 		return this._siteList;
-	}
+	};
 	
 	/**
 	 * Returns whether the Wikibase installation knows a site with a certain ID.
@@ -65,7 +65,7 @@ window.wikibase = new( function() {
 			return null;
 		}
 		return site;
-	}
+	};
 	
 } )();
 

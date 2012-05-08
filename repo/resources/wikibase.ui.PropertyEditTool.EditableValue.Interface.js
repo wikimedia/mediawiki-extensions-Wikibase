@@ -169,7 +169,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * its initial value or on setValue() while in edit mode.
 	 */
 	_onInputRegistered: function() {
-		//this._previousValue = this._inputElem.val();
 		if( this.onInputRegistered !== null && this.onInputRegistered() === false ) { // callback
 			return false; // cancel
 		}
@@ -183,7 +182,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	_expand: function() {
 		if ( this.autoExpand ) {
 			var ruler = this._subject.find( '.ruler' );
-			//console.log( '"'+ this._inputElem.attr( 'value' ).replace( / /g, '&nbsp;') + '"' );
 
 			var currentValue = this._inputElem.val();
 			if ( currentValue === '' ) {
@@ -200,16 +198,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			var currentWidth = this._subject.parent().width();
 			this._subject.parent().css( 'display', 'block' );
 
-			//console.log(maxWidth);
-			//console.log(currentWidth);
-			//console.log(this._inputElem.width());
-			/*
-			if ( currentWidth > maxWidth && !(ruler.width() < maxWidth) ) {
-				this._inputElem.css( 'width', maxWidth - 1 );
-			} else {
-				this._inputElem.css( 'width', ( ruler.width() + 25 ) + 'px' );
-			}*/
-
 			// TODO use additional parent element to measer width of (input + toolbar)
 			if ( this._inputElem.width() > this._subject.parent().width() - 250 && !(ruler.width() < this._subject.parent().width() - 250) ) {
 				this._inputElem.css( 'width', this._subject.parent().width() - 249 );
@@ -222,7 +210,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 				var tooltipLeft = parseInt( this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left' ) );
 				this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left', ( tooltipLeft + this._inputElem.width() - inputWidth ) + 'px' );
 			}
-
 		}
 	},
 
@@ -230,7 +217,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
-		this._previousValue = this.getValue() // remember current value before key changes text
+		this._previousValue = this.getValue(); // remember current value before key changes text
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
