@@ -19,16 +19,22 @@ class WikibaseItemDisambiguation extends ContextSource {
 	 */
 	protected $items;
 
+	protected $langCode;
+
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $items
-	 * @param IContextSource|null $context
+	 * @param $items array of WikibaseItem
+	 * @param string $langCode
+	 * @param $context IContextSource|null
+	 *
+	 * @thorws MWException
 	 */
-	public function __construct( WikibaseItem $items, IContextSource $context = null ) {
+	public function __construct( array $items, $langCode, IContextSource $context = null ) {
 		$this->items = $items;
+		$this->langCode = $langCode;
 
 		if ( !is_null( $context ) ) {
 			$this->setContext( $context );
@@ -47,13 +53,25 @@ class WikibaseItemDisambiguation extends ContextSource {
 	 * @return string
 	 */
 	public function getHTML() {
-		$html = '';
+		$langCode = $this->langCode;
 
-		foreach ( $this->items as /* WikibaseItem */ $item ) {
-
-		}
-
-		return $html;
+		return
+			'<ul class="wikibase-disambiguation">' .
+				implode( '', array_map(
+					function( WikibaseItem $item ) use ( $langCode ) {
+						return HTML::rawElement(
+							'li',
+							array( 'class' => 'wikibase-disambiguation' ),
+							Linker::link(
+								$item->getTitle(),
+								// TODO: rem label and have description fallback
+								htmlspecialchars( $item->getLabel( $langCode ) . ': ' . $item->getDescription( $langCode ) )
+							)
+						);
+					},
+					$this->items
+				) ).
+			'</ul>';
 	}
 
 	/**
