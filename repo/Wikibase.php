@@ -242,3 +242,6 @@ $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE;
 
 
 $egWBSettings = array();
+
+$egWBSettings['apiDebugWithWrite'] = true;
+$egWBSettings['apiDebugWithPost'] = true;
