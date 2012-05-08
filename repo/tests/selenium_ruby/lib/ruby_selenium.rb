@@ -4,6 +4,7 @@ require 'json'
 
 WIKI_URL = "http://localhost/mediawiki/"
 WIKI_USELANG = "en"
+WIKI_SKIN = "vector" # "vector" "monobook"
 WIKI_API_URL = WIKI_URL + 'api.php'
 
 class RubySelenium
@@ -54,7 +55,7 @@ class RubySelenium
     # @item_id = '700'
     
     create_new_item
-    item_url = WIKI_URL + "index.php/Data:q" + @item_id + "?uselang=" + WIKI_USELANG
+    item_url = WIKI_URL + "index.php/Data:q" + @item_id + "?uselang=" + WIKI_USELANG + "&useskin=" + WIKI_SKIN
     return item_url
   end
 
