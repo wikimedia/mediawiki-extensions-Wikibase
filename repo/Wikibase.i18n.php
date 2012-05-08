@@ -38,6 +38,7 @@ $messages['en'] = array(
 	'wikibase-remove' => 'remove',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
+	'wikibase-disambiguation-title' => 'Disambiguation for "$1"',
 
 	// Special pages
 	'special-itembytitle' => 'Item by title',
@@ -50,6 +51,7 @@ $messages['en'] = array(
 /** Message documentation (Message documentation) */
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc}}',
+	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)

@@ -52,6 +52,7 @@ class SpecialItemByLabel extends SpecialItemResolver {
 				// TODO: display that there are no matching items and possibly some fancy input UI
 			}
 			elseif ( count( $items ) !== 1 ) {
+				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $parts[1] )->escaped() );
 				$this->displayDisambiguationPage( $items, $parts[0] );
 			}
 			else {

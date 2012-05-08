@@ -64,8 +64,7 @@ class WikibaseItemDisambiguation extends ContextSource {
 							array( 'class' => 'wikibase-disambiguation' ),
 							Linker::link(
 								$item->getTitle(),
-								// TODO: rem label and have description fallback
-								htmlspecialchars( $item->getLabel( $langCode ) . ': ' . $item->getDescription( $langCode ) )
+								htmlspecialchars( $item->getDescription( $langCode ) )
 							)
 						);
 					},
