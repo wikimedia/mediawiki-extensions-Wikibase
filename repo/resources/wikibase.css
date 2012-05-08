@@ -53,7 +53,8 @@ table.wb-sitelinks th {
 	font-size:1.25em;
 	font-weight:normal;
 }
-table.wb-sitelinks tr:hover td {
+table.wb-sitelinks tr:hover td,
+table.wb-sitelinks tr.wb-pending-value td {
 	/*background-color:#5dc9f4;*/
 	background-color:#D6F3FF;
 }
