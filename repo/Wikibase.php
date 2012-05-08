@@ -144,10 +144,20 @@ $moduleTemplate = array(
 	'remoteExtPath' => preg_replace( '%^.*[/\\\](.+)$%', '$1', dirname( __FILE__ ) ) . '/resources'
 );
 
+// common styles independent from JavaScript being enabled or disabled
+$wgResourceModules['wikibase.common'] = $moduleTemplate + array(
+	'styles' => array(
+		'wikibase.css'
+	)
+);
+
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.js',
-		'wikibase.Site.js',
+		'wikibase.Site.js'
+	),
+	'dependencies' => array(
+		'wikibase.common'
 	)
 );
 

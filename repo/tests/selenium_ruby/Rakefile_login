@@ -3,7 +3,7 @@ require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/*/*_spec.rb'
+  spec.pattern = 'spec/item/login_spec.rb'
 end
 
 task :default => :spec
