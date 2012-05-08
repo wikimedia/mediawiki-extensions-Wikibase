@@ -33,6 +33,11 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 * @var jQuery
 	 */
 	_elem: null,
+
+	/**
+	 * @var wikibase.ui.Tooltip tooltip attached to this label
+	 */
+	tooltip: null,
 	
 	/**
 	 * Initializes the ui element.
@@ -94,6 +99,11 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 			// return jQuery object
 			return contents;
 		}
+	},
+
+	addTooltip: function( message, tipsyConfig ) {
+		this._elem.attr( 'title', message );
+		this.tooltip = new window.wikibase.ui.Tooltip( this._elem, message, tipsyConfig );
 	},
 	
 	/**

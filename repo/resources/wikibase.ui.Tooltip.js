@@ -1,33 +1,39 @@
 /**
- * JavasSript for creating and managing the tooltip of the 'Wikibase' property edit tool
+ * JavasScript for creating and managing a tooltip within the 'Wikibase' extension
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.Tooltip.js
+ * @file wikibase.ui.Tooltip.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-"use strict";
+'use strict';
 
 /**
- * Represents a tooltip within a wikibase.ui.Toolbar toolbar
+ * a generic tooltip
  *
- * @param String tooltip message
- * @param Object tipsy tooltip configuration vars
+ * @param jQuery subject element the tooltip shall be attached to
+ * @param String tooltip message (may contain HTML markup)
+ * @param Object (optional) custom tipsy tooltip configuration
  */
-window.wikibase.ui.Toolbar.Tooltip = function( tooltipMessage, tipsyConfig ) {
-	this._tipsyConfig = tipsyConfig;
-	window.wikibase.ui.Toolbar.Label.call( this, tooltipMessage );
+window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig ) {
+	if( typeof subject != 'undefined' ) {
+		this._init( subject, tooltipContent, tipsyConfig );
+	}
 };
-window.wikibase.ui.Toolbar.Tooltip.prototype = new window.wikibase.ui.Toolbar.Label();
-$.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
+window.wikibase.ui.Tooltip.prototype = {
 	/**
 	 * @const
 	 * Class which marks the tooltip within the site html.
 	 */
 	UI_CLASS: 'wb-ui-toolbar-tooltip',
+
+	/**
+	 * @var jQuery element the tooltip should be attached to
+	 */
+	_subject: null,
 
 	/**
 	 * @var Tipsy tipsy tooltip element
@@ -48,39 +54,44 @@ $.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
 	 * @var bool used to determine if tooltip should react on hovering or not
 	 */
 	_permanent: false,
-	
+
+	/**
+	 * initializes ui element, called by the constructor
+	 *
+	 * @param jQuery subject
+	 * @param string tooltipContent (may contain HTML markup)
+	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
+	 */
+	_init: function( subject, tooltipContent, tipsyConfig ) {
+		this._subject = subject;
+		this._subject.attr( 'title', tooltipContent );
+		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
+			this._tipsyConfig = {};
+			this.setGravity( 'ne' );
+		}
+		this._initTooltip();
+	},
+
 	/**
 	 * Initializes the tooltip for the given element.
 	 * This should normally be called directly by the constructor.
 	 *
 	 * @param jQuery parent element
 	 */
-	_initElem: function( tooltipMessage ) {
-		// default tipsy configuration
-		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
-			this._tipsyConfig = {};
-			this.setGravity( 'ne' );
-		}
-
-		var tooltip = $( '<span/>', {
-			'class': 'mw-help-field-hint',
-			title: tooltipMessage,
-			style: 'display:inline',
-			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css) */
-		} ).tipsy( {
+	_initTooltip: function() {
+		this._subject.tipsy( {
 			'gravity': this._tipsyConfig.gravity,
-			'trigger': 'manual'
+			'trigger': 'manual',
+			'html': true
 		} );
 
-		this._tipsy = tooltip.data( 'tipsy' );
-
-		window.wikibase.ui.Toolbar.Label.prototype._initElem.call( this, tooltip );
+		this._tipsy = this._subject.data( 'tipsy' );
 
 		// reposition tooltip when resizing the browser window
 		$( window ).on( 'resize', $.proxy( function() {
 			if ( this._isVisible ) {
-				this.hide(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
-				this.show();
+				this.hideMessage(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
+				this.showMessage();
 			}
 		}, this ) );
 
@@ -94,11 +105,11 @@ $.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
 	 */
 	_toggleEvents: function( activate ) {
 		if ( activate ) {
-			this._elem.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
-			this._elem.on( 'mouseout', jQuery.proxy( function() { this.hide(); }, this ) );
+			this._subject.on( 'mouseover', jQuery.proxy( function() { this.showMessage(); }, this ) );
+			this._subject.on( 'mouseout', jQuery.proxy( function() { this.hideMessage(); }, this ) );
 		} else {
-			this._elem.off( 'mouseover' );
-			this._elem.off( 'mouseout' );
+			this._subject.off( 'mouseover' );
+			this._subject.off( 'mouseout' );
 		}
 	},
 
@@ -108,7 +119,7 @@ $.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
 	 * @param boolean permanent whether tooltip should be displayed permanently until hide() is being
 	 *        called explicitly. false by default.
 	 */
-	show: function( permanent ) {
+	showMessage: function( permanent ) {
 		if ( !this._isVisible ) {
 			this._tipsy.show();
 			this._isVisible = true;
@@ -122,8 +133,8 @@ $.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
 	/**
 	 * hide tooltip
 	 */
-	hide: function() {
-		if ( this._permanent && typeof this._elem.data( 'events' ) == 'undefined' || !this._permanent ) {
+	hideMessage: function() {
+		if ( this._permanent && typeof this._subject.data( 'events' ) == 'undefined' || !this._permanent ) {
 			this._permanent = false;
 			this._toggleEvents( true );
 			if ( this._isVisible ) {
@@ -153,16 +164,25 @@ $.extend( window.wikibase.ui.Toolbar.Tooltip.prototype, {
 		}
 	},
 
+	/**
+	 * set tooltip message
+	 *
+	 * @param string message
+	 */
+	setMessage: function( message ) {
+		this._tipsy.$element.attr( 'original-title', message );
+	},
+
+
+	/**
+	 * destroy object
+	 */
 	destroy: function() {
-		if ( this._elem ) {
-			if ( this._isVisible ) {
-				this.hide();
-			}
-			this._elem.remove();
-			this._elem = null;
+		if ( this._isVisible ) {
+			this.hideMessage();
 		}
 		this._tipsyConfig = null;
-		this.tipsy = null;
+		this._tipsy = null;
 	}
 
-} );
+};

@@ -53,9 +53,9 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	_editableValue: null,
 
 	/**
-	 * @var window.wikibase.ui.Toolbar.Tooltip
+	 * @var window.wikibase.ui.Toolbar.Label
 	 */
-	tooltip: null,
+	tooltipAnchor: null,
 	
 	/**
 	 * Inner group needed to visually separate tooltip and edit buttons, this one holds the edit buttons.
@@ -80,9 +80,18 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		// create a group inside the group so we can separate the tooltip visually
 		this.innerGroup = new window.wikibase.ui.Toolbar.Group();
 		this.addElement( this.innerGroup );
-		
-		this.tooltip = new window.wikibase.ui.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );
-		
+
+		this.tooltipAnchor = new window.wikibase.ui.Toolbar.Label( $( '<span/>', {
+			'class': 'mw-help-field-hint',
+			style: 'display:inline',
+			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
+		} ) );
+		this.tooltipAnchor.addTooltip( this._editableValue.getInputHelpMessage() );
+
+//		this.tooltipAnchor = new window.wikibase.ui.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );
+
+
+
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.Toolbar.Button;
 		
@@ -108,7 +117,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	
 	_editActionHandler: function() {
 		return $.proxy( function(){
-			this.addElement( this.tooltip, 0 ); // add tooltip before edit commands
+			this.addElement( this.tooltipAnchor, 0 ); // add tooltip before edit commands
 			this.innerGroup.removeElement( this.btnEdit );
 			if ( this.displayRemoveButton ) {
 				this.innerGroup.removeElement( this.btnRemove );
@@ -137,8 +146,8 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	
 	_leaveAction: function( save ) {
 		this._editableValue.stopEditing( save, $.proxy( function() {
-			this.tooltip.hide();
-			this.removeElement( this.tooltip );
+			this.tooltipAnchor.tooltip.hideMessage();
+			this.removeElement( this.tooltipAnchor );
 			this.innerGroup.removeElement( this.btnSave );
 			this.innerGroup.removeElement( this.btnCancel );
 			if ( this.displayRemoveButton ) {
@@ -158,9 +167,9 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 			this.innerGroup.destroy();
 			this.innerGroup = null;
 		}
-		if ( this.tooltip != null ) {
-			this.tooltip.destroy();
-			this.tooltip = null;
+		if ( this.tooltipAnchor != null ) {
+			this.tooltipAnchor.destroy();
+			this.tooltipAnchor = null;
 		}
 		if ( this.btnEdit != null ) {
 			this.btnEdit.destroy();

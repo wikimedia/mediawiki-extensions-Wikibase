@@ -190,11 +190,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if ( this._toolbar.editGroup.tooltip !== null ) {
 			/*
 			FIXME: tooltip needs to recalculate its horizontal position after input elements have been placed inside
-			the DOM; but show() has already been called on initialization, so the tooltip is marked as visible (which
-			is necessary since the tooltip should be permanently shown on some occasions)
+			the DOM; but showMessage() has already been called on initialization, so the tooltip is marked as visible
+			(which is necessary since the tooltip should be permanently shown on some occasions)
 			 */
-			this._toolbar.editGroup.tooltip.hide();
-			this._toolbar.editGroup.tooltip.show( true );
+			this._toolbar.editGroup.tooltipAnchor.tooltip.hideMessage();
+			this._toolbar.editGroup.tooltipAnchor.tooltip.showMessage( true );
 		}
 
 		return true;
@@ -331,8 +331,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_apiCallErr: function( textStatus, response ) {
 		var error = {};
-		console.dir( response );
-		alert( textStatus );
 		if ( textStatus != 'abort' ) {
 			error = {
 				code: 'unknown-error',
@@ -359,7 +357,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param object error
 	 */
 	apiCallErr: function( error ) {
-		alert( error.shortMessage );
+		// TODO append error tooltip, show it and implement logic when to hide it
+		// this._interfaces[ this._interfaces.length - 1 ].addTooltip( error.shortMessage );
+		//
+		// debug output for now
+		console.dir( error );
 	},
 
 	/**
@@ -557,7 +559,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param jQuery.Event event
 	 */
 	_interfaceHandler_onFocus: function( relatedInterface, event ) {
-		this._toolbar.editGroup.tooltip.show( true );
+		this._toolbar.editGroup.tooltipAnchor.tooltip.showMessage( true );
 	},
 
 	/**
@@ -567,7 +569,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param jQuery.Event event
 	 */
 	_interfaceHandler_onBlur: function( relatedInterface, event ) {
-		this._toolbar.editGroup.tooltip.hide();
+		this._toolbar.editGroup.tooltipAnchor.tooltip.hideMessage();
 	},
 	
 	///////////

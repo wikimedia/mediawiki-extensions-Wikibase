@@ -172,11 +172,11 @@ $wgResourceModules['wikibase.tests.qunit.testrunner'] = $moduleTemplate + array(
 $wgResourceModules['wikibase.ui.Toolbar'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.ui.js',
+		'wikibase.ui.Tooltip.js',
 		'wikibase.ui.Toolbar.js',
 		'wikibase.ui.Toolbar.Group.js',
 		'wikibase.ui.Toolbar.Label.js',
-		'wikibase.ui.Toolbar.Button.js',
-		'wikibase.ui.Toolbar.Tooltip.js'
+		'wikibase.ui.Toolbar.Button.js'
 	),
 	'styles' => array(
 		'wikibase.ui.Toolbar.css'
