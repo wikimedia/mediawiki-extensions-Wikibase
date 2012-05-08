@@ -102,13 +102,28 @@ final class WikibaseHooks {
 		$testModules['qunit']['wikibase.tests'] = array(
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/wikibase.Site.tests.js',
+				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
+				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
+				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js'
+				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Tooltip.tests.js'
 			),
 			'dependencies' => array(
+				'wikibase.tests.qunit.testrunner',
 				'wikibase',
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool'

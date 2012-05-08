@@ -25,18 +25,17 @@ $messages['en'] = array(
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-edit-placeholder' => 'enter description',
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
-
 	'wikibase-sitelink-site-edit-placeholder' => 'specify site',
 	'wikibase-sitelink-page-edit-placeholder' => 'specify page',
-
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
-	'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
-	'wikibase-sitelinks' => 'Wikipedia Pages linked to this item',
-	'wikibase-sitelinks-add' => 'add a link to a Wikipedia page',
-	'wikibase-sitelinks-empty' => 'No Wikipedia pages linked to this item yet.',
-	'wikibase-sitelinks-input-help-message' => 'Set a link to a Wikipedia article.',
+	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-sitelinks' => 'Pages linked to this item',
+	'wikibase-sitelinks-add' => 'add a link to a site-link',
+	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
+	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 	'wikibase-disambiguation-title' => 'Disambiguation for "$1"',
 
@@ -52,6 +51,8 @@ $messages['en'] = array(
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc}}',
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
+	'wikibase-label-input-help-message' => '$1: name of the language',
+	'wikibase-description-input-help-message' => '$1: name of the language',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)

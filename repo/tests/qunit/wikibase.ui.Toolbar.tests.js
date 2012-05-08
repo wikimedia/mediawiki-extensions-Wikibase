@@ -1,5 +1,5 @@
 /**
- * QUnit tests for property edit tool
+ * QUnit tests for toolbar component
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.Toolbar', {
+	module( 'wikibase.ui.Toolbar', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.toolbar = new window.wikibase.ui.Toolbar();
 
@@ -46,7 +46,7 @@
 
 		}
 
-	} );
+	} ) );
 
 
 	test( 'fill and remove', function() {

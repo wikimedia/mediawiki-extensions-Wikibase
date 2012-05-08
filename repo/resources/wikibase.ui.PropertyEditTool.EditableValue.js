@@ -123,18 +123,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Does the initialization for a single editable value interface. Basically this will bind the used
 	 * events and set needed options.
 	 * 
-	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
+	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface singleInterface
 	 */
 	_configSingleInterface: function( singleInterface ) {
 		var self = this;		
-		singleInterface.onFocus = function( event ){self._interfaceHandler_onFocus( event );};
-		singleInterface.onBlur = function( event ){self._interfaceHandler_onBlur( event );};
+		singleInterface.onFocus = function( event ){ self._interfaceHandler_onFocus( singleInterface, event ); };
+		singleInterface.onBlur = function( event ){ self._interfaceHandler_onBlur( singleInterface, event ); };
 		singleInterface.onKeyPressed =
-			function( event ) {self._interfaceHandler_onKeyPressed( event );};
+			function( event ) { self._interfaceHandler_onKeyPressed( singleInterface, event ); };
 		singleInterface.onKeyUp = // ESC key does not react onKeyPressed but on onKeyUp
-			function( event ) {self._interfaceHandler_onKeyPressed( event );};
+			function( event ) { self._interfaceHandler_onKeyPressed( singleInterface, event ); };
 		singleInterface.onInputRegistered =
-				function( event ){self._interfaceHandler_onInputRegistered( event );};
+				function(){ self._interfaceHandler_onInputRegistered( singleInterface ); };
 	},
 	
 	/**
@@ -220,7 +220,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var changed = false;
 		
 		$.each( this._interfaces, function( index, elem ) {
-			changed = elem.stopEditing( save ) || changed;
+				changed = elem.stopEditing( save ) || changed;
 		} );
 		
 		// out of edit mode after interfaces are converted back to HTML:
@@ -277,6 +277,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * Returns the neccessary parameters for an api call to store the value.
+	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function() {
 		return {};
@@ -409,6 +410,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * Helper function to compares two values returned by getValue() or getInitialValue() as long as
 	 * we work with arrays instead of proper objects here.
+	 * When comparing the values, this will also do an normalization on the values before comparing
+	 * them, so even though they are not exactly the same perhaps, they stillh ave the same meaning
+	 * and true will be returned.
 	 * 
 	 * @todo: make this deprecated as soon as we use objects representing property values...
 	 * 
@@ -417,8 +421,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool
 	 */
 	valueCompare: function( value1, value2 ) {
+		if( value1.length !== this._interfaces.length ) {
+			return false; // there has to be one value for each interface!
+		}
+
 		if( value2 === null ) {
-			// check for empty value1			
+			// check for empty value1
 			for( var i in value1 ) {
 				if( $.trim( value1[ i ] ) !== '' ) {
 					return false;
@@ -426,20 +434,28 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			}
 			return true;
 		}
-		
+
 		// check for equal arrays with same entries in same order
 		if( value1.length !== value2.length ) {
 			return false;
 		}
 		for( var i in value1 ) {
-			if( $.trim( value1[ i ] ) !== $.trim( value2[ i ] ) ) {
+			// normalize first:
+			var val1 = this._interfaces[ i ].normalize( value1[ i ] );
+			var val2 = this._interfaces[ i ].normalize( value2[ i ] );
+
+			if( val1 !== val2 ) {
 				return false;
 			}
 		}
 		return true;
 	},
 	
-	_interfaceHandler_onInputRegistered: function() {
+	_interfaceHandler_onInputRegistered: function( relatedInterface ) {
+		if( ! relatedInterface.isInEditMode() ) {
+			return;
+		}
+
 		var value = this.getValue();
 		var isInvalid = !this.validate( value );
 		
@@ -448,12 +464,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		
 		// can't cancel if empty before except the edit is pending (then it will be removed)
 		var disableCancel = !this.isPending() && this.valueCompare( this.getInitialValue(), null );
-		
+
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
 	},
 
-	_interfaceHandler_onKeyPressed: function( event ) {		
+	_interfaceHandler_onKeyPressed: function( relatedInterface, event ) {
 		if( event.which == 13 ) {
 			this._toolbar.editGroup.btnSave.doAction();
 		}
@@ -462,10 +478,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 	},
 
-	_interfaceHandler_onFocus: function( event ) {
+	_interfaceHandler_onFocus: function( relatedInterface, event ) {
 		this._toolbar.editGroup.tooltip.show( true );
 	},
-	_interfaceHandler_onBlur: function( event ) {
+	_interfaceHandler_onBlur: function( relatedInterface, event ) {
 		this._toolbar.editGroup.tooltip.hide();
 	},
 	

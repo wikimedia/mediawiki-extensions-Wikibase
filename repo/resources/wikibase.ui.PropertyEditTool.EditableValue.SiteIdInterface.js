@@ -23,9 +23,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface = function( su
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
-	
-	_initInputElement: function() {
+
+	_init: function( subject ) {
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.call( this, subject );
 		this._initSiteList();
+	},
+
+	_initInputElement: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 		/**
 		 * when leaving the input box, set displayed value to from any allowed input value to correct display value
@@ -59,9 +63,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		// make sure to allow choosing the currently selected site id even if it is in the list of
 		// sites to ignore. This makes sense since it is selected already and it should be possible
 		// to select it again.
-		var ignoredSites = this.ignoredSiteLinks.slice();
+		var ignoredSites = [];
+		if ( this.ignoredSiteLinks !== null ) {
+			ignoredSites = this.ignoredSiteLinks.slice();
+		}
 		var ownSite = this.getSelectedSite();
 		if( ownSite !== null ) {
+			// make sure currently selected site can still be selected even if on ignore list
 			var ownSiteIndex = $.inArray( ownSite, ignoredSites );
 			if( ownSiteIndex > -1 ) {
 				ignoredSites.splice( ownSiteIndex, 1 );
@@ -84,30 +92,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	},
 
 	/**
-	 * Returns the selected sites site Id from currently specified value.
-	 * 
-	 * @return string|null siteId or null if no valid selection has been made yet.
-	 */
-	getSelectedSiteId: function() {
-		var value = this.getValue();
-		if( ! this.isInEditMode() ) {
-			return this._getSiteIdFromString( value );
-		}		
-		for( var i in this._currentResults ) {
-			if(
-				   value == this._currentResults[i].site.getId()
-				|| value == this._currentResults[i].site.getShortName()
-				|| value == this._currentResults[i].value
-			) {
-				return this._currentResults[i].site.getId();
-			}
-		}
-		return null;
-	},
-	
-	/**
 	 * Returns the selected site
-	 * 
+	 *
 	 * @return wikibase.Site
 	 */
 	getSelectedSite: function() {
@@ -119,19 +105,52 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	},
 
 	/**
-	 * validate input
-	 * @param String value
+	 * Returns the selected sites site Id from currently specified value.
+	 * 
+	 * @return string|null siteId or null if no valid selection has been made yet.
+	 */
+	getSelectedSiteId: function() {
+		var value = this.getValue();
+		return this.normalize( value );
+	},
+
+	/**
+	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.Interface
 	 */
 	validate: function( value ) {
 		// check whether current input is in the list of values returned by the wikis API
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.validate.call( this, value );
-		return ( this.getSelectedSiteId() === null ) ? false : true;
+		return this.normalize( value ) !== null;
 	},
-	
-	_getSiteIdFromString: function( text ) {
-		return text.replace( /^.+\(\s*(.+)\s*\)\s*/, '$1' );
+
+	_setValue_inNonEditMode: function( value ) {
+		// the actual value is the site id, displayed value though should be the whole site name and id in parentheses.
+		var site = wikibase.getSite( value );
+		value = site.getShortName() + ' (' + site.getId() + ')';
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._setValue_inNonEditMode.call( this, value );
 	},
-	
+
+	/**
+	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.normalize
+	 *
+	 * Will return the site ID if any of the site names is given.
+	 *
+	 * @todo: might be nice to move this into wikibase.Site.getIdByString() or something.
+	 */
+	normalize: function( value ) {
+		value = window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.normalize.call( this, value );
+
+		for( var i in this._currentResults ) {
+			var currentItem = this._currentResults[i];
+			if(    value == currentItem.site.getId()
+				|| value == currentItem.site.getShortName()
+				|| value == currentItem.value
+				|| value == currentItem.label
+			) {
+				return currentItem.site.getId();
+			}
+		}
+		return null;
+	},
 	
 	/////////////////
 	// CONFIGURABLE:

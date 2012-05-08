@@ -53,7 +53,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 
 	_buildSingleValueToolbar: function( editableValue ) {
 		var toolbar = window.wikibase.ui.PropertyEditTool.prototype._buildSingleValueToolbar.call( this, editableValue );
-		toolbar.editGroup.tooltip.setGravity( 'nw' );
+		toolbar.editGroup.tooltip.setGravity( 'se' );
 		return toolbar;
 	},
 
@@ -109,7 +109,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		}
 		var basePrototype = window.wikibase.ui.PropertyEditTool.EditableSiteLink;
 		
-		this._editableValuesProto = function() { basePrototype.apply( this, arguments ) };
+		this._editableValuesProto = function() { basePrototype.apply( this, arguments ); };
 		this._editableValuesProto.prototype = new basePrototype();
 		this._editableValuesProto.prototype.ignoredSiteLinks = this.getRepresentedSites();
 		
@@ -124,10 +124,17 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		if( removedSite !== null ) {
 			var index = $.inArray( removedSite, this._editableValuesProto.prototype.ignoredSiteLinks );
 			if( index > -1 ) {
+				// remove site link from ignored site links shared by all values managed by this:
 				this._editableValuesProto.prototype.ignoredSiteLinks.splice( index, 1 );
+
+				var pendingValues = this.getPendingValues();
+				for( var i in pendingValues ) {
+					// re-init site link list for value in edit mode currently
+					pendingValues[ i ].siteIdInterface._initSiteList();
+				}
 			}
 		}
-	},	
+	},
 	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
 		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_afterStopEditing.call( this, newValue, save );		
 		if( save ) {
@@ -176,4 +183,4 @@ window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
 			mw.msg( 'wikibase-sitelinks' ) +
 			'</th></thead><tbody></tbody></table>'
 	);
-}
+};

@@ -16,7 +16,7 @@
  */
 window.wikibase.Site = function( siteDetails ) {
 	this._siteDetails = siteDetails;
-}
+};
 window.wikibase.Site.prototype = {
 	
 	/**
@@ -57,14 +57,14 @@ window.wikibase.Site.prototype = {
 	},
 	
 	/**
-	 * Returns the url to a site of the site. To get a full html ready link, use getLinkTo().
+	 * Returns the url to a page of the site. To get a full html ready link, use getLinkTo().
 	 * 
-	 * @param string siteTitle title of the site within the site
+	 * @param string pageTitle title of the page within the site
 	 * @return string
 	 */
-	getUrlTo: function( siteTitle ) {
-		siteTitle = this._urlEncodeSite( $.trim( siteTitle ) );
-		return this._siteDetails.pageUrl.replace( /\$1/g, siteTitle );
+	getUrlTo: function( pageTitle ) {
+		pageTitle = this._urlEncodeSite( $.trim( pageTitle ) );
+		return this._siteDetails.pageUrl.replace( /\$1/g, pageTitle );
 	},
 	
 	/**

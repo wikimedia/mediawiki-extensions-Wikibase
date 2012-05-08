@@ -13,6 +13,8 @@
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.
+ *
+ * @since 0.1
  */
 window.wikibase.ui.PropertyEditTool = function( subject ) {
 	if( typeof subject != 'undefined' ) {
@@ -295,23 +297,27 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Allows to enter a new value, the input interface will be available but the process can still
 	 * be cancelled.
-	 * 
+	 *
+	 * @param value Object optional, initial value
 	 * @return newValue wikibase.ui.PropertyEditTool.EditableValue
 	 */
-	enterNewValue: function() {
+	enterNewValue: function( value ) {
 		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
 		newValueElem.addClass( 'wb-pending-value' );
 		
 		this._subject.append( newValueElem );
-		var newValue = this._initSingleValue( newValueElem );		
-				
+		var newValue = this._initSingleValue( newValueElem );
+
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
 		var self = this;
 		newValue.afterStopEditing = function( save, changed, wasPending ) {
 			self._newValueHandler_afterStopEditing( newValue, save, changed, wasPending );
 			newValue.onStopEditing = null; // make sure handler is only called once!
-		};		
+		};
+		if( value ) {
+			newValue.setValue( value );
+		}
 		
 		this._onRefreshView( this.getIndexOf( newValue ) );
 		newValue.setFocus();
@@ -358,7 +364,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	_updateCounters: function() {
 		var counterElems = this._getCounterNodes();
 		if( counterElems !== null && counterElems.length > 0 ) {
-			this._getCounterNodes().text( this._getFormattedCounterText() );
+			this._getCounterNodes().empty().append( this._getFormattedCounterText() );
 		}
 	},
 	
@@ -374,13 +380,29 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Returns a formatted string with the number of elements.
 	 * 
-	 * @return string
+	 * @return jQuery
 	 */
 	_getFormattedCounterText: function() {
+		var out = $();
 		var numberOfValues = this.getValues().length;
-		return ( numberOfValues != 1 )
-				? '(' + numberOfValues + ')'
-				: '';
+		var pendingValues = this.getPendingValues();
+
+		out = out.add( document.createTextNode( '(' + numberOfValues ) );
+
+		if( pendingValues.length > 0 ) {
+			out = out.add( '<span/>', {
+				'class': this.UI_CLASS + '-counter-pending',
+				'title': mw.msg( 'wikibase-propertyedittool-counter-pending-tooltip', pendingValues.length )
+			} )
+			.append( '+' + pendingValues.length )
+			.tipsy( {
+				'gravity': 'ne'
+			} );
+		}
+
+		out = out.add( document.createTextNode( ')' ) );
+
+		return out;
 	},
 	
 	/**
@@ -407,6 +429,22 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		$.each( this._editableValues, function( index, elem ) {
 			// don't collect pending elements
 			if( ! elem.isPending() ) {
+				values.push( elem );
+			}
+		} );
+		return values;
+	},
+
+	/**
+	 * This will just return all pending values.
+	 * See getValues() for getting all values or only values not pending.
+	 *
+	 * @return wikibase.ui.PropertyEditTool.EditableValue[]
+	 */
+	getPendingValues: function() {
+		var values = new Array();
+		$.each( this._editableValues, function( index, elem ) {
+			if( elem.isPending() ) {
 				values.push( elem );
 			}
 		} );

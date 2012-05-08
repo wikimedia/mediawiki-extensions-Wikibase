@@ -129,14 +129,34 @@ $wgHooks['AbortMove'][]								= 'WikibaseHooks::onAbortMove';
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' => 'Wikibase/resources'
+	// since 'WikidataRepo' extension was renamed to 'Wikibase', the directory should be renamed in the git repo first
+	// after that this 'weird' regex can be removed
+	'remoteExtPath' =>  preg_replace( '%^.*[/\\\](.+)$%', '$1', dirname( __FILE__ ) ) . '/resources'
+);
+
+// common styles independent from JavaScript being enabled or disabled
+$wgResourceModules['wikibase.common'] = $moduleTemplate + array(
+	'styles' => array(
+		'wikibase.css'
+	)
 );
 
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.js',
-		'wikibase.Site.js',
+		'wikibase.Site.js'
+	),
+	'dependencies' => array(
+		'wikibase.common'
 	)
+);
+
+$wgResourceModules['wikibase.tests.qunit.testrunner'] = $moduleTemplate + array(
+	'scripts' => '../tests/qunit/data/testrunner.js',
+	'dependencies' => array(
+		'mediawiki.tests.qunit.testrunner',
+	),
+	'position' => 'top'
 );
 
 $wgResourceModules['wikibase.ui.Toolbar'] = $moduleTemplate + array(
@@ -170,7 +190,7 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase.ui.PropertyEditTool.EditableDescription.js',
 		'wikibase.ui.PropertyEditTool.EditableLabel.js',
 		'wikibase.ui.PropertyEditTool.EditableSiteLink.js',
-		'wikibase.ui.HeadingEditTool.js',
+		'wikibase.ui.LabelEditTool.js',
 		'wikibase.ui.DescriptionEditTool.js',
 		'wikibase.ui.SiteLinksEditTool.js',
 		'wikibase.startup.js' // should probably be adjusted for more moduldarity
@@ -182,7 +202,8 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase',
 		'wikibase.ui.Toolbar',
 		'jquery.ui.autocomplete',
-		'mediawiki.Title'
+		'mediawiki.Title',
+		'mediawiki.jqueryMsg' // for {{plural}} and {{gender}} support in messages
 	),
 	'messages' => array(
 		'wikibase-sitelinks',
@@ -199,6 +220,7 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase-sitelinks-input-help-message',
 		'wikibase-remove',
 		'wikibase-propertyedittool-full',
+		'wikibase-propertyedittool-counter-pending-tooltip',
 		'wikibase-sitelinksedittool-full',
 	)
 );
