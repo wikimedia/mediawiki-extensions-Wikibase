@@ -36,6 +36,11 @@ h1.firstHeading .wb-ui-toolbar {
 	width: 0; /* don't use extra space if we have a spacey table */
 }
 
+.wb-sitelinks th.wb-ui-propertyedittool-counterinheading {
+	text-align: right;
+	font-size: .99em;
+}
+
 
 /********** TOOLTIP **********/
 

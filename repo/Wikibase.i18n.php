@@ -29,12 +29,13 @@ $messages['en'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'specify page',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
-	'wikibase-sitelinks' => 'Pages linked to this item',
+	'wikibase-sitelinks' => 'List of Pages Linked to This Item',
 	'wikibase-sitelinks-add' => 'add a link to a site-link',
 	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
+	'wikibase-propertyedittool-counter' => '($2 {{PLURAL:$1|entry|entries}})',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 
@@ -48,6 +49,8 @@ $messages['en'] = array(
 
 /** Message documentation (Message documentation) */
 $messages['qqq'] = array(
+	'wikibase-sitelinks' => 'Heading for the site links table.',
+	'wikibase-propertyedittool-counter' => '$1 is the number of links in the list. $2 also is the number of links (but with markup), if there are pending links currently $2 will be "<number of links>+<pending links>". "entries" refers to links in the list.',
 	'wikibase-desc' => '{{desc}}',
 	'wikibase-label-input-help-message' => '$1: name of the language',
 	'wikibase-description-input-help-message' => '$1: name of the language',
