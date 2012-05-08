@@ -17,6 +17,18 @@
 class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 
 	/**
+	 * Check the rights
+	 * 
+	 * @param $title Title
+	 * @param $user User doing the action
+	 * @param $token String
+	 * @return array
+	 */
+	protected function getPermissionsErrorInternal( $title, $user, array $params, $mod=null, $op=null ) {
+		return parent::getPermissionsError( $title, $user, 'alias', $params['item'] );
+	}
+	
+	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 * This overrides the base class
 	 *
