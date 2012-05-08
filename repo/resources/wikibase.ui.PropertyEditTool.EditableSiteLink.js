@@ -39,10 +39,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 */
 	_currentResults: null,
 
-	//getInputHelpMessage: function() {
-	//	return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
-	//},
-
 	_initToolbar: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._initToolbar.call( this );
 		this._toolbar.editGroup.displayRemoveButton = true;
@@ -138,12 +134,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		}, this ) );
 	},
 	
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing
+	 */
 	startEditing: function() {
 		// set ignored site links again since they could have changed
 		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
 		return window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
 	},
 	
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing
+	 */
 	stopEditing: function( save ) {
 		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
 		
@@ -153,10 +155,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return changed;
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
+	 */
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-sitelinks-input-help-message' );
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
+	 */
 	getApiCallParams: function( removeValue ) {
 		var linkValues = this.getValue();
 		var siteId = this.siteIdInterface.getSelectedSiteId();

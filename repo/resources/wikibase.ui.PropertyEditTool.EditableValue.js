@@ -277,6 +277,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * Returns the neccessary parameters for an api call to store the value.
+	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function() {
 		return {};
