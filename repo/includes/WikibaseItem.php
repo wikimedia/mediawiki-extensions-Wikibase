@@ -60,7 +60,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @since 0.1
 	 */
 	public function cleanStructure() {
-		foreach ( array( 'links', 'label', 'description' ) as $field ) {
+		foreach ( array( 'links', 'label', 'description', 'aliases' ) as $field ) {
 			if ( !array_key_exists( $field, $this->data ) ) {
 				$this->data[$field] = array();
 			}
@@ -113,14 +113,14 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function save() {
+	protected function relationalSave() {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$fields = array();
 
 		$success = true;
 
-		if ( !$this->hasId() ) {
+		if ( $this->isNew() ) {
 			$fields['item_id'] = null; // This is needed to have at least one field.
 
 			$success = $dbw->insert(
@@ -146,6 +146,71 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * Saves the item.
+	 * If the item does not exist yet, it will be created (ie an ID will be fetched and a new page in the data NS created).
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $summary
+	 * @param null|User $user
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function save( $summary = '', User $user = null ) {
+		$success = $this->relationalSave();
+
+		if ( $success ) {
+			$status = $this->getWikiPage()->doEditContent(
+				$this,
+				$summary,
+				EDIT_AUTOSUMMARY,
+				false,
+				$user,
+				'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
+			);
+
+			$success = $status->isOk();
+		}
+
+		return $success;
+	}
+
+	/**
+	 * Load the item data from the database, overriding the data currently set.
+	 *
+	 * @since 0.1
+	 *
+	 * @throws MWException
+	 */
+	public function reload() {
+		if ( !$this->isNew() ) {
+			$item = self::getFromId( $this->getId() );
+
+			if ( is_null( $item ) ) {
+				throw new MWException( 'Attempt to reload item failed because it could not be obtained from the db.' );
+			}
+			else {
+				$this->data = $item->toArray();
+			}
+		}
+	}
+
+	/**
+	 * Removes the item.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $summary
+	 * @param null|User $user
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function remove( $summary = '', User $user = null ) {
+		// TODO
+		return true;
+	}
+
+	/**
 	 * Sets the ID.
 	 * Should only be set to something determined by the store and not by the user (to avoid duplicate IDs).
 	 *
@@ -164,8 +229,8 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean
 	 */
-	public function hasId() {
-		return !is_null( $this->getId() );
+	public function isNew() {
+		return is_null( $this->getId() );
 	}
 
 	/**
@@ -299,6 +364,80 @@ class WikibaseItem extends WikibaseEntity {
 				unset( $this->data[$fieldKey][$lang] );
 			}
 		}
+	}
+
+	/**
+	 * Returns the aliases for the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 *
+	 * @return array
+	 */
+	public function getAliases( $languageCode ) {
+		return array_key_exists( $languageCode, $this->data['aliases'] ) ?
+			$this->data['aliases'][$languageCode] : array();
+ 	}
+
+	/**
+	 * Returns all the aliases for the item.
+	 * The result is an array with language codes pointing to an array of aliases in the language they specify.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getAllAliases() {
+		return $this->data['aliases'];
+	}
+
+	/**
+	 * Sets the aliases for the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function setAliases( $languageCode, array $aliases ) {
+		$this->data['aliases'][$languageCode] = $aliases;
+	}
+
+	/**
+	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function addAliases( $languageCode, array $aliases ) {
+		$this->setAliases(
+			$languageCode,
+			array_unique( array_merge(
+				$this->getAliases( $languageCode ),
+				$aliases
+			) )
+		);
+	}
+
+	/**
+	 * Removed the provided aliases from the aliases list of the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function removeAliases( $languageCode, array $aliases ) {
+		$this->setAliases(
+			$languageCode,
+			array_diff(
+				$this->getAliases( $languageCode ),
+				$aliases
+			)
+		);
 	}
 
 	/**
@@ -537,7 +676,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return String the summary text
 	 */
 	public function getTextForSummary( $maxlength = 250 ) {
-		return $this->getDescription( $GLOBALS['wgLang'] );
+		return $this->getDescription( $GLOBALS['wgLang']->getCode() );
 	}
 
 	/**
@@ -557,7 +696,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return int
 	 */
 	public function getSize()  {
-		return strlen( serialize( $this->toArray() ) ); #TODO: keep and reuse value, content object is immutable!
+		return strlen( serialize( $this->getNativeData() ) ); #TODO: keep and reuse value, content object is immutable!
 	}
 
 	/**
@@ -631,7 +770,7 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
-			$this->wikiPage = $this->hasId() ? self::getWikiPageForId( $this->getId() ) : false;
+			$this->wikiPage = $this->isNew() ? false : self::getWikiPageForId( $this->getId() );
 		}
 
 		return $this->wikiPage;

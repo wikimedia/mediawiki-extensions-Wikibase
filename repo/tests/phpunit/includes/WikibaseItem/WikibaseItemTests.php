@@ -9,24 +9,26 @@
  * @ingroup Wikibase
  * @ingroup Test
  *
+ * @group Wikibase
+ * @group WikibaseItem
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
- * 
  */
 class WikibaseItemTests extends MediaWikiTestCase {
 
 	/**
 	 * This is to set up the environment
 	 */
-	protected function setUp() {
+	public function setUp() {
   		parent::setUp();
 	}
 	
   	/**
 	 * This is to tear down the environment
 	 */
-	function tearDown() {
+	public function tearDown() {
 		parent::tearDown();
 	}
 	

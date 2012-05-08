@@ -34,14 +34,15 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) )
+			&& !( isset( $params['item'] ) && $params['item'] === 'add' ) ) {
+
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
-/*
+
 		if ( isset( $params['id'] ) && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-with-id' ), 'add-with-id' );
 		}
-		*/
 	}
 
 	/**
@@ -52,76 +53,56 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		$success = false;
+		$hasLink = isset( $params['site'] ) && $params['title'];
+		$item = null;
 
 		$this->validateParameters( $params );
-		
-		if ( !isset( $params['id'] ) ) { // create is for development
-			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
 
-			if ( $params['id'] === false && $params['item'] === 'update' ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
-			}
+		if ( $params['item'] === 'update' && !isset( $params['id'] ) && !$hasLink ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-update-without-id' ), 'update-without-id' );
 		}
-/*
-		if ( $params['id'] !== false && $params['item'] === 'add' ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
-		}
-*/
-		if ( isset( $params['id'] ) && $params['id'] !== false ) {
-			$page = WikibaseItem::getWikiPageForId( $params['id'] );
 
-			if ( $page->exists() ) {
-				$item = $page->getContent();
-			}
-			else {
+		if ( isset( $params['id'] ) ) {
+			$item = WikibaseItem::getFromId( $params['id'] );
+
+			if ( is_null( $item ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
 			}
 		}
-		else {
-			// now we should never be here
-			// TODO: find good way to do this. Seems like we need a WikiPage::setContent
-			$item = WikibaseItem::newEmpty();
-			$success = $item->save();
+		elseif ( $hasLink ) {
+			$item = WikibaseItem::getFromSiteLink( $params['site'], $params['title'] );
 
-			if ( $success ) {
-				if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-					$item->addSiteLink( $params['site'], $params['title'] );
-				}
+			if ( is_null( $item ) && $params['item'] === 'update' ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-id' );
+			}
+		}
+
+		if ( !is_null( $item ) && $params['item'] === 'add' ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
+		}
+
+		if ( is_null( $item ) ) {
+			$item = WikibaseItem::newEmpty();
+
+			if ( $hasLink ) {
+				$item->addSiteLink( $params['site'], $params['title'] );
+			}
+		}
+
+		$this->modifyItem( $item, $params );
+
+		$isNew = $item->isNew();
+		$success = $item->save();
+
+		if ( !$success ) {
+			if ( $isNew ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
 			}
 			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed-1' );
+				$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
 			}
 		}
 
-		if ( $item->getModelName() === CONTENT_MODEL_WIKIBASE ) {
-			$success = $this->modifyItem( $item, $params );
-
-			if ( $success ) {
-				$page = $item->getWikiPage();
-				$status = $page->doEditContent(
-					$item,
-					$params['summary'],
-					EDIT_AUTOSUMMARY,
-					false,
-					$this->getUser(),
-					'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
-				);
-
-				$success = $status->isOk();
-			}
-		}
-		else {
-			$this->dieUsage( wfMsg( 'wikibase-api-invalid-contentmodel' ), 'invalid-contentmodel' );
-		}
-
-		// this saves unconditionally if we had a success so far
-		// it could be interesting to avoid storing if the item is in fact not changed
-		// or if the saves could be queued somehow
-		if ($success) {
-			$success = $item->save();
-		}
-		
 		$this->getResult()->addValue(
 			null,
 			'success',

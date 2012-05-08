@@ -29,30 +29,18 @@ class ApiWikibaseSetItem extends ApiBase {
 		$success = false;
 		
 		// lacks error checking
-		$ch = new WikibaseContentHandler();
-		$item = $ch->unserializeContent( $params['data'],'application/json' );
-		$item->cleanStructure();
+		$item = WikibaseItem::newFromArray( json_decode( $params['data'], true ) );
 		$success = $item->save();
-		
+
+		if ( !$success ) {
+			// TODO: throw error. Right now will have PHP fatal when accessing $item later on...
+		}
+
 		if ( !isset($params['summary']) ) {
 			//$params['summary'] = $item->getTextForSummary();
 			$params['summary'] = 'dummy';
 		}
-		
-		if ( $success ) {
-			$page = $item->getWikiPage();
-			$status = $page->doEditContent(
-				$item,
-				$params['summary'],
-				EDIT_AUTOSUMMARY,
-				false,
-				$this->getUser(),
-				'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
-			);
 
-			$success = $status->isOk();
-		}
-		
 		$languages = WikibaseUtils::getLanguageCodes();
 		
 		// because this is serialized and cleansed we can simply go for known values
