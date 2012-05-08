@@ -2,16 +2,17 @@ require 'ruby_selenium'
 
 class EmptyItemPage < RubySelenium
   include PageObject
-  
+
   page_url self.get_new_item_url
   # self.set_item_label
-  
+
   # edit label UI
   h1(:firstHeading, :id => "firstHeading")
+  div(:uiToolbar, :class => "wb-ui-toolbar")
   span(:itemLabelSpan, :xpath => "//h1[@id='firstHeading']/span")
   link(:editLabelLink, :css => "h1#firstHeading > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
   text_field(:labelInputField, :xpath => "//h1[@id='firstHeading']/span/input")
-  
+
   link(:cancelLabelLink, :css => "h1#firstHeading > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
   link(:saveLabelLinkDisabled, :css => "h1#firstHeading > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(1)")
   link(:cancelLabelLinkDisabled, :css => "h1#firstHeading > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(2)")

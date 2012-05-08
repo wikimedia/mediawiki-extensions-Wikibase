@@ -36,10 +36,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 		return interfaces;
 	},
 	
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
+	 */
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
+	 */
 	getApiCallParams: function() {
 		return {
 			action: "wbsetlanguageattribute",
