@@ -12,7 +12,7 @@ require 'require_all'
 require_all 'lib/pages'
 
 # TODO: must this really be global?
-$target_browser = "chrome" # "chrome" "ie" "opera" "safari" "firefox"
+$target_browser = "firefox" # "chrome" "ie" "opera" "safari" "firefox"
 
 RSpec.configure do |config|
   config.include PageObject::PageFactory

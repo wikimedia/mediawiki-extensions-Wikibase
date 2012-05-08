@@ -121,18 +121,13 @@ describe "Check functionality of add/edit/remove sitelinks" do
       new_page = "Ber"
       @current_page.pageInputField = new_page
 
-      #@current_page.wait_until do
-      #  @current_page.editSitelinkAutocompleteList?
-      #end
+      @current_page.wait_until do
+        @current_page.editSitelinkAutocompleteList_element.visible?
+      end
 
-      #@current_page.wait_until do
-      #  puts @current_page.pageInputFieldLoading?
-      #  (@current_page.pageInputFieldLoading? == false)
-      #end
-      sleep(1)
       @current_page.pageInputField_element.send_keys :arrow_down
-      @current_page.editSitelinkAutocompleteList_element.send_keys :arrow_down
-      
+      # @current_page.editSitelinkAutocompleteList_element.send_keys :arrow_down
+
       @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 1).click
       @current_page.saveSitelinkLinkDisabled?.should be_true
       @current_page.pageInputField_element.send_keys :arrow_down
