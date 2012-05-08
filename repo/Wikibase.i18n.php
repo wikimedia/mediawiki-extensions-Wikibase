@@ -43,9 +43,30 @@ $messages['en'] = array(
 	'special-itembylabel' => 'Item by label',
 );
 
-/** Message documentation (Message documentation) */
+/** Message documentation (Message documentation)
+ * @author Jeblad
+ */
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc}}',
+	'wikibase-edit' => 'This is a generic text used for a link that puts the user interface into edit mode for an existing element of some kind.',
+	'wikibase-save' => 'This is a generic text used for a link that saves what the user has done while the user interface has been in edit mode.',
+	'wikibase-cancel' => 'This is a generic text used for a link that cancels what the user has done while the user interface has been in edit mode.',
+	'wikibase-add' => 'This is a generic text used for a link that puts the user interface into edit mode for an additional element of some kind.',
+	'wikibase-label-edit-placeholder' => 'This is a generic text used while editing a (possibly new) label.',
+	'wikibase-description-edit-placeholder' => 'This is a generic text used while editing a (possibly new) description.',
+	'wikibase-sitelink-site-edit-placeholder' => 'This is a generic text used while defining the site for a (possibly new) sitelink.',
+	'wikibase-sitelink-page-edit-placeholder' => 'This is a generic text used while defining the page for a (possibly new) sitelink.',
+	'wikibase-label-input-help-message' => 'Help message for entering the label of the data set used for a specific item. Takes on additional argument that is a page identifier.',
+	'wikibase-description-input-help-message' => 'Help message for entering the description of the data set used for a specific item. Takes on additional argument that is a page identifier.',
+	'wikibase-sitelinks' => 'Pages on a specific cluster of sites linked to this item',
+	'wikibase-sitelinks-add' => 'Add a sitelink to a language specific page on the cluster.',
+	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.',
+	'wikibase-sitelinks-input-help-message' => 'Set a sitelink to a language specific page on the cluster.',
+	'wikibase-remove' => 'This is a generic text used for a link that removes an element of some kind, without the the user interface is put in edit mode.',
+	'wikibase-propertyedittool-full' => 'A list of elements the user is assumed to enter is now complete.',
+	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available.',
+	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated.',
+	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
@@ -183,6 +204,7 @@ $messages['fa'] = array(
 	'wikibase-sitelinks-input-help-message' => 'تنظیم یک لینک به مقاله‌ای از ویکی‌پدیا.',
 	'wikibase-remove' => 'حذف',
 	'wikibase-propertyedittool-full' => 'فهرست مقادیر کامل است.',
+	'wikibase-sitelinksedittool-full' => 'پیوندها به صفحه‌ها در حال حاضر برای همهٔ وب‌گاه‌های شناخته‌شده تنظیم شده‌اند.',
 	'special-itembytitle' => 'آیتم بر اساس عنوان',
 	'special-itembylabel' => 'آیتم بر اساس برچسب',
 );
@@ -359,17 +381,26 @@ $messages['mk'] = array(
  * @author Siebrand
  */
 $messages['nl'] = array(
+	'wikibase-desc' => 'Repository voor gestructureerde gegevens',
 	'wikibase-edit' => 'bewerken',
 	'wikibase-save' => 'opslaan',
 	'wikibase-cancel' => 'annuleren',
 	'wikibase-add' => 'toevoegen',
 	'wikibase-label-edit-placeholder' => 'geef een label op',
 	'wikibase-description-edit-placeholder' => 'geef een beschrijving op',
+	'wikibase-sitelink-site-edit-placeholder' => 'site opgeven',
+	'wikibase-sitelink-page-edit-placeholder' => 'pagina opgeven',
+	'wikibase-label-input-help-message' => 'Geef de naam van deze gegevensset in in $1.',
+	'wikibase-description-input-help-message' => 'Geef een korte beschrijving in in $1.',
 	'wikibase-sitelinks' => "{{SITENAME}}-pagina's gekoppeld aan dit item",
 	'wikibase-sitelinks-add' => 'verwijzing toevoegen naar een Wikipediapagina',
 	'wikibase-sitelinks-empty' => "Er zijn nog geen {{SITENAME}}-pagina's gekoppeld aan dit item.",
+	'wikibase-sitelinks-input-help-message' => 'Geef een koppeling in naar een pagina in Wikipedia.',
 	'wikibase-remove' => 'verwijderen',
 	'wikibase-propertyedittool-full' => 'De lijst met waarden is compleet.',
+	'wikibase-sitelinksedittool-full' => "Verwijzingen naar pagina's die al zijn ingesteld voor alle bekende sites.",
+	'special-itembytitle' => 'Item gesorteerd op naam',
+	'special-itembylabel' => 'Item gesorteerd op label',
 );
 
 /** Portuguese (Português)
