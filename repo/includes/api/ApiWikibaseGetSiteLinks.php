@@ -27,8 +27,8 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 		$params = $this->extractRequestParams();
 
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$msg = 'id-xor-wikititle ' . $params['site'] . ' ' . $params['title '];
-			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), $msg);
+			//$msg = 'id-xor-wikititle ' . $params['site'] . ' ' . $params['title '];
+			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
 		$success = false;
@@ -68,6 +68,13 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 		);
 	}
 
+	/**
+	 * Returns an array of allowed parameters (parameter name) => (default
+	 * value) or (parameter name) => (array with PARAM_* constants as keys)
+	 * Don't call this function directly: use getFinalParams() to allow
+	 * hooks to modify parameters as needed.
+	 * @return array|bool
+	 */
 	public function getAllowedParams() {
 		return array(
 			'id' => array(
@@ -82,6 +89,12 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 		);
 	}
 
+	/**
+	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
+	 * needed.
+	 *
+	 * @return array|bool False on no parameter descriptions
+	 */
 	public function getParamDescription() {
 		return array(
 			'id' => 'The ID of the item to get the data from',
@@ -94,20 +107,32 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 		);
 	}
 
+	/**
+	 * Returns the description string for this module
+	 * @return mixed string or array of strings
+	 */
 	public function getDescription() {
 		return array(
 			'API module to get the data for a single Wikibase item.'
 		);
 	}
 
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item id or the title of a corresponding page and the identifier for the wiki this page is on' ),
-			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
-			array( 'code' => 'no-such-item', 'info' => 'Could not find an existing item' ),
+			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
+			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
+			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
 		) );
 	}
 
+	/**
+	 * Returns usage examples for this module. Return false if no examples are available.
+	 * @return bool|string|array
+	 */
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetsitelinks&id=42'
@@ -117,10 +142,17 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 		);
 	}
 
+	/**
+	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
+	 */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbgetlinksites';
 	}
 
+	/**
+	 * Returns a string that identifies the version of this class.
+	 * @return string
+	 */
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}
