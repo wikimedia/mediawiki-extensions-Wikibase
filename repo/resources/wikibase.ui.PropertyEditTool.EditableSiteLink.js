@@ -118,7 +118,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 
 	_getToolbarParent: function() {
 		// append toolbar to new td
-		return $( '<td/>' ).appendTo( this._subject );
+		this.__toolbarParent = this.__toolbarParent || $( '<td/>' ).appendTo( this._subject );
+		return this.__toolbarParent;
+	},
+
+	_getIndexParent: function() {
+		this.__indexParent = this.__indexParent || $( '<td/>' ).prependTo( this._subject );
+		return this.__indexParent;
+
 	},
 	
 	/**

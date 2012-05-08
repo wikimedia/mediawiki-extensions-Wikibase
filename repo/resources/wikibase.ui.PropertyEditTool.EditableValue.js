@@ -87,13 +87,24 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._initInterfaces();
 
 		this._toolbar = toolbar;
-		this._toolbar.appendTo( this._getToolbarParent() );
+		var tbParent = this._getToolbarParent();
+		this._toolbar.appendTo( tbParent );
+		tbParent.addClass( this.UI_CLASS + '-toolbarparent' );
+
+		var indexParent = this._getIndexParent();
+		if( indexParent ) {
+			indexParent.addClass( this.UI_CLASS + '-index' );
+		}
 		
 		if( this.isEmpty() || this.isPending() ) {
 			// enable editing from the beginning if there is no value yet or pending value...
 			this._toolbar.editGroup.btnEdit.doAction();
 			this.removeFocus(); // ...but don't set focus there for now
 		}
+	},
+
+	_setIndex: function( index ){
+
 	},
 	
 	/**
@@ -139,9 +150,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	
 	/**
 	 * Returns the node the toolbar should be appended to
+	 *
+	 * @return jQuery
 	 */
 	_getToolbarParent: function() {
 		return this._subject.parent();
+	},
+
+	/**
+	 * Returns the node reserved for the text expressing which index this editable value has
+	 *
+	 * @return jQuery|null
+	 */
+	_getIndexParent: function() {
+		return null;
 	},
 	
 	/**
@@ -333,6 +355,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * // TODO: should take an object representing a properties value
 	 * 
 	 * @param Array|string value
+	 * @return Array value but normalized
 	 */
 	setValue: function( value ) {
 		if( ! $.isArray( value ) ) {
@@ -341,6 +364,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		$.each( value, $.proxy( function( index, val ) {
 			this._interfaces[ index ].setValue( val );
 		}, this ) );
+
+		return this.getValue(); // will return value but normalized
 	},
 
 	/**

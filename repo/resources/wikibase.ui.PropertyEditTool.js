@@ -352,9 +352,16 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		}
 		for( var i = fromIndex; i < this._editableValues.length; i++ ) {
 			var isEven = ( i % 2 ) != 0;
-			this._editableValues[ i ]._subject
+			var val = this._editableValues[ i ];
+
+			val._subject
 			.addClass( isEven ? 'even' : 'uneven' )
 			.removeClass( isEven ? 'uneven' : 'even' );
+
+			var valIndexParent = val._getIndexParent();
+			if( valIndexParent !== null ) {
+				valIndexParent.text( i + 1 + '.' );
+			}
 		};
 	},
 	

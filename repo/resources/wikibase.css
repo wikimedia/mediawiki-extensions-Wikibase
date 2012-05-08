@@ -15,11 +15,11 @@
 }
 
 .wb-property-container-value {
-	margin:0 .3em;
+	margin: .3em;
 }
 
 .wb-property-container {
-	margin-top:.3em;
+	margin-top: .3em;
 }
 .wb-property-container-value {
 	background: /* @embed */ url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) left  no-repeat;

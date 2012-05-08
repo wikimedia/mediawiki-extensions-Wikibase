@@ -42,7 +42,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		
-		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
+		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 2 );
 	},
 	
 	_initToolbar: function() {
