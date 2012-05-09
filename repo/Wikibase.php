@@ -220,6 +220,8 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase-remove',
 		'wikibase-propertyedittool-full',
 		'wikibase-propertyedittool-counter',
+		'wikibase-propertyedittool-counter-pending',
+		'wikibase-propertyedittool-counter-pending-pendingsubpart',
 		'wikibase-propertyedittool-counter-pending-tooltip',
 		'wikibase-sitelinksedittool-full',
 	)

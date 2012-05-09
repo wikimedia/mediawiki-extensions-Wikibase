@@ -35,7 +35,9 @@ $messages['en'] = array(
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
-	'wikibase-propertyedittool-counter' => '($2 {{PLURAL:$1|entry|entries}})',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entry|entries}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entry|entries}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 
@@ -50,7 +52,9 @@ $messages['en'] = array(
 /** Message documentation (Message documentation) */
 $messages['qqq'] = array(
 	'wikibase-sitelinks' => 'Heading for the site links table.',
-	'wikibase-propertyedittool-counter' => '$1 is the number of links in the list. $2 also is the number of links (but with markup), if there are pending links currently $2 will be "<number of links>+<pending links>". "entries" refers to links in the list.',
+	'wikibase-propertyedittool-counter' => '$1 is the sum of elements in the list currently.',
+	'wikibase-propertyedittool-counter-pending' => '$1 is the sum of elements in the list plus the ones pending (still in edit mode and not saved). $2 is the number of elements stored in the list (not pending). $3 is the message "wikibase-propertyedittool-counter-pending-pendingsubpart" with some additional markup around, expressing how many entries in the list are pending right now.',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => 'the number of pending elements within the list of site links and a leading "+". This will be inserted into "wikibase-propertyedittool-counter-pending" parameter $3.',
 	'wikibase-desc' => '{{desc}}',
 	'wikibase-label-input-help-message' => '$1: name of the language',
 	'wikibase-description-input-help-message' => '$1: name of the language',

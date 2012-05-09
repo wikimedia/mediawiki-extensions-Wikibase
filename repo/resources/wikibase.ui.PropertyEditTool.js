@@ -390,28 +390,29 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @return jQuery
 	 */
 	_getFormattedCounterText: function() {
+		var numberOfPendingValues = this.getPendingValues().length;
 		var numberOfValues = this.getValues().length;
-		var pendingValues = this.getPendingValues();
 
-		//// for now, only append a span so we can grab it afterwards and replace it against real DOM stuff with tooltip
-		// It seems like when using PLURAL in the message, the advanced msg parser will escape html, so we use another
-		// placeholder __2__ to replace it with the span afterwards
-		var msg = mw.msg( 'wikibase-propertyedittool-counter', numberOfValues + pendingValues.length, '__2__' );
-		msg = $( ( '<div>' + msg + '</div>' ).replace( /__2__/g, '<span/>' ) );
+		var msg = numberOfPendingValues < 1
+				? mw.msg( 'wikibase-propertyedittool-counter', numberOfValues )
+				: mw.msg(
+						'wikibase-propertyedittool-counter-pending',
+						numberOfValues + numberOfPendingValues,
+						numberOfValues,
+						'__3__' // can't insert html here since it would be escaped!
+				);
+
+		// replace __3__ with a span we can grab next
+		msg = $( ( '<div>' + msg + '</div>' ).replace( /__3__/g, '<span/>' ) );
 		var msgSpan = msg.find( 'span' );
 
-		msgSpan.append( document.createTextNode( numberOfValues ) );
-
-		if( pendingValues.length > 0 ) {
-			$( '<span/>', {
-				'class': this.UI_CLASS + '-counter-pending',
-				'title': mw.msg( 'wikibase-propertyedittool-counter-pending-tooltip', pendingValues.length )
-			} )
-			.append( '+' + pendingValues.length )
-			.tipsy( {
+		if( msgSpan.length > 0 ) {
+			msgSpan.addClass( this.UI_CLASS + '-counter-pending' );
+			msgSpan.attr( 'title', mw.msg( 'wikibase-propertyedittool-counter-pending-tooltip', numberOfPendingValues ) );
+			msgSpan.text( mw.msg( 'wikibase-propertyedittool-counter-pending-pendingsubpart', numberOfPendingValues ) );
+			msgSpan.tipsy( {
 				'gravity': 'ne'
-			} )
-			.appendTo( msgSpan );
+			} );
 		}
 
 		return msg.contents();
