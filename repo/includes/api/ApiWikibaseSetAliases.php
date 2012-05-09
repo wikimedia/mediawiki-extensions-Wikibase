@@ -19,13 +19,12 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	/**
 	 * Check the rights
 	 * 
-	 * @param $title Title
 	 * @param $user User doing the action
 	 * @param $token String
 	 * @return array
 	 */
-	protected function getPermissionsErrorInternal( $title, $user, array $params, $mod=null, $op=null ) {
-		return parent::getPermissionsError( $title, $user, 'alias', $params['item'] );
+	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
+		return parent::getPermissionsError( $user, 'alias', $params['item'] );
 	}
 	
 	/**
@@ -70,12 +69,23 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 		return true;
 	}
 
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'aliases-invalid-list', 'info' => 'You need to either provide the set parameter xor the add or remove parameters' ),
 		) );
 	}
 
+	/**
+	 * Returns an array of allowed parameters (parameter name) => (default
+	 * value) or (parameter name) => (array with PARAM_* constants as keys)
+	 * Don't call this function directly: use getFinalParams() to allow
+	 * hooks to modify parameters as needed.
+	 * @return array|bool
+	 */
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
 			'add' => array(
@@ -97,6 +107,12 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 		) );
 	}
 
+	/**
+	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
+	 * needed.
+	 *
+	 * @return array|bool False on no parameter descriptions
+	 */
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
 			'add' => 'List of aliases to add',
@@ -106,12 +122,20 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 		) );
 	}
 
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
 	public function getDescription() {
 		return array(
 			'API module to set the aliases for a Wikibase item.'
 		);
 	}
 
+	/**
+	 * Returns usage examples for this module. Return false if no examples are available.
+	 * @return bool|string|array
+	 */
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbsetaliases&language=en&id=1&set=Foo|Bar'
@@ -125,11 +149,18 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 		);
 	}
 
+	/**
+	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
+	 */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetaliases';
 	}
 
 
+	/**
+	 * Returns a string that identifies the version of this class.
+	 * @return string
+	 */
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}
