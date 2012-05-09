@@ -160,7 +160,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			'site' => $site,
 			'title' => $title,
 		) );
-		print_r($first[0]);
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'item', $first[0],
@@ -178,7 +177,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider provideSetItemIdDataOp
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testGetItems( $id, $op, $data ) {
 		$first = $this->doApiRequest( array(
@@ -206,7 +204,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * 
 	 * @group API
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testGetItemsMultiple() {
 		$first = $this->doApiRequest( array(
@@ -228,7 +225,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerGetItemId
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testGetItemsSiteTitle($id, $site, $title) {
 		$first = $this->doApiRequest( array(
@@ -260,7 +256,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLinkSiteId
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testLinkSiteIdAdd( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'add' );
@@ -270,7 +265,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLinkSiteId
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testLinkSiteIdUpdate( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'update' );
@@ -280,7 +274,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLinkSiteId
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testLinkSiteIdSet( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'set' );
@@ -366,7 +359,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLinkSitePair
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testLinkSitePairAdd( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'add' );
@@ -376,7 +368,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLinkSitePair
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testLinkSitePairUpdate( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'update' );
@@ -386,7 +377,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLinkSitePair
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testLinkSitePairSet( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'set' );
@@ -403,7 +393,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-			//print_r($data[0]);
 			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
 		}
 		
@@ -478,7 +467,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLabelDescription
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testSetLanguageAttributeAdd( $id, $site, $title, $language, $label, $description ) {
 		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'add' );
@@ -488,7 +476,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLabelDescription
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testSetLanguageAttributeUpdate( $id, $site, $title, $language, $label, $description ) {
 		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'update' );
@@ -498,7 +485,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerLabelDescription
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testSetLanguageAttributeSet( $id, $site, $title, $language, $label, $description ) {
 		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'set' );
@@ -522,12 +508,19 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 		
 		$req = array_merge( $req, array(
 			'action' => 'wbsetlanguageattribute',
-			'id' => $id,
 			'label' => $label,
 			'description' => $description,
 			'language' => $language,
 			'item' => $op
 		) );
+		
+		$id += 3; // TODO: Verify that this is right
+		
+		if ( $op !== 'add' ) {
+			$req = array_merge( $req, array(
+				'id' => $id,
+			) );
+		}
 		
 		$first = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		
@@ -577,7 +570,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerRemoveLabelDescription
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testDeleteLanguageAttributeLabel( $id, $site, $title, $language ) {
 		$this->deleteLanguageAttribute( $id, $site, $title, $language, 'label' );
@@ -587,7 +579,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 * @group API
 	 * @dataProvider providerRemoveLabelDescription
 	 * @Depends testSetItemGetTokenSetData
-	 * @group Broken
 	 */
 	public function testDeleteLanguageAttributeDescription( $id, $site, $title, $language ) {
 		$this->deleteLanguageAttribute( $id, $site, $title, $language, 'description' );
@@ -605,7 +596,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-			//print_r($data[0]);
 			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
 		}
 		
@@ -660,7 +650,7 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			array(
 				++$idx,
 				'add',
-				'[{
+				'{
 					"links": {
 						"de": { "site": "de", "title": "Berlin" },
 						"en": { "site": "en", "title": "Berlin" },
@@ -679,12 +669,12 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 						"no" : { "language": "no", "value": "Hovedsted og delstat og i Forbundsrepublikken Tyskland." },
 						"nn" : { "language": "nn", "value": "Hovudstad og delstat i Forbundsrepublikken Tyskland." }
 					}
-				}]'
+				}'
 			),
 			array(
 				++$idx,
 				'add',
-				'[{
+				'{
 					"links": {
 						"de": { "site": "de", "title": "London" },
 						"en": { "site": "en", "title": "London" },
@@ -703,12 +693,12 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 						"no" : { "language": "no", "value": "Hovedsted i England og Storbritannia." },
 						"nn" : { "language": "nn", "value": "Hovudstad i England og Storbritannia." }
 					}
-				}]'
+				}'
 			),
 			array(
 				++$idx,
 				'add',
-				'[{
+				'{
 					"links": {
 						"de": { "site": "de", "title": "Oslo" },
 						"en": { "site": "en", "title": "Oslo" },
@@ -727,7 +717,7 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 						"no" : { "language": "no", "value": "Hovedsted i Norge." },
 						"nn" : { "language": "nn", "value": "Hovudstad i Noreg." }
 					}
-				}]'
+				}'
 			),
 		);
 	}

@@ -72,7 +72,7 @@ class ApiWikibaseSetItem extends ApiBase {
 		}
 		
 		// lacks error checking
-		$item = WikibaseItem::newFromArray( json_decode( $params['data'] ) );
+		$item = WikibaseItem::newFromArray( json_decode( $params['data'], true ) );
 		
 		// TODO: Change for more fine grained permissions
 		$user = $this->getUser();
@@ -209,9 +209,9 @@ class ApiWikibaseSetItem extends ApiBase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetitem&data=[{}]'
+			'api.php?action=wbsetitem&data={}'
 			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed',
-			'api.php?action=wbsetitem&data=[{"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}]'
+			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
 			=> 'Set a more complete JSON structure for the item.',
 		);
 	}
