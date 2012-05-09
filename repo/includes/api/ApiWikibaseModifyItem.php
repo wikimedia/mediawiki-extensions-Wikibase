@@ -55,6 +55,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	}
 	
 	/**
+	 * Report the new values so they can be added to the result array
+	 * @return array conaining the values for the result
+	 */
+	protected abstract function reportNewValues( WikibaseItem &$item, array $params );
+	
+	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
 	 * @since 0.1
@@ -146,6 +152,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		
 		
 		$success = $item->save();
+		
 
 		if ( !$success ) {
 			if ( $isNew ) {
@@ -155,6 +162,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
 			}
 		}
+		
+		$this->getResult()->addValue(
+			null,
+			'item',
+			$this->reportNewValues($item, $params)
+		);
 		
 		$this->getResult()->addValue(
 			null,

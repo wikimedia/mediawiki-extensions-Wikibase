@@ -31,6 +31,35 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	}
 	
 	/**
+	 * Report the new values so they can be added to the result array
+	 * @return array conaining the values for the result
+	 */
+	protected function reportNewValues( WikibaseItem &$item, array $params ) {
+		$languages = WikibaseUtils::getLanguageCodes();
+		$labels = $item->getLabels();
+		$descriptions = $item->getDescriptions();
+		$res = array();
+		// TODO: Get this to report the changed values
+		/*
+		switch ($params['item']) {
+			case 'update':
+			case 'add':
+			case 'set':
+				if ( isset($params['label']) ) {
+					$res['labels'] = array( $item->getLabel( $params['language'] ) );
+				}
+				if ( isset($params['description']) ) {
+					$res['descriptions'] = array( $item->getDescription( $params['language'] ) );
+				}
+				break;
+			default:
+				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+		}
+		*/
+		return $res;
+	}
+	
+	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
 	 * @since 0.1

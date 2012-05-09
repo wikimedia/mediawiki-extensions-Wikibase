@@ -28,6 +28,15 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	}
 	
 	/**
+	 * Report the new values so they can be added to the result array
+	 * @return array conaining the values for the result
+	 */
+	protected function reportNewValues( WikibaseItem &$item, array $params ) {
+		// TODO: Return the correct values
+		return array();
+	}
+	
+	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 * This overrides the base class
 	 *

@@ -30,6 +30,15 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	}
 	
 	/**
+	 * Report the new values so they can be added to the result array
+	 * @return array conaining the values for the result
+	 */
+	protected function reportNewValues( WikibaseItem &$item, array $params ) {
+		// TODO: Return the correct values
+		return array();
+	}
+	
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
