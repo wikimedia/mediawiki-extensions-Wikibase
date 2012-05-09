@@ -51,11 +51,6 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			return null;
 		}
 		
-		// Check permissions
-		//return $title->getUserPermissionsErrors(
-		//	is_string($mod) ? "{$mod}-{$op}" : $op,
-		//	$user
-		//);
 		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
 	}
 	
@@ -144,16 +139,8 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		$isNew = $item->isNew();
 		
 		// TODO: Change for more fine grained permissions
-		//$page = $item->getWikiPage();	
-		//$errors = self::getPermissionsError( $page->getTitle(), $this->getUser() );
-		//if ( count( $errors ) ) {
-			// this could be redesigned into something more usefull
 		$user = $this->getUser();
 		if ( $this->getPermissionsErrorInternal( $this->getUser(), $params ) ) {
-		//if ( count( $errors ) ) {
-		
-			
-			//if (self::getPermissionsError( $this->getUser() ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
 		
@@ -168,15 +155,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
 			}
 		}
-
-		//$page = $item->getWikiPage();
-				
-		//$errors = $this->getPermissionsErrorInternal( $page->getTitle(), $this->getUser(), $params );
-		//if ( count( $errors ) ) {
-			// this could be redesigned into something more usefull
-			//print_r($errors);
-			//$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
-		//}
+		
 		$this->getResult()->addValue(
 			null,
 			'success',
