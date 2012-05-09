@@ -209,9 +209,9 @@ class ApiWikibaseSetItem extends ApiBase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetitem&data={}'
+			'api.php?action=wbsetitem&data=[{}]'
 			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed',
-			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			'api.php?action=wbsetitem&data=[{"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}]'
 			=> 'Set a more complete JSON structure for the item.',
 		);
 	}
