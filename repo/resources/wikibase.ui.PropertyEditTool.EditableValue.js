@@ -219,8 +219,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			return false; // cancel
 		}
 		if( !save && this.isPending() ) {
-			// not yet existing value, no state to go back to
-			this.remove( false );
+			this.reTransform( save );
+			this.remove( false ); // not yet existing value, no state to go back to
 			return false; // do not call afterStopEditing() here!
 		}
 
@@ -265,6 +265,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		$.each( this._interfaces, function( index, elem ) {
 			elem.stopEditing( save );
 		} );
+		this._toolbar._items[0].btnSave.removeTooltip();
 		this._isInEditMode = false; // out of edit mode after interfaces are converted back to HTML
 		return this.isPending();
 	},
@@ -357,9 +358,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param object error
 	 */
 	apiCallErr: function( error ) {
-		// TODO append error tooltip, show it and implement logic when to hide it
-		// this._interfaces[ this._interfaces.length - 1 ].addTooltip( error.shortMessage );
-		//
+		// TODO enhance tooltip error message and logic for when to remove tooltip
+		var btnSave = this._toolbar._items[0].btnSave;
+		btnSave.addTooltip( error.shortMessage, { gravity: 'sw' } );
+		btnSave.tooltip.showMessage( true );
+		this.setFocus();
+
 		// debug output for now
 		console.dir( error );
 	},

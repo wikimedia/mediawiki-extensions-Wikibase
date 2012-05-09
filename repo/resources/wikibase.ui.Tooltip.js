@@ -65,6 +65,9 @@ window.wikibase.ui.Tooltip.prototype = {
 	_init: function( subject, tooltipContent, tipsyConfig ) {
 		this._subject = subject;
 		this._subject.attr( 'title', tooltipContent );
+		if ( typeof tipsyConfig != 'undefined' ) {
+			this._tipsyConfig = tipsyConfig;
+		}
 		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
 			this._tipsyConfig = {};
 			this.setGravity( 'ne' );
@@ -114,6 +117,20 @@ window.wikibase.ui.Tooltip.prototype = {
 	},
 
 	/**
+	 * query whether hover events are attached
+	 */
+	_hasEvents: function() {
+		if ( typeof this._subject.data( 'events' ) == 'undefined' ) {
+			return false;
+		} else {
+			return (
+				typeof this._subject.data( 'events' ).mouseover != 'undefined' &&
+				typeof this._subject.data( 'events' ).mouseout != 'undefined'
+			);
+		}
+	},
+
+	/**
 	 * show tooltip
 	 *
 	 * @param boolean permanent whether tooltip should be displayed permanently until hide() is being
@@ -134,7 +151,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * hide tooltip
 	 */
 	hideMessage: function() {
-		if ( this._permanent && typeof this._subject.data( 'events' ) == 'undefined' || !this._permanent ) {
+		if ( this._permanent && !this._hasEvents() || !this._permanent ) {
 			this._permanent = false;
 			this._toggleEvents( true );
 			if ( this._isVisible ) {

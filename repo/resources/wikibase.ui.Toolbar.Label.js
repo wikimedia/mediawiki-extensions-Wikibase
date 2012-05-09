@@ -101,9 +101,25 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 		}
 	},
 
+	/**
+	 * attach a tooltip message to this label
+	 *
+	 * @param string message tooltip message
+	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
+	 */
 	addTooltip: function( message, tipsyConfig ) {
 		this._elem.attr( 'title', message );
 		this.tooltip = new window.wikibase.ui.Tooltip( this._elem, message, tipsyConfig );
+	},
+
+	/**
+	 * remove a tooltip message attached to this label
+	 */
+	removeTooltip: function() {
+		if ( this.tooltip !== null ) {
+			this.tooltip.hideMessage();
+			this.tooltip = null;
+		}
 	},
 	
 	/**
