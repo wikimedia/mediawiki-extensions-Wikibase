@@ -131,7 +131,8 @@ $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
 	// since 'WikidataRepo' extension was renamed to 'Wikibase', the directory should be renamed in the git repo first
 	// after that this 'weird' regex can be removed
-	'remoteExtPath' =>  preg_replace( '%^.*[/\\\](.+)$%', '$1', dirname( __FILE__ ) ) . '/resources'
+	// Newslash: the directory is not in the git repo. So properly clone it or rename the directory on your machine if you did it wrong.
+	'remoteExtPath' =>  'Wikibase/resources'
 );
 
 // common styles independent from JavaScript being enabled or disabled
