@@ -39,7 +39,10 @@ describe "Check functionality of add/edit/remove sitelinks" do
       #@current_page.siteIdInputField_element.enabled?.should be_true
       @current_page.pageInputField_element.enabled?.should be_false
       @current_page.siteIdInputField="e"
-      ajax_wait
+      #ajax_wait
+      @current_page.wait_until do
+        @current_page.siteIdAutocompleteList_element.visible?
+      end
       
 
       # TODO: find solution: key has to be sent to input field first to get the autocomplete list visible to selenium
