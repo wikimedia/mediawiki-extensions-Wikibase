@@ -153,7 +153,7 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#setaliases';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetaliases';
 	}
 
 
