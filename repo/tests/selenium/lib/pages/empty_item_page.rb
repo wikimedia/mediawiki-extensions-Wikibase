@@ -21,7 +21,6 @@ class EmptyItemPage < RubySelenium
   # edit description UI
   span(:itemDescriptionSpan, :class => "wb-property-container-value")
   link(:editDescriptionLink, :css => "div.wb-ui-descriptionedittool > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
-  # text_field(:descriptionInputField, :xpath => "//div[@class='wb-property-container wb-ui-propertyedittool-subject wb-ui-descriptionedittool']/span/input")
   text_field(:descriptionInputField, :xpath => "//div[@id='mw-content-text']/div/span/input")
   link(:cancelDescriptionLink, :css => "div.wb-ui-descriptionedittool > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
   link(:saveDescriptionLinkDisabled, :css => "div.wb-ui-descriptionedittool > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button:nth-child(1)")
