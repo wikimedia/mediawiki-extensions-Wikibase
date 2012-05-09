@@ -53,10 +53,8 @@ class WikibaseChanges extends ORMTable {
 		return array(
 			'id' => 'id',
 
-			'course_id' => 'int',
-			'user_id' => 'int',
-			'time' => 'str', // TS_MW
 			'type' => 'str',
+			'time' => 'str', // TS_MW
 			'info' => 'blob',
 		);
 	}

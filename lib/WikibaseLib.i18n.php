@@ -19,3 +19,10 @@ $messages = array();
 $messages['en'] = array(
 	'wikibaselib-desc' => 'Holds common functionality for the Wikibase and Wikibase Client extensions.',
 );
+
+/** Message documentation (Message documentation)
+ * @author Jeroen De Dauw
+ */
+$messages['qqq'] = array(
+	'wikibaselib-desc' => '{{desc}}',
+);
