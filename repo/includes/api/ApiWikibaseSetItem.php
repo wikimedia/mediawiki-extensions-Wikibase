@@ -27,14 +27,12 @@ class ApiWikibaseSetItem extends ApiBase {
 	 * @param $op null|String operation that is about to be done, usually not set
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	//protected static function getPermissionsError( $title, $user, $mod='item', $op='add' ) {
 	protected static function getPermissionsError( $user, $mod='item', $op='add' ) {
 		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
 		
 		// Check permissions
-		//return $title->getUserPermissionsErrors(
 		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
 		
 	}
@@ -77,10 +75,6 @@ class ApiWikibaseSetItem extends ApiBase {
 		$item = WikibaseItem::newFromArray( json_decode( $params['data'] ) );
 		
 		// TODO: Change for more fine grained permissions
-		//$page = $item->getWikiPage();	
-		//$errors = self::getPermissionsError( $page->getTitle(), $this->getUser() );
-		//if ( count( $errors ) ) {
-			// this could be redesigned into something more usefull
 		$user = $this->getUser();
 		if (self::getPermissionsError( $this->getUser() ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
