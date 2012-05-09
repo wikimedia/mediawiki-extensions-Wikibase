@@ -75,7 +75,7 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'aliases-invalid-list', 'info' => 'You need to either provide the set parameter xor the add or remove parameters' ),
+			array( 'code' => 'aliases-invalid-list', 'info' => wfMsg( 'wikibase-api-aliases-invalid-list' ) ),
 		) );
 	}
 
