@@ -27,4 +27,9 @@ class EmptyItemPage < RubySelenium
   link(:cancelDescriptionLinkDisabled, :css => "div.wb-ui-descriptionedittool > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button:nth-child(2)")
   link(:saveDescriptionLink, :css => "div.wb-ui-descriptionedittool > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
 
+  def wait_for_item_to_load
+    wait_until do
+      uiToolbar_element.visible?
+    end
+  end
 end

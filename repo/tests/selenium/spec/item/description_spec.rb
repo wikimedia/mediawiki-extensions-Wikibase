@@ -9,7 +9,7 @@ describe "Check functionality of edit description" do
       current_description = @current_page.itemDescriptionSpan
       changed_description = current_description + " Adding something."
       @current_page.itemDescriptionSpan.should == current_description
-      @current_page.wait_for_page_to_load
+      @current_page.wait_for_item_to_load
       @current_page.editDescriptionLink?.should be_true
       @current_page.cancelDescriptionLink?.should be_false
       @current_page.editDescriptionLink
@@ -30,9 +30,7 @@ describe "Check functionality of edit description" do
       @current_page.saveDescriptionLink
       @current_page.itemDescriptionSpan.should == changed_description
       ajax_wait
-      # TODO: is there a better method for reloading?
-      visit_page(ItemPage)
-      @current_page.wait_for_page_to_load
+      @browser.refresh
       @current_page.itemDescriptionSpan.should == changed_description
       @current_page.editDescriptionLink
       @current_page.descriptionInputField.clear
@@ -40,9 +38,7 @@ describe "Check functionality of edit description" do
       @current_page.saveDescriptionLink
       @current_page.itemDescriptionSpan.should == current_description
       ajax_wait
-      # TODO: is there a better method for reloading?
-      visit_page(ItemPage)
-      @current_page.wait_for_page_to_load
+      @browser.refresh
       @current_page.itemDescriptionSpan.should == current_description
     end
   end

@@ -30,8 +30,7 @@ describe "Check functionality of edit label" do
       @current_page.saveLabelLink
       @current_page.itemLabelSpan.should == changed_label
       ajax_wait
-      # TODO: is there a better method for reloading?
-      visit_page(ItemPage)
+      @browser.refresh
       @current_page.itemLabelSpan.should == changed_label
       @browser.title.include? changed_label
       @current_page.editLabelLink
@@ -40,8 +39,7 @@ describe "Check functionality of edit label" do
       @current_page.saveLabelLink
       @current_page.itemLabelSpan.should == current_label
       ajax_wait
-      # TODO: is there a better method for reloading?
-      visit_page(ItemPage)
+      @browser.refresh
       @current_page.itemLabelSpan.should == current_label
       @browser.title.include? current_label
     end
