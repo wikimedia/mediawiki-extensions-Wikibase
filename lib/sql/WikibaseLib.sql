@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_changes (
   change_info                BLOB                NOT NULL -- Holds additional info about the change, inc diff and stuff
 ) /*$wgDBTableOptions*/;
 
-CREATE INDEX /*i*/wb_changes_change_id ON /*_*/wb_changes (change_id);
+CREATE INDEX /*i*/wb_changes_change_type ON /*_*/wb_changes (change_type);
 CREATE INDEX /*i*/wb_changes_change_time ON /*_*/wb_changes (change_time);

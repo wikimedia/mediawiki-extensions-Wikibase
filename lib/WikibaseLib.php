@@ -62,3 +62,7 @@ $wgAutoloadClasses['WikibaseChanges'] 				= $dir . 'WikibaseChanges.php';
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseLibHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseLibHooks::registerUnitTests';
+
+
+
+$wgSharedTables[] = 'wb_changes';
