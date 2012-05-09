@@ -17,7 +17,7 @@ describe "Check functionality of edit label" do
       @current_page.cancelLabelLink?.should be_true
       @current_page.saveLabelLinkDisabled?.should be_true
       @current_page.labelInputField.should be_true
-      @current_page.labelInputField.clear
+      @current_page.labelInputField_element.clear
       @current_page.labelInputField = changed_label
       @current_page.saveLabelLink?.should be_true
       @current_page.cancelLabelLink
@@ -25,23 +25,21 @@ describe "Check functionality of edit label" do
       @current_page.cancelLabelLink?.should be_false
       @current_page.itemLabelSpan.should == current_label
       @current_page.editLabelLink
-      @current_page.labelInputField.clear
+      @current_page.labelInputField_element.clear
       @current_page.labelInputField = changed_label
       @current_page.saveLabelLink
       @current_page.itemLabelSpan.should == changed_label
       ajax_wait
-      # TODO: is there a better method for reloading?
-      visit_page(ItemPage)
+      @browser.refresh
       @current_page.itemLabelSpan.should == changed_label
       @browser.title.include? changed_label
       @current_page.editLabelLink
-      @current_page.labelInputField.clear
+      @current_page.labelInputField_element.clear
       @current_page.labelInputField = current_label
       @current_page.saveLabelLink
       @current_page.itemLabelSpan.should == current_label
       ajax_wait
-      # TODO: is there a better method for reloading?
-      visit_page(ItemPage)
+      @browser.refresh
       @current_page.itemLabelSpan.should == current_label
       @browser.title.include? current_label
     end

@@ -40,6 +40,7 @@ $messages['en'] = array(
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
+	'wikibase-disambiguation-title' => 'Disambiguation for "$1"',
 
 	// Special pages
 	'special-itembytitle' => 'Item by title',
@@ -56,6 +57,7 @@ $messages['qqq'] = array(
 	'wikibase-propertyedittool-counter-pending' => '$1 is the sum of elements in the list plus the ones pending (still in edit mode and not saved). $2 is the number of elements stored in the list (not pending). $3 is the message "wikibase-propertyedittool-counter-pending-pendingsubpart" with some additional markup around, expressing how many entries in the list are pending right now.',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => 'the number of pending elements within the list of site links and a leading "+". This will be inserted into "wikibase-propertyedittool-counter-pending" parameter $3.',
 	'wikibase-desc' => '{{desc}}',
+	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wikibase-label-input-help-message' => '$1: name of the language',
 	'wikibase-description-input-help-message' => '$1: name of the language',
 );

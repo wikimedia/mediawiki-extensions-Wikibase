@@ -12,7 +12,7 @@ describe "Check functionality of edit description" do
       @current_page.editLabelLink?.should be_false
       @current_page.saveLabelLinkDisabled?.should be_true
       @current_page.cancelLabelLinkDisabled?.should be_true
-      @current_page.labelInputField.clear
+      @current_page.labelInputField_element.clear
       @current_page.labelInputField = initial_label
       @current_page.saveLabelLink?.should be_true
       @current_page.saveLabelLink
@@ -27,7 +27,7 @@ describe "Check functionality of edit description" do
       @current_page.editDescriptionLink?.should be_false
       @current_page.saveDescriptionLinkDisabled?.should be_true
       @current_page.cancelDescriptionLinkDisabled?.should be_true
-      @current_page.descriptionInputField.clear
+      @current_page.descriptionInputField_element.clear
       @current_page.descriptionInputField = initial_description
       @current_page.saveDescriptionLink?.should be_true
       @current_page.saveDescriptionLink

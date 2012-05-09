@@ -9,9 +9,4 @@ class ItemPage < EmptyItemPage
 
   div(:uiToolbar, :class => "wb-ui-toolbar")
   
-  def wait_for_page_to_load
-    wait_until do
-      uiToolbar_element.visible?
-    end
-  end
 end
