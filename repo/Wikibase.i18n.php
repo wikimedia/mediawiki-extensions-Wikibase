@@ -45,6 +45,29 @@ $messages['en'] = array(
 
 	// API errors
 	'wikibase-api-aliases-invalid-list' => 'You need to either provide the set parameter xor the add or remove parameters',
+	'wikibase-api-no-such-item' => 'There are no such item to be found',
+	'wikibase-api-no-token' => 'There are no token given',
+	'wikibase-api-no-data' => 'It is not found any data to operate upon',
+	'wikibase-api-cant-edit' => 'The logged in user is not allowed to edit',
+	'wikibase-api-no-permissions' => 'The logged in user does not have sufficient rights',
+	'wikibase-api-id-xor-wikititle' => 'Either provide the item ids or a site-title pair for a corresponding page',
+	'wikibase-api-no-such-item' => 'Could not find an existing item',
+	'wikibase-api-no-such-item-id' => 'Could not find an existing item for this id',
+	'wikibase-api-link-exists' => 'An article on the specified wiki is already linked',
+	'wikibase-api-add-with-id' => 'Can not add with the id of an existing item',
+	'wikibase-api-add-exists' => 'Can not add to an existing item',
+	'wikibase-api-no-such-item-link' => 'Could not find an existing item for this link',
+	'wikibase-api-create-failed' => 'Attempted creation of new item failed',
+	'wikibase-api-invalid-contentmodel' => 'The content model of the page on which the item is stored is invalid',
+	'wikibase-api-alias-incomplete' => 'Can not find a definition of the alias for the item',
+	'wikibase-api-alias-not-found' => 'Can not find any previous alias in the item',
+	'wikibase-api-alias-found' => 'Found a previous alias in the item',
+	'wikibase-api-not-recognized' => 'Directive is not recognized',
+	'wikibase-api-label-or-description' => 'Use either or both of label and/or description, but not noen of them',
+	'wikibase-api-label-not-found' => 'Can not find any previous label in the item',
+	'wikibase-api-description-not-found' => 'Can not find any previous description in the item',
+	'wikibase-api-label-found' => 'Found a previous label in the item',
+	'wikibase-api-description-found' => 'Found a previous description in the item',
 );
 
 /** Message documentation (Message documentation) */
