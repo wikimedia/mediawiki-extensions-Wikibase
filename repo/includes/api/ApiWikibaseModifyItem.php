@@ -29,14 +29,13 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	/**
 	 * Check the rights for the user accessing the module, that is a subclass of this one.
 	 * 
-	 * @param $title Title object where the item is stored
 	 * @param $user User doing the action
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 * @param $mod null|String name of the module, usually not set
 	 * @param $op null|String operation that is about to be done, usually not set
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected abstract function getPermissionsErrorInternal( $title, $user, array $params, $module=null, $op=null );
+	protected abstract function getPermissionsErrorInternal( $user, array $params, $module=null, $op=null );
 
 	/**
 	 * Check the rights for the user accessing the module, module name and operation comes from the actual subclass.
@@ -47,16 +46,17 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @param $op null|String operation that is about to be done, usually not set
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected static function getPermissionsError( $title, $user, $mod=null, $op=null ) {
+	protected static function getPermissionsError( $user, $mod=null, $op=null ) {
 		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
 		
 		// Check permissions
-		return $title->getUserPermissionsErrors(
-			is_string($mod) ? "{$mod}-{$op}" : $op,
-			$user
-		);
+		//return $title->getUserPermissionsErrors(
+		//	is_string($mod) ? "{$mod}-{$op}" : $op,
+		//	$user
+		//);
+		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
 	}
 	
 	/**
@@ -142,6 +142,22 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		$this->modifyItem( $item, $params );
 
 		$isNew = $item->isNew();
+		
+		// TODO: Change for more fine grained permissions
+		//$page = $item->getWikiPage();	
+		//$errors = self::getPermissionsError( $page->getTitle(), $this->getUser() );
+		//if ( count( $errors ) ) {
+			// this could be redesigned into something more usefull
+		$user = $this->getUser();
+		if ( $this->getPermissionsErrorInternal( $this->getUser(), $params ) ) {
+		//if ( count( $errors ) ) {
+		
+			
+			//if (self::getPermissionsError( $this->getUser() ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
+		}
+		
+		
 		$success = $item->save();
 
 		if ( !$success ) {
@@ -153,14 +169,14 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			}
 		}
 
-		$page = $item->getWikiPage();
+		//$page = $item->getWikiPage();
 				
-		$errors = $this->getPermissionsErrorInternal( $page->getTitle(), $this->getUser(), $params );
-		if ( count( $errors ) ) {
+		//$errors = $this->getPermissionsErrorInternal( $page->getTitle(), $this->getUser(), $params );
+		//if ( count( $errors ) ) {
 			// this could be redesigned into something more usefull
 			//print_r($errors);
-			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
-		}
+			//$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
+		//}
 		$this->getResult()->addValue(
 			null,
 			'success',
