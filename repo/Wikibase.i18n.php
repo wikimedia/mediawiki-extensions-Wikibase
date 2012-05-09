@@ -56,8 +56,8 @@ $messages['qqq'] = array(
 	'wikibase-description-edit-placeholder' => 'This is a generic text used while editing a (possibly new) description.',
 	'wikibase-sitelink-site-edit-placeholder' => 'This is a generic text used while defining the site for a (possibly new) sitelink.',
 	'wikibase-sitelink-page-edit-placeholder' => 'This is a generic text used while defining the page for a (possibly new) sitelink.',
-	'wikibase-label-input-help-message' => 'Help message for entering the label of the data set used for a specific item. Takes on additional argument that is a page identifier.',
-	'wikibase-description-input-help-message' => 'Help message for entering the description of the data set used for a specific item. Takes on additional argument that is a page identifier.',
+	'wikibase-label-input-help-message' => 'Help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form.',
+	'wikibase-description-input-help-message' => 'Help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form.',
 	'wikibase-sitelinks' => 'Pages on a specific cluster of sites linked to this item',
 	'wikibase-sitelinks-add' => 'Add a sitelink to a language specific page on the cluster.',
 	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.',
@@ -463,6 +463,7 @@ $messages['ru'] = array(
 
 /** Swedish (Svenska)
  * @author Ainali
+ * @author WikiPhoenix
  */
 $messages['sv'] = array(
 	'wikibase-desc' => 'Strukturerad datalagring',
@@ -477,7 +478,9 @@ $messages['sv'] = array(
 	'wikibase-sitelinks' => 'Wikipedia-sidor som är länkade till det här objektet',
 	'wikibase-sitelinks-add' => 'lägg till en länk till en Wikipedia-sida',
 	'wikibase-sitelinks-empty' => 'Inga Wikipedia-sidor länkade till det här objektet ännu.',
+	'wikibase-sitelinks-input-help-message' => 'Ange en länk till en Wikipedia-artikel.',
 	'wikibase-remove' => 'ta bort',
+	'wikibase-propertyedittool-full' => 'Lista över värden är färdig.',
 );
 
 /** Tamil (தமிழ்)
