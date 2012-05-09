@@ -17,7 +17,7 @@ describe "Check functionality of edit description" do
       @current_page.cancelDescriptionLink?.should be_true
       @current_page.saveDescriptionLinkDisabled?.should be_true
       @current_page.descriptionInputField.should be_true
-      @current_page.descriptionInputField.clear
+      @current_page.descriptionInputField_element.clear
       @current_page.descriptionInputField = changed_description
       @current_page.saveDescriptionLink?.should be_true
       @current_page.cancelDescriptionLink
@@ -25,7 +25,7 @@ describe "Check functionality of edit description" do
       @current_page.cancelDescriptionLink?.should be_false
       @current_page.itemDescriptionSpan.should == current_description
       @current_page.editDescriptionLink
-      @current_page.descriptionInputField.clear
+      @current_page.descriptionInputField_element.clear
       @current_page.descriptionInputField = changed_description
       @current_page.saveDescriptionLink
       @current_page.itemDescriptionSpan.should == changed_description
@@ -33,7 +33,7 @@ describe "Check functionality of edit description" do
       @browser.refresh
       @current_page.itemDescriptionSpan.should == changed_description
       @current_page.editDescriptionLink
-      @current_page.descriptionInputField.clear
+      @current_page.descriptionInputField_element.clear
       @current_page.descriptionInputField = current_description
       @current_page.saveDescriptionLink
       @current_page.itemDescriptionSpan.should == current_description
