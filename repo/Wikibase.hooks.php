@@ -80,7 +80,7 @@ final class WikibaseHooks {
 		global $wgNamespaceContentModels;
 
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
-			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE ) {
+			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			$pageLanguage = $language;
 		}
 

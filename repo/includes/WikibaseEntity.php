@@ -15,13 +15,6 @@
  */
 abstract class WikibaseEntity extends Content {
 
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.1
-	 */
-	public function __construct() {
-		parent::__construct( CONTENT_MODEL_WIKIBASE );
-	}
+
 
 }

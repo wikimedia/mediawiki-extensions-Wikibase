@@ -68,7 +68,8 @@ $wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['WikibaseContentHandler'] 			= $dir . 'includes/WikibaseContentHandler.php';
+$wgAutoloadClasses['WikibaseEntityHandler'] 			= $dir . 'includes/WikibaseEntityHandler.php';
+$wgAutoloadClasses['WikibaseItemHandler'] 				= $dir . 'includes/WikibaseItemHandler.php';
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 			= $dir . 'includes/WikibaseDifferenceEngine.php';
 $wgAutoloadClasses['WikibaseUtils'] 					= $dir . 'includes/WikibaseUtils.php';
 $wgAutoloadClasses['WikibaseItem'] 						= $dir . 'includes/WikibaseItem.php';
@@ -239,16 +240,33 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 unset( $moduleTemplate );
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
+define( 'CONTENT_MODEL_WIKIBASE_ITEM', 'wikibase' );
+//define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', 'wbprop' );
+//define( 'CONTENT_MODEL_WIKIBASE_QUERY', 'wbquery' );
 
-define( 'WB_NS_DATA', 100 );
-define( 'WB_NS_DATA_TALK', 101 );
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseItemHandler';
+//$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibasePropertyHandler';
+//$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseQueryHandler';
+
+$baseNs = 100;
+
+define( 'WB_NS_DATA', $baseNs );
+define( 'WB_NS_DATA_TALK', $baseNs + 1 );
+//define( 'WB_NS_PROPERTY', $baseNs + 2 );
+//define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
+//define( 'WB_NS_QUERY', $baseNs + 4 );
+//define( 'WB_NS_QUERY_TALK', $baseNs + 5 );
 
 $wgExtraNamespaces[WB_NS_DATA] = 'Data';
 $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
+//$wgExtraNamespaces[WB_NS_DATA] = 'Property';
+//$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Property_talk';
+//$wgExtraNamespaces[WB_NS_DATA] = 'Query';
+//$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
 
-$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE;
+$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
+//$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_PROPERTY;
+//$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_QUERY;
 
 
 $egWBSettings = array();

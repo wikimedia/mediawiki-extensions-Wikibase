@@ -9,8 +9,10 @@
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
+ * @author Daniel Kinzler
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseContentHandler extends ContentHandler {
+class WikibaseItemHandler extends WikibaseEntityHandler {
 
 	/**
 	 * FIXME: bad method name
@@ -27,46 +29,7 @@ class WikibaseContentHandler extends ContentHandler {
 			'application/vnd.php.serialized' #FIXME: find out what mime type the api uses for serialized php objects
 		);
 
-		parent::__construct( CONTENT_MODEL_WIKIBASE, $formats );
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getDefaultFormat() {
-		return WBSettings::get( 'serializationFormat' );
-	}
-
-	/**
-	 * @param Content $content
-	 * @param null|string $format
-	 *
-	 * @return string
-	 */
-	public function serializeContent( Content $content, $format = null ) {
-
-		if ( is_null( $format ) ) {
-			$format = WBSettings::get( 'serializationFormat' );
-		}
-
-		#FIXME: assert $content is a WikibaseContent instance
-		$data = $content->getNativeData();
-
-		switch ( $format ) {
-			case 'application/vnd.php.serialized':
-				$blob = serialize( $data );
-				break;
-			case 'application/json':
-				$blob = json_encode( $data );
-				break;
-			default:
-				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
-				break;
-		}
-
-		return $blob;
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $formats );
 	}
 
 	public function getActionOverrides() {
@@ -106,24 +69,5 @@ class WikibaseContentHandler extends ContentHandler {
 		return WikibaseItem::newFromArray( $data );
 	}
 
-	public static function flattenArray( $a, $prefix = '', &$into = null ) {
-		if ( is_null( $into ) ) {
-			$into = array();
-		}
-
-		foreach ( $a as $k => $v ) {
-			if ( is_object( $v ) ) {
-				$v = get_object_vars( $v );
-			}
-
-			if ( is_array( $v ) ) {
-				WikibaseContentHandler::flattenArray( $v, "$prefix$k | ", $into );
-			} else {
-				$into[ "$prefix$k" ] = $v;
-			}
-		}
-
-		return $into;
-	}
 }
 
