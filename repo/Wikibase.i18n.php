@@ -311,13 +311,26 @@ $messages['is'] = array(
  * @author Beta16
  */
 $messages['it'] = array(
+	'wikibase-desc' => 'Repository di dati strutturati',
 	'wikibase-edit' => 'modifica',
 	'wikibase-save' => 'salva',
 	'wikibase-cancel' => 'annulla',
 	'wikibase-add' => 'aggiungi',
 	'wikibase-label-edit-placeholder' => 'inserisci etichetta',
 	'wikibase-description-edit-placeholder' => 'inserisci descrizione',
+	'wikibase-sitelink-site-edit-placeholder' => 'specifica sito',
+	'wikibase-sitelink-page-edit-placeholder' => 'specifica pagina',
+	'wikibase-label-input-help-message' => 'Inserisci il titolo di questo insieme di dati in $1.',
+	'wikibase-description-input-help-message' => 'Inserisci una breve descrizione in $1.',
+	'wikibase-sitelinks' => 'Pagine di Wikipedia che sono collegate a questo elemento',
+	'wikibase-sitelinks-add' => 'aggiungi un collegamento ad una pagina di Wikipedia',
+	'wikibase-sitelinks-empty' => 'Nessuna pagina di Wikipedia ancora è collegata a questo elemento.',
+	'wikibase-sitelinks-input-help-message' => 'Imposta un collegamento ad una voce di Wikipedia.',
 	'wikibase-remove' => 'rimuovi',
+	'wikibase-propertyedittool-full' => "L'elenco dei valori è completo.",
+	'wikibase-sitelinksedittool-full' => 'Sono già stati impostati collegamenti alle pagine per tutti i siti conosciuti.',
+	'special-itembytitle' => 'Elementi per titolo',
+	'special-itembylabel' => 'Elementi per etichetta',
 );
 
 /** Japanese (日本語)
