@@ -30,6 +30,10 @@ if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c becaus
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.' );
 }
 
+if ( !defined( 'WBL_VERSION' ) ) { // No version constant to check against :/
+	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
+}
+
 // TODO: enable
 //if ( !array_key_exists( 'CountryNames', $wgAutoloadClasses ) ) { // No version constant to check against :/
 //	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:CLDR">CLDR</a> extension.' );
@@ -51,24 +55,6 @@ $wgExtensionCredits['other'][] = array(
 $dir = dirname( __FILE__ ) . '/';
 
 
-// rights
-// names should be according to other naming scheme
-$wgGroupPermissions['wbeditor']['item-add']			= true;
-$wgGroupPermissions['wbeditor']['item-update']		= true;
-$wgGroupPermissions['wbeditor']['item-set']			= true;
-$wgGroupPermissions['wbeditor']['item-remove']		= true;
-$wgGroupPermissions['wbeditor']['alias-add']		= true;
-$wgGroupPermissions['wbeditor']['alias-update']		= true;
-$wgGroupPermissions['wbeditor']['alias-set']		= true;
-$wgGroupPermissions['wbeditor']['alias-remove']		= true;
-$wgGroupPermissions['wbeditor']['site-link-add']	= true;
-$wgGroupPermissions['wbeditor']['site-link-update']	= true;
-$wgGroupPermissions['wbeditor']['site-link-set']	= true;
-$wgGroupPermissions['wbeditor']['site-link-remove']	= true;
-$wgGroupPermissions['wbeditor']['lang-attr-add']	= true;
-$wgGroupPermissions['wbeditor']['lang-attr-update']	= true;
-$wgGroupPermissions['wbeditor']['lang-attr-set']	= true;
-$wgGroupPermissions['wbeditor']['lang-attr-remove']	= true;
 
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
@@ -86,7 +72,9 @@ $wgAutoloadClasses['WikibaseContentHandler'] 			= $dir . 'includes/WikibaseConte
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 			= $dir . 'includes/WikibaseDifferenceEngine.php';
 $wgAutoloadClasses['WikibaseUtils'] 					= $dir . 'includes/WikibaseUtils.php';
 $wgAutoloadClasses['WikibaseItem'] 						= $dir . 'includes/WikibaseItem.php';
+$wgAutoloadClasses['WikibaseItemDiff'] 					= $dir . 'includes/WikibaseItemDiff.php';
 $wgAutoloadClasses['WikibaseEntity'] 					= $dir . 'includes/WikibaseEntity.php';
+$wgAutoloadClasses['WikibaseEntityDiff'] 				= $dir . 'includes/WikibaseEntityDiff.php';
 $wgAutoloadClasses['WikibaseItemDisambiguation'] 		= $dir . 'includes/WikibaseItemDisambiguation.php';
 $wgAutoloadClasses['WikibaseItemStructuredSave'] 		= $dir . 'includes/WikibaseItemStructuredSave.php';
 $wgAutoloadClasses['WikibaseItemView'] 					= $dir . 'includes/WikibaseItemView.php';
@@ -264,7 +252,3 @@ $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE;
 
 
 $egWBSettings = array();
-
-$egWBSettings['apiDebugWithWrite'] = true;
-$egWBSettings['apiDebugWithPost'] = true;
-$egWBSettings['apiDebugWithRights'] = true;
