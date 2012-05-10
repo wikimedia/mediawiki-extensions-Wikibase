@@ -65,6 +65,7 @@ class ApiWikibaseSetAliasesTest extends ApiWikibaseModifyItemTest {
 	 */
 	public function testSetAliases( $langCode, $param, $value, $expected ) {
 		$apiResponse = $this->doApiRequest( array(
+			'token' => self::$token,
 			'id' => self::$item->getId(),
 			'action' => 'wbsetaliases',
 			'language' => $langCode,
