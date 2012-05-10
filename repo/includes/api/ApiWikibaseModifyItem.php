@@ -29,14 +29,13 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	/**
 	 * Check the rights for the user accessing the module, that is a subclass of this one.
 	 * 
-	 * @param $title Title object where the item is stored
 	 * @param $user User doing the action
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 * @param $mod null|String name of the module, usually not set
 	 * @param $op null|String operation that is about to be done, usually not set
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected abstract function getPermissionsErrorInternal( $title, $user, array $params, $module=null, $op=null );
+	protected abstract function getPermissionsErrorInternal( $user, array $params, $module=null, $op=null );
 
 	/**
 	 * Check the rights for the user accessing the module, module name and operation comes from the actual subclass.
@@ -47,16 +46,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @param $op null|String operation that is about to be done, usually not set
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected static function getPermissionsError( $title, $user, $mod=null, $op=null ) {
+	protected static function getPermissionsError( $user, $mod=null, $op=null ) {
 		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
 		
-		// Check permissions
-		return $title->getUserPermissionsErrors(
-			is_string($mod) ? "{$mod}-{$op}" : $op,
-			$user
-		);
+		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
 	}
 	
 	/**
@@ -67,6 +62,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @param array $params
 	 */
 	protected function validateParameters( array $params ) {
+		// note that this is changed back and could fail
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) )
 			&& !( isset( $params['item'] ) && $params['item'] === 'add' ) ) {
 
@@ -87,8 +83,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
-		$hasLink = isset( $params['site'] ) && $params['title'];
-		$item = null;
+		$success = false;
 
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
@@ -99,10 +94,15 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			$this->dieUsageMsg( 'cantedit' );
 		}
 
-		$success = false;
+		$hasLink = isset( $params['site'] ) && $params['title'];
+		$item = null;
 
 		$this->validateParameters( $params );
-
+		
+		if ( !isset($params['summary']) ) {
+			$params['summary'] = 'dummy';
+		}
+		
 		if ( $params['item'] === 'update' && !isset( $params['id'] ) && !$hasLink ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-update-without-id' ), 'update-without-id' );
 		}
@@ -137,6 +137,14 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		$this->modifyItem( $item, $params );
 
 		$isNew = $item->isNew();
+		
+		// TODO: Change for more fine grained permissions
+		$user = $this->getUser();
+		if ( $this->getPermissionsErrorInternal( $this->getUser(), $params ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
+		}
+		
+		
 		$success = $item->save();
 
 		if ( !$success ) {
@@ -147,7 +155,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
 			}
 		}
-
+		
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -156,11 +164,8 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 		if ( $success ) {
 			$this->getResult()->addValue(
-				null,
 				'item',
-				array(
-					'id' => $item->getId()
-				)
+				'id', $item->getId()
 			);
 		}
 	}
@@ -174,9 +179,11 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
 			array( 'code' => 'add-with-id', 'info' => wfMsg( 'wikibase-api-add-with-id' ) ),
 			array( 'code' => 'add-exists', 'info' => wfMsg( 'wikibase-api-add-exists' ) ),
+			array( 'code' => 'update-without-id', 'info' => wfMsg( 'wikibase-api-update-without-id' ) ),
 			array( 'code' => 'no-such-item-link', 'info' => wfMsg( 'wikibase-api-no-such-item-link' ) ),
 			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
 			array( 'code' => 'create-failed', 'info' => wfMsg( 'wikibase-api-create-failed' ) ),
+			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 			array( 'code' => 'invalid-contentmodel', 'info' => wfMsg( 'wikibase-api-invalid-contentmodel' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
 		) );

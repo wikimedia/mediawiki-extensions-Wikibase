@@ -5,7 +5,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
   context "Check for empty site links UI" do
     it "should check that there are no site links and if there's an add button" do
       visit_page(SitelinksItemPage)
-      #@current_page.wait_for_sitelinks_to_load
+      @current_page.wait_for_sitelinks_to_load
 
       @current_page.sitelinksTable?.should be_true
       @current_page.addSitelinkLink?.should be_true

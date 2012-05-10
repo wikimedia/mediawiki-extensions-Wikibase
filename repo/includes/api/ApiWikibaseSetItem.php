@@ -27,16 +27,14 @@ class ApiWikibaseSetItem extends ApiBase {
 	 * @param $op null|String operation that is about to be done, usually not set
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected static function getPermissionsError( $title, $user, $mod='item', $op='add' ) {
+	protected static function getPermissionsError( $user, $mod='item', $op='add' ) {
 		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
 		
 		// Check permissions
-		return $title->getUserPermissionsErrors(
-			is_string($mod) ? "{$mod}-{$op}" : $op,
-			$user
-		);
+		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
+		
 	}
 	
 	/**
@@ -45,6 +43,12 @@ class ApiWikibaseSetItem extends ApiBase {
 	 * @since 0.1
 	 */
 	public function execute() {
+		// TODO: Rewrite as more fine grained permissions
+		// note that we use permissions at the page level while we should use permissions
+		// at a more fine grained level
+		// especially note that we need the page for this specific implementation but that
+		// we could get away with only isAllowed(/*right*/) for internal content within an
+		// item
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
@@ -67,14 +71,15 @@ class ApiWikibaseSetItem extends ApiBase {
 			$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 		
-		$success = false;
-		
-		if ( !isset($params['summary']) ) {
-			$params['summary'] = 'dummy';
-		}
-		
 		// lacks error checking
 		$item = WikibaseItem::newFromArray( json_decode( $params['data'], true ) );
+		
+		// TODO: Change for more fine grained permissions
+		$user = $this->getUser();
+		if (self::getPermissionsError( $this->getUser() ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
+		}
+		
 		$success = $item->save();
 
 		if ( !$success ) {
@@ -82,6 +87,7 @@ class ApiWikibaseSetItem extends ApiBase {
 		}
 
 		if ( !isset($params['summary']) ) {
+			// TODO: make a proper summary
 			//$params['summary'] = $item->getTextForSummary();
 			$params['summary'] = 'dummy';
 		}

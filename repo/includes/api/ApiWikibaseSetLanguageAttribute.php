@@ -19,16 +19,15 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	/**
 	 * Check the rights for the user accessing this module.
 	 * This is called from ModifyItem.
-	 * 
-	 * @param $title Title object where the item is stored
+	 *
 	 * @param $user User doing the action
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 * @param $mod null|String name of the module, usually not set
 	 * @param $op null|String operation that is about to be done, usually not set
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected function getPermissionsErrorInternal( $title, $user, array $params, $mod=null, $op=null ) {
-		return parent::getPermissionsError( $title, $user, 'lang-attr', $params['item'] );
+	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
+		return parent::getPermissionsError( $user, 'lang-attr', $params['item'] );
 	}
 	
 	/**
@@ -117,11 +116,18 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	protected function setItemLabel( WikibaseItem &$item, $language, $label ) {
 		// TODO: Normalize
-		$item->setLabel( $language, $label );
+		$value = $item->setLabel( $language, $label );
+		if ( $label !== $value ) {
+			$this->getResult()->addValue(
+				'item',
+				'normalized',
+				array( array( 'from' => $label, 'to' => $value ) )
+			);
+		}
 		$this->getResult()->addValue(
-			null,
+			'item',
 			'labels',
-			array( $language => $item->getLabel( $language ) )
+			array( $language => $value )
 		);
 		return ;
 	}
@@ -136,11 +142,18 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	protected function setItemDescription( WikibaseItem &$item, $language, $description ) {
 		// TODO: Normalize
-		$item->setDescription( $language, $description );
+		$value = $item->setDescription( $language, $description );
+		if ( $description !== $value ) {
+			$this->getResult()->addValue(
+				null,
+				'normalized',
+				array( 'from' => $description, 'to' => $value )
+			);
+		}
 		$this->getResult()->addValue(
 			null,
 			'descriptions',
-			array( $language => $item->getDescription( $language ) )
+			array( $language => $value )
 		);
 		return ;
 	}
@@ -182,8 +195,8 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	}
 
 	/**
-	 * Returns the description string for this module
-	 * @return mixed string or array of strings
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
 	 */
 	public function getDescription() {
 		return array(

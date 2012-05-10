@@ -19,15 +19,14 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	 * Check the rights for the user accessing this module.
 	 * This is called from ModifyItem.
 	 * 
-	 * @param $title Title object where the item is stored
 	 * @param $user User doing the action
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 * @param $mod null|String name of the module, usually not set
 	 * @param $op null|String operation that is about to be done, usually not set
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected function getPermissionsErrorInternal( $title, $user, array $params, $mod=null, $op=null ) {
-		return parent::getPermissionsError( $title, $user, 'lang-attr', 'delete' );
+	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
+		return parent::getPermissionsError( $user, 'lang-attr', 'delete' );
 	}
 	
 	/**
