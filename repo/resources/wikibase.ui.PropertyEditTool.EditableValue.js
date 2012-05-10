@@ -351,16 +351,22 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if ( textStatus != 'abort' ) {
 			error = {
 				code: 'unknown-error',
-				shortMessage: window.mw.msg( 'wikibase-error-save-connection' ),
+				shortMessage: ( removeValue ) ?
+					window.mw.msg( 'wikibase-error-remove-connection' )
+					: window.mw.msg( 'wikibase-error-save-connection' ),
 				message: ''
 			};
 			if ( typeof response.error != 'undefined' ) {
 				if ( textStatus == 'timeout' ) {
 					error.code = textStatus;
-					error.shortMessage = window.mw.msg( 'wikibase-error-save-timeout' );
+					error.shortMessage = ( removeValue ) ?
+						window.mw.msg( 'wikibase-error-remove-timeout' )
+						: window.mw.msg( 'wikibase-error-save-timeout' );
 				} else {
 					error.code = response.error.code;
-					error.shortMessage = window.mw.msg( 'wikibase-error-save-generic' );
+					error.shortMessage = ( removeValue ) ?
+						window.mw.msg( 'wikibase-error-remove-generic' )
+						: window.mw.msg( 'wikibase-error-save-generic' );
 					error.message = response.error.info;
 				}
 			}
@@ -369,9 +375,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * custom method to handle API call error
+	 * custom method to handle UI presentation of API call error
 	 *
 	 * @param object error
+	 * @param bool removeValue whether the action is removing or saving
 	 */
 	apiCallErr: function( error, removeValue ) {
 		// create error tooltip
@@ -425,13 +432,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
 			event.stopPropagation();
 		} );
-		// resize removes click event
+		// resizing removes click event
 		$( window ).on( 'resize', function() {
 			btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
 				event.stopPropagation();
 			} );
 		});
-		$( window ).on( 'click', function( event ) {
+		$( window ).one( 'click', function( event ) {
 			btn.removeTooltip();
 		} );
 

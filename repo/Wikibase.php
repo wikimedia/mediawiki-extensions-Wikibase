@@ -214,7 +214,13 @@ $wgResourceModules['wikibase.ui.Toolbar'] = $moduleTemplate + array(
 		'jquery.ui.core'
 	),
 	'messages' => array(
-		'wikibase-tooltip-error-details'
+		'wikibase-tooltip-error-details',
+		'wikibase-error-save-generic',
+		'wikibase-error-remove-generic',
+		'wikibase-error-save-connection',
+		'wikibase-error-remove-connection',
+		'wikibase-error-save-timeout',
+		'wikibase-error-remove-timeout'
 	)
 );
 

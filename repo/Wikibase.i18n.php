@@ -44,8 +44,11 @@ $messages['en'] = array(
 
 	'wikibase-tooltip-error-details' => 'Details',
 	'wikibase-error-save-generic' => 'An error occurred while trying to save your changes. Your changes could not be stored.',
+	'wikibase-error-remove-generic' => 'An error occurred while trying to perform removing.',
 	'wikibase-error-save-connection' => 'Your changes could not be stored. Please check your internet connection.',
+	'wikibase-error-remove-connection' => 'An error occurred while trying to perform removing. Please check your internet connection.',
 	'wikibase-error-save-timeout' => 'We are experiencing technical difficulties. Your changes could not be stored.',
+	'wikibase-error-remove-timeout' => 'We are experiencing technical difficulties. Could not perform removal.',
 
 	// Special pages
 	'special-itembytitle' => 'Item by title',
@@ -90,6 +93,14 @@ $messages['qqq'] = array(
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wikibase-label-input-help-message' => '$1: name of the language',
 	'wikibase-description-input-help-message' => '$1: name of the language',
+
+	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the mor specific error message returned from the underlying API).',
+	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',
+	'wikibase-error-remove-generic' => 'Generic error message for an error happening during a remove operation',
+	'wikibase-error-save-connection' => 'Error message for an error happening during a save operation. The error might most likely be caused by a connection problem.',
+	'wikibase-error-remove-connection' => 'Error message for an error happening during a remove operation. The error might most likely be caused by a connection problem.',
+	'wikibase-error-save-timeout' => 'Error message for an error happening during a save operation. The error was caused by a request time out.',
+	'wikibase-error-remove-timeout' => 'Error message for an error happening during a remove operation. The error was caused by a request time out.'
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
