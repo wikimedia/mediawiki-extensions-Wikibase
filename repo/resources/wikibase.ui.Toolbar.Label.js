@@ -106,10 +106,11 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 *
 	 * @param string message tooltip message
 	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
+	 * @param bool (optional, default: false) whether the tooltip is an error tooltip being displayed in red colors
 	 */
-	addTooltip: function( message, tipsyConfig ) {
+	addTooltip: function( message, tipsyConfig, isError ) {
 		this._elem.attr( 'title', message );
-		this.tooltip = new window.wikibase.ui.Tooltip( this._elem, message, tipsyConfig );
+		this.tooltip = new window.wikibase.ui.Tooltip( this._elem, message, tipsyConfig, isError );
 	},
 
 	/**
@@ -117,7 +118,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 */
 	removeTooltip: function() {
 		if ( this.tooltip !== null ) {
-			this.tooltip.hideMessage();
+			this.tooltip.destroy();
 			this.tooltip = null;
 		}
 	},

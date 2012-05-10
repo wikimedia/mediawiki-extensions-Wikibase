@@ -353,19 +353,73 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * custom method to handle API call error (should be overridden in subclasses)
+	 * custom method to handle API call error
 	 *
 	 * @param object error
 	 */
 	apiCallErr: function( error ) {
-		// TODO enhance tooltip error message and logic for when to remove tooltip
-		var btnSave = this._toolbar._items[0].btnSave;
-		btnSave.addTooltip( error.shortMessage, { gravity: 'sw' } );
-		btnSave.tooltip.showMessage( true );
-		this.setFocus();
+		// create error tooltip
+		var content = (
+			$( '<div/>', {
+				'class': 'wb-error wb-tooltip-error',
+				text: error.shortMessage
+			} )
+		);
+		if ( error.message != '' ) { // append detailed error message
+			content.addClass( 'wb-tooltip-error-top-message' );
+			content = content.after( $( '<a/>', {
+				'class': 'wb-tooltip-error-details-link',
+				href: 'javascript:void(0);'
+			} )
+				.on( 'click', function( event ) {
+					$( this ).parent().find( '.wb-tooltip-error-details' ).slideToggle();
+				} )
+				.toggle(
+					function() {
+						$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-e' );
+						$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-s' );
+					},
+					function() {
+						$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-s' );
+						$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-e' );
+					}
+				)
+				.append( $( '<span/>', {
+					'class': 'ui-icon ui-icon-triangle-1-e'
+				} ) )
+					.append( $( '<span/>', {
+						text: window.mw.msg( 'wikibase-tooltip-error-details' )
+					} ) )
+			)
+				.after( $( '<div/>', {
+					'class': 'wb-tooltip-error-details',
+					text: error.message
+				} ) )
+					.after( $( '<div/>', {
+						'class': 'wb-clear'
+				} ) );
+		}
 
-		// debug output for now
-		console.dir( error );
+		// attach error tooltip to save button
+		var btnSave = this._toolbar._items[0].btnSave;
+		btnSave.addTooltip( content, { gravity: 'nw' }, true );
+		btnSave.tooltip.showMessage( true );
+
+		// hide error tooltip when clicking outside of it
+		btnSave.tooltip._tipsy.$tip.on( 'click', function( event ) {
+			event.stopPropagation();
+		} );
+		// resize removes click event
+		$( window ).on( 'resize', function() {
+			btnSave.tooltip._tipsy.$tip.on( 'click', function( event ) {
+				event.stopPropagation();
+			} );
+		});
+		$( window ).on( 'click', function( event ) {
+			btnSave.removeTooltip();
+		} );
+
+		this.setFocus(); // re-focus input
 	},
 
 	/**

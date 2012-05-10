@@ -34,6 +34,10 @@
 	display:none;
 }
 
+wb-clear {
+	clear:both;
+}
+
 /********** SITE LINKS TABLE **********/
 
 table.wb-sitelinks {

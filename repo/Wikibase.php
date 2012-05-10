@@ -183,7 +183,11 @@ $wgResourceModules['wikibase.ui.Toolbar'] = $moduleTemplate + array(
 	),
 	'dependencies' => array(
 		'jquery.tipsy',
-		'mediawiki.legacy.shared'
+		'mediawiki.legacy.shared',
+		'jquery.ui.core'
+	),
+	'messages' => array(
+		'wikibase-tooltip-error-details'
 	)
 );
 
