@@ -26,7 +26,7 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @return array of errors reported from the static getPermissionsError
 	 */
 	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
-		return parent::getPermissionsError( $user, 'lang-attr', 'delete' );
+		return parent::getPermissionsError( $user, 'lang-attr', 'remove' );
 	}
 	
 	/**

@@ -74,19 +74,19 @@ $wgGroupPermissions['wbeditor']['lang-attr-delete']	= true; // could be called r
 $wgGroupPermissions['wbeditor']['item-add']			= true;
 $wgGroupPermissions['wbeditor']['item-update']		= true;
 $wgGroupPermissions['wbeditor']['item-set']			= true;
-$wgGroupPermissions['wbeditor']['item-delete']		= true; // could be called remove
+$wgGroupPermissions['wbeditor']['item-remove']		= true;
 $wgGroupPermissions['wbeditor']['alias-add']		= true;
 $wgGroupPermissions['wbeditor']['alias-update']		= true;
 $wgGroupPermissions['wbeditor']['alias-set']		= true;
-$wgGroupPermissions['wbeditor']['alias-delete']		= true; // could be called remove
+$wgGroupPermissions['wbeditor']['alias-remove']		= true;
 $wgGroupPermissions['wbeditor']['site-link-add']	= true;
 $wgGroupPermissions['wbeditor']['site-link-update']	= true;
 $wgGroupPermissions['wbeditor']['site-link-set']	= true;
-$wgGroupPermissions['wbeditor']['site-link-delete']	= true; // could be called remove
+$wgGroupPermissions['wbeditor']['site-link-remove']	= true;
 $wgGroupPermissions['wbeditor']['lang-attr-add']	= true;
 $wgGroupPermissions['wbeditor']['lang-attr-update']	= true;
 $wgGroupPermissions['wbeditor']['lang-attr-set']	= true;
-$wgGroupPermissions['wbeditor']['lang-attr-delete']	= true; // could be called remove
+$wgGroupPermissions['wbeditor']['lang-attr-remove']	= true;
 
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
@@ -159,7 +159,8 @@ $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 $wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTestModules';
-$wgHooks['AbortMove'][]								= 'WikibaseHooks::onAbortMove';
+$wgHooks['NamespaceIsMovable'][]					= 'WikibaseHooks::onNamespaceIsMovable';
+
 
 
 // Resource loader modules
