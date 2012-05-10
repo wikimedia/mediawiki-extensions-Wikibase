@@ -136,28 +136,22 @@ final class WikibaseHooks {
 	}
 
 	/**
-	 * Allows canceling the move of one title to another.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/AbortMove
+	 * Allows overriding if the pages in a certain namespace can be moved or not.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NamespaceIsMovable
 	 *
 	 * @since 0.1
 	 *
-	 * @param Title $oldTitle
-	 * @param Title $newTitle
-	 * @param User $user
-	 * @param string $error
-	 * @param string $reason
+	 * @param integer $index
+	 * @param boolean $movable
 	 *
 	 * @return boolean
 	 */
-	public static function onAbortMove( Title $oldTitle, Title $newTitle, User $user, &$error, $reason ) {
-		$nss = array( WB_NS_DATA );
-		$allowed = !in_array( $oldTitle->getNamespace(), $nss ) && !in_array( $newTitle->getNamespace(), $nss );
-
-		if ( !$allowed ) {
-			$error = wfMsg( 'wikibase-move-error' );
+	public static function onNamespaceIsMovable( $index, &$movable ) {
+		if ( in_array( $index, array( WB_NS_DATA, WB_NS_DATA_TALK ) ) ) {
+			$movable = false;
 		}
 
-		return $allowed;
+		return true;
 	}
 
 }
