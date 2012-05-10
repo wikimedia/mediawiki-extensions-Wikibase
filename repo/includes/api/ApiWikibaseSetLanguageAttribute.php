@@ -176,11 +176,6 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'label-or-description', 'info' => wfMsg( 'wikibase-api-label-or-description' ) ),
-			//array( 'code' => 'label-not-found', 'info' => wfMsg( 'wikibase-api-label-not-found' ) ),
-			//array( 'code' => 'description-not-found', 'info' => wfMsg( 'wikibase-api-description-not-found' ) ),
-			//array( 'code' => 'label-found', 'info' => wfMsg( 'wikibase-api-label-found' ) ),
-			//array( 'code' => 'description-found', 'info' => wfMsg( 'wikibase-api-description-found' ) ),
-			//array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
 			) );
 	}
 
