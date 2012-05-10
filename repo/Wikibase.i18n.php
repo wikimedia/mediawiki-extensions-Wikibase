@@ -71,8 +71,6 @@ $messages['en'] = array(
 	'wikibase-api-label-or-description' => 'Use either or both of label and/or description, but not noen of them',
 	'wikibase-api-label-not-found' => 'Can not find any previous label in the item',
 	'wikibase-api-description-not-found' => 'Can not find any previous description in the item',
-	'wikibase-api-label-found' => 'Found a previous label in the item',
-	'wikibase-api-description-found' => 'Found a previous description in the item',
 );
 
 /** Message documentation (Message documentation) */
