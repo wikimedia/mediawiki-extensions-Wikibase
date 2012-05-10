@@ -80,6 +80,27 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		// make sure selecting a language in EditableSiteLink only offers languages not yet chosen
 		this.getEditableValuePrototype().prototype.ignoredSiteLinks = this.getRepresentedSites();
 	},
+
+	_initSingleValue: function( valueElem ) {
+		var editableSiteLink = window.wikibase.ui.PropertyEditTool.prototype._initSingleValue.call( this, valueElem );
+
+		var valElem = editableSiteLink._subject;
+		var self = this;
+
+		valElem.on( 'mouseenter', function(){
+			if( ! self.isInEditMode() ) {
+				valElem.addClass( editableSiteLink.UI_CLASS + '-inhover' );
+			}
+		} );
+		valElem.on( 'mouseleave', function(){
+			if( ! editableSiteLink.isInEditMode() ) {
+				// TODO: also remove when using enter key or esc to stop editing!
+				valElem.removeClass( editableSiteLink.UI_CLASS + '-inhover' );
+			}
+		} );
+
+		return editableSiteLink;
+	},
 	
 	/**
 	 * Full when all languages are represented within

@@ -41,6 +41,13 @@ h1.firstHeading .wb-ui-toolbar {
 	font-size: .99em;
 }
 
+.wb-ui-propertyedittool-editablevalue-toolbarparent {
+	visibility: hidden;
+}
+.wb-ui-propertyedittool-editablevalue-inhover .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	visibility: visible;
+}
+
 
 /********** TOOLTIP **********/
 
