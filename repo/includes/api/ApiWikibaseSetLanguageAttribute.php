@@ -60,6 +60,17 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		$labels = $item->getLabels();
 		$descriptions = $item->getDescriptions();
 		$success = false;
+		// inserted fixed code
+		
+		if (isset($params['label'])) {
+			$this->setItemLabel( $item, $params['language'], $params['label'] );
+		}
+		if (isset($params['description'])) {
+			$this->setItemDescription( $item, $params['language'], $params['description'] );
+		}
+		$success = true;
+		
+		/*
 		switch ($params['item']) {
 			case 'update':
 				if ( isset($params['label']) ) {
@@ -103,7 +114,8 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 			default:
 				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
 		}
-		return $success;
+		*/
+		//return $success;
 	}
 	
 	/**
@@ -211,11 +223,11 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'label-or-description', 'info' => wfMsg( 'wikibase-api-label-or-description' ) ),
-			array( 'code' => 'label-not-found', 'info' => wfMsg( 'wikibase-api-label-not-found' ) ),
-			array( 'code' => 'description-not-found', 'info' => wfMsg( 'wikibase-api-description-not-found' ) ),
-			array( 'code' => 'label-found', 'info' => wfMsg( 'wikibase-api-label-found' ) ),
-			array( 'code' => 'description-found', 'info' => wfMsg( 'wikibase-api-description-found' ) ),
-			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
+			//array( 'code' => 'label-not-found', 'info' => wfMsg( 'wikibase-api-label-not-found' ) ),
+			//array( 'code' => 'description-not-found', 'info' => wfMsg( 'wikibase-api-description-not-found' ) ),
+			//array( 'code' => 'label-found', 'info' => wfMsg( 'wikibase-api-label-found' ) ),
+			//array( 'code' => 'description-found', 'info' => wfMsg( 'wikibase-api-description-found' ) ),
+			//array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
 			) );
 	}
 

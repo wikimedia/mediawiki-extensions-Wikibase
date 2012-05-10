@@ -42,9 +42,9 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		if ( !isset($params['link']) ) {
-			$params['link'] = $params['item'];
-		}
+		//if ( !isset($params['link']) ) {
+		//	$params['link'] = $params['item'];
+		//}
 		if ( isset($params['link']) && $params['link'] === 'remove') {
 			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
@@ -102,9 +102,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			'linksite' => 'The identifier of the site on which the article to link resides',
 			'linktitle' => 'The title of the article to link',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
-			'link' => array('Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
-				'The argument "item" works as an alias for "item".',
-			),
+			'link' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
 		) );
 	}
 
