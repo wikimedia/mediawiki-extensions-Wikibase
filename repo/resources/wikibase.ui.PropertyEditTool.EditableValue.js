@@ -165,22 +165,23 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_getIndexParent: function() {
 		return null;
 	},
-	
+
 	/**
 	 * Removes the value from the dom as well as from the data store via the API
-	 *
-	 * @param bool doRemoveApiCall (optional, default: true) define whether API has to be involved in removing
 	 */
-	remove: function( doRemoveApiCall ) {
-		doRemoveApiCall = ( typeof doRemoveApiCall != 'undefined' ) ? doRemoveApiCall : true;
-		if ( doRemoveApiCall ) {
-			this.doApiCall( true, $.proxy( function() {
-				this.destroy();
-				this._subject.empty().remove();
-				if( this.onAfterRemove !== null ) {
-					this.onAfterRemove(); // callback
-				}
-			}, this ) );
+	remove: function() {
+		var degrade = $.proxy( function() {
+			this.destroy();
+			this._subject.empty().remove();
+			if( this.onAfterRemove !== null ) {
+				this.onAfterRemove(); // callback
+			}
+		}, this );
+
+		if ( this.isPending() ) {
+			degrade();
+		} else {
+			this.doApiCall( true, $.proxy( degrade, this ) );
 		}
 	},
 
@@ -233,7 +234,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		if( !save && this.isPending() ) {
 			this.reTransform( save );
-			this.remove( false ); // not yet existing value, no state to go back to
+			this.remove(); // not yet existing value, no state to go back to
 			return false; // do not call afterStopEditing() here!
 		}
 
