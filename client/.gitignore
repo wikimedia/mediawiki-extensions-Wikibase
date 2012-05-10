@@ -1,3 +1,5 @@
 .idea
 .project
 .settings
+
+/tests/selenium/chromedriver.log
