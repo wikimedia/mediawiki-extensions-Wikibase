@@ -8,6 +8,8 @@ class ArticlePage<RubySelenium
   # language links
   div(:langLinks, :id => "p-lang")
   unordered_list(:langLinksList, :xpath => "//div[@id='p-lang']/div/ul")
+  link(:germanWikiLink, :text => "Deutsch")
+  span(:wikiArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
 
   def count_language_links
     count = 0
