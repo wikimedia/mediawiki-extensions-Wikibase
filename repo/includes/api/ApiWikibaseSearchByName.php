@@ -12,7 +12,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetItem extends ApiBase {
+class ApiWikibaseSearchByName extends ApiBase {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
