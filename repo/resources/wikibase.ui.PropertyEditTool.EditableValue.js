@@ -671,8 +671,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param jQuery.Event event
 	 */
 	_interfaceHandler_onKeyPressed: function( relatedInterface, event ) {
-		if( event.which == 13 ) { // return key
-			this._toolbar.editGroup.btnSave.doAction();
+		if( event.which == 13 ) { // enter key
+			if( this.valueCompare( this.getInitialValue(), this.getValue() ) ) {
+				// value not modified yet, cancel button not available but enter should also stop editing
+				this._toolbar.editGroup.btnCancel.doAction();
+			} else {
+				// try to save value
+				this._toolbar.editGroup.btnSave.doAction();
+			}
 		}
 	},
 
