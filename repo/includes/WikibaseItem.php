@@ -302,12 +302,16 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @param string $langCode
 	 * @param string $value
+	 * @return string
 	 */
 	public function setLabel( $langCode, $value ) {
 		$this->data['label'][$langCode] = array(
 			'language' => $langCode,
 			'value' => $value,
 		);
+		// the value should be returned as it is after cleanup
+		// not only as it is coming into the method
+		return $value;
 	}
 
 	/**
@@ -317,12 +321,16 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @param string $langCode
 	 * @param string $value
+	 * @return string
 	 */
 	public function setDescription( $langCode, $value ) {
 		$this->data['description'][$langCode] = array(
 			'language' => $langCode,
 			'value' => $value,
 		);
+		// the value should be returned as it is after cleanup
+		// not only as it is coming into the method
+		return $value;
 	}
 
 	/**
