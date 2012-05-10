@@ -167,18 +167,30 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * Removes the value from the dom as well as from the data store via the API
+	 * Removes the value from the data store via the API. Also removes the values representation from the dom stated
+	 * differently.
+	 *
+	 * @param bool preserveEmptyForm allows to preserve the empty form so a new value can be entered immediately.
 	 */
-	remove: function() {
+	remove: function( preserveEmptyForm ) {
 		var degrade = $.proxy( function() {
-			this.destroy();
-			this._subject.empty().remove();
-			if( this.onAfterRemove !== null ) {
-				this.onAfterRemove(); // callback
+			if( ! preserveEmptyForm ) {
+				// remove value totally
+				this.destroy();
+				this._subject.empty().remove();
+				if( this.onAfterRemove !== null ) {
+					this.onAfterRemove(); // callback
+				}
+			} else {
+				// delete value but keep empty input form
+				this.reTransform( true );
+				this.startEditing();
+				this.removeFocus(); // don't want the focus immediately after removing the value
 			}
 		}, this );
 
 		if ( this.isPending() ) {
+			// no API call necessary since value hasn't been stored yet.
 			degrade();
 		} else {
 			this.doApiCall( true, $.proxy( degrade, this ) );
@@ -219,7 +231,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 *
 	 * @param bool save whether to save the new user given value
 	 * @param function afterStopEditing function to be called after saving has been performed
-	 * @return bool whether the value has to be stored
+	 * @return bool whether the value has changed (or was removed) and has to be sent to the API
 	 */
 	stopEditing: function( save, afterStopEditing ) {
 		if ( typeof afterStopEditing == 'undefined' ) {
@@ -232,14 +244,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.onStopEditing !== null && this.onStopEditing( save ) === false ) { // callback
 			return false; // cancel
 		}
-		if( !save && this.isPending() ) {
+		if( ! save && this.isPending() ) {
 			this.reTransform( save );
 			this.remove(); // not yet existing value, no state to go back to
-			return false; // do not call afterStopEditing() here!
+			return false; // do not call onAfterStopEditing() here!
 		}
 
-		if ( !save ) {
-
+		if ( ! save ) {
+			//cancel...
 			var wasPending = this.reTransform( save );
 
 			if( this.onAfterStopEditing !== null && this.onAfterStopEditing( save, wasPending ) === false ) { // callback
@@ -248,7 +260,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 			afterStopEditing();
 
-		} else {
+		}
+		// Save...
+		else if( ! this.isValid() ) {
+			// ... remove:
+			// not valid! Save equals remove in this case
+			this.remove( true );
+			return true;
+		}
+		else {
+			// save for real:
 			this.doApiCall( false, $.proxy( function( response ) {
 
 				var wasPending = this.reTransform( save );
@@ -279,7 +300,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		$.each( this._interfaces, function( index, elem ) {
 			elem.stopEditing( save );
 		} );
-		this._toolbar._items[0].btnSave.removeTooltip();
+		this._toolbar.editGroup.btnSave.removeTooltip();
 		this._isInEditMode = false; // out of edit mode after interfaces are converted back to HTML
 		return this.isPending();
 	},
@@ -540,6 +561,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
+	 * Returns whether the current value is valid
+	 *
+	 * @return bool
+	 */
+	isValid: function() {
+		return this.validate( this.getValue() );
+	},
+
+	/**
 	 * Velidates whether a certain value would be valid for this editable value.
 	 *
 	 * @todo: we might want to move this into a prototype describing the property/snak later.
@@ -611,8 +641,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var value = this.getValue();
 		var isInvalid = !this.validate( value );
 		
-		// can't save if invalid input OR same as before
-		var disableSave = isInvalid || this.valueCompare( this.getInitialValue(), value );
+		// can't save if invalid input (except it is empty, in that case save == remove) OR same as before
+		var disableSave = ( isInvalid && !this.isEmpty() ) || this.valueCompare( this.getInitialValue(), value );
 		
 		// can't cancel if empty before except the edit is pending (then it will be removed)
 		var disableCancel = !this.isPending() && this.valueCompare( this.getInitialValue(), null );
