@@ -21,17 +21,13 @@
 .wb-property-container {
 	margin-top: .3em;
 }
-.wb-property-container-value {
-	background: /* @embed */ url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) left  no-repeat;
-	padding: 5px 0 0 35px;
-}
-/* @noflip */ .rtl .wb-property-container-value {
-	background: /* @embed */ url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
-	padding: 5px 35px 0 0;
-} /* css Janus does not convert padding in every browser */
 
 .mw-jump, #contentSub {
 	display:none;
+}
+
+.wb-hr {
+	margin-top:1em;
 }
 
 wb-clear {
@@ -54,9 +50,12 @@ table.wb-sitelinks th, table.wb-sitelinks td {
 table.wb-sitelinks th {
 	/*background-color:#D6F3FF;*/
 	text-align:left;
-	font-size:1.25em;
 	font-weight:normal;
 }
+	table.wb-sitelinks th h2 {
+		border-bottom:none;
+	}
+
 table.wb-sitelinks tr:hover td,
 table.wb-sitelinks tr.wb-pending-value td {
 	/*background-color:#5dc9f4;*/

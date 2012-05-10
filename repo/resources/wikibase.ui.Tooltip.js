@@ -113,7 +113,7 @@ window.wikibase.ui.Tooltip.prototype = {
 
 		// reposition tooltip when resizing the browser window
 		$( window ).on( 'resize', $.proxy( function() {
-			if ( this._isVisible ) {
+			if ( this._isVisible && this._permanent ) {
 				this.hideMessage(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
 				this.showMessage();
 			}

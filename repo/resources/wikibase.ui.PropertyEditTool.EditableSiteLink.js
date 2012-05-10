@@ -154,11 +154,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing
 	 */
 	stopEditing: function( save, afterStopEditing ) {
-		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save, afterStopEditing );
-		
-		// make sure the interface for entering the sites id can't be edited after created
-		this._interfaces.siteId.setActive( this.isPending() );
-		
+		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call(
+			this,
+			save,
+			$.proxy( function() {
+				afterStopEditing();
+				// make sure the interface for entering the sites id can't be edited after created
+				this._interfaces.siteId.setActive( this.isPending() );
+			}, this )
+		);
 		return changed;
 	},
 

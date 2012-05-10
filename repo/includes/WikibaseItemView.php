@@ -55,15 +55,20 @@ class WikibaseItemView extends ContextSource {
 		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
 		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
 		$html .= Html::closeElement( 'div' );
-		
+
+		$html .= Html::element( 'hr', array( 'class' => 'wb-hr' ) );
+
 		if( empty( $siteLinks ) ) {
 			// no site links available for this item
 			$html .= Html::element( 'div', array( 'class' => 'wb-sitelinks-empty' ), wfMessage( 'wikibase-sitelinks-empty' ) );
 		} else {
 			$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks', 'cellspacing' => '0' ) );
+
 			$html .= Html::openElement( 'thead' );
 			$html .= Html::openElement( 'tr' );
-			$html .= Html::element( 'th', array( 'colspan' => '2' ), wfMessage( 'wikibase-sitelinks' ) );
+			$html .= Html::openElement( 'th', array( 'colspan' => '2' ) );
+			$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-sitelinks' ) );
+			$html .= Html::closeElement( 'th' );
 			$html .= Html::closeElement( 'tr' );
 			$html .= Html::closeElement( 'thead' );
 

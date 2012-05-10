@@ -174,13 +174,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	remove: function( doRemoveApiCall ) {
 		doRemoveApiCall = ( typeof doRemoveApiCall != 'undefined' ) ? doRemoveApiCall : true;
 		if ( doRemoveApiCall ) {
-			this.doApiCall( true, function() {} );
-		}
-		//this.destroy(); // no need to destroy this proberly since we remove anything for real! FIXME: really??
-		this._subject.empty().remove();
-		
-		if( this.onAfterRemove !== null ) {
-			this.onAfterRemove(); // callback
+			this.doApiCall( true, $.proxy( function() {
+				this.destroy();
+				this._subject.empty().remove();
+				if( this.onAfterRemove !== null ) {
+					this.onAfterRemove(); // callback
+				}
+			}, this ) );
 		}
 	},
 
@@ -209,16 +209,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		$.each( this._interfaces, function( index, elem ) {
 			elem.startEditing();
 		} );
-
-		if ( this._toolbar.editGroup.tooltip !== null ) {
-			/*
-			FIXME: tooltip needs to recalculate its horizontal position after input elements have been placed inside
-			the DOM; but showMessage() has already been called on initialization, so the tooltip is marked as visible
-			(which is necessary since the tooltip should be permanently shown on some occasions)
-			 */
-			this._toolbar.editGroup.tooltipAnchor.tooltip.hideMessage();
-			this._toolbar.editGroup.tooltipAnchor.tooltip.showMessage( true );
-		}
 
 		return true;
 	},
@@ -324,7 +314,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			var localApi = new mw.Api();
 			localApi.post( apiCall, {
 				ok: onSuccess,
-				err: jQuery.proxy( this._apiCallErr, this )
+				err: jQuery.proxy( function( textStatus, response ) {
+					this._apiCallErr( textStatus, response, removeValue );
+				}, this )
 			} );
 		}, this ) );
 	},
@@ -354,7 +346,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param string textStatus
 	 * @param object JSON response
 	 */
-	_apiCallErr: function( textStatus, response ) {
+	_apiCallErr: function( textStatus, response, removeValue ) {
 		var error = {};
 		if ( textStatus != 'abort' ) {
 			error = {
@@ -373,7 +365,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				}
 			}
 		}
-		this.apiCallErr( error );
+		this.apiCallErr( error, removeValue );
 	},
 
 	/**
@@ -381,7 +373,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 *
 	 * @param object error
 	 */
-	apiCallErr: function( error ) {
+	apiCallErr: function( error, removeValue ) {
 		// create error tooltip
 		var content = (
 			$( '<div/>', {
@@ -425,22 +417,22 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 
 		// attach error tooltip to save button
-		var btnSave = this._toolbar._items[0].btnSave;
-		btnSave.addTooltip( content, { gravity: 'nw' }, true );
-		btnSave.tooltip.showMessage( true );
+		var btn = ( removeValue ) ? this._toolbar.editGroup.btnRemove : this._toolbar.editGroup.btnSave;
+		btn.addTooltip( content, { gravity: 'nw' }, true );
+		btn.tooltip.showMessage( true );
 
 		// hide error tooltip when clicking outside of it
-		btnSave.tooltip._tipsy.$tip.on( 'click', function( event ) {
+		btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
 			event.stopPropagation();
 		} );
 		// resize removes click event
 		$( window ).on( 'resize', function() {
-			btnSave.tooltip._tipsy.$tip.on( 'click', function( event ) {
+			btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
 				event.stopPropagation();
 			} );
 		});
 		$( window ).on( 'click', function( event ) {
-			btnSave.removeTooltip();
+			btn.removeTooltip();
 		} );
 
 		this.setFocus(); // re-focus input
@@ -652,9 +644,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
 	 * @param jQuery.Event event
 	 */
-	_interfaceHandler_onFocus: function( relatedInterface, event ) {
-		this._toolbar.editGroup.tooltipAnchor.tooltip.showMessage( true );
-	},
+	_interfaceHandler_onFocus: function( relatedInterface, event ) { },
 
 	/**
 	 * interface's onBlur event handler
@@ -662,9 +652,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
 	 * @param jQuery.Event event
 	 */
-	_interfaceHandler_onBlur: function( relatedInterface, event ) {
-		this._toolbar.editGroup.tooltipAnchor.tooltip.hideMessage();
-	},
+	_interfaceHandler_onBlur: function( relatedInterface, event ) { },
 	
 	///////////
 	// EVENTS:
