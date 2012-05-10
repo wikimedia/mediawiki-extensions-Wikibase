@@ -16,11 +16,12 @@
  *
  * @param jQuery subject element the tooltip shall be attached to
  * @param String tooltip message (may contain HTML markup)
- * @param Object (optional) custom tipsy tooltip configuration
+ * @param Object (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
+ * @param bool (optional, default: false) whether the tooltip is an error tooltip being displayed in red colors
  */
-window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig ) {
+window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig, isError ) {
 	if( typeof subject != 'undefined' ) {
-		this._init( subject, tooltipContent, tipsyConfig );
+		this._init( subject, tooltipContent, tipsyConfig, isError );
 	}
 };
 window.wikibase.ui.Tooltip.prototype = {
@@ -56,15 +57,34 @@ window.wikibase.ui.Tooltip.prototype = {
 	_permanent: false,
 
 	/**
+	 * @var bool basically defines if the tooltip will appear in standard or error color schema
+	 */
+	_isError: false,
+
+	/**
+	 * @var jQuery storing DOM content that should be displayed as tooltip bubble content
+	 */
+	_DomContent: null,
+
+	/**
 	 * initializes ui element, called by the constructor
 	 *
 	 * @param jQuery subject
 	 * @param string tooltipContent (may contain HTML markup)
 	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
+	 * @param bool (optional, default: false) whether the tooltip is an error tooltip being displayed in red colors
 	 */
-	_init: function( subject, tooltipContent, tipsyConfig ) {
+	_init: function( subject, tooltipContent, tipsyConfig, isError ) {
 		this._subject = subject;
-		this._subject.attr( 'title', tooltipContent );
+		if ( typeof tooltipContent == 'string' ) {
+			this._subject.attr( 'title', tooltipContent );
+		} else {
+			/* init tipsy with some placeholder since the tooltip message would not show without the title attribute
+			being set; however, setting a complex HTML structure cannot be done via the title tag, so the content is
+			stored in a custom variable that will be injected when the message is triggered to show */
+			this._subject.attr( 'title', '.' );
+			this._DomContent = tooltipContent;
+		}
 		if ( typeof tipsyConfig != 'undefined' ) {
 			this._tipsyConfig = tipsyConfig;
 		}
@@ -72,6 +92,7 @@ window.wikibase.ui.Tooltip.prototype = {
 			this._tipsyConfig = {};
 			this.setGravity( 'ne' );
 		}
+		this._isError = ( typeof isError != 'undefined' ) ? isError : false;
 		this._initTooltip();
 	},
 
@@ -139,6 +160,13 @@ window.wikibase.ui.Tooltip.prototype = {
 	showMessage: function( permanent ) {
 		if ( !this._isVisible ) {
 			this._tipsy.show();
+			if ( this._isError ) {
+				this._tipsy.$tip.addClass( 'wb-error' );
+			}
+			if ( this._DomContent != null ) {
+				this._tipsy.$tip.find('.tipsy-inner').empty();
+				this._tipsy.$tip.find('.tipsy-inner').append( this._DomContent );
+			}
 			this._isVisible = true;
 		}
 		if( permanent === true ) {
@@ -182,14 +210,18 @@ window.wikibase.ui.Tooltip.prototype = {
 	},
 
 	/**
-	 * set tooltip message
+	 * set tooltip message / HTML content
 	 *
-	 * @param string message
+	 * @param jQuery|string content
 	 */
-	setMessage: function( message ) {
-		this._tipsy.$element.attr( 'original-title', message );
+	setContent: function( content ) {
+		this._DomContent = null;
+		if ( typeof content == 'string' ) {
+			this._tipsy.$element.attr( 'original-title', content );
+		} else {
+			this._DomContent = content;
+		}
 	},
-
 
 	/**
 	 * destroy object
@@ -198,6 +230,7 @@ window.wikibase.ui.Tooltip.prototype = {
 		if ( this._isVisible ) {
 			this.hideMessage();
 		}
+		this._toggleEvents( false );
 		this._tipsyConfig = null;
 		this._tipsy = null;
 	}
