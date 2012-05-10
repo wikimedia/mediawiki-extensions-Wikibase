@@ -27,7 +27,6 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	 * @return array of errors reported from the static getPermissionsError
 	 */
 	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
-		// at this point $params['link'] should be a copy of $params['item'] unless none exist
 		return parent::getPermissionsError( $user, 'site-link', $params['link'] );
 	}
 	
@@ -42,9 +41,6 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		//if ( !isset($params['link']) ) {
-		//	$params['link'] = $params['item'];
-		//}
 		if ( isset($params['link']) && $params['link'] === 'remove') {
 			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
