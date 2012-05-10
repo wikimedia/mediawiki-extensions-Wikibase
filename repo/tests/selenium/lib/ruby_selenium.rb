@@ -2,7 +2,7 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-WIKI_URL = "http://localhost/mediawiki/core/"
+WIKI_URL = "http://localhost/mediawiki/"
 WIKI_USELANG = "en"
 WIKI_SKIN = "vector" # "vector" "monobook"
 WIKI_API_URL = WIKI_URL + 'api.php'
