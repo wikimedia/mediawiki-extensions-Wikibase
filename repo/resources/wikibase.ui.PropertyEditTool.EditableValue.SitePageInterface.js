@@ -35,8 +35,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 	 * @param site wikibase.Site as source for the page suggestions
 	 */
 	_init: function( subject, site ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.apply( this, arguments );		
-		this.setSite( site );
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.apply( this, arguments );
+		if( site ) {
+			this.setSite( site );
+		}
 	},
 	
 	/**
@@ -45,9 +47,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 	 * @param site wikibase.Site
 	 */
 	setSite: function( site ) {
-		if( typeof site !== 'object' ) {
-			return;
-		}
 		if( this._site !== null && this._site.getId() === site.getId() ) {
 			return; // no change
 		}

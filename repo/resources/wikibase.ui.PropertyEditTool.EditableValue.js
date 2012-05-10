@@ -87,13 +87,24 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._initInterfaces();
 
 		this._toolbar = toolbar;
-		this._toolbar.appendTo( this._getToolbarParent() );
+		var tbParent = this._getToolbarParent();
+		this._toolbar.appendTo( tbParent );
+		tbParent.addClass( this.UI_CLASS + '-toolbarparent' );
+
+		var indexParent = this._getIndexParent();
+		if( indexParent ) {
+			indexParent.addClass( this.UI_CLASS + '-index' );
+		}
 		
 		if( this.isEmpty() || this.isPending() ) {
 			// enable editing from the beginning if there is no value yet or pending value...
 			this._toolbar.editGroup.btnEdit.doAction();
 			this.removeFocus(); // ...but don't set focus there for now
 		}
+	},
+
+	_setIndex: function( index ){
+
 	},
 	
 	/**
@@ -139,17 +150,29 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	
 	/**
 	 * Returns the node the toolbar should be appended to
+	 *
+	 * @return jQuery
 	 */
 	_getToolbarParent: function() {
 		return this._subject.parent();
+	},
+
+	/**
+	 * Returns the node reserved for the text expressing which index this editable value has
+	 *
+	 * @return jQuery|null
+	 */
+	_getIndexParent: function() {
+		return null;
 	},
 	
 	/**
 	 * Removes the value from the dom as well as from the data store via the API
 	 *
-	 * @param bool define whether API has to be informed of removing
+	 * @param bool doRemoveApiCall (optional, default: true) define whether API has to be involved in removing
 	 */
 	remove: function( doRemoveApiCall ) {
+		doRemoveApiCall = ( typeof doRemoveApiCall != 'undefined' ) ? doRemoveApiCall : true;
 		if ( doRemoveApiCall ) {
 			this.doApiCall( true, function() {} );
 		}
@@ -308,6 +331,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * Returns the neccessary parameters for an api call to store the value.
+	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function() {
 		return {};
@@ -459,6 +483,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * // TODO: should take an object representing a properties value
 	 * 
 	 * @param Array|string value
+	 * @return Array value but normalized
 	 */
 	setValue: function( value ) {
 		if( ! $.isArray( value ) ) {
@@ -467,6 +492,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		$.each( value, $.proxy( function( index, val ) {
 			this._interfaces[ index ].setValue( val );
 		}, this ) );
+
+		return this.getValue(); // will return value but normalized
 	},
 
 	/**
@@ -535,16 +562,21 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * Helper function to compares two values returned by getValue() or getInitialValue() as long as
 	 * we work with arrays instead of proper objects here.
+	 * When comparing the values, this will also do an normalization on the values before comparing
+	 * them, so even though they are not exactly the same perhaps, they stillh ave the same meaning
+	 * and true will be returned.
 	 * 
 	 * @todo: make this deprecated as soon as we use objects representing property values...
-	 *
-	 * @static
 	 * 
 	 * @param Array value1
 	 * @param Array|null value2 if null, this will check whether value1 is empty
 	 * @return bool
 	 */
 	valueCompare: function( value1, value2 ) {
+		if( value1.length !== this._interfaces.length ) {
+			return false; // there has to be one value for each interface!
+		}
+
 		if( value2 === null ) {
 			// check for empty value1
 			for( var i in value1 ) {
@@ -554,13 +586,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			}
 			return true;
 		}
-		
+
 		// check for equal arrays with same entries in same order
 		if( value1.length !== value2.length ) {
 			return false;
 		}
 		for( var i in value1 ) {
-			if( $.trim( value1[ i ] ) !== $.trim( value2[ i ] ) ) {
+			// normalize first:
+			var val1 = this._interfaces[ i ].normalize( value1[ i ] );
+			var val2 = this._interfaces[ i ].normalize( value2[ i ] );
+
+			if( val1 !== val2 ) {
 				return false;
 			}
 		}

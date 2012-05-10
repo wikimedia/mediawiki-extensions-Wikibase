@@ -48,11 +48,12 @@ class SpecialItemByLabel extends SpecialItemResolver {
 		else {
 			$items = call_user_func_array( 'WikibaseItem::getFromLabel', $parts );
 
-			if ( empty( $items ) ) {
+			if ( $items === array() ) {
 				// TODO: display that there are no matching items and possibly some fancy input UI
 			}
 			elseif ( count( $items ) !== 1 ) {
-				$this->displayDisambiguationPage( $items );
+				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $parts[1] )->escaped() );
+				$this->displayDisambiguationPage( $items, $parts[0] );
 			}
 			else {
 				$this->displayItem( $items[0] );
@@ -60,8 +61,9 @@ class SpecialItemByLabel extends SpecialItemResolver {
 		}
 	}
 
-	protected function displayDisambiguationPage( array /* of WikibaseItem */ $items ) {
-		// TODO
+	protected function displayDisambiguationPage( array /* of WikibaseItem */ $items, $langCode ) {
+		$disambiguationList = new WikibaseItemDisambiguation( $items, $langCode, $this->getContext() );
+		$disambiguationList->display();
 	}
 
 }

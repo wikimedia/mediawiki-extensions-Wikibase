@@ -74,31 +74,18 @@ class ApiWikibaseSetItem extends ApiBase {
 		}
 		
 		// lacks error checking
-		$ch = new WikibaseContentHandler();
-		$item = $ch->unserializeContent( $params['data'],'application/json' );
+		$item = WikibaseItem::newFromArray( json_decode( $params['data'], true ) );
 		$success = $item->save();
-		
-		if ( $success ) {
-			$page = $item->getWikiPage();
-				
-			$errors = self::getPermissionsError( $page->getTitle(), $this->getUser() );
-			if ( count( $errors ) ) {
-				// this could be redesigned into something more usefull
-				$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
-			}
-			
-			$status = $page->doEditContent(
-				$item,
-				$params['summary'],
-				EDIT_AUTOSUMMARY,
-				false,
-				$this->getUser(),
-				'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
-			);
 
-			$success = $status->isOk();
+		if ( !$success ) {
+			// TODO: throw error. Right now will have PHP fatal when accessing $item later on...
 		}
-		
+
+		if ( !isset($params['summary']) ) {
+			//$params['summary'] = $item->getTextForSummary();
+			$params['summary'] = 'dummy';
+		}
+
 		$languages = WikibaseUtils::getLanguageCodes();
 		
 		// because this is serialized and cleansed we can simply go for known values

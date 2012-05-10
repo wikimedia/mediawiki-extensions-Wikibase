@@ -33,7 +33,7 @@
 	// without css this is not required, so we build it here manually
 	$( '.wb-sitelinks-empty' )
 	.each( function() {
-		$( this ).replaceWith( wikibase.ui.SiteLinksEditTool.getEmptyStructure() )
+		$( this ).replaceWith( wikibase.ui.SiteLinksEditTool.getEmptyStructure() );
 	} );
 	
 	$( 'table.wb-sitelinks' ).each( function() {

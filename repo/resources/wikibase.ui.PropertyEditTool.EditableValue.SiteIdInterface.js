@@ -69,6 +69,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		}
 		var ownSite = this.getSelectedSite();
 		if( ownSite !== null ) {
+			// make sure currently selected site can still be selected even if on ignore list
 			var ownSiteIndex = $.inArray( ownSite, ignoredSites );
 			if( ownSiteIndex > -1 ) {
 				ignoredSites.splice( ownSiteIndex, 1 );
@@ -110,17 +111,33 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 */
 	getSelectedSiteId: function() {
 		var value = this.getValue();
-		return this.getSiteIdByValue( value );
+		return this.normalize( value );
 	},
-	
+
 	/**
-	 * Tries to get a site id by analyzing a given string
-	 *
-	 * @param String value
+	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.Interface
 	 */
-	getSiteIdByValue: function( value ) {
-		// normalize value first (trim and stuff)
-		value = this.normalize( value );
+	validate: function( value ) {
+		// check whether current input is in the list of values returned by the wikis API
+		return this.normalize( value ) !== null;
+	},
+
+	_setValue_inNonEditMode: function( value ) {
+		// the actual value is the site id, displayed value though should be the whole site name and id in parentheses.
+		var site = wikibase.getSite( value );
+		value = site.getShortName() + ' (' + site.getId() + ')';
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._setValue_inNonEditMode.call( this, value );
+	},
+
+	/**
+	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.normalize
+	 *
+	 * Will return the site ID if any of the site names is given.
+	 *
+	 * @todo: might be nice to move this into wikibase.Site.getIdByString() or something.
+	 */
+	normalize: function( value ) {
+		value = window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.normalize.call( this, value );
 
 		for( var i in this._currentResults ) {
 			var currentItem = this._currentResults[i];
@@ -134,20 +151,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		}
 		return null;
 	},
-
-	/**
-	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.Interface
-	 */
-	validate: function( value ) {
-		// check whether current input is in the list of values returned by the wikis API
-		return this.getSiteIdByValue( value ) !== null;
-	},
-/*
-	normalize: function( value ) {
-		value = window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.normalize.call( this, value );
-		return value;
-	},
-*/
 	
 	/////////////////
 	// CONFIGURABLE:

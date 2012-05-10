@@ -31,15 +31,21 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 			var value = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
 			value = value.replace( /\s+/g, ' ' ); // make sure we don't ever allow several spaces in the items label
 			return value;
-		}
+		};
 		
 		return interfaces;
 	},
 	
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
+	 */
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
+	 */
 	getApiCallParams: function() {
 		return {
 			action: "wbsetlanguageattribute",

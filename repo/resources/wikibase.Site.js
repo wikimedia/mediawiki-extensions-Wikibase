@@ -16,7 +16,7 @@
  */
 window.wikibase.Site = function( siteDetails ) {
 	this._siteDetails = siteDetails;
-}
+};
 window.wikibase.Site.prototype = {
 	
 	/**

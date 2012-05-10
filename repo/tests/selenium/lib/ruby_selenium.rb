@@ -2,11 +2,12 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-WIKI_URL = "http://localhost/mediawiki/"
+WIKI_URL = "http://localhost/mediawiki/core/"
 WIKI_USELANG = "en"
+WIKI_SKIN = "vector" # "vector" "monobook"
 WIKI_API_URL = WIKI_URL + 'api.php'
-WIKI_USERNAME = "tobijat"
-WIKI_PASSWORD = "darthvader"
+WIKI_USERNAME = "Admin"
+WIKI_PASSWORD = "root"
 
 class RubySelenium
   # do API request to create a new item
@@ -130,8 +131,10 @@ class RubySelenium
 
   # creates a new item and returns the URL for that item
   def self.get_new_item_url
+    # @item_id = '700'
+    
     create_new_item
-    item_url = WIKI_URL + "index.php/Data:q" + @item_id + "?uselang=" + WIKI_USELANG
+    item_url = WIKI_URL + "index.php/Data:q" + @item_id + "?uselang=" + WIKI_USELANG + "&useskin=" + WIKI_SKIN
     return item_url
   end
 

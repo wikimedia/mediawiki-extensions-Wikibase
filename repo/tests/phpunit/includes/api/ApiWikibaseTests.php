@@ -21,9 +21,6 @@
  *
  * @ingroup Wikibase
  * @ingroup Test
- *
- * @licence GNU GPL v2+
- * @author John Erling Blad < jeblad@gmail.com >
  * 
  * @group API
  * 
@@ -35,6 +32,12 @@
  * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
+ *
+ * @group Wikibase
+ * @group WikibaseAPI
+ *
+ * @licence GNU GPL v2+
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 class ApiWikibaseTests extends ApiTestCase {
 	
@@ -678,7 +681,8 @@ class ApiWikibaseTests extends ApiTestCase {
 	 * @Depends testSetItem
 	 */
 	public function testDeleteLanguageAttributeDescription( $id, $site, $title, $language ) {
-		$this->deleteLanguageAttribute( $id, $site, $title, $language, 'description' );
+		// FIXME: $attribute is not set!
+		$this->deleteLanguageAttribute( $id, $site, $title, $language, $attribute, 'description' );
 	}
 	
 	public function deleteLanguageAttribute( $id, $site, $title, $language, $op ) {

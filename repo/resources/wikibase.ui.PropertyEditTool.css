@@ -26,6 +26,21 @@ h1.firstHeading .wb-ui-toolbar {
 	background-position:left center;
 }
 
+.wb-ui-propertyedittool-counter-pending, .wb-pending-value .wb-ui-propertyedittool-editablevalue-index  {
+	margin-left: .25em;
+	color: #57a7b9;
+	font-weight: bold;
+}
+
+.wb-ui-propertyedittool-editablevalue-index {
+	width: 0; /* don't use extra space if we have a spacey table */
+}
+
+.wb-sitelinks th.wb-ui-propertyedittool-counterinheading {
+	text-align: right;
+	font-size: .99em;
+}
+
 
 /********** TOOLTIP **********/
 
@@ -112,4 +127,10 @@ td .wb-ui-propertyedittool-editablevalueinterface {
 }
 .wb-ui-propertyedittool-editablevalueinterface-disabled input {
 	background-color: #eee;
+}
+
+td.wb-ui-propertyedittool-editablevalue-toolbarparent {
+	/* for toolbars in a table make sure that all toolbars are bound on the right side so when one goes into edit mode
+	   it won't break the line */
+	text-align: right;
 }
