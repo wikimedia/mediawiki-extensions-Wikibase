@@ -70,52 +70,6 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		}
 		$success = true;
 		
-		/*
-		switch ($params['item']) {
-			case 'update':
-				if ( isset($params['label']) ) {
-					if ( !isset($labels[$params['language']]) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
-					}
-					$this->setItemLabel( $item, $params['language'], $params['label'] );
-				}
-				if ( isset($params['description']) ) {
-					if ( !isset($descriptions[$params['language']]) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
-					}
-					$this->setItemDescription( $item, $params['language'], $params['description'] );
-				}
-				$success = true;
-				break;
-			case 'add':
-				if ( isset($params['label']) ) {
-					if ( isset($labels[$params['language']]) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-label-found' ), 'label-found' );
-					}
-					$this->setItemLabel( $item, $params['language'], $params['label'] );
-				}
-				if ( isset($params['description']) ) {
-					if ( isset($descriptions[$params['language']]) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-description-found' ), 'description-found' );
-					}
-					$this->setItemDescription( $item, $params['language'], $params['description'] );
-				}
-				$success = true;
-				break;
-			case 'set':
-				if (isset($params['label'])) {
-					$this->setItemLabel( $item, $params['language'], $params['label'] );
-				}
-				if (isset($params['description'])) {
-					$this->setItemDescription( $item, $params['language'], $params['description'] );
-				}
-				$success = true;
-				break;
-			default:
-				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
-		}
-		*/
-		//return $success;
 	}
 	
 	/**
@@ -127,7 +81,6 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @param string $label
 	 */
 	protected function setItemLabel( WikibaseItem &$item, $language, $label ) {
-		// TODO: Normalize
 		$value = $item->setLabel( $language, $label );
 		if ( $label !== $value ) {
 			$this->getResult()->addValue(
