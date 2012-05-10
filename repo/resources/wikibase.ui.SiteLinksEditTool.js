@@ -46,7 +46,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		
-		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
+		//th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
 	},
 	
 	_initToolbar: function() {
@@ -63,12 +63,15 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 
 	_getToolbarParent: function() {
 		// take content (table), put it into a div and also add the toolbar into the div
-		return $( '<td/>', { colspan: '3' } )
-			.appendTo( $( '<tr/>' )
-				.appendTo( $( '<tfoot/>' )
-					.appendTo( this._subject )
-				)
-			);
+		this.__toolbarParent = this.__toolbarParent || $(
+			'<td/>', { colspan: '12' }
+		)
+		.appendTo( $( '<tr/>' )
+			.appendTo( $( '<tfoot/>' )
+				.appendTo( this._subject )
+			)
+		);
+		return this.__toolbarParent;
 	},
 	
 	_initEditToolForValues: function() {
@@ -81,7 +84,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	/**
 	 * Full when all languages are represented within
 	 * 
-	 * @see wikibase.ui.PropertyEditTool.isFull()
+	 * @see wikibase.ui.PropertyEditTool.prototype.isFull
 	 */
 	isFull: function() {
 		var allSites = wikibase.getSites();
@@ -93,7 +96,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool._getValueElems()
+	 * @see wikibase.ui.PropertyEditTool.prototype._getValueElems
 	 * @return jQuery[]
 	 */
 	_getValueElems: function() {
@@ -104,7 +107,10 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	_newEmptyValueDOM: function() {
 		return $( '<tr> <td></td> <td></td> </tr>' );
 	},
-	
+
+	/**
+	 * @see window.wikibase.ui.PropertyEditTool.prototype.getEditableValuePrototype
+	 */
 	getEditableValuePrototype: function() {
 		// TODO: this system might be useful in other prototypes based on PropertyEditTool, implement
 		//       this in PropertyEditTool directly perhaps.
@@ -183,8 +189,8 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
  */
 window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
 	return $(
-			'<table class="wb-sitelinks" cellspacing="0"><thead><th colspan="2">' +
+			'<table class="wb-sitelinks" cellspacing="0"><thead><th colspan="2"><h2>' +
 			mw.msg( 'wikibase-sitelinks' ) +
-			'</th></thead><tbody></tbody></table>'
+			'</h2></th></thead><tbody></tbody></table>'
 	);
 };

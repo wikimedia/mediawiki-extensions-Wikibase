@@ -117,12 +117,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		this.__toolbarParent = this.__toolbarParent || $( '<td/>' ).appendTo( this._subject );
 		return this.__toolbarParent;
 	},
-
-	_getIndexParent: function() {
-		this.__indexParent = this.__indexParent || $( '<td/>' ).prependTo( this._subject );
-		return this.__indexParent;
-
-	},
 	
 	/**
 	 * Helper function to remove a css class matching a regular expression.

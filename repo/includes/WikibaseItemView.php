@@ -67,7 +67,7 @@ class WikibaseItemView extends ContextSource {
 			$html .= Html::openElement( 'thead' );
 			$html .= Html::openElement( 'tr' );
 			$html .= Html::openElement( 'th', array( 'colspan' => '2' ) );
-			$html .= Html::element( 'h2', array(), wfMessage( 'wikibase-sitelinks' ) );
+			$html .= Html::element( 'h3', array(), wfMessage( 'wikibase-sitelinks' ) );
 			$html .= Html::closeElement( 'th' );
 			$html .= Html::closeElement( 'tr' );
 			$html .= Html::closeElement( 'thead' );
