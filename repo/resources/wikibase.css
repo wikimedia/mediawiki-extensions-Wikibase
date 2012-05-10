@@ -15,11 +15,11 @@
 }
 
 .wb-property-container-value {
-	margin:0 .3em;
+	margin: .3em;
 }
 
 .wb-property-container {
-	margin-top:.3em;
+	margin-top: .3em;
 }
 .wb-property-container-value {
 	background: /* @embed */ url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) left  no-repeat;
@@ -53,7 +53,8 @@ table.wb-sitelinks th {
 	font-size:1.25em;
 	font-weight:normal;
 }
-table.wb-sitelinks tr:hover td {
+table.wb-sitelinks tr:hover td,
+table.wb-sitelinks tr.wb-pending-value td {
 	/*background-color:#5dc9f4;*/
 	background-color:#D6F3FF;
 }

@@ -352,9 +352,16 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		}
 		for( var i = fromIndex; i < this._editableValues.length; i++ ) {
 			var isEven = ( i % 2 ) != 0;
-			this._editableValues[ i ]._subject
+			var val = this._editableValues[ i ];
+
+			val._subject
 			.addClass( isEven ? 'even' : 'uneven' )
 			.removeClass( isEven ? 'uneven' : 'even' );
+
+			var valIndexParent = val._getIndexParent();
+			if( valIndexParent !== null ) {
+				valIndexParent.text( i + 1 + '.' );
+			}
 		};
 	},
 	
@@ -383,26 +390,32 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @return jQuery
 	 */
 	_getFormattedCounterText: function() {
-		var out = $();
+		var numberOfPendingValues = this.getPendingValues().length;
 		var numberOfValues = this.getValues().length;
-		var pendingValues = this.getPendingValues();
 
-		out = out.add( document.createTextNode( '(' + numberOfValues ) );
+		var msg = numberOfPendingValues < 1
+				? mw.msg( 'wikibase-propertyedittool-counter', numberOfValues )
+				: mw.msg(
+						'wikibase-propertyedittool-counter-pending',
+						numberOfValues + numberOfPendingValues,
+						numberOfValues,
+						'__3__' // can't insert html here since it would be escaped!
+				);
 
-		if( pendingValues.length > 0 ) {
-			out = out.add( '<span/>', {
-				'class': this.UI_CLASS + '-counter-pending',
-				'title': mw.msg( 'wikibase-propertyedittool-counter-pending-tooltip', pendingValues.length )
-			} )
-			.append( '+' + pendingValues.length )
-			.tipsy( {
+		// replace __3__ with a span we can grab next
+		msg = $( ( '<div>' + msg + '</div>' ).replace( /__3__/g, '<span/>' ) );
+		var msgSpan = msg.find( 'span' );
+
+		if( msgSpan.length > 0 ) {
+			msgSpan.addClass( this.UI_CLASS + '-counter-pending' );
+			msgSpan.attr( 'title', mw.msg( 'wikibase-propertyedittool-counter-pending-tooltip', numberOfPendingValues ) );
+			msgSpan.text( mw.msg( 'wikibase-propertyedittool-counter-pending-pendingsubpart', numberOfPendingValues ) );
+			msgSpan.tipsy( {
 				'gravity': 'ne'
 			} );
 		}
 
-		out = out.add( document.createTextNode( ')' ) );
-
-		return out;
+		return msg.contents();
 	},
 	
 	/**

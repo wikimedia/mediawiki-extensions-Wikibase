@@ -16,7 +16,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       numExistingSitelinks.should == @current_page.getNumberOfSitelinksFromCounter
 
       @current_page.addSitelinkLink
-      @current_page.siteIdInputField.should be_true
+      @current_page.siteIdInputField_element.should be_true
       @current_page.pageInputField.should be_true
       @current_page.saveSitelinkLinkDisabled.should be_true
       @current_page.cancelSitelinkLink?.should be_true
@@ -35,26 +35,29 @@ describe "Check functionality of add/edit/remove sitelinks" do
       @current_page.wait_for_sitelinks_to_load
       @current_page.countExistingSitelinks.should == 0
       @current_page.addSitelinkLink
-      @current_page.siteIdInputField_element.enabled?.should be_true
+      @current_page.siteIdInputField_element.should be_true
+      #@current_page.siteIdInputField_element.enabled?.should be_true
       @current_page.pageInputField_element.enabled?.should be_false
-      @current_page.siteIdInputField = "e"
-      ajax_wait
+      @current_page.siteIdInputField="e"
+      #ajax_wait
+      @current_page.wait_until do
+        @current_page.siteIdAutocompleteList_element.visible?
+      end
 
       # TODO: find solution: key has to be sent to input field first to get the autocomplete list visible to selenium
-      @current_page.siteIdInputField_element.send_keys :arrow_down
+      #@current_page.siteIdInputField_element.send_keys :arrow_down
       @current_page.siteIdAutocompleteList_element.visible?.should be_true
 
       @current_page.getNthElementInAutocompleteList(@current_page.siteIdAutocompleteList_element, 1).click
 
-      @current_page.siteIdAutocompleteList_element.visible?.should be_false
+      #@current_page.siteIdAutocompleteList_element.visible?.should be_false
       @current_page.pageInputField_element.enabled?.should be_true
-      @current_page.pageInputField = "Ber"
+      @current_page.pageInputField="Ber"
       @current_page.wait_until do
         @current_page.pageAutocompleteList_element.visible?
       end
 
       # TODO: find solution: key has to be sent to input field first to get the autocomplete list visible to selenium
-      @current_page.pageInputField_element.send_keys :arrow_down
       @current_page.getNthElementInAutocompleteList(@current_page.pageAutocompleteList_element, 1).click
       @current_page.pageAutocompleteList_element.visible?.should be_false
 
@@ -125,12 +128,12 @@ describe "Check functionality of add/edit/remove sitelinks" do
       end
 
       @current_page.pageInputField_element.send_keys :arrow_down
-      
-      listItem = @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 1) 
+
+      listItem = @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 1)
       listItem.click
       @current_page.saveSitelinkLinkDisabled?.should be_true
       @current_page.pageInputField_element.send_keys :arrow_down
-      listItem = @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 3) 
+      listItem = @current_page.getNthElementInAutocompleteList(@current_page.editSitelinkAutocompleteList_element, 3)
       listItem.click
       @current_page.editSitelinkAutocompleteList_element.visible?.should be_false
       @current_page.saveSitelinkLink?.should be_true

@@ -29,12 +29,15 @@ $messages['en'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'specify page',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
-	'wikibase-sitelinks' => 'Pages linked to this item',
+	'wikibase-sitelinks' => 'List of Pages Linked to This Item',
 	'wikibase-sitelinks-add' => 'add a link to a site-link',
 	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entry|entries}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entry|entries}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 	'wikibase-disambiguation-title' => 'Disambiguation for "$1"',
@@ -74,6 +77,10 @@ $messages['en'] = array(
 
 /** Message documentation (Message documentation) */
 $messages['qqq'] = array(
+	'wikibase-sitelinks' => 'Heading for the site links table.',
+	'wikibase-propertyedittool-counter' => '$1 is the sum of elements in the list currently.',
+	'wikibase-propertyedittool-counter-pending' => '$1 is the sum of elements in the list plus the ones pending (still in edit mode and not saved). $2 is the number of elements stored in the list (not pending). $3 is the message "wikibase-propertyedittool-counter-pending-pendingsubpart" with some additional markup around, expressing how many entries in the list are pending right now.',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => 'the number of pending elements within the list of site links and a leading "+". This will be inserted into "wikibase-propertyedittool-counter-pending" parameter $3.',
 	'wikibase-desc' => '{{desc}}',
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wikibase-label-input-help-message' => '$1: name of the language',

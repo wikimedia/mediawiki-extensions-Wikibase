@@ -129,7 +129,7 @@ final class WikibaseHooks {
 				'wikibase.ui.PropertyEditTool'
 			),
 			'localBasePath' => dirname( __FILE__ ),
-			'remoteExtPath' => 'WikidataRepo',
+			'remoteExtPath' => 'Wikibase',
 		);
 
 		return true;

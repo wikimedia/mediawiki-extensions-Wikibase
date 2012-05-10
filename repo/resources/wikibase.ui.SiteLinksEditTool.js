@@ -35,11 +35,15 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	_init: function( subject ) {
 		// add colspan+1 because of toolbar td's:
 		var th = subject.find( 'th' );
-		th.append( '&nbsp;' );
-		th.append( $( '<span/>', {
+
+		$( '<th/>', {
+			'class': this.UI_CLASS + '-counterinheading'
+		} )
+		.append( $( '<span/>', {
 			'class': this.UI_CLASS + '-counter'
-		} ) );
-		
+		} ) )
+		.appendTo( th.parent() );
+
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		
 		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
