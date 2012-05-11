@@ -30,6 +30,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Class which marks the element within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittool-editablevalue',
+
+	/**
+	 * @const
+	 * @enum number
+	 */
+	API_ACTION: {
+		SAVE: 1,
+		REMOVE: 2
+	},
 	
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
@@ -167,6 +176,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
+	 * Removes all traces of this ui element from the DOM, so the represented value is still visible but not interactive
+	 * anymore.
+	 */
+	destroy: function() {
+		if( this._toolbar != null) {
+			this._toolbar.destroy();
+			this._toolbar = null;
+		}
+		this.stopEditing( false );
+	},
+
+	/**
 	 * Removes the value from the data store via the API. Also removes the values representation from the dom stated
 	 * differently.
 	 *
@@ -183,7 +204,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				}
 			} else {
 				// delete value but keep empty input form
-				this.reTransform( true );
+				this._reTransform( true );
 				this.startEditing();
 				this.removeFocus(); // don't want the focus immediately after removing the value
 			}
@@ -193,16 +214,35 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			// no API call necessary since value hasn't been stored yet.
 			degrade();
 		} else {
-			this.doApiCall( true, $.proxy( degrade, this ) );
+			this.doApiCall( this.API_ACTION.REMOVE, $.proxy( degrade, this ) );
 		}
 	},
 
-	destroy: function() {
-		if( this._toolbar != null) {
-			this._toolbar.destroy();
-			this._toolbar = null;
+	/**
+	 * Saves the current value by sending it to the server. In case the current value is invalid, this will trigger a
+	 * remove instead but will preserve the form to insert a new value.
+	 */
+	save: function( afterSaveComplete ) {
+		if( ! this.isValid() ) {
+			// remove instead! Save equals remove in this case!
+			return this.remove( true );
 		}
-		this.stopEditing( false );
+
+		this.doApiCall( this.API_ACTION.SAVE, $.proxy(
+			function( response ) {
+				var wasPending = this.isPending();
+				this._reTransform( true );
+
+				this._pending = false; // not pending anymore after saved once
+				this._subject.removeClass( 'wb-pending-value' );
+
+				if( this.onAfterStopEditing !== null && this.onAfterStopEditing( true, wasPending ) === false ) { // callback
+					return false; // cancel
+				}
+
+				afterSaveComplete && afterSaveComplete(); // callback if defined
+			},
+		this ) );
 	},
 
 	/**
@@ -219,7 +259,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		this._isInEditMode = true;
 		this._subject.addClass( this.UI_CLASS + '-ineditmode' );
-		
+
 		$.each( this._interfaces, function( index, elem ) {
 			elem.startEditing();
 		} );
@@ -231,12 +271,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Destroys the edit box and displays the original text or the inputs new value.
 	 *
 	 * @param bool save whether to save the new user given value
-	 * @param function afterStopEditing function to be called after saving has been performed
-	 * @return bool whether the value has changed (or was removed) and has to be sent to the API
+	 * @param function afterSaveComplete function to be called after saving has been performed
+	 * @return bool whether the value has changed (or was removed) in which case the changes are on their way to the API
 	 */
-	stopEditing: function( save, afterStopEditing ) {
-		if ( typeof afterStopEditing == 'undefined' ) {
-			afterStopEditing = function() {};
+	stopEditing: function( save, afterSaveComplete ) {
+		if( typeof afterSaveComplete == 'undefined' ) {
+			afterSaveComplete = function() {};
 		}
 
 		if( ! this.isInEditMode() ) {
@@ -245,48 +285,26 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.onStopEditing !== null && this.onStopEditing( save ) === false ) { // callback
 			return false; // cancel
 		}
+
 		if( ! save && this.isPending() ) {
-			this.reTransform( save );
+			// cancel pending edit...
+			this._reTransform( save );
 			this.remove(); // not yet existing value, no state to go back to
 			return false; // do not call onAfterStopEditing() here!
 		}
 
-		if ( ! save ) {
+		if( ! save ) {
 			//cancel...
-			var wasPending = this.reTransform( save );
+			var wasPending = this._reTransform( save );
 
 			if( this.onAfterStopEditing !== null && this.onAfterStopEditing( save, wasPending ) === false ) { // callback
 				return false; // cancel
 			}
-
-			afterStopEditing();
-
-		}
-		// Save...
-		else if( ! this.isValid() ) {
-			// ... remove:
-			// not valid! Save equals remove in this case
-			this.remove( true );
-			return true;
+			afterSaveComplete();
 		}
 		else {
-			// save for real:
-			this.doApiCall( false, $.proxy( function( response ) {
-
-				var wasPending = this.reTransform( save );
-
-				if( save ) {
-					this._pending = false; // TODO: might have to move this to API call error/success handling when implemented
-					this._subject.removeClass( 'wb-pending-value' );
-				}
-
-				if( this.onAfterStopEditing !== null && this.onAfterStopEditing( save, wasPending ) === false ) { // callback
-					return false; // cancel
-				}
-
-				afterStopEditing();
-
-			}, this ) );
+			// save...
+			this.save( afterSaveComplete );
 		}
 
 		return save;
@@ -295,9 +313,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * remove input elements from DOM
 	 *
-	 * @param bool save
+	 * @param bool whether the state was changed
 	 */
-	reTransform: function( save ) {
+	_reTransform: function( save ) {
+		if( ! this.isInEditMode() ) {
+			return false;
+		}
 		$.each( this._interfaces, function( index, elem ) {
 			elem.stopEditing( save );
 		} );
@@ -307,7 +328,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._isInEditMode = false; // out of edit mode after interfaces are converted back to HTML
 		this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
 
-		return this.isPending();
+		return true;
 	},
 
 	/**
@@ -331,18 +352,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * Does the actual API call
 	 *
-	 * @param bool removeValue whether to make the remove or the save call to the API
+	 * @param number apiAction see this.API_ACTION enum for all available actions
 	 * @param function success function to be called when the AJAX request returns successfully
 	 */
-	doApiCall: function( removeValue, onSuccess ) {
-		var apiCall = this.getApiCallParams( removeValue );
+	doApiCall: function( apiAction, onSuccess ) {
+		var apiCall = this.getApiCallParams( apiAction );
 		
 		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
 			var localApi = new mw.Api();
 			localApi.post( apiCall, {
 				ok: onSuccess,
 				err: jQuery.proxy( function( textStatus, response ) {
-					this._apiCallErr( textStatus, response, removeValue );
+					this._apiCallErr( textStatus, response, apiAction );
 				}, this )
 			} );
 		}, this ) );
@@ -350,9 +371,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * Returns the neccessary parameters for an api call to store the value.
+	 *
+	 * @param number apiAction see this.API_ACTION enum for all available actions
 	 * @return Object containing the API call specific parameters
 	 */
-	getApiCallParams: function() {
+	getApiCallParams: function( apiAction ) {
 		return {};
 	},
 
@@ -372,42 +395,43 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 *
 	 * @param string textStatus
 	 * @param object JSON response
+	 * @param number apiAction see this.API_ACTION enum
 	 */
-	_apiCallErr: function( textStatus, response, removeValue ) {
+	_apiCallErr: function( textStatus, response, apiAction ) {
 		var error = {};
 		if ( textStatus != 'abort' ) {
 			error = {
 				code: 'unknown-error',
-				shortMessage: ( removeValue ) ?
-					window.mw.msg( 'wikibase-error-remove-connection' )
+				shortMessage: ( apiAction === this.API_ACTION.REMOVE )
+					? window.mw.msg( 'wikibase-error-remove-connection' )
 					: window.mw.msg( 'wikibase-error-save-connection' ),
 				message: ''
 			};
 			if ( typeof response.error != 'undefined' ) {
 				if ( textStatus == 'timeout' ) {
 					error.code = textStatus;
-					error.shortMessage = ( removeValue ) ?
-						window.mw.msg( 'wikibase-error-remove-timeout' )
+					error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
+						? window.mw.msg( 'wikibase-error-remove-timeout' )
 						: window.mw.msg( 'wikibase-error-save-timeout' );
 				} else {
 					error.code = response.error.code;
-					error.shortMessage = ( removeValue ) ?
-						window.mw.msg( 'wikibase-error-remove-generic' )
+					error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
+						? window.mw.msg( 'wikibase-error-remove-generic' )
 						: window.mw.msg( 'wikibase-error-save-generic' );
 					error.message = response.error.info;
 				}
 			}
 		}
-		this.apiCallErr( error, removeValue );
+		this.apiCallErr( error, apiAction );
 	},
 
 	/**
-	 * custom method to handle UI presentation of API call error
+	 * custom method to handle UI presentation of API call errors
 	 *
 	 * @param object error
-	 * @param bool removeValue whether the action is removing or saving
+	 * @param number apiAction see this.API_ACTION enum
 	 */
-	apiCallErr: function( error, removeValue ) {
+	apiCallErr: function( error, apiAction ) {
 		// create error tooltip
 		var content = (
 			$( '<div/>', {
@@ -451,7 +475,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 
 		// attach error tooltip to save button
-		var btn = ( removeValue ) ? this._toolbar.editGroup.btnRemove : this._toolbar.editGroup.btnSave;
+		var btn = ( apiAction === this.API_ACTION.REMOVE )
+				? this._toolbar.editGroup.btnRemove
+				: this._toolbar.editGroup.btnSave;
 		btn.addTooltip( content, { gravity: 'nw' }, true );
 		btn.tooltip.showMessage( true );
 

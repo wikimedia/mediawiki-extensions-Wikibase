@@ -46,7 +46,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
 	 */
-	getApiCallParams: function() {
+	getApiCallParams: function( apiAction ) {
 		return {
 			action: "wbsetlanguageattribute",
 			language: window.mw.config.get( 'wgUserLanguage' ),

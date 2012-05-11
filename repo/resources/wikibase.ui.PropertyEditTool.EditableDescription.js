@@ -40,7 +40,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
 	 */
-	getApiCallParams: function() {
+	getApiCallParams: function( apiAction ) {
 		return {
 			action: 'wbsetlanguageattribute',
 			language: window.mw.config.get( 'wgUserLanguage' ),

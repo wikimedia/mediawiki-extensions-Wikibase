@@ -170,7 +170,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
 	 */
-	getApiCallParams: function( removeValue ) {
+	getApiCallParams: function( apiAction ) {
 		var linkValues = this.getValue();
 		var siteId = this.siteIdInterface.getSelectedSiteId();
 		var params = {
@@ -180,7 +180,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			linktitle: linkValues[1],
 			token: window.mw.config.get( 'wbEditToken' )
 		};
-		if ( removeValue === true ) {
+		if( apiAction === this.API_ACTION.REMOVE ) {
 			return $.extend( params, { link: 'remove' } );
 		} else {
 			return $.extend( params, { link: 'set' } );
