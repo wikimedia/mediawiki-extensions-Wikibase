@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Class representing the diff between to (non-associative) arrays.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup WikibaseLib
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
 class WikibaseListDiff implements Serializable {
 
 	protected $removals;
