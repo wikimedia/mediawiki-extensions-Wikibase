@@ -48,6 +48,13 @@ h1.firstHeading .wb-ui-toolbar {
 	visibility: visible;
 }
 
+.wb-sitelinks .wb-ui-propertyedittool-editablevalue-aftereditnotify td {
+	background-color:#FFDFC9!important;
+}
+
+.wb-ui-propertyedittool-editablevalue-aftereditnotify .wb-ui-toolbar {
+	visibility: visible!important;
+}
 
 /********** TOOLTIP **********/
 

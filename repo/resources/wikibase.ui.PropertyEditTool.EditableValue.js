@@ -372,10 +372,33 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var deferred = $.Deferred();
 		var self = this;
 
-		deferred.fail( function( textStatus, response ) {
+		var waitMsg = $( '<span/>', {
+			'class': this.UI_CLASS + '-waitmsg',
+			'text': 'Save...' // TODO: Internationalize, think about animation and text
+		} ).appendTo( this._getToolbarParent() ).hide();
+
+		this._toolbar._elem.fadeOut( 200, function() {
+			waitMsg.fadeIn( 200 );
+		} );
+		this._subject.addClass( this.UI_CLASS + '-waiting' );
+
+		deferred
+		.done( function() {
+			self._subject.removeClass( self.UI_CLASS + '-waiting' );
+		} )
+		.then( function() {
+			// fade out wait text
+			waitMsg.fadeOut( 400, function() { waitMsg.remove(); self._toolbar._elem.fadeIn( 300 ); } );
+		} )
+		.fail( function( textStatus, response ) {
+			// remove and show immediatelly since we need nodes for tooltip!
+			self._subject.addClass( self.UI_CLASS + '-aftereditnotify' );
+			waitMsg.remove();
+			self._toolbar._elem.show();
 			self._apiCallErr( textStatus, response, apiAction );
 		} );
 
+		// do the actual API request and tritter jQuery.Deferred stuff:
 		api.post( apiCall, {
 			ok: function( textStatus ) {
 				deferred.resolve( textStatus );
@@ -447,7 +470,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * custom method to handle UI presentation of API call errors
 	 *
-	 * FIXME: Why is this a public function and why is there a private one as well??
+	 * FIXME: Why is this a public function and why is there a private one as well?? Rename function perhaps?
 	 *
 	 * @param object error
 	 * @param number apiAction see this.API_ACTION enum
@@ -512,9 +535,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				event.stopPropagation();
 			} );
 		});
-		$( window ).one( 'click', function( event ) {
+		$( window ).one( 'click', $.proxy( function( event ) {
 			btn.removeTooltip();
-		} );
+			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
+		}, this ) );
 
 		this.setFocus(); // re-focus input
 	},
