@@ -18,4 +18,4 @@ CREATE INDEX /*i*/wb_changes_change_type ON /*_*/wb_changes (change_type);
 CREATE INDEX /*i*/wb_changes_change_time ON /*_*/wb_changes (change_time);
 CREATE INDEX /*i*/wb_changes_change_object_id ON /*_*/wb_changes (change_object_id);
 CREATE INDEX /*i*/wb_changes_change_user_id ON /*_*/wb_changes (change_user_id);
-CREATE INDEX /*i*/wb_changes_change_revision_id ON /*_*/wb_changes (revision_id);
+CREATE INDEX /*i*/wb_changes_change_revision_id ON /*_*/wb_changes (change_revision_id);

@@ -30,11 +30,11 @@ class WikibaseMapDiff implements Serializable, Iterator {
 	}
 
 	public function serialize() {
-		return $this->items;
+		return serialize( $this->items );
 	}
 
 	public function unserialize( $serialization ) {
-		$this->items = $serialization;
+		$this->items = unserialize( $serialization );
 	}
 
 	public static function newEmpty() {

@@ -33,15 +33,16 @@ class WikibaseListDiff implements Serializable {
 	}
 
 	public function unserialize( $serialization ) {
+		$serialization = unserialize( $serialization );
 		$this->setAdditions( $serialization['additions'] );
 		$this->setRemovals( $serialization['removals'] );
 	}
 
 	public function serialize() {
-		return array(
+		return serialize( array(
 			'additions' => $this->additions,
 			'removals' => $this->removals,
-		);
+		) );
 	}
 
 	public function setAdditions( array $additions ) {

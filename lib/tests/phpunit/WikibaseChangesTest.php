@@ -52,7 +52,7 @@ class WikibaseChangesTest extends MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testNewFromArray( array $data, $loadDefaults = false ) {
-		$change = WikibaseChanges::newFromArray( $data, $loadDefaults );
+		$change = WikibaseChanges::singleton()->newFromArray( $data, $loadDefaults );
 
 		$this->assertEquals( $data['type'], get_class( $change ) );
 
@@ -63,6 +63,31 @@ class WikibaseChangesTest extends MediaWikiTestCase {
 		}
 
 		$this->assertTrue( $change->isEmpty() );
+	}
+
+	/**
+	 * @dataProvider newFromArrayProvider
+	 */
+	public function testSaveSelectCountAndDelete( array $data, $loadDefaults = false ) {
+		$changesTable = WikibaseChanges::singleton();
+
+		$change = $changesTable->newFromArray( $data, $loadDefaults );
+
+		$this->assertTrue( $change->save() );
+
+		$id = $change->getId();
+
+		$this->assertEquals( 1, $changesTable->count( array( 'id' => $id ) ) );
+
+		$obtainedChange = $changesTable->selectRow( null, array( 'id' => $id ) );
+
+		foreach ( array( 'revision_id', 'object_id', 'user_id', 'type' ) as $field ) {
+			$this->assertEquals( $data[$field], $obtainedChange->getField( $field ) );
+		}
+
+		$this->assertTrue( $obtainedChange->remove() );
+
+		$this->assertEquals( 0, $changesTable->count( array( 'id' => $id ) ) );
 	}
 
 }
