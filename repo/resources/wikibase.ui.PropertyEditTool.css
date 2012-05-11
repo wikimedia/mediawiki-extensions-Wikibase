@@ -49,7 +49,7 @@ h1.firstHeading .wb-ui-toolbar {
 }
 
 .wb-sitelinks .wb-ui-propertyedittool-editablevalue-aftereditnotify td {
-	background-color:#FFDFC9!important;
+	background-color:#FFEBD4!important;
 }
 
 .wb-ui-propertyedittool-editablevalue-aftereditnotify .wb-ui-toolbar {
@@ -89,13 +89,13 @@ h1.firstHeading .wb-ui-toolbar {
 	}
 
 	.wb-error .tipsy-inner {
-		background-color:#FFDFC9;
-		border-color:#B27631;
+		background-color:#FFEBD4;
+		border-color:#FFB05A;
 	}
 
 		.wb-tooltip-error-top-message {
 			float:left;
-			border-bottom:1px dotted #B27631;
+			border-bottom:1px dotted #FFB05A;
 			padding-bottom:1em;
 		}
 		.wb-tooltip-error-details-link {
