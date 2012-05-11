@@ -216,12 +216,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			}
 		}, this );
 
-		if ( this.isPending() ) {
+		if( this.isPending() ) {
 			// no API call necessary since value hasn't been stored yet.
 			degrade();
 		} else {
 			var action = preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
-			this.performApiAction( action, $.proxy( degrade, this ) );
+			this.performApiAction( action )
+			.then( $.proxy( degrade, this ) );
 		}
 	},
 
@@ -235,21 +236,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			return this.remove( true );
 		}
 
-		this.performApiAction( this.API_ACTION.SAVE, $.proxy(
-			function( response ) {
-				var wasPending = this.isPending();
-				this._reTransform( true );
+		this.performApiAction( this.API_ACTION.SAVE )
+		.then( $.proxy( function( response ) {
+			var wasPending = this.isPending();
+			this._reTransform( true );
 
-				this._pending = false; // not pending anymore after saved once
-				this._subject.removeClass( 'wb-pending-value' );
+			this._pending = false; // not pending anymore after saved once
+			this._subject.removeClass( 'wb-pending-value' );
 
-				if( this.onAfterStopEditing !== null && this.onAfterStopEditing( true, wasPending ) === false ) { // callback
-					return false; // cancel
-				}
+			if( this.onAfterStopEditing !== null && this.onAfterStopEditing( true, wasPending ) === false ) { // callback
+				return false; // cancel
+			}
 
-				afterSaveComplete && afterSaveComplete(); // callback if defined
-			},
-		this ) );
+			afterSaveComplete && afterSaveComplete(); // callback if defined
+		}, this ) );
 	},
 
 	/**
@@ -360,19 +360,32 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Performs one of the actions available in the this.API_ACTION enum and handles all API related stuff.
 	 *
 	 * @param number apiAction see this.API_ACTION enum for all available actions
-	 * @param function success function to be called when the AJAX request returns successfully
-	 * @return jqXHR
+	 * @return jQuery.Deferred
 	 */
-	performApiAction: function( apiAction, onSuccess ) {
+	performApiAction: function( apiAction ) {
+		var api = new mw.Api();
 		var apiCall = this.getApiCallParams( apiAction );
-		var localApi = new mw.Api();
-		
-		return localApi.post( apiCall, {
-			ok: onSuccess,
-			err: jQuery.proxy( function( textStatus, response ) {
-				this._apiCallErr( textStatus, response, apiAction );
-			}, this )
+
+		// we have to build our own deferred since the jqXHR object returned by api.proxy() is just referring to the
+		// success of the ajax call, not to the actual success of the API request (which could have failed depending on
+		// the return value).
+		var deferred = $.Deferred();
+		var self = this;
+
+		deferred.fail( function( textStatus, response ) {
+			self._apiCallErr( textStatus, response, apiAction );
 		} );
+
+		api.post( apiCall, {
+			ok: function( textStatus ) {
+				deferred.resolve( textStatus );
+			},
+			err: function( textStatus, response, exception ) {
+				deferred.reject( textStatus, response, exception );
+			}
+		} );
+
+		return deferred;
 	},
 
 	/**
@@ -433,6 +446,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * custom method to handle UI presentation of API call errors
+	 *
+	 * FIXME: Why is this a public function and why is there a private one as well??
 	 *
 	 * @param object error
 	 * @param number apiAction see this.API_ACTION enum
