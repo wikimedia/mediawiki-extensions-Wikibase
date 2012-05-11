@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Tests for the WikibaseSitelinkChange class.
+ * Tests for the WikibaseAliasChange class.
  *
  * @file
  * @since 0.1
@@ -21,31 +21,31 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseSitelinkChangeTest extends MediaWikiTestCase {
+class WikibaseAliasChangeTest extends MediaWikiTestCase {
 
 	public function diffProvider() {
 		return array(
-			array( WikibaseMapDiff::newEmpty() ),
-			array( WikibaseMapDiff::newFromArrays( array(), array( 'en' => 'foo' ) ) ),
-			array( WikibaseMapDiff::newFromArrays( array( 'en' => 'bar' ), array( 'en' => 'foo' ) ) ),
-			array( WikibaseMapDiff::newFromArrays( array( 'en' => 'bar' ), array( 'de' => 'bar' ) ) ),
+			array( WikibaseListDiff::newEmpty() ),
+			array( WikibaseListDiff::newFromArrays( array(), array( 'foo' ) ) ),
+			array( WikibaseListDiff::newFromArrays( array( 'bar' ), array( 'foo' ) ) ),
+			array( WikibaseListDiff::newFromArrays( array( 'bar' ), array() ) ),
 		);
 	}
 
 	/**
-	 * @param WikibaseMapDiff $diff
+	 * @param WikibaseListDiff $diff
 	 * @dataProvider diffProvider
 	 */
-	public function testNewFromDiff( WikibaseMapDiff $diff ) {
-		$change =  WikibaseSitelinkChange::newFromDiff( $diff );
+	public function testNewFromDiff( WikibaseListDiff $diff ) {
+		$change =  WikibaseAliasChange::newFromDiff( $diff );
 
 		$this->assertEquals( $diff->isEmpty(), $change->isEmpty() );
 
-		$change->setDiff( WikibaseMapDiff::newEmpty() );
+		$change->setDiff( WikibaseListDiff::newEmpty() );
 
 		$this->assertTrue( $change->isEmpty() );
 
-		$diff = WikibaseMapDiff::newFromArrays( array(), array( 'en' => 'foo' ) );
+		$diff = WikibaseListDiff::newFromArrays( array(), array( 'foo' ) );
 
 		$change->setDiff( $diff );
 
