@@ -37,7 +37,7 @@ class WikibaseListDiff implements Serializable {
 		$this->setRemovals( $serialization['removals'] );
 	}
 
-	protected function serialize() {
+	public function serialize() {
 		return array(
 			'additions' => $this->additions,
 			'removals' => $this->removals,

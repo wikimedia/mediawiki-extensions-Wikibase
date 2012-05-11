@@ -54,21 +54,21 @@ $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 $wgAutoloadClasses['WikibaseLibHooks'] 				= $dir . 'WikibaseLib.hooks.php';
 
 // includes
-$wgAutoloadClasses['WikibaseChanges'] 				= $dir . 'WikibaseChanges.php';
-$wgAutoloadClasses['WikibaseListDiff'] 				= $dir . 'WikibaseListDiff.php';
-$wgAutoloadClasses['WikibaseMapDiff'] 				= $dir . 'WikibaseMapDiff.php';
+$wgAutoloadClasses['WikibaseChanges'] 				= $dir . 'includes/WikibaseChanges.php';
+$wgAutoloadClasses['WikibaseListDiff'] 				= $dir . 'includes/WikibaseListDiff.php';
+$wgAutoloadClasses['WikibaseMapDiff'] 				= $dir . 'includes/WikibaseMapDiff.php';
 
 // includes/changes
-$wgAutoloadClasses['WikibaseAliasChange'] 			= $dir . 'WikibaseAliasChange.php';
-$wgAutoloadClasses['WikibaseChange'] 				= $dir . 'WikibaseChange.php';
-$wgAutoloadClasses['WikibaseListChange'] 			= $dir . 'WikibaseListChange.php';
-$wgAutoloadClasses['WikibaseMapChange'] 			= $dir . 'WikibaseMapChange.php';
-$wgAutoloadClasses['WikibaseSitelinkChange'] 		= $dir . 'WikibaseSitelinkChange.php';
+$wgAutoloadClasses['WikibaseAliasChange'] 			= $dir . 'includes/changes/WikibaseAliasChange.php';
+$wgAutoloadClasses['WikibaseChange'] 				= $dir . 'includes/changes/WikibaseChange.php';
+$wgAutoloadClasses['WikibaseListChange'] 			= $dir . 'includes/changes/WikibaseListChange.php';
+$wgAutoloadClasses['WikibaseMapChange'] 			= $dir . 'includes/changes/WikibaseMapChange.php';
+$wgAutoloadClasses['WikibaseSitelinkChange'] 		= $dir . 'includes/changes/WikibaseSitelinkChange.php';
 
 // tests
-$wgAutoloadClasses['WikibaseChangesTest'] 			= $dir . 'WikibaseSitelinkChange.php';
-$wgAutoloadClasses['WikibaseListDiffTest'] 			= $dir . 'WikibaseListDiffTest.php';
-$wgAutoloadClasses['WikibaseMapDiffTest'] 			= $dir . 'WikibaseMapDiffTest.php';
+$wgAutoloadClasses['WikibaseChangesTest'] 			= $dir . 'tests/phpunit/WikibaseSitelinkChange.php';
+$wgAutoloadClasses['WikibaseListDiffTest'] 			= $dir . 'tests/phpunit/WikibaseListDiffTest.php';
+$wgAutoloadClasses['WikibaseMapDiffTest'] 			= $dir . 'tests/phpunit/WikibaseMapDiffTest.php';
 
 
 
