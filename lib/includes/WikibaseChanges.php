@@ -62,6 +62,14 @@ class WikibaseChanges extends ORMTable {
 		);
 	}
 
+	/**
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 * @param boolean $loadDefaults
+	 *
+	 * @return WikibaseChange
+	 */
 	public function newFromArray( array $data, $loadDefaults = false ) {
 		$class = $data['type'];
 		return new $class( $this, $data, $loadDefaults );

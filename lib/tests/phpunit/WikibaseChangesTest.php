@@ -25,16 +25,44 @@ class WikibaseChangesTest extends MediaWikiTestCase {
 
 	public function newFromArrayProvider() {
 		return array(
-			array(),
-
+			array(
+				array(
+					'type' => 'WikibaseSitelinkChange',
+					'user_id' => $GLOBALS['wgUser']->getId(),
+					'revision_id' => 9001,
+					'object_id' => 42,
+					'info' => WikibaseMapDiff::newEmpty()
+				),
+				true
+			),
+			array(
+				array(
+					'type' => 'WikibaseAliasChange',
+					'user_id' => $GLOBALS['wgUser']->getId(),
+					'revision_id' => 9001,
+					'object_id' => 42,
+					'info' => WikibaseListDiff::newEmpty()
+				),
+				true
+			),
 		);
 	}
 
 	/**
-	 * @dataProvider newFromArraysProvider
+	 * @dataProvider newFromArrayProvider
 	 */
-	public function testNewFromArray( array $data ) {
+	public function testNewFromArray( array $data, $loadDefaults = false ) {
+		$change = WikibaseChanges::newFromArray( $data, $loadDefaults );
 
+		$this->assertEquals( $data['type'], get_class( $change ) );
+
+		$this->assertEquals( $GLOBALS['wgUser']->getId(), $change->getUser()->getId() );
+
+		foreach ( array( 'revision_id', 'object_id', 'user_id', 'type' ) as $field ) {
+			$this->assertEquals( $data[$field], $change->getField( $field ) );
+		}
+
+		$this->assertTrue( $change->isEmpty() );
 	}
 
 }

@@ -51,4 +51,16 @@ abstract class WikibaseListChange extends WikibaseChange {
 		return $instance;
 	}
 
+	/**
+	 * Returns whether the change is empty.
+	 * If it's empty, it can be ignored.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return $this->getDiff()->isEmpty();
+	}
+
 }
