@@ -27,7 +27,7 @@ abstract class WikibaseMapChange extends WikibaseChange {
 	 *
 	 * @param WikibaseMapDiff $diff
 	 */
-	public function setDiff( WikibaseListDiff $diff ) {
+	public function setDiff( WikibaseMapDiff $diff ) {
 		return $this->setField( 'info', $diff );
 	}
 

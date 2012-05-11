@@ -49,6 +49,9 @@ final class WikibaseLibHooks {
 		$files[] = $testDir . 'WikibaseListDiffTest.php';
 		$files[] = $testDir . 'WikibaseMapDiffTest.php';
 
+		// changes
+		$files[] = $testDir . 'changes/WikibaseSitelinkChangeTest.php';
+
 		return true;
 	}
 

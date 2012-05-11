@@ -70,6 +70,8 @@ $wgAutoloadClasses['WikibaseChangesTest'] 			= $dir . 'tests/phpunit/WikibaseSit
 $wgAutoloadClasses['WikibaseListDiffTest'] 			= $dir . 'tests/phpunit/WikibaseListDiffTest.php';
 $wgAutoloadClasses['WikibaseMapDiffTest'] 			= $dir . 'tests/phpunit/WikibaseMapDiffTest.php';
 
+// tests/changes
+$wgAutoloadClasses['WikibaseSitelinkChangeTest'] 	= $dir . 'tests/phpunit/changes/WikibaseSitelinkChangeTest.php';
 
 
 // Hooks
