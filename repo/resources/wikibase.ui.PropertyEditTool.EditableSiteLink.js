@@ -180,7 +180,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			linktitle: linkValues[1],
 			token: window.mw.config.get( 'wbEditToken' )
 		};
-		if( apiAction === this.API_ACTION.REMOVE ) {
+		if( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) {
 			return $.extend( params, { link: 'remove' } );
 		} else {
 			return $.extend( params, { link: 'set' } );

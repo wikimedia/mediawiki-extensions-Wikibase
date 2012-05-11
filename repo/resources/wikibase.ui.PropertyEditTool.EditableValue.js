@@ -33,11 +33,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * @const
+	 * Actions for doApiAction()
 	 * @enum number
 	 */
 	API_ACTION: {
 		SAVE: 1,
-		REMOVE: 2
+		REMOVE: 2,
+		/**
+		 * A save action which will trigger a remove, the actual difference to a real remove is how this action is
+		 * handled in the interface
+		 */
+		SAVE_TO_REMOVE: 3
 	},
 	
 	/**
@@ -214,7 +220,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			// no API call necessary since value hasn't been stored yet.
 			degrade();
 		} else {
-			this.doApiCall( this.API_ACTION.REMOVE, $.proxy( degrade, this ) );
+			var action = preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
+			this.performApiAction( action, $.proxy( degrade, this ) );
 		}
 	},
 
@@ -228,7 +235,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			return this.remove( true );
 		}
 
-		this.doApiCall( this.API_ACTION.SAVE, $.proxy(
+		this.performApiAction( this.API_ACTION.SAVE, $.proxy(
 			function( response ) {
 				var wasPending = this.isPending();
 				this._reTransform( true );
@@ -350,12 +357,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * Does the actual API call
+	 * Performs one of the actions available in the this.API_ACTION enum and handles all API related stuff.
 	 *
 	 * @param number apiAction see this.API_ACTION enum for all available actions
 	 * @param function success function to be called when the AJAX request returns successfully
 	 */
-	doApiCall: function( apiAction, onSuccess ) {
+	performApiAction: function( apiAction, onSuccess ) {
 		var apiCall = this.getApiCallParams( apiAction );
 		
 		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
