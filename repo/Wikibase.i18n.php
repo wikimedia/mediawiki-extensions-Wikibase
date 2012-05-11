@@ -47,17 +47,17 @@ $messages['en'] = array(
  * @author Jeblad
  */
 $messages['qqq'] = array(
-	'wikibase-desc' => '{{desc}}',
+	'wikibase-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-edit' => 'This is a generic text used for a link that puts the user interface into edit mode for an existing element of some kind.',
 	'wikibase-save' => 'This is a generic text used for a link that saves what the user has done while the user interface has been in edit mode.',
 	'wikibase-cancel' => 'This is a generic text used for a link that cancels what the user has done while the user interface has been in edit mode.',
 	'wikibase-add' => 'This is a generic text used for a link that puts the user interface into edit mode for an additional element of some kind.',
-	'wikibase-label-edit-placeholder' => 'This is a generic text used while editing a (possibly new) label.',
-	'wikibase-description-edit-placeholder' => 'This is a generic text used while editing a (possibly new) description.',
+	'wikibase-label-edit-placeholder' => 'This is a generic text used while editing a (possibly new) label. See also Wikidatas glossary on [[m:Wikidata/Glossary#Label|label]].',
+	'wikibase-description-edit-placeholder' => 'This is a generic text used while editing a (possibly new) description. See also Wikidatas glossary on [[m:Wikidata/Glossary#Description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => 'This is a generic text used while defining the site for a (possibly new) sitelink.',
 	'wikibase-sitelink-page-edit-placeholder' => 'This is a generic text used while defining the page for a (possibly new) sitelink.',
-	'wikibase-label-input-help-message' => 'Help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form.',
-	'wikibase-description-input-help-message' => 'Help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form.',
+	'wikibase-label-input-help-message' => 'Help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#Label|label]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-description-input-help-message' => 'Help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#Description|description]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks' => 'Pages on a specific cluster of sites linked to this item',
 	'wikibase-sitelinks-add' => 'Add a sitelink to a language specific page on the cluster.',
 	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.',
