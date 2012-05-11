@@ -2,6 +2,7 @@
 
 /**
  * Class representing the diff between to associative arrays.
+ * Immutable.
  *
  * @since 0.1
  *
@@ -23,15 +24,9 @@ class WikibaseMapDiff implements Serializable, Iterator {
 	 */
 	protected $key;
 
-	/**
-	 * @var array
-	 */
-	protected $current;
-
 	protected function __construct( array $items ) {
 		$this->items = $items;
-		$this->key = 0;
-		$this->setCurrent( $this->res->current() );
+		$this->rewind();
 	}
 
 	public function serialize() {
@@ -95,13 +90,6 @@ class WikibaseMapDiff implements Serializable, Iterator {
 	}
 
 	/**
-	 * @param array|false $item
-	 */
-	protected function setCurrent( $item ) {
-		$this->current = $item;
-	}
-
-	/**
 	 * @return integer
 	 */
 	public function count() {
@@ -119,7 +107,7 @@ class WikibaseMapDiff implements Serializable, Iterator {
 	 * @return array
 	 */
 	public function current() {
-		return $this->current;
+		return $this->items[$this->key];
 	}
 
 	/**
@@ -130,22 +118,20 @@ class WikibaseMapDiff implements Serializable, Iterator {
 	}
 
 	public function next() {
-		$row = next( $this->items );
-		$this->setCurrent( $row );
-		$this->key++;
+		next( $this->items );
+		$this->key = key( $this->items );
 	}
 
 	public function rewind() {
-		rewind( $this->items );
-		$this->key = 0;
-		$this->setCurrent( current( $this->items ) );
+		reset( $this->items );
+		$this->key = key( $this->items );
 	}
 
 	/**
 	 * @return boolean
 	 */
 	public function valid() {
-		return $this->current !== false;
+		return $this->key !== false && isset( $this->items[$this->key] );
 	}
 
 }
