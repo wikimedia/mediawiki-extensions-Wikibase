@@ -69,13 +69,19 @@ class WikibaseMapDiffTest extends MediaWikiTestCase {
 	 * @dataProvider newFromArraysProvider
 	 */
 	public function testNewFromArrays( array $from, array $to, array $expected, $emptyValue = null, $recursive = false ) {
-		$actual = iterator_to_array( WikibaseMapDiff::newFromArrays( $from, $to, $emptyValue, $recursive ) );
+		$diff = WikibaseMapDiff::newFromArrays( $from, $to, $emptyValue, $recursive );
+		$actual = iterator_to_array( $diff );
 
 		// Sort to get rid of differences in order, since no promises about order are made.
 		asort( $expected );
 		asort( $actual );
 
 		$this->assertEquals( $expected, $actual );
+
+		$this->assertEquals(
+			$actual === array(),
+			$diff->isEmpty()
+		);
 	}
 
 }
