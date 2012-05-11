@@ -218,6 +218,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			return false;
 		}
 		this._isInEditMode = true;
+		this._subject.addClass( this.UI_CLASS + '-ineditmode' );
 		
 		$.each( this._interfaces, function( index, elem ) {
 			elem.startEditing();
@@ -300,8 +301,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		$.each( this._interfaces, function( index, elem ) {
 			elem.stopEditing( save );
 		} );
+
 		this._toolbar.editGroup.btnSave.removeTooltip();
+
 		this._isInEditMode = false; // out of edit mode after interfaces are converted back to HTML
+		this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
+
 		return this.isPending();
 	},
 

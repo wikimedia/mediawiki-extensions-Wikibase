@@ -85,18 +85,13 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		var editableSiteLink = window.wikibase.ui.PropertyEditTool.prototype._initSingleValue.call( this, valueElem );
 
 		var valElem = editableSiteLink._subject;
-		var self = this;
 
 		valElem.on( 'mouseenter', function(){
-			if( ! self.isInEditMode() ) {
-				valElem.addClass( editableSiteLink.UI_CLASS + '-inhover' );
-			}
+			valElem.addClass( editableSiteLink.UI_CLASS + '-inhover' );
 		} );
 		valElem.on( 'mouseleave', function(){
-			if( ! editableSiteLink.isInEditMode() ) {
-				// TODO: also remove when using enter key or esc to stop editing!
-				valElem.removeClass( editableSiteLink.UI_CLASS + '-inhover' );
-			}
+			valElem.removeClass( editableSiteLink.UI_CLASS + '-inhover' );
+			// NOTE: in case still in edit mode, we NEVER hide it via some css rules
 		} );
 
 		return editableSiteLink;

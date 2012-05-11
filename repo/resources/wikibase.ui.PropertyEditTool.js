@@ -304,7 +304,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	enterNewValue: function( value ) {
 		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
 		newValueElem.addClass( 'wb-pending-value' );
-		
+
 		this._subject.append( newValueElem );
 		var newValue = this._initSingleValue( newValueElem );
 

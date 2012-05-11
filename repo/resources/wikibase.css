@@ -44,7 +44,7 @@ table.wb-sitelinks th, table.wb-sitelinks td {
 	border-bottom: 1px solid #ccc;
 	margin: 0;
 	padding: 0 0.4em;
-	height: 2.2em; /* steady height when input boxes are inserted compared with padding usage */
+	height: 2.25em; /* steady height when input boxes are inserted compared with padding usage */
 
 }
 table.wb-sitelinks th {
@@ -57,7 +57,7 @@ table.wb-sitelinks th {
 	}
 
 table.wb-sitelinks tr:hover td,
-table.wb-sitelinks tr.wb-pending-value td {
+table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
 	/*background-color:#5dc9f4;*/
 	background-color:#D6F3FF;
 }

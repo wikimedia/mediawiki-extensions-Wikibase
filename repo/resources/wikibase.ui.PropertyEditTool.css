@@ -19,14 +19,14 @@ h1.firstHeading .wb-ui-toolbar {
 	}
 
 .wb-ui-toolbar, .wb-property-container-value {
-	margin:0 .3em;
+	margin: .3em;
 }
 
 .mw-content-rtl .ui-autocomplete-loading { /* set AJAX spinner to left of the autocomplete input box in rtl */
 	background-position:left center;
 }
 
-.wb-ui-propertyedittool-counter-pending, .wb-pending-value .wb-ui-propertyedittool-editablevalue-index  {
+.wb-ui-propertyedittool-counter-pending {
 	margin-left: .25em;
 	color: #57a7b9;
 	font-weight: bold;
@@ -38,13 +38,13 @@ h1.firstHeading .wb-ui-toolbar {
 
 .wb-sitelinks th.wb-ui-propertyedittool-counterinheading {
 	text-align: right;
-	font-size: .99em;
 }
 
-.wb-ui-propertyedittool-editablevalue-toolbarparent {
+.wb-sitelinks .wb-ui-propertyedittool-editablevalue-toolbarparent .wb-ui-toolbar {
 	visibility: hidden;
 }
-.wb-ui-propertyedittool-editablevalue-inhover .wb-ui-propertyedittool-editablevalue-toolbarparent {
+.wb-sitelinks .wb-ui-propertyedittool-editablevalue-inhover .wb-ui-propertyedittool-editablevalue-toolbarparent .wb-ui-toolbar,
+.wb-sitelinks .wb-ui-propertyedittool-editablevalue-ineditmode .wb-ui-propertyedittool-editablevalue-toolbarparent .wb-ui-toolbar {
 	visibility: visible;
 }
 
