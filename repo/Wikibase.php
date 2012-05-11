@@ -250,6 +250,7 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase',
 		'wikibase.ui.Toolbar',
 		'jquery.ui.autocomplete',
+		'mediawiki.api',
 		'mediawiki.Title',
 		'mediawiki.jqueryMsg' // for {{plural}} and {{gender}} support in messages
 	),

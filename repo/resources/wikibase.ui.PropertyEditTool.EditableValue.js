@@ -361,19 +361,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 *
 	 * @param number apiAction see this.API_ACTION enum for all available actions
 	 * @param function success function to be called when the AJAX request returns successfully
+	 * @return jqXHR
 	 */
 	performApiAction: function( apiAction, onSuccess ) {
 		var apiCall = this.getApiCallParams( apiAction );
+		var localApi = new mw.Api();
 		
-		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
-			var localApi = new mw.Api();
-			localApi.post( apiCall, {
-				ok: onSuccess,
-				err: jQuery.proxy( function( textStatus, response ) {
-					this._apiCallErr( textStatus, response, apiAction );
-				}, this )
-			} );
-		}, this ) );
+		return localApi.post( apiCall, {
+			ok: onSuccess,
+			err: jQuery.proxy( function( textStatus, response ) {
+				this._apiCallErr( textStatus, response, apiAction );
+			}, this )
+		} );
 	},
 
 	/**
