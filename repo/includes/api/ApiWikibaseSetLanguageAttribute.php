@@ -60,50 +60,16 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		$labels = $item->getLabels();
 		$descriptions = $item->getDescriptions();
 		$success = false;
-		switch ($params['item']) {
-			case 'update':
-				if ( isset($params['label']) ) {
-					if ( !isset($labels[$params['language']]) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
-					}
-					$this->setItemLabel( $item, $params['language'], $params['label'] );
-				}
-				if ( isset($params['description']) ) {
-					if ( !isset($descriptions[$params['language']]) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
-					}
-					$this->setItemDescription( $item, $params['language'], $params['description'] );
-				}
-				$success = true;
-				break;
-			case 'add':
-				if ( isset($params['label']) ) {
-					if ( isset($labels[$params['language']]) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-label-found' ), 'label-found' );
-					}
-					$this->setItemLabel( $item, $params['language'], $params['label'] );
-				}
-				if ( isset($params['description']) ) {
-					if ( isset($descriptions[$params['language']]) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-description-found' ), 'description-found' );
-					}
-					$this->setItemDescription( $item, $params['language'], $params['description'] );
-				}
-				$success = true;
-				break;
-			case 'set':
-				if (isset($params['label'])) {
-					$this->setItemLabel( $item, $params['language'], $params['label'] );
-				}
-				if (isset($params['description'])) {
-					$this->setItemDescription( $item, $params['language'], $params['description'] );
-				}
-				$success = true;
-				break;
-			default:
-				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+		// inserted fixed code
+		
+		if (isset($params['label'])) {
+			$this->setItemLabel( $item, $params['language'], $params['label'] );
 		}
-		return $success;
+		if (isset($params['description'])) {
+			$this->setItemDescription( $item, $params['language'], $params['description'] );
+		}
+		$success = true;
+		
 	}
 	
 	/**
@@ -115,7 +81,6 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @param string $label
 	 */
 	protected function setItemLabel( WikibaseItem &$item, $language, $label ) {
-		// TODO: Normalize
 		$value = $item->setLabel( $language, $label );
 		if ( $label !== $value ) {
 			$this->getResult()->addValue(
@@ -211,11 +176,6 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'label-or-description', 'info' => wfMsg( 'wikibase-api-label-or-description' ) ),
-			array( 'code' => 'label-not-found', 'info' => wfMsg( 'wikibase-api-label-not-found' ) ),
-			array( 'code' => 'description-not-found', 'info' => wfMsg( 'wikibase-api-description-not-found' ) ),
-			array( 'code' => 'label-found', 'info' => wfMsg( 'wikibase-api-label-found' ) ),
-			array( 'code' => 'description-found', 'info' => wfMsg( 'wikibase-api-description-found' ) ),
-			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
 			) );
 	}
 

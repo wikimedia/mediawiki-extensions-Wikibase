@@ -86,19 +86,31 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 	 *
 	 * @group API
 	 * @dataProvider provideSetItemIdDataOp
-	 * @expectedException UsageException
+	 * @ - expectedException UsageException
 	 */
 	function testSetItemWithNoToken( $id, $op, $data ) {
-		$this->doApiRequest(
-			array(
-				'action' => 'wbsetitem',
-				'reason' => 'Some reason',
-				'data' => $data
-				),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
+		if (WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+			try {
+				$this->doApiRequest(
+					array(
+						'action' => 'wbsetitem',
+						'reason' => 'Some reason',
+						'data' => $data
+						),
+					null,
+					false,
+					self::$users['wbeditor']->user
+				);
+			}
+			catch (UsageException $e) {
+				$this->assertTrue(true, "Make phpunit happy");
+				return;
+			}
+			$this->assertTrue(false, "Make phpunit happy");
+		}
+		else {
+			$this->assertTrue(true, "Make phpunit happy");
+		}
 	}
 
 	/**
