@@ -65,10 +65,6 @@ class WikibaseItemViewTests extends MediaWikiTestCase {
         	"Could not find a view" );
         
         $html = $view->getHTML();
-        if ( self::$num == 3 ) {
-        	print_r($item);
-        	print($html);
-        }
         
         if ( is_string($expected) ) {
 	        $this->assertRegExp(
