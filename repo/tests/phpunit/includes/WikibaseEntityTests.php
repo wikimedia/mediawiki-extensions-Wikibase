@@ -1,5 +1,6 @@
 <?php
-/* Tests for the WikibaseEntity class.
+/**
+ *  Tests for the WikibaseEntity class.
  *
  * @file
  * @since 0.1
