@@ -350,6 +350,16 @@ $messages['ja'] = array(
 	'wikibase-remove' => '除去',
 );
 
+/** Kurdish (Latin script) (‪Kurdî (latînî)‬)
+ * @author George Animal
+ */
+$messages['ku-latn'] = array(
+	'wikibase-edit' => 'biguherîne',
+	'wikibase-save' => 'tomar bike',
+	'wikibase-cancel' => 'betal bike',
+	'wikibase-description-input-help-message' => 'Danasîneka kurt têkeve $1',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
