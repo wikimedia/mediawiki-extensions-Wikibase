@@ -98,6 +98,9 @@ class WikibaseUtilsTests extends MediaWikiTestCase {
     		$actual,
     		"The URL for site with code {$siteId} was not evaluated to the expected form"
     	);
+    	if (!substr_count($actual, $pageTitle)) {
+    		$this->markTestincomplete("There are no traces of the title '{$pageTitle}' within the URL '{$actual}'");
+    	}
 	}
 	public function providerGetSiteUrl() {
     	return array(
