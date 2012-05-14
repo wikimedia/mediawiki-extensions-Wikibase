@@ -7,6 +7,7 @@
  *
  * @license GNU GPL v2+
  * @author H. Snater
+ * @author Daniel Werner
  */
 
 .firstHeading {
@@ -57,8 +58,9 @@ table.wb-sitelinks th {
 	}
 
 table.wb-sitelinks {
-	width: 99%;
+	width: 100%;
 	max-width: 50em;
+	display: block; /* safari and chrome */
 }
 table.wb-sitelinks td.wb-sitelinks-site {
 	width: 33%;
@@ -67,6 +69,11 @@ table.wb-sitelinks td.wb-sitelinks-link {
 	/* set no width here so sitelinks width has the highest priority and this will be
 	 * shared together with the toolbar which always has a variable width (changes after "edit")
 	 */
+	width: 66%;
+}
+.wb-sitelinks td.wb-ui-propertyedittool-editablevalue-toolbarparent {
+	/* don't use more space than necessary so the rest goes to the site links */
+	width: 0;
 }
 
 table.wb-sitelinks tr:hover td,
