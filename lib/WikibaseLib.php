@@ -52,6 +52,7 @@ $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 
 // Autoloading
 $wgAutoloadClasses['WikibaseLibHooks'] 				= $dir . 'WikibaseLib.hooks.php';
+$wgAutoloadClasses['WBLSettings'] 					= $dir . 'WikibaseLib.settings.php';
 
 // includes
 $wgAutoloadClasses['WikibaseChanges'] 				= $dir . 'includes/WikibaseChanges.php';
