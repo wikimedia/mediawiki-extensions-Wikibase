@@ -12,6 +12,7 @@
 
 .wb-ui-toolbar, .wb-ui-toolbar-group {
 	display: inline-block;
+	white-space: nowrap;
 }
 
 	.wb-ui-toolbar-label,

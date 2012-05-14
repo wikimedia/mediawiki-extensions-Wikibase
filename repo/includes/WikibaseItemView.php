@@ -79,11 +79,11 @@ class WikibaseItemView extends ContextSource {
 					'class' => 'wb-sitelinks-' . $siteId . ' ' . $alternatingClass )
 				);
 				$html .= Html::element(
-						'td', array( 'class' => 'wb-sitelinks-site-' . $siteId ),
+						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $siteId ),
 						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
 						Language::fetchLanguageName( $siteId ) . ' (' . $siteId . ')'
 				);
-				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link-' . $siteId ) );
+				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $siteId ) );
 				$html .= Html::element(
 					'a',
 					array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
