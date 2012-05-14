@@ -64,13 +64,29 @@ class ApiWikibaseSetAliasesTest extends ApiWikibaseModifyItemTest {
 	 * @dataProvider paramProvider
 	 */
 	public function testSetAliases( $langCode, $param, $value, $expected ) {
-		$apiResponse = $this->doApiRequest( array(
-			'token' => self::$token,
+		
+		$req = array();
+		if (WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true) {
+			$first = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'gettoken' => '' ),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			
+			$req['token'] = $first[0]['wbsetitem']['setitemtoken'];
+		}
+		
+		$req = array_merge( $req, array(
 			'id' => self::$item->getId(),
 			'action' => 'wbsetaliases',
 			'language' => $langCode,
 			$param => $value
 		) );
+
+		$apiResponse = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 
 		$apiResponse = $apiResponse[0];
 
