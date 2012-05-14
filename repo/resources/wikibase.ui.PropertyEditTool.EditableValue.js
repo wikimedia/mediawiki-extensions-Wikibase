@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
 "use strict";
 
@@ -388,9 +389,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		} )
 		.fail( function( textStatus, response ) {
 			// remove and show immediately since we need nodes for the tooltip!
-			self._subject
-			.removeClass( self.UI_CLASS + '-waiting' )
-			.addClass( self.UI_CLASS + '-aftereditnotify' );
+			self._subject.removeClass( self.UI_CLASS + '-waiting' );
 
 			waitMsg.remove();
 			self._toolbar._elem.show();
@@ -483,8 +482,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var btn = ( apiAction === this.API_ACTION.REMOVE )
 			? this._toolbar.editGroup.btnRemove
 			: this._toolbar.editGroup.btnSave;
+
+		this._subject.addClass( this.UI_CLASS + '-aftereditnotify' );
+
 		btn.addTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' }, btn ) );
 		btn.tooltip.showMessage( true );
+		$( btn.tooltip ).on( 'Hide', $.proxy( function() {
+			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
+		}, this ) );
+
 		this.setFocus(); // re-focus input
 	},
 

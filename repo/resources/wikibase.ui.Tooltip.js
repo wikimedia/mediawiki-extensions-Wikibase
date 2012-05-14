@@ -19,6 +19,8 @@
  * @param object tipsyConfig (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
  * @param object parentObject (only required for error tooltip, has to have an implementation of removeTooltip() )
  * 					parent object that the tooltip is referred from
+ *
+ * @event Hide called after the tooltip was hidden from a previously visible state.
  */
 window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig, parentObject ) {
 	if( typeof subject != 'undefined' ) {
@@ -30,7 +32,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * @const
 	 * Class which marks the tooltip within the site html.
 	 */
-	UI_CLASS: 'wb-ui-toolbar-tooltip',
+	UI_CLASS: 'wb-ui-tooltip',
 
 	/**
 	 * @var jQuery element the tooltip should be attached to
@@ -119,8 +121,10 @@ window.wikibase.ui.Tooltip.prototype = {
 					&& $( node ).data( 'wikibase.ui.tooltip' )._isVisible
 				) {
 					var tooltip = $( node ).data( 'wikibase.ui.tooltip' );
-					var permanent = tooltip._permanent;
-					tooltip.showMessage();
+					if ( tooltip._permanent ) {
+						tooltip._isVisible = false;
+						tooltip.showMessage( tooltip._permanent ); // trigger showMessage() to reposition
+					}
 				}
 			} );
 		} );
@@ -246,13 +250,11 @@ window.wikibase.ui.Tooltip.prototype = {
 				} );
 				$( window ).one( 'click', $.proxy( function( event ) {
 					this._parentObject.removeTooltip();
-					this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
 				}, this ) );
 
 			}
 			if ( this._DomContent != null ) {
-				this._tipsy.$tip.find('.tipsy-inner').empty();
-				this._tipsy.$tip.find('.tipsy-inner').append( this._DomContent );
+				this._tipsy.$tip.find('.tipsy-inner').empty().append( this._DomContent );
 			}
 			this._isVisible = true;
 		}
@@ -273,6 +275,7 @@ window.wikibase.ui.Tooltip.prototype = {
 				this._tipsy.$tip.off( 'click' );
 				this._tipsy.hide();
 				this._isVisible = false;
+				$( this ).triggerHandler( 'Hide' ); // call event
 			}
 		}
 	},

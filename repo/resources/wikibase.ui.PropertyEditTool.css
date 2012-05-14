@@ -7,6 +7,7 @@
  *
  * @license GNU GPL v2+
  * @author H. Snater
+ * @author Daniel Werner
  */
 
 h1.firstHeading .wb-ui-toolbar {
@@ -25,14 +26,21 @@ h1.firstHeading .wb-ui-toolbar {
 	background-position:left center;
 }
 
-.wb-ui-propertyedittool-counter-pending {
-	margin-left: .25em;
-	color: #57a7b9;
-	font-weight: bold;
-}
-
 .wb-ui-propertyedittool-editablevalue-index {
 	width: 0; /* don't use extra space if we have a spacey table */
+}
+
+.wb-ui-propertyedittool-counter {
+	white-space: nowrap;
+}
+	.wb-ui-propertyedittool-counter-pending {
+		margin-left: .25em;
+		color: #57a7b9;
+		font-weight: bold;
+	}
+
+.wb-ui-propertyedittool-editablevalue-aftereditnotify .wb-ui-toolbar {
+	visibility: visible!important;
 }
 
 .wb-sitelinks th.wb-ui-propertyedittool-counterinheading {
@@ -49,10 +57,6 @@ h1.firstHeading .wb-ui-toolbar {
 
 .wb-sitelinks .wb-ui-propertyedittool-editablevalue-aftereditnotify td {
 	background-color:#FFDFC9!important;
-}
-
-.wb-ui-propertyedittool-editablevalue-aftereditnotify .wb-ui-toolbar {
-	visibility: visible!important;
 }
 
 .wb-sitelinks .wb-ui-propertyedittool-editablevalue-waiting .wb-ui-propertyedittool-editablevalue-toolbarparent {
