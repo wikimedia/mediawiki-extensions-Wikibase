@@ -72,11 +72,15 @@ class WikibasePollForChanges extends Maintenance {
 		$this->sleepInterval = (int)$this->getArg( 'sleepinterval', WBLSettings::get( 'pollDefaultInterval' ) );
 		$this->continueInterval = (int)$this->getArg( 'continueinterval', WBLSettings::get( 'pollContinueInterval' ) );
 
-		$this->doPoll();
+		while ( true ) {
+			usleep( $this->doPoll() * 1000 );
+		}
 	}
 
 	/**
 	 * Do a poll operation, finding all new changes.
+	 *
+	 * @return integer The amount of milliseconds the script should sleep before doing the next poll.
 	 */
 	protected function doPoll() {
 		$changes = $this->changes->select(
@@ -89,10 +93,16 @@ class WikibasePollForChanges extends Maintenance {
 			__METHOD__
 		);
 
-		if ( $changes->count() !== 0 ) {
+		if ( $changes->count() === 0 ) {
+			$this->msg( 'No new changes where found' );
+		}
+		else {
+			$this->msg( $changes->count() . ' new changes where found' );
+
 			wfRunHooks( 'WikibasePollBeforeHandle', array( $changes ) );
 
 			foreach ( $changes as /* WikibaseChange */ $change ) {
+				$this->msg( 'Handling change with id ' . $change->getId() );
 				wfRunHooks( 'WikibasePollHandle', array( $change ) );
 			}
 
@@ -101,11 +111,12 @@ class WikibasePollForChanges extends Maintenance {
 			wfRunHooks( 'WikibasePollAfterHandle', array( $changes ) );
 		}
 
-		sleep( $changes->count() === $this->pollLimit ? $this->continueInterval : $this->sleepInterval );
-
-		$this->doPoll();
+		return $changes->count() === $this->pollLimit ? $this->continueInterval : $this->sleepInterval;
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function getContinuationConds() {
 		$conds = array();
 
@@ -118,6 +129,15 @@ class WikibasePollForChanges extends Maintenance {
 		}
 
 		return $conds;
+	}
+
+	/**
+	 * Handle a message (ie display and logging)
+	 *
+	 * @param string $message
+	 */
+	protected function msg( $message ) {
+		echo $message . "\n";
 	}
 
 }

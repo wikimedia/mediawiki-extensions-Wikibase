@@ -82,3 +82,7 @@ $wgHooks['UnitTestsList'][]							= 'WikibaseLibHooks::registerUnitTests';
 
 
 $wgSharedTables[] = 'wb_changes';
+
+
+
+$egWBLSettings = array();
