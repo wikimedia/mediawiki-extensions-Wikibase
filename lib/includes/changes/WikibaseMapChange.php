@@ -11,7 +11,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class WikibaseMapChange extends WikibaseChange {
+class WikibaseMapChange extends WikibaseChange {
 
 	/**
 	 * @since 0.1

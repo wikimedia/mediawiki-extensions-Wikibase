@@ -11,7 +11,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class WikibaseChange extends ORMRow {
+class WikibaseChange extends ORMRow {
 
 	/**
 	 * @since 0.1

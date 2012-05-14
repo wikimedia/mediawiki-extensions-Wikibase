@@ -62,16 +62,29 @@ class WikibaseChanges extends ORMTable {
 		);
 	}
 
+	protected static $typeMap = array(
+		'alias' => 'WikibaseAliasChange',
+		'sitelink' => 'WikibaseSitelinkChange',
+	);
+
 	/**
+	 * Factory method to construct a new WikibaseChange instance.
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $data
 	 * @param boolean $loadDefaults
 	 *
 	 * @return WikibaseChange
+	 * @throws MWException
 	 */
 	public function newFromArray( array $data, $loadDefaults = false ) {
-		$class = $data['type'];
+		if ( !array_key_exists( 'type', $data ) ) {
+			throw new MWException( 'The type element must be set in the $data array before a new change can be constructed.' );
+		}
+
+		$class = array_key_exists( $data['type'], self::$typeMap ) ? self::$typeMap[$data['type']] : 'WikibaseChange';
+
 		return new $class( $this, $data, $loadDefaults );
 	}
 
