@@ -384,8 +384,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			// fade out wait text
 			waitMsg.fadeOut( 400, function() {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
-				waitMsg.remove(); self._toolbar._elem.fadeIn( 300 ); }
-			);
+				waitMsg.remove();
+
+				if( apiAction === self.API_ACTION.SAVE ) {
+					// only re-display toolbar if value wasn't removed
+					self._toolbar._elem.fadeIn( 300 );
+				}
+			} );
 		} )
 		.fail( function( textStatus, response ) {
 			// remove and show immediately since we need nodes for the tooltip!
@@ -485,9 +490,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		this._subject.addClass( this.UI_CLASS + '-aftereditnotify' );
 
-		btn.addTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' }, btn ) );
-		btn.tooltip.showMessage( true );
-		$( btn.tooltip ).on( 'Hide', $.proxy( function() {
+		btn.setTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' }, btn ) );
+		btn.getTooltip().show( true );
+		$( btn.getTooltip() ).on( 'Hide', $.proxy( function() {
 			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
 		}, this ) );
 

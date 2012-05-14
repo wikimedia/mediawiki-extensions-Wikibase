@@ -59,8 +59,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 									shortMessage: window.mw.msg( 'wikibase-error-autocomplete-connection' ),
 									message: window.mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
 								};
-								this.addTooltip( new window.wikibase.ui.Tooltip( this._inputElem, error, { gravity: 'nw' }, this ) );
-								this.tooltip.showMessage( true );
+								this.setTooltip( new window.wikibase.ui.Tooltip( this._inputElem, error, { gravity: 'nw' }, this ) );
+								this.tooltip.show( true );
 								this.setFocus(); // re-focus input
 							}
 						}, this )

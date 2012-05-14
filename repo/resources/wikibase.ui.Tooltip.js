@@ -127,8 +127,8 @@ window.wikibase.ui.Tooltip.prototype = {
 		// reposition tooltip when resizing the browser window
 		$( window ).on( 'resize', $.proxy( function( event ) {
 			if ( this._isVisible && this._permanent ) {
-				this.hideMessage(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
-				this.showMessage();
+				this.hide(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
+				this.show();
 			} else {
 				$( window ).off( event );
 			}
@@ -200,8 +200,8 @@ window.wikibase.ui.Tooltip.prototype = {
 				( typeof this._subject.data( 'events' ).mouseover == 'undefined' &&
 				typeof this._subject.data( 'events' ).mouseout == 'undefined' )
 			) {
-				this._subject.on( 'mouseover', jQuery.proxy( function() { this.showMessage(); }, this ) );
-				this._subject.on( 'mouseout', jQuery.proxy( function() { this.hideMessage(); }, this ) );
+				this._subject.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
+				this._subject.on( 'mouseout', jQuery.proxy( function() { this.hide(); }, this ) );
 			}
 		} else {
 			this._subject.off( 'mouseover' );
@@ -224,12 +224,21 @@ window.wikibase.ui.Tooltip.prototype = {
 	},
 
 	/**
+	 * Returns whether the tooltip is displayed currently.
+	 *
+	 * @return bool
+	 */
+	isVisible: function() {
+		return this._isVisible();
+	},
+
+	/**
 	 * show tooltip
 	 *
 	 * @param boolean permanent whether tooltip should be displayed permanently until hide() is being
 	 *        called explicitly. false by default.
 	 */
-	showMessage: function( permanent ) {
+	show: function( permanent ) {
 		if ( !this._isVisible ) {
 			this._tipsy.show();
 			if ( this._isError ) {
@@ -270,7 +279,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	/**
 	 * hide tooltip
 	 */
-	hideMessage: function() {
+	hide: function() {
 		if ( this._permanent && !this._hasEvents() || !this._permanent ) {
 			this._permanent = false;
 			this._toggleEvents( true );
@@ -322,7 +331,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	 */
 	destroy: function() {
 		if ( this._isVisible ) {
-			this.hideMessage();
+			this.hide();
 		}
 		this._toggleEvents( false );
 		this._tipsyConfig = null;

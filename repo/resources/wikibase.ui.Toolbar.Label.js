@@ -37,7 +37,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	/**
 	 * @var wikibase.ui.Tooltip tooltip attached to this label
 	 */
-	tooltip: null,
+	_tooltip: null,
 	
 	/**
 	 * Initializes the ui element.
@@ -84,7 +84,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	},
 	
 	/**
-	 * returns the labels content. If only text was set as content, a string will be returned, if
+	 * Returns the labels content. If only text was set as content, a string will be returned, if
 	 * HTML nodes were set, this will return a jQuery object.
 	 * 
 	 * @return jQuery|string
@@ -102,27 +102,58 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	},
 
 	/**
-	 * attach a tooltip message to this label
+	 * Attaches a tooltip message to this label
 	 *
 	 * @param string|window.wikibase.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
 	 */
-	addTooltip: function( tooltip ) {
+	setTooltip: function( tooltip ) {
+		// if last tooltip was visible, we make the new one visible as well
+		var wasVisible = false;
+
+		if ( this._tooltip !== null ) {
+			// remove existing tooltip first!
+			this.removeTooltip();
+			wasVisible = this._tooltip.isVisible();
+		}
 		if ( typeof tooltip == 'string' ) {
+			// build new tooltip from string:
 			this._elem.attr( 'title', tooltip );
-			this.tooltip = new window.wikibase.ui.Tooltip( this._elem, tooltip );
-		} else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
-			this.tooltip = tooltip;
+			this._tooltip = new window.wikibase.ui.Tooltip( this._elem, tooltip );
+		}
+		else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
+			this._tooltip = tooltip;
+		}
+		// restore previous tooltips visibility:
+		if( this._tooltip !== null ) {
+			if( wasVisible ) {
+				this._tooltip.show();
+			} else {
+				this._tooltip.hide();
+			}
 		}
 	},
 
 	/**
 	 * remove a tooltip message attached to this label
+	 *
+	 * @return bool whether a tooltip was set
 	 */
 	removeTooltip: function() {
-		if ( this.tooltip !== null ) {
-			this.tooltip.destroy();
-			this.tooltip = null;
+		if ( this._tooltip !== null ) {
+			this._tooltip.destroy();
+			this._tooltip = null;
+			return true;
 		}
+		return false;
+	},
+
+	/**
+	 * Returns the labels tooltip or null in case none is set yet.
+	 *
+	 * @return window.wikibase.ui.Tooltip|null
+	 */
+	getTooltip: function() {
+		return this._tooltip;
 	},
 	
 	/**
