@@ -120,7 +120,7 @@ final class WikibaseHooks {
 				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.Tooltip.tests.js'
+				'tests/qunit/wikibase.ui.Tooltip.tests.js'
 			),
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
