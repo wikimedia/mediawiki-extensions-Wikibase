@@ -56,6 +56,10 @@ h1.firstHeading .wb-ui-toolbar {
 	visibility: visible!important;
 }
 
+.wb-sitelinks .wb-ui-propertyedittool-editablevalue-waiting .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	text-align: center;
+}
+
 /********** TOOLTIP **********/
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */

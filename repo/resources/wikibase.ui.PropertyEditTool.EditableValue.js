@@ -374,24 +374,28 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		var waitMsg = $( '<span/>', {
 			'class': this.UI_CLASS + '-waitmsg',
-			'text': 'Save...' // TODO: Internationalize, think about animation and text
-		} ).appendTo( this._getToolbarParent() ).hide();
+			'text': mw.msg( 'wikibase-' + ( apiAction === this.API_ACTION.REMOVE ? 'remove' : 'save' ) + '-inprogress' )
+		} )
+		.appendTo( this._getToolbarParent() ).hide();
 
 		deferred
-			.done( function() {
-			self._subject.removeClass( self.UI_CLASS + '-waiting' );
+		.then( function() {
+			// fade out wait text
+			waitMsg.fadeOut( 400, function() {
+				self._subject.removeClass( self.UI_CLASS + '-waiting' );
+				waitMsg.remove(); self._toolbar._elem.fadeIn( 300 ); }
+			);
 		} )
-			.then( function() {
-				// fade out wait text
-				waitMsg.fadeOut( 400, function() { waitMsg.remove(); self._toolbar._elem.fadeIn( 300 ); } );
-			} )
-			.fail( function( textStatus, response ) {
-				// remove and show immediatelly since we need nodes for tooltip!
-				self._subject.addClass( self.UI_CLASS + '-aftereditnotify' );
-				waitMsg.remove();
-				self._toolbar._elem.show();
-				self._apiCallErr( textStatus, response, apiAction );
-			} );
+		.fail( function( textStatus, response ) {
+			// remove and show immediately since we need nodes for the tooltip!
+			self._subject
+			.removeClass( self.UI_CLASS + '-waiting' )
+			.addClass( self.UI_CLASS + '-aftereditnotify' );
+
+			waitMsg.remove();
+			self._toolbar._elem.show();
+			self._apiCallErr( textStatus, response, apiAction );
+		} );
 
 		this._toolbar._elem.fadeOut( 200, function() {
 			waitMsg.fadeIn( 200 );
