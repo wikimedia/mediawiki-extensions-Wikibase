@@ -18,6 +18,8 @@
  * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
  * @param object tipsyConfig (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
  * @param object parentObject (only required for error tooltip) parent object that the tooltip is referred from
+ *
+ * @event onHide called after the tooltip was hidden from a previously visible state.
  */
 window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig, parentObject ) {
 	if( typeof subject != 'undefined' ) {
@@ -29,7 +31,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * @const
 	 * Class which marks the tooltip within the site html.
 	 */
-	UI_CLASS: 'wb-ui-toolbar-tooltip',
+	UI_CLASS: 'wb-ui-tooltip',
 
 	/**
 	 * @var jQuery element the tooltip should be attached to
@@ -250,7 +252,6 @@ window.wikibase.ui.Tooltip.prototype = {
 				}, this ) );
 				$( window ).one( 'click', $.proxy( function( event ) {
 					this._parentObject.removeTooltip();
-					this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
 				}, this ) );
 
 			}
@@ -276,6 +277,8 @@ window.wikibase.ui.Tooltip.prototype = {
 			if ( this._isVisible ) {
 				this._tipsy.hide();
 				this._isVisible = false;
+				// call event:
+				$( this ).triggerHandler( 'Hide' );
 			}
 		}
 	},
