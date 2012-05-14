@@ -186,11 +186,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * anymore.
 	 */
 	destroy: function() {
+		this.stopEditing( false );
 		if( this._toolbar != null) {
 			this._toolbar.destroy();
 			this._toolbar = null;
 		}
-		this.stopEditing( false );
 	},
 
 	/**
@@ -479,29 +479,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var btn = ( apiAction === this.API_ACTION.REMOVE )
 			? this._toolbar.editGroup.btnRemove
 			: this._toolbar.editGroup.btnSave;
-		btn.addTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' } ) );
+		btn.addTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' }, btn ) );
 		btn.tooltip.showMessage( true );
-
-		// hide error tooltip when clicking outside of it
-		btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
-			event.stopPropagation();
-		} );
-
-		// resizing removes click event
-		$( window ).on( 'resize', function( event ) {
-			if ( btn.tooltip === null ) {
-				$( window ).off( event );
-			} else {
-				btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
-					event.stopPropagation();
-				} );
-			}
-		} );
-		$( window ).one( 'click', $.proxy( function( event ) {
-			btn.removeTooltip();
-			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
-		}, this ) );
-
 		this.setFocus(); // re-focus input
 	},
 

@@ -14,14 +14,14 @@
 /**
  * a generic tooltip
  *
- * @param jQuery subject element the tooltip shall be attached to
- * @param String tooltip message (may contain HTML markup)
- * @param Object (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
- * @param bool (optional, default: false) whether the tooltip is an error tooltip being displayed in red colors
+ * @param jQuery subject tooltip will be attached to this node
+ * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
+ * @param object tipsyConfig (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
+ * @param object parentObject (only required for error tooltip) parent object that the tooltip is referred from
  */
-window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig, isError ) {
+window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig, parentObject ) {
 	if( typeof subject != 'undefined' ) {
-		this._init( subject, tooltipContent, tipsyConfig, isError );
+		this._init( subject, tooltipContent, tipsyConfig, parentObject );
 	}
 };
 window.wikibase.ui.Tooltip.prototype = {
@@ -67,13 +67,19 @@ window.wikibase.ui.Tooltip.prototype = {
 	_DomContent: null,
 
 	/**
+	 * @var object parent object the tooltip is referred from
+	 */
+	_parentObject: null,
+
+	/**
 	 * initializes ui element, called by the constructor
 	 *
-	 * @param jQuery subject tooltip will be attached to this
+	 * @param jQuery subject tooltip will be attached to this node
 	 * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
 	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
+	 * @param object parentObject (only required for error tooltip) parent object that the tooltip is referred from
 	 */
-	_init: function( subject, tooltipContent, tipsyConfig ) {
+	_init: function( subject, tooltipContent, tipsyConfig, parentObject ) {
 		this._subject = subject;
 		this._isError = false;
 		if ( typeof tooltipContent == 'string' ) {
@@ -97,6 +103,7 @@ window.wikibase.ui.Tooltip.prototype = {
 			this._tipsyConfig = {};
 			this.setGravity( 'ne' );
 		}
+		this._parentObject = parentObject;
 		this._initTooltip();
 	},
 
@@ -116,10 +123,12 @@ window.wikibase.ui.Tooltip.prototype = {
 		this._tipsy = this._subject.data( 'tipsy' );
 
 		// reposition tooltip when resizing the browser window
-		$( window ).on( 'resize', $.proxy( function() {
+		$( window ).on( 'resize', $.proxy( function( event ) {
 			if ( this._isVisible && this._permanent ) {
 				this.hideMessage(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
 				this.showMessage();
+			} else {
+				$( window ).off( event );
 			}
 		}, this ) );
 
@@ -172,6 +181,7 @@ window.wikibase.ui.Tooltip.prototype = {
 				'class': 'wb-clear'
 			} ) );
 		}
+
 		return content;
 	},
 
@@ -182,8 +192,15 @@ window.wikibase.ui.Tooltip.prototype = {
 	 */
 	_toggleEvents: function( activate ) {
 		if ( activate ) {
-			this._subject.on( 'mouseover', jQuery.proxy( function() { this.showMessage(); }, this ) );
-			this._subject.on( 'mouseout', jQuery.proxy( function() { this.hideMessage(); }, this ) );
+			// only attach events when not yet attached to prevent memory leak
+			if (
+				typeof this._subject.data( 'events' ) == 'undefined' ||
+				( typeof this._subject.data( 'events' ).mouseover == 'undefined' &&
+				typeof this._subject.data( 'events' ).mouseout == 'undefined' )
+			) {
+				this._subject.on( 'mouseover', jQuery.proxy( function() { this.showMessage(); }, this ) );
+				this._subject.on( 'mouseout', jQuery.proxy( function() { this.hideMessage(); }, this ) );
+			}
 		} else {
 			this._subject.off( 'mouseover' );
 			this._subject.off( 'mouseout' );
@@ -215,6 +232,27 @@ window.wikibase.ui.Tooltip.prototype = {
 			this._tipsy.show();
 			if ( this._isError ) {
 				this._tipsy.$tip.addClass( 'wb-error' );
+
+				// hide error tooltip when clicking outside of it
+				this._tipsy.$tip.on( 'click', function( event ) {
+					event.stopPropagation();
+				} );
+
+				// resizing removes click event
+				$( window ).on( 'resize', $.proxy( function( event ) {
+					if ( this === null ) {
+						$( window ).off( event );
+					} else {
+						this._tipsy.$tip.on( 'click', function( event ) {
+							event.stopPropagation();
+						} );
+					}
+				}, this ) );
+				$( window ).one( 'click', $.proxy( function( event ) {
+					this._parentObject.removeTooltip();
+					this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
+				}, this ) );
+
 			}
 			if ( this._DomContent != null ) {
 				this._tipsy.$tip.find('.tipsy-inner').empty();
