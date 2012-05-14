@@ -104,13 +104,15 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	/**
 	 * attach a tooltip message to this label
 	 *
-	 * @param string message tooltip message
-	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
-	 * @param bool (optional, default: false) whether the tooltip is an error tooltip being displayed in red colors
+	 * @param string|window.wikibase.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
 	 */
-	addTooltip: function( message, tipsyConfig, isError ) {
-		this._elem.attr( 'title', message );
-		this.tooltip = new window.wikibase.ui.Tooltip( this._elem, message, tipsyConfig, isError );
+	addTooltip: function( tooltip ) {
+		if ( typeof tooltip == 'string' ) {
+			this._elem.attr( 'title', tooltip );
+			this.tooltip = new window.wikibase.ui.Tooltip( this._elem, tooltip );
+		} else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
+			this.tooltip = tooltip;
+		}
 	},
 
 	/**

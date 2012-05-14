@@ -88,10 +88,6 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		} ) );
 		this.tooltipAnchor.addTooltip( this._editableValue.getInputHelpMessage() );
 
-//		this.tooltipAnchor = new window.wikibase.ui.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );
-
-
-
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.Toolbar.Button;
 		

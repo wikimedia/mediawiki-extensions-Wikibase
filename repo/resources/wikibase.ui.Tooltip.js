@@ -69,13 +69,13 @@ window.wikibase.ui.Tooltip.prototype = {
 	/**
 	 * initializes ui element, called by the constructor
 	 *
-	 * @param jQuery subject
-	 * @param string tooltipContent (may contain HTML markup)
+	 * @param jQuery subject tooltip will be attached to this
+	 * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
 	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
-	 * @param bool (optional, default: false) whether the tooltip is an error tooltip being displayed in red colors
 	 */
-	_init: function( subject, tooltipContent, tipsyConfig, isError ) {
+	_init: function( subject, tooltipContent, tipsyConfig ) {
 		this._subject = subject;
+		this._isError = false;
 		if ( typeof tooltipContent == 'string' ) {
 			this._subject.attr( 'title', tooltipContent );
 		} else {
@@ -83,7 +83,12 @@ window.wikibase.ui.Tooltip.prototype = {
 			being set; however, setting a complex HTML structure cannot be done via the title tag, so the content is
 			stored in a custom variable that will be injected when the message is triggered to show */
 			this._subject.attr( 'title', '.' );
-			this._DomContent = tooltipContent;
+			if ( typeof tooltipContent == 'object' && typeof tooltipContent.code != 'undefined' ) {
+				this._DomContent = this._buildErrorTooltip( tooltipContent );
+				this._isError = true;
+			} else {
+				this._DomContent = tooltipContent;
+			}
 		}
 		if ( typeof tipsyConfig != 'undefined' ) {
 			this._tipsyConfig = tipsyConfig;
@@ -92,7 +97,6 @@ window.wikibase.ui.Tooltip.prototype = {
 			this._tipsyConfig = {};
 			this.setGravity( 'ne' );
 		}
-		this._isError = ( typeof isError != 'undefined' ) ? isError : false;
 		this._initTooltip();
 	},
 
@@ -120,6 +124,55 @@ window.wikibase.ui.Tooltip.prototype = {
 		}, this ) );
 
 		this._toggleEvents( true );
+	},
+
+	/**
+	 * construct DOM structure for an error tooltip
+	 *
+	 * @param object error error code and messages
+	 */
+	_buildErrorTooltip: function( error ) {
+		var content = (
+			$( '<div/>', {
+				'class': 'wb-error wb-tooltip-error',
+				text: error.shortMessage
+			} )
+		);
+		if ( error.message != '' ) { // append detailed error message
+			content.addClass( 'wb-tooltip-error-top-message' );
+			content = content.after( $( '<a/>', {
+				'class': 'wb-tooltip-error-details-link',
+				href: 'javascript:void(0);'
+			} )
+				.on( 'click', function( event ) {
+					$( this ).parent().find( '.wb-tooltip-error-details' ).slideToggle();
+				} )
+				.toggle(
+				function() {
+					$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-e' );
+					$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-s' );
+				},
+				function() {
+					$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-s' );
+					$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-e' );
+				}
+			)
+				.append( $( '<span/>', {
+				'class': 'ui-icon ui-icon-triangle-1-e'
+			} ) )
+				.append( $( '<span/>', {
+				text: window.mw.msg( 'wikibase-tooltip-error-details' )
+			} ) )
+			)
+				.after( $( '<div/>', {
+				'class': 'wb-tooltip-error-details',
+				text: error.message
+			} ) )
+				.after( $( '<div/>', {
+				'class': 'wb-clear'
+			} ) );
+		}
+		return content;
 	},
 
 	/**

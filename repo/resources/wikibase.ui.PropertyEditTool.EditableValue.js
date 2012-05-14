@@ -465,65 +465,21 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				}
 			}
 		}
-		this.apiCallErr( error, apiAction );
+		this.showError( error, apiAction );
 	},
 
 	/**
-	 * custom method to handle UI presentation of API call errors
-	 *
-	 * FIXME: Why is this a public function and why is there a private one as well?? Rename function perhaps?
+	 * custom method to handle UI presentation of API errors
 	 *
 	 * @param object error
 	 * @param number apiAction see this.API_ACTION enum
 	 */
-	apiCallErr: function( error, apiAction ) {
-		// create error tooltip
-		var content = (
-			$( '<div/>', {
-				'class': 'wb-error wb-tooltip-error',
-				text: error.shortMessage
-			} )
-		);
-		if ( error.message != '' ) { // append detailed error message
-			content.addClass( 'wb-tooltip-error-top-message' );
-			content = content.after( $( '<a/>', {
-				'class': 'wb-tooltip-error-details-link',
-				href: 'javascript:void(0);'
-			} )
-				.on( 'click', function( event ) {
-					$( this ).parent().find( '.wb-tooltip-error-details' ).slideToggle();
-				} )
-				.toggle(
-					function() {
-						$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-e' );
-						$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-s' );
-					},
-					function() {
-						$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-s' );
-						$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-e' );
-					}
-				)
-				.append( $( '<span/>', {
-					'class': 'ui-icon ui-icon-triangle-1-e'
-				} ) )
-					.append( $( '<span/>', {
-						text: window.mw.msg( 'wikibase-tooltip-error-details' )
-					} ) )
-			)
-				.after( $( '<div/>', {
-					'class': 'wb-tooltip-error-details',
-					text: error.message
-				} ) )
-					.after( $( '<div/>', {
-						'class': 'wb-clear'
-				} ) );
-		}
-
+	showError: function( error, apiAction ) {
 		// attach error tooltip to save button
 		var btn = ( apiAction === this.API_ACTION.REMOVE )
-				? this._toolbar.editGroup.btnRemove
-				: this._toolbar.editGroup.btnSave;
-		btn.addTooltip( content, { gravity: 'nw' }, true );
+			? this._toolbar.editGroup.btnRemove
+			: this._toolbar.editGroup.btnSave;
+		btn.addTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' } ) );
 		btn.tooltip.showMessage( true );
 
 		// hide error tooltip when clicking outside of it

@@ -157,16 +157,19 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	/**
-	 * add a tooltip to the interface's input element
+	 * attach a tooltip to this input interface
 	 *
-	 * @param string message tooltip message to be displayed
-	 * @param object (optional) tipsyConfig custom tipsy tooltip configuration
+	 * @param string|window.wikibase.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
 	 */
-	addTooltip: function( message, tipsyConfig ) {
-		this._inputElem.attr( 'title', message );
-		this.tooltip = new window.wikibase.ui.Tooltip( this._inputElem, message, tipsyConfig );
+	addTooltip: function( tooltip ) {
+		if ( typeof tooltip == 'string' ) {
+			this._inputElem.attr( 'title', tooltip );
+			this.tooltip = new window.wikibase.ui.Tooltip( this._inputElem, tooltip );
+		} else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
+			this.tooltip = tooltip;
+		}
 	},
-	
+
 	/**
 	 * Returns the node holding the value. This node will also hold the input box when in edit mode.
 	 * @return jQuery
