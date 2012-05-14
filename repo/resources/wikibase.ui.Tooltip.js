@@ -62,7 +62,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	/**
 	 * @var bool basically defines if the tooltip will appear in standard or error color schema
 	 */
-	_isError: false,
+	_error: false,
 
 	/**
 	 * @var jQuery storing DOM content that should be displayed as tooltip bubble content
@@ -85,7 +85,6 @@ window.wikibase.ui.Tooltip.prototype = {
 	 */
 	_init: function( subject, tooltipContent, tipsyConfig, parentObject ) {
 		this._subject = subject;
-		this._isError = false;
 		if ( typeof tooltipContent == 'string' ) {
 			this._subject.attr( 'title', tooltipContent );
 		} else {
@@ -94,8 +93,7 @@ window.wikibase.ui.Tooltip.prototype = {
 			stored in a custom variable that will be injected when the message is triggered to show */
 			this._subject.attr( 'title', '.' );
 			if ( typeof tooltipContent == 'object' && typeof tooltipContent.code != 'undefined' ) {
-				this._DomContent = this._buildErrorTooltip( tooltipContent );
-				this._isError = true;
+				this._error = tooltipContent;
 			} else {
 				this._DomContent = tooltipContent;
 			}
@@ -151,14 +149,14 @@ window.wikibase.ui.Tooltip.prototype = {
 	 *
 	 * @param object error error code and messages
 	 */
-	_buildErrorTooltip: function( error ) {
+	_buildErrorTooltip: function() {
 		var content = (
 			$( '<div/>', {
 				'class': 'wb-error wb-tooltip-error',
-				text: error.shortMessage
+				text: this._error.shortMessage
 			} )
 		);
-		if ( error.message != '' ) { // append detailed error message
+		if ( this._error.message != '' ) { // append detailed error message
 			content.addClass( 'wb-tooltip-error-top-message' );
 			content = content.after( $( '<a/>', {
 				'class': 'wb-tooltip-error-details-link',
@@ -186,7 +184,7 @@ window.wikibase.ui.Tooltip.prototype = {
 			)
 				.after( $( '<div/>', {
 				'class': 'wb-tooltip-error-details',
-				text: error.message
+				text: this._error.message
 			} ) )
 				.after( $( '<div/>', {
 				'class': 'wb-clear'
@@ -241,7 +239,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	showMessage: function( permanent ) {
 		if ( !this._isVisible ) {
 			this._tipsy.show();
-			if ( this._isError ) {
+			if ( this._error != null ) {
 				this._tipsy.$tip.addClass( 'wb-error' );
 
 				// hide error tooltip when clicking outside of it
@@ -252,9 +250,10 @@ window.wikibase.ui.Tooltip.prototype = {
 					this._parentObject.removeTooltip();
 				}, this ) );
 
-			}
-			if ( this._DomContent != null ) {
-				this._tipsy.$tip.find('.tipsy-inner').empty().append( this._DomContent );
+				// will lose inner click event on resizing (Details link) when not re-constructed on show
+				this._tipsy.$tip.find( '.tipsy-inner' ).empty().append( this._buildErrorTooltip() );
+			} else if ( this._DomContent != null ) {
+				this._tipsy.$tip.find( '.tipsy-inner' ).empty().append( this._DomContent );
 			}
 			this._isVisible = true;
 		}
@@ -268,15 +267,13 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * hide tooltip
 	 */
 	hideMessage: function() {
-		if ( this._permanent && !this._hasEvents() || !this._permanent ) {
-			this._permanent = false;
-			this._toggleEvents( true );
-			if ( this._isVisible ) {
-				this._tipsy.$tip.off( 'click' );
-				this._tipsy.hide();
-				this._isVisible = false;
-				$( this ).triggerHandler( 'Hide' ); // call event
-			}
+		this._permanent = false;
+		this._toggleEvents( false );
+		if ( this._isVisible ) {
+			this._tipsy.$tip.off( 'click' );
+			this._tipsy.hide();
+			this._isVisible = false;
+			$( this ).triggerHandler( 'Hide' ); // call event
 		}
 	},
 

@@ -109,6 +109,7 @@ h1.firstHeading .wb-ui-toolbar {
 			float:left;
 			clear:both;
 			margin-top:.5em;
+			white-space:nowrap;
 		}
 			.wb-tooltip-error-details-link .ui-icon {
 				display:block;

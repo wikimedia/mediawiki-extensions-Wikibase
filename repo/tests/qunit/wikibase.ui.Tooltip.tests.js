@@ -23,14 +23,8 @@
 			};
 		},
 		teardown: function() {
-			this.tooltip.destroy();
-
-			equal(
-				this.tooltip._elem,
-				null,
-				'destroyed tooltip'
-			);
-
+			$( window ).off( 'click' );
+			this.tooltip = null;
 			this.label.destroy();
 			this.error = null;
 			this.node = null;
@@ -121,25 +115,32 @@
 			'tooltip reacts on hover'
 		);
 
+		this.tooltip.destroy();
+
+		equal(
+			this.tooltip._elem,
+			null,
+			'destroyed tooltip'
+		);
+
 	} );
 
 	test( 'show and hide error tooltip', function() {
 		this.tooltip = new window.wikibase.ui.Tooltip( this.node, this.error, {}, this.label );
 		this.label.addTooltip( this.tooltip );
 
-		equal(
-			this.tooltip._isError,
-			true,
+		ok(
+			this.tooltip._error != null,
 			'is an error tooltip'
 		);
+
+		this.tooltip.showMessage( true );
 
 		equal(
 			typeof this.tooltip._DomContent,
 			'object',
 			'constructed DOM content'
 		);
-
-		this.tooltip.showMessage( true );
 
 		equal(
 			this.tooltip._isVisible,
@@ -161,6 +162,14 @@
 			this.tooltip._isVisible,
 			false,
 			'tooltip hidden after triggering window click event'
+		);
+
+		this.label.removeTooltip();
+
+		equal(
+			this.tooltip._elem,
+			null,
+			'destroyed tooltip'
 		);
 
 	} );
