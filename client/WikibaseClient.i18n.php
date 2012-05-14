@@ -23,9 +23,11 @@ $messages['en'] = array(
 	'wbc-editlinkstitle' => 'Edit interlanguage links',
 );
 
-/** Message documentation (Message documentation) */
+/** Message documentation (Message documentation)
+ * @author Jeblad
+ */
 $messages['qqq'] = array(
-	'wbc-desc' => '{{desc}}',
+	'wbc-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wbc-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
 );
