@@ -56,6 +56,19 @@ table.wb-sitelinks th {
 		border-bottom:none;
 	}
 
+table.wb-sitelinks {
+	width: 99%;
+	max-width: 50em;
+}
+table.wb-sitelinks td.wb-sitelinks-site {
+	width: 33%;
+}
+table.wb-sitelinks td.wb-sitelinks-link {
+	/* set no width here so sitelinks width has the highest priority and this will be
+	 * shared together with the toolbar which always has a variable width (changes after "edit")
+	 */
+}
+
 table.wb-sitelinks tr:hover td,
 table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
 	/*background-color:#5dc9f4;*/

@@ -9,7 +9,6 @@
  * @author H. Snater
  */
 
-
 h1.firstHeading .wb-ui-toolbar {
 	font-size: 0.5em;
 }
@@ -54,6 +53,10 @@ h1.firstHeading .wb-ui-toolbar {
 
 .wb-ui-propertyedittool-editablevalue-aftereditnotify .wb-ui-toolbar {
 	visibility: visible!important;
+}
+
+.wb-sitelinks .wb-ui-propertyedittool-editablevalue-waiting .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	text-align: center;
 }
 
 /********** TOOLTIP **********/

@@ -102,10 +102,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			this._subject.addClass( 'wb-sitelinks-' + siteId );
 			
 			this._removeClassByRegex( idInterface._getValueContainer(), /^wb-sitelinks-site-.+/ );
-			idInterface._getValueContainer().addClass( 'wb-sitelinks-' + siteId );
+			idInterface._getValueContainer().addClass( 'wb-sitelinks-site wb-sitelinks-site-' + siteId );
 			
 			this._removeClassByRegex( pageInterface._getValueContainer(), /^wb-sitelinks-link-.+/ );
-			pageInterface._getValueContainer().addClass( 'wb-sitelinks-site-' + siteId );
+			pageInterface._getValueContainer().addClass( 'wb-sitelinks-link wb-sitelinks-link-' + siteId );
 		}
 		
 		// only enable site page selector if there is a valid site id selected
