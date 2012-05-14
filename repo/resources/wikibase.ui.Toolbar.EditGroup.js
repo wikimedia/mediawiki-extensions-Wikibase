@@ -53,6 +53,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	_editableValue: null,
 
 	/**
+	 * Element holding the tooltips image with the tooltip itself attached.
 	 * @var window.wikibase.ui.Toolbar.Label
 	 */
 	tooltipAnchor: null,
@@ -86,7 +87,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 			style: 'display:inline',
 			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
 		} ) );
-		this.tooltipAnchor.addTooltip( this._editableValue.getInputHelpMessage() );
+		this.tooltipAnchor.setTooltip( this._editableValue.getInputHelpMessage() );
 
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.Toolbar.Button;
@@ -142,7 +143,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	
 	_leaveAction: function( save ) {
 		this._editableValue.stopEditing( save, $.proxy( function() {
-			this.tooltipAnchor.tooltip.hideMessage();
+			this.tooltipAnchor.getTooltip().hideMessage();
 			this.removeElement( this.tooltipAnchor );
 			this.innerGroup.removeElement( this.btnSave );
 			this.innerGroup.removeElement( this.btnCancel );

@@ -224,6 +224,15 @@ window.wikibase.ui.Tooltip.prototype = {
 	},
 
 	/**
+	 * Returns whether the tooltip is displayed currently.
+	 *
+	 * @return bool
+	 */
+	isVisible: function() {
+		return this._isVisible();
+	},
+
+	/**
 	 * show tooltip
 	 *
 	 * @param boolean permanent whether tooltip should be displayed permanently until hide() is being

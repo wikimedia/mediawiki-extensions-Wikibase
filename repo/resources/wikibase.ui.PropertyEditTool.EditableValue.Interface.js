@@ -166,7 +166,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 *
 	 * @param string|window.wikibase.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
 	 */
-	addTooltip: function( tooltip ) {
+	setTooltip: function( tooltip ) {
 		if ( typeof tooltip == 'string' ) {
 			this._inputElem.attr( 'title', tooltip );
 			this.tooltip = new window.wikibase.ui.Tooltip( this._inputElem, tooltip );
