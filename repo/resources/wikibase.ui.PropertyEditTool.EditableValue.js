@@ -377,36 +377,37 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			'text': 'Save...' // TODO: Internationalize, think about animation and text
 		} ).appendTo( this._getToolbarParent() ).hide();
 
-		this._toolbar._elem.fadeOut( 200, function() {
-			waitMsg.fadeIn( 200 );
-		} );
-		this._subject.addClass( this.UI_CLASS + '-waiting' );
-
 		deferred
-		.done( function() {
+			.done( function() {
 			self._subject.removeClass( self.UI_CLASS + '-waiting' );
 		} )
-		.then( function() {
-			// fade out wait text
-			waitMsg.fadeOut( 400, function() { waitMsg.remove(); self._toolbar._elem.fadeIn( 300 ); } );
-		} )
-		.fail( function( textStatus, response ) {
-			// remove and show immediatelly since we need nodes for tooltip!
-			self._subject.addClass( self.UI_CLASS + '-aftereditnotify' );
-			waitMsg.remove();
-			self._toolbar._elem.show();
-			self._apiCallErr( textStatus, response, apiAction );
-		} );
+			.then( function() {
+				// fade out wait text
+				waitMsg.fadeOut( 400, function() { waitMsg.remove(); self._toolbar._elem.fadeIn( 300 ); } );
+			} )
+			.fail( function( textStatus, response ) {
+				// remove and show immediatelly since we need nodes for tooltip!
+				self._subject.addClass( self.UI_CLASS + '-aftereditnotify' );
+				waitMsg.remove();
+				self._toolbar._elem.show();
+				self._apiCallErr( textStatus, response, apiAction );
+			} );
 
-		// do the actual API request and tritter jQuery.Deferred stuff:
-		api.post( apiCall, {
-			ok: function( textStatus ) {
-				deferred.resolve( textStatus );
-			},
-			err: function( textStatus, response, exception ) {
-				deferred.reject( textStatus, response, exception );
-			}
+		this._toolbar._elem.fadeOut( 200, function() {
+			waitMsg.fadeIn( 200 );
+
+			// do the actual API request and tritter jQuery.Deferred stuff:
+			api.post( apiCall, {
+				ok: function( textStatus ) {
+					deferred.resolve( textStatus );
+				},
+				err: function( textStatus, response, exception ) {
+					deferred.reject( textStatus, response, exception );
+				}
+			} );
+
 		} );
+		this._subject.addClass( this.UI_CLASS + '-waiting' );
 
 		return deferred;
 	},
@@ -529,12 +530,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
 			event.stopPropagation();
 		} );
+
 		// resizing removes click event
-		$( window ).on( 'resize', function() {
-			btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
-				event.stopPropagation();
-			} );
-		});
+		$( window ).on( 'resize', function( event ) {
+			if ( btn.tooltip === null ) {
+				$( window ).off( event );
+			} else {
+				btn.tooltip._tipsy.$tip.on( 'click', function( event ) {
+					event.stopPropagation();
+				} );
+			}
+		} );
 		$( window ).one( 'click', $.proxy( function( event ) {
 			btn.removeTooltip();
 			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
