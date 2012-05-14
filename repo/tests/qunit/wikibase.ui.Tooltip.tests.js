@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file wikibase.ui.Toolbar.Tooltip.tests.js
+ * @file wikibase.ui.Tooltip.tests.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -12,20 +12,16 @@
 'use strict';
 
 ( function() {
-	module( 'wikibase.ui.Toolbar.Tooltip', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.Tooltip', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 
-			this.tooltip = new window.wikibase.ui.Toolbar.Tooltip( 'Text' );
+			this.node = $( '<div/>' );
+			this.tooltip = new window.wikibase.ui.Tooltip( this.node, 'Text' );
 
 			equal(
-				typeof this.tooltip._elem,
-				'object',
+				this.tooltip._subject[0],
+				this.node[0],
 				'initialized tooltip'
-			);
-
-			ok(
-				this.tooltip._elem.length == 1 && this.tooltip._elem.children().length == 1,
-				'initilized DOM'
 			);
 
 			equal(
@@ -61,7 +57,7 @@
 			'tooltip reacts on hover'
 		);
 
-		this.tooltip.show();
+		this.tooltip.showMessage();
 
 		equal(
 			this.tooltip._isVisible,
@@ -75,7 +71,7 @@
 			'tooltip reacts on hover'
 		);
 
-		this.tooltip.hide();
+		this.tooltip.hideMessage();
 
 		equal(
 			this.tooltip._isVisible,
@@ -89,7 +85,7 @@
 			'tooltip reacts on hover'
 		);
 
-		this.tooltip.show( true );
+		this.tooltip.showMessage( true );
 
 		equal(
 			this.tooltip._isVisible,
@@ -103,7 +99,7 @@
 			'tooltip does not react on hover'
 		);
 
-		this.tooltip.hide();
+		this.tooltip.hideMessage();
 
 		equal(
 			this.tooltip._isVisible,

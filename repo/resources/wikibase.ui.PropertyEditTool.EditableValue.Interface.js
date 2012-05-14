@@ -66,6 +66,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	_currentWidth: null,
 
 	/**
+	 * @var object wikibase.ui.Tooltip attached to this input interface
+	 */
+	tooltip: null,
+
+	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
 	 *
@@ -167,6 +172,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this.tooltip = new window.wikibase.ui.Tooltip( this._inputElem, tooltip );
 		} else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
 			this.tooltip = tooltip;
+		}
+	},
+
+	/**
+	 * remove a tooltip message attached to this input interface
+	 */
+	removeTooltip: function() {
+		if ( this.tooltip !== null ) {
+			this.tooltip.destroy();
+			this.tooltip = null;
 		}
 	},
 

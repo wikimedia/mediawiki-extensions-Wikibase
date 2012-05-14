@@ -51,6 +51,8 @@ $messages['en'] = array(
 	'wikibase-error-remove-connection' => 'An error occurred while trying to perform removing. Please check your internet connection.',
 	'wikibase-error-save-timeout' => 'We are experiencing technical difficulties. Your changes could not be stored.',
 	'wikibase-error-remove-timeout' => 'We are experiencing technical difficulties. Could not perform removal.',
+	'wikibase-error-autocomplete-connection' => 'Could not query Wikipedia API. Please try again later.',
+	'wikibase-error-autocomplete-response' => 'Server responded: $1',
 
 	// Special pages
 	'special-itembytitle' => 'Item by title',
@@ -102,7 +104,9 @@ $messages['qqq'] = array(
 	'wikibase-error-save-connection' => 'Error message for an error happening during a save operation. The error might most likely be caused by a connection problem.',
 	'wikibase-error-remove-connection' => 'Error message for an error happening during a remove operation. The error might most likely be caused by a connection problem.',
 	'wikibase-error-save-timeout' => 'Error message for an error happening during a save operation. The error was caused by a request time out.',
-	'wikibase-error-remove-timeout' => 'Error message for an error happening during a remove operation. The error was caused by a request time out.'
+	'wikibase-error-remove-timeout' => 'Error message for an error happening during a remove operation. The error was caused by a request time out.',
+	'wikibase-error-autocomplete-connection' => 'Error message for page auto-complete input box; displayed when API could not be reached.',
+	'wikibase-error-autocomplete-response' => 'When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)

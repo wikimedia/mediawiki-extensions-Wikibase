@@ -41,11 +41,30 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		if ( this.ajaxParams !== null ) {
 			inputElement.autocomplete( {
 				source: $.proxy( function( request, suggest ) {
-					$.getJSON( this.url + '?callback=?', $.extend( {}, this.ajaxParams, { 'search': request.term } ), $.proxy( function( data ) {
-						this._currentResults = data[1];
-						suggest( data[1] ); // pass array of returned values to callback
-						this._onInputRegistered();
-					}, this ) );
+					$.ajax( {
+						url: this.url,
+						dataType: 'jsonp',
+						data:  $.extend( {}, this.ajaxParams, { 'search': request.term } ),
+						timeout: 8000,
+						success: $.proxy( function( response ) {
+							this._currentResults = response[1];
+							suggest( response[1] ); // pass array of returned values to callback
+							this._onInputRegistered();
+						}, this ),
+						error: $.proxy( function( jqXHR, textStatus, errorThrown ) {
+							this._inputElem.data('autocomplete')._response(); // remove spinner
+							if ( textStatus != 'abort' ) {
+								var error = {
+									code: textStatus,
+									shortMessage: window.mw.msg( 'wikibase-error-autocomplete-connection' ),
+									message: window.mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
+								};
+								this.addTooltip( new window.wikibase.ui.Tooltip( this._inputElem, error, { gravity: 'nw' }, this ) );
+								this.tooltip.showMessage( true );
+								this.setFocus(); // re-focus input
+							}
+						}, this )
+					} );
 				}, this ),
 				close: $.proxy( function( event, ui ) {
 					this._onInputRegistered();
