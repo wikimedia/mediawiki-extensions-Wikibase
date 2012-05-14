@@ -10,7 +10,7 @@
  * @author Daniel Werner
  */
 
-h1.firstHeading .wb-ui-toolbar {
+h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	font-size: 0.5em;
 }
 	h1.firstHeading input {
@@ -62,6 +62,10 @@ h1.firstHeading .wb-ui-toolbar {
 
 .wb-ui-propertyedittool-counter {
 	white-space: nowrap;
+}
+
+.wb-ui-propertyedittool-editablevalue-waitmsg {
+	margin: 0.3em;
 }
 
 /********** TOOLTIP **********/

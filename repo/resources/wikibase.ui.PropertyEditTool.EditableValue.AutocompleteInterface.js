@@ -52,7 +52,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 							this._onInputRegistered();
 						}, this ),
 						error: $.proxy( function( jqXHR, textStatus, errorThrown ) {
-							this._inputElem.data('autocomplete')._response(); // remove spinner
+							this._inputElem.data( 'autocomplete' )._response(); // remove spinner
 							if ( textStatus != 'abort' ) {
 								var error = {
 									code: textStatus,
