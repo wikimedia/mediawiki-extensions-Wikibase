@@ -168,7 +168,7 @@ class WikibaseItem extends WikibaseEntity {
 				EDIT_AUTOSUMMARY,
 				false,
 				$user,
-				'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
+				$this->getContentHandler()->getDefaultFormat()
 			);
 
 			$success = $status->isOk();
