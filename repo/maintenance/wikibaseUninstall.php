@@ -25,7 +25,7 @@ class WikibaseUninstall extends Maintenance {
 	}
 
 	public function execute() {
-		echo "Are you really really sure you want to permanently delete all Wikibase date?? If so, type YES\n";
+		echo "Are you really really sure you want to permanently delete all Wikibase data?? If so, type YES\n";
 
 		if ( $this->readconsole() !== 'YES' ) {
 			return;
