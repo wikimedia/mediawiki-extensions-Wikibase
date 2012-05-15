@@ -142,7 +142,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_buildInterfaces: function( subject ) {
 		var interfaces = new Array();
-		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.Interface( subject, this ) );
+
+		var interfaceParent = $( '<span/>' ).append( subject.contents() );
+		subject.prepend( interfaceParent );
+		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this ) );
+
 		return interfaces;
 	},
 	
@@ -170,7 +174,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return jQuery
 	 */
 	_getToolbarParent: function() {
-		return this._subject.parent();
+		// create new div within the structure where we can append the toolbar later:
+		this.__toolbarParent = this.__toolbarParent || $( '<span/>' ).appendTo( this._subject );
+		return this.__toolbarParent;
 	},
 
 	/**
@@ -321,7 +327,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * remove input elements from DOM
 	 *
-	 * @param bool whether the state was changed
+	 * @param bool save whether the current value should be kept. If false, the initial value will be restored.
 	 */
 	_reTransform: function( save ) {
 		if( ! this.isInEditMode() ) {
@@ -386,7 +392,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
 				waitMsg.remove();
 
-				if( apiAction === self.API_ACTION.SAVE ) {
+				if( apiAction !== self.API_ACTION.REMOVE ) {
 					// only re-display toolbar if value wasn't removed
 					self._toolbar._elem.fadeIn( 300 );
 				}
@@ -491,8 +497,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._subject.addClass( this.UI_CLASS + '-aftereditnotify' );
 
 		btn.setTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' }, btn ) );
-		btn.tooltip.showMessage( true );
-		$( btn.tooltip ).on( 'Hide', $.proxy( function() {
+		btn.getTooltip().show( true );
+		$( btn.getTooltip() ).on( 'Hide', $.proxy( function() {
 			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
 		}, this ) );
 

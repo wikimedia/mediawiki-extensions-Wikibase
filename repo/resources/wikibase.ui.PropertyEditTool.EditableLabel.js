@@ -25,8 +25,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	
 	_buildInterfaces: function( subject ) {
 		var interfaces = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInterfaces.call( this, subject );
+
 		interfaces[0].inputPlaceholder = mw.msg( 'wikibase-label-edit-placeholder' );
-		
+		interfaces[0].autoExpand = true;
+
 		interfaces[0].normalize = function( value ) {
 			var value = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
 			value = value.replace( /\s+/g, ' ' ); // make sure we don't ever allow several spaces in the items label

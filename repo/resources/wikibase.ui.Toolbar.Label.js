@@ -126,9 +126,9 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 		// restore previous tooltips visibility:
 		if( this._tooltip !== null ) {
 			if( wasVisible ) {
-				this._tooltip.showMessage();
+				this._tooltip.show();
 			} else {
-				this._tooltip.hideMessage();
+				this._tooltip.hide();
 			}
 		}
 	},

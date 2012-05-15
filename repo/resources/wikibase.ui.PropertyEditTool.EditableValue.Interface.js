@@ -107,14 +107,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		// initializes the input element into the DOM and removes the html representation
 		this._initInputElement();
 
-		// auto expand dummy element to messure text lenght:
-		if ( this.autoExpand ) {
-			var ruler = $( '<span/>', {
-				'class': 'ruler'
-			} );
-			this._inputElem.after( ruler );
-		}
-
 		this._isInEditMode = true;
 		
 		this._onInputRegistered(); // do this after setting _isInEditMode !
@@ -139,6 +131,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		var inputParent = this._getValueContainer();
 		inputParent.text( '' );
 		this._inputElem.appendTo( inputParent );
+
+		if( this.autoExpand ) {
+			this._inputElem.inputAutoExpand( {
+				comfortZone: 20,
+				minWidth: 100,
+				maxWidth: 600
+			} );
+		}
 	},
 	
 	/**
@@ -204,45 +204,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	/**
-	 * Functionality for dynamically expanding the input fields size.
-	 *
-	 * @todo: This is not used currenty but basically works. One problem remaining is considering the max width.
-	 */
-	_expand: function() {
-		if ( this.autoExpand ) {
-			var ruler = this._subject.find( '.ruler' );
-
-			var currentValue = this._inputElem.val();
-			if ( currentValue === '' ) {
-				currentValue = this._inputElem.attr( 'placeholder' );
-			}
-			ruler.html( currentValue.replace( / /g, '&nbsp;' ).replace( /</g, '&lt;' ) ); // TODO prevent insane HTML from being placed in the ruler
-			var inputWidth = this._inputElem.width();
-
-			// get max width
-			var maxWidth = this._subject.parent().width();
-
-			// get new current width
-			this._subject.parent().css( 'display', 'inline-block' );
-			var currentWidth = this._subject.parent().width();
-			this._subject.parent().css( 'display', 'block' );
-
-			// TODO use additional parent element to measer width of (input + toolbar)
-			if ( this._inputElem.width() > this._subject.parent().width() - 250 && !(ruler.width() < this._subject.parent().width() - 250) ) {
-				this._inputElem.css( 'width', this._subject.parent().width() - 249 );
-			} else {
-				this._inputElem.css( 'width', ( ruler.width() + 25 ) + 'px' ); // TODO better resize mechanism (maybe by temporarily replacing text input)
-			}
-
-
-			if ( typeof this._editableValue._toolbar._items[0].tooltip._tipsy.$tip != 'undefined' ) {
-				var tooltipLeft = parseInt( this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left' ) );
-				this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left', ( tooltipLeft + this._inputElem.width() - inputWidth ) + 'px' );
-			}
-		}
-	},
-
-	/**
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
@@ -256,7 +217,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		if ( this._previousValue !== this.getValue() ) {
 			this._onInputRegistered(); // only called if input really changed
 		}
-		this._expand();
 		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
 			return false; // cancel
 		}
@@ -269,7 +229,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	_onFocus: function( event ) {
-		this._expand();
 		if( this.onFocus !== null ) {
 			this.onFocus( event ); // callback
 		}

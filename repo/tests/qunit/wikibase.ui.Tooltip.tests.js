@@ -57,7 +57,7 @@
 			'tooltip reacts on hover'
 		);
 
-		this.tooltip.showMessage();
+		this.tooltip.show();
 
 		equal(
 			this.tooltip._isVisible,
@@ -71,7 +71,7 @@
 			'tooltip reacts on hover'
 		);
 
-		this.tooltip.hideMessage();
+		this.tooltip.hide();
 
 		equal(
 			this.tooltip._isVisible,
@@ -85,7 +85,7 @@
 			'tooltip reacts on hover'
 		);
 
-		this.tooltip.showMessage( true );
+		this.tooltip.show( true );
 
 		equal(
 			this.tooltip._isVisible,
@@ -99,7 +99,7 @@
 			'tooltip does not react on hover'
 		);
 
-		this.tooltip.hideMessage();
+		this.tooltip.hide();
 
 		equal(
 			this.tooltip._isVisible,

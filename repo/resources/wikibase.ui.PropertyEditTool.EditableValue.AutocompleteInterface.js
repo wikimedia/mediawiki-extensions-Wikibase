@@ -52,7 +52,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 							this._onInputRegistered();
 						}, this ),
 						error: $.proxy( function( jqXHR, textStatus, errorThrown ) {
-							this._inputElem.data('autocomplete')._response(); // remove spinner
+							this._inputElem.data( 'autocomplete' )._response(); // remove spinner
 							if ( textStatus != 'abort' ) {
 								var error = {
 									code: textStatus,
@@ -60,7 +60,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 									message: window.mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
 								};
 								this.setTooltip( new window.wikibase.ui.Tooltip( this._inputElem, error, { gravity: 'nw' }, this ) );
-								this.tooltip.showMessage( true );
+								this.tooltip.show( true );
 								this.setFocus(); // re-focus input
 							}
 						}, this )

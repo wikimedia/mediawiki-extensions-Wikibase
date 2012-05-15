@@ -143,7 +143,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	
 	_leaveAction: function( save ) {
 		this._editableValue.stopEditing( save, $.proxy( function() {
-			this.tooltipAnchor.getTooltip().hideMessage();
+			this.tooltipAnchor.getTooltip().hide();
 			this.removeElement( this.tooltipAnchor );
 			this.innerGroup.removeElement( this.btnSave );
 			this.innerGroup.removeElement( this.btnCancel );
