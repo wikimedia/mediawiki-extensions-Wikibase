@@ -49,10 +49,10 @@ class WBCLangLinkHandler {
 			// ...or from the external storage.
 			$links = self::getLinks( $title_text );
 
-			// If there was an error while getting links, we use the current links...
-			if( $links === false ) {
-				$links = self::readLinksFromDB( wfGetDB( DB_SLAVE ), $title->getArticleID() );
-			}
+                        // If there was an error while getting links, we use the current links...
+                        if( $links === false ) {
+                                $links = array(); // self::readLinksFromDB( wfGetDB( DB_SLAVE ), $title->getArticleID() );
+                        }
 
 			// ...and write them to the cache.
 			self::$cache[$title_text] = $links;
