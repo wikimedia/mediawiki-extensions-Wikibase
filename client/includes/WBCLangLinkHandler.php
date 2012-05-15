@@ -13,7 +13,6 @@
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
 class WBCLangLinkHandler {
-        protected static $cache = array();
         protected static $sort_order = false;
         protected static $langlinksset = false;
 
@@ -326,13 +325,6 @@ class WBCLangLinkHandler {
 		self::$sort_order = array_flip( self::$sort_order );
 
 		return true;
-	}
-
-	/**
-	 * Clears the local cache.
-	 */
-	public static function clearCache() {
-		self::$cache = array();
 	}
 
 }
