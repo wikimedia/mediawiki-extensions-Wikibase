@@ -311,7 +311,7 @@ class WikibaseItem extends WikibaseEntity {
 		);
 		// the value should be returned as it is after cleanup
 		// not only as it is coming into the method
-		return $value;
+		return $this->data['label'][$langCode];
 	}
 
 	/**
@@ -330,7 +330,7 @@ class WikibaseItem extends WikibaseEntity {
 		);
 		// the value should be returned as it is after cleanup
 		// not only as it is coming into the method
-		return $value;
+		return $this->data['description'][$langCode];
 	}
 
 	/**
@@ -366,7 +366,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @param array|null $languages
 	 */
 	protected function removeMultilangTexts( $fieldKey, array $languages = null ) {
-		if ( !is_null( $languages ) ) {
+		if ( is_null( $languages ) ) {
 			$this->data[$fieldKey] = array();
 		}
 		else {
@@ -466,6 +466,19 @@ class WikibaseItem extends WikibaseEntity {
 	/**
 	 * @since 0.1
 	 * 
+	 * Get descriptions for an item but as raw values
+	 * 
+	 * @param array|null $languages note that an empty array gives descriptions for no languages while a null pointer gives all
+	 * 
+	 * @return array found labels in given languages
+	 */
+	public function getRawDescriptions( array $languages = null ) {
+		return $this->getMultilangTexts( 'description', $languages, true );
+	}
+	
+	/**
+	 * @since 0.1
+	 * 
 	 * Get labels for an item
 	 * 
 	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
@@ -479,6 +492,19 @@ class WikibaseItem extends WikibaseEntity {
 	/**
 	 * @since 0.1
 	 * 
+	 * Get labels for an item but as raw values
+	 * 
+	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
+	 * 
+	 * @return array found labels in given languages
+	 */
+	public function getRawLabels( array $languages = null ) {
+		return $this->getMultilangTexts( 'label', $languages, true );
+	}
+	
+	/**
+	 * @since 0.1
+	 * 
 	 * Get texts from an item with a field specifier
 	 *
 	 * @param string $fieldKey
@@ -486,7 +512,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return array
 	 */
-	protected function getMultilangTexts( $fieldKey, array $languages = null ) {
+	protected function getMultilangTexts( $fieldKey, array $languages = null, $raw = false ) {
 		$textList = $this->data[$fieldKey];
 
 		if ( !is_null( $languages ) ) {
@@ -498,7 +524,8 @@ class WikibaseItem extends WikibaseEntity {
 		$texts = array();
 
 		foreach ( $textList as $languageCode => $textData ) {
-			$texts[$languageCode] = $textData['value'];
+			// TODO: A raw value should probably be filtered somehow
+			$texts[$languageCode] = $raw ? $textData : $textData['value'];
 		}
 
 		return $texts;
@@ -513,9 +540,9 @@ class WikibaseItem extends WikibaseEntity {
 	 * @param string $pageName
 	 * @param string $updateType
 	 *
-	 * @return boolean Success indicator
+	 * @return array|false Returns array on success, or false on failure
 	 */
-	public function addSiteLink( $siteId, $pageName, $updateType = 'set' ) {
+	public function addSiteLink( $siteId, $pageName, $updateType = 'add' ) {
 		/*
 		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
 			$this->data['links'][$siteId] = array();
@@ -539,7 +566,7 @@ class WikibaseItem extends WikibaseEntity {
 			);
 		}
 
-		return $success;
+		return $success ? $this->data['links'][$siteId] : false;
 
 		// TODO: verify the link is allowed (ie no other item already links here)
 
@@ -661,6 +688,18 @@ class WikibaseItem extends WikibaseEntity {
 		}
 
 		return $titles;
+	}
+
+	/**
+	 * Returns the site links in an associative array with the following format:
+	 * site id (str) => arr
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getRawSiteLinks() {
+		return $this->data['links'];
 	}
 
 	/**
@@ -902,6 +941,25 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	public static function newEmpty() {
 		return self::newFromArray( array() );
+	}
+
+	/**
+	 * Whatever would be more appropriate during a normalization of titles during lookup.
+	 * 
+	 * @since 0.1
+	 *
+	 * @param string $str
+	 * @return string
+	 */
+	public static function normalize( $str ) {
+		
+		// ugly but works, should probably do more normalization
+		// should (?) use $wgLegalTitleChars and $wgDisableTitleConversion somehow
+		$str = preg_replace( '/^[\s_]+/', '', $str );
+		$str = preg_replace( '/[\s_]+$/', '', $str );
+		$str = preg_replace( '/[\s_]+/', ' ', $str );
+		
+		return $str;
 	}
 
 }

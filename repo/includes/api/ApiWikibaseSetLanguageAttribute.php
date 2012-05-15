@@ -70,6 +70,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		}
 		$success = true;
 		
+		return $success;
 	}
 	
 	/**
@@ -81,18 +82,18 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @param string $label
 	 */
 	protected function setItemLabel( WikibaseItem &$item, $language, $label ) {
-		$value = $item->setLabel( $language, $label );
-		if ( $label !== $value ) {
+		$arr = $item->setLabel( $language, $label );
+		if ( isset($arr['value']) && $label !== $arr['value'] ) {
 			$this->getResult()->addValue(
-				'item',
+				null,
 				'normalized',
-				array( array( 'from' => $label, 'to' => $value ) )
+				array( array( 'from' => $label, 'to' => $arr['value'] ) )
 			);
 		}
 		$this->getResult()->addValue(
 			'item',
 			'labels',
-			array( $language => $value )
+			array( $language => $arr )
 		);
 		return ;
 	}
@@ -106,19 +107,18 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @param string $description
 	 */
 	protected function setItemDescription( WikibaseItem &$item, $language, $description ) {
-		// TODO: Normalize
-		$value = $item->setDescription( $language, $description );
-		if ( $description !== $value ) {
+		$arr = $item->setDescription( $language, $description );
+		if ( isset($arr['value']) && $description !== $arr['value'] ) {
 			$this->getResult()->addValue(
 				null,
 				'normalized',
-				array( 'from' => $description, 'to' => $value )
+				array( 'from' => $description, 'to' => $arr['value'] )
 			);
 		}
 		$this->getResult()->addValue(
-			null,
+			'item',
 			'descriptions',
-			array( $language => $value )
+			array( $language => $arr )
 		);
 		return ;
 	}
@@ -165,7 +165,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to set a label and a description for a Wikibase item.'
+			'API module to set a label or description for a single Wikibase item.'
 		);
 	}
 
