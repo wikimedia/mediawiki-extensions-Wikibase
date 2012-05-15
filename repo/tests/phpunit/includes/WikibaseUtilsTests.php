@@ -44,39 +44,13 @@ class WikibaseUtilsTests extends MediaWikiTestCase {
 	 * @dataProvider providerGetSiteIdentifiers
 	 */
 	public function testGetSiteIdentifiers( $site ) {
-    	$result = WikibaseUtils::getSiteIdentifiers();
+    	$result = WikibaseSites::singleton()->getIdentifiers();
     	$this->assertContains(
     		$site,
     		$result,
     		"The site identifier with code {$site} could not be found in the returned result"
     	);
     }
-    
-	/**
-	 * @group WikibaseUtils
-	 * @dataProvider providerGetSiteIdentifiers
-	 */
-	public function testGetIndexSites( $site ) {
-    	$result = WikibaseUtils::getIndexSites();
-    	$this->assertTrue(
-    		isset($result[$site]),
-    		"The site identifier with code {$site} could not be found in the returned result"
-    	);
-	}
-    
-	/**
-	 * @group WikibaseUtils
-	 * @dataProvider providerGetSiteIdentifiers
-	 */
-	public function testGetIndexSites2SiteIdentifiers( $site ) {
-    	$result1 = WikibaseUtils::getIndexSites();
-    	$result2 = WikibaseUtils::getSiteIdentifiers();
-    	$this->assertEquals(
-    		$site,
-    		$result2[$result1[$site]],
-    		"The site identifier with code {$site} could not be found in the returned results"
-    	);
-	}
     
 	public function providerGetSiteIdentifiers() {
     	return array(

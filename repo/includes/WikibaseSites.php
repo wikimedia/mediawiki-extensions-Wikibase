@@ -55,6 +55,13 @@ class WikibaseSites {
 		}
 	}
 
+	/**
+	 * Returns an instance of WikibaseSites.
+	 *
+	 * @since 0.1
+	 *
+	 * @return WikibaseSites
+	 */
 	public static function singleton() {
 		static $instance = false;
 
@@ -78,7 +85,7 @@ class WikibaseSites {
 	 * @return array
 	 * @throws MWException
 	 */
-	public function getSiteIdentifiers( $groupName = null ) {
+	public function getIdentifiers( $groupName = null ) {
 		if ( is_null( $groupName ) ) {
 			if ( !array_key_exists( $groupName, $this->groups ) ) {
 				throw new MWException( "No site group with name '$groupName' exists" );
