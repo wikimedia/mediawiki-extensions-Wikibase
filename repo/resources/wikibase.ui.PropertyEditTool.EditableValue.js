@@ -46,6 +46,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		 */
 		SAVE_TO_REMOVE: 3
 	},
+
+	/**
+	 * specific property key within the API JSON structure (overridden by specific subclasses)
+	 * @const string
+	 */
+	API_KEY: null,
 	
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
@@ -371,13 +377,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		.appendTo( this._getToolbarParent() ).hide();
 
 		deferred
-		.then( function() {
+		.then( function( response ) {
 			// fade out wait text
 			waitMsg.fadeOut( 400, function() {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
 
 				if( apiAction !== self.API_ACTION.REMOVE ) {
 					// only re-display toolbar if value wasn't removed
+					if ( self.API_KEY !== null ) {
+						self.setValue( response.item[self.API_KEY][window.mw.config.get( 'wgUserLanguage' )].value );
+					}
 					waitMsg.remove();
 					self._toolbar._elem.fadeIn( 300 );
 				}
