@@ -21,8 +21,8 @@ class WikibaseDifferenceEngine extends DifferenceEngine {
 	function generateContentDiff( Content $old, Content $new ) {
 		wfProfileIn( __METHOD__ );
 
-		$aold = WikibaseContentHandler::flattenArray( $old->getNativeData() );
-		$anew = WikibaseContentHandler::flattenArray( $new->getNativeData() );
+		$aold = self::flattenArray( $old->getNativeData() );
+		$anew = self::flattenArray( $new->getNativeData() );
 
 		$keys = array_unique( array_merge( array_keys( $aold ), array_keys( $anew ) ) );
 
@@ -60,6 +60,26 @@ class WikibaseDifferenceEngine extends DifferenceEngine {
 		wfProfileOut( __METHOD__ );
 
 		return $difftext;
+	}
+
+	public static function flattenArray( $a, $prefix = '', &$into = null ) {
+		if ( is_null( $into ) ) {
+			$into = array();
+		}
+
+		foreach ( $a as $k => $v ) {
+			if ( is_object( $v ) ) {
+				$v = get_object_vars( $v );
+			}
+
+			if ( is_array( $v ) ) {
+				self::flattenArray( $v, "$prefix$k | ", $into );
+			} else {
+				$into[ "$prefix$k" ] = $v;
+			}
+		}
+
+		return $into;
 	}
 
 }

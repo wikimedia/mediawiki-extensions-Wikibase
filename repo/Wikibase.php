@@ -82,11 +82,12 @@ $wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['WikibaseContentHandler'] 			= $dir . 'includes/WikibaseContentHandler.php';
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 			= $dir . 'includes/WikibaseDifferenceEngine.php';
 $wgAutoloadClasses['WikibaseUtils'] 					= $dir . 'includes/WikibaseUtils.php';
 $wgAutoloadClasses['WikibaseItem'] 						= $dir . 'includes/WikibaseItem.php';
+$wgAutoloadClasses['WikibaseItemHandler'] 				= $dir . 'includes/WikibaseItemHandler.php';
 $wgAutoloadClasses['WikibaseEntity'] 					= $dir . 'includes/WikibaseEntity.php';
+$wgAutoloadClasses['WikibaseEntityHandler'] 			= $dir . 'includes/WikibaseEntityHandler.php';
 $wgAutoloadClasses['WikibaseItemDisambiguation'] 		= $dir . 'includes/WikibaseItemDisambiguation.php';
 $wgAutoloadClasses['WikibaseItemStructuredSave'] 		= $dir . 'includes/WikibaseItemStructuredSave.php';
 $wgAutoloadClasses['WikibaseItemView'] 					= $dir . 'includes/WikibaseItemView.php';
@@ -252,7 +253,7 @@ unset( $moduleTemplate );
 
 // register hooks and handlers
 define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseItemHandler';
 
 define( 'WB_NS_DATA', 100 );
 define( 'WB_NS_DATA_TALK', 101 );
