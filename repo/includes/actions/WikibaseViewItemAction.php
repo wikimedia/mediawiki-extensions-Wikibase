@@ -84,6 +84,12 @@ class WikibaseViewItemAction extends FormlessAction {
 					'apiUrl' => 'http://ja.wikipedia.org/w/api.php'
 				)
 			);
+
+			$sites = array();
+
+			foreach ( WikibaseSites::singleton()->getIdentifiers() as $siteId ) {
+
+			}
 			
 			$out->addJsConfigVars( 'wbSiteDetails', $dummySiteDetails );
 		}
