@@ -31,25 +31,4 @@ final class WikibaseUtils {
 		return $languageCodes;
 	}
 
-	/**
-	 * Returns the full url for the specified site.
-	 * A page can also be provided, which is then added to the url.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $siteId
-	 * @param string $pageTitle
-	 *
-	 * @return string|false
-	 */
-	public static function getSiteUrl( $siteId, $pageTitle = '' ) {
-		$ids = WBSettings::get( 'siteIdentifiers' );
-
-		if ( !array_key_exists( $siteId, $ids ) ) {
-			return false;
-		}
-		
-		return str_replace( '$1', $pageTitle, $ids[$siteId] );
-	}
-
 }

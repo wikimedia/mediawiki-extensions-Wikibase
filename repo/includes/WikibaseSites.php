@@ -98,4 +98,23 @@ class WikibaseSites {
 		}
 	}
 
+	/**
+	 * Returns the full url for the specified site.
+	 * A page can also be provided, which is then added to the url.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $siteId
+	 * @param string $pageName
+	 *
+	 * @return false|string
+	 */
+	public function getUrl( $siteId, $pageName ) {
+		if ( !array_key_exists( $siteId, $this->sites ) ) {
+			return false;
+		}
+
+		return str_replace( '$1', $pageName, $this->sites[$siteId] );
+	}
+
 }

@@ -66,7 +66,7 @@ class WikibaseUtilsTests extends MediaWikiTestCase {
 	 * @dataProvider providerGetSiteUrl
 	 */
 	public function testGetSiteUrl( $siteId, $pageTitle, $expected ) {
-    	$actual = WikibaseUtils::getSiteUrl( $siteId, $pageTitle );
+    	$actual = WikibaseSites::singleton()->getUrl( $siteId, $pageTitle );
     	$this->assertEquals(
     		$expected,
     		$actual,
