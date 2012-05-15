@@ -251,8 +251,10 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 unset( $moduleTemplate );
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
+define( 'CONTENT_MODEL_WIKIBASE', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
+
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
+
 
 define( 'WB_NS_DATA', 100 );
 define( 'WB_NS_DATA_TALK', 101 );

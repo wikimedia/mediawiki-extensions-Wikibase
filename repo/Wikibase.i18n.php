@@ -72,6 +72,9 @@ $messages['en'] = array(
 	'wikibase-api-label-or-description' => 'Use either or both of label and/or description, but not noen of them',
 	'wikibase-api-label-not-found' => 'Can not find a previous label for this language in the item',
 	'wikibase-api-description-not-found' => 'Can not find a previous description for this language in the item',
+
+	//content model names
+	'content-model-1001' => 'Wikibase item',
 );
 
 /** Message documentation (Message documentation) */
@@ -84,6 +87,8 @@ $messages['qqq'] = array(
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wikibase-label-input-help-message' => '$1: name of the language',
 	'wikibase-description-input-help-message' => '$1: name of the language',
+
+	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
