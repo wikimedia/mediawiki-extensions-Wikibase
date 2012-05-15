@@ -50,7 +50,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @dataProvider provideBasicData
 	 */
 	public function testUnserializeContent( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input,'application/json' );
+		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->assertInstanceOf(
 			'WikibaseItem',
 			$this->item,
@@ -63,7 +63,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testGetLabels( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input,'application/json' );
+		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->assertEquals(
 			$labels,
 			$this->item->getLabels( $languages ),
@@ -76,7 +76,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testGetDescriptions( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input,'application/json' );
+		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->assertEquals(
 			$descriptions,
 			$this->item->getDescriptions( $languages ),
@@ -90,7 +90,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testCopy( $input ) {
-		$this->item = $this->ch->unserializeContent( $input,'application/json' );
+		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$copy = $this->item->copy();
 		$this->assertInstanceOf(
 			'WikibaseItem',
@@ -111,7 +111,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testCleanStructure( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input,'application/json' );
+		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->item->cleanStructure();
 		$this->assertInstanceOf(
 			'WikibaseItem',
@@ -138,7 +138,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 * @group Broken
 	 */
 	public function testAddSiteLink( $input, array $link, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input,'application/json' );
+		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		//$this->addSiteLink( $siteId, $pageName, $updateType = 'set' );
 	}
 	

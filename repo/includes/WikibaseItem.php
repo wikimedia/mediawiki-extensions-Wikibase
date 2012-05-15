@@ -46,7 +46,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @param array $data
 	 */
 	public function __construct( array $data ) {
-		parent::__construct();
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 
 		$this->data = $data;
 	}
@@ -166,7 +166,7 @@ class WikibaseItem extends WikibaseEntity {
 				EDIT_AUTOSUMMARY,
 				false,
 				$user,
-				'application/json' // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
+				CONTENT_FORMAT_JSON // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
 			);
 
 			$success = $status->isOk();

@@ -25,11 +25,50 @@ class WikibaseItemHandler extends WikibaseEntityHandler {
 
 	public function __construct() {
 		$formats = array(
-			'application/json',
-			'application/vnd.php.serialized' #FIXME: find out what mime type the api uses for serialized php objects
+			CONTENT_FORMAT_JSON,
+			CONTENT_FORMAT_SERIALIZED
 		);
 
 		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $formats );
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getDefaultFormat() {
+		return WBSettings::get( 'serializationFormat' );
+	}
+
+	/**
+	 * @param Content $content
+	 * @param null|string $format
+	 *
+	 * @return string
+	 */
+	public function serializeContent( Content $content, $format = null ) {
+
+		if ( is_null( $format ) ) {
+			$format = WBSettings::get( 'serializationFormat' );
+		}
+
+		#FIXME: assert $content is a WikibaseContent instance
+		$data = $content->getNativeData();
+
+		switch ( $format ) {
+			case CONTENT_FORMAT_SERIALIZED:
+				$blob = serialize( $data );
+				break;
+			case CONTENT_FORMAT_JSON:
+				$blob = json_encode( $data );
+				break;
+			default:
+				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+				break;
+		}
+
+		return $blob;
 	}
 
 	public function getActionOverrides() {
@@ -51,10 +90,10 @@ class WikibaseItemHandler extends WikibaseEntityHandler {
 		}
 
 		switch ( $format ) {
-			case 'application/vnd.php.serialized':
+			case CONTENT_FORMAT_SERIALIZED:
 				$data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
 				break;
-			case 'application/json':
+			case CONTENT_FORMAT_JSON:
 				$data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
 				break;
 			default:
