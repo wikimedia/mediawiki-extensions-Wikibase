@@ -149,7 +149,7 @@ class WBSettings {
 						'no' => 'https://no.wikipedia.org',
 						'nn' => 'https://nn.wikipedia.org',
 						'sv' => 'https://sv.wikipedia.org',
-						'foobar' => array( 'site' => 'https://www.foo.bar/', 'filepath' => '/folder/', 'urlpath' => '/wikiname/$1' ),
+						//'foobar' => array( 'url' => 'https://www.foo.bar/', 'filepath' => '/folder/', 'urlpath' => '/wikiname/$1' ),
 					),
 					'defaultSiteType' => 'mediawiki',
 				),
