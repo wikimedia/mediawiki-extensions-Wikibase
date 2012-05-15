@@ -59,6 +59,39 @@ class WikibaseSite {
 	}
 
 	/**
+	 * Returns the sites identifier.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Returns the sites group.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getGroup() {
+		return $this->group;
+	}
+
+	/**
+	 * Returns the sites type.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return $this->type;
+	}
+
+	/**
 	 * Returns the full url for the specified site.
 	 * A page can also be provided, which is then added to the url.
 	 *
