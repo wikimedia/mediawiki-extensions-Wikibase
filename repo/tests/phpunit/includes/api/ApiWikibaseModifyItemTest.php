@@ -31,7 +31,7 @@ abstract class ApiWikibaseModifyItemTest extends ApiTestCase {
 	 * @var WikibaseItem
 	 */
 	protected static $item = false;
-
+	
 	/**
 	 * This is to set up the environment.
 	 */
@@ -42,6 +42,31 @@ abstract class ApiWikibaseModifyItemTest extends ApiTestCase {
 			self::$item = WikibaseItem::newEmpty();
 			self::$item->save();
 		}
+		
+		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
+				'Apitesteditor',
+				'Api Test Editor',
+				'api_test_editor@example.com',
+				array( 'wbeditor' )
+			);
+		$wgUser = self::$users['wbeditor']->user;
+		
+		// now we have to do the login with the previous user
+		$data = $this->doApiRequest( array(
+			'action' => 'login',
+			'lgname' => self::$users['wbeditor']->username,
+			'lgpassword' => self::$users['wbeditor']->password )
+		 );
+
+		$token = $data[0]['login']['token'];
+
+		$resp = $this->doApiRequest( array(
+			'action' => 'login',
+			'lgtoken' => $token,
+			'lgname' => self::$users['wbeditor']->username,
+			'lgpassword' => self::$users['wbeditor']->password
+			),
+			$data );
 	}
 
 	/**

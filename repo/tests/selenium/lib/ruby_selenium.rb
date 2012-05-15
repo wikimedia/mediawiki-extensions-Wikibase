@@ -6,8 +6,8 @@ WIKI_URL = "http://localhost/mediawiki/"
 WIKI_USELANG = "en"
 WIKI_SKIN = "vector" # "vector" "monobook"
 WIKI_API_URL = WIKI_URL + 'api.php'
-WIKI_USERNAME = "Admin"
-WIKI_PASSWORD = "root"
+WIKI_USERNAME = "tobijat"
+WIKI_PASSWORD = "darthvader"
 
 class RubySelenium
   # do API request to create a new item
@@ -23,10 +23,10 @@ class RubySelenium
     uri = URI.parse(WIKI_API_URL)
     req = Net::HTTP::Post.new(uri.path)
     
-    puts "cookie"
-    puts @session_cookie
-    puts "token"
-    puts @item_token
+    # puts "cookie"
+    # puts @session_cookie
+    # puts "token"
+    # puts @item_token
     
     req.set_form_data(
     {'format'=>'json',
@@ -38,7 +38,9 @@ class RubySelenium
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       postData =  http.request(req)
       result = JSON.parse(postData.body)
-      puts result
+      # puts result
+      result['item'].should_not == nil
+      result['item']['id'].should_not == nil
       @item_id = result['item']['id'].to_s()
     end
     return @item_id
@@ -57,6 +59,7 @@ class RubySelenium
       postData =  http.request(req)
       @session_cookie = postData.response['set-cookie']
       result = JSON.parse(postData.body)
+      # puts result
       login_token = result['login']['token']
 
       req.set_form_data(
@@ -69,6 +72,7 @@ class RubySelenium
 
       postData =  http.request(req)
       result = JSON.parse(postData.body)
+      # puts result
     end
 
     req = Net::HTTP::Post.new(uri.path)
@@ -81,6 +85,7 @@ class RubySelenium
       postData =  http.request(req)
 
       result = JSON.parse(postData.body)
+      # puts result
       @item_token = result['wbsetitem']['setitemtoken']
     end
 
@@ -131,8 +136,6 @@ class RubySelenium
 
   # creates a new item and returns the URL for that item
   def self.get_new_item_url
-    # @item_id = '700'
-    
     create_new_item
     item_url = WIKI_URL + "index.php/Data:q" + @item_id + "?uselang=" + WIKI_USELANG + "&useskin=" + WIKI_SKIN
     return item_url
@@ -144,7 +147,7 @@ class RubySelenium
 
   # creates a random string
   def self.generate_random_string(length=8)
-    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ '
+    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
     string = ''
     length.times { string << chars[rand(chars.size)] }
     return string
