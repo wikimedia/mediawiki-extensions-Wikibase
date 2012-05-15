@@ -20,12 +20,23 @@
 			$( '<div/>', { id: 'parent' } ).append( node );
 			var propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
 			this.editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue;
+			this.editableValue.queryApi = function( deferred, apiAction ) { // override AJAX API call
+				deferred.resolve( '' );
+			};
 			var toolbar = propertyEditTool._buildSingleValueToolbar( this.editableValue );
 			this.editableValue._init( node, toolbar );
 			this.strings = {
 				valid: [ 'test', 'test 2' ],
 				invalid: [ '' ]
 			};
+			this.errors = [ // simulated error objects being returned from the API
+				{ 'error':
+					{
+						'code': 'no-permissions',
+						'info': 'The logged in user does not have sufficient rights'
+					}
+				}
+			];
 
 			equal(
 				this.editableValue._getToolbarParent().attr( 'id' ),
@@ -137,87 +148,138 @@
 		);
 
 		equal(
-			this.editableValue.stopEditing( true, function() {
-
-				equal(
-					this.editableValue.isInEditMode(),
-					false,
-					'is not in edit mode'
-				);
-
-				this.editableValue.setValue( this.strings['valid'][1] );
-
-				ok(
-					this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['valid'][1],
-					'changed value'
-				);
-
-				equal(
-					this.editableValue.startEditing(),
-					true,
-					'started edit mode'
-				);
-
-				equal(
-					this.editableValue.startEditing(),
-					false,
-					'try to start edit mode again'
-				);
-
-				equal(
-					this.editableValue.validate( [this.strings['invalid'][0]] ),
-					false,
-					'empty value not validated'
-				);
-
-				equal(
-					this.editableValue.validate( [this.strings['valid'][0]] ),
-					true,
-					'validated input'
-				);
-
-				this.editableValue.setValue( this.strings['invalid'][0] );
-
-				ok(
-					this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['invalid'][0],
-					'set empty value'
-				);
-
-				equal(
-					this.editableValue.isEmpty(),
-					true,
-					'editable value is empty'
-				);
-
-				ok(
-					this.editableValue.getValue() instanceof Array && this.editableValue.getInitialValue()[0] == this.strings['valid'][1],
-					'checked initial value'
-				);
-
-				equal(
-					this.editableValue.valueCompare( this.editableValue.getValue(), this.editableValue.getInitialValue() ),
-					false,
-					'compared current and initial value'
-				);
-
-				this.editableValue.setValue( this.strings['valid'][1] );
-
-				ok(
-					this.editableValue.getValue() == this.strings['valid'][1],
-					'reset value to initial value'
-				);
-
-				equal(
-					this.editableValue.valueCompare( this.editableValue.getValue(), this.editableValue.getInitialValue() ),
-					true,
-					'compared current and initial value'
-				);
-
-				this.editableValue.remove();
-
-			} ),
+			this.editableValue.stopEditing( true ),
 			true,
 			'stopped edit mode, save'
+		);
+
+		equal(
+			this.editableValue.isInEditMode(),
+			false,
+			'is not in edit mode'
+		);
+
+		this.editableValue.setValue( this.strings['valid'][1] );
+
+		ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['valid'][1],
+			'changed value'
+		);
+
+		equal(
+			this.editableValue.startEditing(),
+			true,
+			'started edit mode'
+		);
+
+		equal(
+			this.editableValue.startEditing(),
+			false,
+			'try to start edit mode again'
+		);
+
+		equal(
+			this.editableValue.validate( [this.strings['invalid'][0]] ),
+			false,
+			'empty value not validated'
+		);
+
+		equal(
+			this.editableValue.validate( [this.strings['valid'][0]] ),
+			true,
+			'validated input'
+		);
+
+		this.editableValue.setValue( this.strings['invalid'][0] );
+
+		ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['invalid'][0],
+			'set empty value'
+		);
+
+		equal(
+			this.editableValue.isEmpty(),
+			true,
+			'editable value is empty'
+		);
+
+		ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getInitialValue()[0] == this.strings['valid'][1],
+			'checked initial value'
+		);
+
+		equal(
+			this.editableValue.valueCompare( this.editableValue.getValue(), this.editableValue.getInitialValue() ),
+			false,
+			'compared current and initial value'
+		);
+
+		this.editableValue.setValue( this.strings['valid'][1] );
+
+		ok(
+			this.editableValue.getValue() == this.strings['valid'][1],
+			'reset value to initial value'
+		);
+
+		equal(
+			this.editableValue.valueCompare( this.editableValue.getValue(), this.editableValue.getInitialValue() ),
+			true,
+			'compared current and initial value'
+		);
+
+		this.editableValue.remove();
+
+	} );
+
+	test( 'error handling', function() {
+
+		this.editableValue.queryApi = $.proxy( function( deferred, apiAction ) {
+			deferred.reject( 'error', this.errors[0] );
+		}, this );
+
+		this.editableValue.startEditing();
+		this.editableValue.setValue( this.strings['valid'][0] );
+
+		equal(
+			this.editableValue.isInEditMode(),
+			true,
+			'started editing ans set value'
+		);
+
+		this.editableValue.stopEditing( true );
+
+		equal(
+			this.editableValue.isInEditMode(),
+			true,
+			'is still in edit mode after receiving error'
+		);
+
+		ok(
+			this.editableValue._toolbar.editGroup.btnSave.tooltip instanceof window.wikibase.ui.Tooltip,
+			'attached tooltip to save button'
+		);
+
+		this.editableValue.stopEditing();
+
+		equal(
+			this.editableValue.isInEditMode(),
+		false,
+			'cancelled editing'
+		);
+
+		this.editableValue.remove( true );
+
+		equal(
+			this.editableValue.getValue()[0],
+			this.editableValue.getInitialValue()[0],
+			'emptied input interface resetting to default value and preserving the input interface'
+		);
+
+		this.editableValue.remove( false );
+
+		ok(
+			this.editableValue._toolbar.editGroup.btnRemove.tooltip instanceof window.wikibase.ui.Tooltip,
+			'attached tooltip to remove button after trying to remove with API action'
 		);
 
 	} );

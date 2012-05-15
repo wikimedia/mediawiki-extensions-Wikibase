@@ -17,9 +17,10 @@
  * @param jQuery subject tooltip will be attached to this node
  * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
  * @param object tipsyConfig (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
- * @param object parentObject (only required for error tooltip) parent object that the tooltip is referred from
+ * @param object parentObject (only required for error tooltip, has to have an implementation of removeTooltip() )
+ * 					parent object that the tooltip is referred from
  *
- * @event onHide called after the tooltip was hidden from a previously visible state.
+ * @event Hide called after the tooltip was hidden from a previously visible state.
  */
 window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig, parentObject ) {
 	if( typeof subject != 'undefined' ) {
@@ -61,7 +62,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	/**
 	 * @var bool basically defines if the tooltip will appear in standard or error color schema
 	 */
-	_isError: false,
+	_error: null,
 
 	/**
 	 * @var jQuery storing DOM content that should be displayed as tooltip bubble content
@@ -79,11 +80,11 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * @param jQuery subject tooltip will be attached to this node
 	 * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
 	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
-	 * @param object parentObject (only required for error tooltip) parent object that the tooltip is referred from
+	 * @param object parentObject (only required for error tooltip, has to have an implementation of removeTooltip() )
+	 * 					parent object that the tooltip is referred from
 	 */
 	_init: function( subject, tooltipContent, tipsyConfig, parentObject ) {
 		this._subject = subject;
-		this._isError = false;
 		if ( typeof tooltipContent == 'string' ) {
 			this._subject.attr( 'title', tooltipContent );
 		} else {
@@ -92,8 +93,7 @@ window.wikibase.ui.Tooltip.prototype = {
 			stored in a custom variable that will be injected when the message is triggered to show */
 			this._subject.attr( 'title', '.' );
 			if ( typeof tooltipContent == 'object' && typeof tooltipContent.code != 'undefined' ) {
-				this._DomContent = this._buildErrorTooltip( tooltipContent );
-				this._isError = true;
+				this._error = tooltipContent;
 			} else {
 				this._DomContent = tooltipContent;
 			}
@@ -107,6 +107,25 @@ window.wikibase.ui.Tooltip.prototype = {
 		}
 		this._parentObject = parentObject;
 		this._initTooltip();
+
+		jQuery.data( this._subject[0], 'wikibase.ui.tooltip', this );
+
+		// reposition tooltip when resizing the browser window
+		$( window ).off( '.wikibase.ui.tooltip' );
+		$( window ).on( 'resize.wikibase.ui.tooltip', function( event ) {
+			$( '[original-title]' ).each( function( i, node ) {
+				if (
+					typeof $( node ).data( 'wikibase.ui.tooltip' ) != 'undefined'
+					&& $( node ).data( 'wikibase.ui.tooltip' )._isVisible
+				) {
+					var tooltip = $( node ).data( 'wikibase.ui.tooltip' );
+					if ( tooltip._permanent ) {
+						tooltip._isVisible = false;
+						tooltip.showMessage( tooltip._permanent ); // trigger showMessage() to reposition
+					}
+				}
+			} );
+		} );
 	},
 
 	/**
@@ -121,19 +140,7 @@ window.wikibase.ui.Tooltip.prototype = {
 			'trigger': 'manual',
 			'html': true
 		} );
-
 		this._tipsy = this._subject.data( 'tipsy' );
-
-		// reposition tooltip when resizing the browser window
-		$( window ).on( 'resize', $.proxy( function( event ) {
-			if ( this._isVisible && this._permanent ) {
-				this.hide(); // FIXME: better repositioning mechanism (this one is also used in EditableValue)
-				this.show();
-			} else {
-				$( window ).off( event );
-			}
-		}, this ) );
-
 		this._toggleEvents( true );
 	},
 
@@ -142,14 +149,14 @@ window.wikibase.ui.Tooltip.prototype = {
 	 *
 	 * @param object error error code and messages
 	 */
-	_buildErrorTooltip: function( error ) {
+	_buildErrorTooltip: function() {
 		var content = (
 			$( '<div/>', {
 				'class': 'wb-error wb-tooltip-error',
-				text: error.shortMessage
+				text: this._error.shortMessage
 			} )
 		);
-		if ( error.message != '' ) { // append detailed error message
+		if ( this._error.message != '' ) { // append detailed error message
 			content.addClass( 'wb-tooltip-error-top-message' );
 			content = content.after( $( '<a/>', {
 				'class': 'wb-tooltip-error-details-link',
@@ -177,7 +184,7 @@ window.wikibase.ui.Tooltip.prototype = {
 			)
 				.after( $( '<div/>', {
 				'class': 'wb-tooltip-error-details',
-				text: error.message
+				text: this._error.message
 			} ) )
 				.after( $( '<div/>', {
 				'class': 'wb-clear'
@@ -241,32 +248,21 @@ window.wikibase.ui.Tooltip.prototype = {
 	show: function( permanent ) {
 		if ( !this._isVisible ) {
 			this._tipsy.show();
-			if ( this._isError ) {
+			if ( this._error != null ) {
 				this._tipsy.$tip.addClass( 'wb-error' );
 
 				// hide error tooltip when clicking outside of it
 				this._tipsy.$tip.on( 'click', function( event ) {
 					event.stopPropagation();
 				} );
-
-				// resizing removes click event
-				$( window ).on( 'resize', $.proxy( function( event ) {
-					if ( this === null ) {
-						$( window ).off( event );
-					} else {
-						this._tipsy.$tip.on( 'click', function( event ) {
-							event.stopPropagation();
-						} );
-					}
-				}, this ) );
 				$( window ).one( 'click', $.proxy( function( event ) {
 					this._parentObject.removeTooltip();
 				}, this ) );
 
-			}
-			if ( this._DomContent != null ) {
-				this._tipsy.$tip.find('.tipsy-inner').empty();
-				this._tipsy.$tip.find('.tipsy-inner').append( this._DomContent );
+				// will lose inner click event on resizing (Details link) when not re-constructed on show
+				this._tipsy.$tip.find( '.tipsy-inner' ).empty().append( this._buildErrorTooltip() );
+			} else if ( this._DomContent != null ) {
+				this._tipsy.$tip.find( '.tipsy-inner' ).empty().append( this._DomContent );
 			}
 			this._isVisible = true;
 		}
@@ -280,15 +276,13 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * hide tooltip
 	 */
 	hide: function() {
-		if ( this._permanent && !this._hasEvents() || !this._permanent ) {
-			this._permanent = false;
-			this._toggleEvents( true );
-			if ( this._isVisible ) {
-				this._tipsy.hide();
-				this._isVisible = false;
-				// call event:
-				$( this ).triggerHandler( 'Hide' );
-			}
+		this._permanent = false;
+		this._toggleEvents( false );
+		if ( this._isVisible ) {
+			this._tipsy.$tip.off( 'click' );
+			this._tipsy.hide();
+			this._isVisible = false;
+			$( this ).triggerHandler( 'Hide' ); // call event
 		}
 	},
 

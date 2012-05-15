@@ -189,6 +189,13 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	)
 );
 
+$wgResourceModules['wikibase.utilities.jQuery'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.utilities.js',
+		'wikibase.utilities.jQuery.js'
+	)
+);
+
 $wgResourceModules['wikibase.tests.qunit.testrunner'] = $moduleTemplate + array(
 	'scripts' => '../tests/qunit/data/testrunner.js',
 	'dependencies' => array(
@@ -243,6 +250,7 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 	'dependencies' => array(
 		'wikibase',
 		'wikibase.ui.Toolbar',
+		'wikibase.utilities.jQuery',
 		'jquery.ui.autocomplete',
 		'mediawiki.api',
 		'mediawiki.Title',

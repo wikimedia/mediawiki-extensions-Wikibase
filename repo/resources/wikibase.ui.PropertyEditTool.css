@@ -26,14 +26,21 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	background-position:left center;
 }
 
-.wb-ui-propertyedittool-counter-pending {
-	margin-left: .25em;
-	color: #57a7b9;
-	font-weight: bold;
-}
-
 .wb-ui-propertyedittool-editablevalue-index {
 	width: 0; /* don't use extra space if we have a spacey table */
+}
+
+.wb-ui-propertyedittool-counter {
+	white-space: nowrap;
+}
+	.wb-ui-propertyedittool-counter-pending {
+		margin-left: .25em;
+		color: #57a7b9;
+		font-weight: bold;
+	}
+
+.wb-ui-propertyedittool-editablevalue-aftereditnotify .wb-ui-toolbar {
+	visibility: visible!important;
 }
 
 .wb-sitelinks th.wb-ui-propertyedittool-counterinheading {
@@ -52,14 +59,11 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	background-color:#FFDFC9!important;
 }
 
-.wb-ui-propertyedittool-editablevalue-aftereditnotify .wb-ui-toolbar {
-	visibility: visible!important;
-}
-
 .wb-sitelinks .wb-ui-propertyedittool-editablevalue-waiting .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	text-align: center;
 }
 
+<<<<<<< HEAD
 .wb-ui-propertyedittool-counter {
 	white-space: nowrap;
 }
@@ -68,6 +72,8 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	margin: 0.3em;
 }
 
+=======
+>>>>>>> 34794c03b26ee5c2cd89e06e549a6fff79ca1424
 /********** TOOLTIP **********/
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
@@ -114,6 +120,7 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 			float:left;
 			clear:both;
 			margin-top:.5em;
+			white-space:nowrap;
 		}
 			.wb-tooltip-error-details-link .ui-icon {
 				display:block;

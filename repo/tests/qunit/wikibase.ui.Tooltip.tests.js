@@ -14,36 +14,39 @@
 ( function() {
 	module( 'wikibase.ui.Tooltip', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
-
 			this.node = $( '<div/>' );
-			this.tooltip = new window.wikibase.ui.Tooltip( this.node, 'Text' );
-
-			equal(
-				this.tooltip._subject[0],
-				this.node[0],
-				'initialized tooltip'
-			);
-
-			equal(
-				typeof this.tooltip._tipsy,
-				'object',
-				'created tipsy object'
-			);
-
+			this.label = new window.wikibase.ui.Toolbar.Label( 'Text' );
+			this.error = {
+				code: 'error-code',
+				shortMessage: 'Text',
+				message: 'Text'
+			};
 		},
 		teardown: function() {
-			this.tooltip.destroy();
-
-			equal(
-				this.tooltip._elem,
-				null,
-				'destroyed tooltip'
-			);
+			$( window ).off( 'click' );
+			$( window ).off( 'resize' );
+			this.tooltip = null;
+			this.label.destroy();
+			this.error = null;
+			this.node = null;
 		}
 
 	} ) );
 
-	test( 'show and hide', function() {
+	test( 'show and hide basic tooltip', function() {
+		this.tooltip = new window.wikibase.ui.Tooltip( this.node, 'Text' );
+
+		equal(
+			this.tooltip._subject[0],
+			this.node[0],
+			'initialized tooltip'
+		);
+
+		equal(
+			typeof this.tooltip._tipsy,
+			'object',
+			'created tipsy object'
+		);
 
 		equal(
 			this.tooltip._isVisible,
@@ -111,6 +114,71 @@
 			this.tooltip._permanent,
 			false,
 			'tooltip reacts on hover'
+		);
+
+		this.tooltip.destroy();
+
+		equal(
+			this.tooltip._elem,
+			null,
+			'destroyed tooltip'
+		);
+
+	} );
+
+	test( 'show and hide error tooltip', function() {
+		this.tooltip = new window.wikibase.ui.Tooltip( this.node, this.error, {}, this.label );
+		this.label.addTooltip( this.tooltip );
+
+		ok(
+			this.tooltip._error != null,
+			'is an error tooltip'
+		);
+
+		this.tooltip.showMessage( true );
+
+		equal(
+			typeof this.tooltip._DomContent,
+			'object',
+			'constructed DOM content'
+		);
+
+		equal(
+			this.tooltip._isVisible,
+			true,
+			'tooltip is visible'
+		);
+
+		this.tooltip._tipsy.$tip.trigger( 'click' );
+
+		equal(
+			this.tooltip._isVisible,
+			true,
+			'tooltip still visible after clicking on it'
+		);
+
+		$( window ).trigger( 'resize' );
+
+		equal(
+			this.tooltip._isVisible,
+			true,
+			'tooltip still visible after triggering window resize event'
+		);
+
+		$( window ).trigger( 'click' );
+
+		equal(
+			this.tooltip._isVisible,
+			false,
+			'tooltip hidden after triggering window click event'
+		);
+
+		this.label.removeTooltip();
+
+		equal(
+			this.tooltip._elem,
+			null,
+			'destroyed tooltip'
 		);
 
 	} );

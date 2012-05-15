@@ -9,7 +9,7 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-"use strict";
+'use strict';
 
 /**
  * Serves an autocomplete supported input interface as part of an EditableValue
@@ -19,7 +19,8 @@
 window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface = function( subject ) {
 	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
 };
-window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
+window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype
+	= new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype, {
 
 	/**
@@ -35,7 +36,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	
 	_buildInputElement: function() {
 		// get basic input box:
-		var inputElement = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
+		var inputElement
+			= window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
 
 		// extend input element with autocomplete:
 		if ( this.ajaxParams !== null ) {
@@ -59,7 +61,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 									shortMessage: window.mw.msg( 'wikibase-error-autocomplete-connection' ),
 									message: window.mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
 								};
-								this.setTooltip( new window.wikibase.ui.Tooltip( this._inputElem, error, { gravity: 'nw' }, this ) );
+								this.setTooltip( new window.wikibase.ui.Tooltip(
+									this._inputElem,
+									error,
+									{ gravity: 'nw' },
+									this
+								) );
 								this.tooltip.show( true );
 								this.setFocus(); // re-focus input
 							}
@@ -89,8 +96,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		}
 
 		// since results list does not reposition automatically on resize, just close it
-		$( window ).on( 'resize', $.proxy( function() {
-			this._inputElem.data( 'autocomplete' ).close( {} );
+		$( window ).off( 'wikibase.ui.AutocompleteInterface' ); // one resize event handler is enough for all widgets
+		$( window ).on( 'resize.wikibase.ui.AutocompleteInterface', $.proxy( function() {
+			if ( $( '.ui-autocomplete-input' ).length > 0 ) {
+				$( '.ui-autocomplete-input' ).data( 'autocomplete' ).close( {} );
+			}
 		}, this ) );
 
 		return inputElement;

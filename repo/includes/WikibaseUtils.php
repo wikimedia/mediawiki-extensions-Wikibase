@@ -64,7 +64,6 @@ final class WikibaseUtils {
 			foreach (self::getSiteIdentifiers() as $key) {
 				$idx[$key] = $num++;
 			}
-			print_r($idx);
 		}
 
 		return $idx;
@@ -87,7 +86,7 @@ final class WikibaseUtils {
 		if ( !array_key_exists( $siteId, $ids ) ) {
 			return false;
 		}
-
+		
 		return str_replace( '$1', $pageTitle, $ids[$siteId] );
 	}
 
