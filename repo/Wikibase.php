@@ -90,6 +90,8 @@ $wgAutoloadClasses['WikibaseEntity'] 					= $dir . 'includes/WikibaseEntity.php'
 $wgAutoloadClasses['WikibaseItemDisambiguation'] 		= $dir . 'includes/WikibaseItemDisambiguation.php';
 $wgAutoloadClasses['WikibaseItemStructuredSave'] 		= $dir . 'includes/WikibaseItemStructuredSave.php';
 $wgAutoloadClasses['WikibaseItemView'] 					= $dir . 'includes/WikibaseItemView.php';
+$wgAutoloadClasses['WikibaseLinks'] 					= $dir . 'includes/WikibaseLinks.php';
+$wgAutoloadClasses['WikibaseLinkGroup'] 				= $dir . 'includes/WikibaseLinkGroup.php';
 
 // includes/actions
 $wgAutoloadClasses['WikibaseViewItemAction'] 			= $dir . 'includes/actions/WikibaseViewItemAction.php';
