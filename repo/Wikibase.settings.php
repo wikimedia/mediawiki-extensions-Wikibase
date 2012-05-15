@@ -150,6 +150,7 @@ class WBSettings {
 						'sv' => 'https://sv.wikipedia.org',
 						'foobar' => array( 'site' => 'https://www.foo.bar/', 'filepath' => '/folder/', 'urlpath' => '/wikiname/$1' ),
 					),
+					'defaultSiteType' => 'mediawiki',
 				),
 				'stuff' => array(
 					'sites' => array(
@@ -163,6 +164,7 @@ class WBSettings {
 
 			'defaultSiteUrlPath' => '/wiki/$1',
 			'defaultSiteFilePath' => '/w/',
+			'defaultSiteType' => 'unknown',
 		);
 	}
 
