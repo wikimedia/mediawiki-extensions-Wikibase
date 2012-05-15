@@ -183,18 +183,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * Removes all traces of this ui element from the DOM, so the represented value is still visible but not interactive
-	 * anymore.
-	 */
-	destroy: function() {
-		this.stopEditing( false );
-		if( this._toolbar != null) {
-			this._toolbar.destroy();
-			this._toolbar = null;
-		}
-	},
-
-	/**
 	 * Removes the value from the data store via the API. Also removes the values representation from the dom stated
 	 * differently.
 	 *
@@ -364,9 +352,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return jQuery.Deferred
 	 */
 	performApiAction: function( apiAction ) {
-		var api = new mw.Api();
-		var apiCall = this.getApiCallParams( apiAction );
-
 		// we have to build our own deferred since the jqXHR object returned by api.proxy() is just referring to the
 		// success of the ajax call, not to the actual success of the API request (which could have failed depending on
 		// the return value).
@@ -384,8 +369,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			// fade out wait text
 			waitMsg.fadeOut( 400, function() {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
-				waitMsg.remove();
-				self._toolbar._elem.fadeIn( 300 );
+				if ( !self.API_ACTION.REMOVE ) {
+					waitMsg.remove();
+					self._toolbar._elem.fadeIn( 300 );
+				}
 			} );
 		} )
 		.fail( function( textStatus, response ) {
@@ -396,23 +383,33 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			self._apiCallErr( textStatus, response, apiAction );
 		} );
 
-		this._toolbar._elem.fadeOut( 200, function() {
+		this._toolbar._elem.fadeOut( 200, $.proxy( function() {
 			waitMsg.fadeIn( 200 );
-
-			// do the actual API request and tritter jQuery.Deferred stuff:
-			api.post( apiCall, {
-				ok: function( textStatus ) {
-					deferred.resolve( textStatus );
-				},
-				err: function( textStatus, response, exception ) {
-					deferred.reject( textStatus, response, exception );
-				}
-			} );
-
-		} );
+			// do the actual API request and trigger jQuery.Deferred stuff:
+			this.queryApi( deferred, apiAction );
+		}, this ) );
 		this._subject.addClass( this.UI_CLASS + '-waiting' );
 
 		return deferred;
+	},
+
+	/**
+	 * submitting the AJAX request to query the API
+	 *
+	 * @param jQuery.deferred deferred handling the returning AJAX request
+	 * @param number apiAction see this.API_ACTION enum for all available actions
+	 */
+	queryApi: function( deferred, apiAction ) {
+		var api = new mw.Api();
+		var apiCall = this.getApiCallParams( apiAction );
+		api.post( apiCall, {
+			ok: function( response ) {
+				deferred.resolve( response );
+			},
+			err: function( textStatus, response ) {
+				deferred.reject( textStatus, response );
+			}
+		} );
 	},
 
 	/**
@@ -712,7 +709,19 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param jQuery.Event event
 	 */
 	_interfaceHandler_onBlur: function( relatedInterface, event ) { },
-	
+
+	/**
+	 * Removes all traces of this ui element from the DOM, so the represented value is still visible but not interactive
+	 * anymore.
+	 */
+	destroy: function() {
+		this.stopEditing( false );
+		if( this._toolbar != null) {
+			this._toolbar.destroy();
+			this._toolbar = null;
+		}
+	},
+
 	///////////
 	// EVENTS:
 	///////////
