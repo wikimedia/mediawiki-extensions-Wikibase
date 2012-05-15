@@ -28,6 +28,12 @@ class WikibaseSites implements SeekableIterator {
 	protected $groups;
 
 	/**
+	 * Position of the iterator in the sites field.
+	 * @var string
+	 */
+	protected $key;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -38,6 +44,7 @@ class WikibaseSites implements SeekableIterator {
 	protected function __construct( array $sites, array $groups ) {
 		$this->sites = $sites;
 		$this->groups = $groups;
+		$this->rewind();
 	}
 
 	/**
@@ -218,6 +225,63 @@ class WikibaseSites implements SeekableIterator {
 		}
 
 		return WikibaseSite::newFromArray( $siteId, $this->sites[$siteId] )->getPath( $path );
+	}
+
+	/**
+	 * @return integer
+	 */
+	public function count() {
+		return count( $this->sites );
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return $this->sites === array();
+	}
+
+	/**
+	 * @return array
+	 */
+	public function current() {
+		return $this->sites[$this->key];
+	}
+
+	/**
+	 * @return integer
+	 */
+	public function key() {
+		return $this->key;
+	}
+
+	public function next() {
+		next( $this->sites );
+		$this->key = key( $this->sites );
+	}
+
+	public function rewind() {
+		reset( $this->sites );
+		$this->key = key( $this->sites );
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function valid() {
+		return $this->key !== false && isset( $this->sites[$this->key] );
+	}
+
+	/**
+	 * @param string $position
+	 * @throws MWException
+	 */
+	function seek( $position ) {
+		if ( !array_key_exists( $position, $this->sites ) ) {
+			throw new MWException( "Cannot seek to non-existing key '$position'." );
+		}
+
+		$this->key = $position;
 	}
 
 }
