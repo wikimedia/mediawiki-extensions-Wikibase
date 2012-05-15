@@ -28,7 +28,7 @@ end
 
 RSpec::Core::RakeTask.new(:spec_sitelinks) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/sitelinks_spec.rb'
+  spec.pattern = 'spec/sitelinks/*_spec.rb'
 end
 
 task :default => :spec
