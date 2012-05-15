@@ -164,7 +164,7 @@
 
 		equal(
 			this.propertyEditTool._subject.children().length,
-			3,
+			2,
 			'checked DOM'
 		);
 

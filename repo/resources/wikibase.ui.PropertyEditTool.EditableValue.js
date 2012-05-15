@@ -728,6 +728,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._toolbar.destroy();
 			this._toolbar = null;
 		}
+		this._getToolbarParent().remove();
+		for ( var i in this._interfaces ) { // remove span added in _buildInterfaces()
+			this._interfaces[i]._subject.parent().empty().text( this._interfaces[i]._subject.text() );
+		}
 	},
 
 	///////////
