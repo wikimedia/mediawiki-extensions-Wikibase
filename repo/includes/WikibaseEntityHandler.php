@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class representing a Wikibase page.
+ * Base handler class for WikibaseEntity content classes.
  *
  * @since 0.1
  *
- * @file WikibaseContentHandler.php
+ * @file WikibaseEntityHandler.php
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -13,6 +13,15 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class WikibaseEntityHandler extends ContentHandler {
+
+	public function __construct( $modelId ) {
+		$formats = array(
+			CONTENT_FORMAT_JSON,
+			CONTENT_FORMAT_SERIALIZED
+		);
+
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $formats );
+	}
 
 	/**
 	 * @since 0.1
@@ -32,17 +41,17 @@ abstract class WikibaseEntityHandler extends ContentHandler {
 	public function serializeContent( Content $content, $format = null ) {
 
 		if ( is_null( $format ) ) {
-			$format = WBSettings::get( 'serializationFormat' );
+			$format = $this->getDefaultFormat();
 		}
 
 		#FIXME: assert $content is a WikibaseContent instance
 		$data = $content->getNativeData();
 
 		switch ( $format ) {
-			case 'application/vnd.php.serialized':
+			case CONTENT_FORMAT_SERIALIZED:
 				$blob = serialize( $data );
 				break;
-			case 'application/json':
+			case CONTENT_FORMAT_JSON:
 				$blob = json_encode( $data );
 				break;
 			default:
@@ -51,6 +60,38 @@ abstract class WikibaseEntityHandler extends ContentHandler {
 		}
 
 		return $blob;
+	}
+
+	/**
+	 * @param $blob
+	 * @param null $format
+	 * @return mixed
+	 *
+	 * @throws MWException
+	 * @throws MWContentSerializationException
+	 */
+	protected function unserializedData( $blob, $format = null ) {
+		if ( is_null( $format ) ) {
+			$format = $this->getDefaultFormat();
+		}
+
+		switch ( $format ) {
+			case CONTENT_FORMAT_SERIALIZED:
+				$data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
+				break;
+			case CONTENT_FORMAT_JSON:
+				$data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
+				break;
+			default:
+				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+				break;
+		}
+
+		if ( $data === false || $data === null ) {
+			throw new MWContentSerializationException( 'failed to deserialize' );
+		}
+
+		return $data;
 	}
 
 }

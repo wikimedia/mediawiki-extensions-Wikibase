@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class representing a Wikibase page.
+ *
  *
  * @since 0.1
  *
- * @file WikibaseContentHandler.php
+ * @file WikibaseItemHandler.php
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -24,53 +24,12 @@ class WikibaseItemHandler extends WikibaseEntityHandler {
 	}
 
 	public function __construct() {
-		$formats = array(
-			CONTENT_FORMAT_JSON,
-			CONTENT_FORMAT_SERIALIZED
-		);
-
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $formats );
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 	}
 
 	/**
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @return array
 	 */
-	public function getDefaultFormat() {
-		return WBSettings::get( 'serializationFormat' );
-	}
-
-	/**
-	 * @param Content $content
-	 * @param null|string $format
-	 *
-	 * @return string
-	 */
-	public function serializeContent( Content $content, $format = null ) {
-
-		if ( is_null( $format ) ) {
-			$format = WBSettings::get( 'serializationFormat' );
-		}
-
-		#FIXME: assert $content is a WikibaseContent instance
-		$data = $content->getNativeData();
-
-		switch ( $format ) {
-			case CONTENT_FORMAT_SERIALIZED:
-				$blob = serialize( $data );
-				break;
-			case CONTENT_FORMAT_JSON:
-				$blob = json_encode( $data );
-				break;
-			default:
-				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
-				break;
-		}
-
-		return $blob;
-	}
-
 	public function getActionOverrides() {
 		return array(
 			'view' => 'WikibaseViewItemAction',
@@ -85,27 +44,7 @@ class WikibaseItemHandler extends WikibaseEntityHandler {
 	 * @return WikibaseItem
 	 */
 	public function unserializeContent( $blob, $format = null ) {
-		if ( is_null( $format ) ) {
-			$format = WBSettings::get( 'serializationFormat' );
-		}
-
-		switch ( $format ) {
-			case CONTENT_FORMAT_SERIALIZED:
-				$data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
-				break;
-			case CONTENT_FORMAT_JSON:
-				$data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
-				break;
-			default:
-				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
-				break;
-		}
-
-		if ( $data === false || $data === null ) {
-			throw new MWContentSerializationException( 'failed to deserialize' );
-		}
-
-		return WikibaseItem::newFromArray( $data );
+		return WikibaseItem::newFromArray( $this->unserializedData( $blob, $format ) );
 	}
 
 }
