@@ -24,6 +24,7 @@
 		},
 		teardown: function() {
 			$( window ).off( 'click' );
+			$( window ).off( 'resize' );
 			this.tooltip = null;
 			this.label.destroy();
 			this.error = null;
@@ -154,6 +155,14 @@
 			this.tooltip._isVisible,
 			true,
 			'tooltip still visible after clicking on it'
+		);
+
+		$( window ).trigger( 'resize' );
+
+		equal(
+			this.tooltip._isVisible,
+			true,
+			'tooltip still visible after triggering window resize event'
 		);
 
 		$( window ).trigger( 'click' );

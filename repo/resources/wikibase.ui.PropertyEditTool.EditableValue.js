@@ -384,13 +384,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			// fade out wait text
 			waitMsg.fadeOut( 400, function() {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
-				waitMsg.remove(); self._toolbar._elem.fadeIn( 300 ); }
-			);
+				waitMsg.remove();
+				self._toolbar._elem.fadeIn( 300 );
+			} );
 		} )
 		.fail( function( textStatus, response ) {
 			// remove and show immediately since we need nodes for the tooltip!
 			self._subject.removeClass( self.UI_CLASS + '-waiting' );
-
 			waitMsg.remove();
 			self._toolbar._elem.show();
 			self._apiCallErr( textStatus, response, apiAction );
@@ -426,17 +426,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * handle return of successful API call
-	 *
-	 * @param object JSON response
-	 */
-	_apiCallOk: function( response ) {
-		if ( typeof response.success == 'undefined' ) { // out-of-scope error
-			this._apiCallErr( 'unknown-error', response );
-		}
-	},
-
-	/**
 	 * handle error of unsuccessful API call
 	 *
 	 * @param string textStatus
@@ -447,24 +436,23 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var error = {};
 		if ( textStatus != 'abort' ) {
 			error = {
-				code: 'unknown-error',
+				code: textStatus,
 				shortMessage: ( apiAction === this.API_ACTION.REMOVE )
 					? window.mw.msg( 'wikibase-error-remove-connection' )
 					: window.mw.msg( 'wikibase-error-save-connection' ),
 				message: ''
 			};
-			if ( typeof response.error != 'undefined' ) {
-				if ( textStatus == 'timeout' ) {
-					error.code = textStatus;
-					error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
-						? window.mw.msg( 'wikibase-error-remove-timeout' )
-						: window.mw.msg( 'wikibase-error-save-timeout' );
-				} else {
+			if ( textStatus == 'timeout' ) {
+				error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
+					? window.mw.msg( 'wikibase-error-remove-timeout' )
+					: window.mw.msg( 'wikibase-error-save-timeout' );
+			} else {
+				if ( typeof response.error != 'undefined' ) {
 					error.code = response.error.code;
+					error.message = response.error.info;
 					error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
 						? window.mw.msg( 'wikibase-error-remove-generic' )
 						: window.mw.msg( 'wikibase-error-save-generic' );
-					error.message = response.error.info;
 				}
 			}
 		}

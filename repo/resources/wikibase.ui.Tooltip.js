@@ -62,7 +62,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	/**
 	 * @var bool basically defines if the tooltip will appear in standard or error color schema
 	 */
-	_error: false,
+	_error: null,
 
 	/**
 	 * @var jQuery storing DOM content that should be displayed as tooltip bubble content
@@ -108,7 +108,7 @@ window.wikibase.ui.Tooltip.prototype = {
 		this._parentObject = parentObject;
 		this._initTooltip();
 
-		this._subject.data( 'wikibase.ui.tooltip', this );
+		jQuery.data( this._subject[0], 'wikibase.ui.tooltip', this );
 
 		// reposition tooltip when resizing the browser window
 		$( window ).off( '.wikibase.ui.tooltip' );
