@@ -16,8 +16,9 @@ class WikibaseSite {
 	protected $id;
 	protected $group;
 	protected $url;
+	protected $urlPath;
 	protected $type;
-	protected $path;
+	protected $filePath;
 
 	/**
 	 * Constructor.
@@ -27,19 +28,21 @@ class WikibaseSite {
 	 * @param string $id
 	 * @param string $group
 	 * @param string $url
+	 * @param string $urlPath
 	 * @param string $type
-	 * @param string|boolean $path
+	 * @param string|boolean $filePath
 	 */
-	public function __construct( $id, $group, $url, $type = 'unknown', $path = false ) {
+	public function __construct( $id, $group, $url, $urlPath, $type = 'unknown', $filePath = false ) {
 		$this->id = $id;
 		$this->group = $group;
 		$this->url = $url;
+		$this->urlPath = $urlPath;
 		$this->type = $type;
-		$this->path = $path;
+		$this->filePath = $filePath;
 	}
 
 	/**
-	 * Creates and returns a new instance from an array with group, urlpath, type and filepath keys.
+	 * Creates and returns a new instance from an array with url, group, urlpath, type and filepath keys.
 	 *
 	 * @since 0.1
 	 *
@@ -52,6 +55,7 @@ class WikibaseSite {
 		return new static(
 			$siteId,
 			$site['group'],
+			$site['url'],
 			$site['urlpath'],
 			$site['type'],
 			$site['filepath']
@@ -67,6 +71,17 @@ class WikibaseSite {
 	 */
 	public function getId() {
 		return $this->id;
+	}
+
+	/**
+	 * Returns the sites identifier.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getUrl() {
+		return $this->url;
 	}
 
 	/**
@@ -101,8 +116,8 @@ class WikibaseSite {
 	 *
 	 * @return string
 	 */
-	public function getUrl( $pageName = '' ) {
-		return str_replace( '$1', $pageName, $this->url );
+	public function getPageUrl( $pageName = '' ) {
+		return str_replace( '$1', $pageName, $this->url . $this->urlPath );
 	}
 
 	/**
@@ -116,11 +131,11 @@ class WikibaseSite {
 	 * @return false|string
 	 */
 	public function getPath( $path = '' ) {
-		if ( $this->path === false ) {
+		if ( $this->filePath === false ) {
 			return false;
 		}
 
-		return str_replace( '$1', $path, $this->path['filepath'] );
+		return str_replace( '$1', $path, $this->url . $this->filePath );
 	}
 
 }

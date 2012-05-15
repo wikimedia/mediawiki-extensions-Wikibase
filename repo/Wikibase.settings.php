@@ -137,6 +137,7 @@ class WBSettings {
 			// Each element in the 'sites' array contains the identifier for the site (which should be unique!)
 			// pointing to the url of the site, or an array with the url (element: site) and optionally
 			// the filepath and urlpath, using these words as keys.
+			// TODO: add stuff to hold message keys for short and long names
 			'siteIdentifiers' => array(
 				'wikipedia' => array(
 					'sites' => array(

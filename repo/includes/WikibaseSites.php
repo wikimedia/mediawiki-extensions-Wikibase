@@ -16,7 +16,7 @@ class WikibaseSites implements SeekableIterator {
 
 	/**
 	 * Holds the sites with the keys being their identifiers and the
-	 * values being arrays with filepath, urlpath, type and group keys.
+	 * values being arrays with url, filepath, urlpath, type and group keys.
 	 * @var array
 	 */
 	protected $sites;
@@ -66,21 +66,21 @@ class WikibaseSites implements SeekableIterator {
 		foreach ( $siteGroups as $groupName => $siteGroup ) {
 			$groups[$groupName] = array_keys( $siteGroup['sites'] );
 
-			$pathDefault = array_key_exists( 'defaultSiteFilePath', $siteGroup ) ? $siteGroup['defaultSiteFilePath'] : $globalPathDefault;
-			$urlDefault = array_key_exists( 'defaultSiteUrlPath', $siteGroup ) ? $siteGroup['defaultSiteUrlPath'] : $globalUrlDefault;
+			$filePathDefault = array_key_exists( 'defaultSiteFilePath', $siteGroup ) ? $siteGroup['defaultSiteFilePath'] : $globalPathDefault;
+			$urlPathDefault = array_key_exists( 'defaultSiteUrlPath', $siteGroup ) ? $siteGroup['defaultSiteUrlPath'] : $globalUrlDefault;
 			$typeDefault = array_key_exists( 'defaultSiteType', $siteGroup ) ? $siteGroup['defaultSiteType'] : $globalTypeDefault;
 
 			foreach ( $siteGroup['sites'] as $identifier => $data ) {
 				if ( !is_array( $data ) ) {
-					$data = array( 'site' => $data );
+					$data = array( 'url' => $data );
 				}
 
 				if ( !array_key_exists( 'filepath', $data ) ) {
-					$data['filepath'] = $pathDefault;
+					$data['filepath'] = $filePathDefault;
 				}
 
 				if ( !array_key_exists( 'urlpath', $data ) ) {
-					$data['urlpath'] = $urlDefault;
+					$data['urlpath'] = $urlPathDefault;
 				}
 
 				if ( !array_key_exists( 'type', $data ) ) {
@@ -108,10 +108,10 @@ class WikibaseSites implements SeekableIterator {
 
 		if ( $instance === false ) {
 			$instance = static::newFromConfig(
-				WBCSettings::get( 'siteIdentifiers' ),
-				WBCSettings::get( 'defaultSiteUrlPath' ),
-				WBCSettings::get( 'defaultSiteFilePath' ),
-				WBCSettings::get( 'defaultSiteType' )
+				WBSettings::get( 'siteIdentifiers' ),
+				WBSettings::get( 'defaultSiteUrlPath' ),
+				WBSettings::get( 'defaultSiteFilePath' ),
+				WBSettings::get( 'defaultSiteType' )
 			);
 		}
 
@@ -152,8 +152,19 @@ class WikibaseSites implements SeekableIterator {
 	 * @return WikibaseSites
 	 */
 	public function getGroup( $groupName ) {
+		if ( array_key_exists( $groupName, $this->groups ) ) {
+			$sites = array();
+
+			foreach ( $this->groups[$groupName] as $siteId ) {
+				$sites[$siteId] = $this->sites[$siteId];
+			}
+		}
+		else {
+			$sites = array();
+		}
+
 		return new static(
-			array_key_exists( $groupName, $this->groups ) ? $this->groups[$groupName] : array(),
+			$sites,
 			array( $groupName )
 		);
 	}
@@ -242,10 +253,10 @@ class WikibaseSites implements SeekableIterator {
 	}
 
 	/**
-	 * @return array
+	 * @return WikibaseSite
 	 */
 	public function current() {
-		return $this->sites[$this->key];
+		return WikibaseSite::newFromArray( $this->key, $this->sites[$this->key] );
 	}
 
 	/**
