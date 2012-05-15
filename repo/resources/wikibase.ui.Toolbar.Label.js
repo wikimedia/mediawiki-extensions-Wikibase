@@ -68,7 +68,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 			this._elem.empty().remove();
 			this._elem = null;
 		}
-		if ( this.tooltip != null ) {
+		if ( this._tooltip != null ) {
 			this.removeTooltip();
 		}
 	},

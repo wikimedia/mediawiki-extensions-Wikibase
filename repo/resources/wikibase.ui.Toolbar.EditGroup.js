@@ -84,7 +84,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 
 		this.tooltipAnchor = new window.wikibase.ui.Toolbar.Label( $( '<span/>', {
 			'class': 'mw-help-field-hint',
-			style: 'display:inline',
+			style: 'display:inline;text-decoration:none;',
 			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
 		} ) );
 		this.tooltipAnchor.setTooltip( this._editableValue.getInputHelpMessage() );

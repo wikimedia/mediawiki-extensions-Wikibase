@@ -83,7 +83,6 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
 .mw-help-field-hint {
-	text-decoration:none;
 	height:11px;
 	width:11px;
 }

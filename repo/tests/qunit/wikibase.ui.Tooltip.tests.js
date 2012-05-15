@@ -126,16 +126,52 @@
 
 	} );
 
+
+	test( 'show and hide by triggering events', function() {
+		this.label.setTooltip( 'Text' );
+
+		equal(
+			this.label._tooltip._isVisible,
+			false,
+			'tooltip is hidden'
+		);
+
+		this.label._elem.trigger( 'mouseover' );
+
+		equal(
+			this.label._tooltip._isVisible,
+			true,
+			'tooltip is visible when mouseover event is triggered'
+		);
+
+		this.label._elem.trigger( 'mouseout' );
+
+		equal(
+			this.label._tooltip._isVisible,
+			false,
+			'tooltip is hidden when mouseout event is triggered'
+		);
+
+		this.label._elem.trigger( 'mouseover' );
+
+		equal(
+			this.label._tooltip._isVisible,
+			true,
+			'tooltip is visible when mouseover event is triggered (second time)'
+		);
+
+	} );
+
 	test( 'show and hide error tooltip', function() {
 		this.tooltip = new window.wikibase.ui.Tooltip( this.node, this.error, {}, this.label );
-		this.label.addTooltip( this.tooltip );
+		this.label.setTooltip( this.tooltip );
 
 		ok(
 			this.tooltip._error != null,
 			'is an error tooltip'
 		);
 
-		this.tooltip.showMessage( true );
+		this.tooltip.show( true );
 
 		equal(
 			typeof this.tooltip._DomContent,

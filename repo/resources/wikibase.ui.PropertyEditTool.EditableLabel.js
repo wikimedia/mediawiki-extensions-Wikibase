@@ -22,7 +22,9 @@ window.wikibase.ui.PropertyEditTool.EditableLabel = function( subject ) {
 };
 window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
-	
+
+	API_KEY: 'labels',
+
 	_buildInterfaces: function( subject ) {
 		var interfaces = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInterfaces.call( this, subject );
 

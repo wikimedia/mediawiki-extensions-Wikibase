@@ -16,14 +16,13 @@
 ( function () {
 	module( 'wikibase.ui.PropertyEditTool.EditableValue', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
-			var node = $( '<div/>', { id: 'subject' } );
-			$( '<div/>', { id: 'parent' } ).append( node );
-			var propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
+			var node = $( '<div/>', { id: 'parent' } );
+			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
 			this.editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue;
 			this.editableValue.queryApi = function( deferred, apiAction ) { // override AJAX API call
 				deferred.resolve( '' );
 			};
-			var toolbar = propertyEditTool._buildSingleValueToolbar( this.editableValue );
+			var toolbar = this.propertyEditTool._buildSingleValueToolbar( this.editableValue );
 			this.editableValue._init( node, toolbar );
 			this.strings = {
 				valid: [ 'test', 'test 2' ],
@@ -39,7 +38,7 @@
 			];
 
 			equal(
-				this.editableValue._getToolbarParent().attr( 'id' ),
+				this.editableValue._getToolbarParent().parent().attr( 'id' ),
 				'parent',
 				'parent node for toolbar exists'
 			);
@@ -66,6 +65,8 @@
 				'destroyed instances'
 			);
 
+			this.propertyEditTool.destroy();
+			this.propertyEditTool = null;
 			this.editableValue = null;
 			this.strings = null;
 		}
@@ -255,7 +256,7 @@
 		);
 
 		ok(
-			this.editableValue._toolbar.editGroup.btnSave.tooltip instanceof window.wikibase.ui.Tooltip,
+			this.editableValue._toolbar.editGroup.btnSave._tooltip instanceof window.wikibase.ui.Tooltip,
 			'attached tooltip to save button'
 		);
 
@@ -278,7 +279,7 @@
 		this.editableValue.remove( false );
 
 		ok(
-			this.editableValue._toolbar.editGroup.btnRemove.tooltip instanceof window.wikibase.ui.Tooltip,
+			this.editableValue._toolbar.editGroup.btnRemove._tooltip instanceof window.wikibase.ui.Tooltip,
 			'attached tooltip to remove button after trying to remove with API action'
 		);
 
