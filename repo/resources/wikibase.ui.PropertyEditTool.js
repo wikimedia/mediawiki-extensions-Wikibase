@@ -59,7 +59,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._editableValues = new Array();
 		
 		this._subject = $( subject );
-		this._subject.addClass( this.UI_CLASS + '-subject' );
+		this._subject.addClass( this.UI_CLASS );
 				
 		this._initEditToolForValues();
 		this._initToolbar();

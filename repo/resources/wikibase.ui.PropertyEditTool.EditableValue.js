@@ -98,6 +98,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
+		this._subject.addClass( this.UI_CLASS );
+
 		this._pending = this._subject.hasClass( 'wb-pending-value' );
 		
 		this._initInterfaces();

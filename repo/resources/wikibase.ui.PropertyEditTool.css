@@ -63,7 +63,6 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	text-align: center;
 }
 
-<<<<<<< HEAD
 .wb-ui-propertyedittool-counter {
 	white-space: nowrap;
 }
@@ -72,8 +71,14 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	margin: 0.3em;
 }
 
-=======
->>>>>>> 34794c03b26ee5c2cd89e06e549a6fff79ca1424
+.wb-ui-propertyedittool-editablevalue {
+
+}
+
+.wb-ui-propertyedittool-editablevalue-ineditmode {
+	white-space: nowrap;
+}
+
 /********** TOOLTIP **********/
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */

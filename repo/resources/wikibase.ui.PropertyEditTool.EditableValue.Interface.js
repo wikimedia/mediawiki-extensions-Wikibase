@@ -136,10 +136,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		this._inputElem.appendTo( inputParent );
 
 		if( this.autoExpand ) {
+			var autoExpansionBoundary = this._subject.parents( '.' + wikibase.ui.PropertyEditTool.prototype.UI_CLASS + ':first' );
+			var autoExpansionSum = this._subject.parents( '.' + wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS + ':first' );
+
 			this._inputElem.inputAutoExpand( {
 				comfortZone: 20,
 				minWidth: 100,
-				maxWidth: 600
+				maxWidth: this._subject.parents( '.' + wikibase.ui.PropertyEditTool.prototype.UI_CLASS + ':first' ),
+				widthCalculation: $.proxy( function( width ) {
+					// add width of the toolbar
+					return width + autoExpansionSum.children( '.' + wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS + '-toolbarparent:first' ).outerWidth( true ) + 20;
+				}, this )
 			} );
 		}
 	},
