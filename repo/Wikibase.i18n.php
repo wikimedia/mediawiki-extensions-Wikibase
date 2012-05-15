@@ -47,26 +47,35 @@ $messages['en'] = array(
  * @author Jeblad
  */
 $messages['qqq'] = array(
-	'wikibase-desc' => '{{desc}}',
-	'wikibase-edit' => 'This is a generic text used for a link that puts the user interface into edit mode for an existing element of some kind.',
-	'wikibase-save' => 'This is a generic text used for a link that saves what the user has done while the user interface has been in edit mode.',
-	'wikibase-cancel' => 'This is a generic text used for a link that cancels what the user has done while the user interface has been in edit mode.',
-	'wikibase-add' => 'This is a generic text used for a link that puts the user interface into edit mode for an additional element of some kind.',
-	'wikibase-label-edit-placeholder' => 'This is a generic text used while editing a (possibly new) label.',
-	'wikibase-description-edit-placeholder' => 'This is a generic text used while editing a (possibly new) description.',
-	'wikibase-sitelink-site-edit-placeholder' => 'This is a generic text used while defining the site for a (possibly new) sitelink.',
-	'wikibase-sitelink-page-edit-placeholder' => 'This is a generic text used while defining the page for a (possibly new) sitelink.',
-	'wikibase-label-input-help-message' => 'Help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form.',
-	'wikibase-description-input-help-message' => 'Help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form.',
-	'wikibase-sitelinks' => 'Pages on a specific cluster of sites linked to this item',
-	'wikibase-sitelinks-add' => 'Add a sitelink to a language specific page on the cluster.',
-	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.',
-	'wikibase-sitelinks-input-help-message' => 'Set a sitelink to a language specific page on the cluster.',
-	'wikibase-remove' => 'This is a generic text used for a link that removes an element of some kind, without the the user interface is put in edit mode.',
+	'wikibase-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
+	'wikibase-edit' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
+This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.',
+	'wikibase-save' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
+This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that saves what the user has done while the user interface has been in edit mode.',
+	'wikibase-cancel' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
+This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that cancels what the user has done while the user interface has been in edit mode.',
+	'wikibase-add' => 'This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.',
+	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
+This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
+This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
+	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
+This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
+	'wikibase-sitelink-page-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
+This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
+	'wikibase-label-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 B.png|right|0x150px]]
+Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-description-input-help-message' => 'Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
+Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-sitelinks-add' => 'Add a sitelink to a language specific page on the cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
+	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+	'wikibase-sitelinks-input-help-message' => 'Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+	'wikibase-remove' => 'This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface is put in edit mode.',
 	'wikibase-propertyedittool-full' => 'A list of elements the user is assumed to enter is now complete.',
-	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available.',
-	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated.',
-	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated.',
+	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
+	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
+	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
@@ -350,6 +359,16 @@ $messages['ja'] = array(
 	'wikibase-remove' => '除去',
 );
 
+/** Kurdish (Latin script) (‪Kurdî (latînî)‬)
+ * @author George Animal
+ */
+$messages['ku-latn'] = array(
+	'wikibase-edit' => 'biguherîne',
+	'wikibase-save' => 'tomar bike',
+	'wikibase-cancel' => 'betal bike',
+	'wikibase-description-input-help-message' => 'Danasîneka kurt têkeve $1',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
@@ -414,6 +433,32 @@ $messages['nl'] = array(
 	'wikibase-sitelinksedittool-full' => "Verwijzingen naar pagina's die al zijn ingesteld voor alle bekende sites.",
 	'special-itembytitle' => 'Item gesorteerd op naam',
 	'special-itembylabel' => 'Item gesorteerd op label',
+);
+
+/** Norwegian Nynorsk (‪Norsk (nynorsk)‬)
+ * @author Jeblad
+ */
+$messages['nn'] = array(
+	'wikibase-desc' => 'Strukturert datalager',
+	'wikibase-edit' => 'endre',
+	'wikibase-save' => 'lagre',
+	'wikibase-cancel' => 'avbryt',
+	'wikibase-add' => 'legg til',
+	'wikibase-label-edit-placeholder' => 'lag merkelapp',
+	'wikibase-description-edit-placeholder' => 'lag beskriving',
+	'wikibase-sitelink-site-edit-placeholder' => 'oppgje nettstad',
+	'wikibase-sitelink-page-edit-placeholder' => 'oppgje side',
+	'wikibase-label-input-help-message' => 'Lag ein merkelapp for datasettet knytt til $1.',
+	'wikibase-description-input-help-message' => 'Lag ein kort beskriving for datasettet knytt til $1.',
+	'wikibase-sitelinks' => 'Sidene som er knytt til dette datasettet',
+	'wikibase-sitelinks-add' => 'Legg til ein nettstadlekk',
+	'wikibase-sitelinks-empty' => 'Det fins ingen nettstadlekker',
+	'wikibase-sitelinks-input-help-message' => 'Definer ein nettstadlekk slik at den peiker på ein artikkel.',
+	'wikibase-remove' => 'fjern',
+	'wikibase-propertyedittool-full' => 'Lista av verdiar er nå komplett',
+	'wikibase-sitelinksedittool-full' => 'Det er ikkje fleire nettstadar tilgjengeleg',
+	'special-itembytitle' => 'Eit datasett er påvist ved bruk av tittel',
+	'special-itembylabel' => 'Eit datasett er påvist ved bruk av merkelapp',
 );
 
 /** Portuguese (Português)
