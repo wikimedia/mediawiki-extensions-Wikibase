@@ -46,7 +46,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @param array $data
 	 */
 	public function __construct( array $data ) {
-		parent::__construct();
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 
 		$this->data = $data;
 	}

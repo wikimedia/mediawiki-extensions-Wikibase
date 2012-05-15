@@ -1,33 +1,26 @@
 <?php
 
 /**
- * Class representing a Wikibase page.
+ * Base handler class for WikibaseEntity content classes.
  *
  * @since 0.1
  *
- * @file WikibaseContentHandler.php
+ * @file WikibaseEntityHandler.php
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
+ * @author Daniel Kinzler
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseContentHandler extends ContentHandler {
+abstract class WikibaseEntityHandler extends ContentHandler {
 
-	/**
-	 * FIXME: bad method name
-	 *
-	 * @return WikibaseItem
-	 */
-	public function makeEmptyContent() {
-		return WikibaseItem::newEmpty();
-	}
-
-	public function __construct() {
+	public function __construct( $modelId ) {
 		$formats = array(
 			CONTENT_FORMAT_JSON,
 			CONTENT_FORMAT_SERIALIZED
 		);
 
-		parent::__construct( CONTENT_MODEL_WIKIBASE, $formats );
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $formats );
 	}
 
 	/**
@@ -48,7 +41,7 @@ class WikibaseContentHandler extends ContentHandler {
 	public function serializeContent( Content $content, $format = null ) {
 
 		if ( is_null( $format ) ) {
-			$format = WBSettings::get( 'serializationFormat' );
+			$format = $this->getDefaultFormat();
 		}
 
 		#FIXME: assert $content is a WikibaseContent instance
@@ -69,22 +62,17 @@ class WikibaseContentHandler extends ContentHandler {
 		return $blob;
 	}
 
-	public function getActionOverrides() {
-		return array(
-			'view' => 'WikibaseViewItemAction',
-			'edit' => 'WikibaseEditItemAction',
-		);
-	}
-
 	/**
-	 * @param string $blob
-	 * @param null|string $format
+	 * @param $blob
+	 * @param null $format
+	 * @return mixed
 	 *
-	 * @return WikibaseItem
+	 * @throws MWException
+	 * @throws MWContentSerializationException
 	 */
-	public function unserializeContent( $blob, $format = null ) {
+	protected function unserializedData( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
-			$format = WBSettings::get( 'serializationFormat' );
+			$format = $this->getDefaultFormat();
 		}
 
 		switch ( $format ) {
@@ -103,27 +91,8 @@ class WikibaseContentHandler extends ContentHandler {
 			throw new MWContentSerializationException( 'failed to deserialize' );
 		}
 
-		return WikibaseItem::newFromArray( $data );
+		return $data;
 	}
 
-	public static function flattenArray( $a, $prefix = '', &$into = null ) {
-		if ( is_null( $into ) ) {
-			$into = array();
-		}
-
-		foreach ( $a as $k => $v ) {
-			if ( is_object( $v ) ) {
-				$v = get_object_vars( $v );
-			}
-
-			if ( is_array( $v ) ) {
-				WikibaseContentHandler::flattenArray( $v, "$prefix$k | ", $into );
-			} else {
-				$into[ "$prefix$k" ] = $v;
-			}
-		}
-
-		return $into;
-	}
 }
 
