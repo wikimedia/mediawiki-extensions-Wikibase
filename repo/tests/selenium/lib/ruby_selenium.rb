@@ -147,7 +147,7 @@ class RubySelenium
 
   # creates a random string
   def self.generate_random_string(length=8)
-    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ '
+    chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
     string = ''
     length.times { string << chars[rand(chars.size)] }
     return string

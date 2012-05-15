@@ -12,7 +12,7 @@ require 'require_all'
 require_all 'lib/pages'
 
 # TODO: must this really be global?
-$target_browser = "firefox" # "chrome" "ie" "opera" "safari" "firefox"
+$target_browser = "ie" # "chrome" "ie" "opera" "safari" "firefox"
 
 RSpec.configure do |config|
   config.include PageObject::PageFactory
@@ -50,12 +50,4 @@ def ajax_wait
   end
   # puts script
   return true
-end
-
-# creates a random string
-def generate_random_string(length=8)
-  chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
-  string = ''
-  length.times { string << chars[rand(chars.size)] }
-  return string
 end
