@@ -48,8 +48,7 @@ window.wikibase.utilities = {};
 				fontWeight: input.css( 'fontWeight' ),
 				letterSpacing: input.css( 'letterSpacing' ),
 				whiteSpace: 'nowrap'
-			} )
-			.appendTo( $( 'body' ) ); // if not appended, width() will always return 0
+			} );
 
 			var expand = function() {
 				if( val === ( val = input.val() ) ) {
@@ -57,15 +56,18 @@ window.wikibase.utilities = {};
 				}
 
 				// Take text from input and put it into our dummy
+				// insert ruler and remove it again
+				ruler.insertAfter( input );
 				ruler.html( val // escape stuff
 					.replace(/&/g, '&amp;')
 					.replace(/</g, '&lt;')
 					.replace(/\s/g,'&nbsp;')
 					.replace(/\s/g,'&nbsp;')
 				);
+				var rulerWidth = ruler.width();
+				ruler.remove();
 
 				// Calculate new width + whether to change
-				var rulerWidth = ruler.width();
 				var newWidth = ( rulerWidth + o.comfortZone ) >= minWidth ? rulerWidth + o.comfortZone : minWidth;
 				var currentWidth = input.width();
 
@@ -78,8 +80,6 @@ window.wikibase.utilities = {};
 					input.width( newWidth );
 				}
 			};
-
-			ruler.insertAfter( input );
 
 			$( this ).on( 'keyup keydown blur update', expand );
 
