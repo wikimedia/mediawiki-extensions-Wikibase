@@ -108,7 +108,7 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to set a label and a description for a Wikibase item.'
+			'API module to delete a label or description for a single Wikibase item.'
 		);
 	}
 
