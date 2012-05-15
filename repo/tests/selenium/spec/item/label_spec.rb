@@ -3,10 +3,11 @@ require 'spec_helper'
 describe "Check functionality of edit label" do
   context "Check for edit label" do
     it "should check for edit label" do
-      visit_page(LoginPage)
-      @current_page.login_with("tobijat", "darthvader")
-      
+      # visit_page(LoginPage)
+      # @current_page.login_with("tobijat", "darthvader")
+
       visit_page(ItemPage)
+      @current_page.wait_for_item_to_load
       @current_page.firstHeading.should be_true
       @current_page.itemLabelSpan.should be_true
       current_label = @current_page.itemLabelSpan
@@ -31,18 +32,26 @@ describe "Check functionality of edit label" do
       @current_page.labelInputField_element.clear
       @current_page.labelInputField = changed_label
       @current_page.saveLabelLink
-      @current_page.itemLabelSpan.should == changed_label
+      @current_page.apiCallWaitingMessage?.should be_true
       ajax_wait
+      @current_page.wait_for_api_callback
+      
+      @current_page.itemLabelSpan.should == changed_label
       @browser.refresh
+      @current_page.wait_for_item_to_load
       @current_page.itemLabelSpan.should == changed_label
       @browser.title.include? changed_label
       @current_page.editLabelLink
       @current_page.labelInputField_element.clear
       @current_page.labelInputField = current_label
       @current_page.saveLabelLink
-      @current_page.itemLabelSpan.should == current_label
+      @current_page.apiCallWaitingMessage?.should be_true
       ajax_wait
+      @current_page.wait_for_api_callback
+      
+      @current_page.itemLabelSpan.should == current_label
       @browser.refresh
+      @current_page.wait_for_item_to_load
       @current_page.itemLabelSpan.should == current_label
       @browser.title.include? current_label
     end
