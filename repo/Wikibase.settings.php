@@ -140,15 +140,15 @@ class WBSettings {
 			'siteIdentifiers' => array(
 				'wikipedia' => array(
 					'sites' => array(
-					'en' => 'https://en.wikipedia.org',
-					'de' => 'https://de.wikipedia.org',
-					'nl' => 'https://nl.wikipedia.org',
-					'fi' => 'https://fi.wikipedia.org',
-					'da' => 'https://da.wikipedia.org',
-					'no' => 'https://no.wikipedia.org',
-					'nn' => 'https://nn.wikipedia.org',
-					'sv' => 'https://sv.wikipedia.org',
-					'foobar' => array( 'site' => 'https://www.foo.bar/', 'filepath' => '/folder/', 'urlpath' => '/wikiname/$1' ),
+						'en' => 'https://en.wikipedia.org',
+						'de' => 'https://de.wikipedia.org',
+						'nl' => 'https://nl.wikipedia.org',
+						'fi' => 'https://fi.wikipedia.org',
+						'da' => 'https://da.wikipedia.org',
+						'no' => 'https://no.wikipedia.org',
+						'nn' => 'https://nn.wikipedia.org',
+						'sv' => 'https://sv.wikipedia.org',
+						'foobar' => array( 'site' => 'https://www.foo.bar/', 'filepath' => '/folder/', 'urlpath' => '/wikiname/$1' ),
 					),
 				),
 				'stuff' => array(
