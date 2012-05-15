@@ -24,10 +24,11 @@ window.wikibase.utilities = {};
 	 *
 	 * @param object options set of options with the following (optional) keys:
 	 *        'maxWidth':         number|function|jQuery - maximum width allowed.
-	 *        'minWidth':         number|function|jQuery - minimum width allowed.
+	 *        'minWidth':         number|function|jQuery - minimum width allowed. If not set, the space required by the
+	 *                            input elements placeholder text will be datermined automatically.
 	 *        'comfortZone':      number|function|jQuery - space left free behind the input.
-	 *        'widthCalculation': function(input) - function which receives the input element as first parameter.
-	 *                            has to return the width considered the current width.
+	 *        'widthCalculation': function(width) - function to calculate the width, for example to add some additional
+	 *                            space for other elements which should be considered when calculating remaining space.
 	 *
 	 * @example $( 'input' ).inputAutoExpand();
 	 */
@@ -35,7 +36,7 @@ window.wikibase.utilities = {};
 
 		var o = $.extend( {
 			maxWidth: 1000,
-			minWidth: 0,
+			minWidth: false,
 			comfortZone: 70,
 			widthCalculation: function( width ) { return width },
 
@@ -67,16 +68,18 @@ window.wikibase.utilities = {};
 			}
 		}, options );
 
+		var autoMinWidth = o.minWidth === false;
+
 		// only expand input fields:
 		this.filter( 'input:text' ).each( function() {
 
-			var minWidth = o.getMinWidth() || $( this ).width();
-			var val = '';
+			//var minWidth = o.getMinWidth() || $( this ).width();
 			var input = $( this );
+			var val = input.val();
 			var ruler = $( '<div/>' ).css( {
 				position: 'absolute',
-				top: -99999,
-				left: -99999,
+				top: -9999,
+				left: -9999,
 				width: 'auto',
 				fontSize: input.css( 'fontSize' ),
 				fontFamily: input.css( 'fontFamily' ),
@@ -86,8 +89,9 @@ window.wikibase.utilities = {};
 			} );
 
 			var expand = function() {
-				if( val === ( val = input.val() ) ) {
-					return;
+				if( val === '' && input.attr( 'placeholder' ) && !input.is( ':focus' ) ) {
+					// if empty and not focused, make sure placeholder text will be displayed
+					val = input.attr( 'placeholder' );
 				}
 
 				// Take text from input and put it into our dummy
@@ -102,13 +106,16 @@ window.wikibase.utilities = {};
 				var rulerWidth = ruler.width();
 				ruler.remove();
 
-				// Calculate new width + whether to change
-				var maxWidth = o.getMaxWidth()
-				var newWidth = ( rulerWidth + o.getComfortZone() ) >= minWidth ? rulerWidth + o.getComfortZone() : minWidth;
-				var newInputWidth = newWidth; // pure width of the input
-				newWidth = o.widthCalculation( newWidth );
+				var minWidth = o.getMinWidth();
+				var maxWidth = o.getMaxWidth();
+
+				// pure width of the input, without additional calculation
+				var newInputWidth = ( rulerWidth + o.getComfortZone() ) >= minWidth ? rulerWidth + o.getComfortZone() : minWidth;
+				var newWidth = o.widthCalculation( newInputWidth );
+
 				var currentWidth = o.widthCalculation( input.width() );
 
+				// Calculate new width + whether to change
 				var isValidWidthChange =
 						( newWidth < currentWidth && newWidth >= minWidth )
 						|| ( newWidth > minWidth && newWidth < maxWidth );
@@ -118,13 +125,38 @@ window.wikibase.utilities = {};
 					input.width( newInputWidth );
 				}
 				else if( maxWidth < newWidth ) {
+					// make sure we set the width if the content is too long from the start
 					input.width( maxWidth - o.widthCalculation( 0 ) );
+				}
+
+				if( o.minWidth === false ) {
+					// no explicit min-width given, set this to the text required by placeholder
+					o.minWidth = input.width();
 				}
 			};
 
-			expand(); // set width initially
-			$( this ).on( 'keyup keydown blur update', expand );
+			// if no min width given, set min width to placeholder text. This will also prevent impediments with
+			// growing/shrinking boxes on blur when intending to click some button but after the blur the mouse click
+			// event isn't fired because the mouseup has been registered on some other element.
+			if( o.minWidth === false && input.attr( 'placeholder' ) ) {
+				var origVal = val;
+				val = input.attr( 'placeholder' );
+				// first call to provoke placeholder being handled to datermine min width:
+				expand();
+				val = origVal;
+			} else {
+				o.minWidth = 0;
+			}
 
+			expand(); // set width initially
+
+			// set width on all important related events:
+			$( this )
+			.on( 'keyup keydown blur update', function() {
+				if( val !== ( val = input.val() ) ) {
+					expand();
+				}
+			} )
 		} );
 
 		return this;
