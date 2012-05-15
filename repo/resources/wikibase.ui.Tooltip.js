@@ -236,7 +236,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * @return bool
 	 */
 	isVisible: function() {
-		return this._isVisible();
+		return this._isVisible;
 	},
 
 	/**
@@ -277,7 +277,6 @@ window.wikibase.ui.Tooltip.prototype = {
 	 */
 	hide: function() {
 		this._permanent = false;
-		this._toggleEvents( false );
 		if ( this._isVisible ) {
 			this._tipsy.$tip.off( 'click' );
 			this._tipsy.hide();
