@@ -59,3 +59,4 @@ def generate_random_string(length=8)
   length.times { string << chars[rand(chars.size)] }
   return string
 end
+

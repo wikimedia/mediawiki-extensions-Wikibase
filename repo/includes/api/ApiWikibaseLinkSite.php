@@ -45,7 +45,34 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			return $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
+			$arr = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
+			if ( $arr !== false ) {
+				$normalized = array();
+				if ( $params['linksite'] !== $arr['site'] ) {
+					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $arr['site'] );
+				}
+				if ( $params['linktitle'] !== $arr['title'] ) {
+					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $arr['title'] );
+				}
+				if ( count($normalized) ) {
+					$this->getResult()->addValue(
+						'item',
+						'normalized',
+						$normalized
+					);
+				}
+				$this->getResult()->addValue(
+					'item',
+					'sitelinks',
+					array( $params['linksite'] => $arr )
+				);
+			}
+//				$this->getResult()->addValue(
+//					null,
+//					'res',
+//					$arr !== false
+//				);
+			return $arr !== false;
 		}
 	}
 
@@ -68,7 +95,9 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array_merge( parent::getAllowedParams(), array(
+		$allowedParams = parent::getAllowedParams();
+		$allowedParams['item'][ApiBase::PARAM_DFLT] = 'set';
+		return array_merge( $allowedParams, array(
 			'badge' => array(
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
@@ -82,7 +111,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			),
 			'link' => array(
 				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
-				ApiBase::PARAM_REQUIRED => true,
+				ApiBase::PARAM_DFLT => 'add',
 			),
 		) );
 	}
@@ -98,7 +127,12 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			'linksite' => 'The identifier of the site on which the article to link resides',
 			'linktitle' => 'The title of the article to link',
 			'badge' => 'Badge to give to the page, ie "good" or "featured"',
-			'link' => 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist',
+			'link' => array( 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist.',
+				"add - the link should not exist before the call or an error will be reported.",
+				"update - the link shuld exist before the call or an error will be reported.",
+				"set - the link could exist or not before the call.",
+				"remove - the link is removed if its found."
+			)
 		) );
 	}
 
@@ -108,7 +142,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to associate an artcile on a wiki with a Wikibase item or remove an already made such association.'
+			'API module to associate an artiile on a wiki with a Wikibase item or remove an already made such association.'
 		);
 	}
 

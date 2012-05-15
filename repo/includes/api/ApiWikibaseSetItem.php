@@ -86,25 +86,34 @@ class ApiWikibaseSetItem extends ApiBase {
 			// TODO: throw error. Right now will have PHP fatal when accessing $item later on...
 		}
 
-		if ( !isset($params['summary']) ) {
+		//if ( !isset($params['summary']) ) {
 			// TODO: make a proper summary
 			//$params['summary'] = $item->getTextForSummary();
-			$params['summary'] = 'dummy';
-		}
+			//$params['summary'] = 'dummy';
+		//}
 
 		$languages = WikibaseUtils::getLanguageCodes();
 		
 		// because this is serialized and cleansed we can simply go for known values
+		$arr = array( 'id' => $item->getId() );
+		$sitelinks = $item->getRawSiteLinks();
+		if (count($sitelinks)) {
+			$arr['sitelinks'] = $sitelinks;
+		}
+		$descriptions = $item->getRawDescriptions(  );
+		if (count($descriptions)) {
+			$arr['descriptions'] = $descriptions;
+		}
+		$labels = $item->getRawLabels(  );
+		if (count($labels)) {
+			$arr['labels'] = $labels;
+		}
 		$this->getResult()->addValue(
-			NULL,
+			null,
 			'item',
-			array(
-				'id' => $item->getId(),
-				'sitelinks' => $item->getSiteLinks(),
-				'descriptions' => $item->getDescriptions($languages),
-				'labels' => $item->getLabels($languages)
-			)
+			$arr
 		);
+		
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -162,10 +171,10 @@ class ApiWikibaseSetItem extends ApiBase {
 				ApiBase::PARAM_TYPE => 'string',
 				//ApiBase::PARAM_REQUIRED => true,
 			),
-			'summary' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_DFLT => __CLASS__, // TODO
-			),
+			//'summary' => array(
+			//	ApiBase::PARAM_TYPE => 'string',
+			//	ApiBase::PARAM_DFLT => __CLASS__, // TODO
+			//),
 			'item' => array(
 				ApiBase::PARAM_TYPE => array( 'add' ),
 				ApiBase::PARAM_DFLT => 'add',
@@ -186,8 +195,12 @@ class ApiWikibaseSetItem extends ApiBase {
 			'data' => array( 'The serialized object that is used as the data source.',
 				"The newly created item will be assigned an item 'id'."
 			),
-			'item' => 'Indicates if you are changing the content of the item',
-			'summary' => 'Summary for the edit.',
+			'item' => array( 'Indicates if you are changing the content of the item.',
+				"add - the item should not exist before the call or an error will be reported.",
+				"update - the item shuld exist before the call or an error will be reported.",
+				"set - the item could exist or not before the call.",
+			),
+			//'summary' => 'Summary for the edit.',
 			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
 			'gettoken' => 'If set, a "setitem" token will be returned, and no other action will be taken',
 		);
@@ -199,7 +212,7 @@ class ApiWikibaseSetItem extends ApiBase {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to create a new Wikibase item and modify it with serialised information.'
+			'API module to create a single new Wikibase item and modify it with serialised information.'
 		);
 	}
 
