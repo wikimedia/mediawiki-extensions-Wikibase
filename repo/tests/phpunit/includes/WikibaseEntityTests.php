@@ -21,7 +21,7 @@ class WikibaseEntityTests extends MediaWikiTestCase {
     {
     	// this should not do anything usefull, except checking that its there
         $stub = $this->getMockForAbstractClass('WikibaseEntity');
-        $this->assertEquals( CONTENT_MODEL_WIKIBASE, $stub->getModelName() );
+        $this->assertEquals( CONTENT_MODEL_WIKIBASE, $stub->getModel() );
     }
 
 }

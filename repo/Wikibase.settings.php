@@ -125,7 +125,7 @@ class WBSettings {
 	protected static function getDefaultSettings() {
 		return array(
 			// alternative: application/vnd.php.serialized
-			'serializationFormat' => 'application/json',
+			'serializationFormat' => CONTENT_FORMAT_JSON,
 
 			// Disables token and post requirements in the API to
 			// facilitate testing, do not turn on in production!
