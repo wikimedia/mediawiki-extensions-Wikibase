@@ -131,14 +131,14 @@ class WikibaseSites implements SeekableIterator {
 	 */
 	public function getIdentifiers( $groupName = null ) {
 		if ( is_null( $groupName ) ) {
+			return array_keys( $this->sites );
+		}
+		else {
 			if ( !array_key_exists( $groupName, $this->groups ) ) {
 				throw new MWException( "No site group with name '$groupName' exists" );
 			}
 
 			return $this->groups[$groupName];
-		}
-		else {
-			return array_keys( $this->sites );
 		}
 	}
 

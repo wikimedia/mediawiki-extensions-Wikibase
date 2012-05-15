@@ -131,7 +131,9 @@ class WBSettings {
 			// facilitate testing, do not turn on in production!
 			'apiInDebug' => false,
 
-			// The client sites.
+			'apiDebugWithTokens' => false,
+
+				// The client sites.
 			// They are grouped, each group has a 'sites' element which is an array holding the identifiers.
 			// It also can hold defaultSiteUrlPath and defaultSiteFilePath overriding the global default.
 			// Each element in the 'sites' array contains the identifier for the site (which should be unique!)
