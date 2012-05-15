@@ -26,6 +26,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	_buildInterfaces: function( subject ) {
 		var interfaces = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInterfaces.call( this, subject );
 		interfaces[0].inputPlaceholder = mw.msg( 'wikibase-description-edit-placeholder' );
+		interfaces[0].autoExpand = true;
 		
 		return interfaces;
 	},
