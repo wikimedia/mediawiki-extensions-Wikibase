@@ -13,16 +13,29 @@
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
 class WBCLangLinkHandler {
-	protected static $cache = array();
-	protected static $sort_order = false;
+        protected static $cache = array();
+        protected static $sort_order = false;
+        protected static $langlinksset = false;
 
-	public static function onParserBeforeTidy( Parser &$parser, &$text ) {
-		global $wgLanguageCode;
+	# todo: this is hackish, is this the best hook to use?
+        public static function onParserBeforeTidy( Parser &$parser, &$text ) {
+                if ( ! self::$langlinksset ) {
+                        $result = self::addLangLinks( $parser, $text );
+                }
 
-		// If this is an interface message, we don't do anything.
-		if( $parser->getOptions()->getInterfaceMessage() ) {
-			return true;
-		}
+                if ( $result ) {
+                        self::$langlinksset = true;
+                }
+                return true;
+        }
+
+        protected static function addLangLinks( &$parser, &$text ) {
+                global $wgLanguageCode, $wgLang;
+
+                // If this is an interface message, we don't do anything.
+                if( $parser->getOptions()->getInterfaceMessage() ) {
+                        return true;
+                }
 
 		// If we don't support the namespace, we maybe sort the links, but don't do anything else.
 		$title = $parser->getTitle();
@@ -42,21 +55,8 @@ class WBCLangLinkHandler {
 		// Here we finally get the links...
 		// NOTE: Instead of getFullText(), we need to get a normalized title, and the server should use a locale-aware normalization function yet to be written which has the same output
 		$title_text = $title->getFullText();
-		if( isset( self::$cache[$title_text] ) ) {
-			// ...from the local cache if there is one...
-			$links = self::$cache[$title_text];
-		} else {
-			// ...or from the external storage.
-			$links = self::getLinks( $title_text );
-
-                        // If there was an error while getting links, we use the current links...
-                        if( $links === false ) {
-                                $links = array(); // self::readLinksFromDB( wfGetDB( DB_SLAVE ), $title->getArticleID() );
-                        }
-
-			// ...and write them to the cache.
-			self::$cache[$title_text] = $links;
-		}
+		
+		$links = self::getLinks( $title_text );
 
 		// Always remove the link to the site language.
 		unset( $links[$wgLanguageCode] );
