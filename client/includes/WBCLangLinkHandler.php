@@ -135,16 +135,12 @@ class WBCLangLinkHandler {
 
 		$links = $api_response['item']['sitelinks'];
 
-		// Convert the links to the return format.
-		// This is no longer necessary since API format changed, but it will probably change again.
-		/*
-		$res = array();
+                $iwlinks = array();
 		foreach( $links as $link ) {
-			$res[$link['site']] = $link['title'];
-		}
-		*/
+                        $iwlinks[$link['site']] = $link['title'];
+                }
 
-		return $links;
+		return $iwlinks;
 	}
 
 	/**
