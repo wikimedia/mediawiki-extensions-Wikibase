@@ -109,8 +109,8 @@ class WikibaseSites implements SeekableIterator {
 		if ( $instance === false ) {
 			$instance = static::newFromConfig(
 				WBSettings::get( 'siteIdentifiers' ),
-				WBSettings::get( 'defaultSiteUrlPath' ),
 				WBSettings::get( 'defaultSiteFilePath' ),
+				WBSettings::get( 'defaultSiteUrlPath' ),
 				WBSettings::get( 'defaultSiteType' )
 			);
 		}
