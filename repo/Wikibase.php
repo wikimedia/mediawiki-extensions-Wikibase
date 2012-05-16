@@ -100,11 +100,12 @@ $wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['WikibaseContentHandler'] 			= $dir . 'includes/WikibaseContentHandler.php';
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 			= $dir . 'includes/WikibaseDifferenceEngine.php';
 $wgAutoloadClasses['WikibaseUtils'] 					= $dir . 'includes/WikibaseUtils.php';
 $wgAutoloadClasses['WikibaseItem'] 						= $dir . 'includes/WikibaseItem.php';
+$wgAutoloadClasses['WikibaseItemHandler'] 				= $dir . 'includes/WikibaseItemHandler.php';
 $wgAutoloadClasses['WikibaseEntity'] 					= $dir . 'includes/WikibaseEntity.php';
+$wgAutoloadClasses['WikibaseEntityHandler'] 			= $dir . 'includes/WikibaseEntityHandler.php';
 $wgAutoloadClasses['WikibaseItemDisambiguation'] 		= $dir . 'includes/WikibaseItemDisambiguation.php';
 $wgAutoloadClasses['WikibaseItemStructuredSave'] 		= $dir . 'includes/WikibaseItemStructuredSave.php';
 $wgAutoloadClasses['WikibaseItemView'] 					= $dir . 'includes/WikibaseItemView.php';
@@ -292,8 +293,12 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 unset( $moduleTemplate );
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIBASE', 'wikibase' );
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE] = 'WikibaseContentHandler';
+
+define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
+
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseItemHandler';
+
+
 
 define( 'WB_NS_DATA', 100 );
 define( 'WB_NS_DATA_TALK', 101 );
@@ -301,7 +306,7 @@ define( 'WB_NS_DATA_TALK', 101 );
 $wgExtraNamespaces[WB_NS_DATA] = 'Data';
 $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 
-$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE;
+$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
 
 
 $egWBSettings = array();

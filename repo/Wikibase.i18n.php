@@ -96,6 +96,7 @@ $messages['qqq'] = array(
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wikibase-label-input-help-message' => '$1: name of the language',
 	'wikibase-description-input-help-message' => '$1: name of the language',
+	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the mor specific error message returned from the underlying API).',
 	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',
