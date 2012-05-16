@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.DescriptionEditTool', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.DescriptionEditTool', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.parentNode = $( '<div/>' );
 			this.text = 'Text';

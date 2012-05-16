@@ -13,7 +13,7 @@
 
 
 ( function () {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.Interface', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.Interface', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } );
 			this.evInterface = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( this.node );

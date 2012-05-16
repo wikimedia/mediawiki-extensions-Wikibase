@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } );
 			this.autocomplete = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface( this.node );

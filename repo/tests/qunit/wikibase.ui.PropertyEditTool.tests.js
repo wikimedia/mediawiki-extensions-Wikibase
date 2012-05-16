@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.PropertyEditTool', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.PropertyEditTool', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.node = $( '<div/>' );
 			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( this.node );

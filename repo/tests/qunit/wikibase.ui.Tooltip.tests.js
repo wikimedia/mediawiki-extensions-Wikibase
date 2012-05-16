@@ -12,7 +12,7 @@
 'use strict';
 
 ( function() {
-	module( 'wikibase.ui.Tooltip', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.Tooltip', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.node = $( '<div/>' );
 			this.label = new window.wikibase.ui.Toolbar.Label( 'Text' );
