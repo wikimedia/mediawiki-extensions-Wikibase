@@ -45,6 +45,18 @@ class SitelinksItemPage < ItemPage
     return false
   end
 
+  def getNthSitelinksTableRow(n)
+    count = 0
+    sitelinksTable_element.each do |tableRow|
+      #count = count+1
+      if count == n
+        return tableRow
+      end
+      count = count+1
+    end
+    return false
+  end
+
   def countExistingSitelinks
     count = 0
     sitelinksTable_element.each do |tableRow|
