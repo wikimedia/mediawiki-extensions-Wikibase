@@ -17,14 +17,12 @@
  * @param jQuery subject tooltip will be attached to this node
  * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
  * @param object tipsyConfig (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
- * @param object parentObject (only required for error tooltip, has to have an implementation of removeTooltip() )
- * 					parent object that the tooltip is referred from
  *
  * @event Hide called after the tooltip was hidden from a previously visible state.
  */
-window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig, parentObject ) {
+window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig ) {
 	if( typeof subject != 'undefined' ) {
-		this._init( subject, tooltipContent, tipsyConfig, parentObject );
+		this._init( subject, tooltipContent, tipsyConfig );
 	}
 };
 window.wikibase.ui.Tooltip.prototype = {
@@ -70,20 +68,13 @@ window.wikibase.ui.Tooltip.prototype = {
 	_DomContent: null,
 
 	/**
-	 * @var object parent object the tooltip is referred from
-	 */
-	_parentObject: null,
-
-	/**
 	 * initializes ui element, called by the constructor
 	 *
 	 * @param jQuery subject tooltip will be attached to this node
 	 * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
 	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
-	 * @param object parentObject (only required for error tooltip, has to have an implementation of removeTooltip() )
-	 * 					parent object that the tooltip is referred from
 	 */
-	_init: function( subject, tooltipContent, tipsyConfig, parentObject ) {
+	_init: function( subject, tooltipContent, tipsyConfig ) {
 		this._subject = subject;
 		if ( typeof tooltipContent == 'string' ) {
 			this._subject.attr( 'title', tooltipContent );
@@ -105,7 +96,6 @@ window.wikibase.ui.Tooltip.prototype = {
 			this._tipsyConfig = {};
 			this.setGravity( 'ne' );
 		}
-		this._parentObject = parentObject;
 		this._initTooltip();
 
 		jQuery.data( this._subject[0], 'wikibase.ui.tooltip', this );
@@ -256,7 +246,7 @@ window.wikibase.ui.Tooltip.prototype = {
 					event.stopPropagation();
 				} );
 				$( window ).one( 'click', $.proxy( function( event ) {
-					this._parentObject.removeTooltip();
+					$( this ).triggerHandler( 'clickoutside' );
 				}, this ) );
 
 				// will lose inner click event on resizing (Details link) when not re-constructed on show
@@ -329,6 +319,80 @@ window.wikibase.ui.Tooltip.prototype = {
 		this._toggleEvents( false );
 		this._tipsyConfig = null;
 		this._tipsy = null;
+	}
+
+};
+
+
+/**
+ * extends random element (like label or interface) with a tooltip
+ */
+window.wikibase.ui.Tooltip.ext = {
+
+	/**
+	 * @var wikibase.ui.Tooltip tooltip attached to this label
+	 */
+	_tooltip: null,
+
+	/**
+	 * Attaches a tooltip message to this element
+	 *
+	 * @param string|window.wikibase.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
+	 */
+	setTooltip: function( tooltip ) {
+		// if last tooltip was visible, we make the new one visible as well
+		var wasVisible = false;
+
+		if ( this._tooltip !== null ) {
+			// remove existing tooltip first!
+			this.removeTooltip();
+			wasVisible = this._tooltip.isVisible();
+		}
+		if ( typeof tooltip == 'string' ) {
+			// build new tooltip from string:
+			this._elem.attr( 'title', tooltip );
+			this._tooltip = new window.wikibase.ui.Tooltip( this._elem, tooltip );
+		} else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
+			this._tooltip = tooltip;
+		}
+		// restore previous tooltips visibility:
+		if( this._tooltip !== null ) {
+			if( wasVisible ) {
+				this._tooltip.show();
+			} else {
+				this._tooltip.hide();
+			}
+		}
+
+		if ( this._tooltip._error != null ) {
+			$( this._tooltip ).one( 'clickoutside', $.proxy( function( event) {
+					this.removeTooltip();
+			}, this ) );
+		}
+
+	},
+
+	/**
+	 * remove a tooltip message attached to this element
+	 *
+	 * @return bool whether a tooltip was set
+	 */
+	removeTooltip: function() {
+		if ( this._tooltip !== null ) {
+			this._tooltip.destroy();
+			this._tooltip = null;
+			return true;
+		}
+		return false;
+	},
+
+	/**
+	 * Returns the element's tooltip or null in case none is set yet
+	 *
+	 * @return window.wikibase.ui.Tooltip|null
+	 */
+	getTooltip: function() {
+		return this._tooltip;
 	}
 
 };

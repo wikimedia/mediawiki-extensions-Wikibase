@@ -34,11 +34,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 */
 	_elem: null,
 
-	/**
-	 * @var wikibase.ui.Tooltip tooltip attached to this label
-	 */
-	_tooltip: null,
-	
+
 	/**
 	 * Initializes the ui element.
 	 * This should normally be called directly by the constructor.
@@ -103,61 +99,6 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 			return contents;
 		}
 	},
-
-	/**
-	 * Attaches a tooltip message to this label
-	 *
-	 * @param string|window.wikibase.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
-	 */
-	setTooltip: function( tooltip ) {
-		// if last tooltip was visible, we make the new one visible as well
-		var wasVisible = false;
-
-		if ( this._tooltip !== null ) {
-			// remove existing tooltip first!
-			this.removeTooltip();
-			wasVisible = this._tooltip.isVisible();
-		}
-		if ( typeof tooltip == 'string' ) {
-			// build new tooltip from string:
-			this._elem.attr( 'title', tooltip );
-			this._tooltip = new window.wikibase.ui.Tooltip( this._elem, tooltip );
-		}
-		else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
-			this._tooltip = tooltip;
-		}
-		// restore previous tooltips visibility:
-		if( this._tooltip !== null ) {
-			if( wasVisible ) {
-				this._tooltip.show();
-			} else {
-				this._tooltip.hide();
-			}
-		}
-	},
-
-	/**
-	 * remove a tooltip message attached to this label
-	 *
-	 * @return bool whether a tooltip was set
-	 */
-	removeTooltip: function() {
-		if ( this._tooltip !== null ) {
-			this._tooltip.destroy();
-			this._tooltip = null;
-			return true;
-		}
-		return false;
-	},
-
-	/**
-	 * Returns the labels tooltip or null in case none is set yet.
-	 *
-	 * @return window.wikibase.ui.Tooltip|null
-	 */
-	getTooltip: function() {
-		return this._tooltip;
-	},
 	
 	/**
 	 * Returns true if the element is disabled.
@@ -215,3 +156,5 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 */
 	beforeEnable: null
 };
+
+$.extend( window.wikibase.ui.Toolbar.Label.prototype, window.wikibase.ui.Tooltip.ext );

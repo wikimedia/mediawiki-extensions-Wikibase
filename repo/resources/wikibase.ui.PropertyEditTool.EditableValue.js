@@ -489,7 +489,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		this._subject.addClass( this.UI_CLASS + '-aftereditnotify' );
 
-		btn.setTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' }, btn ) );
+		btn.setTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' } ) );
 		btn.getTooltip().show( true );
 		$( btn.getTooltip() ).on( 'Hide', $.proxy( function() {
 			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );

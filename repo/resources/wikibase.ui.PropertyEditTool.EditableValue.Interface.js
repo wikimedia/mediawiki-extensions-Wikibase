@@ -66,11 +66,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	_currentWidth: null,
 
 	/**
-	 * @var object wikibase.ui.Tooltip attached to this input interface
-	 */
-	tooltip: null,
-
-	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
 	 *
@@ -167,30 +162,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'blur':     $.proxy( this._onBlur, this ),
 			'change':   $.proxy( this._onChange, this )
 		} );
-	},
-
-	/**
-	 * attach a tooltip to this input interface
-	 *
-	 * @param string|window.wikibase.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
-	 */
-	setTooltip: function( tooltip ) {
-		if ( typeof tooltip == 'string' ) {
-			this._inputElem.attr( 'title', tooltip );
-			this.tooltip = new window.wikibase.ui.Tooltip( this._inputElem, tooltip );
-		} else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
-			this.tooltip = tooltip;
-		}
-	},
-
-	/**
-	 * remove a tooltip message attached to this input interface
-	 */
-	removeTooltip: function() {
-		if ( this.tooltip !== null ) {
-			this.tooltip.destroy();
-			this.tooltip = null;
-		}
 	},
 
 	/**
@@ -523,3 +494,5 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 	onChange: null
 };
+
+$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype, window.wikibase.ui.Tooltip.ext );
