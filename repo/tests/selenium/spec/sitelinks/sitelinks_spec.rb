@@ -59,10 +59,10 @@ describe "Check functionality of add/edit/remove sitelinks" do
       @current_page.pageInputField_element.send_keys :arrow_down
       @current_page.pageInputField_element.send_keys :return
       ajax_wait
-
+      @current_page.wait_for_api_callback
+      
       @browser.refresh
       @current_page.wait_for_sitelinks_to_load
-
       numExistingSitelinks = @current_page.countExistingSitelinks
       numExistingSitelinks.should == 1
     end
@@ -99,6 +99,9 @@ describe "Check functionality of add/edit/remove sitelinks" do
         @current_page.pageInputField_element.send_keys :arrow_down
         @current_page.pageInputField_element.send_keys :return
         ajax_wait
+        @current_page.wait_for_api_callback
+        @browser.refresh
+        @current_page.wait_for_sitelinks_to_load
 
         count = count+1
         if count!=1
@@ -139,7 +142,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
       @current_page.pageInputField_element.send_keys :arrow_down
       @current_page.pageInputField_element.send_keys :return
       ajax_wait
-
+      @current_page.wait_for_api_callback
+      
       @browser.refresh
       @current_page.wait_for_sitelinks_to_load
       @current_page.editSitelinkLink
