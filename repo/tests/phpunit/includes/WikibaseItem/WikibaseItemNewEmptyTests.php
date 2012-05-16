@@ -158,7 +158,6 @@ class WikibaseItemNewEmptyTests extends MediaWikiTestCase {
 		);
 	}
 	
-	
 	public function testGetTextForSummary() {
 		$str = 'This is an description';
 		$len = 8;
