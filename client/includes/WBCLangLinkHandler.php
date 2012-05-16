@@ -133,14 +133,7 @@ class WBCLangLinkHandler {
 			return false;
 		}
 
-		$links = $api_response['item']['sitelinks'];
-
-                $iwlinks = array();
-		foreach( $links as $link ) {
-                        $iwlinks[$link['site']] = $link['title'];
-                }
-
-		return $iwlinks;
+		return $api_response['item']['sitelinks'];
 	}
 
 	/**
