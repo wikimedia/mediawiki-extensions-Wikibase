@@ -61,7 +61,7 @@ class WikibaseViewItemAction extends FormlessAction {
 			foreach ( WikibaseSites::singleton()->getGroup( 'wikipedia' ) as /* WikibaseSite */ $site ) {
 				$sites[$site->getId()] = array(
 					'shortName' => Language::fetchLanguageName( $site->getId() ),
-					'name' => Language::fetchLanguageName( $site->getId() )  . ' Wikipedia',
+					'name' => Language::fetchLanguageName( $site->getId() ), // TODO: names should be configurable in settings
 					'pageUrl' => $site->getPageUrlPath(),
 					'apiUrl' => $site->getPath( 'api.php' ),
 
