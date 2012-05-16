@@ -113,7 +113,7 @@ class ApiWikibaseGetItems extends ApiBase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'titles' => array(
