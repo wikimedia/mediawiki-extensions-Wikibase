@@ -81,7 +81,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 				ApiBase::PARAM_TYPE => 'integer',
 			),
 			'site' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',

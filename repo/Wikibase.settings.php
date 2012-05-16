@@ -123,44 +123,6 @@ class WBSettings {
 	 * @return array
 	 */
 	protected static function getDefaultSettings() {
-
-		// FIXME: this is not nice - we should not mix in API calls with the static configuration
-		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-			// Read all the interlanguage links
-			// This should be cached by Interwiki class depending on $wgInterwikiCache so probably no need to cache here.
-			$api = new ApiMain( new FauxRequest( array( 'action' => 'query', 'meta' => 'siteinfo', 'siprop' => 'interwikimap', 'format' => 'php' ) ) );
-			$api->execute();
-			$api_response = $api->getResult()->getData();
-	
-			$interwikis = $api_response['query']['interwikimap'];
-			$siteIdentifiers = array();
-			foreach( $interwikis as $k => $interwiki ) {
-				if( isset( $interwiki['language'] ) ) {
-					$siteIdentifiers[$interwiki['prefix']] = $interwiki['url'];
-				}
-			}
-			
-		}
-		else {
-			// The client sites during testing. This is so we avoid running maintenance scripts during testing.
-			// They are grouped, each group has a 'sites' element which is an array holding the identifiers.
-			// It also can hold defaultSiteUrlPath and defaultSiteFilePath overriding the global default.
-			// Each element in the 'sites' array contains the identifier for the site (which should be unique!)
-			// pointing to the url of the site, or an array with the url (element: site) and optionally
-			// the filepath and urlpath, using these words as keys.
-			$siteIdentifiers = array(
-				'en' => 'https://en.wikipedia.org',
-				'de' => 'https://de.wikipedia.org',
-				'nl' => 'https://nl.wikipedia.org',
-				'fi' => 'https://fi.wikipedia.org',
-				'da' => 'https://da.wikipedia.org',
-				'no' => 'https://no.wikipedia.org',
-				'nn' => 'https://nn.wikipedia.org',
-				'sv' => 'https://sv.wikipedia.org',
-			);
-			
-		}
-		
 		return array(
 			// alternative: application/vnd.php.serialized
 			'serializationFormat' => CONTENT_FORMAT_JSON,
@@ -169,24 +131,29 @@ class WBSettings {
 			// facilitate testing, do not turn on in production!
 			'apiInDebug' => false,
 
+			'apiDebugWithTokens' => false,
 
-			'siteIdentifiers' => $siteIdentifiers,
-
-			/*
-			// The client sites.
+			// The site link sites we can link to (not necessarily clients!)
 			// They are grouped, each group has a 'sites' element which is an array holding the identifiers.
 			// It also can hold defaultSiteUrlPath and defaultSiteFilePath overriding the global default.
 			// Each element in the 'sites' array contains the identifier for the site (which should be unique!)
 			// pointing to the url of the site, or an array with the url (element: site) and optionally
 			// the filepath and urlpath, using these words as keys.
+			// TODO: add stuff to hold message keys for short and long names
 			'siteIdentifiers' => array(
 				'wikipedia' => array(
 					'sites' => array(
 						'en' => 'https://en.wikipedia.org',
 						'de' => 'https://de.wikipedia.org',
 						'nl' => 'https://nl.wikipedia.org',
-						'foobar' => array( 'site' => 'https://www.foo.bar/', 'filepath' => '/folder/', 'urlpath' => '/wikiname/$1' ),
+						'fi' => 'https://fi.wikipedia.org',
+						'da' => 'https://da.wikipedia.org',
+						'no' => 'https://no.wikipedia.org',
+						'nn' => 'https://nn.wikipedia.org',
+						'sv' => 'https://sv.wikipedia.org',
+						//'foobar' => array( 'url' => 'https://www.foo.bar/', 'filepath' => '/folder/', 'urlpath' => '/wikiname/$1' ),
 					),
+					'defaultSiteType' => 'mediawiki',
 				),
 				'stuff' => array(
 					'sites' => array(
@@ -194,13 +161,13 @@ class WBSettings {
 						'stuff-de' => 'https://de.wikipedia.org',
 					),
 					'defaultSiteUrlPath' => '/stuffwiki/$1',
-					'defaultSiteFilePath' => '/somepath/',
+					'defaultSiteFilePath' => '/somepath/$1',
 				),
 			),
 
 			'defaultSiteUrlPath' => '/wiki/$1',
-			'defaultSiteFilePath' => '/w/',
-			*/
+			'defaultSiteFilePath' => '/w/$1',
+			'defaultSiteType' => 'unknown',
 		);
 	}
 

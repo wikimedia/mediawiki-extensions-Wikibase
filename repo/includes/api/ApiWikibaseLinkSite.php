@@ -102,7 +102,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
 			'linksite' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'linktitle' => array(
