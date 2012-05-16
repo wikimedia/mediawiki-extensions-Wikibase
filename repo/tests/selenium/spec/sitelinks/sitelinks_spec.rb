@@ -58,6 +58,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
       @current_page.pageInputField_element.send_keys :arrow_down
       @current_page.pageInputField_element.send_keys :return
+      #check if the enter-key was recognized; if not then click the save-link (issue in chrome & IE)
       if @current_page.saveSitelinkLink?
         @current_page.saveSitelinkLink
       end

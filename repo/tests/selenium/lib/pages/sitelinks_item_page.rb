@@ -48,10 +48,12 @@ class SitelinksItemPage < ItemPage
   def getNthSitelinksTableRow(n)
     count = 0
     sitelinksTable_element.each do |tableRow|
+      #don't count here to skip the table header
       #count = count+1
       if count == n
         return tableRow
       end
+      #count here instead
       count = count+1
     end
     return false
