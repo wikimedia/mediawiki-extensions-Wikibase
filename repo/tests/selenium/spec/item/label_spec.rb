@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "Check functionality of edit label" do
   context "Check for edit label" do
     it "should check for edit label" do
-      # visit_page(LoginPage)
-      # @current_page.login_with("tobijat", "darthvader")
+      visit_page(LoginPage)
+      @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
 
       visit_page(ItemPage)
       @current_page.wait_for_item_to_load

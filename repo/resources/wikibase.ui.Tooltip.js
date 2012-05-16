@@ -121,7 +121,7 @@ window.wikibase.ui.Tooltip.prototype = {
 					var tooltip = $( node ).data( 'wikibase.ui.tooltip' );
 					if ( tooltip._permanent ) {
 						tooltip._isVisible = false;
-						tooltip.showMessage( tooltip._permanent ); // trigger showMessage() to reposition
+						tooltip.show( tooltip._permanent ); // trigger show() to reposition
 					}
 				}
 			} );

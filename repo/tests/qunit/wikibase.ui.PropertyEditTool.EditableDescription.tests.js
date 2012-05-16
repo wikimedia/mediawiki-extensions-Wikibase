@@ -13,7 +13,7 @@
 
 
 ( function () {
-	module( 'wikibase.ui.PropertyEditTool.EditableDescription', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.PropertyEditTool.EditableDescription', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			var node = $( '<div/>', { id: 'subject' } );
 			$( '<div/>', { id: 'parent' } ).append( node );

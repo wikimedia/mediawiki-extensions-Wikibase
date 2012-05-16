@@ -1,34 +1,27 @@
 require 'spec_helper'
 
+# This test will only work when RIGHTS and TOKENS are switched on!
+
 describe "Check functionality of errorhandling" do
 
   context "Check for errorhandling of UI" do
     it "should check that errorhandling is done correctly by showing a error-tooltip" do
-      visit_page(SitelinksItemPage)
-      @current_page.wait_for_sitelinks_to_load
-      @current_page.addSitelinkLink
-      @current_page.siteIdInputField="en"
-      ajax_wait
-      @current_page.wait_until do
-        @current_page.siteIdAutocompleteList_element.visible?
-      end
-      @current_page.siteIdInputField_element.send_keys :arrow_down
-      aCListElement = @current_page.getNthElementInAutocompleteList(@current_page.siteIdAutocompleteList_element, 1)
-      aCListElement.visible?.should be_true
-      aCListElement.click
-      @current_page.pageInputField="Germa"
-      ajax_wait
-      @current_page.wait_until do
-        @current_page.pageAutocompleteList_element.visible?
-      end
 
-      @current_page.pageInputField_element.send_keys :arrow_down
-      @current_page.pageInputField_element.send_keys :return
-      if @current_page.saveSitelinkLink?
-        @current_page.saveSitelinkLink
-      end
+      visit_page(ErrorProducingPage)
+      @current_page.wait_for_item_to_load
+      @current_page.editLabelLink?.should be_true
+      @current_page.editLabelLink
+      @current_page.labelInputField.should be_true
+      @current_page.labelInputField = "youCannotSaveMe"
+      @current_page.saveLabelLink?.should be_true
+      @current_page.saveLabelLink
+      @current_page.apiCallWaitingMessage?.should be_true
       ajax_wait
       @current_page.wait_for_api_callback
+      @current_page.wbErrorDiv?.should be_true
+      @current_page.wbErrorDetailsLink?.should be_true
+      @current_page.wbErrorDetailsLink
+      
     end
   end
 

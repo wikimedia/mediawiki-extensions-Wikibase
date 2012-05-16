@@ -32,7 +32,8 @@
 		}
 	};
 
-	module( 'wikibase.ui.SiteLinksEditTool', window.QUnit.newWbEnvironment( config, null, {
+	module( 'wikibase.ui.SiteLinksEditTool', window.QUnit.newWbEnvironment( {
+		config: config,
 		setup: function() {
 			// get empty nodes we get when no links on the site yet:
 			var dom = window.wikibase.ui.SiteLinksEditTool.getEmptyStructure();
@@ -57,7 +58,6 @@
 
 			this.subject = null;
 		}
-
 	} ) );
 
 
