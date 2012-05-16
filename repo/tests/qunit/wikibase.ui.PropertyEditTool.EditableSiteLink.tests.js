@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.PropertyEditTool.EditableSiteLink', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.PropertyEditTool.EditableSiteLink', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.node = $( '<tr/>', { id: 'subject' } );
 			this.node.append( $( '<td/>', { 'class': 'child' } ) );

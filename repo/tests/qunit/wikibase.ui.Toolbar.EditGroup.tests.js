@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.Toolbar.EditGroup', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.Toolbar.EditGroup', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			var node = $( '<div/>', { id: 'subject' } );
 			$( '<div/>', { id: 'parent' } ).append( node );

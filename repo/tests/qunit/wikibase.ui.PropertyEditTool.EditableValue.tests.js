@@ -14,7 +14,7 @@
 
 
 ( function () {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			var node = $( '<div/>', { id: 'parent' } );
 			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );

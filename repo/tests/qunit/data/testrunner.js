@@ -1,15 +1,26 @@
+/**
+ * Wikibase QUnit test environment
+ * @see https://www.mediawiki.org/wiki/Extension:Wikibase
+ *
+ * @since 0.1
+ * @file testrunner.js
+ * @ingroup Wikibase
+ *
+ * @licence GNU GPL v2+
+ * @author Daniel Werner
+ * @author H. Snater
+ */
+
 ( function ( $, mw, QUnit ) {
-	"use strict";
+	'use strict';
 
 	/**
 	 * Reset basic configuration for each test(); Makes sure that global configuration stuff and cached stuff will be
 	 * resetted befor each test. Also allows to set additional 'setup' and 'teardown' commands.
 	 *
-	 * @see QUnit.newMWEnvironment
+	 * @see QUnit.newMwEnvironment
 	 *
-	 * @param Object overrideConfig (optional)
-	 * @param Object overrideMsgs (optional)
-	 * @param Object additionalQUnitLifecycle
+	 * @param Object custom test environment variables according to QUnit.newMwEnvironment
 	 *
 	 * @example:
 	 * <code>
@@ -25,7 +36,7 @@
 	 * } );
 	 *
 	 *
-	 * module( ..., newMwEnvironment( { 'wbSiteDetails', ... } ) );
+	 * module( ..., newMwEnvironment( { config: { 'wbSiteDetails', ... } } ) );
 	 *
 	 * test( ..., function () {
 	 *     wikibase.getSites(); // from the set above
@@ -33,39 +44,39 @@
 	 *     mw.config.set( 'wbSiteDetails', ... );
 	 * } );
 	 *
-	 * test( .., function () {
+	 * test( ..., function () {
 	 *     wikibase.getSites(); // returns the ones set in module() again
 	 * } );
 	 *
 	 *
 	 * // additional setup and teardown:
-	 * module( .., newMwEnvironment( null, null, { setup: .. , teardown: .. } ) );
+	 * module( ..., newMwEnvironment( { setup: .. , teardown: ... } ) );
 	 * </code>
 	 */
 	QUnit.newWbEnvironment = ( function () {
 
-		return function ( overrideConfig, overrideMsgs, additionalQUnitLifecycle ) {
-			additionalQUnitLifecycle = additionalQUnitLifecycle || {};
-
-			var additionalSetup = additionalQUnitLifecycle.setup || function() {};
-			var additionalTeardown = additionalQUnitLifecycle.teardown || function() {};
+		return function ( custom ) {
+			if ( typeof custom == 'undefined' ) custom = {};
 
 			// init a new MW environment first, so we clean up the basic config stuff
-			var mwEnv = new QUnit.newMwEnvironment( overrideConfig, overrideMsgs );
+			var mwEnv = new QUnit.newMwEnvironment( {
+				config: custom.config,
+				messages: custom.messages
+			} );
 
 			return {
 				setup: function () {
 					mwEnv.setup();
-
-					// empty cache of wikibases site details
-					wikibase._siteList = null;
-
-					additionalSetup.call( this );
+					wikibase._siteList = null; // empty cache of wikibases site details
+					if ( typeof custom.setup != 'undefined' ) {
+						custom.setup.call( this );
+					}
 				},
-
 				teardown: function () {
 					mwEnv.teardown();
-					additionalTeardown.call( this );
+					if ( typeof custom.teardown != 'undefined' ) {
+						custom.teardown.call( this );
+					}
 				}
 			};
 		};

@@ -12,7 +12,7 @@
 'use strict';
 
 ( function() {
-	module( 'wikibase.ui.LabelEditTool', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.LabelEditTool', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.h1 = $( '<h1/>', { 'id': 'firstHeading', 'class': 'firstHeading' } );
 			this.span = $( '<span/>', { text: 'Text' } ).appendTo( this.h1 );

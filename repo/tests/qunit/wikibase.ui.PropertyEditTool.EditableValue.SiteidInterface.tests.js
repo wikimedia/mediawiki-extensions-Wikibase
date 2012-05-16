@@ -33,7 +33,8 @@
 		}
 	};
 
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface', window.QUnit.newWbEnvironment( config, null, {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface', window.QUnit.newWbEnvironment( {
+		config: config,
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } );
 			this.siteIds = ['en', 'de'];

@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.Toolbar', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.Toolbar', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.toolbar = new window.wikibase.ui.Toolbar();
 
