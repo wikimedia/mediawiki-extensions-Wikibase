@@ -6,7 +6,10 @@ describe "Check functionality of edit description" do
     it "should check for edit description" do
       initial_label = generate_random_string(10)
       initial_description = generate_random_string(20)
-
+      
+      visit_page(LoginPage)
+      @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+      
       visit_page(EmptyItemPage)
       @current_page.wait_for_item_to_load
       @current_page.labelInputField.should be_true

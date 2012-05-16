@@ -14,7 +14,7 @@
 window.wikibase.utilities = {};
 
 // Wikibase jQuery plugins:
-( function( $ ){
+( function( $ ) {
 
 	/**
 	 * Can be used on input elements. They grow bigger when input is registered and shrinks when something was removed.
