@@ -133,7 +133,7 @@ class WBSettings {
 
 			'apiDebugWithTokens' => false,
 
-				// The client sites.
+			// The site link sites we can link to (not necessarily clients!)
 			// They are grouped, each group has a 'sites' element which is an array holding the identifiers.
 			// It also can hold defaultSiteUrlPath and defaultSiteFilePath overriding the global default.
 			// Each element in the 'sites' array contains the identifier for the site (which should be unique!)
@@ -161,12 +161,12 @@ class WBSettings {
 						'stuff-de' => 'https://de.wikipedia.org',
 					),
 					'defaultSiteUrlPath' => '/stuffwiki/$1',
-					'defaultSiteFilePath' => '/somepath/',
+					'defaultSiteFilePath' => '/somepath/$1',
 				),
 			),
 
 			'defaultSiteUrlPath' => '/wiki/$1',
-			'defaultSiteFilePath' => '/w/',
+			'defaultSiteFilePath' => '/w/$1',
 			'defaultSiteType' => 'unknown',
 		);
 	}

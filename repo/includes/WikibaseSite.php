@@ -10,6 +10,7 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner
  */
 class WikibaseSite {
 
@@ -27,10 +28,10 @@ class WikibaseSite {
 	 *
 	 * @param string $id
 	 * @param string $group
-	 * @param string $url
-	 * @param string $urlPath
-	 * @param string $type
-	 * @param string|boolean $filePath
+	 * @param string $url base url to the site
+	 * @param string $urlPath relative path added to $url, can contain a placeholder '$1' for a page on that site
+	 * @param string $type type of the site, for example 'mediawiki'
+	 * @param string|boolean $filePath relative path added to $url
 	 */
 	public function __construct( $id, $group, $url, $urlPath, $type = 'unknown', $filePath = false ) {
 		$this->id = $id;
@@ -74,7 +75,7 @@ class WikibaseSite {
 	}
 
 	/**
-	 * Returns the sites identifier.
+	 * Returns the sites url.
 	 *
 	 * @since 0.1
 	 *
@@ -112,12 +113,23 @@ class WikibaseSite {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $pageName
+	 * @param string $pageName will be encoded internally
 	 *
 	 * @return string
 	 */
 	public function getPageUrl( $pageName = '' ) {
-		return str_replace( '$1', $pageName, $this->url . $this->urlPath );
+		return str_replace( '$1', urlencode( $pageName ), this.getPageUrlPath() );
+	}
+
+	/**
+	 * Returns the path to the url of a page where the page is represented by a replacement marker '$1'.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getPageUrlPath() {
+		return $this->url . $this->urlPath;
 	}
 
 	/**
@@ -126,7 +138,7 @@ class WikibaseSite {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $path
+	 * @param string $path has to be url encoded where required, no further encoding will be done
 	 *
 	 * @return false|string
 	 */
@@ -134,7 +146,6 @@ class WikibaseSite {
 		if ( $this->filePath === false ) {
 			return false;
 		}
-
 		return str_replace( '$1', $path, $this->url . $this->filePath );
 	}
 

@@ -63,8 +63,9 @@ class WikibaseViewItemAction extends FormlessAction {
 				$sites[$site->getId()] = array(
 					'shortName' => Language::fetchLanguageName( $site->getId() ),
 					'name' => Language::fetchLanguageName( $site->getId() )  . ' Wikipedia',
-					'pageUrl' => $site->getUrl( '$1' ),
+					'pageUrl' => $site->getPageUrlPath(),
 					'apiUrl' => $site->getPath( 'api.php' ),
+
 				);
 			}
 			
