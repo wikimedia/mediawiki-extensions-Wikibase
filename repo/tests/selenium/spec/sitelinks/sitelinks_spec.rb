@@ -4,6 +4,9 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for empty site links UI" do
     it "should check that there are no site links and if there's an add button" do
+      visit_page(LoginPage)
+      @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+            
       visit_page(SitelinksItemPage)
       @current_page.wait_for_sitelinks_to_load
 
