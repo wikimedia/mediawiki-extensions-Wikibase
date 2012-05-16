@@ -132,7 +132,6 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 		$opt = new ParserOptions();
 		$parser->parse("", $title, $opt);
 		$parser->getOutput()->setLanguageLinks( $links );
-		WBCLangLinkHandler::clearCache();
 		$dummy = "";
 		WBCLangLinkHandler::onParserBeforeTidy( $parser, $dummy );
 		return $parser->getOutput()->getLanguageLinks();

@@ -18,13 +18,11 @@ class WBCLangLinkHandler {
 
 	# todo: this is hackish, is this the best hook to use?
         public static function onParserBeforeTidy( Parser &$parser, &$text ) {
-                if ( ! self::$langlinksset ) {
-                        $result = self::addLangLinks( $parser, $text );
-                }
-
-                if ( $result ) {
-                        self::$langlinksset = true;
-                }
+		if ( ! self::$langlinksset ) {
+                	if ( self::addLangLinks( $parser, $text ) ) {
+                        	self::$langlinksset = true;
+                	}
+		}
                 return true;
         }
 
