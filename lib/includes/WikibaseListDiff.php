@@ -11,31 +11,33 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseListDiff implements Serializable {
+class WikibaseListDiff extends WikibaseDiffOpList implements IWikibaseDiff {
 
-	protected $removals;
-	protected $additions;
+	public function getType() {
+		return 'list';
+	}
 
-	protected function __construct( array $additions, array $removals ) {
-		$this->removals = $removals;
-		$this->additions = $additions;
+	protected $typePointers = array(
+		'add' => array(),
+		'remove' => array(),
+	);
+
+	protected function addOperations( array $operations ) {
+		parent::addOperations( $operations );
+		$this->addTypedOperations( $operations );
 	}
 
 	public static function newEmpty() {
-		return new self( array(), array() );
+		return new static( array() );
 	}
 
 	public static function newFromArrays( array $firstList, array $secondList ) {
-		return new self(
-			array_diff( $secondList, $firstList ),
-			array_diff( $firstList, $secondList )
-		);
-	}
+		$instance = new static( array() );
 
-	public function unserialize( $serialization ) {
-		$serialization = unserialize( $serialization );
-		$this->setAdditions( $serialization['additions'] );
-		$this->setRemovals( $serialization['removals'] );
+		$instance->addAdditions( array_diff( $secondList, $firstList ) );
+		$instance->addRemovals( array_diff( $firstList, $secondList ) );
+
+		return $instance;
 	}
 
 	public function serialize() {
@@ -43,42 +45,6 @@ class WikibaseListDiff implements Serializable {
 			'additions' => $this->additions,
 			'removals' => $this->removals,
 		) );
-	}
-
-	public function setAdditions( array $additions ) {
-		$this->additions = $additions;
-	}
-
-	public function setRemovals( array $removals ) {
-		$this->removals = $removals;
-	}
-
-	public function addAddition( $addition ) {
-		$this->additions[] = $addition;
-	}
-
-	public function addRemoval( $removal ) {
-		$this->removals[] = $removal;
-	}
-
-	public function getAdditions() {
-		return $this->additions;
-	}
-
-	public function getRemovals() {
-		return $this->removals;
-	}
-
-	/**
-	 * Returns whether the change is empty.
-	 * If it's empty, it can be ignored.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function isEmpty() {
-		return $this->additions === array() && $this->removals === array();
 	}
 
 }
