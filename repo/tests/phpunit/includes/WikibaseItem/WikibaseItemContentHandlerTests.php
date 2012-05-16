@@ -35,7 +35,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 */
 	public function setUp() {
   		parent::setUp();
-		$this->ch = new WikibaseContentHandler();
+		$this->ch = new WikibaseItemHandler();
 	}
 	
   	/**
@@ -54,7 +54,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 		$this->assertInstanceOf(
 			'WikibaseItem',
 			$this->item,
-			'Calling unserializeContent on a WikibaseContentHandler should return a WikibaseItem'
+			'Calling unserializeContent on a WikibaseItemHandler should return a WikibaseItem'
 		);
 	}
 
