@@ -92,8 +92,8 @@ class ListDiffTest extends \MediaWikiTestCase {
 		$diff = ListDiff::newFromArrays( $from, $to );
 
 		// array_values because we only care about the values, not promises are made about the keys.
-		$resultAdditions = array_values( $diff->getAdditions() );
-		$resultRemovals = array_values( $diff->getRemovals() );
+		$resultAdditions = array_values( $diff->getAddedValues() );
+		$resultRemovals = array_values( $diff->getRemovedValues() );
 
 		// Sort everything since no promises are made about ordering.
 		asort( $resultAdditions );

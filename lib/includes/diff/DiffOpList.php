@@ -37,6 +37,7 @@ class DiffOpList extends \ArrayIterator implements IDiff {
 	 * @param string|integer|null $parentKey
 	 */
 	public function __construct( array $operations, $parentKey = null ) {
+		parent::__construct( $operations );
 		$this->parentKey = $parentKey;
 		$this->addOperations( $operations );
 		$this->rewind();
@@ -44,21 +45,22 @@ class DiffOpList extends \ArrayIterator implements IDiff {
 
 	/**
 	 * @param string $type
-	 * @return DiffOpList
+	 * @return array of DiffOp
 	 */
 	protected function getTypeOperations( $type ) {
-		return new DiffOpList( array_intersect_key(
+		return array_intersect_key(
 			$this->operations,
 			array_flip( $this->typePointers[$type] )
-		) );
+		);
 	}
 
 	protected function addOperations( array $operations ) {
 		$this->operations = $operations;
+		$this->addTypedOperations( $operations );
 	}
 
 	protected function addTypedOperations( array $operations ) {
-		foreach ( $operations as $key => $operation ) {
+		foreach ( $operations as $key => /* DiffOp */ $operation ) {
 			if ( array_key_exists( $operation->getType(), $this->typePointers ) ) {
 				$this->typePointers[$operation->getType()][] = $key;
 			}
@@ -150,7 +152,7 @@ class DiffOpList extends \ArrayIterator implements IDiff {
 
 	/**
 	 * @since 0.1
-	 * @return DiffOpList
+	 * @return array of DiffOp
 	 */
 	public function getAdditions() {
 		return $this->getTypeOperations( 'add' );
@@ -158,10 +160,36 @@ class DiffOpList extends \ArrayIterator implements IDiff {
 
 	/**
 	 * @since 0.1
-	 * @return DiffOpList
+	 * @return array of DiffOp
 	 */
 	public function getRemovals() {
 		return $this->getTypeOperations( 'remove' );
+	}
+
+	/**
+	 * @since 0.1
+	 * @return array of mixed
+	 */
+	public function getAddedValues() {
+		return array_map(
+			function( DiffOpAdd $addition ) {
+				return $addition->getNewValue();
+			},
+			$this->getTypeOperations( 'add' )
+		);
+	}
+
+	/**
+	 * @since 0.1
+	 * @return array of mixed
+	 */
+	public function getRemovedValues() {
+		return array_map(
+			function( DiffOpRemove $addition ) {
+				return $addition->getOldValue();
+			},
+			$this->getTypeOperations( 'remove' )
+		);
 	}
 
 }

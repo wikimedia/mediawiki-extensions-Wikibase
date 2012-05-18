@@ -66,9 +66,13 @@ class Changes extends \ORMTable {
 	}
 
 	protected static $typeMap = array(
-		'alias' => 'WikibaseAliasChange',
-		'sitelink' => 'WikibaseSitelinkChange',
+		'alias' => 'Wikibase\AliasChange',
+		'sitelink' => 'Wikibase\SitelinkChange',
 	);
+
+	public static function getClassForType( $type ) {
+		return array_key_exists( $type, self::$typeMap ) ? self::$typeMap[$type] : 'Wikibase\Change';
+	}
 
 	/**
 	 * Factory method to construct a new WikibaseChange instance.
@@ -86,7 +90,7 @@ class Changes extends \ORMTable {
 			throw new MWException( 'The type element must be set in the $data array before a new change can be constructed.' );
 		}
 
-		$class = array_key_exists( $data['type'], self::$typeMap ) ? self::$typeMap[$data['type']] : 'WikibaseChange';
+		$class = static::getClassForType( $data['type'] );
 
 		return new $class( $this, $data, $loadDefaults );
 	}

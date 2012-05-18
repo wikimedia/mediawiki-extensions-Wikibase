@@ -2,6 +2,9 @@
 
 namespace Wikibase\Test;
 use Wikibase\MapDiff as MapDiff;
+use Wikibase\DiffOpRemove as DiffOpRemove;
+use Wikibase\DiffOpAdd as DiffOpAdd;
+use Wikibase\DiffOpChange as DiffOpChange;
 
 /**
  * Tests for the WikibaseMapDiff class.
@@ -29,30 +32,38 @@ class MapDiffTest extends \MediaWikiTestCase {
 			array(
 				array( 'en' => 'en' ),
 				array(),
-				array( 'en' => array( 'old' => 'en', 'new' => null ) ),
+				array(
+					'en' => new DiffOpRemove( 'en' )
+				),
 			),
 			array(
 				array(),
 				array( 'en' => 'en' ),
-				array( 'en' => array( 'old' => null, 'new' => 'en' ) ),
+				array(
+					'en' => new DiffOpAdd( 'en' )
+				)
 			),
 			array(
 				array( 'en' => 'foo' ),
 				array( 'en' => 'en' ),
-				array( 'en' => array( 'old' => 'foo', 'new' => 'en' ) ),
+				array(
+					'en' => new DiffOpChange( 'foo', 'en' )
+				),
 			),
 			array(
 				array( 'en' => 'foo' ),
 				array( 'en' => 'foo', 'de' => 'bar' ),
-				array( 'de' => array( 'old' => null, 'new' => 'bar' ) ),
+				array(
+					'de' => new DiffOpAdd( 'bar' )
+				)
 			),
 			array(
 				array( 'en' => 'foo' ),
 				array( 'en' => 'baz', 'de' => 'bar' ),
 				array(
-					'de' => array( 'old' => null, 'new' => 'bar' ),
-					'en' => array( 'old' => 'foo', 'new' => 'baz' ),
-				),
+					'de' => new DiffOpAdd( 'bar' ),
+					'en' => new DiffOpChange( 'foo', 'baz' )
+				)
 			),
 		);
 	}
@@ -60,13 +71,13 @@ class MapDiffTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider newFromArraysProvider
 	 */
-	public function testNewFromArrays( array $from, array $to, array $expected, $emptyValue = null, $recursive = false ) {
-		$diff = MapDiff::newFromArrays( $from, $to, $emptyValue, $recursive );
-		$actual = iterator_to_array( $diff );
+	public function testNewFromArrays( array $from, array $to, array $expected ) {
+		$diff = MapDiff::newFromArrays( $from, $to );
 
 		// Sort to get rid of differences in order, since no promises about order are made.
 		asort( $expected );
-		asort( $actual );
+		$diff->asort();
+		$actual = $diff->getArrayCopy();
 
 		$this->assertEquals( $expected, $actual );
 

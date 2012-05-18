@@ -68,18 +68,4 @@ class Change extends ORMRow {
 		return false;
 	}
 
-	/**
-	 * Overrides the save function to first set the info field to the return value of getInfoBlob.
-	 *
-	 * @since 0.1
-	 *
-	 * @param null|string $functionName
-	 *
-	 * @return boolean Success indicator
-	 */
-	public function save( $functionName = null ) {
-		$this->setField( 'type', get_called_class() );
-		return parent::save( $functionName );
-	}
-
 }

@@ -9,11 +9,6 @@ class MapDiff extends DiffOpList implements IDiffOp {
 		return 'map';
 	}
 
-	protected function addOperations( array $operations ) {
-		parent::addOperations( $operations );
-		$this->addTypedOperations( $operations );
-	}
-
 	public static function newEmpty() {
 		return new self( array() );
 	}
@@ -74,23 +69,13 @@ class MapDiff extends DiffOpList implements IDiffOp {
 			$diffSet[$key] = array();
 
 			if ( $hasOld && $hasNew ) {
-				$diffSet[$key] = array(
-					'change',
-					$oldSet[$key],
-					$newSet[$key]
-				);
+				$diffSet[$key] = new DiffOpChange( $oldSet[$key], $newSet[$key] );
 			}
 			elseif ( $hasOld ) {
-				$diffSet[$key] = array(
-					'remove',
-					$oldSet[$key],
-				);
+				$diffSet[$key] = new DiffOpRemove( $oldSet[$key] );
 			}
 			elseif ( $hasNew ) {
-				$diffSet[$key] = array(
-					'add',
-					$newSet[$key]
-				);
+				$diffSet[$key] = new DiffOpAdd( $newSet[$key] );
 			}
 			else {
 				throw new MWException( 'Cannot create a diff op for two empty values.' );

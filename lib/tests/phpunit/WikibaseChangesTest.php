@@ -61,8 +61,6 @@ class ChangesTest extends \MediaWikiTestCase {
 	public function testNewFromArray( array $data, $loadDefaults = false ) {
 		$change = Changes::singleton()->newFromArray( $data, $loadDefaults );
 
-		$this->assertEquals( $data['type'], get_class( $change ) );
-
 		$this->assertEquals( $GLOBALS['wgUser']->getId(), $change->getUser()->getId() );
 
 		foreach ( array( 'revision_id', 'object_id', 'user_id', 'type' ) as $field ) {

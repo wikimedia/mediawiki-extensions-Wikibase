@@ -66,6 +66,7 @@ $wgAutoloadClasses['Wikibase\SitelinkChange'] 		= $dir . 'includes/changes/Sitel
 
 // includes/diff
 $wgAutoloadClasses['Wikibase\DiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
+$wgAutoloadClasses['Wikibase\IDiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
 $wgAutoloadClasses['Wikibase\DiffOpAdd'] 			= $dir . 'includes/diff/DiffOpAdd.php';
 $wgAutoloadClasses['Wikibase\DiffOpChange'] 		= $dir . 'includes/diff/DiffOpChange.php';
 $wgAutoloadClasses['Wikibase\DiffOpList'] 			= $dir . 'includes/diff/DiffOpList.php';

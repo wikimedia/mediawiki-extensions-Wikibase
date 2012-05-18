@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListDiff extends DiffOpList implements IDiff {
+class ListDiff extends DiffOpList {
 
 	public function getType() {
 		return 'list';
@@ -24,29 +24,22 @@ class ListDiff extends DiffOpList implements IDiff {
 		'remove' => array(),
 	);
 
-	protected function addOperations( array $operations ) {
-		parent::addOperations( $operations );
-		$this->addTypedOperations( $operations );
-	}
-
 	public static function newEmpty() {
 		return new static( array() );
 	}
 
 	public static function newFromArrays( array $firstList, array $secondList ) {
-		$instance = new static( array() );
+		$operations = array();
 
-		$instance->addAdditions( array_diff( $secondList, $firstList ) );
-		$instance->addRemovals( array_diff( $firstList, $secondList ) );
+		foreach ( array_diff( $secondList, $firstList ) as $addition ) {
+			$operations[] = new DiffOpAdd( $addition );
+		}
 
-		return $instance;
-	}
+		foreach ( array_diff( $firstList, $secondList ) as $removal ) {
+			$operations[] = new DiffOpRemove( $removal );
+		}
 
-	public function serialize() {
-		return serialize( array(
-			'additions' => $this->additions,
-			'removals' => $this->removals,
-		) );
+		return new static( $operations );
 	}
 
 }
