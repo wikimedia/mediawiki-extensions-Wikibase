@@ -43,9 +43,7 @@ class WikibaseItemView extends ContextSource {
 	 *
 	 * @return string
 	 */
-	public function getHTML() {
-		global $wgContLang;
-	
+	public function getHTML() {		
 		$siteLinks = $this->item->getSiteLinks();
 		$lang = $this->getLanguage();
 		$html = '';
@@ -80,15 +78,10 @@ class WikibaseItemView extends ContextSource {
 				$html .= Html::openElement( 'tr', array(
 					'class' => 'wb-sitelinks-' . $siteId . ' ' . $alternatingClass )
 				);
-				$html .= Html::rawElement(
-					'td', array( 'class' => 'wb-sitelinks-site-' . $siteId, 'lang' => $lang->getCode(), 'dir' => $lang->getDir() ),
-					// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
-					Language::fetchLanguageName( $siteId ) . ' ' .
-					Html::element(
-						'span',
-						array( 'lang' => $lang->getCode(), 'dir' => $lang->getDir() ),
-						' (' . $siteId . ')'
-					)
+				$html .= Html::element(
+						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $siteId ),
+						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
+						Language::fetchLanguageName( $siteId ) . ' (' . $siteId . ')'
 				);
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $siteId ) );
 				$html .= Html::element(
