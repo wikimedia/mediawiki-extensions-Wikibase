@@ -216,7 +216,7 @@ class WikibaseSites implements SeekableIterator {
 			return false;
 		}
 
-		return WikibaseSite::newFromArray( $siteId, $this->sites[$siteId] )->getUrl( $pageName );
+		return WikibaseSite::newFromArray( $siteId, $this->sites[$siteId] )->getPageUrl( $pageName );
 	}
 
 	/**
