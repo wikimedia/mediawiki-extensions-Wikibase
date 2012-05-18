@@ -58,20 +58,22 @@ class WBCLangLinkHandler {
 		// Always remove the link to the site language.
 		unset( $links[$wgLanguageCode] );
 
-		// Remove the links specified by noexternalinterlang parser function.
-		$links = array_diff_key( $links, $nei );
+		if ( is_array( $links ) && is_array( $nei ) ) {
+			// Remove the links specified by noexternalinterlang parser function.
+			$links = array_diff_key( $links, $nei );
 
-		// Pack the links properly into mLanguageLinks.
-		$old_links = $out->getLanguageLinks();
-		foreach( $links as $lang => $link ) {
-			$new_link = $link['site'] . ':' . $link['title'];
-			if( !in_array( $new_link, $old_links ) ) {
-				$out->addLanguageLink( $new_link );
+			// Pack the links properly into mLanguageLinks.
+			$old_links = $out->getLanguageLinks();
+			foreach( $links as $lang => $link ) {
+				$new_link = $link['site'] . ':' . $link['title'];
+				if( !in_array( $new_link, $old_links ) ) {
+					$out->addLanguageLink( $new_link );
+				}
 			}
-		}
 
-		// Sort the links, always.
-		self::sortLinks( $out->getLanguageLinks() );
+			// Sort the links, always.
+			self::sortLinks( $out->getLanguageLinks() );
+		}
 
 		return true;
 	}
