@@ -89,6 +89,32 @@ window.wikibase.utilities = {};
 			}
 		} );
 
+		// make sure size will adjust on resize:
+		( function() {
+			var oldWidth;
+			var resizeHandler = function() {
+				if( ! self.input.data( 'AutoExpandInput' ) ) {
+					// remove() must have been called on input, data was removed, remove handler from window!
+					$( window ).off( 'resize', resizeHandler );
+					return;
+				}
+				if( ! self.input.closest('html').length ) {
+					// if input doesn't exist in DOM, no resize necessary
+					oldWidth = null;
+					return;
+				}
+
+				var newWidth = $( this ).width();
+
+				// only resize if width has been resized!
+				if( oldWidth !== newWidth ) {
+					self.expand();
+				}
+				oldWidth = newWidth;
+			}
+
+			$( window ).on( 'resize', resizeHandler );
+		} )();
 	}
 
 	AutoExpandInput.prototype = {
