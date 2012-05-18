@@ -1,5 +1,11 @@
 <?php
 
+namespace Wikibase;
+
+$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : dirname( __FILE__ ) . '/../../..';
+
+require_once $basePath . '/maintenance/Maintenance.php';
+
 /**
  * Maintenance script that polls for Wikibase changes in the shared wb_changes table
  * and triggers a hook to invoke the code that needs to handle these changes.
@@ -12,15 +18,10 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : dirname( __FILE__ ) . '/../../..';
-
-require_once $basePath . '/maintenance/Maintenance.php';
-
-class WikibasePollForChanges extends Maintenance {
+class PollForChanges extends \Maintenance {
 
 	/**
-	 * @var ORMTable
+	 * @var Changes
 	 */
 	protected $changes;
 
@@ -64,13 +65,13 @@ class WikibasePollForChanges extends Maintenance {
 	 * Maintenance script entry point.
 	 */
 	public function execute() {
-		$this->changes = WikibaseChanges::singleton();
+		$this->changes = Changes::singleton();
 
 		$this->lastChangeId = (int)$this->getArg( 'startid', 0 );
 		$this->startTime = (int)$this->getArg( 'starttime', 0 );
-		$this->pollLimit = (int)$this->getArg( 'polllimit', WBLSettings::get( 'pollDefaultLimit' ) );
-		$this->sleepInterval = (int)$this->getArg( 'sleepinterval', WBLSettings::get( 'pollDefaultInterval' ) );
-		$this->continueInterval = (int)$this->getArg( 'continueinterval', WBLSettings::get( 'pollContinueInterval' ) );
+		$this->pollLimit = (int)$this->getArg( 'polllimit', \WBLSettings::get( 'pollDefaultLimit' ) );
+		$this->sleepInterval = (int)$this->getArg( 'sleepinterval', \WBLSettings::get( 'pollDefaultInterval' ) );
+		$this->continueInterval = (int)$this->getArg( 'continueinterval', \WBLSettings::get( 'pollContinueInterval' ) );
 
 		while ( true ) {
 			usleep( $this->doPoll() * 1000 );
@@ -137,10 +138,10 @@ class WikibasePollForChanges extends Maintenance {
 	 * @param string $message
 	 */
 	protected function msg( $message ) {
-		echo $message . "\n";
+		echo date( 'H:i:s' ) . ' ' . $message . "\n";
 	}
 
 }
 
-$maintClass = 'WikibasePollForChanges';
+$maintClass = 'Wikibase\PollForChanges';
 require_once( RUN_MAINTENANCE_IF_MAIN );
