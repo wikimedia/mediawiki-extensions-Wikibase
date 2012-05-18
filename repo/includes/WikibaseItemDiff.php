@@ -1,5 +1,10 @@
 <?php
 
+use Wikibase\MapDiff as MapDiff;
+use Wikibase\MapDiff as ListDiff;
+use Wikibase\SitelinkChange as SitelinkChange;
+use Wikibase\AliasChange as AliasChange;
+
 /**
  * Represents a diff between two WikibaseItem instances.
  *
@@ -14,12 +19,12 @@
 class WikibaseItemDiff extends WikibaseEntityDiff {
 
 	/**
-	 * @var WikibaseMapDiff
+	 * @var MapDiff
 	 */
 	protected $siteLinkDiff;
 
 	/**
-	 * @var WikibaseListDiff
+	 * @var MapDiff
 	 */
 	protected $aliasDiff;
 
@@ -32,12 +37,12 @@ class WikibaseItemDiff extends WikibaseEntityDiff {
 	 * @return WikibaseItemDiff
 	 */
 	public function __construct( WikibaseItem $oldItem, WikibaseItem $newItem ) {
-		$this->siteLinkDiff = WikibaseMapDiff::newFromArrays(
+		$this->siteLinkDiff = MapDiff::newFromArrays(
 			$oldItem->getSiteLinks(),
 			$newItem->getSiteLinks()
 		);
 
-		$this->aliasDiff = WikibaseListDiff::newFromArrays(
+		$this->aliasDiff = ListDiff::newFromArrays(
 			$oldItem->getAllAliases(),
 			$newItem->getAllAliases()
 		);
@@ -58,17 +63,17 @@ class WikibaseItemDiff extends WikibaseEntityDiff {
 	}
 
 	/**
-	 * @return WikibaseSitelinkChange
+	 * @return SitelinkChange
 	 */
 	public function getSiteLinkChange() {
-		return WikibaseSitelinkChange::newFromDiff( $this->siteLinkDiff );
+		return SitelinkChange::newFromDiff( $this->siteLinkDiff );
 	}
 
 	/**
-	 * @return WikibaseAliasChange
+	 * @return AliasChange
 	 */
 	public function getAliasesChange() {
-		return WikibaseAliasChange::newFromDiff( $this->aliasDiff );
+		return AliasChange::newFromDiff( $this->aliasDiff );
 	}
 
 }
