@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Class representing the diff between to (non-associative) arrays.
  *
@@ -11,7 +13,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseListDiff extends WikibaseDiffOpList implements IWikibaseDiff {
+class ListDiff extends DiffOpList implements IDiff {
 
 	public function getType() {
 		return 'list';
