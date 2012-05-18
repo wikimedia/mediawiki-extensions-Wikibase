@@ -139,7 +139,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			var editableValNode = this._subject.parents( '.' + wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS + ':first' );
 
 			this._inputElem.inputAutoExpand( {
-				comfortZone: 20,
 				maxWidth: this._subject.parents( '.' + wikibase.ui.PropertyEditTool.prototype.UI_CLASS + ':first' ),
 				widthCalculation: $.proxy( function( width ) {
 					// add width of the toolbar
