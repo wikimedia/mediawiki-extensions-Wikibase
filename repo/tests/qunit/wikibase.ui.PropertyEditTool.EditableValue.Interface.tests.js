@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.EditableValue.tests.js
+ * @file wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -13,7 +13,7 @@
 
 
 ( function () {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue.Interface', {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue.Interface', window.QUnit.newWbEnvironment( null, null, {
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } );
 			this.evInterface = new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( this.node );
@@ -52,7 +52,7 @@
 			this.node = null;
 			this.strings = null;
 		}
-	} );
+	} ) );
 
 
 	test( 'initial check', function() {

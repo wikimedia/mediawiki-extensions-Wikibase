@@ -30,6 +30,11 @@ final class WikibaseHooks {
 			dirname( __FILE__ ) . '/sql/Wikibase.sql'
 		);
 
+		$updater->addExtensionTable(
+			'wb_aliases',
+			dirname( __FILE__ ) . '/sql/AddAliasesTable.sql'
+		);
+
 		return true;
 	}
 
@@ -46,13 +51,15 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
 
-		//$files[] = $testDir . 'WikibaseItemTests.php';
-		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemTests.php';
-		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemNewEmptyTests.php';
-		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemNewFromArrayTests.php';
-		$files[] = $testDir . 'WikidataRepo/WikibaseItem/WikibaseItemContentHandlerTests.php';
-		
-		$files[] = $testDir . 'WikidataRepo/api/ApiWikibaseTests.php';
+		$files[] = $testDir . 'WikibaseItem/WikibaseItemTests.php';
+		$files[] = $testDir . 'WikibaseItem/WikibaseItemMoveTests.php';
+		$files[] = $testDir . 'WikibaseItem/WikibaseItemNewEmptyTests.php';
+		$files[] = $testDir . 'WikibaseItem/WikibaseItemNewFromArrayTests.php';
+		$files[] = $testDir . 'WikibaseItem/WikibaseItemContentHandlerTests.php';
+
+		$files[] = $testDir . 'api/ApiWikibaseTests.php';
+		$files[] = $testDir . 'api/ApiWikibaseModifyItemTest.php';
+		$files[] = $testDir . 'api/ApiWikibaseSetAliasesTest.php';
 
 		return true;
 	}
@@ -73,7 +80,7 @@ final class WikibaseHooks {
 		global $wgNamespaceContentModels;
 
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
-			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE ) {
+			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			$pageLanguage = $language;
 		}
 
@@ -95,47 +102,56 @@ final class WikibaseHooks {
 		$testModules['qunit']['wikibase.tests'] = array(
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/wikibase.Site.tests.js',
+				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
+				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
+				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js'
+				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Tooltip.tests.js'
 			),
 			'dependencies' => array(
+				'wikibase.tests.qunit.testrunner',
 				'wikibase',
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool'
 			),
 			'localBasePath' => dirname( __FILE__ ),
-			'remoteExtPath' => 'WikidataRepo',
+			'remoteExtPath' => 'Wikibase',
 		);
 
 		return true;
 	}
 
 	/**
-	 * Allows canceling the move of one title to another.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/AbortMove
+	 * Allows overriding if the pages in a certain namespace can be moved or not.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NamespaceIsMovable
 	 *
 	 * @since 0.1
 	 *
-	 * @param Title $oldTitle
-	 * @param Title $newTitle
-	 * @param User $user
-	 * @param string $error
-	 * @param string $reason
+	 * @param integer $index
+	 * @param boolean $movable
 	 *
 	 * @return boolean
 	 */
-	public static function onAbortMove( Title $oldTitle, Title $newTitle, User $user, &$error, $reason ) {
-		$nss = array( WB_NS_DATA );
-		$allowed = !in_array( $oldTitle->getNamespace(), $nss ) && !in_array( $newTitle->getNamespace(), $nss );
-
-		if ( !$allowed ) {
-			$error = wfMsg( 'wikibase-move-error' );
+	public static function onNamespaceIsMovable( $index, &$movable ) {
+		if ( in_array( $index, array( WB_NS_DATA, WB_NS_DATA_TALK ) ) ) {
+			$movable = false;
 		}
 
-		return $allowed;
+		return true;
 	}
 
 }

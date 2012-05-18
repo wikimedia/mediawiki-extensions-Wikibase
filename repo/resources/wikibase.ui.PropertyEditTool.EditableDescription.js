@@ -30,10 +30,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 		return interfaces;
 	},
 	
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
+	 */
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
+	 */
 	getApiCallParams: function() {
 		return {
 			action: 'wbsetlanguageattribute',

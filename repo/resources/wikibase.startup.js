@@ -13,7 +13,7 @@
 ( function( $ ) {
 	
 	// add an edit tool for the main label. This will be integrated into the heading nicely:
-	new window.wikibase.ui.HeadingEditTool( $( '#firstHeading' ) );
+	new window.wikibase.ui.LabelEditTool( $( '#firstHeading' ) );
 	
 	// add an edit tool for all properties in the data grid view:
 	$( 'body' )
@@ -33,7 +33,7 @@
 	// without css this is not required, so we build it here manually
 	$( '.wb-sitelinks-empty' )
 	.each( function() {
-		$( this ).replaceWith( wikibase.ui.SiteLinksEditTool.getEmptyStructure() )
+		$( this ).replaceWith( wikibase.ui.SiteLinksEditTool.getEmptyStructure() );
 	} );
 	
 	$( 'table.wb-sitelinks' ).each( function() {

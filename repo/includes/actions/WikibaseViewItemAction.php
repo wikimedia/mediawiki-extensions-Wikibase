@@ -42,6 +42,9 @@ class WikibaseViewItemAction extends FormlessAction {
 
 			$out = $this->getOutput();
 
+			// make css available when JavaScript is disabled
+			$out->addModuleStyles( array( 'wikibase.common' ) );
+
 			$out->addHTML( $parserOutput->getText() );
 
 			// make sure required client sided resources will be loaded:
@@ -53,36 +56,20 @@ class WikibaseViewItemAction extends FormlessAction {
 			// hand over the itemId to JS
 			$out->addJsConfigVars( 'wbItemId', $content->getId() );
 			$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLangCode ) );
+
+			$sites = array();
+
+			foreach ( WikibaseSites::singleton()->getGroup( 'wikipedia' ) as /* WikibaseSite */ $site ) {
+				$sites[$site->getId()] = array(
+					'shortName' => Language::fetchLanguageName( $site->getId() ),
+					'name' => Language::fetchLanguageName( $site->getId() )  . ' Wikipedia',
+					'pageUrl' => $site->getPageUrlPath(),
+					'apiUrl' => $site->getPath( 'api.php' ),
+
+				);
+			}
 			
-			// TODO get this from the configuration after its implemented:
-			$dummySiteDetails = array(
-				'en' => array(
-					'shortName' => Language::fetchLanguageName( 'en' ),
-					'name' => Language::fetchLanguageName( 'en' ) . ' Wikipedia',
-					'pageUrl' => 'http://en.wikipedia.org/wiki/$1',
-					'apiUrl' => 'http://en.wikipedia.org/w/api.php' // NOTE: we might better have an internal API module instead of using the site APIs directly
-				),
-				'de' => array(
-					'shortName' => Language::fetchLanguageName( 'de' ), // name in users language, this is just a hack as well!
-					'name' => Language::fetchLanguageName( 'de' ) . ' Wikipedia',
-					'pageUrl' => 'http://de.wikipedia.org/wiki/$1',
-					'apiUrl' => 'http://de.wikipedia.org/w/api.php'
-				),
-				'he' => array(
-					'shortName' => Language::fetchLanguageName( 'he' ),
-					'name' => Language::fetchLanguageName( 'he' ) . ' Wikipedia',
-					'pageUrl' => 'http://he.wikipedia.org/wiki/$1',
-					'apiUrl' => 'http://he.wikipedia.org/w/api.php'
-				),
-				'ja' => array(
-					'shortName' => Language::fetchLanguageName( 'ja' ),
-					'name' => Language::fetchLanguageName( 'ja' ) . ' Wikipedia',
-					'pageUrl' => 'http://ja.wikipedia.org/wiki/$1',
-					'apiUrl' => 'http://ja.wikipedia.org/w/api.php'
-				)
-			);
-			
-			$out->addJsConfigVars( 'wbSiteDetails', $dummySiteDetails );
+			$out->addJsConfigVars( 'wbSiteDetails', $sites );
 		}
 
 		return '';

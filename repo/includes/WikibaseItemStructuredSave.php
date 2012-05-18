@@ -2,6 +2,7 @@
 
 /**
  * Represents an update to the structured storage for a single WikibaseItem.
+ * TODO: we could keep track of actual changes in a lot of cases, and so be able to do less (expensive) queries to update.
  *
  * @since 0.1
  *
@@ -11,7 +12,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseItemStructuredSave extends SecondaryDataUpdate {
+class WikibaseItemStructuredSave extends DataUpdate {
 
 	/**
 	 * The item to update.
@@ -48,18 +49,13 @@ class WikibaseItemStructuredSave extends SecondaryDataUpdate {
 	 * @since 0.1
 	 */
 	public function doUpdate() {
-		$success = $this->item->save( /* $articleId */ );
+		$dbw = wfGetDB( DB_MASTER );
 
-		if ( $success ) {
-			$dbw = wfGetDB( DB_MASTER );
-
-			$dbw->begin();
-			$this->saveSiteLinks();
-			$this->saveMultilangFields();
-			$dbw->commit();
-		}
-
-		return $success;
+		$dbw->begin();
+		$this->saveSiteLinks();
+		$this->saveMultilangFields();
+		$this->saveAliases();
+		$dbw->commit();
 	}
 
 
@@ -140,6 +136,44 @@ class WikibaseItemStructuredSave extends SecondaryDataUpdate {
 				),
 				__METHOD__
 			) && $success;
+		}
+
+		return $success;
+	}
+
+	/**
+	 * Saves the aliases.
+	 * This info is saved in wb_aliases.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean Success indicator
+	 */
+	protected function saveAliases() {
+		$dbw = wfGetDB( DB_MASTER );
+
+		$idField = array( 'alias_item_id' => $this->item->getId() );
+
+		$success = $dbw->delete(
+			'wb_aliases',
+			$idField,
+			__METHOD__
+		);
+
+		foreach ( $this->item->getAllAliases() as $languageCode => $aliases ) {
+			foreach ( $aliases as $alias ) {
+				$success = $dbw->insert(
+					'wb_aliases',
+					array_merge(
+						$idField,
+						array(
+							'alias_language' => $languageCode,
+							'alias_text' => $alias,
+						)
+					),
+					__METHOD__
+				) && $success;
+			}
 		}
 
 		return $success;

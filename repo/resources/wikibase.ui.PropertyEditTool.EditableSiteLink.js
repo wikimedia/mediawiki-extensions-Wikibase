@@ -14,11 +14,10 @@
 
 /**
  * Serves the input interface for a site link, extends EditableValue.
- *
- * @param jQuery subject
+ * @see window.wikibase.ui.PropertyEditTool.EditableValue
  */
-window.wikibase.ui.PropertyEditTool.EditableSiteLink = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
+window.wikibase.ui.PropertyEditTool.EditableSiteLink = function( subject, toolbar ) {
+	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject, toolbar );
 };
 window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
@@ -40,10 +39,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 */
 	_currentResults: null,
 
-	//getInputHelpMessage: function() {
-	//	return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
-	//},
-
 	_initToolbar: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._initToolbar.call( this );
 		this._toolbar.editGroup.displayRemoveButton = true;
@@ -63,10 +58,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
 		
 		// interface for choosing the source site:
-		interfaces.siteId = new ev.SiteIdInterface( tableCells[0], this );		
-		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
+		interfaces.siteId = new ev.SiteIdInterface();
 		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
 		interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
+		interfaces.siteId._init( tableCells[0] );
+
+		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
 
 		// interface for choosing a page (from the source site):
 		interfaces.pageName = new ev.SitePageInterface(
@@ -84,8 +81,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return interfaces;
 	},
 	
-	_interfaceHandler_onInputRegistered: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this );
+	_interfaceHandler_onInputRegistered: function( relatedInterface ) {
+		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
 		
 		var idInterface = this._interfaces.siteId;
 		var pageInterface = this._interfaces.pageName;
@@ -117,7 +114,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 
 	_getToolbarParent: function() {
 		// append toolbar to new td
-		return $( '<td/>' ).appendTo( this._subject );
+		this.__toolbarParent = this.__toolbarParent || $( '<td/>' ).appendTo( this._subject );
+		return this.__toolbarParent;
+	},
+
+	_getIndexParent: function() {
+		this.__indexParent = this.__indexParent || $( '<td/>' ).prependTo( this._subject );
+		return this.__indexParent;
+
 	},
 	
 	/**
@@ -137,12 +141,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		}, this ) );
 	},
 	
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing
+	 */
 	startEditing: function() {
 		// set ignored site links again since they could have changed
 		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
+		return window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
 	},
 	
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing
+	 */
 	stopEditing: function( save ) {
 		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
 		
@@ -152,10 +162,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return changed;
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
+	 */
 	getInputHelpMessage: function() {
 		return window.mw.msg( 'wikibase-sitelinks-input-help-message' );
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
+	 */
 	getApiCallParams: function( removeValue ) {
 		var linkValues = this.getValue();
 		var siteId = this.siteIdInterface.getSelectedSiteId();

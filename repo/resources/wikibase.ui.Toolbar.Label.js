@@ -60,7 +60,8 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 
 	destroy: function() {
 		if ( this._elem != null ) {
-			this._elem.remove();
+			this._elem.empty().remove();
+			this._elem = null;
 		}
 	},
 	

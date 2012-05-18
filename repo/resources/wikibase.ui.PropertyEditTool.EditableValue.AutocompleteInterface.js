@@ -28,7 +28,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 */
 	_currentResults: null,
 
-	_init: function( subject, editableValue ) {
+	_init: function( subject ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 		this._currentResults = new Array();
 	},
@@ -51,7 +51,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 					this._onInputRegistered();
 				}, this )
 			} );
-		} else if ( this._resultSet !== null ) {
+		} else if ( this._currentResults !== null ) {
 			inputElement.autocomplete( {
 				source: this._currentResults,
 				close: $.proxy( function( event, ui ) {
@@ -83,6 +83,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 */
 	setResultSet: function( resultSet ) {
 		this._currentResults = resultSet;
+		if( this.isInEditMode() ) {
+			// set this again if in edit mode, so autocomplete also updates
+			this._inputElem.autocomplete( 'option', 'source', resultSet );
+		}
 	},
 
 	/**

@@ -13,6 +13,8 @@
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.
+ *
+ * @since 0.1
  */
 window.wikibase.ui.PropertyEditTool = function( subject ) {
 	if( typeof subject != 'undefined' ) {
@@ -295,23 +297,27 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Allows to enter a new value, the input interface will be available but the process can still
 	 * be cancelled.
-	 * 
+	 *
+	 * @param value Object optional, initial value
 	 * @return newValue wikibase.ui.PropertyEditTool.EditableValue
 	 */
-	enterNewValue: function() {
+	enterNewValue: function( value ) {
 		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
 		newValueElem.addClass( 'wb-pending-value' );
 		
 		this._subject.append( newValueElem );
-		var newValue = this._initSingleValue( newValueElem );		
-				
+		var newValue = this._initSingleValue( newValueElem );
+
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
 		var self = this;
 		newValue.afterStopEditing = function( save, changed, wasPending ) {
 			self._newValueHandler_afterStopEditing( newValue, save, changed, wasPending );
 			newValue.onStopEditing = null; // make sure handler is only called once!
-		};		
+		};
+		if( value ) {
+			newValue.setValue( value );
+		}
 		
 		this._onRefreshView( this.getIndexOf( newValue ) );
 		newValue.setFocus();
@@ -346,9 +352,16 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		}
 		for( var i = fromIndex; i < this._editableValues.length; i++ ) {
 			var isEven = ( i % 2 ) != 0;
-			this._editableValues[ i ]._subject
+			var val = this._editableValues[ i ];
+
+			val._subject
 			.addClass( isEven ? 'even' : 'uneven' )
 			.removeClass( isEven ? 'uneven' : 'even' );
+
+			var valIndexParent = val._getIndexParent();
+			if( valIndexParent !== null ) {
+				valIndexParent.text( i + 1 + '.' );
+			}
 		};
 	},
 	
@@ -358,7 +371,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	_updateCounters: function() {
 		var counterElems = this._getCounterNodes();
 		if( counterElems !== null && counterElems.length > 0 ) {
-			this._getCounterNodes().text( this._getFormattedCounterText() );
+			this._getCounterNodes().empty().append( this._getFormattedCounterText() );
 		}
 	},
 	
@@ -374,13 +387,35 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Returns a formatted string with the number of elements.
 	 * 
-	 * @return string
+	 * @return jQuery
 	 */
 	_getFormattedCounterText: function() {
+		var numberOfPendingValues = this.getPendingValues().length;
 		var numberOfValues = this.getValues().length;
-		return ( numberOfValues != 1 )
-				? '(' + numberOfValues + ')'
-				: '';
+
+		var msg = numberOfPendingValues < 1
+				? mw.msg( 'wikibase-propertyedittool-counter', numberOfValues )
+				: mw.msg(
+						'wikibase-propertyedittool-counter-pending',
+						numberOfValues + numberOfPendingValues,
+						numberOfValues,
+						'__3__' // can't insert html here since it would be escaped!
+				);
+
+		// replace __3__ with a span we can grab next
+		msg = $( ( '<div>' + msg + '</div>' ).replace( /__3__/g, '<span/>' ) );
+		var msgSpan = msg.find( 'span' );
+
+		if( msgSpan.length > 0 ) {
+			msgSpan.addClass( this.UI_CLASS + '-counter-pending' );
+			msgSpan.attr( 'title', mw.msg( 'wikibase-propertyedittool-counter-pending-tooltip', numberOfPendingValues ) );
+			msgSpan.text( mw.msg( 'wikibase-propertyedittool-counter-pending-pendingsubpart', numberOfPendingValues ) );
+			msgSpan.tipsy( {
+				'gravity': 'ne'
+			} );
+		}
+
+		return msg.contents();
 	},
 	
 	/**
@@ -407,6 +442,22 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		$.each( this._editableValues, function( index, elem ) {
 			// don't collect pending elements
 			if( ! elem.isPending() ) {
+				values.push( elem );
+			}
+		} );
+		return values;
+	},
+
+	/**
+	 * This will just return all pending values.
+	 * See getValues() for getting all values or only values not pending.
+	 *
+	 * @return wikibase.ui.PropertyEditTool.EditableValue[]
+	 */
+	getPendingValues: function() {
+		var values = new Array();
+		$.each( this._editableValues, function( index, elem ) {
+			if( elem.isPending() ) {
 				values.push( elem );
 			}
 		} );

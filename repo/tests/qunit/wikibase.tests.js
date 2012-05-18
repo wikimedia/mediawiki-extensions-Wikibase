@@ -1,9 +1,9 @@
 /**
- * QUnit tests for input interface component of property edit tool
+ * QUnit tests for general wikibase JavaScript code
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file wikibase.ui.PropertyEditTool.EditableValue.tests.js
+ * @file wikibase.tests.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -13,7 +13,7 @@
 
 
 ( function () {
-	module( 'wikibase', QUnit.newMwEnvironment() );
+	module( 'wikibase', window.QUnit.newWbEnvironment() );
 
 	test( 'basic', function() {
 

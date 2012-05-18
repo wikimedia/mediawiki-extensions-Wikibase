@@ -3,3 +3,4 @@
 .settings
 
 /tests/selenium_ruby/chromedriver.log
+/tests/selenium/chromedriver.log

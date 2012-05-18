@@ -1,0 +1,39 @@
+require 'rubygems'
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/*/*_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:spec_item) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/item/*_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:spec_description) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/item/description_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:spec_empty_item) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/item/empty_item_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:spec_label) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/item/label_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:spec_sitelinks) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/sitelinks/*_spec.rb'
+end
+
+task :default => :spec
+task :item => :spec_item
+task :description => :spec_description
+task :empty_item => :spec_empty_item
+task :label => :spec_label
+task :sitelinks => :spec_sitelinks

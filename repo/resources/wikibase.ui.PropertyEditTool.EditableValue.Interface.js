@@ -19,8 +19,8 @@
  * @param jQuery subject
  */
 window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject );
+	if( arguments.length > 0 ) {
+		this._init.apply( this, arguments );
 	}
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
@@ -58,13 +58,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 	/**
 	 * when adding characters to the input value, the previous value is stored to be able to check whether instant
-	 * on change operations have to be performed
+	 * on change operations have to be performed.
 	 * @var String
 	 */
 	_previousValue: null,
 
 	_currentWidth: null,
-
 
 	/**
 	 * Initializes the editable value.
@@ -82,7 +81,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	destroy: function() {
-		if( this._isInEditMode ) {
+		if( this.isInEditMode() ) {
 			this.stopEditing( false );
 		}
 	},
@@ -167,19 +166,22 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 	/**
 	 * Called when the input changes in general for example on its initialization when setting
-	 * its initial value.
+	 * its initial value or on setValue() while in edit mode.
 	 */
 	_onInputRegistered: function() {
-		this._previousValue = this._inputElem.val();
 		if( this.onInputRegistered !== null && this.onInputRegistered() === false ) { // callback
 			return false; // cancel
 		}
 	},
 
+	/**
+	 * Functionality for dynamically expanding the input fields size.
+	 *
+	 * @todo: This is not used currenty but basically works. One problem remaining is considering the max width.
+	 */
 	_expand: function() {
 		if ( this.autoExpand ) {
 			var ruler = this._subject.find( '.ruler' );
-			//console.log( '"'+ this._inputElem.attr( 'value' ).replace( / /g, '&nbsp;') + '"' );
 
 			var currentValue = this._inputElem.val();
 			if ( currentValue === '' ) {
@@ -196,16 +198,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			var currentWidth = this._subject.parent().width();
 			this._subject.parent().css( 'display', 'block' );
 
-			//console.log(maxWidth);
-			//console.log(currentWidth);
-			//console.log(this._inputElem.width());
-			/*
-			if ( currentWidth > maxWidth && !(ruler.width() < maxWidth) ) {
-				this._inputElem.css( 'width', maxWidth - 1 );
-			} else {
-				this._inputElem.css( 'width', ( ruler.width() + 25 ) + 'px' );
-			}*/
-
 			// TODO use additional parent element to measer width of (input + toolbar)
 			if ( this._inputElem.width() > this._subject.parent().width() - 250 && !(ruler.width() < this._subject.parent().width() - 250) ) {
 				this._inputElem.css( 'width', this._subject.parent().width() - 249 );
@@ -218,7 +210,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 				var tooltipLeft = parseInt( this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left' ) );
 				this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left', ( tooltipLeft + this._inputElem.width() - inputWidth ) + 'px' );
 			}
-
 		}
 	},
 
@@ -226,15 +217,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
-		this._previousValue = this._inputElem.val();
+		this._previousValue = this.getValue(); // remember current value before key changes text
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
 	_onKeyUp: function( event ) {
-		if ( this._inputElem.val() != this._previousValue ) {
-			this._onInputRegistered();
+		if ( this._previousValue !== this.getValue() ) {
+			this._onInputRegistered(); // only called if input really changed
 		}
 		this._expand();
 		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
@@ -326,39 +317,67 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	getValue: function() {
 		var value = '';
 		if( this.isInEditMode() ) {
-			value = $( this._getValueContainer().children( '.' + this.UI_CLASS )[0] ).attr( 'value' );
+			value = this._inputElem.val();
 			value = this.normalize( value );
 		} else {
 			value = this._getValueContainer().text();
 			// if already set, the value should be normalized already
 		}
-		return value;
+		// normalize in case we display a different variation from the actual normalized value
+		return this.normalize( value );
 	},
 	
 	/**
 	 * Sets a value.
 	 * Returns the value really set in the end. This string can be different from the given value
 	 * since it will go through some normalization first.
-	 * 
-	 * @return string
+	 * Won't change the value and return in case it was invalid.
+	 *
+	 * @param string value
+	 * @return string|null same as value but normalized, null in case the value was invalid
 	 */
 	setValue: function( value ) {
 		// make sure the value is sufficient
 		value = this.normalize( value );
+		var oldVal = this.getValue();
+
+		if( value === oldVal ) {
+			// nothing changed
+			return value;
+		}
 		
 		if( this.isInEditMode() ) {
-			this._inputElem.attr( 'value', value );
+			this._setValue_inEditMode( value );
 		} else {
-			this._getValueContainer().text( value );
+			this._setValue_inNonEditMode( value );
 		}
+
+		this._onInputRegistered(); // new input
 		return value;
+	},
+
+	/**
+	 * Called by setValue() if the value has to be injected into the input interface in edit mode.
+	 */
+	_setValue_inEditMode: function( value ) {
+		this._inputElem.attr( 'value', value );
+	},
+
+	/**
+	 * Called by setValue() if the value has to be injected into the static DOM nodes, not into input elements.
+	 * @param value
+	 * @private
+	 */
+	_setValue_inNonEditMode: function( value ) {
+		this._getValueContainer().text( value );
 	},
 	
 	/**
 	 * Normalizes a string so it is sufficient for setting it as value for this interface.
 	 * This will be done automatically when using setValue().
+	 * In case the given value is invalid, null will be returned.
 	 * 
-	 * @return string
+	 * @return string|null
 	 */
 	normalize: function( value ) {
 		return $.trim( value );
@@ -430,6 +449,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
 	 * If its not in edit mode, the current value will be returned.
+	 *
 	 * @return string
 	 */
 	getInitialValue: function() {
@@ -450,6 +470,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	
 	/**
 	 * Returns whether the current value is valid
+	 *
+	 * @return bool
 	 */
 	isValid: function() {
 		return this.validate( this.getValue() );
@@ -462,7 +484,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @return bool
 	 */
 	validate: function( value ) {
-		return this.normalize( value ) !== '';
+		var normalized = this.normalize( value );
+		return  typeof( value ) == 'string' && normalized !== '';
 	},
 
 	/////////////////

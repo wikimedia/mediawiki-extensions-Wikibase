@@ -24,23 +24,57 @@ $messages['en'] = array(
 	'wikibase-add' => 'add',
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-edit-placeholder' => 'enter description',
-
+	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 	'wikibase-sitelink-site-edit-placeholder' => 'specify site',
 	'wikibase-sitelink-page-edit-placeholder' => 'specify page',
-
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
-	'wikibase-description-input-help-message' => 'Enter a short desription in $1.',
-	'wikibase-sitelinks' => 'Wikipedia Pages linked to this item',
-	'wikibase-sitelinks-add' => 'add a link to a Wikipedia page',
-	'wikibase-sitelinks-empty' => 'No Wikipedia pages linked to this item yet.',
-	'wikibase-sitelinks-input-help-message' => 'Set a link to a Wikipedia article.',
+	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-sitelinks' => 'List of Pages Linked to This Item',
+	'wikibase-sitelinks-add' => 'add a link to a site-link',
+	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
+	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entry|entries}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entry|entries}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
+	'wikibase-disambiguation-title' => 'Disambiguation for "$1"',
 
 	// Special pages
 	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
+
+	// API errors
+	'wikibase-api-aliases-invalid-list' => 'You need to either provide the set parameter xor the add or remove parameters',
+	'wikibase-api-no-such-item' => 'There are no such item to be found',
+	'wikibase-api-no-token' => 'There are no token given',
+	'wikibase-api-no-data' => 'It is not found any data to operate upon',
+	'wikibase-api-cant-edit' => 'The logged in user is not allowed to edit',
+	'wikibase-api-no-permissions' => 'The logged in user does not have sufficient rights',
+	'wikibase-api-id-xor-wikititle' => 'Either provide the item ids or a site-title pair for a corresponding page',
+	'wikibase-api-no-such-item' => 'Could not find an existing item',
+	'wikibase-api-no-such-item-id' => 'Could not find an existing item for this id',
+	'wikibase-api-link-exists' => 'An article on the specified wiki is already linked',
+	'wikibase-api-add-with-id' => 'Can not add with the id of an existing item',
+	'wikibase-api-add-exists' => 'Can not add to an existing item',
+	'wikibase-api-update-without-id' => 'Update without an previous id is not possible',
+	'wikibase-api-no-such-item-link' => 'Could not find an existing item for this link',
+	'wikibase-api-create-failed' => 'Attempted creation of new item failed',
+	'wikibase-api-modify-failed' => 'Attempted modification of an item failed',
+	'wikibase-api-save-failed' => 'Attempted save of item failed',
+	'wikibase-api-invalid-contentmodel' => 'The content model of the page on which the item is stored is invalid',
+	'wikibase-api-alias-incomplete' => 'Can not find a definition of the alias for the item',
+	'wikibase-api-alias-not-found' => 'Can not find any previous alias in the item',
+	'wikibase-api-alias-found' => 'Found a previous alias in the item',
+	'wikibase-api-not-recognized' => 'Directive is not recognized',
+	'wikibase-api-label-or-description' => 'Use either or both of label and/or description, but not noen of them',
+	'wikibase-api-label-not-found' => 'Can not find a previous label for this language in the item',
+	'wikibase-api-description-not-found' => 'Can not find a previous description for this language in the item',
+
+	//content model names
+	'content-model-1001' => 'Wikibase item',
 );
 
 /** Message documentation (Message documentation)
@@ -76,6 +110,17 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
+
+	'wikibase-sitelinks' => 'Heading for the site links table.',
+	'wikibase-propertyedittool-counter' => '$1 is the sum of elements in the list currently.',
+	'wikibase-propertyedittool-counter-pending' => '$1 is the sum of elements in the list plus the ones pending (still in edit mode and not saved). $2 is the number of elements stored in the list (not pending). $3 is the message "wikibase-propertyedittool-counter-pending-pendingsubpart" with some additional markup around, expressing how many entries in the list are pending right now.',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => 'the number of pending elements within the list of site links and a leading "+". This will be inserted into "wikibase-propertyedittool-counter-pending" parameter $3.',
+	'wikibase-desc' => '{{desc}}',
+	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
+	'wikibase-label-input-help-message' => '$1: name of the language',
+	'wikibase-description-input-help-message' => '$1: name of the language',
+
+	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)

@@ -55,6 +55,24 @@ $wgExtensionCredits['other'][] = array(
 $dir = dirname( __FILE__ ) . '/';
 
 
+// rights
+// names should be according to other naming scheme
+$wgGroupPermissions['wbeditor']['item-add']			= true;
+$wgGroupPermissions['wbeditor']['item-update']		= true;
+$wgGroupPermissions['wbeditor']['item-set']			= true;
+$wgGroupPermissions['wbeditor']['item-remove']		= true;
+$wgGroupPermissions['wbeditor']['alias-add']		= true;
+$wgGroupPermissions['wbeditor']['alias-update']		= true;
+$wgGroupPermissions['wbeditor']['alias-set']		= true;
+$wgGroupPermissions['wbeditor']['alias-remove']		= true;
+$wgGroupPermissions['wbeditor']['site-link-add']	= true;
+$wgGroupPermissions['wbeditor']['site-link-update']	= true;
+$wgGroupPermissions['wbeditor']['site-link-set']	= true;
+$wgGroupPermissions['wbeditor']['site-link-remove']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-add']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-update']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-set']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-remove']	= true;
 
 // rights
 // names should be according to other naming scheme
@@ -89,17 +107,17 @@ $wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['WikibaseEntityHandler'] 			= $dir . 'includes/WikibaseEntityHandler.php';
-$wgAutoloadClasses['WikibaseItemHandler'] 				= $dir . 'includes/WikibaseItemHandler.php';
 $wgAutoloadClasses['WikibaseDifferenceEngine'] 			= $dir . 'includes/WikibaseDifferenceEngine.php';
 $wgAutoloadClasses['WikibaseUtils'] 					= $dir . 'includes/WikibaseUtils.php';
 $wgAutoloadClasses['WikibaseItem'] 						= $dir . 'includes/WikibaseItem.php';
-$wgAutoloadClasses['WikibaseItemDiff'] 					= $dir . 'includes/WikibaseItemDiff.php';
+$wgAutoloadClasses['WikibaseItemHandler'] 				= $dir . 'includes/WikibaseItemHandler.php';
 $wgAutoloadClasses['WikibaseEntity'] 					= $dir . 'includes/WikibaseEntity.php';
-$wgAutoloadClasses['WikibaseEntityDiff'] 				= $dir . 'includes/WikibaseEntityDiff.php';
+$wgAutoloadClasses['WikibaseEntityHandler'] 			= $dir . 'includes/WikibaseEntityHandler.php';
 $wgAutoloadClasses['WikibaseItemDisambiguation'] 		= $dir . 'includes/WikibaseItemDisambiguation.php';
 $wgAutoloadClasses['WikibaseItemStructuredSave'] 		= $dir . 'includes/WikibaseItemStructuredSave.php';
 $wgAutoloadClasses['WikibaseItemView'] 					= $dir . 'includes/WikibaseItemView.php';
+$wgAutoloadClasses['WikibaseSites'] 					= $dir . 'includes/WikibaseSites.php';
+$wgAutoloadClasses['WikibaseSite'] 						= $dir . 'includes/WikibaseSite.php';
 
 // includes/actions
 $wgAutoloadClasses['WikibaseViewItemAction'] 			= $dir . 'includes/actions/WikibaseViewItemAction.php';
@@ -261,13 +279,9 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 unset( $moduleTemplate );
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIBASE_ITEM', 'wikibase' );
-//define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', 'wbprop' );
-//define( 'CONTENT_MODEL_WIKIBASE_QUERY', 'wbquery' );
+define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
 
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseItemHandler';
-//$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibasePropertyHandler';
-//$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseQueryHandler';
 
 $baseNs = 100;
 
@@ -286,12 +300,10 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 //$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
 
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
-//$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_PROPERTY;
-//$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_QUERY;
-
 
 $egWBSettings = array();
 
 $egWBSettings['apiDebugWithWrite'] = true;
 $egWBSettings['apiDebugWithPost'] = true;
+
 $egWBSettings['apiDebugWithRights'] = true;

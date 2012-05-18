@@ -56,26 +56,36 @@ class ApiWikibaseGetItems extends ApiBase {
 
 		$languages = WikibaseUtils::getLanguageCodes();
 		
-		$this->getResult()->addValue(
+/*		$this->getResult()->addValue(
 			null,
 			'items',
 			array()
 		);
-		
+*/		
 		foreach ($params['ids'] as $id) {
 			$page = WikibaseItem::getWikiPageForId( $id );
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				$item = $page->getContent();
+				// this is not a very nice way to do it
+				// but if its only a few 
+				$arr = array( 'id' => $id );
+				$sitelinks = $item->getRawSiteLinks();
+				if (count($sitelinks)) {
+					$arr['sitelinks'] = $sitelinks;
+				}
+				$descriptions = $item->getRawDescriptions( $params['language'] );
+				if (count($descriptions)) {
+					$arr['descriptions'] = $descriptions;
+				}
+				$labels = $item->getRawLabels( $params['language'] );
+				if (count($labels)) {
+					$arr['labels'] = $labels;
+				}
 				$this->getResult()->addValue(
 					'items',
-					"{$id}",
-					array(
-					 	'id' => $id,
-						'sitelinks' => $item->getSiteLinks(),
-						'descriptions' => $item->getDescriptions($languages),
-						'labels' => $item->getLabels($languages),
-					)
+					"q{$id}",
+					$arr
 				);
 			}
 		}
@@ -89,6 +99,13 @@ class ApiWikibaseGetItems extends ApiBase {
 		);
 	}
 
+	/**
+	 * Returns an array of allowed parameters (parameter name) => (default
+	 * value) or (parameter name) => (array with PARAM_* constants as keys)
+	 * Don't call this function directly: use getFinalParams() to allow
+	 * hooks to modify parameters as needed.
+	 * @return array|bool
+	 */
 	public function getAllowedParams() {
 		return array(
 			'ids' => array(
@@ -96,7 +113,7 @@ class ApiWikibaseGetItems extends ApiBase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'titles' => array(
@@ -110,34 +127,51 @@ class ApiWikibaseGetItems extends ApiBase {
 		);
 	}
 
+	/**
+	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
+	 * needed.
+	 *
+	 * @return array|bool False on no parameter descriptions
+	 */
 	public function getParamDescription() {
 		return array(
-			'ids' => 'The ID of the item to get the data from',
+			'ids' => 'The IDs of the items to get the data from',
 			'language' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
 			'titles' => array( 'The title of the corresponding page',
-				"Use together with 'site'."
+				"Use together with 'sites', but only give one site for several titles or several sites for one title."
 			),
 			'sites' => array( 'Identifier for the site on which the corresponding page resides',
-				"Use together with 'title'."
+				"Use together with 'title', but only give one site for several titles or several sites for one title."
 			),
 		);
 	}
 
+	/**
+	 * Returns the description string for this module
+	 * @return mixed string or array of strings
+	 */
 	public function getDescription() {
 		return array(
-			'API module to get the data for a single Wikibase item.'
+			'API module to get the data for multiple Wikibase items.'
 		);
 	}
 
+	/**
+	 * Returns a list of all possible errors returned by the module
+	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'id-xor-wikititle', 'info' => 'You need to either provide the item ids or the titles of a corresponding page and the identifier for the wiki this page is on' ),
-			array( 'code' => 'no-such-item-id', 'info' => 'Could not find an existing item for this id' ),
-			array( 'code' => 'no-such-item', 'info' => 'Could not find an existing item' ),
+			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
+			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
 		) );
 	}
 
+	/**
+	 * Returns usage examples for this module. Return false if no examples are available.
+	 * @return bool|string|array
+	 */
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitems&ids=42'
@@ -149,10 +183,17 @@ class ApiWikibaseGetItems extends ApiBase {
 		);
 	}
 
+	/**
+	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
+	 */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbgetitems';
 	}
 
+	/**
+	 * Returns a string that identifies the version of this class.
+	 * @return string
+	 */
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}

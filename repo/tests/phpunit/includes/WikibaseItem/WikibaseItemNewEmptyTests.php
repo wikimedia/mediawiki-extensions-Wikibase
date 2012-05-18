@@ -9,10 +9,12 @@
  * @ingroup Wikibase
  * @ingroup Test
  *
+ * @group Wikibase
+ * @group WikibaseItem
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
- * 
  */
 class WikibaseItemNewEmptyTests extends MediaWikiTestCase {
 	
@@ -46,9 +48,9 @@ class WikibaseItemNewEmptyTests extends MediaWikiTestCase {
 			$this->item,
 			'After creating an empty WikibaseItem it should be a WikibaseItem'
 		);
-		$this->assertFalse(
-			$this->item->hasId(),
-			'Calling hasID on a new empty WikibaseItem after creating it should return false'
+		$this->assertTrue(
+			$this->item->isNew(),
+			'Calling isNew on a new empty WikibaseItem after creating it should return true'
 		);
 		$this->assertEquals(
 			null,
@@ -155,7 +157,6 @@ class WikibaseItemNewEmptyTests extends MediaWikiTestCase {
 			'The getWikitextForTransclusion is not implemented yet.'
 		);
 	}
-	
 	
 	public function testGetTextForSummary() {
 		$str = 'This is an description';

@@ -46,7 +46,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @param array $data
 	 */
 	public function __construct( array $data ) {
-		parent::__construct();
+		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 
 		$this->data = $data;
 	}
@@ -60,7 +60,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @since 0.1
 	 */
 	public function cleanStructure() {
-		foreach ( array( 'links', 'label', 'description' ) as $field ) {
+		foreach ( array( 'links', 'label', 'description', 'aliases' ) as $field ) {
 			if ( !array_key_exists( $field, $this->data ) ) {
 				$this->data[$field] = array();
 			}
@@ -113,14 +113,14 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function save() {
+	protected function relationalSave() {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$fields = array();
 
 		$success = true;
 
-		if ( !$this->hasId() ) {
+		if ( $this->isNew() ) {
 			$fields['item_id'] = null; // This is needed to have at least one field.
 
 			$success = $dbw->insert(
@@ -146,6 +146,71 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * Saves the item.
+	 * If the item does not exist yet, it will be created (ie an ID will be fetched and a new page in the data NS created).
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $summary
+	 * @param null|User $user
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function save( $summary = '', User $user = null ) {
+		$success = $this->relationalSave();
+
+		if ( $success ) {
+			$status = $this->getWikiPage()->doEditContent(
+				$this,
+				$summary,
+				EDIT_AUTOSUMMARY,
+				false,
+				$user,
+				CONTENT_FORMAT_JSON // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
+			);
+
+			$success = $status->isOk();
+		}
+
+		return $success;
+	}
+
+	/**
+	 * Load the item data from the database, overriding the data currently set.
+	 *
+	 * @since 0.1
+	 *
+	 * @throws MWException
+	 */
+	public function reload() {
+		if ( !$this->isNew() ) {
+			$item = self::getFromId( $this->getId() );
+
+			if ( is_null( $item ) ) {
+				throw new MWException( 'Attempt to reload item failed because it could not be obtained from the db.' );
+			}
+			else {
+				$this->data = $item->toArray();
+			}
+		}
+	}
+
+	/**
+	 * Removes the item.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $summary
+	 * @param null|User $user
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function remove( $summary = '', User $user = null ) {
+		// TODO
+		return true;
+	}
+
+	/**
 	 * Sets the ID.
 	 * Should only be set to something determined by the store and not by the user (to avoid duplicate IDs).
 	 *
@@ -164,8 +229,8 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return boolean
 	 */
-	public function hasId() {
-		return !is_null( $this->getId() );
+	public function isNew() {
+		return is_null( $this->getId() );
 	}
 
 	/**
@@ -237,12 +302,16 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @param string $langCode
 	 * @param string $value
+	 * @return string
 	 */
 	public function setLabel( $langCode, $value ) {
 		$this->data['label'][$langCode] = array(
 			'language' => $langCode,
 			'value' => $value,
 		);
+		// the value should be returned as it is after cleanup
+		// not only as it is coming into the method
+		return $this->data['label'][$langCode];
 	}
 
 	/**
@@ -252,12 +321,16 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @param string $langCode
 	 * @param string $value
+	 * @return string
 	 */
 	public function setDescription( $langCode, $value ) {
 		$this->data['description'][$langCode] = array(
 			'language' => $langCode,
 			'value' => $value,
 		);
+		// the value should be returned as it is after cleanup
+		// not only as it is coming into the method
+		return $this->data['description'][$langCode];
 	}
 
 	/**
@@ -291,7 +364,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @param array|null $languages
 	 */
 	protected function removeMultilangTexts( $fieldKey, array $languages = null ) {
-		if ( !is_null( $languages ) ) {
+		if ( is_null( $languages ) ) {
 			$this->data[$fieldKey] = array();
 		}
 		else {
@@ -299,6 +372,80 @@ class WikibaseItem extends WikibaseEntity {
 				unset( $this->data[$fieldKey][$lang] );
 			}
 		}
+	}
+
+	/**
+	 * Returns the aliases for the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 *
+	 * @return array
+	 */
+	public function getAliases( $languageCode ) {
+		return array_key_exists( $languageCode, $this->data['aliases'] ) ?
+			$this->data['aliases'][$languageCode] : array();
+ 	}
+
+	/**
+	 * Returns all the aliases for the item.
+	 * The result is an array with language codes pointing to an array of aliases in the language they specify.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getAllAliases() {
+		return $this->data['aliases'];
+	}
+
+	/**
+	 * Sets the aliases for the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function setAliases( $languageCode, array $aliases ) {
+		$this->data['aliases'][$languageCode] = $aliases;
+	}
+
+	/**
+	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function addAliases( $languageCode, array $aliases ) {
+		$this->setAliases(
+			$languageCode,
+			array_unique( array_merge(
+				$this->getAliases( $languageCode ),
+				$aliases
+			) )
+		);
+	}
+
+	/**
+	 * Removed the provided aliases from the aliases list of the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function removeAliases( $languageCode, array $aliases ) {
+		$this->setAliases(
+			$languageCode,
+			array_diff(
+				$this->getAliases( $languageCode ),
+				$aliases
+			)
+		);
 	}
 
 	/**
@@ -317,6 +464,19 @@ class WikibaseItem extends WikibaseEntity {
 	/**
 	 * @since 0.1
 	 * 
+	 * Get descriptions for an item but as raw values
+	 * 
+	 * @param array|null $languages note that an empty array gives descriptions for no languages while a null pointer gives all
+	 * 
+	 * @return array found labels in given languages
+	 */
+	public function getRawDescriptions( array $languages = null ) {
+		return $this->getMultilangTexts( 'description', $languages, true );
+	}
+	
+	/**
+	 * @since 0.1
+	 * 
 	 * Get labels for an item
 	 * 
 	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
@@ -330,6 +490,19 @@ class WikibaseItem extends WikibaseEntity {
 	/**
 	 * @since 0.1
 	 * 
+	 * Get labels for an item but as raw values
+	 * 
+	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
+	 * 
+	 * @return array found labels in given languages
+	 */
+	public function getRawLabels( array $languages = null ) {
+		return $this->getMultilangTexts( 'label', $languages, true );
+	}
+	
+	/**
+	 * @since 0.1
+	 * 
 	 * Get texts from an item with a field specifier
 	 *
 	 * @param string $fieldKey
@@ -337,7 +510,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @return array
 	 */
-	protected function getMultilangTexts( $fieldKey, array $languages = null ) {
+	protected function getMultilangTexts( $fieldKey, array $languages = null, $raw = false ) {
 		$textList = $this->data[$fieldKey];
 
 		if ( !is_null( $languages ) ) {
@@ -349,7 +522,8 @@ class WikibaseItem extends WikibaseEntity {
 		$texts = array();
 
 		foreach ( $textList as $languageCode => $textData ) {
-			$texts[$languageCode] = $textData['value'];
+			// TODO: A raw value should probably be filtered somehow
+			$texts[$languageCode] = $raw ? $textData : $textData['value'];
 		}
 
 		return $texts;
@@ -364,9 +538,9 @@ class WikibaseItem extends WikibaseEntity {
 	 * @param string $pageName
 	 * @param string $updateType
 	 *
-	 * @return boolean Success indicator
+	 * @return array|false Returns array on success, or false on failure
 	 */
-	public function addSiteLink( $siteId, $pageName, $updateType = 'set' ) {
+	public function addSiteLink( $siteId, $pageName, $updateType = 'add' ) {
 		/*
 		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
 			$this->data['links'][$siteId] = array();
@@ -390,7 +564,7 @@ class WikibaseItem extends WikibaseEntity {
 			);
 		}
 
-		return $success;
+		return $success ? $this->data['links'][$siteId] : false;
 
 		// TODO: verify the link is allowed (ie no other item already links here)
 
@@ -515,6 +689,18 @@ class WikibaseItem extends WikibaseEntity {
 	}
 
 	/**
+	 * Returns the site links in an associative array with the following format:
+	 * site id (str) => arr
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getRawSiteLinks() {
+		return $this->data['links'];
+	}
+
+	/**
 	 * @return String a string representing the content in a way useful for building a full text search index.
 	 *		 If no useful representation exists, this method returns an empty string.
 	 */
@@ -537,7 +723,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return String the summary text
 	 */
 	public function getTextForSummary( $maxlength = 250 ) {
-		return $this->getDescription( $GLOBALS['wgLang'] );
+		return $this->getDescription( $GLOBALS['wgLang']->getCode() );
 	}
 
 	/**
@@ -557,7 +743,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return int
 	 */
 	public function getSize()  {
-		return strlen( serialize( $this->toArray() ) ); #TODO: keep and reuse value, content object is immutable!
+		return strlen( serialize( $this->getNativeData() ) ); #TODO: keep and reuse value, content object is immutable!
 	}
 
 	/**
@@ -631,7 +817,7 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
-			$this->wikiPage = $this->hasId() ? self::getWikiPageForId( $this->getId() ) : false;
+			$this->wikiPage = $this->isNew() ? false : self::getWikiPageForId( $this->getId() );
 		}
 
 		return $this->wikiPage;
@@ -753,6 +939,25 @@ class WikibaseItem extends WikibaseEntity {
 	 */
 	public static function newEmpty() {
 		return self::newFromArray( array() );
+	}
+
+	/**
+	 * Whatever would be more appropriate during a normalization of titles during lookup.
+	 * 
+	 * @since 0.1
+	 *
+	 * @param string $str
+	 * @return string
+	 */
+	public static function normalize( $str ) {
+		
+		// ugly but works, should probably do more normalization
+		// should (?) use $wgLegalTitleChars and $wgDisableTitleConversion somehow
+		$str = preg_replace( '/^[\s_]+/', '', $str );
+		$str = preg_replace( '/[\s_]+$/', '', $str );
+		$str = preg_replace( '/[\s_]+/', ' ', $str );
+		
+		return $str;
 	}
 
 }
