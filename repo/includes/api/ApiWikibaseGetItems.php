@@ -56,26 +56,36 @@ class ApiWikibaseGetItems extends ApiBase {
 
 		$languages = WikibaseUtils::getLanguageCodes();
 		
-		$this->getResult()->addValue(
+/*		$this->getResult()->addValue(
 			null,
 			'items',
 			array()
 		);
-		
+*/		
 		foreach ($params['ids'] as $id) {
 			$page = WikibaseItem::getWikiPageForId( $id );
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				$item = $page->getContent();
+				// this is not a very nice way to do it
+				// but if its only a few 
+				$arr = array( 'id' => $id );
+				$sitelinks = $item->getRawSiteLinks();
+				if (count($sitelinks)) {
+					$arr['sitelinks'] = $sitelinks;
+				}
+				$descriptions = $item->getRawDescriptions( $params['language'] );
+				if (count($descriptions)) {
+					$arr['descriptions'] = $descriptions;
+				}
+				$labels = $item->getRawLabels( $params['language'] );
+				if (count($labels)) {
+					$arr['labels'] = $labels;
+				}
 				$this->getResult()->addValue(
 					'items',
-					"{$id}",
-					array(
-					 	'id' => $id,
-						'sitelinks' => $item->getSiteLinks(),
-						'descriptions' => $item->getDescriptions($languages),
-						'labels' => $item->getLabels($languages),
-					)
+					"q{$id}",
+					$arr
 				);
 			}
 		}
@@ -103,7 +113,7 @@ class ApiWikibaseGetItems extends ApiBase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'titles' => array(
@@ -125,14 +135,14 @@ class ApiWikibaseGetItems extends ApiBase {
 	 */
 	public function getParamDescription() {
 		return array(
-			'ids' => 'The ID of the item to get the data from',
+			'ids' => 'The IDs of the items to get the data from',
 			'language' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
 			'titles' => array( 'The title of the corresponding page',
-				"Use together with 'site'."
+				"Use together with 'sites', but only give one site for several titles or several sites for one title."
 			),
 			'sites' => array( 'Identifier for the site on which the corresponding page resides',
-				"Use together with 'title'."
+				"Use together with 'title', but only give one site for several titles or several sites for one title."
 			),
 		);
 	}
@@ -143,7 +153,7 @@ class ApiWikibaseGetItems extends ApiBase {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to get the data for a single Wikibase item.'
+			'API module to get the data for multiple Wikibase items.'
 		);
 	}
 

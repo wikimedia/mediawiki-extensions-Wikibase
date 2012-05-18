@@ -99,9 +99,9 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 
 		$this->validateParameters( $params );
 		
-		if ( !isset($params['summary']) ) {
-			$params['summary'] = 'dummy';
-		}
+		//if ( !isset($params['summary']) ) {
+		//	$params['summary'] = 'dummy';
+		//}
 		
 		if ( $params['item'] === 'update' && !isset( $params['id'] ) && !$hasLink ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-update-without-id' ), 'update-without-id' );
@@ -115,8 +115,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			}
 		}
 		elseif ( $hasLink ) {
-			$item = WikibaseItem::getFromSiteLink( $params['site'], $params['title'] );
-
+			$item = WikibaseItem::getFromSiteLink( $params['site'], WikibaseItem::normalize( $params['title'] ) );
 			if ( is_null( $item ) && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-id' );
 			}
@@ -134,7 +133,10 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			}
 		}
 
-		$this->modifyItem( $item, $params );
+		$success = $this->modifyItem( $item, $params );
+		if ( !$success ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
+		}
 
 		$isNew = $item->isNew();
 		
@@ -167,6 +169,21 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				'item',
 				'id', $item->getId()
 			);
+			if ( $hasLink ) {
+				// normalizing site does not really give any meaning
+				$normTitle = WikibaseItem::normalize( $params['title'] );
+				$normalized = array();
+				if ( $normTitle !== $params['title'] ) {
+					$normalized['from'] = $params['title'];
+					$normalized['to'] = $normTitle;
+				}
+				if ( count( $normalized ) ) {
+					$this->getResult()->addValue(
+						'item',
+						'normalized', $normalized
+					);
+				}
+			}
 		}
 	}
 
@@ -183,6 +200,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			array( 'code' => 'no-such-item-link', 'info' => wfMsg( 'wikibase-api-no-such-item-link' ) ),
 			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
 			array( 'code' => 'create-failed', 'info' => wfMsg( 'wikibase-api-create-failed' ) ),
+			array( 'code' => 'modify-failed', 'info' => wfMsg( 'wikibase-api-modify-failed' ) ),
 			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 			array( 'code' => 'invalid-contentmodel', 'info' => wfMsg( 'wikibase-api-invalid-contentmodel' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
@@ -222,22 +240,22 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'create' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-			),
+			//'create' => array(
+			//	ApiBase::PARAM_TYPE => 'boolean',
+			//),
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
 			'site' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
+				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'summary' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_DFLT => __CLASS__, // TODO
-			),
+			//'summary' => array(
+			//	ApiBase::PARAM_TYPE => 'string',
+			//	ApiBase::PARAM_DFLT => __CLASS__, // TODO
+			//),
 			'item' => array(
 				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set' ),
 				ApiBase::PARAM_DFLT => 'update',
@@ -263,8 +281,12 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			'title' => array( 'Title of the page to associate.',
 				"Use together with 'site'."
 			),
-			'item' => 'Indicates if you are changing the content of the item',
-			'summary' => 'Summary for the edit.',
+			'item' => array( 'Indicates if you are changing the content of the item.',
+				"add - the item should not exist before the call or an error will be reported.",
+				"update - the item shuld exist before the call or an error will be reported.",
+				"set - the item could exist or not before the call.",
+			),
+			// 'summary' => 'Summary for the edit.',
 			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
 		);
 	}

@@ -85,7 +85,7 @@ class WikibaseItemView extends ContextSource {
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link-' . $siteId ) );
 				$html .= Html::element(
 					'a',
-					array( 'href' => WikibaseUtils::getSiteUrl( $siteId, $title ) ),
+					array( 'href' => WikibaseSites::singleton()->getUrl( $siteId, $title ) ),
 					$title
 				);
 				$html .= Html::closeElement( 'td' );

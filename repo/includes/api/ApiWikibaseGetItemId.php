@@ -62,8 +62,8 @@ class ApiWikibaseGetItemId extends ApiBase {
 	public function getAllowedParams() {
 		return array(
 			'site' => array(
-				//ApiBase::PARAM_TYPE => WikibaseUtils::getSiteIdentifiers(),
-				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
+				//ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true
 			),
 			'title' => array(
@@ -98,7 +98,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to obtain the Wikibase ids of one or more pages on the specified site.'
+			'API module to obtain the Wikibase id for a single item given a site and title pair.'
 		);
 	}
 

@@ -62,6 +62,7 @@ $messages['en'] = array(
 	'wikibase-api-update-without-id' => 'Update without an previous id is not possible',
 	'wikibase-api-no-such-item-link' => 'Could not find an existing item for this link',
 	'wikibase-api-create-failed' => 'Attempted creation of new item failed',
+	'wikibase-api-modify-failed' => 'Attempted modification of an item failed',
 	'wikibase-api-save-failed' => 'Attempted save of item failed',
 	'wikibase-api-invalid-contentmodel' => 'The content model of the page on which the item is stored is invalid',
 	'wikibase-api-alias-incomplete' => 'Can not find a definition of the alias for the item',
@@ -69,8 +70,11 @@ $messages['en'] = array(
 	'wikibase-api-alias-found' => 'Found a previous alias in the item',
 	'wikibase-api-not-recognized' => 'Directive is not recognized',
 	'wikibase-api-label-or-description' => 'Use either or both of label and/or description, but not noen of them',
-	'wikibase-api-label-not-found' => 'Can not find any previous label in the item',
-	'wikibase-api-description-not-found' => 'Can not find any previous description in the item',
+	'wikibase-api-label-not-found' => 'Can not find a previous label for this language in the item',
+	'wikibase-api-description-not-found' => 'Can not find a previous description for this language in the item',
+
+	//content model names
+	'content-model-1001' => 'Wikibase item',
 );
 
 /** Message documentation (Message documentation) */
@@ -83,6 +87,8 @@ $messages['qqq'] = array(
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wikibase-label-input-help-message' => '$1: name of the language',
 	'wikibase-description-input-help-message' => '$1: name of the language',
+
+	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
