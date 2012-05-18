@@ -45,13 +45,15 @@ final class WikibaseLibHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
 
-		$files[] = $testDir . 'WikibaseChangesTest.php';
-		$files[] = $testDir . 'WikibaseListDiffTest.php';
-		$files[] = $testDir . 'WikibaseMapDiffTest.php';
+		$files[] = $testDir . 'ChangesTest.php';
 
 		// changes
-		$files[] = $testDir . 'changes/WikibaseAliasChangeTest.php';
-		$files[] = $testDir . 'changes/WikibaseSitelinkChangeTest.php';
+		$files[] = $testDir . 'changes/AliasChangeTest.php';
+		$files[] = $testDir . 'changes/SitelinkChangeTest.php';
+
+		// diff
+		$files[] = $testDir . 'diff/ListDiffTest.php';
+		$files[] = $testDir . 'diff/MapDiffTest.php';
 
 		return true;
 	}

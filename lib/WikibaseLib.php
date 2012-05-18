@@ -76,12 +76,14 @@ $wgAutoloadClasses['Wikibase\MapDiff'] 				= $dir . 'includes/diff/MapDiff.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\tests\ChangesTest'] 			= $dir . 'tests/phpunit/ChangesTest.php';
-$wgAutoloadClasses['Wikibase\tests\ListDiffTest'] 			= $dir . 'tests/phpunit/ListDiffTest.php';
-$wgAutoloadClasses['Wikibase\tests\MapDiffTest'] 			= $dir . 'tests/phpunit/MapDiffTest.php';
 
 // tests/changes
 $wgAutoloadClasses['Wikibase\tests\AliasChangeTest'] 		= $dir . 'tests/phpunit/changes/AliasChangeTest.php';
 $wgAutoloadClasses['Wikibase\tests\SitelinkChangeTest'] 	= $dir . 'tests/phpunit/changes/SitelinkChangeTest.php';
+
+// tests/diff
+$wgAutoloadClasses['Wikibase\tests\ListDiffTest'] 			= $dir . 'tests/phpunit/diff/ListDiffTest.php';
+$wgAutoloadClasses['Wikibase\tests\MapDiffTest'] 			= $dir . 'tests/phpunit/diff/MapDiffTest.php';
 
 
 
