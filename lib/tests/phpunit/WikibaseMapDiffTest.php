@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase\Test;
+use Wikibase\MapDiff as MapDiff;
+
 /**
  * Tests for the WikibaseMapDiff class.
  *
@@ -8,11 +11,13 @@
  *
  * @ingroup WikibaseLib
  * @ingroup Test
+ * @group Wikibase
+ * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseMapDiffTest extends MediaWikiTestCase {
+class MapDiffTest extends \MediaWikiTestCase {
 
 	public function newFromArraysProvider() {
 		return array(
@@ -56,7 +61,7 @@ class WikibaseMapDiffTest extends MediaWikiTestCase {
 	 * @dataProvider newFromArraysProvider
 	 */
 	public function testNewFromArrays( array $from, array $to, array $expected, $emptyValue = null, $recursive = false ) {
-		$diff = WikibaseMapDiff::newFromArrays( $from, $to, $emptyValue, $recursive );
+		$diff = MapDiff::newFromArrays( $from, $to, $emptyValue, $recursive );
 		$actual = iterator_to_array( $diff );
 
 		// Sort to get rid of differences in order, since no promises about order are made.

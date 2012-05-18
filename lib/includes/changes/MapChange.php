@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Class representing a change that can be described as a list of changes to named items (ie a WikibaseMapDiff).
  *
@@ -11,12 +13,12 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseMapChange extends WikibaseChange {
+class MapChange extends Change {
 
 	/**
 	 * @since 0.1
 	 *
-	 * @return WikibaseMapDiff
+	 * @return MapDiff
 	 */
 	public function getDiff() {
 		return $this->getField( 'info' );
@@ -25,23 +27,23 @@ class WikibaseMapChange extends WikibaseChange {
 	/**
 	 * @since 0.1
 	 *
-	 * @param WikibaseMapDiff $diff
+	 * @param MapDiff $diff
 	 */
-	public function setDiff( WikibaseMapDiff $diff ) {
+	public function setDiff( MapDiff $diff ) {
 		return $this->setField( 'info', $diff );
 	}
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param WikibaseMapDiff $diff
+	 * @param MapDiff $diff
 	 * @param array|null $fields
 	 *
-	 * @return WikibaseMapChange
+	 * @return MapChange
 	 */
-	public static function newFromDiff( WikibaseMapDiff $diff, array $fields = null ) {
+	public static function newFromDiff( MapDiff $diff, array $fields = null ) {
 		$instance = new static(
-			WikibaseChanges::singleton(),
+			Changes::singleton(),
 			$fields,
 			true
 		);

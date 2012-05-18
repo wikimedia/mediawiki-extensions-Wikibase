@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Test;
+use Wikibase\MapDiff as MapDiff;
+use Wikibase\ListDiff as ListDiff;
+use Wikibase\Changes as Changes;
+
 /**
  * Tests for the WikibaseChanges class.
  *
@@ -8,6 +13,8 @@
  *
  * @ingroup WikibaseLib
  * @ingroup Test
+ * @group Wikibase
+ * @group WikibaseLib
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -21,27 +28,27 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseChangesTest extends MediaWikiTestCase {
+class ChangesTest extends \MediaWikiTestCase {
 
 	public function newFromArrayProvider() {
 		return array(
 			array(
 				array(
-					'type' => 'WikibaseSitelinkChange',
+					'type' => 'sitelink',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
-					'info' => WikibaseMapDiff::newEmpty()
+					'info' => MapDiff::newEmpty()
 				),
 				true
 			),
 			array(
 				array(
-					'type' => 'WikibaseAliasChange',
+					'type' => 'alias',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
-					'info' => WikibaseListDiff::newEmpty()
+					'info' => ListDiff::newEmpty()
 				),
 				true
 			),
@@ -52,7 +59,7 @@ class WikibaseChangesTest extends MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testNewFromArray( array $data, $loadDefaults = false ) {
-		$change = WikibaseChanges::singleton()->newFromArray( $data, $loadDefaults );
+		$change = Changes::singleton()->newFromArray( $data, $loadDefaults );
 
 		$this->assertEquals( $data['type'], get_class( $change ) );
 
@@ -69,7 +76,7 @@ class WikibaseChangesTest extends MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testSaveSelectCountAndDelete( array $data, $loadDefaults = false ) {
-		$changesTable = WikibaseChanges::singleton();
+		$changesTable = Changes::singleton();
 
 		$change = $changesTable->newFromArray( $data, $loadDefaults );
 

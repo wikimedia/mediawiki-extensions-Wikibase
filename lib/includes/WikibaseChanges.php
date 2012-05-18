@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use MWException;
+
 /**
  * Class representing the wb_changes table.
  *
@@ -11,7 +14,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseChanges extends ORMTable {
+class Changes extends \ORMTable {
 
 	/**
 	 * (non-PHPdoc)
@@ -75,7 +78,7 @@ class WikibaseChanges extends ORMTable {
 	 * @param array $data
 	 * @param boolean $loadDefaults
 	 *
-	 * @return WikibaseChange
+	 * @return Change
 	 * @throws MWException
 	 */
 	public function newFromArray( array $data, $loadDefaults = false ) {

@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase\Test;
+use Wikibase\ListDiff as ListDiff;
+
 /**
  * Tests for the WikibaseListDiff class.
  *
@@ -8,11 +11,13 @@
  *
  * @ingroup WikibaseLib
  * @ingroup Test
+ * @group Wikibase
+ * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseListDiffTest extends MediaWikiTestCase {
+class ListDiffTest extends \MediaWikiTestCase {
 
 	public function newFromArraysProvider() {
 		return array(
@@ -84,7 +89,7 @@ class WikibaseListDiffTest extends MediaWikiTestCase {
 	 * @dataProvider newFromArraysProvider
 	 */
 	public function testNewFromArrays( array $from, array $to, array $additions, array $removals ) {
-		$diff = WikibaseListDiff::newFromArrays( $from, $to );
+		$diff = ListDiff::newFromArrays( $from, $to );
 
 		// array_values because we only care about the values, not promises are made about the keys.
 		$resultAdditions = array_values( $diff->getAdditions() );

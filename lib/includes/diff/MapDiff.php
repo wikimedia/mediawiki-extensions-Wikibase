@@ -18,8 +18,8 @@ class MapDiff extends DiffOpList implements IDiffOp {
 		return new self( array() );
 	}
 
-	public static function newFromArrays( array $oldValues, array $newValues, $emptyValue = null, $recursively = false ) {
-		return new self( self::doDiff( $oldValues, $newValues, $emptyValue, $recursively ) );
+	public static function newFromArrays( array $oldValues, array $newValues, $recursively = false ) {
+		return new self( self::doDiff( $oldValues, $newValues, $recursively ) );
 	}
 
 	/**
@@ -32,6 +32,7 @@ class MapDiff extends DiffOpList implements IDiffOp {
 	 * @param boolean $recursively If elements that are arrays should also be diffed.
 	 * @param array|boolean $lists
 	 *
+	 * @throws MWException
 	 * @return array
 	 * Each key existing in either array will exist in the result and have an array as value.
 	 * This value is an array with two keys: old and new.
@@ -60,7 +61,7 @@ class MapDiff extends DiffOpList implements IDiffOp {
 
 					if ( is_array( $old ) && is_array( $new ) ) {
 						$diff = new ListDiff( $old, $new );
-
+						// TODO
 					}
 				}
 				else if ( $hasOld && $hasNew && is_array( $oldSet[$key] ) && is_array( $newSet[$key] ) ) {
@@ -101,7 +102,7 @@ class MapDiff extends DiffOpList implements IDiffOp {
 
 	/**
 	 * @since 0.1
-	 * @return WikibaseDiffOpList
+	 * @return DiffOpList
 	 */
 	public function getChanges() {
 		return $this->getTypeOperations( 'change' );

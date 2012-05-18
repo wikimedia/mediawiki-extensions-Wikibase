@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use \ORMRow, \User;
+
 /**
  * Class representing a single change (ie a row in the wb_changes).
  *
@@ -11,7 +14,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseChange extends ORMRow {
+class Change extends ORMRow {
 
 	/**
 	 * @since 0.1

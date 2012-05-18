@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Class representing a change that can be described as a list of additions and removals (ie a WikibaseListDiff).
  *
@@ -11,12 +13,12 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseListChange extends WikibaseChange {
+class ListChange extends Change {
 
 	/**
 	 * @since 0.1
 	 *
-	 * @return WikibaseListDiff
+	 * @return ListDiff
 	 */
 	public function getDiff() {
 		return $this->getField( 'info' );
@@ -25,23 +27,23 @@ class WikibaseListChange extends WikibaseChange {
 	/**
 	 * @since 0.1
 	 *
-	 * @param WikibaseListDiff $diff
+	 * @param ListDiff $diff
 	 */
-	public function setDiff( WikibaseListDiff $diff ) {
+	public function setDiff( ListDiff $diff ) {
 		return $this->setField( 'info', $diff );
 	}
 
 	/**
 	 * @since 0.1
 	 * .
-	 * @param WikibaseListDiff $diff
+	 * @param ListDiff $diff
 	 * @param array|null $fields
 	 *
-	 * @return WikibaseSitelinkChange
+	 * @return SitelinkChange
 	 */
-	public static function newFromDiff( WikibaseListDiff $diff, array $fields = null ) {
+	public static function newFromDiff( ListDiff $diff, array $fields = null ) {
 		$instance = new static(
-			WikibaseChanges::singleton(),
+			Changes::singleton(),
 			$fields,
 			true
 		);

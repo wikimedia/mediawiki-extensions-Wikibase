@@ -55,24 +55,33 @@ $wgAutoloadClasses['WikibaseLibHooks'] 				= $dir . 'WikibaseLib.hooks.php';
 $wgAutoloadClasses['WBLSettings'] 					= $dir . 'WikibaseLib.settings.php';
 
 // includes
-$wgAutoloadClasses['WikibaseChanges'] 				= $dir . 'includes/WikibaseChanges.php';
-$wgAutoloadClasses['WikibaseListDiff'] 				= $dir . 'includes/WikibaseListDiff.php';
-$wgAutoloadClasses['WikibaseMapDiff'] 				= $dir . 'includes/WikibaseMapDiff.php';
+$wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
 
 // includes/changes
-$wgAutoloadClasses['WikibaseAliasChange'] 			= $dir . 'includes/changes/WikibaseAliasChange.php';
-$wgAutoloadClasses['WikibaseChange'] 				= $dir . 'includes/changes/WikibaseChange.php';
-$wgAutoloadClasses['WikibaseListChange'] 			= $dir . 'includes/changes/WikibaseListChange.php';
-$wgAutoloadClasses['WikibaseMapChange'] 			= $dir . 'includes/changes/WikibaseMapChange.php';
-$wgAutoloadClasses['WikibaseSitelinkChange'] 		= $dir . 'includes/changes/WikibaseSitelinkChange.php';
+$wgAutoloadClasses['Wikibase\AliasChange'] 			= $dir . 'includes/changes/AliasChange.php';
+$wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
+$wgAutoloadClasses['Wikibase\ListChange'] 			= $dir . 'includes/changes/ListChange.php';
+$wgAutoloadClasses['Wikibase\MapChange'] 			= $dir . 'includes/changes/MapChange.php';
+$wgAutoloadClasses['Wikibase\SitelinkChange'] 		= $dir . 'includes/changes/SitelinkChange.php';
+
+// includes/diff
+$wgAutoloadClasses['Wikibase\DiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
+$wgAutoloadClasses['Wikibase\DiffOpAdd'] 			= $dir . 'includes/diff/DiffOpAdd.php';
+$wgAutoloadClasses['Wikibase\DiffOpChange'] 		= $dir . 'includes/diff/DiffOpChange.php';
+$wgAutoloadClasses['Wikibase\DiffOpList'] 			= $dir . 'includes/diff/DiffOpList.php';
+$wgAutoloadClasses['Wikibase\DiffOpRemove'] 		= $dir . 'includes/diff/DiffOpRemove.php';
+$wgAutoloadClasses['Wikibase\ListDiff'] 			= $dir . 'includes/diff/ListDiff.php';
+$wgAutoloadClasses['Wikibase\MapDiff'] 				= $dir . 'includes/diff/MapDiff.php';
 
 // tests
-$wgAutoloadClasses['WikibaseChangesTest'] 			= $dir . 'tests/phpunit/WikibaseSitelinkChange.php';
-$wgAutoloadClasses['WikibaseListDiffTest'] 			= $dir . 'tests/phpunit/WikibaseListDiffTest.php';
-$wgAutoloadClasses['WikibaseMapDiffTest'] 			= $dir . 'tests/phpunit/WikibaseMapDiffTest.php';
+$wgAutoloadClasses['Wikibase\tests\ChangesTest'] 			= $dir . 'tests/phpunit/ChangesTest.php';
+$wgAutoloadClasses['Wikibase\tests\ListDiffTest'] 			= $dir . 'tests/phpunit/ListDiffTest.php';
+$wgAutoloadClasses['Wikibase\tests\MapDiffTest'] 			= $dir . 'tests/phpunit/MapDiffTest.php';
 
 // tests/changes
-$wgAutoloadClasses['WikibaseSitelinkChangeTest'] 	= $dir . 'tests/phpunit/changes/WikibaseSitelinkChangeTest.php';
+$wgAutoloadClasses['Wikibase\tests\AliasChangeTest'] 		= $dir . 'tests/phpunit/changes/AliasChangeTest.php';
+$wgAutoloadClasses['Wikibase\tests\SitelinkChangeTest'] 	= $dir . 'tests/phpunit/changes/SitelinkChangeTest.php';
+
 
 
 // Hooks

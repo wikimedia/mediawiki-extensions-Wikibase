@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Class representing a single change to an item affecting one or more sitelinks.
  *
@@ -11,7 +13,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseSitelinkChange extends WikibaseMapChange {
+class SitelinkChange extends MapChange {
 
 
 
