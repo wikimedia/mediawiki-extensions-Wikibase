@@ -13,7 +13,7 @@
  */
 class WBCSkinHandler {
 	public static function onBeforePageDisplay( $out, $skin ) {
-		$out->addModules( 'wikibaseClient' );
+		$out->addModules( 'ext.wikibaseclient' );
 		return true;
 	}
 
