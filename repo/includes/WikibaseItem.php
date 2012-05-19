@@ -541,6 +541,13 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return array|false Returns array on success, or false on failure
 	 */
 	public function addSiteLink( $siteId, $pageName, $updateType = 'add' ) {
+		
+		// TODO Checks if the link to be added already exists. Should give a better error message.
+		$exists = self::getIdForSiteLink( $siteId, $pageName );
+		if ( $exists !== false ) {
+			return false;
+		}
+
 		/*
 		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
 			$this->data['links'][$siteId] = array();
