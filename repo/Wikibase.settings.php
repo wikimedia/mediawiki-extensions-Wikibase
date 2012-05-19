@@ -204,7 +204,7 @@ class WBSettings {
 						'ee' => 'http://ee.wikipedia.org',
 						'el' => 'http://el.wikipedia.org',
 						'eml' => 'http://eml.wikipedia.org',
-						'en' => '/wiki/Main_Page',
+						'en' => 'http://en.wikipedia.org',
 						'eo' => 'http://eo.wikipedia.org',
 						'es' => 'http://es.wikipedia.org',
 						'et' => 'http://et.wikipedia.org',

@@ -79,6 +79,10 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	white-space: nowrap;
 }
 
+.wb-property-container-value {
+	margin-left: 0;
+}
+
 /********** TOOLTIP **********/
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
