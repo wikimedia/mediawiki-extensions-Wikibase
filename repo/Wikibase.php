@@ -139,6 +139,7 @@ $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialC
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/SpecialItemByLabel.php';
+$wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
 
 
@@ -160,7 +161,7 @@ $wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
 
 
 // Special page registration
-//$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
