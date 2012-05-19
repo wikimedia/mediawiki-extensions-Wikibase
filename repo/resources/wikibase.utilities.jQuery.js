@@ -88,33 +88,6 @@ window.wikibase.utilities = {};
 				self.expand();
 			}
 		} );
-
-		// make sure size will adjust on resize:
-		( function() {
-			var oldWidth;
-			var resizeHandler = function() {
-				if( ! self.input.data( 'AutoExpandInput' ) ) {
-					// remove() must have been called on input, data was removed, remove handler from window!
-					$( window ).off( 'resize', resizeHandler );
-					return;
-				}
-				if( ! self.input.closest('html').length ) {
-					// if input doesn't exist in DOM, no resize necessary
-					oldWidth = null;
-					return;
-				}
-
-				var newWidth = $( this ).width();
-
-				// only resize if width has been resized!
-				if( oldWidth !== newWidth ) {
-					self.expand();
-				}
-				oldWidth = newWidth;
-			}
-
-			$( window ).on( 'resize', resizeHandler );
-		} )();
 	}
 
 	AutoExpandInput.prototype = {
@@ -133,7 +106,7 @@ window.wikibase.utilities = {};
 			// pure width of the input, without additional calculation
 			var newInputWidth = ( valWidth + comfortZone ) > minWidth ? valWidth + comfortZone : minWidth,
 				newWidth = this._o.widthCalculation( newInputWidth ),
-				oldWidth = this.input.width();
+				oldWidth = this.getWidth();
 
 			// Calculate new width + whether to change
 			var isValidWidthChange =
@@ -150,7 +123,7 @@ window.wikibase.utilities = {};
 			}
 
 			// return change
-			return this.input.width() - oldWidth;
+			return this.getWidth() - oldWidth;
 		},
 
 		/**
@@ -188,6 +161,15 @@ window.wikibase.utilities = {};
 			ruler.remove();
 
 			return rulerWidth;
+		},
+
+		/**
+		 * Returns the current width.
+		 *
+		 * @return number
+		 */
+		getWidth: function() {
+			return this.input.width();
 		},
 
 		getMaxWidth: function() {
@@ -249,6 +231,36 @@ window.wikibase.utilities = {};
 			this._o = $.extend( this._o, options );
 			this.expand();
 		}
-	}
+	};
+
+	// make sure AutoExpandInput's will adjust on resize:
+	( function() {
+		var oldWidth;
+		var resizeHandler = function() {
+			var newWidth = $( this ).width();
+
+			if( oldWidth === newWidth ) {
+				// no change in horizontal width after resize
+				return;
+			}
+
+			// get all AutoExpandInput by checking input $.data(). If $.remove() was called, the data was removed!
+			var autoExpandInputs = $( 'input' ).filter(
+				function( i ) { return !!$.data( this, 'AutoExpandInput' ); }
+			);
+
+			autoExpandInputs.each( function() {
+				// NOTE: this could be more efficient in case many inputs are set. We could just calculate the inputs
+				// (new) max-width and check whether it is exceeded in which case we set it to the max width.
+				// Basically the same but other way around for minWidth.
+				var input = $( this ).data( 'AutoExpandInput' );
+				input.expand();
+			} );
+
+			oldWidth = newWidth;
+		}
+
+		$( window ).on( 'resize', resizeHandler );
+	} )();
 
 } )( jQuery );
