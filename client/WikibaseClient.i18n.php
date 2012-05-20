@@ -200,11 +200,12 @@ $messages['ru'] = array(
 
 /** Serbian (Cyrillic script) (‪Српски (ћирилица)‬)
  * @author Nikola Smolenski
+ * @author Rancher
  */
 $messages['sr-ec'] = array(
-	'wbc-desc' => 'Клијент за Викибаза проширење',
-	'wbc-editlinks' => 'Измени везе',
-	'wbc-editlinkstitle' => 'Измени међујезичке везе',
+	'wbc-desc' => 'Клијент за проширење Викибаза',
+	'wbc-editlinks' => 'Уреди везе',
+	'wbc-editlinkstitle' => 'Уређивање међујезичких веза',
 );
 
 /** Swedish (Svenska)
@@ -219,5 +220,14 @@ $messages['sv'] = array(
  */
 $messages['te'] = array(
 	'wbc-editlinks' => 'లంకెలను మార్చు',
+);
+
+/** Simplified Chinese (‪中文(简体)‬)
+ * @author Linforest
+ */
+$messages['zh-hans'] = array(
+	'wbc-desc' => 'Wikibase扩展客户端',
+	'wbc-editlinks' => '编辑链接',
+	'wbc-editlinkstitle' => '编辑跨语言链接',
 );
 
