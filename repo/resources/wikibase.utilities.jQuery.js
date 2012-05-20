@@ -88,6 +88,67 @@ window.wikibase.utilities = {};
 				self.expand();
 			}
 		} );
+
+		// make sure box will consider window size after resize:
+		AutoExpandInput.activateResizeHandler();
+	}
+
+	/**
+	 * Once called, this will make sure AutoExpandInput's will adjust on resize. When called for a second time
+	 * the resize handler will not be initialized again.
+	 *
+	 * @return bool false if the handler was active before.
+	 */
+	AutoExpandInput.activateResizeHandler = function() {
+		if( AutoExpandInput.activateResizeHandler.active ) {
+			return false; // don't initialize this more than once
+		}
+		AutoExpandInput.activateResizeHandler.active = true;
+
+		( function() {
+			var oldWidth; // width before resize
+			var resizeHandler = function() {
+				var newWidth = $( this ).width();
+
+				if( oldWidth === newWidth ) {
+					// no change in horizontal width after resize
+					return;
+				}
+
+				$.each( AutoExpandInput.getActiveInstances(), function() {
+					// NOTE: this could be more efficient in case many inputs are set. We could just calculate the inputs
+					// (new) max-width and check whether it is exceeded in which case we set it to the max width.
+					// Basically the same but other way around for minWidth.
+					this.expand();
+
+				} );
+
+				oldWidth = newWidth;
+			}
+
+			$( window ).on( 'resize', resizeHandler );
+		} )();
+
+		return true;
+	}
+
+	/**
+	 * Returns all active instances whose related input is still in the DOM
+	 *
+	 * @return AutoExpandInput[]
+	 */
+	AutoExpandInput.getActiveInstances = function() {
+		var instances = new Array();
+
+		// get all AutoExpandInput by checking input $.data(). If $.remove() was called, the data was removed!
+		$( 'input' ).each( function() {
+			var instance = $.data( this, 'AutoExpandInput' );
+			if( instance ) {
+				instances.push( instance );
+			}
+		} );
+
+		return instances;
 	}
 
 	AutoExpandInput.prototype = {
@@ -232,35 +293,5 @@ window.wikibase.utilities = {};
 			this.expand();
 		}
 	};
-
-	// make sure AutoExpandInput's will adjust on resize:
-	( function() {
-		var oldWidth;
-		var resizeHandler = function() {
-			var newWidth = $( this ).width();
-
-			if( oldWidth === newWidth ) {
-				// no change in horizontal width after resize
-				return;
-			}
-
-			// get all AutoExpandInput by checking input $.data(). If $.remove() was called, the data was removed!
-			var autoExpandInputs = $( 'input' ).filter(
-				function( i ) { return !!$.data( this, 'AutoExpandInput' ); }
-			);
-
-			autoExpandInputs.each( function() {
-				// NOTE: this could be more efficient in case many inputs are set. We could just calculate the inputs
-				// (new) max-width and check whether it is exceeded in which case we set it to the max width.
-				// Basically the same but other way around for minWidth.
-				var input = $( this ).data( 'AutoExpandInput' );
-				input.expand();
-			} );
-
-			oldWidth = newWidth;
-		}
-
-		$( window ).on( 'resize', resizeHandler );
-	} )();
 
 } )( jQuery );
