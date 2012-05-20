@@ -79,16 +79,20 @@ $messages['en'] = array(
 
 /** Message documentation (Message documentation)
  * @author Jeblad
+ * @author Siebrand
  */
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wikibase-edit' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
+[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 1 and 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an existing element of some kind.',
 	'wikibase-save' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that saves what the user has done while the user interface has been in edit mode.',
 	'wikibase-cancel' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that cancels what the user has done while the user interface has been in edit mode.',
-	'wikibase-add' => 'This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.',
+	'wikibase-add' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
+[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
+This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.',
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
@@ -97,29 +101,30 @@ This is a generic text used as a placeholder while editing a new description. Se
 This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
 	'wikibase-sitelink-page-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
 This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
-	'wikibase-label-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 B.png|right|0x150px]]
+	'wikibase-label-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 I.png|right|0x150px]]
 Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Item|item]].',
-	'wikibase-description-input-help-message' => 'Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]
+Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks-add' => 'Add a sitelink to a language specific page on the cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
-	'wikibase-sitelinks-input-help-message' => 'Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
-	'wikibase-remove' => 'This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface is put in edit mode.',
+	'wikibase-sitelinks-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 D.png|right|0x150px]]
+Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
+	'wikibase-remove' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
+This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface is put in edit mode.',
 	'wikibase-propertyedittool-full' => 'A list of elements the user is assumed to enter is now complete.',
+	'wikibase-propertyedittool-counter' => 'Parameters:
+* $1 is the sum of elements in the list currently.',
+	'wikibase-propertyedittool-counter-pending' => 'Parameters:
+* $1 is the sum of elements in the list plus the ones pending (still in edit mode and not saved).
+* $2 is the number of elements stored in the list (not pending).
+* $3 is the message "wikibase-propertyedittool-counter-pending-pendingsubpart" with some additional markup around, expressing how many entries in the list are pending right now.',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => 'the number of pending elements within the list of site links and a leading "+". This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-counter-pending}}.',
 	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
+	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
-
-	'wikibase-sitelinks' => 'Heading for the site links table.',
-	'wikibase-propertyedittool-counter' => '$1 is the sum of elements in the list currently.',
-	'wikibase-propertyedittool-counter-pending' => '$1 is the sum of elements in the list plus the ones pending (still in edit mode and not saved). $2 is the number of elements stored in the list (not pending). $3 is the message "wikibase-propertyedittool-counter-pending-pendingsubpart" with some additional markup around, expressing how many entries in the list are pending right now.',
-	'wikibase-propertyedittool-counter-pending-pendingsubpart' => 'the number of pending elements within the list of site links and a leading "+". This will be inserted into "wikibase-propertyedittool-counter-pending" parameter $3.',
-	'wikibase-desc' => '{{desc}}',
-	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
-	'wikibase-label-input-help-message' => '$1: name of the language',
-	'wikibase-description-input-help-message' => '$1: name of the language',
-
 	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
@@ -151,6 +156,7 @@ $messages['be-tarask'] = array(
 
 /** German (Deutsch)
  * @author Kghbln
+ * @author Metalhead64
  */
 $messages['de'] = array(
 	'wikibase-desc' => 'Ermöglicht ein Repositorium strukturierter Daten',
@@ -160,6 +166,7 @@ $messages['de'] = array(
 	'wikibase-add' => 'hinzufügen',
 	'wikibase-label-edit-placeholder' => 'Bezeichnung eingeben',
 	'wikibase-description-edit-placeholder' => 'Beschreibung eingeben',
+	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-sitelink-site-edit-placeholder' => 'Website angeben',
 	'wikibase-sitelink-page-edit-placeholder' => 'Seite angeben',
 	'wikibase-label-input-help-message' => 'Gib den Namen für diesen Datensatz in $1 an.',
@@ -170,19 +177,53 @@ $messages['de'] = array(
 	'wikibase-sitelinks-input-help-message' => 'Leg eine Verknüpfung zu einer {{SITENAME}}-Seite fest.',
 	'wikibase-remove' => 'entfernen',
 	'wikibase-propertyedittool-full' => 'Die Werteliste ist vollständig.',
+	'wikibase-propertyedittool-counter' => '({{PLURAL:$1|Ein Eintrag|$1 Einträge}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|Eintrag|Einträge}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Ein Wert wurde|$1 Werte wurden}} noch nicht gespeichert',
 	'wikibase-sitelinksedittool-full' => 'Für alle bekannten Websites sind die Links auf die Seiten bereits festgelegt.',
+	'wikibase-disambiguation-title' => 'Begriffsklärung für „$1“',
 	'special-itembytitle' => 'Wert nach Name',
 	'special-itembylabel' => 'Wert nach Bezeichnung',
+	'wikibase-api-aliases-invalid-list' => 'Du musst entweder den Parameter für „setzen“ zu x angeben oder die Parameter zu „hinzufügen“ bzw. „entfernen“.',
+	'wikibase-api-no-such-item' => 'Es wurde kein vorhandenes Datenelement gefunden.',
+	'wikibase-api-no-token' => 'Es wurden keine Token angegeben.',
+	'wikibase-api-no-data' => 'Es wurden keine zu verarbeitenden Daten gefunden.',
+	'wikibase-api-cant-edit' => 'Der angemeldete Benutzer ist nicht berechtigt Bearbeitungen durchzuführen.',
+	'wikibase-api-no-permissions' => 'Der angemeldete Benutzer verfügt über keine ausreichenden Berechtigungen.',
+	'wikibase-api-id-xor-wikititle' => 'Gib entweder die Kennungen der Datenelemente oder ein Website-Seitennamenpaar für eine entsprechende Seite an.',
+	'wikibase-api-no-such-item-id' => 'Es wurde zu dieser Kennung kein vorhandenes Datenelement gefunden.',
+	'wikibase-api-link-exists' => 'Ein Artikel auf dem angegebenen Wiki ist bereits verknüpft.',
+	'wikibase-api-add-with-id' => 'Mit der Kennung eines vorhanden Datenelements kann nichts hinzugefügt werden.',
+	'wikibase-api-add-exists' => 'Zu einem vorhandenen Datenelement kann nichts hinzugefügt werden.',
+	'wikibase-api-update-without-id' => 'Die Aktualisierung ohne eine frühere Kennung ist nicht möglich.',
+	'wikibase-api-no-such-item-link' => 'Es wurde zu dieser Verknüpfung kein vorhandenes Datenelement gefunden.',
+	'wikibase-api-create-failed' => 'Der Versuch ein neues Datenelement zu erstellen ist fehlgeschlagen.',
+	'wikibase-api-modify-failed' => 'Der Versuch ein Datenelement zu ändern ist fehlgeschlagen.',
+	'wikibase-api-save-failed' => 'Der Versuch das Datenelement zu speichern ist fehlgeschlagen.',
+	'wikibase-api-invalid-contentmodel' => 'Die Inhaltsstruktur der Seite auf der das Datenelement gespeichert ist, ist ungültig.',
+	'wikibase-api-alias-incomplete' => 'Es wurde keine Definition des Alias zum Datenelement gefunden.',
+	'wikibase-api-alias-not-found' => 'Es wurde kein früherer Alias im Datenelement gefunden.',
+	'wikibase-api-alias-found' => 'Es wurde ein früherer Alias im Datenelement gefunden.',
+	'wikibase-api-not-recognized' => 'Die Richtlinie wird nicht erkannt.',
+	'wikibase-api-label-or-description' => 'Verwende entweder Bezeichnung und/oder Beschreibung, aber lasse dies nicht offen.',
+	'wikibase-api-label-not-found' => 'Es wurde keine frühere Bezeichnung in dieser Sprache im Datenelement gefunden.',
+	'wikibase-api-description-not-found' => 'Es wurde keine frühere Beschreibung in dieser Sprache im Datenelement gefunden.',
+	'content-model-1001' => 'Wikibase-Datenelement',
 );
 
 /** German (formal address) (‪Deutsch (Sie-Form)‬)
  * @author Kghbln
  */
 $messages['de-formal'] = array(
+	'wikibase-move-error' => 'Sie können keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-label-input-help-message' => 'Geben Sie den Namen für diesen Datensatz in $1 an.',
 	'wikibase-description-input-help-message' => 'Geben Sie eine kurze Beschreibung in $1 an.',
 	'wikibase-sitelinks-add' => 'fügen Sie eine Verknüpfung zu einer {{SITENAME}}-Seite hinzu',
 	'wikibase-sitelinks-input-help-message' => 'Legen Sie eine Verknüpfung zu einer {{SITENAME}}-Seite fest.',
+	'wikibase-api-aliases-invalid-list' => 'Sie müssen entweder den Parameter für „setzen“ zu x angeben oder die Parameter zu „hinzufügen“ bzw. „entfernen“.',
+	'wikibase-api-id-xor-wikititle' => 'Geben Sie entweder die Kennungen der Datenelemente oder ein Website-Seitennamenpaar für eine entsprechende Seite an.',
+	'wikibase-api-label-or-description' => 'Verwenden Sie entweder Bezeichnung und/oder Beschreibung, aber lassen Sie dies nicht offen.',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -222,6 +263,7 @@ $messages['es'] = array(
 	'wikibase-add' => 'añadir',
 	'wikibase-label-edit-placeholder' => 'introducir la etiqueta',
 	'wikibase-description-edit-placeholder' => 'introducir una descripción',
+	'wikibase-move-error' => 'No puedes mover las páginas que se encuentran en el espacio de nombres de datos, y no puedes mover páginas hacia allí.',
 	'wikibase-sitelink-site-edit-placeholder' => 'especificar el sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'especificar la página',
 	'wikibase-label-input-help-message' => 'Introducir el título de este conjunto de datos en  $1.',
@@ -232,9 +274,39 @@ $messages['es'] = array(
 	'wikibase-sitelinks-input-help-message' => 'Poner un enlace a un artículo de Wikipedia',
 	'wikibase-remove' => 'eliminar',
 	'wikibase-propertyedittool-full' => 'La lista de valores está completa.',
+	'wikibase-propertyedittool-counter' => '$1 {{PLURAL:$1|entrada|entradas}}',
+	'wikibase-propertyedittool-counter-pending' => '($2 $3 {{PLURAL:$1|entrada|entradas}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Un valor aún no guardado|$1 valores aún no guardados}}',
 	'wikibase-sitelinksedittool-full' => 'Los enlaces a las páginas están ya definidos para todos los sitios conocidos.',
+	'wikibase-disambiguation-title' => 'Desambiguación para "$1"',
 	'special-itembytitle' => 'Artículo por título',
 	'special-itembylabel' => 'Artículo por etiqueta',
+	'wikibase-api-aliases-invalid-list' => 'Es necesario proporcionar el parámetro de configuración xor al agregar o quitar parámetros',
+	'wikibase-api-no-such-item' => 'No se pudo encontrar un elemento existente',
+	'wikibase-api-no-token' => 'No se ha dado ninguna clave (token)',
+	'wikibase-api-no-data' => 'No se ha encontrado ningún dato sobre el que operar',
+	'wikibase-api-cant-edit' => 'El usuario que ha iniciado sesión no tiene permisos para editar',
+	'wikibase-api-no-permissions' => 'El usuario que ha iniciado sesión no tiene derechos suficientes',
+	'wikibase-api-id-xor-wikititle' => 'Proporciona el elemento ids o una pareja sitio-título para una página correspondiente',
+	'wikibase-api-no-such-item-id' => 'No se pudo encontrar un elemento existente para este identificador',
+	'wikibase-api-link-exists' => 'Un artículo de la wiki especificada ya está vinculado',
+	'wikibase-api-add-with-id' => 'No se puede agregar con el identificador de un elemento existente',
+	'wikibase-api-add-exists' => 'No se puede agregar a un elemento existente',
+	'wikibase-api-update-without-id' => 'No es posible la actualización sin un identificador previo',
+	'wikibase-api-no-such-item-link' => 'No se pudo encontrar un elemento existente para este enlace',
+	'wikibase-api-create-failed' => 'Error al intentar crear un nuevo elemento',
+	'wikibase-api-modify-failed' => 'Error en el intento de modificación de un elemento',
+	'wikibase-api-save-failed' => 'Error en el intento de guardar el elemento',
+	'wikibase-api-invalid-contentmodel' => 'No es válido el modelo de contenido de la página en la que se almacena el elemento',
+	'wikibase-api-alias-incomplete' => 'No se puede encontrar una definición del alias para el elemento',
+	'wikibase-api-alias-not-found' => 'No se puede encontrar ningún alias anterior en el elemento',
+	'wikibase-api-alias-found' => 'Se ha encotrado un alias anterior en el elemento',
+	'wikibase-api-not-recognized' => 'No se reconoce la directiva',
+	'wikibase-api-label-or-description' => 'Utiliza la etiqueta, la descripción o ambas, pero no pueden faltar las dos',
+	'wikibase-api-label-not-found' => 'No se puede encontrar una etiqueta anterior para este idioma en el elemento',
+	'wikibase-api-description-not-found' => 'No se puede encontrar una descripción anterior para este idioma en el elemento',
+	'content-model-1001' => 'Elemento de Wikibase',
 );
 
 /** Persian (فارسی)
@@ -288,6 +360,32 @@ $messages['fr'] = array(
 	'wikibase-sitelinksedittool-full' => 'Les liens vers les pages sont déjà définis pour tous les sites connus.',
 	'special-itembytitle' => 'Article par titre',
 	'special-itembylabel' => 'Article par étiquette',
+);
+
+/** Galician (Galego)
+ * @author Toliño
+ */
+$messages['gl'] = array(
+	'wikibase-desc' => 'Repositorio de datos estruturados',
+	'wikibase-edit' => 'editar',
+	'wikibase-save' => 'gardar',
+	'wikibase-cancel' => 'cancelar',
+	'wikibase-add' => 'engadir',
+	'wikibase-label-edit-placeholder' => 'escriba unha etiqueta',
+	'wikibase-description-edit-placeholder' => 'escriba unha descrición',
+	'wikibase-sitelink-site-edit-placeholder' => 'especifique o sitio',
+	'wikibase-sitelink-page-edit-placeholder' => 'especifique a páxina',
+	'wikibase-label-input-help-message' => 'Introduza o título deste conxunto de datos en $1.',
+	'wikibase-description-input-help-message' => 'Introduza unha breve descrición en $1.',
+	'wikibase-sitelinks' => 'Páxinas da Wikipedia con ligazóns cara a este elemento',
+	'wikibase-sitelinks-add' => 'engada unha ligazón cara a unha páxina da Wikipedia',
+	'wikibase-sitelinks-empty' => 'Ningunha páxina da Wikipedia ten ligazóns cara a este elemento.',
+	'wikibase-sitelinks-input-help-message' => 'Defina unha ligazón cara a un artigo da Wikipedia.',
+	'wikibase-remove' => 'eliminar',
+	'wikibase-propertyedittool-full' => 'A lista de valores está completa.',
+	'wikibase-sitelinksedittool-full' => 'As ligazóns cara ás páxinas xa están definidas para todos os sitios coñecidos.',
+	'special-itembytitle' => 'Artigo por título',
+	'special-itembylabel' => 'Artigo por etiqueta',
 );
 
 /** Swiss German (Alemannisch)
@@ -345,15 +443,15 @@ $messages['is'] = array(
 	'wikibase-cancel' => 'hætta við',
 	'wikibase-add' => 'bæta við',
 	'wikibase-label-edit-placeholder' => 'bæta við merki',
-	'wikibase-description-edit-placeholder' => 'bæta við lýsingu',
+	'wikibase-description-edit-placeholder' => 'setja inn lýsingu',
 	'wikibase-sitelink-site-edit-placeholder' => 'tilgreindu vefsvæði',
 	'wikibase-sitelink-page-edit-placeholder' => 'tilgreindu síðu',
-	'wikibase-label-input-help-message' => 'Sláðu inn titil á þessum gögnum í $1.',
-	'wikibase-description-input-help-message' => 'Sláðu inn stutta lýsingu í $1.',
+	'wikibase-label-input-help-message' => 'Sláðu inn titil á þessum gögnum á $1.',
+	'wikibase-description-input-help-message' => 'Sláðu inn stutta lýsingu á $1.',
 	'wikibase-sitelinks' => 'Wikipedia síður sem tengja á þennan hlut',
 	'wikibase-sitelinks-add' => 'bæta við tengli á Wikipedia síðu',
 	'wikibase-sitelinks-empty' => 'Engar Wikipedia síður tengja á þennan hlut ennþá.',
-	'wikibase-sitelinks-input-help-message' => 'Setja tengil á Wikipedia grein.',
+	'wikibase-sitelinks-input-help-message' => 'Settu tengil á Wikipedia grein.',
 	'wikibase-remove' => 'fjarlægja',
 	'wikibase-propertyedittool-full' => 'Listi yfir gildi er tilbúinn.',
 	'wikibase-sitelinksedittool-full' => 'Tenglar á síður eru þegar virkir fyrir öll þekkt vefsvæði.',
@@ -465,6 +563,7 @@ $messages['nl'] = array(
 	'wikibase-add' => 'toevoegen',
 	'wikibase-label-edit-placeholder' => 'geef een label op',
 	'wikibase-description-edit-placeholder' => 'geef een beschrijving op',
+	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
 	'wikibase-sitelink-site-edit-placeholder' => 'site opgeven',
 	'wikibase-sitelink-page-edit-placeholder' => 'pagina opgeven',
 	'wikibase-label-input-help-message' => 'Geef de naam van deze gegevensset in in $1.',
@@ -475,7 +574,12 @@ $messages['nl'] = array(
 	'wikibase-sitelinks-input-help-message' => 'Geef een koppeling in naar een pagina in Wikipedia.',
 	'wikibase-remove' => 'verwijderen',
 	'wikibase-propertyedittool-full' => 'De lijst met waarden is compleet.',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|ingang|ingangen}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|ingang|ingangen}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Eén waarde|$1 waarden}} nog niet opgeslagen',
 	'wikibase-sitelinksedittool-full' => "Verwijzingen naar pagina's die al zijn ingesteld voor alle bekende sites.",
+	'wikibase-disambiguation-title' => 'Disambiguatie voor "$1"',
 	'special-itembytitle' => 'Item gesorteerd op naam',
 	'special-itembylabel' => 'Item gesorteerd op label',
 );
@@ -601,9 +705,36 @@ $messages['ta'] = array(
  * @author Veeven
  */
 $messages['te'] = array(
+	'wikibase-edit' => 'సవరించు',
 	'wikibase-save' => 'భద్రపరచు',
 	'wikibase-cancel' => 'రద్దుచేయి',
 	'wikibase-add' => 'చేర్చు',
 	'wikibase-remove' => 'తొలగించు',
+);
+
+/** Simplified Chinese (‪中文(简体)‬)
+ * @author Linforest
+ */
+$messages['zh-hans'] = array(
+	'wikibase-desc' => '结构化数据存储库',
+	'wikibase-edit' => '编辑',
+	'wikibase-save' => '保存',
+	'wikibase-cancel' => '取消',
+	'wikibase-add' => '添加',
+	'wikibase-label-edit-placeholder' => '输入标签',
+	'wikibase-description-edit-placeholder' => '输入描述',
+	'wikibase-sitelink-site-edit-placeholder' => '指定站点',
+	'wikibase-sitelink-page-edit-placeholder' => '指定页面',
+	'wikibase-label-input-help-message' => '采用$1输入该数据集的标题。',
+	'wikibase-description-input-help-message' => '采用$1输入简要说明。',
+	'wikibase-sitelinks' => '链接到此项的维基百科页面',
+	'wikibase-sitelinks-add' => '添加指向特定维基百科页面的链接',
+	'wikibase-sitelinks-empty' => '尚无维基百科页面链接到此项目。',
+	'wikibase-sitelinks-input-help-message' => '设置一条指向特定维基百科文章的链接。',
+	'wikibase-remove' => '删除',
+	'wikibase-propertyedittool-full' => '取值列表已完整。',
+	'wikibase-sitelinksedittool-full' => '已经为所有的已知站点设置了指向页面的链接。',
+	'special-itembytitle' => '按标题排序的项目',
+	'special-itembylabel' => '按标签排序的项目',
 );
 
