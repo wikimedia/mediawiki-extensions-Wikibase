@@ -25,7 +25,6 @@ class MapDiff extends DiffOpList implements IDiffOp {
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
 	 * @param boolean $recursively If elements that are arrays should also be diffed.
-	 * @param array|boolean $lists
 	 *
 	 * @throws MWException
 	 * @return array
@@ -37,7 +36,7 @@ class MapDiff extends DiffOpList implements IDiffOp {
 	 * 'de' => array( 'old' => 42, 'new' => 9001 ),
 	 * )
 	 */
-	public static function doDiff( array $oldValues, array $newValues, $recursively = false, $lists = false ) {
+	public static function doDiff( array $oldValues, array $newValues, $recursively = false ) {
 		$oldSet = array_diff_assoc( $oldValues, $newValues );
 		$newSet = array_diff_assoc( $newValues, $oldValues );
 
@@ -48,25 +47,20 @@ class MapDiff extends DiffOpList implements IDiffOp {
 			$hasNew = array_key_exists( $key, $newSet );
 
 			if ( $recursively ) {
-				if ( ( $lists === true || ( is_array( $lists ) && in_array( $key, $lists ) ) )
-					&& ( ( $hasOld && is_array( $oldSet[$key] ) ) || ( $hasNew && is_array( $newSet[$key] ) ) ) ) {
-
+				if ( ( !$hasOld || is_array( $oldSet[$key] ) ) && ( !$hasNew || is_array( $newSet[$key] ) ) ) {
 					$old = $hasOld ? $oldSet[$key] : array();
 					$new = $hasNew ? $newSet[$key] : array();
 
-					if ( is_array( $old ) && is_array( $new ) ) {
-						$diff = new ListDiff( $old, $new );
-						// TODO
+					if ( self::isAssociative( $old ) || self::isAssociative( $new ) ) {
+						$diffSet[$key] = self::newFromArrays( $old, $new );
 					}
-				}
-				else if ( $hasOld && $hasNew && is_array( $oldSet[$key] ) && is_array( $newSet[$key] ) ) {
-					$elementDiff = self::arrayDiff( $oldSet[$key], $newSet[$key] );
-					$oldSet[$key] = $elementDiff['old'];
-					$newSet[$key] = $elementDiff['new'];
+					else {
+						$diffSet[$key] = ListDiff::newFromArrays( $old, $new );
+					}
+
+					continue;
 				}
 			}
-
-			$diffSet[$key] = array();
 
 			if ( $hasOld && $hasNew ) {
 				$diffSet[$key] = new DiffOpChange( $oldSet[$key], $newSet[$key] );
@@ -83,6 +77,10 @@ class MapDiff extends DiffOpList implements IDiffOp {
 		}
 
 		return $diffSet;
+	}
+
+	protected static function isAssociative( array $array ) {
+		return array_keys( $array ) !== range( 0, count( $array ) - 1 );
 	}
 
 	/**

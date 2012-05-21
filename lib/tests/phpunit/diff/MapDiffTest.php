@@ -74,6 +74,11 @@ class MapDiffTest extends \MediaWikiTestCase {
 	public function testNewFromArrays( array $from, array $to, array $expected ) {
 		$diff = MapDiff::newFromArrays( $from, $to );
 
+		$this->assertInstanceOf( 'MapDiff', $diff );
+		$this->assertInstanceOf( 'IDiffOp', $diff );
+		$this->assertInstanceOf( 'IDiff', $diff );
+		$this->assertInstanceOf( 'ArrayIterator', $diff );
+
 		// Sort to get rid of differences in order, since no promises about order are made.
 		asort( $expected );
 		$diff->asort();
