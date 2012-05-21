@@ -80,77 +80,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		// extend input element with autocomplete
 		if ( this.ajaxParams !== null ) {
 			inputElement.wikibaseAutocomplete( {
-				source: $.proxy( function( request, suggest ) {
-					$.ajax( {
-						url: this.url,
-						dataType: 'jsonp',
-						data:  $.extend( {}, this.ajaxParams, { 'search': request.term } ),
-						timeout: this.TIMEOUT,
-						success: $.proxy( function( response ) {
-							if ( ! this.isInEditMode() ) {
-								// in a few rare cases this could happen. For example when just switching a char from lower
-								// to upper case, which will still be considered valid but require another suggestion list
-								return;
-							}
-							if ( response[0] == this._inputElem.val() ) {
-								this._currentResults = response[1];
-								suggest( response[1] ); // pass array of returned values to callback
-
-								/*
-								set value to first suggestion but select text of additional characters automatically placed
-								allowing the first value to be selected directly but be overwritten as well;
-								because of the API call lag, this is avoided when hitting backspace, since the value would
-								be resetted too slow
-								 */
-								if ( this._lastKeyDown != 8 && response[1].length > 0 ) {
-									/*
-									following if-statement is a work-around for a technically unexpected search
-									behaviour: e.g. in English Wikipedia opensearch for "Allegro " returns "Allegro"
-									as first result instead of "Allegro (music)", so auto-completion should probably
-									be prevented here
-									*/
-									if ( response[1][0].indexOf( this._inputElem.val() ) != -1 ) {
-										this.setValue( response[1][0] );
-										var start = response[0].length;
-										var end = response[1][0].length;
-										var node = this._inputElem[0];
-										if( node.createTextRange ) {
-											var selRange = node.createTextRange();
-											selRange.collapse( true );
-											selRange.moveStart( 'character', start);
-											selRange.moveEnd( 'character', end);
-											selRange.select();
-										} else if( node.setSelectionRange ) {
-											node.setSelectionRange( start, end );
-										} else if( node.selectionStart ) {
-											node.selectionStart = start;
-											node.selectionEnd = end;
-										}
-									}
-								}
-								this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
-							}
-							this._onInputRegistered();
-						}, this ),
-						error: $.proxy( function( jqXHR, textStatus, errorThrown ) {
-							this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
-							if ( textStatus != 'abort' ) {
-								var error = {
-									code: textStatus,
-									shortMessage: window.mw.msg( 'wikibase-error-autocomplete-connection' ),
-									message: window.mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
-								};
-								this.setTooltip( new window.wikibase.ui.Tooltip(
-									this._inputElem,
-									error,
-									{ gravity: 'nw' }
-								) );
-								this.getTooltip().show( true );
-								this.setFocus(); // re-focus input
-							}
-						}, this )
-					} );
-				}, this ),
+				source: $.proxy( this._handleResponse, this ),
 				close: $.proxy( function( event, ui ) {
 					this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
 					this._onInputRegistered();
@@ -173,6 +103,84 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		}, this ) );
 
 		return inputElement;
+	},
+
+	/**
+	 * handles AJAX response for jquery.ui.autocomplete filling auto-complete result set on success
+	 *
+	 * @param object request contains request parameters
+	 * @param function suggest callback putting results into auto-complete menu
+	 */
+	_handleResponse: function( request, suggest ) {
+		$.ajax( {
+			url: this.url,
+			dataType: 'jsonp',
+			data:  $.extend( {}, this.ajaxParams, { 'search': request.term } ),
+			timeout: this.TIMEOUT,
+			success: $.proxy( function( response ) {
+				if ( ! this.isInEditMode() ) {
+					// in a few rare cases this could happen. For example when just switching a char from lower
+					// to upper case, which will still be considered valid but require another suggestion list
+					return;
+				}
+				if ( response[0] == this._inputElem.val() ) {
+					this._currentResults = response[1];
+					suggest( response[1] ); // pass array of returned values to callback
+
+					/*
+					 set value to first suggestion but select text of additional characters automatically placed
+					 allowing the first value to be selected directly but be overwritten as well;
+					 because of the API call lag, this is avoided when hitting backspace, since the value would
+					 be resetted too slow
+					 */
+					if ( this._lastKeyDown != 8 && response[1].length > 0 ) {
+						/*
+						 following if-statement is a work-around for a technically unexpected search
+						 behaviour: e.g. in English Wikipedia opensearch for "Allegro " returns "Allegro"
+						 as first result instead of "Allegro (music)", so auto-completion should probably
+						 be prevented here
+						 */
+						if ( response[1][0].indexOf( this._inputElem.val() ) != -1 ) {
+							this.setValue( response[1][0] );
+							var start = response[0].length;
+							var end = response[1][0].length;
+							var node = this._inputElem[0];
+							if( node.createTextRange ) {
+								var selRange = node.createTextRange();
+								selRange.collapse( true );
+								selRange.moveStart( 'character', start);
+								selRange.moveEnd( 'character', end);
+								selRange.select();
+							} else if( node.setSelectionRange ) {
+								node.setSelectionRange( start, end );
+							} else if( node.selectionStart ) {
+								node.selectionStart = start;
+								node.selectionEnd = end;
+							}
+						}
+					}
+					this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
+				}
+				this._onInputRegistered();
+			}, this ),
+			error: $.proxy( function( jqXHR, textStatus, errorThrown ) {
+				this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
+				if ( textStatus != 'abort' ) {
+					var error = {
+						code: textStatus,
+						shortMessage: window.mw.msg( 'wikibase-error-autocomplete-connection' ),
+						message: window.mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
+					};
+					this.setTooltip( new window.wikibase.ui.Tooltip(
+						this._inputElem,
+						error,
+						{ gravity: 'nw' }
+					) );
+					this.getTooltip().show( true );
+					this.setFocus(); // re-focus input
+				}
+			}, this )
+		} );
 	},
 
 	/**
