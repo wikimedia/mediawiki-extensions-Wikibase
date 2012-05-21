@@ -98,13 +98,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			var siteId = idInterface.getSelectedSiteId();
 			
 			// change class names:
-			this._removeClassByRegex( this._subject, /^wb-sitelinks-.+/ );
+			this._subject.removeClassByRegex( /^wb-sitelinks-.+/ );
 			this._subject.addClass( 'wb-sitelinks-' + siteId );
 			
-			this._removeClassByRegex( idInterface._getValueContainer(), /^wb-sitelinks-site-.+/ );
+			idInterface._getValueContainer().removeClassByRegex( /^wb-sitelinks-site-.+/ );
 			idInterface._getValueContainer().addClass( 'wb-sitelinks-site wb-sitelinks-site-' + siteId );
 			
-			this._removeClassByRegex( pageInterface._getValueContainer(), /^wb-sitelinks-link-.+/ );
+			pageInterface._getValueContainer().removeClassByRegex( /^wb-sitelinks-link-.+/ );
 			pageInterface._getValueContainer().addClass( 'wb-sitelinks-link wb-sitelinks-link-' + siteId );
 		}
 		
@@ -118,22 +118,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		return this.__toolbarParent;
 	},
 	
-	/**
-	 * Helper function to remove a css class matching a regular expression.
-	 * 
-	 * @param subject jQuery
-	 * @param RegExp classNameRegex
-	 */
-	_removeClassByRegex: function( subject, classNameRegex ) {
-		if ( typeof subject.attr( 'class' ) == 'undefined' ) {
-			return
-		}
-		$.each( subject.attr( 'class' ).split( ' ' ), $.proxy( function( index, className ) {
-			if ( className.match( classNameRegex ) ) {
-				subject.removeClass( className );
-			}
-		}, this ) );
-	},
+
 	
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing

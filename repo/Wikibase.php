@@ -220,8 +220,10 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 
 $wgResourceModules['wikibase.utilities.jQuery'] = $moduleTemplate + array(
 	'scripts' => array(
-		'wikibase.utilities.js',
-		'wikibase.utilities.jQuery.js'
+		'wikibase.utilities/wikibase.utilities.js',
+		'wikibase.utilities/wikibase.utilities.jQuery.js',
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
 	)
 );
 
