@@ -50,7 +50,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 				'item',
 				array(
 				 	'id' => $params['id'],
-					'sitelinks' => self::stripKeys( $params, $item->getRawSiteLinks() ),
+					'sitelinks' => $this->stripKeys( $params, $item->getRawSiteLinks() ),
 				)
 			);
 		}

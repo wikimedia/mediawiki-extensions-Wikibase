@@ -70,15 +70,15 @@ class ApiWikibaseGetItems extends ApiWikibase {
 				// this is not a very nice way to do it
 				// but if its only a few 
 				$arr = array( 'id' => $id );
-				$sitelinks = self::stripKeys( $params, $item->getRawSiteLinks() );
+				$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks() );
 				if (count($sitelinks)) {
 					$arr['sitelinks'] = $sitelinks;
 				}
-				$descriptions = self::stripKeys( $params, $item->getRawDescriptions( $params['language'] ) );
+				$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( $params['language'] ) );
 				if (count($descriptions)) {
 					$arr['descriptions'] = $descriptions;
 				}
-				$labels = self::stripKeys( $params, $item->getRawLabels( $params['language'] ) );
+				$labels = $this->stripKeys( $params, $item->getRawLabels( $params['language'] ) );
 				if (count($labels)) {
 					$arr['labels'] = $labels;
 				}

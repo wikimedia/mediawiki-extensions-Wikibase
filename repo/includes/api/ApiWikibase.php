@@ -20,7 +20,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @param $arr array some value to be possibly stripped for keys
 	 * @return array of key-valuepairs or only values
 	 */
-	protected static function stripKeys( array $params, array $arr ) {
+	protected function stripKeys( array $params, array $arr ) {
 		$usekeys = isset($params['usekeys']) ? $params['usekeys'] : false;
 		if ( $usekeys ) {
 			switch ( $this->getMain()->getRequest()->getVal( 'format' ) ) {

@@ -103,15 +103,15 @@ class ApiWikibaseSetItem extends ApiWikibase {
 		
 		// because this is serialized and cleansed we can simply go for known values
 		$arr = array( 'id' => $item->getId() );
-		$sitelinks = self::stripKeys( $params, $item->getRawSiteLinks() );
+		$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks() );
 		if (count($sitelinks)) {
 			$arr['sitelinks'] = $sitelinks;
 		}
-		$descriptions = self::stripKeys( $params, $item->getRawDescriptions() );
+		$descriptions = $this->stripKeys( $params, $item->getRawDescriptions() );
 		if (count($descriptions)) {
 			$arr['descriptions'] = $descriptions;
 		}
-		$labels = self::stripKeys( $params, $item->getRawLabels() );
+		$labels = $this->stripKeys( $params, $item->getRawLabels() );
 		if (count($labels)) {
 			$arr['labels'] = $labels;
 		}
