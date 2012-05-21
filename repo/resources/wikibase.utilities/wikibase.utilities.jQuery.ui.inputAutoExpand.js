@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file wikibase.utilities.jQuery.js
+ * @file wikibase.utilities.jQuery.ui.inputAutoExpand.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -11,9 +11,7 @@
  */
 "use strict";
 
-window.wikibase.utilities = {};
-
-// Wikibase jQuery plugins:
+// Wikibase jQuery plugin for auto expanding input boxes:
 ( function( $ ) {
 
 	/**
@@ -271,7 +269,7 @@ window.wikibase.utilities = {};
 			if( width === false ) {
 				// automatic comfort zone, calculate
 				// average of some usually broader characters
-				width = this.getWidthFor( '@%_MW' ) / 5;
+				width = this.getWidthFor( '@%_MW' ) / 5 * 1.5;
 			}
 			return this._normalizeWidth( width );
 		},
