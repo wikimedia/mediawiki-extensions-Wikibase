@@ -33,6 +33,13 @@
 				'ycvbn',
 				'ycvba'
 			];
+
+			// overriding AJAX request handling
+			this.autocomplete._handleResponse = $.proxy( function( request, suggest ) {
+				this.autocomplete._currentResults = this.resultSet;
+				suggest( this.resultSet );
+			}, this );
+
 			this.reopenMenu = function( resultSet ) {
 				if ( typeof resultSet != 'undefined' ) {
 					this.autocomplete.setResultSet( resultSet );
@@ -94,6 +101,48 @@
 			this.autocomplete._inputElem.data( 'autocomplete' ).menu.element.css( 'display' ),
 			'none',
 			'menu is hidden'
+		);
+
+	} );
+
+
+	test( 'simulate AJAX', function() {
+		// tell autocomplete to use AJAX interface
+		this.autocomplete.url = 'someurl';
+		this.autocomplete.ajaxParams = {};
+
+		this.autocomplete.startEditing();
+		this.autocomplete._inputElem.data( 'autocomplete' ).search( 'y' ); // trigger simulated AJAX call
+
+		equal(
+			this.autocomplete._currentResults.length,
+			this.resultSet.length,
+			'calling function simulating AJAX handling'
+		);
+
+		this.autocomplete.setValue( this.resultSet[0] );
+
+		equal(
+			this.autocomplete.getValue(),
+			this.resultSet[0],
+			'set valid value'
+		);
+
+		this.autocomplete.stopEditing( true );
+
+		equal(
+			this.autocomplete.getValue(),
+			this.resultSet[0],
+			'confirmed valid value after stopping edit mode'
+		);
+
+		this.autocomplete.setResultSet( [] );
+		this.autocomplete.startEditing();
+
+		equal(
+			this.autocomplete.getValue(),
+			this.resultSet[0],
+			'confirmed last set value even after eptying result set (simulating not yet received AJAX request)'
 		);
 
 	} );
