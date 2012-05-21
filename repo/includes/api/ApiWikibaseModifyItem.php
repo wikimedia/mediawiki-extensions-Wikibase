@@ -12,7 +12,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ApiWikibaseModifyItem extends ApiBase {
+abstract class ApiWikibaseModifyItem extends ApiWikibase {
 
 	/**
 	 * Actually modify the item.
@@ -239,7 +239,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			//'create' => array(
 			//	ApiBase::PARAM_TYPE => 'boolean',
 			//),
@@ -261,7 +261,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				ApiBase::PARAM_DFLT => 'update',
 			),
 			'token' => null,
-		);
+		) );
 	}
 
 	/**
@@ -271,7 +271,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'id' => array( 'The ID of the item.',
 				"Use either 'id' or 'site' and 'title' together."
 			),
@@ -288,7 +288,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			),
 			// 'summary' => 'Summary for the edit.',
 			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
-		);
+		) );
 	}
 
 }

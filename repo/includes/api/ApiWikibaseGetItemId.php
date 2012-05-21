@@ -13,7 +13,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetItemId extends ApiBase {
+class ApiWikibaseGetItemId extends ApiWikibase {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -60,7 +60,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'site' => array(
 				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
 				//ApiBase::PARAM_TYPE => 'string',
@@ -70,7 +70,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true
 			),
-		);
+		) );
 	}
 
 	/**
@@ -80,7 +80,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'title' => array(
 				'The title of the external page that is used as an reference for the internal page.',
 				'Must be used together with the identifier for the site where the page resides.'
@@ -89,7 +89,7 @@ class ApiWikibaseGetItemId extends ApiBase {
 				'Site identifier for the external page that is used as an reference for the internal page.',
 				'Must be used together with the title from the site where the page resides.'
 			),
-		);
+		) );
 	}
 
 	/**

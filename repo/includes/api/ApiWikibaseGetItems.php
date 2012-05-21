@@ -13,7 +13,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetItems extends ApiBase {
+class ApiWikibaseGetItems extends ApiWikibase {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -70,15 +70,15 @@ class ApiWikibaseGetItems extends ApiBase {
 				// this is not a very nice way to do it
 				// but if its only a few 
 				$arr = array( 'id' => $id );
-				$sitelinks = $item->getRawSiteLinks();
+				$sitelinks = self::stripKeys( $params, $item->getRawSiteLinks() );
 				if (count($sitelinks)) {
 					$arr['sitelinks'] = $sitelinks;
 				}
-				$descriptions = $item->getRawDescriptions( $params['language'] );
+				$descriptions = self::stripKeys( $params, $item->getRawDescriptions( $params['language'] ) );
 				if (count($descriptions)) {
 					$arr['descriptions'] = $descriptions;
 				}
-				$labels = $item->getRawLabels( $params['language'] );
+				$labels = self::stripKeys( $params, $item->getRawLabels( $params['language'] ) );
 				if (count($labels)) {
 					$arr['labels'] = $labels;
 				}
@@ -107,7 +107,7 @@ class ApiWikibaseGetItems extends ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'ids' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_ISMULTI => true,
@@ -124,7 +124,7 @@ class ApiWikibaseGetItems extends ApiBase {
 				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
-		);
+		) );
 	}
 
 	/**
@@ -134,7 +134,7 @@ class ApiWikibaseGetItems extends ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'ids' => 'The IDs of the items to get the data from',
 			'language' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
@@ -144,7 +144,7 @@ class ApiWikibaseGetItems extends ApiBase {
 			'sites' => array( 'Identifier for the site on which the corresponding page resides',
 				"Use together with 'title', but only give one site for several titles or several sites for one title."
 			),
-		);
+		) );
 	}
 
 	/**

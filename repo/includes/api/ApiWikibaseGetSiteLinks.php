@@ -50,7 +50,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 				'item',
 				array(
 				 	'id' => $params['id'],
-					'sitelinks' => $item->getRawSiteLinks(),
+					'sitelinks' => self::stripKeys( $params, $item->getRawSiteLinks() ),
 				)
 			);
 		}
@@ -76,7 +76,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
@@ -86,7 +86,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-		);
+		) );
 	}
 
 	/**
@@ -96,7 +96,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'id' => 'The ID of the item to get the data from',
 			'title' => array( 'The title of the corresponding page',
 				"Use together with 'site'."
@@ -104,7 +104,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 			'site' => array( 'Identifier for the site on which the corresponding page resides',
 				"Use together with 'title'."
 			),
-		);
+		) );
 	}
 
 	/**

@@ -124,6 +124,7 @@ $wgAutoloadClasses['WikibaseViewItemAction'] 			= $dir . 'includes/actions/Wikib
 $wgAutoloadClasses['WikibaseEditItemAction'] 			= $dir . 'includes/actions/WikibaseEditItemAction.php';
 
 // includes/api
+$wgAutoloadClasses['ApiWikibase'] 				= $dir . 'includes/api/ApiWikibase.php';
 $wgAutoloadClasses['ApiWikibaseGetItems'] 				= $dir . 'includes/api/ApiWikibaseGetItems.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 				= $dir . 'includes/api/ApiWikibaseGetItemId.php';
 $wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 			= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
