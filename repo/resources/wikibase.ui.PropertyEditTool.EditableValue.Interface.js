@@ -131,13 +131,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		this._inputElem.appendTo( inputParent );
 
 		if( this.autoExpand ) {
-			var editableValNode = this._subject.parents( '.' + wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS + ':first' );
+			/**
+			 * FIXME: not the nicest way of getting these things via DOM, might be better to implement this into the
+			 *        related EditableValue
+			 */
+			var evCls = wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS,
+				petCls = wikibase.ui.PropertyEditTool.prototype.UI_CLASS;
 
 			this._inputElem.inputAutoExpand( {
-				maxWidth: this._subject.parents( '.' + wikibase.ui.PropertyEditTool.prototype.UI_CLASS + ':first' ),
-				widthCalculation: $.proxy( function( width ) {
-					// add width of the toolbar
-					return width + editableValNode.children( '.' + wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS + '-toolbarparent:first' ).outerWidth( true ) + 20;
+				maxWidth: $.proxy( function() {
+					var editableValNode = this._subject.closest( '.' + evCls ),
+						propertyEditTool = editableValNode.closest( '.' + petCls ),
+						toolbarParent = editableValNode.children( '.' + evCls + '-toolbarparent:first' );
+
+					return propertyEditTool.width() - toolbarParent.outerWidth( true ) - 25;
 				}, this )
 			} );
 		}

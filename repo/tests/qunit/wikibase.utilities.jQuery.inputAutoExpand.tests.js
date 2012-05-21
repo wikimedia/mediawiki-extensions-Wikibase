@@ -26,17 +26,30 @@
 
 			/**
 			 * Changes the text of the input field and triggers an event for the growing process
-			 * @param text
-			 * @return number width of the input box
+			 *
+			 * @param string text
+			 * @return number pixels of change in size
 			 */
 			this.subject.$insert = function( text ) {
-				this.val( 'AA' );
+				this.val( text );
 				return this.$trigger();
 			}
+			/**
+			 * Triggers the expand() of the AutoExpandInput
+			 *
+			 * @return {*}
+			 */
 			this.subject.$trigger = function() {
-				this.focus();
-				this.blur();
-				return this.width();
+				var autoExpand = this.$getObj();
+				return autoExpand.expand();
+			}
+			/**
+			 * Returns the input boxes associated AutoExpandInput
+			 *
+			 * @return AutoExpandInput
+			 */
+			this.subject.$getObj = function() {
+				return this.data( 'AutoExpandInput' );
 			}
 		},
 		teardown: function() {
@@ -54,7 +67,7 @@
 		);
 
 		ok(
-			this.subject.width() < this.subject.$insert( 'AA' ),
+			this.subject.$insert( 'AA' ) > 0,
 			'Input field has grown after longer string was inserted'
 		);
 
@@ -62,8 +75,24 @@
 		this.subject.attr( 'placeholder', 'AA BB CC' );
 
 		ok(
-			this.subject.width() < this.subject.$trigger(),
+			this.subject.$trigger() > 0,
 			'Input field has grown after long placeholder was inserted'
+		);
+
+		equal(
+			this.subject.$insert( '' ),
+			0,
+			'Remove input fields text, size shouldn\'t change since we still have a placeholder'
+		);
+
+		// remove placeholder
+		this.subject.attr( 'placeholder', null );
+		this.subject.$trigger();
+
+		equal(
+			this.subject.$getObj().getWidth(),
+			this.subject.$getObj().getComfortZone(),
+			'Removed placeholder, width should be comfort zone width since there is no text set now'
 		);
 	} );
 

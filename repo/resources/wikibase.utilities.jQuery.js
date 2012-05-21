@@ -1,7 +1,7 @@
 /**
  * JavasSript for 'wikibase' extension
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.utilities.jQuery.js
  * @ingroup Wikibase
@@ -28,9 +28,6 @@ window.wikibase.utilities = {};
 	 *                            required by the input elements placeholder text will be determined automatically.
 	 *        'comfortZone':      number|function|jQuery|false - space left free behind the input. if not set or false,
 	 *                            an appropriate amount of space will be calculated automatically.
-	 *        'widthCalculation': function(width) - function to calculate the width, for example to add some additional
-	 *                            space for other elements which should be considered when calculating remaining space.
-	 *
 	 * @example $( 'input' ).inputAutoExpand();
 	 */
 	$.fn.inputAutoExpand = function( options ) {
@@ -42,8 +39,7 @@ window.wikibase.utilities = {};
 		var fullOptions = $.extend( {
 			maxWidth: 1000,
 			minWidth: false, // dynamic: length of placeholder or 0 if no placeholder
-			comfortZone: false,
-			widthCalculation: function( width ) { return width }
+			comfortZone: false
 		}, options );
 
 		// expand input fields:
@@ -84,6 +80,7 @@ window.wikibase.utilities = {};
 		// set width on all important related events:
 		$( this.input )
 		.on( 'keyup keydown blur focus update', function() { //TODO: doesn't yet update its width when new value set via JS
+			// NOTE/FIXME: won't be triggered if placeholder has changed (via JS) but not input text
 			if( self._val !== ( self._val = self.input.val() ) ) {
 				self.expand();
 			}
@@ -162,26 +159,43 @@ window.wikibase.utilities = {};
 				maxWidth = this.getMaxWidth(),
 				comfortZone = this.getComfortZone();
 
-			var valWidth = this.getWidthFor( this._val ) + comfortZone;
+			// give min width higher priority than max width:
+			maxWidth = ( maxWidth > minWidth ) ? maxWidth : minWidth;
 
-			// pure width of the input, without additional calculation
-			var newInputWidth = ( valWidth + comfortZone ) > minWidth ? valWidth + comfortZone : minWidth,
-				newWidth = this._o.widthCalculation( newInputWidth ),
+			//console.log( '=== START EXPANSION ===' );
+			//console.log( 'min: ' + minWidth + ' | max: ' + maxWidth + ' | comfort: ' + comfortZone );
+
+			this._val = this.input.val();
+			var valWidth = this.getWidthFor( this._val ); // pure width of the input, without additional calculation
+
+			//console.log( 'valWidth: ' + valWidth + ' | val: ' + this._val );
+
+			// add comfort zone or take min-width if too short
+			var newWidth = ( valWidth + comfortZone ) > minWidth ? valWidth + comfortZone : minWidth,
 				oldWidth = this.getWidth();
 
-			// Calculate new width + whether to change
-			var isValidWidthChange =
-					( newWidth < oldWidth && newWidth >= minWidth )
-					|| ( newWidth > minWidth && newWidth < maxWidth );
-
-			// Animate width
-			if( isValidWidthChange ) {
-				this.input.width( newInputWidth );
-			}
-			else if( maxWidth < newWidth ) {
+			if( newWidth >= maxWidth  ) {
+				// NOTE: check for this in all cases, FF had some bug not returning false for isValidWidthChange due to some floating point issues apparently
 				// make sure we set the width if the content is too long from the start
-				this.input.width( maxWidth - this._o.widthCalculation( 0 ) );
+				this.input.width( maxWidth );
+				//console.log( 'set to max width!' );
 			}
+			else {
+				// Calculate new width + whether to change
+				var isValidWidthChange =
+						( newWidth < oldWidth && newWidth >= minWidth )
+						|| ( newWidth >= minWidth && newWidth < maxWidth );
+
+				//console.log( 'newWidth: ' + newWidth + ' | oldWidth: ' + oldWidth + ' | isValidChange: ' + ( isValidWidthChange ? 'true' : 'false' ) );
+
+				// Animate width
+				if( isValidWidthChange ) {
+					this.input.width( newWidth );
+					//console.log( 'set to calculated width!' );
+				}
+			}
+
+			//console.log( '=== END EXPANSION (' + ( this.getWidth() - oldWidth ) + ') ===' );
 
 			// return change
 			return this.getWidth() - oldWidth;
@@ -247,18 +261,19 @@ window.wikibase.utilities = {};
 					return 0; // ... or 0 if no placeholder
 				}
 				// don't need comfort zone in this case just some sane space
-				return this.getWidthFor( this.input.attr( 'placeholder' ) + ' ' );
+				width = this.getWidthFor( this.input.attr( 'placeholder' ) + ' ' );
 			}
 			return this._normalizeWidth( width );
 		},
 
 		getComfortZone: function() {
-			if( this._o.comfortZone === false ) {
+			var width = this._o.comfortZone;
+			if( width === false ) {
 				// automatic comfort zone, calculate
 				// average of some usually broader characters
-				return this.getWidthFor( '@%_MW' ) / 5;
+				width = this.getWidthFor( '@%_MW' ) / 5;
 			}
-			return this._normalizeWidth( this._o.comfortZone );
+			return this._normalizeWidth( width );
 		},
 
 		/**
@@ -276,7 +291,7 @@ window.wikibase.utilities = {};
 			if( width instanceof $ ) {
 				width = width.width();
 			}
-			return width;
+			return Math.round( width );
 		},
 
 		getOptions: function() {
