@@ -118,7 +118,7 @@ class WikibaseSite {
 	 * @return string
 	 */
 	public function getPageUrl( $pageName = '' ) {
-		return str_replace( '$1', urlencode( $pageName ), this.getPageUrlPath() );
+		return str_replace( '$1', urlencode( $pageName ), $this->getPageUrlPath() );
 	}
 
 	/**
@@ -130,6 +130,28 @@ class WikibaseSite {
 	 */
 	public function getPageUrlPath() {
 		return $this->url . $this->urlPath;
+	}
+
+	/**
+	 * Returns the relative path to the url of a page where the page is represented by a replacement marker '$1'.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getRelativePageUrlPath() {
+		return $this->urlPath;
+	}
+
+	/**
+	 * Returns the relative path to the url of a page where the page is represented by a replacement marker '$1'.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getRelativeFilePath() {
+		return $this->filePath;
 	}
 
 	/**
