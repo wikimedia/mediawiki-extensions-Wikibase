@@ -190,14 +190,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		return this.normalize( value );
 	},
 
-	/**
-	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.Interface
-	 */
-	validate: function( value ) {
-		// check whether current input is in the list of values returned by the wikis API
-		return this.normalize( value ) !== null;
-	},
-
 	_setValue_inNonEditMode: function( value ) {
 		// the actual value is the site id, displayed value though should be the whole site name and id in parentheses.
 		var site = wikibase.getSite( value );
@@ -213,8 +205,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 * @todo: might be nice to move this into wikibase.Site.getIdByString() or something.
 	 */
 	normalize: function( value ) {
-		value = window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.normalize.call( this, value );
-		value = value.toLowerCase();
+		value = $.trim( value ).toLowerCase(); // case-insensitive
 
 		for( var i in this._currentResults ) {
 			var currentItem = this._currentResults[i];

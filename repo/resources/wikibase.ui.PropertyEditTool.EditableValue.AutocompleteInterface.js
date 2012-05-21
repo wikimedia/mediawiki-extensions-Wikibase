@@ -87,6 +87,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 						data:  $.extend( {}, this.ajaxParams, { 'search': request.term } ),
 						timeout: this.TIMEOUT,
 						success: $.proxy( function( response ) {
+							if ( ! this.isInEditMode() ) {
+								// in a few raw cases this could happen. For example when just switching a char from lower
+								// to upper case, which will still be considered valud but require another suggestion list
+								return;
+							}
 							if ( response[0] == this._inputElem.val() ) {
 								this._currentResults = response[1];
 								suggest( response[1] ); // pass array of returned values to callback
@@ -195,16 +200,22 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	},
 
 	/**
-	 * validate input
-	 * @param String value
+	 * Takes the value and checks whether it is in the list of current suggestions (case sensitive) and returns the
+	 * value in the exact form from the list.
+	 *
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.normalize
 	 */
-	validate: function( value ) {
+	normalize: function( value ) {
+		// trim and lower...
+		value = $.trim( value ).toLowerCase();
+
 		for( var i in this._currentResults ) {
-			if( $.trim( this._currentResults[i] ) === $.trim( value ) ) {
-				return true;
+			if( $.trim( this._currentResults[i] ).toLowerCase() === value ) {
+				// ...but return the original from suggestions
+				return this._currentResults[i];
 			}
 		}
-		return false;
+		return null; // not found, invalid!
 	},
 
 	_disableInputElement: function() {
