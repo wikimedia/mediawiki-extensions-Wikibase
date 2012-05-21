@@ -40,7 +40,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       @current_page.addSitelinkLink
       @current_page.siteIdInputField_element.should be_true
       @current_page.pageInputField_element.enabled?.should be_false
-      @current_page.siteIdInputField="e"
+      @current_page.siteIdInputField="en"
       ajax_wait
       @current_page.wait_until do
         @current_page.siteIdAutocompleteList_element.visible?

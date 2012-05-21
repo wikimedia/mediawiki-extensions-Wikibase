@@ -224,6 +224,7 @@ $wgResourceModules['wikibase.utilities.jQuery'] = $moduleTemplate + array(
 		'wikibase.utilities/wikibase.utilities.jQuery.js',
 		'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
 		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
 	)
 );
 
