@@ -45,6 +45,7 @@ $messages['en'] = array(
 	// Special pages
 	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
+	'special-createitem' => 'Create a new item',
 
 	// API errors
 	'wikibase-api-aliases-invalid-list' => '!!FUZZY!! Use either one of "set", "add" and "remove" parameters.',
