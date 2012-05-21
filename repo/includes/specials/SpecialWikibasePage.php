@@ -1,30 +1,20 @@
 <?php
 
 /**
- * Base for special pages that resolve certain arguments to an item.
+ * Base for special pages of the Wikibase extension,
+ * holding some scaffolding and preventing us from needing to
+ * deal with weird SpecialPage insanity (ie $this->mFile inclusion)
+ * in every base class.
  *
  * @since 0.1
  *
- * @file SpecialItemResolver.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class SpecialItemResolver extends SpecialWikibasePage {
-
-	// TODO: would we benefit from using cached page here?
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $name
-	 */
-	public function __construct( $name ) {
-		parent::__construct( $name, '', false );
-	}
+abstract class SpecialWikibasePage extends SpecialPage {
 
 	/**
 	 * The subpage, ie the part after Special:PageName/
@@ -79,20 +69,6 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Displays the item.
-	 *
-	 * @since 0.1
-	 *
-	 * @param WikibaseItem $item
-	 */
-	protected function displayItem( WikibaseItem $item ) {
-		$view = new WikibaseItemView( $item, $this->getContext() );
-		$view->display();
-
-		$this->getOutput()->setPageTitle( $item->getLabel( $this->getLanguage()->getCode() ) );
 	}
 
 }

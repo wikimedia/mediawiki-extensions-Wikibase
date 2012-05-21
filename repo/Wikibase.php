@@ -30,6 +30,10 @@ if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c becaus
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.' );
 }
 
+if ( !defined( 'WBL_VERSION' ) ) { // No version constant to check against :/
+	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
+}
+
 // TODO: enable
 //if ( !array_key_exists( 'CountryNames', $wgAutoloadClasses ) ) { // No version constant to check against :/
 //	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:CLDR">CLDR</a> extension.' );
@@ -88,6 +92,27 @@ $wgGroupPermissions['wbeditor']['lang-attr-update']	= true;
 $wgGroupPermissions['wbeditor']['lang-attr-set']	= true;
 $wgGroupPermissions['wbeditor']['lang-attr-remove']	= true;
 
+// rights
+// names should be according to other naming scheme
+$wgGroupPermissions['wbeditor']['item-add']			= true;
+$wgGroupPermissions['wbeditor']['item-update']		= true;
+$wgGroupPermissions['wbeditor']['item-set']			= true;
+$wgGroupPermissions['wbeditor']['item-remove']		= true;
+$wgGroupPermissions['wbeditor']['alias-add']		= true;
+$wgGroupPermissions['wbeditor']['alias-update']		= true;
+$wgGroupPermissions['wbeditor']['alias-set']		= true;
+$wgGroupPermissions['wbeditor']['alias-remove']		= true;
+$wgGroupPermissions['wbeditor']['site-link-add']	= true;
+$wgGroupPermissions['wbeditor']['site-link-update']	= true;
+$wgGroupPermissions['wbeditor']['site-link-set']	= true;
+$wgGroupPermissions['wbeditor']['site-link-remove']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-add']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-update']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-set']	= true;
+$wgGroupPermissions['wbeditor']['lang-attr-remove']	= true;
+
+
+
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
 $wgExtensionMessagesFiles['WikibaseAlias'] 	= $dir . 'Wikibase.i18n.alias.php';
@@ -132,6 +157,7 @@ $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialC
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/SpecialItemByLabel.php';
+$wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
 
 
@@ -153,7 +179,7 @@ $wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
 
 
 // Special page registration
-//$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
@@ -295,24 +321,31 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 unset( $moduleTemplate );
 
 // register hooks and handlers
-
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
 
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseItemHandler';
 
+$baseNs = 100;
 
-
-define( 'WB_NS_DATA', 100 );
-define( 'WB_NS_DATA_TALK', 101 );
+define( 'WB_NS_DATA', $baseNs );
+define( 'WB_NS_DATA_TALK', $baseNs + 1 );
+//define( 'WB_NS_PROPERTY', $baseNs + 2 );
+//define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
+//define( 'WB_NS_QUERY', $baseNs + 4 );
+//define( 'WB_NS_QUERY_TALK', $baseNs + 5 );
 
 $wgExtraNamespaces[WB_NS_DATA] = 'Data';
 $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
+//$wgExtraNamespaces[WB_NS_DATA] = 'Property';
+//$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Property_talk';
+//$wgExtraNamespaces[WB_NS_DATA] = 'Query';
+//$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
 
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
-
 
 $egWBSettings = array();
 
 $egWBSettings['apiDebugWithWrite'] = true;
 $egWBSettings['apiDebugWithPost'] = true;
+
 $egWBSettings['apiDebugWithRights'] = true;
