@@ -53,6 +53,13 @@ class ApiWikibaseSetItem extends ApiBase {
 		$user = $this->getUser();
 
 		if ( $params['gettoken'] ) {
+			// in JSON callback mode, no tokens should be returned
+			// this will then block later updates through reuse of cached scripts
+			if ( !is_null( $this->getMain()->getRequest()->getVal( 'callback' ) ) ) {
+				return;
+			}
+			
+			// continue 
 			$res['setitemtoken'] = $user->getEditToken();
 			$this->getResult()->addValue( null, $this->getModuleName(), $res );
 			return;
