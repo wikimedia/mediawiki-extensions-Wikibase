@@ -118,7 +118,7 @@ class WikibaseSite {
 	 * @return string
 	 */
 	public function getPageUrl( $pageName = '' ) {
-		return str_replace( '$1', urlencode( $pageName ), $this->getPageUrlPath() );
+		return str_replace( '$1', rawurlencode( $pageName ), $this->getPageUrlPath() );
 	}
 
 	/**
