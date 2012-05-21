@@ -15,4 +15,4 @@
  * ui related collection of jQuery extensions of the Wikibase extension
  * @var Object
  */
-window.wikibase.utilities.ui = {};
+window.wikibase.utilities.jQuery.ui = window.wikibase.utilities.jQuery.ui || {};
