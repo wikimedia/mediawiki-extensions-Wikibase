@@ -78,10 +78,10 @@ class WikibaseUtilsTests extends MediaWikiTestCase {
 	}
 	public function providerGetSiteUrl() {
     	return array(
-    		array( 'de', 'foo1', 'https://de.wikipedia.org' ),
-    		array( 'en', 'foo2', 'https://en.wikipedia.org' ),
-    		array( 'no', 'foo3', 'https://no.wikipedia.org' ),
-    		array( 'nn', 'foo4', 'https://nn.wikipedia.org' ),
+    		array( 'de', 'foo1', 'http://de.wikipedia.org/wiki/foo1' ),
+    		array( 'en', 'foo2', 'http://en.wikipedia.org/wiki/foo2' ),
+    		array( 'no', 'foo3', 'http://no.wikipedia.org/wiki/foo3' ),
+    		array( 'nn', 'foo4', 'http://nn.wikipedia.org/wiki/foo4' ),
     	);
     }
 

@@ -127,12 +127,23 @@ class WBSettings {
 			// alternative: application/vnd.php.serialized
 			'serializationFormat' => CONTENT_FORMAT_JSON,
 
-			// Disables token and post requirements in the API to
-			// facilitate testing, do not turn on in production!
+			// Set API in debug mode
+			// do not turn on in production!
 			'apiInDebug' => false,
-
+			
+			// Additional settings for API when debugging is on to
+			// facilitate testing, do not turn on in production!
+			'apiDebugWithWrite' => true,
+			'apiDebugWithPost' => false,
+			'apiDebugWithRights' => false,
 			'apiDebugWithTokens' => false,
-
+		
+			// turn on checks before and after saving to secondary storage
+			// can be turned off when (and if) transactions work with the given database
+			// TODO: Verify if this is in fact in use later on
+			'apiPreconditionSiteLink' => true,
+			'apiPostconditionSiteLink' => true,
+		
 			// The site link sites we can link to (not necessarily clients!)
 			// They are grouped, each group has a 'sites' element which is an array holding the identifiers.
 			// It also can hold defaultSiteUrlPath and defaultSiteFilePath overriding the global default.

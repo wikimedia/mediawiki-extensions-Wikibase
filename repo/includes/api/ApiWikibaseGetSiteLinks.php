@@ -45,14 +45,22 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 		if ( $page->exists() ) {
 			// as long as getWikiPageForId only returns ids for legal items this holds
 			$item = $page->getContent();
-			$this->getResult()->addValue(
-				null,
-				'item',
-				array(
-				 	'id' => $params['id'],
-					'sitelinks' => $this->stripKeys( $params, $item->getRawSiteLinks() ),
-				)
-			);
+			if (is_null() ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+			}
+			if ( !( $item instanceof WikibaseItem ) ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
+			}
+			$res = $this->getResult();
+			$arr = array();
+			
+			$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks() );
+			if (count($sitelinks)) {
+				$arr['sitelinks'] = $sitelinks;
+			}
+			
+			$arr['id'] = $item->getId();
+			$res->addValue( null, 'item', $arr );
 		}
 		else {
 			// not  sure about this, its not conforming with other calls
@@ -123,6 +131,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
 			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
 			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
@@ -136,9 +145,9 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetsitelinks&id=42'
-			=> 'Get item number 42',
+			=> 'Get item number "42" and report the sitelinks',
 			'api.php?action=wbgesitelinks&site=en&title=Berlin'
-			=> 'Get the item associated to page Berlin on the site identified by "en"',
+			=> 'Get the item associated to page "Berlin" on the site identified by "en" and report the sitelinks',
 		);
 	}
 

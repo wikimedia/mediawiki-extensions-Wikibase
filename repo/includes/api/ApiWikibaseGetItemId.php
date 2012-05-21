@@ -37,6 +37,7 @@ class ApiWikibaseGetItemId extends ApiWikibase {
 			}
 		}
 		
+		// the id should be checked for correct class, but we don't have a full item
 		$this->getResult()->addValue(
 			null,
 			'item',

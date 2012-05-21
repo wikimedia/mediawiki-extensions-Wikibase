@@ -18,9 +18,10 @@ abstract class ApiWikibase extends ApiBase {
 	 * 
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 * @param $arr array some value to be possibly stripped for keys
+	 * @param $tag string to be used as a tag name for indexed elements
 	 * @return array of key-valuepairs or only values
 	 */
-	protected function stripKeys( array $params, array $arr ) {
+	protected function stripKeys( array $params, array $arr, $tag ) {
 		$usekeys = isset($params['usekeys']) ? $params['usekeys'] : false;
 		if ( $usekeys ) {
 			switch ( $this->getMain()->getRequest()->getVal( 'format' ) ) {
@@ -38,7 +39,11 @@ abstract class ApiWikibase extends ApiBase {
 					break;
 			}
 		}
-		return $usekeys ? $arr : array_values( $arr );
+		if (!$usekeys) {
+			$arr = array_values( $arr );
+			$this->getResult()->setIndexedTagName( $arr, $tag );
+		}
+		return $arr;
 	}
 	
 	

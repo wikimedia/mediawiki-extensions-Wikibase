@@ -199,16 +199,16 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
 			"Must have an 'items' key in the result from the API" );
-		$this->assertArrayHasKey( "q{$id}", $first[0]['items'],
-			"Must have an 'q{$id}' key in the 'items' result from the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['items']["q{$id}"],
-			"Must have an 'id' key in the 'q{$id}' result from the API" );
-		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["q{$id}"],
-			"Must have an 'sitelinks' key in the 'q{$id}' result from the API" );
-		$this->assertArrayHasKey( 'labels', $first[0]['items']["q{$id}"],
-			"Must have an 'labels' key in the 'q{$id}' result from the API" );
-		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["q{$id}"],
-			"Must have an 'descriptions' key in the 'q{$id}' result from the API" );
+		$this->assertArrayHasKey( "{$id}", $first[0]['items'],
+			"Must have an '{$id}' key in the 'items' result from the API" );
+		$this->assertArrayHasKey( 'id', $first[0]['items']["{$id}"],
+			"Must have an 'id' key in the '{$id}' result from the API" );
+		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["{$id}"],
+			"Must have an 'sitelinks' key in the '{$id}' result from the API" );
+		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$id}"],
+			"Must have an 'labels' key in the '{$id}' result from the API" );
+		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$id}"],
+			"Must have an 'descriptions' key in the '{$id}' result from the API" );
 	}
 		
 	/**
@@ -248,16 +248,16 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
 			"Must have an 'items' key in the result from the API" );
-		$this->assertArrayHasKey( "q{$id}", $first[0]['items'],
-			"Must have an 'q{$id}' key in the 'items' result from the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['items']["q{$id}"],
-			"Must have an 'id' key in the 'q{$id}' result from the API" );
-		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["q{$id}"],
-			"Must have an 'sitelinks' key in the 'q{$id}' result from the API" );
-		$this->assertArrayHasKey( 'labels', $first[0]['items']["q{$id}"],
-			"Must have an 'labels' key in the 'q{$id}' result from the API" );
-		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["q{$id}"],
-			"Must have an 'descriptions' key in the 'q{$id}' result from the API" );
+		$this->assertArrayHasKey( "{$id}", $first[0]['items'],
+			"Must have an '{$id}' key in the 'items' result from the API" );
+		$this->assertArrayHasKey( 'id', $first[0]['items']["{$id}"],
+			"Must have an 'id' key in the '{$id}' result from the API" );
+		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["{$id}"],
+			"Must have an 'sitelinks' key in the '{$id}' result from the API" );
+		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$id}"],
+			"Must have an 'labels' key in the '{$id}' result from the API" );
+		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$id}"],
+			"Must have an 'descriptions' key in the '{$id}' result from the API" );
 	}
 	
 	/**
@@ -336,11 +336,11 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			"Must have an 'items' key in the result from the second call to the API" );
 		$this->assertCount( 1, $second[0]['items'],
 			"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( "q{$id}", $second[0]['items'],
-			"Must have an 'q{$id}' key in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['items']["q{$id}"],
-			"Must have an 'id' key in the 'q{$id}' result from the second call to the API" );
-		$this->assertEquals( $id, $second[0]['items']["q{$id}"]['id'],
+		$this->assertArrayHasKey( "{$id}", $second[0]['items'],
+			"Must have an '{$id}' key in the 'items' result from the second call to the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['items']["{$id}"],
+			"Must have an 'id' key in the '{$id}' result from the second call to the API" );
+		$this->assertEquals( $id, $second[0]['items']["{$id}"]['id'],
 			"Must have the value '{$id}' for the 'id' in the result from the second call to the API" );
 		
 		$third = $this->doApiRequest( array(
@@ -355,12 +355,12 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			"Must have an 'items' key in the result from the third call to the API" );
 		$this->assertCount( 1, $third[0]['items'],
 			"Must have a number of count of 1 in the 'items' result from the third call to the API" );
-		$this->assertArrayHasKey( "q{$id}", $third[0]['items'],
-			"Must have an 'q{$id}' key in the 'items' result from the third call to the API" );
-		$this->assertArrayHasKey( 'id', $third[0]['items']["q{$id}"],
-			"Must have an 'id' key in the 'q{$id}' result from the third call to the API" );
-		$this->assertEquals( $id, $third[0]['items']["q{$id}"]['id'],
-			"Must have the value 'q{$id}' for the 'id' in the result from the third call to the API" );
+		$this->assertArrayHasKey( "{$id}", $third[0]['items'],
+			"Must have an '{$id}' key in the 'items' result from the third call to the API" );
+		$this->assertArrayHasKey( 'id', $third[0]['items']["{$id}"],
+			"Must have an 'id' key in the '{$id}' result from the third call to the API" );
+		$this->assertEquals( $id, $third[0]['items']["{$id}"]['id'],
+			"Must have the value '{$id}' for the 'id' in the result from the third call to the API" );
 	}
 
 	/**
@@ -442,11 +442,11 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			"Must have an 'items' key in the result from the second call to the API" );
 		$this->assertCount( 1, $second[0]['items'],
 			"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( "q{$id}", $second[0]['items'],
-			"Must have an 'q{$id}' key in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['items']["q{$id}"],
-			"Must have an 'id' key in the 'q{$id}' result from the second call to the API" );
-		$this->assertEquals( $id, $second[0]['items']["q{$id}"]['id'],
+		$this->assertArrayHasKey( "{$id}", $second[0]['items'],
+			"Must have an '{$id}' key in the 'items' result from the second call to the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['items']["{$id}"],
+			"Must have an 'id' key in the '{$id}' result from the second call to the API" );
+		$this->assertEquals( $id, $second[0]['items']["{$id}"]['id'],
 			"Must have the value '{$id}' for the 'id' in the result from the second call to the API" );
 		
 		// now check if we can find them by their old site-title pairs
@@ -463,11 +463,11 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			"Must have an 'items' key in the result from the second call to the API" );
 		$this->assertCount( 1, $third[0]['items'],
 			"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( "q{$id}", $third[0]['items'],
-			"Must have an 'q{$id}' key in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( 'id', $third[0]['items']["q{$id}"],
-			"Must have an 'id' key in the 'q{$id}' result from the second call to the API" );
-		$this->assertEquals( $id, $third[0]['items']["q{$id}"]['id'],
+		$this->assertArrayHasKey( "{$id}", $third[0]['items'],
+			"Must have an '{$id}' key in the 'items' result from the second call to the API" );
+		$this->assertArrayHasKey( 'id', $third[0]['items']["{$id}"],
+			"Must have an 'id' key in the '{$id}' result from the second call to the API" );
+		$this->assertEquals( $id, $third[0]['items']["{$id}"]['id'],
 			"Must have the value '{$id}' for the 'id' in the result from the second call to the API" );
 		
 	}
@@ -556,25 +556,25 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			"Must have an 'items' key in the result in the second call to the API" );
 		$this->assertCount( 1, $second[0]['items'],
 			"Must have a number of count of 1 in the 'items' result in the second call to the API" );
-		$this->assertArrayHasKey( "q{$id}", $second[0]['items'],
-			"Must have an 'q{$id}' key in the 'items' result in the second call to the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['items']["q{$id}"],
-			"Must have an 'id' key in the 'q{$id}' result in the second call to the API" );
-		$this->assertEquals( $id, $second[0]['items']["q{$id}"]['id'],
+		$this->assertArrayHasKey( "{$id}", $second[0]['items'],
+			"Must have an '{$id}' key in the 'items' result in the second call to the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['items']["{$id}"],
+			"Must have an 'id' key in the '{$id}' result in the second call to the API" );
+		$this->assertEquals( $id, $second[0]['items']["{$id}"]['id'],
 			"Must have the value '{$id}' for the 'id' in the result in the second call to the API" );
 		
-		$this->assertArrayHasKey( $language, $second[0]['items']["q{$id}"]['labels'],
+		$this->assertArrayHasKey( $language, $second[0]['items']["{$id}"]['labels'],
 			"Must have an '{$language}' key in the 'labels' second result in the second call to the API" );
-		$this->assertInternalType( 'array', $second[0]['items']["q{$id}"]['labels'][$language],
+		$this->assertInternalType( 'array', $second[0]['items']["{$id}"]['labels'][$language],
 			"Must have an array as the value for language '{$language}' in the 'labels' set in the result in the second call to the API" );
-		$this->assertEquals( $label, $second[0]['items']["q{$id}"]['labels'][$language]['value'],
+		$this->assertEquals( $label, $second[0]['items']["{$id}"]['labels'][$language]['value'],
 			"Must have the value '{$label}' for the 'value' in '{$language}' in the 'labels' set in the result in the second call to the API" );
 		
-		$this->assertArrayHasKey( $language, $second[0]['items']["q{$id}"]['descriptions'],
+		$this->assertArrayHasKey( $language, $second[0]['items']["{$id}"]['descriptions'],
 			"Must have an '{$language}' key in the 'descriptions' result in the second to the API" );
-		$this->assertInternalType( 'array', $second[0]['items']["q{$id}"]['descriptions'][$language],
+		$this->assertInternalType( 'array', $second[0]['items']["{$id}"]['descriptions'][$language],
 			"Must have an array as the value for language '{$language}' in the 'descriptios' set in the result in the second call to the API" );
-		$this->assertEquals( $description, $second[0]['items']["q{$id}"]['descriptions'][$language]['value'],
+		$this->assertEquals( $description, $second[0]['items']["{$id}"]['descriptions'][$language]['value'],
 			"Must have the value '{$description}' for the 'value' in '{$language}' in the 'descriptions' set in the result in the second call to the API" );
 		
 	}
@@ -645,11 +645,11 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			"Must have an 'items' key in the result in the second call to the API" );
 		$this->assertCount( 1, $second[0]['items'],
 			"Must have a number of count of 1 in the 'items' result in the second call to the API" );
-		$this->assertArrayHasKey( "q{$id}", $second[0]['items'],
-			"Must have an 'q{$id}' key in the 'items' result in the second call to the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['items']["q{$id}"],
-			"Must have an 'id' key in the 'q{$id}' result in the second call to the API" );
-		$this->assertEquals( $id, $second[0]['items']["q{$id}"]['id'],
+		$this->assertArrayHasKey( "{$id}", $second[0]['items'],
+			"Must have an '{$id}' key in the 'items' result in the second call to the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['items']["{$id}"],
+			"Must have an 'id' key in the '{$id}' result in the second call to the API" );
+		$this->assertEquals( $id, $second[0]['items']["{$id}"]['id'],
 			"Must have the value '{$id}' for the 'id' in the result in the second call to the API" );
 		
 		if ( isset($second[0]['items']["{$id}"][$op][$language]) ) {

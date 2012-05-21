@@ -116,11 +116,16 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 		}
 		elseif ( $hasLink ) {
 			$item = WikibaseItem::getFromSiteLink( $params['site'], WikibaseItem::normalize( $params['title'] ) );
+			
 			if ( is_null( $item ) && $params['item'] === 'update' ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-id' );
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
 			}
 		}
-
+		
+		if ( !is_null( $item ) && !( $item instanceof WikibaseItem ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
+		}
+			
 		if ( !is_null( $item ) && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
@@ -132,7 +137,7 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 				$item->addSiteLink( $params['site'], $params['title'] );
 			}
 		}
-
+		
 		$success = $this->modifyItem( $item, $params );
 		if ( !$success ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
@@ -157,12 +162,6 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 				$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
 			}
 		}
-		
-		$this->getResult()->addValue(
-			null,
-			'success',
-			(int)$success
-		);
 
 		if ( $success ) {
 			$this->getResult()->addValue(
@@ -171,6 +170,7 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 			);
 			if ( $hasLink ) {
 				// normalizing site does not really give any meaning
+				// so we only normalize title
 				$normTitle = WikibaseItem::normalize( $params['title'] );
 				$normalized = array();
 				if ( $normTitle !== $params['title'] ) {
@@ -185,6 +185,13 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 				}
 			}
 		}
+		
+		$this->getResult()->addValue(
+			null,
+			'success',
+			(int)$success
+		);
+		
 	}
 
 	/**
@@ -201,6 +208,7 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
 			array( 'code' => 'create-failed', 'info' => wfMsg( 'wikibase-api-create-failed' ) ),
 			array( 'code' => 'modify-failed', 'info' => wfMsg( 'wikibase-api-modify-failed' ) ),
+			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 			array( 'code' => 'invalid-contentmodel', 'info' => wfMsg( 'wikibase-api-invalid-contentmodel' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),

@@ -80,7 +80,15 @@ class ApiWikibaseSetItem extends ApiWikibase {
 		
 		// lacks error checking
 		$item = WikibaseItem::newFromArray( json_decode( $params['data'], true ) );
+	
+		if ( is_null( $item ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+		}
 		
+		if ( !( $item instanceof WikibaseItem ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
+		}
+			
 		// TODO: Change for more fine grained permissions
 		$user = $this->getUser();
 		if (self::getPermissionsError( $this->getUser() ) ) {
@@ -99,21 +107,26 @@ class ApiWikibaseSetItem extends ApiWikibase {
 			//$params['summary'] = 'dummy';
 		//}
 
-		$languages = WikibaseUtils::getLanguageCodes();
+		//$languages = $params['language'];
 		
 		// because this is serialized and cleansed we can simply go for known values
-		$arr = array( 'id' => $item->getId() );
-		$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks() );
+		$res = $this->getResult();
+		$arr = array();
+		
+		$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks(), 'sl' );
 		if (count($sitelinks)) {
 			$arr['sitelinks'] = $sitelinks;
+			//$res->setIndexedTagName( $arr['sitelinks'], 'sitelink' );
 		}
 		$descriptions = $this->stripKeys( $params, $item->getRawDescriptions() );
 		if (count($descriptions)) {
 			$arr['descriptions'] = $descriptions;
+			//$res->setIndexedTagName( $arr['descriptions'], 'description' );
 		}
 		$labels = $this->stripKeys( $params, $item->getRawLabels() );
 		if (count($labels)) {
 			$arr['labels'] = $labels;
+			//$res->setIndexedTagName( $arr['labels'], 'label' );
 		}
 		$this->getResult()->addValue(
 			null,
@@ -121,7 +134,10 @@ class ApiWikibaseSetItem extends ApiWikibase {
 			$arr
 		);
 		
-		$this->getResult()->addValue(
+		$arr['id'] = $item->getId();
+		$res->addValue( null, 'item', $arr );
+		
+		$res->addValue(
 			null,
 			'success',
 			(int)$success
@@ -136,6 +152,7 @@ class ApiWikibaseSetItem extends ApiWikibase {
 		return array_merge( parent::getPossibleErrors(), array(
 			array( 'code' => 'no-token', 'info' => wfMsg( 'wikibase-api-no-token' ) ),
 			array( 'code' => 'no-data', 'info' => wfMsg( 'wikibase-api-no-data' ) ),
+			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'cant-edit', 'info' => wfMsg( 'wikibase-api-cant-edit' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
 		) );
@@ -229,10 +246,10 @@ class ApiWikibaseSetItem extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetitem&data={}'
-			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed',
+			'api.php?action=wbsetitem&data={}&format=xmlfm'
+			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed. Report it as pretty printed xml format.',
 			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
-			=> 'Set a more complete JSON structure for the item.',
+			=> 'Set a more complete JSON structure for the item, it will be extended with an item id and the structure cleansed and completed.',
 		);
 	}
 

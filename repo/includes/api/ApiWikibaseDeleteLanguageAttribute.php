@@ -40,30 +40,38 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		$languages = WikibaseUtils::getLanguageCodes();
-		$labels = $item->getLabels();
-		$descriptions = $item->getDescriptions();
+		$language = $params['language'];
+		$labels = $item->getLabels( array( $language ) );
+		$descriptions = $item->getDescriptions( array( $language ) );
+		
 		$success = false;
+		
 		foreach ($params['attribute'] as $attr) {
+			
 			switch ($attr) {
 				case 'label':
-					if ( !isset($labels[$params['language']]) ) {
+					if ( !count($labels) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
 					}
-					$item->removeLabel( $params['language'] );
+					$item->removeLabel( $language );
 					$success = $success || true;
 					break;
+					
 				case 'description':
-					if ( !isset($descriptions[$params['language']]) ) {
+					if ( !count($descriptions) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
 					}
-					$item->removeDescription( $params['language'] );
+					$item->removeDescription( $language );
 					$success = $success || true;
 					break;
+					
 				default:
+					// should never be here
 					$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
 			}
+			
 		}
+		
 		return $success;
 	}
 

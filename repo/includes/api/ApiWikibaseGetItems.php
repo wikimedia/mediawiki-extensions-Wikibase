@@ -54,7 +54,7 @@ class ApiWikibaseGetItems extends ApiWikibase {
 			}
 		}
 
-		$languages = WikibaseUtils::getLanguageCodes();
+		$languages = $params['language'];
 		
 /*		$this->getResult()->addValue(
 			null,
@@ -67,26 +67,39 @@ class ApiWikibaseGetItems extends ApiWikibase {
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				$item = $page->getContent();
-				// this is not a very nice way to do it
-				// but if its only a few 
-				$arr = array( 'id' => $id );
-				$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks() );
+				if ( is_null($item) ) {
+					continue;
+				}
+				if ( !( $item instanceof WikibaseItem ) ) {
+					$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
+				}
+				
+				// this is not a very nice way to transfer the values
+				// but if there are only a few calls its okey
+				$res = $this->getResult();
+				$arr = array();
+				//$arr = array( 'id' => $id );
+				$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks(), 'sl' );
 				if (count($sitelinks)) {
 					$arr['sitelinks'] = $sitelinks;
 				}
-				$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( $params['language'] ) );
+				$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( $languages ), 'd' );
 				if (count($descriptions)) {
 					$arr['descriptions'] = $descriptions;
 				}
-				$labels = $this->stripKeys( $params, $item->getRawLabels( $params['language'] ) );
+				$labels = $this->stripKeys( $params, $item->getRawLabels( $languages ), 'l' );
 				if (count($labels)) {
 					$arr['labels'] = $labels;
 				}
-				$this->getResult()->addValue(
+				
+				$arr['id'] = $item->getId();
+				
+				$res->addValue(
 					'items',
-					"q{$id}",
+					"{$id}",
 					$arr
 				);
+				$res->setIndexedTagName_internal( array( 'items' ), 'item' );
 			}
 		}
 		
@@ -163,6 +176,7 @@ class ApiWikibaseGetItems extends ApiWikibase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
 			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
 		) );
@@ -175,11 +189,11 @@ class ApiWikibaseGetItems extends ApiWikibase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetitems&ids=42'
-			=> 'Get item number 42 with default (user?) language',
+			=> 'Get item number 42 with language attributes in all available languages',
 			'api.php?action=wbgetitems&ids=42&language=en'
-			=> 'Get item number 42 with english language',
+			=> 'Get item number 42 with language attributes in english language',
 			'api.php?action=wbgetitems&sites=en&titles=Berlin&language=en'
-			=> 'Get the item associated to page Berlin on the site identified by "en"',
+			=> 'Get the item for page "Berlin" on the site "en", with language attributes in english language',
 		);
 	}
 
