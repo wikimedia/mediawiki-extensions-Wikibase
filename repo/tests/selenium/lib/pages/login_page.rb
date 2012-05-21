@@ -1,7 +1,7 @@
 class LoginPage
   include PageObject
 
-  page_url 'http://localhost/mediawiki/index.php?title=Special:UserLogin'
+  page_url WIKI_URL + 'index.php?title=Special:UserLogin'
   text_field(:username, :id => 'wpName1')
   text_field(:password, :id => 'wpPassword1')
   button(:login, :id => 'wpLoginAttempt')

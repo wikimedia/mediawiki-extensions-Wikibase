@@ -54,6 +54,82 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		}, this ) );
 	},
 
+
+	/**
+	 * build autocomplete input box and define input handling
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement
+	 */
+	_buildInputElement: function() {
+		// get basic input box
+		var inputElement
+			= window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
+
+		// extend input element with autocomplete
+		if ( this._currentResults !== null ) {
+			inputElement.wikibaseAutocomplete( {
+				source: $.proxy( function( request, response ) {
+					// just matching from the beginning (autocomplete would match anywhere within the string)
+					var results = $.grep( this._currentResults, function( result, i ) {
+						return (
+							result.label.toLowerCase().indexOf( request.term.toLowerCase() ) == 0
+								|| result.site.getId().indexOf( request.term.toLowerCase() ) == 0
+						);
+					} );
+					/*
+					if some site id is specified exactly, move that site to the top for it will be the one picked
+					when leaving the input field
+					 */
+					var additionallyFiltered = $.grep( results, function( result, i ) {
+						return ( request.term == result.site.getId() );
+					} );
+					if ( additionallyFiltered.length > 0 ) { // remove site from original result set
+						for ( var i in results ) {
+							if ( results[i].site.getId() == additionallyFiltered[0].site.getId() ) {
+								results.splice( i, 1 );
+								break;
+							}
+						}
+					}
+					// put site with exactly hit site id to beginning of complete result set
+					$.merge( additionallyFiltered, results );
+					response( additionallyFiltered );
+				}, this ),
+				close: $.proxy( function( event, ui ) {
+					this._onInputRegistered();
+				}, this )
+			} );
+			inputElement.on( 'keyup', $.proxy( function( event ) {
+				this._onInputRegistered();
+			}, this ) );
+		}
+
+		inputElement.on( 'autocompleteopen', $.proxy( function( event ) {
+			this._highlightMatchingCharacters();
+		}, this ) );
+
+		return inputElement;
+	},
+
+	/**
+	 * highlight matching input characters in results
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._highlightMatchingCharacters
+	 */
+	_highlightMatchingCharacters: function() {
+		var regExp = new RegExp( '^(' + $.ui.autocomplete.escapeRegex( this._inputElem.val() ) + ')', 'i' );
+		var regExpCode = new RegExp(
+			'\\((' + $.ui.autocomplete.escapeRegex( this._inputElem.val() ) + ')(\\S*)\\)',
+			'i'
+		); // check for direct language code hit
+		this._inputElem.data( 'autocomplete' ).menu.element.children().each( function( i ) {
+			var node = $( this ).find( 'a' );
+			if ( regExpCode.test( node.text() ) ) {
+				node.html( node.text().replace( regExpCode, '(<b>$1</b>$2)' ) );
+			} else {
+				node.html( node.text().replace( regExp, '<b>$1</b>' ) );
+			}
+		} );
+	},
+
 	/**
 	 * Builds a list of sites allowed to choose from
 	 */
@@ -138,13 +214,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 */
 	normalize: function( value ) {
 		value = window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.normalize.call( this, value );
+		value = value.toLowerCase();
 
 		for( var i in this._currentResults ) {
 			var currentItem = this._currentResults[i];
-			if(    value == currentItem.site.getId()
-				|| value == currentItem.site.getShortName()
-				|| value == currentItem.value
-				|| value == currentItem.label
+			if(    value == currentItem.site.getId().toLowerCase()
+				|| value == currentItem.site.getShortName().toLowerCase()
+				|| value == currentItem.value.toLowerCase()
+				|| value == currentItem.label.toLowerCase()
 			) {
 				return currentItem.site.getId();
 			}

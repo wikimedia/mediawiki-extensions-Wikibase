@@ -109,6 +109,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		
 		this._onInputRegistered(); // do this after setting _isInEditMode !
 		this.setFocus();
+
+		$( this ).trigger( 'afterStartEditing' );
 		
 		return true;
 	},
@@ -244,7 +246,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		
 		this._isInEditMode = false;
 		this.setValue( $value );
-		
+
+		$( this ).trigger( 'afterStopEditing' );
+
 		// any change at all compared to initial value?
 		return initialValue !== $value;
 	},

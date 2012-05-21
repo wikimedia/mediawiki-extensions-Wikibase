@@ -24,38 +24,111 @@ window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototyp
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype, {
 
 	/**
+	 * timeout if auto-complete AJAX request in milliseconds
+	 * @const int
+	 */
+	TIMEOUT: 8000,
+
+	/**
 	 * current result set of strings used for validation
 	 * @var Array
 	 */
 	_currentResults: null,
 
+	/**
+	 * to prevent text highlighting when pressing backspace, keyCode is stored onKeyDown event
+	 * @var int
+	 */
+	_lastKeyDown: null,
+
 	_init: function( subject ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 		this._currentResults = new Array();
 	},
-	
+
+	/**
+	 * initialize input box
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement
+	 */
+	_initInputElement: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement.call( this );
+
+		// make autocomplete results list strech from the right side of the input box in rtl
+		if ( document.documentElement.dir == 'rtl' ) {
+			this._inputElem.data( 'autocomplete' ).options.position.my = 'right top';
+			this._inputElem.data( 'autocomplete' ).options.position.at = 'right bottom';
+		}
+
+		// since results list does not reposition automatically on resize, just close it
+		$( window ).off( 'wikibase.ui.AutocompleteInterface' ); // one resize event handler is enough for all widgets
+		$( window ).on( 'resize.wikibase.ui.AutocompleteInterface', $.proxy( function() {
+			if ( $( '.ui-autocomplete-input' ).length > 0 ) {
+				$( '.ui-autocomplete-input' ).data( 'autocomplete' ).close( {} );
+			}
+		}, this ) );
+	},
+
+	/**
+	 * create input element and initialize autocomplete
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement
+	 */
 	_buildInputElement: function() {
-		// get basic input box:
+		// get basic input box
 		var inputElement
 			= window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
 
-		// extend input element with autocomplete:
+		// extend input element with autocomplete
 		if ( this.ajaxParams !== null ) {
-			inputElement.autocomplete( {
+			inputElement.wikibaseAutocomplete( {
 				source: $.proxy( function( request, suggest ) {
 					$.ajax( {
 						url: this.url,
 						dataType: 'jsonp',
 						data:  $.extend( {}, this.ajaxParams, { 'search': request.term } ),
-						timeout: 8000,
+						timeout: this.TIMEOUT,
 						success: $.proxy( function( response ) {
-							this._currentResults = response[1];
-							suggest( response[1] ); // pass array of returned values to callback
+							if ( response[0] == this._inputElem.val() ) {
+								this._currentResults = response[1];
+								suggest( response[1] ); // pass array of returned values to callback
+
+								/*
+								set value to first suggestion but select text of additional characters automatically placed
+								allowing the first value to be selected directly but be overwritten as well;
+								because of the API call lag, this is avoided when hitting backspace, since the value would
+								be resetted too slow
+								 */
+								if ( this._lastKeyDown != 8 && response[1].length > 0 ) {
+									/*
+									following if-statement is a work-around for a technically unexpected search
+									behaviour: e.g. in English Wikipedia opensearch for "Allegro " returns "Allegro"
+									as first result instead of "Allegro (music)", so auto-completion should probably
+									be prevented here
+									*/
+									if ( response[1][0].indexOf( this._inputElem.val() ) != -1 ) {
+										this.setValue( response[1][0] );
+										var start = response[0].length;
+										var end = response[1][0].length;
+										var node = this._inputElem[0];
+										if( node.createTextRange ) {
+											var selRange = node.createTextRange();
+											selRange.collapse( true );
+											selRange.moveStart( 'character', start);
+											selRange.moveEnd( 'character', end);
+											selRange.select();
+										} else if( node.setSelectionRange ) {
+											node.setSelectionRange( start, end );
+										} else if( node.selectionStart ) {
+											node.selectionStart = start;
+											node.selectionEnd = end;
+										}
+									}
+								}
+								this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
+							}
 							this._onInputRegistered();
 						}, this ),
 						error: $.proxy( function( jqXHR, textStatus, errorThrown ) {
-							// TODO do not use jquery.ui.autocomplete private method
-							( this._inputElem.data( 'autocomplete' )._response() )(); // remove spinner
+							this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
 							if ( textStatus != 'abort' ) {
 								var error = {
 									code: textStatus,
@@ -74,6 +147,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 					} );
 				}, this ),
 				close: $.proxy( function( event, ui ) {
+					this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
 					this._onInputRegistered();
 				}, this )
 			} );
@@ -89,21 +163,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 			}, this ) );
 		}
 
-		// make autocomplete results list strech from the right side of the input box in rtl
-		if ( document.documentElement.dir == 'rtl' ) {
-			inputElement.data( 'autocomplete' ).options.position.my = 'right top';
-			inputElement.data( 'autocomplete' ).options.position.at = 'right bottom';
-		}
-
-		// since results list does not reposition automatically on resize, just close it
-		$( window ).off( 'wikibase.ui.AutocompleteInterface' ); // one resize event handler is enough for all widgets
-		$( window ).on( 'resize.wikibase.ui.AutocompleteInterface', $.proxy( function() {
-			if ( $( '.ui-autocomplete-input' ).length > 0 ) {
-				$( '.ui-autocomplete-input' ).data( 'autocomplete' ).close( {} );
-			}
+		inputElement.on( 'autocompleteopen', $.proxy( function( event ) {
+			this._highlightMatchingCharacters();
 		}, this ) );
 
 		return inputElement;
+	},
+
+	/**
+	 * highlight matching input characters in results
+	 */
+	_highlightMatchingCharacters: function() {
+		var regexp = new RegExp( '(' + $.ui.autocomplete.escapeRegex( this._inputElem.val() ) + ')', 'i' );
+		this._inputElem.data( 'autocomplete' ).menu.element.children().each( function( i ) {
+			$( this ).find( 'a' ).html(
+				$( this ).find( 'a' ).text().replace( regexp, '<b>$1</b>' )
+			);
+		} );
 	},
 
 	/**
@@ -130,7 +206,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		}
 		return false;
 	},
-		
+
 	_disableInputElement: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._disableInputElement.call( this );
 		this._inputElem.autocomplete( "disable" );
@@ -140,6 +216,15 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	_enableInputelement: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputelement.call( this );
 		this._inputElem.autocomplete( "enable" );
+	},
+
+	/**
+	 * custom onKeyDown event extension
+	 *
+	 * @param jQuery.event event
+	 */
+	onKeyDown: function( event ) {
+		this._lastKeyDown = event.keyCode;
 	},
 
 

@@ -1,5 +1,5 @@
 /**
- * JavasSript for 'wikibase' extension
+ * jQuery plugins for 'wikibase' extension
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  * 
  * @since 0.1
@@ -8,12 +8,84 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
-"use strict";
+'use strict';
 
 window.wikibase.utilities = {};
 
-// Wikibase jQuery plugins:
+( function( $ ) {
+	/**
+	 * extension of jquery.ui.autocomplete
+	 *
+	 * @example $( 'input' ).wikibaseAutocomplete( { source: ['a', 'b', 'c'] });
+	 */
+	$.fn.wikibaseAutocomplete = function( options ) {
+		/**
+		 * how many items the dropdown should containg before toggling scrollbar
+		 * @const int
+		 */
+		var MAX_ITEMS = 10;
+
+		this.filter( 'input:text' ).each( function() {
+			$( this ).autocomplete( options )
+				.on( 'autocompleteopen', $.proxy( function( event ) {
+					// resize menu height to height of MAX_ITEMS
+					var menu = this.data('autocomplete').menu.element;
+					menu.css( 'minWidth', 'auto' );
+					if ( menu.children().length > MAX_ITEMS ) {
+						var fixedHeight = 0;
+						for ( var i = 0; i < MAX_ITEMS ; i++ ) {
+							fixedHeight += $( menu.children()[i] ).height();
+						}
+						menu.width( menu.width() + $.getScrollbarWidth() );
+						menu.height( fixedHeight );
+						menu.css( 'overflowY', 'scroll' );
+					} else {
+						menu.width( 'auto' );
+						menu.height( 'auto' );
+						menu.css( 'overflowY', 'auto' );
+					}
+					menu.css( 'minWidth', this.data('autocomplete').element.outerWidth() - ( menu.outerWidth() - menu.width() ) + 'px' );
+				}, $( this ) ) );
+		} );
+		return this;
+	}
+} )( jQuery );
+
+
+/**
+ * Gets the width of the OS scrollbar
+ *
+ *! Copyright (c) 2008 Brandon Aaron (brandon.aaron@gmail.com || http://brandonaaron.net)
+ * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
+ * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ */
+( function( $ ) {
+	var scrollbarWidth = 0;
+	$.getScrollbarWidth = function() {
+		if ( !scrollbarWidth ) {
+			if ( $.browser.msie ) {
+				var $textarea1 = $( '<textarea cols="10" rows="2"></textarea>' )
+					.css( { position: 'absolute', top: -1000, left: -1000 } ).appendTo( 'body' ),
+					$textarea2 = $( '<textarea cols="10" rows="2" style="overflow: hidden;"></textarea>' )
+						.css( { position: 'absolute', top: -1000, left: -1000 } ).appendTo( 'body' );
+				scrollbarWidth = $textarea1.width() - $textarea2.width();
+				$textarea1.add( $textarea2 ).remove();
+			} else {
+				var $div = $( '<div />' )
+					.css( { width: 100, height: 100, overflow: 'auto', position: 'absolute', top: -1000, left: -1000 } )
+					.prependTo( 'body' ).append( '<div />' ).find( 'div' )
+					.css( { width: '100%', height: 200 } );
+				scrollbarWidth = 100 - $div.width();
+				$div.parent().remove();
+			}
+		}
+		return scrollbarWidth;
+	};
+} )( jQuery );
+
+
 ( function( $ ) {
 
 	/**

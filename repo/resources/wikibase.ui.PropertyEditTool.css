@@ -18,8 +18,9 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 		font-size:inherit;
 	}
 
-.wb-ui-toolbar, .wb-property-container-value {
-	margin: .3em;
+.wb-property-container-value {
+	margin-left: .3em;
+	margin-right: .3em;
 }
 
 .mw-content-rtl .ui-autocomplete-loading { /* set AJAX spinner to left of the autocomplete input box in rtl */
@@ -154,8 +155,36 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	border:none;
 }
 
-
 /********** /TOOLTIP **********/
+
+
+/********** jquery.ui.autocomplete **********/
+
+.ui-widget-content {
+	border-color: #AAA;
+	background: white;
+}
+
+.ui-widget-content .ui-state-hover {
+	border: none;
+	background: #4C59A6;
+	color: white;
+}
+
+.ui-menu {
+	padding: 0;
+}
+
+.ui-menu .ui-menu-item a {
+	padding: 0 0.2em;
+}
+
+.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+	margin: 0;
+}
+
+/********** /jquery.ui.autocomplete **********/
+
 
 .ruler {
 	display:none;

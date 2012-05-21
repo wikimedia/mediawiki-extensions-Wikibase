@@ -13,10 +13,11 @@
 .firstHeading {
 	border-bottom: 0;
 	margin-bottom: 0 !important;
+	padding-top:1px;
 }
 
 div#bodyContent {
-	margin-top: -1em;
+	margin-top: -0.4em;
 }
 
 .wb-property-container-value {
