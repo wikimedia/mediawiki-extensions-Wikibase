@@ -7,7 +7,7 @@ use Wikibase\DiffOpAdd as DiffOpAdd;
 use Wikibase\DiffOpChange as DiffOpChange;
 
 /**
- * Tests for the WikibaseMapDiff class.
+ * Tests for the MapDiff class.
  *
  * @file
  * @since 0.1
@@ -16,6 +16,7 @@ use Wikibase\DiffOpChange as DiffOpChange;
  * @ingroup Test
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

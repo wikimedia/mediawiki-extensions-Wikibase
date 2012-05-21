@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\ListDiff as ListDiff;
 
 /**
- * Tests for the WikibaseListDiff class.
+ * Tests for the ListDiff class.
  *
  * @file
  * @since 0.1
@@ -13,6 +13,7 @@ use Wikibase\ListDiff as ListDiff;
  * @ingroup Test
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

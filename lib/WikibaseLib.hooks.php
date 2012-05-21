@@ -52,6 +52,7 @@ final class WikibaseLibHooks {
 		$files[] = $testDir . 'changes/SitelinkChangeTest.php';
 
 		// diff
+		$files[] = $testDir . 'diff/DiffTest.php';
 		$files[] = $testDir . 'diff/ListDiffTest.php';
 		$files[] = $testDir . 'diff/MapDiffTest.php';
 

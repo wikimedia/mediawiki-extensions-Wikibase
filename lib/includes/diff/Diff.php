@@ -47,7 +47,7 @@ class Diff extends \ArrayIterator implements IDiff {
 	 * @param string $type
 	 * @return array of DiffOp
 	 */
-	protected function getTypeOperations( $type ) {
+	public function getTypeOperations( $type ) {
 		return array_intersect_key(
 			$this->operations,
 			array_flip( $this->typePointers[$type] )
