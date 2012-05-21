@@ -121,6 +121,7 @@ final class WikibaseHooks {
 				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
 				'tests/qunit/wikibase.ui.Tooltip.tests.js',
+				'tests/qunit/wikibase.utilities.jQuery.tests.js',
 				'tests/qunit/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
 			),
 			'dependencies' => array(

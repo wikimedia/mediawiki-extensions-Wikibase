@@ -12,6 +12,9 @@
  */
 "use strict";
 
+// make this usable without base utilities
+window.wikibase.utilities = window.wikibase.utilities || {};
+
 /**
  * Collection of jQuery extensions of the Wikibase extension
  * @var Object
@@ -23,8 +26,8 @@ window.wikibase.utilities.jQuery = window.wikibase.utilities.jQuery || {};
 	/**
 	 * Helper function to remove all css classes matching a regular expression.
 	 *
-	 * @param subject jQuery
 	 * @param RegExp classNameRegex
+	 * @return jQuery
 	 */
 	$.fn.removeClassByRegex = function( classNameRegex ) {
 		this.each( function() {
@@ -33,7 +36,7 @@ window.wikibase.utilities.jQuery = window.wikibase.utilities.jQuery || {};
 				return
 			}
 			var newClasses = '';
-			$.each( subject.attr( 'class' ).split( ' ' ),function( i, className ) {
+			$.each( subject.attr( 'class' ).split( /\s+/ ),function( i, className ) {
 				// check for each class whether it matches...
 				if( ! className.match( classNameRegex ) ) {
 					// ...if not, we re-add it
@@ -42,8 +45,9 @@ window.wikibase.utilities.jQuery = window.wikibase.utilities.jQuery || {};
 			} );
 
 			// override classes:
-			subject.attr( 'class', newClasses );
+			subject.attr( 'class', $.trim( newClasses ) );
 		} );
+		return this;
 	}
 
 } )( jQuery );

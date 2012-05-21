@@ -12,7 +12,7 @@
 'use strict';
 
 ( function() {
-	module( 'wikibase.utilities.jQuery.inputAutoExpand', window.QUnit.newWbEnvironment( {
+	module( 'wikibase.utilities.jQuery.ui.inputAutoExpand', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.subject = $( '<input/>', {
 				'type': 'text',
