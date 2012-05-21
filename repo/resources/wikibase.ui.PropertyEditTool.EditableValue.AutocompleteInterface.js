@@ -88,8 +88,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 						timeout: this.TIMEOUT,
 						success: $.proxy( function( response ) {
 							if ( ! this.isInEditMode() ) {
-								// in a few raw cases this could happen. For example when just switching a char from lower
-								// to upper case, which will still be considered valud but require another suggestion list
+								// in a few rare cases this could happen. For example when just switching a char from lower
+								// to upper case, which will still be considered valid but require another suggestion list
 								return;
 							}
 							if ( response[0] == this._inputElem.val() ) {
@@ -157,7 +157,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 				}, this )
 			} );
 		} else if ( this._currentResults !== null ) {
-			inputElement.autocomplete( {
+			inputElement.wikibaseAutocomplete( {
 				source: this._currentResults,
 				close: $.proxy( function( event, ui ) {
 					this._onInputRegistered();
@@ -202,17 +202,17 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	/**
 	 * Takes the value and checks whether it is in the list of current suggestions (case sensitive) and returns the
 	 * value in the exact form from the list.
-	 *
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.normalize
+	 *
+	 * @param string value string to be normalized
+	 * @return string|null actual string found within the result set or null if nothing was found
 	 */
 	normalize: function( value ) {
 		// trim and lower...
 		value = $.trim( value ).toLowerCase();
-
 		for( var i in this._currentResults ) {
 			if( $.trim( this._currentResults[i] ).toLowerCase() === value ) {
-				// ...but return the original from suggestions
-				return this._currentResults[i];
+				return this._currentResults[i]; // ...but return the original from suggestions
 			}
 		}
 		return null; // not found, invalid!
@@ -223,7 +223,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		this._inputElem.autocomplete( "disable" );
 		this._inputElem.autocomplete( "close" );
 	},
-	
+
 	_enableInputelement: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputelement.call( this );
 		this._inputElem.autocomplete( "enable" );

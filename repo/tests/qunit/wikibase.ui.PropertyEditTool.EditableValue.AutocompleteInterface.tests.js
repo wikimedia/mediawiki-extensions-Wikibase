@@ -17,7 +17,29 @@
 		setup: function() {
 			this.node = $( '<div/>', { id: 'subject' } );
 			this.autocomplete = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface( this.node );
-			this.resultSet = ['qwer', 'asdf', 'yxcv' ];
+			this.resultSet = [
+				'yqwer',
+				'yasdf',
+				'yxcv',
+				'yxcv',
+				'yxcv',
+				'yxcv',
+				'yxcv',
+				'yxcv',
+				'yxcv'
+			];
+			this.additionalResults = [
+				'yfghj',
+				'ycvbn',
+				'ycvba'
+			];
+			this.reopenMenu = function( resultSet ) {
+				if ( typeof resultSet != 'undefined' ) {
+					this.autocomplete.setResultSet( resultSet );
+				}
+				this.autocomplete._inputElem.data( 'autocomplete' ).close();
+				this.autocomplete._inputElem.data( 'autocomplete' ).search( 'y' );
+			};
 
 			ok(
 				this.autocomplete._subject[0] == this.node[0],
@@ -34,6 +56,9 @@
 				'destroyed input element'
 			);
 
+			this.reopen = null;
+			this.resultSet = null;
+			this.additionalResults = null;
 			this.autocomplete = null;
 			this.node = null;
 		}
@@ -66,9 +91,42 @@
 		);
 
 		equal(
-			this.autocomplete._inputElem.data('autocomplete').menu.element.css( 'display' ),
+			this.autocomplete._inputElem.data( 'autocomplete' ).menu.element.css( 'display' ),
 			'none',
 			'menu is hidden'
+		);
+
+	} );
+
+
+	test( 'automatic height adjustment', function() {
+		this.autocomplete.setResultSet( this.resultSet );
+		this.autocomplete.startEditing();
+		this.autocomplete._inputElem.data( 'autocomplete' ).search( 'y' );
+
+		var initHeight = this.autocomplete._inputElem.data( 'autocomplete' ).menu.element.height();
+		this.resultSet.push( this.additionalResults[0] );
+		this.reopenMenu( this.resultSet );
+
+		// testing (MAX_ITEMS - 1)++
+		ok(
+			this.autocomplete._inputElem.data( 'autocomplete' ).menu.element.height() > initHeight,
+			'height changed after adding another item to result set'
+		);
+
+		// adding one more item (MAX_ITEMS + 1) first, since there might be side effects adding the scrollbar
+		this.resultSet.push( this.additionalResults[1] );
+		this.reopenMenu( this.resultSet );
+		initHeight = this.autocomplete._inputElem.data( 'autocomplete' ).menu.element.height();
+
+		this.resultSet.push( this.additionalResults[2] );
+		this.reopenMenu( this.resultSet );
+
+		// testing (MAX_ITEMS + 1)++
+		equal(
+			this.autocomplete._inputElem.data( 'autocomplete' ).menu.element.height(),
+			initHeight,
+			'height unchanged after adding more than maximum items'
 		);
 
 	} );
