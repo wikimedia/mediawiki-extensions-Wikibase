@@ -200,22 +200,63 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	},
 
 	/**
-	 * Takes the value and checks whether it is in the list of current suggestions (case sensitive) and returns the
-	 * value in the exact form from the list.
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.normalize
+	 * Returns an value from the result set if it equals the one given.
+	 * null in case the value doesn't exist within the result set.
 	 *
-	 * @param string value string to be normalized
-	 * @return string|null actual string found within the result set or null if nothing was found
+	 * @return string|null
 	 */
-	normalize: function( value ) {
+	getRestulSetMatch: function( value ) {
 		// trim and lower...
 		value = $.trim( value ).toLowerCase();
+
 		for( var i in this._currentResults ) {
 			if( $.trim( this._currentResults[i] ).toLowerCase() === value ) {
 				return this._currentResults[i]; // ...but return the original from suggestions
 			}
 		}
-		return null; // not found, invalid!
+		return null
+	},
+
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.validate
+	 */
+	validate: function( value ) {
+		return this.getRestulSetMatch( value );
+	},
+
+	/**
+	 * Takes the value and checks whether it is in the list of current suggestions (case-insensitive) and returns the
+	 * value in the normalized form from the list.
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.normalize
+	 *
+	 * @param string value string to be normalized
+	 * @return string|null actual string found within the result set or null for invalid values
+	 */
+	normalize: function( value ) {
+		if(    this.isInEditMode()
+			&& this.getInitialValue() !== ''
+			&& this.getInitialValue() === $.trim( value ).toLowerCase()
+		) {
+			// in edit mode, return initial value if there was one and it matches
+			// this catches the case where _currentResults still is empty but normalization is required
+			return this.getInitialValue();
+		}
+
+		// check against list:
+		return this._normalize_fromCurrentResults( value );
+	},
+
+	/**
+	 * Checks whether the value is in the list of current suggestions (case-insensitive)
+	 *
+	 * @param value string
+	 * @return string|null
+	 */
+	_normalize_fromCurrentResults: function( value ) {
+		var match = this.getRestulSetMatch( value )
+		return ( match === null )
+			? value // not found, return string "unnormalized" but don't return null since it could still be valid!
+			: match
 	},
 
 	_disableInputElement: function() {

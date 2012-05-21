@@ -186,26 +186,42 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 * @return string|null siteId or null if no valid selection has been made yet.
 	 */
 	getSelectedSiteId: function() {
-		var value = this.getValue();
-		return this.normalize( value );
+		var id = this.getValue();
+		if( id === '' ) {
+			return null
+		}
+		return id;
+	},
+
+	/**
+	 * Returns the current value
+	 *
+	 * @return string
+	 */
+	getValue: function() {
+		var value = window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.getValue.call( this );
+		value = this.normalize( value ); // return id instead of actual value...
+		return value ? value : ''; // ... but make sure this won't be null!
 	},
 
 	_setValue_inNonEditMode: function( value ) {
 		// the actual value is the site id, displayed value though should be the whole site name and id in parentheses.
 		var site = wikibase.getSite( value );
-		value = site.getShortName() + ' (' + site.getId() + ')';
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._setValue_inNonEditMode.call( this, value );
+		if( site !== null ) {
+			// site is null in case it was initialized empty and destroy() is called... so we just handle this
+			value = site.getShortName() + ' (' + site.getId() + ')';
+		}
+		return window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._setValue_inNonEditMode.call( this, value );
 	},
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.normalize
-	 *
-	 * Will return the site ID if any of the site names is given.
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.getRestulSetMatch
 	 *
 	 * @todo: might be nice to move this into wikibase.Site.getIdByString() or something.
 	 */
-	normalize: function( value ) {
-		value = $.trim( value ).toLowerCase(); // case-insensitive
+	getRestulSetMatch: function( value ) {
+		// trim and lower...
+		value = $.trim( value ).toLowerCase();
 
 		for( var i in this._currentResults ) {
 			var currentItem = this._currentResults[i];
@@ -213,11 +229,27 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				|| value == currentItem.site.getShortName().toLowerCase()
 				|| value == currentItem.value.toLowerCase()
 				|| value == currentItem.label.toLowerCase()
-			) {
+				) {
 				return currentItem.site.getId();
 			}
 		}
-		return null;
+		return null; // not found, invalid!
+	},
+
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.validate
+	 */
+	validate: function( value ) {
+		return this.normalize( value ) !== null;
+	},
+
+	/**
+	 * @see window.wikibase.ui.PropertyEditTool.EditableValue._normalize_fromCurrentResults
+	 *
+	 * Will return the site ID if any of the site names is given.
+	 */
+	_normalize_fromCurrentResults: function( value ) {
+		return this.getRestulSetMatch( value ); // null in case it doesn't exist!
 	},
 	
 	/////////////////

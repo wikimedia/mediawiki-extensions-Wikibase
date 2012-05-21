@@ -18,11 +18,11 @@
 
 		var classes = [ 'a11a', 'bbb', 'c333', 'dddd', 'e', '6', '7' ];
 		var subject = $( '<div/>', {
-			'class': classes.join( ' ' )
+			'class': classes.join( '   ' ) // should also work with more than one space
 		} );
 
 		equal(
-			subject.attr( 'class' ).split( ' ' ).length,
+			subject.attr( 'class' ).split( /\s+/ ).length,
 			classes.length,
 			'number of classes ok'
 		);

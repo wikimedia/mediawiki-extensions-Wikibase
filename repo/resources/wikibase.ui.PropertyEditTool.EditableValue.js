@@ -298,14 +298,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		if( ! save && this.isPending() ) {
 			// cancel pending edit...
-			this._reTransform( save );
+			this._reTransform( false );
 			this.remove(); // not yet existing value, no state to go back to
 			return false; // do not call onAfterStopEditing() here!
 		}
 
 		if( ! save ) {
 			//cancel...
-			var wasPending = this._reTransform( save );
+			var wasPending = this._reTransform( false );
 
 			if( this.onAfterStopEditing !== null && this.onAfterStopEditing( save, wasPending ) === false ) { // callback
 				return false; // cancel

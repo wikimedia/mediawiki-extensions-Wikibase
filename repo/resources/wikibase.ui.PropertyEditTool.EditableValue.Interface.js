@@ -101,7 +101,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		if( this.isInEditMode() || !this.isActive() ) {
 			return false;
 		}
-		
+
 		// initializes the input element into the DOM and removes the html representation
 		this._initInputElement();
 
@@ -124,7 +124,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			// disable element properly if disabled from before edit mode
 			this._disableInputElement();
 		}
-		
+
 		// store original text value from before input box insertion:
 		this._inputElem.data( this.UI_CLASS + '-initial-value', this.getValue() );
 		
@@ -245,18 +245,26 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		}
 		var initialValue = this.getInitialValue();
 		
-		var $value = save ? this.getValue() : initialValue;
+		var value = save ? this.getValue() : initialValue;
 		
 		this._inputElem.empty().remove(); // remove input interface
 		this._inputElem = null;
 		
 		this._isInEditMode = false;
-		this.setValue( $value );
+
+		// save but don't use setValue(), in case we cancelled, we don't want further normalization
+		var fireEvent = this.isInEditMode()
+			? this._setValue_inEditMode( value )
+			: this._setValue_inNonEditMode( value );
+
+		if( fireEvent !== false ) {
+			this._onInputRegistered(); // new input
+		}
 
 		$( this ).trigger( 'afterStopEditing' );
 
 		// any change at all compared to initial value?
-		return initialValue !== $value;
+		return initialValue !== value;
 	},
 
 	/**
@@ -298,10 +306,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			value = this.normalize( value );
 		} else {
 			value = this._getValueContainer().text();
-			// if already set, the value should be normalized already
+			// if already set, the value should be normalized already.
+			// if this is not the case in another inheriting interface, change it there BUT NOT HERE!
 		}
-		// normalize in case we display a different variation from the actual normalized value
-		return this.normalize( value );
+		return value === null ? '' : value; // don't allow this to be null!
 	},
 	
 	/**
@@ -323,30 +331,36 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			return value;
 		}
 		
-		if( this.isInEditMode() ) {
-			this._setValue_inEditMode( value );
-		} else {
-			this._setValue_inNonEditMode( value );
-		}
+		var fireEvent = this.isInEditMode()
+			? this._setValue_inEditMode( value )
+			: this._setValue_inNonEditMode( value );
 
-		this._onInputRegistered(); // new input
+		if( fireEvent !== false ) {
+			this._onInputRegistered(); // new input
+		}
 		return value;
 	},
 
 	/**
 	 * Called by setValue() if the value has to be injected into the input interface in edit mode.
+	 *
+	 * @param string value
+	 * @return bool whether the value has been changed
 	 */
 	_setValue_inEditMode: function( value ) {
 		this._inputElem.attr( 'value', value );
+		return true;
 	},
 
 	/**
 	 * Called by setValue() if the value has to be injected into the static DOM nodes, not into input elements.
-	 * @param value
-	 * @private
+
+	 * @param string value
+	 * @return bool whether the value has been changed
 	 */
 	_setValue_inNonEditMode: function( value ) {
 		this._getValueContainer().text( value );
+		return true;
 	},
 	
 	/**
@@ -427,7 +441,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
 	 * If its not in edit mode, the current value will be returned.
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	getInitialValue: function() {
 		if( ! this.isInEditMode() ) {
@@ -462,7 +476,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 */
 	validate: function( value ) {
 		var normalized = this.normalize( value );
-		return  typeof( value ) == 'string' && normalized !== '';
+		return  typeof( value ) == 'string' && normalized !== null && normalized !== '';
 	},
 
 	/////////////////

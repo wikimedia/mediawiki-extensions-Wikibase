@@ -79,7 +79,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 		this._getValueContainer()
 		.empty()
 		.append( // insert link to site in site
-			this._site.getLinkTo( value )
+			this._site && value !== '' ? this._site.getLinkTo( value ) : ''
 		);
+		return true;
 	}
 } );
