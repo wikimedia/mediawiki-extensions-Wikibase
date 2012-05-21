@@ -91,10 +91,10 @@ class ListDiffTest extends \MediaWikiTestCase {
 	public function testNewFromArrays( array $from, array $to, array $additions, array $removals ) {
 		$diff = ListDiff::newFromArrays( $from, $to );
 
-		$this->assertInstanceOf( 'ListDiff', $diff );
-		$this->assertInstanceOf( 'IDiffOp', $diff );
-		$this->assertInstanceOf( 'IDiff', $diff );
-		$this->assertInstanceOf( 'ArrayIterator', $diff );
+		$this->assertInstanceOf( '\Wikibase\ListDiff', $diff );
+		$this->assertInstanceOf( '\Wikibase\IDiffOp', $diff );
+		$this->assertInstanceOf( '\Wikibase\IDiff', $diff );
+		$this->assertInstanceOf( '\ArrayIterator', $diff );
 
 		// array_values because we only care about the values, not promises are made about the keys.
 		$resultAdditions = array_values( $diff->getAddedValues() );

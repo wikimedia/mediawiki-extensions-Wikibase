@@ -12,7 +12,7 @@ interface IDiff {
 
 }
 
-class DiffOpList extends \ArrayIterator implements IDiff {
+class Diff extends \ArrayIterator implements IDiff {
 
 	protected $parentKey;
 

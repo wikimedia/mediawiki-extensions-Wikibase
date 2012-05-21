@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListDiff extends DiffOpList implements IDiffOp {
+class ListDiff extends Diff implements IDiffOp {
 
 	public function getType() {
 		return 'list';

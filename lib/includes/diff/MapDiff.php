@@ -3,7 +3,7 @@
 namespace Wikibase;
 use MWException;
 
-class MapDiff extends DiffOpList implements IDiffOp {
+class MapDiff extends Diff implements IDiffOp {
 
 	public function getType() {
 		return 'map';
