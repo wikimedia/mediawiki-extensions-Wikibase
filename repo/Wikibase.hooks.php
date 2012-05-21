@@ -126,6 +126,7 @@ final class WikibaseHooks {
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
+				'wikibase.utilities.jQuery',
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool'
 			),
