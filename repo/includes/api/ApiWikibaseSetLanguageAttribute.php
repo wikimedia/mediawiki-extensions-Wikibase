@@ -56,25 +56,27 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		//$labels = $item->getLabels();
-		//$descriptions = $item->getDescriptions();
 		$success = false;
 		
 		$res = $this->getResult();
 		$language = $params['language'];
-		$arr = array();
+		$res->addValue( null, 'item', array() );
 		
 		if (isset($params['label'])) {
-			$arr['labels'] = array( $language => $item->setLabel( $language, $params['label'] ) );
-			//$res->setIndexedTagName( $arr['labels'], 'label' );
+			$res->addValue(
+				'item',
+				'labels',
+				$this->stripKeys( $params, array( $language => $item->setLabel( $language, $params['label'] ) ), 'l' )
+			);
 		}
 		
 		if (isset($params['description'])) {
-			$arr['descriptions'] = array( $language => $item->setDescription( $language, $params['description'] ) );
-			//$res->setIndexedTagName( $arr['descriptions'], 'description' );
+			$res->addValue(
+				'item',
+				'descritions',
+				$this->stripKeys( $params, array( $language => $item->setDescription( $language, $params['description'] ) ), 'd' )
+			);
 		}
-		
-		$res->addValue( null, 'item', $arr );
 		
 		$success = true;
 		

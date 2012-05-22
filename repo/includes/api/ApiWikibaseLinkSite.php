@@ -46,17 +46,16 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 		}
 		else {
 			$res = $this->getResult();
-			$arr = array();
-			if ( WBSettings::get( 'apiPreconditionSiteLink' ) ) {
+			if ( false && WBSettings::get( 'apiPreconditionSiteLink' ) ) {
 				$exist = WikibaseItem::getIdForSiteLink( $params['linksite'], $params['linktitle'] );
 				if ($exist) {
 					$this->dieUsage( wfMsg( 'wikibase-api-link-exists' ), 'link-exists' );
 				}
 			}
-			
+			//print_r($params);
 			$ret = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
 			
-			if ( WBSettings::get( 'apiPostconditionSiteLink' ) ) {
+			if ( false && WBSettings::get( 'apiPostconditionSiteLink' ) ) {
 				if ($ret === false) {
 					$page = $item->getWikiPage();
 					// TODO: here we should do rollback of a single edit of the WikiPage
@@ -65,26 +64,26 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 				}
 			}
 			
-			if ( $arr !== false ) {
-				$ret = $this->stripKeys( $params, $ret, 'sl' );
+			if ( $ret !== false ) {
 				$normalized = array();
-				if ( $params['linksite'] !== $arr['site'] ) {
-					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $arr['site'] );
+				if ( $params['linksite'] !== $ret['site'] ) {
+					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $ret['site'] );
 				}
-				if ( $params['linktitle'] !== $arr['title'] ) {
-					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $arr['title'] );
+				if ( $params['linktitle'] !== $ret['title'] ) {
+					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $ret['title'] );
 				}
 				if ( count($normalized) ) {
-					$this->getResult()->addValue(
+					$res->addValue(
 						'item',
 						'normalized',
 						$normalized
 					);
 				}
-				$this->getResult()->addValue(
+				
+				$res->addValue(
 					'item',
 					'sitelinks',
-					$ret
+					$this->stripKeys( $params, array( $ret['site'] => $ret ), 'sl' )
 				);
 			}
 

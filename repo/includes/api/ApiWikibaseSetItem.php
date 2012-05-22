@@ -111,31 +111,44 @@ class ApiWikibaseSetItem extends ApiWikibase {
 		
 		// because this is serialized and cleansed we can simply go for known values
 		$res = $this->getResult();
-		$arr = array();
-		
-		$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks(), 'sl' );
-		if (count($sitelinks)) {
-			$arr['sitelinks'] = $sitelinks;
-			//$res->setIndexedTagName( $arr['sitelinks'], 'sitelink' );
-		}
-		$descriptions = $this->stripKeys( $params, $item->getRawDescriptions() );
-		if (count($descriptions)) {
-			$arr['descriptions'] = $descriptions;
-			//$res->setIndexedTagName( $arr['descriptions'], 'description' );
-		}
-		$labels = $this->stripKeys( $params, $item->getRawLabels() );
-		if (count($labels)) {
-			$arr['labels'] = $labels;
-			//$res->setIndexedTagName( $arr['labels'], 'label' );
-		}
-		$this->getResult()->addValue(
+		$res->addValue(
 			null,
 			'item',
-			$arr
+			array()
 		);
 		
-		$arr['id'] = $item->getId();
-		$res->addValue( null, 'item', $arr );
+		$sitelinks = $item->getRawSiteLinks();
+		if (count($sitelinks)) {
+			$res->addValue(
+				'item',
+				'sitelinks',
+				$this->stripKeys( $params, $sitelinks, 'sitelink' )
+			);
+		}
+		
+		$descriptions = $item->getRawDescriptions();
+		if (count($descriptions)) {
+			$res->addValue(
+				'item',
+				'descriptions',
+				$this->stripKeys( $params, $descriptions, 'd' )
+			); 
+		}
+		
+		$labels = $item->getRawLabels();
+		if (count($labels)) {
+			$res->addValue(
+				'item',
+				'labels',
+				$this->stripKeys( $params, $labels, 'l' )
+			); 
+		}
+		
+		$res->addValue(
+			'item',
+			'id',
+			$item->getId()
+		);
 		
 		$res->addValue(
 			null,
