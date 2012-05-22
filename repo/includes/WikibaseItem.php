@@ -353,8 +353,8 @@ class WikibaseItem extends WikibaseEntity {
 	 * 
 	 * @param string|array $languages note that an empty array removes descriptions for no languages while a null pointer removes all
 	 */
-	public function removeDescription( $language ) {
-		$this->removeMultilangTexts( 'description', array($language) );
+	public function removeDescription( $languages = array() ) {
+		$this->removeMultilangTexts( 'description', (array)$languages );
 	}
 
 	/**
