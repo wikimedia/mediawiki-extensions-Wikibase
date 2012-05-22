@@ -103,7 +103,7 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 				);
 			}
 			catch (UsageException $e) {
-				$this->assertTrue(true, "Make phpunit happy");
+				$this->assertEquals( 'no-token', $e->getCodeString(), "The correct error code is not found, yet an exception is thrown");
 				return;
 			}
 			$this->assertTrue(false, "Make phpunit happy");
