@@ -12,7 +12,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetSiteLinks extends ApiBase {
+class ApiWikibaseGetSiteLinks extends ApiWikibase {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );

@@ -84,7 +84,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 				$this->getResult()->addValue(
 					'item',
 					'sitelinks',
-					$ret )
+					$ret
 				);
 			}
 
