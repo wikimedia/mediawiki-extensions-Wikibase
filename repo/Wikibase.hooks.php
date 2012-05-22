@@ -51,15 +51,22 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
 
+		$files[] = $testDir . 'WikibaseEntityTests.php';
+		$files[] = $testDir . 'WikibaseItemViewTests.php';
+		$files[] = $testDir . 'WikibaseSiteTests.php';
+		$files[] = $testDir . 'WikibaseUtilsTests.php';
+
+		// api
+		$files[] = $testDir . 'api/ApiWikibaseTests.php';
+		$files[] = $testDir . 'api/ApiWikibaseModifyItemTest.php';
+		$files[] = $testDir . 'api/ApiWikibaseSetAliasesTest.php';
+
+		// wikibaseitem
 		$files[] = $testDir . 'WikibaseItem/WikibaseItemTests.php';
 		$files[] = $testDir . 'WikibaseItem/WikibaseItemMoveTests.php';
 		$files[] = $testDir . 'WikibaseItem/WikibaseItemNewEmptyTests.php';
 		$files[] = $testDir . 'WikibaseItem/WikibaseItemNewFromArrayTests.php';
 		$files[] = $testDir . 'WikibaseItem/WikibaseItemContentHandlerTests.php';
-
-		$files[] = $testDir . 'api/ApiWikibaseTests.php';
-		$files[] = $testDir . 'api/ApiWikibaseModifyItemTest.php';
-		$files[] = $testDir . 'api/ApiWikibaseSetAliasesTest.php';
 
 		return true;
 	}
