@@ -37,6 +37,9 @@ abstract class ApiWikibase extends ApiBase {
 				case 'rawfm':
 					$params['usekeys'] = true;
 					break;
+				default:
+					$params['usekeys'] = false;
+					break;
 			}
 		}
 		if (!$usekeys) {

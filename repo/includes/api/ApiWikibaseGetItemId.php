@@ -108,9 +108,9 @@ class ApiWikibaseGetItemId extends ApiWikibase {
 	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
 	 */
 	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
+		return array(
 			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
-		) );
+		);
 	}
 
 	/**

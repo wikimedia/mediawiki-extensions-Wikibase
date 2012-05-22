@@ -54,7 +54,7 @@ class ApiWikibaseGetItems extends ApiWikibase {
 			}
 		}
 
-		$languages = $params['language'];
+		$languages = $params['languages'];
 		
 /*		$this->getResult()->addValue(
 			null,
@@ -83,11 +83,11 @@ class ApiWikibaseGetItems extends ApiWikibase {
 				if (count($sitelinks)) {
 					$arr['sitelinks'] = $sitelinks;
 				}
-				$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( $languages ), 'd' );
+				$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( (array)$languages ), 'd' );
 				if (count($descriptions)) {
 					$arr['descriptions'] = $descriptions;
 				}
-				$labels = $this->stripKeys( $params, $item->getRawLabels( $languages ), 'l' );
+				$labels = $this->stripKeys( $params, $item->getRawLabels( (array)$languages ), 'l' );
 				if (count($labels)) {
 					$arr['labels'] = $labels;
 				}
@@ -133,7 +133,7 @@ class ApiWikibaseGetItems extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 			),
-			'language' => array(
+			'languages' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
@@ -149,7 +149,7 @@ class ApiWikibaseGetItems extends ApiWikibase {
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
 			'ids' => 'The IDs of the items to get the data from',
-			'language' => 'By default the internationalized values are returned in all available languages.
+			'languages' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
 			'titles' => array( 'The title of the corresponding page',
 				"Use together with 'sites', but only give one site for several titles or several sites for one title."
@@ -191,9 +191,9 @@ class ApiWikibaseGetItems extends ApiWikibase {
 			'api.php?action=wbgetitems&ids=42'
 			=> 'Get item number 42 with language attributes in all available languages',
 			'api.php?action=wbgetitems&ids=42&language=en'
-			=> 'Get item number 42 with language attributes in english language',
+			=> 'Get item number 42 with language attributes in English language',
 			'api.php?action=wbgetitems&sites=en&titles=Berlin&language=en'
-			=> 'Get the item for page "Berlin" on the site "en", with language attributes in english language',
+			=> 'Get the item for page "Berlin" on the site "en", with language attributes in English language',
 		);
 	}
 

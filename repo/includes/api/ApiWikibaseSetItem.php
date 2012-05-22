@@ -107,7 +107,7 @@ class ApiWikibaseSetItem extends ApiWikibase {
 			//$params['summary'] = 'dummy';
 		//}
 
-		//$languages = $params['language'];
+		$languages = $params['languages'];
 		
 		// because this is serialized and cleansed we can simply go for known values
 		$res = $this->getResult();
@@ -126,7 +126,7 @@ class ApiWikibaseSetItem extends ApiWikibase {
 			);
 		}
 		
-		$descriptions = $item->getRawDescriptions();
+		$descriptions = $item->getRawDescriptions( (array)$languages );
 		if (count($descriptions)) {
 			$res->addValue(
 				'item',
@@ -135,7 +135,7 @@ class ApiWikibaseSetItem extends ApiWikibase {
 			); 
 		}
 		
-		$labels = $item->getRawLabels();
+		$labels = $item->getRawLabels( (array)$languages );
 		if (count($labels)) {
 			$res->addValue(
 				'item',
@@ -208,6 +208,10 @@ class ApiWikibaseSetItem extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'string',
 				//ApiBase::PARAM_REQUIRED => true,
 			),
+			'languages' => array(
+				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_REQUIRED => true,
+			),
 			//'summary' => array(
 			//	ApiBase::PARAM_TYPE => 'string',
 			//	ApiBase::PARAM_DFLT => __CLASS__, // TODO
@@ -232,6 +236,7 @@ class ApiWikibaseSetItem extends ApiWikibase {
 			'data' => array( 'The serialized object that is used as the data source.',
 				"The newly created item will be assigned an item 'id'."
 			),
+			'languages' => 'Language for the labels and descriptions',
 			'item' => array( 'Indicates if you are changing the content of the item.',
 				"add - the item should not exist before the call or an error will be reported.",
 				"update - the item shuld exist before the call or an error will be reported.",
@@ -259,8 +264,8 @@ class ApiWikibaseSetItem extends ApiWikibase {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetitem&data={}&format=xmlfm'
-			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed. Report it as pretty printed xml format.',
+			'api.php?action=wbsetitem&data={}&format=jsonfm'
+			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed. Report it as pretty printed json format.',
 			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
 			=> 'Set a more complete JSON structure for the item, it will be extended with an item id and the structure cleansed and completed.',
 		);

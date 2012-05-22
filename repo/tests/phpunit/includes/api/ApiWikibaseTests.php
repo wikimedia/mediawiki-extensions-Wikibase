@@ -554,7 +554,6 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 			'usekeys' => '',
 			'language' => $language,
 		) );
-		//print_r($second);
 		
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the result in the second call to the API" );

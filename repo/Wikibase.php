@@ -72,7 +72,6 @@ $wgGroupPermissions['*']['lang-attr-add']		= true;
 $wgGroupPermissions['*']['lang-attr-update']	= true;
 $wgGroupPermissions['*']['lang-attr-set']		= true;
 $wgGroupPermissions['*']['lang-attr-remove']	= true;
->>>>>>> e0e92ea... Squashed commit of the following:
 
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
@@ -309,8 +308,3 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
 
 $egWBSettings = array();
-
-$egWBSettings['apiDebugWithWrite'] = true;
-$egWBSettings['apiDebugWithPost'] = true;
-
-$egWBSettings['apiDebugWithRights'] = true;

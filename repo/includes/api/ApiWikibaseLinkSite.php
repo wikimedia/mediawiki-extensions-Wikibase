@@ -46,23 +46,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 		}
 		else {
 			$res = $this->getResult();
-			if ( false && WBSettings::get( 'apiPreconditionSiteLink' ) ) {
-				$exist = WikibaseItem::getIdForSiteLink( $params['linksite'], $params['linktitle'] );
-				if ($exist) {
-					$this->dieUsage( wfMsg( 'wikibase-api-link-exists' ), 'link-exists' );
-				}
-			}
-			//print_r($params);
 			$ret = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
-			
-			if ( false && WBSettings::get( 'apiPostconditionSiteLink' ) ) {
-				if ($ret === false) {
-					$page = $item->getWikiPage();
-					// TODO: here we should do rollback of a single edit of the WikiPage
-					// we also need to check that this in fact something we can rollback
-					$this->dieUsage( wfMsg( 'wikibase-api-database-error' ), 'database-error' );
-				}
-			}
 			
 			if ( $ret !== false ) {
 				$normalized = array();
@@ -125,7 +109,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'link' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
+				ApiBase::PARAM_TYPE => array( 'add', /*'update', 'set',*/ 'remove' ),
 				ApiBase::PARAM_DFLT => 'add',
 			),
 		) );
@@ -144,8 +128,8 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			'linkbadge' => 'Badge to give to the page, ie "good" or "featured"',
 			'link' => array( 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist.',
 				"add - the link should not exist before the call or an error will be reported.",
-				"update - the link shuld exist before the call or an error will be reported.",
-				"set - the link could exist or not before the call.",
+				//"update - the link shuld exist before the call or an error will be reported.",
+				//"set - the link could exist or not before the call.",
 				"remove - the link is removed if its found."
 			)
 		) );

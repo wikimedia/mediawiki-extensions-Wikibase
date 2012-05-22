@@ -113,7 +113,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
-			'language' => 'Language the description is in',
+			'language' => 'Language for the label and description',
 			'label' => 'The value to set for the label',
 			'description' => 'The value to set for the description',
 		) );

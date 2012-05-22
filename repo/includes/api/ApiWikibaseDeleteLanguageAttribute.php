@@ -41,8 +41,8 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
 		$language = $params['language'];
-		$labels = $item->getLabels( array( $language ) );
-		$descriptions = $item->getDescriptions( array( $language ) );
+		$labels = $item->getLabels( (array)$language );
+		$descriptions = $item->getDescriptions( (array)$language );
 		
 		$success = false;
 		
@@ -129,7 +129,7 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 			array( 'code' => 'label-not-found', 'info' => wfMsg( 'wikibase-api-label-not-found' ) ),
 			array( 'code' => 'description-not-found', 'info' =>  wfMsg( 'wikibase-api-description-not-found' ) ),
 			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
-			) );
+		) );
 	}
 
 	/**
