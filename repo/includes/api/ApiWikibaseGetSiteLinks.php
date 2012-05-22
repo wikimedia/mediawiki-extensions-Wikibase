@@ -12,7 +12,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetSiteLinks extends ApiBase {
+class ApiWikibaseGetSiteLinks extends ApiWikibase {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -45,13 +45,27 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 		if ( $page->exists() ) {
 			// as long as getWikiPageForId only returns ids for legal items this holds
 			$item = $page->getContent();
-			$this->getResult()->addValue(
-				null,
+			if (is_null() ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+			}
+			if ( !( $item instanceof WikibaseItem ) ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
+			}
+			$res = $this->getResult();
+			$res->addValue( null, 'item', array() );
+			
+			$sitelinks = $item->getRawSiteLinks();
+			if (count($sitelinks)) {
+				$res->addValue(
+					'item',
+					'sitelinks',
+					$this->stripKeys( $params, $sitelinks, 'sl' )
+				);
+			}
+			$res->addValue(
 				'item',
-				array(
-				 	'id' => $params['id'],
-					'sitelinks' => $item->getRawSiteLinks(),
-				)
+				'id',
+				$item->getId()
 			);
 		}
 		else {
@@ -76,7 +90,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
@@ -86,7 +100,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-		);
+		) );
 	}
 
 	/**
@@ -96,7 +110,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'id' => 'The ID of the item to get the data from',
 			'title' => array( 'The title of the corresponding page',
 				"Use together with 'site'."
@@ -104,7 +118,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 			'site' => array( 'Identifier for the site on which the corresponding page resides',
 				"Use together with 'title'."
 			),
-		);
+		) );
 	}
 
 	/**
@@ -123,6 +137,7 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
 			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
 			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
@@ -136,9 +151,9 @@ class ApiWikibaseGetSiteLinks extends ApiBase {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbgetsitelinks&id=42'
-			=> 'Get item number 42',
+			=> 'Get item number "42" and report the sitelinks',
 			'api.php?action=wbgesitelinks&site=en&title=Berlin'
-			=> 'Get the item associated to page Berlin on the site identified by "en"',
+			=> 'Get the item associated to page "Berlin" on the site identified by "en" and report the sitelinks',
 		);
 	}
 

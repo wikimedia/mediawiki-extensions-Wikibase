@@ -84,6 +84,10 @@ $messages['en'] = array(
 	'wikibase-api-label-or-description' => '!!FUZZY!! Use either or both of "label" and "description".',
 	'wikibase-api-label-not-found' => '!!FUZZY!! Can not find a previous label for this language in the item.',
 	'wikibase-api-description-not-found' => '!!FUZZY!! Can not find a previous description for this language in the item.',
+	'wikibase-api-wrong-class' => '!!FUZZY!! The content on the found page is not of correct type.', //'wikibase-api-invalid-contentmodel'
+
+	//content model names
+	'content-model-1001' => 'Wikibase item',
 );
 
 /** Message documentation (Message documentation)

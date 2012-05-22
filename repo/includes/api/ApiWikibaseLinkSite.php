@@ -45,34 +45,49 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			$arr = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
-			if ( $arr !== false ) {
-				$normalized = array();
-				if ( $params['linksite'] !== $arr['site'] ) {
-					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $arr['site'] );
+			$res = $this->getResult();
+			if ( false && WBSettings::get( 'apiPreconditionSiteLink' ) ) {
+				$exist = WikibaseItem::getIdForSiteLink( $params['linksite'], $params['linktitle'] );
+				if ($exist) {
+					$this->dieUsage( wfMsg( 'wikibase-api-link-exists' ), 'link-exists' );
 				}
-				if ( $params['linktitle'] !== $arr['title'] ) {
-					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $arr['title'] );
+			}
+			//print_r($params);
+			$ret = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
+			
+			if ( false && WBSettings::get( 'apiPostconditionSiteLink' ) ) {
+				if ($ret === false) {
+					$page = $item->getWikiPage();
+					// TODO: here we should do rollback of a single edit of the WikiPage
+					// we also need to check that this in fact something we can rollback
+					$this->dieUsage( wfMsg( 'wikibase-api-database-error' ), 'database-error' );
+				}
+			}
+			
+			if ( $ret !== false ) {
+				$normalized = array();
+				if ( $params['linksite'] !== $ret['site'] ) {
+					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $ret['site'] );
+				}
+				if ( $params['linktitle'] !== $ret['title'] ) {
+					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $ret['title'] );
 				}
 				if ( count($normalized) ) {
-					$this->getResult()->addValue(
+					$res->addValue(
 						'item',
 						'normalized',
 						$normalized
 					);
 				}
-				$this->getResult()->addValue(
+				
+				$res->addValue(
 					'item',
 					'sitelinks',
-					array( $params['linksite'] => $arr )
+					$this->stripKeys( $params, array( $ret['site'] => $ret ), 'sl' )
 				);
 			}
-//				$this->getResult()->addValue(
-//					null,
-//					'res',
-//					$arr !== false
-//				);
-			return $arr !== false;
+
+			return $ret !== false;
 		}
 	}
 
@@ -82,8 +97,8 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			// is this in use?
 			array( 'code' => 'link-exists', 'info' => wfMsg( 'wikibase-api-link-exists' ) ),
+			array( 'code' => 'database-error', 'info' => wfMsg( 'wikibase-api-database-error' ) ),
 		) );
 	}
 
@@ -98,7 +113,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 		$allowedParams = parent::getAllowedParams();
 		$allowedParams['item'][ApiBase::PARAM_DFLT] = 'set';
 		return array_merge( $allowedParams, array(
-			'badge' => array(
+			'linkbadge' => array(
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
 			'linksite' => array(
@@ -126,7 +141,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 		return array_merge( parent::getParamDescription(), array(
 			'linksite' => 'The identifier of the site on which the article to link resides',
 			'linktitle' => 'The title of the article to link',
-			'badge' => 'Badge to give to the page, ie "good" or "featured"',
+			'linkbadge' => 'Badge to give to the page, ie "good" or "featured"',
 			'link' => array( 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist.',
 				"add - the link should not exist before the call or an error will be reported.",
 				"update - the link shuld exist before the call or an error will be reported.",
@@ -152,14 +167,14 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wblinksite&id=42&site=en&title=Wikimedia'
-			=> 'Set title "Wikimedia" for English page with id "42"',
-			'api.php?action=wblinksite&id=42&site=en&title=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
-			=> 'Set title "Wikimedia" for English page with id "42" with an edit summary',
-			'api.php?action=wblinksite&id=42&site=en&title=Wikimedia&badge='
-			=> 'Set title "Wikimedia" for English page with id "42" and with a badge',
-			'api.php?action=wblinksite&id=42&site=en&title=Wikimedia'
-			=> 'Set title "Wikimedia" for English page with id "42"',
+			'api.php?action=wblinksite&id=42&linksite=en&linktitle=Wikimedia'
+			=> 'Add title "Wikimedia" for English page with id "42" if the link does not exist',
+			'api.php?action=wblinksite&id=42&linksite=en&linktitle=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
+			=> 'Add title "Wikimedia" for English page with id "42" with an edit summary if the link does not exist',
+			'api.php?action=wblinksite&id=42&linksite=en&linktitle=Wikimedia&linkbadge='
+			=> 'Add title "Wikimedia" for English page with id "42", and with a badge, if the link does not exist',
+			'api.php?action=wblinksite&id=42&linksite=en&linktitle=Wikimedia&link=update'
+			=> 'Updates title "Wikimedia" for English page with id "42" if the link exist',
 		);
 	}
 
