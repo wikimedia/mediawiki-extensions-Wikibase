@@ -69,9 +69,6 @@ class WikibaseViewItemAction extends FormlessAction {
 			}
 			
 			$out->addJsConfigVars( 'wbSiteDetails', $sites );
-
-			// retrieve edit token
-			$out->addJsConfigVars( 'wbEditToken', $this->getUser()->getEditToken() );
 		}
 
 		return '';

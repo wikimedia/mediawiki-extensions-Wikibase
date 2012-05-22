@@ -163,7 +163,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			id: window.mw.config.get( 'wbItemId' ),
 			linksite: siteId,
 			linktitle: linkValues[1],
-			token: window.mw.config.get( 'wbEditToken' )
+			token: mw.user.tokens.get( 'editToken' )
 		};
 		if( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) {
 			return $.extend( params, { link: 'remove' } );

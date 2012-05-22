@@ -50,7 +50,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 			description: this.getValue().toString(),
 			id: window.mw.config.get( 'wbItemId' ),
 			item: 'set',
-			token: window.mw.config.get( 'wbEditToken' )
+			token: mw.user.tokens.get( 'editToken' )
 		};
 	}
 } );
