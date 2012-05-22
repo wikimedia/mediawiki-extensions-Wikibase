@@ -56,73 +56,33 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( WikibaseItem &$item, array $params ) {
-		$languages = WikibaseUtils::getLanguageCodes();
-		$labels = $item->getLabels();
-		$descriptions = $item->getDescriptions();
 		$success = false;
-		// inserted fixed code
+		
+		$res = $this->getResult();
+		$language = $params['language'];
+		$res->addValue( null, 'item', array() );
 		
 		if (isset($params['label'])) {
-			$this->setItemLabel( $item, $params['language'], $params['label'] );
+			$res->addValue(
+				'item',
+				'labels',
+				$this->stripKeys( $params, array( $language => $item->setLabel( $language, $params['label'] ) ), 'l' )
+			);
 		}
+		
 		if (isset($params['description'])) {
-			$this->setItemDescription( $item, $params['language'], $params['description'] );
+			$res->addValue(
+				'item',
+				'descritions',
+				$this->stripKeys( $params, array( $language => $item->setDescription( $language, $params['description'] ) ), 'd' )
+			);
 		}
+		
 		$success = true;
 		
 		return $success;
 	}
 	
-	/**
-	 * Sets the label in the item and reports the new value.
-	 * This method does not handle a label in multiple languages.
-	 * 
-	 * @param WikibaseItem $item
-	 * @param string $language
-	 * @param string $label
-	 */
-	protected function setItemLabel( WikibaseItem &$item, $language, $label ) {
-		$arr = $item->setLabel( $language, $label );
-		if ( isset($arr['value']) && $label !== $arr['value'] ) {
-			$this->getResult()->addValue(
-				null,
-				'normalized',
-				array( array( 'from' => $label, 'to' => $arr['value'] ) )
-			);
-		}
-		$this->getResult()->addValue(
-			'item',
-			'labels',
-			array( $language => $arr )
-		);
-		return ;
-	}
-	
-	/**
-	 * Sets the description in the item and reports the new value.
-	 * This method does not handle a description in multiple languages.
-	 * 
-	 * @param WikibaseItem $item
-	 * @param string $language
-	 * @param string $description
-	 */
-	protected function setItemDescription( WikibaseItem &$item, $language, $description ) {
-		$arr = $item->setDescription( $language, $description );
-		if ( isset($arr['value']) && $description !== $arr['value'] ) {
-			$this->getResult()->addValue(
-				null,
-				'normalized',
-				array( 'from' => $description, 'to' => $arr['value'] )
-			);
-		}
-		$this->getResult()->addValue(
-			'item',
-			'descriptions',
-			array( $language => $arr )
-		);
-		return ;
-	}
-
 	/**
 	 * Returns an array of allowed parameters (parameter name) => (default
 	 * value) or (parameter name) => (array with PARAM_* constants as keys)
@@ -153,7 +113,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
-			'language' => 'Language the description is in',
+			'language' => 'Language for the label and description',
 			'label' => 'The value to set for the label',
 			'description' => 'The value to set for the description',
 		) );
@@ -185,8 +145,8 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetlanguageattribute&id=42&language=en&label=Wikimedia'
-				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language',
+			'api.php?action=wbsetlanguageattribute&id=42&language=en&label=Wikimedia&format=jsonfm'
+				=> 'Set the string "Wikimedia" for page with id "42" as a label in English language and report it as pretty printed json',
 			'api.php?action=wbsetlanguageattribute&id=42&language=en&description=An%20encyclopedia%20that%20everyone%20can%20edit'
 				=> 'Set the string "An encyclopedia that everyone can edit" for page with id "42" as a decription in English language',
 			'api.php?action=wbsetlanguageattribute&id=42&language=en&label=Wikimedia&description=An%20encyclopedia%20that%20everyone%20can%20edit'

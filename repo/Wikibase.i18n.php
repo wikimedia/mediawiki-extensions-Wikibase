@@ -84,6 +84,10 @@ $messages['en'] = array(
 	'wikibase-api-label-or-description' => '!!FUZZY!! Use either or both of "label" and "description".',
 	'wikibase-api-label-not-found' => '!!FUZZY!! Can not find a previous label for this language in the item.',
 	'wikibase-api-description-not-found' => '!!FUZZY!! Can not find a previous description for this language in the item.',
+	'wikibase-api-wrong-class' => '!!FUZZY!! The content on the found page is not of correct type.', //'wikibase-api-invalid-contentmodel'
+
+	//content model names
+	'content-model-1001' => 'Wikibase item',
 );
 
 /** Message documentation (Message documentation)
@@ -169,6 +173,16 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-remove-timeout' => 'Error message for an error happening during a remove operation. The error was caused by a request time out.',
 	'wikibase-error-autocomplete-connection' => 'Error message for page auto-complete input box; displayed when API could not be reached.',
 	'wikibase-error-autocomplete-response' => 'When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).',
+
+	'wikibase-api-aliases-invalid-list' => '!!FUZZY!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition.',
+	'wikibase-api-no-token' => '!!FUZZY!! This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are som exceptional error condition. The message can be shown after misconfiguration of the system.',
+	'wikibase-api-no-data' => '!!FUZZY!! This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
+	'wikibase-api-cant-edit' => '!!FUZZY!! This is an error message for a situation where the user is blocked from editing. This will be shown to the user if he tries to edit when being blocked.',
+	'wikibase-api-no-permissions' => '!!FUZZY!! This is an error message for a situation where the user does not have sufficient rights. This will be shown to the user if the wiki uses group rights, and the user does not belong to the correct group, or if the rights of some other reason does not include the user.',
+	'wikibase-api-id-xor-wikititle' => '!!FUZZY!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition.',
+	'wikibase-api-no-such-item' => '!!FUZZY!! This is an error message for a situation where the API could not find an item, usually on an already found page. Usually this should never be shown to the user, unless there are som exceptional error condition, or the item is deleted due to a race condition.',
+	'wikibase-api-no-such-item-id' => '!!FUZZY!! This is an error message for a situation where the API could not find an item by using a specific item id. Usually this should never be shown to the user, unless there are som exceptional error condition.',
+	'wikibase-api-link-exists' => '!!FUZZY!! This is an error message for a situation where the arguments to the API requests a sitelink to be created but there already exist a similar link. Usually this should never be shown to the user, unless there are som exceptional error condition, or the link is already created due to a race condition.',
 	'wikibase-api-add-with-id' => '!!FUZZY!! This is an error message for a situation where the arguments to the API includes an id, but the operation can not be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are som exceptional error condition.',
 	'wikibase-api-add-exists' => '!!FUZZY!! This is an error message for a situation where the API already found an item, but the operation can not be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are som exceptional error condition, or an item is already created due to a race condition.',
 	'wikibase-api-update-without-id' => '!!FUZZY!! This is an error message for an update where the API expect to have an id, but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition.',
@@ -184,7 +198,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-label-or-description' => '!!FUZZY!! This is an error message for a situation where the arguments to the API is inconsistent, either or both of "label" or "description" should be used but not none of them. Usually this should never be shown to the user, unless there are som exceptional error condition.',
 	'wikibase-api-label-not-found' => '!!FUZZY!! This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the label.',
 	'wikibase-api-description-not-found' => '!!FUZZY!! This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
+	'wikibase-api-wrong-class' => '!!FUZZY!! This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 
+	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
@@ -245,6 +261,7 @@ $messages['de'] = array(
 	'special-itembytitle' => 'Wert nach Name',
 	'special-itembylabel' => 'Wert nach Bezeichnung',
 	'wikibase-api-aliases-invalid-list' => 'Du musst entweder den Parameter für „setzen“ zu x angeben oder die Parameter zu „hinzufügen“ bzw. „entfernen“.',
+	'wikibase-api-no-such-item' => 'Es wurde kein vorhandenes Datenelement gefunden.',
 	'wikibase-api-no-token' => 'Es wurden keine Token angegeben.',
 	'wikibase-api-no-data' => 'Es wurden keine zu verarbeitenden Daten gefunden.',
 	'wikibase-api-cant-edit' => 'Der angemeldete Benutzer ist nicht berechtigt Bearbeitungen durchzuführen.',
@@ -343,6 +360,7 @@ $messages['es'] = array(
 	'special-itembylabel' => 'Artículo por etiqueta',
 	'special-createitem' => 'Crear un nuevo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Es necesario proporcionar el parámetro de configuración xor al agregar o quitar parámetros',
+	'wikibase-api-no-such-item' => 'No se pudo encontrar un elemento existente',
 	'wikibase-api-no-token' => 'No se ha dado ninguna clave (token)',
 	'wikibase-api-no-data' => 'No se ha encontrado ningún dato sobre el que operar',
 	'wikibase-api-cant-edit' => 'El usuario que ha iniciado sesión no tiene permisos para editar',
@@ -510,7 +528,7 @@ $messages['is'] = array(
 	'wikibase-label-input-help-message' => 'Sláðu inn titil á þessum gögnum á $1.',
 	'wikibase-description-input-help-message' => 'Sláðu inn stutta lýsingu á $1.',
 	'wikibase-sitelinks' => 'Wikipedia síður sem tengja á þennan hlut',
-	'wikibase-sitelinks-add' => 'bæta við tengil á Wikipedia síðu',
+	'wikibase-sitelinks-add' => 'bæta við tengli á Wikipedia síðu',
 	'wikibase-sitelinks-empty' => 'Engar Wikipedia síður tengja á þennan hlut ennþá.',
 	'wikibase-sitelinks-input-help-message' => 'Settu tengil á Wikipedia grein.',
 	'wikibase-remove' => 'fjarlægja',

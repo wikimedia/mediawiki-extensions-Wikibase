@@ -12,7 +12,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ApiWikibaseModifyItem extends ApiBase {
+abstract class ApiWikibaseModifyItem extends ApiWikibase {
 
 	/**
 	 * Actually modify the item.
@@ -116,11 +116,16 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 		}
 		elseif ( $hasLink ) {
 			$item = WikibaseItem::getFromSiteLink( $params['site'], WikibaseItem::normalize( $params['title'] ) );
+			
 			if ( is_null( $item ) && $params['item'] === 'update' ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-id' );
+				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
 			}
 		}
-
+		
+		if ( !is_null( $item ) && !( $item instanceof WikibaseItem ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
+		}
+			
 		if ( !is_null( $item ) && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
@@ -132,7 +137,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				$item->addSiteLink( $params['site'], $params['title'] );
 			}
 		}
-
+		
 		$success = $this->modifyItem( $item, $params );
 		if ( !$success ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
@@ -157,12 +162,6 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
 			}
 		}
-		
-		$this->getResult()->addValue(
-			null,
-			'success',
-			(int)$success
-		);
 
 		if ( $success ) {
 			$this->getResult()->addValue(
@@ -171,6 +170,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			);
 			if ( $hasLink ) {
 				// normalizing site does not really give any meaning
+				// so we only normalize title
 				$normTitle = WikibaseItem::normalize( $params['title'] );
 				$normalized = array();
 				if ( $normTitle !== $params['title'] ) {
@@ -185,6 +185,13 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				}
 			}
 		}
+		
+		$this->getResult()->addValue(
+			null,
+			'success',
+			(int)$success
+		);
+		
 	}
 
 	/**
@@ -201,6 +208,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
 			array( 'code' => 'create-failed', 'info' => wfMsg( 'wikibase-api-create-failed' ) ),
 			array( 'code' => 'modify-failed', 'info' => wfMsg( 'wikibase-api-modify-failed' ) ),
+			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 			array( 'code' => 'invalid-contentmodel', 'info' => wfMsg( 'wikibase-api-invalid-contentmodel' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
@@ -239,7 +247,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array(
+		return array_merge( parent::getAllowedParams(), array(
 			//'create' => array(
 			//	ApiBase::PARAM_TYPE => 'boolean',
 			//),
@@ -261,7 +269,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 				ApiBase::PARAM_DFLT => 'update',
 			),
 			'token' => null,
-		);
+		) );
 	}
 
 	/**
@@ -271,7 +279,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array(
+		return array_merge( parent::getParamDescription(), array(
 			'id' => array( 'The ID of the item.',
 				"Use either 'id' or 'site' and 'title' together."
 			),
@@ -288,7 +296,7 @@ abstract class ApiWikibaseModifyItem extends ApiBase {
 			),
 			// 'summary' => 'Summary for the edit.',
 			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
-		);
+		) );
 	}
 
 }

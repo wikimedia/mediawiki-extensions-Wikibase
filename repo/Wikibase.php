@@ -56,24 +56,22 @@ $dir = dirname( __FILE__ ) . '/';
 
 // rights
 // names should be according to other naming scheme
-$wgGroupPermissions['wbeditor']['item-add']			= true;
-$wgGroupPermissions['wbeditor']['item-update']		= true;
-$wgGroupPermissions['wbeditor']['item-set']			= true;
-$wgGroupPermissions['wbeditor']['item-delete']		= true; // could be called remove
-$wgGroupPermissions['wbeditor']['alias-add']		= true;
-$wgGroupPermissions['wbeditor']['alias-update']		= true;
-$wgGroupPermissions['wbeditor']['alias-set']		= true;
-$wgGroupPermissions['wbeditor']['alias-delete']		= true; // could be called remove
-$wgGroupPermissions['wbeditor']['site-link-add']	= true;
-$wgGroupPermissions['wbeditor']['site-link-update']	= true;
-$wgGroupPermissions['wbeditor']['site-link-set']	= true;
-$wgGroupPermissions['wbeditor']['site-link-remove']	= true; // could be called remove
-$wgGroupPermissions['wbeditor']['lang-attr-add']	= true;
-$wgGroupPermissions['wbeditor']['lang-attr-update']	= true;
-$wgGroupPermissions['wbeditor']['lang-attr-set']	= true;
-$wgGroupPermissions['wbeditor']['lang-attr-delete']	= true; // could be called remove
-
-
+$wgGroupPermissions['*']['item-add']			= true;
+$wgGroupPermissions['*']['item-update']			= true;
+$wgGroupPermissions['*']['item-set']			= true;
+$wgGroupPermissions['*']['item-remove']			= true;
+$wgGroupPermissions['*']['alias-add']			= true;
+$wgGroupPermissions['*']['alias-update']		= true;
+$wgGroupPermissions['*']['alias-set']			= true;
+$wgGroupPermissions['*']['alias-remove']		= true;
+$wgGroupPermissions['*']['site-link-add']		= true;
+$wgGroupPermissions['*']['site-link-update']	= true;
+$wgGroupPermissions['*']['site-link-set']		= true;
+$wgGroupPermissions['*']['site-link-remove']	= true;
+$wgGroupPermissions['*']['lang-attr-add']		= true;
+$wgGroupPermissions['*']['lang-attr-update']	= true;
+$wgGroupPermissions['*']['lang-attr-set']		= true;
+$wgGroupPermissions['*']['lang-attr-remove']	= true;
 
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
@@ -104,6 +102,7 @@ $wgAutoloadClasses['WikibaseViewItemAction'] 			= $dir . 'includes/actions/Wikib
 $wgAutoloadClasses['WikibaseEditItemAction'] 			= $dir . 'includes/actions/WikibaseEditItemAction.php';
 
 // includes/api
+$wgAutoloadClasses['ApiWikibase'] 				= $dir . 'includes/api/ApiWikibase.php';
 $wgAutoloadClasses['ApiWikibaseGetItems'] 				= $dir . 'includes/api/ApiWikibaseGetItems.php';
 $wgAutoloadClasses['ApiWikibaseGetItemId'] 				= $dir . 'includes/api/ApiWikibaseGetItemId.php';
 $wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 			= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
@@ -309,8 +308,3 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
 
 $egWBSettings = array();
-
-$egWBSettings['apiDebugWithWrite'] = true;
-$egWBSettings['apiDebugWithPost'] = true;
-
-$egWBSettings['apiDebugWithRights'] = true;

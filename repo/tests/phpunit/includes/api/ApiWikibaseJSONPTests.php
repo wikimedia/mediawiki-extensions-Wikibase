@@ -26,7 +26,7 @@
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiWikibaseSetItemTests extends ApiTestCase {
+class ApiWikibaseJSONPTests extends ApiTestCase {
 	
 	protected static $top = 0;
 	
