@@ -137,7 +137,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			this,
 			save,
 			$.proxy( function() {
-				afterStopEditing();
+				afterStopEditing && afterStopEditing();
 				// make sure the interface for entering the sites id can't be edited after created
 				this._interfaces.siteId.setActive( this.isPending() );
 			}, this )
