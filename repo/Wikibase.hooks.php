@@ -54,6 +54,7 @@ final class WikibaseHooks {
 		$files[] = $testDir . 'WikibaseEntityTests.php';
 		$files[] = $testDir . 'WikibaseItemViewTests.php';
 		$files[] = $testDir . 'WikibaseSiteTests.php';
+		$files[] = $testDir . 'WikibaseSitesTests.php';
 		$files[] = $testDir . 'WikibaseUtilsTests.php';
 
 		// api
