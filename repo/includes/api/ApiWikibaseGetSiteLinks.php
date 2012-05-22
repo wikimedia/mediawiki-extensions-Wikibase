@@ -52,15 +52,21 @@ class ApiWikibaseGetSiteLinks extends ApiWikibase {
 				$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 			}
 			$res = $this->getResult();
-			$arr = array();
+			$res->addValue( null, 'item', array() );
 			
-			$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks() );
+			$sitelinks = $item->getRawSiteLinks();
 			if (count($sitelinks)) {
-				$arr['sitelinks'] = $sitelinks;
+				$res->addValue(
+					'item',
+					'sitelinks',
+					$this->stripKeys( $params, $sitelinks, 'sl' )
+				);
 			}
-			
-			$arr['id'] = $item->getId();
-			$res->addValue( null, 'item', $arr );
+			$res->addValue(
+				'item',
+				'id',
+				$item->getId()
+			);
 		}
 		else {
 			// not  sure about this, its not conforming with other calls
