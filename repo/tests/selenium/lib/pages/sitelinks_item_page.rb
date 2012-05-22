@@ -21,6 +21,9 @@ class SitelinksItemPage < ItemPage
   link(:editSitelinkLink, :text => "edit", :index => 3)
   
   def getNumberOfSitelinksFromCounter
+    wait_until do
+      siteLinkCounter?
+    end
     scanned = siteLinkCounter.scan(/\(([^)]+)\)/)
     integerValue = scanned[0][0].to_i()
     return integerValue
