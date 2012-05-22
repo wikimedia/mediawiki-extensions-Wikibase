@@ -32,7 +32,8 @@ class RubySelenium
     {'format'=>'json',
       'action'=>'wbsetitem',
       'data'=>'{}',
-      'token' => @item_token})
+      'token' => @item_token,
+      'languages'=>'en'})
     req['Cookie'] = @session_cookie
 
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
@@ -79,7 +80,8 @@ class RubySelenium
     req.set_form_data(
     {'format'=>'json',
       'action'=>'wbsetitem',
-      'gettoken'=>'1'})
+      'gettoken'=>'1',
+      'languages'=>'en'})
     req['Cookie'] = @session_cookie
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       postData =  http.request(req)
