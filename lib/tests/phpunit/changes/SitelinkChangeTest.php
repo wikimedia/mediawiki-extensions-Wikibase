@@ -13,6 +13,8 @@ use Wikibase\SitelinkChange as SitelinkChange;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
+ * @group Wikibase
+ *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
  * @group Database

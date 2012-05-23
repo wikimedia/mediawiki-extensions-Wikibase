@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ListDiff as ListDiff;
+use Wikibase\MapDiff as MapDiff;
 use Wikibase\AliasChange as AliasChange;
 
 /**
@@ -12,6 +12,8 @@ use Wikibase\AliasChange as AliasChange;
  *
  * @ingroup WikibaseLib
  * @ingroup Test
+ *
+ * @group Wikibase
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -29,35 +31,34 @@ class AliasChangeTest extends \MediaWikiTestCase {
 
 	public function diffProvider() {
 		return array(
-			array( ListDiff::newEmpty() ),
-			array( ListDiff::newFromArrays( array(), array( 'foo' ) ) ),
-			array( ListDiff::newFromArrays( array( 'bar' ), array( 'foo' ) ) ),
-			array( ListDiff::newFromArrays( array( 'bar' ), array() ) ),
+			array( MapDiff::newEmpty() ),
+			array( MapDiff::newFromArrays( array(), array( 'en' => 'foo' ) ) ),
+			array( MapDiff::newFromArrays( array( 'en' => 'bar' ), array( 'en' => 'foo' ) ) ),
+			array( MapDiff::newFromArrays( array( 'en' => 'bar' ), array( 'de' => 'bar' ) ) ),
 		);
 	}
 
 	/**
-	 * @param ListDiff $diff
+	 * @param MapDiff $diff
 	 * @dataProvider diffProvider
-	 * TODO: implementation changes to use MapDiff
 	 */
-//	public function testNewFromDiff( ListDiff $diff ) {
-//		$change =  AliasChange::newFromDiff( $diff );
-//
-//		$this->assertEquals( $diff->isEmpty(), $change->isEmpty() );
-//
-//		$change->setDiff( ListDiff::newEmpty() );
-//
-//		$this->assertTrue( $change->isEmpty() );
-//
-//		$diff = ListDiff::newFromArrays( array(), array( 'foo' ) );
-//
-//		$change->setDiff( $diff );
-//
-//		$this->assertFalse( $change->isEmpty() );
-//
-//		$this->assertEquals( $diff, $change->getDiff() );
-//	}
+	public function testNewFromDiff( MapDiff $diff ) {
+		$change =  AliasChange::newFromDiff( $diff );
+
+		$this->assertEquals( $diff->isEmpty(), $change->isEmpty() );
+
+		$change->setDiff( MapDiff::newEmpty() );
+
+		$this->assertTrue( $change->isEmpty() );
+
+		$diff = MapDiff::newFromArrays( array(), array( 'en' => 'foo' ) );
+
+		$change->setDiff( $diff );
+
+		$this->assertFalse( $change->isEmpty() );
+
+		$this->assertEquals( $diff, $change->getDiff() );
+	}
 
 }
 	
