@@ -51,7 +51,7 @@ class ItemDiff extends EntityDiff {
 			$newItem->getSiteLinks()
 		);
 
-		$this->aliasDiff = ListDiff::newFromArrays(
+		$this->aliasDiff = MapDiff::newFromArrays(
 			$oldItem->getAllAliases(),
 			$newItem->getAllAliases()
 		);
