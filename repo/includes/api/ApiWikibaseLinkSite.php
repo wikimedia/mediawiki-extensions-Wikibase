@@ -109,7 +109,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'link' => array(
-				ApiBase::PARAM_TYPE => array( 'add', /*'update', 'set',*/ 'remove' ),
+				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
 				ApiBase::PARAM_DFLT => 'add',
 			),
 		) );
@@ -128,8 +128,8 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 			'linkbadge' => 'Badge to give to the page, ie "good" or "featured"',
 			'link' => array( 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist.',
 				"add - the link should not exist before the call or an error will be reported.",
-				//"update - the link shuld exist before the call or an error will be reported.",
-				//"set - the link could exist or not before the call.",
+				"update - the link shuld exist before the call or an error will be reported.",
+				"set - the link could exist or not before the call.",
 				"remove - the link is removed if its found."
 			)
 		) );

@@ -127,6 +127,11 @@ class WBSettings {
 			// alternative: application/vnd.php.serialized
 			'serializationFormat' => CONTENT_FORMAT_JSON,
 
+			// Block use of duplicate keys
+			// this is to turn on a quick fix that breaks
+			// some UI code and also some tests
+			'blockDuplicateSiteLinks' => false,
+			
 			// Defaults to turn off use of keys
 			// set to true will always return the key form
 			'apiUseKeys' => false,
