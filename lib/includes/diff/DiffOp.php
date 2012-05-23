@@ -3,6 +3,21 @@
 namespace Wikibase;
 use MWException;
 
+/**
+ * Interface for diff operations. A diff operation
+ * represents a change to a single element.
+ * In case the elements are maps or diffs, the resulting operation
+ * can be a MapDiff or ListDiff, which contain their own list of IDiffOp objects.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup WikibaseLib
+ * @ingroup WikibaseDiff
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
 interface IDiffOp {
 
 	public function getType();
@@ -11,6 +26,19 @@ interface IDiffOp {
 
 }
 
+/**
+ * Base class for diff operations. A diff operation
+ * represents a change to a single element.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup WikibaseLib
+ * @ingroup WikibaseDiff
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
 abstract class DiffOp implements IDiffOp {
 
 	/**

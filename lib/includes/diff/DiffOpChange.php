@@ -2,6 +2,19 @@
 
 namespace Wikibase;
 
+/**
+ * Represents a change.
+ * This means the item is present in both the new and old objects, but changed value.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup WikibaseLib
+ * @ingroup WikibaseDiff
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
 class DiffOpChange extends DiffOp {
 
 	protected $newValue;

@@ -2,6 +2,19 @@
 
 namespace Wikibase;
 
+/**
+ * Represents a removal.
+ * This means the value is not present in the "new" object but was in the old.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup WikibaseLib
+ * @ingroup WikibaseDiff
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
 class DiffOpRemove extends DiffOp {
 
 	protected $oldValue;
