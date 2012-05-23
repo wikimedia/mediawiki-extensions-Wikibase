@@ -152,6 +152,7 @@ $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 $wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTestModules';
 $wgHooks['NamespaceIsMovable'][]					= 'WikibaseHooks::onNamespaceIsMovable';
+$wgHooks['NewRevisionFromEditComplete'][]			= 'WikibaseHooks::onNewRevisionFromEditComplete';
 
 
 
