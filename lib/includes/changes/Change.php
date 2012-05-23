@@ -68,4 +68,36 @@ class Change extends ORMRow {
 		return false;
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.20
+	 *
+	 * @param \ORMTable $table
+	 * @param array|null $fields
+	 * @param boolean $loadDefaults
+	 */
+	public function __construct( \ORMTable $table, $fields = null, $loadDefaults = false ) {
+		if ( is_null( $fields ) ) {
+			$fields = array();
+		}
+
+		if ( !array_key_exists( 'type', $fields ) ) {
+			$fields['type'] = $this->getType();
+		}
+
+		parent::__construct( $table, $fields, $loadDefaults );
+	}
+
+	/**
+	 * Returns the type of change.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'change';
+	}
+
 }
