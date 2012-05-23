@@ -15,6 +15,15 @@ namespace Wikibase;
  */
 class AliasChange extends MapChange {
 
-
+	/**
+	 * Returns the type of change.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'alias';
+	}
 
 }
