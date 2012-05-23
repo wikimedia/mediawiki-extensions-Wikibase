@@ -551,8 +551,7 @@ class ApiWikibaseSetItemTests extends ApiTestCase {
 		$second = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
 			'ids' => $id,
-			'usekeys' => '',
-			'language' => $language,
+			'languages' => $language,
 		) );
 		
 		$this->assertArrayHasKey( 'success', $second[0],
