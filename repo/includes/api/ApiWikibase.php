@@ -22,7 +22,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @return array of key-valuepairs or only values
 	 */
 	protected function stripKeys( array $params, array $arr, $tag ) {
-		$usekeys = isset($params['usekeys']) ? $params['usekeys'] : false;
+		$usekeys = WBSettings::get( 'apiUseKeys' ) || (isset($params['usekeys']) ? $params['usekeys'] : false);
 		if ( $usekeys ) {
 			switch ( $this->getMain()->getRequest()->getVal( 'format' ) ) {
 				case 'json':
@@ -82,7 +82,6 @@ abstract class ApiWikibase extends ApiBase {
 		return array(
 			'usekeys' => array(
 				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false,
 			),
 		);
 	}

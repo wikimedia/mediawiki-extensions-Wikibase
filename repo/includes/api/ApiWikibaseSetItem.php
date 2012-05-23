@@ -126,7 +126,7 @@ class ApiWikibaseSetItem extends ApiWikibase {
 			);
 		}
 		
-		$descriptions = $item->getRawDescriptions( (array)$languages );
+		$descriptions = $item->getRawDescriptions( $languages );
 		if (count($descriptions)) {
 			$res->addValue(
 				'item',
@@ -135,7 +135,7 @@ class ApiWikibaseSetItem extends ApiWikibase {
 			); 
 		}
 		
-		$labels = $item->getRawLabels( (array)$languages );
+		$labels = $item->getRawLabels( $languages );
 		if (count($labels)) {
 			$res->addValue(
 				'item',
@@ -206,11 +206,9 @@ class ApiWikibaseSetItem extends ApiWikibase {
 		return array_merge( parent::getAllowedParams(), array(
 			'data' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				//ApiBase::PARAM_REQUIRED => true,
 			),
 			'languages' => array(
 				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
-				ApiBase::PARAM_REQUIRED => true,
 			),
 			//'summary' => array(
 			//	ApiBase::PARAM_TYPE => 'string',

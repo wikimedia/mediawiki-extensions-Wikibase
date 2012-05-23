@@ -90,14 +90,11 @@ class WBSettings {
 	 * @throws MWException
 	 * @return mixed
 	 */
-	public function getSetting( $settingName, $default=null ) {
+	public function getSetting( $settingName ) {
 		$this->buildSettings();
 
 		if ( !array_key_exists( $settingName, $this->settings ) ) {
-			if ($default === null) {
-				throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
-			}
-			return $default;
+			throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
 		}
 
 		return $this->settings[$settingName];
@@ -113,8 +110,8 @@ class WBSettings {
 	 *
 	 * @return mixed
 	 */
-	public static function get( $settingName, $default=null ) {
-		return self::singleton()->getSetting( $settingName, $default );
+	public static function get( $settingName ) {
+		return self::singleton()->getSetting( $settingName );
 	}
 
 	/**
@@ -130,6 +127,10 @@ class WBSettings {
 			// alternative: application/vnd.php.serialized
 			'serializationFormat' => CONTENT_FORMAT_JSON,
 
+			// Defaults to turn off use of keys
+			// set to true will always return the key form
+			'apiUseKeys' => false,
+			
 			// Set API in debug mode
 			// do not turn on in production!
 			'apiInDebug' => false,

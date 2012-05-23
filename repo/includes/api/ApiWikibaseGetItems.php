@@ -83,11 +83,11 @@ class ApiWikibaseGetItems extends ApiWikibase {
 				if (count($sitelinks)) {
 					$arr['sitelinks'] = $sitelinks;
 				}
-				$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( (array)$languages ), 'd' );
+				$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( $languages ), 'd' );
 				if (count($descriptions)) {
 					$arr['descriptions'] = $descriptions;
 				}
-				$labels = $this->stripKeys( $params, $item->getRawLabels( (array)$languages ), 'l' );
+				$labels = $this->stripKeys( $params, $item->getRawLabels( $languages ), 'l' );
 				if (count($labels)) {
 					$arr['labels'] = $labels;
 				}
