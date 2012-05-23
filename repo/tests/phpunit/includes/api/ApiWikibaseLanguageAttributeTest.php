@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase\Test;
+
 /**
  * Tests for the ApiWikibaseSetAliases API module.
  *
@@ -37,7 +39,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseLanguageAttributeTest extends ApiWikibaseModifyItemTest {
+class ApiLanguageAttributeTest extends ApiModifyItemTest {
 
 	public function paramProvider() {
 		return array(
@@ -74,7 +76,7 @@ class ApiWikibaseLanguageAttributeTest extends ApiWikibaseModifyItemTest {
 		try {
 			$apiResponse = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		}
-		catch (Exception $e) {
+		catch ( \Exception $e ) {
 			if ($exception !== null) {
 				$this->assertTrue(is_a($e, $exception), "Not the expected exception");
 				return;

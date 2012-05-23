@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use ApiBase;
+
 /**
  * API module to get the data for a single Wikibase item.
  *
@@ -37,7 +40,7 @@ class ApiWikibaseSearchByName extends ApiBase {
 	public function getAllowedParams() {
 		return array(
 			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'fragment' => array(

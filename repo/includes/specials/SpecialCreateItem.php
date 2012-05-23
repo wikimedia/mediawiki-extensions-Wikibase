@@ -36,7 +36,7 @@ class SpecialCreateItem extends SpecialWikibasePage {
 		$this->checkPermissions();
 		$this->outputHeader();
 
-		$view = new WikibaseItemView( WikibaseItem::newEmpty(), $this->getContext() );
+		$view = new Wikibase\ItemView( Wikibase\Item::newEmpty(), $this->getContext() );
 		$view->display();
 	}
 

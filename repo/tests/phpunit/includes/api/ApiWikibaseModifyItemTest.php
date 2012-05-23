@@ -1,5 +1,9 @@
 <?php
 
+namespace Wikibase\Test;
+use ApiTestCase, ApiTestUser;
+use Wikibase\Item as Item;
+
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
  *
@@ -25,10 +29,10 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ApiWikibaseModifyItemTest extends ApiTestCase {
+abstract class ApiModifyItemTest extends ApiTestCase {
 
 	/**
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected static $item = false;
 	
@@ -39,7 +43,7 @@ abstract class ApiWikibaseModifyItemTest extends ApiTestCase {
 		parent::setUp();
 
 		if ( self::$item === false ) {
-			self::$item = WikibaseItem::newEmpty();
+			self::$item = Item::newEmpty();
 			self::$item->save();
 		}
 		

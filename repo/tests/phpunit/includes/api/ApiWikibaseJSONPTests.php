@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase\Test;
+use ApiTestCase, ApiTestUser;
+
 /**
  * Tests for the ApiWikibase class.
  * 
@@ -26,7 +29,7 @@
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiWikibaseJSONPTests extends ApiTestCase {
+class ApiJSONPTests extends ApiTestCase {
 	
 	protected static $top = 0;
 	

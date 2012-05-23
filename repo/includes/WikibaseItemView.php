@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use Html;
+
 /**
  * Class for creation views of WikibaseItems.
  *
@@ -12,11 +15,11 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater
  */
-class WikibaseItemView extends ContextSource {
+class ItemView extends \ContextSource {
 
 	/**
 	 * @since 0.1
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected $item;
 
@@ -25,10 +28,10 @@ class WikibaseItemView extends ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
-	 * @param IContextSource|null $context
+	 * @param Item $item
+	 * @param \IContextSource|null $context
 	 */
-	public function __construct( WikibaseItem $item, IContextSource $context = null ) {
+	public function __construct( Item $item, \IContextSource $context = null ) {
 		$this->item = $item;
 
 		if ( !is_null( $context ) ) {
@@ -81,12 +84,12 @@ class WikibaseItemView extends ContextSource {
 				$html .= Html::element(
 						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $siteId ),
 						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
-						Language::fetchLanguageName( $siteId ) . ' (' . $siteId . ')'
+						\Language::fetchLanguageName( $siteId ) . ' (' . $siteId . ')'
 				);
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $siteId ) );
 				$html .= Html::element(
 					'a',
-					array( 'href' => WikibaseSites::singleton()->getUrl( $siteId, $title ) ),
+					array( 'href' => Sites::singleton()->getUrl( $siteId, $title ) ),
 					$title
 				);
 				$html .= Html::closeElement( 'td' );

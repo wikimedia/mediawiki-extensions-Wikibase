@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Test;
+use \Wikibase\ItemHandler as ItemHandler;
+use \Wikibase\Item as Item;
+use WikiPage, Title, WikitextContent;
+
 /**
  * Tests prevention of moving pages in and out of the data NS.
  *
@@ -16,10 +21,10 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class WikibaseItemMoveTests extends MediaWikiTestCase {
+class ItemMoveTests extends \MediaWikiTestCase {
 
 	/**
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected $item;
 
@@ -34,7 +39,7 @@ class WikibaseItemMoveTests extends MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->item = WikibaseItem::newEmpty();
+		$this->item = Item::newEmpty();
 		$this->item->save();
 
 		$title = Title::newFromText( 'wbmovetest' );
@@ -55,7 +60,7 @@ class WikibaseItemMoveTests extends MediaWikiTestCase {
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving a regular page into data NS to an empty (but valid) location
-		$title = WikibaseItem::newFromArray( array( 'entity' => 'q42' ) )->getTitle();
+		$title = Item::newFromArray( array( 'entity' => 'q42' ) )->getTitle();
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving item page out of data NS onto an existing page
@@ -71,7 +76,7 @@ class WikibaseItemMoveTests extends MediaWikiTestCase {
 		$this->assertFalse( $this->item->getTitle()->moveTo( $title ) === true );
 
 		// Moving item to an valid location in the data NS
-		$title = WikibaseItem::newFromArray( array( 'entity' => 'q42' ) )->getTitle();
+		$title = Item::newFromArray( array( 'entity' => 'q42' ) )->getTitle();
 		$this->assertFalse( $this->item->getTitle()->moveTo( $title ) === true );
 	}
 

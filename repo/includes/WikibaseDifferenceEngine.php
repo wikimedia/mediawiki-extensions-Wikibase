@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use Content, _DiffOp_Add, _DiffOp_Delete, _DiffOp_Change, _DiffOp_Copy;
+
 /**
  * Difference engine for structured data.
  *
@@ -10,7 +13,7 @@
  *
  * @licence GNU GPL v2+
  */
-class WikibaseDifferenceEngine extends DifferenceEngine {
+class DifferenceEngine extends \DifferenceEngine {
 
 	function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
 		parent::__construct($context, $old, $new, $rcid, $refreshCache, $unhide);
@@ -41,7 +44,7 @@ class WikibaseDifferenceEngine extends DifferenceEngine {
 			$edits[] = $e;
 		}
 
-		$res = new DiffResult( $edits );
+		$res = new \DiffResult( $edits );
 
 		wfProfileOut( __METHOD__ );
 		return $res;
@@ -54,7 +57,7 @@ class WikibaseDifferenceEngine extends DifferenceEngine {
 
 		$res = $this->generateContentDiff( $old, $new );
 
-		$formatter = new TableDiffFormatter();
+		$formatter = new \TableDiffFormatter();
 		$difftext = $wgContLang->unsegmentForDiff( $formatter->format( $res ) ) .
 
 		wfProfileOut( __METHOD__ );

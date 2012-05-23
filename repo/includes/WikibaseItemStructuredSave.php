@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use Title;
+
 /**
  * Represents an update to the structured storage for a single WikibaseItem.
  * TODO: we could keep track of actual changes in a lot of cases, and so be able to do less (expensive) queries to update.
@@ -12,13 +15,13 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseItemStructuredSave extends DataUpdate {
+class ItemStructuredSave extends \DataUpdate {
 
 	/**
 	 * The item to update.
 	 *
 	 * @since 0.1
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected $item;
 
@@ -35,10 +38,10 @@ class WikibaseItemStructuredSave extends DataUpdate {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
+	 * @param Item $item
 	 * @param Title $title
 	 */
-	public function __construct( WikibaseItem $item, Title $title ) {
+	public function __construct( Item $item, Title $title ) {
 		$this->item = $item;
 		$this->title = $title;
 	}

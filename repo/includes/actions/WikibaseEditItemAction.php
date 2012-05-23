@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Handles the edit action for Wikibase items.
  *
@@ -14,7 +16,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseEditItemAction extends FormlessAction {
+class EditItemAction extends \FormlessAction {
 
 	/**
 	 * (non-PHPdoc)

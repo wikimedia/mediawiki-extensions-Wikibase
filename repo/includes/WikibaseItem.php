@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use User, Title, WikiPage, Content;
+
 /**
  * Represents a single Wikibase item.
  * See https://meta.wikimedia.org/wiki/Wikidata/Data_model#Items
@@ -13,7 +16,7 @@
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseItem extends WikibaseEntity {
+class Item extends Entity {
 
 	/**
 	 * @since 0.1
@@ -543,10 +546,8 @@ class WikibaseItem extends WikibaseEntity {
 	 * @return array|false Returns array on success, or false on failure
 	 */
 	public function addSiteLink( $siteId, $pageName, $updateType = 'add' ) {
-		
-
 		// TODO: This should be removed before code goes into production
-		if (WBSettings::get( 'blockDuplicateSiteLinks' ) ) {
+		if ( \WBSettings::get( 'blockDuplicateSiteLinks' ) ) {
 			// TODO Checks if the link to be added already exists. Should give a better error message.
 			// This really should have a solution and not only a quick fix
 			$exists = self::getIdForSiteLink( $siteId, $pageName );
@@ -899,7 +900,7 @@ class WikibaseItem extends WikibaseEntity {
 	 * @param string $label
 	 * @param string|null $description
 	 *
-	 * @return array of WikibaseItem
+	 * @return array of Item
 	 */
 	public static function getFromLabel( $language, $label, $description = null ) {
 		$ids = self::getIdsForLabel( $language, $label, $description );
@@ -947,7 +948,7 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @param array $data
 	 *
-	 * @return WikibaseItem
+	 * @return Item
 	 */
 	public static function newFromArray( array $data ) {
 		$item = new static( $data, true );
@@ -958,7 +959,7 @@ class WikibaseItem extends WikibaseEntity {
 	/**
 	 * @since 0.1
 	 *
-	 * @return WikibaseItem
+	 * @return Item
 	 */
 	public static function newEmpty() {
 		return self::newFromArray( array() );

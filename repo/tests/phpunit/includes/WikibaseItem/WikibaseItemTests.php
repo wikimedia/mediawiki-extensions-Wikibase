@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase\Test;
+use \Wikibase\Item as Item;
+
 /**
  * Tests for the WikibaseItem class.
  *
@@ -16,7 +19,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class WikibaseItemTests extends MediaWikiTestCase {
+class ItemTests extends \MediaWikiTestCase {
 
 	/**
 	 * This is to set up the environment
@@ -37,7 +40,7 @@ class WikibaseItemTests extends MediaWikiTestCase {
 	 */
 	public function testNotFound() {
 		$this->assertFalse(
-			WikibaseItem::getIdForSiteLink( 9999, "ThisDoesNotExistAndProbablyWillNeverExist" ),
+			Item::getIdForSiteLink( 9999, "ThisDoesNotExistAndProbablyWillNeverExist" ),
 			'Calling getIdForLinkSite( 42, "ThisDoesNotExistAndProbablyWillNeverExist" ) should return false'
 		);
 	}
@@ -46,7 +49,7 @@ class WikibaseItemTests extends MediaWikiTestCase {
 	 * Tests @see WikibaseItem::getTitleForId
 	 */
 	public function testGetTitleForId() {
-		$title = WikibaseItem::getTitleForId( 42 );
+		$title = Item::getTitleForId( 42 );
 		$this->assertInstanceOf(
 			'Title',
 			$title,
@@ -63,7 +66,7 @@ class WikibaseItemTests extends MediaWikiTestCase {
 	 * Tests @see WikibaseItem::getWikiPageForId
 	 */
 	public function testGetWikiPageForId() {
-		$page = WikibaseItem::getWikiPageForId( 42 );
+		$page = Item::getWikiPageForId( 42 );
 		$this->assertInstanceOf(
 			'WikiPage',
 			$page,

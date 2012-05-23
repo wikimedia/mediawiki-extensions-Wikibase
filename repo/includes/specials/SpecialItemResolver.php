@@ -86,10 +86,10 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
+	 * @param Wikibase\Item $item
 	 */
-	protected function displayItem( WikibaseItem $item ) {
-		$view = new WikibaseItemView( $item, $this->getContext() );
+	protected function displayItem( Wikibase\Item $item ) {
+		$view = new Wikibase\ItemView( $item, $this->getContext() );
 		$view->display();
 
 		$this->getOutput()->setPageTitle( $item->getLabel( $this->getLanguage()->getCode() ) );

@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase\Test;
+use \Wikibase\Item as Item;
+
 /**
  * Tests for the WikibaseItem class.
  *
@@ -15,11 +18,11 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class WikibaseItemMultilangTextsTests extends MediaWikiTestCase {
+class ItemMultilangTextsTests extends \MediaWikiTestCase {
 	
 	/**
 	 * Enter description here ...
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected static $item = null;
 	
@@ -28,7 +31,7 @@ class WikibaseItemMultilangTextsTests extends MediaWikiTestCase {
 	 */
 	protected function setUp() {
   		parent::setUp();
-		self::$item = WikibaseItem::newFromArray( array( 'entity' => 'q42' ) );
+		self::$item = Item::newFromArray( array( 'entity' => 'q42' ) );
 	}
 	
   	/**

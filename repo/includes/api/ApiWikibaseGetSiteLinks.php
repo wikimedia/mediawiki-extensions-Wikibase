@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use ApiBase;
+
 /**
  * API module to get the link sites for a single Wikibase item.
  *
@@ -12,7 +15,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetSiteLinks extends ApiWikibase {
+class ApiGetSiteLinks extends Api{
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -34,21 +37,21 @@ class ApiWikibaseGetSiteLinks extends ApiWikibase {
 		$success = false;
 
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
+			$params['id'] = Item::getIdForSiteLink( $params['site'], $params['title'] );
 
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 		}
 
-		$page = WikibaseItem::getWikiPageForId( $params['id'] );
+		$page = Item::getWikiPageForId( $params['id'] );
 		if ( $page->exists() ) {
 			// as long as getWikiPageForId only returns ids for legal items this holds
 			$item = $page->getContent();
 			if (is_null( $item ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
-			if ( !( $item instanceof WikibaseItem ) ) {
+			if ( !( $item instanceof Item ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 			}
 			$res = $this->getResult();
@@ -95,7 +98,7 @@ class ApiWikibaseGetSiteLinks extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'integer',
 			),
 			'site' => array(
-				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
+				ApiBase::PARAM_TYPE => Sites::singleton()->getIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',

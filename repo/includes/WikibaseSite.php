@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Class representing a single site that can be linked to.
  *
@@ -12,7 +14,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Werner
  */
-class WikibaseSite {
+class Site {
 
 	protected $id;
 	protected $group;
@@ -50,7 +52,7 @@ class WikibaseSite {
 	 * @param string $siteId
 	 * @param array $site
 	 *
-	 * @return WikibaseSite
+	 * @return Site
 	 */
 	public static function newFromArray( $siteId, array $site ) {
 		return new static(

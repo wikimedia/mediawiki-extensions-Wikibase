@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Represents a diff between two WikibaseEntity instances.
+ * Represents a diff between two Wikibase\Entity instances.
  *
  * @since 0.1
  *
@@ -11,7 +11,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class WikibaseEntityDiff {
+abstract class EntityDiff {
 
 
 

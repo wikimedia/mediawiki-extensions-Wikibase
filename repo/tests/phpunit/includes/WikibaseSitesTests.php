@@ -1,4 +1,9 @@
 <?php
+
+namespace Wikibase\Test;
+use Wikibase\Item as Item;
+use Wikibase\Sites as Sites;
+
 /**
  * Tests for the WikibaseSites class.
  *
@@ -14,24 +19,24 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseSitesTests extends MediaWikiTestCase {
+class WikibaseSitesTests extends \MediaWikiTestCase {
 
 	public function testSingleton() {
-		$sites = WikibaseSites::singleton();
+		$sites = Sites::singleton();
 
-		$this->assertEquals( $sites, WikibaseSites::singleton() );
-		$this->assertInstanceOf( 'SeekableIterator', $sites );
+		$this->assertEquals( $sites, Sites::singleton() );
+		$this->assertInstanceOf( '\SeekableIterator', $sites );
 	}
 
 	public function testGetIdentifiers() {
-		$this->assertTrue( is_array( WikibaseSites::singleton()->getIdentifiers() ) );
+		$this->assertTrue( is_array( Sites::singleton()->getIdentifiers() ) );
 
 		$success = true;
 
 		try {
-			WikibaseSites::singleton()->getIdentifiers( '4241413541354135435435413' );
+			Sites::singleton()->getIdentifiers( '4241413541354135435435413' );
 		}
-		catch ( MWException $ex ) {
+		catch ( \MWException $ex ) {
 			$success = false;
 		}
 
@@ -39,27 +44,27 @@ class WikibaseSitesTests extends MediaWikiTestCase {
 	}
 
 	public function testHasSite() {
-		$ids = WikibaseSites::singleton()->getIdentifiers();
+		$ids = Sites::singleton()->getIdentifiers();
 
-		$this->assertTrue( WikibaseSites::singleton()->hasSite( reset( $ids ) ) );
-		$this->assertFalse( WikibaseSites::singleton()->hasSite( '4241413541354135435435413' ) );
+		$this->assertTrue( Sites::singleton()->hasSite( reset( $ids ) ) );
+		$this->assertFalse( Sites::singleton()->hasSite( '4241413541354135435435413' ) );
 	}
 
 	public function testGetGroup() {
-		$groups = array_keys( WBSettings::get( 'siteIdentifiers' ) );
-		$totalCount = WikibaseSites::singleton()->count();
+		$groups = array_keys( \WBSettings::get( 'siteIdentifiers' ) );
+		$totalCount = Sites::singleton()->count();
 		$count = 0;
 
 		foreach ( $groups as $groupName ) {
-			$group = WikibaseSites::singleton()->getGroup( $groupName );
-			$this->assertInstanceOf( 'WikibaseSites', $group );
+			$group = Sites::singleton()->getGroup( $groupName );
+			$this->assertInstanceOf( '\Wikibase\Sites', $group );
 			$count += $group->count();
 
 			if ( !$group->isEmpty() ) {
 				$sites = iterator_to_array( $group );
 
 				foreach ( array_slice( $sites, 0, 5 ) as $site ) {
-					$this->assertInstanceOf( 'WikibaseSite', $site );
+					$this->assertInstanceOf( '\Wikibase\Site', $site );
 					$this->assertEquals( $groupName, $site->getGroup() );
 				}
 			}
@@ -71,9 +76,9 @@ class WikibaseSitesTests extends MediaWikiTestCase {
 	public function testGetSite() {
 		$count = 0;
 
-		foreach ( WikibaseSites::singleton() as $site ) {
-			$this->assertInstanceOf( 'WikibaseSite', $site );
-			$this->assertEquals( $site, WikibaseSites::singleton()->getSite( $site->getId() ) );
+		foreach ( Sites::singleton() as $site ) {
+			$this->assertInstanceOf( '\Wikibase\Site', $site );
+			$this->assertEquals( $site, Sites::singleton()->getSite( $site->getId() ) );
 
 			if ( ++$count > 100 ) {
 				break;

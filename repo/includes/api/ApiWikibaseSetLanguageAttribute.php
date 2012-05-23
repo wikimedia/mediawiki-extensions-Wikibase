@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use ApiBase;
+
 /**
  * API module to set the language attributes for a Wikibase item.
  * Requires API write mode to be enabled.
@@ -14,7 +17,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
+class ApiSetLanguageAttribute extends ApiModifyItem {
 
 	/**
 	 * Check the rights for the user accessing this module.
@@ -50,12 +53,12 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
+	 * @param Item $item
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( WikibaseItem &$item, array $params ) {
+	protected function modifyItem( Item &$item, array $params ) {
 		$success = false;
 		
 		$res = $this->getResult();
@@ -93,7 +96,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
 			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'label' => array(

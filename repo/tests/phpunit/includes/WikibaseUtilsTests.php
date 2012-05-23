@@ -1,4 +1,9 @@
 <?php
+
+namespace Wikibase\Test;
+use Wikibase\Utils as Utils;
+use Wikibase\Sites as Sites;
+
 /**
  * Tests for the WikibaseUtils class.
  *
@@ -15,14 +20,14 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class WikibaseUtilsTests extends MediaWikiTestCase {
+class UtilsTests extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
 	 * @dataProvider providerGetLanguageCodes
 	 */
 	public function testGetLanguageCodes( $lang ) {
-    	$result = WikibaseUtils::getLanguageCodes();
+    	$result = Utils::getLanguageCodes();
     	$this->assertContains(
     		$lang,
     		$result,
@@ -44,7 +49,7 @@ class WikibaseUtilsTests extends MediaWikiTestCase {
 	 * @dataProvider providerGetSiteIdentifiers
 	 */
 	public function testGetSiteIdentifiers( $site ) {
-    	$result = WikibaseSites::singleton()->getIdentifiers();
+    	$result = Sites::singleton()->getIdentifiers();
     	$this->assertContains(
     		$site,
     		$result,
@@ -66,7 +71,7 @@ class WikibaseUtilsTests extends MediaWikiTestCase {
 	 * @dataProvider providerGetSiteUrl
 	 */
 	public function testGetSiteUrl( $siteId, $pageTitle, $expected ) {
-    	$actual = WikibaseSites::singleton()->getUrl( $siteId, $pageTitle );
+    	$actual = Sites::singleton()->getUrl( $siteId, $pageTitle );
     	$this->assertEquals(
     		$expected,
     		$actual,

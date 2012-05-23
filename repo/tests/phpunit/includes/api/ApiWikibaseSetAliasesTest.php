@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase\Test;
+
 /**
  * Tests for the ApiWikibaseSetAliases API module.
  *
@@ -37,7 +39,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiWikibaseSetAliasesTest extends ApiWikibaseModifyItemTest {
+class ApiSetAliasesTest extends ApiModifyItemTest {
 
 	public function paramProvider() {
 		return array(
@@ -66,7 +68,7 @@ class ApiWikibaseSetAliasesTest extends ApiWikibaseModifyItemTest {
 	public function testSetAliases( $langCode, $param, $value, $expected ) {
 		
 		$req = array();
-		if (WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true) {
+		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',

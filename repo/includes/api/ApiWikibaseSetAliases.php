@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use ApiBase, User;
+
 /**
  * API module to set the aliases for a Wikibase item.
  * Requires API write mode to be enabled.
@@ -14,7 +17,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
+class ApiSetAliases extends ApiModifyItem {
 
 	/**
 	 * Check the rights
@@ -48,12 +51,12 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
+	 * @param Item $item
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( WikibaseItem &$item, array $params ) {
+	protected function modifyItem( Item &$item, array $params ) {
 		if ( isset( $params['set'] ) ) {
 			$item->setAliases( $params['language'], $params['set'] );
 		}
@@ -101,7 +104,7 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 		) );
@@ -144,7 +147,7 @@ class ApiWikibaseSetAliases extends ApiWikibaseModifyItem {
 			'api.php?action=wbsetaliases&language=en&id=1&add=Foo|Bar'
 				=> 'Add Foo and Bar to the list of English labels for the item with id 1',
 
-			'api.php?action=wbsetaliases&language=en&id=1&set=Foo|Bar'
+			'api.php?action=wbsetaliases&language=en&id=1&remove=Foo|Bar'
 				=> 'Remove Foo and Bar from the list of English labels for the item with id 1',
 		);
 	}

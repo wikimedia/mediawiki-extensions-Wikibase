@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use ApiBase;
+
 /**
  * API module to obtain the Wikibase ids of one or more pages on a Wikipedia.
  *
@@ -13,7 +16,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetItemId extends ApiWikibase {
+class ApiGetItemId extends Api {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -31,7 +34,7 @@ class ApiWikibaseGetItemId extends ApiWikibase {
 
 		// normally 'id' should not exist here and the test should always return true
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = WikibaseItem::getIdForSiteLink( $params['site'], $params['title'] );
+			$params['id'] = Item::getIdForSiteLink( $params['site'], $params['title'] );
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
@@ -63,7 +66,7 @@ class ApiWikibaseGetItemId extends ApiWikibase {
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
 			'site' => array(
-				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
+				ApiBase::PARAM_TYPE => Sites::singleton()->getIdentifiers(),
 				//ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true
 			),

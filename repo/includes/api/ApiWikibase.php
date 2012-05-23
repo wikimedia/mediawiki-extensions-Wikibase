@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
  *
@@ -12,7 +14,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-abstract class ApiWikibase extends ApiBase {
+abstract class Api extends \ApiBase {
 	/**
 	 * Check the rights for the user accessing the module, that is a subclass of this one.
 	 * 
@@ -22,7 +24,7 @@ abstract class ApiWikibase extends ApiBase {
 	 * @return array of key-valuepairs or only values
 	 */
 	protected function stripKeys( array $params, array $arr, $tag ) {
-		$usekeys = WBSettings::get( 'apiUseKeys' ) || (isset($params['usekeys']) ? $params['usekeys'] : false);
+		$usekeys = \WBSettings::get( 'apiUseKeys' ) || (isset($params['usekeys']) ? $params['usekeys'] : false);
 		if ( $usekeys ) {
 			switch ( $this->getMain()->getRequest()->getVal( 'format' ) ) {
 				case 'json':
@@ -81,7 +83,7 @@ abstract class ApiWikibase extends ApiBase {
 	public function getAllowedParams() {
 		return array(
 			'usekeys' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
+				\ApiBase::PARAM_TYPE => 'boolean',
 			),
 		);
 	}

@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use IContextSource, MWException;
+
 /**
  * Class representing the disambiguation of a list of WikibaseItems.
  *
@@ -11,11 +14,11 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseItemDisambiguation extends ContextSource {
+class ItemDisambiguation extends \ContextSource {
 
 	/**
 	 * @since 0.1
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected $items;
 
@@ -58,11 +61,11 @@ class WikibaseItemDisambiguation extends ContextSource {
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
-					function( WikibaseItem $item ) use ( $langCode ) {
-						return HTML::rawElement(
+					function( Item $item ) use ( $langCode ) {
+						return \Html::rawElement(
 							'li',
 							array( 'class' => 'wikibase-disambiguation' ),
-							Linker::link(
+							\Linker::link(
 								$item->getTitle(),
 								htmlspecialchars( $item->getDescription( $langCode ) )
 							)

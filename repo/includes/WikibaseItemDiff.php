@@ -1,9 +1,6 @@
 <?php
 
-use Wikibase\MapDiff as MapDiff;
-use Wikibase\MapDiff as ListDiff;
-use Wikibase\SitelinkChange as SitelinkChange;
-use Wikibase\AliasChange as AliasChange;
+namespace Wikibase;
 
 /**
  * Represents a diff between two WikibaseItem instances.
@@ -21,7 +18,7 @@ use Wikibase\AliasChange as AliasChange;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseItemDiff extends WikibaseEntityDiff {
+class ItemDiff extends EntityDiff {
 
 	/**
 	 * @var MapDiff
@@ -43,12 +40,12 @@ class WikibaseItemDiff extends WikibaseEntityDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $oldItem
-	 * @param WikibaseItem $newItem
+	 * @param Item $oldItem
+	 * @param Item $newItem
 	 *
-	 * @return WikibaseItemDiff
+	 * @return ItemDiff
 	 */
-	public function __construct( WikibaseItem $oldItem, WikibaseItem $newItem ) {
+	public function __construct( Item $oldItem, Item $newItem ) {
 		$this->siteLinkDiff = MapDiff::newFromArrays(
 			$oldItem->getSiteLinks(),
 			$newItem->getSiteLinks()

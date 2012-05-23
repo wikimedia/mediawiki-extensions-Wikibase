@@ -1,5 +1,9 @@
 <?php
 
+namespace Wikibase\Test;
+use \Wikibase\ItemHandler as ItemHandler;
+use \Wikibase\Item as Item;
+
 /**
  * Tests for the WikibaseItem class.
  *
@@ -16,17 +20,17 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
+class ItemContentHandlerTests extends \MediaWikiTestCase {
 	
 	/**
 	 * Enter description here ...
-	 * @var WikibaseContentHandler
+	 * @var ItemHandler
 	 */
 	protected $ch;
 	
 	/**
 	 * Enter description here ...
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected $item;
 	
@@ -35,7 +39,7 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	 */
 	public function setUp() {
   		parent::setUp();
-		$this->ch = new WikibaseItemHandler();
+		$this->ch = new ItemHandler();
 	}
 	
   	/**

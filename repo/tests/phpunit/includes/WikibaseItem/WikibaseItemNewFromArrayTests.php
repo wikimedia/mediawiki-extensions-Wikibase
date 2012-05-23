@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase\Test;
+use \Wikibase\Item as Item;
+
 /**
  * Tests for the WikibaseItem class.
  *
@@ -16,11 +19,11 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class WikibaseItemNewFromArrayTests extends MediaWikiTestCase {
+class ItemNewFromArrayTests extends \MediaWikiTestCase {
 	
 	/**
 	 * Enter description here ...
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected $item = null;
 	
@@ -29,7 +32,7 @@ class WikibaseItemNewFromArrayTests extends MediaWikiTestCase {
 	 */
 	protected function setUp() {
   		parent::setUp();
-		$this->item = WikibaseItem::newFromArray( array( 'entity' => 'q42' ) );
+		$this->item = Item::newFromArray( array( 'entity' => 'q42' ) );
 	}
 	
   	/**

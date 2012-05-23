@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  *
  *
@@ -12,15 +14,13 @@
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseItemHandler extends WikibaseEntityHandler {
+class ItemHandler extends EntityHandler {
 
 	/**
-	 * FIXME: bad method name
-	 *
-	 * @return WikibaseItem
+	 * @return Item
 	 */
 	public function makeEmptyContent() {
-		return WikibaseItem::newEmpty();
+		return Item::newEmpty();
 	}
 
 	public function __construct() {
@@ -41,10 +41,10 @@ class WikibaseItemHandler extends WikibaseEntityHandler {
 	 * @param string $blob
 	 * @param null|string $format
 	 *
-	 * @return WikibaseItem
+	 * @return Item
 	 */
 	public function unserializeContent( $blob, $format = null ) {
-		return WikibaseItem::newFromArray( $this->unserializedData( $blob, $format ) );
+		return Item::newFromArray( $this->unserializedData( $blob, $format ) );
 	}
 
 }

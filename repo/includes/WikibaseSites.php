@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use MWException;
+
 /**
  * Interface to access sitelink related configuration. Right now this is read
  * from the configuration in WBSettings, but later on we might get this from the db.
@@ -12,7 +15,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseSites implements SeekableIterator {
+class Sites implements \SeekableIterator {
 
 	/**
 	 * Holds the sites with the keys being their identifiers and the
@@ -57,7 +60,7 @@ class WikibaseSites implements SeekableIterator {
 	 * @param string $globalUrlDefault
 	 * @param string $globalTypeDefault
 	 *
-	 * @return WikibaseSites
+	 * @return Sites
 	 */
 	protected static function newFromConfig( array $siteGroups, $globalPathDefault, $globalUrlDefault, $globalTypeDefault ) {
 		$groups = array();
@@ -97,21 +100,21 @@ class WikibaseSites implements SeekableIterator {
 	}
 
 	/**
-	 * Returns an instance of WikibaseSites.
+	 * Returns an instance of Sites.
 	 *
 	 * @since 0.1
 	 *
-	 * @return WikibaseSites
+	 * @return Sites
 	 */
 	public static function singleton() {
 		static $instance = false;
 
 		if ( $instance === false ) {
 			$instance = static::newFromConfig(
-				WBSettings::get( 'siteIdentifiers' ),
-				WBSettings::get( 'defaultSiteFilePath' ),
-				WBSettings::get( 'defaultSiteUrlPath' ),
-				WBSettings::get( 'defaultSiteType' )
+				\WBSettings::get( 'siteIdentifiers' ),
+				\WBSettings::get( 'defaultSiteFilePath' ),
+				\WBSettings::get( 'defaultSiteUrlPath' ),
+				\WBSettings::get( 'defaultSiteType' )
 			);
 		}
 
@@ -143,13 +146,13 @@ class WikibaseSites implements SeekableIterator {
 	}
 
 	/**
-	 * Returns a WikibaseSites containing only the sites of the specified group.
+	 * Returns a Sites containing only the sites of the specified group.
 	 *
 	 * @since 0.1
 	 *
 	 * @param string $groupName
 	 *
-	 * @return WikibaseSites
+	 * @return Sites
 	 */
 	public function getGroup( $groupName ) {
 		if ( array_key_exists( $groupName, $this->groups ) ) {
@@ -176,7 +179,7 @@ class WikibaseSites implements SeekableIterator {
 	 *
 	 * @param string $siteId
 	 *
-	 * @return WikibaseSite
+	 * @return Site
 	 * @throws MWException
 	 */
 	public function getSite( $siteId ) {
@@ -184,7 +187,7 @@ class WikibaseSites implements SeekableIterator {
 			throw new MWException( "There is no site with identifier '$siteId'." );
 		}
 
-		return WikibaseSite::newFromArray( $siteId, $this->sites[$siteId] );
+		return Site::newFromArray( $siteId, $this->sites[$siteId] );
 	}
 
 	/**
@@ -216,7 +219,7 @@ class WikibaseSites implements SeekableIterator {
 			return false;
 		}
 
-		return WikibaseSite::newFromArray( $siteId, $this->sites[$siteId] )->getPageUrl( $pageName );
+		return Site::newFromArray( $siteId, $this->sites[$siteId] )->getPageUrl( $pageName );
 	}
 
 	/**
@@ -235,7 +238,7 @@ class WikibaseSites implements SeekableIterator {
 			return false;
 		}
 
-		return WikibaseSite::newFromArray( $siteId, $this->sites[$siteId] )->getPath( $path );
+		return Site::newFromArray( $siteId, $this->sites[$siteId] )->getPath( $path );
 	}
 
 	/**
@@ -253,10 +256,10 @@ class WikibaseSites implements SeekableIterator {
 	}
 
 	/**
-	 * @return WikibaseSite
+	 * @return Site
 	 */
 	public function current() {
-		return WikibaseSite::newFromArray( $this->key, $this->sites[$this->key] );
+		return Site::newFromArray( $this->key, $this->sites[$this->key] );
 	}
 
 	/**

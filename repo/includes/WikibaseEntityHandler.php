@@ -1,18 +1,21 @@
 <?php
 
+namespace Wikibase;
+use MWException;
+
 /**
- * Base handler class for WikibaseEntity content classes.
+ * Base handler class for Wikibase\Entity content classes.
  *
  * @since 0.1
  *
- * @file WikibaseEntityHandler.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class WikibaseEntityHandler extends ContentHandler {
+abstract class EntityHandler extends \ContentHandler {
 
 	public function __construct( $modelId ) {
 		$formats = array(
@@ -29,16 +32,17 @@ abstract class WikibaseEntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	public function getDefaultFormat() {
-		return WBSettings::get( 'serializationFormat' );
+		return \WBSettings::get( 'serializationFormat' );
 	}
 
 	/**
-	 * @param Content $content
+	 * @param \Content $content
 	 * @param null|string $format
 	 *
+	 * @throws MWException
 	 * @return string
 	 */
-	public function serializeContent( Content $content, $format = null ) {
+	public function serializeContent( \Content $content, $format = null ) {
 
 		if ( is_null( $format ) ) {
 			$format = $this->getDefaultFormat();
@@ -68,7 +72,7 @@ abstract class WikibaseEntityHandler extends ContentHandler {
 	 * @return mixed
 	 *
 	 * @throws MWException
-	 * @throws MWContentSerializationException
+	 * @throws \MWContentSerializationException
 	 */
 	protected function unserializedData( $blob, $format = null ) {
 		if ( is_null( $format ) ) {
@@ -88,7 +92,7 @@ abstract class WikibaseEntityHandler extends ContentHandler {
 		}
 
 		if ( $data === false || $data === null ) {
-			throw new MWContentSerializationException( 'failed to deserialize' );
+			throw new \MWContentSerializationException( 'failed to deserialize' );
 		}
 
 		return $data;

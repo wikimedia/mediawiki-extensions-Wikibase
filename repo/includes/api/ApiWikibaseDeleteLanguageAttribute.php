@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * API module to delete the language attributes for a Wikibase item.
  * Requires API write mode to be enabled.
@@ -13,7 +15,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
+class ApiDeleteLanguageAttribute extends ApiModifyItem {
 
 	/**
 	 * Check the rights for the user accessing this module.
@@ -34,12 +36,12 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
+	 * @param Item $item
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( WikibaseItem &$item, array $params ) {
+	protected function modifyItem( Item &$item, array $params ) {
 		$language = $params['language'];
 		$labels = $item->getLabels( (array)$language );
 		$descriptions = $item->getDescriptions( (array)$language );
@@ -85,7 +87,7 @@ class ApiWikibaseDeleteLanguageAttribute extends ApiWikibaseModifyItem {
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
 			'language' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'attribute' => array(

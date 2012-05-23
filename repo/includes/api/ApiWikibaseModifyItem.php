@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use User, Title, ApiBase, WBSettings;
+
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
  *
@@ -12,19 +15,19 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ApiWikibaseModifyItem extends ApiWikibase {
+abstract class ApiModifyItem extends Api {
 
 	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
+	 * @param Item $item
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected abstract function modifyItem( WikibaseItem &$item, array $params );
+	protected abstract function modifyItem( Item &$item, array $params );
 	
 	/**
 	 * Check the rights for the user accessing the module, that is a subclass of this one.
@@ -108,21 +111,21 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 		}
 
 		if ( isset( $params['id'] ) ) {
-			$item = WikibaseItem::getFromId( $params['id'] );
+			$item = Item::getFromId( $params['id'] );
 
 			if ( is_null( $item ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
 			}
 		}
 		elseif ( $hasLink ) {
-			$item = WikibaseItem::getFromSiteLink( $params['site'], WikibaseItem::normalize( $params['title'] ) );
+			$item = Item::getFromSiteLink( $params['site'], Item::normalize( $params['title'] ) );
 			
 			if ( is_null( $item ) && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
 			}
 		}
 		
-		if ( !is_null( $item ) && !( $item instanceof WikibaseItem ) ) {
+		if ( !is_null( $item ) && !( $item instanceof Item ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
 			
@@ -131,7 +134,7 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 		}
 
 		if ( is_null( $item ) ) {
-			$item = WikibaseItem::newEmpty();
+			$item = Item::newEmpty();
 
 			if ( $hasLink ) {
 				$item->addSiteLink( $params['site'], $params['title'] );
@@ -171,7 +174,7 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 			if ( $hasLink ) {
 				// normalizing site does not really give any meaning
 				// so we only normalize title
-				$normTitle = WikibaseItem::normalize( $params['title'] );
+				$normTitle = Item::normalize( $params['title'] );
 				$normalized = array();
 				if ( $normTitle !== $params['title'] ) {
 					$normalized['from'] = $params['title'];
@@ -255,7 +258,7 @@ abstract class ApiWikibaseModifyItem extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'integer',
 			),
 			'site' => array(
-				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
+				ApiBase::PARAM_TYPE => Sites::singleton()->getIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',

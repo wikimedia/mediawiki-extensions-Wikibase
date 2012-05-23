@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use Language;
+
 /**
  * Handles the view action for Wikibase items.
  *
@@ -14,7 +17,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseViewItemAction extends FormlessAction {
+class ViewItemAction extends \FormlessAction {
 
 	/**
 	 * (non-PHPdoc)
@@ -58,7 +61,7 @@ class WikibaseViewItemAction extends FormlessAction {
 			$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLangCode ) );
 			$sites = array();
 
-			foreach ( WikibaseSites::singleton()->getGroup( 'wikipedia' ) as /* WikibaseSite */ $site ) {
+			foreach ( Sites::singleton()->getGroup( 'wikipedia' ) as /* Wikibase\Site */ $site ) {
 				$sites[$site->getId()] = array(
 					'shortName' => Language::fetchLanguageName( $site->getId() ),
 					'name' => Language::fetchLanguageName( $site->getId() ), // TODO: names should be configurable in settings

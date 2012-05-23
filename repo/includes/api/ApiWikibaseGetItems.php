@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use ApiBase;
+
 /**
  * API module to get the data for one or more Wikibase items.
  *
@@ -13,7 +16,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseGetItems extends ApiWikibase {
+class ApiGetItems extends Api {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -37,12 +40,13 @@ class ApiWikibaseGetItems extends ApiWikibase {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {
 				foreach ($params['titles'] as $title) {
-					$params['ids'][] = WikibaseItem::getIdForSiteLink( $params['sites'], $title );
+					$params['ids'][] = Item::getIdForSiteLink( $params['sites'], $title );
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				foreach ($params['sites'] as $site) {
-					$params['ids'][] = WikibaseItem::getIdForSiteLink( $sites, $params['titles'] );
+					// FOXME: $sites is not defined
+					$params['ids'][] = Item::getIdForSiteLink( $sites, $params['titles'] );
 				}
 			}
 			else {
@@ -63,14 +67,14 @@ class ApiWikibaseGetItems extends ApiWikibase {
 		);
 */		
 		foreach ($params['ids'] as $id) {
-			$page = WikibaseItem::getWikiPageForId( $id );
+			$page = Item::getWikiPageForId( $id );
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				$item = $page->getContent();
 				if ( is_null($item) ) {
 					continue;
 				}
-				if ( !( $item instanceof WikibaseItem ) ) {
+				if ( !( $item instanceof Item ) ) {
 					$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 				}
 				
@@ -126,7 +130,7 @@ class ApiWikibaseGetItems extends ApiWikibase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
+				ApiBase::PARAM_TYPE => Sites::singleton()->getIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'titles' => array(
@@ -134,7 +138,7 @@ class ApiWikibaseGetItems extends ApiWikibase {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'languages' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 		) );

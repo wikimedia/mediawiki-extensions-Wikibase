@@ -10,7 +10,7 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @authorNikola Smolenski
+ * @author Nikola Smolenski
  */
 final class WikibaseHooks {
 
@@ -183,9 +183,9 @@ final class WikibaseHooks {
 		$newItem = $article->getContent();
 
 		if ( $newItem->getModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
-			$oldItem = is_null( $revision->getParentId() ) ? WikibaseItem::newEmpty() : Revision::newFromId( $revision->getParentId() )->getContent();
+			$oldItem = is_null( $revision->getParentId() ) ? Wikibase\Item::newEmpty() : Revision::newFromId( $revision->getParentId() )->getContent();
 
-			$diff = new WikibaseItemDiff( $oldItem, $newItem );
+			$diff = new Wikibase\ItemDiff( $oldItem, $newItem );
 
 			if ( $diff->hasChanges() ) {
 				$dbw = wfGetDB( DB_MASTER );

@@ -1,4 +1,8 @@
 <?php
+
+namespace Wikibase\Test;
+use Wikibase\Site as Site;
+
 /**
  * Tests for the WikibaseSite class.
  *
@@ -14,7 +18,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseSiteTests extends MediaWikiTestCase {
+class WikibaseSiteTests extends \MediaWikiTestCase {
 
 	public function constructorProvider() {
 		return array(
@@ -31,7 +35,7 @@ class WikibaseSiteTests extends MediaWikiTestCase {
 	public function testConstructor() {
 		$args = func_get_args();
 
-		$reflect = new ReflectionClass( 'WikibaseSite' );
+		$reflect = new \ReflectionClass( 'WikibaseSite' );
 		$site = $reflect->newInstanceArgs( $args );
 
 		$functionMap = array(
@@ -67,7 +71,7 @@ class WikibaseSiteTests extends MediaWikiTestCase {
 	 * @dataProvider pathProvider
 	 */
 	public function testGetPath( $url, $filePath, $pathArgument, $expected ) {
-		$site = new WikibaseSite( 'en', 'wikipedia', $url, '', 'unknown', $filePath );
+		$site = new Site( 'en', 'wikipedia', $url, '', 'unknown', $filePath );
 		$this->assertEquals( $expected, $site->getPath( $pathArgument ) );
 	}
 
@@ -87,7 +91,7 @@ class WikibaseSiteTests extends MediaWikiTestCase {
 	 * @dataProvider pageUrlProvider
 	 */
 	public function testGetPageUrl( $url, $urlPath, $pageName, $expected ) {
-		$site = new WikibaseSite( 'en', 'wikipedia', $url, $urlPath, 'unknown' );
+		$site = new Site( 'en', 'wikipedia', $url, $urlPath, 'unknown' );
 		$this->assertEquals( $expected, $site->getPageUrl( $pageName ) );
 	}
 

@@ -1,5 +1,9 @@
 <?php
 
+namespace Wikibase\Test;
+use Wikibase\Item as Item;
+use Wikibase\ItemView as ItemView;
+
 /**
  * Test WikibaseItemView.
  *
@@ -37,7 +41,7 @@
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class WikibaseItemViewTests extends MediaWikiTestCase {
+class ItemViewTests extends \MediaWikiTestCase {
 	
 	protected static $num = -1;
 
@@ -56,13 +60,13 @@ class WikibaseItemViewTests extends MediaWikiTestCase {
     {
     	self::$num++;
     	
-    	$item = $arr === false ? WikibaseItem::newEmpty() : WikibaseItem::newFromArray( $arr );
+    	$item = $arr === false ? Item::newEmpty() : Item::newFromArray( $arr );
     	$item->setLabel('de', 'Stockholm');
         $this->assertTrue(
         	$item != null && $item !== false,
         	"Could not find an item" );
         
-		$view = new WikibaseItemView( $item );
+		$view = new ItemView( $item );
         $this->assertTrue(
         	$view != null && $view !== false,
         	"Could not find a view" );

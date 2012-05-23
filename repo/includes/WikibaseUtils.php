@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Utility functions for Wikibase.
  *
@@ -11,7 +13,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-final class WikibaseUtils {
+final class Utils {
 
 	/**
 	 * Returns a list of language codes that Wikibase supports,
@@ -25,7 +27,7 @@ final class WikibaseUtils {
 		static $languageCodes = null;
 
 		if ( is_null( $languageCodes ) ) {
-			$languageCodes = array_keys( Language::fetchLanguageNames() );
+			$languageCodes = array_keys( \Language::fetchLanguageNames() );
 		}
 
 		return $languageCodes;

@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use ApiBase, User;
+
 /**
  * API module to associate a page on a site with a Wikibase item or remove an already made such association.
  * Requires API write mode to be enabled.
@@ -14,7 +17,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
+class ApiLinkSite extends ApiModifyItem {
 
 	/**
 	 * Check the rights for the user accessing this module.
@@ -35,12 +38,12 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
+	 * @param Item $item
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( WikibaseItem &$item, array $params ) {
+	protected function modifyItem( Item &$item, array $params ) {
 		if ( isset($params['link']) && $params['link'] === 'remove') {
 			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
 		}
@@ -101,7 +104,7 @@ class ApiWikibaseLinkSite extends ApiWikibaseModifyItem {
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
 			'linksite' => array(
-				ApiBase::PARAM_TYPE => WikibaseSites::singleton()->getIdentifiers(),
+				ApiBase::PARAM_TYPE => Sites::singleton()->getIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'linktitle' => array(

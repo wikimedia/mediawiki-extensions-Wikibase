@@ -62,7 +62,7 @@ class SpecialItemByLabel extends SpecialItemResolver {
 	}
 
 	protected function displayDisambiguationPage( array /* of WikibaseItem */ $items, $langCode ) {
-		$disambiguationList = new WikibaseItemDisambiguation( $items, $langCode, $this->getContext() );
+		$disambiguationList = new Wikibase\ItemDisambiguation( $items, $langCode, $this->getContext() );
 		$disambiguationList->display();
 	}
 

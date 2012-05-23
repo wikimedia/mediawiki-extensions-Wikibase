@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use ApiBase, WBSettings;
+
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
  *
@@ -12,7 +15,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiWikibaseSetItem extends ApiWikibase {
+class ApiSetItem extends Api {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -79,13 +82,13 @@ class ApiWikibaseSetItem extends ApiWikibase {
 		}
 		
 		// lacks error checking
-		$item = WikibaseItem::newFromArray( json_decode( $params['data'], true ) );
+		$item = Item::newFromArray( json_decode( $params['data'], true ) );
 	
 		if ( is_null( $item ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 		}
 		
-		if ( !( $item instanceof WikibaseItem ) ) {
+		if ( !( $item instanceof Item ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
 			
@@ -208,7 +211,7 @@ class ApiWikibaseSetItem extends ApiWikibase {
 				ApiBase::PARAM_TYPE => 'string',
 			),
 			'languages' => array(
-				ApiBase::PARAM_TYPE => WikibaseUtils::getLanguageCodes(),
+				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 			),
 			//'summary' => array(
 			//	ApiBase::PARAM_TYPE => 'string',

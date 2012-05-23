@@ -1,4 +1,7 @@
 <?php
+
+namespace Wikibase\Test;
+
 /**
  *  Tests for the WikibaseEntity class.
  *
@@ -15,7 +18,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class WikibaseEntityTests extends MediaWikiTestCase {
+class EntityTests extends \MediaWikiTestCase {
 
 	public function testGetModelName()  {
 		// this should not do anything usefull, except checking that its there
