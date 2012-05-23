@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use ApiBase;
 
 /**
  * API module to delete the language attributes for a Wikibase item.
@@ -20,8 +21,8 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 	/**
 	 * Check the rights for the user accessing this module.
 	 * This is called from ModifyItem.
-	 * 
-	 * @param $user User doing the action
+	 *
+	 * @param $user \User doing the action
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 * @param $mod null|String name of the module, usually not set
 	 * @param $op null|String operation that is about to be done, usually not set
@@ -30,7 +31,7 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
 		return parent::getPermissionsError( $user, 'lang-attr', 'remove' );
 	}
-	
+
 	/**
 	 * Actually modify the item.
 	 *
@@ -45,11 +46,11 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 		$language = $params['language'];
 		$labels = $item->getLabels( (array)$language );
 		$descriptions = $item->getDescriptions( (array)$language );
-		
+
 		$success = false;
-		
+
 		foreach ($params['attribute'] as $attr) {
-			
+
 			switch ($attr) {
 				case 'label':
 					if ( !count($labels) ) {
@@ -58,7 +59,7 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 					$item->removeLabel( $language );
 					$success = $success || true;
 					break;
-					
+
 				case 'description':
 					if ( !count($descriptions) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
@@ -66,14 +67,14 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 					$item->removeDescription( $language );
 					$success = $success || true;
 					break;
-					
+
 				default:
 					// should never be here
 					$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
 			}
-			
+
 		}
-		
+
 		return $success;
 	}
 
@@ -108,7 +109,7 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 		return array_merge( parent::getParamDescription(), array(
 			'language' => 'Language the description is in',
 			'attribute' => array('The type of attribute to delete',
-					'One of ("label", "description")')
+				'One of ("label", "description")')
 		) );
 	}
 
@@ -141,17 +142,17 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 	protected function getExamples() {
 		return array(
 			'api.php?action=wbdeletelanguageattribute&id=42&language=en&attribute=label'
-				=> 'Delete whatever is stored in the attribute "label" in english language.',
+			=> 'Delete whatever is stored in the attribute "label" in english language.',
 		);
 	}
-	
+
 	/**
 	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
 	 */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbdeletelanguageattribute';
 	}
-	
+
 
 	/**
 	 * Returns a string that identifies the version of this class.
