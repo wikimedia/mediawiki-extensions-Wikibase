@@ -166,4 +166,41 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Called when a revision was inserted due to an edit.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NewRevisionFromEditComplete
+	 *
+	 * @since 0.1
+	 *
+	 * @param weirdStuffButProbablyWikiPage $article
+	 * @param Revision $revision
+	 * @param integer $baseID
+	 * @param User $user
+	 *
+	 * @return boolean
+	 */
+	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
+		$newItem = $article->getContent();
+
+		if ( $newItem->getModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
+			$oldItem = is_null( $revision->getParentId() ) ? WikibaseItem::newEmpty() : Revision::newFromId( $revision->getParentId() )->getContent();
+
+			$diff = new WikibaseItemDiff( $oldItem, $newItem );
+
+			if ( $diff->hasChanges() ) {
+				$dbw = wfGetDB( DB_MASTER );
+
+				$dbw->begin();
+
+				foreach ( $diff->getChanges() as /* Wikibase\Change */ $change ) {
+					$change->save();
+				}
+
+				$dbw->commit();
+			}
+		}
+
+		return true;
+	}
+
 }
