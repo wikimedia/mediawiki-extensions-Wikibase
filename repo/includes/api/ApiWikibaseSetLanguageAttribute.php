@@ -73,7 +73,7 @@ class ApiWikibaseSetLanguageAttribute extends ApiWikibaseModifyItem {
 		if (isset($params['description'])) {
 			$res->addValue(
 				'item',
-				'descritions',
+				'descriptions',
 				$this->stripKeys( $params, array( $language => $item->setDescription( $language, $params['description'] ) ), 'd' )
 			);
 		}

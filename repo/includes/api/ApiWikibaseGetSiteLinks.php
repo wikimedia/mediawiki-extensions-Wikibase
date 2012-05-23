@@ -45,7 +45,7 @@ class ApiWikibaseGetSiteLinks extends ApiWikibase {
 		if ( $page->exists() ) {
 			// as long as getWikiPageForId only returns ids for legal items this holds
 			$item = $page->getContent();
-			if (is_null() ) {
+			if (is_null( $item ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 			if ( !( $item instanceof WikibaseItem ) ) {
