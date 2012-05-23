@@ -53,6 +53,7 @@ class ApiWikibaseLanguageAttributeTest extends ApiWikibaseModifyItemTest {
 
 	/**
 	 * @dataProvider paramProvider
+	 * @group Broken
 	 */
 	public function testLanguageAttributeLabel( $attr, $langCode, $op, $value, $expected, $exception ) {
 		
