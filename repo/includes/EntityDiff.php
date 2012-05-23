@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Represents a diff between two Wikibase\Entity instances.
  *
