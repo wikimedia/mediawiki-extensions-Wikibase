@@ -131,16 +131,16 @@ class WikibaseItemContentHandlerTests extends MediaWikiTestCase {
 	}
 	
 	
-	/**
-	 * Tests @see WikibaseItem::testAddSiteLink
-	 * @dataProvider provideLinkData
-	 * @depends testUnserializeContent
-	 * @group Broken
-	 */
-	public function testAddSiteLink( $input, array $link, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
-		//$this->addSiteLink( $siteId, $pageName, $updateType = 'set' );
-	}
+#	/**
+#	 * Tests @see WikibaseItem::testAddSiteLink
+#	 * @dataProvider provideLinkData
+#	 * @depends testUnserializeContent
+#	 * @group Broken
+#	 */
+#	public function testAddSiteLink( $input, array $link, array $languages = null ) {
+#		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
+#		//$this->addSiteLink( $siteId, $pageName, $updateType = 'set' );
+#	}
 	
 	public function provideBasicData() {
 		return array(
