@@ -24,19 +24,19 @@ use Wikibase\DiffOpChange as DiffOpChange;
  */
 class MapDiffTest extends \MediaWikiTestCase {
 
-	public function recursionProvider() {//$this->newFromArraysProvider()
-		return array_merge( array(), array(
-//			array(
-//				array(
-//					'en' => array( 1, 2, 3 ),
-//				),
-//				array(
-//					'en' => array( 4, 2 ),
-//				),
-//				array(
-//					'en' => 'list',
-//				),
-//			),
+	public function recursionProvider() {
+		return array_merge( $this->newFromArraysProvider(), array(
+			array(
+				array(
+					'en' => array( 1, 2, 3 ),
+				),
+				array(
+					'en' => array( 4, 2 ),
+				),
+				array(
+					'en' => 'list',
+				),
+			),
 			array(
 				array(
 					'en' => array( 1, 2, 3 ),

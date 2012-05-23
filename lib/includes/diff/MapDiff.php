@@ -9,10 +9,28 @@ class MapDiff extends Diff implements IDiffOp {
 		return 'map';
 	}
 
+	/**
+	 * Creates and returns an empty MapDiff.
+	 *
+	 * @since 0.1
+	 *
+	 * @return MapDiff
+	 */
 	public static function newEmpty() {
 		return new self( array() );
 	}
 
+	/**
+	 * Creates a new MapDiff given two arrays.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $oldValues
+	 * @param array $newValues
+	 * @param boolean $recursively
+	 *
+	 * @return MapDiff
+	 */
 	public static function newFromArrays( array $oldValues, array $newValues, $recursively = false ) {
 		return new self( static::doDiff( $oldValues, $newValues, $recursively ) );
 	}
@@ -84,8 +102,17 @@ class MapDiff extends Diff implements IDiffOp {
 		return $diffSet;
 	}
 
+	/**
+	 * Returns if an array is associative or not.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $array
+	 *
+	 * @return boolean
+	 */
 	protected static function isAssociative( array $array ) {
-		return array_keys( $array ) !== range( 0, count( $array ) - 1 );
+		return $array !== array() && array_keys( $array ) !== range( 0, count( $array ) - 1 );
 	}
 
 	/**
