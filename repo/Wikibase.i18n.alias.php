@@ -20,3 +20,17 @@ $specialPageAliases['en'] = array(
 	'ItemByTitle' => array( 'ItemByTitle' ),
 	'ItemByLabel' => array( 'ItemByLabel' ),
 );
+
+/** Macedonian (Македонски) */
+$specialPageAliases['mk'] = array(
+	'CreateItem' => array( 'СоздајСтавка' ),
+	'ItemByTitle' => array( 'СтавкаПоНаслов' ),
+	'ItemByLabel' => array( 'СтавкаПоНатпис' ),
+);
+
+/** Dutch (Nederlands) */
+$specialPageAliases['nl'] = array(
+	'CreateItem' => array( 'ItemAanmaken' ),
+	'ItemByTitle' => array( 'ItemPerTitel' ),
+	'ItemByLabel' => array( 'ItemPerLabel' ),
+);
