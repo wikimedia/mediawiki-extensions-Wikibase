@@ -20,6 +20,8 @@ class Diff extends \ArrayIterator implements IDiff {
 		'add' => array(),
 		'remove' => array(),
 		'change' => array(),
+		'list' => array(),
+		'map' => array(),
 	);
 
 	/**

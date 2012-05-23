@@ -14,7 +14,7 @@ class MapDiff extends Diff implements IDiffOp {
 	}
 
 	public static function newFromArrays( array $oldValues, array $newValues, $recursively = false ) {
-		return new self( self::doDiff( $oldValues, $newValues, $recursively ) );
+		return new self( static::doDiff( $oldValues, $newValues, $recursively ) );
 	}
 
 	/**
@@ -37,8 +37,8 @@ class MapDiff extends Diff implements IDiffOp {
 	 * )
 	 */
 	public static function doDiff( array $oldValues, array $newValues, $recursively = false ) {
-		$oldSet = array_diff_assoc( $oldValues, $newValues );
-		$newSet = array_diff_assoc( $newValues, $oldValues );
+		$newSet = static::array_diff_assoc( $newValues, $oldValues );
+		$oldSet = static::array_diff_assoc( $oldValues, $newValues );
 
 		$diffSet = array();
 
@@ -48,14 +48,19 @@ class MapDiff extends Diff implements IDiffOp {
 
 			if ( $recursively ) {
 				if ( ( !$hasOld || is_array( $oldSet[$key] ) ) && ( !$hasNew || is_array( $newSet[$key] ) ) ) {
+
 					$old = $hasOld ? $oldSet[$key] : array();
 					$new = $hasNew ? $newSet[$key] : array();
 
-					if ( self::isAssociative( $old ) || self::isAssociative( $new ) ) {
-						$diffSet[$key] = self::newFromArrays( $old, $new );
+					if ( static::isAssociative( $old ) || static::isAssociative( $new ) ) {
+						$diff = static::newFromArrays( $old, $new );
 					}
 					else {
-						$diffSet[$key] = ListDiff::newFromArrays( $old, $new );
+						$diff = ListDiff::newFromArrays( $old, $new );
+					}
+
+					if ( !$diff->isEmpty() ) {
+						$diffSet[$key] = $diff;
 					}
 
 					continue;
@@ -81,6 +86,39 @@ class MapDiff extends Diff implements IDiffOp {
 
 	protected static function isAssociative( array $array ) {
 		return array_keys( $array ) !== range( 0, count( $array ) - 1 );
+	}
+
+	/**
+	 * Similar to the native array_diff_assoc function, except that it will
+	 * spot differences between array values. Very weird the native
+	 * function just ignores these...
+	 *
+	 * @see http://php.net/manual/en/function.array-diff-assoc.php
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $from
+	 * @param array $to
+	 *
+	 * @return array
+	 */
+	protected static function array_diff_assoc( array $from, array $to ) {
+		$diff = array();
+
+		foreach ( $from as $key => $value ) {
+			if ( !array_key_exists( $key, $to ) || $to[$key] !== $value ) {
+				$diff[$key] = $value;
+			}
+		}
+
+		return $diff;
+
+		return array_filter(
+			$from,
+			function( $value ) use ( $to ) {
+				return !in_array( $value, $to );
+			}
+		);
 	}
 
 	/**

@@ -17,11 +17,67 @@ use Wikibase\DiffOpChange as DiffOpChange;
  * @group Wikibase
  * @group WikibaseLib
  * @group WikibaseDiff
+ * @group WikibaseMapDiff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class MapDiffTest extends \MediaWikiTestCase {
+
+	public function recursionProvider() {//$this->newFromArraysProvider()
+		return array_merge( array(), array(
+//			array(
+//				array(
+//					'en' => array( 1, 2, 3 ),
+//				),
+//				array(
+//					'en' => array( 4, 2 ),
+//				),
+//				array(
+//					'en' => 'list',
+//				),
+//			),
+			array(
+				array(
+					'en' => array( 1, 2, 3 ),
+					'nl' => array( 'hax' ),
+					'foo' => 'bar',
+				),
+				array(
+					'en' => array( 4, 2 ),
+					'de' => array( 'hax' ),
+				),
+				array(
+					'en' => 'list',
+					'de' => 'list',
+					'nl' => 'list',
+					'foo' => new DiffOpRemove( 'bar' ),
+				),
+			),
+		) );
+	}
+
+	/**
+	 * @dataProvider recursionProvider
+	 */
+	public function testRecursion( array $from, array $to, $expected ) {
+		$diff = MapDiff::newFromArrays( $from, $to, true );
+
+		foreach ( $expected as $key => &$value ) {
+			if ( $value === 'list' ) {
+				$value = \Wikibase\ListDiff::newFromArrays(
+					array_key_exists( $key, $from ) ? $from[$key] : array(),
+					array_key_exists( $key, $to ) ? $to[$key] : array()
+				);
+			}
+		}
+
+		asort( $expected );
+		$diff->asort();
+		$actual = $diff->getArrayCopy();
+
+		$this->assertEquals( $expected, $actual );
+	}
 
 	public function newFromArraysProvider() {
 		return array(
