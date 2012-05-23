@@ -22,6 +22,9 @@
  * @ingroup Wikibase
  * @ingroup Test
  *
+ * @group Wikibase
+ * @group WikibaseItemView
+ *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  *

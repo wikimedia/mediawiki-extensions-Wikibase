@@ -17,10 +17,10 @@
  */
 class WikibaseEntityTests extends MediaWikiTestCase {
 
-    public function testGetModelName()  {
-    	// this should not do anything usefull, except checking that its there
-        $stub = $this->getMockForAbstractClass( 'WikibaseEntity' );
-        $this->assertEquals( CONTENT_MODEL_WIKIBASE_ITEM, $stub->getModel() );
-    }
+	public function testGetModelName()  {
+		// this should not do anything usefull, except checking that its there
+		$stub = $this->getMockForAbstractClass( 'WikibaseEntity', array( CONTENT_MODEL_WIKIBASE_ITEM ) );
+		$this->assertEquals( CONTENT_MODEL_WIKIBASE_ITEM, $stub->getModel() );
+	}
 
 }
