@@ -95,10 +95,10 @@ class PollForChanges extends \Maintenance {
 		);
 
 		if ( $changes->count() === 0 ) {
-			$this->msg( 'No new changes where found' );
+			$this->msg( 'No new changes were found' );
 		}
 		else {
-			$this->msg( $changes->count() . ' new changes where found' );
+			$this->msg( $changes->count() . ' new changes were found' );
 
 			wfRunHooks( 'WikibasePollBeforeHandle', array( $changes ) );
 
