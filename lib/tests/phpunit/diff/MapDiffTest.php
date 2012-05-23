@@ -54,6 +54,26 @@ class MapDiffTest extends \MediaWikiTestCase {
 					'foo' => new DiffOpRemove( 'bar' ),
 				),
 			),
+			array(
+				array(
+					'en' => array( 'a' => 1, 'b' => 2, 'c' => 3 ),
+					'nl' => array( 'a' => 'hax' ),
+					'foo' => 'bar',
+					'bar' => array( 1, 2, 3 ),
+				),
+				array(
+					'bar' => array( 4, 2 ),
+					'en' => array( 'd' => 4, 'b' => 2 ),
+					'de' => array( 'a' =>'hax' ),
+				),
+				array(
+					'en' => 'map',
+					'de' => 'map',
+					'nl' => 'map',
+					'foo' => new DiffOpRemove( 'bar' ),
+					'bar' => 'list',
+				),
+			),
 		) );
 	}
 
@@ -66,6 +86,12 @@ class MapDiffTest extends \MediaWikiTestCase {
 		foreach ( $expected as $key => &$value ) {
 			if ( $value === 'list' ) {
 				$value = \Wikibase\ListDiff::newFromArrays(
+					array_key_exists( $key, $from ) ? $from[$key] : array(),
+					array_key_exists( $key, $to ) ? $to[$key] : array()
+				);
+			}
+			elseif ( $value === 'map' ) {
+				$value = \Wikibase\MapDiff::newFromArrays(
 					array_key_exists( $key, $from ) ? $from[$key] : array(),
 					array_key_exists( $key, $to ) ? $to[$key] : array()
 				);
