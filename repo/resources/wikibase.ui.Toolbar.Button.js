@@ -59,7 +59,7 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 		) {
             // cancel action
             return false;
-        }		
+        }
 		return true;
 	},
 	

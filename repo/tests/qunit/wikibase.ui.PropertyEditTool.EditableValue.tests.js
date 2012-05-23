@@ -264,7 +264,7 @@
 
 		equal(
 			this.editableValue.isInEditMode(),
-		false,
+			false,
 			'cancelled editing'
 		);
 
@@ -279,7 +279,7 @@
 		this.editableValue.remove( false );
 
 		ok(
-			this.editableValue._toolbar.editGroup.btnRemove._tooltip instanceof window.wikibase.ui.Tooltip,
+			this.editableValue._toolbar.editGroup.btnRemove.getTooltip() instanceof window.wikibase.ui.Tooltip,
 			'attached tooltip to remove button after trying to remove with API action'
 		);
 

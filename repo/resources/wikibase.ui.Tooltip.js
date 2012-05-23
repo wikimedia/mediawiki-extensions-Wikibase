@@ -345,8 +345,8 @@ window.wikibase.ui.Tooltip.ext = {
 
 		if ( this._tooltip !== null ) {
 			// remove existing tooltip first!
-			this.removeTooltip();
 			wasVisible = this._tooltip.isVisible();
+			this.removeTooltip();
 		}
 		if ( typeof tooltip == 'string' ) {
 			// build new tooltip from string:

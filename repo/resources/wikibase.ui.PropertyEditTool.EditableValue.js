@@ -201,8 +201,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * differently.
 	 *
 	 * @param bool preserveEmptyForm allows to preserve the empty form so a new value can be entered immediately.
+	 * @return jQuery.Deferred in case the remove was called before and is still running, the deferred from the ongoing
+	 *         remove will be returned and the deferreds property isOngoingRemove will be set to true.
 	 */
 	remove: function( preserveEmptyForm ) {
+		if( this.__isRemoving ) {
+			this.__isRemoving.isOngoingRemove = true;
+			return this.__isRemoving_deferred; // returns the deferred
+		}
+
 		var degrade = $.proxy( function() {
 			if( ! preserveEmptyForm ) {
 				// remove value totally
@@ -220,26 +227,42 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}, this );
 
 		if( this.isPending() ) {
-			// no API call necessary since value hasn't been stored yet.
+			// no API call necessary since value hasn't been stored yet...
 			degrade();
+			return $.Deferred().resolve(); // ...return new deferred nonetheless
 		} else {
 			var action = preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
-			this.performApiAction( action )
-			.then( $.proxy( degrade, this ) );
+
+			// store deferred so we can return it when this is called again while still running
+			// NOTE: can't store deferred in this.__isRemoving because .always() might be called even before return!
+			this.__isRemoving = true;
+			this.__isRemoving_deferred =
+				this.performApiAction( action )
+				.then( degrade )
+				.always( $.proxy( function() {
+					this.__isRemoving = false;
+				}, this ) );
+
+			return this.__isRemoving_deferred; // return deferred
 		}
 	},
 
 	/**
 	 * Saves the current value by sending it to the server. In case the current value is invalid, this will trigger a
 	 * remove instead but will preserve the form to insert a new value.
+	 *
+	 * @return jQuery.Deferred
 	 */
-	save: function( afterSaveComplete ) {
+	save: function() {
+		if( arguments.length > 0 ) {
+			alert( "TAKE A LOOK AT EditableValue.save() again!" );
+		}
 		if( ! this.isValid() ) {
 			// remove instead! Save equals remove in this case!
 			return this.remove( true );
 		}
 
-		this.performApiAction( this.API_ACTION.SAVE )
+		return this.performApiAction( this.API_ACTION.SAVE ) // returns deferred
 		.then( $.proxy( function( response ) {
 			var wasPending = this.isPending();
 			this._reTransform( true );
@@ -247,11 +270,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._pending = false; // not pending anymore after saved once
 			this._subject.removeClass( 'wb-pending-value' );
 
-			if( this.onAfterStopEditing !== null && this.onAfterStopEditing( true, wasPending ) === false ) { // callback
-				return false; // cancel
-			}
-
-			afterSaveComplete && afterSaveComplete(); // callback if defined
+			this.onAfterStopEditing && this.onAfterStopEditing( true, wasPending ); // callback
 		}, this ) );
 	},
 
@@ -281,19 +300,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Destroys the edit box and displays the original text or the inputs new value.
 	 *
 	 * @param bool save whether to save the new user given value
-	 * @param function afterSaveComplete function to be called after saving has been performed
+	 * @param Function afterSaveComplete function to be called after saving has been performed //TODO: get rid of this!
 	 * @return bool whether the value has changed (or was removed) in which case the changes are on their way to the API
 	 */
 	stopEditing: function( save, afterSaveComplete ) {
-		if( typeof afterSaveComplete == 'undefined' ) {
-			afterSaveComplete = function() {};
-		}
-
-		if( ! this.isInEditMode() ) {
+		if( ! this.isInEditMode() || this.__isStopEditing ) {
 			return false;
 		}
+
 		if( this.onStopEditing !== null && this.onStopEditing( save ) === false ) { // callback
 			return false; // cancel
+		}
+
+		if( typeof afterSaveComplete == 'undefined' ) {
+			afterSaveComplete = function() {};
 		}
 
 		if( ! save && this.isPending() ) {
@@ -313,8 +333,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			afterSaveComplete();
 		}
 		else {
-			// save...
-			this.save( afterSaveComplete );
+			this.__isStopEditing = true; // don't go here twice as long as callback still running
+
+			// save... (will call all the API stuff)
+			this.save()
+			.done( function() {
+				afterSaveComplete();
+			} )
+			.always( $.proxy( function() {
+				this.__isStopEditing = false;
+			}, this ) );
 		}
 
 		return save;
