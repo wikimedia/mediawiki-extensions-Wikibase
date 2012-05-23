@@ -786,18 +786,27 @@ class WikibaseItem extends WikibaseEntity {
 	 *
 	 * @since 0.1
 	 *
-	 * @param IContextSource $context
+	 * @param Title $title
 	 * @param null $revId
 	 * @param null|ParserOptions $options
 	 * @param bool $generateHtml
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( IContextSource $context, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+		global $wgRequest;
+
+		# construct dummy context for the dummy view
+		$context = new RequestContext( $wgRequest );
+		$context->setTitle( $title );
+
 		$itemView = new WikibaseItemView( $this, $context );
 		$parserOutput = new ParserOutput( $itemView->getHTML() );
 
-		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $context->getTitle() ) );
+		#@todo (phase 2) would be nice to put pagelinks (item references) and categorylinks (from special properties)...
+		#@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
+
+		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $title ) );
 
 		return $parserOutput;
 	}
@@ -968,5 +977,4 @@ class WikibaseItem extends WikibaseEntity {
 		
 		return $str;
 	}
-
 }

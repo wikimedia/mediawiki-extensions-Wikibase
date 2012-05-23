@@ -38,7 +38,7 @@ class WikibaseViewItemAction extends FormlessAction {
 			// TODO: switch on type of content.
 			$contentLangCode = $this->getLanguage()->getCode();
 
-			$parserOutput = $content->getParserOutput( $this->getContext() );
+			$parserOutput = $content->getParserOutput( $this->getTitle() );
 
 			$out = $this->getOutput();
 
