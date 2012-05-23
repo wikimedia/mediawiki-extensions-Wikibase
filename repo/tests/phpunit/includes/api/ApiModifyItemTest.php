@@ -26,6 +26,9 @@ use Wikibase\Item as Item;
  * @ingroup Wikibase
  * @ingroup Test
  *
+ * @group Wikibase
+ * @group WikibaseAPI
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

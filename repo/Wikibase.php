@@ -125,7 +125,7 @@ $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/Specia
 
 
 // tests
-$wgAutoloadClasses['ApiWikibaseModifyItemTest'] 		= $dir . 'tests/phpunit/includes/api/ApiWikibaseModifyItemTest.php';
+$wgAutoloadClasses['Wikibase\Test\ApiModifyItemTest'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemTest.php';
 
 
 

@@ -19,7 +19,10 @@ use ApiTestCase, ApiTestUser;
  * @author John Erling Blad < jeblad@gmail.com >
  * 
  * @group API
- * 
+ *
+ * @group Wikibase
+ * @group WikibaseAPI
+ *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
  * @group Database
