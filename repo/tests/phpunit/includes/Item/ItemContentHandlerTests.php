@@ -56,9 +56,9 @@ class ItemContentHandlerTests extends \MediaWikiTestCase {
 	public function testUnserializeContent( $input, array $labels, array $descriptions, array $languages = null ) {
 		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->assertInstanceOf(
-			'WikibaseItem',
+			'\Wikibase\Item',
 			$this->item,
-			'Calling unserializeContent on a WikibaseItemHandler should return a WikibaseItem'
+			'Calling unserializeContent on a \Wikibase\ItemHandler should return a \Wikibase\Item'
 		);
 	}
 
@@ -71,7 +71,7 @@ class ItemContentHandlerTests extends \MediaWikiTestCase {
 		$this->assertEquals(
 			$labels,
 			$this->item->getLabels( $languages ),
-			'Testing getLabels on a new WikibaseItem after creating it with preset values and doing a unserializeContent'
+			'Testing getLabels on a new \Wikibase\Item after creating it with preset values and doing a unserializeContent'
 		);
 	}
 
@@ -84,7 +84,7 @@ class ItemContentHandlerTests extends \MediaWikiTestCase {
 		$this->assertEquals(
 			$descriptions,
 			$this->item->getDescriptions( $languages ),
-			'Testing getDescriptions on a new WikibaseItem after creating it with preset values and doing a unserializeContent'
+			'Testing getDescriptions on a new \Wikibase\Item after creating it with preset values and doing a unserializeContent'
 		);
 	}
 	
@@ -97,9 +97,9 @@ class ItemContentHandlerTests extends \MediaWikiTestCase {
 		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$copy = $this->item->copy();
 		$this->assertInstanceOf(
-			'WikibaseItem',
+			'\Wikibase\Item',
 			$copy,
-			'Calling copy on the return value of WikibaseItem::unserializeContent() should still return a new WikibaseItem object'
+			'Calling copy on the return value of \Wikibase\Item::unserializeContent() should still return a new \Wikibase\Item object'
 		);
 		$this->assertEquals(
 			$copy,
@@ -118,14 +118,14 @@ class ItemContentHandlerTests extends \MediaWikiTestCase {
 		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->item->cleanStructure();
 		$this->assertInstanceOf(
-			'WikibaseItem',
+			'\Wikibase\Item',
 			$this->item,
-			'Calling cleanStructure should still leave the item as a WikibaseItem object'
+			'Calling cleanStructure should still leave the item as a \Wikibase\Item object'
 		);
 		$this->assertInternalType(
 			'array',
 			$this->item->getLabels(),
-			'Checking if the expected structure is the type for returned labels for a cleaned WikibaseItem'
+			'Checking if the expected structure is the type for returned labels for a cleaned \Wikibase\Item'
 		);
 		$this->assertInternalType(
 			'array',

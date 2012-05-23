@@ -47,7 +47,7 @@ class ItemNewFromArrayTests extends \MediaWikiTestCase {
 	 */
 	public function testNewFromArray() {
 		$this->assertInstanceOf(
-			'WikibaseItem',
+			'\Wikibase\Item',
 			$this->item,
 			'After creating a WikibaseItem with an entity "q42" it should still be a WikibaseItem'
 		);
@@ -56,7 +56,7 @@ class ItemNewFromArrayTests extends \MediaWikiTestCase {
 			'Calling isNew on a new WikibaseItem after creating it with an entity "q42" should return false'
 		);
 		$this->assertInstanceOf(
-			'Title',
+			'\Title',
 			$this->item->getTitle(),
 			'Calling getTitle on a WikibaseItem after creating it with an entity "q42" should return a Title'
 		);

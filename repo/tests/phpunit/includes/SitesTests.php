@@ -5,7 +5,7 @@ use Wikibase\Item as Item;
 use Wikibase\Sites as Sites;
 
 /**
- * Tests for the WikibaseSites class.
+ * Tests for the Wikibase\Sites class.
  *
  * @file
  * @since 0.1
@@ -19,7 +19,7 @@ use Wikibase\Sites as Sites;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseSitesTests extends \MediaWikiTestCase {
+class SitesTests extends \MediaWikiTestCase {
 
 	public function testSingleton() {
 		$sites = Sites::singleton();

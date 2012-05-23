@@ -1,6 +1,6 @@
 <?php
 /**
- *  Tests for the WikibaseEntity class.
+ *  Tests for the Wikibase\Item class.
  *
  * @file
  * @since 0.1
@@ -15,7 +15,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class WikibaseItemTests extends MediaWikiTestCase {
+class ItemTests extends MediaWikiTestCase {
 
 	protected $the_item;
 

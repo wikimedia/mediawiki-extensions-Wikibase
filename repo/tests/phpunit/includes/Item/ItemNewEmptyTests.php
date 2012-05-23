@@ -47,7 +47,7 @@ class ItemNewEmptyTests extends \MediaWikiTestCase {
 	 */
 	public function testNewEmpty() {
 		$this->assertInstanceOf(
-			'WikibaseItem',
+			'\Wikibase\Item',
 			$this->item,
 			'After creating an empty WikibaseItem it should be a WikibaseItem'
 		);

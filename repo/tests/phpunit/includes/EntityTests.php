@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- *  Tests for the WikibaseEntity class.
+ *  Tests for the Wikibase\Entity class.
  *
  * @file
  * @since 0.1
@@ -22,7 +22,7 @@ class EntityTests extends \MediaWikiTestCase {
 
 	public function testGetModelName()  {
 		// this should not do anything usefull, except checking that its there
-		$stub = $this->getMockForAbstractClass( 'WikibaseEntity', array( CONTENT_MODEL_WIKIBASE_ITEM ) );
+		$stub = $this->getMockForAbstractClass( '\Wikibase\Entity', array( CONTENT_MODEL_WIKIBASE_ITEM ) );
 		$this->assertEquals( CONTENT_MODEL_WIKIBASE_ITEM, $stub->getModel() );
 	}
 

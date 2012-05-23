@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\Site as Site;
 
 /**
- * Tests for the WikibaseSite class.
+ * Tests for the Wikibase\Site class.
  *
  * @file
  * @since 0.1
@@ -18,7 +18,7 @@ use Wikibase\Site as Site;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseSiteTests extends \MediaWikiTestCase {
+class SiteTests extends \MediaWikiTestCase {
 
 	public function constructorProvider() {
 		return array(
@@ -35,7 +35,7 @@ class WikibaseSiteTests extends \MediaWikiTestCase {
 	public function testConstructor() {
 		$args = func_get_args();
 
-		$reflect = new \ReflectionClass( 'WikibaseSite' );
+		$reflect = new \ReflectionClass( '\Wikibase\Site' );
 		$site = $reflect->newInstanceArgs( $args );
 
 		$functionMap = array(

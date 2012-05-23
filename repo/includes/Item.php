@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Title, WikiPage, Content;
+use User, Title, WikiPage, Content, ParserOptions, ParserOutput, RequestContext;
 
 /**
  * Represents a single Wikibase item.
@@ -806,13 +806,13 @@ class Item extends Entity {
 		$context = new RequestContext( $wgRequest );
 		$context->setTitle( $title );
 
-		$itemView = new WikibaseItemView( $this, $context );
+		$itemView = new ItemView( $this, $context );
 		$parserOutput = new ParserOutput( $itemView->getHTML() );
 
 		#@todo (phase 2) would be nice to put pagelinks (item references) and categorylinks (from special properties)...
 		#@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
 
-		$parserOutput->addSecondaryDataUpdate( new WikibaseItemStructuredSave( $this, $title ) );
+		$parserOutput->addSecondaryDataUpdate( new ItemStructuredSave( $this, $title ) );
 
 		return $parserOutput;
 	}
@@ -820,7 +820,7 @@ class Item extends Entity {
 	/**
 	 * @since 0.1
 	 * @see Content::copy
-	 * @return WikibaseItem
+	 * @return Item
 	 */
 	public function copy() {
 		$array = array();

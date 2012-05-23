@@ -32,8 +32,8 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-			'view' => 'WikibaseViewItemAction',
-			'edit' => 'WikibaseEditItemAction',
+			'view' => '\Wikibase\ViewItemAction',
+			'edit' => '\Wikibase\EditItemAction',
 		);
 	}
 

@@ -51,23 +51,23 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
 
-		$files[] = $testDir . 'WikibaseEntityTests.php';
-		$files[] = $testDir . 'WikibaseItemViewTests.php';
-		$files[] = $testDir . 'WikibaseSiteTests.php';
-		$files[] = $testDir . 'WikibaseSitesTests.php';
-		$files[] = $testDir . 'WikibaseUtilsTests.php';
+		$files[] = $testDir . 'EntityTests.php';
+		$files[] = $testDir . 'ItemViewTests.php';
+		$files[] = $testDir . 'SiteTests.php';
+		$files[] = $testDir . 'SitesTests.php';
+		$files[] = $testDir . 'UtilsTests.php';
 
 		// api
-		$files[] = $testDir . 'api/ApiWikibaseTests.php';
-		$files[] = $testDir . 'api/ApiWikibaseModifyItemTest.php';
-		$files[] = $testDir . 'api/ApiWikibaseSetAliasesTest.php';
+		$files[] = $testDir . 'api/ApiTests.php';
+		$files[] = $testDir . 'api/ApiModifyItemTest.php';
+		$files[] = $testDir . 'api/ApiSetAliasesTest.php';
 
 		// wikibaseitem
-		$files[] = $testDir . 'WikibaseItem/WikibaseItemTests.php';
-		$files[] = $testDir . 'WikibaseItem/WikibaseItemMoveTests.php';
-		$files[] = $testDir . 'WikibaseItem/WikibaseItemNewEmptyTests.php';
-		$files[] = $testDir . 'WikibaseItem/WikibaseItemNewFromArrayTests.php';
-		$files[] = $testDir . 'WikibaseItem/WikibaseItemContentHandlerTests.php';
+		$files[] = $testDir . 'Item/ItemTests.php';
+		$files[] = $testDir . 'Item/ItemMoveTests.php';
+		$files[] = $testDir . 'Item/ItemNewEmptyTests.php';
+		$files[] = $testDir . 'Item/ItemNewFromArrayTests.php';
+		$files[] = $testDir . 'Item/ItemContentHandlerTests.php';
 
 		return true;
 	}

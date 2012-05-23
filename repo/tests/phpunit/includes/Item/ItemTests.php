@@ -51,7 +51,7 @@ class ItemTests extends \MediaWikiTestCase {
 	public function testGetTitleForId() {
 		$title = Item::getTitleForId( 42 );
 		$this->assertInstanceOf(
-			'Title',
+			'\Title',
 			$title,
 			'Calling WikibaseItem::getTitleForId(42) should return a Title object'
 		);
@@ -68,7 +68,7 @@ class ItemTests extends \MediaWikiTestCase {
 	public function testGetWikiPageForId() {
 		$page = Item::getWikiPageForId( 42 );
 		$this->assertInstanceOf(
-			'WikiPage',
+			'\WikiPage',
 			$page,
 			'Calling WikibaseItem::getWikiPageForId(42) should return a WikiPage object'
 		);

@@ -85,35 +85,35 @@ $wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['WikibaseDifferenceEngine'] 			= $dir . 'includes/WikibaseDifferenceEngine.php';
-$wgAutoloadClasses['WikibaseUtils'] 					= $dir . 'includes/WikibaseUtils.php';
-$wgAutoloadClasses['WikibaseItem'] 						= $dir . 'includes/WikibaseItem.php';
-$wgAutoloadClasses['WikibaseItemDiff'] 					= $dir . 'includes/WikibaseItemDiff.php';
-$wgAutoloadClasses['WikibaseItemHandler'] 				= $dir . 'includes/WikibaseItemHandler.php';
-$wgAutoloadClasses['WikibaseEntity'] 					= $dir . 'includes/WikibaseEntity.php';
-$wgAutoloadClasses['WikibaseEntityDiff'] 				= $dir . 'includes/WikibaseEntityDiff.php';
-$wgAutoloadClasses['WikibaseEntityHandler'] 			= $dir . 'includes/WikibaseEntityHandler.php';
-$wgAutoloadClasses['WikibaseItemDisambiguation'] 		= $dir . 'includes/WikibaseItemDisambiguation.php';
-$wgAutoloadClasses['WikibaseItemStructuredSave'] 		= $dir . 'includes/WikibaseItemStructuredSave.php';
-$wgAutoloadClasses['WikibaseItemView'] 					= $dir . 'includes/WikibaseItemView.php';
-$wgAutoloadClasses['WikibaseSites'] 					= $dir . 'includes/WikibaseSites.php';
-$wgAutoloadClasses['WikibaseSite'] 						= $dir . 'includes/WikibaseSite.php';
+$wgAutoloadClasses['Wikibase\DifferenceEngine'] 		= $dir . 'includes/DifferenceEngine.php';
+$wgAutoloadClasses['Wikibase\Utils'] 					= $dir . 'includes/Utils.php';
+$wgAutoloadClasses['Wikibase\Item'] 					= $dir . 'includes/Item.php';
+$wgAutoloadClasses['Wikibase\ItemDiff'] 				= $dir . 'includes/ItemDiff.php';
+$wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
+$wgAutoloadClasses['Wikibase\Entity'] 					= $dir . 'includes/Entity.php';
+$wgAutoloadClasses['Wikibase\EntityDiff'] 				= $dir . 'includes/EntityDiff.php';
+$wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/EntityHandler.php';
+$wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisambiguation.php';
+$wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/ItemStructuredSave.php';
+$wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
+$wgAutoloadClasses['Wikibase\Sites'] 					= $dir . 'includes/Sites.php';
+$wgAutoloadClasses['Wikibase\Site'] 					= $dir . 'includes/Site.php';
 
 // includes/actions
-$wgAutoloadClasses['WikibaseViewItemAction'] 			= $dir . 'includes/actions/WikibaseViewItemAction.php';
-$wgAutoloadClasses['WikibaseEditItemAction'] 			= $dir . 'includes/actions/WikibaseEditItemAction.php';
+$wgAutoloadClasses['Wikibase\ViewItemAction'] 			= $dir . 'includes/actions/ViewItemAction.php';
+$wgAutoloadClasses['Wikibase\EditItemAction'] 			= $dir . 'includes/actions/EditItemAction.php';
 
 // includes/api
-$wgAutoloadClasses['ApiWikibase'] 				= $dir . 'includes/api/ApiWikibase.php';
-$wgAutoloadClasses['ApiWikibaseGetItems'] 				= $dir . 'includes/api/ApiWikibaseGetItems.php';
-$wgAutoloadClasses['ApiWikibaseGetItemId'] 				= $dir . 'includes/api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 			= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
-$wgAutoloadClasses['ApiWikibaseSetLanguageAttribute'] 	= $dir . 'includes/api/ApiWikibaseSetLanguageAttribute.php';
-$wgAutoloadClasses['ApiWikibaseDeleteLanguageAttribute']= $dir . 'includes/api/ApiWikibaseDeleteLanguageAttribute.php';
-$wgAutoloadClasses['ApiWikibaseModifyItem'] 			= $dir . 'includes/api/ApiWikibaseModifyItem.php';
-$wgAutoloadClasses['ApiWikibaseLinkSite'] 				= $dir . 'includes/api/ApiWikibaseLinkSite.php';
-$wgAutoloadClasses['ApiWikibaseSetAliases'] 			= $dir . 'includes/api/ApiWikibaseSetAliases.php';
-$wgAutoloadClasses['ApiWikibaseSetItem'] 				= $dir . 'includes/api/ApiWikibaseSetItem.php';
+$wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
+$wgAutoloadClasses['Wikibase\ApiGetItems'] 				= $dir . 'includes/api/ApiGetItems.php';
+$wgAutoloadClasses['Wikibase\ApiGetItemId'] 			= $dir . 'includes/api/ApiGetItemId.php';
+$wgAutoloadClasses['Wikibase\ApiGetSiteLinks'] 			= $dir . 'includes/api/ApiGetSiteLinks.php';
+$wgAutoloadClasses['Wikibase\ApiSetLanguageAttribute'] 	= $dir . 'includes/api/ApiSetLanguageAttribute.php';
+$wgAutoloadClasses['Wikibase\ApiDeleteLanguageAttribute']= $dir . 'includes/api/ApiDeleteLanguageAttribute.php';
+$wgAutoloadClasses['Wikibase\ApiModifyItem'] 			= $dir . 'includes/api/ApiModifyItem.php';
+$wgAutoloadClasses['Wikibase\ApiLinkSite'] 				= $dir . 'includes/api/ApiLinkSite.php';
+$wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
+$wgAutoloadClasses['Wikibase\ApiSetItem'] 				= $dir . 'includes/api/ApiSetItem.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
@@ -130,14 +130,14 @@ $wgAutoloadClasses['ApiWikibaseModifyItemTest'] 		= $dir . 'tests/phpunit/includ
 
 
 // API module registration
-$wgAPIModules['wbgetitems'] 						= 'ApiWikibaseGetItems';
-$wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
-$wgAPIModules['wbsetlanguageattribute'] 			= 'ApiWikibaseSetLanguageAttribute';
-$wgAPIModules['wbdeletelanguageattribute'] 			= 'ApiWikibaseDeleteLanguageAttribute';
-$wgAPIModules['wbgetsitelinks'] 					= 'ApiWikibaseGetSiteLinks';
-$wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
-$wgAPIModules['wbsetaliases'] 						= 'ApiWikibaseSetAliases';
-$wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
+$wgAPIModules['wbgetitems'] 						= 'Wikibase\ApiGetItems';
+$wgAPIModules['wbgetitemid'] 						= 'Wikibase\ApiGetItemId';
+$wgAPIModules['wbsetlanguageattribute'] 			= 'Wikibase\ApiSetLanguageAttribute';
+$wgAPIModules['wbdeletelanguageattribute'] 			= 'Wikibase\ApiDeleteLanguageAttribute';
+$wgAPIModules['wbgetsitelinks'] 					= 'Wikibase\ApiGetSiteLinks';
+$wgAPIModules['wblinksite'] 						= 'Wikibase\ApiLinkSite';
+$wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
+$wgAPIModules['wbsetitem'] 							= 'Wikibase\ApiSetItem';
 
 
 
@@ -289,7 +289,7 @@ unset( $moduleTemplate );
 // register hooks and handlers
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
 
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseItemHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 
 $baseNs = 100;
 
