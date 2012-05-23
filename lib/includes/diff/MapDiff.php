@@ -3,6 +3,21 @@
 namespace Wikibase;
 use MWException;
 
+/**
+ * Class representing the diff between to (associative) arrays.
+ * Since items are identified by keys, it's possible to do meaningful
+ * recursive diffs. So the IDiffOp objects contained by this MapDiff can
+ * be containers such as MapDiff and ListDiff themselves.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup WikibaseLib
+ * @ingroup WikibaseDiff
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
 class MapDiff extends Diff implements IDiffOp {
 
 	public function getType() {
