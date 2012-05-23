@@ -193,6 +193,13 @@ final class WikibaseHooks {
 				$dbw->begin();
 
 				foreach ( $diff->getChanges() as /* Wikibase\Change */ $change ) {
+					$change->setFields( array(
+						'revision_id' => $revision->getId(),
+						'user_id' => $user->getId(),
+						'object_id' => $newItem->getId(),
+						'time' => $revision->getTimestamp(),
+					) );
+
 					$change->save();
 				}
 
