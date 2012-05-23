@@ -127,6 +127,7 @@ class WBSettings {
 			// alternative: application/vnd.php.serialized
 			'serializationFormat' => CONTENT_FORMAT_JSON,
 
+			// TODO: This should be removed before code goes into production
 			// Block use of duplicate keys
 			// this is to turn on a quick fix that breaks
 			// some UI code and also some tests

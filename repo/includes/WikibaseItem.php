@@ -545,6 +545,7 @@ class WikibaseItem extends WikibaseEntity {
 	public function addSiteLink( $siteId, $pageName, $updateType = 'add' ) {
 		
 
+		// TODO: This should be removed before code goes into production
 		if (WBSettings::get( 'blockDuplicateSiteLinks' ) ) {
 			// TODO Checks if the link to be added already exists. Should give a better error message.
 			// This really should have a solution and not only a quick fix
@@ -981,4 +982,5 @@ class WikibaseItem extends WikibaseEntity {
 		
 		return $str;
 	}
+
 }
