@@ -65,6 +65,11 @@ class PollForChanges extends \Maintenance {
 	 * Maintenance script entry point.
 	 */
 	public function execute() {
+		if ( !defined( 'WBL_VERSION' ) ) {
+			// Since people might waste time debugging odd errors when they forget to enable the extension. BTDT.
+			die( 'WikibaseLib has not been loaded.' );
+		}
+
 		$this->changes = Changes::singleton();
 
 		$this->lastChangeId = (int)$this->getArg( 'startid', 0 );
