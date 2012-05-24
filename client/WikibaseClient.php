@@ -54,13 +54,15 @@ $wgAutoloadClasses['WBCNoLangLinkHandler'] 			= $dir . 'includes/WBCNoLangLinkHa
 $wgAutoloadClasses['WBCSkinHandler'] 				= $dir . 'includes/WBCSkinHandler.php';
 
 // Hooks
+$wgHooks['UnitTestsList'][] 						= 'WBCHooks::registerUnitTests';
+$wgHooks['WikibasePollHandle'][]					= 'WBCHooks::onWikibasePollHandle';
 $wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
 $wgHooks['ParserFirstCallInit'][]					= 'WBCNoLangLinkHandler::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]				= 'WBCNoLangLinkHandler::onMagicWordwgVariableIDs';
 $wgHooks['ParserGetVariableValueSwitch'][]			= 'WBCNoLangLinkHandler::onParserGetVariableValueSwitch';
-$wgHooks['UnitTestsList'][] 						= 'WBCHooks::registerUnitTests';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= 'WBCSkinHandler::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['BeforePageDisplay'][]						= 'WBCSkinHandler::onBeforePageDisplay';
+
 
 // Resource loader modules
 $moduleTemplate = array(
@@ -68,9 +70,9 @@ $moduleTemplate = array(
 	'remoteExtPath' => 'WikidataClient/resources',
 );
 
-$wgResourceModules['wikibaseClient'] = $moduleTemplate + array(
+$wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
 	'styles' => array(
-		'wikibaseclient.css'
+		'ext.wikibaseclient.css'
 	),
 );
 
