@@ -62,6 +62,7 @@ $wgHooks['MagicWordwgVariableIDs'][]				= 'WBCNoLangLinkHandler::onMagicWordwgVa
 $wgHooks['ParserGetVariableValueSwitch'][]			= 'WBCNoLangLinkHandler::onParserGetVariableValueSwitch';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= 'WBCSkinHandler::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['BeforePageDisplay'][]						= 'WBCSkinHandler::onBeforePageDisplay';
+$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WBCHooks::onSchemaUpdate';
 
 
 // Resource loader modules

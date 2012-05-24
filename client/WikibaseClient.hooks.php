@@ -16,6 +16,25 @@ use Wikibase\Change as Change;
 final class WBCHooks {
 
 	/**
+	 * Schema update to set up the needed database tables.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
+	 *
+	 * @since 0.1
+	 *
+	 * @param DatabaseUpdater $updater
+	 *
+	 * @return boolean
+	 */
+	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
+		$updater->addExtensionTable(
+			'wbc_local_items',
+			dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
+		);
+
+		return true;
+	}
+
+	/**
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
