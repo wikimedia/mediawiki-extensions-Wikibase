@@ -23,8 +23,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
 
-if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c because version_compare() works in confusing ways.
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.\n" );
+if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
+	die( "<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.\n" );
 }
 
 define( 'WBC_VERSION', '0.1 alpha' );
@@ -68,9 +68,9 @@ $moduleTemplate = array(
 	'remoteExtPath' => 'WikidataClient/resources',
 );
 
-$wgResourceModules['wikibaseClient'] = $moduleTemplate + array(
+$wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
 	'styles' => array(
-		'wikibaseclient.css'
+		'ext.wikibaseclient.css'
 	),
 );
 
