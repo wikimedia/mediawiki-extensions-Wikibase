@@ -49,6 +49,9 @@ $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.m
 // Autoloading
 $wgAutoloadClasses['WBCHooks'] 						= $dir . 'WikibaseClient.hooks.php';
 $wgAutoloadClasses['WBCSettings'] 					= $dir . 'WikibaseClient.settings.php';
+
+$wgAutoloadClasses['Wikibase\LocalItem'] 			= $dir . 'includes/LocalItem.php';
+$wgAutoloadClasses['Wikibase\LocalItems'] 			= $dir . 'includes/LocalItems.php';
 $wgAutoloadClasses['WBCLangLinkHandler'] 			= $dir . 'includes/WBCLangLinkHandler.php';
 $wgAutoloadClasses['WBCNoLangLinkHandler'] 			= $dir . 'includes/WBCNoLangLinkHandler.php';
 $wgAutoloadClasses['WBCSkinHandler'] 				= $dir . 'includes/WBCSkinHandler.php';

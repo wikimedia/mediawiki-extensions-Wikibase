@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Diff as Diff;
+use Wikibase\LocalItem as LocalItem;
 
 /**
  * Tests for the Diff class.
@@ -9,18 +9,17 @@ use Wikibase\Diff as Diff;
  * @file
  * @since 0.1
  *
- * @ingroup WikibaseLib
+ * @ingroup WikibaseClient
  * @ingroup Test
  * @group Wikibase
- * @group WikibaseLib
- * @group WikibaseDiff
+ * @group WikibaseClient
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffTest extends \MediaWikiTestCase {
+class LocalItemTest extends \MediaWikiTestCase {
 
-
+	// TODO
 
 }
 	

@@ -105,6 +105,14 @@ $messages['gsw'] = array(
 	'wbc-editlinkstitle' => 'Sprachibergryfigi Link bearbeite',
 );
 
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'wbc-editlinks' => 'עריכת קישורים',
+	'wbc-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
+);
+
 /** Upper Sorbian (Hornjoserbsce)
  * @author Michawiki
  */
@@ -118,6 +126,8 @@ $messages['hsb'] = array(
  * @author McDutchie
  */
 $messages['ia'] = array(
+	'wbc-desc' => 'Cliente pro le extension Wikibase',
+	'wbc-editlinks' => 'Modificar ligamines',
 	'wbc-editlinkstitle' => 'Modificar ligamines interlingua',
 );
 
