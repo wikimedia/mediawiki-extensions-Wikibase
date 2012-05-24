@@ -230,24 +230,15 @@ final class WikibaseHooks {
 	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
-		$sites = array();
-
-		foreach ( Wikibase\Sites::singleton()->getGroup( 'wikipedia' ) as /* WikibaseSite */ $site ) {
-			$visibleSiteName = $site->getId() . ' - ' . Language::fetchLanguageName( $site->getId() );
-			$sites[ $visibleSiteName ] = $site->getId();
-		}
-
 		$preferences['wb-languages'] = array(
 			'type' => 'multiselect',
 			'usecheckboxes' => false,
 			'label-message' => 'wikibase-setting-languages',
-			'options' => $preferences['language']['options'],
+			'options' => $preferences['language']['options'], // all languages available in 'language' selector
 			'section' => 'personal/i18n',
 			'prefix' => 'wb-languages-',
-			//'default' => $user->getOption( 'wb-languages' ),
 		);
 
-		// Required return value of a hook function.
 		return true;
 	}
 
@@ -260,14 +251,11 @@ final class WikibaseHooks {
 	 * @return bool
 	 */
 	public static function onUserGetDefaultOptions( array &$defaultOptions ) {
-		// get default language...
+		// pre-select default language in the list of fallback languages
 		$defaultLang = $defaultOptions['language'];
+		$defaultOptions[ 'wb-languages-' . $defaultLang ] = 1;
 
-		if( Wikibase\Sites::singleton()->getGroup( 'wikipedia' )->hasSite( $defaultLang ) ) {
-			// ... and pre-select this language if it is available in the list of fallback languages
-			$defaultOptions[ 'wb-languages-' . $defaultOptions['language'] ] = 1;
-			return true;
-		};
+		return true;
 	}
 
 }
