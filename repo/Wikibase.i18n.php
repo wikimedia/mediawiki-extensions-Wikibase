@@ -54,6 +54,8 @@ $messages['en'] = array(
 	'wikibase-error-autocomplete-connection' => 'Could not query Wikipedia API. Please try again later.',
 	'wikibase-error-autocomplete-response' => 'Server responded: $1',
 
+	'wikibase-setting-languages' => 'Further languages<br/>(e.g. as fallback when displaying data not available in the main language)',
+
 	// Special pages
 	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
@@ -145,6 +147,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-remove-timeout' => 'Error message for an error happening during a remove operation. The error was caused by a request time out.',
 	'wikibase-error-autocomplete-connection' => 'Error message for page auto-complete input box; displayed when API could not be reached.',
 	'wikibase-error-autocomplete-response' => 'When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).',
+	'wikibase-setting-languages' => 'Label for the user settings where the user can choose several languages he is interested in editing data for or which are interesting as a fallback when displaying data not available in the users main language',
 	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 
