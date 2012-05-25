@@ -8,14 +8,26 @@
  *
  * @ingroup Wikibase
  * @ingroup Test
- * 
+ *
  * @group Wikibase
  * @group WikibaseClient
- *
+ * 
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>
  */
 class WikibaseClientGeneralTests extends MediaWikiTestCase {
+
+	public $defaultSettings = array(
+		'source' => array(
+			'var' => array(
+				"Berlin" => array( 
+					"fr" => array( "site" => "fr", "title"	=> "Berlin" ),
+					"de" => array( "site" => "de", "title"	=> "Berlin" )
+				)
+			)
+		),
+		'sort' => 'alphabetic',
+	);
 
 	/**
 	 * No local links, no remote links.
@@ -29,19 +41,14 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 * Only local links, no remote links, alphabetical sorting.
 	 */
 	public function testLocal() {
+		$settings = $this->defaultSettings;
+		$settings['source']['var'] = array();
 		$links = $this->doParse(
 			Title::newFromText( "Berlin" ),
-			array(
-				'source' => array(
-					'var' => array(
-						"Berlin" => array()
-					)
-				),
-				'sort' => 'alphabetic',
-			),
+			$settings,
 			array( "fr:Berlin", "de:Berlin" )
 		);
-		$this->assertEquals( array( "de:Berlin", "fr:Berlin" ), $links );
+		$this->assertEquals( array( "fr:Berlin", "de:Berlin" ), $links );
 	}
 
 	/**
@@ -50,17 +57,10 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	public function testRemote() {
 		$links = $this->doParse(
 			Title::newFromText( "Berlin" ),
-			array(
-				'source' => array(
-					'var' => array(
-						"Berlin" => array( "mk" => "Берлин", "fr" => "Berlin" )
-					)
-				),
-				'sort' => 'alphabetic',
-			),
+			$this->defaultSettings,
 			array()
 		);
-		$this->assertEquals( array( "fr:Berlin", "mk:Берлин" ), $links );
+		$this->assertEquals( array( "de:Berlin", "fr:Berlin" ), $links );
 	}
 
 	/**
@@ -69,17 +69,10 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	public function testAll() {
 		$links = $this->doParse(
 			Title::newFromText( "Berlin" ),
-			array(
-				'source' => array(
-					'var' => array(
-						"Berlin" => array( "fr" => "Berlin", "de" => "Berlin" )
-					)
-				),
-				'sort' => 'alphabetic',
-			),
-			array( "mk:Берлин", "fr:Berlin" )
+			$this->defaultSettings,
+			array( "en:Berlin" )
 		);
-		$this->assertEquals( array( "de:Berlin", "fr:Berlin", "mk:Берлин" ), $links );
+		$this->assertEquals( array( "de:Berlin", "en:Berlin", "fr:Berlin" ), $links );
 	}
 
 	/**
@@ -90,13 +83,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 
 		$links = $this->doParse(
 			$title,
-			array(
-				'source' => array(
-					'var' => array(
-						$title->getFullText() => array( "fr" => "Berlin", "de" => "Berlin" )
-					)
-				),
-			),
+			$this->defaultSettings,
 			array()
 		);
 		$this->assertEquals( array(), $links );
@@ -107,18 +94,18 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 */
 	public function testNamespace() {
 		$title = Title::makeTitle( NS_CATEGORY, "Berlin" );
+		$settings = $this->defaultSettings;
+		$settings['source']['var'] = array(
+			"Category:Berlin" => array(
+				"fr" => array( "site" => "fr", "title"  => "Berlin" ),
+				"de" => array( "site" => "de", "title"  => "Berlin" )
+			)
+		);
 
-		$links = $this->doParse(
+		$settings['namespaces'] = array( NS_MAIN, NS_CATEGORY );
+		$links = $this->doParse(		
 			$title,
-			array(
-				'source' => array(
-					'var' => array(
-						$title->getFullText() => array( "fr" => "Berlin", "de" => "Berlin" )
-					)
-				),
-				'sort' => 'alphabetic',
-				'namespaces' => array( NS_MAIN, NS_CATEGORY ),
-			),
+			$settings,
 			array()
 		);
 		$this->assertEquals( array( "de:Berlin", "fr:Berlin" ), $links );
@@ -136,6 +123,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 		$parser->parse("", $title, $opt);
 		$parser->getOutput()->setLanguageLinks( $links );
 		$dummy = "";
+		WBCLangLinkHandler::resetLangLinks();
 		WBCLangLinkHandler::onParserBeforeTidy( $parser, $dummy );
 		return $parser->getOutput()->getLanguageLinks();
 	}
