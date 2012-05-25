@@ -45,10 +45,12 @@ final class WBCHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
-		$testDir = dirname( __FILE__ ) . '/tests';
+		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
 
-		$files[] = $testDir . '/phpunit/General.php';
-		$files[] = $testDir . '/phpunit/Sorting.php';
+		$files[] = $testDir . 'General.php';
+		$files[] = $testDir . 'Sorting.php';
+
+		$files[] = $testDir . 'includes/LocalItemTest.php';
 
 		return true;
 	}

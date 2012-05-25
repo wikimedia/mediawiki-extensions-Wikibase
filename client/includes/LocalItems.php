@@ -53,8 +53,9 @@ class LocalItems extends \ORMTable {
 	 */
 	public function getFields() {
 		return array(
-			'item_id' => 'id',
-			'page_id' => 'id',
+			'id' => 'id',
+			'item_id' => 'int',
+			'page_id' => 'int',
 			'item_data' => 'blob',
 		);
 	}

@@ -25,7 +25,7 @@ class LocalItem extends ORMRow {
 	 * @return Item
 	 */
 	public function getItem() {
-		return $this->getField( 'item' );
+		return $this->getField( 'item_data' );
 	}
 
 }
