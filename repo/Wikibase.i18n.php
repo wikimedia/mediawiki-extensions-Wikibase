@@ -109,10 +109,18 @@ This is a generic text used for a link (fig. 2 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-add' => '[[File:Screenshot WikidataRepo 2012-05-13 F.png|right|0x150px]]
 [[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that puts the user interface into edit mode for an additional element of some kind.',
+	'wikibase-save-inprogress' => '[[File:Screenshot WikidataRepo 2012-05-25 L.png|right|350px]]
+[[File:Screenshot WikidataRepo 2012-05-25 J.png|right|350px]]
+[[File:Screenshot WikidataRepo 2012-05-25 K.png|right|350px]]
+This is a generic placeholder message used while a save is in progress, and replaces the save and cancel links.',
+	'wikibase-remove-inprogress' => '[[File:Screenshot WikidataRepo 2012-05-25 L.png|right|350px]]
+[[File:Screenshot WikidataRepo 2012-05-25 M.png|right|350px]]
+This is a generic placeholder message used while a remove is in progress, and replaces the edit and remove.',
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
+	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|pagfe]] and [[m:Wikidata/Glossary#item|item]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
 This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
 	'wikibase-sitelink-page-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
@@ -137,6 +145,8 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 * $2 is the number of elements stored in the list (not pending).
 * $3 is the message "wikibase-propertyedittool-counter-pending-pendingsubpart" with some additional markup around, expressing how many entries in the list are pending right now.',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => 'the number of pending elements within the list of site links and a leading "+". This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-counter-pending}}.',
+	'wikibase-propertyedittool-counter-pending-tooltip' => 'Parameters:
+* $1 is the number of elements not saved yet.',
 	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the mor specific error message returned from the underlying API).',
@@ -151,6 +161,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-setting-languages' => 'Label for the user settings where the user can choose several languages he is interested in editing data for or which are interesting as a fallback when displaying data not available in the users main language',
 	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
+	'special-createitem' => 'Title of the special page for creating new items.',
 	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition.',
 	'wikibase-api-no-token' => 'This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are som exceptional error condition. The message can be shown after misconfiguration of the system.',
 	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
@@ -237,14 +248,15 @@ $messages['de'] = array(
 	'wikibase-sitelinksedittool-full' => 'Für alle bekannten Websites sind die Links auf die Seiten bereits festgelegt.',
 	'wikibase-disambiguation-title' => 'Begriffsklärung für „$1“',
 	'wikibase-tooltip-error-details' => 'Einzelheiten',
-	'wikibase-error-save-generic' => 'Beim Versuch deine Änderungen zu speichern, ist ein Fehler aufgetreten. Deine Änderungen konnten daher nicht gespeichert werden.',
-	'wikibase-error-remove-generic' => 'Beim Versuch das Entfernen auszuführen, ist ein Fehler aufgetreten.',
-	'wikibase-error-save-connection' => 'Deine Änderungen konnten nicht gespeichert werden. Bitte prüfe deine Internetverbindung.',
-	'wikibase-error-remove-connection' => 'Beim Versuch das Entfernen auszuführen, ist ein Fehler aufgetreten. Bitte prüfe deine Internetverbindung.',
-	'wikibase-error-save-timeout' => 'Wir haben technische Schwierigkeiten. Deine Änderungen konnten daher nicht gespeichert werden.',
-	'wikibase-error-remove-timeout' => 'Wir haben technische Schwierigkeiten. Das Entfernen konnten daher nicht ausgeführt werden.',
+	'wikibase-error-save-generic' => 'Beim Versuch zu speichern, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.',
+	'wikibase-error-remove-generic' => 'Beim Versuch zu entfernen, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.',
+	'wikibase-error-save-connection' => 'Beim Versuch zu speichern ist ein Verbindungsfehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden. Die Internetverbindung sollte überprüft werden.',
+	'wikibase-error-remove-connection' => 'Beim Versuch zu entfernen ist ein Verbindungsfehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden. Die Internetverbindung sollte überprüft werden.',
+	'wikibase-error-save-timeout' => 'Wir haben technische Schwierigkeiten. Diese Änderungen konnten daher nicht fertig gespeichert werden.',
+	'wikibase-error-remove-timeout' => 'Wir haben technische Schwierigkeiten. Diese Änderungen konnten daher nicht fertig gespeichert werden.',
 	'wikibase-error-autocomplete-connection' => 'Die Wikipedia-API konnte nicht abgefragt werden. Bitte versuche es später noch einmal.',
 	'wikibase-error-autocomplete-response' => 'Serverantwort: $1',
+	'wikibase-setting-languages' => 'Weitere Sprachen<br />(z. B. für den Fall, dass das Anzeigen von Daten nicht in der Hauptsprache möglich ist)',
 	'special-itembytitle' => 'Wert nach Name',
 	'special-itembylabel' => 'Wert nach Bezeichnung',
 	'special-createitem' => 'Ein neues Datenelement erstellen',
@@ -293,6 +305,14 @@ $messages['de-formal'] = array(
 	'wikibase-api-aliases-invalid-list' => 'Sie müssen einen der Parameter zu „set“, „add“, bzw. „remove“ nutzen.',
 	'wikibase-api-id-xor-wikititle' => 'Geben Sie für eine entsprechende Seite entweder die Kennung des Datenelements „id“ oder Informationspaare mit Angaben zu „site“ und „title“ an.',
 	'wikibase-api-label-or-description' => 'Verwenden Sie entweder Bezeichnung und/oder Beschreibung, aber lassen Sie dies nicht offen.',
+);
+
+/** Zazaki (Zazaki)
+ * @author Erdemaslancan
+ */
+$messages['diq'] = array(
+	'wikibase-add' => 'Deke',
+	'wikibase-save-inprogress' => 'Starêno...',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -972,8 +992,11 @@ $messages['nn'] = array(
 	'wikibase-save' => 'lagre',
 	'wikibase-cancel' => 'avbryt',
 	'wikibase-add' => 'legg til',
+	'wikibase-save-inprogress' => 'Lagrar…',
+	'wikibase-remove-inprogress' => 'Fjernar…',
 	'wikibase-label-edit-placeholder' => 'lag merkelapp',
 	'wikibase-description-edit-placeholder' => 'lag beskriving',
+	'wikibase-move-error' => 'Du kan ikkje flytte sider i datanamnerommet, og du kan ikkje flytte sider inn i det.',
 	'wikibase-sitelink-site-edit-placeholder' => 'oppgje nettstad',
 	'wikibase-sitelink-page-edit-placeholder' => 'oppgje side',
 	'wikibase-label-input-help-message' => 'Lag ein merkelapp for datasettet knytt til $1.',
@@ -987,6 +1010,7 @@ $messages['nn'] = array(
 	'wikibase-sitelinksedittool-full' => 'Det er ikkje fleire nettstadar tilgjengeleg',
 	'special-itembytitle' => 'Eit datasett er påvist ved bruk av tittel',
 	'special-itembylabel' => 'Eit datasett er påvist ved bruk av merkelapp',
+	'wikibase-api-aliases-invalid-list' => 'Bruk en av parametrene «set» («sett»), «add» («legg til») eller «remove» («fjern»).',
 );
 
 /** Portuguese (Português)
