@@ -15,6 +15,7 @@ $messages = array();
 /** English
  * @author Daniel Kinzler
  * @author Tobias Gritschacher
+ * @author John Erling Blad
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -22,8 +23,8 @@ $messages['en'] = array(
 	'wikibase-save' => 'save',
 	'wikibase-cancel' => 'cancel',
 	'wikibase-add' => 'add',
-	'wikibase-save-inprogress' => 'Saving...',
-	'wikibase-remove-inprogress' => 'Removing...',
+	'wikibase-save-inprogress' => 'Saving…',
+	'wikibase-remove-inprogress' => 'Removing…',
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-edit-placeholder' => 'enter description',
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
@@ -31,7 +32,7 @@ $messages['en'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'specify page',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
-	'wikibase-sitelinks' => 'List of Pages Linked to This Item',
+	'wikibase-sitelinks' => 'List of pages linked to this item',
 	'wikibase-sitelinks-add' => 'add a link to a site-link',
 	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
@@ -45,12 +46,12 @@ $messages['en'] = array(
 	'wikibase-disambiguation-title' => 'Disambiguation for "$1"',
 
 	'wikibase-tooltip-error-details' => 'Details',
-	'wikibase-error-save-generic' => 'An error occurred while trying to save your changes. Your changes could not be stored.',
-	'wikibase-error-remove-generic' => 'An error occurred while trying to perform removing.',
-	'wikibase-error-save-connection' => 'Your changes could not be stored. Please check your internet connection.',
-	'wikibase-error-remove-connection' => 'An error occurred while trying to perform removing. Please check your internet connection.',
-	'wikibase-error-save-timeout' => 'We are experiencing technical difficulties. Your changes could not be stored.',
-	'wikibase-error-remove-timeout' => 'We are experiencing technical difficulties. Could not perform removal.',
+	'wikibase-error-save-generic' => 'An error occurred while trying to perform save, and because of this changes could not be completed.',
+	'wikibase-error-remove-generic' => 'An error occurred while trying to perform remove, and because of this your changes could not be completed.',
+	'wikibase-error-save-connection' => 'A connection error has occurred while trying to perform save, and because of this your changes could not be completed. Please check your internet connection.',
+	'wikibase-error-remove-connection' => 'A connection error occurred while trying to perform remove, and because of this your changes could not be completed. Please check your internet connection.',
+	'wikibase-error-save-timeout' => 'We are experiencing technical difficulties, and because of this your "save" could not be completed.',
+	'wikibase-error-remove-timeout' => 'We are experiencing technical difficulties, and because of this your "remove" could not be completed.',
 	'wikibase-error-autocomplete-connection' => 'Could not query Wikipedia API. Please try again later.',
 	'wikibase-error-autocomplete-response' => 'Server responded: $1',
 
