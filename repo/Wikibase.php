@@ -153,6 +153,8 @@ $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 $wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTestModules';
 $wgHooks['NamespaceIsMovable'][]					= 'WikibaseHooks::onNamespaceIsMovable';
 $wgHooks['NewRevisionFromEditComplete'][]			= 'WikibaseHooks::onNewRevisionFromEditComplete';
+$wgHooks['GetPreferences'][]						= 'WikibaseHooks::onGetPreferences';
+$wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOptions';
 
 
 
