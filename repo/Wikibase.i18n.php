@@ -55,7 +55,7 @@ $messages['en'] = array(
 	'wikibase-error-autocomplete-connection' => 'Could not query Wikipedia API. Please try again later.',
 	'wikibase-error-autocomplete-response' => 'Server responded: $1',
 
-	'wikibase-setting-languages' => 'Further languages<br/>(e.g. as fallback when displaying data not available in the main language)',
+	'wikibase-setting-languages' => 'Additional languages<br />(as fallback when displaying data not available in the main language)',
 
 	// Special pages
 	'special-itembytitle' => 'Item by title',
