@@ -4,7 +4,8 @@ namespace Wikibase;
 use Html;
 
 /**
- * Class for creation views of WikibaseItems.
+ * Class for creating views for Wikibase\Item instances.
+ * For the Wikibase\Item this basically is what the Parser is for WikitextContent.
  *
  * @since 0.1
  *
@@ -14,6 +15,7 @@ use Html;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater
+ * @author Daniel Werner
  */
 class ItemView extends \ContextSource {
 
@@ -25,6 +27,9 @@ class ItemView extends \ContextSource {
 
 	/**
 	 * Constructor.
+	 *
+	 * @todo think about using IContextSource here. Parser for example uses parser options (which also can be generated
+	 *       from an IContextSource) but this seems sufficient for now.
 	 *
 	 * @since 0.1
 	 *
@@ -46,11 +51,11 @@ class ItemView extends \ContextSource {
 	 *
 	 * @return string
 	 */
-	public function getHTML() {		
-		$siteLinks = $this->item->getSiteLinks();
-		$lang = $this->getLanguage();
+	public function getHTML() {
 		$html = '';
+		$lang = $this->getLanguage();
 
+		$siteLinks = $this->item->getSiteLinks();
 		$description = $this->item->getDescription( $lang->getCode() );
 		
 		// even if description is false, we want it in any case!
@@ -97,29 +102,66 @@ class ItemView extends \ContextSource {
 			}
 			$html .= Html::closeElement( 'table' );
 		}
-		
-		/*
-		$html .= Html::element( 'div', array( 'style' => 'clear:both;' ) );
-		$htmlTable = '';
-		foreach ( WikibaseContentHandler::flattenArray( $this->item->toArray() ) as $k => $v ) {
-			$htmlTable .= Html::openElement( 'tr' );
-			$htmlTable .= Html::element( 'td', null, $k );
-			$htmlTable .= Html::element( 'td', null, $v );
-			$htmlTable .= Html::closeElement( 'tr' );
-		}
-		$htmlTable = Html::rawElement( 'table', array('class' => 'wikitable'), $htmlTable );
-		$html .= $htmlTable;
-		 */
+
 		return $html;
 	}
 
 	/**
-	 * Display the item using the set context.
+	 * Returns a ParserOutput object with the rendered item for the provided context source
 	 *
 	 * @since 0.1
+	 *
+	 * @return ParserOutput
 	 */
-	public function display() {
-		$this->getOutput()->addHTML( $this->getHTML() );
+	public function render() {
+		$langCode = $this->getLanguage()->getCode();
+
+		// fresh parser output with items markup
+		$out = new \ParserOutput( $this->getHTML() );
+
+		if( ! $this->item->isNew() ) {
+			// only remember for updates in case this item has been stored yet.
+			/*
+			 * todo: verify that it makes sense calling this here. Moved this here from Item::getParserOutput(), which
+			 *       is calling this function. At least here the update is added whenever serving an items ParserOutput
+			 *       so it seems like the right place to put this.
+			 */
+			$out->addSecondaryDataUpdate(
+				new ItemStructuredSave( $this->item, $this->getContext()->getTitle() )
+			);
+		}
+		#@todo (phase 2) would be nice to put pagelinks (item references) and categorylinks (from special properties)...
+		#@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
+
+		// make css available for JavaScript-less browsers
+		$out->addModuleStyles( array( 'wikibase.common' ) );
+
+		// make sure required client sided resources will be loaded:
+		$out->addModules( 'wikibase.ui.PropertyEditTool' );
+
+		// NOTE: instead of calling $this->getOutput(), at least addJsConfigVars() could be implemented into ParserOutput,
+		//       right now it is only available in the OutputPage class, using this here might be kind of hacky.
+
+		// overwrite page title
+		$this->getOutput()->setPageTitle( $this->item->getLabel( $langCode ) );
+
+		// hand over the itemId to JS
+		$this->getOutput()->addJsConfigVars( 'wbItemId', $this->item->getId() );
+		$this->getOutput()->addJsConfigVars( 'wbDataLangName', \Language::fetchLanguageName( $langCode ) );
+
+		// TODO: this whole construct doesn't really belong here:
+		$sites = array();
+		foreach ( Sites::singleton()->getGroup( 'wikipedia' ) as /* Wikibase\Site */ $site ) {
+			$sites[$site->getId()] = array(
+				'shortName' => \Language::fetchLanguageName( $site->getId() ),
+				'name' => \Language::fetchLanguageName( $site->getId() ), // TODO: names should be configurable in settings
+				'pageUrl' => $site->getPageUrlPath(),
+				'apiUrl' => $site->getPath( 'api.php' ),
+			);
+		}
+		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites );
+
+		return $out;
 	}
 
 }

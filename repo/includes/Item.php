@@ -807,14 +807,7 @@ class Item extends Entity {
 		$context->setTitle( $title );
 
 		$itemView = new ItemView( $this, $context );
-		$parserOutput = new ParserOutput( $itemView->getHTML() );
-
-		#@todo (phase 2) would be nice to put pagelinks (item references) and categorylinks (from special properties)...
-		#@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
-
-		$parserOutput->addSecondaryDataUpdate( new ItemStructuredSave( $this, $title ) );
-
-		return $parserOutput;
+		return $itemView->render();
 	}
 
 	/**
