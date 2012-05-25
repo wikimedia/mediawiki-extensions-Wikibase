@@ -86,18 +86,11 @@ $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\DifferenceEngine'] 		= $dir . 'includes/DifferenceEngine.php';
-$wgAutoloadClasses['Wikibase\Utils'] 					= $dir . 'includes/Utils.php';
-$wgAutoloadClasses['Wikibase\Item'] 					= $dir . 'includes/Item.php';
-$wgAutoloadClasses['Wikibase\ItemDiff'] 				= $dir . 'includes/ItemDiff.php';
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
-$wgAutoloadClasses['Wikibase\Entity'] 					= $dir . 'includes/Entity.php';
-$wgAutoloadClasses['Wikibase\EntityDiff'] 				= $dir . 'includes/EntityDiff.php';
 $wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/EntityHandler.php';
 $wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisambiguation.php';
 $wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/ItemStructuredSave.php';
 $wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
-$wgAutoloadClasses['Wikibase\Sites'] 					= $dir . 'includes/Sites.php';
-$wgAutoloadClasses['Wikibase\Site'] 					= $dir . 'includes/Site.php';
 
 // includes/actions
 $wgAutoloadClasses['Wikibase\ViewItemAction'] 			= $dir . 'includes/actions/ViewItemAction.php';
