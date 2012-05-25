@@ -56,6 +56,13 @@ $wgAutoloadClasses['WBLSettings'] 					= $dir . 'WikibaseLib.settings.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
+$wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/Entity.php';
+$wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/EntityDiff.php';
+$wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/Item.php';
+$wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
+$wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
+$wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
+$wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
 // includes/changes
 $wgAutoloadClasses['Wikibase\AliasChange'] 			= $dir . 'includes/changes/AliasChange.php';
