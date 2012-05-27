@@ -44,13 +44,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
 	 */
 	getApiCallParams: function( apiAction ) {
-		return {
+		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
+		return $.extend( params, {
 			action: 'wbsetlanguageattribute',
 			language: window.mw.config.get( 'wgUserLanguage' ),
-			description: this.getValue().toString(),
-			id: window.mw.config.get( 'wbItemId' ),
-			item: 'set',
-			token: mw.user.tokens.get( 'editToken' )
-		};
+			description: this.getValue().toString()
+		} );
 	}
 } );

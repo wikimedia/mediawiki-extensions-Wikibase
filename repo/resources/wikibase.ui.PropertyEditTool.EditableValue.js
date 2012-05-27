@@ -415,6 +415,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				if( apiAction !== self.API_ACTION.REMOVE ) {
 					// only re-display toolbar if value wasn't removed
 					if ( self.API_KEY !== null ) {
+						// set normalized value
 						self.setValue( response.item[self.API_KEY][window.mw.config.get( 'wgUserLanguage' )].value );
 					}
 					waitMsg.remove();
@@ -467,7 +468,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function( apiAction ) {
-		return {};
+		return {
+			token: mw.user.tokens.get( 'editToken' ),
+			id: window.mw.config.get( 'wbItemId' ),
+			item: 'set'
+		};
 	},
 
 	/**

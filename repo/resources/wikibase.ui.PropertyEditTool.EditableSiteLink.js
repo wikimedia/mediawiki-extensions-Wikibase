@@ -156,20 +156,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
 	 */
 	getApiCallParams: function( apiAction ) {
-		var linkValues = this.getValue();
-		var siteId = this.siteIdInterface.getSelectedSiteId();
-		var params = {
+		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
+		var params = $.extend( params, {
 			action: 'wblinksite',
-			id: window.mw.config.get( 'wbItemId' ),
-			linksite: siteId,
-			linktitle: linkValues[1],
-			token: mw.user.tokens.get( 'editToken' )
-		};
-		if( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) {
-			return $.extend( params, { link: 'remove' } );
-		} else {
-			return $.extend( params, { link: 'set' } );
-		}
+			linksite: this.siteIdInterface.getSelectedSiteId(),
+			linktitle: this.getValue()[1]
+		} );
+		params.link = ( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE )
+			? 'remove'
+			: 'set';
+		delete( params.item ); // ? danwe: why is there an 'item' AND a 'link' param here?
+
+		return params;
 	},
 	
 	/////////////////
