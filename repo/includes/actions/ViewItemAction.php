@@ -39,41 +39,10 @@ class ViewItemAction extends \FormlessAction {
 		}
 		else {
 			// TODO: switch on type of content.
-			$contentLangCode = $this->getLanguage()->getCode();
-
-			$parserOutput = $content->getParserOutput( $this->getTitle() );
-
-			$out = $this->getOutput();
-
-			// make css available when JavaScript is disabled
-			$out->addModuleStyles( array( 'wikibase.common' ) );
-
-			$out->addHTML( $parserOutput->getText() );
-
-			// make sure required client sided resources will be loaded:
-			$out->addModules( 'wikibase.ui.PropertyEditTool' );
-
-			// overwrite page title
-			$out->setPageTitle( $content->getLabel( $contentLangCode ) );
-
-			// hand over the itemId to JS
-			$out->addJsConfigVars( 'wbItemId', $content->getId() );
-			$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $contentLangCode ) );
-			$sites = array();
-
-			foreach ( Sites::singleton()->getGroup( 'wikipedia' ) as /* Wikibase\Site */ $site ) {
-				$sites[$site->getId()] = array(
-					'shortName' => Language::fetchLanguageName( $site->getId() ),
-					'name' => Language::fetchLanguageName( $site->getId() ), // TODO: names should be configurable in settings
-					'pageUrl' => $site->getPageUrlPath(),
-					'apiUrl' => $site->getPath( 'api.php' ),
-
-				);
-			}
-			
-			$out->addJsConfigVars( 'wbSiteDetails', $sites );
+			$view = new ItemView( $content, $this->getContext() );
+			$renderedOutput = $view->render();
+			$this->getOutput()->addParserOutput( $renderedOutput );
 		}
-
 		return '';
 	}
 
