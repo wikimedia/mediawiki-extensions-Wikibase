@@ -37,9 +37,7 @@ class SpecialCreateItem extends SpecialWikibasePage {
 		$this->outputHeader();
 
 		$view = new Wikibase\ItemView( Wikibase\Item::newEmpty(), $this->getContext() );
-		$view->display();
+		$renderedOutput = $view->render();
+		$this->getOutput()->addParserOutput( $renderedOutput );
 	}
-
-
-
 }
