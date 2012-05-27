@@ -174,6 +174,10 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	),
 	'dependencies' => array(
 		'wikibase.common'
+	),
+	'messages' => array(
+		'special-createitem',
+		'wb-special-createitem-new-item-notification'
 	)
 );
 

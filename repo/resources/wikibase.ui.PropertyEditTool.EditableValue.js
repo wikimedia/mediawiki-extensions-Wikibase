@@ -414,10 +414,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 				if( apiAction !== self.API_ACTION.REMOVE ) {
 					// only re-display toolbar if value wasn't removed
+
 					if ( self.API_KEY !== null ) {
 						// set normalized value
 						self.setValue( response.item[self.API_KEY][window.mw.config.get( 'wgUserLanguage' )].value );
 					}
+
+					if( window.mw.config.get( 'wbItemId' ) === null ) {
+						// if the 'save' process will create a new item, trigger the event!
+						$( wikibase ).trigger( 'NewItemCreated', response.item );
+					}
+
 					waitMsg.remove();
 					self._toolbar._elem.fadeIn( 300 );
 				}
@@ -468,11 +475,21 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function( apiAction ) {
-		return {
-			token: mw.user.tokens.get( 'editToken' ),
-			id: window.mw.config.get( 'wbItemId' ),
-			item: 'set'
+		var itemId = window.mw.config.get( 'wbItemId' );
+		var params = {
+			token: mw.user.tokens.get( 'editToken' )
 		};
+
+		if( itemId !== null ) {
+			// API param can only be used if item exists
+			params.id = itemId;
+			params.item = 'set';
+		} else {
+			// add a new item, ID will be received in APIs return value
+			params.item = 'add';
+		}
+
+		return params;
 	},
 
 	/**
