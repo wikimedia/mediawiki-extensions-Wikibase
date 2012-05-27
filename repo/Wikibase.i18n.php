@@ -44,6 +44,7 @@ $messages['en'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|One value|$1 values}} not saved yet',
 	'wikibase-sitelinksedittool-full' => 'Links to pages are already set for all known sites.',
 	'wikibase-disambiguation-title' => 'Disambiguation for "$1"',
+	'wb-special-createitem-new-item-notification' => 'New item $1 created and redirected to its page. Back to $2.',
 
 	'wikibase-tooltip-error-details' => 'Details',
 	'wikibase-error-save-generic' => 'An error occurred while trying to perform save, and because of this changes could not be completed.',
@@ -188,6 +189,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
+	'wb-special-createitem-new-item-notification' => 'Message displayed when a new item was created on [[Special:CreateItem]] and the user has been redirected to the new items page. $1 is the new items id, $2 is a link back to the special page with "special-createitem" as label'
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)

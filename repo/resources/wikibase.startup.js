@@ -28,17 +28,41 @@
 	} );
 	
 	// edit tool for site links:
-	
-	// if there are no site links yet, we have to create the table for it to initialize the ui
-	// without css this is not required, so we build it here manually
-	$( '.wb-sitelinks-empty' )
-	.each( function() {
-		$( this ).replaceWith( wikibase.ui.SiteLinksEditTool.getEmptyStructure() );
-	} );
-	
-	$( 'table.wb-sitelinks' ).each( function() {
-		// actual initialization
-		new window.wikibase.ui.SiteLinksEditTool( $( this ) );
-	} );
+	if( mw.config.get( 'wbItemId' ) !== null ) {
+		// if there are no site links yet, we have to create the table for it to initialize the ui
+		// without css this is not required, so we build it here manually
+		$( '.wb-sitelinks-empty' )
+		.each( function() {
+			$( this ).replaceWith( wikibase.ui.SiteLinksEditTool.getEmptyStructure() );
+		} );
+
+		$( 'table.wb-sitelinks' ).each( function() {
+			// actual initialization
+			new window.wikibase.ui.SiteLinksEditTool( $( this ) );
+		} );
+	} else {
+		// site-links are only editable if item exists, not on 'Special:CreateItem'
+		$( '.wb-sitelinks-empty' ).remove();
+	}
+
+
+	if( window.location.href.match( /[\\?&]wbitemcreated=yes/ ) ) {
+		// Display notification if the item was created on 'Special:CreateItem' and we just redirected from there
+		// TODO: the parameter should be removed somehow, otherwise on a page reload it will still appear
+		var notification = $( '<div>', {
+			'id': 'wb-specialcreateitem-newitemnotification',
+			'class': 'successbox',
+			'text': mw.msg(
+				'wb-special-createitem-new-item-notification',
+				'q' + mw.config.get( 'wbItemId' ),
+				'@@@@' // link to 'Special:CreateItem'
+			)
+		} ).hide();
+
+		notification.html( notification.text().replace(
+			"@@@@", '<a href="' + ( new mw.Title( 'Special:CreateItem' ) ).getUrl() + '">' + mw.msg( 'special-createitem' ) + '</a>'
+		) )
+		.prependTo( $( '#content' ) ).fadeIn();
+	}
 	
 } )( jQuery );
