@@ -41,6 +41,24 @@ wb-clear {
 	clear:both;
 }
 
+
+/********** ALIASES **********/
+
+.wb-aliases {
+	font-size: 0.9em;
+}
+
+.wb-aliases-label {
+	font-weight: bold;
+}
+
+.wb-aliases-container .wb-aliases-alias {
+	margin-left: 1em;
+}
+
+/********** /ALIASES **********/
+
+
 /********** SITE LINKS TABLE **********/
 
 table.wb-sitelinks {
