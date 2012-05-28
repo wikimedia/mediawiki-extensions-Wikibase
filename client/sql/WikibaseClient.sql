@@ -6,7 +6,7 @@
 -- Table holing a local copy of the items relevant to this wiki.
 -- Also links the items to their associated pages with item_page_id.
 CREATE TABLE IF NOT EXISTS /*_*/wbc_local_items (
-  li_id                      INT unsigned        NOT NULL auto_increment PRIMARY KEY,
+  li_id                      INT unsigned        NOT NULL PRIMARY KEY AUTO_INCREMENT,
 
   -- Foreign key on wb_items.item_id
   li_item_id                 INT unsigned        NOT NULL,
