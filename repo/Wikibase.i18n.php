@@ -96,6 +96,7 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author DavidL
  * @author Jeblad
  * @author Siebrand
  */
@@ -151,6 +152,8 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 * $1 is the number of elements not saved yet.',
 	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
+	'wb-special-createitem-new-item-notification' => 'Message displayed when a new item was created on [[Special:CreateItem]] and the user has been redirected to the new items page. $1 is the new items id, $2 is a link back to the special page with "special-createitem" as label',
+	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the mor specific error message returned from the underlying API).',
 	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',
 	'wikibase-error-remove-generic' => 'Generic error message for an error happening during a remove operation',
@@ -164,7 +167,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 	'special-createitem' => 'Title of the special page for creating new items.',
-	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition.',
+	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error condition.',
 	'wikibase-api-no-token' => 'This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are som exceptional error condition. The message can be shown after misconfiguration of the system.',
 	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
 	'wikibase-api-cant-edit' => 'This is an error message for a situation where the user is blocked from editing. This will be shown to the user if he tries to edit when being blocked.',
@@ -190,8 +193,6 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
-	'wb-special-createitem-new-item-notification' => 'Message displayed when a new item was created on [[Special:CreateItem]] and the user has been redirected to the new items page. $1 is the new items id, $2 is a link back to the special page with "special-createitem" as label',
-	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
@@ -265,6 +266,8 @@ $messages['de'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Ein Wert wurde|$1 Werte wurden}} noch nicht gespeichert',
 	'wikibase-sitelinksedittool-full' => 'Für alle bekannten Websites sind die Links auf die Seiten bereits festgelegt.',
 	'wikibase-disambiguation-title' => 'Begriffsklärung für „$1“',
+	'wb-special-createitem-new-item-notification' => 'Neues Element $1 erstellt und weitergeleitet auf seine Seite. Zurück zu $2.',
+	'wikibase-aliases-label' => 'Auch bekannt als:',
 	'wikibase-tooltip-error-details' => 'Einzelheiten',
 	'wikibase-error-save-generic' => 'Beim Versuch zu speichern, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.',
 	'wikibase-error-remove-generic' => 'Beim Versuch zu entfernen, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.',
@@ -458,6 +461,8 @@ $messages['fa'] = array(
 );
 
 /** French (Français)
+ * @author Alno
+ * @author DavidL
  * @author Gomoko
  * @author Wyz
  */
@@ -467,21 +472,66 @@ $messages['fr'] = array(
 	'wikibase-save' => 'enregistrer',
 	'wikibase-cancel' => 'annuler',
 	'wikibase-add' => 'ajouter',
-	'wikibase-label-edit-placeholder' => 'saisir étiquette',
-	'wikibase-description-edit-placeholder' => 'saisir description',
+	'wikibase-save-inprogress' => 'Sauvegarde en cours...',
+	'wikibase-remove-inprogress' => 'Suppression en cours...',
+	'wikibase-label-edit-placeholder' => 'saisir un libellé',
+	'wikibase-description-edit-placeholder' => 'saisir une description',
+	'wikibase-move-error' => 'Vous ne pouvez pas déplacer des pages situées dans l\'espace de nom "data", ni déplacer des pages vers cet espace de nom.',
 	'wikibase-sitelink-site-edit-placeholder' => 'spécifier le site',
 	'wikibase-sitelink-page-edit-placeholder' => 'spécifier la page',
-	'wikibase-label-input-help-message' => 'Saisissez le titre de ces données définies dans $1.',
-	'wikibase-description-input-help-message' => 'Saisissez une courte description dans $1.',
+	'wikibase-label-input-help-message' => 'Saisissez le titre de cet ensemble de données en $1.',
+	'wikibase-description-input-help-message' => 'Saisissez une courte description en $1.',
 	'wikibase-sitelinks' => 'Pages Wikipédia liées à cet élément',
 	'wikibase-sitelinks-add' => 'ajouter un lien vers une page de Wikipédia',
 	'wikibase-sitelinks-empty' => "Aucune page de Wikipédia n'est encore liée à cet élément.",
-	'wikibase-sitelinks-input-help-message' => 'Mettre un lien vers un article de Wikipédia.',
-	'wikibase-remove' => 'retirer',
+	'wikibase-sitelinks-input-help-message' => 'Créer un lien vers une page relative à cet élément.',
+	'wikibase-remove' => 'supprimer',
 	'wikibase-propertyedittool-full' => 'La liste des valeurs est complète.',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entrée|entrées}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entrée|entrées}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Une valeur non enregistrée|$1 valeurs non enregistrées}} déjà',
 	'wikibase-sitelinksedittool-full' => 'Les liens vers les pages sont déjà définis pour tous les sites connus.',
+	'wikibase-disambiguation-title' => 'Homonymie pour « $1 »',
+	'wikibase-tooltip-error-details' => 'Détails',
+	'wikibase-error-save-generic' => "Une erreur est survenue lors de l'enregistrement, en conséquence, vos modifications n'ont pas pu être prises en compte.",
+	'wikibase-error-remove-generic' => "Une erreur est survenue lors de la suppression, en conséquence, vos modifications n'ont pas pu être prises en compte.",
+	'wikibase-error-save-connection' => "Une erreur de connexion est survenue lors de l'enregistrement, en conséquence, vos modifications n'ont pas pu être prises en compte. Vérifiez votre connexion Internet.",
+	'wikibase-error-remove-connection' => "Une erreur de connexion est survenue lors de la suppression, en conséquence, vos modifications n'ont pas pu être prises en compte. Vérifiez votre connexion Internet.",
+	'wikibase-error-save-timeout' => 'Nous rencontrons actuellement quelques problèmes techniques, la sauvegarde que vous avez demandée ne peut être réalisée.',
+	'wikibase-error-remove-timeout' => 'Nous rencontrons quelques problèmes techniques, la suppression que vous avez demandé ne peut être réalisée.',
+	'wikibase-error-autocomplete-connection' => "Impossible d'interroger l'API Wikipedia. Veuillez réessayer plus tard.",
+	'wikibase-error-autocomplete-response' => 'Le serveur a répondu : $1',
+	'wikibase-setting-languages' => "Langues supplémentaires<br />(utilisés pour l'affichage des données non disponibles dans la langue principale)",
 	'special-itembytitle' => 'Article par titre',
 	'special-itembylabel' => 'Article par étiquette',
+	'special-createitem' => 'Créer un nouvel élément',
+	'wikibase-api-aliases-invalid-list' => "Utilisez l'un des paramètres « set », « add» ou « remove».",
+	'wikibase-api-no-token' => "Il n'y a aucun jeton donné.",
+	'wikibase-api-no-data' => "Il n'y a pas de données à traiter.",
+	'wikibase-api-cant-edit' => "L'utilisateur connecté n'est pas autorisé à modifier.",
+	'wikibase-api-no-permissions' => "L'utilisateur connecté n'a pas de droits suffisants.",
+	'wikibase-api-id-xor-wikititle' => "Fournissez soit l'élément « id » ou la paire « site » et « title » pour une page correspondante.",
+	'wikibase-api-no-such-item' => 'Impossible de trouver un élément existant.',
+	'wikibase-api-no-such-item-id' => 'Impossible de trouver un élément existant pour cet identifiant.',
+	'wikibase-api-link-exists' => 'Un article sur le wiki spécifié est déjà lié.',
+	'wikibase-api-add-with-id' => "Impossible d'ajouter l'identifiant d'un élément existant.",
+	'wikibase-api-add-exists' => "Impossible d'ajouter à un élément existant.",
+	'wikibase-api-update-without-id' => "La mise à jour sans un précédent identifiant n'est pas possible.",
+	'wikibase-api-no-such-item-link' => 'Impossible de trouver un élément existant pour ce lien.',
+	'wikibase-api-create-failed' => "La création de l'item a échoué.",
+	'wikibase-api-modify-failed' => "La modification de l'item a échoué.",
+	'wikibase-api-save-failed' => "La sauvegarde de l'item a échoué.",
+	'wikibase-api-invalid-contentmodel' => "Le modèle du contenu de la page est invalide (problème d'incohérence du contentmodel).",
+	'wikibase-api-alias-incomplete' => "Impossible de trouver une définition de l'alias pour l'élément.",
+	'wikibase-api-alias-not-found' => "Impossible de trouver un alias précédent dans l'élément.",
+	'wikibase-api-alias-found' => "Un alias précédent dans l'élément a été trouvé.",
+	'wikibase-api-not-recognized' => "L'opération demandée n'est pas définie (directive non reconnue).",
+	'wikibase-api-label-or-description' => 'Utilisez « label » et/ou « description ».',
+	'wikibase-api-label-not-found' => "Impossible de trouver une étiquette précédente de cette langue dans l'élément.",
+	'wikibase-api-description-not-found' => "Impossible de trouver une description antérieure de cette langue dans l'élément.",
+	'wikibase-api-wrong-class' => "Le contenu de la page trouvée n'est pas du bon type.",
+	'content-model-1001' => 'Élément Wikibase',
 );
 
 /** Galician (Galego)
@@ -620,7 +670,7 @@ $messages['hsb'] = array(
 	'wikibase-sitelinksedittool-full' => 'Wotkazy k stronam su hižo za wšě znate strony stajene.',
 	'wikibase-disambiguation-title' => 'Strona wjacezmyslnosće za "$1"',
 	'wikibase-tooltip-error-details' => 'Podrobnosće',
-	'wikibase-error-save-connection' => 'Twoje změny njedadźa so składować. Prošu přepruwuj swój internetny zwisk.',
+	'wikibase-error-save-connection' => 'Zwiskowy zmylk je při składowanju wustupił a twoje změny njedadźa so tohodla přewjesć. Prošu přepruwuj swój internetowy zwisk.',
 	'wikibase-error-autocomplete-response' => 'Serwer wotmołwi: $1',
 	'special-itembytitle' => 'Zapisk po titulu',
 	'special-itembylabel' => 'Zapisk po pomjenowanju',
@@ -783,12 +833,12 @@ $messages['it'] = array(
 	'wikibase-sitelinksedittool-full' => 'Sono già stati impostati collegamenti alle pagine per tutti i siti conosciuti.',
 	'wikibase-disambiguation-title' => 'Disambigua per "$1"',
 	'wikibase-tooltip-error-details' => 'Dettagli',
-	'wikibase-error-save-generic' => 'Si è verificato un errore durante il salvataggio delle tue modifiche. Le modifiche apportate non possono essere memorizzate.',
-	'wikibase-error-remove-generic' => 'Si è verificato un errore durante la rimozione.',
-	'wikibase-error-save-connection' => 'Le modifiche apportate non possono essere memorizzate. Per favore, controlla la tua connessione ad internet.',
-	'wikibase-error-remove-connection' => 'Si è verificato un errore durante la rimozione. Per favore, controlla la tua connessione ad internet.',
-	'wikibase-error-save-timeout' => 'Stiamo riscontrando difficoltà tecniche. Le modifiche apportate non possono essere memorizzate.',
-	'wikibase-error-remove-timeout' => 'Stiamo riscontrando difficoltà tecniche. Impossibile eseguire la rimozione.',
+	'wikibase-error-save-generic' => 'Si è verificato un errore durante il tentativo di salvataggio, e perciò le tue modifiche potrebbero non essere completamente memorizzate.',
+	'wikibase-error-remove-generic' => 'Si è verificato un errore durante il tentativo di rimozione, e perciò le tue modifiche potrebbero non essere completamente memorizzate.',
+	'wikibase-error-save-connection' => 'Si è verificato un errore di connessione durante il tentativo di salvataggio, e perciò le tue modifiche potrebbero non essere completamente memorizzate. Per favore, controlla la tua connessione ad internet.',
+	'wikibase-error-remove-connection' => 'Si è verificato un errore di connessione durante il tentativo di rimozione, e perciò le tue modifiche potrebbero non essere completamente memorizzate. Per favore, controlla la tua connessione ad internet.',
+	'wikibase-error-save-timeout' => 'Stiamo riscontrando difficoltà tecniche, e perciò il tuo salvataggio potrebbe non essere completo.',
+	'wikibase-error-remove-timeout' => 'Stiamo riscontrando difficoltà tecniche, e perciò la tua rimozione potrebbe non essere completa.',
 	'wikibase-error-autocomplete-connection' => 'Non è possibile interrogare le API di Wikipedia. Riprova più tardi.',
 	'wikibase-error-autocomplete-response' => 'Risposta del server: $1',
 	'special-itembytitle' => 'Elementi per titolo',
@@ -831,12 +881,16 @@ $messages['ja'] = array(
 	'wikibase-save' => '保存',
 	'wikibase-cancel' => 'キャンセル',
 	'wikibase-add' => '追加',
+	'wikibase-save-inprogress' => '保存中…',
+	'wikibase-remove-inprogress' => '除去中…',
 	'wikibase-label-edit-placeholder' => 'ラベルを入力',
 	'wikibase-description-edit-placeholder' => '説明を入力',
 	'wikibase-sitelink-site-edit-placeholder' => 'サイトを指定',
 	'wikibase-sitelink-page-edit-placeholder' => 'ページを指定',
 	'wikibase-sitelinks-add' => 'ウィキペディアのページへのリンクを追加',
 	'wikibase-remove' => '除去',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-tooltip-error-details' => '詳細',
 );
 
 /** Kurdish (Latin script) (‪Kurdî (latînî)‬)
