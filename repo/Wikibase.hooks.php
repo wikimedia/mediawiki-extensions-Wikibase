@@ -27,7 +27,7 @@ final class WikibaseHooks {
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$updater->addExtensionTable(
-			'wb_items_per_site',
+			'wb_items',
 			dirname( __FILE__ ) . '/sql/Wikibase.sql'
 		);
 
