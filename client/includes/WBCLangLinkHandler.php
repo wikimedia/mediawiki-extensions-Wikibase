@@ -78,7 +78,7 @@ class WBCLangLinkHandler {
 		return true;
 	}
 
-	public function resetLangLinks() {
+	public static function resetLangLinks() {
 		self::$langlinksset = false;
 	}
 
