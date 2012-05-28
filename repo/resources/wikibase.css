@@ -52,8 +52,16 @@ wb-clear {
 	font-weight: bold;
 }
 
-.wb-aliases-container .wb-aliases-alias {
+ul.wb-aliases-container {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+li.wb-aliases-alias {
 	margin-left: 1em;
+	display: inline;
+	list-style-type: none;
 }
 
 /********** /ALIASES **********/

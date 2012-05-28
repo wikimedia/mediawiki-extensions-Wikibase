@@ -71,13 +71,13 @@ class ItemView extends \ContextSource {
 
 		$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
 		$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMsg( 'wikibase-aliases-label' ) );
-		$html .= Html::openElement( 'span', array( 'class' => 'wb-aliases-container' ) );
+		$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
 		foreach( $aliases as $alias ) {
 			$html .= Html::element(
-				'span', array( 'class' => ' wb-aliases-alias' ), $alias
+				'li', array( 'class' => ' wb-aliases-alias' ), $alias
 			);
 		}
-		$html .= Html::closeElement( 'span' );
+		$html .= Html::closeElement( 'ul' );
 		$html .= Html::closeElement( 'div' );
 
 		// SITE-LINKS
