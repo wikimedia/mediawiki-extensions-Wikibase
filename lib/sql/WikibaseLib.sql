@@ -5,7 +5,7 @@
 
 -- Change feed.
 CREATE TABLE IF NOT EXISTS /*_*/wb_changes (
-  change_id                  INT unsigned        NOT NULL auto_increment PRIMARY KEY, -- Id of change
+  change_id                  INT unsigned        NOT NULL PRIMARY KEY AUTO_INCREMENT, -- Id of change
   change_type                VARCHAR(25)         NOT NULL, -- Type of the change
   change_time                varbinary(14)       NOT NULL, -- Time the change was made
   change_object_id           INT unsigned        NOT NULL, -- The id of the object (ie item, query) the change affects
