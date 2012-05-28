@@ -138,6 +138,7 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * construct DOM structure for an error tooltip
 	 *
 	 * @param object error error code and messages
+	 * @return jQuery
 	 */
 	_buildErrorTooltip: function() {
 		var content = (
@@ -148,35 +149,36 @@ window.wikibase.ui.Tooltip.prototype = {
 		);
 		if ( this._error.message != '' ) { // append detailed error message
 			content.addClass( 'wb-tooltip-error-top-message' );
-			content = content.after( $( '<a/>', {
-				'class': 'wb-tooltip-error-details-link',
-				href: 'javascript:void(0);'
-			} )
+			content = content.after(
+				$( '<a/>', {
+					'class': 'wb-tooltip-error-details-link',
+					href: 'javascript:void(0);'
+				} )
 				.on( 'click', function( event ) {
 					$( this ).parent().find( '.wb-tooltip-error-details' ).slideToggle();
 				} )
 				.toggle(
-				function() {
-					$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-e' );
-					$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-s' );
-				},
-				function() {
-					$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-s' );
-					$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-e' );
-				}
-			)
+					function() {
+						$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-e' );
+						$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-s' );
+					},
+					function() {
+						$( $( this ).children()[0] ).removeClass( 'ui-icon-triangle-1-s' );
+						$( $( this ).children()[0] ).addClass( 'ui-icon-triangle-1-e' );
+					}
+				)
 				.append( $( '<span/>', {
-				'class': 'ui-icon ui-icon-triangle-1-e'
-			} ) )
+					'class': 'ui-icon ui-icon-triangle-1-e'
+				} ) )
 				.append( $( '<span/>', {
-				text: window.mw.msg( 'wikibase-tooltip-error-details' )
-			} ) )
+					text: window.mw.msg( 'wikibase-tooltip-error-details' )
+				} ) )
 			)
-				.after( $( '<div/>', {
+			.after( $( '<div/>', {
 				'class': 'wb-tooltip-error-details',
 				text: this._error.message
 			} ) )
-				.after( $( '<div/>', {
+			.after( $( '<div/>', {
 				'class': 'wb-clear'
 			} ) );
 		}
@@ -365,7 +367,7 @@ window.wikibase.ui.Tooltip.ext = {
 		}
 
 		if ( this._tooltip._error != null ) {
-			$( this._tooltip ).one( 'clickoutside', $.proxy( function( event) {
+			$( this._tooltip ).one( 'clickoutside', $.proxy( function( event ) {
 					this.removeTooltip();
 			}, this ) );
 		}
