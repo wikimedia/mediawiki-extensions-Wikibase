@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- *
+ * Content handler for Wikibase items.
  *
  * @since 0.1
  *
@@ -45,6 +45,20 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function unserializeContent( $blob, $format = null ) {
 		return Item::newFromArray( $this->unserializedData( $blob, $format ) );
+	}
+
+	/**
+	 * @see ContentHandler::getDeletionUpdates
+	 *
+	 * @param \WikiPage $page
+	 *
+	 * @return array of \DataUpdate
+	 */
+	public function getDeletionUpdates( \WikiPage $page ) {
+		return array_merge(
+			parent::getDeletionUpdates( $page ),
+			array( new ItemDeletionUpdate( $page->getContent() ) )
+		);
 	}
 
 }
