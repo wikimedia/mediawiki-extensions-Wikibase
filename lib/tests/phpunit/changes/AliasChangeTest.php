@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\Item as Item;
 use Wikibase\MapDiff as MapDiff;
 use Wikibase\AliasChange as AliasChange;
 
@@ -35,7 +36,7 @@ class AliasChangeTest extends \MediaWikiTestCase {
 	 * @dataProvider diffProvider
 	 */
 	public function testNewFromDiff( MapDiff $diff ) {
-		$change = AliasChange::newFromDiff( $diff );
+		$change = AliasChange::newFromDiff( Item::newEmpty(), $diff );
 
 		$this->assertEquals( $diff->isEmpty(), $change->isEmpty() );
 

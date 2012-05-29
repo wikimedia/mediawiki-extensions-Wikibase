@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class AliasChange extends MapChange {
+class AliasChange extends ItemMapChange {
 
 	/**
 	 * Returns the type of change.

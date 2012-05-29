@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\Item as Item;
 use Wikibase\MapDiff as MapDiff;
 use Wikibase\SitelinkChange as SitelinkChange;
 
@@ -35,7 +36,7 @@ class SitelinkChangeTest extends \MediaWikiTestCase {
 	 * @dataProvider diffProvider
 	 */
 	public function testNewFromDiff( MapDiff $diff ) {
-		$change = SitelinkChange::newFromDiff( $diff );
+		$change = SitelinkChange::newFromDiff( Item::newEmpty(), $diff );
 
 		$this->assertEquals( $diff->isEmpty(), $change->isEmpty() );
 

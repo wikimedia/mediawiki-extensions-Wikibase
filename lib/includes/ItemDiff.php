@@ -36,6 +36,16 @@ class ItemDiff extends EntityDiff {
 	protected $changes = false;
 
 	/**
+	 * @var Item
+	 */
+	protected $oldItem;
+
+	/**
+	 * @var Item
+	 */
+	protected $newItem;
+
+	/**
 	 * Constructs a new
 	 *
 	 * @since 0.1
@@ -46,15 +56,32 @@ class ItemDiff extends EntityDiff {
 	 * @return ItemDiff
 	 */
 	public function __construct( Item $oldItem, Item $newItem ) {
-		$this->siteLinkDiff = MapDiff::newFromArrays(
-			$oldItem->getSiteLinks(),
-			$newItem->getSiteLinks()
-		);
+		$this->oldItem = $oldItem;
+		$this->newItem = $newItem;
+	}
 
-		$this->aliasDiff = MapDiff::newFromArrays(
-			$oldItem->getAllAliases(),
-			$newItem->getAllAliases()
-		);
+	/**
+	 * Create the sitelinks diff if not already done so.
+	 */
+	protected function diffSiteLinks() {
+		if ( !isset( $this->siteLinkDiff ) ) {
+			$this->siteLinkDiff = MapDiff::newFromArrays(
+				$this->oldItem->getSiteLinks(),
+				$this->newItem->getSiteLinks()
+			);
+		}
+	}
+
+	/**
+	 * Create the aliases diff if not already done so.
+	 */
+	protected function diffAliases() {
+		if ( !isset( $this->aliasDiff ) ) {
+			$this->aliasDiff = MapDiff::newFromArrays(
+				$this->oldItem->getAllAliases(),
+				$this->newItem->getAllAliases()
+			);
+		}
 	}
 
 	/**
@@ -65,6 +92,7 @@ class ItemDiff extends EntityDiff {
 	 * @return boolean
 	 */
 	public function hasSiteLinkChanges() {
+		$this->diffSiteLinks();
 		return !$this->siteLinkDiff->isEmpty();
 	}
 
@@ -76,6 +104,7 @@ class ItemDiff extends EntityDiff {
 	 * @return boolean
 	 */
 	public function hasAliasChanges() {
+		$this->diffAliases();
 		return !$this->aliasDiff->isEmpty();
 	}
 
@@ -87,7 +116,8 @@ class ItemDiff extends EntityDiff {
 	 * @return SitelinkChange
 	 */
 	public function getSiteLinkChange() {
-		return SitelinkChange::newFromDiff( $this->siteLinkDiff );
+		$this->diffSiteLinks();
+		return SitelinkChange::newFromDiff( $this->newItem, $this->siteLinkDiff );
 	}
 
 	/**
@@ -98,7 +128,8 @@ class ItemDiff extends EntityDiff {
 	 * @return AliasChange
 	 */
 	public function getAliasesChange() {
-		return AliasChange::newFromDiff( $this->aliasDiff );
+		$this->diffAliases();
+		return AliasChange::newFromDiff( $this->newItem, $this->aliasDiff );
 	}
 
 	/**
