@@ -10,10 +10,8 @@ require 'page-object/page_factory'
 require 'require_all'
 
 require_all 'lib/pages'
-
-# TODO: must this really be global?
-$target_browser = "firefox" # "chrome" "ie" "opera" "safari" "firefox"
-
+configs = YAML::load( File.open( 'configuration.yml' ) )
+$target_browser = configs['target_browser']
 RSpec.configure do |config|
   config.include PageObject::PageFactory
   config.before(:all) do
