@@ -43,11 +43,12 @@ $messages['be-tarask'] = array(
 
 /** German (Deutsch)
  * @author Kghbln
+ * @author Purodha
  */
 $messages['de'] = array(
 	'wbc-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
 	'wbc-editlinks' => 'Links bearbeiten',
-	'wbc-editlinkstitle' => 'Sprachenübergreifende Links bearbeiten',
+	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -155,6 +156,15 @@ $messages['it'] = array(
 $messages['ja'] = array(
 	'wbc-editlinks' => 'リンクを編集',
 	'wbc-editlinkstitle' => '言語間リンクを編集',
+);
+
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'wbc-desc' => 'Madd en Aanwendong vun däm WikiData Projrammzihsaz müjjelesch.',
+	'wbc-editlinks' => 'Lenks ändere',
+	'wbc-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
