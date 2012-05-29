@@ -35,7 +35,7 @@ class RubySelenium
       'token' => @item_token})
     req['Cookie'] = @session_cookie
 
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    res = Net::HTTP.start(uri.host, uri.port) do |http|
       postData =  http.request(req)
       result = JSON.parse(postData.body)
       # puts result
@@ -55,7 +55,7 @@ class RubySelenium
       'lgname'=>WIKI_USERNAME,
       'lgpassword'=>WIKI_PASSWORD})
 
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    res = Net::HTTP.start(uri.host, uri.port) do |http|
       postData =  http.request(req)
       @session_cookie = postData.response['set-cookie']
       result = JSON.parse(postData.body)
@@ -81,7 +81,7 @@ class RubySelenium
       'action'=>'wbsetitem',
       'gettoken'=>'1'})
     req['Cookie'] = @session_cookie
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    res = Net::HTTP.start(uri.host, uri.port) do |http|
       postData =  http.request(req)
 
       result = JSON.parse(postData.body)
@@ -108,7 +108,7 @@ class RubySelenium
       'token' => @item_token})
     req['Cookie'] = @session_cookie
 
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    res = Net::HTTP.start(uri.host, uri.port) do |http|
       http.request(req)
     end
   end
@@ -129,7 +129,7 @@ class RubySelenium
       'token' => @item_token})
     req['Cookie'] = @session_cookie
 
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+    res = Net::HTTP.start(uri.host, uri.port) do |http|
       http.request(req)
     end
   end
