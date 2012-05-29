@@ -50,16 +50,24 @@ wb-clear {
 
 .wb-aliases-label {
 	font-weight: bold;
+	vertical-align: top;
+	display: inline-block;
+	margin-right: 1em;
 }
 
 ul.wb-aliases-container {
-	display: inline;
+	display: inline-block; /* without js... */
 	margin: 0;
 	padding: 0;
 }
 
+.wb-aliases .wb-ui-propertyedittool-editablevalue,
+.wb-aliases .wb-ui-propertyedittool-editablevalue > div { /* ... with js */
+	display: inline-block
+}
+
 li.wb-aliases-alias {
-	margin-left: 1em;
+	margin-right: 1em;
 	display: inline;
 	list-style-type: none;
 }

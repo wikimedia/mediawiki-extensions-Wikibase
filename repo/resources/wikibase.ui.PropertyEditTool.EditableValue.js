@@ -477,6 +477,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	getApiCallParams: function( apiAction ) {
 		var itemId = window.mw.config.get( 'wbItemId' );
 		var params = {
+			language: window.mw.config.get( 'wgUserLanguage' ),
 			token: mw.user.tokens.get( 'editToken' )
 		};
 

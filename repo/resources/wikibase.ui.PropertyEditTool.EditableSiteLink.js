@@ -166,6 +166,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			? 'remove'
 			: 'set';
 		delete( params.item ); // ? danwe: why is there an 'item' AND a 'link' param here?
+		delete( params.language );
 
 		return params;
 	},

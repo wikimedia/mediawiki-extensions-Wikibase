@@ -74,7 +74,7 @@ class ItemView extends \ContextSource {
 		$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
 		foreach( $aliases as $alias ) {
 			$html .= Html::element(
-				'li', array( 'class' => ' wb-aliases-alias' ), $alias
+				'li', array( 'class' => 'wb-aliases-alias' ), $alias
 			);
 		}
 		$html .= Html::closeElement( 'ul' );

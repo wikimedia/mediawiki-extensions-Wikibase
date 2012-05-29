@@ -32,6 +32,9 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 */
 	_editableValuesProto: null,
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool._init()
+	 */
 	_init: function( subject ) {
 		// add colspan+1 because of toolbar td's:
 		var th = subject.find( 'th' );

@@ -47,7 +47,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
 		return $.extend( params, {
 			action: 'wbsetlanguageattribute',
-			language: window.mw.config.get( 'wgUserLanguage' ),
 			description: this.getValue().toString()
 		} );
 	}

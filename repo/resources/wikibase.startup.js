@@ -15,7 +15,7 @@
 	// add an edit tool for the main label. This will be integrated into the heading nicely:
 	new window.wikibase.ui.LabelEditTool( $( '#firstHeading' ) );
 	
-	// add an edit tool for all properties in the data grid view:
+	// add an edit tool for all properties in the data view:
 	$( 'body' )
 	.find( '.wb-property-container' )
 	.each( function() {
@@ -25,6 +25,13 @@
 		} else {
 			new window.wikibase.ui.PropertyEditTool( this );
 		}
+	} );
+
+	// edit tool for aliases:
+	$( 'body' )
+	.find( '.wb-aliases' )
+	.each( function() {
+		new window.wikibase.ui.AliasesEditTool( this );
 	} );
 	
 	// edit tool for site links:
@@ -64,5 +71,7 @@
 		) )
 		.prependTo( $( '#content' ) ).fadeIn();
 	}
+
+
 	
 } )( jQuery );
