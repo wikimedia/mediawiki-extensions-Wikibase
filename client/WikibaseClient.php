@@ -47,8 +47,8 @@ $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php'
 $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
 
 // Autoloading
-$wgAutoloadClasses['WBCHooks'] 						= $dir . 'WikibaseClient.hooks.php';
-$wgAutoloadClasses['WBCSettings'] 					= $dir . 'WikibaseClient.settings.php';
+$wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
+$wgAutoloadClasses['Wikibase\ClientSettings'] 		= $dir . 'WikibaseClient.settings.php';
 
 $wgAutoloadClasses['Wikibase\LocalItem'] 			= $dir . 'includes/LocalItem.php';
 $wgAutoloadClasses['Wikibase\LocalItems'] 			= $dir . 'includes/LocalItems.php';
@@ -57,15 +57,16 @@ $wgAutoloadClasses['WBCNoLangLinkHandler'] 			= $dir . 'includes/WBCNoLangLinkHa
 $wgAutoloadClasses['WBCSkinHandler'] 				= $dir . 'includes/WBCSkinHandler.php';
 
 // Hooks
-$wgHooks['UnitTestsList'][] 						= 'WBCHooks::registerUnitTests';
-$wgHooks['WikibasePollHandle'][]					= 'WBCHooks::onWikibasePollHandle';
+$wgHooks['UnitTestsList'][] 						= '\Wikibase\ClientHooks::registerUnitTests';
+$wgHooks['WikibasePollHandle'][]					= '\Wikibase\ClientHooks::onWikibasePollHandle';
+$wgHooks['LoadExtensionSchemaUpdates'][] 			= '\Wikibase\ClientHooks::onSchemaUpdate';
+
 $wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
 $wgHooks['ParserFirstCallInit'][]					= 'WBCNoLangLinkHandler::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]				= 'WBCNoLangLinkHandler::onMagicWordwgVariableIDs';
 $wgHooks['ParserGetVariableValueSwitch'][]			= 'WBCNoLangLinkHandler::onParserGetVariableValueSwitch';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= 'WBCSkinHandler::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['BeforePageDisplay'][]						= 'WBCSkinHandler::onBeforePageDisplay';
-$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WBCHooks::onSchemaUpdate';
 
 
 // Resource loader modules

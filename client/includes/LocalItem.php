@@ -28,4 +28,34 @@ class LocalItem extends ORMRow {
 		return $this->getField( 'item_data' );
 	}
 
+	/**
+	 * Creates and returns a LocalItem object.
+	 * When $loadFromDB is true, the local items table is queried for an existing object,
+	 * which will then be returned if found. If it's false or not found, a new object
+	 * is constructed.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Item $item
+	 * @param bool $loadFromDB
+	 *
+	 * @return LocalItem
+	 */
+	public static function newFromItem( Item $item, $loadFromDB = true ) {
+		$table = \Wikibase\LocalItems::singleton();
+		$localItem = false;
+
+		if ( $loadFromDB ) {
+			$localItem = $table->selectRow( null, array( 'item_id' => $item->getId() ) );
+		}
+
+		if ( $localItem === false ) {
+			$localItem = new static( $table, array( 'item_data' => $item ) );
+
+			// TODO: set article id
+		}
+
+		return $localItem;
+	}
+
 }

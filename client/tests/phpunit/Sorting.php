@@ -23,7 +23,7 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 	public function testNone() {
 		global $egWBCSettings;
 		$egWBCSettings = array();
-		WBCSettings::singleton()->rebuildSettings();
+		\Wikibase\ClientSettings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $orig = $this->provideArray();
@@ -39,7 +39,7 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 		$egWBCSettings = array(
 			'sort' => 'code'
 		);
-		WBCSettings::singleton()->rebuildSettings();
+		\Wikibase\ClientSettings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
@@ -304,7 +304,7 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 		$egWBCSettings = array(
 			'sort' => 'alphabetic'
 		);
-		WBCSettings::singleton()->rebuildSettings();
+		\Wikibase\ClientSettings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
@@ -317,7 +317,7 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 		$egWBCSettings = array(
 			'sort' => 'alphabetic_revised'
 		);
-		WBCSettings::singleton()->rebuildSettings();
+		\Wikibase\ClientSettings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
@@ -838,7 +838,7 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 				'ace',
 			)
 		);
-		WBCSettings::singleton()->rebuildSettings();
+		\Wikibase\ClientSettings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
@@ -854,7 +854,7 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 		$egWBCSettings = array(
 			'sort' => 'alphabetic'
 		);
-		WBCSettings::singleton()->rebuildSettings();
+		\Wikibase\ClientSettings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$alphabetic = $this->provideAlphabetic();

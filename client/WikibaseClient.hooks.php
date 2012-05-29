@@ -1,6 +1,7 @@
 <?php
 
-use Wikibase\Change as Change;
+namespace Wikibase;
+
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -13,7 +14,7 @@ use Wikibase\Change as Change;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-final class WBCHooks {
+final class ClientHooks {
 
 	/**
 	 * Schema update to set up the needed database tables.
@@ -21,11 +22,11 @@ final class WBCHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param DatabaseUpdater $updater
+	 * @param \DatabaseUpdater $updater
 	 *
 	 * @return boolean
 	 */
-	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
+	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
 		$updater->addExtensionTable(
 			'wbc_local_items',
 			dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
@@ -68,8 +69,8 @@ final class WBCHooks {
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
 		$changeHandlers = array(
-			'sitelink' => array( __CLASS__, 'todo' ),
-			'alias' => array( __CLASS__, 'todo' ),
+			'sitelink' => array( __CLASS__, 'onWikibaseItemChange' ),
+			'alias' => array( __CLASS__, 'onWikibaseItemChange' ),
 		);
 
 		if ( array_key_exists( $change->getType(), $changeHandlers ) ) {
@@ -79,8 +80,24 @@ final class WBCHooks {
 		return true;
 	}
 
-	public static function todo( Change $change ) {
-		// TODO
+	/**
+	 * Some temporary code to handle changes to items in a very simple fashion:
+	 * The changes now contain the complete new version of the item, which
+	 * on every detected change gets updated in the local items table.
+	 *
+	 * This is inefficient because:
+	 * * Multiple changes can be created for a single update to an item (ie sitelink and alias changes)
+	 * * The whole item is stored in each change on top of the actual change diff
+	 *
+	 * TODO: further handle item changes according to their types, including page cache invalidation
+	 *
+	 * @since 0.1
+	 *
+	 * @param ItemChange $change
+	 */
+	public static function onWikibaseItemChange( ItemChange $change ) {
+		$localItem = LocalItem::newFromItem( $change->getItem() );
+		$localItem->save();
 	}
 
 }

@@ -26,8 +26,8 @@ class WBCLangLinkHandler {
                 return true;
         }
 
-        protected static function addLangLinks( &$parser, &$text ) {
-                global $wgLanguageCode, $wgLang;
+        protected static function addLangLinks( Parser &$parser, &$text ) {
+                global $wgLanguageCode;
 
                 // If this is an interface message, we don't do anything.
                 if( $parser->getOptions()->getInterfaceMessage() ) {
@@ -36,7 +36,7 @@ class WBCLangLinkHandler {
 
 		// If we don't support the namespace, we maybe sort the links, but don't do anything else.
 		$title = $parser->getTitle();
-		if( !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
+		if( !in_array( $title->getNamespace(), \Wikibase\ClientSettings::get( 'namespaces' ) ) ) {
 			self::maybeSortLinks( $parser->getOutput()->getLanguageLinks() );
 			return true;
 		}
@@ -111,7 +111,7 @@ class WBCLangLinkHandler {
 	 * @return Array of links, empty array for no links, false for failure.
 	 */
 	protected static function getLinks( $title_text ) {
-		$source = WBCSettings::get( 'source' );
+		$source = \Wikibase\ClientSettings::get( 'source' );
 		if( isset( $source['api'] ) ) {
 			return self::getLinksFromApi( $title_text, $source['api'] );
 		} elseif( isset( $source['var'] ) ) {
@@ -189,7 +189,7 @@ class WBCLangLinkHandler {
 	 * Sort an array of links in-place iff alwaysSort option is turned on.
 	 */
 	protected static function maybeSortLinks( &$a ) {
-		if( WBCSettings::get( 'alwaysSort' ) ) {
+		if( \Wikibase\ClientSettings::get( 'alwaysSort' ) ) {
 			self::sortLinks( $a );
 		}
 	}
@@ -293,7 +293,7 @@ class WBCLangLinkHandler {
 			'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea', 'bat-smg', 'zh', 'zh-tw', 'zh-cn',
 		);
 
-		$sort = WBCSettings::get( 'sort' );
+		$sort = \Wikibase\ClientSettings::get( 'sort' );
 		switch( $sort ) {
 			case 'code':
 				self::$sort_order = $order_alphabetic;
@@ -311,7 +311,7 @@ class WBCLangLinkHandler {
 				return false;
 		}
 
-		$sortPrepend = WBCSettings::get( 'sortPrepend' );
+		$sortPrepend = \Wikibase\ClientSettings::get( 'sortPrepend' );
 		if( is_array( $sortPrepend ) ) {
 			self::$sort_order = array_unique( array_merge( $sortPrepend, self::$sort_order ) );
 		}

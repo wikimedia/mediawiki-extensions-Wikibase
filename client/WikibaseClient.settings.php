@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * File defining the settings for the Wikibase Client extension.
  * More info can be found at https://www.mediawiki.org/wiki/Extension:Wikibase_Client#Settings
@@ -16,7 +18,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WBCSettings {
+class ClientSettings {
 
 	/**
 	 * Build version of the settings.
@@ -44,7 +46,7 @@ class WBCSettings {
 	 *
 	 * @since 0.1
 	 *
-	 * @return WBCSettings
+	 * @return ClientSettings
 	 */
 	public static function singleton() {
 		static $instance = false;
@@ -87,14 +89,14 @@ class WBCSettings {
 	 *
 	 * @param string $settingName
 	 *
-	 * @throws MWException
+	 * @throws \MWException
 	 * @return mixed
 	 */
 	public function getSetting( $settingName ) {
 		$this->buildSettings();
 
 		if ( !array_key_exists( $settingName, $this->settings ) ) {
-			throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
+			throw new \MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
 		}
 
 		return $this->settings[$settingName];
