@@ -156,9 +156,6 @@ $wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOption
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	// since 'WikidataRepo' extension was renamed to 'Wikibase', the directory should be renamed in the git repo first
-	// after that this 'weird' regex can be removed
-	// Newslash: the directory is not in the git repo. So properly clone it or rename the directory on your machine if you did it wrong.
 	'remoteExtPath' =>  'Wikibase/resources'
 );
 
@@ -166,6 +163,20 @@ $moduleTemplate = array(
 $wgResourceModules['wikibase.common'] = $moduleTemplate + array(
 	'styles' => array(
 		'wikibase.css'
+	)
+);
+
+$wgResourceModules['wikibase.libs.jQuery.tagit'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.libs/wikibase.libs.jquery.tagit/js/tag-it.js'
+	),
+	'styles' => array(
+		'wikibase.libs/wikibase.libs.jquery.tagit/css/jquery.tagit.css'
+	),
+	'dependencies' => array(
+		'jquery.ui.widget',
+		'jquery.effects.core',
+		'jquery.effects.blind'
 	)
 );
 
