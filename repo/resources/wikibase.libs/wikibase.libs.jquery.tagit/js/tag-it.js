@@ -1,7 +1,7 @@
 /*
 * jQuery UI Tag-it!
 *
-* @version v2.0 (06/2011)
+* @version v2.0.1wb (5/2012) extended for 'Wikibase' extension for 'Mediawiki'
 *
 * Copyright 2011, Levy Carneiro Jr.
 * Released under the MIT license.
@@ -16,6 +16,7 @@
 *   Tobias Schmidt
 *   Skylar Challand
 *   Alex Ehlke
+*   Daniel Werner < daniel.werner@wikimedia.de >
 *
 * Maintainer:
 *   Alex Ehlke - Twitter: @aehlke
@@ -125,7 +126,7 @@
                 .addClass('ui-widget ui-widget-content ui-corner-all')
                 // Create the input field.
                 .append($('<li class="tagit-new"></li>').append(this._tagInput))
-                .click(function(e) {
+                .on('click.tagit', function(e) {
                     var target = $(e.target);
                     if (target.hasClass('tagit-label')) {
                         that._trigger('onTagClicked', e, target.closest('.tagit-choice'));
@@ -370,7 +371,7 @@
             // Animate the removal.
             if (animate) {
                 tag.fadeOut('fast').hide('blind', {direction: 'horizontal'}, 'fast', function(){
-                    tag.remove();
+                    tag.remove(); //TODO/FIXME: danwe: This won't work for some reason, callback not called, fadeOut not happening!
                 }).dequeue();
             } else {
                 tag.remove();
@@ -383,7 +384,32 @@
             this.tagList.children('.tagit-choice').each(function(index, tag) {
                 that.removeTag(tag, false);
             });
-        }
+        },
+
+		/**
+		 * Destroys the element and only leaves the original ul element (including all new elements)
+		 *
+		 * @todo test this also with 'input' element variation of tagit
+		 */
+		destroy: function() {
+			var that = this;
+
+			this.tagList
+				.removeClass('tagit ui-widget ui-widget-content ui-corner-all')
+				.off( 'click.tagit' )
+				.children( '.tagit-new' ).remove();
+
+			this.tagList.children( 'li' ).each( function() {
+				var tag = $( this );
+				var text = that.tagLabel( tag );
+				tag
+					.removeClass('tagit-choice ui-widget-content ui-state-default ui-corner-all ui-state-highlight remove')
+					.empty()
+					.text( text ); // also removes all the helper stuff within
+			} );
+
+			return $.Widget.prototype.destroy.call( this );
+		}
 
     });
 
