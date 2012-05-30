@@ -53,6 +53,7 @@ final class WikibaseHooks {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
 
 		$files[] = $testDir . 'EntityTests.php';
+		$files[] = $testDir . 'ItemDeletionUpdateTest.php';
 		$files[] = $testDir . 'ItemTests.php';
 		$files[] = $testDir . 'ItemViewTests.php';
 		$files[] = $testDir . 'SiteTests.php';
