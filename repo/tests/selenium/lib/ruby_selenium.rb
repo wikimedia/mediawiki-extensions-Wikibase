@@ -1,14 +1,11 @@
 require 'net/http'
 require 'uri'
 require 'json'
-
-WIKI_URL = "http://localhost/mediawiki/"
-WIKI_USELANG = "en"
-WIKI_SKIN = "vector" # "vector" "monobook"
-WIKI_API_URL = WIKI_URL + 'api.php'
-WIKI_USERNAME = "tobijat"
-WIKI_PASSWORD = "darthvader"
-
+require 'yaml'
+configs = YAML::load( File.open( 'configuration.yml' ) )
+configs.each do |k,v|
+  eval("#{k} = '#{v}'")
+end
 class RubySelenium
   # do API request to create a new item
   def self.create_new_item

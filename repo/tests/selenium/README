@@ -1,3 +1,5 @@
 potential architecture for browser testing at WMF
 
 to run, do 'rake -t' at the top directory
+
+Make sure to edit configuration.yml before running tests!
