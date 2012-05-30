@@ -1,6 +1,6 @@
 require 'ruby_selenium'
 
-class SitelinksItemPage < ItemPage
+class SitelinksItemPage < NewItemPage
   include PageObject
 
   # language links UI
