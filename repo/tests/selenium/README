@@ -1,5 +1,6 @@
 potential architecture for browser testing at WMF
 
+Rename "configuration.yml.sample" to "configuration.yml" and
+set configuration parameters to your needs before running the tests!
+ 
 to run, do 'rake -t' at the top directory
-
-Make sure to edit configuration.yml before running tests!

@@ -12,8 +12,6 @@ describe "Check functionality of create new item" do
       @current_page.labelInputField.should be_true
       @current_page.descriptionInputField.should be_true
       @current_page.create_new_item(initial_label, initial_description)
-      @browser.refresh
-      @current_page.wait_for_item_to_load
       @current_page.itemLabelSpan.should == initial_label
       @current_page.itemDescriptionSpan.should == initial_description
 
