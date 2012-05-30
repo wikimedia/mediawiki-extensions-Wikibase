@@ -1,7 +1,7 @@
 /*
 * jQuery UI Tag-it!
 *
-* @version v2.0 (06/2011)
+* @version v2.0.1wb (5/2012) extended for 'Wikibase' extension for 'Mediawiki'
 *
 * Copyright 2011, Levy Carneiro Jr.
 * Released under the MIT license.
@@ -16,6 +16,7 @@
 *   Tobias Schmidt
 *   Skylar Challand
 *   Alex Ehlke
+*   Daniel Werner < daniel.werner@wikimedia.de >
 *
 * Maintainer:
 *   Alex Ehlke - Twitter: @aehlke

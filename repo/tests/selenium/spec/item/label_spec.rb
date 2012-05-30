@@ -3,11 +3,12 @@ require 'spec_helper'
 describe "Check functionality of edit label" do
   context "Check for edit label" do
     it "should check for edit label" do
-      visit_page(LoginPage)
-      @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+      # visit_page(LoginPage)
+      # @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
 
-      visit_page(ItemPage)
-      @current_page.wait_for_item_to_load
+      visit_page(NewItemPage)
+      @current_page.create_new_item(generate_random_string(10), generate_random_string(20))
+      
       @current_page.firstHeading.should be_true
       @current_page.itemLabelSpan.should be_true
       current_label = @current_page.itemLabelSpan

@@ -4,11 +4,12 @@ describe "Check functionality of edit description" do
 
   context "Check for item description UI" do
     it "should check for edit description" do
-      visit_page(LoginPage)
-      @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+      # visit_page(LoginPage)
+      # @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
       
-      visit_page(ItemPage)
-      @current_page.wait_for_item_to_load
+      visit_page(NewItemPage)
+      @current_page.create_new_item(generate_random_string(10), generate_random_string(20))
+
       @current_page.itemDescriptionSpan.should be_true
       current_description = @current_page.itemDescriptionSpan
       changed_description = current_description + " Adding something."

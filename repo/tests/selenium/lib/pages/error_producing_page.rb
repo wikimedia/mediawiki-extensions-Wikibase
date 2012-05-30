@@ -1,6 +1,6 @@
 require 'ruby_selenium'
 
-class ErrorProducingPage < ItemPage
+class ErrorProducingPage < NewItemPage
   include PageObject
   
   div(:wbErrorDiv, :class => "wb-tooltip-error-top-message")

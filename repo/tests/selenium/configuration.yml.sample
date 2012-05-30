@@ -1,0 +1,8 @@
+ target_browser: "firefox" # "chrome" "ie" "opera" "safari" "firefox"
+ WIKI_URL: "http://localhost/wiki/"
+ WIKI_USELANG: "en"
+ WIKI_SKIN: "vector" # "vector" "monobook"
+ WIKI_API_URL: "http://localhost/wiki/api.php"
+ WIKI_USERNAME: "Username"
+ WIKI_PASSWORD: "Password"
+

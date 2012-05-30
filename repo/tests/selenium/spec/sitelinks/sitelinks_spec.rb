@@ -4,10 +4,11 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for empty site links UI" do
     it "should check that there are no site links and if there's an add button" do
-      visit_page(LoginPage)
-      @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
-            
+      # visit_page(LoginPage)
+      # @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+
       visit_page(SitelinksItemPage)
+      @current_page.create_new_item(generate_random_string(10), generate_random_string(20))
       @current_page.wait_for_sitelinks_to_load
 
       @current_page.sitelinksTable?.should be_true
@@ -34,7 +35,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for adding site link UI" do
     it "should check if adding a sitelink works" do
-      visit_page(SitelinksItemPage)
+      on_page(SitelinksItemPage)
+      @current_page.navigate_to_item
       @current_page.wait_for_sitelinks_to_load
       @current_page.countExistingSitelinks.should == 0
       @current_page.addSitelinkLink
@@ -79,7 +81,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check if adding multiple sitelinks works" do
       count = 1
       sitelinks = [["de", "Ber"], ["ja", "Ber"], ["he", "Ber"]]
-      visit_page(SitelinksItemPage)
+      on_page(SitelinksItemPage)
+      @current_page.navigate_to_item
       @current_page.wait_for_sitelinks_to_load
       sitelinks.each do |sitelink|
         @current_page.countExistingSitelinks.should == count
@@ -114,9 +117,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         @current_page.wait_for_sitelinks_to_load
 
         count = count+1
-        # if count!=4
-          @current_page.getNumberOfSitelinksFromCounter.should == count
-        # end
+        @current_page.getNumberOfSitelinksFromCounter.should == count
       end
       @current_page.countExistingSitelinks.should == count
     end
@@ -124,7 +125,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for editing site links UI" do
     it "should check if editing sitelinks works" do
-      visit_page(SitelinksItemPage)
+      on_page(SitelinksItemPage)
+      @current_page.navigate_to_item
       @current_page.wait_for_sitelinks_to_load
       @current_page.getNthSitelinksTableRow(2).click
       @current_page.editSitelinkLink
@@ -172,7 +174,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for removing multiple site link UI" do
     it "should check if removing multiple sitelink works" do
-      visit_page(SitelinksItemPage)
+      on_page(SitelinksItemPage)
+      @current_page.navigate_to_item
       @current_page.wait_for_sitelinks_to_load
       numExistingSitelinks = @current_page.countExistingSitelinks
       @current_page.getNthSitelinksTableRow(1).click
