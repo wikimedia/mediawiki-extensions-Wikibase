@@ -69,16 +69,18 @@ class ItemView extends \ContextSource {
 
 		// ALIASES
 
-		$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
-		$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMsg( 'wikibase-aliases-label' ) );
-		$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
-		foreach( $aliases as $alias ) {
-			$html .= Html::element(
-				'li', array( 'class' => 'wb-aliases-alias' ), $alias
-			);
+		if( ! empty( $aliases ) ) {
+			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
+			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMsg( 'wikibase-aliases-label' ) );
+			$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
+			foreach( $aliases as $alias ) {
+				$html .= Html::element(
+					'li', array( 'class' => 'wb-aliases-alias' ), $alias
+				);
+			}
+			$html .= Html::closeElement( 'ul' );
+			$html .= Html::closeElement( 'div' );
 		}
-		$html .= Html::closeElement( 'ul' );
-		$html .= Html::closeElement( 'div' );
 
 		// SITE-LINKS
 
