@@ -236,6 +236,17 @@ $messages['be-tarask'] = array(
 	'special-createitem' => 'Стварыць новы прадмет',
 );
 
+/** Breton (Brezhoneg)
+ * @author Fulup
+ */
+$messages['br'] = array(
+	'wikibase-save' => 'enrollañ',
+	'wikibase-cancel' => 'nullañ',
+	'wikibase-add' => 'ouzhpennañ',
+	'wikibase-save-inprogress' => "Oc'h enrollañ...",
+	'wikibase-tooltip-error-details' => 'Munudoù',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  * @author Metalhead64
@@ -395,10 +406,10 @@ $messages['es'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'especificar la página',
 	'wikibase-label-input-help-message' => 'Introducir el título de este conjunto de datos en  $1.',
 	'wikibase-description-input-help-message' => 'Introducir una breve descripción en  $1.',
-	'wikibase-sitelinks' => 'Páginas de {{SITENAME}} enlazadas a este elemento',
-	'wikibase-sitelinks-add' => 'Agregar un enlace a una página de {{SITENAME}}',
-	'wikibase-sitelinks-empty' => 'No hay todavía ninguna página de {{SITENAME}} enlazada a este elemento.',
-	'wikibase-sitelinks-input-help-message' => 'Poner un enlace a un artículo de Wikipedia',
+	'wikibase-sitelinks' => 'Lista de páginas enlazadas a este elemento',
+	'wikibase-sitelinks-add' => 'Agregar un enlace a un enlace del sitio (site-link)',
+	'wikibase-sitelinks-empty' => 'No hay ningún enlace del sitio para este elemento.',
+	'wikibase-sitelinks-input-help-message' => 'Poner un enlace a una página relacionada con este elemento.',
 	'wikibase-remove' => 'eliminar',
 	'wikibase-propertyedittool-full' => 'La lista de valores está completa.',
 	'wikibase-propertyedittool-counter' => '$1 {{PLURAL:$1|entrada|entradas}}',
