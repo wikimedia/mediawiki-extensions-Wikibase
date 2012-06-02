@@ -23,7 +23,7 @@ window.wikibase.ui.PropertyEditTool.EditableAliases = function( subject ) {
 window.wikibase.ui.PropertyEditTool.EditableAliases.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 
-	API_KEY: 'aliases',
+	API_VALUE_KEY: null, //NOTE: This has to be adjusted as soon as the wbsetaliases API module supports it
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue._init
@@ -57,13 +57,26 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 	},
 
 	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue._getValueFromApiResponse
+	 * @return array
+	 */
+	_getValueFromApiResponse: function( response ) {
+		var value = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._getValueFromApiResponse.call( this, response );
+		return value !== null
+			? value.split( '|' ) // NOTE: not yet supported by the API and the way this will be returned might be different.
+			: null;
+	},
+
+	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.getApiCallParams
 	 */
 	getApiCallParams: function( apiAction ) {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
-		return $.extend( params, {
-			action: "wbsetlanguageattribute",
-			label: this.getValue().toString()
-		} );
+
+		params.action = 'wbsetaliases';
+		params.item = 'set';
+		params.set = this.getValue()[0].join( '|' );
+
+		return params;
 	}
 } );

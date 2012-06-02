@@ -48,10 +48,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * specific property key within the API JSON structure (overridden by specific subclasses)
+	 * specific property key within the API JSON structure.
 	 * @const string
 	 */
-	API_KEY: null,
+	API_VALUE_KEY: null,
 	
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
@@ -413,20 +413,19 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
 
 				if( apiAction !== self.API_ACTION.REMOVE ) {
-					// only re-display toolbar if value wasn't removed
-
-					if ( self.API_KEY !== null ) {
-						// set normalized value
-						self.setValue( response.item[self.API_KEY][window.mw.config.get( 'wgUserLanguage' )].value );
+					var responseVal = self._getValueFromApiResponse( response.item );
+					if( responseVal !== null ) {
+						// set normalized value from response if supported by API module
+						self.setValue( responseVal );
 					}
 
 					if( window.mw.config.get( 'wbItemId' ) === null ) {
 						// if the 'save' process will create a new item, trigger the event!
-						$( wikibase ).trigger( 'NewItemCreated', response.item );
+						$( wikibase ).triggerHandler( 'NewItemCreated', response.item );
 					}
 
 					waitMsg.remove();
-					self._toolbar._elem.fadeIn( 300 );
+					self._toolbar._elem.fadeIn( 300 ); // only re-display toolbar if value wasn't removed
 				}
 			} );
 		} )
@@ -446,6 +445,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._subject.addClass( this.UI_CLASS + '-waiting' );
 
 		return deferred;
+	},
+
+	/**
+	 * Extracts a value usable for this from an API response returned after saving the current state.
+	 * Returns null in case the API module doesn't return any normalized value. This will fai an error if the given
+	 * response is not compatible.
+	 *
+	 * @param array response
+	 * @return string|null
+	 */
+	_getValueFromApiResponse: function( response ) {
+		return ( this.API_VALUE_KEY !== null )
+			? response[ this.API_VALUE_KEY ][ window.mw.config.get( 'wgUserLanguage' ) ].value
+			: null;
 	},
 
 	/**
