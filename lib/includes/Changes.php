@@ -17,8 +17,7 @@ use MWException;
 class Changes extends \ORMTable {
 
 	/**
-	 * (non-PHPdoc)
-	 * @see ORMTable::getName()
+	 * @see IORMTable::getName()
 	 * @since 0.1
 	 * @return string
 	 */
@@ -27,18 +26,16 @@ class Changes extends \ORMTable {
 	}
 
 	/**
-	 * (non-PHPdoc)
 	 * @see ORMTable::getFieldPrefix()
 	 * @since 0.1
 	 * @return string
 	 */
-	public function getFieldPrefix() {
+	protected function getFieldPrefix() {
 		return 'change_';
 	}
 
 	/**
-	 * (non-PHPdoc)
-	 * @see ORMTable::getRowClass()
+	 * @see IORMTable::getRowClass()
 	 * @since 0.1
 	 * @return string
 	 */
@@ -47,8 +44,7 @@ class Changes extends \ORMTable {
 	}
 
 	/**
-	 * (non-PHPdoc)
-	 * @see ORMTable::getFields()
+	 * @see IORMTable::getFields()
 	 * @since 0.1
 	 * @return array
 	 */

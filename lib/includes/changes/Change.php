@@ -73,11 +73,11 @@ class Change extends ORMRow {
 	 *
 	 * @since 1.20
 	 *
-	 * @param \ORMTable $table
+	 * @param \IORMTable $table
 	 * @param array|null $fields
 	 * @param boolean $loadDefaults
 	 */
-	public function __construct( \ORMTable $table, $fields = null, $loadDefaults = false ) {
+	public function __construct( \IORMTable $table, $fields = null, $loadDefaults = false ) {
 		if ( is_null( $fields ) ) {
 			$fields = array();
 		}
