@@ -19,7 +19,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'wbc-desc' => 'Client for the Wikibase extension',
-	'wbc-editlinks' => 'Edit Links',
+	'wbc-editlinks' => 'Edit links',
 	'wbc-editlinkstitle' => 'Edit interlanguage links',
 );
 
