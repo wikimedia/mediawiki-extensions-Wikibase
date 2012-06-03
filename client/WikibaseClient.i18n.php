@@ -41,6 +41,14 @@ $messages['be-tarask'] = array(
 	'wbc-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 );
 
+/** Breton (brezhoneg)
+ * @author Fulup
+ */
+$messages['br'] = array(
+	'wbc-editlinks' => 'Kemmañ al liammoù',
+	'wbc-editlinkstitle' => 'Kemmañ al liammoù etreyezhel',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  * @author Purodha
