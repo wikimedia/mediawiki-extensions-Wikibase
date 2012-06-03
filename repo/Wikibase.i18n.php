@@ -236,14 +236,21 @@ $messages['be-tarask'] = array(
 	'special-createitem' => 'Стварыць новы прадмет',
 );
 
-/** Breton (Brezhoneg)
+/** Breton (brezhoneg)
  * @author Fulup
  */
 $messages['br'] = array(
+	'wikibase-edit' => 'kemmañ',
 	'wikibase-save' => 'enrollañ',
 	'wikibase-cancel' => 'nullañ',
 	'wikibase-add' => 'ouzhpennañ',
 	'wikibase-save-inprogress' => "Oc'h enrollañ...",
+	'wikibase-remove-inprogress' => 'O tiverkañ...',
+	'wikibase-sitelink-site-edit-placeholder' => "spisaat al lec'hienn",
+	'wikibase-sitelink-page-edit-placeholder' => 'spisaat ar bajenn',
+	'wikibase-remove' => 'Dilemel',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-aliases-label' => 'Anvet ivez :',
 	'wikibase-tooltip-error-details' => 'Munudoù',
 );
 
@@ -386,7 +393,7 @@ $messages['dsb'] = array(
 	'content-model-1001' => 'Datowy element z Wikibase',
 );
 
-/** Spanish (Español)
+/** Spanish (español)
  * @author Armando-Martin
  * @author Savh
  * @author Vivaelcelta
@@ -484,7 +491,7 @@ $messages['fa'] = array(
 	'special-itembylabel' => 'آیتم بر اساس برچسب',
 );
 
-/** French (Français)
+/** French (français)
  * @author Alno
  * @author DavidL
  * @author Gomoko
@@ -731,7 +738,7 @@ $messages['hsb'] = array(
 	'content-model-1001' => 'Datowy element Wikibase',
 );
 
-/** Interlingua (Interlingua)
+/** Interlingua (interlingua)
  * @author McDutchie
  */
 $messages['ia'] = array(
@@ -772,7 +779,7 @@ $messages['ia'] = array(
 	'special-createitem' => 'Crear un nove objecto',
 );
 
-/** Icelandic (Íslenska)
+/** Icelandic (íslenska)
  * @author Snævar
  */
 $messages['is'] = array(
@@ -845,7 +852,7 @@ $messages['is'] = array(
 	'content-model-1001' => 'Wikibase hlutur',
 );
 
-/** Italian (Italiano)
+/** Italian (italiano)
  * @author Beta16
  */
 $messages['it'] = array(
@@ -978,7 +985,7 @@ $messages['lb'] = array(
 	'wikibase-remove' => 'ewechhuelen',
 );
 
-/** Macedonian (Македонски)
+/** Macedonian (македонски)
  * @author Bjankuloski06
  */
 $messages['mk'] = array(
@@ -1199,7 +1206,7 @@ $messages['nl'] = array(
 	'content-model-1001' => 'Wikibaseitem',
 );
 
-/** Norwegian Nynorsk (‪Norsk (nynorsk)‬)
+/** Norwegian Nynorsk (‪norsk (nynorsk)‬)
  * @author Jeblad
  * @author Njardarlogar
  */
@@ -1273,7 +1280,7 @@ $messages['nn'] = array(
 	'content-model-1001' => 'Wikibase datasett',
 );
 
-/** Portuguese (Português)
+/** Portuguese (português)
  * @author Malafaya
  */
 $messages['pt'] = array(
@@ -1292,7 +1299,7 @@ $messages['pt'] = array(
 	'wikibase-remove' => 'remover',
 );
 
-/** Brazilian Portuguese (Português do Brasil)
+/** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
  */
 $messages['pt-br'] = array(
@@ -1365,7 +1372,7 @@ $messages['pt-br'] = array(
 	'content-model-1001' => 'Item do Wikibase',
 );
 
-/** Russian (Русский)
+/** Russian (русский)
  * @author Kaganer
  * @author Александр Сигачёв
  */
@@ -1385,7 +1392,7 @@ $messages['ru'] = array(
 	'wikibase-remove' => 'убрать',
 );
 
-/** Swedish (Svenska)
+/** Swedish (svenska)
  * @author Ainali
  * @author WikiPhoenix
  */
