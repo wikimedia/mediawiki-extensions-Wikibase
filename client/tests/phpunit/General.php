@@ -42,13 +42,13 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 */
 	public function testLocal() {
 		$settings = $this->defaultSettings;
-		$settings['source']['var'] = array();
+		$settings['source']['var'] = array( "Berlin" => array() );
 		$links = $this->doParse(
 			Title::newFromText( "Berlin" ),
 			$settings,
 			array( "fr:Berlin", "de:Berlin" )
 		);
-		$this->assertEquals( array( "fr:Berlin", "de:Berlin" ), $links );
+		$this->assertEquals( array( "de:Berlin", "fr:Berlin" ), $links );
 	}
 
 	/**
