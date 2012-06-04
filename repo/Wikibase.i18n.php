@@ -226,14 +226,20 @@ $messages['be-tarask'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Адно значэньне яшчэ не захаванае|$1 значэньні яшчэ не захаваныя|$1 значэньняў яшчэ не захавана}}',
 	'wikibase-sitelinksedittool-full' => 'Спасылкі на старонкі ёсьць ужо для ўсіх вядомых сайтаў.',
 	'wikibase-disambiguation-title' => 'Неадназначнасьць для «$1»',
+	'wb-special-createitem-new-item-notification' => 'Новы прадмет «$1» створаны і перанакіроўвае на ўласную старонку. Вярнуцца — $2.',
+	'wikibase-aliases-label' => 'Таксама вядома як:',
 	'wikibase-tooltip-error-details' => 'Падрабязнасьці',
 	'wikibase-error-save-generic' => 'У час спробы захаваньня адбылася памылка, з-за чаго зьмены не былі ўнесеныя цалкам.',
+	'wikibase-error-remove-generic' => 'У час спробы выдаленьня адбылася памылка, з-за чаго зьмены не былі ўнесеныя цалкам.',
+	'wikibase-error-save-connection' => 'У час спробы захаваньня адбылася памылка злучэньня, з-за чаго вашыя зьмены не былі захаваныя. Калі ласка, праверце вашае злучэньне з Інтэрнэтам.',
 	'wikibase-error-autocomplete-connection' => 'Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазьней.',
 	'wikibase-error-autocomplete-response' => 'Адказ сэрвэра: $1',
 	'wikibase-setting-languages' => 'Дапаможныя мовы<br />(напр., для адлюстраваньня зьвестак, калі яны не даступныя на асноўнай мове)',
 	'special-itembytitle' => 'Аб’ект паводле назвы',
 	'special-itembylabel' => 'Аб’ект паводле меткі',
 	'special-createitem' => 'Стварыць новы прадмет',
+	'wikibase-api-no-token' => 'Не пазначаны token.',
+	'content-model-1001' => 'Прадмет у Вікібазе',
 );
 
 /** Breton (brezhoneg)
@@ -980,9 +986,16 @@ $messages['lb'] = array(
 	'wikibase-save' => 'späicheren',
 	'wikibase-cancel' => 'ofbriechen',
 	'wikibase-add' => 'derbäisetzen',
+	'wikibase-save-inprogress' => 'Späicheren...',
+	'wikibase-remove-inprogress' => 'Ewechuelen...',
 	'wikibase-description-edit-placeholder' => 'Beschreiwung aginn',
-	'wikibase-sitelinks-add' => 'e Link op eng Wikipedia-Säit derbäisetzen',
+	'wikibase-sitelink-page-edit-placeholder' => "spezifizéiert d'Säit",
+	'wikibase-sitelinks' => 'Lëscht vun de Säiten déi mat dësem Objet verlinkt sinn',
+	'wikibase-sitelinks-add' => 'e Link bäi e Link vum Site derbäisetzen',
 	'wikibase-remove' => 'ewechhuelen',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-aliases-label' => 'Och bekannt als:',
+	'wikibase-tooltip-error-details' => 'Detailer',
 );
 
 /** Macedonian (македонски)
