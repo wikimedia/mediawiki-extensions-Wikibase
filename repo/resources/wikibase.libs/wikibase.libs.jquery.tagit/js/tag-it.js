@@ -37,10 +37,6 @@
             caseSensitive     : true,
             placeholderText   : null,
 
-            // When enabled, quotes are not neccesary
-            // for inputting multi-word tags.
-            allowSpaces: false,
-
             // Whether to animate tag removals or not.
             animate: true,
 
@@ -77,6 +73,14 @@
 			// leaves the input field.
 			createOnBlur: false,
 
+			/**
+			 * Keys which - when pressed in the input area - will trigger the current
+			 * input to be added as tag. $.ui.keyCode members can be used for convenience.
+			 * @var Number[]
+			 */
+			triggerKeys: [
+				$.ui.keyCode.ENTER
+			],
 
             // Event callbacks.
 			onTagAdded        : null,
@@ -183,29 +187,8 @@
                         that._lastTag().removeClass('remove ui-state-highlight');
                     }
 
-                    // Comma/Space/Enter are all valid delimiters for new tags,
-                    // except when there is an open quote or if setting allowSpaces = true.
-                    // Tab will also create a tag, unless the tag input is empty, in which case it isn't caught.
-                    if (
-                        event.which == $.ui.keyCode.COMMA ||
-                        event.which == $.ui.keyCode.ENTER ||
-                        (
-                            event.which == $.ui.keyCode.TAB &&
-                            that._tagInput.val() !== ''
-                        ) ||
-                        (
-                            event.which == $.ui.keyCode.SPACE &&
-                            that.options.allowSpaces !== true &&
-                            (
-                                $.trim(that._tagInput.val()).replace( /^s*/, '' ).charAt(0) != '"' ||
-                                (
-                                    $.trim(that._tagInput.val()).charAt(0) == '"' &&
-                                    $.trim(that._tagInput.val()).charAt($.trim(that._tagInput.val()).length - 1) == '"' &&
-                                    $.trim(that._tagInput.val()).length - 1 !== 0
-                                )
-                            )
-                        )
-                    ) {
+                    // check whether key for insertion was triggered
+                    if( that._tagInput.val() !== '' && $.inArray( event.which, that.options.triggerKeys ) > -1 ) {
                         event.preventDefault();
                         that.createTag( that._tagInput.val() );
 
