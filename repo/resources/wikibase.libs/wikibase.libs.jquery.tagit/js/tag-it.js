@@ -73,6 +73,10 @@
             // created for tag-it.
             tabIndex: null,
 
+			// if true this creates a new tag if text was inserted and the user
+			// leaves the input field.
+			createOnBlur: false,
+
 
             // Event callbacks.
 			onTagAdded        : null,
@@ -203,15 +207,17 @@
                         )
                     ) {
                         event.preventDefault();
-                        that.createTag(that._cleanedInput());
+                        that.createTag( that._tagInput.val() );
 
                         // The autocomplete doesn't close automatically when TAB is pressed.
                         // So let's ensure that it closes.
                         that._tagInput.autocomplete('close');
                     }
                 }).blur(function(e){
-                    // Create a tag when the element loses focus (unless it's empty).
-                    that.createTag(that._cleanedInput());
+					if( that.options.createOnBlur ) {
+						// Create a tag when the element loses focus (unless it's empty).
+						that.createTag( that._tagInput.val() );
+					}
                 });
                 
 
@@ -235,11 +241,6 @@
                     }
                 });
             }
-        },
-
-        _cleanedInput: function() {
-            // Returns the contents of the tag input, cleaned and ready to be passed to createTag
-            return $.trim(this._tagInput.val().replace(/^"(.*)"$/, '$1'));
         },
 
         _lastTag: function() {
@@ -358,8 +359,8 @@
 					// highlight tag visually so the user knows the tag is in the list already
 					// switch to highlighted class...
 					tag.switchClass( '', 'tagit-choice-existing ui-state-highlight', 150, 'linear', function() {
-						// ... and remove it again
-						tag.switchClass( 'tagit-choice-existing ui-state-highlight', '', 750, 'linear' );
+						// ... and remove it again (also remove 'remove' class to avoid confusio
+						tag.switchClass( 'tagit-choice-existing ui-state-highlight remove', '', 750, 'linear' );
 					} );
 				}
 				return false;
