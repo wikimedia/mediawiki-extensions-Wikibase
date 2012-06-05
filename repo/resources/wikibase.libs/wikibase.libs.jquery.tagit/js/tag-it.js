@@ -1,7 +1,7 @@
 /*
 * jQuery UI Tag-it!
 *
-* @version v2.0.1wb (5/2012) extended for 'Wikibase' extension for 'Mediawiki'
+* @version v2.1.0wb (5/2012) extended for 'Wikibase' extension for 'Mediawiki'
 *
 * Copyright 2011, Levy Carneiro Jr.
 * Released under the MIT license.
@@ -75,9 +75,10 @@
 
 
             // Event callbacks.
-            onTagAdded  : null,
-            onTagRemoved: null,
-            onTagClicked: null
+			onTagAdded        : null,
+			onBeforeTagRemoved: null,
+			onTagRemoved      : null,
+            onTagClicked      : null
         },
 
 
@@ -344,13 +345,15 @@
                 tag.append('<input type="hidden" style="display:none;" value="' + escapedValue + '" name="' + this.options.itemName + '[' + this.options.fieldName + '][]" />');
             }
 
-            this._trigger('onTagAdded', null, tag);
-
             // Cleaning the input.
             this._tagInput.val('');
 
             // insert tag
             this._tagInput.parent().before(tag);
+
+			this._trigger( 'onTagAdded', null, tag );
+
+			return tag;
         },
         
         removeTag: function(tag, animate) {
@@ -358,7 +361,7 @@
 
             tag = $(tag);
 
-            this._trigger('onTagRemoved', null, tag);
+            this._trigger( 'onBeforeTagRemoved', null, tag );
 
             if (this.options.singleField) {
                 var tags = this.assignedTags();
@@ -368,13 +371,20 @@
                 });
                 this._updateSingleTagsField(tags);
             }
+
+			var removeTag = $.proxy( function() {
+				tag.remove();
+				this._trigger( 'onTagRemoved', null, tag );
+			}, this );
+
             // Animate the removal.
             if (animate) {
+				// TODO/FIXME: it's not clear that the tag is still in the list until the animation stopped!
                 tag.fadeOut('fast').hide('blind', {direction: 'horizontal'}, 'fast', function(){
-                    tag.remove(); //TODO/FIXME: danwe: This won't work for some reason, callback not called, fadeOut not happening!
+					removeTag(); //TODO/FIXME: danwe: This won't work for some reason, callback not called, fadeOut not happening!
                 }).dequeue();
             } else {
-                tag.remove();
+				removeTag();
             }
         },
 
