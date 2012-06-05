@@ -1,7 +1,7 @@
-/*
-* jQuery UI Tag-it!
+/**
+* jQuery UI Tag-it, modified version for 'Wikibase' extension for 'MediaWiki'
 *
-* @version v2.1.0wb (5/2012) extended for 'Wikibase' extension for 'Mediawiki'
+* @version v2.1.0wb (5/2012) extended for 'Wikibase' extension for 'MediaWiki'
 *
 * Copyright 2011, Levy Carneiro Jr.
 * Released under the MIT license.
@@ -33,44 +33,64 @@
             fieldName         : 'tags',
             availableTags     : [],
             tagSource         : null,
-            removeConfirmation: false,
-            caseSensitive     : true,
-            placeholderText   : null,
 
-            // Whether to animate tag removals or not.
+			/**
+			 * If set to true, hitting backspace will not delete the last tag immediately but highlight it first.
+			 * @var Boolean
+			 */
+            removeConfirmation: false,
+
+			/**
+			 * If true, tags with the same text but different capitalization can be inserted.
+			 * @var Boolean
+			 */
+            caseSensitive: true,
+
+			/**
+			 * Text used as placeholder in the input field if no text has been typed yet.
+			 * @var String
+			 */
+            placeholderText: null,
+
+			/**
+			 * Whether  to animate tag removals or not.
+			 * @var Boolean
+			 */
             animate: true,
 
-            // The below options are for using a single field instead of several
-            // for our form values.
-            //
-            // When enabled, will use a single hidden field for the form,
-            // rather than one per tag. It will delimit tags in the field
-            // with singleFieldDelimiter.
-            //
-            // The easiest way to use singleField is to just instantiate tag-it
-            // on an INPUT element, in which case singleField is automatically
-            // set to true, and singleFieldNode is set to that element. This 
-            // way, you don't need to fiddle with these options.
+			/**
+			 * The below options are for using a single field instead of several for our form values.
+			 * When enabled, will use a single hidden field for the form, rather than one per tag. It will delimit tags
+			 * in the field with singleFieldDelimiter.
+			 *
+			 * The easiest way to use singleField is to just instantiate tag-it on an INPUT element, in which case
+			 * singleField is automatically set to true, and singleFieldNode is set to that element. This way, you don't
+			 * need to fiddle with these options.
+			 *
+			 * @var Boolean
+			 */
             singleField: false,
 
             singleFieldDelimiter: ',',
 
-            // Set this to an input DOM node to use an existing form field.
-            // Any text in it will be erased on init. But it will be
-            // populated with the text of tags as they are created,
-            // delimited by singleFieldDelimiter.
-            //
-            // If this is not set, we create an input node for it,
-            // with the name given in settings.fieldName, 
-            // ignoring settings.itemName.
+			/**
+			 * Set this to an input DOM node to use an existing form field. Any text in it will be erased on init. But
+			 * it will be populated with the text of tags as they are created, delimited by singleFieldDelimiter.
+			 * If this is not set, we create an input node for it, with the name given in settings.fieldName,
+			 * ignoring settings.itemName.
+			 */
             singleFieldNode: null,
 
-            // Optionally set a tabindex attribute on the input that gets
-            // created for tag-it.
+            /**
+			 * Optionally set a tabindex attribute on the input that gets created for tag-it.
+			 * @var Number
+			 */
             tabIndex: null,
 
-			// if true this creates a new tag if text was inserted and the user
-			// leaves the input field.
+			/**
+			 * if true this creates a new tag if text was inserted and the user leaves the input field.
+			 * @var Boolean
+ 			 */
 			createOnBlur: false,
 
 			/**
@@ -211,7 +231,7 @@
                     select: function(event, ui) {
                         // Delete the last tag if we autocomplete something despite the input being empty
                         // This happens because the input's blur event causes the tag to be created when
-                        // the user clicks an autocomplete item.
+                        // the user clicks an autocomplete item. I don't know how to lock my screen.
                         // The only artifact of this is that while the user holds down the mouse button
                         // on the selected autocomplete item, a tag is shown with the pre-autocompleted text,
                         // and is changed to the autocompleted text upon mouseup.
