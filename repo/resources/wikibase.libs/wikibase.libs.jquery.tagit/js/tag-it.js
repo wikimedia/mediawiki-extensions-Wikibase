@@ -246,6 +246,11 @@
             return this.tagList.children('.tagit-choice:last');
         },
 
+		/**
+		 * Returns the labels of all tags currently assigned.
+		 *
+		 * @return String[]
+		 */
         assignedTags: function() {
             // Returns an array of tag string values
             var that = this;
@@ -256,9 +261,12 @@
                     tags = [];
                 }
             } else {
-                this.tagList.children('.tagit-choice').each(function() {
-                    tags.push(that.tagLabel(this));
-                });
+                this.tagList.children('.tagit-choice').each( function() {
+					// check if already removed but still assigned till animations end. if so, don't add tag!
+					if( ! $( this ).hasClass( 'tagit-choice-removed' ) ) {
+                    	tags.push( that.tagLabel( this ) );
+					}
+                } );
             }
             return tags;
         },
@@ -278,6 +286,12 @@
             return result;
         },
 
+		/**
+		 * Returns the label of a tag represented by a DOM node.
+		 *
+		 * @param jQuery tag
+		 * @return string
+		 */
         tagLabel: function(tag) {
             // Returns the tag's string label.
             if (this.options.singleField) {
@@ -287,32 +301,62 @@
             }
         },
 
-        _isNew: function(value) {
-            var that = this;
-            var isNew = true;
-            this.tagList.children('.tagit-choice').each(function(i) {
-                if (that._formatStr(value) == that._formatStr(that.tagLabel(this))) {
-                    isNew = false;
-                    return false;
-                }
-            });
-            return isNew;
-        },
+		/**
+		 * Returns a tags element by its label. If the tag is not in the list, null will be returned.
+		 *
+		 * @param string label
+		 * @return jQuery|null
+		 */
+		getTag: function( label ) {
+			var self = this;
+			var result = null;
+			this.tagList.children( '.tagit-choice' ).each( function( i ) {
+				if( self._formatLabel( label ) === self._formatLabel( self.tagLabel( this ) ) ) {
+					result = $( this );
+					return false;
+				}
+			} );
+			return result;
+		},
 
-        _formatStr: function(str) {
+		/**
+		 * Returns whether the tag with an given label is present within the list of tags already
+		 *
+		 * @param string label
+		 * @return Boolean
+		 */
+		hasTag: function( label ) {
+			return this.getTag( label ) !== null;
+		},
+
+        _formatLabel: function(str) {
+			str = $.trim( str );
             if (this.options.caseSensitive) {
                 return str;
             }
-            return $.trim(str.toLowerCase());
+            return str.toLowerCase();
         },
 
-        createTag: function(value, additionalClass) {
+		/**
+		 * This will add a new tag to the list of tags. If the tag exists in the list already, false will be returned,
+		 * otherwise the newly assigned tag.
+		 *
+		 * @param String value
+		 * @param String additionalClass
+		 * @return jQuery|false
+		 */
+        createTag: function( value, additionalClass ) {
             var that = this;
             // Automatically trims the value of leading and trailing whitespace.
-            value = $.trim(value);
+            value = this._formatLabel( value );
 
-            if (!this._isNew(value) || value === '') {
-                return false;
+            if( this.hasTag( value ) || value === '' ) {
+				var tag = this.getTag( value );
+				if( tag !== null ) {
+					// highlight tag visually so the user knows the tag is in the list already
+					tag.addClass(  )
+				}
+				return false;
             }
 
             var label = $(this.options.onTagClicked ? '<a class="tagit-label"></a>' : '<span class="tagit-label"></span>').text(value);
@@ -372,20 +416,18 @@
                 this._updateSingleTagsField(tags);
             }
 
-			var removeTag = $.proxy( function() {
-				tag.remove();
-				this._trigger( 'onTagRemoved', null, tag );
-			}, this );
-
             // Animate the removal.
             if (animate) {
-				// TODO/FIXME: it's not clear that the tag is still in the list until the animation stopped!
+				tag.addClass( 'tagit-choice-removed' );
                 tag.fadeOut('fast').hide('blind', {direction: 'horizontal'}, 'fast', function(){
-					removeTag(); //TODO/FIXME: danwe: This won't work for some reason, callback not called, fadeOut not happening!
+					tag.remove(); //TODO/FIXME: danwe: This won't work for some reason, callback not called, fadeOut not happening!
                 }).dequeue();
             } else {
-				removeTag();
+				tag.remove();
             }
+
+			this._trigger( 'onTagRemoved', null, tag );
+			return true;
         },
 
         removeAll: function() {
@@ -413,7 +455,7 @@
 				var tag = $( this );
 				var text = that.tagLabel( tag );
 				tag
-					.removeClass('tagit-choice ui-widget-content ui-state-default ui-corner-all ui-state-highlight remove')
+					.removeClass('tagit-choice tagit-choice-removed ui-widget-content ui-state-default ui-corner-all ui-state-highlight remove')
 					.empty()
 					.text( text ); // also removes all the helper stuff within
 			} );
