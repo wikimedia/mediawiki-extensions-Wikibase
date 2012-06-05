@@ -52,3 +52,5 @@ ul.tagit input[type="text"] {
     background-color: inherit;
     outline: none;
 }
+
+ul.tagit li.tagit-choice-existing {}

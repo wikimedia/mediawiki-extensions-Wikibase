@@ -353,8 +353,14 @@
             if( this.hasTag( value ) || value === '' ) {
 				var tag = this.getTag( value );
 				if( tag !== null ) {
+					// tag in list already, don't add it twice
+					this._tagInput.val( '' );
 					// highlight tag visually so the user knows the tag is in the list already
-					tag.addClass(  )
+					// switch to highlighted class...
+					tag.switchClass( '', 'tagit-choice-existing ui-state-highlight', 150, 'linear', function() {
+						// ... and remove it again
+						tag.switchClass( 'tagit-choice-existing ui-state-highlight', '', 750, 'linear' );
+					} );
 				}
 				return false;
             }
