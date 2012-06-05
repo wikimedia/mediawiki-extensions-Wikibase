@@ -244,6 +244,7 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.ListInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableDescription.js',
 		'wikibase.ui.PropertyEditTool.EditableLabel.js',
