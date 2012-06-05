@@ -11,10 +11,10 @@
  */
 "use strict";
 ( function( $ ) {
-	
+
 	// add an edit tool for the main label. This will be integrated into the heading nicely:
 	new window.wikibase.ui.LabelEditTool( $( '#firstHeading' ) );
-	
+
 	// add an edit tool for all properties in the data view:
 	$( 'body' )
 	.find( '.wb-property-container' )
@@ -53,7 +53,7 @@
 	}
 
 
-	if( window.location.href.match( /[\\?&]wbitemcreated=yes/ ) ) {
+	if( mw.util.getParamValue( 'wbitemcreated' ) == 'yes' ) {
 		// Display notification if the item was created on 'Special:CreateItem' and we just redirected from there
 		// TODO: the parameter should be removed somehow, otherwise on a page reload it will still appear
 		var notification = $( '<div>', {

@@ -699,6 +699,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool
 	 */
 	valueCompare: function( value1, value2 ) {
+		if( ! $.isArray( value1 ) ) {
+			// only go here after recursive call, comparing single array entries, totally resolved/normalized
+			return value1 === value2;
+		}
 		if( value1.length !== this._interfaces.length ) {
 			return false; // there has to be one value for each interface!
 		}
@@ -706,7 +710,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( value2 === null ) {
 			// check for empty value1
 			for( var i in value1 ) {
-				if( $.trim( value1[ i ] ) !== '' ) {
+				// TODO: should be nicer; func for whether value is empty!
+				var val1 = this._interfaces[ i ].normalize( value1[ i ] );
+				if( val1 !== '' || val1 === null ) {
 					return false;
 				}
 			}
@@ -722,7 +728,26 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			var val1 = this._interfaces[ i ].normalize( value1[ i ] );
 			var val2 = this._interfaces[ i ].normalize( value2[ i ] );
 
-			if( val1 !== val2 ) {
+			if( ! this._valueCompare_innerCompare( val1, val2 ) ) {
+				return false;
+			}
+		}
+		return true;
+	},
+
+	/**
+	 * Does the comparison of two already normalized values of one interface, considers that they could be arrays and
+	 * if so, compares all values by recursively calling this function.
+	 */
+	_valueCompare_innerCompare: function( value1, value2 ) {
+		if( ! $.isArray( value1 ) ) {
+			return value1 === value2;
+		}
+		if( value1.length !== value2.length ) {
+			return false;
+		}
+		for( var i in value1 ) {
+			if( ! this._valueCompare_innerCompare( value1[i], value2[i] ) ) {
 				return false;
 			}
 		}

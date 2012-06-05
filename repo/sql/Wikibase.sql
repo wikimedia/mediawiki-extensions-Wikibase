@@ -54,9 +54,3 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_texts_per_lang (
 CREATE UNIQUE INDEX /*i*/tpl_item_id_lang ON /*_*/wb_texts_per_lang (tpl_item_id, tpl_language);
 CREATE INDEX /*i*/tpl_language ON /*_*/wb_texts_per_lang (tpl_language);
 CREATE INDEX /*i*/tpl_label ON /*_*/wb_texts_per_lang (tpl_label); -- TODO: might not be needed
-
-
-
-
-
-

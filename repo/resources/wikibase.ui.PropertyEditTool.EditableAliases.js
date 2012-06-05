@@ -58,12 +58,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue._getValueFromApiResponse
+	 *
 	 * @return array
 	 */
 	_getValueFromApiResponse: function( response ) {
 		var value = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._getValueFromApiResponse.call( this, response );
 		return value !== null
-			? value.split( '|' ) // NOTE: not yet supported by the API and the way this will be returned might be different.
+			? value.split( '|' ) // TODO: not yet supported by the API and the way this will be returned might (hopefully) be different.
 			: null;
 	},
 

@@ -11,13 +11,13 @@
  */
 'use strict';
 
+/**
+ * Serves the input interface for an items aliases and handles the conversion between the pure html representation
+ * and the interface itself in both directions
+ *
+ * @param jQuery subject
+ */
 window.wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface = function( subject ) {
-	/**
-	 * Serves the input interface for an items aliases and handles the conversion between the pure html representation
-	 * and the interface itself in both directions
-	 *
-	 * @param jQuery subject
-	 */
 	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
 };
 window.wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.prototype
