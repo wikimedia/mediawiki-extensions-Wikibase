@@ -29,6 +29,9 @@
 ( function( $, undefined ) {
 
 	$.widget( 'ui.tagadata', {
+
+		widgetEventPrefix: 'tagadata',
+
 		options: {
 			itemName: 'item',
 			fieldName: 'tags',
@@ -77,10 +80,10 @@
 			],
 
 			// Event callbacks.
-			onTagAdded: null,
-			onBeforeTagRemoved: null,
-			onTagRemoved: null,
-			onTagClicked: null
+			tagAdded: null,
+			beforeTagRemoved: null,
+			tagRemoved: null,
+			tagClicked: null
 		},
 
 
@@ -111,7 +114,7 @@
 			.on( 'click.tagadata', function( e ) {
 				var target = $( e.target );
 				if( target.hasClass( 'tagadata-label' ) ) {
-					self._trigger( 'onTagClicked', e, target.closest( '.tagadata-choice' ) );
+					self._trigger( 'tagClicked', e, target.closest( '.tagadata-choice' ) );
 				}
 			} );
 
@@ -325,8 +328,6 @@
 							if( targetTag[0] !== tag[0] ) { // ... except for the helper tag
 								self.removeTag( tag );
 								self.highlightTag( targetTag );
-							} else {
-								targetTag = null;
 							}
 						}
 						targetTag.find( 'input' ).focus();
@@ -348,7 +349,7 @@
 			/// / insert tag
 			this.tagList.append( tag );
 
-			this._trigger( 'onTagAdded', null, tag );
+			this._trigger( 'tagAdded', null, tag );
 
 			return tag;
 		},
@@ -378,7 +379,7 @@
 
 			tag = $( tag );
 
-			this._trigger( 'onBeforeTagRemoved', null, tag );
+			this._trigger( 'beforeTagRemoved', null, tag );
 
 			// Animate the removal.
 			if( animate ) {
@@ -390,7 +391,7 @@
 				tag.remove();
 			}
 
-			this._trigger( 'onTagRemoved', null, tag );
+			this._trigger( 'tagRemoved', null, tag );
 			return true;
 		},
 

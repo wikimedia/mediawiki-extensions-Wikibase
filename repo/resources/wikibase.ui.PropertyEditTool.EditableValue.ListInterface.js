@@ -39,17 +39,26 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 			.addClass( this.UI_CLASS )
 			.addClass( 'wb-ui-propertyedittool-editablevaluelistinterface' ); // additional UI class
 
-		return inputElement.tagadata( {
+		inputElement.tagadata( {
 			animate: false, // FIXME: when animated set to true, something won't work in there, fails silently then
-			allowSpaces: true,
-			removeConfirmation: true, // only two times backspace will remove tag
 			placeholderText: this.inputPlaceholder,
-			onTagAdded: $.proxy( function( e, tag ) {
-				tag.addClass( this.UI_VALUE_PIECE_CLASS );
-				this._onInputRegistered();
-			}, this ),
-			onTagRemoved: $.proxy( this._onInputRegistered, this )
+			tagRemoved: $.proxy( this._onInputRegistered, this )
 		} );
+
+		// register event after initial tags were added on tag-a-data initialization!
+		var newPieceHandler = $.proxy( function( e, tag ) {
+			$( tag )
+			.addClass( this.UI_VALUE_PIECE_CLASS )
+			.addClass( this.UI_VALUE_PIECE_CLASS + '-new' );
+			this._onInputRegistered();
+		}, this );
+
+		inputElement.on( 'tagadatatagadded', newPieceHandler );
+
+		// make sure the input helper (first, empty element) gets the treatment already:
+		newPieceHandler( null, inputElement.data( 'tagadata' ).getHelperTag() );
+
+		return inputElement;
 	},
 
 	/**
@@ -57,6 +66,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	 */
 	_destroyInputElement: function() {
 		this._getTagadata().destroy();
+		this._subject.children( 'li' ).removeClass( this.UI_VALUE_PIECE_CLASS + '-new' );
 		this._inputElem = null;
 	},
 
