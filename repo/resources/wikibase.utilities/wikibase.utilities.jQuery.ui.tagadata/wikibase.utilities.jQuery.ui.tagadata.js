@@ -23,7 +23,7 @@
  * @author Daniel Werner
  */
 
-(function( $ ) {
+( function( $, undefined ) {
 
 	$.widget( 'ui.tagadata', {
 		options: {
@@ -57,7 +57,7 @@
 			animate: true,
 
 			/**
-			 * Optionally set a tabindex attribute on the input that gets created for 'tag-a-data'.
+			 * Optionally set a tabindex attribute on the input self gets created for 'tag-a-data'.
 			 * @var Number
 			 */
 			tabIndex: null,
@@ -87,7 +87,7 @@
 
 		_create: function() {
 			// for handling static scoping inside callbacks
-			var that = this;
+			var self = this;
 
 			this.tagList = this.element.find( 'ul, ol' ).andSelf().last();
 
@@ -102,7 +102,7 @@
 			this.options.tagSource = this.options.tagSource || function( search, showChoices ) {
 				var filter = search.term.toLowerCase();
 				var choices = $.grep( this.options.availableTags, function( element ) {
-					// Only match autocomplete options that begin with the search term.
+					// Only match autocomplete options self begin with the search term.
 					// (Case insensitive.)
 					return (element.toLowerCase().indexOf( filter ) === 0);
 				} );
@@ -122,19 +122,19 @@
 			.on( 'click.tagadata', function( e ) {
 				var target = $( e.target );
 				if( target.hasClass( 'tagadata-label' ) ) {
-					that._trigger( 'onTagClicked', e, target.closest( '.tagadata-choice' ) );
+					self._trigger( 'onTagClicked', e, target.closest( '.tagadata-choice' ) );
 				} else {
 					// Sets the focus() to the input field, if the user
 					// clicks anywhere inside the UL. This is needed
 					// because the input field needs to be of a small size.
-					that._tagInput.focus();
+					self._tagInput.focus();
 				}
 			} );
 
 			// Add existing tags from the list, if any.
 			this.tagList.children( 'li' ).each( function() {
 				if( !$( this ).hasClass( 'tagadata-new' ) ) {
-					that.createTag( $( this ).html(), $( this ).attr( 'class' ) );
+					self.createTag( $( this ).html(), $( this ).attr( 'class' ) );
 					$( this ).remove();
 				}
 			} );
@@ -143,31 +143,31 @@
 			this._tagInput
 			.keydown(function( event ) {
 				// Backspace is not detected within a keypress, so it must use keydown.
-				if( event.which == $.ui.keyCode.BACKSPACE && that._tagInput.val() === '' ) {
-					var tag = that._lastTag();
-					if( !that.options.removeConfirmation || tag.hasClass( 'remove' ) ) {
+				if( event.which == $.ui.keyCode.BACKSPACE && self._tagInput.val() === '' ) {
+					var tag = self._lastTag();
+					if( !self.options.removeConfirmation || tag.hasClass( 'remove' ) ) {
 						// When backspace is pressed, the last tag is deleted.
-						that.removeTag( tag );
-					} else if( that.options.removeConfirmation ) {
+						self.removeTag( tag );
+					} else if( self.options.removeConfirmation ) {
 						tag.addClass( 'remove ui-state-highlight' );
 					}
-				} else if( that.options.removeConfirmation ) {
-					that._lastTag().removeClass( 'remove ui-state-highlight' );
+				} else if( self.options.removeConfirmation ) {
+					self._lastTag().removeClass( 'remove ui-state-highlight' );
 				}
 
 				// check whether key for insertion was triggered
-				if( that._tagInput.val() !== '' && $.inArray( event.which, that.options.triggerKeys ) > -1 ) {
+				if( self._tagInput.val() !== '' && $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
 					event.preventDefault();
-					that.createTag( that._tagInput.val() );
+					self.createTag( self._tagInput.val() );
 
 					// The autocomplete doesn't close automatically when TAB is pressed.
-					// So let's ensure that it closes.
-					that._tagInput.autocomplete( 'close' );
+					// So let's ensure self it closes.
+					self._tagInput.autocomplete( 'close' );
 				}
 			} ).blur( function( e ) {
-				if( that.options.createOnBlur ) {
+				if( self.options.createOnBlur ) {
 					// Create a tag when the element loses focus (unless it's empty).
-					that.createTag( that._tagInput.val() );
+					self.createTag( self._tagInput.val() );
 				}
 			} );
 
@@ -180,13 +180,13 @@
 						// Delete the last tag if we autocomplete something despite the input being empty
 						// This happens because the input's blur event causes the tag to be created when
 						// the user clicks an autocomplete item. I don't know how to lock my screen.
-						// The only artifact of this is that while the user holds down the mouse button
+						// The only artifact of this is self while the user holds down the mouse button
 						// on the selected autocomplete item, a tag is shown with the pre-autocompleted text,
 						// and is changed to the autocompleted text upon mouseup.
-						if( that._tagInput.val() === '' ) {
-							that.removeTag( that._lastTag(), false );
+						if( self._tagInput.val() === '' ) {
+							self.removeTag( self._lastTag(), false );
 						}
-						that.createTag( ui.item.value );
+						self.createTag( ui.item.value );
 						// Preventing the tag input to be updated with the chosen value.
 						return false;
 					}
@@ -205,13 +205,13 @@
 		 */
 		assignedTags: function() {
 			// Returns an array of tag string values
-			var that = this;
+			var self = this;
 			var tags = [];
 
 			this.tagList.children( '.tagadata-choice' ).each( function() {
 				// check if already removed but still assigned till animations end. if so, don't add tag!
 				if( !$( this ).hasClass( 'tagadata-choice-removed' ) ) {
-					tags.push( that.tagLabel( this ) );
+					tags.push( self.tagLabel( this ) );
 				}
 			} );
 
@@ -280,11 +280,14 @@
 		 * otherwise the newly assigned tag.
 		 *
 		 * @param String value
-		 * @param String additionalClass
+		 * @param String|Array additionalClasses
 		 * @return jQuery|false
 		 */
-		createTag: function( value, additionalClass ) {
-			var that = this;
+		createTag: function( value, additionalClasses ) {
+			if( $.isArray( additionalClasses ) ) {
+				additionalClasses = additionalClasses.join( ' ' );
+			}
+			var self = this;
 			var tag;
 
 			// Automatically trims the value of leading and trailing whitespace.
@@ -309,25 +312,31 @@
 
 			// Create tag.
 			tag = $( '<li></li>' )
-				.addClass( 'tagadata-choice ui-widget-content ui-state-default ui-corner-all' )
-				.addClass( additionalClass )
-				.append( label );
+			.addClass( 'tagadata-choice ui-widget-content ui-state-default ui-corner-all' )
+			.addClass( additionalClasses )
+			.append( label );
 
 			// Button for removing the tag.
 			var removeTagIcon = $( '<span></span>' )
 				.addClass( 'ui-icon ui-icon-close' );
+
 			var removeTag = $( '<a><span class="text-icon">\xd7</span></a>' )// \xd7 is an X
 				.addClass( 'tagadata-close' )
 				.append( removeTagIcon )
 				.click( function( e ) {
 					// Removes a tag when the little 'x' is clicked.
-					that.removeTag( tag );
+					self.removeTag( tag );
 				} );
+
 			tag.append( removeTag );
 
 			// each tag has a hidden input field inline.
-			var escapedValue = label.html();
-			tag.append( '<input type="hidden" style="display:none;" value="' + escapedValue + '" name="' + this.options.itemName + '[' + this.options.fieldName + '][]" />' );
+			tag.append( $( '<input>', {
+				type: 'hidden',
+				style: 'display:none;',
+				value: label.html(),
+				name: this.options.itemName + '[' + this.options.fieldName + '][]'
+			} ) );
 
 			// Cleaning the input.
 			this._tagInput.val( '' );
@@ -363,9 +372,9 @@
 
 		removeAll: function() {
 			// Removes all tags.
-			var that = this;
+			var self = this;
 			this.tagList.children( '.tagadata-choice' ).each( function( index, tag ) {
-				that.removeTag( tag, false );
+				self.removeTag( tag, false );
 			} );
 		},
 
@@ -373,7 +382,7 @@
 		 * Destroys the element and only leaves the original ul element (including all new elements)
 		 */
 		destroy: function() {
-			var that = this;
+			var self = this;
 
 			this.tagList
 			.removeClass( 'tagadata ui-widget ui-widget-content ui-corner-all' )
@@ -382,7 +391,7 @@
 
 			this.tagList.children( 'li' ).each( function() {
 				var tag = $( this );
-				var text = that.tagLabel( tag );
+				var text = self.tagLabel( tag );
 				tag
 				.removeClass( 'tagadata-choice tagadata-choice-removed ui-widget-content ui-state-default ui-corner-all ui-state-highlight remove' )
 				.empty()
@@ -394,4 +403,4 @@
 
 	} );
 
-})( jQuery );
+} )( jQuery );
