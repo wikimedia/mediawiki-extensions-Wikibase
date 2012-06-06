@@ -58,29 +58,6 @@
 			 */
             animate: true,
 
-			/**
-			 * The below options are for using a single field instead of several for our form values.
-			 * When enabled, will use a single hidden field for the form, rather than one per tag. It will delimit tags
-			 * in the field with singleFieldDelimiter.
-			 *
-			 * The easiest way to use singleField is to just instantiate tag-it on an INPUT element, in which case
-			 * singleField is automatically set to true, and singleFieldNode is set to that element. This way, you don't
-			 * need to fiddle with these options.
-			 *
-			 * @var Boolean
-			 */
-            singleField: false,
-
-            singleFieldDelimiter: ',',
-
-			/**
-			 * Set this to an input DOM node to use an existing form field. Any text in it will be erased on init. But
-			 * it will be populated with the text of tags as they are created, delimited by singleFieldDelimiter.
-			 * If this is not set, we create an input node for it, with the name given in settings.fieldName,
-			 * ignoring settings.itemName.
-			 */
-            singleFieldNode: null,
-
             /**
 			 * Optionally set a tabindex attribute on the input that gets created for tag-it.
 			 * @var Number
@@ -114,18 +91,7 @@
             // for handling static scoping inside callbacks
             var that = this;
 
-            // There are 2 kinds of DOM nodes this widget can be instantiated on:
-            //     1. UL, OL, or some element containing either of these.
-            //     2. INPUT, in which case 'singleField' is overridden to true,
-            //        a UL is created and the INPUT is hidden.
-            if (this.element.is('input')) {
-                this.tagList = $('<ul></ul>').insertAfter(this.element);
-                this.options.singleField = true;
-                this.options.singleFieldNode = this.element;
-                this.element.css('display', 'none');
-            } else {
-                this.tagList = this.element.find('ul, ol').andSelf().last();
-            }
+			this.tagList = this.element.find('ul, ol').andSelf().last();
 
             this._tagInput = $('<input type="text" />').addClass('ui-widget-content');
             if (this.options.tabIndex) {
@@ -174,22 +140,6 @@
                     $(this).remove();
                 }
             });
-
-            // Single field support.
-            if (this.options.singleField) {
-                if (this.options.singleFieldNode) {
-                    // Add existing tags from the input field.
-                    var node = $(this.options.singleFieldNode);
-                    var tags = node.val().split(this.options.singleFieldDelimiter);
-                    node.val('');
-                    $.each(tags, function(index, tag) {
-                        that.createTag(tag);
-                    });
-                } else {
-                    // Create our single field input after our list.
-                    this.options.singleFieldNode = this.tagList.after('<input type="hidden" style="display:none;" value="" name="' + this.options.fieldName + '" />');
-                }
-            }
 
             // Events.
             this._tagInput
@@ -259,25 +209,15 @@
             // Returns an array of tag string values
             var that = this;
             var tags = [];
-            if (this.options.singleField) {
-                tags = $(this.options.singleFieldNode).val().split(this.options.singleFieldDelimiter);
-                if (tags[0] === '') {
-                    tags = [];
-                }
-            } else {
-                this.tagList.children('.tagit-choice').each( function() {
-					// check if already removed but still assigned till animations end. if so, don't add tag!
-					if( ! $( this ).hasClass( 'tagit-choice-removed' ) ) {
-                    	tags.push( that.tagLabel( this ) );
-					}
-                } );
-            }
-            return tags;
-        },
 
-        _updateSingleTagsField: function(tags) {
-            // Takes a list of tag string values, updates this.options.singleFieldNode.val to the tags delimited by this.options.singleFieldDelimiter
-            $(this.options.singleFieldNode).val(tags.join(this.options.singleFieldDelimiter));
+			this.tagList.children('.tagit-choice').each( function() {
+				// check if already removed but still assigned till animations end. if so, don't add tag!
+				if( ! $( this ).hasClass( 'tagit-choice-removed' ) ) {
+					tags.push( that.tagLabel( this ) );
+				}
+			} );
+
+            return tags;
         },
 
         _subtractArray: function(a1, a2) {
@@ -298,11 +238,7 @@
 		 */
         tagLabel: function(tag) {
             // Returns the tag's string label.
-            if (this.options.singleField) {
-                return $(tag).children('.tagit-label').text();
-            } else {
-                return $(tag).children('input').val();
-            }
+			return $(tag).children('input').val();
         },
 
 		/**
@@ -389,15 +325,9 @@
                 });
             tag.append(removeTag);
 
-            // Unless options.singleField is set, each tag has a hidden input field inline.
-            if (this.options.singleField) {
-                var tags = this.assignedTags();
-                tags.push(value);
-                this._updateSingleTagsField(tags);
-            } else {
-                var escapedValue = label.html();
-                tag.append('<input type="hidden" style="display:none;" value="' + escapedValue + '" name="' + this.options.itemName + '[' + this.options.fieldName + '][]" />');
-            }
+            // each tag has a hidden input field inline.
+			var escapedValue = label.html();
+			tag.append('<input type="hidden" style="display:none;" value="' + escapedValue + '" name="' + this.options.itemName + '[' + this.options.fieldName + '][]" />');
 
             // Cleaning the input.
             this._tagInput.val('');
@@ -416,15 +346,6 @@
             tag = $(tag);
 
             this._trigger( 'onBeforeTagRemoved', null, tag );
-
-            if (this.options.singleField) {
-                var tags = this.assignedTags();
-                var removedTagLabel = this.tagLabel(tag);
-                tags = $.grep(tags, function(el){
-                    return el != removedTagLabel;
-                });
-                this._updateSingleTagsField(tags);
-            }
 
             // Animate the removal.
             if (animate) {
@@ -476,5 +397,3 @@
     });
 
 })(jQuery);
-
-
