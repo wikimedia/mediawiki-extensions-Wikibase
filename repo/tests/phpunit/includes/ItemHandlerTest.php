@@ -17,10 +17,10 @@ use \Wikibase\Item as Item;
  * @group WikibaseItem
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemContentHandlerTests extends \MediaWikiTestCase {
+class ItemHandlerTest extends \MediaWikiTestCase {
 	
 	/**
 	 * Enter description here ...

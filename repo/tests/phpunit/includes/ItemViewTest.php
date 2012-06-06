@@ -41,7 +41,7 @@ use Wikibase\ItemView as ItemView;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ItemViewTests extends \MediaWikiTestCase {
+class ItemViewTest extends \MediaWikiTestCase {
 	
 	protected static $num = -1;
 
