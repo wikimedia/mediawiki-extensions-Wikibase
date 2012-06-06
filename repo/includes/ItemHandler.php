@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use User, Title, WikiPage, Content, ParserOptions, ParserOutput, RequestContext;
 
 /**
  * Content handler for Wikibase items.
@@ -35,6 +36,29 @@ class ItemHandler extends EntityHandler {
 			'view' => '\Wikibase\ViewItemAction',
 			'edit' => '\Wikibase\EditItemAction',
 		);
+	}
+
+	/**
+	 * Returns a ParserOutput object containing the HTML.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $title
+	 * @param null $revId
+	 * @param null|ParserOptions $options
+	 * @param bool $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	public function getParserOutput( Content $content, Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+		global $wgRequest;
+
+		# construct dummy context for the dummy view
+		$context = new RequestContext( $wgRequest );
+		$context->setTitle( $title );
+
+		$itemView = new ItemView( $this, $context );
+		return $itemView->render();
 	}
 
 	/**
