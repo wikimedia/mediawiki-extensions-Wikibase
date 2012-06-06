@@ -154,7 +154,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-sitelinksedittool-full' => 'The list of elements the user can enter is exhausted and there are no additional sites available. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'wikibase-disambiguation-title' => 'Disambiguation page title. $1 is the label of the item being disambiguated.',
 	'wb-special-createitem-new-item-notification' => 'Message displayed when a new item was created on [[Special:CreateItem]] and the user has been redirected to the new items page. $1 is the new items id, $2 is a link back to the special page with "special-createitem" as label',
-	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list',
+	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list. Aliases are alternate names and nicknames for the item. See also [[m:Wikidata/Glossary]].',
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the mor specific error message returned from the underlying API).',
 	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',
 	'wikibase-error-remove-generic' => 'Generic error message for an error happening during a remove operation',
@@ -214,7 +214,7 @@ $messages['be-tarask'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'пазначце старонку',
 	'wikibase-label-input-help-message' => 'Увядзіце назву гэтага набору зьвестак у $1.',
 	'wikibase-description-input-help-message' => 'Увядзіце кароткае апісаньне ў $1.',
-	'wikibase-sitelinks' => 'Старонкі Вікіпэдыі, што спасылаюцца на гэты аб’ект',
+	'wikibase-sitelinks' => 'Сьпіс старонак, што спасылаюцца на гэты аб’ект',
 	'wikibase-sitelinks-add' => 'дадаць спасылку да старонкі Вікіпэдыі',
 	'wikibase-sitelinks-empty' => 'Ніводная старонка Вікіпэдыі дагэтуль не спасылаецца на аб’ект.',
 	'wikibase-sitelinks-input-help-message' => 'Дадайце спасылку на артыкул у Вікіпэдыі.',
@@ -226,14 +226,38 @@ $messages['be-tarask'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Адно значэньне яшчэ не захаванае|$1 значэньні яшчэ не захаваныя|$1 значэньняў яшчэ не захавана}}',
 	'wikibase-sitelinksedittool-full' => 'Спасылкі на старонкі ёсьць ужо для ўсіх вядомых сайтаў.',
 	'wikibase-disambiguation-title' => 'Неадназначнасьць для «$1»',
+	'wb-special-createitem-new-item-notification' => 'Новы прадмет «$1» створаны і перанакіроўвае на ўласную старонку. Вярнуцца — $2.',
+	'wikibase-aliases-label' => 'Таксама вядома як:',
 	'wikibase-tooltip-error-details' => 'Падрабязнасьці',
 	'wikibase-error-save-generic' => 'У час спробы захаваньня адбылася памылка, з-за чаго зьмены не былі ўнесеныя цалкам.',
+	'wikibase-error-remove-generic' => 'У час спробы выдаленьня адбылася памылка, з-за чаго зьмены не былі ўнесеныя цалкам.',
+	'wikibase-error-save-connection' => 'У час спробы захаваньня адбылася памылка злучэньня, з-за чаго вашыя зьмены не былі захаваныя. Калі ласка, праверце вашае злучэньне з Інтэрнэтам.',
 	'wikibase-error-autocomplete-connection' => 'Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазьней.',
 	'wikibase-error-autocomplete-response' => 'Адказ сэрвэра: $1',
-	'wikibase-setting-languages' => 'Дапаможныя мовы<br/>(напр., для адлюстраваньня зьвестак, калі яны не даступныя на асноўнай мове)',
+	'wikibase-setting-languages' => 'Дапаможныя мовы<br />(напр., для адлюстраваньня зьвестак, калі яны не даступныя на асноўнай мове)',
 	'special-itembytitle' => 'Аб’ект паводле назвы',
 	'special-itembylabel' => 'Аб’ект паводле меткі',
 	'special-createitem' => 'Стварыць новы прадмет',
+	'wikibase-api-no-token' => 'Не пазначаны token.',
+	'content-model-1001' => 'Прадмет у Вікібазе',
+);
+
+/** Breton (brezhoneg)
+ * @author Fulup
+ */
+$messages['br'] = array(
+	'wikibase-edit' => 'kemmañ',
+	'wikibase-save' => 'enrollañ',
+	'wikibase-cancel' => 'nullañ',
+	'wikibase-add' => 'ouzhpennañ',
+	'wikibase-save-inprogress' => "Oc'h enrollañ...",
+	'wikibase-remove-inprogress' => 'O tiverkañ...',
+	'wikibase-sitelink-site-edit-placeholder' => "spisaat al lec'hienn",
+	'wikibase-sitelink-page-edit-placeholder' => 'spisaat ar bajenn',
+	'wikibase-remove' => 'Dilemel',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-aliases-label' => 'Anvet ivez :',
+	'wikibase-tooltip-error-details' => 'Munudoù',
 );
 
 /** German (Deutsch)
@@ -346,24 +370,36 @@ $messages['dsb'] = array(
 	'wikibase-save' => 'składowaś',
 	'wikibase-cancel' => 'pśetergnuś',
 	'wikibase-add' => 'pśidaś',
+	'wikibase-save-inprogress' => 'Składujo se...',
+	'wikibase-remove-inprogress' => 'Wótpórajo se...',
 	'wikibase-label-edit-placeholder' => 'pomjenjenje zapódaś',
 	'wikibase-description-edit-placeholder' => 'wopisanje zapódaś',
 	'wikibase-sitelink-site-edit-placeholder' => 'sedło pódaś',
 	'wikibase-sitelink-page-edit-placeholder' => 'bok pódaś',
 	'wikibase-label-input-help-message' => 'Zapódaj mě toś teje datoweje sajźby w $1.',
 	'wikibase-description-input-help-message' => 'Zapódaj krotke wopisanje w $1.',
-	'wikibase-sitelinks' => 'Boki Wikipedije, kótarež su z toś tym elementom zwězane',
-	'wikibase-sitelinks-add' => 'wótkaz bokoju Wikipedije pśidaś',
-	'wikibase-sitelinks-empty' => 'Až doněnta žedne boki Wikipedije njejsu zwězane z toś tym elementom.',
-	'wikibase-sitelinks-input-help-message' => 'Póstaj wótkaz k nastawkoju Wikipedije.',
+	'wikibase-sitelinks' => 'Lisćina bokow, kótarež su z toś tym elementom zwězane',
+	'wikibase-sitelinks-add' => 'wótkaz sedłowemu wótkazoju pśidaś',
+	'wikibase-sitelinks-empty' => 'Až doněnta žeden sedłowy wótkaz za toś ten element.',
+	'wikibase-sitelinks-input-help-message' => 'Staj wótkaz k bokoju, kótaryž jo z toś tym elementom zwězany.',
 	'wikibase-remove' => 'wótpóraś',
 	'wikibase-propertyedittool-full' => 'Lisćina gódnotow jo dopołna.',
+	'wikibase-propertyedittool-counter' => '$1 {{PLURAL:$1|zapisk|zapiska|zapiski|zapiskow}}',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|zapisk|zapiska|zapiski|zapiskow}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-sitelinksedittool-full' => 'Wótkaze k bokam su južo za wšykne znate sedła nastajone.',
+	'wikibase-aliases-label' => 'Teke znaty ako:',
+	'wikibase-tooltip-error-details' => 'Drobnostki',
+	'wikibase-error-autocomplete-response' => 'Serwer jo wótegronił: $1',
 	'special-itembytitle' => 'Zapisk pó titelu',
 	'special-itembylabel' => 'Zapisk pó pomjenjenju',
+	'special-createitem' => 'Nowy element napóraś',
+	'wikibase-api-invalid-contentmodel' => 'Wopśimjeśowy model za bok jo njepłaśiwy.',
+	'wikibase-api-not-recognized' => 'Směrnica se njespóznawa.',
+	'content-model-1001' => 'Datowy element z Wikibase',
 );
 
-/** Spanish (Español)
+/** Spanish (español)
  * @author Armando-Martin
  * @author Savh
  * @author Vivaelcelta
@@ -383,10 +419,10 @@ $messages['es'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'especificar la página',
 	'wikibase-label-input-help-message' => 'Introducir el título de este conjunto de datos en  $1.',
 	'wikibase-description-input-help-message' => 'Introducir una breve descripción en  $1.',
-	'wikibase-sitelinks' => 'Páginas de {{SITENAME}} enlazadas a este elemento',
-	'wikibase-sitelinks-add' => 'Agregar un enlace a una página de {{SITENAME}}',
-	'wikibase-sitelinks-empty' => 'No hay todavía ninguna página de {{SITENAME}} enlazada a este elemento.',
-	'wikibase-sitelinks-input-help-message' => 'Poner un enlace a un artículo de Wikipedia',
+	'wikibase-sitelinks' => 'Lista de páginas enlazadas a este elemento',
+	'wikibase-sitelinks-add' => 'Agregar un enlace a un enlace del sitio (site-link)',
+	'wikibase-sitelinks-empty' => 'No hay ningún enlace del sitio para este elemento.',
+	'wikibase-sitelinks-input-help-message' => 'Poner un enlace a una página relacionada con este elemento.',
 	'wikibase-remove' => 'eliminar',
 	'wikibase-propertyedittool-full' => 'La lista de valores está completa.',
 	'wikibase-propertyedittool-counter' => '$1 {{PLURAL:$1|entrada|entradas}}',
@@ -461,7 +497,7 @@ $messages['fa'] = array(
 	'special-itembylabel' => 'آیتم بر اساس برچسب',
 );
 
-/** French (Français)
+/** French (français)
  * @author Alno
  * @author DavidL
  * @author Gomoko
@@ -482,9 +518,9 @@ $messages['fr'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'spécifier la page',
 	'wikibase-label-input-help-message' => 'Saisissez le titre de cet ensemble de données en $1.',
 	'wikibase-description-input-help-message' => 'Saisissez une courte description en $1.',
-	'wikibase-sitelinks' => 'Pages Wikipédia liées à cet élément',
-	'wikibase-sitelinks-add' => 'ajouter un lien vers une page de Wikipédia',
-	'wikibase-sitelinks-empty' => "Aucune page de Wikipédia n'est encore liée à cet élément.",
+	'wikibase-sitelinks' => 'Liste des pages liées à cet élément',
+	'wikibase-sitelinks-add' => 'ajouter un lien vers une page',
+	'wikibase-sitelinks-empty' => 'Pas encore de site-lien pour cet élément.',
 	'wikibase-sitelinks-input-help-message' => 'Créer un lien vers une page relative à cet élément.',
 	'wikibase-remove' => 'supprimer',
 	'wikibase-propertyedittool-full' => 'La liste des valeurs est complète.',
@@ -555,10 +591,10 @@ $messages['gl'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'especifique a páxina',
 	'wikibase-label-input-help-message' => 'Introduza o título deste conxunto de datos en $1.',
 	'wikibase-description-input-help-message' => 'Introduza unha breve descrición en $1.',
-	'wikibase-sitelinks' => 'Páxinas da Wikipedia con ligazóns cara a este elemento',
-	'wikibase-sitelinks-add' => 'engada unha ligazón cara a unha páxina da Wikipedia',
-	'wikibase-sitelinks-empty' => 'Ningunha páxina da Wikipedia ten ligazóns cara a este elemento.',
-	'wikibase-sitelinks-input-help-message' => 'Defina unha ligazón cara a un artigo da Wikipedia.',
+	'wikibase-sitelinks' => 'Lista de páxinas con ligazóns cara a este elemento',
+	'wikibase-sitelinks-add' => 'engada unha ligazón cara a unha páxina do sitio',
+	'wikibase-sitelinks-empty' => 'Ningunha páxina do sitio ten ligazóns cara a este elemento.',
+	'wikibase-sitelinks-input-help-message' => 'Defina unha ligazón cara a unha páxina relacionada co elemento.',
 	'wikibase-remove' => 'eliminar',
 	'wikibase-propertyedittool-full' => 'A lista de valores está completa.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entrada|entradas}})',
@@ -658,14 +694,15 @@ $messages['hsb'] = array(
 	'wikibase-remove-inprogress' => 'Wotstronja so...',
 	'wikibase-label-edit-placeholder' => 'pomjenowanje zapodać',
 	'wikibase-description-edit-placeholder' => 'wopisanje zapodać',
+	'wikibase-move-error' => 'Njemóžeš strony přesunyć, kotrež su w datowym mjenowym rumje, a njemóžeš strony do njeho přesunyć.',
 	'wikibase-sitelink-site-edit-placeholder' => 'sydło podać',
 	'wikibase-sitelink-page-edit-placeholder' => 'stronu podać',
 	'wikibase-label-input-help-message' => 'Zapodaj mjeno tuteje datoweje sadźby w $1.',
 	'wikibase-description-input-help-message' => 'Zapodaj krótke wopisanje w $1.',
-	'wikibase-sitelinks' => 'Strony Wikipedije, kotrež su z tutym elementom zwjazane',
-	'wikibase-sitelinks-add' => 'wotkaz stronje Wikipedije přidać',
-	'wikibase-sitelinks-empty' => 'Dotal žane strony Wikipedije z tutym elementom zwjazane njejsu.',
-	'wikibase-sitelinks-input-help-message' => 'Wotkaz k nastawkej Wikipedije stajić.',
+	'wikibase-sitelinks' => 'Lisćina stronow, kotrež su z tutym elementom zwjazane',
+	'wikibase-sitelinks-add' => 'wotkaz sydłowemu wotkazej přidać',
+	'wikibase-sitelinks-empty' => 'Dotal žadyn wotkaz sydła za tutón element njeje.',
+	'wikibase-sitelinks-input-help-message' => 'Wotkaz k stronje wutworić, kotraž je z tutym elementom zwjazana.',
 	'wikibase-remove' => 'wotstronić',
 	'wikibase-propertyedittool-full' => 'Lisćina hódnotow je dospołna.',
 	'wikibase-propertyedittool-counter' => '$1 {{PLURAL:$1|zapisk|zapiskaj|zapiski|zapiskow}}',
@@ -674,24 +711,30 @@ $messages['hsb'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Jedna hódnota hišće njeskładowana|$1 hódnoće hišće njeskładowanej|$1 hódnoty hišće njeskładowane|$1 hódnotow hišće njeskładowanych}}',
 	'wikibase-sitelinksedittool-full' => 'Wotkazy k stronam su hižo za wšě znate strony stajene.',
 	'wikibase-disambiguation-title' => 'Strona wjacezmyslnosće za "$1"',
+	'wb-special-createitem-new-item-notification' => 'Nowy element $1 je so wutworił a k swojej stronje dale sposrědokował. Wróćo k $2.',
 	'wikibase-aliases-label' => 'Tež znaty jako:',
 	'wikibase-tooltip-error-details' => 'Podrobnosće',
 	'wikibase-error-save-connection' => 'Zwiskowy zmylk je při składowanju wustupił a twoje změny njedadźa so tohodla přewjesć. Prošu přepruwuj swój internetowy zwisk.',
 	'wikibase-error-autocomplete-response' => 'Serwer wotmołwi: $1',
+	'wikibase-setting-languages' => 'Přidatne rěče<br />(jako narunanje, hdyž daty njedadźa so we hłownej rěči zwobraznić)',
 	'special-itembytitle' => 'Zapisk po titulu',
 	'special-itembylabel' => 'Zapisk po pomjenowanju',
 	'special-createitem' => 'Nowy element wutworić',
 	'wikibase-api-aliases-invalid-list' => 'Wužij jedyn z parametrow "set", "add" a "remove".',
+	'wikibase-api-no-token' => 'Njeje so token podał.',
 	'wikibase-api-no-data' => 'Njejsu žane daty, kotrež dadźa so předźěłać.',
 	'wikibase-api-cant-edit' => 'Přizjewjeny wužiwar njesmě wobdźěłać.',
 	'wikibase-api-no-permissions' => 'Přizjewjeny wužiwar nima dosahace prawa.',
 	'wikibase-api-no-such-item' => 'Njeje so eksistowacy element namakał.',
 	'wikibase-api-no-such-item-id' => 'Njeje so žadyn eksistowacy element za tutón ID namakał.',
 	'wikibase-api-link-exists' => 'Nastawk na podatym wikiju je hižo wotkazany.',
+	'wikibase-api-add-with-id' => 'Z ID eksistowaceho elementa njeda so ničo přidać.',
 	'wikibase-api-add-exists' => 'Eksistowacemu elementej njeda so ničo přidać.',
 	'wikibase-api-update-without-id' => 'Aktualizacija bjez prjedawšeho ID móžno njeje.',
 	'wikibase-api-no-such-item-link' => 'Njeje so žadyn eksistowacy element za tutón wotkaz namakał.',
 	'wikibase-api-invalid-contentmodel' => 'Wobsahowy model za stronu je njepłaćiwy.',
+	'wikibase-api-alias-incomplete' => 'Njeje so definicija aliasa za element namakała.',
+	'wikibase-api-alias-not-found' => 'Njeje so předchadny alias w elemenće namakał.',
 	'wikibase-api-alias-found' => 'Prjedawši alias je so za element namakał.',
 	'wikibase-api-not-recognized' => 'Směrnica so njespóznawa.',
 	'wikibase-api-label-or-description' => 'Wužij pak "pomjenowanje" pak "wopisanje".',
@@ -701,7 +744,7 @@ $messages['hsb'] = array(
 	'content-model-1001' => 'Datowy element Wikibase',
 );
 
-/** Interlingua (Interlingua)
+/** Interlingua (interlingua)
  * @author McDutchie
  */
 $messages['ia'] = array(
@@ -742,7 +785,7 @@ $messages['ia'] = array(
 	'special-createitem' => 'Crear un nove objecto',
 );
 
-/** Icelandic (Íslenska)
+/** Icelandic (íslenska)
  * @author Snævar
  */
 $messages['is'] = array(
@@ -753,17 +796,17 @@ $messages['is'] = array(
 	'wikibase-add' => 'bæta við',
 	'wikibase-save-inprogress' => 'Vista...',
 	'wikibase-remove-inprogress' => 'Fjarlægi...',
-	'wikibase-label-edit-placeholder' => 'bæta við merki',
+	'wikibase-label-edit-placeholder' => 'bæta við merkimiða',
 	'wikibase-description-edit-placeholder' => 'setja inn lýsingu',
 	'wikibase-move-error' => 'Ekki er mögulegt að færa síður í data nafnrýminu, né færa síður þangað.',
 	'wikibase-sitelink-site-edit-placeholder' => 'tilgreindu vefsvæði',
 	'wikibase-sitelink-page-edit-placeholder' => 'tilgreindu síðu',
 	'wikibase-label-input-help-message' => 'Sláðu inn titil á þessum gögnum á $1.',
 	'wikibase-description-input-help-message' => 'Sláðu inn stutta lýsingu á $1.',
-	'wikibase-sitelinks' => 'Wikipedia síður sem tengja á þennan hlut',
-	'wikibase-sitelinks-add' => 'bæta við tengil á Wikipedia síðu',
-	'wikibase-sitelinks-empty' => 'Engar Wikipedia síður tengja á þennan hlut ennþá.',
-	'wikibase-sitelinks-input-help-message' => 'Settu tengil á Wikipedia grein.',
+	'wikibase-sitelinks' => 'Listi yfir síður sem tengja á þennan hlut',
+	'wikibase-sitelinks-add' => 'bæta við vefsvæðis tengli',
+	'wikibase-sitelinks-empty' => 'Enginn vefsvæðis tengill fyrir þennan hlut ennþá.',
+	'wikibase-sitelinks-input-help-message' => 'Settu tengil á síðu sem tengist þessum hlut.',
 	'wikibase-remove' => 'fjarlægja',
 	'wikibase-propertyedittool-full' => 'Listi yfir gildi er tilbúinn.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|færsla|færslur}})',
@@ -772,18 +815,20 @@ $messages['is'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Eitt gildi er|$1 gildi eru}} ekki {{PLURAL:$1|vistað|vistuð}}',
 	'wikibase-sitelinksedittool-full' => 'Tenglar á síður eru þegar virkir fyrir öll þekkt vefsvæði.',
 	'wikibase-disambiguation-title' => 'Aðgreining fyrir "$1"',
+	'wb-special-createitem-new-item-notification' => 'Nýr hlutur $1 hefur verið búinn til og tilvísun á síðu hans. Aftur á $2.',
+	'wikibase-aliases-label' => 'Einnig þekkt sem:',
 	'wikibase-tooltip-error-details' => 'Nánar',
-	'wikibase-error-save-generic' => 'Villa átti sér stað þegar þú reyndir að vista breytingarnar þínar. Vistun breytingarinnar þinnar mistókst.',
-	'wikibase-error-remove-generic' => 'Villa átti sér stað þegar þú reyndir að fjarlægja hlut.',
-	'wikibase-error-save-connection' => 'Mistókst að vista breytingarnar þínar. Athugaðu hvort þú sért tengd/ur netinu.',
-	'wikibase-error-remove-connection' => 'Villa átti sér stað þegar þú reyndir að fjarlægja hlut. Vinsamlegast athugaðu hvort þú sért tengd/ur netinu.',
-	'wikibase-error-save-timeout' => 'Við höfum orðið fyrir tæknilegum örðugleikum. Vistun breytingarinnar þinnar mistókst.',
-	'wikibase-error-remove-timeout' => 'Við höfum orðið fyrir tæknilegum örðugleikum. Fjarlægingin mistókst.',
+	'wikibase-error-save-generic' => 'Villa átti sér stað þegar þú reyndir að framkvæma vistun og því mistókst að vista breytingarnar þínar.',
+	'wikibase-error-remove-generic' => 'Villa átti sér stað þegar þú reyndir að fjarlægja hlut og því var ekki hægt að ljúka breytingum þínum.',
+	'wikibase-error-save-connection' => 'Tengingar villa átti sér stað þegar reynt var að framkvæma vistun og því var ekki hægt að ljúka breytingunum þínum. Athugaðu hvort þú sért tengd/ur netinu.',
+	'wikibase-error-remove-connection' => 'Tengingar villa átti sér stað þegar þú reyndir að framkvæma fjarlægingu og því var ekki hægt að ljúka breytingum þínum. Vinsamlegast athugaðu hvort þú sért tengd/ur netinu.',
+	'wikibase-error-save-timeout' => 'Við höfum orðið fyrir tæknilegum örðugleikum og því var ekki hægt að ljúka vistun.',
+	'wikibase-error-remove-timeout' => 'Við höfum orðið fyrir tæknilegum örðugleikum og því var ekki hægt að ljúka fjarlægingu.',
 	'wikibase-error-autocomplete-connection' => 'Mistókst að senda fyrirspurn til Wikipedia. Vinsamlegast reyndu aftur síðar.',
 	'wikibase-error-autocomplete-response' => 'Vefþjónninn svaraði: $1',
 	'wikibase-setting-languages' => 'Önnur tungumál<br />(t.d. sem varatungumál þegar gögn eru ekki aðgengileg á aðal tungumáli)',
 	'special-itembytitle' => 'Hlutur eftir titli',
-	'special-itembylabel' => 'Hlutur eftir merki',
+	'special-itembylabel' => 'Hlutur eftir merkimiða',
 	'special-createitem' => 'Búa til nýjan hlut',
 	'wikibase-api-aliases-invalid-list' => 'Notaðu einn af þessum stikum „set", „add" eða „remove".',
 	'wikibase-api-no-token' => 'Enginn tóki tilgreindur.',
@@ -801,14 +846,19 @@ $messages['is'] = array(
 	'wikibase-api-create-failed' => 'Mistókst að búa til nýjan hlut.',
 	'wikibase-api-modify-failed' => 'Mistókst að breyta hlut.',
 	'wikibase-api-save-failed' => 'Mistókst að vista hlut.',
-	'wikibase-api-label-or-description' => '"Merki" eða "lýsing" er ekki tilgreind. Tilgreindu annaðhvort eða bæði.',
-	'wikibase-api-label-not-found' => 'Mistókst að finna fyrra merki fyrir þetta tungumál í hlutnum.',
+	'wikibase-api-invalid-contentmodel' => 'Innihalds líkanið fyrir síðuna er ógilt.',
+	'wikibase-api-alias-incomplete' => 'Mistókst að finna skýringu á fölsku nafni hlutarinns.',
+	'wikibase-api-alias-not-found' => 'Mistókst að finna eitthvert fyrrum falskt nafn í hlutnum.',
+	'wikibase-api-alias-found' => 'Fann fyrra falskt nafn í hlutnum.',
+	'wikibase-api-not-recognized' => 'Tilskipun þekkist ekki.',
+	'wikibase-api-label-or-description' => '"Merkimiði" eða "lýsing" er ekki tilgreind. Tilgreindu annaðhvort eða bæði.',
+	'wikibase-api-label-not-found' => 'Mistókst að finna fyrri merkimiða fyrir þetta tungumál í hlutnum.',
 	'wikibase-api-description-not-found' => 'Mistókst að finna fyrri lýsingu fyrir þetta tungumál í hlutnum.',
 	'wikibase-api-wrong-class' => 'Innihald síðunnar sem fannst er ekki af réttri gerð.',
 	'content-model-1001' => 'Wikibase hlutur',
 );
 
-/** Italian (Italiano)
+/** Italian (italiano)
  * @author Beta16
  */
 $messages['it'] = array(
@@ -826,10 +876,10 @@ $messages['it'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'specifica pagina',
 	'wikibase-label-input-help-message' => 'Inserisci il titolo di questo insieme di dati in $1.',
 	'wikibase-description-input-help-message' => 'Inserisci una breve descrizione in $1.',
-	'wikibase-sitelinks' => 'Pagine di Wikipedia che sono collegate a questo elemento',
-	'wikibase-sitelinks-add' => 'aggiungi un collegamento ad una pagina di Wikipedia',
-	'wikibase-sitelinks-empty' => 'Nessuna pagina di Wikipedia ancora è collegata a questo elemento.',
-	'wikibase-sitelinks-input-help-message' => 'Imposta un collegamento ad una voce di Wikipedia.',
+	'wikibase-sitelinks' => 'Elenco delle pagine collegate a questo elemento',
+	'wikibase-sitelinks-add' => 'aggiungi un collegamento ad una pagina',
+	'wikibase-sitelinks-empty' => 'Nessuna pagina è collegata a questo elemento ancora.',
+	'wikibase-sitelinks-input-help-message' => 'Imposta un collegamento ad una pagina relativa a questo elemento.',
 	'wikibase-remove' => 'rimuovi',
 	'wikibase-propertyedittool-full' => "L'elenco dei valori è completo.",
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|elemento|elementi}})',
@@ -906,6 +956,11 @@ $messages['ja'] = array(
  * @author Purodha
  */
 $messages['ksh'] = array(
+	'wikibase-edit' => 'ändere',
+	'wikibase-save' => 'faßhalde',
+	'wikibase-cancel' => 'ophüre',
+	'wikibase-add' => 'dobei donn',
+	'wikibase-save-inprogress' => 'Aam Afspeichere',
 	'wikibase-remove' => 'fott nämme',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-sitelinksedittool-full' => 'För alle bikannte ẞaijts sin ald Lenks enjedraare.',
@@ -931,12 +986,19 @@ $messages['lb'] = array(
 	'wikibase-save' => 'späicheren',
 	'wikibase-cancel' => 'ofbriechen',
 	'wikibase-add' => 'derbäisetzen',
+	'wikibase-save-inprogress' => 'Späicheren...',
+	'wikibase-remove-inprogress' => 'Ewechuelen...',
 	'wikibase-description-edit-placeholder' => 'Beschreiwung aginn',
-	'wikibase-sitelinks-add' => 'e Link op eng Wikipedia-Säit derbäisetzen',
+	'wikibase-sitelink-page-edit-placeholder' => "spezifizéiert d'Säit",
+	'wikibase-sitelinks' => 'Lëscht vun de Säiten déi mat dësem Objet verlinkt sinn',
+	'wikibase-sitelinks-add' => 'e Link bäi e Link vum Site derbäisetzen',
 	'wikibase-remove' => 'ewechhuelen',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-aliases-label' => 'Och bekannt als:',
+	'wikibase-tooltip-error-details' => 'Detailer',
 );
 
-/** Macedonian (Македонски)
+/** Macedonian (македонски)
  * @author Bjankuloski06
  */
 $messages['mk'] = array(
@@ -954,10 +1016,10 @@ $messages['mk'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'укажете страница',
 	'wikibase-label-input-help-message' => 'Внесете го насловот на податочниот збир во $1.',
 	'wikibase-description-input-help-message' => 'Внесете краток опис за $1.',
-	'wikibase-sitelinks' => 'Страници од {{SITENAME}} поврзани со оваа ставка',
-	'wikibase-sitelinks-add' => 'додај врска до страница од {{SITENAME}}',
-	'wikibase-sitelinks-empty' => '!Досега нема страници од {{SITENAME}} поврзани со оваа ставка.',
-	'wikibase-sitelinks-input-help-message' => 'Задајте врска до статија од Википедија.',
+	'wikibase-sitelinks' => 'Список на страници поврзани со оваа ставка',
+	'wikibase-sitelinks-add' => 'додај врска во поврзаност со страница',
+	'wikibase-sitelinks-empty' => 'Досега нема врски до страници за оваа ставка.',
+	'wikibase-sitelinks-input-help-message' => 'Задајте врска до страница поврзана со оваа ставка.',
 	'wikibase-remove' => 'отстрани',
 	'wikibase-propertyedittool-full' => 'Списокот на вредности е исполнет.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|ставка|ставки}})',
@@ -1009,6 +1071,79 @@ $messages['mk'] = array(
 	'content-model-1001' => 'Ставка во Викибазата',
 );
 
+/** Norwegian Bokmål (‪Norsk (bokmål)‬)
+ * @author Jeblad
+ */
+$messages['nb'] = array(
+	'wikibase-desc' => 'Strukturert datalager',
+	'wikibase-edit' => 'rediger',
+	'wikibase-save' => 'lagre',
+	'wikibase-cancel' => 'avbryt',
+	'wikibase-add' => 'legg til',
+	'wikibase-save-inprogress' => 'Lagrer…',
+	'wikibase-remove-inprogress' => 'Fjerner…',
+	'wikibase-label-edit-placeholder' => 'lag etikett',
+	'wikibase-description-edit-placeholder' => 'lag beskrivelse',
+	'wikibase-move-error' => 'Du kan ikke flytte sider i datanavnerommet, og du kan ikke flytte sider inn i det.',
+	'wikibase-sitelink-site-edit-placeholder' => 'oppgi nettsted',
+	'wikibase-sitelink-page-edit-placeholder' => 'oppgi side',
+	'wikibase-label-input-help-message' => 'Lag en etikett for datasettet knyttet til $1.',
+	'wikibase-description-input-help-message' => 'Lag en kort beskrivelse for datasettet knyttet til $1.',
+	'wikibase-sitelinks' => 'Sider som lenkes til dette datasettet',
+	'wikibase-sitelinks-add' => 'Legg til en nettstedslenke',
+	'wikibase-sitelinks-empty' => 'Det er ingen nettstedslenker',
+	'wikibase-sitelinks-input-help-message' => 'Definer en nettstedslenke slik at den peker på en artikkel.',
+	'wikibase-remove' => 'fjern',
+	'wikibase-propertyedittool-full' => 'Lista av verdier er nå komplett',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|oppføring|oppføringer}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|oppføring|oppføringer}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|En verdi|$1 verdier}} er ennå ikke lagret',
+	'wikibase-sitelinksedittool-full' => 'Det er ikke fler nettsteder tilgjengelig',
+	'wikibase-disambiguation-title' => 'Alternativer for «$1»',
+	'wb-special-createitem-new-item-notification' => 'Nytt datasett «$1» er lagd og videresendt til dens side. Tilbake til $2.',
+	'wikibase-aliases-label' => 'Også kjent som:',
+	'wikibase-tooltip-error-details' => 'Detaljer',
+	'wikibase-error-save-generic' => 'En feil oppstod under forsøket på å lagre oppføringen, og på grunn av dette så kunne ikke endringen gjennomføres.',
+	'wikibase-error-remove-generic' => 'En feil oppstod under forsøket på å fjerne oppføringen, og på grunn av dette så kunne ikke endringen gjennomføres.',
+	'wikibase-error-save-connection' => 'En feil oppstod under forsøket på å lagre oppføringen, og på grunn av dette så kunne ikke endringen gjennomføres. Sjekk din tilknytting til internett.',
+	'wikibase-error-remove-connection' => 'En feil oppstod under forsøket på å fjerne oppføringen, og på grunn av dette så kunne ikke endringen gjennomføres. Sjekk din tilknytting til internett.',
+	'wikibase-error-save-timeout' => 'Vi har tekniske problemer, og på grunn av dette så kan vi ikke gjennomføre lagring av oppføringen.',
+	'wikibase-error-remove-timeout' => 'Vi har tekniske problemer, og på grunn av dette så kan vi ikke gjennomføre fjerning av oppføringen.',
+	'wikibase-error-autocomplete-connection' => 'Kunne ikke spørre mot Wikipedias API. Prøv igjen senere.',
+	'wikibase-error-autocomplete-response' => 'Tjeneren svarte: $1',
+	'wikibase-setting-languages' => 'Flere språk<br />(disse brukes som reserver når data ikke er tilgjengelig i det primære språket.)',
+	'special-itembytitle' => 'Et datasett er identifisert via tittel',
+	'special-itembylabel' => 'Et datasett er identifisert via etikett',
+	'special-createitem' => 'Lag et nytt datasett',
+	'wikibase-api-aliases-invalid-list' => 'Bruk en av «set» («sett»), «add» («legg til») eller «remove» («fjern») som parameter.',
+	'wikibase-api-no-token' => 'Det er ikke gitt noe token.',
+	'wikibase-api-no-data' => 'Det finnes ingen data som det kan utføres operasjoner på.',
+	'wikibase-api-cant-edit' => 'Den innloggede brukeren har ikke lov til å redigere.',
+	'wikibase-api-no-permissions' => 'Den innloggede brukeren har ikke tilstrekkelige rettigheter.',
+	'wikibase-api-id-xor-wikititle' => 'Oppgi enten en «id» («identifikator») for datasettet eller et par av «site» («nettsted») og «title» («tittel») som identifiserer en tilhørende side.',
+	'wikibase-api-no-such-item' => 'Kan ikke finne et eksisterende datasett.',
+	'wikibase-api-no-such-item-id' => 'Kan ikke finne et eksisterende datasett for denne «id» («identifikator»).',
+	'wikibase-api-link-exists' => 'En artikkel på den angitte wiki (nettsted) er allerede lenket opp.',
+	'wikibase-api-add-with-id' => 'Kan ikke gjøre en «add» («legg til») med en «id» («identifikator») for et eksisterende datasett.',
+	'wikibase-api-add-exists' => 'Kan ikke gjøre en «add» («legg til») med et eksisterende datasett.',
+	'wikibase-api-update-without-id' => 'Kan ikke «update» («oppdater») uten en «id» («identifikator») for et eksisterende datasett.',
+	'wikibase-api-no-such-item-link' => 'Kunne ikke finne et eksisterende datasett for denne lenken.',
+	'wikibase-api-create-failed' => 'Forsøket på å skape et nytt datasett feilet.',
+	'wikibase-api-modify-failed' => 'Forsøket på å endre et datasett feilet.',
+	'wikibase-api-save-failed' => 'Forsøket på å lagre datasettet feilet.',
+	'wikibase-api-invalid-contentmodel' => 'Innholdsmodellen for siden er ugyldig.',
+	'wikibase-api-alias-incomplete' => 'Kan ikke finne en definisjon for kallenavnet for datasettet.',
+	'wikibase-api-alias-not-found' => 'Kan ikke finne noen tidligere kallenavn for datasettet.',
+	'wikibase-api-alias-found' => 'Fant et tidligere kallenavn i datasettet.',
+	'wikibase-api-not-recognized' => 'Direktivet er ikke gjenkjent.',
+	'wikibase-api-label-or-description' => 'Bruk en av, eller begge, av «label» («etikett») eller «description» («beskrivelse»).',
+	'wikibase-api-label-not-found' => 'Kan ikke finne noen tidligere etikett på angitt språk for dette datasettet.',
+	'wikibase-api-description-not-found' => 'Kan ikke finne noen tidligere beskrivelse på angitt språk for dette datasettet.',
+	'wikibase-api-wrong-class' => 'Innholdet på funnet side er ikke av korrekt type.',
+	'content-model-1001' => 'Wikibase datasett',
+);
+
 /** Dutch (Nederlands)
  * @author McDutchie
  * @author SPQRobin
@@ -1029,10 +1164,10 @@ $messages['nl'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'pagina opgeven',
 	'wikibase-label-input-help-message' => 'Geef de naam van deze gegevensset in in $1.',
 	'wikibase-description-input-help-message' => 'Geef een korte beschrijving in in $1.',
-	'wikibase-sitelinks' => "{{SITENAME}}-pagina's gekoppeld aan dit item",
-	'wikibase-sitelinks-add' => 'verwijzing toevoegen naar een Wikipediapagina',
-	'wikibase-sitelinks-empty' => "Er zijn nog geen {{SITENAME}}-pagina's gekoppeld aan dit item.",
-	'wikibase-sitelinks-input-help-message' => 'Geef een koppeling in naar een pagina in Wikipedia.',
+	'wikibase-sitelinks' => "Lijst met pagina's gekoppeld aan dit item",
+	'wikibase-sitelinks-add' => 'verwijzing toevoegen naar een sitepagina',
+	'wikibase-sitelinks-empty' => "Er zijn nog geen sitepagina's voor dit item.",
+	'wikibase-sitelinks-input-help-message' => 'Geef een verwijzing op naar een pagina over dit item.',
 	'wikibase-remove' => 'verwijderen',
 	'wikibase-propertyedittool-full' => 'De lijst met waarden is compleet.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|ingang|ingangen}})',
@@ -1084,7 +1219,7 @@ $messages['nl'] = array(
 	'content-model-1001' => 'Wikibaseitem',
 );
 
-/** Norwegian Nynorsk (‪Norsk (nynorsk)‬)
+/** Norwegian Nynorsk (‪norsk (nynorsk)‬)
  * @author Jeblad
  * @author Njardarlogar
  */
@@ -1115,6 +1250,8 @@ $messages['nn'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Ein verdi|$1 verdiar}} er ikkje lagra ennå.',
 	'wikibase-sitelinksedittool-full' => 'Det er ikkje fleire nettstader tilgjengelege',
 	'wikibase-disambiguation-title' => 'Alternativ for «$1»',
+	'wb-special-createitem-new-item-notification' => 'Nytt datasett «$1» er lagd og videresendt til sida. Tilbake til $2.',
+	'wikibase-aliases-label' => 'Også kjend som:',
 	'wikibase-tooltip-error-details' => 'Detaljar',
 	'wikibase-error-save-generic' => 'Ein feil oppstod under forsøket på å lagre oppføringa, og på grunn av dette så kunne ikkje endringa gjennomførast.',
 	'wikibase-error-remove-generic' => 'Ein feil oppstod under forsøket på å fjerne oppføringa, og på grunn av dette så kunne ikkje endringa gjennomførast.',
@@ -1156,7 +1293,7 @@ $messages['nn'] = array(
 	'content-model-1001' => 'Wikibase datasett',
 );
 
-/** Portuguese (Português)
+/** Portuguese (português)
  * @author Malafaya
  */
 $messages['pt'] = array(
@@ -1175,7 +1312,7 @@ $messages['pt'] = array(
 	'wikibase-remove' => 'remover',
 );
 
-/** Brazilian Portuguese (Português do Brasil)
+/** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
  */
 $messages['pt-br'] = array(
@@ -1184,17 +1321,71 @@ $messages['pt-br'] = array(
 	'wikibase-save' => 'salvar',
 	'wikibase-cancel' => 'cancelar',
 	'wikibase-add' => 'adicionar',
+	'wikibase-save-inprogress' => 'Salvando...',
+	'wikibase-remove-inprogress' => 'Removendo...',
 	'wikibase-label-edit-placeholder' => 'insira um rótulo',
 	'wikibase-description-edit-placeholder' => 'insira uma descrição',
+	'wikibase-move-error' => 'Você não pode mover páginas que estão no domínio de dados, além disso, você não pode mover páginas para dentro de tal domínio.',
+	'wikibase-sitelink-site-edit-placeholder' => 'especifique o site',
+	'wikibase-sitelink-page-edit-placeholder' => 'especifique a página',
 	'wikibase-label-input-help-message' => 'Insira o título deste conjunto de dados em $1.',
 	'wikibase-description-input-help-message' => 'Insira uma curta descrição em $1 .',
-	'wikibase-sitelinks' => 'Páginas da Wikipédia linkadas a este item',
-	'wikibase-sitelinks-add' => 'adicione um link para uma página da Wikipédia',
-	'wikibase-sitelinks-empty' => 'Ainda não há qualquer página da Wikipédia linkada a este item.',
+	'wikibase-sitelinks' => 'Lista de páginas linkadas a este item',
+	'wikibase-sitelinks-add' => 'adicione um link para uma página do site',
+	'wikibase-sitelinks-empty' => 'Ainda não há qualquer página do site linkada a este item.',
+	'wikibase-sitelinks-input-help-message' => 'Defina um link para uma página relacionada a este item.',
 	'wikibase-remove' => 'remover',
+	'wikibase-propertyedittool-full' => 'A lista de valores está completa.',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entrada|entradas}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entrada|entradas}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Um valor não salvo|$1 valores não salvos}} ainda',
+	'wikibase-sitelinksedittool-full' => 'Os links para as páginas já estão definidos para todos os sites conhecidos.',
+	'wikibase-disambiguation-title' => 'Desambiguação para "$1"',
+	'wb-special-createitem-new-item-notification' => 'Novo item $1 criado e redirecionado para sua página. De volta à $2.',
+	'wikibase-aliases-label' => 'Também conhecido como:',
+	'wikibase-tooltip-error-details' => 'Detalhes',
+	'wikibase-error-save-generic' => 'Ocorreu um erro ao tentar salvar e, por isso, as alterações não puderam ser completadas.',
+	'wikibase-error-remove-generic' => 'Ocorreu um erro ao tentar remover e, por isso, as alterações não puderam ser completadas.',
+	'wikibase-error-save-connection' => 'Ocorreu um erro de conexão ao tentar salvar e, por isso, as alterações não puderam ser completadas. Por favor, verifique sua conexão com a Internet.',
+	'wikibase-error-remove-connection' => 'Ocorreu um erro de conexão ao tentar remover e, por isso, as alterações não puderam ser completadas. Por favor, verifique sua conexão com a Internet.',
+	'wikibase-error-save-timeout' => 'Nós estamos tendo dificuldades técnicas e, por isso, sua ação de "salvar" pode não ter sido completada.',
+	'wikibase-error-remove-timeout' => 'Nós estamos tendo dificuldades técnicas e, por isso, sua ação de "remover" pode não ter sido completada.',
+	'wikibase-error-autocomplete-connection' => 'Não foi possível consultar a API da Wikipédia. Por favor, tente novamente mais tarde.',
+	'wikibase-error-autocomplete-response' => 'O servidor respondeu: $1',
+	'wikibase-setting-languages' => 'Idiomas adicionais<br />(como alternativa ao exibir dados não disponíveis em seu idioma principal)',
+	'special-itembytitle' => 'Item por título',
+	'special-itembylabel' => 'Item por rótulo',
+	'special-createitem' => 'Criar um novo item',
+	'wikibase-api-aliases-invalid-list' => 'Utilize um dos parâmetros "set", "add" e "remove".',
+	'wikibase-api-no-token' => 'Não há qualquer token dado.',
+	'wikibase-api-no-data' => 'Não há quaisquer dados para operar.',
+	'wikibase-api-cant-edit' => 'O usuário logado não tem permissão para editar.',
+	'wikibase-api-no-permissions' => 'O usuário logado não tem direitos suficientes.',
+	'wikibase-api-id-xor-wikititle' => 'Forneça o "id" do item ou os pares de "site" e "title" para uma página correspondente.',
+	'wikibase-api-no-such-item' => 'Não foi possível localizar um item existente.',
+	'wikibase-api-no-such-item-id' => 'Não foi possível localizar um item para esse id.',
+	'wikibase-api-link-exists' => 'Um artigo no wiki especificado já está linkado.',
+	'wikibase-api-add-with-id' => 'Não foi possível adicionar com o id de um item existente.',
+	'wikibase-api-add-exists' => 'Não foi possível adicionar a um item existente.',
+	'wikibase-api-update-without-id' => 'Não foi possível atualizar sem o id prévio.',
+	'wikibase-api-no-such-item-link' => 'Não foi possível localizar um item existente para esse link.',
+	'wikibase-api-create-failed' => 'Falha na tentativa de criação de um novo item.',
+	'wikibase-api-modify-failed' => 'Falha na tentativa de modificação do item.',
+	'wikibase-api-save-failed' => 'Falha na tentativa de salvar o item.',
+	'wikibase-api-invalid-contentmodel' => 'O modelo de conteúdo para a página é inválido.',
+	'wikibase-api-alias-incomplete' => 'Não foi possível localizar uma definição do alias para o item.',
+	'wikibase-api-alias-not-found' => 'Não foi possível localizar qualquer alias anterior no item.',
+	'wikibase-api-alias-found' => 'Encontrado um alias anterior no item.',
+	'wikibase-api-not-recognized' => 'A diretiva não é reconhecida.',
+	'wikibase-api-label-or-description' => 'Use um ou ambos de "label" e "description".',
+	'wikibase-api-label-not-found' => 'Não foi possível localizar um rótulo prévio para este item nesse idioma.',
+	'wikibase-api-description-not-found' => 'Não foi possível localizar uma descrição prévia para este item nesse idioma.',
+	'wikibase-api-wrong-class' => 'O conteúdo da página encontrada não é do tipo correto.',
+	'content-model-1001' => 'Item do Wikibase',
 );
 
-/** Russian (Русский)
+/** Russian (русский)
  * @author Kaganer
  * @author Александр Сигачёв
  */
@@ -1214,7 +1405,7 @@ $messages['ru'] = array(
 	'wikibase-remove' => 'убрать',
 );
 
-/** Swedish (Svenska)
+/** Swedish (svenska)
  * @author Ainali
  * @author WikiPhoenix
  */
@@ -1259,6 +1450,7 @@ $messages['te'] = array(
 );
 
 /** Simplified Chinese (‪中文（简体）‬)
+ * @author Dimension
  * @author Linforest
  */
 $messages['zh-hans'] = array(
@@ -1273,10 +1465,10 @@ $messages['zh-hans'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => '指定页面',
 	'wikibase-label-input-help-message' => '采用$1输入该数据集的标题。',
 	'wikibase-description-input-help-message' => '采用$1输入简要说明。',
-	'wikibase-sitelinks' => '链接到此项的维基百科页面',
+	'wikibase-sitelinks' => '链接到此项的页面清单',
 	'wikibase-sitelinks-add' => '添加指向特定维基百科页面的链接',
-	'wikibase-sitelinks-empty' => '尚无维基百科页面链接到此项目。',
-	'wikibase-sitelinks-input-help-message' => '设置一条指向特定维基百科文章的链接。',
+	'wikibase-sitelinks-empty' => '尚无此项目的全站链接。',
+	'wikibase-sitelinks-input-help-message' => '设置一个本项目相关页面的链接。',
 	'wikibase-remove' => '删除',
 	'wikibase-propertyedittool-full' => '取值列表已完整。',
 	'wikibase-sitelinksedittool-full' => '已经为所有的已知站点设置了指向页面的链接。',

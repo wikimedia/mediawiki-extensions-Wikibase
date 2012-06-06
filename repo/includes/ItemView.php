@@ -137,17 +137,6 @@ class ItemView extends \ContextSource {
 		// fresh parser output with items markup
 		$out = new \ParserOutput( $this->getHTML() );
 
-		if( ! $this->item->isNew() ) {
-			// only remember for updates in case this item has been stored yet.
-			/*
-			 * todo: verify that it makes sense calling this here. Moved this here from Item::getParserOutput(), which
-			 *       is calling this function. At least here the update is added whenever serving an items ParserOutput
-			 *       so it seems like the right place to put this.
-			 */
-			$out->addSecondaryDataUpdate(
-				new ItemStructuredSave( $this->item, $this->getContext()->getTitle() )
-			);
-		}
 		#@todo (phase 2) would be nice to put pagelinks (item references) and categorylinks (from special properties)...
 		#@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
 
