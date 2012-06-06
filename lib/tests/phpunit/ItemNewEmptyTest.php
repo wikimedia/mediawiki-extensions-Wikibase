@@ -161,28 +161,4 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 		);
 	}
 	
-	public function testGetTextForSummary() {
-		$str = 'This is an description';
-		$len = 8;
-		
-		$this->markTestSkipped(
-			'The getSystemPropertyNames is not implemented yet.'
-		);
-		
-		$this->assertInternalType(
-			'string',
-			$GLOBALS['wgLang'],
-			'Checking globals for a definition of default language.'
-		);
-		$this->item->setDescription( $GLOBALS['wgLang'], $str );
-		
-		print "'" . $item->getTextForSummary($len) . "'\n";
-		
-		$this->assertEquals(
-			substr($str, 0, $len),
-			$this->item->getTextForSummary($len),
-			'Calling getTextForSummary wth a length of {$len} should be equal to substr($str, 0, $len) from a WikibaseItem with set description.'
-		);
-	}
-	
 }
