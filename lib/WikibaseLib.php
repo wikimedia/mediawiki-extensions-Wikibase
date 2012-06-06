@@ -83,7 +83,7 @@ $wgAutoloadClasses['Wikibase\ListDiff'] 			= $dir . 'includes/diff/ListDiff.php'
 $wgAutoloadClasses['Wikibase\MapDiff'] 				= $dir . 'includes/diff/MapDiff.php';
 
 // tests
-$wgAutoloadClasses['Wikibase\tests\ChangesTest'] 			= $dir . 'tests/phpunit/ChangesTest.php';
+$wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/TestItems.php';
 
 // tests/changes
 $wgAutoloadClasses['Wikibase\tests\AliasChangeTest'] 		= $dir . 'tests/phpunit/changes/AliasChangeTest.php';

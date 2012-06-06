@@ -43,18 +43,27 @@ final class WikibaseLibHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
-		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
+		$testFiles = array(
+			'Changes',
+			'ItemMove',
+			'ItemMultilangTexts',
+			'ItemNewEmpty',
+			'ItemNewFromArray',
+			'Item',
+			'Site',
+			'Sites',
 
-		$files[] = $testDir . 'ChangesTest.php';
+			'changes/AliasChange',
+			'changes/SitelinkChange',
 
-		// changes
-		$files[] = $testDir . 'changes/AliasChangeTest.php';
-		$files[] = $testDir . 'changes/SitelinkChangeTest.php';
+			'diff/Diff',
+			'diff/ListDiff',
+			'diff/MapDiff',
+		);
 
-		// diff
-		$files[] = $testDir . 'diff/DiffTest.php';
-		$files[] = $testDir . 'diff/ListDiffTest.php';
-		$files[] = $testDir . 'diff/MapDiffTest.php';
+		foreach ( $testFiles as $file ) {
+			$files[] = dirname( __FILE__ ) . '/tests/phpunit/' . $file . 'Test.php';
+		}
 
 		return true;
 	}
