@@ -57,7 +57,7 @@ class ItemHandler extends EntityHandler {
 		$context = new RequestContext( $wgRequest );
 		$context->setTitle( $title );
 
-		$itemView = new ItemView( $this, $context );
+		$itemView = new ItemView( $content, $context );
 		return $itemView->render();
 	}
 
