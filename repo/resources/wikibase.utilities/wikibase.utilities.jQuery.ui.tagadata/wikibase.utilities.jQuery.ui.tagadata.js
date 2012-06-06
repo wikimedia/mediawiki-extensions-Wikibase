@@ -21,6 +21,9 @@
  *
  * @licence MIT license
  * @author Daniel Werner
+ *
+ * TODO: Danwe: This should be refactored to introduce a 'Tag' Prototype for representing tags. Right now the whole
+ *       thing is a mess made of functions returning/expecting either a label or a DOM node.
  */
 
 ( function( $, undefined ) {
@@ -35,6 +38,7 @@
 			/**
 			 * Defines whether the tags can be altered at all times. If true, the tags contain input boxes so it can
 			 * be tabbed over them or clicked inside to alter the value.
+			 * @TODO: false for this value not fully supported! There won't be any input at all.
 			 * @var Boolean
 			 */
 			editableTags: true,
@@ -64,18 +68,6 @@
 			animate: true,
 
 			/**
-			 * Optionally set a tabindex attribute on the input self gets created for 'tag-a-data'.
-			 * @var Number
-			 */
-			tabIndex: null,
-
-			/**
-			 * if true this creates a new tag if text was inserted and the user leaves the input field.
-			 * @var Boolean
-			 */
-			createOnBlur: false,
-
-			/**
 			 * Keys which - when pressed in the input area - will trigger the current
 			 * input to be added as tag. $.ui.keyCode members can be used for convenience.
 			 * @var Number[]
@@ -98,14 +90,6 @@
 
 			this.tagList = this.element.find( 'ul, ol' ).andSelf().last();
 
-			this._tagInput = $( '<input type="text" />' ).addClass( 'ui-widget-content' );
-			if( this.options.tabIndex ) {
-				this._tagInput.attr( 'tabindex', this.options.tabIndex );
-			}
-			if( this.options.placeholderText ) {
-				this._tagInput.attr( 'placeholder', this.options.placeholderText );
-			}
-
 			this.options.tagSource = this.options.tagSource || function( search, showChoices ) {
 				var filter = search.term.toLowerCase();
 				var choices = $.grep( this.options.availableTags, function( element ) {
@@ -124,81 +108,20 @@
 			this.tagList
 			.addClass( 'tagadata' )
 			.addClass( 'ui-widget ui-widget-content ui-corner-all' )
-			// Create the input field.
-			.append( $( '<li class="tagadata-new"></li>' ).append( this._tagInput ) )
 			.on( 'click.tagadata', function( e ) {
 				var target = $( e.target );
 				if( target.hasClass( 'tagadata-label' ) ) {
 					self._trigger( 'onTagClicked', e, target.closest( '.tagadata-choice' ) );
-				} /*else {
-					// Sets the focus() to the input field, if the user
-					// clicks anywhere inside the UL. This is needed
-					// because the input field needs to be of a small size.
-					self._tagInput.focus();
-				}*/
+				}
 			} );
 
 			// Add existing tags from the list, if any.
 			this.tagList.children( 'li' ).each( function() {
-				if( !$( this ).hasClass( 'tagadata-new' ) ) {
-					self.createTag( $( this ).html(), $( this ).attr( 'class' ) );
-					$( this ).remove();
-				}
+				self.createTag( $( this ).html(), $( this ).attr( 'class' ) );
+				$( this ).remove();
 			} );
 
-			// Events.
-			this._tagInput
-			.keydown(function( event ) {
-				// Backspace is not detected within a keypress, so it must use keydown.
-				if( event.which == $.ui.keyCode.BACKSPACE && self._tagInput.val() === '' ) {
-					var tag = self._lastTag();
-					if( !self.options.removeConfirmation || tag.hasClass( 'remove' ) ) {
-						// When backspace is pressed, the last tag is deleted.
-						self.removeTag( tag );
-					} else if( self.options.removeConfirmation ) {
-						tag.addClass( 'remove ui-state-highlight' );
-					}
-				} else if( self.options.removeConfirmation ) {
-					self._lastTag().removeClass( 'remove ui-state-highlight' );
-				}
-
-				// check whether key for insertion was triggered
-				if( self._tagInput.val() !== '' && $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
-					event.preventDefault();
-					self.createTag( self._tagInput.val() );
-
-					// The autocomplete doesn't close automatically when TAB is pressed.
-					// So let's ensure self it closes.
-					self._tagInput.autocomplete( 'close' );
-				}
-			} ).blur( function( e ) {
-				if( self.options.createOnBlur ) {
-					// Create a tag when the element loses focus (unless it's empty).
-					self.createTag( self._tagInput.val() );
-				}
-			} );
-
-
-			// Autocomplete.
-			if( this.options.availableTags || this.options.tagSource ) {
-				this._tagInput.autocomplete( {
-					source: this.options.tagSource,
-					select: function( event, ui ) {
-						// Delete the last tag if we autocomplete something despite the input being empty
-						// This happens because the input's blur event causes the tag to be created when
-						// the user clicks an autocomplete item. I don't know how to lock my screen.
-						// The only artifact of this is self while the user holds down the mouse button
-						// on the selected autocomplete item, a tag is shown with the pre-autocompleted text,
-						// and is changed to the autocompleted text upon mouseup.
-						if( self._tagInput.val() === '' ) {
-							self.removeTag( self._lastTag(), false );
-						}
-						self.createTag( ui.item.value );
-						// Preventing the tag input to be updated with the chosen value.
-						return false;
-					}
-				} );
-			}
+			this.getHelperTag().focus(); // creates an empty input tag at the end.
 		},
 
 		_lastTag: function() {
@@ -243,7 +166,9 @@
 		 */
 		tagLabel: function( tag ) {
 			// Returns the tag's string label (input can be direct child or inside the label).
-			return $( tag ).find( 'input' ).val();
+			return this.options.editableTags
+				? $( tag ).find( 'input' ).val()
+				: $( tag ).find( '.tagadata-label' ).text();
 		},
 
 		/**
@@ -282,13 +207,22 @@
 			return str.toLowerCase();
 		},
 
+		highlightTag: function( tag ) {
+			// highlight tag visually so the user knows the tag is in the list already
+			// switch to highlighted class...
+			tag.switchClass( '', 'tagadata-choice-existing ui-state-highlight', 150, 'linear', function() {
+				// ... and remove it again (also remove 'remove' class to avoid confusio
+				tag.switchClass( 'tagadata-choice-existing ui-state-highlight remove', '', 750, 'linear' );
+			} );
+		},
+
 		/**
-		 * This will add a new tag to the list of tags. If the tag exists in the list already, false will be returned,
-		 * otherwise the newly assigned tag.
+		 * This will add a new tag to the list of tags. If the tag exists in the list already, the already existing tag
+		 * will be returned.
 		 *
 		 * @param String value
 		 * @param String|Array additionalClasses
-		 * @return jQuery|false
+		 * @return jQuery
 		 */
 		createTag: function( value, additionalClasses ) {
 			if( $.isArray( additionalClasses ) ) {
@@ -300,28 +234,23 @@
 			// Automatically trims the value of leading and trailing whitespace.
 			value = this._formatLabel( value );
 
-			if( value === '' ) {
-				return false;
-			}
 			if( tag !== null ) {
 				// tag in list already, don't add it twice
-				this._tagInput.val( '' );
-				// highlight tag visually so the user knows the tag is in the list already
-				// switch to highlighted class...
-				tag.switchClass( '', 'tagadata-choice-existing ui-state-highlight', 150, 'linear', function() {
-					// ... and remove it again (also remove 'remove' class to avoid confusio
-					tag.switchClass( 'tagadata-choice-existing ui-state-highlight remove', '', 750, 'linear' );
-				} );
-				return false;
+				if( value !== '' ) {
+					// highlight the already existing tag, except if it is the new tag input
+					this.highlightTag( tag );
+				}
+
+				return tag;
 			}
 
 			var label = $( '<span>', {
-				'class': 'tagadata-label' + ( this.options.onTagClicked ? 'tagadata-label-clickable' : '' )
+				'class': 'tagadata-label' + ( this.options.onTagClicked ? ' tagadata-label-clickable' : '' )
 			} );
 
 
 			var input = ( $( '<input>', {
-				value: value,
+				placeholder: this.options.placeholderText,
 				name: this.options.itemName + '[' + this.options.fieldName + '][]'
 			} ) );
 
@@ -346,8 +275,64 @@
 			tag.append( removeTag );
 
 			if( this.options.editableTags ) {
+				var tagCheck = function( tag ) {
+					// find out whether given tag has equivalent and remove it in that case.
+					var tagLabel = self.tagLabel( tag );
+					var equalTags = self.tagList.find('.tagadata-label input').filter( function() {
+						return $( this ).val() === tagLabel;
+					} );
+					if( equalTags.length > 1 ) {
+						// remove given tag
+						equalTags = equalTags.not( tag.find('.tagadata-label input') );
+						// remove given tag and highlight the other one
+						self.highlightTag( $( equalTags[0] ).closest( '.tagadata-choice' ) );
+						self.removeTag( tag );
+						return false;
+					}
+					return true;
+				};
+
 				// input is the actual visible content
-				input.appendTo( label );
+				input.attr( {
+					type: 'text',
+					value: value,
+					'class': 'tagadata-label-text'
+				} )
+				.blur( function( e ) {
+					var tag = input.closest( '.tagadata-choice' );
+
+					if( ! tagCheck( tag ) ) {
+						return false;
+					}
+
+					// remove tag if it is empty already
+					if( self._formatLabel( input.val() ) === ''
+						&& self.assignedTags().length > 1
+						&& ! tag.is( '.tagadata-choice:last' )
+					) {
+						self.removeTag( tag );
+					}
+				} )
+				.keydown( function( event ) {
+					// check whether key for insertion was triggered
+					if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
+						event.preventDefault();
+						var targetTag = self.getHelperTag();
+
+						if( self._formatLabel( input.val() ) === '' ) {
+							// enter hit on an empty tag, remove it...
+
+							if( targetTag[0] !== tag[0] ) { // ... except for the helper tag
+								self.removeTag( tag );
+								self.highlightTag( targetTag );
+							} else {
+								targetTag = null;
+							}
+						}
+						targetTag.find( 'input' ).focus();
+					}
+				} )
+				.appendTo( label );
 			} else {
 				// we need input only for the form to contain the data
 				input.attr( {
@@ -355,20 +340,39 @@
 					style: 'display:none;'
 				} )
 				.appendTo( tag );
-				label.text( value );
+
+				label.text( value )
+				.addClass( 'tagadata-label-text' );
 			}
 
-			// Cleaning the input.
-			this._tagInput.val( '' );
-
-			// insert tag
-			this._tagInput.parent().before( tag );
+			/// / insert tag
+			this.tagList.append( tag );
 
 			this._trigger( 'onTagAdded', null, tag );
 
 			return tag;
 		},
 
+		/**
+		 * Returns an empty tag at the end of the tag list. If none exists, this will create one and return it.
+		 *
+		 * @return jQuery
+		 */
+		getHelperTag: function() {
+			var tag = this.tagList.find( '.tagadata-choice:last' );
+			if( this.tagLabel( tag ) !== '' ) {
+				tag = this.createTag( '' );
+			}
+			return tag;
+		},
+
+		/**
+		 * Removes a tag which can be received by getTag() via its label.
+		 *
+		 * @param jQuery tag
+		 * @param animate (optional)
+		 * @return Boolean
+		 */
 		removeTag: function( tag, animate ) {
 			animate = animate || this.options.animate;
 
@@ -406,8 +410,7 @@
 
 			this.tagList
 			.removeClass( 'tagadata ui-widget ui-widget-content ui-corner-all' )
-			.off( 'click.tagadata' )
-			.children( '.tagadata-new' ).remove();
+			.off( 'click.tagadata' );
 
 			this.tagList.children( 'li' ).each( function() {
 				var tag = $( this );

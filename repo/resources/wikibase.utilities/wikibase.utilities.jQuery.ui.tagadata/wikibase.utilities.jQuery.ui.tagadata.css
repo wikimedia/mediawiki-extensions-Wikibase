@@ -3,6 +3,7 @@ ul.tagadata {
     overflow: auto;
     margin-left: inherit; /* usually we don't want the regular ul margins. */
     margin-right: inherit;
+	border: none;
 }
 ul.tagadata li {
     display: block;
@@ -10,7 +11,7 @@ ul.tagadata li {
     margin: 2px 5px 2px 0;
 }
 ul.tagadata li.tagadata-choice {
-    padding: .2em 18px .2em .5em;
+    padding: 0;
     position: relative;
     line-height: inherit;
 }
@@ -18,9 +19,8 @@ ul.tagadata li.tagadata-new {
     padding: .25em 4px .25em 0;
 }
 
-ul.tagadata li.tagadata-choice a.tagadata-label {
+ul.tagadata .tagadata-label-clickable {
     cursor: pointer;
-    text-decoration: none;
 }
 ul.tagadata li.tagadata-choice .tagadata-close {
     cursor: pointer;
@@ -35,22 +35,25 @@ ul.tagadata li.tagadata-choice .tagadata-close .text-icon {
     display: none;
 }
 
-ul.tagadata li.tagadata-choice input {
-    display: block;
-    float: left;
-    margin: 2px 5px 2px 0;
+ul.tagadata li.tagadata-choice .tagadata-label-text { /* the input or pure text */
+	margin: 0;
+	padding: .4em 18px .4em .5em;
+	display: block;
 }
-ul.tagadata input[type="text"] {
-    -moz-box-sizing:    border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing:         border-box;
 
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: inherit;
-    background-color: inherit;
-    outline: none;
+ul.tagadata li.tagadata-choice .tagadata-label input {
+	-moz-box-sizing:    border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:         border-box;
+
+	border: none;
+	width: inherit;
+	background-color: inherit;
+	outline: none;
+}
+
+ul.tagadata li.tagadata-choice .tagadata-label input:focus {
+	background-color: white;
 }
 
 ul.tagadata li.tagadata-choice-existing {}
