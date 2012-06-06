@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Title, WikiPage, Content, ParserOptions, ParserOutput, RequestContext;
+use User, Title, WikiPage, Content, RequestContext;
 
 /**
  * Represents a single Wikibase item.
@@ -784,30 +784,6 @@ class Item extends Entity {
 		// Certainly not the current check as it can have elements that are empty arrays, making base array non-empty.
 		$data = $this->toArray();
 		return empty( $data );
-	}
-
-
-	/**
-	 * Returns a ParserOutput object containing the HTML.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Title $title
-	 * @param null $revId
-	 * @param null|ParserOptions $options
-	 * @param bool $generateHtml
-	 *
-	 * @return ParserOutput
-	 */
-	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		global $wgRequest;
-
-		# construct dummy context for the dummy view
-		$context = new RequestContext( $wgRequest );
-		$context->setTitle( $title );
-
-		$itemView = new ItemView( $this, $context );
-		return $itemView->render();
 	}
 
 	/**
