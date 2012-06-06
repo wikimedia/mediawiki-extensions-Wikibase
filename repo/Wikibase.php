@@ -166,20 +166,6 @@ $wgResourceModules['wikibase.common'] = $moduleTemplate + array(
 	)
 );
 
-$wgResourceModules['wikibase.libs.jQuery.tagit'] = $moduleTemplate + array(
-	'scripts' => array(
-		'wikibase.libs/wikibase.libs.jquery.tagit/js/tag-it.js'
-	),
-	'styles' => array(
-		'wikibase.libs/wikibase.libs.jquery.tagit/css/jquery.tagit.css'
-	),
-	'dependencies' => array(
-		'jquery.ui.widget',
-		'jquery.effects.core',
-		'jquery.effects.blind'
-	)
-);
-
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.js',
@@ -199,8 +185,31 @@ $wgResourceModules['wikibase.utilities.jQuery'] = $moduleTemplate + array(
 		'wikibase.utilities/wikibase.utilities.js',
 		'wikibase.utilities/wikibase.utilities.jQuery.js',
 		'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
-		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
 		'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
+	)
+);
+
+$wgResourceModules['wikibase.utilities.jQuery.inputAutoExpand'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
+	),
+	'dependencies' => array(
+		'wikibase.utilities.jQuery',
+	)
+);
+
+$wgResourceModules['wikibase.utilities.jQuery.tagadata'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.js',
+	),
+	'styles' => array(
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.css',
+	),
+	'dependencies' => array(
+		'wikibase.utilities.jQuery',
+		'jquery.ui.widget',
+		'jquery.effects.core',
+		'jquery.effects.blind'
 	)
 );
 
@@ -262,8 +271,8 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 	'dependencies' => array(
 		'wikibase',
 		'wikibase.ui.Toolbar',
-		'wikibase.utilities.jQuery',
-		'wikibase.libs.jQuery.tagit',
+		'wikibase.utilities.jQuery.inputAutoExpand',
+		'wikibase.utilities.jQuery.tagadata',
 		'jquery.ui.autocomplete',
 		'mediawiki.api',
 		'mediawiki.Title',

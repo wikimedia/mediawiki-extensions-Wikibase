@@ -28,7 +28,7 @@ window.wikibase = new( function() {
 		window.location =  newItemTitle.getUrl() + '?wbitemcreated=yes';
 		// TODO: this is not yet near perfect and a proper workflow hast to be created. The redirect as of now is
 		//       rather ugly in its presentation to the user.
-	}
+	};
 	$( this ).on( 'NewItemCreated', onNewItemCreated );
 
 

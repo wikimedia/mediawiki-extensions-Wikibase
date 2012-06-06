@@ -39,7 +39,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 			.addClass( this.UI_CLASS )
 			.addClass( 'wb-ui-propertyedittool-editablevaluelistinterface' ); // additional UI class
 
-		return inputElement.tagit( {
+		return inputElement.tagadata( {
 			animate: false, // FIXME: when animated set to true, something won't work in there, fails silently then
 			allowSpaces: true,
 			removeConfirmation: true, // only two times backspace will remove tag
@@ -56,18 +56,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	 * $see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._destroyInputElement
 	 */
 	_destroyInputElement: function() {
-		this._getTagit().destroy();
+		this._getTagadata().destroy();
 		this._inputElem = null;
 	},
 
 	/**
-	 * Convenience function for getting the 'tagit' jQuery plugin data related to the _inputElem
+	 * Convenience function for getting the 'tagadata' jQuery plugin data related to the _inputElem
 	 */
-	_getTagit: function() {
+	_getTagadata: function() {
 		if( ! this._inputElem ) {
 			return null;
 		}
-		return this._inputElem.data( 'tagit' );
+		return this._inputElem.data( 'tagadata' );
 	},
 
 	/**
@@ -76,7 +76,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	 * @param string[]
 	 */
 	_getValue_inEditMode: function() {
-		return this._getTagit().assignedTags();
+		return this._getTagadata().assignedTags();
 	},
 
 	/**
@@ -114,9 +114,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	_setValue_inEditMode: function( value ) {
 		var self = this;
 		$.each( value, function( i, val ) {
-			self._getTagit().createTag( val, self.UI_VALUE_PIECE_CLASS );
+			self._getTagadata().createTag( val, self.UI_VALUE_PIECE_CLASS );
 		} );
-		return false; // onInputRegistered event will be thrown by tagit.onTagAdded
+		return false; // onInputRegistered event will be thrown by tagadata.onTagAdded
 	},
 
 	/**
@@ -143,14 +143,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._disableInputElement
 	 */
 	_disableInputElement: function() {
-		this._getTagit().disable();
+		this._getTagadata().disable();
 	},
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputelement
 	 */
 	_enableInputelement: function() {
-		this._getTagit().enable();
+		this._getTagadata().enable();
 	},
 
 	/**
