@@ -33,6 +33,13 @@
 			tagSource: null,
 
 			/**
+			 * Defines whether the tags can be altered at all times. If true, the tags contain input boxes so it can
+			 * be tabbed over them or clicked inside to alter the value.
+			 * @var Boolean
+			 */
+			editableTags: true,
+
+			/**
 			 * If set to true, hitting backspace will not delete the last tag immediately but highlight it first.
 			 * @var Boolean
 			 */
@@ -123,12 +130,12 @@
 				var target = $( e.target );
 				if( target.hasClass( 'tagadata-label' ) ) {
 					self._trigger( 'onTagClicked', e, target.closest( '.tagadata-choice' ) );
-				} else {
+				} /*else {
 					// Sets the focus() to the input field, if the user
 					// clicks anywhere inside the UL. This is needed
 					// because the input field needs to be of a small size.
 					self._tagInput.focus();
-				}
+				}*/
 			} );
 
 			// Add existing tags from the list, if any.
@@ -235,8 +242,8 @@
 		 * @return string
 		 */
 		tagLabel: function( tag ) {
-			// Returns the tag's string label.
-			return $( tag ).children( 'input' ).val();
+			// Returns the tag's string label (input can be direct child or inside the label).
+			return $( tag ).find( 'input' ).val();
 		},
 
 		/**
@@ -288,30 +295,38 @@
 				additionalClasses = additionalClasses.join( ' ' );
 			}
 			var self = this;
-			var tag;
+			var tag = this.getTag( value );
 
 			// Automatically trims the value of leading and trailing whitespace.
 			value = this._formatLabel( value );
 
-			if( this.hasTag( value ) || value === '' ) {
-				tag = this.getTag( value );
-				if( tag !== null ) {
-					// tag in list already, don't add it twice
-					this._tagInput.val( '' );
-					// highlight tag visually so the user knows the tag is in the list already
-					// switch to highlighted class...
-					tag.switchClass( '', 'tagadata-choice-existing ui-state-highlight', 150, 'linear', function() {
-						// ... and remove it again (also remove 'remove' class to avoid confusio
-						tag.switchClass( 'tagadata-choice-existing ui-state-highlight remove', '', 750, 'linear' );
-					} );
-				}
+			if( value === '' ) {
+				return false;
+			}
+			if( tag !== null ) {
+				// tag in list already, don't add it twice
+				this._tagInput.val( '' );
+				// highlight tag visually so the user knows the tag is in the list already
+				// switch to highlighted class...
+				tag.switchClass( '', 'tagadata-choice-existing ui-state-highlight', 150, 'linear', function() {
+					// ... and remove it again (also remove 'remove' class to avoid confusio
+					tag.switchClass( 'tagadata-choice-existing ui-state-highlight remove', '', 750, 'linear' );
+				} );
 				return false;
 			}
 
-			var label = $( this.options.onTagClicked ? '<a class="tagadata-label"></a>' : '<span class="tagadata-label"></span>' ).text( value );
+			var label = $( '<span>', {
+				'class': 'tagadata-label' + ( this.options.onTagClicked ? 'tagadata-label-clickable' : '' )
+			} );
+
+
+			var input = ( $( '<input>', {
+				value: value,
+				name: this.options.itemName + '[' + this.options.fieldName + '][]'
+			} ) );
 
 			// Create tag.
-			tag = $( '<li></li>' )
+			tag = $( '<li>' )
 			.addClass( 'tagadata-choice ui-widget-content ui-state-default ui-corner-all' )
 			.addClass( additionalClasses )
 			.append( label );
@@ -330,13 +345,18 @@
 
 			tag.append( removeTag );
 
-			// each tag has a hidden input field inline.
-			tag.append( $( '<input>', {
-				type: 'hidden',
-				style: 'display:none;',
-				value: label.html(),
-				name: this.options.itemName + '[' + this.options.fieldName + '][]'
-			} ) );
+			if( this.options.editableTags ) {
+				// input is the actual visible content
+				input.appendTo( label );
+			} else {
+				// we need input only for the form to contain the data
+				input.attr( {
+					type: 'hidden',
+					style: 'display:none;'
+				} )
+				.appendTo( tag );
+				label.text( value );
+			}
 
 			// Cleaning the input.
 			this._tagInput.val( '' );
