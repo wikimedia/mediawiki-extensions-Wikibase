@@ -27,9 +27,9 @@ $messages['en'] = array(
 	'wikibase-remove-inprogress' => 'Removing…',
 	'wikibase-label-edit-placeholder' => 'enter label',
 	'wikibase-description-edit-placeholder' => 'enter description',
-	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 	'wikibase-sitelink-site-edit-placeholder' => 'specify site',
 	'wikibase-sitelink-page-edit-placeholder' => 'specify page',
+	'wikibase-alias-edit-placeholder' => 'enter an alias',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
 	'wikibase-sitelinks' => 'List of pages linked to this item',
@@ -56,6 +56,7 @@ $messages['en'] = array(
 	'wikibase-error-remove-timeout' => 'We are experiencing technical difficulties, and because of this your "remove" could not be completed.',
 	'wikibase-error-autocomplete-connection' => 'Could not query Wikipedia API. Please try again later.',
 	'wikibase-error-autocomplete-response' => 'Server responded: $1',
+	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
 	'wikibase-setting-languages' => 'Additional languages<br />(as fallback when displaying data not available in the main language)',
 
@@ -129,6 +130,7 @@ This is a generic text used as a placeholder while editing a new description. Se
 This is a generic text used as a placeholder while defining the site for a new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
 	'wikibase-sitelink-page-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
 This is a generic text used as a placeholder while defining the page for a possibly new sitelink. See also Wikidatas glossary on [[m:Wikidata/Glossary#sitelink|sitelink]].',
+	'wikibase-alias-edit-placeholder' => 'This is a generic placeholder message used while editing the list of aliases of an item. It is displayed in an empty input box which can be used to defien a new alias.',
 	'wikibase-label-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 I.png|right|0x150px]]
 Bubble help message for entering the label of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-description-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 H.png|right|0x150px]]

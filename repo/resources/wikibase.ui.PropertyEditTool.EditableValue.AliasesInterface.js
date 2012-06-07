@@ -29,6 +29,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.pro
 	 */
 	UI_VALUE_PIECE_CLASS: 'wb-aliases-alias',
 
-	inputPlaceholder: 'Enter an Alias',
+	inputPlaceholder: window.mw.msg( 'wikibase-alias-edit-placeholder' )
 } );
 

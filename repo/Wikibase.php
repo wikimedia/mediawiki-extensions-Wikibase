@@ -288,6 +288,7 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase-description-edit-placeholder',
 		'wikibase-sitelink-site-edit-placeholder',
 		'wikibase-sitelink-page-edit-placeholder',
+		'wikibase-alias-edit-placeholder',
 		'wikibase-label-input-help-message',
 		'wikibase-description-input-help-message',
 		'wikibase-sitelinks-input-help-message',
