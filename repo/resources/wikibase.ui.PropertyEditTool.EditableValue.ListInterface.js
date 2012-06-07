@@ -78,7 +78,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	 * @param string[]
 	 */
 	_getValue_inEditMode: function() {
-		return this._getTagadata().assignedTags();
+		var tagadata = this._getTagadata();
+		var labels = [];
+		var values = this._getTagadata().getTags();
+
+		for( var i in values ) {
+			labels.push( tagadata.getTagLabel( values[i] ) );
+		}
+		return labels;
 	},
 
 	/**

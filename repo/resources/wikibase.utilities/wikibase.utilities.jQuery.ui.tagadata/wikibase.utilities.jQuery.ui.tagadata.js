@@ -107,7 +107,7 @@
 			// Add existing tags from the list, if any.
 			this.tagList.children( 'li' ).each( function() {
 				var newTag = self.createTag( $( this ).html(), $( this ).attr( 'class' ) );
-				self.originalTags.push( self.tagLabel( newTag ) );
+				self.originalTags.push( self.getTagLabel( newTag ) );
 				$( this ).remove();
 			} );
 
@@ -119,11 +119,12 @@
 		},
 
 		/**
-		 * Returns the labels of all tags currently assigned.
+		 * Returns the nodes of all Tags currently assigned. To get the actual text, use getTagLabel() on them.
+		 * If there is a empty tag for inserting a new tag, this won't be returned by this. Use getHelperTag() instead.
 		 *
-		 * @return String[]
+		 * @return jQuery[]
 		 */
-		assignedTags: function() {
+		getTags: function() {
 			// Returns an array of tag string values
 			var self = this;
 			var tags = [];
@@ -131,39 +132,12 @@
 			this.tagList.children( '.tagadata-choice' ).each( function() {
 				// check if already removed but still assigned till animations end. if so, don't add tag!
 				if( !$( this ).hasClass( 'tagadata-choice-removed' ) ) {
-					var label = self.tagLabel( this );
-					if( label !== '' ) {
-						tags.push( label );
+					if( self.getTagLabel( this ) !== '' ) { // don't want the empty helper tag
+						tags.push( this );
 					}
 				}
 			} );
-
 			return tags;
-		},
-
-		_subtractArray: function( a1, a2 ) {
-			var result = [];
-			for( var i = 0; i < a1.length; i++ ) {
-				if( $.inArray( a1[i], a2 ) === -1 ) {
-					result.push( a1[i] );
-				}
-			}
-			return result;
-		},
-
-		/**
-		 * Returns the label of a tag represented by a DOM node.
-		 *
-		 * @param jQuery tag
-		 * @return string
-		 */
-		tagLabel: function( tag ) {
-			// Returns the tag's string label (input can be direct child or inside the label).
-			return this._formatLabel(
-				this.options.editableTags
-					? $( tag ).find( 'input' ).val()
-					: $( tag ).find( '.tagadata-label' ).text()
-			);
 		},
 
 		/**
@@ -176,12 +150,27 @@
 			var self = this;
 			var result = null;
 			this.tagList.children( '.tagadata-choice' ).each( function( i ) {
-				if( self._formatLabel( label ) === self._formatLabel( self.tagLabel( this ) ) ) {
+				if( self._formatLabel( label ) === self._formatLabel( self.getTagLabel( this ) ) ) {
 					result = $( this );
 					return false;
 				}
 			} );
 			return result;
+		},
+
+		/**
+		 * Returns the label of a tag represented by a DOM node.
+		 *
+		 * @param jQuery tag
+		 * @return string
+		 */
+		getTagLabel: function( tag ) {
+			// Returns the tag's string label (input can be direct child or inside the label).
+			return this._formatLabel(
+				this.options.editableTags
+					? $( tag ).find( 'input' ).val()
+					: $( tag ).find( '.tagadata-label' ).text()
+			);
 		},
 
 		/**
@@ -202,6 +191,11 @@
 			return str.toLowerCase();
 		},
 
+		/**
+		 * Highlights a tag for a short time
+		 *
+		 * @param tag
+		 */
 		highlightTag: function( tag ) {
 			// highlight tag visually so the user knows the tag is in the list already
 			// switch to highlighted class...
@@ -271,7 +265,7 @@
 			if( this.options.editableTags ) {
 				var tagMerge = function( tag ) {
 					// find out whether given tag has equivalent and remove it in that case.
-					var tagLabel = self.tagLabel( tag );
+					var tagLabel = self.getTagLabel( tag );
 					var equalTags = self.tagList.find('.tagadata-label input').filter( function() {
 						return $( this ).val() === tagLabel;
 					} );
@@ -318,7 +312,7 @@
 				} )
 				.blur( function( e ) {
 					var tag = input.closest( '.tagadata-choice' );
-					var tagLabel = self.tagLabel( tag );
+					var tagLabel = self.getTagLabel( tag );
 
 					if( ! tagMerge( tag ) ) {
 						return; // tag has equivalent, merged them
@@ -327,17 +321,17 @@
 					// remove tag if it is empty already
 					// tagMerge() doesn't cach this case, where we left a tag empty and there is no tag helper currently!
 					if( self._formatLabel( input.val() ) === ''
-						&& self.assignedTags().length > 1
+						&& self.getTags().length > 1
 						&& ! tag.is( '.tagadata-choice:last' )
 					) {
 						self.removeTag( tag );
 					}
 				} )
 				.keypress( function( event ) {
-						previousLabel = self.tagLabel( tag );
+						previousLabel = self.getTagLabel( tag );
 				} )
 				.keyup( function( event ) {
-					var tagLabel = self.tagLabel( tag );
+					var tagLabel = self.getTagLabel( tag );
 					// check whether key for insertion was triggered
 					if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
 						event.preventDefault();
@@ -408,7 +402,7 @@
 		 */
 		getHelperTag: function() {
 			var tag = this.tagList.find( '.tagadata-choice:last' );
-			if( this.tagLabel( tag ) !== '' ) {
+			if( this.getTagLabel( tag ) !== '' ) {
 				tag = this.createTag( '' );
 			}
 			tag.appendTo( this.tagList ); // make sure helper tag is appended at the end (not the case if '' already exists somewhere else)
@@ -478,7 +472,7 @@
 
 			this.tagList.children( 'li' ).each( function() {
 				var tag = $( this );
-				var text = self.tagLabel( tag );
+				var text = self.getTagLabel( tag );
 				tag
 				.removeClass( 'tagadata-choice tagadata-choice-removed ui-widget-content ui-state-default ui-corner-all ui-state-highlight remove' )
 				.empty()
