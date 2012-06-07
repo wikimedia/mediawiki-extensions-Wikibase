@@ -27,6 +27,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.pro
 	 * @see wikibase.ui.PropertyEditTool.ListInterface.UI_VALUE_PIECE_CLASS
 	 * @const
 	 */
-	UI_VALUE_PIECE_CLASS: 'wb-aliases-alias'
+	UI_VALUE_PIECE_CLASS: 'wb-aliases-alias',
+
+	inputPlaceholder: 'Enter an Alias',
 } );
 

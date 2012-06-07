@@ -43,20 +43,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 			animate: false, // FIXME: when animated set to true, something won't work in there, fails silently then
 			placeholderText: this.inputPlaceholder,
 			tagRemoved: $.proxy( this._onInputRegistered, this )
-		} );
+		} )
 
 		// register event after initial tags were added on tag-a-data initialization!
-		var newPieceHandler = $.proxy( function( e, tag ) {
-			$( tag )
-			.addClass( this.UI_VALUE_PIECE_CLASS )
-			.addClass( this.UI_VALUE_PIECE_CLASS + '-new' );
+		.on( 'tagadatatagadded tagadatatagchanged', $.proxy( function( e, tag ) {
 			this._onInputRegistered();
-		}, this );
-
-		inputElement.on( 'tagadatatagadded', newPieceHandler );
-
-		// make sure the input helper (first, empty element) gets the treatment already:
-		newPieceHandler( null, inputElement.data( 'tagadata' ).getHelperTag() );
+		}, this ) );
 
 		return inputElement;
 	},

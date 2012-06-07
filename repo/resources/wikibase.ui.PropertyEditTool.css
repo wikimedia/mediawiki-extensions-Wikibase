@@ -205,7 +205,7 @@ td.wb-ui-propertyedittool-editablevalue-toolbarparent {
 	text-align: right;
 }
 
-.wb-aliases-alias-new .tagadata-label-text {
+.wb-ui-propertyedittool-editablevaluelistinterface li.tagadata-choice-modified .tagadata-label-text {
 	/* highlight new aliases while in edit mode */
 	text-decoration: underline;
 }
