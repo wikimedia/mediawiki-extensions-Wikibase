@@ -83,6 +83,7 @@
 			tagAdded: null,
 			beforeTagRemoved: null,
 			tagRemoved: null,
+			tagChanged: null,
 			tagClicked: null
 		},
 
@@ -92,6 +93,7 @@
 			var self = this;
 
 			this.tagList = this.element.find( 'ul, ol' ).andSelf().last();
+			this.originalTags = [];
 
 			this.options.tagSource = this.options.tagSource || function( search, showChoices ) {
 				var filter = search.term.toLowerCase();
@@ -120,7 +122,8 @@
 
 			// Add existing tags from the list, if any.
 			this.tagList.children( 'li' ).each( function() {
-				self.createTag( $( this ).html(), $( this ).attr( 'class' ) );
+				var newTag = self.createTag( $( this ).html(), $( this ).attr( 'class' ) );
+				self.originalTags.push( self.tagLabel( newTag ) );
 				$( this ).remove();
 			} );
 
@@ -169,9 +172,11 @@
 		 */
 		tagLabel: function( tag ) {
 			// Returns the tag's string label (input can be direct child or inside the label).
-			return this.options.editableTags
-				? $( tag ).find( 'input' ).val()
-				: $( tag ).find( '.tagadata-label' ).text();
+			return this._formatLabel(
+				this.options.editableTags
+					? $( tag ).find( 'input' ).val()
+					: $( tag ).find( '.tagadata-label' ).text()
+			);
 		},
 
 		/**
@@ -295,6 +300,8 @@
 					return true;
 				};
 
+				var previousLabel; // for determining whether label has changed
+
 				// input is the actual visible content
 				input.attr( {
 					type: 'text',
@@ -316,13 +323,18 @@
 						self.removeTag( tag );
 					}
 				} )
-				.keydown( function( event ) {
+				.keypress( function( event ) {
+						previousLabel = self.tagLabel( tag );
+				} )
+				.keyup( function( event ) {
+					var tagLabel = self.tagLabel( tag );
+
 					// check whether key for insertion was triggered
 					if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
 						event.preventDefault();
 						var targetTag = self.getHelperTag();
 
-						if( self._formatLabel( input.val() ) === '' ) {
+						if( tagLabel === '' ) {
 							// enter hit on an empty tag, remove it...
 
 							if( targetTag[0] !== tag[0] ) { // ... except for the helper tag
@@ -331,6 +343,17 @@
 							}
 						}
 						targetTag.find( 'input' ).focus();
+					}
+
+					// Check whether the tag is modified/new compared to initial state:
+					if( $.inArray( tagLabel, self.originalTags ) < 0 ) {
+						tag.addClass( 'tagadata-choice-modified' );
+					} else {
+						tag.removeClass( 'tagadata-choice-modified' );
+					}
+
+					if( tagLabel !== previousLabel ) {
+						self._trigger( 'tagChanged', tag, previousLabel );
 					}
 				} )
 				.appendTo( label );
