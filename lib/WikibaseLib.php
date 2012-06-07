@@ -65,11 +65,9 @@ $wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
 // includes/changes
-$wgAutoloadClasses['Wikibase\AliasChange'] 			= $dir . 'includes/changes/AliasChange.php';
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
 $wgAutoloadClasses['Wikibase\ItemChange'] 			= $dir . 'includes/changes/ItemChange.php';
 $wgAutoloadClasses['Wikibase\ItemMapChange'] 		= $dir . 'includes/changes/ItemMapChange.php';
-$wgAutoloadClasses['Wikibase\SitelinkChange'] 		= $dir . 'includes/changes/SitelinkChange.php';
 
 // includes/diff
 $wgAutoloadClasses['Wikibase\DiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
