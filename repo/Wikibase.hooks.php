@@ -52,6 +52,7 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
 
+		$files[] = $testDir . 'ChangeNotifierTest.php';
 		$files[] = $testDir . 'EntityHandlerTest.php';
 		$files[] = $testDir . 'ItemDeletionUpdateTest.php';
 		$files[] = $testDir . 'ItemHandlerTest.php';

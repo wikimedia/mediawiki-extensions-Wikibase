@@ -74,6 +74,17 @@ class ChangeNotifier {
 	}
 
 	/**
+	 * Returns if a transaction is open or not.
+	 *
+	 * @since 0.1
+	 *
+	 * @return bool
+	 */
+	public function isInTranscation() {
+		return $this->inTranscation;
+	}
+
+	/**
 	 * Handles the provided change.
 	 *
 	 * @since 0.1
@@ -98,7 +109,11 @@ class ChangeNotifier {
 	public function handleChanges( array $changes ) {
 		if ( $changes !== array() ) {
 			if ( $this->inTranscation ) {
-				$this->changes = array_merge( $this->changes, $changes );
+				foreach ( $changes as $change ) {
+					if ( !$change->isEmpty() ) {
+						$this->changes[] = $change;
+					}
+				}
 			}
 			else {
 				$dbw = wfGetDB( DB_MASTER );
