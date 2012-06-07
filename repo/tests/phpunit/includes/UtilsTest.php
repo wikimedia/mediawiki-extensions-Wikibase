@@ -20,7 +20,7 @@ use Wikibase\Sites as Sites;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class UtilsTests extends \MediaWikiTestCase {
+class UtilsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
