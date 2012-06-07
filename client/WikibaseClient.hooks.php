@@ -69,8 +69,8 @@ final class ClientHooks {
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
 		$changeHandlers = array(
-			'sitelink' => array( __CLASS__, 'onWikibaseItemChange' ),
-			'alias' => array( __CLASS__, 'onWikibaseItemChange' ),
+			'item' => array( __CLASS__, 'onWikibaseItemChange' ),
+			'query' => array( __CLASS__, 'onWikibaseQueryChange' ),
 		);
 
 		if ( array_key_exists( $change->getType(), $changeHandlers ) ) {
@@ -98,6 +98,10 @@ final class ClientHooks {
 	public static function onWikibaseItemChange( ItemChange $change ) {
 		$localItem = LocalItem::newFromItem( $change->getItem() );
 		$localItem->save();
+	}
+
+	public static function onWikibaseQueryChange( $change ) {
+		// TODO
 	}
 
 }
