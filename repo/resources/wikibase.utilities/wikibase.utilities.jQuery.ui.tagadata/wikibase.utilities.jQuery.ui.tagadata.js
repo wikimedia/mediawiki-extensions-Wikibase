@@ -36,7 +36,6 @@
 			itemName: 'item',
 			fieldName: 'tags',
 			availableTags: [],
-			tagSource: null,
 
 			/**
 			 * Defines whether the tags can be altered at all times. If true, the tags contain input boxes so it can
@@ -95,21 +94,6 @@
 			this.tagList = this.element.find( 'ul, ol' ).andSelf().last();
 			this.originalTags = [];
 
-			this.options.tagSource = this.options.tagSource || function( search, showChoices ) {
-				var filter = search.term.toLowerCase();
-				var choices = $.grep( this.options.availableTags, function( element ) {
-					// Only match autocomplete options self begin with the search term.
-					// (Case insensitive.)
-					return (element.toLowerCase().indexOf( filter ) === 0);
-				} );
-				showChoices( this._subtractArray( choices, this.assignedTags() ) );
-			};
-
-			// Bind tagSource callback functions to this context.
-			if( $.isFunction( this.options.tagSource ) ) {
-				this.options.tagSource = $.proxy( this.options.tagSource, this );
-			}
-
 			this.tagList
 			.addClass( 'tagadata' )
 			.addClass( 'ui-widget ui-widget-content ui-corner-all' )
@@ -147,7 +131,10 @@
 			this.tagList.children( '.tagadata-choice' ).each( function() {
 				// check if already removed but still assigned till animations end. if so, don't add tag!
 				if( !$( this ).hasClass( 'tagadata-choice-removed' ) ) {
-					tags.push( self.tagLabel( this ) );
+					var label = self.tagLabel( this );
+					if( label !== '' ) {
+						tags.push( label );
+					}
 				}
 			} );
 
@@ -258,7 +245,6 @@
 
 
 			var input = ( $( '<input>', {
-				placeholder: this.options.placeholderText,
 				name: this.options.itemName + '[' + this.options.fieldName + '][]'
 			} ) );
 
@@ -283,7 +269,7 @@
 			tag.append( removeTag );
 
 			if( this.options.editableTags ) {
-				var tagCheck = function( tag ) {
+				var tagMerge = function( tag ) {
 					// find out whether given tag has equivalent and remove it in that case.
 					var tagLabel = self.tagLabel( tag );
 					var equalTags = self.tagList.find('.tagadata-label input').filter( function() {
@@ -293,7 +279,9 @@
 						// remove given tag
 						equalTags = equalTags.not( tag.find('.tagadata-label input') );
 						// remove given tag and highlight the other one
-						self.highlightTag( $( equalTags[0] ).closest( '.tagadata-choice' ) );
+						if( tagLabel !== '' ) {
+							self.highlightTag( $( equalTags[0] ).closest( '.tagadata-choice' ) );
+						}
 						self.removeTag( tag );
 						return false;
 					}
@@ -301,6 +289,26 @@
 				};
 
 				var previousLabel; // for determining whether label has changed
+				var addPlaceholder = function() {
+					if( self.options.placeholderText ) {
+						input.attr( 'placeholder', self.options.placeholderText );
+						if( input.inputAutoExpand ) {
+							input.inputAutoExpand();
+						}
+					}
+				};
+				var removePlaceholder = function() {
+					if( self.options.placeholderText ) {
+						input.removeAttr( 'placeholder' );
+						if( input.inputAutoExpand ) {
+							input.inputAutoExpand();
+						}
+					}
+				};
+
+				if( value === '' ) {
+					addPlaceholder();
+				}
 
 				// input is the actual visible content
 				input.attr( {
@@ -310,12 +318,25 @@
 				} )
 				.blur( function( e ) {
 					var tag = input.closest( '.tagadata-choice' );
+					var tagLabel = self.tagLabel( tag );
 
-					if( ! tagCheck( tag ) ) {
-						return false;
+					if( ! tagMerge( tag ) ) {
+						return; // tag has equivalent, merged them
+					}
+
+					if( tag.is( '.tagadata-choice:last' ) ) {
+						// Tag is completely emty now and the last one, consider it the helper tag:
+						if( tagLabel === '' ) {
+							addPlaceholder();
+							tag.addClass( 'tagadata-choice-empty' );
+						} else {
+							removePlaceholder();
+							tag.removeClass( 'tagadata-choice-empty' );
+						}
 					}
 
 					// remove tag if it is empty already
+					// tagMerge() doesn't cach this case, where we left a tag empty and there is no tag helper currently!
 					if( self._formatLabel( input.val() ) === ''
 						&& self.assignedTags().length > 1
 						&& ! tag.is( '.tagadata-choice:last' )
@@ -328,6 +349,8 @@
 				} )
 				.keyup( function( event ) {
 					var tagLabel = self.tagLabel( tag );
+
+
 
 					// check whether key for insertion was triggered
 					if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
@@ -375,9 +398,7 @@
 			this._trigger( 'tagAdded', null, tag );
 
 			if( input.inputAutoExpand ) { // if auto expand is available, use it for tags!
-				input.inputAutoExpand( {
-
-				} );
+				input.inputAutoExpand();
 			}
 
 			return tag;
@@ -393,7 +414,23 @@
 			if( this.tagLabel( tag ) !== '' ) {
 				tag = this.createTag( '' );
 			}
+			tag.appendTo( this.tagList ); // make sure helper tag is appended at the end (not the case if '' already exists somewhere else)
+
+			this.tagList.children().removeClass( 'tagadata-choice-empty' );
+			tag.addClass( 'tagadata-choice-empty' );
+
 			return tag;
+		},
+
+		/**
+		 * Returns whether the given tag is the helper tag. Doesn NOT create a helper tag if it isn't.
+		 *
+		 * @param tag jQuery
+		 * @return Boolean
+		 */
+		isHelperTag: function( tag ) {
+			var helperTab = this.tagList.find( '.tagadata-choice:last' );
+			return tag[0] === helperTab;
 		},
 
 		/**

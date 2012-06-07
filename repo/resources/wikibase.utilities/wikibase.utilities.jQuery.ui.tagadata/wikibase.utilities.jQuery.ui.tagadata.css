@@ -15,9 +15,6 @@ ul.tagadata li.tagadata-choice {
     position: relative;
     line-height: inherit;
 }
-ul.tagadata li.tagadata-new {
-    padding: .25em 4px .25em 0;
-}
 
 ul.tagadata .tagadata-label-clickable {
     cursor: pointer;
@@ -52,8 +49,9 @@ ul.tagadata li.tagadata-choice .tagadata-label input {
 	outline: none;
 }
 
-ul.tagadata li.tagadata-choice .tagadata-label input:focus {
-	background-color: white;
+ul.tagadata li.tagadata-choice .tagadata-label input:focus,
+ul.tagadata li.tagadata-choice-empty input {
+	background-color: white!important;
 }
 
 ul.tagadata li.tagadata-choice-existing {}
