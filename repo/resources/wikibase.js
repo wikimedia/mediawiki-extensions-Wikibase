@@ -28,7 +28,7 @@ window.wikibase = new( function() {
 		window.location =  newItemTitle.getUrl() + '?wbitemcreated=yes';
 		// TODO: this is not yet near perfect and a proper workflow hast to be created. The redirect as of now is
 		//       rather ugly in its presentation to the user.
-	}
+	};
 	$( this ).on( 'NewItemCreated', onNewItemCreated );
 
 
@@ -54,9 +54,11 @@ window.wikibase = new( function() {
 		this._siteList = {};
 		
 		for( var siteId in sitesDetails ) {
-			var site = sitesDetails[ siteId ];
-			site.id = siteId;
-			this._siteList[ siteId ] =  new window.wikibase.Site( site );
+			if( sitesDetails.hasOwnProperty( siteId ) ) {
+				var site = sitesDetails[ siteId ];
+				site.id = siteId;
+				this._siteList[ siteId ] =  new window.wikibase.Site( site );
+			}
 		}
 		
 		return this._siteList;

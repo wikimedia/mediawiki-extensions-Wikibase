@@ -37,7 +37,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
 	 */
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
+		return mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
 	/**
@@ -47,7 +47,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
 		return $.extend( params, {
 			action: 'wbsetlanguageattribute',
-			language: window.mw.config.get( 'wgUserLanguage' ),
+			language: mw.config.get( 'wgUserLanguage' ),
 			description: this.getValue().toString()
 		} );
 	}

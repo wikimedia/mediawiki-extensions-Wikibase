@@ -32,7 +32,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 		interfaces[0].autoExpand = true;
 
 		interfaces[0].normalize = function( value ) {
-			var value = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
+			value = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
 			value = value.replace( /\s+/g, ' ' ); // make sure we don't ever allow several spaces in the items label
 			return value;
 		};
@@ -44,7 +44,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
 	 */
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
+		return mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
 	/**
@@ -54,7 +54,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
 		return $.extend( params, {
 			action: "wbsetlanguageattribute",
-			language: window.mw.config.get( 'wgUserLanguage' ),
+			language: mw.config.get( 'wgUserLanguage' ),
 			label: this.getValue().toString()
 		} );
 	}

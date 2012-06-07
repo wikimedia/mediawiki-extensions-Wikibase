@@ -171,7 +171,7 @@ window.wikibase.ui.Tooltip.prototype = {
 					'class': 'ui-icon ui-icon-triangle-1-e'
 				} ) )
 				.append( $( '<span/>', {
-					text: window.mw.msg( 'wikibase-tooltip-error-details' )
+					text: mw.msg( 'wikibase-tooltip-error-details' )
 				} ) )
 			)
 			.after( $( '<div/>', {

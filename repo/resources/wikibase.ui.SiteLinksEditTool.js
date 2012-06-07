@@ -52,7 +52,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	_initToolbar: function() {
 		window.wikibase.ui.PropertyEditTool.prototype._initToolbar.call( this );
 		// change message appearing when all language links are represented within the list
-		this._toolbar.lblFull.setContent( '&nbsp;- ' + window.mw.msg( 'wikibase-sitelinksedittool-full' ) );
+		this._toolbar.lblFull.setContent( '&nbsp;- ' + mw.msg( 'wikibase-sitelinksedittool-full' ) );
 	},
 
 	_buildSingleValueToolbar: function( editableValue ) {
@@ -103,7 +103,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.prototype.isFull
 	 */
 	isFull: function() {
-		var allSites = wikibase.getSites();
+		var allSites = window.wikibase.getSites();
 		var usedSites = this.getRepresentedSites();
 		
 		// FIXME: in case we have sites in the DB which were removed at some point, this check will
@@ -176,7 +176,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @return wikibase.Site[]
 	 */
 	getRepresentedSites: function() {
-		var sites = new Array();
+		var sites = [];
 		
 		for( var i in this._editableValues ) {
 			var editableSiteLink = this._editableValues[ i ];

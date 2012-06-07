@@ -92,20 +92,20 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.Toolbar.Button;
 		
-		this.btnEdit = new button( window.mw.msg( 'wikibase-edit' ) );
+		this.btnEdit = new button( mw.msg( 'wikibase-edit' ) );
 		this.btnEdit.onAction = this._editActionHandler();
 		
-		this.btnCancel = new button( window.mw.msg( 'wikibase-cancel' ) );
+		this.btnCancel = new button( mw.msg( 'wikibase-cancel' ) );
 		this.btnCancel.onAction = this._cancelActionHandler();
 
-		this.btnSave = new button( window.mw.msg( 'wikibase-save' ) );
+		this.btnSave = new button( mw.msg( 'wikibase-save' ) );
 		this.btnSave.onAction = this._saveActionHandler();
 
 		// add 'edit' button only for now:
 		this.innerGroup.addElement( this.btnEdit );
 
 		// initialize remove button:
-		this.btnRemove = new button( window.mw.msg( 'wikibase-remove' ) );
+		this.btnRemove = new button( mw.msg( 'wikibase-remove' ) );
 		this.btnRemove.onAction = this._removeActionHandler();
 		if ( this.displayRemoveButton ) {
 			this.innerGroup.addElement( this.btnRemove );
@@ -160,27 +160,27 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 
 	destroy: function() {
 		window.wikibase.ui.Toolbar.Group.prototype.destroy.call( this );
-		if ( this.innerGroup != null ) {
+		if ( this.innerGroup !== null ) {
 			this.innerGroup.destroy();
 			this.innerGroup = null;
 		}
-		if ( this.tooltipAnchor != null ) {
+		if ( this.tooltipAnchor !== null ) {
 			this.tooltipAnchor.destroy();
 			this.tooltipAnchor = null;
 		}
-		if ( this.btnEdit != null ) {
+		if ( this.btnEdit !== null ) {
 			this.btnEdit.destroy();
 			this.btnEdit = null;
 		}
-		if ( this.btnCancel != null ) {
+		if ( this.btnCancel !== null ) {
 			this.btnCancel.destroy();
 			this.btnCancel = null;
 		}
-		if ( this.btnSave != null ) {
+		if ( this.btnSave !== null ) {
 			this.btnSave.destroy();
 			this.btnSave = null;
 		}
-		if ( this.btnRemove != null ) {
+		if ( this.btnRemove !== null ) {
 			this.btnRemove.destroy();
 			this.btnRemove = null;
 		}
