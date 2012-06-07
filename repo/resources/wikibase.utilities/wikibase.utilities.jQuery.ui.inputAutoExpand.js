@@ -50,7 +50,8 @@
 				inputAE.setOptions( options );
 			} else {
 				// initialize new auto expand:
-				new AutoExpandInput( this, fullOptions );
+				var autoExpandInput = new AutoExpandInput( this, fullOptions );
+				$( this ).data( 'AutoExpandInput', autoExpandInput );
 			}
 		} );
 
@@ -69,11 +70,28 @@
 		this._val = this.input.val();
 		this._o = options;
 
-		this.input.data( 'AutoExpandInput', this );
-
 		this.expand(); // calculate width initially
 
 		var self = this;
+
+		var domCheck = function() {
+			if( ! self.input.closest( 'html' ).length ) {
+				// if input is not in DOM...
+				self._val = null; // ... make sure events will be triggered as soon as it is and one event is triggered
+				return false;
+			}
+			return true;
+		};
+
+		if( ! domCheck() ) {
+			// use timeout till input is in DOM. This might not be the prettiest way but seems necessary in some situations.
+			window.setTimeout( function() {
+				if( domCheck() ) {
+					window.clearTimeout( this );
+					self.expand();
+				}
+			}, 10 );
+		}
 
 		// set width on all important related events:
 		$( this.input )
@@ -230,7 +248,8 @@
 				.replace(/>/g, '&gt;')
 				.replace(/\s/g,'&nbsp;')
 			);
-			var rulerWidth = ruler.width();
+			// consider padding of input
+			var rulerWidth = ruler.width() + ( input.innerWidth() - input.width() );
 			ruler.remove();
 
 			return rulerWidth;
@@ -269,7 +288,7 @@
 			if( width === false ) {
 				// automatic comfort zone, calculate
 				// average of some usually broader characters
-				width = this.getWidthFor( '@%_MW' ) / 5 * 1.5;
+				width = this.getWidthFor( '@%_MW' ) / 5 * 1.25;
 			}
 			return this._normalizeWidth( width );
 		},
