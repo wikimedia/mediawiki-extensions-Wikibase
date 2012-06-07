@@ -953,21 +953,4 @@ class Item extends Entity {
 		return $str;
 	}
 
-	/**
-	 * @see Content::getSecondaryDataUpdates
-	 *
-	 * @since 0.1
-	 *
-	 * @param \Title $title
-	 * @param \Content|null $old
-	 * @param bool $recursive
-	 *
-	 * @return array of \DataUpdate
-	 */
-	public function getSecondaryDataUpdates( Title $title, Content $old = null, $recursive = false ) {
-		return array(
-			new ItemStructuredSave( $this->item, $this->getContext()->getTitle() )
-		);
-	}
-
 }
