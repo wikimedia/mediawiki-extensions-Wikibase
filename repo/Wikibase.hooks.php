@@ -183,9 +183,9 @@ final class WikibaseHooks {
 			$diff = new Wikibase\ItemDiff( $oldItem, $newItem );
 
 			if ( $diff->hasChanges() ) {
-				$dbw = wfGetDB( DB_MASTER );
+				$changeNotifier = \Wikibase\ChangeNotifier::singleton();
 
-				$dbw->begin();
+				$changeNotifier->begin();
 
 				foreach ( $diff->getChanges() as /* Wikibase\Change */ $change ) {
 					$change->setFields( array(
@@ -195,10 +195,10 @@ final class WikibaseHooks {
 						'time' => $revision->getTimestamp(),
 					) );
 
-					$change->save();
+					$changeNotifier->handleChange( $change );
 				}
 
-				$dbw->commit();
+				$changeNotifier->commit();
 			}
 		}
 

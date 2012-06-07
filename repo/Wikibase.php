@@ -85,6 +85,7 @@ $wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
+$wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\DifferenceEngine'] 		= $dir . 'includes/DifferenceEngine.php';
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
 $wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/ItemDeletionUpdate.php';
