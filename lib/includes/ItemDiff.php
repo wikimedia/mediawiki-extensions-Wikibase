@@ -109,52 +109,27 @@ class ItemDiff extends EntityDiff {
 	}
 
 	/**
-	 * Returns a SitelinkChange object constructed from the sitelink differences.
+	 * Returns a MapDiff object with the sitelink differences.
 	 *
 	 * @since 0.1
 	 *
-	 * @return SitelinkChange
+	 * @return MapDiff
 	 */
-	public function getSiteLinkChange() {
+	public function getSiteLinkDiff() {
 		$this->diffSiteLinks();
-		return SitelinkChange::newFromDiff( $this->newItem, $this->siteLinkDiff );
+		return $this->siteLinkDiff;
 	}
 
 	/**
-	 * Returns a AliasChange object constructed from the aliases differences.
+	 * Returns a MapDiff object with the aliases differences.
 	 *
 	 * @since 0.1
 	 *
-	 * @return AliasChange
+	 * @return MapDiff
 	 */
-	public function getAliasesChange() {
+	public function getAliasesDiff() {
 		$this->diffAliases();
-		return AliasChange::newFromDiff( $this->newItem, $this->aliasDiff );
-	}
-
-	/**
-	 * Returns a list of Change objects representing all changes
-	 * made to the item. No change objects are constructed for
-	 * fields where no changes where made (ie those where the diff is empty).
-	 *
-	 * @since 0.1
-	 *
-	 * @return array of Wikibase\Change
-	 */
-	public function getChanges() {
-		if ( $this->changes === false ) {
-			$this->changes = array();
-
-			if ( $this->hasAliasChanges() ) {
-				$this->changes[] = $this->getAliasesChange();
-			}
-
-			if ( $this->hasSiteLinkChanges() ) {
-				$this->changes[] = $this->getSiteLinkChange();
-			}
-		}
-
-		return $this->changes;
+		return $this->aliasDiff;
 	}
 
 	/**
@@ -164,8 +139,9 @@ class ItemDiff extends EntityDiff {
 	 *
 	 * @return boolean
 	 */
-	public function hasChanges() {
-		return $this->getChanges() !== array();
+	public function isEmpty() {
+		return $this->getSiteLinkDiff()->isEmpty()
+			&& $this->getAliasesDiff()->isEmpty();
 	}
 
 }
