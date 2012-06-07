@@ -116,11 +116,9 @@ $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/Specia
 $wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/SpecialItemByLabel.php';
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
-
-
 // tests
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemTest'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemTest.php';
-$wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/includes/TestItems.php';
+
 
 
 

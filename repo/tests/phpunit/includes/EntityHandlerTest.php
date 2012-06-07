@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- *  Tests for the Wikibase\Entity class.
+ *  Tests for the Wikibase\EntityHandler class.
  *
  * @file
  * @since 0.1
@@ -18,7 +18,7 @@ namespace Wikibase\Test;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class EntityTests extends \MediaWikiTestCase {
+class EntityHandlerTest extends \MediaWikiTestCase {
 
 	public function testGetModelName()  {
 		// this should not do anything usefull, except checking that its there

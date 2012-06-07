@@ -52,28 +52,17 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
 
-		$files[] = $testDir . 'EntityTests.php';
+		$files[] = $testDir . 'EntityHandlerTest.php';
 		$files[] = $testDir . 'ItemDeletionUpdateTest.php';
-		$files[] = $testDir . 'ItemTests.php';
-		$files[] = $testDir . 'ItemViewTests.php';
-		$files[] = $testDir . 'SiteTests.php';
-		$files[] = $testDir . 'SitesTests.php';
-		$files[] = $testDir . 'UtilsTests.php';
+		$files[] = $testDir . 'ItemHandlerTest.php';
+		$files[] = $testDir . 'ItemViewTest.php';
+		$files[] = $testDir . 'UtilsTest.php';
 
 		// api
 		$files[] = $testDir . 'api/ApiJSONPTests.php';
 		$files[] = $testDir . 'api/ApiLanguageAttributeTest.php';
-		#$files[] = $testDir . 'api/ApiModifyItemTest.php'; #abstract base class, rename!
 		$files[] = $testDir . 'api/ApiSetAliasesTest.php';
 		$files[] = $testDir . 'api/ApiSetItemTests.php';
-
-		// wikibaseitem
-		$files[] = $testDir . 'Item/ItemContentHandlerTests.php';
-		$files[] = $testDir . 'Item/ItemMoveTests.php';
-		$files[] = $testDir . 'Item/ItemMultilangTextsTests.php';
-		$files[] = $testDir . 'Item/ItemNewEmptyTests.php';
-		$files[] = $testDir . 'Item/ItemNewFromArrayTests.php';
-		$files[] = $testDir . 'Item/ItemTests.php';
 
 		return true;
 	}
