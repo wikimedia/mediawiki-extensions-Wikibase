@@ -324,17 +324,6 @@
 						return; // tag has equivalent, merged them
 					}
 
-					if( tag.is( '.tagadata-choice:last' ) ) {
-						// Tag is completely emty now and the last one, consider it the helper tag:
-						if( tagLabel === '' ) {
-							addPlaceholder();
-							tag.addClass( 'tagadata-choice-empty' );
-						} else {
-							removePlaceholder();
-							tag.removeClass( 'tagadata-choice-empty' );
-						}
-					}
-
 					// remove tag if it is empty already
 					// tagMerge() doesn't cach this case, where we left a tag empty and there is no tag helper currently!
 					if( self._formatLabel( input.val() ) === ''
@@ -349,9 +338,6 @@
 				} )
 				.keyup( function( event ) {
 					var tagLabel = self.tagLabel( tag );
-
-
-
 					// check whether key for insertion was triggered
 					if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
 						event.preventDefault();
@@ -368,14 +354,25 @@
 						targetTag.find( 'input' ).focus();
 					}
 
-					// Check whether the tag is modified/new compared to initial state:
-					if( $.inArray( tagLabel, self.originalTags ) < 0 ) {
-						tag.addClass( 'tagadata-choice-modified' );
-					} else {
-						tag.removeClass( 'tagadata-choice-modified' );
-					}
-
 					if( tagLabel !== previousLabel ) {
+						// Check whether the tag is modified/new compared to initial state:
+						if( $.inArray( tagLabel, self.originalTags ) < 0 ) {
+							tag.addClass( 'tagadata-choice-modified' );
+						} else {
+							tag.removeClass( 'tagadata-choice-modified' );
+						}
+
+						if( tag.is( '.tagadata-choice:last' ) ) {
+							// Tag is completely emty now and the last one, consider it the helper tag:
+							if( tagLabel === '' ) {
+								addPlaceholder();
+								tag.addClass( 'tagadata-choice-empty' );
+							} else {
+								removePlaceholder();
+								tag.removeClass( 'tagadata-choice-empty' );
+							}
+						}
+
 						self._trigger( 'tagChanged', tag, previousLabel );
 					}
 				} )

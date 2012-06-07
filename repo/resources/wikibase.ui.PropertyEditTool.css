@@ -209,3 +209,7 @@ td.wb-ui-propertyedittool-editablevalue-toolbarparent {
 	/* highlight new aliases while in edit mode */
 	text-decoration: underline;
 }
+
+ul.tagadata li.tagadata-choice-empty .tagadata-label-text {
+	text-decoration:none; /* don't underline when only placeholder is displayed */
+}
