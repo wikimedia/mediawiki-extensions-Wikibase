@@ -34,21 +34,27 @@ class ChangesTest extends \MediaWikiTestCase {
 		return array(
 			array(
 				array(
-					'type' => 'sitelink',
+					'type' => 'item',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
-					'info' => MapDiff::newEmpty()
+					'info' => array(
+						'item' => \Wikibase\Item::newEmpty(),
+						'diff' => \Wikibase\ItemDiff::newEmpty(),
+					)
 				),
 				true
 			),
 			array(
 				array(
-					'type' => 'alias',
+					'type' => 'item',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
-					'info' => ListDiff::newEmpty()
+					'info' => array(
+						'item' => \Wikibase\Item::newEmpty(),
+						'diff' => \Wikibase\ItemDiff::newEmpty(),
+					)
 				),
 				true
 			),

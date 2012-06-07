@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Class representing a change that can be represented as a MapDiff to an item.
+ * Class for changes that can be represented as a IDiff.
  *
  * @since 0.1
  *
@@ -13,12 +13,12 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemMapChange extends ItemChange {
+class DiffChange extends Change {
 
 	/**
 	 * @since 0.1
 	 *
-	 * @return MapDiff
+	 * @return IDiff
 	 * @throws \MWException
 	 */
 	public function getDiff() {
@@ -34,31 +34,29 @@ class ItemMapChange extends ItemChange {
 	/**
 	 * @since 0.1
 	 *
-	 * @param MapDiff $diff
+	 * @param IDiff $diff
 	 */
-	public function setDiff( MapDiff $diff ) {
+	public function setDiff( IDiff $diff ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		$info['diff'] = $diff;
-		return $this->setField( 'info', $info );
+		$this->setField( 'info', $info );
 	}
 
 	/**
 	 * @since 0.1
 	 *
-	 * @param Item $item
-	 * @param MapDiff $diff
+	 * @param IDiff $diff
 	 * @param array|null $fields
 	 *
-	 * @return ItemMapChange
+	 * @return DiffChange
 	 */
-	public static function newFromDiff( Item $item, MapDiff $diff, array $fields = null ) {
+	public static function newFromDiff( IDiff $diff, array $fields = null ) {
 		$instance = new static(
 			Changes::singleton(),
 			$fields,
 			true
 		);
 
-		$instance->setItem( $item );
 		$instance->setDiff( $diff );
 
 		return $instance;

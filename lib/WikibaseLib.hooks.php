@@ -53,8 +53,8 @@ final class WikibaseLibHooks {
 			'Site',
 			'Sites',
 
-//			'changes/AliasChange',
-//			'changes/SitelinkChange',
+			'changes/DiffChange',
+			'changes/ItemChange',
 
 			'diff/Diff',
 			'diff/ListDiff',

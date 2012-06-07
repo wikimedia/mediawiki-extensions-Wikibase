@@ -66,16 +66,16 @@ $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
 // includes/changes
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
+$wgAutoloadClasses['Wikibase\DiffChange'] 			= $dir . 'includes/changes/DiffChange.php';
 $wgAutoloadClasses['Wikibase\ItemChange'] 			= $dir . 'includes/changes/ItemChange.php';
-$wgAutoloadClasses['Wikibase\ItemMapChange'] 		= $dir . 'includes/changes/ItemMapChange.php';
 
 // includes/diff
 $wgAutoloadClasses['Wikibase\DiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
+$wgAutoloadClasses['Wikibase\IDiff'] 				= $dir . 'includes/diff/IDiff.php';
 $wgAutoloadClasses['Wikibase\IDiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
 $wgAutoloadClasses['Wikibase\DiffOpAdd'] 			= $dir . 'includes/diff/DiffOpAdd.php';
 $wgAutoloadClasses['Wikibase\DiffOpChange'] 		= $dir . 'includes/diff/DiffOpChange.php';
 $wgAutoloadClasses['Wikibase\Diff'] 				= $dir . 'includes/diff/Diff.php';
-$wgAutoloadClasses['Wikibase\IDiff'] 				= $dir . 'includes/diff/Diff.php';
 $wgAutoloadClasses['Wikibase\DiffOpRemove'] 		= $dir . 'includes/diff/DiffOpRemove.php';
 $wgAutoloadClasses['Wikibase\ListDiff'] 			= $dir . 'includes/diff/ListDiff.php';
 $wgAutoloadClasses['Wikibase\MapDiff'] 				= $dir . 'includes/diff/MapDiff.php';

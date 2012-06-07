@@ -3,28 +3,6 @@
 namespace Wikibase;
 
 /**
- * Interface for diffs. Diffs are collections of IDiffOp objects.
- *
- * @since 0.1
- *
- * @file
- * @ingroup WikibaseLib
- * @ingroup WikibaseDiff
- *
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
-interface IDiff {
-
-	function __construct( array $operations );
-
-	function getAdditions();
-
-	function getRemovals();
-
-}
-
-/**
  * Base class for diffs. Diffs are collections of IDiffOp objects.
  *
  * TODO: since this is an ArrayIterator, people can just add stuff using $diff[] = $diffOp.
@@ -70,6 +48,10 @@ class Diff extends \ArrayIterator implements IDiff {
 		$this->parentKey = $parentKey;
 		$this->addOperations( $operations );
 		$this->rewind();
+	}
+
+	public function getOperations() {
+		return $this->operations;
 	}
 
 	/**

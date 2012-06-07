@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemChange extends Change {
+class ItemChange extends DiffChange {
 
 	/**
 	 * @since 0.1
@@ -43,53 +43,6 @@ class ItemChange extends Change {
 	}
 
 	/**
-	 * Returns whether the change is empty.
-	 * If it's empty, it can be ignored.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function isEmpty() {
-		if ( $this->hasField( 'info' ) ) {
-			$info = $this->getField( 'info' );
-
-			if ( array_key_exists( 'diff', $info ) ) {
-				return !$this->getDiff()->hasChanges();
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @return ItemDiff
-	 * @throws \MWException
-	 */
-	public function getDiff() {
-		$info = $this->getField( 'info' );
-
-		if ( !array_key_exists( 'diff', $info ) ) {
-			throw new \MWException( 'Cannot get the diff when it has not been set yet.' );
-		}
-
-		return $info['diff'];
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @param ItemDiff $diff
-	 */
-	public function setDiff( ItemDiff $diff ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$info['diff'] = $diff;
-		$this->setField( 'info', $info );
-	}
-
-	/**
 	 * @since 0.1
 	 *
 	 * @param Item $oldItem
@@ -105,7 +58,7 @@ class ItemChange extends Change {
 		);
 
 		$instance->setItem( $newItem );
-		$instance->setDiff( new ItemDiff( $oldItem, $newItem ) );
+		$instance->setDiff( ItemDiff::newFromItems( $oldItem, $newItem ) );
 
 		return $instance;
 	}

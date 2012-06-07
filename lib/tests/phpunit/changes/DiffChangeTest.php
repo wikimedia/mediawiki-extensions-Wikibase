@@ -3,10 +3,9 @@
 namespace Wikibase\Test;
 use Wikibase\Item as Item;
 use Wikibase\MapDiff as MapDiff;
-use Wikibase\SitelinkChange as SitelinkChange;
 
 /**
- * Tests for the WikibaseSitelinkChange class.
+ * Tests for the Wikibase\DiffChange class.
  *
  * @file
  * @since 0.1
@@ -16,11 +15,12 @@ use Wikibase\SitelinkChange as SitelinkChange;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseChange
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SitelinkChangeTest extends \MediaWikiTestCase {
+class DiffChangeTest extends \MediaWikiTestCase {
 
 	public function diffProvider() {
 		return array(
@@ -36,7 +36,7 @@ class SitelinkChangeTest extends \MediaWikiTestCase {
 	 * @dataProvider diffProvider
 	 */
 	public function testNewFromDiff( MapDiff $diff ) {
-		$change = SitelinkChange::newFromDiff( Item::newEmpty(), $diff );
+		$change = \Wikibase\DiffChange::newFromDiff( $diff );
 
 		$this->assertEquals( $diff->isEmpty(), $change->isEmpty() );
 

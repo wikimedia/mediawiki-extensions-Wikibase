@@ -18,94 +18,19 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemDiff extends EntityDiff {
+class ItemDiff extends MapDiff {
 
-	/**
-	 * @var MapDiff
-	 */
-	protected $siteLinkDiff;
-
-	/**
-	 * @var MapDiff
-	 */
-	protected $aliasDiff;
-
-	/**
-	 * @var array|false
-	 */
-	protected $changes = false;
-
-	/**
-	 * @var Item
-	 */
-	protected $oldItem;
-
-	/**
-	 * @var Item
-	 */
-	protected $newItem;
-
-	/**
-	 * Constructs a new
-	 *
-	 * @since 0.1
-	 *
-	 * @param Item $oldItem
-	 * @param Item $newItem
-	 *
-	 * @return ItemDiff
-	 */
-	public function __construct( Item $oldItem, Item $newItem ) {
-		$this->oldItem = $oldItem;
-		$this->newItem = $newItem;
-	}
-
-	/**
-	 * Create the sitelinks diff if not already done so.
-	 */
-	protected function diffSiteLinks() {
-		if ( !isset( $this->siteLinkDiff ) ) {
-			$this->siteLinkDiff = MapDiff::newFromArrays(
-				$this->oldItem->getSiteLinks(),
-				$this->newItem->getSiteLinks()
-			);
-		}
-	}
-
-	/**
-	 * Create the aliases diff if not already done so.
-	 */
-	protected function diffAliases() {
-		if ( !isset( $this->aliasDiff ) ) {
-			$this->aliasDiff = MapDiff::newFromArrays(
-				$this->oldItem->getAllAliases(),
-				$this->newItem->getAllAliases()
-			);
-		}
-	}
-
-	/**
-	 * Returns if there are any changes to the sitelinks.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function hasSiteLinkChanges() {
-		$this->diffSiteLinks();
-		return !$this->siteLinkDiff->isEmpty();
-	}
-
-	/**
-	 * Returns if there are any changes to the aliases.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function hasAliasChanges() {
-		$this->diffAliases();
-		return !$this->aliasDiff->isEmpty();
+	public static function newFromItems( Item $oldItem, Item $newItem ) {
+		return new static( array(
+			'sites' => MapDiff::newFromArrays(
+				$oldItem->getSiteLinks(),
+				$newItem->getSiteLinks()
+			),
+			'aliases' => MapDiff::newFromArrays(
+				$oldItem->getAllAliases(),
+				$newItem->getAllAliases()
+			)
+		) );
 	}
 
 	/**
@@ -116,8 +41,7 @@ class ItemDiff extends EntityDiff {
 	 * @return MapDiff
 	 */
 	public function getSiteLinkDiff() {
-		$this->diffSiteLinks();
-		return $this->siteLinkDiff;
+		return $this->operations['sites'];
 	}
 
 	/**
@@ -128,9 +52,10 @@ class ItemDiff extends EntityDiff {
 	 * @return MapDiff
 	 */
 	public function getAliasesDiff() {
-		$this->diffAliases();
-		return $this->aliasDiff;
+		return $this->operations['aliases'];
 	}
+
+
 
 	/**
 	 * Returns if there are any changes (equivalent to: any differences between the items).
