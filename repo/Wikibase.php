@@ -205,6 +205,7 @@ $wgResourceModules['wikibase.utilities.jQuery.tagadata'] = $moduleTemplate + arr
 	),
 	'dependencies' => array(
 		'wikibase.utilities.jQuery',
+		'wikibase.utilities.jQuery.inputAutoExpand',
 		'jquery.ui.widget',
 		'jquery.effects.core',
 		'jquery.effects.blind'

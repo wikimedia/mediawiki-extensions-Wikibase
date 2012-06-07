@@ -374,6 +374,12 @@
 
 			this._trigger( 'tagAdded', null, tag );
 
+			if( input.inputAutoExpand ) { // if auto expand is available, use it for tags!
+				input.inputAutoExpand( {
+
+				} );
+			}
+
 			return tag;
 		},
 
