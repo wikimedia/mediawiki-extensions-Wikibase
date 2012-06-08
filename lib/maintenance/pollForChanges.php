@@ -109,7 +109,13 @@ class PollForChanges extends \Maintenance {
 
 			$changes = iterator_to_array( $changes );
 
-			ChangeHandler::singleton()->handleChanges( $changes );
+			try {
+				ChangeHandler::singleton()->handleChanges( $changes );
+			}
+			catch ( \Exception $ex ) {
+				$ids = array_map( function( Change $change ) { return $change->getId(); }, $changes );
+				self::msg( 'FAILED TO HANDLE CHANGES ' . implode( ', ', $ids ) . ': ' . $ex->getMessage() );
+			}
 
 			$this->lastChangeId = array_pop( $changes )->getId();
 		}
