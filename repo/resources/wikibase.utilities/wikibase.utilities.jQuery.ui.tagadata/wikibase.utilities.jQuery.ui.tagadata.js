@@ -16,7 +16,7 @@
  * http://aehlke.github.com/tag-it/LICENSE
  *
  * @since 0.1
- * @file
+ * @file wikibase.utilities.jQuery.ui.tagadata.js
  * @ingroup Wikibase
  *
  * @licence MIT license
@@ -104,14 +104,24 @@
 				}
 			} );
 
-			// Add existing tags from the list, if any.
+			// Add existing tags from the list, if any
 			this.tagList.children( 'li' ).each( function() {
 				var newTag = self.createTag( $( this ).html(), $( this ).attr( 'class' ) );
 				self.originalTags.push( self.getTagLabel( newTag ) );
 				$( this ).remove();
 			} );
 
-			this.getHelperTag().focus(); // creates an empty input tag at the end.
+			// button to create a new item:
+			this.createButton = this._subject = $( '<li>', {
+				text: '+',
+				'class': 'tagadata-create'
+			} )
+			.button()
+			.appendTo( this.tagList )
+			.data( 'button' );
+
+			// create an empty input tag at the end:
+			this.getHelperTag().focus();
 		},
 
 		_lastTag: function() {
@@ -332,8 +342,9 @@
 				} )
 				.keyup( function( event ) {
 					var tagLabel = self.getTagLabel( tag );
-					// check whether key for insertion was triggered
+
 					if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
+						// Key for finishing tag input was hit!
 						event.preventDefault();
 						var targetTag = self.getHelperTag();
 
@@ -349,6 +360,8 @@
 					}
 
 					if( tagLabel !== previousLabel ) {
+						// input has changed compared with before key pressed!
+
 						// Check whether the tag is modified/new compared to initial state:
 						if( $.inArray( tagLabel, self.originalTags ) < 0 ) {
 							tag.addClass( 'tagadata-choice-modified' );
@@ -361,9 +374,11 @@
 							if( tagLabel === '' ) {
 								addPlaceholder();
 								tag.addClass( 'tagadata-choice-empty' );
+								self.createButton.disable();
 							} else {
 								removePlaceholder();
 								tag.removeClass( 'tagadata-choice-empty' );
+								self.createButton.enable();
 							}
 						}
 
@@ -405,7 +420,10 @@
 			if( this.getTagLabel( tag ) !== '' ) {
 				tag = this.createTag( '' );
 			}
-			tag.appendTo( this.tagList ); // make sure helper tag is appended at the end (not the case if '' already exists somewhere else)
+
+			// make sure helper tag is appended before create button (not the case if '' already exists somewhere else)
+			tag.insertBefore( this.tagList.children( '.tagadata-create' ) );
+			this.createButton.disable();
 
 			this.tagList.children().removeClass( 'tagadata-choice-empty' );
 			tag.addClass( 'tagadata-choice-empty' );
@@ -421,7 +439,7 @@
 		 */
 		isHelperTag: function( tag ) {
 			var helperTab = this.tagList.find( '.tagadata-choice:last' );
-			return tag[0] === helperTab;
+			return tag[0] === helperTab[0];
 		},
 
 		/**
@@ -437,6 +455,11 @@
 			tag = $( tag );
 
 			this._trigger( 'beforeTagRemoved', null, tag );
+
+			if( this.isHelperTag( tag ) ) {
+				// helper removed, enable button for creating new helper
+				this.createButton.enable();
+			}
 
 			// Animate the removal.
 			if( animate ) {
