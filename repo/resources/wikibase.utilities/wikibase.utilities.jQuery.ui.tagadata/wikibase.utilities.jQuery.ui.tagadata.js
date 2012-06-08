@@ -261,7 +261,6 @@
 				'class': 'tagadata-label' + ( this.options.onTagClicked ? ' tagadata-label-clickable' : '' )
 			} );
 
-
 			var input = ( $( '<input>', {
 				name: this.options.itemName + '[' + this.options.fieldName + '][]'
 			} ) );
@@ -288,26 +287,6 @@
 
 			if( this.options.editableTags ) {
 				var previousLabel; // for determining whether label has changed
-				var addPlaceholder = function() {
-					if( self.options.placeholderText ) {
-						input.attr( 'placeholder', self.options.placeholderText );
-						if( input.inputAutoExpand ) {
-							input.inputAutoExpand();
-						}
-					}
-				};
-				var removePlaceholder = function() {
-					if( self.options.placeholderText ) {
-						input.removeAttr( 'placeholder' );
-						if( input.inputAutoExpand ) {
-							input.inputAutoExpand();
-						}
-					}
-				};
-
-				if( value === '' ) {
-					addPlaceholder();
-				}
 
 				// input is the actual visible content
 				input.attr( {
@@ -384,18 +363,6 @@
 							tag.removeClass( 'tagadata-choice-modified' );
 						}
 
-						// Additional checks in case this is the helper tag
-						if( tag.is( '.tagadata-choice:last' ) ) {
-							// Tag is completely emty now and the last one, consider it the helper tag:
-							if( tagLabel === '' ) {
-								addPlaceholder();
-								tag.addClass( 'tagadata-choice-empty' );
-							} else {
-								removePlaceholder();
-								tag.removeClass( 'tagadata-choice-empty' );
-							}
-						}
-
 						// trigger once for widget, once for tag itself
 						$( tag ).triggerHandler( 'tagadatatagchanged', previousLabel );
 						self._trigger( 'tagChanged', tag, previousLabel );
@@ -448,12 +415,29 @@
 			if( this.getTagLabel( tag ) !== '' ) {
 				// no helper yet, create one!
 				tag = this.createTag( '' );
+				var input = tag.find( 'input' );
+
+				// add placeholder and auto-expand afterwards:
+				if( this.options.placeholderText ) {
+					input.attr( 'placeholder', this.options.placeholderText );
+					if( input.inputAutoExpand ) {
+						input.inputAutoExpand();
+					}
+				}
 
 				// make sure a new helper will be created when something is inserted into helper:
 				var self = this;
 				var helperManifestation = function( e ) {
 					var tagLabel = self.getTagLabel( tag );
 					if( tagLabel !== '' ) {
+						// remove placeholder:
+						if( self.options.placeholderText ) {
+							input.removeAttr( 'placeholder' );
+							if( input.inputAutoExpand ) {
+								input.inputAutoExpand();
+							}
+						}
+						tag.removeClass( 'tagadata-choice-empty' );
 						self._trigger( 'tagAdded', null, tag );
 						self.getHelperTag();
 						tag.off( 'tagadatatagchanged', helperManifestation );
