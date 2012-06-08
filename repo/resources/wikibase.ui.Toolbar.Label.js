@@ -139,6 +139,24 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 		}
 		return true;
 	},
+
+	/**
+	 * Disables the element. Shorthand for setDisabled( false ).
+	 *
+	 * @return bool
+	 */
+	enable: function() {
+		return this.setDisabled( false );
+	},
+
+	/**
+	 * Disables the element. Shorthand for setDisabled( true ).
+	 *
+	 * @return bool
+	 */
+	disable: function() {
+		return this.setDisabled( true );
+	},
 	
 	///////////
 	// EVENTS:
