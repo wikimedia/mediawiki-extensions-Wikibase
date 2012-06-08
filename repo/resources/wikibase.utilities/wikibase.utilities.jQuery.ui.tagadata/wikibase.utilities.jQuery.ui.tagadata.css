@@ -10,6 +10,7 @@ ul.tagadata li {
     float: left;
     margin: 2px 5px 2px 0;
 }
+
 ul.tagadata li.tagadata-choice {
     padding: 0;
     position: relative;
