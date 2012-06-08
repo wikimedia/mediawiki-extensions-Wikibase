@@ -3,7 +3,9 @@
 namespace Wikibase;
 
 /**
- *
+ * Interface for change notification.
+ * Whenever a change is made, it should be fed to this interface
+ * so the appropriate notification tasks can be created and run.
  *
  * @since 0.1
  *
