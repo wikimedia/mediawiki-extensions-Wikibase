@@ -158,6 +158,30 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 /********** /TOOLTIP **********/
 
 
+/********** ALIASES **********/
+
+.wb-aliases .wb-ui-propertyedittool-editablevalue {
+	display: inline;
+}
+
+.wb-alias li.tagadata-choice {
+	line-height:inherit;
+	padding: 0;
+}
+
+.wb-aliases .tagadata-choice input {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	font-size: 133% !important;
+}
+
+.wb-aliases .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	float: left;
+	font-size: 120%;
+}
+
+/********** /ALIASES **********/
+
 /********** jquery.ui.autocomplete **********/
 
 .ui-widget-content {
