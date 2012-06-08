@@ -228,12 +228,3 @@ td.wb-ui-propertyedittool-editablevalue-toolbarparent {
 	   it won't break the line */
 	text-align: right;
 }
-
-.wb-ui-propertyedittool-editablevaluelistinterface li.tagadata-choice-modified .tagadata-label-text {
-	/* highlight new aliases while in edit mode */
-	text-decoration: underline;
-}
-
-ul.tagadata li.tagadata-choice-empty .tagadata-label-text {
-	text-decoration:none; /* don't underline when only placeholder is displayed */
-}

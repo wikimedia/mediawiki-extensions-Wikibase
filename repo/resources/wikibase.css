@@ -79,6 +79,19 @@ wb-clear {
 	margin-bottom: 2px;
 	background-color: #F9F9F9;
 }
+				.wb-aliases .tagadata-choice {
+					/*margin-top: 1px !important; /* take care of 1px border */
+				}
+					.wb-aliases .tagadata-choice input {
+						padding-top: 0 !important;
+						padding-bottom: 0 !important;
+						font-size: 133% !important;
+					}
+
+	.wb-aliases .wb-ui-propertyedittool-editablevalue-toolbarparent {
+		float: left;
+		font-size: 120%;
+	}
 
 /********** /ALIASES **********/
 

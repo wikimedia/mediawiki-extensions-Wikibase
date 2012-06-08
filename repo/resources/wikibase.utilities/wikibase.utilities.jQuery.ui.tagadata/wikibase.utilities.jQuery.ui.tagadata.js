@@ -111,20 +111,8 @@
 				$( this ).remove();
 			} );
 
-			// button to create a new item:
-			this.createButton = this._subject = $( '<li>', {
-				text: '+',
-				'class': 'tagadata-create'
-			} )
-			.button()
-			.on( 'click', function() {
-				self.getHelperTag().focus();
-			} )
-			.appendTo( this.tagList )
-			.data( 'button' );
-
 			// create an empty input tag at the end:
-			this.getHelperTag().focus();
+			this.getHelperTag();
 		},
 
 		_lastTag: function() {
@@ -133,7 +121,9 @@
 
 		/**
 		 * Returns the nodes of all Tags currently assigned. To get the actual text, use getTagLabel() on them.
-		 * If there is a empty tag for inserting a new tag, this won't be returned by this. Use getHelperTag() instead.
+		 * If there is an empty tag for inserting a new tag, this won't be returned by this. Use getHelperTag() instead.
+		 * If tags have a conflict (same tag exists twice in the list) only one DOM node in the result will represent
+		 * all of these conflicted tags.
 		 *
 		 * @return jQuery[]
 		 */
@@ -141,12 +131,18 @@
 			// Returns an array of tag string values
 			var self = this;
 			var tags = [];
+			var usedLabels = [];
 
 			this.tagList.children( '.tagadata-choice' ).each( function() {
 				// check if already removed but still assigned till animations end. if so, don't add tag!
 				if( !$( this ).hasClass( 'tagadata-choice-removed' ) ) {
-					if( self.getTagLabel( this ) !== '' ) { // don't want the empty helper tag
+					var tagLabel = self.getTagLabel( this );
+
+					if( tagLabel !== '' // don't want the empty helper tag...
+						&& $.inArray( tagLabel, usedLabels ) < 0 // ... or anything twice (in case of conflicts)
+					) {
 						tags.push( this );
+						usedLabels.push( tagLabel );
 					}
 				}
 			} );
@@ -169,6 +165,21 @@
 				}
 			} );
 			return result;
+		},
+
+		/**
+		 * Helper function to return all tags having the same value currently
+		 *
+		 * @param String label
+		 * @return jQuery
+		 */
+		_getTags: function( label ) {
+			var self = this;
+			label = this._formatLabel( label );
+
+			return this.tagList.children( '.tagadata-choice' ).filter( function() {
+				return self.getTagLabel( this ) === label;
+			} );
 		},
 
 		/**
@@ -276,25 +287,6 @@
 			tag.append( removeTag );
 
 			if( this.options.editableTags ) {
-				var tagMerge = function( tag ) {
-					// find out whether given tag has equivalent and remove it in that case.
-					var tagLabel = self.getTagLabel( tag );
-					var equalTags = self.tagList.find('.tagadata-label input').filter( function() {
-						return $( this ).val() === tagLabel;
-					} );
-					if( equalTags.length > 1 ) {
-						// remove given tag
-						equalTags = equalTags.not( tag.find('.tagadata-label input') );
-						// remove given tag and highlight the other one
-						if( tagLabel !== '' ) {
-							self.highlightTag( $( equalTags[0] ).closest( '.tagadata-choice' ) );
-						}
-						self.removeTag( tag );
-						return false;
-					}
-					return true;
-				};
-
 				var previousLabel; // for determining whether label has changed
 				var addPlaceholder = function() {
 					if( self.options.placeholderText ) {
@@ -325,14 +317,8 @@
 				} )
 				.blur( function( e ) {
 					var tag = input.closest( '.tagadata-choice' );
-					var tagLabel = self.getTagLabel( tag );
 
-					if( ! tagMerge( tag ) ) {
-						return; // tag has equivalent, merged them
-					}
-
-					// remove tag if it is empty already
-					// tagMerge() doesn't cach this case, where we left a tag empty and there is no tag helper currently!
+					// remove tag if it is empty already:
 					if( self._formatLabel( input.val() ) === ''
 						&& self.getTags().length > 1
 						&& ! tag.is( '.tagadata-choice:last' )
@@ -341,13 +327,15 @@
 					}
 				} )
 				.keypress( function( event ) {
+						// store value before key evaluated to make comparison afterwards
 						previousLabel = self.getTagLabel( tag );
 				} )
 				.keyup( function( event ) {
 					var tagLabel = self.getTagLabel( tag );
 
 					if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
-						// Key for finishing tag input was hit!
+						// Key for finishing tag input was hit (e.g. ENTER)
+
 						event.preventDefault();
 						var targetTag = self.getHelperTag();
 
@@ -365,6 +353,30 @@
 					if( tagLabel !== previousLabel ) {
 						// input has changed compared with before key pressed!
 
+						// Handle non-unique tags (conflicts):
+						var equalTags = self._getTags( previousLabel ).add( tag );
+						( equalTags.length <= 2
+							? equalTags // only two tags WERE equal, so the conflict is resolved for both
+							: tag       // the other nodes still have the conflict, but this one doesn't
+						).removeClass( 'tagadata-choice-equal' );
+
+						equalTags = tagLabel !== ''
+							? self._getTags( tagLabel )
+							: $(); // don't highlight anything if empty (will be removed anyhow)
+
+						if( equalTags.length > 1 ) {
+							// mark as equal
+							equalTags.addClass( 'tagadata-choice-equal' );
+						}
+
+						// if this is the tag before the helper and its value has just been emptied, remove it
+						// and jump into the helper:
+						if( tagLabel === '' && self.getHelperTag().prev( tag ).length ) {
+							self.removeTag( tag );
+							self.getHelperTag().find( 'input' ).focus();
+							return;
+						}
+
 						// Check whether the tag is modified/new compared to initial state:
 						if( $.inArray( tagLabel, self.originalTags ) < 0 ) {
 							tag.addClass( 'tagadata-choice-modified' );
@@ -372,23 +384,37 @@
 							tag.removeClass( 'tagadata-choice-modified' );
 						}
 
+						// Additional checks in case this is the helper tag
 						if( tag.is( '.tagadata-choice:last' ) ) {
 							// Tag is completely emty now and the last one, consider it the helper tag:
 							if( tagLabel === '' ) {
 								addPlaceholder();
 								tag.addClass( 'tagadata-choice-empty' );
-								self.createButton.disable();
 							} else {
 								removePlaceholder();
 								tag.removeClass( 'tagadata-choice-empty' );
-								self.createButton.enable();
 							}
 						}
 
+						// trigger once for widget, once for tag itself
+						$( tag ).triggerHandler( 'tagadatatagchanged', previousLabel );
 						self._trigger( 'tagChanged', tag, previousLabel );
 					}
 				} )
 				.appendTo( label );
+
+				// if auto expand is available, use it for tags!
+				if( input.inputAutoExpand ) {
+					input.inputAutoExpand( {
+						maxWidth: function() {
+							var origCssDisplay = self.tagList.css( 'display' );
+							self.tagList.css( 'display', 'block' );
+							var width = self.tagList.width();
+							self.tagList.css( 'display', origCssDisplay );
+							return width;
+						}
+					} );
+				}
 			} else {
 				// we need input only for the form to contain the data
 				input.attr( {
@@ -404,10 +430,9 @@
 			/// / insert tag
 			this.tagList.append( tag );
 
-			this._trigger( 'tagAdded', null, tag );
-
-			if( input.inputAutoExpand ) { // if auto expand is available, use it for tags!
-				input.inputAutoExpand();
+			if( value !== '' ) {
+				// only trigger if this isn't the helper tag
+				this._trigger( 'tagAdded', null, tag );
 			}
 
 			return tag;
@@ -421,12 +446,23 @@
 		getHelperTag: function() {
 			var tag = this.tagList.find( '.tagadata-choice:last' );
 			if( this.getTagLabel( tag ) !== '' ) {
+				// no helper yet, create one!
 				tag = this.createTag( '' );
+
+				// make sure a new helper will be created when something is inserted into helper:
+				var self = this;
+				var helperManifestation = function( e ) {
+					var tagLabel = self.getTagLabel( tag );
+					if( tagLabel !== '' ) {
+						self._trigger( 'tagAdded', null, tag );
+						self.getHelperTag();
+						tag.off( 'tagadatatagchanged', helperManifestation );
+					}
+				};
+				tag.on( 'tagadatatagchanged', helperManifestation );
 			}
 
-			// make sure helper tag is appended before create button (not the case if '' already exists somewhere else)
-			tag.insertBefore( this.tagList.children( '.tagadata-create' ) );
-			this.createButton.disable();
+			tag.appendTo( this.tagList );
 
 			this.tagList.children().removeClass( 'tagadata-choice-empty' );
 			tag.addClass( 'tagadata-choice-empty' );
@@ -441,8 +477,8 @@
 		 * @return Boolean
 		 */
 		isHelperTag: function( tag ) {
-			var helperTab = this.tagList.find( '.tagadata-choice:last' );
-			return tag[0] === helperTab[0];
+			var helperTag = this.tagList.find( '.tagadata-choice:last' );
+			return tag[0] === helperTag[0];
 		},
 
 		/**
@@ -459,9 +495,10 @@
 
 			this._trigger( 'beforeTagRemoved', null, tag );
 
-			if( this.isHelperTag( tag ) ) {
-				// helper removed, enable button for creating new helper
-				this.createButton.enable();
+			// make sure conflicts with tag which has same content will be marked as resolved:
+			var equalTags = this._getTags( this.getTagLabel( tag ) );
+			if( equalTags.length == 2 ) {
+				equalTags.removeClass( 'tagadata-choice-equal' );
 			}
 
 			// Animate the removal.
