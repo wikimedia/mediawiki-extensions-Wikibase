@@ -59,28 +59,19 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( Item &$item, array $params ) {
-		$success = false;
-		
-		$res = $this->getResult();
 		$language = $params['language'];
-		$res->addValue( null, 'item', array() );
-		
-		if (isset($params['label'])) {
-			$res->addValue(
-				'item',
-				'labels',
-				$this->stripKeys( $params, array( $language => $item->setLabel( $language, $params['label'] ) ), 'l' )
-			);
+
+		if ( isset( $params['label'] ) ) {
+			$labels = array( $language => $item->setLabel( $language, $params['label'] ) );
+			$this->addLabelsToResult( $labels, 'item' );
 		}
-		
-		if (isset($params['description'])) {
-			$res->addValue(
-				'item',
-				'descriptions',
-				$this->stripKeys( $params, array( $language => $item->setDescription( $language, $params['description'] ) ), 'd' )
-			);
+
+		if ( isset( $params['description'] ) ) {
+			$descriptions = array( $language => $item->setDescription( $language, $params['description'] ) );
+			$this->addDescriptionsToResult( $descriptions, 'item' );
 		}
-		
+
+		// Because we can't fail?
 		$success = true;
 		
 		return $success;

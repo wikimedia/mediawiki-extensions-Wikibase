@@ -17,10 +17,6 @@ use ApiBase;
  */
 class ApiGetSiteLinks extends Api{
 
-	public function __construct( $main, $action ) {
-		parent::__construct( $main, $action );
-	}
-
 	/**
 	 * Main method. Does the actual work and sets the result.
 	 *
@@ -34,8 +30,6 @@ class ApiGetSiteLinks extends Api{
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
-		$success = false;
-
 		if ( !isset( $params['id'] ) ) {
 			$params['id'] = Item::getIdForSiteLink( $params['site'], $params['title'] );
 
@@ -45,27 +39,21 @@ class ApiGetSiteLinks extends Api{
 		}
 
 		$page = Item::getWikiPageForId( $params['id'] );
+
 		if ( $page->exists() ) {
 			// as long as getWikiPageForId only returns ids for legal items this holds
 			$item = $page->getContent();
+
 			if (is_null( $item ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 			if ( !( $item instanceof Item ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 			}
-			$res = $this->getResult();
-			$res->addValue( null, 'item', array() );
-			
-			$sitelinks = $item->getRawSiteLinks();
-			if (count($sitelinks)) {
-				$res->addValue(
-					'item',
-					'sitelinks',
-					$this->stripKeys( $params, $sitelinks, 'sl' )
-				);
-			}
-			$res->addValue(
+
+			$this->addSiteLinksToResult( $item->getSiteLinks(), 'item' );
+
+			$this->getResult()->addValue(
 				'item',
 				'id',
 				$item->getId()
