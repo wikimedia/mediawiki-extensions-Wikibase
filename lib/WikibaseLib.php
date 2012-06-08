@@ -56,6 +56,7 @@ $wgAutoloadClasses['WBLSettings'] 					= $dir . 'WikibaseLib.settings.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
+$wgAutoloadClasses['Wikibase\ChangeHandler'] 		= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/Entity.php';
 $wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/EntityDiff.php';
 $wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/Item.php';
