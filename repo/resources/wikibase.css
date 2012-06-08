@@ -45,32 +45,47 @@ wb-clear {
 /********** ALIASES **********/
 
 .wb-aliases {
-	font-size: 0.9em;
+	font-size: 84%;
 }
 
-.wb-aliases-label {
-	font-weight: bold;
-	vertical-align: top;
-	display: inline-block;
-	margin-right: 1em;
-}
+	.wb-aliases-label {
+		float: left;
+		font-weight: bold;
+		vertical-align: top;
+		margin-right: 1em;
+		margin-bottom: -1em; /* IE 7 would not wrap around directly but instead leave empty space underneath the label
+								for one line in some cases */
+	}
 
-ul.wb-aliases-container {
-	display: inline-block; /* without js... */
-	margin: 0;
-	padding: 0;
-}
+	.wb-aliases .wb-ui-propertyedittool-editablevalue, .wb-aliases div, .wb-aliases ul {
+		display: inline;
+	}
 
-.wb-aliases .wb-ui-propertyedittool-editablevalue,
-.wb-aliases .wb-ui-propertyedittool-editablevalue > div { /* ... with js */
-	display: inline-block
-}
+		.wb-aliases ul {
+			margin: 0;
+			padding: 0;
+			line-height: inherit;
+		}
+			.wb-aliases li {
+				float: left;
+				margin-right: 1em;
+				display: inline;
+				list-style-type: none;
+				margin-top: 0 !important;
+			}
+				.wb-aliases .tagadata-choice {
+					/*margin-top: 1px !important; /* take care of 1px border */
+				}
+					.wb-aliases .tagadata-choice input {
+						padding-top: 0 !important;
+						padding-bottom: 0 !important;
+						font-size: 133% !important;
+					}
 
-li.wb-aliases-alias {
-	margin-right: 1em;
-	display: inline;
-	list-style-type: none;
-}
+	.wb-aliases .wb-ui-propertyedittool-editablevalue-toolbarparent {
+		float: left;
+		font-size: 120%;
+	}
 
 /********** /ALIASES **********/
 
@@ -79,7 +94,8 @@ li.wb-aliases-alias {
 
 table.wb-sitelinks {
 	/*border:1px solid #5dc9f4;*/
-	margin-top:2em;
+	margin-top:4em;
+	clear:both;
 }
 table.wb-sitelinks th, table.wb-sitelinks td {
 	border-bottom: 1px solid #ccc;

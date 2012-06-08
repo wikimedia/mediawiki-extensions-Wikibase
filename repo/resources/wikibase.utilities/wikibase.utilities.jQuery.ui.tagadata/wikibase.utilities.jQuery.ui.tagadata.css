@@ -1,35 +1,35 @@
 ul.tagadata {
-    padding: 1px 5px;
-    overflow: auto;
-    margin-left: inherit; /* usually we don't want the regular ul margins. */
-    margin-right: inherit;
+	padding: 1px 5px;
+	overflow: auto;
+	margin-left: inherit; /* usually we don't want the regular ul margins. */
+	margin-right: inherit;
 	border: none;
 }
 ul.tagadata li {
-    display: block;
-    float: left;
-    margin: 2px 5px 2px 0;
+	display: block;
+	float: left;
+	margin: 2px 5px 2px 0;
 }
 ul.tagadata li.tagadata-choice {
-    padding: 0;
-    position: relative;
-    line-height: inherit;
+	padding: 0;
+	position: relative;
+	line-height: inherit;
 }
 
 ul.tagadata .tagadata-label-clickable {
-    cursor: pointer;
+	cursor: pointer;
 }
 ul.tagadata li.tagadata-choice .tagadata-close {
-    cursor: pointer;
-    position: absolute;
-    right: .1em;
-    top: 50%;
-    margin-top: -8px;
+	cursor: pointer;
+	position: absolute;
+	right: .1em;
+	top: 50%;
+	margin-top: -8px;
 }
 
 /* used for some custom themes that don't need image icons */
 ul.tagadata li.tagadata-choice .tagadata-close .text-icon {
-    display: none;
+	display: none;
 }
 
 ul.tagadata li.tagadata-choice .tagadata-label-text { /* the input or pure text */
@@ -45,7 +45,7 @@ ul.tagadata li.tagadata-choice .tagadata-label input {
 
 	border: none;
 	width: inherit;
-	background-color: inherit;
+	background: transparent;
 	outline: none;
 }
 
