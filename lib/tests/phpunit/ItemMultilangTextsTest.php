@@ -47,12 +47,11 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 	 * @dataProvider providerLabels
 	 */
 	public function testLabels( $lang, $str ) {
-		
 		$label = self::$item->setLabel( $lang, $str);
 		
 		$this->assertEquals(
 			$str,
-			$label['value'],
+			$label,
 			"Did not get back whats stored from setLabel('{$lang}', '{$label}')"
 		);
 		
@@ -63,15 +62,6 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 			$labels[$lang],
 			"Did not get back whats stored from getLabels(array('{$lang}'))"
 		);
-		
-		$rawlabels = self::$item->getRawLabels( array($lang) );
-		
-		$this->assertEquals(
-			$str,
-			$rawlabels[$lang]['value'],
-			"Did not get back whats stored from getRawLabels(array('{$lang}'))"
-		);
-		
 	}
 	
 	public function providerLabels() {
@@ -87,12 +77,11 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 	 * @dataProvider providerDescriptions
 	 */
 	public function testDescriptions( $lang, $str ) {
-		
 		$description = self::$item->setDescription( $lang, $str);
 		
 		$this->assertEquals(
 			$str,
-			$description['value'],
+			$description,
 			"Did not get back whats stored from setDescription('{$lang}', '{$description}')"
 		);
 		
@@ -103,15 +92,6 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 			$descriptions[$lang],
 			"Did not get back whats stored from getDescriptions(array('{$lang}'))"
 		);
-		
-		$rawdescriptions = self::$item->getRawDescriptions( array($lang) );
-		
-		$this->assertEquals(
-			$str,
-			$rawdescriptions[$lang]['value'],
-			"Did not get back whats stored from getRawDescriptions(array('{$lang}'))"
-		);
-		
 	}
 	
 	public function providerDescriptions() {

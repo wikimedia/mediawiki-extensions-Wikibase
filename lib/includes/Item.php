@@ -68,6 +68,8 @@ class Item extends Entity {
 				$this->data[$field] = array();
 			}
 		}
+
+		//TODO: move legacy cleanup from getSiteLinks and getMultilangText here
 	}
 
 	/**
@@ -312,13 +314,9 @@ class Item extends Entity {
 	 * @return string
 	 */
 	public function setLabel( $langCode, $value ) {
-		$this->data['label'][$langCode] = array(
-			'language' => $langCode,
-			'value' => $value,
-		);
-		// the value should be returned as it is after cleanup
-		// not only as it is coming into the method
-		return $this->data['label'][$langCode];
+		// TODO: normalize value
+		$this->data['label'][$langCode] = $value;
+		return $value;
 	}
 
 	/**
@@ -331,13 +329,9 @@ class Item extends Entity {
 	 * @return string
 	 */
 	public function setDescription( $langCode, $value ) {
-		$this->data['description'][$langCode] = array(
-			'language' => $langCode,
-			'value' => $value,
-		);
-		// the value should be returned as it is after cleanup
-		// not only as it is coming into the method
-		return $this->data['description'][$langCode];
+		// TODO: normalize value
+		$this->data['description'][$langCode] = $value;
+		return $value;
 	}
 
 	/**
@@ -418,6 +412,7 @@ class Item extends Entity {
 	 * @param array $aliases
 	 */
 	public function setAliases( $languageCode, array $aliases ) {
+		//@todo: validate the internal structure of $aliases
 		$this->data['aliases'][$languageCode] = $aliases;
 	}
 
@@ -469,25 +464,12 @@ class Item extends Entity {
 	public function getDescriptions( array $languages = null ) {
 		return $this->getMultilangTexts( 'description', $languages );
 	}
-
-	/**
-	 * @since 0.1
-	 * 
-	 * Get descriptions for an item but as raw values
-	 * 
-	 * @param array|null $languages note that an empty array gives descriptions for no languages while a null pointer gives all
-	 * 
-	 * @return array found labels in given languages
-	 */
-	public function getRawDescriptions( array $languages = null ) {
-		return $this->getMultilangTexts( 'description', $languages, true );
-	}
 	
 	/**
+	 *  Get labels for an item
+	 *
 	 * @since 0.1
-	 * 
-	 * Get labels for an item
-	 * 
+	 *
 	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
 	 * 
 	 * @return array found labels in given languages
@@ -495,47 +477,33 @@ class Item extends Entity {
 	public function getLabels( array $languages = null ) {
 		return $this->getMultilangTexts( 'label', $languages );
 	}
-
-	/**
-	 * @since 0.1
-	 * 
-	 * Get labels for an item but as raw values
-	 * 
-	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
-	 * 
-	 * @return array found labels in given languages
-	 */
-	public function getRawLabels( array $languages = null ) {
-		return $this->getMultilangTexts( 'label', $languages, true );
-	}
 	
 	/**
+	 * Get texts from an item with a field specifier.
+	 *
 	 * @since 0.1
-	 * 
-	 * Get texts from an item with a field specifier
 	 *
 	 * @param string $fieldKey
 	 * @param array|null $languages
 	 *
 	 * @return array
 	 */
-	protected function getMultilangTexts( $fieldKey, array $languages = null, $raw = false ) {
+	protected function getMultilangTexts( $fieldKey, array $languages = null ) {
 		$textList = $this->data[$fieldKey];
 
+		// This is compat code for the old internal layout.
+		// TODO: Should be removed before we go into production.
+		foreach ( $textList as $text ) {
+			if ( is_array( $text ) ) {
+				$textList[$text['language']] = $text['value'];
+			}
+		}
+
 		if ( !is_null( $languages ) ) {
-			$textList = array_filter( $textList, function( $textData ) use ( $languages ) {
-				return in_array( $textData['language'], $languages );
-			} );
+			$textList = array_intersect_key( $textList, array_flip( $languages ) );
 		}
 
-		$texts = array();
-
-		foreach ( $textList as $languageCode => $textData ) {
-			// TODO: A raw value should probably be filtered somehow
-			$texts[$languageCode] = $raw ? $textData : $textData['value'];
-		}
-
-		return $texts;
+		return $textList;
 	}
 
 	/**
@@ -560,56 +528,17 @@ class Item extends Entity {
 			}
 		}
 
-		/*
-		if ( !array_key_exists( $siteId, $this->data['links'] ) ) {
-			$this->data['links'][$siteId] = array();
-		}
-		*/
-
-		/*
-		$success =
-			!( ( $updateType === 'add' && array_key_exists( $siteId, $this->data['links'][$siteId] ) )
-			|| ( $updateType === 'update' && !array_key_exists( $siteId, $this->data['links'][$siteId] ) ) );
-			*/
 		$success =
 			( $updateType === 'add' && !array_key_exists( $siteId, $this->data['links'] ) )
 			|| ( $updateType === 'update' && array_key_exists( $siteId, $this->data['links'] ) )
 			|| ( $updateType === 'set' );
 			
 		if ( $success ) {
-			$this->data['links'][$siteId] = array(
-				'site' => $siteId,
-				'title' => $pageName
-			);
+			$this->data['links'][$siteId] = $pageName;
 		}
 
-		return $success ? $this->data['links'][$siteId] : false;
-
-		// TODO: verify the link is allowed (ie no other item already links here)
-
-//		$dbw = wfGetDB( DB_MASTER );
-//
-//		if ( $update ) {
-//			$this->removeLInkSite( $siteId, $pageName );
-//		}
-//		else {
-//			$exists = $dbw->selectRow(
-//				'wb_items_per_site',
-//				array( 'ips_item_id' ),
-//				$this->getLinkSiteConds( $siteId, $pageName ),
-//				__METHOD__
-//			) !== false;
-//
-//			if ( $exists ) {
-//				return false;
-//			}
-//		}
-//
-//		return $dbw->insert(
-//			'wb_items_per_site',
-//			$this->getLinkSiteConds( $siteId, $pageName ),
-//			__METHOD__
-//		);
+		// TODO: we should not return this array here like this. Probably create new object to represent link.
+		return $success ? array( 'site' => $siteId, 'title' => $this->data['links'][$siteId] ) : false;
 	}
 
 	/**
@@ -642,7 +571,7 @@ class Item extends Entity {
 	 * @return boolean Success indicator
 	 */
 	public function removeSiteLink( $siteId, $pageName ) {
-		$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId]['title'] === $pageName;
+		$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId] === $pageName;
 
 		if ( $success ) {
 			unset( $this->data['links'][$siteId] );
@@ -670,8 +599,14 @@ class Item extends Entity {
 	 * @return string|false
 	 */
 	public function getDescription( $langCode ) {
+		// This is compat code for the old internal layout.
+		// TODO: Should be removed before we go into production.
+		if ( array_key_exists( $langCode, $this->data['description'] ) && is_array( $this->data['description'][$langCode] ) ) {
+			$this->data['description'][$langCode] = $this->data['description'][$langCode]['value'];
+		}
+
 		return array_key_exists( $langCode, $this->data['description'] )
-			? $this->data['description'][$langCode]['value'] : false;
+			? $this->data['description'][$langCode] : false;
 	}
 
 	/**
@@ -685,8 +620,14 @@ class Item extends Entity {
 	 * @return string|false
 	 */
 	public function getLabel( $langCode ) {
+		// This is compat code for the old internal layout.
+		// TODO: Should be removed before we go into production.
+		if ( array_key_exists( $langCode, $this->data['label'] ) && is_array( $this->data['label'][$langCode] ) ) {
+			$this->data['label'][$langCode] = $this->data['label'][$langCode]['value'];
+		}
+
 		return array_key_exists( $langCode, $this->data['label'] )
-			? $this->data['label'][$langCode]['value'] : false;
+			? $this->data['label'][$langCode] : false;
 	}
 
 	/**
@@ -698,24 +639,14 @@ class Item extends Entity {
 	 * @return array
 	 */
 	public function getSiteLinks() {
-		$titles = array();
-
-		foreach ( $this->data['links'] as $siteId => $linkData ) {
-			$titles[$siteId] = $linkData['title'];
+		// This is compat code for the old internal layout.
+		// TODO: Should be removed before we go into production.
+		foreach ( $this->data['links'] as $link ) {
+			if ( is_array($link) ) {
+				$this->data['links'][$link['site']] = $link['title'];
+			}
 		}
 
-		return $titles;
-	}
-
-	/**
-	 * Returns the site links in an associative array with the following format:
-	 * site id (str) => arr
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function getRawSiteLinks() {
 		return $this->data['links'];
 	}
 
@@ -920,7 +851,13 @@ class Item extends Entity {
 	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public static function getTitleForId( $itemId ) {
-		return Title::newFromText( 'Data:Q' . $itemId ); // TODO
+		$id = intval( $itemId );
+
+		if ( $id <= 0 ) {
+			throw new \MWException( "itemId must be a positive integer, not " . var_export( $itemId , true ) );
+		}
+
+		return Title::newFromText( 'Data:Q' . $id ); // TODO
 	}
 
 	/**
