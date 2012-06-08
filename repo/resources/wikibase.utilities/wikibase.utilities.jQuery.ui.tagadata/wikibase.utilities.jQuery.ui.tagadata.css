@@ -35,7 +35,7 @@ ul.tagadata li.tagadata-choice .tagadata-close .text-icon {
 
 ul.tagadata li.tagadata-choice .tagadata-label-text { /* the input or pure text */
 	margin: 0;
-	padding: .4em 18px .4em .5em;
+	padding: .4em 4px .4em 6px;
 	display: block;
 }
 

@@ -48,44 +48,37 @@ wb-clear {
 	font-size: 84%;
 }
 
-	.wb-aliases-label {
-		float: left;
-		font-weight: bold;
-		vertical-align: top;
-		margin-right: 1em;
-		margin-bottom: -1em; /* IE 7 would not wrap around directly but instead leave empty space underneath the label
-								for one line in some cases */
-	}
+.wb-aliases-label {
+	float: left;
+	font-weight: bold;
+	vertical-align: top;
+	margin-right: 1em;
+	margin-bottom: -1em; /* IE 7 would not wrap around directly but instead leave empty space underneath the label
+							for one line in some cases */
+}
 
-	.wb-aliases .wb-ui-propertyedittool-editablevalue, .wb-aliases div, .wb-aliases ul {
-		display: inline;
-	}
+.wb-aliases div, .wb-aliases ul {
+	display: inline;
+}
 
-		.wb-aliases ul {
-			margin: 0;
-			padding: 0;
-			line-height: inherit;
-		}
-			.wb-aliases li {
-				float: left;
-				margin-right: 1em;
-				display: inline;
-				list-style-type: none;
-				margin-top: 0 !important;
-			}
-				.wb-aliases .tagadata-choice {
-					/*margin-top: 1px !important; /* take care of 1px border */
-				}
-					.wb-aliases .tagadata-choice input {
-						padding-top: 0 !important;
-						padding-bottom: 0 !important;
-						font-size: 133% !important;
-					}
+.wb-aliases ul {
+	margin: 0;
+	padding: 0;
+	line-height: inherit;
+}
 
-	.wb-aliases .wb-ui-propertyedittool-editablevalue-toolbarparent {
-		float: left;
-		font-size: 120%;
-	}
+.wb-aliases li {
+	float: left;
+	margin-right: 1em;
+	display: inline;
+	list-style-type: none;
+	margin-top: 0 !important;
+	border: 1px solid #CCC;
+	padding: 0 12px 0 7px;
+	line-height: 136%;
+	margin-bottom: 2px;
+	background-color: #F9F9F9;
+}
 
 /********** /ALIASES **********/
 
