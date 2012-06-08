@@ -90,6 +90,7 @@ $messages['en'] = array(
 	'wikibase-api-label-not-found' => 'Cannot find a previous label for this language in the item.',
 	'wikibase-api-description-not-found' => 'Cannot find a previous description for this language in the item.',
 	'wikibase-api-wrong-class' => 'The content on the found page is not of correct type.', //'wikibase-api-invalid-contentmodel'
+	'wikibase-api-session-failure' => 'The current session has failed and you must refresh the page and log in again.',
 
 	//content model names
 	'content-model-1001' => 'Wikibase item',

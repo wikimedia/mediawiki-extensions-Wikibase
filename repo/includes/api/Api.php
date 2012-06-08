@@ -23,30 +23,55 @@ abstract class Api extends \ApiBase {
 	 * @param $tag string to be used as a tag name for indexed elements
 	 * @return array of key-valuepairs or only values
 	 */
-	protected function stripKeys( array $params, array $arr, $tag ) {
-		$usekeys = \WBSettings::get( 'apiUseKeys' ) || (isset($params['usekeys']) ? $params['usekeys'] : false);
+	protected function stripKeys( array $params, array $arr, $tag, $level=1 ) {
+		if ( \WBSettings::get( 'apiUseKeys' ) ) {
+			$usekeys = true;
+		}
+		else {
+			$usekeys = $params['usekeys'];
+		}
 		if ( $usekeys ) {
 			switch ( $this->getMain()->getRequest()->getVal( 'format' ) ) {
 				case 'json':
 				case 'jsonfm':
-					$params['usekeys'] = true;
+					$usekeys = true;
 					break;
 				case 'yaml':
 				case 'yamlfm':
-					$params['usekeys'] = true;
+					$usekeys = true;
 					break;
 				case 'raw':
 				case 'rawfm':
-					$params['usekeys'] = true;
+					$usekeys = true;
 					break;
 				default:
-					$params['usekeys'] = false;
+					$usekeys = false;
 					break;
 			}
 		}
 		if (!$usekeys) {
-			$arr = array_values( $arr );
-			$this->getResult()->setIndexedTagName( $arr, $tag );
+			$newarr = array();
+			foreach ( array_values( $arr ) as $a ) {
+				switch ($level) {
+				case 2:
+					if ( is_array( $a )) {
+						$newarr = array_merge( $newarr, array_values( $a ) );
+					}
+					else {
+						$newarr[] = $a;
+					}
+					break;
+				case 1:
+					$newarr[] = $a;
+					break;
+				}
+			};
+			
+			if ( count( $newarr ) ) {
+				$this->getResult()->setIndexedTagName( $newarr, $tag );
+			}
+			
+			$arr = $newarr;
 		}
 		return $arr;
 	}

@@ -33,11 +33,18 @@ use ApiTestCase, ApiTestUser;
  */
 class ApiSetItemTests extends \ApiTestCase {
 	
-	protected static $top = 0;
+	protected static $baseOfItemIds = 0;
+	protected static $usepost;
+	protected static $usetoken;
+	protected static $userights;
 	
 	function setUp() {
 		global $wgUser;
 		parent::setUp();
+		
+		self::$usepost = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithPost' ) : true;
+		self::$usetoken = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens' ) : true;
+		self::$userights = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithRights' ) : true;
 		
 		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
 				'Apitesteditor',
@@ -69,7 +76,26 @@ class ApiSetItemTests extends \ApiTestCase {
 	}
 	
 	/**
+	 * This initiates a cascade that fails if there are no
+	 * production-like environment
 	 * @group API
+	 */
+	function testTokensAndRights() {
+		// check if there is a production-like environment available
+		if (!self::$usetoken || !self::$userights) {
+			$this->markTestSkipped(
+				"The current setup does not include use of tokens or user rights"
+			);
+		}
+		// make sure execution pass through at least one assertion
+		else {
+			$this->assertTrue( true, "Make phpunit happy" );
+		}
+	}
+	
+	/**
+	 * @group API
+	 * @depends testTokensAndRights
 	 * @dataProvider provideSetItemIdDataOp
 	 */
 	function testSetItemGetToken( $id, $op, $data ) {
@@ -81,7 +107,16 @@ class ApiSetItemTests extends \ApiTestCase {
 			false,
 			self::$users['wbeditor']->user
 		);
-		$this->assertEquals( 34, strlen( $data[0]["wbsetitem"]["setitemtoken"] ) );
+		// this should always hold for a logged in user
+		// unless we do some additional tricks with the token
+		$this->assertEquals(
+			34, strlen( $data[0]["wbsetitem"]["setitemtoken"] ),
+			"The length of the token is not 34 chars"
+		);
+		$this->assertRegExp(
+			'/\+\\\\$/', $data[0]["wbsetitem"]["setitemtoken"],
+			"The final chars of the token is not '+\\'"
+		);
 	}
 
 	/**
@@ -90,26 +125,68 @@ class ApiSetItemTests extends \ApiTestCase {
 	 *   "The token parameter must be set"
 	 *
 	 * @group API
+	 * @depends testSetItemGetToken
 	 * @dataProvider provideSetItemIdDataOp
-	 * @expectedException UsageException
 	 */
 	function testSetItemWithNoToken( $id, $op, $data ) {
-		$this->doApiRequest(
-			array(
-				'action' => 'wbsetitem',
-				'reason' => 'Some reason',
-				'data' => $data
-				),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
+		try {
+			$this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'reason' => 'Some reason',
+					'data' => $data
+					),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+		}
+		catch (\UsageException $e) {
+			$this->assertTrue( ($e->getCode() == 'session-failure'), "Got a wrong exception" );
+			return;
+		}
+		$this->assertTrue( (self::$usetoken), "Missing an exception" );
 	}
 
 	/**
 	 * @group API
 	 * @depends testSetItemGetToken
 	 * @depends testSetItemWithNoToken
+	 */
+	function testSetItemTop() {
+		$req = array();
+		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+			$first = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'gettoken' => '' ),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			
+			$req['token'] = $first[0]['wbsetitem']['setitemtoken'];
+		}
+		
+		$req = array_merge( $req, array(
+				'action' => 'wbsetitem',
+				'summary' => 'Some reason',
+				'data' => '{}',
+				'item' => 'add' ) );
+		
+		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+		$this->assertArrayHasKey( 'success', $second[0],
+			"Must have an 'success' key in the second result from the API" );
+		$this->assertArrayHasKey( 'item', $second[0],
+			"Must have an 'item' key in the second result from the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['item'],
+			"Must have an 'id' key in the 'item' from the second result from the API" );
+		self::$baseOfItemIds = $second[0]['item']['id'];
+	}
+	
+	/**
+	 * @group API
+	 * @depends testSetItemTop
 	 * @dataProvider provideSetItemIdDataOp
 	 */
 	function testSetItemGetTokenSetData( $id, $op, $data ) {
@@ -134,6 +211,7 @@ class ApiSetItemTests extends \ApiTestCase {
 				'item' => $op ) );
 		
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+		
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
 		$this->assertArrayHasKey( 'item', $second[0],
@@ -147,8 +225,9 @@ class ApiSetItemTests extends \ApiTestCase {
 		$this->assertArrayHasKey( 'descriptions', $second[0]['item'],
 			"Must have an 'descriptions' key in the 'item' result from the second call to the API" );
 		// we should store and reuse but its thrown away on each iteration
-		$this->assertEquals( $id, $second[0]['item']['id'],
-			"Must have an 'id' key in the 'item' result from the second call to the API that is equal to the expected" );
+		$myid =  self::$baseOfItemIds + $id;
+		$this->assertEquals( $myid, $second[0]['item']['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 	}
 	
 	/**
@@ -156,7 +235,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * This is really a fast lookup without reparsing the stringified item.
 	 * 
 	 * @group API
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 * @dataProvider providerGetItemId
 	 */
 	public function testGetItemId( $id, $site, $title ) {
@@ -165,14 +244,16 @@ class ApiSetItemTests extends \ApiTestCase {
 			'site' => $site,
 			'title' => $title,
 		) );
+		
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'item', $first[0],
 			"Must have an 'item' key in the result from the API" );
 		$this->assertArrayHasKey( 'id', $first[0]['item'],
 			"Must have an 'id' key in the 'item' result from the API" );
-		$this->assertEquals( $id, $first[0]['item']['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the API" );
+		$myid =  self::$baseOfItemIds + $id;
+		$this->assertEquals( $myid, $first[0]['item']['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 	}
 	
 	/**
@@ -181,40 +262,43 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider provideSetItemIdDataOp
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testGetItems( $id, $op, $data ) {
+		$myid =  self::$baseOfItemIds + $id;
 		$first = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
-			'ids' => "{$id}",
+			'ids' => "{$myid}",
 		) );
+		
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
 			"Must have an 'items' key in the result from the API" );
-		$this->assertArrayHasKey( "{$id}", $first[0]['items'],
-			"Must have an '{$id}' key in the 'items' result from the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['items']["{$id}"],
-			"Must have an 'id' key in the '{$id}' result from the API" );
-		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["{$id}"],
-			"Must have an 'sitelinks' key in the '{$id}' result from the API" );
-		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$id}"],
-			"Must have an 'labels' key in the '{$id}' result from the API" );
-		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$id}"],
-			"Must have an 'descriptions' key in the '{$id}' result from the API" );
+		$this->assertArrayHasKey( "{$myid}", $first[0]['items'],
+			"Must have an '{$myid}' key in the 'items' result from the API" );
+		$this->assertArrayHasKey( 'id', $first[0]['items']["{$myid}"],
+			"Must have an 'id' key in the '{$myid}' result from the API" );
+		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["{$myid}"],
+			"Must have an 'sitelinks' key in the '{$myid}' result from the API" );
+		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$myid}"],
+			"Must have an 'labels' key in the '{$myid}' result from the API" );
+		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$myid}"],
+			"Must have an 'descriptions' key in the '{$myid}' result from the API" );
 	}
 		
 	/**
 	 * Testing if we can get all the complete stringified items if we do lookup with multiple ids.
 	 * 
 	 * @group API
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testGetItemsMultiple() {
 		$first = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
 			'ids' => '1|2|3'
 		) );
+		
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
@@ -229,28 +313,30 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider providerGetItemId
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testGetItemsSiteTitle($id, $site, $title) {
+		$myid =  self::$baseOfItemIds + $id;
 		$first = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
 			'sites' => $site,
 			'titles' => $title,
 		) );
+		
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
 			"Must have an 'items' key in the result from the API" );
-		$this->assertArrayHasKey( "{$id}", $first[0]['items'],
-			"Must have an '{$id}' key in the 'items' result from the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['items']["{$id}"],
-			"Must have an 'id' key in the '{$id}' result from the API" );
-		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["{$id}"],
-			"Must have an 'sitelinks' key in the '{$id}' result from the API" );
-		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$id}"],
-			"Must have an 'labels' key in the '{$id}' result from the API" );
-		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$id}"],
-			"Must have an 'descriptions' key in the '{$id}' result from the API" );
+		$this->assertArrayHasKey( "{$myid}", $first[0]['items'],
+			"Must have an '{$myid}' key in the 'items' result from the API" );
+		$this->assertArrayHasKey( 'id', $first[0]['items']["{$myid}"],
+			"Must have an 'id' key in the '{$myid}' result from the API" );
+		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["{$myid}"],
+			"Must have an 'sitelinks' key in the '{$myid}' result from the API" );
+		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$myid}"],
+			"Must have an 'labels' key in the '{$myid}' result from the API" );
+		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$myid}"],
+			"Must have an 'descriptions' key in the '{$myid}' result from the API" );
 	}
 	
 	/**
@@ -260,7 +346,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider providerLinkSiteId
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSiteIdAdd( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'add' );
@@ -269,7 +355,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLinkSiteId
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSiteIdUpdate( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'update' );
@@ -278,13 +364,14 @@ class ApiSetItemTests extends \ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLinkSiteId
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSiteIdSet( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'set' );
 	}
 
 	public function linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
+		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
 		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
@@ -295,13 +382,12 @@ class ApiSetItemTests extends \ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-			//print_r($data[0]);
 			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
 		}
 		
 		$req = array_merge( $req, array(
 			'action' => 'wblinksite',
-			'id' => $id,
+			'id' => $myid,
 			'linksite' => $linksite,
 			'linktitle' => $linktitle,
 			'link' => $op, // this is an odd name
@@ -314,8 +400,8 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'item' key in the result from the first call to the API" );
 		$this->assertArrayHasKey( 'id', $first[0]['item'],
 			"Must have an 'id' key in the 'item' result from the first call to the API" );
-		$this->assertEquals( $id, $first[0]['item']['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the first call to the API" );
+		$this->assertEquals( $myid, $first[0]['item']['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the first call to the API" );
 		
 		$second = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
@@ -329,12 +415,12 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'items' key in the result from the second call to the API" );
 		$this->assertCount( 1, $second[0]['items'],
 			"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( "{$id}", $second[0]['items'],
-			"Must have an '{$id}' key in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['items']["{$id}"],
-			"Must have an 'id' key in the '{$id}' result from the second call to the API" );
-		$this->assertEquals( $id, $second[0]['items']["{$id}"]['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the second call to the API" );
+		$this->assertArrayHasKey( "{$myid}", $second[0]['items'],
+			"Must have an '{$myid}' key in the 'items' result from the second call to the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['items']["{$myid}"],
+			"Must have an 'id' key in the '{$myid}' result from the second call to the API" );
+		$this->assertEquals( $myid, $second[0]['items']["{$myid}"]['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the second call to the API" );
 		
 		$third = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
@@ -348,12 +434,12 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'items' key in the result from the third call to the API" );
 		$this->assertCount( 1, $third[0]['items'],
 			"Must have a number of count of 1 in the 'items' result from the third call to the API" );
-		$this->assertArrayHasKey( "{$id}", $third[0]['items'],
-			"Must have an '{$id}' key in the 'items' result from the third call to the API" );
-		$this->assertArrayHasKey( 'id', $third[0]['items']["{$id}"],
-			"Must have an 'id' key in the '{$id}' result from the third call to the API" );
-		$this->assertEquals( $id, $third[0]['items']["{$id}"]['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the third call to the API" );
+		$this->assertArrayHasKey( "{$myid}", $third[0]['items'],
+			"Must have an '{$myid}' key in the 'items' result from the third call to the API" );
+		$this->assertArrayHasKey( 'id', $third[0]['items']["{$myid}"],
+			"Must have an 'id' key in the '{$myid}' result from the third call to the API" );
+		$this->assertEquals( $myid, $third[0]['items']["{$myid}"]['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the third call to the API" );
 	}
 
 	/**
@@ -363,7 +449,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider providerLinkSitePair
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSitePairAdd( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'add' );
@@ -372,7 +458,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLinkSitePair
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSitePairUpdate( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'update' );
@@ -381,13 +467,14 @@ class ApiSetItemTests extends \ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerLinkSitePair
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testLinkSitePairSet( $id, $site, $title, $linksite, $linktitle, $badge ) {
 		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'set' );
 	}
 
 	public function linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
+		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
 		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
@@ -398,7 +485,7 @@ class ApiSetItemTests extends \ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-			//print_r($data[0]);
+			
 			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
 		}
 		
@@ -420,8 +507,8 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'item' key in the result from the first call to the API" );
 		$this->assertArrayHasKey( 'id', $first[0]['item'],
 			"Must have an 'id' key in the 'item' result from the first call to the API" );
-		$this->assertEquals( $id, $first[0]['item']['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the first call to the API" );
+		$this->assertEquals( $myid, $first[0]['item']['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the first call to the API" );
 		
 		// now check if we can find them by their new site-title pairs
 		$second = $this->doApiRequest( array(
@@ -436,15 +523,15 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'items' key in the result from the second call to the API" );
 		$this->assertCount( 1, $second[0]['items'],
 			"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( "{$id}", $second[0]['items'],
-			"Must have an '{$id}' key in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['items']["{$id}"],
-			"Must have an 'id' key in the '{$id}' result from the second call to the API" );
-		$this->assertEquals( $id, $second[0]['items']["{$id}"]['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the second call to the API" );
+		$this->assertArrayHasKey( "{$myid}", $second[0]['items'],
+			"Must have an '{$myid}' key in the 'items' result from the second call to the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['items']["{$myid}"],
+			"Must have an 'id' key in the '{$myid}' result from the second call to the API" );
+		$this->assertEquals( $myid, $second[0]['items']["{$myid}"]['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the second call to the API" );
 		
 		// now check if we can find them by their old site-title pairs
-		// that is they should not have lost teir old pairs
+		// that is, they should not have lost teir old pairs
 		$third = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
 			'sites' => $linksite,
@@ -457,12 +544,12 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'items' key in the result from the second call to the API" );
 		$this->assertCount( 1, $third[0]['items'],
 			"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( "{$id}", $third[0]['items'],
-			"Must have an '{$id}' key in the 'items' result from the second call to the API" );
-		$this->assertArrayHasKey( 'id', $third[0]['items']["{$id}"],
-			"Must have an 'id' key in the '{$id}' result from the second call to the API" );
-		$this->assertEquals( $id, $third[0]['items']["{$id}"]['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the second call to the API" );
+		$this->assertArrayHasKey( "{$myid}", $third[0]['items'],
+			"Must have an '{$myid}' key in the 'items' result from the second call to the API" );
+		$this->assertArrayHasKey( 'id', $third[0]['items']["{$myid}"],
+			"Must have an 'id' key in the '{$myid}' result from the second call to the API" );
+		$this->assertEquals( $myid, $third[0]['items']["{$myid}"]['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the second call to the API" );
 		
 	}
 
@@ -472,41 +559,32 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider providerLabelDescription
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testSetLanguageAttributeAdd( $id, $site, $title, $language, $label, $description ) {
-		$this->markTestIncomplete(
-			'This test needs loving.'
-		);
-		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'add' );
+		$this->setLanguageAttribute( $id+3, $site, $title, $language, $label, $description, 'add' );
 	}
 	
 	/**
 	 * @group API
 	 * @dataProvider providerLabelDescription
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testSetLanguageAttributeUpdate( $id, $site, $title, $language, $label, $description ) {
-		$this->markTestIncomplete(
-			'This test needs loving.'
-		);
 		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'update' );
 	}
 	
 	/**
 	 * @group API
 	 * @dataProvider providerLabelDescription
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testSetLanguageAttributeSet( $id, $site, $title, $language, $label, $description ) {
-		$this->markTestIncomplete(
-			'This test needs loving.'
-		);
 		$this->setLanguageAttribute( $id, $site, $title, $language, $label, $description, 'set' );
 	}
 	
 	public function setLanguageAttribute( $id, $site, $title, $language, $label, $description, $op ) {
-		
+		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
 		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
@@ -517,13 +595,14 @@ class ApiSetItemTests extends \ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-			//print_r($data[0]);
+			
 			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
 		}
-		
+		if ( $op !== 'add') {
+			$req['id'] = $myid;
+		}
 		$req = array_merge( $req, array(
 			'action' => 'wbsetlanguageattribute',
-			'id' => $id,
 			'label' => $label,
 			'description' => $description,
 			'language' => $language,
@@ -538,36 +617,39 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'item' key in the result from the API" );
 		$this->assertArrayHasKey( 'id', $first[0]['item'],
 			"Must have an 'id' key in the 'item' result from the API" );
-		$this->assertEquals( $id, $first[0]['item']['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the API" );
+		$this->assertEquals( $myid, $first[0]['item']['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 		
 		$second = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
-			'ids' => $id,
+			'ids' => $myid,
+			'usekeys' => true,
+			'format' => 'jsonfm',
 			'language' => $language,
 		) );
+		
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the result in the second call to the API" );
 		$this->assertArrayHasKey( 'items', $second[0],
 			"Must have an 'items' key in the result in the second call to the API" );
 		$this->assertCount( 1, $second[0]['items'],
 			"Must have a number of count of 1 in the 'items' result in the second call to the API" );
-		$this->assertArrayHasKey( "{$id}", $second[0]['items'],
-			"Must have an '{$id}' key in the 'items' result in the second call to the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['items']["{$id}"],
-			"Must have an 'id' key in the '{$id}' result in the second call to the API" );
-		$this->assertEquals( $id, $second[0]['items']["{$id}"]['id'],
-			"Must have the value '{$id}' for the 'id' in the result in the second call to the API" );
+		$this->assertArrayHasKey( "{$myid}", $second[0]['items'],
+			"Must have an '{$myid}' key in the 'items' result in the second call to the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['items']["{$myid}"],
+			"Must have an 'id' key in the '{$myid}' result in the second call to the API" );
+		$this->assertEquals( $myid, $second[0]['items']["{$myid}"]['id'],
+			"Must have the value '{$myid}' for the 'id' in the result in the second call to the API" );
 		
-		$this->assertArrayHasKey( $language, $second[0]['items']["{$id}"]['labels'],
+		$this->assertArrayHasKey( $language, $second[0]['items']["{$myid}"]['labels'],
 			"Must have an '{$language}' key in the 'labels' second result in the second call to the API" );
-		$this->assertEquals( $label, $second[0]['items']["{$id}"]['labels'][$language],
-			"Must have the value '{$label}' for the '{$language}' in the 'labels' set in the result in the second call to the API" );
+		$this->assertEquals( $label, $second[0]['items']["{$myid}"]['labels'][$language]['value'],
+			"Must have the value '{$label}' for the value of '{$language}' in the 'labels' set in the result in the second call to the API" );
 		
-		$this->assertArrayHasKey( $language, $second[0]['items']["{$id}"]['descriptions'],
+		$this->assertArrayHasKey( $language, $second[0]['items']["{$myid}"]['descriptions'],
 			"Must have an '{$language}' key in the 'descriptions' result in the second to the API" );
-		$this->assertEquals( $description, $second[0]['items']["{$id}"]['descriptions'][$language],
-			"Must have the value '{$description}' for the '{$language}' in the 'descriptions' set in the result in the second call to the API" );
+		$this->assertEquals( $description, $second[0]['items']["{$myid}"]['descriptions'][$language]['value'],
+			"Must have the value '{$description}' for the value of '{$language}' in the 'descriptions' set in the result in the second call to the API" );
 		
 	}
 	
@@ -577,7 +659,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * 
 	 * @group API
 	 * @dataProvider providerRemoveLabelDescription
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testDeleteLanguageAttributeLabel( $id, $site, $title, $language ) {
 		$this->deleteLanguageAttribute( $id, $site, $title, $language, 'label' );
@@ -586,14 +668,14 @@ class ApiSetItemTests extends \ApiTestCase {
 	/**
 	 * @group API
 	 * @dataProvider providerRemoveLabelDescription
-	 * @Depends testSetItemGetTokenSetData
+	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testDeleteLanguageAttributeDescription( $id, $site, $title, $language ) {
 		$this->deleteLanguageAttribute( $id, $site, $title, $language, 'description' );
 	}
 	
 	public function deleteLanguageAttribute( $id, $site, $title, $language, $op ) {
-		
+		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
 		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
@@ -604,13 +686,12 @@ class ApiSetItemTests extends \ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-			//print_r($data[0]);
 			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
 		}
 		
 		$req = array_merge( $req, array(
 			'action' => 'wbdeletelanguageattribute',
-			'id' => $id,
+			'id' => $myid,
 			'language' => $language,
 			'attribute' => $op,
 		) );
@@ -623,12 +704,12 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'item' key in the result from the API" );
 		$this->assertArrayHasKey( 'id', $first[0]['item'],
 			"Must have an 'id' key in the 'item' result from the API" );
-		$this->assertEquals( $id, $first[0]['item']['id'],
-			"Must have the value '{$id}' for the 'id' in the result from the API" );
+		$this->assertEquals( $myid, $first[0]['item']['id'],
+			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 		
 		$second = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
-			'ids' => $id,
+			'ids' => $myid,
 			'language' => $language,
 		) );
 		
@@ -638,14 +719,14 @@ class ApiSetItemTests extends \ApiTestCase {
 			"Must have an 'items' key in the result in the second call to the API" );
 		$this->assertCount( 1, $second[0]['items'],
 			"Must have a number of count of 1 in the 'items' result in the second call to the API" );
-		$this->assertArrayHasKey( "{$id}", $second[0]['items'],
-			"Must have an '{$id}' key in the 'items' result in the second call to the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['items']["{$id}"],
-			"Must have an 'id' key in the '{$id}' result in the second call to the API" );
-		$this->assertEquals( $id, $second[0]['items']["{$id}"]['id'],
-			"Must have the value '{$id}' for the 'id' in the result in the second call to the API" );
+		$this->assertArrayHasKey( "{$myid}", $second[0]['items'],
+			"Must have an '{$myid}' key in the 'items' result in the second call to the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['items']["{$myid}"],
+			"Must have an 'id' key in the '{$myid}' result in the second call to the API" );
+		$this->assertEquals( $myid, $second[0]['items']["{$myid}"]['id'],
+			"Must have the value '{$myid}' for the 'id' in the result in the second call to the API" );
 		
-		if ( isset($second[0]['items']["{$id}"][$op][$language]) ) {
+		if ( isset($second[0]['items']["{$myid}"][$op][$language]) ) {
 			$this->fail( "Must not have an '{$language}' key in the 'labels' result in the second call to the API" );
 		}
 	}
@@ -654,7 +735,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * Just provide the actions to test the API calls
 	 */
 	function provideSetItemIdDataOp() {
-		$idx = self::$top;
+		$idx = self::$baseOfItemIds;
 		return array(
 			array(
 				++$idx,
@@ -732,7 +813,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	}
 	
 	public function providerGetItemId() {
-		$idx = self::$top;
+		$idx = self::$baseOfItemIds;
 		return array(
 			array( ++$idx, 'de', 'Berlin'),
 			array( $idx, 'en', 'Berlin'),
@@ -750,7 +831,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	}
 	
 	public function providerLinkSiteId() {
-		$idx = self::$top;
+		$idx = self::$baseOfItemIds;
 		return array(
 			array( ++$idx, 'nn', 'Berlin', 'fi', 'Berlin', 1 ),
 			array( ++$idx, 'en', 'London', 'fi', 'London', 2 ),
@@ -759,7 +840,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	}
 	
 	public function providerLinkSitePair() {
-		$idx = self::$top;
+		$idx = self::$baseOfItemIds;
 		return array(
 			array( ++$idx, 'nn', 'Berlin', 'sv', 'Berlin', 1 ),
 			array( ++$idx, 'en', 'London', 'sv', 'London', 2 ),
@@ -768,7 +849,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	}
 	
 	public function providerLabelDescription() {
-		$idx = self::$top;
+		$idx = self::$baseOfItemIds;
 		return array(
 			array( ++$idx, 'nn', 'Berlin', 'da', 'Berlin', 'Hovedstad i Tyskland' ),
 			array( ++$idx, 'nn', 'London', 'da', 'London', 'Hovedstad i England' ),
@@ -777,13 +858,12 @@ class ApiSetItemTests extends \ApiTestCase {
 	}
 	
 	public function providerRemoveLabelDescription() {
-		$idx = self::$top;
+		$idx = self::$baseOfItemIds;
 		return array(
 			array( ++$idx, 'nn', 'Berlin', 'de' ),
 			array( ++$idx, 'nn', 'London', 'de' ),
 			array( ++$idx, 'nn', 'Oslo', 'de' ),
 		);
 	}
-	
 	
 }

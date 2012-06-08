@@ -39,7 +39,7 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiLanguageAttributeTest extends ApiModifyItemTest {
+class ApiLanguageAttributeTest extends ApiModifyItemBase {
 
 	public function paramProvider() {
 		return array(
@@ -55,9 +55,8 @@ class ApiLanguageAttributeTest extends ApiModifyItemTest {
 
 	/**
 	 * @dataProvider paramProvider
-	 * @group Broken
 	 */
-	public function testLanguageAttributeLabel( $attr, $langCode, $op, $value, $expected, $exception ) {
+	public function testLanguageAttribute( $attr, $langCode, $op, $value, $expected, $exception ) {
 		
 		$req = array();
 		$token = $this->gettoken();
@@ -68,6 +67,8 @@ class ApiLanguageAttributeTest extends ApiModifyItemTest {
 		$req = array_merge( $req, array(
 			'id' => self::$item->getId(),
 			'action' => 'wbsetlanguageattribute',
+			//'usekeys' => true, // this comes from \WBSettings::get( 'apiUseKeys' )
+			'format' => 'json',
 			'language' => $langCode,
 			'item' => $op,
 			$attr => $value
@@ -89,13 +90,21 @@ class ApiLanguageAttributeTest extends ApiModifyItemTest {
 		$apiResponse = $apiResponse[0];
 
 		$this->assertSuccess( $apiResponse );
-
+		
 		self::$item->reload();
 		if ( $attr === 'label') {
 			$str = self::$item->getLabel( $langCode );
+			$this->assertTrue(
+				\WBSettings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['labels']) : !array_key_exists($langCode, $apiResponse['item']['labels']),
+				"Found '{$langCode}' and it should" . (\WBSettings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in labels"
+			);
 		}
 		if ( $attr === 'description') {
 			$str = self::$item->getDescription( $langCode );
+			$this->assertTrue(
+				\WBSettings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['descriptions']) : !array_key_exists($langCode, $apiResponse['item']['descriptions']),
+				"Found '{$langCode}' and it should" . (\WBSettings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in descriptions"
+			);
 		}
 		
 		$this->assertEquals(
@@ -103,7 +112,7 @@ class ApiLanguageAttributeTest extends ApiModifyItemTest {
 			$str,
 			"Setting of {$attr} does not return the expected result"
 		);
+		
 	}
 
 }
-	
