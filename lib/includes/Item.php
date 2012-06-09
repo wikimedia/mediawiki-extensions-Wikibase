@@ -637,7 +637,7 @@ class Item extends Entity {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function removeLinkSite( $siteId, $pageName ) {
+	public function removeSiteLink( $siteId, $pageName ) {
 		$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId]['title'] === $pageName;
 
 		if ( $success ) {

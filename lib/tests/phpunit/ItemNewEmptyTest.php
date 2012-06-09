@@ -145,12 +145,12 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 			'Testing if getSiteLinks reconstructs the whole structure after it is built with addSiteLink'
 		);
 		foreach ($arr as $key => $val) {
-			$this->item->removeLinkSite( $key, $val );
+			$this->item->removeSiteLink( $key, $val );
 		}
 		$this->assertCount(
 			0,
 			$this->item->getSiteLinks(),
-			'Testing if removeLinkSite decrements the whole structure to zero after it is built with addSiteLink'
+			'Testing if removeSiteLink decrements the whole structure to zero after it is built with addSiteLink'
 		);
 	}
 	
