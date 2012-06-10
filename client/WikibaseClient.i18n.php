@@ -162,6 +162,7 @@ $messages['it'] = array(
  * @author Shirayuki
  */
 $messages['ja'] = array(
+	'wbc-desc' => 'Wikibase拡張機能のクライアント',
 	'wbc-editlinks' => 'リンクを編集',
 	'wbc-editlinkstitle' => '言語間リンクを編集',
 );
@@ -248,6 +249,15 @@ $messages['sv'] = array(
  */
 $messages['te'] = array(
 	'wbc-editlinks' => 'లంకెలను మార్చు',
+);
+
+/** Tagalog (Tagalog)
+ * @author AnakngAraw
+ */
+$messages['tl'] = array(
+	'wbc-desc' => 'Kliyente para sa dugtong na Wikibase',
+	'wbc-editlinks' => 'Baguhin ang mga kawing',
+	'wbc-editlinkstitle' => 'Baguhin ang mga kawing na para sa interwika',
 );
 
 /** Simplified Chinese (‪中文(简体)‬)
