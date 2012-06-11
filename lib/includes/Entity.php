@@ -15,7 +15,7 @@ namespace Wikibase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class Entity extends \Content {
+abstract class Entity extends \AbstractContent {
 
 
 
