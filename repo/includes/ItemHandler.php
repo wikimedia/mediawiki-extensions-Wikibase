@@ -87,5 +87,28 @@ class ItemHandler extends EntityHandler {
 		);
 	}
 
+	/**
+	 * @see   ContentHandler::getSecondaryDataUpdates
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Content           $content
+	 * @param \Title             $title
+	 * @param \Content|null      $old
+	 * @param bool               $recursive
+	 *
+	 * @param null|\ParserOutput $parserOutput
+	 *
+	 * @return array of \DataUpdate
+	 */
+	public function getSecondaryDataUpdates( Content $content, Title $title, Content $old = null,
+											$recursive = false, ParserOutput $parserOutput = null ) {
+
+		return array_merge(
+			parent::getSecondaryDataUpdates( $content, $title, $old, $recursive, $parserOutput ),
+			array( new ItemStructuredSave( $content, $title ) )
+		);
+	}
+
 }
 

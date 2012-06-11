@@ -65,11 +65,16 @@
 				'@@@@' // link to 'Special:CreateItem'
 			)
 		} ).hide();
-
+               
 		notification.html( notification.text().replace(
 			"@@@@", '<a href="' + ( new mw.Title( 'Special:CreateItem' ) ).getUrl() + '">' + mw.msg( 'special-createitem' ) + '</a>'
-		) )
-		.prependTo( $( '#content' ) ).fadeIn();
+		) );
+
+		if ( $( '#siteNotice' ).length ) {
+			notification.insertAfter( $( '#siteNotice' ) ).fadeIn();
+		} else {
+			notification.prependTo( $( '#content' ) ).fadeIn();
+		}
 	}
 
 

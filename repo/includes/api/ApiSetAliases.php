@@ -69,6 +69,20 @@ class ApiSetAliases extends ApiModifyItem {
 			$item->addAliases( $params['language'], $params['add'] );
 		}
 
+		// FIXME: getRawAliases() doesn't exist, and we decided to refactor that part of the Item class.
+		//        ignore aliases for now to remove the dependency on getRawAliases and get the review process unstuck.
+		//        This should REALLY be fixed one way or the other by tomorrow (June 10) [dk].
+		/*
+		$aliases = $this->stripKeys( $params, $item->getRawAliases( (array)$params['language'] ), 'al', 2 );
+		if ( count( $aliases ) ) {
+			$this->getResult()->addValue(
+				'item',
+				'aliases',
+				$aliases
+			);
+		}
+		*/
+
 		return true;
 	}
 

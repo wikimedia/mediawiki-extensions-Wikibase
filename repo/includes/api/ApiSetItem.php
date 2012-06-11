@@ -70,7 +70,7 @@ class ApiSetItem extends Api {
 		
 		// This is really already done with needTokens()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-token' ), 'no-token' );
+			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
 		
 		if ( !$params['data'] ) {
@@ -171,6 +171,7 @@ class ApiSetItem extends Api {
 			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'cant-edit', 'info' => wfMsg( 'wikibase-api-cant-edit' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
+			array( 'code' => 'session-failure', 'info' => wfMsg( 'wikibase-api-session-failure' ) ),
 		) );
 	}
 
