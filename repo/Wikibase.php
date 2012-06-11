@@ -81,7 +81,6 @@ $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php'
 
 
 // Autoloading
-$wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
@@ -142,6 +141,7 @@ $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
 // Hooks
+$wgHooks['WikibaseDefaultSettings'][] 			    = 'WikibaseHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
@@ -300,10 +300,11 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 unset( $moduleTemplate );
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
-
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 
+//@todo: FIXME: this doesn't give wikis a chance to change the $baseNs.
+//       Namespace definitions should be deferred into a hook and be based on WBSettings.
+//       Note that some wikis may use the main namespace for data, or not have a data namespace.
 $baseNs = 100;
 
 define( 'WB_NS_DATA', $baseNs );
@@ -321,5 +322,3 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 //$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
 
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
-
-$egWBSettings = array();
