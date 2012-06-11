@@ -85,6 +85,7 @@ $wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
+$wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\DifferenceEngine'] 		= $dir . 'includes/DifferenceEngine.php';
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
 $wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/ItemDeletionUpdate.php';
@@ -117,7 +118,8 @@ $wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/Special
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
 // tests
-$wgAutoloadClasses['Wikibase\Test\ApiModifyItemTest'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemTest.php';
+$wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
+//$wgAutoloadClasses['Wikibase\Test\TestItems'] 			= $dir . 'tests/phpunit/includes/TestItems.php';
 
 
 

@@ -305,7 +305,7 @@
 						self.removeTag( tag );
 					}
 				} )
-				.keypress( function( event ) {
+				.keydown( function( event ) {
 						// store value before key evaluated to make comparison afterwards
 						previousLabel = self.getTagLabel( tag );
 				} )

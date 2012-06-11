@@ -45,8 +45,7 @@ class ApiGetItems extends Api {
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				foreach ($params['sites'] as $site) {
-					// FOXME: $sites is not defined
-					$params['ids'][] = Item::getIdForSiteLink( $sites, $params['titles'] );
+					$params['ids'][] = Item::getIdForSiteLink( $site, $params['titles'] );
 				}
 			}
 			else {
@@ -70,6 +69,7 @@ class ApiGetItems extends Api {
 			$page = Item::getWikiPageForId( $id );
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
+				/** @var Item $item **/
 				$item = $page->getContent();
 				if ( is_null($item) ) {
 					continue;
@@ -82,22 +82,43 @@ class ApiGetItems extends Api {
 				// but if there are only a few calls its okey
 				$res = $this->getResult();
 				$arr = array();
-				//$arr = array( 'id' => $id );
-				$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks(), 'sl' );
-				if (count($sitelinks)) {
-					$arr['sitelinks'] = $sitelinks;
-				}
-				$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( $languages ), 'd' );
-				if (count($descriptions)) {
-					$arr['descriptions'] = $descriptions;
-				}
-				$labels = $this->stripKeys( $params, $item->getRawLabels( $languages ), 'l' );
-				if (count($labels)) {
-					$arr['labels'] = $labels;
-				}
-				
 				$arr['id'] = $item->getId();
-				
+				foreach ( $params['props'] as $key ) {
+					switch ($key) {
+					case 'sitelinks':
+						$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks(), 'sl' );
+						if ( count( $sitelinks ) ) {
+							$arr['sitelinks'] = $sitelinks;
+						}
+						break;
+					case 'aliases':
+						// FIXME: getRawAliases() doesn't exist, and we decided to refactor that part of the Item class.
+						//        ignore aliases for now to remove the dependency on getRawAliases and get the review process unstuck.
+						//        This should REALLY be fixed one way or the other by tomorrow (June 10) [dk].
+						/*
+						$aliases = $this->stripKeys( $params, $item->getRawAliases( $languages ), 'al', 2 );
+						if ( count( $aliases ) ) {
+							$arr['aliases'] = $aliases;
+						} */
+						break;
+					case 'descriptions':
+						$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( $languages ), 'd' );
+						if ( count( $descriptions ) ) {
+							$arr['descriptions'] = $descriptions;
+						}
+						break;
+					case 'labels':
+						$labels = $this->stripKeys( $params, $item->getRawLabels( $languages ), 'l' );
+						if ( count( $labels ) ) {
+							$arr['labels'] = $labels;
+						}
+						break;
+					default:
+						// should never be here
+						$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+					}
+				}
+
 				$res->addValue(
 					'items',
 					"{$id}",
@@ -106,7 +127,7 @@ class ApiGetItems extends Api {
 				$res->setIndexedTagName_internal( array( 'items' ), 'item' );
 			}
 		}
-		
+
 		$success = true;
 
 		$this->getResult()->addValue(
@@ -137,6 +158,11 @@ class ApiGetItems extends Api {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 			),
+			'props' => array(
+				ApiBase::PARAM_TYPE => array( 'sitelinks', 'aliases', 'labels', 'descriptions' ),
+				ApiBase::PARAM_DFLT => 'sitelinks|aliases|labels|descriptions',
+				ApiBase::PARAM_ISMULTI => true,
+			),
 			'languages' => array(
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
@@ -153,6 +179,9 @@ class ApiGetItems extends Api {
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
 			'ids' => 'The IDs of the items to get the data from',
+			'props' => array( 'The names of the properties to get back from each item',
+				"Will be further filtered by any languages given."
+			),
 			'languages' => 'By default the internationalized values are returned in all available languages.
 						This parameter allows filtering these down to one or more languages by providing their language codes.',
 			'titles' => array( 'The title of the corresponding page',
@@ -183,6 +212,7 @@ class ApiGetItems extends Api {
 			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
 			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
+			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
 		) );
 	}
 

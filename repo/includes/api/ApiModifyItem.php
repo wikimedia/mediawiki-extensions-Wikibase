@@ -90,7 +90,7 @@ abstract class ApiModifyItem extends Api {
 
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
-			$this->dieUsageMsg( 'sessionfailure' );
+			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
 		
 		if ( !$user->isAllowed( 'edit' ) ) {
@@ -215,7 +215,8 @@ abstract class ApiModifyItem extends Api {
 			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 			array( 'code' => 'invalid-contentmodel', 'info' => wfMsg( 'wikibase-api-invalid-contentmodel' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
-		) );
+			array( 'code' => 'session-failure', 'info' => wfMsg( 'wikibase-api-session-failure' ) ),
+			) );
 	}
 
 	/**

@@ -52,6 +52,7 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
 
+		$files[] = $testDir . 'ChangeNotifierTest.php';
 		$files[] = $testDir . 'EntityHandlerTest.php';
 		$files[] = $testDir . 'ItemDeletionUpdateTest.php';
 		$files[] = $testDir . 'ItemHandlerTest.php';
@@ -180,26 +181,16 @@ final class WikibaseHooks {
 		if ( $newItem->getModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			$oldItem = is_null( $revision->getParentId() ) ? Wikibase\Item::newEmpty() : Revision::newFromId( $revision->getParentId() )->getContent();
 
-			$diff = new Wikibase\ItemDiff( $oldItem, $newItem );
+			$change = \Wikibase\ItemChange::newFromItems( $oldItem, $newItem );
 
-			if ( $diff->hasChanges() ) {
-				$dbw = wfGetDB( DB_MASTER );
+			$change->setFields( array(
+				'revision_id' => $revision->getId(),
+				'user_id' => $user->getId(),
+				'object_id' => $newItem->getId(),
+				'time' => $revision->getTimestamp(),
+			) );
 
-				$dbw->begin();
-
-				foreach ( $diff->getChanges() as /* Wikibase\Change */ $change ) {
-					$change->setFields( array(
-						'revision_id' => $revision->getId(),
-						'user_id' => $user->getId(),
-						'object_id' => $newItem->getId(),
-						'time' => $revision->getTimestamp(),
-					) );
-
-					$change->save();
-				}
-
-				$dbw->commit();
-			}
+			\Wikibase\ChangeNotifier::singleton()->handleChange( $change );
 		}
 
 		return true;

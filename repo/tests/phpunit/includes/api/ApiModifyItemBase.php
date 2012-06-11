@@ -32,10 +32,10 @@ use Wikibase\Item as Item;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ApiModifyItemTest extends ApiTestCase {
+abstract class ApiModifyItemBase extends ApiTestCase {
 
 	/**
-	 * @var Item
+	 * @var WikibaseItem
 	 */
 	protected static $item = false;
 	
@@ -84,6 +84,21 @@ abstract class ApiModifyItemTest extends ApiTestCase {
 
 		parent::tearDown();
 	}
+	
+	protected function gettoken() {
+		if (\WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true) {
+			$first = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'gettoken' => '' ),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			return $first[0]['wbsetitem']['setitemtoken'];
+		}
+		return null;
+	}
 
 	protected function assertSuccess( array $apiResponse ) {
 		$this->assertArrayHasKey(
@@ -112,4 +127,3 @@ abstract class ApiModifyItemTest extends ApiTestCase {
 	}
 
 }
-	
