@@ -99,25 +99,22 @@ class PollForChanges extends \Maintenance {
 			__METHOD__
 		);
 
-		if ( $changes->count() === 0 ) {
-			$this->msg( 'No new changes were found' );
+		$changeCount = $changes->count();
+
+		if ( $changeCount == 0 ) {
+			self::msg( 'No new changes were found' );
 		}
 		else {
-			$this->msg( $changes->count() . ' new changes were found' );
+			self::msg( $changeCount . ' new changes were found' );
 
-			wfRunHooks( 'WikibasePollBeforeHandle', array( $changes ) );
+			$changes = iterator_to_array( $changes );
 
-			foreach ( $changes as /* WikibaseChange */ $change ) {
-				$this->msg( 'Handling change with id ' . $change->getId() );
-				wfRunHooks( 'WikibasePollHandle', array( $change ) );
-			}
+			ChangeHandler::singleton()->handleChanges( $changes );
 
-			$this->lastChangeId = $change->getId();
-
-			wfRunHooks( 'WikibasePollAfterHandle', array( $changes ) );
+			$this->lastChangeId = array_pop( $changes )->getId();
 		}
 
-		return $changes->count() === $this->pollLimit ? $this->continueInterval : $this->sleepInterval;
+		return $changeCount === $this->pollLimit ? $this->continueInterval : $this->sleepInterval;
 	}
 
 	/**
@@ -142,11 +139,15 @@ class PollForChanges extends \Maintenance {
 	 *
 	 * @param string $message
 	 */
-	protected function msg( $message ) {
+	public static function msg( $message ) {
 		echo date( 'H:i:s' ) . ' ' . $message . "\n";
 	}
 
 }
+
+$wgHooks['WikibasePollHandle'] = function( Change $change ) {
+	PollForChanges::msg( 'Handling change with id ' . $change->getId() );
+};
 
 $maintClass = 'Wikibase\PollForChanges';
 require_once( RUN_MAINTENANCE_IF_MAIN );
