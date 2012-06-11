@@ -370,18 +370,6 @@
 				} )
 				.appendTo( label );
 
-				// if auto expand is available, use it for tags!
-				if( input.inputAutoExpand ) {
-					input.inputAutoExpand( {
-						maxWidth: function() {
-							var origCssDisplay = self.tagList.css( 'display' );
-							self.tagList.css( 'display', 'block' );
-							var width = self.tagList.width();
-							self.tagList.css( 'display', origCssDisplay );
-							return width;
-						}
-					} );
-				}
 			} else {
 				// we need input only for the form to contain the data
 				input.attr( {

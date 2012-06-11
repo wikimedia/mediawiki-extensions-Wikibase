@@ -30,6 +30,34 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	 */
 	UI_VALUE_PIECE_CLASS: 'wb-ui-propertyedittool-editablevaluelistinterface-piece',
 
+
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement
+	 */
+	_initInputElement: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement.call( this );
+		/*
+		applying auto-expansion mechanism has to be done after tagadata's tagList has been placed within
+		the DOM since no css rules of the specified css classes are applied by then - respectively jQuery's
+		.css() function would return unexpected results
+		*/
+		var self = this;
+		$.each( this._getTagadata().tagList.children( 'li' ).find( 'input' ), function( i, input ) {
+			if ( $( input ).inputAutoExpand ) {
+				$( input ).inputAutoExpand( {
+					maxWidth: function() {
+						var tagList = self._getTagadata().tagList;
+						var origCssDisplay = tagList.css( 'display' );
+						tagList.css( 'display', 'block' );
+						var width = tagList.width();
+						tagList.css( 'display', origCssDisplay );
+						return width;
+					}
+				} );
+			}
+		} );
+	},
+
 	/**
 	 * create input element and initialize autocomplete
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement
