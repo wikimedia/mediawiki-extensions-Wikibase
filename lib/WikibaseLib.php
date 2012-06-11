@@ -43,7 +43,8 @@ $wgExtensionCredits['other'][] = array(
 
 $dir = dirname( __FILE__ ) . '/';
 
-
+// constants
+define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
 
 // i18n
 $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
@@ -52,7 +53,7 @@ $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 
 // Autoloading
 $wgAutoloadClasses['WikibaseLibHooks'] 				= $dir . 'WikibaseLib.hooks.php';
-$wgAutoloadClasses['WBLSettings'] 					= $dir . 'WikibaseLib.settings.php';
+$wgAutoloadClasses['WBSettings'] 					= $dir . 'WikibaseLib.settings.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
@@ -104,4 +105,6 @@ $wgSharedTables[] = 'wb_changes';
 
 
 
-$egWBLSettings = array();
+$egWBDefaultsFunction = null;
+
+$egWBSettings = array();

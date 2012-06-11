@@ -45,7 +45,6 @@ final class WikibaseLibHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testFiles = array(
 			'Changes',
-			'ItemMove',
 			'ItemMultilangTexts',
 			'ItemNewEmpty',
 			'ItemNewFromArray',

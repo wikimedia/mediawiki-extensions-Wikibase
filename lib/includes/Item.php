@@ -115,6 +115,7 @@ class Item extends Entity {
 	 * @since 0.1
 	 *
 	 * @return boolean Success indicator
+	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	protected function relationalSave() {
 		$dbw = wfGetDB( DB_MASTER );
@@ -158,6 +159,7 @@ class Item extends Entity {
 	 * @param null|User $user
 	 *
 	 * @return boolean Success indicator
+	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public function save( $summary = '', User $user = null ) {
 		$success = $this->relationalSave();
@@ -184,6 +186,7 @@ class Item extends Entity {
 	 * @since 0.1
 	 *
 	 * @throws MWException
+	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public function reload() {
 		if ( !$this->isNew() ) {
@@ -207,6 +210,7 @@ class Item extends Entity {
 	 * @param null|User $user
 	 *
 	 * @return boolean Success indicator
+	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public function remove( $summary = '', User $user = null ) {
 		// TODO
@@ -807,6 +811,7 @@ class Item extends Entity {
 	 * @since 0.1
 	 *
 	 * @return WikiPage|false
+	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
@@ -822,6 +827,7 @@ class Item extends Entity {
 	 * @since 0.1
 	 *
 	 * @return Title|false
+	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public function getTitle() {
 		$wikiPage = $this->getWikiPage();
@@ -836,6 +842,7 @@ class Item extends Entity {
 	 * @param integer $itemId
 	 *
 	 * @return Content|null
+	 * @todo: factor out into the repo and/or provide a client side implementation based on the local cache
 	 */
 	public static function getFromId( $itemId ) {
 		// TODO: since we already did the trouble of getting a WikiPage here,
@@ -852,6 +859,7 @@ class Item extends Entity {
 	 * @param string $pageName
 	 *
 	 * @return Content|null
+	 * @todo: factor out into the repo and/or provide a client side implementation based on the local cache
 	 */
 	public static function getFromSiteLink( $siteId, $pageName ) {
 		$id = self::getIdForSiteLink( $siteId, $pageName );
@@ -870,6 +878,7 @@ class Item extends Entity {
 	 * @param string|null $description
 	 *
 	 * @return array of Item
+	 * @todo: factor out into the repo; label search is not possible on the client side.
 	 */
 	public static function getFromLabel( $language, $label, $description = null ) {
 		$ids = self::getIdsForLabel( $language, $label, $description );
@@ -894,6 +903,7 @@ class Item extends Entity {
 	 * @param integer $itemId
 	 *
 	 * @return WikiPage
+	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public static function getWikiPageForId( $itemId ) {
 		return new WikiPage( self::getTitleForId( $itemId ) );
@@ -907,6 +917,7 @@ class Item extends Entity {
 	 * @param integer $itemId
 	 *
 	 * @return Title
+	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public static function getTitleForId( $itemId ) {
 		return Title::newFromText( 'Data:Q' . $itemId ); // TODO
