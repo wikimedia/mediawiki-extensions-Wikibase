@@ -332,6 +332,7 @@ $messages['de'] = array(
 	'wikibase-api-label-not-found' => 'Es wurde keine frühere Bezeichnung in dieser Sprache im Datenelement gefunden.',
 	'wikibase-api-description-not-found' => 'Es wurde keine frühere Beschreibung in dieser Sprache im Datenelement gefunden.',
 	'wikibase-api-wrong-class' => 'Der Inhalt auf der gefundenen Seite entspricht nicht dem richtigen Typ.',
+	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Du musst die Seite neu laden und dich erneut anmelden.',
 	'content-model-1001' => 'Wikibase-Datenelement',
 );
 
@@ -352,6 +353,7 @@ $messages['de-formal'] = array(
 	'wikibase-api-aliases-invalid-list' => 'Sie müssen einen der Parameter zu „set“, „add“, bzw. „remove“ nutzen.',
 	'wikibase-api-id-xor-wikititle' => 'Geben Sie für eine entsprechende Seite entweder die Kennung des Datenelements „id“ oder Informationspaare mit Angaben zu „site“ und „title“ an.',
 	'wikibase-api-label-or-description' => 'Verwenden Sie entweder „label“ und/oder „description“.',
+	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Sie müssen die Seite neu laden und sich erneut anmelden.',
 );
 
 /** Zazaki (Zazaki)
@@ -647,6 +649,7 @@ $messages['gl'] = array(
 	'wikibase-api-label-not-found' => 'Non se pode atopar unha etiqueta anterior para esta lingua no elemento.',
 	'wikibase-api-description-not-found' => 'Non se pode atopar unha descrición anterior para esta lingua no elemento.',
 	'wikibase-api-wrong-class' => 'O contido da páxina atopada non é do tipo correcto.',
+	'wikibase-api-session-failure' => 'A sesión actual fallou e agora debe refrescar a páxina e acceder de novo.',
 	'content-model-1001' => 'Elemento de Wikibase',
 );
 
@@ -812,8 +815,8 @@ $messages['is'] = array(
 	'wikibase-move-error' => 'Ekki er mögulegt að færa síður í data nafnrýminu, né færa síður þangað.',
 	'wikibase-sitelink-site-edit-placeholder' => 'tilgreindu vefsvæði',
 	'wikibase-sitelink-page-edit-placeholder' => 'tilgreindu síðu',
-	'wikibase-label-input-help-message' => 'Sláðu inn {{lcfirst:$1}}n titil fyrir þetta gagnasett.',
-	'wikibase-description-input-help-message' => 'Sláðu inn stutta lýsingu á $1.',
+	'wikibase-label-input-help-message' => 'Sláðu inn $1n titil fyrir þetta gagnasett.',
+	'wikibase-description-input-help-message' => 'Sláðu inn stutta $1 lýsingu.',
 	'wikibase-sitelinks' => 'Listi yfir síður sem tengja á þennan hlut',
 	'wikibase-sitelinks-add' => 'bæta við vefsvæðis tengli',
 	'wikibase-sitelinks-empty' => 'Enginn vefsvæðis tengill fyrir þennan hlut ennþá.',
@@ -939,6 +942,7 @@ $messages['it'] = array(
 	'wikibase-api-label-not-found' => "Non è possibile trovare un'etichetta precedente per questa lingua nell'elemento.",
 	'wikibase-api-description-not-found' => "Non è possibile trovare una descrizione precedente per questa lingua nell'elemento.",
 	'wikibase-api-wrong-class' => 'Il contenuto della pagina trovata non è di un tipo corretto.',
+	'wikibase-api-session-failure' => "La sessione corrente ha restituito un errore; devi ricaricare la pagina ed effettuare nuovamente l'accesso.",
 	'content-model-1001' => 'Elemento wikibase',
 );
 
@@ -1080,6 +1084,7 @@ $messages['mk'] = array(
 	'wikibase-api-label-not-found' => 'Не можев да пронајдам претходен натпис за овој јазик во ставката',
 	'wikibase-api-description-not-found' => 'Не можев да пронајдам претходен опис за овој јазик во ставката',
 	'wikibase-api-wrong-class' => 'Содржината на пронајдената страница не е од бараниот тип.',
+	'wikibase-api-session-failure' => 'Тековната сесија повеќе не работи. Ќе мора да ја превчитате страницата и да се најавите повторно.',
 	'content-model-1001' => 'Ставка во Викибазата',
 );
 
