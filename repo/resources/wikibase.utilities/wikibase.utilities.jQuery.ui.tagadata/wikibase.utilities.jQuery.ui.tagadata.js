@@ -304,6 +304,13 @@
 					) {
 						self.removeTag( tag );
 					}
+					// remove placeholder preventing removal of line break when entering a short value
+					if( self.options.placeholderText && input.val() !== '' ) {
+						input.removeAttr( 'placeholder' );
+						if( input.inputAutoExpand ) {
+							input.inputAutoExpand();
+						}
+					}
 				} )
 				.keydown( function( event ) {
 						// store value before key evaluated to make comparison afterwards
@@ -418,13 +425,6 @@
 				var helperManifestation = function( e ) {
 					var tagLabel = self.getTagLabel( tag );
 					if( tagLabel !== '' ) {
-						// remove placeholder:
-						if( self.options.placeholderText ) {
-							input.removeAttr( 'placeholder' );
-							if( input.inputAutoExpand ) {
-								input.inputAutoExpand();
-							}
-						}
 						tag.removeClass( 'tagadata-choice-empty' );
 						self._trigger( 'tagAdded', null, tag );
 						self.getHelperTag();
