@@ -57,15 +57,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	_inputElem: null,
 
 	/**
-	 * when adding characters to the input value, the previous value is stored to be able to check whether instant
-	 * on change operations have to be performed.
-	 * @var String
-	 */
-	_previousValue: null,
-
-	_currentWidth: null,
-
-	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
 	 *
@@ -77,7 +68,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._currentWidth = 0;
 	},
 
 	destroy: function() {
@@ -171,7 +161,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'focus':    $.proxy( this._onFocus, this ),
 			'blur':     $.proxy( this._onBlur, this ),
 			'change':   $.proxy( this._onChange, this )
-		} );
+		} )
+		// on each change to this input check whether value was changed:
+		.eachchange( $.proxy( function( e, oldValue ) {
+			if( this.normalize( oldValue ) !== this.getValue() ) {
+				this._onInputRegistered(); // only called if input really changed
+			}
+		}, this ) );
 	},
 
 	/**
@@ -196,16 +192,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
-		this._previousValue = this.getValue(); // remember current value before key changes text
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
 	_onKeyUp: function( event ) {
-		if ( this._previousValue !== this.getValue() ) {
-			this._onInputRegistered(); // only called if input really changed
-		}
 		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
 			return false; // cancel
 		}
