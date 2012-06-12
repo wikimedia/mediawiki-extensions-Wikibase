@@ -189,7 +189,7 @@ $wgResourceModules['wikibase.utilities.jQuery'] = $moduleTemplate + array(
 	)
 );
 
-$wgResourceModules['wikibase.utilities.jQuery.inputAutoExpand'] = $moduleTemplate + array(
+$wgResourceModules['wikibase.utilities.jQuery.ui.inputAutoExpand'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
 	),
@@ -198,7 +198,7 @@ $wgResourceModules['wikibase.utilities.jQuery.inputAutoExpand'] = $moduleTemplat
 	)
 );
 
-$wgResourceModules['wikibase.utilities.jQuery.tagadata'] = $moduleTemplate + array(
+$wgResourceModules['wikibase.utilities.jQuery.ui.tagadata'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.js',
 	),
@@ -207,7 +207,7 @@ $wgResourceModules['wikibase.utilities.jQuery.tagadata'] = $moduleTemplate + arr
 	),
 	'dependencies' => array(
 		'wikibase.utilities.jQuery',
-		'wikibase.utilities.jQuery.inputAutoExpand',
+		'wikibase.utilities.jQuery.ui.inputAutoExpand',
 		'jquery.ui.widget',
 		'jquery.effects.core',
 		'jquery.effects.blind'
@@ -272,8 +272,9 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 	'dependencies' => array(
 		'wikibase',
 		'wikibase.ui.Toolbar',
-		'wikibase.utilities.jQuery.inputAutoExpand',
-		'wikibase.utilities.jQuery.tagadata',
+		'wikibase.utilities.jQuery',
+		'wikibase.utilities.jQuery.ui.inputAutoExpand',
+		'wikibase.utilities.jQuery.ui.tagadata',
 		'jquery.ui.autocomplete',
 		'mediawiki.api',
 		'mediawiki.Title',

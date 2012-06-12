@@ -26,7 +26,7 @@
  *       thing is a mess made of functions returning/expecting either a label or a DOM node.
  */
 
-( function( $, undefined ) {
+( function( $, mw, undefined ) {
 
 	$.widget( 'ui.tagadata', {
 
@@ -241,11 +241,11 @@
 			if( $.isArray( additionalClasses ) ) {
 				additionalClasses = additionalClasses.join( ' ' );
 			}
-			var self = this;
-			var tag = this.getTag( value );
-
 			// Automatically trims the value of leading and trailing whitespace.
 			value = this._formatLabel( value );
+
+			var self = this;
+			var tag = this.getTag( value );
 
 			if( tag !== null ) {
 				// tag in list already, don't add it twice
@@ -286,8 +286,6 @@
 			tag.append( removeTag );
 
 			if( this.options.editableTags ) {
-				var previousLabel; // for determining whether label has changed
-
 				// input is the actual visible content
 				input.attr( {
 					type: 'text',
@@ -312,20 +310,25 @@
 						}
 					}
 				} )
-				.keydown( function( event ) {
-						// store value before key evaluated to make comparison afterwards
-						previousLabel = self.getTagLabel( tag );
-				} )
-				.keyup( function( event ) {
-					var tagLabel = self.getTagLabel( tag );
+				.eachchange( function( e, oldValue ) {
+					// input change registered, check whether tag was really changed...
+					var oldNormalValue = self._formatLabel( oldValue );
+					var newNormalValue = self._formatLabel( input.val() );
 
+					if( oldNormalValue !== newNormalValue ) {
+						// trigger once for widget, once for tag itself
+						$( tag ).triggerHandler( 'tagadatatagchanged', oldNormalValue );
+						self._trigger( 'tagChanged', tag, oldNormalValue );
+					}
+				} )
+				.on( 'keydown', function( event ) {
 					if( $.inArray( event.which, self.options.triggerKeys ) > -1 ) {
 						// Key for finishing tag input was hit (e.g. ENTER)
 
 						event.preventDefault();
 						var targetTag = self.getHelperTag();
 
-						if( tagLabel === '' ) {
+						if( self.getTagLabel( tag ) === '' ) {
 							// enter hit on an empty tag, remove it...
 
 							if( targetTag[0] !== tag[0] ) { // ... except for the helper tag
@@ -335,47 +338,44 @@
 						}
 						targetTag.find( 'input' ).focus();
 					}
+				} );
 
-					if( tagLabel !== previousLabel ) {
-						// input has changed compared with before key pressed!
+				tag.on( 'tagadatatagchanged', function( e, oldValue ) {
+					var tagLabel = self.getTagLabel( tag );
 
-						// Handle non-unique tags (conflicts):
-						var equalTags = self._getTags( previousLabel ).add( tag );
-						( equalTags.length <= 2
-							? equalTags // only two tags WERE equal, so the conflict is resolved for both
-							: tag       // the other nodes still have the conflict, but this one doesn't
+					// Handle non-unique tags (conflicts):
+					var equalTags = self._getTags( oldValue ).add( tag );
+					( equalTags.length <= 2
+						? equalTags // only two tags WERE equal, so the conflict is resolved for both
+						: tag       // the other nodes still have the conflict, but this one doesn't
 						).removeClass( 'tagadata-choice-equal' );
 
-						equalTags = tagLabel !== ''
-							? self._getTags( tagLabel )
-							: $(); // don't highlight anything if empty (will be removed anyhow)
+					equalTags = tagLabel !== ''
+						? self._getTags( tagLabel )
+						: $(); // don't highlight anything if empty (will be removed anyhow)
 
-						if( equalTags.length > 1 ) {
-							// mark as equal
-							equalTags.addClass( 'tagadata-choice-equal' );
-						}
-
-						// if this is the tag before the helper and its value has just been emptied, remove it
-						// and jump into the helper:
-						if( tagLabel === '' && self.getHelperTag().prev( tag ).length ) {
-							self.removeTag( tag );
-							self.getHelperTag().find( 'input' ).focus();
-							return;
-						}
-
-						// Check whether the tag is modified/new compared to initial state:
-						if( $.inArray( tagLabel, self.originalTags ) < 0 ) {
-							tag.addClass( 'tagadata-choice-modified' );
-						} else {
-							tag.removeClass( 'tagadata-choice-modified' );
-						}
-
-						// trigger once for widget, once for tag itself
-						$( tag ).triggerHandler( 'tagadatatagchanged', previousLabel );
-						self._trigger( 'tagChanged', tag, previousLabel );
+					if( equalTags.length > 1 ) {
+						// mark as equal
+						equalTags.addClass( 'tagadata-choice-equal' );
 					}
-				} )
-				.appendTo( label );
+
+					// if this is the tag before the helper and its value has just been emptied, remove it
+					// and jump into the helper:
+					if( tagLabel === '' && self.getHelperTag().prev( tag ).length ) {
+						self.removeTag( tag );
+						self.getHelperTag().find( 'input' ).focus();
+						return;
+					}
+
+					// Check whether the tag is modified/new compared to initial state:
+					if( $.inArray( tagLabel, self.originalTags ) < 0 ) {
+						tag.addClass( 'tagadata-choice-modified' );
+					} else {
+						tag.removeClass( 'tagadata-choice-modified' );
+					}
+				} );
+
+				input.appendTo( label );
 
 			} else {
 				// we need input only for the form to contain the data
@@ -519,4 +519,4 @@
 
 	} );
 
-} )( jQuery );
+} )( jQuery, window.mediaWiki );
