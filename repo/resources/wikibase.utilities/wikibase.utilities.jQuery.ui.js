@@ -82,16 +82,20 @@ window.wikibase.utilities.jQuery.ui = window.wikibase.utilities.jQuery.ui || {};
 
 			var oldVal = input.val(); // old val to compare new one with
 			input
-			.on( 'keyup keydown blur', function( e ) {
+			.on( 'keyup keydown mouseout blur paste mouseup', function( e ) {
 				/*
 				 * NOTE: we use 'keyup' here as well, so when holding backspace the thing still gets triggered. Also,
 				 *       for some reason in some browsers 'keydown' isn't triggered when typing fast, 'keyup' always is.
 				 * @TODO: Take care of context related changes via mouse (paste, drag, delete) and DOM
-				 *        blur is used so at least after these changes when leaving the field, something happens^^
+				 *        blur is used so at least after these changes when leaving the field, something happens,
+				 *        mouseout works when dragging stuff in.
+				 *        paste and mouseup only work for IE in the context menu
 				 */
 				// compare old value with new value and trigger 'eachchange' if it differs
-				if( oldVal !== input.val() ) {
+				var newVal = input.val();
+				if( oldVal !== newVal ) {
 					input.trigger( 'eachchange', oldVal );
+					oldVal = input.val();
 				}
 			} )
 			.on( 'keydown', function( e ) {

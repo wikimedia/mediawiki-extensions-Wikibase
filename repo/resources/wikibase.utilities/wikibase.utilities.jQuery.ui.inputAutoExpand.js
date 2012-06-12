@@ -67,7 +67,6 @@
 	 */
 	var AutoExpandInput = function( inputElem, options ) {
 		this.input = $( inputElem );
-		this._val = this.input.val();
 		this._o = options;
 
 		this.expand(); // calculate width initially
@@ -75,12 +74,7 @@
 		var self = this;
 
 		var domCheck = function() {
-			if( ! self.input.closest( 'html' ).length ) {
-				// if input is not in DOM...
-				self._val = null; // ... make sure events will be triggered as soon as it is and one event is triggered
-				return false;
-			}
-			return true;
+			return !!self.input.closest( 'html' ).length; // false if input is not in DOM
 		};
 
 		if( ! domCheck() ) {
@@ -95,11 +89,9 @@
 
 		// set width on all important related events:
 		$( this.input )
-		.on( 'keyup keydown blur focus update', function() { //TODO: doesn't yet update its width when new value set via JS
+		.eachchange( function( e, oldValue ) {
 			// NOTE/FIXME: won't be triggered if placeholder has changed (via JS) but not input text
-			if( self._val !== ( self._val = self.input.val() ) ) {
-				self.expand();
-			}
+			self.expand();
 		} );
 
 		// make sure box will consider window size after resize:
@@ -181,10 +173,10 @@
 			//console.log( '=== START EXPANSION ===' );
 			//console.log( 'min: ' + minWidth + ' | max: ' + maxWidth + ' | comfort: ' + comfortZone );
 
-			this._val = this.input.val();
-			var valWidth = this.getWidthFor( this._val ); // pure width of the input, without additional calculation
+			var val = this.input.val();
+			var valWidth = this.getWidthFor( val ); // pure width of the input, without additional calculation
 
-			//console.log( 'valWidth: ' + valWidth + ' | val: ' + this._val );
+			//console.log( 'valWidth: ' + valWidth + ' | val: ' + val );
 
 			// add comfort zone or take min-width if too short
 			var newWidth = ( valWidth + comfortZone ) > minWidth ? valWidth + comfortZone : minWidth,
