@@ -201,7 +201,7 @@
 			'tooltip still visible after triggering window resize event'
 		);
 
-		$( window ).trigger( 'click' );
+		$( window ).trigger( 'mousedown' );
 
 		equal(
 			this.tooltip._isVisible,
