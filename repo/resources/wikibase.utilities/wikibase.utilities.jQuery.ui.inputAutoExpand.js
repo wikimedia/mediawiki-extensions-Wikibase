@@ -50,7 +50,8 @@
 				inputAE.setOptions( options );
 			} else {
 				// initialize new auto expand:
-				new AutoExpandInput( this, fullOptions );
+				var autoExpandInput = new AutoExpandInput( this, fullOptions );
+				$( this ).data( 'AutoExpandInput', autoExpandInput );
 			}
 		} );
 
@@ -66,22 +67,31 @@
 	 */
 	var AutoExpandInput = function( inputElem, options ) {
 		this.input = $( inputElem );
-		this._val = this.input.val();
 		this._o = options;
-
-		this.input.data( 'AutoExpandInput', this );
 
 		this.expand(); // calculate width initially
 
 		var self = this;
 
+		var domCheck = function() {
+			return !!self.input.closest( 'html' ).length; // false if input is not in DOM
+		};
+
+		if( ! domCheck() ) {
+			// use timeout till input is in DOM. This might not be the prettiest way but seems necessary in some situations.
+			window.setTimeout( function() {
+				if( domCheck() ) {
+					window.clearTimeout( this );
+					self.expand();
+				}
+			}, 10 );
+		}
+
 		// set width on all important related events:
 		$( this.input )
-		.on( 'keyup keydown blur focus update', function() { //TODO: doesn't yet update its width when new value set via JS
+		.eachchange( function( e, oldValue ) {
 			// NOTE/FIXME: won't be triggered if placeholder has changed (via JS) but not input text
-			if( self._val !== ( self._val = self.input.val() ) ) {
-				self.expand();
-			}
+			self.expand();
 		} );
 
 		// make sure box will consider window size after resize:
@@ -163,10 +173,10 @@
 			//console.log( '=== START EXPANSION ===' );
 			//console.log( 'min: ' + minWidth + ' | max: ' + maxWidth + ' | comfort: ' + comfortZone );
 
-			this._val = this.input.val();
-			var valWidth = this.getWidthFor( this._val ); // pure width of the input, without additional calculation
+			var val = this.input.val();
+			var valWidth = this.getWidthFor( val ); // pure width of the input, without additional calculation
 
-			//console.log( 'valWidth: ' + valWidth + ' | val: ' + this._val );
+			//console.log( 'valWidth: ' + valWidth + ' | val: ' + val );
 
 			// add comfort zone or take min-width if too short
 			var newWidth = ( valWidth + comfortZone ) > minWidth ? valWidth + comfortZone : minWidth,
@@ -230,7 +240,8 @@
 				.replace(/>/g, '&gt;')
 				.replace(/\s/g,'&nbsp;')
 			);
-			var rulerWidth = ruler.width();
+			// consider padding of input
+			var rulerWidth = ruler.width() + ( input.innerWidth() - input.width() );
 			ruler.remove();
 
 			return rulerWidth;
@@ -269,7 +280,7 @@
 			if( width === false ) {
 				// automatic comfort zone, calculate
 				// average of some usually broader characters
-				width = this.getWidthFor( '@%_MW' ) / 5 * 1.5;
+				width = this.getWidthFor( '@%_MW' ) / 5 * 1.25;
 			}
 			return this._normalizeWidth( width );
 		},

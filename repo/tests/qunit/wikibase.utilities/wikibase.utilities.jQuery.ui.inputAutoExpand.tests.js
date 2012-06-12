@@ -91,8 +91,8 @@
 
 		equal(
 			this.subject.$getObj().getWidth(),
-			this.subject.$getObj().getComfortZone(),
-			'Removed placeholder, width should be comfort zone width since there is no text set now'
+			this.subject.$getObj().getComfortZone() + this.subject.innerWidth() - this.subject.width(),
+			'Removed placeholder, width should be comfort zone width and padding of text box since there is no text set now'
 		);
 	} );
 
