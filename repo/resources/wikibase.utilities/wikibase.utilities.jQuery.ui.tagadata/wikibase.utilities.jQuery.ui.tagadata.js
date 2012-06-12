@@ -302,13 +302,6 @@
 					) {
 						self.removeTag( tag );
 					}
-					// remove placeholder preventing removal of line break when entering a short value
-					if( self.options.placeholderText && input.val() !== '' ) {
-						input.removeAttr( 'placeholder' );
-						if( input.inputAutoExpand ) {
-							input.inputAutoExpand();
-						}
-					}
 				} )
 				.eachchange( function( e, oldValue ) {
 					// input change registered, check whether tag was really changed...
@@ -425,6 +418,15 @@
 				var helperManifestation = function( e ) {
 					var tagLabel = self.getTagLabel( tag );
 					if( tagLabel !== '' ) {
+						// remove placeholder.
+						// NOTE: can't do this on leaving (blur) the input because when clicking a button the click
+						//       might fail because of the input box resizing.
+						if( self.options.placeholderText && input.val() !== '' ) {
+							input.removeAttr( 'placeholder' );
+							if( input.inputAutoExpand ) {
+								input.inputAutoExpand();
+							}
+						}
 						tag.removeClass( 'tagadata-choice-empty' );
 						self._trigger( 'tagAdded', null, tag );
 						self.getHelperTag();
