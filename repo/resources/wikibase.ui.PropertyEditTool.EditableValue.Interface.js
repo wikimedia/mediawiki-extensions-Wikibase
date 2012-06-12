@@ -196,7 +196,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
-		this._previousValue = this.getValue(); // remember current value before key changes text
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
@@ -212,6 +211,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	_onKeyDown: function( event ) {
+		this._previousValue = this.getValue(); // remember current value before key changes text
 		if( this.onKeyDown !== null && this.onKeyDown( event ) === false ) { // callback
 			return false; // cancel
 		}

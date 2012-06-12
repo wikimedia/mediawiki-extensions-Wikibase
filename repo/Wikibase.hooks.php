@@ -52,6 +52,7 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
 
+		$files[] = $testDir . 'ItemMoveTest.php';
 		$files[] = $testDir . 'ChangeNotifierTest.php';
 		$files[] = $testDir . 'EntityHandlerTest.php';
 		$files[] = $testDir . 'ItemDeletionUpdateTest.php';
@@ -239,4 +240,38 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Adds defaults settings.
+	 * setting name (string) => setting value (mixed)
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public static function onWikibaseDefaultSettings( array &$settings ) {
+
+		$settings = array_merge(
+			$settings,
+			array(
+				// alternative: application/vnd.php.serialized
+				'serializationFormat' => CONTENT_FORMAT_JSON,
+
+				// Defaults to turn off use of keys
+				// set to true will always return the key form
+				'apiUseKeys' => false,
+
+				// Set API in debug mode
+				// do not turn on in production!
+				'apiInDebug' => false,
+
+				// Additional settings for API when debugging is on to
+				// facilitate testing, do not turn on in production!
+				'apiDebugWithWrite' => true,
+				'apiDebugWithPost' => false,
+				'apiDebugWithRights' => false,
+				'apiDebugWithTokens' => false,
+			) );
+
+		return true;
+	}
 }
