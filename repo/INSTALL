@@ -1,7 +1,7 @@
 These is the install file for the Wikibase extension.
 
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Wikibase
-Latest version of the install file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git;a=blob;f=INSTALL
+Latest version of the install file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=repo/INSTALL
 
 
 == Requirements ==
@@ -10,7 +10,7 @@ Wikibase requires:
 
 * MediaWiki 1.20 or above
 * PHP 5.3 or above
-* MySQL
+* MySQL >=5 or SQLite >=3
 
 == Download ==
 
@@ -22,14 +22,14 @@ Once you have downloaded the code, place the ''Wikibase'' directory within your 
 Then add the following code to your [[Manual:LocalSettings.php|LocalSettings.php]] file:
 
 # Wikibase
-require_once( "$IP/extensions/Wikibase/Wikibase.php" );
+require_once( "$IP/extensions/Wikibase/repo/Wikibase.php" );
 
 == Configuration ==
 
 Configuration of Reviews is done by assigning to $egWBSettings in your
 [[Manual:LocalSettings.php|LocalSettings.php]] file, AFTER the inclusion of the
 extension. The options are listed below and their default is set in the Wikibase settings file:
-https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git;a=blob;f=Wikibase.settings.php
+https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=lib/includes/Settings.php
 You should NOT modify the settings file, but can have a look at it to get an idea of
 how to use the settings, in case the below descriptions do not suffice.
 
