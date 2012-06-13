@@ -180,6 +180,10 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	font-size: 120%;
 }
 
+.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode {
+	white-space: normal; /* required by FF for not(!) wrapping toolbar when there is only one line of aliases */
+}
+
 /********** /ALIASES **********/
 
 /********** jquery.ui.autocomplete **********/
