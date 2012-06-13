@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAMX///60\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-06-13T19:44:35Z",
+      "side": 1,
+      "message": "FIXME: wrong parameters",
+      "revId": "bc1aa43f0f944c83c68833942e230459717c6689",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
