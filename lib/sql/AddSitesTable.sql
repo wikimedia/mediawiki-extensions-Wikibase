@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS /*_*/sites (
 
   -- If equivalent pages of this site should be listed.
   -- For example in the "language links" section.
-  site_link_equivalents      bool                NOT NULL,
+  site_link_navigation       bool                NOT NULL,
 
   -- If site.tld/path/key:pageTitle should forward users to  the page on
   -- the actual site, where "key" os either the local or global identifier.
@@ -51,3 +51,12 @@ CREATE TABLE IF NOT EXISTS /*_*/sites (
   -- that holds it and possibly other misc stuff.
   site_allow_transclusion    bool                NOT NULL
 ) /*$wgDBTableOptions*/;
+
+CREATE UNIQUE INDEX /*i*/sites_global_key ON /*_*/sites (site_global_key);
+CREATE INDEX /*i*/sites_type ON /*_*/sites (site_type);
+CREATE INDEX /*i*/sites_group ON /*_*/sites (site_group);
+CREATE UNIQUE INDEX /*i*/sites_local_key ON /*_*/sites (site_local_key);
+CREATE INDEX /*i*/sites_link_inline ON /*_*/sites (site_link_inline);
+CREATE INDEX /*i*/sites_link_navigation ON /*_*/sites (site_link_navigation);
+CREATE INDEX /*i*/sites_forward ON /*_*/sites (site_forward);
+CREATE INDEX /*i*/sites_allow_transclusion ON /*_*/sites (site_allow_transclusion);

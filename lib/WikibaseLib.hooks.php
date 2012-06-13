@@ -42,6 +42,12 @@ final class WikibaseLibHooks {
 			dirname( __FILE__ ) . '/sql/AddLocalLanglinksField.sql'
 		);
 
+		$updater->addExtensionField(
+			'sites',
+			'site_link_navigation',
+			dirname( __FILE__ ) . '/sql/IndexSitesTable.sql'
+		);
+
 		// TODO: enable && move to core
 //		$updater->dropExtensionTable(
 //			'interwiki',
