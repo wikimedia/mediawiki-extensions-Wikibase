@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use MWException;
+
 /**
  * File defining the settings for the Wikibase extension.
  * More info can be found at https://www.mediawiki.org/wiki/Extension:Wikibase#Settings
@@ -10,13 +13,13 @@
  *
  * @since 0.1
  *
- * @file Wikibase.settings.php
- * @ingroup Wikibase
+ * @file
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WBSettings {
+class Settings {
 
 	/**
 	 * Build version of the settings.
@@ -44,13 +47,13 @@ class WBSettings {
 	 *
 	 * @since 0.1
 	 *
-	 * @return WBSettings
+	 * @return Settings
 	 */
 	public static function singleton() {
 		static $instance = false;
 
 		if ( $instance === false ) {
-			$instance = new self();
+			$instance = new static();
 		}
 
 		return $instance;

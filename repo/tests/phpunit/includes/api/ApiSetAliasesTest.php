@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 use ApiTestCase;
 use ApiTestUser;
-use WBSettings;
+use \Wikibase\Settings as Settings;
 use UsageException;
 //use ApiModifyItemBase;
 use Wikibase\Test\ApiModifyItemBase as ApiModifyItemBase;
@@ -82,7 +82,7 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		$req = array_merge( $req, array(
 			'id' => self::$item->getId(),
 			'action' => 'wbsetaliases',
-			//'usekeys' => true, // this comes from \WBSettings::get( 'apiUseKeys' )
+			//'usekeys' => true, // this comes from Settings::get( 'apiUseKeys' )
 			'format' => 'json',
 			'language' => $langCode,
 			$param => $value
@@ -96,8 +96,8 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		
 		if ( $param === 'add') {
 			$this->assertTrue(
-				\WBSettings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['aliases']) : !array_key_exists($langCode, $apiResponse['item']['aliases']),
-				"Found '{$langCode}' and it should" . (\WBSettings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in aliases"
+				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['aliases']) : !array_key_exists($langCode, $apiResponse['item']['aliases']),
+				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in aliases"
 			);
 		}
 		

@@ -305,7 +305,7 @@ unset( $moduleTemplate );
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 
 //@todo: FIXME: this doesn't give wikis a chance to change the $baseNs.
-//       Namespace definitions should be deferred into a hook and be based on WBSettings.
+//       Namespace definitions should be deferred into a hook and be based on Wikibase\Settings.
 //       Note that some wikis may use the main namespace for data, or not have a data namespace.
 $baseNs = 100;
 

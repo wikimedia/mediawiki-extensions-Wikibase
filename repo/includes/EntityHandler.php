@@ -32,7 +32,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @return string
 	 */
 	public function getDefaultFormat() {
-		return \WBSettings::get( 'serializationFormat' );
+		return Settings::get( 'serializationFormat' );
 	}
 
 	/**

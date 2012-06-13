@@ -27,11 +27,11 @@ abstract class Api extends \ApiBase {
 	 * @param $params array parameters requested in subclass
 	 */
 	protected function setUsekeys( array $params ) {
-		$usekeys = \WBSettings::get( 'apiUseKeys' ) || ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
+		$usekeys = Settings::get( 'apiUseKeys' ) || ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
 
 		if ( $usekeys ) {
 			$format = $this->getMain()->getRequest()->getVal( 'format' );
-			$withkeys = \WBSettings::get( 'formatsWithKeys' );
+			$withkeys = Settings::get( 'formatsWithKeys' );
 			$usekeys = isset( $format ) && isset( $withkeys[$format] ) ? $withkeys[$format] : false;
 		}
 

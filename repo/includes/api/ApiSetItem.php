@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, WBSettings;
+use ApiBase;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -27,7 +27,7 @@ class ApiSetItem extends Api {
 	 * @return array of errors reported from the static getPermissionsError
 	 */
 	protected static function getPermissionsError( $user, $mod='item', $op='add' ) {
-		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
+		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
 		
@@ -148,7 +148,7 @@ class ApiSetItem extends Api {
 	 * @return bool
 	 */
 	public function needsToken() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ;
 	}
 
 	/**
@@ -156,7 +156,7 @@ class ApiSetItem extends Api {
 	 * @return bool
 	 */
 	public function mustBePosted() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithPost', false ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost', false ) : true ;
 	}
 
 	/**
@@ -164,7 +164,7 @@ class ApiSetItem extends Api {
 	 * @return bool
 	 */
 	public function isWriteMode() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithWrite', false ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite', false ) : true ;
 	}
 	
 	/**

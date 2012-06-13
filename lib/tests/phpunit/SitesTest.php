@@ -51,7 +51,7 @@ class SitesTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetGroup() {
-		$groups = array_keys( \WBSettings::get( 'siteIdentifiers' ) );
+		$groups = array_keys( \Wikibase\Settings::get( 'siteIdentifiers' ) );
 		$totalCount = Sites::singleton()->count();
 		$count = 0;
 

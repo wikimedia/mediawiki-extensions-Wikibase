@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase, ApiTestUser;
+use Wikibase\Settings as Settings;
 
 /**
  * Tests for the ApiWikibase class.
@@ -38,7 +39,7 @@ class ApiJSONPCompleteTests extends ApiTestCase {
 	protected static $name = 'empty';
 	
 	protected static function config($arr) {
-		\WBSettings::singleton()->rebuildSettings();
+		Settings::singleton()->rebuildSettings();
 		foreach ( $arr as $key => $val ) {
 			$egWBSettings[$key] = $val;
 		}

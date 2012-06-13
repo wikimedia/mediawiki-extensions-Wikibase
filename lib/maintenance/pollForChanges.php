@@ -74,9 +74,9 @@ class PollForChanges extends \Maintenance {
 
 		$this->lastChangeId = (int)$this->getArg( 'startid', 0 );
 		$this->startTime = (int)$this->getArg( 'starttime', 0 );
-		$this->pollLimit = (int)$this->getArg( 'polllimit', \WBSettings::get( 'pollDefaultLimit' ) );
-		$this->sleepInterval = (int)$this->getArg( 'sleepinterval', \WBSettings::get( 'pollDefaultInterval' ) );
-		$this->continueInterval = (int)$this->getArg( 'continueinterval', \WBSettings::get( 'pollContinueInterval' ) );
+		$this->pollLimit = (int)$this->getArg( 'polllimit', Settings::get( 'pollDefaultLimit' ) );
+		$this->sleepInterval = (int)$this->getArg( 'sleepinterval', Settings::get( 'pollDefaultInterval' ) );
+		$this->continueInterval = (int)$this->getArg( 'continueinterval', Settings::get( 'pollContinueInterval' ) );
 
 		while ( true ) {
 			usleep( $this->doPoll() * 1000 );

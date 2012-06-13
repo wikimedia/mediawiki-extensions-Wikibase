@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase, ApiTestUser;
+use Wikibase\Settings as Settings;
 
 /**
  * Tests for the ApiWikibase class.
@@ -42,9 +43,9 @@ class ApiSetItemTests extends \ApiTestCase {
 		global $wgUser;
 		parent::setUp();
 		
-		self::$usepost = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithPost' ) : true;
-		self::$usetoken = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens' ) : true;
-		self::$userights = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithRights' ) : true;
+		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
+		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
+		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
 		
 		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
 				'Apitesteditor',
@@ -155,7 +156,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 */
 	function testSetItemTop() {
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -191,7 +192,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 */
 	function testSetItemGetTokenSetData( $id, $op, $data ) {
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -373,7 +374,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	public function linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -476,7 +477,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	public function linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -586,7 +587,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	public function setLanguageAttribute( $id, $site, $title, $language, $label, $description, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -677,7 +678,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	public function deleteLanguageAttribute( $id, $site, $title, $language, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',

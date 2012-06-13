@@ -111,10 +111,10 @@ class Sites implements \SeekableIterator {
 
 		if ( $instance === false ) {
 			$instance = static::newFromConfig(
-				\WBSettings::get( 'siteIdentifiers' ),
-				\WBSettings::get( 'defaultSiteFilePath' ),
-				\WBSettings::get( 'defaultSiteUrlPath' ),
-				\WBSettings::get( 'defaultSiteType' )
+				Settings::get( 'siteIdentifiers' ),
+				Settings::get( 'defaultSiteFilePath' ),
+				Settings::get( 'defaultSiteUrlPath' ),
+				Settings::get( 'defaultSiteType' )
 			);
 		}
 

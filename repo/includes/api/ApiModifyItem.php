@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Title, ApiBase, WBSettings;
+use User, Title, ApiBase;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -50,7 +50,7 @@ abstract class ApiModifyItem extends Api {
 	 * @return array of errors reported from the static getPermissionsError
 	 */
 	protected static function getPermissionsError( $user, $mod=null, $op=null ) {
-		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
+		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
 		
@@ -225,7 +225,7 @@ abstract class ApiModifyItem extends Api {
 	 * @return bool
 	 */
 	public function needsToken() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true ;
 	}
 
 	/**
@@ -233,7 +233,7 @@ abstract class ApiModifyItem extends Api {
 	 * @return bool
 	 */
 	public function mustBePosted() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithPost' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true ;
 	}
 
 	/**
@@ -241,7 +241,7 @@ abstract class ApiModifyItem extends Api {
 	 * @return bool
 	 */
 	public function isWriteMode() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithWrite' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
 	}
 	
 	/**

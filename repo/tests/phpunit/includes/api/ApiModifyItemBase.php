@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use ApiTestCase, ApiTestUser;
 use Wikibase\Item as Item;
+use Wikibase\Settings as Settings;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
@@ -86,7 +87,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	}
 	
 	protected function gettoken() {
-		if (\WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true) {
+		if (Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true) {
 			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
