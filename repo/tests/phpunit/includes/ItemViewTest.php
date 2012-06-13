@@ -66,12 +66,12 @@ class ItemViewTest extends \MediaWikiTestCase {
         	$item != null && $item !== false,
         	"Could not find an item" );
        // q($item->getSiteLinks());
-		$view = new ItemView( $item );
+		$view = new ItemView( );
         $this->assertTrue(
         	$view != null && $view !== false,
         	"Could not find a view" );
         
-        $html = $view->getHTML();
+        $html = $view->getHTML( $item );
         
         if ( is_string($expected) ) {
 	        $this->assertRegExp(

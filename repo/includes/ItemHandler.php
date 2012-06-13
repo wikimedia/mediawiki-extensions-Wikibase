@@ -51,14 +51,8 @@ class ItemHandler extends EntityHandler {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( Content $content, Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		global $wgRequest;
-
-		# construct dummy context for the dummy view
-		$context = new RequestContext( $wgRequest );
-		$context->setTitle( $title );
-
-		$itemView = new ItemView( $content, $context );
-		return $itemView->render();
+		$itemView = new ItemView( );
+		return $itemView->makeParserOutput( $content );
 	}
 
 	/**
