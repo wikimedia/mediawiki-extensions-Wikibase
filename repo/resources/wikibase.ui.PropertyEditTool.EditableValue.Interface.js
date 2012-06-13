@@ -57,15 +57,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	_inputElem: null,
 
 	/**
-	 * when adding characters to the input value, the previous value is stored to be able to check whether instant
-	 * on change operations have to be performed.
-	 * @var String
-	 */
-	_previousValue: null,
-
-	_currentWidth: null,
-
-	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
 	 *
@@ -77,7 +68,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._currentWidth = 0;
 	},
 
 	destroy: function() {
@@ -119,17 +109,19 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Initializes the input element and appends it into the DOM when needed.
 	 */
 	_initInputElement: function() {
+		var initialValue = this.getValue();
 		this._inputElem = this._buildInputElement();
+
 		if( this.isDisabled() ) {
 			// disable element properly if disabled from before edit mode
 			this._disableInputElement();
 		}
 
 		// store original text value from before input box insertion:
-		this._inputElem.data( this.UI_CLASS + '-initial-value', this.getValue() );
+		this._inputElem.data( this.UI_CLASS + '-initial-value', initialValue );
 		
 		var inputParent = this._getValueContainer();
-		inputParent.text( '' );
+		inputParent.empty();
 		this._inputElem.appendTo( inputParent );
 
 		if( this.autoExpand ) {
@@ -169,7 +161,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'focus':    $.proxy( this._onFocus, this ),
 			'blur':     $.proxy( this._onBlur, this ),
 			'change':   $.proxy( this._onChange, this )
-		} );
+		} )
+		// on each change to this input check whether value was changed:
+		.eachchange( $.proxy( function( e, oldValue ) {
+			if( this.normalize( oldValue ) !== this.getValue() ) {
+				this._onInputRegistered(); // only called if input really changed
+			}
+		}, this ) );
 	},
 
 	/**
@@ -200,9 +198,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	_onKeyUp: function( event ) {
-		if ( this._previousValue !== this.getValue() ) {
-			this._onInputRegistered(); // only called if input really changed
-		}
 		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
 			return false; // cancel
 		}
@@ -367,7 +362,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Normalizes a string so it is sufficient for setting it as value for this interface.
 	 * This will be done automatically when using setValue().
 	 * In case the given value is invalid, null will be returned.
-	 * 
+	 *
 	 * @return string|null
 	 */
 	normalize: function( value ) {
@@ -376,7 +371,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	
 	/**
 	 * Returns true if the interface is disabled.
-	 * 
+	 *
 	 * @return bool
 	 */
 	isDisabled: function() {
@@ -386,14 +381,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Disables or enables the element. Disabled is still visible but will be presented differently
 	 * and might behave differently in some cases.
-	 * 
+	 *
 	 * @param bool disable true for disabling, false for enabling the element
 	 * @return bool whether the state was changed or not.
 	 */
 	setDisabled: function( disable ) {
 		// TODO!
 		if( disable ) {
-			this._subject.addClass( this.UI_CLASS + '-disabled' );			
+			this._subject.addClass( this.UI_CLASS + '-disabled' );
 			if( this.isInEditMode() ) {
 				this._disableInputElement();
 			}
@@ -416,7 +411,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
 	 * interface will not be made available on startEditing()
-	 * 
+	 *
 	 * @return bool
 	 */
 	isActive: function() {
@@ -427,10 +422,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Sets the interface active or inactive. If inactive, the interface will not be made available
 	 * when startEditing() is called. If called to deactivate the interface but still in edit mode,
 	 * the edit mode will be closed without saving.
-	 * 
+	 *
 	 * @return bool whether the state was changed or not.
 	 */
-	setActive: function( active ) {		
+	setActive: function( active ) {
 		if( !active && this.isInEditMode() ) {
 			this.stopEditing( false );
 		}
