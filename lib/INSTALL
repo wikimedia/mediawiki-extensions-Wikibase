@@ -1,0 +1,27 @@
+These is the install file for the WikibaseLib extension.
+
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:WikibaseLib
+Latest version of the install file: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikibaseLib.git;a=blob;f=INSTALL
+
+
+== Requirements ==
+
+WikibaseLib requires:
+
+* MediaWiki 1.20 or above
+* PHP 5.3 or above
+* MySQL
+
+== Download ==
+
+TODO
+
+== Installation ==
+
+Once you have downloaded the code, place the ''WikibaseLib'' directory within your MediaWiki 'extensions' directory.
+Then add the following code to your [[Manual:LocalSettings.php|LocalSettings.php]] file:
+
+# Wikibase
+require_once( "$IP/extensions/WikibaseLib/WikibaseLib.php" );
+
+
