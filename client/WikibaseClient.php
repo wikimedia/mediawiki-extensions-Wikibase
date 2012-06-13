@@ -77,7 +77,7 @@ $moduleTemplate = array(
 
 $wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
 	'styles' => array(
-		'wikibaseclient.css'
+		'ext.wikibaseclient.css'
 	),
 );
 
