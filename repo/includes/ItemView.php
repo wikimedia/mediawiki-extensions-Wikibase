@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Html;
+use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage;
 
 /**
  * Class for creating views for Wikibase\Item instances.
@@ -20,12 +20,6 @@ use Html;
 class ItemView extends \ContextSource {
 
 	/**
-	 * @since 0.1
-	 * @var Item
-	 */
-	protected $item;
-
-	/**
 	 * Constructor.
 	 *
 	 * @todo think about using IContextSource here. Parser for example uses parser options (which also can be generated
@@ -36,12 +30,12 @@ class ItemView extends \ContextSource {
 	 * @param Item $item
 	 * @param \IContextSource|null $context
 	 */
-	public function __construct( Item $item, \IContextSource $context = null ) {
-		$this->item = $item;
-
-		if ( !is_null( $context ) ) {
-			$this->setContext( $context );
+	public function __construct( IContextSource $context = null ) {
+		if ( !$context ) {
+			$context = \RequestContext::getMain();
 		}
+
+		$this->setContext( $context );
 	}
 
 	/**
@@ -49,15 +43,21 @@ class ItemView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
+	 * @param \Wikibase\Item    $item the item to render
+	 * @param \Language|null    $lang the language to use for rendering. if not given, the local context will be used.
+	 *
 	 * @return string
 	 */
-	public function getHTML() {
-		$html = '';
-		$lang = $this->getLanguage();
+	public function getHTML( Item $item, Language $lang = null ) {
+		if ( !$lang ) {
+			$lang = $this->getLanguage();
+		}
 
-		$description = $this->item->getDescription( $lang->getCode() );
-		$aliases = $this->item->getAliases( $lang->getCode() );
-		$siteLinks = $this->item->getSiteLinks();
+		$html = '';
+
+		$description = $item->getDescription( $lang->getCode() );
+		$aliases = $item->getAliases( $lang->getCode() );
+		$siteLinks = $item->getSiteLinks();
 		
 		// even if description is false, we want it in any case!
 		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
@@ -123,41 +123,93 @@ class ItemView extends \ContextSource {
 		return $html;
 	}
 
+	protected function makeParserOptions( ) {
+		$options = ParserOptions::newFromContext( $this );
+		return $options;
+	}
+
 	/**
-	 * Returns a ParserOutput object with the rendered item for the provided context source
+	 * Renders an item into an ParserOutput object
 	 *
 	 * @since 0.1
 	 *
+	 * @param Item                $item the item to analyze/render
+	 * @param null|ParserOptions  $options parser options. If nto provided, the local context will be used to create generic parser options.
+	 * @param bool                $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
+	 *
 	 * @return ParserOutput
 	 */
-	public function render() {
-		$langCode = $this->getLanguage()->getCode();
+	public function getParserOutput( Item $item, ParserOptions $options = null, $generateHtml = true ) {
+		if ( !$options ) {
+			$options = $this->makeParserOptions();
+		}
+
+		$langCode = $options->getTargetLanguage();
 
 		// fresh parser output with items markup
-		$out = new \ParserOutput( $this->getHTML() );
+		$pout = new ParserOutput();
+
+		if ( $generateHtml ) {
+			$html = $this->getHTML( $item, $langCode );
+			$pout->setText( $html );
+		}
 
 		#@todo (phase 2) would be nice to put pagelinks (item references) and categorylinks (from special properties)...
 		#@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
 
 		// make css available for JavaScript-less browsers
-		$out->addModuleStyles( array( 'wikibase.common' ) );
+		$pout->addModuleStyles( array( 'wikibase.common' ) );
 
 		// make sure required client sided resources will be loaded:
-		$out->addModules( 'wikibase.ui.PropertyEditTool' );
+		$pout->addModules( 'wikibase.ui.PropertyEditTool' );
 
-		// NOTE: instead of calling $this->getOutput(), at least addJsConfigVars() could be implemented into ParserOutput,
-		//       right now it is only available in the OutputPage class, using this here might be kind of hacky.
+		// set the display title
+		$pout->setTitleText( $item->getLabel( $langCode ) );
+
+		return $pout;
+	}
+
+	/**
+	 * Outputs the given item to the OutputPage.
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Wikibase\Item      $item the item to output
+	 * @param null|OutputPage    $out the output page to write to. If not given, the local context will be used.
+	 * @param null|ParserOptions $options parser options to use for rendering. If not given, the local context will be used.
+	 * @param null|ParserOutput  $pout optional parser object - provide this if you already have a parser options for this item,
+	 *                           to avoid redundant rendering.
+	 *
+	 * @return ParserOutput the parser output, for further processing.
+	 */
+	public function render( Item $item, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
+
+		if ( !$pout ) {
+			if ( !$options ) {
+				$options = $this->makeParserOptions();
+			}
+
+			$pout = $this->getParserOutput( $item, $item->getTitle(), null, $options, true );
+		}
+
+		if ( $options ) {
+			$langCode = $options->getTargetLanguage();
+		} else  {
+			#XXX: this is quite ugly, we don't know that this language is the language that was used to generate the parser output object
+			$langCode = $this->getLanguage()->getCode();
+		}
+
 
 		// overwrite page title
-		$this->getOutput()->setPageTitle( $this->item->getLabel( $langCode ) );
+		$out->setPageTitle( $pout->getTitleText() );
 
 		// hand over the itemId to JS
-		$this->getOutput()->addJsConfigVars( 'wbItemId', $this->item->getId() );
-		$this->getOutput()->addJsConfigVars( 'wbDataLangName', \Language::fetchLanguageName( $langCode ) );
+		$out->addJsConfigVars( 'wbItemId', $item->getId() );
+		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $langCode ) );
 
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
-		foreach ( Sites::singleton()->getGroup( 'wikipedia' ) as /* Wikibase\Site */ $site ) {
+		foreach ( Sites::singleton()->getGroup( 'wikipedia' ) as  /** @var \Wikibase\Site $site */ $site ) {
 			$sites[$site->getId()] = array(
 				'shortName' => \Language::fetchLanguageName( $site->getId() ),
 				'name' => \Language::fetchLanguageName( $site->getId() ), // TODO: names should be configurable in settings
@@ -165,9 +217,10 @@ class ItemView extends \ContextSource {
 				'apiUrl' => $site->getPath( 'api.php' ),
 			);
 		}
-		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites );
+		$out->addJsConfigVars( 'wbSiteDetails', $sites );
 
-		return $out;
+		$out->addParserOutput( $renderedOutput );
+		return $pout;
 	}
 
 }
