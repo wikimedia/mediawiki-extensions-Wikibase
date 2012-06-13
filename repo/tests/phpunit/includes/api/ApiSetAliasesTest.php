@@ -72,11 +72,6 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 	 * @dataProvider paramProvider
 	 */
 	public function testSetAliases( $langCode, $param, $value, $expected ) {
-		// FIXME: getRawAliases() doesn't exist, and we decided to refactor that part of the Item class.
-		//        ignore aliases for now to remove the dependency on getRawAliases and get the review process unstuck.
-		//        This should REALLY be fixed one way or the other by tomorrow (June 10) [dk].
-		$this->assertTrue( true ); //dummy
-		return; //FIXME: remove this.
 
 		$req = array();
 		$token = $this->gettoken();

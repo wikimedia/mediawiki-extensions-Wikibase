@@ -141,6 +141,7 @@ abstract class ApiModifyItem extends Api {
 			}
 		}
 		
+		$this->setUsekeys( $params );
 		$success = $this->modifyItem( $item, $params );
 		if ( !$success ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
