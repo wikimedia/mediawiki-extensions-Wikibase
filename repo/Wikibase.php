@@ -158,7 +158,7 @@ $wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOption
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' =>  'Wikibase/resources'
+	'remoteExtPath' =>  'Wikibase/repo/resources'
 );
 
 // common styles independent from JavaScript being enabled or disabled
