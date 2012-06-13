@@ -1,7 +1,0 @@
-.idea
-.project
-.settings
-
-/tests/selenium_ruby/chromedriver.log
-/tests/selenium/chromedriver.log
-/tests/selenium/configuration.yml
