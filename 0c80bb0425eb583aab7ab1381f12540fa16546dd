@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAMH//+NM\u003d",
+        "filename": "lib/INSTALL",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-13T16:01:22Z",
+      "side": 1,
+      "message": "Please change the name and URL. It\u0027s not WikibaseLib etc., it\u0027s one extension now.",
+      "revId": "0c80bb0425eb583aab7ab1381f12540fa16546dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAMH//+NQ\u003d",
+        "filename": "lib/INSTALL",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-13T16:01:22Z",
+      "side": 1,
+      "message": "This works differently now.",
+      "revId": "0c80bb0425eb583aab7ab1381f12540fa16546dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAMH//+NA\u003d",
+        "filename": "lib/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-13T16:01:22Z",
+      "side": 1,
+      "message": "Please change to correct URL or delete.",
+      "revId": "0c80bb0425eb583aab7ab1381f12540fa16546dd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
