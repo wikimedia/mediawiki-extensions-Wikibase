@@ -72,12 +72,12 @@ $wgHooks['BeforePageDisplay'][]						= 'WBCSkinHandler::onBeforePageDisplay';
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' => 'WikidataClient/resources',
+	'remoteExtPath' => 'Wikibase/client/resources',
 );
 
 $wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
 	'styles' => array(
-		'ext.wikibaseclient.css'
+		'wikibaseclient.css'
 	),
 );
 

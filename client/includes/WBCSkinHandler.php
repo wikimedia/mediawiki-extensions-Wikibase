@@ -14,6 +14,7 @@
 class WBCSkinHandler {
 
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
+		// FIXME: we do NOT want to add these resources on every page where the parser is used (ie pretty much all pages)
 		$out->addModules( 'ext.wikibaseclient' );
 		return true;
 	}
