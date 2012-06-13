@@ -52,7 +52,7 @@ window.wikibase.ui.Toolbar.prototype = {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
-		this._items = new Array();
+		this._items = [];
 		//this._parent = parent;
 		this.draw(); // draw first to have toolbar wrapper
 		this._initToolbar();
@@ -92,7 +92,7 @@ window.wikibase.ui.Toolbar.prototype = {
 		this._elem = $( '<div/>', {
 			'class': this.UI_CLASS
 		} );
-	   	
+	
 		if( parent !== null ) { // if not known yet, appendTo() wasn't called so far
 			parent.append( this._elem );
 		}

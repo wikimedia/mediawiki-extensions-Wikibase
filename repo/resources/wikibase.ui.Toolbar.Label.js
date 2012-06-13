@@ -60,11 +60,11 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	},
 
 	destroy: function() {
-		if ( this._elem != null ) {
+		if ( this._elem !== null ) {
 			this._elem.empty().remove();
 			this._elem = null;
 		}
-		if ( this._tooltip != null ) {
+		if ( this._tooltip !== null ) {
 			this.removeTooltip();
 		}
 	},
@@ -91,7 +91,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	getContent: function() {
 		var contents = this._elem.contents();
 		
-		if( contents.length == 1 && contents[0].nodeType === 3 ) {
+		if( contents.length === 1 && contents[0].nodeType === 3 ) {
 			// return the text
 			return contents.text();
 		} else {

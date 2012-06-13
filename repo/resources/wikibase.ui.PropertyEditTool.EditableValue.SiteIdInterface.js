@@ -153,8 +153,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		}
 		
 		// find out which site ids should be selectable and add them as auto selct choice
-		for ( var siteId in wikibase.getSites() ) {
-			var site = wikibase.getSite( siteId );
+		for ( var siteId in window.wikibase.getSites() ) {
+			var site = window.wikibase.getSite( siteId );
 			
 			if( $.inArray( site, ignoredSites ) == -1 ) {
 				siteList.push( {
@@ -177,7 +177,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		if( siteId === null ) {
 			return null;
 		}
-		return wikibase.getSite( siteId );
+		return window.wikibase.getSite( siteId );
 	},
 
 	/**
@@ -188,7 +188,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	getSelectedSiteId: function() {
 		var id = this.getValue();
 		if( id === '' ) {
-			return null
+			return null;
 		}
 		return id;
 	},
@@ -206,7 +206,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 
 	_setValue_inNonEditMode: function( value ) {
 		// the actual value is the site id, displayed value though should be the whole site name and id in parentheses.
-		var site = wikibase.getSite( value );
+		var site = window.wikibase.getSite( value );
 		if( site !== null ) {
 			// site is null in case it was initialized empty and destroy() is called... so we just handle this
 			value = site.getShortName() + ' (' + site.getId() + ')';
@@ -225,10 +225,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 
 		for( var i in this._currentResults ) {
 			var currentItem = this._currentResults[i];
-			if(    value == currentItem.site.getId().toLowerCase()
-				|| value == currentItem.site.getShortName().toLowerCase()
-				|| value == currentItem.value.toLowerCase()
-				|| value == currentItem.label.toLowerCase()
+			if( value == currentItem.site.getId().toLowerCase() ||
+				value == currentItem.site.getShortName().toLowerCase() ||
+				value == currentItem.value.toLowerCase() ||
+				value == currentItem.label.toLowerCase()
 				) {
 				return currentItem.site.getId();
 			}

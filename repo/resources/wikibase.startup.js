@@ -20,7 +20,7 @@
 	.find( '.wb-property-container' )
 	.each( function() {
 		// TODO: Make this nicer when we have implemented a JS class for properties
-		if( $( this ).children( '.wb-property-container-key' ).attr( 'title') == 'description' ) {
+		if( $( this ).children( '.wb-property-container-key' ).attr( 'title') === 'description' ) {
 			new window.wikibase.ui.DescriptionEditTool( this );
 		} else {
 			new window.wikibase.ui.PropertyEditTool( this );
@@ -40,7 +40,7 @@
 		// without css this is not required, so we build it here manually
 		$( '.wb-sitelinks-empty' )
 		.each( function() {
-			$( this ).replaceWith( wikibase.ui.SiteLinksEditTool.getEmptyStructure() );
+			$( this ).replaceWith( window.wikibase.ui.SiteLinksEditTool.getEmptyStructure() );
 		} );
 
 		$( 'table.wb-sitelinks' ).each( function() {

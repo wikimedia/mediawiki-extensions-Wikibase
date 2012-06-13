@@ -149,11 +149,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return wikibase.ui.PropertyEditTool.EditableValue.Interface[]
 	 */
 	_buildInterfaces: function( subject ) {
-		var interfaces = new Array();
+		var interfaces = [];
 
 		var interfaceParent = $( '<span/>' ).append( subject.contents() );
 		subject.prepend( interfaceParent );
-		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this ) );
+		interfaces.push( new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this ) );
 
 		return interfaces;
 	},
@@ -270,7 +270,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._pending = false; // not pending anymore after saved once
 			this._subject.removeClass( 'wb-pending-value' );
 
-			this.onAfterStopEditing && this.onAfterStopEditing( true, wasPending ); // callback
+			
+			if( this.onAfterStopEditing ) {
+				this.onAfterStopEditing( true, wasPending ); // callback
+			}
 		}, this ) );
 	},
 
@@ -419,9 +422,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 						self.setValue( responseVal );
 					}
 
-					if( window.mw.config.get( 'wbItemId' ) === null ) {
+					if( mw.config.get( 'wbItemId' ) === null ) {
 						// if the 'save' process will create a new item, trigger the event!
-						$( wikibase ).triggerHandler( 'NewItemCreated', response.item );
+						$( window.wikibase ).triggerHandler( 'NewItemCreated', response.item );
 					}
 
 					waitMsg.remove();
@@ -488,7 +491,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function( apiAction ) {
-		var itemId = window.mw.config.get( 'wbItemId' );
+		var itemId = mw.config.get( 'wbItemId' );
 		var params = {
 			language: window.mw.config.get( 'wgUserLanguage' ),
 			token: mw.user.tokens.get( 'editToken' )
@@ -519,21 +522,21 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			error = {
 				code: textStatus,
 				shortMessage: ( apiAction === this.API_ACTION.REMOVE )
-					? window.mw.msg( 'wikibase-error-remove-connection' )
-					: window.mw.msg( 'wikibase-error-save-connection' ),
+					? mw.msg( 'wikibase-error-remove-connection' )
+					: mw.msg( 'wikibase-error-save-connection' ),
 				message: ''
 			};
 			if ( textStatus == 'timeout' ) {
 				error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
-					? window.mw.msg( 'wikibase-error-remove-timeout' )
-					: window.mw.msg( 'wikibase-error-save-timeout' );
+					? mw.msg( 'wikibase-error-remove-timeout' )
+					: mw.msg( 'wikibase-error-save-timeout' );
 			} else {
 				if ( typeof response.error != 'undefined' ) {
 					error.code = response.error.code;
 					error.message = response.error.info;
 					error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
-						? window.mw.msg( 'wikibase-error-remove-generic' )
-						: window.mw.msg( 'wikibase-error-save-generic' );
+						? mw.msg( 'wikibase-error-remove-generic' )
+						: mw.msg( 'wikibase-error-save-generic' );
 				}
 			}
 		}
@@ -778,7 +781,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 *
 	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
 	 * @param jQuery.Event event
- 	 */
+	 */
 	_interfaceHandler_onKeyUp: function( relatedInterface, event ) {
 		if( event.which == 27 ) { // ESC key
 			this._toolbar.editGroup.btnCancel.doAction();
@@ -825,7 +828,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	destroy: function() {
 		this.stopEditing( false );
-		if( this._toolbar != null) {
+		if( this._toolbar !== null) {
 			this._toolbar.destroy();
 			this._toolbar = null;
 		}

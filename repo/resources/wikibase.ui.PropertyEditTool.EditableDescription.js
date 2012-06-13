@@ -37,7 +37,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
 	 */
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
+		return mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
 	/**

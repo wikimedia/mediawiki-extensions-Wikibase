@@ -21,7 +21,35 @@ $specialPageAliases['en'] = array(
 	'ItemByLabel' => array( 'ItemByLabel' ),
 );
 
-/** Macedonian (Македонски) */
+/** Arabic (العربية) */
+$specialPageAliases['ar'] = array(
+	'CreateItem' => array( 'إنشاء_مدخلة' ),
+	'ItemByTitle' => array( 'المدخلات_بالعنوان' ),
+	'ItemByLabel' => array( 'المدخلات_بالعلامة' ),
+);
+
+/** German (Deutsch) */
+$specialPageAliases['de'] = array(
+	'CreateItem' => array( 'Datenelement_erstellen' ),
+	'ItemByTitle' => array( 'Datenelement_nach_Name' ),
+	'ItemByLabel' => array( 'Datenelement_nach_Bezeichnung' ),
+);
+
+/** Zazaki (Zazaki) */
+$specialPageAliases['diq'] = array(
+	'CreateItem' => array( 'LeteVırazê' ),
+	'ItemByTitle' => array( 'SernuşteyêLeti' ),
+	'ItemByLabel' => array( 'EtiketêLeti' ),
+);
+
+/** Korean (한국어) */
+$specialPageAliases['ko'] = array(
+	'CreateItem' => array( '항목만들기', '아이템만들기' ),
+	'ItemByTitle' => array( '제목별항목', '제목별아이템' ),
+	'ItemByLabel' => array( '레이블별항목', '라벨별항목', '레이블별아이템', '라벨별아이템' ),
+);
+
+/** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
 	'CreateItem' => array( 'СоздајСтавка' ),
 	'ItemByTitle' => array( 'СтавкаПоНаслов' ),

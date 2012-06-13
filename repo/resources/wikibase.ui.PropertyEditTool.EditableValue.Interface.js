@@ -129,8 +129,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			 * FIXME: not the nicest way of getting these things via DOM, might be better to implement this into the
 			 *        related EditableValue
 			 */
-			var evCls = wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS,
-				petCls = wikibase.ui.PropertyEditTool.prototype.UI_CLASS;
+			var evCls = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS,
+				petCls = window.wikibase.ui.PropertyEditTool.prototype.UI_CLASS;
 
 			this._inputElem.inputAutoExpand( {
 				maxWidth: $.proxy( function() {
@@ -204,6 +204,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	_onKeyDown: function( event ) {
+		this._previousValue = this.getValue(); // remember current value before key changes text
 		if( this.onKeyDown !== null && this.onKeyDown( event ) === false ) { // callback
 			return false; // cancel
 		}

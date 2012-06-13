@@ -171,7 +171,7 @@ window.wikibase.ui.Tooltip.prototype = {
 					'class': 'ui-icon ui-icon-triangle-1-e'
 				} ) )
 				.append( $( '<span/>', {
-					text: window.mw.msg( 'wikibase-tooltip-error-details' )
+					text: mw.msg( 'wikibase-tooltip-error-details' )
 				} ) )
 			)
 			.after( $( '<div/>', {
@@ -244,10 +244,10 @@ window.wikibase.ui.Tooltip.prototype = {
 				this._tipsy.$tip.addClass( 'wb-error' );
 
 				// hide error tooltip when clicking outside of it
-				this._tipsy.$tip.on( 'click', function( event ) {
+				this._tipsy.$tip.on( 'mousedown', function( event ) { // catching events of all mouse buttons
 					event.stopPropagation();
 				} );
-				$( window ).one( 'click', $.proxy( function( event ) {
+				$( window ).one( 'mousedown', $.proxy( function( event ) {
 					$( this ).triggerHandler( 'clickoutside' );
 				}, this ) );
 

@@ -54,9 +54,11 @@ window.wikibase = new( function() {
 		this._siteList = {};
 		
 		for( var siteId in sitesDetails ) {
-			var site = sitesDetails[ siteId ];
-			site.id = siteId;
-			this._siteList[ siteId ] =  new window.wikibase.Site( site );
+			if( sitesDetails.hasOwnProperty( siteId ) ) {
+				var site = sitesDetails[ siteId ];
+				site.id = siteId;
+				this._siteList[ siteId ] =  new window.wikibase.Site( site );
+			}
 		}
 		
 		return this._siteList;

@@ -53,7 +53,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	},
 
 	_buildInterfaces: function( subject ) {
-		var interfaces = new Array();
+		var interfaces = [];
 		var tableCells = subject.children( 'td' );
 		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
 		
@@ -137,7 +137,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			this,
 			save,
 			$.proxy( function() {
-				afterStopEditing && afterStopEditing();
+				if( afterStopEditing ) {
+					afterStopEditing();
+				}
 				// make sure the interface for entering the sites id can't be edited after created
 				this._interfaces.siteId.setActive( this.isPending() );
 			}, this )
@@ -149,7 +151,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
 	 */
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-sitelinks-input-help-message' );
+		return mw.msg( 'wikibase-sitelinks-input-help-message' );
 	},
 
 	/**
@@ -157,14 +159,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 */
 	getApiCallParams: function( apiAction ) {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
-		var params = $.extend( params, {
+		params = $.extend( params, {
 			action: 'wblinksite',
 			linksite: this.siteIdInterface.getSelectedSiteId(),
 			linktitle: this.getValue()[1]
 		} );
-		params.link = ( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE )
-			? 'remove'
-			: 'set';
+		params.link = ( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) ? 'remove' : 'set';
 		delete( params.item ); // ? danwe: why is there an 'item' AND a 'link' param here?
 		delete( params.language );
 

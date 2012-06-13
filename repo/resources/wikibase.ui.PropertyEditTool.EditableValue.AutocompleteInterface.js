@@ -19,8 +19,8 @@
 window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface = function( subject ) {
 	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
 };
-window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype
-	= new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
+window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype =
+	new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype, {
 
 	/**
@@ -43,7 +43,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 
 	_init: function( subject ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
-		this._currentResults = new Array();
+		this._currentResults = [];
 	},
 
 	/**
@@ -123,7 +123,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 					// to upper case, which will still be considered valid but require another suggestion list
 					return;
 				}
-				if ( response[0] == this._inputElem.val() ) {
+				if ( response[0] === this._inputElem.val() ) {
 					this._currentResults = response[1];
 					suggest( response[1] ); // pass array of returned values to callback
 
@@ -133,14 +133,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 					 because of the API call lag, this is avoided when hitting backspace, since the value would
 					 be resetted too slow
 					 */
-					if ( this._lastKeyDown != 8 && response[1].length > 0 ) {
+					if ( this._lastKeyDown !== 8 && response[1].length > 0 ) {
 						/*
 						 following if-statement is a work-around for a technically unexpected search
 						 behaviour: e.g. in English Wikipedia opensearch for "Allegro " returns "Allegro"
 						 as first result instead of "Allegro (music)", so auto-completion should probably
 						 be prevented here
 						 */
-						if ( response[1][0].indexOf( this._inputElem.val() ) != -1 ) {
+						if ( response[1][0].indexOf( this._inputElem.val() ) !== -1 ) {
 							this.setValue( response[1][0] );
 							var start = response[0].length;
 							var end = response[1][0].length;
@@ -165,11 +165,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 			}, this ),
 			error: $.proxy( function( jqXHR, textStatus, errorThrown ) {
 				this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
-				if ( textStatus != 'abort' ) {
+				if ( textStatus !== 'abort' ) {
 					var error = {
 						code: textStatus,
-						shortMessage: window.mw.msg( 'wikibase-error-autocomplete-connection' ),
-						message: window.mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
+						shortMessage: mw.msg( 'wikibase-error-autocomplete-connection' ),
+						message: mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
 					};
 					this.setTooltip( new window.wikibase.ui.Tooltip(
 						this._inputElem,
@@ -222,7 +222,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 				return this._currentResults[i]; // ...but return the original from suggestions
 			}
 		}
-		return null
+		return null;
 	},
 
 	/**
@@ -241,9 +241,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @return string|null actual string found within the result set or null for invalid values
 	 */
 	normalize: function( value ) {
-		if(    this.isInEditMode()
-			&& this.getInitialValue() !== ''
-			&& this.getInitialValue() === $.trim( value ).toLowerCase()
+		if( this.isInEditMode() &&
+			this.getInitialValue() !== '' &&
+			this.getInitialValue() === $.trim( value ).toLowerCase()
 		) {
 			// in edit mode, return initial value if there was one and it matches
 			// this catches the case where _currentResults still is empty but normalization is required
@@ -261,10 +261,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @return string|null
 	 */
 	_normalize_fromCurrentResults: function( value ) {
-		var match = this.getRestulSetMatch( value )
+		var match = this.getRestulSetMatch( value );
+		
 		return ( match === null )
 			? value // not found, return string "unnormalized" but don't return null since it could still be valid!
-			: match
+			: match;
 	},
 
 	_disableInputElement: function() {
