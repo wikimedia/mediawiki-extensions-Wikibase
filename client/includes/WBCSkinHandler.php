@@ -28,7 +28,7 @@ class WBCSkinHandler {
 	public static function onSkinTemplateOutputPageBeforeExec( Skin &$skin, &$template ) {
 		global $wgLanguageCode;
 
-		$edit_url = \Wikibase\ClientSettings::get( 'editURL' );
+		$edit_url = \Wikibase\Settings::get( 'editURL' );
 		if( empty( $edit_url ) ) {
 			return true;
 		}

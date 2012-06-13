@@ -21,9 +21,9 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 	 * No sorting.
 	 */
 	public function testNone() {
-		global $egWBCSettings;
-		$egWBCSettings = array();
-		\Wikibase\ClientSettings::singleton()->rebuildSettings();
+		global $egWBSettings;
+		$egWBSettings = array();
+		\Wikibase\Settings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $orig = $this->provideArray();
@@ -35,11 +35,11 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 	 * Sort by language code.
 	 */
 	public function testCode() {
-		global $egWBCSettings;
-		$egWBCSettings = array(
+		global $egWBSettings;
+		$egWBSettings = array(
 			'sort' => 'code'
 		);
-		\Wikibase\ClientSettings::singleton()->rebuildSettings();
+		\Wikibase\Settings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
@@ -300,11 +300,11 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 	}
 
 	public function testAlphabetic() {
-		global $egWBCSettings;
-		$egWBCSettings = array(
+		global $egWBSettings;
+		$egWBSettings = array(
 			'sort' => 'alphabetic'
 		);
-		\Wikibase\ClientSettings::singleton()->rebuildSettings();
+		\Wikibase\Settings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
@@ -313,11 +313,11 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 	}
 
 	public function testAlphabeticRevised() {
-		global $egWBCSettings;
-		$egWBCSettings = array(
+		global $egWBSettings;
+		$egWBSettings = array(
 			'sort' => 'alphabetic_revised'
 		);
-		\Wikibase\ClientSettings::singleton()->rebuildSettings();
+		\Wikibase\Settings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
@@ -581,8 +581,8 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 	 * Test sortPrepend, sort the links in reverse
 	 */
 	public function testPrepend() {
-		global $egWBCSettings;
-		$egWBCSettings = array (
+		global $egWBSettings;
+		$egWBSettings = array (
 			'sort' => 'alphabetic',
 			'sortPrepend' => array (
 				'zh',
@@ -838,7 +838,7 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 				'ace',
 			)
 		);
-		\Wikibase\ClientSettings::singleton()->rebuildSettings();
+		\Wikibase\Settings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
@@ -850,11 +850,11 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 	 * Unknown languages go to the bottom.
 	 */
 	public function testUnknown() {
-		global $egWBCSettings;
-		$egWBCSettings = array(
+		global $egWBSettings;
+		$egWBSettings = array(
 			'sort' => 'alphabetic'
 		);
-		\Wikibase\ClientSettings::singleton()->rebuildSettings();
+		\Wikibase\Settings::singleton()->rebuildSettings();
 		WBCLangLinkHandler::buildSortOrder();
 
 		$alphabetic = $this->provideAlphabetic();

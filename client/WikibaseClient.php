@@ -48,7 +48,6 @@ $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.m
 
 // Autoloading
 $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
-$wgAutoloadClasses['Wikibase\ClientSettings'] 		= $dir . 'WikibaseClient.settings.php';
 
 $wgAutoloadClasses['Wikibase\LocalItem'] 			= $dir . 'includes/LocalItem.php';
 $wgAutoloadClasses['Wikibase\LocalItems'] 			= $dir . 'includes/LocalItems.php';
@@ -60,6 +59,7 @@ $wgAutoloadClasses['WBCSkinHandler'] 				= $dir . 'includes/WBCSkinHandler.php';
 $wgHooks['UnitTestsList'][] 						= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['WikibasePollHandle'][]					= '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= '\Wikibase\ClientHooks::onSchemaUpdate';
+$wgHooks['WikibaseDefaultSettings'][] 			    = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
 
 $wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
 $wgHooks['ParserFirstCallInit'][]					= 'WBCNoLangLinkHandler::onParserFirstCallInit';
@@ -82,6 +82,4 @@ $wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
 );
 
 unset( $moduleTemplate );
-
-$egWBCSettings = array();
 

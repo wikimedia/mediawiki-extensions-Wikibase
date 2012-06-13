@@ -241,15 +241,16 @@ final class WikibaseHooks {
 	}
 
 	/**
-	 * Adds defaults settings.
-	 * setting name (string) => setting value (mixed)
+	 * Adds default settings.
+	 * Setting name (string) => setting value (mixed)
+	 *
+	 * @param array &$settings
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return boolean
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
-
 		$settings = array_merge(
 			$settings,
 			array(
@@ -292,8 +293,10 @@ final class WikibaseHooks {
 					'dump' => true,
 					'dumpfm' => true,
 				),
-			) );
+			)
+		);
 
 		return true;
 	}
+
 }

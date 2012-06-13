@@ -104,4 +104,30 @@ final class ClientHooks {
 		// TODO
 	}
 
+	/**
+	 * Adds default settings.
+	 * Setting name (string) => setting value (mixed)
+	 *
+	 * @param array &$settings
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public static function onWikibaseDefaultSettings( array &$settings ) {
+		$settings = array_merge(
+			$settings,
+			array(
+				'namespaces' => array( NS_MAIN ),
+				'source' => array( 'dir' => dirname(__FILE__) . '/tests' ),
+				'editURL' => '',
+				'sort' => 'none',
+				'sortPrepend' => false,
+				'alwaysSort' => false,
+			)
+		);
+
+		return true;
+	}
+
 }
