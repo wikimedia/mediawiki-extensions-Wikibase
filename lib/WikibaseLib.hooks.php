@@ -29,6 +29,25 @@ final class WikibaseLibHooks {
 			dirname( __FILE__ ) . '/sql/WikibaseLib.sql'
 		);
 
+		// TODO: move to core
+		$updater->addExtensionTable(
+			'sites',
+			dirname( __FILE__ ) . '/sql/AddSitesTable.sql'
+		);
+
+		// TODO: move to core
+		$updater->addExtensionField(
+			'langlinks',
+			'll_local',
+			dirname( __FILE__ ) . '/sql/AddLocalLanglinksField.sql'
+		);
+
+		// TODO: enable && move to core
+//		$updater->dropExtensionTable(
+//			'interwiki',
+//			dirname( __FILE__ ) . '/sql/DropInterwiki.sql'
+//		);
+
 		return true;
 	}
 
