@@ -39,9 +39,10 @@ class ViewItemAction extends \FormlessAction {
 		}
 		else {
 			// TODO: switch on type of content.
-			$view = new ItemView( $content, $this->getContext() );
-			$renderedOutput = $view->render();
-			$this->getOutput()->addParserOutput( $renderedOutput );
+			$view = new ItemView( $this->getContext() );
+			$view->render( $content );
+
+			$this->getOutput()->setPageTitle( $content->getLabel( $this->getLanguage()->getCode() ) );
 		}
 		return '';
 	}
