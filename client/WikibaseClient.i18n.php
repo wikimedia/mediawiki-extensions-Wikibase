@@ -176,6 +176,13 @@ $messages['ksh'] = array(
 	'wbc-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
 );
 
+/** Kurdish (Latin script) (‪Kurdî (latînî)‬)
+ * @author George Animal
+ */
+$messages['ku-latn'] = array(
+	'wbc-editlinks' => 'Girêdanan biguherîne',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */

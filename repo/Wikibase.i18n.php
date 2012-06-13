@@ -474,6 +474,7 @@ $messages['es'] = array(
 	'wikibase-api-label-not-found' => 'No se puede encontrar una etiqueta anterior para este idioma en el elemento',
 	'wikibase-api-description-not-found' => 'No se puede encontrar una descripción anterior para este idioma en el elemento',
 	'wikibase-api-wrong-class' => 'El contenido de la página encontrada no es del tipo correcto.',
+	'wikibase-api-session-failure' => 'La sesión actual ha fallado y debe actualizar la página y volver a iniciar sesión.',
 	'content-model-1001' => 'Elemento de Wikibase',
 );
 
@@ -1404,6 +1405,7 @@ $messages['pt-br'] = array(
 
 /** Russian (русский)
  * @author Kaganer
+ * @author Ole Yves
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
@@ -1412,14 +1414,39 @@ $messages['ru'] = array(
 	'wikibase-save' => 'сохранить',
 	'wikibase-cancel' => 'отменить',
 	'wikibase-add' => 'добавить',
+	'wikibase-save-inprogress' => 'Сохранение…',
+	'wikibase-remove-inprogress' => 'Удаление…',
 	'wikibase-label-edit-placeholder' => 'введите метку',
 	'wikibase-description-edit-placeholder' => 'введите описание',
+	'wikibase-move-error' => 'Вы не можете переименовывать страницы, которые находятся в пространстве данных, и вы не можете перемещать страницы в него.',
+	'wikibase-sitelink-site-edit-placeholder' => 'Укажите сайт',
+	'wikibase-sitelink-page-edit-placeholder' => 'Укажите страницу',
 	'wikibase-label-input-help-message' => 'Введите название этого набора данных в $1.',
 	'wikibase-description-input-help-message' => 'Введите краткое описание в $1.',
-	'wikibase-sitelinks' => 'Страницы Википедии, ссылающиеся на этот элемент',
-	'wikibase-sitelinks-add' => 'добавить ссылку на страницу Википедии',
-	'wikibase-sitelinks-empty' => 'Ни одна страница Википедии ещё не ссылается сюда.',
+	'wikibase-sitelinks' => 'Список страниц, ссылающихся на этот элемент',
+	'wikibase-sitelinks-add' => 'добавить ссылку на страницу сайта',
+	'wikibase-sitelinks-empty' => 'Ни одна страница сайта ещё не ссылается сюда.',
+	'wikibase-sitelinks-input-help-message' => 'Поставьте ссылку на страницу, относящуюся к этому пункту.',
 	'wikibase-remove' => 'убрать',
+	'wikibase-propertyedittool-full' => 'Список значений уже полон.',
+	'wikibase-propertyedittool-counter' => '($1 запис{{PLURAL:$1|ь|и|ей}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 запис{{PLURAL:$1|ь|и|ей}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Одно из значений|$1 значения}} еще не сохран{{PLURAL:$1|ено|ены}}',
+	'wikibase-sitelinksedittool-full' => 'Ссылки на страницы уже заданы для всех известных сайтов.',
+	'wikibase-disambiguation-title' => 'Значения для «$1»',
+	'wb-special-createitem-new-item-notification' => 'Новый элемент «$1» создан и перенаправлен на его страницу. Вернуться к «$2».',
+	'wikibase-aliases-label' => 'Также известен как:',
+	'wikibase-tooltip-error-details' => 'Подробности',
+	'wikibase-error-save-generic' => 'Произошла ошибка при попытке выполнить сохранение, из-за чего изменения не могут быть совершены.',
+	'wikibase-error-remove-generic' => 'Произошла ошибка при попытке выполнить удаление, из-за чего изменения не могут быть совершены.',
+	'wikibase-error-save-connection' => 'При попытке выполнить сохранение произошла ошибка подключения, из-за чего изменения не могут быть совершены. Пожалуйста, проверьте своё подключение к Интернету.',
+	'wikibase-error-remove-connection' => 'При попытке выполнить удаление произошла ошибка подключения, из-за чего изменения не могут быть совершены. Пожалуйста, проверьте своё подключение к Интернету.',
+	'wikibase-error-save-timeout' => 'Мы переживаем технические трудности, из-за чего ваше изменение не может быть совершено.',
+	'wikibase-error-remove-timeout' => 'Мы переживаем технические трудности, из-за чего ваше удаление не может быть совершено.',
+	'wikibase-error-autocomplete-connection' => 'Не удалось запросить API Википедии. Пожалуйста, попробуйте снова позже.',
+	'wikibase-error-autocomplete-response' => 'Сервер ответил: $1',
+	'wikibase-setting-languages' => 'Дополнительные языки<br />(откат при отображении данных не доступен в основном языке)',
 );
 
 /** Swedish (svenska)
