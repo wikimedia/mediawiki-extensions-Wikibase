@@ -19,9 +19,12 @@
  * @param jQuery subject
  */
 window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface = function( subject, site ) {
+	delete this.setResultSet; // no use calling that function since result set is retrieved via AJAX
 	window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.apply( this, arguments );
 };
-window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
+window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.prototype
+	= new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
+
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.prototype, {
 	/**
 	 * Information for which site this autocomplete interface should serve input suggestions
@@ -79,7 +82,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 		this._getValueContainer()
 		.empty()
 		.append( // insert link to site in site
-			this._site.getLinkTo( value )
+			this._site && value !== '' ? this._site.getLinkTo( value ) : ''
 		);
+	},
+
+	destroy: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.destroy.call( this );
+		this._site = null;
 	}
+
 } );

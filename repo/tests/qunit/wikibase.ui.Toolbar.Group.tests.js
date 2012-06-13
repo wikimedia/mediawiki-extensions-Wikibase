@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.Toolbar.Group', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.Toolbar.Group', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.subject = new window.wikibase.ui.Toolbar.Group();
 

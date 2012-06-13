@@ -57,15 +57,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	_inputElem: null,
 
 	/**
-	 * when adding characters to the input value, the previous value is stored to be able to check whether instant
-	 * on change operations have to be performed.
-	 * @var String
-	 */
-	_previousValue: null,
-
-	_currentWidth: null,
-
-	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
 	 *
@@ -77,12 +68,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
-		this._currentWidth = 0;
 	},
 
 	destroy: function() {
 		if( this.isInEditMode() ) {
 			this.stopEditing( false );
+		}
+		if ( this.tooltip !== null ) {
+			this.removeTooltip();
 		}
 	},
 
@@ -98,22 +91,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		if( this.isInEditMode() || !this.isActive() ) {
 			return false;
 		}
-		
+
 		// initializes the input element into the DOM and removes the html representation
 		this._initInputElement();
-
-		// auto expand dummy element to messure text lenght:
-		if ( this.autoExpand ) {
-			var ruler = $( '<span/>', {
-				'class': 'ruler'
-			} );
-			this._inputElem.after( ruler );
-		}
 
 		this._isInEditMode = true;
 		
 		this._onInputRegistered(); // do this after setting _isInEditMode !
 		this.setFocus();
+
+		$( this ).trigger( 'afterStartEditing' );
 		
 		return true;
 	},
@@ -122,18 +109,39 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Initializes the input element and appends it into the DOM when needed.
 	 */
 	_initInputElement: function() {
+		var initialValue = this.getValue();
 		this._inputElem = this._buildInputElement();
+
 		if( this.isDisabled() ) {
 			// disable element properly if disabled from before edit mode
 			this._disableInputElement();
 		}
-		
+
 		// store original text value from before input box insertion:
-		this._inputElem.data( this.UI_CLASS + '-initial-value', this.getValue() );
+		this._inputElem.data( this.UI_CLASS + '-initial-value', initialValue );
 		
 		var inputParent = this._getValueContainer();
-		inputParent.text( '' );
+		inputParent.empty();
 		this._inputElem.appendTo( inputParent );
+
+		if( this.autoExpand ) {
+			/**
+			 * FIXME: not the nicest way of getting these things via DOM, might be better to implement this into the
+			 *        related EditableValue
+			 */
+			var evCls = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS,
+				petCls = window.wikibase.ui.PropertyEditTool.prototype.UI_CLASS;
+
+			this._inputElem.inputAutoExpand( {
+				maxWidth: $.proxy( function() {
+					var editableValNode = this._subject.closest( '.' + evCls ),
+						propertyEditTool = editableValNode.closest( '.' + petCls ),
+						toolbarParent = editableValNode.children( '.' + evCls + '-toolbarparent:first' );
+
+					return propertyEditTool.width() - toolbarParent.outerWidth( true ) - 25;
+				}, this )
+			} );
+		}
 	},
 	
 	/**
@@ -153,9 +161,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'focus':    $.proxy( this._onFocus, this ),
 			'blur':     $.proxy( this._onBlur, this ),
 			'change':   $.proxy( this._onChange, this )
-		} );
+		} )
+		// on each change to this input check whether value was changed:
+		.eachchange( $.proxy( function( e, oldValue ) {
+			if( this.normalize( oldValue ) !== this.getValue() ) {
+				this._onInputRegistered(); // only called if input really changed
+			}
+		}, this ) );
 	},
-	
+
 	/**
 	 * Returns the node holding the value. This node will also hold the input box when in edit mode.
 	 * @return jQuery
@@ -175,72 +189,28 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	/**
-	 * Functionality for dynamically expanding the input fields size.
-	 *
-	 * @todo: This is not used currenty but basically works. One problem remaining is considering the max width.
-	 */
-	_expand: function() {
-		if ( this.autoExpand ) {
-			var ruler = this._subject.find( '.ruler' );
-
-			var currentValue = this._inputElem.val();
-			if ( currentValue === '' ) {
-				currentValue = this._inputElem.attr( 'placeholder' );
-			}
-			ruler.html( currentValue.replace( / /g, '&nbsp;' ).replace( /</g, '&lt;' ) ); // TODO prevent insane HTML from being placed in the ruler
-			var inputWidth = this._inputElem.width();
-
-			// get max width
-			var maxWidth = this._subject.parent().width();
-
-			// get new current width
-			this._subject.parent().css( 'display', 'inline-block' );
-			var currentWidth = this._subject.parent().width();
-			this._subject.parent().css( 'display', 'block' );
-
-			// TODO use additional parent element to measer width of (input + toolbar)
-			if ( this._inputElem.width() > this._subject.parent().width() - 250 && !(ruler.width() < this._subject.parent().width() - 250) ) {
-				this._inputElem.css( 'width', this._subject.parent().width() - 249 );
-			} else {
-				this._inputElem.css( 'width', ( ruler.width() + 25 ) + 'px' ); // TODO better resize mechanism (maybe by temporarily replacing text input)
-			}
-
-
-			if ( typeof this._editableValue._toolbar._items[0].tooltip._tipsy.$tip != 'undefined' ) {
-				var tooltipLeft = parseInt( this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left' ) );
-				this._editableValue._toolbar._items[0].tooltip._tipsy.$tip.css( 'left', ( tooltipLeft + this._inputElem.width() - inputWidth ) + 'px' );
-			}
-		}
-	},
-
-	/**
 	 * Called when a key is pressed inside the input interface
 	 */
 	_onKeyPressed: function( event ) {
-		this._previousValue = this.getValue(); // remember current value before key changes text
 		if( this.onKeyPressed !== null && this.onKeyPressed( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
 	_onKeyUp: function( event ) {
-		if ( this._previousValue !== this.getValue() ) {
-			this._onInputRegistered(); // only called if input really changed
-		}
-		this._expand();
 		if( this.onKeyUp !== null && this.onKeyUp( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
 	_onKeyDown: function( event ) {
+		this._previousValue = this.getValue(); // remember current value before key changes text
 		if( this.onKeyDown !== null && this.onKeyDown( event ) === false ) { // callback
 			return false; // cancel
 		}
 	},
 
 	_onFocus: function( event ) {
-		this._expand();
 		if( this.onFocus !== null ) {
 			this.onFocus( event ); // callback
 		}
@@ -270,16 +240,26 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		}
 		var initialValue = this.getInitialValue();
 		
-		var $value = save ? this.getValue() : initialValue;
+		var value = save ? this.getValue() : initialValue;
 		
 		this._inputElem.empty().remove(); // remove input interface
 		this._inputElem = null;
 		
 		this._isInEditMode = false;
-		this.setValue( $value );
-		
+
+		// save but don't use setValue(), in case we cancelled, we don't want further normalization
+		var fireEvent = this.isInEditMode()
+			? this._setValue_inEditMode( value )
+			: this._setValue_inNonEditMode( value );
+
+		if( fireEvent !== false ) {
+			this._onInputRegistered(); // new input
+		}
+
+		$( this ).trigger( 'afterStopEditing' );
+
 		// any change at all compared to initial value?
-		return initialValue !== $value;
+		return initialValue !== value;
 	},
 
 	/**
@@ -321,10 +301,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			value = this.normalize( value );
 		} else {
 			value = this._getValueContainer().text();
-			// if already set, the value should be normalized already
+			// if already set, the value should be normalized already.
+			// if this is not the case in another inheriting interface, change it there BUT NOT HERE!
 		}
-		// normalize in case we display a different variation from the actual normalized value
-		return this.normalize( value );
+		return value === null ? '' : value; // don't allow this to be null!
 	},
 	
 	/**
@@ -346,37 +326,43 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			return value;
 		}
 		
-		if( this.isInEditMode() ) {
-			this._setValue_inEditMode( value );
-		} else {
-			this._setValue_inNonEditMode( value );
-		}
+		var fireEvent = this.isInEditMode()
+			? this._setValue_inEditMode( value )
+			: this._setValue_inNonEditMode( value );
 
-		this._onInputRegistered(); // new input
+		if( fireEvent !== false ) {
+			this._onInputRegistered(); // new input
+		}
 		return value;
 	},
 
 	/**
 	 * Called by setValue() if the value has to be injected into the input interface in edit mode.
+	 *
+	 * @param string value
+	 * @return bool whether the value has been changed
 	 */
 	_setValue_inEditMode: function( value ) {
 		this._inputElem.attr( 'value', value );
+		return true;
 	},
 
 	/**
 	 * Called by setValue() if the value has to be injected into the static DOM nodes, not into input elements.
-	 * @param value
-	 * @private
+
+	 * @param string value
+	 * @return bool whether the value has been changed
 	 */
 	_setValue_inNonEditMode: function( value ) {
 		this._getValueContainer().text( value );
+		return true;
 	},
 	
 	/**
 	 * Normalizes a string so it is sufficient for setting it as value for this interface.
 	 * This will be done automatically when using setValue().
 	 * In case the given value is invalid, null will be returned.
-	 * 
+	 *
 	 * @return string|null
 	 */
 	normalize: function( value ) {
@@ -385,7 +371,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	
 	/**
 	 * Returns true if the interface is disabled.
-	 * 
+	 *
 	 * @return bool
 	 */
 	isDisabled: function() {
@@ -395,14 +381,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Disables or enables the element. Disabled is still visible but will be presented differently
 	 * and might behave differently in some cases.
-	 * 
+	 *
 	 * @param bool disable true for disabling, false for enabling the element
 	 * @return bool whether the state was changed or not.
 	 */
 	setDisabled: function( disable ) {
 		// TODO!
 		if( disable ) {
-			this._subject.addClass( this.UI_CLASS + '-disabled' );			
+			this._subject.addClass( this.UI_CLASS + '-disabled' );
 			if( this.isInEditMode() ) {
 				this._disableInputElement();
 			}
@@ -425,7 +411,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
 	 * interface will not be made available on startEditing()
-	 * 
+	 *
 	 * @return bool
 	 */
 	isActive: function() {
@@ -436,10 +422,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Sets the interface active or inactive. If inactive, the interface will not be made available
 	 * when startEditing() is called. If called to deactivate the interface but still in edit mode,
 	 * the edit mode will be closed without saving.
-	 * 
+	 *
 	 * @return bool whether the state was changed or not.
 	 */
-	setActive: function( active ) {		
+	setActive: function( active ) {
 		if( !active && this.isInEditMode() ) {
 			this.stopEditing( false );
 		}
@@ -450,7 +436,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
 	 * If its not in edit mode, the current value will be returned.
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	getInitialValue: function() {
 		if( ! this.isInEditMode() ) {
@@ -485,7 +471,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 */
 	validate: function( value ) {
 		var normalized = this.normalize( value );
-		return  typeof( value ) == 'string' && normalized !== '';
+		return  typeof( value ) == 'string' && normalized !== null && normalized !== '';
 	},
 
 	/////////////////
@@ -527,3 +513,5 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 	onChange: null
 };
+
+$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype, window.wikibase.ui.Tooltip.ext );

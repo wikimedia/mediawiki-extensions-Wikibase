@@ -7,11 +7,18 @@
  *
  * @license GNU GPL v2+
  * @author H. Snater
+ * @author Daniel Werner
  */
 
 .firstHeading {
 	border-bottom: 0;
 	margin-bottom: 0 !important;
+	padding-top:1px;
+	clear: both; /* so success bar after new item created won't float heading */
+}
+
+div#bodyContent {
+	margin-top: -0.4em;
 }
 
 .wb-property-container-value {
@@ -21,18 +28,44 @@
 .wb-property-container {
 	margin-top: .3em;
 }
-.wb-property-container-value {
-	background: /* @embed */ url(//bits.wikimedia.org/skins-1.19/common/images/redirectltr.png) left  no-repeat;
-	padding: 5px 0 0 35px;
-}
-/* @noflip */ .rtl .wb-property-container-value {
-	background: /* @embed */ url(//bits.wikimedia.org/skins-1.19/common/images/redirectrtl.png) right no-repeat;
-	padding: 5px 35px 0 0;
-} /* css Janus does not convert padding in every browser */
 
 .mw-jump, #contentSub {
 	display:none;
 }
+
+.wb-hr {
+	margin-top:0.2em;
+}
+
+wb-clear {
+	clear:both;
+}
+
+
+/********** ALIASES **********/
+
+.wb-aliases {
+	font-size: 0.9em;
+}
+
+.wb-aliases-label {
+	font-weight: bold;
+}
+
+ul.wb-aliases-container {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+li.wb-aliases-alias {
+	margin-left: 1em;
+	display: inline;
+	list-style-type: none;
+}
+
+/********** /ALIASES **********/
+
 
 /********** SITE LINKS TABLE **********/
 
@@ -44,17 +77,39 @@ table.wb-sitelinks th, table.wb-sitelinks td {
 	border-bottom: 1px solid #ccc;
 	margin: 0;
 	padding: 0 0.4em;
-	height: 2.2em; /* steady height when input boxes are inserted compared with padding usage */
+	height: 2.25em; /* steady height when input boxes are inserted compared with padding usage */
 
 }
 table.wb-sitelinks th {
 	/*background-color:#D6F3FF;*/
 	text-align:left;
-	font-size:1.25em;
 	font-weight:normal;
 }
+	table.wb-sitelinks th h2 {
+		border-bottom:none;
+	}
+
+table.wb-sitelinks {
+	width: 100%;
+	max-width: 50em;
+	display: block; /* safari and chrome */
+}
+table.wb-sitelinks td.wb-sitelinks-site {
+	width: 33%;
+}
+table.wb-sitelinks td.wb-sitelinks-link {
+	/* set no width here so sitelinks width has the highest priority and this will be
+	 * shared together with the toolbar which always has a variable width (changes after "edit")
+	 */
+	width: 66%;
+}
+.wb-sitelinks td.wb-ui-propertyedittool-editablevalue-toolbarparent {
+	/* don't use more space than necessary so the rest goes to the site links */
+	width: 0;
+}
+
 table.wb-sitelinks tr:hover td,
-table.wb-sitelinks tr.wb-pending-value td {
+table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
 	/*background-color:#5dc9f4;*/
 	background-color:#D6F3FF;
 }

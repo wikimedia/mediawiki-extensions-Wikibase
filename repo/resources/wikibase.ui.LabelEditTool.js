@@ -30,9 +30,8 @@ $.extend( window.wikibase.ui.LabelEditTool.prototype, {
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		// add class specific to this ui element:
 		this._subject.addClass( 'wb-ui-labeledittool' );
-		
-		// Todo: think about auto expand feature and fix it
-		this._editableValues[0]._interfaces[0].autoExpand = false;
+
+		this._editableValues[0]._interfaces[0].autoExpand = true;
 	},
 	
 	/**

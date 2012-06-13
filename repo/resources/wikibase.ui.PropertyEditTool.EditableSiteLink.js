@@ -53,7 +53,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	},
 
 	_buildInterfaces: function( subject ) {
-		var interfaces = new Array();
+		var interfaces = [];
 		var tableCells = subject.children( 'td' );
 		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
 		
@@ -98,14 +98,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			var siteId = idInterface.getSelectedSiteId();
 			
 			// change class names:
-			this._removeClassByRegex( this._subject, /^wb-sitelinks-.+/ );
+			this._subject.removeClassByRegex( /^wb-sitelinks-.+/ );
 			this._subject.addClass( 'wb-sitelinks-' + siteId );
 			
-			this._removeClassByRegex( idInterface._getValueContainer(), /^wb-sitelinks-site-.+/ );
-			idInterface._getValueContainer().addClass( 'wb-sitelinks-' + siteId );
+			idInterface._getValueContainer().removeClassByRegex( /^wb-sitelinks-site-.+/ );
+			idInterface._getValueContainer().addClass( 'wb-sitelinks-site wb-sitelinks-site-' + siteId );
 			
-			this._removeClassByRegex( pageInterface._getValueContainer(), /^wb-sitelinks-link-.+/ );
-			pageInterface._getValueContainer().addClass( 'wb-sitelinks-site-' + siteId );
+			pageInterface._getValueContainer().removeClassByRegex( /^wb-sitelinks-link-.+/ );
+			pageInterface._getValueContainer().addClass( 'wb-sitelinks-link wb-sitelinks-link-' + siteId );
 		}
 		
 		// only enable site page selector if there is a valid site id selected
@@ -117,29 +117,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		this.__toolbarParent = this.__toolbarParent || $( '<td/>' ).appendTo( this._subject );
 		return this.__toolbarParent;
 	},
-
-	_getIndexParent: function() {
-		this.__indexParent = this.__indexParent || $( '<td/>' ).prependTo( this._subject );
-		return this.__indexParent;
-
-	},
 	
-	/**
-	 * Helper function to remove a css class matching a regular expression.
-	 * 
-	 * @param subject jQuery
-	 * @param RegExp classNameRegex
-	 */
-	_removeClassByRegex: function( subject, classNameRegex ) {
-		if ( typeof subject.attr( 'class' ) == 'undefined' ) {
-			return
-		}
-		$.each( subject.attr( 'class' ).split( ' ' ), $.proxy( function( index, className ) {
-			if ( className.match( classNameRegex ) ) {
-				subject.removeClass( className );
-			}
-		}, this ) );
-	},
+
 	
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing
@@ -153,12 +132,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing
 	 */
-	stopEditing: function( save ) {
-		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
-		
-		// make sure the interface for entering the sites id can't be edited after created
-		this._interfaces.siteId.setActive( this.isPending() );
-		
+	stopEditing: function( save, afterStopEditing ) {
+		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call(
+			this,
+			save,
+			$.proxy( function() {
+				if( afterStopEditing ) {
+					afterStopEditing();
+				}
+				// make sure the interface for entering the sites id can't be edited after created
+				this._interfaces.siteId.setActive( this.isPending() );
+			}, this )
+		);
 		return changed;
 	},
 
@@ -166,32 +151,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
 	 */
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-sitelinks-input-help-message' );
+		return mw.msg( 'wikibase-sitelinks-input-help-message' );
 	},
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
 	 */
-	getApiCallParams: function( removeValue ) {
-		var linkValues = this.getValue();
-		var siteId = this.siteIdInterface.getSelectedSiteId();
-		if ( removeValue === true ) {
-			return {
-				action: 'wblinksite',
-				id: mw.config.values.wbItemId,
-				link: 'remove',
-				linksite: siteId,
-				linktitle: linkValues[1]
-			};
-		} else {
-			return {
-				action: 'wblinksite',
-				id: mw.config.values.wbItemId,
-				link: 'set',
-				linksite: siteId,
-				linktitle: linkValues[1]
-			};
-		}
+	getApiCallParams: function( apiAction ) {
+		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
+		params = $.extend( params, {
+			action: 'wblinksite',
+			linksite: this.siteIdInterface.getSelectedSiteId(),
+			linktitle: this.getValue()[1]
+		} );
+		params.link = ( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) ? 'remove' : 'set';
+		delete( params.item ); // ? danwe: why is there an 'item' AND a 'link' param here?
+
+		return params;
 	},
 	
 	/////////////////

@@ -42,7 +42,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		$parts = explode( '/', $this->subPage, 2 );
 
 		if ( count( $parts ) == 2 ) {
-			$item = WikibaseItem::getFromSiteLink( $parts[0], $parts[1] );
+			$item = Wikibase\Item::getFromSiteLink( $parts[0], $parts[1] );
 
 			if ( is_null( $item ) ) {
 				// TODO: display a message that the item does not exist and possibly some fancy input UI

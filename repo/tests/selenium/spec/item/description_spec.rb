@@ -4,7 +4,12 @@ describe "Check functionality of edit description" do
 
   context "Check for item description UI" do
     it "should check for edit description" do
-      visit_page(ItemPage)
+      # visit_page(LoginPage)
+      # @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+      
+      visit_page(NewItemPage)
+      @current_page.create_new_item(generate_random_string(10), generate_random_string(20))
+
       @current_page.itemDescriptionSpan.should be_true
       current_description = @current_page.itemDescriptionSpan
       changed_description = current_description + " Adding something."
@@ -28,17 +33,25 @@ describe "Check functionality of edit description" do
       @current_page.descriptionInputField_element.clear
       @current_page.descriptionInputField = changed_description
       @current_page.saveDescriptionLink
-      @current_page.itemDescriptionSpan.should == changed_description
+      @current_page.apiCallWaitingMessage?.should be_true
       ajax_wait
+      @current_page.wait_for_api_callback
+      @current_page.itemDescriptionSpan.should == changed_description
+
       @browser.refresh
+      @current_page.wait_for_item_to_load
       @current_page.itemDescriptionSpan.should == changed_description
       @current_page.editDescriptionLink
       @current_page.descriptionInputField_element.clear
       @current_page.descriptionInputField = current_description
       @current_page.saveDescriptionLink
-      @current_page.itemDescriptionSpan.should == current_description
+      @current_page.apiCallWaitingMessage?.should be_true
       ajax_wait
+      @current_page.wait_for_api_callback
+      @current_page.itemDescriptionSpan.should == current_description
+      
       @browser.refresh
+      @current_page.wait_for_item_to_load
       @current_page.itemDescriptionSpan.should == current_description
     end
   end

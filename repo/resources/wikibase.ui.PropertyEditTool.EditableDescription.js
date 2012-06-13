@@ -22,10 +22,13 @@ window.wikibase.ui.PropertyEditTool.EditableDescription = function( subject ) {
 };
 window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
-	
+
+	API_KEY: 'descriptions',
+
 	_buildInterfaces: function( subject ) {
 		var interfaces = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInterfaces.call( this, subject );
 		interfaces[0].inputPlaceholder = mw.msg( 'wikibase-description-edit-placeholder' );
+		interfaces[0].autoExpand = true;
 		
 		return interfaces;
 	},
@@ -34,19 +37,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
 	 */
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
+		return mw.msg( 'wikibase-description-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
 	 */
-	getApiCallParams: function() {
-		return {
+	getApiCallParams: function( apiAction ) {
+		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
+		return $.extend( params, {
 			action: 'wbsetlanguageattribute',
-			language: wgUserLanguage,
-			description: this.getValue().toString(),
-			id: mw.config.values.wbItemId,
-			item: 'set'
-		};
+			language: mw.config.get( 'wgUserLanguage' ),
+			description: this.getValue().toString()
+		} );
 	}
 } );

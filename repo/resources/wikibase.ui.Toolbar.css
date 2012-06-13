@@ -12,6 +12,7 @@
 
 .wb-ui-toolbar, .wb-ui-toolbar-group {
 	display: inline-block;
+	white-space: nowrap;
 }
 
 	.wb-ui-toolbar-label,
@@ -24,8 +25,9 @@
 			color: grey;
 		}
 
-.wb-ui-toolbar, .wb-property-container-value {
-	margin: 0.3em;
+.wb-ui-toolbar {
+	margin-left: 0.3em;
+	margin-right: 0.3em;
 }
 
 .mw-content-rtl .wb-ui-toolbar {

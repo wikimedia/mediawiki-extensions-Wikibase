@@ -22,13 +22,17 @@ window.wikibase.ui.PropertyEditTool.EditableLabel = function( subject ) {
 };
 window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
-	
+
+	API_KEY: 'labels',
+
 	_buildInterfaces: function( subject ) {
 		var interfaces = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInterfaces.call( this, subject );
+
 		interfaces[0].inputPlaceholder = mw.msg( 'wikibase-label-edit-placeholder' );
-		
+		interfaces[0].autoExpand = true;
+
 		interfaces[0].normalize = function( value ) {
-			var value = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
+			value = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
 			value = value.replace( /\s+/g, ' ' ); // make sure we don't ever allow several spaces in the items label
 			return value;
 		};
@@ -40,19 +44,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
 	 */
 	getInputHelpMessage: function() {
-		return window.mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
+		return mw.msg( 'wikibase-label-input-help-message', mw.config.get('wbDataLangName') );
 	},
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
 	 */
-	getApiCallParams: function() {
-		return {
+	getApiCallParams: function( apiAction ) {
+		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
+		return $.extend( params, {
 			action: "wbsetlanguageattribute",
-			language: window.wgUserLanguage,
-			label: this.getValue().toString(),
-			id: window.mw.config.get( 'wbItemId' ),
-			item: 'set'
-		};
+			language: mw.config.get( 'wgUserLanguage' ),
+			label: this.getValue().toString()
+		} );
 	}
 } );

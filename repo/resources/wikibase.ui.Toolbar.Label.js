@@ -33,7 +33,8 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 * @var jQuery
 	 */
 	_elem: null,
-	
+
+
 	/**
 	 * Initializes the ui element.
 	 * This should normally be called directly by the constructor.
@@ -59,9 +60,12 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	},
 
 	destroy: function() {
-		if ( this._elem != null ) {
+		if ( this._elem !== null ) {
 			this._elem.empty().remove();
 			this._elem = null;
+		}
+		if ( this._tooltip !== null ) {
+			this.removeTooltip();
 		}
 	},
 	
@@ -79,7 +83,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	},
 	
 	/**
-	 * returns the labels content. If only text was set as content, a string will be returned, if
+	 * Returns the labels content. If only text was set as content, a string will be returned, if
 	 * HTML nodes were set, this will return a jQuery object.
 	 * 
 	 * @return jQuery|string
@@ -87,7 +91,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	getContent: function() {
 		var contents = this._elem.contents();
 		
-		if( contents.length == 1 && contents[0].nodeType === 3 ) {
+		if( contents.length === 1 && contents[0].nodeType === 3 ) {
 			// return the text
 			return contents.text();
 		} else {
@@ -152,3 +156,5 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 */
 	beforeEnable: null
 };
+
+$.extend( window.wikibase.ui.Toolbar.Label.prototype, window.wikibase.ui.Tooltip.ext );

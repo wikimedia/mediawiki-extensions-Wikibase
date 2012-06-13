@@ -8,9 +8,30 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
+ *
+ * Events:
+ * -------
+ * onNewItemCreated: Called after a new wikibase item was created and successfully stored in the database via an API call.
+ *                   Parameters: (1) event
+ *                               (2) apiResponse - the APIs response after the item was created. FIXME: this should be an
+ *                                                                                                      'Item' object!
  */
 "use strict";
 window.wikibase = new( function() {
+
+	var onNewItemCreated = function( event, apiResponse ) {
+		// remember a new items id globally when created!
+		mw.config.set( 'wbItemId', apiResponse.id );
+
+		// redirect to the newly created items site:
+		var newItemTitle = new mw.Title( 'Data:' + 'q' + apiResponse.id );
+		window.location =  newItemTitle.getUrl() + '?wbitemcreated=yes';
+		// TODO: this is not yet near perfect and a proper workflow hast to be created. The redirect as of now is
+		//       rather ugly in its presentation to the user.
+	};
+	$( this ).on( 'NewItemCreated', onNewItemCreated );
+
+
 	/**
 	 * Will hold a list of all the sites after getSites() was called. This will cache the result.
 	 * @var wikibase.Site[]
@@ -33,9 +54,11 @@ window.wikibase = new( function() {
 		this._siteList = {};
 		
 		for( var siteId in sitesDetails ) {
-			var site = sitesDetails[ siteId ];
-			site.id = siteId;
-			this._siteList[ siteId ] =  new window.wikibase.Site( site );
+			if( sitesDetails.hasOwnProperty( siteId ) ) {
+				var site = sitesDetails[ siteId ];
+				site.id = siteId;
+				this._siteList[ siteId ] =  new window.wikibase.Site( site );
+			}
 		}
 		
 		return this._siteList;

@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
 "use strict";
 
@@ -30,6 +31,27 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Class which marks the element within the site html.
 	 */
 	UI_CLASS: 'wb-ui-propertyedittool-editablevalue',
+
+	/**
+	 * @const
+	 * Actions for doApiAction()
+	 * @enum number
+	 */
+	API_ACTION: {
+		SAVE: 1,
+		REMOVE: 2,
+		/**
+		 * A save action which will trigger a remove, the actual difference to a real remove is how this action is
+		 * handled in the interface
+		 */
+		SAVE_TO_REMOVE: 3
+	},
+
+	/**
+	 * specific property key within the API JSON structure (overridden by specific subclasses)
+	 * @const string
+	 */
+	API_KEY: null,
 	
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
@@ -82,6 +104,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
+		this._subject.addClass( this.UI_CLASS );
+
 		this._pending = this._subject.hasClass( 'wb-pending-value' );
 		
 		this._initInterfaces();
@@ -125,8 +149,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return wikibase.ui.PropertyEditTool.EditableValue.Interface[]
 	 */
 	_buildInterfaces: function( subject ) {
-		var interfaces = new Array();
-		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.Interface( subject, this ) );
+		var interfaces = [];
+
+		var interfaceParent = $( '<span/>' ).append( subject.contents() );
+		subject.prepend( interfaceParent );
+		interfaces.push( new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this ) );
+
 		return interfaces;
 	},
 	
@@ -140,9 +168,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var self = this;		
 		singleInterface.onFocus = function( event ){ self._interfaceHandler_onFocus( singleInterface, event ); };
 		singleInterface.onBlur = function( event ){ self._interfaceHandler_onBlur( singleInterface, event ); };
-		singleInterface.onKeyPressed =
-			function( event ) { self._interfaceHandler_onKeyPressed( singleInterface, event ); };
 		singleInterface.onKeyUp = // ESC key does not react onKeyPressed but on onKeyUp
+			function( event ) { self._interfaceHandler_onKeyUp( singleInterface, event ); };
+		singleInterface.onKeyPressed =
 			function( event ) { self._interfaceHandler_onKeyPressed( singleInterface, event ); };
 		singleInterface.onInputRegistered =
 				function(){ self._interfaceHandler_onInputRegistered( singleInterface ); };
@@ -154,7 +182,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return jQuery
 	 */
 	_getToolbarParent: function() {
-		return this._subject.parent();
+		// create new div within the structure where we can append the toolbar later:
+		this.__toolbarParent = this.__toolbarParent || $( '<span/>' ).appendTo( this._subject );
+		return this.__toolbarParent;
 	},
 
 	/**
@@ -165,27 +195,86 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_getIndexParent: function() {
 		return null;
 	},
-	
+
 	/**
-	 * Removes the value from the dom as well as from the data store via the API
+	 * Removes the value from the data store via the API. Also removes the values representation from the dom stated
+	 * differently.
+	 *
+	 * @param bool preserveEmptyForm allows to preserve the empty form so a new value can be entered immediately.
+	 * @return jQuery.Deferred in case the remove was called before and is still running, the deferred from the ongoing
+	 *         remove will be returned and the deferreds property isOngoingRemove will be set to true.
 	 */
-	remove: function() {
-		// TODO API call
-		this.doApiCall( true );
-		//this.destroy(); // no need to destroy this proberly since we remove anything for real! FIXME: really??
-		this._subject.empty().remove();
-		
-		if( this.onAfterRemove !== null ) {
-			this.onAfterRemove(); // callback
+	remove: function( preserveEmptyForm ) {
+		if( this.__isRemoving ) {
+			this.__isRemoving.isOngoingRemove = true;
+			return this.__isRemoving_deferred; // returns the deferred
+		}
+
+		var degrade = $.proxy( function() {
+			if( ! preserveEmptyForm ) {
+				// remove value totally
+				this.destroy();
+				this._subject.empty().remove();
+				if( this.onAfterRemove !== null ) {
+					this.onAfterRemove(); // callback
+				}
+			} else {
+				// delete value but keep empty input form
+				this._reTransform( true );
+				this.startEditing();
+				this.removeFocus(); // don't want the focus immediately after removing the value
+			}
+		}, this );
+
+		if( this.isPending() ) {
+			// no API call necessary since value hasn't been stored yet...
+			degrade();
+			return $.Deferred().resolve(); // ...return new deferred nonetheless
+		} else {
+			var action = preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
+
+			// store deferred so we can return it when this is called again while still running
+			// NOTE: can't store deferred in this.__isRemoving because .always() might be called even before return!
+			this.__isRemoving = true;
+			this.__isRemoving_deferred =
+				this.performApiAction( action )
+				.then( degrade )
+				.always( $.proxy( function() {
+					this.__isRemoving = false;
+				}, this ) );
+
+			return this.__isRemoving_deferred; // return deferred
 		}
 	},
 
-	destroy: function() {
-		if( this._toolbar != null) {
-			this._toolbar.destroy();
-			this._toolbar = null;
+	/**
+	 * Saves the current value by sending it to the server. In case the current value is invalid, this will trigger a
+	 * remove instead but will preserve the form to insert a new value.
+	 *
+	 * @return jQuery.Deferred
+	 */
+	save: function() {
+		if( arguments.length > 0 ) {
+			alert( "TAKE A LOOK AT EditableValue.save() again!" );
 		}
-		this.stopEditing( false );
+		if( ! this.isValid() ) {
+			// remove instead! Save equals remove in this case!
+			return this.remove( true );
+		}
+
+		return this.performApiAction( this.API_ACTION.SAVE ) // returns deferred
+		.then( $.proxy( function( response ) {
+			var wasPending = this.isPending();
+			this._reTransform( true );
+
+			this._pending = false; // not pending anymore after saved once
+			this._subject.removeClass( 'wb-pending-value' );
+
+			
+			if( this.onAfterStopEditing ) {
+				this.onAfterStopEditing( true, wasPending ); // callback
+			}
+		}, this ) );
 	},
 
 	/**
@@ -201,20 +290,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			return false;
 		}
 		this._isInEditMode = true;
-		
+		this._subject.addClass( this.UI_CLASS + '-ineditmode' );
+
 		$.each( this._interfaces, function( index, elem ) {
 			elem.startEditing();
 		} );
-
-		if ( this._toolbar.editGroup.tooltip !== null ) {
-			/*
-			FIXME: tooltip needs to recalculate its horizontal position after input elements have been placed inside
-			the DOM; but show() has already been called on initialization, so the tooltip is marked as visible (which
-			is necessary since the tooltip should be permanently shown on some occasions)
-			 */
-			this._toolbar.editGroup.tooltip.hide();
-			this._toolbar.editGroup.tooltip.show( true );
-		}
 
 		return true;
 	},
@@ -223,44 +303,73 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Destroys the edit box and displays the original text or the inputs new value.
 	 *
 	 * @param bool save whether to save the new user given value
-	 * @return bool whether the value has changed compared to the original value
+	 * @param Function afterSaveComplete function to be called after saving has been performed //TODO: get rid of this!
+	 * @return bool whether the value has changed (or was removed) in which case the changes are on their way to the API
 	 */
-	stopEditing: function( save ) {
-		if( ! this.isInEditMode() ) {
+	stopEditing: function( save, afterSaveComplete ) {
+		if( ! this.isInEditMode() || this.__isStopEditing ) {
 			return false;
 		}
+
 		if( this.onStopEditing !== null && this.onStopEditing( save ) === false ) { // callback
 			return false; // cancel
 		}
-		if( !save && this.isPending() ) {
-			// not yet existing value, no state to go back to
-			this.remove();
+
+		if( typeof afterSaveComplete == 'undefined' ) {
+			afterSaveComplete = function() {};
+		}
+
+		if( ! save && this.isPending() ) {
+			// cancel pending edit...
+			this._reTransform( false );
+			this.remove(); // not yet existing value, no state to go back to
+			return false; // do not call onAfterStopEditing() here!
+		}
+
+		if( ! save ) {
+			//cancel...
+			var wasPending = this._reTransform( false );
+
+			if( this.onAfterStopEditing !== null && this.onAfterStopEditing( save, wasPending ) === false ) { // callback
+				return false; // cancel
+			}
+			afterSaveComplete();
+		}
+		else {
+			this.__isStopEditing = true; // don't go here twice as long as callback still running
+
+			// save... (will call all the API stuff)
+			this.save()
+			.done( function() {
+				afterSaveComplete();
+			} )
+			.always( $.proxy( function() {
+				this.__isStopEditing = false;
+			}, this ) );
+		}
+
+		return save;
+	},
+
+	/**
+	 * remove input elements from DOM
+	 *
+	 * @param bool save whether the current value should be kept. If false, the initial value will be restored.
+	 */
+	_reTransform: function( save ) {
+		if( ! this.isInEditMode() ) {
 			return false;
-			// do not call afterStopEditing() here!
 		}
-		
-		var changed = false;
-		
 		$.each( this._interfaces, function( index, elem ) {
-				changed = elem.stopEditing( save ) || changed;
+			elem.stopEditing( save );
 		} );
-		
-		// out of edit mode after interfaces are converted back to HTML:
-		this._isInEditMode = false;
-		
-		var wasPending = this.isPending();
-		if( save ) {
-			this.doApiCall( false );
-			this._pending = false; // TODO: might have to move this to API call error/success handling when implemented
-			this._subject.removeClass( 'wb-pending-value' );
-		}
-		
-		if( this.afterStopEditing !== null && this.afterStopEditing( save, changed, wasPending ) === false ) { // callback
-			return false; // cancel
-		}
-		
-		// any change at all compared to initial value?
-		return changed;
+
+		this._toolbar.editGroup.btnSave.removeTooltip();
+
+		this._isInEditMode = false; // out of edit mode after interfaces are converted back to HTML
+		this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
+
+		return true;
 	},
 
 	/**
@@ -282,41 +391,165 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * Does the actual API call
-	 * @param bool removeValue whether to make the remove or the save call to the API
+	 * Performs one of the actions available in the this.API_ACTION enum and handles all API related stuff.
+	 *
+	 * @param number apiAction see this.API_ACTION enum for all available actions
+	 * @return jQuery.Deferred
 	 */
-	doApiCall: function( removeValue ) {
-		var apiCall = this.getApiCallParams( removeValue );
-		
-		mw.loader.using( 'mediawiki.api', jQuery.proxy( function() {
-			var localApi = new mw.Api();
-			localApi.post( apiCall, {
-				ok: jQuery.proxy( this._apiCallOk, this ),
-				err: jQuery.proxy( this._apiCallErr, this )
+	performApiAction: function( apiAction ) {
+		// we have to build our own deferred since the jqXHR object returned by api.proxy() is just referring to the
+		// success of the ajax call, not to the actual success of the API request (which could have failed depending on
+		// the return value).
+		var deferred = $.Deferred();
+		var self = this;
+
+		var waitMsg = $( '<span/>', {
+			'class': this.UI_CLASS + '-waitmsg',
+			'text': mw.msg( 'wikibase-' + ( apiAction === this.API_ACTION.REMOVE ? 'remove' : 'save' ) + '-inprogress' )
+		} )
+		.appendTo( this._getToolbarParent() ).hide();
+
+		deferred
+		.then( function( response ) {
+			// fade out wait text
+			waitMsg.fadeOut( 400, function() {
+				self._subject.removeClass( self.UI_CLASS + '-waiting' );
+
+				if( apiAction !== self.API_ACTION.REMOVE ) {
+					// only re-display toolbar if value wasn't removed
+
+					if ( self.API_KEY !== null ) {
+						// set normalized value
+						self.setValue( response.item[self.API_KEY][mw.config.get( 'wgUserLanguage' )].value );
+					}
+
+					if( mw.config.get( 'wbItemId' ) === null ) {
+						// if the 'save' process will create a new item, trigger the event!
+						$( window.wikibase ).trigger( 'NewItemCreated', response.item );
+					}
+
+					waitMsg.remove();
+					self._toolbar._elem.fadeIn( 300 );
+				}
 			} );
+		} )
+		.fail( function( textStatus, response ) {
+			// remove and show immediately since we need nodes for the tooltip!
+			self._subject.removeClass( self.UI_CLASS + '-waiting' );
+			waitMsg.remove();
+			self._toolbar._elem.show();
+			self._apiCallErr( textStatus, response, apiAction );
+		} );
+
+		this._toolbar._elem.fadeOut( 200, $.proxy( function() {
+			waitMsg.fadeIn( 200 );
+			// do the actual API request and trigger jQuery.Deferred stuff:
+			this.queryApi( deferred, apiAction );
 		}, this ) );
+		this._subject.addClass( this.UI_CLASS + '-waiting' );
+
+		return deferred;
+	},
+
+	/**
+	 * submitting the AJAX request to query the API
+	 *
+	 * @param jQuery.deferred deferred handling the returning AJAX request
+	 * @param number apiAction see this.API_ACTION enum for all available actions
+	 */
+	queryApi: function( deferred, apiAction ) {
+		var api = new mw.Api();
+		var apiCall = this.getApiCallParams( apiAction );
+		$.extend( apiCall, { usekeys: 1 } ); // according to API
+		api.post( apiCall, {
+			ok: function( response ) {
+				deferred.resolve( response );
+			},
+			err: function( textStatus, response ) {
+				deferred.reject( textStatus, response );
+			}
+		} );
 	},
 
 	/**
 	 * Returns the neccessary parameters for an api call to store the value.
+	 *
+	 * @param number apiAction see this.API_ACTION enum for all available actions
 	 * @return Object containing the API call specific parameters
 	 */
-	getApiCallParams: function() {
-		return {};
-	},
+	getApiCallParams: function( apiAction ) {
+		var itemId = mw.config.get( 'wbItemId' );
+		var params = {
+			token: mw.user.tokens.get( 'editToken' )
+		};
 
-	/**
-	 * handle return of successful API call
-	 */
-	_apiCallOk: function() {
-		//console.log( arguments );
+		if( itemId !== null ) {
+			// API param can only be used if item exists
+			params.id = itemId;
+			params.item = 'set';
+		} else {
+			// add a new item, ID will be received in APIs return value
+			params.item = 'add';
+		}
+
+		return params;
 	},
 
 	/**
 	 * handle error of unsuccessful API call
+	 *
+	 * @param string textStatus
+	 * @param object JSON response
+	 * @param number apiAction see this.API_ACTION enum
 	 */
-	_apiCallErr: function() {
-		//console.log( arguments );
+	_apiCallErr: function( textStatus, response, apiAction ) {
+		var error = {};
+		if ( textStatus != 'abort' ) {
+			error = {
+				code: textStatus,
+				shortMessage: ( apiAction === this.API_ACTION.REMOVE )
+					? mw.msg( 'wikibase-error-remove-connection' )
+					: mw.msg( 'wikibase-error-save-connection' ),
+				message: ''
+			};
+			if ( textStatus == 'timeout' ) {
+				error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
+					? mw.msg( 'wikibase-error-remove-timeout' )
+					: mw.msg( 'wikibase-error-save-timeout' );
+			} else {
+				if ( typeof response.error != 'undefined' ) {
+					error.code = response.error.code;
+					error.message = response.error.info;
+					error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
+						? mw.msg( 'wikibase-error-remove-generic' )
+						: mw.msg( 'wikibase-error-save-generic' );
+				}
+			}
+		}
+		this.showError( error, apiAction );
+	},
+
+	/**
+	 * custom method to handle UI presentation of API errors
+	 *
+	 * @param object error
+	 * @param number apiAction see this.API_ACTION enum
+	 */
+	showError: function( error, apiAction ) {
+		// attach error tooltip to save button
+		var btn = ( apiAction === this.API_ACTION.REMOVE )
+			? this._toolbar.editGroup.btnRemove
+			: this._toolbar.editGroup.btnSave;
+
+		this._subject.addClass( this.UI_CLASS + '-aftereditnotify' );
+
+		btn.setTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' } ) );
+		btn.getTooltip().show( true );
+		$( btn.getTooltip() ).on( 'Hide', $.proxy( function() {
+			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
+		}, this ) );
+
+		this.setFocus(); // re-focus input
 	},
 
 	/**
@@ -413,6 +646,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
+	 * Returns whether the current value is valid
+	 *
+	 * @return bool
+	 */
+	isValid: function() {
+		return this.validate( this.getValue() );
+	},
+
+	/**
 	 * Velidates whether a certain value would be valid for this editable value.
 	 *
 	 * @todo: we might want to move this into a prototype describing the property/snak later.
@@ -484,8 +726,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var value = this.getValue();
 		var isInvalid = !this.validate( value );
 		
-		// can't save if invalid input OR same as before
-		var disableSave = isInvalid || this.valueCompare( this.getInitialValue(), value );
+		// can't save if invalid input (except it is empty, in that case save == remove) OR same as before
+		var disableSave = ( isInvalid && !this.isEmpty() ) || this.valueCompare( this.getInitialValue(), value );
 		
 		// can't cancel if empty before except the edit is pending (then it will be removed)
 		var disableCancel = !this.isPending() && this.valueCompare( this.getInitialValue(), null );
@@ -494,22 +736,69 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
 	},
 
-	_interfaceHandler_onKeyPressed: function( relatedInterface, event ) {
-		if( event.which == 13 ) {
-			this._toolbar.editGroup.btnSave.doAction();
-		}
-		else if( event.which == 27 ) {
+	/**
+	 * interface's onKeyUp event handler
+	 * (ESC key does not react on onKeyPressed)
+	 *
+	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
+	 * @param jQuery.Event event
+	 */
+	_interfaceHandler_onKeyUp: function( relatedInterface, event ) {
+		if( event.which == 27 ) { // ESC key
 			this._toolbar.editGroup.btnCancel.doAction();
 		}
 	},
 
-	_interfaceHandler_onFocus: function( relatedInterface, event ) {
-		this._toolbar.editGroup.tooltip.show( true );
+	/**
+	 * interface's onKeyPressed event handler (more user friendly regarding keyboard input handling)
+	 *
+	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
+	 * @param jQuery.Event event
+	 */
+	_interfaceHandler_onKeyPressed: function( relatedInterface, event ) {
+		if( event.which == 13 ) { // enter key
+			if( this.valueCompare( this.getInitialValue(), this.getValue() ) ) {
+				// value not modified yet, cancel button not available but enter should also stop editing
+				this._toolbar.editGroup.btnCancel.doAction();
+			} else {
+				// try to save value
+				this._toolbar.editGroup.btnSave.doAction();
+			}
+		}
 	},
-	_interfaceHandler_onBlur: function( relatedInterface, event ) {
-		this._toolbar.editGroup.tooltip.hide();
+
+	/**
+	 * interface's onFocus event handler
+	 *
+	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
+	 * @param jQuery.Event event
+	 */
+	_interfaceHandler_onFocus: function( relatedInterface, event ) { },
+
+	/**
+	 * interface's onBlur event handler
+	 *
+	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface interface
+	 * @param jQuery.Event event
+	 */
+	_interfaceHandler_onBlur: function( relatedInterface, event ) { },
+
+	/**
+	 * Removes all traces of this ui element from the DOM, so the represented value is still visible but not interactive
+	 * anymore.
+	 */
+	destroy: function() {
+		this.stopEditing( false );
+		if( this._toolbar !== null) {
+			this._toolbar.destroy();
+			this._toolbar = null;
+		}
+		this._getToolbarParent().remove();
+		for ( var i in this._interfaces ) { // remove span added in _buildInterfaces()
+			this._interfaces[i]._subject.parent().empty().text( this._interfaces[i]._subject.text() );
+		}
 	},
-	
+
 	///////////
 	// EVENTS:
 	///////////
@@ -539,7 +828,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * 
 	 * @example function( saved, changed, wasPending ) {return true}
 	 */
-	afterStopEditing: null,
+	onAfterStopEditing: null,
 	
 	/**
 	 * Callback called after the element was removed

@@ -12,7 +12,7 @@
 'use strict';
 
 ( function () {
-	module( 'wikibase.ui.Toolbar.Button', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.Toolbar.Button', window.QUnit.newWbEnvironment( {
 		setup: function() {
 
 			this.button = new wikibase.ui.Toolbar.Button( 'Text' );

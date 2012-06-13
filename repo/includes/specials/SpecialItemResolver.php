@@ -11,9 +11,20 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class SpecialItemResolver extends UnlistedSpecialPage {
+abstract class SpecialItemResolver extends SpecialWikibasePage {
 
 	// TODO: would we benefit from using cached page here?
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $name
+	 */
+	public function __construct( $name ) {
+		parent::__construct( $name, '', false );
+	}
 
 	/**
 	 * The subpage, ie the part after Special:PageName/
@@ -75,10 +86,10 @@ abstract class SpecialItemResolver extends UnlistedSpecialPage {
 	 *
 	 * @since 0.1
 	 *
-	 * @param WikibaseItem $item
+	 * @param Wikibase\Item $item
 	 */
-	protected function displayItem( WikibaseItem $item ) {
-		$view = new WikibaseItemView( $item, $this->getContext() );
+	protected function displayItem( Wikibase\Item $item ) {
+		$view = new Wikibase\ItemView( $item, $this->getContext() );
 		$view->display();
 
 		$this->getOutput()->setPageTitle( $item->getLabel( $this->getLanguage()->getCode() ) );

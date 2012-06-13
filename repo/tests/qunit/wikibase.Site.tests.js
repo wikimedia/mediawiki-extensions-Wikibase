@@ -13,7 +13,7 @@
 
 
 ( function () {
-	module( 'wikibase.Site', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.Site', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			this.siteDetails = {
 				apiUrl: 'http://en.wikipedia.org/w/api.php',

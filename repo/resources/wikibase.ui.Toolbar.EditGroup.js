@@ -53,9 +53,10 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	_editableValue: null,
 
 	/**
-	 * @var window.wikibase.ui.Toolbar.Tooltip
+	 * Element holding the tooltips image with the tooltip itself attached.
+	 * @var window.wikibase.ui.Toolbar.Label
 	 */
-	tooltip: null,
+	tooltipAnchor: null,
 	
 	/**
 	 * Inner group needed to visually separate tooltip and edit buttons, this one holds the edit buttons.
@@ -80,26 +81,31 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		// create a group inside the group so we can separate the tooltip visually
 		this.innerGroup = new window.wikibase.ui.Toolbar.Group();
 		this.addElement( this.innerGroup );
-		
-		this.tooltip = new window.wikibase.ui.Toolbar.Tooltip( this._editableValue.getInputHelpMessage() );
-		
+
+		this.tooltipAnchor = new window.wikibase.ui.Toolbar.Label( $( '<span/>', {
+			'class': 'mw-help-field-hint',
+			style: 'display:inline;text-decoration:none;',
+			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
+		} ) );
+		this.tooltipAnchor.setTooltip( this._editableValue.getInputHelpMessage() );
+
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.Toolbar.Button;
 		
-		this.btnEdit = new button( window.mw.msg( 'wikibase-edit' ) );
+		this.btnEdit = new button( mw.msg( 'wikibase-edit' ) );
 		this.btnEdit.onAction = this._editActionHandler();
 		
-		this.btnCancel = new button( window.mw.msg( 'wikibase-cancel' ) );
+		this.btnCancel = new button( mw.msg( 'wikibase-cancel' ) );
 		this.btnCancel.onAction = this._cancelActionHandler();
 
-		this.btnSave = new button( window.mw.msg( 'wikibase-save' ) );
+		this.btnSave = new button( mw.msg( 'wikibase-save' ) );
 		this.btnSave.onAction = this._saveActionHandler();
 
 		// add 'edit' button only for now:
 		this.innerGroup.addElement( this.btnEdit );
 
 		// initialize remove button:
-		this.btnRemove = new button( window.mw.msg( 'wikibase-remove' ) );
+		this.btnRemove = new button( mw.msg( 'wikibase-remove' ) );
 		this.btnRemove.onAction = this._removeActionHandler();
 		if ( this.displayRemoveButton ) {
 			this.innerGroup.addElement( this.btnRemove );
@@ -108,7 +114,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	
 	_editActionHandler: function() {
 		return $.proxy( function(){
-			this.addElement( this.tooltip, 0 ); // add tooltip before edit commands
+			this.addElement( this.tooltipAnchor, 0 ); // add tooltip before edit commands
 			this.innerGroup.removeElement( this.btnEdit );
 			if ( this.displayRemoveButton ) {
 				this.innerGroup.removeElement( this.btnRemove );
@@ -136,43 +142,45 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	},
 	
 	_leaveAction: function( save ) {
-		this._editableValue.stopEditing( save );
-		this.tooltip.hide();
-		this.removeElement( this.tooltip );
-		this.innerGroup.removeElement( this.btnSave );
-		this.innerGroup.removeElement( this.btnCancel );
-		if ( this.displayRemoveButton ) {
-			this.innerGroup.removeElement( this.btnRemove );
-		}
-		this.innerGroup.addElement( this.btnEdit );
-		if ( this.displayRemoveButton ) {
-			this.innerGroup.addElement( this.btnRemove );
-		}
+		this._editableValue.stopEditing( save, $.proxy( function() {
+			this.tooltipAnchor.getTooltip().hide();
+			this.removeElement( this.tooltipAnchor );
+			this.innerGroup.removeElement( this.btnSave );
+			this.innerGroup.removeElement( this.btnCancel );
+			if ( this.displayRemoveButton ) {
+				this.innerGroup.removeElement( this.btnRemove );
+			}
+			this.innerGroup.addElement( this.btnEdit );
+			if ( this.displayRemoveButton ) {
+				this.innerGroup.addElement( this.btnRemove );
+			}
+		}, this ) );
+
 	},
 
 	destroy: function() {
 		window.wikibase.ui.Toolbar.Group.prototype.destroy.call( this );
-		if ( this.innerGroup != null ) {
+		if ( this.innerGroup !== null ) {
 			this.innerGroup.destroy();
 			this.innerGroup = null;
 		}
-		if ( this.tooltip != null ) {
-			this.tooltip.destroy();
-			this.tooltip = null;
+		if ( this.tooltipAnchor !== null ) {
+			this.tooltipAnchor.destroy();
+			this.tooltipAnchor = null;
 		}
-		if ( this.btnEdit != null ) {
+		if ( this.btnEdit !== null ) {
 			this.btnEdit.destroy();
 			this.btnEdit = null;
 		}
-		if ( this.btnCancel != null ) {
+		if ( this.btnCancel !== null ) {
 			this.btnCancel.destroy();
 			this.btnCancel = null;
 		}
-		if ( this.btnSave != null ) {
+		if ( this.btnSave !== null ) {
 			this.btnSave.destroy();
 			this.btnSave = null;
 		}
-		if ( this.btnRemove != null ) {
+		if ( this.btnRemove !== null ) {
 			this.btnRemove.destroy();
 			this.btnRemove = null;
 		}

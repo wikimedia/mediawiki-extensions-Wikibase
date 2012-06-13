@@ -13,10 +13,16 @@
 
 
 ( function() {
-	module( 'wikibase.ui.DescriptionEditTool', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.DescriptionEditTool', window.QUnit.newWbEnvironment( {
 		setup: function() {
-			this.node = $( '<div/>', { text: 'Text' } );
-			this.subject = new window.wikibase.ui.DescriptionEditTool( this.node );
+			this.parentNode = $( '<div/>' );
+			this.text = 'Text';
+			this.node = $( '<div/>', {
+				text: this.text,
+				'class': 'wb-property-container-value'
+			} );
+			this.parentNode.append( this.node );
+			this.subject = new window.wikibase.ui.DescriptionEditTool( this.parentNode );
 
 			ok(
 				this.subject instanceof window.wikibase.ui.DescriptionEditTool,
@@ -31,6 +37,12 @@
 				this.node.children().length,
 				0,
 				'cleaned DOM'
+			);
+
+			equal(
+				this.node.text(),
+				this.text,
+				'plain text remains'
 			);
 
 			this.subject = null;

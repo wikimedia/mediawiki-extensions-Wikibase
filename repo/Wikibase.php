@@ -26,8 +26,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c because version_compare() works in confusing ways.
-	die( '<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.' );
+if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
+	die( '<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.' );
 }
 
 if ( !defined( 'WBL_VERSION' ) ) { // No version constant to check against :/
@@ -54,7 +54,24 @@ $wgExtensionCredits['other'][] = array(
 
 $dir = dirname( __FILE__ ) . '/';
 
-
+// rights
+// names should be according to other naming scheme
+$wgGroupPermissions['*']['item-add']			= true;
+$wgGroupPermissions['*']['item-update']			= true;
+$wgGroupPermissions['*']['item-set']			= true;
+$wgGroupPermissions['*']['item-remove']			= true;
+$wgGroupPermissions['*']['alias-add']			= true;
+$wgGroupPermissions['*']['alias-update']		= true;
+$wgGroupPermissions['*']['alias-set']			= true;
+$wgGroupPermissions['*']['alias-remove']		= true;
+$wgGroupPermissions['*']['site-link-add']		= true;
+$wgGroupPermissions['*']['site-link-update']	= true;
+$wgGroupPermissions['*']['site-link-set']		= true;
+$wgGroupPermissions['*']['site-link-remove']	= true;
+$wgGroupPermissions['*']['lang-attr-add']		= true;
+$wgGroupPermissions['*']['lang-attr-update']	= true;
+$wgGroupPermissions['*']['lang-attr-set']		= true;
+$wgGroupPermissions['*']['lang-attr-remove']	= true;
 
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
@@ -64,75 +81,77 @@ $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php'
 
 
 // Autoloading
-$wgAutoloadClasses['WBSettings'] 						= $dir . 'Wikibase.settings.php';
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['WikibaseEntityHandler'] 			= $dir . 'includes/WikibaseEntityHandler.php';
-$wgAutoloadClasses['WikibaseItemHandler'] 				= $dir . 'includes/WikibaseItemHandler.php';
-$wgAutoloadClasses['WikibaseDifferenceEngine'] 			= $dir . 'includes/WikibaseDifferenceEngine.php';
-$wgAutoloadClasses['WikibaseUtils'] 					= $dir . 'includes/WikibaseUtils.php';
-$wgAutoloadClasses['WikibaseItem'] 						= $dir . 'includes/WikibaseItem.php';
-$wgAutoloadClasses['WikibaseItemDiff'] 					= $dir . 'includes/WikibaseItemDiff.php';
-$wgAutoloadClasses['WikibaseEntity'] 					= $dir . 'includes/WikibaseEntity.php';
-$wgAutoloadClasses['WikibaseEntityDiff'] 				= $dir . 'includes/WikibaseEntityDiff.php';
-$wgAutoloadClasses['WikibaseItemDisambiguation'] 		= $dir . 'includes/WikibaseItemDisambiguation.php';
-$wgAutoloadClasses['WikibaseItemStructuredSave'] 		= $dir . 'includes/WikibaseItemStructuredSave.php';
-$wgAutoloadClasses['WikibaseItemView'] 					= $dir . 'includes/WikibaseItemView.php';
+$wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
+$wgAutoloadClasses['Wikibase\DifferenceEngine'] 		= $dir . 'includes/DifferenceEngine.php';
+$wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
+$wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/ItemDeletionUpdate.php';
+$wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/EntityHandler.php';
+$wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisambiguation.php';
+$wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/ItemStructuredSave.php';
+$wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
 
 // includes/actions
-$wgAutoloadClasses['WikibaseViewItemAction'] 			= $dir . 'includes/actions/WikibaseViewItemAction.php';
-$wgAutoloadClasses['WikibaseEditItemAction'] 			= $dir . 'includes/actions/WikibaseEditItemAction.php';
+$wgAutoloadClasses['Wikibase\ViewItemAction'] 			= $dir . 'includes/actions/ViewItemAction.php';
+$wgAutoloadClasses['Wikibase\EditItemAction'] 			= $dir . 'includes/actions/EditItemAction.php';
 
 // includes/api
-$wgAutoloadClasses['ApiWikibaseGetItems'] 				= $dir . 'includes/api/ApiWikibaseGetItems.php';
-$wgAutoloadClasses['ApiWikibaseGetItemId'] 				= $dir . 'includes/api/ApiWikibaseGetItemId.php';
-$wgAutoloadClasses['ApiWikibaseGetSiteLinks'] 			= $dir . 'includes/api/ApiWikibaseGetSiteLinks.php';
-$wgAutoloadClasses['ApiWikibaseSetLanguageAttribute'] 	= $dir . 'includes/api/ApiWikibaseSetLanguageAttribute.php';
-$wgAutoloadClasses['ApiWikibaseDeleteLanguageAttribute']= $dir . 'includes/api/ApiWikibaseDeleteLanguageAttribute.php';
-$wgAutoloadClasses['ApiWikibaseModifyItem'] 			= $dir . 'includes/api/ApiWikibaseModifyItem.php';
-$wgAutoloadClasses['ApiWikibaseLinkSite'] 				= $dir . 'includes/api/ApiWikibaseLinkSite.php';
-$wgAutoloadClasses['ApiWikibaseSetAliases'] 			= $dir . 'includes/api/ApiWikibaseSetAliases.php';
-$wgAutoloadClasses['ApiWikibaseSetItem'] 				= $dir . 'includes/api/ApiWikibaseSetItem.php';
+$wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
+$wgAutoloadClasses['Wikibase\ApiGetItems'] 				= $dir . 'includes/api/ApiGetItems.php';
+$wgAutoloadClasses['Wikibase\ApiGetItemId'] 			= $dir . 'includes/api/ApiGetItemId.php';
+$wgAutoloadClasses['Wikibase\ApiGetSiteLinks'] 			= $dir . 'includes/api/ApiGetSiteLinks.php';
+$wgAutoloadClasses['Wikibase\ApiSetLanguageAttribute'] 	= $dir . 'includes/api/ApiSetLanguageAttribute.php';
+$wgAutoloadClasses['Wikibase\ApiDeleteLanguageAttribute']= $dir . 'includes/api/ApiDeleteLanguageAttribute.php';
+$wgAutoloadClasses['Wikibase\ApiModifyItem'] 			= $dir . 'includes/api/ApiModifyItem.php';
+$wgAutoloadClasses['Wikibase\ApiLinkSite'] 				= $dir . 'includes/api/ApiLinkSite.php';
+$wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
+$wgAutoloadClasses['Wikibase\ApiSetItem'] 				= $dir . 'includes/api/ApiSetItem.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/SpecialItemByLabel.php';
-
-
+$wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
 // tests
-$wgAutoloadClasses['ApiWikibaseModifyItemTest'] 		= $dir . 'tests/phpunit/includes/api/ApiWikibaseModifyItemTest.php';
+$wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
+//$wgAutoloadClasses['Wikibase\Test\TestItems'] 			= $dir . 'tests/phpunit/includes/TestItems.php';
+
 
 
 
 // API module registration
-$wgAPIModules['wbgetitems'] 						= 'ApiWikibaseGetItems';
-$wgAPIModules['wbgetitemid'] 						= 'ApiWikibaseGetItemId';
-$wgAPIModules['wbsetlanguageattribute'] 			= 'ApiWikibaseSetLanguageAttribute';
-$wgAPIModules['wbdeletelanguageattribute'] 			= 'ApiWikibaseDeleteLanguageAttribute';
-$wgAPIModules['wbgetsitelinks'] 					= 'ApiWikibaseGetSiteLinks';
-$wgAPIModules['wblinksite'] 						= 'ApiWikibaseLinkSite';
-$wgAPIModules['wbsetaliases'] 						= 'ApiWikibaseSetAliases';
-$wgAPIModules['wbsetitem'] 							= 'ApiWikibaseSetItem';
+$wgAPIModules['wbgetitems'] 						= 'Wikibase\ApiGetItems';
+$wgAPIModules['wbgetitemid'] 						= 'Wikibase\ApiGetItemId';
+$wgAPIModules['wbsetlanguageattribute'] 			= 'Wikibase\ApiSetLanguageAttribute';
+$wgAPIModules['wbdeletelanguageattribute'] 			= 'Wikibase\ApiDeleteLanguageAttribute';
+$wgAPIModules['wbgetsitelinks'] 					= 'Wikibase\ApiGetSiteLinks';
+$wgAPIModules['wblinksite'] 						= 'Wikibase\ApiLinkSite';
+$wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
+$wgAPIModules['wbsetitem'] 							= 'Wikibase\ApiSetItem';
 
 
 
 // Special page registration
-//$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+$wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
 
 
 // Hooks
+$wgHooks['WikibaseDefaultSettings'][] 			    = 'WikibaseHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'WikibaseHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'WikibaseHooks::onPageContentLanguage';
 $wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTestModules';
 $wgHooks['NamespaceIsMovable'][]					= 'WikibaseHooks::onNamespaceIsMovable';
+$wgHooks['NewRevisionFromEditComplete'][]			= 'WikibaseHooks::onNewRevisionFromEditComplete';
+$wgHooks['GetPreferences'][]						= 'WikibaseHooks::onGetPreferences';
+$wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOptions';
 
 
 
@@ -159,9 +178,6 @@ $wgGroupPermissions['wbeditor']['lang-attr-remove']	= true;
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	// since 'WikidataRepo' extension was renamed to 'Wikibase', the directory should be renamed in the git repo first
-	// after that this 'weird' regex can be removed
-	// Newslash: the directory is not in the git repo. So properly clone it or rename the directory on your machine if you did it wrong.
 	'remoteExtPath' =>  'Wikibase/resources'
 );
 
@@ -172,6 +188,20 @@ $wgResourceModules['wikibase.common'] = $moduleTemplate + array(
 	)
 );
 
+$wgResourceModules['wikibase.libs.jQuery.tagit'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.libs/wikibase.libs.jquery.tagit/js/tag-it.js'
+	),
+	'styles' => array(
+		'wikibase.libs/wikibase.libs.jquery.tagit/css/jquery.tagit.css'
+	),
+	'dependencies' => array(
+		'jquery.ui.widget',
+		'jquery.effects.core',
+		'jquery.effects.blind'
+	)
+);
+
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.js',
@@ -179,6 +209,20 @@ $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	),
 	'dependencies' => array(
 		'wikibase.common'
+	),
+	'messages' => array(
+		'special-createitem',
+		'wb-special-createitem-new-item-notification'
+	)
+);
+
+$wgResourceModules['wikibase.utilities.jQuery'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.utilities/wikibase.utilities.js',
+		'wikibase.utilities/wikibase.utilities.jQuery.js',
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
 	)
 );
 
@@ -193,18 +237,22 @@ $wgResourceModules['wikibase.tests.qunit.testrunner'] = $moduleTemplate + array(
 $wgResourceModules['wikibase.ui.Toolbar'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.ui.js',
+		'wikibase.ui.Tooltip.js',
 		'wikibase.ui.Toolbar.js',
 		'wikibase.ui.Toolbar.Group.js',
 		'wikibase.ui.Toolbar.Label.js',
-		'wikibase.ui.Toolbar.Button.js',
-		'wikibase.ui.Toolbar.Tooltip.js'
+		'wikibase.ui.Toolbar.Button.js'
 	),
 	'styles' => array(
 		'wikibase.ui.Toolbar.css'
 	),
 	'dependencies' => array(
 		'jquery.tipsy',
-		'mediawiki.legacy.shared'
+		'mediawiki.legacy.shared',
+		'jquery.ui.core'
+	),
+	'messages' => array(
+		'wikibase-tooltip-error-details'
 	)
 );
 
@@ -232,7 +280,9 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 	'dependencies' => array(
 		'wikibase',
 		'wikibase.ui.Toolbar',
+		'wikibase.utilities.jQuery',
 		'jquery.ui.autocomplete',
+		'mediawiki.api',
 		'mediawiki.Title',
 		'mediawiki.jqueryMsg' // for {{plural}} and {{gender}} support in messages
 	),
@@ -242,6 +292,8 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase-edit',
 		'wikibase-save',
 		'wikibase-add',
+		'wikibase-save-inprogress',
+		'wikibase-remove-inprogress',
 		'wikibase-label-edit-placeholder',
 		'wikibase-description-edit-placeholder',
 		'wikibase-sitelink-site-edit-placeholder',
@@ -256,20 +308,25 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase-propertyedittool-counter-pending-pendingsubpart',
 		'wikibase-propertyedittool-counter-pending-tooltip',
 		'wikibase-sitelinksedittool-full',
+		'wikibase-error-save-generic',
+		'wikibase-error-remove-generic',
+		'wikibase-error-save-connection',
+		'wikibase-error-remove-connection',
+		'wikibase-error-save-timeout',
+		'wikibase-error-remove-timeout',
+		'wikibase-error-autocomplete-connection',
+		'wikibase-error-autocomplete-response'
 	)
 );
 
 unset( $moduleTemplate );
 
 // register hooks and handlers
-define( 'CONTENT_MODEL_WIKIBASE_ITEM', 'wikibase' );
-//define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', 'wbprop' );
-//define( 'CONTENT_MODEL_WIKIBASE_QUERY', 'wbquery' );
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 
-$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseItemHandler';
-//$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibasePropertyHandler';
-//$wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = 'WikibaseQueryHandler';
-
+//@todo: FIXME: this doesn't give wikis a chance to change the $baseNs.
+//       Namespace definitions should be deferred into a hook and be based on WBSettings.
+//       Note that some wikis may use the main namespace for data, or not have a data namespace.
 $baseNs = 100;
 
 define( 'WB_NS_DATA', $baseNs );
@@ -287,8 +344,3 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 //$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
 
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
-//$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_PROPERTY;
-//$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_QUERY;
-
-
-$egWBSettings = array();

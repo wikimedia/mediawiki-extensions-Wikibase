@@ -56,10 +56,10 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
-		this._editableValues = new Array();
+		this._editableValues = [];
 		
 		this._subject = $( subject );
-		this._subject.addClass( this.UI_CLASS + '-subject' );
+		this._subject.addClass( this.UI_CLASS );
 				
 		this._initEditToolForValues();
 		this._initToolbar();
@@ -81,11 +81,11 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		if( this.allowsMultipleValues ) {
 			// toolbar group for buttons:
 			this._toolbar.lblFull = new window.wikibase.ui.Toolbar.Label(
-					'&nbsp;- ' + window.mw.msg( 'wikibase-propertyedittool-full' )
+					'&nbsp;- ' + mw.msg( 'wikibase-propertyedittool-full' )
 			);
 			
 			// only add 'add' button if we can have several values
-			this._toolbar.btnAdd = new window.wikibase.ui.Toolbar.Button( window.mw.msg( 'wikibase-add' ) );
+			this._toolbar.btnAdd = new window.wikibase.ui.Toolbar.Button( mw.msg( 'wikibase-add' ) );
 			this._toolbar.btnAdd.onAction = $.proxy( function() {
 				this.enterNewValue();
 			}, this );
@@ -207,7 +207,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		var editableValue = new ( this.getEditableValuePrototype() )();
 		
 		// message to be displayed for empty input:
-		editableValue.inputPlaceholder = window.mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
+		editableValue.inputPlaceholder = mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
 		
 		var editableValueToolbar = this._buildSingleValueToolbar( editableValue );
 		
@@ -304,15 +304,15 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	enterNewValue: function( value ) {
 		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
 		newValueElem.addClass( 'wb-pending-value' );
-		
+
 		this._subject.append( newValueElem );
 		var newValue = this._initSingleValue( newValueElem );
 
 		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
 		
 		var self = this;
-		newValue.afterStopEditing = function( save, changed, wasPending ) {
-			self._newValueHandler_afterStopEditing( newValue, save, changed, wasPending );
+		newValue.onAfterStopEditing = function( save, wasPending ) {
+			self._newValueHandler_onAfterStopEditing( newValue, save, wasPending );
 			newValue.onStopEditing = null; // make sure handler is only called once!
 		};
 		if( value ) {
@@ -327,7 +327,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	/**
 	 * Handler called only the first time a new value was added and saved or cancelled.
 	 */
-	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
+	_newValueHandler_onAfterStopEditing: function( newValue, save, wasPending ) {
 		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
 		if( save ) {
 			this._onRefreshView( $.inArray( newValue, this._editableValues ) );

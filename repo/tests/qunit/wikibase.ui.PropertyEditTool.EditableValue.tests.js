@@ -14,21 +14,31 @@
 
 
 ( function () {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.PropertyEditTool.EditableValue', window.QUnit.newWbEnvironment( {
 		setup: function() {
-			var node = $( '<div/>', { id: 'subject' } );
-			$( '<div/>', { id: 'parent' } ).append( node );
-			var propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
+			var node = $( '<div/>', { id: 'parent' } );
+			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
 			this.editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue;
-			var toolbar = propertyEditTool._buildSingleValueToolbar( this.editableValue );
+			this.editableValue.queryApi = function( deferred, apiAction ) { // override AJAX API call
+				deferred.resolve( '' );
+			};
+			var toolbar = this.propertyEditTool._buildSingleValueToolbar( this.editableValue );
 			this.editableValue._init( node, toolbar );
 			this.strings = {
 				valid: [ 'test', 'test 2' ],
 				invalid: [ '' ]
 			};
+			this.errors = [ // simulated error objects being returned from the API
+				{ 'error':
+					{
+						'code': 'no-permissions',
+						'info': 'The logged in user does not have sufficient rights'
+					}
+				}
+			];
 
 			equal(
-				this.editableValue._getToolbarParent().attr( 'id' ),
+				this.editableValue._getToolbarParent().parent().attr( 'id' ),
 				'parent',
 				'parent node for toolbar exists'
 			);
@@ -55,6 +65,8 @@
 				'destroyed instances'
 			);
 
+			this.propertyEditTool.destroy();
+			this.propertyEditTool = null;
 			this.editableValue = null;
 			this.strings = null;
 		}
@@ -214,6 +226,61 @@
 			this.editableValue.valueCompare( this.editableValue.getValue(), this.editableValue.getInitialValue() ),
 			true,
 			'compared current and initial value'
+		);
+
+		this.editableValue.remove();
+
+	} );
+
+	test( 'error handling', function() {
+
+		this.editableValue.queryApi = $.proxy( function( deferred, apiAction ) {
+			deferred.reject( 'error', this.errors[0] );
+		}, this );
+
+		this.editableValue.startEditing();
+		this.editableValue.setValue( this.strings['valid'][0] );
+
+		equal(
+			this.editableValue.isInEditMode(),
+			true,
+			'started editing ans set value'
+		);
+
+		this.editableValue.stopEditing( true );
+
+		equal(
+			this.editableValue.isInEditMode(),
+			true,
+			'is still in edit mode after receiving error'
+		);
+
+		ok(
+			this.editableValue._toolbar.editGroup.btnSave._tooltip instanceof window.wikibase.ui.Tooltip,
+			'attached tooltip to save button'
+		);
+
+		this.editableValue.stopEditing();
+
+		equal(
+			this.editableValue.isInEditMode(),
+			false,
+			'cancelled editing'
+		);
+
+		this.editableValue.remove( true );
+
+		equal(
+			this.editableValue.getValue()[0],
+			this.editableValue.getInitialValue()[0],
+			'emptied input interface resetting to default value and preserving the input interface'
+		);
+
+		this.editableValue.remove( false );
+
+		ok(
+			this.editableValue._toolbar.editGroup.btnRemove.getTooltip() instanceof window.wikibase.ui.Tooltip,
+			'attached tooltip to remove button after trying to remove with API action'
 		);
 
 	} );

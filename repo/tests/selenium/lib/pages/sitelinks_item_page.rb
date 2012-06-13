@@ -1,16 +1,16 @@
 require 'ruby_selenium'
 
-class SitelinksItemPage < ItemPage
+class SitelinksItemPage < NewItemPage
   include PageObject
 
   # language links UI
   table(:sitelinksTable, :class => "wb-sitelinks")
   link(:addSitelinkLink, :css => "table.wb-sitelinks > tfoot > tr > td > div.wb-ui-toolbar > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
   span(:siteLinkCounter, :class => "wb-ui-propertyedittool-counter")
-  text_field(:siteIdInputField, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[2]/input")
-  text_field(:pageInputField, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[3]/input")
-  text_field(:siteIdInputFieldLoading, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[2]/input[@class='ui-autocomplete-loading']")
-  text_field(:pageInputFieldLoading, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[3]/input[@class='ui-autocomplete-loading']")
+  text_field(:siteIdInputField, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[1]/input")
+  text_field(:pageInputField, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[2]/input")
+  text_field(:siteIdInputFieldLoading, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[1]/input[@class='ui-autocomplete-loading']")
+  text_field(:pageInputFieldLoading, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[2]/input[@class='ui-autocomplete-loading']")
   span(:saveSitelinkLinkDisabled, :class => "wb-ui-toolbar-button-disabled")
   unordered_list(:siteIdAutocompleteList, :class => "ui-autocomplete", :index => 0)
   unordered_list(:pageAutocompleteList, :class => "ui-autocomplete", :index => 1)
@@ -21,6 +21,9 @@ class SitelinksItemPage < ItemPage
   link(:editSitelinkLink, :text => "edit", :index => 3)
   
   def getNumberOfSitelinksFromCounter
+    wait_until do
+      siteLinkCounter?
+    end
     scanned = siteLinkCounter.scan(/\(([^)]+)\)/)
     integerValue = scanned[0][0].to_i()
     return integerValue
@@ -41,6 +44,20 @@ class SitelinksItemPage < ItemPage
       if count == n
         return listItem
       end
+    end
+    return false
+  end
+
+  def getNthSitelinksTableRow(n)
+    count = 0
+    sitelinksTable_element.each do |tableRow|
+      #don't count here to skip the table header
+      #count = count+1
+      if count == n
+        return tableRow
+      end
+      #count here instead
+      count = count+1
     end
     return false
   end

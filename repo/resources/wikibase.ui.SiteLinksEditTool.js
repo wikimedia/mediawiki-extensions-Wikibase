@@ -46,29 +46,32 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		
-		th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
+		//th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
 	},
 	
 	_initToolbar: function() {
 		window.wikibase.ui.PropertyEditTool.prototype._initToolbar.call( this );
 		// change message appearing when all language links are represented within the list
-		this._toolbar.lblFull.setContent( '&nbsp;- ' + window.mw.msg( 'wikibase-sitelinksedittool-full' ) );
+		this._toolbar.lblFull.setContent( '&nbsp;- ' + mw.msg( 'wikibase-sitelinksedittool-full' ) );
 	},
 
 	_buildSingleValueToolbar: function( editableValue ) {
 		var toolbar = window.wikibase.ui.PropertyEditTool.prototype._buildSingleValueToolbar.call( this, editableValue );
-		toolbar.editGroup.tooltip.setGravity( 'se' );
+		toolbar.editGroup.tooltipAnchor.getTooltip().setGravity( 'se' );
 		return toolbar;
 	},
 
 	_getToolbarParent: function() {
 		// take content (table), put it into a div and also add the toolbar into the div
-		return $( '<td/>', { colspan: '3' } )
-			.appendTo( $( '<tr/>' )
-				.appendTo( $( '<tfoot/>' )
-					.appendTo( this._subject )
-				)
-			);
+		this.__toolbarParent = this.__toolbarParent || $(
+			'<td/>', { colspan: '12' }
+		)
+		.appendTo( $( '<tr/>' )
+			.appendTo( $( '<tfoot/>' )
+				.appendTo( this._subject )
+			)
+		);
+		return this.__toolbarParent;
 	},
 	
 	_initEditToolForValues: function() {
@@ -77,14 +80,30 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		// make sure selecting a language in EditableSiteLink only offers languages not yet chosen
 		this.getEditableValuePrototype().prototype.ignoredSiteLinks = this.getRepresentedSites();
 	},
+
+	_initSingleValue: function( valueElem ) {
+		var editableSiteLink = window.wikibase.ui.PropertyEditTool.prototype._initSingleValue.call( this, valueElem );
+
+		var valElem = editableSiteLink._subject;
+
+		valElem.on( 'mouseenter', function(){
+			valElem.addClass( editableSiteLink.UI_CLASS + '-inhover' );
+		} );
+		valElem.on( 'mouseleave', function(){
+			valElem.removeClass( editableSiteLink.UI_CLASS + '-inhover' );
+			// NOTE: in case still in edit mode, we NEVER hide it via some css rules
+		} );
+
+		return editableSiteLink;
+	},
 	
 	/**
 	 * Full when all languages are represented within
 	 * 
-	 * @see wikibase.ui.PropertyEditTool.isFull()
+	 * @see wikibase.ui.PropertyEditTool.prototype.isFull
 	 */
 	isFull: function() {
-		var allSites = wikibase.getSites();
+		var allSites = window.wikibase.getSites();
 		var usedSites = this.getRepresentedSites();
 		
 		// FIXME: in case we have sites in the DB which were removed at some point, this check will
@@ -93,7 +112,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool._getValueElems()
+	 * @see wikibase.ui.PropertyEditTool.prototype._getValueElems
 	 * @return jQuery[]
 	 */
 	_getValueElems: function() {
@@ -104,7 +123,10 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	_newEmptyValueDOM: function() {
 		return $( '<tr> <td></td> <td></td> </tr>' );
 	},
-	
+
+	/**
+	 * @see window.wikibase.ui.PropertyEditTool.prototype.getEditableValuePrototype
+	 */
 	getEditableValuePrototype: function() {
 		// TODO: this system might be useful in other prototypes based on PropertyEditTool, implement
 		//       this in PropertyEditTool directly perhaps.
@@ -139,8 +161,8 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 			}
 		}
 	},
-	_newValueHandler_afterStopEditing: function( newValue, save, changed, wasPending ) {
-		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_afterStopEditing.call( this, newValue, save );		
+	_newValueHandler_onAfterStopEditing: function( newValue, save, wasPending ) {
+		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_onAfterStopEditing.call( this, newValue, save );
 		if( save ) {
 			// add chosen site to list of sites which can not be chosen by other editable site links
 			var addedSite = newValue.siteIdInterface.getSelectedSite();
@@ -154,7 +176,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @return wikibase.Site[]
 	 */
 	getRepresentedSites: function() {
-		var sites = new Array();
+		var sites = [];
 		
 		for( var i in this._editableValues ) {
 			var editableSiteLink = this._editableValues[ i ];
@@ -183,8 +205,8 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
  */
 window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
 	return $(
-			'<table class="wb-sitelinks" cellspacing="0"><thead><th colspan="2">' +
+			'<table class="wb-sitelinks" cellspacing="0"><thead><th colspan="2"><h2>' +
 			mw.msg( 'wikibase-sitelinks' ) +
-			'</th></thead><tbody></tbody></table>'
+			'</h2></th></thead><tbody></tbody></table>'
 	);
 };

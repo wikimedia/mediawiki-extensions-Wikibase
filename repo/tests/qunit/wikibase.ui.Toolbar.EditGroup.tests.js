@@ -13,7 +13,7 @@
 
 
 ( function() {
-	module( 'wikibase.ui.Toolbar.EditGroup', window.QUnit.newWbEnvironment( null, null, {
+	module( 'wikibase.ui.Toolbar.EditGroup', window.QUnit.newWbEnvironment( {
 		setup: function() {
 			var node = $( '<div/>', { id: 'subject' } );
 			$( '<div/>', { id: 'parent' } ).append( node );
@@ -38,7 +38,7 @@
 			);
 
 			equal(
-				this.editGroup.tooltip,
+				this.editGroup.tooltipAnchor,
 				null,
 				'destroyed tooltip'
 			);
@@ -78,11 +78,11 @@
 
 		ok(
 			this.editGroup.innerGroup instanceof window.wikibase.ui.Toolbar.Group,
-			'initiated: set editable value'
+			'initiated inner edit group'
 		);
 
 		ok(
-			this.editGroup.tooltip instanceof window.wikibase.ui.Toolbar.Tooltip,
+			this.editGroup.tooltipAnchor instanceof window.wikibase.ui.Toolbar.Label,
 			'initiated tooltip'
 		);
 

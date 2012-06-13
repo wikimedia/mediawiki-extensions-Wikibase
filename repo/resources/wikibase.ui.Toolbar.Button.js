@@ -43,7 +43,7 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 
 	destroy: function() {
 		window.wikibase.ui.Toolbar.Label.prototype.destroy.call( this );
-		if ( this._elem != null ) {
+		if ( this._elem !== null ) {
 			this._elem.remove();
 		}
 	},
@@ -59,7 +59,7 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 		) {
             // cancel action
             return false;
-        }		
+        }
 		return true;
 	},
 	

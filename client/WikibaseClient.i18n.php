@@ -23,11 +23,22 @@ $messages['en'] = array(
 	'wbc-editlinkstitle' => 'Edit interlanguage links',
 );
 
-/** Message documentation (Message documentation) */
+/** Message documentation (Message documentation)
+ * @author Jeblad
+ */
 $messages['qqq'] = array(
-	'wbc-desc' => '{{desc}}',
+	'wbc-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wbc-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
+);
+
+/** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
+ * @author Wizardist
+ */
+$messages['be-tarask'] = array(
+	'wbc-desc' => 'Кліент пашырэньня Wikibase',
+	'wbc-editlinks' => 'Рэдагаваць спасылкі',
+	'wbc-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 );
 
 /** German (Deutsch)
@@ -35,6 +46,8 @@ $messages['qqq'] = array(
  */
 $messages['de'] = array(
 	'wbc-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
+	'wbc-editlinks' => 'Links bearbeiten',
+	'wbc-editlinkstitle' => 'Sprachenübergreifende Links bearbeiten',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -42,6 +55,8 @@ $messages['de'] = array(
  */
 $messages['dsb'] = array(
 	'wbc-desc' => 'Klient za rozšyrjenje Wikibase',
+	'wbc-editlinks' => 'Wótkaze wobźěłaś',
+	'wbc-editlinkstitle' => 'Mjazyrěcne wótkaze wobźěłaś',
 );
 
 /** Spanish (Español)
@@ -49,13 +64,27 @@ $messages['dsb'] = array(
  */
 $messages['es'] = array(
 	'wbc-desc' => 'Cliente para la extensión Wikibase',
+	'wbc-editlinks' => 'Editar los enlaces',
+	'wbc-editlinkstitle' => 'Editar enlaces de interlengua',
+);
+
+/** Persian (فارسی)
+ * @author ZxxZxxZ
+ */
+$messages['fa'] = array(
+	'wbc-desc' => 'سرویس‌گیرنده برای افزونهٔ ویکی‌بیس',
+	'wbc-editlinks' => 'ویرایش پیوندها',
+	'wbc-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
 );
 
 /** French (Français)
+ * @author Gomoko
  * @author Wyz
  */
 $messages['fr'] = array(
 	'wbc-desc' => 'Client pour l’extension Wikibase',
+	'wbc-editlinks' => 'Modifier les liens',
+	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
 );
 
 /** Galician (Galego)
@@ -63,6 +92,17 @@ $messages['fr'] = array(
  */
 $messages['gl'] = array(
 	'wbc-desc' => 'Cliente para a extensión Wikibase',
+	'wbc-editlinks' => 'Editar as ligazóns',
+	'wbc-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
+);
+
+/** Swiss German (Alemannisch)
+ * @author Als-Holder
+ */
+$messages['gsw'] = array(
+	'wbc-desc' => 'Macht e Client fir d Erwyterig Wikibase megli',
+	'wbc-editlinks' => 'Links bearbeite',
+	'wbc-editlinkstitle' => 'Sprachibergryfigi Link bearbeite',
 );
 
 /** Upper Sorbian (Hornjoserbsce)
@@ -70,6 +110,15 @@ $messages['gl'] = array(
  */
 $messages['hsb'] = array(
 	'wbc-desc' => 'Klient za rozšěrjenje Wikibase',
+	'wbc-editlinks' => 'Wotkazy wobdźěłać',
+	'wbc-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
+);
+
+/** Interlingua (Interlingua)
+ * @author McDutchie
+ */
+$messages['ia'] = array(
+	'wbc-editlinkstitle' => 'Modificar ligamines interlingua',
 );
 
 /** Icelandic (Íslenska)
@@ -77,6 +126,25 @@ $messages['hsb'] = array(
  */
 $messages['is'] = array(
 	'wbc-desc' => 'Biðlari fyrir Wikibase viðbótina',
+	'wbc-editlinks' => 'Breyta tenglum',
+	'wbc-editlinkstitle' => 'Breyta tungumálatenglum',
+);
+
+/** Italian (Italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'wbc-desc' => "Client per l'estensione Wikibase",
+	'wbc-editlinks' => 'Modifica collegamenti',
+	'wbc-editlinkstitle' => 'Modifica collegamenti interlingua',
+);
+
+/** Japanese (日本語)
+ * @author Shirayuki
+ */
+$messages['ja'] = array(
+	'wbc-editlinks' => 'リンクを編集',
+	'wbc-editlinkstitle' => '言語間リンクを編集',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -91,6 +159,17 @@ $messages['lb'] = array(
  */
 $messages['mk'] = array(
 	'wbc-desc' => 'Клиент за додатокот „Викибаза“',
+	'wbc-editlinks' => 'Уреди врски',
+	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
+);
+
+/** Dutch (Nederlands)
+ * @author Siebrand
+ */
+$messages['nl'] = array(
+	'wbc-desc' => 'Client voor de uitbreiding Wikibase',
+	'wbc-editlinks' => 'Verwijzingen bewerken',
+	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
 );
 
 /** Portuguese (Português)
@@ -98,6 +177,15 @@ $messages['mk'] = array(
  */
 $messages['pt'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
+);
+
+/** Brazilian Portuguese (Português do Brasil)
+ * @author Jaideraf
+ */
+$messages['pt-br'] = array(
+	'wbc-desc' => 'Cliente para a extensão Wikibase',
+	'wbc-editlinks' => 'Editar links',
+	'wbc-editlinkstitle' => 'Editar links interlíngua',
 );
 
 /** Russian (Русский)
@@ -110,10 +198,36 @@ $messages['ru'] = array(
 	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
 );
 
+/** Serbian (Cyrillic script) (‪Српски (ћирилица)‬)
+ * @author Nikola Smolenski
+ * @author Rancher
+ */
+$messages['sr-ec'] = array(
+	'wbc-desc' => 'Клијент за проширење Викибаза',
+	'wbc-editlinks' => 'Уреди везе',
+	'wbc-editlinkstitle' => 'Уређивање међујезичких веза',
+);
+
 /** Swedish (Svenska)
  * @author Ainali
  */
 $messages['sv'] = array(
 	'wbc-desc' => 'Klient för tillägget Wikibase',
+);
+
+/** Telugu (తెలుగు)
+ * @author Veeven
+ */
+$messages['te'] = array(
+	'wbc-editlinks' => 'లంకెలను మార్చు',
+);
+
+/** Simplified Chinese (‪中文(简体)‬)
+ * @author Linforest
+ */
+$messages['zh-hans'] = array(
+	'wbc-desc' => 'Wikibase扩展客户端',
+	'wbc-editlinks' => '编辑链接',
+	'wbc-editlinkstitle' => '编辑跨语言链接',
 );
 
