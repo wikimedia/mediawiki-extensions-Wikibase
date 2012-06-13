@@ -12,8 +12,9 @@
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
 class WBCSkinHandler {
-	public static function onBeforePageDisplay( $out, $skin ) {
-		$out->addModules( 'wikibaseClient' );
+
+	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
+		$out->addModules( 'ext.wikibaseclient' );
 		return true;
 	}
 
@@ -23,10 +24,10 @@ class WBCSkinHandler {
 	 * @param	$skin - standard Skin object.
 	 * @param	$template
 	 */
-	public static function onSkinTemplateOutputPageBeforeExec( &$skin, &$template ) {
+	public static function onSkinTemplateOutputPageBeforeExec( Skin &$skin, &$template ) {
 		global $wgLanguageCode;
 
-		$edit_url = WBCSettings::get( 'editURL' );
+		$edit_url = \Wikibase\ClientSettings::get( 'editURL' );
 		if( empty( $edit_url ) ) {
 			return true;
 		}
