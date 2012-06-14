@@ -68,7 +68,7 @@ $messages['dsb'] = array(
 	'wbc-editlinkstitle' => 'Mjazyrěcne wótkaze wobźěłaś',
 );
 
-/** Spanish (Español)
+/** Spanish (español)
  * @author Armando-Martin
  */
 $messages['es'] = array(
@@ -86,7 +86,7 @@ $messages['fa'] = array(
 	'wbc-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
 );
 
-/** French (Français)
+/** French (français)
  * @author Gomoko
  * @author Wyz
  */
@@ -131,7 +131,7 @@ $messages['hsb'] = array(
 	'wbc-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
 );
 
-/** Interlingua (Interlingua)
+/** Interlingua (interlingua)
  * @author McDutchie
  */
 $messages['ia'] = array(
@@ -140,7 +140,7 @@ $messages['ia'] = array(
 	'wbc-editlinkstitle' => 'Modificar ligamines interlingua',
 );
 
-/** Icelandic (Íslenska)
+/** Icelandic (íslenska)
  * @author Snævar
  */
 $messages['is'] = array(
@@ -149,7 +149,7 @@ $messages['is'] = array(
 	'wbc-editlinkstitle' => 'Breyta tungumálatenglum',
 );
 
-/** Italian (Italiano)
+/** Italian (italiano)
  * @author Beta16
  */
 $messages['it'] = array(
@@ -190,7 +190,7 @@ $messages['lb'] = array(
 	'wbc-desc' => "Client fir d'Wikibase Erweiderung",
 );
 
-/** Macedonian (Македонски)
+/** Macedonian (македонски)
  * @author Bjankuloski06
  */
 $messages['mk'] = array(
@@ -208,14 +208,14 @@ $messages['nl'] = array(
 	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
 );
 
-/** Portuguese (Português)
+/** Portuguese (português)
  * @author Malafaya
  */
 $messages['pt'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
 );
 
-/** Brazilian Portuguese (Português do Brasil)
+/** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
  */
 $messages['pt-br'] = array(
@@ -224,7 +224,7 @@ $messages['pt-br'] = array(
 	'wbc-editlinkstitle' => 'Editar links interlíngua',
 );
 
-/** Russian (Русский)
+/** Russian (русский)
  * @author Kaganer
  * @author Александр Сигачёв
  */
@@ -234,7 +234,7 @@ $messages['ru'] = array(
 	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
 );
 
-/** Serbian (Cyrillic script) (‪Српски (ћирилица)‬)
+/** Serbian (Cyrillic script) (‪српски (ћирилица)‬)
  * @author Nikola Smolenski
  * @author Rancher
  */
@@ -244,7 +244,7 @@ $messages['sr-ec'] = array(
 	'wbc-editlinkstitle' => 'Уређивање међујезичких веза',
 );
 
-/** Swedish (Svenska)
+/** Swedish (svenska)
  * @author Ainali
  */
 $messages['sv'] = array(
@@ -267,7 +267,7 @@ $messages['tl'] = array(
 	'wbc-editlinkstitle' => 'Baguhin ang mga kawing na para sa interwika',
 );
 
-/** Simplified Chinese (‪中文(简体)‬)
+/** Simplified Chinese (‪中文（简体）‬)
  * @author Linforest
  */
 $messages['zh-hans'] = array(
