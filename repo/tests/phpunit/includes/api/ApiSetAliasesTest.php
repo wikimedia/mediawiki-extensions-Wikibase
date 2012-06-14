@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 use ApiTestCase;
 use ApiTestUser;
-use WBSettings;
+use \Wikibase\Settings as Settings;
 use UsageException;
 //use ApiModifyItemBase;
 use Wikibase\Test\ApiModifyItemBase as ApiModifyItemBase;
@@ -72,11 +72,6 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 	 * @dataProvider paramProvider
 	 */
 	public function testSetAliases( $langCode, $param, $value, $expected ) {
-		// FIXME: getRawAliases() doesn't exist, and we decided to refactor that part of the Item class.
-		//        ignore aliases for now to remove the dependency on getRawAliases and get the review process unstuck.
-		//        This should REALLY be fixed one way or the other by tomorrow (June 10) [dk].
-		$this->assertTrue( true ); //dummy
-		return; //FIXME: remove this.
 
 		$req = array();
 		$token = $this->gettoken();
@@ -87,7 +82,7 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		$req = array_merge( $req, array(
 			'id' => self::$item->getId(),
 			'action' => 'wbsetaliases',
-			//'usekeys' => true, // this comes from \WBSettings::get( 'apiUseKeys' )
+			//'usekeys' => true, // this comes from Settings::get( 'apiUseKeys' )
 			'format' => 'json',
 			'language' => $langCode,
 			$param => $value
@@ -101,8 +96,8 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		
 		if ( $param === 'add') {
 			$this->assertTrue(
-				\WBSettings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['aliases']) : !array_key_exists($langCode, $apiResponse['item']['aliases']),
-				"Found '{$langCode}' and it should" . (\WBSettings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in aliases"
+				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['aliases']) : !array_key_exists($langCode, $apiResponse['item']['aliases']),
+				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in aliases"
 			);
 		}
 		

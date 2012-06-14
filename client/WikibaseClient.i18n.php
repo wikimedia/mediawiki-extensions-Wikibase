@@ -19,7 +19,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'wbc-desc' => 'Client for the Wikibase extension',
-	'wbc-editlinks' => 'Edit Links',
+	'wbc-editlinks' => 'Edit links',
 	'wbc-editlinkstitle' => 'Edit interlanguage links',
 );
 
@@ -41,13 +41,22 @@ $messages['be-tarask'] = array(
 	'wbc-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 );
 
+/** Breton (brezhoneg)
+ * @author Fulup
+ */
+$messages['br'] = array(
+	'wbc-editlinks' => 'Kemmañ al liammoù',
+	'wbc-editlinkstitle' => 'Kemmañ al liammoù etreyezhel',
+);
+
 /** German (Deutsch)
  * @author Kghbln
+ * @author Purodha
  */
 $messages['de'] = array(
 	'wbc-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
 	'wbc-editlinks' => 'Links bearbeiten',
-	'wbc-editlinkstitle' => 'Sprachenübergreifende Links bearbeiten',
+	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 );
 
 /** Lower Sorbian (Dolnoserbski)
@@ -105,6 +114,14 @@ $messages['gsw'] = array(
 	'wbc-editlinkstitle' => 'Sprachibergryfigi Link bearbeite',
 );
 
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'wbc-editlinks' => 'עריכת קישורים',
+	'wbc-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
+);
+
 /** Upper Sorbian (Hornjoserbsce)
  * @author Michawiki
  */
@@ -118,6 +135,8 @@ $messages['hsb'] = array(
  * @author McDutchie
  */
 $messages['ia'] = array(
+	'wbc-desc' => 'Cliente pro le extension Wikibase',
+	'wbc-editlinks' => 'Modificar ligamines',
 	'wbc-editlinkstitle' => 'Modificar ligamines interlingua',
 );
 
@@ -143,8 +162,25 @@ $messages['it'] = array(
  * @author Shirayuki
  */
 $messages['ja'] = array(
+	'wbc-desc' => 'Wikibase拡張機能のクライアント',
 	'wbc-editlinks' => 'リンクを編集',
 	'wbc-editlinkstitle' => '言語間リンクを編集',
+);
+
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'wbc-desc' => 'Madd en Aanwendong vun däm WikiData Projrammzihsaz müjjelesch.',
+	'wbc-editlinks' => 'Lenks ändere',
+	'wbc-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
+);
+
+/** Kurdish (Latin script) (‪Kurdî (latînî)‬)
+ * @author George Animal
+ */
+$messages['ku-latn'] = array(
+	'wbc-editlinks' => 'Girêdanan biguherîne',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
@@ -220,6 +256,15 @@ $messages['sv'] = array(
  */
 $messages['te'] = array(
 	'wbc-editlinks' => 'లంకెలను మార్చు',
+);
+
+/** Tagalog (Tagalog)
+ * @author AnakngAraw
+ */
+$messages['tl'] = array(
+	'wbc-desc' => 'Kliyente para sa dugtong na Wikibase',
+	'wbc-editlinks' => 'Baguhin ang mga kawing',
+	'wbc-editlinkstitle' => 'Baguhin ang mga kawing na para sa interwika',
 );
 
 /** Simplified Chinese (‪中文(简体)‬)

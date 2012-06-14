@@ -13,21 +13,31 @@
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
 class WBCLangLinkHandler {
-	protected static $cache = array();
-	protected static $sort_order = false;
+        protected static $sort_order = false;
+        protected static $langlinksset = false;
 
-	public static function onParserBeforeTidy( Parser &$parser, &$text ) {
-		global $wgLanguageCode;
-
-		// If this is an interface message, we don't do anything.
-		if( $parser->getOptions()->getInterfaceMessage() ) {
-			return true;
+	# todo: this is hackish, is this the best hook to use?
+        public static function onParserBeforeTidy( Parser &$parser, &$text ) {
+		if ( ! self::$langlinksset ) {
+                	if ( self::addLangLinks( $parser, $text ) ) {
+                        	self::$langlinksset = true;
+                	}
 		}
+                return true;
+        }
+
+        protected static function addLangLinks( Parser &$parser, &$text ) {
+                global $wgLanguageCode;
+
+                // If this is an interface message, we don't do anything.
+                if( $parser->getOptions()->getInterfaceMessage() ) {
+                        return true;
+                }
 
 		// If we don't support the namespace, we maybe sort the links, but don't do anything else.
 		$title = $parser->getTitle();
-		if( !in_array( $title->getNamespace(), WBCSettings::get( 'namespaces' ) ) ) {
-			self::maybeSortLinks( $parser->getOutput()->mLanguageLinks );
+		if( !in_array( $title->getNamespace(), \Wikibase\Settings::get( 'namespaces' ) ) ) {
+			self::maybeSortLinks( $parser->getOutput()->getLanguageLinks() );
 			return true;
 		}
 
@@ -35,44 +45,41 @@ class WBCLangLinkHandler {
 		$out = $parser->getOutput();
 		$nei = self::getNoExternalInterlang( $out );
 		if( array_key_exists( '*', $nei ) ) {
-			self::maybeSortLinks( $out->mLanguageLinks );
+			self::maybeSortLinks( $out->getLanguageLinks() );
 			return true;
 		}
 
 		// Here we finally get the links...
 		// NOTE: Instead of getFullText(), we need to get a normalized title, and the server should use a locale-aware normalization function yet to be written which has the same output
 		$title_text = $title->getFullText();
-		if( isset( self::$cache[$title_text] ) ) {
-			// ...from the local cache if there is one...
-			$links = self::$cache[$title_text];
-		} else {
-			// ...or from the external storage.
-			$links = self::getLinks( $title_text );
-
-			// If there was an error while getting links, we use the current links...
-			if( $links === false ) {
-				$links = self::readLinksFromDB( wfGetDB( DB_SLAVE ), $title->getArticleID() );
-			}
-
-			// ...and write them to the cache.
-			self::$cache[$title_text] = $links;
-		}
+		
+		$links = self::getLinks( $title_text );
 
 		// Always remove the link to the site language.
 		unset( $links[$wgLanguageCode] );
 
-		// Remove the links specified by noexternalinterlang parser function.
-		$links = array_diff_key( $links, $nei );
+		if ( is_array( $links ) && is_array( $nei ) ) {
+			// Remove the links specified by noexternalinterlang parser function.
+			$links = array_diff_key( $links, $nei );
 
-		// Pack the links properly into mLanguageLinks.
-		foreach( $links as $lang => $link ) {
-			$out->addLanguageLink( $lang . ':' . $link );
+			// Pack the links properly into mLanguageLinks.
+			$old_links = $out->getLanguageLinks();
+			foreach( $links as $lang => $link ) {
+				$new_link = $link['site'] . ':' . $link['title'];
+				if( !in_array( $new_link, $old_links ) ) {
+					$out->addLanguageLink( $new_link );
+				}
+			}
+
+			// Sort the links, always.
+			self::sortLinks( $out->getLanguageLinks() );
 		}
 
-		// Sort the links, always.
-		self::sortLinks( $out->mLanguageLinks );
-
 		return true;
+	}
+
+	public static function resetLangLinks() {
+		self::$langlinksset = false;
 	}
 
 	/**
@@ -104,9 +111,11 @@ class WBCLangLinkHandler {
 	 * @return Array of links, empty array for no links, false for failure.
 	 */
 	protected static function getLinks( $title_text ) {
-		$source = WBCSettings::get( 'source' );
+		$source = \Wikibase\Settings::get( 'source' );
 		if( isset( $source['api'] ) ) {
 			return self::getLinksFromApi( $title_text, $source['api'] );
+		} elseif( isset( $source['var'] ) ) {
+			return self::getLinksFromVar( $title_text, $source['var'] );
 		} elseif( isset( $source['dir'] ) ) {
 			return self::getLinksFromFile( $title_text, $source['dir'] );
 		} else {
@@ -130,18 +139,15 @@ class WBCLangLinkHandler {
 			return false;
 		}
 
-		$links = $api_response['item']['sitelinks'];
+		return $api_response['item']['sitelinks'];
+	}
 
-		// Convert the links to the return format.
-		// This is no longer necessary since API format changed, but it will probably change again.
-		/*
-		$res = array();
-		foreach( $links as $link ) {
-			$res[$link['site']] = $link['title'];
-		}
-		*/
-
-		return $links;
+	/**
+	 * Get the list of links for a title from a variable. This would generally be used for testing.
+	 * @return Array of links, empty array for no links, false for failure.
+	 */
+	protected static function getLinksFromVar( $title_text, $var ) {
+		return isset( $var[$title_text] )? $var[$title_text]: false;
 	}
 
 	/**
@@ -183,7 +189,7 @@ class WBCLangLinkHandler {
 	 * Sort an array of links in-place iff alwaysSort option is turned on.
 	 */
 	protected static function maybeSortLinks( &$a ) {
-		if( WBCSettings::get( 'alwaysSort' ) ) {
+		if( \Wikibase\Settings::get( 'alwaysSort' ) ) {
 			self::sortLinks( $a );
 		}
 	}
@@ -287,7 +293,7 @@ class WBCLangLinkHandler {
 			'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea', 'bat-smg', 'zh', 'zh-tw', 'zh-cn',
 		);
 
-		$sort = WBCSettings::get( 'sort' );
+		$sort = \Wikibase\Settings::get( 'sort' );
 		switch( $sort ) {
 			case 'code':
 				self::$sort_order = $order_alphabetic;
@@ -301,10 +307,11 @@ class WBCLangLinkHandler {
 				break;
 			case 'none':
 			default:
+				self::$sort_order = false;
 				return false;
 		}
 
-		$sortPrepend = WBCSettings::get( 'sortPrepend' );
+		$sortPrepend = \Wikibase\Settings::get( 'sortPrepend' );
 		if( is_array( $sortPrepend ) ) {
 			self::$sort_order = array_unique( array_merge( $sortPrepend, self::$sort_order ) );
 		}

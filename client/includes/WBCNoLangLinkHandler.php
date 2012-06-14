@@ -15,6 +15,8 @@ class WBCNoLangLinkHandler {
 
 	/**
 	 * Register the parser function.
+	 * @param $parser Parser
+	 * @return bool
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
 		$parser->setFunctionHook( 'noexternalinterlang', 'WBCNoLangLinkHandler::noExternalInterlang', SFH_NO_HASH );
@@ -42,6 +44,8 @@ class WBCNoLangLinkHandler {
 
 	/**
 	 * Actual parser function.
+	 * @param $parser Parser
+	 * @return string
 	 */
 	public static function noExternalInterlang( &$parser ) {
 		$langs = func_get_args();
@@ -50,7 +54,7 @@ class WBCNoLangLinkHandler {
 		$langs = array_flip( $langs );
 
 		$out = $parser->getOutput();
-		$nei = WBCLangLinkHandler::getNEI( $out );
+		$nei = WBCLangLinkHandler::getNoExternalInterlang( $out );
 		$nei += $langs;
 		$out->setProperty( 'no_external_interlang', serialize( $nei ) );
 

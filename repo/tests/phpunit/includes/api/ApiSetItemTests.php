@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase, ApiTestUser;
+use Wikibase\Settings as Settings;
 
 /**
  * Tests for the ApiWikibase class.
@@ -42,9 +43,9 @@ class ApiSetItemTests extends \ApiTestCase {
 		global $wgUser;
 		parent::setUp();
 		
-		self::$usepost = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithPost' ) : true;
-		self::$usetoken = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens' ) : true;
-		self::$userights = \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithRights' ) : true;
+		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
+		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
+		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
 		
 		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
 				'Apitesteditor',
@@ -155,7 +156,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 */
 	function testSetItemTop() {
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -191,7 +192,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	 */
 	function testSetItemGetTokenSetData( $id, $op, $data ) {
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -373,7 +374,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	public function linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -384,7 +385,7 @@ class ApiSetItemTests extends \ApiTestCase {
 			);
 			$req['token'] = $data[0]['wbsetitem']['setitemtoken'];
 		}
-		
+
 		$req = array_merge( $req, array(
 			'action' => 'wblinksite',
 			'id' => $myid,
@@ -476,7 +477,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	public function linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -586,7 +587,7 @@ class ApiSetItemTests extends \ApiTestCase {
 	public function setLanguageAttribute( $id, $site, $title, $language, $label, $description, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -673,11 +674,11 @@ class ApiSetItemTests extends \ApiTestCase {
 	public function testDeleteLanguageAttributeDescription( $id, $site, $title, $language ) {
 		$this->deleteLanguageAttribute( $id, $site, $title, $language, 'description' );
 	}
-	
+
 	public function deleteLanguageAttribute( $id, $site, $title, $language, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
 		$req = array();
-		if ( \WBSettings::get( 'apiInDebug' ) ? \WBSettings::get( 'apiDebugWithTokens', false ) : true ) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$data = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
@@ -742,22 +743,22 @@ class ApiSetItemTests extends \ApiTestCase {
 				'add',
 				'{
 					"links": {
-						"de": { "site": "de", "title": "Berlin" },
-						"en": { "site": "en", "title": "Berlin" },
-						"no": { "site": "no", "title": "Berlin" },
-						"nn": { "site": "nn", "title": "Berlin" }
+						"de": "Berlin",
+						"en": "Berlin",
+						"no": "Berlin",
+						"nn": "Berlin"
 					},
 					"label": {
-						"de": { "language": "de", "value": "Berlin" },
-						"en": { "language": "en", "value": "Berlin" },
-						"no": { "language": "no", "value": "Berlin" },
-						"nn": { "language": "nn", "value": "Berlin" }
+						"de": "Berlin",
+						"en": "Berlin",
+						"no": "Berlin",
+						"nn": "Berlin"
 					},				
 					"description": { 
-						"de" : { "language": "de", "value": "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland." },
-						"en" : { "language": "en", "value": "Capital city and a federated state of the Federal Republic of Germany." },
-						"no" : { "language": "no", "value": "Hovedsted og delstat og i Forbundsrepublikken Tyskland." },
-						"nn" : { "language": "nn", "value": "Hovudstad og delstat i Forbundsrepublikken Tyskland." }
+						"de" : "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland.",
+						"en" : "Capital city and a federated state of the Federal Republic of Germany.",
+						"no" : "Hovedsted og delstat og i Forbundsrepublikken Tyskland.",
+						"nn" : "Hovudstad og delstat i Forbundsrepublikken Tyskland."
 					}
 				}'
 			),
@@ -766,22 +767,22 @@ class ApiSetItemTests extends \ApiTestCase {
 				'add',
 				'{
 					"links": {
-						"de": { "site": "de", "title": "London" },
-						"en": { "site": "en", "title": "London" },
-						"no": { "site": "no", "title": "London" },
-						"nn": { "site": "nn", "title": "London" }
+						"de": "London",
+						"en": "London",
+						"no": "London",
+						"nn": "London"
 					},
 					"label": {
-						"de": { "language": "de", "value": "London" },
-						"en": { "language": "en", "value": "London" },
-						"no": { "language": "no", "value": "London" },
-						"nn": { "language": "nn", "value": "London" }
+						"de": "London",
+						"en": "London",
+						"no": "London",
+						"nn": "London"
 					},				
 					"description": { 
-						"de" : { "language": "de", "value": "Hauptstadt Englands und des Vereinigten Königreiches." },
-						"en" : { "language": "en", "value": "Capital city of England and the United Kingdom." },
-						"no" : { "language": "no", "value": "Hovedsted i England og Storbritannia." },
-						"nn" : { "language": "nn", "value": "Hovudstad i England og Storbritannia." }
+						"de" : "Hauptstadt Englands und des Vereinigten Königreiches.",
+						"en" : "Capital city of England and the United Kingdom.",
+						"no" : "Hovedsted i England og Storbritannia.",
+						"nn" : "Hovudstad i England og Storbritannia."
 					}
 				}'
 			),
@@ -790,22 +791,22 @@ class ApiSetItemTests extends \ApiTestCase {
 				'add',
 				'{
 					"links": {
-						"de": { "site": "de", "title": "Oslo" },
-						"en": { "site": "en", "title": "Oslo" },
-						"no": { "site": "no", "title": "Oslo" },
-						"nn": { "site": "nn", "title": "Oslo" }
+						"de": "Oslo",
+						"en": "Oslo",
+						"no": "Oslo",
+						"nn": "Oslo"
 					},
 					"label": {
-						"de": { "language": "de", "value": "Oslo" },
-						"en": { "language": "en", "value": "Oslo" },
-						"no": { "language": "no", "value": "Oslo" },
-						"nn": { "language": "nn", "value": "Oslo" }
+						"de": "Oslo",
+						"en": "Oslo",
+						"no": "Oslo",
+						"nn": "Oslo"
 					},				
 					"description": { 
-						"de" : { "language": "de", "value": "Hauptstadt der Norwegen." },
-						"en" : { "language": "en", "value": "Capital city in Norway." },
-						"no" : { "language": "no", "value": "Hovedsted i Norge." },
-						"nn" : { "language": "nn", "value": "Hovudstad i Noreg." }
+						"de" : "Hauptstadt der Norwegen.",
+						"en" : "Capital city in Norway.",
+						"no" : "Hovedsted i Norge.",
+						"nn" : "Hovudstad i Noreg."
 					}
 				}'
 			),

@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, WBSettings;
+use ApiBase;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -17,10 +17,6 @@ use ApiBase, WBSettings;
  */
 class ApiSetItem extends Api {
 
-	public function __construct( $main, $action ) {
-		parent::__construct( $main, $action );
-	}
-
 	/**
 	 * Check the rights
 	 * 
@@ -31,7 +27,7 @@ class ApiSetItem extends Api {
 	 * @return array of errors reported from the static getPermissionsError
 	 */
 	protected static function getPermissionsError( $user, $mod='item', $op='add' ) {
-		if ( WBSettings::get( 'apiInDebug' ) ? !WBSettings::get( 'apiDebugWithRights', false ) : false ) {
+		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
 		
@@ -115,43 +111,16 @@ class ApiSetItem extends Api {
 		// because this is serialized and cleansed we can simply go for known values
 		$res = $this->getResult();
 		$res->addValue(
-			null,
-			'item',
-			array()
-		);
-		
-		$sitelinks = $item->getRawSiteLinks();
-		if (count($sitelinks)) {
-			$res->addValue(
-				'item',
-				'sitelinks',
-				$this->stripKeys( $params, $sitelinks, 'sitelink' )
-			);
-		}
-		
-		$descriptions = $item->getRawDescriptions( $languages );
-		if (count($descriptions)) {
-			$res->addValue(
-				'item',
-				'descriptions',
-				$this->stripKeys( $params, $descriptions, 'd' )
-			); 
-		}
-		
-		$labels = $item->getRawLabels( $languages );
-		if (count($labels)) {
-			$res->addValue(
-				'item',
-				'labels',
-				$this->stripKeys( $params, $labels, 'l' )
-			); 
-		}
-		
-		$res->addValue(
 			'item',
 			'id',
 			$item->getId()
 		);
+		
+		$this->setUsekeys( $params );
+		$this->addAliasesToResult( $item->getAllAliases(), 'item' );
+		$this->addSiteLinksToResult( $item->getSiteLinks(), 'item' );
+		$this->addDescriptionsToResult( $item->getDescriptions( $languages ), 'item' );
+		$this->addLabelsToResult( $item->getLabels( $languages ), 'item' );
 		
 		$res->addValue(
 			null,
@@ -166,7 +135,6 @@ class ApiSetItem extends Api {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'no-token', 'info' => wfMsg( 'wikibase-api-no-token' ) ),
 			array( 'code' => 'no-data', 'info' => wfMsg( 'wikibase-api-no-data' ) ),
 			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'cant-edit', 'info' => wfMsg( 'wikibase-api-cant-edit' ) ),
@@ -180,7 +148,7 @@ class ApiSetItem extends Api {
 	 * @return bool
 	 */
 	public function needsToken() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithTokens', false ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ;
 	}
 
 	/**
@@ -188,7 +156,7 @@ class ApiSetItem extends Api {
 	 * @return bool
 	 */
 	public function mustBePosted() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithPost', false ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost', false ) : true ;
 	}
 
 	/**
@@ -196,7 +164,7 @@ class ApiSetItem extends Api {
 	 * @return bool
 	 */
 	public function isWriteMode() {
-		return WBSettings::get( 'apiInDebug' ) ? WBSettings::get( 'apiDebugWithWrite', false ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite', false ) : true ;
 	}
 	
 	/**

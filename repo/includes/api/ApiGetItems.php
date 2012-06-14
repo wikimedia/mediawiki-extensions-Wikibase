@@ -40,12 +40,16 @@ class ApiGetItems extends Api {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {
 				foreach ($params['titles'] as $title) {
-					$params['ids'][] = Item::getIdForSiteLink( $params['sites'], $title );
+					$id = Item::getIdForSiteLink( $params['sites'], $title );
+					if ( $id ) $params['ids'][] = intval( $id );
+					//@todo: else report this problem
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				foreach ($params['sites'] as $site) {
-					$params['ids'][] = Item::getIdForSiteLink( $site, $params['titles'] );
+					$id = Item::getIdForSiteLink( $site, $params['titles'] );
+					if ( $id ) $params['ids'][] = intval( $id );
+					//@todo: else report this problem
 				}
 			}
 			else {
@@ -59,17 +63,12 @@ class ApiGetItems extends Api {
 
 		$languages = $params['languages'];
 		
-/*		$this->getResult()->addValue(
-			null,
-			'items',
-			array()
-		);
-*/		
+		$this->setUsekeys( $params );
+		
 		foreach ($params['ids'] as $id) {
 			$page = Item::getWikiPageForId( $id );
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
-				/** @var Item $item **/
 				$item = $page->getContent();
 				if ( is_null($item) ) {
 					continue;
@@ -78,53 +77,37 @@ class ApiGetItems extends Api {
 					$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 				}
 				
-				// this is not a very nice way to transfer the values
-				// but if there are only a few calls its okey
+				$itemPath = array( 'items', $id );
 				$res = $this->getResult();
-				$arr = array();
-				$arr['id'] = $item->getId();
+
+				$res->addValue(
+					$itemPath,
+					'id',
+					$id
+				);
+
 				foreach ( $params['props'] as $key ) {
-					switch ($key) {
-					case 'sitelinks':
-						$sitelinks = $this->stripKeys( $params, $item->getRawSiteLinks(), 'sl' );
-						if ( count( $sitelinks ) ) {
-							$arr['sitelinks'] = $sitelinks;
-						}
-						break;
+					switch ( $key ) {
 					case 'aliases':
-						// FIXME: getRawAliases() doesn't exist, and we decided to refactor that part of the Item class.
-						//        ignore aliases for now to remove the dependency on getRawAliases and get the review process unstuck.
-						//        This should REALLY be fixed one way or the other by tomorrow (June 10) [dk].
-						/*
-						$aliases = $this->stripKeys( $params, $item->getRawAliases( $languages ), 'al', 2 );
-						if ( count( $aliases ) ) {
-							$arr['aliases'] = $aliases;
-						} */
+						$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
+						break;
+					case 'sitelinks':
+						$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath );
 						break;
 					case 'descriptions':
-						$descriptions = $this->stripKeys( $params, $item->getRawDescriptions( $languages ), 'd' );
-						if ( count( $descriptions ) ) {
-							$arr['descriptions'] = $descriptions;
-						}
+						$this->addDescriptionsToResult( $item->getDescriptions( $languages ), $itemPath );
 						break;
 					case 'labels':
-						$labels = $this->stripKeys( $params, $item->getRawLabels( $languages ), 'l' );
-						if ( count( $labels ) ) {
-							$arr['labels'] = $labels;
-						}
+						$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
 						break;
 					default:
 						// should never be here
 						$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
 					}
 				}
-
-				$res->addValue(
-					'items',
-					"{$id}",
-					$arr
-				);
 				$res->setIndexedTagName_internal( array( 'items' ), 'item' );
+			} else {
+				//@todo: somehow report that this item doesn't exist
 			}
 		}
 
@@ -179,16 +162,17 @@ class ApiGetItems extends Api {
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
 			'ids' => 'The IDs of the items to get the data from',
-			'props' => array( 'The names of the properties to get back from each item',
-				"Will be further filtered by any languages given."
+			'sites' => array( 'Identifier for the site on which the corresponding page resides',
+				"Use together with 'title', but only give one site for several titles or several sites for one title."
 			),
-			'languages' => 'By default the internationalized values are returned in all available languages.
-						This parameter allows filtering these down to one or more languages by providing their language codes.',
 			'titles' => array( 'The title of the corresponding page',
 				"Use together with 'sites', but only give one site for several titles or several sites for one title."
 			),
-			'sites' => array( 'Identifier for the site on which the corresponding page resides',
-				"Use together with 'title', but only give one site for several titles or several sites for one title."
+			'props' => array( 'The names of the properties to get back from each item.',
+				"Will be further filtered by any languages given."
+			),
+			'languages' => array( 'By default the internationalized values are returned in all available languages.',
+				'This parameter allows filtering these down to one or more languages by providing their language codes.'
 			),
 		) );
 	}

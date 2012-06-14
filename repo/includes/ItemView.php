@@ -104,6 +104,7 @@ class ItemView extends \ContextSource {
 				$html .= Html::openElement( 'tr', array(
 					'class' => 'wb-sitelinks-' . $siteId . ' ' . $alternatingClass )
 				);
+
 				$html .= Html::element(
 						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $siteId ),
 						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!

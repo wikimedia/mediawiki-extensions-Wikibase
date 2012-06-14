@@ -241,15 +241,16 @@ final class WikibaseHooks {
 	}
 
 	/**
-	 * Adds defaults settings.
-	 * setting name (string) => setting value (mixed)
+	 * Adds default settings.
+	 * Setting name (string) => setting value (mixed)
+	 *
+	 * @param array &$settings
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return boolean
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
-
 		$settings = array_merge(
 			$settings,
 			array(
@@ -270,8 +271,32 @@ final class WikibaseHooks {
 				'apiDebugWithPost' => false,
 				'apiDebugWithRights' => false,
 				'apiDebugWithTokens' => false,
-			) );
+
+				// Which formats to use with keys when there are a "usekeys" in the URL
+				// undefined entries are interpreted as false
+				'formatsWithKeys' => array(
+					'json' => true,
+					'jsonfm' => true,
+					'php' => false,
+					'phpfm' => false,
+					'wddx' => false,
+					'wddxfm' => false,
+					'xml' => false,
+					'xmlfm' => false,
+					'yaml' => true,
+					'yamlfm' => true,
+					'raw' => true,
+					'rawfm' => true,
+					'txtfm' => true,
+					'dbg' => true,
+					'dbgfm' => true,
+					'dump' => true,
+					'dumpfm' => true,
+				),
+			)
+		);
 
 		return true;
 	}
+
 }

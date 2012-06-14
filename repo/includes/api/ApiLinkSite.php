@@ -45,7 +45,7 @@ class ApiLinkSite extends ApiModifyItem {
 	 */
 	protected function modifyItem( Item &$item, array $params ) {
 		if ( isset($params['link']) && $params['link'] === 'remove') {
-			return $item->removeLinkSite( $params['linksite'], $params['linktitle'] );
+			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
 			$res = $this->getResult();
@@ -56,9 +56,11 @@ class ApiLinkSite extends ApiModifyItem {
 				if ( $params['linksite'] !== $ret['site'] ) {
 					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $ret['site'] );
 				}
+
 				if ( $params['linktitle'] !== $ret['title'] ) {
 					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $ret['title'] );
 				}
+
 				if ( count($normalized) ) {
 					$res->addValue(
 						'item',
@@ -66,12 +68,8 @@ class ApiLinkSite extends ApiModifyItem {
 						$normalized
 					);
 				}
-				
-				$res->addValue(
-					'item',
-					'sitelinks',
-					$this->stripKeys( $params, array( $ret['site'] => $ret ), 'sl' )
-				);
+
+				$this->addSiteLinksToResult( array( $ret['site'] => $ret ), 'item' );
 			}
 
 			return $ret !== false;

@@ -23,8 +23,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
 
-if ( version_compare( $wgVersion, '1.19c', '<' ) ) { // Needs to be 1.19c because version_compare() works in confusing ways.
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.19 or above.\n" );
+if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
+	die( "<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.\n" );
 }
 
 define( 'WBC_VERSION', '0.1 alpha' );
@@ -47,34 +47,39 @@ $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php'
 $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
 
 // Autoloading
-$wgAutoloadClasses['WBCHooks'] 						= $dir . 'WikibaseClient.hooks.php';
-$wgAutoloadClasses['WBCSettings'] 					= $dir . 'WikibaseClient.settings.php';
+$wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
+
+$wgAutoloadClasses['Wikibase\LocalItem'] 			= $dir . 'includes/LocalItem.php';
+$wgAutoloadClasses['Wikibase\LocalItems'] 			= $dir . 'includes/LocalItems.php';
 $wgAutoloadClasses['WBCLangLinkHandler'] 			= $dir . 'includes/WBCLangLinkHandler.php';
 $wgAutoloadClasses['WBCNoLangLinkHandler'] 			= $dir . 'includes/WBCNoLangLinkHandler.php';
 $wgAutoloadClasses['WBCSkinHandler'] 				= $dir . 'includes/WBCSkinHandler.php';
 
 // Hooks
+$wgHooks['UnitTestsList'][] 						= '\Wikibase\ClientHooks::registerUnitTests';
+$wgHooks['WikibasePollHandle'][]					= '\Wikibase\ClientHooks::onWikibasePollHandle';
+$wgHooks['LoadExtensionSchemaUpdates'][] 			= '\Wikibase\ClientHooks::onSchemaUpdate';
+$wgHooks['WikibaseDefaultSettings'][] 			    = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
+
 $wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
 $wgHooks['ParserFirstCallInit'][]					= 'WBCNoLangLinkHandler::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]				= 'WBCNoLangLinkHandler::onMagicWordwgVariableIDs';
 $wgHooks['ParserGetVariableValueSwitch'][]			= 'WBCNoLangLinkHandler::onParserGetVariableValueSwitch';
-$wgHooks['UnitTestsList'][] 						= 'WBCHooks::registerUnitTests';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= 'WBCSkinHandler::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['BeforePageDisplay'][]						= 'WBCSkinHandler::onBeforePageDisplay';
+
 
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' => 'WikidataClient/resources',
+	'remoteExtPath' => 'Wikibase/client/resources',
 );
 
-$wgResourceModules['wikibaseClient'] = $moduleTemplate + array(
+$wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
 	'styles' => array(
-		'wikibaseclient.css'
+		'ext.wikibaseclient.css'
 	),
 );
 
 unset( $moduleTemplate );
-
-$egWBCSettings = array();
 

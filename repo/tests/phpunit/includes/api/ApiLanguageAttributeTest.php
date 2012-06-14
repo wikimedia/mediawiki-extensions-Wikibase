@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use \Wikibase\Settings as Settings;
 
 /**
  * Tests for the ApiWikibaseSetAliases API module.
@@ -67,7 +68,7 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 		$req = array_merge( $req, array(
 			'id' => self::$item->getId(),
 			'action' => 'wbsetlanguageattribute',
-			//'usekeys' => true, // this comes from \WBSettings::get( 'apiUseKeys' )
+			//'usekeys' => true, // this comes from Settings::get( 'apiUseKeys' )
 			'format' => 'json',
 			'language' => $langCode,
 			'item' => $op,
@@ -95,15 +96,15 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 		if ( $attr === 'label') {
 			$str = self::$item->getLabel( $langCode );
 			$this->assertTrue(
-				\WBSettings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['labels']) : !array_key_exists($langCode, $apiResponse['item']['labels']),
-				"Found '{$langCode}' and it should" . (\WBSettings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in labels"
+				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['labels']) : !array_key_exists($langCode, $apiResponse['item']['labels']),
+				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in labels"
 			);
 		}
 		if ( $attr === 'description') {
 			$str = self::$item->getDescription( $langCode );
 			$this->assertTrue(
-				\WBSettings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['descriptions']) : !array_key_exists($langCode, $apiResponse['item']['descriptions']),
-				"Found '{$langCode}' and it should" . (\WBSettings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in descriptions"
+				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['descriptions']) : !array_key_exists($langCode, $apiResponse['item']['descriptions']),
+				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in descriptions"
 			);
 		}
 		

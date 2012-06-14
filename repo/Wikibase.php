@@ -140,6 +140,8 @@ $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
+
+
 // Hooks
 $wgHooks['WikibaseDefaultSettings'][] 			    = 'WikibaseHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseHooks::onSchemaUpdate';
@@ -156,7 +158,7 @@ $wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOption
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' =>  'Wikibase/resources'
+	'remoteExtPath' =>  'Wikibase/repo/resources'
 );
 
 // common styles independent from JavaScript being enabled or disabled
@@ -320,7 +322,7 @@ unset( $moduleTemplate );
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 
 //@todo: FIXME: this doesn't give wikis a chance to change the $baseNs.
-//       Namespace definitions should be deferred into a hook and be based on WBSettings.
+//       Namespace definitions should be deferred into a hook and be based on Wikibase\Settings.
 //       Note that some wikis may use the main namespace for data, or not have a data namespace.
 $baseNs = 100;
 

@@ -395,7 +395,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	
 	/**
 	 * Returns true if the interface is disabled.
-	 * 
+	 *
 	 * @return bool
 	 */
 	isDisabled: function() {
@@ -405,14 +405,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Disables or enables the element. Disabled is still visible but will be presented differently
 	 * and might behave differently in some cases.
-	 * 
+	 *
 	 * @param bool disable true for disabling, false for enabling the element
 	 * @return bool whether the state was changed or not.
 	 */
 	setDisabled: function( disable ) {
 		// TODO!
 		if( disable ) {
-			this._subject.addClass( this.UI_CLASS + '-disabled' );			
+			this._subject.addClass( this.UI_CLASS + '-disabled' );
 			if( this.isInEditMode() ) {
 				this._disableInputElement();
 			}
@@ -435,7 +435,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
 	 * interface will not be made available on startEditing()
-	 * 
+	 *
 	 * @return bool
 	 */
 	isActive: function() {
@@ -446,10 +446,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Sets the interface active or inactive. If inactive, the interface will not be made available
 	 * when startEditing() is called. If called to deactivate the interface but still in edit mode,
 	 * the edit mode will be closed without saving.
-	 * 
+	 *
 	 * @return bool whether the state was changed or not.
 	 */
-	setActive: function( active ) {		
+	setActive: function( active ) {
 		if( !active && this.isInEditMode() ) {
 			this.stopEditing( false );
 		}
