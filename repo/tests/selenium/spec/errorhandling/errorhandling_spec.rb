@@ -1,15 +1,14 @@
 require 'spec_helper'
 
 # This test will only work when RIGHTS and TOKENS are switched on!
+# FIXXME: This test does currently not work, as no login is required at the moment and thus no error can be enforced
 
+=begin
 describe "Check functionality of errorhandling" do
-
   context "Check for errorhandling of UI" do
     it "should check that errorhandling is done correctly by showing a error-tooltip" do
-      
       visit_page(ErrorProducingPage)
       @current_page.create_new_item(generate_random_string(10), generate_random_string(20))
-
       @current_page.editLabelLink?.should be_true
       @current_page.editLabelLink
       @current_page.labelInputField.should be_true
@@ -25,5 +24,5 @@ describe "Check functionality of errorhandling" do
       
     end
   end
-
 end
+=end

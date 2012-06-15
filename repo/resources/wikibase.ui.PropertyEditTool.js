@@ -78,39 +78,43 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._toolbar.innerGroup = new window.wikibase.ui.Toolbar.Group();
 		this._toolbar.addElement( this._toolbar.innerGroup );
 		
-		if( this.allowsMultipleValues ) {
-			// toolbar group for buttons:
-			this._toolbar.lblFull = new window.wikibase.ui.Toolbar.Label(
-					'&nbsp;- ' + mw.msg( 'wikibase-propertyedittool-full' )
-			);
+		if( this.allowsMultipleValues || this.allowsFullErase ) {
+			if ( this.allowsMultipleValues ) {
+				// toolbar group for buttons:
+				this._toolbar.lblFull = new window.wikibase.ui.Toolbar.Label(
+						'&nbsp;- ' + mw.message( 'wikibase-propertyedittool-full' ).escaped()
+				);
+			}
 			
 			// only add 'add' button if we can have several values
 			this._toolbar.btnAdd = new window.wikibase.ui.Toolbar.Button( mw.msg( 'wikibase-add' ) );
-			this._toolbar.btnAdd.onAction = $.proxy( function() {
+			$( this._toolbar.btnAdd ).on( 'action', $.proxy( function( event ) {
 				this.enterNewValue();
-			}, this );
-			
+			}, this ) );
+
 			this._toolbar.innerGroup.addElement( this._toolbar.btnAdd );
-			
-			// enable button only if this is not full yet, overwrite function directly	
-			var self = this;
-			this._toolbar.btnAdd.setDisabled = function( disable ) {
-				var isFull = self.isFull();
-				if( ! disable && self.isFull() ) {
-					// full list, don't enable 'add' button, show hint
-					self._toolbar.addElement( self._toolbar.lblFull );
-					disable = true;
-				}
-				if( ! disable && self.isInAddMode() ) {					
-					disable = true; // still adding new value, don't enable 'add' button!
-				}
-				if( disable == false ) {
-					// enabled, label with 'full' message not required
-					self._toolbar.removeElement( self._toolbar.lblFull );
-				}
-				return window.wikibase.ui.Toolbar.Button.prototype.setDisabled.call( this, disable );
-			};
-			this._toolbar.btnAdd.setDisabled( false ); // will run the code above
+
+			if ( this.allowsMultipleValues ) {
+				// enable button only if this is not full yet, overwrite function directly
+				var self = this;
+				this._toolbar.btnAdd.setDisabled = function( disable ) {
+					var isFull = self.isFull();
+					if( ! disable && self.isFull() ) {
+						// full list, don't enable 'add' button, show hint
+						self._toolbar.addElement( self._toolbar.lblFull );
+						disable = true;
+					}
+					if( ! disable && self.isInAddMode() ) {
+						disable = true; // still adding new value, don't enable 'add' button!
+					}
+					if( disable == false ) {
+						// enabled, label with 'full' message not required
+						self._toolbar.removeElement( self._toolbar.lblFull );
+					}
+					return window.wikibase.ui.Toolbar.Button.prototype.setDisabled.call( this, disable );
+				};
+				this._toolbar.btnAdd.setDisabled( false ); // will run the code above
+			}
 		}
 		
 		this._toolbar.appendTo( this._getToolbarParent() );
@@ -218,8 +222,25 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		editableValue.onAfterRemove = function() {
 			self._editableValueHandler_onAfterRemove( editableValue );
 		};
+
+		/**
+		 * Event called after the editing process is finished. At this point the element is not in
+		 * edit mode anymore.
+		 * This will not be called in case the element was just created, still pending, and the editing
+		 * process was cancelled.
+		 *
+		 * @param bool saved whether the result will be saved. If true, the result is sent to the API
+		 *        already and the internal value is changed to the new value.
+		 * @param bool wasPending whether the element was pending before the edit.
+		 */
+		$( editableValue ).on( 'afterStopEditing', $.proxy( function( event, save, wasPending ) {
+			if ( save && wasPending ) {
+				this._newValueHandler_onAfterStopEditing( editableValue, save, wasPending );
+			}
+			editableValue.onStopEditing = null; // make sure handler is only called once!
+		}, this ) );
 		
-		this._editableValues.push( editableValue );		
+		this._editableValues.push( editableValue );
 		return editableValue;
 	},
 	
@@ -308,19 +329,17 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._subject.append( newValueElem );
 		var newValue = this._initSingleValue( newValueElem );
 
-		this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
-		
-		var self = this;
-		newValue.onAfterStopEditing = function( save, wasPending ) {
-			self._newValueHandler_onAfterStopEditing( newValue, save, wasPending );
-			newValue.onStopEditing = null; // make sure handler is only called once!
-		};
+		if ( !this.allowsFullErase ) { // on allowsFullErase, add button will be hidden when not in use
+			this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
+		}
+
 		if( value ) {
 			newValue.setValue( value );
 		}
-		
+
 		this._onRefreshView( this.getIndexOf( newValue ) );
 		newValue.setFocus();
+
 		return newValue;
 	},
 	
@@ -493,5 +512,11 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * If true, the tool will manage several editable values and offer a remove and add command
 	 * @var bool
 	 */
-	allowsMultipleValues: true
+	allowsMultipleValues: true,
+
+	/**
+	 * determines whether it is possible to fully erase all values (displaying an add button when completely empty)
+	 * @var bool
+	 */
+	allowsFullErase: false
 };

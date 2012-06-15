@@ -32,6 +32,9 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 */
 	_editableValuesProto: null,
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool._init()
+	 */
 	_init: function( subject ) {
 		// add colspan+1 because of toolbar td's:
 		var th = subject.find( 'th' );
@@ -205,8 +208,8 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
  */
 window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
 	return $(
-			'<table class="wb-sitelinks" cellspacing="0"><thead><th colspan="2"><h2>' +
-			mw.msg( 'wikibase-sitelinks' ) +
-			'</h2></th></thead><tbody></tbody></table>'
+			'<table class="wb-sitelinks" cellspacing="0"><thead><th colspan="2"><h3>' +
+			mw.message( 'wikibase-sitelinks' ).escaped()  +
+			'</h3></th></thead><tbody></tbody></table>'
 	);
 };

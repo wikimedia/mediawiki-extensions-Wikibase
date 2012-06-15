@@ -40,8 +40,15 @@ window.wikibase.ui.Toolbar.prototype = {
 	
 	/**
 	 * @var Array
+	 * items that are rendered inside the toolbar like buttons, labels, tooltips or groups of such items
 	 */
 	_items: null,
+
+	/**
+	 * @var string
+	 * initial css display value that is stored for re-showing when hiding the toolbar
+	 */
+	_display: null,
 	
 	/**
 	 * Initializes the edit toolbar for the given element.
@@ -92,7 +99,6 @@ window.wikibase.ui.Toolbar.prototype = {
 		this._elem = $( '<div/>', {
 			'class': this.UI_CLASS
 		} );
-	
 		if( parent !== null ) { // if not known yet, appendTo() wasn't called so far
 			parent.append( this._elem );
 		}
@@ -182,7 +188,39 @@ window.wikibase.ui.Toolbar.prototype = {
 			this._elem = null;
 		}
 	},
-	
+
+	/**
+	 * hide the toolbar
+	 *
+	 * @return bool whether toolbar is hidden
+	 */
+	hide: function() {
+		if ( this._display === null || this._display === 'none' ) {
+			this._display = this._elem.css( 'display' );
+			this._elem.css( 'display', 'none' );
+		}
+		return this.isHidden();
+	},
+
+	/**
+	 * show the toolbar
+	 *
+	 * @return whether toolbar is visible
+	 */
+	show: function() {
+		this._elem.css( 'display', ( this._display === null ) ? 'block' : this._display );
+		return !this.isHidden();
+	},
+
+	/**
+	 * determine whether this toolbar is hidden
+	 *
+	 * @return bool
+	 */
+	isHidden: function() {
+		return ( this._elem.css( 'display' ) == 'none' );
+	},
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////

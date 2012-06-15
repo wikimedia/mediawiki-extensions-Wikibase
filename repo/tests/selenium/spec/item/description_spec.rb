@@ -37,6 +37,7 @@ describe "Check functionality of edit description" do
       ajax_wait
       @current_page.wait_for_api_callback
       @current_page.itemDescriptionSpan.should == changed_description
+      @current_page.editDescriptionLink?.should be_true
 
       @browser.refresh
       @current_page.wait_for_item_to_load
@@ -49,6 +50,7 @@ describe "Check functionality of edit description" do
       ajax_wait
       @current_page.wait_for_api_callback
       @current_page.itemDescriptionSpan.should == current_description
+      @current_page.editDescriptionLink?.should be_true
       
       @browser.refresh
       @current_page.wait_for_item_to_load

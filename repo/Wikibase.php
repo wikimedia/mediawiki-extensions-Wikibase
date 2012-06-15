@@ -168,20 +168,6 @@ $wgResourceModules['wikibase.common'] = $moduleTemplate + array(
 	)
 );
 
-$wgResourceModules['wikibase.libs.jQuery.tagit'] = $moduleTemplate + array(
-	'scripts' => array(
-		'wikibase.libs/wikibase.libs.jquery.tagit/js/tag-it.js'
-	),
-	'styles' => array(
-		'wikibase.libs/wikibase.libs.jquery.tagit/css/jquery.tagit.css'
-	),
-	'dependencies' => array(
-		'jquery.ui.widget',
-		'jquery.effects.core',
-		'jquery.effects.blind'
-	)
-);
-
 $wgResourceModules['wikibase'] = $moduleTemplate + array(
 	'scripts' => array(
 		'wikibase.js',
@@ -201,8 +187,32 @@ $wgResourceModules['wikibase.utilities.jQuery'] = $moduleTemplate + array(
 		'wikibase.utilities/wikibase.utilities.js',
 		'wikibase.utilities/wikibase.utilities.jQuery.js',
 		'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
-		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
 		'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
+	)
+);
+
+$wgResourceModules['wikibase.utilities.jQuery.ui.inputAutoExpand'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
+	),
+	'dependencies' => array(
+		'wikibase.utilities.jQuery',
+	)
+);
+
+$wgResourceModules['wikibase.utilities.jQuery.ui.tagadata'] = $moduleTemplate + array(
+	'scripts' => array(
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.js',
+	),
+	'styles' => array(
+		'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.css',
+	),
+	'dependencies' => array(
+		'wikibase.utilities.jQuery',
+		'wikibase.utilities.jQuery.ui.inputAutoExpand',
+		'jquery.ui.widget',
+		'jquery.effects.core',
+		'jquery.effects.blind'
 	)
 );
 
@@ -246,12 +256,16 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.ListInterface.js',
+		'wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.js',
 		'wikibase.ui.PropertyEditTool.EditableDescription.js',
 		'wikibase.ui.PropertyEditTool.EditableLabel.js',
 		'wikibase.ui.PropertyEditTool.EditableSiteLink.js',
+		'wikibase.ui.PropertyEditTool.EditableAliases.js',
 		'wikibase.ui.LabelEditTool.js',
 		'wikibase.ui.DescriptionEditTool.js',
 		'wikibase.ui.SiteLinksEditTool.js',
+		'wikibase.ui.AliasesEditTool.js',
 		'wikibase.startup.js' // should probably be adjusted for more moduldarity
 	),
 	'styles' => array(
@@ -261,6 +275,8 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase',
 		'wikibase.ui.Toolbar',
 		'wikibase.utilities.jQuery',
+		'wikibase.utilities.jQuery.ui.inputAutoExpand',
+		'wikibase.utilities.jQuery.ui.tagadata',
 		'jquery.ui.autocomplete',
 		'mediawiki.api',
 		'mediawiki.Title',
@@ -276,6 +292,9 @@ $wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
 		'wikibase-remove-inprogress',
 		'wikibase-label-edit-placeholder',
 		'wikibase-description-edit-placeholder',
+		'wikibase-aliases-label',
+		'wikibase-aliases-input-help-message',
+		'wikibase-alias-edit-placeholder',
 		'wikibase-sitelink-site-edit-placeholder',
 		'wikibase-sitelink-page-edit-placeholder',
 		'wikibase-label-input-help-message',

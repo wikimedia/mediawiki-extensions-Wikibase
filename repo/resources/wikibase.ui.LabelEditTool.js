@@ -24,6 +24,8 @@ $.extend( window.wikibase.ui.LabelEditTool.prototype, {
 	/**
 	 * Initializes the edit form for the given h1 with 'firstHeading' class, basically the page title.
 	 * This should normally be called directly by the constructor.
+	 *
+	 * @see wikibase.ui.PropertyEditTool._init()
 	 */
 	_init: function( subject ) {
 		// call prototypes _init():

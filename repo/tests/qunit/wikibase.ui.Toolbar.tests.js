@@ -116,6 +116,19 @@
 			-1,
 			'second label not referenced anymore'
 		);
+
+		equal(
+			this.toolbar.hide(),
+			true,
+			'hide toolbar'
+		);
+
+		equal(
+			this.toolbar.show(),
+			true,
+			'show toolbar'
+		);
+
 	} );
 
 

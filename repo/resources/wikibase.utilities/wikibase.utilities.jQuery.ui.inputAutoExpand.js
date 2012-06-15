@@ -37,7 +37,8 @@
 		var fullOptions = $.extend( {
 			maxWidth: 1000,
 			minWidth: false, // dynamic: length of placeholder or 0 if no placeholder
-			comfortZone: false
+			comfortZone: false,
+			expandOnResize: true // whether width should be re-calculated when browser window has been resized
 		}, options );
 
 		// expand input fields:
@@ -121,15 +122,16 @@
 				}
 
 				$.each( AutoExpandInput.getActiveInstances(), function() {
-					// NOTE: this could be more efficient in case many inputs are set. We could just calculate the inputs
-					// (new) max-width and check whether it is exceeded in which case we set it to the max width.
+					// NOTE: this could be more efficient in case many inputs are set. We could just calculate the
+					// inputs (new) max-width and check whether it is exceeded in which case we set it to the max width.
 					// Basically the same but other way around for minWidth.
-					this.expand();
-
+					if( this.getOptions().expandOnResize ) {
+						this.expand();
+					}
 				} );
 
 				oldWidth = newWidth;
-			}
+			};
 
 			$( window ).on( 'resize', resizeHandler );
 		} )();
