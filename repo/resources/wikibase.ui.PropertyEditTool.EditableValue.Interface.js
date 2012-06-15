@@ -68,6 +68,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this.destroy();
 		}
 		this._subject = $( subject );
+
+		// make sure the value is normalized when initialized:
+		this.setValue( this.getValue() );
 	},
 
 	destroy: function() {
@@ -239,11 +242,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			return false;
 		}
 		var initialValue = this.getInitialValue();
-		
+
 		var value = save ? this.getValue() : initialValue;
-		
-		this._inputElem.empty().remove(); // remove input interface
-		this._inputElem = null;
+
+		this._destroyInputElement(); // remove input interface
 		
 		this._isInEditMode = false;
 
@@ -256,10 +258,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			this._onInputRegistered(); // new input
 		}
 
-		$( this ).trigger( 'afterStopEditing' );
-
 		// any change at all compared to initial value?
 		return initialValue !== value;
+	},
+
+	/**
+	 * Destroys and removes input element (this._inputElem) from DOM and sets it to null.
+	 */
+	_destroyInputElement: function() {
+		this._inputElem.empty().remove();
+		this._inputElem = null;
 	},
 
 	/**
@@ -295,16 +303,31 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @return string
 	 */
 	getValue: function() {
-		var value = '';
-		if( this.isInEditMode() ) {
-			value = this._inputElem.val();
-			value = this.normalize( value );
-		} else {
-			value = this._getValueContainer().text();
+		var value = this.isInEditMode()
+			? this.normalize( this._getValue_inEditMode() )
+			: this._getValue_inNonEditMode();
 			// if already set, the value should be normalized already.
 			// if this is not the case in another inheriting interface, change it there BUT NOT HERE!
-		}
+
 		return value === null ? '' : value; // don't allow this to be null!
+	},
+
+	/**
+	 * Called by getValue() if the value has to be grabbed from the input interface in edit mode.
+	 *
+	 * @return string
+	 */
+	_getValue_inEditMode: function() {
+		return this._inputElem.val();
+	},
+
+	/**
+	 * Called by getValue() if the value has to be grabbed from the static DOM nodes.
+	 *
+	 * @return string
+	 */
+	_getValue_inNonEditMode: function() {
+		return this._getValueContainer().text();
 	},
 	
 	/**
@@ -337,6 +360,23 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	/**
+	 * Helper function to compares two values returned by getValue() or getInitialValue().
+	 *
+	 * @param String value1
+	 * @param String value2 [optional] if not given, this will check whether value1 is empty
+	 * @return bool true for equal/empty, false if not
+	 */
+	valueCompare: function( value1, value2 ) {
+		value1 = this.normalize( value1 );
+
+		if( typeof value2 == 'undefined' || value2 === null ) {
+			// check for empty value1
+			return value1 === '' || value1 === null;
+		}
+		return value1 === this.normalize( value2 );
+	},
+
+	/**
 	 * Called by setValue() if the value has to be injected into the input interface in edit mode.
 	 *
 	 * @param string value
@@ -363,15 +403,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * This will be done automatically when using setValue().
 	 * In case the given value is invalid, null will be returned.
 	 *
+	 * @param string value
 	 * @return string|null
 	 */
 	normalize: function( value ) {
 		return $.trim( value );
+		// NOTE: don't return null in case '' is given - FIXME: seems a bit off from the actual description!
 	},
 	
 	/**
 	 * Returns true if the interface is disabled.
-	 *
+	 * 
 	 * @return bool
 	 */
 	isDisabled: function() {
@@ -381,21 +423,21 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	/**
 	 * Disables or enables the element. Disabled is still visible but will be presented differently
 	 * and might behave differently in some cases.
-	 *
+	 * 
 	 * @param bool disable true for disabling, false for enabling the element
 	 * @return bool whether the state was changed or not.
 	 */
 	setDisabled: function( disable ) {
 		// TODO!
 		if( disable ) {
-			this._subject.addClass( this.UI_CLASS + '-disabled' );
+			this._subject.addClass( this.UI_CLASS + '-disabled' );			
 			if( this.isInEditMode() ) {
 				this._disableInputElement();
 			}
 		} else {
 			this._subject.removeClass( this.UI_CLASS + '-disabled' );
 			if( this.isInEditMode() ) {
-				this._enableInputelement();
+				this._enableInputElement();
 			}
 		}
 	},
@@ -404,14 +446,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		this._inputElem.attr( 'disabled', 'true' );
 	},
 	
-	_enableInputelement: function() {
+	_enableInputElement: function() {
 		this._inputElem.removeAttr( 'disabled' );
 	},
 	
 	/**
 	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
 	 * interface will not be made available on startEditing()
-	 *
+	 * 
 	 * @return bool
 	 */
 	isActive: function() {
@@ -422,10 +464,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * Sets the interface active or inactive. If inactive, the interface will not be made available
 	 * when startEditing() is called. If called to deactivate the interface but still in edit mode,
 	 * the edit mode will be closed without saving.
-	 *
+	 * 
 	 * @return bool whether the state was changed or not.
 	 */
-	setActive: function( active ) {
+	setActive: function( active ) {		
 		if( !active && this.isInEditMode() ) {
 			this.stopEditing( false );
 		}
@@ -451,7 +493,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 * @return bool
 	 */
 	isEmpty: function() {
-		return this.getValue() === '';
+		return this.valueCompare( this.getValue() );
 	},
 	
 	/**

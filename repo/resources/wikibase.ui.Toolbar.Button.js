@@ -34,11 +34,11 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 	
 	_initElem: function( text ) {
 		this._elem = $( '<a/>', {
-            'class': this.UI_CLASS,
-            text: text,
-            href: 'javascript:;',
-            click: jQuery.proxy( this.doAction, this )
-        } );
+			'class': this.UI_CLASS,
+			text: text,
+			href: 'javascript:;',
+			click: jQuery.proxy( this.doAction, this )
+		} );
 	},
 
 	destroy: function() {
@@ -50,16 +50,13 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 	
 	/**
 	 * Executes the action related to the button. Can't be done if button is disabled.
-	 * @return bool false if the action was cancelled by the onAction hook.
+	 * @return bool false if the button is disabled
 	 */
 	doAction: function() {
-        if(
-			this.isDisabled() // can't do action when disabled!
-			|| this.onAction !== null && this.onAction() === false // callback
-		) {
-            // cancel action
-            return false;
-        }
+		if( this.isDisabled() ) { // can't do action when disabled!
+			return false;
+		}
+		$( this ).trigger( 'action' );
 		return true;
 	},
 	
@@ -88,15 +85,6 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 		
 		// call prototypes disable function:
 		return window.wikibase.ui.Toolbar.Label.prototype.setDisabled.call( this, disable );
-	},
-	
-	///////////
-	// EVENTS:
-	///////////
+	}
 
-	/**
-	 * Callback called after the button was pressed (only if the button is enabled).
-	 * If the callback returns false, the action will be cancelled.
-	 */
-	onAction: null
 } );

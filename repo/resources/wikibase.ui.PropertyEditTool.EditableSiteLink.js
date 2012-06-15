@@ -9,6 +9,14 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  * @author Daniel Werner
+ *
+ * Events:
+ * -------
+ * afterStopEditing: Triggered after having left edit mode
+ *                   Parameters: (1) jQuery.event
+ *                               (2) save - bool - whether save action was triggered
+ *                               (3) wasPending - bool - whether value is a completely new value
+ *                   @see wikibase.ui.PropertyEditTool.EditableValue
  */
 "use strict";
 
@@ -132,14 +140,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing
 	 */
-	stopEditing: function( save, afterStopEditing ) {
+	stopEditing: function( save ) {
 		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call(
 			this,
 			save,
 			$.proxy( function() {
-				if( afterStopEditing ) {
-					afterStopEditing();
-				}
+				$( this ).triggerHandler( 'afterStopEditing',[save, this.isPending()] );
 				// make sure the interface for entering the sites id can't be edited after created
 				this._interfaces.siteId.setActive( this.isPending() );
 			}, this )
@@ -166,6 +172,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		} );
 		params.link = ( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) ? 'remove' : 'set';
 		delete( params.item ); // ? danwe: why is there an 'item' AND a 'link' param here?
+		delete( params.language );
 
 		return params;
 	},
@@ -173,7 +180,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
-	
+
+	/**
+	 * determines whether to keep an empty form when leaving edit mode
+	 * @see wikibase.ui.PropertyEditTool.EditableValue
+	 * @var bool
+	 */
+	preserveEmptyForm: false,
+
 	/**
 	 * Allows to specify an array with sites which should not be allowed to choose
 	 * @var wikibase.Site[]
