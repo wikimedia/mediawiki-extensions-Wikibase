@@ -390,6 +390,7 @@ $messages['dsb'] = array(
 	'wikibase-propertyedittool-counter' => '$1 {{PLURAL:$1|zapisk|zapiska|zapiski|zapiskow}}',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|zapisk|zapiska|zapiski|zapiskow}})',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Jadna gódnota hyšći njeskładowana|$1 gódnośe hyšći njeskładowanej|$1 gódnoty hyšći njeskładowane|$1 gódnotow hyšći njeskładowane}}',
 	'wikibase-sitelinksedittool-full' => 'Wótkaze k bokam su južo za wšykne znate sedła nastajone.',
 	'wikibase-aliases-label' => 'Teke znaty ako:',
 	'wikibase-tooltip-error-details' => 'Drobnostki',
@@ -397,6 +398,9 @@ $messages['dsb'] = array(
 	'special-itembytitle' => 'Zapisk pó titelu',
 	'special-itembylabel' => 'Zapisk pó pomjenjenju',
 	'special-createitem' => 'Nowy element napóraś',
+	'wikibase-api-aliases-invalid-list' => 'Wužyj jaden z parametrow "set", "add" a "remove".',
+	'wikibase-api-cant-edit' => 'Píszjawjony wužywaŕ njesmějo wobźěłaś.',
+	'wikibase-api-no-permissions' => 'Pśizjawjony wužywaŕ njama dosegajuce pšawa.',
 	'wikibase-api-invalid-contentmodel' => 'Wopśimjeśowy model za bok jo njepłaśiwy.',
 	'wikibase-api-not-recognized' => 'Směrnica se njespóznawa.',
 	'content-model-1001' => 'Datowy element z Wikibase',
@@ -577,6 +581,7 @@ $messages['fr'] = array(
 	'wikibase-api-label-not-found' => "Impossible de trouver une étiquette précédente de cette langue dans l'élément.",
 	'wikibase-api-description-not-found' => "Impossible de trouver une description antérieure de cette langue dans l'élément.",
 	'wikibase-api-wrong-class' => "Le contenu de la page trouvée n'est pas du bon type.",
+	'wikibase-api-session-failure' => 'La session en cours a échoué et vous devez rafraîchir la page et vous reconnecter.',
 	'content-model-1001' => 'Élément Wikibase',
 );
 
@@ -756,6 +761,7 @@ $messages['hsb'] = array(
 	'wikibase-api-label-not-found' => 'Njeje so žane prjedawše pomjenowanje za tutu rěč w elemenće namakało.',
 	'wikibase-api-description-not-found' => 'Njeje so žane prjedawše wopisanje za tutu rěč w elemenće namakało.',
 	'wikibase-api-wrong-class' => 'Wobsah na namakanej stronje korektny typ nima.',
+	'wikibase-api-session-failure' => 'Aktualne posedźenje je spadnyło a dyrbiš stronu aktualizować a so znowa přizjewić.',
 	'content-model-1001' => 'Datowy element Wikibase',
 );
 
@@ -870,6 +876,7 @@ $messages['is'] = array(
 	'wikibase-api-label-not-found' => 'Mistókst að finna fyrri merkimiða fyrir þetta tungumál í hlutnum.',
 	'wikibase-api-description-not-found' => 'Mistókst að finna fyrri lýsingu fyrir þetta tungumál í hlutnum.',
 	'wikibase-api-wrong-class' => 'Innihald síðunnar sem fannst er ekki af réttri gerð.',
+	'wikibase-api-session-failure' => 'Núverandi seta hefur mistekist. Þú þarft að endurhlaða síðuna og skrá þig inn aftur.',
 	'content-model-1001' => 'Wikibase hlutur',
 );
 
@@ -1234,6 +1241,7 @@ $messages['nl'] = array(
 	'wikibase-api-label-not-found' => 'Er is geen eerder label in deze taal gevonden in het item.',
 	'wikibase-api-description-not-found' => 'Er is geen eerdere beschrijving in deze taal gevonden in dit item.',
 	'wikibase-api-wrong-class' => 'De inhoud van de gevonden pagina is niet van het juiste type.',
+	'wikibase-api-session-failure' => 'De gegevens van de huidige sessie zijn niet langer geldig. Ververs de pagina en meld opnieuw aan.',
 	'content-model-1001' => 'Wikibaseitem',
 );
 
