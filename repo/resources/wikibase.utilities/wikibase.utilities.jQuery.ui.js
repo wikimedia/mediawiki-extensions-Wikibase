@@ -1,5 +1,5 @@
 /**
- * JavasSript for 'wikibase' extension
+ * JavaScript for 'wikibase' extension
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1

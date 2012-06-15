@@ -1,7 +1,7 @@
 /**
- * JavasSript for 'Wikibase' property edit tool toolbar groups
+ * JavaScript for 'Wikibase' property edit tool toolbar groups
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.ui.Toolbar.Group.js
  * @ingroup Wikibase
@@ -21,11 +21,11 @@ window.wikibase.ui.Toolbar.Group.prototype = Object.create( window.wikibase.ui.T
 $.extend( window.wikibase.ui.Toolbar.Group.prototype, {
 
 	UI_CLASS: 'wb-ui-toolbar-group',
-	
+
 	_init: function() {
 		window.wikibase.ui.Toolbar.prototype._init.call( this );
-	},	
-	
+	},
+
 	_drawToolbar: function() {
 		if( this._elem === null ) {
 			// create outer div for group only the first time
@@ -43,7 +43,7 @@ $.extend( window.wikibase.ui.Toolbar.Group.prototype, {
 	destroy: function() {
 		window.wikibase.ui.Toolbar.prototype.destroy.call( this );
 	},
-	
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////

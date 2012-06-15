@@ -1,7 +1,7 @@
 /**
- * JavasSript for a part of an editable property value for the input for a site id
+ * JavaScript for a part of an editable property value for the input for a site id
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js
  * @ingroup Wikibase
@@ -15,7 +15,7 @@
 /**
  * Serves the input interface to write a site code or to selectone. This will also validate whether
  * the site code is existing and will display the full site name if it is.
- * 
+ *
  * @param jQuery subject
  */
 window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface = function( subject ) {
@@ -25,8 +25,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = ne
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 
 	_init: function( subject ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.call( this, subject );
+		if( this._subject !== null ) {
+			// initializing twice should never happen, have to destroy first!
+			this.destroy();
+		}
+		this._subject = $( subject );
 		this._initSiteList();
+		this._subject = null; // necessary so original _init() won't destroy this
+
+		// NOTE: this isn't too nice since we don't call the parent _init() which would override the list we create
+		//       with _initSiteList() which we also can't call afterwards since the original _init() already requires
+		//       it when normalizing the initial value.
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 	},
 
 	_initInputElement: function() {
@@ -135,7 +145,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 */
 	_initSiteList: function() {
 		var siteList = [];
-		
+
 		// make sure to allow choosing the currently selected site id even if it is in the list of
 		// sites to ignore. This makes sense since it is selected already and it should be possible
 		// to select it again.
@@ -151,11 +161,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				ignoredSites.splice( ownSiteIndex, 1 );
 			}
 		}
-		
+
 		// find out which site ids should be selectable and add them as auto selct choice
 		for ( var siteId in window.wikibase.getSites() ) {
 			var site = window.wikibase.getSite( siteId );
-			
+
 			if( $.inArray( site, ignoredSites ) == -1 ) {
 				siteList.push( {
 					'label': site.getName() + ' (' + site.getId() + ')',
@@ -182,7 +192,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 
 	/**
 	 * Returns the selected sites site Id from currently specified value.
-	 * 
+	 *
 	 * @return string|null siteId or null if no valid selection has been made yet.
 	 */
 	getSelectedSiteId: function() {
@@ -229,7 +239,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				value == currentItem.site.getShortName().toLowerCase() ||
 				value == currentItem.value.toLowerCase() ||
 				value == currentItem.label.toLowerCase()
-				) {
+			) {
 				return currentItem.site.getId();
 			}
 		}
@@ -251,11 +261,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	_normalize_fromCurrentResults: function( value ) {
 		return this.getRestulSetMatch( value ); // null in case it doesn't exist!
 	},
-	
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
-	
+
 	/**
 	 * Allows to specify an array with sites which should not be allowed to choose
 	 */

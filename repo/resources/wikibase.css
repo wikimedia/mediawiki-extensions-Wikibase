@@ -44,24 +44,45 @@ wb-clear {
 
 /********** ALIASES **********/
 
-.wb-aliases {
-	font-size: 0.9em;
+.wb-aliases, .wb-aliases-empty {
+	font-size: 84%;
+}
+
+.wb-aliases-empty {
+	float: left;
 }
 
 .wb-aliases-label {
+	float: left;
 	font-weight: bold;
+	vertical-align: top;
+	margin-right: 1em;
+	margin-bottom: -3px; /* IE 7 would not wrap around directly but instead leave empty space underneath the label
+							for one line in some cases */
 }
 
-ul.wb-aliases-container {
+.wb-aliases div {
+	display: inline;
+}
+
+.wb-aliases ul {
 	display: inline;
 	margin: 0;
 	padding: 0;
+	line-height: inherit;
 }
 
-li.wb-aliases-alias {
-	margin-left: 1em;
+.wb-aliases li {
+	float: left;
+	margin-right: 1em;
 	display: inline;
 	list-style-type: none;
+	margin-top: 0 !important;
+	border: 1px solid #CCC;
+	padding: 0 12px 0 7px;
+	line-height: 136%;
+	margin-bottom: 2px;
+	background-color: #F9F9F9;
 }
 
 /********** /ALIASES **********/
@@ -69,10 +90,12 @@ li.wb-aliases-alias {
 
 /********** SITE LINKS TABLE **********/
 
-table.wb-sitelinks {
+table.wb-sitelinks, .wb-sitelinks-empty {
 	/*border:1px solid #5dc9f4;*/
-	margin-top:2em;
+	margin-top:4em;
+	clear:both;
 }
+
 table.wb-sitelinks th, table.wb-sitelinks td {
 	border-bottom: 1px solid #ccc;
 	margin: 0;

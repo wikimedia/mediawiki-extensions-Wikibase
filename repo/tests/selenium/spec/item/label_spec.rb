@@ -36,7 +36,8 @@ describe "Check functionality of edit label" do
       @current_page.apiCallWaitingMessage?.should be_true
       ajax_wait
       @current_page.wait_for_api_callback
-      
+      @current_page.editLabelLink?.should be_true
+
       @current_page.itemLabelSpan.should == changed_label
       @browser.refresh
       @current_page.wait_for_item_to_load
@@ -49,6 +50,7 @@ describe "Check functionality of edit label" do
       @current_page.apiCallWaitingMessage?.should be_true
       ajax_wait
       @current_page.wait_for_api_callback
+      @current_page.editLabelLink?.should be_true
       
       @current_page.itemLabelSpan.should == current_label
       @browser.refresh

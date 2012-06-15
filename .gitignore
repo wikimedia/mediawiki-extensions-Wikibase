@@ -4,3 +4,4 @@
 .*.swp
 .idea
 .project
+/repo/tests/selenium/configuration.yml

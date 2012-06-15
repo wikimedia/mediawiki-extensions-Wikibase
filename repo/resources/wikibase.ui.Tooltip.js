@@ -8,6 +8,13 @@
  *
  * @licence GNU GPL v2+
  * @author H. Snater
+ *
+ * Events:
+ * -------
+ * hide: Triggered after the tooltip was hidden from a previously visible state.
+ *                   Parameters: (1) jQuery.event
+ * clickOutside: Triggered when clicking outside of the tooltip's bubble
+ *                    Parameters: (1) jQuery.event
  */
 'use strict';
 
@@ -17,8 +24,6 @@
  * @param jQuery subject tooltip will be attached to this node
  * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
  * @param object tipsyConfig (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
- *
- * @event Hide called after the tooltip was hidden from a previously visible state.
  */
 window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig ) {
 	if( typeof subject != 'undefined' ) {
@@ -248,7 +253,7 @@ window.wikibase.ui.Tooltip.prototype = {
 					event.stopPropagation();
 				} );
 				$( window ).one( 'mousedown', $.proxy( function( event ) {
-					$( this ).triggerHandler( 'clickoutside' );
+					$( this ).triggerHandler( 'clickOutside' );
 				}, this ) );
 
 				// will lose inner click event on resizing (Details link) when not re-constructed on show
@@ -273,7 +278,7 @@ window.wikibase.ui.Tooltip.prototype = {
 			this._tipsy.$tip.off( 'click' );
 			this._tipsy.hide();
 			this._isVisible = false;
-			$( this ).triggerHandler( 'Hide' ); // call event
+			$( this ).triggerHandler( 'hide' ); // call event
 		}
 	},
 
@@ -367,7 +372,7 @@ window.wikibase.ui.Tooltip.ext = {
 		}
 
 		if ( this._tooltip._error != null ) {
-			$( this._tooltip ).one( 'clickoutside', $.proxy( function( event ) {
+			$( this._tooltip ).one( 'clickOutside', $.proxy( function( event ) {
 					this.removeTooltip();
 			}, this ) );
 		}

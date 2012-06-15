@@ -1,7 +1,7 @@
 /**
- * JavasSript for user interface related stuff of the 'Wikibase' extension.
+ * JavaScript for user interface related stuff of the 'Wikibase' extension.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.ui.js
  * @ingroup Wikibase
