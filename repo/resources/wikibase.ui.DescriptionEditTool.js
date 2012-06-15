@@ -1,7 +1,7 @@
 /**
- * JavasSript for 'Wikibase' edit form for a items description
+ * JavaScript for 'Wikibase' edit form for a items description
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.ui.DescriptionEditTool.js
  * @ingroup Wikibase
@@ -23,6 +23,8 @@ $.extend( window.wikibase.ui.DescriptionEditTool.prototype, {
 	/**
 	 * Initializes the edit form for the given h1 with 'firstHeading' class, basically the page title.
 	 * This should normally be called directly by the constructor.
+	 *
+	 * @see wikibase.ui.PropertyEditTool._init()
 	 */
 	_init: function( subject ) {
 		// call prototypes _init():
@@ -32,10 +34,10 @@ $.extend( window.wikibase.ui.DescriptionEditTool.prototype, {
 
 		this._editableValues[0]._interfaces[0].autoExpand = true;
 	},
-	
+
 	getEditableValuePrototype: function() {
 		return window.wikibase.ui.PropertyEditTool.EditableDescription;
 	},
-	
+
 	allowsMultipleValues: false
 } );

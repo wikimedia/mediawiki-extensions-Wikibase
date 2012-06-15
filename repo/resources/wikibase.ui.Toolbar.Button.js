@@ -1,19 +1,24 @@
 /**
- * JavasSript for 'Wikibase' property edit tool toolbar buttons
+ * JavaScript for 'Wikibase' property edit tool toolbar buttons
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.ui.Toolbar.Button.js
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ *
+ * Events:
+ * -------
+ * action: Triggered when the button action is triggered by clicking or hitting enter on it
+ *                   Parameters: (1) jQuery.event
  */
 "use strict";
 
 /**
  * Represents a button within a wikibase.ui.Toolbar toolbar
- * 
+ *
  * @param jQuery parent
  */
 window.wikibase.ui.Toolbar.Button = function( text ) {
@@ -31,14 +36,14 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 	 * @var jQuery
 	 */
 	_elem: null,
-	
+
 	_initElem: function( text ) {
 		this._elem = $( '<a/>', {
-            'class': this.UI_CLASS,
-            text: text,
-            href: 'javascript:;',
-            click: jQuery.proxy( this.doAction, this )
-        } );
+			'class': this.UI_CLASS,
+			text: text,
+			href: 'javascript:;',
+			click: jQuery.proxy( this.doAction, this )
+		} );
 	},
 
 	destroy: function() {
@@ -47,22 +52,19 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 			this._elem.remove();
 		}
 	},
-	
+
 	/**
 	 * Executes the action related to the button. Can't be done if button is disabled.
-	 * @return bool false if the action was cancelled by the onAction hook.
+	 * @return bool false if the button is disabled
 	 */
 	doAction: function() {
-        if(
-			this.isDisabled() // can't do action when disabled!
-			|| this.onAction !== null && this.onAction() === false // callback
-		) {
-            // cancel action
-            return false;
-        }
+		if( this.isDisabled() ) { // can't do action when disabled!
+			return false;
+		}
+		$( this ).triggerHandler( 'action' );
 		return true;
 	},
-	
+
 	/**
 	 * Disables or enables the button
 	 * @param bool disabled true for disabling, false for enabling the button.
@@ -74,7 +76,7 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 		}
 		var text = this.getContent();
 		var oldElem = this._elem;
-		
+
 		if( disable ) {
 			// create a disabled label instead of a link
 			window.wikibase.ui.Toolbar.Label.prototype._initElem.call( this, text );
@@ -82,21 +84,12 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 		else {
 			this._initElem( text );
 		}
-		
+
 		// replace old element with new one within dom
 		oldElem.replaceWith( this._elem );
-		
+
 		// call prototypes disable function:
 		return window.wikibase.ui.Toolbar.Label.prototype.setDisabled.call( this, disable );
-	},
-	
-	///////////
-	// EVENTS:
-	///////////
+	}
 
-	/**
-	 * Callback called after the button was pressed (only if the button is enabled).
-	 * If the callback returns false, the action will be cancelled.
-	 */
-	onAction: null
 } );

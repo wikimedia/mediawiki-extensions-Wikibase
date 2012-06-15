@@ -1,5 +1,5 @@
 /**
- * JavasSript for managing editable representation of site links.
+ * JavaScript for managing editable representation of site links.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
@@ -9,6 +9,14 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  * @author Daniel Werner
+ *
+ * Events:
+ * -------
+ * afterStopEditing: Triggered after having left edit mode
+ *                   Parameters: (1) jQuery.event
+ *                               (2) save - bool - whether save action was triggered
+ *                               (3) wasPending - bool - whether value is a completely new value
+ *                   @see wikibase.ui.PropertyEditTool.EditableValue
  */
 "use strict";
 
@@ -26,7 +34,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 * @var wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface
 	 */
 	siteIdInterface: null,
-	
+
 	/**
 	 * The part of the editable site link representing the link to the site
 	 * @var wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface
@@ -39,12 +47,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 */
 	_currentResults: null,
 
-	_initToolbar: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._initToolbar.call( this );
-		this._toolbar.editGroup.displayRemoveButton = true;
-		this._toolbar.draw();
-	},
-
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue._initInterfaces
+	 */
 	_initInterfaces: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._initInterfaces.call( this );
 		// make interfaces available for public since they contain interesting data:
@@ -52,11 +57,17 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		this.pageNameInterface = this._interfaces.pageName;
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue._buildInterfaces
+	 *
+	 * @param jQuery subject
+	 * @return wikibase.ui.PropertyEditTool.EditableValue.Interface[]
+	 */
 	_buildInterfaces: function( subject ) {
 		var interfaces = [];
 		var tableCells = subject.children( 'td' );
 		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
-		
+
 		// interface for choosing the source site:
 		interfaces.siteId = new ev.SiteIdInterface();
 		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
@@ -75,18 +86,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			namespace: 0,
 			suggest: ''
 		};
-		
+
 		interfaces.push( interfaces.siteId );
 		interfaces.push( interfaces.pageName );
 		return interfaces;
 	},
-	
+
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue._interfaceHandler_onInputRegistered
+	 *
+	 * @param relatedInterface wikibase.ui.PropertyEditTool.EditableValue.Interface
+	 */
 	_interfaceHandler_onInputRegistered: function( relatedInterface ) {
 		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
-		
+
 		var idInterface = this._interfaces.siteId;
 		var pageInterface = this._interfaces.pageName;
-		
+
 		// set up necessary communication between both interfaces:
 		var site = idInterface.getSelectedSite();
 		if( site !== pageInterface.getSite() && site !== null ) {
@@ -94,52 +110,58 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 			//        is not really possible with the current 'event' system since this function is
 			//        registered there.
 			pageInterface.setSite( site );
-			
+
 			var siteId = idInterface.getSelectedSiteId();
-			
+
 			// change class names:
 			this._subject.removeClassByRegex( /^wb-sitelinks-.+/ );
 			this._subject.addClass( 'wb-sitelinks-' + siteId );
-			
+
 			idInterface._getValueContainer().removeClassByRegex( /^wb-sitelinks-site-.+/ );
 			idInterface._getValueContainer().addClass( 'wb-sitelinks-site wb-sitelinks-site-' + siteId );
-			
+
 			pageInterface._getValueContainer().removeClassByRegex( /^wb-sitelinks-link-.+/ );
 			pageInterface._getValueContainer().addClass( 'wb-sitelinks-link wb-sitelinks-link-' + siteId );
 		}
-		
+
 		// only enable site page selector if there is a valid site id selected
 		pageInterface.setDisabled( ! idInterface.isValid() );
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue._getToolbarParent
+	 *
+	 * @return jQuery node the toolbar should be appended to
+	 */
 	_getToolbarParent: function() {
 		// append toolbar to new td
 		this.__toolbarParent = this.__toolbarParent || $( '<td/>' ).appendTo( this._subject );
 		return this.__toolbarParent;
 	},
-	
 
-	
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.startEditing
+	 *
+	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
 		// set ignored site links again since they could have changed
 		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
 		return window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
 	},
-	
+
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.stopEditing
+	 *
+	 * @param bool save whether to save the new user given value
+	 * @return bool whether the value has changed (or was removed) in which case the changes are on their way to the API
 	 */
-	stopEditing: function( save, afterStopEditing ) {
+	stopEditing: function( save ) {
 		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call(
 			this,
 			save,
 			$.proxy( function() {
-				if( afterStopEditing ) {
-					afterStopEditing();
-				}
+				$( this ).triggerHandler( 'afterStopEditing',[save, this.isPending()] );
 				// make sure the interface for entering the sites id can't be edited after created
 				this._interfaces.siteId.setActive( this.isPending() );
 			}, this )
@@ -148,14 +170,19 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getInputHelpMessage
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.getInputHelpMessage
+	 *
+	 * @return string tooltip help message
 	 */
 	getInputHelpMessage: function() {
 		return mw.msg( 'wikibase-sitelinks-input-help-message' );
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.getApiCallParams
+	 *
+	 * @param number apiAction
+	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function( apiAction ) {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
@@ -166,14 +193,22 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		} );
 		params.link = ( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) ? 'remove' : 'set';
 		delete( params.item ); // ? danwe: why is there an 'item' AND a 'link' param here?
+		delete( params.language );
 
 		return params;
 	},
-	
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
-	
+
+	/**
+	 * determines whether to keep an empty form when leaving edit mode
+	 * @see wikibase.ui.PropertyEditTool.EditableValue
+	 * @var bool
+	 */
+	preserveEmptyForm: false,
+
 	/**
 	 * Allows to specify an array with sites which should not be allowed to choose
 	 * @var wikibase.Site[]

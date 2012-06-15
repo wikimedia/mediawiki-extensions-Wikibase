@@ -1,5 +1,5 @@
 /**
- * JavasSript for a part of an editable property value offering auto complete functionality
+ * JavaScript for a part of an editable property value offering auto complete functionality
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
@@ -42,8 +42,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	_lastKeyDown: null,
 
 	_init: function( subject ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 		this._currentResults = [];
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 	},
 
 	/**
@@ -262,20 +262,26 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 */
 	_normalize_fromCurrentResults: function( value ) {
 		var match = this.getRestulSetMatch( value );
-		
+
 		return ( match === null )
 			? value // not found, return string "unnormalized" but don't return null since it could still be valid!
 			: match;
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._disableInputElement
+	 */
 	_disableInputElement: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._disableInputElement.call( this );
 		this._inputElem.autocomplete( "disable" );
 		this._inputElem.autocomplete( "close" );
 	},
 
-	_enableInputelement: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputelement.call( this );
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._enableInputElement
+	 */
+	_enableInputElement: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputElement.call( this );
 		this._inputElem.autocomplete( "enable" );
 	},
 

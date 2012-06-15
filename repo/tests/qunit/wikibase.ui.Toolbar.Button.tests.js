@@ -37,7 +37,9 @@
 
 	test( 'button action', function() {
 
-		this.button.onAction = function() { this.__test = true };
+		$( this.button ).on( 'action', function( event ) {
+			this.__test = true;
+		} );
 
 		equal(
 			this.button.doAction(),
@@ -49,22 +51,6 @@
 			this.button.__test,
 			true,
 			'check whether custom button action was executed'
-		);
-
-		this.button.onAction = function() { return false };
-
-		equal(
-			this.button.doAction(),
-			false,
-			'execute button action but action returns false, not executed'
-		);
-
-		this.button.onAction = function() { return true };
-
-		equal(
-			this.button.doAction(),
-			true,
-			'button action executed, onAction returned true'
 		);
 
 	} );

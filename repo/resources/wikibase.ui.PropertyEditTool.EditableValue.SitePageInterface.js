@@ -1,7 +1,7 @@
 /**
- * JavasSript for a part of an editable property value
+ * JavaScript for a part of an editable property value
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js
  * @ingroup Wikibase
@@ -15,7 +15,7 @@
 /**
  * Serves the input interface to choose a wiki page from some MediaWiki installation as part of an
  * editable value
- * 
+ *
  * @param jQuery subject
  */
 window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface = function( subject, site ) {
@@ -31,10 +31,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 	 * @var wikibase.Site
 	 */
 	_site: null,
-	
+
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._init()
-	 * 
+	 *
 	 * @param site wikibase.Site as source for the page suggestions
 	 */
 	_init: function( subject, site ) {
@@ -43,7 +43,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 			this.setSite( site );
 		}
 	},
-	
+
 	/**
 	 * Allows to set the site, the pages should be selected from.
 	 *
@@ -53,14 +53,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 		if( this._site !== null && this._site.getId() === site.getId() ) {
 			return; // no change
 		}
-		
+
 		this.url = site.getApi();
 		this._site = site;
-				
+
 		this._currentResults = []; // empty current suggestions...
 		if( this.isInEditMode() ) {
 			this._inputElem.autocomplete( "search" ); // ...and get new suggestions
-			
+
 			/* // TODO: this should be done after "search" is finished, apparently, there is no callback for that currently...
 			if( ! this.isValid() ) {
 				this.setValue( '' );
@@ -68,7 +68,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 			*/
 		}
 	},
-	
+
 	/**
 	 * Returns the site set to select pages from.
 	 *
