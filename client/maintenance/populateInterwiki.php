@@ -3,7 +3,7 @@
  * @author	Katie Filbert
  */
 
-require_once( dirname( __FILE__ ) . '../../../../maintenance/Maintenance.php' );
+require_once( dirname( __FILE__ ) . '../../../../../maintenance/Maintenance.php' );
 
 class PopulateInterwiki extends Maintenance {
 
