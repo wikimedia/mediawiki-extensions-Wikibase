@@ -1,0 +1,77 @@
+ul.tagadata {
+	padding: 1px 5px;
+	overflow: auto;
+	margin-left: inherit; /* usually we don't want the regular ul margins. */
+	margin-right: inherit;
+	border: none;
+}
+ul.tagadata li {
+	display: block;
+	float: left;
+	margin: 2px 5px 2px 0;
+}
+
+ul.tagadata li.tagadata-choice {
+	padding: 0;
+	position: relative;
+	line-height: inherit;
+}
+
+ul.tagadata .tagadata-label-clickable {
+	cursor: pointer;
+}
+ul.tagadata li.tagadata-choice .tagadata-close {
+	cursor: pointer;
+	position: absolute;
+	right: .1em;
+	top: 50%;
+	margin-top: -8px;
+}
+
+/* used for some custom themes that don't need image icons */
+ul.tagadata li.tagadata-choice .tagadata-close .text-icon {
+	display: none;
+}
+
+ul.tagadata li.tagadata-choice .tagadata-label-text { /* the input or pure text */
+	margin: 0;
+	padding: .4em 4px .4em 6px;
+	display: block;
+}
+
+ul.tagadata li.tagadata-choice .tagadata-label input {
+	-moz-box-sizing:    border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:         border-box;
+
+	border: none;
+	width: inherit;
+	background: transparent;
+	outline: none;
+}
+
+ul.tagadata li.tagadata-choice .tagadata-label input:focus,
+ul.tagadata li.tagadata-choice-empty input {
+	background-color: white!important;
+}
+
+ul.tagadata li.tagadata-choice-empty .tagadata-close {
+	display: none;
+}
+
+ul.tagadata li.tagadata-choice-existing {}
+
+.wb-ui-propertyedittool-editablevaluelistinterface li.tagadata-choice-modified .tagadata-label-text {
+	/* highlight new tags since initialization */
+	text-decoration: underline;
+}
+
+ul.tagadata li.tagadata-choice-empty .tagadata-label-text, /* don't underline when only placeholder is displayed */
+ul.tagadata li.tagadata-choice:last-of-type.tagadata-choice-equal .tagadata-label-text /* don't underline when conflict */ {
+	text-decoration:none;
+}
+
+ul.tagadata li.tagadata-choice-equal {
+	color: red;
+	border-color: red;
+}

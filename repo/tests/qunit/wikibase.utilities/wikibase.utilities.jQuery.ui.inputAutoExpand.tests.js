@@ -1,5 +1,5 @@
 /**
- * QUnit tests for Wikibase inputAutoExpand jQuery plugin
+ * QUnit tests for Wikibase 'inputAutoExpand' jQuery plugin
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
@@ -33,7 +33,7 @@
 			this.subject.$insert = function( text ) {
 				this.val( text );
 				return this.$trigger();
-			}
+			};
 			/**
 			 * Triggers the expand() of the AutoExpandInput
 			 *
@@ -42,7 +42,7 @@
 			this.subject.$trigger = function() {
 				var autoExpand = this.$getObj();
 				return autoExpand.expand();
-			}
+			};
 			/**
 			 * Returns the input boxes associated AutoExpandInput
 			 *
@@ -50,7 +50,7 @@
 			 */
 			this.subject.$getObj = function() {
 				return this.data( 'AutoExpandInput' );
-			}
+			};
 		},
 		teardown: function() {
 
