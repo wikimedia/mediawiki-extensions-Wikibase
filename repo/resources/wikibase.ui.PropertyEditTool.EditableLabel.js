@@ -13,7 +13,7 @@
 "use strict";
 
 /**
- * Serves the input interface for an item label, extends EditableValue.
+ * Serves the input interface for an items label, extends EditableValue.
  * 
  * @param jQuery subject
  */
@@ -23,7 +23,7 @@ window.wikibase.ui.PropertyEditTool.EditableLabel = function( subject ) {
 window.wikibase.ui.PropertyEditTool.EditableLabel.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 
-	API_KEY: 'labels',
+	API_VALUE_KEY: 'labels',
 
 	_buildInterfaces: function( subject ) {
 		var interfaces = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInterfaces.call( this, subject );
@@ -54,7 +54,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
 		return $.extend( params, {
 			action: "wbsetlanguageattribute",
-			language: mw.config.get( 'wgUserLanguage' ),
 			label: this.getValue().toString()
 		} );
 	}

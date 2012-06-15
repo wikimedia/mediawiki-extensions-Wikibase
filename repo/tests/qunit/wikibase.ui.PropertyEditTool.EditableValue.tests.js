@@ -268,7 +268,8 @@
 			'cancelled editing'
 		);
 
-		this.editableValue.remove( true );
+		this.editableValue.preserveEmptyForm = true;
+		this.editableValue.remove();
 
 		equal(
 			this.editableValue.getValue()[0],
@@ -276,7 +277,8 @@
 			'emptied input interface resetting to default value and preserving the input interface'
 		);
 
-		this.editableValue.remove( false );
+		this.editableValue.preserveEmptyForm = false;
+		this.editableValue.remove();
 
 		ok(
 			this.editableValue._toolbar.editGroup.btnRemove.getTooltip() instanceof window.wikibase.ui.Tooltip,

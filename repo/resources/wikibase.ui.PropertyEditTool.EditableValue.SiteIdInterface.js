@@ -25,8 +25,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = ne
 $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
 
 	_init: function( subject ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.call( this, subject );
+		if( this._subject !== null ) {
+			// initializing twice should never happen, have to destroy first!
+			this.destroy();
+		}
+		this._subject = $( subject );
 		this._initSiteList();
+		this._subject = null; // necessary so original _init() won't destroy this
+
+		// NOTE: this isn't too nice since we don't call the parent _init() which would override the list we create
+		//       with _initSiteList() which we also can't call afterwards since the original _init() already requires
+		//       it when normalizing the inittial value.
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 	},
 
 	_initInputElement: function() {
@@ -229,7 +239,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				value == currentItem.site.getShortName().toLowerCase() ||
 				value == currentItem.value.toLowerCase() ||
 				value == currentItem.label.toLowerCase()
-				) {
+			) {
 				return currentItem.site.getId();
 			}
 		}

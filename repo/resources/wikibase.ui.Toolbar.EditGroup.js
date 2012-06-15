@@ -26,7 +26,7 @@ window.wikibase.ui.Toolbar.EditGroup = function( editableValue ) {
 };
 window.wikibase.ui.Toolbar.EditGroup.prototype = Object.create( window.wikibase.ui.Toolbar.Group.prototype );
 $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
-	
+
 	/**
 	 * @var window.wikibase.ui.Toolbar.Button
 	 */
@@ -93,56 +93,33 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		var button = window.wikibase.ui.Toolbar.Button;
 		
 		this.btnEdit = new button( mw.msg( 'wikibase-edit' ) );
-		this.btnEdit.onAction = this._editActionHandler();
+		$( this.btnEdit ).on( 'action', $.proxy( function( event ) {
+			this._editActionHandler();
+		}, this ) );
 		
 		this.btnCancel = new button( mw.msg( 'wikibase-cancel' ) );
-		this.btnCancel.onAction = this._cancelActionHandler();
+		$( this.btnCancel ).on( 'action', $.proxy( function( event ) {
+			this._cancelActionHandler();
+		}, this ) );
 
 		this.btnSave = new button( mw.msg( 'wikibase-save' ) );
-		this.btnSave.onAction = this._saveActionHandler();
+		$( this.btnSave ).on( 'action', $.proxy( function( event ) {
+			this._saveActionHandler();
+		}, this ) );
 
 		// add 'edit' button only for now:
 		this.innerGroup.addElement( this.btnEdit );
 
 		// initialize remove button:
 		this.btnRemove = new button( mw.msg( 'wikibase-remove' ) );
-		this.btnRemove.onAction = this._removeActionHandler();
+		$( this.btnRemove ).on( 'action', $.proxy( function( event ) {
+			this._removeActionHandler();
+		}, this ) );
 		if ( this.displayRemoveButton ) {
 			this.innerGroup.addElement( this.btnRemove );
 		}
-	},
-	
-	_editActionHandler: function() {
-		return $.proxy( function(){
-			this.addElement( this.tooltipAnchor, 0 ); // add tooltip before edit commands
-			this.innerGroup.removeElement( this.btnEdit );
-			if ( this.displayRemoveButton ) {
-				this.innerGroup.removeElement( this.btnRemove );
-			}
-			this.innerGroup.addElement( this.btnSave );
-			this.innerGroup.addElement( this.btnCancel );
-			
-			this._editableValue.startEditing();
-		}, this );
-	},
-	_cancelActionHandler: function() {
-		return $.proxy( function() {
-			this._leaveAction( false );
-		}, this );
-	},
-	_saveActionHandler: function() {
-		return $.proxy( function() {
-			this._leaveAction( true );
-		}, this );
-	},
-	_removeActionHandler: function() {
-		return $.proxy( function() {
-			this._editableValue.remove();
-		}, this );
-	},
-	
-	_leaveAction: function( save ) {
-		this._editableValue.stopEditing( save, $.proxy( function() {
+
+		$( this._editableValue ).on( 'afterSaveComplete', $.proxy( function( event ) {
 			this.tooltipAnchor.getTooltip().hide();
 			this.removeElement( this.tooltipAnchor );
 			this.innerGroup.removeElement( this.btnSave );
@@ -156,6 +133,31 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 			}
 		}, this ) );
 
+	},
+	
+	_editActionHandler: function() {
+		this.addElement( this.tooltipAnchor, 0 ); // add tooltip before edit commands
+		this.innerGroup.removeElement( this.btnEdit );
+		if ( this.displayRemoveButton ) {
+			this.innerGroup.removeElement( this.btnRemove );
+		}
+		this.innerGroup.addElement( this.btnSave );
+		this.innerGroup.addElement( this.btnCancel );
+
+		this._editableValue.startEditing();
+	},
+	_cancelActionHandler: function() {
+		this._leaveAction( false );
+	},
+	_saveActionHandler: function() {
+		this._leaveAction( true );
+	},
+	_removeActionHandler: function() {
+		this._editableValue.remove();
+	},
+	
+	_leaveAction: function( save ) {
+		this._editableValue.stopEditing( save );
 	},
 
 	destroy: function() {

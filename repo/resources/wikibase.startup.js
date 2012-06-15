@@ -11,11 +11,11 @@
  */
 "use strict";
 ( function( $ ) {
-	
+
 	// add an edit tool for the main label. This will be integrated into the heading nicely:
 	new window.wikibase.ui.LabelEditTool( $( '#firstHeading' ) );
-	
-	// add an edit tool for all properties in the data grid view:
+
+	// add an edit tool for all properties in the data view:
 	$( 'body' )
 	.find( '.wb-property-container' )
 	.each( function() {
@@ -26,11 +26,24 @@
 			new window.wikibase.ui.PropertyEditTool( this );
 		}
 	} );
-	
-	// edit tool for site links:
+
 	if( mw.config.get( 'wbItemId' ) !== null ) {
+		// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
+		// needed for running the page without JS
+		$( '.wb-aliases-empty' )
+		.each( function() {
+			$( this ).replaceWith( wikibase.ui.AliasesEditTool.getEmptyStructure() );
+		} );
+
+		// edit tool for aliases:
+		$( 'body' )
+		.find( '.wb-aliases' )
+		.each( function() {
+			new window.wikibase.ui.AliasesEditTool( this );
+		} );
+
 		// if there are no site links yet, we have to create the table for it to initialize the ui
-		// without css this is not required, so we build it here manually
+		// without JS this is not required, so we build it here manually
 		$( '.wb-sitelinks-empty' )
 		.each( function() {
 			$( this ).replaceWith( window.wikibase.ui.SiteLinksEditTool.getEmptyStructure() );
@@ -46,7 +59,7 @@
 	}
 
 
-	if( window.location.href.match( /[\\?&]wbitemcreated=yes/ ) ) {
+	if( mw.util.getParamValue( 'wbitemcreated' ) == 'yes' ) {
 		// Display notification if the item was created on 'Special:CreateItem' and we just redirected from there
 		// TODO: the parameter should be removed somehow, otherwise on a page reload it will still appear
 		var notification = $( '<div>', {
@@ -58,7 +71,7 @@
 				'@@@@' // link to 'Special:CreateItem'
 			)
 		} ).hide();
-               
+
 		notification.html( notification.text().replace(
 			"@@@@", '<a href="' + ( new mw.Title( 'Special:CreateItem' ) ).getUrl() + '">' + mw.msg( 'special-createitem' ) + '</a>'
 		) );
@@ -69,5 +82,7 @@
 			notification.prependTo( $( '#content' ) ).fadeIn();
 		}
 	}
+
+
 	
 } )( jQuery );

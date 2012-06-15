@@ -42,8 +42,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	_lastKeyDown: null,
 
 	_init: function( subject ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 		this._currentResults = [];
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 	},
 
 	/**
@@ -274,8 +274,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 		this._inputElem.autocomplete( "close" );
 	},
 
-	_enableInputelement: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputelement.call( this );
+	_enableInputElement: function() {
+		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputElement.call( this );
 		this._inputElem.autocomplete( "enable" );
 	},
 
