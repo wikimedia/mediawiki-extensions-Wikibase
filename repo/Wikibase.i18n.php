@@ -958,7 +958,7 @@ $messages['it'] = array(
  * @author Shirayuki
  */
 $messages['ja'] = array(
-	'wikibase-desc' => '構造化されたデータリポジトリー',
+	'wikibase-desc' => '構造化されたデータリポジトリ',
 	'wikibase-edit' => '編集',
 	'wikibase-save' => '保存',
 	'wikibase-cancel' => 'キャンセル',
