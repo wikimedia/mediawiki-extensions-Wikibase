@@ -64,9 +64,11 @@ class ApiGetItemId extends Api {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
+		$globalIds = Sites::singleton()->getGlobalIdentifiers();
+
 		return array_merge( parent::getAllowedParams(), array(
 			'site' => array(
-				ApiBase::PARAM_TYPE => Sites::singleton()->getIdentifiers(),
+				ApiBase::PARAM_TYPE => $globalIds,
 				//ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true
 			),

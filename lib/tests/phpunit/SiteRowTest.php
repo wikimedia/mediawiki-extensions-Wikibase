@@ -4,7 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\Site as Site;
 
 /**
- * Tests for the Wikibase\Site class.
+ * Tests for the Wikibase\SiteRow class.
  *
  * @file
  * @since 0.1
@@ -18,14 +18,13 @@ use Wikibase\Site as Site;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteTest extends \MediaWikiTestCase {
+class SiteRowTest extends \MediaWikiTestCase {
 
 	public function constructorProvider() {
 		return array(
-			array( 'en', 'wikipedia', 'https://en.wikipedia.org', '/wiki/$1' ),
-			array( 'en', 'wikipedia', 'https://en.wikipedia.org', '/wiki/$1', 'mediawiki' ),
-			array( 'en', 'wikipedia', 'https://en.wikipedia.org', '/wiki/$1', 'mediawiki', false ),
-			array( 'en', 'wikipedia', 'https://en.wikipedia.org', '/wiki/$1', 'mediawiki', '/w/' ),
+			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1' ),
+			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1', 9001 ),
+			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1', 9001, '/w/' ),
 		);
 	}
 
@@ -35,14 +34,28 @@ class SiteTest extends \MediaWikiTestCase {
 	public function testConstructor() {
 		$args = func_get_args();
 
-		$reflect = new \ReflectionClass( '\Wikibase\Site' );
-		$site = $reflect->newInstanceArgs( $args );
+		$fields = array(
+			'global_key' => $args[0],
+			'group' => $args[1],
+			'url' => $args[2],
+			'page_path' => $args[3],
+		);
+
+		if ( array_key_exists( 4, $args ) ) {
+			$fields['type'] = $args[4];
+		}
+
+		if ( array_key_exists( 5, $args ) ) {
+			$fields['file_path'] = $args[5];
+		}
+
+		$site = \Wikibase\SitesTable::singleton()->newFromArray( $fields );
 
 		$functionMap = array(
-			'getId',
+			'getGlobalId',
 			'getGroup',
 			'getUrl',
-			'getRelativePageUrlPath',
+			'getRelativePagePath',
 			'getType',
 			'getRelativeFilePath',
 		);
@@ -53,7 +66,7 @@ class SiteTest extends \MediaWikiTestCase {
 			}
 		}
 
-		$this->assertEquals( $args[2] . $args[3], $site->getPageUrlPath() );
+		$this->assertEquals( $args[2] . $args[3], $site->getPagePath() );
 	}
 
 	public function pathProvider() {
@@ -71,8 +84,15 @@ class SiteTest extends \MediaWikiTestCase {
 	 * @dataProvider pathProvider
 	 */
 	public function testGetPath( $url, $filePath, $pathArgument, $expected ) {
-		$site = new Site( 'en', 'wikipedia', $url, '', 'unknown', $filePath );
-		$this->assertEquals( $expected, $site->getPath( $pathArgument ) );
+		$site = \Wikibase\SitesTable::singleton()->newFromArray( array(
+			'global_key' => 'en',
+			'group' => 'wikipedia',
+			'url' => $url,
+			'type' => 'unknown',
+			'file_path' => $filePath,
+			'page_path' => '',
+		) );
+		$this->assertEquals( $expected, $site->getFilePath( $pathArgument ) );
 	}
 
 	public function pageUrlProvider() {
@@ -90,9 +110,17 @@ class SiteTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider pageUrlProvider
 	 */
-	public function testGetPageUrl( $url, $urlPath, $pageName, $expected ) {
-		$site = new Site( 'en', 'wikipedia', $url, $urlPath, 'unknown' );
-		$this->assertEquals( $expected, $site->getPageUrl( $pageName ) );
+	public function testGetPagePath( $url, $urlPath, $pageName, $expected ) {
+		$site = \Wikibase\SitesTable::singleton()->newFromArray( array(
+			'global_key' => 'en',
+			'group' => 'wikipedia',
+			'url' => $url,
+			'type' => 'unknown',
+			'file_path' => '',
+			'page_path' => $urlPath,
+		) );
+
+		$this->assertEquals( $expected, $site->getPagePath( $pageName ) );
 	}
 
 }

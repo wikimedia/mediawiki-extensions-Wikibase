@@ -33,4 +33,98 @@ final class Utils {
 		return $languageCodes;
 	}
 
+	/**
+	 * Temporary helper function.
+	 * Inserts some sites into the sites table.
+	 *
+	 * @since 0.1
+	 */
+	public static function insertTemporarySites() {
+		$sitesTable = \Wikibase\SitesTable::singleton();
+
+		$sitesTable->newFromArray( array(
+			'global_key' => 'enwiki',
+			'type' => 0,
+			'group' => 0,
+			'url' => 'https://en.wikipedia.org',
+			'page_path' => '/wiki/$1',
+			'file_path' => '/w/',
+			'local_key' => 'en',
+			'link_inline' => true,
+			'link_navigation' => true,
+			'forward' => true,
+			'allow_transclusion' => false,
+		) )->save();
+
+		$sitesTable->newFromArray( array(
+			'global_key' => 'dewiki',
+			'type' => 0,
+			'group' => 0,
+			'url' => 'https://de.wikipedia.org',
+			'page_path' => '/wiki/$1',
+			'file_path' => '/w/',
+			'local_key' => 'de',
+			'link_inline' => true,
+			'link_navigation' => true,
+			'forward' => true,
+			'allow_transclusion' => false,
+		) )->save();
+
+		$sitesTable->newFromArray( array(
+			'global_key' => 'nlwiki',
+			'type' => 0,
+			'group' => 0,
+			'url' => 'https://nl.wikipedia.org',
+			'page_path' => '/wiki/$1',
+			'file_path' => '/w/',
+			'local_key' => 'nl',
+			'link_inline' => true,
+			'link_navigation' => true,
+			'forward' => true,
+			'allow_transclusion' => false,
+		) )->save();
+
+		$sitesTable->newFromArray( array(
+			'global_key' => 'svwiki',
+			'type' => 0,
+			'group' => 0,
+			'url' => 'https://sv.wikipedia.org',
+			'page_path' => '/wiki/$1',
+			'file_path' => '/w/',
+			'local_key' => 'sv',
+			'link_inline' => true,
+			'link_navigation' => true,
+			'forward' => true,
+			'allow_transclusion' => false,
+		) )->save();
+
+		$sitesTable->newFromArray( array(
+			'global_key' => 'nnwiki',
+			'type' => 0,
+			'group' => 0,
+			'url' => 'https://nn.wikipedia.org',
+			'page_path' => '/wiki/$1',
+			'file_path' => '/w/',
+			'local_key' => 'nn',
+			'link_inline' => true,
+			'link_navigation' => true,
+			'forward' => true,
+			'allow_transclusion' => false,
+		) )->save();
+
+		$sitesTable->newFromArray( array(
+			'global_key' => 'enwiktionary',
+			'type' => 0,
+			'group' => 1,
+			'url' => 'https://en.wiktionary.org',
+			'page_path' => '/wiki/$1',
+			'file_path' => '/w/',
+			'local_key' => 'enwiktionary',
+			'link_inline' => true,
+			'link_navigation' => true,
+			'forward' => true,
+			'allow_transclusion' => false,
+		) )->save();
+	}
+
 }

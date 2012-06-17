@@ -54,6 +54,10 @@ final class WikibaseLibHooks {
 //			dirname( __FILE__ ) . '/sql/DropInterwiki.sql'
 //		);
 
+		if ( \Wikibase\SitesTable::singleton()->count() === 0 ) {
+			\Wikibase\Utils::insertTemporarySites();
+		}
+
 		return true;
 	}
 
@@ -74,7 +78,7 @@ final class WikibaseLibHooks {
 			'ItemNewEmpty',
 			'ItemNewFromArray',
 			'Item',
-			'Site',
+			'SiteRow',
 			'Sites',
 
 			'changes/DiffChange',

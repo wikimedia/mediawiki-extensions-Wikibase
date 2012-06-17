@@ -4,99 +4,52 @@ namespace Wikibase;
 use MWException;
 
 /**
- * Interface to access sitelink related configuration. Right now this is read
- * from the configuration in WBSettings, but later on we might get this from the db.
+ * Represents the site configuration of a wiki.
+ * Holds a list of sites (ie SiteList) and takes care
+ * of retrieving and caching site information when appropriate.
  *
  * @since 0.1
  *
  * @file
  * @ingroup Wikibase
+ * @ingroup Sites
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Sites implements \SeekableIterator {
+class Sites {
 
 	/**
-	 * Holds the sites with the keys being their identifiers and the
-	 * values being arrays with url, filepath, urlpath, type and group keys.
-	 * @var array
+	 * @since 0.1
+	 * @var SiteList
 	 */
 	protected $sites;
 
 	/**
-	 * Holds the group names (keys) pointing to an array with the identifiers of the sites they contain.
+	 * Cache for requests to sites that where not found and could thus not be added to the $sites field.
+	 * @since 0.1
 	 * @var array
 	 */
-	protected $groups;
+	protected $nonExistingSites = array(
+		'local_key' => array(),
+		'global_key' => array(),
+	);
 
 	/**
-	 * Position of the iterator in the sites field.
-	 * @var string
+	 * Keeps track if all sites where fetched for caching purpouses.
+	 *
+	 * @since 0.1
+	 * @var boolean
 	 */
-	protected $key;
+	protected $gotAllSites = false;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
-	 *
-	 * @param array $sites
-	 * @param array $groups
 	 */
-	protected function __construct( array $sites, array $groups ) {
-		$this->sites = $sites;
-		$this->groups = $groups;
-		$this->rewind();
-	}
-
-	/**
-	 *
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $siteGroups
-	 * @param string $globalPathDefault
-	 * @param string $globalUrlDefault
-	 * @param string $globalTypeDefault
-	 *
-	 * @return Sites
-	 */
-	protected static function newFromConfig( array $siteGroups, $globalPathDefault, $globalUrlDefault, $globalTypeDefault ) {
-		$groups = array();
-		$sites = array();
-
-		foreach ( $siteGroups as $groupName => $siteGroup ) {
-			$groups[$groupName] = array_keys( $siteGroup['sites'] );
-
-			$filePathDefault = array_key_exists( 'defaultSiteFilePath', $siteGroup ) ? $siteGroup['defaultSiteFilePath'] : $globalPathDefault;
-			$urlPathDefault = array_key_exists( 'defaultSiteUrlPath', $siteGroup ) ? $siteGroup['defaultSiteUrlPath'] : $globalUrlDefault;
-			$typeDefault = array_key_exists( 'defaultSiteType', $siteGroup ) ? $siteGroup['defaultSiteType'] : $globalTypeDefault;
-
-			foreach ( $siteGroup['sites'] as $identifier => $data ) {
-				if ( !is_array( $data ) ) {
-					$data = array( 'url' => $data );
-				}
-
-				if ( !array_key_exists( 'filepath', $data ) ) {
-					$data['filepath'] = $filePathDefault;
-				}
-
-				if ( !array_key_exists( 'urlpath', $data ) ) {
-					$data['urlpath'] = $urlPathDefault;
-				}
-
-				if ( !array_key_exists( 'type', $data ) ) {
-					$data['type'] = $typeDefault;
-				}
-
-				$data['group'] = $groupName;
-
-				$sites[$identifier] = $data;
-			}
-		}
-
-		return new static( $sites, $groups );
+	protected function __construct() {
+		$this->sites = new SiteList( array() );
 	}
 
 	/**
@@ -110,97 +63,166 @@ class Sites implements \SeekableIterator {
 		static $instance = false;
 
 		if ( $instance === false ) {
-			$instance = static::newFromConfig(
-				Settings::get( 'siteIdentifiers' ),
-				Settings::get( 'defaultSiteFilePath' ),
-				Settings::get( 'defaultSiteUrlPath' ),
-				Settings::get( 'defaultSiteType' )
-			);
+			$instance = new static();
 		}
 
 		return $instance;
 	}
 
 	/**
-	 * Returns all the site identifiers.
-	 * Optionally only those belonging to the specified group.
+	 * Loads the sites matching the provided conditions.
 	 *
 	 * @since 0.1
 	 *
-	 * @param string|null $groupName
-	 *
-	 * @return array
-	 * @throws MWException
+	 * @param array $conditions
 	 */
-	public function getIdentifiers( $groupName = null ) {
-		if ( is_null( $groupName ) ) {
-			return array_keys( $this->sites );
+	public function loadSites( array $conditions = array() ) {
+		if ( $this->gotAllSites && $conditions === array() ) {
+			return;
 		}
-		else {
-			if ( !array_key_exists( $groupName, $this->groups ) ) {
-				throw new MWException( "No site group with name '$groupName' exists" );
+
+		$sites = SitesTable::singleton()->select( null, $conditions );
+
+		if ( $conditions === array() ) {
+			$this->gotAllSites = true;
+		}
+
+		foreach ( $sites as $site ) {
+			$this->sites[] = $site;
+		}
+
+		$this->trackNonExistingSites( $conditions );
+	}
+
+	/**
+	 * In case the there is only a single condition that is
+	 * an unique identifier for sites, the non-existing sites are
+	 * put into the nonExistingSites field (so subsequent
+	 * requests for these do not cause additional lookups in the db).
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $conditions
+	 */
+	protected function trackNonExistingSites( array $conditions ) {
+		if ( count( $conditions ) === 1 ) {
+			reset( $conditions );
+			$field = key( $conditions );
+
+			if ( in_array( $field, array( 'global_key', 'local_key' ) ) ) {
+				foreach ( (array)$conditions[$field] as $value ) {
+					if ( $this->getSiteByField( $field, $value ) === false
+						&& !in_array( $value, $this->nonExistingSites[$field] ) ) {
+						$this->nonExistingSites[$field][] = $value;
+					}
+				}
 			}
-
-			return $this->groups[$groupName];
 		}
 	}
 
 	/**
-	 * Returns a Sites containing only the sites of the specified group.
+	 * Looks into the list of loaded sites for the one with the provided
+	 * value for the specified field and return it, or false is there is no such site.
 	 *
-	 * @since 0.1
+	 * @param string $field
+	 * @param mixed $value
 	 *
-	 * @param string $groupName
+	 * @return Site|false
 	 *
-	 * @return Sites
+	 * @throws \MWException
 	 */
-	public function getGroup( $groupName ) {
-		if ( array_key_exists( $groupName, $this->groups ) ) {
-			$sites = array();
-
-			foreach ( $this->groups[$groupName] as $siteId ) {
-				$sites[$siteId] = $this->sites[$siteId];
+	protected function getSiteByField( $field, $value ) {
+		if ( $field === 'global_key' ) {
+			if ( $this->sites->offsetExists( $value ) ) {
+				return $this->sites[$value];
 			}
+			return false;
 		}
-		else {
-			$sites = array();
+		elseif ( $field === 'local_key' ) {
+			if ( $this->sites->hasLocalId( $value ) ) {
+				return $this->sites->getSiteByLocalId( $value );
+			}
+			return false;
 		}
 
-		return new static(
-			$sites,
-			array( $groupName )
-		);
+		throw new MWException( 'Invalid field name provided' );
 	}
 
 	/**
-	 * Returns the site with the provided id.
+	 * Returns the site that has the provided value for the specified field
+	 * or false if there is no such site. Takes care of caching, so no
+	 * non-needed database calls are made.
 	 *
-	 * @since 0.1
+	 * @param string $field
+	 * @param mixed $value
 	 *
-	 * @param string $siteId
-	 *
-	 * @return Site
-	 * @throws MWException
+	 * @return Site|false
 	 */
-	public function getSite( $siteId ) {
-		if ( !array_key_exists( $siteId, $this->sites ) ) {
-			throw new MWException( "There is no site with identifier '$siteId'." );
+	protected function getSite( $field, $value ) {
+		if ( in_array( $value, $this->nonExistingSites[$field] ) ) {
+			return false;
 		}
 
-		return Site::newFromArray( $siteId, $this->sites[$siteId] );
+		$site = $this->getSiteByField( $field, $value );
+
+		if ( $site !== false ) {
+			return $site;
+		}
+
+		$this->loadSites( array( $field => $value ) );
+
+		return $this->getSite( $field, $value );
 	}
 
 	/**
-	 * Returns if the site with the provided id exists.
+	 * Fetches a site based on a local identifier and returns it,
+	 * or false if there is no such site.
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $siteId
+	 * @param string $localSiteId
 	 *
-	 * @return boolean
+	 * @return Site|false
 	 */
-	public function hasSite( $siteId ) {
-		return array_key_exists( $siteId, $this->sites );
+	public function getSiteByLocalId( $localSiteId ) {
+		return $this->getSite( 'local_key', $localSiteId );
+	}
+
+	/**
+	 * Fetches a site based on a global identifier and returns it,
+	 * or false if there is no such site.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $globalSiteId
+	 *
+	 * @return Site|false
+	 */
+	public function getSiteByGlobalId( $globalSiteId ) {
+		return $this->getSite( 'global_key', $globalSiteId );
+	}
+
+	/**
+	 * Returns the sites that have been loaded into memory.
+	 *
+	 * @since 0.1
+	 *
+	 * @return SiteList
+	 */
+	public function getLoadedSites() {
+		return $this->sites;
+	}
+
+	/**
+	 * Loads all of the sites into memory.
+	 *
+	 * @since 0.1
+	 *
+	 * @return SiteList
+	 */
+	public function getAllSites() {
+		$this->loadSites();
+		return $this->getLoadedSites();
 	}
 
 	/**
@@ -209,17 +231,19 @@ class Sites implements \SeekableIterator {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $siteId
+	 * @param string $globalSiteId
 	 * @param string $pageName
 	 *
 	 * @return false|string
 	 */
-	public function getUrl( $siteId, $pageName = '' ) {
-		if ( !array_key_exists( $siteId, $this->sites ) ) {
+	public function getUrl( $globalSiteId, $pageName = '' ) {
+		$site = $this->getSiteByGlobalId( $globalSiteId );
+
+		if ( $site === false ) {
 			return false;
 		}
 
-		return Site::newFromArray( $siteId, $this->sites[$siteId] )->getPageUrl( $pageName );
+		return $site->getPagePath( $pageName );
 	}
 
 	/**
@@ -228,74 +252,41 @@ class Sites implements \SeekableIterator {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $siteId
+	 * @param string $globalSiteId
 	 * @param string $path
 	 *
 	 * @return false|string
 	 */
-	public function getPath( $siteId, $path = '' ) {
-		if ( !array_key_exists( $siteId, $this->sites ) ) {
+	public function getPath( $globalSiteId, $path = '' ) {
+		$site = $this->getSiteByGlobalId( $globalSiteId );
+
+		if ( $site === false ) {
 			return false;
 		}
 
-		return Site::newFromArray( $siteId, $this->sites[$siteId] )->getPath( $path );
+		return $site->getPath( $path );
 	}
 
 	/**
-	 * @return integer
+	 * Returns the global identifiers.
+	 * TODO: cache invalidation
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
 	 */
-	public function count() {
-		return count( $this->sites );
-	}
+	public function getGlobalIdentifiers() {
+		$cache = wfGetMainCache();
+		$key = wfMemcKey( __METHOD__, serialize( func_get_args() ) );
 
-	/**
-	 * @return boolean
-	 */
-	public function isEmpty() {
-		return $this->sites === array();
-	}
+		$identifiers = $cache->get( $key );
 
-	/**
-	 * @return Site
-	 */
-	public function current() {
-		return Site::newFromArray( $this->key, $this->sites[$this->key] );
-	}
-
-	/**
-	 * @return integer
-	 */
-	public function key() {
-		return $this->key;
-	}
-
-	public function next() {
-		next( $this->sites );
-		$this->key = key( $this->sites );
-	}
-
-	public function rewind() {
-		reset( $this->sites );
-		$this->key = key( $this->sites );
-	}
-
-	/**
-	 * @return boolean
-	 */
-	public function valid() {
-		return $this->key !== false && isset( $this->sites[$this->key] );
-	}
-
-	/**
-	 * @param string $position
-	 * @throws MWException
-	 */
-	function seek( $position ) {
-		if ( !array_key_exists( $position, $this->sites ) ) {
-			throw new MWException( "Cannot seek to non-existing key '$position'." );
+		if ( !is_array( $identifiers ) ) {
+			$identifiers = SitesTable::singleton()->selectFields( 'global_key' );
+			$cache->set( $key, $identifiers, 3600 );
 		}
 
-		$this->key = $position;
+		return $identifiers;
 	}
 
 }
