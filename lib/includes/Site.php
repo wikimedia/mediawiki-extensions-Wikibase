@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Class representing a single site that can be linked to.
+ * Interface for site objects.
  *
  * @since 0.1
  *
@@ -12,165 +12,97 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Werner
  */
-class Site {
-
-	protected $id;
-	protected $group;
-	protected $url;
-	protected $urlPath;
-	protected $type;
-	protected $filePath;
+interface Site extends \IORMRow {
 
 	/**
-	 * Constructor.
+	 *
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $id
-	 * @param string $group
-	 * @param string $url base url to the site
-	 * @param string $urlPath relative path added to $url, can contain a placeholder '$1' for a page on that site
-	 * @param string $type type of the site, for example 'mediawiki'
-	 * @param string|boolean $filePath relative path added to $url
+	 * @return SiteConfig
 	 */
-	public function __construct( $id, $group, $url, $urlPath, $type = 'unknown', $filePath = false ) {
-		$this->id = $id;
-		$this->group = $group;
-		$this->url = $url;
-		$this->urlPath = $urlPath;
-		$this->type = $type;
-		$this->filePath = $filePath;
-	}
+	public function getConfig();
 
 	/**
-	 * Creates and returns a new instance from an array with url, group, urlpath, type and filepath keys.
+	 * Returns the global site identifier (ie enwiktionary).
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $siteId
-	 * @param array $site
-	 *
-	 * @return Site
+	 * @return integer
 	 */
-	public static function newFromArray( $siteId, array $site ) {
-		return new static(
-			$siteId,
-			$site['group'],
-			$site['url'],
-			$site['urlpath'],
-			$site['type'],
-			$site['filepath']
-		);
-	}
+	public function getGlobalId();
 
 	/**
-	 * Returns the sites identifier.
+	 * Returns the type of the site (ie SITE_MW).
+	 *
+	 * @since 0.1
+	 *
+	 * @return integer
+	 */
+	public function getType();
+
+
+	/**
+	 * Returns the type of the site (ie SITE_GROUP_WIKIPEDIA).
+	 *
+	 * @since 0.1
+	 *
+	 * @return integer
+	 */
+	public function getGroup();
+
+	/**
+	 * Returns the base URL of the site, ie http://en.wikipedia.org
 	 *
 	 * @since 0.1
 	 *
 	 * @return string
 	 */
-	public function getId() {
-		return $this->id;
-	}
+	public function getUrl();
 
 	/**
-	 * Returns the sites url.
+	 * Returns the full page path (ie site url + relative page path).
+	 * The page title should go at the $1 marker. If the $pageName
+	 * argument is provided, the marker will be replaced by it's value.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string|false $pageName
+	 *
+	 * @return string
+	 */
+	public function getPagePath( $pageName = false );
+
+	/**
+	 * Returns the full file path (ie site url + relative file path).
+	 * The path should go at the $1 marker. If the $path
+	 * argument is provided, the marker will be replaced by it's value.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string|false $path
+	 *
+	 * @return string
+	 */
+	public function getFilePath( $path = false );
+
+	/**
+	 * Returns the relative page path.
 	 *
 	 * @since 0.1
 	 *
 	 * @return string
 	 */
-	public function getUrl() {
-		return $this->url;
-	}
+	public function getRelativePagePath();
 
 	/**
-	 * Returns the sites group.
+	 * Returns the relative file path.
 	 *
 	 * @since 0.1
 	 *
 	 * @return string
 	 */
-	public function getGroup() {
-		return $this->group;
-	}
-
-	/**
-	 * Returns the sites type.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getType() {
-		return $this->type;
-	}
-
-	/**
-	 * Returns the full url for the specified site.
-	 * A page can also be provided, which is then added to the url.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $pageName will be encoded internally
-	 *
-	 * @return string
-	 */
-	public function getPageUrl( $pageName = '' ) {
-		return str_replace( '$1', rawurlencode( $pageName ), $this->getPageUrlPath() );
-	}
-
-	/**
-	 * Returns the path to the url of a page where the page is represented by a replacement marker '$1'.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getPageUrlPath() {
-		return $this->url . $this->urlPath;
-	}
-
-	/**
-	 * Returns the relative path to the url of a page where the page is represented by a replacement marker '$1'.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getRelativePageUrlPath() {
-		return $this->urlPath;
-	}
-
-	/**
-	 * Returns the relative path to the url of a page where the page is represented by a replacement marker '$1'.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getRelativeFilePath() {
-		return $this->filePath;
-	}
-
-	/**
-	 * Returns the full path for the specified site.
-	 * A path can also be provided, which is then added to the base path.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $path has to be url encoded where required, no further encoding will be done
-	 *
-	 * @return false|string
-	 */
-	public function getPath( $path = '' ) {
-		if ( $this->filePath === false ) {
-			return false;
-		}
-		return str_replace( '$1', $path, $this->url . $this->filePath );
-	}
+	public function getRelativeFilePath();
 
 }

@@ -60,3 +60,5 @@ CREATE INDEX /*i*/sites_link_inline ON /*_*/sites (site_link_inline);
 CREATE INDEX /*i*/sites_link_navigation ON /*_*/sites (site_link_navigation);
 CREATE INDEX /*i*/sites_forward ON /*_*/sites (site_forward);
 CREATE INDEX /*i*/sites_allow_transclusion ON /*_*/sites (site_allow_transclusion);
+
+

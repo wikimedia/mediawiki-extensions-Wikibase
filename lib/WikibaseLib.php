@@ -62,8 +62,12 @@ $wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/EntityDiff.php';
 $wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/Item.php';
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
-$wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
 $wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
+$wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
+$wgAutoloadClasses['Wikibase\SiteList'] 			= $dir . 'includes/SiteList.php';
+$wgAutoloadClasses['Wikibase\SiteRow'] 				= $dir . 'includes/SiteRow.php';
+$wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
+$wgAutoloadClasses['Wikibase\SitesTable'] 			= $dir . 'includes/SitesTable.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
 // includes/changes
