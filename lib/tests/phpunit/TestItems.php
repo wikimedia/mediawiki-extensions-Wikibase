@@ -23,7 +23,7 @@ final class TestItems {
 	 */
 	public static function getItems() {
 		$items = array( Item::newEmpty() );
-		$links = \Wikibase\Sites::singleton();
+
 
 		$item = Item::newEmpty();
 
@@ -40,15 +40,23 @@ final class TestItems {
 
 		$item = Item::newEmpty();
 
-		$item->addSiteLink( $links->current()->getId(), 'spam' );
+		$links = \Wikibase\Sites::singleton()->getAllSites();
+
+		if ( $links->count() > 1 ) {
+			$item->addSiteLink( $links->getIterator()->current()->getId(), 'spam' );
+		}
 
 		$items[] = $item;
 
 		$item = Item::newEmpty();
 
-		$item->addSiteLink( $links->current()->getId(), 'spam' );
-		$links->next();
-		$item->addSiteLink( $links->current()->getId(), 'foobar' );
+		if ( $links->count() > 1 ) {
+			$linksIterator = $links->getIterator();
+
+			$item->addSiteLink( $linksIterator->current()->getId(), 'spam' );
+			$linksIterator->next();
+			$item->addSiteLink( $linksIterator->current()->getId(), 'foobar' );
+		}
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );

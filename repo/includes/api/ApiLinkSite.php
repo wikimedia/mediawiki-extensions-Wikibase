@@ -102,7 +102,7 @@ class ApiLinkSite extends ApiModifyItem {
 				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
 			),
 			'linksite' => array(
-				ApiBase::PARAM_TYPE => Sites::singleton()->getIdentifiers(),
+				ApiBase::PARAM_TYPE => Sites::singleton()->getGlobalIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'linktitle' => array(
