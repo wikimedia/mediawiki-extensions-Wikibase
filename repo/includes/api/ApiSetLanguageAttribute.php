@@ -49,6 +49,43 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 	}
 
 	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $available integer the number of bytes available for the autocomment
+	 * @return string that can be used as an auto comment
+	 */
+	protected function autoComment( array $params, $available=128 ) {
+		$count = (int)isset( $params['label'] ) + (int)isset( $params['description'] ) + (int)isset( $params['badges'] );
+		if ( 1<$count ) {
+			$comment = "set-language-attributes:" . $params['language']
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams( $params, $available - strlen( "set-language-attributes:" . $params['language'] ), 'badge', 'label', 'description' );
+		}
+		elseif ( isset( $params['label'] ) ) {
+			$comment = "set-language-label:" . $params['language']
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams( $params, $available - strlen( "set-language-label:" . $params['language'] ), 'label');
+		}
+		elseif ( isset( $params['description'] ) ) {
+			$comment = "set-language-description:" . $params['language']
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams( $params, $available - strlen( "set-language-description:" . $params['language'] ), 'description' );
+		}
+		elseif ( isset( $params['badges'] ) ) {
+			$comment = "set-language-badges:" . $params['language']
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams( $params, $available - strlen( "set-language-badges:" . $params['language'] ), 'badges' );
+		}
+		else {
+			$comment = '';
+		}
+		return $comment;
+	}
+	
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
@@ -70,6 +107,11 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 			$descriptions = array( $language => $item->setDescription( $language, $params['description'] ) );
 			$this->addDescriptionsToResult( $descriptions, 'item' );
 		}
+
+		//if ( isset( $params['badges'] ) ) {
+		//	$badges = array( $language => $item->setBadges( $language, $params['badges'] ) );
+		//	$this->addBadgesToResult( $badges, 'item' );
+		//}
 
 		// Because we can't fail?
 		$success = true;
@@ -96,6 +138,10 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 			'description' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
+			'badges' => array(
+				ApiBase::PARAM_TYPE => 'string',
+				ApiBase::PARAM_ISMULTI => true,
+			),
 		) );
 	}
 
@@ -110,6 +156,7 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 			'language' => 'Language for the label and description',
 			'label' => 'The value to set for the label',
 			'description' => 'The value to set for the description',
+			'badges' => 'The values to set for the badges',
 		) );
 	}
 

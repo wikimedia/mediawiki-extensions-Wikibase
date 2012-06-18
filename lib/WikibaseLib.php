@@ -46,6 +46,16 @@ $dir = dirname( __FILE__ ) . '/';
 // constants
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
 
+/**
+ * Constants for parsing of summary
+ * This could exist somewhere under another name
+ */
+define( 'SUMMARY_MAX_LENGTH', '250' );
+define( 'SUMMARY_CONTINUATION', '…' );
+define( 'SUMMARY_GROUPING', '|' );
+define( 'SUMMARY_SUBGROUPING', '¦' );
+
+
 // i18n
 $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 

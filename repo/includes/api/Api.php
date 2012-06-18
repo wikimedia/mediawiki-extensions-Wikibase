@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Sanitizer;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -15,6 +16,7 @@ namespace Wikibase;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 abstract class Api extends \ApiBase {
+	
 	/**
 	 * Var to keep the set status for later use
 	 * @var bool how to handle the keys
