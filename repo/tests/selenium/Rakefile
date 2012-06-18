@@ -41,6 +41,11 @@ RSpec::Core::RakeTask.new(:spec_newitem) do |spec|
   spec.pattern = 'spec/item/new_item_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:spec_aliases) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/aliases/*_spec.rb'
+end
+
 task :default => :spec
 task :item => :spec_item
 task :description => :spec_description
@@ -49,3 +54,4 @@ task :label => :spec_label
 task :sitelinks => :spec_sitelinks
 task :errorhandling => :spec_errorhandling
 task :newitem => :spec_newitem
+task :aliases => :spec_aliases

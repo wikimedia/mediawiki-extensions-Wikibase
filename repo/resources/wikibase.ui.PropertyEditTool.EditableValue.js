@@ -1,7 +1,7 @@
 /**
- * JavasSript for managing editable representation of property values.
+ * JavaScript for managing editable representation of property values.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.ui.PropertyEditTool.EditableValue.js
  * @ingroup Wikibase
@@ -9,6 +9,20 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  * @author H. Snater
+ *
+ * Events:
+ * -------
+ * TODO untangle afterSaveComplete and afterStopEditing
+ * afterSaveComplete: Triggered after saving a valid item and cancelling
+ *                    Parameters: (1) jQuery.event
+ * afterStopEditing: Triggered after having left edit mode
+ *                   Parameters: (1) jQuery.event
+ *                               (2) bool - save - whether save action was triggered
+ *                               (3) bool - wasPending - whether value is a completely new value
+ * newItemCreated: Triggered after an item has been created and the necessary API request has returned
+ *                   Parameters: (1) jQuery.event
+ *                               (2) JSON - item - the new item returned by the API request FIXME: this should be an
+ *                                                                                                 'Item' object!
  */
 "use strict";
 
@@ -16,7 +30,7 @@
  * Manages several editable value pieces which act as converters between the pure html input and the
  * input interface. Also does the API call to store new and modify existing values as well as the
  * removal of stored values.
- * 
+ *
  * @param jQuery subject
  * @param wikibase.ui.Toolbar toolbar
  */
@@ -48,53 +62,53 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
-	 * specific property key within the API JSON structure (overridden by specific subclasses)
+	 * specific property key within the API JSON structure.
 	 * @const string
 	 */
-	API_KEY: null,
-	
+	API_VALUE_KEY: null,
+
 	/**
 	 * Element representing the editable value. This element will either hold the value or the input
 	 * box in case it is activated for edit.
 	 * @var jQuery
 	 */
 	_subject: null,
-	
+
 	/**
 	 * This is true if the input interface is initialized at the time.
 	 * @var bool
 	 */
 	_isInEditMode: false,
-	
+
 	/**
 	 * Holds the input element in case this is in edit mode
 	 * @var null|jQuery
 	 */
 	_inputElem: null,
-	
+
 	/**
 	 * The toolbar controling the editable value
 	 * @var window.wikibase.ui.Toolbar
 	 */
 	_toolbar: null,
-	
+
 	/**
 	 * If this is true, it means that the value has not been stored to the database at all. So if
 	 * in edit mode and pressing cancel, the element will be removed
 	 * @var bool
 	 */
 	_pending: false,
-	
+
 	/**
 	 * Array holding all the interfaces which are part of the editable value.
 	 * @var wikibase.ui.PropertyEditTool.EditableValue.Interface[]
 	 */
 	_interfaces: null,
-	
+
 	/**
 	 * Initializes the editable value.
 	 * This should normally be called directly by the constructor.
-	 * 
+	 *
 	 * @param jQuery subject
 	 * @param wikibase.ui.Toolbar toolbar shouldn't be initialized yet
 	 */
@@ -107,7 +121,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._subject.addClass( this.UI_CLASS );
 
 		this._pending = this._subject.hasClass( 'wb-pending-value' );
-		
+
 		this._initInterfaces();
 
 		this._toolbar = toolbar;
@@ -119,7 +133,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( indexParent ) {
 			indexParent.addClass( this.UI_CLASS + '-index' );
 		}
-		
+
 		if( this.isEmpty() || this.isPending() ) {
 			// enable editing from the beginning if there is no value yet or pending value...
 			this._toolbar.editGroup.btnEdit.doAction();
@@ -127,10 +141,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 	},
 
-	_setIndex: function( index ){
-
-	},
-	
 	/**
 	 * initializes the interfaces handled by this editable value.
 	 */
@@ -141,11 +151,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}, this ) );
 		this._interfaces = interfaces;
 	},
-	
+
 	/**
 	 * Function analysing the subject and splitting it into all the input interfaces needed by the
 	 * editable value.
-	 * 
+	 *
+	 * @param jQuery subject
 	 * @return wikibase.ui.PropertyEditTool.EditableValue.Interface[]
 	 */
 	_buildInterfaces: function( subject ) {
@@ -157,15 +168,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		return interfaces;
 	},
-	
+
 	/**
 	 * Does the initialization for a single editable value interface. Basically this will bind the used
 	 * events and set needed options.
-	 * 
+	 *
 	 * @param wikibase.ui.PropertyEditTool.EditableValue.Interface singleInterface
 	 */
 	_configSingleInterface: function( singleInterface ) {
-		var self = this;		
+		var self = this;
 		singleInterface.onFocus = function( event ){ self._interfaceHandler_onFocus( singleInterface, event ); };
 		singleInterface.onBlur = function( event ){ self._interfaceHandler_onBlur( singleInterface, event ); };
 		singleInterface.onKeyUp = // ESC key does not react onKeyPressed but on onKeyUp
@@ -175,7 +186,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		singleInterface.onInputRegistered =
 				function(){ self._interfaceHandler_onInputRegistered( singleInterface ); };
 	},
-	
+
 	/**
 	 * Returns the node the toolbar should be appended to
 	 *
@@ -200,18 +211,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Removes the value from the data store via the API. Also removes the values representation from the dom stated
 	 * differently.
 	 *
-	 * @param bool preserveEmptyForm allows to preserve the empty form so a new value can be entered immediately.
 	 * @return jQuery.Deferred in case the remove was called before and is still running, the deferred from the ongoing
 	 *         remove will be returned and the deferreds property isOngoingRemove will be set to true.
 	 */
-	remove: function( preserveEmptyForm ) {
+	remove: function() {
 		if( this.__isRemoving ) {
 			this.__isRemoving.isOngoingRemove = true;
 			return this.__isRemoving_deferred; // returns the deferred
 		}
 
 		var degrade = $.proxy( function() {
-			if( ! preserveEmptyForm ) {
+			if( !this.preserveEmptyForm ) {
 				// remove value totally
 				this.destroy();
 				this._subject.empty().remove();
@@ -231,7 +241,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			degrade();
 			return $.Deferred().resolve(); // ...return new deferred nonetheless
 		} else {
-			var action = preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
+			var action = this.preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
 
 			// store deferred so we can return it when this is called again while still running
 			// NOTE: can't store deferred in this.__isRemoving because .always() might be called even before return!
@@ -266,14 +276,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		.then( $.proxy( function( response ) {
 			var wasPending = this.isPending();
 			this._reTransform( true );
-
 			this._pending = false; // not pending anymore after saved once
 			this._subject.removeClass( 'wb-pending-value' );
-
-			
-			if( this.onAfterStopEditing ) {
-				this.onAfterStopEditing( true, wasPending ); // callback
-			}
+			$( this ).triggerHandler( 'afterStopEditing', [ true, wasPending ] );
 		}, this ) );
 	},
 
@@ -303,10 +308,9 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Destroys the edit box and displays the original text or the inputs new value.
 	 *
 	 * @param bool save whether to save the new user given value
-	 * @param Function afterSaveComplete function to be called after saving has been performed //TODO: get rid of this!
 	 * @return bool whether the value has changed (or was removed) in which case the changes are on their way to the API
 	 */
-	stopEditing: function( save, afterSaveComplete ) {
+	stopEditing: function( save ) {
 		if( ! this.isInEditMode() || this.__isStopEditing ) {
 			return false;
 		}
@@ -315,34 +319,33 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			return false; // cancel
 		}
 
-		if( typeof afterSaveComplete == 'undefined' ) {
-			afterSaveComplete = function() {};
-		}
-
 		if( ! save && this.isPending() ) {
 			// cancel pending edit...
 			this._reTransform( false );
 			this.remove(); // not yet existing value, no state to go back to
-			return false; // do not call onAfterStopEditing() here!
+			return false; // do not trigger 'afterStopEditing' here!
 		}
 
 		if( ! save ) {
 			//cancel...
 			var wasPending = this._reTransform( false );
-
-			if( this.onAfterStopEditing !== null && this.onAfterStopEditing( save, wasPending ) === false ) { // callback
-				return false; // cancel
-			}
-			afterSaveComplete();
+			$( this ).triggerHandler( 'afterStopEditing', [ save, this.isPending() ] );
+			$( this ).triggerHandler( 'afterSaveComplete' );
 		}
 		else {
 			this.__isStopEditing = true; // don't go here twice as long as callback still running
 
 			// save... (will call all the API stuff)
 			this.save()
-			.done( function() {
-				afterSaveComplete();
-			} )
+			.done(
+				$.proxy( function() {
+					if ( this.isValid() ) { // editable value will be removed if invalid
+						$( this ).triggerHandler( 'afterSaveComplete' );
+					} else {
+						$( this ).triggerHandler( 'afterStopEditing', [ save, this.isPending() ] );
+					}
+				}, this )
+			)
 			.always( $.proxy( function() {
 				this.__isStopEditing = false;
 			}, this ) );
@@ -416,20 +419,19 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
 
 				if( apiAction !== self.API_ACTION.REMOVE ) {
-					// only re-display toolbar if value wasn't removed
-
-					if ( self.API_KEY !== null ) {
-						// set normalized value
-						self.setValue( response.item[self.API_KEY][mw.config.get( 'wgUserLanguage' )].value );
+					var responseVal = self._getValueFromApiResponse( response.item );
+					if( responseVal !== null ) {
+						// set normalized value from response if supported by API module
+						self.setValue( responseVal );
 					}
 
 					if( mw.config.get( 'wbItemId' ) === null ) {
 						// if the 'save' process will create a new item, trigger the event!
-						$( window.wikibase ).trigger( 'NewItemCreated', response.item );
+						$( window.wikibase ).triggerHandler( 'newItemCreated', response.item );
 					}
 
 					waitMsg.remove();
-					self._toolbar._elem.fadeIn( 300 );
+					self._toolbar._elem.fadeIn( 300 ); // only re-display toolbar if value wasn't removed
 				}
 			} );
 		} )
@@ -449,6 +451,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._subject.addClass( this.UI_CLASS + '-waiting' );
 
 		return deferred;
+	},
+
+	/**
+	 * Extracts a value usable for this from an API response returned after saving the current state.
+	 * Returns null in case the API module doesn't return any normalized value. This will fai an error if the given
+	 * response is not compatible.
+	 *
+	 * @param array response
+	 * @return string|null
+	 */
+	_getValueFromApiResponse: function( response ) {
+		return ( this.API_VALUE_KEY !== null )
+			? response[ this.API_VALUE_KEY ][ window.mw.config.get( 'wgUserLanguage' ) ].value
+			: null;
 	},
 
 	/**
@@ -480,6 +496,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	getApiCallParams: function( apiAction ) {
 		var itemId = mw.config.get( 'wbItemId' );
 		var params = {
+			language: mw.config.get( 'wgUserLanguage' ),
 			token: mw.user.tokens.get( 'editToken' )
 		};
 
@@ -545,7 +562,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		btn.setTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' } ) );
 		btn.getTooltip().show( true );
-		$( btn.getTooltip() ).on( 'Hide', $.proxy( function() {
+		$( btn.getTooltip() ).on( 'hide', $.proxy( function() {
 			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
 		}, this ) );
 
@@ -560,10 +577,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	isInEditMode: function() {
 		return this._isInEditMode;
 	},
-	
+
 	/**
 	 * Returns true if the value is in edit mode and not stored in the database yet.
-	 * 
+	 *
 	 * @return bool
 	 */
 	isPending: function() {
@@ -583,11 +600,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		} );
 		return result;
 	},
-	
+
 	/**
 	 * Sets a value
 	 * // TODO: should take an object representing a properties value
-	 * 
+	 *
 	 * @param Array|string value
 	 * @return Array value but normalized
 	 */
@@ -598,33 +615,29 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		$.each( value, $.proxy( function( index, val ) {
 			this._interfaces[ index ].setValue( val );
 		}, this ) );
-
 		return this.getValue(); // will return value but normalized
 	},
 
 	/**
 	 * If the input is in edit mode, this will return the value active before the edit mode was entered.
 	 * If its not in edit mode, the current value will be returned.
-	 * 
+	 *
 	 * @return Array
 	 */
 	getInitialValue: function() {
 		if( ! this.isInEditMode() ) {
 			return this.getValue();
 		}
-		
 		var result = [];
-		
 		$.each( this._interfaces, function( index, elem ) {
 			result.push( elem.getInitialValue() );
 		} );
-		
 		return result;
 	},
 
 	/**
 	 * Returns a short information about how the input should be inserted by the user.
-	 * 
+	 *
 	 * @return string
 	 */
 	getInputHelpMessage: function() {
@@ -637,12 +650,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool
 	 */
 	isEmpty: function() {
-		for( var i in this._interfaces ) {
-			if( ! this._interfaces[ i ].isEmpty() ) {
-				return false;
-			}
-		}
-		return true;
+		return this.valueCompare( this.getValue() );
 	},
 
 	/**
@@ -673,51 +681,46 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		return true;
 	},
-	
+
 	/**
-	 * Helper function to compares two values returned by getValue() or getInitialValue() as long as
+	 * Helper function comparing two values returned by getValue() or getInitialValue() as long as
 	 * we work with arrays instead of proper objects here.
 	 * When comparing the values, this will also do an normalization on the values before comparing
-	 * them, so even though they are not exactly the same perhaps, they stillh ave the same meaning
+	 * them, so even though they are not exactly the same perhaps, they still have the same meaning
 	 * and true will be returned.
-	 * 
+	 * NOTE/TODO: arrays basically empty but with missing elements (so they are considered invalid)
+	 *            are not considered empty right now.
+	 *
 	 * @todo: make this deprecated as soon as we use objects representing property values...
-	 * 
+	 *
 	 * @param Array value1
-	 * @param Array|null value2 if null, this will check whether value1 is empty
-	 * @return bool
+	 * @param Array value2 [optional] if not given, this will check whether value1 is empty
+	 * @return bool true for equal/empty, false if not
 	 */
 	valueCompare: function( value1, value2 ) {
-		if( value1.length !== this._interfaces.length ) {
-			return false; // there has to be one value for each interface!
-		}
+		var emptyCheck = !$.isArray( value2 );
 
-		if( value2 === null ) {
-			// check for empty value1
-			for( var i in value1 ) {
-				if( $.trim( value1[ i ] ) !== '' ) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-		// check for equal arrays with same entries in same order
-		if( value1.length !== value2.length ) {
+		if( this._interfaces.length !== value1.length
+			|| !emptyCheck && value1.length !== value2.length
+		) {
 			return false;
 		}
-		for( var i in value1 ) {
-			// normalize first:
-			var val1 = this._interfaces[ i ].normalize( value1[ i ] );
-			var val2 = this._interfaces[ i ].normalize( value2[ i ] );
 
-			if( val1 !== val2 ) {
-				return false;
+		for( var i in value1 ) {
+			// check for equal arrays with same entries in same order
+			var val2 = emptyCheck ? null : value2[ i ];
+			if ( ! this._interfaces[ i ].valueCompare( value1[ i ], val2 ) ) {
+				return false
 			}
 		}
 		return true;
 	},
-	
+
+	/**
+	 * reacting on interface input
+	 *
+	 * @param relatedInterface wikibase.ui.PropertyEditTool.EditableValue.Interface
+	 */
 	_interfaceHandler_onInputRegistered: function( relatedInterface ) {
 		if( ! relatedInterface.isInEditMode() ) {
 			return;
@@ -725,10 +728,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		var value = this.getValue();
 		var isInvalid = !this.validate( value );
-		
+
 		// can't save if invalid input (except it is empty, in that case save == remove) OR same as before
 		var disableSave = ( isInvalid && !this.isEmpty() ) || this.valueCompare( this.getInitialValue(), value );
-		
+
 		// can't cancel if empty before except the edit is pending (then it will be removed)
 		var disableCancel = !this.isPending() && this.valueCompare( this.getInitialValue(), null );
 
@@ -788,6 +791,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * anymore.
 	 */
 	destroy: function() {
+		this.preserveEmptyForm = false; // will cause stopEditing() to completely erase all structure
 		this.stopEditing( false );
 		if( this._toolbar !== null) {
 			this._toolbar.destroy();
@@ -799,10 +803,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 	},
 
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
+	/**
+	 * determines whether to keep an empty form when leaving edit mode
+	 * @var bool
+	 */
+	preserveEmptyForm: true,
+
 	///////////
 	// EVENTS:
 	///////////
-	
+
 	/**
 	 * Callback called when the edit process is going to be ended. If the callback returns false, the
 	 * process will be cancelled.
@@ -810,26 +824,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param bool save whether the result should be saved. If false, the editing will be cancelled
 	 *        without saving.
 	 * @return bool whether to go on with the stop editing.
-	 * 
+	 *
 	 * @example function( save ) {return true}
 	 */
 	onStopEditing: null,
-	
-	/**
-	 * Callback called after the editing process is finished. At this point the element is not in
-	 * edit mode anymore.
-	 * This will not be called in case the element was just created, still pending, and the editing
-	 * process was cancelled.
-	 * 
-	 * @param bool saved whether the result will be saved. If true, the result is sent to the API
-	 *        already and the internal value is changed to the new value.
-	 * @param bool changed whether the value was changed during the editing process.
-	 * @param bool wasPending whether the element was pending before the edit.
-	 * 
-	 * @example function( saved, changed, wasPending ) {return true}
-	 */
-	onAfterStopEditing: null,
-	
+
 	/**
 	 * Callback called after the element was removed
 	 */

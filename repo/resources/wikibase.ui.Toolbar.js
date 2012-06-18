@@ -1,7 +1,7 @@
 /**
- * JavasSript for toolbars for 'Wikibase' property editing.
+ * JavaScript for toolbars for 'Wikibase' property editing.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
- * 
+ *
  * @since 0.1
  * @file wikibase.ui.Toolbar.js
  * @ingroup Wikibase
@@ -26,23 +26,30 @@ window.wikibase.ui.Toolbar.prototype = {
 	 * Class which marks the element within the site html.
 	 */
 	UI_CLASS: 'wb-ui-toolbar',
-	
+
 	/**
 	 * @var jQuery
 	 */
 	_parent: null,
-	
+
 	/**
 	 * The toolbar element in the dom
 	 * @var jQuery
 	 */
 	_elem: null,
-	
+
 	/**
 	 * @var Array
+	 * items that are rendered inside the toolbar like buttons, labels, tooltips or groups of such items
 	 */
 	_items: null,
-	
+
+	/**
+	 * @var string
+	 * initial css display value that is stored for re-showing when hiding the toolbar
+	 */
+	_display: null,
+
 	/**
 	 * Initializes the edit toolbar for the given element.
 	 * This should normally be called directly by the constructor.
@@ -57,12 +64,12 @@ window.wikibase.ui.Toolbar.prototype = {
 		this.draw(); // draw first to have toolbar wrapper
 		this._initToolbar();
 	},
-	
+
 	/**
 	 * Initializes elements within the toolbar if any should be there from the beginning.
 	 */
 	_initToolbar: function() {},
-	
+
 	/**
 	 * Function for (re)rendering the element
 	 */
@@ -70,7 +77,7 @@ window.wikibase.ui.Toolbar.prototype = {
 		this._drawToolbar();
 		this._drawToolbarElements();
 	},
-	
+
 	appendTo: function( elem ) { // TODO: integrate the whole prototype with jQuery somehow
 		if( this._elem === null ) {
 			this.draw(); // this will generate the toolbar
@@ -78,7 +85,7 @@ window.wikibase.ui.Toolbar.prototype = {
 		this._elem.appendTo( elem );
 		this._parent = this._elem.parent();
 	},
-	
+
 	/**
 	 * Draws the toolbar element itself without its content
 	 */
@@ -92,12 +99,11 @@ window.wikibase.ui.Toolbar.prototype = {
 		this._elem = $( '<div/>', {
 			'class': this.UI_CLASS
 		} );
-	
 		if( parent !== null ) { // if not known yet, appendTo() wasn't called so far
 			parent.append( this._elem );
 		}
 	},
-	
+
 	/**
 	 * Draws the toolbar elements like buttons and labels
 	 */
@@ -109,7 +115,7 @@ window.wikibase.ui.Toolbar.prototype = {
 			}
 			this._elem.append( this._items[i]._elem );
 		}
-		
+
 		// only render brackets if we have any content
 		if( this.renderItemSeparators && i > -1 ) {
 			this._elem
@@ -117,10 +123,10 @@ window.wikibase.ui.Toolbar.prototype = {
 			.append( ']' );
 		}
 	},
-	
+
 	/**
 	 * This will add a toolbar element, e.g. a label or a button to the toolbar at the given index.
-	 * 
+	 *
 	 * @param Object elem toolbar content element (e.g. a group, button or label).
 	 * @param index where to add the element (use negative values to specify the position from the end).
 	 */
@@ -134,10 +140,10 @@ window.wikibase.ui.Toolbar.prototype = {
 		}
 		this.draw(); // TODO: could be more efficient when just adding one element
 	},
-	
+
 	/**
 	 * Removes an element from the toolbar
-	 * 
+	 *
 	 * @param Object elem the element to remove
 	 * @return bool false if element isn't part of this element
 	 */
@@ -147,23 +153,23 @@ window.wikibase.ui.Toolbar.prototype = {
 			return false;
 		}
 		this._items.splice( index, 1 );
-		
+
 		this.draw(); // TODO: could be more efficient when just removing one element
 		return true;
 	},
-	
+
 	/**
 	 * Returns whether the given element is represented within the toolbar.
-	 * 
+	 *
 	 * @return bool
 	 */
 	hasElement: function( elem ) {
 		return this.getIndexOf( elem ) > -1;
 	},
-	
+
 	/**
 	 * returns the index of an element within the toolbar, -1 in case the element is not represented.
-	 * 
+	 *
 	 * @return int
 	 */
 	getIndexOf: function( elem ) {
@@ -182,7 +188,39 @@ window.wikibase.ui.Toolbar.prototype = {
 			this._elem = null;
 		}
 	},
-	
+
+	/**
+	 * hide the toolbar
+	 *
+	 * @return bool whether toolbar is hidden
+	 */
+	hide: function() {
+		if ( this._display === null || this._display === 'none' ) {
+			this._display = this._elem.css( 'display' );
+			this._elem.css( 'display', 'none' );
+		}
+		return this.isHidden();
+	},
+
+	/**
+	 * show the toolbar
+	 *
+	 * @return whether toolbar is visible
+	 */
+	show: function() {
+		this._elem.css( 'display', ( this._display === null ) ? 'block' : this._display );
+		return !this.isHidden();
+	},
+
+	/**
+	 * determine whether this toolbar is hidden
+	 *
+	 * @return bool
+	 */
+	isHidden: function() {
+		return ( this._elem.css( 'display' ) == 'none' );
+	},
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////

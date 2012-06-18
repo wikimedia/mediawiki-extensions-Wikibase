@@ -120,6 +120,7 @@ final class WikibaseHooks {
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
@@ -129,6 +130,8 @@ final class WikibaseHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
 			),
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
@@ -138,7 +141,7 @@ final class WikibaseHooks {
 				'wikibase.ui.PropertyEditTool'
 			),
 			'localBasePath' => dirname( __FILE__ ),
-			'remoteExtPath' => 'Wikibase',
+			'remoteExtPath' => 'Wikibase/repo',
 		);
 
 		return true;
