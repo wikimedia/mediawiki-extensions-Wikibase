@@ -54,7 +54,6 @@ describe "Check functionality of add/edit/remove aliases" do
       end
       @current_page.saveAliases?.should be_true
 
-
       @current_page.saveAliases
       ajax_wait
       @current_page.wait_for_api_callback
@@ -62,6 +61,33 @@ describe "Check functionality of add/edit/remove aliases" do
       @current_page.wait_for_aliases_to_load
       @current_page.wait_for_item_to_load
       @current_page.countExistingAliases.should == NUM_INITIAL_ALIASES
+    end
+  end
+
+  context "Check functionality of saving an alias by pressing return" do
+    it "should check that adding an alias by pressing return works properly" do
+      on_page(AliasesItemPage)
+      num_current_aliases = @current_page.countExistingAliases
+      @current_page.wait_for_aliases_to_load
+      @current_page.wait_for_item_to_load
+      @current_page.editAliases
+      @current_page.aliasesInputEmpty= generate_random_string(8)
+      @current_page.aliasesInputModified_element.send_keys :return
+      ajax_wait
+      @current_page.wait_for_api_callback
+      @browser.refresh
+      @current_page.wait_for_aliases_to_load
+      @current_page.wait_for_item_to_load
+      @current_page.countExistingAliases.should == (num_current_aliases + 1)
+      @current_page.editAliases
+      @current_page.aliasesInputFirstRemove
+      @current_page.saveAliases
+      ajax_wait
+      @current_page.wait_for_api_callback
+      @browser.refresh
+      @current_page.wait_for_aliases_to_load
+      @current_page.wait_for_item_to_load
+      @current_page.countExistingAliases.should == num_current_aliases
     end
   end
 
