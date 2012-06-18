@@ -114,10 +114,10 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 	/**
 	 * @see wikibase.ui.PropertyEditTool.getPropertyName
 	 *
-	 * @return string 'label'
+	 * @return string 'aliases'
 	 */
 	getPropertyName: function() {
-		return 'label';
+		return 'aliases';
 	},
 
 	/**
