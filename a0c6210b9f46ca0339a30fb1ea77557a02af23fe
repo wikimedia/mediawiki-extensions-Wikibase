@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAM3//+MM\u003d",
+        "filename": ".gitignore",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "Please put stuff like that in your local .gitignore, no need to have that globally — the repo path may not even be available...",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAM3//+Og\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 3
@@ -19,6 +36,40 @@
     },
     {
       "key": {
+        "uuid": "AAAAM3//+ME\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "\"modularity\" :)",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+MA\u003d",
+        "filename": "repo/resources/wikibase.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "\"JavaScript\"",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAM3//+Nw\u003d",
         "filename": "repo/resources/wikibase.libs/README",
         "patchSetId": 3
@@ -30,6 +81,142 @@
       "writtenOn": "2012-06-18T09:30:33Z",
       "side": 1,
       "message": "This folder does not contain any source files. Remove it?",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+Lw\u003d",
+        "filename": "repo/resources/wikibase.ui.AliasesEditTool.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "email address for Henning? :)",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+Lo\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableAliases.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "\"JavaScript\"",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+Lk\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "Cool, you are up to date with ALL the new ECMAScript 5 features!",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+LU\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.Interface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "Huh? What keeps you from fixing this?",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+LM\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "\"JavaScript\"",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+LI\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "no email?",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+LA\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "\"JavaScript\" -- please fix this typo in all the files.",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAM3//+K8\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-18T10:41:55Z",
+      "side": 1,
+      "message": "e-mail addresses?",
       "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
