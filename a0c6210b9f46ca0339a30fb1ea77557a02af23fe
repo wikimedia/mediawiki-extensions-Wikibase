@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAM3//+IU\u003d",
+        "filename": ".gitignore",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-06-18T12:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAM3//+MM\u003d",
+      "revId": "a0c6210b9f46ca0339a30fb1ea77557a02af23fe",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAM3//+Og\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 3
