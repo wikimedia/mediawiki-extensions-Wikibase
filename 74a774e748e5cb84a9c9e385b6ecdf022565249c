@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "AAAANX///v0\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-18T20:52:59Z",
+      "side": 1,
+      "message": "the \"path\" is the path of keys in the diff structure, e.g. \"sites / en\". It\u0027s shown to let the user know what has been changed. This isn\u0027t pretty at all and needs more thought, but it\u0027ll do for now.",
+      "parentUuid": "AAAANX///9c\u003d",
+      "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX///+A\u003d",
         "filename": "repo/includes/DifferenceEngine.php",
         "patchSetId": 2
@@ -98,6 +116,24 @@
       "writtenOn": "2012-06-18T16:12:34Z",
       "side": 1,
       "message": "What is this? I don\u0027t even\n\n:)",
+      "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///vw\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-18T20:52:59Z",
+      "side": 1,
+      "message": "oh, forgot to remove that. just a chunk of the output of the normal wikitext diff, for reference.",
+      "parentUuid": "AAAANX///+A\u003d",
       "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
