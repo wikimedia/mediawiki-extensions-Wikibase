@@ -76,6 +76,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 			.addClass( this.UI_CLASS )
 			.addClass( 'wb-ui-propertyedittool-editablevaluelistinterface' ); // additional UI class
 
+		inputElement
+		.on( 'tagadatataginserted', $.proxy( function( e, tag ) {
+			$( tag ).find( 'input' ).on( 'keypress', $.proxy( function( event ) {
+				this._onKeyPressed( event );
+			}, this ) );
+		}, this ) );
+
 		inputElement.tagadata( {
 			animate: false, // FIXME: when animated set to true, something won't work in there, fails silently then
 			placeholderText: this.inputPlaceholder,
@@ -84,7 +91,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 		// register event after initial tags were added on tag-a-data initialization!
 		.on( 'tagadatatagadded tagadatatagchanged', $.proxy( function( e, tag ) {
 			this._onInputRegistered();
-		}, this ) );
+		}, this ) )
 
 		return inputElement;
 	},
