@@ -17,8 +17,8 @@
  *
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableAliases = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
+window.wikibase.ui.PropertyEditTool.EditableAliases = function( subject, toolbar ) {
+	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject, toolbar );
 };
 window.wikibase.ui.PropertyEditTool.EditableAliases.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
@@ -87,6 +87,23 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 		return value !== null
 			? value.split( '|' ) // TODO: not yet supported by the API and the way this will be returned might (hopefully) be different.
 			: null;
+	},
+
+	/**
+	 * EditableAliases has no option to manually trigger a complete removal of the input component
+	 * (but when saving with an empty value, a remove action is implied without having a remove button to which an error
+	 * tooltip may be attached to; subsequently, the remove action has to be internally converted to an action
+	 * triggered by the save button internally)
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.showError
+	 *
+	 * @param object error
+	 * @param number apiAction see wikibase.ui.PropertyEditTool.EditableValue.API_ACTION enum
+	 */
+	showError: function( error, apiAction ) {
+		if ( apiAction === this.API_ACTION.REMOVE ) {
+			apiAction = this.API_ACTION.SAVE_TO_REMOVE;
+		}
+		wikibase.ui.PropertyEditTool.EditableValue.prototype.showError.call( this, error, apiAction );
 	},
 
 	/**
