@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAANX///9g\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-18T16:12:34Z",
+      "side": 0,
+      "message": "Not and issue with this commit, but should this not be something like ItemDiffView?",
+      "revId": "8b2b50f1a4c5ee9ba0f3ab53058582894b955364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}

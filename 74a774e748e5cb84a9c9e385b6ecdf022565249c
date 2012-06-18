@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAANX///98\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-18T16:12:34Z",
+      "side": 1,
+      "message": "Style: brackets",
+      "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///94\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-18T16:12:34Z",
+      "side": 1,
+      "message": "Style: Spaces",
+      "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///+I\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-18T16:12:34Z",
+      "side": 1,
+      "message": "Arrrg, don\u0027t use instanceof evilness. There is a getType method.",
+      "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///+E\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-18T16:12:34Z",
+      "side": 1,
+      "message": "Probably better to just import Html and not have to enter the full path everywhere :)",
+      "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///9c\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-18T16:12:34Z",
+      "side": 1,
+      "message": "$p is NOT a good name.\n\n$subop isn\u0027t either. $subOp is better, although why not just type $subOperation and have it obvious to everyone?\n\n$key ...\n\n$path huh? what path?",
+      "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///+A\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-18T16:12:34Z",
+      "side": 1,
+      "message": "What is this? I don\u0027t even\n\n:)",
+      "revId": "74a774e748e5cb84a9c9e385b6ecdf022565249c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
