@@ -759,7 +759,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param jQuery.Event event
 	 */
 	_interfaceHandler_onKeyPressed: function( relatedInterface, event ) {
-		if( event.which == 13 ) { // enter key
+		if( event.which === $.ui.keyCode.ENTER ) {
 			if( this.valueCompare( this.getInitialValue(), this.getValue() ) ) {
 				// value not modified yet, cancel button not available but enter should also stop editing
 				this._toolbar.editGroup.btnCancel.doAction();
@@ -792,6 +792,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	destroy: function() {
 		this.preserveEmptyForm = false; // will cause stopEditing() to completely erase all structure
+		                                // TODO/FIXME: not the nicest way of doing this!
 		this.stopEditing( false );
 		if( this._toolbar !== null) {
 			this._toolbar.destroy();
