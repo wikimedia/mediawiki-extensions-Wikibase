@@ -32,6 +32,15 @@ class ViewItemAction extends \FormlessAction {
 	 * @see FormlessAction::onView()
 	 */
 	public function onView() {
+		# If we got diff in the query, we want to see a diff page instead of the article.
+		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
+			wfDebug( __METHOD__ . ": showing diff page\n" );
+			$this->showDiffPage(  );
+			wfProfileOut( __METHOD__ );
+
+			return;
+		}
+
 		$content = $this->getContext()->getWikiPage()->getContent();
 
 		if ( is_null( $content ) ) {
@@ -47,7 +56,21 @@ class ViewItemAction extends \FormlessAction {
 		return '';
 	}
 
-	/**
+	public function showDiffPage() {
+		//XXX: would be nice if we could just inherit this from ViewAction.
+		//XXX: maybe move logic from Article to ViewAction?
+
+		//FIXME: don't allow editing? editing would revert the whole item!
+		//FIXME: how to revert? how to undo???
+		//FIXME: currrently, the diff title is editable!
+
+		$title = $this->getContext()->getTitle();
+
+		$article = new \Article( $title );
+		$article->showDiffPage();
+	}
+
+		/**
 	 * (non-PHPdoc)
 	 * @see Action::getDescription()
 	 */
