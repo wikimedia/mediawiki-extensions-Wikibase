@@ -296,6 +296,15 @@ final class WikibaseHooks {
 					'dump' => true,
 					'dumpfm' => true,
 				),
+				// settings for the user agent
+				'userAgent' => '$1 (Wikibase $2)',
+				'clientTimeout' => 5,
+				'clientPageOpts' => array(
+					'action' => 'query',
+					'prop' => 'info',
+					'redirects' => true,
+					'converttitles' => true,
+					'format' => 'json',
 
 				// Which messages to use while formating logs
 				'apiFormatMessages' => array(
