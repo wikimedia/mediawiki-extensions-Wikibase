@@ -211,13 +211,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Removes the value from the data store via the API. Also removes the values representation from the dom stated
 	 * differently.
 	 *
-	 * @return jQuery.Deferred in case the remove was called before and is still running, the deferred from the ongoing
+	 * @return jQuery.Promise in case the remove was called before and is still running, the deferred from the ongoing
 	 *         remove will be returned and the deferreds property isOngoingRemove will be set to true.
 	 */
 	remove: function() {
 		if( this.__isRemoving ) {
 			this.__isRemoving.isOngoingRemove = true;
-			return this.__isRemoving_deferred; // returns the deferred
+			return this.__isRemoving_deferred.promise(); // returns the deferred
 		}
 
 		var degrade = $.proxy( function() {
@@ -253,7 +253,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 					this.__isRemoving = false;
 				}, this ) );
 
-			return this.__isRemoving_deferred; // return deferred
+			return this.__isRemoving_deferred.promise(); // return deferred
 		}
 	},
 
@@ -261,7 +261,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Saves the current value by sending it to the server. In case the current value is invalid, this will trigger a
 	 * remove instead but will preserve the form to insert a new value.
 	 *
-	 * @return jQuery.Deferred
+	 * @return jQuery.Promise
 	 */
 	save: function() {
 		if( arguments.length > 0 ) {
@@ -279,7 +279,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			this._pending = false; // not pending anymore after saved once
 			this._subject.removeClass( 'wb-pending-value' );
 			$( this ).triggerHandler( 'afterStopEditing', [ true, wasPending ] );
-		}, this ) );
+		}, this ) )
+		.promise();
 	},
 
 	/**
@@ -397,7 +398,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Performs one of the actions available in the this.API_ACTION enum and handles all API related stuff.
 	 *
 	 * @param number apiAction see this.API_ACTION enum for all available actions
-	 * @return jQuery.Deferred
+	 * @return jQuery.Promise
 	 */
 	performApiAction: function( apiAction ) {
 		// we have to build our own deferred since the jqXHR object returned by api.proxy() is just referring to the
@@ -450,7 +451,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}, this ) );
 		this._subject.addClass( this.UI_CLASS + '-waiting' );
 
-		return deferred;
+		return deferred.promise();
 	},
 
 	/**
