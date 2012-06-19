@@ -7,6 +7,7 @@ class AliasesItemPage < NewItemPage
   div(:aliasesDiv, :class => "wb-aliases")
   span(:aliasesTitle, :class => "wb-aliases-label")
   unordered_list(:aliasesList, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool']/span[2]/div/ul")
+  div(:addAliasesDiv, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool']/div")
   link(:addAliases, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool']/div/div/a[text()='add']")
   link(:editAliases, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool']/span[2]/span/div/div/div/a[text()='edit']")
   link(:saveAliases, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool']/span[2]/span/div/div/div/a[text()='save']")

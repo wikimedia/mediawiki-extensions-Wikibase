@@ -197,8 +197,8 @@ window.wikibase.ui.Toolbar.prototype = {
 	hide: function() {
 		if ( this._display === null || this._display === 'none' ) {
 			this._display = this._elem.css( 'display' );
-			this._elem.css( 'display', 'none' );
 		}
+		this._elem.css( 'display', 'none' );
 		return this.isHidden();
 	},
 
