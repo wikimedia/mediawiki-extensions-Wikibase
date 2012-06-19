@@ -70,34 +70,32 @@ class ApiLinkSite extends ApiModifyItem {
 			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			// Note that the following can create inconsistency between results from
-			// a test environment and a production environment!
-			// if the code is not under test, then access client sites
-			if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-				$agent = ClientPage::newQuery( $params['linksite'], $params['linktitle'] );
-				if ( !$agent->hasReply() ) {
-					$this->dieUsage( wfMsg( 'wikibase-api-no-external-reply' ), 'no-external-reply' );
+			$res = $this->getResult();
+			$ret = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
+			
+			if ( $ret !== false ) {
+				$normalized = array();
+				if ( $params['linksite'] !== $ret['site'] ) {
+					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $ret['site'] );
 				}
-	
-				$page = $agent->lookup( $params['linktitle'] );
-				if ( $page === false || isset( $page['missing'] ) ) {
-					$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
+
+				if ( $params['linktitle'] !== $ret['title'] ) {
+					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $ret['title'] );
 				}
-	
-				$ret = $item->addSiteLink( $params['linksite'], $page['title'], $params['link'] );
-				if ( $ret === false ) {
-					$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
+
+				// FIXME: Code for link badges
+
+				if ( count($normalized) ) {
+					$res->addValue(
+						'item',
+						'normalized',
+						$normalized
+					);
 				}
+
+				$this->addSiteLinksToResult( array( $ret['site'] => $ret ), 'item' );
 			}
-			// else skip accessing client sites
-			else {
-				$ret = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
-				if ( $ret === false ) {
-					$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
-				}
-			}
-	
-			$this->addSiteLinksToResult( array( $ret['site'] => $ret ), 'item' );
+
 			return $ret !== false;
 		}
 	}

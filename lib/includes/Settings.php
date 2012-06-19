@@ -136,7 +136,6 @@ class Settings {
 
 			'defaultSiteUrlPath' => '/wiki/$1',
 			'defaultSiteFilePath' => '/w/$1',
-			'defaultSiteScript' => '/w/$1',
 			'defaultSiteType' => 'unknown',
 
 			// The site link sites we can link to (not necessarily clients!)
