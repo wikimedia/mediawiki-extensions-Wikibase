@@ -1,0 +1,8 @@
+Change-Id: I04ce0cd7e28ca8ada3e6fd28b15cd4aa0638961d
+Code-Review+2: Jeroen De Dauw <jeroendedauw@gmail.com>
+Verified+1: Jeroen De Dauw <jeroendedauw@gmail.com>
+Submitted-by: Jeroen De Dauw <jeroendedauw@gmail.com>
+Submitted-at: Tue, 19 Jun 2012 15:14:34 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/12019
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
