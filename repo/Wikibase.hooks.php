@@ -296,6 +296,18 @@ final class WikibaseHooks {
 					'dump' => true,
 					'dumpfm' => true,
 				),
+				// settings for the user agent
+				'clientTimeout' => 5,
+				'clientPageOpts' => array(
+					'userAgent' => 'Wikibase',
+				),
+				'clientPageArgs' => array(
+					'action' => 'query',
+					'prop' => 'info',
+					'redirects' => true,
+					'converttitles' => true,
+					'format' => 'json',
+				),
 			)
 		);
 
