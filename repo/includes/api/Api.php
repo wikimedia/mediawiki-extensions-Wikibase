@@ -16,6 +16,7 @@ use UtfNormal, User, Status;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 abstract class Api extends \ApiBase {
+
 	/**
 	 * Var to keep the set status for later use
 	 * @var bool how to handle the keys

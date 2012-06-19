@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Title, ApiBase;
+use User, Title, ApiBase, Sanitizer;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -30,7 +30,7 @@ abstract class ApiModifyItem extends Api {
 	/**
 	 * Actually modify the item.
 	 *
-	 * @since    0.1
+	 * @since 0.1
 	 *
 	 * @param ItemContent $item
 	 * @param array       $params
@@ -39,6 +39,34 @@ abstract class ApiModifyItem extends Api {
 	 * @return bool Success indicator
 	 */
 	protected abstract function modifyItem( ItemContent &$item, array $params );
+
+	/**
+	 * Check the rights for the user accessing the module, module name and operation comes from the actual subclass.
+	 * 
+	 * @param $title Title object where the item is stored
+	 * @param $user User doing the action
+	 * @param $mod null|String name of the module, usually not set
+	 * @param $op null|String operation that is about to be done, usually not set
+	 * @return array of errors reported from the static getPermissionsError
+	 */
+	protected static function getPermissionsError( $user, $mod=null, $op=null ) {
+		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
+			return null;
+		}
+		
+		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
+	}
+	
+	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $useShortMessage boolean that switch between long and short format
+	 * @param $params array with parameters for the call
+	 * @return string that can be used as an auto comment
+	 */
+	protected abstract function autoComment( array $params, $useShortMessage=false );
 
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
@@ -80,6 +108,8 @@ abstract class ApiModifyItem extends Api {
 			$normTitle = Api::squashToNFC( $params['title'] );
 			$hasLink = true;
 		}
+
+		$hasLink = isset( $params['site'] ) && $params['title'];
 		$itemContent = null;
 
 		$this->validateParameters( $params );
@@ -136,8 +166,18 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
 		}
 
+		//$isNew = $itemContent->getItem()->isNew();
+
+		$summary = Sanitizer::escapeHtmlAllowEntities( isset($params['summary']) ? $params['summary'] : '' );
+		$comment = $this->autoComment(
+			$params,
+			SUMMARY_MAX_LENGTH
+				- strlen( $summary ) /* this must be counted for a filtered string, and its a byte count on a multibyte string */
+				- (isset( $params['summary'] ) ? 6 : 7) /* add according to overall formatting */
+		);
+		$comment = $comment !== "" ? "/* $comment */" : '';
 		// Do the actual save, or if it don't exist yet create it.
-		$status = $itemContent->save();
+		$status = $itemContent->save( $comment . ( ($comment !== "" && $summary !== "") ? '' : ' ' ) . $summary );
 		$success = $status->isOK();
 
 		if ( !$success ) {
@@ -156,6 +196,9 @@ abstract class ApiModifyItem extends Api {
 			);
 
 			if ( $hasLink ) {
+				// normalizing site does not really give any meaning
+				// so we only normalize title
+				$normTitle = Api::squashToNFC( $params['title'] );
 				$normalized = array();
 
 				if ( $normTitle !== $params['title'] ) {
@@ -247,10 +290,9 @@ abstract class ApiModifyItem extends Api {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			//'summary' => array(
-			//	ApiBase::PARAM_TYPE => 'string',
-			//	ApiBase::PARAM_DFLT => __CLASS__, // TODO
-			//),
+			'summary' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
 			'item' => array(
 				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set' ),
 				ApiBase::PARAM_DFLT => 'update',
@@ -281,9 +323,100 @@ abstract class ApiModifyItem extends Api {
 				"update - the item shuld exist before the call or an error will be reported.",
 				"set - the item could exist or not before the call.",
 			),
-			// 'summary' => 'Summary for the edit.',
+			'summary' => array( 'Summary for the edit.',
+				"Will be prepended by an automatically generated comment."
+			),
 			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
 		) );
+	}
+
+	/**
+	 * Pick values from the params array and string them together
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $max_length integer is the byte length of the available space
+	 */
+	protected static function pickValuesFromParams( array $params, $max_length ) {
+
+		// the keys of the values that shall be extracted
+		$keys = func_get_args();
+
+		// shift out the args that is handled
+		array_shift( $keys );
+		array_shift( $keys );
+
+		// accumulator for the length
+		$overallLength = 0;
+
+		// the continuation marker can't be localized as it is written into the comment
+		$contLength = strlen( SUMMARY_CONTINUATION );
+
+		// check if there is any space at all
+		if ( $max_length <= 0 ) {
+			return '';
+		}
+
+		// collect the values
+		// note that we must figure out how many of the args we can find and what they contains
+		// before we can chop the remaining string to the correct length
+		$arr = array();
+		foreach ( array_intersect_key( $params, array_flip( $keys ) ) as $k => $v ) {
+			if ( is_string( $v ) ) {
+				$value = Sanitizer::escapeHtmlAllowEntities( $v );
+				// note that we use previous overall length and fix overflow later
+				if ( $max_length < $overallLength ) {
+					array_push( $arr, $continuationMarker );
+					$overallLength += ( $overallLength ? 1 + $contLength : $contLength );
+				}
+				else {
+					array_push( $arr, $value );
+					$overallLength += ( $overallLength ? 1 + strlen( $value ) : strlen( $value ) );
+				}
+			}
+			elseif ( is_array( $v ) ) {
+				$value = Sanitizer::escapeHtmlAllowEntities( join( SUMMARY_SUBGROUPING, $v ) );
+				// note that we use previous overall length and fix overflow later
+				if ( $max_length < $overallLength ) {
+					array_push( $arr, $continuationMarker );
+					$overallLength += ( $overallLength ? 1 + $contLength : $contLength );
+				}
+				else{
+					array_push( $arr, $value );
+					$overallLength += ( $overallLength ? 1 + strlen( $value ) : strlen( $value ) );
+				}
+			}
+			else {
+				array_push( $arr, $continuationMarker );
+				$overallLength += ( $overallLength ? 1 + $contLength : $contLength );
+			}
+		}
+		// if the overall length of the collected string is to long the values needs to be shortened
+		// that is the elements with overflow from the previous must be identified and shortened
+		if ( $overallLength > $max_length ) {
+			for ( $i = count( $arr )-1; 0 <= $i; $i-- ) {
+				// can't shorten?
+				if ( $arr[$i] === "" || $arr[$i] === $continuationMarker ) {
+					continue;
+				}
+				// still too long?
+				elseif ( $overallLength > $max_length ) {
+					$lengthOfElement = strlen( $arr[$i] );
+					$diffLength = $max_length - $overallLength;
+					// to little space left?
+					if ($diffLength < 0) {
+						$diffLength -= $contLength;
+						$matchLength = $lengthOfElement + $diffLength;
+						$chopped = mb_strcut( $arr[$i], 0, $matchLength );
+						$chopped .= SUMMARY_CONTINUATION;
+						$overallLength += strlen( $chopped ) - $lengthOfElement;
+						$arr[$i] = $chopped;
+					}
+				}
+			}
+		}
+		return implode('|', $arr);
 	}
 
 }

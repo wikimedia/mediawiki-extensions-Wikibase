@@ -29,6 +29,33 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 	}
 
 	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $available integer the number of bytes available for the autocomment
+	 * @return string that can be used as an auto comment
+	 */
+	protected function autoComment( array $params, $available=128 ) {
+		$flipped = array_flip( $params['attribute'] );
+		$count = count( $params['attribute'] );
+		if ( 1<$count ) {
+			$comment = "delete-language-attributes:" . $params['language'];
+		}
+		elseif ( array_key_exists( 'label', $flipped ) ) {
+			$comment = "delete-language-label:" . $params['language'];
+		}
+		elseif ( array_key_exists( 'description', $flipped ) ) {
+			$comment = "delete-language-description:" . $params['language'];
+		}
+		else {
+			$comment = '';
+		}
+		return $comment;
+	}
+
+	/**
 	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1

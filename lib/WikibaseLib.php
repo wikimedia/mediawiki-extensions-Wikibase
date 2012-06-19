@@ -64,6 +64,16 @@ $wgSiteTypes = array();
 
 $wgSiteTypes[SITE_TYPE_MEDIAWIKI] = 'Wikibase\MediaWikiSite';
 
+/**
+ * Constants for parsing of summary
+ * This could exist somewhere under another name
+ */
+define( 'SUMMARY_MAX_LENGTH', '250' );
+define( 'SUMMARY_CONTINUATION', '…' );
+define( 'SUMMARY_GROUPING', '|' );
+define( 'SUMMARY_SUBGROUPING', '¦' );
+
+
 // i18n
 $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 

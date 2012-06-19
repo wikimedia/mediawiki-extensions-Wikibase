@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File defining the hook handlers for the Wikibase Client extension.
+ * File defining the hook handlers for the Wikibase Repo extension.
  *
  * @since 0.1
  *
@@ -50,7 +50,11 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
+		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
+
 		$testFiles = array(
+			//'ChangeNotifier',
+			//'Utils',
 			'ItemMove',
 			'EntityHandler',
 			'ItemContent',
@@ -95,7 +99,7 @@ final class WikibaseHooks {
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
 
-		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
+		if ( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			$pageLanguage = $language;
 		}
@@ -198,6 +202,7 @@ final class WikibaseHooks {
 			 */
 			$newItem = $article->getContent()->getItem();
 
+			//$oldItem = is_null( $revision->getParentId() ) ? Wikibase\Item::newEmpty() : Revision::newFromId( $revision->getParentId() )->getContent();
 			if ( is_null( $revision->getParentId() ) ) {
 				$change = \Wikibase\ItemCreation::newFromItem( $newItem );
 			}
@@ -399,6 +404,30 @@ final class WikibaseHooks {
 					'dump' => true,
 					'dumpfm' => true,
 				),
+
+				// Which messages to use while formating logs
+				'apiFormatMessages' => array(
+					'languages' => array(
+						'delete-language-attributes' => 'wikibase-api-summary-delete-language-attributes',
+						'delete-language-label' => 'wikibase-api-summary-delete-language-label',
+						'delete-language-description' => 'wikibase-api-summary-delete-language-description',
+						'delete-language-badge' => 'wikibase-api-summary-delete-language-badge',
+						'change-aliases' => 'wikibase-api-summary-change-aliases',
+						'set-aliases' => 'wikibase-api-summary-set-aliases',
+						'remove-aliases' => 'wikibase-api-summary-remove-aliases',
+						'add-aliases' => 'wikibase-api-summary-add-aliases',
+						'set-language-attributes' => 'wikibase-api-summary-set-language-attributes',
+						'set-language-label' => 'wikibase-api-summary-set-language-label',
+						'set-language-description' => 'wikibase-api-summary-set-language-description',
+						'set-language-badges' => 'wikibase-api-summary-set-language-badges',
+					),
+					'sites' => array(
+						'add-sitelink' => 'wikibase-api-summary-add-sitelink',
+						'update-sitelink' => 'wikibase-api-summary-update-sitelink',
+						'set-sitelink' => 'wikibase-api-summary-set-sitelink',
+						'remove-sitelink' => 'wikibase-api-summary-remove-sitelink',
+					),
+				),
 				// settings for the user agent
 				//TODO: This should REALLY be handled somehow as without it we could run into lots of trouble
 				'clientTimeout' => 10, // this is before final timeout, without maxlag or maxage we can't hang around
@@ -439,6 +468,102 @@ final class WikibaseHooks {
 			unset( $links['views']['edit'] );
 		}
 
+		return true;
+	}
+
+	/**
+	 * Pretty formating of autocomments.
+	 *
+	 * @param string $comment reference to the finalized autocomment
+	 * @param string $pre the string before the autocomment
+	 * @param string $auto the autocomment unformatted
+	 * @param string $post the string after the autocomment
+	 * @param Titel $title use for further information
+	 * @param boolean $local shall links be genreted locally or globally
+	 */
+	public static function onFormatAutocomments( $comment, $pre, $auto, $post, $title, $local ) {
+		global $wgLang;
+
+		// Note that it can be necessary to check the title object and/or item before any
+		// other code is run in this callback. If it is possible to avoid loading the whole
+		// page then the code will be lighter on the server. Present code formats autocomment
+		// after detecting a legal message key, and without using the title or page.
+
+		// our first prerequisite to process this comment is to have the following form
+		$matches = array(); //not really needed, just to show whats happening
+		if ( preg_match( '/^([\-\w]+):(.*)$/', $auto, $matches ) ) {
+			// then we should check each initial part if it is a key in the array
+			$messages = \Wikibase\Settings::get( 'apiFormatMessages' );
+			foreach ( $messages as $key => $msgs ) {
+
+				// if it matches one key we can procede
+				if ( isset( $msgs[$matches[1]] ) ) {
+
+					// keep the replacement message name for later..
+					$msg = $msgs[$matches[1]];
+
+					// and the messages used as wrappers and joiners for the head part
+					$headWrapper = wfMessage( 'wikibase-api-summary-wrapper-' . $key );
+
+					// and the messages used as wrappers and joiners for the tail part
+					$tailWrapper = wfMessage( 'wikibase-api-summary-wrapper' );
+
+					// turn our args into an array
+					$args = explode( SUMMARY_GROUPING, $matches[2] );
+
+					// and pop the head and format each element
+					$f = function( $v ) use ( $headWrapper ) {
+						$headmsg = clone $headWrapper;
+						return $headmsg->params( trim($v) )->text();
+					};
+					$head = array_map( $f, explode( SUMMARY_SUBGROUPING, $args[0] ) );
+
+					// make a unique list of the remaining args
+					array_shift( $args );
+					$tail = array();
+					$g = function( $v ) use ( $tailWrapper ) {
+						$tailMessage = clone $tailWrapper;
+						$v = trim( $v );
+						// mb_ereg can't be anchored, so this is easier
+						$str = null;
+						if ( $v !== "" ) {
+							$char = mb_substr( $v, mb_strlen( $v ) -1, 1 );
+							if ( $char === SUMMARY_CONTINUATION ) {
+								$str = $tailMessage->params( mb_substr( $v, 0, mb_strlen( $v ) - 1 ), $char )->text();
+							}
+							else {
+								$str =  $tailMessage->params( $v, '' )->text();
+							}
+						}
+						return $str ? $str : $tailMessage->params( '', '' )->text();
+					};
+					foreach ( $args as $arg ) {
+						$tail = array_merge( $tail, array_map( $g, explode( SUMMARY_SUBGROUPING, $arg ) ) );
+					}
+
+					// build the core message
+					$auto = wfMessage( $msg,
+						count( $head ),
+						$wgLang->commaList( $head ),
+						count( $tail ),
+						$wgLang->commaList( $tail )
+					)->escaped(); // to show where the parenthesis are
+
+					if ( $pre ) {
+						# written summary $presep autocomment (summary /* section */)
+						$pre .= wfMessage( 'autocomment-prefix', array( 'escapenoentities', 'content' ) )->escaped();
+					}
+
+					if ( $post ) {
+						# autocomment $postsep written summary (/* section */ summary)
+						$auto .= wfMessage( 'colon-separator', array( 'escapenoentities', 'content' ) )->escaped();
+					}
+
+					$auto = '<span class="autocomment">' . $auto . '</span>';
+					$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
+				}
+			}
+		}
 		return true;
 	}
 
