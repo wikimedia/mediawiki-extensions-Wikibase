@@ -16,6 +16,23 @@
       "revId": "8b2b50f1a4c5ee9ba0f3ab53058582894b955364",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///lU\u003d",
+        "filename": "repo/includes/DifferenceEngine.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-19T08:08:58Z",
+      "side": 0,
+      "message": "\"DifferenceEngine\" in core is already misnamed and should be called \"DiffView\" or some such - it implements the view, not the actual diff logic.\n\nAnyway, I guess we should stay consistent.",
+      "revId": "8b2b50f1a4c5ee9ba0f3ab53058582894b955364",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
