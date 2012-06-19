@@ -44,7 +44,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 	 * @return wikibase.ui.PropertyEditTool.EditableValue.AliasInterface[]
 	 */
 	_buildInterfaces: function( subject ) {
-		var interfaces = new Array();
+		var interfaces = [];
 
 		// we have to wrap the list in another node for the ListInterface, since the <ul/> is the actual value
 		var interfaceParent = $( '<div/>' );

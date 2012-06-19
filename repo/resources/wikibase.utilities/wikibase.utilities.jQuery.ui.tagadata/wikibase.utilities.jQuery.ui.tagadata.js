@@ -24,6 +24,7 @@
  *
  * TODO: Danwe: This should be refactored to introduce a 'Tag' Prototype for representing tags. Right now the whole
  *       thing is a mess made of functions returning/expecting either a label or a DOM node.
+ * TODO: Documentation for events
  */
 
 ( function( $, mw, undefined ) {
@@ -68,9 +69,7 @@
 			 * input to be added as tag. $.ui.keyCode members can be used for convenience.
 			 * @var Number[]
 			 */
-			triggerKeys: [
-				$.ui.keyCode.ENTER
-			],
+			triggerKeys: [],
 
 			// Event callbacks.
 			tagAdded: null,
@@ -386,6 +385,7 @@
 				// only trigger if this isn't the helper tag
 				this._trigger( 'tagAdded', null, tag );
 			}
+			this._trigger( 'tagInserted', null, tag ); // event fired for both, helper and normal tags
 
 			return tag;
 		},
@@ -441,6 +441,8 @@
 
 			this.tagList.children().removeClass( 'tagadata-choice-empty' );
 			tag.addClass( 'tagadata-choice-empty' );
+
+			this._trigger( 'helperTagAdded', null, tag );
 
 			return tag;
 		},
