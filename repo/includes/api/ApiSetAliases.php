@@ -47,6 +47,47 @@ class ApiSetAliases extends ApiModifyItem {
 	}
 	
 	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $available integer the number of bytes available for the autocomment
+	 * @return string that can be used as an auto comment
+	 */
+	protected function autoComment( array $params, $available=128 ) {
+		$count = (int)isset( $params['set'] ) + (int)isset( $params['remove'] ) + (int)isset( $params['add'] );
+		if ( 1<$count ) {
+			$comment = "change-aliases:" . $params['language']
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams($params, $available - strlen( "change-aliases:" . $params['language'] ), 'set' )
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams($params, $available - strlen( "change-aliases:" . $params['language'] ), 'remove' )
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams($params, $available - strlen( "change-aliases:" . $params['language'] ), 'add' );
+		}
+		elseif ( isset( $params['set'] ) ) {
+			$comment = "set-aliases:" . $params['language']
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams($params, $available - strlen( "set-aliases:" . $params['language'] ), 'set' );
+		}
+		elseif ( isset( $params['remove'] ) ) {
+			$comment = "remove-aliases:" . $params['language']
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams($params, $available - strlen( "remove-aliases:" . $params['language'] ), 'remove' );
+		}
+		elseif ( isset( $params['add'] ) ) {
+			$comment = "add-aliases:" . $params['language']
+				. SUMMARY_GROUPING
+				. ApiModifyItem::pickValuesFromParams($params, $available - strlen( "add-aliases:" . $params['language'] ), 'add' );
+		}
+		else {
+			$comment = '';
+		}
+		return $comment;
+	}
+
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
