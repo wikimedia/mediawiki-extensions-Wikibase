@@ -60,7 +60,7 @@ $messages['fr'] = array(
 	'wikibaselib-desc' => 'Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client',
 );
 
-/** Galician (Galego)
+/** Galician (galego)
  * @author Toliño
  */
 $messages['gl'] = array(
