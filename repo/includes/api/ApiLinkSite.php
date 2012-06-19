@@ -32,7 +32,7 @@ class ApiLinkSite extends ApiModifyItem {
 	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
 		return parent::getPermissionsError( $user, 'site-link', $params['link'] );
 	}
-	
+
 	/**
 	 * Actually modify the item.
 	 *
@@ -48,31 +48,35 @@ class ApiLinkSite extends ApiModifyItem {
 			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			$res = $this->getResult();
-			$ret = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
-			
-			if ( $ret !== false ) {
-				$normalized = array();
-				if ( $params['linksite'] !== $ret['site'] ) {
-					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $ret['site'] );
+			// Note that the following can create inconsistency between results from
+			// a test environment and a production environment!
+			// if the code is not under test, then access client sites
+			if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+				$agent = ClientPage::newQuery( $params['linksite'], $params['linktitle'] );
+				if ( !$agent->hasData() ) {
+					$this->dieUsage( wfMsg( 'wikibase-api-no-external-data' ), 'no-external-data' );
 				}
 
-				if ( $params['linktitle'] !== $ret['title'] ) {
-					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $ret['title'] );
+				$page = $agent->lookup( $params['linktitle'] );
+				if ( $page === false || isset( $page['missing'] ) ) {
+					$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
 				}
 
-				if ( count($normalized) ) {
-					$res->addValue(
-						'item',
-						'normalized',
-						$normalized
-					);
+				$sitelink = $item->addSiteLink( $params['linksite'], $page['title'], $params['link'] );
+				if ( $sitelink === false ) {
+					$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
 				}
-
-				$this->addSiteLinksToResult( array( $ret['site'] => $ret ), 'item' );
 			}
-
-			return $ret !== false;
+			// else skip accessing client sites
+			else {
+				$sitelink = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
+				if ( $sitelink === false ) {
+					$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
+				}
+			}
+			$this->addSiteLinksToResult( array( $sitelink['site'] => $sitelink ), 'item' );
+			//$this->addSiteLinksToResult( array( $sitelink['site'] => $sitelink['title'] ), 'item' );
+			return $sitelink !== false;
 		}
 	}
 
