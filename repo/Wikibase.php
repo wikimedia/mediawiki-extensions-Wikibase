@@ -79,7 +79,6 @@ $wgExtensionMessagesFiles['WikibaseAlias'] 	= $dir . 'Wikibase.i18n.alias.php';
 $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php';
 
 
-
 // Autoloading
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
@@ -121,8 +120,6 @@ $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/
 //$wgAutoloadClasses['Wikibase\Test\TestItems'] 			= $dir . 'tests/phpunit/includes/TestItems.php';
 
 
-
-
 // API module registration
 $wgAPIModules['wbgetitems'] 						= 'Wikibase\ApiGetItems';
 $wgAPIModules['wbgetitemid'] 						= 'Wikibase\ApiGetItemId';
@@ -134,12 +131,10 @@ $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbsetitem'] 							= 'Wikibase\ApiSetItem';
 
 
-
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
-
 
 
 // Hooks
@@ -155,171 +150,9 @@ $wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOption
 $wgHooks['FormatAutocomments'][]					= 'WikibaseHooks::onFormatAutocomments';
 
 
+// Resource Loader Modules:
+$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
-// Resource loader modules
-$moduleTemplate = array(
-	'localBasePath' => dirname( __FILE__ ) . '/resources',
-	'remoteExtPath' =>  'Wikibase/repo/resources'
-);
-
-// common styles independent from JavaScript being enabled or disabled
-$wgResourceModules['wikibase.common'] = $moduleTemplate + array(
-	'styles' => array(
-		'wikibase.css'
-	)
-);
-
-$wgResourceModules['wikibase'] = $moduleTemplate + array(
-	'scripts' => array(
-		'wikibase.js',
-		'wikibase.Site.js'
-	),
-	'dependencies' => array(
-		'wikibase.common'
-	),
-	'messages' => array(
-		'special-createitem',
-		'wb-special-createitem-new-item-notification'
-	)
-);
-
-$wgResourceModules['wikibase.utilities.jQuery'] = $moduleTemplate + array(
-	'scripts' => array(
-		'wikibase.utilities/wikibase.utilities.js',
-		'wikibase.utilities/wikibase.utilities.jQuery.js',
-		'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
-		'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
-	)
-);
-
-$wgResourceModules['wikibase.utilities.jQuery.ui.inputAutoExpand'] = $moduleTemplate + array(
-	'scripts' => array(
-		'wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.js',
-	),
-	'dependencies' => array(
-		'wikibase.utilities.jQuery',
-	)
-);
-
-$wgResourceModules['wikibase.utilities.jQuery.ui.tagadata'] = $moduleTemplate + array(
-	'scripts' => array(
-		'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.js',
-	),
-	'styles' => array(
-		'wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata/wikibase.utilities.jQuery.ui.tagadata.css',
-	),
-	'dependencies' => array(
-		'wikibase.utilities.jQuery',
-		'wikibase.utilities.jQuery.ui.inputAutoExpand',
-		'jquery.ui.widget',
-		'jquery.effects.core',
-		'jquery.effects.blind'
-	)
-);
-
-$wgResourceModules['wikibase.tests.qunit.testrunner'] = $moduleTemplate + array(
-	'scripts' => '../tests/qunit/data/testrunner.js',
-	'dependencies' => array(
-		'mediawiki.tests.qunit.testrunner',
-	),
-	'position' => 'top'
-);
-
-$wgResourceModules['wikibase.ui.Toolbar'] = $moduleTemplate + array(
-	'scripts' => array(
-		'wikibase.ui.js',
-		'wikibase.ui.Tooltip.js',
-		'wikibase.ui.Toolbar.js',
-		'wikibase.ui.Toolbar.Group.js',
-		'wikibase.ui.Toolbar.Label.js',
-		'wikibase.ui.Toolbar.Button.js'
-	),
-	'styles' => array(
-		'wikibase.ui.Toolbar.css'
-	),
-	'dependencies' => array(
-		'jquery.tipsy',
-		'mediawiki.legacy.shared',
-		'jquery.ui.core'
-	),
-	'messages' => array(
-		'wikibase-tooltip-error-details'
-	)
-);
-
-$wgResourceModules['wikibase.ui.PropertyEditTool'] = $moduleTemplate + array(
-	'scripts' => array(
-		'wikibase.ui.js',
-		'wikibase.ui.Toolbar.EditGroup.js', // related to EditableValue, see todo in file
-		'wikibase.ui.PropertyEditTool.js',
-		'wikibase.ui.PropertyEditTool.EditableValue.js',
-		'wikibase.ui.PropertyEditTool.EditableValue.Interface.js',
-		'wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.js',
-		'wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js',
-		'wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js',
-		'wikibase.ui.PropertyEditTool.EditableValue.ListInterface.js',
-		'wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.js',
-		'wikibase.ui.PropertyEditTool.EditableDescription.js',
-		'wikibase.ui.PropertyEditTool.EditableLabel.js',
-		'wikibase.ui.PropertyEditTool.EditableSiteLink.js',
-		'wikibase.ui.PropertyEditTool.EditableAliases.js',
-		'wikibase.ui.LabelEditTool.js',
-		'wikibase.ui.DescriptionEditTool.js',
-		'wikibase.ui.SiteLinksEditTool.js',
-		'wikibase.ui.AliasesEditTool.js',
-		'wikibase.startup.js' // should probably be adjusted for more modularity
-	),
-	'styles' => array(
-		'wikibase.ui.PropertyEditTool.css'
-	),
-	'dependencies' => array(
-		'wikibase',
-		'wikibase.ui.Toolbar',
-		'wikibase.utilities.jQuery',
-		'wikibase.utilities.jQuery.ui.inputAutoExpand',
-		'wikibase.utilities.jQuery.ui.tagadata',
-		'jquery.ui.autocomplete',
-		'mediawiki.api',
-		'mediawiki.Title',
-		'mediawiki.jqueryMsg' // for {{plural}} and {{gender}} support in messages
-	),
-	'messages' => array(
-		'wikibase-sitelinks',
-		'wikibase-cancel',
-		'wikibase-edit',
-		'wikibase-save',
-		'wikibase-add',
-		'wikibase-save-inprogress',
-		'wikibase-remove-inprogress',
-		'wikibase-label-edit-placeholder',
-		'wikibase-description-edit-placeholder',
-		'wikibase-aliases-label',
-		'wikibase-aliases-input-help-message',
-		'wikibase-alias-edit-placeholder',
-		'wikibase-sitelink-site-edit-placeholder',
-		'wikibase-sitelink-page-edit-placeholder',
-		'wikibase-label-input-help-message',
-		'wikibase-description-input-help-message',
-		'wikibase-sitelinks-input-help-message',
-		'wikibase-remove',
-		'wikibase-propertyedittool-full',
-		'wikibase-propertyedittool-counter',
-		'wikibase-propertyedittool-counter-pending',
-		'wikibase-propertyedittool-counter-pending-pendingsubpart',
-		'wikibase-propertyedittool-counter-pending-tooltip',
-		'wikibase-sitelinksedittool-full',
-		'wikibase-error-save-generic',
-		'wikibase-error-remove-generic',
-		'wikibase-error-save-connection',
-		'wikibase-error-remove-connection',
-		'wikibase-error-save-timeout',
-		'wikibase-error-remove-timeout',
-		'wikibase-error-autocomplete-connection',
-		'wikibase-error-autocomplete-response'
-	)
-);
-
-unset( $moduleTemplate );
 
 // register hooks and handlers
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
@@ -344,3 +177,5 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 //$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
 
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
+
+unset( $dir );
