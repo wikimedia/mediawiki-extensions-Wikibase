@@ -88,7 +88,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * The toolbar controling the editable value
-	 * @var window.wikibase.ui.Toolbar
+	 * @var wikibase.ui.Toolbar
 	 */
 	_toolbar: null,
 
@@ -185,6 +185,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			function( event ) { self._interfaceHandler_onKeyPressed( singleInterface, event ); };
 		singleInterface.onInputRegistered =
 				function(){ self._interfaceHandler_onInputRegistered( singleInterface ); };
+	},
+
+	/**
+	 * returns the toolbar of this EditableValue
+	 *
+	 * @return wikibase.ui.Toolbar
+	 */
+	getToolbar: function() {
+		return this._toolbar;
 	},
 
 	/**
@@ -585,6 +594,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	isPending: function() {
 		return this._pending;
+	},
+
+	/**
+	 * Returns the DOM element representing this EditableValue
+	 *
+	 * @return jQuery
+	 */
+	getSubject: function() {
+		return this._subject;
 	},
 
 	/**

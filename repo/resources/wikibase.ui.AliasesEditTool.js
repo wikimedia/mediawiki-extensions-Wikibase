@@ -9,11 +9,6 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  * @author H. Snater
- *
- * Events:
- * -------
- * cancel: triggered on cancelling the aliases edit mode
- *                   Parameters: (1) jQuery.event
  */
 "use strict";
 
@@ -44,20 +39,7 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 			this._toolbar.hide(); // hide add button when hitting it since edit mode toolbar will appear
 		}, this ) );
 
-		// determine whether to show or hide the add button when cancelling edit mode
-		$( this ).on( 'cancel', $.proxy( function( event ) {
-			if ( this.getValues()[0].getValue()[0].length === 0 ) { // no aliases at all
-				this._toolbar.show();
-				this._editableValues[0].destroy();
-				this._editableValues[0]._subject.remove(); // subject will be re-created via add button
-				this._editableValues = [];
-			} else {
-				this._toolbar.hide();
-			}
-		}, this ) );
-
-		$( this ).triggerHandler( 'cancel' ); // initialize state of add button toolbar
-
+		$( this._editableValues[0].getToolbar().editGroup.btnCancel ).triggerHandler( 'action' );
 	},
 
 	/**
@@ -95,8 +77,16 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 	_buildSingleValueToolbar: function( editableValue ) {
 		var toolbar = window.wikibase.ui.PropertyEditTool.prototype._buildSingleValueToolbar.call( this, editableValue );
 
-		$( toolbar._items[0].btnCancel ).on( 'action', $.proxy( function( event ) {
-			$( this ).triggerHandler( 'cancel' );
+		// determine whether to show or hide the add button when cancelling edit mode
+		$( toolbar.editGroup.btnCancel ).on( 'action', $.proxy( function( event ) {
+			if ( this.getValues()[0].getValue()[0].length === 0 ) { // no aliases at all
+				this._toolbar.show();
+				this._editableValues[0].destroy();
+				this._editableValues[0].getSubject().remove(); // subject will be re-created via add button
+				this._editableValues = [];
+			} else {
+				this._toolbar.hide();
+			}
 		}, this ) );
 
 		return toolbar;

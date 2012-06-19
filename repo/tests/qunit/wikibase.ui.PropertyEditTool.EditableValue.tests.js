@@ -43,6 +43,12 @@
 				'parent node for toolbar exists'
 			);
 
+			equal(
+				this.editableValue.getSubject()[0],
+				node[0],
+				'verified subject node'
+			);
+
 			ok(
 				this.editableValue._interfaces.length == 1
 					&& this.editableValue._interfaces[0] instanceof window.wikibase.ui.PropertyEditTool.EditableValue.Interface,
@@ -92,6 +98,11 @@
 			this.editableValue.isInEditMode(),
 			false,
 			'not in edit mode'
+		);
+
+		ok(
+			this.editableValue.getToolbar() instanceof wikibase.ui.Toolbar,
+			'instantiated toolbar'
 		);
 
 	} );

@@ -82,6 +82,11 @@
 			'has no elements with values'
 		);
 
+		ok(
+			this.propertyEditTool.getToolbar() instanceof wikibase.ui.Toolbar,
+			'instantiated toolbar'
+		);
+
 	} );
 
 
