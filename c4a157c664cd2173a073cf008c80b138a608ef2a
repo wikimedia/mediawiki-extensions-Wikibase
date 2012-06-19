@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAANX///dU\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-19T13:34:56Z",
+      "side": 1,
+      "message": "Isn\u0027t json-fm even nicer?",
+      "revId": "c4a157c664cd2173a073cf008c80b138a608ef2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///dM\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-19T13:34:56Z",
+      "side": 1,
+      "message": "I can think of several cases where this would break. IP addresses in the return string etc.",
+      "revId": "c4a157c664cd2173a073cf008c80b138a608ef2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
