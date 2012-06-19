@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAANX///b8\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-19T13:52:46Z",
+      "side": 1,
+      "message": "no, json-fm is actually html. it\u0027s for debugging and testing only.",
+      "parentUuid": "AAAANX///dU\u003d",
+      "revId": "c4a157c664cd2173a073cf008c80b138a608ef2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX///dM\u003d",
         "filename": "repo/includes/ClientPage.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-06-19T13:34:56Z",
       "side": 1,
       "message": "I can think of several cases where this would break. IP addresses in the return string etc.",
+      "revId": "c4a157c664cd2173a073cf008c80b138a608ef2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX///b4\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-19T13:52:46Z",
+      "side": 1,
+      "message": "this would be a reason not to merge this. the status code must be at the right place of the status string. and http specifies that anything \u003e\u003d 200 and \u003c 300 is \"ok\".\n\nHow about a gregex? this should do: !^HTTP/[^ ]+ (2\\d\\d) !",
+      "parentUuid": "AAAANX///dM\u003d",
       "revId": "c4a157c664cd2173a073cf008c80b138a608ef2a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
