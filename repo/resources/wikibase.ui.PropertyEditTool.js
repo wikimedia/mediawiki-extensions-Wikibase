@@ -165,6 +165,15 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 
 	/**
+	 * returns the toolbar of this PropertyEditTool
+	 *
+	 * @return wikibase.ui.Toolbar
+	 */
+	getToolbar: function() {
+		return this._toolbar;
+	},
+
+	/**
 	 * Returns the node the toolbar should be appended to
 	 *
 	 * @return jQuery
