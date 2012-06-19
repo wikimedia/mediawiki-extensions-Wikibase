@@ -152,7 +152,6 @@ $wgHooks['NamespaceIsMovable'][]					= 'WikibaseHooks::onNamespaceIsMovable';
 $wgHooks['NewRevisionFromEditComplete'][]			= 'WikibaseHooks::onNewRevisionFromEditComplete';
 $wgHooks['GetPreferences'][]						= 'WikibaseHooks::onGetPreferences';
 $wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOptions';
-$wgHooks['FormatAutocomments'][]					= 'WikibaseHooks::onFormatAutocomments';
 
 
 
