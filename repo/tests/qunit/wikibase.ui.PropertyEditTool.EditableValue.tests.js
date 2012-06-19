@@ -19,9 +19,7 @@
 			var node = $( '<div/>', { id: 'parent' } );
 			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
 			this.editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue;
-			this.editableValue.queryApi = function( deferred, apiAction ) { // override AJAX API call
-				deferred.resolve( '' );
-			};
+
 			var toolbar = this.propertyEditTool._buildSingleValueToolbar( this.editableValue );
 			this.editableValue._init( node, toolbar );
 			this.strings = {
@@ -49,6 +47,34 @@
 				'initialized one interface'
 			);
 
+
+			var self = this;
+
+			this.editableValue.simulateApiFailure = function() {
+				self.editableValue.queryApi = function( deferred, apiAction ) {
+					deferred.reject( 'error', self.errors[0] ).promise();
+				};
+			};
+
+			this.editableValue.simulateApiFailure();
+
+			ok(
+				this.editableValue.remove().isRejected(),
+				'simulateApiFailure() we use for testing failures in the API works'
+			);
+
+			this.editableValue.simulateApiSuccess = function() {
+				self.editableValue.queryApi = function( deferred, apiAction ) { // override AJAX API call
+					deferred.resolve().promise();
+				};
+			};
+
+			this.editableValue.simulateApiSuccess(); // initial state by default api actions in our tests are a success!
+
+			ok(
+				this.editableValue.save().isResolved(),
+				'simulateApiSuccess() we use for testing success in the API works'
+			);
 		},
 		teardown: function() {
 			this.editableValue.destroy();
@@ -234,9 +260,7 @@
 
 	test( 'error handling', function() {
 
-		this.editableValue.queryApi = $.proxy( function( deferred, apiAction ) {
-			deferred.reject( 'error', this.errors[0] );
-		}, this );
+		this.editableValue.simulateApiFailure();
 
 		this.editableValue.startEditing();
 		this.editableValue.setValue( this.strings['valid'][0] );
@@ -260,6 +284,8 @@
 			'attached tooltip to save button'
 		);
 
+		this.editableValue.simulateApiSuccess();
+
 		this.editableValue.stopEditing();
 
 		equal(
@@ -267,6 +293,8 @@
 			false,
 			'cancelled editing'
 		);
+
+		this.editableValue.simulateApiFailure();
 
 		this.editableValue.preserveEmptyForm = true;
 		this.editableValue.remove();
@@ -278,7 +306,7 @@
 		);
 
 		this.editableValue.preserveEmptyForm = false;
-		this.editableValue.remove();
+		var x = this.editableValue.remove();
 
 		ok(
 			this.editableValue._toolbar.editGroup.btnRemove.getTooltip() instanceof window.wikibase.ui.Tooltip,
