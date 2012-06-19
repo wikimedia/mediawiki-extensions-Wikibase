@@ -218,18 +218,6 @@ class ItemView extends \ContextSource {
 		$out->addJsConfigVars( 'wbItemId', $item->getId() );
 		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $langCode ) );
 
-		// TODO: this whole construct doesn't really belong here:
-		$sites = array();
-		foreach ( Sites::singleton()->getGroup( 'wikipedia' ) as  /** @var \Wikibase\Site $site */ $site ) {
-			$sites[$site->getId()] = array(
-				'shortName' => \Language::fetchLanguageName( $site->getId() ),
-				'name' => \Language::fetchLanguageName( $site->getId() ), // TODO: names should be configurable in settings
-				'pageUrl' => $site->getPageUrlPath(),
-				'apiUrl' => $site->getPath( 'api.php' ),
-			);
-		}
-		$out->addJsConfigVars( 'wbSiteDetails', $sites );
-
 		$out->addParserOutput( $pout );
 		return $pout;
 	}

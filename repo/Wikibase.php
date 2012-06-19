@@ -153,6 +153,7 @@ $wgHooks['NewRevisionFromEditComplete'][]			= 'WikibaseHooks::onNewRevisionFromE
 $wgHooks['GetPreferences'][]						= 'WikibaseHooks::onGetPreferences';
 $wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOptions';
 $wgHooks['FormatAutocomments'][]					= 'WikibaseHooks::onFormatAutocomments';
+$wgHooks['ResourceLoaderGetConfigVars'][]			= 'WikibaseHooks::onResourceLoaderGetConfigVars';
 
 
 

@@ -420,4 +420,27 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Used to register global variables
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderGetConfigVars
+	 *
+	 * @param array &$vars
+	 *
+	 * @return bool
+	 */
+	public static function onResourceLoaderGetConfigVars( &$vars ) {
+		$sites = array();
+		foreach ( Wikibase\Sites::singleton()->getGroup( 'wikipedia' ) as  /** @var \Wikibase\Site $site */ $site ) {
+			$sites[ $site->getId() ] = array(
+				// TODO: names should be configurable in settings, this is a hack to get the name of each language!
+				'shortName' => Language::fetchLanguageName( $site->getId() ),
+				'name'      => Language::fetchLanguageName( $site->getId() ),
+				'pageUrl'   => $site->getPageUrlPath(),
+				'apiUrl'    => $site->getPath( 'api.php' ),
+			);
+		}
+		$vars['wbSiteDetails'] = $sites;
+
+		return true;
+	}
 }
