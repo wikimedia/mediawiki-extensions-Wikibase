@@ -29,6 +29,14 @@ class ItemDiff extends MapDiff {
 			'aliases' => MapDiff::newFromArrays(
 				$oldItem->getAllAliases(),
 				$newItem->getAllAliases()
+			),
+			'labels' => MapDiff::newFromArrays(
+				$oldItem->getLabels(),
+				$newItem->getLabels()
+			),
+			'descriptions' => MapDiff::newFromArrays(
+				$oldItem->getDescriptions(),
+				$newItem->getDescriptions()
 			)
 		) );
 	}
@@ -55,7 +63,27 @@ class ItemDiff extends MapDiff {
 		return $this->operations['aliases'];
 	}
 
+	/**
+	 * Returns a MapDiff object with the labels differences.
+	 *
+	 * @since 0.1
+	 *
+	 * @return MapDiff
+	 */
+	public function getLabelsDiff() {
+		return $this->operations['labels'];
+	}
 
+	/**
+	 * Returns a MapDiff object with the descriptions differences.
+	 *
+	 * @since 0.1
+	 *
+	 * @return MapDiff
+	 */
+	public function getDescriptionsDiff() {
+		return $this->operations['descriptions'];
+	}
 
 	/**
 	 * Returns if there are any changes (equivalent to: any differences between the items).
