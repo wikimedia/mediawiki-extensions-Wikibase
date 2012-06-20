@@ -28,7 +28,8 @@ class ItemDiff extends MapDiff {
 			),
 			'aliases' => MapDiff::newFromArrays(
 				$oldItem->getAllAliases(),
-				$newItem->getAllAliases()
+				$newItem->getAllAliases(),
+				true
 			),
 			'labels' => MapDiff::newFromArrays(
 				$oldItem->getLabels(),
