@@ -289,4 +289,18 @@ class Sites {
 		return $identifiers;
 	}
 
+	/**
+	 * Returns the sites in a certain group.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $group
+	 *
+	 * @return SiteList
+	 */
+	public function getGroup( $group ) {
+		$this->loadSites( array( 'group' => $group ) );
+		return $this->sites->getGroup( $group );
+	}
+
 }
