@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "AAAANX//+xc\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-20T13:02:09Z",
+      "side": 1,
+      "message": "First I thought that was a typo, since it should be \"insert\". But then I saw the typo is actually in the definition: \"public static function insetTemporarySites() {\"...",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+2g\u003d",
         "filename": "lib/includes/Site.php",
         "patchSetId": 1
@@ -189,6 +206,23 @@
     },
     {
       "key": {
+        "uuid": "AAAANX//+w0\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-20T13:02:09Z",
+      "side": 1,
+      "message": "I CAN HAZ correct English and have it named \"insertTemporarySites\"?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+xY\u003d",
         "filename": "lib/tests/phpunit/SiteRowTest.php",
         "patchSetId": 1
@@ -234,6 +268,23 @@
       "writtenOn": "2012-06-20T12:59:44Z",
       "side": 1,
       "message": "so, if there\u0027s exactly one link... it\u0027s ignored?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+ws\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTests.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-20T13:02:09Z",
+      "side": 1,
+      "message": "\"\\Wikibase\\Utils::insertTemporarySites();\"",
       "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
