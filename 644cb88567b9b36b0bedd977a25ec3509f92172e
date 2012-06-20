@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "AAAANn////w\u003d",
+        "filename": "lib/includes/Site.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Not sure what you mean - this represents a site. It does not derive from entity - in fact it\u0027s no specific to WD at all. Keep in mind I\u0027m just putting the code in the lib for now so we can get the stuff working and then once it\u0027s all done and nicely cleaned up, move the relevant bits (including this class) to core.",
+      "parentUuid": "AAAANX//+2g\u003d",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+2o\u003d",
         "filename": "lib/includes/Site.php",
         "patchSetId": 1
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "AAAANn////s\u003d",
+        "filename": "lib/includes/Site.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Yeah, as mentioned above",
+      "parentUuid": "AAAANX//+2o\u003d",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+2c\u003d",
         "filename": "lib/includes/SiteConfig.php",
         "patchSetId": 1
@@ -81,6 +117,24 @@
       "writtenOn": "2012-06-20T12:59:44Z",
       "side": 1,
       "message": "please document: what does this represent, as apposed to Site?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANn////o\u003d",
+        "filename": "lib/includes/SiteConfig.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Yes, this class still needs documentation - will add in follow up commit",
+      "parentUuid": "AAAANX//+2c\u003d",
       "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +175,24 @@
     },
     {
       "key": {
+        "uuid": "AAAANn////k\u003d",
+        "filename": "lib/includes/SiteList.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Because then PHP complains about mismatching method signature with ArrayObject. So yes this is not ideal, but the best we can do, since you cannot have different signatures, and no generics (which are really applicable here).",
+      "parentUuid": "AAAANX//+2I\u003d",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+2E\u003d",
         "filename": "lib/includes/SiteList.php",
         "patchSetId": 1
@@ -132,6 +204,24 @@
       "writtenOn": "2012-06-20T12:59:44Z",
       "side": 1,
       "message": "no spaces inside [ ]?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAN3////8\u003d",
+        "filename": "lib/includes/SiteList.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Indeed - this code matches the guidelines :)\n\n  $foo[0]\n  $foo[\u0027bar\u0027]\n  $foo[stuff( 42 )]",
+      "parentUuid": "AAAANX//+2E\u003d",
       "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +245,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAN3////4\u003d",
+        "filename": "lib/includes/SiteRow.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "SiteRow represents a site, SiteConfig represents the configuration for the site (as opposed to the actual data defining the site).",
+      "parentUuid": "AAAANX//+14\u003d",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+10\u003d",
         "filename": "lib/includes/Sites.php",
         "patchSetId": 1
@@ -166,6 +274,24 @@
       "writtenOn": "2012-06-20T12:59:44Z",
       "side": 1,
       "message": "that sentence no sense. please rephrase :)",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX////k\u003d",
+        "filename": "lib/includes/Sites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAANX//+10\u003d",
       "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +315,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOH////8\u003d",
+        "filename": "lib/includes/Sites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "The sites field is of type SiteList, which implements ArrayAccess.",
+      "parentUuid": "AAAANX//+1k\u003d",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+1w\u003d",
         "filename": "lib/includes/Sites.php",
         "patchSetId": 1
@@ -200,6 +344,24 @@
       "writtenOn": "2012-06-20T12:59:44Z",
       "side": 1,
       "message": "this is kind of arcane... could there be a separate function for this?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX////g\u003d",
+        "filename": "lib/includes/Sites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAANX//+1w\u003d",
       "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +385,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX///+4\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAANX//+w0\u003d",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+xY\u003d",
         "filename": "lib/tests/phpunit/SiteRowTest.php",
         "patchSetId": 1
@@ -234,6 +414,24 @@
       "writtenOn": "2012-06-20T12:59:44Z",
       "side": 1,
       "message": "singleton()-\u003enewFromArray() just sounds wrong. IF it\u0027s a singleton, why does it have a factory method? If the singleton is a factory for something else, the name of the factory method should let me know what it actually creates...",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///+0\u003d",
+        "filename": "lib/tests/phpunit/SiteRowTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Yeah, the name is a bit unfortunate and comes from the thing being moved at some point. newRowFromArray would be better. Either way, this is in core like this so is an issue there.",
+      "parentUuid": "AAAANX//+xY\u003d",
       "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +455,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX///+w\u003d",
+        "filename": "lib/tests/phpunit/SitesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Easiest way to get the first element of an array (w/o removing it) in PHP.",
+      "parentUuid": "AAAANX//+xE\u003d",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+xA\u003d",
         "filename": "lib/tests/phpunit/TestItems.php",
         "patchSetId": 1
@@ -274,6 +490,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX///+s\u003d",
+        "filename": "lib/tests/phpunit/TestItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Yeah. Some of the tests assume there are at least two links. Which is a completely mute point as there are other tests that assume there are links with specific identifiers. Without having links with enwiki, nlwiki, dewiki and nnwiki, tests will fail. This sucks but was not introduced by this change.",
+      "parentUuid": "AAAANX//+xA\u003d",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAANX//+ws\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiSetItemTests.php",
         "patchSetId": 1
@@ -285,6 +519,24 @@
       "writtenOn": "2012-06-20T13:02:09Z",
       "side": 1,
       "message": "\"\\Wikibase\\Utils::insertTemporarySites();\"",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///+o\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTests.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-20T13:27:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAANX//+ws\u003d",
       "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
