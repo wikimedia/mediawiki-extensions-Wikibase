@@ -54,11 +54,7 @@ final class WikibaseLibHooks {
 //			dirname( __FILE__ ) . '/sql/DropInterwiki.sql'
 //		);
 
-		$updater->addExtensionUpdate( array( function() {
-			if ( \Wikibase\SitesTable::singleton()->count() === 0 ) {
-				\Wikibase\Utils::insertTemporarySites();
-			}
-		} ) );
+		$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
 
 		return true;
 	}
