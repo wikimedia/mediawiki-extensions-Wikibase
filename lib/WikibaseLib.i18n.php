@@ -53,6 +53,13 @@ $messages['es'] = array(
 	'wikibaselib-desc' => 'Contiene una funcionalidad común para las extensiones de Wikibase y Wikibase Client.',
 );
 
+/** Persian (فارسی)
+ * @author Reza1615
+ */
+$messages['fa'] = array(
+	'wikibaselib-desc' => 'نگهداری موارد اساسی برای ویکی‌پایه و افزونه‌های وابسته به ویکی‌پایه',
+);
+
 /** French (français)
  * @author Wyz
  */

@@ -433,6 +433,7 @@ $messages['es'] = array(
 	'wikibase-description-edit-placeholder' => 'introducir una descripción',
 	'wikibase-sitelink-site-edit-placeholder' => 'especificar el sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'especificar la página',
+	'wikibase-alias-edit-placeholder' => 'introduce un alias',
 	'wikibase-label-input-help-message' => 'Introducir el título de este conjunto de datos en  $1.',
 	'wikibase-description-input-help-message' => 'Introducir una breve descripción en  $1.',
 	'wikibase-sitelinks' => 'Lista de páginas enlazadas a este elemento',
@@ -449,6 +450,8 @@ $messages['es'] = array(
 	'wikibase-disambiguation-title' => 'Desambiguación para "$1"',
 	'wb-special-createitem-new-item-notification' => 'Nuevo elemento $1 creado y redirigido a la página correspondiente. Volver a  $2.',
 	'wikibase-aliases-label' => 'También conocido como:',
+	'wikibase-aliases-input-help-message' => 'Si este conjunto de datos es conocido bajo más de un nombre en particular, puede escribir sus alias y sinónimos, para que así pueda ser encontrado por sus nombres alternativos.',
+	'wikibase-aliases-empty' => 'No hay alias definidos.',
 	'wikibase-tooltip-error-details' => 'Detalles',
 	'wikibase-error-save-generic' => 'Hubo un error al intentar guardar, por lo que no se pudieron almacenar los cambios.',
 	'wikibase-error-remove-generic' => 'Hubo un error al intentar realizar la eliminación, y debido a esto no se pudieron completar los cambios.',
@@ -493,6 +496,7 @@ $messages['es'] = array(
 );
 
 /** Persian (فارسی)
+ * @author Reza1615
  * @author ZxxZxxZ
  */
 $messages['fa'] = array(
@@ -501,21 +505,38 @@ $messages['fa'] = array(
 	'wikibase-save' => 'ذخیره',
 	'wikibase-cancel' => 'انصراف',
 	'wikibase-add' => 'افزودن',
+	'wikibase-save-inprogress' => 'ذخیره‌سازی...',
+	'wikibase-remove-inprogress' => 'حذف کردن...',
 	'wikibase-label-edit-placeholder' => 'واردکردن برچسب',
 	'wikibase-description-edit-placeholder' => 'واردکردن توضیحات',
 	'wikibase-sitelink-site-edit-placeholder' => 'مشخص‌کردن وب‌گاه',
 	'wikibase-sitelink-page-edit-placeholder' => 'مشخص‌کردن صفحه',
+	'wikibase-alias-edit-placeholder' => 'نام مستعار وارد نمایید',
 	'wikibase-label-input-help-message' => 'واردکردن عنوان این مجموعه داده‌ها در $1.',
 	'wikibase-description-input-help-message' => 'توضیحات کوتاهی در $1 وارد کنید.',
-	'wikibase-sitelinks' => 'صفحه‌هایی از ویکی‌پدیا که به این آیتم پیوند دارند',
-	'wikibase-sitelinks-add' => 'افزودن پیوند به یک صفحه از ویکی‌پدیا',
-	'wikibase-sitelinks-empty' => 'هیچ صفحه‌ای از ویکی‌پدیا به این آیتم پیوند ندارد.',
-	'wikibase-sitelinks-input-help-message' => 'تنظیم یک لینک به مقاله‌ای از ویکی‌پدیا.',
+	'wikibase-sitelinks' => 'فهرست صفحه‌های که به این مورد پیوند دارند',
+	'wikibase-sitelinks-add' => 'افزودن پیوند به یک پیوند وب‌گاه',
+	'wikibase-sitelinks-empty' => 'هیچ صفحهٔ وب‌گاهی هنوز به این مورد پیوند ندارد.',
+	'wikibase-sitelinks-input-help-message' => 'تنظیم یک پیوند به صفحهٔ مرتبط با این مورد',
 	'wikibase-remove' => 'حذف',
 	'wikibase-propertyedittool-full' => 'فهرست مقادیر کامل است.',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|ورودی|ورودی‌ها}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|ورودی|ورودی‌ها}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|مورد|$1 مورد}} هنوز ذخیره نشده',
 	'wikibase-sitelinksedittool-full' => 'پیوندها به صفحه‌ها در حال حاضر برای همهٔ وب‌گاه‌های شناخته‌شده تنظیم شده‌اند.',
-	'special-itembytitle' => 'آیتم بر اساس عنوان',
-	'special-itembylabel' => 'آیتم بر اساس برچسب',
+	'wikibase-disambiguation-title' => 'ابهام‌زدایی برای " $1 "',
+	'wikibase-aliases-label' => 'همچنین شناخته شده به عنوان :',
+	'wikibase-aliases-empty' => 'هیچ نام مستعار تعریف نشده.',
+	'wikibase-tooltip-error-details' => 'جزئیات',
+	'wikibase-error-autocomplete-response' => 'پاسخ سرور:$1',
+	'special-itembytitle' => 'مورد را بر پایه عنوان',
+	'special-itembylabel' => 'مورد بر پایه برچسب',
+	'special-createitem' => 'ایجاد یک مورد جدید',
+	'wikibase-api-no-token' => 'نشانه‌ای دریافت نشد.',
+	'wikibase-api-no-data' => 'برای اجرا کردن هیچ داده‌ای  نیست.',
+	'wikibase-api-add-exists' => 'امکان افزودن به مورد موجود نیست.',
+	'content-model-1001' => 'مورد ویکی‌پایه',
 );
 
 /** French (français)

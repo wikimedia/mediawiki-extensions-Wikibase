@@ -78,10 +78,11 @@ $messages['es'] = array(
 );
 
 /** Persian (فارسی)
+ * @author Reza1615
  * @author ZxxZxxZ
  */
 $messages['fa'] = array(
-	'wbc-desc' => 'سرویس‌گیرنده برای افزونهٔ ویکی‌بیس',
+	'wbc-desc' => 'سرویس‌گیرنده برای افزونهٔ ویکی‌پایه',
 	'wbc-editlinks' => 'ویرایش پیوندها',
 	'wbc-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
 );
