@@ -47,7 +47,7 @@ class ApiSetItemTests extends \ApiTestCase {
 		global $wgUser;
 		parent::setUp();
 
-		\Wikibase\Utils::insertTemporarySites();
+		\Wikibase\Utils::insertDefaultSites();
 		
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;

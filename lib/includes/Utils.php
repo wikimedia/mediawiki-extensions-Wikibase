@@ -39,7 +39,11 @@ final class Utils {
 	 *
 	 * @since 0.1
 	 */
-	public static function insertTemporarySites() {
+	public static function insertDefaultSites() {
+		if ( \Wikibase\SitesTable::singleton()->count() > 0 ) {
+			return;
+		}
+
 		$sitesTable = \Wikibase\SitesTable::singleton();
 
 		$sitesTable->newFromArray( array(
