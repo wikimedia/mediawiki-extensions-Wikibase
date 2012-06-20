@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAANX//+6g\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-20T09:54:37Z",
+      "side": 1,
+      "message": "\"build\" \u003c3",
+      "revId": "08d889b67d2141ce177a595835d60c5feedb28ba",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
