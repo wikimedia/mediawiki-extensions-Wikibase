@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX///+A\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTests.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-20T13:32:45Z",
+      "side": 1,
+      "message": "Should be \"de\" as it is a language.",
+      "revId": "b6986c6931fe214649793c0ed5a425d1d5b62fbd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
