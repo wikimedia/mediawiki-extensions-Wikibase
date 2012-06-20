@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAANX//+3A\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "what does this do? temporary how?\n\nand why do we only need it if the site list is *empty*?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+2g\u003d",
+        "filename": "lib/includes/Site.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "Please document what kind of entity this models.",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+2o\u003d",
+        "filename": "lib/includes/Site.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "This should go into core some day, right?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+2c\u003d",
+        "filename": "lib/includes/SiteConfig.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "please document: what does this represent, as apposed to Site?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+2Q\u003d",
+        "filename": "lib/includes/SiteConfig.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "document params",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+2I\u003d",
+        "filename": "lib/includes/SiteList.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "why no type hinting?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+2E\u003d",
+        "filename": "lib/includes/SiteList.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "no spaces inside [ ]?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+14\u003d",
+        "filename": "lib/includes/SiteRow.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "Why do we need SiteRow *and* SiteConfig?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+10\u003d",
+        "filename": "lib/includes/Sites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "that sentence no sense. please rephrase :)",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+1k\u003d",
+        "filename": "lib/includes/Sites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "Why not use a SiteList?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+1w\u003d",
+        "filename": "lib/includes/Sites.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "this is kind of arcane... could there be a separate function for this?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+xY\u003d",
+        "filename": "lib/tests/phpunit/SiteRowTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "singleton()-\u003enewFromArray() just sounds wrong. IF it\u0027s a singleton, why does it have a factory method? If the singleton is a factory for something else, the name of the factory method should let me know what it actually creates...",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+xE\u003d",
+        "filename": "lib/tests/phpunit/SitesTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "why do we need reset()? I thought that was only be useful together with next()?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAANX//+xA\u003d",
+        "filename": "lib/tests/phpunit/TestItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-20T12:59:44Z",
+      "side": 1,
+      "message": "so, if there\u0027s exactly one link... it\u0027s ignored?",
+      "revId": "644cb88567b9b36b0bedd977a25ec3509f92172e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
