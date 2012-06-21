@@ -1,0 +1,361 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX///LM\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "do we need to set that? I thought mediawiki would set the user agent to something sensible automatically.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///LQ\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "should this really be a setting? I think it should just be hard coded.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///LA\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "\"unwound\" should be \"found\", no?",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Kw\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "\"store\".",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///KA\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "I would like to have unit tests for this. But we can\u0027t call an external site in tests, of course. Perhaps we could call our own API locally, to check that we can handle our own title normalization?",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///IQ\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "Looking at the code, it seems that you can actually get information about multiple pages in a single ClientPage. That makes the name very confusing... it\u0027s not about one page, right? Should it be called ClientPageInfo or some such?\n\nAlternatively, this could be redesigned so that a ClientPage only has info about a single page, and the static method that actually performs the request (currently newQuery() but should be renamed) returns an array mapping titles to ClientPage objects.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Jw\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "Doing work in a constructor is evil. Please don\u0027t do that. Have an extra execute() method or some such to perform the actual work. \n\nOr change the static newQuery() function to actually perform the request, and then just hand the result to the ClientPage object. In any case, this function should be renamed (see there).\n\nIn any case, plase don\u0027t hide work in the constructor, that\u0027s bad style. Constructors are for initializing.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Js\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "we are trusting the caller to provide a $siteid that is actually known. If that is not the case, this triggers an \"unknown index\" notice. And, worse, the code then continues with $url being null, causing more errors.\n\nWould be better to check explicitely with isset( $groups[\u0027wikipedia\u0027][\u0027sites\u0027][$siteId] ) and thrown an MWException if that isn\u0027t there.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///JU\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "Building the URL to call can new be done using Site::getFilePath( \"api.php\" )",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///HY\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "why do we keep the content around?",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///I4\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "please check that this doesn\u0027t return null or false, and fail nicely if it is.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Is\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "This needs to be renamed - newQuery() sounds like a factory method, and I would not expect a factory method to do any serious work, much less to call to an external service and block.\n\nCall it getClientPage() or better retrieveClientPageInfo() or something.\n\nAlso note my comments on the constructor.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Io\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "$titles may be empty. check for that.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///IE\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "This is really awkward, especially since we have to do it for every title and every property (normalized, converted, redirect).\n\nCan\u0027t we just walk over the array once, and build an array that maps titles to their normalized form?\n\nWhat form of normalization is desired (follow redirects or not?) could be an option provided to the constructor.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Hw\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "I don\u0027t understand why we need both, getNormalized() and normalize(). The names also don\u0027t tell me what one does as opposed to the other.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Hc\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "it\u0027s unclear what this \"page structure\" looks like. at least point the caller to the API for reference.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Ho\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "should this really be exposed? if so, it should probably have a different name.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///HU\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "why should we expose this? it\u0027s an implementation detail that should be kept private, i think.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///HQ\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "like above.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///HM\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "like above.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///HI\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-21T18:00:31Z",
+      "side": 1,
+      "message": "like above.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
