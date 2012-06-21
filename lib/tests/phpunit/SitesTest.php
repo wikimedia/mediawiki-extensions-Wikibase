@@ -78,4 +78,48 @@ class SitesTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function loadConditionsProvider() {
+		return array(
+			array( array( 'global_key' => 'enwiki' ) ),
+			array( array( 'local_key' => 'en' ) ),
+			array( array( 'global_key' => 'zsdfszdrtgsdftyg' ) ),
+			array( array( 'local_key' => 'sdrfsdatddertd' ) ),
+			array( array( 'global_key' => 'enwiki', 'local_key' => 'en' ) ),
+			array( array() ),
+		);
+	}
+
+	/**
+	 * @dataProvider loadConditionsProvider
+	 * @param array $conditions
+	 */
+	public function testLoadSites( array $conditions ) {
+		Sites::singleton()->loadSites( $conditions );
+
+		$this->assertTrue( true, 'Loading sites with these conditions: ' . json_encode( $conditions ) );
+	}
+
+	public function testGetSiteByLocalId() {
+		$site = Sites::singleton()->getAllSites()->getIterator()->current();
+
+		$this->assertEquals( $site, Sites::singleton()->getSiteByLocalId( $site->getConfig()->getLocalId() ) );
+		$this->assertFalse( Sites::singleton()->getSiteByLocalId( 'dxzfzxdegxdrfyxsdty' ) );
+	}
+
+	public function testGetSiteByGlobalId() {
+		$site = Sites::singleton()->getAllSites()->getIterator()->current();
+
+		$this->assertEquals( $site, Sites::singleton()->getSiteByGlobalId( $site->getGlobalId() ) );
+		$this->assertFalse( Sites::singleton()->getSiteByGlobalId( 'dxzfzxdegxdrfyxsdty' ) );
+	}
+
+	public function testGetLoadedSites() {
+		$this->assertInstanceOf( '\Wikibase\SiteList', Sites::singleton()->getLoadedSites() );
+
+		$this->assertEquals(
+			Sites::singleton()->getAllSites(),
+			Sites::singleton()->getLoadedSites()
+		);
+	}
+
 }
