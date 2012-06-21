@@ -66,6 +66,9 @@ final class WikibaseHooks {
 		$files[] = $testDir . 'api/ApiSetAliasesTest.php';
 		$files[] = $testDir . 'api/ApiSetItemTests.php';
 
+		// specials
+		$files[] = $testDir . 'specials/SpecialItemByLabelTest.php';
+
 		return true;
 	}
 

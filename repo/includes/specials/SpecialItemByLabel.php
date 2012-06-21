@@ -29,8 +29,6 @@ class SpecialItemByLabel extends SpecialItemResolver {
 	 * @since 0.1
 	 *
 	 * @param string|null $subPage
-	 *
-	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
@@ -46,7 +44,7 @@ class SpecialItemByLabel extends SpecialItemResolver {
 			// TODO: display a message that the user needs to provide  the label and possibly some fancy input UI
 		}
 		else {
-			$items = call_user_func_array( 'WikibaseItem::getFromLabel', $parts );
+			$items = call_user_func_array( 'Wikibase\Item::getFromLabel', $parts );
 
 			if ( $items === array() ) {
 				// TODO: display that there are no matching items and possibly some fancy input UI
