@@ -70,6 +70,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX///AA\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-21T18:53:57Z",
+      "side": 1,
+      "message": "Please add @since tags to ALL public interfaces. If it\u0027s not private or protected, it should have a tag, so people know what they can use when extending the code. Which means most protected stuff is also better of with such a tag, since you can derive from classes.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX///KA\u003d",
         "filename": "repo/includes/ClientPage.php",
         "patchSetId": 4
@@ -104,6 +121,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX///AM\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-21T18:53:57Z",
+      "side": 1,
+      "message": "Having a ClientPageInfo class sounds good - could still kpee this one with relevant code split off and just have the stuff in it for actually obtaining the info.",
+      "parentUuid": "AAAAOX///IQ\u003d",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX///Jw\u003d",
         "filename": "repo/includes/ClientPage.php",
         "patchSetId": 4
@@ -115,6 +150,24 @@
       "writtenOn": "2012-06-21T18:00:31Z",
       "side": 1,
       "message": "Doing work in a constructor is evil. Please don\u0027t do that. Have an extra execute() method or some such to perform the actual work. \n\nOr change the static newQuery() function to actually perform the request, and then just hand the result to the ClientPage object. In any case, this function should be renamed (see there).\n\nIn any case, plase don\u0027t hide work in the constructor, that\u0027s bad style. Constructors are for initializing.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX///Ac\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-21T18:53:57Z",
+      "side": 1,
+      "message": "Yeah, any type of non-initialization stuff in constructors is bad. Doing an HTTP request is about as bad as it can get :)",
+      "parentUuid": "AAAAOX///Jw\u003d",
       "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +276,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX///AI\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-21T18:53:57Z",
+      "side": 1,
+      "message": "Why not simply have a $titles parameter that\u0027s an array?",
+      "parentUuid": "AAAAOX///Io\u003d",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX///IE\u003d",
         "filename": "repo/includes/ClientPage.php",
         "patchSetId": 4
@@ -240,6 +311,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX///AE\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-21T18:53:57Z",
+      "side": 1,
+      "message": "The comment seems wrong to me - it actually does normalization and returns the normalized stuff no?\n\nMethod name could also be better, ie getNromalizedFoobar, where foobar is whatever it normalizes",
+      "parentUuid": "AAAAOX///IE\u003d",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX///Hw\u003d",
         "filename": "repo/includes/ClientPage.php",
         "patchSetId": 4
@@ -251,6 +340,23 @@
       "writtenOn": "2012-06-21T18:00:31Z",
       "side": 1,
       "message": "I don\u0027t understand why we need both, getNormalized() and normalize(). The names also don\u0027t tell me what one does as opposed to the other.",
+      "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//+/8\u003d",
+        "filename": "repo/includes/ClientPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-21T18:53:57Z",
+      "side": 1,
+      "message": "Sentences end with a \".\", this is in the style guidelines.",
       "revId": "f8ba88a03b6b6e9f06021fce495b67bb473fbf08",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
