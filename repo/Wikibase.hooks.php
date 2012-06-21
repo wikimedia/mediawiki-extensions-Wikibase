@@ -64,7 +64,9 @@ final class WikibaseHooks {
 			'api/ApiSetAliases',
 			'api/ApiSetItem',
 
+			'specials/SpecialCreateItem',
 			'specials/SpecialItemByLabel',
+			'specials/SpecialItemByTitle',
 		);
 
 		foreach ( $testFiles as $file ) {
