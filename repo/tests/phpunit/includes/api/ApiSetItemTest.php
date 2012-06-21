@@ -668,18 +668,18 @@ class ApiSetItemTests extends \ApiTestCase {
 	 * @dataProvider providerRemoveLabelDescription
 	 * @depends testSetItemGetTokenSetData
 	 */
-	//public function testDeleteLanguageAttributeLabel( $id, $site, $title, $language ) { //FIXME: enable once the provider is ok again
-	//	$this->deleteLanguageAttribute( $id, $site, $title, $language, 'label' );
-	//}
+  public function testDeleteLanguageAttributeLabel( $id, $site, $title, $language ) {
+	  $this->deleteLanguageAttribute( $id, $site, $title, $language, 'label' );
+  }
 	
 	/**
 	 * @group API
 	 * @dataProvider providerRemoveLabelDescription
 	 * @depends testSetItemGetTokenSetData
 	 */
-	//public function testDeleteLanguageAttributeDescription( $id, $site, $title, $language ) { //FIXME: enable once the provider is ok again
-	//	$this->deleteLanguageAttribute( $id, $site, $title, $language, 'description' );
-	//}
+   public function testDeleteLanguageAttributeDescription( $id, $site, $title, $language ) {
+ 	  $this->deleteLanguageAttribute( $id, $site, $title, $language, 'description' );
+   }
 
 	public function deleteLanguageAttribute( $id, $site, $title, $language, $op ) {
 		$myid =  self::$baseOfItemIds + $id;
@@ -865,14 +865,13 @@ class ApiSetItemTests extends \ApiTestCase {
 		);
 	}
 
-	// FIXME: this thing got broken somehow by changes at some other place in the file - good luck finding it
-//	public function providerRemoveLabelDescription() {
-//		$idx = self::$baseOfItemIds;
-//		return array(
-//			array( ++$idx, 'dewiki', 'Berlin', 'de' ),
-//			array( ++$idx, 'dewiki', 'London', 'de' ),
-//			array( ++$idx, 'dewiki', 'Oslo', 'de' ),
-//		);
-//	}
+public function providerRemoveLabelDescription() {
+	$idx = self::$baseOfItemIds;
+	return array(
+		array( ++$idx, 'nlwiki', 'Berlin', 'da' ),
+		array( ++$idx, 'nlwiki', 'London', 'da' ),
+		array( ++$idx, 'nlwiki', 'Oslo', 'da' ),
+	);
+}
 	
 }
