@@ -133,8 +133,8 @@ class Sites {
 	 */
 	protected function getSiteByField( $field, $value ) {
 		if ( $field === 'global_key' ) {
-			if ( $this->sites->offsetExists( $value ) ) {
-				return $this->sites[$value];
+			if ( $this->sites->hasGlobalId( $value ) ) {
+				return $this->sites->getSiteByGlobalId( $value );
 			}
 			return false;
 		}

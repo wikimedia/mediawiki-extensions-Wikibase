@@ -14,7 +14,7 @@ use Wikibase\Sites as Sites;
  * @ingroup Test
  *
  * @group Wikibase
- * @group WikibaseSite
+ * @group Sites
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -43,7 +43,7 @@ class SitesTest extends \MediaWikiTestCase {
 		$count = 0;
 
 		foreach ( $allSites->getGroupNames() as $groupName ) {
-			$group = Sites::singleton()->getAllSites()->getGroup( $groupName );
+			$group = Sites::singleton()->getGroup( $groupName );
 			$this->assertInstanceOf( '\Wikibase\SiteList', $group );
 			$count += $group->count();
 
@@ -62,10 +62,15 @@ class SitesTest extends \MediaWikiTestCase {
 
 	public function testGetSite() {
 		$count = 0;
+		$sites = Sites::singleton()->getAllSites();
 
-		foreach ( Sites::singleton() as $site ) {
+		foreach ( $sites as $site ) {
 			$this->assertInstanceOf( '\Wikibase\Site', $site );
-			$this->assertEquals( $site, Sites::singleton()->getSiteByGlobalId( $site->getId() ) );
+
+			$this->assertEquals(
+				$site,
+				Sites::singleton()->getSiteByGlobalId( $site->getGlobalId() )
+			);
 
 			if ( ++$count > 100 ) {
 				break;

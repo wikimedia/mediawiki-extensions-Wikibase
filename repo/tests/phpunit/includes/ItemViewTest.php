@@ -65,7 +65,7 @@ class ItemViewTest extends \MediaWikiTestCase {
         $this->assertTrue(
         	$item != null && $item !== false,
         	"Could not find an item" );
-       // q($item->getSiteLinks());
+
 		$view = new ItemView( );
         $this->assertTrue(
         	$view != null && $view !== false,
