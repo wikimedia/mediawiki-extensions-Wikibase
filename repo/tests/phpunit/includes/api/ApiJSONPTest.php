@@ -56,7 +56,7 @@ class ApiJSONPTests extends ApiTestCase {
 
 		$token = $data[0]['login']['token'];
 
-		$data = $this->doApiRequest( array(
+		$this->doApiRequest( array(
 			'action' => 'login',
 			'lgtoken' => $token,
 			'lgname' => self::$users['wbeditor']->username,

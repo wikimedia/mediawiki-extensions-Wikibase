@@ -57,7 +57,6 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 				'api_test_editor@example.com',
 				array( 'wbeditor' )
 			);
-		$wgUser = self::$users['wbeditor']->user;
 		
 		// now we have to do the login with the previous user
 		$data = $this->doApiRequest( array(
@@ -68,7 +67,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 
 		$token = $data[0]['login']['token'];
 
-		$resp = $this->doApiRequest( array(
+		$this->doApiRequest( array(
 			'action' => 'login',
 			'lgtoken' => $token,
 			'lgname' => self::$users['wbeditor']->username,

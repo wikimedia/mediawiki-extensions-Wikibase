@@ -83,8 +83,6 @@ class LocalItemTest extends \MediaWikiTestCase {
 
 		$this->assertTrue( $item->save() );
 
-		$id = $item->getId();
-
 		$this->assertTrue( $item->remove() );
 
 		$this->assertFalse( $item->hasIdField() );

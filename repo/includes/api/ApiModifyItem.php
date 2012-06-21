@@ -86,8 +86,6 @@ abstract class ApiModifyItem extends Api {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
-		$success = false;
-
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
@@ -150,12 +148,10 @@ abstract class ApiModifyItem extends Api {
 		$isNew = $item->isNew();
 		
 		// TODO: Change for more fine grained permissions
-		$user = $this->getUser();
 		if ( $this->getPermissionsErrorInternal( $this->getUser(), $params ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
-		
-		
+
 		$success = $item->save();
 
 		if ( !$success ) {
