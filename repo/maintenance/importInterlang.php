@@ -12,7 +12,7 @@
  * @author Nikola Smolenski <smolensk@eunet.rs>
  */
 
-$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : dirname( __FILE__ ) . '/../../..';
+$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : dirname( __FILE__ ) . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
 require_once $basePath . '/includes/Exception.php';
