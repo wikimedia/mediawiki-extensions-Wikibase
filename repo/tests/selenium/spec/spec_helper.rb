@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# bootstrap code and helper functions
+
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), ',,', 'lib'))
 

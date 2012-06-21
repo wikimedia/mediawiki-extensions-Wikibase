@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# tests for sitelinks
+
 require 'spec_helper'
 
 describe "Check functionality of add/edit/remove sitelinks" do

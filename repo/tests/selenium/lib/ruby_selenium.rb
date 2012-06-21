@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# Base class for all page objects
+
 require 'net/http'
 require 'uri'
 require 'json'

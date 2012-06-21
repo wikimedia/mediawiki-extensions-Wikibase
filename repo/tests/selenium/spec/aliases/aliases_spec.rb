@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# tests for aliases
+
 require 'spec_helper'
 
 describe "Check functionality of add/edit/remove aliases" do

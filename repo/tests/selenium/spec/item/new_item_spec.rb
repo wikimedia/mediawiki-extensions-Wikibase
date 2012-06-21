@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# tests for new item special page
+
 require 'spec_helper'
 
 describe "Check functionality of create new item" do

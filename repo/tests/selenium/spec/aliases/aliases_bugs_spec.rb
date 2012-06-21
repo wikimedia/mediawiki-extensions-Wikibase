@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# tests for bugs concerning aliases
+
 require 'spec_helper'
 
 describe "Check for bugs" do

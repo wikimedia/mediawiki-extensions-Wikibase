@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# page object for aliases
+
 require 'ruby_selenium'
 
 class AliasesItemPage < NewItemPage

@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# page object for item page
+
 require 'ruby_selenium'
 
 class ItemPage < RubySelenium

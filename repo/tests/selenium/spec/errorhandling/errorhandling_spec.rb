@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# tests for errorhandling
+
 require 'spec_helper'
 
 # This test will only work when RIGHTS and TOKENS are switched on!

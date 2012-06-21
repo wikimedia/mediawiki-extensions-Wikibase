@@ -1,3 +1,10 @@
+# Wikidata UI tests
+#
+# Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# License:: GNU GPL v2+
+#
+# RAKEFILE
+
 require 'rubygems'
 require 'rspec/core/rake_task'
 
