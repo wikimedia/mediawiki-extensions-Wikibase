@@ -220,12 +220,13 @@ class ItemView extends \ContextSource {
 
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
-		foreach ( Sites::singleton()->getGroup( 'wikipedia' ) as  /** @var \Wikibase\Site $site */ $site ) {
-			$sites[$site->getId()] = array(
-				'shortName' => \Language::fetchLanguageName( $site->getId() ),
-				'name' => \Language::fetchLanguageName( $site->getId() ), // TODO: names should be configurable in settings
-				'pageUrl' => $site->getPageUrlPath(),
-				'apiUrl' => $site->getPath( 'api.php' ),
+		
+		foreach ( Sites::singleton()->getGroup( '0' ) as  /** @var \Wikibase\Site $site */ $site ) {
+			$sites[$site->getConfig()->getLocalId()] = array(
+				'shortName' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ),
+				'name' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ), // TODO: names should be configurable in settings
+				'pageUrl' => $site->getPagePath(),
+				'apiUrl' => $site->getFilePath( 'api.php' ),
 			);
 		}
 		$out->addJsConfigVars( 'wbSiteDetails', $sites );
