@@ -50,24 +50,26 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
-		$testDir = dirname( __FILE__ ) . '/tests/phpunit/includes/';
+		$testFiles = array(
+			'ItemMove',
+			'ChangeNotifier',
+			'EntityHandler',
+			'ItemDeletionUpdate',
+			'ItemHandler',
+			'ItemView',
+			'Utils',
 
-		$files[] = $testDir . 'ItemMoveTest.php';
-		$files[] = $testDir . 'ChangeNotifierTest.php';
-		$files[] = $testDir . 'EntityHandlerTest.php';
-		$files[] = $testDir . 'ItemDeletionUpdateTest.php';
-		$files[] = $testDir . 'ItemHandlerTest.php';
-		$files[] = $testDir . 'ItemViewTest.php';
-		$files[] = $testDir . 'UtilsTest.php';
+			'api/ApiJSONP', // FIXME: There is a ApiJSONCompleteTest file currently not registered??
+			'api/ApiLanguageAttribute',
+			'api/ApiSetAliases',
+			'api/ApiSetItem',
 
-		// api
-		$files[] = $testDir . 'api/ApiJSONPTests.php';
-		$files[] = $testDir . 'api/ApiLanguageAttributeTest.php';
-		$files[] = $testDir . 'api/ApiSetAliasesTest.php';
-		$files[] = $testDir . 'api/ApiSetItemTests.php';
+			'specials/SpecialItemByLabel',
+		);
 
-		// specials
-		$files[] = $testDir . 'specials/SpecialItemByLabelTest.php';
+		foreach ( $testFiles as $file ) {
+			$files[] = dirname( __FILE__ ) . '/tests/phpunit/includes/' . $file . 'Test.php';
+		}
 
 		return true;
 	}
