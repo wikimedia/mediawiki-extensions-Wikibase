@@ -33,7 +33,7 @@ use Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiJSONPCompleteTests extends ApiTestCase {
+class ApiJSONPCompleteTest extends ApiTestCase {
 	
 	protected static $num = 0;
 	protected static $name = 'empty';
