@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX///I0\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-21T17:44:24Z",
+      "side": 1,
+      "message": "Eh, where did the indent go?\n\nAlso, what\u0027s with the bracket at the end? Seems like a php parse error to me.",
+      "revId": "d8291b47bb8d43b7f8df5caf3ae11732f4590c87",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
