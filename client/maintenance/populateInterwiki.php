@@ -1,6 +1,6 @@
 <?php
 /**
- * @author	Katie Filbert
+ * @author Katie Filbert
  */
 
 require_once( dirname( __FILE__ ) . '../../../../../maintenance/Maintenance.php' );
@@ -10,7 +10,7 @@ class PopulateInterwiki extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-                $this->mDescription = <<<TEXT
+				$this->mDescription = <<<TEXT
 This script will populate the interwiki table, pulling in interwiki links 
 that are used on Wikipedia.
 
@@ -29,33 +29,33 @@ TEXT;
 
 	public function fetchLinks() {
 		$url = 'http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&sifilteriw=local&format=json';
-		$json = Http::get($url);
-                $data = FormatJSON::decode( $json, true );
+
+		$json = Http::get( $url );
+		$data = FormatJSON::decode( $json, true );
+
 		return $data['query']['interwikimap'];
 	}
 
-	public function doPopulate( $data, $force ) { 
-	
+	public function doPopulate( $data, $force ) {
 		$dbw = wfGetDB( DB_MASTER );
 
 		if ( !$force ) {
-			$row = $dbw->selectRow(                    
-				'updatelog',                             
-				'1',                    
+			$row = $dbw->selectRow(
+				'updatelog',
+				'1',
 				array( 'ul_key' => 'populate interwiki' ),
 				__METHOD__
 			);
 
-              	          if ( $row ) {
-                	                $this->output( "Interwiki table already populated.  Use php " .
-                        	        "maintenance/populateInterwiki.php\n--force from the command line " .
-                                	"to override.\n" );
-                        	        return true;
-                       	 }
+			if ( $row ) {
+				$this->output( "Interwiki table already populated.  Use php " .
+					"maintenance/populateInterwiki.php\n--force from the command line " .
+					"to override.\n" );
+				return true;
+			}
 		}
 
 		foreach( $data as $d ) {
-			
 			$row = $dbw->selectRow(
 				'interwiki',
 				'1',
@@ -77,11 +77,11 @@ TEXT;
 		}
  		
 		$this->output( "Interwiki links are populated.\n" );
-                return true;
+
+		return true;
 	}
 }
 
 $maintClass = 'PopulateInterwiki';
 require_once( RUN_MAINTENANCE_IF_MAIN );
 
-?>
