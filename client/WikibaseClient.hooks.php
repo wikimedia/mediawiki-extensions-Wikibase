@@ -46,12 +46,16 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
-		$testDir = dirname( __FILE__ ) . '/tests/phpunit/';
+		$testFiles = array(
+			'General',
+			'Sorting',
 
-		$files[] = $testDir . 'General.php';
-		$files[] = $testDir . 'Sorting.php';
+			'includes/LocalItem',
+		);
 
-		$files[] = $testDir . 'includes/LocalItemTest.php';
+		foreach ( $testFiles as $file ) {
+			$files[] = dirname( __FILE__ ) . '/tests/phpunit/' . $file . 'Test.php';
+		}
 
 		return true;
 	}
