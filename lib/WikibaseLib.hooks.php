@@ -78,6 +78,7 @@ final class WikibaseLibHooks {
 			'Item',
 			'SiteRow',
 			'Sites',
+			'Utils',
 
 			'changes/DiffChange',
 			'changes/ItemChange',

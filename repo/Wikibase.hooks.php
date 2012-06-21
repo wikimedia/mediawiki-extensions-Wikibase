@@ -57,7 +57,6 @@ final class WikibaseHooks {
 			'ItemDeletionUpdate',
 			'ItemHandler',
 			'ItemView',
-			'Utils',
 
 			'api/ApiJSONP', // FIXME: There is a ApiJSONCompleteTest file currently not registered??
 			'api/ApiLanguageAttribute',
