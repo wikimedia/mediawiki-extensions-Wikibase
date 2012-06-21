@@ -246,7 +246,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			if ( save && wasPending ) {
 				this._newValueHandler_onAfterStopEditing( editableValue, save, wasPending );
 			}
-			editableValue.onStopEditing = null; // make sure handler is only called once!
 		}, this ) );
 
 		this._editableValues.push( editableValue );

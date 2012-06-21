@@ -63,8 +63,12 @@
 
 	test( 'adding a new editable site link', function() {
 
-		var initialValue = [ 'Deutsche Wikipedia (de)', 'Berlin' ];
+		var initialValue = [ 'Deutsch (de)', 'Berlin' ];
 		var newValue = this.subject.enterNewValue( initialValue );
+		this.subject._editableValues[0].queryApi = function( deferred, apiAction ) { // override AJAX API call
+			deferred.resolve();
+		};
+		this.subject._editableValues[0].pageNameInterface.setResultSet( ['Berlin'] ); // set result set for validation
 
 		equal(
 			this.subject.getValues().length,
@@ -104,8 +108,8 @@
 		);
 
 		equal(
-			newValue.stopEditing( true ),
-			true,
+			newValue.stopEditing( true ).apiAction,
+			wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.SAVE,
 			'stopped editing (save), true returned because value has changed (it was created)'
 		);
 

@@ -156,8 +156,8 @@
 		);
 
 		equal(
-			this.editableValue.stopEditing( false ),
-			false,
+			this.editableValue.stopEditing( false ).apiAction,
+			wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE,
 			"stopped edit mode, don't save value"
 		);
 
@@ -166,9 +166,11 @@
 			'value not saved after leaving edit mode without saving value'
 		);
 
+		var deferred = this.editableValue.stopEditing( false );
+
 		equal(
-			this.editableValue.stopEditing(),
-			false,
+			deferred.apiAction,
+			wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE,
 			'stop edit mode again'
 		);
 
@@ -186,8 +188,8 @@
 		);
 
 		equal(
-			this.editableValue.stopEditing( true ),
-			true,
+			this.editableValue.stopEditing( true ).apiAction,
+			wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.SAVE,
 			'stopped edit mode, save'
 		);
 
