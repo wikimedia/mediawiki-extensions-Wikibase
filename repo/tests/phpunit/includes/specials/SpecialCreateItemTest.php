@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- * Tests for the SpecialItemByLabel class.
+ * Tests for the SpecialCreateItem class.
  *
  * @file
  * @since 0.1
@@ -17,6 +17,6 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SpecialItemByLabelTest extends SpecialPageTestBase {
+class SpecialCreateItemTest extends SpecialPageTestBase {
 
 }
