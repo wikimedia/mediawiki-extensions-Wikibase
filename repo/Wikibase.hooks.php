@@ -68,7 +68,7 @@ final class WikibaseHooks {
 		);
 
 		foreach ( $testFiles as $file ) {
-			$files[] = dirname( __FILE__ ) . '/tests/phpunit/includes/' . $file . 'Test.php';
+			array_push($files, dirname( __FILE__ ) . '/tests/phpunit/includes/' . $file . 'Test.php');
 		}
 
 		return true;
