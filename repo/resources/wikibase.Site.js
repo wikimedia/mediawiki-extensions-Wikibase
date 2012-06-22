@@ -45,6 +45,15 @@ window.wikibase.Site.prototype = {
 	},
 
 	/**
+	 * Returns the global site id of the site.
+	 *
+	 * @param string
+	 */
+	getGlobalSiteId: function() {
+		return this._siteDetails.globalSiteId;
+	},
+
+	/**
 	 * Returns the link to the API
 	 *
 	 * @note: this might not be necessary later since we might want to do only API call to the

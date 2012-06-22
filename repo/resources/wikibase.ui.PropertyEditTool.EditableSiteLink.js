@@ -188,7 +188,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
 		params = $.extend( params, {
 			action: 'wblinksite',
-			linksite: this.siteIdInterface.getSelectedSiteId(),
+			linksite: this.siteIdInterface.getSelectedSite().getGlobalSiteId(),
 			linktitle: this.getValue()[1]
 		} );
 		params.link = ( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) ? 'remove' : 'set';

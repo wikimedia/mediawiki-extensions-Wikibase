@@ -225,6 +225,7 @@ class ItemView extends \ContextSource {
 			$sites[$site->getConfig()->getLocalId()] = array(
 				'shortName' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ),
 				'name' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ), // TODO: names should be configurable in settings
+				'globalSiteId' => $site->getGlobalId(),
 				'pageUrl' => $site->getPagePath(),
 				'apiUrl' => $site->getFilePath( 'api.php' ),
 			);
