@@ -16,6 +16,7 @@ use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPa
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater
  * @author Daniel Werner
+ * @author Tobias Gritschacher
  */
 class ItemView extends \ContextSource {
 
@@ -104,16 +105,17 @@ class ItemView extends \ContextSource {
 			$i = 0;
 			foreach( $siteLinks as $siteId => $title ) {
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+				$languageCode = Utils::getLanguageCodeFromGlobalSiteId( $siteId );
 				$html .= Html::openElement( 'tr', array(
-					'class' => 'wb-sitelinks-' . $siteId . ' ' . $alternatingClass )
+					'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
 				);
 
 				$html .= Html::element(
-						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $siteId ),
+						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $languageCode ),
 						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
-						\Language::fetchLanguageName( $siteId ) . ' (' . $siteId . ')'
+						\Language::fetchLanguageName( $languageCode ) . ' (' . $languageCode . ')'
 				);
-				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $siteId ) );
+				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
 				$html .= Html::element(
 					'a',
 					array( 'href' => Sites::singleton()->getUrl( $siteId, $title ) ),
@@ -220,11 +222,12 @@ class ItemView extends \ContextSource {
 
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
-		
+
 		foreach ( Sites::singleton()->getGroup( '0' ) as  /** @var \Wikibase\Site $site */ $site ) {
-			$sites[$site->getConfig()->getLocalId()] = array(
-				'shortName' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ),
-				'name' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ), // TODO: names should be configurable in settings
+			$languageCode = Utils::getLanguageCodeFromGlobalSiteId(  $site->getGlobalId() );
+			$sites[$languageCode] = array(
+				'shortName' => \Language::fetchLanguageName( $languageCode ),
+				'name' => \Language::fetchLanguageName( $languageCode ),
 				'globalSiteId' => $site->getGlobalId(),
 				'pageUrl' => $site->getPagePath(),
 				'apiUrl' => $site->getFilePath( 'api.php' ),
