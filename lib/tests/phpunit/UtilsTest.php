@@ -5,7 +5,7 @@ use Wikibase\Utils as Utils;
 use Wikibase\Sites as Sites;
 
 /**
- * Tests for the WikibaseUtils class.
+ * Tests for the Wikibase\Utils class.
  *
  * @file
  * @since 0.1
