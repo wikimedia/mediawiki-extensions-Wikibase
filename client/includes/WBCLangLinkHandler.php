@@ -64,7 +64,7 @@ class WBCLangLinkHandler {
 
 			// Pack the links properly into mLanguageLinks.
 			$old_links = $out->getLanguageLinks();
-			foreach( $links as $lang => $link ) {
+			foreach( $links as $link ) {
 				$new_link = $link['site'] . ':' . $link['title'];
 				if( !in_array( $new_link, $old_links ) ) {
 					$out->addLanguageLink( $new_link );

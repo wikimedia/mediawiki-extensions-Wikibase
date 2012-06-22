@@ -77,8 +77,7 @@ abstract class Api extends \ApiBase {
 
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
 		$value = array();
-		$idx = 0;
-		
+
 		if ( $this->usekeys ) {
 			foreach ( $aliases as $languageCode => $alarr ) {
 				$arr = array();

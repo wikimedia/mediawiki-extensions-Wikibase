@@ -34,8 +34,6 @@ class ApiGetItems extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
-		$success = false;
-
 		if ( !isset( $params['ids'] ) ) {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {

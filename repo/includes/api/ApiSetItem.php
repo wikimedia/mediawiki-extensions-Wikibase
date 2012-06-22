@@ -89,7 +89,6 @@ class ApiSetItem extends Api {
 		}
 			
 		// TODO: Change for more fine grained permissions
-		$user = $this->getUser();
 		if (self::getPermissionsError( $this->getUser() ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}

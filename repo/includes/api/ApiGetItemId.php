@@ -30,8 +30,6 @@ class ApiGetItemId extends Api {
 	public function execute() {
 		$params = $this->extractRequestParams();
 
-		$success = false;
-
 		// normally 'id' should not exist here and the test should always return true
 		if ( !isset( $params['id'] ) ) {
 			$params['id'] = Item::getIdForSiteLink( $params['site'], $params['title'] );
