@@ -16,6 +16,7 @@ use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPa
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater
  * @author Daniel Werner
+ * @author Tobias Gritschacher
  */
 class ItemView extends \ContextSource {
 
@@ -104,16 +105,17 @@ class ItemView extends \ContextSource {
 			$i = 0;
 			foreach( $siteLinks as $siteId => $title ) {
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+				$siteCode = Utils::getSiteCodeFromGlobalSiteId( $siteId );
 				$html .= Html::openElement( 'tr', array(
-					'class' => 'wb-sitelinks-' . $siteId . ' ' . $alternatingClass )
+					'class' => 'wb-sitelinks-' . $siteCode . ' ' . $alternatingClass )
 				);
 
 				$html .= Html::element(
-						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $siteId ),
+						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $siteCode ),
 						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
-						\Language::fetchLanguageName( $siteId ) . ' (' . $siteId . ')'
+						\Language::fetchLanguageName( $siteCode ) . ' (' . $siteCode . ')'
 				);
-				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $siteId ) );
+				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $siteCode ) );
 				$html .= Html::element(
 					'a',
 					array( 'href' => Sites::singleton()->getUrl( $siteId, $title ) ),
@@ -220,11 +222,12 @@ class ItemView extends \ContextSource {
 
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
-		
+
 		foreach ( Sites::singleton()->getGroup( '0' ) as  /** @var \Wikibase\Site $site */ $site ) {
-			$sites[$site->getConfig()->getLocalId()] = array(
-				'shortName' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ),
-				'name' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ), // TODO: names should be configurable in settings
+			$siteCode = Utils::getSiteCodeFromGlobalSiteId(  $site->getGlobalId() );
+			$sites[$siteCode] = array(
+				'shortName' => \Language::fetchLanguageName( $siteCode ),
+				'name' => \Language::fetchLanguageName( $siteCode ),
 				'globalSiteId' => $site->getGlobalId(),
 				'pageUrl' => $site->getPagePath(),
 				'apiUrl' => $site->getFilePath( 'api.php' ),
