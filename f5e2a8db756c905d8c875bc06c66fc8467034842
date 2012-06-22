@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX//+bc\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-06-22T16:01:03Z",
+      "side": 1,
+      "message": "I agree that this is a hack and it should be replaced by a better solution as soon as possible; probably that information should also be available through the sites-table...\nso, this method will get removed again anyway, so why not leave it in utils for the moment.",
+      "parentUuid": "AAAAOX//+cE\u003d",
+      "revId": "f5e2a8db756c905d8c875bc06c66fc8467034842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX//+cI\u003d",
         "filename": "lib/tests/phpunit/UtilsTest.php",
         "patchSetId": 1
