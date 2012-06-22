@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX//+cE\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-22T15:11:10Z",
+      "side": 1,
+      "message": "noooooooooooooo... disregarding that this hack is completely evil, it\u0027s the wrong place to put it.\n\nBetter place a method getLanguageCode in \\Wikibase\\Item that does this.\n\nAnd call it LanguageCode, not siteCode, which would get horribly confusing with the site identifiers, which people are already confused about... :)",
+      "revId": "f5e2a8db756c905d8c875bc06c66fc8467034842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//+cI\u003d",
+        "filename": "lib/tests/phpunit/UtilsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-22T15:11:10Z",
+      "side": 1,
+      "message": "indent...",
+      "revId": "f5e2a8db756c905d8c875bc06c66fc8467034842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//+cM\u003d",
+        "filename": "lib/tests/phpunit/UtilsTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-22T15:11:10Z",
+      "side": 1,
+      "message": "indent...",
+      "revId": "f5e2a8db756c905d8c875bc06c66fc8467034842",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
