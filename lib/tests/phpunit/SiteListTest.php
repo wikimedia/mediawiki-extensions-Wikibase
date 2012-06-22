@@ -120,9 +120,45 @@ class SiteListTest extends \MediaWikiTestCase {
 		$this->assertEquals( $groups, $obtainedGroups );
 	}
 
+	public function siteListProvider() {
+		$sites = Sites::singleton();
+		$groups = $sites->getAllSites()->getGroupNames();
+		$group = array_shift( $groups );
+
+		return array(
+			array( $sites->getAllSites() ),
+			array( $sites->getGroup( $group ), $group ),
+			array( new SiteList() ),
+		);
+	}
+
+	/**
+	 * @dataProvider siteListProvider
+	 * @param SiteList $sites
+	 */
+	public function testGetGlobalIdentifiers( SiteList $sites, $groupName = null ) {
+		$identifiers = $sites->getGlobalIdentifiers( $groupName );
+
+		$this->assertTrue( is_array( $identifiers ) );
+
+		$expected = array();
+
+		foreach ( $sites as $site ) {
+			$expected[] = $site->getGlobalId();
+		}
+
+		asort( $expected );
+		asort( $identifiers );
+
+		$this->assertEquals(
+			array_values( $expected ),
+			array_values( $identifiers )
+		);
+	}
+
 	public function testGetLocalIdentifiers() {
 		$allSites = Sites::singleton()->getAllSites();
-		$identifiers = $allSites->getGlobalIdentifiers();
+		$identifiers = $allSites->getLocalIdentifiers();
 
 		$this->assertTrue( is_array( $identifiers ) );
 	}
