@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Site as Site;
+use ORMRowTest;
 
 /**
  * Tests for the Wikibase\SiteRow class.
@@ -18,37 +19,64 @@ use Wikibase\Site as Site;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteRowTest extends \MediaWikiTestCase {
+class SiteRowTest extends ORMRowTest {
 
-	public function constructorProvider() {
-		return array(
+	/**
+	 * @see ORMRowTest::getRowClass()
+	 * @since 0.1
+	 * @return string
+	 */
+	protected function getRowClass() {
+		return '\Wikibase\SiteRow';
+	}
+
+	/**
+	 * @see ORMRowTest::getTableInstance()
+	 * @since 0.1
+	 * @return \IORMTable
+	 */
+	protected function getTableInstance() {
+		return \Wikibase\SitesTable::singleton();
+	}
+
+	/**
+	 * @see ORMRowTest::constructorTestProvider()
+	 * @since 0.1
+	 * @return array
+	 */
+	public function constructorTestProvider() {
+		$rows = array(
 			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1' ),
 			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1', 9001 ),
 			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1', 9001, '/w/' ),
 		);
+
+		foreach ( $rows as &$args ) {
+			$fields = array(
+				'global_key' => $args[0],
+				'group' => $args[1],
+				'url' => $args[2],
+				'page_path' => $args[3],
+			);
+
+			if ( array_key_exists( 4, $args ) ) {
+				$fields['type'] = $args[4];
+			}
+
+			if ( array_key_exists( 5, $args ) ) {
+				$fields['file_path'] = $args[5];
+			}
+
+			$args = array( $fields, true );
+		}
+
+		return $rows;
 	}
 
 	/**
-	 * @dataProvider constructorProvider
+	 * @dataProvider constructorTestProvider
 	 */
-	public function testConstructor() {
-		$args = func_get_args();
-
-		$fields = array(
-			'global_key' => $args[0],
-			'group' => $args[1],
-			'url' => $args[2],
-			'page_path' => $args[3],
-		);
-
-		if ( array_key_exists( 4, $args ) ) {
-			$fields['type'] = $args[4];
-		}
-
-		if ( array_key_exists( 5, $args ) ) {
-			$fields['file_path'] = $args[5];
-		}
-
+	public function testConstructorEvenMore( array $fields ) {
 		$site = \Wikibase\SitesTable::singleton()->newFromArray( $fields );
 
 		$functionMap = array(
@@ -56,17 +84,24 @@ class SiteRowTest extends \MediaWikiTestCase {
 			'getGroup',
 			'getUrl',
 			'getRelativePagePath',
-			'getType',
-			'getRelativeFilePath',
 		);
 
-		foreach ( $functionMap as $index => $functionName ) {
-			if ( array_key_exists( $index, $args ) ) {
-				$this->assertEquals( $args[$index], call_user_func( array( $site, $functionName ) ) );
-			}
+		if ( array_key_exists( 'type', $fields ) ) {
+			$functionMap[] = 'getType';
 		}
 
-		$this->assertEquals( $args[2] . $args[3], $site->getPagePath() );
+		if ( array_key_exists( 'file_path', $fields ) ) {
+			$functionMap[] = 'getRelativeFilePath';
+		}
+
+		reset( $fields );
+
+		foreach ( $functionMap as $functionName ) {
+			$this->assertEquals( current( $fields ), call_user_func( array( $site, $functionName ) ) );
+			next( $fields );
+		}
+
+		$this->assertEquals( $fields['url'] . $fields['page_path'], $site->getPagePath() );
 	}
 
 	public function pathProvider() {

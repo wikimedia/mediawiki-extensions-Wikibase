@@ -111,13 +111,16 @@ class SiteListTest extends \MediaWikiTestCase {
 			$groups[] = $site->getGroup();
 		}
 
-		$groups = array_values( array_unique( $groups ) );
-		$obtainedGroups = array_values( $allSites->getGroupNames() );
+		$groups = array_unique( $groups );
+		$obtainedGroups = $allSites->getGroupNames();
 
 		asort( $groups );
 		asort( $obtainedGroups );
 
-		$this->assertEquals( $groups, $obtainedGroups );
+		$this->assertEquals(
+			array_values( $groups ),
+			array_values( $obtainedGroups )
+		);
 	}
 
 	public function siteListProvider() {
