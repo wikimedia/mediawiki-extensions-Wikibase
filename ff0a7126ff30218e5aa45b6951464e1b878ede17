@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX//+f4\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-22T13:13:25Z",
+      "side": 1,
+      "message": "Please do not make style and logic changes in the same commit - now I needed to review the style stuff for actual changes while that was not needed.",
+      "revId": "ff0a7126ff30218e5aa45b6951464e1b878ede17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//+f8\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-22T13:13:25Z",
+      "side": 1,
+      "message": "Why do we not have the site and title elements here? That would be consistent with the rest of item data that we currently output.\n\nAlso, in case we do not have it here, can we not simply return $siteLinks as it is?",
+      "revId": "ff0a7126ff30218e5aa45b6951464e1b878ede17",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
