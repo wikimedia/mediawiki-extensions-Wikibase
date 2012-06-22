@@ -32,7 +32,7 @@ class ApiLinkSite extends ApiModifyItem {
 	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
 		return parent::getPermissionsError( $user, 'site-link', $params['link'] );
 	}
-	
+
 	/**
 	 * Actually modify the item.
 	 *
@@ -50,7 +50,7 @@ class ApiLinkSite extends ApiModifyItem {
 		else {
 			$res = $this->getResult();
 			$ret = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
-			
+
 			if ( $ret !== false ) {
 				$normalized = array();
 				if ( $params['linksite'] !== $ret['site'] ) {
