@@ -79,20 +79,20 @@ abstract class Api extends \ApiBase {
 		$value = array();
 
 		if ( $this->usekeys ) {
-			foreach ( $aliases as $languageCode => $alarr ) {
-				$arr = array();
-				foreach ( $alarr as $alias ) {
-					$arr[] = array(
+			foreach ( $aliases as $languageCode => $listOfAliases ) {
+				$collectedAliases = array();
+				foreach ( $listOfAliases as $alias ) {
+					$collectedAliases[] = array(
 						'language' => $languageCode,
 						'value' => $alias,
 					);
 				}
-				$value[$languageCode] = $arr;
+				$value[$languageCode] = $collectedAliases;
 			}
 		}
 		else {
-			foreach ( $aliases as $languageCode => $alarr ) {
-				foreach ( $alarr as $alias ) {
+			foreach ( $aliases as $languageCode => $listOfAliases ) {
+				foreach ( $listOfAliases as $alias ) {
 					$value[] = array(
 						'language' => $languageCode,
 						'value' => $alias,
@@ -113,10 +113,10 @@ abstract class Api extends \ApiBase {
 		$value = array();
 		$idx = 0;
 
-		foreach ( $siteLinks as $siteId => $pageTitle ) {
+		foreach ( $siteLinks as $siteId => $siteTitle ) {
 			$value[$this->usekeys ? $siteId : $idx++] = array(
 				'site' => $siteId,
-				'title' => $pageTitle,
+				'title' => $siteTitle
 			);
 		}
 
