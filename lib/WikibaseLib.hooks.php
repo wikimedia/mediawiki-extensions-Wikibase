@@ -76,6 +76,7 @@ final class WikibaseLibHooks {
 			'ItemNewEmpty',
 			'ItemNewFromArray',
 			'Item',
+			'SiteList',
 			'SiteRow',
 			'Sites',
 			'Utils',
