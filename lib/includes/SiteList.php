@@ -69,18 +69,66 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	}
 
 	/**
+	 * Constructor.
+	 * @see ArrayObject::__construct
+	 *
+	 * @since 0.1
+	 *
+	 * @param null $input
+	 * @param int $flags
+	 * @param string $iterator_class
+	 */
+	public function __construct( $input = null, $flags = 0, $iterator_class = 'ArrayIterator' ) {
+		parent::__construct( array(), $flags, $iterator_class );
+
+		if ( !is_null( $input ) ) {
+			array_walk( $input, array( $this, 'append' ) );
+		}
+	}
+
+	/**
+	 * @see ArrayObject::append
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $value
+	 */
+	public function append( $value ) {
+		$this->offsetSet( null, $value );
+	}
+
+	/**
 	 * @see ArrayObject::offsetSet()
 	 *
 	 * @since 0.1
 	 *
 	 * @param mixed $index
 	 * @param Site $site
+	 *
+	 * @throws MWException
 	 */
 	public function offsetSet( $index, $site ) {
 		if ( !$site instanceof Site ) {
 			throw new MWException( 'Can only add Site implementing objects to SiteList.' );
 		}
 
+		if ( $this->hasGlobalId( $site->getGlobalId() ) ) {
+			$this->removeSiteByGlobalId( $site->getGlobalId() );
+		}
+
+		return $this->setSite( $index, $site );
+	}
+
+	/**
+	 * Sets the provided site.
+	 * Equivalent behaviour to parent::offsetSet, plus additional indexing.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $index
+	 * @param Site $site
+	 */
+	protected function setSite( $index, Site $site ) {
 		if ( is_null( $index ) ) {
 			$index = $this->getNewOffset();
 		}
@@ -127,18 +175,13 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 * @param string|null $groupName
 	 *
 	 * @return array
-	 * @throws MWException
 	 */
 	public function getGlobalIdentifiers( $groupName = null ) {
 		if ( is_null( $groupName ) ) {
 			return array_keys( $this->byGlobalId );
 		}
 		else {
-			if ( !array_key_exists( $groupName, $this->groups ) ) {
-				throw new MWException( "No site group with name '$groupName' exists" );
-			}
-
-			return $this->groups[$groupName];
+			return array_key_exists( $groupName, $this->groups ) ? $this->groups[$groupName] : array();
 		}
 	}
 
@@ -243,6 +286,18 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 */
 	public function isEmpty() {
 		return $this->count() === 0;
+	}
+
+	/**
+	 * Removes the site with the specified global id.
+	 * The site needs to exist, so if not sure, call hasGlobalId first.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $globalSiteId
+	 */
+	public function removeSiteByGlobalId( $globalSiteId ) {
+		$this->offsetUnset( $this->byGlobalId[$globalSiteId] );
 	}
 
 }
