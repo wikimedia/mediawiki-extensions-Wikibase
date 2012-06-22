@@ -58,7 +58,8 @@ final class WikibaseHooks {
 			'ItemHandler',
 			'ItemView',
 
-			'api/ApiJSONP', // FIXME: There is a ApiJSONCompleteTest file currently not registered??
+			'api/ApiJSONP',
+			'api/ApiJSONPComplete',
 			'api/ApiLanguageAttribute',
 			'api/ApiSetAliases',
 			'api/ApiSetItem',
