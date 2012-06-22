@@ -184,7 +184,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		singleInterface.onKeyPressed =
 			function( event ) { self._interfaceHandler_onKeyPressed( singleInterface, event ); };
 		singleInterface.onInputRegistered =
-				function(){ self._interfaceHandler_onInputRegistered( singleInterface ); };
+			function(){ self._interfaceHandler_onInputRegistered( singleInterface ); };
 	},
 
 	/**
@@ -221,17 +221,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * differently.
 	 *
 	 * @return jQuery.Promise in case the remove was called before and is still running, the Promise from the ongoing
-	 *         remove will be returned and the promises additional property isOngoingRemove will be set to true.
+	 *         remove will be returned again. The promise will hold additional information this.
+	 * @see $.PersistentPromisor()
 	 */
-	remove: function() {
-		if( this.__isRemoving_deferred &&
-			!( this.__isRemoving_deferred.isResolved() || this.__isRemoving_deferred.isRejected() )
-		) {
-			var promise = this.__isRemoving_deferred.promise(); // returns the deferred
-			promise.isOngoingRemove = true;
-			return promise;
-		}
-
+	remove: $.PersistentPromisor( function() {
 		var degrade = $.proxy( function() {
 			if( !this.preserveEmptyForm ) {
 				// remove value totally
@@ -251,19 +244,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		if( this.isPending() ) {
 			// no API call necessary since value hasn't been stored yet...
 			degrade();
-			return $.Deferred().resolve().promise(); // ...return new deferred nonetheless
+			return $.Deferred().resolve().promise(); // ...return new promise nonetheless
 		} else {
 			var action = this.preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
 
 			// store deferred so we can return it when this is called again while still running
 			// NOTE: can't store deferred in this.__isRemoving because .always() might be called even before return!
-			this.__isRemoving_deferred =
-				this.performApiAction( action )
-				.then( degrade );
-
-			return this.__isRemoving_deferred.promise(); // return deferred
+			return this.performApiAction( action )
+				.then( degrade )
+				.promise();
 		}
-	},
+	} ),
 
 	/**
 	 * Saves the current value by sending it to the server. In case the current value is invalid, this will trigger a

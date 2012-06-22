@@ -135,6 +135,7 @@ final class WikibaseHooks {
 				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
 				'tests/qunit/wikibase.ui.Tooltip.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
