@@ -32,7 +32,7 @@ use ApiTestCase, ApiTestUser;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiJSONPTests extends ApiTestCase {
+class ApiJSONPTest extends ApiTestCase {
 	
 	protected static $top = 0;
 	
