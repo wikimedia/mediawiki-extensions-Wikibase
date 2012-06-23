@@ -728,7 +728,7 @@ $messages['he'] = array(
 	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב השם נתונים, ולא ניתן להעביר דפים אליו.',
 );
 
-/** Upper Sorbian (Hornjoserbsce)
+/** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
 $messages['hsb'] = array(

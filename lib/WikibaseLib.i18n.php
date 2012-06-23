@@ -81,6 +81,13 @@ $messages['hsb'] = array(
 	'wikibaselib-desc' => 'Steji powšitkownu funkcionalnosć za rozšěrjeni Wikibase a Wikibase Client k dispoziciji',
 );
 
+/** Interlingua (interlingua)
+ * @author McDutchie
+ */
+$messages['ia'] = array(
+	'wikibaselib-desc' => 'Contine functionalitate commun pro le extensiones Wikibase e Wikibase Client',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */
