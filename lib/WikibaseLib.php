@@ -46,6 +46,9 @@ $dir = dirname( __FILE__ ) . '/';
 // constants
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
 
+define( 'SITE_TYPE_MEDIAWIKI', 0 );
+define( 'SITE_GROUP_WIKIPEDIA', 0 );
+
 // i18n
 $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 

@@ -223,7 +223,7 @@ class ItemView extends \ContextSource {
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
 
-		foreach ( Sites::singleton()->getGroup( '0' ) as  /** @var \Wikibase\Site $site */ $site ) {
+		foreach ( Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA ) as  /** @var \Wikibase\Site $site */ $site ) {
 			$languageCode = Utils::getLanguageCodeFromGlobalSiteId(  $site->getGlobalId() );
 			$sites[$languageCode] = array(
 				'shortName' => \Language::fetchLanguageName( $languageCode ),
