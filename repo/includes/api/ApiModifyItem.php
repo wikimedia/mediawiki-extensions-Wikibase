@@ -90,20 +90,16 @@ abstract class ApiModifyItem extends Api {
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
-		
-		if ( !$user->isAllowed( 'edit' ) ) {
-			$this->dieUsageMsg( 'cantedit' );
-		}
 
 		$hasLink = isset( $params['site'] ) && $params['title'];
 		$item = null;
 
 		$this->validateParameters( $params );
-		
+
 		//if ( !isset($params['summary']) ) {
 		//	$params['summary'] = 'dummy';
 		//}
-		
+
 		if ( $params['item'] === 'update' && !isset( $params['id'] ) && !$hasLink ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-update-without-id' ), 'update-without-id' );
 		}
@@ -117,18 +113,32 @@ abstract class ApiModifyItem extends Api {
 		}
 		elseif ( $hasLink ) {
 			$item = Item::getFromSiteLink( $params['site'], Item::normalize( $params['title'] ) );
-			
+
 			if ( is_null( $item ) && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
 			}
 		}
-		
+
 		if ( !is_null( $item ) && !( $item instanceof Item ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
-			
+
 		if ( !is_null( $item ) && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
+		}
+
+		if ( !is_null( $item ) && $item !== false ) {
+			$title = $item->getTitle();
+			if ( !is_null( $title ) && $title !== false ) {
+				if ( !$title->quickUserCan( 'edit', $user ) ) {
+					$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
+				}
+			}
+		}
+
+		// TODO: Change for more fine grained permissions
+		if ( $this->getPermissionsErrorInternal( $user, $params ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
 
 		if ( is_null( $item ) ) {
@@ -138,7 +148,7 @@ abstract class ApiModifyItem extends Api {
 				$item->addSiteLink( $params['site'], $params['title'] );
 			}
 		}
-		
+
 		$this->setUsekeys( $params );
 		$success = $this->modifyItem( $item, $params );
 		if ( !$success ) {
@@ -146,12 +156,8 @@ abstract class ApiModifyItem extends Api {
 		}
 
 		$isNew = $item->isNew();
-		
-		// TODO: Change for more fine grained permissions
-		if ( $this->getPermissionsErrorInternal( $this->getUser(), $params ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
-		}
 
+		// do the actual save, or if it don't exist yet create it
 		$success = $item->save();
 
 		if ( !$success ) {

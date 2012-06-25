@@ -30,12 +30,12 @@ class ApiSetItem extends Api {
 		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
-		
+
 		// Check permissions
 		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
-		
+
 	}
-	
+
 	/**
 	 * Main method. Does the actual work and sets the result.
 	 *
@@ -57,42 +57,47 @@ class ApiSetItem extends Api {
 			if ( !is_null( $this->getMain()->getRequest()->getVal( 'callback' ) ) ) {
 				return;
 			}
-			
+
 			// continue 
 			$res['setitemtoken'] = $user->getEditToken();
 			$this->getResult()->addValue( null, $this->getModuleName(), $res );
 			return;
 		}
-		
+
 		// This is really already done with needTokens()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
-		
+
 		if ( !$params['data'] ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-data' ), 'no-data' );
 		}
 
-		if ( !$user->isAllowed( 'edit' ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
-		}
-		
 		// lacks error checking
 		$item = Item::newFromArray( json_decode( $params['data'], true ) );
-	
+
 		if ( is_null( $item ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 		}
-		
+
 		if ( !( $item instanceof Item ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
-			
+
+		if ( !is_null( $item ) && $item !== false ) {
+			$title = $item->getTitle();
+			if ( !is_null( $title ) && $title !== false ) {
+				if ( !$title->quickUserCan( 'edit', $user ) ) {
+					$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
+				}
+			}
+		}
+
 		// TODO: Change for more fine grained permissions
 		if (self::getPermissionsError( $this->getUser() ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
-		
+
 		$success = $item->save();
 
 		if ( !$success ) {
@@ -106,7 +111,7 @@ class ApiSetItem extends Api {
 		//}
 
 		$languages = $params['languages'];
-		
+
 		// because this is serialized and cleansed we can simply go for known values
 		$res = $this->getResult();
 		$res->addValue(
@@ -114,20 +119,20 @@ class ApiSetItem extends Api {
 			'id',
 			$item->getId()
 		);
-		
+
 		$this->setUsekeys( $params );
 		$this->addAliasesToResult( $item->getAllAliases(), 'item' );
 		$this->addSiteLinksToResult( $item->getSiteLinks(), 'item' );
 		$this->addDescriptionsToResult( $item->getDescriptions( $languages ), 'item' );
 		$this->addLabelsToResult( $item->getLabels( $languages ), 'item' );
-		
+
 		$res->addValue(
 			null,
 			'success',
 			(int)$success
 		);
 	}
-	
+
 	/**
 	 * Returns a list of all possible errors returned by the module
 	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
