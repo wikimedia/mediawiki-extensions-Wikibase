@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX//9j4\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T14:46:37Z",
+      "side": 1,
+      "message": "Yeah - we can\u0027t set the local keys to the language codes, because then they won\u0027t be unique (so we\u0027ll end up with db errors :p)\n\nThis switch on group\u003d\u003dWP makes the setup similar to what it will look like on WP, which is what we want.",
+      "parentUuid": "AAAAOX//9kQ\u003d",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX//9lY\u003d",
         "filename": "lib/includes/Utils.php",
         "patchSetId": 3
