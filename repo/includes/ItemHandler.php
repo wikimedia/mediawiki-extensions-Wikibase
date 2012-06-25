@@ -51,8 +51,8 @@ class ItemHandler extends EntityHandler {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( Content $content, Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$itemView = new ItemView( );
-		return $itemView->getParserOutput( $content );
+		$itemView = new ItemView( ); // @todo: construct context for title?
+		return $itemView->getParserOutput( $content, $options, $generateHtml );
 	}
 
 	/**
