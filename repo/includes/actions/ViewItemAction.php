@@ -16,6 +16,7 @@ use Language;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  */
 class ViewItemAction extends \FormlessAction {
 
@@ -27,50 +28,44 @@ class ViewItemAction extends \FormlessAction {
 		return 'view';
 	}
 
-	/**
-	 * (non-PHPdoc)
-	 * @see FormlessAction::onView()
-	 */
 	public function onView() {
-		# If we got diff in the query, we want to see a diff page instead of the article.
+		$article = \Article::newFromTitle( $this->getTitle(), $this->getContext() );
+		$article->view();
+
+		/* @var Item $item */
+		$item = $article->getContentObject();
+		$out = $this->getContext()->getOutput();
+		$langCode = $this->getContext()->getLanguage()->getCode();
+		$label = $item->getLabel( $this->getLanguage()->getCode() );
+
 		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
-			wfDebug( __METHOD__ . ": showing diff page\n" );
-			$this->showDiffPage(  );
-			wfProfileOut( __METHOD__ );
-
-			return;
+			$out->setPageTitle( $this->msg( 'difference-title', $label ) );
+		} else {
+			//FIXME: we may be overriding an error page title here, or something else we don't know about.
+			//       Using the label should just be the default.
+			$this->getOutput()->setPageTitle( $label );
 		}
 
-		$content = $this->getContext()->getWikiPage()->getContent();
+		// hand over the itemId to JS
+		$out->addJsConfigVars( 'wbItemId', $item->getId() );
+		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $langCode ) );
 
-		if ( is_null( $content ) ) {
-			// TODO: show ui for editing an empty item that does not have an ID yet.
-		}
-		else {
-			// TODO: switch on type of content.
-			$view = new ItemView( $this->getContext() );
-			$view->render( $content );
+		// TODO: this whole construct doesn't really belong here:
+		$sites = array();
 
-			$this->getOutput()->setPageTitle( $content->getLabel( $this->getLanguage()->getCode() ) );
+		foreach ( Sites::singleton()->getGroup( '0' ) as  /** @var \Wikibase\Site $site */ $site ) {
+			$sites[$site->getConfig()->getLocalId()] = array(
+				'shortName' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ),
+				'name' => \Language::fetchLanguageName( $site->getConfig()->getLocalId() ), // TODO: names should be configurable in settings
+				'pageUrl' => $site->getPagePath(),
+				'apiUrl' => $site->getFilePath( 'api.php' ),
+			);
 		}
-		return '';
+		$out->addJsConfigVars( 'wbSiteDetails', $sites );
+
 	}
 
-	public function showDiffPage() {
-		//XXX: would be nice if we could just inherit this from ViewAction.
-		//XXX: maybe move logic from Article to ViewAction?
-
-		//FIXME: don't allow editing? editing would revert the whole item!
-		//FIXME: how to revert? how to undo???
-		//FIXME: currrently, the diff title is editable!
-
-		$title = $this->getContext()->getTitle();
-
-		$article = new \Article( $title );
-		$article->showDiffPage();
-	}
-
-		/**
+	/**
 	 * (non-PHPdoc)
 	 * @see Action::getDescription()
 	 */
