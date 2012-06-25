@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX//9io\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T15:19:18Z",
+      "side": 1,
+      "message": "please at least check that $sitesTable is actually an array, and fail otherwise.",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9iQ\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T15:19:18Z",
+      "side": 1,
+      "message": "should check whether the group code is actually know. is null allowed here?",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9ic\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T15:19:18Z",
+      "side": 1,
+      "message": "note that this will produces bogus codes in some cases, like \"commons\" and \"meta\".",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9iM\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T15:19:18Z",
+      "side": 1,
+      "message": "str_replace would be sufficient :)",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9iI\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T15:19:18Z",
+      "side": 1,
+      "message": "yay! can we have the same for SitesTest and SiteListTest?",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
