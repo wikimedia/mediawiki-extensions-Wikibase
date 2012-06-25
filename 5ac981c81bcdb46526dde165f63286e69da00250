@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX//9hk\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T15:28:54Z",
+      "side": 1,
+      "message": "Please have a look at the code - it\u0027s not supposed to be an array. Not seen a singleton return an array yet :)",
+      "parentUuid": "AAAAOX//9io\u003d",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX//9iQ\u003d",
         "filename": "lib/includes/Utils.php",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX//9hg\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T15:28:54Z",
+      "side": 1,
+      "message": "If it\u0027s not, we\u0027ll get an error here. But we\u0027re not. We\u0027ll get one when the JSON changes by adding additional projects, but so what - keep in mind this is a temporary import script, not a core part of our infrastructure everyone will need to keep running forever.",
+      "parentUuid": "AAAAOX//9iQ\u003d",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX//9ic\u003d",
         "filename": "lib/includes/Utils.php",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2012-06-25T15:19:18Z",
       "side": 1,
       "message": "note that this will produces bogus codes in some cases, like \"commons\" and \"meta\".",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9hY\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T15:28:54Z",
+      "side": 1,
+      "message": "We\u0027re well aware of this - this is a temporary hack since the site stuff does not have a notion of language yet. We just discussed on how to implement this, but that\u0027s definitely going in another commit.",
+      "parentUuid": "AAAAOX//9ic\u003d",
       "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +135,24 @@
       "writtenOn": "2012-06-25T15:19:18Z",
       "side": 1,
       "message": "yay! can we have the same for SitesTest and SiteListTest?",
+      "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9hI\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T15:28:54Z",
+      "side": 1,
+      "message": "could be - unrelated to this change",
+      "parentUuid": "AAAAOX//9iI\u003d",
       "revId": "5ac981c81bcdb46526dde165f63286e69da00250",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
