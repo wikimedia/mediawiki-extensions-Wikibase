@@ -100,17 +100,29 @@ class SitesTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetSiteByLocalId() {
-		$site = Sites::singleton()->getAllSites()->getIterator()->current();
+		$sites = Sites::singleton()->getAllSites();
 
-		$this->assertEquals( $site, Sites::singleton()->getSiteByLocalId( $site->getConfig()->getLocalId() ) );
-		$this->assertFalse( Sites::singleton()->getSiteByLocalId( 'dxzfzxdegxdrfyxsdty' ) );
+		if ( $sites->isEmpty() ) {
+			$this->markTestSkipped( 'No sites to test with' );
+		}
+		else {
+			$site = $sites->getIterator()->current();
+			$this->assertEquals( $site, Sites::singleton()->getSiteByLocalId( $site->getConfig()->getLocalId() ) );
+			$this->assertFalse( Sites::singleton()->getSiteByLocalId( 'dxzfzxdegxdrfyxsdty' ) );
+		}
 	}
 
 	public function testGetSiteByGlobalId() {
-		$site = Sites::singleton()->getAllSites()->getIterator()->current();
+		$sites = Sites::singleton()->getAllSites();
 
-		$this->assertEquals( $site, Sites::singleton()->getSiteByGlobalId( $site->getGlobalId() ) );
-		$this->assertFalse( Sites::singleton()->getSiteByGlobalId( 'dxzfzxdegxdrfyxsdty' ) );
+		if ( $sites->isEmpty() ) {
+			$this->markTestSkipped( 'No sites to test with' );
+		}
+		else {
+			$site = $sites->getIterator()->current();
+			$this->assertEquals( $site, Sites::singleton()->getSiteByGlobalId( $site->getGlobalId() ) );
+			$this->assertFalse( Sites::singleton()->getSiteByGlobalId( 'dxzfzxdegxdrfyxsdty' ) );
+		}
 	}
 
 	public function testGetLoadedSites() {

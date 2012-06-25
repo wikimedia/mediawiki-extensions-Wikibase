@@ -46,11 +46,17 @@ class SiteListTest extends \MediaWikiTestCase {
 	public function siteArrayProvider() {
 		$sites = Sites::singleton()->getAllSites()->getArrayCopy();
 
-		return array(
-			array( array() ),
-			array( array( array_shift( $sites ) ) ),
-			array( array( array_shift( $sites ), array_shift( $sites ) ) ),
-		);
+		$siteArrays = array( array( array() ) );
+
+		if ( count( $sites ) > 0 ) {
+			$siteArrays[] = array( array( array_shift( $sites ) ) );
+		}
+
+		if ( count( $sites ) > 1 ) {
+			$siteArrays[] = array( array( array_shift( $sites ), array_shift( $sites ) ) );
+		}
+
+		return $siteArrays;
 	}
 
 	/**
@@ -75,32 +81,52 @@ class SiteListTest extends \MediaWikiTestCase {
 
 	public function testGetSiteByLocalId() {
 		$sites = Sites::singleton()->getAllSites();
-		$site = $sites->getIterator()->current();
 
-		$this->assertEquals( $site, $sites->getSiteByLocalId( $site->getConfig()->getLocalId() ) );
+		if ( $sites->isEmpty() ) {
+			$this->markTestSkipped( 'No sites to test with' );
+		}
+		else {
+			$site = $sites->getIterator()->current();
+			$this->assertEquals( $site, $sites->getSiteByLocalId( $site->getConfig()->getLocalId() ) );
+		}
 	}
 
 	public function testHasLocalId() {
 		$sites = Sites::singleton()->getAllSites();
-		$site = $sites->getIterator()->current();
 
-		$this->assertTrue( $sites->hasLocalId( $site->getConfig()->getLocalId() ) );
-		$this->assertFalse( $sites->hasLocalId( 'dxzfzxdegxdrfyxsdty' ) );
+		if ( $sites->isEmpty() ) {
+			$this->markTestSkipped( 'No sites to test with' );
+		}
+		else {
+			$site = $sites->getIterator()->current();
+			$this->assertTrue( $sites->hasLocalId( $site->getConfig()->getLocalId() ) );
+			$this->assertFalse( $sites->hasLocalId( 'dxzfzxdegxdrfyxsdty' ) );
+		}
 	}
 
 	public function testGetSiteByGlobalId() {
 		$sites = Sites::singleton()->getAllSites();
-		$site = $sites->getIterator()->current();
 
-		$this->assertEquals( $site, $sites->getSiteByGlobalId( $site->getGlobalId() ) );
+		if ( $sites->isEmpty() ) {
+			$this->markTestSkipped( 'No sites to test with' );
+		}
+		else {
+			$site = $sites->getIterator()->current();
+			$this->assertEquals( $site, $sites->getSiteByGlobalId( $site->getGlobalId() ) );
+		}
 	}
 
 	public function testHasGlobalId() {
 		$sites = Sites::singleton()->getAllSites();
-		$site = $sites->getIterator()->current();
 
-		$this->assertTrue( $sites->hasGlobalId( $site->getGlobalId() ) );
-		$this->assertFalse( $sites->hasGlobalId( 'dxzfzxdegxdrfyxsdty' ) );
+		if ( $sites->isEmpty() ) {
+			$this->markTestSkipped( 'No sites to test with' );
+		}
+		else {
+			$site = $sites->getIterator()->current();
+			$this->assertTrue( $sites->hasGlobalId( $site->getGlobalId() ) );
+			$this->assertFalse( $sites->hasGlobalId( 'dxzfzxdegxdrfyxsdty' ) );
+		}
 	}
 
 	public function testGetGroup() {
@@ -191,64 +217,75 @@ class SiteListTest extends \MediaWikiTestCase {
 	public function testAppend() {
 		$sites = array_slice( Sites::singleton()->getAllSites()->getArrayCopy(), 0, 5 );
 
-		$list = new SiteList();
+		if ( count( $sites ) === 5 ) {
+			$list = new SiteList();
 
-		foreach ( $sites as $site ) {
-			$list->append( $site );
-			$list->hasGlobalId( $site->getGlobalId() );
+			foreach ( $sites as $site ) {
+				$list->append( $site );
+				$list->hasGlobalId( $site->getGlobalId() );
+			}
+
+			$list = new SiteList();
+
+			foreach ( $sites as $site ) {
+				$list[] = $site;
+				$list->hasGlobalId( $site->getGlobalId() );
+			}
+
+			$listSize = $list->count();
+
+			$list = new SiteList();
+
+			foreach ( $sites as $site ) {
+				$list[] = $site;
+				$list->append( $site );
+			}
+
+			$this->assertEquals( $listSize, $list->count() );
+
+			$excption = null;
+
+			try{
+				$list->append( 42 );
+				$this->fail( 'Appending an integer to a SiteList should not work' );
+			}
+			catch ( \MWException $excption ) {}
+
 		}
-
-		$list = new SiteList();
-
-		foreach ( $sites as $site ) {
-			$list[] = $site;
-			$list->hasGlobalId( $site->getGlobalId() );
+		else {
+			$this->markTestSkipped( 'No sites to test with' );
 		}
-
-		$listSize = $list->count();
-
-		$list = new SiteList();
-
-		foreach ( $sites as $site ) {
-			$list[] = $site;
-			$list->append( $site );
-		}
-
-		$this->assertEquals( $listSize, $list->count() );
-
-		$excption = null;
-
-		try{
-			$list->append( 42 );
-			$this->fail( 'Appending an integer to a SiteList should not work' );
-		}
-		catch ( \MWException $excption ) {}
 	}
 
 	public function testOffsetSet() {
 		$sites = array_slice( Sites::singleton()->getAllSites()->getArrayCopy(), 0, 5 );
-		$list = new SiteList();
 
-		$site = array_shift( $sites );
-		$list->offsetSet( 42, $site );
-		$this->assertEquals( $site, $list->offsetGet( 42 ) );
+		if ( count( $sites ) === 5 ) {
+			$list = new SiteList();
 
-		$site = array_shift( $sites );
-		$list['oHai'] = $site;
-		$this->assertEquals( $site, $list['oHai'] );
+			$site = array_shift( $sites );
+			$list->offsetSet( 42, $site );
+			$this->assertEquals( $site, $list->offsetGet( 42 ) );
 
-		$site = array_shift( $sites );
-		$list->offsetSet( 9001, $site );
-		$this->assertEquals( $site, $list[9001] );
+			$site = array_shift( $sites );
+			$list['oHai'] = $site;
+			$this->assertEquals( $site, $list['oHai'] );
 
-		$site = array_shift( $sites );
-		$list->offsetSet( null, $site );
-		$this->assertEquals( $site, $list[0] );
+			$site = array_shift( $sites );
+			$list->offsetSet( 9001, $site );
+			$this->assertEquals( $site, $list[9001] );
 
-		$site = array_shift( $sites );
-		$list->offsetSet( null, $site );
-		$this->assertEquals( $site, $list[1] );
+			$site = array_shift( $sites );
+			$list->offsetSet( null, $site );
+			$this->assertEquals( $site, $list[0] );
+
+			$site = array_shift( $sites );
+			$list->offsetSet( null, $site );
+			$this->assertEquals( $site, $list[1] );
+		}
+		else {
+			$this->markTestSkipped( 'No sites to test with' );
+		}
 	}
-
 
 }
