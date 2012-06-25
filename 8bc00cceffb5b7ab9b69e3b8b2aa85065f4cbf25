@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX//9kk\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T14:39:10Z",
+      "side": 1,
+      "message": "Nice to have, but I don\u0027t think this should block this improvement.",
+      "parentUuid": "AAAAOX//9lc\u003d",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX//9lo\u003d",
         "filename": "lib/includes/Utils.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-06-25T14:32:26Z",
       "side": 1,
       "message": "could at least check whether the HTTP get returns null, and fail with a meaningful error messaew if so. We can\u0027t assume to be connected to the internet when this is run.",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9ko\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T14:39:10Z",
+      "side": 1,
+      "message": "Documentation states it always returns a string.\n\nError checking would be nice yes, but whatever, this is a temporary script anyway.",
+      "parentUuid": "AAAAOX//9lo\u003d",
       "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOX//9k0\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T14:39:10Z",
+      "side": 1,
+      "message": "Sorry what? This should work with all projects, and in fact does as far as I can tell.",
+      "parentUuid": "AAAAOX//9lg\u003d",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOX//9lY\u003d",
         "filename": "lib/includes/Utils.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2012-06-25T14:32:26Z",
       "side": 1,
       "message": "really? we\u0027ll use wikipedia links in the navigation bar on wikidata? not really...",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9k4\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T14:39:10Z",
+      "side": 1,
+      "message": "Not sure what you are getting at - what should change here according to you?",
+      "parentUuid": "AAAAOX//9lY\u003d",
       "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
