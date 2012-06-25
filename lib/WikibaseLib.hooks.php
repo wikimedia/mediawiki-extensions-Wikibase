@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use DatabaseUpdater;
+
 /**
  * File defining the hook handlers for the WikibaseLib extension.
  *
@@ -11,7 +14,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-final class WikibaseLibHooks {
+final class LibHooks {
 
 	/**
 	 * Schema update to set up the needed database tables.
@@ -76,6 +79,7 @@ final class WikibaseLibHooks {
 			'ItemNewEmpty',
 			'ItemNewFromArray',
 			'Item',
+			'LibHooks',
 			'SiteList',
 			'SiteRow',
 			'Sites',

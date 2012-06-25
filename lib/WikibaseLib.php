@@ -52,7 +52,7 @@ $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 
 
 // Autoloading
-$wgAutoloadClasses['WikibaseLibHooks'] 				= $dir . 'WikibaseLib.hooks.php';
+$wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
@@ -100,8 +100,8 @@ $wgAutoloadClasses['Wikibase\tests\MapDiffTest'] 			= $dir . 'tests/phpunit/diff
 
 
 // Hooks
-$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'WikibaseLibHooks::onSchemaUpdate';
-$wgHooks['UnitTestsList'][]							= 'WikibaseLibHooks::registerUnitTests';
+$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\LibHooks::onSchemaUpdate';
+$wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerUnitTests';
 
 
 
