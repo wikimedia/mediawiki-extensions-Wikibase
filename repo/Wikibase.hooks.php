@@ -63,6 +63,7 @@ final class WikibaseHooks {
 			'api/ApiLanguageAttribute',
 			'api/ApiSetAliases',
 			'api/ApiSetItem',
+			'api/ApiLinkSiteTest',
 
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemByLabel',
@@ -302,6 +303,19 @@ final class WikibaseHooks {
 					'dbgfm' => true,
 					'dump' => true,
 					'dumpfm' => true,
+				),
+				// settings for the user agent
+				'clientTimeout' => 7,
+				'clientPageOpts' => array(
+					'userAgent' => 'Wikibase',
+				),
+				'clientPageArgs' => array(
+					'action' => 'query',
+					'prop' => 'info',
+					'redirects' => true,
+					'converttitles' => true,
+					'format' => 'json',
+					'maxlag' => '5',
 				),
 			)
 		);
