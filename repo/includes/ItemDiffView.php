@@ -26,9 +26,63 @@ class ItemDiffView extends \DifferenceEngine {
 		return parent::addHeader( $diff, $otitle, $ntitle, $multi, $notice );
 	}
 
+	/**
+	 * Get a header for a specified revision.
+	 *
+	 * @param $rev \Revision
+	 * @param $complete String: 'complete' to get the header wrapped depending
+	 *        the visibility of the revision and a link to edit the page.
+	 * @return String HTML fragment
+	 */
 	protected function getRevisionHeader( \Revision $rev, $complete = '' ) {
-		// if we want to show different links on the revision label, we have to change this
-		return parent::getRevisionHeader( $rev, $complete );
+		//NOTE: This must be kept in sync with the parent implementation.
+		//      Perhaps some parts could be factored out to reduce code duplication.
+
+		$lang = $this->getLanguage();
+		$user = $this->getUser();
+		$revtimestamp = $rev->getTimestamp();
+		$timestamp = $lang->userTimeAndDate( $revtimestamp, $user );
+		$dateofrev = $lang->userDate( $revtimestamp, $user );
+		$timeofrev = $lang->userTime( $revtimestamp, $user );
+
+		$header = $this->msg(
+			$rev->isCurrent() ? 'currentrev-asof' : 'revisionasof',
+			$timestamp,
+			$dateofrev,
+			$timeofrev
+		)->escaped();
+
+		if ( $complete !== 'complete' ) {
+			return $header;
+		}
+
+		$title = $rev->getTitle();
+
+		$header = \Linker::linkKnown( $title, $header, array(),
+			array( 'oldid' => $rev->getID() ) );
+
+		if ( $rev->userCan( \Revision::DELETED_TEXT, $user ) ) {
+			if ( $title->quickUserCan( 'edit', $user ) ) {
+				if ( $rev->isCurrent() ) {
+					$editQuery = array( 'action' => 'edit' ); //XXX: does nothing, just like view
+					$msg = $this->msg( 'editold' )->escaped();
+				} else {
+					$editQuery = array( 'action' => 'reset' ); //XXX: not yet implemented
+					$editQuery['oldid'] = $rev->getID();
+					$msg = $this->msg( 'wikibase-resetold' )->escaped();
+				}
+
+				$header .= ' (' . \Linker::linkKnown( $title, $msg, array(), $editQuery ) . ')';
+			}
+
+			if ( $rev->isDeleted( \Revision::DELETED_TEXT ) ) {
+				$header = Html::rawElement( 'span', array( 'class' => 'history-deleted' ), $header );
+			}
+		} else {
+			$header = Html::rawElement( 'span', array( 'class' => 'history-deleted' ), $header );
+		}
+
+		return $header;
 	}
 
 	function generateContentDiffBody( Content $old, Content $new ) {
