@@ -45,91 +45,127 @@ final class Utils {
 			return;
 		}
 
-		$sitesTable = \Wikibase\SitesTable::singleton();
+        $sitesTable = \Wikibase\SitesTable::singleton();
+        if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 
-		$sitesTable->newFromArray( array(
-			'global_key' => 'enwiki',
-			'type' => 0,
-			'group' => 0,
-			'url' => 'https://en.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'en',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-			'allow_transclusion' => false,
-		) )->save();
+            $sitesTable->newFromArray( array(
+                'global_key' => 'enwiki',
+                'type' => 0,
+                'group' => 0,
+                'url' => 'https://en.wikipedia.org',
+                'page_path' => '/wiki/$1',
+                'file_path' => '/w/$1',
+                'local_key' => 'en',
+                'link_inline' => true,
+                'link_navigation' => true,
+                'forward' => true,
+                'allow_transclusion' => false,
+            ) )->save();
 
-		$sitesTable->newFromArray( array(
-			'global_key' => 'dewiki',
-			'type' => 0,
-			'group' => 0,
-			'url' => 'https://de.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'de',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-			'allow_transclusion' => false,
-		) )->save();
+            $sitesTable->newFromArray( array(
+                'global_key' => 'dewiki',
+                'type' => 0,
+                'group' => 0,
+                'url' => 'https://de.wikipedia.org',
+                'page_path' => '/wiki/$1',
+                'file_path' => '/w/$1',
+                'local_key' => 'de',
+                'link_inline' => true,
+                'link_navigation' => true,
+                'forward' => true,
+                'allow_transclusion' => false,
+            ) )->save();
 
-		$sitesTable->newFromArray( array(
-			'global_key' => 'nlwiki',
-			'type' => 0,
-			'group' => 0,
-			'url' => 'https://nl.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'nl',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-			'allow_transclusion' => false,
-		) )->save();
+            $sitesTable->newFromArray( array(
+                'global_key' => 'nlwiki',
+                'type' => 0,
+                'group' => 0,
+                'url' => 'https://nl.wikipedia.org',
+                'page_path' => '/wiki/$1',
+                'file_path' => '/w/$1',
+                'local_key' => 'nl',
+                'link_inline' => true,
+                'link_navigation' => true,
+                'forward' => true,
+                'allow_transclusion' => false,
+            ) )->save();
 
-		$sitesTable->newFromArray( array(
-			'global_key' => 'svwiki',
-			'type' => 0,
-			'group' => 0,
-			'url' => 'https://sv.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'sv',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-			'allow_transclusion' => false,
-		) )->save();
+            $sitesTable->newFromArray( array(
+                'global_key' => 'svwiki',
+                'type' => 0,
+                'group' => 0,
+                'url' => 'https://sv.wikipedia.org',
+                'page_path' => '/wiki/$1',
+                'file_path' => '/w/$1',
+                'local_key' => 'sv',
+                'link_inline' => true,
+                'link_navigation' => true,
+                'forward' => true,
+                'allow_transclusion' => false,
+            ) )->save();
 
-		$sitesTable->newFromArray( array(
-			'global_key' => 'nnwiki',
-			'type' => 0,
-			'group' => 0,
-			'url' => 'https://nn.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'nn',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-			'allow_transclusion' => false,
-		) )->save();
+            $sitesTable->newFromArray( array(
+                'global_key' => 'nnwiki',
+                'type' => 0,
+                'group' => 0,
+                'url' => 'https://nn.wikipedia.org',
+                'page_path' => '/wiki/$1',
+                'file_path' => '/w/$1',
+                'local_key' => 'nn',
+                'link_inline' => true,
+                'link_navigation' => true,
+                'forward' => true,
+                'allow_transclusion' => false,
+            ) )->save();
 
-		$sitesTable->newFromArray( array(
-			'global_key' => 'enwiktionary',
-			'type' => 0,
-			'group' => 1,
-			'url' => 'https://en.wiktionary.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'enwiktionary',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-			'allow_transclusion' => false,
-		) )->save();
+            $sitesTable->newFromArray( array(
+                'global_key' => 'enwiktionary',
+                'type' => 0,
+                'group' => 1,
+                'url' => 'https://en.wiktionary.org',
+                'page_path' => '/wiki/$1',
+                'file_path' => '/w/$1',
+                'local_key' => 'enwiktionary',
+                'link_inline' => true,
+                'link_navigation' => true,
+                'forward' => true,
+                'allow_transclusion' => false,
+            ) )->save();
+        } else {
+            $languages = \FormatJson::decode( \Http::get( "http://meta.wikimedia.org/w/api.php?action=sitematrix&format=json" ), true );
+            wfGetDB(DB_MASTER)->begin();
+            $groupMap = array(
+                'wiki' => SITE_GROUP_WIKIPEDIA,
+                'wiktionary' => 1,
+                'wikibooks' => 2,
+                'wikiquote' => 3,
+                'wikisource' => 4,
+                'wikiversity' => 5,
+                'wikinews' => 6
+            );
+
+            foreach ( $languages['sitematrix'] as $language ) {
+                if ( is_array( $language ) && array_key_exists( 'code', $language ) && array_key_exists( 'site', $language ) ) {
+                    $languageCode = $language['code'];
+                    foreach ( $language['site'] as $site ) {
+                        $sitesTable->newFromArray( array(
+                            'global_key' => $site['dbname'],
+                            'type' => SITE_TYPE_MEDIAWIKI,
+                            'group' => $groupMap[$site['code']],
+                            'url' => $site['url'],
+                            'page_path' => '/wiki/$1',
+                            'file_path' => '/w/$1',
+                            'local_key' => ($site['code'] === 'wiki') ? $languageCode : $site['dbname'] ,
+                            'link_inline' => true,
+                            'link_navigation' => true,
+                            'forward' => true,
+                            'allow_transclusion' => false,
+                        ) )->save();
+                    }
+                }
+            }
+            wfGetDB(DB_MASTER)->commit();
+        };
 	}
 
 	/**
