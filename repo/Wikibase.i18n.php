@@ -97,6 +97,12 @@ $messages['en'] = array(
 
 	'wikibase-resetold' => 'reset',
 
+	'wikibase-noitem'                    => 'This item does not exist.
+You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]
+to find out where it went, or [[Special:CreateItem|create a new item]]</span>.',
+	'wikibase-noitem-nopermission'       => 'This item does not exist.
+You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs].',
+
 	//content model names
 	'content-model-1001' => 'Wikibase item',
 );
@@ -203,6 +209,8 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+	'noarticletext' => 'This is the message that you get if you visit a page for an item that doesn\'t exist yet or was deleted. See also {{msg-mw|Noarticletext-nopermission}}.',
+	'noarticletext-nopermission' => 'See also {{msg-mw|Noarticletext}}.',
 	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
