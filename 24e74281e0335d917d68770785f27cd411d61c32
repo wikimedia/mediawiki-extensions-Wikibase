@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX//9n8\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-06-25T13:37:52Z",
+      "side": 1,
+      "message": "hm.. there should be another solution for the unit-Tests then. API-tests are using this function very often, this would\n1. slow them down\n2. cause that unnit-tests are depending on some external stuff, which should never happen",
+      "revId": "24e74281e0335d917d68770785f27cd411d61c32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
