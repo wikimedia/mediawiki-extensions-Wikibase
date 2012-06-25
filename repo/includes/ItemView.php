@@ -46,10 +46,13 @@ class ItemView extends \ContextSource {
 	 *
 	 * @param \Wikibase\Item    $item the item to render
 	 * @param \Language|null    $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param bool              $editable whether editing is allowed (enabled edit links).
 	 *
 	 * @return string
 	 */
-	public function getHTML( Item $item, Language $lang = null ) {
+	public function getHTML( Item $item, Language $lang = null, $editable = true ) {
+		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
+
 		if ( !$lang ) {
 			$lang = $this->getLanguage();
 		}
@@ -152,12 +155,13 @@ class ItemView extends \ContextSource {
 		}
 
 		$langCode = $options->getTargetLanguage();
+		$editable = $options->getEditSection();
 
 		// fresh parser output with items markup
 		$pout = new ParserOutput();
 
 		if ( $generateHtml ) {
-			$html = $this->getHTML( $item, $langCode );
+			$html = $this->getHTML( $item, $langCode, $editable );
 			$pout->setText( $html );
 		}
 
@@ -167,8 +171,10 @@ class ItemView extends \ContextSource {
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array( 'wikibase.common' ) );
 
-		// make sure required client sided resources will be loaded:
-		$pout->addModules( 'wikibase.ui.PropertyEditTool' );
+		if ( $editable ) {
+			// make sure required client sided resources will be loaded:
+			$pout->addModules( 'wikibase.ui.PropertyEditTool' );
+		}
 
 		//FIXME: some places, like Special:CreateItem, don't want to override the page title.
 		//       But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
