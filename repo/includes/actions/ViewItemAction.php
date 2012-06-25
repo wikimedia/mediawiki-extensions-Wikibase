@@ -16,8 +16,9 @@ use Language;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
  */
-class ViewItemAction extends \FormlessAction {
+class ViewItemAction extends \ViewAction {
 
 	/**
 	 * (non-PHPdoc)
@@ -27,50 +28,80 @@ class ViewItemAction extends \FormlessAction {
 		return 'view';
 	}
 
-	/**
-	 * (non-PHPdoc)
-	 * @see FormlessAction::onView()
-	 */
-	public function onView() {
-		# If we got diff in the query, we want to see a diff page instead of the article.
-		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
-			wfDebug( __METHOD__ . ": showing diff page\n" );
-			$this->showDiffPage(  );
-			wfProfileOut( __METHOD__ );
+	public function show() {
 
+		// some fishy pseudo-casting
+		$article = $this->page; /* @var \Article $article */
+		$item = $article->getPage()->getContent(); /* @var Item $item */
+
+		$out = $this->getContext()->getOutput();
+
+		if ( $item === null ) {
+			$this->showMissingItem( $article->getTitle(), $article->getOldID() );
 			return;
 		}
 
-		$content = $this->getContext()->getWikiPage()->getContent();
+		// view it!
+		$article->view();
 
-		if ( is_null( $content ) ) {
-			// TODO: show ui for editing an empty item that does not have an ID yet.
+		if ( $article->getContentObject() != $item ) { // hacky...
+			// Article decided to not show the item but something else. So skip all the Item stuff below.
+			return;
 		}
-		else {
-			// TODO: switch on type of content.
-			$view = new ItemView( $this->getContext() );
-			$view->render( $content );
 
-			$this->getOutput()->setPageTitle( $content->getLabel( $this->getLanguage()->getCode() ) );
+		// ok, we are viewing an item, do all the silly JS stuff etc.
+
+		$langCode = $this->getContext()->getLanguage()->getCode();
+		$label = $item->getLabel( $this->getLanguage()->getCode() );
+
+		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
+			$out->setPageTitle( $this->msg( 'difference-title', $label ) );
+		} else {
+			//XXX: are we really sure?!
+			$this->getOutput()->setPageTitle( $label );
 		}
-		return '';
+
+		ItemView::registerJsConfigVars( $out, $item, $langCode );
 	}
 
-	public function showDiffPage() {
-		//XXX: would be nice if we could just inherit this from ViewAction.
-		//XXX: maybe move logic from Article to ViewAction?
+	/**
+	 * Show the error text for a missing article. For articles in the MediaWiki
+	 * namespace, show the default message text. To be called from Article::view().
+	 */
+	protected function showMissingItem( \Title $title, $oldid = 0 ) {
+		global $wgSend404Code; //@todo: do send a 404?
 
-		//FIXME: don't allow editing? editing would revert the whole item!
-		//FIXME: how to revert? how to undo???
-		//FIXME: currrently, the diff title is editable!
+		$outputPage = $this->getContext()->getOutput();
 
-		$title = $this->getContext()->getTitle();
+		$outputPage->setPageTitle( $title->getPrefixedText() );
 
-		$article = new \Article( $title );
-		$article->showDiffPage();
+		wfRunHooks( 'ShowMissingArticle', array( $this ) );
+
+		$hookResult = wfRunHooks( 'BeforeDisplayNoArticleText', array( $this ) );
+
+		if ( ! $hookResult ) {
+			return;
+		}
+
+		# Show error message
+		if ( $oldid ) {
+			$text = wfMsgNoTrans( 'missing-article',
+				$this->getTitle()->getPrefixedText(),
+				wfMsgNoTrans( 'missingarticle-rev', $oldid ) );
+		} elseif ( $this->getTitle()->quickUserCan( 'create', $this->getContext()->getUser() )
+			&& $this->getTitle()->quickUserCan( 'edit', $this->getContext()->getUser() )
+		) {
+			$text = wfMsgNoTrans( 'wikibase-noitem' );
+		} else {
+			$text = wfMsgNoTrans( 'wikibase-noitem-nopermission' );
+		}
+
+		$text = "<div class='noarticletext'>\n$text\n</div>";
+
+		$outputPage->addWikiText( $text );
 	}
 
-		/**
+	/**
 	 * (non-PHPdoc)
 	 * @see Action::getDescription()
 	 */
@@ -78,4 +109,19 @@ class ViewItemAction extends \FormlessAction {
 		return '';
 	}
 
+	/**
+	 * (non-PHPdoc)
+	 * @see Action::requiresUnblock()
+	 */
+	public function requiresUnblock() {
+		return false;
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Action::requiresWrite()
+	 */
+	public function requiresWrite() {
+		return false;
+	}
 }
