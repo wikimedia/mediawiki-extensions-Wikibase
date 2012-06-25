@@ -49,7 +49,7 @@ class ApiSetItemTest extends \ApiTestCase {
 
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'sites' ) );
-		\Wikibase\Utils::insertDefaultSites();
+		\Wikibase\Utils::insertSitesForTests();
 		
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
