@@ -112,4 +112,16 @@ class DifferenceEngine extends \DifferenceEngine {
 		return $html;
 	}
 
+	protected function getParserOutput( \WikiPage $page, \Revision $rev ) { //NOTE: needs a core change to work
+		$parserOptions = \ParserOptions::newFromContext( $this->getContext() );
+		$parserOptions->enableLimitReport();
+		$parserOptions->setTidy( true );
+
+		$parserOptions->setEditSection( false );
+		$parserOptions->addExtraKey("diff=1"); // don't poison parser cache with diff-specific stuff
+
+		$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
+		return $parserOutput;
+	}
+
 }
