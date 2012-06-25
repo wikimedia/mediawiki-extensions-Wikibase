@@ -16,6 +16,24 @@
       "revId": "24e74281e0335d917d68770785f27cd411d61c32",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9nY\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-06-25T13:44:01Z",
+      "side": 1,
+      "message": "addition to 1.: --group WikibaseAPI now runs for 2:11 minutes compared to 0:16 minutes before.",
+      "parentUuid": "AAAAOX//9n8\u003d",
+      "revId": "24e74281e0335d917d68770785f27cd411d61c32",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
