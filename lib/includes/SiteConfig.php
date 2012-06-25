@@ -52,14 +52,4 @@ interface SiteConfig {
 	 */
 	public function getForward();
 
-	/**
-	 * If template translcusion should be allowed or not.
-	 * TODO/NOTE: this is volatile and might be removed soonish, see addTable.sql
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function getAllowTransclusion();
-
 }

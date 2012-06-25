@@ -57,6 +57,10 @@ define( 'SITE_GROUP_WIKINEWS', 6 );
 
 
 
+$wgSiteTypes = array();
+
+$wgSiteTypes[SITE_TYPE_MEDIAWIKI] = 'Wikibase\MediaWikiSite';
+
 // i18n
 $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 
@@ -72,6 +76,7 @@ $wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/Entity.php';
 $wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/EntityDiff.php';
 $wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/Item.php';
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
+$wgAutoloadClasses['Wikibase\MediaWikiSite'] 		= $dir . 'includes/MediaWikiSite.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
 $wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';

@@ -51,6 +51,12 @@ final class LibHooks {
 			dirname( __FILE__ ) . '/sql/IndexSitesTable.sql'
 		);
 
+		$updater->addExtensionField(
+			'sites',
+			'site_language',
+			dirname( __FILE__ ) . '/sql/MakeSitesTableMoarAwesome.sql'
+		);
+
 		// TODO: enable && move to core
 //		$updater->dropExtensionTable(
 //			'interwiki',
