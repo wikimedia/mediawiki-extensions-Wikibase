@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX//9lc\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T14:32:26Z",
+      "side": 1,
+      "message": "would be nice to output a log message, indicating that we are contacting a remote site. this is unexpected during database setup.\n\ni don\u0027t know who to sanely display such a message, though... must probably be in the setup code, not here.",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9lo\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T14:32:26Z",
+      "side": 1,
+      "message": "could at least check whether the HTTP get returns null, and fail with a meaningful error messaew if so. We can\u0027t assume to be connected to the internet when this is run.",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9lg\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T14:32:26Z",
+      "side": 1,
+      "message": "the code will only be a language for the wikipedia family, other families are this skipped. is this intentional? if so, it should be documented.",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9lY\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-25T14:32:26Z",
+      "side": 1,
+      "message": "really? we\u0027ll use wikipedia links in the navigation bar on wikidata? not really...",
+      "revId": "8bc00cceffb5b7ab9b69e3b8b2aa85065f4cbf25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
