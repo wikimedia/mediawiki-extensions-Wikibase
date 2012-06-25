@@ -63,6 +63,7 @@ final class WikibaseHooks {
 			'api/ApiLanguageAttribute',
 			'api/ApiSetAliases',
 			'api/ApiSetItem',
+			'api/ApiLinkSite',
 
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemByLabel',
@@ -302,6 +303,21 @@ final class WikibaseHooks {
 					'dbgfm' => true,
 					'dump' => true,
 					'dumpfm' => true,
+				),
+				// settings for the user agent
+				'clientTimeout' => 120, // this is before final timeout, the maxlag value and then some
+				'clientPageOpts' => array(
+					'userAgent' => 'Wikibase',
+				),
+				'clientPageArgs' => array(
+					'action' => 'query',
+					'prop' => 'info',
+					'redirects' => true,
+					'converttitles' => true,
+					'format' => 'json',
+					'maxage' => 5, // filter down repeated clicks, don't let clicky folks loose to fast
+					'smaxage' => 15, // give the proxy some time, don't let clicky folks loose to fast
+					'maxlag' => 100, // time to wait on a lagging server, hanging on for 100 sec is very aggressive
 				),
 			)
 		);
