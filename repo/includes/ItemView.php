@@ -113,7 +113,7 @@ class ItemView extends \ContextSource {
 				$html .= Html::element(
 						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $languageCode ),
 						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
-						\Language::fetchLanguageName( $languageCode ) . ' (' . $languageCode . ')'
+						\Language::fetchLanguageName( preg_replace( "/_/", "-", $languageCode ) ) . ' (' . $languageCode . ')'
 				);
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
 				$html .= Html::element(
@@ -225,9 +225,11 @@ class ItemView extends \ContextSource {
 
 		foreach ( Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA ) as  /** @var \Wikibase\Site $site */ $site ) {
 			$languageCode = Utils::getLanguageCodeFromGlobalSiteId(  $site->getGlobalId() );
+			$languageName = \Language::fetchLanguageName( preg_replace( "/_/", "-", $languageCode ) );
+
 			$sites[$languageCode] = array(
-				'shortName' => \Language::fetchLanguageName( $languageCode ),
-				'name' => \Language::fetchLanguageName( $languageCode ),
+				'shortName' => $languageName,
+				'name' => $languageName,
 				'globalSiteId' => $site->getGlobalId(),
 				'pageUrl' => $site->getPagePath(),
 				'apiUrl' => $site->getFilePath( 'api.php' ),
