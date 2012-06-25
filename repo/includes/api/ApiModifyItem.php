@@ -85,14 +85,15 @@ abstract class ApiModifyItem extends Api {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
+		$title = $this->getTitle();
 
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
-		
-		if ( !$user->isAllowed( 'edit' ) ) {
-			$this->dieUsageMsg( 'cantedit' );
+
+		if ( !$title->userCan( 'edit', $user ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 
 		$hasLink = isset( $params['site'] ) && $params['title'];

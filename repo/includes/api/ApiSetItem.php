@@ -50,6 +50,7 @@ class ApiSetItem extends Api {
 		// item
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
+		$title = $this->getTitle();
 
 		if ( $params['gettoken'] ) {
 			// in JSON callback mode, no tokens should be returned
@@ -73,7 +74,7 @@ class ApiSetItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-data' ), 'no-data' );
 		}
 
-		if ( !$user->isAllowed( 'edit' ) ) {
+		if ( !$title->userCan( 'edit', $user ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 		
