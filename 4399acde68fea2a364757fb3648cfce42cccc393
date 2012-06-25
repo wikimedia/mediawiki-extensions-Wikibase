@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX//9eE\u003d",
+        "filename": "lib/includes/Settings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-25T17:36:22Z",
+      "side": 1,
+      "message": "Not in use",
+      "revId": "4399acde68fea2a364757fb3648cfce42cccc393",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9eM\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-25T17:36:22Z",
+      "side": 1,
+      "message": "Changed to client-error",
+      "revId": "4399acde68fea2a364757fb3648cfce42cccc393",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9eI\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-25T17:36:22Z",
+      "side": 1,
+      "message": "Changed to client-error",
+      "revId": "4399acde68fea2a364757fb3648cfce42cccc393",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOX//9eQ\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-25T17:36:22Z",
+      "side": 1,
+      "message": "Spourious class, remove",
+      "revId": "4399acde68fea2a364757fb3648cfce42cccc393",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
