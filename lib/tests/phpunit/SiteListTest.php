@@ -21,6 +21,28 @@ use Wikibase\SiteList as SiteList;
  */
 class SiteListTest extends \MediaWikiTestCase {
 
+	public function testUnset() {
+		$sites = Sites::singleton()->getAllSites();
+
+		if ( !$sites->isEmpty() ) {
+			$offset = $sites->getIterator()->key();
+			$count = $sites->count();
+			$sites->offsetUnset( $offset );
+			$this->assertEquals( $count - 1, $sites->count() );
+		}
+
+		if ( !$sites->isEmpty() ) {
+			$offset = $sites->getIterator()->key();
+			$count = $sites->count();
+			unset( $sites[$offset] );
+			$this->assertEquals( $count - 1, $sites->count() );
+		}
+
+		$exception = null;
+		try { $sites->offsetUnset( 'sdfsedtgsrdysftu' ); } catch ( \Exception $exception ){}
+		$this->assertInstanceOf( '\Exception', $exception );
+	}
+
 	public function siteArrayProvider() {
 		$sites = Sites::singleton()->getAllSites()->getArrayCopy();
 

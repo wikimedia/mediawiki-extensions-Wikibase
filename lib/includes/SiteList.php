@@ -197,10 +197,31 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	}
 
 	/**
+	 * Returns the names of the groups represented in this
+	 * list of sites.
+	 *
+	 * @since 0.1
+	 *
 	 * @return array
 	 */
 	public function getGroupNames() {
+		$this->cleanDeadGroups();
 		return array_keys( $this->groups );
+	}
+
+	/**
+	 * Removes the groups without any associated sites
+	 * from the groups field.
+	 *
+	 * @since 0.1
+	 */
+	protected function cleanDeadGroups() {
+		$this->groups = array_filter(
+			$this->groups,
+			function( array $groupPointers ) {
+				return $groupPointers !== array();
+			}
+		);
 	}
 
 	/**
