@@ -4,16 +4,16 @@ namespace Wikibase;
 use Content, _DiffOp_Add, _DiffOp_Delete, _DiffOp_Change, _DiffOp_Copy, Html;
 
 /**
- * Difference engine for structured data.
+ * Difference view for Wikibase items.
  *
  * @since 0.1
  *
- * @file WikibaseDifferenceEngine.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  */
-class DifferenceEngine extends \DifferenceEngine {
+class ItemDiffView extends \DifferenceEngine {
 
 	function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
 		parent::__construct($context, $old, $new, $rcid, $refreshCache, $unhide);

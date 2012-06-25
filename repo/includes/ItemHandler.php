@@ -105,7 +105,7 @@ class ItemHandler extends EntityHandler {
 	}
 
 	protected function getDiffEngineClass() {
-		return '\Wikibase\DifferenceEngine';
+		return '\Wikibase\ItemDiffView';
 	}
 }
 
