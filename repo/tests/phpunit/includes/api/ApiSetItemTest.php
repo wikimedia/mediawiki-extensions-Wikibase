@@ -56,28 +56,31 @@ class ApiSetItemTest extends \ApiTestCase {
 		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
 		
 		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
-				'Apitesteditor',
-				'Api Test Editor',
-				'api_test_editor@example.com',
-				array( 'wbeditor' )
-			);
+			'Apitesteditor',
+			'Api Test Editor',
+			'api_test_editor@example.com',
+			array( 'wbeditor' )
+		);
 		$wgUser = self::$users['wbeditor']->user;
 		
 		// now we have to do the login with the previous user
 		$data = $this->doApiRequest( array(
 			'action' => 'login',
 			'lgname' => self::$users['wbeditor']->username,
-			'lgpassword' => self::$users['wbeditor']->password ) );
+			'lgpassword' => self::$users['wbeditor']->password
+		) );
 
 		$token = $data[0]['login']['token'];
 
-		$this->doApiRequest( array(
-			'action' => 'login',
-			'lgtoken' => $token,
-			'lgname' => self::$users['wbeditor']->username,
-			'lgpassword' => self::$users['wbeditor']->password
+		$this->doApiRequest(
+			array(
+				'action' => 'login',
+				'lgtoken' => $token,
+				'lgname' => self::$users['wbeditor']->username,
+				'lgpassword' => self::$users['wbeditor']->password
 			),
-			$data );
+			$data
+		);
 	}
 
 	function getTokens() {
@@ -177,11 +180,15 @@ class ApiSetItemTest extends \ApiTestCase {
 			$req['token'] = $first[0]['wbsetitem']['setitemtoken'];
 		}
 		
-		$req = array_merge( $req, array(
+		$req = array_merge(
+			$req,
+			array(
 				'action' => 'wbsetitem',
 				'summary' => 'Some reason',
 				'data' => '{}',
-				'item' => 'add' ) );
+				'item' => 'add'
+			)
+		);
 		
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		$this->assertArrayHasKey( 'success', $second[0],
@@ -204,7 +211,8 @@ class ApiSetItemTest extends \ApiTestCase {
 			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
-					'gettoken' => '' ),
+					'gettoken' => ''
+				),
 				null,
 				false,
 				self::$users['wbeditor']->user
@@ -213,11 +221,15 @@ class ApiSetItemTest extends \ApiTestCase {
 			$req['token'] = $first[0]['wbsetitem']['setitemtoken'];
 		}
 		
-		$req = array_merge( $req, array(
+		$req = array_merge(
+			$req,
+			array(
 				'action' => 'wbsetitem',
 				'summary' => 'Some reason',
 				'data' => $data,
-				'item' => $op ) );
+				'item' => $op
+			)
+		);
 		
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		
