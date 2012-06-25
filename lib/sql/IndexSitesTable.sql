@@ -1,3 +1,8 @@
+-- Patch for the sites table.
+-- Introduced in 0.1, can probably be removed once we are in production for a few weeks.
+-- Licence: GNU GPL v2+
+-- Author: Jeroen De Dauw < jeroendedauw@gmail.com >
+
 ALTER TABLE /*_*/sites CHANGE site_link_equivalents site_link_navigation bool NOT NULL;
 
 CREATE UNIQUE INDEX /*i*/sites_global_key ON /*_*/sites (site_global_key);

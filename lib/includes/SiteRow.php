@@ -29,8 +29,7 @@ class SiteRow extends \ORMRow implements Site {
 			$this->getField( 'local_key' ),
 			$this->getField( 'link_inline' ),
 			$this->getField( 'link_navigation' ),
-			$this->getField( 'forward' ),
-			$this->getField( 'allow_transclusion' )
+			$this->getField( 'forward' )
 		);
 	}
 
@@ -137,6 +136,28 @@ class SiteRow extends \ORMRow implements Site {
 	 */
 	public function getRelativeFilePath() {
 		return $this->getField( 'file_path' );
+	}
+
+
+	/**
+	 * Compatibility helper.
+	 * Can be used by code that still needs the old Interwiki class,
+	 * but this should be updated, as this method will eventually be removed.
+	 *
+	 * @since 0.1
+	 * @deprecated since 0.1
+	 *
+	 * @return \Interwiki
+	 */
+	public function toInterwiki() {
+		return new \Interwiki(
+			$this->getConfig()->getLocalId(),
+			$this->getUrl(),
+			$this->getFilePath( 'api.php' ),
+			'',
+			$this->getConfig()->getForward(),
+			$this->getConfig()->getAllowTransclusion()
+		);
 	}
 
 }

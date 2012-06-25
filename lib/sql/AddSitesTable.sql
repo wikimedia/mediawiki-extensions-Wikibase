@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS /*_*/sites (
   -- Global identifier for the site, ie enwiktionary
   site_global_key            VARCHAR(25)         NOT NULL, -- obtained from repo
 
-  -- Type of the site, ie SITE_MW
+  -- Type of the site, ie SITE_TYPE_MW
   site_type                  INT UNSIGNED        NOT NULL, -- obtained from repo
 
   -- Group of the site, ie SITE_GROUP_WIKIPEDIA
@@ -29,11 +29,22 @@ CREATE TABLE IF NOT EXISTS /*_*/sites (
   -- Path of files relative to the base url, ie /w/
   site_file_path             VARCHAR(255)        NOT NULL, -- obtained from repo
 
+  -- Language code of the sites primary language.
+  -- We do not have real multilingual handling here by design,
+  -- as implementing it would require expensive changes in core
+  -- and would overcomplicate things. If you have a multilingual
+   -- site, for instance imdb, you can just create multiple rows
+   -- for it, ie imdben and imdbbe.
+  site_language              VARCHAR(10)         NOT NULL, -- obtained from repo
+
+  -- Type dependent site data.
+  site_data                  BLOB                NOT NULL, -- obtained from repo
+
   -- Local identifier for the site, ie en
   site_local_key             VARCHAR(25)         NOT NULL,
 
   -- If the site should be linkable inline as an "interwiki link" using
-  -- [[site_global_key:pageTitle]] or [[site_local_key:pageTitle]].
+  -- [[site_local_key:pageTitle]].
   site_link_inline           bool                NOT NULL,
 
   -- If equivalent pages of this site should be listed.
@@ -41,24 +52,22 @@ CREATE TABLE IF NOT EXISTS /*_*/sites (
   site_link_navigation       bool                NOT NULL,
 
   -- If site.tld/path/key:pageTitle should forward users to  the page on
-  -- the actual site, where "key" os either the local or global identifier.
+  -- the actual site, where "key" is the local identifier.
   site_forward               bool                NOT NULL,
 
-  -- If template translcusion should be allowed or not.
-  -- TODO: if we need to search against this, then it probably should
-  -- go in it's own table as this is MW specific. If we don't need
-  -- to search against it, then we can create a site_info blob
-  -- that holds it and possibly other misc stuff.
-  site_allow_transclusion    bool                NOT NULL
+  -- Type dependent site config.
+  -- For instance if template transclusion should be allowed if it's a MediaWiki.
+  site_config                BLOB                NOT NULL
 ) /*$wgDBTableOptions*/;
 
 CREATE UNIQUE INDEX /*i*/sites_global_key ON /*_*/sites (site_global_key);
 CREATE INDEX /*i*/sites_type ON /*_*/sites (site_type);
 CREATE INDEX /*i*/sites_group ON /*_*/sites (site_group);
+CREATE INDEX /*i*/sites_language ON /*_*/sites (site_language);
 CREATE UNIQUE INDEX /*i*/sites_local_key ON /*_*/sites (site_local_key);
 CREATE INDEX /*i*/sites_link_inline ON /*_*/sites (site_link_inline);
 CREATE INDEX /*i*/sites_link_navigation ON /*_*/sites (site_link_navigation);
 CREATE INDEX /*i*/sites_forward ON /*_*/sites (site_forward);
-CREATE INDEX /*i*/sites_allow_transclusion ON /*_*/sites (site_allow_transclusion);
+
 
 
