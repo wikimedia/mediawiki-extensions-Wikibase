@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOX//9kU\u003d",
+        "filename": "repo/includes/actions/EditItemAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-25T14:43:54Z",
+      "side": 1,
+      "message": ".\n  //this is wrong...\n  // This is right...",
+      "revId": "a1ed5adc977fe69ab8ff9f5065655e5ef4c5af9a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
