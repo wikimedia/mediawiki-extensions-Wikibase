@@ -127,7 +127,6 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
-			'allow_transclusion' => false,
 		) )->save();
 
 		$sitesTable->newFromArray( array(
@@ -141,7 +140,6 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
-			'allow_transclusion' => false,
 		) )->save();
 
 		$sitesTable->newFromArray( array(
@@ -155,7 +153,6 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
-			'allow_transclusion' => false,
 		) )->save();
 
 		$sitesTable->newFromArray( array(
@@ -169,7 +166,32 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
-			'allow_transclusion' => false,
+		) )->save();
+
+		$sitesTable->newFromArray( array(
+			'global_key' => 'srwiki',
+			'type' => 0,
+			'group' => 0,
+			'url' => 'https://sr.wikipedia.org',
+			'page_path' => '/wiki/$1',
+			'file_path' => '/w/$1',
+			'local_key' => 'sr',
+			'link_inline' => true,
+			'link_navigation' => true,
+			'forward' => true,
+		) )->save();
+
+		$sitesTable->newFromArray( array(
+			'global_key' => 'nowiki',
+			'type' => 0,
+			'group' => 0,
+			'url' => 'https://no.wikipedia.org',
+			'page_path' => '/wiki/$1',
+			'file_path' => '/w/$1',
+			'local_key' => 'no',
+			'link_inline' => true,
+			'link_navigation' => true,
+			'forward' => true,
 		) )->save();
 
 		$sitesTable->newFromArray( array(
@@ -183,7 +205,6 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
-			'allow_transclusion' => false,
 		) )->save();
 
 		$sitesTable->newFromArray( array(
@@ -197,7 +218,6 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
-			'allow_transclusion' => false,
 		) )->save();
 
 		wfGetDB( DB_MASTER )->commit();
