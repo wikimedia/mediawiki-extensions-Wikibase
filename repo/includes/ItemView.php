@@ -170,7 +170,13 @@ class ItemView extends \ContextSource {
 		}
 
 		$langCode = $options->getTargetLanguage();
-		$editable = $options->getEditSection();
+		$editable = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
+
+		//@todo: would be nice to disable editing if the user isn't allowed to do that.
+		//@todo: but this breaks the parser cache! So this needs to be done from the outside, per request.
+		//if ( !$this->getTitle()->quickUserCan( "edit" ) ) {
+		//	$editable = false;
+		//}
 
 		// fresh parser output with items markup
 		$pout = new ParserOutput();
@@ -188,6 +194,7 @@ class ItemView extends \ContextSource {
 
 		if ( $editable ) {
 			// make sure required client sided resources will be loaded:
+			//@todo: perhaps always include, but set a canEdit flag in the JS options?
 			$pout->addModules( 'wikibase.ui.PropertyEditTool' );
 		}
 
@@ -237,10 +244,42 @@ class ItemView extends \ContextSource {
 		// overwrite page title
 		$out->setPageTitle( $pout->getTitleText() );
 
+		// register JS stuff
+		self::registerJsConfigVars( $out, $item, $langCode );
+
+		$out->addParserOutput( $pout );
+		return $pout;
+	}
+
+	/**
+	 * Helper function for registering any JavaScript stuff needed to show the Item.
+	 * Would be much nicer if we could do that via the ResourceLoader Module or via some hook.
+	 *
+	 * @static
+	 *
+	 * @param OutputPage $out the OutputPage to add to
+	 * @param Item       $item the item for which we want to add the JS config
+	 * @param String     $langCode the language used for showing the item.
+	 *
+	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
+	 */
+	public static function registerJsConfigVars( OutputPage $out, Item $item, $langCode  ) {
+
 		// hand over the itemId to JS
 		$out->addJsConfigVars( 'wbItemId', $item->getId() );
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
+		$sites = self::getSiteDetails();
+		$out->addJsConfigVars( 'wbSiteDetails', $sites );
+	}
+
+	/**
+	 * Returns a list of all the sites that can be used as a target for a site link.
+	 *
+	 * @static
+	 * @return array
+	 */
+	protected static function getSiteDetails() {
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
 
@@ -255,10 +294,8 @@ class ItemView extends \ContextSource {
 				'apiUrl' => $site->getFilePath( 'api.php' ),
 			);
 		}
-		$out->addJsConfigVars( 'wbSiteDetails', $sites );
 
-		$out->addParserOutput( $pout );
-		return $pout;
+		return $sites;
 	}
 
 }
