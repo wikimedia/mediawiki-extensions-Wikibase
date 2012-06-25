@@ -38,9 +38,9 @@ class UtilsTest extends \MediaWikiTestCase {
 
     /**
      * @group WikibaseUtils
-     * @dataProvider providerGetSiteCodeFromGlobalSiteId
+     * @dataProvider providerGetLanguageCodeFromGlobalSiteId
      */
-    public function testGetSiteCodeFromGlobalSiteId( $globalSiteId, $expectedSiteCode ) {
+    public function testGetLanguageCodeFromGlobalSiteId( $globalSiteId, $expectedSiteCode ) {
     	$result = Utils::getLanguageCodeFromGlobalSiteId( $globalSiteId );
     	$this->assertEquals(
     		$expectedSiteCode,
