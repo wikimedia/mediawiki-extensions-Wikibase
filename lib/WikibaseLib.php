@@ -48,6 +48,14 @@ define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://media
 
 define( 'SITE_TYPE_MEDIAWIKI', 0 );
 define( 'SITE_GROUP_WIKIPEDIA', 0 );
+define( 'SITE_GROUP_WIKTIONARY', 1 );
+define( 'SITE_GROUP_WIKIBOOKS', 2 );
+define( 'SITE_GROUP_WIKIQUOTE', 3 );
+define( 'SITE_GROUP_WIKISOURCE', 4 );
+define( 'SITE_GROUP_WIKIVERSITY', 5 );
+define( 'SITE_GROUP_WIKINEWS', 6 );
+
+
 
 // i18n
 $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
