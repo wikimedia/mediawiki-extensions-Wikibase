@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User;
+use ApiBase, User, Http;
 
 /**
  * API module to associate a page on a site with a Wikibase item or remove an already made such association.
@@ -32,7 +32,7 @@ class ApiLinkSite extends ApiModifyItem {
 	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
 		return parent::getPermissionsError( $user, 'site-link', $params['link'] );
 	}
-	
+
 	/**
 	 * Actually modify the item.
 	 *
@@ -48,32 +48,169 @@ class ApiLinkSite extends ApiModifyItem {
 			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			$res = $this->getResult();
-			$ret = $item->addSiteLink( $params['linksite'], $params['linktitle'], $params['link'] );
-			
-			if ( $ret !== false ) {
-				$normalized = array();
-				if ( $params['linksite'] !== $ret['site'] ) {
-					$normalized['linksite'] = array( 'from' => $params['linksite'], 'to' => $ret['site'] );
-				}
-
-				if ( $params['linktitle'] !== $ret['title'] ) {
-					$normalized['linktitle'] = array( 'from' => $params['linktitle'], 'to' => $ret['title'] );
-				}
-
-				if ( count($normalized) ) {
-					$res->addValue(
-						'item',
-						'normalized',
-						$normalized
-					);
-				}
-
-				$this->addSiteLinksToResult( array( $ret['site'] => $ret ), 'item' );
+			$data = $this->queryPageAtSite( $params['linksite'], $params['linktitle'] );
+			if ( $data === false ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-external-data' ), 'no-external-data' );
+			}
+			if ( isset( $data['error'] ) ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-client-error' ), 'client-error' );
 			}
 
+			$page = $this->titleToPage($data, $params['linktitle']);
+			if ( isset( $page['missing'] ) ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
+			}
+			$ret = $item->addSiteLink( $params['linksite'], $page['title'], $params['link'] );
+			if ( $ret === false ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
+			}
+
+			$this->addSiteLinksToResult( array( $ret['site'] => $ret['title'] ), 'item' );
 			return $ret !== false;
 		}
+	}
+
+
+	/**
+	 * Query the external site and return the reply. 
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $globalSiteId Identifies the external site according to the sites tible.
+	 * @param string $pageTitle Identifies the page at the external site, needing normalization,
+	 * 		conversion and redirects.
+	 *
+	 * @return array Reply from the external server.
+	 */
+	public function queryPageAtSite( $globalSiteId, $pageTitle ) {
+		// Check if we have strings as arguments.
+		if ( !is_string( $globalSiteId ) || !is_string( $pageTitle ) ) {
+			return false;
+		}
+		// Get site identifiers and figure out the URL.
+		$site = Sites::singleton()->getSiteByGlobalId( $globalSiteId );
+		if ( $site === false ) {
+			return false;
+		}
+		$url = $site->getFilePath();
+		if ( $site === false ) {
+			return false;
+		}
+
+		// Build the args for the specific call
+		$args = Settings::get( 'clientPageArgs' );
+		$args['titles'] = $pageTitle;
+
+		// Go on call the external site
+		$content = $this->http_get( $url . 'api.php?' . wfArrayToCgi( $args ), $pageTitle );
+		if ( $content === false ) {
+			return false;
+		}
+		$data = json_decode( $content, true );
+		return is_array( $data ) ? $data : false;
+	}
+	
+	/**
+	 * Do the query of the external site.
+	 * Note that this makes an override if the class is under test to avoid making the test dependant
+	 * on external sites. It should really be done by mock classes in the tests itself.
+	 *
+	 * @todo Move code for testing out of this function if possible.
+	 * 
+	 * @since 0.1
+	 *
+	 * @param string $url The encoded url for the call.
+	 *
+	 * @return string Reply from the external server.
+	 */
+	public function http_get($url, $pageTitle) {
+		// Note that the following can create inconsistencies!
+		// If the code is under test, then avoid accessing external client sites
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			// Construct a "page" for the json in case we are testing, as it is very bad to access
+			// external sites during testing. This will not make it possible to do complete testing
+			// of all error situations, even more so than having a bit of code for testing here.
+			// Note that the later Http::get is a static method.
+			// The following will do an equivalent to a page query but without normalization, conversion
+			// and redirects. The rest of the parsing is similar to the normal client response.
+			$content = "{ \"query\" : { \"pages\" : { \"1\" : { \"title\" : \"$pageTitle\" } } } }";
+		}
+		// In production so go get the normalization/conversion from the external site
+		else {
+			// It will be nearly impossible to figure out what goes wrong without the status available,
+			// the only indication is that there are no json to decode.
+			$content = Http::get( $url, Settings::get( 'clientTimeout' ), Settings::get( 'clientPageOpts' ) );
+		}
+		if ( is_string( $content ) ) {
+			if ( preg_match( '/^Waiting for [^ ]*: [0-9.-]+ seconds lagged$/', $content ) ) {
+				return false;
+			}
+			return $content;
+		}
+		return false;
+	}
+
+	/**
+	 * Follow the from-to pairs from the title and to the final page. 
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $externalData A reply from the external server, previously returned from
+	 * 		a call to queryPageAtSite or through som other similar method.
+	 * @param string $pageTitle Identifies the page at the external site, needing normalization,
+	 * 		conversion and redirects.
+	 *
+	 * @return array|false Reply from the external server filtered down to a single page.
+	 */
+	public function titleToPage( $externalData, $pageTitle ) {
+		// make initial checks and return if prerequisites are not meet
+		if ( !is_array( $externalData ) || !isset( $externalData['query'] ) ) {
+			return false;
+		}
+		// loop over the tree different named structures, that otherwise are similar
+		$structs = array(
+			'normalized' => 'from',
+			'converted' => 'from',
+			'redirects' => 'from',
+			'pages' => 'title'
+		);
+		foreach ( $structs as $listId => $fieldId) {
+			// check for normalization
+			if ( !isset( $externalData['query'][$listId] ) ) {
+				continue;
+			}
+			$collectedHits = array_filter(
+				array_values( $externalData['query'][$listId] ),
+				function( $a ) use ( $fieldId, $pageTitle ) {
+					return $a[$fieldId] === $pageTitle;
+				}
+			);
+			// if still looping over normalization, conversion or redirects
+			if ( $fieldId === 'from' && is_array( $collectedHits ) ) {
+				switch ( count( $collectedHits ) ) {
+				case 0:
+					break;
+				case 1:
+					$pageTitle = $collectedHits[0]['to'];
+					break;
+				default:
+					return false;
+				}
+			}
+			// if on the pages structure
+			elseif ( $fieldId === 'title' && is_array( $collectedHits ) ) {
+				switch ( count( $collectedHits ) ) {
+				case 0:
+					return false;
+				case 1:
+					return array_shift( $collectedHits );
+				default:
+					return false;
+				}
+			}
+		}
+		// should never be here
+		return false;
 	}
 
 	/**
