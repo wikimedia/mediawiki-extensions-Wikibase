@@ -135,4 +135,10 @@ class SitesTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testNewSite() {
+		$this->assertInstanceOf( 'Wikibase\Site', Sites::newSite() );
+		$this->assertInstanceOf( 'Wikibase\Site', Sites::newSite( array() ) );
+		$this->assertInstanceOf( 'Wikibase\Site', Sites::newSite( array( 'type' => SITE_TYPE_UNKNOWN ) ) );
+	}
+
 }

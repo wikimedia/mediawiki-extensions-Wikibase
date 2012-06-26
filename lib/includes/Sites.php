@@ -303,4 +303,18 @@ class Sites {
 		return $this->sites->getGroup( $group );
 	}
 
+	/**
+	 * Convenience method to create new site objects.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $fields
+	 * @param bool $loadDefaults
+	 *
+	 * @return Site
+	 */
+	public static function newSite( array $fields = array(), $loadDefaults = true ) {
+		return SitesTable::singleton()->newFromArray( $fields, $loadDefaults );
+	}
+
 }

@@ -86,6 +86,7 @@ final class LibHooks {
 			'ItemNewFromArray',
 			'Item',
 			'LibHooks',
+			'MediaWikiSite',
 			'SiteConfigObject',
 			'SiteList',
 			'SiteRow',
