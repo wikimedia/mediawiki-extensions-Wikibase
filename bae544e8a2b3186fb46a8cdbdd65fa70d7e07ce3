@@ -16,6 +16,24 @@
       "revId": "bae544e8a2b3186fb46a8cdbdd65fa70d7e07ce3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOn///qc\u003d",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-26T10:43:27Z",
+      "side": 1,
+      "message": "This is just gerrit failing. Open the file in a decent editor and it\u0027ll be fine.",
+      "parentUuid": "AAAAOn///qk\u003d",
+      "revId": "bae544e8a2b3186fb46a8cdbdd65fa70d7e07ce3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
