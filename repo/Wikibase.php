@@ -54,6 +54,25 @@ $wgExtensionCredits['other'][] = array(
 
 $dir = dirname( __FILE__ ) . '/';
 
+/**
+ * Constants for parsing of summary
+ * This could exist somewhere under another name
+ * Note that the patterns are used for multibyte strings
+ */
+define( 'SUMMARY_MAX_LENGTH', '250' );
+// string used as a continuation marker
+define( 'SUMMARY_CONTINUATION_STR', '…' );
+define( 'SUMMARY_CONTINUATION_ALT', '&#8230;' );
+// string used as a grouping marker
+define( 'SUMMARY_GROUPING_STR', '|' );
+define( 'SUMMARY_GROUPING_ALT', '&#124;' );
+// string used as a subgrouping marker
+define( 'SUMMARY_SUBGROUPING_STR', '¦' );
+define( 'SUMMARY_SUBGROUPING_ALT', '&#166;' );
+// and we need char stuffing
+define( 'SUMMARY_STUFFING_STR', '%' );
+define( 'SUMMARY_STUFFING_ALT', '&#37;' );
+
 // rights
 // names should be according to other naming scheme
 $wgGroupPermissions['*']['item-add']			= true;
@@ -79,12 +98,14 @@ $wgExtensionMessagesFiles['WikibaseAlias'] 	= $dir . 'Wikibase.i18n.alias.php';
 $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php';
 
 
+
 // Autoloading
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 			= $dir . 'includes/ChangeNotifier.php';
-$wgAutoloadClasses['Wikibase\ItemDiffView'] 			= $dir . 'includes/ItemDiffView.php';
+//$wgAutoloadClasses['Wikibase\ItemDiffView'] 		= $dir . 'includes/DifferenceEngine.php';
+$wgAutoloadClasses['Wikibase\DifferenceEngine'] 		= $dir . 'includes/DifferenceEngine.php';
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
 $wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/ItemDeletionUpdate.php';
 $wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/EntityHandler.php';
@@ -117,7 +138,13 @@ $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/Specia
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
+//$wgAutoloadClasses['Wikibase\Test\TestItems'] 			= $dir . 'tests/phpunit/includes/TestItems.php';
+
+$wgAutoloadClasses['Wikibase\FormatSummary'] 			= $dir . 'includes/FormatSummary.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
+
+
+
 
 // API module registration
 $wgAPIModules['wbgetitems'] 						= 'Wikibase\ApiGetItems';
@@ -130,10 +157,12 @@ $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbsetitem'] 							= 'Wikibase\ApiSetItem';
 
 
+
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
+
 
 
 // Hooks
@@ -146,6 +175,7 @@ $wgHooks['NamespaceIsMovable'][]					= 'WikibaseHooks::onNamespaceIsMovable';
 $wgHooks['NewRevisionFromEditComplete'][]			= 'WikibaseHooks::onNewRevisionFromEditComplete';
 $wgHooks['GetPreferences'][]						= 'WikibaseHooks::onGetPreferences';
 $wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOptions';
+$wgHooks['FormatAutocomments'][]					= '\Wikibase\FormatSummary::doFormatAutocomments';
 
 
 // Resource Loader Modules:
@@ -175,5 +205,4 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 //$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
 
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
-
 unset( $dir );

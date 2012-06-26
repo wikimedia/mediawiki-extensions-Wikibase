@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Title, ApiBase;
+use User, Title, ApiBase, Sanitizer;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -28,7 +28,7 @@ abstract class ApiModifyItem extends Api {
 	 * @return boolean Success indicator
 	 */
 	protected abstract function modifyItem( Item &$item, array $params );
-	
+
 	/**
 	 * Check the rights for the user accessing the module, that is a subclass of this one.
 	 * 
@@ -53,10 +53,21 @@ abstract class ApiModifyItem extends Api {
 		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
-		
+
 		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
 	}
-	
+
+	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $useShortMessage boolean that switch between long and short format
+	 * @param $params array with parameters for the call
+	 * @return string that can be used as an auto comment
+	 */
+	protected abstract function autoComment( array $params, $useShortMessage=false );
+
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
@@ -90,7 +101,8 @@ abstract class ApiModifyItem extends Api {
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
-		
+
+		// FIXME: This does not check if user is blocked or page is protected
 		if ( !$user->isAllowed( 'edit' ) ) {
 			$this->dieUsageMsg( 'cantedit' );
 		}
@@ -99,11 +111,7 @@ abstract class ApiModifyItem extends Api {
 		$item = null;
 
 		$this->validateParameters( $params );
-		
-		//if ( !isset($params['summary']) ) {
-		//	$params['summary'] = 'dummy';
-		//}
-		
+
 		if ( $params['item'] === 'update' && !isset( $params['id'] ) && !$hasLink ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-update-without-id' ), 'update-without-id' );
 		}
@@ -117,16 +125,16 @@ abstract class ApiModifyItem extends Api {
 		}
 		elseif ( $hasLink ) {
 			$item = Item::getFromSiteLink( $params['site'], Item::normalize( $params['title'] ) );
-			
+
 			if ( is_null( $item ) && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
 			}
 		}
-		
+
 		if ( !is_null( $item ) && !( $item instanceof Item ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
-			
+
 		if ( !is_null( $item ) && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
@@ -138,7 +146,7 @@ abstract class ApiModifyItem extends Api {
 				$item->addSiteLink( $params['site'], $params['title'] );
 			}
 		}
-		
+
 		$this->setUsekeys( $params );
 		$success = $this->modifyItem( $item, $params );
 		if ( !$success ) {
@@ -146,13 +154,21 @@ abstract class ApiModifyItem extends Api {
 		}
 
 		$isNew = $item->isNew();
-		
+
 		// TODO: Change for more fine grained permissions
 		if ( $this->getPermissionsErrorInternal( $this->getUser(), $params ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
 
-		$success = $item->save();
+		$summary = Sanitizer::escapeHtmlAllowEntities( isset($params['summary']) ? $params['summary'] : '' );
+		$comment = $this->autoComment(
+			$params,
+			SUMMARY_MAX_LENGTH
+				- strlen( $summary ) /* this must be counted for a filtered string, and its a byte count on a multibyte string */
+				- (isset( $params['summary'] ) ? 6 : 7) /* add according to overall formatting */
+		);
+		$comment = $comment !== "" ? "/* $comment */" : '';
+		$success = $item->save( $comment . ( ($comment !== "" && $summary !== "") ? '' : ' ' ) . $summary );
 
 		if ( !$success ) {
 			if ( $isNew ) {
@@ -185,13 +201,13 @@ abstract class ApiModifyItem extends Api {
 				}
 			}
 		}
-		
+
 		$this->getResult()->addValue(
 			null,
 			'success',
 			(int)$success
 		);
-		
+
 	}
 
 	/**
@@ -239,7 +255,7 @@ abstract class ApiModifyItem extends Api {
 	public function isWriteMode() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
 	}
-	
+
 	/**
 	 * Returns an array of allowed parameters (parameter name) => (default
 	 * value) or (parameter name) => (array with PARAM_* constants as keys)
@@ -261,10 +277,9 @@ abstract class ApiModifyItem extends Api {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			//'summary' => array(
-			//	ApiBase::PARAM_TYPE => 'string',
-			//	ApiBase::PARAM_DFLT => __CLASS__, // TODO
-			//),
+			'summary' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
 			'item' => array(
 				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set' ),
 				ApiBase::PARAM_DFLT => 'update',
@@ -295,7 +310,9 @@ abstract class ApiModifyItem extends Api {
 				"update - the item shuld exist before the call or an error will be reported.",
 				"set - the item could exist or not before the call.",
 			),
-			// 'summary' => 'Summary for the edit.',
+			'summary' => array( 'Summary for the edit.',
+				"Will be prepended by an automatically generated comment."
+			),
 			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
 		) );
 	}

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File defining the hook handlers for the Wikibase Client extension.
+ * File defining the hook handlers for the Wikibase Repo extension.
  *
  * @since 0.1
  *
@@ -91,7 +91,7 @@ final class WikibaseHooks {
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
 
-		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
+		if ( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			$pageLanguage = $language;
 		}
@@ -303,10 +303,38 @@ final class WikibaseHooks {
 					'dump' => true,
 					'dumpfm' => true,
 				),
+
+				// Which messages to use while formating logs
+				'apiFormatMessages' => array(
+					'languages' => array(
+						'delete-language-attributes' => 'wikibase-api-summary-delete-language-attributes',
+						'delete-language-label' => 'wikibase-api-summary-delete-language-label',
+						'delete-language-description' => 'wikibase-api-summary-delete-language-description',
+						'delete-language-badge' => 'wikibase-api-summary-delete-language-badge',
+						'change-aliases' => 'wikibase-api-summary-change-aliases',
+						'set-aliases' => 'wikibase-api-summary-set-aliases',
+						'remove-aliases' => 'wikibase-api-summary-remove-aliases',
+						'add-aliases' => 'wikibase-api-summary-add-aliases',
+						'set-language-attributes' => 'wikibase-api-summary-set-language-attributes',
+						'set-language-label' => 'wikibase-api-summary-set-language-label',
+						'set-language-description' => 'wikibase-api-summary-set-language-description',
+						'set-language-badges' => 'wikibase-api-summary-set-language-badges',
+					),
+					'sites' => array(
+						'add-sitelink' => 'wikibase-api-summary-add-sitelink',
+						'update-sitelink' => 'wikibase-api-summary-update-sitelink',
+						'set-sitelink' => 'wikibase-api-summary-set-sitelink',
+						'remove-sitelink' => 'wikibase-api-summary-remove-sitelink',
+					),
+				),
 			)
 		);
 
 		return true;
 	}
-
+	
+	public static function onFormatAutocomments( $comment, $pre, $auto, $post, $title, $local ) {
+		return \Wikibase\FormatSummary::doFormatAutocomments( $comment, $pre, $auto, $post, $title, $local );
+	}
+	
 }

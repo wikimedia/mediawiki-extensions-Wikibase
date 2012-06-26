@@ -97,6 +97,28 @@ $messages['en'] = array(
 
 	'wikibase-resetold' => 'reset',
 
+
+	// summary and autocomment
+	'wikibase-api-summary-delete-language-attributes' => 'Deleted language-specific [$2] {{plural:$3|attribute|attributes}} $4',
+	'wikibase-api-summary-delete-language-label' => 'Deleted language-specific [$2] {{plural:$3|label|labels}}{{#if:$4|: $4}}',
+	'wikibase-api-summary-delete-language-description' => 'Deleted language-specific [$2] {{plural:$3|description|descriptions}} $4',
+	'wikibase-api-summary-delete-language-badge' => 'Deleted language-specific [$2] {{plural:$3|badge|badges}} $4',
+	'wikibase-api-summary-add-sitelink' => 'Added site-specific [$2] {{plural:$3|link|links}} $4',
+	'wikibase-api-summary-update-sitelink' => 'Updated site-specific [$2] {{plural:$3|link|links}} $4',
+	'wikibase-api-summary-set-sitelink' => 'Setting site-specific [$2] {{plural:$3|link|links}} $4',
+	'wikibase-api-summary-remove-sitelink' => 'Removed site-specific [$2] {{plural:$3|link|links}} $4',
+	'wikibase-api-summary-change-aliases' => 'Changed language-specific [$2] {{plural:$3|alias|aliases}} $4',
+	'wikibase-api-summary-set-aliases' => 'Setting language-specific [$2] {{plural:$3|alias|aliases}} $4',
+	'wikibase-api-summary-remove-aliases' => 'Removed language-specific [$2] {{plural:$3|alias|aliases}} $4',
+	'wikibase-api-summary-add-aliases' => 'Added language-specific [$2] {{plural:$3|alias|aliases}} $4',
+	'wikibase-api-summary-set-language-attributes' => 'Setting language-specific [$2] {{plural:$3|attribute|attributes}} $4',
+	'wikibase-api-summary-set-language-label' => 'Setting language-specific [$2] {{plural:$3|label|labels}} $4',
+	'wikibase-api-summary-set-language-description' => 'Setting language-specific [$2] {{plural:$3|description|descriptions}} $4',
+	'wikibase-api-summary-set-language-badges' => 'Setting language-specific [$2] {{plural:$3|badge|badges}} $4',
+	'wikibase-api-summary-wrapper-languages' => '{{#language:$1|en}}',
+	'wikibase-api-summary-wrapper-sites' => '$1',
+	'wikibase-api-summary-wrapper' => '"$1$2"',
+
 	//content model names
 	'content-model-1001' => 'Wikibase item',
 );
@@ -202,7 +224,33 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-label-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the label.',
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
+
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+
+	'wikibase-api-summary-delete-language-attributes' => 'This is the initial part of the autocomment for a deletion of language-specific attributes associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]], [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#languageattribute-badges|badges]].',
+	'wikibase-api-summary-delete-language-label' => 'This is the initial part of the autocomment for a deletion of language-specific label associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+	'wikibase-api-summary-delete-language-description' => 'This is the initial part of the autocomment for a deletion of language-specific description associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
+	'wikibase-api-summary-delete-language-badge' => 'This is the initial part of the autocomment for a deletion of language-specific badges associated with an item. The message takes one argument (\$1) that is the language. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-badges|badges]].',
+
+	'wikibase-api-summary-add-sitelink' => 'This is the initial part of the autocomment for addition of a site-specific link associate an item in the repository with an external site. To add a sitelink imply that it should not exist before the call. The message takes two arguments (\$1 and \$2) that is the number of sites and the site names, and variant argument (\$3) that is the title of the external page. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-sitelink|sitelink]].',
+	'wikibase-api-summary-update-sitelink' => 'This is the initial part of the autocomment for update of a site-specific link associate an item in the repository with an external site. To update a sitelink imply that it should exist before the call. The message takes two arguments (\$1 and \$2) that is the number of sites and the site names, and variant argument (\$3) that is the title of the external page. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-sitelink|sitelink]].',
+	'wikibase-api-summary-set-sitelink' => 'This is the initial part of the autocomment for setting of a site-specific link associate an item in the repository with an external site. It makes no difference if the sitelink exist or not before the call. The message takes two arguments (\$1 and \$2) that is the number of sites and the site names, and variant argument (\$3) that is the title of the external page. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-sitelink|sitelink]].',
+	'wikibase-api-summary-remove-sitelink' => 'This is the initial part of the autocomment for removal of a site-specific link associate an item in the repository with an external site. To remove an sitelink imply that it must exist before the call. The message takes two arguments (\$1 and \$2) that is the number of sites and the site names, and variant argument (\$3) that is the title of the external page. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-sitelink|sitelink]].',
+
+	'wikibase-api-summary-change-aliases' => 'This is the initial part of the autocomment for changing language-specific aliases associated with an item. The change call is a composite of several forms of updates, and could include both creation and removal of aliases. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered, and three variant arguments (\$4, \$5, \$6) that is the aliases for set, remove and add. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-set-aliases' => 'This is the initial part of the autocomment for setting language-specific aliases associated with an item. The list of aliases will become the same as what is in the list. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered, and one variant argument (\$4) that is a list of the aliases to set. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-remove-aliases' => 'This is the initial part of the autocomment for removeing language-specific aliases associated with an item. All aliases on the list will be removed from the list of aliases after the call. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered, and one variant argument (\$4) that is a list of the aliases to remove. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-add-aliases' => 'This is the initial part of the autocomment for adding language-specific aliases associated with an item. All aliases on the list will be added to the list of aliases after the call. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered, and one variant argument (\$4) that is a list of the aliases to add. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+
+	'wikibase-api-summary-set-language-attributes' => 'This is the initial part of the autocomment for setting of language-specific attributes associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of badges, labels and descriptions, and three variant arguments (\$4, \$5, \$6) that is the badges, labels and descriptions. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]], [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#languageattribute-badges|badges]].',
+	'wikibase-api-summary-set-language-label' => 'This is the initial part of the autocomment for setting of language-specific labels associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the number of labels, and one variant argument (\$4) that is the labels. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+	'wikibase-api-summary-set-language-description' => 'This is the initial part of the autocomment for setting of language-specific descriptions associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the number of descriptions, and one variant argument (\$4) that is the descriptions. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
+	'wikibase-api-summary-set-language-badges' => 'This is the initial part of the autocomment for setting of language-specific badges associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the number of badges, and one variant argument (\$4) that is the badges. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-badges|badges]].',
+
+	'wikibase-api-summary-wrapper-languages' => 'This is the wrapper used for the languages in the system generated autocomment. It will usually include a call to the language parser function. The message takes one argument (\$1), the string to contain within the message.',
+	'wikibase-api-summary-wrapper-sites' => 'This is the wrapper used for the sites in the system generated autocomment. It will usually include a call to a parser function to replace the name with a localized one. The message takes one argument (\$1), the string to contain within the message.',
+	'wikibase-api-summary-wrapper' => 'This is the wrapper for user supplied vlues in the system generated autocomment. It will usually be wrapped up in quotes of some kind, but otherwise used as it is. The message takes two arguments (\$1 and \$2), the string without any final continuation marker and the continuation marker itself. Usually a language that does not use the default continuation marker will make its own.',
+
 	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
@@ -284,6 +332,7 @@ $messages['de'] = array(
 	'wikibase-remove-inprogress' => 'Entferne ...',
 	'wikibase-label-edit-placeholder' => 'Bezeichnung eingeben',
 	'wikibase-description-edit-placeholder' => 'Beschreibung eingeben',
+	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-sitelink-site-edit-placeholder' => 'Website angeben',
 	'wikibase-sitelink-page-edit-placeholder' => 'Seite angeben',
 	'wikibase-alias-edit-placeholder' => 'Alias eingeben',
@@ -352,6 +401,7 @@ $messages['de'] = array(
  * @author Kghbln
  */
 $messages['de-formal'] = array(
+	'wikibase-move-error' => 'Sie können keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-label-input-help-message' => 'Geben Sie den Namen für diesen Datensatz in $1 an.',
 	'wikibase-description-input-help-message' => 'Geben Sie eine kurze Beschreibung in $1 an.',
 	'wikibase-sitelinks-add' => 'fügen Sie eine Verknüpfung zu einer Seitenverknüpfung hinzu',
@@ -619,7 +669,7 @@ $messages['fr'] = array(
 	'content-model-1001' => 'Élément Wikibase',
 );
 
-/** Galician (galego)
+/** Galician (Galego)
  * @author Toliño
  */
 $messages['gl'] = array(
@@ -632,6 +682,7 @@ $messages['gl'] = array(
 	'wikibase-remove-inprogress' => 'Eliminando...',
 	'wikibase-label-edit-placeholder' => 'escriba unha etiqueta',
 	'wikibase-description-edit-placeholder' => 'escriba unha descrición',
+	'wikibase-move-error' => 'Non pode trasladar as páxinas que se atopan no espazo de nomes de datos, e tampouco pode mover páxinas a este espazo de nomes.',
 	'wikibase-sitelink-site-edit-placeholder' => 'especifique o sitio',
 	'wikibase-sitelink-page-edit-placeholder' => 'especifique a páxina',
 	'wikibase-alias-edit-placeholder' => 'escriba un pseudónimo',
@@ -731,7 +782,7 @@ $messages['he'] = array(
 	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב השם נתונים, ולא ניתן להעביר דפים אליו.',
 );
 
-/** Upper Sorbian (hornjoserbsce)
+/** Upper Sorbian (Hornjoserbsce)
  * @author Michawiki
  */
 $messages['hsb'] = array(
@@ -935,6 +986,7 @@ $messages['it'] = array(
 	'wikibase-remove-inprogress' => 'Sto rimuovendo...',
 	'wikibase-label-edit-placeholder' => 'inserisci etichetta',
 	'wikibase-description-edit-placeholder' => 'inserisci descrizione',
+	'wikibase-move-error' => 'Non puoi spostare le pagine che sono nel namespace "Data", e non puoi spostarci le pagine in esso.',
 	'wikibase-sitelink-site-edit-placeholder' => 'specifica sito',
 	'wikibase-sitelink-page-edit-placeholder' => 'specifica pagina',
 	'wikibase-alias-edit-placeholder' => 'inserisci un alias',
@@ -1082,6 +1134,7 @@ $messages['mk'] = array(
 	'wikibase-remove-inprogress' => 'Отстранувам...',
 	'wikibase-label-edit-placeholder' => 'внесете натпис',
 	'wikibase-description-edit-placeholder' => 'внесете опис',
+	'wikibase-move-error' => 'Не можете да преместувате страници што се наоѓаат во податочниот именски простор. Исто така не можете да преместувате други страници во него.',
 	'wikibase-sitelink-site-edit-placeholder' => 'укажете вики',
 	'wikibase-sitelink-page-edit-placeholder' => 'укажете страница',
 	'wikibase-alias-edit-placeholder' => 'внесете алијас',
@@ -1216,6 +1269,25 @@ $messages['nb'] = array(
 	'wikibase-api-label-not-found' => 'Kan ikke finne noen tidligere etikett på angitt språk for dette datasettet.',
 	'wikibase-api-description-not-found' => 'Kan ikke finne noen tidligere beskrivelse på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innholdet på funnet side er ikke av korrekt type.',
+	'wikibase-api-summary-delete-language-attributes' => 'Slettet {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] attributt|språkspesifikke [$2] attributter}} $4',
+	'wikibase-api-summary-delete-language-label' => 'Slettet {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] merke|språkspesifikke [$2] merker}} $4',
+	'wikibase-api-summary-delete-language-description' => 'Slettet {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] beskrivelse|språkspesifikke [$2] beskrivelser}} $4',
+	'wikibase-api-summary-delete-language-badge' => 'Slettet {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] merke|språkspesifikke [$2] merker}} $4',
+	'wikibase-api-summary-add-sitelink' => 'Lagt til {{plural:{{#expr:$1+$3-1}}|lenke|lenker}} til nettsted [$2] $4',
+	'wikibase-api-summary-update-sitelink' => 'Oppdatert {{plural:{{#expr:$1+$3-1}}|lenke|lenker}} til nettsted [$2] $4',
+	'wikibase-api-summary-set-sitelink' => 'Satt {{plural:{{#expr:$1+$3-1}}|lenke|lenker}} til nettsted [$2] $4',
+	'wikibase-api-summary-remove-sitelink' => 'Fjernet {{plural:{{#expr:$1+$3-1}}|lenke|lenker}} til nettsted [$2] $4',
+	'wikibase-api-summary-change-aliases' => 'Endret {{plural:{{#expr:$1+$3-1}}|språkspesifikt|språkspesifikke}} [$2] kallenavn $4',
+	'wikibase-api-summary-set-aliases' => 'Satt {{plural:{{#expr:$1+$3-1}}|språkspesifikt|språkspesifikke}} [$2] kallenavn $4',
+	'wikibase-api-summary-remove-aliases' => 'Fjernet {{plural:{{#expr:$1+$3-1}}|språkspesifikt|språkspesifikke}} [$2] kallenavn $4',
+	'wikibase-api-summary-add-aliases' => 'Lagt til {{plural:$3|språkspesifikt|språkspesifikke}} [$2] kallenavn $4',
+	'wikibase-api-summary-set-language-attributes' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] attributt|språkspesifikke [$2] attributter}} $4',
+	'wikibase-api-summary-set-language-label' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] merke|språkspesifikke [$2] merker}} $4',
+	'wikibase-api-summary-set-language-description' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] beskrivelse|språkspesifikke [$2] beskrivelser}} $4',
+	'wikibase-api-summary-set-language-badges' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] merke|språkspesifikke [$2] merker}} $4',
+	'wikibase-api-summary-wrapper-languages' => '{{#language:$1|nb}}',
+	'wikibase-api-summary-wrapper-sites' => '$1',
+	'wikibase-api-summary-wrapper' => '«$1$2»',
 	'content-model-1001' => 'Wikibase datasett',
 );
 
@@ -1312,6 +1384,7 @@ $messages['nn'] = array(
 	'wikibase-remove-inprogress' => 'Fjernar…',
 	'wikibase-label-edit-placeholder' => 'lag merkelapp',
 	'wikibase-description-edit-placeholder' => 'lag skildring',
+	'wikibase-move-error' => 'Du kan ikkje flytte sider i datanamnerommet, og du kan ikkje flytte sider inn i det.',
 	'wikibase-sitelink-site-edit-placeholder' => 'oppgje nettstad',
 	'wikibase-sitelink-page-edit-placeholder' => 'oppgje side',
 	'wikibase-alias-edit-placeholder' => 'oppgje kallenamn',
@@ -1372,7 +1445,26 @@ $messages['nn'] = array(
 	'wikibase-api-label-not-found' => 'Kan ikkje finne nokon tidligare etikett på angitt språk for dette datasettet.',
 	'wikibase-api-description-not-found' => 'Kan ikkje finne nokon tidligare skildring på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innhaldet på funnen side er ikkje av korrekt type.',
-	'wikibase-api-session-failure' => 'Den inneverande brukarøkta har feila og du må oppdatere sida og logge inn på nytt.',
+	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+	'wikibase-api-summary-delete-language-attributes' => 'Sletta {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] attributt|språkspesifikke [$2] attributtar}} $4',
+	'wikibase-api-summary-delete-language-label' => 'Sletta {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] etikett|språkspesifikke [$2] etiketter}} $4',
+	'wikibase-api-summary-delete-language-description' => 'Sletta {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] skildring|språkspesifikke [$2] skildringer}} $4',
+	'wikibase-api-summary-delete-language-badge' => 'Sletta {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] merke|språkspesifikke [$2] merker}} $4',
+	'wikibase-api-summary-add-sitelink' => 'Lagt til {{plural:{{#expr:$1+$3-1}}|lekk|lekker}} til nettstad [$2] $4',
+	'wikibase-api-summary-update-sitelink' => 'Oppdatert {{plural:{{#expr:$1+$3-1}}|lekk|lekker}} til nettstad [$2] $4',
+	'wikibase-api-summary-set-sitelink' => 'Satte {{plural:{{#expr:$1+$3-1}}|lekk|lekker}} til nettstad [$2] $4',
+	'wikibase-api-summary-remove-sitelink' => 'Fjerna {{plural:{{#expr:$1+$3-1}}|lekk|lekker}} til nettstad [$2] $4',
+	'wikibase-api-summary-change-aliases' => 'Endra {{plural:{{#expr:$1+$3-1}}|språkspesifikt|språkspesifikke}} [$2] kallenamn $4',
+	'wikibase-api-summary-set-aliases' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt|språkspesifikke}} [$2] kallenamn $4',
+	'wikibase-api-summary-remove-aliases' => 'Fjerna {{plural:{{#expr:$1+$3-1}}|språkspesifikt|språkspesifikke}} [$2] kallenamn $4',
+	'wikibase-api-summary-add-aliases' => 'Lagt til {{plural:{{#expr:$1+$3-1}}|språkspesifikt|språkspesifikke}} [$2] kallenamn $4',
+	'wikibase-api-summary-set-language-attributes' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] attributt|språkspesifikke [$2] attributtar}} $4',
+	'wikibase-api-summary-set-language-label' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] etikett|språkspesifikke [$2] etiketter}} $4',
+	'wikibase-api-summary-set-language-description' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] skildring|språkspesifikke [$2] skildringer}} $4',
+	'wikibase-api-summary-set-language-badges' => 'Satte {{plural:{{#expr:$1+$3-1}}|språkspesifikt [$2] merke|språkspesifikke [$2] merker}} $4',
+	'wikibase-api-summary-wrapper-languages' => '{{#language:$1|nn}}',
+	'wikibase-api-summary-wrapper-sites' => '$1',
+	'wikibase-api-summary-wrapper' => '«$1$2»',
 	'content-model-1001' => 'Wikibase datasett',
 );
 
