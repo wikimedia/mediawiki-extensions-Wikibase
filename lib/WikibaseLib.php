@@ -49,6 +49,7 @@ define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://media
 define( 'SITE_TYPE_MEDIAWIKI', 0 );
 define( 'SITE_TYPE_UNKNOWN', 1 );
 
+define( 'SITE_GROUP_NONE', -1 );
 define( 'SITE_GROUP_WIKIPEDIA', 0 );
 define( 'SITE_GROUP_WIKTIONARY', 1 );
 define( 'SITE_GROUP_WIKIBOOKS', 2 );

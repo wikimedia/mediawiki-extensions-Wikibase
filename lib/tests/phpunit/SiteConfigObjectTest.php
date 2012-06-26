@@ -103,4 +103,18 @@ class SiteConfigObjectTest extends \MediaWikiTestCase {
 		$this->assertEquals( $args[3], $configObject->getForward() );
 	}
 
+	/**
+	 * @dataProvider constructorProvider
+	 * @param array $args
+	 */
+	public function testGetExtraInfo( array $args ) {
+		$configObject = $this->createInstance( $args );
+
+		$this->assertInternalType( 'array', $configObject->getExtraInfo() );
+		$this->assertEquals(
+			array_key_exists( 4, $args ) ? $args[4] : array(),
+			$configObject->getExtraInfo()
+		);
+	}
+
 }

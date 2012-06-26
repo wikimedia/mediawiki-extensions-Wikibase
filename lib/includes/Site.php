@@ -34,14 +34,13 @@ interface Site extends \IORMRow {
 	public function getGlobalId();
 
 	/**
-	 * Returns the type of the site (ie SITE_MW).
+	 * Returns the type of the site (ie SITE_TYPE_MEDIAWIKI).
 	 *
 	 * @since 0.1
 	 *
 	 * @return integer
 	 */
 	public function getType();
-
 
 	/**
 	 * Returns the type of the site (ie SITE_GROUP_WIKIPEDIA).
@@ -104,5 +103,18 @@ interface Site extends \IORMRow {
 	 * @return string
 	 */
 	public function getRelativeFilePath();
+
+	/**
+	 * Returns an array with additional data part of the
+	 * site definition. This is meant for usage by fields
+	 * we never need to search against and for those that
+	 * are site type specific, ie "allows file uploads"
+	 * for MediaWiki sites.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getExtraData();
 
 }

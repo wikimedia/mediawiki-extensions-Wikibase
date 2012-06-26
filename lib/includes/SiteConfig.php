@@ -52,4 +52,17 @@ interface SiteConfig {
 	 */
 	public function getForward();
 
+	/**
+	 * Returns an array with additional info part of the
+	 * site condiguration. This is meant for usage by fields
+	 * we never need to search against and for those that
+	 * are site type specific, ie "allow template transclusion"
+	 * for MediaWiki sites.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getExtraInfo();
+
 }

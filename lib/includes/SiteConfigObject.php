@@ -19,6 +19,7 @@ class SiteConfigObject implements SiteConfig {
 	protected $linkInline;
 	protected $linkNavigation;
 	protected $forward;
+	protected $extraConfig;
 
 	/**
 	 * Constructor.
@@ -30,12 +31,14 @@ class SiteConfigObject implements SiteConfig {
 	 * @param boolean $linkNavigation
 	 * @param boolean $forward
 	 * @param boolean $allowTransclusion
+	 * @param array $extraConfig
 	 */
-	public function __construct( $localId, $linkInline, $linkNavigation, $forward ) {
+	public function __construct( $localId, $linkInline, $linkNavigation, $forward, array $extraConfig = array() ) {
 		$this->localId = $localId;
 		$this->linkInline = $linkInline;
 		$this->linkNavigation = $linkNavigation;
 		$this->forward = $forward;
+		$this->extraConfig = $extraConfig;
 	}
 
 	/**
@@ -80,6 +83,17 @@ class SiteConfigObject implements SiteConfig {
 	 */
 	public function getForward() {
 		return $this->forward;
+	}
+
+	/**
+	 * @see SiteConfig::getExtraInfo()
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getExtraInfo() {
+		return $this->extraConfig;
 	}
 
 }

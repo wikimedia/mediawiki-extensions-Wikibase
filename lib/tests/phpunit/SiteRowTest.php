@@ -49,7 +49,18 @@ class SiteRowTest extends ORMRowTest {
 		$rows = array(
 			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1' ),
 			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1', SITE_TYPE_MEDIAWIKI ),
-			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1', SITE_TYPE_MEDIAWIKI, '/w/' ),
+			array(
+				'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org',
+				'/wiki/$1', SITE_TYPE_MEDIAWIKI, '/w/'
+			),
+			array(
+				'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org',
+				'/wiki/$1', SITE_TYPE_MEDIAWIKI, '/w/', array()
+			),
+			array(
+				'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org',
+				'/wiki/$1', SITE_TYPE_MEDIAWIKI, '/w/', array( 'foo' => 'bar', 'baz' => 42 )
+			),
 		);
 
 		foreach ( $rows as &$args ) {
@@ -68,6 +79,10 @@ class SiteRowTest extends ORMRowTest {
 				$fields['file_path'] = $args[5];
 			}
 
+			if ( array_key_exists( 6, $args ) ) {
+				$fields['data'] = $args[6];
+			}
+
 			$args = array( $fields, true );
 		}
 
@@ -78,7 +93,7 @@ class SiteRowTest extends ORMRowTest {
 	 * @dataProvider constructorTestProvider
 	 */
 	public function testConstructorEvenMore( array $fields ) {
-		$site = \Wikibase\SitesTable::singleton()->newFromArray( $fields );
+		$site = \Wikibase\SitesTable::singleton()->newFromArray( $fields, true );
 
 		$functionMap = array(
 			'getGlobalId',
@@ -93,6 +108,10 @@ class SiteRowTest extends ORMRowTest {
 
 		if ( array_key_exists( 'file_path', $fields ) ) {
 			$functionMap[] = 'getRelativeFilePath';
+		}
+
+		if ( array_key_exists( 'data', $fields ) ) {
+			$functionMap[] = 'getExtraData';
 		}
 
 		reset( $fields );
@@ -157,6 +176,19 @@ class SiteRowTest extends ORMRowTest {
 		) );
 
 		$this->assertEquals( $expected, $site->getPagePath( $pageName ) );
+	}
+
+	/**
+	 * @dataProvider constructorTestProvider
+	 */
+	public function testGetExtraData( array $fields ) {
+		$site = \Wikibase\SitesTable::singleton()->newFromArray( $fields, true );
+
+		$this->assertInternalType( 'array', $site->getExtraData() );
+		$this->assertEquals(
+			array_key_exists( 'data', $fields ) ? $fields['data'] : array(),
+			$site->getExtraData()
+		);
 	}
 
 }

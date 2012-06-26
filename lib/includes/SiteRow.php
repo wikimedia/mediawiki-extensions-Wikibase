@@ -160,4 +160,15 @@ class SiteRow extends \ORMRow implements Site {
 		);
 	}
 
+	/**
+	 * @see Site::getExtraData()
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getExtraData() {
+		return $this->getField( 'data' );
+	}
+
 }

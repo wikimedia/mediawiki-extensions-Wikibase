@@ -61,14 +61,32 @@ class SitesTable extends \ORMTable {
 			'page_path' => 'str',
 			'file_path' => 'str',
 			'language' => 'str',
-			'data' => 'blob',
+			'data' => 'array',
 
 			// Site config
 			'local_key' => 'str',
 			'link_inline' => 'bool',
 			'link_navigation' => 'bool',
 			'forward' => 'bool',
-			'config' => 'blob',
+			'config' => 'array',
+		);
+	}
+
+	/**
+	 * @see IORMTable::getDefaults()
+	 * @since 0.1
+	 * @return array
+	 */
+	public function getDefaults() {
+		return array(
+			'type' => SITE_TYPE_UNKNOWN,
+			'group' => SITE_GROUP_NONE,
+			'data' => array(),
+
+			'link_inline' => false,
+			'link_navigation' => false,
+			'forward' => false,
+			'config' => array(),
 		);
 	}
 
