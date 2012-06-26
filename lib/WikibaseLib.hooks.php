@@ -86,6 +86,7 @@ final class LibHooks {
 			'ItemNewFromArray',
 			'Item',
 			'LibHooks',
+			'SiteConfigObject',
 			'SiteList',
 			'SiteRow',
 			'Sites',

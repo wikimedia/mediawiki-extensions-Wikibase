@@ -47,6 +47,8 @@ $dir = dirname( __FILE__ ) . '/';
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
 
 define( 'SITE_TYPE_MEDIAWIKI', 0 );
+define( 'SITE_TYPE_UNKNOWN', 1 );
+
 define( 'SITE_GROUP_WIKIPEDIA', 0 );
 define( 'SITE_GROUP_WIKTIONARY', 1 );
 define( 'SITE_GROUP_WIKIBOOKS', 2 );

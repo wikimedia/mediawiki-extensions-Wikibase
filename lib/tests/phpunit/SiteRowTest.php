@@ -14,6 +14,7 @@ use ORMRowTest;
  * @ingroup Test
  *
  * @group Wikibase
+ * @group WikibaseLib
  * @group Sites
  *
  * @licence GNU GPL v2+
@@ -46,9 +47,9 @@ class SiteRowTest extends ORMRowTest {
 	 */
 	public function constructorTestProvider() {
 		$rows = array(
-			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1' ),
-			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1', 9001 ),
-			array( 'en', 42, 'https://en.wikipedia.org', '/wiki/$1', 9001, '/w/' ),
+			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1' ),
+			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1', SITE_TYPE_MEDIAWIKI ),
+			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1', SITE_TYPE_MEDIAWIKI, '/w/' ),
 		);
 
 		foreach ( $rows as &$args ) {
@@ -123,7 +124,7 @@ class SiteRowTest extends ORMRowTest {
 			'global_key' => 'en',
 			'group' => 'wikipedia',
 			'url' => $url,
-			'type' => 'unknown',
+			'type' => SITE_TYPE_UNKNOWN,
 			'file_path' => $filePath,
 			'page_path' => '',
 		) );
@@ -150,7 +151,7 @@ class SiteRowTest extends ORMRowTest {
 			'global_key' => 'en',
 			'group' => 'wikipedia',
 			'url' => $url,
-			'type' => 'unknown',
+			'type' => SITE_TYPE_UNKNOWN,
 			'file_path' => '',
 			'page_path' => $urlPath,
 		) );

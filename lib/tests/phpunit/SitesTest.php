@@ -14,6 +14,7 @@ use Wikibase\Sites as Sites;
  * @ingroup Test
  *
  * @group Wikibase
+ * @group WikibaseLib
  * @group Sites
  *
  * @licence GNU GPL v2+
