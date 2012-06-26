@@ -345,6 +345,7 @@ $messages['de'] = array(
 	'wikibase-api-description-not-found' => 'Es wurde keine frühere Beschreibung in dieser Sprache im Datenelement gefunden.',
 	'wikibase-api-wrong-class' => 'Der Inhalt auf der gefundenen Seite entspricht nicht dem richtigen Typ.',
 	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Du musst die Seite neu laden und dich erneut anmelden.',
+	'wikibase-resetold' => 'zurücksetzen',
 	'content-model-1001' => 'Wikibase-Datenelement',
 );
 
@@ -693,6 +694,7 @@ $messages['gl'] = array(
 	'wikibase-api-description-not-found' => 'Non se pode atopar unha descrición anterior para esta lingua no elemento.',
 	'wikibase-api-wrong-class' => 'O contido da páxina atopada non é do tipo correcto.',
 	'wikibase-api-session-failure' => 'A sesión actual fallou e agora debe refrescar a páxina e acceder de novo.',
+	'wikibase-resetold' => 'restablecer',
 	'content-model-1001' => 'Elemento de Wikibase',
 );
 
@@ -801,6 +803,7 @@ $messages['hsb'] = array(
 	'wikibase-api-description-not-found' => 'Njeje so žane prjedawše wopisanje za tutu rěč w elemenće namakało.',
 	'wikibase-api-wrong-class' => 'Wobsah na namakanej stronje korektny typ nima.',
 	'wikibase-api-session-failure' => 'Aktualne posedźenje je spadnyło a dyrbiš stronu aktualizować a so znowa přizjewić.',
+	'wikibase-resetold' => 'wróćo stajić',
 	'content-model-1001' => 'Datowy element Wikibase',
 );
 
@@ -996,6 +999,7 @@ $messages['it'] = array(
 	'wikibase-api-description-not-found' => "Non è possibile trovare una descrizione precedente per questa lingua nell'elemento.",
 	'wikibase-api-wrong-class' => 'Il contenuto della pagina trovata non è di un tipo corretto.',
 	'wikibase-api-session-failure' => "La sessione corrente ha restituito un errore; devi ricaricare la pagina ed effettuare nuovamente l'accesso.",
+	'wikibase-resetold' => 'reimposta',
 	'content-model-1001' => 'Elemento wikibase',
 );
 
@@ -1143,6 +1147,7 @@ $messages['mk'] = array(
 	'wikibase-api-description-not-found' => 'Не можев да пронајдам претходен опис за овој јазик во ставката',
 	'wikibase-api-wrong-class' => 'Содржината на пронајдената страница не е од бараниот тип.',
 	'wikibase-api-session-failure' => 'Тековната сесија повеќе не работи. Ќе мора да ја превчитате страницата и да се најавите повторно.',
+	'wikibase-resetold' => 'врати',
 	'content-model-1001' => 'Ставка во Викибазата',
 );
 
@@ -1295,6 +1300,7 @@ $messages['nl'] = array(
 	'wikibase-api-description-not-found' => 'Er is geen eerdere beschrijving in deze taal gevonden in dit item.',
 	'wikibase-api-wrong-class' => 'De inhoud van de gevonden pagina is niet van het juiste type.',
 	'wikibase-api-session-failure' => 'De gegevens van de huidige sessie zijn niet langer geldig. Ververs de pagina en meld opnieuw aan.',
+	'wikibase-resetold' => 'opnieuw instellen',
 	'content-model-1001' => 'Wikibaseitem',
 );
 
