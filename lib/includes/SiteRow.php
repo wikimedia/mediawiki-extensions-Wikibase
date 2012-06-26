@@ -25,7 +25,7 @@ class SiteRow extends \ORMRow implements Site {
 	 * @return SiteConfig
 	 */
 	public function getConfig() {
-		return new SiteConfig(
+		return new SiteConfigObject(
 			$this->getField( 'local_key' ),
 			$this->getField( 'link_inline' ),
 			$this->getField( 'link_navigation' ),
