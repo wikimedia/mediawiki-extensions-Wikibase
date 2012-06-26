@@ -66,6 +66,10 @@
 		var initialValue = [ 'Deutsche Wikipedia (de)', 'Berlin' ];
 		var newValue = this.subject.enterNewValue( initialValue );
 
+		newValue.queryApi = function( deferred, apiAction ) { // pretend API success
+			deferred.resolve();
+		};
+
 		equal(
 			this.subject.getValues().length,
 			0,
@@ -79,7 +83,7 @@
 		);
 
 		ok(
-			typeof ( this.subject.getValues( true )[0] ) == 'object', // same as newValue
+			typeof ( this.subject.getValues( true )[0] ) === 'object', // same as newValue
 			'newly inserted value returned by enterNewValue( value )'
 		);
 
