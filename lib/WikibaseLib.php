@@ -44,7 +44,7 @@ $wgExtensionCredits['other'][] = array(
 $dir = dirname( __FILE__ ) . '/';
 
 // constants
-define( 'CONTENT_MODEL_WIKIBASE_ITEM', 1001 ); //@todo: register at http://mediawiki.org/wiki/ContentHandeler/registry
+define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 
 define( 'SITE_TYPE_MEDIAWIKI', 0 );
 define( 'SITE_GROUP_WIKIPEDIA', 0 );
