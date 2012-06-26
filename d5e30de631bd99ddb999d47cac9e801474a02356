@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAOn///nw\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-26T12:39:48Z",
+      "side": 1,
+      "message": "Great choice of names.",
+      "revId": "d5e30de631bd99ddb999d47cac9e801474a02356",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
