@@ -68,6 +68,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 			*/
 		}
 	},
+	
+	/**
+	 * Just a dummy to override the validation of the page
+	 * For now the validation is done by the API only
+	 * @param value String page
+	 * @return String page
+	 */
+	validate: function( value ) {
+		return value;
+	},
 
 	/**
 	 * Returns the site set to select pages from.
