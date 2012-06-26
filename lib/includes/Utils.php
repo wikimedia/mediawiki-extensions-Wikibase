@@ -46,8 +46,6 @@ final class Utils {
 			return;
 		}
 
-        $sitesTable = \Wikibase\SitesTable::singleton();
-
 		$languages = \FormatJson::decode(
 			\Http::get( 'http://meta.wikimedia.org/w/api.php?action=sitematrix&format=json' ),
 			true
@@ -70,7 +68,7 @@ final class Utils {
 				$languageCode = $language['code'];
 
 				foreach ( $language['site'] as $site ) {
-					$sitesTable->newFromArray( array(
+					Sites::newSite( array(
 						'global_key' => $site['dbname'],
 						'type' => SITE_TYPE_MEDIAWIKI,
 						'group' => $groupMap[$site['code']],
@@ -78,6 +76,7 @@ final class Utils {
 						'page_path' => '/wiki/$1',
 						'file_path' => '/w/$1',
 						'local_key' => ($site['code'] === 'wiki') ? $languageCode : $site['dbname'] ,
+						'language' => $languageCode,
 						'link_inline' => true,
 						'link_navigation' => true,
 						'forward' => true,
@@ -111,40 +110,34 @@ final class Utils {
 	 * @since 0.1
 	 */
 	public static function insertSitesForTests() {
-		$sitesTable = \Wikibase\SitesTable::singleton();
-
 		wfGetDB( DB_MASTER )->begin();
 
-		$sitesTable->newFromArray( array(
+		Sites::newSite( array(
 			'global_key' => 'enwiki',
-			'type' => 0,
-			'group' => 0,
+			'type' => SITE_TYPE_MEDIAWIKI,
+			'group' => SITE_GROUP_WIKIPEDIA,
 			'url' => 'https://en.wikipedia.org',
 			'page_path' => '/wiki/$1',
 			'file_path' => '/w/$1',
 			'local_key' => 'en',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
+			'language' => 'en',
 		) )->save();
 
-		$sitesTable->newFromArray( array(
+		Sites::newSite( array(
 			'global_key' => 'dewiki',
-			'type' => 0,
-			'group' => 0,
+			'type' => SITE_TYPE_MEDIAWIKI,
+			'group' => SITE_GROUP_WIKIPEDIA,
 			'url' => 'https://de.wikipedia.org',
 			'page_path' => '/wiki/$1',
 			'file_path' => '/w/$1',
 			'local_key' => 'de',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
+			'language' => 'de',
 		) )->save();
 
-		$sitesTable->newFromArray( array(
+		Sites::newSite( array(
 			'global_key' => 'nlwiki',
-			'type' => 0,
-			'group' => 0,
+			'type' => SITE_TYPE_MEDIAWIKI,
+			'group' => SITE_GROUP_WIKIPEDIA,
 			'url' => 'https://nl.wikipedia.org',
 			'page_path' => '/wiki/$1',
 			'file_path' => '/w/$1',
@@ -152,22 +145,20 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
+			'language' => 'nl',
 		) )->save();
 
-		$sitesTable->newFromArray( array(
+		Sites::newSite( array(
 			'global_key' => 'svwiki',
-			'type' => 0,
-			'group' => 0,
 			'url' => 'https://sv.wikipedia.org',
 			'page_path' => '/wiki/$1',
 			'file_path' => '/w/$1',
 			'local_key' => 'sv',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
+			'language' => 'sv',
 		) )->save();
 
-		$sitesTable->newFromArray( array(
+
+		Sites::newSite( array(
 			'global_key' => 'srwiki',
 			'type' => 0,
 			'group' => 0,
@@ -180,7 +171,7 @@ final class Utils {
 			'forward' => true,
 		) )->save();
 
-		$sitesTable->newFromArray( array(
+		Sites::newSite( array(
 			'global_key' => 'nowiki',
 			'type' => 0,
 			'group' => 0,
@@ -193,30 +184,22 @@ final class Utils {
 			'forward' => true,
 		) )->save();
 
-		$sitesTable->newFromArray( array(
+		Sites::newSite( array(
 			'global_key' => 'nnwiki',
-			'type' => 0,
-			'group' => 0,
 			'url' => 'https://nn.wikipedia.org',
 			'page_path' => '/wiki/$1',
 			'file_path' => '/w/$1',
 			'local_key' => 'nn',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
+			'language' => 'nn',
 		) )->save();
 
-		$sitesTable->newFromArray( array(
+		Sites::newSite( array(
 			'global_key' => 'enwiktionary',
-			'type' => 0,
-			'group' => 1,
 			'url' => 'https://en.wiktionary.org',
 			'page_path' => '/wiki/$1',
 			'file_path' => '/w/$1',
 			'local_key' => 'enwiktionary',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
+			'language' => 'en',
 		) )->save();
 
 		wfGetDB( DB_MASTER )->commit();
