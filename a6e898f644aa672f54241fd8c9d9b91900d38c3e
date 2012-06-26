@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOn///sc\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-26T09:20:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAOn///to\u003d",
+      "revId": "a6e898f644aa672f54241fd8c9d9b91900d38c3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOn///tY\u003d",
         "filename": "repo/includes/api/ApiLinkSite.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-06-26T08:45:23Z",
       "side": 1,
       "message": "spaces missing in function call.",
+      "revId": "a6e898f644aa672f54241fd8c9d9b91900d38c3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOn///sg\u003d",
+        "filename": "repo/includes/api/ApiLinkSite.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-26T09:20:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAOn///tY\u003d",
       "revId": "a6e898f644aa672f54241fd8c9d9b91900d38c3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOn///sk\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiLinkSiteTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-26T09:20:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAOn///ts\u003d",
+      "revId": "a6e898f644aa672f54241fd8c9d9b91900d38c3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOn///tw\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiLinkSiteTest.php",
         "patchSetId": 2
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAOn///so\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiLinkSiteTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-26T09:20:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAOn///tw\u003d",
+      "revId": "a6e898f644aa672f54241fd8c9d9b91900d38c3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAOn///t0\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiLinkSiteTest.php",
         "patchSetId": 2
@@ -115,6 +187,24 @@
       "writtenOn": "2012-06-26T08:45:23Z",
       "side": 1,
       "message": "please use \\Wikibase\\Utils::insertSitesForTests(); now.",
+      "revId": "a6e898f644aa672f54241fd8c9d9b91900d38c3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAOn///ss\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiLinkSiteTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-26T09:20:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAOn///t0\u003d",
       "revId": "a6e898f644aa672f54241fd8c9d9b91900d38c3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
