@@ -29,6 +29,9 @@ window.wikibase.ui.PropertyEditTool.EditableSiteLink = function( subject, toolba
 };
 window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
+
+	API_VALUE_KEY: 'sitelinks',
+
 	/**
 	 * The part of the editable site link representing the site the selected page belongs to
 	 * @var wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface
@@ -126,6 +129,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 
 		// only enable site page selector if there is a valid site id selected
 		pageInterface.setDisabled( ! idInterface.isValid() );
+	},
+
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue._getValueFromApiResponse
+	 *
+	 * @param array response
+	 * @return string|null
+	 */
+	_getValueFromApiResponse: function( response ) {
+		var siteId = this._interfaces.siteId.getSelectedSite().getId();
+		var normalizedTitle = response[ this.API_VALUE_KEY ][ this._interfaces.siteId.getSelectedSite().getGlobalSiteId() ].title;
+		return [ siteId, normalizedTitle ];
 	},
 
 	/**
