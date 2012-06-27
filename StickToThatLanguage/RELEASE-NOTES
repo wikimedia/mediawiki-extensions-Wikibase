@@ -8,5 +8,7 @@ Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Stick_
 
 Initial release with the following features:
 
+* Language selector which looks and feels like Wikipedias navigation language links. User preferred
+  languages are displayed on top. For users not logged in the default languages can be configured.
 * New user preference for users to choose their preferred languages.
 * ...

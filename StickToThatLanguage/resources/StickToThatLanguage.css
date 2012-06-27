@@ -1,0 +1,14 @@
+/**
+ * Styles for the 'StickToThatLanguage' extensions language selector.
+ *
+ * @since 0.1
+ * @file StickToThatLanguage.css
+ * @ingroup STTLanguage
+ *
+ * @license GNU GPL v2+
+ * @author Daniel Werner
+ */
+
+.sttl-lasttoplang {
+	margin-bottom: 0.5em!important;
+}

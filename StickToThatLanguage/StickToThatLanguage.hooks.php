@@ -75,13 +75,21 @@ final class Hooks {
 	 * @return bool
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( \SkinTemplate &$sk, \QuickTemplate &$tpl ) {
-		global $egSTTLanguageDisplaySelector;
+		global $egSTTLanguageDisplaySelector, $egSTTLanguageTopLanguages;
 		if( ! $egSTTLanguageDisplaySelector ) {
 			return true; // option for disabling the selector is active
 		}
 
 		// Title of our item:
 		$title = $sk->getOutput()->getTitle();
+		$user = $sk->getUser();
+
+		$langUrls = array();
+		$topLangUrls = array();
+
+		$topLanguages = $user->isLoggedIn()
+			? Ext::getUserLanguageCodes( $user ) // display users preferred languages on top
+			: $egSTTLanguageTopLanguages;
 
 		foreach( \Language::fetchLanguageNames() as $code => $name ) {
 			if( $code === $sk->getLanguage()->getCode() ) {
@@ -89,7 +97,7 @@ final class Hooks {
 			}
 
 			// build information for the skin to generate links for all languages:
-			$language_urls[] = array(
+			$url = array(
 				'href' => $title->getFullURL( array( 'uselang' => $code ) ),
 				'text' => $name,
 				'title' => $title->getText(),
@@ -97,7 +105,18 @@ final class Hooks {
 				'lang' => $code,
 				'hreflang' => $code,
 			);
+
+			if( in_array( $code, $topLanguages ) ) {
+				// language is considered a 'top' language
+				$url['class'] .= ' sttl-toplang';
+				$topLangUrls[] = $url;
+			} else {
+				$langUrls[] = $url;
+			}
 		}
+
+		// put preferred languages on top and add others:
+		$language_urls = array_merge( $topLangUrls, $langUrls );
 
 		// define these languages as languages for the sitebar within the skin:
 		$tpl->setRef( 'language_urls', $language_urls );
