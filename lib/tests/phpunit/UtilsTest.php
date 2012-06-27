@@ -36,35 +36,12 @@ class UtilsTest extends \MediaWikiTestCase {
     	);
     }
 
-    /**
-     * @group WikibaseUtils
-     * @dataProvider providerGetLanguageCodeFromGlobalSiteId
-     */
-    public function testGetLanguageCodeFromGlobalSiteId( $globalSiteId, $expectedSiteCode ) {
-    	$result = Utils::getLanguageCodeFromGlobalSiteId( $globalSiteId );
-    	$this->assertEquals(
-    		$expectedSiteCode,
-    		$result
-    		);
-    }
-
     public function providerGetLanguageCodes() {
     	return array(
     		array( 'de' ),
     		array( 'en' ),
     		array( 'no' ),
     		array( 'nn' ),
-    	);
-    }
-
-    public function providerGetLanguageCodeFromGlobalSiteId() {
-    	return array(
-    		array( 'dewiki', 'de' ),
-    		array( 'enwiki', 'en' ),
-    		array( 'nowiki', 'no' ),
-    		array( 'nnwiki', 'nn' ),
-    		array( 'cbk-zamwiki', 'cbk-zam' ),
-    		array( 'bxrwiki', 'bxr' ),
     	);
     }
 
