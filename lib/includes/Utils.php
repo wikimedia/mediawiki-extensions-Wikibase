@@ -36,6 +36,23 @@ final class Utils {
 	}
 
 	/**
+	 * @see \Language::fetchLanguageName()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $languageCode
+	 *
+	 * @return string
+	 */
+	public function fetchLanguageName( $languageCode ) {
+		$languageName = \Language::fetchLanguageName( str_replace( '_', '-', $languageCode ) );
+		if ( $languageName == '' ) {
+			$languageName = $languageCode;
+		}
+		return $languageName;
+	}
+
+	/**
 	 * Temporary helper function.
 	 * Inserts some sites into the sites table.
 	 *
