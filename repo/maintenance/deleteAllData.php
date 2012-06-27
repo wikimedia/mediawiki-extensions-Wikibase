@@ -32,22 +32,23 @@ class DeleteAllData extends \Maintenance {
 			return;
 		}
 
-		echo 'Deleting pages from Data NS...';
+		echo 'Deleting revisions from Data NS...';
 
 		$dbw = wfGetDB( DB_MASTER );
 
-		$dbw->delete(
-			'page',
+		$dbw->deleteJoin(
+			'revision', 'page',
+			'rev_page', 'page_id',
 			array( 'page_namespace' => WB_NS_DATA )
 		);
 
 		echo "done!\n";
 
-		echo 'Deleting associated revisions...';
+		echo 'Deleting pages from Data NS...';
 
 		$dbw->delete(
-			'revision',
-			array( 'rev_content_model' => CONTENT_MODEL_WIKIBASE_ITEM )
+			'page',
+			array( 'page_namespace' => WB_NS_DATA )
 		);
 
 		echo "done!\n";
