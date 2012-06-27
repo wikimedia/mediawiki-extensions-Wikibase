@@ -157,15 +157,15 @@ abstract class ApiModifyItem extends Api {
 
 		$isNew = $item->isNew();
 
-		// do the actual save, or if it don't exist yet create it
-		$success = $item->save();
+		// Do the actual save, or if it don't exist yet create it.
+		$status = $item->save();
 
-		if ( !$success ) {
+		if ( !$status->isOK() ) {
 			if ( $isNew ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+				$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
 			}
 			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
+				$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
 			}
 		}
 

@@ -207,7 +207,7 @@ class Item extends Entity {
 	 * @param string $summary
 	 * @param null|User $user
 	 *
-	 * @return Status Success indicator
+	 * @return \Status Success indicator
 	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public function save( $summary = '', User $user = null ) {
@@ -225,7 +225,7 @@ class Item extends Entity {
 			);
 		}
 
-		return $status->isOK(); //@todo: return the status, so caller gets info about the actual error.
+		return $status;
 	}
 
 	/**
