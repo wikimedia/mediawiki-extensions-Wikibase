@@ -92,6 +92,9 @@ $wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
 $wgAutoloadClasses['Wikibase\SitesTable'] 			= $dir . 'includes/SitesTable.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
+$wgAutoloadClasses['Settings'] 						= $dir . 'compat/Settings.php';
+$wgAutoloadClasses['SettingsBase'] 					= $dir . 'compat/SettingsBase.php';
+
 // includes/changes
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
 $wgAutoloadClasses['Wikibase\DiffChange'] 			= $dir . 'includes/changes/DiffChange.php';

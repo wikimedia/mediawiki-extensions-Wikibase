@@ -134,7 +134,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	protected function setSettings( $settings = null ) {
 		global $egWBSettings;
 		$egWBSettings = $settings;
-		\Wikibase\Settings::singleton()->rebuildSettings();
+		\Wikibase\Settings::singleton( true );
 		WBCLangLinkHandler::buildSortOrder();
 	}
 
