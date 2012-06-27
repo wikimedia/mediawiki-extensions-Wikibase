@@ -80,6 +80,9 @@ final class Hooks {
 			return true; // option for disabling the selector is active
 		}
 
+		// NOTE: usually we would add the module styles for the selector here, but apparently at this point
+		//       it is too late to add any styles to the OutputPage.
+
 		// Title of our item:
 		$title = $sk->getOutput()->getTitle();
 		$user = $sk->getUser();
@@ -115,11 +118,41 @@ final class Hooks {
 			}
 		}
 
+		if( count( $topLangUrls ) ) { // can be empty when the only language in here is the one displayed!
+			// add another css class for the last preferred, after that, other languages start:
+			$topLangUrls[ count( $topLangUrls ) - 1 ]['class'] .= ' sttl-lasttoplang';
+		}
+
 		// put preferred languages on top and add others:
 		$language_urls = array_merge( $topLangUrls, $langUrls );
 
 		// define these languages as languages for the sitebar within the skin:
 		$tpl->setRef( 'language_urls', $language_urls );
+
+		return true;
+	}
+
+	/**
+	 * Used to include the language selectors required resource loader module.
+	 *
+	 * NOTE: can't do this in onSkinTemplateOutputPageBeforeExec. Seems like at that point of time it is not
+	 *       possible to add them.
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
+	 *
+	 * @param OutputPage $out
+	 * @param Skin $skin
+	 * @return bool
+	 */
+	public static function onBeforePageDisplay( \OutputPage &$out, \Skin &$skin ) {
+		// add styles for the language selector:
+		global $egSTTLanguageDisplaySelector;
+
+		if( $egSTTLanguageDisplaySelector ) {
+			// add styles for language selector:
+			$out->addModuleStyles( 'sticktothatlanguage' );
+			$out->addModules( 'sticktothatlanguage' );
+		}
 
 		return true;
 	}
