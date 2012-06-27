@@ -93,10 +93,10 @@ class ApiSetItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
 		
-		$success = $item->save();
+		$status = $item->save();
 
-		if ( !$success ) {
-			// TODO: throw error. Right now will have PHP fatal when accessing $item later on...
+		if ( !$status->isOK() ) {
+			$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
 		}
 
 		//if ( !isset($params['summary']) ) {
@@ -124,7 +124,7 @@ class ApiSetItem extends Api {
 		$res->addValue(
 			null,
 			'success',
-			(int)$success
+			(int)$status->isOK()
 		);
 	}
 	
@@ -139,6 +139,7 @@ class ApiSetItem extends Api {
 			array( 'code' => 'cant-edit', 'info' => wfMsg( 'wikibase-api-cant-edit' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
 			array( 'code' => 'session-failure', 'info' => wfMsg( 'wikibase-api-session-failure' ) ),
+			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 		) );
 	}
 

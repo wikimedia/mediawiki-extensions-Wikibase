@@ -152,14 +152,14 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
 
-		$success = $item->save();
+		$status = $item->save(); /* @var \Status $status */
 
-		if ( !$success ) {
+		if ( !$status->isOK() ) {
 			if ( $isNew ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+				$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
 			}
 			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
+				$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
 			}
 		}
 
