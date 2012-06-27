@@ -104,7 +104,7 @@ class SitesTest extends \MediaWikiTestCase {
 	public function testGetSiteByLocalId() {
 		$site = Sites::singleton()->getSiteByLocalId( "en" );
 		$this->assertFalse( $site === false, "site not found" );
-		$this->assertEquals( "en", $site->getId() );
+		$this->assertEquals( "en", $site->getConfig()->getLocalId() );
 		$this->assertFalse( Sites::singleton()->getSiteByLocalId( 'dxzfzxdegxdrfyxsdty' ) );
 	}
 
