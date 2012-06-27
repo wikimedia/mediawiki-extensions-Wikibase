@@ -16,6 +16,7 @@ use Wikibase\Sites as Sites;
  * @group Wikibase
  * @group WikibaseLib
  * @group Sites
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -101,29 +102,17 @@ class SitesTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetSiteByLocalId() {
-		$sites = Sites::singleton()->getAllSites();
-
-		if ( $sites->isEmpty() ) {
-			$this->markTestSkipped( 'No sites to test with' );
-		}
-		else {
-			$site = $sites->getIterator()->current();
-			$this->assertEquals( $site, Sites::singleton()->getSiteByLocalId( $site->getConfig()->getLocalId() ) );
-			$this->assertFalse( Sites::singleton()->getSiteByLocalId( 'dxzfzxdegxdrfyxsdty' ) );
-		}
+		$site = Sites::singleton()->getSiteByLocalId( "en" );
+		$this->assertFalse( $site === false, "site not found" );
+		$this->assertEquals( "en", $site->getId() );
+		$this->assertFalse( Sites::singleton()->getSiteByLocalId( 'dxzfzxdegxdrfyxsdty' ) );
 	}
 
 	public function testGetSiteByGlobalId() {
-		$sites = Sites::singleton()->getAllSites();
-
-		if ( $sites->isEmpty() ) {
-			$this->markTestSkipped( 'No sites to test with' );
-		}
-		else {
-			$site = $sites->getIterator()->current();
-			$this->assertEquals( $site, Sites::singleton()->getSiteByGlobalId( $site->getGlobalId() ) );
-			$this->assertFalse( Sites::singleton()->getSiteByGlobalId( 'dxzfzxdegxdrfyxsdty' ) );
-		}
+		$site = Sites::singleton()->getSiteByGlobalId( "enwiki" );
+		$this->assertFalse( $site === false, "site not found" );
+		$this->assertEquals( "enwiki", $site->getGlobalId() );
+		$this->assertFalse( Sites::singleton()->getSiteByGlobalId( 'dxzfzxdegxdrfyxsdty' ) );
 	}
 
 	public function testGetLoadedSites() {
