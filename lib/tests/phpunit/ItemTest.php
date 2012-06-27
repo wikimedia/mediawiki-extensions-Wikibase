@@ -79,5 +79,38 @@ class ItemTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function dataGetTextForSearchIndex() {
+		return array( // runs
+			array( // #0
+				array( // data
+					'label' => array( 'en' => 'Test', 'de' => 'Testen' ),
+					'aliases' => array( 'en' => array('abc', 'cde'), 'de' => array('xyz', 'uvw') )
+				),
+				array( // patterns
+					'/^Test$/',
+					'/^Testen$/',
+					'/^abc$/',
+					'/^cde$/',
+					'/^uvw$/',
+					'/^xyz$/',
+					'/^(?!abcde).*$/',
+				),
+			),
+		);
+	}
+
+	/**
+	 * Tests @see WikibaseItem::getTextForSearchIndex
+	 *
+	 * @dataProvider dataGetTextForSearchIndex
+	 */
+	public function testGetTextForSearchIndex( Array $data, Array $patterns ) {
+		$item = Item::newFromArray( $data );
+		$text = $item->getTextForSearchIndex();
+
+		foreach ( $patterns as $pattern ) {
+			$this->assertTrue( preg_match( $pattern . 'm', $text ) > 0, "Text did not match pattern $pattern: $text" );
+		}
+	}
 }
 	
