@@ -1,0 +1,8 @@
+Change-Id: I94abbad4eda31e27579ba20a05ff2c7c6f1733e5
+Code-Review+2: Tobias Gritschacher <tobias.gritschacher@wikimedia.de>
+Verified+1: Tobias Gritschacher <tobias.gritschacher@wikimedia.de>
+Submitted-by: Tobias Gritschacher <tobias.gritschacher@wikimedia.de>
+Submitted-at: Wed, 27 Jun 2012 14:41:51 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/13160
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
