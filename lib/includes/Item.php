@@ -152,6 +152,59 @@ class Item extends Entity {
 	}
 
 	/**
+	 *
+	 * @param WikiPage $page
+	 * @param int      $flags
+	 * @param int      $baseRevId
+	 * @param User     $user
+	 *
+	 * @return \Status
+	 * @see Content::prepareSave()
+	 */
+	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
+		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
+
+		if ( $status->isOK() ) {
+			$this->checkSiteLinksForInsert( $status );
+		}
+
+		if ( $status->isOK() ) {
+			$success = $this->relationalSave();
+
+			if ( !$success ) {
+				$status->error( "wikibase-relational-save-failed" ); #FIXME: i18n
+			}
+		}
+
+		return $status;
+	}
+
+	protected function checkSiteLinksForInsert( \Status $status ) {
+		$dbw = wfGetDB( DB_SLAVE );
+
+		foreach ( $this->getSiteLinks() as $siteId => $pageName ) {
+			$res = $dbw->select(
+				'wb_items_per_site',
+				array( 'ips_item_id' ),
+				array(
+					'ips_site_id' => $siteId,
+					'ips_site_page' => $pageName,
+				),
+				__METHOD__
+			);
+
+			while ( $row = $res->fetchRow() ) {
+				if ( $row->ips_item_id != $this->getId() ) {
+					$status->error( 'sitelink-already-used', $siteId, $pageName );
+
+				}
+			}
+		}
+
+		return $status->isOK();
+	}
+
+	/**
 	 * Saves the item.
 	 * If the item does not exist yet, it will be created (ie an ID will be fetched and a new page in the data NS created).
 	 *
@@ -164,22 +217,15 @@ class Item extends Entity {
 	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public function save( $summary = '', User $user = null ) {
-		$success = $this->relationalSave();
+		$status = $this->getWikiPage()->doEditContent(
+			$this,
+			$summary,
+			EDIT_AUTOSUMMARY,
+			false,
+			$user
+		);
 
-		if ( $success ) {
-			$status = $this->getWikiPage()->doEditContent(
-				$this,
-				$summary,
-				EDIT_AUTOSUMMARY,
-				false,
-				$user,
-				CONTENT_FORMAT_JSON // TODO: this should not be needed here? (w/o it stuff is stored as wikitext...)
-			);
-
-			$success = $status->isOk();
-		}
-
-		return $success;
+		return $status->isOK(); //@todo: return the status, so caller gets info about the actual error.
 	}
 
 	/**
@@ -195,7 +241,7 @@ class Item extends Entity {
 			$item = self::getFromId( $this->getId() );
 
 			if ( is_null( $item ) ) {
-				throw new MWException( 'Attempt to reload item failed because it could not be obtained from the db.' );
+				throw new \MWException( 'Attempt to reload item failed because it could not be obtained from the db.' );
 			}
 			else {
 				$this->data = $item->toArray();
