@@ -203,7 +203,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
-	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
+	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
@@ -249,7 +249,7 @@ $messages['be-tarask'] = array(
 	'special-itembylabel' => 'Аб’ект паводле меткі',
 	'special-createitem' => 'Стварыць новы прадмет',
 	'wikibase-api-no-token' => 'Не пазначаны token.',
-	'content-model-1001' => 'Прадмет у Вікібазе',
+	'content-model-wikibase-item' => 'Прадмет у Вікібазе',
 );
 
 /** Breton (brezhoneg)
@@ -345,7 +345,7 @@ $messages['de'] = array(
 	'wikibase-api-description-not-found' => 'Es wurde keine frühere Beschreibung in dieser Sprache im Datenelement gefunden.',
 	'wikibase-api-wrong-class' => 'Der Inhalt auf der gefundenen Seite entspricht nicht dem richtigen Typ.',
 	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Du musst die Seite neu laden und dich erneut anmelden.',
-	'content-model-1001' => 'Wikibase-Datenelement',
+	'content-model-wikibase-item' => 'Wikibase-Datenelement',
 );
 
 /** German (formal address) (‪Deutsch (Sie-Form)‬)
@@ -416,7 +416,7 @@ $messages['dsb'] = array(
 	'wikibase-api-no-permissions' => 'Pśizjawjony wužywaŕ njama dosegajuce pšawa.',
 	'wikibase-api-invalid-contentmodel' => 'Wopśimjeśowy model za bok jo njepłaśiwy.',
 	'wikibase-api-not-recognized' => 'Směrnica se njespóznawa.',
-	'content-model-1001' => 'Datowy element z Wikibase',
+	'content-model-wikibase-item' => 'Datowy element z Wikibase',
 );
 
 /** Spanish (español)
@@ -495,7 +495,7 @@ $messages['es'] = array(
 	'wikibase-api-description-not-found' => 'No se puede encontrar una descripción anterior para este idioma en el elemento',
 	'wikibase-api-wrong-class' => 'El contenido de la página encontrada no es del tipo correcto.',
 	'wikibase-api-session-failure' => 'La sesión actual ha fallado y debe actualizar la página y volver a iniciar sesión.',
-	'content-model-1001' => 'Elemento de Wikibase',
+	'content-model-wikibase-item' => 'Elemento de Wikibase',
 );
 
 /** Persian (فارسی)
@@ -539,7 +539,7 @@ $messages['fa'] = array(
 	'wikibase-api-no-token' => 'نشانه‌ای دریافت نشد.',
 	'wikibase-api-no-data' => 'برای اجرا کردن هیچ داده‌ای  نیست.',
 	'wikibase-api-add-exists' => 'امکان افزودن به مورد موجود نیست.',
-	'content-model-1001' => 'مورد ویکی‌پایه',
+	'content-model-wikibase-item' => 'مورد ویکی‌پایه',
 );
 
 /** French (français)
@@ -616,7 +616,7 @@ $messages['fr'] = array(
 	'wikibase-api-description-not-found' => "Impossible de trouver une description antérieure de cette langue dans l'élément.",
 	'wikibase-api-wrong-class' => "Le contenu de la page trouvée n'est pas du bon type.",
 	'wikibase-api-session-failure' => 'La session en cours a échoué et vous devez rafraîchir la page et vous reconnecter.',
-	'content-model-1001' => 'Élément Wikibase',
+	'content-model-wikibase-item' => 'Élément Wikibase',
 );
 
 /** Galician (galego)
@@ -693,7 +693,7 @@ $messages['gl'] = array(
 	'wikibase-api-description-not-found' => 'Non se pode atopar unha descrición anterior para esta lingua no elemento.',
 	'wikibase-api-wrong-class' => 'O contido da páxina atopada non é do tipo correcto.',
 	'wikibase-api-session-failure' => 'A sesión actual fallou e agora debe refrescar a páxina e acceder de novo.',
-	'content-model-1001' => 'Elemento de Wikibase',
+	'content-model-wikibase-item' => 'Elemento de Wikibase',
 );
 
 /** Swiss German (Alemannisch)
@@ -801,7 +801,7 @@ $messages['hsb'] = array(
 	'wikibase-api-description-not-found' => 'Njeje so žane prjedawše wopisanje za tutu rěč w elemenće namakało.',
 	'wikibase-api-wrong-class' => 'Wobsah na namakanej stronje korektny typ nima.',
 	'wikibase-api-session-failure' => 'Aktualne posedźenje je spadnyło a dyrbiš stronu aktualizować a so znowa přizjewić.',
-	'content-model-1001' => 'Datowy element Wikibase',
+	'content-model-wikibase-item' => 'Datowy element Wikibase',
 );
 
 /** Interlingua (interlingua)
@@ -919,7 +919,7 @@ $messages['is'] = array(
 	'wikibase-api-description-not-found' => 'Mistókst að finna fyrri lýsingu fyrir þetta tungumál í hlutnum.',
 	'wikibase-api-wrong-class' => 'Innihald síðunnar sem fannst er ekki af réttri gerð.',
 	'wikibase-api-session-failure' => 'Núverandi seta hefur mistekist. Þú þarft að endurhlaða síðuna og skrá þig inn aftur.',
-	'content-model-1001' => 'Wikibase hlutur',
+	'content-model-wikibase-item' => 'Wikibase hlutur',
 );
 
 /** Italian (italiano)
@@ -996,7 +996,7 @@ $messages['it'] = array(
 	'wikibase-api-description-not-found' => "Non è possibile trovare una descrizione precedente per questa lingua nell'elemento.",
 	'wikibase-api-wrong-class' => 'Il contenuto della pagina trovata non è di un tipo corretto.',
 	'wikibase-api-session-failure' => "La sessione corrente ha restituito un errore; devi ricaricare la pagina ed effettuare nuovamente l'accesso.",
-	'content-model-1001' => 'Elemento wikibase',
+	'content-model-wikibase-item' => 'Elemento wikibase',
 );
 
 /** Japanese (日本語)
@@ -1143,7 +1143,7 @@ $messages['mk'] = array(
 	'wikibase-api-description-not-found' => 'Не можев да пронајдам претходен опис за овој јазик во ставката',
 	'wikibase-api-wrong-class' => 'Содржината на пронајдената страница не е од бараниот тип.',
 	'wikibase-api-session-failure' => 'Тековната сесија повеќе не работи. Ќе мора да ја превчитате страницата и да се најавите повторно.',
-	'content-model-1001' => 'Ставка во Викибазата',
+	'content-model-wikibase-item' => 'Ставка во Викибазата',
 );
 
 /** Norwegian Bokmål (‪Norsk (bokmål)‬)
@@ -1216,7 +1216,7 @@ $messages['nb'] = array(
 	'wikibase-api-label-not-found' => 'Kan ikke finne noen tidligere etikett på angitt språk for dette datasettet.',
 	'wikibase-api-description-not-found' => 'Kan ikke finne noen tidligere beskrivelse på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innholdet på funnet side er ikke av korrekt type.',
-	'content-model-1001' => 'Wikibase datasett',
+	'content-model-wikibase-item' => 'Wikibase datasett',
 );
 
 /** Dutch (Nederlands)
@@ -1295,7 +1295,7 @@ $messages['nl'] = array(
 	'wikibase-api-description-not-found' => 'Er is geen eerdere beschrijving in deze taal gevonden in dit item.',
 	'wikibase-api-wrong-class' => 'De inhoud van de gevonden pagina is niet van het juiste type.',
 	'wikibase-api-session-failure' => 'De gegevens van de huidige sessie zijn niet langer geldig. Ververs de pagina en meld opnieuw aan.',
-	'content-model-1001' => 'Wikibaseitem',
+	'content-model-wikibase-item' => 'Wikibaseitem',
 );
 
 /** Norwegian Nynorsk (‪norsk (nynorsk)‬)
@@ -1373,7 +1373,7 @@ $messages['nn'] = array(
 	'wikibase-api-description-not-found' => 'Kan ikkje finne nokon tidligare skildring på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innhaldet på funnen side er ikkje av korrekt type.',
 	'wikibase-api-session-failure' => 'Den inneverande brukarøkta har feila og du må oppdatere sida og logge inn på nytt.',
-	'content-model-1001' => 'Wikibase datasett',
+	'content-model-wikibase-item' => 'Wikibase datasett',
 );
 
 /** Portuguese (português)
@@ -1465,7 +1465,7 @@ $messages['pt-br'] = array(
 	'wikibase-api-label-not-found' => 'Não foi possível localizar um rótulo prévio para este item nesse idioma.',
 	'wikibase-api-description-not-found' => 'Não foi possível localizar uma descrição prévia para este item nesse idioma.',
 	'wikibase-api-wrong-class' => 'O conteúdo da página encontrada não é do tipo correto.',
-	'content-model-1001' => 'Item do Wikibase',
+	'content-model-wikibase-item' => 'Item do Wikibase',
 );
 
 /** Russian (русский)
