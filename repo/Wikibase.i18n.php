@@ -179,10 +179,8 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-autocomplete-connection' => 'Error message for page auto-complete input box; displayed when API could not be reached.',
 	'wikibase-error-autocomplete-response' => 'When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).',
 	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|pagfe]] and [[m:Wikidata/Glossary#item|item]].',
-
-	'wikibase-error-relational-save-failed' => 'Error message shown when an item\'s identity could not be created in the database, prior to the primary save operation.',
-	'wikibase-error-sitelink-already-used' => 'Error message shown when an item can\'t be saved because it contains a ite link already used by another item. Parameter 1 is the site id (interwiki prefix), parameter 2 is the title on the remote site, and parameter 3 is the page title of the conflicting item.',
-
+	'wikibase-error-relational-save-failed' => "Error message shown when an item's identity could not be created in the database, prior to the primary save operation.",
+	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a ite link already used by another item. Parameter 1 is the site id (interwiki prefix), parameter 2 is the title on the remote site, and parameter 3 is the page title of the conflicting item.",
 	'wikibase-setting-languages' => 'Label for the user settings where the user can choose several languages he is interested in editing data for or which are interesting as a fallback when displaying data not available in the users main language',
 	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
@@ -190,7 +188,6 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error condition.',
 	'wikibase-api-no-token' => 'This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are som exceptional error condition. The message can be shown after misconfiguration of the system.',
 	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
-	'wikibase-api-no-external-reply' => 'This is an error message where the external client site failed to reply, either because it is not there, because it choose to not reply, because the connection was terminated, or had some other unexpected failure.',
 	'wikibase-api-no-external-page' => 'This is an error message where the external client did reply but either because of foulty reply or because the page title could not be unwound it was not possible to identify an external page.',
 	'wikibase-api-add-sitelink-failed' => 'This is an error message where the system of some unspecific reason could not add the site link to the temporary stor.',
 	'wikibase-api-cant-edit' => 'This is an error message for a situation where the user is blocked from editing. This will be shown to the user if he tries to edit when being blocked.',
@@ -216,10 +213,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
-	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
-/** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
+/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
@@ -232,7 +228,6 @@ $messages['be-tarask'] = array(
 	'wikibase-remove-inprogress' => 'Выдаленьне…',
 	'wikibase-label-edit-placeholder' => 'увядзіце метку',
 	'wikibase-description-edit-placeholder' => 'увядзіце апісаньне',
-	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
 	'wikibase-sitelink-site-edit-placeholder' => 'пазначце сайт',
 	'wikibase-sitelink-page-edit-placeholder' => 'пазначце старонку',
 	'wikibase-label-input-help-message' => 'Увядзіце назву гэтага набору зьвестак у $1.',
@@ -257,12 +252,12 @@ $messages['be-tarask'] = array(
 	'wikibase-error-save-connection' => 'У час спробы захаваньня адбылася памылка злучэньня, з-за чаго вашыя зьмены не былі захаваныя. Калі ласка, праверце вашае злучэньне з Інтэрнэтам.',
 	'wikibase-error-autocomplete-connection' => 'Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазьней.',
 	'wikibase-error-autocomplete-response' => 'Адказ сэрвэра: $1',
+	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
 	'wikibase-setting-languages' => 'Дапаможныя мовы<br />(напр., для адлюстраваньня зьвестак, калі яны не даступныя на асноўнай мове)',
 	'special-itembytitle' => 'Аб’ект паводле назвы',
 	'special-itembylabel' => 'Аб’ект паводле меткі',
 	'special-createitem' => 'Стварыць новы прадмет',
 	'wikibase-api-no-token' => 'Не пазначаны token.',
-	'content-model-wikibase-item' => 'Прадмет у Вікібазе',
 );
 
 /** Breton (brezhoneg)
@@ -335,6 +330,9 @@ $messages['de'] = array(
 	'wikibase-api-aliases-invalid-list' => 'Du musst einen der Parameter zu „set“, „add“, bzw. „remove“ nutzen.',
 	'wikibase-api-no-token' => 'Es wurden keine Token angegeben.',
 	'wikibase-api-no-data' => 'Es wurden keine zu verarbeitenden Daten gefunden.',
+	'wikibase-api-client-error' => 'Die externe Website steht nicht zur Verfügung.',
+	'wikibase-api-no-external-page' => 'Die externe Website hat keine Informationen zur Seite bereitgestellt.',
+	'wikibase-api-add-sitelink-failed' => 'Der Link zur Website konnte nicht gespeichert werden.',
 	'wikibase-api-cant-edit' => 'Der angemeldete Benutzer ist nicht berechtigt Bearbeitungen durchzuführen.',
 	'wikibase-api-no-permissions' => 'Der angemeldete Benutzer verfügt über keine ausreichenden Berechtigungen.',
 	'wikibase-api-id-xor-wikititle' => 'Gib für eine entsprechende Seite entweder die Kennung des Datenelements „id“ oder Informationspaare mit Angaben zu „site“ und „title“ an.',
@@ -359,7 +357,6 @@ $messages['de'] = array(
 	'wikibase-api-wrong-class' => 'Der Inhalt auf der gefundenen Seite entspricht nicht dem richtigen Typ.',
 	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Du musst die Seite neu laden und dich erneut anmelden.',
 	'wikibase-resetold' => 'zurücksetzen',
-	'content-model-wikibase-item' => 'Wikibase-Datenelement',
 );
 
 /** German (formal address) (‪Deutsch (Sie-Form)‬)
@@ -391,7 +388,7 @@ $messages['diq'] = array(
 	'wikibase-save-inprogress' => 'Starêno...',
 );
 
-/** Lower Sorbian (Dolnoserbski)
+/** Lower Sorbian (dolnoserbski)
  * @author Michawiki
  */
 $messages['dsb'] = array(
@@ -430,7 +427,6 @@ $messages['dsb'] = array(
 	'wikibase-api-no-permissions' => 'Pśizjawjony wužywaŕ njama dosegajuce pšawa.',
 	'wikibase-api-invalid-contentmodel' => 'Wopśimjeśowy model za bok jo njepłaśiwy.',
 	'wikibase-api-not-recognized' => 'Směrnica se njespóznawa.',
-	'content-model-wikibase-item' => 'Datowy element z Wikibase',
 );
 
 /** Spanish (español)
@@ -509,7 +505,6 @@ $messages['es'] = array(
 	'wikibase-api-description-not-found' => 'No se puede encontrar una descripción anterior para este idioma en el elemento',
 	'wikibase-api-wrong-class' => 'El contenido de la página encontrada no es del tipo correcto.',
 	'wikibase-api-session-failure' => 'La sesión actual ha fallado y debe actualizar la página y volver a iniciar sesión.',
-	'content-model-wikibase-item' => 'Elemento de Wikibase',
 );
 
 /** Persian (فارسی)
@@ -553,7 +548,6 @@ $messages['fa'] = array(
 	'wikibase-api-no-token' => 'نشانه‌ای دریافت نشد.',
 	'wikibase-api-no-data' => 'برای اجرا کردن هیچ داده‌ای  نیست.',
 	'wikibase-api-add-exists' => 'امکان افزودن به مورد موجود نیست.',
-	'content-model-wikibase-item' => 'مورد ویکی‌پایه',
 );
 
 /** French (français)
@@ -630,7 +624,6 @@ $messages['fr'] = array(
 	'wikibase-api-description-not-found' => "Impossible de trouver une description antérieure de cette langue dans l'élément.",
 	'wikibase-api-wrong-class' => "Le contenu de la page trouvée n'est pas du bon type.",
 	'wikibase-api-session-failure' => 'La session en cours a échoué et vous devez rafraîchir la page et vous reconnecter.',
-	'content-model-wikibase-item' => 'Élément Wikibase',
 );
 
 /** Galician (galego)
@@ -708,7 +701,6 @@ $messages['gl'] = array(
 	'wikibase-api-wrong-class' => 'O contido da páxina atopada non é do tipo correcto.',
 	'wikibase-api-session-failure' => 'A sesión actual fallou e agora debe refrescar a páxina e acceder de novo.',
 	'wikibase-resetold' => 'restablecer',
-	'content-model-wikibase-item' => 'Elemento de Wikibase',
 );
 
 /** Swiss German (Alemannisch)
@@ -817,7 +809,6 @@ $messages['hsb'] = array(
 	'wikibase-api-wrong-class' => 'Wobsah na namakanej stronje korektny typ nima.',
 	'wikibase-api-session-failure' => 'Aktualne posedźenje je spadnyło a dyrbiš stronu aktualizować a so znowa přizjewić.',
 	'wikibase-resetold' => 'wróćo stajić',
-	'content-model-wikibase-item' => 'Datowy element Wikibase',
 );
 
 /** Interlingua (interlingua)
@@ -935,7 +926,6 @@ $messages['is'] = array(
 	'wikibase-api-description-not-found' => 'Mistókst að finna fyrri lýsingu fyrir þetta tungumál í hlutnum.',
 	'wikibase-api-wrong-class' => 'Innihald síðunnar sem fannst er ekki af réttri gerð.',
 	'wikibase-api-session-failure' => 'Núverandi seta hefur mistekist. Þú þarft að endurhlaða síðuna og skrá þig inn aftur.',
-	'content-model-wikibase-item' => 'Wikibase hlutur',
 );
 
 /** Italian (italiano)
@@ -989,6 +979,9 @@ $messages['it'] = array(
 	'wikibase-api-aliases-invalid-list' => 'Utilizzare uno dei seguenti parametri: "set", "add" o "remove".',
 	'wikibase-api-no-token' => 'Non è stato fornito alcun token.',
 	'wikibase-api-no-data' => 'Non ci sono dati su cui operare.',
+	'wikibase-api-client-error' => "Il sito client esterno ha restituito un'errore.",
+	'wikibase-api-no-external-page' => 'Il sito client esterno non ha fornito informazioni sulla pagina.',
+	'wikibase-api-add-sitelink-failed' => 'Il collegamento al sito non può essere salvato.',
 	'wikibase-api-cant-edit' => "All'utente connesso non è consentita la modifica.",
 	'wikibase-api-no-permissions' => "L'utente connesso non ha diritti sufficienti.",
 	'wikibase-api-id-xor-wikititle' => 'Fornire o l\'elemento "id" o la coppia "site" e "title" per una pagina corrispondente.',
@@ -1013,7 +1006,6 @@ $messages['it'] = array(
 	'wikibase-api-wrong-class' => 'Il contenuto della pagina trovata non è di un tipo corretto.',
 	'wikibase-api-session-failure' => "La sessione corrente ha restituito un errore; devi ricaricare la pagina ed effettuare nuovamente l'accesso.",
 	'wikibase-resetold' => 'reimposta',
-	'content-model-wikibase-item' => 'Elemento wikibase',
 );
 
 /** Japanese (日本語)
@@ -1161,7 +1153,6 @@ $messages['mk'] = array(
 	'wikibase-api-wrong-class' => 'Содржината на пронајдената страница не е од бараниот тип.',
 	'wikibase-api-session-failure' => 'Тековната сесија повеќе не работи. Ќе мора да ја превчитате страницата и да се најавите повторно.',
 	'wikibase-resetold' => 'врати',
-	'content-model-wikibase-item' => 'Ставка во Викибазата',
 );
 
 /** Norwegian Bokmål (‪Norsk (bokmål)‬)
@@ -1314,7 +1305,6 @@ $messages['nl'] = array(
 	'wikibase-api-wrong-class' => 'De inhoud van de gevonden pagina is niet van het juiste type.',
 	'wikibase-api-session-failure' => 'De gegevens van de huidige sessie zijn niet langer geldig. Ververs de pagina en meld opnieuw aan.',
 	'wikibase-resetold' => 'opnieuw instellen',
-	'content-model-wikibase-item' => 'Wikibaseitem',
 );
 
 /** Norwegian Nynorsk (‪norsk (nynorsk)‬)
@@ -1392,7 +1382,6 @@ $messages['nn'] = array(
 	'wikibase-api-description-not-found' => 'Kan ikkje finne nokon tidligare skildring på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innhaldet på funnen side er ikkje av korrekt type.',
 	'wikibase-api-session-failure' => 'Den inneverande brukarøkta har feila og du må oppdatere sida og logge inn på nytt.',
-	'content-model-wikibase-item' => 'Wikibase datasett',
 );
 
 /** Portuguese (português)
@@ -1427,7 +1416,6 @@ $messages['pt-br'] = array(
 	'wikibase-remove-inprogress' => 'Removendo...',
 	'wikibase-label-edit-placeholder' => 'insira um rótulo',
 	'wikibase-description-edit-placeholder' => 'insira uma descrição',
-	'wikibase-move-error' => 'Você não pode mover páginas que estão no domínio de dados, além disso, você não pode mover páginas para dentro de tal domínio.',
 	'wikibase-sitelink-site-edit-placeholder' => 'especifique o site',
 	'wikibase-sitelink-page-edit-placeholder' => 'especifique a página',
 	'wikibase-label-input-help-message' => 'Insira o título deste conjunto de dados em $1.',
@@ -1455,6 +1443,7 @@ $messages['pt-br'] = array(
 	'wikibase-error-remove-timeout' => 'Nós estamos tendo dificuldades técnicas e, por isso, sua ação de "remover" pode não ter sido completada.',
 	'wikibase-error-autocomplete-connection' => 'Não foi possível consultar a API da Wikipédia. Por favor, tente novamente mais tarde.',
 	'wikibase-error-autocomplete-response' => 'O servidor respondeu: $1',
+	'wikibase-move-error' => 'Você não pode mover páginas que estão no domínio de dados, além disso, você não pode mover páginas para dentro de tal domínio.',
 	'wikibase-setting-languages' => 'Idiomas adicionais<br />(como alternativa ao exibir dados não disponíveis em seu idioma principal)',
 	'special-itembytitle' => 'Item por título',
 	'special-itembylabel' => 'Item por rótulo',
@@ -1484,7 +1473,6 @@ $messages['pt-br'] = array(
 	'wikibase-api-label-not-found' => 'Não foi possível localizar um rótulo prévio para este item nesse idioma.',
 	'wikibase-api-description-not-found' => 'Não foi possível localizar uma descrição prévia para este item nesse idioma.',
 	'wikibase-api-wrong-class' => 'O conteúdo da página encontrada não é do tipo correto.',
-	'content-model-wikibase-item' => 'Item do Wikibase',
 );
 
 /** Russian (русский)
