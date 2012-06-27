@@ -10,7 +10,6 @@ namespace STTLanguage;
  * Source code:    https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
  *
  * TODO:
- * - implement actual language selector
  * - make language stick somehow
  *
  * @file StickToThatLanguage.php
@@ -41,7 +40,11 @@ $wgAutoloadClasses['STTLanguage\Hooks']   = Ext::getDir() . '/StickToThatLanguag
 // hooks registration:
 $wgHooks['GetPreferences'][]                   = 'STTLanguage\Hooks::onGetPreferences';
 $wgHooks['UserGetDefaultOptions'][]            = 'STTLanguage\Hooks::onUserGetDefaultOptions';
+$wgHooks['SkinTemplateOutputPageBeforeExec'][] = 'STTLanguage\Hooks::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['UnitTestsList'][]                    = 'STTLanguage\Hooks::registerUnitTests';
+
+// Include settings:
+require_once Ext::getDir() . '/StickToThatLanguage.settings.php';
 
 
 /**
