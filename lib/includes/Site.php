@@ -61,6 +61,15 @@ interface Site extends \IORMRow {
 	public function getUrl();
 
 	/**
+	 * Returns language code of the sites primary language.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getLanguage();
+
+	/**
 	 * Returns the full page path (ie site url + relative page path).
 	 * The page title should go at the $1 marker. If the $pageName
 	 * argument is provided, the marker will be replaced by it's value.

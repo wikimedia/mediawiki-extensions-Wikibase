@@ -171,4 +171,15 @@ class SiteRow extends \ORMRow implements Site {
 		return $this->getField( 'data' );
 	}
 
+	/**
+	 * @see Site::getLanguage()
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getLanguage() {
+		return $this->getField( 'language' );
+	}
+
 }

@@ -47,19 +47,19 @@ class SiteRowTest extends ORMRowTest {
 	 */
 	public function constructorTestProvider() {
 		$rows = array(
-			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1' ),
-			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1', SITE_TYPE_MEDIAWIKI ),
+			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1', 'en' ),
+			array( 'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org', '/wiki/$1', 'en', SITE_TYPE_MEDIAWIKI ),
 			array(
 				'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org',
-				'/wiki/$1', SITE_TYPE_MEDIAWIKI, '/w/'
+				'/wiki/$1', 'en', SITE_TYPE_MEDIAWIKI, '/w/'
 			),
 			array(
 				'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org',
-				'/wiki/$1', SITE_TYPE_MEDIAWIKI, '/w/', array()
+				'/wiki/$1', 'en', SITE_TYPE_MEDIAWIKI, '/w/', array()
 			),
 			array(
 				'en', SITE_GROUP_WIKIPEDIA, 'https://en.wikipedia.org',
-				'/wiki/$1', SITE_TYPE_MEDIAWIKI, '/w/', array( 'foo' => 'bar', 'baz' => 42 )
+				'/wiki/$1', 'en', SITE_TYPE_MEDIAWIKI, '/w/', array( 'foo' => 'bar', 'baz' => 42 )
 			),
 		);
 
@@ -69,18 +69,19 @@ class SiteRowTest extends ORMRowTest {
 				'group' => $args[1],
 				'url' => $args[2],
 				'page_path' => $args[3],
+				'language' => $args[4],
 			);
 
-			if ( array_key_exists( 4, $args ) ) {
-				$fields['type'] = $args[4];
-			}
-
 			if ( array_key_exists( 5, $args ) ) {
-				$fields['file_path'] = $args[5];
+				$fields['type'] = $args[5];
 			}
 
 			if ( array_key_exists( 6, $args ) ) {
-				$fields['data'] = $args[6];
+				$fields['file_path'] = $args[6];
+			}
+
+			if ( array_key_exists( 7, $args ) ) {
+				$fields['data'] = $args[7];
 			}
 
 			$args = array( $fields, true );
@@ -100,6 +101,7 @@ class SiteRowTest extends ORMRowTest {
 			'getGroup',
 			'getUrl',
 			'getRelativePagePath',
+			'getLanguage',
 		);
 
 		if ( array_key_exists( 'type', $fields ) ) {
@@ -141,12 +143,11 @@ class SiteRowTest extends ORMRowTest {
 	public function testGetPath( $url, $filePath, $pathArgument, $expected ) {
 		$site = \Wikibase\SitesTable::singleton()->newFromArray( array(
 			'global_key' => 'en',
-			'group' => 'wikipedia',
 			'url' => $url,
-			'type' => SITE_TYPE_UNKNOWN,
 			'file_path' => $filePath,
 			'page_path' => '',
-		) );
+			'language' => 'en',
+		), true );
 		$this->assertEquals( $expected, $site->getFilePath( $pathArgument ) );
 	}
 
@@ -168,12 +169,11 @@ class SiteRowTest extends ORMRowTest {
 	public function testGetPagePath( $url, $urlPath, $pageName, $expected ) {
 		$site = \Wikibase\SitesTable::singleton()->newFromArray( array(
 			'global_key' => 'en',
-			'group' => 'wikipedia',
 			'url' => $url,
-			'type' => SITE_TYPE_UNKNOWN,
 			'file_path' => '',
 			'page_path' => $urlPath,
-		) );
+			'language' => 'en',
+		), true );
 
 		$this->assertEquals( $expected, $site->getPagePath( $pageName ) );
 	}
