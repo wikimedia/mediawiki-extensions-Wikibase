@@ -100,7 +100,7 @@ class ItemViewTest extends \MediaWikiTestCase {
     		array(
     			array(
     				'links'=> array(
-						'en' => 'Oslo',
+						'enwiki' => 'Oslo',
     				)
     			),
     			array(
@@ -112,8 +112,8 @@ class ItemViewTest extends \MediaWikiTestCase {
     		array(
     			array(
     				'links'=> array(
-						'de' => 'Stockholm',
-						'en' => 'Oslo',
+						'dewiki' => 'Stockholm',
+						'enwiki' => 'Oslo',
     				)
     			),
     			array(
@@ -133,8 +133,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 						)
 					),
     				'links'=> array(
-						'site' => 'en',
-						'title' => 'Oslo'
+						'enwiki' => 'Oslo',
 					),
     			),
     			array(
