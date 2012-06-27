@@ -131,7 +131,7 @@ class ItemView extends \ContextSource {
 						'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $languageCode
 					),
 					// TODO: get an actual site name rather then just the language
-					\Language::fetchLanguageName( $languageCode ) . ' (' . $languageCode . ')'
+					Utils::fetchLanguageName( $languageCode ) . ' (' . $languageCode . ')'
 				);
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
 				$html .= Html::element(
@@ -239,13 +239,13 @@ class ItemView extends \ContextSource {
 
 		// hand over the itemId to JS
 		$out->addJsConfigVars( 'wbItemId', $item->getId() );
-		$out->addJsConfigVars( 'wbDataLangName', Language::fetchLanguageName( $langCode ) );
+		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
 
 		foreach ( Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA ) as  /** @var \Wikibase\Site $site */ $site ) {
-			$languageName = \Language::fetchLanguageName( $site->getLanguage() );
+			$languageName = Utils::fetchLanguageName( $site->getLanguage() );
 
 			$sites[$site->getLanguage()] = array(
 				'shortName' => $languageName,
