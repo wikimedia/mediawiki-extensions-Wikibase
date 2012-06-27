@@ -24,3 +24,12 @@
  * @var bool
  */
 $egSTTLanguageDisplaySelector = true;
+
+/**
+ * preferred languages (displayed on top) for the language switcher for non-logged-in users. Logged-
+ * in users can choose their preferred languages, these will be used instead.
+ * By default this is set to the busiest languages on Wikipedia.
+ *
+ * NOTE: These languages are not used as defaults for the preferred languages user option.
+ */
+$egSTTLanguageTopLanguages = array( 'en', 'de', 'fr', 'nl', 'it', 'pl', 'es', 'ru', 'ja', 'pt' );
