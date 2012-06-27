@@ -178,7 +178,6 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
-			'allow_transclusion' => false,
 		) )->save();
 
 		$sitesTable->newFromArray( array(
@@ -192,7 +191,6 @@ final class Utils {
 			'link_inline' => true,
 			'link_navigation' => true,
 			'forward' => true,
-			'allow_transclusion' => false,
 		) )->save();
 
 		$sitesTable->newFromArray( array(
