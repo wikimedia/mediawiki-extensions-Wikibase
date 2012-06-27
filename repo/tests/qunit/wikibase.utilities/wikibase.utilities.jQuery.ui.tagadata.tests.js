@@ -14,7 +14,9 @@
 ( function() {
 	module( 'wikibase.utilities.jQuery.ui.tagadata', window.QUnit.newWbEnvironment( {
 		setup: function() {
-			this.subject = $( '<ul><li>A</li><li><!--empty tag--></li><li>B</li><li>C</li></ul>' );
+			/* need to append the element to the DOM since jQuery's removeClass() within tagadata's destroy function
+			 would cause a Firefox exclusive error */
+			this.subject = $( '<ul><li>A</li><li><!--empty tag--></li><li>B</li><li>C</li></ul>' ).appendTo( 'body' );
 
 			this.$getWidget = function() {
 				return this.subject.data( 'tagadata' );
@@ -23,6 +25,7 @@
 
 		teardown: function() {
 			this.$getWidget().destroy();
+			this.subject.remove();
 		}
 	} ) );
 
