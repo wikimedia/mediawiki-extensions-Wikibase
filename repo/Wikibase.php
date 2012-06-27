@@ -174,6 +174,8 @@ $wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 //$wgExtraNamespaces[WB_NS_DATA] = 'Query';
 //$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
 
+$wgNamespacesToBeSearchedDefault[] = WB_NS_DATA;
+
 $wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
 
 unset( $dir );

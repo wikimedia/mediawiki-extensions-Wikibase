@@ -652,10 +652,21 @@ class Item extends Entity {
 
 	/**
 	 * @return String a string representing the content in a way useful for building a full text search index.
-	 *		 If no useful representation exists, this method returns an empty string.
 	 */
 	public function getTextForSearchIndex() {
-		return ''; #TODO: recursively collect all values from all properties.
+		$text = "";
+
+		foreach ( $this->getLabels() as $lang => $label ) {
+			$text .= $label . "\n";
+		}
+
+		foreach ( $this->getAllAliases() as $lang => $aliases ) {
+			foreach ( $aliases as $alias ) {
+				$text .= $alias . "\n";
+			}
+		}
+
+		return $text;
 	}
 
 	/**
