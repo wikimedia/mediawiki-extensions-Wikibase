@@ -44,7 +44,7 @@ final class Utils {
 	 *
 	 * @return string
 	 */
-	public function fetchLanguageName( $languageCode ) {
+	public static function fetchLanguageName( $languageCode ) {
 		$languageName = \Language::fetchLanguageName( str_replace( '_', '-', $languageCode ) );
 		if ( $languageName == '' ) {
 			$languageName = $languageCode;
