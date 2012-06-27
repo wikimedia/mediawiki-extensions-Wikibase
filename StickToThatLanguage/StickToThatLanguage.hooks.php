@@ -65,4 +65,43 @@ final class Hooks {
 
 		return true;
 	}
+
+	/**
+	 * Used to build the global language selector if activated
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateOutputPageBeforeExec
+	 *
+	 * @param SkinTemplate $sk
+	 * @param QuickTemplate $tpl
+	 * @return bool
+	 */
+	public static function onSkinTemplateOutputPageBeforeExec( \SkinTemplate &$sk, \QuickTemplate &$tpl ) {
+		global $egSTTLanguageDisplaySelector;
+		if( ! $egSTTLanguageDisplaySelector ) {
+			return true; // option for disabling the selector is active
+		}
+
+		// Title of our item:
+		$title = $sk->getOutput()->getTitle();
+
+		foreach( \Language::fetchLanguageNames() as $code => $name ) {
+			if( $code === $sk->getLanguage()->getCode() ) {
+				continue; // don't add language the page is displayed in
+			}
+
+			// build information for the skin to generate links for all languages:
+			$language_urls[] = array(
+				'href' => $title->getFullURL( array( 'uselang' => $code ) ),
+				'text' => $name,
+				'title' => $title->getText(),
+				'class' => "sttl-lang-$code", // site-links use 'interwiki-' which seems inappropriate in this case
+				'lang' => $code,
+				'hreflang' => $code,
+			);
+		}
+
+		// define these languages as languages for the sitebar within the skin:
+		$tpl->setRef( 'language_urls', $language_urls );
+
+		return true;
+	}
 }
