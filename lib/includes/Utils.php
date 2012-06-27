@@ -89,22 +89,6 @@ final class Utils {
 	}
 
 	/**
-	 * Strips off the "wiki" part of the global site id
-	 * to get the language code
-	 *
-	 * TODO: this is just a tempory solution to get the sitelinks working again
-	 * and this will obviously only work for global site ids with the
-	 * postfix "wiki", not for e.g. "wiktionary"
-	 *
-	 * @since 0.1
-	 *
-	 * @return String
-	 */
-	public static function getLanguageCodeFromGlobalSiteId( $id ) {
-		return preg_replace( "/wiki/", '', $id );
-	}
-
-	/**
 	 * Inserts sites into the database for the unit tests that need them.
 	 *
 	 * @since 0.1
