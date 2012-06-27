@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAO3///4E\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-27T12:14:04Z",
+      "side": 1,
+      "message": "This should probably use siteid\u0027s already in the call, but then the csv-file and the script that generate that file should also be updated. Anyhow, this works for now.",
+      "revId": "9a6a6b13c6943d30243280134bacf3e2304be884",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAO3///4A\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-27T12:14:04Z",
+      "side": 1,
+      "message": "Test for verbose output?",
+      "revId": "9a6a6b13c6943d30243280134bacf3e2304be884",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAO3///38\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-27T12:14:04Z",
+      "side": 1,
+      "message": "Test for verbose output?",
+      "revId": "9a6a6b13c6943d30243280134bacf3e2304be884",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAO3///30\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-27T12:14:04Z",
+      "side": 1,
+      "message": "This should probably use siteid\u0027s already in the call, but then the csv-file and the script that generate that file should also be updated. Anyhow, this works for now.",
+      "revId": "9a6a6b13c6943d30243280134bacf3e2304be884",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAO3///34\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-27T12:14:04Z",
+      "side": 1,
+      "message": "Test for verbose output?",
+      "revId": "9a6a6b13c6943d30243280134bacf3e2304be884",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
