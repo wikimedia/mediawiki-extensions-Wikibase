@@ -41,7 +41,18 @@ $wgAutoloadClasses['STTLanguage\Hooks']   = Ext::getDir() . '/StickToThatLanguag
 $wgHooks['GetPreferences'][]                   = 'STTLanguage\Hooks::onGetPreferences';
 $wgHooks['UserGetDefaultOptions'][]            = 'STTLanguage\Hooks::onUserGetDefaultOptions';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = 'STTLanguage\Hooks::onSkinTemplateOutputPageBeforeExec';
+$wgHooks['BeforePageDisplay'][]                = 'STTLanguage\Hooks::onBeforePageDisplay';
 $wgHooks['UnitTestsList'][]                    = 'STTLanguage\Hooks::registerUnitTests';
+
+// Resource Loader Module:
+$wgResourceModules['sticktothatlanguage'] = array(
+	'localBasePath' => Ext::getDir(),
+	'remoteBasePath' => Ext::getScriptPath(),
+	'group' => 'sticktothatlanguage',
+	'styles' => array(
+		'resources/StickToThatLanguage.css'
+	),
+);
 
 // Include settings:
 require_once Ext::getDir() . '/StickToThatLanguage.settings.php';
@@ -77,6 +88,30 @@ class Ext {
 			$dir = dirname( __FILE__ );
 		}
 		return $dir;
+	}
+
+	/**
+	 * Get the extensions installation directory path as seen from the web.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public static function getScriptPath() {
+		static $path = null;
+		if( $path === null ) {
+			global $wgVersion, $wgScriptPath, $wgExtensionAssetsPath;
+
+			$dir = str_replace( '\\', '/', self::getDir() );
+			$dirName = substr( $dir, strrpos( $dir, '/' ) + 1 );
+
+			$path = (
+			( version_compare( $wgVersion, '1.16', '>=' ) && isset( $wgExtensionAssetsPath ) && $wgExtensionAssetsPath )
+				? $wgExtensionAssetsPath
+				: $wgScriptPath . '/extensions'
+			) . "/Wikibase/$dirName"; // FIXME: has to be adjusted as soon as extension moves!
+		}
+		return $path;
 	}
 
 	/**
