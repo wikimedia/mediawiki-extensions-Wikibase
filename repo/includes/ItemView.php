@@ -62,7 +62,7 @@ class ItemView extends \ContextSource {
 		$description = $item->getDescription( $lang->getCode() );
 		$aliases = $item->getAliases( $lang->getCode() );
 		$siteLinks = $item->getSiteLinks();
-
+		
 		// even if description is false, we want it in any case!
 		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
 		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
@@ -106,26 +106,17 @@ class ItemView extends \ContextSource {
 			$html .= Html::closeElement( 'thead' );
 
 			$i = 0;
-
-			// Batch load the sites we need info about during the building of the sitelink list.
-			Sites::singleton()->loadSites( array( 'global_key' => array_keys( $siteLinks ) ) );
-
 			foreach( $siteLinks as $siteId => $title ) {
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
-
-				$languageCode = Sites::singleton()->getSiteByGlobalId( $siteId )->getLanguage();
-
+				$languageCode = Utils::getLanguageCodeFromGlobalSiteId( $siteId );
 				$html .= Html::openElement( 'tr', array(
-						'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
+					'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
 				);
 
 				$html .= Html::element(
-					'td',
-					array(
-						'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $languageCode
-					),
-					// TODO: get an actual site name rather then just the language
-					\Language::fetchLanguageName( $languageCode ) . ' (' . $languageCode . ')'
+						'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $languageCode ),
+						// TODO get the site name instead of pretending the ID is a lang code and the sites name a language!
+						\Language::fetchLanguageName( preg_replace( "/_/", "-", $languageCode ) ) . ' (' . $languageCode . ')'
 				);
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
 				$html .= Html::element(
@@ -239,9 +230,10 @@ class ItemView extends \ContextSource {
 		$sites = array();
 
 		foreach ( Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA ) as  /** @var \Wikibase\Site $site */ $site ) {
-			$languageName = \Language::fetchLanguageName( $site->getLanguage() );
+			$languageCode = Utils::getLanguageCodeFromGlobalSiteId(  $site->getGlobalId() );
+			$languageName = \Language::fetchLanguageName( preg_replace( "/_/", "-", $languageCode ) );
 
-			$sites[$site->getLanguage()] = array(
+			$sites[$languageCode] = array(
 				'shortName' => $languageName,
 				'name' => $languageName,
 				'globalSiteId' => $site->getGlobalId(),
