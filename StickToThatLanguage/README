@@ -1,0 +1,18 @@
+== About ==
+
+The 'Stick to That Language' extension for MediaWiki will allow to choose an
+interface language (via the 'uselang' url parameter) which will then be
+
+* Website: https://www.mediawiki.org/wiki/Extension:Stick_to_That_Language
+* Authors: Daniel Werner < daniel.werner@wikimedia.de >
+* License: GNU GPL v2+
+
+
+== Installation ==
+
+Once you have downloaded the code, place the 'StickToThatLanguage' directory within your
+MediaWiki 'extensions' directory. Then add the following code to your
+[[Manual:LocalSettings.php|LocalSettings.php]] file:
+
+ # Stick to That Language
+ require_once( "$IP/extensions/StickToThatLanguage/StickToThatLanguage.php" );
