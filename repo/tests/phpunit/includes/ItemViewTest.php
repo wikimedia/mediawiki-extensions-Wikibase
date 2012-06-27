@@ -28,6 +28,7 @@ use Wikibase\ItemView as ItemView;
  *
  * @group Wikibase
  * @group WikibaseItemView
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
@@ -42,7 +43,7 @@ use Wikibase\ItemView as ItemView;
  * @group medium
  */
 class ItemViewTest extends \MediaWikiTestCase {
-	
+
 	protected static $num = -1;
 
 	/**
@@ -51,97 +52,97 @@ class ItemViewTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 	}
-	
+
 	/**
 	 * @group WikibaseUtils
 	 * @dataProvider providerGetHTML
 	 */
 	public function testGetHTML( $itemData, $expected) {
-    	self::$num++;
-    	
-    	$item = $itemData === false ? Item::newEmpty() : Item::newFromArray( $itemData );
+		self::$num++;
 
-    	$item->setLabel('de', 'Stockholm');
-        $this->assertTrue(
-        	$item != null && $item !== false,
-        	"Could not find an item" );
+		$item = $itemData === false ? Item::newEmpty() : Item::newFromArray( $itemData );
+
+		$item->setLabel('de', 'Stockholm');
+		$this->assertTrue(
+			$item != null && $item !== false,
+			"Could not find an item" );
 
 		$view = new ItemView( );
-        $this->assertTrue(
-        	$view != null && $view !== false,
-        	"Could not find a view" );
-        
-        $html = $view->getHTML( $item );
-        
-        if ( is_string($expected) ) {
-	        $this->assertRegExp(
-	        	$expected,
-	        	$html,
-	        	"Could not find the marker '{$expected}'" );
-        }
-        else {
-        	foreach ($expected as $that) {
-	        $this->assertRegExp(
-	        	$that,
-	        	$html,
-	        	"Could not find the marker '{$that}'" );
-        		
-        	}
-        }
-        
-    }
-    
-    public function providerGetHTML() {
-    	return array(
-    		array(
-    			false,
-    			'/"wb-sitelinks-empty"/'
-    		),
-    		array(
-    			array(
-    				'links'=> array(
+		$this->assertTrue(
+			$view != null && $view !== false,
+			"Could not find a view" );
+
+		$html = $view->getHTML( $item );
+
+		if ( is_string($expected) ) {
+			$this->assertRegExp(
+				$expected,
+				$html,
+				"Could not find the marker '{$expected}'" );
+		}
+		else {
+			foreach ($expected as $that) {
+			$this->assertRegExp(
+				$that,
+				$html,
+				"Could not find the marker '{$that}'" );
+
+			}
+		}
+
+	}
+
+	public function providerGetHTML() {
+		return array(
+			array(
+				false,
+				'/"wb-sitelinks-empty"/'
+			),
+			array(
+				array(
+					'links'=> array(
 						'enwiki' => 'Oslo',
-    				)
-    			),
-    			array(
-    				'/"wb-sitelinks"/',
-    				'/"wb-sitelinks-en uneven"/',
-    			//	'/<a>\s*Oslo\s*<\/a>/'
-    			)
-    		),
-    		array(
-    			array(
-    				'links'=> array(
+					)
+				),
+				array(
+					'/"wb-sitelinks"/',
+					'/"wb-sitelinks-en uneven"/',
+				//	'/<a>\s*Oslo\s*<\/a>/'
+				)
+			),
+			array(
+				array(
+					'links'=> array(
 						'dewiki' => 'Stockholm',
 						'enwiki' => 'Oslo',
-    				)
-    			),
-    			array(
-    				'/"wb-sitelinks"/',
-    				'/"wb-sitelinks-de uneven"/',
-    				'/"wb-sitelinks-en even"/',
-    			//	'/<a>\s*Oslo\s*<\/a>/',
-    			//	'/<a>\s*Stockholm\s*<\/a>/'
-    			)
-    		),
-    		array(
-    			array(
-    				'description'=> array(
+					)
+				),
+				array(
+					'/"wb-sitelinks"/',
+					'/"wb-sitelinks-de uneven"/',
+					'/"wb-sitelinks-en even"/',
+				//	'/<a>\s*Oslo\s*<\/a>/',
+				//	'/<a>\s*Stockholm\s*<\/a>/'
+				)
+			),
+			array(
+				array(
+					'description'=> array(
 						'en' => array(
 							'language' => 'en',
 							'value' => 'Capitol of Norway'
 						)
 					),
-    				'links'=> array(
+					'links'=> array(
 						'enwiki' => 'Oslo',
 					),
-    			),
-    			array(
-    				'/"wb-sitelinks"/',
-    				'/<span class="wb-property-container-value">\s*Capitol of Norway\s*<\/span>/',
-    			//	'/<a>\s*Oslo\s*<\/a>/'
-    			)
-    		),
-    	);
-    }
+				),
+				array(
+					'/"wb-sitelinks"/',
+					'/<span class="wb-property-container-value">\s*Capitol of Norway\s*<\/span>/',
+				//	'/<a>\s*Oslo\s*<\/a>/'
+				)
+			),
+		);
+	}
 }
