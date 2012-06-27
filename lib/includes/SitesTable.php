@@ -113,7 +113,6 @@ class SitesTable extends \ORMTable {
 	 * @param boolean $loadDefaults
 	 *
 	 * @return Change
-	 * @throws \MWException
 	 */
 	public function newFromArray( array $data, $loadDefaults = false ) {
 		if ( !array_key_exists( 'type', $data ) ) {
