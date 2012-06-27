@@ -130,6 +130,47 @@ describe "Check functionality of add/edit/remove sitelinks" do
     end
   end
 
+  context "Check for displaying normalized title when adding sitelink" do
+    it "should check if the normalized version of the title is displayed" do
+      on_page(SitelinksItemPage)
+      @current_page.navigate_to_item
+      @current_page.wait_for_sitelinks_to_load
+      @current_page.addSitelinkLink
+      @current_page.siteIdInputField = "sr"
+      ajax_wait
+      @current_page.wait_until do
+        @current_page.siteIdAutocompleteList_element.visible?
+      end
+      @current_page.siteIdInputField_element.send_keys :arrow_down
+
+      @current_page.siteIdAutocompleteList_element.visible?.should be_true
+      aCListElement = @current_page.getNthElementInAutocompleteList(@current_page.siteIdAutocompleteList_element, 1)
+      aCListElement.visible?.should be_true
+      aCListElement.click
+
+      @current_page.pageInputField_element.enabled?.should be_true
+      @current_page.pageInputField = "s"
+      ajax_wait
+      @current_page.wait_until do
+        @current_page.pageAutocompleteList_element.visible?
+      end
+
+      if @current_page.saveSitelinkLink?
+        @current_page.saveSitelinkLink
+      end
+      ajax_wait
+      @current_page.wait_for_api_callback
+      sleep 1 #cause there's a delay before the value is actually set in the dom -> should be changed in the UI
+      @current_page.pageArticleNormalized?.should be_true
+      @current_page.pageArticleNormalized_element.text.should == "\u0421"
+
+      @browser.refresh
+      @current_page.wait_for_sitelinks_to_load
+      @current_page.pageArticleNormalized_element.text.should == "\u0421"
+      @current_page.pageArticleNormalized?.should be_true
+    end
+  end
+
   context "Check for editing site links UI" do
     it "should check if editing sitelinks works" do
       on_page(SitelinksItemPage)

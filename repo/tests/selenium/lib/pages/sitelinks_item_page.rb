@@ -26,6 +26,8 @@ class SitelinksItemPage < NewItemPage
   link(:cancelSitelinkLink, :text => "cancel")
   link(:removeSitelinkLink, :text => "remove")
   link(:editSitelinkLink, :text => "edit", :index => 3)
+  link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
+  #link(:pageArticleNormalized, :text => 'C')
   
   def getNumberOfSitelinksFromCounter
     wait_until do
