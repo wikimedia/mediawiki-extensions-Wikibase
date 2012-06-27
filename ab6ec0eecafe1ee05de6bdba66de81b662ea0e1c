@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAO3///mk\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-27T18:36:46Z",
+      "side": 1,
+      "message": "Calling a static method as instance method",
+      "revId": "ab6ec0eecafe1ee05de6bdba66de81b662ea0e1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAO3///mg\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-27T18:36:46Z",
+      "side": 1,
+      "message": "This method name does not make sense to me\n\n* \"default\" seems wrong\n* \"target\" seems not to add any info\n\nWhat about \"getSitesInfo\"?",
+      "revId": "ab6ec0eecafe1ee05de6bdba66de81b662ea0e1c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
