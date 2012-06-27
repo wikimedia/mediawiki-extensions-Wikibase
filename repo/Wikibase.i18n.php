@@ -60,8 +60,6 @@ $messages['en'] = array(
 	'wikibase-error-autocomplete-response' => 'Server responded: $1',
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
-	'wikibase-setting-languages' => 'Additional languages<br />(as fallback when displaying data not available in the main language)',
-
 	// Special pages
 	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
@@ -176,7 +174,6 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-autocomplete-connection' => 'Error message for page auto-complete input box; displayed when API could not be reached.',
 	'wikibase-error-autocomplete-response' => 'When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).',
 	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|pagfe]] and [[m:Wikidata/Glossary#item|item]].',
-	'wikibase-setting-languages' => 'Label for the user settings where the user can choose several languages he is interested in editing data for or which are interesting as a fallback when displaying data not available in the users main language',
 	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 	'special-createitem' => 'Title of the special page for creating new items.',

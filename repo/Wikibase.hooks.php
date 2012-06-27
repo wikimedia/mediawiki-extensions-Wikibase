@@ -210,49 +210,6 @@ final class WikibaseHooks {
 	}
 
 	/**
-	 * Allows to add user preferences.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/GetPreferences
-	 *
-	 * NOTE: Might make sense to put the inner functionality into a well structured Preferences file once this
-	 *       becomes more.
-	 *
-	 * @since 0.1
-	 *
-	 * @param User $user
-	 * @param array &$preferences
-	 *
-	 * @return bool
-	 */
-	public static function onGetPreferences( User $user, array &$preferences ) {
-		$preferences['wb-languages'] = array(
-			'type' => 'multiselect',
-			'usecheckboxes' => false,
-			'label-message' => 'wikibase-setting-languages',
-			'options' => $preferences['language']['options'], // all languages available in 'language' selector
-			'section' => 'personal/i18n',
-			'prefix' => 'wb-languages-',
-		);
-
-		return true;
-	}
-
-	/**
-	 * Called after fetching the core default user options.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UserGetDefaultOptions
-	 *
-	 * @param array &$defaultOptions
-	 *
-	 * @return bool
-	 */
-	public static function onUserGetDefaultOptions( array &$defaultOptions ) {
-		// pre-select default language in the list of fallback languages
-		$defaultLang = $defaultOptions['language'];
-		$defaultOptions[ 'wb-languages-' . $defaultLang ] = 1;
-
-		return true;
-	}
-
-	/**
 	 * Adds default settings.
 	 * Setting name (string) => setting value (mixed)
 	 *
