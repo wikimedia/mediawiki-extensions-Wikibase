@@ -109,7 +109,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 */
 	public function offsetSet( $index, $site ) {
 		if ( !$site instanceof Site ) {
-			throw new MWException( 'Can only add Site implementing objects to SiteList.' );
+			throw new \MWException( 'Can only add Site implementing objects to SiteList.' );
 		}
 
 		if ( $this->hasGlobalId( $site->getGlobalId() ) ) {
