@@ -70,7 +70,8 @@ class importInterlang extends Maintenance {
   protected function createItem( $lang, $link ) {
     $link = self::niceLink( $link );
 
-    $api_response = $this->callAPI( $this->api . "?action=wbgetitemid&format=php&site=" . urlencode( $lang ) . "&title=" . urlencode( $link ) );
+    $api_response = $this->callAPI( $this->api . "?action=wbgetitemid&format=php&site=" . urlencode( $lang ) . "wiki" . "&title=" . urlencode( $link ) );
+    print_r ( $api_response );
     if( isset( $api_response['error'] ) ) {
       if( $api_response['error']['code'] !== 'no-such-item' ) {
         throw new importInterlangException( $api_response['error']['info'] );
@@ -87,6 +88,7 @@ class importInterlang extends Maintenance {
 
     // We only reach this if we have received an error, and the error was no-such-item
     $api_response = $this->callAPI( $this->api . "?action=wbsetitem&data=%7B%7D&format=php" );
+    print_r ( $api_response );
     if( isset( $api_response['error'] ) ) {
       throw new importInterlangException( $api_response['error']['info'] );
     }
@@ -112,7 +114,8 @@ class importInterlang extends Maintenance {
     $link = self::niceLink( $link );
     $label = self::makeLabel( $link );
 
-    $api_response = $this->callAPI( $this->api . "?action=wblinksite&format=php&link=add&id=" . urlencode( $id )  . "&linksite=" . urlencode( $lang ) . "&linktitle=" . urlencode( $link ) );
+    $api_response = $this->callAPI( $this->api . "?action=wblinksite&format=php&link=set&id=" . urlencode( $id )  . "&linksite=" . urlencode( $lang ) . "wiki" . "&linktitle=" . urlencode( $link ) );
+    print_r ( $api_response );
     if( isset( $api_response['error'] ) ) {
       throw new importInterlangException( $api_response['error']['info'] );
     }
