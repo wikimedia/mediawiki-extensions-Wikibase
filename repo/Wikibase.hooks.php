@@ -295,7 +295,7 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function onPageTabs( SkinTemplate &$sktemplate, array &$links ) {
-		if ( $sktemplate->getTitle()->inNamespaces( WB_NS_DATA, WB_NS_DATA_TALK ) ) {
+		if ( in_array( $sktemplate->getTitle()->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) ) ) {
 			unset( $links['views']['edit'] );
 		}
 
