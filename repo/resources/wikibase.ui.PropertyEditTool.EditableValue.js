@@ -12,9 +12,6 @@
  *
  * Events:
  * -------
- * TODO untangle afterSaveComplete and afterStopEditing
- * afterSaveComplete: Triggered after saving a valid item and cancelling
- *                    Parameters: (1) jQuery.event
  * afterStopEditing: Triggered after having left edit mode
  *                   Parameters: (1) jQuery.event
  *                               (2) bool - save - whether save action was triggered
@@ -58,7 +55,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		 * A save action which will trigger a remove, the actual difference to a real remove is how this action is
 		 * handled in the interface
 		 */
-		SAVE_TO_REMOVE: 3
+		SAVE_TO_REMOVE: 3,
+		/**
+		 * Action for information purpose only. Is only used by the jQuery.Promise returned by stopEditing().
+		 * This has not to be used as an actual API action.
+		 */
+		NONE: false
 	},
 
 	/**
@@ -249,10 +251,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			var action = this.preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
 
 			// store deferred so we can return it when this is called again while still running
-			// NOTE: can't store deferred in this.__isRemoving because .always() might be called even before return!
-			return this.performApiAction( action )
+			var promise = this.performApiAction( action )
 				.then( degrade )
 				.promise();
+
+			return promise;
 		}
 	} ),
 
@@ -261,26 +264,30 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * remove instead but will preserve the form to insert a new value.
 	 *
 	 * @return jQuery.Promise
+	 * @see $.PersistentPromisor()
 	 */
-	save: function() {
-		if( arguments.length > 0 ) {
-			alert( "TAKE A LOOK AT EditableValue.save() again!" );
-		}
-		if( ! this.isValid() ) {
-			// remove instead! Save equals remove in this case!
-			return this.remove( true );
-		}
+	save: $.PersistentPromisor( function() {
+		var promise = null;
 
-		return this.performApiAction( this.API_ACTION.SAVE ) // returns deferred
-		.then( $.proxy( function( response ) {
+		if( ! this.isValid() ) { // remove instead! Save equals remove in this case!
+			promise = this.remove().promise();
+			promise.promisor = promise.promisor || {};
+			promise.promisor.apiAction = this.API_ACTION.SAVE_TO_REMOVE;
+		} else {
 			var wasPending = this.isPending();
-			this._reTransform( true );
-			this._pending = false; // not pending anymore after saved once
-			this._subject.removeClass( 'wb-pending-value' );
-			$( this ).triggerHandler( 'afterStopEditing', [ true, wasPending ] );
-		}, this ) )
-		.promise();
-	},
+			var deferred = this.performApiAction( this.API_ACTION.SAVE ) // returns deferred
+			.then( $.proxy( function( response ) {
+				this._reTransform( true );
+				this._pending = false; // not pending anymore after saved once
+				this._subject.removeClass( 'wb-pending-value' );
+			}, this ) );
+			promise = deferred.promise();
+			promise.promisor = {};
+			promise.promisor.apiAction = this.API_ACTION.SAVE;
+			promise.promisor.wasPending = wasPending;
+		}
+		return promise;
+	} ),
 
 	/**
 	 * By calling this, the editable value will be made editable for the user.
@@ -308,51 +315,41 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Destroys the edit box and displays the original text or the inputs new value.
 	 *
 	 * @param bool save whether to save the new user given value
-	 * @return bool whether the value has changed (or was removed) in which case the changes are on their way to the API
+	 * @return jQuery.Promise
 	 */
-	stopEditing: function( save ) {
-		if( ! this.isInEditMode() || this.__isStopEditing ) {
-			return false;
+	stopEditing: $.PersistentPromisor( function( save ) {
+		// create promise which will ONLY be returned in case nothing is saved AND not pending
+		var promise = $.Deferred().resolve().promise();
+		promise.promisor = {};
+		promise.promisor.apiAction = this.API_ACTION.NONE;
+
+		if( !this.isInEditMode() ) {
+			return promise;
 		}
 
-		if( this.onStopEditing !== null && this.onStopEditing( save ) === false ) { // callback
-			return false; // cancel
-		}
-
-		if( ! save && this.isPending() ) {
-			// cancel pending edit...
+		if ( !save ) {
 			this._reTransform( false );
-			this.remove(); // not yet existing value, no state to go back to
-			return false; // do not trigger 'afterStopEditing' here!
+			if( this.isPending() ) { // cancel pending edit...
+				promise = this.remove(); // not yet existing value, no state to go back to -> do not trigger 'afterStopEditing' here!
+			} else { // cancel...
+				return promise;
+			}
+		} else {
+			promise = this.save(); // save... (will call all the API stuff)
 		}
 
-		if( ! save ) {
-			//cancel...
-			var wasPending = this._reTransform( false );
-			$( this ).triggerHandler( 'afterStopEditing', [ save, this.isPending() ] );
-			$( this ).triggerHandler( 'afterSaveComplete' );
-		}
-		else {
-			this.__isStopEditing = true; // don't go here twice as long as callback still running
+		var wasPending = ( typeof promise.promisor.wasPending !== 'undefined' )
+				? promise.promisor.wasPending
+				: this.isPending();
+		// store deferred so we can return it when this is called again while still running
+		return promise
+		.done(
+			$.proxy( function() {
+				$( this ).triggerHandler( 'afterStopEditing', [ save, wasPending ] );
+			}, this )
+		);
 
-			// save... (will call all the API stuff)
-			this.save()
-			.done(
-				$.proxy( function() {
-					if ( this.isValid() ) { // editable value will be removed if invalid
-						$( this ).triggerHandler( 'afterSaveComplete' );
-					} else {
-						$( this ).triggerHandler( 'afterStopEditing', [ save, this.isPending() ] );
-					}
-				}, this )
-			)
-			.always( $.proxy( function() {
-				this.__isStopEditing = false;
-			}, this ) );
-		}
-
-		return save;
-	},
+	} ),
 
 	/**
 	 * remove input elements from DOM
@@ -418,7 +415,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			waitMsg.fadeOut( 400, function() {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
 
-				if( apiAction !== self.API_ACTION.REMOVE ) {
+				if( apiAction === self.API_ACTION.SAVE ) {
 					var responseVal = self._getValueFromApiResponse( response.item );
 					if( responseVal !== null ) {
 						// set normalized value from response if supported by API module
@@ -450,7 +447,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}, this ) );
 		this._subject.addClass( this.UI_CLASS + '-waiting' );
 
-		return deferred.promise();
+		// add additional info to promise:
+		var promise = deferred.promise();
+		promise.promisor = {};
+		promise.promisor.apiAction = apiAction;
+
+		return promise;
 	},
 
 	/**
@@ -804,7 +806,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		                                // TODO/FIXME: not the nicest way of doing this!
 		this.stopEditing( false );
 		if( this._toolbar !== null) {
-			this._toolbar.destroy();
 			this._toolbar = null;
 		}
 		this._getToolbarParent().remove();
@@ -826,18 +827,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	///////////
 	// EVENTS:
 	///////////
-
-	/**
-	 * Callback called when the edit process is going to be ended. If the callback returns false, the
-	 * process will be cancelled.
-	 *
-	 * @param bool save whether the result should be saved. If false, the editing will be cancelled
-	 *        without saving.
-	 * @return bool whether to go on with the stop editing.
-	 *
-	 * @example function( save ) {return true}
-	 */
-	onStopEditing: null,
 
 	/**
 	 * Callback called after the element was removed
