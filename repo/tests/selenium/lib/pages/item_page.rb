@@ -9,7 +9,7 @@ require 'ruby_selenium'
 
 class ItemPage < RubySelenium
   include PageObject
-  
+
   # edit label UI
   h1(:firstHeading, :id => "firstHeading")
   div(:uiToolbar, :class => "wb-ui-toolbar")
@@ -32,9 +32,14 @@ class ItemPage < RubySelenium
   link(:saveDescriptionLink, :css => "div.wb-ui-descriptionedittool > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
 
   span(:apiCallWaitingMessage, :class => "wb-ui-propertyedittool-editablevalue-waitmsg")
-  
+
   # edit-tab
   list_item(:editTab, :id => "ca-edit")
+
+  # error tooltipps
+  div(:wbErrorDiv, :class => "wb-tooltip-error-top-message")
+  div(:wbErrorDetailsDiv, :class => "wb-tooltip-error-details")
+  link(:wbErrorDetailsLink, :class => "wb-tooltip-error-details-link")
 
   def wait_for_item_to_load
     wait_until do
@@ -50,5 +55,5 @@ class ItemPage < RubySelenium
       apiCallWaitingMessage? == false
     end
   end
-  
+
 end
