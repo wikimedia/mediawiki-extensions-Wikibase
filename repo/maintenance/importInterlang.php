@@ -32,6 +32,8 @@ class importInterlang extends Maintenance {
 	public function __construct() {
 		$this->mDescription = "Import interlanguage links in Wikidata.\n\nThe links may be created by extractInterlang.sql";
 
+		$this->addOption( 'skip', "Skip number of entries in the import file" );
+		$this->addOption( 'only', "Only import the specific entry from the import file" );
 		$this->addOption( 'verbose', "Print API requests and responses" );
 		$this->addOption( 'ignore-errors', "Ignore API errors" );
 		$this->addArg( 'lang', "Language code of the base wiki", true );
@@ -44,6 +46,8 @@ class importInterlang extends Maintenance {
 	public function execute() {
 		$this->verbose = (bool)$this->getOption( 'verbose' );
 		$this->ignore_errors = (bool)$this->getOption( 'ignore-errors' );
+		$this->skip = (int)$this->getOption( 'skip' );
+		$this->only = (int)$this->getOption( 'only' );
 		$lang = $this->getArg( 0 );
 		$filename = $this->getArg( 1 );
 		$this->api = $this->getArg( 2 );
@@ -51,14 +55,21 @@ class importInterlang extends Maintenance {
 		$file = fopen( $filename, "r" );
 		fgets( $file ); // We don't need the first line with column names.
 		$current = ""; $current_id = false;
+		$count = 0;
 		while( $link = fgetcsv( $file, 0, "\t" ) ) {
 			try {
 				if( $link[0] !== $current ) {
+					$count++;
 					$current = $link[0];
+					if ((isset($this->skip) && ( $this->skip > $count)) || (isset($this->only) && ($this->only !== $count))) {
+						continue;
+					}
 					$this->maybePrint( "New item: $current" );
 					$current_id = $this->createItem( $lang, $current );
 				}
-				$this->addLink( $link[1], $link[2], $current_id );
+				if ($current_id) {
+					$this->addLink( $link[1], $link[2], $current_id );
+				}
 			} catch( importInterlangException $e ) {
 				if( !$this->ignore_errors ) {
 					throw $e;
@@ -111,6 +122,7 @@ class importInterlang extends Maintenance {
 	}
 
 	protected function addLink( $lang, $link, $id ) {
+		print( "$lang: $link\n" );
 		// If a link is empty (which is a valid MediaWiki interlanguage link), fail silently.
 		if( $link === "" ) {
 			$this->maybePrint( "Skipping empty link." );
