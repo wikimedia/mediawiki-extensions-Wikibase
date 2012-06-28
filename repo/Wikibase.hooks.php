@@ -283,4 +283,23 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Alter the structured navigation links in SkinTemplates.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
+	 *
+	 * @since 0.1
+	 *
+	 * @param SkinTemplate $sktemplate
+	 * @param array $links
+	 *
+	 * @return boolean
+	 */
+	public static function onPageTabs( SkinTemplate &$sktemplate, array &$links ) {
+		if ( $sktemplate->getTitle()->inNamespaces( WB_NS_DATA, WB_NS_DATA_TALK ) ) {
+			unset( $links['views']['edit'] );
+		}
+
+		return true;
+	}
+
 }
