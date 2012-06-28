@@ -168,6 +168,15 @@ $messages['ja'] = array(
 	'wbc-editlinkstitle' => '言語間リンクを編集',
 );
 
+/** Korean (한국어)
+ * @author 아라
+ */
+$messages['ko'] = array(
+	'wbc-desc' => '위키베이스 확장 기능을 위한 클라이언트',
+	'wbc-editlinks' => '링크 편집',
+	'wbc-editlinkstitle' => '인터언어 링크 편집',
+);
+
 /** Colognian (Ripoarisch)
  * @author Purodha
  */

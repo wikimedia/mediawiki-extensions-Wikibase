@@ -95,6 +95,13 @@ $messages['it'] = array(
 	'wikibaselib-desc' => 'Contiene le funzionalità comuni per le estensioni Wikibase e Wikibase Client.',
 );
 
+/** Korean (한국어)
+ * @author 아라
+ */
+$messages['ko'] = array(
+	'wikibaselib-desc' => '위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 함수 취득',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
@@ -107,5 +114,12 @@ $messages['mk'] = array(
  */
 $messages['nl'] = array(
 	'wikibaselib-desc' => 'Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client',
+);
+
+/** Brazilian Portuguese (português do Brasil)
+ * @author Jaideraf
+ */
+$messages['pt-br'] = array(
+	'wikibaselib-desc' => 'Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client',
 );
 
