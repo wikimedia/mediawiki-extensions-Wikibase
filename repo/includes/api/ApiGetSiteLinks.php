@@ -31,14 +31,14 @@ class ApiGetSiteLinks extends Api{
 		}
 
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = Item::getIdForSiteLink( $params['site'], $params['title'] );
+			$params['id'] = ItemContent::getIdForSiteLink( $params['site'], $params['title'] );
 
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 		}
 
-		$page = Item::getWikiPageForId( $params['id'] );
+		$page = ItemContent::getWikiPageForId( $params['id'] );
 
 		if ( $page->exists() ) {
 			// as long as getWikiPageForId only returns ids for legal items this holds

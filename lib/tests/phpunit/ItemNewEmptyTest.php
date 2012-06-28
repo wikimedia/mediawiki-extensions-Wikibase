@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use \Wikibase\ItemObject as ItemObject;
 use \Wikibase\Item as Item;
 
 /**
@@ -22,60 +23,48 @@ use \Wikibase\Item as Item;
 class ItemNewEmptyTest extends \MediaWikiTestCase {
 	
 	/**
-	 * Enter description here ...
-	 * @var Item
+	 * @var ItemObject
 	 */
 	protected $item;
 	
 	/**
-	 * This is to set up the environment
+	 * This is to set up the environment.
 	 */
 	protected function setUp() {
   		parent::setUp();
-		$this->item = Item::newEmpty();
-	}
-	
-  	/**
-	 * This is to tear down the environment
-	 */
-	function tearDown() {
-		parent::tearDown();
+		$this->item = ItemObject::newEmpty();
 	}
 	
 	/**
-	 * Tests @see WikibaseItem::newEmpty
+	 * Tests @see Item::newEmpty
 	 */
 	public function testNewEmpty() {
 		$this->assertInstanceOf(
 			'\Wikibase\Item',
 			$this->item,
-			'After creating an empty WikibaseItem it should be a WikibaseItem'
-		);
-		$this->assertTrue(
-			$this->item->isNew(),
-			'Calling isNew on a new empty WikibaseItem after creating it should return true'
+			'After creating an empty Item it should be a WikibaseItem'
 		);
 		$this->assertEquals(
 			null,
 			$this->item->getId(),
-			'Calling getId on a newly created WikibaseItem should return null'
+			'Calling getId on a newly created Item should return null'
 		);
 		$this->assertCount(
 			0,
 			$this->item->getLabels(),
-			'Calling count on labels for a newly created WikibaseItem should return zero'
+			'Calling count on labels for a newly created Item should return zero'
 		);
 		$this->assertCount(
 			0,
 			$this->item->getdescriptions(),
-			'Calling count on descriptions for a newly created WikibaseItem should return zero'
+			'Calling count on descriptions for a newly created Item should return zero'
 		);
 	}
 	
 	/**
-	 * Tests @see WikibaseItem::getLabel
-	 * Tests @see WikibaseItem::setLabel
-	 * Tests @see WikibaseItem::getLabels
+	 * Tests @see Item::getLabel
+	 * Tests @see Item::setLabel
+	 * Tests @see Item::getLabels
 	 */
 	public function testSetGetLabel() {
 		$arr = array(
@@ -127,9 +116,9 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 	}
 	
 	/**
-	 * Tests @see WikibaseItem::addSiteLink
-	 * Tests @see WikibaseItem::removeSiteLink
-	 * Tests @see WikibaseItem::getSiteLinks
+	 * Tests @see Item::addSiteLink
+	 * Tests @see Item::removeSiteLink
+	 * Tests @see Item::getSiteLinks
 	 */
 	public function testAddRemoveSiteLink() {
 		$arr = array(
@@ -151,13 +140,6 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 			0,
 			$this->item->getSiteLinks(),
 			'Testing if removeSiteLink decrements the whole structure to zero after it is built with addSiteLink'
-		);
-	}
-	
-	public function testGetWikitextForTransclusion() {
-		$this->assertFalse(
-			$this->item->getWikitextForTransclusion(),
-			'The getWikitextForTransclusion is not implemented yet.'
 		);
 	}
 	

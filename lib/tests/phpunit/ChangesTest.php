@@ -39,7 +39,7 @@ class ChangesTest extends \MediaWikiTestCase {
 					'revision_id' => 9001,
 					'object_id' => 42,
 					'info' => array(
-						'item' => \Wikibase\Item::newEmpty(),
+						'item' => \Wikibase\ItemObject::newEmpty(),
 						'diff' => \Wikibase\ItemDiff::newEmpty(),
 					)
 				),
@@ -52,7 +52,7 @@ class ChangesTest extends \MediaWikiTestCase {
 					'revision_id' => 9001,
 					'object_id' => 42,
 					'info' => array(
-						'item' => \Wikibase\Item::newEmpty(),
+						'item' => \Wikibase\ItemObject::newEmpty(),
 						'diff' => \Wikibase\ItemDiff::newEmpty(),
 					)
 				),

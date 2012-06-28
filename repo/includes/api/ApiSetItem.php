@@ -74,18 +74,19 @@ class ApiSetItem extends Api {
 		}
 
 		// lacks error checking
-		$item = Item::newFromArray( json_decode( $params['data'], true ) );
+		$itemContent = ItemContent::newFromArray( json_decode( $params['data'], true ) );
 
-		if ( is_null( $item ) ) {
+		if ( is_null( $itemContent ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 		}
 
-		if ( !( $item instanceof Item ) ) {
+		if ( !( $itemContent instanceof ItemContent ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
 
-		if ( !is_null( $item ) && $item !== false ) {
-			$title = $item->getTitle();
+		if ( !is_null( $itemContent ) && $itemContent !== false ) {
+			$title = $itemContent->getTitle();
+
 			if ( !is_null( $title ) && $title !== false ) {
 				if ( !$title->userCan( 'edit', $user ) ) {
 					$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
@@ -94,11 +95,11 @@ class ApiSetItem extends Api {
 		}
 
 		// TODO: Change for more fine grained permissions
-		if (self::getPermissionsError( $this->getUser() ) ) {
+		if ( self::getPermissionsError( $this->getUser() ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
 
-		$status = $item->save();
+		$status = $itemContent->save();
 
 		if ( !$status->isOK() ) {
 			$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
@@ -111,6 +112,8 @@ class ApiSetItem extends Api {
 		//}
 
 		$languages = $params['languages'];
+
+		$item = $itemContent->getItem();
 
 		// because this is serialized and cleansed we can simply go for known values
 		$res = $this->getResult();

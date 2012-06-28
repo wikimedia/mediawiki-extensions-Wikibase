@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase\test;
+namespace Wikibase\Test;
 use \Wikibase\Item as Item;
+use \Wikibase\ItemObject as ItemObject;
 
 /**
- * Holds item objects for testing proposes.
+ * Holds Item objects for testing proposes.
  *
  * @file
  * @since 0.1
@@ -22,23 +23,23 @@ final class TestItems {
 	 * @return array of Item
 	 */
 	public static function getItems() {
-		$items = array( Item::newEmpty() );
+		$items = array( ItemObject::newEmpty() );
 
 
-		$item = Item::newEmpty();
+		$item = ItemObject::newEmpty();
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );
 
 		$items[] = $item;
 
-		$item = Item::newEmpty();
+		$item = ItemObject::newEmpty();
 
 		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
 
 		$items[] = $item;
 
-		$item = Item::newEmpty();
+		$item = ItemObject::newEmpty();
 
 		$links = \Wikibase\Sites::singleton()->getAllSites();
 
@@ -48,7 +49,7 @@ final class TestItems {
 
 		$items[] = $item;
 
-		$item = Item::newEmpty();
+		$item = ItemObject::newEmpty();
 
 		if ( $links->count() > 1 ) {
 			$linksIterator = $links->getIterator();

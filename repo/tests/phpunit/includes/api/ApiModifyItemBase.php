@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use ApiTestCase, ApiTestUser;
 use Wikibase\Item as Item;
 use Wikibase\Settings as Settings;
+use Wikibase\ItemContent as ItemContent;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
@@ -32,13 +33,14 @@ use Wikibase\Settings as Settings;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 abstract class ApiModifyItemBase extends ApiTestCase {
 
 	/**
-	 * @var WikibaseItem
+	 * @var ItemContent
 	 */
-	protected static $item = false;
+	protected static $itemContent = false;
 	
 	/**
 	 * This is to set up the environment.
@@ -46,17 +48,17 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		if ( self::$item === false ) {
-			self::$item = Item::newEmpty();
-			self::$item->save();
+		if ( self::$itemContent === false ) {
+			self::$itemContent = ItemContent::newEmpty();
+			self::$itemContent->save();
 		}
 		
 		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
-				'Apitesteditor',
-				'Api Test Editor',
-				'api_test_editor@example.com',
-				array( 'wbeditor' )
-			);
+			'Apitesteditor',
+			'Api Test Editor',
+			'api_test_editor@example.com',
+			array( 'wbeditor' )
+		);
 		
 		// now we have to do the login with the previous user
 		$data = $this->doApiRequest( array(
@@ -73,30 +75,26 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			'lgname' => self::$users['wbeditor']->username,
 			'lgpassword' => self::$users['wbeditor']->password
 			),
-			$data );
+			$data
+		);
 	}
 
-	/**
-	 * This is to tear down the environment.
-	 */
-	public function tearDown() {
-		//self::$item->remove();
-
-		parent::tearDown();
-	}
-	
+	// FIXME: bad method name!
 	protected function gettoken() {
-		if (Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true) {
+		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
-					'gettoken' => '' ),
+					'gettoken' => ''
+				),
 				null,
 				false,
 				self::$users['wbeditor']->user
 			);
+
 			return $first[0]['wbsetitem']['setitemtoken'];
 		}
+
 		return null;
 	}
 

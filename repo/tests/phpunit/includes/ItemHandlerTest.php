@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use \Wikibase\ItemHandler as ItemHandler;
 use \Wikibase\Item as Item;
+use \Wikibase\ItemContent as ItemContent;
 
 /**
  * Tests for the WikibaseItem class.
@@ -29,10 +30,9 @@ class ItemHandlerTest extends \MediaWikiTestCase {
 	protected $ch;
 	
 	/**
-	 * Enter description here ...
-	 * @var Item
+	 * @var ItemContent
 	 */
-	protected $item;
+	protected $itemContent;
 	
 	/**
 	 * This is to set up the environment
@@ -54,10 +54,10 @@ class ItemHandlerTest extends \MediaWikiTestCase {
 	 * @dataProvider provideBasicData
 	 */
 	public function testUnserializeContent( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
+		$this->itemContent = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->assertInstanceOf(
-			'\Wikibase\Item',
-			$this->item,
+			'\Wikibase\ItemContent',
+			$this->itemContent,
 			'Calling unserializeContent on a \Wikibase\ItemHandler should return a \Wikibase\Item'
 		);
 	}
@@ -67,10 +67,10 @@ class ItemHandlerTest extends \MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testGetLabels( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
+		$this->itemContent = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->assertEquals(
 			$labels,
-			$this->item->getLabels( $languages ),
+			$this->itemContent->getItem()->getLabels( $languages ),
 			'Testing getLabels on a new \Wikibase\Item after creating it with preset values and doing a unserializeContent'
 		);
 	}
@@ -80,10 +80,10 @@ class ItemHandlerTest extends \MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testGetDescriptions( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
+		$this->itemContent = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
 		$this->assertEquals(
 			$descriptions,
-			$this->item->getDescriptions( $languages ),
+			$this->itemContent->getItem()->getDescriptions( $languages ),
 			'Testing getDescriptions on a new \Wikibase\Item after creating it with preset values and doing a unserializeContent'
 		);
 	}
@@ -94,16 +94,16 @@ class ItemHandlerTest extends \MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testCopy( $input ) {
-		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
-		$copy = $this->item->copy();
+		$this->itemContent = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
+		$copy = $this->itemContent->copy();
 		$this->assertInstanceOf(
-			'\Wikibase\Item',
+			'\Wikibase\ItemContent',
 			$copy,
 			'Calling copy on the return value of \Wikibase\Item::unserializeContent() should still return a new \Wikibase\Item object'
 		);
 		$this->assertEquals(
 			$copy,
-			$this->item,
+			$this->itemContent,
 			'Calling copy() on an item built by unserializeContent should return a similar object'
 		);
 	}
@@ -115,36 +115,24 @@ class ItemHandlerTest extends \MediaWikiTestCase {
 	 * @depends testUnserializeContent
 	 */
 	public function testCleanStructure( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
-		$this->item->cleanStructure();
+		$this->itemContent = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
+		$this->itemContent->getItem()->cleanStructure();
 		$this->assertInstanceOf(
-			'\Wikibase\Item',
-			$this->item,
+			'\Wikibase\ItemContent',
+			$this->itemContent,
 			'Calling cleanStructure should still leave the item as a \Wikibase\Item object'
 		);
 		$this->assertInternalType(
 			'array',
-			$this->item->getLabels(),
+			$this->itemContent->getItem()->getLabels(),
 			'Checking if the expected structure is the type for returned labels for a cleaned \Wikibase\Item'
 		);
 		$this->assertInternalType(
 			'array',
-			$this->item->getdescriptions(),
+			$this->itemContent->getItem()->getdescriptions(),
 			'Checking if the expected structure is the type returned for descriptions for a cleaned WikibaseItem'
 		);
 	}
-	
-	
-#	/**
-#	 * Tests @see WikibaseItem::testAddSiteLink
-#	 * @dataProvider provideLinkData
-#	 * @depends testUnserializeContent
-#	 * @group Broken
-#	 */
-#	public function testAddSiteLink( $input, array $link, array $languages = null ) {
-#		$this->item = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
-#		//$this->addSiteLink( $siteId, $pageName, $updateType = 'set' );
-#	}
 	
 	public function provideBasicData() {
 		return array(

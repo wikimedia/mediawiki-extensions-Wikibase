@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use \Wikibase\Item as Item;
+use \Wikibase\ItemObject as ItemObject;
 
 /**
  * Tests for the WikibaseItem class.
@@ -32,7 +33,7 @@ class ItemNewFromArrayTest extends \MediaWikiTestCase {
 	 */
 	protected function setUp() {
   		parent::setUp();
-		$this->item = Item::newFromArray( array( 'entity' => 'q42' ) );
+		$this->item = ItemObject::newFromArray( array( 'entity' => 'q42' ) );
 	}
 	
   	/**
@@ -49,31 +50,21 @@ class ItemNewFromArrayTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf(
 			'\Wikibase\Item',
 			$this->item,
-			'After creating a WikibaseItem with an entity "q42" it should still be a WikibaseItem'
+			'After creating a Item with an entity "q42" it should still be a WikibaseItem'
 		);
 		$this->assertFalse(
-			$this->item->isNew(),
-			'Calling isNew on a new WikibaseItem after creating it with an entity "q42" should return false'
-		);
-		$this->assertInstanceOf(
-			'\Title',
-			$this->item->getTitle(),
-			'Calling getTitle on a WikibaseItem after creating it with an entity "q42" should return a Title'
-		);
-		$this->assertRegExp(
-			'/Q42/i',
-			$this->item->getTitle()->getBaseText(),
-			'Calling getTitle on a new WikibaseItem after creating it with an entity "q42" should return "q42"'
+			$this->item->isEmpty(),
+			'Calling isEmpty on a new Item after creating it with an entity "q42" should return false'
 		);
 		$this->assertCount(
 			0,
 			$this->item->getLabels(),
-			'Calling count on labels for a newly created WikibaseItem should return zero'
+			'Calling count on labels for a newly created Item should return zero'
 		);
 		$this->assertCount(
 			0,
 			$this->item->getdescriptions(),
-			'Calling count on descriptions for a newly created WikibaseItem should return zero'
+			'Calling count on descriptions for a newly created Item should return zero'
 		);
 	}
 	

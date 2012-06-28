@@ -32,11 +32,11 @@ class ViewItemAction extends \ViewAction {
 
 		// some fishy pseudo-casting
 		$article = $this->page; /* @var \Article $article */
-		$item = $article->getPage()->getContent(); /* @var Item $item */
+		$itemContent = $article->getPage()->getContent(); /* @var ItemContent $itemContent */
 
 		$out = $this->getContext()->getOutput();
 
-		if ( $item === null ) {
+		if ( $itemContent === null ) {
 			$this->showMissingItem( $article->getTitle(), $article->getOldID() );
 			return;
 		}
@@ -44,7 +44,7 @@ class ViewItemAction extends \ViewAction {
 		// view it!
 		$article->view();
 
-		if ( $article->getContentObject() != $item ) { // hacky...
+		if ( $article->getContentObject() !== $itemContent ) { // hacky...
 			// Article decided to not show the item but something else. So skip all the Item stuff below.
 			return;
 		}
@@ -52,7 +52,7 @@ class ViewItemAction extends \ViewAction {
 		// ok, we are viewing an item, do all the silly JS stuff etc.
 
 		$langCode = $this->getContext()->getLanguage()->getCode();
-		$label = $item->getLabel( $this->getLanguage()->getCode() );
+		$label = $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() );
 
 		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
 			$out->setPageTitle( $this->msg( 'difference-title', $label ) );
@@ -61,7 +61,7 @@ class ViewItemAction extends \ViewAction {
 			$this->getOutput()->setPageTitle( $label );
 		}
 
-		ItemView::registerJsConfigVars( $out, $item, $langCode );
+		ItemView::registerJsConfigVars( $out, $itemContent, $langCode );
 	}
 
 	/**

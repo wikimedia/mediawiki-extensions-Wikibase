@@ -49,25 +49,25 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 	}
 
 	/**
-	 * Actually modify the item.
+	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param ItemContent $itemContent
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( Item &$item, array $params ) {
+	protected function modifyItem( ItemContent &$itemContent, array $params ) {
 		$language = $params['language'];
 
 		if ( isset( $params['label'] ) ) {
-			$labels = array( $language => $item->setLabel( $language, $params['label'] ) );
+			$labels = array( $language => $itemContent->getItem()->setLabel( $language, $params['label'] ) );
 			$this->addLabelsToResult( $labels, 'item' );
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$descriptions = array( $language => $item->setDescription( $language, $params['description'] ) );
+			$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, $params['description'] ) );
 			$this->addDescriptionsToResult( $descriptions, 'item' );
 		}
 

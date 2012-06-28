@@ -54,6 +54,7 @@ final class WikibaseHooks {
 			'ItemMove',
 			'ChangeNotifier',
 			'EntityHandler',
+			'ItemContent',
 			'ItemDeletionUpdate',
 			'ItemHandler',
 			'ItemView',
@@ -189,10 +190,15 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
-		$newItem = $article->getContent();
+		if ( $article->getContent()->getModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
+			/**
+			 * @var $newItem \Wikibase\Item
+			 */
+			$newItem = $article->getContent()->getItem();
 
-		if ( $newItem->getModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
-			$oldItem = is_null( $revision->getParentId() ) ? Wikibase\Item::newEmpty() : Revision::newFromId( $revision->getParentId() )->getContent();
+			$oldItem = is_null( $revision->getParentId() ) ?
+				Wikibase\ItemObject::newEmpty()
+				: Revision::newFromId( $revision->getParentId() )->getContent()->getItem();
 
 			$change = \Wikibase\ItemChange::newFromItems( $oldItem, $newItem );
 

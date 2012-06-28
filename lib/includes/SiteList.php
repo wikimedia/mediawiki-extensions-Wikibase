@@ -116,7 +116,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 			$this->removeSiteByGlobalId( $site->getGlobalId() );
 		}
 
-		return $this->setSite( $index, $site );
+		$this->setSite( $index, $site );
 	}
 
 	/**

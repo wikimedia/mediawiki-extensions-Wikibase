@@ -72,15 +72,18 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 	 * @dataProvider paramProvider
 	 */
 	public function testSetAliases( $langCode, $param, $value, $expected ) {
-
 		$req = array();
 		$token = $this->gettoken();
+
 		if ( $token ) {
 			$req['token'] = $token;
 		}
-		
+
+		$item = self::$itemContent->getItem();
+		$this->assertInstanceOf( '\Wikibase\Item', $item );
+
 		$req = array_merge( $req, array(
-			'id' => self::$item->getId(),
+			'id' => $item->getId(),
 			'action' => 'wbsetaliases',
 			//'usekeys' => true, // this comes from Settings::get( 'apiUseKeys' )
 			'format' => 'json',
@@ -101,10 +104,13 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 			);
 		}
 		
-
 		$expected = $expected === '' ? array() : explode( '|', $expected );
-		self::$item->reload();
-		$actual = array_values( self::$item->getAliases( $langCode ) );
+		self::$itemContent->reload();
+
+		$item = self::$itemContent->getItem();
+		$this->assertInstanceOf( '\Wikibase\Item', $item );
+
+		$actual = array_values( $item->getAliases( $langCode ) );
 
 		asort( $expected );
 		asort( $actual );

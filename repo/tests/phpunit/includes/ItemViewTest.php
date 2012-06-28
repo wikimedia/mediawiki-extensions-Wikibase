@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Item as Item;
+use Wikibase\ItemContent as ItemContent;
 use Wikibase\ItemView as ItemView;
 
 /**
@@ -60,33 +60,38 @@ class ItemViewTest extends \MediaWikiTestCase {
 	public function testGetHTML( $itemData, $expected) {
 		self::$num++;
 
-		$item = $itemData === false ? Item::newEmpty() : Item::newFromArray( $itemData );
+		$itemContent = $itemData === false ? ItemContent::newEmpty() : ItemContent::newFromArray( $itemData );
 
-		$item->setLabel('de', 'Stockholm');
+		$itemContent->getItem()->setLabel( 'de', 'Stockholm' );
+
 		$this->assertTrue(
-			$item != null && $item !== false,
-			"Could not find an item" );
+			!is_null( $itemContent ) && $itemContent !== false,
+			"Could not find an item"
+		);
 
 		$view = new ItemView( );
+
 		$this->assertTrue(
-			$view != null && $view !== false,
-			"Could not find a view" );
+			!is_null( $view ) && $view !== false,
+			"Could not find a view"
+		);
 
-		$html = $view->getHTML( $item );
+		$html = $view->getHTML( $itemContent );
 
-		if ( is_string($expected) ) {
+		if ( is_string( $expected ) ) {
 			$this->assertRegExp(
 				$expected,
 				$html,
-				"Could not find the marker '{$expected}'" );
+				"Could not find the marker '{$expected}'"
+			);
 		}
 		else {
-			foreach ($expected as $that) {
-			$this->assertRegExp(
-				$that,
-				$html,
-				"Could not find the marker '{$that}'" );
-
+			foreach ( $expected as $that ) {
+				$this->assertRegExp(
+					$that,
+					$html,
+					"Could not find the marker '{$that}'"
+				);
 			}
 		}
 
@@ -145,4 +150,5 @@ class ItemViewTest extends \MediaWikiTestCase {
 			),
 		);
 	}
+
 }

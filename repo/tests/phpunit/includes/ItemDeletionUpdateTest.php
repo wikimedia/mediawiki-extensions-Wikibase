@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use \Wikibase\ItemDeletionUpdate as ItemDeletionUpdate;
-use \Wikibase\Item as Item;
+use \Wikibase\ItemContent as ItemContent;
 
 /**
  *  Tests for the Wikibase\ItemDeletionUpdate class.
@@ -32,29 +32,31 @@ use \Wikibase\Item as Item;
 class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 
 	public function testConstruct() {
-		$this->assertInstanceOf( '\Wikibase\ItemDeletionUpdate', new ItemDeletionUpdate( \Wikibase\Item::newEmpty() ) );
+		$this->assertInstanceOf( '\Wikibase\ItemDeletionUpdate', new ItemDeletionUpdate( \Wikibase\ItemContent::newEmpty() ) );
 	}
 
 	public function itemProvider() {
 		return array_map(
-			function( Item $item ) { return array( $item ); },
-			\Wikibase\Test\TestItems::getItems()
+			function( ItemContent $itemContent ) { return array( $itemContent ); },
+			\Wikibase\Test\TestItemContents::getItems()
 		);
 	}
 
 	/**
 	 * @dataProvider itemProvider
-	 * @param Item $item
+	 * @param ItemContent $itemContent
 	 */
-	public function testDoUpdate( Item $item ) {
-		$item->save();
-		$update = new ItemDeletionUpdate( $item );
+	public function testDoUpdate( ItemContent $itemContent ) {
+		$itemContent->save();
+		$update = new ItemDeletionUpdate( $itemContent );
 		$update->doUpdate();
 
-		$this->assertEquals( 0, $this->countRows( 'wb_items', array( 'item_id' => $item->getId() ) ) );
-		$this->assertEquals( 0, $this->countRows( 'wb_items_per_site', array( 'ips_item_id' => $item->getId() ) ) );
-		$this->assertEquals( 0, $this->countRows( 'wb_aliases', array( 'alias_item_id' => $item->getId() ) ) );
-		$this->assertEquals( 0, $this->countRows( 'wb_texts_per_lang', array( 'tpl_item_id' => $item->getId() ) ) );
+		$id = $itemContent->getItem()->getId();
+
+		$this->assertEquals( 0, $this->countRows( 'wb_items', array( 'item_id' => $id ) ) );
+		$this->assertEquals( 0, $this->countRows( 'wb_items_per_site', array( 'ips_item_id' => $id ) ) );
+		$this->assertEquals( 0, $this->countRows( 'wb_aliases', array( 'alias_item_id' => $id ) ) );
+		$this->assertEquals( 0, $this->countRows( 'wb_texts_per_lang', array( 'tpl_item_id' => $id ) ) );
 	}
 
 	protected function countRows( $table, array $conds = array() ) {

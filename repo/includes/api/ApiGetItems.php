@@ -38,14 +38,14 @@ class ApiGetItems extends Api {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {
 				foreach ($params['titles'] as $title) {
-					$id = Item::getIdForSiteLink( $params['sites'], $title );
+					$id = ItemContent::getIdForSiteLink( $params['sites'], $title );
 					if ( $id ) $params['ids'][] = intval( $id );
 					//@todo: else report this problem
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				foreach ($params['sites'] as $site) {
-					$id = Item::getIdForSiteLink( $site, $params['titles'] );
+					$id = ItemContent::getIdForSiteLink( $site, $params['titles'] );
 					if ( $id ) $params['ids'][] = intval( $id );
 					//@todo: else report this problem
 				}
@@ -64,14 +64,16 @@ class ApiGetItems extends Api {
 		$this->setUsekeys( $params );
 		
 		foreach ($params['ids'] as $id) {
-			$page = Item::getWikiPageForId( $id );
+			$page = ItemContent::getWikiPageForId( $id );
 			if ($page->exists()) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
-				$item = $page->getContent();
-				if ( is_null($item) ) {
+				$itemContent = $page->getContent();
+
+				if ( is_null( $itemContent ) ) {
 					continue;
 				}
-				if ( !( $item instanceof Item ) ) {
+
+				if ( !( $itemContent instanceof ItemContent ) ) {
 					$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 				}
 				
@@ -83,6 +85,8 @@ class ApiGetItems extends Api {
 					'id',
 					$id
 				);
+
+				$item = $itemContent->getItem();
 
 				foreach ( $params['props'] as $key ) {
 					switch ( $key ) {

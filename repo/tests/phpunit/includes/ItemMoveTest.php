@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use \Wikibase\ItemHandler as ItemHandler;
 use \Wikibase\Item as Item;
+use \Wikibase\ItemContent as ItemContent;
 use WikiPage, Title, WikitextContent;
 
 /**
@@ -24,9 +25,9 @@ use WikiPage, Title, WikitextContent;
 class ItemMoveTest extends \MediaWikiTestCase {
 
 	/**
-	 * @var Item
+	 * @var ItemContent
 	 */
-	protected $item;
+	protected $itemContent;
 
 	/**
 	 * @var WikiPage
@@ -39,8 +40,8 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->item = Item::newEmpty();
-		$this->item->save();
+		$this->itemContent = ItemContent::newEmpty();
+		$this->itemContent->save();
 
 		$title = Title::newFromText( 'wbmovetest' );
 		$this->page =  new WikiPage( $title );
@@ -52,7 +53,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	 */
 	public function testMovePrevention() {
 		// Moving a regular page into data NS onto an existing item
-		$title = $this->item->getTitle();
+		$title = $this->itemContent->getTitle();
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving a regular page into data NS to an invalid location
@@ -60,24 +61,24 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving a regular page into data NS to an empty (but valid) location
-		$title = Item::newFromArray( array( 'entity' => 'q42' ) )->getTitle();
+		$title = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getTitle();
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving item page out of data NS onto an existing page
 		$title = $this->page->getTitle();
-		$this->assertFalse( $this->item->getTitle()->moveTo( $title ) === true );
+		$this->assertFalse( $this->itemContent->getTitle()->moveTo( $title ) === true );
 
 		// Moving item page out of data NS onto a non-existing page
 		$title = Title::newFromText( 'wbmovetestitem' );
-		$this->assertFalse( $this->item->getTitle()->moveTo( $title ) === true );
+		$this->assertFalse( $this->itemContent->getTitle()->moveTo( $title ) === true );
 
 		// Moving item to an invalid location in the data NS
 		$title = Title::newFromText( $this->page->getTitle()->getText(), WB_NS_DATA );
-		$this->assertFalse( $this->item->getTitle()->moveTo( $title ) === true );
+		$this->assertFalse( $this->itemContent->getTitle()->moveTo( $title ) === true );
 
 		// Moving item to an valid location in the data NS
-		$title = Item::newFromArray( array( 'entity' => 'q42' ) )->getTitle();
-		$this->assertFalse( $this->item->getTitle()->moveTo( $title ) === true );
+		$title = ItemContent::newFromArray( array( 'entity' => 'q42' ) )->getTitle();
+		$this->assertFalse( $this->itemContent->getTitle()->moveTo( $title ) === true );
 	}
 
 }

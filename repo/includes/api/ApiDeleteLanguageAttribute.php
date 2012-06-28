@@ -33,30 +33,30 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 	}
 
 	/**
-	 * Actually modify the item.
+	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param ItemContent $itemContent
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( Item &$item, array $params ) {
+	protected function modifyItem( ItemContent &$itemContent, array $params ) {
 		$language = $params['language'];
-		$labels = $item->getLabels( (array)$language );
-		$descriptions = $item->getDescriptions( (array)$language );
+		$labels = $itemContent->getItem()->getLabels( (array)$language );
+		$descriptions = $itemContent->getItem()->getDescriptions( (array)$language );
 
 		$success = false;
 
-		foreach ($params['attribute'] as $attr) {
+		foreach ( $params['attribute'] as $attr ) {
 
-			switch ($attr) {
+			switch ( $attr ) {
 				case 'label':
 					if ( !count($labels) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
 					}
-					$item->removeLabel( $language );
+					$itemContent->getItem()->removeLabel( $language );
 					$success = $success || true;
 					break;
 
@@ -64,7 +64,7 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 					if ( !count($descriptions) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
 					}
-					$item->removeDescription( $language );
+					$itemContent->getItem()->removeDescription( $language );
 					$success = $success || true;
 					break;
 

@@ -21,9 +21,9 @@ class ItemStructuredSave extends \DataUpdate {
 	 * The item to update.
 	 *
 	 * @since 0.1
-	 * @var Item
+	 * @var ItemContent
 	 */
-	protected $item;
+	protected $itemContent;
 
 	/**
 	 * The title of the page representing the item.
@@ -38,11 +38,11 @@ class ItemStructuredSave extends \DataUpdate {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param ItemContent $itemContent
 	 * @param Title $title
 	 */
-	public function __construct( Item $item, Title $title ) {
-		$this->item = $item;
+	public function __construct( ItemContent $itemContent, Title $title ) {
+		$this->itemContent = $itemContent;
 		$this->title = $title;
 	}
 
@@ -73,7 +73,7 @@ class ItemStructuredSave extends \DataUpdate {
 	protected function saveSiteLinks() {
 		$dbw = wfGetDB( DB_MASTER );
 
-		$idField = array( 'ips_item_id' => $this->item->getId() );
+		$idField = array( 'ips_item_id' => $this->itemContent->getItem()->getId() );
 
 		$success = $dbw->delete(
 			'wb_items_per_site',
@@ -81,7 +81,7 @@ class ItemStructuredSave extends \DataUpdate {
 			__METHOD__
 		);
 
-		foreach ( $this->item->getSiteLinks() as $siteId => $pageName ) {
+		foreach ( $this->itemContent->getItem()->getSiteLinks() as $siteId => $pageName ) {
 			$success = $dbw->insert(
 				'wb_items_per_site',
 				array_merge(
@@ -109,7 +109,7 @@ class ItemStructuredSave extends \DataUpdate {
 	protected function saveMultilangFields() {
 		$dbw = wfGetDB( DB_MASTER );
 
-		$idField = array( 'tpl_item_id' => $this->item->getId() );
+		$idField = array( 'tpl_item_id' => $this->itemContent->getItem()->getId() );
 
 		$success = $dbw->delete(
 			'wb_texts_per_lang',
@@ -117,8 +117,8 @@ class ItemStructuredSave extends \DataUpdate {
 			__METHOD__
 		);
 
-		$descriptions = $this->item->getDescriptions();
-		$labels = $this->item->getLabels();
+		$descriptions = $this->itemContent->getItem()->getDescriptions();
+		$labels = $this->itemContent->getItem()->getLabels();
 
 		foreach ( array_unique( array_merge( array_keys( $descriptions ), array_keys( $labels ) ) ) as $langCode ) {
 			$fieldValues = array( 'tpl_language' => $langCode );
@@ -155,7 +155,7 @@ class ItemStructuredSave extends \DataUpdate {
 	protected function saveAliases() {
 		$dbw = wfGetDB( DB_MASTER );
 
-		$idField = array( 'alias_item_id' => $this->item->getId() );
+		$idField = array( 'alias_item_id' => $this->itemContent->getItem()->getId() );
 
 		$success = $dbw->delete(
 			'wb_aliases',
@@ -163,7 +163,7 @@ class ItemStructuredSave extends \DataUpdate {
 			__METHOD__
 		);
 
-		foreach ( $this->item->getAllAliases() as $languageCode => $aliases ) {
+		foreach ( $this->itemContent->getItem()->getAllAliases() as $languageCode => $aliases ) {
 			foreach ( $aliases as $alias ) {
 				$success = $dbw->insert(
 					'wb_aliases',

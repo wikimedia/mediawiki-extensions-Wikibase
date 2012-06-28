@@ -47,29 +47,29 @@ class ApiSetAliases extends ApiModifyItem {
 	}
 	
 	/**
-	 * Actually modify the item.
+	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param ItemContent $itemContent
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( Item &$item, array $params ) {
+	protected function modifyItem( ItemContent &$itemContent, array $params ) {
 		if ( isset( $params['set'] ) ) {
-			$item->setAliases( $params['language'], $params['set'] );
+			$itemContent->getItem()->setAliases( $params['language'], $params['set'] );
 		}
 
 		if ( isset( $params['remove'] ) ) {
-			$item->removeAliases( $params['language'], $params['remove'] );
+			$itemContent->getItem()->removeAliases( $params['language'], $params['remove'] );
 		}
 
 		if ( isset( $params['add'] ) ) {
-			$item->addAliases( $params['language'], $params['add'] );
+			$itemContent->getItem()->addAliases( $params['language'], $params['add'] );
 		}
 
-		$aliases = $item->getAllAliases( (array)$params['language'] );
+		$aliases = $itemContent->getItem()->getAllAliases( (array)$params['language'] );
 		if ( count( $aliases ) ) {
 			$this->addAliasesToResult( $aliases, 'item' );
 		}
