@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAO3///Sk\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-06-28T10:14:53Z",
+      "side": 1,
+      "message": "don\u0027t base that on the namespace, base it on the content model:\n\ngetTitle()-\u003egetContentModel() \u003d\u003d CONTENT_MODEL_WIKIBASE_ITEM",
+      "revId": "fe5fe260ca012f378c86534703d73db1b39bae12",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
