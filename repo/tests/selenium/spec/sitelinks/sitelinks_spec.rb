@@ -40,6 +40,44 @@ describe "Check functionality of add/edit/remove sitelinks" do
     end
   end
 
+  context "Check for adding site link to non existing article" do
+    it "should check if adding sitelink to a non existing article produces an error" do
+      on_page(SitelinksItemPage)
+      @current_page.navigate_to_item
+      @current_page.wait_for_sitelinks_to_load
+      @current_page.countExistingSitelinks.should == 0
+      @current_page.addSitelinkLink
+      @current_page.siteIdInputField_element.should be_true
+      @current_page.pageInputField_element.enabled?.should be_false
+      @current_page.siteIdInputField="en"
+      ajax_wait
+      @current_page.wait_until do
+        @current_page.siteIdAutocompleteList_element.visible?
+      end
+      @current_page.siteIdInputField_element.send_keys :arrow_down
+
+      @current_page.siteIdAutocompleteList_element.visible?.should be_true
+      aCListElement = @current_page.getNthElementInAutocompleteList(@current_page.siteIdAutocompleteList_element, 1)
+      aCListElement.visible?.should be_true
+      aCListElement.click
+
+      @current_page.pageInputField_element.enabled?.should be_true
+      @current_page.pageInputField="xyz_thisarticleshouldneverexist_xyz"
+      ajax_wait
+      if @current_page.saveSitelinkLink?
+        @current_page.saveSitelinkLink
+      end
+      ajax_wait
+      @current_page.wait_for_api_callback
+
+      @current_page.wbErrorDiv?.should be_true
+      @current_page.wbErrorDetailsLink?.should be_true
+      @current_page.wbErrorDetailsLink
+      @current_page.wbErrorDetailsDiv?.should be_true
+      @current_page.wbErrorDetailsDiv_element.text.should == "The external client site did not provide page information."
+    end
+  end
+
   context "Check for adding site link UI" do
     it "should check if adding a sitelink works" do
       on_page(SitelinksItemPage)
