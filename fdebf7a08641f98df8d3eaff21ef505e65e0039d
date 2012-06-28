@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX///+8\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-28T15:48:48Z",
+      "side": 1,
+      "message": "Missing spaces",
+      "revId": "fdebf7a08641f98df8d3eaff21ef505e65e0039d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///+4\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-28T15:48:48Z",
+      "side": 1,
+      "message": "Missing spaces",
+      "revId": "fdebf7a08641f98df8d3eaff21ef505e65e0039d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
