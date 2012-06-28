@@ -32,6 +32,9 @@ class ItemPage < RubySelenium
   link(:saveDescriptionLink, :css => "div.wb-ui-descriptionedittool > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
 
   span(:apiCallWaitingMessage, :class => "wb-ui-propertyedittool-editablevalue-waitmsg")
+  
+  # edit-tab
+  list_item(:editTab, :id => "ca-edit")
 
   def wait_for_item_to_load
     wait_until do
