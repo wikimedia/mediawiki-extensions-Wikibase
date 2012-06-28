@@ -16,7 +16,7 @@
  * Basically '[edit]' which gets expanded to '[cancel|save]' when hit.
  * This also interacts with a given editable value.
  *
- * @todo might be worth refactoring this so it won't require the editableValue as parameter.
+ * @todo might be worth refactoring this so it won't require the EditableValue as parameter.
  */
 window.wikibase.ui.Toolbar.EditGroup = function( editableValue ) {
 	if( typeof editableValue != 'undefined' ) {
@@ -119,20 +119,6 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 			this.innerGroup.addElement( this.btnRemove );
 		}
 
-		$( this._editableValue ).on( 'afterSaveComplete', $.proxy( function( event ) {
-			this.tooltipAnchor.getTooltip().hide();
-			this.removeElement( this.tooltipAnchor );
-			this.innerGroup.removeElement( this.btnSave );
-			this.innerGroup.removeElement( this.btnCancel );
-			if ( this.displayRemoveButton ) {
-				this.innerGroup.removeElement( this.btnRemove );
-			}
-			this.innerGroup.addElement( this.btnEdit );
-			if ( this.displayRemoveButton ) {
-				this.innerGroup.addElement( this.btnRemove );
-			}
-		}, this ) );
-
 	},
 
 	_editActionHandler: function() {
@@ -156,8 +142,32 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		this._editableValue.remove();
 	},
 
+	/**
+	 * Changes the edit group from displaying buttons for editing to the state of displaying buttons to go into
+	 * edit mode again.
+	 */
 	_leaveAction: function( save ) {
-		this._editableValue.stopEditing( save );
+		// trigger the stop editing...
+		var promise = this._editableValue.stopEditing( save );
+
+		if(    promise.promisor.apiAction === wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.SAVE
+			|| promise.promisor.apiAction === wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE
+		) {
+			// ... when stopped, remove buttons for editing and display buttons for going back to edit mode
+			promise.done( $.proxy( function() {
+				this.tooltipAnchor.getTooltip().hide();
+				this.removeElement( this.tooltipAnchor );
+				this.innerGroup.removeElement( this.btnSave );
+				this.innerGroup.removeElement( this.btnCancel );
+				if ( this.displayRemoveButton ) {
+					this.innerGroup.removeElement( this.btnRemove );
+				}
+				this.innerGroup.addElement( this.btnEdit );
+				if ( this.displayRemoveButton ) {
+					this.innerGroup.addElement( this.btnRemove );
+				}
+			}, this ) );
+		}
 	},
 
 	destroy: function() {
