@@ -39,7 +39,14 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 			this._toolbar.hide(); // hide add button when hitting it since edit mode toolbar will appear
 		}, this ) );
 
-		$( this._editableValues[0].getToolbar().editGroup.btnCancel ).triggerHandler( 'action' );
+		if ( this.getValues()[0].getValue()[0].length === 0 ) {
+			/* remove EditableValue by triggering leaving edit mode to get rid of edit button when there are no aliases
+			yet (using the PropertyEditTool's add button instead) */
+			$( this.getValues()[0].getToolbar().editGroup.btnCancel ).triggerHandler( 'action' );
+		} else {
+			this._toolbar.hide(); // hide add button when there are aliases
+		}
+
 	},
 
 	/**
