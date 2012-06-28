@@ -9,14 +9,6 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  * @author Daniel Werner
- *
- * Events:
- * -------
- * afterStopEditing: Triggered after having left edit mode
- *                   Parameters: (1) jQuery.event
- *                               (2) save - bool - whether save action was triggered
- *                               (3) wasPending - bool - whether value is a completely new value
- *                   @see wikibase.ui.PropertyEditTool.EditableValue
  */
 "use strict";
 
@@ -163,25 +155,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		// set ignored site links again since they could have changed
 		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
 		return window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
-	},
-
-	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.stopEditing
-	 *
-	 * @param bool save whether to save the new user given value
-	 * @return bool whether the value has changed (or was removed) in which case the changes are on their way to the API
-	 */
-	stopEditing: function( save ) {
-		var changed = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call(
-			this,
-			save,
-			$.proxy( function() {
-				$( this ).triggerHandler( 'afterStopEditing',[save, this.isPending()] );
-				// make sure the interface for entering the sites id can't be edited after created
-				this._interfaces.siteId.setActive( this.isPending() );
-			}, this )
-		);
-		return changed;
 	},
 
 	/**
