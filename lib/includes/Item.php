@@ -700,16 +700,10 @@ class Item extends Entity {
 	 * @return String a string representing the content in a way useful for building a full text search index.
 	 */
 	public function getTextForSearchIndex() {
-		$text = "";
-
-		foreach ( $this->getLabels() as $lang => $label ) {
-			$text .= $label . "\n";
-		}
+		$text = implode( "\n", $this->getLabels() );
 
 		foreach ( $this->getAllAliases() as $lang => $aliases ) {
-			foreach ( $aliases as $alias ) {
-				$text .= $alias . "\n";
-			}
+			$text .= "\n" . implode( "\n", $aliases );
 		}
 
 		return $text;

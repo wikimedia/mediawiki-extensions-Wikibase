@@ -84,7 +84,7 @@ class ItemTest extends \MediaWikiTestCase {
 			array( // #0
 				array( // data
 					'label' => array( 'en' => 'Test', 'de' => 'Testen' ),
-					'aliases' => array( 'en' => array('abc', 'cde'), 'de' => array('xyz', 'uvw') )
+					'aliases' => array( 'en' => array( 'abc', 'cde' ), 'de' => array( 'xyz', 'uvw' ) )
 				),
 				array( // patterns
 					'/^Test$/',
@@ -103,13 +103,16 @@ class ItemTest extends \MediaWikiTestCase {
 	 * Tests @see WikibaseItem::getTextForSearchIndex
 	 *
 	 * @dataProvider dataGetTextForSearchIndex
+	 *
+	 * @param array $data
+	 * @param array $patterns
 	 */
-	public function testGetTextForSearchIndex( Array $data, Array $patterns ) {
+	public function testGetTextForSearchIndex( array $data, array $patterns ) {
 		$item = Item::newFromArray( $data );
 		$text = $item->getTextForSearchIndex();
 
 		foreach ( $patterns as $pattern ) {
-			$this->assertTrue( preg_match( $pattern . 'm', $text ) > 0, "Text did not match pattern $pattern: $text" );
+			$this->assertRegExp( $pattern . 'm', $text );
 		}
 	}
 }
