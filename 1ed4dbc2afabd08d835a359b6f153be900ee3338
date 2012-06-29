@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX///oY\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-29T10:45:15Z",
+      "side": 1,
+      "message": "Please print debug stuff like that only when verbose is set.",
+      "revId": "1ed4dbc2afabd08d835a359b6f153be900ee3338",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
