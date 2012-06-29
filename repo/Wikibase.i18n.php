@@ -184,7 +184,10 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-autocomplete-response' => 'When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).',
 	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|pagfe]] and [[m:Wikidata/Glossary#item|item]].',
 	'wikibase-error-relational-save-failed' => "Error message shown when an item's identity could not be created in the database, prior to the primary save operation.",
-	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a ite link already used by another item. Parameter 1 is the site id (interwiki prefix), parameter 2 is the title on the remote site, and parameter 3 is the page title of the conflicting item.",
+	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a ite link already used by another item. Parameters:
+* $1 is the site id (interwiki prefix);
+* $2 is the title on the remote site;
+* $3 is the page title of the conflicting item.",
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 	'special-createitem' => 'Title of the special page for creating new items.',
 	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error condition.
@@ -366,7 +369,7 @@ $messages['de'] = array(
 	'wikibase-noitem' => 'Dieses Datenelement ist nicht vorhanden.
 Du kannst entweder die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen], um herauszufinden, was mit ihm passiert ist, oder ein [[Special:CreateItem|neues Datenobjekt erstellen]]</span>.',
 	'wikibase-noitem-nopermission' => 'Dieses Datenelement ist nicht vorhanden.
-Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen].',
+Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>.',
 	'content-model-1001' => 'Wikibase-Datenelement',
 );
 
@@ -392,7 +395,7 @@ $messages['de-formal'] = array(
 	'wikibase-noitem' => 'Dieses Datenelement ist nicht vorhanden.
 Sie können entweder die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen], um herauszufinden, was mit ihm passiert ist, oder ein [[Special:CreateItem|neues Datenobjekt erstellen]]</span>.',
 	'wikibase-noitem-nopermission' => 'Dieses Datenelement ist nicht vorhanden.
-Sie können die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen].',
+Sie können die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>.',
 );
 
 /** Zazaki (Zazaki)
@@ -445,6 +448,7 @@ $messages['dsb'] = array(
 
 /** Spanish (español)
  * @author Armando-Martin
+ * @author Mr.Ajedrez
  * @author Savh
  * @author Vivaelcelta
  */
@@ -489,11 +493,16 @@ $messages['es'] = array(
 	'wikibase-error-autocomplete-connection' => 'No se pudo consultar en la API de Wikipedia. Inténtalo de nuevo más tarde.',
 	'wikibase-error-autocomplete-response' => 'Tu servidor respondió: $1',
 	'wikibase-move-error' => 'No puedes mover las páginas que se encuentran en el espacio de nombres de datos, y no puedes mover páginas hacia allí.',
+	'wikibase-error-relational-save-failed' => 'No se ha podido guardar la identidad del elemento en la base de datos.',
+	'wikibase-error-sitelink-already-used' => 'En enlace del sitio [[$1:$2]] ya es usado por el elemento [[$3]].',
 	'special-itembylabel' => 'Artículo por etiqueta',
 	'special-createitem' => 'Crear un nuevo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Es necesario proporcionar el parámetro de configuración xor al agregar o quitar parámetros',
 	'wikibase-api-no-token' => 'No se ha dado ninguna clave (token)',
 	'wikibase-api-no-data' => 'No se ha encontrado ningún dato sobre el que operar',
+	'wikibase-api-client-error' => 'El sitio del cliente externo falló.',
+	'wikibase-api-no-external-page' => 'El sitio del cliente externo no proveyó información de la página.',
+	'wikibase-api-add-sitelink-failed' => 'No se pudo guardar el enlace del sitio.',
 	'wikibase-api-cant-edit' => 'El usuario que ha iniciado sesión no tiene permisos para editar',
 	'wikibase-api-no-permissions' => 'El usuario que ha iniciado sesión no tiene derechos suficientes',
 	'wikibase-api-id-xor-wikititle' => 'Proporciona el elemento ids o una pareja sitio-título para una página correspondiente',
@@ -517,6 +526,13 @@ $messages['es'] = array(
 	'wikibase-api-description-not-found' => 'No se puede encontrar una descripción anterior para este idioma en el elemento',
 	'wikibase-api-wrong-class' => 'El contenido de la página encontrada no es del tipo correcto.',
 	'wikibase-api-session-failure' => 'La sesión actual ha fallado y debe actualizar la página y volver a iniciar sesión.',
+	'wikibase-resetold' => 'reestablecer',
+	'wikibase-noitem' => 'Este elemento no existe.
+Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar los registros relacionados]
+para averiguar adónde fue, o [[Special:CreateItem|crear un nuevo elemento]]</span>.',
+	'wikibase-noitem-nopermission' => 'Este elemento no existe.
+Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar los registros relacionados]</span>.',
+	'content-model-1001' => 'Elemento de Wikibase',
 );
 
 /** Persian (فارسی)
@@ -708,6 +724,7 @@ $messages['gl'] = array(
 	'wikibase-api-wrong-class' => 'O contido da páxina atopada non é do tipo correcto.',
 	'wikibase-api-session-failure' => 'A sesión actual fallou e agora debe refrescar a páxina e acceder de novo.',
 	'wikibase-resetold' => 'restablecer',
+	'content-model-1001' => 'Elemento de Wikibase',
 );
 
 /** Swiss German (Alemannisch)
@@ -1024,6 +1041,11 @@ $messages['it'] = array(
 	'wikibase-api-wrong-class' => 'Il contenuto della pagina trovata non è di un tipo corretto.',
 	'wikibase-api-session-failure' => "La sessione corrente ha restituito un errore; devi ricaricare la pagina ed effettuare nuovamente l'accesso.",
 	'wikibase-resetold' => 'reimposta',
+	'wikibase-noitem' => 'Questo elemento non esiste.
+Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare i relativi log]
+per sapere dov\'è ora, o [[Special:CreateItem|creare un nuovo elemento]]</span>.',
+	'wikibase-noitem-nopermission' => 'Questo elemento non esiste.
+Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare i relativi log]</span>.',
 	'content-model-1001' => 'Elemento wikibase',
 );
 
@@ -1256,6 +1278,11 @@ $messages['mk'] = array(
 	'wikibase-api-wrong-class' => 'Содржината на пронајдената страница не е од бараниот тип.',
 	'wikibase-api-session-failure' => 'Тековната сесија повеќе не работи. Ќе мора да ја превчитате страницата и да се најавите повторно.',
 	'wikibase-resetold' => 'врати',
+	'wikibase-noitem' => 'Не постои таква ставка.
+Можете да ги <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате поврзаните дневници]
+за да дознаете каде отишла, или да [[Special:CreateItem|создадете нова ставка]]</span>.',
+	'wikibase-noitem-nopermission' => 'Не постои таква ставка.
+Можете да ги <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате поврзаните дневници]</span>.',
 	'content-model-1001' => 'Ставка во Викибазата',
 );
 
@@ -1378,11 +1405,16 @@ $messages['nl'] = array(
 	'wikibase-error-autocomplete-connection' => 'Het was niet mogelijk de Wikipedia-API te bereiken. Probeer het later opnieuw.',
 	'wikibase-error-autocomplete-response' => 'Antwoord van server: $1',
 	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
+	'wikibase-error-relational-save-failed' => 'Het was niet mogelijk de identiteit van het item op te slaan in de database.',
+	'wikibase-error-sitelink-already-used' => 'De siteverwijzing [[$1:$2]] wordt al gebruikt door item [[$3]].',
 	'special-itembylabel' => 'Item gesorteerd op label',
 	'special-createitem' => 'Nieuw item aanmaken',
 	'wikibase-api-aliases-invalid-list' => 'Gebruik een van de parameters "set", "add" of "remove".',
 	'wikibase-api-no-token' => 'Er is geen token verstrekt.',
 	'wikibase-api-no-data' => 'Er zijn geen gegevens om te verwerken.',
+	'wikibase-api-client-error' => 'De externe clientsite heeft werkt niet correct.',
+	'wikibase-api-no-external-page' => 'De externe clientsite heeft geen paginagegevens verstrekt.',
+	'wikibase-api-add-sitelink-failed' => 'De siteverwijzing kon niet opgeslagen worden.',
 	'wikibase-api-cant-edit' => 'De aangemelde gebruiker mag niet bewerken.',
 	'wikibase-api-no-permissions' => 'De aangemelde gebruiker beschikt niet over voldoende rechten.',
 	'wikibase-api-id-xor-wikititle' => 'Geef een "id" op voor een item, of paren van "site" en "title" voor een overeenkomstige pagina.',
@@ -1407,6 +1439,11 @@ $messages['nl'] = array(
 	'wikibase-api-wrong-class' => 'De inhoud van de gevonden pagina is niet van het juiste type.',
 	'wikibase-api-session-failure' => 'De gegevens van de huidige sessie zijn niet langer geldig. Ververs de pagina en meld opnieuw aan.',
 	'wikibase-resetold' => 'opnieuw instellen',
+	'wikibase-noitem' => 'Dit item bestaat niet.
+U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} bijbehorende logboeken doorzoeken] om uit te vinden waar het is gebleven of een [[Special:CreateItem|niet item aanmaken]]</span>.',
+	'wikibase-noitem-nopermission' => 'Dit item bestaat niet.
+U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} bijbehorende logboeken doorzoeken]</span>.',
+	'content-model-1001' => 'Wikibaseitem',
 );
 
 /** Norwegian Nynorsk (‪norsk (nynorsk)‬)
