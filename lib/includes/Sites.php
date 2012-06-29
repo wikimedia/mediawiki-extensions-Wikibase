@@ -314,7 +314,7 @@ class Sites {
 	 * @return Site
 	 */
 	public static function newSite( array $fields = array(), $loadDefaults = true ) {
-		return SitesTable::singleton()->newFromArray( $fields, $loadDefaults );
+		return SitesTable::singleton()->newRow( $fields, $loadDefaults );
 	}
 
 }
