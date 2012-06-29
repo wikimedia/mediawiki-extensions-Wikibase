@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX///qQ\u003d",
+        "filename": "lib/includes/ItemObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-29T10:14:15Z",
+      "side": 1,
+      "message": "Tested for Malayalam and Arabic? The naive approach with whitespace seems to break encodings in that languages (according to John).",
+      "revId": "a34931c5a2fb0d339975eaecc0f47204db81a981",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///qM\u003d",
+        "filename": "lib/includes/SiteList.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-29T10:14:15Z",
+      "side": 1,
+      "message": "Why? Explicitly writing return should make the logic clearer, IMHO.",
+      "revId": "a34931c5a2fb0d339975eaecc0f47204db81a981",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///qI\u003d",
+        "filename": "lib/includes/diff/MapDiff.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-29T10:14:15Z",
+      "side": 1,
+      "message": "No love for functional programming? :(",
+      "revId": "a34931c5a2fb0d339975eaecc0f47204db81a981",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///qE\u003d",
+        "filename": "lib/tests/phpunit/ItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-06-29T10:14:15Z",
+      "side": 1,
+      "message": "Huh? What about the deleted tests? Not good?",
+      "revId": "a34931c5a2fb0d339975eaecc0f47204db81a981",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
