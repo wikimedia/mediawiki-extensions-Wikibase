@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use UtfNormal;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -164,6 +165,39 @@ abstract class Api extends \ApiBase {
 			}
 			$this->getResult()->addValue( $path, $name, $value );
 		}
+	}
+
+	/**
+	 * Trim initial and trailing whitespace, and compress internal ones.
+	 * @param string $inputString The actual string to process.
+	 * @return filtered string where whitespace possibly are removed.
+	 */
+	public function squash( $inputString ) {
+		return preg_replace( '/(\s+)/', ' ', preg_replace( '/(^\s+|\s+$)/', '', $inputString ) );
+	}
+
+	/**
+	 * Normalize string into NFC after first checkingh if its already normalized.
+	 * @param string $inputString The actual string to process.
+	 * @return filtered string where whitespace possibly are removed.
+	 */
+	public function conditionalToNFC( $inputString ) {
+		// Note that quickIsNFCVerify will do some cleanup of the string,
+		// but if we fail to detect a legal string, then we convert
+		// the filtered string anyhow.
+		if ( !UtfNormal::quickIsNFCVerify( $inputString ) ) {
+			return UtfNormal::toNFC( $inputString );
+		}
+		return $inputString;
+	}
+
+	/**
+	 * Do a toNFC after the string is squashed
+	 * @param string $inputString
+	 * @return trimmed string on NFC form
+	 */
+	public function squashToNFC( $inputString ) {
+		return self::conditionalToNFC( self::squash($inputString ) );
 	}
 
 }

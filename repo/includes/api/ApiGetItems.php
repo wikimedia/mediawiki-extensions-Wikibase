@@ -38,14 +38,14 @@ class ApiGetItems extends Api {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {
 				foreach ($params['titles'] as $title) {
-					$id = Item::getIdForSiteLink( $params['sites'], $title );
+					$id = Item::getIdForSiteLink( $params['sites'], Api::squashToNFC( $title ) );
 					if ( $id ) $params['ids'][] = intval( $id );
 					//@todo: else report this problem
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				foreach ($params['sites'] as $site) {
-					$id = Item::getIdForSiteLink( $site, $params['titles'] );
+					$id = Item::getIdForSiteLink( $site, Api::squashToNFC( $params['titles'] ) );
 					if ( $id ) $params['ids'][] = intval( $id );
 					//@todo: else report this problem
 				}
@@ -53,16 +53,16 @@ class ApiGetItems extends Api {
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 			}
-			
+
 			if ( count($params['ids']) === 0 ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 		}
 
 		$languages = $params['languages'];
-		
+
 		$this->setUsekeys( $params );
-		
+
 		foreach ($params['ids'] as $id) {
 			$page = Item::getWikiPageForId( $id );
 			if ($page->exists()) {
@@ -74,7 +74,7 @@ class ApiGetItems extends Api {
 				if ( !( $item instanceof Item ) ) {
 					$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 				}
-				
+
 				$itemPath = array( 'items', $id );
 				$res = $this->getResult();
 

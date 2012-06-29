@@ -62,19 +62,17 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		$language = $params['language'];
 
 		if ( isset( $params['label'] ) ) {
-			$labels = array( $language => $item->setLabel( $language, $params['label'] ) );
+			$labels = array( $language => $item->setLabel( $language,Api::squashToNFC( $params['label'] ) ) );
 			$this->addLabelsToResult( $labels, 'item' );
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$descriptions = array( $language => $item->setDescription( $language, $params['description'] ) );
+			$descriptions = array( $language => $item->setDescription( $language, Api::squashToNFC( $params['description'] ) ) );
 			$this->addDescriptionsToResult( $descriptions, 'item' );
 		}
 
 		// Because we can't fail?
-		$success = true;
-		
-		return $success;
+		return true;
 	}
 	
 	/**

@@ -583,7 +583,7 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testSetLanguageAttributeAdd( $id, $site, $title, $language, $label, $description ) {
-		$this->setLanguageAttribute( $id+3, $site, $title, $language, $label, $description, 'add' );
+		$this->setLanguageAttribute( $id+4, $site, $title, $language, $label, $description, 'add' );
 	}
 	
 	/**
@@ -830,6 +830,27 @@ class ApiSetItemTest extends \ApiTestCase {
 					}
 				}'
 			),
+			array(
+				++$idx,
+				'add',
+				'{
+					"links": {
+						"dewiki": "Episkopi Cantonment",
+						"enwiki": "Episkopi Cantonment",
+						"nlwiki": "Episkopi Cantonment"
+					},
+					"label": {
+						"de": "Episkopi Cantonment",
+						"en": "Episkopi Cantonment",
+						"nl": "Episkopi Cantonment"
+					},				
+					"description": { 
+						"de" : "Sitz der Verwaltung der Mittelmeerinsel Zypern.",
+						"en" : "The capital of Akrotiri and Dhekelia.",
+						"nl" : "Het bestuurlijke centrum van Akrotiri en Dhekelia."
+					}
+				}'
+			),
 		);
 	}
 	
@@ -841,14 +862,25 @@ class ApiSetItemTest extends \ApiTestCase {
 			array( $idx, 'enwiki', 'Berlin'),
 			array( $idx, 'nlwiki', 'Berlin'),
 			array( $idx, 'nnwiki', 'Berlin'),
+			array( $idx, 'dewiki', ' Berlin'),
+			array( $idx, 'enwiki', '  Berlin'),
+			array( $idx, 'nlwiki', 'Berlin '),
+			array( $idx, 'nnwiki', 'Berlin  '),
 			array( ++$idx, 'dewiki', 'London'),
 			array( $idx, 'enwiki', 'London'),
 			array( $idx, 'nlwiki', 'London'),
 			array( $idx, 'nnwiki', 'London'),
+			array( $idx, 'dewiki', ' London '),
+			array( $idx, 'enwiki', '  London  '),
+			array( $idx, 'nlwiki', '   London   '),
+			array( $idx, 'nnwiki', '    London    '),
 			array( ++$idx, 'enwiki', 'Oslo'),
 			array( $idx, 'dewiki', 'Oslo'),
 			array( $idx, 'nlwiki', 'Oslo'),
 			array( $idx, 'nnwiki', 'Oslo'),
+			array( ++$idx, 'enwiki', 'Episkopi Cantonment'),
+			array( $idx, 'dewiki', 'Episkopi  Cantonment'),
+			array( $idx, 'nlwiki', 'Episkopi   Cantonment'),
 		);
 	}
 	
@@ -879,13 +911,13 @@ class ApiSetItemTest extends \ApiTestCase {
 		);
 	}
 
-public function providerRemoveLabelDescription() {
-	$idx = self::$baseOfItemIds;
-	return array(
-		array( ++$idx, 'nlwiki', 'Berlin', 'da' ),
-		array( ++$idx, 'nlwiki', 'London', 'da' ),
-		array( ++$idx, 'nlwiki', 'Oslo', 'da' ),
-	);
-}
-	
+	public function providerRemoveLabelDescription() {
+		$idx = self::$baseOfItemIds;
+		return array(
+			array( ++$idx, 'nlwiki', 'Berlin', 'da' ),
+			array( ++$idx, 'nlwiki', 'London', 'da' ),
+			array( ++$idx, 'nlwiki', 'Oslo', 'da' ),
+		);
+	}
+
 }

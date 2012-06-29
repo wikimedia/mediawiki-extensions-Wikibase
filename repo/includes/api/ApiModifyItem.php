@@ -91,7 +91,12 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
 
-		$hasLink = isset( $params['site'] ) && $params['title'];
+		$normTitle = '';
+		$hasLink = false;
+		if ( isset( $params['site'] ) && $params['title'] ) {
+			$normTitle = Api::squashToNFC( $params['title'] );
+			$hasLink = true;
+		}
 		$item = null;
 
 		$this->validateParameters( $params );
@@ -112,7 +117,7 @@ abstract class ApiModifyItem extends Api {
 			}
 		}
 		elseif ( $hasLink ) {
-			$item = Item::getFromSiteLink( $params['site'], Item::normalize( $params['title'] ) );
+			$item = Item::getFromSiteLink( $params['site'], $normTitle );
 
 			if ( is_null( $item ) && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
@@ -175,9 +180,6 @@ abstract class ApiModifyItem extends Api {
 				'id', $item->getId()
 			);
 			if ( $hasLink ) {
-				// normalizing site does not really give any meaning
-				// so we only normalize title
-				$normTitle = Item::normalize( $params['title'] );
 				$normalized = array();
 				if ( $normTitle !== $params['title'] ) {
 					$normalized['from'] = $params['title'];

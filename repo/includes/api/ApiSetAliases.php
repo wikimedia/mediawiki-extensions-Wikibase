@@ -58,15 +58,33 @@ class ApiSetAliases extends ApiModifyItem {
 	 */
 	protected function modifyItem( Item &$item, array $params ) {
 		if ( isset( $params['set'] ) ) {
-			$item->setAliases( $params['language'], $params['set'] );
+			$item->setAliases(
+				$params['language'],
+				array_map(
+					function( $str ) { return Api::squashToNFC( $str ); },
+					$params['set']
+				)
+			);
 		}
 
 		if ( isset( $params['remove'] ) ) {
-			$item->removeAliases( $params['language'], $params['remove'] );
+			$item->removeAliases(
+				$params['language'],
+				array_map(
+					function( $str ) { return Api::squashToNFC( $str ); },
+					$params['remove']
+				)
+			);
 		}
 
 		if ( isset( $params['add'] ) ) {
-			$item->addAliases( $params['language'], $params['add'] );
+			$item->addAliases(
+				$params['language'],
+				array_map(
+					function( $str ) { return Api::squashToNFC( $str ); },
+					$params['add']
+				)
+			);
 		}
 
 		$aliases = $item->getAllAliases( (array)$params['language'] );
