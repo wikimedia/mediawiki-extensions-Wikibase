@@ -104,7 +104,7 @@ $messages['en'] = array(
 You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]
 to find out where it went, or [[Special:CreateItem|create a new item]]</span>.',
 	'wikibase-noitem-nopermission'       => 'This item does not exist.
-You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs].',
+You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]</span>.',
 
 	//content model names
 	'content-model-1001' => 'Wikibase item',
