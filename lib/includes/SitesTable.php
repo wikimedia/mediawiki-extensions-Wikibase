@@ -105,7 +105,7 @@ class SitesTable extends \ORMTable {
 	}
 
 	/**
-	 * Factory method to construct a new WikibaseChange instance.
+	 * Factory method to construct a new Wikibase\Change instance.
 	 *
 	 * @since 0.1
 	 *
@@ -114,7 +114,7 @@ class SitesTable extends \ORMTable {
 	 *
 	 * @return Change
 	 */
-	public function newFromArray( array $data, $loadDefaults = false ) {
+	public function newRow( array $data, $loadDefaults = false ) {
 		if ( !array_key_exists( 'type', $data ) ) {
 			$data['type'] = SITE_TYPE_UNKNOWN;
 		}
