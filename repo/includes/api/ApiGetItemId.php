@@ -32,7 +32,7 @@ class ApiGetItemId extends Api {
 
 		// normally 'id' should not exist here and the test should always return true
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = Item::getIdForSiteLink( $params['site'], $params['title'] );
+			$params['id'] = ItemContent::getIdForSiteLink( $params['site'], $params['title'] );
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}

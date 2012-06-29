@@ -154,18 +154,11 @@ class MapDiff extends Diff implements IDiffOp {
 		}
 
 		return $diff;
-
-		return array_filter(
-			$from,
-			function( $value ) use ( $to ) {
-				return !in_array( $value, $to );
-			}
-		);
 	}
 
 	/**
 	 * @since 0.1
-	 * @return DiffOpList
+	 * @return array
 	 */
 	public function getChanges() {
 		return $this->getTypeOperations( 'change' );

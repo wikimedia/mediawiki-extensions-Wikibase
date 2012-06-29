@@ -29,7 +29,7 @@ class ItemDisambiguation extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $items array of WikibaseItem
+	 * @param $items array of ItemContent
 	 * @param string $langCode
 	 * @param $context IContextSource|null
 	 *

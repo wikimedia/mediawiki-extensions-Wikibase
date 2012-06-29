@@ -28,7 +28,6 @@ class ItemView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
 	 * @param \IContextSource|null $context
 	 */
 	public function __construct( IContextSource $context = null ) {
@@ -44,13 +43,13 @@ class ItemView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Wikibase\Item    $item the item to render
+	 * @param \Wikibase\ItemContent    $item the item to render
 	 * @param \Language|null    $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool              $editable whether editing is allowed (enabled edit links).
 	 *
 	 * @return string
 	 */
-	public function getHTML( Item $item, Language $lang = null, $editable = true ) {
+	public function getHTML( ItemContent $item, Language $lang = null, $editable = true ) {
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 
 		if ( !$lang ) {
@@ -59,9 +58,9 @@ class ItemView extends \ContextSource {
 
 		$html = '';
 
-		$description = $item->getDescription( $lang->getCode() );
-		$aliases = $item->getAliases( $lang->getCode() );
-		$siteLinks = $item->getSiteLinks();
+		$description = $item->getItem()->getDescription( $lang->getCode() );
+		$aliases = $item->getItem()->getAliases( $lang->getCode() );
+		$siteLinks = $item->getItem()->getSiteLinks();
 
 		// even if description is false, we want it in any case!
 		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
@@ -158,13 +157,13 @@ class ItemView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item                $item the item to analyze/render
+	 * @param ItemContent                $item the item to analyze/render
 	 * @param null|ParserOptions  $options parser options. If nto provided, the local context will be used to create generic parser options.
 	 * @param bool                $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( Item $item, ParserOptions $options = null, $generateHtml = true ) {
+	public function getParserOutput( ItemContent $item, ParserOptions $options = null, $generateHtml = true ) {
 		if ( !$options ) {
 			$options = $this->makeParserOptions();
 		}
@@ -212,7 +211,7 @@ class ItemView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Wikibase\Item      $item the item to output
+	 * @param \Wikibase\ItemContent      $item the item to output
 	 * @param null|OutputPage    $out the output page to write to. If not given, the local context will be used.
 	 * @param null|ParserOptions $options parser options to use for rendering. If not given, the local context will be used.
 	 * @param null|ParserOutput  $pout optional parser object - provide this if you already have a parser options for this item,
@@ -221,7 +220,7 @@ class ItemView extends \ContextSource {
 	 * @return ParserOutput the parser output, for further processing.
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
-	public function render( Item $item, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
+	public function render( ItemContent $item, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
 		if ( !$out ) {
 			$out = $this->getOutput();
 		}
@@ -258,15 +257,15 @@ class ItemView extends \ContextSource {
 	 * @static
 	 *
 	 * @param OutputPage $out the OutputPage to add to
-	 * @param Item       $item the item for which we want to add the JS config
+	 * @param ItemContent       $item the item for which we want to add the JS config
 	 * @param String     $langCode the language used for showing the item.
 	 *
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
-	public static function registerJsConfigVars( OutputPage $out, Item $item, $langCode  ) {
+	public static function registerJsConfigVars( OutputPage $out, ItemContent $item, $langCode  ) {
 
 		// hand over the itemId to JS
-		$out->addJsConfigVars( 'wbItemId', $item->getId() );
+		$out->addJsConfigVars( 'wbItemId', $item->getItem()->getId() );
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
 		$sites = self::getSiteDetails();

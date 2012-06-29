@@ -18,10 +18,10 @@ use User, Title, WikiPage, Content, ParserOptions, ParserOutput, RequestContext;
 class ItemHandler extends EntityHandler {
 
 	/**
-	 * @return Item
+	 * @return ItemContent
 	 */
 	public function makeEmptyContent() {
-		return Item::newEmpty();
+		return ItemContent::newEmpty();
 	}
 
 	public function __construct() {
@@ -59,10 +59,10 @@ class ItemHandler extends EntityHandler {
 	 * @param string $blob
 	 * @param null|string $format
 	 *
-	 * @return Item
+	 * @return ItemContent
 	 */
 	public function unserializeContent( $blob, $format = null ) {
-		return Item::newFromArray( $this->unserializedData( $blob, $format ) );
+		return ItemContent::newFromArray( $this->unserializedData( $blob, $format ) );
 	}
 
 	/**

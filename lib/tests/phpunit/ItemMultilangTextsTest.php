@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use \Wikibase\Item as Item;
+use \Wikibase\ItemObject as ItemObject;
 
 /**
  * Tests for the WikibaseItem class.
@@ -21,7 +22,6 @@ use \Wikibase\Item as Item;
 class ItemMultilangTextsTest extends \MediaWikiTestCase {
 	
 	/**
-	 * Enter description here ...
 	 * @var Item
 	 */
 	protected static $item = null;
@@ -31,19 +31,13 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 	 */
 	protected function setUp() {
   		parent::setUp();
-		self::$item = Item::newFromArray( array( 'entity' => 'q42' ) );
-	}
-	
-  	/**
-	 * This is to tear down the environment
-	 */
-	function tearDown() {
-		parent::tearDown();
+		self::$item = ItemObject::newFromArray( array( 'entity' => 'q42' ) );
 	}
 	
 	/**
-	 * Tests @see WikibaseItem::setLabel
-	 * Tests @see WikibaseItem::getLabels
+	 * Tests @see Item::setLabel
+	 * Tests @see Item::getLabels
+	 *
 	 * @dataProvider providerLabels
 	 */
 	public function testLabels( $lang, $str ) {
@@ -66,14 +60,15 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 	
 	public function providerLabels() {
 		return array(
-			array('de', 'Bar'),
-			array('en', 'Foo'),
+			array( 'de', 'Bar' ),
+			array( 'en', 'Foo' ),
 		);
 	}
 	
 	/**
-	 * Tests @see WikibaseItem::setDescription
-	 * Tests @see WikibaseItem::getDescriptions
+	 * Tests @see Item::setDescription
+	 * Tests @see Item::getDescriptions
+	 *
 	 * @dataProvider providerDescriptions
 	 */
 	public function testDescriptions( $lang, $str ) {
@@ -96,8 +91,8 @@ class ItemMultilangTextsTest extends \MediaWikiTestCase {
 	
 	public function providerDescriptions() {
 		return array(
-			array('de', 'This is about Bar'),
-			array('en', 'This is about Foo'),
+			array( 'de', 'This is about Bar' ),
+			array( 'en', 'This is about Foo' ),
 		);
 	}
 	

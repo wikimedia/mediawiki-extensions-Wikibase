@@ -17,15 +17,15 @@ namespace Wikibase;
 class ItemDeletionUpdate extends \DataUpdate {
 
 	/**
-	 * @var Item
+	 * @var ItemContent
 	 */
-	protected $item;
+	protected $itemContent;
 
 	/**
-	 * @param Item $item
+	 * @param ItemContent $itemContent
 	 */
-	public function __construct( Item $item ) {
-		$this->item = $item;
+	public function __construct( ItemContent $itemContent ) {
+		$this->itemContent = $itemContent;
 	}
 
 	/**
@@ -34,7 +34,7 @@ class ItemDeletionUpdate extends \DataUpdate {
 	public function doUpdate() {
 		$dbw = wfGetDB( DB_MASTER );
 
-		$id = $this->item->getId();
+		$id = $this->itemContent->getItem()->getId();
 
 		$dbw->delete(
 			'wb_items',

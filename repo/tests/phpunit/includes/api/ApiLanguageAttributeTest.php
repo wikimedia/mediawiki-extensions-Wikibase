@@ -64,9 +64,13 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 		if ( $token ) {
 			$req['token'] = $token;
 		}
+
+		$item = self::$itemContent->getItem();
+
+		$this->assertInstanceOf( '\Wikibase\Item', $item );
 		
 		$req = array_merge( $req, array(
-			'id' => self::$item->getId(),
+			'id' => $item->getId(),
 			'action' => 'wbsetlanguageattribute',
 			//'usekeys' => true, // this comes from Settings::get( 'apiUseKeys' )
 			'format' => 'json',
@@ -79,8 +83,8 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 			$apiResponse = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		}
 		catch ( \Exception $e ) {
-			if ($exception !== null) {
-				$this->assertTrue(is_a($e, $exception), "Not the expected exception");
+			if ( $exception !== null ) {
+				$this->assertTrue( is_a( $e, $exception ), "Not the expected exception" );
 				return;
 			}
 			else {
@@ -92,16 +96,22 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 
 		$this->assertSuccess( $apiResponse );
 		
-		self::$item->reload();
+		self::$itemContent->reload();
+
+		$item = self::$itemContent->getItem();
+
+		$this->assertInstanceOf( '\Wikibase\Item', $item );
+
 		if ( $attr === 'label') {
-			$str = self::$item->getLabel( $langCode );
+			$str = $item->getLabel( $langCode );
 			$this->assertTrue(
 				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['labels']) : !array_key_exists($langCode, $apiResponse['item']['labels']),
 				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in labels"
 			);
 		}
+
 		if ( $attr === 'description') {
-			$str = self::$item->getDescription( $langCode );
+			$str = $item->getDescription( $langCode );
 			$this->assertTrue(
 				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['descriptions']) : !array_key_exists($langCode, $apiResponse['item']['descriptions']),
 				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in descriptions"

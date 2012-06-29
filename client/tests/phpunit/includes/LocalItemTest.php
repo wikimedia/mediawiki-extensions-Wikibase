@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\LocalItem as LocalItem;
 use Wikibase\LocalItems as LocalItems;
 use Wikibase\Item as Item;
+use Wikibase\ItemObject as ItemObject;
 
 /**
  * Tests for the Diff class.
@@ -29,7 +30,7 @@ class LocalItemTest extends \MediaWikiTestCase {
 				array(
 					'item_id' => 42,
 					'page_id' => 9001,
-					'item_data' => Item::newEmpty(),
+					'item_data' => ItemObject::newEmpty(),
 				),
 				true
 			),

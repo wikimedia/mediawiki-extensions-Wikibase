@@ -26,6 +26,7 @@ use Wikibase\Settings as Settings;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group ApiSetItemTest
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -104,7 +105,7 @@ class ApiSetItemTest extends \ApiTestCase {
 			$this->assertTrue( true, "Make phpunit happy" );
 		}
 	}
-	
+
 	/**
 	 * @group API
 	 * @depends testTokensAndRights
@@ -153,11 +154,11 @@ class ApiSetItemTest extends \ApiTestCase {
 				self::$users['wbeditor']->user
 			);
 		}
-		catch (\UsageException $e) {
+		catch ( \UsageException $e ) {
 			$this->assertTrue( ($e->getCode() == 'session-failure'), "Got a wrong exception" );
 			return;
 		}
-		$this->assertTrue( (self::$usetoken), "Missing an exception" );
+		$this->assertTrue( self::$usetoken, "Missing an exception" );
 	}
 
 	/**
@@ -176,10 +177,10 @@ class ApiSetItemTest extends \ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-			
+
 			$req['token'] = $first[0]['wbsetitem']['setitemtoken'];
 		}
-		
+
 		$req = array_merge(
 			$req,
 			array(
@@ -189,7 +190,7 @@ class ApiSetItemTest extends \ApiTestCase {
 				'item' => 'add'
 			)
 		);
-		
+
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
@@ -199,7 +200,7 @@ class ApiSetItemTest extends \ApiTestCase {
 			"Must have an 'id' key in the 'item' from the second result from the API" );
 		self::$baseOfItemIds = $second[0]['item']['id'];
 	}
-	
+
 	/**
 	 * @group API
 	 * @depends testSetItemTop
@@ -217,10 +218,10 @@ class ApiSetItemTest extends \ApiTestCase {
 				false,
 				self::$users['wbeditor']->user
 			);
-			
+
 			$req['token'] = $first[0]['wbsetitem']['setitemtoken'];
 		}
-		
+
 		$req = array_merge(
 			$req,
 			array(
@@ -230,9 +231,9 @@ class ApiSetItemTest extends \ApiTestCase {
 				'item' => $op
 			)
 		);
-		
+
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-		
+
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
 		$this->assertArrayHasKey( 'item', $second[0],
@@ -250,11 +251,11 @@ class ApiSetItemTest extends \ApiTestCase {
 		$this->assertEquals( $myid, $second[0]['item']['id'],
 			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 	}
-	
+
 	/**
 	 * Test basic lookup of items to get the id.
 	 * This is really a fast lookup without reparsing the stringified item.
-	 * 
+	 *
 	 * @group API
 	 * @depends testSetItemGetTokenSetData
 	 * @dataProvider providerGetItemId
@@ -265,7 +266,7 @@ class ApiSetItemTest extends \ApiTestCase {
 			'site' => $site,
 			'title' => $title,
 		) );
-		
+
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'item', $first[0],
@@ -276,11 +277,11 @@ class ApiSetItemTest extends \ApiTestCase {
 		$this->assertEquals( $myid, $first[0]['item']['id'],
 			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 	}
-	
+
 	/**
 	 * Testing if we can get individual complete stringified items if we do lookup with single ids.
 	 * Note that this makes assumptions about which ids they have been assigned.
-	 * 
+	 *
 	 * @group API
 	 * @dataProvider provideSetItemIdDataOp
 	 * @depends testSetItemGetTokenSetData
@@ -291,7 +292,7 @@ class ApiSetItemTest extends \ApiTestCase {
 			'action' => 'wbgetitems',
 			'ids' => "{$myid}",
 		) );
-		
+
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
@@ -307,10 +308,10 @@ class ApiSetItemTest extends \ApiTestCase {
 		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$myid}"],
 			"Must have an 'descriptions' key in the '{$myid}' result from the API" );
 	}
-		
+
 	/**
 	 * Testing if we can get all the complete stringified items if we do lookup with multiple ids.
-	 * 
+	 *
 	 * @group API
 	 * @depends testSetItemGetTokenSetData
 	 */
@@ -319,7 +320,7 @@ class ApiSetItemTest extends \ApiTestCase {
 			'action' => 'wbgetitems',
 			'ids' => '1|2|3'
 		) );
-		
+
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
@@ -327,11 +328,11 @@ class ApiSetItemTest extends \ApiTestCase {
 		$this->assertCount( 3, $first[0]['items'],
 			"Must have a number of count of 3 in the 'items' result from the API" );
 	}
-	
+
 	/**
 	 * Testing if we can get individual complete stringified items if we do lookup with site-title pairs
 	 * Note that this makes assumptions about which ids they have been assigned.
-	 * 
+	 *
 	 * @group API
 	 * @dataProvider providerGetItemId
 	 * @depends testSetItemGetTokenSetData
@@ -343,7 +344,7 @@ class ApiSetItemTest extends \ApiTestCase {
 			'sites' => $site,
 			'titles' => $title,
 		) );
-		
+
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],

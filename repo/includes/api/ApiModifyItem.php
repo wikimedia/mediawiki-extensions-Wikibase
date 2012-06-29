@@ -22,12 +22,12 @@ abstract class ApiModifyItem extends Api {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param ItemContent $itemContent
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected abstract function modifyItem( Item &$item, array $params );
+	protected abstract function modifyItem( ItemContent &$itemContent, array $params );
 	
 	/**
 	 * Check the rights for the user accessing the module, that is a subclass of this one.
@@ -36,20 +36,21 @@ abstract class ApiModifyItem extends Api {
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 * @param $mod null|String name of the module, usually not set
 	 * @param $op null|String operation that is about to be done, usually not set
+	 *
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected abstract function getPermissionsErrorInternal( $user, array $params, $module=null, $op=null );
+	protected abstract function getPermissionsErrorInternal( $user, array $params, $module = null, $op = null );
 
 	/**
 	 * Check the rights for the user accessing the module, module name and operation comes from the actual subclass.
 	 * 
-	 * @param $title Title object where the item is stored
 	 * @param $user User doing the action
 	 * @param $mod null|String name of the module, usually not set
 	 * @param $op null|String operation that is about to be done, usually not set
+	 *
 	 * @return array of errors reported from the static getPermissionsError
 	 */
-	protected static function getPermissionsError( $user, $mod=null, $op=null ) {
+	protected static function getPermissionsError( $user, $mod = null, $op = null ) {
 		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
@@ -92,7 +93,7 @@ abstract class ApiModifyItem extends Api {
 		}
 
 		$hasLink = isset( $params['site'] ) && $params['title'];
-		$item = null;
+		$itemContent = null;
 
 		$this->validateParameters( $params );
 
@@ -105,30 +106,31 @@ abstract class ApiModifyItem extends Api {
 		}
 
 		if ( isset( $params['id'] ) ) {
-			$item = Item::getFromId( $params['id'] );
+			$itemContent = ItemContent::getFromId( $params['id'] );
 
-			if ( is_null( $item ) ) {
+			if ( is_null( $itemContent ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
 			}
 		}
 		elseif ( $hasLink ) {
-			$item = Item::getFromSiteLink( $params['site'], Item::normalize( $params['title'] ) );
+			$itemContent = ItemContent::getFromSiteLink( $params['site'], ItemObject::normalize( $params['title'] ) );
 
-			if ( is_null( $item ) && $params['item'] === 'update' ) {
+			if ( is_null( $itemContent ) && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
 			}
 		}
 
-		if ( !is_null( $item ) && !( $item instanceof Item ) ) {
+		if ( !is_null( $itemContent ) && !( $itemContent instanceof ItemContent ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
 
-		if ( !is_null( $item ) && $params['item'] === 'add' ) {
+		if ( !is_null( $itemContent ) && $params['item'] === 'add' ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
 
-		if ( !is_null( $item ) && $item !== false ) {
-			$title = $item->getTitle();
+		if ( !is_null( $itemContent ) && $itemContent !== false ) {
+			$title = $itemContent->getTitle();
+
 			if ( !is_null( $title ) && $title !== false ) {
 				if ( !$title->userCan( 'edit', $user ) ) {
 					$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
@@ -141,27 +143,26 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
 		}
 
-		if ( is_null( $item ) ) {
-			$item = Item::newEmpty();
+		if ( is_null( $itemContent ) ) {
+			$itemContent = ItemContent::newEmpty();
 
 			if ( $hasLink ) {
-				$item->addSiteLink( $params['site'], $params['title'] );
+				$itemContent->getItem()->addSiteLink( $params['site'], $params['title'] );
 			}
 		}
 
 		$this->setUsekeys( $params );
-		$success = $this->modifyItem( $item, $params );
+		$success = $this->modifyItem( $itemContent, $params );
+
 		if ( !$success ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
 		}
 
-		$isNew = $item->isNew();
-
 		// Do the actual save, or if it don't exist yet create it.
-		$status = $item->save();
+		$status = $itemContent->save();
 
 		if ( !$status->isOK() ) {
-			if ( $isNew ) {
+			if ( $itemContent->isNew() ) {
 				$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
 			}
 			else {
@@ -172,18 +173,22 @@ abstract class ApiModifyItem extends Api {
 		if ( $success ) {
 			$this->getResult()->addValue(
 				'item',
-				'id', $item->getId()
+				'id', $itemContent->getItem()->getId()
 			);
+
 			if ( $hasLink ) {
 				// normalizing site does not really give any meaning
 				// so we only normalize title
-				$normTitle = Item::normalize( $params['title'] );
+				$normTitle = ItemObject::normalize( $params['title'] );
+
 				$normalized = array();
+
 				if ( $normTitle !== $params['title'] ) {
 					$normalized['from'] = $params['title'];
 					$normalized['to'] = $normTitle;
 				}
-				if ( count( $normalized ) ) {
+
+				if ( $normalized !== array() ) {
 					$this->getResult()->addValue(
 						'item',
 						'normalized', $normalized
@@ -197,7 +202,6 @@ abstract class ApiModifyItem extends Api {
 			'success',
 			(int)$success
 		);
-		
 	}
 
 	/**

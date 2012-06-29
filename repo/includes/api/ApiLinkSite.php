@@ -34,18 +34,18 @@ class ApiLinkSite extends ApiModifyItem {
 	}
 
 	/**
-	 * Actually modify the item.
+	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param ItemContent $itemContent
 	 * @param array $params
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected function modifyItem( Item &$item, array $params ) {
+	protected function modifyItem( ItemContent &$itemContent, array $params ) {
 		if ( isset($params['link']) && $params['link'] === 'remove') {
-			return $item->removeSiteLink( $params['linksite'], $params['linktitle'] );
+			return $itemContent->getItem()->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
 			$data = $this->queryPageAtSite( $params['linksite'], $params['linktitle'] );
@@ -60,7 +60,7 @@ class ApiLinkSite extends ApiModifyItem {
 			if ( isset( $page['missing'] ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
 			}
-			$ret = $item->addSiteLink( $params['linksite'], $page['title'], $params['link'] );
+			$ret = $itemContent->getItem()->addSiteLink( $params['linksite'], $page['title'], $params['link'] );
 			if ( $ret === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
 			}

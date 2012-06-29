@@ -44,22 +44,22 @@ class SpecialItemByLabel extends SpecialItemResolver {
 			// TODO: display a message that the user needs to provide  the label and possibly some fancy input UI
 		}
 		else {
-			$items = call_user_func_array( 'Wikibase\Item::getFromLabel', $parts );
+			$itemContents = call_user_func_array( 'Wikibase\ItemContent::getFromLabel', $parts );
 
-			if ( $items === array() ) {
+			if ( $itemContents === array() ) {
 				// TODO: display that there are no matching items and possibly some fancy input UI
 			}
-			elseif ( count( $items ) !== 1 ) {
+			elseif ( count( $itemContents ) !== 1 ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $parts[1] )->escaped() );
-				$this->displayDisambiguationPage( $items, $parts[0] );
+				$this->displayDisambiguationPage( $itemContents, $parts[0] );
 			}
 			else {
-				$this->displayItem( $items[0] );
+				$this->displayItem( $itemContents[0] );
 			}
 		}
 	}
 
-	protected function displayDisambiguationPage( array /* of WikibaseItem */ $items, $langCode ) {
+	protected function displayDisambiguationPage( array /* of ItemContent */ $items, $langCode ) {
 		$disambiguationList = new Wikibase\ItemDisambiguation( $items, $langCode, $this->getContext() );
 		$disambiguationList->display();
 	}
