@@ -32,7 +32,7 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
 		return parent::getPermissionsError( $user, 'lang-attr', $params['item'] );
 	}
-	
+
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
@@ -42,13 +42,14 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 	 */
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
-		
+
 		if ( !isset( $params['label'] ) && !isset( $params['description'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-label-or-description' ), 'label-or-description' );
 		}
 	}
 
 	/**
+	 * Actually modify the item.
 	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1
@@ -62,21 +63,19 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		$language = $params['language'];
 
 		if ( isset( $params['label'] ) ) {
-			$labels = array( $language => $itemContent->getItem()->setLabel( $language, $params['label'] ) );
+			$labels = array( $language => $itemContent->getItem()->setLabel( $language,Api::squashToNFC( $params['label'] ) ) );
 			$this->addLabelsToResult( $labels, 'item' );
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, $params['description'] ) );
+			$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, Api::squashToNFC( $params['description'] ) ) );
 			$this->addDescriptionsToResult( $descriptions, 'item' );
 		}
 
 		// Because we can't fail?
-		$success = true;
-		
-		return $success;
+		return true;
 	}
-	
+
 	/**
 	 * Returns an array of allowed parameters (parameter name) => (default
 	 * value) or (parameter name) => (array with PARAM_* constants as keys)
@@ -147,7 +146,7 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 				=> 'Set the string "Wikimedia" for page with id "42" as a label, and the string "An encyclopedia that everyone can edit" as a decription in English language',
 		);
 	}
-	
+
 	/**
 	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
 	 */

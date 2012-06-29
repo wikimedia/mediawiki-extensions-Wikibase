@@ -72,6 +72,7 @@ $messages['en'] = array(
 	'wikibase-api-no-token' => 'There are no token given.',
 	'wikibase-api-no-data' => 'There are no data to operate upon.',
 	'wikibase-api-client-error' => 'The external client site failed.',
+	'wikibase-api-no-external-data' => 'There was no data from the external client site, possibly due to connection errors.',
 	'wikibase-api-no-external-page' => 'The external client site did not provide page information.',
 	'wikibase-api-add-sitelink-failed' => 'The site link could not be saved.',
 	'wikibase-api-cant-edit' => 'The logged in user is not allowed to edit.',
@@ -195,8 +196,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
 	'wikibase-api-no-token' => 'This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are som exceptional error condition. The message can be shown after misconfiguration of the system.',
 	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
+	'wikibase-api-no-external-data' => 'This is an error message where the external client did not reply, either because of the repo or the client terminated the connection, or because of some other connection error.',
 	'wikibase-api-no-external-page' => 'This is an error message where the external client did reply but either because of foulty reply or because the page title could not be unwound it was not possible to identify an external page.',
-	'wikibase-api-add-sitelink-failed' => 'This is an error message where the system of some unspecific reason could not add the site link to the temporary stor.',
+	'wikibase-api-add-sitelink-failed' => 'This is an error message where the system of some unspecific reason could not add the site link to the temporary store.',
 	'wikibase-api-cant-edit' => 'This is an error message for a situation where the user is blocked from editing. This will be shown to the user if he tries to edit when being blocked.',
 	'wikibase-api-no-permissions' => 'This is an error message for a situation where the user does not have sufficient rights. This will be shown to the user if the wiki uses group rights, and the user does not belong to the correct group, or if the rights of some other reason does not include the user.',
 	'wikibase-api-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error condition.
