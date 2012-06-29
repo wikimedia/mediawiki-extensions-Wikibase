@@ -48,7 +48,6 @@ $wgHooks['UnitTestsList'][]                    = 'STTLanguage\Hooks::registerUni
 $wgResourceModules['sticktothatlanguage'] = array(
 	'localBasePath' => Ext::getDir(),
 	'remoteBasePath' => Ext::getScriptPath(),
-	'group' => 'sticktothatlanguage',
 	'styles' => array(
 		'resources/StickToThatLanguage.css'
 	),
