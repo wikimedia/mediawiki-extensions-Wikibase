@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAPX///c0\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "squashWhitespace\n\nmissing @since tag",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAPX///b4\u003d",
         "filename": "repo/includes/api/Api.php",
         "patchSetId": 1
@@ -13,6 +30,125 @@
       "writtenOn": "2012-06-29T19:10:50Z",
       "side": 1,
       "message": "Check if this removes newlines, carriage returns and vertical form feed",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///cs\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "missing @since tag",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///cc\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "missing @since tag\n\nmissing space\n\nstatic call to non-static method",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///cU\u003d",
+        "filename": "repo/includes/api/ApiGetItemId.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "Item has no such method (it can\u0027t even since it\u0027s an interface). You probably want ItemContent.",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///cQ\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "ItemContent\n\nstatic call to non-static method",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///b8\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "ItemContent\n\nstatic call to non-static method",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///b0\u003d",
+        "filename": "repo/includes/api/ApiGetSiteLinks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "ItemContent\n\nstatic call to non-static method",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///bw\u003d",
+        "filename": "repo/includes/api/ApiLinkSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "static call to non-static method",
       "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -36,6 +172,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAPX///bs\u003d",
+        "filename": "repo/includes/api/ApiLinkSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "???",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAPX///c4\u003d",
         "filename": "repo/includes/api/ApiLinkSite.php",
         "patchSetId": 1
@@ -53,6 +206,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAPX///bY\u003d",
+        "filename": "repo/includes/api/ApiLinkSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "???",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAPX///dA\u003d",
         "filename": "repo/includes/api/ApiLinkSite.php",
         "patchSetId": 1
@@ -64,6 +234,142 @@
       "writtenOn": "2012-06-29T19:10:50Z",
       "side": 1,
       "message": "Cleanup",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///bg\u003d",
+        "filename": "repo/includes/api/ApiLinkSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "???",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///bU\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "static call to non-static method",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///bQ\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "ItemContent",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///bM\u003d",
+        "filename": "repo/includes/api/ApiSetAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "static call to non-static method",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///bI\u003d",
+        "filename": "repo/includes/api/ApiSetAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "static call to non-static method",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///bE\u003d",
+        "filename": "repo/includes/api/ApiSetAliases.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "static call to non-static method",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///bA\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "static call to non-static method\n\nmissing space",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///a8\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "static call to non-static method",
       "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -132,6 +438,23 @@
       "writtenOn": "2012-06-29T19:10:50Z",
       "side": 1,
       "message": "Whitespace",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///a4\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T19:13:06Z",
+      "side": 1,
+      "message": "Missing spaces",
       "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
