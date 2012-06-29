@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAPX///o4\u003d",
+        "filename": "lib/includes/SiteList.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T10:44:28Z",
+      "side": 1,
+      "message": "Because it\u0027s inconsistent with ArraObject behaviour. And this was the only place where the return was so it actually returned void.",
+      "parentUuid": "AAAAPX///qM\u003d",
+      "revId": "a34931c5a2fb0d339975eaecc0f47204db81a981",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAPX///qI\u003d",
         "filename": "lib/includes/diff/MapDiff.php",
         "patchSetId": 1
@@ -71,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAPX///os\u003d",
+        "filename": "lib/includes/diff/MapDiff.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T10:44:28Z",
+      "side": 1,
+      "message": "The above code was dead as it was surrounded by a return and a closing bracket. So no possibility to make it alive again...",
+      "parentUuid": "AAAAPX///qI\u003d",
+      "revId": "a34931c5a2fb0d339975eaecc0f47204db81a981",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAPX///qE\u003d",
         "filename": "lib/tests/phpunit/ItemTest.php",
         "patchSetId": 1
@@ -82,6 +118,24 @@
       "writtenOn": "2012-06-29T10:14:15Z",
       "side": 1,
       "message": "Huh? What about the deleted tests? Not good?",
+      "revId": "a34931c5a2fb0d339975eaecc0f47204db81a981",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///ok\u003d",
+        "filename": "lib/tests/phpunit/ItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-06-29T10:44:28Z",
+      "side": 1,
+      "message": "Not deleted - moved. They are no in ItemContentTest.",
+      "parentUuid": "AAAAPX///qE\u003d",
       "revId": "a34931c5a2fb0d339975eaecc0f47204db81a981",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
