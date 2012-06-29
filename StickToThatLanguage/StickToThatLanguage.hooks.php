@@ -70,18 +70,26 @@ final class Hooks {
 	 * Used to build the global language selector if activated
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateOutputPageBeforeExec
 	 *
-	 * @param SkinTemplate $sk
-	 * @param QuickTemplate $tpl
+	 * @param \SkinTemplate $sk
+	 * @param \QuickTemplate $tpl
 	 * @return bool
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( \SkinTemplate &$sk, \QuickTemplate &$tpl ) {
-		global $egSTTLanguageDisplaySelector;
+		global $egSTTLanguageDisplaySelector, $egSTTLanguageTopLanguages;
 		if( ! $egSTTLanguageDisplaySelector ) {
 			return true; // option for disabling the selector is active
 		}
 
 		// Title of our item:
 		$title = $sk->getOutput()->getTitle();
+		$user = $sk->getUser();
+
+		$langUrls = array();
+		$topLangUrls = array();
+
+		$topLanguages = $user->isLoggedIn()
+			? Ext::getUserLanguageCodes( $user ) // display users preferred languages on top
+			: $egSTTLanguageTopLanguages;
 
 		foreach( \Language::fetchLanguageNames() as $code => $name ) {
 			if( $code === $sk->getLanguage()->getCode() ) {
@@ -89,7 +97,7 @@ final class Hooks {
 			}
 
 			// build information for the skin to generate links for all languages:
-			$language_urls[] = array(
+			$url = array(
 				'href' => $title->getFullURL( array( 'uselang' => $code ) ),
 				'text' => $name,
 				'title' => $title->getText(),
@@ -97,7 +105,20 @@ final class Hooks {
 				'lang' => $code,
 				'hreflang' => $code,
 			);
+
+			$topIndex =  array_search( $code, $topLanguages );
+			if( $topIndex !== false ) {
+				// language is considered a 'top' language
+				$url['class'] .= ' sttl-toplang';
+				$topLangUrls[ $topIndex ] = $url;
+			} else {
+				$langUrls[] = $url;
+			}
 		}
+
+		// put preferred languages on top and add others:
+		ksort( $topLangUrls );
+		$language_urls = array_merge( $topLangUrls, $langUrls );
 
 		// define these languages as languages for the sitebar within the skin:
 		$tpl->setRef( 'language_urls', $language_urls );
