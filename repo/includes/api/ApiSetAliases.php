@@ -29,7 +29,7 @@ class ApiSetAliases extends ApiModifyItem {
 	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
 		return parent::getPermissionsError( $user, 'alias', $params['item'] );
 	}
-	
+
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 * This overrides the base class
@@ -47,6 +47,7 @@ class ApiSetAliases extends ApiModifyItem {
 	}
 	
 	/**
+	 * Actually modify the item.
 	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1
@@ -58,15 +59,33 @@ class ApiSetAliases extends ApiModifyItem {
 	 */
 	protected function modifyItem( ItemContent &$itemContent, array $params ) {
 		if ( isset( $params['set'] ) ) {
-			$itemContent->getItem()->setAliases( $params['language'], $params['set'] );
+			$itemContent->getItem()->setAliases(
+				$params['language'],
+				array_map(
+					function( $str ) { return Api::squashToNFC( $str ); },
+					$params['set']
+				)
+			);
 		}
 
 		if ( isset( $params['remove'] ) ) {
-			$itemContent->getItem()->removeAliases( $params['language'], $params['remove'] );
+			$itemContent->getItem()->removeAliases(
+				$params['language'],
+				array_map(
+					function( $str ) { return Api::squashToNFC( $str ); },
+					$params['remove']
+				)
+			);
 		}
 
 		if ( isset( $params['add'] ) ) {
-			$itemContent->getItem()->addAliases( $params['language'], $params['add'] );
+			$itemContent->getItem()->addAliases(
+				$params['language'],
+				array_map(
+					function( $str ) { return Api::squashToNFC( $str ); },
+					$params['add']
+				)
+			);
 		}
 
 		$aliases = $itemContent->getItem()->getAllAliases( (array)$params['language'] );

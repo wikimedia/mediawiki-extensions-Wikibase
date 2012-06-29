@@ -38,14 +38,14 @@ class ApiGetItems extends Api {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {
 				foreach ($params['titles'] as $title) {
-					$id = ItemContent::getIdForSiteLink( $params['sites'], $title );
+					$id = ItemContent::getIdForSiteLink( $params['sites'], Api::squashToNFC( $title ) );
 					if ( $id ) $params['ids'][] = intval( $id );
 					//@todo: else report this problem
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				foreach ($params['sites'] as $site) {
-					$id = ItemContent::getIdForSiteLink( $site, $params['titles'] );
+					$id = ItemContent::getIdForSiteLink( $site, Api::squashToNFC( $params['titles'] ) );
 					if ( $id ) $params['ids'][] = intval( $id );
 					//@todo: else report this problem
 				}
@@ -53,19 +53,19 @@ class ApiGetItems extends Api {
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 			}
-			
+
 			if ( count($params['ids']) === 0 ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 		}
 
 		$languages = $params['languages'];
-		
+
 		$this->setUsekeys( $params );
-		
+
 		foreach ($params['ids'] as $id) {
 			$page = ItemContent::getWikiPageForId( $id );
-			if ($page->exists()) {
+			if ( $page->exists() ) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				$itemContent = $page->getContent();
 
@@ -76,7 +76,7 @@ class ApiGetItems extends Api {
 				if ( !( $itemContent instanceof ItemContent ) ) {
 					$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 				}
-				
+
 				$itemPath = array( 'items', $id );
 				$res = $this->getResult();
 
@@ -103,7 +103,7 @@ class ApiGetItems extends Api {
 						$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
 						break;
 					default:
-						// should never be here
+						// should never be here, because it should be something for the earlyer cases
 						$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
 					}
 				}
