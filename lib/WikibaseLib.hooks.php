@@ -84,7 +84,7 @@ final class LibHooks {
 			'ItemMultilangTexts',
 			'ItemNewEmpty',
 			'ItemNewFromArray',
-			'Item',
+			'ItemObject',
 			'LibHooks',
 			'MediaWikiSite',
 			'SiteConfigObject',
