@@ -65,7 +65,7 @@ class ChangesTest extends \MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testNewFromArray( array $data, $loadDefaults = false ) {
-		$change = Changes::singleton()->newFromArray( $data, $loadDefaults );
+		$change = Changes::singleton()->newRow( $data, $loadDefaults );
 
 		$this->assertEquals( $GLOBALS['wgUser']->getId(), $change->getUser()->getId() );
 
@@ -82,7 +82,7 @@ class ChangesTest extends \MediaWikiTestCase {
 	public function testSaveSelectCountAndDelete( array $data, $loadDefaults = false ) {
 		$changesTable = Changes::singleton();
 
-		$change = $changesTable->newFromArray( $data, $loadDefaults );
+		$change = $changesTable->newRow( $data, $loadDefaults );
 
 		$this->assertTrue( $change->save() );
 
