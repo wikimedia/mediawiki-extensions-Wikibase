@@ -40,7 +40,7 @@ class Changes extends \ORMTable {
 	 * @return string
 	 */
 	public function getRowClass() {
-		return 'WikibaseChange';
+		return '\Wikibase\Change';
 	}
 
 	/**
