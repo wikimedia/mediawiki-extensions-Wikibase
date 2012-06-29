@@ -70,6 +70,8 @@ final class Hooks {
 	 * Used to build the global language selector if activated
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateOutputPageBeforeExec
 	 *
+	 * @since 0.1
+	 *
 	 * @param \SkinTemplate $sk
 	 * @param \QuickTemplate $tpl
 	 * @return bool
@@ -144,6 +146,8 @@ final class Hooks {
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
 	 *
+	 * @since 0.1
+	 *
 	 * @param \OutputPage $out
 	 * @param \Skin $skin
 	 * @return bool
@@ -157,6 +161,51 @@ final class Hooks {
 			$out->addModuleStyles( 'sticktothatlanguage' );
 		}
 
+		return true;
+	}
+
+	/**
+	 * Makes the language sticky (mostly for links of the page content)
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin
+	 *
+	 * @param $skin
+	 * @param $target
+	 * @param $text
+	 * @param $customAttribs
+	 * @param $query
+	 * @param $options
+	 * @param $ret
+	 * @return bool true
+	 */
+	public static function onLinkBegin( $skin, $target, &$text, &$customAttribs, &$query, &$options, &$ret ) {
+		global $wgLang, $wgLanguageCode;
+		if( $wgLang->getCode() !== $wgLanguageCode   // cache friendly!
+			&& array_key_exists( 'uselang', $query ) // don't add it if there is a uselang set to that url already!
+		) {
+			// this will add the 'uselang' parameter to each link generated with Linker::link()
+			$query[ 'uselang' ] = $wgLang->getCode();
+		}
+		return true;
+	}
+
+	/**
+	 * Makes the language stick (mostly for links other than the page content)
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/GetLocalURL::Internal
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Title $title
+	 * @param string $url
+	 * @return bool true
+	 */
+	public static function onGetLocalUrlInternally( \Title $title, &$url ) {
+		global $wgLang, $wgLanguageCode;
+		if( $wgLang->getCode() !== $wgLanguageCode    // squid-cache friendly!
+			&& !preg_match( '/[&\?]uselang=/i', $url ) // don't add it if there is a uselang set to that url already!
+		) {
+			// this will add the 'uselang' parameter to each link returned by Title::getLocalURL()
+			$url = wfAppendQuery( $url, 'uselang=' . $wgLang->getCode() );
+		}
 		return true;
 	}
 }
