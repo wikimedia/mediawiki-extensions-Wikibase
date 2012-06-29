@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX///b4\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-29T19:10:50Z",
+      "side": 1,
+      "message": "Check if this removes newlines, carriage returns and vertical form feed",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///dE\u003d",
+        "filename": "repo/includes/api/ApiLinkSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-29T19:10:50Z",
+      "side": 1,
+      "message": "Cleanup",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///c4\u003d",
+        "filename": "repo/includes/api/ApiLinkSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-29T19:10:50Z",
+      "side": 1,
+      "message": "Cleanup",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///dA\u003d",
+        "filename": "repo/includes/api/ApiLinkSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-29T19:10:50Z",
+      "side": 1,
+      "message": "Cleanup",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///cw\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiLinkSiteTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-29T19:10:50Z",
+      "side": 1,
+      "message": "Better wording",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///cY\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-29T19:10:50Z",
+      "side": 1,
+      "message": "Should write a comment about this magic number",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///ck\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-29T19:10:50Z",
+      "side": 1,
+      "message": "Whitespace",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX///cg\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-06-29T19:10:50Z",
+      "side": 1,
+      "message": "Whitespace",
+      "revId": "b53c9c2fa047d4fb268a1d6b2e2373aebb8263f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
