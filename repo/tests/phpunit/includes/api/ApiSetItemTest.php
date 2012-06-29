@@ -44,12 +44,10 @@ class ApiSetItemTest extends \ApiTestCase {
 	protected static $usetoken;
 	protected static $userights;
 	
-	function setUp() {
+	public function setUp() {
 		global $wgUser;
 		parent::setUp();
 
-		$dbw = wfGetDB( DB_MASTER );
-		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'sites' ) );
 		\Wikibase\Utils::insertSitesForTests();
 		
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;

@@ -16,12 +16,18 @@ use Wikibase\Sites as Sites;
  * @group Wikibase
  * @group WikibaseLib
  * @group Sites
+ *
  * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SitesTest extends \MediaWikiTestCase {
+
+	public function setUp() {
+		parent::setUp();
+		\Wikibase\Utils::insertSitesForTests();
+	}
 
 	public function testSingleton() {
 		$sites = Sites::singleton();

@@ -25,12 +25,8 @@ class ApiLinkSiteTest extends ApiTestCase {
 
 	public static $jsonData;
 
-	function setUp() {
-		global $wgUser;
+	public function setUp() {
 		parent::setUp();
-
-		$dbw = wfGetDB( DB_MASTER );
-		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'sites' ) );
 		\Wikibase\Utils::insertSitesForTests();
 	}
 

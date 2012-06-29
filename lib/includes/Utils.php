@@ -111,7 +111,11 @@ final class Utils {
 	 * @since 0.1
 	 */
 	public static function insertSitesForTests() {
-		wfGetDB( DB_MASTER )->begin();
+		$dbw = wfGetDB( DB_MASTER );
+
+		$dbw->begin();
+
+		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'sites' ) );
 
 		Sites::newSite( array(
 			'global_key' => 'enwiki',
@@ -203,7 +207,7 @@ final class Utils {
 			'language' => 'en',
 		) )->save();
 
-		wfGetDB( DB_MASTER )->commit();
+		$dbw->commit();
 	}
 
 }
