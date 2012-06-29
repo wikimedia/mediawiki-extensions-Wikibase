@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Http;
+use ApiBase, User, Http, UtfNormal;
 
 /**
  * API module to associate a page on a site with a Wikibase item or remove an already made such association.
@@ -163,11 +163,25 @@ class ApiLinkSite extends ApiModifyItem {
 	 * @return array|false Reply from the external server filtered down to a single page.
 	 */
 	public function titleToPage( $externalData, $pageTitle ) {
-		// make initial checks and return if prerequisites are not meet
+		// If there is a special case with only one returned page
+		// and its not marked missing we can cheat, and only return
+		// the single page in the "pages" substructure.
+		if ( isset( $externalData['query']['pages'] ) ) {
+			$pages = array_values( $externalData['query']['pages'] );
+			if ( count( $pages) === 1 ) {
+				if ( !isset( $pages[0]['missing'] ) ) {
+					return $pages[0];
+				}
+			}
+		}
+		// This is only used during internal testing, as it is assumed
+		// a more optimal (and lossfree) storage.
+		$pageTitle = UtfNormal::toNFC( $pageTitle );
+		// Make initial checks and return if prerequisites are not meet.
 		if ( !is_array( $externalData ) || !isset( $externalData['query'] ) ) {
 			return false;
 		}
-		// loop over the tree different named structures, that otherwise are similar
+		// Loop over the tree different named structures, that otherwise are similar
 		$structs = array(
 			'normalized' => 'from',
 			'converted' => 'from',
@@ -175,29 +189,31 @@ class ApiLinkSite extends ApiModifyItem {
 			'pages' => 'title'
 		);
 		foreach ( $structs as $listId => $fieldId ) {
-			// check for normalization
+			// Check if the substructure exist at all.
 			if ( !isset( $externalData['query'][$listId] ) ) {
 				continue;
 			}
+			// Filter the substructure down to what we actually are using.
 			$collectedHits = array_filter(
 				array_values( $externalData['query'][$listId] ),
 				function( $a ) use ( $fieldId, $pageTitle ) {
-					return $a[$fieldId] === $pageTitle;
+					return UtfNormal::toNFC( $a[$fieldId] ) === $pageTitle;
 				}
 			);
-			// if still looping over normalization, conversion or redirects
+			// If still looping over normalization, conversion or redirects,
+			// then we need to keep the new page title for later rounds.
 			if ( $fieldId === 'from' && is_array( $collectedHits ) ) {
 				switch ( count( $collectedHits ) ) {
 				case 0:
 					break;
 				case 1:
-					$pageTitle = $collectedHits[0]['to'];
+					$pageTitle = UtfNormal::toNFC( $collectedHits[0]['to'] );
 					break;
 				default:
 					return false;
 				}
 			}
-			// if on the pages structure
+			// If on the pages structure we should prepare for returning.
 			elseif ( $fieldId === 'title' && is_array( $collectedHits ) ) {
 				switch ( count( $collectedHits ) ) {
 				case 0:
