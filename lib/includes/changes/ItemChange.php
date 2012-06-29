@@ -63,4 +63,15 @@ class ItemChange extends DiffChange {
 		return $instance;
 	}
 
+	/**
+	 * @see Change::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'item';
+	}
+
 }
