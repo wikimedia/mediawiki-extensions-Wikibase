@@ -31,7 +31,7 @@ class ApiGetSiteLinks extends Api{
 		}
 
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = ItemContent::getIdForSiteLink( $params['site'], $params['title'] );
+			$params['id'] = ItemContent::getIdForSiteLink( $params['site'], Api::squashToNFC( $params['title'] ) );
 
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
@@ -65,7 +65,7 @@ class ApiGetSiteLinks extends Api{
 		}
 
 		$success = true;
-		
+
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -78,6 +78,7 @@ class ApiGetSiteLinks extends Api{
 	 * value) or (parameter name) => (array with PARAM_* constants as keys)
 	 * Don't call this function directly: use getFinalParams() to allow
 	 * hooks to modify parameters as needed.
+	 *
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
@@ -114,6 +115,7 @@ class ApiGetSiteLinks extends Api{
 
 	/**
 	 * Returns the description string for this module
+	 *
 	 * @return mixed string or array of strings
 	 */
 	public function getDescription() {

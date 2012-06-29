@@ -279,9 +279,10 @@ final class WikibaseHooks {
 					'redirects' => true,
 					'converttitles' => true,
 					'format' => 'json',
-					'maxage' => 5, // filter down repeated clicks, don't let clicky folks loose to fast
-					'smaxage' => 15, // give the proxy some time, don't let clicky folks loose to fast
-					'maxlag' => 100, // time to wait on a lagging server, hanging on for 100 sec is very aggressive
+					//TODO: This should REALLY be handled somehow as without it we could run into lots of trouble
+					//'maxage' => 5, // filter down repeated clicks, don't let clicky folks loose to fast
+					//'smaxage' => 15, // give the proxy some time, don't let clicky folks loose to fast
+					//'maxlag' => 100, // time to wait on a lagging server, hanging on for 100 sec is very aggressive
 				),
 			)
 		);
