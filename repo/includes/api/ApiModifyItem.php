@@ -28,7 +28,7 @@ abstract class ApiModifyItem extends Api {
 	 * @return boolean Success indicator
 	 */
 	protected abstract function modifyItem( ItemContent &$itemContent, array $params );
-	
+
 	/**
 	 * Check the rights for the user accessing the module, that is a subclass of this one.
 	 * 
@@ -54,10 +54,10 @@ abstract class ApiModifyItem extends Api {
 		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
 			return null;
 		}
-		
+
 		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
 	}
-	
+
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
@@ -92,7 +92,12 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
 
-		$hasLink = isset( $params['site'] ) && $params['title'];
+		$normTitle = '';
+		$hasLink = false;
+		if ( isset( $params['site'] ) && $params['title'] ) {
+			$normTitle = Api::squashToNFC( $params['title'] );
+			$hasLink = true;
+		}
 		$itemContent = null;
 
 		$this->validateParameters( $params );
@@ -113,7 +118,7 @@ abstract class ApiModifyItem extends Api {
 			}
 		}
 		elseif ( $hasLink ) {
-			$itemContent = ItemContent::getFromSiteLink( $params['site'], ItemObject::normalize( $params['title'] ) );
+			$itemContent = ItemContent::getFromSiteLink( $params['site'], $normTitle );
 
 			if ( is_null( $itemContent ) && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
@@ -177,10 +182,6 @@ abstract class ApiModifyItem extends Api {
 			);
 
 			if ( $hasLink ) {
-				// normalizing site does not really give any meaning
-				// so we only normalize title
-				$normTitle = ItemObject::normalize( $params['title'] );
-
 				$normalized = array();
 
 				if ( $normTitle !== $params['title'] ) {
@@ -196,12 +197,13 @@ abstract class ApiModifyItem extends Api {
 				}
 			}
 		}
-		
+
 		$this->getResult()->addValue(
 			null,
 			'success',
 			(int)$success
 		);
+
 	}
 
 	/**
@@ -249,7 +251,7 @@ abstract class ApiModifyItem extends Api {
 	public function isWriteMode() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
 	}
-	
+
 	/**
 	 * Returns an array of allowed parameters (parameter name) => (default
 	 * value) or (parameter name) => (array with PARAM_* constants as keys)

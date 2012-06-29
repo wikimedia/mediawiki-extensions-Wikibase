@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Http, UtfNormal;
+use ApiBase, User, Http;
 
 /**
  * API module to associate a page on a site with a Wikibase item or remove an already made such association.
@@ -48,7 +48,13 @@ class ApiLinkSite extends ApiModifyItem {
 			return $itemContent->getItem()->removeSiteLink( $params['linksite'], $params['linktitle'] );
 		}
 		else {
-			$data = $this->queryPageAtSite( $params['linksite'], $params['linktitle'] );
+			// Clean up initial and trailing spaces and compress rest of the spaces.
+			$linktitle = Api::squashToNFC( $params['linktitle'] );
+			if ( !isset( $linktitle ) || $linktitle === "" ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-empty-link-title' ), 'empty-link-title' );
+			}
+
+			$data = $this->queryPageAtSite( $params['linksite'], $linktitle );
 			if ( $data === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-external-data' ), 'no-external-data' );
 			}
@@ -56,7 +62,7 @@ class ApiLinkSite extends ApiModifyItem {
 				$this->dieUsage( wfMsg( 'wikibase-api-client-error' ), 'client-error' );
 			}
 
-			$page = $this->titleToPage( $data, $params['linktitle'] );
+			$page = $this->titleToPage( $data, $linktitle );
 			if ( isset( $page['missing'] ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
 			}
@@ -176,7 +182,6 @@ class ApiLinkSite extends ApiModifyItem {
 		}
 		// This is only used during internal testing, as it is assumed
 		// a more optimal (and lossfree) storage.
-		$pageTitle = UtfNormal::toNFC( $pageTitle );
 		// Make initial checks and return if prerequisites are not meet.
 		if ( !is_array( $externalData ) || !isset( $externalData['query'] ) ) {
 			return false;
@@ -197,7 +202,7 @@ class ApiLinkSite extends ApiModifyItem {
 			$collectedHits = array_filter(
 				array_values( $externalData['query'][$listId] ),
 				function( $a ) use ( $fieldId, $pageTitle ) {
-					return UtfNormal::toNFC( $a[$fieldId] ) === $pageTitle;
+					return $a[$fieldId] === $pageTitle;
 				}
 			);
 			// If still looping over normalization, conversion or redirects,
@@ -207,7 +212,7 @@ class ApiLinkSite extends ApiModifyItem {
 				case 0:
 					break;
 				case 1:
-					$pageTitle = UtfNormal::toNFC( $collectedHits[0]['to'] );
+					$pageTitle = $collectedHits[0]['to'];
 					break;
 				default:
 					return false;
@@ -235,6 +240,7 @@ class ApiLinkSite extends ApiModifyItem {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
+			array( 'code' => 'empty-link-title', 'info' => wfMsg( 'wikibase-api-empty-link-title' ) ),
 			array( 'code' => 'link-exists', 'info' => wfMsg( 'wikibase-api-link-exists' ) ),
 			array( 'code' => 'database-error', 'info' => wfMsg( 'wikibase-api-database-error' ) ),
 		) );

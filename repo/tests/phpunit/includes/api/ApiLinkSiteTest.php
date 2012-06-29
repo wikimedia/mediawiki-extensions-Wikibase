@@ -108,6 +108,7 @@ class ApiLinkSiteTest extends ApiTestCase {
 
 	public function providerTitleToLabel() {
 		return array(
+			// #0
 			array(
 				array(
 					'query' => array(
@@ -117,15 +118,17 @@ class ApiLinkSiteTest extends ApiTestCase {
 				'Bergen',
 				false,
 			),
+			// #1
 			array(
 				array(
 					'query' => array(
-						'pages' => array( array( 'title' => 'Bergen' ) )
+						'pages' => array( array( 'title' => 'Bergen' ), array( 'title' => 'Neverland' ) )
 					)
 				),
 				'Bergen',
 				array( 'title' => 'Bergen' ),
 			),
+			// #2
 			array(
 				array(
 					'query' => array(
@@ -135,6 +138,7 @@ class ApiLinkSiteTest extends ApiTestCase {
 				'Bergen',
 				false,
 			),
+			// #3
 			array(
 				array(
 					'query' => array(
@@ -144,26 +148,89 @@ class ApiLinkSiteTest extends ApiTestCase {
 				'Bergen',
 				array( 'title' => 'Bergen' ),
 			),
+			// #4
 			array(
 				array(
 					'query' => array(
 						'normalized' => array( array( 'from' => 'oslo', 'to' => 'Oslo' ) ),
-						'pages' => array( array( 'title' => 'Oslo' ) )
+						'pages' => array( array( 'title' => 'Oslo' ), array( 'title' => 'Neverland' ) )
 					)
 				),
 				'oslo',
 				array( 'title' => 'Oslo' ),
 			),
+			// #5
 			array(
 				array(
 					'query' => array(
 						'normalized' => array( array( 'from' => 'oslo', 'to' => 'Oslo' ), array( 'from' => 'gol', 'to' => 'Gol' ) ),
-						'pages' => array( array( 'title' => 'Oslo' ) )
+						'pages' => array( array( 'title' => 'Oslo' ), array( 'title' => 'Neverland' ) )
 					)
 				),
 				'oslo',
 				array( 'title' => 'Oslo' ),
 			),
+			// #6
+			array(
+				array(
+					'query' => array(
+						'normalized' => array( array( 'from' => 'gol', 'to' => 'Gol' ) ),
+						'pages' => array( array( 'title' => 'Oslo' ), array( 'title' => 'Neverland' ) )
+					)
+				),
+				'oslo',
+				false,
+			),
+			// #7
+			array(
+				array(
+					'query' => array(
+						'normalized' => array( array( 'from' => 'kristiania', 'to' => 'Kristiania' ) ),
+						'redirects' => array( array( 'from' => 'Kristiania', 'to' => 'Oslo' ) ),
+						'pages' => array( array( 'title' => 'Oslo' ), array( 'title' => 'Neverland' ) )
+					)
+				),
+				'kristiania',
+				array( 'title' => 'Oslo' ),
+			),
+			// #8
+			array(
+				array(
+					'query' => array(
+						//'normalized' => array( array( 'from' => 'oslo', 'to' => 'Oslo' ) ),
+						'converted' => array( array( 'from' => 'hammerlille', 'to' => 'Lillehammer' ) ),
+						'pages' => array( array( 'title' => 'Lillehammer' ), array( 'title' => 'Neverland' ) )
+					)
+				),
+				'hammerlille',
+				array( 'title' => 'Lillehammer' ),
+			),
+			// #9
+			array(
+				array(
+					'query' => array(
+						'converted' => array( array( 'from' => 'hammerlille', 'to' => 'Hammerlille' ) ),
+						'redirects' => array( array( 'from' => 'Hammerlille', 'to' => 'Lillehammer' ) ),
+						'pages' => array( array( 'title' => 'Lillehammer' ), array( 'title' => 'Neverland' ) )
+					)
+				),
+				'hammerlille',
+				array( 'title' => 'Lillehammer' ),
+			),
+			// #10
+			array(
+				array(
+					'query' => array(
+						'normalized' => array( array( 'from' => 'festhammer', 'to' => 'Festhammer' ) ),
+						'converted' => array( array( 'from' => 'Festhammer', 'to' => 'Hammerfest' ) ),
+						'redirects' => array( array( 'from' => 'Hammerfest', 'to' => 'Kirkenes' ) ),
+						'pages' => array( array( 'title' => 'Kirkenes' ), array( 'title' => 'Neverland' ) )
+					)
+				),
+				'festhammer',
+				array( 'title' => 'Kirkenes' ),
+			),
+			// #11
 			array(
 				array(
 					'query' => array(
@@ -172,52 +239,10 @@ class ApiLinkSiteTest extends ApiTestCase {
 					)
 				),
 				'oslo',
-				false,
-			),
-			array(
-				array(
-					'query' => array(
-						'normalized' => array( array( 'from' => 'kristiania', 'to' => 'Kristiania' ) ),
-						'redirects' => array( array( 'from' => 'Kristiania', 'to' => 'Oslo' ) ),
-						'pages' => array( array( 'title' => 'Oslo' ) )
-					)
-				),
-				'kristiania',
-				array( 'title' => 'Oslo' ),
-			),
-			array(
-				array(
-					'query' => array(
-						//'normalized' => array( array( 'from' => 'oslo', 'to' => 'Oslo' ) ),
-						'converted' => array( array( 'from' => 'hammerlille', 'to' => 'Lillehammer' ) ),
-						'pages' => array( array( 'title' => 'Lillehammer' ) )
-					)
-				),
-				'hammerlille',
-				array( 'title' => 'Lillehammer' ),
-			),
-			array(
-				array(
-					'query' => array(
-						'converted' => array( array( 'from' => 'hammerlille', 'to' => 'Hammerlille' ) ),
-						'redirects' => array( array( 'from' => 'Hammerlille', 'to' => 'Lillehammer' ) ),
-						'pages' => array( array( 'title' => 'Lillehammer' ) )
-					)
-				),
-				'hammerlille',
-				array( 'title' => 'Lillehammer' ),
-			),
-			array(
-				array(
-					'query' => array(
-						'normalized' => array( array( 'from' => 'festhammer', 'to' => 'Festhammer' ) ),
-						'converted' => array( array( 'from' => 'Festhammer', 'to' => 'Hammerfest' ) ),
-						'redirects' => array( array( 'from' => 'Hammerfest', 'to' => 'Kirkenes' ) ),
-						'pages' => array( array( 'title' => 'Kirkenes' ) )
-					)
-				),
-				'festhammer',
-				array( 'title' => 'Kirkenes' ),
+				// Because we skip following the internal from-to structures, its only one page,
+				// qnd find the page by direct lookup, we will find this one anyhow. Even if the
+				// capital letter "O" dosn't really match up.
+				array( 'title' => 'Oslo' )
 			),
 		);
 	}
