@@ -13,16 +13,27 @@
 
 $magicWords = array();
 
-/** English
- * @author Nikola Smolenski
- */
+/** English (English) */
 $magicWords['en'] = array(
 	'noexternalinterlang' => array( 0, 'noexternalinterlang' ),
 );
 
-/** Serbian
- * @author Nikola Smolenski
- */
+/** Arabic (العربية) */
+$magicWords['ar'] = array(
+	'noexternalinterlang' => array( 0, 'لا_لغة_إنترويكي_خارجية' ),
+);
+
+/** Korean (한국어) */
+$magicWords['ko'] = array(
+	'noexternalinterlang' => array( 0, '바깥인터언어없음' ),
+);
+
+/** Macedonian (македонски) */
+$magicWords['mk'] = array(
+	'noexternalinterlang' => array( 0, 'безнадворешнимеѓујазични' ),
+);
+
+/** Serbian (српски / srpski) */
 $magicWords['sr'] = array(
 	'noexternalinterlang' => array( 0, 'безспољашњихмеђујез', 'bezspoljašnjihmeđujez' ),
 );
