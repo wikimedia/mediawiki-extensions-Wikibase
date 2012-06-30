@@ -28,30 +28,34 @@ class DeleteAllData extends \Maintenance {
 	public function execute() {
 		echo "Are you really really sure you want to delete all the Wikibase data?? If so, type YES\n";
 
+		$dbw = wfGetDB( DB_MASTER );
+
 		if ( $this->readconsole() !== 'YES' ) {
 			return;
 		}
 
-		echo 'Deleting revisions from Data NS...';
+		if ( defined( 'WB_NS_DATA' ) ) {
 
-		$dbw = wfGetDB( DB_MASTER );
+			echo 'Deleting revisions from Data NS...';
 
-		$dbw->deleteJoin(
-			'revision', 'page',
-			'rev_page', 'page_id',
-			array( 'page_namespace' => WB_NS_DATA )
-		);
+			$dbw->deleteJoin(
+				'revision', 'page',
+				'rev_page', 'page_id',
+				array( 'page_namespace' => WB_NS_DATA )
+			);
 
-		echo "done!\n";
+			echo "done!\n";
 
-		echo 'Deleting pages from Data NS...';
+			echo 'Deleting pages from Data NS...';
 
-		$dbw->delete(
-			'page',
-			array( 'page_namespace' => WB_NS_DATA )
-		);
+			$dbw->delete(
+				'page',
+				array( 'page_namespace' => WB_NS_DATA )
+			);
 
-		echo "done!\n";
+			echo "done!\n";
+
+		}
 
 		$tables = array(
 			'wb_changes',
