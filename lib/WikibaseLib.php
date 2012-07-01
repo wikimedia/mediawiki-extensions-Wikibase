@@ -96,6 +96,8 @@ $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
 $wgAutoloadClasses['Wikibase\DiffChange'] 			= $dir . 'includes/changes/DiffChange.php';
 $wgAutoloadClasses['Wikibase\ItemChange'] 			= $dir . 'includes/changes/ItemChange.php';
+$wgAutoloadClasses['Wikibase\ItemCreation'] 		= $dir . 'includes/changes/ItemCreation.php';
+$wgAutoloadClasses['Wikibase\ItemDeletion'] 		= $dir . 'includes/changes/ItemDeletion.php';
 
 // includes/diff
 $wgAutoloadClasses['Wikibase\DiffOp'] 				= $dir . 'includes/diff/DiffOp.php';

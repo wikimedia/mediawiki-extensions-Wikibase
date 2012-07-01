@@ -148,6 +148,8 @@ $wgHooks['ResourceLoaderTestModules'][]				= 'WikibaseHooks::onResourceLoaderTes
 $wgHooks['NamespaceIsMovable'][]					= 'WikibaseHooks::onNamespaceIsMovable';
 $wgHooks['NewRevisionFromEditComplete'][]			= 'WikibaseHooks::onNewRevisionFromEditComplete';
 $wgHooks['SkinTemplateNavigation'][] 				= 'WikibaseHooks::onPageTabs';
+$wgHooks['ArticleDeleteComplete'][] 				= 'WikibaseHooks::onArticleDeleteComplete';
+
 
 
 // Resource Loader Modules:

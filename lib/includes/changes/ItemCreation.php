@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Class representing a change to an item.
+ * Represents the creation of an item.
  *
  * @since 0.1
  *
@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemChange extends DiffChange {
+class ItemCreation extends Change {
 
 	/**
 	 * @since 0.1
@@ -45,22 +45,37 @@ class ItemChange extends DiffChange {
 	/**
 	 * @since 0.1
 	 *
-	 * @param Item $oldItem
-	 * @param Item $newItem
+	 * @param IDiff $diff
+	 * @param array|null $fields
 	 *
-	 * @return ItemChange
+	 * @return DiffChange
 	 */
-	public static function newFromItems( Item $oldItem, Item $newItem ) {
+	public static function newFromItem( Item $item, array $fields = null ) {
 		$instance = new static(
 			Changes::singleton(),
-			array(),
+			$fields,
 			true
 		);
 
-		$instance->setItem( $newItem );
-		$instance->setDiff( ItemDiff::newFromItems( $oldItem, $newItem ) );
+		$instance->setItem( $item );
 
 		return $instance;
+	}
+
+	/**
+	 * Returns whether the change is empty.
+	 * If it's empty, it can be ignored.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		if ( $this->hasField( 'info' ) ) {
+			return !array_key_exists( 'item', $this->getField( 'info' ) );
+		}
+
+		return true;
 	}
 
 	/**
@@ -71,7 +86,7 @@ class ItemChange extends DiffChange {
 	 * @return string
 	 */
 	public function getType() {
-		return 'item-update';
+		return 'item-add';
 	}
 
 }
