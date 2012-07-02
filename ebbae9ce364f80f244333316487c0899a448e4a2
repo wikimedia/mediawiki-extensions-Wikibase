@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//+P8\u003d",
+        "filename": "repo/includes/api/ApiSetAliases.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-02T14:35:24Z",
+      "side": 1,
+      "message": "array_map(\n  \u0027Api::squashToNFC(\u0027,\n  $params[\u0027set\u0027]\n)",
+      "revId": "ebbae9ce364f80f244333316487c0899a448e4a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
