@@ -441,4 +441,67 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Special page handling where we want to display meaningful link labels instead of just the items ID.
+	 * This is only handling special pages right now and gets disabled in normal pages.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin
+	 *
+	 * @param DummyLinker $skin
+	 * @param Title $target
+	 * @param string $text
+	 * @param array $customAttribs
+	 * @param string $query
+	 * @param array $options
+	 * @param mixed $ret
+	 * @return bool true
+	 */
+	public static function onLinkBegin( $skin, $target, &$text, array &$customAttribs, &$query, &$options, &$ret ) {
+		if(
+			// if custom text is given, there is no point in overwriting it
+			$text !== null
+			// we only want to handle links to data items differently here
+			|| $target->getContentModel() !== CONTENT_MODEL_WIKIBASE_ITEM
+			// as of MW 1.20 Linker shouldn't support anything but Title anyhow
+			|| ! $target instanceof Title
+		) {
+			return true;
+		}
+
+		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
+		// just check whether the page is a special page and if not, disable the behavior.
+		global $wgTitle;
+
+		if( ! $wgTitle->isSpecialPage() ) {
+			// no special page, we don't handle this for now
+			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
+			//       users language so they are cache independent.
+			return true;
+		}
+
+		global $wgLang, $wgOut;
+
+		// add wikibase styles in all cases, so we can format the link properly:
+		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
+
+		$lang = $wgLang->getCode();
+		$page = new WikiPage( $target );
+		$item = $page->getContent()->getItem();
+
+		$rawLabel = $item->getLabel( $lang );
+
+		// construct link:
+		$id = '<span class="wb-itemlink-label">'
+			. wfMsgForContent( 'wikibase-itemlink-id-wrapper', htmlspecialchars( 'q' . $item->getId() ) )
+			. '</span>';
+		$label = '<span class="wb-itemlink-id">'
+			. htmlspecialchars( $rawLabel )
+			. '</span>';
+
+		$text =  '<span class="wb-itemlink">' . wfMsgForContent( 'wikibase-itemlink', $label, $id ) . '</span>';
+
+		// set title attribute for constructed link:
+		$customAttribs[ 'title' ] = wfMsgForContent( 'wikibase-itemlink-title', $rawLabel, $item->getDescription( $lang ) );
+
+		return true;
+	}
 }
