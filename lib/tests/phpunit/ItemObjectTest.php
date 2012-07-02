@@ -114,6 +114,31 @@ class ItemObjectTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testIsEmpty() {
+		$item = ItemObject::newEmpty();
+
+		$this->assertTrue( $item->isEmpty() );
+
+		$item->addAliases( 'en', array( 'ohi' ) );
+
+		$this->assertFalse( $item->isEmpty() );
+
+		$item = ItemObject::newEmpty();
+		$item->addSiteLink( 'enwiki', 'Foobar' );
+
+		$this->assertFalse( $item->isEmpty() );
+
+		$item = ItemObject::newEmpty();
+		$item->setDescription( 'en', 'o_O' );
+
+		$this->assertFalse( $item->isEmpty() );
+
+		$item = ItemObject::newEmpty();
+		$item->setLabel( 'en', 'o_O' );
+
+		$this->assertFalse( $item->isEmpty() );
+	}
+
 	// TODO: We're not testing a lot here are we now? o_O
 
 }
