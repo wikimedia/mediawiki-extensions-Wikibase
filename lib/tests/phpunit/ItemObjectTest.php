@@ -139,7 +139,140 @@ class ItemObjectTest extends \MediaWikiTestCase {
 		$this->assertFalse( $item->isEmpty() );
 	}
 
-	// TODO: We're not testing a lot here are we now? o_O
+	public function testCopy() {
+		$foo = ItemObject::newEmpty();
+		$bar = $foo->copy();
+
+		$this->assertInstanceOf( '\Wikibase\Item', $bar );
+		$this->assertEquals( $foo, $bar );
+		$this->assertFalse( $foo === $bar );
+	}
+
+	public function descriptionProvider() {
+		return array(
+			array( 'en', 'spam' ),
+			array( 'en', 'spam', 'spam' ),
+			array( 'de', 'foo bar baz' ),
+		);
+	}
+
+	/**
+	 * @dataProvider descriptionProvider
+	 * @param string $languageCode
+	 * @param string $labelText
+	 * @param string $moarText
+	 */
+	public function testSetDescription( $languageCode, $labelText, $moarText = 'ohi there' ) {
+		$item = ItemObject::newEmpty();
+
+		$item->setDescription( $languageCode, $labelText );
+
+		$this->assertEquals( $labelText, $item->getDescription( $languageCode ) );
+
+		$item->setDescription( $languageCode, $moarText );
+
+		$this->assertEquals( $moarText, $item->getDescription( $languageCode ) );
+	}
+
+	/**
+	 * @dataProvider descriptionProvider
+	 * @param string $languageCode
+	 * @param string $labelText
+	 * @param string $moarText
+	 */
+	public function testGetDescription( $languageCode, $labelText, $moarText = 'ohi there' ) {
+		$item = ItemObject::newEmpty();
+
+		$this->assertFalse( $item->getDescription( $languageCode ) );
+
+		$item->setDescription( $languageCode, $labelText );
+
+		$this->assertEquals( $labelText, $item->getDescription( $languageCode ) );
+	}
+
+	public function aliasesProvider() {
+		return array(
+			array( array(
+				'en' => array( array( 'spam' ) )
+			) ),
+			array( array(
+				'en' => array( array( 'foo', 'bar', 'baz' ) )
+			) ),
+			array( array(
+				'en' => array( array( 'foo', 'bar' ), array( 'baz', 'spam' ) )
+			) ),
+			array( array(
+				'en' => array( array( 'foo', 'bar', 'baz' ) ),
+				'de' => array( array( 'foobar' ), array( 'baz' ) ),
+			) ),
+		);
+	}
+
+	/**
+	 * @dataProvider aliasesProvider
+	 */
+	public function testAddAliases( array $aliasesLists ) {
+		$item = ItemObject::newEmpty();
+
+		foreach ( $aliasesLists as $langCode => $aliasesList ) {
+			foreach ( $aliasesList as $aliases ) {
+				$item->addAliases( $langCode, $aliases );
+			}
+		}
+
+		foreach ( $aliasesLists as $langCode => $aliasesList ) {
+			$expected = call_user_func_array( 'array_merge', $aliasesList );
+			asort( $expected );
+
+			$actual = $item->getAliases( $langCode );
+			asort( $actual );
+
+			$this->assertEquals( $expected, $actual );
+		}
+	}
+
+	/**
+	 * @dataProvider aliasesProvider
+	 */
+	public function testSetAliases( array $aliasesLists ) {
+		$item = ItemObject::newEmpty();
+
+		foreach ( $aliasesLists as $langCode => $aliasesList ) {
+			foreach ( $aliasesList as $aliases ) {
+				$item->setAliases( $langCode, $aliases );
+			}
+		}
+
+		foreach ( $aliasesLists as $langCode => $aliasesList ) {
+			$expected = array_pop( $aliasesList );
+			asort( $aliasesList );
+
+			$actual = $item->getAliases( $langCode );
+			asort( $actual );
+
+			$this->assertEquals( $expected, $actual );
+		}
+	}
+
+	/**
+	 * @dataProvider aliasesProvider
+	 */
+	public function testGetAliases( array $aliasesLists ) {
+		$item = ItemObject::newEmpty();
+
+		foreach ( $aliasesLists as $langCode => $aliasesList ) {
+			$expected = array_shift( $aliasesList );
+			$item->setAliases( $langCode, $expected );
+			$actual = $item->getAliases( $langCode );
+			
+			asort( $expected );
+			asort( $actual );
+
+			$this->assertEquals( $expected, $actual );
+		}
+
+
+	}
 
 }
 	
