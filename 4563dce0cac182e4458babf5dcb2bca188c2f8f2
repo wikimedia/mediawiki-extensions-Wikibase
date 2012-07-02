@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//+LQ\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T16:20:16Z",
+      "side": 1,
+      "message": "uh, why is this in this patch? it doesn\u0027t belong here, does it?",
+      "revId": "4563dce0cac182e4458babf5dcb2bca188c2f8f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+LE\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T16:20:16Z",
+      "side": 1,
+      "message": "also unrelated to \"Prevent direct editing of item through API\", or am I missing something?",
+      "revId": "4563dce0cac182e4458babf5dcb2bca188c2f8f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
