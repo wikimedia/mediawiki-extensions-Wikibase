@@ -810,8 +810,12 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		}
 		this._getToolbarParent().remove();
 		for ( var i in this._interfaces ) { // remove span added in _buildInterfaces()
-			this._interfaces[i]._subject.parent().empty().text( this._interfaces[i]._subject.text() );
+			this._interfaces[i].destroy();
 		}
+		this._interfaces = null;
+		var span = this._subject.children( 'span' ); // span that was inserted in _buildInterfaces()
+		span.contents().detach().appendTo( this._subject );
+		span.remove();
 	},
 
 	/////////////////

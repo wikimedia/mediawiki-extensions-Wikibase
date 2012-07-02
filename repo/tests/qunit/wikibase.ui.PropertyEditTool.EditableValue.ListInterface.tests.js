@@ -48,13 +48,13 @@
 
 		equal(
 			this.subject.getValue().join( '|' ),
-			'A|Y|Z',
+			'Y|Z|A',
 			'getValue() value equals initial value but sorted'
 		);
 
 		equal(
 			this.subject.setValue( [ '3', '2', '', '1' ] ).join( '|' ),
-			'1|2|3',
+			'3|2|1',
 			'set new value, normalized it'
 		);
 
@@ -63,7 +63,7 @@
 	test( 'valueCompare()', function() {
 
 		ok(
-			this.subject.valueCompare( [ 'a', 'b' ], [ 'b', 'a' ] ),
+			this.subject.valueCompare( [ 'a', 'b' ], [ 'a', 'b' ] ),
 			'simple strings, different order, equal'
 		);
 
