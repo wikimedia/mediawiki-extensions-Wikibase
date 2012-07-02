@@ -75,7 +75,8 @@ $messages['en'] = array(
 	'wikibase-api-no-external-data' => 'There was no data from the external client site, possibly due to connection errors.',
 	'wikibase-api-no-external-page' => 'The external client site did not provide page information.',
 	'wikibase-api-add-sitelink-failed' => 'The site link could not be saved.',
-	'wikibase-api-cant-edit' => 'Edit not allowed:\n$1',
+	'wikibase-api-cant-edit' => 'Edit not allowed:
+$1',
 	'wikibase-api-no-permissions' => 'The logged in user does not have sufficient rights.',
 	'wikibase-api-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page.',
 	'wikibase-api-no-such-item' => 'Could not find an existing item.',
