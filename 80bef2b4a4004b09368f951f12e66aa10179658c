@@ -52,6 +52,24 @@
       "revId": "80bef2b4a4004b09368f951f12e66aa10179658c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+M8\u003d",
+        "filename": "lib/compat/Settings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-02T15:43:36Z",
+      "side": 1,
+      "message": "*pass all of the parameters as array elements*\n\nSettings::singleton( [ \u0027rebuild\u0027 \u003d\u003e false ] )\n\nA constant seems rather stupid - we\u0027d end up with over9000 constants that way.",
+      "parentUuid": "AAAAPX//+NM\u003d",
+      "revId": "80bef2b4a4004b09368f951f12e66aa10179658c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
