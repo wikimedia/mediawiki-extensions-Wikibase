@@ -277,14 +277,6 @@ class ItemObject extends EntityObject implements Item {
 	protected function getMultilangTexts( $fieldKey, array $languages = null ) {
 		$textList = $this->data[$fieldKey];
 
-		// This is compat code for the old internal layout.
-		// TODO: Should be removed before we go into production.
-		foreach ( $textList as $text ) {
-			if ( is_array( $text ) ) {
-				$textList[$text['language']] = $text['value'];
-			}
-		}
-
 		if ( !is_null( $languages ) ) {
 			$textList = array_intersect_key( $textList, array_flip( $languages ) );
 		}
@@ -304,16 +296,6 @@ class ItemObject extends EntityObject implements Item {
 	 * @return array|false Returns array on success, or false on failure
 	 */
 	public function addSiteLink( $siteId, $pageName, $updateType = 'add' ) {
-		// TODO: This should be removed before code goes into production
-		if ( Settings::get( 'blockDuplicateSiteLinks' ) ) {
-			// TODO Checks if the link to be added already exists. Should give a better error message.
-			// This really should have a solution and not only a quick fix
-			$exists = self::getIdForSiteLink( $siteId, $pageName );
-			if ( $exists !== false ) {
-				return false;
-			}
-		}
-
 		$success =
 			( $updateType === 'add' && !array_key_exists( $siteId, $this->data['links'] ) )
 				|| ( $updateType === 'update' && array_key_exists( $siteId, $this->data['links'] ) )
@@ -357,12 +339,6 @@ class ItemObject extends EntityObject implements Item {
 	 * @return string|false
 	 */
 	public function getDescription( $langCode ) {
-		// This is compat code for the old internal layout.
-		// TODO: Should be removed before we go into production.
-		if ( array_key_exists( $langCode, $this->data['description'] ) && is_array( $this->data['description'][$langCode] ) ) {
-			$this->data['description'][$langCode] = $this->data['description'][$langCode]['value'];
-		}
-
 		return array_key_exists( $langCode, $this->data['description'] )
 			? $this->data['description'][$langCode] : false;
 	}
@@ -377,12 +353,6 @@ class ItemObject extends EntityObject implements Item {
 	 * @return string|false
 	 */
 	public function getLabel( $langCode ) {
-		// This is compat code for the old internal layout.
-		// TODO: Should be removed before we go into production.
-		if ( array_key_exists( $langCode, $this->data['label'] ) && is_array( $this->data['label'][$langCode] ) ) {
-			$this->data['label'][$langCode] = $this->data['label'][$langCode]['value'];
-		}
-
 		return array_key_exists( $langCode, $this->data['label'] )
 			? $this->data['label'][$langCode] : false;
 	}
@@ -395,14 +365,6 @@ class ItemObject extends EntityObject implements Item {
 	 * @return array
 	 */
 	public function getSiteLinks() {
-		// This is compat code for the old internal layout.
-		// TODO: Should be removed before we go into production.
-		foreach ( $this->data['links'] as $link ) {
-			if ( is_array($link) ) {
-				$this->data['links'][$link['site']] = $link['title'];
-			}
-		}
-
 		return $this->data['links'];
 	}
 
@@ -441,8 +403,6 @@ class ItemObject extends EntityObject implements Item {
 				$this->data[$field] = array();
 			}
 		}
-
-		//TODO: move legacy cleanup from getSiteLinks and getMultilangText here
 	}
 
 	/**

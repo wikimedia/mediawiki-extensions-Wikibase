@@ -423,12 +423,6 @@ class Settings {
 					'defaultSiteFilePath' => '/somepath/$1',
 				),
 			),
-
-			// TODO: This should be removed before code goes into production
-			// Block use of duplicate keys
-			// this is to turn on a quick fix that breaks
-			// some UI code and also some tests
-			'blockDuplicateSiteLinks' => false,
 		);
 
 		// allow extensions that use WikidataLib to register mode defaults
