@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//+IY\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-02T17:24:40Z",
+      "side": 1,
+      "message": "Log in imply refreshing the page, but log in can also be done in other ways. Its not even necessary for the user to be aware of this.",
+      "revId": "3a54bf0fbc470519ee70cd34e816a03f4f4f3797",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
