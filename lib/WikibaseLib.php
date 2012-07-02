@@ -73,8 +73,9 @@ $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 
 // includes
-$wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 		= $dir . 'includes/ChangeHandler.php';
+$wgAutoloadClasses['Wikibase\ChangeNotifier'] 		= $dir . 'includes/ChangeNotifier.php';
+$wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
 $wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/Entity.php';
 $wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/EntityDiff.php';
 $wgAutoloadClasses['Wikibase\EntityObject'] 		= $dir . 'includes/EntityObject.php';
