@@ -33,6 +33,11 @@ $magicWords['mk'] = array(
 	'noexternalinterlang' => array( 0, 'безнадворешнимеѓујазични' ),
 );
 
+/** Dutch (Nederlands) */
+$magicWords['nl'] = array(
+	'noexternalinterlang' => array( 0, 'geenexterneintertaal' ),
+);
+
 /** Serbian (српски / srpski) */
 $magicWords['sr'] = array(
 	'noexternalinterlang' => array( 0, 'безспољашњихмеђујез', 'bezspoljašnjihmeđujez' ),
