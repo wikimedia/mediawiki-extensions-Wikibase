@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//+L4\u003d",
+        "filename": "lib/tests/phpunit/ItemObjectTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T15:56:43Z",
+      "side": 1,
+      "message": "how about testEquals() to test the equals() function?",
+      "revId": "7c9e6da9c0b52b271f9259b2dbb5895371135feb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
