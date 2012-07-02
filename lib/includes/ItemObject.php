@@ -414,10 +414,15 @@ class ItemObject extends EntityObject implements Item {
 	 * @return boolean
 	 */
 	public function isEmpty() {
-		// FIXME: this still needs to be really implemented!
-		// What does it mean for an item to be empty?
-		// Certainly not the current check as it can have elements that are empty arrays, making base array non-empty.
-		return is_null( $this->id );
+		$fields = array( 'links', 'label', 'description', 'aliases' );
+
+		foreach ( $fields as $field ) {
+			if ( $this->data[$field] !== array() ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
