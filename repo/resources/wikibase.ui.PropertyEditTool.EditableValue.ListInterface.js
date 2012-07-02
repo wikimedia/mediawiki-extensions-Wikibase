@@ -151,23 +151,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.setValue
-	 *
-	 * @param string[] value
-	 * @return string[]|null same as value but normalized, null in case the value was invalid
-	 */
-	setValue: function( value ) {
-		value.sort(); // sort values. NOTE: could be made configurable!
-		return window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.setValue.call( this, value );
-	},
-
-	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._setValue_inEditMode
 	 *
 	 * @param string[] value
 	 * @return bool
 	 */
 	_setValue_inEditMode: function( value ) {
+		this._getTagadata().removeAll();
 		var self = this;
 		$.each( value, function( i, val ) {
 			self._getTagadata().createTag( val, self.UI_VALUE_PIECE_CLASS );

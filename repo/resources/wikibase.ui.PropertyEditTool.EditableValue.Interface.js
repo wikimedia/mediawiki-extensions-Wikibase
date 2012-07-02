@@ -80,6 +80,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		if ( this.tooltip !== null ) {
 			this.removeTooltip();
 		}
+		this._subject.parent().empty().text( this._subject.text() );
 	},
 
 	/**

@@ -23,7 +23,7 @@ window.wikibase.ui.PropertyEditTool.EditableAliases = function( subject, toolbar
 window.wikibase.ui.PropertyEditTool.EditableAliases.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
 $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 
-	API_VALUE_KEY: null, //NOTE: This has to be adjusted as soon as the wbsetaliases API module supports it
+	API_VALUE_KEY: 'aliases',
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue._init
@@ -83,10 +83,29 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 	 * @return array|null
 	 */
 	_getValueFromApiResponse: function( response ) {
-		var value = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._getValueFromApiResponse.call( this, response );
-		return value !== null
-			? value.split( '|' ) // TODO: not yet supported by the API and the way this will be returned might (hopefully) be different.
-			: null;
+		if ( !$.isArray( response[ this.API_VALUE_KEY ][ window.mw.config.get( 'wgUserLanguage' ) ] ) ) {
+			return null;
+		} else {
+			var values = [];
+			$.each( response[ this.API_VALUE_KEY ][ window.mw.config.get( 'wgUserLanguage' ) ], function( i, item ) {
+				values.push( item.value );
+			} );
+			return values;
+		}
+	},
+
+	/**
+	 * Sets a value
+	 * @see wikibase.ui.PropertyEditTool.EditableValue
+	 *
+	 * @param Array value to set
+	 * @return Array set value
+	 */
+	setValue: function( value ) {
+		if( $.isArray( value ) ) {
+			this._interfaces[0].setValue( value );
+		}
+		return this.getValue();
 	},
 
 	/**
