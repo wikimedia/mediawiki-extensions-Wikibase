@@ -32,6 +32,18 @@
 						'code': 'no-permissions',
 						'info': 'The logged in user does not have sufficient rights'
 					}
+				},
+				{ 'error':
+					{
+						'code': 'some-nonexistant-error-code',
+						'info': 'This error code should not be defined.'
+					}
+				},
+				{ 'error':
+					{
+						'code': 'client-error',
+						'info': 'The connection to the client page failed.'
+					}
 				}
 			];
 
@@ -56,9 +68,12 @@
 
 			var self = this;
 
-			this.editableValue.simulateApiFailure = function() {
+			this.editableValue.simulateApiFailure = function( error ) {
+				if ( error === undefined ) {
+					error = 0;
+				}
 				self.editableValue.queryApi = function( deferred, apiAction ) {
-					deferred.reject( 'error', self.errors[0] ).promise();
+					deferred.reject( 'error', self.errors[ error ] ).promise();
 				};
 			};
 
@@ -324,6 +339,26 @@
 		ok(
 			this.editableValue._toolbar.editGroup.btnRemove.getTooltip() instanceof window.wikibase.ui.Tooltip,
 			'attached tooltip to remove button after trying to remove with API action'
+		);
+
+		this.editableValue.simulateApiFailure( 1 );
+		this.editableValue.startEditing();
+		this.editableValue.setValue( this.strings['valid'][0] );
+		this.editableValue.stopEditing( true );
+		equal(
+			this.editableValue._toolbar.editGroup.btnSave._tooltip._error.shortMessage,
+			mw.msg( 'wikibase-error-save-generic' ),
+			"when getting unknown error-code from API, generic message should be shown"
+		);
+
+		this.editableValue.simulateApiFailure( 2 );
+		this.editableValue.startEditing();
+		this.editableValue.setValue( this.strings['valid'][0] );
+		this.editableValue.stopEditing( true );
+		equal(
+			this.editableValue._toolbar.editGroup.btnSave._tooltip._error.shortMessage,
+			mw.msg( 'wikibase-error-ui-client-error' ),
+			"when getting an registered error-code from API, the corresponding message should be shown"
 		);
 
 	} );
