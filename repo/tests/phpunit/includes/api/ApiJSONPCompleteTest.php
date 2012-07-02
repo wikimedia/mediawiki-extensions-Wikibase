@@ -39,7 +39,7 @@ class ApiJSONPCompleteTest extends ApiTestCase {
 	protected static $name = 'empty';
 	
 	protected static function config($arr) {
-		Settings::singleton()->rebuildSettings();
+		Settings::singleton( true );
 		foreach ( $arr as $key => $val ) {
 			$egWBSettings[$key] = $val;
 		}

@@ -93,6 +93,8 @@ final class LibHooks {
 			'Sites',
 			'Utils',
 
+			'SettingsBase',
+
 			'changes/DiffChange',
 			'changes/ItemChange',
 

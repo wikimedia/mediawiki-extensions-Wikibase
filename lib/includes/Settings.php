@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use MWException;
+use MWException, SettingsBase;
 
 /**
  * File defining the settings for the Wikibase extension.
@@ -19,116 +19,27 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Settings {
+class Settings extends SettingsBase {
 
 	/**
-	 * Build version of the settings.
-	 * @since 0.1
-	 * @var boolean
-	 */
-	protected $settings = false;
-
-	/**
-	 * Returns an array with all settings after making sure they are
-	 * initialized (ie set settings have been merged with the defaults).
-	 * setting name (string) => setting value (mixed)
+	 * @see SettingsBase::getSetSettings
 	 *
 	 * @since 0.1
 	 *
 	 * @return array
 	 */
-	public function getSettings() {
-		$this->buildSettings();
-		return $this->settings;
+	protected function getSetSettings() {
+		return $GLOBALS['egWBSettings'];
 	}
 
 	/**
-	 * Returns an instance of the settings class.
-	 *
-	 * @since 0.1
-	 *
-	 * @return Settings
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
-	/**
-	 * Does a lazy rebuild of the settings.
-	 *
-	 * @since 0.1
-	 */
-	public function rebuildSettings() {
-		$this->settings = false;
-	}
-
-	/**
-	 * Builds the settings if needed.
-	 * This includes merging the set settings over the default ones.
-	 *
-	 * @since 0.1
-	 */
-	protected function buildSettings() {
-		if ( $this->settings === false ) {
-			$this->settings = array_merge(
-				self::getDefaultSettings(),
-				$GLOBALS['egWBSettings']
-			);
-
-			// allow extensions that use WikidataLib to manipulate settings
-			wfRunHooks( 'WikibaseSettings', array( &$this->settings ) );
-		}
-	}
-
-	/**
-	 * Gets the value of the specified setting.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $settingName
-	 *
-	 * @throws MWException
-	 * @return mixed
-	 */
-	public function getSetting( $settingName ) {
-		$this->buildSettings();
-
-		if ( !array_key_exists( $settingName, $this->settings ) ) {
-			throw new MWException( 'Attempt to get non-existing setting "' . $settingName . '"' );
-		}
-
-		return $this->settings[$settingName];
-	}
-
-	/**
-	 * Gets the value of the specified setting.
-	 * Shortcut to calling getSetting on the singleton instance of the settings class.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $settingName
-	 *
-	 * @return mixed
-	 */
-	public static function get( $settingName ) {
-		return self::singleton()->getSetting( $settingName );
-	}
-
-	/**
-	 * Returns the default values for the settings.
-	 * setting name (string) => setting value (mixed)
+	 * @see SettingsBase::getDefaultSettings
 	 *
 	 * @since 0.1
 	 *
 	 * @return array
 	 */
-	protected static function getDefaultSettings() {
+	protected function getDefaultSettings() {
 		$settings = array(
 			'pollDefaultInterval' => 1000,
 			'pollDefaultLimit' => 100,
