@@ -10,13 +10,14 @@ require 'spec_helper'
 describe "Check functionality of non existing item page" do
   context "Check functionality of non existing item page" do
     it "should check for link to Special:CreateItem and firstHeading" do
-      visit_page(NonExistingItemPage)
-      @current_page.firstHeading.should be_true
-      @current_page.firstHeading_element.text.should == "Data:Qxy"
-      @current_page.specialCreateNewItemLink?.should be_true
-      @current_page.specialCreateNewItemLink
-      @current_page.labelInputField.should be_true
-      @current_page.descriptionInputField.should be_true
+      visit_page(NonExistingItemPage) do |page|
+        page.firstHeading.should be_true
+        page.firstHeading_element.text.should == "Data:Qxy"
+        page.specialCreateNewItemLink?.should be_true
+        page.specialCreateNewItemLink
+        page.labelInputField.should be_true
+        page.descriptionInputField.should be_true
+      end
     end
   end
 end

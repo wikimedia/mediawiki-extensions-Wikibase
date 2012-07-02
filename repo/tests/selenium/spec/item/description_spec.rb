@@ -11,57 +11,55 @@ describe "Check functionality of edit description" do
 
   context "Check for item description UI" do
     it "should check for edit description" do
-      # visit_page(LoginPage)
-      # @current_page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
-      
-      visit_page(NewItemPage)
-      @current_page.create_new_item(generate_random_string(10), generate_random_string(20))
+      visit_page(NewItemPage) do |page|
+        page.create_new_item(generate_random_string(10), generate_random_string(20))
 
-      @current_page.itemDescriptionSpan.should be_true
-      current_description = @current_page.itemDescriptionSpan
-      changed_description = current_description + " Adding something."
-      @current_page.itemDescriptionSpan.should == current_description
-      @current_page.wait_for_item_to_load
-      @current_page.editDescriptionLink?.should be_true
-      @current_page.cancelDescriptionLink?.should be_false
-      @current_page.editDescriptionLink
-      @current_page.editDescriptionLink?.should be_false
-      @current_page.cancelDescriptionLink?.should be_true
-      @current_page.saveDescriptionLinkDisabled?.should be_true
-      @current_page.descriptionInputField.should be_true
-      @current_page.descriptionInputField_element.clear
-      @current_page.descriptionInputField = changed_description
-      @current_page.saveDescriptionLink?.should be_true
-      @current_page.cancelDescriptionLink
-      @current_page.editDescriptionLink?.should be_true
-      @current_page.cancelDescriptionLink?.should be_false
-      @current_page.itemDescriptionSpan.should == current_description
-      @current_page.editDescriptionLink
-      @current_page.descriptionInputField_element.clear
-      @current_page.descriptionInputField = changed_description
-      @current_page.saveDescriptionLink
-      @current_page.apiCallWaitingMessage?.should be_true
-      ajax_wait
-      @current_page.wait_for_api_callback
-      @current_page.itemDescriptionSpan.should == changed_description
-      @current_page.editDescriptionLink?.should be_true
+        page.itemDescriptionSpan.should be_true
+        current_description = page.itemDescriptionSpan
+        changed_description = current_description + " Adding something."
+        page.itemDescriptionSpan.should == current_description
+        page.wait_for_item_to_load
+        page.editDescriptionLink?.should be_true
+        page.cancelDescriptionLink?.should be_false
+        page.editDescriptionLink
+        page.editDescriptionLink?.should be_false
+        page.cancelDescriptionLink?.should be_true
+        page.saveDescriptionLinkDisabled?.should be_true
+        page.descriptionInputField.should be_true
+        page.descriptionInputField_element.clear
+        page.descriptionInputField = changed_description
+        page.saveDescriptionLink?.should be_true
+        page.cancelDescriptionLink
+        page.editDescriptionLink?.should be_true
+        page.cancelDescriptionLink?.should be_false
+        page.itemDescriptionSpan.should == current_description
+        page.editDescriptionLink
+        page.descriptionInputField_element.clear
+        page.descriptionInputField = changed_description
+        page.saveDescriptionLink
+        page.apiCallWaitingMessage?.should be_true
+        ajax_wait
+        page.wait_for_api_callback
+        page.itemDescriptionSpan.should == changed_description
+        page.editDescriptionLink?.should be_true
 
-      @browser.refresh
-      @current_page.wait_for_item_to_load
-      @current_page.itemDescriptionSpan.should == changed_description
-      @current_page.editDescriptionLink
-      @current_page.descriptionInputField_element.clear
-      @current_page.descriptionInputField = current_description
-      @current_page.saveDescriptionLink
-      @current_page.apiCallWaitingMessage?.should be_true
-      ajax_wait
-      @current_page.wait_for_api_callback
-      @current_page.itemDescriptionSpan.should == current_description
-      @current_page.editDescriptionLink?.should be_true
-      
-      @browser.refresh
-      @current_page.wait_for_item_to_load
-      @current_page.itemDescriptionSpan.should == current_description
+        @browser.refresh
+        page.wait_for_item_to_load
+        page.itemDescriptionSpan.should == changed_description
+        page.editDescriptionLink
+        page.descriptionInputField_element.clear
+        page.descriptionInputField = current_description
+        page.saveDescriptionLink
+        page.apiCallWaitingMessage?.should be_true
+        ajax_wait
+        page.wait_for_api_callback
+        page.itemDescriptionSpan.should == current_description
+        page.editDescriptionLink?.should be_true
+        
+        @browser.refresh
+        page.wait_for_item_to_load
+        page.itemDescriptionSpan.should == current_description
+      end
     end
   end
 
