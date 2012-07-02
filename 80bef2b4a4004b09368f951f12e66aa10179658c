@@ -34,6 +34,24 @@
       "revId": "80bef2b4a4004b09368f951f12e66aa10179658c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+NM\u003d",
+        "filename": "lib/compat/Settings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T15:34:45Z",
+      "side": 1,
+      "message": "I wish php had named parameters: Settings::singleton( $rebuild \u003d\u003e false );\n\nAnyway - I don\u0027t see a good way to avoid this. What would you suggest? A constant? Multiple methods?",
+      "parentUuid": "AAAAPX//+Oo\u003d",
+      "revId": "80bef2b4a4004b09368f951f12e66aa10179658c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
