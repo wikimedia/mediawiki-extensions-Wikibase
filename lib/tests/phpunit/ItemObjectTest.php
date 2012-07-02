@@ -105,6 +105,25 @@ class ItemObjectTest extends \MediaWikiTestCase {
 		$this->assertEquals( $labelText, $item->getLabel( $languageCode ) );
 	}
 
+	/**
+	 * @dataProvider labelProvider
+	 * @param string $languageCode
+	 * @param string $labelText
+	 * @param string $moarText
+	 */
+	public function testRemoveLabel( $languageCode, $labelText, $moarText = 'ohi there' ) {
+		$item = ItemObject::newEmpty();
+		$item->setLabel( $languageCode, $labelText );
+		$item->removeLabel( $languageCode );
+		$this->assertFalse( $item->getLabel( $languageCode ) );
+
+		$item->setLabel( 'nl', 'sadefradtgsrduy' );
+		$item->setLabel( $languageCode, $labelText );
+		$item->removeLabel( array( $languageCode, 'nl' ) );
+		$this->assertFalse( $item->getLabel( $languageCode ) );
+		$this->assertFalse( $item->getLabel( 'nl' ) );
+	}
+
 	public function testGetSiteLinks() {
 		/**
 		 * @var \Wikibase\Item $item
@@ -190,6 +209,25 @@ class ItemObjectTest extends \MediaWikiTestCase {
 		$this->assertEquals( $labelText, $item->getDescription( $languageCode ) );
 	}
 
+	/**
+	 * @dataProvider descriptionProvider
+	 * @param string $languageCode
+	 * @param string $labelText
+	 * @param string $moarText
+	 */
+	public function testRemoveDescription( $languageCode, $labelText, $moarText = 'ohi there' ) {
+		$item = ItemObject::newEmpty();
+		$item->setDescription( $languageCode, $labelText );
+		$item->removeDescription( $languageCode );
+		$this->assertFalse( $item->getDescription( $languageCode ) );
+
+		$item->setDescription( 'nl', 'sadefradtgsrduy' );
+		$item->setDescription( $languageCode, $labelText );
+		$item->removeDescription( array( $languageCode, 'nl' ) );
+		$this->assertFalse( $item->getDescription( $languageCode ) );
+		$this->assertFalse( $item->getDescription( 'nl' ) );
+	}
+
 	public function aliasesProvider() {
 		return array(
 			array( array(
@@ -270,8 +308,51 @@ class ItemObjectTest extends \MediaWikiTestCase {
 
 			$this->assertEquals( $expected, $actual );
 		}
+	}
 
+	public function duplicateAliasesProvider() {
+		return array(
+			array( array(
+				'en' => array( array( 'foo', 'bar', 'baz' ), array( 'foo', 'bar', 'baz' ) )
+			) ),
+			array( array(
+				'en' => array( array( 'foo', 'bar', 'baz' ), array( 'foo', 'bar' ) )
+			) ),
+			array( array(
+				'en' => array( array( 'foo', 'bar' ), array( 'foo', 'bar', 'baz' ) )
+			) ),
+			array( array(
+				'en' => array( array( 'foo', 'bar' ), array( 'bar', 'baz' ) ),
+				'de' => array( array(), array( 'foo' ) ),
+				'nl' => array( array( 'foo' ), array() ),
+			) ),
+			array( array(
+				'en' => array( array( 'foo', 'bar', 'baz' ), array( 'foo', 'bar', 'baz', 'foo', 'bar' ) )
+			) ),
+		);
+	}
 
+	/**
+	 * @dataProvider duplicateAliasesProvider
+	 */
+	public function testRemoveAliases( array $aliasesLists ) {
+		$item = ItemObject::newEmpty();
+
+		foreach ( $aliasesLists as $langCode => $aliasesList ) {
+			$aliases = array_shift( $aliasesList );
+			$removedAliases =  array_shift( $aliasesList );
+
+			$item->setAliases( $langCode, $aliases );
+			$item->removeAliases( $langCode, $removedAliases );
+
+			$expected = array_diff( $aliases, $removedAliases );
+			$actual = $item->getAliases( $langCode );
+
+			asort( $expected );
+			asort( $actual );
+
+			$this->assertEquals( $expected, $actual );
+		}
 	}
 
 }
