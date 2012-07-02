@@ -30,9 +30,8 @@ class SitesTest extends \MediaWikiTestCase {
 	}
 
 	public function testSingleton() {
-		$sites = Sites::singleton();
-
-		$this->assertEquals( $sites, Sites::singleton() );
+		$this->assertInstanceOf( 'Wikibase\Sites', Sites::singleton() );
+		$this->assertTrue( Sites::singleton() === Sites::singleton() );
 	}
 
 	public function testGetGlobalIdentifiers() {
