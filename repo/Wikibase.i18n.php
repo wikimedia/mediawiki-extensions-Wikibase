@@ -50,14 +50,21 @@ $messages['en'] = array(
 	'wikibase-aliases-empty' => 'No aliases defined.',
 
 	'wikibase-tooltip-error-details' => 'Details',
-	'wikibase-error-save-generic' => 'An error occurred while trying to perform save, and because of this changes could not be completed.',
-	'wikibase-error-remove-generic' => 'An error occurred while trying to perform remove, and because of this your changes could not be completed.',
+	'wikibase-error-save-generic' => 'An error occurred while trying to perform save and because of this, changes could not be completed.',
+	'wikibase-error-remove-generic' => 'An error occurred while trying to perform remove and because of this, your changes could not be completed.',
 	'wikibase-error-save-connection' => 'A connection error has occurred while trying to perform save, and because of this your changes could not be completed. Please check your internet connection.',
 	'wikibase-error-remove-connection' => 'A connection error occurred while trying to perform remove, and because of this your changes could not be completed. Please check your internet connection.',
 	'wikibase-error-save-timeout' => 'We are experiencing technical difficulties, and because of this your "save" could not be completed.',
 	'wikibase-error-remove-timeout' => 'We are experiencing technical difficulties, and because of this your "remove" could not be completed.',
 	'wikibase-error-autocomplete-connection' => 'Could not query Wikipedia API. Please try again later.',
 	'wikibase-error-autocomplete-response' => 'Server responded: $1',
+	'wikibase-error-ui-client-error' => 'The connection to the client page failed. Please try again later.',
+	'wikibase-error-ui-no-external-page' => 'The specified article could not be found on the corresponding page.',
+	'wikibase-error-ui-cant-edit' => 'You are not allowed to perform this action.',
+	'wikibase-error-ui-no-permissions' => 'You do not have sufficient rights to perform this action.',
+	'wikibase-error-ui-link-exists' => 'You cannot link to this page because another item already links to it.',
+	'wikibase-error-ui-session-failure' => 'Your session has expired. Please log in again.',
+	
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
 	'wikibase-error-relational-save-failed' => 'Could not store item identity in the database.',
@@ -69,8 +76,8 @@ $messages['en'] = array(
 
 	// API errors
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.',
-	'wikibase-api-no-token' => 'There are no token given.',
-	'wikibase-api-no-data' => 'There are no data to operate upon.',
+	'wikibase-api-no-token' => 'No token given.',
+	'wikibase-api-no-data' => 'No data to operate upon.',
 	'wikibase-api-client-error' => 'The external client site failed.',
 	'wikibase-api-no-external-data' => 'There was no data from the external client site, possibly due to connection errors.',
 	'wikibase-api-no-external-page' => 'The external client site did not provide page information.',
@@ -97,7 +104,7 @@ $messages['en'] = array(
 	'wikibase-api-label-not-found' => 'Cannot find a previous label for this language in the item.',
 	'wikibase-api-description-not-found' => 'Cannot find a previous description for this language in the item.',
 	'wikibase-api-wrong-class' => 'The content on the found page is not of correct type.', //'wikibase-api-invalid-contentmodel'
-	'wikibase-api-session-failure' => 'The current session has failed and you must refresh the page and log in again.',
+	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.',
 
 	'wikibase-resetold' => 'reset',
 
@@ -183,6 +190,12 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-remove-timeout' => 'Error message for an error happening during a remove operation. The error was caused by a request time out.',
 	'wikibase-error-autocomplete-connection' => 'Error message for page auto-complete input box; displayed when API could not be reached.',
 	'wikibase-error-autocomplete-response' => 'When querying the API for auto-completion fails, this message contains more detailed information about the error. $1 is the actual server error response or jQuery error code (e.g. when the server did not respond).',
+	'wikibase-error-ui-client-error' => 'This is a human readable version of the API error "wikibase-api-client-error" which is shown in the UI.',
+	'wikibase-error-ui-no-external-page' => 'This is a human readable version of the API error "wikibase-api-no-external-page" which is shown in the UI.',
+	'wikibase-error-ui-cant-edit' => 'This is a human readable version of the API error "wikibase-api-cant-edit" which is shown in the UI.',
+	'wikibase-error-ui-no-permissions' => 'This is a human readable version of the API error "wikibase-api-no-permission" which is shown in the UI.',
+	'wikibase-error-ui-link-exists' => 'This is a human readable version of the API error "wikibase-api-link-exists" which is shown in the UI.',
+	'wikibase-error-ui-session-failure' => 'This is a human readable version of the API error "wikibase-api-session-failure" which is shown in the UI.',
 	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|pagfe]] and [[m:Wikidata/Glossary#item|item]].',
 	'wikibase-error-relational-save-failed' => "Error message shown when an item's identity could not be created in the database, prior to the primary save operation.",
 	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a ite link already used by another item. Parameters:
