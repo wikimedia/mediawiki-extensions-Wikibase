@@ -16,6 +16,24 @@
       "revId": "80bef2b4a4004b09368f951f12e66aa10179658c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+OY\u003d",
+        "filename": "lib/compat/Settings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-02T15:04:55Z",
+      "side": 1,
+      "message": "Not readable in what way? And how do you suggest improving it?",
+      "parentUuid": "AAAAPX//+Oo\u003d",
+      "revId": "80bef2b4a4004b09368f951f12e66aa10179658c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
