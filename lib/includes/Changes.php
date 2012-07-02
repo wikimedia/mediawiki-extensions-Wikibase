@@ -80,7 +80,7 @@ class Changes extends \ORMTable {
 	 * @return Change
 	 * @throws MWException
 	 */
-	public function newFromArray( array $data, $loadDefaults = false ) {
+	public function newRow( array $data, $loadDefaults = false ) {
 		if ( !array_key_exists( 'type', $data ) ) {
 			throw new MWException( 'The type element must be set in the $data array before a new change can be constructed.' );
 		}
