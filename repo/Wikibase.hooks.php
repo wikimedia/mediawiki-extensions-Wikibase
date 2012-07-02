@@ -196,11 +196,15 @@ final class WikibaseHooks {
 			 */
 			$newItem = $article->getContent()->getItem();
 
-			$oldItem = is_null( $revision->getParentId() ) ?
-				Wikibase\ItemObject::newEmpty()
-				: Revision::newFromId( $revision->getParentId() )->getContent()->getItem();
-
-			$change = \Wikibase\ItemChange::newFromItems( $oldItem, $newItem );
+			if ( is_null( $revision->getParentId() ) ) {
+				$change = \Wikibase\ItemCreation::newFromItem( $newItem );
+			}
+			else {
+				$change = \Wikibase\ItemChange::newFromItems(
+					Revision::newFromId( $revision->getParentId() )->getContent()->getItem(),
+					$newItem
+				);
+			}
 
 			$change->setFields( array(
 				'revision_id' => $revision->getId(),
@@ -210,6 +214,70 @@ final class WikibaseHooks {
 			) );
 
 			\Wikibase\ChangeNotifier::singleton()->handleChange( $change );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Occurs after the delete article request has been processed.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
+	 *
+	 * @since 0.1
+	 *
+	 * @param WikiPage $wikiPage
+	 * @param User $user
+	 * @param string $reason
+	 * @param integer $id
+	 *
+	 * @return boolean
+	 */
+	public static function onArticleDeleteComplete( WikiPage &$wikiPage, User &$user, $reason, $id ) {
+		// This is a temporary hack since the archive table does not correctly have the data we need.
+		// Once this is fixed this can go, and we can use the commented out code later in this method.
+		if ( $wikiPage->getTitle()->getNamespace() !== WB_NS_DATA ) {
+			return true;
+		}
+
+		$dbw = wfGetDB( DB_MASTER );
+
+		$archiveEntry = $dbw->selectRow(
+			'archive',
+			array(
+				'ar_user',
+				'ar_text_id',
+				'ar_rev_id',
+				'ar_timestamp',
+				'ar_content_format',
+			),
+			array(
+				'ar_page_id' => $id,
+				// 'ar_content_model' => CONTENT_MODEL_WIKIBASE_ITEM,
+			)
+		);
+
+		if ( $archiveEntry !== false ) {
+			$textEntry = $dbw->selectRow(
+				'text',
+				'old_text',
+				array( 'old_id' => $archiveEntry->ar_text_id )
+			);
+
+			if ( $textEntry !== false ) {
+				$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+				$itemContent = $itemHandler->unserializeContent( $textEntry->old_text/* , $archiveEntry->ar_content_format */ );
+				$item = $itemContent->getItem();
+				$change = \Wikibase\ItemDeletion::newFromItem( $item );
+
+				$change->setFields( array(
+					'revision_id' => $archiveEntry->ar_rev_id,
+					'user_id' => $archiveEntry->ar_user,
+					'object_id' => $item->getId(),
+					'time' => $archiveEntry->ar_timestamp,
+				) );
+
+				\Wikibase\ChangeNotifier::singleton()->handleChange( $change );
+			}
 		}
 
 		return true;

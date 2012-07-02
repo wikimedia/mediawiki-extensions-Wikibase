@@ -62,7 +62,9 @@ class Changes extends \ORMTable {
 	}
 
 	protected static $typeMap = array(
-		'item' => 'Wikibase\ItemChange',
+		'item-update' => 'Wikibase\ItemChange',
+		'item-remove' => 'Wikibase\ItemDeletion',
+		'item-add' => 'Wikibase\ItemCreation',
 	);
 
 	public static function getClassForType( $type ) {

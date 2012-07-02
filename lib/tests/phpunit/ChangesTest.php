@@ -34,7 +34,7 @@ class ChangesTest extends \MediaWikiTestCase {
 		return array(
 			array(
 				array(
-					'type' => 'item',
+					'type' => 'item-update',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
@@ -47,7 +47,7 @@ class ChangesTest extends \MediaWikiTestCase {
 			),
 			array(
 				array(
-					'type' => 'item',
+					'type' => 'item-update',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
