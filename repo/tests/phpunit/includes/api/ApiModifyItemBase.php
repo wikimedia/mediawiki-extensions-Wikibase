@@ -36,7 +36,7 @@ use Wikibase\Settings as Settings;
 abstract class ApiModifyItemBase extends ApiTestCase {
 
 	/**
-	 * @var WikibaseItem
+	 * @var Item
 	 */
 	protected static $item = false;
 	

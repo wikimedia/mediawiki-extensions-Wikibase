@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Title, WikiPage, Content, RequestContext;
+use User, Title, WikiPage, Content, RequestContext, Status;
 
 /**
  * Represents a single Wikibase item.
@@ -158,7 +158,7 @@ class Item extends Entity {
 	 * @param int      $baseRevId
 	 * @param User     $user
 	 *
-	 * @return \Status
+	 * @return Status
 	 * @see Content::prepareSave()
 	 */
 	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
@@ -171,7 +171,7 @@ class Item extends Entity {
 		return $status;
 	}
 
-	protected function checkSiteLinksForInsert( \Status $status ) {
+	protected function checkSiteLinksForInsert( Status $status ) {
 		$dbw = wfGetDB( DB_SLAVE );
 
 		foreach ( $this->getSiteLinks() as $siteId => $pageName ) {
@@ -207,14 +207,14 @@ class Item extends Entity {
 	 * @param string $summary
 	 * @param null|User $user
 	 *
-	 * @return \Status Success indicator
+	 * @return Status Success indicator
 	 * @todo: page based operations must be factored out of this class; they are only meaningful in the repo.
 	 */
 	public function save( $summary = '', User $user = null ) {
 		$success = $this->relationalSave();
 
 		if ( !$success ) {
-			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
+			$status = Status::newFatal( "wikibase-error-relational-save-failed" );
 		} else {
 			$status = $this->getWikiPage()->doEditContent(
 				$this,
@@ -223,6 +223,72 @@ class Item extends Entity {
 				false,
 				$user
 			);
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Checks whether the user can perform the given action.
+	 *
+	 * Shorthand for $this->checkPermission( $permission )->isOK();
+	 *
+	 * @param String    $permission         the permission to check
+	 * @param null|User $user               the user to check for. If omitted, $wgUser is checked.
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May be set to false for
+	 *                                      non-critical checks.
+	 *
+	 * @return bool True if the user has the given permission, false otherwise.
+	 */
+	public function userCan( $permission, User $user = null, $doExpensiveQueries = true ) {
+		return $this->checkPermission( $permission, $user, $doExpensiveQueries )->isOK();
+	}
+
+	/**
+	 * Checks whether the user can perform the given action.
+	 *
+	 * @param String    $permission         the permission to check
+	 * @param null|User $user               the user to check for. If omitted, $wgUser is checked.
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May be set to false for
+	 *                                      non-critical checks.
+	 *
+	 * @return Status a status object representing the check's result.
+	 */
+	public function checkPermission( $permission, User $user = null, $doExpensiveQueries = true ) {
+		global $wgUser;
+		static $dummyTitle = null;
+
+		if ( !$user ) {
+			$user = $wgUser;
+		}
+
+		$title = $this->getTitle();
+		$errors = null;
+
+		if ( !$title ) {
+			if ( !$dummyTitle ) {
+				$dummyTitle = Title::makeTitleSafe( WB_NS_DATA, '/' );
+			}
+
+			$title = $dummyTitle;
+
+			if ( $permission == 'edit' ) {
+				// when checking for edit rights on an item that doesn't yet exists, check create rights first.
+
+				$errors = $title->getUserPermissionsErrors( 'createpage', $user, $doExpensiveQueries );
+			}
+		}
+
+		if ( empty( $errors ) ) {
+			// only do this if we don't already have errors from an earlier check, to avoid redundant messages
+			$errors = $title->getUserPermissionsErrors( $permission, $user, $doExpensiveQueries );
+		}
+
+		$status = Status::newGood();
+
+		foreach ( $errors as $error ) {
+			call_user_func_array( array( $status, 'error'), $error );
+			$status->setResult( false );
 		}
 
 		return $status;
