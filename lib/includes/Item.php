@@ -118,6 +118,7 @@ interface Item extends Entity {
 
 	/**
 	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
+	 * TODO: decide on how to deal with duplicates
 	 *
 	 * @since 0.1
 	 *
