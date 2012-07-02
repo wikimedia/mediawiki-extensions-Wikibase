@@ -95,7 +95,7 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 		$apiResponse = $apiResponse[0];
 
 		$this->assertSuccess( $apiResponse );
-		
+
 		self::$itemContent->reload();
 
 		$item = self::$itemContent->getItem();
