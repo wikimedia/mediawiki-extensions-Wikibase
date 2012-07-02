@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//+YY\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-02T10:37:04Z",
+      "side": 1,
+      "message": "Why not use 0 or -1? Better for performance :)",
+      "revId": "18bafb24b716e0f87e56d768e8f466fe500ef0b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
