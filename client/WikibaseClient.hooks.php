@@ -50,6 +50,7 @@ final class ClientHooks {
 			'General',
 			'Sorting',
 
+			'includes/LocalItemsTable',
 			'includes/LocalItem',
 		);
 

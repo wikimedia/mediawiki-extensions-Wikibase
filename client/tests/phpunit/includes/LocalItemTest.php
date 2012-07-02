@@ -2,12 +2,12 @@
 
 namespace Wikibase\Test;
 use Wikibase\LocalItem as LocalItem;
-use Wikibase\LocalItems as LocalItems;
+use Wikibase\LocalItemsTable as LocalItemsTable;
 use Wikibase\Item as Item;
 use Wikibase\ItemObject as ItemObject;
 
 /**
- * Tests for the Diff class.
+ * Tests for the Wikibase\LocalItem class.
  *
  * @file
  * @since 0.1
@@ -22,7 +22,25 @@ use Wikibase\ItemObject as ItemObject;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LocalItemTest extends \MediaWikiTestCase {
+class LocalItemTest extends \ORMRowTest {
+
+	/**
+	 * @see ORMRowTest::getRowClass()
+	 * @since 0.1
+	 * @return string
+	 */
+	protected function getRowClass() {
+		return '\Wikibase\LocalItem';
+	}
+
+	/**
+	 * @see ORMRowTest::getTableInstance()
+	 * @since 0.1
+	 * @return \IORMTable
+	 */
+	protected function getTableInstance() {
+		return \Wikibase\LocalItemsTable::singleton();
+	}
 
 	public function constructorTestProvider() {
 		return array(
@@ -35,70 +53,6 @@ class LocalItemTest extends \MediaWikiTestCase {
 				true
 			),
 		);
-	}
-
-	protected function verifyFields( LocalItem $item, array $data ) {
-		foreach ( array_keys( $data ) as $fieldName ) {
-			$this->assertEquals( $data[$fieldName], $item->getField( $fieldName ) );
-		}
-
-		$this->assertEquals( $data['item_data'], $item->getItem() );
-	}
-
-	/**
-	 * @dataProvider constructorTestProvider
-	 */
-	public function testConstructor( array $data, $loadDefaults ) {
-		$item = new LocalItem( LocalItems::singleton(), $data, $loadDefaults );
-
-		$this->verifyFields( $item, $data );
-	}
-
-	/**
-	 * @dataProvider constructorTestProvider
-	 */
-	public function testSave( array $data, $loadDefaults ) {
-		$item = new LocalItem( LocalItems::singleton(), $data, $loadDefaults );
-
-		$this->assertTrue( $item->save() );
-
-		$this->assertTrue( $item->hasIdField() );
-		$this->assertTrue( is_integer( $item->getId() ) );
-
-		//$this->assertTrue( $item->getId() > 0 );
-
-		$id = $item->getId();
-
-		$this->assertTrue( $item->save() );
-
-		$this->assertEquals( $id, $item->getId() );
-
-		$this->verifyFields( $item, $data );
-	}
-
-	/**
-	 * @dataProvider constructorTestProvider
-	 */
-	public function testRemove( array $data, $loadDefaults ) {
-		$item = new LocalItem( LocalItems::singleton(), $data, $loadDefaults );
-
-		$this->assertTrue( $item->save() );
-
-		$this->assertTrue( $item->remove() );
-
-		$this->assertFalse( $item->hasIdField() );
-
-		$this->assertTrue( $item->save() );
-
-		//$this->assertNotEquals( $id, $item->getId() );
-
-		$this->verifyFields( $item, $data );
-
-		$this->assertTrue( $item->remove() );
-
-		$this->assertFalse( $item->hasIdField() );
-
-		$this->verifyFields( $item, $data );
 	}
 
 }
