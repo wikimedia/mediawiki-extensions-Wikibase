@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-
 interface Item extends Entity {
 
 	/**

@@ -358,7 +358,7 @@ class ApiSetItemTest extends \ApiTestCase {
 		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$myid}"],
 			"Must have an 'descriptions' key in the '{$myid}' result from the API" );
 	}
-	
+
 	/**
 	 * This tests are entering links to sites by giving 'id' for the fiorst lookup, then setting 'linksite' and 'linktitle'.
 	 * In these cases the ids returned should also match up with the ids from the provider.

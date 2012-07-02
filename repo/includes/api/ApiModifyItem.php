@@ -18,6 +18,16 @@ use User, Title, ApiBase;
 abstract class ApiModifyItem extends Api {
 
 	/**
+	 * @see  Api::getRequiredPermissions()
+	 */
+	protected function getRequiredPermissions( Item $item, array $params ) {
+		$permissions = parent::getRequiredPermissions( $item, $params );
+
+		$permissions[] = 'edit';
+		return $permissions;
+	}
+
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since 0.1
@@ -27,37 +37,8 @@ abstract class ApiModifyItem extends Api {
 	 *
 	 * @return boolean Success indicator
 	 */
-	protected abstract function modifyItem( ItemContent &$itemContent, array $params );
-	
-	/**
-	 * Check the rights for the user accessing the module, that is a subclass of this one.
-	 * 
-	 * @param $user User doing the action
-	 * @param $params array of arguments for the module, passed for ModifyItem
-	 * @param $mod null|String name of the module, usually not set
-	 * @param $op null|String operation that is about to be done, usually not set
-	 *
-	 * @return array of errors reported from the static getPermissionsError
-	 */
-	protected abstract function getPermissionsErrorInternal( $user, array $params, $module = null, $op = null );
+	protected abstract function modifyItem( Item &$item, array $params );
 
-	/**
-	 * Check the rights for the user accessing the module, module name and operation comes from the actual subclass.
-	 * 
-	 * @param $user User doing the action
-	 * @param $mod null|String name of the module, usually not set
-	 * @param $op null|String operation that is about to be done, usually not set
-	 *
-	 * @return array of errors reported from the static getPermissionsError
-	 */
-	protected static function getPermissionsError( $user, $mod = null, $op = null ) {
-		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
-			return null;
-		}
-		
-		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
-	}
-	
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
@@ -128,27 +109,18 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
 		}
 
-		if ( !is_null( $itemContent ) && $itemContent !== false ) {
-			$title = $itemContent->getTitle();
-
-			if ( !is_null( $title ) && $title !== false ) {
-				if ( !$title->userCan( 'edit', $user ) ) {
-					$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
-				}
-			}
-		}
-
-		// TODO: Change for more fine grained permissions
-		if ( $this->getPermissionsErrorInternal( $user, $params ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
-		}
-
 		if ( is_null( $itemContent ) ) {
 			$itemContent = ItemContent::newEmpty();
 
 			if ( $hasLink ) {
 				$itemContent->getItem()->addSiteLink( $params['site'], $params['title'] );
 			}
+		}
+
+		$status = $this->checkPermissions( $itemContent, $user, $params );
+
+		if ( !$status->isOK() ) {
+			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 
 		$this->setUsekeys( $params );

@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase;
+use ApiBase, User;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -18,22 +18,14 @@ use ApiBase;
 class ApiSetItem extends Api {
 
 	/**
-	 * Check the rights
-	 * 
-	 * @param $title Title object where the item is stored
-	 * @param $user User doing the action
-	 * @param $mod null|String name of the module, usually not set
-	 * @param $op null|String operation that is about to be done, usually not set
-	 * @return array of errors reported from the static getPermissionsError
+	 * @see  Api::getRequiredPermissions()
 	 */
-	protected static function getPermissionsError( $user, $mod='item', $op='add' ) {
-		if ( Settings::get( 'apiInDebug' ) ? !Settings::get( 'apiDebugWithRights', false ) : false ) {
-			return null;
-		}
+	protected function getRequiredPermissions( Item $item, array $params ) {
+		$permissions = parent::getRequiredPermissions( $item, $params );
 
-		// Check permissions
-		return !$user->isAllowed( is_string($mod) ? "{$mod}-{$op}" : $op);
-
+		$permissions[] = 'edit';
+		$permissions[] = 'item-' . $params['item'];
+		return $permissions;
 	}
 
 	/**
@@ -84,19 +76,10 @@ class ApiSetItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
 
-		if ( !is_null( $itemContent ) && $itemContent !== false ) {
-			$title = $itemContent->getTitle();
+		$status = $this->checkPermissions( $itemContent, $user, $params );
 
-			if ( !is_null( $title ) && $title !== false ) {
-				if ( !$title->userCan( 'edit', $user ) ) {
-					$this->dieUsage( wfMsg( 'wikibase-api-cant-edit' ), 'cant-edit' );
-				}
-			}
-		}
-
-		// TODO: Change for more fine grained permissions
-		if ( self::getPermissionsError( $this->getUser() ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-permissions' ), 'no-permissions' );
+		if ( !$status->isOK() ) {
+			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 
 		$status = $itemContent->save();

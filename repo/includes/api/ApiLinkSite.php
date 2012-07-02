@@ -20,17 +20,13 @@ use ApiBase, User, Http, UtfNormal;
 class ApiLinkSite extends ApiModifyItem {
 
 	/**
-	 * Check the rights for the user accessing this module.
-	 * This is called from ModifyItem.
-	 * 
-	 * @param $user User doing the action
-	 * @param $params array of arguments for the module, passed for ModifyItem
-	 * @param $mod null|String name of the module, usually not set
-	 * @param $op null|String operation that is about to be done, usually not set
-	 * @return array of errors reported from the static getPermissionsError
+	 * @see  ApiModifyItem::getRequiredPermissions()
 	 */
-	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
-		return parent::getPermissionsError( $user, 'site-link', $params['link'] );
+	protected function getRequiredPermissions( Item $item, array $params ) {
+		$permissions = parent::getRequiredPermissions( $item, $params );
+
+		$permissions[] = 'site-link-' . $params['link'];
+		return $permissions;
 	}
 
 	/**

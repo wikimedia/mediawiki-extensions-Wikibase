@@ -74,7 +74,7 @@ $messages['en'] = array(
 	'wikibase-api-client-error' => 'The external client site failed.',
 	'wikibase-api-no-external-page' => 'The external client site did not provide page information.',
 	'wikibase-api-add-sitelink-failed' => 'The site link could not be saved.',
-	'wikibase-api-cant-edit' => 'The logged in user is not allowed to edit.',
+	'wikibase-api-cant-edit' => 'Edit not allowed:\n$1',
 	'wikibase-api-no-permissions' => 'The logged in user does not have sufficient rights.',
 	'wikibase-api-id-xor-wikititle' => 'Either provide the item "id" or pairs of "site" and "title" for a corresponding page.',
 	'wikibase-api-no-such-item' => 'Could not find an existing item.',
@@ -197,11 +197,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
 	'wikibase-api-no-external-page' => 'This is an error message where the external client did reply but either because of foulty reply or because the page title could not be unwound it was not possible to identify an external page.',
 	'wikibase-api-add-sitelink-failed' => 'This is an error message where the system of some unspecific reason could not add the site link to the temporary stor.',
-	'wikibase-api-cant-edit' => 'This is an error message for a situation where the user is blocked from editing. This will be shown to the user if he tries to edit when being blocked.',
-	'wikibase-api-no-permissions' => 'This is an error message for a situation where the user does not have sufficient rights. This will be shown to the user if the wiki uses group rights, and the user does not belong to the correct group, or if the rights of some other reason does not include the user.',
-	'wikibase-api-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error condition.
-
-{{doc-important|Do not translate the names of the arguments: "id", "site" and "title"}}',
+	'wikibase-api-cant-edit' => 'This error message is used when the user is not allowed to edit or create an item via the API. The first parameter is a wikitext list of reasons, it should be placed on a separate line.',
+	'wikibase-api-no-permissions' => 'This error message is used when the user is not allowed to perform a specific action via the API. The first parameter is a wikitext list of reasons, it should be placed on a separate line.',
+	'wikibase-api-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition.',
 	'wikibase-api-no-such-item' => 'This is an error message for a situation where the API could not find an item, usually on an already found page. Usually this should never be shown to the user, unless there are som exceptional error condition, or the item is deleted due to a race condition.',
 	'wikibase-api-no-such-item-id' => 'This is an error message for a situation where the API could not find an item by using a specific item id. Usually this should never be shown to the user, unless there are som exceptional error condition.',
 	'wikibase-api-link-exists' => 'This is an error message for a situation where the arguments to the API requests a sitelink to be created but there already exist a similar link. Usually this should never be shown to the user, unless there are som exceptional error condition, or the link is already created due to a race condition.',
