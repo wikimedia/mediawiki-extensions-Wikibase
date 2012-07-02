@@ -4,4 +4,4 @@
 
 -- TODO: move to core and make matching changes to tables.sql files
 
-DROP TABLE IF EXISTS interwiki;
+DROP TABLE IF EXISTS /*_*/interwiki;
