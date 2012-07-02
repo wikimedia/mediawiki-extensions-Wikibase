@@ -168,7 +168,7 @@ class ApiLinkSiteTest extends ApiTestCase {
 				array(
 					'query' => array(
 						'normalized' => array( array( 'from' => 'gol', 'to' => 'Gol' ) ),
-						'pages' => array( array( 'title' => 'Oslo' ) )
+						//'pages' => array( array( 'title' => 'Oslo' ) ) //NOTE: there's some cheat code in titleToPage() that will return the only page entry if there is one.
 					)
 				),
 				'oslo',

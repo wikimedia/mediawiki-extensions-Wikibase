@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use User, Status;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -164,6 +165,55 @@ abstract class Api extends \ApiBase {
 			}
 			$this->getResult()->addValue( $path, $name, $value );
 		}
+	}
+
+	/**
+	 * Returns the permissions that are required to perform the operation specified by
+	 * the parameters.
+	 *
+	 * @param $item Item the item to check permissions for
+	 * @param $params array of arguments for the module, describing the operation to be performed
+	 *
+<<<<<<< Updated upstream
+	 * @return \Status the check's result
+=======
+	 * @return Status the check's result
+>>>>>>> Stashed changes
+	 */
+	protected function getRequiredPermissions( Item $item, array $params ) {
+		$permissions = array( 'read' );
+
+		#could directly check for each module here:
+		#$modulePermission = $this->getModuleName();
+		#$permissions[] = $modulePermission;
+
+		return $permissions;
+	}
+
+	/**
+	 * Check the rights for the user accessing the module.
+	 *
+	 * @param $item ItemContent the item to check
+	 * @param $user User doing the action
+	 * @param $params array of arguments for the module, passed for ModifyItem
+	 *
+	 * @return Status the check's result
+	 * @todo: use this also to check for read access in ApiGetItems, etc
+	 */
+	public function checkPermissions( ItemContent $itemContent, User $user, array $params ) {
+		if ( Settings::get( 'apiInDebug' ) && !Settings::get( 'apiDebugWithRights', false ) ) {
+			return Status::newGood();
+		}
+
+		$permissions = $this->getRequiredPermissions( $itemContent->getItem(), $params );
+		$status = Status::newGood();
+
+		foreach ( $permissions as $perm ) {
+			$permStatus = $itemContent->checkPermission( $perm, $user, true );
+			$status->merge( $permStatus );
+		}
+
+		return $status;
 	}
 
 }

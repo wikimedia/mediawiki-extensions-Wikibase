@@ -20,14 +20,13 @@ use ApiBase, User;
 class ApiSetAliases extends ApiModifyItem {
 
 	/**
-	 * Check the rights
-	 * 
-	 * @param $user User doing the action
-	 * @param $token String
-	 * @return array
+	 * @see  ApiModifyItem::getRequiredPermissions()
 	 */
-	protected function getPermissionsErrorInternal( $user, array $params, $mod=null, $op=null ) {
-		return parent::getPermissionsError( $user, 'alias', $params['item'] );
+	protected function getRequiredPermissions( Item $item, array $params ) {
+		$permissions = parent::getRequiredPermissions( $item, $params );
+
+		$permissions[] = 'alias-' . $params['item'];
+		return $permissions;
 	}
 	
 	/**
