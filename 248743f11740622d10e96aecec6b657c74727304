@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//+Mc\u003d",
+        "filename": "lib/tests/phpunit/ItemNewFromArrayTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T15:51:16Z",
+      "side": 1,
+      "message": "Why do we need an extra class for this? Shouldn\u0027t this be in ItemObjectTest or something?",
+      "revId": "248743f11740622d10e96aecec6b657c74727304",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+Mg\u003d",
+        "filename": "lib/tests/phpunit/ItemNewFromArrayTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T15:51:16Z",
+      "side": 1,
+      "message": "messed up (mixed space) indents up here.",
+      "revId": "248743f11740622d10e96aecec6b657c74727304",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+Mo\u003d",
+        "filename": "lib/tests/phpunit/ItemNewFromArrayTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T15:51:16Z",
+      "side": 1,
+      "message": "actually, it should return true: newEmpty()-\u003eisEmpty(). \n\nItemObjectTest already tests that. So get rid of the misleading stuff here.",
+      "revId": "248743f11740622d10e96aecec6b657c74727304",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+MU\u003d",
+        "filename": "lib/tests/phpunit/ItemObjectTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T15:51:16Z",
+      "side": 1,
+      "message": "Why don\u0027t we just use new ItemObject()?",
+      "revId": "248743f11740622d10e96aecec6b657c74727304",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+MM\u003d",
+        "filename": "lib/tests/phpunit/ItemObjectTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T15:51:16Z",
+      "side": 1,
+      "message": "could also check that isEmpty() returns true after removing stuff again.",
+      "revId": "248743f11740622d10e96aecec6b657c74727304",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//+MQ\u003d",
+        "filename": "lib/tests/phpunit/ItemObjectTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-02T15:51:16Z",
+      "side": 1,
+      "message": "maybe mark the test as incomplete, then?",
+      "revId": "248743f11740622d10e96aecec6b657c74727304",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
