@@ -6,7 +6,7 @@ use Wikibase\ListDiff as ListDiff;
 use Wikibase\Changes as Changes;
 
 /**
- * Tests for the WikibaseChanges class.
+ * Tests for the Wikibase\Changes class.
  *
  * @file
  * @since 0.1

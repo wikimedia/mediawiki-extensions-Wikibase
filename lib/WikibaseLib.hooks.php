@@ -80,6 +80,7 @@ final class LibHooks {
 	 */
 	public static function registerUnitTests( array &$files ) {
 		$testFiles = array(
+			'ChangeHandler',
 			'Changes',
 			'ItemMultilangTexts',
 			'ItemNewEmpty',
