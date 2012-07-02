@@ -3,6 +3,17 @@
 namespace Wikibase;
 use Title, WikiPage, User, MWException, Content;
 
+/**
+ * Content object for articles representing Wikibase items.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup Wikibase
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
 class ItemContent extends EntityContent {
 
 	/**
