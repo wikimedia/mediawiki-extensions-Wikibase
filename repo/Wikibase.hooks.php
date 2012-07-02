@@ -52,7 +52,6 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testFiles = array(
 			'ItemMove',
-			'ChangeNotifier',
 			'EntityHandler',
 			'ItemContent',
 			'ItemDeletionUpdate',
