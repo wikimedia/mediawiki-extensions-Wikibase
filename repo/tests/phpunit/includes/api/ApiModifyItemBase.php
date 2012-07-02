@@ -41,7 +41,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 * @var ItemContent
 	 */
 	protected static $itemContent = false;
-	
+
 	/**
 	 * This is to set up the environment.
 	 */
@@ -52,14 +52,14 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			self::$itemContent = ItemContent::newEmpty();
 			self::$itemContent->save();
 		}
-		
+
 		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
 			'Apitesteditor',
 			'Api Test Editor',
 			'api_test_editor@example.com',
 			array( 'wbeditor' )
 		);
-		
+
 		// now we have to do the login with the previous user
 		$data = $this->doApiRequest( array(
 			'action' => 'login',

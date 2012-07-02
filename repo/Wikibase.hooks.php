@@ -65,6 +65,7 @@ final class WikibaseHooks {
 			'api/ApiSetItem',
 			'api/ApiLinkSite',
 			'api/ApiEditPage',
+			'api/ApiPermissions',
 
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemByLabel',
