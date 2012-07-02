@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//+Oo\u003d",
+        "filename": "lib/compat/Settings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-07-02T15:01:21Z",
+      "side": 1,
+      "message": "Boolean parameters like this are not readable.",
+      "revId": "80bef2b4a4004b09368f951f12e66aa10179658c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
