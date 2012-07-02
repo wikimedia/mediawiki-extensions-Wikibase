@@ -42,7 +42,7 @@ class LocalItem extends ORMRow {
 	 * @return LocalItem
 	 */
 	public static function newFromItem( Item $item, $loadFromDB = true ) {
-		$table = \Wikibase\LocalItems::singleton();
+		$table = \Wikibase\LocalItemsTable::singleton();
 		$localItem = false;
 
 		if ( $loadFromDB ) {

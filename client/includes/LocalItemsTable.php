@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LocalItems extends \ORMTable {
+class LocalItemsTable extends \ORMTable {
 
 	/**
 	 * (non-PHPdoc)
