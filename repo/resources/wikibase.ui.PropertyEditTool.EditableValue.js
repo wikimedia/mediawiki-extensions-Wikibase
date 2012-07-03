@@ -64,6 +64,20 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
+	 * @const
+	 * Mapping of API error codes to messages. If the API returns an error code which is not defined here,
+	 * wikibase-error-remove-generic or wikibase-error-save-generic message will be shown. ( see _apiCallErr() )
+	 */
+	API_ERROR_MESSAGE_MAP: {
+		'client-error': 'wikibase-error-ui-client-error',
+		'no-external-page': 'wikibase-error-ui-no-external-page',
+		'cant-edit': 'wikibase-error-ui-cant-edit',
+		'no-permissions': 'wikibase-error-ui-no-permissions',
+		'link-exists': 'wikibase-error-ui-link-exists',
+		'session-failure': 'wikibase-error-ui-session-failure'
+	},
+
+	/**
 	 * specific property key within the API JSON structure.
 	 * @const string
 	 */
@@ -539,9 +553,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				if ( typeof response.error != 'undefined' ) {
 					error.code = response.error.code;
 					error.message = response.error.info;
-					error.shortMessage = ( apiAction === this.API_ACTION.REMOVE )
-						? mw.msg( 'wikibase-error-remove-generic' )
-						: mw.msg( 'wikibase-error-save-generic' );
+					error.shortMessage = ( this.API_ERROR_MESSAGE_MAP[ response.error.code ] !== undefined )
+						? mw.msg( this.API_ERROR_MESSAGE_MAP[ response.error.code ] )
+						: ( apiAction === this.API_ACTION.REMOVE )
+							? mw.msg( 'wikibase-error-remove-generic' )
+							: mw.msg( 'wikibase-error-save-generic' );
 				}
 			}
 		}
