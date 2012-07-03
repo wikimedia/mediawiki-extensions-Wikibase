@@ -178,10 +178,19 @@ final class Hooks {
 	 * @return bool true
 	 */
 	public static function onLinkBegin( $skin, $target, &$text, &$customAttribs, &$query, &$options, &$ret ) {
-		global $wgLang, $wgLanguageCode;
-		if( $wgLang->getCode() !== $wgLanguageCode   // cache friendly!
-			&& array_key_exists( 'uselang', $query ) // don't add it if there is a uselang set to that url already!
-		) {
+		global $wgLang, $wgParser;
+
+		/*
+		 * the following will trigger a cache fragmentation. This means, the parsed output is only put into the cache
+		 * cache for the current user language. This is necessary because otherwise the 'uselang' parameter would we
+		 * wrong when accessing the page in another language as the one active during parsing for the cached version.
+		 */
+		self::causeCacheFragmentation();
+
+		// NOTE: we can't just add 'uselang' in case it is different from the sites global language (e.g. 'en')
+		//       because a users language could still be different than that language.
+
+		if( array_key_exists( 'uselang', $query ) ) { // only add it if there is no uselang set to that link already!
 			// this will add the 'uselang' parameter to each link generated with Linker::link()
 			$query[ 'uselang' ] = $wgLang->getCode();
 		}
@@ -199,13 +208,32 @@ final class Hooks {
 	 * @return bool true
 	 */
 	public static function onGetLocalUrlInternally( \Title $title, &$url ) {
-		global $wgLang, $wgLanguageCode;
-		if( $wgLang->getCode() !== $wgLanguageCode    // squid-cache friendly!
-			&& !preg_match( '/[&\?]uselang=/i', $url ) // don't add it if there is a uselang set to that url already!
-		) {
+		global $wgLang;
+
+		/*
+		 * We have to do this here as well, since content parsing could still come here instead of the onLinkBegin.
+		 * This is for example happening when having an image with link.
+		 */
+		self::causeCacheFragmentation();
+
+		// don't add uselang if there is a uselang set to that url already!
+		if( !preg_match( '/[&\?]uselang=/i', $url ) ) {
 			// this will add the 'uselang' parameter to each link returned by Title::getLocalURL()
 			$url = wfAppendQuery( $url, 'uselang=' . $wgLang->getCode() );
 		}
+
 		return true;
+	}
+
+	/**
+	 * Helper to cause some cache fragmentation (separate cached version of the article in all languages)
+	 *
+	 * @since 0.1
+	 */
+	private static function causeCacheFragmentation() {
+		global $wgParser;
+		if( $wgParser->getOptions() !== null ) { // if not parsing anything right now, this is set to null
+			$wgParser->getOptions()->getUserLangObj();
+		}
 	}
 }

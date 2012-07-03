@@ -11,4 +11,7 @@ Initial release with the following features:
 * Language selector which looks and feels like Wikipedias navigation language links. User preferred
   languages are displayed on top. For users not logged in the default languages can be configured.
 * New user preference for users to choose their preferred languages.
+* Chosen language (by selector or by adding 'uselang' to an url) will remain when clicking on any
+  link. This is because the extension will add the 'uselang' parameter to all links. If there are
+  wiki links within the content, there will be a separate cached version for each accessed language.
 * ...
