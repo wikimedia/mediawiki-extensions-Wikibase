@@ -55,6 +55,7 @@ final class WikibaseHooks {
 			'EntityHandler',
 			'ItemContent',
 			'ItemDeletionUpdate',
+			'ItemDiffView',
 			'ItemHandler',
 			'ItemMove',
 			'ItemView',
