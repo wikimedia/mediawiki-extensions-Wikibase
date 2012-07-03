@@ -59,13 +59,25 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		$language = $params['language'];
 
 		if ( isset( $params['label'] ) ) {
-			$labels = array( $language => $itemContent->getItem()->setLabel( $language,Api::squashToNFC( $params['label'] ) ) );
-			$this->addLabelsToResult( $labels, 'item' );
+			$label = Api::squashToNFC( $params['label'] );
+			if ( 0 < strlen( $label ) ) {
+				$labels = array( $language => $itemContent->getItem()->setLabel( $language, $label ) );
+				$this->addLabelsToResult( $labels, 'item' );
+			}
+			else {
+				$itemContent->getItem()->removeLabel( $language );
+			}
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, Api::squashToNFC( $params['description'] ) ) );
-			$this->addDescriptionsToResult( $descriptions, 'item' );
+			$description = Api::squashToNFC( $params['description'] );
+			if ( 0 < strlen( $description ) ) {
+				$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, $description ) );
+				$this->addDescriptionsToResult( $descriptions, 'item' );
+			}
+			else {
+				$itemContent->getItem()->removeDescription( $language );
+			}
 		}
 
 		// Because we can't fail?
