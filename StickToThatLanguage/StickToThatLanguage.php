@@ -10,9 +10,7 @@ namespace STTLanguage;
  * Source code:    https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
  *
  * TODO:
- * - improve stickiness of the chosen language. Right now we use the 'LinkBegin' hook to add the 'uselang' parameter
- *   to all link within the page content when they are generated. This will only work when the content is parsed though,
- *   so this would require disabling the parser cache to work properly on all pages.
+ * - the search is not yet working, language not sticky when clicking a search button
  *
  * @file StickToThatLanguage.php
  * @ingroup STTLanguage
