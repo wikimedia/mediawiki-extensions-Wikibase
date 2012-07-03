@@ -87,9 +87,9 @@ class ApiSetAliases extends ApiModifyItem {
 			);
 		}
 
-		$aliases = $itemContent->getItem()->getAllAliases( (array)$params['language'] );
+		$aliases = $itemContent->getItem()->getAllAliases( $params['language'] );
 		if ( count( $aliases ) ) {
-			$this->addAliasesToResult( $aliases, 'item' );
+			$this->addAliasesToResult( array( $params['language'] => $aliases ), 'item' );
 		}
 
 		return true;
