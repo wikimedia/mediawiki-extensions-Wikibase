@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//9xw\u003d",
+        "filename": "repo/tests/selenium/spec/aliases/aliases_bugs_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-03T07:28:52Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "d0c3ca6db3cdb9589298d2de8fc6d52128b8501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//9x0\u003d",
+        "filename": "repo/tests/selenium/spec/item/description_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-03T07:28:52Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "d0c3ca6db3cdb9589298d2de8fc6d52128b8501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//9xk\u003d",
+        "filename": "repo/tests/selenium/spec/item/label_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-03T07:28:52Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "d0c3ca6db3cdb9589298d2de8fc6d52128b8501e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
