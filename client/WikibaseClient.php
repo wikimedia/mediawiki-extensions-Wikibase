@@ -60,13 +60,14 @@ $wgHooks['UnitTestsList'][] 						= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['WikibasePollHandle'][]					= '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= '\Wikibase\ClientHooks::onSchemaUpdate';
 $wgHooks['WikibaseDefaultSettings'][] 			    = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
+$wgHooks['ParserBeforeTidy'][] 						= '\Wikibase\ClientHooks::onParserBeforeTidy';
 
-$wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
-$wgHooks['ParserFirstCallInit'][]					= 'WBCNoLangLinkHandler::onParserFirstCallInit';
-$wgHooks['MagicWordwgVariableIDs'][]				= 'WBCNoLangLinkHandler::onMagicWordwgVariableIDs';
-$wgHooks['ParserGetVariableValueSwitch'][]			= 'WBCNoLangLinkHandler::onParserGetVariableValueSwitch';
-$wgHooks['SkinTemplateOutputPageBeforeExec'][]		= 'WBCSkinHandler::onSkinTemplateOutputPageBeforeExec';
-$wgHooks['BeforePageDisplay'][]						= 'WBCSkinHandler::onBeforePageDisplay';
+//$wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
+//$wgHooks['ParserFirstCallInit'][]					= 'WBCNoLangLinkHandler::onParserFirstCallInit';
+//$wgHooks['MagicWordwgVariableIDs'][]				= 'WBCNoLangLinkHandler::onMagicWordwgVariableIDs';
+//$wgHooks['ParserGetVariableValueSwitch'][]			= 'WBCNoLangLinkHandler::onParserGetVariableValueSwitch';
+//$wgHooks['SkinTemplateOutputPageBeforeExec'][]		= 'WBCSkinHandler::onSkinTemplateOutputPageBeforeExec';
+//$wgHooks['BeforePageDisplay'][]						= 'WBCSkinHandler::onBeforePageDisplay';
 
 
 // Resource loader modules

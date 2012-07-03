@@ -53,14 +53,6 @@ class LocalItem extends ORMRow {
 			);
 		}
 
-		$siteLinks = $item->getSiteLinks();
-
-		// TODO: obtain local wiki global id
-		// TODO: properly manage this field
-		if ( array_key_exists( 'enwiki', $siteLinks ) ) {
-			$localItem->setField( 'page_title', $siteLinks['enwiki'] );
-		}
-
 		return $localItem;
 	}
 
