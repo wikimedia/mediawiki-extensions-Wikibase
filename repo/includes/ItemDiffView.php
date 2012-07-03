@@ -88,7 +88,7 @@ class ItemDiffView extends \DifferenceEngine {
 	function generateContentDiffBody( Content $old, Content $new ) {
 		wfProfileIn( __METHOD__ );
 
-		$diff = ItemDiff::newFromItems( $old, $new );
+		$diff = ItemDiff::newFromItems( $old->getItem(), $new->getItem() );
 
 		#FIXME: debug only
 		$text = print_r( $diff, true );
