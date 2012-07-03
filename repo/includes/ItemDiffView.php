@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Content, _DiffOp_Add, _DiffOp_Delete, _DiffOp_Change, _DiffOp_Copy, Html;
+use Content, Html;
 
 /**
  * Difference view for Wikibase items.
