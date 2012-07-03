@@ -89,15 +89,53 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
-		switch ( $change->getType() ) {
-			case 'item-add': case 'item-update':
-				$localItem = LocalItem::newFromItem( $change->getItem() );
-				$localItem->save();
-				break;
-			case 'item-remove':
-				$localItem = LocalItem::newFromItem( $change->getItem() );
-				$localItem->remove();
-				break;
+		list( $mainType, ) = explode( '-', $change->getType() );
+
+		if ( $mainType === 'item' ) {
+			$itemUpdater = new ItemUpdater();
+			$itemUpdater->handleChange( $change );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Used to process the nearly-rendered html code for the page (but before any html tidying occurs).
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserBeforeTidy
+	 *
+	 * This is used to add the remote navigation links to the navigation menu.
+	 * TODO: this might not be a good place to do this
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Parser $parser
+	 * @param string $text
+	 *
+	 * @return boolean
+	 */
+	public static function onParserBeforeTidy( \Parser &$parser, &$text ) {
+		$parserOutput = $parser->getOutput();
+
+		$dbr = wfGetDB( DB_MASTER );
+
+		$articleId = $parser->getTitle()->getArticleID();
+
+		if ( $articleId !== 0 ) {
+			$links = $dbr->select(
+				'langlinks',
+				array(
+					'll_lang',
+					'll_title',
+				),
+				array(
+				'll_from' => $articleId,
+				'll_local' => 0,
+			)
+			);
+
+			foreach ( $links as $link ) {
+				$parserOutput->addLanguageLink( $link->ll_lang . ':' . $link->ll_title );
+			}
 		}
 
 		return true;
