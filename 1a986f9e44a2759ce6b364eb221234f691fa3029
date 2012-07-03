@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//9pw\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-03T13:30:15Z",
+      "side": 1,
+      "message": "no, this does not work. it\u0027s not about diffs at all. it\u0027s about looking at old revisions. \nbut mediawiki may decide to put something else into that section too, at any time. there\u0027s no way to anticipate all situations.\n\nit exists for a reason! you can\u0027t just hide it and hope that nothing important is lost.\n\nyou could try to hack the core and make mediawiki only include the section if it actually has content. or use javascript to only hide it if it\u0027s empty. or just live with it...",
+      "revId": "1a986f9e44a2759ce6b364eb221234f691fa3029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//9pg\u003d",
+        "filename": "repo/resources/wikibase.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-03T13:30:15Z",
+      "side": 1,
+      "message": "uh... how about just using #contentSub:empty? that\u0027s css3, but we can live with older browsers showing the gap, no?",
+      "revId": "1a986f9e44a2759ce6b364eb221234f691fa3029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
