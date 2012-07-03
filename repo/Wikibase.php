@@ -148,6 +148,7 @@ $wgHooks['NamespaceIsMovable'][]					= 'WikibaseHooks::onNamespaceIsMovable';
 $wgHooks['NewRevisionFromEditComplete'][]			= 'WikibaseHooks::onNewRevisionFromEditComplete';
 $wgHooks['SkinTemplateNavigation'][] 				= 'WikibaseHooks::onPageTabs';
 $wgHooks['ArticleDeleteComplete'][] 				= 'WikibaseHooks::onArticleDeleteComplete';
+$wgHooks['OutputPageBodyAttributes'][] 				= 'WikibaseHooks::onOutputPageBodyAttributes';
 
 
 
