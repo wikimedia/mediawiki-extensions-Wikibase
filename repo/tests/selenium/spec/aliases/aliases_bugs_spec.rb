@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Wikidata UI tests
 #
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
@@ -27,19 +28,19 @@ describe "Check for bugs" do
     end
   end
 
-  context "bug: add-button appearing when it sould not" do
-    it "bug: add-button appearing when it sould not" do
+  context "bug: add-button appearing when it should not" do
+    it "bug: add-button appearing when it should not" do
       on_page(AliasesItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
         page.addAliases
-        page.addAliasesDiv_element.present?.should be_false
+        page.addAliasesDiv_element.style("display").should == "none"
         page.cancelAliases?.should be_true
         page.cancelAliases
         page.addAliases?.should be_true
         page.cancelAliases?.should be_false
         page.addAliases
-        page.addAliasesDiv_element.present?.should be_false
+        page.addAliasesDiv_element.style("display").should == "none"
         page.cancelAliases?.should be_true
         page.cancelAliases
       end
