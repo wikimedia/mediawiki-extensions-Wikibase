@@ -114,10 +114,11 @@ abstract class Api extends \ApiBase {
 		$value = array();
 		$idx = 0;
 
-		foreach ( $siteLinks as $siteId => $pageTitle ) {
-			$value[$this->usekeys ? $siteId : $idx++] = array(
-				'site' => $siteId,
-				'title' => $pageTitle,
+		foreach ( $siteLinks as $link ) { /* @var SiteLink $link */
+			$value[$this->usekeys ? $link->getSiteID() : $idx++] = array(
+				'site' => $link->getSiteID(),
+				'title' => $link->getPage(),
+				'url' => $link->getUrl(), //XXX: could make this optional
 			);
 		}
 

@@ -44,7 +44,7 @@ final class TestItems {
 		$links = \Wikibase\Sites::singleton()->getAllSites();
 
 		if ( $links->count() > 1 ) {
-			$item->addSiteLink( $links->getIterator()->current()->getId(), 'spam' );
+			$item->addSiteLink( $links->getIterator()->current()->getGlobalId(), 'spam' );
 		}
 
 		$items[] = $item;
@@ -54,9 +54,9 @@ final class TestItems {
 		if ( $links->count() > 1 ) {
 			$linksIterator = $links->getIterator();
 
-			$item->addSiteLink( $linksIterator->current()->getId(), 'spam' );
+			$item->addSiteLink( $linksIterator->current()->getGlobalId(), 'spam' );
 			$linksIterator->next();
-			$item->addSiteLink( $linksIterator->current()->getId(), 'foobar' );
+			$item->addSiteLink( $linksIterator->current()->getGlobalId(), 'foobar' );
 		}
 
 		$item->setDescription( 'en', 'foo' );

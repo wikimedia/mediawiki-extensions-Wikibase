@@ -20,11 +20,22 @@ namespace Wikibase;
  */
 class ItemDiff extends MapDiff {
 
+	protected static function siteLinksToArray( $links ) {
+		$links = array();
+
+		/* @var SiteLink $link */
+		foreach ( $links as $link ) {
+			$links[ $link->getSiteID() ] = $link->getPage();
+		}
+
+		return $links;
+	}
+
 	public static function newFromItems( Item $oldItem, Item $newItem ) {
 		return new static( array(
 			'sites' => MapDiff::newFromArrays(
-				$oldItem->getSiteLinks(),
-				$newItem->getSiteLinks()
+				self::siteLinksToArray( $oldItem->getSiteLinks() ),
+				self::siteLinksToArray( $newItem->getSiteLinks() )
 			),
 			'aliases' => MapDiff::newFromArrays(
 				$oldItem->getAllAliases(),

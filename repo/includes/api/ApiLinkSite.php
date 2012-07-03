@@ -67,7 +67,7 @@ class ApiLinkSite extends ApiModifyItem {
 				$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
 			}
 
-			$this->addSiteLinksToResult( array( $ret['site'] => $ret['title'] ), 'item' );
+			$this->addSiteLinksToResult( array( new SiteLink( $ret['site'], $ret['title'] ) ), 'item' );
 			return $ret !== false;
 		}
 	}

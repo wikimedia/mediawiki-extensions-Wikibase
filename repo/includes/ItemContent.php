@@ -117,13 +117,14 @@ class ItemContent extends EntityContent {
 		// TODO: this can work obtaining only a single row
 		// TODO: this can be batched
 
-		foreach ( $this->item->getSiteLinks() as $siteId => $pageName ) {
+		/* @var SiteLink $siteLink */
+		foreach ( $this->item->getSiteLinks() as $siteLink ) {
 			$res = $dbw->select(
 				'wb_items_per_site',
 				array( 'ips_item_id' ),
 				array(
-					'ips_site_id' => $siteId,
-					'ips_site_page' => $pageName,
+					'ips_site_id' => $siteLink->getSiteID(),
+					'ips_site_page' => $siteLink->getPage(),
 				),
 				__METHOD__
 			);
@@ -136,7 +137,7 @@ class ItemContent extends EntityContent {
 					$title = Title::newFromID( $row->ips_item_id );
 
 					$status->setResult( false );
-					$status->error( 'wikibase-error-sitelink-already-used', $siteId, $pageName, $title->getPrefixedDBkey() );
+					$status->error( 'wikibase-error-sitelink-already-used', $siteLink, $title->getPrefixedDBkey() );
 				}
 			}
 		}

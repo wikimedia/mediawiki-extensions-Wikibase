@@ -78,6 +78,7 @@ class SiteRow extends \ORMRow implements Site {
 		return $this->getField( 'url' );
 	}
 
+
 	/**
 	 * @see Site::getPagePath()
 	 *
@@ -91,7 +92,7 @@ class SiteRow extends \ORMRow implements Site {
 		$pagePath = $this->getField( 'url' ) . $this->getField( 'page_path' );
 
 		if ( $pageName !== false ) {
-			$pagePath = str_replace( '$1', rawurlencode( $pageName ), $pagePath );
+			$pagePath = str_replace( '$1', wfUrlencode( $pageName ), $pagePath );
 		}
 
 		return $pagePath;
