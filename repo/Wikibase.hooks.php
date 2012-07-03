@@ -441,4 +441,23 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Used to append a css class to the body, so the page can be identified as Wikibase item page.
+	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
+	 *
+	 * @since 0.1
+	 *
+	 * @param OutputPage $out
+	 * @param Skin $sk
+	 * @param array $bodyAttrs
+	 *
+	 * @return bool
+	 */
+	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
+		if ( $out->getTitle()->getContentModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
+			$bodyAttrs['class'] .= ' wb-itempage';
+		}
+		return true;
+	}
+
 }
