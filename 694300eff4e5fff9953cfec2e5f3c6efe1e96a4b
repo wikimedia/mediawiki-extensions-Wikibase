@@ -16,6 +16,23 @@
       "revId": "694300eff4e5fff9953cfec2e5f3c6efe1e96a4b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//9tE\u003d",
+        "filename": "repo/resources/wikibase.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-03T10:07:13Z",
+      "side": 1,
+      "message": "#contentSub must not be hidden if it\u0027s not empty. It contains all navigation elements and automated warnings for old revisions, and probably other things too. This will all be inside .action-view! \n\nIf you find a mechanism to hide if when not need it, please verify that you still see the revision navigation on top of thew page when viewing old versions.",
+      "revId": "694300eff4e5fff9953cfec2e5f3c6efe1e96a4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
