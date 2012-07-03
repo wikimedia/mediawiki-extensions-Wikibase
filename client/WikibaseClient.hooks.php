@@ -79,15 +79,90 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
-		switch ( $change->getType() ) {
-			case 'item-add': case 'item-update':
-				$localItem = LocalItem::newFromItem( $change->getItem() );
-				$localItem->save();
-				break;
-			case 'item-remove':
-				$localItem = LocalItem::newFromItem( $change->getItem() );
-				$localItem->remove();
-				break;
+		list( $mainType, $subType ) = explode( '-', $change->getType() );
+
+		if ( $mainType === 'item' ) {
+			/**
+			 * @var Item $item
+			 */
+			$item = $change->getItem();
+			$siteLinks = $item->getSiteLinks();
+
+			$globalId = 'enwiki'; // TODO
+
+			if ( array_key_exists( $globalId, $siteLinks ) ) {
+				$title = \Title::newFromText( $siteLinks[$globalId] );
+
+				if ( !is_null( $title ) ) {
+					$localItem = LocalItem::newFromItem( $item );
+
+					$localItem->setField( 'page_title', $title->getFullText() );
+
+					if ( $subType === 'remove' ) {
+						$localItem->remove();
+					}
+					else {
+						$localItem->save();
+					}
+
+					$dbw = wfGetDB( DB_MASTER );
+					$dbw->begin();
+
+					if ( $subType === 'update' || $subType === 'remove' ) {
+						$dbw->delete(
+							'langlinks',
+							array(
+								'll_from' => $title->getArticleID(),
+								'll_local' => 0,
+							)
+						);
+					}
+
+					if ( $subType === 'update' || $subType === 'add' ) {
+						$sites = Sites::singleton()->getAllSites();
+
+						foreach ( $siteLinks as $globalSiteId => $pageName ) {
+							$dbw->insert(
+								'langlinks',
+								array(
+									'll_local' => 0,
+									'll_from' => $title->getArticleID(),
+									'll_lang' => $sites->getSiteByGlobalId( $globalSiteId )->getConfig()->getLocalId(),
+									'll_title' => $pageName,
+								)
+							);
+						}
+					}
+
+					$dbw->commit();
+
+					$title->invalidateCache();
+				}
+			}
+		}
+
+		return true;
+	}
+
+	public static function onParserBeforeTidy( \Parser &$parser, &$text ) {
+		$parserOutput = $parser->getOutput();
+
+		$dbr = wfGetDB( DB_MASTER );
+
+		$links = $dbr->select(
+			'langlinks',
+			array(
+				'll_lang',
+				'll_title',
+			),
+			array(
+				'll_from' => $parser->getTitle()->getArticleID(),
+				'll_local' => 0,
+			)
+		);
+
+		foreach ( $links as $link ) {
+			$parserOutput->addLanguageLink( $link->ll_lang . ':' . $link->ll_title );
 		}
 
 		return true;
