@@ -148,6 +148,25 @@ abstract class Api extends \ApiBase {
 		}
 	}
 
+	protected function addDeletedDescriptionsToResult( array $languages, $path, $name = 'descriptions', $tag = 'description' ) {
+		$value = array();
+		$idx = 0;
+
+		foreach ( $languages as $languageCode ) {
+			$value[$this->usekeys ? $languageCode : $idx++] = array(
+				'language' => $languageCode,
+				'status' => 'deleted',
+			);
+		}
+
+		if ( $value !== array() ) {
+			if (!$this->usekeys) {
+				$this->getResult()->setIndexedTagName( $value, $tag );
+			}
+			$this->getResult()->addValue( $path, $name, $value );
+		}
+	}
+
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
 		$value = array();
 		$idx = 0;
@@ -155,7 +174,27 @@ abstract class Api extends \ApiBase {
 		foreach ( $labels as $languageCode => $label ) {
 			$value[$this->usekeys ? $languageCode : $idx++] = array(
 				'language' => $languageCode,
+				'status' => 'changed',
 				'value' => $label,
+			);
+		}
+
+		if ( $value !== array() ) {
+			if (!$this->usekeys) {
+				$this->getResult()->setIndexedTagName( $value, $tag );
+			}
+			$this->getResult()->addValue( $path, $name, $value );
+		}
+	}
+
+	protected function addDeletedLabelsToResult( array $languages, $path, $name = 'labels', $tag = 'label' ) {
+		$value = array();
+		$idx = 0;
+
+		foreach ( $languages as $languageCode ) {
+			$value[$this->usekeys ? $languageCode : $idx++] = array(
+				'language' => $languageCode,
+				'status' => 'deleted',
 			);
 		}
 
