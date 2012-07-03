@@ -15,13 +15,13 @@ use Content, _DiffOp_Add, _DiffOp_Delete, _DiffOp_Change, _DiffOp_Copy, Html;
  */
 class ItemDiffView extends \DifferenceEngine {
 
-	function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
-		parent::__construct($context, $old, $new, $rcid, $refreshCache, $unhide);
+	public function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
+		parent::__construct( $context, $old, $new, $rcid, $refreshCache, $unhide );
 
 		$this->mRefreshCache = true; #FIXME: debug only!
 	}
 
-	function addHeader( $diff, $otitle, $ntitle, $multi = '', $notice = '' ) {
+	public function addHeader( $diff, $otitle, $ntitle, $multi = '', $notice = '' ) {
 		// if we don't want a two column table layout, we have to change this
 		return parent::addHeader( $diff, $otitle, $ntitle, $multi, $notice );
 	}
