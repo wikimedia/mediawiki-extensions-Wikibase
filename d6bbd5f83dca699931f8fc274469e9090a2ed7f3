@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//9aE\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-03T19:01:19Z",
+      "side": 1,
+      "message": "this stuff needs some splitting up and could be improved performance wise",
+      "revId": "d6bbd5f83dca699931f8fc274469e9090a2ed7f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//9aM\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-03T19:01:19Z",
+      "side": 1,
+      "message": "Using same hooks as nikolas original code - should still put it on a better place",
+      "revId": "d6bbd5f83dca699931f8fc274469e9090a2ed7f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//9aA\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-03T19:01:19Z",
+      "side": 1,
+      "message": "Commenting out this as we want the new code rather then the old hack",
+      "revId": "d6bbd5f83dca699931f8fc274469e9090a2ed7f3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
