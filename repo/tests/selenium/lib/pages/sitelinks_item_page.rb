@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Wikidata UI tests
 #
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)

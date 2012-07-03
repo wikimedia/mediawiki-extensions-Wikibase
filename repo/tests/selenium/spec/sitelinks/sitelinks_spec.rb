@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Wikidata UI tests
 #
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
@@ -200,11 +201,11 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_for_api_callback
         sleep 1 #cause there's a delay before the value is actually set in the dom -> should be changed in the UI
         page.pageArticleNormalized?.should be_true
-        page.pageArticleNormalized_element.text.should == "\u0421"
+        page.pageArticleNormalized_element.text.should == "С"
 
         @browser.refresh
         page.wait_for_sitelinks_to_load
-        page.pageArticleNormalized_element.text.should == "\u0421"
+        page.pageArticleNormalized_element.text.should == "С"
         page.pageArticleNormalized?.should be_true
       end
     end
