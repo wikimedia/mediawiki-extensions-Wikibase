@@ -10,7 +10,9 @@ namespace STTLanguage;
  * Source code:    https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
  *
  * TODO:
- * - make language stick somehow
+ * - improve stickiness of the chosen language. Right now we use the 'LinkBegin' hook to add the 'uselang' parameter
+ *   to all link within the page content when they are generated. This will only work when the content is parsed though,
+ *   so this would require disabling the parser cache to work properly on all pages.
  *
  * @file StickToThatLanguage.php
  * @ingroup STTLanguage
@@ -38,11 +40,13 @@ $wgExtensionMessagesFiles['StickToThatLanguage'] = Ext::getDir() . '/StickToThat
 $wgAutoloadClasses['STTLanguage\Hooks']   = Ext::getDir() . '/StickToThatLanguage.hooks.php';
 
 // hooks registration:
+$wgHooks['UnitTestsList'][]                    = 'STTLanguage\Hooks::registerUnitTests';
 $wgHooks['GetPreferences'][]                   = 'STTLanguage\Hooks::onGetPreferences';
 $wgHooks['UserGetDefaultOptions'][]            = 'STTLanguage\Hooks::onUserGetDefaultOptions';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = 'STTLanguage\Hooks::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['BeforePageDisplay'][]                = 'STTLanguage\Hooks::onBeforePageDisplay';
-$wgHooks['UnitTestsList'][]                    = 'STTLanguage\Hooks::registerUnitTests';
+$wgHooks['GetLocalURL::Internal'][]            = 'STTLanguage\Hooks::onGetLocalUrlInternally';
+$wgHooks['LinkBegin'][]                        = 'STTLanguage\Hooks::onLinkBegin';
 
 // Resource Loader Module:
 $wgResourceModules['sticktothatlanguage'] = array(
