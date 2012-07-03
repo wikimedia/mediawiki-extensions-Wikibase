@@ -133,10 +133,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 			array(
 				array(
 					'description'=> array(
-						'en' => array(
-							'language' => 'en',
-							'value' => 'Capitol of Norway'
-						)
+						'en' => 'Capitol of Norway'
 					),
 					'links'=> array(
 						'enwiki' => 'Oslo',
