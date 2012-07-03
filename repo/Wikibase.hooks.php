@@ -56,6 +56,7 @@ final class WikibaseHooks {
 			'ItemContent',
 			'ItemDeletionUpdate',
 			'ItemHandler',
+			'ItemMove',
 			'ItemView',
 
 			'api/ApiJSONP',
