@@ -29,6 +29,13 @@ div#bodyContent {
 	margin-top: .3em;
 }
 
+/* hide navigation elements on item page since, though they are empty, their margins use too much space;
+we might want to put the description into contentSub instead;
+this should be addressed when applying the layout change */
+.action-view .mw-jump, .action-view  #contentSub {
+	display: none;
+}
+
 .wb-hr {
 	margin-top:0.2em;
 }
