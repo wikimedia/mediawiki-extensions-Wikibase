@@ -50,6 +50,40 @@
       "revId": "9851165d72d4975e311179c5e60b62cfce24316a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//9tU\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-03T09:57:14Z",
+      "side": 1,
+      "message": "When the user is logged in this somehow seem to break, and the link text only contains the (q#) part.",
+      "revId": "9851165d72d4975e311179c5e60b62cfce24316a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAPX//9tY\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-03T09:57:14Z",
+      "side": 1,
+      "message": "Title missing descriptions when the user is not logged in, and also missing label when logged in",
+      "revId": "9851165d72d4975e311179c5e60b62cfce24316a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
