@@ -11,7 +11,6 @@ namespace STTLanguage;
  *
  * TODO:
  * - getting rid of the overall hackiness of this extension, especially the part where the output buffer is hacked to
- *   get the 'uselang' parameter into 'form' elements (see 'STTLanguage\Hooks::onAfterFinalPageOutput' for details).
  *
  * @file StickToThatLanguage.php
  * @ingroup STTLanguage
