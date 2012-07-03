@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAPX//9o0\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-03T14:16:38Z",
+      "side": 1,
+      "message": "Don\u0027t think hacking core for that would be best. There might be scripts depending on it, they might want to display information there dynamically.\n\nAt some point we have to do this nice. Right now we are just hacking in our contents and therefore kind of breaking the expected DOM structure. Our information should probably be displayed above that section, so the layout won\u0027t break when the section is used.",
+      "parentUuid": "AAAAPX//9pw\u003d",
+      "revId": "1a986f9e44a2759ce6b364eb221234f691fa3029",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAPX//9pg\u003d",
         "filename": "repo/resources/wikibase.css",
         "patchSetId": 1
