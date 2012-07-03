@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//9tM\u003d",
+        "filename": "repo/resources/wikibase.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-03T10:00:14Z",
+      "side": 1,
+      "message": "Did danielk not get mad because you did this?",
+      "revId": "694300eff4e5fff9953cfec2e5f3c6efe1e96a4b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
