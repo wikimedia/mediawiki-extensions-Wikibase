@@ -92,15 +92,44 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
-		switch ( $change->getType() ) {
-			case 'item-add': case 'item-update':
-				$localItem = LocalItem::newFromItem( $change->getItem() );
-				$localItem->save();
-				break;
-			case 'item-remove':
-				$localItem = LocalItem::newFromItem( $change->getItem() );
-				$localItem->remove();
-				break;
+		list( $mainType, ) = explode( '-', $change->getType() );
+
+		if ( $mainType === 'item' ) {
+			$itemUpdater = new ItemUpdater();
+			$itemUpdater->handleChange( $change );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Used to process the nearly-rendered html code for the page (but before any html tidying occurs).
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserBeforeTidy
+	 *
+	 * This is used to add the remote navigation links to the navigation menu.
+	 * TODO: this might not be a good place to do this - ParserAfterParse ?
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Parser $parser
+	 * @param string $text
+	 *
+	 * @return boolean
+	 */
+	public static function onParserBeforeTidy( \Parser &$parser, &$text ) {
+		$parserOutput = $parser->getOutput();
+
+		$localItem = LocalItemsTable::singleton()->selectRow( null, array( 'page_title' => $parser->getTitle()->getDBkey() ) );
+
+		if ( $localItem !== false ) {
+			/**
+			 * @var LocalItem $localItem
+			 * @var SiteLink $link
+			 */
+			foreach ( $localItem->getItem()->getSiteLinks() as $link ) {
+				// TODO: hold into account wiki-wide and page-specific settings to do the merge rather then just overriding.
+				$parserOutput->addLanguageLink( $link->getSite()->getGlobalId() . ':' . $link->getPage() );
+			}
 		}
 
 		return true;
