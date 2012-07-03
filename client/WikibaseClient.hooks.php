@@ -32,6 +32,12 @@ final class ClientHooks {
 			dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
 		);
 
+		$updater->addExtensionField(
+			'wbc_local_items',
+			'li_page_title',
+			dirname( __FILE__ ) . '/sql/LocalItemTitleField.sql'
+		);
+
 		return true;
 	}
 

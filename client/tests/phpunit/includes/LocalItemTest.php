@@ -47,7 +47,7 @@ class LocalItemTest extends \ORMRowTest {
 			array(
 				array(
 					'item_id' => 42,
-					'page_id' => 9001,
+					'title_id' => \Title::newMainPage()->getFullText(),
 					'item_data' => ItemObject::newEmpty(),
 				),
 				true
