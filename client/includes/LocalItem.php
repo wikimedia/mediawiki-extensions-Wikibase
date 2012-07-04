@@ -6,9 +6,6 @@ use ORMRow;
 /**
  * Class representing a single local item (ie a row in the wbc_local_items).
  *
- * TODO: would be nice if this thing could use the decorator pattern and actually be
- * and extension to the item class, but for that we need an IItem interface in the lib.
- *
  * @since 0.1
  *
  * @file
@@ -50,9 +47,18 @@ class LocalItem extends ORMRow {
 		}
 
 		if ( $localItem === false ) {
-			$localItem = new static( $table, array( 'item_data' => $item ) );
+			$localItem = new static(
+				$table,
+				array( 'item_data' => $item )
+			);
+		}
 
-			// TODO: set article id
+		$siteLinks = $item->getSiteLinks();
+
+		// TODO: obtain local wiki global id
+		// TODO: properly manage this field
+		if ( array_key_exists( 'enwiki', $siteLinks ) ) {
+			$localItem->setField( 'page_title', $siteLinks['enwiki'] );
 		}
 
 		return $localItem;
