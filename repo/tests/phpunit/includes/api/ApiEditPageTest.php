@@ -45,7 +45,7 @@ class ApiEditPageTest extends ApiTestCase {
 
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'sites' ) );
-		\Wikibase\Utils::insertSitesForTests();
+		\MW\Test\SitesTest::insertSitesForTests();
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;

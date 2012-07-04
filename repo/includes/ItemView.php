@@ -107,12 +107,12 @@ class ItemView extends \ContextSource {
 			$i = 0;
 
 			// Batch load the sites we need info about during the building of the sitelink list.
-			Sites::singleton()->loadSites( array( 'global_key' => array_keys( $siteLinks ) ) );
+			\MW\Sites::singleton()->loadSites( array( 'global_key' => array_keys( $siteLinks ) ) );
 
 			foreach( $siteLinks as $siteId => $title ) {
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
-				$site = Sites::singleton()->getSiteByGlobalId( $siteId );
+				$site = \MW\Sites::singleton()->getSiteByGlobalId( $siteId );
 
 				if ( $site === false ) {
 					continue;
@@ -135,7 +135,7 @@ class ItemView extends \ContextSource {
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
 				$html .= Html::element(
 					'a',
-					array( 'href' => Sites::singleton()->getUrl( $siteId, $title ) ),
+					array( 'href' => \MW\Sites::singleton()->getUrl( $siteId, $title ) ),
 					$title
 				);
 				$html .= Html::closeElement( 'td' );
@@ -282,7 +282,7 @@ class ItemView extends \ContextSource {
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
 
-		foreach ( Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA ) as  /** @var \Wikibase\Site $site */ $site ) {
+		foreach ( \MW\Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA ) as  /** @var \Wikibase\Site $site */ $site ) {
 			$languageName = Utils::fetchLanguageName( $site->getLanguage() );
 
 			$sites[$site->getLanguage()] = array(

@@ -62,7 +62,7 @@ class ApiGetItemId extends Api {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$globalIds = Sites::singleton()->getGlobalIdentifiers();
+		$globalIds = \MW\Sites::singleton()->getGlobalIdentifiers();
 
 		return array_merge( parent::getAllowedParams(), array(
 			'site' => array(

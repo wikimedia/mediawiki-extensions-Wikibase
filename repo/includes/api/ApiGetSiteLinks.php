@@ -87,7 +87,7 @@ class ApiGetSiteLinks extends Api{
 				ApiBase::PARAM_TYPE => 'integer',
 			),
 			'site' => array(
-				ApiBase::PARAM_TYPE => Sites::singleton()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => \MW\Sites::singleton()->getGlobalIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',

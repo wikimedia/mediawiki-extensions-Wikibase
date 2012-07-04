@@ -38,13 +38,6 @@ final class LibHooks {
 			dirname( __FILE__ ) . '/sql/AddSitesTable.sql'
 		);
 
-		// TODO: move to core
-		$updater->addExtensionField(
-			'langlinks',
-			'll_local',
-			dirname( __FILE__ ) . '/sql/AddLocalLanglinksField.sql'
-		);
-
 		$updater->addExtensionField(
 			'sites',
 			'site_link_navigation',
@@ -88,11 +81,6 @@ final class LibHooks {
 			'ItemNewFromArray',
 			'ItemObject',
 			'LibHooks',
-			'MediaWikiSite',
-			'SiteConfigObject',
-			'SiteList',
-			'SiteRow',
-			'Sites',
 			'Utils',
 
 			'SettingsBase',

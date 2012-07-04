@@ -27,7 +27,7 @@ class ApiLinkSiteTest extends ApiTestCase {
 
 	public function setUp() {
 		parent::setUp();
-		\Wikibase\Utils::insertSitesForTests();
+		\MW\Test\SitesTest::insertSitesForTests();
 	}
 
 	/**

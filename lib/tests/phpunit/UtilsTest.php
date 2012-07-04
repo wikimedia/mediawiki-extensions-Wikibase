@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Utils as Utils;
-use Wikibase\Sites as Sites;
+use MW\Sites as Sites;
 
 /**
  * Tests for the Wikibase\Utils class.

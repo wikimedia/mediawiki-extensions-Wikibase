@@ -136,7 +136,7 @@ class ApiGetItems extends Api {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => Sites::singleton()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => \MW\Sites::singleton()->getGlobalIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'titles' => array(

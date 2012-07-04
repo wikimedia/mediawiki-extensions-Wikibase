@@ -46,23 +46,7 @@ $dir = dirname( __FILE__ ) . '/';
 // constants
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 
-define( 'SITE_TYPE_MEDIAWIKI', 0 );
-define( 'SITE_TYPE_UNKNOWN', 1 );
 
-define( 'SITE_GROUP_NONE', -1 );
-define( 'SITE_GROUP_WIKIPEDIA', 0 );
-define( 'SITE_GROUP_WIKTIONARY', 1 );
-define( 'SITE_GROUP_WIKIBOOKS', 2 );
-define( 'SITE_GROUP_WIKIQUOTE', 3 );
-define( 'SITE_GROUP_WIKISOURCE', 4 );
-define( 'SITE_GROUP_WIKIVERSITY', 5 );
-define( 'SITE_GROUP_WIKINEWS', 6 );
-
-
-
-$wgSiteTypes = array();
-
-$wgSiteTypes[SITE_TYPE_MEDIAWIKI] = 'Wikibase\MediaWikiSite';
 
 // i18n
 $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
@@ -84,13 +68,6 @@ $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
 $wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/ItemObject.php';
 $wgAutoloadClasses['Wikibase\MediaWikiSite'] 		= $dir . 'includes/MediaWikiSite.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
-$wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
-$wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
-$wgAutoloadClasses['Wikibase\SiteConfigObject'] 	= $dir . 'includes/SiteConfigObject.php';
-$wgAutoloadClasses['Wikibase\SiteList'] 			= $dir . 'includes/SiteList.php';
-$wgAutoloadClasses['Wikibase\SiteRow'] 				= $dir . 'includes/SiteRow.php';
-$wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
-$wgAutoloadClasses['Wikibase\SitesTable'] 			= $dir . 'includes/SitesTable.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
 $wgAutoloadClasses['Settings'] 						= $dir . 'compat/Settings.php';

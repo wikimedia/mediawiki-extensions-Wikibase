@@ -119,7 +119,7 @@ final class ClientHooks {
 					}
 
 					if ( $subType === 'update' || $subType === 'add' ) {
-						$sites = Sites::singleton()->getAllSites();
+						$sites = \MW\Sites::singleton()->getAllSites();
 
 						foreach ( $siteLinks as $globalSiteId => $pageName ) {
 							$dbw->insert(

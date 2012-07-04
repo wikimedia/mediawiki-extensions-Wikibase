@@ -90,7 +90,7 @@ class ApiLinkSite extends ApiModifyItem {
 			return false;
 		}
 		// Get site identifiers and figure out the URL.
-		$site = Sites::singleton()->getSiteByGlobalId( $globalSiteId );
+		$site = \MW\Sites::singleton()->getSiteByGlobalId( $globalSiteId );
 		if ( $site === false ) {
 			return false;
 		}

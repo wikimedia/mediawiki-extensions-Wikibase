@@ -41,7 +41,7 @@ final class TestItems {
 
 		$item = ItemObject::newEmpty();
 
-		$links = \Wikibase\Sites::singleton()->getAllSites();
+		$links = \MW\Sites::singleton()->getAllSites();
 
 		if ( $links->count() > 1 ) {
 			$item->addSiteLink( $links->getIterator()->current()->getId(), 'spam' );
