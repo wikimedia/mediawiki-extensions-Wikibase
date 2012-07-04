@@ -513,10 +513,10 @@ final class WikibaseHooks {
 		$rawDescription = $item->getDescription( $lang );
 
 		// construct link:
-		$idHtml = '<span class="wb-itemlink-label">'
+		$idHtml = '<span class="wb-itemlink-id">'
 			. wfMsgForContent( 'wikibase-itemlink-id-wrapper', htmlspecialchars( 'q' . $item->getId() ) )
 			. '</span>';
-		$labelHtml = '<span class="wb-itemlink-id">'
+		$labelHtml = '<span class="wb-itemlink-label">'
 			. htmlspecialchars( $rawLabel )
 			. '</span>';
 
