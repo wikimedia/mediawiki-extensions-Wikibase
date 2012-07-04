@@ -70,6 +70,10 @@ $messages['en'] = array(
 	'wikibase-error-relational-save-failed' => 'Could not store item identity in the database.',
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
 
+	'wikibase-itemlink' => '$1 $2',
+	'wikibase-itemlink-id-wrapper' => '($1)',
+	'wikibase-itemlink-title' => '$1 | $2',
+
 	// Special pages	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
 	'special-createitem' => 'Create a new item',
@@ -241,6 +245,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+	'wikibase-itemlink' => 'used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
+	'wikibase-itemlink-id-wrapper' => 'Used to wrap the items id for a link to an item in parentheses or similar.',
+	'wikibase-itemlink-title' => 'Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.'
 );
 
 /** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)

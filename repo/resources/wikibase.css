@@ -154,3 +154,7 @@ table.wb-sitelinks tfoot td {
 }
 
 /********** /SITE LINKS TABLE **********/
+
+span.wb-itemlink-label {
+	font-size: .85em;
+}
