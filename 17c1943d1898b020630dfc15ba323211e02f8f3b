@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//9Bc\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2012-07-04T14:28:15Z",
+      "side": 1,
+      "message": "I suggest to remove this message in favour of using message\n\n\u0027parentheses\u0027         \u003d\u003e \u0027($1)\u0027\n\nfrom core.",
+      "revId": "17c1943d1898b020630dfc15ba323211e02f8f3b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
