@@ -117,10 +117,11 @@ $messages['nl'] = array(
 );
 
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'wikibaselib-desc' => "A conten funsionalità comun-e për j'estension Wikibase e Wikibase Client",
+	'wikibaselib-desc' => "A conten dle funsionalità comun-e a j'estension Wikibase e Wikibase Client",
 );
 
 /** Brazilian Portuguese (português do Brasil)
