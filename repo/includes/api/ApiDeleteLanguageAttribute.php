@@ -52,7 +52,9 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 					if ( !count($labels) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-label-not-found' ), 'label-not-found' );
 					}
+					// TODO: should probably be some kind of status from the remove operation
 					$itemContent->getItem()->removeLabel( $language );
+					$this->addDeletedLabelsToResult( array( $language ), 'item' );
 					$success = $success || true;
 					break;
 
@@ -60,7 +62,9 @@ class ApiDeleteLanguageAttribute extends ApiModifyItem {
 					if ( !count($descriptions) ) {
 						$this->dieUsage( wfMsg( 'wikibase-api-description-not-found' ), 'description-not-found' );
 					}
+					// TODO: should probably be some kind of status from the remove operation
 					$itemContent->getItem()->removeDescription( $language );
+					$this->addDeletedDescriptionsToResult( array( $language ), 'item' );
 					$success = $success || true;
 					break;
 
