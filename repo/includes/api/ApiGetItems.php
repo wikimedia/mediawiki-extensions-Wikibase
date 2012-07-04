@@ -38,14 +38,14 @@ class ApiGetItems extends Api {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {
 				foreach ($params['titles'] as $title) {
-					$id = ItemContent::getIdForSiteLink( $params['sites'], Api::squashToNFC( $title ) );
+					$id = ItemContent::getIdForSiteLink( $params['sites'], Utils::squashToNFC( $title ) );
 					if ( $id ) $params['ids'][] = intval( $id );
 					//@todo: else report this problem
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				foreach ($params['sites'] as $site) {
-					$id = ItemContent::getIdForSiteLink( $site, Api::squashToNFC( $params['titles'] ) );
+					$id = ItemContent::getIdForSiteLink( $site, Utils::squashToNFC( $params['titles'] ) );
 					if ( $id ) $params['ids'][] = intval( $id );
 					//@todo: else report this problem
 				}
