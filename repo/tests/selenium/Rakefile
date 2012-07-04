@@ -68,6 +68,11 @@ RSpec::Core::RakeTask.new(:spec_protected_page) do |spec|
   spec.pattern = 'spec/item/protected_page_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:spec_search) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/special/search_spec.rb'
+end
+
 task :default => :spec
 task :item => :spec_item
 task :nonexistingitem => :spec_non_existing_item
@@ -80,4 +85,5 @@ task :aliases => :spec_aliases
 task :aliases_bugs => :spec_aliases_bugs
 task :blocked_user => :spec_blocked_user
 task :protected_page => :spec_protected_page
+task :search => :spec_search
 
