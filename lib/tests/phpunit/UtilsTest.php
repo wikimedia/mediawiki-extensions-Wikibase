@@ -28,21 +28,79 @@ class UtilsTest extends \MediaWikiTestCase {
 	 * @dataProvider providerGetLanguageCodes
 	 */
 	public function testGetLanguageCodes( $lang ) {
-    	$result = Utils::getLanguageCodes();
-    	$this->assertContains(
-    		$lang,
-    		$result,
-    		"The language code {$lang} could not be found in the returned result"
-    	);
-    }
+		$result = Utils::getLanguageCodes();
+		$this->assertContains(
+			$lang,
+			$result,
+			"The language code {$lang} could not be found in the returned result"
+		);
+	}
 
-    public function providerGetLanguageCodes() {
-    	return array(
-    		array( 'de' ),
-    		array( 'en' ),
-    		array( 'no' ),
-    		array( 'nn' ),
-    	);
-    }
+	public function providerGetLanguageCodes() {
+		return array(
+			array( 'de' ),
+			array( 'en' ),
+			array( 'no' ),
+			array( 'nn' ),
+		);
+	}
+
+	/**
+	 * @group WikibaseUtils
+	 * @dataProvider providerSquashWhitespace
+	 */
+	public function testSquashWhitespace( $string, $expected ) {
+		$this->assertEquals( $expected, Utils::squashWhitespace( $string ) );
+	}
+
+	public function providerSquashWhitespace() {
+		return array(
+			array( 'foo bar', 'foo bar'),
+			array( ' foo  bar ', 'foo bar'),
+			array( '  foo   bar  ', 'foo bar'),
+			array( "foo\tbar", 'foo bar'),
+			array( "foo\nbar", 'foo bar'),
+			array( "foo\rbar", 'foo bar'),
+			array( "\r \t\nfoo\r\t\t\tbar\n\n\n\r\r", 'foo bar'),
+		);
+	}
+
+	/**
+	 * @group WikibaseUtils
+	 * @dataProvider providerConditionalToNFC
+	 */
+	public function testConditionalToNFC( $src, $dst, $expected ) {
+		if ($expected) {
+			$this->assertEquals( $dst, Utils::conditionalToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
+		}
+		else {
+			$this->assertFalse( $dst === Utils::conditionalToNFC( $src ), "String '$src' (" . urlencode( $src ) . ") is the same as the expected '$dst' (" . urlencode( $dst ) . "). This is unusual, but correct." );
+		}
+	}
+
+	public function providerConditionalToNFC() {
+		return array(
+			array( "\xC3\x85land", 'Åland', true ),
+			array( "A\xCC\x8Aland", 'Åland', true ),
+			array( "\xE2\x84\xABngstrom (unit)", 'Ångstrom (unit)', false ),
+		);
+	}
+
+	/**
+	 * @group WikibaseUtils
+	 * @dataProvider providerSquashToNFC
+	 */
+	public function testSquashToNFC( $src, $dst ) {
+		$this->assertEquals( $dst, Utils::squashToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
+	}
+
+	public function providerSquashToNFC() {
+		return array(
+			array( "  \xC3\x85land  øyene  ", 'Åland øyene' ),
+			array( "  A\xCC\x8Aland  øyene  ", 'Åland øyene' ),
+			array( "  \xC3\x85land    øyene  ", 'Åland øyene' ),
+			array( "  A\xCC\x8Aland    øyene  ", 'Åland øyene' ),
+		);
+	}
 
 }

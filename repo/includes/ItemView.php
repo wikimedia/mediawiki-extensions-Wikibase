@@ -157,7 +157,7 @@ class ItemView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param ItemContent                $item the item to analyze/render
+	 * @param ItemContent         $item the item to analyze/render
 	 * @param null|ParserOptions  $options parser options. If nto provided, the local context will be used to create generic parser options.
 	 * @param bool                $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
 	 *

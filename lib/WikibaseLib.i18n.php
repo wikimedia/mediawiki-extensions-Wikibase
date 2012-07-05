@@ -116,6 +116,14 @@ $messages['nl'] = array(
 	'wikibaselib-desc' => 'Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client',
 );
 
+/** Piedmontese (Piemontèis)
+ * @author Borichèt
+ * @author Dragonòt
+ */
+$messages['pms'] = array(
+	'wikibaselib-desc' => "A conten dle funsionalità comun-e a j'estension Wikibase e Wikibase Client",
+);
+
 /** Brazilian Portuguese (português do Brasil)
  * @author Jaideraf
  */

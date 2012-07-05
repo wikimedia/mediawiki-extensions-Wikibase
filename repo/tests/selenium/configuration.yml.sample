@@ -5,4 +5,5 @@
  WIKI_API_URL: "http://localhost/wiki/api.php"
  WIKI_USERNAME: "Username"
  WIKI_PASSWORD: "Password"
-
+ WIKI_BLOCKED_USERNAME: "Username"
+ WIKI_BLOCKED_PASSWORD: "Password"

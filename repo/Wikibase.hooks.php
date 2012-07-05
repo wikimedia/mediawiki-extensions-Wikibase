@@ -55,6 +55,7 @@ final class WikibaseHooks {
 			'EntityHandler',
 			'ItemContent',
 			'ItemDeletionUpdate',
+			'ItemDiffView',
 			'ItemHandler',
 			'ItemMove',
 			'ItemView',
@@ -123,6 +124,7 @@ final class WikibaseHooks {
 				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
 				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableAliases.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
 				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
@@ -442,4 +444,90 @@ final class WikibaseHooks {
 		return true;
 	}
 
+	/**
+	 * Used to append a css class to the body, so the page can be identified as Wikibase item page.
+	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
+	 *
+	 * @since 0.1
+	 *
+	 * @param OutputPage $out
+	 * @param Skin $sk
+	 * @param array $bodyAttrs
+	 *
+	 * @return bool
+	 */
+	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
+		if ( $out->getTitle()->getContentModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
+			$bodyAttrs['class'] .= ' wb-itempage';
+		}
+		return true;
+	}
+
+	/**
+	 * Special page handling where we want to display meaningful link labels instead of just the items ID.
+	 * This is only handling special pages right now and gets disabled in normal pages.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin
+	 *
+	 * @param DummyLinker $skin
+	 * @param Title $target
+	 * @param string $text
+	 * @param array $customAttribs
+	 * @param string $query
+	 * @param array $options
+	 * @param mixed $ret
+	 * @return bool true
+	 */
+	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query, &$options, &$ret ) {
+		if(
+			// if custom link text is given, there is no point in overwriting it
+			$html !== null
+			// we only want to handle links to data items differently here
+			|| $target->getContentModel() !== CONTENT_MODEL_WIKIBASE_ITEM
+			// as of MW 1.20 Linker shouldn't support anything but Title anyhow
+			|| ! $target instanceof Title
+		) {
+			return true;
+		}
+
+		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
+		// just check whether the page is a special page and if not, disable the behavior.
+		global $wgTitle;
+
+		if( ! $wgTitle->isSpecialPage() ) {
+			// no special page, we don't handle this for now
+			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
+			//       users language so they are cache independent.
+			return true;
+		}
+
+		global $wgLang, $wgOut;
+
+		// add wikibase styles in all cases, so we can format the link properly:
+		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
+
+		$lang = $wgLang->getCode();
+		$page = new WikiPage( $target );
+		$item = $page->getContent()->getItem();
+
+		$rawLabel = $item->getLabel( $lang );
+		$rawDescription = $item->getDescription( $lang );
+
+		// construct link:
+		$idHtml = '<span class="wb-itemlink-label">'
+			. wfMsgForContent( 'wikibase-itemlink-id-wrapper', htmlspecialchars( 'q' . $item->getId() ) )
+			. '</span>';
+		$labelHtml = '<span class="wb-itemlink-id">'
+			. htmlspecialchars( $rawLabel )
+			. '</span>';
+
+		$html =  '<span class="wb-itemlink">' . wfMsgForContent( 'wikibase-itemlink', $labelHtml, $idHtml ) . '</span>';
+
+		// set title attribute for constructed link:
+		$titleText = ( $rawLabel !== '' ) ? $rawLabel : $target->getPrefixedText();
+		$customAttribs[ 'title' ] = ( $rawDescription !== '' )
+				? wfMsgForContent( 'wikibase-itemlink-title', $titleText, $rawDescription )
+				: $titleText; // no description, just display the title then
+
+		return true;
+	}
 }

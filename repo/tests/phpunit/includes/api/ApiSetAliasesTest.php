@@ -94,16 +94,15 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		$apiResponse = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 
 		$apiResponse = $apiResponse[0];
-		
+
 		$this->assertSuccess( $apiResponse );
-		
 		if ( $param === 'add') {
 			$this->assertTrue(
 				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['aliases']) : !array_key_exists($langCode, $apiResponse['item']['aliases']),
 				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in aliases"
 			);
 		}
-		
+
 		$expected = $expected === '' ? array() : explode( '|', $expected );
 		self::$itemContent->reload();
 

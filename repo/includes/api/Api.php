@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use UtfNormal, User, Status;
+use User, Status;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -148,6 +148,25 @@ abstract class Api extends \ApiBase {
 		}
 	}
 
+	protected function addDeletedDescriptionsToResult( array $languages, $path, $name = 'descriptions', $tag = 'description' ) {
+		$value = array();
+		$idx = 0;
+
+		foreach ( $languages as $languageCode ) {
+			$value[$this->usekeys ? $languageCode : $idx++] = array(
+				'language' => $languageCode,
+				'status' => 'deleted',
+			);
+		}
+
+		if ( $value !== array() ) {
+			if (!$this->usekeys) {
+				$this->getResult()->setIndexedTagName( $value, $tag );
+			}
+			$this->getResult()->addValue( $path, $name, $value );
+		}
+	}
+
 	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
 		$value = array();
 		$idx = 0;
@@ -155,7 +174,27 @@ abstract class Api extends \ApiBase {
 		foreach ( $labels as $languageCode => $label ) {
 			$value[$this->usekeys ? $languageCode : $idx++] = array(
 				'language' => $languageCode,
+				'status' => 'changed',
 				'value' => $label,
+			);
+		}
+
+		if ( $value !== array() ) {
+			if (!$this->usekeys) {
+				$this->getResult()->setIndexedTagName( $value, $tag );
+			}
+			$this->getResult()->addValue( $path, $name, $value );
+		}
+	}
+
+	protected function addDeletedLabelsToResult( array $languages, $path, $name = 'labels', $tag = 'label' ) {
+		$value = array();
+		$idx = 0;
+
+		foreach ( $languages as $languageCode ) {
+			$value[$this->usekeys ? $languageCode : $idx++] = array(
+				'language' => $languageCode,
+				'status' => 'deleted',
 			);
 		}
 
@@ -210,48 +249,6 @@ abstract class Api extends \ApiBase {
 		}
 
 		return $status;
-	}
-
-	/**
-	 * Trim initial and trailing whitespace, and compress internal ones.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $inputString The actual string to process.
-	 * @return filtered string where whitespace possibly are removed.
-	 */
-	static public function squashWhitespace( $inputString ) {
-		return preg_replace( '/(\s+)/', ' ', preg_replace( '/(^\s+|\s+$)/', '', $inputString ) );
-	}
-
-	/**
-	 * Normalize string into NFC after first checkingh if its already normalized.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $inputString The actual string to process.
-	 * @return filtered string where whitespace possibly are removed.
-	 */
-	static public function conditionalToNFC( $inputString ) {
-		// Note that quickIsNFCVerify will do some cleanup of the string,
-		// but if we fail to detect a legal string, then we convert
-		// the filtered string anyhow.
-		if ( !UtfNormal::quickIsNFCVerify( $inputString ) ) {
-			return UtfNormal::toNFC( $inputString );
-		}
-		return $inputString;
-	}
-
-	/**
-	 * Do a toNFC after the string is squashed
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $inputString
-	 * @return trimmed string on NFC form
-	 */
-	static public function squashToNFC( $inputString ) {
-		return self::conditionalToNFC( self::squashWhitespace( $inputString ) );
 	}
 
 }

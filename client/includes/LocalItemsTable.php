@@ -55,7 +55,7 @@ class LocalItemsTable extends \ORMTable {
 		return array(
 			'id' => 'id',
 			'item_id' => 'int',
-			'page_id' => 'int',
+			'page_title' => 'str',
 			'item_data' => 'blob',
 		);
 	}

@@ -32,6 +32,12 @@ final class ClientHooks {
 			dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
 		);
 
+		$updater->addExtensionField(
+			'wbc_local_items',
+			'li_page_title',
+			dirname( __FILE__ ) . '/sql/LocalItemTitleField.sql'
+		);
+
 		return true;
 	}
 
@@ -73,40 +79,18 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
-		$changeHandlers = array(
-			'item' => array( __CLASS__, 'onWikibaseItemChange' ),
-			'query' => array( __CLASS__, 'onWikibaseQueryChange' ),
-		);
-
-		if ( array_key_exists( $change->getType(), $changeHandlers ) ) {
-			call_user_func_array( $changeHandlers[$change->getType()], array( $change ) );
+		switch ( $change->getType() ) {
+			case 'item-add': case 'item-update':
+				$localItem = LocalItem::newFromItem( $change->getItem() );
+				$localItem->save();
+				break;
+			case 'item-remove':
+				$localItem = LocalItem::newFromItem( $change->getItem() );
+				$localItem->remove();
+				break;
 		}
 
 		return true;
-	}
-
-	/**
-	 * Some temporary code to handle changes to items in a very simple fashion:
-	 * The changes now contain the complete new version of the item, which
-	 * on every detected change gets updated in the local items table.
-	 *
-	 * This is inefficient because:
-	 * * Multiple changes can be created for a single update to an item (ie sitelink and alias changes)
-	 * * The whole item is stored in each change on top of the actual change diff
-	 *
-	 * TODO: further handle item changes according to their types, including page cache invalidation
-	 *
-	 * @since 0.1
-	 *
-	 * @param ItemChange $change
-	 */
-	public static function onWikibaseItemChange( ItemChange $change ) {
-		$localItem = LocalItem::newFromItem( $change->getItem() );
-		$localItem->save();
-	}
-
-	public static function onWikibaseQueryChange( $change ) {
-		// TODO
 	}
 
 	/**

@@ -31,7 +31,7 @@ class ApiGetSiteLinks extends Api{
 		}
 
 		if ( !isset( $params['id'] ) ) {
-			$params['id'] = ItemContent::getIdForSiteLink( $params['site'], Api::squashToNFC( $params['title'] ) );
+			$params['id'] = ItemContent::getIdForSiteLink( $params['site'], Utils::squashToNFC( $params['title'] ) );
 
 			if ( $params['id'] === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );

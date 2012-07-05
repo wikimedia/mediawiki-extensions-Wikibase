@@ -6,7 +6,7 @@ use \Wikibase\Item as Item;
 use \Wikibase\ItemContent as ItemContent;
 
 /**
- * Tests for the WikibaseItem class.
+ * Tests for the Wikibase\ItemHandler class.
  *
  * @file
  * @since 0.1

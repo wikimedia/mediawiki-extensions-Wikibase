@@ -59,13 +59,29 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		$language = $params['language'];
 
 		if ( isset( $params['label'] ) ) {
-			$labels = array( $language => $itemContent->getItem()->setLabel( $language,Api::squashToNFC( $params['label'] ) ) );
-			$this->addLabelsToResult( $labels, 'item' );
+			$label = Utils::squashToNFC( $params['label'] );
+			if ( 0 < strlen( $label ) ) {
+				$labels = array( $language => $itemContent->getItem()->setLabel( $language, $label ) );
+				$this->addLabelsToResult( $labels, 'item' );
+			}
+			else {
+				// TODO: should probably be some kind of status from the remove operation
+				$itemContent->getItem()->removeLabel( $language );
+				$this->addDeletedLabelsToResult( array( $language ), 'item' );
+			}
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, Api::squashToNFC( $params['description'] ) ) );
-			$this->addDescriptionsToResult( $descriptions, 'item' );
+			$description = Utils::squashToNFC( $params['description'] );
+			if ( 0 < strlen( $description ) ) {
+				$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, $description ) );
+				$this->addDescriptionsToResult( $descriptions, 'item' );
+			}
+			else {
+				// TODO: should probably be some kind of status from the remove operation
+				$itemContent->getItem()->removeDescription( $language );
+				$this->addDeletedDescriptionsToResult( array( $language ), 'item' );
+			}
 		}
 
 		// Because we can't fail?

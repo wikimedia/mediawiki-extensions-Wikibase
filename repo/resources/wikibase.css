@@ -29,6 +29,14 @@ div#bodyContent {
 	margin-top: .3em;
 }
 
+.wb-itempage #contentSub:empty { /* causing a gap even when they are empty, see bug #38145 */
+	display: none;
+}
+
+.wb-itempage #jump-to-nav { /* not reacting on :empty selector, removing margin for now, see bug #38145 */
+	margin: 0;
+}
+
 .wb-hr {
 	margin-top:0.2em;
 }
@@ -146,3 +154,7 @@ table.wb-sitelinks tfoot td {
 }
 
 /********** /SITE LINKS TABLE **********/
+
+span.wb-itemlink-label {
+	font-size: .85em;
+}
