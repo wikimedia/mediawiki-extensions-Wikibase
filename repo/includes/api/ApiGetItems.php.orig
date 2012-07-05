@@ -34,6 +34,7 @@ class ApiGetItems extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
+		//$missing = array();
 		$missing = 0;
 
 		if ( !isset( $params['ids'] ) ) {
@@ -41,6 +42,11 @@ class ApiGetItems extends Api {
 			if ( count($params['sites']) === 1 ) {
 				$site = end( $params['sites'] );
 				foreach ($params['titles'] as $title) {
+<<<<<<< HEAD
+					$id = ItemContent::getIdForSiteLink( $params['sites'], Utils::squashToNFC( $title ) );
+					if ( $id ) $params['ids'][] = intval( $id );
+					//@todo: else report this problem
+=======
 					$title = Api::squashToNFC( $title );
 					$id = ItemContent::getIdForSiteLink( $site, $title );
 					if ( $id ) {
@@ -51,11 +57,17 @@ class ApiGetItems extends Api {
 							array( 'site' => $site, 'title' => $title, 'missing' => "" )
 						);
 					}
+>>>>>>> Reporting of missing items in reply from ApiGetItems.
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
 				$title = Api::squashToNFC( end( $params['titles'] ) );
 				foreach ($params['sites'] as $site) {
+<<<<<<< HEAD
+					$id = ItemContent::getIdForSiteLink( $site, Utils::squashToNFC( $params['titles'] ) );
+					if ( $id ) $params['ids'][] = intval( $id );
+					//@todo: else report this problem
+=======
 					$id = ItemContent::getIdForSiteLink( $site, $title );
 					if ( $id ) {
 						$params['ids'][] = intval( $id );
@@ -65,6 +77,7 @@ class ApiGetItems extends Api {
 							array( 'site' => $site, 'title' => $title, 'missing' => "" )
 						);
 					}
+>>>>>>> Reporting of missing items in reply from ApiGetItems.
 				}
 			}
 			else {

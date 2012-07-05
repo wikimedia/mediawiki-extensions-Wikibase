@@ -59,7 +59,7 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		$language = $params['language'];
 
 		if ( isset( $params['label'] ) ) {
-			$label = Api::squashToNFC( $params['label'] );
+			$label = Utils::squashToNFC( $params['label'] );
 			if ( 0 < strlen( $label ) ) {
 				$labels = array( $language => $itemContent->getItem()->setLabel( $language, $label ) );
 				$this->addLabelsToResult( $labels, 'item' );
@@ -72,7 +72,7 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$description = Api::squashToNFC( $params['description'] );
+			$description = Utils::squashToNFC( $params['description'] );
 			if ( 0 < strlen( $description ) ) {
 				$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, $description ) );
 				$this->addDescriptionsToResult( $descriptions, 'item' );

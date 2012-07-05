@@ -61,7 +61,7 @@ class ApiSetAliases extends ApiModifyItem {
 			$itemContent->getItem()->setAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Api::squashToNFC( $str ); },
+					function( $str ) { return Utils::squashToNFC( $str ); },
 					$params['set']
 				)
 			);
@@ -71,7 +71,7 @@ class ApiSetAliases extends ApiModifyItem {
 			$itemContent->getItem()->removeAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Api::squashToNFC( $str ); },
+					function( $str ) { return Utils::squashToNFC( $str ); },
 					$params['remove']
 				)
 			);
@@ -81,7 +81,7 @@ class ApiSetAliases extends ApiModifyItem {
 			$itemContent->getItem()->addAliases(
 				$params['language'],
 				array_map(
-					function( $str ) { return Api::squashToNFC( $str ); },
+					function( $str ) { return Utils::squashToNFC( $str ); },
 					$params['add']
 				)
 			);
