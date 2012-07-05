@@ -45,7 +45,7 @@ class ApiLinkSite extends ApiModifyItem {
 		}
 		else {
 			// Clean up initial and trailing spaces and compress rest of the spaces.
-			$linktitle = Api::squashToNFC( $params['linktitle'] );
+			$linktitle = Utils::squashToNFC( $params['linktitle'] );
 			if ( !isset( $linktitle ) || $linktitle === "" ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-empty-link-title' ), 'empty-link-title' );
 			}

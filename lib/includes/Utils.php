@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Sanitizer, UtfNormal;
 
 /**
  * Utility functions for Wikibase.
@@ -208,6 +209,49 @@ final class Utils {
 		) )->save();
 
 		$dbw->commit();
+	}
+
+	/**
+	 * Trim initial and trailing whitespace, and compress internal ones.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $inputString The actual string to process.
+	 * @return filtered string where whitespace possibly are removed.
+	 */
+	static public function squashWhitespace( $inputString ) {
+		return preg_replace( '/(\s+)/', ' ', preg_replace( '/(^\s+|\s+$)/', '', $inputString ) );
+		//return preg_replace( '/(^\s+|\s+$)/', '', Sanitizer::normalizeWhitespace( $inputString ) );
+	}
+
+	/**
+	 * Normalize string into NFC after first checkingh if its already normalized.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $inputString The actual string to process.
+	 * @return filtered string where whitespace possibly are removed.
+	 */
+	static public function conditionalToNFC( $inputString ) {
+		// Note that quickIsNFCVerify will do some cleanup of the string,
+		// but if we fail to detect a legal string, then we convert
+		// the filtered string anyhow.
+		if ( !UtfNormal::quickIsNFCVerify( $inputString ) ) {
+			return UtfNormal::toNFC( $inputString );
+		}
+		return $inputString;
+	}
+
+	/**
+	 * Do a toNFC after the string is squashed
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $inputString
+	 * @return trimmed string on NFC form
+	 */
+	static public function squashToNFC( $inputString ) {
+		return self::conditionalToNFC( self::squashWhitespace( $inputString ) );
 	}
 
 }
