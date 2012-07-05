@@ -93,8 +93,14 @@ $wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
 $wgAutoloadClasses['Wikibase\SitesTable'] 			= $dir . 'includes/SitesTable.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
-$wgAutoloadClasses['Settings'] 						= $dir . 'compat/Settings.php';
-$wgAutoloadClasses['SettingsBase'] 					= $dir . 'compat/SettingsBase.php';
+foreach ( array(
+	'Settings',
+	'SettingsBase'
+		  ) as $compatClass ) {
+	if ( !array_key_exists( $compatClass, $wgAutoloadLocalClasses ) ) {
+		$wgAutoloadClasses[$compatClass] = $dir . 'compat/' . $compatClass . '.php';
+	}
+}
 
 // includes/changes
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
