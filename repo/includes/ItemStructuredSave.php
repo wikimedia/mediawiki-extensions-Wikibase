@@ -26,24 +26,14 @@ class ItemStructuredSave extends \DataUpdate {
 	protected $itemContent;
 
 	/**
-	 * The title of the page representing the item.
-	 *
-	 * @since 0.1
-	 * @var Title
-	 */
-	protected $title;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
 	 * @param ItemContent $itemContent
-	 * @param Title $title
 	 */
-	public function __construct( ItemContent $itemContent, Title $title ) {
+	public function __construct( ItemContent $itemContent ) {
 		$this->itemContent = $itemContent;
-		$this->title = $title;
 	}
 
 	/**

@@ -100,7 +100,7 @@ class ItemHandler extends EntityHandler {
 
 		return array_merge(
 			parent::getSecondaryDataUpdates( $content, $title, $old, $recursive, $parserOutput ),
-			array( new ItemStructuredSave( $content, $title ) )
+			array( new ItemStructuredSave( $content ) )
 		);
 	}
 
