@@ -13,8 +13,9 @@ class NewItemPage < ItemPage
   page_url WIKI_URL + "index.php/Special:CreateItem"
 
   @@item_url = ""
+  @@item_id = ""
 
-  div(:newItemNotification, :id => "wb-specialcreateitem-newitemnotification")  
+  div(:newItemNotification, :id => "wb-specialcreateitem-newitemnotification")
 
   def create_new_item(label, description)
     wait_for_item_to_load
@@ -27,6 +28,7 @@ class NewItemPage < ItemPage
     wait_for_api_callback
     url = current_url
     @@item_url = url[0, url.index('?')]
+    @@item_id = @@item_url[@@item_url.index('Data:Q')+6..-1]
     navigate_to_item
     wait_for_item_to_load
   end
@@ -39,6 +41,10 @@ class NewItemPage < ItemPage
   
   def navigate_to_item
     navigate_to @@item_url
+  end
+
+  def get_item_id
+    @@item_id
   end
 
 end
