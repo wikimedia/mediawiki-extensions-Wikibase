@@ -29,12 +29,25 @@ class ItemDeletionUpdate extends \DataUpdate {
 	}
 
 	/**
+	 * Returns the ItemContent that's being deleted.
+	 *
+	 * @since 0.1
+	 *
+	 * @return ItemContent
+	 */
+	public function getItemContent() {
+		return $this->itemContent;
+	}
+
+	/**
 	 * @see DeferrableUpdate::doUpdate
 	 */
 	public function doUpdate() {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$id = $this->itemContent->getItem()->getId();
+
+		$dbw->begin( __METHOD__ );
 
 		$dbw->delete(
 			'wb_items',
@@ -59,6 +72,18 @@ class ItemDeletionUpdate extends \DataUpdate {
 			array( 'alias_item_id' => $id ),
 			__METHOD__
 		);
+
+		$dbw->commit( __METHOD__ );
+
+		/**
+		 * Gets called after the deletion of an item has been comitted,
+		 * allowing for extensions to do additional cleanup.
+		 *
+		 * @since 0.1
+		 *
+		 * @param ItemStructuredSave $this
+		 */
+		wfRunHooks( 'WikibaseItemDeletionUpdate', array( $this ) );
 
 		// TODO: we need to handle failures in this thing.
 		// If the update breaks for some reason, and stuff remains for a deleted item, how do we get rid of it?

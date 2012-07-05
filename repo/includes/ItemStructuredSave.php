@@ -55,11 +55,11 @@ class ItemStructuredSave extends \DataUpdate {
 	public function doUpdate() {
 		$dbw = wfGetDB( DB_MASTER );
 
-		$dbw->begin();
+		$dbw->begin( __METHOD__ );
 		$this->saveSiteLinks();
 		$this->saveMultilangFields();
 		$this->saveAliases();
-		$dbw->commit();
+		$dbw->commit( __METHOD__ );
 
 		/**
 		 * Gets called after the structured save of an item has been comitted,
@@ -69,7 +69,7 @@ class ItemStructuredSave extends \DataUpdate {
 		 *
 		 * @param ItemStructuredSave $this
 		 */
-		wfRunHooks( 'OnItemStructuredSave', array( $this ) );
+		wfRunHooks( 'WikibaseItemStructuredSave', array( $this ) );
 	}
 
 
