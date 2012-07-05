@@ -525,10 +525,10 @@ final class WikibaseHooks {
 		$html =  '<span class="wb-itemlink">' . wfMsgForContent( 'wikibase-itemlink', $labelHtml, $idHtml ) . '</span>';
 
 		// set title attribute for constructed link:
-		$titleText = ( $rawLabel !== '' ) ? $rawLabel : $target->getPrefixedText();
-		$customAttribs[ 'title' ] = ( $rawDescription !== '' )
-				? wfMsgForContent( 'wikibase-itemlink-title', $titleText, $rawDescription )
-				: $titleText; // no description, just display the title then
+		$titleText = ( $rawLabel !== false ) ? $rawLabel : $target->getPrefixedText();
+		$customAttribs[ 'title' ] = ( $rawDescription !== false )
+			? wfMsgForContent( 'wikibase-itemlink-title', $titleText, $rawDescription )
+			: $titleText; // no description, just display the title then
 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
