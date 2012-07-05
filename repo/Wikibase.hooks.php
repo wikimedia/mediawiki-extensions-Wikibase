@@ -468,7 +468,16 @@ final class WikibaseHooks {
 	 */
 	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
 		if ( $out->getTitle()->getContentModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
-			$bodyAttrs['class'] .= ' wb-itempage';
+			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
+			$itemPage = new WikiPage( $out->getTitle() );
+			$itemContent = $itemPage->getContent();
+
+			if( $itemContent !== null ) {
+				// add class to body so it's clear this is a wb item:
+				$bodyAttrs['class'] .= ' wb-itempage';
+				// add another class with the ID of the item:
+				$bodyAttrs['class'] .= ' wb-itempage-' . $itemContent->getItem()->getId();
+			}
 		}
 		return true;
 	}
