@@ -37,6 +37,17 @@ class ItemStructuredSave extends \DataUpdate {
 	}
 
 	/**
+	 * Returns the ItemContent that's being saved.
+	 *
+	 * @since 0.1
+	 *
+	 * @return ItemContent
+	 */
+	public function getItemContent() {
+		return $this->itemContent;
+	}
+
+	/**
 	 * Perform the actual update.
 	 *
 	 * @since 0.1
@@ -49,6 +60,16 @@ class ItemStructuredSave extends \DataUpdate {
 		$this->saveMultilangFields();
 		$this->saveAliases();
 		$dbw->commit();
+
+		/**
+		 * Gets called after the structured save of an item has been comitted,
+		 * allowing for extensions to do additional storage/indexing.
+		 *
+		 * @since 0.1
+		 *
+		 * @param ItemStructuredSave $this
+		 */
+		wfRunHooks( 'OnItemStructuredSave', array( $this ) );
 	}
 
 
