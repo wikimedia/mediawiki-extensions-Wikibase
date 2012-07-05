@@ -42,7 +42,10 @@ final class ClientHooks {
 			);
 		}
 		elseif ( $type === 'postgres' ) {
-			// TODO
+			$updater->addExtensionTable(
+				'wbc_local_items',
+				dirname( __FILE__ ) . '/sql/WikibaseClient.pg.sql'
+			);
 		}
 		else {
 			// TODO
