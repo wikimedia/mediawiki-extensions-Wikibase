@@ -34,28 +34,41 @@ class ApiGetItems extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
+		$missing = 0;
+
 		if ( !isset( $params['ids'] ) ) {
 			$params['ids'] = array();
 			if ( count($params['sites']) === 1 ) {
+				$site = end( $params['sites'] );
 				foreach ($params['titles'] as $title) {
-					$id = ItemContent::getIdForSiteLink( $params['sites'], Utils::squashToNFC( $title ) );
-					if ( $id ) $params['ids'][] = intval( $id );
-					//@todo: else report this problem
+					$title = Utils::squashToNFC( $title );
+					$id = ItemContent::getIdForSiteLink( $site, $title );
+					if ( $id ) {
+						$params['ids'][] = intval( $id );
+					}
+					else {
+						$this->getResult()->addValue( 'items', --$missing,
+							array( 'site' => $site, 'title' => $title, 'missing' => "" )
+						);
+					}
 				}
 			}
 			elseif ( count($params['titles']) === 1 ) {
+				$title = Utils::squashToNFC( end( $params['titles'] ) );
 				foreach ($params['sites'] as $site) {
-					$id = ItemContent::getIdForSiteLink( $site, Utils::squashToNFC( $params['titles'] ) );
-					if ( $id ) $params['ids'][] = intval( $id );
-					//@todo: else report this problem
+					$id = ItemContent::getIdForSiteLink( $site, $title );
+					if ( $id ) {
+						$params['ids'][] = intval( $id );
+					}
+					else {
+						$this->getResult()->addValue( 'items', --$missing,
+							array( 'site' => $site, 'title' => $title, 'missing' => "" )
+						);
+					}
 				}
 			}
 			else {
 				$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
-			}
-
-			if ( count($params['ids']) === 0 ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 			}
 		}
 
@@ -107,11 +120,14 @@ class ApiGetItems extends Api {
 						$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
 					}
 				}
-				$res->setIndexedTagName_internal( array( 'items' ), 'item' );
-			} else {
-				//@todo: somehow report that this item doesn't exist
+			}
+			else {
+				$this->getResult()->addValue( 'items', --$missing,
+					array( 'id' => $id, 'missing' => "")
+				);
 			}
 		}
+		$this->getResult()->setIndexedTagName_internal( array( 'items' ), 'item' );
 
 		$success = true;
 
