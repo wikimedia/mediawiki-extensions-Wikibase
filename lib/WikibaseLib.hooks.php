@@ -27,43 +27,47 @@ final class LibHooks {
 	 * @return boolean
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
-		$updater->addExtensionTable(
-			'wb_changes',
-			dirname( __FILE__ ) . '/sql/WikibaseLib.sql'
-		);
+		$type = $updater->getDB()->getType();
 
-		// TODO: move to core
-		$updater->addExtensionTable(
-			'sites',
-			dirname( __FILE__ ) . '/sql/AddSitesTable.sql'
-		);
+		if ( $type === 'mysql' || $type === 'sqlite' ) {
+			$updater->addExtensionTable(
+				'wb_changes',
+				dirname( __FILE__ ) . '/sql/WikibaseLib.sql'
+			);
 
-		// TODO: move to core
-		$updater->addExtensionField(
-			'langlinks',
-			'll_local',
-			dirname( __FILE__ ) . '/sql/AddLocalLanglinksField.sql'
-		);
+			// TODO: move to core
+			$updater->addExtensionTable(
+				'sites',
+				dirname( __FILE__ ) . '/sql/AddSitesTable.sql'
+			);
 
-		$updater->addExtensionField(
-			'sites',
-			'site_link_navigation',
-			dirname( __FILE__ ) . '/sql/IndexSitesTable.sql'
-		);
+			// TODO: move to core
+			$updater->addExtensionField(
+				'langlinks',
+				'll_local',
+				dirname( __FILE__ ) . '/sql/AddLocalLanglinksField.sql'
+			);
 
-		$updater->addExtensionField(
-			'sites',
-			'site_language',
-			dirname( __FILE__ ) . '/sql/MakeSitesTableMoarAwesome.sql'
-		);
+			$updater->addExtensionField(
+				'sites',
+				'site_link_navigation',
+				dirname( __FILE__ ) . '/sql/IndexSitesTable.sql'
+			);
 
-		// TODO: enable && move to core
-//		$updater->dropExtensionTable(
-//			'interwiki',
-//			dirname( __FILE__ ) . '/sql/DropInterwiki.sql'
-//		);
+			$updater->addExtensionField(
+				'sites',
+				'site_language',
+				dirname( __FILE__ ) . '/sql/MakeSitesTableMoarAwesome.sql'
+			);
 
-		$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
+			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
+		}
+		elseif ( $type === 'postgres' ) {
+			// TODO
+		}
+		else {
+			// TODO
+		}
 
 		return true;
 	}

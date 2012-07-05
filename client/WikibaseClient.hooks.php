@@ -27,16 +27,26 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
-		$updater->addExtensionTable(
-			'wbc_local_items',
-			dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
-		);
+		$type = $updater->getDB()->getType();
 
-		$updater->addExtensionField(
-			'wbc_local_items',
-			'li_page_title',
-			dirname( __FILE__ ) . '/sql/LocalItemTitleField.sql'
-		);
+		if ( $type === 'mysql' || $type === 'sqlite' ) {
+			$updater->addExtensionTable(
+				'wbc_local_items',
+				dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
+			);
+
+			$updater->addExtensionField(
+				'wbc_local_items',
+				'li_page_title',
+				dirname( __FILE__ ) . '/sql/LocalItemTitleField.sql'
+			);
+		}
+		elseif ( $type === 'postgres' ) {
+			// TODO
+		}
+		else {
+			// TODO
+		}
 
 		return true;
 	}
