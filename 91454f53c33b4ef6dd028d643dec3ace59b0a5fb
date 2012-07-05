@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAPX//8b0\u003d",
+        "filename": "repo/tests/selenium/lib/pages/new_item_page.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-07-05T15:51:35Z",
+      "side": 1,
+      "message": "ಠ__ಠ",
+      "revId": "91454f53c33b4ef6dd028d643dec3ace59b0a5fb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
