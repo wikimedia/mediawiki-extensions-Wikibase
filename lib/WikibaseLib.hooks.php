@@ -63,7 +63,12 @@ final class LibHooks {
 			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
 		}
 		elseif ( $type === 'postgres' ) {
-			// TODO
+			$updater->addExtensionTable(
+				'wb_changes',
+				dirname( __FILE__ ) . '/sql/WikibaseLib.pg.sql'
+			);
+
+			//$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
 		}
 		else {
 			// TODO
