@@ -46,4 +46,11 @@ class NewItemPage < ItemPage
     @@item_id
   end
 
+  def navigate_to_item_en
+    navigate_to @@item_url + "?uselang=en"
+  end
+
+  def navigate_to_item_de
+    navigate_to @@item_url + "?uselang=de"
+  end
 end

@@ -83,6 +83,11 @@ RSpec::Core::RakeTask.new(:spec_language_selector) do |spec|
   spec.pattern = 'spec/language_selector/language_selector_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:spec_bugs) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/item/bugs_spec.rb'
+end
+
 task :default => :spec
 task :item => :spec_item
 task :nonexistingitem => :spec_non_existing_item
@@ -98,4 +103,5 @@ task :protected_page => :spec_protected_page
 task :search => :spec_search
 task :recentchanges => :spec_recentchanges
 task :sttl => :spec_language_selector
+task :bugs => :spec_bugs
 
