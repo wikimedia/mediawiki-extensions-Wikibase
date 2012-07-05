@@ -308,6 +308,55 @@ class ApiSetItemTest extends \ApiTestCase {
 	}
 
 	/**
+	 * Testing if we can get missing items if we do lookup with single fake ids.
+	 * Note that this makes assumptions about which ids they have been assigned.
+	 *
+	 * @group API
+	 * @depends testSetItemGetTokenSetData
+	 */
+	public function testGetItemsMissingId( ) {
+		$myid =  self::$baseOfItemIds + 123456789;
+		$first = $this->doApiRequest( array(
+			'action' => 'wbgetitems',
+			'ids' => "{$myid}",
+		) );
+		$this->assertArrayHasKey( 'success', $first[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'items', $first[0],
+			"Must have an 'items' key in the result from the API" );
+		$items = array_values( $first[0]['items'] );
+		$this->assertEquals( 1, count( $items ),
+			"Must have an item count of '1' in the result from the API" );
+		$this->assertArrayHasKey( 'missing', $items[0],
+			"Must have a 'missing' key in the result from the API" );
+	}
+
+	/**
+	 * Testing if we can get missing items if we do lookup with failing titles.
+	 * Note that this makes assumptions about which ids they have been assigned.
+	 *
+	 * @group API
+	 * @depends testSetItemGetTokenSetData
+	 * @dataProvider providerGetItemsMissingTitle
+	 */
+	public function testGetItemsMissingTitle( $id, $sites, $titles ) {
+		$first = $this->doApiRequest( array(
+			'action' => 'wbgetitems',
+			'sites' => $sites,
+			'titles' => $titles,
+		) );
+		$this->assertArrayHasKey( 'success', $first[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'items', $first[0],
+			"Must have an 'items' key in the result from the API" );
+		$items = array_values( $first[0]['items'] );
+		foreach ( $first[0]['items'] as $k => $v ) {
+			$this->assertArrayHasKey( 'missing', $v,
+				"Must have a 'missing' key in the result from the API" );
+		}
+	}
+
+	/**
 	 * Testing if we can get all the complete stringified items if we do lookup with multiple ids.
 	 *
 	 * @group API
@@ -932,6 +981,16 @@ class ApiSetItemTest extends \ApiTestCase {
 					}
 				}'
 			),
+		);
+	}
+
+	public function providerGetItemsMissingTitle() {
+
+		$idx = self::$baseOfItemIds;
+		return array(
+			array( $idx, 'dewiki', 'sugarinthemorningtothefriedkittens' ),
+			array( $idx, 'dewiki', 'sugarinthemorningtothefriedkittens|sugarintheeveningtothefriedkittens' ),
+			array( $idx, 'dewiki|enwiki', 'sugarinthemorningtothefriedkittens' ),
 		);
 	}
 
