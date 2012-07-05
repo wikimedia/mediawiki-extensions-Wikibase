@@ -502,12 +502,14 @@ final class WikibaseHooks {
 
 		global $wgLang, $wgOut;
 
-		// add wikibase styles in all cases, so we can format the link properly:
-		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
-
 		$lang = $wgLang->getCode();
-		$page = new WikiPage( $target );
-		$item = $page->getContent()->getItem();
+		$itemPage = new WikiPage( $target );
+		$itemContent = $itemPage->getContent();
+
+		if( $itemContent === null ) {
+			return true; // content is empty (page doesn't exist), e.g. after item was deleted
+		}
+		$item = $itemContent->getItem();
 
 		$rawLabel = $item->getLabel( $lang );
 		$rawDescription = $item->getDescription( $lang );
@@ -527,6 +529,9 @@ final class WikibaseHooks {
 		$customAttribs[ 'title' ] = ( $rawDescription !== '' )
 				? wfMsgForContent( 'wikibase-itemlink-title', $titleText, $rawDescription )
 				: $titleText; // no description, just display the title then
+
+		// add wikibase styles in all cases, so we can format the link properly:
+		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
 
 		return true;
 	}
