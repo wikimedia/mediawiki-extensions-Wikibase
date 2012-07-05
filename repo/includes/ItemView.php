@@ -158,17 +158,26 @@ class ItemView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param ItemContent         $item the item to analyze/render
-	 * @param null|ParserOptions  $options parser options. If nto provided, the local context will be used to create generic parser options.
-	 * @param bool                $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
+	 * @param null|ParserOptions &$options parser options. If not provided, the local context will be used to create
+	 *                             generic parser options.
+	 * @param bool                $generateHtml whether to generate HTML. Set to false if only interested in meta-info.
+	 *                             default: true.
+	 *
+	 * @TODO/FIXME: shouldn't $generateHtml actually be a parser option?
 	 *
 	 * @return ParserOutput
 	 */
-	public function getParserOutput( ItemContent $item, ParserOptions $options = null, $generateHtml = true ) {
+	public function getParserOutput( ItemContent $item, $generateHtml = true, ParserOptions &$options = null ) {
 		if ( !$options ) {
 			$options = $this->makeParserOptions();
 		}
 
-		$langCode = $options->getTargetLanguage();
+		/**
+		 * Using $options->getUserLangObj() will fragment the parser cache so we will have one cached version of each
+		 * version of the item in each language. This is necessary because we use 'uselang' parameter to determine the
+		 * language the item should be displayed in.
+		 */
+		$lang = $options->getUserLangObj();
 		$editable = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
 
 		//@todo: would be nice to disable editing if the user isn't allowed to do that.
@@ -181,7 +190,7 @@ class ItemView extends \ContextSource {
 		$pout = new ParserOutput();
 
 		if ( $generateHtml ) {
-			$html = $this->getHTML( $item, $langCode, $editable );
+			$html = $this->getHTML( $item, $lang, $editable );
 			$pout->setText( $html );
 		}
 
@@ -211,31 +220,30 @@ class ItemView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param \Wikibase\ItemContent      $item the item to output
-	 * @param null|OutputPage    $out the output page to write to. If not given, the local context will be used.
-	 * @param null|ParserOptions $options parser options to use for rendering. If not given, the local context will be used.
-	 * @param null|ParserOutput  $pout optional parser object - provide this if you already have a parser options for this item,
-	 *                           to avoid redundant rendering.
+	 * @param \Wikibase\ItemContent $item the item to output
+	 * @param null|OutputPage       $out the output page to write to. If not given, the local context will be used.
+	 * @param null|ParserOptions   &$options parser options to use for rendering. If not given, the local context will
+	 *                               be used and passed as reference.
+	 * @param null|ParserOutput     $pout optional parser object - provide this if you already have a parser options for
+	 *                               this item, to avoid redundant rendering.
 	 *
 	 * @return ParserOutput the parser output, for further processing.
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
-	public function render( ItemContent $item, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
+	public function render( ItemContent $item, OutputPage $out = null, ParserOptions &$options = null, ParserOutput $pout = null ) {
 		if ( !$out ) {
-			$out = $this->getOutput();
+			$out = $this->getOutput(); // using output of context source
 		}
 
 		if ( !$pout ) {
-			if ( !$options ) {
-				$options = $this->makeParserOptions();
-			}
-
-			$pout = $this->getParserOutput( $item, $options, true );
+			// generate all the HTML:
+			$pout = $this->getParserOutput( $item, true, $options );
 		}
 
 		if ( $options ) {
-			$langCode = $options->getTargetLanguage();
-		} else  {
+			// this will create cache fragmentation (which we need because content is 'uselang' dependent
+			$langCode = $options->getUserLangObj()->getCode();
+		} else {
 			#XXX: this is quite ugly, we don't know that this language is the language that was used to generate the parser output object
 			$langCode = $this->getLanguage()->getCode();
 		}
