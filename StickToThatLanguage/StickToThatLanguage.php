@@ -44,9 +44,14 @@ $wgHooks['UnitTestsList'][]                    = 'STTLanguage\Hooks::registerUni
 $wgHooks['GetPreferences'][]                   = 'STTLanguage\Hooks::onGetPreferences';
 $wgHooks['UserGetDefaultOptions'][]            = 'STTLanguage\Hooks::onUserGetDefaultOptions';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = 'STTLanguage\Hooks::onSkinTemplateOutputPageBeforeExec';
-$wgHooks['BeforePageDisplay'][]                = 'STTLanguage\Hooks::onBeforePageDisplay';
-$wgHooks['GetLocalURL::Internal'][]            = 'STTLanguage\Hooks::onGetLocalUrlInternally';
-$wgHooks['LinkBegin'][]                        = 'STTLanguage\Hooks::onLinkBegin';
+
+if( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
+	// We don't want to hook in these places when running tests. This is because core tests will fail since they
+	// simply do not consider extensions to change the output of the tested functions.
+	$wgHooks['BeforePageDisplay'][]                = 'STTLanguage\Hooks::onBeforePageDisplay';
+	$wgHooks['GetLocalURL::Internal'][]            = 'STTLanguage\Hooks::onGetLocalUrlInternally';
+	$wgHooks['LinkBegin'][]                        = 'STTLanguage\Hooks::onLinkBegin';
+}
 
 // Resource Loader Module:
 $wgResourceModules['sticktothatlanguage'] = array(
