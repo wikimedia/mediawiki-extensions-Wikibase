@@ -127,6 +127,7 @@ You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAME
  * @author DavidL
  * @author Jeblad
  * @author Kghbln
+ * @author McDutchie
  * @author Purodha
  * @author Siebrand
  */
@@ -218,7 +219,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-no-token' => 'This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are som exceptional error condition. The message can be shown after misconfiguration of the system.',
 	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
 	'wikibase-api-no-external-data' => 'This is an error message where the external client did not reply, either because of the repo or the client terminated the connection, or because of some other connection error.',
-	'wikibase-api-no-external-page' => 'This is an error message where the external client did reply but either because of foulty reply or because the page title could not be unwound it was not possible to identify an external page.',
+	'wikibase-api-no-external-page' => 'This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.',
 	'wikibase-api-add-sitelink-failed' => 'This is an error message where the system of some unspecific reason could not add the site link to the temporary store.',
 	'wikibase-api-cant-edit' => 'This error message is used when the user is not allowed to edit or create an item via the API. Parameters:
 * $1 is a wikitext list of reasons. It should be placed on a separate line.',
@@ -509,6 +510,7 @@ $messages['dsb'] = array(
 
 /** Spanish (español)
  * @author Armando-Martin
+ * @author McDutchie
  * @author Mr.Ajedrez
  * @author Savh
  * @author Vivaelcelta
@@ -702,6 +704,7 @@ $1',
 
 /** French (français)
  * @author Alno
+ * @author Crochet.david
  * @author DavidL
  * @author Gomoko
  * @author Wyz
@@ -759,7 +762,7 @@ $messages['fr'] = array(
 	'wikibase-api-add-exists' => "Impossible d'ajouter à un élément existant.",
 	'wikibase-api-update-without-id' => "La mise à jour sans un précédent identifiant n'est pas possible.",
 	'wikibase-api-no-such-item-link' => 'Impossible de trouver un élément existant pour ce lien.',
-	'wikibase-api-create-failed' => "La création de l'item a échoué.",
+	'wikibase-api-create-failed' => "Échec de la tentative de création d'un nouvel élément : $1",
 	'wikibase-api-modify-failed' => "La modification de l'item a échoué.",
 	'wikibase-api-save-failed' => "La sauvegarde de l'item a échoué.",
 	'wikibase-api-invalid-contentmodel' => "Le modèle du contenu de la page est invalide (problème d'incohérence du contentmodel).",
@@ -771,7 +774,8 @@ $messages['fr'] = array(
 	'wikibase-api-label-not-found' => "Impossible de trouver une étiquette précédente de cette langue dans l'élément.",
 	'wikibase-api-description-not-found' => "Impossible de trouver une description antérieure de cette langue dans l'élément.",
 	'wikibase-api-wrong-class' => "Le contenu de la page trouvée n'est pas du bon type.",
-	'wikibase-api-session-failure' => 'La session en cours a échoué et vous devez rafraîchir la page et vous reconnecter.',
+	'wikibase-api-session-failure' => 'La session en cours a échoué. Vous devez vous reconnecter à nouveau.',
+	'wikibase-resetold' => 'réinitialiser',
 );
 
 /** Galician (galego)
@@ -1007,12 +1011,15 @@ $messages['ia'] = array(
 	'wikibase-remove-inprogress' => 'Remove…',
 	'wikibase-label-edit-placeholder' => 'scribe etiquetta',
 	'wikibase-description-edit-placeholder' => 'scribe description',
-	'wikibase-move-error' => 'Tu non pote renominar paginas que es in le spatio de nomines de datos, e tu non pote displaciar paginas a in illo.',
 	'wikibase-sitelink-site-edit-placeholder' => 'specifica sito',
 	'wikibase-sitelink-page-edit-placeholder' => 'specifica pagina',
+	'wikibase-alias-edit-placeholder' => 'scribe un alias',
 	'wikibase-label-input-help-message' => 'Entra le titulo de iste insimul de datos in $1.',
 	'wikibase-description-input-help-message' => 'Entra un curte description in $1.',
 	'wikibase-sitelinks' => 'Lista de paginas ligate a iste objecto',
+	'wikibase-sitelinks-add' => 'adder un ligamine a un ligamine de sito',
+	'wikibase-sitelinks-empty' => 'Il non ha ancora un ligamine de sito pro iste elemento.',
+	'wikibase-sitelinks-input-help-message' => 'Definir un ligamine a un pagina que tracta de iste thema.',
 	'wikibase-remove' => 'remover',
 	'wikibase-propertyedittool-full' => 'Le lista de valores es complete.',
 	'wikibase-propertyedittool-counter' => '$1 {{PLURAL:$1|entrata|entratas}}',
@@ -1021,18 +1028,68 @@ $messages['ia'] = array(
 	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Un valor|$1 valores}} non ancora salveguardate',
 	'wikibase-sitelinksedittool-full' => 'Ligamines a paginas es jam definite pro tote le sitos cognoscite.',
 	'wikibase-disambiguation-title' => 'Disambiguation pro "$1"',
+	'wb-special-createitem-new-item-notification' => 'Nove elemento $1 create e redirigite a su pagina. Retornar a $2.',
+	'wikibase-aliases-label' => 'Etiam cognoscite como:',
+	'wikibase-aliases-input-help-message' => 'Si iste gruppo de datos es cognoscite per plus de un particular nomine, tu pote specificar aliases e synonymos, a fin que illo pote esser trovate per su nomines alternative.',
+	'wikibase-aliases-empty' => 'Nulle alias definite.',
 	'wikibase-tooltip-error-details' => 'Detalios',
-	'wikibase-error-save-generic' => 'Un error occurreva durante le salveguarda. Le modificationes non poteva esser immagazinate.',
-	'wikibase-error-remove-generic' => 'Un error occurreva durante le tentativa de remover.',
-	'wikibase-error-save-connection' => 'Le modificationes non poteva esser immagazinate. Per favor verifica le connexion a internet.',
-	'wikibase-error-remove-connection' => 'Un error occurreva durante le tentativa de remover. Verifica tu connexion a internet.',
-	'wikibase-error-save-timeout' => 'Nos incontra difficultates technic. Le modificationes non poteva esser immagazinate.',
-	'wikibase-error-remove-timeout' => 'Nos incontra difficultates technic. Non poteva exequer le remotion.',
+	'wikibase-error-save-generic' => 'Un error occurreva durante le salveguarda. A causa de isto, le cambiamentos non poteva esser completate.',
+	'wikibase-error-remove-generic' => 'Un error occurreva durante le remotion. A causa de isto, le cambiamentos non poteva esser completate.',
+	'wikibase-error-save-connection' => 'Un error de connexion occurreva durante le salveguarda. A causa de isto, le cambiamentos non poteva esser completate. Per favor verifica tu connexion a internet.',
+	'wikibase-error-remove-connection' => 'Un error de connexion occurreva durante le remotion. A causa de isto, le cambiamentos non poteva esser completate. Per favor verifica tu connexion a internet.',
+	'wikibase-error-save-timeout' => 'Nos ha incontrate difficultates technic. A causa de isto, tu commando "save" (salveguardar) non poteva esser completate.',
+	'wikibase-error-remove-timeout' => 'Nos ha incontrate difficultates technic. A causa de isto, tu commando "remove" (remover) non poteva esser completate.',
 	'wikibase-error-autocomplete-connection' => 'Non poteva consultar le API de Wikipedia. Per favor reproba plus tarde.',
 	'wikibase-error-autocomplete-response' => 'Le servitor respondeva: $1',
-	'special-itembytitle' => 'Objecto per titulo',
+	'wikibase-error-ui-client-error' => 'Le connexion al pagina cliente ha fallite. Per favor reproba plus tarde.',
+	'wikibase-error-ui-no-external-page' => 'Le articulo specificate non poteva esser trovate in le pagina correspondente.',
+	'wikibase-error-ui-cant-edit' => 'Tu non es autorisate a exequer iste action.',
+	'wikibase-error-ui-no-permissions' => 'Tu non ha derectos sufficiente pro exequer iste action.',
+	'wikibase-error-ui-link-exists' => 'Tu non pote ligar a iste pagina perque un altere elemento jam es ligate a illo.',
+	'wikibase-error-ui-session-failure' => 'Le session ha expirate. Per favor aperi session de novo.',
+	'wikibase-move-error' => 'Tu non pote renominar paginas que es in le spatio de nomines de datos, e tu non pote displaciar paginas a in illo.',
+	'wikibase-error-relational-save-failed' => 'Non poteva immagazinar le identitate del elemento in le base de datos.',
+	'wikibase-error-sitelink-already-used' => 'Le ligamine de sito [[$1:$2]] es jam usate per le elemento [[$3]].',
 	'special-itembylabel' => 'Objecto per etiquetta',
 	'special-createitem' => 'Crear un nove objecto',
+	'wikibase-api-aliases-invalid-list' => 'Usa un del tres parametros "set", "add" e "remove".',
+	'wikibase-api-no-token' => 'Nulle indicio date.',
+	'wikibase-api-no-data' => 'Il non ha datos a tractar.',
+	'wikibase-api-client-error' => 'Le sito cliente externe ha fallite.',
+	'wikibase-api-no-external-data' => 'Il non habeva datos ab le sito cliente externe, possibilemente a causa de errores de connexion.',
+	'wikibase-api-no-external-page' => 'Le sito cliente externe non forniva informationes sur le pagina.',
+	'wikibase-api-add-sitelink-failed' => 'Le ligamine de sito non poteva esser salveguardate.',
+	'wikibase-api-cant-edit' => 'Modification non permittite:
+$1',
+	'wikibase-api-no-permissions' => 'Le usator identificate non ha sufficiente derectos.',
+	'wikibase-api-id-xor-wikititle' => 'Specifica o le elemetno "id" o pares de "site" e "title" pro un pagina correspondente.',
+	'wikibase-api-no-such-item' => 'Non poteva trovar un elemento existente.',
+	'wikibase-api-no-such-item-id' => 'Non poteva trovar un elemento existente pro iste ID.',
+	'wikibase-api-link-exists' => 'Un articulo in le wiki specificate es jam ligate.',
+	'wikibase-api-add-with-id' => 'Non pote adder con le ID de un elemento existente.',
+	'wikibase-api-add-exists' => 'Non pote adder a un elemento existente.',
+	'wikibase-api-update-without-id' => 'Actualisar sin ID previe non es possibile.',
+	'wikibase-api-no-such-item-link' => 'Non poteva trovar un elemento existente pro iste ligamine.',
+	'wikibase-api-create-failed' => 'Le tentativa de creation de un nove elemento ha fallite: $1',
+	'wikibase-api-modify-failed' => 'Le tentativa de modification del elemento ha fallite.',
+	'wikibase-api-save-failed' => 'Le tentativa de salveguarda del elemento ha fallite: $1',
+	'wikibase-api-invalid-contentmodel' => 'Le modello de contento pro le pagina es invalide.',
+	'wikibase-api-alias-incomplete' => 'Non poteva trovar un definition del alias pro le elemento.',
+	'wikibase-api-alias-not-found' => 'Non poteva trovar un previe alias in le elemento.',
+	'wikibase-api-alias-found' => 'Un previe alias ha essite trovate in le elemento.',
+	'wikibase-api-not-recognized' => 'Le directiva non es recognoscite.',
+	'wikibase-api-label-or-description' => 'Usa un o ambes del parametros "label" e "description".',
+	'wikibase-api-label-not-found' => 'Non pote trovar un previe etiquetta pro iste lingua in le elemento.',
+	'wikibase-api-description-not-found' => 'Non pote trovar un previe description pro iste lingua in le elemento.',
+	'wikibase-api-wrong-class' => 'Le contento in le pagina trovate non es del typo correcte.',
+	'wikibase-api-session-failure' => 'Le session actual ha fallite. Tu debe aperir session de novo.',
+	'wikibase-resetold' => 'reinitialisar',
+	'wikibase-noitem' => 'Iste elemento non existe.
+Tu pote <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercar in le registros associate]
+pro localisar lo, o [[Special:CreateItem|crear un nove elemento]]</span>.',
+	'wikibase-noitem-nopermission' => 'Iste elemento non existe.
+Tu pote <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercar lo in le registros associate]</span>.',
+	'content-model-1001' => 'Elemento de Wikibase',
 );
 
 /** Icelandic (íslenska)
@@ -1641,7 +1698,7 @@ $1',
 	'wikibase-api-label-not-found' => 'Er is geen eerder label in deze taal gevonden in het item.',
 	'wikibase-api-description-not-found' => 'Er is geen eerdere beschrijving in deze taal gevonden in dit item.',
 	'wikibase-api-wrong-class' => 'De inhoud van de gevonden pagina is niet van het juiste type.',
-	'wikibase-api-session-failure' => 'De huidige sessie is verbroken. U dient opnieuw aan te melden.',
+	'wikibase-api-session-failure' => 'De huidige sessie is verbroken. U dient zich opnieuw aan te melden.',
 	'wikibase-resetold' => 'opnieuw instellen',
 	'wikibase-noitem' => 'Dit item bestaat niet.
 U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} bijbehorende logboeken doorzoeken] om uit te vinden waar het is gebleven of een [[Special:CreateItem|niet item aanmaken]]</span>.',
@@ -1881,7 +1938,6 @@ $messages['ru'] = array(
 	'wikibase-error-autocomplete-connection' => 'Не удалось запросить API Википедии. Пожалуйста, попробуйте снова позже.',
 	'wikibase-error-autocomplete-response' => 'Сервер ответил: $1',
 	'wikibase-move-error' => 'Вы не можете переименовывать страницы, которые находятся в пространстве данных, и вы не можете перемещать страницы в него.',
-	'wikibase-setting-languages' => 'Дополнительные языки<br />(откат при отображении данных не доступен в основном языке)',
 );
 
 /** Swedish (svenska)
@@ -1951,7 +2007,6 @@ $messages['zh-hans'] = array(
 	'wikibase-remove' => '删除',
 	'wikibase-propertyedittool-full' => '取值列表已完整。',
 	'wikibase-sitelinksedittool-full' => '已经为所有的已知站点设置了指向页面的链接。',
-	'special-itembytitle' => '按标题排序的项目',
 	'special-itembylabel' => '按标签排序的项目',
 );
 

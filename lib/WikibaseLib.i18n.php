@@ -131,3 +131,10 @@ $messages['pt-br'] = array(
 	'wikibaselib-desc' => 'Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client',
 );
 
+/** Tagalog (Tagalog)
+ * @author AnakngAraw
+ */
+$messages['tl'] = array(
+	'wikibaselib-desc' => 'Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client',
+);
+
