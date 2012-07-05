@@ -77,7 +77,7 @@ abstract class ApiModifyItem extends Api {
 		$normTitle = '';
 		$hasLink = false;
 		if ( isset( $params['site'] ) && $params['title'] ) {
-			$normTitle = Api::squashToNFC( $params['title'] );
+			$normTitle = Utils::squashToNFC( $params['title'] );
 			$hasLink = true;
 		}
 		$itemContent = null;
