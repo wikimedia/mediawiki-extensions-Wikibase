@@ -26,15 +26,25 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
-		$updater->addExtensionTable(
-			'wb_items',
-			dirname( __FILE__ ) . '/sql/Wikibase.sql'
-		);
+		$type = $updater->getDB()->getType();
 
-		$updater->addExtensionTable(
-			'wb_aliases',
-			dirname( __FILE__ ) . '/sql/AddAliasesTable.sql'
-		);
+		if ( $type === 'mysql' || $type === 'sqlite' ) {
+			$updater->addExtensionTable(
+				'wb_items',
+				dirname( __FILE__ ) . '/sql/Wikibase.sql'
+			);
+
+			$updater->addExtensionTable(
+				'wb_aliases',
+				dirname( __FILE__ ) . '/sql/AddAliasesTable.sql'
+			);
+		}
+		elseif ( $type === 'postgres' ) {
+			// TODO
+		}
+		else {
+			// TODO
+		}
 
 		return true;
 	}
