@@ -179,6 +179,8 @@ final class Hooks {
 	 */
 	public static function onLinkBegin( $skin, $target, &$text, &$customAttribs, &$query, &$options, &$ret ) {
 		global $wgLang, $wgLanguageCode;
+		$query = (array)$query; // could be a string and MW core didn't do this before somewhat MW 1.20
+
 		if( $wgLang->getCode() !== $wgLanguageCode   // cache friendly!
 			&& array_key_exists( 'uselang', $query ) // don't add it if there is a uselang set to that url already!
 		) {
