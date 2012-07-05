@@ -99,8 +99,6 @@ final class LibHooks {
 			'Sites',
 			'Utils',
 
-			'SettingsBase',
-
 			'changes/DiffChange',
 			'changes/ItemChange',
 
@@ -108,6 +106,11 @@ final class LibHooks {
 			'diff/ListDiff',
 			'diff/MapDiff',
 		);
+
+		// Test compat
+		if ( !array_key_exists( 'SettingsBase', $GLOBALS['wgAutoloadLocalClasses'] ) ) {
+			$testFiles[] = 'SettingsBase';
+		}
 
 		foreach ( $testFiles as $file ) {
 			$files[] = dirname( __FILE__ ) . '/tests/phpunit/' . $file . 'Test.php';
