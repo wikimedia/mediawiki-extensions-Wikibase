@@ -27,7 +27,7 @@ describe "Check functionality of protected page" do
   end
 
   context "check functionality of protected page" do
-    it "should be logged out, and check if protected item could not be edited" do
+    it "should be logged out, and check if label/description of protected item could not be edited" do
       visit_page(LoginPage) do |page|
         if page.logout? == true
           page.logout_user
@@ -35,6 +35,7 @@ describe "Check functionality of protected page" do
       end
       on_page(NewItemPage) do |page|
         page.navigate_to_item
+        #label
         original_label = page.itemLabelSpan
         changed_label = original_label + "123"
         page.editLabelLink
@@ -48,6 +49,42 @@ describe "Check functionality of protected page" do
         @browser.refresh
         page.wait_for_item_to_load
         page.itemLabelSpan.should == original_label
+        # description
+        original_description = page.itemDescriptionSpan
+        changed_description = original_description + "123"
+        page.editDescriptionLink
+        page.descriptionInputField_element.clear
+        page.descriptionInputField = changed_description
+        page.saveDescriptionLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.wbErrorDiv?.should be_true
+        page.wbErrorDiv_element.text.should == "You are not allowed to perform this action."
+        @browser.refresh
+        page.wait_for_item_to_load
+        page.itemDescriptionSpan.should == original_description
+      end
+    end
+  end
+
+  context "check functionality of protected page" do
+    it "check if no aliases could be added to an item" do
+      on_page(AliasesItemPage) do |page|
+        page.navigate_to_item
+        new_alias = generate_random_string(5);
+        page.wait_for_aliases_to_load
+        page.wait_for_item_to_load
+        page.addAliases
+        page.aliasesInputEmpty= new_alias
+        page.saveAliases
+        ajax_wait
+        page.wait_for_api_callback
+        page.wbErrorDiv?.should be_true
+        page.wbErrorDiv_element.text.should == "You are not allowed to perform this action."
+        @browser.refresh
+        page.wait_for_aliases_to_load
+        page.wait_for_item_to_load
+        page.addAliases?.should be_true
       end
     end
   end
