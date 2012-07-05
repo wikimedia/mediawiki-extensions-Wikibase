@@ -33,11 +33,6 @@ final class WikibaseHooks {
 				'wb_items',
 				dirname( __FILE__ ) . '/sql/Wikibase.sql'
 			);
-
-			$updater->addExtensionTable(
-				'wb_aliases',
-				dirname( __FILE__ ) . '/sql/AddAliasesTable.sql'
-			);
 		}
 		elseif ( $type === 'postgres' ) {
 			// TODO
