@@ -158,6 +158,16 @@ describe "Check functionality of add/edit/remove sitelinks" do
           end
           ajax_wait
           page.wait_for_api_callback
+
+          if count == 1
+            page.getNthSitelinksTableRow(2).click
+            page.wait_until do
+              page.editSitelinkLink_element.visible?
+            end
+            page.editSitelinkLink
+            page.siteIdInputField?.should be_false
+          end
+
           @browser.refresh
           page.wait_for_sitelinks_to_load
 
