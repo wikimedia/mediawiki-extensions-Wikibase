@@ -25,7 +25,13 @@ window.wikibase = new( function() {
 
 		// redirect to the newly created items site:
 		var newItemTitle = new mw.Title( 'Data:' + 'q' + apiResponse.id );
-		window.location =  newItemTitle.getUrl() + '?wbitemcreated=yes';
+		var newLocation = newItemTitle.getUrl() + '?wbitemcreated=yes';
+		var useLang = mw.util.getParamValue( 'uselang' );
+		if( useLang ) {
+			newLocation += '&uselang=' + useLang; // make sure language stays the same on redirect
+		}
+
+		window.location = newLocation;
 		// TODO: this is not yet near perfect and a proper workflow hast to be created. The redirect as of now is
 		//       rather ugly in its presentation to the user.
 	};
