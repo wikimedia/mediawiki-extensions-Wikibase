@@ -16,7 +16,6 @@ class NewItemPage < ItemPage
   @@item_id = ""
 
   div(:newItemNotification, :id => "wb-specialcreateitem-newitemnotification")
-
   def create_new_item(label, description)
     wait_for_item_to_load
     self.labelInputField = label
@@ -38,7 +37,7 @@ class NewItemPage < ItemPage
       newItemNotification_element.visible?
     end
   end
-  
+
   def navigate_to_item
     navigate_to @@item_url
   end
