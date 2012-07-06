@@ -16,6 +16,24 @@
       "revId": "99963bdcd2ac1ad43f5cd860e85c089c5ee3652f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX///54\u003d",
+        "filename": "lib/sql/WikibaseLib.pg.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-06T11:40:15Z",
+      "side": 1,
+      "message": "They are not causing any problems - I\u0027ve run this stuff and it worked just fine. Can always remove these in a follow up commit.",
+      "parentUuid": "AAAAQX///70\u003d",
+      "revId": "99963bdcd2ac1ad43f5cd860e85c089c5ee3652f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
