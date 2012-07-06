@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX///wI\u003d",
+        "filename": "repo/resources/wikibase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-06T16:01:25Z",
+      "side": 1,
+      "message": "The name and above line made me think this is a boolean, but the below line suggests it\u0027s a string. Please use proper naming and explicit checks.\n\nAlso beware that you probably want to escape url args when the user has control over them.",
+      "revId": "4faa68883683f44ec843202dd44fa5c4cb62fd9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
