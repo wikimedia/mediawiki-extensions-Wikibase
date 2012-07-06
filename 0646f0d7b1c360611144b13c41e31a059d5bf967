@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX///48\u003d",
+        "filename": "repo/includes/ItemDeletionUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-06T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX///7E\u003d",
+      "revId": "0646f0d7b1c360611144b13c41e31a059d5bf967",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX///7A\u003d",
         "filename": "repo/includes/ItemDeletionUpdate.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-07-06T10:13:41Z",
       "side": 1,
       "message": "Shouldn\u0027t we use names with \"Wikibase\" in the name? Just \"Item\" doesn\u0027t make sure this hook is related to wikibase necessarily. At least call it \"wbOnItemDeletionUpdate\" or something.",
+      "revId": "0646f0d7b1c360611144b13c41e31a059d5bf967",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX///44\u003d",
+        "filename": "repo/includes/ItemDeletionUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-06T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX///7A\u003d",
       "revId": "0646f0d7b1c360611144b13c41e31a059d5bf967",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
