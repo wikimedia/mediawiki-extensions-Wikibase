@@ -262,14 +262,16 @@ final class WikibaseHooks {
 			array(
 				'ar_page_id' => $id,
 				// 'ar_content_model' => CONTENT_MODEL_WIKIBASE_ITEM,
-			)
+			),
+			__METHOD__
 		);
 
 		if ( $archiveEntry !== false ) {
 			$textEntry = $dbw->selectRow(
 				'text',
 				'old_text',
-				array( 'old_id' => $archiveEntry->ar_text_id )
+				array( 'old_id' => $archiveEntry->ar_text_id ),
+				__METHOD__
 			);
 
 			if ( $textEntry !== false ) {
