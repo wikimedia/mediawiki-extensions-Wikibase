@@ -818,9 +818,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * anymore.
 	 */
 	destroy: function() {
-		this.preserveEmptyForm = false; // will cause stopEditing() to completely erase all structure
-		                                // TODO/FIXME: not the nicest way of doing this!
-		this.stopEditing( false );
+		this._reTransform( false );
+		if ( this.isPending() ) {
+			this._subject.empty().remove();
+		}
 		if( this._toolbar !== null) {
 			this._toolbar = null;
 		}
