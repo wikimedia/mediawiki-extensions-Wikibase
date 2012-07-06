@@ -10,9 +10,8 @@ namespace STTLanguage;
  * Source code:    https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
  *
  * TODO:
- * - improve stickiness of the chosen language. Right now we use the 'LinkBegin' hook to add the 'uselang' parameter
- *   to all link within the page content when they are generated. This will only work when the content is parsed though,
- *   so this would require disabling the parser cache to work properly on all pages.
+ * - getting rid of the overall hackiness of this extension, especially the part where the output buffer is hacked to
+ *   get the 'uselang' parameter into 'form' elements (see 'STTLanguage\Hooks::onAfterFinalPageOutput' for details).
  *
  * @file StickToThatLanguage.php
  * @ingroup STTLanguage
@@ -44,6 +43,7 @@ $wgHooks['UnitTestsList'][]                    = 'STTLanguage\Hooks::registerUni
 $wgHooks['GetPreferences'][]                   = 'STTLanguage\Hooks::onGetPreferences';
 $wgHooks['UserGetDefaultOptions'][]            = 'STTLanguage\Hooks::onUserGetDefaultOptions';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][] = 'STTLanguage\Hooks::onSkinTemplateOutputPageBeforeExec';
+$wgHooks['LinkBegin'][]                        = 'STTLanguage\Hooks::onLinkBegin';
 
 if( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 	// We don't want to hook in these places when running tests. This is because core tests will fail since they
@@ -51,6 +51,7 @@ if( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 	$wgHooks['BeforePageDisplay'][]                = 'STTLanguage\Hooks::onBeforePageDisplay';
 	$wgHooks['GetLocalURL::Internal'][]            = 'STTLanguage\Hooks::onGetLocalUrlInternally';
 	$wgHooks['LinkBegin'][]                        = 'STTLanguage\Hooks::onLinkBegin';
+	$wgHooks['AfterFinalPageOutput'][]             = 'STTLanguage\Hooks::onAfterFinalPageOutput';
 }
 
 // Resource Loader Module:

@@ -214,4 +214,47 @@ final class Hooks {
 		}
 		return true;
 	}
+
+	/**
+	 * Used to make the language sticky for all forms. This is done by actually grabbing the php output which is about
+	 * to be sent to the user and running a regular expression over it to get the 'uselang' parameter into the post
+	 * request of the form.
+	 *
+	 * @Todo: this is the top of the hackiness of this extension. It's double evil since we are running a regular
+	 *        expression on the overall output, and because we are grabbing the output buffer directly and setting its
+	 *        value with the regex-modified version of the output. This should be done differently, probably a cookie
+	 *        solution would be the best after all.
+	 *
+	 * @since 0.1
+	 *
+	 * @param \OutputPage $out
+	 * @return bool true
+	 */
+	public static function onAfterFinalPageOutput( \OutputPage $out ) {
+		global $wgLang;
+		$startTime = microtime();
+
+		// removes everything from the output buffer and returns it, so we can actually modify it:
+		$output = ob_get_clean();
+
+		// regex which picks <form> if it is valid HTML (allows self-closing tags):
+		/*
+		$recursiveDomRegex = '(?P<innerDOM> <(\w+)(?:\s+[^>]*|)>(?: (?> (?!<\w+(?:\s+[^>]*|)[^\/]> | <\/\w+> ).)* | (?&innerDOM) )*?<\/ \4 > )*';
+		$regex = '/(<form(?:\s+[^>]*|)>)(' . $recursiveDomRegex . '<\/form>)/xs';
+		*/
+		// NOTE: recursive regex will fail on action=edit since there would be too many recursions... lets build a simple one:
+		$regex = '/(<form(?:\s+[^>]*|)>)()/s'; // $2 just to keep it compatible to recursive regex above when testing^^
+
+		// the hidden input field we want to inject into each <form> field:
+		$langInfo = \Html::hidden( 'uselang', $wgLang->getCode() );
+
+		// replacement contains the hidden input field
+		$replacement = "\n" . '$1' . $langInfo . "\n" . '<!-- STTLanguage hacked this form -->' . '$2';
+
+		// replace <form>'s content with content + hidden 'uselang' field
+		echo preg_replace( $regex, $replacement, $output );
+		echo sprintf( '<!-- STTLanguage <form> \'uselang\' injection done in  %01.3f secs -->', microtime() - $startTime ) . "\n";
+
+		return true;
+	}
 }
