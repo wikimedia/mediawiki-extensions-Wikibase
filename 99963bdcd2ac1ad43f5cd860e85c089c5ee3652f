@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX///70\u003d",
+        "filename": "lib/sql/WikibaseLib.pg.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-06T09:41:36Z",
+      "side": 1,
+      "message": "I am not sure you need these /*i*/ prefixes here, can\u0027t see them in the cores postgrees files. Do you know for sure?",
+      "revId": "99963bdcd2ac1ad43f5cd860e85c089c5ee3652f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
