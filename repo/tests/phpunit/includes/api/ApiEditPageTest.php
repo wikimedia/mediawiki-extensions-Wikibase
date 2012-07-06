@@ -39,13 +39,11 @@ class ApiEditPageTest extends ApiTestCase {
 	protected static $edittoken;
 
 	function setUp() {
-		global $wgUser;
 		parent::setUp();
 		$this->doLogin();
 
-		$dbw = wfGetDB( DB_MASTER );
-		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'sites' ) );
 		\Wikibase\Utils::insertSitesForTests();
+
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
@@ -56,24 +54,24 @@ class ApiEditPageTest extends ApiTestCase {
 			'api_test_editor@example.com',
 			array( 'wbeditor' )
 		);
-		//$wgUser = self::$users['wbeditor']->user;
 	}
 
 	/**
 	 * @group API
 	 */
-	function testEdit(  ) {
-
-		$data = $this->doApiRequest( array(
-			'action' => 'login',
-			'lgname' => self::$users['wbeditor']->username,
-			'lgpassword' => self::$users['wbeditor']->password
-		),
+	function testEdit() {
+		$data = $this->doApiRequest(
+			array(
+				'action' => 'login',
+				'lgname' => self::$users['wbeditor']->username,
+				'lgpassword' => self::$users['wbeditor']->password
+			),
 			null,
 			false,
-			self::$users['wbeditor']->user );
+			self::$users['wbeditor']->user
+		);
 
-		$data = $this->doApiRequest(
+		$this->doApiRequest(
 			array(
 				'action' => 'login',
 				'lgtoken' => $data[0]['login']['token'],
