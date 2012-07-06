@@ -68,7 +68,7 @@ $messages['en'] = array(
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
 	'wikibase-error-relational-save-failed' => 'Could not store item identity in the database.',
-	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item with ID [[$3]].',
 
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
@@ -207,7 +207,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a ite link already used by another item. Parameters:
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;
-* $3 is the page title of the conflicting item.",
+* $3 is the id of the conflicting item.",
 	'wikibase-itemlink' => 'used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
 	'wikibase-itemlink-id-wrapper' => 'Used to wrap the items id for a link to an item in parentheses or similar.',
 	'wikibase-itemlink-title' => 'Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',

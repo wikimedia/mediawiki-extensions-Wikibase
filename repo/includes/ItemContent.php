@@ -133,10 +133,8 @@ class ItemContent extends EntityContent {
 				$itemId = $this->item->getId();
 
 				if ( $ipsId !== $itemId ) {
-					$title = Title::newFromID( $row->ips_item_id );
-
 					$status->setResult( false );
-					$status->error( 'wikibase-error-sitelink-already-used', $siteId, $pageName, $title->getPrefixedDBkey() );
+					$status->error( 'wikibase-error-sitelink-already-used', $siteId, $pageName, $ipsId );
 				}
 			}
 		}
