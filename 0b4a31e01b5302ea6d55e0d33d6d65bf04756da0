@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX///wU\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-06T15:58:53Z",
+      "side": 1,
+      "message": "Confusing indenting, better spread it out a bit more",
+      "revId": "0b4a31e01b5302ea6d55e0d33d6d65bf04756da0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
