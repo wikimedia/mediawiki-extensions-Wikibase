@@ -110,6 +110,9 @@ class ChangeNotifier {
 	 */
 	public function handleChanges( array $changes ) {
 		if ( $changes !== array() ) {
+			/**
+			 * @var Change $change
+			 */
 			if ( $this->inTranscation ) {
 				foreach ( $changes as $change ) {
 					if ( !$change->isEmpty() ) {
@@ -120,13 +123,13 @@ class ChangeNotifier {
 			else {
 				$dbw = wfGetDB( DB_MASTER );
 
-				$dbw->begin();
+				$dbw->begin( __METHOD__ );
 
 				foreach ( $changes as $change ) {
 					$change->save();
 				}
 
-				$dbw->commit();
+				$dbw->commit( __METHOD__ );
 			}
 		}
 
