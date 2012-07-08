@@ -218,6 +218,15 @@ $messages['nl'] = array(
 	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
 );
 
+/** Norwegian Nynorsk (‪norsk (nynorsk)‬)
+ * @author Jeblad
+ */
+$messages['nn'] = array(
+	'wbc-desc' => 'Klientutviding for Wikibase, det strukturerte datalageret',
+	'wbc-editlinks' => 'Endre lekker',
+	'wbc-editlinkstitle' => 'Endre nettstadlekkjer',
+);
+
 /** Portuguese (português)
  * @author Malafaya
  */

@@ -116,6 +116,13 @@ $messages['nl'] = array(
 	'wikibaselib-desc' => 'Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client',
 );
 
+/** Norwegian Nynorsk (‪norsk (nynorsk)‬)
+ * @author Jeblad
+ */
+$messages['nn'] = array(
+	'wikibaselib-desc' => 'Felles funksjonalitet for Wikibase, det strukturerte datalageret',
+);
+
 /** Piedmontese (Piemontèis)
  * @author Borichèt
  * @author Dragonòt
