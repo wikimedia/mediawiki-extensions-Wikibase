@@ -16,6 +16,24 @@
       "revId": "4faa68883683f44ec843202dd44fa5c4cb62fd9c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX///Eg\u003d",
+        "filename": "repo/resources/wikibase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-08T18:51:31Z",
+      "side": 1,
+      "message": "You\u0027re right, it should be \"var useLangParam\" or so. No need for explicit check though, dosn\u0027t matter whether it is null, false or an empty string, I only want it when there is any non-empty string. JS is not as stupid as PHP when it comes to checking for an empty string (where in PHP \"0\" is considered empty)",
+      "parentUuid": "AAAAQX///wI\u003d",
+      "revId": "4faa68883683f44ec843202dd44fa5c4cb62fd9c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
