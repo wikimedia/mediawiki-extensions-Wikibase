@@ -774,7 +774,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param jQuery.Event event
 	 */
 	_interfaceHandler_onKeyUp: function( relatedInterface, event ) {
-		if( event.which == 27 ) { // ESC key
+		if( event.which === $.ui.keyCode.ESCAPE ) {
 			this._toolbar.editGroup.btnCancel.doAction();
 		}
 	},
