@@ -213,7 +213,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 *
 	 * @return string|null
 	 */
-	getRestulSetMatch: function( value ) {
+	getResultSetMatch: function( value ) {
 		// trim and lower...
 		value = $.trim( value ).toLowerCase();
 
@@ -229,7 +229,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.validate
 	 */
 	validate: function( value ) {
-		return this.getRestulSetMatch( value );
+		return this.getResultSetMatch( value );
 	},
 
 	/**
@@ -261,7 +261,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @return string|null
 	 */
 	_normalize_fromCurrentResults: function( value ) {
-		var match = this.getRestulSetMatch( value );
+		var match = this.getResultSetMatch( value );
 
 		return ( match === null )
 			? value // not found, return string "unnormalized" but don't return null since it could still be valid!

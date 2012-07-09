@@ -52,15 +52,11 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
         end
-        page.siteIdInputField_element.send_keys :arrow_down
-
         page.siteIdAutocompleteList_element.visible?.should be_true
-        aCListElement = page.getNthElementInAutocompleteList(page.siteIdAutocompleteList_element, 1)
-        aCListElement.visible?.should be_true
-        aCListElement.click
 
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="xyz_thisarticleshouldneverexist_xyz"
+        page.siteIdInputField.should == "English (en)"
         ajax_wait
         if page.saveSitelinkLink?
           page.saveSitelinkLink
@@ -91,26 +87,18 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
         end
-        page.siteIdInputField_element.send_keys :arrow_down
 
         page.siteIdAutocompleteList_element.visible?.should be_true
-        aCListElement = page.getNthElementInAutocompleteList(page.siteIdAutocompleteList_element, 1)
-        aCListElement.visible?.should be_true
-        aCListElement.click
 
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="Ber"
+        page.siteIdInputField.should == "English (en)"
         ajax_wait
         page.wait_until do
           page.pageAutocompleteList_element.visible?
         end
 
-        page.pageInputField_element.send_keys :arrow_down
-        page.pageInputField_element.send_keys :return
-        #check if the enter-key was recognized; if not then click the save-link (issue in chrome & IE)
-        if page.saveSitelinkLink?
-          page.saveSitelinkLink
-        end
+        page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
 
@@ -125,7 +113,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
   context "Check for adding multiple site links UI" do
     it "should check if adding multiple sitelinks works" do
       count = 1
-      sitelinks = [["de", "Ber"], ["ja", "Ber"], ["he", "Ber"]]
+      sitelinks = [["de", "Ber", "Deutsch (de)"], ["ja", "Ber", "日本語 (ja)"], ["he", "Ber", "עברית (he)"]]
       on_page(SitelinksItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
@@ -137,25 +125,18 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.wait_until do
             page.siteIdAutocompleteList_element.visible?
           end
-          page.siteIdInputField_element.send_keys :arrow_down
 
           page.siteIdAutocompleteList_element.visible?.should be_true
-          aCListElement = page.getNthElementInAutocompleteList(page.siteIdAutocompleteList_element, 1)
-          aCListElement.visible?.should be_true
-          aCListElement.click
 
           page.pageInputField_element.enabled?.should be_true
           page.pageInputField = sitelink[1]
+          page.siteIdInputField.should == sitelink[2]
           ajax_wait
           page.wait_until do
             page.pageAutocompleteList_element.visible?
           end
 
-          page.pageInputField_element.send_keys :arrow_down
-          page.pageInputField_element.send_keys :return
-          if page.saveSitelinkLink?
-            page.saveSitelinkLink
-          end
+          page.saveSitelinkLink
           ajax_wait
           page.wait_for_api_callback
 

@@ -71,7 +71,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 
 	/**
 	 * build autocomplete input box and define input handling
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._buildInputElement
 	 */
 	_buildInputElement: function() {
 		// get basic input box
@@ -116,6 +116,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 
 		inputElement.on( 'autocompleteopen', $.proxy( function( event ) {
 			this._highlightMatchingCharacters();
+			// make sure that when the autocomplete list opens and nothing was considered a valid choice, we just
+			// select the first entry as the valid choice (see getResultSetMatch() for details)
+			this._onInputRegistered();
 		}, this ) );
 
 		return inputElement;
@@ -226,15 +229,31 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.getRestulSetMatch
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.getResultSetMatch
 	 *
 	 * @todo: might be nice to move this into wikibase.Site.getIdByString() or something.
 	 */
-	getRestulSetMatch: function( value ) {
+	getResultSetMatch: function( value ) {
 		// trim and lower...
 		value = $.trim( value ).toLowerCase();
 
+		var fallbackSearch = false;
+		var fallback = null;
+
+		if( this.isInEditMode() ) {
+			// This is the search for the 'fallback', if nothing specific matches the input string, we return this
+			// one, the first suggested item in the suggestion list.
+			var autoComplete = this._inputElem.data( 'autocomplete' );
+
+			//autoComplete.search( value );
+			var suggestions = autoComplete.widget().children();
+			if( suggestions.is( ':visible' ) && suggestions.length > 0 ) {
+				fallbackSearch = $( suggestions[0] ).text().toLowerCase();
+			}
+		}
+
 		for( var i in this._currentResults ) {
+			// search the site which matches the input string in any way:
 			var currentItem = this._currentResults[i];
 			if( value == currentItem.site.getId().toLowerCase() ||
 				value == currentItem.site.getShortName().toLowerCase() ||
@@ -243,8 +262,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 			) {
 				return currentItem.site.getId();
 			}
+			// check whether this string matches the fallback (if any)
+			if( fallbackSearch && fallbackSearch == currentItem.label.toLowerCase() ) {
+				fallbackSearch = false; // fallback found, don't search any longer
+				fallback = currentItem.site.getId(); // remembers the ID as fallback in case we can't find any nicer match
+			}
 		}
-		return null; // not found, invalid!
+
+		return fallback; // not found (invalid) or fallback
 	},
 
 	/**
@@ -255,12 +280,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	},
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.EditableValue._normalize_fromCurrentResults
+	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._normalize_fromCurrentResults
 	 *
 	 * Will return the site ID if any of the site names is given.
 	 */
 	_normalize_fromCurrentResults: function( value ) {
-		return this.getRestulSetMatch( value ); // null in case it doesn't exist!
+		return this.getResultSetMatch( value ); // null in case it doesn't exist!
 	},
 
 	/////////////////
