@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//+wM\u003d",
+        "filename": "lib/includes/Item.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xA\u003d",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//+w8\u003d",
         "filename": "lib/includes/ItemObject.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-07-09T12:37:29Z",
       "side": 1,
       "message": "spaces: should be $pageName \u003d false",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+wQ\u003d",
+        "filename": "lib/includes/ItemObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+w8\u003d",
       "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//+wI\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xw\u003d",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//+xE\u003d",
         "filename": "repo/includes/api/ApiSetItem.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2012-07-09T12:37:29Z",
       "side": 1,
       "message": "here and all further: don\u0027t leave unused code in here.",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+v4\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xE\u003d",
       "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//+v0\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xI\u003d",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//+xQ\u003d",
         "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2012-07-09T12:30:20Z",
       "side": 1,
       "message": "please remove unused code to make the overall code more readable.",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+vw\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xQ\u003d",
       "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//+vo\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiLanguageAttributeTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xY\u003d",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//+xk\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2012-07-09T12:23:12Z",
       "side": 1,
       "message": "here and further down: please remove debugging code.",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+vc\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xk\u003d",
       "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//+vY\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xg\u003d",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//+xs\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
         "patchSetId": 3
@@ -166,6 +328,24 @@
       "writtenOn": "2012-07-09T12:18:33Z",
       "side": 1,
       "message": "Trailing whitespace",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+vU\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-09T13:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//+xs\u003d",
       "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
