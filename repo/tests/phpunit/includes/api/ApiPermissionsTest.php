@@ -93,7 +93,6 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 			}
 
 			$params[ 'action' ] = $action;
-
 			list( $re, , ) = $this->doApiRequest( $params, null, false, $this->user );
 
 			if ( $expectedError == null ) {
@@ -156,8 +155,8 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 		$permissions[] = array( #5
 			array( # permissions
-				'*'    => array( 'item-add' => false ),
-				'user' => array( 'item-add' => false )
+				'*'    => array( 'item-create' => false ),
+				'user' => array( 'item-create' => false )
 			),
 			'cant-edit' # error
 		);
@@ -170,26 +169,25 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	 */
 	function testAddItem( $permissions, $expectedError ) {
 		$itemData = array(
-			'label' => array( 'en' => 'Test' ),
+			'labels' => array( 'en' => 'Test' ),
 		);
 
 		$json = new \Services_JSON();
 
 		$params = array(
-			'item' => 'add',
 			'data' => $json->encode( $itemData ),
 		);
 
 		$this->doPermissionsTest( 'wbsetitem', $params, $permissions, $expectedError );
 	}
 
-	function provideLinkSiteAddPermissions() {
+	function provideSetSiteLinkPermissions() {
 		$permissions = $this->provideEditPermissions();
 
 		$permissions[] = array( #4
 			array( # permissions
-				'*'    => array( 'site-link-add' => false ),
-				'user' => array( 'site-link-add' => false )
+				'*'    => array( 'sitelink-update' => false ),
+				'user' => array( 'sitelink-update' => false )
 			),
 			'cant-edit' # error
 		);
@@ -198,9 +196,9 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * @dataProvider provideLinkSiteAddPermissions
+	 * @dataProvider provideSetSiteLinkPermissions
 	 */
-	function testLinkSiteAdd( $permissions, $expectedError ) {
+	function testSetSiteLink( $permissions, $expectedError ) {
 		#XXX: hack: clear tables first. This may create database inconsistencies.
 		#TODO: Use $this->tables_used *everywhere*, so each test cleans up after itself.
 		$dbw = wfGetDB( DB_MASTER );
@@ -208,12 +206,11 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 		$params = array(
 			'id' => self::$itemContent->getItem()->getID(),
-			'link' => 'add',
 			'linksite' => 'enwiki',
 			'linktitle' => 'Oslo',
 		);
 
-		$this->doPermissionsTest( 'wblinksite', $params, $permissions, $expectedError );
+		$this->doPermissionsTest( 'wbsetsitelink', $params, $permissions, $expectedError );
 	}
 
 	function provideSetLabelPermissions() {
@@ -221,8 +218,8 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 		$permissions[] = array( #4
 			array( # permissions
-				'*'    => array( 'lang-attr-update' => false ),
-				'user' => array( 'lang-attr-update' => false )
+				'*'    => array( 'label-update' => false ),
+				'user' => array( 'label-update' => false )
 			),
 			'cant-edit' # error
 		);
