@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQX//+xA\u003d",
+        "filename": "lib/includes/Item.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-09T12:37:29Z",
+      "side": 1,
+      "message": "spaces: should be $pageName \u003d false",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+w8\u003d",
+        "filename": "lib/includes/ItemObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-09T12:37:29Z",
+      "side": 1,
+      "message": "spaces: should be $pageName \u003d false",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//+xw\u003d",
         "filename": "repo/includes/api/Api.php",
         "patchSetId": 3
@@ -13,6 +47,40 @@
       "writtenOn": "2012-07-09T12:18:33Z",
       "side": 1,
       "message": "Whitespace",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+xE\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-09T12:37:29Z",
+      "side": 1,
+      "message": "here and all further: don\u0027t leave unused code in here.",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+xI\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-09T12:37:29Z",
+      "side": 1,
+      "message": "unused code.",
       "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
