@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//+xQ\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-09T12:30:20Z",
+      "side": 1,
+      "message": "please remove unused code to make the overall code more readable.",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+xY\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiLanguageAttributeTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-09T12:30:20Z",
+      "side": 1,
+      "message": "will this be needed later? if not, remove it please.",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//+xk\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
         "patchSetId": 3
