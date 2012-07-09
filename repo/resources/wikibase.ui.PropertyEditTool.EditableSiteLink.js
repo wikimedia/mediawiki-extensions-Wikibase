@@ -158,6 +158,32 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	},
 
 	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.stopEditing
+	 *
+	 * @param bool save whether to save the current value
+	 * @return jQuery.Promise
+	 */
+	stopEditing: function( save ) {
+		var promise = wikibase.ui.PropertyEditTool.EditableValue.prototype.stopEditing.call( this, save );
+		/*
+		 * prevent siteId input element from appearing again when triggering edit on a just created
+		 * site link without having reloaded the page; however, it is required to check whether the
+		 * corresponding interface (still) exists since it might have been destroyed when - instead
+		 * of being saved - the pending value got removed again by cancelling
+		 */
+		promise.done(
+			$.proxy(
+				function() {
+					if ( typeof this._interfaces !== null ) {
+						this._interfaces.siteId.setActive( this.isPending() );
+					}
+				}, this
+			)
+		);
+		return promise;
+	},
+
+	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.getInputHelpMessage
 	 *
 	 * @return string tooltip help message
