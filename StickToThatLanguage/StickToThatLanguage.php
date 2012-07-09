@@ -58,9 +58,16 @@ if( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
 $wgResourceModules['sticktothatlanguage'] = array(
 	'localBasePath' => Ext::getDir(),
 	'remoteBasePath' => Ext::getScriptPath(),
+	'scripts' => array(
+		'resources/StickToThatLanguage.js'
+	),
 	'styles' => array(
 		'resources/StickToThatLanguage.css'
 	),
+	'messages' => array(
+		'sttl-languages-more-link'
+	),
+	'group' => 'ext.sticktothatlanguage'
 );
 
 // Include settings:

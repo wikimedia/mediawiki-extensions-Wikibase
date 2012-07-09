@@ -6,9 +6,23 @@
  * @ingroup STTLanguage
  *
  * @license GNU GPL v2+
- * @author Daniel Werner
+ * @author H. Snater
  */
 
 .sttl-lasttoplang {
 	margin-bottom: 0.5em!important;
+	border-bottom: 1px solid lightgray;
+}
+
+#p-lang .body h6 {
+	margin-bottom: 0.4em;
+}
+
+#p-lang .body h6 .ui-icon {
+	float: left;
+	margin-left: -5px;
+}
+
+.sttl-languages-more {
+	display: none;
 }

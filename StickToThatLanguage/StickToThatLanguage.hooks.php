@@ -157,8 +157,9 @@ final class Hooks {
 		global $egSTTLanguageDisplaySelector;
 
 		if( $egSTTLanguageDisplaySelector ) {
-			// add styles for language selector:
+			// add styles for language selector (has to be done separately for non-JS version):
 			$out->addModuleStyles( 'sticktothatlanguage' );
+			$out->addModules( 'sticktothatlanguage' );
 		}
 
 		return true;
