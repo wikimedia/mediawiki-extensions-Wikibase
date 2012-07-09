@@ -77,54 +77,51 @@ class ApiGetItems extends Api {
 		$this->setUsekeys( $params );
 
 		foreach ($params['ids'] as $id) {
-			$page = ItemContent::getWikiPageForId( $id );
-			if ( $page->exists() ) {
-				// as long as getWikiPageForId only returns ids for legal items this holds
-				$itemContent = $page->getContent();
 
-				if ( is_null( $itemContent ) ) {
-					continue;
-				}
+			$itemPath = array( 'items', $id );
+			$res = $this->getResult();
 
-				if ( !( $itemContent instanceof ItemContent ) ) {
-					$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
-				}
+			$res->addValue( $itemPath, 'id', $id );
 
-				$itemPath = array( 'items', $id );
-				$res = $this->getResult();
+			if ( $params['props'] !== array() ) {
+				$page = ItemContent::getWikiPageForId( $id );
+				if ( $page->exists() ) {
+					// as long as getWikiPageForId only returns ids for legal items this holds
+					$itemContent = $page->getContent();
 
-				$res->addValue(
-					$itemPath,
-					'id',
-					$id
-				);
+					if ( is_null( $itemContent ) ) {
+						continue;
+					}
 
-				$item = $itemContent->getItem();
+					if ( !( $itemContent instanceof ItemContent ) ) {
+						$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
+					}
 
-				foreach ( $params['props'] as $key ) {
-					switch ( $key ) {
-					case 'aliases':
-						$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
-						break;
-					case 'sitelinks':
-						$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath );
-						break;
-					case 'descriptions':
-						$this->addDescriptionsToResult( $item->getDescriptions( $languages ), $itemPath );
-						break;
-					case 'labels':
-						$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
-						break;
-					default:
-						// should never be here, because it should be something for the earlyer cases
-						$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+					$item = $itemContent->getItem();
+
+					foreach ( $params['props'] as $key ) {
+						switch ( $key ) {
+						case 'aliases':
+							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
+							break;
+						case 'sitelinks':
+							$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath );
+							break;
+						case 'descriptions':
+							$this->addDescriptionsToResult( $item->getDescriptions( $languages ), $itemPath );
+							break;
+						case 'labels':
+							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
+							break;
+						default:
+							// should never be here, because it should be something for the earlyer cases
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+						}
 					}
 				}
-			}
-			else {
-				$this->getResult()->addValue( 'items', --$missing,
-					array( 'id' => $id, 'missing' => "")
-				);
+				else {
+					$this->getResult()->addValue( $itemPath, 'missing', "" );
+				}
 			}
 		}
 		$this->getResult()->setIndexedTagName_internal( array( 'items' ), 'item' );
@@ -190,7 +187,7 @@ class ApiGetItems extends Api {
 				"Will be further filtered by any languages given."
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
-				'This parameter allows filtering these down to one or more languages by providing their language codes.'
+				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
 			),
 		) );
 	}
@@ -226,9 +223,9 @@ class ApiGetItems extends Api {
 		return array(
 			'api.php?action=wbgetitems&ids=42'
 			=> 'Get item number 42 with language attributes in all available languages',
-			'api.php?action=wbgetitems&ids=42&language=en'
+			'api.php?action=wbgetitems&ids=42&languages=en'
 			=> 'Get item number 42 with language attributes in English language',
-			'api.php?action=wbgetitems&sites=en&titles=Berlin&language=en'
+			'api.php?action=wbgetitems&sites=en&titles=Berlin&languages=en'
 			=> 'Get the item for page "Berlin" on the site "en", with language attributes in English language',
 		);
 	}

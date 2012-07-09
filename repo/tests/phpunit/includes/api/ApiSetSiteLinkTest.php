@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use Wikibase\ApiLinkSite;
+use Wikibase\ApiSetSiteLink;
 
 /**
  * Additional tests for ApiLinkSite API module.
@@ -21,7 +21,7 @@ use Wikibase\ApiLinkSite;
  * @licence GNU GPL v2+
  * @author JOhn Erling Blad < jeblad@gmail.com >
  */
-class ApiLinkSiteTest extends ApiTestCase {
+class ApiSetSiteLinkTest extends ApiTestCase {
 
 	public static $jsonData;
 
@@ -34,8 +34,8 @@ class ApiLinkSiteTest extends ApiTestCase {
 	 * @dataProvider providerQueryPageAtSite
 	 */
 	function testQueryPageAtSite( $globalSiteId, $pageTitle, $jsonData, $expected ) {
-		ApiLinkSiteTest::$jsonData = $jsonData;
-		$mock = new ApiMockLinkSite();
+		ApiSetSiteLinkTest::$jsonData = $jsonData;
+		$mock = new ApiMockSetSiteLink();
 		$this->assertEquals( $expected, $mock->queryPageAtSite( $globalSiteId, $pageTitle ) );
 	}
 
@@ -43,7 +43,7 @@ class ApiLinkSiteTest extends ApiTestCase {
 	 * @dataProvider providerTitleToLabel
 	 */
 	function testTitleToPage( $externalData, $pageTitle, $expected ) {
-		$mock = new ApiMockLinkSite();
+		$mock = new ApiMockSetSiteLink();
 		$this->assertEquals( $expected, $mock->titleToPage( $externalData, $pageTitle ) );
 	}
 
@@ -248,11 +248,11 @@ class ApiLinkSiteTest extends ApiTestCase {
 	}
 }
 
-class ApiMockLinkSite extends ApiLinkSite {
+class ApiMockSetSiteLink extends ApiSetSiteLink {
 
 	public function __construct() { }
 	public function http_get($url, $pageTitle) {
-		return ApiLinkSiteTest::$jsonData;
+		return ApiSetSiteLinkTest::$jsonData;
 	}
 }
 

@@ -15,7 +15,7 @@ use ApiBase, User;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiSetItem extends Api {
+class ApiSetItem extends ApiModifyItem {
 
 	/**
 	 * @see  Api::getRequiredPermissions()
@@ -24,99 +24,140 @@ class ApiSetItem extends Api {
 		$permissions = parent::getRequiredPermissions( $item, $params );
 
 		$permissions[] = 'edit';
-		$permissions[] = 'item-' . $params['item'];
+		$permissions[] = 'item-' . ( $item->getId() ? 'override' : 'create' );
 		return $permissions;
 	}
 
 	/**
-	 * Main method. Does the actual work and sets the result.
+	 * Create the item if its missing.
+	 *
+	 * @since    0.1
+	 *
+	 * @param array       $params
+	 *
+	 * @internal param \Wikibase\ItemContent $itemContent
+	 * @return ItemContent Newly created item
+	 */
+	protected function createItem( array $params ) {
+		if ( isset( $params['data'] ) ) {
+			return ItemContent::newEmpty();
+		}
+		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+	}
+
+	/**
+	 * Make sure the required parameters are provided and that they are valid.
 	 *
 	 * @since 0.1
+	 *
+	 * @param array $params
 	 */
-	public function execute() {
-		// TODO: Rewrite as more fine grained permissions
-		// note that we use permissions at the page level while we should use permissions
-		// at a more fine grained level
-		// especially note that we need the page for this specific implementation but that
-		// we could get away with only isAllowed(/*right*/) for internal content within an
-		// item
-		$params = $this->extractRequestParams();
-		$user = $this->getUser();
+	protected function validateParameters( array $params ) {
+		// note that this is changed back and could fail
+		if ( !( isset( $params['data'] ) OR  isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-data-or-id-xor-wikititle' ), 'data-or-id-xor-wikititle' );
+		}
+	}
 
-		if ( $params['gettoken'] ) {
-			// in JSON callback mode, no tokens should be returned
-			// this will then block later updates through reuse of cached scripts
-			if ( !is_null( $this->getMain()->getRequest()->getVal( 'callback' ) ) ) {
-				return;
+	/**
+	 * @see ApiModifyItem::modifyItem()
+	 *
+	 * @since 0.1
+	 *
+	 * @param ItemContent $itemContent
+	 * @param array $params
+	 *
+	 * @return boolean Success indicator
+	 */
+	protected function modifyItem( ItemContent &$itemContent, array $params ) {
+		if ( isset( $params['data'] ) ) {
+			$data = json_decode( $params['data'], true );
+			if ( is_null( $data ) ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-json-invalid' ), 'json-invalid' );
 			}
-
-			// continue 
-			$res['setitemtoken'] = $user->getEditToken();
-			$this->getResult()->addValue( null, $this->getModuleName(), $res );
-			return;
+			$sites = array_flip( Sites::singleton()->getGlobalIdentifiers() );
+			$languages = array_flip( Utils::getLanguageCodes() );
+			foreach ( $data as $props => $list ) {
+				switch ($props) {
+				case 'labels':
+					foreach ( $list as $langCode => $value ) {
+						if ( !is_string( $value ) ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
+						}
+						if ( !array_key_exists( $langCode, $languages ) ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-language' ), 'not-recognized-language' );
+						}
+						if ( $value === "" ) {
+							$itemContent->getItem()->removeLabel( $langCode );
+						}
+						else {
+							$itemContent->getItem()->setLabel( $langCode, Utils::squashToNFC( $value ) );
+						}
+					}
+					break;
+				case 'descriptions':
+					foreach ( $list as $langCode => $value ) {
+						if ( !is_string( $value ) ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
+						}
+						if ( !array_key_exists( $langCode, $languages ) ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-language' ), 'not-recognized-language' );
+						}
+						if ( $value === "" ) {
+							$itemContent->getItem()->removeDescription( $langCode );
+						}
+						else {
+							$itemContent->getItem()->setDescription( $langCode, Utils::squashToNFC( $value ) );
+						}
+					}
+					break;
+				case 'aliases':
+					foreach ( $list as $langCode => $aliases ) {
+						if ( !is_array( $aliases ) ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-array' ), 'not-recognized-array' );
+						}
+						if ( !array_key_exists( $langCode, $languages ) ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-language' ), 'not-recognized-language' );
+						}
+						$newAliases = array();
+						foreach ( $aliases as $alias ) {
+							if ( !is_string( $alias ) ) {
+								$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
+							}
+							$newAliases[] = Utils::squashToNFC( $alias );
+						}
+						$itemContent->getItem()->setAliases( $langCode, $newAliases );
+					}
+					break;
+				case 'sitelinks':
+					// FIXME: this does no normalization
+					foreach ( $list as $siteId => $pageName ) {
+						if ( !is_string( $pageName ) ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
+						}
+						if ( !array_key_exists( $siteId, $sites ) ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'not-recognized-siteid' );
+						}
+						$itemContent->getItem()->addSiteLink( $siteId, $pageName, 'set' );
+					}
+					break;
+				default:
+					$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+				}
+			}
 		}
-
-		// This is really already done with needTokens()
-		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
-		}
-
-		if ( !$params['data'] ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-data' ), 'no-data' );
-		}
-
-		// lacks error checking
-		$itemContent = ItemContent::newFromArray( json_decode( $params['data'], true ) );
-
-		if ( is_null( $itemContent ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
-		}
-
-		if ( !( $itemContent instanceof ItemContent ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
-		}
-
-		$status = $this->checkPermissions( $itemContent, $user, $params );
-
-		if ( !$status->isOK() ) {
-			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
-		}
-
-		$status = $itemContent->save();
-
-		if ( !$status->isOK() ) {
-			$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
-		}
-
-		//if ( !isset($params['summary']) ) {
-			// TODO: make a proper summary
-			//$params['summary'] = $item->getTextForSummary();
-			//$params['summary'] = 'dummy';
-		//}
-
-		$languages = $params['languages'];
 
 		$item = $itemContent->getItem();
 
-		// because this is serialized and cleansed we can simply go for known values
 		$res = $this->getResult();
-		$res->addValue(
-			'item',
-			'id',
-			$item->getId()
-		);
 
 		$this->setUsekeys( $params );
+		$this->addLabelsToResult( $item->getLabels(), 'item' );
+		$this->addDescriptionsToResult( $item->getDescriptions(), 'item' );
 		$this->addAliasesToResult( $item->getAllAliases(), 'item' );
 		$this->addSiteLinksToResult( $item->getSiteLinks(), 'item' );
-		$this->addDescriptionsToResult( $item->getDescriptions( $languages ), 'item' );
-		$this->addLabelsToResult( $item->getLabels( $languages ), 'item' );
 
-		$res->addValue(
-			null,
-			'success',
-			(int)$status->isOK()
-		);
+		return true;
 	}
 
 	/**
@@ -129,7 +170,6 @@ class ApiSetItem extends Api {
 			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
 			array( 'code' => 'cant-edit', 'info' => wfMsg( 'wikibase-api-cant-edit' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
-			array( 'code' => 'session-failure', 'info' => wfMsg( 'wikibase-api-session-failure' ) ),
 			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 		) );
 	}
@@ -170,19 +210,6 @@ class ApiSetItem extends Api {
 			'data' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'languages' => array(
-				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
-			),
-			//'summary' => array(
-			//	ApiBase::PARAM_TYPE => 'string',
-			//	ApiBase::PARAM_DFLT => __CLASS__, // TODO
-			//),
-			'item' => array(
-				ApiBase::PARAM_TYPE => array( 'add' ),
-				ApiBase::PARAM_DFLT => 'add',
-			),
-			'token' => null,
-			'gettoken' => false,
 		) );
 	}
 
@@ -197,15 +224,6 @@ class ApiSetItem extends Api {
 			'data' => array( 'The serialized object that is used as the data source.',
 				"The newly created item will be assigned an item 'id'."
 			),
-			'languages' => 'Language for the labels and descriptions',
-			'item' => array( 'Indicates if you are changing the content of the item.',
-				"add - the item should not exist before the call or an error will be reported.",
-				"update - the item shuld exist before the call or an error will be reported.",
-				"set - the item could exist or not before the call.",
-			),
-			//'summary' => 'Summary for the edit.',
-			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
-			'gettoken' => 'If set, a "setitem" token will be returned, and no other action will be taken',
 		) );
 	}
 
@@ -227,7 +245,7 @@ class ApiSetItem extends Api {
 		return array(
 			'api.php?action=wbsetitem&data={}&format=jsonfm'
 			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed. Report it as pretty printed json format.',
-			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			'api.php?action=wbsetitem&data={"labels":{"de":"de-label","en":"en-label"},"descriptions":{"de":"de-desc","en":"en-desc"}}'
 			=> 'Set a more complete JSON structure for the item, it will be extended with an item id and the structure cleansed and completed.',
 		);
 	}
@@ -246,5 +264,5 @@ class ApiSetItem extends Api {
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}
-	
+
 }

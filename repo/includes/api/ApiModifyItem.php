@@ -28,6 +28,18 @@ abstract class ApiModifyItem extends Api {
 	}
 
 	/**
+	 * Create the item if its missing.
+	 *
+	 * @since    0.1
+	 *
+	 * @param array       $params
+	 *
+	 * @internal param \Wikibase\ItemContent $itemContent
+	 * @return ItemContent Newly created item
+	 */
+	protected abstract function createItem( array $params );
+
+	/**
 	 * Actually modify the item.
 	 *
 	 * @since    0.1
@@ -49,14 +61,8 @@ abstract class ApiModifyItem extends Api {
 	 */
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
-		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) )
-			&& !( isset( $params['item'] ) && $params['item'] === 'add' ) ) {
-
+		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
-		}
-
-		if ( isset( $params['id'] ) && $params['item'] === 'add' ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-add-with-id' ), 'add-with-id' );
 		}
 	}
 
@@ -69,10 +75,19 @@ abstract class ApiModifyItem extends Api {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
+		if ( $params['gettoken'] ) {
+			$this->addTokenToResult( $user->getEditToken() );
+			$this->getResult()->addValue( null, 'success', (int)true );
+			return;
+		}
+
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
 		}
+
+		// this is really peeking into a subclass, which is not good
+		$hasData = isset( $params['data'] ) ? strlen( preg_replace( '/(^\s*|\s*$)/s', '', $params['data'] ) ) : false;
 
 		$normTitle = '';
 		$hasLink = false;
@@ -83,14 +98,6 @@ abstract class ApiModifyItem extends Api {
 		$itemContent = null;
 
 		$this->validateParameters( $params );
-
-		//if ( !isset($params['summary']) ) {
-		//	$params['summary'] = 'dummy';
-		//}
-
-		if ( $params['item'] === 'update' && !isset( $params['id'] ) && !$hasLink ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-update-without-id' ), 'update-without-id' );
-		}
 
 		if ( isset( $params['id'] ) ) {
 			$itemContent = ItemContent::getFromId( $params['id'] );
@@ -111,24 +118,27 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 		}
 
-		if ( !is_null( $itemContent ) && $params['item'] === 'add' ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-add-exists' ), 'add-exists', 0, array( 'item' => array( 'id' => $params['id'] ) ) );
+		//if ( is_null( $itemContent ) && !$hasData ) {
+		if ( is_null( $itemContent ) ) {
+			$itemContent = $this->createItem( $params );
+
+			//if ( !is_null( $itemContent ) && $hasLink ) {
+			//	$itemContent->getItem()->addSiteLink( $params['site'], $params['title'] );
+			//}
 		}
 
 		if ( is_null( $itemContent ) ) {
-			$itemContent = ItemContent::newEmpty();
-
-			if ( $hasLink ) {
-				$itemContent->getItem()->addSiteLink( $params['site'], $params['title'] );
-			}
+			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
 		}
 
+		// At this point only change/edit rights should be checked
 		$status = $this->checkPermissions( $itemContent, $user, $params );
 
 		if ( !$status->isOK() ) {
 			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 
+		// FIXME: we can (?) do this before we do permission checks as long as we don't save
 		$this->setUsekeys( $params );
 		$success = $this->modifyItem( $itemContent, $params );
 
@@ -136,38 +146,58 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
 		}
 
-		// Do the actual save, or if it don't exist yet create it.
-		$status = $itemContent->save();
-		$success = $status->isOK();
-
-		if ( !$success ) {
+		if ( Settings::get( 'apiDeleteEmpty' ) && $itemContent->isEmpty() ) {
 			if ( $itemContent->isNew() ) {
-				$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
+				// Delete the object if the user holds enough rights.
+				$allowed = $itemContent->userCan( 'delete' );
+				if ( $allowed ) {
+					// TODO: Delete an existing object
+					$this->getResult()->addValue( 'item', 'deleted', "" );
+				}
+				else {
+					// Give an error message
+					$this->dieUsage( $status->getWikiText( 'wikibase-api-delete-failed' ), 'delete-failed' );
+				}
 			}
 			else {
-				$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
+				// Just give a message that it was newer created
+				$this->getResult()->addValue( 'item', 'newercreated', "" );
 			}
 		}
+		else {
+			// Do the actual save, or if it don't exist yet create it.
+			$status = $itemContent->save();
+			$success = $status->isOK();
 
-		if ( $success ) {
-			$this->getResult()->addValue(
-				'item',
-				'id', $itemContent->getItem()->getId()
-			);
-
-			if ( $hasLink ) {
-				$normalized = array();
-
-				if ( $normTitle !== $params['title'] ) {
-					$normalized['from'] = $params['title'];
-					$normalized['to'] = $normTitle;
+			if ( !$success ) {
+				if ( $itemContent->isNew() ) {
+					$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
 				}
+				else {
+					$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
+				}
+			}
 
-				if ( $normalized !== array() ) {
-					$this->getResult()->addValue(
-						'item',
-						'normalized', $normalized
-					);
+			if ( $success ) {
+				$this->getResult()->addValue(
+					'item',
+					'id', $itemContent->getItem()->getId()
+				);
+
+				if ( $hasLink ) {
+					$normalized = array();
+
+					if ( $normTitle !== $params['title'] ) {
+						$normalized['from'] = $params['title'];
+						$normalized['to'] = $normTitle;
+					}
+
+					if ( $normalized !== array() ) {
+						$this->getResult()->addValue(
+							'item',
+							'normalized', $normalized
+						);
+					}
 				}
 			}
 		}
@@ -199,7 +229,7 @@ abstract class ApiModifyItem extends Api {
 			array( 'code' => 'invalid-contentmodel', 'info' => wfMsg( 'wikibase-api-invalid-contentmodel' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
 			array( 'code' => 'session-failure', 'info' => wfMsg( 'wikibase-api-session-failure' ) ),
-			) );
+		) );
 	}
 
 	/**
@@ -235,9 +265,6 @@ abstract class ApiModifyItem extends Api {
 	 */
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
-			//'create' => array(
-			//	ApiBase::PARAM_TYPE => 'boolean',
-			//),
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
@@ -247,15 +274,11 @@ abstract class ApiModifyItem extends Api {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			//'summary' => array(
-			//	ApiBase::PARAM_TYPE => 'string',
-			//	ApiBase::PARAM_DFLT => __CLASS__, // TODO
-			//),
-			'item' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set' ),
-				ApiBase::PARAM_DFLT => 'update',
-			),
 			'token' => null,
+			'gettoken' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
+			),
 		) );
 	}
 
@@ -267,22 +290,20 @@ abstract class ApiModifyItem extends Api {
 	 */
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
-			'id' => array( 'The ID of the item.',
+			'id' => array( 'The numeric identifier for the item.',
 				"Use either 'id' or 'site' and 'title' together."
 			),
 			'site' => array( 'An identifier for the site on which the page resides.',
-				"Use together with 'title'."
+				"Use together with 'title' to make a complete sitelink."
 			),
 			'title' => array( 'Title of the page to associate.',
-				"Use together with 'site'."
+				"Use together with 'site' to make a complete sitelink."
 			),
-			'item' => array( 'Indicates if you are changing the content of the item.',
-				"add - the item should not exist before the call or an error will be reported.",
-				"update - the item shuld exist before the call or an error will be reported.",
-				"set - the item could exist or not before the call.",
+			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
+				'During a normal reply a token can be returned spontaneously and the requester should',
+				'then start using the new token from the next request, possibly when repeating a failed',
+				'request.'
 			),
-			// 'summary' => 'Summary for the edit.',
-			'token' => 'A "setitem" token previously obtained through the gettoken parameter', // or prop=info,
 		) );
 	}
 
