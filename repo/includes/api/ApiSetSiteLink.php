@@ -17,7 +17,7 @@ use ApiBase, User, Http;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiLinkSite extends ApiModifyItem {
+class ApiSetSiteLink extends ApiModifyItem {
 
 	/**
 	 * @see  ApiModifyItem::getRequiredPermissions()
@@ -25,8 +25,38 @@ class ApiLinkSite extends ApiModifyItem {
 	protected function getRequiredPermissions( Item $item, array $params ) {
 		$permissions = parent::getRequiredPermissions( $item, $params );
 
-		$permissions[] = 'site-link-' . $params['link'];
+		$permissions[] = 'sitelink-' . ( strlen( $params['linktitle'] ) ? 'update' : 'remove' );
 		return $permissions;
+	}
+
+	/**
+	 * Make sure the required parameters are provided and that they are valid.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $params
+	 */
+	protected function validateParameters( array $params ) {
+		parent::validateParameters( $params );
+
+		if ( isset( $params['linktitle'] ) ) {
+			$params['linktitle'] = isset( $params['linktitle'] ) ? Utils::squashToNFC( $params['linktitle'] ) : '';
+		}
+	}
+
+	/**
+	 * Create the item if its missing.
+	 *
+	 * @since    0.1
+	 *
+	 * @param array       $params
+	 *
+	 * @internal param \Wikibase\ItemContent $itemContent
+	 * @return ItemContent Newly created item
+	 */
+	protected function createItem( array $params ) {
+		//$this->dieUsage( wfMsg( 'wikibase-api-cant-create' ), 'cant-create' );
+		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 	}
 
 	/**
@@ -40,17 +70,20 @@ class ApiLinkSite extends ApiModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( ItemContent &$itemContent, array $params ) {
-		if ( isset($params['link']) && $params['link'] === 'remove') {
-			return $itemContent->getItem()->removeSiteLink( $params['linksite'], $params['linktitle'] );
-		}
-		else {
-			// Clean up initial and trailing spaces and compress rest of the spaces.
-			$linktitle = Utils::squashToNFC( $params['linktitle'] );
-			if ( !isset( $linktitle ) || $linktitle === "" ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-empty-link-title' ), 'empty-link-title' );
+
+		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
+			$sitelinks = $itemContent->getItem()->getSiteLinks();
+			if ( !isset( $sitelinks[$params['linksite']] ) ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-remove-sitelink-failed' ), 'remove-sitelink-failed' );
 			}
 
-			$data = $this->queryPageAtSite( $params['linksite'], $linktitle );
+			$this->addSiteLinksToResult( array( $params['linksite'] => $sitelinks[$params['linksite']] ), 'item' );
+			$itemContent->getItem()->removeSiteLink( $params['linksite'] );
+			return true;
+		}
+		else {
+
+			$data = $this->queryPageAtSite( $params['linksite'], $params['linktitle'] );
 			if ( $data === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-external-data' ), 'no-external-data' );
 			}
@@ -58,11 +91,11 @@ class ApiLinkSite extends ApiModifyItem {
 				$this->dieUsage( wfMsg( 'wikibase-api-client-error' ), 'client-error' );
 			}
 
-			$page = $this->titleToPage( $data, $linktitle );
+			$page = $this->titleToPage( $data, $params['linktitle'] );
 			if ( isset( $page['missing'] ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
 			}
-			$ret = $itemContent->getItem()->addSiteLink( $params['linksite'], $page['title'], $params['link'] );
+			$ret = $itemContent->getItem()->addSiteLink( $params['linksite'], $page['title'], 'set' );
 			if ( $ret === false ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
 			}
@@ -253,20 +286,13 @@ class ApiLinkSite extends ApiModifyItem {
 		$allowedParams = parent::getAllowedParams();
 		$allowedParams['item'][ApiBase::PARAM_DFLT] = 'set';
 		return array_merge( $allowedParams, array(
-			'linkbadge' => array(
-				ApiBase::PARAM_TYPE => 'string', // TODO: list? integer? how will badges be represented?
-			),
 			'linksite' => array(
 				ApiBase::PARAM_TYPE => Sites::singleton()->getGlobalIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'linktitle' => array(
 				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'link' => array(
-				ApiBase::PARAM_TYPE => array( 'add', 'update', 'set', 'remove' ),
-				ApiBase::PARAM_DFLT => 'add',
+				//ApiBase::PARAM_REQUIRED => true,
 			),
 		) );
 	}
@@ -281,13 +307,6 @@ class ApiLinkSite extends ApiModifyItem {
 		return array_merge( parent::getParamDescription(), array(
 			'linksite' => 'The identifier of the site on which the article to link resides',
 			'linktitle' => 'The title of the article to link',
-			'linkbadge' => 'Badge to give to the page, ie "good" or "featured"',
-			'link' => array( 'Indicates if you are adding or removing the link, and in case of adding, if it can or should already exist.',
-				"add - the link should not exist before the call or an error will be reported.",
-				"update - the link should exist before the call or an error will be reported.",
-				"set - the link could exist or not before the call.",
-				"remove - the link is removed if its found."
-			)
 		) );
 	}
 
@@ -307,14 +326,10 @@ class ApiLinkSite extends ApiModifyItem {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wblinksite&id=42&linksite=en&linktitle=Wikimedia'
-			=> 'Add title "Wikimedia" for English page with id "42" if the link does not exist',
-			'api.php?action=wblinksite&id=42&linksite=en&linktitle=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
-			=> 'Add title "Wikimedia" for English page with id "42" with an edit summary if the link does not exist',
-			'api.php?action=wblinksite&id=42&linksite=en&linktitle=Wikimedia&linkbadge='
-			=> 'Add title "Wikimedia" for English page with id "42", and with a badge, if the link does not exist',
-			'api.php?action=wblinksite&id=42&linksite=en&linktitle=Wikimedia&link=update'
-			=> 'Updates title "Wikimedia" for English page with id "42" if the link exist',
+			'api.php?action=wbsetsitelink&id=42&linksite=en&linktitle=Wikimedia'
+			=> 'Add title "Wikimedia" for English page with id "42" if the site link does not exist',
+			'api.php?action=wbsetsitelink&id=42&linksite=en&linktitle=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
+			=> 'Add title "Wikimedia" for English page with id "42", if the site link does not exist',
 		);
 	}
 
@@ -322,7 +337,7 @@ class ApiLinkSite extends ApiModifyItem {
 	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wblinksite';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetsitelink';
 	}
 
 	/**
