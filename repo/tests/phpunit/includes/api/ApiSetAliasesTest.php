@@ -73,7 +73,7 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 	 */
 	public function testSetAliases( $langCode, $param, $value, $expected ) {
 		$req = array();
-		$token = $this->gettoken();
+		$token = $this->getItemToken();
 
 		if ( $token ) {
 			$req['token'] = $token;
