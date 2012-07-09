@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//+g4\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-09T20:57:04Z",
+      "side": 1,
+      "message": "Why not use suggestions.eq( 0 ) instead of $( suggestions[0] ).eq( 0 ), should be the same. What do you need the end() for?\n\nAlso, better don\u0027t add  an ID here. It could be that there are several of them active. For example, there is a second dropdown, if we use the same meachanism there (and at times both dropdowns are expanded) we would have the same id twice. Can\u0027t see any reason why ever using an ID instead of a class for such ui stuff.",
+      "revId": "b6ff5ef11910e81a6153faf033c9530199402827",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
