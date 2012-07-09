@@ -33,13 +33,13 @@ use ApiTestCase, ApiTestUser;
  * @group medium
  */
 class ApiJSONPTest extends ApiTestCase {
-	
+
 	protected static $top = 0;
-	
+
 	function setUp() {
 		global $wgUser;
 		parent::setUp();
-		
+
 		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
 				'Apitesteditor',
 				'Api Test Editor',
@@ -47,7 +47,7 @@ class ApiJSONPTest extends ApiTestCase {
 				array( 'wbeditor' )
 			);
 		$wgUser = self::$users['wbeditor']->user;
-		
+
 		// now we have to do the login with the previous user
 		$data = $this->doApiRequest( array(
 			'action' => 'login',
@@ -69,22 +69,27 @@ class ApiJSONPTest extends ApiTestCase {
 	 * @group API
 	 */
 	function testSetItemTokenMissing(  ) {
-		$data = $this->doApiRequest(
-			array(
-				'action' => 'wbsetitem',
-				'callback' => 'sometestfunction',
-				'gettoken' => ''
-				 ),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
-		$this->assertTrue(
-			!(isset($data[0]["wbsetitem"]) && isset($data[0]["wbsetitem"]["setitemtoken"])),
-			"Did find a token and it should not exist"
-		);
+		try {
+			$data = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'callback' => 'sometestfunction',
+					'gettoken' => ''
+					 ),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			$this->assertTrue(
+				!(isset($data[0]["wbsetitem"]) && isset($data[0]["wbsetitem"]["itemtoken"])),
+				"Did find a token and it should not exist"
+			);
+		}
+		catch ( \UsageException $ex ) {
+			$this->assertEquals( 'jsonp-token-violation', $ex->getCodeString(), 'API did not return expected error code. Got error message ' . $ex );
+		}
 	}
-	
+
 	/**
 	 * @group API
 	 */
@@ -99,7 +104,7 @@ class ApiJSONPTest extends ApiTestCase {
 			self::$users['wbeditor']->user
 		);
 		$this->assertTrue(
-			isset($data[0]["wbsetitem"]) && isset($data[0]["wbsetitem"]["setitemtoken"]),
+			isset($data[0]["wbsetitem"]) && isset($data[0]["wbsetitem"]["itemtoken"]),
 			"Did not find a token and it should exist"
 		);
 	}

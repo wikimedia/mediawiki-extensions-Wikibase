@@ -140,7 +140,7 @@ class importInterlang extends Maintenance {
 		}
 		$label = self::niceLink( $link );
 
-		$api_response = $this->callAPI( $this->api . "?action=wblinksite&format=php&link=set&id=" . urlencode( $id )	. "&linksite=" . urlencode( $lang ) . "wiki" . "&linktitle=" . urlencode( $link ) );
+		$api_response = $this->callAPI( $this->api . "?action=wbsetlink&format=php&id=" . urlencode( $id )	. "&linksite=" . urlencode( $lang ) . "wiki" . "&linktitle=" . urlencode( $link ) );
 		if( $this->verbose ) {
 				print_r ( $api_response );
 		}
