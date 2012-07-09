@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//+xw\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-07-09T12:18:33Z",
+      "side": 1,
+      "message": "Whitespace",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+xs\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-07-09T12:18:33Z",
+      "side": 1,
+      "message": "Trailing whitespace",
+      "revId": "a83877992baa70ca3f01887bef48059ca32a92e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
