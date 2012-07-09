@@ -177,12 +177,12 @@ interface Item extends Entity {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $siteId
+	 * @param string $siteId
 	 * @param string $pageName
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function removeSiteLink( $siteId, $pageName );
+	public function removeSiteLink( $siteId, $pageName = false );
 
 	/**
 	 * Returns the description of the item in the language with the provided code,
