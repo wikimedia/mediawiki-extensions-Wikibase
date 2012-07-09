@@ -39,6 +39,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 	},
 
+	/**
+	 * initialize input box
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._initInputElement
+	 */
 	_initInputElement: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 		/**
@@ -108,9 +112,6 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 					this._onInputRegistered();
 				}, this )
 			} );
-			inputElement.on( 'keyup', $.proxy( function( event ) {
-				this._onInputRegistered();
-			}, this ) );
 		}
 
 		inputElement.on( 'autocompleteopen', $.proxy( function( event ) {

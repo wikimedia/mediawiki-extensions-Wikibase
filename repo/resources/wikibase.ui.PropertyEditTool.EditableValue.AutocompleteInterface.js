@@ -48,7 +48,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 
 	/**
 	 * initialize input box
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._initInputElement
 	 */
 	_initInputElement: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement.call( this );
@@ -70,7 +70,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 
 	/**
 	 * create input element and initialize autocomplete
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._buildInputElement
 	 */
 	_buildInputElement: function() {
 		// get basic input box
