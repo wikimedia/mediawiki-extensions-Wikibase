@@ -58,9 +58,9 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 	 * @dataProvider paramProvider
 	 */
 	public function testLanguageAttribute( $attr, $langCode, $op, $value, $expected, $exception ) {
-		
+
 		$req = array();
-		$token = $this->gettoken();
+		$token = $this->getItemToken();
 		if ( $token ) {
 			$req['token'] = $token;
 		}
@@ -68,14 +68,16 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 		$item = self::$itemContent->getItem();
 
 		$this->assertInstanceOf( '\Wikibase\Item', $item );
-		
+
+		if ( !Settings::get( 'apiUseKeys' ) ) {
+			$req['usekeys'] = true;
+		}
+
 		$req = array_merge( $req, array(
 			'id' => $item->getId(),
 			'action' => 'wbsetlanguageattribute',
-			//'usekeys' => true, // this comes from Settings::get( 'apiUseKeys' )
 			'format' => 'json',
 			'language' => $langCode,
-			'item' => $op,
 			$attr => $value
 		) );
 
@@ -93,7 +95,6 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 		}
 
 		$apiResponse = $apiResponse[0];
-
 		$this->assertSuccess( $apiResponse );
 
 		self::$itemContent->reload();
@@ -117,13 +118,13 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in descriptions"
 			);
 		}
-		
+
 		$this->assertEquals(
 			$expected,
 			$str,
 			"Setting of {$attr} does not return the expected result"
 		);
-		
+
 	}
 
 }

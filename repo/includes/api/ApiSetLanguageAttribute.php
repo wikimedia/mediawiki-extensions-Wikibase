@@ -25,7 +25,14 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 	protected function getRequiredPermissions( Item $item, array $params ) {
 		$permissions = parent::getRequiredPermissions( $item, $params );
 
-		$permissions[] = 'lang-attr-' . $params['item'];
+		if ( isset( $params['label'] ) ) {
+			$permissions[] = 'label-' . ( strlen( $params['label'] ) ? 'update' : 'remove' );
+		}
+
+		if ( isset( $params['description'] ) ) {
+			$permissions[] = 'description-' . ( strlen( $params['label'] ) ? 'update' : 'remove' );
+		}
+
 		return $permissions;
 	}
 
@@ -42,6 +49,29 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		if ( !isset( $params['label'] ) && !isset( $params['description'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-label-or-description' ), 'label-or-description' );
 		}
+
+		if ( isset( $params['label'] ) ) {
+			$params['label'] = Utils::squashToNFC( $params['label'] );
+		}
+
+		if ( isset( $params['description'] ) ) {
+			$params['description'] = Utils::squashToNFC( $params['description'] );
+		}
+	}
+
+	/**
+	 * Create the item if its missing.
+	 *
+	 * @since    0.1
+	 *
+	 * @param array       $params
+	 *
+	 * @internal param \Wikibase\ItemContent $itemContent
+	 * @return ItemContent Newly created item
+	 */
+	protected function createItem( array $params ) {
+		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+		return null;
 	}
 
 	/**
@@ -59,29 +89,29 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		$language = $params['language'];
 
 		if ( isset( $params['label'] ) ) {
-			$label = Utils::squashToNFC( $params['label'] );
+			$label = $params['label'];
 			if ( 0 < strlen( $label ) ) {
 				$labels = array( $language => $itemContent->getItem()->setLabel( $language, $label ) );
-				$this->addLabelsToResult( $labels, 'item' );
 			}
 			else {
 				// TODO: should probably be some kind of status from the remove operation
 				$itemContent->getItem()->removeLabel( $language );
-				$this->addDeletedLabelsToResult( array( $language ), 'item' );
+				$labels = array( $language => '' );
 			}
+			$this->addLabelsToResult( $labels, 'item' );
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$description = Utils::squashToNFC( $params['description'] );
+			$description = $params['description'];
 			if ( 0 < strlen( $description ) ) {
 				$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, $description ) );
-				$this->addDescriptionsToResult( $descriptions, 'item' );
 			}
 			else {
 				// TODO: should probably be some kind of status from the remove operation
 				$itemContent->getItem()->removeDescription( $language );
-				$this->addDeletedDescriptionsToResult( array( $language ), 'item' );
+				$descriptions = array( $language => '' );
 			}
+			$this->addDescriptionsToResult( $descriptions, 'item' );
 		}
 
 		// Because we can't fail?
