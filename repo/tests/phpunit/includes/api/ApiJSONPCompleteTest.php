@@ -34,22 +34,22 @@ use Wikibase\Settings as Settings;
  * @group medium
  */
 class ApiJSONPCompleteTest extends ApiTestCase {
-	
+
 	protected static $num = 0;
 	protected static $name = 'empty';
-	
+
 	protected static function config($arr) {
 		Settings::singleton( true );
 		foreach ( $arr as $key => $val ) {
 			$egWBSettings[$key] = $val;
 		}
 	}
-	
+
 	protected static function user() {
-		
+
 		self::$num++;
 		self::$name = "wbeditor" . self::$num;
-		
+
 		ApiTestCase::$users[self::$name] = new ApiTestUser(
 				'Apitesteditor',
 				'Api Test Editor',
@@ -58,7 +58,7 @@ class ApiJSONPCompleteTest extends ApiTestCase {
 			);
 		return self::$users[self::$name];
 	}
-		
+
 	protected function register($user) {
 		// now we have to do the login with the previous user
 		$data = $this->doApiRequest( array(
@@ -76,53 +76,58 @@ class ApiJSONPCompleteTest extends ApiTestCase {
 			),
 			$data );
 	}
-	
+
 	/**
 	 * @group API
 	 * @dataProvider providerConfig
 	 */
 	function testSetItemTokenMissing( $missing, $exist, $arr ) {
 		global $wgUser;
-		
+
 		self::config( $arr );
-		
+
 		$user = self::user();
 		$wgUser = $user->user;
-		
+
 		$this->register( $user );
-		
-		$data = $this->doApiRequest(
-			array(
-				'action' => 'wbsetitem',
-				'format' => 'json',
-				'callback' => 'sometestfunction',
-				'gettoken' => ''
-				 ),
-			null,
-			false,
-			$user->user
-		);
-		
-		$this->assertTrue(
-			$missing === (isset($data[0]["wbsetitem"]) && isset($data[0]["wbsetitem"]["setitemtoken"])),
-			"Did find a token and it should not exist"
-		);
+
+		try {
+			$data = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'format' => 'json',
+					'callback' => 'sometestfunction',
+					'gettoken' => ''
+					 ),
+				null,
+				false,
+				$user->user
+			);
+
+			$this->assertTrue(
+				$missing === (isset($data[0]["wbsetitem"]) && isset($data[0]["wbsetitem"]["itemtoken"])),
+				"Did find a token and it should not exist"
+			);
+		}
+		catch ( \UsageException $ex ) {
+			$this->assertEquals( 'jsonp-token-violation', $ex->getCodeString(), 'API did not return expected error code. Got error message ' . $ex );
+		}
 	}
-	
+
 	/**
 	 * @group API
 	 * @dataProvider providerConfig
 	 */
 	function testSetItemTokenExist( $missing, $exist, $arr ) {
 		global $wgUser;
-		
+
 		self::config( $arr );
-		
+
 		$user = self::user();
 		$wgUser = $user->user;
-		
+
 		$this->register($user);
-		
+
 		$data = $this->doApiRequest(
 			array(
 				'action' => 'wbsetitem',
@@ -134,11 +139,11 @@ class ApiJSONPCompleteTest extends ApiTestCase {
 			$user->user
 		);
 		$this->assertTrue(
-			$exist === (isset($data[0]["wbsetitem"]) && isset($data[0]["wbsetitem"]["setitemtoken"])),
+			$exist === (isset($data[0]["wbsetitem"]) && isset($data[0]["wbsetitem"]["itemtoken"])),
 			"Did not find a token and it should exist"
 		);
 	}
-	
+
     public function providerConfig() {
     	$arr = array(
     		array( false, true, array( 'apiInDebug' => false ) )
