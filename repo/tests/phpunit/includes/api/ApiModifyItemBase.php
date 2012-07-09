@@ -79,8 +79,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		);
 	}
 
-	// FIXME: bad method name!
-	protected function gettoken() {
+	protected function getItemToken() {
 		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
@@ -92,7 +91,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 				self::$users['wbeditor']->user
 			);
 
-			return $first[0]['wbsetitem']['setitemtoken'];
+			return $first[0]['wbsetitem']['itemtoken'];
 		}
 
 		return null;

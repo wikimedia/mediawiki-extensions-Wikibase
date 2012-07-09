@@ -25,7 +25,15 @@ class ApiSetAliases extends ApiModifyItem {
 	protected function getRequiredPermissions( Item $item, array $params ) {
 		$permissions = parent::getRequiredPermissions( $item, $params );
 
-		$permissions[] = 'alias-' . $params['item'];
+		if ( isset( $params['add'] ) ) {
+			$permissions[] = 'alias-add';
+		}
+		if ( isset( $params['set'] ) ) {
+			$permissions[] = 'alias-set';
+		}
+		if ( isset( $params['remove'] ) ) {
+			$permissions[] = 'alias-remove';
+		}
 		return $permissions;
 	}
 
@@ -44,7 +52,21 @@ class ApiSetAliases extends ApiModifyItem {
 			$this->dieUsage( wfMsg( 'wikibase-api-aliases-invalid-list' ), 'aliases-invalid-list' );
 		}
 	}
-	
+
+	/**
+	 * Create the item if its missing.
+	 *
+	 * @since    0.1
+	 *
+	 * @param array       $params
+	 *
+	 * @internal param \Wikibase\ItemContent $itemContent
+	 * @return ItemContent Newly created item
+	 */
+	protected function createItem( array $params ) {
+		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+	}
+
 	/**
 	 * Actually modify the item.
 	 * @see ApiModifyItem::modifyItem()
