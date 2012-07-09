@@ -240,14 +240,21 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		var fallback = null;
 
 		if( this.isInEditMode() ) {
-			// This is the search for the 'fallback', if nothing specific matches the input string, we return this
-			// one, the first suggested item in the suggestion list.
+			// This is the search for the 'fallback', if nothing specific matches the input string,
+			// we return this one, the first suggested item in the suggestion list.
 			var autoComplete = this._inputElem.data( 'autocomplete' );
 
 			//autoComplete.search( value );
-			var suggestions = autoComplete.widget().children();
+			var suggestions = autoComplete.menu.element.children();
 			if( suggestions.is( ':visible' ) && suggestions.length > 0 ) {
 				fallbackSearch = $( suggestions[0] ).text().toLowerCase();
+				// manually highlighting the fallback suggestion
+				if ( typeof autoComplete.menu.active === 'undefined' || autoComplete.menu.active === null ) {
+					$( suggestions[0] ).children( 'a' ).addClass( 'ui-state-hover' );
+				} else if ( autoComplete.menu.active[0] !== suggestions[0] ) {
+					// removing manual highlight of first item if a different item is selected
+					$( suggestions[0] ).children( 'a' ).removeClass( 'ui-state-hover' );
+				}
 			}
 		}
 
