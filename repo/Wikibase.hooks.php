@@ -70,7 +70,7 @@ final class WikibaseHooks {
 			'api/ApiLanguageAttribute',
 			'api/ApiSetAliases',
 			'api/ApiSetItem',
-			'api/ApiLinkSite',
+			'api/ApiSetSiteLink',
 			'api/ApiEditPage',
 			'api/ApiPermissions',
 
@@ -372,6 +372,10 @@ final class WikibaseHooks {
 				// alternative: application/vnd.php.serialized
 				'serializationFormat' => CONTENT_FORMAT_JSON,
 
+				// Defaults to turn on deletion of empty items
+				// set to true will always delete empty items
+				'apiDeleteEmpty' => false,
+
 				// Defaults to turn off use of keys
 				// set to true will always return the key form
 				'apiUseKeys' => false,
@@ -518,14 +522,32 @@ final class WikibaseHooks {
 
 		global $wgLang, $wgOut;
 
-		$lang = $wgLang->getCode();
-		$itemPage = new WikiPage( $target );
-		$itemContent = $itemPage->getContent();
+		// Add wikibase styles in all cases, so we can format the link properly:
+		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
 
-		if( $itemContent === null ) {
-			return true; // content is empty (page doesn't exist), e.g. after item was deleted
+		// If this fails we will not find labels and descriptions later
+		$lang = $wgLang->getCode();
+
+		// The following three vars should all exist, unless there is a failurre
+		// somewhere, and then it will fail hard. Better test it now!
+		$page = new WikiPage( $target );
+		if ( is_null( $page ) ) {
+			// failed, can't continue
+			// this should not happen
+			return true;
 		}
-		$item = $itemContent->getItem();
+		$content = $page->getContent();
+		if ( is_null( $content ) ) {
+			// failed, can't continue
+			// this could happen because there is an illegal structure
+			return true;
+		}
+		$item = $content->getItem();
+		if ( is_null( $item ) ) {
+			// failed, can't continue
+			// this could happen because there is an illegal structure
+			return true;
+		}
 
 		$rawLabel = $item->getLabel( $lang );
 		$rawDescription = $item->getDescription( $lang );

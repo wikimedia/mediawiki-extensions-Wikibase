@@ -39,13 +39,13 @@ abstract class Api extends \ApiBase {
 		$this->usekeys = $usekeys;
 	}
 
-
 	/**
 	 * Returns a list of all possible errors returned by the module
 	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
 	 */
 	public function getPossibleErrors() {
 		return array(
+			array( 'code' => 'jsonp-token-violation', 'info' => wfMsg( 'wikibase-api-jsonp-token-violation' ) ),
 		);
 	}
 
@@ -56,9 +56,22 @@ abstract class Api extends \ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array(
-			'usekeys' => 'Use the keys in formats that supports them, otherwise fall back to the ordinary style',
-		);
+		$descriptions = array();
+		if ( Settings::get( 'apiUseKeys' ) ) {
+			$descriptions['nousekeys'] = array( 'Turn off use the keys. The use of keys are only used in formats that supports them,',
+				'otherwise fall back to the ordinary style which is to use keys.'
+			);
+		}
+		else {
+			$descriptions['usekeys'] = array( 'Turn on use the keys. The use of keys are only used in formats that supports them,',
+				'otherwise fall back to the ordinary style which is to use keys.'
+			);
+		}
+		return array_merge($descriptions, array(
+			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
+				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
+			)
+		) );
 	}
 
 	/**
@@ -69,11 +82,32 @@ abstract class Api extends \ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array(
-			'usekeys' => array(
-				\ApiBase::PARAM_TYPE => 'boolean',
-			),
-		);
+		$allowedParams = array();
+		if ( Settings::get( 'apiUseKeys' ) ) {
+			$allowedParams['nousekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
+		}
+		else {
+			$allowedParams['usekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
+		}
+		return array_merge($allowedParams, array(
+		) );
+	}
+
+	
+	protected function addTokenToResult( $token, $path=null, $name = 'itemtoken' ) {
+		// in JSON callback mode, no tokens should be returned
+		// this will then block later updates through reuse of cached scripts
+		if ( !is_null( $this->getMain()->getRequest()->getVal( 'callback' ) ) ) {
+			$this->dieUsage( wfMsg( 'wikibase-api-jsonp-token-violation' ), 'jsonp-token-violation' );
+		}
+		if ( is_null( $path ) ) {
+			$path = array( null, $this->getModuleName() );
+		}
+		else if ( !is_array( $path ) ) {
+			$path = array( null, (string)$path );
+		}
+		$path = is_null( $path ) ? $path : $this->getModuleName();
+		$this->getResult()->addValue( $path, $name, $token );
 	}
 
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
@@ -115,10 +149,18 @@ abstract class Api extends \ApiBase {
 		$idx = 0;
 
 		foreach ( $siteLinks as $siteId => $pageTitle ) {
-			$value[$this->usekeys ? $siteId : $idx++] = array(
-				'site' => $siteId,
-				'title' => $pageTitle,
-			);
+			if ( $pageTitle === '' ) {
+				$value[$this->usekeys ? $siteId : $idx++] = array(
+					'site' => $siteId,
+					'removed' => '',
+				);
+			}
+			else {
+				$value[$this->usekeys ? $siteId : $idx++] = array(
+					'site' => $siteId,
+					'title' => $pageTitle,
+				);
+			}
 		}
 
 		if ( $value !== array() ) {
@@ -134,29 +176,18 @@ abstract class Api extends \ApiBase {
 		$idx = 0;
 
 		foreach ( $descriptions as $languageCode => $description ) {
-			$value[$this->usekeys ? $languageCode : $idx++] = array(
-				'language' => $languageCode,
-				'value' => $description,
-			);
-		}
-
-		if ( $value !== array() ) {
-			if (!$this->usekeys) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
+			if ( $description === '' ) {
+				$value[$this->usekeys ? $languageCode : $idx++] = array(
+					'language' => $languageCode,
+					'removed' => '',
+				);
 			}
-			$this->getResult()->addValue( $path, $name, $value );
-		}
-	}
-
-	protected function addDeletedDescriptionsToResult( array $languages, $path, $name = 'descriptions', $tag = 'description' ) {
-		$value = array();
-		$idx = 0;
-
-		foreach ( $languages as $languageCode ) {
-			$value[$this->usekeys ? $languageCode : $idx++] = array(
-				'language' => $languageCode,
-				'status' => 'deleted',
-			);
+			else {
+				$value[$this->usekeys ? $languageCode : $idx++] = array(
+					'language' => $languageCode,
+					'value' => $description,
+				);
+			}
 		}
 
 		if ( $value !== array() ) {
@@ -172,30 +203,18 @@ abstract class Api extends \ApiBase {
 		$idx = 0;
 
 		foreach ( $labels as $languageCode => $label ) {
-			$value[$this->usekeys ? $languageCode : $idx++] = array(
-				'language' => $languageCode,
-				'status' => 'changed',
-				'value' => $label,
-			);
-		}
-
-		if ( $value !== array() ) {
-			if (!$this->usekeys) {
-				$this->getResult()->setIndexedTagName( $value, $tag );
+			if ( $label === '' ) {
+				$value[$this->usekeys ? $languageCode : $idx++] = array(
+					'language' => $languageCode,
+					'removed' => '',
+				);
 			}
-			$this->getResult()->addValue( $path, $name, $value );
-		}
-	}
-
-	protected function addDeletedLabelsToResult( array $languages, $path, $name = 'labels', $tag = 'label' ) {
-		$value = array();
-		$idx = 0;
-
-		foreach ( $languages as $languageCode ) {
-			$value[$this->usekeys ? $languageCode : $idx++] = array(
-				'language' => $languageCode,
-				'status' => 'deleted',
-			);
+			else {
+				$value[$this->usekeys ? $languageCode : $idx++] = array(
+					'language' => $languageCode,
+					'value' => $label,
+				);
+			}
 		}
 
 		if ( $value !== array() ) {
