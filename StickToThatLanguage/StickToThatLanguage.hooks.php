@@ -101,9 +101,16 @@ final class Hooks {
 				continue; // don't add language the page is displayed in
 			}
 
+			// set 'uselang' and in case this was a GET request also all other parameters when switching language
+			$urlParams = array( 'uselang' => $code ) + $sk->getRequest()->getValues();
+			if( ! $sk->getRequest()->wasPosted() ) {
+				$urlParams += $sk->getRequest()->getValues();
+				unset( $urlParams['title'] ); // don't want the 'title' twice
+			}
+
 			// build information for the skin to generate links for all languages:
 			$url = array(
-				'href' => $title->getFullURL( array( 'uselang' => $code ) ),
+				'href' => $title->getFullURL( $urlParams ),
 				'text' => $name,
 				'title' => $title->getText(),
 				'class' => "sttl-lang-$code", // site-links use 'interwiki-' which seems inappropriate in this case
