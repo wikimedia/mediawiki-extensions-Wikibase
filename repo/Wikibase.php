@@ -56,22 +56,18 @@ $dir = dirname( __FILE__ ) . '/';
 
 // rights
 // names should be according to other naming scheme
-$wgGroupPermissions['*']['item-add']			= true;
-$wgGroupPermissions['*']['item-update']			= true;
-$wgGroupPermissions['*']['item-set']			= true;
+$wgGroupPermissions['*']['item-override']		= true;
+$wgGroupPermissions['*']['item-create']			= true;
 $wgGroupPermissions['*']['item-remove']			= true;
 $wgGroupPermissions['*']['alias-add']			= true;
-$wgGroupPermissions['*']['alias-update']		= true;
 $wgGroupPermissions['*']['alias-set']			= true;
 $wgGroupPermissions['*']['alias-remove']		= true;
-$wgGroupPermissions['*']['site-link-add']		= true;
-$wgGroupPermissions['*']['site-link-update']	= true;
-$wgGroupPermissions['*']['site-link-set']		= true;
-$wgGroupPermissions['*']['site-link-remove']	= true;
-$wgGroupPermissions['*']['lang-attr-add']		= true;
-$wgGroupPermissions['*']['lang-attr-update']	= true;
-$wgGroupPermissions['*']['lang-attr-set']		= true;
-$wgGroupPermissions['*']['lang-attr-remove']	= true;
+$wgGroupPermissions['*']['sitelink-remove']		= true;
+$wgGroupPermissions['*']['sitelink-update']		= true;
+$wgGroupPermissions['*']['label-remove']		= true;
+$wgGroupPermissions['*']['label-update']		= true;
+$wgGroupPermissions['*']['description-remove']	= true;
+$wgGroupPermissions['*']['description-update']	= true;
 
 // i18n
 $wgExtensionMessagesFiles['Wikibase'] 		= $dir . 'Wikibase.i18n.php';
@@ -100,12 +96,9 @@ $wgAutoloadClasses['Wikibase\EditItemAction'] 			= $dir . 'includes/actions/Edit
 // includes/api
 $wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
 $wgAutoloadClasses['Wikibase\ApiGetItems'] 				= $dir . 'includes/api/ApiGetItems.php';
-$wgAutoloadClasses['Wikibase\ApiGetItemId'] 			= $dir . 'includes/api/ApiGetItemId.php';
-$wgAutoloadClasses['Wikibase\ApiGetSiteLinks'] 			= $dir . 'includes/api/ApiGetSiteLinks.php';
 $wgAutoloadClasses['Wikibase\ApiSetLanguageAttribute'] 	= $dir . 'includes/api/ApiSetLanguageAttribute.php';
-$wgAutoloadClasses['Wikibase\ApiDeleteLanguageAttribute']= $dir . 'includes/api/ApiDeleteLanguageAttribute.php';
 $wgAutoloadClasses['Wikibase\ApiModifyItem'] 			= $dir . 'includes/api/ApiModifyItem.php';
-$wgAutoloadClasses['Wikibase\ApiLinkSite'] 				= $dir . 'includes/api/ApiLinkSite.php';
+$wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
 $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
 $wgAutoloadClasses['Wikibase\ApiSetItem'] 				= $dir . 'includes/api/ApiSetItem.php';
 
@@ -123,11 +116,8 @@ $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit
 
 // API module registration
 $wgAPIModules['wbgetitems'] 						= 'Wikibase\ApiGetItems';
-$wgAPIModules['wbgetitemid'] 						= 'Wikibase\ApiGetItemId';
 $wgAPIModules['wbsetlanguageattribute'] 			= 'Wikibase\ApiSetLanguageAttribute';
-$wgAPIModules['wbdeletelanguageattribute'] 			= 'Wikibase\ApiDeleteLanguageAttribute';
-$wgAPIModules['wbgetsitelinks'] 					= 'Wikibase\ApiGetSiteLinks';
-$wgAPIModules['wblinksite'] 						= 'Wikibase\ApiLinkSite';
+$wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
 $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbsetitem'] 							= 'Wikibase\ApiSetItem';
 

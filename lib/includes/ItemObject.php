@@ -314,13 +314,18 @@ class ItemObject extends EntityObject implements Item {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $siteId
+	 * @param string $siteId
 	 * @param string $pageName
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function removeSiteLink( $siteId, $pageName ) {
-		$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId] === $pageName;
+	public function removeSiteLink( $siteId, $pageName = false ) {
+		if ( $pageName !== false) {
+			$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId] === $pageName;
+		}
+		else {
+			$success = true;
+		}
 
 		if ( $success ) {
 			unset( $this->data['links'][$siteId] );
