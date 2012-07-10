@@ -35,7 +35,10 @@ final class WikibaseHooks {
 			);
 		}
 		elseif ( $type === 'postgres' ) {
-			// TODO
+			$updater->addExtensionTable(
+				'wb_items',
+				dirname( __FILE__ ) . '/sql/Wikibase.sql'
+			);
 		}
 		else {
 			// TODO

@@ -15,12 +15,12 @@ CREATE TABLE wb_changes (
   change_revision_id         INTEGER             NOT NULL, -- The id of the revision on the repo that made the change
   change_user_id             INTEGER             NOT NULL, -- The id of the user on the repo that made the change
   change_info                TEXT                NOT NULL -- Holds additional info about the change, inc diff and stuff
-) /*$wgDBTableOptions*/;
+);
 
-CREATE INDEX /*i*/wb_changes_change_type ON /*_*/wb_changes (change_type);
-CREATE INDEX /*i*/wb_changes_change_time ON /*_*/wb_changes (change_time);
-CREATE INDEX /*i*/wb_changes_change_object_id ON /*_*/wb_changes (change_object_id);
-CREATE INDEX /*i*/wb_changes_change_user_id ON /*_*/wb_changes (change_user_id);
-CREATE INDEX /*i*/wb_changes_change_revision_id ON /*_*/wb_changes (change_revision_id);
+CREATE INDEX /*i*/wb_changes_change_type ON wb_changes (change_type);
+CREATE INDEX /*i*/wb_changes_change_time ON wb_changes (change_time);
+CREATE INDEX /*i*/wb_changes_change_object_id ON wb_changes (change_object_id);
+CREATE INDEX /*i*/wb_changes_change_user_id ON wb_changes (change_user_id);
+CREATE INDEX /*i*/wb_changes_change_revision_id ON wb_changes (change_revision_id);
 
 COMMIT;

@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_items (
 -- Links site+title pairs to item ids.
 CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (
   ips_item_id                INT unsigned        NOT NULL, -- Id of the item
-  ips_site_id                VARBINARY(32)       NOT NULL, -- Site identifier
+  ips_site_id                VARBINARY(32)       NOT NULL, -- Site identifier (global)
   ips_site_page              VARCHAR(255)        NOT NULL -- Title of the page
 ) /*$wgDBTableOptions*/;
 
