@@ -87,4 +87,19 @@ describe "Check functionality of STTL language switcher" do
       end
     end
   end
+
+  context "STTL test more languages expansion" do
+    it "should check if more languages expand" do
+      on_page(LanguageSelectorPage) do |page|
+        page.navigate_to_item
+        page.wait_for_item_to_load
+        page.sttlLiTo_element.parent.style("display").should == "none"
+        page.moreLanguagesLink
+        page.sttlLiTo_element.parent.style("display").should_not == "none"
+        page.moreLanguagesLink
+        sleep 1 # wait for fold animation to finish
+        page.sttlLiTo_element.parent.style("display").should == "none"
+      end
+    end
+  end
 end
