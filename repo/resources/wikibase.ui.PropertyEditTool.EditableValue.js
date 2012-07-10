@@ -492,7 +492,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	queryApi: function( deferred, apiAction ) {
 		var api = new mw.Api();
 		var apiCall = this.getApiCallParams( apiAction );
-		$.extend( apiCall, { usekeys: 1 } ); // according to API
 		api.post( apiCall, {
 			ok: function( response ) {
 				deferred.resolve( response );
