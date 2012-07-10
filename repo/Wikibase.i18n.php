@@ -232,14 +232,14 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-remove-sitelink-failed' => 'This is an error message where the system of some unspecific reason could not remove the site link from the temporary store.',
 	'wikibase-api-cant-edit' => 'This error message is used when the user is not allowed to edit or create an item via the API. Parameters:
 * $1 is a wikitext list of reasons. It should be placed on a separate line.',
-	'wikibase-api-no-permissions' => 'This error message is used when the user is not allowed to perform a specific action via the API. The first parameter is a wikitext list of reasons, it should be placed on a separate line.',
 	'wikibase-api-json-invalid' => 'The supplied json structure is invalid of some reson, usually because it is malformed or because it can not be recreated as a legal form. The exact reason is not clear and there should be made no attempt to guess a reason.',
 	'wikibase-api-not-recognized-string' => 'During parsing of some structure, usually coming from a json structure, a string was expected but not found. This leads to termination of the on-going parsing.',
 	'wikibase-api-not-recognized-array' => 'During parsing of some structure, usually coming from a json structure, an array was expected but not found. This leads to termination of the on-going parsing.',
 	'wikibase-api-not-recognized-language' => 'During parsing of some structure, usually coming from a json structure, a language identifier was expected but the found one was invalid. This leads to termination of the on-going parsing.',
 	'wikibase-api-not-recognized-siteid' => 'During parsing of some structure, usually coming from a json structure, a site identifier was expected but the found one was invalid. This leads to termination of the on-going parsing.',
-	'wikibase-api-data-or-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition.',
-	'wikibase-api-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition.',
+	'wikibase-api-no-permissions' => 'This error message is used when the user is not allowed to perform a specific action via the API. The first parameter is a wikitext list of reasons, it should be placed on a separate line.',
+	'wikibase-api-data-or-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition. {{doc-important|Do not translate "id", "site", "title" and "data".}}',
+	'wikibase-api-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition. {{doc-important|Do not translate "id", "site" and "title".}}',
 	'wikibase-api-no-such-item' => 'This is an error message for a situation where the API could not find an item, usually on an already found page. Usually this should never be shown to the user, unless there are som exceptional error condition, or the item is deleted due to a race condition.',
 	'wikibase-api-no-such-item-id' => 'This is an error message for a situation where the API could not find an item by using a specific item id. Usually this should never be shown to the user, unless there are som exceptional error condition.',
 	'wikibase-api-link-exists' => 'This is an error message for a situation where the arguments to the API requests a sitelink to be created but there already exist a similar link. Usually this should never be shown to the user, unless there are som exceptional error condition, or the link is already created due to a race condition.',
@@ -390,9 +390,16 @@ $messages['de'] = array(
 	'wikibase-api-no-external-data' => 'Es sind keine Daten, möglicherweise aufgrund von Verbindungsfehlern, der externen Website vorhanden.',
 	'wikibase-api-no-external-page' => 'Die externe Website hat keine Informationen zur Seite bereitgestellt.',
 	'wikibase-api-add-sitelink-failed' => 'Der Link zur Website konnte nicht gespeichert werden.',
+	'wikibase-api-remove-sitelink-failed' => 'Der Link zur Website konnte nicht entfernt werden.',
 	'wikibase-api-cant-edit' => 'Die Bearbeitung ist nicht zulässig:\\n$1',
+	'wikibase-api-json-invalid' => 'Die bereitgestellte JSON-Struktur konnte nicht als gültige Struktur geparst und/oder wiederhergestellt werden.',
+	'wikibase-api-not-recognized-string' => 'Es wurde eine Zeichenkette erwartet aber nicht ermittelt.',
+	'wikibase-api-not-recognized-array' => 'Es wurde ein Datenfeld erwartet aber nicht ermittelt.',
+	'wikibase-api-not-recognized-language' => 'Der ermittelte Sprachenbezeichner wurde nicht erkannt.',
+	'wikibase-api-not-recognized-siteid' => 'Der ermittelte Websitebezeichner wurde nicht erkannt.',
 	'wikibase-api-no-permissions' => 'Der angemeldete Benutzer verfügt über keine ausreichenden Berechtigungen.',
-	'wikibase-api-id-xor-wikititle' => 'Gib für eine entsprechende Seite entweder die Kennung des Datenelements „id“ oder Informationspaare mit Angaben zu „site“ und „title“ an.',
+	'wikibase-api-data-or-id-xor-wikititle' => 'Gib für die zugehörige Seite entweder „id“ als Kennung des Datenelements, die Informationspaare mit Angaben zu „site“ und „title“ oder „data“ für ein neues Datenelement an.',
+	'wikibase-api-id-xor-wikititle' => 'Gib für die zugehörige Seite entweder „id“ als Kennung des Datenelements oder Informationspaare mit Angaben zu „site“ und „title“ an.',
 	'wikibase-api-no-such-item' => 'Es wurde kein vorhandenes Datenelement gefunden.',
 	'wikibase-api-no-such-item-id' => 'Es wurde zu dieser Kennung kein vorhandenes Datenelement gefunden.',
 	'wikibase-api-link-exists' => 'Ein Artikel auf dem angegebenen Wiki ist bereits verknüpft.',
@@ -401,7 +408,8 @@ $messages['de'] = array(
 	'wikibase-api-update-without-id' => 'Die Aktualisierung ohne eine frühere Kennung ist nicht möglich.',
 	'wikibase-api-no-such-item-link' => 'Es wurde zu dieser Verknüpfung kein vorhandenes Datenelement gefunden.',
 	'wikibase-api-create-failed' => 'Der Versuch ein neues Datenelement zu erstellen ist fehlgeschlagen: $1',
-	'wikibase-api-modify-failed' => 'Der Versuch ein Datenelement zu ändern ist fehlgeschlagen.',
+	'wikibase-api-modify-failed' => 'Der Versuch das Datenelement zu ändern ist fehlgeschlagen.',
+	'wikibase-api-delete-failed' => 'Der Versuch das Datenelement zu löschen ist fehlgeschlagen.',
 	'wikibase-api-save-failed' => 'Der Versuch das Datenelement zu speichern ist fehlgeschlagen: $1',
 	'wikibase-api-invalid-contentmodel' => 'Die Inhaltsstruktur der Seite ist ungültig.',
 	'wikibase-api-alias-incomplete' => 'Es wurde keine Definition des Alias zum Datenelement gefunden.',
@@ -442,7 +450,8 @@ $messages['de-formal'] = array(
 	'wikibase-error-ui-session-failure' => 'Ihre Sitzung ist abgelaufen. Sie müssen sich daher erneut anmelden.',
 	'wikibase-move-error' => 'Sie können keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-api-aliases-invalid-list' => 'Sie müssen einen der Parameter zu „set“, „add“, bzw. „remove“ nutzen.',
-	'wikibase-api-id-xor-wikititle' => 'Geben Sie für eine entsprechende Seite entweder die Kennung des Datenelements „id“ oder Informationspaare mit Angaben zu „site“ und „title“ an.',
+	'wikibase-api-data-or-id-xor-wikititle' => 'Geben Sie für die zugehörige Seite entweder „id“ als Kennung des Datenelements, die Informationspaare mit Angaben zu „site“ und „title“ oder „data“ für ein neues Datenelement an.',
+	'wikibase-api-id-xor-wikititle' => 'Geben Sie für die zugehörige Seite entweder „id“ als Kennung des Datenelements oder Informationspaare mit Angaben zu „site“ und „title“ an.',
 	'wikibase-api-label-or-description' => 'Verwenden Sie entweder „label“ und/oder „description“.',
 	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Sie müssen sich daher erneut anmelden.',
 	'wikibase-noitem' => 'Dieses Datenelement ist nicht vorhanden.
@@ -1478,6 +1487,25 @@ $messages['lb'] = array(
 	'wikibase-disambiguation-title' => 'Homonymie fir "$1"',
 	'wikibase-aliases-label' => 'Och bekannt als:',
 	'wikibase-tooltip-error-details' => 'Detailer',
+);
+
+/** Lithuanian (lietuvių)
+ * @author Eitvys200
+ */
+$messages['lt'] = array(
+	'wikibase-edit' => 'redaguoti',
+	'wikibase-save' => 'išsaugoti',
+	'wikibase-cancel' => 'atšaukti',
+	'wikibase-add' => 'pridėti',
+	'wikibase-save-inprogress' => 'Saugoma...',
+	'wikibase-remove-inprogress' => 'Šalinama...',
+	'wikibase-sitelink-site-edit-placeholder' => 'svetainė',
+	'wikibase-sitelink-page-edit-placeholder' => 'straipsnis',
+	'wikibase-remove' => 'pašalinti',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-aliases-label' => 'Taip pat žinomas kaip:',
+	'wikibase-tooltip-error-details' => 'Detalės',
+	'wikibase-resetold' => 'perkrauti',
 );
 
 /** Macedonian (македонски)
