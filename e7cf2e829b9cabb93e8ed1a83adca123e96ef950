@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQX//+VI\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-10T13:04:42Z",
+      "side": 1,
+      "message": "Look at line 572, this is added there!",
+      "revId": "e7cf2e829b9cabb93e8ed1a83adca123e96ef950",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//+VE\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-10T13:04:42Z",
+      "side": 1,
+      "message": "This has been there before. This basically happens when the item was deleted (the comment should mention that).\n\n$itemContent \u003d $itemPage-\u003egetContent();\nif( $itemContent \u003d\u003d\u003d null ) {\n    return true; // content is empty (page doesn\u0027t exist), e.g. after item was deleted\n}",
+      "revId": "e7cf2e829b9cabb93e8ed1a83adca123e96ef950",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//+WM\u003d",
         "filename": "repo/includes/api/Api.php",
         "patchSetId": 8
