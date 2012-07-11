@@ -48,6 +48,22 @@ $messages['dsb'] = array(
 	'sttl-languages-more-link' => 'dalšne rěcy',
 );
 
+/** French (français)
+ * @author Brunoperel
+ */
+$messages['fr'] = array(
+	'sttl-languages-more-link' => 'autres langages',
+);
+
+/** Galician (galego)
+ * @author Toliño
+ */
+$messages['gl'] = array(
+	'sticktothatlanguage-desc' => 'Proporciona varias funcionalidades para elixir unha lingua continuamente',
+	'sttl-setting-languages' => 'Linguas adicionais<br />(de reserva cando os datos que se mostren non estean dispoñibles na lingua principal)',
+	'sttl-languages-more-link' => 'máis linguas',
+);
+
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
@@ -55,6 +71,32 @@ $messages['hsb'] = array(
 	'sticktothatlanguage-desc' => 'Zmóžnja, rěč na přeco wuzwolić',
 	'sttl-setting-languages' => 'Přidatne rěče<br />(jako narunanje, hdyž maja so daty pokazać, kotrež we hłownej rěči k dispoziciji njesteja.)',
 	'sttl-languages-more-link' => 'dalše rěče',
+);
+
+/** Interlingua (interlingua)
+ * @author McDutchie
+ */
+$messages['ia'] = array(
+	'sticktothatlanguage-desc' => 'Forni le functionalitate de render le selection de lingua persistente',
+	'sttl-setting-languages' => 'Linguas additional<br />(como reserva quando monstrar datos non disponibile in le lingua principal)',
+	'sttl-languages-more-link' => 'plus linguas',
+);
+
+/** Icelandic (íslenska)
+ * @author Snævar
+ */
+$messages['is'] = array(
+	'sttl-setting-languages' => 'Viðbóitar tungumál<br />(til vara þegar gögn eru ekki til á aðalmáli)',
+	'sttl-languages-more-link' => 'fleiri tungumál',
+);
+
+/** Italian (italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'sticktothatlanguage-desc' => 'Fornisce le funzionalità per scegliere una lingua persistente',
+	'sttl-setting-languages' => 'Lingue aggiuntive<br />(come lingue di riserva durante la visualizzazione dei dati se non sono disponibili nella lingua principale)',
+	'sttl-languages-more-link' => 'altre lingue',
 );
 
 /** Korean (한국어)
