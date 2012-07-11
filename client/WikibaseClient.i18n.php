@@ -32,7 +32,7 @@ $messages['qqq'] = array(
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
 );
 
-/** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
+/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
@@ -59,7 +59,7 @@ $messages['de'] = array(
 	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 );
 
-/** Lower Sorbian (Dolnoserbski)
+/** Lower Sorbian (dolnoserbski)
  * @author Michawiki
  */
 $messages['dsb'] = array(
@@ -97,7 +97,7 @@ $messages['fr'] = array(
 	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
 );
 
-/** Galician (Galego)
+/** Galician (galego)
  * @author Toliño
  */
 $messages['gl'] = array(
@@ -123,7 +123,7 @@ $messages['he'] = array(
 	'wbc-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
 );
 
-/** Upper Sorbian (Hornjoserbsce)
+/** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
 $messages['hsb'] = array(
@@ -207,6 +207,15 @@ $messages['mk'] = array(
 	'wbc-desc' => 'Клиент за додатокот „Викибаза“',
 	'wbc-editlinks' => 'Уреди врски',
 	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
+);
+
+/** Norwegian Bokmål (‪norsk (bokmål)‬)
+ * @author Jeblad
+ */
+$messages['nb'] = array(
+	'wbc-desc' => 'Klientutvidelse for Wikibase, det strukturerte datalageret',
+	'wbc-editlinks' => 'Rediger lenker',
+	'wbc-editlinkstitle' => 'Rediger nettstedlenker',
 );
 
 /** Dutch (Nederlands)

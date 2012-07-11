@@ -25,7 +25,7 @@ $messages['qqq'] = array(
 	'wikibaselib-desc' => '{{desc}}',
 );
 
-/** Belarusian (Taraškievica orthography) (‪Беларуская (тарашкевіца)‬)
+/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
@@ -39,7 +39,7 @@ $messages['de'] = array(
 	'wikibaselib-desc' => 'Stellt den Erweiterungen Wikibase und Wikibase Client gemeinsam genutzte Funktionen bereit',
 );
 
-/** Lower Sorbian (Dolnoserbski)
+/** Lower Sorbian (dolnoserbski)
  * @author Michawiki
  */
 $messages['dsb'] = array(
@@ -74,7 +74,7 @@ $messages['gl'] = array(
 	'wikibaselib-desc' => 'Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client.',
 );
 
-/** Upper Sorbian (Hornjoserbsce)
+/** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
 $messages['hsb'] = array(
@@ -107,6 +107,13 @@ $messages['ko'] = array(
  */
 $messages['mk'] = array(
 	'wikibaselib-desc' => 'Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.',
+);
+
+/** Norwegian Bokmål (‪norsk (bokmål)‬)
+ * @author Jeblad
+ */
+$messages['nb'] = array(
+	'wikibaselib-desc' => 'Felles funksjonalitet for Wikibase, det strukturerte datalageret',
 );
 
 /** Dutch (Nederlands)
