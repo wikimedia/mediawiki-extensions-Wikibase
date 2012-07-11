@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//8u4\u003d",
+        "filename": "StickToThatLanguage/StickToThatLanguage.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2012-07-11T13:20:07Z",
+      "side": 1,
+      "message": "Adding $sk-\u003egetRequest()-\u003egetValues() even when not handling a GET request - and adding it a second time below for GET requests.",
+      "revId": "32fa405a2a0ebafbf5fc6aa0299086dfc448c584",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
