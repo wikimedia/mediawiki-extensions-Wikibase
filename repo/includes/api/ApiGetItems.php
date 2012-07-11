@@ -34,6 +34,14 @@ class ApiGetItems extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 		}
 
+		static $langStore = array();
+		if ( $this->usefallbacks ) {
+			$lang = $wgLang->getCode();
+			if ( !isset( $langStore[$lang] ) ) {
+				$langStore[$lang] = array_merge( array( $lang ), Language::getFallbacksFor( $lang ) );
+			}
+		}
+
 		$missing = 0;
 
 		if ( !isset( $params['ids'] ) ) {
@@ -70,6 +78,7 @@ class ApiGetItems extends Api {
 		$languages = $params['languages'];
 
 		$this->setUsekeys( $params );
+		$this->setUseFallbacks( $params );
 
 		foreach ($params['ids'] as $id) {
 
@@ -97,16 +106,40 @@ class ApiGetItems extends Api {
 					foreach ( $params['props'] as $key ) {
 						switch ( $key ) {
 						case 'aliases':
-							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
+							$this->addAliasesToResult(
+								$item->getAllAliases( $languages ),
+								$itemPath
+							);
 							break;
 						case 'sitelinks':
-							$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath );
+							$this->addSiteLinksToResult(
+								$item->getSiteLinks(),
+								$itemPath
+							);
 							break;
 						case 'descriptions':
-							$this->addDescriptionsToResult( $item->getDescriptions( $languages ), $itemPath );
+							$descriptions = $item->getDescriptions();
+							$fallback = $this->usefallbacks && 0 === count( $descriptions );
+							$descriptions = $fallback
+								? Utils::filterMultilangText( $descriptions, $langStore[$lang] )
+								: Utils::filterMultilangText( $descriptions, $languages );
+							$this->addDescriptionsToResult(
+								$descriptions,
+								$itemPath,
+								$fallback
+							);
 							break;
 						case 'labels':
-							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
+							$labels = $item->getLabels();
+							$fallback = $this->usefallbacks && 0 === count( $labels );
+							$labels = $fallback
+								? Utils::filterMultilangText( $labels, $langStore[$lang] )
+								: Utils::filterMultilangText( $labels, $languages );
+							$this->addLabelsToResult(
+								$labels,
+								$itemPath,
+								$fallback
+							);
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases

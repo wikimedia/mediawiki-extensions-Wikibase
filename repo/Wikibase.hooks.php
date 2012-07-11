@@ -376,13 +376,17 @@ final class WikibaseHooks {
 				// alternative: application/vnd.php.serialized
 				'serializationFormat' => CONTENT_FORMAT_JSON,
 
-				// Defaults to turn on deletion of empty items
-				// set to true will always delete empty items
+				// Turn on deletion of empty items
+				// Set to true will always delete empty items
 				'apiDeleteEmpty' => false,
 
-				// Defaults to turn off use of keys
-				// set to true will always return the key form
+				// Turn on and off use of keys
+				// Set to true will always return the key form
 				'apiUseKeys' => true,
+
+				// Turn on and off use of fallbacks
+				// Set to true will always return the key form
+				'apiUseFallbacks' => true,
 
 				// Set API in debug mode
 				// do not turn on in production!
