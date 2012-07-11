@@ -245,7 +245,7 @@ class ApiSetItem extends ApiModifyItem {
 		return array(
 			'api.php?action=wbsetitem&data={}&format=jsonfm'
 			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed. Report it as pretty printed json format.',
-			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			'api.php?action=wbsetitem&data={"labels":{"de":"de-label","en":"en-label"},"descriptions":{"de":"de-desc","en":"en-desc"}}'
 			=> 'Set a more complete JSON structure for the item, it will be extended with an item id and the structure cleansed and completed.',
 		);
 	}

@@ -23,12 +23,23 @@ abstract class Api extends \ApiBase {
 	protected $usekeys = false;
 	
 	/**
+	 * Var to keep the set status for later use
+	 * @var bool how to handle the fallbacks
+	 */
+	protected $usefallbacks = false;
+	
+	/**
 	 * Sets the usekeys-state for later use (and misuse)
 	 *
 	 * @param $params array parameters requested in subclass
 	 */
 	protected function setUsekeys( array $params ) {
-		$usekeys = Settings::get( 'apiUseKeys' ) || ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
+		if ( Settings::get( 'apiUseKeys' ) ) {
+			$usekeys = !( isset( $params['nousekeys'] ) ? $params['nousekeys'] : false );
+		}
+		else {
+			$usekeys = ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
+		}
 
 		if ( $usekeys ) {
 			$format = $this->getMain()->getRequest()->getVal( 'format' );
@@ -37,6 +48,22 @@ abstract class Api extends \ApiBase {
 		}
 
 		$this->usekeys = $usekeys;
+	}
+
+	/**
+	 * Sets the usefallbacks-state for later use (and misuse)
+	 *
+	 * @param $params array parameters requested in subclass
+	 */
+	protected function setUseFallbacks( array $params ) {
+		if ( Settings::get( 'apiUseFallbacks' ) ) {
+			$usefallbacks = !( isset( $params['nousefallbacks'] ) ? $params['nousefallbacks'] : false );
+		}
+		else {
+			$usefallbacks = ( isset( $params['usefallbacks'] ) ? $params['usefallbacks'] : false );
+		}
+
+		$this->usefallbacks = $usefallbacks;
 	}
 
 	/**
@@ -67,6 +94,18 @@ abstract class Api extends \ApiBase {
 				'otherwise fall back to the ordinary style which is to use keys.'
 			);
 		}
+		if ( Settings::get( 'apiUseFallbacks' ) ) {
+			$descriptions['nousefallbacks'] = array( 'Turn off use the fallbacks. The fallback chains are language specific and makes',
+				'it possible to replace missing multilingual attributes with defined ones in other languages. They use the same',
+				'replacement rules as the user interface messages.'
+			);
+		}
+		else {
+			$descriptions['usefallbacks'] = array( 'Turn on use the fallbacks. The fallback chains are language specific and makes',
+				'it possible to replace missing multilingual attributes with defined ones in other languages. They use the same',
+				'replacement rules as the user interface messages.'
+			);
+		}
 		return array_merge($descriptions, array(
 			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
 				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
@@ -88,6 +127,12 @@ abstract class Api extends \ApiBase {
 		}
 		else {
 			$allowedParams['usekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
+		}
+		if ( Settings::get( 'apiUseFallbacks' ) ) {
+			$allowedParams['nousefallbacks'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
+		}
+		else {
+			$allowedParams['usefallbacks'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
 		}
 		return array_merge($allowedParams, array(
 		) );
@@ -217,23 +262,29 @@ abstract class Api extends \ApiBase {
 	 *
 	 * @return array|bool
 	 */
-	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
+	protected function addDescriptionsToResult( array $descriptions, $path, $fallback = false, $name = 'descriptions', $tag = 'description' ) {
 		$value = array();
 		$idx = 0;
 
 		foreach ( $descriptions as $languageCode => $description ) {
-			if ( $description === '' ) {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
+			$report = array(
+				'language' => $languageCode
+			);
+			if ( is_string($description) ) {
+				if ( $description === '' ) {
+					$report['removed'] = '';
+				}
+				else {
+					$report['value'] = $description;
+				}
 			}
 			else {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $description,
-				);
+				$report['unknown'] = '';
 			}
+			if ( $fallback ) {
+				$report['fallback'] = '';
+			}
+			$value[$this->usekeys ? $languageCode : $idx++] = $report;
 		}
 
 		if ( $value !== array() ) {
@@ -256,23 +307,29 @@ abstract class Api extends \ApiBase {
 	 *
 	 * @return array|bool
 	 */
-	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
+	protected function addLabelsToResult( array $labels, $path, $fallback = false, $name = 'labels', $tag = 'label' ) {
 		$value = array();
 		$idx = 0;
 
 		foreach ( $labels as $languageCode => $label ) {
-			if ( $label === '' ) {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
+			$report = array(
+				'language' => $languageCode,
+			);
+			if ( is_string($label) ) {
+				if ( $label === '' ) {
+					$report['removed'] = '';
+				}
+				else {
+					$report['value'] = $label;
+				}
 			}
 			else {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $label,
-				);
+				$report['unknown'] = '';
 			}
+			if ( $fallback ) {
+				$report['fallback'] = '';
+			}
+			$value[$this->usekeys ? $languageCode : $idx++] = $report;
 		}
 
 		if ( $value !== array() ) {

@@ -379,9 +379,13 @@ final class WikibaseHooks {
 				// set to true will always delete empty items
 				'apiDeleteEmpty' => false,
 
-				// Defaults to turn off use of keys
+				// Defaults to turn on and off use of keys
 				// set to true will always return the key form
 				'apiUseKeys' => true,
+
+				// Defaults to turn on and off use of fallbacks
+				// set to true will always return the key form
+				'apiUseFallbacks' => true,
 
 				// Set API in debug mode
 				// do not turn on in production!

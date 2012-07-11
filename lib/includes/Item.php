@@ -143,10 +143,11 @@ interface Item extends Entity {
 	 * @since 0.1
 	 *
 	 * @param array|null $languages note that an empty array gives descriptions for no languages whil a null pointer gives all
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return array found descriptions in given languages
 	 */
-	public function getDescriptions( array $languages = null );
+	public function getDescriptions( array $languages = null, &$useFallback = null );
 
 	/**
 	 *  Get labels for an item
@@ -154,10 +155,11 @@ interface Item extends Entity {
 	 * @since 0.1
 	 *
 	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return array found labels in given languages
 	 */
-	public function getLabels( array $languages = null );
+	public function getLabels( array $languages = null, &$useFallback = null );
 
 	/**
 	 * Adds a site link.
@@ -191,10 +193,11 @@ interface Item extends Entity {
 	 * @since 0.1
 	 *
 	 * @param string $langCode
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return string|false
 	 */
-	public function getDescription( $langCode );
+	public function getDescription( $langCode, &$useFallback = null );
 
 	/**
 	 * Returns the label of the item in the language with the provided code,
@@ -203,10 +206,11 @@ interface Item extends Entity {
 	 * @since 0.1
 	 *
 	 * @param string $langCode
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return string|false
 	 */
-	public function getLabel( $langCode );
+	public function getLabel( $langCode, &$useFallback = null );
 
 	/**
 	 * Returns the site links in an associative array with the following format:

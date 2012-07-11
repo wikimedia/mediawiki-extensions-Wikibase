@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Language;
 
 /**
  * Represents a single Wikibase item.
@@ -244,11 +245,17 @@ class ItemObject extends EntityObject implements Item {
 	 * @since 0.1
 	 *
 	 * @param array|null $languages note that an empty array gives descriptions for no languages whil a null pointer gives all
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return array found descriptions in given languages
 	 */
-	public function getDescriptions( array $languages = null ) {
-		return $this->getMultilangTexts( 'description', $languages );
+	public function getDescriptions( array $languages = null, &$useFallback = null ) {
+		if ( $useFallback === null ) {
+			return $this->getMultilangTexts( 'description', $languages );
+		}
+		else {
+			return $this->getMultilangTexts( 'description', $languages, $useFallback );
+		}
 	}
 
 	/**
@@ -257,11 +264,17 @@ class ItemObject extends EntityObject implements Item {
 	 * @since 0.1
 	 *
 	 * @param array|null $languages note that an empty array gives labels for no languages while a null pointer gives all
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return array found labels in given languages
 	 */
-	public function getLabels( array $languages = null ) {
-		return $this->getMultilangTexts( 'label', $languages );
+	public function getLabels( array $languages = null, &$useFallback = null ) {
+		if ( $useFallback === null ) {
+			return $this->getMultilangTexts( 'label', $languages );
+		}
+		else {
+			return $this->getMultilangTexts( 'label', $languages, $useFallback );
+		}
 	}
 
 	/**
@@ -271,17 +284,32 @@ class ItemObject extends EntityObject implements Item {
 	 *
 	 * @param string $fieldKey
 	 * @param array|null $languages
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return array
 	 */
-	protected function getMultilangTexts( $fieldKey, array $languages = null ) {
-		$textList = $this->data[$fieldKey];
+	protected function getMultilangTexts( $fieldKey, array $languages = null, &$useFallback = null ) {
+		$entries = $textList = $this->data[$fieldKey];
 
 		if ( !is_null( $languages ) ) {
-			$textList = array_intersect_key( $textList, array_flip( $languages ) );
+			$entries = array_intersect_key( $textList, array_flip( $languages ) );
+			if ( $entries === array() && $useFallback !== null && $useFallback !== false ) {
+				foreach ( $languages as $langCode ) {
+					$fallbacks = Language::getFallbacksFor( $langCode );
+					$entries = array_intersect_key( $textList, array_flip( $fallbacks ) );
+					if ( $entries !== array() ) {
+						if ( $useFallback !== null ) {
+							$useFallback = true;
+						}
+						return $entries;
+					}
+				}
+			}
 		}
-
-		return $textList;
+		if ( $useFallback !== null ) {
+			$useFallback = false;
+		}
+		return $entries;
 	}
 
 	/**
@@ -340,12 +368,26 @@ class ItemObject extends EntityObject implements Item {
 	 * @since 0.1
 	 *
 	 * @param string $langCode
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return string|false
 	 */
-	public function getDescription( $langCode ) {
-		return array_key_exists( $langCode, $this->data['description'] )
+	public function getDescription( $langCode, &$useFallback = null ) {
+
+		$value = array_key_exists( $langCode, $this->data['description'] )
 			? $this->data['description'][$langCode] : false;
+
+		if ( $value === false && $useFallback !== false ) {
+			if ( $useFallback === null ) {
+				$values = array_values( $this->getMultilangTexts( 'description', (array)$langCode ) );
+			}
+			else {
+				$values = array_values( $this->getMultilangTexts( 'description', (array)$langCode, $useFallback ) );
+			}
+			$value = $values === array() ? false : array_shift( $values );
+		}
+
+		return $value;
 	}
 
 	/**
@@ -354,12 +396,26 @@ class ItemObject extends EntityObject implements Item {
 	 * @since 0.1
 	 *
 	 * @param string $langCode
+	 * @param bool $useFallback if the language fallbacks should be used
 	 *
 	 * @return string|false
 	 */
-	public function getLabel( $langCode ) {
-		return array_key_exists( $langCode, $this->data['label'] )
+	public function getLabel( $langCode, &$useFallback = null ) {
+
+		$value = array_key_exists( $langCode, $this->data['label'] )
 			? $this->data['label'][$langCode] : false;
+
+		if ( $value === false && $useFallback !== false ) {
+			if ( $useFallback === null ) {
+				$values = array_values( $this->getMultilangTexts( 'label', (array)$langCode ) );
+			}
+			else {
+				$values = array_values( $this->getMultilangTexts( 'label', (array)$langCode, $useFallback ) );
+			}
+			$value = $values === array() ? false : array_shift( $values );
+		}
+
+		return $value;
 	}
 
 	/**

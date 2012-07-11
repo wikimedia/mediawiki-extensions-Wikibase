@@ -75,6 +75,7 @@ class ApiGetItems extends Api {
 		$languages = $params['languages'];
 
 		$this->setUsekeys( $params );
+		$this->setUseFallbacks( $params );
 
 		foreach ($params['ids'] as $id) {
 
@@ -102,16 +103,34 @@ class ApiGetItems extends Api {
 					foreach ( $params['props'] as $key ) {
 						switch ( $key ) {
 						case 'aliases':
-							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
+							$this->addAliasesToResult(
+								$item->getAllAliases( $languages ),
+								$itemPath
+							);
 							break;
 						case 'sitelinks':
-							$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath );
+							$this->addSiteLinksToResult(
+								$item->getSiteLinks(),
+								$itemPath
+							);
 							break;
 						case 'descriptions':
-							$this->addDescriptionsToResult( $item->getDescriptions( $languages ), $itemPath );
+							$useFallbacks = $this->usefallbacks;
+							$this->addDescriptionsToResult(
+								// secondary effect transferred through $useFallbacks
+								$item->getDescriptions( $languages, $useFallbacks ),
+								$itemPath,
+								$useFallbacks
+							);
 							break;
 						case 'labels':
-							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
+							$useFallbacks = $this->usefallbacks;
+							$this->addLabelsToResult(
+								// secondary effect transferred through $useFallbacks
+								$item->getLabels( $languages, $useFallbacks ),
+								$itemPath,
+								$useFallbacks
+							);
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases
