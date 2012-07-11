@@ -174,7 +174,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		promise.done(
 			$.proxy(
 				function() {
-					if ( typeof this._interfaces !== null ) {
+					if ( this._interfaces !== null ) {
 						this._interfaces.siteId.setActive( this.isPending() );
 					}
 				}, this
