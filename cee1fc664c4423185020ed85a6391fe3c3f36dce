@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//88g\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-11T08:42:41Z",
+      "side": 1,
+      "message": "Aiiieee.. Whitespace!",
+      "revId": "cee1fc664c4423185020ed85a6391fe3c3f36dce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//88k\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-11T08:42:41Z",
+      "side": 1,
+      "message": "This shouldn\u0027t really be part of this commit.",
+      "revId": "cee1fc664c4423185020ed85a6391fe3c3f36dce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
