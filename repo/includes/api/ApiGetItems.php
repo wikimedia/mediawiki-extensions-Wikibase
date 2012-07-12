@@ -38,37 +38,30 @@ class ApiGetItems extends Api {
 
 		if ( !isset( $params['ids'] ) ) {
 			$params['ids'] = array();
-			if ( count($params['sites']) === 1 ) {
-				$site = end( $params['sites'] );
-				foreach ($params['titles'] as $title) {
-					$title = Utils::squashToNFC( $title );
-					$id = ItemContent::getIdForSiteLink( $site, $title );
-					if ( $id ) {
-						$params['ids'][] = intval( $id );
-					}
-					else {
-						$this->getResult()->addValue( 'items', --$missing,
-							array( 'site' => $site, 'title' => $title, 'missing' => "" )
-						);
-					}
-				}
-			}
-			elseif ( count($params['titles']) === 1 ) {
-				$title = Utils::squashToNFC( end( $params['titles'] ) );
-				foreach ($params['sites'] as $site) {
-					$id = ItemContent::getIdForSiteLink( $site, $title );
-					if ( $id ) {
-						$params['ids'][] = intval( $id );
-					}
-					else {
-						$this->getResult()->addValue( 'items', --$missing,
-							array( 'site' => $site, 'title' => $title, 'missing' => "" )
-						);
-					}
-				}
+			$numSites = count( $params['sites'] );
+			$numTitles = count( $params['titles'] );
+			$max = max( $numSites, $numTitles );
+			if ( $numSites === 0 || $numTitles === 0 ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 			}
 			else {
-				$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+				$idxSites = 0;
+				$idxTitles = 0;
+				for ($k = 0; $k < $max; $k++) {
+					$site = $params['sites'][$idxSites++];
+					$title = Utils::squashToNFC( $params['titles'][$idxTitles++] );
+					$id = ItemContent::getIdForSiteLink( $site, $title );
+					if ( $id ) {
+						$params['ids'][] = intval( $id );
+					}
+					else {
+						$this->getResult()->addValue( 'items', --$missing,
+							array( 'site' => $site, 'title' => $title, 'missing' => "" )
+						);
+					}
+					if ( $idxSites === $numSites ) $idxSites = 0;
+					if ( $idxTitles === $numTitles ) $idxTitles = 0;
+				}
 			}
 		}
 
