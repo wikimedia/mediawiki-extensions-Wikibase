@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//8W0\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-07-12T16:44:45Z",
+      "side": 1,
+      "message": "Please don\u0027t commit commented out code. Can\u0027t you replace the other preg_replace with trim?",
+      "revId": "b9df09f4219a757ddc058817fc6ae3f182c39531",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
