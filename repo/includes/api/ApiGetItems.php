@@ -72,6 +72,8 @@ class ApiGetItems extends Api {
 			}
 		}
 
+		$params['ids'] = array_unique( $params['ids'], SORT_NUMERIC );
+
 		$languages = $params['languages'];
 
 		$this->setUsekeys( $params );
