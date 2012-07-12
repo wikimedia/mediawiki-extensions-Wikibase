@@ -16,6 +16,24 @@
       "revId": "e5207a7064b85afaf6a3b8d19e41b88c680d3ae6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//8Rc\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-12T21:32:23Z",
+      "side": 1,
+      "message": "The structure is constructed through calls defined in the item.",
+      "parentUuid": "AAAAQX//8VQ\u003d",
+      "revId": "e5207a7064b85afaf6a3b8d19e41b88c680d3ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
