@@ -61,13 +61,13 @@ class ItemDisambiguation extends \ContextSource {
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
-					function( Item $item ) use ( $langCode ) {
+					function( ItemContent $item ) use ( $langCode ) {
 						return \Html::rawElement(
 							'li',
 							array( 'class' => 'wikibase-disambiguation' ),
 							\Linker::link(
 								$item->getTitle(),
-								htmlspecialchars( $item->getDescription( $langCode ) )
+								htmlspecialchars( $item->getItem()->getDescription( $langCode ) )
 							)
 						);
 					},
