@@ -31,6 +31,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.cancelSitelinkLink?.should be_true
         page.cancelSitelinkLink
 
+        page.countExistingSitelinks.should == 0
         @browser.refresh
         page.wait_for_sitelinks_to_load
         page.countExistingSitelinks.should == 0
@@ -58,9 +59,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.pageInputField="xyz_thisarticleshouldneverexist_xyz"
         page.siteIdInputField.should == "English (en)"
         ajax_wait
-        if page.saveSitelinkLink?
-          page.saveSitelinkLink
-        end
+        page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
 
@@ -87,7 +86,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.siteIdAutocompleteList_element.visible?
         end
-
         page.siteIdAutocompleteList_element.visible?.should be_true
 
         page.pageInputField_element.enabled?.should be_true
@@ -97,11 +95,22 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.pageAutocompleteList_element.visible?
         end
-
         page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
 
+        # let's check if we are not allowed to change the siteId when editing
+        page.getNthSitelinksTableRow(1).click
+        page.wait_until do
+          page.editSitelinkLink_element.visible?
+        end
+        page.editSitelinkLink
+        page.siteIdInputField?.should be_false
+        page.pageInputField?.should be_true
+        page.cancelSitelinkLink
+
+        numExistingSitelinks = page.countExistingSitelinks
+        numExistingSitelinks.should == 1
         @browser.refresh
         page.wait_for_sitelinks_to_load
         numExistingSitelinks = page.countExistingSitelinks
@@ -125,7 +134,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.wait_until do
             page.siteIdAutocompleteList_element.visible?
           end
-
           page.siteIdAutocompleteList_element.visible?.should be_true
 
           page.pageInputField_element.enabled?.should be_true
@@ -135,24 +143,14 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.wait_until do
             page.pageAutocompleteList_element.visible?
           end
-
           page.saveSitelinkLink
           ajax_wait
           page.wait_for_api_callback
 
-          if count == 1
-            page.getNthSitelinksTableRow(2).click
-            page.wait_until do
-              page.editSitelinkLink_element.visible?
-            end
-            page.editSitelinkLink
-            page.siteIdInputField?.should be_false
-          end
-
+          count = count+1
+          page.getNumberOfSitelinksFromCounter.should == count
           @browser.refresh
           page.wait_for_sitelinks_to_load
-
-          count = count+1
           page.getNumberOfSitelinksFromCounter.should == count
         end
         page.countExistingSitelinks.should == count
@@ -184,10 +182,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_until do
           page.pageAutocompleteList_element.visible?
         end
-
-        if page.saveSitelinkLink?
-          page.saveSitelinkLink
-        end
+        page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
         sleep 1 #cause there's a delay before the value is actually set in the dom -> should be changed in the UI
@@ -207,7 +202,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(SitelinksItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        page.getNthSitelinksTableRow(2).click
+        page.getNthSitelinksTableRow(1).click
         page.editSitelinkLink
         page.saveSitelinkLinkDisabled?.should be_true
         page.cancelSitelinkLink?.should be_true
@@ -230,9 +225,18 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
         @browser.refresh
         page.wait_for_sitelinks_to_load
-        page.getNthSitelinksTableRow(2).click
+        page.getNthSitelinksTableRow(1).click
         page.editSitelinkLink
         page.pageInputField.should_not == current_page
+      end
+    end
+  end
+
+  context "Check clicking on sitelink" do
+    it "should check if the sitelink leads to the correct page" do
+      on_page(SitelinksItemPage) do |page|
+        page.germanSitelink
+        page.articleTitle.should == "Berlin"
       end
     end
   end
