@@ -40,6 +40,7 @@ class ApiSetItem extends ApiModifyItem {
 	 */
 	protected function createItem( array $params ) {
 		if ( isset( $params['data'] ) ) {
+			$this->flags |= EDIT_NEW;
 			return ItemContent::newEmpty();
 		}
 		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );

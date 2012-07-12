@@ -160,8 +160,15 @@ abstract class ApiModifyItem extends Api {
 			}
 		}
 		else {
+			# Allow bots to exempt some edits from bot flagging
+			$bot = $user->isAllowed( 'bot' ) && $params['bot'];
+			$flags = //EDIT_DEFER_UPDATES | EDIT_AUTOSUMMARY |
+				//( $new ? EDIT_NEW : EDIT_UPDATE ) |
+				//( ( $this->minoredit && !$this->isNew ) ? EDIT_MINOR : 0 ) |
+				( $bot ? EDIT_FORCE_BOT : 0 );
+			$summary = ($user->isAllowed( 'bot' ) ? 'bot allowed' : 'no bot allowed' ) . ' ' . EDIT_FORCE_BOT;
 			// Do the actual save, or if it don't exist yet create it.
-			$status = $itemContent->save();
+			$status = $itemContent->save( $summary, $user, $flags );
 			$success = $status->isOK();
 
 			if ( !$success ) {
@@ -274,6 +281,7 @@ abstract class ApiModifyItem extends Api {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
+			'bot' => false,
 		) );
 	}
 
