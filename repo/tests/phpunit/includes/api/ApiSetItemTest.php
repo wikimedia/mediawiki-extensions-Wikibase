@@ -363,7 +363,7 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @group API
 	 * @depends testSetItemGetTokenSetData
 	 */
-	public function testGetItemsMultiple() {
+	public function testGetItemsMultipleIds() {
 		$first = $this->doApiRequest( array(
 			'action' => 'wbgetitems',
 			'ids' => '1|2|3'
@@ -375,8 +375,30 @@ class ApiSetItemTest extends \ApiTestCase {
 			"Must have an 'items' key in the result from the API" );
 		$this->assertCount( 3, $first[0]['items'],
 			"Must have a number of count of 3 in the 'items' result from the API" );
+		// FIXME: this ends a bit premature, it should verify correct id
 	}
 
+	/**
+	 * Testing if we can get all the complete stringified items if we do lookup with multiple site-title pairs.
+	 *
+	 * @group API
+	 * @depends testSetItemGetTokenSetData
+	 */
+	public function testGetItemsMultipleSiteLinks() {
+		$first = $this->doApiRequest( array(
+			'action' => 'wbgetitems',
+			'sites' => 'dewiki|enwiki|nlwiki',
+			'titles' => 'Berlin|London|Oslo'
+		) );
+
+		$this->assertArrayHasKey( 'success', $first[0],
+			"Must have an 'success' key in the result from the API" );
+		$this->assertArrayHasKey( 'items', $first[0],
+			"Must have an 'items' key in the result from the API" );
+		$this->assertCount( 3, $first[0]['items'],
+			"Must have a number of count of 3 in the 'items' result from the API" );
+		// FIXME: this ends a bit premature, it should verify correct sitelinks
+	}
 	/**
 	 * Testing if we can get individual complete stringified items if we do lookup with site-title pairs
 	 * Note that this makes assumptions about which ids they have been assigned.
