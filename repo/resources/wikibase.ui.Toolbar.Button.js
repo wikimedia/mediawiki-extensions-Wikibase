@@ -69,10 +69,11 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 	 * Disables or enables the button
 	 * @param bool disabled true for disabling, false for enabling the button.
 	 *        If the button is disabled, it can't be clicked.
+	 * @return bool whether the operation was successful
 	 */
 	setDisabled: function( disable ) {
-		if( this.isDisabled() == disable ) {
-			return false;
+		if( this.isDisabled() === disable ) {
+			return true;
 		}
 		var text = this.getContent();
 		var oldElem = this._elem;

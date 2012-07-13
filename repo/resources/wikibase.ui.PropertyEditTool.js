@@ -66,6 +66,26 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 
 		// call for first rendering of additional stuff of the view:
 		this._onRefreshView( 0 );
+
+		// disabling all actions when starting an edit mode
+		$( wikibase ).on(
+			'startItemPageEditMode',
+			$.proxy(
+				function( event, origin ) {
+					this.disable( origin );
+				}, this
+			)
+		);
+
+		// re-enabling all actions then stoping an edit mode
+		$( wikibase ).on(
+			'stopItemPageEditMode',
+			$.proxy(
+				function( event, origin ) {
+					this.enable();
+				}, this
+			)
+		);
 	},
 
 	/**
@@ -517,6 +537,96 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	getEditableValuePrototype: function() {
 		return window.wikibase.ui.PropertyEditTool.EditableValue;
 	},
+
+	/**
+	 * Disable this property edit tool.
+	 *
+	 * @param wikibase.ui.EditableValue skip editable value to not disable (usually the one that
+	 *                                       triggered starting edit mode)
+	 * @return bool whether disabling was successful for all elements
+	 */
+	disable: function( skip ) {
+		var success = true;
+		if ( this._toolbar !== null ) {
+			success = success && this._toolbar.disable();
+		}
+		if ( this._editableValues !== null ) {
+			$.each( this._editableValues, function( i, editableValue ) {
+				if ( editableValue !== skip ) {
+					success = success && editableValue.disable();
+				}
+			} );
+		}
+		return success;
+	},
+
+	/**
+	 * Enable this property edit tool.
+	 *
+	 * @return bool whether enabling was successful for all elements
+	 */
+	enable: function() {
+		var success = true;
+		if ( this._toolbar !== null ) {
+			success = success && this._toolbar.enable();
+		}
+		if ( this._editableValues !== null ) {
+			$.each( this._editableValues, function( i, editableValue ) {
+				success = success && editableValue.enable();
+			} );
+		}
+		return success;
+	},
+
+	/**
+	 * Returns whether this property edit tool is disabled.
+	 *
+	 * @return bool true if disabled
+	 */
+	isDisabled: function() {
+		return ( this.getElementsState() === wikibase.ui.ELEMENT_STATE.DISABLED );
+	},
+
+	/**
+	 * Returns whether this property edit tool is enabled.
+	 *
+	 * @return bool true if enabled
+	 */
+	isEnabled: function() {
+		return ( this.getElementsState() === wikibase.ui.ELEMENT_STATE.ENABLED );
+	},
+
+	/**
+	 * Get state (disabled, enabled or mixed) of all edit tool elements (editable values and toolbar).
+	 *
+	 * @return number whether all elements are enabled (true), disabled (false) or have mixed states
+	 */
+	getElementsState: function() {
+		var disabled = true, enabled = true;
+
+		// check editableValues
+		$.each( this._editableValues, function( i, editableValue ) {
+			if ( editableValue.isDisabled() ) {
+				enabled = false;
+			} else if ( !editableValue.isDisabled() ) {
+				disabled = false;
+			}
+		} );
+		// check toolbar
+		if ( this.allowsMultipleValues && !this.isFull() ) { // disabled anyhow independently
+			enabled = enabled && this._toolbar.isEnabled();
+			disabled = disabled && this._toolbar.isDisabled();
+		}
+
+		if ( disabled === true ) {
+			return wikibase.ui.ELEMENT_STATE.DISABLED;
+		} else if ( enabled === true ) {
+			return wikibase.ui.ELEMENT_STATE.ENABLED;
+		} else {
+			return wikibase.ui.ELEMENT_STATE.MIXED;
+		}
+	},
+
 
 	/////////////////
 	// CONFIGURABLE:
