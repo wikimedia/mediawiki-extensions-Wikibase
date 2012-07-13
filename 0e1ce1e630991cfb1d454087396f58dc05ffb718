@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//8LA\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-13T10:08:06Z",
+      "side": 1,
+      "message": "Because the initial assignment confuses people when there i a following ternary operator. Can remove them.",
+      "parentUuid": "AAAAQX//8OI\u003d",
+      "revId": "0e1ce1e630991cfb1d454087396f58dc05ffb718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//8MA\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-07-13T07:28:51Z",
       "side": 1,
       "message": "whitespace",
+      "revId": "0e1ce1e630991cfb1d454087396f58dc05ffb718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//8Ko\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-13T10:08:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//8MA\u003d",
       "revId": "0e1ce1e630991cfb1d454087396f58dc05ffb718",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//8K0\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-13T10:08:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//8L8\u003d",
+      "revId": "0e1ce1e630991cfb1d454087396f58dc05ffb718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//8L4\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//8Kw\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-13T10:08:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//8L4\u003d",
+      "revId": "0e1ce1e630991cfb1d454087396f58dc05ffb718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//8L0\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2012-07-13T07:28:51Z",
       "side": 1,
       "message": "please remove",
+      "revId": "0e1ce1e630991cfb1d454087396f58dc05ffb718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//8Ks\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-13T10:08:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//8L0\u003d",
       "revId": "0e1ce1e630991cfb1d454087396f58dc05ffb718",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
