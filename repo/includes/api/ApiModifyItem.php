@@ -270,10 +270,6 @@ abstract class ApiModifyItem extends Api {
 				ApiBase::PARAM_TYPE => 'string',
 			),
 			'token' => null,
-			'gettoken' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false
-			),
 		) );
 	}
 

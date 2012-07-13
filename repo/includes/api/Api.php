@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Status;
+use User, Status, ApiBase;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -56,7 +56,11 @@ abstract class Api extends \ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		$descriptions = array();
+		$descriptions = array(
+			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
+				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
+			)
+		);
 		if ( Settings::get( 'apiUseKeys' ) ) {
 			$descriptions['nousekeys'] = array( 'Turn off use the keys. The use of keys are only used in formats that supports them,',
 				'otherwise fall back to the ordinary style which is to use keys.'
@@ -67,11 +71,7 @@ abstract class Api extends \ApiBase {
 				'otherwise fall back to the ordinary style which is to use keys.'
 			);
 		}
-		return array_merge($descriptions, array(
-			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
-				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
-			)
-		) );
+		return $descriptions;
 	}
 
 	/**
@@ -82,15 +82,19 @@ abstract class Api extends \ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$allowedParams = array();
+		$allowedParams = array(
+			'gettoken' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
+			),
+		);
 		if ( Settings::get( 'apiUseKeys' ) ) {
 			$allowedParams['nousekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
 		}
 		else {
 			$allowedParams['usekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
 		}
-		return array_merge($allowedParams, array(
-		) );
+		return $allowedParams;
 	}
 
 	/**
