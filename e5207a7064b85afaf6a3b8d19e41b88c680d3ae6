@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQX//8OY\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-13T00:48:37Z",
+      "side": 1,
+      "message": "Please put newlines between separate control structures, makes it much more readable.",
+      "revId": "e5207a7064b85afaf6a3b8d19e41b88c680d3ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//8OU\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-13T00:48:37Z",
+      "side": 1,
+      "message": "Tab to many",
+      "revId": "e5207a7064b85afaf6a3b8d19e41b88c680d3ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//8OQ\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-13T00:48:37Z",
+      "side": 1,
+      "message": "Try to avoid comitting commented out debug code - it\u0027ll just end up sitting here forever, polluting the code",
+      "revId": "e5207a7064b85afaf6a3b8d19e41b88c680d3ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//8VQ\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
         "patchSetId": 1
@@ -31,6 +82,24 @@
       "side": 1,
       "message": "The structure is constructed through calls defined in the item.",
       "parentUuid": "AAAAQX//8VQ\u003d",
+      "revId": "e5207a7064b85afaf6a3b8d19e41b88c680d3ae6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//8Oc\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-13T00:48:37Z",
+      "side": 1,
+      "message": "Right - this is going to the API, which is fine. Some other of your tests are doing what I described though :)",
+      "parentUuid": "AAAAQX//8Rc\u003d",
       "revId": "e5207a7064b85afaf6a3b8d19e41b88c680d3ae6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
