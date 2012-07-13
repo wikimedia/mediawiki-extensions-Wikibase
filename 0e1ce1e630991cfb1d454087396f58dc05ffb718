@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//8OI\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-13T00:48:28Z",
+      "side": 1,
+      "message": "Why do you have brackets around the whole statement?",
+      "revId": "0e1ce1e630991cfb1d454087396f58dc05ffb718",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
