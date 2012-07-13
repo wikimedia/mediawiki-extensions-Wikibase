@@ -205,19 +205,30 @@
 			'start editing'
 		);
 
-		this.evInterface.setDisabled( true );
 		equal(
-			this.evInterface.isDisabled(),
+			this.evInterface.setDisabled( true ),
 			true,
 			'disable'
 		);
+
+		equal(
+			this.evInterface.isDisabled(),
+			true,
+			'disabled'
+		);
+
 		ok(
 			this.evInterface._inputElem.attr( 'disabled' ),
 			true,
 			'input element is disabled'
 		);
 
-		this.evInterface.setDisabled( false );
+		equal(
+			this.evInterface.setDisabled( false ),
+			true,
+			'enable'
+		);
+
 		equal(
 			this.evInterface.isDisabled(),
 			false,

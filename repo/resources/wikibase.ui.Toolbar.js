@@ -176,6 +176,99 @@ window.wikibase.ui.Toolbar.prototype = {
 		return $.inArray( elem, this._items );
 	},
 
+	/**
+	 * Determine whether the state (disabled, enabled) of any toolbar element can be changed.
+	 *
+	 * @return bool whether the state of any toolbar element can be changed
+	 */
+	isStateChangeable: function() {
+		var stateChangeable = false;
+		$.each( this._items, function( i, item ) {
+			if ( item.isStateChangeable() ) {
+				stateChangeable = true;
+			}
+		} );
+		return stateChangeable;
+	},
+
+	/**
+	 * Convenience method to disable all toolbar elements.
+	 *
+	 * @return whether all elements are disabled
+	 */
+	disable: function() {
+		return this.setDisabled( true );
+	},
+
+	/**
+	 * Convenience method to enable all toolbar elements.
+	 *
+	 * @return bool whether all elements are enabled
+	 */
+	enable: function() {
+		return this.setDisabled( false );
+	},
+
+	/**
+	 * Dis- or enable all toolbar elements.
+	 *
+	 * @param bool disable true to disable, false to enable all toolbar elements
+	 * @return bool whether the operation was successful
+	 */
+	setDisabled: function( disable ) {
+		var success = true;
+		$.each( this._items, function( i, item ) {
+			success = item.setDisabled( disable ) && success;
+		} );
+		return success;
+	},
+
+	/**
+	 * check whether all toolbar elements are disabled
+	 *
+	 * @return bool whether all toolbar elements are disabled
+	 */
+	isDisabled: function() {
+		var state = this.getElementsState();
+		return ( state === wikibase.ui.ELEMENT_STATE.DISABLED );
+	},
+
+	/**
+	 * check whether all toolbar elements are enabled
+	 *
+	 * @return bool whether all toolbar elements are enabled
+	 */
+	isEnabled: function() {
+		var state = this.getElementsState();
+		return ( state === wikibase.ui.ELEMENT_STATE.ENABLED );
+	},
+
+	/**
+	 * get state of all elements (disabled, enabled or mixed)
+	 *
+	 * @return number whether all elements are enabled (true), disabled (false) or have mixed states
+	 */
+	getElementsState: function() {
+		var disabled = true, enabled = true;
+		$.each( this._items, function( i, item ) {
+			// loop through all sub-toolbars and check dedicated toolbar elements
+			if ( item instanceof wikibase.ui.Toolbar || item.stateChangeable ) {
+				if ( item.isDisabled() ) {
+					enabled = false;
+				} else if ( !item.isDisabled() ) {
+					disabled = false;
+				}
+			}
+		} );
+		if ( disabled === true ) {
+			return wikibase.ui.ELEMENT_STATE.DISABLED;
+		} else if ( enabled === true ) {
+			return wikibase.ui.ELEMENT_STATE.ENABLED;
+		} else {
+			return wikibase.ui.ELEMENT_STATE.MIXED;
+		}
+	},
+
 	destroy: function() {
 		if( this._items !== null ) {
 			for( var i in this._items ) {
