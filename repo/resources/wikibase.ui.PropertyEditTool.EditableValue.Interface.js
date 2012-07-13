@@ -421,14 +421,31 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	},
 
 	/**
+	 * Convenience function to disable this interface.
+	 *
+	 * @return bool whether the operation was successful
+	 */
+	disable: function() {
+		return this.setDisabled( true );
+	},
+
+	/**
+	 * Convenience function to enable this interface.
+	 *
+	 * @return bool whether the operation was successful
+	 */
+	enable: function() {
+		return this.setDisabled( false );
+	},
+
+	/**
 	 * Disables or enables the element. Disabled is still visible but will be presented differently
 	 * and might behave differently in some cases.
 	 *
 	 * @param bool disable true for disabling, false for enabling the element
-	 * @return bool whether the state was changed or not.
+	 * @return bool whether operation was successful
 	 */
 	setDisabled: function( disable ) {
-		// TODO!
 		if( disable ) {
 			this._subject.addClass( this.UI_CLASS + '-disabled' );
 			if( this.isInEditMode() ) {
@@ -440,6 +457,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 				this._enableInputElement();
 			}
 		}
+		return true;
 	},
 
 	/**

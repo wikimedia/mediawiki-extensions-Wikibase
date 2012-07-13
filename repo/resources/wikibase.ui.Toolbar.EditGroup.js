@@ -88,6 +88,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
 		} ) );
 		this.tooltipAnchor.setTooltip( this._editableValue.getInputHelpMessage() );
+		this.tooltipAnchor.stateChangeable = false; // tooltip anchor has no disabled/enabled behaviour
 
 		// now create the buttons we need for basic editing:
 		var button = window.wikibase.ui.Toolbar.Button;

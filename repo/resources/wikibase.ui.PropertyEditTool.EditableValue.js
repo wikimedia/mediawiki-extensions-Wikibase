@@ -20,6 +20,10 @@
  *                   Parameters: (1) jQuery.event
  *                               (2) JSON - item - the new item returned by the API request FIXME: this should be an
  *                                                                                                 'Item' object!
+ * startItemPageEditMode: Triggered when any edit mode on the item page is started
+ *                        Parameters: (1) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
+ * stopItemPageEditMode: Triggered when any edit mode on the item page is stopped
+ *                       Parameters: (1) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
  */
 "use strict";
 
@@ -241,8 +245,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @see $.PersistentPromisor()
 	 */
 	remove: $.PersistentPromisor( function() {
+		$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
+
 		var degrade = $.proxy( function() {
 			if( !this.preserveEmptyForm ) {
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
 				// remove value totally
 				this.destroy();
 				this._subject.empty().remove();
@@ -322,6 +329,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			elem.startEditing();
 		} );
 
+		$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
+
 		return true;
 	},
 
@@ -346,6 +355,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			if( this.isPending() ) { // cancel pending edit...
 				promise = this.remove(); // not yet existing value, no state to go back to -> do not trigger 'afterStopEditing' here!
 			} else { // cancel...
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
 				return promise;
 			}
 		} else {
@@ -360,6 +370,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		.done(
 			$.proxy( function() {
 				$( this ).triggerHandler( 'afterStopEditing', [ save, wasPending ] );
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
 			}, this )
 		);
 
@@ -763,6 +774,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
+
+		/**
+		 * propagade stopping of edit mode (enabling other actions) when all editable value actions
+		 * are disabled; this happens for empty values whose edit modes are triggered directly
+		 * during page loading
+		 */
+		if ( this._toolbar.isDisabled() ) {
+			$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
+		} else {
+			$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
+		}
+
 	},
 
 	/**
@@ -811,6 +834,95 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param jQuery.Event event
 	 */
 	_interfaceHandler_onBlur: function( relatedInterface, event ) { },
+
+	/**
+	 * Convenience method to disable this editable value.
+	 *
+	 * @return bool whether the operation was successful
+	 */
+	disable: function() {
+		return this.setDisabled( true );
+	},
+
+	/**
+	 * Convenience method to enable this editable value.
+	 *
+	 * @return bool whether the operation was successful
+	 */
+	enable: function() {
+		return this.setDisabled( false );
+	},
+
+	/**
+	 * Dis- or enables this editable value.
+	 *
+	 * @param bool disable true to disable, false to enable
+	 * @return bool whether the operation was successful
+	 */
+	setDisabled: function( disable ) {
+		var success = true;
+		if ( !disable || !this._toolbar.isDisabled() ) {
+			$.each( this._interfaces, function( i, interf ) {
+				success = success && interf.setDisabled( disable );
+			} );
+		}
+		/**
+		 * prevent altering the actions' states of the editable values that are in edit mode already
+		 * (referring to editable values that are empty when loading the page, instantly triggering
+		 * edit mode; without excluding them, their actions would be enabled as well
+ 		 */
+		if ( !this.isInEditMode() && this._toolbar !== null ) {
+			success = success && this._toolbar.setDisabled( disable );
+		}
+		return success;
+	},
+
+	/**
+	 * Returns whether this editable value is disabled.
+	 *
+	 * @return bool true if disabled
+	 */
+	isDisabled: function() {
+		return ( this.getElementsState() === wikibase.ui.ELEMENT_STATE.DISABLED );
+	},
+
+	/**
+	 * Returns whether this editable value is enabled.
+	 *
+	 * @return bool true if enabled
+	 */
+	isEnabled: function() {
+		return ( this.getElementsState() === wikibase.ui.ELEMENT_STATE.ENABLED );
+	},
+
+	/**
+	 * Get state (disabled, enabled or mixed) of all editable value elements (interfaces and toolbar).
+	 *
+	 * @return number whether all elements are enabled (true), disabled (false) or have mixed states
+	 */
+	getElementsState: function() {
+		var disabled = true, enabled = true;
+
+		// check interfaces
+		$.each( this._interfaces, function( i, interf ) {
+			if ( interf.isDisabled() ) {
+				enabled = false;
+			} else if ( !interf.isDisabled() ) {
+				disabled = false;
+			}
+		} );
+		// check toolbar
+		enabled = enabled && this._toolbar.isEnabled();
+		disabled = disabled && this._toolbar.isDisabled();
+
+		if ( disabled === true ) {
+			return wikibase.ui.ELEMENT_STATE.DISABLED;
+		} else if ( enabled === true ) {
+			return wikibase.ui.ELEMENT_STATE.ENABLED;
+		} else {
+			return wikibase.ui.ELEMENT_STATE.MIXED;
+		}
+	},
 
 	/**
 	 * Removes all traces of this ui element from the DOM, so the represented value is still visible but not interactive
