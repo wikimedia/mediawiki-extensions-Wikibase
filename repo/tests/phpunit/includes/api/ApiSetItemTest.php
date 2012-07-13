@@ -109,7 +109,34 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @depends testTokensAndRights
 	 * @dataProvider provideSetItemIdDataOp
 	 */
-	function testSetItemGetToken( $id, $op, $data ) {
+	function testSetItemGetTokenGetItems( $id, $op, $data ) {
+		$data = $this->doApiRequest(
+			array(
+				'action' => 'wbgetitems',
+				'ids' => $id,
+				'gettoken' => '' ),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+		// this should always hold for a logged in user
+		// unless we do some additional tricks with the token
+		$this->assertEquals(
+			34, strlen( $data[0]["wbgetitems"]["itemtoken"] ),
+			"The length of the token is not 34 chars"
+		);
+		$this->assertRegExp(
+			'/\+\\\\$/', $data[0]["wbgetitems"]["itemtoken"],
+			"The final chars of the token is not '+\\'"
+		);
+	}
+
+	/**
+	 * @group API
+	 * @depends testTokensAndRights
+	 * @dataProvider provideSetItemIdDataOp
+	 */
+	function testSetItemGetTokenSetItem( $id, $op, $data ) {
 		$data = $this->doApiRequest(
 			array(
 				'action' => 'wbsetitem',
@@ -136,7 +163,7 @@ class ApiSetItemTest extends \ApiTestCase {
 	 *   "The token parameter must be set"
 	 *
 	 * @group API
-	 * @depends testSetItemGetToken
+	 * @depends testSetItemGetTokenSetItem
 	 * @dataProvider provideSetItemIdDataOp
 	 */
 	function testSetItemWithNoToken( $id, $op, $data ) {
@@ -161,7 +188,7 @@ class ApiSetItemTest extends \ApiTestCase {
 
 	/**
 	 * @group API
-	 * @depends testSetItemGetToken
+	 * @depends testSetItemGetTokenSetItem
 	 * @depends testSetItemWithNoToken
 	 */
 	function testSetItemTop() {

@@ -123,6 +123,11 @@ class ApiGetItems extends Api {
 
 		$success = true;
 
+		if ( $success && isset( $params['gettoken'] ) ) {
+			$user = $this->getUser();
+			$this->addTokenToResult( $user->getEditToken() );
+		}
+
 		$this->getResult()->addValue(
 			null,
 			'success',
