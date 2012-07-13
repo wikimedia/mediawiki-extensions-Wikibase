@@ -107,5 +107,16 @@ class ItemHandler extends EntityHandler {
 	protected function getDiffEngineClass() {
 		return '\Wikibase\ItemDiffView';
 	}
+
+	/**
+	 * Returns false to indicate that the parser cache should not be used for data items.
+	 * The html representation of Items depends on the user language, splitting the parser
+	 * cache by user language is currently problematic and would need some core changes.
+	 *
+	 * @return bool false
+	 */
+	public function isParserCacheSupported() {
+		return false;
+	}
 }
 
