@@ -100,6 +100,8 @@ describe "Check functionality of blocking a user" do
         page.wait_for_api_callback
         page.wbErrorDiv?.should be_true
         page.wbErrorDiv_element.text.should == "You are not allowed to perform this action."
+        @browser.refresh
+        page.wait_for_item_to_load
         page.descriptionInputField = "I am also not allowed to do that!"
         page.saveDescriptionLink
         ajax_wait
