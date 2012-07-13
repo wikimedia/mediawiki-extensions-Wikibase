@@ -65,4 +65,23 @@ describe "Check functionality of edit label" do
       end
     end
   end
+
+  context "Check for normalization of label" do
+    it "should check if normalization for item labels is working" do
+      on_page(NewItemPage) do |page|
+        label_unnormalized = "  me haz   too many       spaces inside           "
+        label_normalized = "me haz too many spaces inside"
+        page.editLabelLink
+        page.labelInputField_element.clear
+        page.labelInputField = label_unnormalized
+        page.saveLabelLink
+        ajax_wait
+        page.wait_for_api_callback
+        page.itemLabelSpan.should == label_normalized
+        @browser.refresh
+        page.wait_for_item_to_load
+        page.itemLabelSpan.should == label_normalized
+      end
+    end
+  end
 end
