@@ -114,15 +114,17 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 * and might behave differently in some cases.
 	 *
 	 * @param bool disable true for disabling, false for enabling the element
-	 * @return bool whether the state was changed or not.
+	 * @return bool whether the requested state was applied (might also be applied already)
 	 */
 	setDisabled: function( disable ) {
+		if ( !this.stateChangeable ) { // state is not supposed to change, no need to do anything
+			return true;
+		}
 		if( typeof disable == 'undefined' ) {
 			disable = true;
 		}
 		if( this.isDisabled() == disable ) {
-			// no point in disabling/enabling if this is the current state
-			return false;
+			return true; // no point in disabling/enabling if this is the current state
 		}
 		var cls = this.UI_CLASS + '-disabled';
 
@@ -137,13 +139,14 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 			}
 			this._elem.removeClass( cls );
 		}
+
 		return true;
 	},
 
 	/**
 	 * Disables the element. Shorthand for setDisabled( false ).
 	 *
-	 * @return bool
+	 * @return bool whether operation was successful
 	 */
 	enable: function() {
 		return this.setDisabled( false );
@@ -152,11 +155,31 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	/**
 	 * Disables the element. Shorthand for setDisabled( true ).
 	 *
-	 * @return bool
+	 * @return bool whether operation was successful
 	 */
 	disable: function() {
 		return this.setDisabled( true );
 	},
+
+	/**
+	 * Determine whether state change (enabling, disabling) is possible for this object.
+	 *
+	 * @return bool whether changing the state is possible
+	 */
+	isStateChangeable: function() {
+		return this.stateChangeable;
+	},
+
+
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
+
+	/**
+	 * @var bool whether object's state is changeable (enabled, disabled)
+	 */
+	stateChangeable: true,
+
 
 	///////////
 	// EVENTS:
