@@ -16,7 +16,18 @@ window.wikibase = window.wikibase || {};
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.
+ * Make sure this won't be overriden when loading two ui modules
+ * in parallel without loading base module.
  * @var Object
  */
-window.wikibase.ui = window.wikibase.ui || {}; // make sure this won't override when loading two ui
-                                               // modules in parallel without loading base module.
+window.wikibase.ui = window.wikibase.ui || {
+	/**
+	 * @const states of element groups
+	 * @enum number
+	 */
+	ELEMENT_STATE: {
+		ENABLED: 1, // all elements are enabled
+		DISABLED: 2, // all elements are disabled
+		MIXED: 3
+	}
+};

@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
 'use strict';
 
@@ -71,15 +72,21 @@
 		);
 
 		equal(
+			this.label.isDisabled(),
+			true,
+			'disabled'
+		);
+
+		equal(
 			this.label.setDisabled( true ),
-			false,
-			'disable but disabled already, state not changed'
+			true,
+			'disabling once more'
 		);
 
 		equal(
 			this.label.isDisabled(),
 			true,
-			'disabled now'
+			'disabled'
 		);
 
 		equal(
@@ -89,16 +96,37 @@
 		);
 
 		equal(
-			this.label.setDisabled( false ),
+			this.label.isDisabled(),
 			false,
-			'enable but enabled already, state not changed'
+			'enabled'
+		);
+
+		equal(
+			this.label.setDisabled( false ),
+			true,
+			'enabling once more'
 		);
 
 		equal(
 			this.label.isDisabled(),
 			false,
-			'disabled now'
+			'enabled'
 		);
+
+		this.label.stateChangeable = false;
+
+		equal(
+			this.label.setDisabled( true ),
+			true,
+			'trying to disable without state being changeable'
+		);
+
+		equal(
+			this.label.isDisabled(),
+			false,
+			'state did not change'
+		);
+
 	} );
 
 	test( 'EVENTS: beforeDisable and beforeEnable', function() {

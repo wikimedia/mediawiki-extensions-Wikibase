@@ -86,6 +86,12 @@
 			'initiated tooltip'
 		);
 
+		equal(
+			this.editGroup.tooltipAnchor.stateChangeable,
+			false,
+			'tooltip state is not changeable'
+		);
+
 		ok(
 			this.editGroup.btnEdit instanceof window.wikibase.ui.Toolbar.Button,
 			'initiated edit button'
