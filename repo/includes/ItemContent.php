@@ -150,10 +150,11 @@ class ItemContent extends EntityContent {
 	 *
 	 * @param string $summary
 	 * @param null|User $user
+	 * @param integer $flags
 	 *
 	 * @return \Status Success indicator
 	 */
-	public function save( $summary = '', User $user = null ) {
+	public function save( $summary = '', User $user = null, $flags = 0 ) {
 		$success = $this->relationalSave();
 
 		if ( !$success ) {
@@ -162,7 +163,7 @@ class ItemContent extends EntityContent {
 			$status = $this->getWikiPage()->doEditContent(
 				$this,
 				$summary,
-				EDIT_AUTOSUMMARY,
+				$flags | EDIT_AUTOSUMMARY,
 				false,
 				$user
 			);

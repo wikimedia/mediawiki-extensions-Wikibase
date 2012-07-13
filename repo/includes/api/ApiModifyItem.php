@@ -18,6 +18,12 @@ use User, Title, ApiBase;
 abstract class ApiModifyItem extends Api {
 
 	/**
+	 * When saving a number of flags should be set
+	 * @var integer $flags how flags should be set
+	 */
+	protected $flags;
+
+	/**
 	 * @see  Api::getRequiredPermissions()
 	 */
 	protected function getRequiredPermissions( Item $item, array $params ) {
@@ -74,6 +80,7 @@ abstract class ApiModifyItem extends Api {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
+		$this->flags = 0;
 
 		if ( $params['gettoken'] ) {
 			$this->addTokenToResult( $user->getEditToken() );
@@ -160,8 +167,15 @@ abstract class ApiModifyItem extends Api {
 			}
 		}
 		else {
+			// Allow bots to exempt some edits from bot flagging
+			// Also the EDIT_AUTOSUMMARY should be handled
+			if ( $this->flags & EDIT_NEW) {
+				$this->flags |= EDIT_UPDATE;
+			}
+			$this->flags = ($user->isAllowed( 'bot' ) && $params['bot']) ? EDIT_FORCE_BOT : 0;
+			$summary = '';
 			// Do the actual save, or if it don't exist yet create it.
-			$status = $itemContent->save();
+			$status = $itemContent->save( $summary, $user, $this->flags );
 			$success = $status->isOK();
 
 			if ( !$success ) {
@@ -274,6 +288,7 @@ abstract class ApiModifyItem extends Api {
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
+			'bot' => false,
 		) );
 	}
 
