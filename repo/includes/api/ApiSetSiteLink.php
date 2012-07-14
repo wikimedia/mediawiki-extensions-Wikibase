@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Http;
+use ApiBase, User, Http, Language;
 
 /**
  * API module to associate a page on a site with a Wikibase item or remove an already made such association.
@@ -45,6 +45,53 @@ class ApiSetSiteLink extends ApiModifyItem {
 	}
 
 	/**
+	 * Make a string for an autocomment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $plural integer|string the number used for plural forms
+	 * @return string that can be used as an autocomment
+	 */
+	protected function autoComment( array $params, $plural = 1 ) {
+		if ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) {
+			$comment = "set-sitelink";
+		}
+		else {
+			$comment = "remove-sitelink";
+		}
+		return $comment . SUMMARY_COLON . $params['linksite'] . SUMMARY_GROUPING . $plural;
+	}
+
+	/**
+	 * Make a string for an autosummary.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @return array with a count of items, a string that can be used as an autosummary and the language
+	 */
+	protected function autoSummary( array $params ) {
+		global $wgContLang, $wgLang;
+		$lang = $wgContLang;
+		if ( isset( $params['linksite'] ) ) {
+			$site = Sites::singleton()->getSiteByGlobalId( $params['linksite'] );
+			$lang = Language::factory( $site->getLanguage() );
+		}
+		$summary = array();
+		if ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) {
+			$summary = self::pickValuesFromParams( $params, 'linktitle' );
+		}
+		$list = $lang->commaList( $summary );
+		if ($list !== "") {
+			$list = $lang->getDirMark() 	// dirmark according to the language for the string(s)
+				. $list						// merged list og string(s)
+				. $wgLang->getDirMark();	// dirmark according to the user language
+		}
+		return array( count( $summary ), $list, $lang );
+	}
+
+	/**
 	 * Create the item if its missing.
 	 *
 	 * @since    0.1
@@ -55,7 +102,6 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 * @return ItemContent Newly created item
 	 */
 	protected function createItem( array $params ) {
-		//$this->dieUsage( wfMsg( 'wikibase-api-cant-create' ), 'cant-create' );
 		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 	}
 
@@ -71,7 +117,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 */
 	protected function modifyItem( ItemContent &$itemContent, array $params ) {
 
-		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
+		if ( isset( $params['linksite'] ) && ( !isset( $params['linktitle'] ) || \Wikibase\Utils::squashWhitespace( $params['linktitle'] ) === '' ) ) {
 			$link = $itemContent->getItem()->getSiteLink( $params['linksite'] );
 
 			if ( !$link ) {

@@ -154,6 +154,9 @@ $wgHooks['SkinTemplateNavigation'][] 				= 'WikibaseHooks::onPageTabs';
 $wgHooks['ArticleDeleteComplete'][] 				= 'WikibaseHooks::onArticleDeleteComplete';
 $wgHooks['LinkBegin'][] 							= 'WikibaseHooks::onLinkBegin';
 $wgHooks['OutputPageBodyAttributes'][] 				= 'WikibaseHooks::onOutputPageBodyAttributes';
+$wgHooks['GetPreferences'][]						= 'WikibaseHooks::onGetPreferences';
+$wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOptions';
+$wgHooks['FormatAutocomments'][]					= 'WikibaseHooks::onFormatAutocomments';
 
 
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File defining the hook handlers for the Wikibase Client extension.
+ * File defining the hook handlers for the Wikibase Repo extension.
  *
  * @since 0.1
  *
@@ -58,6 +58,7 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
+
 		$testFiles = array(
 			'ItemMove',
 			'ItemContentDiffView',
@@ -68,8 +69,9 @@ final class WikibaseHooks {
 			'api/ApiJSONPComplete',
 			'api/ApiLanguageAttribute',
 			'api/ApiSetAliases',
-			'api/ApiSetItem',
 			'api/ApiSetSiteLink',
+			'api/ApiOverall',
+			'api/ApiAutoComment',
 			'api/ApiEditPage',
 			'api/ApiPermissions',
 			'api/ApiBotEdit',
@@ -77,10 +79,10 @@ final class WikibaseHooks {
 			'content/EntityHandler',
 			'content/ItemContent',
 			'content/ItemHandler',
-			'content/PropertyContent',
-			'content/PropertyHandler',
-			'content/QueryContent',
-			'content/QueryHandler',
+			//'content/PropertyContent',
+			//'content/PropertyHandler',
+			//'content/QueryContent',
+			//'content/QueryHandler',
 
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemByLabel',
@@ -111,7 +113,7 @@ final class WikibaseHooks {
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
 
-		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
+		if ( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			$pageLanguage = $language;
 		}
@@ -422,6 +424,7 @@ final class WikibaseHooks {
 					'dump' => true,
 					'dumpfm' => true,
 				),
+
 				// settings for the user agent
 				//TODO: This should REALLY be handled somehow as without it we could run into lots of trouble
 				'clientTimeout' => 10, // this is before final timeout, without maxlag or maxage we can't hang around
@@ -462,6 +465,74 @@ final class WikibaseHooks {
 			unset( $links['views']['edit'] );
 		}
 
+		return true;
+	}
+
+	/**
+	 * Pretty formating of autocomments.
+	 *
+	 * @param string $comment reference to the finalized autocomment
+	 * @param string $pre the string before the autocomment
+	 * @param string $auto the autocomment unformatted
+	 * @param string $post the string after the autocomment
+	 * @param Titel $title use for further information
+	 * @param boolean $local shall links be genreted locally or globally
+	 */
+	public static function onFormatAutocomments( $comment, $pre, $auto, $post, $title, $local ) {
+		global $wgLang;
+
+		// If it is possible to avoid loading the whole page then the code will be lighter on the server.
+		if ( !in_array( $title->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) ) ) {
+			return true;
+		}
+
+		if ( preg_match( '/^([\-\w]+?-(sitelink|language)(-[\w]+?|))\s*:\s*(.*)$/', $auto, $matches ) ) {
+
+			// turn the args to the message into an array
+			$args = explode( '|', $matches[4] );
+
+			// turn the first arg into a list in the user language
+			if ( $matches[2] === 'language' ) {
+				$list = array_map(
+					function ( $code ) {
+						global $wgLang;
+						return Language::fetchLanguageName( $code, $wgLang->getCode() );
+					},
+					explode( '¦', array_shift( $args ) )
+				);
+			}
+			elseif ( $matches[2] === 'sitelink' ) {
+				$list = array_map(
+					function ( $code ) {
+						global $wgLang;
+						$site = \Wikibase\Sites::singleton()->getSiteByGlobalId( $code );
+						return isset($site) ? Language::fetchLanguageName( $site->getLanguage(), $wgLang->getCode() ) : $code;
+					},
+					explode( '¦', array_shift( $args ) )
+				);
+			}
+			else {
+				return true;
+			}
+
+			// build the containing message
+			$auto = wfMessage( 'wikibase-api-summary-' . $matches[1] )
+				->params( array_merge( array( count( $list ), $wgLang->commaList( $list ) ), $args ) )
+				->escaped();
+
+			if ( $pre ) {
+				# written summary $presep autocomment (summary /* section */)
+				$pre .= wfMessage( 'autocomment-prefix' )->escaped();
+			}
+			if ( $post ) {
+				# autocomment $postsep written summary (/* section */ summary)
+				$auto .= wfMessage( 'colon-separator' )->escaped();
+			}
+
+			$auto = '<span class="autocomment">' . $auto . '</span>';
+			$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
+
+		}
 		return true;
 	}
 
@@ -605,4 +676,5 @@ final class WikibaseHooks {
 
 		return true;
 	}
+
 }
