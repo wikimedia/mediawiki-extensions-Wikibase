@@ -67,6 +67,8 @@ $messages['en'] = array(
 
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
+	'wikibase-setting-languages' => 'Additional languages<br />(as fallback when displaying data not available in the main language)',
+
 	'wikibase-error-relational-save-failed' => 'Could not store item identity in the database.',
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item with ID [[$3]].',
 
@@ -74,7 +76,8 @@ $messages['en'] = array(
 	'wikibase-itemlink-id-wrapper' => '($1)',
 	'wikibase-itemlink-title' => '$1 | $2',
 
-	// Special pages	'special-itembytitle' => 'Item by title',
+	// Special pages
+	'special-itembytitle' => 'Item by title',
 	'special-itembylabel' => 'Item by label',
 	'special-createitem' => 'Create a new item',
 
@@ -126,6 +129,27 @@ You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAME
 to find out where it went, or [[Special:CreateItem|create a new item]]</span>.',
 	'wikibase-noitem-nopermission'       => 'This item does not exist.
 You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]</span>.',
+
+	// summary and autocomment
+	'wikibase-api-summary-set-sitelink' => 'Added site-specific [$2] {{plural:$3|link|links}}',
+	'wikibase-api-summary-remove-sitelink' => 'Removed site-specific [$2] {{plural:$3|link|links}}',
+
+	'wikibase-api-summary-set-add-language-aliases' => 'Setting and adding [$2] {{plural:$3|alias|aliases}}',
+	'wikibase-api-summary-set-remove-language-aliases' => 'Setting and removing [$2] {{plural:$3|alias|aliases}}',
+	'wikibase-api-summary-set-language-aliases' => 'Setting [$2] {{plural:$3|alias|aliases}}',
+	'wikibase-api-summary-add-language-aliases' => 'Added [$2] {{plural:$3|alias|aliases}}',
+	'wikibase-api-summary-remove-language-aliases' => 'Removed [$2] {{plural:$3|alias|aliases}}',
+
+	'wikibase-api-summary-remove-remove-language-attributes' => 'Removed [$2] label and description',
+	'wikibase-api-summary-set-remove-language-attributes' => 'Changed and removed [$2] label and description',
+	'wikibase-api-summary-remove-set-language-attributes' => 'Removed and changed [$2] label and description',
+	'wikibase-api-summary-set-set-language-attributes' => 'Changed [$2] label and description',
+
+	'wikibase-api-summary-set-language-label' => 'Changed [$2] {{plural:$3|label|labels}}',
+	'wikibase-api-summary-remove-language-label' => 'Removed [$2] {{plural:$3|label|labels}}',
+
+	'wikibase-api-summary-set-language-description' => 'Changed [$2] {{plural:$3|description|descriptions}}',
+	'wikibase-api-summary-remove-language-description' => 'Removed [$2] {{plural:$3|description|descriptions}}',
 
 	//content model names
 	'content-model-1001' => 'Wikibase item',
@@ -219,6 +243,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-itemlink' => 'used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
 	'wikibase-itemlink-id-wrapper' => 'Used to wrap the items id for a link to an item in parentheses or similar.',
 	'wikibase-itemlink-title' => 'Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
+	'special-itembytitle' => 'The item is identified through use of the title alone and must be disambiguated as there might be several sites that uses the same title for pages. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks-title|title]] and [[m:Wikidata/Glossary#Sitelinks-site|site]].',
 	'special-itembylabel' => 'The item is identified through use of the label alone and must be disambiguated as there might be several entities that uses the same label for items. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 	'special-createitem' => 'Title of the special page for creating new items.',
 	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error condition.
@@ -265,6 +290,27 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+
+	'wikibase-api-summary-set-sitelink' => 'This is the initial part of the autocomment for setting of a site-specific link associate an item in the repository with an external site. It makes no difference if the sitelink exist or not before the call. The message takes two arguments (\$1 and \$2) that is the number of sites and the site names, and variant argument (\$3) that is the title of the external page. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-sitelink|sitelink]].',
+	'wikibase-api-summary-remove-sitelink' => 'This is the initial part of the autocomment for removal of a site-specific link associate an item in the repository with an external site. To remove an sitelink imply that it must exist before the call. The message takes two arguments (\$1 and \$2) that is the number of sites and the site names, and variant argument (\$3) that is the title of the external page. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-sitelink|sitelink]].',
+
+	'wikibase-api-summary-set-add-aliases' => 'This is the initial part of the autocomment for setting and then adding language-specific aliases associated with an item. The list of aliases will become the same as what is in the list. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-set-remove-aliases' => 'This is the initial part of the autocomment for setting and then remove language-specific aliases associated with an item. The list of aliases will become the same as what is in the list. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-set-aliases' => 'This is the initial part of the autocomment for setting language-specific aliases associated with an item. The list of aliases will become the same as what is in the list. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-add-aliases' => 'This is the initial part of the autocomment for adding language-specific aliases associated with an item. All aliases on the list will be added to the list of aliases after the call. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-remove-aliases' => 'This is the initial part of the autocomment for removeing language-specific aliases associated with an item. All aliases on the list will be removed from the list of aliases after the call. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+
+	'wikibase-api-summary-remove-remove-language-attributes' => 'This is the initial part of the autocomment for a deletion of language-specific attributes for label and description associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, and one (\$3) that is the number of attributes in the following summary (should always be 0 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#languageattribute-description|description]].',
+	'wikibase-api-summary-set-remove-language-attributes' => 'This is the initial part of the autocomment for a deletion of language-specific attributes associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#languageattribute-description|description]].',
+	'wikibase-api-summary-remove-set-language-attributes' => 'This is the initial part of the autocomment for a deletion of language-specific attributes associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#languageattribute-description|description]].',
+	'wikibase-api-summary-set-set-language-attributes' => 'This is the initial part of the autocomment for setting of language-specific attributes associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, and one (\$3) that is the number of attributes in the following summary (should always be 2 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#languageattribute-description|description]].',
+
+	'wikibase-api-summary-set-language-label' => 'This is the initial part of the autocomment for setting of language-specific labels associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+	'wikibase-api-summary-remove-language-label' => 'This is the initial part of the autocomment for a deletion of language-specific label associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+	'wikibase-api-summary-set-language-description' => 'This is the initial part of the autocomment for setting of language-specific descriptions associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
+	'wikibase-api-summary-remove-language-description' => 'This is the initial part of the autocomment for a deletion of language-specific description associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages and the language names, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
+
+	'content-model-1001' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
@@ -280,6 +326,7 @@ $messages['be-tarask'] = array(
 	'wikibase-remove-inprogress' => 'Выдаленьне…',
 	'wikibase-label-edit-placeholder' => 'увядзіце метку',
 	'wikibase-description-edit-placeholder' => 'увядзіце апісаньне',
+	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
 	'wikibase-sitelink-site-edit-placeholder' => 'пазначце сайт',
 	'wikibase-sitelink-page-edit-placeholder' => 'пазначце старонку',
 	'wikibase-label-input-help-message' => 'Увядзіце назву гэтага набору зьвестак у $1.',
@@ -305,9 +352,12 @@ $messages['be-tarask'] = array(
 	'wikibase-error-autocomplete-connection' => 'Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазьней.',
 	'wikibase-error-autocomplete-response' => 'Адказ сэрвэра: $1',
 	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
+	'wikibase-setting-languages' => 'Дапаможныя мовы<br />(напр., для адлюстраваньня зьвестак, калі яны не даступныя на асноўнай мове)',
+	'special-itembytitle' => 'Аб’ект паводле назвы',
 	'special-itembylabel' => 'Аб’ект паводле меткі',
 	'special-createitem' => 'Стварыць новы прадмет',
 	'wikibase-api-no-token' => 'Не пазначаны token.',
+	'content-model-1001' => 'Прадмет у Вікібазе',
 );
 
 /** Breton (brezhoneg)
@@ -381,6 +431,8 @@ $messages['de'] = array(
 	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-error-relational-save-failed' => 'Die Identität des Datenelements konnte nicht in der Datenbank gespeichert werden.',
 	'wikibase-error-sitelink-already-used' => 'Der Websitelink [[$1:$2]] wird bereits vom Datenelement mit der Kennung [[$3]] verwendet.',
+	'wikibase-setting-languages' => 'Weitere Sprachen<br />(Sofern das Anzeigen von Daten in der Hauptsprache nicht möglich ist.)',
+	'special-itembytitle' => 'Wert nach Name',
 	'special-itembylabel' => 'Wert nach Bezeichnung',
 	'special-createitem' => 'Ein neues Datenelement erstellen',
 	'wikibase-api-aliases-invalid-list' => 'Du musst einen der Parameter zu „set“, „add“, bzw. „remove“ verwenden.',
@@ -433,6 +485,7 @@ Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPA
  * @author Kghbln
  */
 $messages['de-formal'] = array(
+	'wikibase-move-error' => 'Sie können keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-label-input-help-message' => 'Geben Sie den Namen für diesen Datensatz in $1 an.',
 	'wikibase-description-input-help-message' => 'Geben Sie eine kurze Beschreibung in $1 an.',
 	'wikibase-sitelinks-add' => 'fügen Sie eine Verknüpfung zu einer Seitenverknüpfung hinzu',
@@ -511,6 +564,7 @@ $messages['dsb'] = array(
 	'wikibase-error-ui-session-failure' => 'Twójo pósejźenje jo se pśepadnuło. Pšosym pśizjaw se hyšći raz.',
 	'wikibase-error-relational-save-failed' => 'Identita elementa njedajo se w datowej bance składowaś.',
 	'wikibase-error-sitelink-already-used' => 'Sedłowy wótkaz [[$1:$2]] wužywa se južo wót elementa z ID  [[$3]].',
+	'special-itembytitle' => 'Zapisk pó titelu',
 	'special-itembylabel' => 'Zapisk pó pomjenjenju',
 	'special-createitem' => 'Nowy element napóraś',
 	'wikibase-api-aliases-invalid-list' => 'Wužyj jaden z parametrow "set", "add" a "remove".',
@@ -601,6 +655,8 @@ $messages['es'] = array(
 	'wikibase-move-error' => 'No puedes mover las páginas que se encuentran en el espacio de nombres de datos, y no puedes mover páginas hacia allí.',
 	'wikibase-error-relational-save-failed' => 'No se ha podido guardar la identidad del elemento en la base de datos.',
 	'wikibase-error-sitelink-already-used' => 'El enlace del sitio [[$1:$2]] ya es usado por el elemento con identificador ID [[$3]].',
+	'wikibase-setting-languages' => 'Idiomas adicionales<br />(como alternativa cuando no hay disponibles datos a mostrar en el idioma principal)',
+	'special-itembytitle' => 'Artículo por título',
 	'special-itembylabel' => 'Artículo por etiqueta',
 	'special-createitem' => 'Crear un nuevo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Utiliza uno de los parámetros "set", "add" o "remove".',
@@ -737,6 +793,8 @@ $1',
 	'wikibase-noitem-nopermission' => 'این مورد وجود ندارد.
 می‌توانید <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} سیاهه‌های مرتبط را جست‌وجو کنید]</span>.',
 	'content-model-1001' => 'مورد ویکی‌پایه',
+	'special-itembytitle' => 'آیتم بر اساس عنوان',
+	'special-itembylabel' => 'آیتم بر اساس برچسب',
 );
 
 /** French (français)
@@ -788,6 +846,8 @@ $messages['fr'] = array(
 	'wikibase-error-ui-no-permissions' => 'Vous n’avez pas de droits suffisants pour effectuer cette action.',
 	'wikibase-error-ui-session-failure' => 'Votre session a expiré. Veuillez vous connecter à nouveau.',
 	'wikibase-move-error' => 'Vous ne pouvez pas déplacer des pages situées dans l\'espace de nom "data", ni déplacer des pages vers cet espace de nom.',
+	'wikibase-setting-languages' => "Langues supplémentaires<br />(utilisés pour l'affichage des données non disponibles dans la langue principale)",
+	'special-itembytitle' => 'Article par titre',
 	'special-itembylabel' => 'Article par étiquette',
 	'special-createitem' => 'Créer un nouvel élément',
 	'wikibase-api-aliases-invalid-list' => "Utilisez l'un des paramètres « set », « add» ou « remove».",
@@ -816,6 +876,7 @@ $messages['fr'] = array(
 	'wikibase-api-label-not-found' => "Impossible de trouver une étiquette précédente de cette langue dans l'élément.",
 	'wikibase-api-description-not-found' => "Impossible de trouver une description antérieure de cette langue dans l'élément.",
 	'wikibase-api-wrong-class' => "Le contenu de la page trouvée n'est pas du bon type.",
+	'content-model-1001' => 'Élément Wikibase',
 	'wikibase-api-session-failure' => 'La session en cours a échoué. Vous devez vous reconnecter à nouveau.',
 	'wikibase-resetold' => 'réinitialiser',
 );
@@ -872,6 +933,8 @@ $messages['gl'] = array(
 	'wikibase-move-error' => 'Non pode trasladar as páxinas que se atopan no espazo de nomes de datos, e tampouco pode mover páxinas a este espazo de nomes.',
 	'wikibase-error-relational-save-failed' => 'Non se puido almacenar a identidade do elemento na base de datos.',
 	'wikibase-error-sitelink-already-used' => 'O elemento co identificador [[$3]] xa utiliza a ligazón do sitio [[$1:$2]].',
+	'wikibase-setting-languages' => 'Linguas adicionais<br />(por exemplo, a lingua de reserva ao mostrar datos que non están dispoñibles na lingua principal)',
+	'special-itembytitle' => 'Artigo por título',
 	'special-itembylabel' => 'Artigo por etiqueta',
 	'special-createitem' => 'Crear un novo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Utilice unicamente un dos parámetros "set", "add" e "remove".',
@@ -1008,6 +1071,8 @@ $messages['hsb'] = array(
 	'wikibase-move-error' => 'Njemóžeš strony přesunyć, kotrež su w datowym mjenowym rumje, a njemóžeš strony do njeho přesunyć.',
 	'wikibase-error-relational-save-failed' => 'Identita elementa njeda so w datowej bance składować.',
 	'wikibase-error-sitelink-already-used' => 'Sydłowy wotkaz [[$1:$2]] so hižo wot elementa z IDk [[$3]] wužiwa.',
+	'wikibase-setting-languages' => 'Přidatne rěče<br />(jako narunanje, hdyž daty njedadźa so we hłownej rěči zwobraznić)',
+	'special-itembytitle' => 'Zapisk po titulu',
 	'special-itembylabel' => 'Zapisk po pomjenowanju',
 	'special-createitem' => 'Nowy element wutworić',
 	'wikibase-api-aliases-invalid-list' => 'Wužij jedyn z parametrow "set", "add" a "remove".',
@@ -1108,6 +1173,7 @@ $messages['ia'] = array(
 	'wikibase-move-error' => 'Tu non pote renominar paginas que es in le spatio de nomines de datos, e tu non pote displaciar paginas a in illo.',
 	'wikibase-error-relational-save-failed' => 'Non poteva immagazinar le identitate del elemento in le base de datos.',
 	'wikibase-error-sitelink-already-used' => 'Le ligamine de sito [[$1:$2]] es jam usate per le elemento con ID [[$3]].',
+	'special-itembytitle' => 'Objecto per titulo',
 	'special-itembylabel' => 'Objecto per etiquetta',
 	'special-createitem' => 'Crear un nove objecto',
 	'wikibase-api-aliases-invalid-list' => 'Usa un del tres parametros "set", "add" e "remove".',
@@ -1210,6 +1276,8 @@ $messages['is'] = array(
 	'wikibase-move-error' => 'Ekki er mögulegt að færa síður í data nafnrýminu, né færa síður þangað.',
 	'wikibase-error-relational-save-failed' => 'Vistun auðkennis hlutarins í gagnabankanum mistókst.',
 	'wikibase-error-sitelink-already-used' => 'Þessi vefsvæðistengill [[$1:$2]] er þegar í notkun í hlut með auðkennið [[$3]].',
+	'wikibase-setting-languages' => 'Önnur tungumál<br />(t.d. sem varatungumál þegar gögn eru ekki aðgengileg á aðal tungumáli)',
+	'special-itembytitle' => 'Hlutur eftir titli',
 	'special-itembylabel' => 'Hlutur eftir merkimiða',
 	'special-createitem' => 'Búa til nýjan hlut',
 	'wikibase-api-aliases-invalid-list' => 'Notaðu einn af þessum stikum „set", „add" eða „remove".',
@@ -1271,6 +1339,7 @@ $messages['it'] = array(
 	'wikibase-remove-inprogress' => 'Sto rimuovendo...',
 	'wikibase-label-edit-placeholder' => 'inserisci etichetta',
 	'wikibase-description-edit-placeholder' => 'inserisci descrizione',
+	'wikibase-move-error' => 'Non puoi spostare le pagine che sono nel namespace "Data", e non puoi spostarci le pagine in esso.',
 	'wikibase-sitelink-site-edit-placeholder' => 'sito',
 	'wikibase-sitelink-page-edit-placeholder' => 'voce',
 	'wikibase-alias-edit-placeholder' => 'inserisci un alias',
@@ -1310,6 +1379,8 @@ $messages['it'] = array(
 	'wikibase-move-error' => 'Non puoi spostare le pagine che sono nel namespace "Data", e non puoi spostarci le pagine in esso.',
 	'wikibase-error-relational-save-failed' => "Impossibile memorizzare l'identità dell'elemento nel database.",
 	'wikibase-error-sitelink-already-used' => "Collegamento al sito [[$1:$2]] già utilizzato dall'elemento con ID [[$3]].",
+	'wikibase-setting-languages' => 'Lingue aggiuntive<br />(come lingue di riserva durante la visualizzazione dei dati se non sono disponibili nella lingua principale)',
+	'special-itembytitle' => 'Elementi per titolo',
 	'special-itembylabel' => 'Elementi per etichetta',
 	'special-createitem' => 'Crea un nuovo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Utilizzare uno dei seguenti parametri: "set", "add" o "remove".',
@@ -1562,6 +1633,7 @@ $messages['mk'] = array(
 	'wikibase-remove-inprogress' => 'Отстранувам...',
 	'wikibase-label-edit-placeholder' => 'внесете натпис',
 	'wikibase-description-edit-placeholder' => 'внесете опис',
+	'wikibase-move-error' => 'Не можете да преместувате страници што се наоѓаат во податочниот именски простор. Исто така не можете да преместувате други страници во него.',
 	'wikibase-sitelink-site-edit-placeholder' => 'мреж. место',
 	'wikibase-sitelink-page-edit-placeholder' => 'статија',
 	'wikibase-alias-edit-placeholder' => 'внесете алијас',
@@ -1601,6 +1673,8 @@ $messages['mk'] = array(
 	'wikibase-move-error' => 'Не можете да преместувате страници што се наоѓаат во податочниот именски простор. Исто така не можете да преместувате други страници во него.',
 	'wikibase-error-relational-save-failed' => 'Не можев да го зачувам идентитетот на ставката во базата.',
 	'wikibase-error-sitelink-already-used' => 'Надворешната врска [[$1:$2]] веќе се користи во ставката со назнака [[$3]].',
+	'wikibase-setting-languages' => 'Уште јазици<br />(т.е. како резерва, кога податоците не се достапни на главниот јазик)',
+	'special-itembytitle' => 'Ставка по наслов',
 	'special-itembylabel' => 'Ставка по натпис',
 	'special-createitem' => 'Создај нова ставка',
 	'wikibase-api-aliases-invalid-list' => 'Треба да го укажете зададениот параметар xor или да додадете/отстраните параметри',
@@ -1651,7 +1725,7 @@ $1',
 	'content-model-1001' => 'Ставка во Викибазата',
 );
 
-/** Norwegian Bokmål (‪norsk (bokmål)‬)
+/** Norwegian Bokmål (‪Norsk (bokmål)‬)
  * @author Jeblad
  */
 $messages['nb'] = array(
@@ -1664,6 +1738,7 @@ $messages['nb'] = array(
 	'wikibase-remove-inprogress' => 'Fjerner…',
 	'wikibase-label-edit-placeholder' => 'lag etikett',
 	'wikibase-description-edit-placeholder' => 'lag beskrivelse',
+	'wikibase-move-error' => 'Du kan ikke flytte sider i datanavnerommet, og du kan ikke flytte sider inn i det.',
 	'wikibase-sitelink-site-edit-placeholder' => 'nettsted',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikkel',
 	'wikibase-alias-edit-placeholder' => 'lag kallenavn',
@@ -1703,6 +1778,8 @@ $messages['nb'] = array(
 	'wikibase-move-error' => 'Du kan ikke flytte sider i datanavnerommet, og du kan ikke flytte sider inn i det.',
 	'wikibase-error-relational-save-failed' => 'Kunne ikke lagre datasettets identitet i databasen.',
 	'wikibase-error-sitelink-already-used' => 'Nettstedlenken [[$1:$2]] er allerede brukt av datasettet med identifikator [[$3]].',
+	'wikibase-setting-languages' => 'Flere språk<br />(disse brukes som reserver når data ikke er tilgjengelig i det primære språket.)',
+	'special-itembytitle' => 'Et datasett er identifisert via tittel',
 	'special-itembylabel' => 'Et datasett er identifisert via etikett',
 	'special-createitem' => 'Lag et nytt datasett',
 	'wikibase-api-aliases-invalid-list' => 'Bruk en av «set» («sett»), «add» («legg til») eller «remove» («fjern») som parameter.',
@@ -1742,6 +1819,26 @@ for å finne ut hva som har skjedd, eller [[Special:CreateItem|opprette et nytt 
 	'wikibase-noitem-nopermission' => 'Dette datasettet finnes ikke.
 Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]
 for å finne ut hva som har skjedd.',
+	'wikibase-api-summary-remove-language-attributes' => 'Slettet [$2] {{plural:$3|attributt|attributter}}',
+	'wikibase-api-summary-remove-language-label' => 'Slettet [$2] {{plural:$3|merke|merker}}',
+	'wikibase-api-summary-remove-language-description' => 'Slettet [$2] {{plural:$3|beskrivelse|beskrivelser}}',
+	'wikibase-api-summary-remove-language-badge' => 'Slettet [$2] {{plural:$3|merke|merker}}',
+	'wikibase-api-summary-add-sitelink' => 'La til [$2] {{plural:$3|lenke|lenker}} til nettsted',
+	'wikibase-api-summary-update-sitelink' => 'Oppdaterte [$2] {{plural:$3|lenke|lenker}} til nettsted',
+	'wikibase-api-summary-set-sitelink' => 'Satte [$2] {{plural:$3|lenke|lenker}} til nettsted',
+	'wikibase-api-summary-remove-sitelink' => 'Fjernet [$2] {{plural:$3|lenke|lenker}} til nettsted',
+	'wikibase-api-summary-change-aliases' => 'Endret [$2] {{plural:$3|kallenavn|kallenavn}}',
+	'wikibase-api-summary-set-aliases' => 'Satte [$2] {{plural:$3|kallenavn|kallenavn}}',
+	'wikibase-api-summary-remove-aliases' => 'Fjernet [$2] {{plural:$3|kallenavn|kallenavn}}',
+	'wikibase-api-summary-add-aliases' => 'La til [$2] {{plural:$3|kallenavn|kallenavn}}',
+	'wikibase-api-summary-set-language-attributes' => 'Satte [$2] {{plural:$3|attributt|attributter}}',
+	'wikibase-api-summary-set-language-label' => 'Satte [$2] {{plural:$3|merke|merker}}',
+	'wikibase-api-summary-set-language-description' => 'Satte [$2] {{plural:$3|beskrivelse|beskrivelser}}',
+	'wikibase-api-summary-set-language-badges' => 'Satte [$2] {{plural:$3|merke|merker}}',
+	'wikibase-api-summary-wrapper-languages' => '{{#language:$1|en}}',
+	'wikibase-api-summary-wrapper-sites' => '$1',
+	'wikibase-api-summary-wrapper' => '«$1$2»',
+	'content-model-wikibase-item' => 'Wikibase datasett',
 	'content-model-1001' => 'Wikibase datasett',
 );
 
@@ -1800,6 +1897,8 @@ $messages['nl'] = array(
 	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
 	'wikibase-error-relational-save-failed' => 'Het was niet mogelijk de identiteit van het item op te slaan in de database.',
 	'wikibase-error-sitelink-already-used' => 'De siteverwijzing [[$1:$2]] wordt al gebruikt door item [[$3]].',
+	'wikibase-setting-languages' => 'Extra talen<br />(om op terug te vallen tijdens het weergeven van gegevens die niet beschikbaar zijn in de hoofdtaal)',
+	'special-itembytitle' => 'Item gesorteerd op naam',
 	'special-itembylabel' => 'Item gesorteerd op label',
 	'special-createitem' => 'Nieuw item aanmaken',
 	'wikibase-api-aliases-invalid-list' => 'Gebruik een van de parameters "set", "add" of "remove".',
@@ -1855,6 +1954,7 @@ $messages['nn'] = array(
 	'wikibase-remove-inprogress' => 'Fjernar…',
 	'wikibase-label-edit-placeholder' => 'lag merkelapp',
 	'wikibase-description-edit-placeholder' => 'lag skildring',
+	'wikibase-move-error' => 'Du kan ikkje flytte sider i datanamnerommet, og du kan ikkje flytte sider inn i det.',
 	'wikibase-sitelink-site-edit-placeholder' => 'nettstad',
 	'wikibase-sitelink-page-edit-placeholder' => 'artikkel',
 	'wikibase-alias-edit-placeholder' => 'oppgje kallenamn',
@@ -1892,6 +1992,8 @@ $messages['nn'] = array(
 	'wikibase-error-ui-link-exists' => 'Du kan ikkje lenke til denne sida fordi eit anna datasett lenker allereie til den.',
 	'wikibase-error-ui-session-failure' => 'Din arbeidsøkt er avslutta, logg inn på nytt om du vil fortsette.',
 	'wikibase-move-error' => 'Du kan ikkje flytte sider i datanamnerommet, og du kan ikkje flytte sider inn i det.',
+	'wikibase-setting-languages' => 'Fleire språk<br />(t.d. som reserve når data ikkje er tilgjengeleg i hovudspråket.)',
+	'special-itembytitle' => 'Eit datasett er påvist ved bruk av tittel',
 	'wikibase-error-relational-save-failed' => 'Kunne ikkje lagre datasettets identitet i databasen.',
 	'wikibase-error-sitelink-already-used' => 'Nettstedlellen [[$1:$2]] er allereie brukt av datasettet med identifikator [[$3]].',
 	'special-itembylabel' => 'Eit datasett er påvist ved bruk av merkelapp',
@@ -1925,6 +2027,25 @@ $messages['nn'] = array(
 	'wikibase-api-label-not-found' => 'Kan ikkje finne nokon tidligare etikett på angitt språk for dette datasettet.',
 	'wikibase-api-description-not-found' => 'Kan ikkje finne nokon tidligare skildring på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innhaldet på funnen side er ikkje av korrekt type.',
+	'wikibase-api-summary-remove-language-attributes' => 'Sletta [$2] {{plural:$3|attributt|attributtar}}',
+	'wikibase-api-summary-remove-language-label' => 'Sletta [$2] {{plural:$3|etikett|etiketter}}',
+	'wikibase-api-summary-remove-language-description' => 'Sletta [$2] {{plural:$3|skildring|skildringer}}',
+	'wikibase-api-summary-remove-language-badge' => 'Sletta [$2] {{plural:$3|merke|merker}}',
+	'wikibase-api-summary-add-sitelink' => 'Lagt til [$2] {{plural:$3|lekk|lekker}} til nettstad',
+	'wikibase-api-summary-update-sitelink' => 'Oppdatert [$2] {{plural:$3|lekk|lekker}} til nettstad',
+	'wikibase-api-summary-set-sitelink' => 'Satte [$2] {{plural:$3|lekk|lekker}} til nettstad',
+	'wikibase-api-summary-remove-sitelink' => 'Fjerna [$2] {{plural:$3|lekk|lekker}} til nettstad',
+	'wikibase-api-summary-change-aliases' => 'Endra [$2] {{plural:$3|kallenamn|kallenamn}}',
+	'wikibase-api-summary-set-aliases' => 'Satte [$2] {{plural:$3|kallenamn|kallenamn}}',
+	'wikibase-api-summary-remove-aliases' => 'Fjerna [$2] {{plural:$3|kallenamn|kallenamn}}',
+	'wikibase-api-summary-add-aliases' => 'Lagt til [$2] {{plural:$3|kallenamn|kallenamn}}',
+	'wikibase-api-summary-set-language-attributes' => 'Satte [$2] {{plural:$3|attributt|attributtar}}',
+	'wikibase-api-summary-set-language-label' => 'Satte [$2] {{plural:$3|etikett|etiketter}}',
+	'wikibase-api-summary-set-language-description' => 'Satte [$2] {{plural:$3|skildring|skildringer}}',
+	'wikibase-api-summary-set-language-badges' => 'Satte [$2] {{plural:$3|merke|merker}}',
+	'wikibase-api-summary-wrapper-languages' => '{{#language:$1|nn}}',
+	'wikibase-api-summary-wrapper-sites' => '$1',
+	'wikibase-api-summary-wrapper' => '«$1$2»',
 	'wikibase-api-session-failure' => 'Den inneverande brukarøkta har feila og du må oppdatere sida og logge inn på nytt.',
 	'wikibase-resetold' => 'tilbakestill',
 	'wikibase-noitem' => 'Dette datasettet finnes ikkje.
@@ -1969,6 +2090,7 @@ $messages['pt-br'] = array(
 	'wikibase-remove-inprogress' => 'Removendo...',
 	'wikibase-label-edit-placeholder' => 'insira um rótulo',
 	'wikibase-description-edit-placeholder' => 'insira uma descrição',
+	'wikibase-move-error' => 'Você não pode mover páginas que estão no domínio de dados, além disso, você não pode mover páginas para dentro de tal domínio.',
 	'wikibase-sitelink-site-edit-placeholder' => 'especifique o site',
 	'wikibase-sitelink-page-edit-placeholder' => 'especifique a página',
 	'wikibase-alias-edit-placeholder' => 'insira um alias',
@@ -2092,6 +2214,7 @@ $messages['ru'] = array(
 	'wikibase-error-autocomplete-connection' => 'Не удалось запросить API Википедии. Пожалуйста, попробуйте снова позже.',
 	'wikibase-error-autocomplete-response' => 'Сервер ответил: $1',
 	'wikibase-move-error' => 'Вы не можете переименовывать страницы, которые находятся в пространстве данных, и вы не можете перемещать страницы в него.',
+	'wikibase-setting-languages' => 'Дополнительные языки<br />(откат при отображении данных не доступен в основном языке)',
 );
 
 /** Swedish (svenska)
@@ -2161,6 +2284,7 @@ $messages['zh-hans'] = array(
 	'wikibase-remove' => '删除',
 	'wikibase-propertyedittool-full' => '取值列表已完整。',
 	'wikibase-sitelinksedittool-full' => '已经为所有的已知站点设置了指向页面的链接。',
+	'special-itembytitle' => '按标题排序的项目',
 	'special-itembylabel' => '按标签排序的项目',
 );
 
