@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQX//7sg\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-07-14T23:11:25Z",
+      "side": 1,
+      "message": "This commit should not include unrelated language changes.",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7sk\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-07-14T23:11:25Z",
+      "side": 1,
+      "message": "This seems to be unrelated change.",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//7tE\u003d",
         "filename": "repo/includes/api/ApiModifyItem.php",
         "patchSetId": 1
@@ -13,6 +47,57 @@
       "writtenOn": "2012-07-14T22:43:49Z",
       "side": 1,
       "message": "Note to self: Check if the merged string should be truncated, or if this is handled in some other code.",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7s4\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-07-14T23:11:25Z",
+      "side": 1,
+      "message": "Missing space",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7sw\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-07-14T23:11:25Z",
+      "side": 1,
+      "message": "You can turn this into initialization with default value and override with if clause.\n$l \u003d foo;\nif ( $blaa ) {\n $l \u003d Language::factory( $blaa );\n}",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7so\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-07-14T23:11:25Z",
+      "side": 1,
+      "message": "Just return the array( 0, \u0027\u0027 ); here and you can get rid of the ternary operation below.",
       "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
