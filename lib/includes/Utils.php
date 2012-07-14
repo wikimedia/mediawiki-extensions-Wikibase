@@ -243,6 +243,18 @@ final class Utils {
 	}
 
 	/**
+	 * Normalize string into NFC by using the cleanup metod from UtfNormal.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $inputString The actual string to process.
+	 * @return filtered string where whitespace possibly are removed.
+	 */
+	static public function cleanupToNFC( $inputString ) {
+		return UtfNormal::cleanUp( $inputString );
+	}
+
+	/**
 	 * Do a toNFC after the string is squashed
 	 *
 	 * @since 0.1
@@ -251,7 +263,102 @@ final class Utils {
 	 * @return trimmed string on NFC form
 	 */
 	static public function squashToNFC( $inputString ) {
-		return self::conditionalToNFC( self::squashWhitespace( $inputString ) );
+		//return self::conditionalToNFC( self::squashWhitespace( $inputString ) );
+		return self::cleanupToNFC( self::squashWhitespace( $inputString ) );
+	}
+
+	/**
+	 * Truncate a string to a specified length in bytes, appending an optional
+	 * string (e.g. for ellipses)
+	 *
+	 * This is nearly the same as in Language.php
+	 *
+	 * If $length is negative, the string will be truncated from the beginning
+	 *
+	 * @param $string String to truncate
+	 * @param $length Int: maximum length (including ellipses)
+	 * @param $adjustLength Boolean: Subtract length of ellipsis from $length.
+	 *	$adjustLength was introduced in 1.18, before that behaved as if false.
+	 * @return string
+	 */
+	public static function truncate( $string, $length, $adjustLength = true ) {
+		# Check if there is no need to truncate
+		if ( $length == 0 ) {
+			return SUMMARY_CONTINUATION; // convention
+		} elseif ( strlen( $string ) <= abs( $length ) ) {
+			return $string; // no need to truncate
+		}
+		$stringOriginal = $string;
+		# If ellipsis length is >= $length then we can't apply $adjustLength
+		if ( $adjustLength && strlen( SUMMARY_CONTINUATION ) >= abs( $length ) ) {
+			$string = SUMMARY_CONTINUATION; // this can be slightly unexpected
+		# Otherwise, truncate and add ellipsis...
+		} else {
+			$eLength = $adjustLength ? strlen( SUMMARY_CONTINUATION ) : 0;
+			if ( $length > 0 ) {
+				$length -= $eLength;
+				$string = substr( $string, 0, $length ); // xyz...
+				$string = self::removeBadCharLast( $string );
+				$string = rtrim( $string, SUMMARY_ESCAPE );
+				$string = $string . SUMMARY_CONTINUATION;
+			} else {
+				$length += $eLength;
+				$string = substr( $string, $length ); // ...xyz
+				$string = self::removeBadCharFirst( $string );
+				$string = SUMMARY_CONTINUATION . $string;
+			}
+		}
+		# Do not truncate if the ellipsis makes the string longer/equal (bug 22181).
+		# This check is *not* redundant if $adjustLength, due to the single case where
+		# LEN($ellipsis) > ABS($limit arg); $stringOriginal could be shorter than $string.
+		if ( strlen( $string ) < strlen( $stringOriginal ) ) {
+			return $string;
+		} else {
+			return $stringOriginal;
+		}
+	}
+
+	/**
+	 * Remove bytes that represent an incomplete Unicode character
+	 * at the end of string (e.g. bytes of the char are missing)
+	 *
+	 * @param $string String
+	 * @return string
+	 */
+	public static function removeBadCharLast( $string ) {
+		if ( $string != '' ) {
+			$char = ord( $string[strlen( $string ) - 1] );
+			$m = array();
+			if ( $char >= 0xc0 ) {
+				# We got the first byte only of a multibyte char; remove it.
+				$string = substr( $string, 0, -1 );
+			} elseif ( $char >= 0x80 &&
+				  preg_match( '/^(.*)(?:[\xe0-\xef][\x80-\xbf]|' .
+							  '[\xf0-\xf7][\x80-\xbf]{1,2})$/', $string, $m ) )
+			{
+				# We chopped in the middle of a character; remove it
+				$string = $m[1];
+			}
+		}
+		return $string;
+	}
+
+	/**
+	 * Remove bytes that represent an incomplete Unicode character
+	 * at the start of string (e.g. bytes of the char are missing)
+	 *
+	 * @param $string String
+	 * @return string
+	 */
+	public static function removeBadCharFirst( $string ) {
+		if ( $string != '' ) {
+			$char = ord( $string[0] );
+			if ( $char >= 0x80 && $char < 0xc0 ) {
+				# We chopped in the middle of a character; remove the whole thing
+				$string = preg_replace( '/^[\x80-\xbf]+/', '', $string );
+			}
+		}
+		return $string;
 	}
 
 }

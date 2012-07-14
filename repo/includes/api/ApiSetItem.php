@@ -61,6 +61,36 @@ class ApiSetItem extends ApiModifyItem {
 	}
 
 	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $available integer the number of bytes available for the autocomment
+	 * @return string that can be used as an auto comment
+	 */
+	protected function autoComment( array $params, $available=128 ) {
+		// TODO: Missing implementation
+		$comment = "set-item";
+		return $comment;
+	}
+
+	/**
+	 * Make a string for an autosummary.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $available integer the number of bytes available for the autosummary
+	 * @return string that can be used as an autosummary
+	 */
+	protected function autoSummary( array $params, $available=128 ) {
+		// TODO: Missing implementation
+		$summary = array();
+		return $summary ? array( count( $summary ), $language->commaList( $summary ) ) : array( 0, '' );
+	}
+
+	/**
 	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1

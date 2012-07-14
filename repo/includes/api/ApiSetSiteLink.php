@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Http;
+use ApiBase, User, Http, Language;
 
 /**
  * API module to associate a page on a site with a Wikibase item or remove an already made such association.
@@ -45,6 +45,46 @@ class ApiSetSiteLink extends ApiModifyItem {
 	}
 
 	/**
+	 * Make a string for an autocomment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $plural integer|string the number used for plural forms
+	 * @return string that can be used as an autocomment
+	 */
+	protected function autoComment( array $params, $plural = 1 ) {
+		if ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) {
+			$comment = "set-sitelink";
+		}
+		else {
+			$comment = "remove-sitelink";
+		}
+		return $comment . ':' . $params['linksite'] . '|' . $plural;
+	}
+
+	/**
+	 * Make a string for an autosummary.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @return string that can be used as an autosummary
+	 */
+	protected function autoSummary( array $params ) {
+		global $wgContLang;
+		$site = Sites::singleton()->getSiteByGlobalId( $params['linksite'] );
+		$language = isset($site) ? Language::factory( $site->getLanguage() ) : $wgContLang;
+		if ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) {
+			$summary = ApiModifyItem::pickValuesFromParams( $params, 'linktitle' );
+		}
+		else {
+			$summary = false;
+		}
+		return $summary ? array( count( $summary ), $language->commaList( $summary ) ) : array( 0, '' );
+	}
+
+	/**
 	 * Create the item if its missing.
 	 *
 	 * @since    0.1
@@ -82,6 +122,11 @@ class ApiSetSiteLink extends ApiModifyItem {
 			return true;
 		}
 		else {
+			// Clean up initial and trailing spaces and compress rest of the spaces.
+			$linktitle = Utils::squashToNFC( $params['linktitle'] );
+			if ( !isset( $linktitle ) || $linktitle === "" ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-empty-link-title' ), 'empty-link-title' );
+			}
 
 			$data = $this->queryPageAtSite( $params['linksite'], $params['linktitle'] );
 			if ( $data === false ) {

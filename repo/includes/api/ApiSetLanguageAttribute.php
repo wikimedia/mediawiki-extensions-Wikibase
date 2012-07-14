@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase;
+use ApiBase, Language;
 
 /**
  * API module to set the language attributes for a Wikibase item.
@@ -72,6 +72,81 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 	protected function createItem( array $params ) {
 		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 		return null;
+	}
+
+	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $plural integer|string the number used for plural forms
+	 * @return string that can be used as an auto comment
+	 */
+	protected function autoComment( array $params, $plural = 1 ) {
+		if ( isset( $params['label'] ) && isset( $params['description'] ) ) {
+			$comment = 'unknown-languages-attributes';
+			if ( $params['label'] !== "" && $params['description'] !== "") {
+				$comment = 'set-set-language-attributes';
+			}
+			elseif ( $params['label'] !== "" && $params['description'] === "" ) {
+				$comment = 'set-remove-language-attributes';
+			}
+			elseif ( $params['label'] === "" && $params['description'] !== "" ) {
+				$comment = 'remove-set-language-attributes';
+			}
+			elseif ( $params['label'] === "" && $params['description'] === "" ) {
+				$comment = 'remove-remove-language-attributes';
+			}
+		}
+		elseif ( isset( $params['label'] ) ) {
+			$comment = 'unknown-language-label';
+			if ( $params['label'] !== "" ) {
+				$comment = 'set-language-label';
+			}
+			elseif ( $params['label'] === "" ) {
+				$comment = 'remove-language-label';
+			}
+		}
+		elseif ( isset( $params['description'] ) ) {
+			$comment = 'unknown-language-description';
+			if ( $params['description'] !== "" ) {
+				$comment = 'set-language-description';
+			}
+			elseif ( $params['description'] === "" ) {
+				$comment = 'remove-language-description';
+			}
+		}
+		if ( isset($comment) ) {
+			return $comment . ':' . $params['language'] . '|' . $plural;
+		}
+		return '';
+	}
+
+	/**
+	 * Make a string for an autosummary.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @return string that can be used as an autosummary
+	 */
+	protected function autoSummary( array $params ) {
+		global $wgContLang;
+		$language = isset( $params['language'] ) ? Language::factory( $params['language'] ) : $wgContLang;
+		if ( isset( $params['label'] ) && isset( $params['description'] ) ) {
+			$summary = ApiModifyItem::pickValuesFromParams( $params, 'label', 'description' );
+		}
+		elseif ( isset( $params['label'] ) ) {
+			$summary = ApiModifyItem::pickValuesFromParams( $params, 'label' );
+		}
+		elseif ( isset( $params['description'] ) ) {
+			$summary = ApiModifyItem::pickValuesFromParams( $params, 'description' );
+		}
+		else {
+			$summary = false;
+		}
+		return $summary ? array( count( $summary ), $language->commaList( $summary ) ) : array( 0, '' );
 	}
 
 	/**

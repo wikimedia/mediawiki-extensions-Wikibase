@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File defining the hook handlers for the Wikibase Client extension.
+ * File defining the hook handlers for the Wikibase Repo extension.
  *
  * @since 0.1
  *
@@ -58,6 +58,7 @@ final class WikibaseHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
+
 		$testFiles = array(
 			'ItemMove',
 			'EntityHandler',
@@ -105,7 +106,7 @@ final class WikibaseHooks {
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
 
-		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
+		if ( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			$pageLanguage = $language;
 		}
@@ -416,6 +417,29 @@ final class WikibaseHooks {
 					'dump' => true,
 					'dumpfm' => true,
 				),
+
+				// Which messages to use while formating logs
+				'apiFormatMessages' => array(
+					'languages' => array(
+						'set-set-language-attributes' => 'wikibase-api-summary-set-language-attributes',
+						'set-remove-language-attributes' => 'wikibase-api-summary-set-remove-language-attributes',
+						'remove-set-language-attributes' => 'wikibase-api-summary-remove-set-language-attributes',
+						'remove-remove-language-attributes' => 'wikibase-api-summary-remove-remove-language-attributes',
+						'set-language-label' => 'wikibase-api-summary-set-language-label',
+						'remove-language-label' => 'wikibase-api-summary-remove-language-label',
+						'set-language-description' => 'wikibase-api-summary-set-language-description',
+						'remove-language-description' => 'wikibase-api-summary-remove-language-description',
+						'set-add-aliases' => 'wikibase-api-summary-set-add-aliases',
+						'set-remove-aliases' => 'wikibase-api-summary-set-remove-aliases',
+						'set-aliases' => 'wikibase-api-summary-set-aliases',
+						'add-aliases' => 'wikibase-api-summary-add-aliases',
+						'remove-aliases' => 'wikibase-api-summary-remove-aliases',
+					),
+					'sites' => array(
+						'set-sitelink' => 'wikibase-api-summary-set-sitelink',
+						'remove-sitelink' => 'wikibase-api-summary-remove-sitelink',
+					),
+				),
 				// settings for the user agent
 				//TODO: This should REALLY be handled somehow as without it we could run into lots of trouble
 				'clientTimeout' => 10, // this is before final timeout, without maxlag or maxage we can't hang around
@@ -456,6 +480,83 @@ final class WikibaseHooks {
 			unset( $links['views']['edit'] );
 		}
 
+		return true;
+	}
+
+	/**
+	 * Pretty formating of autocomments.
+	 *
+	 * @param string $comment reference to the finalized autocomment
+	 * @param string $pre the string before the autocomment
+	 * @param string $auto the autocomment unformatted
+	 * @param string $post the string after the autocomment
+	 * @param Titel $title use for further information
+	 * @param boolean $local shall links be genreted locally or globally
+	 */
+	public static function onFormatAutocomments( $comment, $pre, $auto, $post, $title, $local ) {
+		global $wgLang;
+//return true;
+		// Note that it can be necessary to check the title object and/or item before any
+		// other code is run in this callback. If it is possible to avoid loading the whole
+		// page then the code will be lighter on the server. Present code formats autocomment
+		// after detecting a legal message key, and without using the title or page.
+
+		if ( preg_match( '/^([\-\w]+):(.*)$/', $auto, $matches ) ) {
+			// a helper function for language names
+			$fetchLangName = function ( $code ) {
+				global $wgLang;
+				return Language::fetchLanguageName( $code, $wgLang->getCode() );
+			};
+
+			// a helper function for site names
+			$fetchSiteName = function ( $code ) {
+				global $wgLang;
+				$site = \Wikibase\Sites::singleton()->getSiteByGlobalId( $code );
+				return isset($site) ? Language::fetchLanguageName( $site->getLanguage(), $wgLang->getCode() ) : $code;
+			};
+
+			// then we should check each initial part if it is a key in the array
+			foreach ( \Wikibase\Settings::get( 'apiFormatMessages' ) as $key => $messages ) {
+
+				// if it matches one key we can procede
+				if ( isset( $messages[$matches[1]] ) ) {
+
+					// turn the args to the message into an array
+					$args = explode( '|', $matches[2] );
+
+					// turn the first arg into a list in the user language
+					if ( $key === 'languages' ) {
+						$list = array_map( $fetchLangName, explode( '¦', array_shift( $args ) ) );
+					}
+					elseif ( $key === 'sites' ) {
+						$list = array_map( $fetchSiteName, explode( '¦', array_shift( $args ) ) );
+					}
+					else {
+						$this->dieUsage( wfMsg( 'wikibase-error-not-recognized' ), 'error-not-recognized' );
+					}
+
+					// build the containing message
+					$auto = wfMessage( $messages[$matches[1]] )
+						->params( array_merge( array( count( $list ), $wgLang->commaList( $list ) ), $args ) )
+						->escaped();
+
+					if ( $pre ) {
+						# written summary $presep autocomment (summary /* section */)
+						$pre .= wfMessage( 'autocomment-prefix' )->escaped();
+					}
+					if ( $post ) {
+						# autocomment $postsep written summary (/* section */ summary)
+						$auto .= wfMessage( 'colon-separator' )->escaped();
+					}
+
+					$auto = '<span class="autocomment">' . $auto . '</span>';
+					$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
+
+					// don't bother with a second pass if a hit was found in the first one
+					break;
+				}
+			}
+		}
 		return true;
 	}
 
@@ -574,4 +675,5 @@ final class WikibaseHooks {
 
 		return true;
 	}
+
 }
