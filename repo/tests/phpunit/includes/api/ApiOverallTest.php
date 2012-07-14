@@ -37,7 +37,7 @@ use Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiSetItemTest extends \ApiTestCase {
+class ApiOverallTest extends \ApiTestCase {
 
 	protected static $baseOfItemIds = 0;
 	protected static $usepost;

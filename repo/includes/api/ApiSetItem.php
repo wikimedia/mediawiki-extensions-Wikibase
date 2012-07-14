@@ -61,6 +61,39 @@ class ApiSetItem extends ApiModifyItem {
 	}
 
 	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $plural integer|string the number used for plural forms
+	 * @return string that can be used as an auto comment
+	 */
+	protected function autoComment( array $params, $plural = 0 ) {
+		// TODO: Missing implementation, should be fairly simple to create a autocomment.
+		$comment = "set-item";
+		return $comment;
+	}
+
+	/**
+	 * Make a string for an autosummary.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @return array with a count of items, a string that can be used as an autosummary and the language
+	 */
+	protected function autoSummary( array $params ) {
+		global $wgContLang;
+		$lang = $wgContLang;
+		$summary = array();
+		// TODO: Missing implementation, should probably just use the autosummary from the item.
+		// The actual call to this method is after the item is modified, so a autosummary should be correct.
+		// In most cases a well-behaved bot will probably provide a summary anyhow.
+		return array( count( $summary ), $lang->commaList( $summary ), $lang );
+	}
+
+	/**
 	 * @see ApiModifyItem::modifyItem()
 	 *
 	 * @since 0.1
