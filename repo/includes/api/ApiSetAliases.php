@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User;
+use ApiBase, User, Language;
 
 /**
  * API module to set the aliases for a Wikibase item.
@@ -65,6 +65,74 @@ class ApiSetAliases extends ApiModifyItem {
 	 */
 	protected function createItem( array $params ) {
 		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+	}
+
+	/**
+	 * Make a string for an auto comment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $plural integer|string the number used for plural forms
+	 * @return string that can be used as an auto comment
+	 */
+	protected function autoComment( array $params, $plural = 1 ) {
+		if ( isset( $params['set'] ) ) {
+			if ( isset( $params['add'] ) ) {
+				$comment = "set-add-aliases";
+			}
+			elseif ( isset( $params['remove'] ) ) {
+				$comment = "set-remove-aliases";
+			}
+			else {
+				$comment = "set-aliases";
+			}
+		}
+		elseif ( isset( $params['add'] ) ) {
+			$comment = "add-aliases";
+		}
+		elseif ( isset( $params['remove'] ) ) {
+			$comment = "remove-aliases";
+		}
+		if ( isset($comment) ) {
+			return $comment . SUMMARY_COLON . $params['language'] . SUMMARY_GROUPING . $plural;
+		}
+		return '';
+	}
+
+	/**
+	 * Make a string for an autosummary.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @return array with a count of items, a string that can be used as an autosummary and the language
+	 */
+	protected function autoSummary( array $params ) {
+		global $wgContLang;
+		$lang = $wgContLang;
+		if ( isset( $params['language'] ) ) {
+			$lang = Language::factory( $params['language'] );
+		}
+		$summary = array();
+		if ( isset( $params['set'] ) ) {
+			if ( isset( $params['add'] ) ) {
+				$summary = ApiModifyItem::pickValuesFromParams( $params, 'set', 'add' );
+			}
+			elseif ( isset( $params['remove'] ) ) {
+				$summary = ApiModifyItem::pickValuesFromParams( $params, 'set', 'remove' );
+			}
+			else {
+				$summary = ApiModifyItem::pickValuesFromParams( $params, 'set' );
+			}
+		}
+		elseif ( isset( $params['add'] ) ) {
+			$summary = ApiModifyItem::pickValuesFromParams( $params, 'add' );
+		}
+		elseif ( isset( $params['remove'] ) ) {
+			$summary = ApiModifyItem::pickValuesFromParams( $params, 'remove' );
+		}
+		return array( count( $summary ), $lang->commaList( $summary ), $lang );
 	}
 
 	/**

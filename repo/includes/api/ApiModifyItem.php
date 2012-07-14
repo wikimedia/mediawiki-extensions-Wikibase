@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Title, ApiBase;
+use User, Title, ApiBase, Sanitizer;
 
 /**
  * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
@@ -36,7 +36,7 @@ abstract class ApiModifyItem extends Api {
 	/**
 	 * Create the item if its missing.
 	 *
-	 * @since    0.1
+	 * @since 0.1
 	 *
 	 * @param array       $params
 	 *
@@ -48,7 +48,7 @@ abstract class ApiModifyItem extends Api {
 	/**
 	 * Actually modify the item.
 	 *
-	 * @since    0.1
+	 * @since 0.1
 	 *
 	 * @param ItemContent $item
 	 * @param array       $params
@@ -57,6 +57,27 @@ abstract class ApiModifyItem extends Api {
 	 * @return bool Success indicator
 	 */
 	protected abstract function modifyItem( ItemContent &$item, array $params );
+
+	/**
+	 * Make a string for an autocomment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $plural integer|string the number used for plural forms
+	 * @return string that can be used as an autocomment
+	 */
+	protected abstract function autoComment( array $params, $plural = 'none' );
+
+	/**
+	 * Make a string for an autosummary.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @return array with a count of items, a string that can be used as an autosummary and the language
+	 */
+	protected abstract function autoSummary( array $params );
 
 	/**
 	 * Make sure the required parameters are provided and that they are valid.
@@ -148,7 +169,29 @@ abstract class ApiModifyItem extends Api {
 			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
 		}
 
+		list( $hits, $summary, $lang ) = $this->autoSummary( $params );
+		if ( isset( $params['summary'] ) ) {
+			$summary = $params['summary'];
+		}
+		if ( !isset( $summary ) || $summary === "" ) {
+			$summary = $itemContent->getTextForSummary();
+		}
+		if ( isset( $summary ) ) {
+			$summary = Sanitizer::escapeHtmlAllowEntities( $summary );
+		}
+		else {
+			$summary = '';
+		}
+		$comment = $this->autoComment( $params, $hits );
+		if ( strlen( $comment ) ) {
+			$comment = '/* ' . Sanitizer::escapeHtmlAllowEntities( $comment ) . ' */';
+		}
+		else {
+			$comment = '';
+		}
+
 		if ( Settings::get( 'apiDeleteEmpty' ) && $itemContent->isEmpty() ) {
+			// FIXME: There should be some handling of empty items.
 			if ( $itemContent->isNew() ) {
 				// Delete the object if the user holds enough rights.
 				$allowed = $itemContent->userCan( 'delete' );
@@ -173,9 +216,10 @@ abstract class ApiModifyItem extends Api {
 				$this->flags |= EDIT_UPDATE;
 			}
 			$this->flags = ($user->isAllowed( 'bot' ) && $params['bot']) ? EDIT_FORCE_BOT : 0;
-			$summary = '';
+			$summary = $lang->truncate( $summary, SUMMARY_MAX_LENGTH - strlen( $comment ) );
+			$commentary = implode( ' ', array( $comment, $summary ) );
 			// Do the actual save, or if it don't exist yet create it.
-			$status = $itemContent->save( $summary, $user, $this->flags );
+			$status = $itemContent->save( $commentary, $user, $this->flags  );
 			$success = $status->isOK();
 
 			if ( !$success ) {
@@ -194,6 +238,9 @@ abstract class ApiModifyItem extends Api {
 				);
 
 				if ( $hasLink ) {
+					// normalizing site does not really give any meaning
+					// so we only normalize title
+					$normTitle = Utils::squashToNFC( $params['title'] );
 					$normalized = array();
 
 					if ( $normTitle !== $params['title'] ) {
@@ -283,6 +330,9 @@ abstract class ApiModifyItem extends Api {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
+			'summary' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
 			'token' => null,
 			'bot' => false,
 		) );
@@ -305,12 +355,40 @@ abstract class ApiModifyItem extends Api {
 			'title' => array( 'Title of the page to associate.',
 				"Use together with 'site' to make a complete sitelink."
 			),
+			'summary' => array( 'Summary for the edit.',
+				"Will be prepended by an automatically generated comment."
+			),
 			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
 				'During a normal reply a token can be returned spontaneously and the requester should',
 				'then start using the new token from the next request, possibly when repeating a failed',
 				'request.'
 			),
 		) );
+	}
+
+	/**
+	 * Pick values from the params array and string them together
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $max_length integer is the byte length of the available space
+	 */
+	protected static function pickValuesFromParams( array $params ) {
+
+		$keys = func_get_args();
+		array_shift( $keys );
+
+		$values = array();
+		foreach ( array_intersect_key( $params, array_flip( $keys ) ) as $k => $v ) {
+			if ( is_string( $v ) ) {
+				$values[] = $v;
+			}
+			elseif ( is_array( $v ) ) {
+				$values = array_merge( $values, $v );
+			}
+		}
+		return array_unique( $values );
 	}
 
 }

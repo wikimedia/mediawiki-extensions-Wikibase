@@ -79,6 +79,8 @@ $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php'
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
+$wgAutoloadClasses['Wikibase\DifferenceEngine'] 		= $dir . 'includes/DifferenceEngine.php';
+$wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/EntityContent.php';
 $wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/EntityHandler.php';
 $wgAutoloadClasses['Wikibase\ItemContent'] 				= $dir . 'includes/ItemContent.php';
@@ -140,6 +142,9 @@ $wgHooks['SkinTemplateNavigation'][] 				= 'WikibaseHooks::onPageTabs';
 $wgHooks['ArticleDeleteComplete'][] 				= 'WikibaseHooks::onArticleDeleteComplete';
 $wgHooks['LinkBegin'][] 							= 'WikibaseHooks::onLinkBegin';
 $wgHooks['OutputPageBodyAttributes'][] 				= 'WikibaseHooks::onOutputPageBodyAttributes';
+$wgHooks['GetPreferences'][]						= 'WikibaseHooks::onGetPreferences';
+$wgHooks['UserGetDefaultOptions'][]					= 'WikibaseHooks::onUserGetDefaultOptions';
+$wgHooks['FormatAutocomments'][]					= 'WikibaseHooks::onFormatAutocomments';
 
 
 

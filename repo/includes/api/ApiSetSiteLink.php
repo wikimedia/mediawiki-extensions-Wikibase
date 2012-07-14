@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Http;
+use ApiBase, User, Http, Language;
 
 /**
  * API module to associate a page on a site with a Wikibase item or remove an already made such association.
@@ -45,6 +45,47 @@ class ApiSetSiteLink extends ApiModifyItem {
 	}
 
 	/**
+	 * Make a string for an autocomment.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $plural integer|string the number used for plural forms
+	 * @return string that can be used as an autocomment
+	 */
+	protected function autoComment( array $params, $plural = 1 ) {
+		if ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) {
+			$comment = "set-sitelink";
+		}
+		else {
+			$comment = "remove-sitelink";
+		}
+		return $comment . SUMMARY_COLON . $params['linksite'] . SUMMARY_GROUPING . $plural;
+	}
+
+	/**
+	 * Make a string for an autosummary.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @return array with a count of items, a string that can be used as an autosummary and the language
+	 */
+	protected function autoSummary( array $params ) {
+		global $wgContLang;
+		$lang = $wgContLang;
+		if ( isset( $params['linksite'] ) ) {
+			$site = Sites::singleton()->getSiteByGlobalId( $params['linksite'] );
+			$lang = Language::factory( $site->getLanguage() );
+		}
+		$summary = array();
+		if ( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) {
+			$summary = ApiModifyItem::pickValuesFromParams( $params, 'linktitle' );
+		}
+		return array( count( $summary ), $lang->commaList( $summary ), $lang );
+	}
+
+	/**
 	 * Create the item if its missing.
 	 *
 	 * @since    0.1
@@ -55,7 +96,6 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 * @return ItemContent Newly created item
 	 */
 	protected function createItem( array $params ) {
-		//$this->dieUsage( wfMsg( 'wikibase-api-cant-create' ), 'cant-create' );
 		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 	}
 
@@ -82,6 +122,11 @@ class ApiSetSiteLink extends ApiModifyItem {
 			return true;
 		}
 		else {
+			// Clean up initial and trailing spaces and compress rest of the spaces.
+			$linktitle = Utils::squashToNFC( $params['linktitle'] );
+			if ( !isset( $linktitle ) || $linktitle === "" ) {
+				$this->dieUsage( wfMsg( 'wikibase-api-empty-link-title' ), 'empty-link-title' );
+			}
 
 			$data = $this->queryPageAtSite( $params['linksite'], $params['linktitle'] );
 			if ( $data === false ) {
