@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//7i0\u003d",
+        "filename": "lib/includes/ItemObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T22:48:29Z",
+      "side": 1,
+      "message": "This doesn\u0027t really clean the structure, it only completes it. But fixing this is outside the scoope I guess.",
+      "revId": "8a97c5029bb54a13b7ae65d862163e152389d263",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7iw\u003d",
+        "filename": "lib/includes/ItemObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T22:48:29Z",
+      "side": 1,
+      "message": "This doesn\u0027t even try to complete the structure now.",
+      "revId": "8a97c5029bb54a13b7ae65d862163e152389d263",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7is\u003d",
+        "filename": "lib/includes/PropertyObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T22:48:29Z",
+      "side": 1,
+      "message": "Protected ? This could be used outside the class, or..?",
+      "revId": "8a97c5029bb54a13b7ae65d862163e152389d263",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7io\u003d",
+        "filename": "lib/includes/PropertyObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T22:48:29Z",
+      "side": 1,
+      "message": "Missing isEmpty ...",
+      "revId": "8a97c5029bb54a13b7ae65d862163e152389d263",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7ik\u003d",
+        "filename": "lib/includes/QueryObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T22:48:29Z",
+      "side": 1,
+      "message": "Same as for PropertyObject",
+      "revId": "8a97c5029bb54a13b7ae65d862163e152389d263",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7ig\u003d",
+        "filename": "lib/includes/QueryObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T22:48:29Z",
+      "side": 1,
+      "message": "Same as for PropertyObject",
+      "revId": "8a97c5029bb54a13b7ae65d862163e152389d263",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
