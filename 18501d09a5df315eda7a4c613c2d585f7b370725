@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//7lI\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T19:50:58Z",
+      "side": 1,
+      "message": "Hm, english please? \u003d)",
+      "revId": "18501d09a5df315eda7a4c613c2d585f7b370725",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
