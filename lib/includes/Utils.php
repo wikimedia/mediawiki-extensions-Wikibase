@@ -254,4 +254,27 @@ final class Utils {
 		return self::conditionalToNFC( self::squashWhitespace( $inputString ) );
 	}
 
+	/**
+	 * Reorder an array with keys with the order given by a second array.
+	 * 
+	 * Note that this function will do an intersection and then organize
+	 * the resulting array in the order given by the array in the second
+	 * argument. The sorting is not by the keys, but by the order the
+	 * entries are inserted into the resulting array. Another way to
+	 * describe this is to change the insertion order of the first array
+	 * according to the sequence of values in the second array.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $array
+	 * @param array $sequence
+	 * @return ordered array
+	 */
+	static public function reorderArray( array $array, array $sequence ) {
+		// First create an intersection with our wanted entries as keys
+		$common = array_intersect_key( array_flip( $sequence ), $array );
+		// Then do a merge with our previous array, and with a new intersection
+		return array_merge( $common, array_intersect_key( $array, $common ) );
+	}
+
 }
