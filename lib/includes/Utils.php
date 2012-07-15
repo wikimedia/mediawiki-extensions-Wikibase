@@ -254,4 +254,18 @@ final class Utils {
 		return self::conditionalToNFC( self::squashWhitespace( $inputString ) );
 	}
 
+	/**
+	 * Take an array with keys and put in the order of the secondary array
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $sort
+	 * @param array $order
+	 * @return ordered array
+	 */
+	function sortByArray( array $sort, array $order)
+	{
+		$common = array_intersect_key(array_flip( $order ), $sort );
+		return array_merge( $common, array_intersect_key( $sort, $common ) );
+	}
 }
