@@ -151,4 +151,56 @@ interface Entity {
 	 */
 	public function isEmpty();
 
+	/**
+	 * Returns the aliases for the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 *
+	 * @return array
+	 */
+	public function getAliases( $languageCode );
+
+	/**
+	 * Returns all the aliases for the item.
+	 * The result is an array with language codes pointing to an array of aliases in the language they specify.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function getAllAliases();
+
+	/**
+	 * Sets the aliases for the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function setAliases( $languageCode, array $aliases );
+
+	/**
+	 * Add the provided aliases to the aliases list of the item in the language with the specified code.
+	 * TODO: decide on how to deal with duplicates
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function addAliases( $languageCode, array $aliases );
+
+	/**
+	 * Removed the provided aliases from the aliases list of the item in the language with the specified code.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $languageCode
+	 * @param array $aliases
+	 */
+	public function removeAliases( $languageCode, array $aliases );
+
 }
