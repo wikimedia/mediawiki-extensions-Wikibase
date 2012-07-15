@@ -526,47 +526,63 @@ final class WikibaseHooks {
 
 		global $wgLang, $wgOut;
 
-		// If this fails we will not find labels and descriptions later
-		$lang = $wgLang->getCode();
-
 		// The following three vars should all exist, unless there is a failurre
 		// somewhere, and then it will fail hard. Better test it now!
 		$page = new WikiPage( $target );
 		if ( is_null( $page ) ) {
-			// failed, can't continue
-			// this should not happen
+			// Failed, can't continue. This should not happen.
 			return true;
 		}
 		$content = $page->getContent();
 		if ( is_null( $content ) ) {
-			// failed, can't continue
-			// this could happen because the content is empty (page doesn't exist), e.g. after item was deleted
+			// Failed, can't continue. This could happen because the content is empty (page doesn't exist),
+			// e.g. after item was deleted.
 			return true;
 		}
 		$item = $content->getItem();
 		if ( is_null( $item ) ) {
-			// failed, can't continue
-			// this could happen because there is an illegal structure that could not be parsed
+			// Failed, can't continue. This could happen because there is an illegal structure that could
+			// not be parsed.
 			return true;
 		}
 
-		$rawLabel = $item->getLabel( $lang );
-		$rawDescription = $item->getDescription( $lang );
+		// If this fails we will not find labels and descriptions later,
+		// but we will try to get a list of alternate languages. The following
+		// uses the user language as a starting point for the fallback chain.
+		// It could be argued that the fallbacks should be limited to the user
+		// selected languages.
+		$lang = $wgLang->getCode();
+		static $langStore = array();
+		if ( !isset( $langStore[$lang] ) ) {
+			$langStore[$lang] = array_merge( array( $lang ), Language::getFallbacksFor( $lang ) );
+		}
 
-		// construct link:
-		$idHtml = '<span class="wb-itemlink-id">'
+		// This could use the user supplied list of acceptable languages
+		list( $labelCode, $labelText ) = each( array_slice( \Wikibase\Utils::sortByArray( $item->getLabels( $langStore[$lang] ), $langStore[$lang] ), 0, 1 ) );
+		list( $descriptionCode, $descriptionText ) = each( array_slice( \Wikibase\Utils::sortByArray( $item->getDescriptions( $langStore[$lang] ), $langStore[$lang] ), 0, 1 ) );
+
+		$labelLang = Language::factory( $labelCode );
+		$descriptionLang = Language::factory( $descriptionCode );
+
+		// Go on and construct the link
+		$idHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
 			. wfMsgForContent( 'wikibase-itemlink-id-wrapper', htmlspecialchars( 'q' . $item->getId() ) )
-			. '</span>';
-		$labelHtml = '<span class="wb-itemlink-label">'
-			. htmlspecialchars( $rawLabel )
-			. '</span>';
+			. Html::closeElement( 'span' );
 
-		$html =  '<span class="wb-itemlink">' . wfMsgForContent( 'wikibase-itemlink', $labelHtml, $idHtml ) . '</span>';
+		$labelHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-label', 'lang' => $labelLang->getCode(), 'dir' => $labelLang->getDir() ) )
+			. htmlspecialchars( $labelText )
+			. Html::closeElement( 'span' );
 
-		// set title attribute for constructed link:
-		$titleText = ( $rawLabel !== false ) ? $rawLabel : $target->getPrefixedText();
-		$customAttribs[ 'title' ] = ( $rawDescription !== false )
-			? wfMsgForContent( 'wikibase-itemlink-title', $titleText, $rawDescription )
+		$html = Html::openElement( 'span', array( 'class' => 'wb-itemlink' ) )
+			. wfMsgForContent( 'wikibase-itemlink', $labelHtml, $idHtml )
+			. Html::closeElement( 'span' );
+
+		// Set title attribute for constructed link, and make tricks with the directionality to get it right
+		$titleText = ( $labelText !== false )
+			? $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
+			: $target->getPrefixedText();
+		$customAttribs[ 'title' ] = ( $descriptionText !== false )
+			? wfMsgForContent( 'wikibase-itemlink-title', $titleText, $descriptionLang->getDirMark() . $descriptionText . $wgLang->getDirMark() )
 			: $titleText; // no description, just display the title then
 
 		// add wikibase styles in all cases, so we can format the link properly:
