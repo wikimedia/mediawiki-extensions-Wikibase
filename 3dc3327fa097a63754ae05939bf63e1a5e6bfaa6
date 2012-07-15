@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//7oQ\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-15T16:15:18Z",
+      "side": 1,
+      "message": "I didn\u0027t really debug it, but this looks weird here. The whole event will be triggered too many times I guess.\nYou might also want to add an additional check, whether the thing is in a pending state right now. There is no point in the whole construct if the value is not pending.",
+      "revId": "3dc3327fa097a63754ae05939bf63e1a5e6bfaa6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oI\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-15T16:15:18Z",
+      "side": 1,
+      "message": "I am not quite sure why you want to implement this one here again. Since we implement disable() and enable() now, we don\u0027t really need a third one really, or do we?",
+      "revId": "3dc3327fa097a63754ae05939bf63e1a5e6bfaa6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7oM\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-07-15T16:15:18Z",
+      "side": 1,
+      "message": "ohoh!",
+      "revId": "3dc3327fa097a63754ae05939bf63e1a5e6bfaa6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
