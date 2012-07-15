@@ -45,6 +45,8 @@ $dir = dirname( __FILE__ ) . '/';
 
 // constants
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
+define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
+define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
 
 define( 'SITE_TYPE_MEDIAWIKI', 0 );
 define( 'SITE_TYPE_UNKNOWN', 1 );

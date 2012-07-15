@@ -149,28 +149,7 @@ $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/R
 
 // register hooks and handlers
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
-
-//@todo: FIXME: this doesn't give wikis a chance to change the $baseNs.
-//       Namespace definitions should be deferred into a hook and be based on Wikibase\Settings.
-//       Note that some wikis may use the main namespace for data, or not have a data namespace.
-$baseNs = 100;
-
-define( 'WB_NS_DATA', $baseNs );
-define( 'WB_NS_DATA_TALK', $baseNs + 1 );
-//define( 'WB_NS_PROPERTY', $baseNs + 2 );
-//define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
-//define( 'WB_NS_QUERY', $baseNs + 4 );
-//define( 'WB_NS_QUERY_TALK', $baseNs + 5 );
-
-$wgExtraNamespaces[WB_NS_DATA] = 'Data';
-$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
-//$wgExtraNamespaces[WB_NS_DATA] = 'Property';
-//$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Property_talk';
-//$wgExtraNamespaces[WB_NS_DATA] = 'Query';
-//$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Query_talk';
-
-$wgNamespacesToBeSearchedDefault[WB_NS_DATA] = true;
-
-$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
 unset( $dir );
