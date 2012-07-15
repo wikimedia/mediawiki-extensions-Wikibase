@@ -8,14 +8,174 @@ namespace Wikibase;
  *
  * @since 0.1
  *
- * @file WikibaseItem.php
- * @ingroup Wikibase
+ * @file
+ * @ingroup WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class EntityObject implements Entity {
 
+	/**
+	 * @since 0.1
+	 * @var array
+	 */
+	protected $data;
 
+	/**
+	 * Id of the item (the 42 in q42 used as page name and in exports).
+	 * Integer when set. False when not initialized. Null when the item is new and unsaved.
+	 *
+	 * @since 0.1
+	 * @var integer|false|null
+	 */
+	protected $id = false;
+
+	/**
+	 * Constructor.
+	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
+	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 */
+	public function __construct( array $data ) {
+		$this->data = $data;
+		$this->cleanStructure();
+	}
+
+	/**
+	 * @see Entity::toArray()
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		$data = $this->data;
+
+		if ( is_null( $this->getId() ) ) {
+			if ( array_key_exists( 'entity', $data ) ) {
+				unset( $data['entity'] );
+			}
+		}
+		else {
+			$data['entity'] = $this->getIdPrefix() . $this->getId();
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Returns a unique id prefix for the type of entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	protected abstract function getIdPrefix();
+
+	/**
+	 * @see Entity::getId()
+	 *
+	 * @since 0.1
+	 *
+	 * @return integer|null
+	 */
+	public function getId() {
+		if ( $this->id === false ) {
+			if ( array_key_exists( 'entity', $this->data ) ) {
+				$this->id = (int)substr( $this->data['entity'], strlen( $this->getIdPrefix() ) );
+			}
+			else {
+				$this->id = null;
+			}
+		}
+
+		return $this->id;
+	}
+
+	/**
+	 * @see Entity::setId()
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $id
+	 */
+	public function setId( $id ) {
+		$this->id = $id;
+	}
+
+	/**
+	 * @see Entity::setLabel()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $langCode
+	 * @param string $value
+	 * @return string
+	 */
+	public function setLabel( $langCode, $value ) {
+		// TODO: normalize value
+		$this->data['label'][$langCode] = $value;
+		return $value;
+	}
+
+	/**
+	 * @see Entity::setDescription()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $langCode
+	 * @param string $value
+	 * @return string
+	 */
+	public function setDescription( $langCode, $value ) {
+		// TODO: normalize value
+		$this->data['description'][$langCode] = $value;
+		return $value;
+	}
+
+	/**
+	 * @see Entity::removeLabel()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string|array $languages note that an empty array removes labels for no languages while a null pointer removes all
+	 */
+	public function removeLabel( $languages = array() ) {
+		$this->removeMultilangTexts( 'label', (array)$languages );
+	}
+
+	/**
+	 * @see Entity::removeDescription()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string|array $languages note that an empty array removes descriptions for no languages while a null pointer removes all
+	 */
+	public function removeDescription( $languages = array() ) {
+		$this->removeMultilangTexts( 'description', (array)$languages );
+	}
+
+	/**
+	 * Remove the value with a field specifier
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $fieldKey
+	 * @param array|null $languages
+	 */
+	protected function removeMultilangTexts( $fieldKey, array $languages = null ) {
+		if ( is_null( $languages ) ) {
+			$this->data[$fieldKey] = array();
+		}
+		else {
+			foreach ( $languages as $lang ) {
+				unset( $this->data[$fieldKey][$lang] );
+			}
+		}
+	}
 
 }
