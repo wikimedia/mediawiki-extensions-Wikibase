@@ -35,6 +35,7 @@ abstract class EntityObject implements Entity {
 	 * Constructor.
 	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
 	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
+	 * @protected
 	 *
 	 * @since 0.1
 	 *
@@ -323,6 +324,41 @@ abstract class EntityObject implements Entity {
 		}
 
 		return $textList;
+	}
+
+	/**
+	 * Cleans the internal array structure.
+	 * This consists of adding elements the code expects to be present later on
+	 * and migrating or removing elements after changes to the structure are made.
+	 * Should typically be called before using any of the other methods.
+	 *
+	 * @since 0.1
+	 */
+	protected function cleanStructure() {
+		foreach ( array( 'label', 'description', 'aliases' ) as $field ) {
+			if ( !array_key_exists( $field, $this->data ) ) {
+				$this->data[$field] = array();
+			}
+		}
+	}
+
+	/**
+	 * @see Entity::isEmpty()
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		$fields = array( 'label', 'description', 'aliases' );
+
+		foreach ( $fields as $field ) {
+			if ( $this->data[$field] !== array() ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

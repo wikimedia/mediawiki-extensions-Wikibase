@@ -85,6 +85,10 @@ $wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/Item.php';
 $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
 $wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/ItemObject.php';
 $wgAutoloadClasses['Wikibase\MediaWikiSite'] 		= $dir . 'includes/MediaWikiSite.php';
+$wgAutoloadClasses['Wikibase\Property'] 			= $dir . 'includes/Property.php';
+$wgAutoloadClasses['Wikibase\PropertyObject'] 		= $dir . 'includes/PropertyObject.php';
+$wgAutoloadClasses['Wikibase\Query'] 				= $dir . 'includes/Query.php';
+$wgAutoloadClasses['Wikibase\QueryObject'] 			= $dir . 'includes/QueryObject.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
 $wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
@@ -124,6 +128,7 @@ $wgAutoloadClasses['Wikibase\MapDiff'] 				= $dir . 'includes/diff/MapDiff.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/TestItems.php';
+$wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/EntityObjectTest.php';
 
 // tests/changes
 $wgAutoloadClasses['Wikibase\tests\AliasChangeTest'] 		= $dir . 'tests/phpunit/changes/AliasChangeTest.php';

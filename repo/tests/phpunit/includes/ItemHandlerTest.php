@@ -108,32 +108,6 @@ class ItemHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 	
-	/**
-	 * Tests @see WikibaseItem::cleanStructure
-	 * This uses a rather strange name as it does not _clean_ the structure but _constructs_ missing elements
-	 * @dataProvider provideBasicData
-	 * @depends testUnserializeContent
-	 */
-	public function testCleanStructure( $input, array $labels, array $descriptions, array $languages = null ) {
-		$this->itemContent = $this->ch->unserializeContent( $input, CONTENT_FORMAT_JSON );
-		$this->itemContent->getItem()->cleanStructure();
-		$this->assertInstanceOf(
-			'\Wikibase\ItemContent',
-			$this->itemContent,
-			'Calling cleanStructure should still leave the item as a \Wikibase\Item object'
-		);
-		$this->assertInternalType(
-			'array',
-			$this->itemContent->getItem()->getLabels(),
-			'Checking if the expected structure is the type for returned labels for a cleaned \Wikibase\Item'
-		);
-		$this->assertInternalType(
-			'array',
-			$this->itemContent->getItem()->getdescriptions(),
-			'Checking if the expected structure is the type returned for descriptions for a cleaned WikibaseItem'
-		);
-	}
-	
 	public function provideBasicData() {
 		return array(
 			array(

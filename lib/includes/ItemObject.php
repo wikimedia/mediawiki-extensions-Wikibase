@@ -97,7 +97,11 @@ class ItemObject extends EntityObject implements Item {
 	 * @return boolean
 	 */
 	public function isEmpty() {
-		$fields = array( 'links', 'label', 'description', 'aliases' );
+		if ( !parent::isEmpty() ) {
+			return false;
+		}
+
+		$fields = array( 'links' );
 
 		foreach ( $fields as $field ) {
 			if ( $this->data[$field] !== array() ) {
@@ -114,12 +118,12 @@ class ItemObject extends EntityObject implements Item {
 	 * and migrating or removing elements after changes to the structure are made.
 	 * Should typically be called before using any of the other methods.
 	 *
-	 * TODO: this should not be public
-	 *
 	 * @since 0.1
 	 */
-	public function cleanStructure() {
-		foreach ( array( 'links', 'label', 'description', 'aliases' ) as $field ) {
+	protected function cleanStructure() {
+		parent::cleanStructure();
+
+		foreach ( array( 'links' ) as $field ) {
 			if ( !array_key_exists( $field, $this->data ) ) {
 				$this->data[$field] = array();
 			}
@@ -151,9 +155,7 @@ class ItemObject extends EntityObject implements Item {
 	 * @return Item
 	 */
 	public static function newFromArray( array $data ) {
-		$item = new static( $data, true );
-		$item->cleanStructure();
-		return $item;
+		return new static( $data );
 	}
 
 	/**
