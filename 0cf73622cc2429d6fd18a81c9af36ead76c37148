@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//7pk\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T11:11:31Z",
+      "side": 1,
+      "message": "How can I avoid that when I do a merge? Either I must avoid updating the language file or reset parts of the file to a previous state. Perhaps we should split out the different languages..",
+      "parentUuid": "AAAAQX//7sg\u003d",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//7sk\u003d",
         "filename": "repo/includes/api/Api.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-07-14T23:11:25Z",
       "side": 1,
       "message": "This seems to be unrelated change.",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7po\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T11:11:31Z",
+      "side": 1,
+      "message": "Yes, there was some code here that used this class. Its removed but the class was left in the use statement. Cleaned up in new patchset.",
+      "parentUuid": "AAAAQX//7sk\u003d",
       "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//7ps\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T11:11:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//7tE\u003d",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//7s4\u003d",
         "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2012-07-14T23:11:25Z",
       "side": 1,
       "message": "Missing space",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7p4\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T11:11:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//7s4\u003d",
       "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//7p0\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T11:11:31Z",
+      "side": 1,
+      "message": "This code sequence is changed, but not really to avoid the ternary operator. ;)",
+      "parentUuid": "AAAAQX//7sw\u003d",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//7so\u003d",
         "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
         "patchSetId": 1
@@ -98,6 +188,24 @@
       "writtenOn": "2012-07-14T23:11:25Z",
       "side": 1,
       "message": "Just return the array( 0, \u0027\u0027 ); here and you can get rid of the ternary operation below.",
+      "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7pw\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-15T11:11:31Z",
+      "side": 1,
+      "message": "I like the ternary operator, its cute!",
+      "parentUuid": "AAAAQX//7so\u003d",
       "revId": "0cf73622cc2429d6fd18a81c9af36ead76c37148",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
