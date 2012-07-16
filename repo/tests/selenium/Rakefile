@@ -93,6 +93,11 @@ RSpec::Core::RakeTask.new(:spec_bugs) do |spec|
   spec.pattern = 'spec/item/bugs_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:spec_editonoff) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/item/editonoff_spec.rb'
+end
+
 task :default => :spec
 task :item => :spec_item
 task :nonexistingitem => :spec_non_existing_item
@@ -109,5 +114,5 @@ task :search => :spec_search
 task :recentchanges => :spec_recentchanges
 task :sttl => :spec_language_selector
 task :delete_item => :spec_item_deletion
-
+task :editonoff => :spec_editonoff
 task :bugs => :spec_bugs
