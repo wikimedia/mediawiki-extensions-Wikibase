@@ -558,8 +558,26 @@ final class WikibaseHooks {
 		}
 
 		// This could use the user supplied list of acceptable languages
-		list( $labelCode, $labelText ) = each( array_slice( \Wikibase\Utils::reorderArray( $item->getLabels( $langStore[$lang] ), $langStore[$lang] ), 0, 1 ) );
-		list( $descriptionCode, $descriptionText ) = each( array_slice( \Wikibase\Utils::reorderArray( $item->getDescriptions( $langStore[$lang] ), $langStore[$lang] ), 0, 1 ) );
+		$labelTuple = array_slice(
+			\Wikibase\Utils::reorderArray(
+				$item->getLabels( $langStore[$lang] ),
+				$langStore[$lang]
+			),
+			0,
+			1
+		);
+		list( $labelCode, $labelText ) = each( $labelTuple );
+
+		$descriptionTuple = array_slice(
+			\Wikibase\Utils::reorderArray(
+				$item->getDescriptions(
+					$langStore[$lang] ),
+					$langStore[$lang]
+				),
+			0,
+			1
+		);
+		list( $descriptionCode, $descriptionText ) = each( $descriptionTuple );
 
 		$labelLang = Language::factory( $labelCode );
 		$descriptionLang = Language::factory( $descriptionCode );
