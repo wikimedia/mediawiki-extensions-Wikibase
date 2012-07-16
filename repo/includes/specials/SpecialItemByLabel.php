@@ -44,7 +44,7 @@ class SpecialItemByLabel extends SpecialItemResolver {
 			// TODO: display a message that the user needs to provide  the label and possibly some fancy input UI
 		}
 		else {
-			$itemContents = call_user_func_array( 'Wikibase\ItemContent::getFromLabel', $parts );
+			$itemContents = call_user_func_array( array( \Wikibase\ItemHandler::singleton(), 'getFromLabel' ), $parts );
 
 			if ( $itemContents === array() ) {
 				// TODO: display that there are no matching items and possibly some fancy input UI

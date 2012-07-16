@@ -88,6 +88,10 @@ $wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisam
 $wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
 $wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/ItemStructuredSave.php';
 $wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
+$wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/PropertyContent.php';
+$wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/PropertyHandler.php';
+$wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/QueryContent.php';
+$wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/QueryHandler.php';
 
 // includes/actions
 $wgAutoloadClasses['Wikibase\ViewItemAction'] 			= $dir . 'includes/actions/ViewItemAction.php';
@@ -149,7 +153,7 @@ $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/R
 
 // register hooks and handlers
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
-//$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler';
-//$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
 unset( $dir );

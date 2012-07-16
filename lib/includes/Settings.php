@@ -334,6 +334,9 @@ class Settings extends SettingsBase {
 					'defaultSiteFilePath' => '/somepath/$1',
 				),
 			),
+			'itemPrefix' => 'q',
+			'propertyPrefix' => 'p',
+			'queryPrefix' => 'query',
 		);
 
 		// allow extensions that use WikidataLib to register mode defaults
