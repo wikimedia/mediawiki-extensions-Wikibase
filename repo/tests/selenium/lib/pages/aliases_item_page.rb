@@ -8,9 +8,11 @@
 
 require 'ruby_selenium'
 
-class AliasesItemPage < NewItemPage
+# deriving from SitelinksItemPage to have all accessors available
+# we should think of moving all accessors to some base class (e.g. ItemPage)
+# to have them on one place and available at the same time
+class AliasesItemPage < SitelinksItemPage
   include PageObject
-  #page_url "http://localhost/mediawiki/index.php/Data:Q159?uselang=en"
   # aliases UI
   div(:aliasesDiv, :class => "wb-aliases")
   span(:aliasesTitle, :class => "wb-aliases-label")
@@ -37,7 +39,6 @@ class AliasesItemPage < NewItemPage
     count = 0
     aliasesList_element.each do |aliasElem|
       count = count+1
-      # puts count
     end
     return count
   end
