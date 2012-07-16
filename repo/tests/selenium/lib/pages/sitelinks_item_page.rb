@@ -26,10 +26,11 @@ class SitelinksItemPage < NewItemPage
   link(:saveSitelinkLink, :text => "save")
   link(:cancelSitelinkLink, :text => "cancel")
   link(:removeSitelinkLink, :text => "remove")
-  link(:editSitelinkLink, :text => "edit", :index => 3)
+  link(:editSitelinkLink, :text => "edit", :index => 2)
   link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
-  #link(:pageArticleNormalized, :text => 'C')
-  
+  link(:germanSitelink, :xpath => "//td[@class='wb-sitelinks-link wb-sitelinks-link-de']/a")
+  span(:articleTitle, :xpath => "//h1[@id='firstHeading']/span")
+
   def getNumberOfSitelinksFromCounter
     wait_until do
       siteLinkCounter?
