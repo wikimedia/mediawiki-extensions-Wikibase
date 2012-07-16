@@ -1,6 +1,20 @@
-potential architecture for browser testing at WMF
+Browser testing for Wikibase
+
+You need to install Ruby and RubyGems (>=1.3.6)
+Then run
+(1) "(sudo) gem install bundler" to install bundler
+(2) "bundle" in the /tests/selenium/ directory to install all necessary gems
 
 Rename "configuration.yml.sample" to "configuration.yml" and
 set configuration parameters to your needs before running the tests!
- 
-to run, do 'rake -t' at the top directory
+
+You need to have an administrator user and an ordinary user (which can be blocked
+by the administrator) registered for the mediawiki instance you want to test
+You have to set username and password of those users in your local configuration.yml
+
+To run the tests, do "rake" at the top directory
+
+Browsers:
+Firefox (if installed) should work out of the box
+For other browsers you should check the corresponding Webdriver on
+http://code.google.com/p/selenium/w/list
