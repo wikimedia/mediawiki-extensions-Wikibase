@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//7zg\u003d",
+        "filename": "lib/includes/Item.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-17T16:02:37Z",
+      "side": 1,
+      "message": "The code is changed and this does not apply anymore. The useFallback in this case was although a reference to a variable that was not used if it was not supplied. The var could be set to true or false, and the null value was there to make it possible to check if the variable could be set at all",
+      "parentUuid": "AAAAQX//8s8\u003d",
+      "revId": "cee1fc664c4423185020ed85a6391fe3c3f36dce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//8tI\u003d",
         "filename": "lib/includes/ItemObject.php",
         "patchSetId": 1
@@ -98,6 +116,24 @@
       "writtenOn": "2012-07-11T08:42:41Z",
       "side": 1,
       "message": "This shouldn\u0027t really be part of this commit.",
+      "revId": "cee1fc664c4423185020ed85a6391fe3c3f36dce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//7EE\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-17T16:02:37Z",
+      "side": 1,
+      "message": "faulty example otherwise, doesn\u0027t matter if its fixed here",
+      "parentUuid": "AAAAQX//88k\u003d",
       "revId": "cee1fc664c4423185020ed85a6391fe3c3f36dce",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
