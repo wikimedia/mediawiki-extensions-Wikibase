@@ -66,6 +66,9 @@ $wgResourceModules['sticktothatlanguage'] = array(
 	'messages' => array(
 		'sttl-languages-more-link'
 	),
+	'dependencies' => array(
+		'jquery.ui.core'
+	),
 	'group' => 'ext.sticktothatlanguage'
 );
 
