@@ -62,6 +62,25 @@ describe "Check functionality of edit description" do
         page.itemDescriptionSpan.should == current_description
       end
     end
+
+    context "Check for normalization of description" do
+      it "should check if normalization for item description is working" do
+        on_page(NewItemPage) do |page|
+          description_unnormalized = "  me haz   too many       spaces inside           "
+          description_normalized = "me haz too many spaces inside"
+          page.editDescriptionLink
+          page.descriptionInputField_element.clear
+          page.descriptionInputField = description_unnormalized
+          page.saveDescriptionLink
+          ajax_wait
+          page.wait_for_api_callback
+          page.itemDescriptionSpan.should == description_normalized
+          @browser.refresh
+          page.wait_for_item_to_load
+          page.itemDescriptionSpan.should == description_normalized
+        end
+      end
+    end
   end
 
 end
