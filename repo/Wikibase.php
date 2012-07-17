@@ -79,19 +79,9 @@ $wgExtensionMessagesFiles['WikibaseNS'] 	= $dir . 'Wikibase.i18n.namespaces.php'
 $wgAutoloadClasses['WikibaseHooks'] 					= $dir . 'Wikibase.hooks.php';
 
 // includes
-$wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/EntityContent.php';
-$wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/EntityHandler.php';
-$wgAutoloadClasses['Wikibase\ItemContent'] 				= $dir . 'includes/ItemContent.php';
-$wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/ItemDeletionUpdate.php';
 $wgAutoloadClasses['Wikibase\ItemDiffView'] 			= $dir . 'includes/ItemDiffView.php';
 $wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisambiguation.php';
-$wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/ItemHandler.php';
-$wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/ItemStructuredSave.php';
 $wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
-$wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/PropertyContent.php';
-$wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/PropertyHandler.php';
-$wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/QueryContent.php';
-$wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/QueryHandler.php';
 
 // includes/actions
 $wgAutoloadClasses['Wikibase\ViewItemAction'] 			= $dir . 'includes/actions/ViewItemAction.php';
@@ -106,12 +96,26 @@ $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSi
 $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
 $wgAutoloadClasses['Wikibase\ApiSetItem'] 				= $dir . 'includes/api/ApiSetItem.php';
 
+// includes/content
+$wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
+$wgAutoloadClasses['Wikibase\EntityHandler'] 			= $dir . 'includes/content/EntityHandler.php';
+$wgAutoloadClasses['Wikibase\ItemContent'] 				= $dir . 'includes/content/ItemContent.php';
+$wgAutoloadClasses['Wikibase\ItemHandler'] 				= $dir . 'includes/content/ItemHandler.php';
+$wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/content/PropertyContent.php';
+$wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/content/PropertyHandler.php';
+$wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
+$wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
+
 // includes/specials
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/SpecialItemByLabel.php';
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
+
+// includes/updates
+$wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/updates/ItemDeletionUpdate.php';
+$wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/updates/ItemStructuredSave.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';

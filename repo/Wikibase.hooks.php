@@ -60,17 +60,9 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testFiles = array(
 			'ItemMove',
-			'EntityHandler',
-			'ItemContent',
-			'ItemDeletionUpdate',
 			'ItemDiffView',
-			'ItemHandler',
 			'ItemMove',
 			'ItemView',
-//			'PropertyContent',
-//			'PropertyHandler',
-//			'QueryContent',
-//			'QueryHandler',
 
 			'api/ApiJSONP',
 			'api/ApiJSONPComplete',
@@ -82,9 +74,19 @@ final class WikibaseHooks {
 			'api/ApiPermissions',
 			'api/ApiBotEdit',
 
+			'content/EntityHandler',
+			'content/ItemContent',
+			'content/ItemHandler',
+			'content/PropertyContent',
+			'content/PropertyHandler',
+			'content/QueryContent',
+			'content/QueryHandler',
+
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemByLabel',
 			'specials/SpecialItemByTitle',
+
+			'updates/ItemDeletionUpdate',
 		);
 
 		foreach ( $testFiles as $file ) {
