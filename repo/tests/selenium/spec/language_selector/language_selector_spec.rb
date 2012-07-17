@@ -26,7 +26,6 @@ describe "Check functionality of STTL language switcher" do
         page.saveLabelLink
         ajax_wait
         page.wait_for_api_callback
-        page.editDescriptionLink # FIXXME: this has to be done due to bug #38181
         page.descriptionInputField_element.clear
         page.descriptionInputField = description_de
         page.saveDescriptionLink
@@ -64,7 +63,6 @@ describe "Check functionality of STTL language switcher" do
         page.sttlLinkDe
         page.wait_for_item_to_load
         page.itemLabelSpan.should == label_de
-        # page.itemDescriptionSpan.should == description_de  # FIXXME: won't work due to bug #38181
       end
     end
   end
