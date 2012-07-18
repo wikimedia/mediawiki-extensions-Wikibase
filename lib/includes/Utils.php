@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Sanitizer, UtfNormal;
+use Sanitizer, UtfNormal, Language;
 
 /**
  * Utility functions for Wikibase.
@@ -271,10 +271,92 @@ final class Utils {
 	 * @return ordered array
 	 */
 	static public function reorderArray( array $array, array $sequence ) {
+
 		// First create an intersection with our wanted entries as keys
 		$common = array_intersect_key( array_flip( $sequence ), $array );
+
 		// Then do a merge with our previous array, and with a new intersection
 		return array_merge( $common, array_intersect_key( $array, $common ) );
+	}
+
+	/**
+	 * Find the multilingual texts that has keys in the the sequence.
+	 *
+	 * The final result will be in the order given by the sequence.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $texts the key-value pairs to check for existence
+	 * @param array $sequence the list of keys that should exist
+	 * @return ordered array
+	 */
+	static public function filterMultilangText( array $texts = null, array $sequence = null ) {
+
+		// Prerequisites for further processing
+		if ( is_null( $texts ) || is_null( $sequence ) ) {
+			return array(); // makes the simplest use case
+		}
+
+		// Do a reordering to get the language strings in correct order
+		$texts = \Wikibase\Utils::reorderArray(
+			$texts,
+			$sequence
+		);
+
+		// Extract the valid codes
+		$validCodes = array_filter(
+			array_keys( $texts ),
+			function( $langCode ) { return is_string( $langCode ) && Language::isValidCode( $langCode ); }
+		);
+
+		// If the valid codes are empty we don't need to process it further
+		if ( empty( $validCodes ) ) {
+			return array();
+		}
+
+		// Filter out everything that matches with a key before we return the result
+		return array_intersect_key( $texts, array_flip( $validCodes ) );
+	}
+
+	/**
+	 * Find the first multilingual string that can be used for constructing a language object.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $texts the key-value pairs to check for existence
+	 * @param array $sequence the list of keys that should exist
+	 * @param array $fallback an array of values that are used as a replacement if nothing is found
+	 * 		The fallback is in the form array( code, text, language )
+	 * @return triplet with the initial language code, the text, and the language object
+	 */
+	static public function lookupMultilangText( array $texts = null, array $sequence = null, array $fallback = null ) {
+
+		// Prerequisites for further processing
+		if ( is_null( $texts ) || is_null( $sequence ) ) {
+			return $fallback; // makes the simplest use case
+		}
+
+		// Filter down the result
+		$texts = \Wikibase\Utils::filterMultilangText( $texts, $sequence );
+		if ( is_null( $texts ) || empty( $texts ) ) {
+			return $fallback;
+		}
+		// Find the first language code we can turn into a language object
+		// Note that the factory call do a pretty dumb cleaning up that makes this vejjy slow
+		while ( list( $code, $text ) = each( $texts ) ) {
+			$lang = Language::factory( $code );
+			if ( !is_null( $lang ) ) {
+				break;
+			}
+		}
+
+		// Check if we have a legal Language object
+		if ( is_null( $lang ) ) {
+			return $fallback;
+		}
+
+		// Do a proper return
+		return array( $code, $text, $lang );
 	}
 
 }
