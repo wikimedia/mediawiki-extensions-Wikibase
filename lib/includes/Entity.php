@@ -203,4 +203,37 @@ interface Entity {
 	 */
 	public function removeAliases( $languageCode, array $aliases );
 
+	/**
+	 * Returns a type identifier for the entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType();
+
+	/**
+	 * Creates a diff between the entity and provided target.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return EntityDiff
+	 */
+	public function getDiff( Entity $target );
+
+	/**
+	 * Returns a diff representing an undo action for the changes made between
+	 * the two provided entities against the entity itself.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $newerEntity
+	 * @param Entity $olderEntity
+	 *
+	 * @return EntityDiff
+	 */
+	public function getUndoDiff( Entity $newerEntity, Entity $olderEntity );
+
 }

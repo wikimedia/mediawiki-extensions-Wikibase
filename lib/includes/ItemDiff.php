@@ -18,26 +18,23 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemDiff extends MapDiff {
+class ItemDiff extends EntityDiffObject {
 
+	/**
+	 * Creates and returns a new ItemDiff constructed from the two provided items.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Item $oldItem
+	 * @param Item $newItem
+	 *
+	 * @return ItemDiff
+	 */
 	public static function newFromItems( Item $oldItem, Item $newItem ) {
-		return new static( array(
+		return static::newFromEntities( $oldItem, $newItem, array(
 			'sites' => MapDiff::newFromArrays(
 				$oldItem->getSiteLinks(),
 				$newItem->getSiteLinks()
-			),
-			'aliases' => MapDiff::newFromArrays(
-				$oldItem->getAllAliases(),
-				$newItem->getAllAliases(),
-				true
-			),
-			'labels' => MapDiff::newFromArrays(
-				$oldItem->getLabels(),
-				$newItem->getLabels()
-			),
-			'descriptions' => MapDiff::newFromArrays(
-				$oldItem->getDescriptions(),
-				$newItem->getDescriptions()
 			)
 		) );
 	}
@@ -54,48 +51,25 @@ class ItemDiff extends MapDiff {
 	}
 
 	/**
-	 * Returns a MapDiff object with the aliases differences.
-	 *
-	 * @since 0.1
-	 *
-	 * @return MapDiff
-	 */
-	public function getAliasesDiff() {
-		return $this->operations['aliases'];
-	}
-
-	/**
-	 * Returns a MapDiff object with the labels differences.
-	 *
-	 * @since 0.1
-	 *
-	 * @return MapDiff
-	 */
-	public function getLabelsDiff() {
-		return $this->operations['labels'];
-	}
-
-	/**
-	 * Returns a MapDiff object with the descriptions differences.
-	 *
-	 * @since 0.1
-	 *
-	 * @return MapDiff
-	 */
-	public function getDescriptionsDiff() {
-		return $this->operations['descriptions'];
-	}
-
-	/**
-	 * Returns if there are any changes (equivalent to: any differences between the items).
+	 * @see EntityDiff::isEmpty
 	 *
 	 * @since 0.1
 	 *
 	 * @return boolean
 	 */
 	public function isEmpty() {
-		return $this->getSiteLinkDiff()->isEmpty()
-			&& $this->getAliasesDiff()->isEmpty();
+		return parent::isEmpty() && $this->getSiteLinkDiff()->isEmpty();
+	}
+
+	/**
+	 * @see EntityDiff::getView
+	 *
+	 * @since 0.1
+	 *
+	 * @return ItemDiffView
+	 */
+	public function getView() {
+		return new ItemDiffView( array(), $this );
 	}
 
 }

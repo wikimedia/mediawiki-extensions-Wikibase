@@ -19,7 +19,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListDiff extends Diff implements IDiffOp {
+class ListDiff extends Diff {
 
 	public function getType() {
 		return 'list';
@@ -63,6 +63,17 @@ class ListDiff extends Diff implements IDiffOp {
 		}
 
 		return new static( $operations );
+	}
+
+	/**
+	 * @see IDiffOp::isAtomic
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isAtomic() {
+		return false;
 	}
 
 }

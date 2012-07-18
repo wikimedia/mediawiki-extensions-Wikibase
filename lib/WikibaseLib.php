@@ -99,15 +99,6 @@ $wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
 $wgAutoloadClasses['Wikibase\SitesTable'] 			= $dir . 'includes/SitesTable.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
-foreach ( array(
-	'Settings',
-	'SettingsBase'
-		  ) as $compatClass ) {
-	if ( !array_key_exists( $compatClass, $wgAutoloadLocalClasses ) ) {
-		$wgAutoloadClasses[$compatClass] = $dir . 'compat/' . $compatClass . '.php';
-	}
-}
-
 // includes/changes
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
 $wgAutoloadClasses['Wikibase\DiffChange'] 			= $dir . 'includes/changes/DiffChange.php';
@@ -116,15 +107,21 @@ $wgAutoloadClasses['Wikibase\ItemCreation'] 		= $dir . 'includes/changes/ItemCre
 $wgAutoloadClasses['Wikibase\ItemDeletion'] 		= $dir . 'includes/changes/ItemDeletion.php';
 
 // includes/diff
+$wgAutoloadClasses['Wikibase\Diff'] 				= $dir . 'includes/diff/Diff.php';
 $wgAutoloadClasses['Wikibase\DiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
-$wgAutoloadClasses['Wikibase\IDiff'] 				= $dir . 'includes/diff/IDiff.php';
-$wgAutoloadClasses['Wikibase\IDiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
 $wgAutoloadClasses['Wikibase\DiffOpAdd'] 			= $dir . 'includes/diff/DiffOpAdd.php';
 $wgAutoloadClasses['Wikibase\DiffOpChange'] 		= $dir . 'includes/diff/DiffOpChange.php';
-$wgAutoloadClasses['Wikibase\Diff'] 				= $dir . 'includes/diff/Diff.php';
 $wgAutoloadClasses['Wikibase\DiffOpRemove'] 		= $dir . 'includes/diff/DiffOpRemove.php';
+$wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/diff/DiffView.php';
+$wgAutoloadClasses['Wikibase\IDiff'] 				= $dir . 'includes/diff/IDiff.php';
+$wgAutoloadClasses['Wikibase\IDiffOp'] 				= $dir . 'includes/diff/IDiffOp.php';
 $wgAutoloadClasses['Wikibase\ListDiff'] 			= $dir . 'includes/diff/ListDiff.php';
 $wgAutoloadClasses['Wikibase\MapDiff'] 				= $dir . 'includes/diff/MapDiff.php';
+
+// includes/entity
+$wgAutoloadClasses['Wikibase\EntityDiffObject'] 	= $dir . 'includes/entity/EntityDiffObject.php';
+$wgAutoloadClasses['Wikibase\EntityDiffView'] 		= $dir . 'includes/entity/EntityDiffView.php';
+$wgAutoloadClasses['Wikibase\ItemDiffView'] 		= $dir . 'includes/entity/ItemDiffView.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/TestItems.php';
@@ -137,6 +134,15 @@ $wgAutoloadClasses['Wikibase\tests\SitelinkChangeTest'] 	= $dir . 'tests/phpunit
 // tests/diff
 $wgAutoloadClasses['Wikibase\tests\ListDiffTest'] 			= $dir . 'tests/phpunit/diff/ListDiffTest.php';
 $wgAutoloadClasses['Wikibase\tests\MapDiffTest'] 			= $dir . 'tests/phpunit/diff/MapDiffTest.php';
+
+foreach ( array(
+			  'Settings',
+			  'SettingsBase'
+		  ) as $compatClass ) {
+	if ( !array_key_exists( $compatClass, $wgAutoloadLocalClasses ) ) {
+		$wgAutoloadClasses[$compatClass] = $dir . 'compat/' . $compatClass . '.php';
+	}
+}
 
 
 

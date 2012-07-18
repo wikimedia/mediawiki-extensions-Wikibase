@@ -124,4 +124,5 @@ class ViewItemAction extends \ViewAction {
 	public function requiresWrite() {
 		return false;
 	}
+
 }

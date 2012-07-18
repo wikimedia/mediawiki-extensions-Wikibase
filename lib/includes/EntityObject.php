@@ -361,4 +361,25 @@ abstract class EntityObject implements Entity {
 		return true;
 	}
 
+	/**
+	 * @see Entity::getUndoDiff
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $newerEntity
+	 * @param Entity $olderEntity
+	 *
+	 * @return EntityDiff
+	 * @throws \MWException
+	 */
+	public function getUndoDiff( Entity $newerEntity, Entity $olderEntity ) {
+		if ( $newerEntity->getType() !== $this->getType() || $olderEntity->getType() !== $this->getType() ) {
+			throw new \MWException( 'Entities passed to getUndoDiff must have the same type as the entity object.' );
+		}
+
+		// FIXME: awareness of internal entity structure in diff code where it can be avoided (and is already in EntityDiff)
+		return $newerEntity->getDiff( $olderEntity )->getApplicableDiff( $this->toArray() );
+	}
+
+
 }

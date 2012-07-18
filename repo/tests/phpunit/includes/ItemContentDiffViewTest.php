@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ItemDiffView as ItemDiffView;
+use Wikibase\ItemContentDiffView as ItemContentDiffView;
 use Wikibase\Item as Item;
 use Wikibase\ItemContent as ItemContent;
 
@@ -36,7 +36,7 @@ use Wikibase\ItemContent as ItemContent;
 class ItemDiffViewTest extends \MediaWikiTestCase {
 
 	public function testConstructor() {
-		new ItemDiffView( \RequestContext::getMain() );
+		new ItemContentDiffView( \RequestContext::getMain() );
 	}
 
 	public function itemProvider() {
@@ -61,7 +61,7 @@ class ItemDiffViewTest extends \MediaWikiTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGenerateContentDiffBody( Item $item0, Item $item1 ) {
-		$diffView = new ItemDiffView( \RequestContext::getMain() );
+		$diffView = new ItemContentDiffView( \RequestContext::getMain() );
 		$this->assertInternalType(
 			'string',
 			$diffView->generateContentDiffBody(
