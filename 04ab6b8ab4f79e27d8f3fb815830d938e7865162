@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//6q0\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-18T10:09:37Z",
+      "side": 1,
+      "message": "PHPUnit tests could be added for this method.",
+      "revId": "04ab6b8ab4f79e27d8f3fb815830d938e7865162",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rA\u003d",
+        "filename": "repo/includes/api/ApiSetAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-18T10:09:37Z",
+      "side": 1,
+      "message": "PHPUnit tests could be added for this method.",
+      "revId": "04ab6b8ab4f79e27d8f3fb815830d938e7865162",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6q8\u003d",
+        "filename": "repo/includes/api/ApiSetAliases.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-18T10:09:37Z",
+      "side": 1,
+      "message": "PHPUnit tests could be added for this method.",
+      "revId": "04ab6b8ab4f79e27d8f3fb815830d938e7865162",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rM\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-18T10:09:37Z",
+      "side": 1,
+      "message": "PHPUnit tests could be added for this method.",
+      "revId": "04ab6b8ab4f79e27d8f3fb815830d938e7865162",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rQ\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-18T10:09:37Z",
+      "side": 1,
+      "message": "PHPUnit tests could be added for this method.",
+      "revId": "04ab6b8ab4f79e27d8f3fb815830d938e7865162",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rI\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-18T10:09:37Z",
+      "side": 1,
+      "message": "PHPUnit tests could be added for this method.",
+      "revId": "04ab6b8ab4f79e27d8f3fb815830d938e7865162",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rE\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-07-18T10:09:37Z",
+      "side": 1,
+      "message": "PHPUnit tests could be added for this method.",
+      "revId": "04ab6b8ab4f79e27d8f3fb815830d938e7865162",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
