@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//6sY\u003d",
+        "filename": "repo/tests/phpunit/includes/ItemHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-18T10:18:42Z",
+      "side": 1,
+      "message": "Outdated?",
+      "revId": "f4afe2c7b048840ecb6c314644af1028c80134de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rk\u003d",
+        "filename": "repo/tests/phpunit/includes/PropertyContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-18T10:18:42Z",
+      "side": 1,
+      "message": "Empty test class, there will be complaints in the complete testsett...\n\n2) Warning\nNo tests found in class \"Wikibase\\Test\\PropertyContentTest\".\n\n/home/john/Workspace/core/tests/phpunit/MediaWikiPHPUnitCommand.php:45\n/home/john/Workspace/core/tests/phpunit/phpunit.php:103",
+      "revId": "f4afe2c7b048840ecb6c314644af1028c80134de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6sU\u003d",
+        "filename": "repo/tests/phpunit/includes/PropertyContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-18T10:18:42Z",
+      "side": 1,
+      "message": "Moahahaha!",
+      "revId": "f4afe2c7b048840ecb6c314644af1028c80134de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rg\u003d",
+        "filename": "repo/tests/phpunit/includes/PropertyHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-18T10:18:42Z",
+      "side": 1,
+      "message": "Empty test class, there will be complaints in the complete testsett...\n\n3) Warning\nNo tests found in class \"Wikibase\\Test\\PropertyHandlerTest\".\n\n/home/john/Workspace/core/tests/phpunit/MediaWikiPHPUnitCommand.php:45\n/home/john/Workspace/core/tests/phpunit/phpunit.php:103",
+      "revId": "f4afe2c7b048840ecb6c314644af1028c80134de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rc\u003d",
+        "filename": "repo/tests/phpunit/includes/QueryContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-18T10:18:42Z",
+      "side": 1,
+      "message": "Empty test class, there will be complaints in the complete testsett...\n\n4) Warning\nNo tests found in class \"Wikibase\\Test\\QueryContentTest\".\n\n/home/john/Workspace/core/tests/phpunit/MediaWikiPHPUnitCommand.php:45\n/home/john/Workspace/core/tests/phpunit/phpunit.php:103",
+      "revId": "f4afe2c7b048840ecb6c314644af1028c80134de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6sQ\u003d",
+        "filename": "repo/tests/phpunit/includes/QueryContentTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-18T10:18:42Z",
+      "side": 1,
+      "message": "Moahahaha!",
+      "revId": "f4afe2c7b048840ecb6c314644af1028c80134de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6rY\u003d",
+        "filename": "repo/tests/phpunit/includes/QueryHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-18T10:18:42Z",
+      "side": 1,
+      "message": "Empty test class, there will be complaints in the complete testsett...\n\n5) Warning\nNo tests found in class \"Wikibase\\Test\\QueryHandlerTest\".\n\n/home/john/Workspace/core/tests/phpunit/MediaWikiPHPUnitCommand.php:45\n/home/john/Workspace/core/tests/phpunit/phpunit.php:103",
+      "revId": "f4afe2c7b048840ecb6c314644af1028c80134de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
