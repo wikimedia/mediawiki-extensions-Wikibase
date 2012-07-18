@@ -45,4 +45,15 @@ class DiffOpChange extends DiffOp {
 		);
 	}
 
+	/**
+	 * @see IDiffOp::isAtomic
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isAtomic() {
+		return true;
+	}
+
 }

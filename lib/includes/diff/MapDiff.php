@@ -18,7 +18,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapDiff extends Diff implements IDiffOp {
+class MapDiff extends Diff {
 
 	public function getType() {
 		return 'map';
@@ -29,10 +29,12 @@ class MapDiff extends Diff implements IDiffOp {
 	 *
 	 * @since 0.1
 	 *
+	 * @param $parentKey = null
+	 *
 	 * @return MapDiff
 	 */
-	public static function newEmpty() {
-		return new self( array() );
+	public static function newEmpty( $parentKey = null ) {
+		return new self( array(), $parentKey );
 	}
 
 	/**
@@ -162,6 +164,17 @@ class MapDiff extends Diff implements IDiffOp {
 	 */
 	public function getChanges() {
 		return $this->getTypeOperations( 'change' );
+	}
+
+	/**
+	 * @see IDiffOp::isAtomic
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isAtomic() {
+		return false;
 	}
 
 }

@@ -133,7 +133,7 @@ class ItemHandler extends EntityHandler {
 	 * @return string
 	 */
 	protected function getDiffEngineClass() {
-		return '\Wikibase\ItemDiffView';
+		return '\Wikibase\ItemContentDiffView';
 	}
 
 	/**

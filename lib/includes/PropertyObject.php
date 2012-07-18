@@ -47,4 +47,29 @@ class PropertyObject extends EntityObject implements Property {
 		return self::newFromArray( array() );
 	}
 
+	/**
+	 * @see Entity::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'property';
+	}
+
+	/**
+	 * @see Entity::getDiff
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return PropertyDiff
+	 */
+	public function getDiff( Entity $target ) {
+		// TODO
+		return ItemDiff::newEmpty();
+	}
+
 }

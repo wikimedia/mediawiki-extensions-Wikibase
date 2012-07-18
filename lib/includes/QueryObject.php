@@ -46,4 +46,29 @@ class QueryObject extends EntityObject implements Query {
 		return self::newFromArray( array() );
 	}
 
+	/**
+	 * @see Entity::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'query';
+	}
+
+	/**
+	 * @see Entity::getDiff
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return QueryDiff
+	 */
+	public function getDiff( Entity $target ) {
+		// TODO
+		return ItemDiff::newEmpty();
+	}
+
 }

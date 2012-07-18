@@ -4,29 +4,6 @@ namespace Wikibase;
 use MWException;
 
 /**
- * Interface for diff operations. A diff operation
- * represents a change to a single element.
- * In case the elements are maps or diffs, the resulting operation
- * can be a MapDiff or ListDiff, which contain their own list of IDiffOp objects.
- *
- * @since 0.1
- *
- * @file
- * @ingroup WikibaseLib
- * @ingroup WikibaseDiff
- *
- * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- */
-interface IDiffOp {
-
-	public function getType();
-
-	//public function toArray();
-
-}
-
-/**
  * Base class for diff operations. A diff operation
  * represents a change to a single element.
  *
@@ -48,16 +25,18 @@ abstract class DiffOp implements IDiffOp {
 	 *
 	 * @param array $array
 	 *
-	 * @return DiffOpAdd|DiffOpChange|DiffOpRemove
+	 * @return IDiffOp
 	 * @throws MWException
 	 */
 	public static function newFromArray( array $array ) {
 		$type = array_shift( $array );
 
 		$typeMap = array(
-			'add' => 'WikibaseDiffOpAdd',
-			'remove' => 'WikibaseDiffOpRemove',
-			'change' => 'WikibaseDiffOpChange',
+			'add' => '\Wikibase\DiffOpAdd',
+			'remove' => '\Wikibase\DiffOpRemove',
+			'change' => '\Wikibase\DiffOpChange',
+			'list' => '\Wikibase\ListDiff',
+			'map' => '\Wikibase\MapDiff',
 		);
 
 		if ( !array_key_exists( $type, $typeMap ) ) {
@@ -65,6 +44,17 @@ abstract class DiffOp implements IDiffOp {
 		}
 
 		return call_user_func_array( array( $typeMap[$type], '__construct' ), $array );
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @param string $type
+	 *
+	 * @return IDiffOp
+	 */
+	public static function newFromType( $type ) {
+		return static::newFromArray( array( $type, array() ) );
 	}
 
 }

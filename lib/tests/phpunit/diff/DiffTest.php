@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Diff as Diff;
+use Wikibase\MapDiff as MapDiff;
 
 /**
  * Tests for the Diff class.
@@ -51,7 +52,7 @@ class DiffTest extends \MediaWikiTestCase {
 	 * @dataProvider stuffProvider
 	 */
 	public function testStuff( array $operations ) {
-		$diff = new Diff( $operations );
+		$diff = new MapDiff( $operations );
 
 		$this->assertInstanceOf( '\Wikibase\IDiff', $diff );
 		$this->assertInstanceOf( '\ArrayIterator', $diff );

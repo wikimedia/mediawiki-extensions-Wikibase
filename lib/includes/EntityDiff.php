@@ -13,9 +13,15 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntityDiff {
+interface EntityDiff extends IDiff {
 
-
+	/**
+	 * Returns a view object for the diff.
+	 *
+	 * @since 0.1
+	 *
+	 * @return EntityDiffView
+	 */
+	public function getView();
 
 }
-

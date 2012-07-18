@@ -21,15 +21,17 @@ use Language;
 class ViewItemAction extends \ViewAction {
 
 	/**
-	 * (non-PHPdoc)
 	 * @see Action::getName()
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
 	 */
 	public function getName() {
 		return 'view';
 	}
 
 	public function show() {
-
 		// some fishy pseudo-casting
 		$article = $this->page; /* @var \Article $article */
 		$itemContent = $article->getPage()->getContent(); /* @var ItemContent $itemContent */
@@ -124,4 +126,5 @@ class ViewItemAction extends \ViewAction {
 	public function requiresWrite() {
 		return false;
 	}
+
 }

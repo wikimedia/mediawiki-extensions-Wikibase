@@ -60,7 +60,7 @@ final class WikibaseHooks {
 	public static function registerUnitTests( array &$files ) {
 		$testFiles = array(
 			'ItemMove',
-			'ItemDiffView',
+			'ItemContentDiffView',
 			'ItemMove',
 			'ItemView',
 
