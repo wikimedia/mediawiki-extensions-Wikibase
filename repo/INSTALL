@@ -8,13 +8,19 @@ Latest version of the install file: https://gerrit.wikimedia.org/r/gitweb?p=medi
 
 Wikibase requires:
 
-* MediaWiki 1.20 or above
-* PHP 5.3 or above
-* MySQL >=5 or SQLite >=3
+* MediaWiki 1.20 or later
+* PHP 5.3 or later
+* WikibaseLib extension of the same version
+
+And one of the following:
+
+* MySQL 5 or later
+* SQLite 3 or later
+* PostgreSQL 9 or later
 
 == Download ==
 
-TODO
+git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase.git Wikibase
 
 == Installation ==
 
@@ -23,6 +29,56 @@ Then add the following code to your [[Manual:LocalSettings.php|LocalSettings.php
 
 # Wikibase
 require_once( "$IP/extensions/Wikibase/repo/Wikibase.php" );
+
+=== Namespace setup ===
+
+You also need to configure which namespaces should be used before the extension will work.
+Wikibase needs 3 namespaces: one for items, one for properties and one for queries. Typically
+these are either 3 new namespaces, or 2 new ones and the main namespace being used for items.
+Configuration for both looks as follows:
+
+$baseNs = 100;
+
+// Define the namespace indexes
+// placholder-0
+define( 'WB_NS_PROPERTY', $baseNs + 2 );
+define( 'WB_NS_PROPERTY_TALK', $baseNs + 3 );
+define( 'WB_NS_QUERY', $baseNs + 4 );
+define( 'WB_NS_QUERY_TALK', $baseNs + 5 );
+
+// Define the namespaces
+// placeholder-1
+$wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
+$wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
+$wgExtraNamespaces[WB_NS_QUERY] = 'Query';
+$wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
+
+// Making the namespaces searched by default
+$wgNamespacesToBeSearchedDefault[WB_NS_DATA] = true;
+$wgNamespacesToBeSearchedDefault[WB_NS_PROPERTY] = true;
+$wgNamespacesToBeSearchedDefault[WB_NS_QUERY] = true;
+
+// Assining the correct content models to the namespaces
+$wgNamespaceContentModels[WB_NS_DATA] = CONTENT_MODEL_WIKIBASE_ITEM;
+$wgNamespaceContentModels[WB_NS_PROPERTY] = CONTENT_MODEL_WIKIBASE_PROPERTY;
+$wgNamespaceContentModels[WB_NS_QUERY] = CONTENT_MODEL_WIKIBASE_QUERY;
+
+Where placeholder-0 and placeholder-1 need to be replaced depending on which setup you go with:
+
+placeholder-0 needs to be as follows for the 3 dedicated namespace setup:
+
+define( 'WB_NS_DATA', $baseNs );
+define( 'WB_NS_DATA_TALK', $baseNs + 1 );
+
+And like this for using the main namespace:
+
+define( 'WB_NS_DATA', NS_MAIN );
+define( 'WB_NS_DATA_TALK', NS_TALK );
+
+placeholder-1 needs to have the below in case of 3 dedicated namespaces and nothing when using the main namespace:
+
+$wgExtraNamespaces[WB_NS_DATA] = 'Data';
+$wgExtraNamespaces[WB_NS_DATA_TALK] = 'Data_talk';
 
 == Configuration ==
 
