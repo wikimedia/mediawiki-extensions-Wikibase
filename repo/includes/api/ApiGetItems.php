@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase;
+use ApiBase, Language;
 
 /**
  * API module to get the data for one or more Wikibase items.
@@ -28,6 +28,8 @@ class ApiGetItems extends Api {
 	 * @since 0.1
 	 */
 	public function execute() {
+		global $wgLang;
+
 		$params = $this->extractRequestParams();
 
 		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
@@ -70,6 +72,16 @@ class ApiGetItems extends Api {
 		$languages = $params['languages'];
 
 		$this->setUsekeys( $params );
+		$this->setUseFallbacks( $params );
+
+		// Do a little caching on the fallback chains
+		static $langStore = array();
+		if ( $this->usefallbacks ) {
+			$lang = $wgLang->getCode(); // only used if fallbacks are true
+			if ( !isset( $langStore[$lang] ) ) {
+				$langStore[$lang] = array_merge( array( $lang ), Language::getFallbacksFor( $lang ) );
+			}
+		}
 
 		foreach ($params['ids'] as $id) {
 
@@ -97,16 +109,54 @@ class ApiGetItems extends Api {
 					foreach ( $params['props'] as $key ) {
 						switch ( $key ) {
 						case 'aliases':
-							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
+							$this->addAliasesToResult(
+								$item->getAllAliases( $languages ),
+								$itemPath
+							);
 							break;
 						case 'sitelinks':
-							$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath );
+							$this->addSiteLinksToResult(
+								$item->getSiteLinks(),
+								$itemPath
+							);
 							break;
 						case 'descriptions':
-							$this->addDescriptionsToResult( $item->getDescriptions( $languages ), $itemPath );
+							$fallback = false;
+							$filtered = null;
+							$descriptions = $item->getDescriptions();
+							if ( !is_null( $languages ) ) {
+								$filtered = Utils::filterMultilangText( $descriptions, $languages );
+								if ( 0 == count( $filtered ) ) {
+									if ( $this->usefallbacks ) {
+										$filtered = Utils::filterMultilangText( $descriptions, $langStore[$lang] );
+										$fallback = $filtered !== array();
+									}
+								}
+							}
+							$this->addDescriptionsToResult(
+								is_array( $filtered ) ? $filtered : $descriptions,
+								$itemPath,
+								$fallback
+							);
 							break;
 						case 'labels':
-							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
+							$fallback = false;
+							$filtered = null;
+							$labels = $item->getLabels();
+							if ( !is_null( $languages ) ) {
+								$filtered = Utils::filterMultilangText( $labels, $languages );
+								if ( 0 == count( $filtered ) ) {
+									if ( $this->usefallbacks ) {
+										$filtered = Utils::filterMultilangText( $labels, $langStore[$lang] );
+										$fallback = $filtered !== array();
+									}
+								}
+							}
+							$this->addLabelsToResult(
+								is_array( $filtered ) ? $filtered : $labels,
+								$itemPath,
+								$fallback
+							);
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases
@@ -143,29 +193,40 @@ class ApiGetItems extends Api {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		return array_merge( parent::getAllowedParams(), array(
-			'ids' => array(
-				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'sites' => array(
-				ApiBase::PARAM_TYPE => Sites::singleton()->getGlobalIdentifiers(),
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'titles' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'props' => array(
-				ApiBase::PARAM_TYPE => array( 'sitelinks', 'aliases', 'labels', 'descriptions' ),
-				ApiBase::PARAM_DFLT => 'sitelinks|aliases|labels|descriptions',
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'languages' => array(
-				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
-				ApiBase::PARAM_ISMULTI => true,
-			),
-		) );
+		$allowedParams = array();
+		if ( Settings::get( 'apiUseFallbacks' ) ) {
+			$allowedParams['nousefallbacks'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
+		}
+		else {
+			$allowedParams['usefallbacks'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
+		}
+		return array_merge(
+			parent::getAllowedParams(),
+			$allowedParams,
+			array(
+				'ids' => array(
+					ApiBase::PARAM_TYPE => 'integer',
+					ApiBase::PARAM_ISMULTI => true,
+				),
+				'sites' => array(
+					ApiBase::PARAM_TYPE => Sites::singleton()->getGlobalIdentifiers(),
+					ApiBase::PARAM_ISMULTI => true,
+				),
+				'titles' => array(
+					ApiBase::PARAM_TYPE => 'string',
+					ApiBase::PARAM_ISMULTI => true,
+				),
+				'props' => array(
+					ApiBase::PARAM_TYPE => array( 'sitelinks', 'aliases', 'labels', 'descriptions' ),
+					ApiBase::PARAM_DFLT => 'sitelinks|aliases|labels|descriptions',
+					ApiBase::PARAM_ISMULTI => true,
+				),
+				'languages' => array(
+					ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
+					ApiBase::PARAM_ISMULTI => true,
+				),
+			)
+		);
 	}
 
 	/**
@@ -175,21 +236,38 @@ class ApiGetItems extends Api {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array_merge( parent::getParamDescription(), array(
-			'ids' => 'The IDs of the items to get the data from',
-			'sites' => array( 'Identifier for the site on which the corresponding page resides',
-				"Use together with 'title', but only give one site for several titles or several sites for one title."
-			),
-			'titles' => array( 'The title of the corresponding page',
-				"Use together with 'sites', but only give one site for several titles or several sites for one title."
-			),
-			'props' => array( 'The names of the properties to get back from each item.',
-				"Will be further filtered by any languages given."
-			),
-			'languages' => array( 'By default the internationalized values are returned in all available languages.',
-				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
-			),
-		) );
+		$descriptions = array();
+		if ( Settings::get( 'apiUseFallbacks' ) ) {
+			$descriptions['nousefallbacks'] = array( 'Turn off use of fallbacks. The fallback chains are language specific and makes',
+				'it possible to replace missing multilingual attributes with defined ones in other languages. They use the same',
+				'replacement rules as the user interface messages.'
+			);
+		}
+		else {
+			$descriptions['usefallbacks'] = array( 'Turn on use of fallbacks. The fallback chains are language specific and makes',
+				'it possible to replace missing multilingual attributes with defined ones in other languages. They use the same',
+				'replacement rules as the user interface messages.'
+			);
+		}
+		return array_merge( 
+			parent::getParamDescription(),
+			$descriptions,
+			array(
+				'ids' => 'The IDs of the items to get the data from',
+				'sites' => array( 'Identifier for the site on which the corresponding page resides',
+					"Use together with 'title', but only give one site for several titles or several sites for one title."
+				),
+				'titles' => array( 'The title of the corresponding page',
+					"Use together with 'sites', but only give one site for several titles or several sites for one title."
+				),
+				'props' => array( 'The names of the properties to get back from each item.',
+					"Will be further filtered by any languages given."
+				),
+				'languages' => array( 'By default the internationalized values are returned in all available languages.',
+					'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
+				),
+			)
+		);
 	}
 
 	/**

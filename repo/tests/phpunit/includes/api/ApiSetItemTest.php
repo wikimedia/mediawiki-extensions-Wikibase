@@ -111,10 +111,14 @@ class ApiSetItemTest extends \ApiTestCase {
 	 */
 	function testSetItemGetTokenGetItems( $id, $op, $data ) {
 		$data = $this->doApiRequest(
-			array(
-				'action' => 'wbgetitems',
-				'ids' => $id,
-				'gettoken' => '' ),
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'ids' => $id,
+					'gettoken' => ''
+				)
+			),
 			null,
 			false,
 			self::$users['wbeditor']->user
@@ -167,12 +171,13 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @dataProvider provideSetItemIdDataOp
 	 */
 	function testSetItemWithNoToken( $id, $op, $data ) {
+		$blob = json_encode( $data );
 		try {
 			$this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
 					'reason' => 'Some reason',
-					'data' => $data
+					'data' => $blob
 					),
 				null,
 				false,
@@ -230,6 +235,7 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @dataProvider provideSetItemIdDataOp
 	 */
 	function testSetItemGetTokenSetData( $id, $op, $data ) {
+		$blob = json_encode( $data );
 		$req = array();
 		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
@@ -250,7 +256,7 @@ class ApiSetItemTest extends \ApiTestCase {
 			array(
 				'action' => 'wbsetitem',
 				'summary' => 'Some reason',
-				'data' => $data,
+				'data' => $blob,
 				'item' => $op
 			)
 		);
@@ -285,11 +291,16 @@ class ApiSetItemTest extends \ApiTestCase {
 	 */
 	public function testGetItemId( $id, $site, $title ) {
 		$myid =  self::$baseOfItemIds + $id;
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $site,
-			'titles' => $title,
-		) );
+		$first = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'sites' => $site,
+					'titles' => $title,
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
@@ -313,11 +324,41 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testGetItems( $id, $op, $data ) {
+		// Returning everything should work without fallback
+		$this->getItems( $id, $op, $data, null, false );
+		// Returning nothing should fail unless fallback works
+		$this->getItems( $id, $op, $data, '', true );
+		// These two should work without fallback
+		$this->getItems( $id, $op, $data, 'en', false );
+		$this->getItems( $id, $op, $data, 'de', false );
+		// These two should fail unless fallback works
+		$this->getItems( $id, $op, $data, 'nn', true );
+		$this->getItems( $id, $op, $data, 'nl', true );
+	}
+
+	public function getItems( $id, $op, $data, $languages, $fallback ) {
 		$myid =  self::$baseOfItemIds + $id;
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'ids' => "{$myid}",
-		) );
+		$req = array();
+		if ( $fallback ) {
+			if ( !Settings::get( 'apiUseFallbacks' ) ) {
+				$req['usefallbacks'] = true;
+			}
+		}
+		else {
+			if ( Settings::get( 'apiUseFallbacks' ) ) {
+				$req['nousefallbacks'] = true;
+			}
+		}
+		$first = $this->doApiRequest(
+			array_merge(
+				$req,
+				is_string($languages) ? array( 'languages' => $languages ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'ids' => "{$myid}",
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
@@ -331,8 +372,24 @@ class ApiSetItemTest extends \ApiTestCase {
 			"Must have an 'sitelinks' key in the '{$myid}' result from the API" );
 		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$myid}"],
 			"Must have an 'labels' key in the '{$myid}' result from the API" );
+		foreach ( $first[0]['items']["{$myid}"]['labels'] as $arr) {
+			$this->assertArrayHasKey( "language", $arr,
+				"Must have a 'language' key in the subset from the API" );
+			$this->assertTrue( isset($data['labels'][$arr['language']]),
+				"Must have a matching 'language' key in the subset from the API" );
+			$this->assertEquals( $data['labels'][$arr['language']], $arr['value'],
+				"Must have matching values in the subset from the API" );
+		}
 		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$myid}"],
 			"Must have an 'descriptions' key in the '{$myid}' result from the API" );
+		foreach ( $first[0]['items']["{$myid}"]['descriptions'] as $arr) {
+			$this->assertArrayHasKey( "language", $arr,
+				"Must have a 'language' key in the subset from the API" );
+			$this->assertTrue( isset($data['descriptions'][$arr['language']]),
+				"Must have a matching 'language' key in the subset from the API" );
+			$this->assertEquals( $data['descriptions'][$arr['language']], $arr['value'],
+				"Must have matching values in the subset from the API" );
+		}
 	}
 
 	/**
@@ -344,10 +401,15 @@ class ApiSetItemTest extends \ApiTestCase {
 	 */
 	public function testGetItemsMissingId( ) {
 		$myid =  self::$baseOfItemIds + 123456789;
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'ids' => "{$myid}",
-		) );
+		$first = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'ids' => "{$myid}",
+				)
+			)
+		);
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
@@ -368,11 +430,16 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @dataProvider providerGetItemsMissingTitle
 	 */
 	public function testGetItemsMissingTitle( $id, $sites, $titles ) {
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $sites,
-			'titles' => $titles,
-		) );
+		$first = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'sites' => $sites,
+					'titles' => $titles,
+				)
+			)
+		);
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
 		$this->assertArrayHasKey( 'items', $first[0],
@@ -391,10 +458,15 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testGetItemsMultipleIds() {
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'ids' => '1|2|3'
-		) );
+		$first = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'ids' => '1|2|3'
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
@@ -412,11 +484,16 @@ class ApiSetItemTest extends \ApiTestCase {
 	 * @depends testSetItemGetTokenSetData
 	 */
 	public function testGetItemsMultipleSiteLinks() {
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => 'dewiki|enwiki|nlwiki',
-			'titles' => 'Berlin|London|Oslo'
-		) );
+		$first = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'sites' => 'dewiki|enwiki|nlwiki',
+					'titles' => 'Berlin|London|Oslo'
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
@@ -436,11 +513,16 @@ class ApiSetItemTest extends \ApiTestCase {
 	 */
 	public function testGetItemsSiteTitle($id, $site, $title) {
 		$myid =  self::$baseOfItemIds + $id;
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $site,
-			'titles' => $title,
-		) );
+		$first = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'sites' => $site,
+					'titles' => $title,
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $first[0],
 			"Must have an 'success' key in the result from the API" );
@@ -513,11 +595,16 @@ class ApiSetItemTest extends \ApiTestCase {
 		$this->assertEquals( $myid, $first[0]['item']['id'],
 			"Must have the value '{$myid}' for the 'id' in the result from the first call to the API" );
 
-		$second = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $linksite,
-			'titles' => $linktitle,
-		) );
+		$second = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'sites' => $linksite,
+					'titles' => $linktitle,
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the result from the second call to the API" );
@@ -542,11 +629,16 @@ class ApiSetItemTest extends \ApiTestCase {
 				"Must have the value '{$myid}' for the 'id' in the result from the second call to the API" );
 		}
 
-		$third = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $site,
-			'titles' => $title,
-		) );
+		$third = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'sites' => $site,
+					'titles' => $title,
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $third[0],
 			"Must have an 'success' key in the result from the third call to the API" );
@@ -620,11 +712,16 @@ class ApiSetItemTest extends \ApiTestCase {
 			"Must have the value '{$myid}' for the 'id' in the result from the first call to the API" );
 
 		// now check if we can find them by their new site-title pairs
-		$second = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $linksite,
-			'titles' => $linktitle,
-		) );
+		$second = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'sites' => $linksite,
+					'titles' => $linktitle,
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the result from the second call to the API" );
@@ -651,11 +748,16 @@ class ApiSetItemTest extends \ApiTestCase {
 
 		// now check if we can find them by their old site-title pairs
 		// that is, they should not have lost teir old pairs
-		$third = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $site,
-			'titles' => $title,
-		) );
+		$third = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'sites' => $site,
+					'titles' => $title,
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $third[0],
 			"Must have an 'success' key in the result from the third call to the API" );
@@ -749,13 +851,18 @@ class ApiSetItemTest extends \ApiTestCase {
 				"Must have the value '{$description}' for the value of '{$language}' in the 'descriptions' set in the result in the first call to the API" );
 		}
 
-		$second = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'ids' => $myid,
-			'usekeys' => true,
-			'format' => 'jsonfm',
-			'language' => $language,
-		) );
+		$second = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'ids' => $myid,
+					'usekeys' => true,
+					'format' => 'jsonfm',
+					'language' => $language,
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the result in the second call to the API" );
@@ -838,11 +945,16 @@ class ApiSetItemTest extends \ApiTestCase {
 		$this->assertEquals( $myid, $first[0]['item']['id'],
 			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 
-		$second = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'ids' => $myid,
-			'language' => $language,
-		) );
+		$second = $this->doApiRequest(
+			array_merge(
+				Settings::get( 'apiUseFallbacks' ) ? array( 'nofallbacks' => true ) : array(),
+				array(
+					'action' => 'wbgetitems',
+					'ids' => $myid,
+					'language' => $language,
+				)
+			)
+		);
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the result in the second call to the API" );
@@ -871,95 +983,95 @@ class ApiSetItemTest extends \ApiTestCase {
 			array(
 				++$idx,
 				'add',
-				'{
-					"sitelinks": {
-						"dewiki": "Berlin",
-						"enwiki": "Berlin",
-						"nlwiki": "Berlin",
-						"nnwiki": "Berlin"
-					},
-					"labels": {
-						"de": "Berlin",
-						"en": "Berlin",
-						"no": "Berlin",
-						"nn": "Berlin"
-					},
-					"descriptions": {
-						"de" : "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland.",
-						"en" : "Capital city and a federated state of the Federal Republic of Germany.",
-						"no" : "Hovedsted og delstat og i Forbundsrepublikken Tyskland.",
-						"nn" : "Hovudstad og delstat i Forbundsrepublikken Tyskland."
-					}
-				}'
+				array(
+					"sitelinks" => array(
+						"dewiki" => "Berlin",
+						"enwiki" => "Berlin",
+						"nlwiki" => "Berlin",
+						"nnwiki" => "Berlin"
+					),
+					"labels" => array(
+						"de" => "Berlin",
+						"en" => "Berlin",
+						"no" => "Berlin",
+						"nn" => "Berlin"
+					),
+					"descriptions" => array(
+						"de" => "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland.",
+						"en" => "Capital city and a federated state of the Federal Republic of Germany.",
+						"no" => "Hovedsted og delstat og i Forbundsrepublikken Tyskland.",
+						"nn" => "Hovudstad og delstat i Forbundsrepublikken Tyskland."
+					)
+				)
 			),
 			array(
 				++$idx,
 				'add',
-				'{
-					"sitelinks": {
-						"enwiki": "London",
-						"dewiki": "London",
-						"nlwiki": "London",
-						"nnwiki": "London"
-					},
-					"labels": {
-						"de": "London",
-						"en": "London",
-						"no": "London",
-						"nn": "London"
-					},
-					"descriptions": {
-						"de" : "Hauptstadt Englands und des Vereinigten Königreiches.",
-						"en" : "Capital city of England and the United Kingdom.",
-						"no" : "Hovedsted i England og Storbritannia.",
-						"nn" : "Hovudstad i England og Storbritannia."
-					}
-				}'
+				array(
+					"sitelinks" => array(
+						"enwiki" => "London",
+						"dewiki" => "London",
+						"nlwiki" => "London",
+						"nnwiki" => "London"
+					),
+					"labels" => array(
+						"de" => "London",
+						"en" => "London",
+						"no" => "London",
+						"nn" => "London"
+					),
+					"descriptions" => array(
+						"de" => "Hauptstadt Englands und des Vereinigten Königreiches.",
+						"en" => "Capital city of England and the United Kingdom.",
+						"no" => "Hovedsted i England og Storbritannia.",
+						"nn" => "Hovudstad i England og Storbritannia."
+					)
+				)
 			),
 			array(
 				++$idx,
 				'add',
-				'{
-					"sitelinks": {
-						"dewiki": "Oslo",
-						"enwiki": "Oslo",
-						"nlwiki": "Oslo",
-						"nnwiki": "Oslo"
-					},
-					"labels": {
-						"de": "Oslo",
-						"en": "Oslo",
-						"no": "Oslo",
-						"nn": "Oslo"
-					},
-					"descriptions": {
-						"de" : "Hauptstadt der Norwegen.",
-						"en" : "Capital city in Norway.",
-						"no" : "Hovedsted i Norge.",
-						"nn" : "Hovudstad i Noreg."
-					}
-				}'
+				array(
+					"sitelinks" => array(
+						"dewiki" => "Oslo",
+						"enwiki" => "Oslo",
+						"nlwiki" => "Oslo",
+						"nnwiki" => "Oslo"
+					),
+					"labels" => array(
+						"de" => "Oslo",
+						"en" => "Oslo",
+						"no" => "Oslo",
+						"nn" => "Oslo"
+					),
+					"descriptions" => array(
+						"de" => "Hauptstadt der Norwegen.",
+						"en" => "Capital city in Norway.",
+						"no" => "Hovedsted i Norge.",
+						"nn" => "Hovudstad i Noreg."
+					)
+				)
 			),
 			array(
 				++$idx,
 				'add',
-				'{
-					"sitelinks": {
-						"dewiki": "Episkopi Cantonment",
-						"enwiki": "Episkopi Cantonment",
-						"nlwiki": "Episkopi Cantonment"
-					},
-					"labels": {
-						"de": "Episkopi Cantonment",
-						"en": "Episkopi Cantonment",
-						"nl": "Episkopi Cantonment"
-					},
-					"descriptions": {
-						"de" : "Sitz der Verwaltung der Mittelmeerinsel Zypern.",
-						"en" : "The capital of Akrotiri and Dhekelia.",
-						"nl" : "Het bestuurlijke centrum van Akrotiri en Dhekelia."
-					}
-				}'
+				array(
+					"sitelinks" => array(
+						"dewiki" => "Episkopi Cantonment",
+						"enwiki" => "Episkopi Cantonment",
+						"nlwiki" => "Episkopi Cantonment"
+					),
+					"labels" => array(
+						"de" => "Episkopi Cantonment",
+						"en" => "Episkopi Cantonment",
+						"nl" => "Episkopi Cantonment"
+					),
+					"descriptions" => array(
+						"de" => "Sitz der Verwaltung der Mittelmeerinsel Zypern.",
+						"en" => "The capital of Akrotiri and Dhekelia.",
+						"nl" => "Het bestuurlijke centrum van Akrotiri en Dhekelia."
+					)
+				)
 			),
 		);
 	}

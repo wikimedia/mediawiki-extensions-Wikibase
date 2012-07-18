@@ -21,14 +21,22 @@ abstract class Api extends \ApiBase {
 	 * @var bool how to handle the keys
 	 */
 	protected $usekeys = false;
-	
+
+	/**
+	 * Var to keep the set status for later use
+	 * @var bool how to handle the fallbacks
+	 */
+	protected $usefallbacks = false;
+
 	/**
 	 * Sets the usekeys-state for later use (and misuse)
 	 *
 	 * @param $params array parameters requested in subclass
 	 */
 	protected function setUsekeys( array $params ) {
-		$usekeys = Settings::get( 'apiUseKeys' ) || ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
+		$usekeys = Settings::get( 'apiUseKeys' )
+			? !( isset( $params['nousekeys'] ) ? $params['nousekeys'] : false )
+			: ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
 
 		if ( $usekeys ) {
 			$format = $this->getMain()->getRequest()->getVal( 'format' );
@@ -37,6 +45,19 @@ abstract class Api extends \ApiBase {
 		}
 
 		$this->usekeys = $usekeys;
+	}
+
+	/**
+	 * Sets the usefallbacks-state for later use (and misuse)
+	 *
+	 * @param $params array parameters requested in subclass
+	 */
+	protected function setUseFallbacks( array $params ) {
+		$usefallbacks = Settings::get( 'apiUseFallbacks' )
+			? !( isset( $params['nousefallbacks'] ) ? $params['nousefallbacks'] : false )
+			: ( isset( $params['usefallbacks'] ) ? $params['usefallbacks'] : false );
+
+		$this->usefallbacks = $usefallbacks;
 	}
 
 	/**
@@ -56,22 +77,22 @@ abstract class Api extends \ApiBase {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		$descriptions = array(
-			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
-				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
-			)
-		);
+		$descriptions = array();
 		if ( Settings::get( 'apiUseKeys' ) ) {
-			$descriptions['nousekeys'] = array( 'Turn off use the keys. The use of keys are only used in formats that supports them,',
+			$descriptions['nousekeys'] = array( 'Turn off use of keys. The use of keys are only used in formats that supports them,',
 				'otherwise fall back to the ordinary style which is to use keys.'
 			);
 		}
 		else {
-			$descriptions['usekeys'] = array( 'Turn on use the keys. The use of keys are only used in formats that supports them,',
+			$descriptions['usekeys'] = array( 'Turn on use of keys. The use of keys are only used in formats that supports them,',
 				'otherwise fall back to the ordinary style which is to use keys.'
 			);
 		}
-		return $descriptions;
+		return array_merge($descriptions, array(
+			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
+				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
+			)
+		) );
 	}
 
 	/**
@@ -82,19 +103,19 @@ abstract class Api extends \ApiBase {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$allowedParams = array(
-			'gettoken' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false
-			),
-		);
+		$allowedParams = array();
 		if ( Settings::get( 'apiUseKeys' ) ) {
 			$allowedParams['nousekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
 		}
 		else {
 			$allowedParams['usekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
 		}
-		return $allowedParams;
+		return array_merge($allowedParams, array(
+			'gettoken' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
+			),
+		) );
 	}
 
 	/**
@@ -221,23 +242,29 @@ abstract class Api extends \ApiBase {
 	 *
 	 * @return array|bool
 	 */
-	protected function addDescriptionsToResult( array $descriptions, $path, $name = 'descriptions', $tag = 'description' ) {
+	protected function addDescriptionsToResult( array $descriptions, $path, $fallback = false, $name = 'descriptions', $tag = 'description' ) {
 		$value = array();
 		$idx = 0;
 
 		foreach ( $descriptions as $languageCode => $description ) {
-			if ( $description === '' ) {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
+			$report = array(
+				'language' => $languageCode
+			);
+			if ( is_string($description) ) {
+				if ( $description === '' ) {
+					$report['removed'] = '';
+				}
+				else {
+					$report['value'] = $description;
+				}
 			}
 			else {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $description,
-				);
+				$report['unknown'] = '';
 			}
+			if ( $fallback ) {
+				$report['fallback'] = '';
+			}
+			$value[$this->usekeys ? $languageCode : $idx++] = $report;
 		}
 
 		if ( $value !== array() ) {
@@ -260,23 +287,29 @@ abstract class Api extends \ApiBase {
 	 *
 	 * @return array|bool
 	 */
-	protected function addLabelsToResult( array $labels, $path, $name = 'labels', $tag = 'label' ) {
+	protected function addLabelsToResult( array $labels, $path, $fallback = false, $name = 'labels', $tag = 'label' ) {
 		$value = array();
 		$idx = 0;
 
 		foreach ( $labels as $languageCode => $label ) {
-			if ( $label === '' ) {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'removed' => '',
-				);
+			$report = array(
+				'language' => $languageCode,
+			);
+			if ( is_string($label) ) {
+				if ( $label === '' ) {
+					$report['removed'] = '';
+				}
+				else {
+					$report['value'] = $label;
+				}
 			}
 			else {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
-					'language' => $languageCode,
-					'value' => $label,
-				);
+				$report['unknown'] = '';
 			}
+			if ( $fallback ) {
+				$report['fallback'] = '';
+			}
+			$value[$this->usekeys ? $languageCode : $idx++] = $report;
 		}
 
 		if ( $value !== array() ) {

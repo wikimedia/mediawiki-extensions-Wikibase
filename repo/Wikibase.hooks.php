@@ -376,13 +376,17 @@ final class WikibaseHooks {
 				// alternative: application/vnd.php.serialized
 				'serializationFormat' => CONTENT_FORMAT_JSON,
 
-				// Defaults to turn on deletion of empty items
-				// set to true will always delete empty items
+				// Turn on deletion of empty items
+				// Set to true will always delete empty items
 				'apiDeleteEmpty' => false,
 
-				// Defaults to turn off use of keys
-				// set to true will always return the key form
+				// Turn on and off use of keys
+				// Set to true will always return the key form
 				'apiUseKeys' => true,
+
+				// Turn on and off use of fallbacks
+				// Set to true will always return the key form
+				'apiUseFallbacks' => true,
 
 				// Set API in debug mode
 				// do not turn on in production!
@@ -557,30 +561,21 @@ final class WikibaseHooks {
 			$langStore[$lang] = array_merge( array( $lang ), Language::getFallbacksFor( $lang ) );
 		}
 
-		// This could use the user supplied list of acceptable languages
-		$labelTuple = array_slice(
-			\Wikibase\Utils::reorderArray(
+		// Get the label and description for the first languages on the chain
+		// that doesn't fail, use a fallback if everything fails. This could
+		// use the user supplied list of acceptable languages as a filter.
+		list( $labelCode, $labelText, $labelLang) = $labelTriplet =
+			\Wikibase\Utils::lookupMultilangText(
 				$item->getLabels( $langStore[$lang] ),
-				$langStore[$lang]
-			),
-			0,
-			1
-		);
-		list( $labelCode, $labelText ) = each( $labelTuple );
-
-		$descriptionTuple = array_slice(
-			\Wikibase\Utils::reorderArray(
-				$item->getDescriptions(
-					$langStore[$lang] ),
-					$langStore[$lang]
-				),
-			0,
-			1
-		);
-		list( $descriptionCode, $descriptionText ) = each( $descriptionTuple );
-
-		$labelLang = Language::factory( $labelCode );
-		$descriptionLang = Language::factory( $descriptionCode );
+				$langStore[$lang],
+				array( $wgLang->getCode(), null, $wgLang )
+			);
+		list( $descriptionCode, $descriptionText, $descriptionLang) = $descriptionTriplet =
+			\Wikibase\Utils::lookupMultilangText(
+				$item->getDescriptions( $langStore[$lang] ),
+				$langStore[$lang],
+				array( $wgLang->getCode(), null, $wgLang )
+			);
 
 		// Go on and construct the link
 		$idHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
@@ -596,10 +591,10 @@ final class WikibaseHooks {
 			. Html::closeElement( 'span' );
 
 		// Set title attribute for constructed link, and make tricks with the directionality to get it right
-		$titleText = ( $labelText !== false )
+		$titleText = ( $labelText !== '' )
 			? $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
 			: $target->getPrefixedText();
-		$customAttribs[ 'title' ] = ( $descriptionText !== false )
+		$customAttribs[ 'title' ] = ( $descriptionText !== '' )
 			? wfMsgForContent( 'wikibase-itemlink-title', $titleText, $descriptionLang->getDirMark() . $descriptionText . $wgLang->getDirMark() )
 			: $titleText; // no description, just display the title then
 
