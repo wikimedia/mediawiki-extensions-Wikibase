@@ -8,13 +8,18 @@ Latest version of the install file: https://gerrit.wikimedia.org/r/gitweb?p=medi
 
 WikibaseLib requires:
 
-* MediaWiki 1.20 or above
-* PHP 5.3 or above
-* MySQL >=5 or SQLite >=3
+* MediaWiki 1.20 or later
+* PHP 5.3 or later
+
+And one of the following:
+
+* MySQL 5 or later
+* SQLite 3 or later
+* PostgreSQL 9 or later
 
 == Download ==
 
-TODO
+git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Wikibase.git Wikibase
 
 == Installation ==
 
