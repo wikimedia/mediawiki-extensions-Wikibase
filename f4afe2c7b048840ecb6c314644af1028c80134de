@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6oM\u003d",
+        "filename": "repo/tests/phpunit/includes/ItemHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-18T13:35:00Z",
+      "side": 1,
+      "message": "No, still applies to the rest of the method",
+      "parentUuid": "AAAAQX//6sY\u003d",
+      "revId": "f4afe2c7b048840ecb6c314644af1028c80134de",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6rk\u003d",
         "filename": "repo/tests/phpunit/includes/PropertyContentTest.php",
         "patchSetId": 1
