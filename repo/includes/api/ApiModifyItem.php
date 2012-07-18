@@ -107,14 +107,14 @@ abstract class ApiModifyItem extends Api {
 		$this->validateParameters( $params );
 
 		if ( isset( $params['id'] ) ) {
-			$itemContent = ItemContent::getFromId( $params['id'] );
+			$itemContent = ItemHandler::singleton()->getFromId( $params['id'] );
 
 			if ( is_null( $itemContent ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
 			}
 		}
 		elseif ( $hasLink ) {
-			$itemContent = ItemContent::getFromSiteLink( $params['site'], $normTitle );
+			$itemContent = ItemHandler::singleton()->getFromSiteLink( $params['site'], $normTitle );
 
 			if ( is_null( $itemContent ) && $params['item'] === 'update' ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );

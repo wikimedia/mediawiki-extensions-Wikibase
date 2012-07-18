@@ -41,16 +41,20 @@ class ApiGetItems extends Api {
 			$numSites = count( $params['sites'] );
 			$numTitles = count( $params['titles'] );
 			$max = max( $numSites, $numTitles );
+
 			if ( $numSites === 0 || $numTitles === 0 ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
 			}
 			else {
 				$idxSites = 0;
 				$idxTitles = 0;
-				for ($k = 0; $k < $max; $k++) {
+
+				for ( $k = 0; $k < $max; $k++ ) {
 					$site = $params['sites'][$idxSites++];
 					$title = Utils::squashToNFC( $params['titles'][$idxTitles++] );
-					$id = ItemContent::getIdForSiteLink( $site, $title );
+
+					$id = ItemHandler::singleton()->getIdForSiteLink( $site, $title );
+
 					if ( $id ) {
 						$params['ids'][] = intval( $id );
 					}
@@ -59,8 +63,14 @@ class ApiGetItems extends Api {
 							array( 'site' => $site, 'title' => $title, 'missing' => "" )
 						);
 					}
-					if ( $idxSites === $numSites ) $idxSites = 0;
-					if ( $idxTitles === $numTitles ) $idxTitles = 0;
+
+					if ( $idxSites === $numSites ) {
+						$idxSites = 0;
+					}
+
+					if ( $idxTitles === $numTitles ) {
+						$idxTitles = 0;
+					}
 				}
 			}
 		}
@@ -79,17 +89,17 @@ class ApiGetItems extends Api {
 			$res->addValue( $itemPath, 'id', $id );
 
 			if ( $params['props'] !== array() ) {
-				$page = ItemContent::getWikiPageForId( $id );
+				$page = ItemHandler::singleton()->getWikiPageForId( $id );
+
 				if ( $page->exists() ) {
 					// as long as getWikiPageForId only returns ids for legal items this holds
+					/**
+					 * @var $itemContent ItemContent
+					 */
 					$itemContent = $page->getContent();
 
 					if ( is_null( $itemContent ) ) {
 						continue;
-					}
-
-					if ( !( $itemContent instanceof ItemContent ) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
 					}
 
 					$item = $itemContent->getItem();

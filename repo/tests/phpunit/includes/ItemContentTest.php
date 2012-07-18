@@ -5,7 +5,7 @@ use \Wikibase\ItemContent as ItemContent;
 use \Wikibase\Item as Item;
 
 /**
- * Tests for the WikibaseItem class.
+ * Tests for the Wikibase\ItemContent class.
  *
  * @file
  * @since 0.1
@@ -22,50 +22,6 @@ use \Wikibase\Item as Item;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class ItemContentTest extends \MediaWikiTestCase {
-
-	/**
-	 * Tests @see WikibaseItem::getIdForSiteLink
-	 */
-	public function testNotFound() {
-		$this->assertFalse(
-			ItemContent::getIdForSiteLink( 9999, "ThisDoesNotExistAndProbablyWillNeverExist" ),
-			'Calling getIdForLinkSite( 42, "ThisDoesNotExistAndProbablyWillNeverExist" ) should return false'
-		);
-	}
-
-	/**
-	 * Tests @see WikibaseItem::getTitleForId
-	 */
-	public function testGetTitleForId() {
-		$title = ItemContent::getTitleForId( 42 );
-		$this->assertInstanceOf(
-			'\Title',
-			$title,
-			'Calling WikibaseItem::getTitleForId(42) should return a Title object'
-		);
-		$this->assertRegExp(
-			'/Q42/i',
-			$title->getBaseText(),
-			'Calling getBaseText() on returned Title from WikibaseItem::getTitleForId(42), ie either a new item with this id or an existing, should return number 42'
-		);
-	}
-
-	/**
-	 * Tests @see WikibaseItem::getWikiPageForId
-	 */
-	public function testGetWikiPageForId() {
-		$page = ItemContent::getWikiPageForId( 42 );
-		$this->assertInstanceOf(
-			'\WikiPage',
-			$page,
-			'Calling WikibaseItem::getWikiPageForId(42) should return a WikiPage object'
-		);
-		$this->assertRegExp(
-			'/Q42/i',
-			$page->getTitle()->getBaseText(),
-			'Calling getTitle()->getBaseText() on returned WikiPage from WikibaseItem::getTitleForId(42), ie either a new item with this id or an existing, should return number 42'
-		);
-	}
 
 	public function dataGetTextForSearchIndex() {
 		return array( // runs
