@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//6Us\u003d",
+        "filename": "repo/includes/actions/EditItemAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-18T22:03:18Z",
+      "side": 1,
+      "message": "If someone goes ahead already to add this stuff, please do it in new commits",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
