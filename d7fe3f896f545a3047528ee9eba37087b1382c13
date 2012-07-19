@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQX//6Ew\u003d",
+        "filename": "repo/includes/actions/EditItemAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-07-19T13:25:44Z",
+      "side": 1,
+      "message": "Oh come one, give yourself some credit, Jeroen ;)",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6Us\u003d",
         "filename": "repo/includes/actions/EditItemAction.php",
         "patchSetId": 2
