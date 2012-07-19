@@ -86,6 +86,38 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 				}, this
 			)
 		);
+
+		/**
+		 * highlight whole PropertyEditTool context if there may no additionally EditableValues be
+		 * added (in that case, PropertyEditTool is a container for a fixed set of EditableValues
+		 * that is being edited as a whole)
+		 */
+		$( wikibase ).on(
+			'startItemPageEditMode',
+			$.proxy(
+				function( event, origin ) {
+					if ( !this.allowsMultipleValues && this._editableValues !== null ) {
+						for ( var i = 0; i < this._editableValues.length; i += 1 ) {
+							if ( this._editableValues[i] === origin ) {
+								this._subject.addClass( this.UI_CLASS + '-ineditmode' );
+								break;
+							}
+						}
+					}
+				}, this
+			)
+		);
+		$( wikibase ).on(
+			'stopItemPageEditMode',
+			$.proxy(
+				function( event, origin ) {
+					if ( !this.allowsMultipleValues ) {
+						this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
+					}
+				}, this
+			)
+		);
+
 	},
 
 	/**

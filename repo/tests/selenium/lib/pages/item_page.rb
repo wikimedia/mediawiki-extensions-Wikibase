@@ -57,4 +57,10 @@ class ItemPage < RubySelenium
     end
   end
 
+  def wait_for_editLabelLink
+    wait_until do
+      editLabelLink?
+    end
+  end
+
 end
