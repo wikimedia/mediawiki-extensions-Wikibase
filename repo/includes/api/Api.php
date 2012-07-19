@@ -186,25 +186,27 @@ abstract class Api extends \ApiBase {
 		$value = array();
 		$idx = 0;
 
-		foreach ( $siteLinks as $siteId => $pageTitle ) {
-			if ( $pageTitle === '' ) {
-				$value[$this->usekeys ? $siteId : $idx++] = array(
-					'site' => $siteId,
-					'removed' => '',
-				);
+		foreach ( $siteLinks as $link ) { /* @var SiteLink $link */
+			$response = array(
+				'site' => $link->getSiteID(),
+				'url' => $link->getUrl(), //XXX: could make this optional
+			);
+
+			if ( $link->getPage() === '' ) {
+				$response['removed'] = '';
 			}
 			else {
-				$value[$this->usekeys ? $siteId : $idx++] = array(
-					'site' => $siteId,
-					'title' => $pageTitle,
-				);
+				$response['title'] = $link->getPage();
 			}
+
+			$value[$this->usekeys ? $link->getSiteID() : $idx++] = $response;
 		}
 
 		if ( $value !== array() ) {
-			if (!$this->usekeys) {
+			if ( !$this->usekeys ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
+
 			$this->getResult()->addValue( $path, $name, $value );
 		}
 	}

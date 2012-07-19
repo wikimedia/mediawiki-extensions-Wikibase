@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use \Wikibase\ItemObject as ItemObject;
 use \Wikibase\Item as Item;
+use \Wikibase\SiteLink as SiteLink;
 
 /**
  * Tests for the WikibaseItem class.
@@ -122,20 +123,25 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 	 */
 	public function testAddRemoveSiteLink() {
 		$arr = array(
-			'no' => 'Norge',
-			'nn' => 'Noreg'
+			new SiteLink( 'nowiki', 'Norge' ),
+			new SiteLink( 'enwiki', 'English' ),
 		);
-		foreach ($arr as $key => $val) {
-			$this->item->addSiteLink( $key, $val );
+
+		/* @var SiteLink $link */
+		foreach ( $arr as $link ) {
+			$this->item->addSiteLink( $link->getSiteID(), $link->getPage() );
 		}
+
 		$this->assertEquals(
 			$arr,
 			$this->item->getSiteLinks(),
 			'Testing if getSiteLinks reconstructs the whole structure after it is built with addSiteLink'
 		);
-		foreach ($arr as $key => $val) {
-			$this->item->removeSiteLink( $key, $val );
+
+		foreach ( $arr as $link ) {
+			$this->item->removeSiteLink( $link->getSiteID(), $link->getPage() );
 		}
+
 		$this->assertCount(
 			0,
 			$this->item->getSiteLinks(),

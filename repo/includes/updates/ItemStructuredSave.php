@@ -92,14 +92,15 @@ class ItemStructuredSave extends \DataUpdate {
 			__METHOD__
 		);
 
-		foreach ( $this->itemContent->getItem()->getSiteLinks() as $siteId => $pageName ) {
+		/* @var SiteLink $siteLink */
+		foreach ( $this->itemContent->getItem()->getSiteLinks() as $siteLink ) {
 			$success = $dbw->insert(
 				'wb_items_per_site',
 				array_merge(
 					$idField,
 					array(
-						'ips_site_id' => $siteId,
-						'ips_site_page' => $pageName,
+						'ips_site_id' => $siteLink->getSiteID(),
+						'ips_site_page' => $siteLink->getPage(),
 					)
 				),
 				__METHOD__

@@ -47,7 +47,7 @@ interface Item extends Entity {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return array an array of SiteLink objects
 	 */
 	public function getSiteLinks();
 
