@@ -1,7 +1,7 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\ListDiff as ListDiff;
+namespace Diff\Test;
+use Diff\ListDiff as ListDiff;
 
 /**
  * Tests for the ListDiff class.
@@ -9,11 +9,9 @@ use Wikibase\ListDiff as ListDiff;
  * @file
  * @since 0.1
  *
- * @ingroup WikibaseLib
+ * @ingroup Diff
  * @ingroup Test
- * @group Wikibase
- * @group WikibaseLib
- * @group WikibaseDiff
+ * @group Diff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -92,9 +90,9 @@ class ListDiffTest extends \MediaWikiTestCase {
 	public function testNewFromArrays( array $from, array $to, array $additions, array $removals ) {
 		$diff = ListDiff::newFromArrays( $from, $to );
 
-		$this->assertInstanceOf( '\Wikibase\ListDiff', $diff );
-		$this->assertInstanceOf( '\Wikibase\IDiffOp', $diff );
-		$this->assertInstanceOf( '\Wikibase\IDiff', $diff );
+		$this->assertInstanceOf( '\Diff\ListDiff', $diff );
+		$this->assertInstanceOf( '\Diff\IDiffOp', $diff );
+		$this->assertInstanceOf( '\Diff\IDiff', $diff );
 		$this->assertInstanceOf( '\ArrayIterator', $diff );
 
 		// array_values because we only care about the values, not promises are made about the keys.

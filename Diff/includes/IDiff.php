@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Diff;
 
 /**
  * Interface for diffs. Diffs are collections of IDiffOp objects.

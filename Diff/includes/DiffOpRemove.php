@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Diff;
 
 /**
- * Represents an addition.
- * This means the value was not present in the "old" object but is in the new.
+ * Represents a removal.
+ * This means the value is not present in the "new" object but was in the old.
  *
  * @since 0.1
  *
@@ -15,26 +15,26 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpAdd extends DiffOp {
+class DiffOpRemove extends DiffOp {
 
-	protected $newValue;
+	protected $oldValue;
 
 	public function getType() {
-		return 'add';
+		return 'remove';
 	}
 
-	public function __construct( $newValue ) {
-		$this->newValue = $newValue;
+	public function __construct( $oldValue ) {
+		$this->oldValue = $oldValue;
 	}
 
-	public function getNewValue() {
-		return $this->newValue;
+	public function getOldValue() {
+		return $this->oldValue;
 	}
 
 	public function toArray() {
 		return array(
 			$this->getType(),
-			$this->newValue,
+			$this->oldValue,
 		);
 	}
 

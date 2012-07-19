@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Diff;
 
 /**
  * Class representing the diff between to (non-associative) arrays.
