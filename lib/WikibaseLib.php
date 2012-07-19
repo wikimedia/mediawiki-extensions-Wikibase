@@ -93,6 +93,7 @@ $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
 $wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
 $wgAutoloadClasses['Wikibase\SiteConfigObject'] 	= $dir . 'includes/SiteConfigObject.php';
+$wgAutoloadClasses['Wikibase\SiteLink'] 			= $dir . 'includes/SiteLink.php';
 $wgAutoloadClasses['Wikibase\SiteList'] 			= $dir . 'includes/SiteList.php';
 $wgAutoloadClasses['Wikibase\SiteRow'] 				= $dir . 'includes/SiteRow.php';
 $wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';

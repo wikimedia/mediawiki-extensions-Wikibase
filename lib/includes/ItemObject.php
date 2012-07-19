@@ -83,10 +83,16 @@ class ItemObject extends EntityObject implements Item {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return array a list of SiteLink objects
 	 */
 	public function getSiteLinks() {
-		return $this->data['links'];
+		$links = array();
+
+		foreach ( $this->data['links'] as $site => $title ) {
+			$links[] = new SiteLink( $site, $title );
+		}
+
+		return $links;
 	}
 
 	/**

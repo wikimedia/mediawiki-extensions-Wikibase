@@ -109,16 +109,11 @@ class ItemView extends \ContextSource {
 			// Batch load the sites we need info about during the building of the sitelink list.
 			Sites::singleton()->loadSites( array( 'global_key' => array_keys( $siteLinks ) ) );
 
-			foreach( $siteLinks as $siteId => $title ) {
+
+			foreach( $siteLinks as $link ) { /* @var SiteLink $link */
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
-				$site = Sites::singleton()->getSiteByGlobalId( $siteId );
-
-				if ( $site === false ) {
-					continue;
-				}
-
-				$languageCode = $site->getLanguage();
+				$languageCode = $link->getSiteLanguage();
 
 				$html .= Html::openElement( 'tr', array(
 						'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
@@ -135,8 +130,8 @@ class ItemView extends \ContextSource {
 				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
 				$html .= Html::element(
 					'a',
-					array( 'href' => Sites::singleton()->getUrl( $siteId, $title ) ),
-					$title
+					array( 'href' => $link->getUrl() ),
+					$link->getPage()
 				);
 				$html .= Html::closeElement( 'td' );
 				$html .= Html::closeElement( 'tr' );
