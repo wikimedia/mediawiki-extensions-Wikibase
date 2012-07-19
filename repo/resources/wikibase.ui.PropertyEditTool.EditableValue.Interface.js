@@ -304,7 +304,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 */
 	getValue: function() {
 		var value = this.isInEditMode()
-			? this.normalize( this._getValue_inEditMode() )
+			? this._getValue_inEditMode()
 			: this._getValue_inNonEditMode();
 			// if already set, the value should be normalized already.
 			// if this is not the case in another inheriting interface, change it there BUT NOT HERE!

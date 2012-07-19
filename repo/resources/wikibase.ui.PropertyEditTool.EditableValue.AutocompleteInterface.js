@@ -140,7 +140,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 						 as first result instead of "Allegro (music)", so auto-completion should probably
 						 be prevented here
 						 */
-						if ( response[1][0].indexOf( this._inputElem.val() ) !== -1 ) {
+						if (
+							response[1][0].toLowerCase().indexOf(
+								this._inputElem.val().toLowerCase()
+							) !== -1
+						) {
 							this.setValue( response[1][0] );
 							var start = response[0].length;
 							var end = response[1][0].length;
