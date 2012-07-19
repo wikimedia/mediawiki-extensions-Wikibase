@@ -20,21 +20,22 @@ namespace Wikibase;
  */
 class ItemDiff extends EntityDiffObject {
 
-	/**
-	 * Creates and returns a new ItemDiff constructed from the two provided items.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Item $oldItem
-	 * @param Item $newItem
-	 *
-	 * @return ItemDiff
-	 */
+	protected static function siteLinksToArray( $links ) {
+		$links = array();
+
+		/* @var SiteLink $link */
+		foreach ( $links as $link ) {
+			$links[ $link->getSiteID() ] = $link->getPage();
+		}
+
+		return $links;
+	}
+
 	public static function newFromItems( Item $oldItem, Item $newItem ) {
 		return static::newFromEntities( $oldItem, $newItem, array(
 			'links' => MapDiff::newFromArrays(
-				$oldItem->getSiteLinks(),
-				$newItem->getSiteLinks()
+				self::siteLinksToArray( $oldItem->getSiteLinks() ),
+				self::siteLinksToArray( $newItem->getSiteLinks() )
 			)
 		) );
 	}

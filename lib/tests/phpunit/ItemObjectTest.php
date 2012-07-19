@@ -79,7 +79,12 @@ class ItemObjectTest extends EntityObjectTest {
 		 * @var \Wikibase\Item $item
 		 */
 		foreach ( TestItems::getItems() as $item ) {
-			$this->assertInternalType( 'array', $item->getSiteLinks() );
+			$links = $item->getSiteLinks();
+			$this->assertInternalType( 'array', $links );
+
+			foreach ( $links as $link ) {
+				$this->assertInstanceOf( '\Wikibase\SiteLink', $link );
+			}
 		}
 	}
 

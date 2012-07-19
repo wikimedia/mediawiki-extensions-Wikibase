@@ -72,13 +72,14 @@ class ApiSetSiteLink extends ApiModifyItem {
 	protected function modifyItem( ItemContent &$itemContent, array $params ) {
 
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
-			$sitelinks = $itemContent->getItem()->getSiteLinks();
-			if ( !isset( $sitelinks[$params['linksite']] ) ) {
+			$link = $itemContent->getItem()->getSiteLink( $params['linksite'] );
+
+			if ( !$link ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-remove-sitelink-failed' ), 'remove-sitelink-failed' );
 			}
 
-			$this->addSiteLinksToResult( array( $params['linksite'] => $sitelinks[$params['linksite']] ), 'item' );
 			$itemContent->getItem()->removeSiteLink( $params['linksite'] );
+			$this->addSiteLinksToResult( array( $link ), 'item' );
 			return true;
 		}
 		else {
@@ -100,7 +101,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 				$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
 			}
 
-			$this->addSiteLinksToResult( array( $ret['site'] => $ret['title'] ), 'item' );
+			$this->addSiteLinksToResult( array( $ret ), 'item' );
 			return $ret !== false;
 		}
 	}

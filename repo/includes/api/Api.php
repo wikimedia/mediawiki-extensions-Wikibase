@@ -175,7 +175,7 @@ abstract class Api extends \ApiBase {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $siteLinks the aliases to insert in the result
+	 * @param array $siteLinks the site links to insert in the result, as SiteLink objects
 	 * @param array|string $path where the data is located
 	 * @param string $name name used for the entry
 	 * @param string $tag tag used for indexed entries in xml formats and similar
@@ -186,25 +186,27 @@ abstract class Api extends \ApiBase {
 		$value = array();
 		$idx = 0;
 
-		foreach ( $siteLinks as $siteId => $pageTitle ) {
-			if ( $pageTitle === '' ) {
-				$value[$this->usekeys ? $siteId : $idx++] = array(
-					'site' => $siteId,
-					'removed' => '',
-				);
+		foreach ( $siteLinks as $link ) { /* @var SiteLink $link */
+			$response = array(
+				'site' => $link->getSiteID(),
+				'url' => $link->getUrl(), //XXX: could make this optional
+			);
+
+			if ( $link->getPage() === '' ) {
+				$response['removed'] = '';
 			}
 			else {
-				$value[$this->usekeys ? $siteId : $idx++] = array(
-					'site' => $siteId,
-					'title' => $pageTitle,
-				);
+				$response['title'] = $link->getPage();
 			}
+
+			$value[$this->usekeys ? $link->getSiteID() : $idx++] = $response;
 		}
 
 		if ( $value !== array() ) {
-			if (!$this->usekeys) {
+			if ( !$this->usekeys ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
+
 			$this->getResult()->addValue( $path, $name, $value );
 		}
 	}

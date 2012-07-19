@@ -49,26 +49,25 @@ class ItemObject extends EntityObject implements Item {
 			$this->data['links'][$siteId] = $pageName;
 		}
 
-		// TODO: we should not return this array here like this. Probably create new object to represent link.
-		return $success ? array( 'site' => $siteId, 'title' => $this->data['links'][$siteId] ) : false;
+		return $success ? new SiteLink( $siteId, $pageName ) : false;
 	}
 
 	/**
-	 * @see Item::removeSiteLink()
+	 * @see   Item::removeSiteLink()
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $siteId
-	 * @param string $pageName
+	 * @param string      $siteId
+	 * @param bool|string $pageName
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function removeSiteLink( $siteId, $pageName = false ) {
 		if ( $pageName !== false) {
 			$success = array_key_exists( $siteId, $this->data['links'] ) && $this->data['links'][$siteId] === $pageName;
 		}
 		else {
-			$success = true;
+			$success = array_key_exists( $siteId, $this->data['links'] );
 		}
 
 		if ( $success ) {
@@ -83,10 +82,33 @@ class ItemObject extends EntityObject implements Item {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return array a list of SiteLink objects
 	 */
 	public function getSiteLinks() {
-		return $this->data['links'];
+		$links = array();
+
+		foreach ( $this->data['links'] as $site => $title ) {
+			$links[] = new SiteLink( $site, $title );
+		}
+
+		return $links;
+	}
+
+	/**
+	 * @see   Item::getSiteLink()
+	 *
+	 * @since 0.1
+	 *
+	 * @param String $siteId the id of the site to which to get the lin
+	 *
+	 * @return SiteLink|null the corresponding SiteLink object, or null
+	 */
+	public function getSiteLink( $siteId ) {
+		if ( array_key_exists( $siteId, $this->data['links'] ) ) {
+			return new SiteLink( $siteId, $this->data['links'][$siteId] );
+		} else {
+			return null;
+		}
 	}
 
 	/**

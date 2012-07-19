@@ -37,19 +37,30 @@ interface Item extends Entity {
 	 * @param string $siteId
 	 * @param string $pageName
 	 *
-	 * @return boolean Success indicator
+	 * @return bool Success indicator
 	 */
 	public function removeSiteLink( $siteId, $pageName = false );
 
 	/**
 	 * Returns the site links in an associative array with the following format:
-	 * site id (str) => page title (str)
+	 * site id (str) => SiteLink
 	 *
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return array an array of SiteLink objects
 	 */
 	public function getSiteLinks();
+
+	/**
+	 * Returns the site link for the given site id, or null.
+	 *
+	 * @since 0.1
+	 *
+	 * @param String $siteId the id of the site to which to get the lin
+	 *
+	 * @return SiteLink the site link
+	 */
+	public function getSiteLink( $siteId );
 
 	/**
 	 * Returns a deep copy of the item.
