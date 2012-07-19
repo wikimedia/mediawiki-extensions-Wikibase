@@ -45,7 +45,7 @@ class ItemCreation extends Change {
 	/**
 	 * @since 0.1
 	 *
-	 * @param IDiff $diff
+	 * @param Item $item
 	 * @param array|null $fields
 	 *
 	 * @return DiffChange

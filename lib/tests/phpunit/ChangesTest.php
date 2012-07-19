@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\MapDiff as MapDiff;
-use Wikibase\ListDiff as ListDiff;
+use Diff\MapDiff as MapDiff;
+use Diff\ListDiff as ListDiff;
 use Wikibase\Changes as Changes;
 
 /**

@@ -1,30 +1,35 @@
 <?php
 
-namespace Wikibase;
+namespace Diff;
 
 /**
- * Represents an addition.
- * This means the value was not present in the "old" object but is in the new.
+ * Represents a change.
+ * This means the item is present in both the new and old objects, but changed value.
  *
  * @since 0.1
  *
  * @file
- * @ingroup WikibaseLib
- * @ingroup WikibaseDiff
+ * @ingroup Diff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpAdd extends DiffOp {
+class DiffOpChange extends DiffOp {
 
 	protected $newValue;
+	protected $oldValue;
 
 	public function getType() {
-		return 'add';
+		return 'change';
 	}
 
-	public function __construct( $newValue ) {
+	public function __construct( $oldValue, $newValue ) {
+		$this->oldValue = $oldValue;
 		$this->newValue = $newValue;
+	}
+
+	public function getOldValue() {
+		return $this->oldValue;
 	}
 
 	public function getNewValue() {
@@ -35,6 +40,7 @@ class DiffOpAdd extends DiffOp {
 		return array(
 			$this->getType(),
 			$this->newValue,
+			$this->oldValue,
 		);
 	}
 

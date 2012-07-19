@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Diff;
 
 /**
  * Base class for diffs. Diffs are collections of IDiffOp objects,
@@ -13,8 +13,7 @@ namespace Wikibase;
  * @since 0.1
  *
  * @file
- * @ingroup WikibaseLib
- * @ingroup WikibaseDiff
+ * @ingroup Diff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -119,7 +118,7 @@ abstract class Diff extends \ArrayIterator implements IDiff {
 	 * @since 0.1
 	 *
 	 * @param $operations array of IDiffOp
-	 * @throws \MWException
+	 * @throws \Diff\Exception
 	 */
 	protected function addTypedOperations( array $operations ) {
 		foreach ( $operations as $key => /* DiffOp */ $operation ) {
@@ -127,7 +126,7 @@ abstract class Diff extends \ArrayIterator implements IDiff {
 				$this->typePointers[$operation->getType()][] = $key;
 			}
 			else {
-				throw new \MWException( 'Diff operation with invalid type "' . $operation->getType() . '" provided.' );
+				throw new Exception( 'Diff operation with invalid type "' . $operation->getType() . '" provided.' );
 			}
 		}
 	}

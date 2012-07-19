@@ -1,0 +1,27 @@
+These are the release notes for the Education Program extension.
+	
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Education_Program
+Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/EducationProgram.git;a=blob;f=RELEASE-NOTES
+
+
+
+=== Version 0.1 ===
+(2012-6-20)
+
+Initial release with these features:
+
+* Browsing interfaces for institutions, courses and terms.
+* Pages with summaries and linked items for all institutions, courses and terms.
+* Edit page for institutions, courses and terms.
+* History pages for institutions, courses and terms.
+* Enrollment page for students with optional token requirement (and associated disenroll page).
+* Sortable and filterable list of students.
+* Personal courses overview at Special:ManageCourses for students, ambassadors and instructors.
+* Personal course activity overview at Special:MyCourses.
+* Overview of the program status on Special:EducationProgram.
+* Overview of student activity on Special:StudentActivity.
+* Online Ambassador and Campus Ambassador profiles.
+* Lists of Online Ambassadors and Campus Ambassadors.
+* Logging of all special education events, such as enrollment and courses association.
+* Several education related user preferences.
+* "Did you know" box on Special:MyCourses.

@@ -108,10 +108,6 @@ final class LibHooks {
 
 			'changes/DiffChange',
 			'changes/ItemChange',
-
-			'diff/Diff',
-			'diff/ListDiff',
-			'diff/MapDiff',
 		);
 
 		// Test compat

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Diff;
 
 /**
  * Represents a removal.
@@ -9,8 +9,7 @@ namespace Wikibase;
  * @since 0.1
  *
  * @file
- * @ingroup WikibaseLib
- * @ingroup WikibaseDiff
+ * @ingroup Diff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

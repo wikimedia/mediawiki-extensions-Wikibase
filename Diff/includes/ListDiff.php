@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Diff;
 
 /**
  * Class representing the diff between to (non-associative) arrays.
@@ -13,8 +13,7 @@ namespace Wikibase;
  * @since 0.1
  *
  * @file
- * @ingroup WikibaseLib
- * @ingroup WikibaseDiff
+ * @ingroup Diff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
