@@ -46,10 +46,15 @@ class ItemObject extends EntityObject implements Item {
 				|| ( $updateType === 'set' );
 
 		if ( $success ) {
+			$site = Sites::singleton()->getSiteByGlobalId( $siteId );
+			$success = $site !== false;
+		}
+
+		if ( $success ) {
 			$this->data['links'][$siteId] = $pageName;
 		}
 
-		return $success ? new SiteLink( $siteId, $pageName ) : false;
+		return $success ? new SiteLink( $site, $pageName ) : false;
 	}
 
 	/**
@@ -87,8 +92,12 @@ class ItemObject extends EntityObject implements Item {
 	public function getSiteLinks() {
 		$links = array();
 
-		foreach ( $this->data['links'] as $site => $title ) {
-			$links[] = new SiteLink( $site, $title );
+		foreach ( $this->data['links'] as $globalSiteId => $title ) {
+			$site = Sites::singleton()->getSiteByGlobalId( $globalSiteId );
+
+			if ( $site !== false ) {
+				$links[] = new SiteLink( $site, $title );
+			}
 		}
 
 		return $links;
@@ -105,7 +114,8 @@ class ItemObject extends EntityObject implements Item {
 	 */
 	public function getSiteLink( $siteId ) {
 		if ( array_key_exists( $siteId, $this->data['links'] ) ) {
-			return new SiteLink( $siteId, $this->data['links'][$siteId] );
+			$site = Sites::singleton()->getSiteByGlobalId( $siteId );
+			return $site === false ? null : new SiteLink( $site, $this->data['links'][$siteId] );
 		} else {
 			return null;
 		}

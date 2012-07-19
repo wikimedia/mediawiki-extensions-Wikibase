@@ -17,6 +17,8 @@ use \Wikibase\SiteLink as SiteLink;
  * @group Wikibase
  * @group WikibaseItem
  *
+ * @group Database
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
@@ -123,8 +125,8 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 	 */
 	public function testAddRemoveSiteLink() {
 		$arr = array(
-			new SiteLink( 'nowiki', 'Norge' ),
-			new SiteLink( 'enwiki', 'English' ),
+			new SiteLink( \Wikibase\Sites::singleton()->getSiteByGlobalId( 'nnwiki' ), 'Norge' ),
+			new SiteLink( \Wikibase\Sites::singleton()->getSiteByGlobalId( 'enwiki' ), 'English' ),
 		);
 
 		/* @var SiteLink $link */

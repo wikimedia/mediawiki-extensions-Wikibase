@@ -113,7 +113,7 @@ class ItemView extends \ContextSource {
 			foreach( $siteLinks as $link ) { /* @var SiteLink $link */
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
-				$languageCode = $link->getSiteLanguage();
+				$languageCode = $link->getSite()->getLanguage();
 
 				$html .= Html::openElement( 'tr', array(
 						'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )

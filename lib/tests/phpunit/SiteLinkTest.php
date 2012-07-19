@@ -38,23 +38,23 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	}
 
 	public function testConstructor() {
-		$link = new SiteLink( "enwiki", "Foo" );
+		$link = new SiteLink( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), "Foo" );
 	}
 
 	public function testGetPage() {
-		$link = new SiteLink( "enwiki", "Foo" );
+		$link = new SiteLink( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), "Foo" );
 
 		$this->assertEquals( "Foo", $link->getPage() );
 	}
 
 	public function testGetDBKey() {
-		$link = new SiteLink( "enwiki", "Foo Bar" );
+		$link = new SiteLink( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), "Foo Bar" );
 
 		$this->assertEquals( "Foo_Bar", $link->getDBKey() );
 	}
 
 	public function testGetSite() {
-		$link = new SiteLink( "enwiki", "Foo" );
+		$link = new SiteLink( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), "Foo" );
 
 		$expected = Sites::singleton()->getSiteByGlobalId( "enwiki" );
 		$this->assertEquals( $expected, $link->getSite() );
@@ -63,23 +63,17 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	public function testGetSiteID() {
 		$link = new SiteLink( "enwiki", "Foo" );
 
-		$this->assertEquals( "enwiki", $link->getSiteID() );
-	}
-
-	public function testGetSiteLanguage() {
-		$link = new SiteLink( "enwiki", "Foo" );
-
-		$this->assertEquals( "en", $link->getSiteLanguage() );
+		$this->assertEquals( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), $link->getSiteID() );
 	}
 
 	public function testUrl() {
-		$link = new SiteLink( "enwiki", "Foo Bar?/notes" );
+		$link = new SiteLink( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), "Foo Bar?/notes" );
 
 		$this->assertEquals( "https://en.wikipedia.org/wiki/Foo_Bar%3F/notes", $link->getUrl() );
 	}
 
 	public function testToString() {
-		$link = new SiteLink( "enwiki", "Foo Bar" );
+		$link = new SiteLink( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), "Foo Bar" );
 
 		$this->assertEquals( "enwiki:Foo_Bar", "$link" );
 	}
