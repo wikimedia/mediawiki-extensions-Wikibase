@@ -2,6 +2,125 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQX//6DA\u003d",
+        "filename": "lib/includes/PropertyObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "Return type?",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6C8\u003d",
+        "filename": "lib/includes/QueryObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "Return type?",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Cw\u003d",
+        "filename": "lib/includes/diff/Diff.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "should it be said which exception gets thrown by used methods?",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6C4\u003d",
+        "filename": "lib/includes/diff/Diff.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "returns through referred var",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Co\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "Comment out or add test for this and the three following ones",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Cg\u003d",
+        "filename": "repo/includes/EntityContentDiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "doc?",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Cc\u003d",
+        "filename": "repo/includes/EntityContentDiffView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "doc?",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6Ew\u003d",
         "filename": "repo/includes/actions/EditItemAction.php",
         "patchSetId": 2
@@ -19,6 +138,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6CY\u003d",
+        "filename": "repo/includes/actions/EditItemAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "At least put in a picture of a kitten...",
+      "parentUuid": "AAAAQX//6Ew\u003d",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6Us\u003d",
         "filename": "repo/includes/actions/EditItemAction.php",
         "patchSetId": 2
@@ -30,6 +167,23 @@
       "writtenOn": "2012-07-18T22:03:18Z",
       "side": 1,
       "message": "If someone goes ahead already to add this stuff, please do it in new commits",
+      "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6CU\u003d",
+        "filename": "repo/includes/actions/ViewItemAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T13:56:04Z",
+      "side": 1,
+      "message": "doc?",
       "revId": "d7fe3f896f545a3047528ee9eba37087b1382c13",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
