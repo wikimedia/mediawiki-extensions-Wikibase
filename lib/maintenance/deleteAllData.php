@@ -26,11 +26,14 @@ class DeleteAllData extends \Maintenance {
 	}
 
 	public function execute() {
-		echo "Are you really really sure you want to delete all the Wikibase data?? If so, type YES\n";
+		( $_SERVER['argc'] > 1 && $_SERVER['argv'][1] == "--yes-im-sure-maybe" ) ? $quick = true : $quick = false;
+
+		if ( !$quick )
+			echo "Are you really really sure you want to delete all the Wikibase data?? If so, type YES\n";
 
 		$dbw = wfGetDB( DB_MASTER );
 
-		if ( $this->readconsole() !== 'YES' ) {
+		if ( !$quick && $this->readconsole() !== 'YES' ) {
 			return;
 		}
 
