@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6EI\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "There are two purposes; one is to identify which messages takes languages and which takes sites as arguments, and to identify which messages that can be processed by the specific hook. An alternative is to use markers in the messages themselves, but with somewhat less control.\n\nChanged the code, don\u0027t like the new version due to less control.",
+      "parentUuid": "AAAAQX//6Fo\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6Fk\u003d",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-07-19T13:02:53Z",
       "side": 1,
       "message": "I suggest creating an object such as \\Wikibase\\AutocommentGenerator that holds the logic (in non-static methods!) which you then instantiate here, feed the needed args, and get the result from.",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6DQ\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "This is called in a static context so its not really much to gain by doing that.. There are no additional args except whats available in the hook, and that is in a static callback anyhow.",
+      "parentUuid": "AAAAQX//6Fk\u003d",
       "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6DM\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "Not going to do anything with it, it will be cleaned up if its wrong. That is as long as entries exists in \"en\" they should not be removed. The messages as such should be checked now because there are messages that are used in the code but missing in this file. That should be an item by itself as it is a good bit of work to do it.",
+      "parentUuid": "AAAAQX//6Fg\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6Fc\u003d",
         "filename": "repo/includes/api/ApiModifyItem.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2012-07-19T13:02:53Z",
       "side": 1,
       "message": "missing return tag",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//5/o\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//6Fc\u003d",
       "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6Bs\u003d",
+        "filename": "repo/includes/api/ApiSetAliases.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//6FU\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6FM\u003d",
         "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2012-07-19T13:02:53Z",
       "side": 1,
       "message": "spaces",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6BY\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//6FM\u003d",
       "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6BU\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "Always use constants if you can.",
+      "parentUuid": "AAAAQX//6FI\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6FE\u003d",
         "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2012-07-19T13:02:53Z",
       "side": 1,
       "message": "The global stuff can go in the else clause",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6A8\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "It can, but if something should always be initialized, then initialize before tests that could give fall through. Only exception is if the initialization is a heavy process.",
+      "parentUuid": "AAAAQX//6FE\u003d",
       "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6A4\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAQX//6FQ\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6E8\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 3
@@ -166,6 +328,24 @@
       "writtenOn": "2012-07-19T13:02:53Z",
       "side": 1,
       "message": "I really don\u0027t like this stuff being put into various API modules. The API is not the only place where edits happen. So it will end up being even more spread then it\u0027s already and become impossible to maintain or keep consistent.\n\nI think we need one class that holds all this kind of logic for all fields of entities and then deriving ones for items, props and queries. \\Wikibase\\EntityContent could probably work for this, and if not, a new class is probably the way to go.",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Ao\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "An auto comment is an attribute produced by the api for the saved revision, its not part of the entity.\n\nInformation from the call exist in the module during the call. Recreating missing information in other classes, or passing all args out of the module to some other class to process the information there and then passing everything back also seems weird. Process and store information in context where it belongs.",
+      "parentUuid": "AAAAQX//6E8\u003d",
       "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6As\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "?",
+      "parentUuid": "AAAAQX//6E4\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6Es\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 3
@@ -206,6 +404,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//6AU\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "Its testing if the param is not set and then shortcuts.",
+      "parentUuid": "AAAAQX//6Es\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6Eg\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiAutoCommentTest.php",
         "patchSetId": 3
@@ -217,6 +433,24 @@
       "writtenOn": "2012-07-19T13:02:53Z",
       "side": 1,
       "message": "Oh my, I just know this test is going to be a pain :D\n\nNot sure how to avoid that though, so I\u0027m fine with this",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6AI\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiAutoCommentTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-19T17:27:28Z",
+      "side": 1,
+      "message": "..",
+      "parentUuid": "AAAAQX//6Eg\u003d",
       "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
