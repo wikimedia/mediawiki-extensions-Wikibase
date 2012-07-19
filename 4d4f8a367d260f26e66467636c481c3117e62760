@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//6Fw\u003d",
+        "filename": "lib/includes/ItemObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T12:41:10Z",
+      "side": 1,
+      "message": "Let\u0027s not construct all these objects for each call, and have the set and add methods just take the simple args rather then the new objects.",
+      "revId": "4d4f8a367d260f26e66467636c481c3117e62760",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
