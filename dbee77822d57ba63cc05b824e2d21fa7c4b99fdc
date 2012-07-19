@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//6Fo\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "Why are we putting such a message key map in the settings file? Never seen this, and looks odd.",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Fk\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "I suggest creating an object such as \\Wikibase\\AutocommentGenerator that holds the logic (in non-static methods!) which you then instantiate here, feed the needed args, and get the result from.",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Fg\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "What\u0027s with all these added messages? Seems like a rebase/merge that\u0027s re-adding removed stuff or so.",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Fc\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "missing return tag",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6FU\u003d",
+        "filename": "repo/includes/api/ApiSetAliases.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "self::\n\nesp since it\u0027s protected",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6FM\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "spaces",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6FI\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "Why are we using constants for these rather then regular settings?",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6FE\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "The global stuff can go in the else clause",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6FQ\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "self::",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6E8\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "I really don\u0027t like this stuff being put into various API modules. The API is not the only place where edits happen. So it will end up being even more spread then it\u0027s already and become impossible to maintain or keep consistent.\n\nI think we need one class that holds all this kind of logic for all fields of entities and then deriving ones for items, props and queries. \\Wikibase\\EntityContent could probably work for this, and if not, a new class is probably the way to go.",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6E4\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "Idem for this stuff",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Es\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "what\u0027s the isset testing for? better have a more explicit check :)",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//6Eg\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiAutoCommentTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T13:02:53Z",
+      "side": 1,
+      "message": "Oh my, I just know this test is going to be a pain :D\n\nNot sure how to avoid that though, so I\u0027m fine with this",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
