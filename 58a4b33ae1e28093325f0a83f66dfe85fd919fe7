@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQX//5sE\u003d",
+        "filename": "lib/includes/ItemObject.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-19T21:37:59Z",
+      "side": 1,
+      "message": "What\u0027s with the extra spaces? Makes it look like a complete mess...",
+      "revId": "58a4b33ae1e28093325f0a83f66dfe85fd919fe7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
