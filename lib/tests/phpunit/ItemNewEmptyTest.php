@@ -125,13 +125,13 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 	 */
 	public function testAddRemoveSiteLink() {
 		$arr = array(
-			new SiteLink( \Wikibase\Sites::singleton()->getSiteByGlobalId( 'nnwiki' ), 'Norge' ),
-			new SiteLink( \Wikibase\Sites::singleton()->getSiteByGlobalId( 'enwiki' ), 'English' ),
+			SiteLink::newFromText( 'nnwiki', 'Norge' ),
+			SiteLink::newFromText( 'enwiki', 'English' ),
 		);
 
 		/* @var SiteLink $link */
 		foreach ( $arr as $link ) {
-			$this->item->addSiteLink( $link->getSiteID(), $link->getPage() );
+			$this->item->addSiteLink( $link );
 		}
 
 		$this->assertEquals(
@@ -141,7 +141,7 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 		);
 
 		foreach ( $arr as $link ) {
-			$this->item->removeSiteLink( $link->getSiteID(), $link->getPage() );
+			$this->item->removeSiteLink( $link->getSiteID() );
 		}
 
 		$this->assertCount(
