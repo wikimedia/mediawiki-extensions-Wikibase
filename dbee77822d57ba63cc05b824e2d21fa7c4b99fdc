@@ -265,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//5ZA\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-20T15:47:11Z",
+      "side": 1,
+      "message": "I do see reasons for using constants, I\u0027m really not sure if it should be configurable. I tend to think not. If you have a clear usecase the code can be changed after it is merged.",
+      "parentUuid": "AAAAQX//5aI\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6FE\u003d",
         "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
         "patchSetId": 3
@@ -388,6 +406,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//5Yk\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-20T15:47:11Z",
+      "side": 1,
+      "message": "Autocomment in this case is generated from the information that exist due to the api call. A complete summary as saved consist of an autocomment and a manually given summary or an automatic one. It is possible to generate autocomments from other sources, for example as it is done for section titles. Still in this case the autocomment is created as part of the call through the API and to this specific module.",
+      "parentUuid": "AAAAQX//5Zw\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6E4\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 3
@@ -488,6 +524,24 @@
       "side": 1,
       "message": "Looking at the code docs I see the method returns a string, so how can it not be set?",
       "parentUuid": "AAAAQX//6AU\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//5XQ\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-20T15:47:11Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "AAAAQX//5Zk\u003d",
       "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
