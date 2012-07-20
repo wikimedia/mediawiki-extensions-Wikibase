@@ -28,6 +28,15 @@ if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c becaus
 	die( '<b>Error:</b> WikibaseLib requires MediaWiki 1.20 or above.' );
 }
 
+// Include the Diff extension if that hasn't been done yet, since it's required for WikibaseLib to work.
+if ( !defined( 'Diff_VERSION' ) ) {
+	@include_once( dirname( __FILE__ ) . '/../Diff/Diff.php' );
+}
+
+if ( !defined( 'Diff_VERSION' ) ) {
+	die( '<b>Error:</b> WikibaseLib depends on the <a href="https://www.mediawiki.org/wiki/Extension:Diff">Diff</a> extension.' );
+}
+
 define( 'WBL_VERSION', '0.1 alpha' );
 
 $wgExtensionCredits['other'][] = array(
@@ -108,16 +117,7 @@ $wgAutoloadClasses['Wikibase\ItemCreation'] 		= $dir . 'includes/changes/ItemCre
 $wgAutoloadClasses['Wikibase\ItemDeletion'] 		= $dir . 'includes/changes/ItemDeletion.php';
 
 // includes/diff
-$wgAutoloadClasses['Wikibase\Diff'] 				= $dir . 'includes/diff/Diff.php';
-$wgAutoloadClasses['Wikibase\DiffOp'] 				= $dir . 'includes/diff/DiffOp.php';
-$wgAutoloadClasses['Wikibase\DiffOpAdd'] 			= $dir . 'includes/diff/DiffOpAdd.php';
-$wgAutoloadClasses['Wikibase\DiffOpChange'] 		= $dir . 'includes/diff/DiffOpChange.php';
-$wgAutoloadClasses['Wikibase\DiffOpRemove'] 		= $dir . 'includes/diff/DiffOpRemove.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/diff/DiffView.php';
-$wgAutoloadClasses['Wikibase\IDiff'] 				= $dir . 'includes/diff/IDiff.php';
-$wgAutoloadClasses['Wikibase\IDiffOp'] 				= $dir . 'includes/diff/IDiffOp.php';
-$wgAutoloadClasses['Wikibase\ListDiff'] 			= $dir . 'includes/diff/ListDiff.php';
-$wgAutoloadClasses['Wikibase\MapDiff'] 				= $dir . 'includes/diff/MapDiff.php';
 
 // includes/entity
 $wgAutoloadClasses['Wikibase\EntityDiffObject'] 	= $dir . 'includes/entity/EntityDiffObject.php';
@@ -131,10 +131,6 @@ $wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/E
 // tests/changes
 $wgAutoloadClasses['Wikibase\tests\AliasChangeTest'] 		= $dir . 'tests/phpunit/changes/AliasChangeTest.php';
 $wgAutoloadClasses['Wikibase\tests\SitelinkChangeTest'] 	= $dir . 'tests/phpunit/changes/SitelinkChangeTest.php';
-
-// tests/diff
-$wgAutoloadClasses['Wikibase\tests\ListDiffTest'] 			= $dir . 'tests/phpunit/diff/ListDiffTest.php';
-$wgAutoloadClasses['Wikibase\tests\MapDiffTest'] 			= $dir . 'tests/phpunit/diff/MapDiffTest.php';
 
 foreach ( array(
 			  'Settings',
