@@ -235,6 +235,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
   context "Check clicking on sitelink" do
     it "should check if the sitelink leads to the correct page" do
       on_page(SitelinksItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_sitelinks_to_load
         page.germanSitelink
         page.articleTitle.should == "Berlin"
       end
