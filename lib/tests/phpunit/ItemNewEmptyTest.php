@@ -131,7 +131,7 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 
 		/* @var SiteLink $link */
 		foreach ( $arr as $link ) {
-			$this->item->addSiteLink( $link->getSiteID(), $link->getPage() );
+			$this->item->addSiteLink( $link );
 		}
 
 		$this->assertEquals(
@@ -141,7 +141,7 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 		);
 
 		foreach ( $arr as $link ) {
-			$this->item->removeSiteLink( $link->getSiteID(), $link->getPage() );
+			$this->item->removeSiteLink( $link->getSiteID() );
 		}
 
 		$this->assertCount(

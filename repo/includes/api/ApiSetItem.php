@@ -131,7 +131,6 @@ class ApiSetItem extends ApiModifyItem {
 					}
 					break;
 				case 'sitelinks':
-					// FIXME: this does no normalization
 					foreach ( $list as $siteId => $pageName ) {
 						if ( !is_string( $pageName ) ) {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
@@ -139,7 +138,9 @@ class ApiSetItem extends ApiModifyItem {
 						if ( !array_key_exists( $siteId, $sites ) ) {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'not-recognized-siteid' );
 						}
-						$itemContent->getItem()->addSiteLink( $siteId, $pageName, 'set' );
+
+						$link = SiteLink::newFromText( $siteId, $pageName );
+						$itemContent->getItem()->addSiteLink( $link, 'set' );
 					}
 					break;
 				default:

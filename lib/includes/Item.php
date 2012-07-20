@@ -21,13 +21,12 @@ interface Item extends Entity {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $siteId
-	 * @param string $pageName
+	 * @param SiteLink $link the link to the target page
 	 * @param string $updateType
 	 *
 	 * @return array|false Returns array on success, or false on failure
 	 */
-	public function addSiteLink( $siteId, $pageName, $updateType = 'add' );
+	public function addSiteLink( SiteLink $link, $updateType = 'add' );
 
 	/**
 	 * Removes a site link.

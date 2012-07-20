@@ -63,19 +63,38 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	public function testGetSiteID() {
 		$link = new SiteLink( "enwiki", "Foo" );
 
-		$this->assertEquals( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), $link->getSiteID() );
+		$this->assertEquals( 'enwiki', $link->getSiteID() );
 	}
 
 	public function testUrl() {
 		$link = new SiteLink( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), "Foo Bar?/notes" );
 
-		$this->assertEquals( "https://en.wikipedia.org/wiki/Foo_Bar%3F/notes", $link->getUrl() );
+		$this->assertEquals( "https://en.wikipedia.org/wiki/Foo_Bar%3F%2Fnotes", $link->getUrl() );
 	}
 
 	public function testToString() {
 		$link = new SiteLink( Sites::singleton()->getSiteByGlobalId( 'enwiki' ), "Foo Bar" );
 
 		$this->assertEquals( "enwiki:Foo_Bar", "$link" );
+	}
+
+	public function testNormalizePageTitle() {
+		//NOTE: this does not actually call out to the enwiki site to perform the normalization,
+		//      but uses a local Title object to do so. This is hardcoded on SiteLink::normalizePageTitle
+		//      for the case that MW_PHPUNIT_TEST is set.
+		$site = Sites::singleton()->getSiteByGlobalId( 'enwiki' );
+		$title = SiteLink::normalizePageTitle( $site, " foo " );
+
+		$this->assertEquals( "Foo", $title );
+	}
+
+	public function testNewFromText() {
+		//NOTE: this does not actually call out to the enwiki site to perform the normalization,
+		//      but uses a local Title object to do so. This is hardcoded on SiteLink::normalizePageTitle
+		//      for the case that MW_PHPUNIT_TEST is set.
+		$link = SiteLink::newFromText( "enwiki", " foo " );
+
+		$this->assertEquals( "Foo", $link->getPage() );
 	}
 
 }
