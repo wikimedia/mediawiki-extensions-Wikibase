@@ -43,13 +43,19 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 
 		// disable button and attach tooltip when editing is restricted
 		$( wikibase ).on(
-			'restrictItemPageActions',
+			'restrictItemPageActions blockItemPageActions',
 			$.proxy(
 				function( event ) {
 					this.disable();
+
+					var messageId = ( event.type === 'blockItemPageActions' )
+						? 'wikibase-blockeduser-tooltip-message'
+						: 'wikibase-restrictionedit-tooltip-message';
+
 					this.setTooltip(
-						mw.message( 'wikibase-restrictionedit-tooltip-message' ).escaped()
+						mw.message( messageId ).escaped()
 					);
+
 					this._tooltip.setGravity( 'nw' );
 				}, this
 			)

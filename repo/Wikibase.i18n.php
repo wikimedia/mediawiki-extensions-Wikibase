@@ -50,6 +50,7 @@ $messages['en'] = array(
 	'wikibase-aliases-empty' => 'No aliases defined.',
 
 	'wikibase-restrictionedit-tooltip-message' => 'This page is protected, editing is not allowed.',
+	'wikibase-blockeduser-tooltip-message' => 'You are blocked from editing.',
 
 	'wikibase-tooltip-error-details' => 'Details',
 	'wikibase-error-save-generic' => 'An error occurred while trying to perform save and because of this, changes could not be completed.',
@@ -199,6 +200,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-aliases-empty' => 'Placeholder message when no aliases for this data set representing a specific item have been defined.',
 
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
+	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
 
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the mor specific error message returned from the underlying API).',
 	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',

@@ -107,6 +107,10 @@
 			}
 		}
 
+		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
+			$( wikibase ).triggerHandler( 'blockItemPageActions' );
+		}
+
 	} );
 
 } )( jQuery, mediaWiki, wikibase );

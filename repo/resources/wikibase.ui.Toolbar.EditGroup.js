@@ -75,12 +75,17 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 
 		// overwrite tooltip message when editing is restricted
 		$( wikibase ).on(
-			'restrictItemPageActions',
+			'restrictItemPageActions blockItemPageActions',
 			$.proxy(
 				function( event ) {
+					var messageId = ( event.type === 'blockItemPageActions' ) ?
+						'wikibase-blockeduser-tooltip-message' :
+						'wikibase-restrictionedit-tooltip-message';
+
 					this.tooltipAnchor.getTooltip().setContent(
-						mw.message( 'wikibase-restrictionedit-tooltip-message' ).escaped()
+						mw.message( messageId ).escaped()
 					);
+
 					this.tooltipAnchor.getTooltip().setGravity( 'nw' );
 				}, this
 			)

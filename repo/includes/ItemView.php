@@ -255,6 +255,9 @@ class ItemView extends \ContextSource {
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
 	public static function registerJsConfigVars( OutputPage $out, ItemContent $item, $langCode  ) {
+		global $wgUser;
+
+		$out->addJsConfigVars( 'wbUserIsBlocked', $wgUser->isBlockedFrom( $item->getTitle() ) );
 
 		// hand over the itemId to JS
 		$out->addJsConfigVars( 'wbItemId', $item->getItem()->getId() );

@@ -74,7 +74,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 		// disable interface when editing is restricted
 		$( wikibase ).on(
-			'restrictItemPageActions',
+			'restrictItemPageActions blockItemPageActions',
 			$.proxy(
 				function( event ) {
 					this.disable();

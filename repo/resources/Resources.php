@@ -179,7 +179,8 @@ return call_user_func( function() {
 				'wikibase-error-ui-no-permissions',
 				'wikibase-error-ui-link-exists',
 				'wikibase-error-ui-session-failure',
-				'wikibase-restrictionedit-tooltip-message'
+				'wikibase-restrictionedit-tooltip-message',
+				'wikibase-blockeduser-tooltip-message'
 			)
 		),
 	);
