@@ -152,6 +152,12 @@
 	test( 'dis- and enabling', function() {
 
 		equal(
+			this.editableValue.enable(),
+			true,
+			'enabling'
+		);
+		
+		equal(
 			this.editableValue.isEnabled(),
 			true,
 			'is enabled'

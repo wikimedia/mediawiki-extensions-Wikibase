@@ -51,7 +51,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.cancelDescriptionLink?.should be_false
         page.labelInputField= generate_random_string(10)
         page.saveLabelLink
-        page.labelInputField_element.enabled?.should be_true
+        page.labelInputField_element.enabled?.should be_false
         page.descriptionInputField_element.enabled?.should be_false
         ajax_wait
         page.wait_for_api_callback
@@ -94,6 +94,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.labelInputField= generate_random_string(10)
         page.saveLabelLink
         page.editDescriptionLink?.should be_false
+        page.labelInputField_element.enabled?.should be_false
         page.descriptionInputField_element.enabled?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
@@ -126,6 +127,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addSitelinkLink?.should be_true
         page.descriptionInputField= generate_random_string(20)
         page.saveDescriptionLink
+        page.descriptionInputField_element.enabled?.should be_false
         page.editLabelLink?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
