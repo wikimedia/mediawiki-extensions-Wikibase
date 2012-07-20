@@ -33,28 +33,24 @@ class ItemObject extends EntityObject implements Item {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $siteId
-	 * @param string $pageName
+	 * @param SiteLink $link the link to the target page
 	 * @param string $updateType
 	 *
 	 * @return array|false Returns array on success, or false on failure
 	 */
-	public function addSiteLink( $siteId, $pageName, $updateType = 'add' ) {
+	public function addSiteLink( SiteLink $link, $updateType = 'add' ) {
+		$siteId = $link->getSiteID();
+
 		$success =
 			( $updateType === 'add' && !array_key_exists( $siteId, $this->data['links'] ) )
 				|| ( $updateType === 'update' && array_key_exists( $siteId, $this->data['links'] ) )
 				|| ( $updateType === 'set' );
 
 		if ( $success ) {
-			$site = Sites::singleton()->getSiteByGlobalId( $siteId );
-			$success = $site !== false;
+			$this->data['links'][$siteId] = $link->getPage();
 		}
 
-		if ( $success ) {
-			$this->data['links'][$siteId] = $pageName;
-		}
-
-		return $success ? new SiteLink( $site, $pageName ) : false;
+		return $success ? $link : false;
 	}
 
 	/**
@@ -62,8 +58,8 @@ class ItemObject extends EntityObject implements Item {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string      $siteId
-	 * @param bool|string $pageName
+	 * @param string      $siteId the target site's id
+	 * @param bool|string $pageName he target page's name (in normalized form)
 	 *
 	 * @return bool Success indicator
 	 */
@@ -93,11 +89,7 @@ class ItemObject extends EntityObject implements Item {
 		$links = array();
 
 		foreach ( $this->data['links'] as $globalSiteId => $title ) {
-			$site = Sites::singleton()->getSiteByGlobalId( $globalSiteId );
-
-			if ( $site !== false ) {
-				$links[] = new SiteLink( $site, $title );
-			}
+			$links[] = SiteLink::newFromText( $globalSiteId, $title );
 		}
 
 		return $links;
@@ -114,8 +106,7 @@ class ItemObject extends EntityObject implements Item {
 	 */
 	public function getSiteLink( $siteId ) {
 		if ( array_key_exists( $siteId, $this->data['links'] ) ) {
-			$site = Sites::singleton()->getSiteByGlobalId( $siteId );
-			return $site === false ? null : new SiteLink( $site, $this->data['links'][$siteId] );
+			return SiteLink::newFromText( $siteId, $this->data['links'][$siteId] );
 		} else {
 			return null;
 		}

@@ -72,10 +72,10 @@ class SiteRow extends \ORMRow implements Site {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return string|bool
 	 */
 	public function getUrl() {
-		return $this->getField( 'url' );
+		return $this->getField( 'url', false );
 	}
 
 	/**
@@ -95,6 +95,22 @@ class SiteRow extends \ORMRow implements Site {
 		}
 
 		return $pagePath;
+	}
+
+	/**
+	 * Returns $pageName without changes.
+	 * Subclasses may override this to apply some kind of normalization.
+	 *
+	 * @see Site::normalizePageName()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $pageName
+	 *
+	 * @return string
+	 */
+	public function normalizePageName( $pageName ) {
+		return $pageName;
 	}
 
 	/**
@@ -176,10 +192,10 @@ class SiteRow extends \ORMRow implements Site {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return string|bool
 	 */
 	public function getLanguage() {
-		return $this->getField( 'language' );
+		return $this->getField( 'language', false );
 	}
 
 }

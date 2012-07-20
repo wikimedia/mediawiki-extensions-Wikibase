@@ -171,6 +171,29 @@ class ItemContent extends EntityContent {
 
 		return $status;
 	}
+
+	/**
+	 * Deletes the item.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $reason string delete reason for deletion log
+	 * @param $suppress int bitfield
+	 * 	Revision::DELETED_TEXT
+	 * 	Revision::DELETED_COMMENT
+	 * 	Revision::DELETED_USER
+	 * 	Revision::DELETED_RESTRICTED
+	 * @param $id int article ID
+	 * @param $commit boolean defaults to true, triggers transaction end
+	 * @param &$error Array of errors to append to
+	 * @param $user User The deleting user
+	 *
+	 * @return int: One of WikiPage::DELETE_* constants
+	 */
+	public function delete( $reason = '', $suppress = false, $id = 0, $commit = true, &$error = '', User $user = null ) {
+		return $this->getWikiPage()->doDeleteArticleReal( $reason, $suppress, $id, $commit, $error, $user );
+	}
+
 	/**
 	 * Checks whether the user can perform the given action.
 	 *

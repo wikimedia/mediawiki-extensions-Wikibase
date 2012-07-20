@@ -117,6 +117,7 @@ final class Utils {
 		$dbw->begin( __METHOD__ );
 
 		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'sites' ), __METHOD__ );
+		Sites::clearCache();
 
 		Sites::newSite( array(
 			'global_key' => 'enwiki',

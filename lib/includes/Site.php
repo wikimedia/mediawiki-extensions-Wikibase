@@ -56,7 +56,7 @@ interface Site extends \IORMRow {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return string|bool the site's url, or false if not known
 	 */
 	public function getUrl();
 
@@ -65,7 +65,7 @@ interface Site extends \IORMRow {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return string|bool the site's language, or false if not known
 	 */
 	public function getLanguage();
 
@@ -81,6 +81,21 @@ interface Site extends \IORMRow {
 	 * @return string
 	 */
 	public function getPagePath( $pageName = false );
+
+	/**
+	 * Returns the normalized, canonical form of the given page name.
+	 * How normalization is performed or what the properties of a normalized name are depends on the site.
+	 * The general contract of this method is that the normalized form shall refer to the same content
+	 * as the original form, and any other page name referring to the same content will have the same normalized form.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $pageName
+	 *
+	 * @return string the normalized page name
+	 * @return string the normalized page name
+	 */
+	public function normalizePageName( $pageName );
 
 	/**
 	 * Returns the full file path (ie site url + relative file path).

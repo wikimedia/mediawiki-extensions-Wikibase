@@ -14,6 +14,7 @@ use ApiBase, User;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
 class ApiSetItem extends ApiModifyItem {
 
@@ -76,7 +77,6 @@ class ApiSetItem extends ApiModifyItem {
 			if ( is_null( $data ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-json-invalid' ), 'json-invalid' );
 			}
-			$sites = array_flip( Sites::singleton()->getGlobalIdentifiers() );
 			$languages = array_flip( Utils::getLanguageCodes() );
 			foreach ( $data as $props => $list ) {
 				switch ($props) {
@@ -131,15 +131,29 @@ class ApiSetItem extends ApiModifyItem {
 					}
 					break;
 				case 'sitelinks':
-					// FIXME: this does no normalization
 					foreach ( $list as $siteId => $pageName ) {
 						if ( !is_string( $pageName ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'add-sitelink-failed' );
 						}
-						if ( !array_key_exists( $siteId, $sites ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'not-recognized-siteid' );
+
+						$site = Sites::singleton()->getSiteByGlobalId( $siteId );
+
+						if ( $site === false ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'add-sitelink-failed' );
 						}
-						$itemContent->getItem()->addSiteLink( $siteId, $pageName, 'set' );
+
+						$page = $site->normalizePageName( $pageName );
+
+						if ( $page === false ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'add-sitelink-failed' );
+						}
+
+						$link = new SiteLink( $site, $page );
+						$ret = $itemContent->getItem()->addSiteLink( $link, 'set' );
+
+						if ( $ret === false ) {
+							$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
+						}
 					}
 					break;
 				default:
@@ -172,6 +186,7 @@ class ApiSetItem extends ApiModifyItem {
 			array( 'code' => 'cant-edit', 'info' => wfMsg( 'wikibase-api-cant-edit' ) ),
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
 			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
+			array( 'code' => 'add-sitelink-failed', 'info' => wfMsg( 'wikibase-api-add-sitelink-failed' ) ),
 		) );
 	}
 

@@ -52,6 +52,8 @@ class Sites {
 		$this->sites = new SiteList( array() );
 	}
 
+	protected static $instance = false;
+
 	/**
 	 * Returns an instance of Sites.
 	 *
@@ -60,13 +62,20 @@ class Sites {
 	 * @return Sites
 	 */
 	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
+		if ( self::$instance === false ) {
+			self::$instance = new static();
 		}
 
-		return $instance;
+		return self::$instance;
+	}
+
+	/**
+	 * Clears the in-memory cache by throwing away the singleton instance.
+	 *
+	 * @since 0.1
+	 */
+	public static function clearCache() {
+		self::$instance = false;
 	}
 
 	/**

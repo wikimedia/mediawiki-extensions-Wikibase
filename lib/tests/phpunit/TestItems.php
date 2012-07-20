@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use \Wikibase\Item as Item;
 use \Wikibase\ItemObject as ItemObject;
+use \Wikibase\SiteLink as SiteLink;
 
 /**
  * Holds Item objects for testing proposes.
@@ -44,7 +45,7 @@ final class TestItems {
 		$links = \Wikibase\Sites::singleton()->getAllSites();
 
 		if ( $links->count() > 1 ) {
-			$item->addSiteLink( $links->getIterator()->current()->getGlobalId(), 'spam' );
+			$item->addSiteLink( new SiteLink( $links->getIterator()->current(), 'spam' ) );
 		}
 
 		$items[] = $item;
@@ -54,9 +55,9 @@ final class TestItems {
 		if ( $links->count() > 1 ) {
 			$linksIterator = $links->getIterator();
 
-			$item->addSiteLink( $linksIterator->current()->getGlobalId(), 'spam' );
+			$item->addSiteLink( new SiteLink( $linksIterator->current(), 'spamz' ) );
 			$linksIterator->next();
-			$item->addSiteLink( $linksIterator->current()->getGlobalId(), 'foobar' );
+			$item->addSiteLink( new SiteLink( $linksIterator->current(), 'foobar' ) );
 		}
 
 		$item->setDescription( 'en', 'foo' );

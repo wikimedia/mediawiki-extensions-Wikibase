@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use \Wikibase\ItemObject as ItemObject;
 use \Wikibase\Item as Item;
+use \Wikibase\SiteLink as SiteLink;
 
 /**
  * Tests for the Wikibase\ItemObject class.
@@ -92,7 +93,7 @@ class ItemObjectTest extends EntityObjectTest {
 		parent::testIsEmpty();
 
 		$item = ItemObject::newEmpty();
-		$item->addSiteLink( 'enwiki', 'Foobar' );
+		$item->addSiteLink( SiteLink::newFromText( 'enwiki', 'Foobar' ) );
 
 		$this->assertFalse( $item->isEmpty() );
 	}
