@@ -23,6 +23,7 @@
 		.wb-ui-toolbar-label-disabled,
 		.wb-ui-toolbar-button-disabled {
 			color: grey;
+			cursor: default;
 		}
 
 .wb-ui-toolbar {

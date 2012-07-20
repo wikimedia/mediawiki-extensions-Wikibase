@@ -186,11 +186,8 @@ class ItemView extends \ContextSource {
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array( 'wikibase.common' ) );
 
-		if ( $editable ) {
-			// make sure required client sided resources will be loaded:
-			//@todo: perhaps always include, but set a canEdit flag in the JS options?
-			$pout->addModules( 'wikibase.ui.PropertyEditTool' );
-		}
+		// make sure required client sided resources will be loaded:
+		$pout->addModules( 'wikibase.ui.PropertyEditTool' );
 
 		//FIXME: some places, like Special:CreateItem, don't want to override the page title.
 		//       But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
@@ -258,6 +255,9 @@ class ItemView extends \ContextSource {
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
 	public static function registerJsConfigVars( OutputPage $out, ItemContent $item, $langCode  ) {
+		global $wgUser;
+
+		$out->addJsConfigVars( 'wbUserIsBlocked', $wgUser->isBlockedFrom( $item->getTitle() ) );
 
 		// hand over the itemId to JS
 		$out->addJsConfigVars( 'wbItemId', $item->getItem()->getId() );

@@ -2,6 +2,7 @@
 # Wikidata UI tests
 #
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
+# Author:: H. Snater
 # License:: GNU GPL v2+
 #
 # tests for a blocked user
@@ -30,34 +31,20 @@ describe "Check functionality of blocking a user" do
       end
       on_page(NewItemPage) do |page|
         page.navigate_to_item
-        # label
-        original_label = page.itemLabelSpan
-        changed_label = original_label + "123"
-        page.editLabelLink
-        page.labelInputField_element.clear
-        page.labelInputField = changed_label
-        page.saveLabelLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.wbErrorDiv?.should be_true
-        page.wbErrorDiv_element.text.should == "You are not allowed to perform this action."
-        @browser.refresh
         page.wait_for_item_to_load
-        page.itemLabelSpan.should == original_label
+        #label
+        page.editLabelLink?.should be_false
+        page.editLabelLinkDisabled?.should be_true
+        page.editLabelLinkDisabled_element.click
+        page.wbTooltip?.should be_true
+        page.labelInputField?.should be_false
+        page.itemLabelSpan_element.click
         # description
-        original_description = page.itemDescriptionSpan
-        changed_description = original_description + "123"
-        page.editDescriptionLink
-        page.descriptionInputField_element.clear
-        page.descriptionInputField = changed_description
-        page.saveDescriptionLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.wbErrorDiv?.should be_true
-        page.wbErrorDiv_element.text.should == "You are not allowed to perform this action."
-        @browser.refresh
-        page.wait_for_item_to_load
-        page.itemDescriptionSpan.should == original_description
+        page.editDescriptionLink?.should be_false
+        page.editDescriptionLinkDisabled?.should be_true
+        page.editDescriptionLinkDisabled_element.click
+        page.wbTooltip?.should be_true
+        page.descriptionInputField?.should be_false
       end
     end
   end
@@ -69,20 +56,14 @@ describe "Check functionality of blocking a user" do
       end
       on_page(AliasesItemPage) do |page|
         page.navigate_to_item
-        new_alias = generate_random_string(5);
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.addAliases
-        page.aliasesInputEmpty= new_alias
-        page.saveAliases
-        ajax_wait
-        page.wait_for_api_callback
-        page.wbErrorDiv?.should be_true
-        page.wbErrorDiv_element.text.should == "You are not allowed to perform this action."
-        @browser.refresh
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
-        page.addAliases?.should be_true
+        page.addAliases?.should be_false
+        page.addAliasesDisabled?.should be_true
+        page.addAliasesDisabled_element.click
+        page.wbTooltip?.should be_true
+        page.aliasesInputEmpty?.should be_false
+        page.saveAliases?.should be_false
       end
     end
   end
@@ -94,20 +75,16 @@ describe "Check functionality of blocking a user" do
       end
       visit_page(NewItemPage) do |page|
         page.wait_for_item_to_load
-        page.labelInputField = "I am not allowed to do that!"
-        page.saveLabelLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.wbErrorDiv?.should be_true
-        page.wbErrorDiv_element.text.should == "You are not allowed to perform this action."
-        @browser.refresh
-        page.wait_for_item_to_load
-        page.descriptionInputField = "I am also not allowed to do that!"
-        page.saveDescriptionLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.wbErrorDiv?.should be_true
-        page.wbErrorDiv_element.text.should == "You are not allowed to perform this action."
+        page.labelInputField_element.enabled?.should be_false
+        page.saveLabelLink?.should be_false
+        page.saveLabelLinkDisabled?.should be_true
+        page.saveLabelLinkDisabled_element.click
+        page.wbTooltip?.should be_true
+        page.descriptionInputField_element.enabled?.should be_false
+        page.saveDescriptionLink?.should be_false
+        page.saveDescriptionLinkDisabled?.should be_true
+        page.saveDescriptionLinkDisabled_element.click
+        page.wbTooltip?.should be_true
       end
     end
   end

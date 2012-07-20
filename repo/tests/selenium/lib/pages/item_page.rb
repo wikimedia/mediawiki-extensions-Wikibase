@@ -16,6 +16,7 @@ class ItemPage < RubySelenium
   div(:uiToolbar, :class => "wb-ui-toolbar")
   span(:itemLabelSpan, :xpath => "//h1[@id='firstHeading']/span/span")
   link(:editLabelLink, :css => "h1#firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
+  link(:editLabelLinkDisabled, :css => "h1#firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(1)")
   text_field(:labelInputField, :xpath => "//h1[@id='firstHeading']/span/span/input")
 
   link(:cancelLabelLink, :css => "h1#firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
@@ -26,6 +27,7 @@ class ItemPage < RubySelenium
   # edit description UI
   span(:itemDescriptionSpan, :xpath => "//div[@id='mw-content-text']/div/span/span")
   link(:editDescriptionLink, :css => "div.wb-ui-descriptionedittool > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
+  link(:editDescriptionLinkDisabled, :css => "div.wb-ui-descriptionedittool > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(1)")
   text_field(:descriptionInputField, :xpath => "//div[@id='mw-content-text']/div/span/span/input")
   link(:cancelDescriptionLink, :css => "div.wb-ui-descriptionedittool > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
   link(:saveDescriptionLinkDisabled, :css => "div.wb-ui-descriptionedittool > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button:nth-child(1)")
@@ -37,7 +39,10 @@ class ItemPage < RubySelenium
   # edit-tab
   list_item(:editTab, :id => "ca-edit")
 
-  # error tooltipps
+  #tooltip
+  div(:wbTooltip, :class => "tipsy-inner")
+
+  # error tooltips
   div(:wbErrorDiv, :class => "wb-tooltip-error-top-message")
   div(:wbErrorDetailsDiv, :class => "wb-tooltip-error-details")
   link(:wbErrorDetailsLink, :class => "wb-tooltip-error-details-link")

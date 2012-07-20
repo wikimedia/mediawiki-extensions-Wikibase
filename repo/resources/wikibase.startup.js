@@ -8,7 +8,13 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
+ *
+ * Events:
+ * -------
+ * restrictItemPageActions: Triggered when editing is not allowed for the user
+ *                          Parameters: (1) jQuery.event
  */
+
 ( function( $, mw, wb, undefined ) {
 	"use strict";
 
@@ -83,6 +89,26 @@
 			} else {
 				notification.prependTo( $( '#content' ) ).fadeIn();
 			}
+		}
+
+		// handle edit restrictions
+		if (
+			mw.config.get( 'wgRestrictionEdit' ) !== null &&
+			mw.config.get( 'wgRestrictionEdit' ).length === 1
+		) { // editing is restricted
+			if (
+				$.inArray(
+					mw.config.get( 'wgRestrictionEdit' )[0],
+					mw.config.get( 'wgUserGroups' )
+				) === -1
+			) {
+				// user is not allowed to edit
+				$( wikibase ).triggerHandler( 'restrictItemPageActions' );
+			}
+		}
+
+		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
+			$( wikibase ).triggerHandler( 'blockItemPageActions' );
 		}
 
 	} );

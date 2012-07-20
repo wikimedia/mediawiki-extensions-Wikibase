@@ -72,6 +72,25 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		this._editableValue = editableValue;
 
 		window.wikibase.ui.Toolbar.Group.prototype._init.call( this );
+
+		// overwrite tooltip message when editing is restricted
+		$( wikibase ).on(
+			'restrictItemPageActions blockItemPageActions',
+			$.proxy(
+				function( event ) {
+					var messageId = ( event.type === 'blockItemPageActions' ) ?
+						'wikibase-blockeduser-tooltip-message' :
+						'wikibase-restrictionedit-tooltip-message';
+
+					this.tooltipAnchor.getTooltip().setContent(
+						mw.message( messageId ).escaped()
+					);
+
+					this.tooltipAnchor.getTooltip().setGravity( 'nw' );
+				}, this
+			)
+		);
+
 	},
 
 	_initToolbar: function() {
