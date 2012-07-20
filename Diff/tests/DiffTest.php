@@ -2,7 +2,6 @@
 
 namespace Diff\Test;
 use Diff\Diff as Diff;
-use Diff\MapDiff as MapDiff;
 use Diff\DiffOpAdd as DiffOpAdd;
 use Diff\DiffOpRemove as DiffOpRemove;
 use Diff\DiffOpChange as DiffOpChange;
@@ -53,7 +52,7 @@ class DiffTest extends \MediaWikiTestCase {
 	 * @dataProvider stuffProvider
 	 */
 	public function testStuff( array $operations ) {
-		$diff = new MapDiff( $operations );
+		$diff = new Diff( $operations );
 
 		$this->assertInstanceOf( '\Diff\IDiff', $diff );
 		$this->assertInstanceOf( '\ArrayIterator', $diff );

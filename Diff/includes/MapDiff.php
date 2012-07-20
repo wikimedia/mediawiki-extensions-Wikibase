@@ -18,10 +18,6 @@ namespace Diff;
  */
 class MapDiff extends Diff {
 
-	public function getType() {
-		return 'map';
-	}
-
 	/**
 	 * Creates and returns an empty MapDiff.
 	 *
@@ -165,14 +161,14 @@ class MapDiff extends Diff {
 	}
 
 	/**
-	 * @see IDiffOp::isAtomic
+	 * @see IDiffOp::getType
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return string
 	 */
-	public function isAtomic() {
-		return false;
+	public function getType() {
+		return 'map';
 	}
 
 }
