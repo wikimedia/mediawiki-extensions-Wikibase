@@ -71,6 +71,17 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 		// make sure the value is normalized when initialized:
 		this.setValue( this.getValue() );
+
+		// disable interface when editing is restricted
+		$( wikibase ).on(
+			'restrictItemPageActions',
+			$.proxy(
+				function( event ) {
+					this.disable();
+				}, this
+			)
+		);
+
 	},
 
 	destroy: function() {
