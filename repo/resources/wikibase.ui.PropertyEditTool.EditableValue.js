@@ -468,10 +468,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			// remove and show immediately since we need nodes for the tooltip!
 			self._subject.removeClass( self.UI_CLASS + '-waiting' );
 			waitMsg.remove();
+			self.enable(); // re-enabling actions and input box when saving has failed
 			self._toolbar._elem.show();
 			self._apiCallErr( textStatus, response, apiAction );
 		} );
 
+		/**
+		 * disabling actions and input box during saving (success will stop edit mode, so no
+		 * re-enabling is necessary in that case)
+		 */
+		this.disable();
 		this._toolbar._elem.fadeOut( 200, $.proxy( function() {
 			waitMsg.fadeIn( 200 );
 			// do the actual API request and trigger jQuery.Deferred stuff:
