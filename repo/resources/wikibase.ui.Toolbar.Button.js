@@ -8,6 +8,7 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  *
  * Events:
  * -------
@@ -36,6 +37,25 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 	 * @var jQuery
 	 */
 	_elem: null,
+
+	_init: function( content ) {
+		wikibase.ui.Toolbar.Label.prototype._init.call( this, content );
+
+		// disable button and attach tooltip when editing is restricted
+		$( wikibase ).on(
+			'restrictItemPageActions',
+			$.proxy(
+				function( event ) {
+					this.disable();
+					this.setTooltip(
+						mw.message( 'wikibase-restrictionedit-tooltip-message' ).escaped()
+					);
+					this._tooltip.setGravity( 'nw' );
+				}, this
+			)
+		);
+
+	},
 
 	_initElem: function( text ) {
 		this._elem = $( '<a/>', {
