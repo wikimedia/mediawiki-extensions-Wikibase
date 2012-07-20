@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff;
+namespace Wikibase;
 
 /**
  * Interface for diff operations. A diff operation
@@ -11,7 +11,8 @@ namespace Diff;
  * @since 0.1
  *
  * @file
- * @ingroup Diff
+ * @ingroup WikibaseLib
+ * @ingroup WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

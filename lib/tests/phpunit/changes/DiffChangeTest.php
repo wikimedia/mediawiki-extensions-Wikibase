@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Item as Item;
-use Diff\MapDiff as MapDiff;
+use Wikibase\MapDiff as MapDiff;
 
 /**
  * Tests for the Wikibase\DiffChange class.

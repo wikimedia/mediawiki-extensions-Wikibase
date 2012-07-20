@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface EntityDiff extends \Diff\IDiff {
+interface EntityDiff extends IDiff {
 
 	/**
 	 * Returns a view object for the diff.

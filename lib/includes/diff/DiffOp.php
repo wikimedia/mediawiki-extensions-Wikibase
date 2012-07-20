@@ -1,6 +1,7 @@
 <?php
 
-namespace Diff;
+namespace Wikibase;
+use MWException;
 
 /**
  * Base class for diff operations. A diff operation
@@ -9,7 +10,8 @@ namespace Diff;
  * @since 0.1
  *
  * @file
- * @ingroup Diff
+ * @ingroup WikibaseLib
+ * @ingroup WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -24,21 +26,21 @@ abstract class DiffOp implements IDiffOp {
 	 * @param array $array
 	 *
 	 * @return IDiffOp
-	 * @throws \Diff\Exception
+	 * @throws MWException
 	 */
 	public static function newFromArray( array $array ) {
 		$type = array_shift( $array );
 
 		$typeMap = array(
-			'add' => '\Diff\DiffOpAdd',
-			'remove' => '\Diff\DiffOpRemove',
-			'change' => '\Diff\DiffOpChange',
-			'list' => '\Diff\ListDiff',
-			'map' => '\Diff\MapDiff',
+			'add' => '\Wikibase\DiffOpAdd',
+			'remove' => '\Wikibase\DiffOpRemove',
+			'change' => '\Wikibase\DiffOpChange',
+			'list' => '\Wikibase\ListDiff',
+			'map' => '\Wikibase\MapDiff',
 		);
 
 		if ( !array_key_exists( $type, $typeMap ) ) {
-			throw new Exception( 'Invalid diff type provided.' );
+			throw new MWException( 'Invalid diff type provided.' );
 		}
 
 		return call_user_func_array( array( $typeMap[$type], '__construct' ), $array );

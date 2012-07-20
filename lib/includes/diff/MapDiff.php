@@ -1,6 +1,7 @@
 <?php
 
-namespace Diff;
+namespace Wikibase;
+use MWException;
 
 /**
  * Class representing the diff between to (associative) arrays.
@@ -11,7 +12,8 @@ namespace Diff;
  * @since 0.1
  *
  * @file
- * @ingroup Diff
+ * @ingroup WikibaseLib
+ * @ingroup WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -59,7 +61,7 @@ class MapDiff extends Diff {
 	 * @param array $newValues The second array
 	 * @param boolean $recursively If elements that are arrays should also be diffed.
 	 *
-	 * @throws \Diff\Exception
+	 * @throws MWException
 	 * @return array
 	 * Each key existing in either array will exist in the result and have an array as value.
 	 * This value is an array with two keys: old and new.
@@ -110,7 +112,7 @@ class MapDiff extends Diff {
 				$diffSet[$key] = new DiffOpAdd( $newSet[$key] );
 			}
 			else {
-				throw new Exception( 'Cannot create a diff op for two empty values.' );
+				throw new MWException( 'Cannot create a diff op for two empty values.' );
 			}
 		}
 

@@ -30,11 +30,6 @@ if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c becaus
 	die( '<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.' );
 }
 
-// Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
-if ( !defined( 'WBL_VERSION' ) ) {
-	@include_once( dirname( __FILE__ ) . '/../lib/WikibaseLib.php' );
-}
-
 if ( !defined( 'WBL_VERSION' ) ) { // No version constant to check against :/
 	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:WikibaseLib">WikibaseLib</a> extension.' );
 }

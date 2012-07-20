@@ -1,8 +1,6 @@
 <?php
 
 namespace Wikibase;
-use Diff\MapDiff as MapDiff;
-use Diff\IDiff as IDiff;
 
 /**
  * Represents a diff between two Wikibase\Entity instances.

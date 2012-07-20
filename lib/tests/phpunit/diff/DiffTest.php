@@ -1,11 +1,8 @@
 <?php
 
-namespace Diff\Test;
-use Diff\Diff as Diff;
-use Diff\MapDiff as MapDiff;
-use Diff\DiffOpAdd as DiffOpAdd;
-use Diff\DiffOpRemove as DiffOpRemove;
-use Diff\DiffOpChange as DiffOpChange;
+namespace Wikibase\Test;
+use Wikibase\Diff as Diff;
+use Wikibase\MapDiff as MapDiff;
 
 /**
  * Tests for the Diff class.
@@ -13,9 +10,11 @@ use Diff\DiffOpChange as DiffOpChange;
  * @file
  * @since 0.1
  *
- * @ingroup Diff
+ * @ingroup WikibaseLib
  * @ingroup Test
- * @group Diff
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -25,26 +24,26 @@ class DiffTest extends \MediaWikiTestCase {
 	public function stuffProvider() {
 		return array(
 			array( array(
-				new DiffOpAdd( 'ohi' )
+				new \Wikibase\DiffOpAdd( 'ohi' )
 			) ),
 			array( array(
-				new DiffOpRemove( 'ohi' )
+				new \Wikibase\DiffOpRemove( 'ohi' )
 			) ),
 			array( array(
-				new DiffOpAdd( 'ohi' ),
-				new DiffOpRemove( 'there' )
+				new \Wikibase\DiffOpAdd( 'ohi' ),
+				new \Wikibase\DiffOpRemove( 'there' )
 			) ),
 			array( array(
 			) ),
 			array( array(
-				new DiffOpAdd( 'ohi' ),
-				new DiffOpRemove( 'there' ),
-				new DiffOpChange( 'ohi', 'there' )
+				new \Wikibase\DiffOpAdd( 'ohi' ),
+				new \Wikibase\DiffOpRemove( 'there' ),
+				new \Wikibase\DiffOpChange( 'ohi', 'there' )
 			) ),
 			array( array(
-				'1' => new DiffOpAdd( 'ohi' ),
-				'33' => new DiffOpRemove( 'there' ),
-				'7' => new DiffOpChange( 'ohi', 'there' )
+				'1' => new \Wikibase\DiffOpAdd( 'ohi' ),
+				'33' => new \Wikibase\DiffOpRemove( 'there' ),
+				'7' => new \Wikibase\DiffOpChange( 'ohi', 'there' )
 			) ),
 		);
 	}
@@ -55,13 +54,13 @@ class DiffTest extends \MediaWikiTestCase {
 	public function testStuff( array $operations ) {
 		$diff = new MapDiff( $operations );
 
-		$this->assertInstanceOf( '\Diff\IDiff', $diff );
+		$this->assertInstanceOf( '\Wikibase\IDiff', $diff );
 		$this->assertInstanceOf( '\ArrayIterator', $diff );
 
 		$types = array();
 
 		foreach ( $diff as $operation ) {
-			$this->assertInstanceOf( '\Diff\IDiffOp', $operation );
+			$this->assertInstanceOf( '\Wikibase\IDiffOp', $operation );
 			if ( !in_array( $operation->getType(), $types ) ) {
 				$types[] = $operation->getType();
 			}

@@ -1,11 +1,10 @@
 <?php
 
-namespace Diff\Test;
-use Diff\MapDiff as MapDiff;
-use Diff\ListDiff as ListDiff;
-use Diff\DiffOpRemove as DiffOpRemove;
-use Diff\DiffOpAdd as DiffOpAdd;
-use Diff\DiffOpChange as DiffOpChange;
+namespace Wikibase\Test;
+use Wikibase\MapDiff as MapDiff;
+use Wikibase\DiffOpRemove as DiffOpRemove;
+use Wikibase\DiffOpAdd as DiffOpAdd;
+use Wikibase\DiffOpChange as DiffOpChange;
 
 /**
  * Tests for the MapDiff class.
@@ -13,9 +12,12 @@ use Diff\DiffOpChange as DiffOpChange;
  * @file
  * @since 0.1
  *
- * @ingroup Diff
+ * @ingroup WikibaseLib
  * @ingroup Test
- * @group Diff
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseDiff
+ * @group WikibaseMapDiff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -83,13 +85,13 @@ class MapDiffTest extends \MediaWikiTestCase {
 
 		foreach ( $expected as $key => &$value ) {
 			if ( $value === 'list' ) {
-				$value = ListDiff::newFromArrays(
+				$value = \Wikibase\ListDiff::newFromArrays(
 					array_key_exists( $key, $from ) ? $from[$key] : array(),
 					array_key_exists( $key, $to ) ? $to[$key] : array()
 				);
 			}
 			elseif ( $value === 'map' ) {
-				$value = MapDiff::newFromArrays(
+				$value = \Wikibase\MapDiff::newFromArrays(
 					array_key_exists( $key, $from ) ? $from[$key] : array(),
 					array_key_exists( $key, $to ) ? $to[$key] : array()
 				);
@@ -155,9 +157,9 @@ class MapDiffTest extends \MediaWikiTestCase {
 	public function testNewFromArrays( array $from, array $to, array $expected ) {
 		$diff = MapDiff::newFromArrays( $from, $to );
 
-		$this->assertInstanceOf( '\Diff\MapDiff', $diff );
-		$this->assertInstanceOf( '\Diff\IDiffOp', $diff );
-		$this->assertInstanceOf( '\Diff\IDiff', $diff );
+		$this->assertInstanceOf( '\Wikibase\MapDiff', $diff );
+		$this->assertInstanceOf( '\Wikibase\IDiffOp', $diff );
+		$this->assertInstanceOf( '\Wikibase\IDiff', $diff );
 		$this->assertInstanceOf( '\ArrayIterator', $diff );
 
 		// Sort to get rid of differences in order, since no promises about order are made.
