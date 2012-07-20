@@ -247,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//5aI\u003d",
+        "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-20T14:37:30Z",
+      "side": 1,
+      "message": "Why not use regular settings? If you use constants, the format of the autocomment stuff cannot be configured.",
+      "parentUuid": "AAAAQX//6BU\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6FE\u003d",
         "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
         "patchSetId": 3
@@ -352,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//5Zw\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-20T14:37:30Z",
+      "side": 1,
+      "message": "So you\u0027re saying there are no autocomments during a regular save?",
+      "parentUuid": "AAAAQX//6Ao\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6E4\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 3
@@ -387,6 +423,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQX//5Z4\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-20T14:37:30Z",
+      "side": 1,
+      "message": "Same as the above remark.",
+      "parentUuid": "AAAAQX//6As\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQX//6Es\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 3
@@ -416,6 +470,24 @@
       "side": 1,
       "message": "Its testing if the param is not set and then shortcuts.",
       "parentUuid": "AAAAQX//6Es\u003d",
+      "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQX//5Zk\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-20T14:37:30Z",
+      "side": 1,
+      "message": "Looking at the code docs I see the method returns a string, so how can it not be set?",
+      "parentUuid": "AAAAQX//6AU\u003d",
       "revId": "dbee77822d57ba63cc05b824e2d21fa7c4b99fdc",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
