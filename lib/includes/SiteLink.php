@@ -16,6 +16,37 @@ namespace Wikibase;
 class SiteLink {
 
 	/**
+	 * Creates a new SiteLink representing a link to the given page on the given site. The page title is normalized
+	 * for the SiteLink object is created. If you already have a normalized page title, use the constructor directly.
+	 *
+	 * @note  : This may cause an API request to the remote site, so beware that this function may be slow slow and
+	 *        depend on an external service.
+	 *
+	 * @param String $siteID  The site's global ID, to be used with Sites::singleton()->getSiteByGlobalId().
+	 * @param String $page    The target page's title. This is expected to already be normalized.
+	 *
+	 * @return \Wikibase\SiteLink the new SiteLink
+	 * @throws \MWException if the $siteID isn't known.
+	 */
+	public static function newFromText( $siteID, $page ) {
+		$site = Sites::singleton()->getSiteByGlobalId( $siteID );
+
+		if ( $site === false ) {
+			throw new \MWException( "unknown site: $siteID" );
+		}
+
+		$title = $site->normalizePageName( $page );
+
+		if ( $title === false ) {
+			throw new \MWException( "failed to normalize title: $page" );
+		}
+
+		return new SiteLink( $siteID, $title );
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
 	 * @since 0.1
 	 * @var String
 	 */
@@ -25,15 +56,23 @@ class SiteLink {
 	 * @since 0.1
 	 * @var Site
 	 */
-	protected $site;
+	protected $siteID;
 
 	/**
-	 * @param Site $site The site's global ID, to be used with Sites::singleton()->getSiteByGlobalId().
-	 * @param String $page The target page's title. This is expected to already be normalized.
+	 * @param String $siteID  The global ID of the site the page link points to
+	 * @param String $page    The target page's title. This is expected to already be normalized.
 	 */
-	public function __construct( Site $site, $page ) {
+	public function __construct( $siteID, $page ) {
+		if ( !is_string( $siteID ) ) {
+			throw new \MWException( '$siteID must be a string' );
+		}
+
+		if ( !is_string( $page ) ) {
+			throw new \MWException( '$page must be a string' );
+		}
+
+		$this->siteID = $siteID;
 		$this->page = $page;
-		$this->site = $site;
 	}
 
 	/**
@@ -66,7 +105,7 @@ class SiteLink {
 	 * @return String
 	 */
 	public function getSiteID() {
-		return $this->site->getGlobalId();
+		return $this->siteID;
 	}
 
 	/**
@@ -77,7 +116,7 @@ class SiteLink {
 	 * @return Site
 	 */
 	public function getSite() {
-		return $this->site;
+		return Sites::singleton()->getSiteByGlobalId( $this->siteID );
 	}
 
 	/**
@@ -86,10 +125,16 @@ class SiteLink {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return String|bool The URL of the page, or false if the target site is not known to the Sites class.
 	 */
 	public function getUrl() {
-		return $this->site->getPagePath( $this->getDBKey() );
+		$site = $this->getSite();
+
+		if ( !$site ) {
+			return false;
+		}
+
+		return $site->getPagePath( $this->getDBKey() );
 	}
 
 	/**

@@ -98,6 +98,22 @@ class SiteRow extends \ORMRow implements Site {
 	}
 
 	/**
+	 * Returns $pageName without changes.
+	 * Subclasses may override this to apply some kind of normalization.
+	 *
+	 * @see Site::normalizePageName()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $pageName
+	 *
+	 * @return string
+	 */
+	public function normalizePageName( $pageName ) {
+		return $pageName;
+	}
+
+	/**
 	 * @see Site::getFilePath()
 	 *
 	 * @since 0.1

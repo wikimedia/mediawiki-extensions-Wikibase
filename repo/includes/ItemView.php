@@ -113,28 +113,44 @@ class ItemView extends \ContextSource {
 			foreach( $siteLinks as $link ) { /* @var SiteLink $link */
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
-				$languageCode = $link->getSite()->getLanguage();
+				$site = $link->getSite();
 
-				$html .= Html::openElement( 'tr', array(
-						'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
-				);
+				if ( !$site ) {
+					// the link is pointing to an unknown site.
+					// XXX: hide it? make it red? strike it out?
 
-				$html .= Html::element(
-					'td',
-					array(
-						'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $languageCode
-					),
-					// TODO: get an actual site name rather then just the language
-					Utils::fetchLanguageName( $languageCode ) . ' (' . $languageCode . ')'
-				);
-				$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
-				$html .= Html::element(
-					'a',
-					array( 'href' => $link->getUrl() ),
-					$link->getPage()
-				);
-				$html .= Html::closeElement( 'td' );
-				$html .= Html::closeElement( 'tr' );
+					$html .= Html::openElement( 'tr', array(
+							'class' => 'wb-sitelinks-site-unknown ' . $alternatingClass )
+					);
+
+					$html .= Html::element( 'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-unknown' ), $link->getSiteID() );
+					$html .= Html::element( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-broken' ), $link->getPage() );
+
+					$html .= Html::closeElement( 'tr' );
+				} else {
+					$languageCode = $site->getLanguage();
+
+					$html .= Html::openElement( 'tr', array(
+							'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
+					);
+
+					$html .= Html::element(
+						'td',
+						array(
+							'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $languageCode
+						),
+						// TODO: get an actual site name rather then just the language
+						Utils::fetchLanguageName( $languageCode ) . ' (' . $languageCode . ')'
+					);
+					$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
+					$html .= Html::element(
+						'a',
+						array( 'href' => $link->getUrl() ),
+						$link->getPage()
+					);
+					$html .= Html::closeElement( 'td' );
+					$html .= Html::closeElement( 'tr' );
+				}
 			}
 			$html .= Html::closeElement( 'table' );
 		}

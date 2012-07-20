@@ -101,8 +101,10 @@ final class LibHooks {
 			'PropertyObject',
 			'QueryObject',
 			'SiteConfigObject',
+			'SiteLink',
 			'SiteList',
 			'SiteRow',
+			'MediaWikiSite',
 			'Sites',
 			'Utils',
 
