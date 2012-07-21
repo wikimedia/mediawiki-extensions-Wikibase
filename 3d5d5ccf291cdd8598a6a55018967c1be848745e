@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3///kM\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-21T23:55:28Z",
+      "side": 1,
+      "message": "It is possible to do \"normalization\" without querying the external site, but in the call the existence of the page is also implicitly verified. That isn\u0027t easily replicated. For testing it could be nice to do local normalization and then only fake the reply, or even have an expensive and a cheap version of the same method.",
+      "revId": "3d5d5ccf291cdd8598a6a55018967c1be848745e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///kU\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-21T23:55:28Z",
+      "side": 1,
+      "message": "This is a blocking call and will serialize accesses to the external site. This can lead to a failure in teh wbsetitem module due to timeouts if the number of queries due to a single request are large.",
+      "revId": "3d5d5ccf291cdd8598a6a55018967c1be848745e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///kY\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-21T23:55:28Z",
+      "side": 1,
+      "message": "This case will because of the looping create a very sluggish response when the servers are not colocated, and in the case with the test server it is not unlikely that bots will time out.",
+      "revId": "3d5d5ccf291cdd8598a6a55018967c1be848745e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
