@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQ3///mw\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-21T19:40:09Z",
+      "side": 1,
+      "message": "And be non-static as well",
+      "parentUuid": "AAAAQ3///nA\u003d",
+      "revId": "3ddacfb03e952ece09614c8fb146f50c228d8b78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3///pc\u003d",
         "filename": "lib/includes/SiteLink.php",
         "patchSetId": 1
