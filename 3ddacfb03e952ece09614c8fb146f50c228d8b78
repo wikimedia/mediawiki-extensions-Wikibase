@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQ3///nA\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-21T19:38:42Z",
+      "side": 1,
+      "message": "This stuff is MediaWiki specific and should go into \\Wikibase\\MediaWikiSite",
+      "revId": "3ddacfb03e952ece09614c8fb146f50c228d8b78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3///pc\u003d",
         "filename": "lib/includes/SiteLink.php",
         "patchSetId": 1
@@ -101,6 +118,24 @@
       "side": 1,
       "message": "Can move that into getSite(), and use getSite() in getUrl(). But what should getUrl() do if the site is unknown? Return false? Throw an exception?",
       "parentUuid": "AAAAQ3///pg\u003d",
+      "revId": "3ddacfb03e952ece09614c8fb146f50c228d8b78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///m4\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-21T19:38:42Z",
+      "side": 1,
+      "message": "I\u0027d go for throwing an exception. But this should all be done in MediaWikiSite - if we don\u0027t know the type of site we can only assume we do not need to do external normalization.\n\nSame goes for newFromText",
+      "parentUuid": "AAAAQ3///nU\u003d",
       "revId": "3ddacfb03e952ece09614c8fb146f50c228d8b78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
