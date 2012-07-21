@@ -16,6 +16,15 @@ namespace Diff;
 interface IDiff extends IDiffOp {
 
 	/**
+	 * Returns a new empty diff.
+	 *
+	 * @since 0.1
+	 *
+	 * @return IDiff
+	 */
+	public static function newEmpty();
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -23,7 +32,7 @@ interface IDiff extends IDiffOp {
 	 * @param $operations array of IDiffOp
 	 * @patam string|integer|null $parentKey
 	 */
-	function __construct( array $operations, $parentKey = null );
+	public function __construct( array $operations, $parentKey = null );
 
 	/**
 	 * Returns the operations that make up the diff.
@@ -51,15 +60,6 @@ interface IDiff extends IDiffOp {
 	 * @param $operations array of IDiffOp
 	 */
 	public function addOperations( array $operations );
-
-	/**
-	 * Returns a new empty diff.
-	 *
-	 * @since 0.1
-	 *
-	 * @return IDiff
-	 */
-	public static function newEmpty();
 
 	/**
 	 * Returns the key the IDiffOp has in it's parent diff.

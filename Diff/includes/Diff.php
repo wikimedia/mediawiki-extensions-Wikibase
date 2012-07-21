@@ -18,7 +18,21 @@ namespace Diff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class Diff extends \ArrayIterator implements IDiff {
+class Diff extends \ArrayIterator implements IDiff {
+
+	/**
+	 * Creates and returns an empty Diff.
+	 * @see IDiff::newEmpty
+	 *
+	 * @since 0.1
+	 *
+	 * @param $parentKey = null
+	 *
+	 * @return Diff
+	 */
+	public static function newEmpty( $parentKey = null ) {
+		return new static( array(), $parentKey );
+	}
 
 	/**
 	 * Key the operation has in it's parent diff.
@@ -42,6 +56,7 @@ abstract class Diff extends \ArrayIterator implements IDiff {
 		'change' => array(),
 		'list' => array(),
 		'map' => array(),
+		'diff' => array(),
 	);
 
 	/**
@@ -361,6 +376,28 @@ abstract class Diff extends \ArrayIterator implements IDiff {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @see IDiffOp::isAtomic
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isAtomic() {
+		return false;
+	}
+
+	/**
+	 * @see IDiffOp::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'diff';
 	}
 
 }

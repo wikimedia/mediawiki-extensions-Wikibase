@@ -20,10 +20,6 @@ namespace Diff;
  */
 class ListDiff extends Diff {
 
-	public function getType() {
-		return 'list';
-	}
-
 	protected $typePointers = array(
 		'add' => array(),
 		'remove' => array(),
@@ -31,6 +27,7 @@ class ListDiff extends Diff {
 
 	/**
 	 * Creates and returns an empty ListDiff.
+	 * @see IDiff::newEmpty
 	 *
 	 * @since 0.1
 	 *
@@ -67,14 +64,14 @@ class ListDiff extends Diff {
 	}
 
 	/**
-	 * @see IDiffOp::isAtomic
+	 * @see IDiffOp::getType
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return string
 	 */
-	public function isAtomic() {
-		return false;
+	public function getType() {
+		return 'list';
 	}
 
 }
