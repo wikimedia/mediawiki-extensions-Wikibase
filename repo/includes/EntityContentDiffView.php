@@ -108,7 +108,11 @@ class EntityContentDiffView extends \DifferenceEngine {
 		return $header;
 	}
 
-	function generateContentDiffBody( EntityContent $old, EntityContent $new ) {
+	function generateContentDiffBody( Content $old, Content $new ) {
+		/**
+		 * @var EntityContent $old
+		 * @var EntityContent $new
+		 */
 		$diffView = $old->getEntity()->getDiff( $new->getEntity() )->getView();
 		$diffView->setContext( $this->getContext() );
 		return $diffView->getHtml();
