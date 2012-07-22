@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3///hE\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-22T15:28:27Z",
+      "side": 1,
+      "message": "self",
+      "revId": "012f522abb0b59c5c14630624245141232454407",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///hA\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-22T15:28:27Z",
+      "side": 1,
+      "message": "Start method name with get would be more clear",
+      "revId": "012f522abb0b59c5c14630624245141232454407",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
