@@ -28,7 +28,6 @@ use Wikibase\ItemView as ItemView;
  *
  * @group Wikibase
  * @group WikibaseItemView
- * @group Database
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
