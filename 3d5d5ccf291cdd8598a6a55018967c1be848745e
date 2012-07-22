@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAQ3///g4\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-22T15:33:51Z",
+      "side": 1,
+      "message": "This will obviously fail if the site is not in the table. Why would you not be able to construct a fully functioning SiteLink object when you have a site that\u0027s not in the table? I think the previous approach of passing a Site object in the constructor is nicer.",
+      "revId": "3d5d5ccf291cdd8598a6a55018967c1be848745e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3///kY\u003d",
         "filename": "repo/includes/api/ApiSetItem.php",
         "patchSetId": 2
