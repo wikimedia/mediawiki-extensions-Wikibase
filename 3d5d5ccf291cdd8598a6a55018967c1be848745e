@@ -67,6 +67,24 @@
       "revId": "3d5d5ccf291cdd8598a6a55018967c1be848745e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///fc\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-22T18:50:27Z",
+      "side": 1,
+      "message": "I do not see a way around this. Either we normalize using the external sites, or we don\u0027t normalize. Normalizing \"half way\" won\u0027t work. If we can find a way to reliably normalize using local information, we\u0027ll use that, but until then, we need to call out to the remote site.",
+      "parentUuid": "AAAAQ3///kY\u003d",
+      "revId": "3d5d5ccf291cdd8598a6a55018967c1be848745e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
