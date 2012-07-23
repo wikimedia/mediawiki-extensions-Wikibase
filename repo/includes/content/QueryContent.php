@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Title, Content, ParserOptions, ParserOutput, DataUpdate;
 
 /**
  * Content object for articles representing Wikibase queries.
@@ -108,4 +109,63 @@ class QueryContent extends EntityContent {
 		return $this->query;
 	}
 
+	/**
+	 * @see Content::getDeletionUpdates
+	 *
+	 * @param \Title $title
+	 * @param null|\ParserOutput $parserOutput
+	 *
+	 * @since 0.1
+	 *
+	 * @return array of \DataUpdate
+	 */
+	public function getDeletionUpdates( \Title $title, \ParserOutput $parserOutput = null ) {
+		return array_merge(
+			parent::getDeletionUpdates( $title, $parserOutput ),
+			array( /* new QueryDeletionUpdate( $this ) */ )
+		);
+	}
+
+
+	/**
+	 * Returns a ParserOutput object containing the HTML.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $title
+	 * @param null $revId
+	 * @param null|ParserOptions $options
+	 * @param bool $generateHtml
+	 *
+	 * @return ParserOutput
+	 */
+	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+		$parserOutput = new ParserOutput();
+
+		$parserOutput->setText( 'TODO' ); // TODO
+
+		return $parserOutput;
+	}
+
+	/**
+	 * @see ContentHandler::getSecondaryDataUpdates
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title $title
+	 * @param Content|null $old
+	 * @param boolean $recursive
+	 *
+	 * @param null|ParserOutput $parserOutput
+	 *
+	 * @return array of \DataUpdate
+	 */
+	public function getSecondaryDataUpdates( Title $title, Content $old = null,
+		$recursive = false, ParserOutput $parserOutput = null ) {
+
+		return array_merge(
+			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
+			array( /* new QueryStructuredSave( $content ) */ )
+		);
+	}
 }
