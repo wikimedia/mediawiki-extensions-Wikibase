@@ -225,7 +225,7 @@ final class Utils {
 	}
 
 	/**
-	 * Normalize string into NFC after first checkingh if its already normalized.
+	 * Normalize string into NFC after first checking if its already normalized.
 	 *
 	 * @since 0.1
 	 *
@@ -319,7 +319,10 @@ final class Utils {
 	}
 
 	/**
-	 * Find the first multilingual string that can be used for constructing a language object.
+	 * Find the first multilingual string that can be used for constructing a language object. The
+	 * global chain is always used.
+	 *
+	 * Note that a multilingual string from the global chain will always be globally cachable.
 	 *
 	 * @since 0.1
 	 *
@@ -341,22 +344,90 @@ final class Utils {
 		if ( is_null( $texts ) || empty( $texts ) ) {
 			return $fallback;
 		}
+
 		// Find the first language code we can turn into a language object
-		// Note that the factory call do a pretty dumb cleaning up that makes this vejjy slow
+		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
 		while ( list( $code, $text ) = each( $texts ) ) {
 			$lang = Language::factory( $code );
 			if ( !is_null( $lang ) ) {
-				break;
+				return array( $code, $text, $lang );;
 			}
 		}
 
-		// Check if we have a legal Language object
-		if ( is_null( $lang ) ) {
+		// Use the fallback if the previous fails
+		return $fallback;
+	}
+
+	/**
+	 * Find the first multilingual string that can be used for constructing a language object
+	 * for the current user. If a preferred language can't be identified the global chain is
+	 * used.
+	 *
+	 * Note that a user specific multilingual string is not globally cachable.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $texts the key-value pairs to check for existence
+	 * @param array $sequence the list of keys that should exist
+	 * @param array $fallback an array of values that are used as a replacement if nothing is found
+	 * 		The fallback is in the form array( code, text, language )
+	 * @return triplet with the initial language code, the text, and the language object
+	 */
+	static public function lookupUserMultilangText( array $texts = null, array $sequence = null, array $fallback = null ) {
+		global $wgUser;
+
+		// Prerequisites for further processing
+		if ( is_null( $texts ) || is_null( $sequence ) ) {
+			return $fallback; // makes the simplest use case
+		}
+
+		// Filter down the result
+		$texts = \Wikibase\Utils::filterMultilangText( $texts, $sequence );
+		if ( is_null( $texts ) || empty( $texts ) ) {
 			return $fallback;
 		}
 
-		// Do a proper return
-		return array( $code, $text, $lang );
+		// Find the first preferred language code we can turn into a language object
+		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
+		while ( list( $code, $text ) = each( $texts ) ) {
+			if ( $wgUser->getOption( "sttl-languages-$code" ) ) {
+				$lang = Language::factory( $code );
+				if ( !is_null( $lang ) ) {
+					return array( $code, $text, $lang );
+				}
+			}
+		}
+
+		// Find the first ordinary language code we can turn into a language object
+		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
+		while ( list( $code, $text ) = each( $texts ) ) {
+			$lang = Language::factory( $code );
+			if ( !is_null( $lang ) ) {
+				return array( $code, $text, $lang );
+			}
+		}
+
+		// Use the fallback if the previous fails
+		return $fallback;
 	}
 
+	/**
+	 * Get the fallback languages prepended with the source language itself.
+	 *
+	 * A language chain in this respect is the language itself and all fallback
+	 * languagese. Because English is prepended to all languages it is not a real
+	 * language group, its only a language group for the purpose of figuring out
+	 * the best guess if language attributes are missing.
+	 *
+	 * Note that a language chain is globally unique, there will not be any
+	 * language with two different chains.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $langCode the language code for the source language itself
+	 * @return array of language codes
+	 */
+	static public function languageChain( $langCode ) {
+		return array_merge( array( $langCode ), Language::getFallbacksFor( $langCode ) );
+	}
 }
