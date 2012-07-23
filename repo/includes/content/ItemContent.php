@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Title, WikiPage, User, MWException, Content, Status;
+use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput, DataUpdate;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -339,6 +339,62 @@ class ItemContent extends EntityContent {
 	 */
 	public function getEntity() {
 		return $this->item;
+	}
+
+	/**
+	 * @see Content::getDeletionUpdates
+	 *
+	 * @param \Title $title
+	 * @param null|\ParserOutput $parserOutput
+	 *
+	 * @since 0.1
+	 *
+	 * @return array of \DataUpdate
+	 */
+	public function getDeletionUpdates( \Title $title, \ParserOutput $parserOutput = null ) {
+		return array_merge(
+			parent::getDeletionUpdates( $title, $parserOutput ),
+			array( /* new ItemDeletionUpdate( $this ) */ )
+		);
+	}
+
+	/**
+	 * @see   ContentHandler::getSecondaryDataUpdates
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title              $title
+	 * @param Content|null       $old
+	 * @param bool               $recursive
+	 *
+	 * @param null|ParserOutput  $parserOutput
+	 *
+	 * @return \Title of DataUpdate
+	 */
+	public function getSecondaryDataUpdates( Title $title, Content $old = null,
+		$recursive = false, ParserOutput $parserOutput = null ) {
+
+		return array_merge(
+			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
+			array( new ItemStructuredSave( $this ) )
+		);
+	}
+
+	/**
+	 * Returns a ParserOutput object containing the HTML.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Title              $title
+	 * @param null               $revId
+	 * @param null|ParserOptions $options
+	 * @param bool               $generateHtml
+	 *
+	 * @return \Title
+	 */
+	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
+		$itemView = new ItemView( ); // @todo: construct context for title?
+		return $itemView->getParserOutput( $this, $options, $generateHtml );
 	}
 
 }
