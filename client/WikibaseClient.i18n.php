@@ -30,6 +30,7 @@ $messages['qqq'] = array(
 	'wbc-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
 	'wbc-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
+	'wbc-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizzard to edit interlanguage links.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
@@ -119,6 +120,7 @@ $messages['gsw'] = array(
  * @author Amire80
  */
 $messages['he'] = array(
+	'wbc-desc' => 'לקוח להרחבה Wikibase',
 	'wbc-editlinks' => 'עריכת קישורים',
 	'wbc-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
 );

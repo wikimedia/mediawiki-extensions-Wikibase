@@ -74,6 +74,13 @@ $messages['gl'] = array(
 	'wikibaselib-desc' => 'Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client.',
 );
 
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'wikibaselib-desc' => 'הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client',
+);
+
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */

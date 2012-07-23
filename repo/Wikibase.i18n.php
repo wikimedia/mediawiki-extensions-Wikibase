@@ -198,10 +198,8 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-aliases-label' => 'Label for list of aliases, displayed in front of the list. Aliases are alternate names and nicknames for the item. See also [[m:Wikidata/Glossary]].',
 	'wikibase-aliases-input-help-message' => 'Bubble help message for entering the aliases of the data set used for a specific item.',
 	'wikibase-aliases-empty' => 'Placeholder message when no aliases for this data set representing a specific item have been defined.',
-
 	'wikibase-restrictionedit-tooltip-message' => 'When editing a page (a data item) is restricted for the current user, this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item.',
 	'wikibase-blockeduser-tooltip-message' => 'When the current user is blocked from editing a page (a data item), this message is displayed in a tooltip bubble when hovering a tooltip anchor next to an input element, an edit button or any other button (add, save, remove) that might trigger an action altering the data item or creating a new item.',
-
 	'wikibase-tooltip-error-details' => 'Link within an error tooltip that will unfold additional information regarding the error (i.e. the mor specific error message returned from the underlying API).',
 	'wikibase-error-save-generic' => 'Generic error message for an error happening during a save operation.',
 	'wikibase-error-remove-generic' => 'Generic error message for an error happening during a remove operation',
@@ -233,6 +231,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
 	'wikibase-api-no-token' => 'This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are som exceptional error condition. The message can be shown after misconfiguration of the system.',
 	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
+	'wikibase-api-client-error' => 'To verify sitelinks the repository must query the external client. Sometimes this fails, but without any possibility for the user to fix the problem.',
 	'wikibase-api-no-external-data' => 'This is an error message where the external client did not reply, either because of the repo or the client terminated the connection, or because of some other connection error.',
 	'wikibase-api-no-external-page' => 'This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.',
 	'wikibase-api-add-sitelink-failed' => 'This is an error message where the system of some unspecific reason could not add the site link to the temporary store.',
@@ -271,7 +270,11 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-label-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the label.',
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
+	'wikibase-api-session-failure' => 'Sometimes the session fails, usually because of timeouts or because the server of other reasons ends the user session. This leads to an invalid token and the user should then log in again.',
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
+	'wikibase-noitem-nopermission' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user do not have sufficient rights to create a new item in this case.',
+	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items.',
 );
 
 /** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
@@ -370,6 +373,8 @@ $messages['de'] = array(
 	'wikibase-aliases-label' => 'Auch bekannt als:',
 	'wikibase-aliases-input-help-message' => 'Sofern dieser Datensatz unter mehr als einem bestimmten Namen bekannt ist, kannst du Aliasse und Synonyme eingeben, damit er auch unter seinen alternativen Namen gefunden werden kann.',
 	'wikibase-aliases-empty' => 'Es wurden keine Aliasse definiert.',
+	'wikibase-restrictionedit-tooltip-message' => 'Diese Seite wurde geschützt, so dass Bearbeitungen nicht möglich sind.',
+	'wikibase-blockeduser-tooltip-message' => 'Du wurdest gesperrt und kannst daher keine Bearbeitungen machen.',
 	'wikibase-tooltip-error-details' => 'Einzelheiten',
 	'wikibase-error-save-generic' => 'Beim Versuch zu speichern, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.',
 	'wikibase-error-remove-generic' => 'Beim Versuch zu entfernen, ist ein Fehler aufgetreten. Diese Änderungen konnten daher nicht fertig durchgeführt werden.',
@@ -445,6 +450,7 @@ $messages['de-formal'] = array(
 	'wikibase-sitelinks-add' => 'fügen Sie eine Verknüpfung zu einer Seitenverknüpfung hinzu',
 	'wikibase-sitelinks-input-help-message' => 'Legen Sie eine Verknüpfung zu einer diesem Datenelement entsprechenden Seite fest.',
 	'wikibase-aliases-input-help-message' => 'Sofern dieser Datensatz unter mehr als einem bestimmten Namen bekannt ist, können Sie Aliasse und Synonyme eingeben, damit er auch unter seinen alternativen Namen gefunden werden kann.',
+	'wikibase-blockeduser-tooltip-message' => 'Sie wurden gesperrt und können daher keine Bearbeitungen machen.',
 	'wikibase-error-autocomplete-connection' => 'Die Wikipedia-API konnte nicht abgefragt werden. Bitte versuchen Sie es später noch einmal.',
 	'wikibase-error-ui-client-error' => 'Die Verbindung zur externen Webseite ist gescheitert. Bitte versuchen Sie es später noch einmal.',
 	'wikibase-error-ui-cant-edit' => 'Sie sind nicht berechtigt, diese Aktion auszuführen.',
@@ -956,6 +962,12 @@ $messages['he'] = array(
 	'wikibase-remove-inprogress' => 'מתבצעת הסרה...',
 	'wikibase-label-edit-placeholder' => 'הזינו תווית',
 	'wikibase-description-edit-placeholder' => 'הזינו תיאור',
+	'wikibase-sitelink-site-edit-placeholder' => 'אתר',
+	'wikibase-sitelink-page-edit-placeholder' => 'ערך',
+	'wikibase-alias-edit-placeholder' => 'הזנת כינוי',
+	'wikibase-label-input-help-message' => 'נא להזין את הכותרת של ערכת הנתונים הזאת ב{{GRAMMAR:תחילית|$1}}.',
+	'wikibase-description-input-help-message' => 'נא להזין תיאור קצר ב{{GRAMMAR:תחילית|$1}}.',
+	'wikibase-sitelinks' => 'רשימת הדפים המקושרים לפריט הזה.',
 	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב השם נתונים, ולא ניתן להעביר דפים אליו.',
 );
 
@@ -1715,8 +1727,15 @@ $messages['nb'] = array(
 	'wikibase-api-no-external-data' => 'Det kom ingen data fra det eksterne klientnettstedet, muligvis på grunn av problemer med nettverket.',
 	'wikibase-api-no-external-page' => 'Det eksterne klientnettstedet sendte ikke tilbake sideinformasjon.',
 	'wikibase-api-add-sitelink-failed' => 'Nettstadlenken kunne ikke lagres.',
+	'wikibase-api-remove-sitelink-failed' => 'Nettstedlenken kunne ikke fjernes.',
 	'wikibase-api-cant-edit' => 'Redigering er ikke tillatt: $1',
+	'wikibase-api-json-invalid' => 'Den oppgitte JSON-strukturen kunne ikke bli tolket og/eller gjenskapt som en gyldig struktur.',
+	'wikibase-api-not-recognized-string' => 'En tekst var forventet, men ble ikke funnet.',
+	'wikibase-api-not-recognized-array' => 'En tabell var forventet, men ble ikke funnet.',
+	'wikibase-api-not-recognized-language' => 'Identifikatoren for språk kunne ikke gjenkjennes.',
+	'wikibase-api-not-recognized-siteid' => 'Identifikatoren for nettsted kunne ikke gjenkjennes.',
 	'wikibase-api-no-permissions' => 'Den innloggede brukeren har ikke tilstrekkelige rettigheter.',
+	'wikibase-api-data-or-id-xor-wikititle' => 'Enten oppgi en «id» eller et par av «site» og «title» for en tilhørende side, eller «data» for et nytt datasett.',
 	'wikibase-api-id-xor-wikititle' => 'Oppgi enten en «id» («identifikator») for datasettet eller et par av «site» («nettsted») og «title» («tittel») som identifiserer en tilhørende side.',
 	'wikibase-api-no-such-item' => 'Kan ikke finne et eksisterende datasett.',
 	'wikibase-api-no-such-item-id' => 'Kan ikke finne et eksisterende datasett for denne «id» («identifikator»).',
@@ -1727,6 +1746,7 @@ $messages['nb'] = array(
 	'wikibase-api-no-such-item-link' => 'Kunne ikke finne et eksisterende datasett for denne lenken.',
 	'wikibase-api-create-failed' => 'Forsøket på å skape et nytt datasett feilet: $1',
 	'wikibase-api-modify-failed' => 'Forsøket på å endre et datasett feilet.',
+	'wikibase-api-delete-failed' => 'Forsøket på å slette datasettet feilet.',
 	'wikibase-api-save-failed' => 'Forsøket på å lagre datasettet feilet: $1',
 	'wikibase-api-invalid-contentmodel' => 'Innholdsmodellen for siden er ugyldig.',
 	'wikibase-api-alias-incomplete' => 'Kan ikke finne en definisjon for kallenavnet for datasettet.',
@@ -1764,8 +1784,8 @@ $messages['nl'] = array(
 	'wikibase-remove-inprogress' => 'Bezig met verwijderen...',
 	'wikibase-label-edit-placeholder' => 'geef een label op',
 	'wikibase-description-edit-placeholder' => 'geef een beschrijving op',
-	'wikibase-sitelink-site-edit-placeholder' => 'site opgeven',
-	'wikibase-sitelink-page-edit-placeholder' => 'pagina opgeven',
+	'wikibase-sitelink-site-edit-placeholder' => 'site',
+	'wikibase-sitelink-page-edit-placeholder' => 'artikel',
 	'wikibase-alias-edit-placeholder' => 'geef een alias op',
 	'wikibase-label-input-help-message' => 'Geef de naam van deze gegevensset in in $1.',
 	'wikibase-description-input-help-message' => 'Geef een korte beschrijving in in $1.',
@@ -1802,7 +1822,7 @@ $messages['nl'] = array(
 	'wikibase-error-ui-session-failure' => 'Uw sessie is verlopen. Log alstublieft opnieuw in.',
 	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
 	'wikibase-error-relational-save-failed' => 'Het was niet mogelijk de identiteit van het item op te slaan in de database.',
-	'wikibase-error-sitelink-already-used' => 'De siteverwijzing [[$1:$2]] wordt al gebruikt door item [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'De siteverwijzing [[$1:$2]] wordt al gebruikt door item met nummer [[$3]].',
 	'special-itembylabel' => 'Item gesorteerd op label',
 	'special-createitem' => 'Nieuw item aanmaken',
 	'wikibase-api-aliases-invalid-list' => 'Gebruik een van de parameters "set", "add" of "remove".',
@@ -1906,8 +1926,15 @@ $messages['nn'] = array(
 	'wikibase-api-no-external-data' => 'Det kom ingen data frå den eksterne klientnettstaden, muligvis på grunn av problem med nettverket.',
 	'wikibase-api-no-external-page' => 'Dnt eksterne klientnettstaden sendte ikkje tilbake sideinformasjon.',
 	'wikibase-api-add-sitelink-failed' => 'Nettstadlekken kunne ikkje lagrast.',
+	'wikibase-api-remove-sitelink-failed' => 'Nettstadlekken kunne ikkje fjernast.',
 	'wikibase-api-cant-edit' => 'Endring er ikkje tillatt: $1',
+	'wikibase-api-json-invalid' => 'Den oppgjevne JSON-strukturen kunne ikkje bli tolka og/eller gjenskapt som ein gyldig struktur.',
+	'wikibase-api-not-recognized-string' => 'Ein text var forventa, men blei ikkje funnen.',
+	'wikibase-api-not-recognized-array' => 'Ein tabell var forventa, men blei ikkje funnen.',
+	'wikibase-api-not-recognized-language' => 'Språkidentifikatoren som blei funne kunne ikkje gjenkjennast.',
+	'wikibase-api-not-recognized-siteid' => 'Nettstadidentifikatoren som blei funne kunne ikkje gjenkjennast.',
 	'wikibase-api-no-permissions' => 'Den innlogga brukaren har ikkje dei kravde rettane.',
+	'wikibase-api-data-or-id-xor-wikititle' => 'Oppgje anten ein «id» («identifikator») for datasettet eller eit par av «site» («nettstad») og «title» («tittel») som identifiserer ei tilhøyrande side, eller «data» for eit nytt datasett.',
 	'wikibase-api-id-xor-wikititle' => 'Oppgje anten ein «id» («identifikator») for datasettet eller eit par av «site» («nettstad») og «title» («tittel») som identifiserer ei tilhøyrande side.',
 	'wikibase-api-no-such-item' => 'Kan ikkje finne eit eksisterande datasett.',
 	'wikibase-api-no-such-item-id' => 'Kan ikkje finne eit eksisterande datasett for denne «id» («identifikator»).',
@@ -1918,6 +1945,7 @@ $messages['nn'] = array(
 	'wikibase-api-no-such-item-link' => 'Kunne ikkje finne eit eksisterande datasett for denne lekken.',
 	'wikibase-api-create-failed' => 'Forsøket på å skape eit nytt datasett feila: $1',
 	'wikibase-api-modify-failed' => 'Forsøket på å endre eit datasett feila.',
+	'wikibase-api-delete-failed' => 'Forsøket på å fjerne eit datasett feila.',
 	'wikibase-api-save-failed' => 'Forsøket på å lagre datasettet feila: $1',
 	'wikibase-api-invalid-contentmodel' => 'Innhaldsmodellen for sida er ugyldig.',
 	'wikibase-api-alias-incomplete' => 'Kan ikkje finne ein definisjon for kallenamnet for datasettet.',
@@ -2139,6 +2167,14 @@ $messages['te'] = array(
 	'wikibase-cancel' => 'రద్దుచేయి',
 	'wikibase-add' => 'చేర్చు',
 	'wikibase-remove' => 'తొలగించు',
+);
+
+/** Tagalog (Tagalog)
+ * @author AnakngAraw
+ */
+$messages['tl'] = array(
+	'wikibase-edit' => 'baguhin',
+	'wikibase-save' => 'sagipin',
 );
 
 /** Simplified Chinese (‪中文（简体）‬)

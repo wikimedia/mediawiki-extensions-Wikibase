@@ -64,6 +64,16 @@ $messages['gl'] = array(
 	'sttl-languages-more-link' => 'máis linguas',
 );
 
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'sticktothatlanguage-desc' => 'יכולת לבחור שפה באופן קבוע',
+	'sttl-setting-languages' => 'שפות נוספות<br />
+(בתור גיבוי למקרה שהנתונים אינם זמינים בשפה העיקרית)',
+	'sttl-languages-more-link' => 'עוד שפות',
+);
+
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
@@ -115,6 +125,20 @@ $messages['mk'] = array(
 	'sticktothatlanguage-desc' => 'Овозможува постојано избирање на јазик',
 	'sttl-setting-languages' => 'Уште јазици<br />(како резервни кога податоците не се достапни на главниот јазик)',
 	'sttl-languages-more-link' => 'уште јазици',
+);
+
+/** Dutch (Nederlands)
+ * @author SPQRobin
+ */
+$messages['nl'] = array(
+	'sttl-languages-more-link' => 'meer talen',
+);
+
+/** Pashto (پښتو)
+ * @author Ahmed-Najib-Biabani-Ibrahimkhel
+ */
+$messages['ps'] = array(
+	'sttl-languages-more-link' => 'نورې ژبې',
 );
 
 /** Tagalog (Tagalog)
