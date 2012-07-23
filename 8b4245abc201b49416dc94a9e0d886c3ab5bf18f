@@ -2,6 +2,176 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQ3///bI\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "Uh... why is this commented out?",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///bE\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "how is this related to auto-summaries?",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///bA\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "\"must be disambiguated\" should be \"must be qualified by a site id\", right?\n\nAlso, how is this related to auto.-summaries?",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///a8\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "why is this in this change set?",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///a0\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "Where does this come from? The translation is wrong.",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///aw\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "Where does this come from? The translation is wrong.",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///ao\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "Please explain some more - when and where is this called, where does this string go, how does it interact with autoSummary?",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///ak\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "Please explain some more - when and where is this called, where does this string go, how does it interact with autoComment?",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///as\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "Why is this logic anchored in the API at all? \n\nI think it would be much better to place it in the ItemContent or EntityContent class, otherwise, it will be painful to implment this for non-JS editing.",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///ag\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "This will return the item\u0027s description in the content language. Is that useful?",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3///kk\u003d",
         "filename": "repo/includes/api/ApiSetLanguageAttribute.php",
         "patchSetId": 6
@@ -13,6 +183,23 @@
       "writtenOn": "2012-07-21T22:23:19Z",
       "side": 1,
       "message": "og?",
+      "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3///aU\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiOverallTest.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-23T10:47:38Z",
+      "side": 1,
+      "message": "Probably a good idea to rename this, but unrelated to the matter at hand.",
       "revId": "8b4245abc201b49416dc94a9e0d886c3ab5bf18f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
