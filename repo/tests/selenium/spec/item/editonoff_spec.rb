@@ -182,6 +182,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addSitelinkLink?.should be_false
         ajax_wait
         page.wait_for_api_callback
+        page.wait_for_editLabelLink
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true

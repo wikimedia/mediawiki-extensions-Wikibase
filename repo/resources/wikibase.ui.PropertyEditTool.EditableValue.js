@@ -470,6 +470,13 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			waitMsg.remove();
 			self.enable(); // re-enabling actions and input box when saving has failed
 			self._toolbar._elem.show();
+			if ( apiAction === self.API_ACTION.REMOVE ) {
+				/**
+				 * re-enable all actions when removing fails since it is just using edit mode for
+				 * disabling all actions while the remove action is being processed
+				 */
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
+			}
 			self._apiCallErr( textStatus, response, apiAction );
 		} );
 
@@ -794,7 +801,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		 * during page loading
 		 */
 		if ( !this.isPending() ) {
-			if ( disableSave && disableCancel ) {
+			if ( disableSave && disableCancel && this.preserveEmptyForm ) {
 				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
 			} else if ( this.valueCompare( this.getInitialValue(), null ) ) {
 				$( wikibase ).triggerHandler( 'startItemPageEditMode', this );

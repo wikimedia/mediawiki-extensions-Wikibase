@@ -46,10 +46,16 @@ wb-clear {
 }
 
 
+.wb-ui-descriptionedittool, .wb-ui-labeledittool {
+	padding: 2pt 5pt !important;
+}
+
+
 /********** ALIASES **********/
 
 .wb-aliases, .wb-aliases-empty {
 	font-size: 84%;
+	padding: 2pt 5pt 1pt 5pt;
 }
 
 .wb-aliases-empty {
@@ -103,7 +109,7 @@ table.wb-sitelinks, .wb-sitelinks-empty {
 table.wb-sitelinks th, table.wb-sitelinks td {
 	border-bottom: 1px solid #ccc;
 	margin: 0;
-	padding: 0 0.4em;
+	padding: 0 5pt;
 	height: 2.25em; /* steady height when input boxes are inserted compared with padding usage */
 
 }

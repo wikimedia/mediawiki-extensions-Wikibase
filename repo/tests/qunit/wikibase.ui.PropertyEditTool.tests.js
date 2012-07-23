@@ -9,49 +9,73 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
 
+( function( $, wb ) {
+	'use strict';
 
-( function() {
 	module( 'wikibase.ui.PropertyEditTool', window.QUnit.newWbEnvironment( {
 		setup: function() {
-			this.node = $( '<div/>' );
-			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( this.node );
+			this.nodes = [
+				$( '<div/>' )
+			];
+			this.subjects = [
+				new wb.ui.PropertyEditTool( this.nodes[0] )
+			];
+			for ( var i = 1; i <= 2; i += 1 ) {
+				this.nodes.push( $( '<div/>' ) );
+				this.subjects.push( new wb.ui.PropertyEditTool( this.nodes[i] ) );
+				this.subjects[i].allowsMultipleValues = false;
+				this.subjects[i]._init( this.nodes[i] );
+				this.subjects[i]._initSingleValue(
+					$( '<div/>', {
+						text: 'someValue'
+					} )
+				);
+			}
 
-			ok(
-				this.propertyEditTool._toolbar instanceof window.wikibase.ui.Toolbar,
-				'instantiated toolbar'
-			);
+			var self = this;
+			$.each ( this.subjects, function( i, subject ) {
 
-			equal(
-				this.propertyEditTool._getToolbarParent().html(),
-				this.node.html(),
-				'placed in DOM'
-			);
+				ok(
+					subject._toolbar instanceof wb.ui.Toolbar,
+					'instantiated toolbar of property edit tool #' + i
+				);
 
-			ok(
-				this.propertyEditTool._editableValues instanceof Array,
-				'editable values initiated correctly'
-			);
+				equal(
+					subject._getToolbarParent().html(),
+					self.nodes[i].html(),
+					'placed property edit tool #' + i + ' in DOM'
+				);
+
+				ok(
+					subject._editableValues instanceof Array,
+					'editable values of property edit tool #' + i + ' initiated correctly'
+				);
+
+			} );
 
 		},
 		teardown: function() {
-			this.propertyEditTool.destroy();
 
-			equal(
-				this.propertyEditTool._editableValues,
-				null,
-				'destroyed editable values'
-			);
+			$.each( this.subjects, function( i, subject ) {
+				subject.destroy();
 
-			equal(
-				this.propertyEditTool._subject.children().length,
-				0,
-				'cleaned DOM'
-			);
+				equal(
+					subject._editableValues,
+					null,
+					'destroyed editable values of property edit tool #' + i
+				);
 
-			this.node = null;
-			this.propertyEditTool = null;
+				equal(
+					subject._subject.children().length,
+					0,
+					'cleaned DOM from property edit tool #' + i
+				);
+
+			} );
+
+			this.nodes = null;
+			this.subjects = null;
 		}
 
 	} ) );
@@ -60,31 +84,31 @@
 	test( 'initial check', function() {
 
 		equal(
-			this.propertyEditTool.isFull(),
+			this.subjects[0].isFull(),
 			true,
 			'is full'
 		);
 
 		equal(
-			this.propertyEditTool.isInEditMode(),
+			this.subjects[0].isInEditMode(),
 			false,
 			'is not in edit mode'
 		);
 
 		equal(
-			this.propertyEditTool.isInAddMode(),
+			this.subjects[0].isInAddMode(),
 			false,
 			'is not in add mode'
 		);
 
 		equal(
-			this.propertyEditTool._getValueElems().length,
+			this.subjects[0]._getValueElems().length,
 			0,
 			'has no elements with values'
 		);
 
 		ok(
-			this.propertyEditTool.getToolbar() instanceof wikibase.ui.Toolbar,
+			this.subjects[0].getToolbar() instanceof wb.ui.Toolbar,
 			'instantiated toolbar'
 		);
 
@@ -94,82 +118,82 @@
 	test( 'editable values', function() {
 
 		ok(
-			this.propertyEditTool._initSingleValue( $( '<div/>' ) ) instanceof window.wikibase.ui.PropertyEditTool.EditableValue,
+			this.subjects[0]._initSingleValue( $( '<div/>' ) ) instanceof wb.ui.PropertyEditTool.EditableValue,
 			'initiated editable value component'
 		);
 
 		equal(
-			this.propertyEditTool._editableValues.length,
+			this.subjects[0]._editableValues.length,
 			1,
 			'stored editable value'
 		);
 
 		ok(
-			this.propertyEditTool._editableValues[0]._toolbar instanceof window.wikibase.ui.Toolbar,
+			this.subjects[0]._editableValues[0]._toolbar instanceof wb.ui.Toolbar,
 			'instantiated toolbar for editable value'
 		);
 
 		ok(
-			this.propertyEditTool._editableValues[0]._toolbar.editGroup instanceof window.wikibase.ui.Toolbar.EditGroup,
+			this.subjects[0]._editableValues[0]._toolbar.editGroup instanceof wb.ui.Toolbar.EditGroup,
 			'instantiated edit group for editable value toolbar'
 		);
 
 		equal(
-			this.propertyEditTool.getIndexOf( this.propertyEditTool._editableValues[0] ),
+			this.subjects[0].getIndexOf( this.subjects[0]._editableValues[0] ),
 			0,
 			'checked index of editable value'
 		);
 
 		ok(
-			this.propertyEditTool.getValues().length == this.propertyEditTool.getValues( true ).length,
+			this.subjects[0].getValues().length === this.subjects[0].getValues( true ).length,
 			'checked getValues()'
 		);
 
 		ok(
-			this.propertyEditTool.enterNewValue() instanceof window.wikibase.ui.PropertyEditTool.EditableValue,
+			this.subjects[0].enterNewValue( '' ) instanceof wb.ui.PropertyEditTool.EditableValue,
 			'instantiated editable value for entering a new value'
 		);
 
 		equal(
-			this.propertyEditTool.getValues().length,
+			this.subjects[0].getValues().length,
 			1,
 			'one value that is not pending'
 		);
 
 		equal(
-			this.propertyEditTool.getValues( true ).length,
+			this.subjects[0].getValues( true ).length,
 			2,
 			'two values including pending values'
 		);
 
 		equal(
-			this.propertyEditTool.isInAddMode(),
+			this.subjects[0].isInAddMode(),
 			true,
 			'is in add mode'
 		);
 
 		equal(
-			this.propertyEditTool.isInEditMode(),
+			this.subjects[0].isInEditMode(),
 			true,
 			'is in edit mode'
 		);
 
 		equal(
-			this.propertyEditTool.isFull(),
+			this.subjects[0].isFull(),
 			true,
 			'is full'
 		);
 
-		this.propertyEditTool.allowsMultipleValues = false;
+		this.subjects[0].allowsMultipleValues = false;
 
 		equal(
-			this.propertyEditTool.isFull(),
+			this.subjects[0].isFull(),
 			false,
 			'is not full'
 		);
 
 		equal(
-			this.propertyEditTool._subject.children().length,
+			this.subjects[0]._subject.children().length,
 			2,
 			'checked DOM'
 		);
@@ -178,75 +202,82 @@
 
 
 	test( 'multiple PropertyEditTools', function() {
-		this.propertyEditTool._initSingleValue(
-			$( '<div/>', {
-				text: 'someValue'
-			} )
-		);
-
-		var node = $( '<div/>' );
-		var pet = new window.wikibase.ui.PropertyEditTool( node );
-		pet._initSingleValue(
-			$( '<div/>', {
-				text: 'someOtherValue'
-			} )
-		);
 
 		equal(
-			this.propertyEditTool.isEnabled(),
+			this.subjects[1].isEnabled(),
 			true,
 			'1st edit tool is enabled'
 		);
 
 		equal(
-			this.propertyEditTool.isEnabled(),
+			this.subjects[1].isEnabled(),
 			true,
 			'2nd edit tool is enabled'
 		);
 
 		equal(
-			this.propertyEditTool._editableValues[0].startEditing(),
+			this.subjects[1]._editableValues[0].startEditing(),
 			true,
 			'started edit mode for 1st edit tool'
 		);
 
 		equal(
-			this.propertyEditTool.isEnabled(),
+			this.subjects[1]._subject.hasClass( this.subjects[1].UI_CLASS + '-ineditmode' ),
+			true,
+			'highlighted 1st property edit tool'
+		);
+
+		equal(
+			this.subjects[2]._subject.hasClass( this.subjects[2].UI_CLASS + '-ineditmode' ),
+			false,
+			'2nd property is not highlighted'
+		);
+
+		equal(
+			this.subjects[1].isEnabled(),
 			true,
 			'1st edit tool is still enabled'
 		);
 
 		equal(
-			pet.isDisabled(),
+			this.subjects[2].isDisabled(),
 			true,
 			'2nd edit tool is disabled'
 		);
 
 		equal(
-			pet.isEnabled(),
+			this.subjects[2].isEnabled(),
 			false,
 			'2nd edit tool is not enabled'
 		);
 
-		this.propertyEditTool._editableValues[0].stopEditing();
+		this.subjects[1]._editableValues[0].stopEditing();
 
 		equal(
-			pet.isEnabled(),
+			this.subjects[2].isEnabled(),
 			true,
 			'2nd edit tool is enabled'
 		);
 
 		equal(
-			this.propertyEditTool.isEnabled(),
+			this.subjects[1]._subject.hasClass( this.subjects[1].UI_CLASS + '-ineditmode' ),
+			false,
+			'removed highlight on 1st property edit tool'
+		);
+
+		equal(
+			this.subjects[2]._subject.hasClass( this.subjects[2].UI_CLASS + '-ineditmode' ),
+			false,
+			'2nd property is not highlighted'
+		);
+
+		equal(
+			this.subjects[1].isEnabled(),
 			true,
 			'1st edit tool is enabled'
 		);
 
-		pet.destroy();
-		pet = null;
-		node = null;
-
 	} );
 
 
-}() );
+}( jQuery, wikibase ) );

@@ -47,6 +47,26 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 			this._toolbar.hide(); // hide add button when there are aliases
 		}
 
+		/**
+		 * very special handling of special AliasEditTool on special case when no aliases are
+		 * defined and edit mode is triggered
+		 */
+		$( wikibase ).on(
+			'startItemPageEditMode',
+			$.proxy(
+				function( event, origin ) {
+					if ( !this.allowsMultipleValues ) {
+						if (
+							this instanceof wikibase.ui.AliasesEditTool &&
+							origin instanceof wikibase.ui.PropertyEditTool.EditableAliases
+						) {
+							this._subject.addClass( this.UI_CLASS + '-ineditmode' );
+						}
+					}
+				}, this
+			)
+		);
+
 	},
 
 	/**

@@ -84,6 +84,10 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	margin-left: 0;
 }
 
+.wb-ui-propertyedittool-ineditmode {
+	background-color:#D6F3FF;
+}
+
 /********** TOOLTIP **********/
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
@@ -160,6 +164,10 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 
 /********** ALIASES **********/
 
+.wb-aliases {
+	float: left; /* necessary for highlighting in edit mode */
+}
+
 .wb-aliases .wb-ui-propertyedittool-editablevalue {
 	display: inline;
 }
@@ -187,6 +195,10 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 
 .wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode {
 	white-space: normal; /* required by FF for not(!) wrapping toolbar when there is only one line of aliases */
+}
+
+.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode ul {
+	background-color: transparent;
 }
 
 /********** /ALIASES **********/
