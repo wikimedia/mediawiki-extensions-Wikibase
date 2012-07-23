@@ -133,7 +133,7 @@ class ApiGetItems extends Api {
 
 		$success = true;
 
-		if ( $success && isset( $params['gettoken'] ) ) {
+		if ( $success && $params['gettoken'] ) {
 			$user = $this->getUser();
 			$this->addTokenToResult( $user->getEditToken() );
 		}

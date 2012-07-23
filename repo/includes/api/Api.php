@@ -28,7 +28,9 @@ abstract class Api extends \ApiBase {
 	 * @param $params array parameters requested in subclass
 	 */
 	protected function setUsekeys( array $params ) {
-		$usekeys = Settings::get( 'apiUseKeys' ) || ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
+		$usekeys = Settings::get( 'apiUseKeys' )
+			? !( isset( $params['nousekeys'] ) ? $params['nousekeys'] : false)
+			: ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
 
 		if ( $usekeys ) {
 			$format = $this->getMain()->getRequest()->getVal( 'format' );
@@ -62,12 +64,12 @@ abstract class Api extends \ApiBase {
 			)
 		);
 		if ( Settings::get( 'apiUseKeys' ) ) {
-			$descriptions['nousekeys'] = array( 'Turn off use the keys. The use of keys are only used in formats that supports them,',
+			$descriptions['nousekeys'] = array( 'Turn off use of the keys. The use of keys are only used in formats that supports them,',
 				'otherwise fall back to the ordinary style which is to use keys.'
 			);
 		}
 		else {
-			$descriptions['usekeys'] = array( 'Turn on use the keys. The use of keys are only used in formats that supports them,',
+			$descriptions['usekeys'] = array( 'Turn on use of the keys. The use of keys are only used in formats that supports them,',
 				'otherwise fall back to the ordinary style which is to use keys.'
 			);
 		}
@@ -89,10 +91,14 @@ abstract class Api extends \ApiBase {
 			),
 		);
 		if ( Settings::get( 'apiUseKeys' ) ) {
-			$allowedParams['nousekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
+			$allowedParams['nousekeys'] = array(
+				ApiBase::PARAM_TYPE => 'boolean',
+			);
 		}
 		else {
-			$allowedParams['usekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
+			$allowedParams['usekeys'] = array(
+				ApiBase::PARAM_TYPE => 'boolean',
+			);
 		}
 		return $allowedParams;
 	}
