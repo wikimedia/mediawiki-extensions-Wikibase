@@ -87,6 +87,7 @@ final class WikibaseHooks {
 			'specials/SpecialItemByTitle',
 
 			'updates/ItemDeletionUpdate',
+			'updates/ItemStructuredSave',
 		);
 
 		foreach ( $testFiles as $file ) {
