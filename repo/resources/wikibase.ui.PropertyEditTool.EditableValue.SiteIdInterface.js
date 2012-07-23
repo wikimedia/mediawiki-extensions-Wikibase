@@ -121,6 +121,36 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 			this._onInputRegistered();
 		}, this ) );
 
+		/**
+		 * the following lines remove the highlight from the auto-complete's first menu item (which
+		 * is the fallback item that automatically fills the input box when the keyboard's tab
+		 * button is hit as long as the mouse cursor does not hover another item) when the menu is
+		 * hovered with the mouse cursor
+		 */
+		inputElement.data( 'autocomplete' ).menu.element.on(
+			'mouseover',
+			'li',
+			$.proxy( function( event ) {
+				// do not remove highlight when the first item is hovered with the mouse cursor
+				if (
+					event.srcElement !==
+						this._inputElem.data( 'autocomplete' ).menu.element.children().first()
+						.children('a')[0]
+				) {
+					this._inputElem.data( 'autocomplete' ).menu.element.children().first()
+					.children( 'a' ).removeClass( 'ui-state-hover' );
+				}
+			}, this )
+		);
+		// re-highlight first (fallback) item when moving the mouse off the menu
+		inputElement.data( 'autocomplete' ).menu.element.on(
+			'mouseout',
+			$.proxy( function( event ) {
+				this._inputElem.data( 'autocomplete' ).menu.element.children().first()
+				.children( 'a' ).addClass( 'ui-state-hover' );
+			}, this )
+		);
+
 		return inputElement;
 	},
 
