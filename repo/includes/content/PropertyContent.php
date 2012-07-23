@@ -108,4 +108,20 @@ class PropertyContent extends EntityContent {
 		return $this->property;
 	}
 
+	/**
+	 * @see Content::getDeletionUpdates
+	 *
+	 * @param \Title $title
+	 * @param null|\ParserOutput $parserOutput
+	 *
+	 * @since 0.1
+	 *
+	 * @return array of \DataUpdate
+	 */
+	public function getDeletionUpdates( \Title $title, \ParserOutput $parserOutput = null ) {
+		return array_merge(
+			parent::getDeletionUpdates( $title, $parserOutput ),
+			array( /* new PropertyDeletionUpdate( $this ) */ )
+		);
+	}
 }

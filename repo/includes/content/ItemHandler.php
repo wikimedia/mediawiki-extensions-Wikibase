@@ -87,22 +87,6 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * @see ContentHandler::getDeletionUpdates
-	 *
-	 * @param \Content           $content
-	 * @param \Title             $title
-	 * @param null|\ParserOutput $parserOutput
-	 *
-	 * @return array of \DataUpdate
-	 */
-	public function getDeletionUpdates( Content $content, Title $title, ParserOutput $parserOutput = null ) {
-		return array_merge(
-			parent::getDeletionUpdates( $content, $title, $parserOutput ),
-			array( new ItemDeletionUpdate( $content ) )
-		);
-	}
-
-	/**
 	 * @see   ContentHandler::getSecondaryDataUpdates
 	 *
 	 * @since 0.1
