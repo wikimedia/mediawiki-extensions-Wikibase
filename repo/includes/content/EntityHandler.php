@@ -24,7 +24,7 @@ abstract class EntityHandler extends \ContentHandler {
 			CONTENT_FORMAT_SERIALIZED
 		);
 
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM, $formats );
+		parent::__construct( $modelId, $formats );
 	}
 
 	/**
@@ -116,6 +116,8 @@ abstract class EntityHandler extends \ContentHandler {
 	/**
 	 * Returns the Title object for the item with provided id.
 	 *
+	 * TODO: refactor to work for all entities
+	 *
 	 * @since 0.1
 	 *
 	 * @param integer $entityId
@@ -136,6 +138,8 @@ abstract class EntityHandler extends \ContentHandler {
 	/**
 	 * Returns the WikiPage object for the item with provided id.
 	 *
+	 * TODO: refactor to work for all entities
+	 *
 	 * @since 0.1
 	 *
 	 * @param integer $entityId
@@ -148,6 +152,8 @@ abstract class EntityHandler extends \ContentHandler {
 
 	/**
 	 * Get the item with the provided id, or null if there is no such item.
+	 *
+	 * TODO: refactor to work for all entities
 	 *
 	 * @since 0.1
 	 *
@@ -165,6 +171,8 @@ abstract class EntityHandler extends \ContentHandler {
 	 * Get the items corresponding to the provided language and label pair.
 	 * A description can also be provided, in which case only the item with
 	 * that description will be returned (as only element in the array).
+	 *
+	 * TODO: refactor to work for all entities
 	 *
 	 * @since 0.1
 	 *
@@ -193,6 +201,8 @@ abstract class EntityHandler extends \ContentHandler {
 	 * Get the ids of the items corresponding to the provided language and label pair.
 	 * A description can also be provided, in which case only the id of the item with
 	 * that description will be returned (as only element in the array).
+	 *
+	 * TODO: refactor to work for all entities
 	 *
 	 * @since 0.1
 	 *
@@ -240,4 +250,3 @@ abstract class EntityHandler extends \ContentHandler {
 	}
 
 }
-
