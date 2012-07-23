@@ -4,7 +4,7 @@ namespace Diff\Test;
 use Diff\ListDiff as ListDiff;
 
 /**
- * Tests for the ListDiff class.
+ * Tests for the Diff\ListDiff class.
  *
  * @file
  * @since 0.1
@@ -93,7 +93,7 @@ class ListDiffTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Diff\ListDiff', $diff );
 		$this->assertInstanceOf( '\Diff\IDiffOp', $diff );
 		$this->assertInstanceOf( '\Diff\IDiff', $diff );
-		$this->assertInstanceOf( '\ArrayIterator', $diff );
+		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		// array_values because we only care about the values, not promises are made about the keys.
 		$resultAdditions = array_values( $diff->getAddedValues() );

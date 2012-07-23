@@ -8,7 +8,7 @@ use Diff\DiffOpAdd as DiffOpAdd;
 use Diff\DiffOpChange as DiffOpChange;
 
 /**
- * Tests for the MapDiff class.
+ * Tests for the Diff\MapDiff class.
  *
  * @file
  * @since 0.1
@@ -158,7 +158,7 @@ class MapDiffTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Diff\MapDiff', $diff );
 		$this->assertInstanceOf( '\Diff\IDiffOp', $diff );
 		$this->assertInstanceOf( '\Diff\IDiff', $diff );
-		$this->assertInstanceOf( '\ArrayIterator', $diff );
+		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		// Sort to get rid of differences in order, since no promises about order are made.
 		asort( $expected );

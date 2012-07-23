@@ -1,6 +1,7 @@
 <?php
 
 namespace Diff;
+use \Diff\Exception as Exception;
 
 /**
  * Base class for diffs. Diffs are collections of IDiffOp objects,
@@ -8,7 +9,6 @@ namespace Diff;
  *
  * TODO: since this is an ArrayIterator, people can just add stuff using $diff[] = $diffOp.
  * The $typePointers is not currently getting updates in this case.
- * FIXME: should use ArrayObject
  *
  * @since 0.1
  *
@@ -18,7 +18,7 @@ namespace Diff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Diff extends \ArrayIterator implements IDiff {
+class Diff extends GenericArrayObject implements IDiff {
 
 	/**
 	 * Creates and returns an empty Diff.
@@ -60,24 +60,6 @@ class Diff extends \ArrayIterator implements IDiff {
 	);
 
 	/**
-	 * The collection of opertaions that make up the diff.
-	 *
-	 * @since 0.1
-	 *
-	 * @var array of IDiffOp
-	 */
-	protected $operations = array();
-
-	/**
-	 * The internal pointer. @see ArrayIterator
-	 *
-	 * @since 0.1
-	 *
-	 * @var string|integer|null
-	 */
-	protected $key;
-
-	/**
 	 * @see IDiff::__construct
 	 *
 	 * @since 0.1
@@ -88,8 +70,17 @@ class Diff extends \ArrayIterator implements IDiff {
 	public function __construct( array $operations, $parentKey = null ) {
 		parent::__construct( $operations );
 		$this->parentKey = $parentKey;
-		$this->addOperations( $operations );
-		$this->rewind();
+	}
+
+	/**
+	 * @see GenericArrayObject::getObjectType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getObjectType() {
+		return '\Diff\IDiffOp';
 	}
 
 	/**
@@ -100,7 +91,7 @@ class Diff extends \ArrayIterator implements IDiff {
 	 * @return array of IDiffOp
 	 */
 	public function getOperations() {
-		return $this->operations;
+		return $this->getArrayCopy();
 	}
 
 	/**
@@ -112,7 +103,7 @@ class Diff extends \ArrayIterator implements IDiff {
 	 */
 	public function getTypeOperations( $type ) {
 		return array_intersect_key(
-			$this->operations,
+			$this->getArrayCopy(),
 			array_flip( $this->typePointers[$type] )
 		);
 	}
@@ -125,25 +116,34 @@ class Diff extends \ArrayIterator implements IDiff {
 	 * @param $operations array of IDiffOp
 	 */
 	public function addOperations( array $operations ) {
-		$this->addTypedOperations( $operations );
-		$this->operations = $operations;
+		foreach ( $operations as $operation ) {
+			$this->append( $operation );
+		}
 	}
 
 	/**
+	 * @see GenericArrayObject::preSetElement
+	 *
 	 * @since 0.1
 	 *
-	 * @param $operations array of IDiffOp
-	 * @throws \Diff\Exception
+	 * @param integer|string $index
+	 * @param mixed $value
+	 *
+	 * @return boolean
+	 * @throws Exception
 	 */
-	protected function addTypedOperations( array $operations ) {
-		foreach ( $operations as $key => /* DiffOp */ $operation ) {
-			if ( array_key_exists( $operation->getType(), $this->typePointers ) ) {
-				$this->typePointers[$operation->getType()][] = $key;
-			}
-			else {
-				throw new Exception( 'Diff operation with invalid type "' . $operation->getType() . '" provided.' );
-			}
+	protected function preSetElement( $index, $value ) {
+		/**
+		 * @var IDiffOp $value
+		 */
+		if ( array_key_exists( $value->getType(), $this->typePointers ) ) {
+			$this->typePointers[$value->getType()][] = $index;
 		}
+		else {
+			throw new Exception( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
+		}
+
+		return true;
 	}
 
 	/**
@@ -169,32 +169,38 @@ class Diff extends \ArrayIterator implements IDiff {
 	}
 
 	/**
+	 * @see GenericArrayObject::getSerializationData
+	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public function serialize() {
-		return serialize( array( $this->operations, $this->typePointers ) );
+	protected function getSerializationData() {
+		return array_merge(
+			parent::getSerializationData(),
+			array(
+				'typePointers' => $this->typePointers,
+				'parentKey' => $this->parentKey,
+			)
+		);
 	}
 
 	/**
+	 * @see GenericArrayObject::unserialize
+	 *
 	 * @since 0.1
 	 *
 	 * @param string $serialization
+	 *
+	 * @return array
 	 */
 	public function unserialize( $serialization ) {
-		list( $this->operations, $this->typePointers ) = unserialize( $serialization );
-	}
+		$serializationData = parent::unserialize( $serialization );
 
-	/**
-	 * Returns the number of operations the diff contains.
-	 *
-	 * @since 0.1
-	 *
-	 * @return integer
-	 */
-	public function count() {
-		return count( $this->operations );
+		$this->typePointers = $serializationData['typePointers'];
+		$this->parentKey = $serializationData['parentKey'];
+
+		return $serializationData;
 	}
 
 	/**
@@ -205,60 +211,7 @@ class Diff extends \ArrayIterator implements IDiff {
 	 * @return boolean
 	 */
 	public function isEmpty() {
-		return $this->operations === array();
-	}
-
-	/**
-	 * Returns the current operation.
-	 *
-	 * @since 0.1
-	 *
-	 * @return IDiffOp
-	 */
-	public function current() {
-		return $this->operations[$this->key];
-	}
-
-	/**
-	 * Returns the key of the current operation.
-	 *
-	 * @since 0.1
-	 *
-	 * @return mixed
-	 */
-	public function key() {
-		return $this->key;
-	}
-
-	/**
-	 * @see ArrayIterator::next
-	 *
-	 * @since 0.1
-	 */
-	public function next() {
-		next( $this->operations );
-		$this->key = key( $this->operations );
-	}
-
-	/**
-	 * @see ArrayIterator::rewind
-	 *
-	 * @since 0.1
-	 */
-	public function rewind() {
-		reset( $this->operations );
-		$this->key = key( $this->operations );
-	}
-
-	/**
-	 * @see ArrayIterator::valid
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function valid() {
-		return $this->key !== false && isset( $this->operations[$this->key] );
+		return $this->count() === 0;
 	}
 
 	/**
