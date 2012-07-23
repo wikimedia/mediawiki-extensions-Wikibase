@@ -98,6 +98,22 @@ RSpec::Core::RakeTask.new(:spec_editonoff) do |spec|
   spec.pattern = 'spec/item/editonoff_spec.rb'
 end
 
+task :setup_firefox do
+  setup_environment "firefox"
+end
+
+task :setup_chrome do
+  setup_environment "chrome"
+end
+
+task :setup_iexplorer do
+  setup_environment "ie"
+end
+
+def setup_environment browser
+  ENV["BROWSER_TYPE"] = browser
+end
+
 task :default => :spec
 task :item => :spec_item
 task :nonexistingitem => :spec_non_existing_item
@@ -116,3 +132,23 @@ task :sttl => :spec_language_selector
 task :delete_item => :spec_item_deletion
 task :editonoff => :spec_editonoff
 task :bugs => :spec_bugs
+
+task :runall_firefox do
+  Rake::Task[:setup_firefox].invoke
+  Rake::Task[:default].invoke
+end
+task :runall_chrome do
+  Rake::Task[:setup_chrome].invoke
+  Rake::Task[:default].invoke
+end
+task :runall_iexplorer do
+  Rake::Task[:setup_iexplorer].invoke
+  Rake::Task[:default].invoke
+end
+
+task :runall do
+  Rake::Task[:runall_firefox].invoke
+  Rake::Task[:runall_chrome].invoke
+  Rake::Task[:runall_iexplorer].invoke
+end
+
