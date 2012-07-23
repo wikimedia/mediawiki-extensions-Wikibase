@@ -139,7 +139,7 @@ class ApiSetItem extends ApiModifyItem {
 						if ( !array_key_exists( $siteId, $sites ) ) {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'not-recognized-siteid' );
 						}
-						$itemContent->getItem()->addSiteLink( $siteId, $pageName, 'set' );
+						$itemContent->getItem()->addSiteLink( $siteId, Utils::squashToNFC( $pageName ), 'set' );
 					}
 					break;
 				default:

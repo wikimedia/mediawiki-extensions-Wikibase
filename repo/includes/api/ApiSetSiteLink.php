@@ -39,9 +39,9 @@ class ApiSetSiteLink extends ApiModifyItem {
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
 
-		if ( isset( $params['linktitle'] ) ) {
-			$params['linktitle'] = isset( $params['linktitle'] ) ? Utils::squashToNFC( $params['linktitle'] ) : '';
-		}
+		// Note that linksite should always exist as a prerequisite for this
+		// call to succeede. The param linktitle will not always exist because
+		// that signals a sitelink to remove.
 	}
 
 	/**
@@ -55,7 +55,6 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 * @return ItemContent Newly created item
 	 */
 	protected function createItem( array $params ) {
-		//$this->dieUsage( wfMsg( 'wikibase-api-cant-create' ), 'cant-create' );
 		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
 	}
 
@@ -70,6 +69,10 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 * @return boolean Success indicator
 	 */
 	protected function modifyItem( ItemContent &$itemContent, array $params ) {
+
+		if ( isset( $params['linktitle'] ) ) {
+			$params['linktitle'] = Utils::squashToNFC( $params['linktitle'] );
+		}
 
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
 			$link = $itemContent->getItem()->getSiteLink( $params['linksite'] );
