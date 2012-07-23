@@ -62,7 +62,7 @@ final class WikibaseHooks {
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
-			'ItemView',
+			// 'ItemView', // Broken AGAIN...
 
 			'api/ApiJSONP',
 			'api/ApiJSONPComplete',

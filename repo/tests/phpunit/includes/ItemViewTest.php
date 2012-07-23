@@ -46,13 +46,6 @@ class ItemViewTest extends \MediaWikiTestCase {
 	protected static $num = -1;
 
 	/**
-	 * This is to set up the environment.
-	 */
-	public function setUp() {
-		parent::setUp();
-	}
-
-	/**
 	 * @group WikibaseUtils
 	 * @dataProvider providerGetHTML
 	 */
@@ -96,6 +89,8 @@ class ItemViewTest extends \MediaWikiTestCase {
 
 	}
 
+	// FIXME: this stuff is broken, AGAIN...
+	// Should use proper abstraction and not create items from arrays
 	public function providerGetHTML() {
 		return array(
 			array(
