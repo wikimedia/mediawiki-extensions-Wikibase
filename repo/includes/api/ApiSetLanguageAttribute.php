@@ -49,14 +49,6 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		if ( !isset( $params['label'] ) && !isset( $params['description'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-label-or-description' ), 'label-or-description' );
 		}
-
-		if ( isset( $params['label'] ) ) {
-			$params['label'] = Utils::squashToNFC( $params['label'] );
-		}
-
-		if ( isset( $params['description'] ) ) {
-			$params['description'] = Utils::squashToNFC( $params['description'] );
-		}
 	}
 
 	/**
@@ -89,7 +81,7 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		$language = $params['language'];
 
 		if ( isset( $params['label'] ) ) {
-			$label = $params['label'];
+			$label = Utils::squashToNFC( $params['label'] );
 			if ( 0 < strlen( $label ) ) {
 				$labels = array( $language => $itemContent->getItem()->setLabel( $language, $label ) );
 			}
@@ -102,7 +94,7 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$description = $params['description'];
+			$description = Utils::squashToNFC( $params['description'] );
 			if ( 0 < strlen( $description ) ) {
 				$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, $description ) );
 			}
