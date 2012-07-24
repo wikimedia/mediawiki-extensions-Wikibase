@@ -255,7 +255,7 @@
 		 * @return number
 		 */
 		getWidth: function() {
-			return this.input.width();
+			return this._normalizeWidth( this.input.width() );
 		},
 
 		getMaxWidth: function() {
