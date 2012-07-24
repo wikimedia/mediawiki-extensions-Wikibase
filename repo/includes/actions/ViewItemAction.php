@@ -75,13 +75,18 @@ class ViewItemAction extends \ViewAction {
 			$out->setPageTitle(
 				$this->msg(
 					'difference-title',
-					$labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
+					// This should be something like the following,
+					// $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
+					// or should set the attribute of the h1 to correct direction.
+					// Still note that the direction is "auto" so guessing should
+					// give the right direction in most cases.
+					$labelText
 				)
 			);
 		} else {
 			//XXX: are we really sure?!
 			$this->getOutput()->setPageTitle(
-				$labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
+				$labelText
 			);
 		}
 
