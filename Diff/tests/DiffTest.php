@@ -7,7 +7,7 @@ use Diff\DiffOpRemove as DiffOpRemove;
 use Diff\DiffOpChange as DiffOpChange;
 
 /**
- * Tests for the Diff class.
+ * Tests for the Diff\Diff class.
  *
  * @file
  * @since 0.1
@@ -19,7 +19,7 @@ use Diff\DiffOpChange as DiffOpChange;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffTest extends \MediaWikiTestCase {
+class DiffTest extends GenericArrayObjectTest {
 
 	public function stuffProvider() {
 		return array(
@@ -55,7 +55,7 @@ class DiffTest extends \MediaWikiTestCase {
 		$diff = new Diff( $operations );
 
 		$this->assertInstanceOf( '\Diff\IDiff', $diff );
-		$this->assertInstanceOf( '\ArrayIterator', $diff );
+		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		$types = array();
 

@@ -16,8 +16,11 @@ return array(
 	'Diff\DiffOpAdd' => 'includes/DiffOpAdd.php',
 	'Diff\DiffOpChange' => 'includes/DiffOpChange.php',
 	'Diff\DiffOpRemove' => 'includes/DiffOpRemove.php',
+	'Diff\GenericArrayObject' => 'includes/GenericArrayObject.php',
 	'Diff\IDiff' => 'includes/IDiff.php',
 	'Diff\IDiffOp' => 'includes/IDiffOp.php',
 	'Diff\ListDiff' => 'includes/ListDiff.php',
 	'Diff\MapDiff' => 'includes/MapDiff.php',
+
+	'Diff\Test\GenericArrayObjectTest' => 'tests/GenericArrayObjectTest.php'
 );
