@@ -59,26 +59,6 @@ class PropertyHandler extends EntityHandler {
 	}
 
 	/**
-	 * Returns a ParserOutput object containing the HTML.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Title $title
-	 * @param null $revId
-	 * @param null|ParserOptions $options
-	 * @param bool $generateHtml
-	 *
-	 * @return ParserOutput
-	 */
-	public function getParserOutput( Content $content, Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$parserOutput = new ParserOutput();
-
-		$parserOutput->setText( 'TODO' ); // TODO
-
-		return $parserOutput;
-	}
-
-	/**
 	 * @see ContentHandler::unserializeContent
 	 *
 	 * @since 0.1
@@ -90,47 +70,6 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function unserializeContent( $blob, $format = null ) {
 		return PropertyContent::newFromArray( $this->unserializedData( $blob, $format ) );
-	}
-
-	/**
-	 * @see ContentHandler::getDeletionUpdates
-	 *
-	 * @param Content $content
-	 * @param Title $title
-	 * @param null|ParserOutput $parserOutput
-	 *
-	 * @since 0.1
-	 *
-	 * @return array of \DataUpdate
-	 */
-	public function getDeletionUpdates( Content $content, Title $title, ParserOutput $parserOutput = null ) {
-		return array_merge(
-			parent::getDeletionUpdates( $content, $title, $parserOutput ),
-			array( /* new PropertyDeletionUpdate( $content ) */ )
-		);
-	}
-
-	/**
-	 * @see ContentHandler::getSecondaryDataUpdates
-	 *
-	 * @since 0.1
-	 *
-	 * @param Content $content
-	 * @param Title $title
-	 * @param Content|null $old
-	 * @param boolean $recursive
-	 *
-	 * @param null|ParserOutput $parserOutput
-	 *
-	 * @return array of \DataUpdate
-	 */
-	public function getSecondaryDataUpdates( Content $content, Title $title, Content $old = null,
-											 $recursive = false, ParserOutput $parserOutput = null ) {
-
-		return array_merge(
-			parent::getSecondaryDataUpdates( $content, $title, $old, $recursive, $parserOutput ),
-			array( /* new PropertyStructuredSave( $content ) */ )
-		);
 	}
 
 	/**
