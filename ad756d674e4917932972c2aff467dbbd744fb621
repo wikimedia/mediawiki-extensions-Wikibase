@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//+JA\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-24T23:25:22Z",
+      "side": 1,
+      "message": "I\u0027d expect it to be a ParserOutput going on the name",
+      "revId": "ad756d674e4917932972c2aff467dbbd744fb621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//+I8\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-24T23:25:22Z",
+      "side": 1,
+      "message": "Implicit check for null followed by an explicit one?!\n\nAnd why are we checking the value of a var set to that value the line above?",
+      "revId": "ad756d674e4917932972c2aff467dbbd744fb621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//+I4\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-24T23:25:22Z",
+      "side": 1,
+      "message": "Should this not be elseif?",
+      "revId": "ad756d674e4917932972c2aff467dbbd744fb621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
