@@ -348,11 +348,10 @@ final class Utils {
 
 		// Find the first language code we can turn into a language object
 		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
-		reset($texts);
-		while ( list( $code, $text ) = each( $texts ) ) {
+		foreach ( $texts as $code => $text ) {
 			$lang = Language::factory( $code );
 			if ( !is_null( $lang ) ) {
-				return array( $code, $text, $lang );;
+				return array( $code, $text, $lang );
 			}
 		}
 
@@ -406,8 +405,7 @@ final class Utils {
 
 		// Find the first preferred language code we can turn into a language object
 		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
-		reset($texts);
-		while ( list( $code, $text ) = each( $texts ) ) {
+		foreach ( $texts as $code => $text ) {
 			if ( $wgUser->getOption( "sttl-languages-$code" ) ) {
 				$lang = Language::factory( $code );
 				if ( !is_null( $lang ) ) {
@@ -418,8 +416,7 @@ final class Utils {
 
 		// Find the first ordinary language code we can turn into a language object
 		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
-		reset($texts);
-		while ( list( $code, $text ) = each( $texts ) ) {
+		foreach ( $texts as $code => $text ) {
 			$lang = Language::factory( $code );
 			if ( !is_null( $lang ) ) {
 				return array( $code, $text, $lang );
