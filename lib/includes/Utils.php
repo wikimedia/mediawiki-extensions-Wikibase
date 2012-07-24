@@ -348,6 +348,7 @@ final class Utils {
 
 		// Find the first language code we can turn into a language object
 		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
+		reset($texts);
 		while ( list( $code, $text ) = each( $texts ) ) {
 			$lang = Language::factory( $code );
 			if ( !is_null( $lang ) ) {
@@ -375,7 +376,10 @@ final class Utils {
 	 * @return triplet with the initial language code, the text, and the language object
 	 */
 	static public function lookupUserMultilangText( array $texts = null, array $sequence = null, array $fallback = null ) {
-		global $wgUser;
+		global $wgUser, $wgLang;
+
+		// Keep this for later
+		$langCode = $wgLang->getCode();
 
 		// Prerequisites for further processing
 		if ( is_null( $texts ) || is_null( $sequence ) ) {
@@ -388,8 +392,21 @@ final class Utils {
 			return $fallback;
 		}
 
+		// Check if we can use the ordinary language
+		// This should always be used if possible because this will match
+		// with the user set language
+		reset($texts);
+		list( $code, $text ) = each( $texts );
+		if ( $wgLang->getCode() === $code ) {
+			$lang = Language::factory( $code );
+			if ( !is_null( $lang ) ) {
+				return array( $code, $text, $lang );
+			}
+		}
+
 		// Find the first preferred language code we can turn into a language object
 		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
+		reset($texts);
 		while ( list( $code, $text ) = each( $texts ) ) {
 			if ( $wgUser->getOption( "sttl-languages-$code" ) ) {
 				$lang = Language::factory( $code );
@@ -401,6 +418,7 @@ final class Utils {
 
 		// Find the first ordinary language code we can turn into a language object
 		// Note that the factory call do a pretty dumb cleaning up that can make this vejjy slow
+		reset($texts);
 		while ( list( $code, $text ) = each( $texts ) ) {
 			$lang = Language::factory( $code );
 			if ( !is_null( $lang ) ) {
