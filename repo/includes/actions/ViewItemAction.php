@@ -32,9 +32,7 @@ class ViewItemAction extends \ViewAction {
 	}
 
 	public function show() {
-		global $wgUser, $wgLang, $wgContLang;
-
-		// Some fishy pseudo-casting.
+		// some fishy pseudo-casting
 		$article = $this->page; /* @var \Article $article */
 		$itemContent = $article->getPage()->getContent(); /* @var ItemContent $itemContent */
 
@@ -45,44 +43,24 @@ class ViewItemAction extends \ViewAction {
 			return;
 		}
 
-		// View it!
+		// view it!
 		$article->view();
 
-		// The view can do weird tricks due to revision ids, better check what we are displaying now.
-		if ( $article->getPage()->getContentModel() !== $itemContent->getModel() ) { // hacky...
-			// Article decided to show something completly else.
-			return;
-		}
-		if ( $article->getPage()->getContent()->getItem()->getId() !== $itemContent->getItem()->getId() ) { // hacky...
-			// Article are not on the same item anymore.
+		if ( $article->getContentObject() !== $itemContent ) { // hacky...
+			// Article decided to not show the item but something else. So skip all the Item stuff below.
 			return;
 		}
 
-		// Ok, we are viewing an item and it seems to be the same. Create the title and
-		// do all the silly JS stuff etc.
+		// ok, we are viewing an item, do all the silly JS stuff etc.
 
-		// Figure out which label to use for title.
 		$langCode = $this->getContext()->getLanguage()->getCode();
-		list( $labelCode, $labelText, $labelLang) =
-			\Wikibase\Utils::lookupUserMultilangText(
-				$itemContent->getItem()->getLabels(),
-				\Wikibase\Utils::languageChain( $langCode ),
-				array( $langCode, $this->getPageTitle(), $this->getContext()->getLanguage() )
-			);
+		$label = $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() );
 
-		// Create and set the title.
 		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
-			$out->setPageTitle(
-				$this->msg(
-					'difference-title',
-					$labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
-				)
-			);
+			$out->setPageTitle( $this->msg( 'difference-title', $label ) );
 		} else {
 			//XXX: are we really sure?!
-			$this->getOutput()->setPageTitle(
-				$labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
-			);
+			$this->getOutput()->setPageTitle( $label );
 		}
 
 		ItemView::registerJsConfigVars( $out, $itemContent, $langCode );
