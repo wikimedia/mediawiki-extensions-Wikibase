@@ -1,5 +1,9 @@
 <?php
 
+namespace Wikibase;
+use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html;
+
+
 /**
  * File defining the hook handlers for the Wikibase Client extension.
  *
@@ -13,7 +17,7 @@
  * @author Nikola Smolenski
  * @author Daniel Werner
  */
-final class WikibaseHooks {
+final class RepoHooks {
 
 	/**
 	 * Schema update to set up the needed database tables.
@@ -21,11 +25,11 @@ final class WikibaseHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param DatabaseUpdater $updater
+	 * @param \DatabaseUpdater $updater
 	 *
 	 * @return boolean
 	 */
-	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
+	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
 
 		if ( $type === 'mysql' || $type === 'sqlite' ) {
@@ -105,7 +109,7 @@ final class WikibaseHooks {
 	 *
 	 * @param Title $title
 	 * @param Language &$pageLanguage
-	 * @param Language|StubUserLang $language
+	 * @param Language|\StubUserLang $language
 	 *
 	 * @return boolean
 	 */
@@ -127,11 +131,11 @@ final class WikibaseHooks {
 	 * @since 0.1
 	 *
 	 * @param array &$testModules
-	 * @param ResourceLoader &$resourceLoader
+	 * @param \ResourceLoader &$resourceLoader
 	 *
 	 * @return boolean
 	 */
-	public static function onResourceLoaderTestModules( array &$testModules, ResourceLoader &$resourceLoader ) {
+	public static function onResourceLoaderTestModules( array &$testModules, \ResourceLoader &$resourceLoader ) {
 		$testModules['qunit']['wikibase.tests'] = array(
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
@@ -212,15 +216,15 @@ final class WikibaseHooks {
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
 		if ( $article->getContent()->getModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			/**
-			 * @var $newItem \Wikibase\Item
+			 * @var $newItem Item
 			 */
 			$newItem = $article->getContent()->getItem();
 
 			if ( is_null( $revision->getParentId() ) ) {
-				$change = \Wikibase\ItemCreation::newFromItem( $newItem );
+				$change = ItemCreation::newFromItem( $newItem );
 			}
 			else {
-				$change = \Wikibase\ItemChange::newFromItems(
+				$change = ItemChange::newFromItems(
 					Revision::newFromId( $revision->getParentId() )->getContent()->getItem(),
 					$newItem
 				);
@@ -233,7 +237,7 @@ final class WikibaseHooks {
 				'time' => $revision->getTimestamp(),
 			) );
 
-			\Wikibase\ChangeNotifier::singleton()->handleChange( $change );
+			ChangeNotifier::singleton()->handleChange( $change );
 		}
 
 		return true;
@@ -289,7 +293,7 @@ final class WikibaseHooks {
 				$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
 				$itemContent = $itemHandler->unserializeContent( $textEntry->old_text/* , $archiveEntry->ar_content_format */ );
 				$item = $itemContent->getItem();
-				$change = \Wikibase\ItemDeletion::newFromItem( $item );
+				$change = ItemDeletion::newFromItem( $item );
 
 				$change->setFields( array(
 					'revision_id' => $archiveEntry->ar_rev_id,
@@ -298,7 +302,7 @@ final class WikibaseHooks {
 					'time' => $archiveEntry->ar_timestamp,
 				) );
 
-				\Wikibase\ChangeNotifier::singleton()->handleChange( $change );
+				ChangeNotifier::singleton()->handleChange( $change );
 			}
 		}
 
@@ -453,12 +457,12 @@ final class WikibaseHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param SkinTemplate $sktemplate
+	 * @param \SkinTemplate $sktemplate
 	 * @param array $links
 	 *
 	 * @return boolean
 	 */
-	public static function onPageTabs( SkinTemplate &$sktemplate, array &$links ) {
+	public static function onPageTabs( \SkinTemplate &$sktemplate, array &$links ) {
 		if ( in_array( $sktemplate->getTitle()->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) ) ) {
 			unset( $links['views']['edit'] );
 		}
@@ -472,13 +476,13 @@ final class WikibaseHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @param OutputPage $out
-	 * @param Skin $sk
+	 * @param \OutputPage $out
+	 * @param \Skin $sk
 	 * @param array $bodyAttrs
 	 *
 	 * @return bool
 	 */
-	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $sk, array &$bodyAttrs ) {
+	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
 		if ( $out->getTitle()->getContentModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
 			$itemPage = new WikiPage( $out->getTitle() );
@@ -499,7 +503,7 @@ final class WikibaseHooks {
 	 * This is only handling special pages right now and gets disabled in normal pages.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin
 	 *
-	 * @param DummyLinker $skin
+	 * @param \DummyLinker $skin
 	 * @param Title $target
 	 * @param string $text
 	 * @param array $customAttribs
@@ -568,13 +572,13 @@ final class WikibaseHooks {
 		// that doesn't fail, use a fallback if everything fails. This could
 		// use the user supplied list of acceptable languages as a filter.
 		list( $labelCode, $labelText, $labelLang) = $labelTriplet =
-			\Wikibase\Utils::lookupMultilangText(
+			Utils::lookupMultilangText(
 				$item->getLabels( $langStore[$lang] ),
 				$langStore[$lang],
 				array( $wgLang->getCode(), null, $wgLang )
 			);
 		list( $descriptionCode, $descriptionText, $descriptionLang) = $descriptionTriplet =
-			\Wikibase\Utils::lookupMultilangText(
+			Utils::lookupMultilangText(
 				$item->getDescriptions( $langStore[$lang] ),
 				$langStore[$lang],
 				array( $wgLang->getCode(), null, $wgLang )
