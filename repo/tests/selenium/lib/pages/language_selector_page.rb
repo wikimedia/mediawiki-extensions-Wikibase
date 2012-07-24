@@ -19,7 +19,7 @@ class LanguageSelectorPage < NewItemPage
   link(:viewTabLink, :xpath => "//li[@id='ca-view']/span/a")
   link(:recentChangesLink, :xpath => "//li[@id='n-recentchanges']/a")
   link(:specialPageTabLink, :xpath => "//li[@id='ca-nstab-special']/span/a")
-  link(:firstResultLink, :xpath => "//ul[@class='special']/li/a[3]")
+  link(:firstResultLink, :xpath => "//span[@class='mw-title']/a")
   link(:moreLanguagesLink, :class => "sttl-languages-more-link")
   list_item(:sttlLiTo, :class => "sttl-lang-to")
 end
