@@ -19,24 +19,17 @@ require 'require_all'
 
 require_all 'lib/pages'
 configs = YAML::load( File.open( 'configuration.yml' ) )
-$target_browser = configs['target_browser']
 RSpec.configure do |config|
   config.include PageObject::PageFactory
   config.before(:all) do
-    case $target_browser
-    when "firefox"
-      @browser = Watir::Browser.new :firefox
-    when "chrome"
-      @browser = Watir::Browser.new :chrome
-    when "ie"
-      @browser = Watir::Browser.new :ie
-    when "opera"
-      @browser = Watir::Browser.new :opera
-    when "safari"
-      @browser = Watir::Browser.new :safari
+    if ENV["BROWSER_TYPE"]
+      BROWSER_TYPE = ENV["BROWSER_TYPE"]
+    elsif configs['DEFAULT_BROWSER'] 
+      BROWSER_TYPE = configs['DEFAULT_BROWSER'] unless defined? BROWSER_TYPE
     else
-      @browser = Watir::Browser.new :firefox
+      raise "No default browser defined. Please define DEFAULT_BROWSER in your local configuration.yml!"
     end
+    @browser = Watir::Browser.new(BROWSER_TYPE)
   end
 
   config.after(:all) do
@@ -63,4 +56,3 @@ def generate_random_string(length=8)
   length.times { string << chars[rand(chars.size)] }
   return string
 end
-
