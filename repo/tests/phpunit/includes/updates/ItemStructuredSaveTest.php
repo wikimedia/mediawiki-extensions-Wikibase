@@ -57,12 +57,33 @@ class ItemStructuredSaveTest extends \MediaWikiTestCase {
 		$update = new ItemStructuredSave( $itemContent );
 		$update->doUpdate();
 
-		$obtainedItemContent = \Wikibase\ItemHandler::singleton()->getFromId( $itemContent->getItem()->getId() );
+		$item = $itemContent->getItem();
+		$id = $item->getId();
 
-		$this->assertTrue( $obtainedItemContent->equals( $itemContent ) );
+		$this->assertEquals( 1, $this->countRows( 'wb_items', array( 'item_id' => $id ) ) );
+
+		$this->assertEquals(
+			count( $item->getSiteLinks() ),
+			$this->countRows( 'wb_items_per_site', array( 'ips_item_id' => $id ) )
+		);
+
+		$this->assertEquals(
+			array_sum( array_map( 'count', $item->getAllAliases() ) ),
+			$this->countRows( 'wb_aliases', array( 'alias_item_id' => $id ) )
+		);
+
+		// TODO: verify texts_per_lang
 
 		$update = new \Wikibase\ItemDeletionUpdate( $itemContent );
 		$update->doUpdate();
+	}
+
+	protected function countRows( $table, array $conds = array() ) {
+		return wfGetDB( DB_SLAVE )->selectRow(
+			$table,
+			array( 'COUNT(*) AS rowcount' ),
+			$conds
+		)->rowcount;
 	}
 
 }
