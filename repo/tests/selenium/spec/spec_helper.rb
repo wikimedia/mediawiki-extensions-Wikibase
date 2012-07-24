@@ -23,13 +23,13 @@ RSpec.configure do |config|
   config.include PageObject::PageFactory
   config.before(:all) do
     if ENV["BROWSER_TYPE"]
-      BROWSER_TYPE = ENV["BROWSER_TYPE"]
+      browser_type = ENV["BROWSER_TYPE"]
     elsif configs['DEFAULT_BROWSER'] 
-      BROWSER_TYPE = configs['DEFAULT_BROWSER'] unless defined? BROWSER_TYPE
+      browser_type = configs['DEFAULT_BROWSER']
     else
       raise "No default browser defined. Please define DEFAULT_BROWSER in your local configuration.yml!"
     end
-    @browser = Watir::Browser.new(BROWSER_TYPE)
+    @browser = Watir::Browser.new(browser_type)
   end
 
   config.after(:all) do
