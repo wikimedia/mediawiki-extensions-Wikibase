@@ -87,17 +87,8 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 		= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 		= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
-$wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/Entity.php';
-$wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/EntityDiff.php';
-$wgAutoloadClasses['Wikibase\EntityObject'] 		= $dir . 'includes/EntityObject.php';
-$wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/Item.php';
-$wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/ItemDiff.php';
-$wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/ItemObject.php';
+$wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\MediaWikiSite'] 		= $dir . 'includes/MediaWikiSite.php';
-$wgAutoloadClasses['Wikibase\Property'] 			= $dir . 'includes/Property.php';
-$wgAutoloadClasses['Wikibase\PropertyObject'] 		= $dir . 'includes/PropertyObject.php';
-$wgAutoloadClasses['Wikibase\Query'] 				= $dir . 'includes/Query.php';
-$wgAutoloadClasses['Wikibase\QueryObject'] 			= $dir . 'includes/QueryObject.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
 $wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
@@ -116,13 +107,26 @@ $wgAutoloadClasses['Wikibase\ItemChange'] 			= $dir . 'includes/changes/ItemChan
 $wgAutoloadClasses['Wikibase\ItemCreation'] 		= $dir . 'includes/changes/ItemCreation.php';
 $wgAutoloadClasses['Wikibase\ItemDeletion'] 		= $dir . 'includes/changes/ItemDeletion.php';
 
-// includes/diff
-$wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/diff/DiffView.php';
-
 // includes/entity
+$wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/entity/Entity.php';
+$wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/entity/EntityDiff.php';
 $wgAutoloadClasses['Wikibase\EntityDiffObject'] 	= $dir . 'includes/entity/EntityDiffObject.php';
 $wgAutoloadClasses['Wikibase\EntityDiffView'] 		= $dir . 'includes/entity/EntityDiffView.php';
-$wgAutoloadClasses['Wikibase\ItemDiffView'] 		= $dir . 'includes/entity/ItemDiffView.php';
+$wgAutoloadClasses['Wikibase\EntityObject'] 		= $dir . 'includes/entity/EntityObject.php';
+
+// includes/item
+$wgAutoloadClasses['Wikibase\Item'] 				= $dir . 'includes/item/Item.php';
+$wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/item/ItemDiff.php';
+$wgAutoloadClasses['Wikibase\ItemDiffView'] 		= $dir . 'includes/item/ItemDiffView.php';
+$wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/ItemObject.php';
+
+// includes/property
+$wgAutoloadClasses['Wikibase\Property'] 			= $dir . 'includes/property/Property.php';
+$wgAutoloadClasses['Wikibase\PropertyObject'] 		= $dir . 'includes/property/PropertyObject.php';
+
+// includes/query
+$wgAutoloadClasses['Wikibase\Query'] 				= $dir . 'includes/query/Query.php';
+$wgAutoloadClasses['Wikibase\QueryObject'] 			= $dir . 'includes/query/QueryObject.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/TestItems.php';
