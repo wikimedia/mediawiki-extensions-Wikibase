@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//+r8\u003d",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-24T09:21:35Z",
+      "side": 1,
+      "message": "Why is this commented out?",
+      "revId": "f5127e3b14620f0e2f4858fe64768f57364cfc3d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
