@@ -21,8 +21,10 @@ use Diff\DiffOpChange as DiffOpChange;
  */
 class DiffTest extends GenericArrayObjectTest {
 
-	public function stuffProvider() {
+	public function elementInstancesProvider() {
 		return array(
+			array( array(
+			) ),
 			array( array(
 				new DiffOpAdd( 'ohi' )
 			) ),
@@ -49,7 +51,7 @@ class DiffTest extends GenericArrayObjectTest {
 	}
 
 	/**
-	 * @dataProvider stuffProvider
+	 * @dataProvider elementInstancesProvider
 	 */
 	public function testStuff( array $operations ) {
 		$diff = new Diff( $operations );
@@ -73,6 +75,21 @@ class DiffTest extends GenericArrayObjectTest {
 		}
 
 		$this->assertEquals( $count, $diff->count() );
+	}
+
+	public function instanceProvider() {
+		$instances = array();
+
+		foreach ( $this->stuffProvider() as $args ) {
+			$diffOps = $args[0];
+			$instances[] = new Diff( $diffOps );
+		}
+
+		return $instances;
+	}
+
+	public function getInstanceClass() {
+		return '\Diff\Diff';
 	}
 
 }

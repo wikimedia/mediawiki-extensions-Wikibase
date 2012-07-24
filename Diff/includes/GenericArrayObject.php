@@ -219,4 +219,15 @@ abstract class GenericArrayObject extends \ArrayObject {
 		return $serializationData;
 	}
 
+	/**
+	 * Returns if the ArrayObject has no elements.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return $this->count() === 0;
+	}
+
 }
