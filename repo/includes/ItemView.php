@@ -229,6 +229,8 @@ class ItemView extends \ContextSource {
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
 	public function render( ItemContent $item, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
+		$oldParserOutput = $pout !== null;
+
 		if ( !$out ) {
 			$out = $this->getOutput();
 		}
@@ -241,10 +243,14 @@ class ItemView extends \ContextSource {
 			$pout = $this->getParserOutput( $item, $options, true );
 		}
 
-		if ( $options ) {
+		$langCode = null;
+		if ( $options && is_null( $langCode ) ) {
+			//XXX: this is deprecated!
 			$langCode = $options->getTargetLanguage();
-		} else  {
-			#XXX: this is quite ugly, we don't know that this language is the language that was used to generate the parser output object
+		}
+		if ( !$oldParserOutput && is_null( $langCode ) ) {
+			//XXX: this is quite ugly, we don't know that this language is the language that was used to generate
+			// the parser output object.
 			$langCode = $this->getLanguage()->getCode();
 		}
 
