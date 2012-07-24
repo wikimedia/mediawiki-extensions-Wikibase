@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//+us\u003d",
+        "filename": "Diff/includes/GenericArrayObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-24T08:54:11Z",
+      "side": 1,
+      "message": "shouldn\u0027t be in that group, should it?",
+      "revId": "6347b35a55cdbf4618121757fde81f1b49442f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//+uo\u003d",
+        "filename": "Diff/includes/GenericArrayObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-24T08:54:11Z",
+      "side": 1,
+      "message": "\"getElementType\" would be clearer.",
+      "revId": "6347b35a55cdbf4618121757fde81f1b49442f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//+uc\u003d",
+        "filename": "Diff/includes/GenericArrayObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-24T08:54:11Z",
+      "side": 1,
+      "message": "Returns *whether* the provided value has the same type as the elements.\n\n\"if\" implies that the function doesn\u0027t return if the condition doesn\u0027t hold.",
+      "revId": "6347b35a55cdbf4618121757fde81f1b49442f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//+uQ\u003d",
+        "filename": "Diff/includes/GenericArrayObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-24T08:54:11Z",
+      "side": 1,
+      "message": "Override, not overload. PHP doesn\u0027t support overloading. http://en.wikipedia.org/wiki/Function_overloading vs. http://en.wikipedia.org/wiki/Method_overriding",
+      "revId": "6347b35a55cdbf4618121757fde81f1b49442f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//+uI\u003d",
+        "filename": "Diff/includes/GenericArrayObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-24T08:54:11Z",
+      "side": 1,
+      "message": "I think \"beforeSetElement\" would be clearer.",
+      "revId": "6347b35a55cdbf4618121757fde81f1b49442f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//+uE\u003d",
+        "filename": "Diff/includes/GenericArrayObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-24T08:54:11Z",
+      "side": 1,
+      "message": "\"overriding\". see above.",
+      "revId": "6347b35a55cdbf4618121757fde81f1b49442f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//+t0\u003d",
+        "filename": "Diff/tests/GenericArrayObjectTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-24T08:54:11Z",
+      "side": 1,
+      "message": "Would be nice to actually test stuff here :)\n\nAt least, add a dummy test that marks the test as incomplete. otherwise, phpunit will generate warnings about not finding test cases.",
+      "revId": "6347b35a55cdbf4618121757fde81f1b49442f2a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
