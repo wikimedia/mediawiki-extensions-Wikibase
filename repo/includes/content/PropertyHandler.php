@@ -53,8 +53,8 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-//			'view' => '\Wikibase\ViewPropertyAction',
-//			'edit' => '\Wikibase\EditPropertyAction',
+			'view' => '\Wikibase\ViewPropertyAction',
+			'edit' => '\Wikibase\EditPropertyAction',
 		);
 	}
 

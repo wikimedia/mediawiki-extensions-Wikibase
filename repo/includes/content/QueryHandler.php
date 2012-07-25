@@ -53,8 +53,8 @@ class QueryHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
-//			'view' => '\Wikibase\ViewQueryAction',
-//			'edit' => '\Wikibase\EditQueryAction',
+			'view' => '\Wikibase\ViewQueryAction',
+			'edit' => '\Wikibase\EditQueryAction',
 		);
 	}
 
