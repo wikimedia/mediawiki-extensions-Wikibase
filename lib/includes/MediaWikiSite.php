@@ -73,13 +73,15 @@ class MediaWikiSite extends SiteRow {
 		$data = \FormatJson::decode( $ret, true );
 
 		if ( !is_array( $data ) ) {
-			return false; //TODO: log this?!
+			//TODO: log.
+			return false;
 		}
 
 		$page = static::extractPageRecord( $data, $pageName );
 
-		if ( !isset( $page['missing'] ) ) {
-			//XXX: do what? fail?
+		if ( isset( $page['missing'] ) ) {
+			//TODO: log.
+			return false;
 		}
 
 		if ( !isset( $page['title'] ) ) {

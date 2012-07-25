@@ -90,13 +90,13 @@ class ApiSetSiteLink extends ApiModifyItem {
 			$site = Sites::singleton()->getSiteByGlobalId( $params['linksite'] );
 
 			if ( $site === false ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'add-sitelink-failed' );
+				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'not-recognized-siteid' );
 			}
 
 			$page = $site->normalizePageName( $params['linktitle'] );
 
 			if ( $page === false ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'add-sitelink-failed' );
+				$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
 			}
 
 			$link = new SiteLink( $site, $page );
