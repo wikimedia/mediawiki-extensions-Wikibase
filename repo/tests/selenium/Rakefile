@@ -98,22 +98,6 @@ RSpec::Core::RakeTask.new(:spec_editonoff) do |spec|
   spec.pattern = 'spec/item/editonoff_spec.rb'
 end
 
-task :setup_firefox do
-  setup_environment "firefox"
-end
-
-task :setup_chrome do
-  setup_environment "chrome"
-end
-
-task :setup_iexplorer do
-  setup_environment "ie"
-end
-
-def setup_environment browser
-  ENV["BROWSER_TYPE"] = browser
-end
-
 task :default => :spec
 task :item => :spec_item
 task :nonexistingitem => :spec_non_existing_item
@@ -133,22 +117,22 @@ task :delete_item => :spec_item_deletion
 task :editonoff => :spec_editonoff
 task :bugs => :spec_bugs
 
-task :runall_firefox do
-  Rake::Task[:setup_firefox].invoke
+task :runlocal_firefox do
+  ENV["BROWSER_TYPE"] = "firefox"
   Rake::Task[:default].invoke
 end
-task :runall_chrome do
-  Rake::Task[:setup_chrome].invoke
+task :runlocal_chrome do
+  ENV["BROWSER_TYPE"] = "chrome"
   Rake::Task[:default].invoke
 end
-task :runall_iexplorer do
-  Rake::Task[:setup_iexplorer].invoke
+task :runlocal_iexplorer do
+  ENV["BROWSER_TYPE"] = "ie"
   Rake::Task[:default].invoke
 end
 
-task :runall do
-  Rake::Task[:runall_firefox].invoke
-  Rake::Task[:runall_chrome].invoke
-  Rake::Task[:runall_iexplorer].invoke
+task :run_tests, :browser, :remote, :os do |t, args|
+  ENV["BROWSER_TYPE"] = args[:browser] || ""
+  ENV["RUN_REMOTE"] = args[:remote] || ""
+  ENV["TARGET_OS"] = args[:os] || ""
+  Rake::Task[:default].invoke
 end
-

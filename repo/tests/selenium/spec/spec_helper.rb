@@ -29,7 +29,18 @@ RSpec.configure do |config|
     else
       raise "No default browser defined. Please define DEFAULT_BROWSER in your local configuration.yml!"
     end
-    @browser = Watir::Browser.new(browser_type)
+    if ENV["RUN_REMOTE"] != ""
+      if browser_type == "ie"
+        caps = Selenium::WebDriver::Remote::Capabilities.internet_explorer
+      elsif browser_type == "chrome"
+        caps = Selenium::WebDriver::Remote::Capabilities.chrome
+      else
+        caps = Selenium::WebDriver::Remote::Capabilities.firefox
+      end
+      @browser = Watir::Browser.new(:remote, :url => REMOTE_SELENIUM_HUB, :desired_capabilities => caps)
+    else
+      @browser = Watir::Browser.new(browser_type)
+    end
   end
 
   config.after(:all) do
