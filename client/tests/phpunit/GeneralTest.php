@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Tests for the WikibaseClient.
  *
@@ -15,7 +17,7 @@
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>
  */
-class WikibaseClientGeneralTests extends MediaWikiTestCase {
+class WikibaseClientGeneralTests extends \MediaWikiTestCase {
 
 	public $defaultSettings = array(
 		'source' => array(
@@ -33,7 +35,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 * No local links, no remote links.
 	 */
 	public function testEmpty() {
-		$links = $this->doParse( new Title(), array(), array() );
+		$links = $this->doParse( new \Title(), array(), array() );
 		$this->assertEquals( array(), $links );
 	}
 
@@ -44,7 +46,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 		$settings = $this->defaultSettings;
 		$settings['source']['var'] = array( "Berlin" => array() );
 		$links = $this->doParse(
-			Title::newFromText( "Berlin" ),
+			\Title::newFromText( "Berlin" ),
 			$settings,
 			array( "fr:Berlin", "de:Berlin" )
 		);
@@ -56,7 +58,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 */
 	public function testRemote() {
 		$links = $this->doParse(
-			Title::newFromText( "Berlin" ),
+			\Title::newFromText( "Berlin" ),
 			$this->defaultSettings,
 			array()
 		);
@@ -68,7 +70,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 */
 	public function testAll() {
 		$links = $this->doParse(
-			Title::newFromText( "Berlin" ),
+			\Title::newFromText( "Berlin" ),
 			$this->defaultSettings,
 			array( "en:Berlin" )
 		);
@@ -79,7 +81,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 * Don't do anything outside of the main namespace...
 	 */
 	public function testNoNamespace() {
-		$title = Title::makeTitle( NS_CATEGORY, "Berlin" );
+		$title = \Title::makeTitle( NS_CATEGORY, "Berlin" );
 
 		$links = $this->doParse(
 			$title,
@@ -93,7 +95,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 * ...unless I say so.
 	 */
 	public function testNamespace() {
-		$title = Title::makeTitle( NS_CATEGORY, "Berlin" );
+		$title = \Title::makeTitle( NS_CATEGORY, "Berlin" );
 		$settings = $this->defaultSettings;
 		$settings['source']['var'] = array(
 			"Category:Berlin" => array(
@@ -118,13 +120,13 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 */
 	protected function doParse( $title, $settings, $links ) {
 		$this->setSettings( $settings );
-		$parser = new Parser();
-		$opt = new ParserOptions();
+		$parser = new \Parser();
+		$opt = new \ParserOptions();
 		$parser->parse("", $title, $opt);
 		$parser->getOutput()->setLanguageLinks( $links );
 		$dummy = "";
-		WBCLangLinkHandler::resetLangLinks();
-		WBCLangLinkHandler::onParserBeforeTidy( $parser, $dummy );
+		\Wikibase\LangLinkHandler::resetLangLinks();
+		\Wikibase\LangLinkHandler::onParserBeforeTidy( $parser, $dummy );
 		return $parser->getOutput()->getLanguageLinks();
 	}
 
@@ -135,7 +137,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 		global $egWBSettings;
 		$egWBSettings = $settings;
 		\Wikibase\Settings::singleton( true );
-		WBCLangLinkHandler::buildSortOrder();
+		\Wikibase\LangLinkHandler::buildSortOrder();
 	}
 
 }
