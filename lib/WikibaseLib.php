@@ -136,6 +136,9 @@ $wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/E
 $wgAutoloadClasses['Wikibase\tests\AliasChangeTest'] 		= $dir . 'tests/phpunit/changes/AliasChangeTest.php';
 $wgAutoloadClasses['Wikibase\tests\SitelinkChangeTest'] 	= $dir . 'tests/phpunit/changes/SitelinkChangeTest.php';
 
+// settings
+$wgAutoloadClasses['Wikibase\SettingsHooks']			= $dir . 'WikibaseLib.settings.php';
+
 foreach ( array(
 			  'Settings',
 			  'SettingsBase'
@@ -150,12 +153,9 @@ foreach ( array(
 // Hooks
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\LibHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerUnitTests';
-
-
+$wgHooks['WikibaseDefaultSettings'][]                       = 'Wikibase\SettingsHooks::onWikibaseDefaultSettings';
 
 $wgSharedTables[] = 'wb_changes';
-
-
 
 $egWBDefaultsFunction = null;
 
