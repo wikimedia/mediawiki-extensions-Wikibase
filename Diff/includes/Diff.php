@@ -204,17 +204,6 @@ class Diff extends GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see IDiff::isEmpty
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function isEmpty() {
-		return $this->count() === 0;
-	}
-
-	/**
 	 * Returns the add operations.
 	 *
 	 * @since 0.1
