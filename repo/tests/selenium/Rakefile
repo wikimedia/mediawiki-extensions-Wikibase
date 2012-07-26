@@ -8,7 +8,7 @@
 require 'rubygems'
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec) do |spec|
+RSpec::Core::RakeTask.new(:all) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = 'spec/*/*_spec.rb'
 end
@@ -98,7 +98,7 @@ RSpec::Core::RakeTask.new(:spec_editonoff) do |spec|
   spec.pattern = 'spec/item/editonoff_spec.rb'
 end
 
-task :default => :spec
+task :default => :run_tests
 task :item => :spec_item
 task :nonexistingitem => :spec_non_existing_item
 task :description => :spec_description
@@ -118,8 +118,9 @@ task :editonoff => :spec_editonoff
 task :bugs => :spec_bugs
 
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
+  task = args[:taskname] || :all
   setup_env(args[:browser], args[:remote], args[:os])
-  Rake::Task[args[:taskname]].invoke
+  Rake::Task[task].invoke
 end
 
 def setup_env(browser, remote, os)
