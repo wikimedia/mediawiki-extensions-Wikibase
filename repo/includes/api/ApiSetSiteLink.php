@@ -134,7 +134,6 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 */
 	public function getAllowedParams() {
 		$allowedParams = parent::getAllowedParams();
-		$allowedParams['item'][ApiBase::PARAM_DFLT] = 'set';
 		return array_merge( $allowedParams, array(
 			'linksite' => array(
 				ApiBase::PARAM_TYPE => Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA )->getGlobalIdentifiers(),
