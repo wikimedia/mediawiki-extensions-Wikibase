@@ -148,9 +148,9 @@ foreach ( array(
 
 
 // Hooks
+$wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\LibHooks::onSchemaUpdate';
-$wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerUnitTests';
-
+$wgHooks['UnitTestsList'][]					= 'Wikibase\LibHooks::registerUnitTests';
 
 
 $wgSharedTables[] = 'wb_changes';
