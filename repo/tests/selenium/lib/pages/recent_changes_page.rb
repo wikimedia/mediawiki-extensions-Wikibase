@@ -12,7 +12,7 @@ class RecentChangesPage < NewItemPage
   unordered_list(:recentChanges, :class => "special")
   span(:firstResultLabelSpan, :class => "wb-itemlink-label")
   span(:firstResultIdSpan, :class => "wb-itemlink-id")
-  link(:firstResultLink, :xpath => "//ul[@class='special']/li/a[3]")
+  link(:firstResultLink, :xpath => "//ul[@class='special']/li/span/a")
 
   def countSearchResults
     count = 0
