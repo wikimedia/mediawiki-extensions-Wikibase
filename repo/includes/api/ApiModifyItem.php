@@ -278,7 +278,7 @@ abstract class ApiModifyItem extends Api {
 				ApiBase::PARAM_TYPE => 'integer',
 			),
 			'site' => array(
-				ApiBase::PARAM_TYPE => Sites::singleton()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA )->getGlobalIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',

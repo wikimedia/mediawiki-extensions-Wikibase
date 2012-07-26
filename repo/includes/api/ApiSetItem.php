@@ -136,12 +136,12 @@ class ApiSetItem extends ApiModifyItem {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'add-sitelink-failed' );
 						}
 
-						$site = Sites::singleton()->getSiteByGlobalId( $siteId );
-
-						if ( $site === false ) {
+						$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
+						if ( !$group->hasGlobalId( $siteId ) ) {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'add-sitelink-failed' );
 						}
 
+						$site = $group->getSiteByGlobalId( $siteId );
 						$page = $site->normalizePageName( $pageName );
 
 						if ( $page === false ) {
