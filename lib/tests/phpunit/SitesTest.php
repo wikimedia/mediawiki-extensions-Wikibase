@@ -3,6 +3,7 @@
 namespace Wikibase\Test;
 use Wikibase\Item as Item;
 use Wikibase\Sites as Sites;
+use Wikibase\Site as Site;
 
 /**
  * Tests for the Wikibase\Sites class.
@@ -87,12 +88,14 @@ class SitesTest extends \MediaWikiTestCase {
 
 	public function loadConditionsProvider() {
 		return array(
-			array( array( 'global_key' => 'enwiki' ) ),
-			array( array( 'local_key' => 'en' ) ),
-			array( array( 'global_key' => 'zsdfszdrtgsdftyg' ) ),
-			array( array( 'local_key' => 'sdrfsdatddertd' ) ),
-			array( array( 'global_key' => 'enwiki', 'local_key' => 'en' ) ),
-			array( array() ),
+			array( array( 'global_key' => 'enwiki' ), array( 'enwiki' ) ),
+			array( array( 'global_key' => array( 'enwiki', 'dewiki' ) ), array( 'enwiki', 'dewiki' ) ),
+			array( array( 'global_key' => array( 'enwiki', 'dewiki', 'xyzwiki' ) ), array( 'enwiki', 'dewiki' ) ),
+			array( array( 'local_key' => 'en' ), array( 'enwiki' ) ),
+			array( array( 'global_key' => 'zsdfszdrtgsdftyg' ), array() ),
+			array( array( 'local_key' => 'sdrfsdatddertd' ), array() ),
+			array( array( 'global_key' => 'enwiki', 'local_key' => 'en' ), array( 'enwiki' ) ),
+			array( array(), null ),
 		);
 	}
 
@@ -100,10 +103,22 @@ class SitesTest extends \MediaWikiTestCase {
 	 * @dataProvider loadConditionsProvider
 	 * @param array $conditions
 	 */
-	public function testLoadSites( array $conditions ) {
-		Sites::singleton()->loadSites( $conditions );
+	public function testLoadSites( array $conditions, $expected  ) {
+		$sites = new TestSites();
+		$sites->loadSites( $conditions );
 
-		$this->assertTrue( true, 'Loading sites with these conditions: ' . json_encode( $conditions ) );
+		if ( !$expected ) {
+			//don't check content
+			$this->assertTrue( true, "just a dummy" );
+			return;
+		}
+
+		$ids = array();
+		foreach ( $sites->getSiteList() as $site /* @var Site $site */ ) {
+			$ids[] = $site->getGlobalId();
+		}
+
+		$this->assertArrayEquals( $expected, $ids );
 	}
 
 	public function testGetSiteByLocalId() {
@@ -135,4 +150,17 @@ class SitesTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\Site', Sites::newSite( array( 'type' => SITE_TYPE_UNKNOWN ) ) );
 	}
 
+}
+
+class TestSites extends Sites {
+	public function __construct() {
+		parent::__construct();
+	}
+
+	/**
+	 * @return \Wikibase\SiteList
+	 */
+	public function getSiteList() {
+		return $this->sites;
+	}
 }

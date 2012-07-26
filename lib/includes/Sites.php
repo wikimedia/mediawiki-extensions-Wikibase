@@ -120,7 +120,8 @@ class Sites {
 
 			if ( in_array( $field, array( 'global_key', 'local_key' ) ) ) {
 				foreach ( (array)$conditions[$field] as $value ) {
-					if ( $this->getSiteByField( $field, $value ) === false
+					if ( !is_array( $value )
+						&& $this->getSiteByField( $field, $value ) === false
 						&& !in_array( $value, $this->nonExistingSites[$field] ) ) {
 						$this->nonExistingSites[$field][] = $value;
 					}
