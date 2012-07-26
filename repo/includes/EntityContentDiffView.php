@@ -15,7 +15,7 @@ use Content, Html;
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityContentDiffView extends \DifferenceEngine {
+abstract class EntityContentDiffView extends \DifferenceEngine {
 
 	/**
 	 * @see DifferenceEngine::__construct
