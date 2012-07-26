@@ -1,5 +1,11 @@
 <?php
 
+namespace Wikibase;
+use MediaWikiTestCase;
+use Parser, ParserOptions, Title;
+use \Wikibase\LangLinkHandler as LangLinkHandler;
+use \Wikibase\Settings as Settings;
+
 /**
  * Tests for the WikibaseClient.
  *
@@ -79,7 +85,7 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	 * Don't do anything outside of the main namespace...
 	 */
 	public function testNoNamespace() {
-		$title = Title::makeTitle( NS_CATEGORY, "Berlin" );
+		$title =Title::makeTitle( NS_CATEGORY, "Berlin" );
 
 		$links = $this->doParse(
 			$title,
@@ -123,8 +129,8 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 		$parser->parse("", $title, $opt);
 		$parser->getOutput()->setLanguageLinks( $links );
 		$dummy = "";
-		WBCLangLinkHandler::resetLangLinks();
-		WBCLangLinkHandler::onParserBeforeTidy( $parser, $dummy );
+		LangLinkHandler::resetLangLinks();
+		LangLinkHandler::onParserBeforeTidy( $parser, $dummy );
 		return $parser->getOutput()->getLanguageLinks();
 	}
 
@@ -134,8 +140,8 @@ class WikibaseClientGeneralTests extends MediaWikiTestCase {
 	protected function setSettings( $settings = null ) {
 		global $egWBSettings;
 		$egWBSettings = $settings;
-		\Wikibase\Settings::singleton( true );
-		WBCLangLinkHandler::buildSortOrder();
+		Settings::singleton( true );
+		LangLinkHandler::buildSortOrder();
 	}
 
 }
