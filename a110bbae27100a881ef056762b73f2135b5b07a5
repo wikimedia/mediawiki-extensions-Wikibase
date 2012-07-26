@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//9IU\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-26T12:52:05Z",
+      "side": 1,
+      "message": "Sorry, should not be inside the loop.. That was bad..",
+      "revId": "a110bbae27100a881ef056762b73f2135b5b07a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
