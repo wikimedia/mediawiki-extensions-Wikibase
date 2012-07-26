@@ -331,7 +331,7 @@ final class Utils {
 	 * @param array $sequence the list of keys that should exist
 	 * @param array $fallback an array of values that are used as a replacement if nothing is found
 	 * 		The fallback is in the form array( code, text, language )
-	 * @return triplet with the initial language code, the text, and the language object
+	 * @return array|null triplet with the initial language code, the text, and the language object
 	 */
 	static public function lookupMultilangText( array $texts = null, array $sequence = null, array $fallback = null ) {
 
@@ -366,19 +366,19 @@ final class Utils {
 	 *
 	 * Note that a user specific multilingual string is not globally cachable.
 	 *
+	 * FIXME: duplication with @see lookupMultilangText, needs refactor
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $texts the key-value pairs to check for existence
 	 * @param array $sequence the list of keys that should exist
 	 * @param array $fallback an array of values that are used as a replacement if nothing is found
 	 * 		The fallback is in the form array( code, text, language )
-	 * @return triplet with the initial language code, the text, and the language object
+	 * @return array|null triplet with the initial language code, the text, and the language object
 	 */
 	static public function lookupUserMultilangText( array $texts = null, array $sequence = null, array $fallback = null ) {
+		// FIXME: deprecated globals!
 		global $wgUser, $wgLang;
-
-		// Keep this for later
-		$langCode = $wgLang->getCode();
 
 		// Prerequisites for further processing
 		if ( is_null( $texts ) || is_null( $sequence ) ) {
