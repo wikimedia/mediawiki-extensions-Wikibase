@@ -1,4 +1,5 @@
- DEFAULT_BROWSER: "firefox" # "chrome" "ie" "opera" "safari" "firefox"
+ DEFAULT_BROWSER: "firefox"
+ SUPPORTED_BROWSERS: ["firefox", "chrome", "ie"]
  WIKI_URL: "http://localhost/wiki/"
  WIKI_USELANG: "en"
  WIKI_SKIN: "vector" # "vector" "monobook"

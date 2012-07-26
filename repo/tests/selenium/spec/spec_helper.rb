@@ -22,14 +22,15 @@ configs = YAML::load( File.open( 'configuration.yml' ) )
 RSpec.configure do |config|
   config.include PageObject::PageFactory
   config.before(:all) do
-    if ENV["BROWSER_TYPE"]
+    if(ENV["BROWSER_TYPE"] && SUPPORTED_BROWSERS.include?(ENV["BROWSER_TYPE"]))
       browser_type = ENV["BROWSER_TYPE"]
     elsif configs['DEFAULT_BROWSER'] 
       browser_type = configs['DEFAULT_BROWSER']
     else
       raise "No default browser defined. Please define DEFAULT_BROWSER in your local configuration.yml!"
     end
-    if ENV["RUN_REMOTE"] != ""
+    if ENV["RUN_REMOTE"] && ENV["RUN_REMOTE"] != ""
+      puts "remote"
       if browser_type == "ie"
         caps = Selenium::WebDriver::Remote::Capabilities.internet_explorer
       elsif browser_type == "chrome"
