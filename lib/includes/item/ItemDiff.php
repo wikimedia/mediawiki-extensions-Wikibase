@@ -21,11 +21,11 @@ use Diff\MapDiff as MapDiff;
  */
 class ItemDiff extends EntityDiffObject {
 
-	protected static function siteLinksToArray( $links ) {
+	protected static function siteLinksToArray( $baseLinks ) {
 		$links = array();
 
 		/* @var SiteLink $link */
-		foreach ( $links as $link ) {
+		foreach ( $baseLinks as $link ) {
 			$links[ $link->getSiteID() ] = $link->getPage();
 		}
 
