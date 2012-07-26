@@ -92,29 +92,38 @@ class importInterlang extends Maintenance {
 	protected function createItem( $lang, $link ) {
 		$link = self::niceLink( $link );
 
-		$api_response = $this->callAPI( $this->api . "?action=wbgetitemid&format=php&site=" . urlencode( $lang ) . "wiki" . "&title=" . urlencode( $link ) );
-		 if( $this->verbose ) {
-				print_r ( $api_response );
-		 }
-			if( isset( $api_response['error'] ) ) {
+		$api_response = $this->callAPI( $this->api . "?action=wbgetitems&format=php&sites=" . urlencode( $lang ) . "wiki" . "&titles=" . urlencode( $link ) );
+		if( $this->verbose ) {
+			print_r ( $api_response );
+		}
+		if( isset( $api_response['error'] ) ) {
 			if( $api_response['error']['code'] !== 'no-such-item' ) {
 				throw new importInterlangException( $api_response['error']['info'] );
 			}
 		} else {
 			if( isset( $api_response['success'] ) && $api_response['success'] ) {
-				$this->addLink( $lang, $link, $api_response['item']['id'] );
-				$this->maybePrint( "The ID#2 is now: " . $api_response['item']['id'] );
-				return $api_response['item']['id'];
+				$found = array_filter( $api_response['items'], function( $item ) { return !isset( $item['missing'] ); } );
+				if ( count($found) > 1 ) {
+					throw new importInterlangException( "several hits: " . count($found) );
+				}
+				$item = array_pop( $found );
+				if ( isset( $item['id'] ) && $item['id'] !== 0 ) {
+					$this->addLink( $lang, $link, $item['id'] );
+					$this->maybePrint( "The ID#2 is now: " . $item['id'] );
+					return $item['id'];
+				}
 			} else {
 				throw new importInterlangException( "no success" );
 			}
 		}
 
 		// We only reach this if we have received an error, and the error was no-such-item
+		// Note: After the changes we will reach this point if no valid items are found,
+		// that is they are "missing"
 		$api_response = $this->callAPI( $this->api . "?action=wbsetitem&data=%7B%7D&format=php" );
-		 if( $this->verbose ) {
-				print_r ( $api_response );
-		 }
+		if( $this->verbose ) {
+			print_r ( $api_response );
+		}
 		if( isset( $api_response['error'] ) ) {
 			throw new importInterlangException( $api_response['error']['info'] );
 		}
@@ -140,7 +149,7 @@ class importInterlang extends Maintenance {
 		}
 		$label = self::niceLink( $link );
 
-		$api_response = $this->callAPI( $this->api . "?action=wbsetlink&format=php&id=" . urlencode( $id )	. "&linksite=" . urlencode( $lang ) . "wiki" . "&linktitle=" . urlencode( $link ) );
+		$api_response = $this->callAPI( $this->api . "?action=wbsetsitelink&format=php&id=" . urlencode( $id )	. "&linksite=" . urlencode( $lang ) . "wiki" . "&linktitle=" . urlencode( $link ) );
 		if( $this->verbose ) {
 				print_r ( $api_response );
 		}
@@ -148,7 +157,7 @@ class importInterlang extends Maintenance {
 			throw new importInterlangException( $api_response['error']['info'] );
 		}
 
-		$api_response = $this->callAPI( $this->api . "?action=wbsetlanguageattribute&format=php&item=set&id=" . urlencode( $id ) . "&language=" . urlencode( $lang ) . "&label=" . urlencode( $label ) );
+		$api_response = $this->callAPI( $this->api . "?action=wbsetlanguageattribute&format=php&id=" . urlencode( $id ) . "&language=" . urlencode( $lang ) . "&label=" . urlencode( $label ) );
 		if( isset( $api_response['error'] ) ) {
 			throw new importInterlangException( $api_response['error']['info'] );
 		}
