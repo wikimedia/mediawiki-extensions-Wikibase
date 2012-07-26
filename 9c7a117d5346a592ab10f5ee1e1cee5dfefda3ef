@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//88s\u003d",
+        "filename": "lib/WikibaseLib.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-26T18:51:52Z",
+      "side": 1,
+      "message": "This is inconsistent with client and repo, which are putting the handler for this in the hooks file. Using a new class is in itself inconsistent with the other hooks, and rather pointless for this hook.",
+      "revId": "9c7a117d5346a592ab10f5ee1e1cee5dfefda3ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//89M\u003d",
+        "filename": "lib/WikibaseLib.settings.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-26T18:51:52Z",
+      "side": 1,
+      "message": "There is a lot of stuff here that\u0027s specific to the repo and should not be put in the lib.",
+      "revId": "9c7a117d5346a592ab10f5ee1e1cee5dfefda3ef",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
