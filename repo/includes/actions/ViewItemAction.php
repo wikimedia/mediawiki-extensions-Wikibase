@@ -25,11 +25,15 @@ class ViewItemAction extends ViewEntityAction {
 	public function show() {
 		parent::show();
 
-		ItemView::registerJsConfigVars(
-			$this->getOutput(),
-			$this->getContent(),
-			$this->getLanguage()->getCode()
-		);
+		$content = $this->getContent();
+
+		if ( !is_null( $content ) ) {
+			ItemView::registerJsConfigVars(
+				$this->getOutput(),
+				$this->getContent(),
+				$this->getLanguage()->getCode()
+			);
+		}
 	}
 
 }
