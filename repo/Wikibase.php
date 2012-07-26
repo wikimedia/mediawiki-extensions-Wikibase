@@ -149,7 +149,6 @@ $wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
 
 
 // Hooks
-$wgHooks['WikibaseDefaultSettings'][] 			    = 'Wikibase\RepoHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\RepoHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][] 						= 'Wikibase\RepoHooks::registerUnitTests';
 $wgHooks['PageContentLanguage'][]					= 'Wikibase\RepoHooks::onPageContentLanguage';
