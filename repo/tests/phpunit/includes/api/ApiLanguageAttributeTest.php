@@ -34,8 +34,10 @@ use \Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  *
+ * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group ApiLanguageAttributeTest
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >

@@ -39,8 +39,10 @@ use Wikibase\Test\ApiModifyItemBase as ApiModifyItemBase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  *
+ * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group ApiSetAliasesTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
