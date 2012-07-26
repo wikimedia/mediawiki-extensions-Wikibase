@@ -28,8 +28,10 @@ use Wikibase\ItemContent as ItemContent;
  * @ingroup Wikibase
  * @ingroup Test
  *
+ * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group ApiModifyItemBase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

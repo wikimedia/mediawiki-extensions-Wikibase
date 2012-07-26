@@ -50,17 +50,17 @@ class ApiGetItems extends Api {
 				$idxTitles = 0;
 
 				for ( $k = 0; $k < $max; $k++ ) {
-					$site = $params['sites'][$idxSites++];
+					$siteId = $params['sites'][$idxSites++];
 					$title = Utils::squashToNFC( $params['titles'][$idxTitles++] );
 
-					$id = ItemHandler::singleton()->getIdForSiteLink( $site, $title );
+					$id = ItemHandler::singleton()->getIdForSiteLink( $siteId, $title );
 
 					if ( $id ) {
 						$params['ids'][] = intval( $id );
 					}
 					else {
 						$this->getResult()->addValue( 'items', (string)(--$missing),
-							array( 'site' => $site, 'title' => $title, 'missing' => "" )
+							array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
 						);
 					}
 
@@ -159,7 +159,7 @@ class ApiGetItems extends Api {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => Sites::singleton()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA )->getGlobalIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'titles' => array(
