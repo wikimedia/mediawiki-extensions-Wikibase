@@ -51,9 +51,9 @@ $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php
 
 $wgAutoloadClasses['Wikibase\LocalItem'] 			= $dir . 'includes/LocalItem.php';
 $wgAutoloadClasses['Wikibase\LocalItemsTable'] 		= $dir . 'includes/LocalItemsTable.php';
-$wgAutoloadClasses['WBCLangLinkHandler'] 			= $dir . 'includes/WBCLangLinkHandler.php';
-$wgAutoloadClasses['WBCNoLangLinkHandler'] 			= $dir . 'includes/WBCNoLangLinkHandler.php';
-$wgAutoloadClasses['WBCSkinHandler'] 				= $dir . 'includes/WBCSkinHandler.php';
+$wgAutoloadClasses['Wikibase\LangLinkHandler'] 			= $dir . 'includes/LangLinkHandler.php';
+$wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 			= $dir . 'includes/NoLangLinkHandler.php';
+$wgAutoloadClasses['Wikibase\SkinHandler'] 				= $dir . 'includes/SkinHandler.php';
 
 // Hooks
 $wgHooks['UnitTestsList'][] 						= '\Wikibase\ClientHooks::registerUnitTests';
@@ -61,12 +61,12 @@ $wgHooks['WikibasePollHandle'][]					= '\Wikibase\ClientHooks::onWikibasePollHan
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= '\Wikibase\ClientHooks::onSchemaUpdate';
 $wgHooks['WikibaseDefaultSettings'][] 			    = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
 
-$wgHooks['ParserBeforeTidy'][] 						= 'WBCLangLinkHandler::onParserBeforeTidy';
-$wgHooks['ParserFirstCallInit'][]					= 'WBCNoLangLinkHandler::onParserFirstCallInit';
-$wgHooks['MagicWordwgVariableIDs'][]				= 'WBCNoLangLinkHandler::onMagicWordwgVariableIDs';
-$wgHooks['ParserGetVariableValueSwitch'][]			= 'WBCNoLangLinkHandler::onParserGetVariableValueSwitch';
-$wgHooks['SkinTemplateOutputPageBeforeExec'][]		= 'WBCSkinHandler::onSkinTemplateOutputPageBeforeExec';
-$wgHooks['BeforePageDisplay'][]						= 'WBCSkinHandler::onBeforePageDisplay';
+$wgHooks['ParserBeforeTidy'][] 						= '\Wikibase\LangLinkHandler::onParserBeforeTidy';
+$wgHooks['ParserFirstCallInit'][]					= '\Wikibase\NoLangLinkHandler::onParserFirstCallInit';
+$wgHooks['MagicWordwgVariableIDs'][]				= '\Wikibase\NoLangLinkHandler::onMagicWordwgVariableIDs';
+$wgHooks['ParserGetVariableValueSwitch'][]			= '\Wikibase\NoLangLinkHandler::onParserGetVariableValueSwitch';
+$wgHooks['SkinTemplateOutputPageBeforeExec'][]		= '\Wikibase\SkinHandler::onSkinTemplateOutputPageBeforeExec';
+$wgHooks['BeforePageDisplay'][]						= '\Wikibase\SkinHandler::onBeforePageDisplay';
 
 
 // Resource loader modules

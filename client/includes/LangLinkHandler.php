@@ -1,38 +1,40 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Handles language links.
  * TODO: do we really want to refresh this on re-render? push updates from the repo seem to make more sense
  *
  * @since 0.1
  *
- * @file WBCLangLinkHandler.php
+ * @file LangLinkHandler.php
  * @ingroup WikibaseClient
  *
  * @licence	GNU GPL v2+
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
-class WBCLangLinkHandler {
-        protected static $sort_order = false;
-        protected static $langlinksset = false;
+class LangLinkHandler {
+	protected static $sort_order = false;
+	protected static $langlinksset = false;
 
 	# todo: this is hackish, is this the best hook to use?
-        public static function onParserBeforeTidy( Parser &$parser, &$text ) {
+	public static function onParserBeforeTidy( \Parser &$parser, &$text ) {
 		if ( ! self::$langlinksset ) {
-                	if ( self::addLangLinks( $parser, $text ) ) {
+			if ( self::addLangLinks( $parser, $text ) ) {
                         	self::$langlinksset = true;
                 	}
 		}
-                return true;
-        }
+		return true;
+	}
 
-        protected static function addLangLinks( Parser &$parser, &$text ) {
-                global $wgLanguageCode;
+	protected static function addLangLinks( \Parser &$parser, &$text ) {
+		global $wgLanguageCode;
 
-                // If this is an interface message, we don't do anything.
-                if( $parser->getOptions()->getInterfaceMessage() ) {
-                        return true;
-                }
+		// If this is an interface message, we don't do anything.
+		if( $parser->getOptions()->getInterfaceMessage() ) {
+			return true;
+		}
 
 		// If we don't support the namespace, we maybe sort the links, but don't do anything else.
 		$title = $parser->getTitle();
@@ -87,7 +89,7 @@ class WBCLangLinkHandler {
 	 *
 	 * @return Array Empty array if not set.
 	 */
-	public static function getNoExternalInterlang( ParserOutput $out ) {
+	public static function getNoExternalInterlang( \ParserOutput $out ) {
 		$nei = $out->getProperty( 'no_external_interlang' );
 
 		if( empty( $nei ) ) {
@@ -132,7 +134,7 @@ class WBCLangLinkHandler {
 
 		$url = $api .
 			"?action=wbgetsitelinks&format=php&site=" . $wgLanguageCode . "&title=" . urlencode( $title_text );
-		$api_response = Http::get( $url );
+		$api_response = \Http::get( $url );
 		$api_response = unserialize( $api_response );
 
 		if( !is_array( $api_response ) || isset( $api_response['error'] ) ) {
@@ -215,7 +217,7 @@ class WBCLangLinkHandler {
 			$a[$k] = explode( ':', $langlink, 2 );
 		}
 
-		usort( $a, 'WBCLangLinkHandler::compareLinks' );
+		usort( $a, '\Wikibase\LangLinkHandler::compareLinks' );
 
 		// Restore the sorted array.
 		foreach( $a as $k => $langlink ) {
