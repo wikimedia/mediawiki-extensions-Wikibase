@@ -172,7 +172,7 @@ abstract class ApiModifyItem extends Api {
 			if ( $this->flags & EDIT_NEW) {
 				$this->flags |= EDIT_UPDATE;
 			}
-			$this->flags = ($user->isAllowed( 'bot' ) && $params['bot']) ? EDIT_FORCE_BOT : 0;
+			$this->flags = ($user->isAllowed( 'bot' ) ) ? EDIT_FORCE_BOT : 0;
 			$summary = '';
 			// Do the actual save, or if it don't exist yet create it.
 			$status = $itemContent->save( $summary, $user, $this->flags );
@@ -284,7 +284,6 @@ abstract class ApiModifyItem extends Api {
 				ApiBase::PARAM_TYPE => 'string',
 			),
 			'token' => null,
-			'bot' => false,
 		) );
 	}
 

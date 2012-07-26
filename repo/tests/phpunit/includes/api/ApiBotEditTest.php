@@ -169,9 +169,6 @@ class ApiBotEditTest extends \ApiTestCase {
 		if ( !$new ) {
 			$req['id'] = $myid;
 		}
-		if ( $bot ) {
-			$req['bot'] = true;
-		}
 
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
 
@@ -199,8 +196,8 @@ class ApiBotEditTest extends \ApiTestCase {
 			"Must have a '0' key in 'recentchanges' subset of the third result from the API" );
 		$this->assertTrue( $new == array_key_exists( 'new', $third[0]['query']['recentchanges']['0'] ),
 			"Must" . ( $new ? '' : ' not ' ) . "have a 'new' key in the rc-entry of the third result from the API" );
-		$this->assertTrue( $bot == array_key_exists( 'bot', $third[0]['query']['recentchanges']['0'] ),
-			"Must" . ( $bot ? '' : ' not ' ) . "have a 'bot' key in the rc-entry of the third result from the API" );
+		$this->assertArrayHasKey( 'bot', $third[0]['query']['recentchanges']['0'],
+			"Must have a 'bot' key in the rc-entry of the third result from the API" );
 	}
 
 	function providerCreateItem() {
