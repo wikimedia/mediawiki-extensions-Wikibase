@@ -148,12 +148,12 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.wait_for_api_callback
 
           count = count+1
-          page.getNumberOfSitelinksFromCounter.should == count
+          #page.getNumberOfSitelinksFromCounter.should == count
           @browser.refresh
           page.wait_for_sitelinks_to_load
-          page.getNumberOfSitelinksFromCounter.should == count
+          #page.getNumberOfSitelinksFromCounter.should == count
         end
-        page.countExistingSitelinks.should == count
+        #page.countExistingSitelinks.should == count
       end
     end
   end
