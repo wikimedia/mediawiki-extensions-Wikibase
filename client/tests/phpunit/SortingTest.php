@@ -1,5 +1,7 @@
 <?php
 
+namespace Wikibase;
+
 /**
  * Tests for the WikibaseClient sorting.
  *
@@ -15,7 +17,7 @@
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>, Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class WikibaseClientSortingTests extends MediaWikiTestCase {
+class WikibaseClientSortingTests extends \MediaWikiTestCase {
 
 	/**
 	 * No sorting.
@@ -24,10 +26,10 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 		global $egWBSettings;
 		$egWBSettings = array();
 		\Wikibase\Settings::singleton( true );
-		WBCLangLinkHandler::buildSortOrder();
+		\Wikibase\LangLinkHandler::buildSortOrder();
 
 		$sorted = $orig = $this->provideArray();
-		WBCLangLinkHandler::sortLinks( $sorted );
+		\Wikibase\LangLinkHandler::sortLinks( $sorted );
 		$this->assertEquals( $orig, $sorted );
 	}
 
@@ -40,10 +42,10 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 			'sort' => 'code'
 		);
 		\Wikibase\Settings::singleton( true );
-		WBCLangLinkHandler::buildSortOrder();
+		\Wikibase\LangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
-		WBCLangLinkHandler::sortLinks( $sorted );
+		\Wikibase\LangLinkHandler::sortLinks( $sorted );
 		$this->assertEquals( array(
 			"ace:Wikipèdia",
 			"af:Wikipedia",
@@ -305,10 +307,10 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 			'sort' => 'alphabetic'
 		);
 		\Wikibase\Settings::singleton( true );
-		WBCLangLinkHandler::buildSortOrder();
+		\Wikibase\LangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
-		WBCLangLinkHandler::sortLinks( $sorted );
+		\Wikibase\LangLinkHandler::sortLinks( $sorted );
 		$this->assertEquals( $this->provideAlphabetic(), $sorted );
 	}
 
@@ -318,10 +320,10 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 			'sort' => 'alphabetic_revised'
 		);
 		\Wikibase\Settings::singleton( true );
-		WBCLangLinkHandler::buildSortOrder();
+		\Wikibase\LangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
-		WBCLangLinkHandler::sortLinks( $sorted );
+		\Wikibase\LangLinkHandler::sortLinks( $sorted );
 		$this->assertEquals( array(
 			"ace:Wikipèdia",
 			"af:Wikipedia",
@@ -839,10 +841,10 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 			)
 		);
 		\Wikibase\Settings::singleton( true );
-		WBCLangLinkHandler::buildSortOrder();
+		\Wikibase\LangLinkHandler::buildSortOrder();
 
 		$sorted = $this->provideArray();
-		WBCLangLinkHandler::sortLinks( $sorted );
+		\Wikibase\LangLinkHandler::sortLinks( $sorted );
 		$this->assertEquals( array_reverse( $this->provideAlphabetic() ), $sorted );
 	}
 
@@ -855,13 +857,13 @@ class WikibaseClientSortingTests extends MediaWikiTestCase {
 			'sort' => 'alphabetic'
 		);
 		\Wikibase\Settings::singleton( true );
-		WBCLangLinkHandler::buildSortOrder();
+		\Wikibase\LangLinkHandler::buildSortOrder();
 
 		$alphabetic = $this->provideAlphabetic();
 		array_push( $alphabetic, "qzz:???" );
 		$sorted = $this->provideArray();
 		array_unshift( $sorted, "qzz:???" );
-		WBCLangLinkHandler::sortLinks( $sorted );
+		\Wikibase\LangLinkHandler::sortLinks( $sorted );
 		$this->assertEquals( $alphabetic, $sorted );
 	}
 

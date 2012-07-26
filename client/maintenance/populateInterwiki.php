@@ -1,11 +1,14 @@
 <?php
+
+namespace Wikibase; 
+
 /**
  * @author Katie Filbert
  */
 
 require_once( dirname( __FILE__ ) . '../../../../../maintenance/Maintenance.php' );
 
-class PopulateInterwiki extends Maintenance {
+class PopulateInterwiki extends \Maintenance {
 
 	public function __construct() {
 		parent::__construct();
@@ -30,8 +33,8 @@ TEXT;
 	public function fetchLinks() {
 		$url = 'http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&sifilteriw=local&format=json';
 
-		$json = Http::get( $url );
-		$data = FormatJSON::decode( $json, true );
+		$json = \Http::get( $url );
+		$data = \FormatJSON::decode( $json, true );
 
 		return $data['query']['interwikimap'];
 	}
@@ -84,4 +87,3 @@ TEXT;
 
 $maintClass = 'PopulateInterwiki';
 require_once( RUN_MAINTENANCE_IF_MAIN );
-
