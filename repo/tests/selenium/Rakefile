@@ -130,9 +130,13 @@ task :runlocal_iexplorer do
   Rake::Task[:default].invoke
 end
 
-task :run_tests, :browser, :remote, :os do |t, args|
-  ENV["BROWSER_TYPE"] = args[:browser] || ""
-  ENV["RUN_REMOTE"] = args[:remote] || ""
-  ENV["TARGET_OS"] = args[:os] || ""
-  Rake::Task[:default].invoke
+task :run_tests, :taskname, :browser, :remote, :os do |t, args|
+  setup_env(args[:browser], args[:remote], args[:os])
+  Rake::Task[args[:taskname]].invoke
+end
+
+def setup_env(browser, remote, os)
+  ENV["BROWSER_TYPE"] = browser
+  ENV["RUN_REMOTE"] = remote
+  ENV["TARGET_OS"] = os
 end

@@ -24,19 +24,26 @@ RSpec.configure do |config|
   config.before(:all) do
     if(ENV["BROWSER_TYPE"] && SUPPORTED_BROWSERS.include?(ENV["BROWSER_TYPE"]))
       browser_type = ENV["BROWSER_TYPE"]
-    elsif configs['DEFAULT_BROWSER'] 
+    elsif configs['DEFAULT_BROWSER']
       browser_type = configs['DEFAULT_BROWSER']
     else
       raise "No default browser defined. Please define DEFAULT_BROWSER in your local configuration.yml!"
     end
     if ENV["RUN_REMOTE"] && ENV["RUN_REMOTE"] != ""
-      puts "remote"
+      if(ENV["TARGET_OS"])
+        target_os = ENV["TARGET_OS"]
+      end
       if browser_type == "ie"
         caps = Selenium::WebDriver::Remote::Capabilities.internet_explorer
       elsif browser_type == "chrome"
         caps = Selenium::WebDriver::Remote::Capabilities.chrome
       else
         caps = Selenium::WebDriver::Remote::Capabilities.firefox
+      end
+      if target_os == "windows"
+        caps.platform = :WINDOWS
+      elsif target_os == "linux"
+        caps.platform = :LINUX
       end
       @browser = Watir::Browser.new(:remote, :url => REMOTE_SELENIUM_HUB, :desired_capabilities => caps)
     else
@@ -47,7 +54,6 @@ RSpec.configure do |config|
   config.after(:all) do
     @browser.close
   end
-
 end
 
 def ajax_wait
