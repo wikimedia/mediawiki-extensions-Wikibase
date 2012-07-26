@@ -107,7 +107,7 @@ class ItemView extends \ContextSource {
 			$i = 0;
 
 			// Batch load the sites we need info about during the building of the sitelink list.
-			Sites::singleton()->loadSites( array( 'global_key' => array_keys( $siteLinks ) ) );
+			Sites::singleton()->loadSites( array( 'global_key' => SiteLink::getSiteIds( $siteLinks ) ) );
 
 
 			foreach( $siteLinks as $link ) { /* @var SiteLink $link */
