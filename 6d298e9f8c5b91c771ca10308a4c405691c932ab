@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//89w\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-26T18:41:33Z",
+      "side": 1,
+      "message": "Missing @since tag",
+      "revId": "6d298e9f8c5b91c771ca10308a4c405691c932ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//89s\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-26T18:41:33Z",
+      "side": 1,
+      "message": "Missing type hint",
+      "revId": "6d298e9f8c5b91c771ca10308a4c405691c932ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//89g\u003d",
+        "filename": "lib/includes/SiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-26T18:41:33Z",
+      "side": 1,
+      "message": "Might be nicer to have a SiteLinks object with getGlobalIds method. Which brings up that this method does not have global in it\u0027s name, which might lead to confusion.",
+      "revId": "6d298e9f8c5b91c771ca10308a4c405691c932ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
