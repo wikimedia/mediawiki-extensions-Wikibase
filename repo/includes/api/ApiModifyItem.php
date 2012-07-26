@@ -116,7 +116,7 @@ abstract class ApiModifyItem extends Api {
 		elseif ( $hasLink ) {
 			$itemContent = ItemHandler::singleton()->getFromSiteLink( $params['site'], $normTitle );
 
-			if ( is_null( $itemContent ) && $params['item'] === 'update' ) {
+			if ( is_null( $itemContent ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
 			}
 		}
