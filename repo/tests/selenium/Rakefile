@@ -117,19 +117,6 @@ task :delete_item => :spec_item_deletion
 task :editonoff => :spec_editonoff
 task :bugs => :spec_bugs
 
-task :runlocal_firefox do
-  ENV["BROWSER_TYPE"] = "firefox"
-  Rake::Task[:default].invoke
-end
-task :runlocal_chrome do
-  ENV["BROWSER_TYPE"] = "chrome"
-  Rake::Task[:default].invoke
-end
-task :runlocal_iexplorer do
-  ENV["BROWSER_TYPE"] = "ie"
-  Rake::Task[:default].invoke
-end
-
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
   setup_env(args[:browser], args[:remote], args[:os])
   Rake::Task[args[:taskname]].invoke
