@@ -172,7 +172,8 @@ abstract class ApiModifyItem extends Api {
 			if ( $this->flags & EDIT_NEW) {
 				$this->flags |= EDIT_UPDATE;
 			}
-			$this->flags = ($user->isAllowed( 'bot' ) && $params['bot']) ? EDIT_FORCE_BOT : 0;
+			// This is similar to ApiEditPage.php and what it uses at line 314
+			$this->flags = ($user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 			$summary = '';
 			// Do the actual save, or if it don't exist yet create it.
 			$status = $itemContent->save( $summary, $user, $this->flags );
@@ -309,6 +310,10 @@ abstract class ApiModifyItem extends Api {
 				'During a normal reply a token can be returned spontaneously and the requester should',
 				'then start using the new token from the next request, possibly when repeating a failed',
 				'request.'
+			),
+			// This is similar to ApiEditPage.php and what it uses at line 527
+			'bot' => array( 'Mark this edit as bot',
+				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
 		) );
 	}
