@@ -248,9 +248,9 @@ class ApiSetItem extends ApiModifyItem {
 	 * @return mixed string or array of strings
 	 */
 	public function getDescription() {
-		return array_merge( parent::getDescription(), array(
+		return array(
 			'API module to create a single new Wikibase item and modify it with serialised information.'
-		) );
+		);
 	}
 
 	/**
