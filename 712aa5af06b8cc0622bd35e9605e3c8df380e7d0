@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//88Y\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-26T18:55:01Z",
+      "side": 1,
+      "message": "This is just so utter fail - having to qualify the full path to something in the same object like this. Serious spaghetti code we got here \u003e_\u003e\n\nJust whining about what\u0027s already here, no problem with your change :)",
+      "revId": "712aa5af06b8cc0622bd35e9605e3c8df380e7d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//88Q\u003d",
+        "filename": "client/includes/NoLangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-26T18:55:01Z",
+      "side": 1,
+      "message": "Missing namespace in the path here",
+      "revId": "712aa5af06b8cc0622bd35e9605e3c8df380e7d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
