@@ -28,6 +28,14 @@ $.extend( window.wikibase.ui.LabelEditTool.prototype, {
 	 * @see wikibase.ui.PropertyEditTool._init()
 	 */
 	_init: function( subject ) {
+
+		/**
+		 * in order to receive having label edit tool on the same DOM level as the description edit
+		 * tool, another DOM level has to be introduced for the label by inserting another span tag
+		 */
+		var text = subject.text();
+		$( '<span/>', { text: text } ).appendTo( subject.text( '' ) );
+
 		// call prototypes _init():
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
 		// add class specific to this ui element:

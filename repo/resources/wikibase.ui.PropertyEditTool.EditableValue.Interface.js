@@ -67,7 +67,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
-		this._subject = $( subject );
+		this._subject = $( subject ).addClass( this.UI_CLASS );
 
 		// make sure the value is normalized when initialized:
 		this.setValue( this.getValue() );

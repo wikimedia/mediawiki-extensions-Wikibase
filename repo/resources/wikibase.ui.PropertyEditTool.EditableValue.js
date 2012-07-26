@@ -146,6 +146,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		this._toolbar = toolbar;
 		var tbParent = this._getToolbarParent();
+		tbParent.css( 'position', 'relative' ); // fxing Firefox's css recognition
 		this._toolbar.appendTo( tbParent );
 		tbParent.addClass( this.UI_CLASS + '-toolbarparent' );
 
@@ -460,7 +461,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 					}
 
 					waitMsg.remove();
-					self._toolbar._elem.fadeIn( 300 ); // only re-display toolbar if value wasn't removed
+					// only re-display toolbar if value wasn't removed
+					self._toolbar._elem.children().fadeIn( 300 );
 				}
 			} );
 		} )
@@ -469,7 +471,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			self._subject.removeClass( self.UI_CLASS + '-waiting' );
 			waitMsg.remove();
 			self.enable(); // re-enabling actions and input box when saving has failed
-			self._toolbar._elem.show();
+			self._toolbar._elem.children().show();
 			if ( apiAction === self.API_ACTION.REMOVE ) {
 				/**
 				 * re-enable all actions when removing fails since it is just using edit mode for
@@ -485,7 +487,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		 * re-enabling is necessary in that case)
 		 */
 		this.disable();
-		this._toolbar._elem.fadeOut( 200, $.proxy( function() {
+		/**
+		 * fading the toolbar element's children since the toolbar might be positioned absolute
+		 * preventing its opacity to be inherited by the children
+		 */
+		this._toolbar._elem.children().fadeOut( 200, $.proxy( function() {
 			waitMsg.fadeIn( 200 );
 			// do the actual API request and trigger jQuery.Deferred stuff:
 			this.queryApi( deferred, apiAction );

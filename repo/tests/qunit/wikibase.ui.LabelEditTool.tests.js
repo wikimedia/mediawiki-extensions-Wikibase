@@ -34,8 +34,8 @@
 			);
 
 			equal(
-				this.h1.children()[0],
-				this.span[0],
+				this.h1.children().first().text(),
+				$( this.span[0] ).text(),
 				'span child remains'
 			);
 
@@ -50,8 +50,8 @@
 	test( 'basic check', function() {
 
 		equal(
-			this.subject._getValueElems()[0],
-			this.span[0],
+			this.subject._getValueElems().first().children().first().text(),
+			$( this.span[0] ).text(),
 			'checked getting value element'
 		);
 

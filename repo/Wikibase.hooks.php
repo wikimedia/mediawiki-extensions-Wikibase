@@ -499,6 +499,78 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Used to restructure the DOM to better reflect the structure of a Wikidata item without having
+	 * to perform major css hacks to adapt the existing MediaWiki skins to Wikidata
+	 *
+	 * @since 0.1
+	 *
+	 * @param \OutputPage $out
+	 *
+	 * @return bool
+	 */
+	public static function onAfterFinalPageOutput( &$out ) {
+
+		if (
+			$out->getTitle()->getContentModel() === CONTENT_MODEL_WIKIBASE_ITEM ||
+			$out->getTitle()->isSpecial( 'CreateItem' )
+		) {
+
+			// get the output buffer
+			$output = ob_get_clean();
+
+			// only using body to construct DOM document since DOMDocument will mess character
+			// encoding of JavaScript strings (e.g. language names)
+			$bodyStart = strpos( $output, '<body' );
+			$bodyEnd = strpos( $output, '</body>' );
+			$dom = array(
+				substr( $output, 0, $bodyStart ),
+				substr( $output, $bodyStart, ( $bodyEnd - $bodyStart ) ),
+				substr( $output, $bodyEnd )
+			);
+
+			// create a DOM document with the page's HTML to easily move nodes around
+			$doc = new \DOMDocument();
+
+			// force loading in UTF-8 character set
+			$doc->loadHTML( '<?xml encoding="UTF-8">'.$dom[1] );
+			foreach ( $doc->childNodes as $node ) {
+				if ( $node->nodeType == XML_PI_NODE ) {
+					$doc->removeChild( $node ); // remove hack
+				}
+			}
+			$doc->encoding = 'UTF-8'; // properly define UTF-8 encoding afterwards
+
+			// append description node to the heading since heading line should appear underneath it
+			if ( ( $descriptionNode = $doc->getElementById( 'wb-description' ) ) !== null ) {
+				$doc->getElementById( 'firstHeading' )->appendChild( $descriptionNode );
+			}
+
+			// move aliases directly underneath the heading line
+			$bodyContentNode = $doc->getElementById( 'bodyContent' );
+			if ( ( $aliasesNode = $doc->getElementById( 'wb-aliases' ) ) !== null ) {
+				$bodyContentNode->insertBefore( $aliasesNode, $bodyContentNode->firstChild );
+			}
+
+			// remove doctype, html and body tags automatically prepended by saveHTML function
+			$html = preg_replace(#
+				array(
+					'/^\<\!DOCTYPE.*?<html>/si',
+					'!</body></html>$!si'
+				),
+				'',
+				$doc->saveHTML()
+			);
+
+			// restart output buffering and output original doctype definition and manipulated DOM
+			ob_start();
+			echo $dom[0].$html.$dom[2];
+
+		}
+
+		return true;
+	}
+
+	/**
 	 * Special page handling where we want to display meaningful link labels instead of just the items ID.
 	 * This is only handling special pages right now and gets disabled in normal pages.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinkBegin

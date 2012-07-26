@@ -28,7 +28,7 @@ class SitelinksItemPage < NewItemPage
   link(:removeSitelinkLink, :text => "remove")
   link(:editSitelinkLink, :text => "edit", :index => 2)
   link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
-  link(:germanSitelink, :xpath => "//td[@class='wb-sitelinks-link wb-sitelinks-link-de']/a")
+  link(:germanSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-de')]/a")
   span(:articleTitle, :xpath => "//h1[@id='firstHeading']/span")
 
   def getNumberOfSitelinksFromCounter

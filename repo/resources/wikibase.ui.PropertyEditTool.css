@@ -10,17 +10,37 @@
  * @author Daniel Werner
  */
 
-h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
+h1.firstHeading .wb-ui-propertyedittool {
+	display: block;
+}
+
+h1.firstHeading .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue {
+	position: relative;
+}
+
+h1.firstHeading .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	position: absolute;
+	bottom: -0.3em;
 	font-size: 0.5em;
 }
-	h1.firstHeading input {
-		font-family:inherit;
-		font-size:inherit;
-	}
 
-.wb-property-container-value {
-	margin-left: .3em;
-	margin-right: .3em;
+h1.firstHeading .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-toolbarparent div {
+	position: absolute;
+	bottom: 0;
+}
+
+h1.firstHeading .wb-ui-labeledittool .mw-help-field-hint {
+	padding-bottom: 0.3em;
+}
+
+h1.firstHeading .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-waitmsg {
+	position: absolute;
+	bottom: -0.3em;
+}
+
+h1.firstHeading input {
+	font-family:inherit;
+	font-size:inherit;
 }
 
 .mw-content-rtl .ui-autocomplete-loading { /* set AJAX spinner to left of the autocomplete input box in rtl */
@@ -78,10 +98,6 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 
 .wb-ui-propertyedittool-editablevalue-ineditmode {
 	white-space: nowrap;
-}
-
-.wb-property-container-value {
-	margin-left: 0;
 }
 
 .wb-ui-propertyedittool-ineditmode {
@@ -163,10 +179,6 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 
 
 /********** ALIASES **********/
-
-.wb-aliases {
-	float: left; /* necessary for highlighting in edit mode */
-}
 
 .wb-aliases .wb-ui-propertyedittool-editablevalue {
 	display: inline;

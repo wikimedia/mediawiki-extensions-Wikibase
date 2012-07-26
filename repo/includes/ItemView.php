@@ -63,20 +63,18 @@ class ItemView extends \ContextSource {
 		$siteLinks = $item->getItem()->getSiteLinks();
 
 		// even if description is false, we want it in any case!
-		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
-		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
+		$html .= Html::openElement( 'span', array( 'id' => 'wb-description', 'class' => 'wb-description wb-property-container' ) );
+		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
 		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
-		$html .= Html::closeElement( 'div' );
-
-		$html .= Html::element( 'hr', array( 'class' => 'wb-hr' ) );
+		$html .= Html::closeElement( 'span' );
 
 		// ALIASES
 
 		if ( empty( $aliases ) ) {
 			// no aliases available for this item
-			$html .= Html::element( 'div', array( 'class' => 'wb-aliases-empty' ), wfMessage( 'wikibase-aliases-empty' ) );
+			$html .= Html::element( 'div', array( 'id' => 'wb-aliases', 'class' => 'wb-aliases wb-aliases-empty' ), wfMessage( 'wikibase-aliases-empty' ) );
 		} else {
-			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
+			$html .= Html::openElement( 'div', array( 'id' => 'wb-aliases', 'class' => 'wb-aliases' ) );
 			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMsg( 'wikibase-aliases-label' ) );
 			$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
 			foreach( $aliases as $alias ) {
