@@ -57,7 +57,7 @@ class LocalItem extends ORMRow {
 
 		// TODO: obtain local wiki global id
 		// TODO: properly manage this field
-		if ( array_key_exists( 'enwiki', $siteLinks ) ) {
+		if ( in_array( 'enwiki', SiteLink::getSiteIDs( $siteLinks ) ) ) {
 			$localItem->setField( 'page_title', $siteLinks['enwiki'] );
 		}
 

@@ -170,4 +170,22 @@ class SiteLink {
 	public static function toDBKey( $title ) {
 		return str_replace( ' ', '_', $title );
 	}
+
+	/**
+	 * Returns the list of site IDs for a given list of site Links.
+	 * Each site will only occur once in the result.
+	 * The order of the site ids in the result is undefined.
+	 *
+	 * @param $siteLinks array a list of SiteLink objects
+	 * @return array the list of site ids.
+	 */
+	public static function getSiteIDs( $siteLinks ) {
+		$siteIds = array();
+
+		foreach ( $siteLinks as $link /* @var SiteLink $link */) {
+			$siteIds[] = $link->getSiteID();
+		}
+
+		return array_unique( $siteIds );
+	}
 }

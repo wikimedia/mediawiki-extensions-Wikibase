@@ -110,4 +110,30 @@ class SiteLinkTest extends \MediaWikiTestCase {
 		$this->assertEquals( "enwiki:Foo_Bar", "$link" );
 	}
 
+	public function dataGetSiteIDs() {
+		return array(
+			array(
+				array(),
+				array() ),
+
+			array(
+				array( SiteLink::newFromText( 'enwiki', "Foo Bar" ), SiteLink::newFromText( 'dewiki', "Bla bla" ) ),
+				array( 'enwiki', 'dewiki' ) ),
+
+			array(
+				array( SiteLink::newFromText( 'enwiki', "Foo Bar" ), SiteLink::newFromText( 'dewiki', "Bla bla" ), SiteLink::newFromText( 'enwiki', "More Stuff" ) ),
+				array( 'enwiki', 'dewiki' ) ),
+		);
+	}
+
+	/**
+	 *
+	 * @dataProvider dataGetSiteIDs
+	 * @depends testNewFromText
+	 */
+	public function testGetSiteIDs( $links, $expected ) {
+		$ids = SiteLink::getSiteIDs( $links );
+
+		$this->assertArrayEquals( $expected, $ids );
+	}
 }
