@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQ3//8ck\u003d",
+        "filename": "lib/includes/value/ItemReferenceValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-27T17:43:48Z",
+      "side": 1,
+      "message": "Well, the idea is to somehow indicate that this array representation is intended for serialization. Which in turn implies that it should not contain other objects and stuff.",
+      "parentUuid": "AAAAQ3//8fQ\u003d",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3//8fI\u003d",
         "filename": "lib/includes/value/SimpleStringValue.php",
         "patchSetId": 1
@@ -166,6 +184,24 @@
       "writtenOn": "2012-07-27T17:08:41Z",
       "side": 1,
       "message": "We should not have the class names in here like this, use a mapping from identifier to class name.",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8cg\u003d",
+        "filename": "lib/includes/value/Value.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-27T17:43:48Z",
+      "side": 1,
+      "message": "Yea, but. I don\u0027t want to have to maintain the mapping explicitely. Maybe something like a common prefix could be used to construct the class name.",
+      "parentUuid": "AAAAQ3//8ew\u003d",
       "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
