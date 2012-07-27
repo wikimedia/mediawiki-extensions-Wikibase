@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//8jI\u003d",
+        "filename": "repo/includes/api/ApiLinkTitles.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-27T14:10:28Z",
+      "side": 1,
+      "message": "Getting the group and then later the site is not an optimum way to do this, I think... It should be possible to get the id for a site within a group if it exists in a single call.",
+      "revId": "ac7e7b7c56abe052d8ab4ba976e5bc517fe931e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8jQ\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-07-27T14:10:28Z",
+      "side": 1,
+      "message": "Getting the group and then the site is not an optimum way to do this, I think... It should be possible to this in a single call.",
+      "revId": "ac7e7b7c56abe052d8ab4ba976e5bc517fe931e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
