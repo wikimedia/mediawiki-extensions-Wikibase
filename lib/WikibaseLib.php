@@ -30,7 +30,7 @@ if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c becaus
 
 // Include the Diff extension if that hasn't been done yet, since it's required for WikibaseLib to work.
 if ( !defined( 'Diff_VERSION' ) ) {
-	@include_once( dirname( __FILE__ ) . '/../Diff/Diff.php' );
+	@include_once( dirname( __FILE__ ) . '/../../Diff/Diff.php' );
 }
 
 if ( !defined( 'Diff_VERSION' ) ) {
