@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//8fc\u003d",
+        "filename": "lib/includes/snak/SimpleValueSnak.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "No, just no... This is NOT PHP 4!",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8fY\u003d",
+        "filename": "lib/includes/snak/Snak.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "ARRRRRRRRRRRRRR",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8fU\u003d",
+        "filename": "lib/includes/value/ItemReferenceValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "ARRRRRRRRR",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8fQ\u003d",
+        "filename": "lib/includes/value/ItemReferenceValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "toArray. No JSON involved here.",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8fI\u003d",
+        "filename": "lib/includes/value/SimpleStringValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "ARRRRRRRRRR",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8fM\u003d",
+        "filename": "lib/includes/value/SimpleStringValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "toArray",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8fE\u003d",
+        "filename": "lib/includes/value/Value.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "toArray",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8fA\u003d",
+        "filename": "lib/includes/value/Value.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "ARRRRRRRRRRRRR x2",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8e8\u003d",
+        "filename": "lib/includes/value/Value.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "fromArray",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//8ew\u003d",
+        "filename": "lib/includes/value/Value.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-07-27T17:08:41Z",
+      "side": 1,
+      "message": "We should not have the class names in here like this, use a mapping from identifier to class name.",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
