@@ -22,5 +22,7 @@ return array(
 	'Diff\ListDiff' => 'includes/ListDiff.php',
 	'Diff\MapDiff' => 'includes/MapDiff.php',
 
-	'Diff\Test\GenericArrayObjectTest' => 'tests/GenericArrayObjectTest.php'
+	'AbstractTestCase' => 'tests/AbstractTestCase.php',
+	'Diff\Test\DiffOpTest' => 'tests/DiffOpTest.php',
+	'Diff\Test\GenericArrayObjectTest' => 'tests/GenericArrayObjectTest.php',
 );

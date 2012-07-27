@@ -49,6 +49,9 @@ namespace {
 	 */
 	$wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		$testFiles = array(
+			'DiffOpAdd',
+			'DiffOpChange',
+			'DiffOpRemove',
 			'Diff',
 			'ListDiff',
 			'MapDiff',
