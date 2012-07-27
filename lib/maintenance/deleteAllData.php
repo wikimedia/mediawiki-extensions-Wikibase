@@ -38,6 +38,7 @@ class DeleteAllData extends \Maintenance {
 		}
 
 		$tables = array(
+			'sites',
 			'wb_changes',
 		);
 
