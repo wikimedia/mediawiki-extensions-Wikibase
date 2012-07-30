@@ -5,10 +5,10 @@ use ApiTestCase, ApiTestUser;
 use Wikibase\Settings as Settings;
 
 /**
- * Tests for the ApiWikibase class.
+ * Tests for the ApiWikibase classes.
  *
- * This testset only checks the validity of the calls and correct handling of tokens and users.
- * Note that we creates an empty database and then starts manipulating testusers.
+ * This testset only checks the validity of the calls and correct handling of tokens and users as
+ * seen from and through the API. The tests adds and manipulates items and testusers.
  *
  * BE WARNED: the tests depend on execution order of the methods and the methods are interdependent,
  * so stuff will fail if you move methods around or make changes to them without matching changes in
@@ -26,7 +26,7 @@ use Wikibase\Settings as Settings;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group ApiSetItemTest
+ * @group ApiDependantTest
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -37,7 +37,7 @@ use Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiSetItemTest extends \ApiTestCase {
+class ApiDependantTest extends \ApiTestCase {
 
 	protected static $baseOfItemIds = 0;
 	protected static $usepost;

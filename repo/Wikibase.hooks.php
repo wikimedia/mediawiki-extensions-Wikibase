@@ -72,7 +72,7 @@ final class RepoHooks {
 			'api/ApiJSONPComplete',
 			'api/ApiLanguageAttribute',
 			'api/ApiSetAliases',
-			'api/ApiSetItem',
+			'api/ApiDependant',
 			'api/ApiSetSiteLink',
 			'api/ApiEditPage',
 			'api/ApiPermissions',
