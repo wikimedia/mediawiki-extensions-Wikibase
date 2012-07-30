@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAQ3//7sU\u003d",
+        "filename": "lib/includes/statement/Statement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T13:23:43Z",
+      "side": 1,
+      "message": "Ooops, yes, you are right.",
+      "parentUuid": "AAAAQ3//7tM\u003d",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3//7tE\u003d",
         "filename": "lib/includes/type/SimpleStringType.php",
         "patchSetId": 1
@@ -81,6 +99,24 @@
       "writtenOn": "2012-07-30T13:06:39Z",
       "side": 1,
       "message": "Naming inconsistent with ItemReferenceType. Should probably be also SimpleStringType instead of SimpleString.",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7sQ\u003d",
+        "filename": "lib/includes/type/SimpleStringType.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T13:23:43Z",
+      "side": 1,
+      "message": "Yea, true. As long as we don\u0027t have any class that is called \"String\".",
+      "parentUuid": "AAAAQ3//7tE\u003d",
       "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -271,6 +307,24 @@
       "side": 1,
       "message": "We should be able to alter the class names without this stuff breaking horribly.",
       "parentUuid": "AAAAQ3//8cg\u003d",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7sM\u003d",
+        "filename": "lib/includes/value/Value.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T13:23:43Z",
+      "side": 1,
+      "message": "Having to register type-name-to-class-name mappings feels cumbersome and error prone to me. But oh hell. I don\u0027t care, let\u0027s make $wgWikibaseDataTypes or whatever.",
+      "parentUuid": "AAAAQ3//8cI\u003d",
       "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
