@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAAQ3//7tQ\u003d",
+        "filename": "lib/includes/snak/SimpleValueSnak.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-07-30T13:06:39Z",
+      "side": 1,
+      "message": "We could drop \"Simple\" from the class name, and just name it \"ValueSnak\" to be slightly more consistent with the data model draft. No strong opinion on this.",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3//8fc\u003d",
         "filename": "lib/includes/snak/SimpleValueSnak.php",
         "patchSetId": 1
@@ -30,6 +47,40 @@
       "writtenOn": "2012-07-27T17:08:41Z",
       "side": 1,
       "message": "ARRRRRRRRRRRRRR",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7tM\u003d",
+        "filename": "lib/includes/statement/Statement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-07-30T13:06:39Z",
+      "side": 1,
+      "message": "Shouldn\u0027t that be an array of Snaks instead of string?",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7tE\u003d",
+        "filename": "lib/includes/type/SimpleStringType.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-07-30T13:06:39Z",
+      "side": 1,
+      "message": "Naming inconsistent with ItemReferenceType. Should probably be also SimpleStringType instead of SimpleString.",
       "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
