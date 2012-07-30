@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//7yc\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T08:55:31Z",
+      "side": 1,
+      "message": "didin\u0027t i just see this cosmetic change in another change set? this will causae a conflict :(",
+      "revId": "767c973fefd7640d33c28802b8ce6c217dcfeff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7yg\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T08:55:31Z",
+      "side": 1,
+      "message": "Is this at all related to fallbacks?\n\nAlso, why use array_merge if you can just use $descriptions[\u0027gettoken\u0027] \u003d ...?",
+      "revId": "767c973fefd7640d33c28802b8ce6c217dcfeff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7yM\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T08:55:31Z",
+      "side": 1,
+      "message": "no fallbacks for aliases? why not?",
+      "revId": "767c973fefd7640d33c28802b8ce6c217dcfeff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7yQ\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T08:55:31Z",
+      "side": 1,
+      "message": "really? shouldn\u0027t fallbacks be applied for each language in the list? \nIf not, and we interpret $languages as a caller-defined fallback list, should the default fallbacks then still be applied at all? I find this interface a bit odd, its unclear when which behavior is triggered and why.",
+      "revId": "767c973fefd7640d33c28802b8ce6c217dcfeff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7x4\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T08:55:31Z",
+      "side": 1,
+      "message": "ugh, code duplication. having this code twice is only a bit annoying, but as soon as we also want it for aliases, this should really be factored out.",
+      "revId": "767c973fefd7640d33c28802b8ce6c217dcfeff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAQ3//7yU\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-07-30T08:55:31Z",
+      "side": 1,
+      "message": "I think controlling this via a global setting is unnecessary and confusing.",
+      "revId": "767c973fefd7640d33c28802b8ce6c217dcfeff5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
