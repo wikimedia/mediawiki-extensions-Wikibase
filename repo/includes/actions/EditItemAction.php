@@ -20,3 +20,9 @@ class EditItemAction extends EditEntityAction {
 
 
 }
+
+class SubmitItemAction extends SubmitEntityAction {
+
+
+
+}

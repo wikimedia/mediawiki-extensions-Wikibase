@@ -24,4 +24,6 @@ interface EntityDiff extends \Diff\IDiff {
 	 */
 	public function getView();
 
+    public function apply( Entity $entity );
+
 }
