@@ -83,7 +83,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 			}
 
 			$itemContent->getItem()->removeSiteLink( $params['linksite'] );
-			$this->addSiteLinksToResult( array( $link ), 'item' );
+			$this->addSiteLinksToResult( array( $link ), 'item', 'sitelinks', 'sitelink', array( 'removed' ) );
 			return true;
 		}
 		else {
@@ -106,7 +106,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 				$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
 			}
 
-			$this->addSiteLinksToResult( array( $ret ), 'item' );
+			$this->addSiteLinksToResult( array( $ret ), 'item', 'sitelinks', 'sitelink' );
 			return $ret !== false;
 		}
 	}
