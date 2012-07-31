@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Content;
+use Content, Html;
 
 /**
  * Handles the edit action for Wikibase entities.
@@ -55,13 +55,27 @@ abstract class EditEntityAction extends ViewEntityAction {
 					$newerContent = $newerRevision->getContent();
 					$latestContent = $latestRevision->getContent();
 
-					$diff = $olderContent->getEntity()->getDiff( $newerContent->getEntity() );
 
-					$diff = $diff->getApplicableDiff( $latestContent->getEntity()->toArray() );
-
-					// TODO: add relevant resources
 					// TODO: set title and stuffs
 					// TODO: add summary and submit things
+                    $langCode = $this->getContext()->getLanguage()->getCode();
+                    list( $labelCode, $labelText, $labelLang) =
+                        Utils::lookupUserMultilangText(
+                            $latestContent->getEntity()->getLabels(),
+                            Utils::languageChain( $langCode ),
+                            array( $langCode, $this->getPageTitle(), $this->getContext()->getLanguage() )
+                        );
+                    $this->getOutput()->setContext( $this->getContext() );
+                    $this->getOutput()->setPageTitle(
+                        $this->msg(
+                            'difference-title',
+                            $labelText
+                        )
+                    );
+                    $diff = $olderContent->getEntity()->getDiff( $newerContent->getEntity() );
+
+                    $diff = $diff->getApplicableDiff( $latestContent->getEntity()->toArray() );
+
 					$this->displayUndoDiff( $diff );
 				}
 			}
@@ -70,6 +84,16 @@ abstract class EditEntityAction extends ViewEntityAction {
 			parent::show();
 		}
 	}
+
+    /**
+     * Add style sheets and supporting JS for diff display.
+     *
+     * @since 0.1
+     *
+     */
+    function showDiffStyle() {
+        $this->getOutput()->addModuleStyles( 'mediawiki.action.history.diff' );
+    }
 
 	/**
 	 * Displays the undo diff.
@@ -80,9 +104,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 */
 	protected function displayUndoDiff( EntityDiff $diff ) {
 		$diffView = $diff->getView();
-		$diffView->setContext( $this->getContext() );
-
-		$this->getOutput()->addHTML( $diffView->getHtml() );
+        $diffView->setContext( $this->getContext() );
+		$this->getOutput()->addHTML( Html::rawElement( 'table', array(),  '<colgroup><col class="diff-marker"> <col class="diff-content"><col class="diff-marker"> <col class="diff-content"></colgroup><tbody>' . $diffView->getHtml() . '</tbody>') );
+        $this->showDiffStyle();
 	}
 
 }
