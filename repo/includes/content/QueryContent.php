@@ -168,4 +168,16 @@ class QueryContent extends EntityContent {
 			array( /* new QueryStructuredSave( $content ) */ )
 		);
 	}
+
+	/**
+	 * Saves the primary fields a database table and determines the entity's id.
+	 * If the entity does not exist yet (ie the id is null), it will be inserted, and the id will be set.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean Success indicator
+	 */
+	protected function relationalSave() {
+		throw new \MWException( "not yet implemented" ); //FIXME
+	}
 }
