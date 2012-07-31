@@ -116,7 +116,8 @@ final class Utils {
 
 		$dbw->begin( __METHOD__ );
 
-		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'sites' ), __METHOD__ );
+		$dbw->delete( $dbw->tableName( 'sites' ), '*', __METHOD__ );
+
 		Sites::clearCache();
 
 		Sites::newSite( array(
