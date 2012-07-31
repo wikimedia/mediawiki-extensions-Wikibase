@@ -16,6 +16,7 @@ $messages = array();
  * @author Daniel Kinzler
  * @author Tobias Gritschacher
  * @author John Erling Blad
+ * @author Jens Ohlig
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -37,6 +38,10 @@ $messages['en'] = array(
 	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
+    'wikibase-undo-title' => 'Undo for "$1"',
+	'wikibase-omitted-undo-ops' => 'The following could not be undone: "$1"',
+	'wikibase-empty-undo' => 'There is nothing that can be undone here.',
+	'wikibase-undo-revision-error' => 'Cannot undo revision "$1"',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entry|entries}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entry|entries}})',

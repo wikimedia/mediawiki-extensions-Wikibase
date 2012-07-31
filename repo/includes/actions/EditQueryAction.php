@@ -13,8 +13,15 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class EditQueryAction extends EditEntityAction {
+
+
+
+}
+
+class SubmitQueryAction extends SubmitEntityAction {
 
 
 
