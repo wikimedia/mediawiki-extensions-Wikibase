@@ -1,19 +1,25 @@
 <?php
 
 namespace Wikibase;
-use Content;
+use Content, Html, Linker, Skin, Status, Revision;
 
 /**
- * Handles the edit action for Wikibase entities.
- *
- * @since 0.1
- *
  * @file
  * @ingroup Wikibase
  * @ingroup Action
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jens Ohlig
+ * @author Daniel Kinzler
+ */
+
+/**
+ * Handles the edit action for Wikibase entities.
+ * This shows the forms for the undo and restore operations if requested.
+ * Otherwise it will just show the normal entity view.
+ *
+ * @since 0.1
  */
 abstract class EditEntityAction extends ViewEntityAction {
 
@@ -29,46 +35,355 @@ abstract class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
+	 * Show an error page if the user is not allowed to perform the given action.
+	 *
+	 * @since 0.1
+	 *
+	 * @param String $action the action to check
+	 *
+	 * @return bool true if there were permission errors
+	 */
+	public function showPermissionError( $action ) {
+		if ( !$this->getTitle()->userCan( $action, $this->getUser() ) ) {
+
+			$this->getOutput()->showPermissionsErrorPage( array( array( "wikibase-cant-undo" ) ), $action ); //TODO: define message
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Loads the revisions specified by the web request and returns them as a 3 element array wrapped in a Status object.
+	 * If any error arises, it will be reported using the status object.
+	 *
+	 * @since 0.1
+	 *
+	 * @return \Status a Status object containing an array with three revisions, ($olderRevision, $newerRevision, $latestRevision)
+	 * @throws \MWException if the page's latest revision can not be loaded
+	 */
+	public function loadRevisions( ) {
+		$latestRevId = $this->getTitle()->getLatestRevID();
+
+		if ( $latestRevId === 0 ) {
+			return Status::newFatal( 'missing-article', $this->getTitle()->getPrefixedText(), '' ); //XXX: better message
+		}
+
+		$latestRevision = \Revision::newFromId( $latestRevId );
+
+		if ( !$latestRevId ) {
+			throw new \MWException( "latest revision not found: $latestRevId" );
+		}
+
+		$req = $this->getRequest();
+
+		if ( $req->getCheck( 'restore' ) ) { // nearly the same as undoafter without undo
+			$olderRevision = \Revision::newFromId( $req->getInt( 'restore' ) );
+
+			if ( !$olderRevision ) {
+				return Status::newFatal( 'undo-norev', $req->getInt( 'restore' ) );
+			}
+
+			// ignore undo, even if set
+			$newerRevision = $latestRevision;
+		} else if ( $req->getCheck( 'undo' ) ) {
+			$newerRevision = \Revision::newFromId( $req->getInt( 'undo' ) );
+
+			if ( !$newerRevision ) {
+				return Status::newFatal( 'undo-norev', $req->getInt( 'undo' ) );
+			}
+
+			if ( $req->getCheck( 'undoafter' ) ) {
+				$olderRevision = \Revision::newFromId( $req->getInt( 'undoafter' ) );
+
+				if ( !$olderRevision ) {
+					return Status::newFatal( 'undo-norev', $req->getInt( 'undoafter' ) );
+				}
+			} else {
+				$olderRevision = $newerRevision->getPrevious();
+
+				if ( !$olderRevision ) {
+					return Status::newFatal( 'wikibase-undo-firstrev' );
+				}
+			}
+		} else if ( $req->getCheck( 'undoafter' ) ) {
+			$olderRevision = \Revision::newFromId( $req->getInt( 'undoafter' ) );
+
+			if ( !$olderRevision ) {
+				return Status::newFatal( 'undo-norev', $req->getInt( 'undo' ) );
+			}
+
+			// we already know that undo is not set
+			$newerRevision = $latestRevision;
+		} else {
+			return Status::newFatal( 'edit_form_incomplete' ); //XXX: better message?
+		}
+
+		if ( $olderRevision->getId() == $newerRevision->getId() ) {
+			return Status::newFatal( 'wikibase-undo-samerev', $this->getTitle() );
+		}
+
+		if ( $newerRevision->getPage() != $latestRevision->getPage() ) {
+			return Status::newFatal( 'wikibase-undo-badpage', $this->getTitle(), $newerRevision->getId() );
+		}
+
+		if ( $olderRevision->getPage() != $latestRevision->getPage() ) {
+			return Status::newFatal( 'wikibase-undo-badpage', $this->getTitle(), $olderRevision->getId() );
+		}
+
+		return Status::newGood( array(
+			$olderRevision, $newerRevision, $latestRevision,
+		) );
+	}
+
+	/**
+	 * Output an error page showing the given status
+	 *
+	 * @since 0.1
+	 *
+	 * @param $title String: message key for page title
+	 * @param $status Status: The status to report.
+	 *
+	 * @todo: would be handy to have this in OutputPage
+	 */
+	public function showStatusErrorsPage( $title, Status $status ) {
+		$this->getOutput()->prepareErrorPage( $this->msg( $title ), $this->msg( 'errorpagetitle' ) );
+
+		$this->getOutput()->addWikiText( $status->getMessage() );
+
+		$this->getOutput()->returnToMain();
+	}
+
+	/**
 	 * @see FormlessAction::show
+	 *
+	 * Calls paren't show() action to just display the entity, unless an undo action is requested.
 	 *
 	 * @since 0.1
 	 */
 	public function show() {
 		$req = $this->getRequest();
 
-		if ( $req->getCheck( 'undo' ) ) {
-			$latestRevId = $this->getTitle()->getLatestRevID();
-
-			if ( $latestRevId !== 0 ) {
-				$latestRevision = \Revision::newFromId( $latestRevId );
-
-				$olderRevision = \Revision::newFromId( $req->getInt( 'undo' ) );
-				$newerRevision = \Revision::newFromId( $req->getInt( 'undoafter' ) );
-
-				if ( !is_null( $latestRevision ) && !is_null( $olderRevision ) && !is_null( $newerRevision ) ) {
-					/**
-					 * @var EntityContent $latestContent
-					 * @var EntityContent $olderContent
-					 * @var EntityContent $newerContent
-					 */
-					$olderContent = $olderRevision->getContent();
-					$newerContent = $newerRevision->getContent();
-					$latestContent = $latestRevision->getContent();
-
-					$diff = $olderContent->getEntity()->getDiff( $newerContent->getEntity() );
-
-					$diff = $diff->getApplicableDiff( $latestContent->getEntity()->toArray() );
-
-					// TODO: add relevant resources
-					// TODO: set title and stuffs
-					// TODO: add summary and submit things
-					$this->displayUndoDiff( $diff );
-				}
-			}
-		}
-		else {
+		if ( $req->getCheck( 'undo' ) || $req->getCheck( 'undoafter' ) || $req->getCheck( 'restore' ) ) {
+			$this->showUndoForm();
+		} else {
 			parent::show();
 		}
+	}
+
+	/**
+	 * Show an undo form
+	 *
+	 * @since 0.1
+	 */
+	public function showUndoForm() {
+		$req = $this->getRequest();
+
+		if ( $this->showPermissionError( "read" ) || $this->showPermissionError( "edit" ) ) {
+			return;
+		}
+
+		$revisions = $this->loadRevisions();
+		if ( !$revisions->isOK() ) {
+			$this->showStatusErrorsPage( 'wikibase-undo-revision-error', $revisions ); //TODO: define message
+			return;
+		}
+
+		/**
+		 * @var \Revision $olderRevision
+		 * @var \Revision $newerRevision
+		 * @var \Revision $latestRevision
+		 */
+		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
+
+		/**
+		 * @var EntityContent $latestContent
+		 * @var EntityContent $olderContent
+		 * @var EntityContent $newerContent
+		 */
+		$olderContent = $olderRevision->getContent();
+		$newerContent = $newerRevision->getContent();
+		$latestContent = $latestRevision->getContent();
+
+		$restore = $req->getCheck( 'restore' );
+
+		//$this->getOutput()->setContext( $this->getContext() ); //XXX: WTF?
+		$this->getOutput()->setPageTitle(
+			$this->msg(
+				$restore ? 'wikibase-restore-title' : 'wikibase-undo-title',
+				$this->getLabelText( $latestContent ),
+				$olderRevision->getId(),
+				$newerRevision->getId()
+			)
+		);
+
+		$diff = $newerContent->getEntity()->getDiff( $olderContent->getEntity() ); // diff from newer to older
+
+		if ( $newerRevision->getId() == $latestRevision->getId() ) {
+			$appDiff = $diff; // if the revision to undo is the latest revision, then there can be no conflicts
+		} else {
+			$appDiff = $diff->getApplicableDiff( $latestContent->getEntity()->toArray() ); //TODO: test this code path!!!
+		}
+
+		if ( !$restore ) {
+			$omitted = self::countAtomicOps( $diff ) - self::countAtomicOps( $appDiff );
+
+			if ( !$appDiff->isEmpty() ) {
+				$this->getOutput()->addHTML( Html::openElement("p") );
+				$this->getOutput()->addWikiMsg( $omitted > 0 ? 'wikibase-partial-undo' : 'undo-success' );
+				$this->getOutput()->addHTML( Html::closeElement("p") );
+			}
+
+			if ( $omitted > 0 ) {
+				$this->getOutput()->addHTML( Html::openElement("p") );
+				$this->getOutput()->addWikiMsg( 'wikibase-omitted-undo-ops', $omitted );
+				$this->getOutput()->addHTML( Html::closeElement("p") );
+			}
+		}
+
+		if ( $appDiff->isEmpty() ) {
+			$this->getOutput()->addHTML( Html::openElement("p") );
+			$this->getOutput()->addWikiMsg( 'wikibase-empty-undo' );
+			$this->getOutput()->addHTML( Html::closeElement("p") );
+			return;
+		}
+
+		$this->displayUndoDiff( $appDiff );
+
+		$autoSummary = $restore ? $this->makeRestoreSummary( $olderRevision, $newerRevision, $latestRevision )
+								: $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
+
+		$this->showConfirmationForm( $autoSummary );
+	}
+
+	/**
+	 * Returns the label that should be shown to represent the given entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @param EntityContent $content
+	 *
+	 * @return String
+	 */
+	public function getLabelText( EntityContent $content ) {
+
+		$langCode = $this->getContext()->getLanguage()->getCode();
+		list( $labelCode, $labelText, $labelLang) =
+			Utils::lookupUserMultilangText(
+				$content->getEntity()->getLabels(),
+				Utils::languageChain( $langCode ),
+				array( $langCode, $this->getPageTitle(), $this->getContext()->getLanguage() )
+			);
+
+		return $labelText;
+	}
+
+	/**
+	 * Returns an edit summary representing a restore-operation defined by the three given revisions.
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Revision $olderRevision
+	 * @param \Revision $newerRevision
+	 * @param \Revision $latestRevision
+	 *
+	 * @return String
+	 */
+	public function makeRestoreSummary( Revision $olderRevision, Revision $newerRevision, Revision $latestRevision ) {
+		$autoSummary = wfMsgForContent( //TODO: use translatable auto-comment!
+			'wikibase-restore-summary',
+			$olderRevision->getId(),
+			$olderRevision->getUserText()
+		);
+
+		return $autoSummary;
+	}
+
+	/**
+	 * Returns an edit summary representing an undo-operation defined by the three given revisions.
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Revision $olderRevision
+	 * @param \Revision $newerRevision
+	 * @param \Revision $latestRevision
+	 *
+	 * @return String
+	 */
+	public function makeUndoSummary( Revision $olderRevision, Revision $newerRevision, Revision $latestRevision ) {
+		$autoSummary = wfMsgForContent( //TODO: use translatable auto-comment!
+			'undo-summary',
+			$newerRevision->getId(),
+			$newerRevision->getUserText()
+		);
+
+		return $autoSummary;
+	}
+
+	/**
+	 * Returns a cancel link back to viewing the entity's page
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getCancelLink() {
+		$cancelParams = array();
+
+		return Linker::linkKnown(
+			$this->getContext()->getTitle(),
+			wfMsgExt( 'cancel', array( 'parseinline' ) ),
+			array( 'id' => 'mw-editform-cancel' ),
+			$cancelParams
+		);
+	}
+
+	/**
+	 * Add style sheets and supporting JS for diff display.
+	 *
+	 * @since 0.1
+	 *
+	 */
+	public function showDiffStyle() {
+		$this->getOutput()->addModuleStyles( 'mediawiki.action.history.diff' );
+	}
+
+	/**
+	 * Generate standard summary input and label (wgSummary), compatible to EditPage.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $summary string The value of the summary input
+	 * @param $labelText string The html to place inside the label
+	 * @param $inputAttrs array of attrs to use on the input
+	 * @param $spanLabelAttrs array of attrs to use on the span inside the label
+	 *
+	 * @return array An array in the format array( $label, $input )
+	 */
+	function getSummaryInput( $summary = "", $labelText = null, $inputAttrs = null, $spanLabelAttrs = null ) {
+		// Note: the maxlength is overriden in JS to 255 and to make it use UTF-8 bytes, not characters.
+		$inputAttrs = ( is_array( $inputAttrs ) ? $inputAttrs : array() ) + array(
+			'id' => 'wpSummary',
+			'maxlength' => '200',
+			'tabindex' => '1',
+			'size' => 60,
+			'spellcheck' => 'true',
+		) + Linker::tooltipAndAccesskeyAttribs( 'summary' );
+
+		$spanLabelAttrs = ( is_array( $spanLabelAttrs ) ? $spanLabelAttrs : array() ) + array(
+			'class' => 'mw-summary',
+			'id' => "wpSummaryLabel"
+		);
+
+		$label = null;
+		if ( $labelText ) {
+			$label = Html::rawElement( 'label', $inputAttrs['id'] ? array( 'for' => $inputAttrs['id'] ) : null, $labelText );
+			$label = Html::rawElement( 'span', $spanLabelAttrs, $label );
+		}
+
+		$input = Html::input( 'wpSummary', $summary, 'text', $inputAttrs );
+
+		return array( $label, $input );
 	}
 
 	/**
@@ -82,7 +397,292 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$diffView = $diff->getView();
 		$diffView->setContext( $this->getContext() );
 
+		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
+
+		$this->getOutput()->addHTML( Html::openElement( 'table', array( 'class' => $tableClass ) ) );
+
+		$this->getOutput()->addHTML( '<colgroup><col class="diff-marker"> <col class="diff-content"><col class="diff-marker"> <col class="diff-content"></colgroup>' );
+		$this->getOutput()->addHTML( Html::openElement( 'tbody' ) );
+
+		$old = $this->msg( 'currentrev' )->parse();
+		$new = $this->msg( 'yourtext' )->parse(); //XXX: better message?
+
+		$this->getOutput()->addHTML( Html::openElement( 'tr', array( 'valign' => 'top' ) ) );
+		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-otitle1' ), $old ) ) );
+		$this->getOutput()->addHTML( Html::rawElement( 'td', array( 'colspan' => '2' ), Html::rawElement( 'div', array( 'id' => 'mw-diff-ntitle1' ), $new ) ) );
+		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
+
 		$this->getOutput()->addHTML( $diffView->getHtml() );
+
+		$this->getOutput()->addHTML( Html::closeElement( 'tbody' ) );
+		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
+
+		$this->showDiffStyle();
 	}
 
+	/**
+	 * Returns an array of html code of the following buttons:
+	 * save, diff, preview and live
+	 *
+	 * @since 0.1
+	 *
+	 * @param $tabindex int Current tabindex
+	 *
+	 * @return array
+	 */
+	public function getEditButtons( &$tabindex ) {
+		$buttons = array();
+
+		$temp = array(
+			'id'        => 'wpSave',
+			'name'      => 'wpSave',
+			'type'      => 'submit',
+			'tabindex'  => ++$tabindex,
+			'value'     => wfMsg( 'savearticle' ),
+			'accesskey' => wfMsg( 'accesskey-save' ),
+			'title'     => wfMsg( 'tooltip-save' ) . ' [' . wfMsg( 'accesskey-save' ) . ']',
+		);
+		$buttons['save'] = Html::element( 'input', $temp, '' );
+
+		++$tabindex; // use the same for preview and live preview
+		return $buttons;
+	}
+
+	/**
+	 * Shows a form that can be used to confirm the requested undo/restore action.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $summary
+	 * @param int    $tabindex
+	 */
+	protected function showConfirmationForm( $summary = '', &$tabindex = 2 ) {
+		$req = $this->getRequest();
+
+		$args = array(
+			'action' => "submit",
+		);
+
+		if ( $req->getInt( 'undo' ) )  {
+			$args[ 'undo' ] = $req->getInt( 'undo' );
+		}
+
+		if ( $req->getInt( 'undoafter' ) )  {
+			$args[ 'undoafter' ] = $req->getInt( 'undoafter' );
+		}
+
+		if ( $req->getInt( 'restore' ) )  {
+			$args[ 'restore' ] = $req->getInt( 'restore' );
+		}
+
+		$actionUrl = $this->getTitle()->getLocalURL( $args );
+
+		$this->getOutput()->addHTML( Html::openElement( 'div', array( 'style' =>"margin-top: 1em") ) );
+
+		$this->getOutput()->addHTML( Html::openElement( 'form', array(
+			'id' =>"undo",
+			'name' => "undo",
+			'method' => 'post',
+			'action' => $actionUrl,
+			'enctype' => 'multipart/form-data' ) ) );
+
+		$this->getOutput()->addHTML( "<p class='editOptions'>\n" );
+
+		$labelText = wfMsgExt( 'summary', 'parseinline' );
+		list( $label, $field ) = $this->getSummaryInput( $summary, $labelText );
+		$this->getOutput()->addHTML( $label . " " . $field );
+		$this->getOutput()->addHTML( "<p class='editButtons'>\n" );
+		$this->getOutput()->addHTML( implode( $this->getEditButtons( $tabindex ), "\n" ) . "\n" );
+
+		$cancel = $this->getCancelLink();
+		if ( $cancel !== '' ) {
+			$this->getOutput()->addHTML( wfMsgExt( 'pipe-separator' , 'escapenoentities' ) );
+			$this->getOutput()->addHTML( $cancel );
+		}
+
+		$this->getOutput()->addHTML( "</p><!-- editButtons -->\n</p><!-- editOptions -->\n" );
+
+		$this->getOutput()->addHTML( "\n" . Html::hidden( "wpEditToken", $this->getUser()->getEditToken() ) . "\n" );
+
+		$this->getOutput()->addHTML( Html::closeElement( 'form' ) );
+		$this->getOutput()->addHTML( Html::closeElement( 'div' ) );
+	}
+
+	/**
+	 * Recursively counts the atomic operations in the given diff.
+	 *
+	 * @todo: this should be a utility method in the Diff class
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Diff\IDiffOp $diff
+	 *
+	 * @return int the num,ber of atomic operations
+	 */
+	public static function countAtomicOps( \Diff\IDiffOp $diff ) {
+
+		if ( $diff->isAtomic() ) {
+			return 1;
+		}
+
+		$count = 0;
+
+		foreach ( $diff as $op ) {
+			$count += self::countAtomicOps( $op );
+		}
+
+		return $count;
+	}
+}
+
+
+/**
+ * Handles the submit action for Wikibase entities.
+ * This performs the undo and restore operations when requested.
+ * Otherwise it will just show the normal entity view.
+ *
+ * @since 0.1
+ */
+class SubmitEntityAction extends EditEntityAction {
+
+	public function getName() {
+		return 'submit';
+	}
+
+	/**
+	 * Make sure the form isn't faking a user's credentials.
+	 *
+	 * @param $request \WebRequest
+	 * @return array ( $tokenOk, $tokenOkExceptSuffix )
+	 * @private
+	 */
+	function tokenOk( \WebRequest &$request ) {
+		$token = $request->getVal( 'wpEditToken' );
+		$tokenOk = $this->getUser()->matchEditToken( $token );
+		$tokenOkExceptSuffix = $this->getUser()->matchEditTokenNoSuffix( $token );
+		return array( $tokenOk, $tokenOkExceptSuffix );
+	}
+
+	/**
+	 * Show the entity using parent::show(), unless an undo operation is requested.
+	 * In that case $this->undo(); is called to perform the action after a permission check.
+	 */
+	public function show() {
+		$req = $this->getRequest();
+
+		if ( $req->getCheck('undo') || $req->getCheck('undoafter') || $req->getCheck('restore') ) {
+			if ( $this->showPermissionError( "read" ) || $this->showPermissionError( "edit" ) ) {
+				return;
+			}
+
+			$this->undo();
+			return;
+		}
+
+		parent::show();
+	}
+
+	/**
+	 * Perform the undo operation specified by the web request.
+	 */
+	public function undo() {
+		$req = $this->getRequest();
+
+		if ( !$req->wasPosted() || !$req->getCheck('wpSave') ) {
+			$args = array( 'action' => "edit" );
+
+			if ( $req->getCheck( 'undo' ) ) {
+				$args['undo'] = $req->getInt( 'undo' );
+			}
+
+			if ( $req->getCheck( 'undoafter' ) ) {
+				$args['undoafter'] = $req->getInt( 'undoafter' );
+			}
+
+			if ( $req->getCheck( 'restore' ) ) {
+				$args['restore'] = $req->getInt( 'restore' );
+			}
+
+			$undoUrl = $this->getTitle()->getLocalURL( $args );
+			$this->getOutput()->redirect( $undoUrl );
+			return;
+		}
+
+		list( $tokenOk, $tokenOkExceptSuffix ) = $this->tokenOk( $req );
+
+		if ( !$tokenOk ) {
+			if ( $tokenOkExceptSuffix ) {
+				$this->getOutput()->showErrorPage( 'wikibase-undo-revision-error', 'token_suffix_mismatch' );
+			} else {
+				$this->getOutput()->showErrorPage( 'wikibase-undo-revision-error', 'session_fail_preview' );
+			}
+
+			return;
+		}
+
+		$revisions = $this->loadRevisions();
+		if ( !$revisions->isOK() ) {
+			$this->showStatusErrorsPage( 'wikibase-undo-revision-error', $revisions );
+			return;
+		}
+
+		/**
+		 * @var \Revision $olderRevision
+		 * @var \Revision $newerRevision
+		 * @var \Revision $latestRevision
+		 */
+		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
+
+		/**
+		 * @var EntityContent $latestContent
+		 * @var EntityContent $olderContent
+		 * @var EntityContent $newerContent
+		 */
+		$olderContent = $olderRevision->getContent();
+		$newerContent = $newerRevision->getContent();
+		$latestContent = $latestRevision->getContent();
+
+		$diff = $newerContent->getEntity()->getDiff( $olderContent->getEntity() );
+
+		if ( $newerRevision->getId() == $latestRevision->getId() ) { // restore
+			$summary = $req->getText( 'wpSummary' );
+			if ( $summary === '' ) {
+				$summary = $this->makeRestoreSummary( $olderRevision, $newerRevision, $latestRevision );
+			}
+
+			if ( !$diff->isEmpty() ) {
+				$status = $olderContent->save( $summary, $this->getUser() ); // make the old content the new content.
+			} else {
+				$status = Status::newGood();
+				$status->warning( 'wikibase-empty-undo' );
+			}
+		} else { // undo
+			$appDiff = $diff->getApplicableDiff( $latestContent->getEntity()->toArray() );
+
+			if ( !$appDiff->isEmpty() ) {
+				$entity = $latestContent->getEntity();
+				$appDiff->apply( $entity );
+
+				$summary = $req->getText( 'wpSummary' );
+				if ( $summary === '' ) {
+					$summary = $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
+				}
+
+				$status = $latestContent->save( $summary, $this->getUser() );
+			} else {
+				$status = Status::newGood();
+				$status->warning( 'wikibase-empty-undo' );
+			}
+		}
+
+		if ( $status->isOK() ) {
+			$this->getOutput()->redirect( $this->getTitle()->getFullUrl() );
+		} else {
+			$this->showStatusErrorsPage( 'undo-failure', $status );
+		}
+	}
+
+	public function execute() {
+		throw new \MWException( "not applicable" );
+	}
 }

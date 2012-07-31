@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\ItemContent as ItemContent;
+use Wikibase\Utils;
 use Wikibase\ItemView as ItemView;
 
 /**
@@ -44,6 +45,17 @@ use Wikibase\ItemView as ItemView;
 class ItemViewTest extends \MediaWikiTestCase {
 
 	protected static $num = -1;
+
+	public function setUp() {
+		parent::setUp();
+
+		static $hasSites = false;
+
+		if ( !$hasSites ) {
+			Utils::insertSitesForTests();
+			$hasSites = true;
+		}
+	}
 
 	/**
 	 * @group WikibaseUtils
