@@ -56,6 +56,7 @@ class ItemHandler extends EntityHandler {
 		return array(
 			'view' => '\Wikibase\ViewItemAction',
 			'edit' => '\Wikibase\EditItemAction',
+			'submit' => '\Wikibase\SubmitItemAction',
 		);
 	}
 
