@@ -104,19 +104,28 @@ class ApiGetItems extends Api {
 
 					$item = $itemContent->getItem();
 
+					if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
+						$siteLinkOptions = array( 'url' );
+					} else {
+						$siteLinkOptions = null;
+					}
+
 					foreach ( $params['props'] as $key ) {
 						switch ( $key ) {
 						case 'aliases':
 							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
 							break;
 						case 'sitelinks':
-							$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath );
+							$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath, 'sitelinks', 'sitelink', $siteLinkOptions );
 							break;
 						case 'descriptions':
 							$this->addDescriptionsToResult( $item->getDescriptions( $languages ), $itemPath );
 							break;
 						case 'labels':
 							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
+							break;
+						case 'sitelinks/urls':
+							//ignore
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases
@@ -167,7 +176,7 @@ class ApiGetItems extends Api {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'props' => array(
-				ApiBase::PARAM_TYPE => array( 'sitelinks', 'aliases', 'labels', 'descriptions' ),
+				ApiBase::PARAM_TYPE => array( 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ),
 				ApiBase::PARAM_DFLT => 'sitelinks|aliases|labels|descriptions',
 				ApiBase::PARAM_ISMULTI => true,
 			),
