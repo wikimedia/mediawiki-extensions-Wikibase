@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use WikiPage, Title;
+use WikiPage, Title, User;
 
 /**
  * Abstract content object for articles representing Wikibase entities.
@@ -161,6 +161,46 @@ abstract class EntityContent extends \AbstractContent {
 		}
 
 		return static::newFromArray( $array );
+	}
+
+	/**
+	 * Saves the primary fields a database table and determines the entity's id.
+	 * If the entity does not exist yet (ie the id is null), it will be inserted, and the id will be set.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean Success indicator
+	 */
+	protected abstract function relationalSave();
+
+		/**
+	 * Saves the item.
+	 * If the item does not exist yet, it will be created (ie an ID will be fetched and a new page in the data NS created).
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $summary
+	 * @param null|User $user
+	 * @param integer $flags
+	 *
+	 * @return \Status Success indicator
+	 */
+	public function save( $summary = '', User $user = null, $flags = 0 ) {
+		$success = $this->relationalSave();
+
+		if ( !$success ) {
+			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
+		} else {
+			$status = $this->getWikiPage()->doEditContent(
+				$this,
+				$summary,
+				$flags | EDIT_AUTOSUMMARY,
+				false,
+				$user
+			);
+		}
+
+		return $status;
 	}
 
 }
