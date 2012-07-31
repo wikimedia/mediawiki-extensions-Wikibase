@@ -18,6 +18,7 @@ use Diff\MapDiff as MapDiff;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jens Ohlig
  */
 class ItemDiff extends EntityDiffObject {
 
@@ -49,7 +50,44 @@ class ItemDiff extends EntityDiffObject {
 	 * @return MapDiff
 	 */
 	public function getSiteLinkDiff() {
-		return $this->operations['links'];
+		return $this['links'];
+	}
+
+	public function apply( Entity $entity ) {
+		return ( $this->applyLinks( $this->getSiteLinkDiff(), $entity )
+		        && parent::apply( $entity ) );
+	}
+
+	private function applyLinks( MapDiff $linkOps, Entity $entity ) {
+		foreach ( $linkOps as $site => $ops ) {
+			foreach ( $ops as $op ) {
+				$this->applyLink( $site, $op, $entity );
+			}
+		}
+	}
+
+	/**
+	 * @param $site
+	 * @param \Diff\DiffOp $diffOp
+	 * @param \Wikibase\Item $item
+	 * @return bool
+	 * @throws \MWException
+	 */
+	private function applyLink( $site, \Diff\DiffOp $diffOp, Entity $item ) {
+		$type = $diffOp->getType();
+		if ( $type === "add" ) {
+			$link = SiteLink::newFromText( $site, $diffOp->getNewValue() );
+			$item->addSiteLink( $link, "add" );
+		} elseif ( $type === "remove" ) {
+			$link = SiteLink::newFromText( $site, $diffOp->getNewValue() );
+			$item->removeSiteLink( $link, $site );
+		} elseif ( $type === "change" ) {
+			$link = SiteLink::newFromText( $site, $diffOp->getNewValue() );
+			$item->addSiteLink( $link, "update" );
+		} else {
+			throw new \MWException( "Unsupported operation: $type" );
+		}
+		return true;
 	}
 
 	/**
@@ -73,5 +111,7 @@ class ItemDiff extends EntityDiffObject {
 	public function getView() {
 		return new ItemDiffView( array(), $this );
 	}
+
+
 
 }

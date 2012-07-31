@@ -14,6 +14,7 @@ use Diff\IDiff as IDiff;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jens Ohlig
  */
 abstract class EntityDiffObject extends MapDiff implements EntityDiff {
 
@@ -44,6 +45,87 @@ abstract class EntityDiffObject extends MapDiff implements EntityDiff {
 				$newEntity->getDescriptions()
 			)
 		), $diffOps ) );
+	}
+
+	/**
+	 * Applies diff operations to an entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $entity
+	 * @return Boolean
+	 */
+	public function apply( Entity $entity ) {
+		return ( $this->applyAliases( $this['aliases'], $entity )
+				&& $this->applyLabels( $this['label'], $entity )
+				&& $this->applyDescriptions( $this['description'], $entity ) );
+	}
+
+	private function applyAliases( MapDiff $aliasesOps, Entity $entity ) {
+		foreach ( $aliasesOps as $lang => $ops ) {
+			foreach ( $ops as $op ) {
+				$this->applyAlias( $lang, $op, $entity );
+			}
+		}
+	}
+
+	private function applyAlias( $lang, \Diff\DiffOp $diffOp, Entity $entity ) {
+		$type = $diffOp->getType();
+		if ( $type === "add" ) {
+			$entity->addAliases( $lang, array( $diffOp->getNewValue() ) );
+		} elseif ( $type === "remove" ) {
+			$entity->removeAliases( $lang, array ( $diffOp->getOldValue() ) );
+		} elseif ( $type === "change" ) {
+			$entity->removeAliases( $lang, array ( $diffOp->getOldValue() ) );
+			$entity->addAliases( $lang, array( $diffOp->getNewValue() ) );
+		} else {
+			throw new \MWException( "Unsupported operation: $type" );
+		}
+		return true;
+	}
+
+	private function applyLabels( MapDiff $labelOps, Entity $entity ) {
+		foreach ( $labelOps as $lang => $ops ) {
+			foreach ( $ops as $op ) {
+				$this->applyLabel( $lang, $op, $entity );
+			}
+		}
+	}
+
+	private function applyLabel( $lang, \Diff\DiffOp $diffOp, Entity $entity ) {
+		$type = $diffOp->getType();
+		if ( $type === "add" ) {
+			$entity->setLabel( $lang, $diffOp->getNewValue() );
+		} elseif ( $type === "remove" ) {
+			$entity->removeLabel( array( $lang ) );
+		} elseif ( $type === "change" ) {
+			$entity->setLabel( $lang, $diffOp->getNewValue() );
+		} else {
+			throw new \MWException( "Unsupported operation: $type" );
+		}
+		return true;
+	}
+
+	private function applyDescriptions( MapDiff $descriptionOps, Entity $entity ) {
+		foreach ( $descriptionOps as $lang => $ops ) {
+			foreach ( $ops as $op ) {
+				$this->applyDescription( $lang, $op, $entity );
+			}
+		}
+	}
+
+	private function applyDescription( $lang, \Diff\DiffOp $diffOp, Entity $entity ) {
+		$type = $diffOp->getType();
+		if ( $type === "add" ) {
+			$entity->setDescription( $lang, $diffOp->getNewValue()  );
+		} elseif ( $type === "remove" ) {
+			$entity->removeDescription( array( $lang ) );
+		} elseif ( $type === "change" ) {
+			$entity->setLabel( $lang, $diffOp->getNewValue() );
+		} else {
+			throw new \MWException( "Unsupported operation: $type" );
+		}
+		return true;
 	}
 
 	/**
