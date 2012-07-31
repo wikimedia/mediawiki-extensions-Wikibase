@@ -59,7 +59,8 @@ abstract class Api extends \ApiBase {
 		$descriptions = array(
 			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
 				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
-			)
+			),
+			'urls' => 'If set, full URLs are included in the result where applicable. Useful especially with props=sitelinks.'
 		);
 		if ( Settings::get( 'apiUseKeys' ) ) {
 			$descriptions['nousekeys'] = array( 'Turn off use the keys. The use of keys are only used in formats that supports them,',
@@ -84,6 +85,10 @@ abstract class Api extends \ApiBase {
 	public function getAllowedParams() {
 		$allowedParams = array(
 			'gettoken' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
+			),
+			'urls' => array(
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
@@ -186,20 +191,21 @@ abstract class Api extends \ApiBase {
 		$value = array();
 		$idx = 0;
 
+		$params = $this->extractRequestParams();
+		$urls = ( isset( $params['urls'] ) && $params['urls'] );
+
 		foreach ( $siteLinks as $link ) { /* @var SiteLink $link */
 			$response = array(
 				'site' => $link->getSiteID(),
-				'url' => $link->getUrl(), //XXX: could make this optional
+				'title' => $link->getPage(),
 			);
 
-			if ( $link->getPage() === '' ) {
-				$response['removed'] = '';
-			}
-			else {
-				$response['title'] = $link->getPage();
+			if ( $urls ) {
+				$response['url'] = $link->getUrl();
 			}
 
-			$value[$this->usekeys ? $link->getSiteID() : $idx++] = $response;
+			$key = $this->usekeys ? $link->getSiteID() : $idx++;
+			$value[ $key ] = $response;
 		}
 
 		if ( $value !== array() ) {
