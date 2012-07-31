@@ -63,6 +63,7 @@ class ItemDiff extends EntityDiffObject {
 	public function getSiteLinkDiff() {
 		return isset( $this['links'] ) ? $this['links'] : new \Diff\MapDiff( array() );
 	}
+
 	/**
 	 * Applies diff for links
 	 *
