@@ -78,7 +78,7 @@ class DeleteAllData extends \Maintenance {
 		foreach ( $tables as $table ) {
 			echo "Truncating table $table...";
 
-			$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( $table ) );
+			$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
 
 			echo "done!\n";
 		}

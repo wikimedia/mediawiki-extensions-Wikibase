@@ -203,7 +203,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		#XXX: hack: clear tables first. This may create database inconsistencies.
 		#TODO: Use $this->tables_used *everywhere*, so each test cleans up after itself.
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'wb_items_per_site' ) );
+		$dbw->delete( $dbw->tableName( 'wb_items_per_site' ), '*', __METHOD__ );
 
 		$params = array(
 			'id' => self::$itemContent->getItem()->getID(),
