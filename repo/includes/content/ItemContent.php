@@ -143,36 +143,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * Saves the item.
-	 * If the item does not exist yet, it will be created (ie an ID will be fetched and a new page in the data NS created).
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $summary
-	 * @param null|User $user
-	 * @param integer $flags
-	 *
-	 * @return \Status Success indicator
-	 */
-	public function save( $summary = '', User $user = null, $flags = 0 ) {
-		$success = $this->relationalSave();
-
-		if ( !$success ) {
-			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
-		} else {
-			$status = $this->getWikiPage()->doEditContent(
-				$this,
-				$summary,
-				$flags | EDIT_AUTOSUMMARY,
-				false,
-				$user
-			);
-		}
-
-		return $status;
-	}
-
-	/**
 	 * Deletes the item.
 	 *
 	 * @since 0.1
