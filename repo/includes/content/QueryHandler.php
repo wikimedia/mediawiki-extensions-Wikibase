@@ -55,6 +55,7 @@ class QueryHandler extends EntityHandler {
 		return array(
 			'view' => '\Wikibase\ViewQueryAction',
 			'edit' => '\Wikibase\EditQueryAction',
+			'submit' => '\Wikibase\SubmitQueryAction',
 		);
 	}
 

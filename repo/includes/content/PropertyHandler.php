@@ -55,6 +55,7 @@ class PropertyHandler extends EntityHandler {
 		return array(
 			'view' => '\Wikibase\ViewPropertyAction',
 			'edit' => '\Wikibase\EditPropertyAction',
+			'submit' => '\Wikibase\SubmitPropertyAction',
 		);
 	}
 

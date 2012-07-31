@@ -18,25 +18,24 @@ use Diff\MapDiff as MapDiff;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jens Ohlig
  */
 class ItemDiff extends EntityDiffObject {
 
-	protected static function siteLinksToArray( $baseLinks ) {
-		$links = array();
-
-		/* @var SiteLink $link */
-		foreach ( $baseLinks as $link ) {
-			$links[ $link->getSiteID() ] = $link->getPage();
-		}
-
-		return $links;
-	}
-
+	/**
+	 * Creates a new ItemDiff representing the difference between $oldItem and $newItem
+	 *
+	 * @since 0.1
+	 *
+	 * @param Item $oldItem
+	 * @param Item $newItem
+	 * @return EntityDiff
+	 */
 	public static function newFromItems( Item $oldItem, Item $newItem ) {
-		return static::newFromEntities( $oldItem, $newItem, array(
+		return parent::newFromEntities( $oldItem, $newItem, array(
 			'links' => MapDiff::newFromArrays(
-				self::siteLinksToArray( $oldItem->getSiteLinks() ),
-				self::siteLinksToArray( $newItem->getSiteLinks() )
+				SiteLink::siteLinksToArray( $oldItem->getSiteLinks() ),
+				SiteLink::siteLinksToArray( $newItem->getSiteLinks() )
 			)
 		) );
 	}
@@ -49,7 +48,60 @@ class ItemDiff extends EntityDiffObject {
 	 * @return MapDiff
 	 */
 	public function getSiteLinkDiff() {
-		return $this['links'];
+		return isset( $this['links'] ) ? $this['links'] : new \Diff\MapDiff( array() );
+	}
+
+	/**
+	 * Applies diff for links
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $entity
+	 */
+	public function apply( Entity $entity ) {
+		$this->applyLinks( $this->getSiteLinkDiff(), $entity );
+		parent::apply( $entity );
+	}
+
+	/**
+	 * Applies changes to the sitelink part of the entity
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Diff\MapDiff $linkOps
+	 * @param Entity $entity
+	 */
+	private function applyLinks( MapDiff $linkOps, Entity $entity ) {
+		foreach ( $linkOps as $site => $op ) {
+			$this->applyLink( $site, $op, $entity );
+		}
+	}
+
+	/**
+	 * Applies a single DiffOp for a sitelink
+	 *
+	 * @param String           $site   the key to perform the operation on
+	 * @param \Diff\DiffOp     $diffOp the operation to perform
+	 * @param Entity           $item   the entity to modify
+	 *
+	 * @throws \MWException the the type of the DiffOp is unknown
+	 *
+	 * @return bool true
+	 */
+	private function applyLink( $site, \Diff\DiffOp $diffOp, Entity $item ) {
+		$type = $diffOp->getType();
+		if ( $type === "add" ) {
+			$link = SiteLink::newFromText( $site, $diffOp->getNewValue() );
+			$item->addSiteLink( $link, "add" );
+		} elseif ( $type === "remove" ) {
+			$item->removeSiteLink( $site, $diffOp->getOldValue() );
+		} elseif ( $type === "change" ) {
+			$link = SiteLink::newFromText( $site, $diffOp->getNewValue() );
+			$item->addSiteLink( $link, "update" );
+		} else {
+			throw new \MWException( "Unsupported operation: $type" );
+		}
+		return true;
 	}
 
 	/**
@@ -73,5 +125,7 @@ class ItemDiff extends EntityDiffObject {
 	public function getView() {
 		return new ItemDiffView( array(), $this );
 	}
+
+
 
 }

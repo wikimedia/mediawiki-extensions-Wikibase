@@ -16,6 +16,7 @@ $messages = array();
  * @author Daniel Kinzler
  * @author Tobias Gritschacher
  * @author John Erling Blad
+ * @author Jens Ohlig
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -37,6 +38,15 @@ $messages['en'] = array(
 	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
 	'wikibase-remove' => 'remove',
+	'wikibase-undo-title' => 'Undoing Edit to "$1"',
+	'wikibase-restore-title' => 'Restoring Old Revision of "$1"',
+	'wikibase-partial-undo' => 'The edit can pertially be undone.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|change has|changes have}} been omitted because the respective {{PLURAL:$1|value has|values have}} changed again since.',
+	'wikibase-empty-undo' => 'There is nothing that can be undone here.',
+	'wikibase-undo-revision-error' => 'Undo failed',
+	'wikibase-undo-samerev' => 'Can\'t undo, same revision given for undo base and undo target.',
+	'wikibase-undo-badpage' => 'Bad revision: Revision $2 does not belong to [[$1]]',
+	'wikibase-undo-firstrev' => 'Can\'t undo the page\'s creation',
 	'wikibase-propertyedittool-full' => 'List of values is complete.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entry|entries}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entry|entries}})',
@@ -140,7 +150,8 @@ $1',
 	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.',
 	'wikibase-api-illegal-field' => 'Illegal field used in call: $1',
 
-	'wikibase-resetold' => 'reset',
+	'wikibase-restoreold' => 'restore',
+	'wikibase-restore-summary' => 'Restore revision $1 by [[Special:Contributions/$2|$2]]',
 
 	'wikibase-noitem'                    => 'This item does not exist.
 You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]
@@ -215,6 +226,15 @@ Header messages for pages on a specific cluster of sites linked to this item. Se
 Bubble help message to set a sitelink to a language specific page on a given cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
 	'wikibase-remove' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
+	'wikibase-undo-title' => 'Title shown on the form for undoing edits.',
+	'wikibase-restore-title' => 'Title shown on the form for restoring old revisions.',
+	'wikibase-partial-undo' => 'Message indicating that an edit can only pertially be undone. This happens when the respective value has been changed again after the edit that is being undone.',
+	'wikibase-omitted-undo-ops' => 'Message indicating the number of operations that could not be undone. This happens when the respective value has been changed again after the edit that is being undone.',
+	'wikibase-empty-undo' => 'Message shown in case the edit can not be undone.',
+	'wikibase-undo-revision-error' => 'Title shown when undo or restore failed',
+	'wikibase-undo-samerev' => 'Message shown when the user attempts to undo the difference between two revisions which are both the same.',
+	'wikibase-undo-badpage' => 'Message shown when the user attempts to undo the difference between two revisions belonging to different pages. The first argument is the name of the page, the second is the revision id.',
+	'wikibase-undo-firstrev' => 'Message shown when the user attempts to undo the very first revision of a page, that is, the page\'s creation.',
 	'wikibase-propertyedittool-full' => 'A list of elements the user is assumed to enter is now complete.',
 	'wikibase-propertyedittool-counter' => 'Parameters:
 * $1 is the sum of elements in the list currently.  The entries are the list of Wikipedia pages linked to the item.',
@@ -325,8 +345,8 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-session-failure' => 'Sometimes the session fails, usually because of timeouts or because the server of other reasons ends the user session. This leads to an invalid token and the user should then log in again.',
 	'wikibase-api-illegal-field' => 'There is an illegal field name in the props for the module call. This makes the call fail, but the name of failing field will be reported.
 * $1 is the failing field name',
-
-	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+	'wikibase-restoreold' => "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+	'wikibase-restore-summary' => 'Edit summary for an restore action.{{Identical|wikibase-restoreold}}',
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
 	'wikibase-noitem-nopermission' => 'For some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user does not have sufficient rights to create a new item in this case.',
 	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item.',
@@ -467,6 +487,15 @@ $messages['de'] = array(
 	'wikibase-sitelinks-empty' => 'Bislang sind zu diesem Datenelement noch keine Seitenverknüpfungen vorhanden.',
 	'wikibase-sitelinks-input-help-message' => 'Leg eine Verknüpfung zu einer diesem Datenelement entsprechenden Seite fest.',
 	'wikibase-remove' => 'entfernen',
+	'wikibase-undo-title' => 'Bearbeitung von "$1" rückgängig machen',
+	'wikibase-restore-title' => 'Alte version von "$1" wiederherstellen',
+	'wikibase-partial-undo' => 'Die Bearbeitung kann teilweise rückgängig gemacht werden.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|Änderung wurde|Änderungen wurden}} ausgelassen, da {{PLURAL:$1|der entsprechende Wert|die entsprechenden Werte}} in der Zwischenzeit noch einmal geändert {{PLURAL:$1|wurde|wurden}}.',
+	'wikibase-empty-undo' => 'There is nothing that can be undone here.',
+	'wikibase-undo-revision-error' => 'Fehler beim rückgängig machen',
+	'wikibase-undo-samerev' => 'Die Basisrevision is die selbe wie die Zielrevision.',
+	'wikibase-undo-badpage' => 'Falsche Revisionsnummer: Revision $2 gehört nicht zur Seite [[$1]]',
+	'wikibase-undo-firstrev' => 'Das Erstellen einer Seite kann nicht rückgängig gemacht werden.',
 	'wikibase-propertyedittool-full' => 'Die Werteliste ist vollständig.',
 	'wikibase-propertyedittool-counter' => '({{PLURAL:$1|Ein Eintrag|$1 Einträge}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|Eintrag|Einträge}})',
@@ -555,7 +584,8 @@ $messages['de'] = array(
 	'wikibase-api-description-not-found' => 'Es wurde keine frühere Beschreibung in dieser Sprache im Datenelement gefunden.',
 	'wikibase-api-wrong-class' => 'Der Inhalt auf der gefundenen Seite entspricht nicht dem richtigen Typ.',
 	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Du musst dich daher erneut anmelden.',
-	'wikibase-resetold' => 'zurücksetzen',
+	'wikibase-restoreold' => 'wiederherstellen',
+	'wikibase-restore-summary' => 'Revision $1 von [[Special:Contributions/$2|$2]] wiederhergestellt',
 	'wikibase-noitem' => 'Dieses Datenelement ist nicht vorhanden.
 Du kannst entweder die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen], um herauszufinden, was mit ihm passiert ist, oder ein [[Special:CreateItem|neues Datenobjekt erstellen]]</span>.',
 	'wikibase-noitem-nopermission' => 'Dieses Datenelement ist nicht vorhanden.
@@ -625,7 +655,7 @@ $messages['diq'] = array(
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|cı kewtış|cı kewtışi}})',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-tooltip-error-details' => 'Detayi',
-	'wikibase-resetold' => 'reset kerê',
+	'wikibase-restoreold' => 'reset kerê',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -723,7 +753,7 @@ $messages['dsb'] = array(
 	'wikibase-api-description-not-found' => 'Pjerwjejšne wopisanje njedajo se za toś tu rěc w elemenśe namakaś.',
 	'wikibase-api-wrong-class' => 'Wopśimjeśe na namakanem boku njama pšawy typ.',
 	'wikibase-api-session-failure' => 'Aktualne pósejźenje jo pśepadnuło. Musyš se znowego pśizjawiś.',
-	'wikibase-resetold' => 'slědk stajiś',
+	'wikibase-restoreold' => 'slědk stajiś',
 	'wikibase-noitem' => 'Toś ten element njeeksistěrujo.
 Móžoš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wótpowědujuce protokole pśepytaś], aby wuslěźił, což jo se z nim stało abo [[Special:CreateItem|napóraj element]]</span>.',
 	'wikibase-noitem-nopermission' => 'Toś ten element njeeksistěrujo.
@@ -832,7 +862,7 @@ $1',
 	'wikibase-api-description-not-found' => 'No se puede encontrar una descripción anterior para este idioma en el elemento',
 	'wikibase-api-wrong-class' => 'El contenido de la página encontrada no es del tipo correcto.',
 	'wikibase-api-session-failure' => 'La sesión actual ha fallado. Debes volver a iniciar sesión.',
-	'wikibase-resetold' => 'reestablecer',
+	'wikibase-restoreold' => 'reestablecer',
 	'wikibase-noitem' => 'Este elemento no existe.
 Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar los registros relacionados]
 para averiguar adónde fue, o [[Special:CreateItem|crear un nuevo elemento]]</span>.',
@@ -942,7 +972,7 @@ $1',
 	'wikibase-api-description-not-found' => 'قادر به یافتن توصیف قبلی برای این زبان در این مورد نمی‌باشد.',
 	'wikibase-api-wrong-class' => 'مطالب موجود در صفحهٔ یافت شده از نوع صحیح نیستند.',
 	'wikibase-api-session-failure' => 'نشست کنونی فرسوده شده است. باید دوباره ثبت ورود کنید.',
-	'wikibase-resetold' => 'از نو',
+	'wikibase-restoreold' => 'از نو',
 	'wikibase-noitem' => 'این مورد وجود ندارد.
 می‌توانید <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} سیاه‌های مرتبط را جست‌وجو کنید]
 تا ببینید کجا رفته است، یا [[Special:CreateItem|یک مورد نو بسازید]]</span>.',
@@ -1059,7 +1089,7 @@ $messages['fr'] = array(
 	'wikibase-api-description-not-found' => "Impossible de trouver une description antérieure de cette langue dans l'élément.",
 	'wikibase-api-wrong-class' => "Le contenu de la page trouvée n'est pas du bon type.",
 	'wikibase-api-session-failure' => 'La session en cours a échoué. Vous devez vous reconnecter à nouveau.',
-	'wikibase-resetold' => 'réinitialiser',
+	'wikibase-restoreold' => 'réinitialiser',
 	'wikibase-noitem' => 'Cet élément n\'existe pas.
 Vous pouvez <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} rechercher dans les journaux correspondants]
 pour trouver d\'où cela vient, ou [[Special:CreateItem|créer un nouvel élément]]</span>.',
@@ -1180,7 +1210,7 @@ $messages['gl'] = array(
 	'wikibase-api-description-not-found' => 'Non se pode atopar unha descrición anterior para esta lingua no elemento.',
 	'wikibase-api-wrong-class' => 'O contido da páxina atopada non é do tipo correcto.',
 	'wikibase-api-session-failure' => 'A sesión actual fallou. Ten que acceder ao sistema de novo.',
-	'wikibase-resetold' => 'restablecer',
+	'wikibase-restoreold' => 'restablecer',
 	'wikibase-noitem' => 'O elemento non existe.
 Pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]
 para descubir onde está ou [[Special:CreateItem|crear un novo elemento]]</span>.',
@@ -1457,7 +1487,7 @@ $messages['hsb'] = array(
 	'wikibase-api-description-not-found' => 'Njeje so žane prjedawše wopisanje za tutu rěč w elemenće namakało.',
 	'wikibase-api-wrong-class' => 'Wobsah na namakanej stronje korektny typ nima.',
 	'wikibase-api-session-failure' => 'Aktualne posedźenje je spadnyło. Dyrbiš so znowa přizjewić.',
-	'wikibase-resetold' => 'wróćo stajić',
+	'wikibase-restoreold' => 'wróćo stajić',
 	'wikibase-noitem' => 'Tutón element njeeksistuje.
 Móžeš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wotpowědowace protokole přepytać], zo by wuslědźił, štož je so z nim stało abo [[Special:CreateItem|wutwor nowy element]]</span>.',
 	'wikibase-noitem-nopermission' => 'Tutón element njeeksistuje.
@@ -1570,7 +1600,7 @@ $1',
 	'wikibase-api-description-not-found' => 'Non pote trovar un previe description pro iste lingua in le elemento.',
 	'wikibase-api-wrong-class' => 'Le contento in le pagina trovate non es del typo correcte.',
 	'wikibase-api-session-failure' => 'Le session actual ha fallite. Tu debe aperir session de novo.',
-	'wikibase-resetold' => 'reinitialisar',
+	'wikibase-restoreold' => 'reinitialisar',
 	'wikibase-noitem' => 'Iste elemento non existe.
 Tu pote <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercar in le registros associate]
 pro localisar lo, o [[Special:CreateItem|crear un nove elemento]]</span>.',
@@ -1690,7 +1720,7 @@ $1',
 	'wikibase-api-description-not-found' => 'Mistókst að finna fyrri lýsingu fyrir þetta tungumál í hlutnum.',
 	'wikibase-api-wrong-class' => 'Innihald síðunnar sem fannst er ekki af réttri gerð.',
 	'wikibase-api-session-failure' => 'Núverandi seta hefur mistekist. Þú þarft að skrá þig inn aftur.',
-	'wikibase-resetold' => 'endursetja',
+	'wikibase-restoreold' => 'endursetja',
 	'wikibase-noitem' => 'Þessi hlutur er ekki til. 
 Þú getur <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} leitað í aðgerðarskrá]
 til þess að finna hvert hann fór, eða [[Special:CreateItem|búið til nýjan hlut]]</span>.',
@@ -1806,7 +1836,7 @@ $1',
 	'wikibase-api-description-not-found' => "Non è possibile trovare una descrizione precedente per questa lingua nell'elemento.",
 	'wikibase-api-wrong-class' => 'Il contenuto della pagina trovata non è di un tipo corretto.',
 	'wikibase-api-session-failure' => "La sessione corrente non è riuscita. Effettua nuovamente l'accesso.",
-	'wikibase-resetold' => 'reimposta',
+	'wikibase-restoreold' => 'reimposta',
 	'wikibase-noitem' => 'Questo elemento non esiste.
 Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare i relativi log]
 per sapere dov\'è ora, o [[Special:CreateItem|creare un nuovo elemento]]</span>.',
@@ -1836,7 +1866,7 @@ $messages['ja'] = array(
 	'wikibase-tooltip-error-details' => '詳細',
 	'wikibase-error-autocomplete-response' => 'サーバーの応答：$1',
 	'special-createitem' => '新しい項目を作成',
-	'wikibase-resetold' => 'リセット',
+	'wikibase-restoreold' => 'リセット',
 	'wikibase-noitem-nopermission' => 'この項目は存在しません。
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 関連する記録を検索]</span>できます。',
 );
@@ -1969,7 +1999,7 @@ $1',
 	'wikibase-api-description-not-found' => '항목의 이 언어에 대한 이전 설명을 찾을 수 없습니다.',
 	'wikibase-api-wrong-class' => '찾은 페이지의 내용은 올바른 형식이 아닙니다.',
 	'wikibase-api-session-failure' => '현재 세션이 실패했습니다. 다시 로그인해야 합니다.',
-	'wikibase-resetold' => '초기화',
+	'wikibase-restoreold' => '초기화',
 	'wikibase-noitem' => '이 항목이 존재하지 않습니다.
 그것이 어디로 갔는지 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 관련 기록을 검색]하거나
 [[Special:CreateItem|새 항목을 만들]]</span>수 있습니다.',
@@ -2048,7 +2078,7 @@ $messages['lt'] = array(
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-aliases-label' => 'Taip pat žinomas kaip:',
 	'wikibase-tooltip-error-details' => 'Detalės',
-	'wikibase-resetold' => 'perkrauti',
+	'wikibase-restoreold' => 'perkrauti',
 );
 
 /** Macedonian (македонски)
@@ -2163,8 +2193,8 @@ $1',
 	'wikibase-api-description-not-found' => 'Не можев да пронајдам претходен опис за овој јазик во предметот.',
 	'wikibase-api-wrong-class' => 'Содржината на пронајдената страница не е од бараниот тип.',
 	'wikibase-api-session-failure' => 'Тековната сесија прекина. Ќе мора да се најавите повторно.',
-	'wikibase-resetold' => 'врати',
-	'wikibase-noitem' => 'Не постои таков предмет.
+	'wikibase-restoreold' => 'врати',
+	'wikibase-noitem' => 'Не постои таква ставка.
 Можете да ги <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате поврзаните дневници]
 за да дознаете каде отишол, или да [[Special:CreateItem|создадете нов предмет]]</span>.',
 	'wikibase-noitem-nopermission' => 'Не постои таков предмет.
@@ -2278,7 +2308,7 @@ $messages['nb'] = array(
 	'wikibase-api-description-not-found' => 'Kan ikke finne noen tidligere beskrivelse på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innholdet på funnet side er ikke av korrekt type.',
 	'wikibase-api-session-failure' => 'Den inneværende brukerøkta har feilet og du må oppdatere siden og logge inn på nytt.',
-	'wikibase-resetold' => 'tilbakestill',
+	'wikibase-restoreold' => 'tilbakestill',
 	'wikibase-noitem' => 'Dette datasettet finnes ikke.
 Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]
 for å finne ut hva som har skjedd, eller [[Special:CreateItem|opprette et nytt datasett]]</span>.',
@@ -2403,7 +2433,7 @@ $1',
 	'wikibase-api-description-not-found' => 'Er is geen eerdere beschrijving in deze taal gevonden in dit item.',
 	'wikibase-api-wrong-class' => 'De inhoud van de gevonden pagina is niet van het juiste type.',
 	'wikibase-api-session-failure' => 'De huidige sessie is verbroken. U dient zich opnieuw aan te melden.',
-	'wikibase-resetold' => 'opnieuw instellen',
+	'wikibase-restoreold' => 'opnieuw instellen',
 	'wikibase-noitem' => 'Dit item bestaat niet.
 U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} bijbehorende logboeken doorzoeken] om uit te vinden waar het is gebleven of een [[Special:CreateItem|niet item aanmaken]]</span>.',
 	'wikibase-noitem-nopermission' => 'Dit item bestaat niet.
@@ -2518,9 +2548,9 @@ $messages['nn'] = array(
 	'wikibase-api-description-not-found' => 'Kan ikkje finne nokon tidligare skildring på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innhaldet på funnen side er ikkje av korrekt type.',
 	'wikibase-api-session-failure' => 'Den inneverande brukarøkta har feila og du må oppdatere sida og logge inn på nytt.',
-	'wikibase-resetold' => 'tilbakestill',
-	'wikibase-noitem' => 'Dette datasettet finst ikkje.
-Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
+        'wikibase-restoreold' => 'tilbakestill',
+	'wikibase-noitem' => 'Dette datasettet finnes ikkje.
+Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]
 for å finne ut kva som har skjedd, eller [[Special:CreateItem|opprette eit nytt datasett]]</span>.',
 	'wikibase-noitem-nopermission' => 'Dette datasettet finst ikkje.
 Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
@@ -2695,7 +2725,7 @@ $messages['pt-br'] = array(
 	'wikibase-api-description-not-found' => 'Não foi possível localizar uma descrição prévia para este item nesse idioma.',
 	'wikibase-api-wrong-class' => 'O conteúdo da página encontrada não é do tipo correto.',
 	'wikibase-api-session-failure' => 'A sessão atual falhou. É necessário fazer login novamente.',
-	'wikibase-resetold' => 'redefinir',
+	'wikibase-restoreold' => 'redefinir',
 	'wikibase-noitem' => 'Este item não existe.
 Você pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os logs relacionados]
 para saber para onde foi ou [[Special:CreateItem|criar um novo item]]</span>.',
@@ -3001,7 +3031,7 @@ $1',
 	'wikibase-api-description-not-found' => 'Hindi matagpuan ang isang dating paglalarawan para sa wikang ito sa loob ng bagay.',
 	'wikibase-api-wrong-class' => 'Hindi tama ang uri ng nilalaman na nasa ibabaw ng natagpuang pahina.',
 	'wikibase-api-session-failure' => 'Nabigo ang pangkasalukuyang inilaang panahon. Kailangan mong lumagda ulit.',
-	'wikibase-resetold' => 'itakdang muli',
+	'wikibase-restoreold' => 'itakdang muli',
 	'wikibase-noitem' => 'Hindi umiiral ang bagay na ito.
 Maaari kang <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} maghanap sa kaugnay na mga talaan]
 upang malaman kung saan ito napunta, o [[Special:CreateItem|lumikha ng isang bagong bagay]]</span>.',
