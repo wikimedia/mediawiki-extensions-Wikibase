@@ -83,7 +83,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 			}
 
 			$itemContent->getItem()->removeSiteLink( $params['linksite'] );
-			$this->addSiteLinksToResult( array( $link ), 'item' );
+			$this->addSiteLinksToResult( array( $link ), 'item', 'sitelink', array( 'removed' ) );
 			return true;
 		}
 		else {
