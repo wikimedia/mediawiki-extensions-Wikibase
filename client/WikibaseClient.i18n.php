@@ -60,6 +60,13 @@ $messages['de'] = array(
 	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 );
 
+/** Zazaki (Zazaki)
+ * @author Erdemaslancan
+ */
+$messages['diq'] = array(
+	'wbc-editlinks' => 'Gri bıvurnê',
+);
+
 /** Lower Sorbian (dolnoserbski)
  * @author Michawiki
  */
