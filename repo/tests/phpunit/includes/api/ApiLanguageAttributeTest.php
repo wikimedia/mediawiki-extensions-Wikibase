@@ -41,50 +41,46 @@ use \Wikibase\Settings as Settings;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
 class ApiLanguageAttributeTest extends ApiModifyItemBase {
 
 	public function paramProvider() {
 		return array(
-			// lang attribute, lang code, operation, value, expected, exception that should be trown
-			array( 'label',			'en', 'set', 'Oslo', 'Oslo', null ),
-			array( 'description',	'en', 'set', 'Back to capitol of Norway', 'Back to capitol of Norway', null ),
-			array( 'label',			'en', 'add', 'Oslo', 'Oslo', 'UsageException' ),
-			array( 'description',	'en', 'add', 'Capitol of Norway', 'Capitol of Norway', 'UsageException' ),
-			array( 'label',			'en', 'update', 'Bergen', 'Bergen', null ),
-			array( 'description',	'en', 'update', 'Not capitol of Norway', 'Not capitol of Norway', null ),
+			// $handle, $attr, $langCode, $value, $exception
+			array( 'Oslo', 'label',			'en', 'Oslo', null ),
+			array( 'Oslo', 'description',	'en', 'Back to capitol of Norway', null ),
+			#array( 'Oslo', 'label',			'en', 'Oslo', 'UsageException' ),
+			#array( 'Oslo', 'description',	'en', 'Capitol of Norway', 'UsageException' ),
+			#array( 'Oslo', 'label',			'en', 'Bergen', null ),
+			#array( 'Oslo', 'description',	'en', 'Not capitol of Norway', null ),
+			array( 'Oslo', 'label',	'en', '', null ),
+			array( 'Oslo', 'description',	'en', '', null ),
 		);
 	}
 
 	/**
 	 * @dataProvider paramProvider
 	 */
-	public function testLanguageAttribute( $attr, $langCode, $op, $value, $expected, $exception ) {
+	public function testLanguageAttribute( $handle, $attr, $langCode, $value, $exception = null ) {
+		$id = $this->getItemId( $handle );
 
-		$req = array();
-		$token = $this->getItemToken();
-		if ( $token ) {
-			$req['token'] = $token;
-		}
-
-		$item = self::$itemContent->getItem();
-
-		$this->assertInstanceOf( '\Wikibase\Item', $item );
-
-		if ( !Settings::get( 'apiUseKeys' ) ) {
-			$req['usekeys'] = true;
-		}
-
-		$req = array_merge( $req, array(
-			'id' => $item->getId(),
+		// update the item ----------------------------------------------------------------
+		$req = array(
+			'token' => $this->getItemToken(),
+			'usekeys' => true,
+			'id' => $id,
 			'action' => 'wbsetlanguageattribute',
-			'format' => 'json',
 			'language' => $langCode,
 			$attr => $value
-		) );
+		);
 
 		try {
-			$apiResponse = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			list( $apiResponse,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+
+			if ( $exception ) {
+				$this->fail( "expected exception $exception" );
+			}
 		}
 		catch ( \Exception $e ) {
 			if ( $exception !== null ) {
@@ -96,37 +92,40 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 			}
 		}
 
-		$apiResponse = $apiResponse[0];
 		$this->assertSuccess( $apiResponse );
 
-		self::$itemContent->reload();
+		$item = $apiResponse['item'];
+		$section = "{$attr}s";
+		$record = null;
 
-		$item = self::$itemContent->getItem();
-
-		$this->assertInstanceOf( '\Wikibase\Item', $item );
-
-		if ( $attr === 'label') {
-			$str = $item->getLabel( $langCode );
-			$this->assertTrue(
-				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['labels']) : !array_key_exists($langCode, $apiResponse['item']['labels']),
-				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in labels"
-			);
+		foreach ( $item[$section] as $rec ) {
+			if ( $rec['language'] == $langCode ) {
+				$record = $rec;
+				break;
+			}
 		}
 
-		if ( $attr === 'description') {
-			$str = $item->getDescription( $langCode );
-			$this->assertTrue(
-				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['descriptions']) : !array_key_exists($langCode, $apiResponse['item']['descriptions']),
-				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in descriptions"
-			);
+		$this->assertNotNull( $record, "no $attr entry found for $langCode" );
+
+		if ( $value === '' ) {
+			$this->assertArrayHasKey( 'removed', $record );
+		} else {
+			$this->assertEquals( $value, $record['value'] );
 		}
 
-		$this->assertEquals(
-			$expected,
-			$str,
-			"Setting of {$attr} does not return the expected result"
-		);
+		// check item in the database ----------------------------------------------------------------
+		$item = $this->loadItem( $id );
+		$values = self::flattenArray( $item[$section], 'language', 'value' );
 
+		if ( $value !== '' ) {
+			$this->assertArrayHasKey( $langCode, $values, "should be present" );
+			$this->assertEquals( $value, $values[$langCode], "should have been updated" );
+		} else {
+			$this->assertArrayNotHasKey( $langCode, $values, "should have been removed" );
+		}
+
+		// cleanup ----------------------------------------------------------------
+		$this->resetItem( $handle );
 	}
 
 }
