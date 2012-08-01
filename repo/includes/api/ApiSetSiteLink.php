@@ -159,8 +159,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 	}
 
 	/**
-	 * Returns the description string for this module
-	 * @return mixed string or array of strings
+	 * @see ApiBase::getDescription()
 	 */
 	public function getDescription() {
 		return array(
