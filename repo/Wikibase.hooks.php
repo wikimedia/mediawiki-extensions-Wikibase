@@ -68,15 +68,16 @@ final class RepoHooks {
 			'ItemMove',
 			// 'ItemView', // Broken AGAIN...
 
-			'api/ApiJSONP',
+			'api/ApiBotEdit',
+			'api/ApiEditPage',
+			'api/ApiGetItems',
 			'api/ApiJSONPComplete',
+			'api/ApiJSONP',
 			'api/ApiLanguageAttribute',
+			'api/ApiPermissions',
 			'api/ApiSetAliases',
 			'api/ApiSetItem',
 			'api/ApiSetSiteLink',
-			'api/ApiEditPage',
-			'api/ApiPermissions',
-			'api/ApiBotEdit',
 
 			'content/EntityHandler',
 			'content/ItemContent',

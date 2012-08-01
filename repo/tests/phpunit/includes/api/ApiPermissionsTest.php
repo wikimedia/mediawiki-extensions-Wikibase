@@ -206,7 +206,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		$dbw->query( 'TRUNCATE TABLE ' . $dbw->tableName( 'wb_items_per_site' ) );
 
 		$params = array(
-			'id' => self::$itemContent->getItem()->getID(),
+			'id' => $this->getItemId( "Oslo" ),
 			'linksite' => 'enwiki',
 			'linktitle' => 'Oslo',
 		);
@@ -233,7 +233,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	 */
 	function testSetLabel( $permissions, $expectedError ) {
 		$params = array(
-			'id' => self::$itemContent->getItem()->getID(),
+			'id' => $this->getItemId( "Oslo" ),
 			'language' => 'de',
 			'label' => 'Oslo',
 		);
