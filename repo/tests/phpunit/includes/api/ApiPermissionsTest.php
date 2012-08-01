@@ -235,10 +235,37 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		$params = array(
 			'id' => $this->getItemId( "Oslo" ),
 			'language' => 'de',
-			'label' => 'Oslo',
+			'value' => 'Oslo',
 		);
 
-		$this->doPermissionsTest( 'wbsetlanguageattribute', $params, $permissions, $expectedError );
+		$this->doPermissionsTest( 'wbsetlabel', $params, $permissions, $expectedError );
+	}
+
+	function provideSetDescriptionPermissions() {
+		$permissions = $this->provideEditPermissions();
+
+		$permissions[] = array( #4
+			array( # permissions
+				'*'    => array( 'description-update' => false ),
+				'user' => array( 'description-update' => false )
+			),
+			'cant-edit' # error
+		);
+
+		return $permissions;
+	}
+
+	/**
+	 * @dataProvider provideSetDescriptionPermissions
+	 */
+	function testSetDescription( $permissions, $expectedError ) {
+		$params = array(
+			'id' => $this->getItemId( "Oslo" ),
+			'language' => 'en',
+			'value' => 'Capitol of Norway',
+		);
+
+		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
 	}
 
 }

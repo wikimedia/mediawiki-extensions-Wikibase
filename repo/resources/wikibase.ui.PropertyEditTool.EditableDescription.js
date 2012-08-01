@@ -64,8 +64,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 			} );
 		} else {
 			return $.extend( params, {
-				action: 'wbsetlanguageattribute',
-				description: this.getValue().toString()
+				action: 'wbsetdescription',
+				value: this.getValue().toString()
 			} );
 		}
 	}

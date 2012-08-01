@@ -157,7 +157,7 @@ class importInterlang extends Maintenance {
 			throw new importInterlangException( $api_response['error']['info'] );
 		}
 
-		$api_response = $this->callAPI( $this->api . "?action=wbsetlanguageattribute&format=php&id=" . urlencode( $id ) . "&language=" . urlencode( $lang ) . "&label=" . urlencode( $label ) );
+		$api_response = $this->callAPI( $this->api . "?action=wbsetlabel&format=php&id=" . urlencode( $id ) . "&language=" . urlencode( $lang ) . "&value=" . urlencode( $label ) );
 		if( isset( $api_response['error'] ) ) {
 			throw new importInterlangException( $api_response['error']['info'] );
 		}
