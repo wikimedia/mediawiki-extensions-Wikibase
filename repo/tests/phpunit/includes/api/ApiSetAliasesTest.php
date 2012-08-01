@@ -52,71 +52,55 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 	public function paramProvider() {
 		return array(
 			// lang code, list name, list values, expected result
-			array( 'en', 'set', 'Foo|bar', 'Foo|bar' ),
-			array( 'en', 'set', 'Foo|bar|baz', 'Foo|bar|baz' ),
-			array( 'en', 'add', 'Foo|bar', 'Foo|bar|baz' ),
-			array( 'en', 'add', 'Foo|spam', 'Foo|bar|baz|spam' ),
-			array( 'en', 'add', 'ohi', 'Foo|bar|baz|spam|ohi' ),
+			array( 'Oslo', 'en', 'set', 'Foo|bar', 'Foo|bar' ),
+			array( 'Oslo', 'en', 'set', 'Foo|bar|baz', 'Foo|bar|baz' ),
+			array( 'Oslo', 'en', 'add', 'Foo|bar', 'Foo|bar|baz' ),
+			array( 'Oslo', 'en', 'add', 'Foo|spam', 'Foo|bar|baz|spam' ),
+			array( 'Oslo', 'en', 'add', 'ohi', 'Foo|bar|baz|spam|ohi' ),
 
-			array( 'de', 'add', 'ohi', 'ohi' ),
-			array( 'de', 'set', 'ohi|ohi|spam|spam', 'ohi|spam' ),
+			array( 'Oslo', 'de', 'set', '', '' ),
+			array( 'Oslo', 'de', 'add', 'ohi', 'ohi' ),
 
-			array( 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
-			array( 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
-			array( 'en', 'remove', 'Foo|bar|baz|o_O', 'spam' ),
-			array( 'en', 'add', 'o_O', 'spam|o_O' ),
-			array( 'en', 'set', 'o_O', 'o_O' ),
-			array( 'en', 'remove', 'o_O', '' ),
+			array( 'Oslo', 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
+			array( 'Oslo', 'en', 'remove', 'ohi', 'Foo|bar|baz|spam' ),
+			array( 'Oslo', 'en', 'remove', 'Foo|bar|baz|o_O', 'spam' ),
+			array( 'Oslo', 'en', 'add', 'o_O', 'spam|o_O' ),
+			array( 'Oslo', 'en', 'set', 'o_O', 'o_O' ),
+			array( 'Oslo', 'en', 'remove', 'o_O', '' ),
 		);
 	}
 
 	/**
 	 * @dataProvider paramProvider
 	 */
-	public function testSetAliases( $langCode, $param, $value, $expected ) {
-		$req = array();
-		$token = $this->getItemToken();
+	public function testSetAliases( $handle, $langCode, $param, $value, $expected ) {
+		$id = $this->getItemId( $handle );
+		$expected = $expected === '' ? array() : explode( '|', $expected );
 
-		if ( $token ) {
-			$req['token'] = $token;
-		}
-
-		$item = self::$itemContent->getItem();
-		$this->assertInstanceOf( '\Wikibase\Item', $item );
-
-		$req = array_merge( $req, array(
-			'id' => $item->getId(),
+		// update the item ----------------------------------------------------------------
+		$req = array(
+			'token' => $this->getItemToken(),
+			'usekeys' => true,
+			'id' => $id,
 			'action' => 'wbsetaliases',
-			//'usekeys' => true, // this comes from Settings::get( 'apiUseKeys' )
-			'format' => 'json',
 			'language' => $langCode,
 			$param => $value
-		) );
+		);
 
-		$apiResponse = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-
-		$apiResponse = $apiResponse[0];
+		list( $apiResponse,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 
 		$this->assertSuccess( $apiResponse );
-		if ( $param === 'add') {
-			$this->assertTrue(
-				Settings::get( 'apiUseKeys' ) ? array_key_exists($langCode, $apiResponse['item']['aliases']) : !array_key_exists($langCode, $apiResponse['item']['aliases']),
-				"Found '{$langCode}' and it should" . (Settings::get( 'apiUseKeys' ) ? ' ' : ' not ') . "exist in aliases"
-			);
-		}
 
-		$expected = $expected === '' ? array() : explode( '|', $expected );
-		self::$itemContent->reload();
+		// check return value --------------------------------------------------
+		//TODO
 
-		$item = self::$itemContent->getItem();
-		$this->assertInstanceOf( '\Wikibase\Item', $item );
+		// check item in database --------------------------------------------------
+		$item = $this->loadItem( $id );
 
-		$actual = array_values( $item->getAliases( $langCode ) );
+		$aliases = self::flattenArray( $item['aliases'], 'language', 'value', true );
+		$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
 
-		asort( $expected );
-		asort( $actual );
-
-		$this->assertEquals(
+		$this->assertArrayEquals(
 			$expected,
 			$actual
 		);
