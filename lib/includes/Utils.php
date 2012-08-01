@@ -227,21 +227,15 @@ final class Utils {
 	}
 
 	/**
-	 * Normalize string into NFC after first checking if its already normalized.
+	 * Normalize string into NFC by using the cleanup metod from UtfNormal.
 	 *
 	 * @since 0.1
 	 *
 	 * @param string $inputString The actual string to process.
 	 * @return filtered string where whitespace possibly are removed.
 	 */
-	static public function conditionalToNFC( $inputString ) {
-		// Note that quickIsNFCVerify will do some cleanup of the string,
-		// but if we fail to detect a legal string, then we convert
-		// the filtered string anyhow.
-		if ( !UtfNormal::quickIsNFCVerify( $inputString ) ) {
-			return UtfNormal::toNFC( $inputString );
-		}
-		return $inputString;
+	static public function cleanupToNFC( $inputString ) {
+		return UtfNormal::cleanUp( $inputString );
 	}
 
 	/**
@@ -253,7 +247,7 @@ final class Utils {
 	 * @return trimmed string on NFC form
 	 */
 	static public function squashToNFC( $inputString ) {
-		return self::conditionalToNFC( self::squashWhitespace( $inputString ) );
+		return self::cleanupToNFC( self::squashWhitespace( $inputString ) );
 	}
 
 	/**

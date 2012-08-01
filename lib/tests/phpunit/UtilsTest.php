@@ -67,18 +67,18 @@ class UtilsTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
-	 * @dataProvider providerConditionalToNFC
+	 * @dataProvider providerCleanupToNFC
 	 */
-	public function testConditionalToNFC( $src, $dst, $expected ) {
+	public function testCleanupToNFC( $src, $dst, $expected ) {
 		if ($expected) {
-			$this->assertEquals( $dst, Utils::conditionalToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
+			$this->assertEquals( $dst, Utils::cleanupToNFC( $src ), "String '$src' is not the same as the expected '$dst'" );
 		}
 		else {
-			$this->assertFalse( $dst === Utils::conditionalToNFC( $src ), "String '$src' (" . urlencode( $src ) . ") is the same as the expected '$dst' (" . urlencode( $dst ) . "). This is unusual, but correct." );
+			$this->assertFalse( $dst === Utils::cleanupToNFC( $src ), "String '$src' (" . urlencode( $src ) . ") is the same as the expected '$dst' (" . urlencode( $dst ) . "). This is unusual, but correct." );
 		}
 	}
 
-	public function providerConditionalToNFC() {
+	public function providerCleanupToNFC() {
 		return array(
 			array( "\xC3\x85land", 'Åland', true ),
 			array( "A\xCC\x8Aland", 'Åland', true ),
