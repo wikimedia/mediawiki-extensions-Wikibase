@@ -77,6 +77,7 @@ class ApiSetItem extends ApiModifyItem {
 			if ( is_null( $data ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-json-invalid' ), 'json-invalid' );
 			}
+			$sites = array_flip( Sites::singleton()->getGlobalIdentifiers() );
 			$languages = array_flip( Utils::getLanguageCodes() );
 			foreach ( $data as $props => $list ) {
 				switch ($props) {
