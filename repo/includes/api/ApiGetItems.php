@@ -23,9 +23,7 @@ class ApiGetItems extends Api {
 	}
 
 	/**
-	 * Main method. Does the actual work and sets the result.
-	 *
-	 * @since 0.1
+	 * @see ApiBase::execute()
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -165,11 +163,7 @@ class ApiGetItems extends Api {
 	}
 
 	/**
-	 * Returns an array of allowed parameters (parameter name) => (default
-	 * value) or (parameter name) => (array with PARAM_* constants as keys)
-	 * Don't call this function directly: use getFinalParams() to allow
-	 * hooks to modify parameters as needed.
-	 * @return array|bool
+	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
@@ -198,10 +192,7 @@ class ApiGetItems extends Api {
 	}
 
 	/**
-	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
-	 * needed.
-	 *
-	 * @return array|bool False on no parameter descriptions
+	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(
@@ -222,8 +213,7 @@ class ApiGetItems extends Api {
 	}
 
 	/**
-	 * Returns the description string for this module
-	 * @return mixed string or array of strings
+	 * @see ApiBase::getDescription()
 	 */
 	public function getDescription() {
 		return array(
@@ -232,8 +222,7 @@ class ApiGetItems extends Api {
 	}
 
 	/**
-	 * Returns a list of all possible errors returned by the module
-	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
@@ -245,8 +234,7 @@ class ApiGetItems extends Api {
 	}
 
 	/**
-	 * Returns usage examples for this module. Return false if no examples are available.
-	 * @return bool|string|array
+	 * @see ApiBase::getExamples()
 	 */
 	protected function getExamples() {
 		return array(
@@ -260,15 +248,14 @@ class ApiGetItems extends Api {
 	}
 
 	/**
-	 * @return bool|string|array Returns a false if the module has no help url, else returns a (array of) string
+	 * @see ApiBase::getHelpUrls()
 	 */
 	public function getHelpUrls() {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbgetitems';
 	}
 
 	/**
-	 * Returns a string that identifies the version of this class.
-	 * @return string
+	 * @see ApiBase::getVersion()
 	 */
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
