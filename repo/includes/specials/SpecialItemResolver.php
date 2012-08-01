@@ -92,7 +92,20 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 		$view = new Wikibase\ItemView( $this->getContext() );
 		$view->render( $itemContent );
 
+		// Figure out which label to use for title.
+		// Commented out until there is a well-defined way to signal that fallback languages are in use.
+		/*
+		$langCode = $this->getLanguage()->getCode();
+		list( $labelCode, $labelText, $labelLang) =
+			\Wikibase\Utils::lookupUserMultilangText(
+				$itemContent->getItem()->getLabels(),
+				\Wikibase\Utils::languageChain( $langCode ),
+				array( $langCode, '', $this->getLanguage() )
+			);
+		*/
+
 		$this->getOutput()->setPageTitle( $itemContent->getItem()->getLabel( $this->getLanguage()->getCode() ) );
+		//$this->getOutput()->setPageTitle( $labelText );
 	}
 
 }
