@@ -48,7 +48,7 @@ abstract class ApiModifyItem extends Api {
 	/**
 	 * Actually modify the item.
 	 *
-	 * @since    0.1
+	 * @since 0.1
 	 *
 	 * @param ItemContent $item
 	 * @param array       $params
@@ -73,9 +73,7 @@ abstract class ApiModifyItem extends Api {
 	}
 
 	/**
-	 * Main method. Does the actual work and sets the result.
-	 *
-	 * @since 0.1
+	 * @see ApiBase::execute()
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
@@ -221,8 +219,7 @@ abstract class ApiModifyItem extends Api {
 	}
 
 	/**
-	 * Returns a list of all possible errors returned by the module
-	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
@@ -243,35 +240,28 @@ abstract class ApiModifyItem extends Api {
 	}
 
 	/**
-	 * Returns whether this module requires a Token to execute
-	 * @return bool
+	 * @see ApiBase::needsToken()
 	 */
 	public function needsToken() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true ;
 	}
 
 	/**
-	 * Indicates whether this module must be called with a POST request
-	 * @return bool
+	 * @see ApiBase::mustBePosted()
 	 */
 	public function mustBePosted() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true ;
 	}
 
 	/**
-	 * Indicates whether this module requires write mode
-	 * @return bool
+	 * @see ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
 	}
 
 	/**
-	 * Returns an array of allowed parameters (parameter name) => (default
-	 * value) or (parameter name) => (array with PARAM_* constants as keys)
-	 * Don't call this function directly: use getFinalParams() to allow
-	 * hooks to modify parameters as needed.
-	 * @return array|bool
+	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
@@ -290,10 +280,7 @@ abstract class ApiModifyItem extends Api {
 	}
 
 	/**
-	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
-	 * needed.
-	 *
-	 * @return array|bool False on no parameter descriptions
+	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
 		return array_merge( parent::getParamDescription(), array(

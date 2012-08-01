@@ -40,8 +40,7 @@ abstract class Api extends \ApiBase {
 	}
 
 	/**
-	 * Returns a list of all possible errors returned by the module
-	 * @return array in the format of array( key, param1, param2, ... ) or array( 'code' => ..., 'info' => ... )
+	 * @see ApiBase::getPossibleErrors()
 	 */
 	public function getPossibleErrors() {
 		return array(
@@ -50,10 +49,7 @@ abstract class Api extends \ApiBase {
 	}
 
 	/**
-	 * Get final parameter descriptions, after hooks have had a chance to tweak it as
-	 * needed.
-	 *
-	 * @return array|bool False on no parameter descriptions
+	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
 		$descriptions = array(
@@ -75,11 +71,7 @@ abstract class Api extends \ApiBase {
 	}
 
 	/**
-	 * Returns an array of allowed parameters (parameter name) => (default
-	 * value) or (parameter name) => (array with PARAM_* constants as keys)
-	 * Don't call this function directly: use getFinalParams() to allow
-	 * hooks to modify parameters as needed.
-	 * @return array|bool
+	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
 		$allowedParams = array(
