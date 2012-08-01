@@ -71,8 +71,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 			} );
 		} else {
 			return $.extend( params, {
-				action: "wbsetlanguageattribute",
-				label: this.getValue().toString()
+				action: "wbsetlabel",
+				value: this.getValue().toString()
 			} );
 		}
 	}
