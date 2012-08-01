@@ -78,6 +78,7 @@ final class RepoHooks {
 			'api/ApiSetAliases',
 			'api/ApiSetItem',
 			'api/ApiSetSiteLink',
+			'api/Autocomment',
 
 			'content/EntityHandler',
 			'content/ItemContent',

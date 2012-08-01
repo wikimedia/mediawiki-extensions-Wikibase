@@ -100,6 +100,7 @@ $wgAutoloadClasses['Wikibase\ViewPropertyAction'] 		= $dir . 'includes/actions/V
 $wgAutoloadClasses['Wikibase\ViewQueryAction'] 			= $dir . 'includes/actions/ViewQueryAction.php';
 
 // includes/api
+$wgAutoloadClasses['Wikibase\Autocomment'] 				= $dir . 'includes/api/Autocomment.php';
 $wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
 $wgAutoloadClasses['Wikibase\ApiGetItems'] 				= $dir . 'includes/api/ApiGetItems.php';
 $wgAutoloadClasses['Wikibase\ApiSetLanguageAttribute'] 	= $dir . 'includes/api/ApiSetLanguageAttribute.php';

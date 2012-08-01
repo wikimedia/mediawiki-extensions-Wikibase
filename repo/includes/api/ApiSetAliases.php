@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User;
+use ApiBase, User, Language;
 
 /**
  * API module to set the aliases for a Wikibase item.
@@ -51,6 +51,28 @@ class ApiSetAliases extends ApiModifyItem {
 		if ( !( ( isset( $params['add'] ) || isset( $params['remove'] ) ) XOR isset( $params['set'] ) ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-aliases-invalid-list' ), 'aliases-invalid-list' );
 		}
+	}
+
+	/**
+	 * @see  ApiModifyItem::getTextForComment()
+	 */
+	protected function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			'wbsetaliases',
+			array_merge(
+				array( $plural, $params['language'] ),
+				Autocomment::pickKeysFromParams( $params, 'set', 'add', 'remove' )
+			)
+		);
+	}
+
+	/**
+	 * @see  ApiModifyItem::getTextForSummary()
+	 */
+	protected function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'set', 'add', 'remove' )
+		);
 	}
 
 	/**

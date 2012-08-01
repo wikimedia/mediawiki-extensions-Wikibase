@@ -30,6 +30,25 @@ class ApiSetItem extends ApiModifyItem {
 	}
 
 	/**
+	 * @see  ApiModifyItem::getTextForComment()
+	 */
+	protected function getTextForComment( array $params, $plural = 'none' ) {
+		return Autocomment::formatAutoComment(
+			'wbsetitem',
+			array()
+		);
+	}
+
+	/**
+	 * @see  ApiModifyItem::getTextForSummary()
+	 */
+	protected function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'data' )
+		);
+	}
+
+	/**
 	 * Create the item if its missing.
 	 *
 	 * @since    0.1
