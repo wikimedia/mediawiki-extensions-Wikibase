@@ -30,7 +30,7 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		}
 
 		if ( isset( $params['description'] ) ) {
-			$permissions[] = 'description-' . ( strlen( $params['label'] ) ? 'update' : 'remove' );
+			$permissions[] = 'description-' . ( strlen( $params['description'] ) ? 'update' : 'remove' );
 		}
 
 		return $permissions;
@@ -49,6 +49,28 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 		if ( !isset( $params['label'] ) && !isset( $params['description'] ) ) {
 			$this->dieUsage( wfMsg( 'wikibase-api-label-or-description' ), 'label-or-description' );
 		}
+	}
+
+	/**
+	 * @see  ApiModifyItem::getTextForComment()
+	 */
+	protected function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			'wbsetlanguageattribute',
+			array_merge(
+				array( $plural, $params['language'] ), // should be some stuff about remove here
+				Autocomment::pickKeysFromParams( $params, 'label', 'description' )
+			)
+		);
+	}
+
+	/**
+	 * @see  ApiModifyItem::getTextForSummary()
+	 */
+	protected function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'label', 'description' )
+		);
 	}
 
 	/**

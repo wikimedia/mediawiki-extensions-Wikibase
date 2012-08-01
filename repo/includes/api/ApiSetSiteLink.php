@@ -46,6 +46,30 @@ class ApiSetSiteLink extends ApiModifyItem {
 	}
 
 	/**
+	 * @see  ApiModifyItem::getTextForComment()
+	 */
+	protected function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			'wbsetsitelink',
+			array_merge(
+				array(
+					$plural, $params['linksite'],
+					( isset( $params['linktitle'] ) && $params['linktitle'] !== "" ) ? "set" : "remove"
+				)
+			)
+		);
+	}
+
+	/**
+	 * @see  ApiModifyItem::getTextForSummary()
+	 */
+	protected function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'linksite', 'linktitle' ) // uses this to get a comma list
+		);
+	}
+
+	/**
 	 * Create the item if its missing.
 	 *
 	 * @since    0.1

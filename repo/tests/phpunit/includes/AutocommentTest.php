@@ -1,0 +1,158 @@
+<?php
+
+namespace Wikibase\Test;
+use Wikibase\Autocomment as Autocomment;
+
+/**
+ * Test Autocomment.
+ *
+ * @file
+ * @since 0.1
+ *
+ * @ingroup Wikibase
+ * @ingroup Test
+ *
+ * @group Wikibase
+ * @group Autocomment
+ *
+ * @licence GNU GPL v2+
+ * @author John Erling Blad < jeblad@gmail.com >
+ *
+ */
+class AutocommentTest extends \MediaWikiTestCase {
+
+	/**
+	 * @dataProvider providerPickValuesFromParams
+	 */
+	public function testPickValuesFromParams( array $params, array $sequence, array $expected ) {
+		$result = Autocomment::pickValuesFromParams( $params, $sequence );
+		$this->assertEquals( $expected, $result, 'Not the expected result' );
+	}
+
+	public function providerPickValuesFromParams() {
+		return array(
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array(),
+				array()
+			),
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array( 'one' ),
+				array( 'one-value' )
+			),
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array( 'one', 'two' ),
+				array( 'one-value', 'two-value' )
+			),
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array( 'one', 'two', 'three' ),
+				array( 'one-value', 'two-value', 'three-value' )
+			),
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array( 'one', 'three', 'four' ),
+				array( 'one-value', 'three-value' )
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider providerPickKeysFromParams
+	 */
+	public function testPickKeysFromParams( array $params, array $sequence, array $expected ) {
+		$result = Autocomment::pickKeysFromParams( $params, $sequence );
+		$this->assertEquals( $expected, $result, 'Not the expected result' );
+	}
+
+	public function providerPickKeysFromParams() {
+		return array(
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array(),
+				array()
+			),
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array( 'one' ),
+				array( 'one' )
+			),
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array( 'one', 'two' ),
+				array( 'one', 'two' )
+			),
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array( 'one', 'two', 'three' ),
+				array( 'one', 'two', 'three' )
+			),
+			array(
+				array( 'one' => 'one-value', 'two' => 'two-value', 'three' => 'three-value' ),
+				array( 'one', 'three', 'four' ),
+				array( 'one', 'three' )
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider providerFormatAutoComment
+	 */
+	public function testFormatAutoComment( $msg, $parts, $expected ) {
+		$result = Autocomment::formatAutoComment( $msg, $parts );
+		$this->assertEquals( $expected, $result, 'Not the expected result' );
+	}
+
+	public function providerFormatAutoComment() {
+		return array(
+			array( '', array(), '' ),
+			array( 'msgkey', array(), 'msgkey' ),
+			array( 'msgkey', array( 'one' ), 'msgkey:one' ),
+			array( 'msgkey', array( 'one', 'two' ), 'msgkey:one|two' ),
+			array( 'msgkey', array( 'one', 'two', 'three' ), 'msgkey:one|two|three' ),
+		);
+	}
+
+	/**
+	 * @dataProvider providerFormatAutoSummary
+	 */
+	public function testFormatAutoSummary( $parts, $lang, $expected ) {
+		$result = Autocomment::formatAutoSummary( $parts, $lang );
+		$this->assertEquals( $expected, $result, 'Not the expected result' );
+	}
+
+	public function providerFormatAutoSummary() {
+		$lang = \Language::factory( 'en' );
+		return array(
+			array( array(), $lang, array( 0, '', $lang ) ),
+			array( array( 'one' ), $lang, array( 1, 'one', $lang ) ),
+			array( array( 'one', 'two' ), $lang, array( 2, 'one, two', $lang ) ),
+			array( array( 'one', 'two', 'three' ), $lang, array( 3, 'one, two, three', $lang ) ),
+		);
+	}
+
+	/**
+	 * @dataProvider providerFormatTotalSummary
+	 */
+	public function testFormatTotalSummary( $comment, $summary, $lang, $expected ) {
+		$result = Autocomment::formatTotalSummary( $comment, $summary, $lang );
+		$this->assertEquals( $expected, $result, 'Not the expected result' );
+	}
+
+	public function providerFormatTotalSummary() {
+		$lang = \Language::factory( 'en' );
+		return array(
+			array( '', '', $lang, '' ),
+			array( 'foobar', 'This is a test…', $lang, '/* foobar */ This is a test…' ),
+			array( 'foobar:one', 'This is a test…', $lang, '/* foobar:one */ This is a test…' ),
+			array( 'foobar:one|two', 'This is a test…', $lang, '/* foobar:one|two */ This is a test…' ),
+			array( 'foobar:one|two|three', 'This is a test…', $lang, '/* foobar:one|two|three */ This is a test…' ),
+			array( 'foobar:one|two|three|…', 'This is a test…', $lang, '/* foobar:one|two|three|… */ This is a test…' ),
+			array( 'foobar:one|two|three|<>', 'This is a test…', $lang, '/* foobar:one|two|three|<> */ This is a test…' ),
+			array( 'foobar:one|two|three|&lt;&gt;', 'This is a test…', $lang, '/* foobar:one|two|three|&lt;&gt; */ This is a test…' ),
+			array(  '', str_repeat( 'a', 2*SUMMARY_MAX_LENGTH ), $lang, str_repeat( 'a', SUMMARY_MAX_LENGTH-3 ) . '...' ),
+		);
+	}
+}

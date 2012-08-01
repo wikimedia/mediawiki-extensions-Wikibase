@@ -69,7 +69,7 @@ define( 'SITE_GROUP_WIKISOURCE', 4 );
 define( 'SITE_GROUP_WIKIVERSITY', 5 );
 define( 'SITE_GROUP_WIKINEWS', 6 );
 
-
+define( 'SUMMARY_MAX_LENGTH', 250 );
 
 $wgSiteTypes = array();
 
