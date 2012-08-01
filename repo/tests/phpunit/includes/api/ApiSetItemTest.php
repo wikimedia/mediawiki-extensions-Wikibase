@@ -22,7 +22,8 @@ use Wikibase\Settings as Settings;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
- * 
+ * @author Daniel Kinzler
+ *
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
@@ -37,88 +38,133 @@ use Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiSetItemTest extends \ApiTestCase {
+class ApiSetItemTest extends ApiModifyItemBase {
 
-	protected static $baseOfItemIds = 0;
-	protected static $usepost;
-	protected static $usetoken;
-	protected static $userights;
-
-	public function setUp() {
-		global $wgUser;
-		parent::setUp();
-
-		\Wikibase\Utils::insertSitesForTests();
-
-		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
-
-		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
-			'Apitesteditor',
-			'Api Test Editor',
-			'api_test_editor@example.com',
-			array( 'wbeditor' )
-		);
-		$wgUser = self::$users['wbeditor']->user;
-
-		// now we have to do the login with the previous user
-		$data = $this->doApiRequest( array(
-			'action' => 'login',
-			'lgname' => self::$users['wbeditor']->username,
-			'lgpassword' => self::$users['wbeditor']->password
-		) );
-
-		$token = $data[0]['login']['token'];
-
-		$this->doApiRequest(
-			array(
-				'action' => 'login',
-				'lgtoken' => $token,
-				'lgname' => self::$users['wbeditor']->username,
-				'lgpassword' => self::$users['wbeditor']->password
+	function testSetItem() {
+		$item = array(
+			"sitelinks" => array(
+				"dewiki" => "Foo",
+				"enwiki" => "Bar",
 			),
-			$data
+			"labels" => array(
+				"de" => "Foo",
+				"en" => "Bar",
+			),
+			"aliases" => array(
+				"de"  => array( "Fuh" ),
+				"en"  => array( "Baar" ),
+			),
+			"descriptions" => array(
+				"de"  => "Metasyntaktische Veriable",
+				"en"  => "Metasyntactic variable",
+			)
 		);
-	}
 
-	function getTokens() {
-		return $this->getTokenList( self::$users['sysop'] );
-	}
+		// ---- check failure without token --------------------------
+		$this->login();
 
-	/**
-	 * This initiates a cascade that fails if there are no
-	 * production-like environment
-	 * @group API
-	 */
-	function testTokensAndRights() {
-		// check if there is a production-like environment available
-		if (!self::$usetoken || !self::$userights) {
-			$this->markTestSkipped(
-				"The current setup does not include use of tokens or user rights"
+		if ( self::$usetoken ) {
+			try {
+				$this->doApiRequest(
+					array(
+						'action' => 'wbsetitem',
+						'reason' => 'Some reason',
+						'data' => json_encode( $item ),
+					),
+					null,
+					false,
+					self::$users['wbeditor']->user
+				);
+
+				$this->fail( "Adding an item without a token should have failed" );
+			}
+			catch ( \UsageException $e ) {
+				$this->assertTrue( ($e->getCode() == 'session-failure'), "Expected session-failure, got unexpected exception: $e" );
+			}
+		}
+
+		// ---- check success with token --------------------------
+		$token = $this->getItemToken();
+
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbsetitem',
+				'reason' => 'Some reason',
+				'data' => json_encode( $item ),
+				'token' => $token,
+			),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+
+		$this->assertSuccess( $res, 'item', 'id' );
+		$this->assertItemEquals( $item, $res['item'] );
+
+		$id = $res['item']['id'];
+
+		// ---- check failure to set the same item again, without id -----------
+		$item['labels'] = array(
+			"de" => "Foo X",
+			"en" => "Bar Y",
+		);
+
+		try {
+			$this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'reason' => 'Some reason',
+					'data' => json_encode( $item ),
+					'token' => $token,
+				),
+				null,
+				false,
+				self::$users['wbeditor']->user
 			);
+
+			$this->fail( "Adding another item with the same sitelinks should have failed" );
 		}
-		// make sure execution pass through at least one assertion
-		else {
-			$this->assertTrue( true, "Make phpunit happy" );
+		catch ( \UsageException $e ) {
+			$this->assertTrue( ($e->getCode() == 'set-sitelink-failed'), "Expected set-sitelink-failed, got unexpected exception: $e" );
 		}
+
+		// ---- check success of update with id --------------------------
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbsetitem',
+				'reason' => 'Some reason',
+				'data' => json_encode( $item ),
+				'token' => $token,
+				'id' => $id,
+			),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+
+		$this->assertSuccess( $res, 'item', 'id' );
+		$this->assertItemEquals( $item, $res['item'] );
 	}
 
 	/**
 	 * @group API
-	 * @depends testTokensAndRights
-	 * @dataProvider provideSetItemIdDataOp
 	 */
-	function testSetItemGetTokenGetItems( $id, $op, $data ) {
+	function testGetToken() {
+		if ( !static::$usetoken ) {
+			$this->markTestSkipped( "tokens disabled" );
+			return;
+		}
+
 		$data = $this->doApiRequest(
 			array(
 				'action' => 'wbgetitems',
-				'ids' => $id,
+				'ids' => '23',
 				'gettoken' => '' ),
 			null,
 			false,
 			self::$users['wbeditor']->user
 		);
+
 		// this should always hold for a logged in user
 		// unless we do some additional tricks with the token
 		$this->assertEquals(
@@ -131,546 +177,43 @@ class ApiSetItemTest extends \ApiTestCase {
 		);
 	}
 
-	/**
-	 * @group API
-	 * @depends testTokensAndRights
-	 * @dataProvider provideSetItemIdDataOp
-	 */
-	function testSetItemGetTokenSetItem( $id, $op, $data ) {
-		$data = $this->doApiRequest(
-			array(
-				'action' => 'wbsetitem',
-				'gettoken' => '' ),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
-		// this should always hold for a logged in user
-		// unless we do some additional tricks with the token
-		$this->assertEquals(
-			34, strlen( $data[0]["wbsetitem"]["itemtoken"] ),
-			"The length of the token is not 34 chars"
-		);
-		$this->assertRegExp(
-			'/\+\\\\$/', $data[0]["wbsetitem"]["itemtoken"],
-			"The final chars of the token is not '+\\'"
-		);
+	function testChangeLabel() {
+		$this->markTestIncomplete();
 	}
 
-	/**
-	 * Attempting to set item without a token should give a UsageException with
-	 * error message:
-	 *   "The token parameter must be set"
-	 *
-	 * @group API
-	 * @depends testSetItemGetTokenSetItem
-	 * @dataProvider provideSetItemIdDataOp
-	 */
-	function testSetItemWithNoToken( $id, $op, $data ) {
-		try {
-			$this->doApiRequest(
-				array(
-					'action' => 'wbsetitem',
-					'reason' => 'Some reason',
-					'data' => $data
-					),
-				null,
-				false,
-				self::$users['wbeditor']->user
-			);
-		}
-		catch ( \UsageException $e ) {
-			$this->assertTrue( ($e->getCode() == 'session-failure'), "Got a wrong exception" );
-			return;
-		}
-		$this->assertTrue( self::$usetoken, "Missing an exception" );
+	function testChangeDescription() {
+		$this->markTestIncomplete();
 	}
 
-	/**
-	 * @group API
-	 * @depends testSetItemGetTokenSetItem
-	 * @depends testSetItemWithNoToken
-	 */
-	function testSetItemTop() {
-		$req = array();
-		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
-			$first = $this->doApiRequest(
-				array(
-					'action' => 'wbsetitem',
-					'gettoken' => '' ),
-				null,
-				false,
-				self::$users['wbeditor']->user
-			);
-
-			$req['token'] = $first[0]['wbsetitem']['itemtoken'];
-		}
-		$req = array_merge(
-			$req,
-			array(
-				'action' => 'wbsetitem',
-				'summary' => 'Some reason',
-				'data' => '{}',
-			)
-		);
-
-		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-		$this->assertArrayHasKey( 'success', $second[0],
-			"Must have an 'success' key in the second result from the API" );
-		$this->assertArrayHasKey( 'item', $second[0],
-			"Must have an 'item' key in the second result from the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['item'],
-			"Must have an 'id' key in the 'item' from the second result from the API" );
-		self::$baseOfItemIds = $second[0]['item']['id'];
+	function testChangeAlias() {
+		$this->markTestIncomplete();
 	}
 
-	/**
-	 * @group API
-	 * @depends testSetItemTop
-	 * @dataProvider provideSetItemIdDataOp
-	 */
-	function testSetItemGetTokenSetData( $id, $op, $data ) {
-		$req = array();
-		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
-			$first = $this->doApiRequest(
-				array(
-					'action' => 'wbsetitem',
-					'gettoken' => ''
-				),
-				null,
-				false,
-				self::$users['wbeditor']->user
-			);
-
-			$req['token'] = $first[0]['wbsetitem']['itemtoken'];
-		}
-
-		$req = array_merge(
-			$req,
-			array(
-				'action' => 'wbsetitem',
-				'summary' => 'Some reason',
-				'data' => $data,
-				'item' => $op
-			)
-		);
-
-		$second = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-
-		$this->assertArrayHasKey( 'success', $second[0],
-			"Must have an 'success' key in the second result from the API" );
-		$this->assertArrayHasKey( 'item', $second[0],
-			"Must have an 'item' key in the second result from the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['item'],
-			"Must have an 'id' key in the 'item' from the second result from the API" );
-		$this->assertArrayHasKey( 'sitelinks', $second[0]['item'],
-			"Must have an 'sitelinks' key in the 'item' result from the second call to the API" );
-		$this->assertArrayHasKey( 'labels', $second[0]['item'],
-			"Must have an 'labels' key in the 'item' result from the second call to the API" );
-		$this->assertArrayHasKey( 'descriptions', $second[0]['item'],
-			"Must have an 'descriptions' key in the 'item' result from the second call to the API" );
-		// we should store and reuse but its thrown away on each iteration
-		$myid =  self::$baseOfItemIds + $id;
-		$this->assertEquals( $myid, $second[0]['item']['id'],
-			"Must have the value '{$myid}' for the 'id' in the result from the API" );
+	function testChangeSitelink() {
+		$this->markTestIncomplete();
 	}
 
-	/**
-	 * Test basic lookup of items to get the id.
-	 * This is really a fast lookup without reparsing the stringified item.
-	 *
-	 * @group API
-	 * @depends testSetItemGetTokenSetData
-	 * @dataProvider providerGetItemId
-	 */
-	public function testGetItemId( $id, $site, $title ) {
-		$myid =  self::$baseOfItemIds + $id;
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $site,
-			'titles' => $title,
-		) );
-
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the API" );
-		$this->assertArrayHasKey( 'items', $first[0],
-			"Must have an 'items' key in the result from the API" );
-		$this->assertArrayHasKey( "{$myid}", $first[0]['items'],
-			"Must have an '{$myid}' key in the 'items' result from the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['items']["{$myid}"],
-			"Must have an 'id' key in the 'item' from the API" );
-		$myid =  self::$baseOfItemIds + $id;
-		$this->assertEquals( $myid, $first[0]['items']["{$myid}"]['id'],
-			"Must have the value '{$myid}' for the 'id' in the 'item' from the result from the API" );
+	/*
+	function testProtectedItem() { //TODO
+		$this->markTestIncomplete();
 	}
 
-	/**
-	 * Testing if we can get individual complete stringified items if we do lookup with single ids.
-	 * Note that this makes assumptions about which ids they have been assigned.
-	 *
-	 * @group API
-	 * @dataProvider provideSetItemIdDataOp
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testGetItems( $id, $op, $data ) {
-		$myid =  self::$baseOfItemIds + $id;
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'ids' => "{$myid}",
-		) );
-
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the API" );
-		$this->assertArrayHasKey( 'items', $first[0],
-			"Must have an 'items' key in the result from the API" );
-		$this->assertArrayHasKey( "{$myid}", $first[0]['items'],
-			"Must have an '{$myid}' key in the 'items' result from the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['items']["{$myid}"],
-			"Must have an 'id' key in the '{$myid}' result from the API" );
-		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["{$myid}"],
-			"Must have an 'sitelinks' key in the '{$myid}' result from the API" );
-		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$myid}"],
-			"Must have an 'labels' key in the '{$myid}' result from the API" );
-		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$myid}"],
-			"Must have an 'descriptions' key in the '{$myid}' result from the API" );
+	function testBlockedUser() { //TODO
+		$this->markTestIncomplete();
 	}
 
-	/**
-	 * Testing if we can get missing items if we do lookup with single fake ids.
-	 * Note that this makes assumptions about which ids they have been assigned.
-	 *
-	 * @group API
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testGetItemsMissingId( ) {
-		$myid =  self::$baseOfItemIds + 123456789;
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'ids' => "{$myid}",
-		) );
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the API" );
-		$this->assertArrayHasKey( 'items', $first[0],
-			"Must have an 'items' key in the result from the API" );
-		$items = array_values( $first[0]['items'] );
-		$this->assertEquals( 1, count( $items ),
-			"Must have an item count of '1' in the result from the API" );
-		$this->assertArrayHasKey( 'missing', $items[0],
-			"Must have a 'missing' key in the result from the API" );
+	function testEditPermission() { //TODO
+		$this->markTestIncomplete();
 	}
+	*/
 
-	/**
-	 * Testing if we can get missing items if we do lookup with failing titles.
-	 * Note that this makes assumptions about which ids they have been assigned.
-	 *
-	 * @group API
-	 * @depends testSetItemGetTokenSetData
-	 * @dataProvider providerGetItemsMissingTitle
-	 */
-	public function testGetItemsMissingTitle( $id, $sites, $titles ) {
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $sites,
-			'titles' => $titles,
-		) );
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the API" );
-		$this->assertArrayHasKey( 'items', $first[0],
-			"Must have an 'items' key in the result from the API" );
-		$items = array_values( $first[0]['items'] );
-		foreach ( $first[0]['items'] as $k => $v ) {
-			$this->assertArrayHasKey( 'missing', $v,
-				"Must have a 'missing' key in the result from the API" );
-		}
-	}
+}
 
-	/**
-	 * Testing if we can get all the complete stringified items if we do lookup with multiple ids.
-	 *
-	 * @group API
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testGetItemsMultipleIds() {
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'ids' => '1|2|3'
-		) );
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the API" );
-		$this->assertArrayHasKey( 'items', $first[0],
-			"Must have an 'items' key in the result from the API" );
-		$this->assertCount( 3, $first[0]['items'],
-			"Must have a number of count of 3 in the 'items' result from the API" );
-		// FIXME: this ends a bit premature, it should verify correct id
-	}
+class DummyFoo extends ApiSetItemTest{
 
-	/**
-	 * Testing if we can get all the complete stringified items if we do lookup with multiple site-title pairs.
-	 *
-	 * @group API
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testGetItemsMultipleSiteLinks() {
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => 'dewiki|enwiki|nlwiki',
-			'titles' => 'Berlin|London|Oslo'
-		) );
-
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the API" );
-		$this->assertArrayHasKey( 'items', $first[0],
-			"Must have an 'items' key in the result from the API" );
-		$this->assertCount( 3, $first[0]['items'],
-			"Must have a number of count of 3 in the 'items' result from the API" );
-		// FIXME: this ends a bit premature, it should verify correct sitelinks
-	}
-	/**
-	 * Testing if we can get individual complete stringified items if we do lookup with site-title pairs
-	 * Note that this makes assumptions about which ids they have been assigned.
-	 *
-	 * @group API
-	 * @dataProvider providerGetItemId
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testGetItemsSiteTitle($id, $site, $title) {
-		$myid =  self::$baseOfItemIds + $id;
-		$first = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $site,
-			'titles' => $title,
-		) );
-
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the API" );
-		$this->assertArrayHasKey( 'items', $first[0],
-			"Must have an 'items' key in the result from the API" );
-		$this->assertArrayHasKey( "{$myid}", $first[0]['items'],
-			"Must have an '{$myid}' key in the 'items' result from the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['items']["{$myid}"],
-			"Must have an 'id' key in the '{$myid}' result from the API" );
-		$this->assertArrayHasKey( 'sitelinks', $first[0]['items']["{$myid}"],
-			"Must have an 'sitelinks' key in the '{$myid}' result from the API" );
-		$this->assertArrayHasKey( 'labels', $first[0]['items']["{$myid}"],
-			"Must have an 'labels' key in the '{$myid}' result from the API" );
-		$this->assertArrayHasKey( 'descriptions', $first[0]['items']["{$myid}"],
-			"Must have an 'descriptions' key in the '{$myid}' result from the API" );
-	}
-
-	/**
-	 * This tests are entering links to sites by giving 'id' for the fiorst lookup, then setting 'linksite' and 'linktitle'.
-	 * In these cases the ids returned should also match up with the ids from the provider.
-	 * Note that we must use a new provider to avoid having multiple links to the same external page.
-	 * 
-	 * @group API
-	 * @dataProvider providerLinkSiteId
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testLinkSiteIdUpdate( $id, $site, $title, $linksite, $linktitle, $badge ) {
-		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'update' );
-	}
-
-	/**
-	 * @group API
-	 * @dataProvider providerLinkSiteId
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testLinkSiteIdRemove( $id, $site, $title, $linksite, $linktitle, $badge ) {
-		$this->linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, 'remove' );
-	}
-
-	public function linkSiteId( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
-		$myid =  self::$baseOfItemIds + $id;
-		$req = array();
-		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
-			$data = $this->doApiRequest(
-				array(
-					'action' => 'wbsetitem',
-					'gettoken' => '' ),
-				null,
-				false,
-				self::$users['wbeditor']->user
-			);
-			$req['token'] = $data[0]['wbsetitem']['itemtoken'];
-		}
-
-		$req = array_merge( $req, array(
-			'action' => 'wbsetsitelink',
-			'id' => $myid,
-			'linksite' => $linksite,
-			'linktitle' => ($op === 'remove' ? '' : $linktitle),
-		) );
-
-		$first = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the first call to the API" );
-		$this->assertArrayHasKey( 'item', $first[0],
-			"Must have an 'item' key in the result from the first call to the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['item'],
-			"Must have an 'id' key in the 'item' result from the first call to the API" );
-		$this->assertEquals( $myid, $first[0]['item']['id'],
-			"Must have the value '{$myid}' for the 'id' in the result from the first call to the API" );
-
-		$second = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $linksite,
-			'titles' => $linktitle,
-		) );
-
-		$this->assertArrayHasKey( 'success', $second[0],
-			"Must have an 'success' key in the result from the second call to the API" );
-		$this->assertArrayHasKey( 'items', $second[0],
-			"Must have an 'items' key in the result from the second call to the API" );
-		if ( $op === 'remove' ) {
-			$this->assertCount( 1, $second[0]['items'],
-				"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-			$this->assertArrayHasKey( "-1", $second[0]['items'],
-				"Must have an '-1' key in the 'items' result from the second call to the API" );
-			$this->assertArrayHasKey( 'missing', $second[0]['items']["-1"],
-				"Must have an 'missing' key in the '-1' result from the second call to the API" );
-		}
-		else {
-			$this->assertCount( 1, $second[0]['items'],
-				"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-			$this->assertArrayHasKey( "{$myid}", $second[0]['items'],
-				"Must have an '{$myid}' key in the 'items' result from the second call to the API" );
-			$this->assertArrayHasKey( 'id', $second[0]['items']["{$myid}"],
-				"Must have an 'id' key in the '{$myid}' result from the second call to the API" );
-			$this->assertEquals( $myid, $second[0]['items']["{$myid}"]['id'],
-				"Must have the value '{$myid}' for the 'id' in the result from the second call to the API" );
-		}
-
-		$third = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $site,
-			'titles' => $title,
-		) );
-
-		$this->assertArrayHasKey( 'success', $third[0],
-			"Must have an 'success' key in the result from the third call to the API" );
-		$this->assertArrayHasKey( 'items', $third[0],
-			"Must have an 'items' key in the result from the third call to the API" );
-		$this->assertCount( 1, $third[0]['items'],
-			"Must have a number of count of 1 in the 'items' result from the third call to the API" );
-		$this->assertArrayHasKey( "{$myid}", $third[0]['items'],
-			"Must have an '{$myid}' key in the 'items' result from the third call to the API" );
-		$this->assertArrayHasKey( 'id', $third[0]['items']["{$myid}"],
-			"Must have an 'id' key in the '{$myid}' result from the third call to the API" );
-		$this->assertEquals( $myid, $third[0]['items']["{$myid}"]['id'],
-			"Must have the value '{$myid}' for the 'id' in the result from the third call to the API" );
-	}
-
-	/**
-	 * This tests are entering links to sites by giving 'site' and 'title' pairs instead of id, then setting 'linksite' and 'linktitle'.
-	 * In these cases the ids returned should also match up with the ids from the provider.
-	 * Note that we must use a new provider to avoid having multiple links to the same external page.
-	 * 
-	 * @group API
-	 * @dataProvider providerLinkSitePair
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testLinkSitePairUpdate( $id, $site, $title, $linksite, $linktitle, $badge ) {
-		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'update' );
-	}
-
-	/**
-	 * @group API
-	 * @dataProvider providerLinkSitePair
-	 * @depends testSetItemGetTokenSetData
-	 */
-	public function testLinkSitePairRemove( $id, $site, $title, $linksite, $linktitle, $badge ) {
-		$this->linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, 'remove' );
-	}
-
-	public function linkSitePair( $id, $site, $title, $linksite, $linktitle, $badge, $op ) {
-		$myid =  self::$baseOfItemIds + $id;
-		$req = array();
-		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
-			$data = $this->doApiRequest(
-				array(
-					'action' => 'wbsetitem',
-					'gettoken' => '' ),
-				null,
-				false,
-				self::$users['wbeditor']->user
-			);
-
-			$req['token'] = $data[0]['wbsetitem']['itemtoken'];
-		}
-
-		$req = array_merge( $req, array(
-			'action' => 'wbsetsitelink',
-			'site' => $site,
-			'title' => $title,
-			'linksite' => $linksite,
-			'linktitle' => ($op === 'remove' ? '' : $linktitle),
-		) );
-
-		$first = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
-
-		$this->assertArrayHasKey( 'success', $first[0],
-			"Must have an 'success' key in the result from the first call to the API" );
-		$this->assertArrayHasKey( 'item', $first[0],
-			"Must have an 'item' key in the result from the first call to the API" );
-		$this->assertArrayHasKey( 'id', $first[0]['item'],
-			"Must have an 'id' key in the 'item' result from the first call to the API" );
-		$this->assertEquals( $myid, $first[0]['item']['id'],
-			"Must have the value '{$myid}' for the 'id' in the result from the first call to the API" );
-
-		// now check if we can find them by their new site-title pairs
-		$second = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $linksite,
-			'titles' => $linktitle,
-		) );
-
-		$this->assertArrayHasKey( 'success', $second[0],
-			"Must have an 'success' key in the result from the second call to the API" );
-		$this->assertArrayHasKey( 'items', $second[0],
-			"Must have an 'items' key in the result from the second call to the API" );
-		if ( $op === 'remove' ) {
-			$this->assertCount( 1, $second[0]['items'],
-				"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-			$this->assertArrayHasKey( "-1", $second[0]['items'],
-				"Must have an '-1' key in the 'items' result from the second call to the API" );
-			$this->assertArrayHasKey( 'missing', $second[0]['items']["-1"],
-				"Must have an 'missing' key in the '-1' result from the second call to the API" );
-		}
-		else {
-			$this->assertCount( 1, $second[0]['items'],
-				"Must have a number of count of 1 in the 'items' result from the second call to the API" );
-			$this->assertArrayHasKey( "{$myid}", $second[0]['items'],
-				"Must have an '{$myid}' key in the 'items' result from the second call to the API" );
-			$this->assertArrayHasKey( 'id', $second[0]['items']["{$myid}"],
-				"Must have an 'id' key in the '{$myid}' result from the second call to the API" );
-			$this->assertEquals( $myid, $second[0]['items']["{$myid}"]['id'],
-				"Must have the value '{$myid}' for the 'id' in the result from the second call to the API" );
-		}
-
-		// now check if we can find them by their old site-title pairs
-		// that is, they should not have lost teir old pairs
-		$third = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
-			'sites' => $site,
-			'titles' => $title,
-		) );
-
-		$this->assertArrayHasKey( 'success', $third[0],
-			"Must have an 'success' key in the result from the third call to the API" );
-		$this->assertArrayHasKey( 'items', $third[0],
-			"Must have an 'items' key in the result from the third call to the API" );
-		$this->assertCount( 1, $third[0]['items'],
-			"Must have a number of count of 1 in the 'items' result from the third call to the API" );
-		$this->assertArrayHasKey( "{$myid}", $third[0]['items'],
-			"Must have an '{$myid}' key in the 'items' result from the third call to the API" );
-		$this->assertArrayHasKey( 'id', $third[0]['items']["{$myid}"],
-			"Must have an 'id' key in the '{$myid}' result from the third call to the API" );
-		$this->assertEquals( $myid, $third[0]['items']["{$myid}"]['id'],
-			"Must have the value '{$myid}' for the 'id' in the result from the third call to the API" );
-
-	}
 
 	/**
 	 * This tests if the site links for the items can be found by using 'id' from the provider.
@@ -860,108 +403,6 @@ class ApiSetItemTest extends \ApiTestCase {
 		if ( isset($second[0]['items']["{$myid}"][$op . 's'][$language]) ) {
 			$this->fail( "Must not have an '{$language}' key in the '{$op}s' result in the second call to the API" );
 		}
-	}
-
-	/**
-	 * Just provide the actions to test the API calls
-	 */
-	function provideSetItemIdDataOp() {
-		$idx = self::$baseOfItemIds;
-		return array(
-			array(
-				++$idx,
-				'add',
-				'{
-					"sitelinks": {
-						"dewiki": "Berlin",
-						"enwiki": "Berlin",
-						"nlwiki": "Berlin",
-						"nnwiki": "Berlin"
-					},
-					"labels": {
-						"de": "Berlin",
-						"en": "Berlin",
-						"no": "Berlin",
-						"nn": "Berlin"
-					},
-					"descriptions": {
-						"de" : "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland.",
-						"en" : "Capital city and a federated state of the Federal Republic of Germany.",
-						"no" : "Hovedsted og delstat og i Forbundsrepublikken Tyskland.",
-						"nn" : "Hovudstad og delstat i Forbundsrepublikken Tyskland."
-					}
-				}'
-			),
-			array(
-				++$idx,
-				'add',
-				'{
-					"sitelinks": {
-						"enwiki": "London",
-						"dewiki": "London",
-						"nlwiki": "London",
-						"nnwiki": "London"
-					},
-					"labels": {
-						"de": "London",
-						"en": "London",
-						"no": "London",
-						"nn": "London"
-					},
-					"descriptions": {
-						"de" : "Hauptstadt Englands und des Vereinigten Königreiches.",
-						"en" : "Capital city of England and the United Kingdom.",
-						"no" : "Hovedsted i England og Storbritannia.",
-						"nn" : "Hovudstad i England og Storbritannia."
-					}
-				}'
-			),
-			array(
-				++$idx,
-				'add',
-				'{
-					"sitelinks": {
-						"dewiki": "Oslo",
-						"enwiki": "Oslo",
-						"nlwiki": "Oslo",
-						"nnwiki": "Oslo"
-					},
-					"labels": {
-						"de": "Oslo",
-						"en": "Oslo",
-						"no": "Oslo",
-						"nn": "Oslo"
-					},
-					"descriptions": {
-						"de" : "Hauptstadt der Norwegen.",
-						"en" : "Capital city in Norway.",
-						"no" : "Hovedsted i Norge.",
-						"nn" : "Hovudstad i Noreg."
-					}
-				}'
-			),
-			array(
-				++$idx,
-				'add',
-				'{
-					"sitelinks": {
-						"dewiki": "Episkopi Cantonment",
-						"enwiki": "Episkopi Cantonment",
-						"nlwiki": "Episkopi Cantonment"
-					},
-					"labels": {
-						"de": "Episkopi Cantonment",
-						"en": "Episkopi Cantonment",
-						"nl": "Episkopi Cantonment"
-					},
-					"descriptions": {
-						"de" : "Sitz der Verwaltung der Mittelmeerinsel Zypern.",
-						"en" : "The capital of Akrotiri and Dhekelia.",
-						"nl" : "Het bestuurlijke centrum van Akrotiri en Dhekelia."
-					}
-				}'
-			),
-		);
 	}
 
 	public function providerGetItemsMissingTitle() {
