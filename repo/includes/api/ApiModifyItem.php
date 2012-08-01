@@ -59,6 +59,40 @@ abstract class ApiModifyItem extends Api {
 	protected abstract function modifyItem( ItemContent &$item, array $params );
 
 	/**
+	 * Make a string for an autocomment, that can be replaced through system messages.
+	 *
+	 * The autocomment is the initial part of the total summary. It is used to
+	 * explain the overall purpose with the change. If its later replaced by a
+	 * system message then it should not use any user supplied text as arg.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @param $plural integer|string the number used for plural forms
+	 * @return string that can be used as an autocomment
+	 */
+	protected abstract function getTextForComment( array $params, $plural = 'none' );
+
+	/**
+	 * Make a string for an autosummary, that can be replaced through system messages.
+	 *
+	 * The autosummary is the final part of the total summary. This call is used if there
+	 * is no ordinary summary. If this call fails an autosummary from the item itself will
+	 * be used.
+	 *
+	 * The returned array has a count that can be used for plural forms in the messages,
+	 * but exact interpretation is somewhat undefined.
+	 *
+	 * FIXME: How do we handle direction.
+	 *
+	 * @since 0.1
+	 *
+	 * @param $params array with parameters from the call to the module
+	 * @return array where the array( int, false|string ) is a count and a string that can be used as an autosummary
+	 */
+	protected abstract function getTextForSummary( array $params );
+
+	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
 	 * @since 0.1
@@ -78,6 +112,8 @@ abstract class ApiModifyItem extends Api {
 	 * @since 0.1
 	 */
 	public function execute() {
+		global $wgContLang;
+
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 		$this->flags = 0;
@@ -155,6 +191,8 @@ abstract class ApiModifyItem extends Api {
 				if ( $allowed ) {
 					// TODO: Delete an existing object
 					$this->getResult()->addValue( 'item', 'deleted', "" );
+					// Give an error message
+					$this->dieUsage( $status->getWikiText( 'wikibase-api-not-implemented' ), 'not-implemented' );
 				}
 				else {
 					// Give an error message
@@ -174,9 +212,30 @@ abstract class ApiModifyItem extends Api {
 			}
 			// This is similar to ApiEditPage.php and what it uses at line 314
 			$this->flags = ($user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+
+			// Lets define this just in case
+			$hits =0;
 			$summary = '';
+			$lang = $wgContLang;
+
+			// Is there a user supplied summary, then use it but get the hits first
+			if ( isset( $params['summary'] ) ) {
+				list( $hits, $summary, $lang ) = $this->getTextForSummary( $params );
+				$summary = $params['summary'];
+			}
+			// otherwise try to construct something
+			else {
+				list( $hits, $summary, $lang ) = $this->getTextForSummary( $params );
+				if ( !is_string( $summary ) ) {
+					$summary = $itemContent->getTextForSummary( $params );
+				}
+			}
+
+			// Comments are newer user supplied
+			$comment = $this->getTextForComment( $params, $hits );
+
 			// Do the actual save, or if it don't exist yet create it.
-			$status = $itemContent->save( $summary, $user, $this->flags );
+			$status = $itemContent->save( Autocomment::formatTotalSummary( $comment, $summary, $lang ), $user, $this->flags  );
 			$success = $status->isOK();
 
 			if ( !$success ) {
@@ -284,6 +343,9 @@ abstract class ApiModifyItem extends Api {
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
+			'summary' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
 			'token' => null,
 			'bot' => false,
 		) );
@@ -305,6 +367,9 @@ abstract class ApiModifyItem extends Api {
 			),
 			'title' => array( 'Title of the page to associate.',
 				"Use together with 'site' to make a complete sitelink."
+			),
+			'summary' => array( 'Summary for the edit.',
+				"Will be prepended by an automatically generated comment."
 			),
 			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
 				'During a normal reply a token can be returned spontaneously and the requester should',
