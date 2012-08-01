@@ -62,13 +62,21 @@ class ItemDisambiguation extends \ContextSource {
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
 					function( ItemContent $item ) use ( $langCode ) {
+						global $wgLang;
+						// Figure out which description to use while identifying the item
+						list( $descriptionCode, $descriptionText, $descriptionLang) =
+							\Wikibase\Utils::lookupUserMultilangText(
+								$item->getItem()->getDescriptions(),
+								\Wikibase\Utils::languageChain( $langCode ),
+								array( $langCode, '', null )
+							);
 						return \Html::rawElement(
 							'li',
 							array( 'class' => 'wikibase-disambiguation' ),
 							\Linker::link(
 								$item->getTitle(),
-								htmlspecialchars( $item->getItem()->getDescription( $langCode ) )
-							)
+								$wgLang->getArrow('forwards')
+							) . ' ' . htmlspecialchars( $descriptionText )
 						);
 					},
 					$this->items
