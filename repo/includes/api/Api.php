@@ -59,7 +59,7 @@ abstract class Api extends \ApiBase {
 		$descriptions = array(
 			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
 				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
-			)
+			),
 		);
 		if ( Settings::get( 'apiUseKeys' ) ) {
 			$descriptions['nousekeys'] = array( 'Turn off use the keys. The use of keys are only used in formats that supports them,',
@@ -179,27 +179,39 @@ abstract class Api extends \ApiBase {
 	 * @param array|string $path where the data is located
 	 * @param string $name name used for the entry
 	 * @param string $tag tag used for indexed entries in xml formats and similar
+	 * @param array $options additional information to include in the listelinks structure. For example:
+	 *              * 'url' will include the full URL of the sitelink in the result
+	 *              * 'removed' will mark the sitelinks as removed
+	 *              * other options will simply be included as flags.
 	 *
 	 * @return array|bool
 	 */
-	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink' ) {
+	protected function addSiteLinksToResult( array $siteLinks, $path, $name = 'sitelinks', $tag = 'sitelink', $options = null ) {
 		$value = array();
 		$idx = 0;
 
 		foreach ( $siteLinks as $link ) { /* @var SiteLink $link */
 			$response = array(
 				'site' => $link->getSiteID(),
-				'url' => $link->getUrl(), //XXX: could make this optional
+				'title' => $link->getPage(),
 			);
 
-			if ( $link->getPage() === '' ) {
-				$response['removed'] = '';
-			}
-			else {
-				$response['title'] = $link->getPage();
+			if ( $options !== null ) {
+				foreach ( $options as $opt ) {
+					if ( isset( $response[$opt] ) ) {
+						//skip
+					} elseif ( $opt === 'url' ) {
+						//include full url in the result
+						$response['url'] = $link->getUrl();
+					} else {
+						//include some flag in the result
+						$response[$opt] = '';
+					}
+				}
 			}
 
-			$value[$this->usekeys ? $link->getSiteID() : $idx++] = $response;
+			$key = $this->usekeys ? $link->getSiteID() : $idx++;
+			$value[$key] = $response;
 		}
 
 		if ( $value !== array() ) {
