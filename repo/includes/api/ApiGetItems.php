@@ -81,6 +81,19 @@ class ApiGetItems extends Api {
 
 		$this->setUsekeys( $params );
 
+		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
+			$siteLinkOptions = array( 'url' );
+		} else {
+			$siteLinkOptions = null;
+		}
+
+		$props = array_unique(
+			array_map(
+				function( $str ) { return preg_replace('/\/.+$/', '', $str ); },
+				$params['props']
+			)
+		);
+
 		foreach ($params['ids'] as $id) {
 
 			$itemPath = array( 'items', $id );
@@ -104,13 +117,7 @@ class ApiGetItems extends Api {
 
 					$item = $itemContent->getItem();
 
-					if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
-						$siteLinkOptions = array( 'url' );
-					} else {
-						$siteLinkOptions = null;
-					}
-
-					foreach ( $params['props'] as $key ) {
+					foreach ( $props as $key ) {
 						switch ( $key ) {
 						case 'aliases':
 							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
@@ -123,9 +130,6 @@ class ApiGetItems extends Api {
 							break;
 						case 'labels':
 							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
-							break;
-						case 'sitelinks/urls':
-							//ignore
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases
