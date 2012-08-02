@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Handles language links.
  * TODO: do we really want to refresh this on re-render? push updates from the repo seem to make more sense
@@ -12,6 +11,7 @@
  * @licence	GNU GPL v2+
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
+
 class WBCLangLinkHandler {
         protected static $sort_order = false;
         protected static $langlinksset = false;
@@ -56,6 +56,7 @@ class WBCLangLinkHandler {
 		$links = self::getLinks( $title_text );
 
 		// Always remove the link to the site language.
+		// TODO: Commons/Wikispecies should be handled here.
 		unset( $links[$wgLanguageCode] );
 
 		if ( is_array( $links ) && is_array( $nei ) ) {
@@ -129,9 +130,11 @@ class WBCLangLinkHandler {
 	 */
 	protected static function getLinksFromApi( $title_text, $api ) {
 		global $wgLanguageCode;
+		//TODO: Read from configuration.
+		$siteSuffix = "wiki";
 
 		$url = $api .
-			"?action=wbgetsitelinks&format=php&site=" . $wgLanguageCode . "&title=" . urlencode( $title_text );
+			"?action=wbgetitems&format=php&sites=" . $wgLanguageCode . $siteSuffix . "&titles=" . urlencode( $title_text );
 		$api_response = Http::get( $url );
 		$api_response = unserialize( $api_response );
 
@@ -139,7 +142,17 @@ class WBCLangLinkHandler {
 			return false;
 		}
 
-		return $api_response['item']['sitelinks'];
+		// Repack the links
+		$item = reset( $api_response['items'] );
+		$sitelinks = $item['sitelinks'];
+
+		$links = array();
+		foreach( $sitelinks as $sitelink ) {
+			$site = preg_replace( "/$siteSuffix$/", "", $sitelink['site'] );
+			$links[$site] = array( 'site' => $site, 'title' => $sitelink['title'] );
+		}
+
+		return $links;
 	}
 
 	/**

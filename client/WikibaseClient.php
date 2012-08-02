@@ -1,11 +1,10 @@
 <?php
-
 /**
  * Initialization file for the Wikibase Client extension.
  *
  * Documentation:	 		https://www.mediawiki.org/wiki/Extension:Wikibase_Client
  * Support					https://www.mediawiki.org/wiki/Extension_talk:Wikibase_Client
- * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataClient.git
+ * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=tree;f=client
  *
  * @file WikibaseClient.php
  * @ingroup Wikibase
