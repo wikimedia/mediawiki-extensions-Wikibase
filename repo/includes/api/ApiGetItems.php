@@ -110,7 +110,14 @@ class ApiGetItems extends Api {
 						$siteLinkOptions = null;
 					}
 
-					foreach ( $params['props'] as $key ) {
+					$props = array_unique(
+						array_map(
+							function( $str ) { return preg_replace('/\/.+$/', '', $str ); },
+							$params['props']
+						)
+					);
+
+					foreach ( $props as $key ) {
 						switch ( $key ) {
 						case 'aliases':
 							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
@@ -123,9 +130,6 @@ class ApiGetItems extends Api {
 							break;
 						case 'labels':
 							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
-							break;
-						case 'sitelinks/urls':
-							//ignore
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases
