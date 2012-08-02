@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAQ3//5gw\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiGetItemsTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-08-02T16:19:02Z",
+      "side": 1,
+      "message": "Spellchecked! Nice :)",
+      "revId": "8a26eb1a6d3f0eef4fa7aed61224a44681bd86b8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
