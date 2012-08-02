@@ -81,6 +81,23 @@ class ApiGetItems extends Api {
 
 		$this->setUsekeys( $params );
 
+		// This really needs a more generic solution as similar tricks will be
+		// done to other props as well, for example variants for the language
+		// attributes. It would also be nice to write something like */urls for
+		// all props that can supply full urls.
+		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
+			$siteLinkOptions = array( 'url' );
+			$props = array_flip( array_values( $params['props'] ) );
+			unset( $props['sitelinks/urls'] );
+			$props['sitelinks'] = true;
+			$props = array_keys( $props );
+		}
+		else {
+			$siteLinkOptions = null;
+			$props = $params['props'];
+		}
+
+		// loop over all items
 		foreach ($params['ids'] as $id) {
 
 			$itemPath = array( 'items', $id );
@@ -88,6 +105,7 @@ class ApiGetItems extends Api {
 
 			$res->addValue( $itemPath, 'id', $id );
 
+			// later we do a getContent but only if props are defined
 			if ( $params['props'] !== array() ) {
 				$page = ItemHandler::singleton()->getWikiPageForId( $id );
 
@@ -104,13 +122,8 @@ class ApiGetItems extends Api {
 
 					$item = $itemContent->getItem();
 
-					if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
-						$siteLinkOptions = array( 'url' );
-					} else {
-						$siteLinkOptions = null;
-					}
-
-					foreach ( $params['props'] as $key ) {
+					// loop over all props
+					foreach ( $props as $key ) {
 						switch ( $key ) {
 						case 'aliases':
 							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
@@ -123,9 +136,6 @@ class ApiGetItems extends Api {
 							break;
 						case 'labels':
 							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
-							break;
-						case 'sitelinks/urls':
-							//ignore
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases
