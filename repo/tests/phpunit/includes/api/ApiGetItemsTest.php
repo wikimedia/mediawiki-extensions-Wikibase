@@ -310,9 +310,6 @@ class ApiGetItemTest extends ApiModifyItemBase {
 	 * @dataProvider provideSitelinkUrls
 	 */
 	function testSitelinkUrls( $handle ) {
-		$this->markTestSkipped( "enable once the sitelinks/urls options has been implemented" ); //FIXME: pending change I55ce5375
-		return;
-
 		$this->createItems();
 		$id = $this->getItemId( $handle );
 
