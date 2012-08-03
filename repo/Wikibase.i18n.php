@@ -592,6 +592,7 @@ Móžoš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAM
 
 /** Spanish (español)
  * @author Armando-Martin
+ * @author Jewbask
  * @author McDutchie
  * @author Mr.Ajedrez
  * @author Savh
@@ -628,6 +629,8 @@ $messages['es'] = array(
 	'wikibase-aliases-label' => 'También conocido como:',
 	'wikibase-aliases-input-help-message' => 'Si este conjunto de datos es conocido bajo más de un nombre en particular, puede escribir sus alias y sinónimos, para que así pueda ser encontrado por sus nombres alternativos.',
 	'wikibase-aliases-empty' => 'No hay alias definidos.',
+	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, no se permite editar.',
+	'wikibase-blockeduser-tooltip-message' => 'Usted ha sido bloqueado para edición.',
 	'wikibase-tooltip-error-details' => 'Detalles',
 	'wikibase-error-save-generic' => 'Hubo un error al intentar guardar, por lo que no se pudieron almacenar los cambios.',
 	'wikibase-error-remove-generic' => 'Hubo un error al intentar realizar la eliminación, y debido a esto no se pudieron completar los cambios.',
@@ -798,6 +801,7 @@ $1',
  * @author DavidL
  * @author Gomoko
  * @author Linedwell
+ * @author Tititou36
  * @author Wyz
  */
 $messages['fr'] = array(
@@ -831,6 +835,8 @@ $messages['fr'] = array(
 	'wikibase-aliases-label' => 'Alias :',
 	'wikibase-aliases-input-help-message' => "Si cet ensemble de données est connu sous plus d'un nom particulier, vous pouvez entrer des alias et des synonymes, afin qu'il puisse être trouvé par ses autres noms.",
 	'wikibase-aliases-empty' => 'Aucun alias défini.',
+	'wikibase-restrictionedit-tooltip-message' => "Cette page est protégée, l'édition n'est pas autorisée.",
+	'wikibase-blockeduser-tooltip-message' => 'Vous avez été bloqué en édition.',
 	'wikibase-tooltip-error-details' => 'Détails',
 	'wikibase-error-save-generic' => "Une erreur est survenue lors de l'enregistrement, en conséquence, vos modifications n'ont pas pu être prises en compte.",
 	'wikibase-error-remove-generic' => "Une erreur est survenue lors de la suppression, en conséquence, vos modifications n'ont pas pu être prises en compte.",
@@ -841,7 +847,7 @@ $messages['fr'] = array(
 	'wikibase-error-autocomplete-connection' => "Impossible d'interroger l'API Wikipedia. Veuillez réessayer plus tard.",
 	'wikibase-error-autocomplete-response' => 'Le serveur a répondu : $1',
 	'wikibase-error-ui-client-error' => 'Échec de la connexion à la page client. Veuillez réessayer ultérieurement.',
-	'wikibase-error-ui-no-external-page' => "L'article spécifié est introuvable sur la page correspondante.",
+	'wikibase-error-ui-no-external-page' => "L'article spécifié est introuvable sur le site correspondant.",
 	'wikibase-error-ui-cant-edit' => 'Vous n’êtes pas autorisé à effectuer cette action.',
 	'wikibase-error-ui-no-permissions' => 'Vous n’avez pas de droits suffisants pour effectuer cette action.',
 	'wikibase-error-ui-link-exists' => "Vous ne pouvez pas faire de lien vers cette page parce qu'un autre élément la référence déjà.",
@@ -944,7 +950,7 @@ $messages['gl'] = array(
 	'wikibase-error-autocomplete-connection' => 'Non se puido pescudar na API da Wikipedia. Inténteo de novo máis tarde.',
 	'wikibase-error-autocomplete-response' => 'O servidor respondeu: $1',
 	'wikibase-error-ui-client-error' => 'Fallou a conexión coa páxina do cliente. Inténteo de novo máis tarde.',
-	'wikibase-error-ui-no-external-page' => 'Non se puido atopar o artigo especificado na páxina correspondente.',
+	'wikibase-error-ui-no-external-page' => 'Non se puido atopar o artigo especificado no sitio correspondente.',
 	'wikibase-error-ui-cant-edit' => 'Non lle está permitido levar a cabo esa acción.',
 	'wikibase-error-ui-no-permissions' => 'Non ten os dereitos necesarios para levar a cabo esta acción.',
 	'wikibase-error-ui-link-exists' => 'Non pode ligar con esta páxina porque xa hai outro elemento que liga con ela.',
@@ -1088,7 +1094,7 @@ $messages['hsb'] = array(
 	'wikibase-error-autocomplete-connection' => 'API Wikipedije njeda so naprašować. Prošu spytaj pozdźišo hišće raz.',
 	'wikibase-error-autocomplete-response' => 'Serwer wotmołwi: $1',
 	'wikibase-error-ui-client-error' => 'Zwisk k eksternej webstronje je so njeporadźił. Prošu spytaj pozdźišo hišće raz.',
-	'wikibase-error-ui-no-external-page' => 'Podaty nastawk njeda so na wotpowědowacej stronje namakać.',
+	'wikibase-error-ui-no-external-page' => 'Podaty nastawk njeda so na wotpowědowacym sydle namakać.',
 	'wikibase-error-ui-cant-edit' => 'Njesměš tutu akciju wuwjesć.',
 	'wikibase-error-ui-no-permissions' => 'Nimaš dosć prawow, zo by tutu akciju wuwjedł.',
 	'wikibase-error-ui-link-exists' => 'Njemóžeš k tutej stronje wotkazować, dokelž druhi element hižo k njej wotkazuje.',
@@ -1396,7 +1402,7 @@ $messages['it'] = array(
 	'wikibase-error-autocomplete-connection' => 'Non è possibile interrogare le API di Wikipedia. Riprova più tardi.',
 	'wikibase-error-autocomplete-response' => 'Risposta del server: $1',
 	'wikibase-error-ui-client-error' => 'La connessione alla pagina client non è riuscita. Riprova più tardi.',
-	'wikibase-error-ui-no-external-page' => 'La voce specificata non è stata trovata alla pagina corrispondente.',
+	'wikibase-error-ui-no-external-page' => 'La voce specificata non è stata trovata sull sito corrispondente.',
 	'wikibase-error-ui-cant-edit' => 'Non sei autorizzato ad eseguire questa azione.',
 	'wikibase-error-ui-no-permissions' => 'Non hai i diritti sufficienti per eseguire questa azione.',
 	'wikibase-error-ui-link-exists' => 'Non puoi inserire un collegamento a questa pagina perché un altro elemento già collega ad essa.',
@@ -1526,7 +1532,7 @@ $messages['ko'] = array(
 	'wikibase-error-autocomplete-connection' => '위키백과 API를 쿼리할 수 없습니다. 나중에 다시 시도하세요.',
 	'wikibase-error-autocomplete-response' => '서버 응답: $1',
 	'wikibase-error-ui-client-error' => '클라이언트 문서에 연결에 실패했습니다. 나중에 다시 시도하세요.',
-	'wikibase-error-ui-no-external-page' => '지정한 문서는 해당 문서에서 찾을 수 없습니다.',
+	'wikibase-error-ui-no-external-page' => '지정한 문서는 해당 사이트에서 찾을 수 없습니다.',
 	'wikibase-error-ui-cant-edit' => '이 작업을 수행하는 것이 허용되지 않습니다.',
 	'wikibase-error-ui-no-permissions' => '이 작업을 수행할 수 있는 충분한 권한이 없습니다.',
 	'wikibase-error-ui-link-exists' => '다른 항목을 이미 링크했기 때문에 이 문서에 링크할 수 없습니다.',
@@ -1697,7 +1703,7 @@ $messages['mk'] = array(
 	'wikibase-error-autocomplete-connection' => 'Не можев да го добијам API-то на Википедија. Обидете се подоцна.',
 	'wikibase-error-autocomplete-response' => 'Одговор на опслужувачот: $1',
 	'wikibase-error-ui-client-error' => 'Врската со клиентската страница е прекината. Обидете се подоцна.',
-	'wikibase-error-ui-no-external-page' => 'Укажаната статија не е најдена на соодветната страница.',
+	'wikibase-error-ui-no-external-page' => 'Укажаната статија не е најдена на соодветното вики.',
 	'wikibase-error-ui-cant-edit' => 'Не сте овластени да ја извршите оваа постапка.',
 	'wikibase-error-ui-no-permissions' => 'Ги немате потребните права за да го извршите ова дејство.',
 	'wikibase-error-ui-link-exists' => 'Не можете да ставите врска за оваа страница бидејќи веќе има друга ставка што води до неа.',
@@ -1895,6 +1901,7 @@ $messages['nl'] = array(
 	'wikibase-aliases-input-help-message' => 'Als deze gegevensset bekend is onder meer dan één bepaalde naam, dan kunt u aliassen en synoniemen opgeven, zodat die ook gevonden kan worden onder alternatieve namen.',
 	'wikibase-aliases-empty' => 'Er zijn geen aliassen ingesteld.',
 	'wikibase-restrictionedit-tooltip-message' => 'Deze pagina is beveiligd, bewerken is niet toegestaan.',
+	'wikibase-blockeduser-tooltip-message' => 'U bent geblokkeerd en kunt niet bewerken.',
 	'wikibase-tooltip-error-details' => 'Details',
 	'wikibase-error-save-generic' => 'Er is een fout opgetreden tijdens het opslaan van uw wijzigingen. Uw wijzigingen konden niet worden opgeslagen.',
 	'wikibase-error-remove-generic' => 'Er is een fout opgetreden tijdens het verwijderen. Uw wijzigingen konden niet worden opgeslagen.',
@@ -1905,7 +1912,7 @@ $messages['nl'] = array(
 	'wikibase-error-autocomplete-connection' => 'Het was niet mogelijk de Wikipedia-API te bereiken. Probeer het later opnieuw.',
 	'wikibase-error-autocomplete-response' => 'Antwoord van server: $1',
 	'wikibase-error-ui-client-error' => 'De verbinding met de externe pagina kon niet gemaakt worden. Probeer het later nog eens.',
-	'wikibase-error-ui-no-external-page' => 'De opgegeven pagina kon niet worden gevonden op de overeenkomende pagina.',
+	'wikibase-error-ui-no-external-page' => 'De opgegeven pagina kon niet worden gevonden op de overeenkomende site.',
 	'wikibase-error-ui-cant-edit' => 'U mag deze handeling niet uitvoeren.',
 	'wikibase-error-ui-no-permissions' => 'U hebt geen rechten om deze handeling uit te voeren.',
 	'wikibase-error-ui-link-exists' => 'U kunt geen koppeling naar deze pagina maken omdat een ander item er al aan gekoppeld is.',
@@ -1921,10 +1928,17 @@ $messages['nl'] = array(
 	'wikibase-api-client-error' => 'De externe clientsite heeft werkt niet correct.',
 	'wikibase-api-no-external-data' => 'Er zijn geen gegevens geleverd door de externe clientsite, mogelijk vanwege verbindingsproblemen.',
 	'wikibase-api-no-external-page' => 'De externe clientsite heeft geen paginagegevens verstrekt.',
-	'wikibase-api-add-sitelink-failed' => 'De siteverwijzing kon niet opgeslagen worden.',
+	'wikibase-api-add-sitelink-failed' => 'De siteverwijzing kon niet worden opgeslagen.',
+	'wikibase-api-remove-sitelink-failed' => 'De siteverwijzing kon niet worden verwijderd.',
 	'wikibase-api-cant-edit' => 'Bewerken is niet toegestaan:
 $1',
+	'wikibase-api-json-invalid' => 'De opgegeven JSON-structuur kon niet verwerkt worden of worden aangepast als geldige structuur.',
+	'wikibase-api-not-recognized-string' => 'Er werd een tekenreeks verwacht maar niet gevonden.',
+	'wikibase-api-not-recognized-array' => 'Er werd een matrix verwacht maar niet gevonden.',
+	'wikibase-api-not-recognized-language' => 'De gevonden taalidentificatie is niet herkend.',
+	'wikibase-api-not-recognized-siteid' => 'De gevonden siteidentificatie is niet herkend.',
 	'wikibase-api-no-permissions' => 'De aangemelde gebruiker beschikt niet over voldoende rechten.',
+	'wikibase-api-data-or-id-xor-wikititle' => 'Lever "id" van het item of het paar "site" en "title" voor een overeenkomende pagina of "data" voor een nieuw item.',
 	'wikibase-api-id-xor-wikititle' => 'Geef een "id" op voor een item, of paren van "site" en "title" voor een overeenkomstige pagina.',
 	'wikibase-api-no-such-item' => 'Er kon geen bestaand item gevonden worden.',
 	'wikibase-api-no-such-item-id' => 'Er kon geen bestaand item gevonden worden voor dit ID.',
@@ -1935,6 +1949,7 @@ $1',
 	'wikibase-api-no-such-item-link' => 'Er kon geen bestaand item gevonden worden voor deze verwijzing.',
 	'wikibase-api-create-failed' => 'Het aanmaken van een nieuw item is mislukt: $1',
 	'wikibase-api-modify-failed' => 'Het wijzigen van het item is mislukt.',
+	'wikibase-api-delete-failed' => 'Het verwijderen van het item is mislukt.',
 	'wikibase-api-save-failed' => 'Het opslaan van het item is mislukt: $1',
 	'wikibase-api-invalid-contentmodel' => 'Het contentmodel voor de pagina is ongeldig.',
 	'wikibase-api-alias-incomplete' => 'Er kon geen definitie voor de alias voor het item gevonden worden.',
