@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH///j4\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-03T15:47:16Z",
+      "side": 1,
+      "message": "just unset($params[\u0027props\u0027][\u0027sitelinks/urls\u0027]) here instead of using pattern based filtering below.",
+      "revId": "29d2ce3da83599cf705ee73ef3eff254e415b00e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH///jw\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-03T15:47:16Z",
+      "side": 1,
+      "message": "map not needed if you simply unset above, see comment on line 85.",
+      "revId": "29d2ce3da83599cf705ee73ef3eff254e415b00e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
