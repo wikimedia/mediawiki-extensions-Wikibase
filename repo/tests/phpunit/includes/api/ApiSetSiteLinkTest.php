@@ -117,16 +117,16 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 
 	public function provideSetLiteLink() {
 		return array(
-			array( 'Berlin', // handle
+			array( 'Leipzig', // handle
 				array( 'id' => null ), // by id
-				'svwiki', // not yet set
-				'berlin', // will be normalized
-				'Berlin'
+				'dewiki', // not yet set
+				'leipzig', // will be normalized
+				'Leipzig'
 			),
 			array( 'Berlin', // handle
 				array( 'id' => null ), // by id
-				'enwiki', // not yet set
-				'Potsdam', // will be normalized
+				'enwiki', // already set
+				'Potsdam', // replaces value
 				'Potsdam'
 			),
 			array( 'London', // handle
