@@ -177,23 +177,146 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 	}
 
-	function testChangeLabel() {
-		$this->markTestIncomplete();
+	function provideSetItemData() {
+		return array(
+			array( #0: labels
+				'Berlin', // handle
+				array(    // input
+					'labels' => array(
+						'de' => '', // remove existing
+						'ru' => '', // remove non-existing
+						'en' => 'Stuff',  // change existing
+						'fr' => 'Berlin', // add new
+					)
+				),
+				array(    // expected
+					'labels' => array(
+						"en" => "Stuff",
+						"no" => "Berlin",
+						"nn" => "Berlin",
+						"fr" => "Berlin",
+					)
+				),
+			),
+
+			array( #1: descriptions
+				'Berlin', // handle
+				array(    // input
+					'descriptions' => array(
+						'de' => '', // remove existing
+						'ru' => '', // remove non-existing
+						'en' => 'Stuff',   // change existing
+						'fr' => 'Bla bla', // add new
+					)
+				),
+				array(    // expected
+					'descriptions' => array(
+						"en"  => "Stuff",
+						"no"  => "Hovedsted og delstat og i Forbundsrepublikken Tyskland.",
+						"nn"  => "Hovudstad og delstat i Forbundsrepublikken Tyskland.",
+						"fr"  => "Bla bla",
+					)
+				),
+			),
+
+			array( #2: aliases
+				'Berlin', // handle
+				array(    // input
+					'aliases' => array(
+						"de" => array(), // remove existing
+						"ru" => array(), // remove non-existing
+						"en"  => array( "Bla bla" ), // change existing
+						"fr"  => array( "Bla bla" ), // add new
+					)
+				),
+				array(    // expected
+					'aliases' => array(
+						"en"  => array( "Bla bla" ),
+						"nl"  => array( "Dickes B" ),
+						"fr"  => array( "Bla bla" ),
+					)
+				),
+			),
+
+			array( #3: sitelinks
+				'Berlin', // handle
+				array(    // input
+					'sitelinks' => array(
+						'dewiki' => '', // remove existing
+						'srwiki' => '', // remove non-existing
+						"nnwiki" => "Berlin X", // change existing
+						"svwiki" => "Berlin X", // add new
+					)
+				),
+				array(    // expected
+					'sitelinks' => array(
+						"enwiki" => "Berlin",
+						"nlwiki" => "Berlin",
+						"nnwiki" => "Berlin X",
+						"svwiki" => "Berlin X",
+					)
+				),
+			),
+		);
 	}
 
-	function testChangeDescription() {
-		$this->markTestIncomplete();
+	/**
+	 * @dataProvider provideSetItemData
+	 */
+	function testSetItemData( $handle, $data, $expected = null ) {
+		$id = $this->getItemId( $handle );
+		$token = $this->getItemToken();
+
+		// wbsetitem ------------------------------------------------------
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbsetitem',
+				'reason' => 'Some reason',
+				'data' => json_encode( $data ),
+				'token' => $token,
+				'id' => $id,
+			),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+
+		// check return value -------------------------------------------
+		$this->assertSuccess( $res, 'item' );
+		$item = $res['item'];
+
+		// check relevant entries
+		foreach ( $expected as $key => $exp ) {
+			$this->assertArrayHasKey( $key, $item );
+			$this->assertArrayEquals( $exp, static::flattenValues( $key, $item[$key] ) );
+		}
+
+		// check item in database -------------------------------------------
+		$item = $this->loadItem( $id );
+
+		// check relevant entries
+		foreach ( $expected as $key => $exp ) {
+			$this->assertArrayHasKey( $key, $item );
+			$this->assertArrayEquals( $exp, static::flattenValues( $key, $item[$key] ) );
+		}
+
+		// cleanup ------------------------------------------------------
+		$this->resetItem( $handle );
 	}
 
-	function testChangeAlias() {
-		$this->markTestIncomplete();
+	static function flattenValues( $prop, $values ) {
+		if ( !is_array( $values ) ) {
+			return $values;
+		} elseif ( $prop == 'sitelinks' ) {
+			return self::flattenArray( $values, 'site', 'title' );
+		} elseif ( $prop == 'aliases' ) {
+			return self::flattenArray( $values, 'language', 'value', true );
+		} else {
+			return self::flattenArray( $values, 'language', 'value' );
+		}
 	}
 
-	function testChangeSitelink() {
-		$this->markTestIncomplete();
-	}
 
-	/*
 	function testProtectedItem() { //TODO
 		$this->markTestIncomplete();
 	}
@@ -205,6 +328,5 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	function testEditPermission() { //TODO
 		$this->markTestIncomplete();
 	}
-	*/
 
 }
