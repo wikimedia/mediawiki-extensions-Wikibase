@@ -77,10 +77,21 @@ class ApiSetItem extends ApiModifyItem {
 			if ( is_null( $data ) ) {
 				$this->dieUsage( wfMsg( 'wikibase-api-json-invalid' ), 'json-invalid' );
 			}
+			if ( !is_array( $data ) ) {
+				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
+			}
 			$languages = array_flip( Utils::getLanguageCodes() );
 			foreach ( $data as $props => $list ) {
+				if ( !is_string( $props ) ) {
+					$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-string' );
+				}
+
 				switch ($props) {
 				case 'labels':
+					if ( !is_array( $list ) ) {
+						$this->dieUsage( "Key 'labels' must refer to an array", 'not-recognized-array' );
+					}
+
 					foreach ( $list as $langCode => $value ) {
 						if ( !is_string( $value ) ) {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
@@ -97,6 +108,10 @@ class ApiSetItem extends ApiModifyItem {
 					}
 					break;
 				case 'descriptions':
+					if ( !is_array( $list ) ) {
+						$this->dieUsage( "Key 'descriptions' must refer to an array", 'not-recognized-array' );
+					}
+
 					foreach ( $list as $langCode => $value ) {
 						if ( !is_string( $value ) ) {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
@@ -113,6 +128,10 @@ class ApiSetItem extends ApiModifyItem {
 					}
 					break;
 				case 'aliases':
+					if ( !is_array( $list ) ) {
+						$this->dieUsage( "Key 'aliases' must refer to an array", 'not-recognized-array' );
+					}
+
 					foreach ( $list as $langCode => $aliases ) {
 						if ( !is_array( $aliases ) ) {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-array' ), 'not-recognized-array' );
@@ -131,6 +150,10 @@ class ApiSetItem extends ApiModifyItem {
 					}
 					break;
 				case 'sitelinks':
+					if ( !is_array( $list ) ) {
+						$this->dieUsage( "Key 'sitelinks' must refer to an array", 'not-recognized-array' );
+					}
+
 					$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
 					foreach ( $list as $siteId => $pageName ) {
 						if ( !is_string( $pageName ) ) {
