@@ -123,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH///Gk\u003d",
+        "filename": "lib/includes/type/SimpleStringType.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-04T02:01:32Z",
+      "side": 1,
+      "message": "Let\u0027s have a stringly-typed data model! It\u0027s simpler and less classes to create, so what\u0027s not to like?",
+      "parentUuid": "AAAAQ3//7sQ\u003d",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3//8fU\u003d",
         "filename": "lib/includes/value/ItemReferenceValue.php",
         "patchSetId": 1
@@ -325,6 +343,24 @@
       "side": 1,
       "message": "Having to register type-name-to-class-name mappings feels cumbersome and error prone to me. But oh hell. I don\u0027t care, let\u0027s make $wgWikibaseDataTypes or whatever.",
       "parentUuid": "AAAAQ3//8cI\u003d",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH///GM\u003d",
+        "filename": "lib/includes/value/Value.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-04T02:01:32Z",
+      "side": 1,
+      "message": "This is a tiny bit of complexity, which is needed to avoid bad breakage. So yes, it\u0027s more work to implement and since it\u0027s more code, it\u0027s one more place you could mess up. Small price to pay compared to dealing with the breakage though :)\n\nAlso, this is identical to what the ContentHandler stuff is doing with the content model id stuff ;)",
+      "parentUuid": "AAAAQ3//7sM\u003d",
       "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
