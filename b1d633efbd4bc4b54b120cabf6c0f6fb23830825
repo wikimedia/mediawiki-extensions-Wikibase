@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH//+Yk\u003d",
+        "filename": "client/tests/phpunit/GeneralTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T09:27:33Z",
+      "side": 1,
+      "message": "Use \"use\" on top to declare classes from other namespaces, so the4y don\u0027t have to be fully qualified all the time.",
+      "revId": "b1d633efbd4bc4b54b120cabf6c0f6fb23830825",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//+Y0\u003d",
+        "filename": "client/tests/phpunit/SortingTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T09:27:33Z",
+      "side": 1,
+      "message": "Use \"use\" so the stuff we need all the time doesn\u0027t have to be fully prefixed...",
+      "revId": "b1d633efbd4bc4b54b120cabf6c0f6fb23830825",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
