@@ -163,4 +163,36 @@ abstract class EntityContent extends \AbstractContent {
 		return static::newFromArray( $array );
 	}
 
+	/**
+	 * Determin whether the given user can edit this item. Also works for items that do not yet exist in the database.
+	 * In that case, the create permission is also checked.
+	 *
+	 * @param \User $user the user to check for (default: $wgUser)
+	 * @param bool  $doExpensiveQueries whether to perform expensive checks (default: true). Should be set to false for
+	 *              quick checks for the UI, but always be true for authoritative checks.
+	 *
+	 * @return bool whether the user is allowed to edit this item.
+	 */
+	public function userCanEdit( \User $user = null, $doExpensiveQueries = true ) {
+		$title = $this->getTitle();
+
+		if ( !$title ) {
+			$title = Title::newFromText( "DUMMY", $this->getContentHandler()->getEntityNamespace() );
+
+			if ( !$title->userCan( 'create', $user, $doExpensiveQueries ) ) {
+				return false;
+			}
+		}
+
+		if ( !$title->userCan( 'read', $user, $doExpensiveQueries ) ) {
+			return false;
+		}
+
+		if ( !$title->userCan( 'edit', $user, $doExpensiveQueries ) ) {
+			return false;
+		}
+
+		//@todo: check entity-specific permissions
+		return true;
+	}
 }

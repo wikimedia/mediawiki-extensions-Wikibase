@@ -396,5 +396,4 @@ class ItemContent extends EntityContent {
 		$itemView = new ItemView( ); // @todo: construct context for title?
 		return $itemView->getParserOutput( $this, $options, $generateHtml );
 	}
-
 }
