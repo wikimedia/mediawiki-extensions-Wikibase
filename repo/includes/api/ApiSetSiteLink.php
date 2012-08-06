@@ -174,9 +174,9 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetsitelink&id=42&linksite=en&linktitle=Wikimedia'
+			'api.php?action=wbsetsitelink&id=42&linksite=enwiki&linktitle=Wikimedia'
 			=> 'Add title "Wikimedia" for English page with id "42" if the site link does not exist',
-			'api.php?action=wbsetsitelink&id=42&linksite=en&linktitle=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
+			'api.php?action=wbsetsitelink&id=42&linksite=enwiki&linktitle=Wikimedia&summary=World%20domination%20will%20be%20mine%20soon!'
 			=> 'Add title "Wikimedia" for English page with id "42", if the site link does not exist',
 		);
 	}
