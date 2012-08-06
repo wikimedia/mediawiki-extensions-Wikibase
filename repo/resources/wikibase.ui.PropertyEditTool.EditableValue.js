@@ -273,7 +273,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 			// store deferred so we can return it when this is called again while still running
 			var promise = this.performApiAction( action )
-				.then( degrade )
+				.done( degrade )
 				.promise();
 
 			return promise;
@@ -297,7 +297,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		} else {
 			var wasPending = this.isPending();
 			var deferred = this.performApiAction( this.API_ACTION.SAVE ) // returns deferred
-			.then( $.proxy( function( response ) {
+			.done( $.proxy( function( response ) {
 				this._reTransform( true );
 				this._pending = false; // not pending anymore after saved once
 				this._subject.removeClass( 'wb-pending-value' );
@@ -442,7 +442,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		.appendTo( this._getToolbarParent() ).hide();
 
 		deferred
-		.then( function( response ) {
+		.done( function( response ) {
 			// fade out wait text
 			waitMsg.fadeOut( 400, function() {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
