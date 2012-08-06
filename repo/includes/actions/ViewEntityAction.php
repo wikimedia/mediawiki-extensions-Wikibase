@@ -71,6 +71,38 @@ abstract class ViewEntityAction extends \ViewAction {
 	}
 
 	/**
+	 * Returns true if this view action is performing a plain view (not a diff, etc)
+	 * of the page's current revision.
+	 */
+	public function isPlainView() {
+		if ( !$this->getArticle()->getPage()->exists() ) {
+			// showing non-existing entity
+			return false;
+		}
+
+		if ( $this->getArticle()->getOldID() > 0
+			&&  ( $this->getArticle()->getOldID() !== $this->getArticle()->getPage()->getLatest() ) ) {
+			// showing old content
+			return false;
+		}
+
+		$content = $this->getContent();
+
+		if ( !( $content instanceof EntityContent ) ) {
+			//XXX: HACK against evil tricks in Article::getContentObject
+			// showing strange content
+			return false;
+		}
+
+		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
+			// showing a diff
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Displays the entity content.
 	 *
 	 * @since 0.1
@@ -80,7 +112,20 @@ abstract class ViewEntityAction extends \ViewAction {
 	protected function displayEntityContent( EntityContent $content ) {
 		$out = $this->getOutput();
 
+		// can edit?
+		$editable = $this->isPlainView();
+		$editable &= $this->getTitle()->quickUserCan( "read" );
+		$editable &= $this->getTitle()->quickUserCan( "edit" );
+
 		// View it!
+		$parserOptions = $this->getArticle()->getPage()->makeParserOptions( $this->getContext()->getUser() );
+
+		if ( !$editable ) {
+			// disable editing features ("sections" is a misnomer, it applies to the wikitext equivalent)
+			$parserOptions->setEditSection( $editable );
+		}
+
+		$this->getArticle()->setParserOptions( $parserOptions );
 		$this->getArticle()->view();
 
 		// Figure out which label to use for title.
