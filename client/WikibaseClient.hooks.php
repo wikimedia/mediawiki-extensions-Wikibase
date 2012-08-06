@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-
+use DatabaseUpdater;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -26,7 +26,7 @@ final class ClientHooks {
 	 *
 	 * @return boolean
 	 */
-	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
+	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
 
 		if ( $type === 'mysql' || $type === 'sqlite' ) {
