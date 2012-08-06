@@ -120,8 +120,8 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 			array( 'Berlin', // handle
 				array( 'id' => null ), // by id
 				'svwiki', // not yet set
-				'berlin', // will be normalized
-				'Berlin'
+				'berlin', // FIXME: Will _not_ be normalized as the svwiki is not listed as a Mediawiki site
+				'berlin' // FIXME: This must be updated later when the sites are read from the database
 			),
 			array( 'Berlin', // handle
 				array( 'id' => null ), // by id
