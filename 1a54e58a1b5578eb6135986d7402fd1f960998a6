@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH//+V4\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T11:54:25Z",
+      "side": 1,
+      "message": "the use of \"self::\" in a string scares me, though it magically seems to work. It\u0027s unclear to me in which context this use of \"self::\" would be evaluated. Better use __CLASS__ or get_class().",
+      "revId": "1a54e58a1b5578eb6135986d7402fd1f960998a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//+V8\u003d",
+        "filename": "client/includes/NoLangLinkHandler.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T11:54:25Z",
+      "side": 1,
+      "message": "i don\u0027t see how the \"self::\" in the string can work. Doesn\u0027t seem to fail, though. Is this even used? noExternalInterlang seems to be called via onParserGetVariableValueSwitch, not directly.",
+      "revId": "1a54e58a1b5578eb6135986d7402fd1f960998a6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
