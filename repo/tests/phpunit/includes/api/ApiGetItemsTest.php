@@ -215,10 +215,10 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 
 	function provideLanguages() {
 		return array(
-			array( 'Berlin', array( 'en', 'de' ) ),
+			array( 'Berlin', array( 'en', 'de', 'nl' ) ),
 			array( 'Leipzig', array( 'en', 'de' ) ),
-			array( 'Leipzig', array( 'fr', 'nl' ) ),
-			array( 'London', array( 'nl' ) ),
+			array( 'Leipzig', array( 'fr', 'nl' ) ), // doesn't exist, but doesn't fail
+			array( 'London', array( 'nl', 'en', 'de' ) ),
 			array( 'Empty', array( 'nl' ) ),
 		);
 	}
