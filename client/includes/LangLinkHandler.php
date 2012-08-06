@@ -1,42 +1,46 @@
 <?php
+
+namespace Wikibase;
+use Http, Parser, ParserOutput;
+use \Wikibase\Settings as Settings;
+
 /**
  * Handles language links.
  * TODO: do we really want to refresh this on re-render? push updates from the repo seem to make more sense
  *
  * @since 0.1
  *
- * @file WBCLangLinkHandler.php
+ * @file LangLinkHandler.php
  * @ingroup WikibaseClient
  *
  * @licence	GNU GPL v2+
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
-
-class WBCLangLinkHandler {
-        protected static $sort_order = false;
-        protected static $langlinksset = false;
+class LangLinkHandler {
+	protected static $sort_order = false;
+	protected static $langlinksset = false;
 
 	# todo: this is hackish, is this the best hook to use?
-        public static function onParserBeforeTidy( Parser &$parser, &$text ) {
+	public static function onParserBeforeTidy( Parser &$parser, &$text ) {
 		if ( ! self::$langlinksset ) {
-                	if ( self::addLangLinks( $parser, $text ) ) {
+			if ( self::addLangLinks( $parser, $text ) ) {
                         	self::$langlinksset = true;
                 	}
 		}
-                return true;
-        }
+		return true;
+	}
 
-        protected static function addLangLinks( Parser &$parser, &$text ) {
-                global $wgLanguageCode;
+	protected static function addLangLinks( Parser &$parser, &$text ) {
+		global $wgLanguageCode;
 
-                // If this is an interface message, we don't do anything.
-                if( $parser->getOptions()->getInterfaceMessage() ) {
-                        return true;
-                }
+		// If this is an interface message, we don't do anything.
+		if( $parser->getOptions()->getInterfaceMessage() ) {
+			return true;
+		}
 
 		// If we don't support the namespace, we maybe sort the links, but don't do anything else.
 		$title = $parser->getTitle();
-		if( !in_array( $title->getNamespace(), \Wikibase\Settings::get( 'namespaces' ) ) ) {
+		if( !in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
 			self::maybeSortLinks( $parser->getOutput()->getLanguageLinks() );
 			return true;
 		}
@@ -112,7 +116,7 @@ class WBCLangLinkHandler {
 	 * @return Array of links, empty array for no links, false for failure.
 	 */
 	protected static function getLinks( $title_text ) {
-		$source = \Wikibase\Settings::get( 'source' );
+		$source = Settings::get( 'source' );
 		if( isset( $source['api'] ) ) {
 			return self::getLinksFromApi( $title_text, $source['api'] );
 		} elseif( isset( $source['var'] ) ) {
@@ -202,7 +206,7 @@ class WBCLangLinkHandler {
 	 * Sort an array of links in-place iff alwaysSort option is turned on.
 	 */
 	protected static function maybeSortLinks( &$a ) {
-		if( \Wikibase\Settings::get( 'alwaysSort' ) ) {
+		if( Settings::get( 'alwaysSort' ) ) {
 			self::sortLinks( $a );
 		}
 	}
@@ -228,7 +232,7 @@ class WBCLangLinkHandler {
 			$a[$k] = explode( ':', $langlink, 2 );
 		}
 
-		usort( $a, 'WBCLangLinkHandler::compareLinks' );
+		usort( $a, 'self::compareLinks' );
 
 		// Restore the sorted array.
 		foreach( $a as $k => $langlink ) {
@@ -306,7 +310,7 @@ class WBCLangLinkHandler {
 			'war', 'wo', 'wuu', 'ts', 'yi', 'yo', 'zh-yue', 'diq', 'zea', 'bat-smg', 'zh', 'zh-tw', 'zh-cn',
 		);
 
-		$sort = \Wikibase\Settings::get( 'sort' );
+		$sort = Settings::get( 'sort' );
 		switch( $sort ) {
 			case 'code':
 				self::$sort_order = $order_alphabetic;
@@ -324,7 +328,7 @@ class WBCLangLinkHandler {
 				return false;
 		}
 
-		$sortPrepend = \Wikibase\Settings::get( 'sortPrepend' );
+		$sortPrepend = Settings::get( 'sortPrepend' );
 		if( is_array( $sortPrepend ) ) {
 			self::$sort_order = array_unique( array_merge( $sortPrepend, self::$sort_order ) );
 		}

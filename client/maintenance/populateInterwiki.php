@@ -1,4 +1,8 @@
 <?php
+
+namespace Wikibase; 
+use FormatJSON, Http, Maintenance;
+
 /**
  * @author Katie Filbert
  */
@@ -84,4 +88,3 @@ TEXT;
 
 $maintClass = 'PopulateInterwiki';
 require_once( RUN_MAINTENANCE_IF_MAIN );
-

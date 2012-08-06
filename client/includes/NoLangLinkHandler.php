@@ -1,5 +1,8 @@
 <?php
 
+namespace Wikibase;
+use \Wikibase\LangLinkHandler as LangLinkHandler;
+
 /**
  * Handles the NOEXTERNALINTERLANG parser function.
  *
@@ -11,7 +14,7 @@
  * @licence	GNU GPL v2+
  * @author	Nikola Smolenski <smolensk@eunet.rs>
  */
-class WBCNoLangLinkHandler {
+class NoLangLinkHandler {
 
 	/**
 	 * Register the parser function.
@@ -19,7 +22,7 @@ class WBCNoLangLinkHandler {
 	 * @return bool
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
-		$parser->setFunctionHook( 'noexternalinterlang', 'WBCNoLangLinkHandler::noExternalInterlang', SFH_NO_HASH );
+		$parser->setFunctionHook( 'noexternalinterlang', 'self::noExternalInterlang', SFH_NO_HASH );
 		return true;
 	}
 
@@ -54,7 +57,7 @@ class WBCNoLangLinkHandler {
 		$langs = array_flip( $langs );
 
 		$out = $parser->getOutput();
-		$nei = WBCLangLinkHandler::getNoExternalInterlang( $out );
+		$nei = LangLinkHandler::getNoExternalInterlang( $out );
 		$nei += $langs;
 		$out->setProperty( 'no_external_interlang', serialize( $nei ) );
 
