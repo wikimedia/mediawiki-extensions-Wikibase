@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH//+Xc\u003d",
+        "filename": "lib/includes/entity/EntityDiffObject.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T10:19:39Z",
+      "side": 1,
+      "message": "\u0026\u0026 is not a valid way to chain these calls. especially since they all return null (\u003d\u003d false), always.",
+      "revId": "1f2bb349015ca298b03d4e27891c64ea188eac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//+XY\u003d",
+        "filename": "lib/includes/entity/EntityDiffObject.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T10:19:39Z",
+      "side": 1,
+      "message": "inner loop IS needed here, since aliasses are lists, so there can be multiple ops per language.",
+      "revId": "1f2bb349015ca298b03d4e27891c64ea188eac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//+XU\u003d",
+        "filename": "lib/includes/entity/EntityDiffObject.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T10:19:39Z",
+      "side": 1,
+      "message": "what does the inner loop loop over? there\u0027s only a single op per label language.",
+      "revId": "1f2bb349015ca298b03d4e27891c64ea188eac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//+XQ\u003d",
+        "filename": "lib/includes/entity/EntityDiffObject.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T10:19:39Z",
+      "side": 1,
+      "message": "what does the inner loop loop over? there\u0027s only a single op per description language.",
+      "revId": "1f2bb349015ca298b03d4e27891c64ea188eac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//+Xg\u003d",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-06T10:19:39Z",
+      "side": 1,
+      "message": "what does the inner loop loop over? there\u0027s only a single op per site.",
+      "revId": "1f2bb349015ca298b03d4e27891c64ea188eac2e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
