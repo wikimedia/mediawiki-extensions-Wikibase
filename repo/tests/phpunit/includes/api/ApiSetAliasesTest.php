@@ -73,7 +73,7 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 	/**
 	 * @dataProvider paramProvider
 	 */
-	public function testSetAliases( $handle, $langCode, $param, $value, $expected ) {
+	public function testSetAliases( $handle, $langCode, $op, $value, $expected ) {
 		$id = $this->getItemId( $handle );
 		$expected = $expected === '' ? array() : explode( '|', $expected );
 
@@ -84,7 +84,7 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 			'id' => $id,
 			'action' => 'wbsetaliases',
 			'language' => $langCode,
-			$param => $value
+			$op => $value
 		);
 
 		list( $apiResponse,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
@@ -92,7 +92,16 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		$this->assertSuccess( $apiResponse );
 
 		// check return value --------------------------------------------------
-		//TODO
+		if ( $expected ) {
+			$this->assertSuccess( $apiResponse, 'item', 'aliases' );
+
+			$aliases = self::flattenArray( $apiResponse['item']['aliases'], 'language', 'value', true );
+			$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
+
+			$this->assertArrayEquals( $expected, $actual );
+		} else {
+			$this->assertFalse( !empty( $apiResponse['item']['aliases'] ), "found aliases when there should be none" );
+		}
 
 		// check item in database --------------------------------------------------
 		$item = $this->loadItem( $id );
@@ -100,11 +109,7 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		$aliases = self::flattenArray( $item['aliases'], 'language', 'value', true );
 		$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
 
-		$this->assertArrayEquals(
-			$expected,
-			$actual
-		);
-
+		$this->assertArrayEquals( $expected, $actual );
 	}
 
 	/**
