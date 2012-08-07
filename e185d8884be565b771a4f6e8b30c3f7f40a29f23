@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAARH//9xc\u003d",
+        "filename": "lib/includes/snak/NoValueSnak.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-08-07T09:44:12Z",
+      "side": 1,
+      "message": "Really?",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3//7tQ\u003d",
         "filename": "lib/includes/snak/SimpleValueSnak.php",
         "patchSetId": 1
