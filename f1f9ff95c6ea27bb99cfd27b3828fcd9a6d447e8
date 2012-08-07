@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9r4\u003d",
+        "filename": "repo/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T12:24:56Z",
+      "side": 1,
+      "message": "The count is needed later after the call, but that and the language can be also be coded right into the code. Or just calculated in one place.",
+      "parentUuid": "AAAARH//9t8\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH//9tM\u003d",
         "filename": "repo/includes/api/ApiModifyItem.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-07T11:20:17Z",
       "side": 1,
       "message": "What about a user supplied summary?",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9r0\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T12:24:56Z",
+      "side": 1,
+      "message": "Line 221 to 226, and will take precedence.",
+      "parentUuid": "AAAARH//9tM\u003d",
       "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9rs\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T12:24:56Z",
+      "side": 1,
+      "message": "The comment can be anywhere in the final string. The pattern used are\n\u0027!(.*)/\\*\\s*(.*?)\\s*\\*/(.*)!\u0027\nwhere the second group is comment. Note the escaped asterix.",
+      "parentUuid": "AAAARH//9tI\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH//9s8\u003d",
         "filename": "repo/includes/api/ApiSetItem.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2012-08-07T11:20:17Z",
       "side": 1,
       "message": "may be nice to use array_keys($data) - so we known e.g. whether this call included sitelinks, etc.",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9ro\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T12:24:56Z",
+      "side": 1,
+      "message": "Good point. It could although need something more fancy than array_keys. I use pickKeysFromParams to filter out the things that are interesting.",
+      "parentUuid": "AAAARH//9s8\u003d",
       "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9rk\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T12:24:56Z",
+      "side": 1,
+      "message": "It will be truncated, so not that much will be included.",
+      "parentUuid": "AAAARH//9tA\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH//9sY\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 2
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9rg\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T12:24:56Z",
+      "side": 1,
+      "message": "Note repo/includes/Autocomment.php line 146 and 147, the generated strings will be whipped into submission.",
+      "parentUuid": "AAAARH//9sY\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH//9sM\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 2
@@ -115,6 +223,24 @@
       "writtenOn": "2012-08-07T11:20:17Z",
       "side": 1,
       "message": "why is linksite and linktitle shown in comment AND summary?",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9rc\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T12:24:56Z",
+      "side": 1,
+      "message": "It is keys vs values. The values are the dangerous by the way, but both are run through Utils::squashToNFC and Sanitizer::escapeHtmlAllowEntities.",
+      "parentUuid": "AAAARH//9sM\u003d",
       "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
