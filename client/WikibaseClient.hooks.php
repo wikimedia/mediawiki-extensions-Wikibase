@@ -67,8 +67,8 @@ final class ClientHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
-			'General',
-			'Sorting',
+//			'General',
+//			'Sorting',
 
 			'includes/ItemUpdater',
 			'includes/LocalItemsTable',
@@ -106,11 +106,8 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Used to process the nearly-rendered html code for the page (but before any html tidying occurs).
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserBeforeTidy
-	 *
-	 * This is used to add the remote navigation links to the navigation menu.
-	 * TODO: this might not be a good place to do this - ParserAfterParse ?
+	 * Hook runs after internal parsing
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
 	 *
 	 * @since 0.1
 	 *
@@ -131,8 +128,9 @@ final class ClientHooks {
 			 * @var SiteLink $link
 			 */
 			foreach ( $localItem->getItem()->getSiteLinks() as $link ) {
+				// TODO: know that this site is in the wikipedia group and get links for only this group
 				// TODO: hold into account wiki-wide and page-specific settings to do the merge rather then just overriding.
-				$parserOutput->addLanguageLink( $link->getSite()->getGlobalId() . ':' . $link->getPage() );
+				$parserOutput->addLanguageLink( $link->getSite()->getField( 'local_key' ) . ':' . $link->getPage() );
 			}
 		}
 
