@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH//9t8\u003d",
+        "filename": "repo/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T11:20:17Z",
+      "side": 1,
+      "message": "why not just return the escaped string? the count and the language are things that the caller already knows, always.",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9tM\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T11:20:17Z",
+      "side": 1,
+      "message": "What about a user supplied summary?",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9tI\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T11:20:17Z",
+      "side": 1,
+      "message": "it will be *after* the autocomment, no? As far as I know, the comment MUST come first.",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9s8\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T11:20:17Z",
+      "side": 1,
+      "message": "may be nice to use array_keys($data) - so we known e.g. whether this call included sitelinks, etc.",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9tA\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T11:20:17Z",
+      "side": 1,
+      "message": "this is going to be very large, and hard to read. maybe just don\u0027t return anything here.",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9sY\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T11:20:17Z",
+      "side": 1,
+      "message": "linktitle is a bit scary here, isn\u0027t it? it can be long and contain interesting characters...",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9sM\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T11:20:17Z",
+      "side": 1,
+      "message": "why is linksite and linktitle shown in comment AND summary?",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
