@@ -1,0 +1,497 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH//9v0\u003d",
+        "filename": "lib/includes/entity/EntityDiff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9vw\u003d",
+        "filename": "lib/includes/entity/EntityDiffObject.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "many docs missing here",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9vs\u003d",
+        "filename": "lib/includes/entity/EntityDiffObject.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "the below stuff is duplicating a lot of code for no good reason",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9vo\u003d",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "docs",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wc\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wg\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9v4\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wY\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9xQ\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9v8\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9xM\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wA\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9xI\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wE\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9xE\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9w0\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9xA\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9w8\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no access level specified",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9ww\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9w4\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no access level specified",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9ws\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wM\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "public?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wo\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wI\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "space",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wk\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "no @since",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9wQ\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "this should be in Diff",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9xU\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "Why a new action here? In core this is all done via the edit action no?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9vg\u003d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "WikiPage and Title not used?",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9vk\u003d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-07T10:04:19Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "6e659e49dc688e5a766a6b8c356d10f68486ec47",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
