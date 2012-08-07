@@ -48,6 +48,7 @@ $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.m
 // Autoloading
 $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
 
+$wgAutoloadClasses['Wikibase\ItemUpdater'] 			= $dir . 'includes/ItemUpdater.php';
 $wgAutoloadClasses['Wikibase\LocalItem'] 			= $dir . 'includes/LocalItem.php';
 $wgAutoloadClasses['Wikibase\LocalItemsTable'] 		= $dir . 'includes/LocalItemsTable.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 			= $dir . 'includes/LangLinkHandler.php';
@@ -59,7 +60,6 @@ $wgHooks['UnitTestsList'][] 						= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['WikibasePollHandle'][]					= '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= '\Wikibase\ClientHooks::onSchemaUpdate';
 $wgHooks['WikibaseDefaultSettings'][] 			    = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
-
 $wgHooks['ParserBeforeTidy'][] 						= '\Wikibase\LangLinkHandler::onParserBeforeTidy';
 $wgHooks['ParserFirstCallInit'][]					= '\Wikibase\NoLangLinkHandler::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]				= '\Wikibase\NoLangLinkHandler::onMagicWordwgVariableIDs';
