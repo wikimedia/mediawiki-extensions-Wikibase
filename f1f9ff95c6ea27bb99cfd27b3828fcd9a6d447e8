@@ -37,6 +37,42 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9oo\u003d",
+        "filename": "repo/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T15:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARH//9t8\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9ok\u003d",
+        "filename": "repo/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T15:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARH//9r4\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH//9tM\u003d",
         "filename": "repo/includes/api/ApiModifyItem.php",
         "patchSetId": 2
@@ -66,6 +102,24 @@
       "side": 1,
       "message": "Line 221 to 226, and will take precedence.",
       "parentUuid": "AAAARH//9tM\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9og\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T15:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARH//9r0\u003d",
       "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -107,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9oc\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T15:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARH//9rs\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH//9s8\u003d",
         "filename": "repo/includes/api/ApiSetItem.php",
         "patchSetId": 2
@@ -136,6 +208,24 @@
       "side": 1,
       "message": "Good point. It could although need something more fancy than array_keys. I use pickKeysFromParams to filter out the things that are interesting.",
       "parentUuid": "AAAARH//9s8\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9oI\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T15:39:33Z",
+      "side": 1,
+      "message": "leave it for now. may be nice to look into later though.",
+      "parentUuid": "AAAARH//9ro\u003d",
       "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -177,6 +267,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9oU\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T15:39:33Z",
+      "side": 1,
+      "message": "It\u0027s going to be gibberish with curly braces. Please just don\u0027t show it.",
+      "parentUuid": "AAAARH//9rk\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH//9sY\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 2
@@ -212,6 +320,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9oE\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T15:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARH//9rg\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH//9sM\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 2
@@ -241,6 +367,24 @@
       "side": 1,
       "message": "It is keys vs values. The values are the dangerous by the way, but both are run through Utils::squashToNFC and Sanitizer::escapeHtmlAllowEntities.",
       "parentUuid": "AAAARH//9sM\u003d",
+      "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9oA\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-07T15:39:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARH//9rc\u003d",
       "revId": "f1f9ff95c6ea27bb99cfd27b3828fcd9a6d447e8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
