@@ -130,6 +130,28 @@ to find out where it went, or [[Special:CreateItem|create a new item]]</span>.',
 	'wikibase-noitem-nopermission'       => 'This item does not exist.
 You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]</span>.',
 
+	// summary and autocomment
+	'wikibase-item-summary-wbsetitem-set' => 'Updated item',
+
+	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
+
+	'wikibase-item-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Addd and removed [$2] {{plural:$1|alias|aliases}}',
+
+	// these will be removed later
+	'wikibase-item-summary-wbsetlanguageattribute-label' => 'Changed [$2] label',
+	'wikibase-item-summary-wbsetlanguageattribute-description' => 'Changed [$2] description',
+	'wikibase-item-summary-wbsetlanguageattribute-label-description' => 'Changed [$2] label and descriptions',
+
+	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
+
+	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Removed [$2] description',
+
 	//content model names
 	'content-model-1001' => 'Wikibase item',
 );
@@ -274,6 +296,31 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
 	'wikibase-noitem-nopermission' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user do not have sufficient rights to create a new item in this case.',
+
+	// summary and autocomment
+	'wikibase-item-summary-wbsetitem-set' => 'This is the initial part of the autocomment for setting parts of, or a complete item. The message takes no arguments. See also Wikidatas glossary on [[m:Wikidata/Glossary#item|item]].',
+
+	'wikibase-api-summary-wbsetsitelink-set' => 'This is the initial part of the autocomment for setting of a site-specific link to associate an item in the repository with an external site. It makes no difference if the sitelink exist or not before the call. The message takes two arguments (\$1 and \$2) that is the number of sites (always one) and the site names, and a variant argument (\$3) that is the title of the external page. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-sitelink|sitelink]].',
+	'wikibase-api-summary-wbsetsitelink-remove' => 'This is the initial part of the autocomment for removal of a site-specific link to associate an item in the repository with an external site. To remove an sitelink imply that it must exist before the call. The message takes two arguments (\$1 and \$2) that is the number of sites (always one) and the site names. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-sitelink|sitelink]].',
+
+	'wikibase-item-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Add and removed [$2] {{plural:$1|alias|aliases}}',
+
+	'wikibase-api-summary-wbsetaliases-set' => 'This is the initial part of the autocomment for setting language-specific aliases associated with an item. The list of aliases will become the same as what is in the list. The message takes two arguments (\$1 and \$2) that is the number of languages and the language code, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-wbsetaliases-add' => 'This is the initial part of the autocomment for adding language-specific aliases associated with an item. All aliases on the list will be added to the list of aliases after the call. The message takes two arguments (\$1 and \$2) that is the number of languages and the language code, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-wbsetaliases-remove' => 'This is the initial part of the autocomment for removeing language-specific aliases associated with an item. All aliases on the list will be removed from the list of aliases after the call. The message takes two arguments (\$1 and \$2) that is the number of languages and the language code, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+	'wikibase-api-summary-wbsetaliases-add-remove' => 'This is the initial part of the autocomment for setting and then adding language-specific aliases associated with an item. The list of aliases will become the same as what is in the list. The message takes two arguments (\$1 and \$2) that is the number of languages and the language code, one argument (\$3) that is the total number of aliases refered in the later summary. The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-alias|aliases]].',
+
+	// should be some stuff about wbsetlanguageattribute but that would be removed again anyhow
+
+	'wikibase-api-summary-wbsetlabel-set' => '!!This module is still not available!!This is the initial part of the autocomment for setting of language-specific label associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages (always one) and the language code, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+	'wikibase-api-summary-wbsetlabel-remove' => '!!This module is still not available!!This is the initial part of the autocomment for a deletion of language-specific label associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages (always one) and the language code, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+
+	'wikibase-api-summary-wbsetdescription-set' => '!!This module is still not available!!This is the initial part of the autocomment for setting of language-specific description associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages (always one) and the language code, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+	'wikibase-api-summary-wbsetdescription-remove' => '!!This module is still not available!!This is the initial part of the autocomment for a deletion of language-specific description associated with an item. The message takes two arguments (\$1 and \$2) that is the number of languages (always one) and the language code, and one (\$3) that is the number of attributes in the following summary (should always be 1 for this message). The later summary can be replaced by a manually written one. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
+
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 

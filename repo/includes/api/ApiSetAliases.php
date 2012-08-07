@@ -58,11 +58,8 @@ class ApiSetAliases extends ApiModifyItem {
 	 */
 	protected function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
-			'wbsetaliases',
-			array_merge(
-				array( $plural, $params['language'] ),
-				Autocomment::pickKeysFromParams( $params, 'set', 'add', 'remove' )
-			)
+			'wbsetaliases-' . implode( '-', Autocomment::pickKeysFromParams( $params, 'set', 'add', 'remove' ) ),
+			array( $plural, $params['language'] )
 		);
 	}
 
