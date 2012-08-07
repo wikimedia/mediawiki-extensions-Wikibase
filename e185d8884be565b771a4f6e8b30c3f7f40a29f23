@@ -88,6 +88,23 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9yo\u003d",
+        "filename": "lib/includes/statement/Statement.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T09:28:26Z",
+      "side": 1,
+      "message": "spelling error \"has\"",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3//7tE\u003d",
         "filename": "lib/includes/type/SimpleStringType.php",
         "patchSetId": 1
@@ -193,6 +210,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARH//9yk\u003d",
+        "filename": "lib/includes/value/ItemReferenceValue.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T09:28:26Z",
+      "side": 1,
+      "message": "Tend to agree with Jeroen on this one...",
+      "parentUuid": "AAAAQ3//8ck\u003d",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3//8fI\u003d",
         "filename": "lib/includes/value/SimpleStringValue.php",
         "patchSetId": 1
@@ -272,6 +307,24 @@
       "writtenOn": "2012-07-27T17:08:41Z",
       "side": 1,
       "message": "fromArray",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9yg\u003d",
+        "filename": "lib/includes/value/Value.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T09:28:26Z",
+      "side": 1,
+      "message": "Depends on $data..",
+      "parentUuid": "AAAAQ3//8e8\u003d",
       "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
