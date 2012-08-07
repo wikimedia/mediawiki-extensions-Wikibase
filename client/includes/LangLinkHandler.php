@@ -148,13 +148,14 @@ class LangLinkHandler {
 
 		// Repack the links
 		$item = reset( $api_response['items'] );
-		$sitelinks = $item['sitelinks'];
-
 		$links = array();
-		foreach( $sitelinks as $sitelink ) {
-			$site = preg_replace( "/$siteSuffix$/", "", $sitelink['site'] );
-			$links[$site] = array( 'site' => $site, 'title' => $sitelink['title'] );
-		}
+        if ( isset( $item['sitelinks'] ) ) {
+            $sitelinks = $item['sitelinks'];
+			foreach( $sitelinks as $sitelink ) {
+				$site = preg_replace( "/$siteSuffix$/", "", $sitelink['site'] );
+				$links[$site] = array( 'site' => $site, 'title' => $sitelink['title'] );
+			}
+        }
 
 		return $links;
 	}
