@@ -130,6 +130,21 @@ to find out where it went, or [[Special:CreateItem|create a new item]]</span>.',
 	'wikibase-noitem-nopermission'       => 'This item does not exist.
 You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]</span>.',
 
+	// summary and autocomment
+	'wikibase-item-summary-wbsetitem-set' => 'Updated item',
+
+	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
+
+	'wikibase-item-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Addd and removed [$2] {{plural:$1|alias|aliases}}',
+
+	'wikibase-item-summary-wbsetlanguageattribute-label' => 'Changed [$2] label',
+	'wikibase-item-summary-wbsetlanguageattribute-description' => 'Changed [$2] description',
+	'wikibase-item-summary-wbsetlanguageattribute-label-description' => 'Changed [$2] label and descriptions',
+
 	//content model names
 	'content-model-1001' => 'Wikibase item',
 );

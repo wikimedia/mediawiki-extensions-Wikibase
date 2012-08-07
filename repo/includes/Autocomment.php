@@ -14,6 +14,68 @@ namespace Wikibase;
  */
 final class Autocomment {
 
+	public function __construct( $model, $root ) {
+		$this->model = $model;
+		$this->root = $root;
+	}
+
+	/**
+	 * Identifier for the model this formatting applies
+	 */
+	protected $model = null;
+
+	/**
+	 * Root of the messages used for this formatting
+	 */
+	protected $root = null;
+
+	/**
+	 * Pretty formating of autocomments.
+	 *
+	 * @param string $comment reference to the finalized autocomment
+	 * @param string $pre the string before the autocomment
+	 * @param string $auto the autocomment unformatted
+	 * @param string $post the string after the autocomment
+	 * @param Titel $title use for further information
+	 * @param boolean $local shall links be generated locally or globally
+	 */
+	public function onFormat( &$comment, $pre, $auto, $post, $title, $local ) {
+		global $wgLang, $wgTitle;
+
+		// If it is possible to avoid loading the whole page then the code will be lighter on the server.
+		$title = $title === null ? $wgTitle : $title;
+
+		if ( $title->getContentModel() === $this->model ) {
+
+			if ( preg_match( '/^([\-a-z]+?)\s*(:\s*(.*?))?\s*$/', $auto, $matches ) ) {
+
+				// turn the args to the message into an array
+				$args = ( 2 < count( $matches ) ) ? explode( '|', $matches[3] ) : array();
+
+				// look up the message
+				$msg = wfMessage( $this->root . '-summary-' . $matches[1] );
+				if ( !$msg->isDisabled() ) {
+					// parse the autocomment
+					$auto = $msg->params( $args )->parse();
+
+					// add pre and post fragments
+					if ( $pre ) {
+						# written summary $presep autocomment (summary /* section */)
+						$pre .= wfMessage( 'autocomment-prefix' )->escaped();
+					}
+					if ( $post ) {
+						# autocomment $postsep written summary (/* section */ summary)
+						$auto .= wfMessage( 'colon-separator' )->escaped();
+					}
+
+					$auto = '<span class="autocomment">' . $auto . '</span>';
+					$comment = $pre . $wgLang->getDirMark() . '<span dir="auto">' . $auto . $post . '</span>';
+				}
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Pick values from a params array and collect them in a array
 	 *

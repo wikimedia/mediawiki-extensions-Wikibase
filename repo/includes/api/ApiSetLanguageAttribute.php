@@ -56,11 +56,8 @@ class ApiSetLanguageAttribute extends ApiModifyItem {
 	 */
 	protected function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
-			'wbsetlanguageattribute',
-			array_merge(
-				array( $plural, $params['language'] ), // should be some stuff about remove here
-				Autocomment::pickKeysFromParams( $params, 'label', 'description' )
-			)
+			'wbsetlanguageattribute-' . implode( '-', Autocomment::pickKeysFromParams( $params, 'label', 'description' ) ),
+			array( /*$plural*/ 1, $params['language'] )
 		);
 	}
 
