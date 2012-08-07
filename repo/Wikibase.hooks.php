@@ -68,6 +68,7 @@ final class RepoHooks {
 			'ItemContentDiffView',
 			'ItemMove',
 			// 'ItemView', // Broken AGAIN...
+			'Autocomment',
 
 			'api/ApiBotEdit',
 			'api/ApiEditPage',
