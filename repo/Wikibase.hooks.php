@@ -62,6 +62,7 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
+		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'ItemMove',
 			'ItemContentDiffView',
@@ -100,6 +101,7 @@ final class RepoHooks {
 		}
 
 		return true;
+		// @codeCoverageIgnoreEnd
 	}
 
 	/**
