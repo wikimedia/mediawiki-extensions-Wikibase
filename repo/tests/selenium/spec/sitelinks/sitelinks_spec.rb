@@ -100,6 +100,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_for_api_callback
 
         # let's check if we are not allowed to change the siteId when editing
+        @browser.refresh
+        page.wait_for_sitelinks_to_load
         page.getNthSitelinksTableRow(1).click
         page.wait_until do
           page.editSitelinkLink_element.visible?
