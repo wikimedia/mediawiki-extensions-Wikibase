@@ -30,12 +30,15 @@ class ItemUpdater {
 		 * @var Item $item
 		 */
 		$item = $change->getItem();
-		$siteLinks = $item->getSiteLinks();
 
 		$globalId = 'enwiki'; // TODO
 
-		if ( array_key_exists( $globalId, $siteLinks ) ) {
-			$title = \Title::newFromText( $siteLinks[$globalId] );
+		$siteLink = $item->getSiteLink( $globalId );
+
+		// TODO: also detect removal or modification of this link and do corresponding updates
+
+		if ( $siteLink !== null ) {
+			$title = \Title::newFromText( $siteLink->getPage() );
 
 			if ( !is_null( $title ) ) {
 				list( , $subType ) = explode( '-', $change->getType() );
@@ -60,8 +63,6 @@ class ItemUpdater {
 	 */
 	protected function updateLocalItem( $changeType, Item $item, Title $title ) {
 		$localItem = LocalItem::newFromItem( $item );
-
-		$localItem->setField( 'page_title', $title->getFullText() );
 
 		if ( $changeType === 'remove' ) {
 			$localItem->remove();

@@ -113,10 +113,11 @@ final class ClientHooks {
 	 *
 	 * @param \Parser $parser
 	 * @param string $text
+	 * @param \StripState $stripState
 	 *
 	 * @return boolean
 	 */
-	public static function onParserBeforeTidy( \Parser &$parser, &$text ) {
+	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
 		$parserOutput = $parser->getOutput();
 
 		$localItem = LocalItemsTable::singleton()->selectRow( null, array( 'page_title' => $parser->getTitle()->getDBkey() ) );

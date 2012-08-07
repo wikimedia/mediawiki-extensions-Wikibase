@@ -42,7 +42,7 @@ class LocalItemsTable extends \ORMTable {
 	 * @return string
 	 */
 	public function getRowClass() {
-		return 'LocalItem';
+		return '\Wikibase\LocalItem';
 	}
 
 	/**
