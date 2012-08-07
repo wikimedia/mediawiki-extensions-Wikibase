@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH//9zM\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T08:38:09Z",
+      "side": 1,
+      "message": "Correctly implemented json decoding will be returning one of two forms\n* A collection of name/value pairs. In various languages, this is realized as an object, record, struct, dictionary, hash table, keyed list, or associative array.\n* An ordered list of values. In most languages, this is realized as an array, vector, list, or sequence.\n\nBoth cases will be returned as arrays in PHP.\n\nIn addition the value null can be returned when the decoding is failing.\n\nIn case of ordered list of values the thread will fall through all cases in the switch statements and end up in the default and fail.",
+      "revId": "7a6606d88c47c299815bac17dd8b9d5c9a775231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9zI\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-07T08:38:09Z",
+      "side": 1,
+      "message": "Always a string for key-value pairs, butcan be int for ordered lists. That case is already handled.",
+      "revId": "7a6606d88c47c299815bac17dd8b9d5c9a775231",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
