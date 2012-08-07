@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH//9nw\u003d",
+        "filename": "client/tests/phpunit/includes/ItemUpdaterTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-08-07T15:11:29Z",
+      "side": 1,
+      "message": "trailing!!!",
+      "revId": "3c91d657e36aa5aecf63fe523b59231abc879a96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
