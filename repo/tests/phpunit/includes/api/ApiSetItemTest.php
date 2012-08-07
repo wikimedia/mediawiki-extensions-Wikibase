@@ -79,7 +79,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				$this->fail( "Adding an item without a token should have failed" );
 			}
 			catch ( \UsageException $e ) {
-				$this->assertTrue( ($e->getCode() == 'session-failure'), "Expected session-failure, got unexpected exception: $e" );
+				$this->assertTrue( ($e->getCodeString() == 'session-failure'), "Expected session-failure, got unexpected exception: $e" );
 			}
 		}
 
@@ -125,7 +125,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			$this->fail( "Adding another item with the same sitelinks should have failed" );
 		}
 		catch ( \UsageException $e ) {
-			$this->assertTrue( ($e->getCode() == 'set-sitelink-failed'), "Expected set-sitelink-failed, got unexpected exception: $e" );
+			$this->assertTrue( ($e->getCodeString() == 'save-failed'), "Expected set-sitelink-failed, got unexpected exception: $e" );
 		}
 
 		// ---- check success of update with id --------------------------
@@ -144,6 +144,156 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 		$this->assertSuccess( $res, 'item', 'id' );
 		$this->assertItemEquals( $item, $res['item'] );
+	}
+
+	function provideBadData() {
+		return array(
+			// explicit ID is invalid
+			array(
+				array(
+					"id" => 1234567
+				),
+				"not-recognized"
+			),
+
+			// random stuff is invalid
+			array(
+				array(
+					"foo" => "xyz"
+				),
+				"not-recognized"
+			),
+
+			//-----------------------------------------------
+
+			// aliases have to be one list per language
+			array(
+				array(
+					"aliases" => array( "de" => "foo" )
+				),
+				"not-recognized-array"
+			),
+
+			// labels have to be one value per language
+			array(
+				array(
+					"labels" => array( "de" => array( "foo" ) )
+				),
+				"not-recognized-string"
+			),
+
+			// descriptions have to be one value per language
+			array(
+				array(
+					"descriptions" => array( "de" => array( "foo" ) )
+				),
+				"not-recognized-string"
+			),
+
+			//-----------------------------------------------
+
+			// aliases have to use valid language codes
+			array(
+				array(
+					"aliases" => array( "*" => array( "foo" ) )
+				),
+				"not-recognized-language"
+			),
+
+			// labels have to use valid language codes
+			array(
+				array(
+					"labels" => array( "*" => "foo" )
+				),
+				"not-recognized-language"
+			),
+
+			// descriptions have to use valid language codes
+			array(
+				array(
+					"descriptions" => array( "*" => "foo" )
+				),
+				"not-recognized-language"
+			),
+
+			//-----------------------------------------------
+
+			// aliases have to be an array
+			array(
+				array(
+					"aliases" => 15
+				),
+				"not-recognized-array"
+			),
+
+			// labels have to be an array
+			array(
+				array(
+					"labels" => 15
+				),
+				"not-recognized-array"
+			),
+
+			// descriptions be an array
+			array(
+				array(
+					"descriptions" => 15
+				),
+				"not-recognized-array"
+			),
+
+			//-----------------------------------------------
+
+			// json must be valid
+			array(
+				'',
+				"json-invalid"
+			),
+
+			// json must be an object
+			array(
+				'123', // json_decode *will* decode this as an int!
+				"not-recognized-array"
+			),
+
+			// json must be an object
+			array(
+				'"foo"', // json_decode *will* decode this as a string!
+				"not-recognized-array"
+			),
+
+			// json must be an object
+			array(
+				'[ "xyz" ]', // json_decode *will* decode this as an indexed array.
+				"not-recognized-string"
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideBadData
+	 */
+	function testSetItemBadData( $data, $expectedErrorCode ) {
+		$token = $this->getItemToken();
+
+		try {
+			$this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'reason' => 'Some reason',
+					'data' => is_string( $data ) ? $data : json_encode( $data ),
+					'token' => $token,
+				),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+
+			$this->fail( "Adding item should have failed" );
+		}
+		catch ( \UsageException $e ) {
+			$this->assertTrue( ($e->getCodeString() == $expectedErrorCode), "Expected $expectedErrorCode, got unexpected exception: $e" );
+		}
 	}
 
 	/**
