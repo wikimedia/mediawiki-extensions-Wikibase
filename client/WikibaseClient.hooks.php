@@ -66,9 +66,6 @@ final class ClientHooks {
 	 */
 	public static function registerUnitTests( array &$files ) {
 		$testFiles = array(
-			'General',
-			'Sorting',
-
 			'includes/LocalItemsTable',
 			'includes/LocalItem',
 		);
