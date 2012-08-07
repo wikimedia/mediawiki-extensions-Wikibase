@@ -42,6 +42,13 @@ $specialPageAliases['diq'] = array(
 	'ItemByLabel' => array( 'EtiketêLeti' ),
 );
 
+/** Icelandic (íslenska) */
+$specialPageAliases['is'] = array(
+	'CreateItem' => array( 'Búa_til_hlut' ),
+	'ItemByTitle' => array( 'Hlutur_eftir_nafni' ),
+	'ItemByLabel' => array( 'Hlutur_eftir_merkimiða' ),
+);
+
 /** Korean (한국어) */
 $specialPageAliases['ko'] = array(
 	'CreateItem' => array( '항목만들기', '아이템만들기' ),
