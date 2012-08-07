@@ -57,7 +57,7 @@ interface Item extends Entity {
 	 *
 	 * @param String $siteId the id of the site to which to get the lin
 	 *
-	 * @return SiteLink the site link
+	 * @return SiteLink|null the corresponding SiteLink object, or null
 	 */
 	public function getSiteLink( $siteId );
 

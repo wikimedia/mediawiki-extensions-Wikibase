@@ -96,7 +96,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see   Item::getSiteLink()
+	 * @see Item::getSiteLink()
 	 *
 	 * @since 0.1
 	 *

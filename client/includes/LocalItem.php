@@ -43,22 +43,26 @@ class LocalItem extends ORMRow {
 		$localItem = false;
 
 		if ( $loadFromDB ) {
-			$localItem = $table->selectRow( null, array( 'item_id' => $item->getId() ) );
+			$localItem = $table->selectRow( array( 'id', 'item_id', 'page_title' ), array( 'item_id' => $item->getId() ) );
 		}
 
 		if ( $localItem === false ) {
 			$localItem = new static(
 				$table,
-				array( 'item_data' => $item )
+				array(
+					'item_id' => $item->getId(),
+				)
 			);
 		}
 
-		$siteLinks = $item->getSiteLinks();
+		$localItem->setField( 'item_data', $item );
 
-		// TODO: obtain local wiki global id
-		// TODO: properly manage this field
-		if ( in_array( 'enwiki', SiteLink::getSiteIDs( $siteLinks ) ) ) {
-			$localItem->setField( 'page_title', $siteLinks['enwiki'] );
+		$globalId = 'enwiki'; // TODO
+
+		$siteLink = $item->getSiteLink( $globalId );
+
+		if ( $siteLink !== null ) {
+			$localItem->setField( 'page_title', $siteLink->getDBKey() );
 		}
 
 		return $localItem;
