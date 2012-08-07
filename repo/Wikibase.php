@@ -137,6 +137,7 @@ $wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/updates/I
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
+$wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
 
 // API module registration
 $wgAPIModules['wbgetitems'] 						= 'Wikibase\ApiGetItems';
