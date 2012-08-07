@@ -65,6 +65,7 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
+		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'General',
 			'Sorting',
@@ -79,6 +80,7 @@ final class ClientHooks {
 		}
 
 		return true;
+		// @codeCoverageIgnoreEnd
 	}
 
 	/**

@@ -119,6 +119,7 @@ final class LibHooks {
 	 * @return boolean
 	 */
 	public static function registerUnitTests( array &$files ) {
+		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'ChangeNotifier',
 			'ChangeHandler',
@@ -153,6 +154,7 @@ final class LibHooks {
 		}
 
 		return true;
+		// @codeCoverageIgnoreEnd
 	}
 
 }
