@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARH//9jk\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-07T17:27:30Z",
+      "side": 1,
+      "message": "This whole block should be removed. This is totally going into the RIGHT direction BUT perhaps we shoud not mix it up like this right now (e.g. the item ID we still only add as variable). The name of the class is kind of weird as well as abusing an empty tag for this.",
+      "revId": "b0dd9f987bfe603b22ba40f995f6df6d812318e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9lY\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-07T17:27:30Z",
+      "side": 1,
+      "message": "If this is not really needed, it is a bad idea to introduce it as a wb variable I think. This should really be in core instead. It just blows up our code here and people might start using it while we will probably take it away again later.",
+      "revId": "b0dd9f987bfe603b22ba40f995f6df6d812318e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARH//9kg\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-07T17:27:30Z",
+      "side": 1,
+      "message": "Todo can be removed, there is \"mw.config.get( \u0027wgCurRevisionId\u0027 )\" and later we should add it into the DOM if we want to generate per-item dom. The DOM would hold item-specific information to allow displaying several items on the same page and allows us to get rid of most of these variables.",
+      "revId": "b0dd9f987bfe603b22ba40f995f6df6d812318e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
