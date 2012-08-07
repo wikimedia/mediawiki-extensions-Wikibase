@@ -198,10 +198,17 @@ abstract class EntityObject implements Entity {
 	 *
 	 * @since 0.1
 	 *
+	 * @param $languages
 	 * @return array
 	 */
-	public function getAllAliases() {
-		return $this->data['aliases'];
+	public function getAllAliases( array $languages = null ) {
+		$textList = $this->data['aliases'];
+
+		if ( !is_null( $languages ) ) {
+			$textList = array_intersect_key( $textList, array_flip( $languages ) );
+		}
+
+		return $textList;
 	}
 
 	/**
