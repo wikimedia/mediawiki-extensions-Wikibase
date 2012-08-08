@@ -31,26 +31,21 @@ final class ClientHooks {
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
 
-		if ( $type === 'mysql' || $type === 'sqlite' ) {
+		if ( $type === 'mysql' || $type === 'sqlite' || $type === 'postgres' ) {
+			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
+
 			$updater->addExtensionTable(
-				'wbc_local_items',
-				dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
+				'wbc_item_usage',
+				dirname( __FILE__ ) . '/sql/KillLocalItems.sql'
 			);
 
-			$updater->addExtensionField(
-				'wbc_local_items',
-				'li_page_title',
-				dirname( __FILE__ ) . '/sql/LocalItemTitleField.sql'
-			);
-		}
-		elseif ( $type === 'postgres' ) {
 			$updater->addExtensionTable(
-				'wbc_local_items',
-				dirname( __FILE__ ) . '/sql/WikibaseClient.pg.sql'
+				'wbc_item_usage',
+				dirname( __FILE__ ) . '/sql/WikibaseClient' . $extension
 			);
 		}
 		else {
-			// TODO
+			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
 		}
 
 		return true;

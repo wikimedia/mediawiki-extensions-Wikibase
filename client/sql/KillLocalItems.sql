@@ -1,0 +1,1 @@
+DROP TABLE /*_*/wbc_local_items;

@@ -16,6 +16,8 @@ namespace Wikibase;
  */
 interface Item extends Entity {
 
+	const ENTITY_TYPE = 'wikibase-item';
+
 	/**
 	 * Adds a site link.
 	 *
