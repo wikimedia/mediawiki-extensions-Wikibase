@@ -85,13 +85,17 @@ abstract class ViewEntityAction extends \ViewAction {
 
 		// Figure out which label to use for title.
 		$langCode = $this->getContext()->getLanguage()->getCode();
+		// FIXME: Removed as a quickfix
+		/*
 		list( $labelCode, $labelText, $labelLang) =
 			Utils::lookupUserMultilangText(
 				$content->getEntity()->getLabels(),
 				Utils::languageChain( $langCode ),
 				array( $langCode, $this->getPageTitle(), $this->getContext()->getLanguage() )
 			);
-
+*/
+		// FIXME: this replaces the stuff above
+		$labelText = $content->getEntity()->getLabel($langCode);
 		// Create and set the title.
 		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
 			$out->setPageTitle(
