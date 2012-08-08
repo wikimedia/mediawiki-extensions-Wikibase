@@ -54,6 +54,7 @@ $wgAutoloadClasses['Wikibase\LocalItemsTable'] 		= $dir . 'includes/LocalItemsTa
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\SkinHandler'] 		= $dir . 'includes/SkinHandler.php';
+$wgAutoloadClasses['Wikibase\SortUtils']                = $dir . 'includes/SortUtils.php';
 
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
