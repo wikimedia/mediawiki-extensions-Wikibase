@@ -11,8 +11,8 @@ use \Wikibase\Settings as Settings;
  * @file SkinHandler.php
  * @ingroup WikibaseClient
  *
- * @licence	GNU GPL v2+
- * @author	Nikola Smolenski <smolensk@eunet.rs>
+ * @licence GNU GPL v2+
+ * @author Nikola Smolenski <smolensk@eunet.rs>
  */
 class SkinHandler {
 
