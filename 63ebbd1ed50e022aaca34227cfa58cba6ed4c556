@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX///q8\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:39:51Z",
+      "side": 1,
+      "message": "@return boolean",
+      "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///qk\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:39:51Z",
+      "side": 1,
+      "message": "simply:\n\nreturn !$parser-\u003egetOptions()-\u003egetInterfaceMessage()",
+      "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///qY\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:39:51Z",
+      "side": 1,
+      "message": "The following two lines use spaces, no tabs. You might have to configur your IDE? Especially since there was nothing really changed on the actual code here.",
+      "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///qU\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:39:51Z",
+      "side": 1,
+      "message": "simply:\n\nreturn in_array( $title-\u003egetNamespace(), Settings::get( \u0027namespaces\u0027 ) )",
+      "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
