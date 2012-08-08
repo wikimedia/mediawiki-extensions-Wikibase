@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "AAAARX///qQ\u003d",
+        "filename": "repo/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-08T15:35:13Z",
+      "side": 1,
+      "message": "we need a test case for this function.",
+      "revId": "b538473b1fd14f2ecebcbd60674fa37e804bfc0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX///qo\u003d",
         "filename": "repo/includes/Autocomment.php",
         "patchSetId": 2
