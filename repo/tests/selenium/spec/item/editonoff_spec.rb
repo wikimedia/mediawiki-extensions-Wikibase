@@ -187,7 +187,6 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
-        page.getNthSitelinksTableRow(1).click
         page.editSitelinkLink
         page.editLabelLink?.should be_false
         page.editDescriptionLink?.should be_false
@@ -227,7 +226,6 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.editDescriptionLink?.should be_false
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
-        page.getNthSitelinksTableRow(1).click
         page.editSitelinkLink?.should be_false
         page.saveAliases
         page.editLabelLink?.should be_false
@@ -254,7 +252,6 @@ describe "Check functionality of disabling/enabling edit actions" do
     it "should check if edit actions are disbled/enabled correctly when removing sitelinks" do
       on_page(EditOnOffPage) do |page|
         page.wait_for_sitelinks_to_load
-        page.getNthSitelinksTableRow(1).click
         page.removeSitelinkLink?.should be_true
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true

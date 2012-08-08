@@ -98,14 +98,10 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
-
+        sleep 1
         # let's check if we are not allowed to change the siteId when editing
         @browser.refresh
         page.wait_for_sitelinks_to_load
-        page.getNthSitelinksTableRow(1).click
-        page.wait_until do
-          page.editSitelinkLink_element.visible?
-        end
         page.editSitelinkLink
         page.siteIdInputField?.should be_false
         page.pageInputField?.should be_true
@@ -148,7 +144,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.saveSitelinkLink
           ajax_wait
           page.wait_for_api_callback
-
+          sleep 1
           count = count+1
           #page.getNumberOfSitelinksFromCounter.should == count
           @browser.refresh
@@ -204,7 +200,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(SitelinksItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        page.getNthSitelinksTableRow(1).click
         page.editSitelinkLink
         page.saveSitelinkLinkDisabled?.should be_true
         page.cancelSitelinkLink?.should be_true
@@ -227,7 +222,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
         @browser.refresh
         page.wait_for_sitelinks_to_load
-        page.getNthSitelinksTableRow(1).click
         page.editSitelinkLink
         page.pageInputField.should_not == current_page
       end
@@ -251,10 +245,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         numExistingSitelinks = page.countExistingSitelinks
-        page.getNthSitelinksTableRow(1).click
         page.removeSitelinkLink?.should be_true
         for i in 1..numExistingSitelinks
-          page.getNthSitelinksTableRow(1).click
           page.removeSitelinkLink?.should be_true
           page.removeSitelinkLink
           ajax_wait
