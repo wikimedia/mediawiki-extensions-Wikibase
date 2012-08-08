@@ -279,8 +279,6 @@ class ItemView extends \ContextSource {
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
 	public static function registerJsConfigVars( OutputPage $out, ItemContent $item, $langCode, $editable = false  ) {
-		global $wgUser;
-
 		$title = $item->getTitle();
 
 		// tell JS whether the user can edit
