@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX///xg\u003d",
+        "filename": "lib/includes/entity/EntityDiff.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "No documentation for this function?",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///ws\u003d",
+        "filename": "lib/includes/entity/EntityDiffObject.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "^^and does what? and why?",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///wc\u003d",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "* @since missing\n* no point in having @static",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///wY\u003d",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///vM\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "why not do  $inputAttrs \u003d array()\n\nthen you don\u0027t have to do:\n\n( is_array( $inputAttrs ) ? $inputAttrs : array() ) + ...\n\ninstead you just do $inputAttrs + ...",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///wE\u003d",
+        "filename": "repo/includes/actions/EditItemAction.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "documentation missing",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///wA\u003d",
+        "filename": "repo/includes/actions/EditPropertyAction.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "no documentation",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///v8\u003d",
+        "filename": "repo/includes/actions/EditQueryAction.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "no documentation",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///vs\u003d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "something is wrong with the first sentence",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///vo\u003d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T15:18:20Z",
+      "side": 1,
+      "message": "one tab too much",
+      "revId": "0a5aa9a7661ca109d35ab9daccb3c07de02818c4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
