@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use Diff\MapDiff as MapDiff;
+use Diff\DiffOp;
 use Diff\IDiff as IDiff;
 
 
@@ -176,7 +177,7 @@ abstract class EntityDiffObject extends MapDiff implements EntityDiff {
 		} elseif ( $type === "remove" ) {
 			$entity->removeDescription( array( $lang ) );
 		} elseif ( $type === "change" ) {
-			$entity->setLabel( $lang, $diffOp->getNewValue() );
+			$entity->setDescription( $lang, $diffOp->getNewValue() );
 		} else {
 			throw new \MWException( "Unsupported operation: $type" );
 		}

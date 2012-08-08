@@ -27,7 +27,7 @@ class ItemDiff extends EntityDiffObject {
 	 * @param $baseLinks
 	 * @return array
 	 */
-	protected static function siteLinksToArray( $baseLinks ) {
+	public static function siteLinksToArray( $baseLinks ) {
 		$links = array();
 
 		/* @var SiteLink $link */
@@ -45,7 +45,7 @@ class ItemDiff extends EntityDiffObject {
 	 * @return EntityDiff
 	 */
 	public static function newFromItems( Item $oldItem, Item $newItem ) {
-		return static::newFromEntities( $oldItem, $newItem, array(
+		return parent::newFromEntities( $oldItem, $newItem, array(
 			'links' => MapDiff::newFromArrays(
 				self::siteLinksToArray( $oldItem->getSiteLinks() ),
 				self::siteLinksToArray( $newItem->getSiteLinks() )
@@ -102,8 +102,7 @@ class ItemDiff extends EntityDiffObject {
 			$link = SiteLink::newFromText( $site, $diffOp->getNewValue() );
 			$item->addSiteLink( $link, "add" );
 		} elseif ( $type === "remove" ) {
-			$link = SiteLink::newFromText( $site, $diffOp->getNewValue() );
-			$item->removeSiteLink( $link, $site );
+			$item->removeSiteLink( $site, $diffOp->getOldValue() );
 		} elseif ( $type === "change" ) {
 			$link = SiteLink::newFromText( $site, $diffOp->getNewValue() );
 			$item->addSiteLink( $link, "update" );
