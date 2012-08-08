@@ -14,7 +14,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Changes extends \ORMTable {
+class ChangesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getName()
@@ -40,7 +40,7 @@ class Changes extends \ORMTable {
 	 * @return string
 	 */
 	public function getRowClass() {
-		return '\Wikibase\Change';
+		return '\Wikibase\ChangeRow';
 	}
 
 	/**
@@ -61,14 +61,18 @@ class Changes extends \ORMTable {
 		);
 	}
 
-	protected static $typeMap = array(
-		'item-update' => 'Wikibase\ItemChange',
-		'item-remove' => 'Wikibase\ItemDeletion',
-		'item-add' => 'Wikibase\ItemCreation',
-	);
-
+	/**
+	 * Returns the name of a class that can handle changes of the provided type.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $type
+	 *
+	 * @return string
+	 */
 	public static function getClassForType( $type ) {
-		return array_key_exists( $type, self::$typeMap ) ? self::$typeMap[$type] : 'Wikibase\Change';
+		$typeMap = Settings::get( 'changeHandlers' );
+		return array_key_exists( $type, $typeMap ) ? $typeMap[$type] : 'Wikibase\ChangeRow';
 	}
 
 	/**

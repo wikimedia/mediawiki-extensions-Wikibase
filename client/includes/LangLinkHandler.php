@@ -2,47 +2,44 @@
 
 namespace Wikibase;
 use Parser, ParserOutput;
-use \Wikibase\LocalItemsTable as LocalItemsTable;
-use \Wikibase\Settings as Settings;
-use \Wikibase\Sites as Sites;
 
 /**
  * Handles language links.
- * TODO: do we really want to refresh this on re-render? push updates from the repo seem to make more sense
  *
  * @since 0.1
  *
  * @file LangLinkHandler.php
  * @ingroup WikibaseClient
+ * @ingroup RefuctoredCode
  *
  * @licence GNU GPL v2+
  * @author Nikola Smolenski <smolensk@eunet.rs>
  */
 class LangLinkHandler {
 
-        /**
-         * Fetches a links from the local items table
-         *
-         * @since 0.1
-         *
-         * @param Parser $parser
-         * @return array a list of SiteLink objects|false
-         */
+	/**
+	 * Finds the corresponding item and fetches it's links from the entity cache.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Parser $parser
+	 * @return array of SiteLink
+	 */
 	public static function getLocalItemLinks( Parser $parser ) {
-                $parserOutput = $parser->getOutput();
+		$linkTable = SiteLinkCache::singleton();
 
-                $localItem = LocalItemsTable::singleton()->selectRow( null, array( 'page_title' => $parser->getTitle()->getDBkey() ) );
+		// TODO: obtain global id
+		$itemId = $linkTable->getItemIdForPage( 'enwiki', $parser->getTitle()->getFullText() );
 
-                if ( $localItem !== false ) {
-                        /**
-                         * @var LocalItem $localItem
-                         * @var SiteLink $link
-                         */
-			return $localItem->getItem()->getSiteLinks();
+		if ( $itemId !== false ) {
+			$item = EntityCache::singleton()->getItem( $itemId );
 
-                }
+			if ( $item !== false ) {
+				return $item->getSiteLinks();
+			}
+		}
 
-		return false;
+		return array();
 	}
 
 	/**
@@ -51,7 +48,7 @@ class LangLinkHandler {
 	 * @since 0.1
 	 *
 	 * @param Parser $parser
-	 * @return true|false
+	 * @return boolean
 	 */
 	public static function doInterwikiLinks( Parser $parser ) {
 		if ( $parser->getOptions()->getInterfaceMessage() ) {

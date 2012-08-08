@@ -41,6 +41,23 @@ final class LibHooks {
 					//'smaxage' => 15, // give the proxy some time, don't let clicky folks loose to fast
 					//'maxlag' => 100, // time to wait on a lagging server, hanging on for 100 sec is very aggressive
 				),
+				'changeHandlers' => array(
+					'wikibase-item~add' => 'Wikibase\EntityCreation',
+					'wikibase-property~add' => 'Wikibase\EntityCreation',
+					'wikibase-query~add' => 'Wikibase\EntityCreation',
+
+					'wikibase-item~update' => 'Wikibase\EntityUpdate',
+					'wikibase-property~update' => 'Wikibase\EntityUpdate',
+					'wikibase-query~update' => 'Wikibase\EntityUpdate',
+
+					'wikibase-item~remove' => 'Wikibase\EntityDeletion',
+					'wikibase-property~remove' => 'Wikibase\EntityDeletion',
+					'wikibase-query~remove' => 'Wikibase\EntityDeletion',
+
+					'wikibase-item~refresh' => 'Wikibase\EntityRefresh',
+					'wikibase-property~refresh' => 'Wikibase\EntityRefresh',
+					'wikibase-query~refresh' => 'Wikibase\EntityRefresh',
+				),
 			)
 		);
 
@@ -123,7 +140,7 @@ final class LibHooks {
 		$testFiles = array(
 			'ChangeNotifier',
 			'ChangeHandler',
-			'Changes',
+			'ChangesTable',
 			'item/ItemMultilangTexts',
 			'item/ItemNewEmpty',
 			'item/ItemNewFromArray',
@@ -141,7 +158,10 @@ final class LibHooks {
 			'Utils',
 
 			'changes/DiffChange',
-			'changes/ItemChange',
+			'changes/EntityCreation',
+			'changes/EntityDeletion',
+			'changes/EntityRefresh',
+			'changes/EntityUpdate',
 		);
 
 		// Test compat
