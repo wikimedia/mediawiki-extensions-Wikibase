@@ -142,6 +142,8 @@ final class LibHooks {
 
 			'changes/DiffChange',
 			'changes/ItemChange',
+
+			'entity/ItemDiff',
 		);
 
 		// Test compat
