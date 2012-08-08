@@ -257,7 +257,8 @@ class ItemView extends \ContextSource {
 		$out->setPageTitle( $pout->getTitleText() );
 
 		// register JS stuff
-		self::registerJsConfigVars( $out, $item, $langCode );
+		$editable = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
+		self::registerJsConfigVars( $out, $item, $langCode, $editable );
 
 		$out->addParserOutput( $pout );
 		return $pout;
@@ -272,18 +273,25 @@ class ItemView extends \ContextSource {
 	 * @param OutputPage $out the OutputPage to add to
 	 * @param ItemContent       $item the item for which we want to add the JS config
 	 * @param String     $langCode the language used for showing the item.
+	 * @param bool       $editable whether the item should be editable. Note that this may be overridden to false
+	 *                   based on uiser permissions.
 	 *
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
-	public static function registerJsConfigVars( OutputPage $out, ItemContent $item, $langCode  ) {
+	public static function registerJsConfigVars( OutputPage $out, ItemContent $item, $langCode, $editable = false  ) {
 		global $wgUser;
 
-		$out->addJsConfigVars( 'wbUserIsBlocked', $wgUser->isBlockedFrom( $item->getTitle() ) );
+		// tell JS whether the user can edit
+		$editable = ( $editable && $item->userCanEdit( $wgUser, false ) );
+
+		$out->addJsConfigVars( 'wbEnableEdit', $editable ); //NOTE: use this to toggle edit mode!
 
 		// hand over the itemId to JS
 		$out->addJsConfigVars( 'wbItemId', $item->getItem()->getId() );
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
+		// register site details
+		//@todo: make this a separate resource module!
 		$sites = self::getSiteDetails();
 		$out->addJsConfigVars( 'wbSiteDetails', $sites );
 	}

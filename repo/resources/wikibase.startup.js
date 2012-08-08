@@ -11,15 +11,17 @@
  *
  * Events:
  * -------
- * restrictItemPageActions: Triggered when editing is not allowed for the user
+ * restrictItemPageActions: Triggered when editing is not allowed for the user.
  *                          Parameters: (1) jQuery.event
+ * blockItemPageActions:    Triggered when editing is not allowed for the user because he is blocked from the page.
+ *                          Parameters: (1) jQuery.event
+ * (see TODO/FIXME about these three events where they are being triggered!)
  */
 
 ( function( $, mw, wb, undefined ) {
 	"use strict";
 
 	$( document ).ready( function() {
-
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		new wb.ui.LabelEditTool( $( '#firstHeading' ) );
 
@@ -92,6 +94,9 @@
 		}
 
 		// handle edit restrictions
+		// TODO/FIXME: most about this system sucks, especially the part where the Button constructor is hacked to disable
+		//             all buttons when this is fired. it also doesn't effect any edit tools added after this point and
+		//             edit tool initialized above do not even know that they are disabled.
 		if (
 			mw.config.get( 'wgRestrictionEdit' ) !== null &&
 			mw.config.get( 'wgRestrictionEdit' ).length === 1
@@ -109,6 +114,16 @@
 
 		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
 			$( wikibase ).triggerHandler( 'blockItemPageActions' );
+		}
+
+		if( !mw.config.get( 'wbEnableEdit' ) ) {
+			// no need to implement a 'disableItemPageActions' since hiding all the toolbars directly like this is
+			// not really worse than hacking the Toolbar prototype to achieve this:
+			$( '.wb-ui-propertyedittool .wb-ui-toolbar' ).hide();
+			$( 'body' ).addClass( 'wb-editing-disabled' );
+			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
+			// firebug to show hidden nodes again to click on them:
+			$( wikibase ).triggerHandler( 'restrictItemPageActions' );
 		}
 
 	} );

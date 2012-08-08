@@ -27,11 +27,14 @@ class ViewItemAction extends ViewEntityAction {
 
 		$content = $this->getContent();
 
+		$editableView = $this->isPlainView();
+
 		if ( !is_null( $content ) ) {
 			ItemView::registerJsConfigVars(
 				$this->getOutput(),
 				$this->getContent(),
-				$this->getLanguage()->getCode()
+				$this->getLanguage()->getCode(),
+				$editableView
 			);
 		}
 	}
