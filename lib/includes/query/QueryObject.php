@@ -54,7 +54,7 @@ class QueryObject extends EntityObject implements Query {
 	 * @return string
 	 */
 	public function getType() {
-		return 'query';
+		return Query::ENTITY_TYPE;
 	}
 
 	/**

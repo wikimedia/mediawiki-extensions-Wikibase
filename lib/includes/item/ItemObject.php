@@ -218,7 +218,7 @@ class ItemObject extends EntityObject implements Item {
 	 * @return string
 	 */
 	public function getType() {
-		return 'item';
+		return Item::ENTITY_TYPE;
 	}
 
 	/**

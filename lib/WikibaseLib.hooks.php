@@ -41,6 +41,23 @@ final class LibHooks {
 					//'smaxage' => 15, // give the proxy some time, don't let clicky folks loose to fast
 					//'maxlag' => 100, // time to wait on a lagging server, hanging on for 100 sec is very aggressive
 				),
+				'changeHandlers' => array(
+					'item-add' => 'Wikibase\EntityCreation',
+					'property-add' => 'Wikibase\EntityCreation',
+					'query-add' => 'Wikibase\EntityCreation',
+
+					'item-update' => 'Wikibase\EntityChange',
+					'property-update' => 'Wikibase\EntityChange',
+					'query-update' => 'Wikibase\EntityChange',
+
+					'item-remove' => 'Wikibase\EntityDeletion',
+					'property-remove' => 'Wikibase\EntityDeletion',
+					'query-remove' => 'Wikibase\EntityDeletion',
+
+					'item-refresh' => 'Wikibase\EntityRefresh',
+					'property-refresh' => 'Wikibase\EntityRefresh',
+					'query-refresh' => 'Wikibase\EntityRefresh',
+				),
 			)
 		);
 

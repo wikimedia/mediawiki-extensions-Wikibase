@@ -86,7 +86,7 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 // includes
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 		= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 		= $dir . 'includes/ChangeNotifier.php';
-$wgAutoloadClasses['Wikibase\Changes'] 				= $dir . 'includes/Changes.php';
+$wgAutoloadClasses['Wikibase\ChangesTable'] 		= $dir . 'includes/ChangesTable.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\MediaWikiSite'] 		= $dir . 'includes/MediaWikiSite.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
@@ -94,6 +94,7 @@ $wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
 $wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
 $wgAutoloadClasses['Wikibase\SiteConfigObject'] 	= $dir . 'includes/SiteConfigObject.php';
 $wgAutoloadClasses['Wikibase\SiteLink'] 			= $dir . 'includes/SiteLink.php';
+$wgAutoloadClasses['Wikibase\SiteLinkTable'] 		= $dir . 'includes/SiteLinkTable.php';
 $wgAutoloadClasses['Wikibase\SiteList'] 			= $dir . 'includes/SiteList.php';
 $wgAutoloadClasses['Wikibase\SiteRow'] 				= $dir . 'includes/SiteRow.php';
 $wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
@@ -102,8 +103,9 @@ $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
 // includes/changes
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
+$wgAutoloadClasses['Wikibase\ChangeRow'] 			= $dir . 'includes/changes/ChangeRow.php';
 $wgAutoloadClasses['Wikibase\DiffChange'] 			= $dir . 'includes/changes/DiffChange.php';
-$wgAutoloadClasses['Wikibase\ItemChange'] 			= $dir . 'includes/changes/ItemChange.php';
+$wgAutoloadClasses['Wikibase\EntityChange'] 		= $dir . 'includes/changes/EntityChange.php';
 $wgAutoloadClasses['Wikibase\ItemCreation'] 		= $dir . 'includes/changes/ItemCreation.php';
 $wgAutoloadClasses['Wikibase\ItemDeletion'] 		= $dir . 'includes/changes/ItemDeletion.php';
 
