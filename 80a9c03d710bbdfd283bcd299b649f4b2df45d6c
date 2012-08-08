@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX///uM\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-08T14:29:06Z",
+      "side": 1,
+      "message": "This is still all spaghetti code, but I guess this is not an issue with this commit :)",
+      "revId": "80a9c03d710bbdfd283bcd299b649f4b2df45d6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///uU\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-08T14:29:06Z",
+      "side": 1,
+      "message": "Why is this still here? It\u0027s not used, so just kill it.",
+      "revId": "80a9c03d710bbdfd283bcd299b649f4b2df45d6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
