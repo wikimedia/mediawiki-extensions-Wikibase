@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX///rE\u003d",
+        "filename": "repo/Wikibase.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-08T15:31:17Z",
+      "side": 1,
+      "message": "please avoid class loading and instantiation in the extension\u0027s main file.",
+      "revId": "b538473b1fd14f2ecebcbd60674fa37e804bfc0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///qo\u003d",
+        "filename": "repo/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-08T15:31:17Z",
+      "side": 1,
+      "message": "is $comment run through the sanitizer later? otherwise we need escaping here!",
+      "revId": "b538473b1fd14f2ecebcbd60674fa37e804bfc0b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
