@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAARX///uE\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-08T14:30:16Z",
+      "side": 1,
+      "message": "Calling a bunch of non-static functions statically here...",
+      "revId": "80a9c03d710bbdfd283bcd299b649f4b2df45d6c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX///uM\u003d",
         "filename": "client/includes/LangLinkHandler.php",
         "patchSetId": 1
