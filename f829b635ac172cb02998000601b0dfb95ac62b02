@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX///zw\u003d",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-08T12:06:57Z",
+      "side": 1,
+      "message": "This should not be public just so you can use it in a test",
+      "revId": "f829b635ac172cb02998000601b0dfb95ac62b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///zs\u003d",
+        "filename": "lib/tests/phpunit/entity/ItemDiffTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-08T12:06:57Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "f829b635ac172cb02998000601b0dfb95ac62b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///zo\u003d",
+        "filename": "lib/tests/phpunit/entity/ItemDiffTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-08T12:06:57Z",
+      "side": 1,
+      "message": "unused",
+      "revId": "f829b635ac172cb02998000601b0dfb95ac62b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///zk\u003d",
+        "filename": "lib/tests/phpunit/entity/ItemDiffTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-08T12:06:57Z",
+      "side": 1,
+      "message": "ItemObject could be imported :)",
+      "revId": "f829b635ac172cb02998000601b0dfb95ac62b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
