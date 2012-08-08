@@ -10,6 +10,12 @@
  * @author Daniel Werner
  */
 
+* {
+	/* defining Arial as default font working around problematic font metrics of Helvetica applied
+	in Firefox and Opera on Mac cutting off high characters like "Å" in some cases */
+	font-family: Arial, sans-serif;
+}
+
 .firstHeading {
 	border-bottom: 0;
 	margin-bottom: 0 !important;

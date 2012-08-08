@@ -13,10 +13,13 @@
 h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	font-size: 0.5em;
 }
-	h1.firstHeading input {
-		font-family:inherit;
-		font-size:inherit;
-	}
+
+h1.firstHeading input {
+	font-family:inherit;
+	font-size:inherit;
+	height: 1.2em;
+	padding: 0;
+}
 
 .wb-property-container-value {
 	margin-left: .3em;
