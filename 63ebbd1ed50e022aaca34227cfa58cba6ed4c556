@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX///o4\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-08-08T15:52:06Z",
+      "side": 1,
+      "message": "right, thanks :)",
+      "parentUuid": "AAAARX///q8\u003d",
+      "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX///qk\u003d",
         "filename": "client/includes/LangLinkHandler.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-08T15:39:51Z",
       "side": 1,
       "message": "simply:\n\nreturn !$parser-\u003egetOptions()-\u003egetInterfaceMessage()",
+      "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///pA\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-08-08T15:52:06Z",
+      "side": 1,
+      "message": "that\u0027s a cleaner way to do things, but not sure yet if there will be other conditions or settings to disable interwiki links list.",
+      "parentUuid": "AAAARX///qk\u003d",
       "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -64,6 +100,24 @@
       "writtenOn": "2012-08-08T15:39:51Z",
       "side": 1,
       "message": "simply:\n\nreturn in_array( $title-\u003egetNamespace(), Settings::get( \u0027namespaces\u0027 ) )",
+      "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///pI\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-08-08T15:52:06Z",
+      "side": 1,
+      "message": "expect we will have more conditions than just namespace setting where links get turned off",
+      "parentUuid": "AAAARX///qU\u003d",
       "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
