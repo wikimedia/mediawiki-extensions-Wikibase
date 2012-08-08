@@ -116,7 +116,7 @@ class ApiSetItem extends ApiModifyItem {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
 						}
 						if ( !array_key_exists( $langCode, $languages ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-language' ), 'not-recognized-language' );
+							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
 						}
 						if ( $value === "" ) {
 							$itemContent->getItem()->removeLabel( $langCode );
@@ -136,7 +136,7 @@ class ApiSetItem extends ApiModifyItem {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
 						}
 						if ( !array_key_exists( $langCode, $languages ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-language' ), 'not-recognized-language' );
+							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
 						}
 						if ( $value === "" ) {
 							$itemContent->getItem()->removeDescription( $langCode );
@@ -156,7 +156,7 @@ class ApiSetItem extends ApiModifyItem {
 							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-array' ), 'not-recognized-array' );
 						}
 						if ( !array_key_exists( $langCode, $languages ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-language' ), 'not-recognized-language' );
+							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
 						}
 						$newAliases = array();
 						foreach ( $aliases as $alias ) {
@@ -180,26 +180,30 @@ class ApiSetItem extends ApiModifyItem {
 						}
 
 						if ( !$group->hasGlobalId( $siteId ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'add-sitelink-failed' );
+							$this->dieUsage( "unknown site: $siteId", 'add-sitelink-failed' );
 						}
 
-						$site = $group->getSiteByGlobalId( $siteId );
-						$page = $site->normalizePageName( $pageName );
+						if ( $pageName === '' ) {
+							$itemContent->getItem()->removeSiteLink( $siteId );
+						} else {
+							$site = $group->getSiteByGlobalId( $siteId );
+							$page = $site->normalizePageName( $pageName );
 
-						if ( $page === false ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'add-sitelink-failed' );
-						}
+							if ( $page === false ) {
+								$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'add-sitelink-failed' );
+							}
 
-						$link = new SiteLink( $site, $page );
-						$ret = $itemContent->getItem()->addSiteLink( $link, 'set' );
+							$link = new SiteLink( $site, $page );
+							$ret = $itemContent->getItem()->addSiteLink( $link, 'set' );
 
-						if ( $ret === false ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
+							if ( $ret === false ) {
+								$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
+							}
 						}
 					}
 					break;
 				default:
-					$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+					$this->dieUsage( "unknown key: $props", 'not-recognized' );
 				}
 			}
 		}
