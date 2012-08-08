@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use DatabaseUpdater;
+use \Wikibase\LangLinkHandler as LangLinkHandler;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -118,21 +119,27 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
+		global $wgLanguageCode;
+
 		$parserOutput = $parser->getOutput();
 
-		$localItem = LocalItemsTable::singleton()->selectRow( null, array( 'page_title' => $parser->getTitle()->getDBkey() ) );
+		if ( LangLinkHandler::doInterWikiLinks( $parser ) && LangLinkHandler::useRepoLinks( $parser ) ) {
+			$repolinks = LangLinkHandler::getLocalItemLinks( $parser );
+			LangLinkHandler::suppressRepoLinks( $parser, $repolinks );
 
-		if ( $localItem !== false ) {
-			/**
-			 * @var LocalItem $localItem
-			 * @var SiteLink $link
-			 */
-			foreach ( $localItem->getItem()->getSiteLinks() as $link ) {
+			foreach ( $repolinks as $link ) {
 				// TODO: know that this site is in the wikipedia group and get links for only this group
 				// TODO: hold into account wiki-wide and page-specific settings to do the merge rather then just overriding.
-				$parserOutput->addLanguageLink( $link->getSite()->getField( 'local_key' ) . ':' . $link->getPage() );
+				$localkey = $link->getSite()->getField( 'local_key' );
+
+				// unset self referencing interwiki link
+				if ( $localkey != $wgLanguageCode ) {
+					$parserOutput->addLanguageLink( $localkey . ':' . $link->getPage() );
+				}
 			}
 		}
+
+		LangLinkHandler::maybeSortLinks( $parserOutput->getLanguageLinks() );
 
 		return true;
 	}
