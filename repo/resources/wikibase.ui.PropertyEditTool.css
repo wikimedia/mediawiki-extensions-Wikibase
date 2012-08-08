@@ -40,24 +40,8 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 		font-weight: bold;
 	}
 
-.wb-ui-propertyedittool-editablevalue-aftereditnotify .wb-ui-toolbar {
-	visibility: visible!important;
-}
-
 .wb-sitelinks th.wb-ui-propertyedittool-counterinheading {
 	text-align: right;
-}
-
-.wb-sitelinks .wb-ui-propertyedittool-editablevalue-toolbarparent .wb-ui-toolbar {
-	visibility: hidden;
-}
-.wb-sitelinks .wb-ui-propertyedittool-editablevalue-inhover .wb-ui-propertyedittool-editablevalue-toolbarparent .wb-ui-toolbar,
-.wb-sitelinks .wb-ui-propertyedittool-editablevalue-ineditmode .wb-ui-propertyedittool-editablevalue-toolbarparent .wb-ui-toolbar {
-	visibility: visible;
-}
-
-.wb-sitelinks .wb-ui-propertyedittool-editablevalue-aftereditnotify td {
-	background-color:#FFDFC9!important;
 }
 
 .wb-sitelinks .wb-ui-propertyedittool-editablevalue-waiting .wb-ui-propertyedittool-editablevalue-toolbarparent {
