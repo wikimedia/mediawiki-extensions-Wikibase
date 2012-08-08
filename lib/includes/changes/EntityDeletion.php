@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Represents the deletion of an item.
+ * Represents the deletion of an entity.
  *
  * @since 0.1
  *
@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemDeletion extends ItemCreation {
+class EntityDeletion extends EntityCreation {
 
 	/**
 	 * @see Change::getType
@@ -23,7 +23,7 @@ class ItemDeletion extends ItemCreation {
 	 * @return string
 	 */
 	public function getType() {
-		return 'item-remove';
+		return $this->getEntity()->getType() . '-remove';
 	}
 
 }

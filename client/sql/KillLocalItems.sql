@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS /*_*/wbc_local_items;
