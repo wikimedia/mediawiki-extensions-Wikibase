@@ -68,6 +68,10 @@ $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= '\Wikibase\SkinHandler::onSkin
 $wgHooks['BeforePageDisplay'][]				= '\Wikibase\SkinHandler::onBeforePageDisplay';
 
 
+$wgSharedTables[] = 'wbc_entity_cache';
+$wgSharedTables[] = 'wbc_items_per_site';
+
+
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => dirname( __FILE__ ) . '/resources',
