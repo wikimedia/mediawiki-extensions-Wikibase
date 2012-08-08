@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX///oI\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-08T16:03:14Z",
+      "side": 1,
+      "message": "doesn\u0027t really matter I guess, the code had to be adjusted later in both cases.\nAdditional comment about future plans like that could be helpful though.",
+      "parentUuid": "AAAARX///pA\u003d",
+      "revId": "63ebbd1ed50e022aaca34227cfa58cba6ed4c556",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX///qY\u003d",
         "filename": "client/includes/LangLinkHandler.php",
         "patchSetId": 2
