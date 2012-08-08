@@ -16,6 +16,12 @@ namespace Wikibase;
  */
 abstract class EntityObject implements Entity {
 
+	public static $typeMap = array(
+		Item::ENTITY_TYPE => '\Wikibase\ItemObject',
+		Property::ENTITY_TYPE => '\Wikibase\PropertyObject',
+		Query::ENTITY_TYPE => '\Wikibase\QueryObject'
+	);
+
 	/**
 	 * @since 0.1
 	 * @var array
@@ -388,5 +394,21 @@ abstract class EntityObject implements Entity {
 		return $newerEntity->getDiff( $olderEntity )->getApplicableDiff( $this->toArray() );
 	}
 
+	/**
+	 * @see Entity::copy()
+	 *
+	 * @since 0.1
+	 *
+	 * @return Entity
+	 */
+	public function copy() {
+		$array = array();
+
+		foreach ( $this->toArray() as $key => $value ) {
+			$array[$key] = is_object( $value ) ? clone $value : $value;
+		}
+
+		return new static( $array );
+	}
 
 }

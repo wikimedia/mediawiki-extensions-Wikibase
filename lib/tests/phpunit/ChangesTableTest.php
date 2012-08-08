@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 use Diff\MapDiff as MapDiff;
 use Diff\ListDiff as ListDiff;
-use Wikibase\Changes as Changes;
+use Wikibase\ChangesTable as ChangesTable;
 
 /**
  * Tests for the Wikibase\Changes class.
@@ -65,7 +65,7 @@ class ChangesTest extends \MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testNewFromArray( array $data, $loadDefaults = false ) {
-		$change = Changes::singleton()->newRow( $data, $loadDefaults );
+		$change = ChangesTable::singleton()->newRow( $data, $loadDefaults );
 
 		$this->assertEquals( $GLOBALS['wgUser']->getId(), $change->getUser()->getId() );
 
@@ -80,7 +80,7 @@ class ChangesTest extends \MediaWikiTestCase {
 	 * @dataProvider newFromArrayProvider
 	 */
 	public function testSaveSelectCountAndDelete( array $data, $loadDefaults = false ) {
-		$changesTable = Changes::singleton();
+		$changesTable = ChangesTable::singleton();
 
 		$change = $changesTable->newRow( $data, $loadDefaults );
 

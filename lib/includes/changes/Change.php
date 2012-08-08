@@ -1,10 +1,9 @@
 <?php
 
 namespace Wikibase;
-use \ORMRow, \User;
 
 /**
- * Class representing a single change (ie a row in the wb_changes).
+ * Interface for objects representing changes.
  *
  * @since 0.1
  *
@@ -14,36 +13,17 @@ use \ORMRow, \User;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Change extends ORMRow {
 
-	/**
-	 * @since 0.1
-	 * @var integer
-	 */
-	protected $itemId;
-
-	/**
-	 * Field for caching the linked user.
-	 *
-	 * @since 0.1
-	 * @var User|false
-	 */
-	protected $user = false;
+interface Change {
 
 	/**
 	 * Returns the user that made the change.
 	 *
 	 * @since 0.1
 	 *
-	 * @return User
+	 * @return \User
 	 */
-	public function getUser() {
-		if ( $this->user === false ) {
-			$this->user = User::newFromId( $this->getField( 'user_id' ) );
-		}
-
-		return $this->user;
-	}
+	public function getUser();
 
 	/**
 	 * Returns the age of the change in seconds.
@@ -52,9 +32,7 @@ class Change extends ORMRow {
 	 *
 	 * @return integer
 	 */
-	public function getAge() {
-		return time() - (int)wfTimestamp( TS_UNIX, $this->getField( 'time' ) );
-	}
+	public function getAge();
 
 	/**
 	 * Returns whether the change is empty.
@@ -64,30 +42,7 @@ class Change extends ORMRow {
 	 *
 	 * @return boolean
 	 */
-	public function isEmpty() {
-		return false;
-	}
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 1.20
-	 *
-	 * @param \IORMTable $table
-	 * @param array|null $fields
-	 * @param boolean $loadDefaults
-	 */
-	public function __construct( \IORMTable $table, $fields = null, $loadDefaults = false ) {
-		if ( is_null( $fields ) ) {
-			$fields = array();
-		}
-
-		if ( !array_key_exists( 'type', $fields ) ) {
-			$fields['type'] = $this->getType();
-		}
-
-		parent::__construct( $table, $fields, $loadDefaults );
-	}
+	public function isEmpty();
 
 	/**
 	 * Returns the type of change.
@@ -96,8 +51,6 @@ class Change extends ORMRow {
 	 *
 	 * @return string
 	 */
-	public function getType() {
-		return 'change';
-	}
+	public function getType();
 
 }
