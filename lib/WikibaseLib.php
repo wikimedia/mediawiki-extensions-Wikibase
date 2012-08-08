@@ -53,9 +53,9 @@ $wgExtensionCredits['other'][] = array(
 $dir = dirname( __FILE__ ) . '/';
 
 // constants
-define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
-define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
-define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
+define( 'CONTENT_MODEL_WIKIBASE_ITEM', \Wikibase\Item::ENTITY_TYPE );
+define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', \Wikibase\Property::ENTITY_TYPE );
+define( 'CONTENT_MODEL_WIKIBASE_QUERY', \Wikibase\Query::ENTITY_TYPE );
 
 define( 'SITE_TYPE_MEDIAWIKI', 0 );
 define( 'SITE_TYPE_UNKNOWN', 1 );
@@ -94,6 +94,7 @@ $wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
 $wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
 $wgAutoloadClasses['Wikibase\SiteConfigObject'] 	= $dir . 'includes/SiteConfigObject.php';
 $wgAutoloadClasses['Wikibase\SiteLink'] 			= $dir . 'includes/SiteLink.php';
+$wgAutoloadClasses['Wikibase\SiteLinkSave'] 		= $dir . 'includes/SiteLinkSave.php';
 $wgAutoloadClasses['Wikibase\SiteList'] 			= $dir . 'includes/SiteList.php';
 $wgAutoloadClasses['Wikibase\SiteRow'] 				= $dir . 'includes/SiteRow.php';
 $wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
