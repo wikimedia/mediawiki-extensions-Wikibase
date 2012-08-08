@@ -54,7 +54,7 @@ abstract class EntityDiffObject extends MapDiff implements EntityDiff {
 	 * @return MapDiff
 	 */
 	public function getAliasesDiff() {
-		return $this->operations['aliases'];
+		return $this['aliases'];
 	}
 
 	/**
@@ -65,7 +65,7 @@ abstract class EntityDiffObject extends MapDiff implements EntityDiff {
 	 * @return MapDiff
 	 */
 	public function getLabelsDiff() {
-		return $this->operations['labels'];
+		return $this['label'];
 	}
 
 	/**
@@ -76,7 +76,7 @@ abstract class EntityDiffObject extends MapDiff implements EntityDiff {
 	 * @return MapDiff
 	 */
 	public function getDescriptionsDiff() {
-		return $this->operations['descriptions'];
+		return $this['description'];
 	}
 
 	/**

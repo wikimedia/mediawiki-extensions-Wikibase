@@ -49,7 +49,7 @@ class ItemDiff extends EntityDiffObject {
 	 * @return MapDiff
 	 */
 	public function getSiteLinkDiff() {
-		return $this->operations['links'];
+		return $this['links'];
 	}
 
 	/**

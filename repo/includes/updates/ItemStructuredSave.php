@@ -82,32 +82,8 @@ class ItemStructuredSave extends \DataUpdate {
 	 * @return boolean Success indicator
 	 */
 	protected function saveSiteLinks() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$idField = array( 'ips_item_id' => $this->itemContent->getItem()->getId() );
-
-		$success = $dbw->delete(
-			'wb_items_per_site',
-			$idField,
-			__METHOD__
-		);
-
-		/* @var SiteLink $siteLink */
-		foreach ( $this->itemContent->getItem()->getSiteLinks() as $siteLink ) {
-			$success = $dbw->insert(
-				'wb_items_per_site',
-				array_merge(
-					$idField,
-					array(
-						'ips_site_id' => $siteLink->getSiteID(),
-						'ips_site_page' => $siteLink->getPage(),
-					)
-				),
-				__METHOD__
-			) && $success;
-		}
-
-		return $success;
+		$updater = new SiteLinkTable( 'wb_items_per_site' );
+		return $updater->saveLinksOfItem( $this->itemContent->getItem() );
 	}
 
 	/**

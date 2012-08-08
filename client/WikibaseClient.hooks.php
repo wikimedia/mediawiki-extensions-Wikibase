@@ -31,26 +31,21 @@ final class ClientHooks {
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
 
-		if ( $type === 'mysql' || $type === 'sqlite' ) {
+		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
+			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
+
 			$updater->addExtensionTable(
-				'wbc_local_items',
-				__DIR__ . '/sql/WikibaseClient.sql'
+				'wbc_item_usage',
+				__DIR__ . '/sql/KillLocalItems.sql'
 			);
 
-			$updater->addExtensionField(
-				'wbc_local_items',
-				'li_page_title',
-				__DIR__ . '/sql/LocalItemTitleField.sql'
-			);
-		}
-		elseif ( $type === 'postgres' ) {
 			$updater->addExtensionTable(
-				'wbc_local_items',
-				__DIR__ . '/sql/WikibaseClient.pg.sql'
+				'wbc_item_usage',
+				__DIR__ . '/sql/WikibaseClient' . $extension
 			);
 		}
 		else {
-			// TODO
+			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
 		}
 
 		return true;
@@ -72,9 +67,9 @@ final class ClientHooks {
 //			'General',
 //			'Sorting',
 
-			'includes/ItemUpdater',
-			'includes/LocalItemsTable',
-			'includes/LocalItem',
+			'includes/CachedEntity',
+			'includes/EntityCache',
+			'includes/EntityCacheUpdater',
 		);
 
 		foreach ( $testFiles as $file ) {
@@ -97,11 +92,34 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
-		list( $mainType, ) = explode( '-', $change->getType() );
+		list( $mainType, ) = explode( '~', $change->getType() );
 
-		if ( $mainType === 'item' ) {
-			$itemUpdater = new ItemUpdater();
-			$itemUpdater->handleChange( $change );
+		if ( array_key_exists( $mainType, EntityObject::$typeMap ) ) {
+
+			$cacheUpdater = new EntityCacheUpdater();
+			$cacheUpdater->handleChange( $change );
+
+			// The following code is a temporary hack to invalidate the cache.
+			// TODO: create cache invalidater that works with all clients for this cluster
+
+			if ( $mainType == Item::ENTITY_TYPE ) {
+				/**
+				 * @var Item $item
+				 */
+				$item = $change->getEntity();
+
+				$globalId = 'enwiki';
+
+				$siteLink = $item->getSiteLink( $globalId );
+
+				if ( $siteLink !== null ) {
+					$title = \Title::newFromText( $siteLink->getPage() );
+
+					if ( !is_null( $title ) && $title->getArticleID() !== 0 ) {
+						$title->invalidateCache();
+					}
+				}
+			}
 		}
 
 		return true;
@@ -125,13 +143,15 @@ final class ClientHooks {
 		$parserOutput = $parser->getOutput();
 
 		if ( LangLinkHandler::doInterWikiLinks( $parser ) && LangLinkHandler::useRepoLinks( $parser ) ) {
-			if ( $repolinks = LangLinkHandler::getLocalItemLinks( $parser ) ) {
+			$repolinks = LangLinkHandler::getLocalItemLinks( $parser );
+
+			if ( $repolinks !== array() ) {
 				LangLinkHandler::suppressRepoLinks( $parser, $repolinks );
 
 				foreach ( $repolinks as $link ) {
 					// TODO: know that this site is in the wikipedia group and get links for only this group
 					// TODO: hold into account wiki-wide and page-specific settings to do the merge rather then just overriding.
-					$localkey = $link->getSite()->getField( 'local_key' );
+					$localkey = $link->getSite()->getConfig()->getLocalId();
 
 					// unset self referencing interwiki link
 					if ( $localkey != $wgLanguageCode ) {
@@ -141,6 +161,8 @@ final class ClientHooks {
 			}
 		}
 
+		// Because, you know, the function might refuse to sort them.
+		// And it's all uncertain with this quantum stuff anyway...
 		SortUtils::maybeSortLinks( $parserOutput->getLanguageLinks() );
 
 		return true;

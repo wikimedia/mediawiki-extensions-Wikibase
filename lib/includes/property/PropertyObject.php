@@ -55,7 +55,7 @@ class PropertyObject extends EntityObject implements Property {
 	 * @return string
 	 */
 	public function getType() {
-		return 'property';
+		return Property::ENTITY_TYPE;
 	}
 
 	/**
