@@ -16,6 +16,8 @@ namespace Wikibase;
  */
 interface Item extends Entity {
 
+	const ENTITY_TYPE = 'wikibase-item';
+
 	/**
 	 * Adds a site link.
 	 *
@@ -60,14 +62,5 @@ interface Item extends Entity {
 	 * @return SiteLink|null the corresponding SiteLink object, or null
 	 */
 	public function getSiteLink( $siteId );
-
-	/**
-	 * Returns a deep copy of the item.
-	 *
-	 * @since 0.1
-	 *
-	 * @return Item
-	 */
-	public function copy();
 
 }

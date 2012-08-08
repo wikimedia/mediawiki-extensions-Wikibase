@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 use Wikibase\ChangeHandler as ChangeHandler;
 use Wikibase\ItemObject as ItemObject;
+use Wikibase\EntityCreation as EntityCreation;
+use Wikibase\EntityDeletion as EntityDeletion;
 
 /**
  * Tests for the Wikibase\ChangeHandler class.
@@ -27,8 +29,8 @@ class ChangeHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function changeProvider() {
-		$itemCreation = \Wikibase\ItemCreation::newFromItem( ItemObject::newEmpty() );
-		$itemDeletion = \Wikibase\ItemDeletion::newFromItem( ItemObject::newEmpty() );
+		$itemCreation = EntityCreation::newFromEntity( ItemObject::newEmpty() );
+		$itemDeletion = EntityDeletion::newFromEntity( ItemObject::newEmpty() );
 
 		return array(
 			array(),

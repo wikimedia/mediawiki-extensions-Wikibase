@@ -21,7 +21,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class PollForChanges extends \Maintenance {
 
 	/**
-	 * @var Changes
+	 * @var ChangesTable
 	 */
 	protected $changes;
 
@@ -70,7 +70,7 @@ class PollForChanges extends \Maintenance {
 			die( 'WikibaseLib has not been loaded.' );
 		}
 
-		$this->changes = Changes::singleton();
+		$this->changes = ChangesTable::singleton();
 
 		$this->lastChangeId = (int)$this->getArg( 'startid', 0 );
 		$this->startTime = (int)$this->getArg( 'starttime', 0 );
