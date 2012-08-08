@@ -55,11 +55,8 @@ class ItemDeletionUpdate extends \DataUpdate {
 			__METHOD__
 		);
 
-		$dbw->delete(
-			'wb_items_per_site',
-			array( 'ips_item_id' => $id ),
-			__METHOD__
-		);
+		$updater = new SiteLinkTable( 'wb_items_per_site' );
+		$updater->deleteLinksOfItem( $this->itemContent->getItem() );
 
 		$dbw->delete(
 			'wb_texts_per_lang',
