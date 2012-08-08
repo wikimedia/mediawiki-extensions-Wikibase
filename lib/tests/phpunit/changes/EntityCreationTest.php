@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- * Tests for the Wikibase\ItemChange class.
+ * Tests for the Wikibase\EntityCreation class.
  *
  * @file
  * @since 0.1
@@ -18,14 +18,10 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemChangeTest extends \MediaWikiTestCase {
+class EntityCreationTest extends EntityRefreshTest {
 
-	public function testNewFromItems() {
-		$this->assertTrue( true ); // TODO
-	}
-
-	public function testSetAndGetItem() {
-		$this->assertTrue( true ); // TODO
+	protected function getClass() {
+		return 'Wikibase\EntityCreation';
 	}
 
 }

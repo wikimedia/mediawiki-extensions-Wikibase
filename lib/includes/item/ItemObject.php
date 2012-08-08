@@ -154,23 +154,6 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::copy()
-	 *
-	 * @since 0.1
-	 *
-	 * @return Item
-	 */
-	public function copy() {
-		$array = array();
-
-		foreach ( $this->toArray() as $key => $value ) {
-			$array[$key] = is_object( $value ) ? clone $value : $value;
-		}
-
-		return new static( $array );
-	}
-
-	/**
 	 * @since 0.1
 	 *
 	 * @param array $data
@@ -218,7 +201,7 @@ class ItemObject extends EntityObject implements Item {
 	 * @return string
 	 */
 	public function getType() {
-		return 'item';
+		return Item::ENTITY_TYPE;
 	}
 
 	/**

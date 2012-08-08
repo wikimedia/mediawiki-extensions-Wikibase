@@ -236,4 +236,13 @@ interface Entity {
 	 */
 	public function getUndoDiff( Entity $newerEntity, Entity $olderEntity );
 
+	/**
+	 * Returns a deep copy of the entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return Entity
+	 */
+	public function copy();
+
 }

@@ -31,26 +31,21 @@ final class ClientHooks {
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
 
-		if ( $type === 'mysql' || $type === 'sqlite' ) {
+		if ( $type === 'mysql' || $type === 'sqlite' || $type === 'postgres' ) {
+			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
+
 			$updater->addExtensionTable(
-				'wbc_local_items',
-				dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
+				'wbc_item_usage',
+				dirname( __FILE__ ) . '/sql/KillLocalItems.sql'
 			);
 
-			$updater->addExtensionField(
-				'wbc_local_items',
-				'li_page_title',
-				dirname( __FILE__ ) . '/sql/LocalItemTitleField.sql'
-			);
-		}
-		elseif ( $type === 'postgres' ) {
 			$updater->addExtensionTable(
-				'wbc_local_items',
-				dirname( __FILE__ ) . '/sql/WikibaseClient.pg.sql'
+				'wbc_item_usage',
+				dirname( __FILE__ ) . '/sql/WikibaseClient' . $extension
 			);
 		}
 		else {
-			// TODO
+			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
 		}
 
 		return true;
@@ -72,9 +67,9 @@ final class ClientHooks {
 //			'General',
 //			'Sorting',
 
-			'includes/ItemUpdater',
-			'includes/LocalItemsTable',
-			'includes/LocalItem',
+			'includes/CachedEntity',
+			'includes/EntityCache',
+			'includes/EntityCacheUpdater',
 		);
 
 		foreach ( $testFiles as $file ) {
@@ -97,11 +92,33 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
-		list( $mainType, ) = explode( '-', $change->getType() );
+		list( $mainType, ) = explode( '~', $change->getType() );
 
-		if ( $mainType === 'item' ) {
-			$itemUpdater = new ItemUpdater();
+		if ( array_key_exists( $mainType, EntityObject::$typeMap ) ) {
+			$itemUpdater = new EntityCacheUpdater();
 			$itemUpdater->handleChange( $change );
+
+			// The following code is a temporary hack to invalidate the cache.
+			// TODO: create cache invalidater that works with all clients for this cluster
+
+			if ( $mainType == Item::ENTITY_TYPE ) {
+				/**
+				 * @var Item $item
+				 */
+				$item = $change->getEntity();
+
+				$globalId = 'enwiki';
+
+				$siteLink = $item->getSiteLink( $globalId );
+
+				if ( $siteLink !== null ) {
+					$title = \Title::newFromText( $siteLink->getPage() );
+
+					if ( !is_null( $title ) && $title->getArticleID() !== 0 ) {
+						$title->invalidateCache();
+					}
+				}
+			}
 		}
 
 		return true;

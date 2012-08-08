@@ -14,7 +14,7 @@ use Diff\IDiff as IDiff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffChange extends Change {
+class DiffChange extends ChangeRow {
 
 	/**
 	 * @since 0.1
@@ -53,7 +53,7 @@ class DiffChange extends Change {
 	 */
 	public static function newFromDiff( IDiff $diff, array $fields = null ) {
 		$instance = new static(
-			Changes::singleton(),
+			ChangesTable::singleton(),
 			$fields,
 			true
 		);
