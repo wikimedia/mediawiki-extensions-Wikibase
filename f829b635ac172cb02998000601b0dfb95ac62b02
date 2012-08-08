@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX///ls\u003d",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-08T16:42:30Z",
+      "side": 1,
+      "message": "yes it should. It defines how a list of SiteLink objects will be represented in a diff. This is not an implementation detail, because it is exposed by the structure of the diff itself. \n\nIn any case, we should have a single utility function for this serialization. Could be moved elsewhere, but it should exist and iot should be public.",
+      "parentUuid": "AAAARX///zw\u003d",
+      "revId": "f829b635ac172cb02998000601b0dfb95ac62b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX///zs\u003d",
         "filename": "lib/tests/phpunit/entity/ItemDiffTest.php",
         "patchSetId": 1
