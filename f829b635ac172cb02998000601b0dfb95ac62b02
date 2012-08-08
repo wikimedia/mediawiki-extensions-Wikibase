@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX///lA\u003d",
+        "filename": "lib/includes/item/ItemDiff.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-08T16:49:11Z",
+      "side": 1,
+      "message": "It is exposed by the structured of the diff itself??\n\nSeems like this is exposing the structure :)\n\nMaking this public so you can use it in the test of newFromItems also makes little sense - imagine there is a bug in siteLinksToArray, you\u0027d not catch it in the test.",
+      "parentUuid": "AAAARX///ls\u003d",
+      "revId": "f829b635ac172cb02998000601b0dfb95ac62b02",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX///zs\u003d",
         "filename": "lib/tests/phpunit/entity/ItemDiffTest.php",
         "patchSetId": 1
