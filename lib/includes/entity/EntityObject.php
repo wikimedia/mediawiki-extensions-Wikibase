@@ -16,6 +16,12 @@ namespace Wikibase;
  */
 abstract class EntityObject implements Entity {
 
+	public static $typeMap = array(
+		Item::ENTITY_TYPE => '\Wikibase\ItemObject',
+		Property::ENTITY_TYPE => '\Wikibase\PropertyObject',
+		Query::ENTITY_TYPE => '\Wikibase\QueryObject'
+	);
+
 	/**
 	 * @since 0.1
 	 * @var array
@@ -387,6 +393,5 @@ abstract class EntityObject implements Entity {
 		// FIXME: awareness of internal entity structure in diff code where it can be avoided (and is already in EntityDiff)
 		return $newerEntity->getDiff( $olderEntity )->getApplicableDiff( $this->toArray() );
 	}
-
 
 }

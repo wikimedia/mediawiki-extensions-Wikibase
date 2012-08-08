@@ -226,10 +226,10 @@ final class RepoHooks {
 			$newItem = $article->getContent()->getItem();
 
 			if ( is_null( $revision->getParentId() ) ) {
-				$change = ItemCreation::newFromItem( $newItem );
+				$change = EntityCreation::newFromEntity( $newItem );
 			}
 			else {
-				$change = ItemChange::newFromItems(
+				$change = EntityChange::newFromEntities(
 					Revision::newFromId( $revision->getParentId() )->getContent()->getItem(),
 					$newItem
 				);
