@@ -21,7 +21,7 @@ describe "Check functionality of STTL language switcher" do
       on_page(LanguageSelectorPage) do |page|
         page.sttlLinkDe
         page.wait_for_item_to_load
-        page.editLabelLink
+        #page.editLabelLink
         page.labelInputField_element.clear
         page.labelInputField = label_de
         page.saveLabelLink
