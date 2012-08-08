@@ -36,6 +36,42 @@
     },
     {
       "key": {
+        "uuid": "AAAARX///1s\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-08T09:37:12Z",
+      "side": 1,
+      "message": "\"sitelinks/url\" is an variation of \"sitelinks\", like \"sitelinks with url\". There seems to be possible to do this in a more generic way, that is there are also variations on labels and descriptions, but that needs more thought.",
+      "parentUuid": "AAAARH///jo\u003d",
+      "revId": "29d2ce3da83599cf705ee73ef3eff254e415b00e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///10\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-08T09:37:12Z",
+      "side": 1,
+      "message": "Good idea",
+      "parentUuid": "AAAARH///j4\u003d",
+      "revId": "29d2ce3da83599cf705ee73ef3eff254e415b00e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARH///jw\u003d",
         "filename": "repo/includes/api/ApiGetItems.php",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2012-08-03T15:47:16Z",
       "side": 1,
       "message": "map not needed if you simply unset above, see comment on line 85.",
+      "revId": "29d2ce3da83599cf705ee73ef3eff254e415b00e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX///1w\u003d",
+        "filename": "repo/includes/api/ApiGetItems.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-08T09:37:12Z",
+      "side": 1,
+      "message": "Good getting rid of it, its slow.. Not pesky slow, just slow.",
+      "parentUuid": "AAAARH///jw\u003d",
       "revId": "29d2ce3da83599cf705ee73ef3eff254e415b00e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
