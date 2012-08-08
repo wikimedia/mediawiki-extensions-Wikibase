@@ -106,6 +106,7 @@ h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	.wb-error .tipsy-inner {
 		background-color:#FFDFC9;
 		border-color:#B27631;
+		background-image: none; /* prevent propagation of background image */
 	}
 
 		.wb-tooltip-error-top-message {
