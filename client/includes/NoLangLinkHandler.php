@@ -8,7 +8,7 @@ use \Wikibase\LangLinkHandler as LangLinkHandler;
  *
  * @since 0.1
  *
- * @file WBCNoLangLinkHandler.php
+ * @file NoLangLinkHandler.php
  * @ingroup WikibaseClient
  *
  * @licence	GNU GPL v2+
@@ -22,7 +22,7 @@ class NoLangLinkHandler {
 	 * @return bool
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
-		$parser->setFunctionHook( 'noexternalinterlang', 'self::noExternalInterlang', SFH_NO_HASH );
+		$parser->setFunctionHook( 'noexternalinterlang', '\Wikibase\NoLangLinkHandler::noExternalInterlang', SFH_NO_HASH );
 		return true;
 	}
 

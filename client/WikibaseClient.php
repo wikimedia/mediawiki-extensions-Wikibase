@@ -46,26 +46,26 @@ $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php'
 $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
 
 // Autoloading
-$wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
+$wgAutoloadClasses['Wikibase\ClientHooks'] 		= $dir . 'WikibaseClient.hooks.php';
 
-$wgAutoloadClasses['Wikibase\ItemUpdater'] 			= $dir . 'includes/ItemUpdater.php';
-$wgAutoloadClasses['Wikibase\LocalItem'] 			= $dir . 'includes/LocalItem.php';
+$wgAutoloadClasses['Wikibase\ItemUpdater'] 		= $dir . 'includes/ItemUpdater.php';
+$wgAutoloadClasses['Wikibase\LocalItem'] 		= $dir . 'includes/LocalItem.php';
 $wgAutoloadClasses['Wikibase\LocalItemsTable'] 		= $dir . 'includes/LocalItemsTable.php';
-$wgAutoloadClasses['Wikibase\LangLinkHandler'] 			= $dir . 'includes/LangLinkHandler.php';
-$wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 			= $dir . 'includes/NoLangLinkHandler.php';
-$wgAutoloadClasses['Wikibase\SkinHandler'] 				= $dir . 'includes/SkinHandler.php';
+$wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
+$wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
+$wgAutoloadClasses['Wikibase\SkinHandler'] 		= $dir . 'includes/SkinHandler.php';
 
 // Hooks
-$wgHooks['UnitTestsList'][] 						= '\Wikibase\ClientHooks::registerUnitTests';
-$wgHooks['WikibasePollHandle'][]					= '\Wikibase\ClientHooks::onWikibasePollHandle';
-$wgHooks['LoadExtensionSchemaUpdates'][] 			= '\Wikibase\ClientHooks::onSchemaUpdate';
-$wgHooks['WikibaseDefaultSettings'][] 			    = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
-$wgHooks['ParserAfterParse'][] 			    		= '\Wikibase\ClientHooks::onParserAfterParse';
-$wgHooks['ParserFirstCallInit'][]					= '\Wikibase\NoLangLinkHandler::onParserFirstCallInit';
-$wgHooks['MagicWordwgVariableIDs'][]				= '\Wikibase\NoLangLinkHandler::onMagicWordwgVariableIDs';
-$wgHooks['ParserGetVariableValueSwitch'][]			= '\Wikibase\NoLangLinkHandler::onParserGetVariableValueSwitch';
+$wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
+$wgHooks['WikibasePollHandle'][]			= '\Wikibase\ClientHooks::onWikibasePollHandle';
+$wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
+$wgHooks['WikibaseDefaultSettings'][]			= '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
+$wgHooks['ParserAfterParse'][]				= '\Wikibase\ClientHooks::onParserAfterParse';
+$wgHooks['ParserFirstCallInit'][]			= '\Wikibase\NoLangLinkHandler::onParserFirstCallInit';
+$wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\NoLangLinkHandler::onMagicWordwgVariableIDs';
+$wgHooks['ParserGetVariableValueSwitch'][]		= '\Wikibase\NoLangLinkHandler::onParserGetVariableValueSwitch';
 $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= '\Wikibase\SkinHandler::onSkinTemplateOutputPageBeforeExec';
-$wgHooks['BeforePageDisplay'][]						= '\Wikibase\SkinHandler::onBeforePageDisplay';
+$wgHooks['BeforePageDisplay'][]				= '\Wikibase\SkinHandler::onBeforePageDisplay';
 
 
 // Resource loader modules

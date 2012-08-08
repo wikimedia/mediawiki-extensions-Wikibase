@@ -2,7 +2,9 @@
 
 namespace Wikibase;
 use Http, Parser, ParserOutput;
+use \Wikibase\LocalItemsTable as LocalItemsTable;
 use \Wikibase\Settings as Settings;
+use \Wikibase\Sites as Sites;
 
 /**
  * Handles language links.
@@ -20,65 +22,112 @@ class LangLinkHandler {
 	protected static $sort_order = false;
 	protected static $langlinksset = false;
 
-	# todo: this is hackish, is this the best hook to use?
-	public static function onParserBeforeTidy( Parser &$parser, &$text ) {
-		if ( ! self::$langlinksset ) {
-			if ( self::addLangLinks( $parser, $text ) ) {
-                        	self::$langlinksset = true;
-                	}
+        /**
+         * Fetches a links from the local items table
+         *
+         * @since 0.1
+         *
+         * @param Parser $parser
+         * @return array a list of SiteLink objects|false
+         */
+	public function getLocalItemLinks( Parser $parser ) {
+                $parserOutput = $parser->getOutput();
+
+                $localItem = LocalItemsTable::singleton()->selectRow( null, array( 'page_title' => $parser->getTitle()->getDBkey() ) );
+
+                if ( $localItem !== false ) {
+                        /**
+                         * @var LocalItem $localItem
+                         * @var SiteLink $link
+                         */
+			return $localItem->getItem()->getSiteLinks();
+
+                }
+
+		return false;
+	}
+
+	/**
+	 * Shall a page have interwiki links in the sidebar?
+	 *
+	 * @since 0.1
+	 *
+	 * @param Parser $parser
+	 * @return true|false
+	 */
+	public function doInterwikiLinks( Parser $parser ) {
+		if ( $parser->getOptions()->getInterfaceMessage() ) {
+			return false;
 		}
 		return true;
 	}
 
-	protected static function addLangLinks( Parser &$parser, &$text ) {
-		global $wgLanguageCode;
-
-		// If this is an interface message, we don't do anything.
-		if( $parser->getOptions()->getInterfaceMessage() ) {
-			return true;
-		}
-
+	/**
+	 * Shall a page have interwiki links from Wikidata repo?
+	 *
+	 * @since 0.1
+	 *
+	 * @param Parser $parser
+	 * @return true|false
+	 */
+	public function useRepoLinks( Parser $parser ) {
 		// If we don't support the namespace, we maybe sort the links, but don't do anything else.
-		$title = $parser->getTitle();
-		if( !in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
-			self::maybeSortLinks( $parser->getOutput()->getLanguageLinks() );
-			return true;
+                $title = $parser->getTitle();
+                if( !in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+			return false;
 		}
 
-		// If all the languages are suppressed, we do the same.
+		return true;
+	}
+
+	/**
+	 * Suppress specific repo interwiki links
+	 *
+	 * @since 0.1
+	 *
+	 * @param Parser $parser
+	 * @param array $repoLinks - array of \Wikibase\SiteLink objects
+	 *
+	 * @return true
+	 */
+	public function suppressRepoLinks( Parser $parser, &$repoLinks ) {
 		$out = $parser->getOutput();
-		$nei = self::getNoExternalInterlang( $out );
+		$nei = self::getNoExternalInterlang( $parser->getOutput() );
+
 		if( array_key_exists( '*', $nei ) ) {
-			self::maybeSortLinks( $out->getLanguageLinks() );
-			return true;
-		}
+			$repoLinks = array();
+		} else if ( is_array( $repoLinks ) && is_array( $nei ) ) {
+			$siteLinksRemove = array();
 
-		// Here we finally get the links...
-		// NOTE: Instead of getFullText(), we need to get a normalized title, and the server should use a locale-aware normalization function yet to be written which has the same output
-		$title_text = $title->getFullText();
-		
-		$links = self::getLinks( $title_text );
+			// TODO: hackish until we have a way of knowing site group
+			$sitesuffix = 'wiki';
 
-		// Always remove the link to the site language.
-		// TODO: Commons/Wikispecies should be handled here.
-		unset( $links[$wgLanguageCode] );
-
-		if ( is_array( $links ) && is_array( $nei ) ) {
 			// Remove the links specified by noexternalinterlang parser function.
-			$links = array_diff_key( $links, $nei );
-
-			// Pack the links properly into mLanguageLinks.
-			$old_links = $out->getLanguageLinks();
-			foreach( $links as $link ) {
-				$new_link = $link['site'] . ':' . $link['title'];
-				if( !in_array( $new_link, $old_links ) ) {
-					$out->addLanguageLink( $new_link );
-				}
+			foreach( array_keys( $nei ) as $code ) {
+				array_push( $siteLinksRemove, SiteLink::newFromText( $code . $sitesuffix, $parser->getTitle()->mDbkeyform ) );
 			}
 
-			// Sort the links, always.
-			self::sortLinks( $out->getLanguageLinks() );
+			$repoLinks = array_diff( $repoLinks, $siteLinksRemove );
 		}
+
+		return true;
+	}
+
+	/**
+	 * @deprecated
+	 */
+	protected static function addLangLinks( Parser &$parser, &$text ) {
+		// Pack the links properly into mLanguageLinks.
+		$old_links = $out->getLanguageLinks();
+		foreach( $links as $link ) {
+			$new_link = $link['site'] . ':' . $link['title'];
+			if( !in_array( $new_link, $old_links ) ) {
+				$out->addLanguageLink( $new_link );
+			}
+		}
+
+		// Sort the links, always.
+		self::sortLinks( $out->getLanguageLinks() );
 
 		return true;
 	}
@@ -149,13 +198,14 @@ class LangLinkHandler {
 		// Repack the links
 		$item = reset( $api_response['items'] );
 		$links = array();
-        if ( isset( $item['sitelinks'] ) ) {
-            $sitelinks = $item['sitelinks'];
+
+		if ( isset( $item['sitelinks'] ) ) {
+			$sitelinks = $item['sitelinks'];
 			foreach( $sitelinks as $sitelink ) {
 				$site = preg_replace( "/$siteSuffix$/", "", $sitelink['site'] );
 				$links[$site] = array( 'site' => $site, 'title' => $sitelink['title'] );
 			}
-        }
+		}
 
 		return $links;
 	}
@@ -206,7 +256,7 @@ class LangLinkHandler {
 	/**
 	 * Sort an array of links in-place iff alwaysSort option is turned on.
 	 */
-	protected static function maybeSortLinks( &$a ) {
+	public static function maybeSortLinks( &$a ) {
 		if( Settings::get( 'alwaysSort' ) ) {
 			self::sortLinks( $a );
 		}
