@@ -1,20 +1,30 @@
 <?php
 
-namespace Wikibase; 
-use FormatJSON, Http, Maintenance;
+namespace Wikibase;
+use Http, FormatJSON, Maintenance;
 
 /**
- * @author Katie Filbert
+ * Maintenance script that populates the interwiki table with list of sites 
+ * as exists on Wikipedia, so interwiki links render properly.
+ *
+ * @since 0.1
+ *
+ * @file
+ * @ingroup WikibaseClient
+ *
+ * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  */
+$basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : dirname( __FILE__ ) . '/../../../..';
 
-require_once( dirname( __FILE__ ) . '../../../../../maintenance/Maintenance.php' );
+require_once $basePath . '/maintenance/Maintenance.php';
 
 class PopulateInterwiki extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
 
-				$this->mDescription = <<<TEXT
+		$this->mDescription = <<<TEXT
 This script will populate the interwiki table, pulling in interwiki links 
 that are used on Wikipedia.
 
@@ -27,11 +37,11 @@ TEXT;
 
 	public function execute() {
 		$force = $this->getOption( 'force', false );
-		$data = self::fetchLinks();
-		self::doPopulate( $data, $force );
+		$data = $this->fetchLinks();
+		$this->doPopulate( $data, $force );
 	}
 
-	public function fetchLinks() {
+	protected function fetchLinks() {
 		$url = 'http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&sifilteriw=local&format=json';
 
 		$json = Http::get( $url );
@@ -40,7 +50,7 @@ TEXT;
 		return $data['query']['interwikimap'];
 	}
 
-	public function doPopulate( $data, $force ) {
+	protected function doPopulate( $data, $force ) {
 		$dbw = wfGetDB( DB_MASTER );
 
 		if ( !$force ) {
@@ -86,5 +96,5 @@ TEXT;
 	}
 }
 
-$maintClass = 'PopulateInterwiki';
+$maintClass = 'Wikibase\PopulateInterwiki';
 require_once( RUN_MAINTENANCE_IF_MAIN );
