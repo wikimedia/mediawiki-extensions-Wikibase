@@ -68,7 +68,6 @@ class ApiLanguageAttributeTest extends ApiModifyItemBase {
 		// update the item ----------------------------------------------------------------
 		$req = array(
 			'token' => $this->getItemToken(),
-			'usekeys' => true,
 			'id' => $id,
 			'action' => 'wbsetlanguageattribute',
 			'language' => $langCode,

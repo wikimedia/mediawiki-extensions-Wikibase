@@ -395,10 +395,6 @@ final class RepoHooks {
 				// set to true will always delete empty items
 				'apiDeleteEmpty' => false,
 
-				// Defaults to turn off use of keys
-				// set to true will always return the key form
-				'apiUseKeys' => true,
-
 				// Set API in debug mode
 				// do not turn on in production!
 				'apiInDebug' => false,
@@ -410,7 +406,7 @@ final class RepoHooks {
 				'apiDebugWithRights' => false,
 				'apiDebugWithTokens' => false,
 
-				// Which formats to use with keys when there are a "usekeys" in the URL
+				// Which formats to inject keys into
 				// undefined entries are interpreted as false
 				'formatsWithKeys' => array(
 					'json' => true,
@@ -423,7 +419,6 @@ final class RepoHooks {
 					'xmlfm' => false,
 					'yaml' => true,
 					'yamlfm' => true,
-					'raw' => true,
 					'rawfm' => true,
 					'txtfm' => true,
 					'dbg' => true,

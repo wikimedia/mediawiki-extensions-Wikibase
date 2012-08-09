@@ -212,7 +212,6 @@ class ApiSetItem extends ApiModifyItem {
 
 		$res = $this->getResult();
 
-		$this->setUsekeys( $params );
 		$this->addLabelsToResult( $item->getLabels(), 'item' );
 		$this->addDescriptionsToResult( $item->getDescriptions(), 'item' );
 		$this->addAliasesToResult( $item->getAllAliases(), 'item' );

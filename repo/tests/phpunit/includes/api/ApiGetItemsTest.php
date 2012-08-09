@@ -340,5 +340,60 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 			$this->assertArrayHasKey( 'url', $link );
 		}
 	}
+
+	/**
+	 * @dataProvider providerGetItemFormat
+	 */
+	function testGetItemFormat( $format, $usekeys ) {
+		$this->createItems();
+
+		$item = $this->getItemOutput( 'Berlin' );
+		$id = $item['id'];
+
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbgetitems',
+				'format' => $format,
+				'ids' => $id )
+		);
+
+		$this->assertSuccess( $res, 'items', $id );
+		if ( $usekeys ) {
+			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
+				if ( array_key_exists( $prop, $res['items'][$id] ) ) {
+					foreach ( $res['items'][$id][$prop] as $key => $value ) {
+						$this->assertTrue( is_string( $key ) );
+						if ( $field !== false ) {
+							$this->assertArrayHasKey( $field, $value );
+							$this->assertTrue( is_string( $value[$field] ) );
+							$this->assertEquals( $key, $value[$field] );
+						}
+					}
+				}
+			}
+		}
+		else {
+			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
+				if ( array_key_exists( $prop, $res['items'][$id] ) ) {
+					foreach ( $res['items'][$id][$prop] as $key => $value ) {
+						$this->assertTrue( is_integer( $key ) );
+						if ( $field !== false ) {
+							$this->assertArrayHasKey( $field, $value );
+							$this->assertTrue( is_string( $value[$field] ) );
+						}
+					}
+				}
+			}
+		}
+	}
+
+	function providerGetItemFormat() {
+		$calls = array();
+		foreach ( Settings::get( 'formatsWithKeys' ) as $format => $usekeys) {
+			$calls[] = array( $format, $usekeys );
+		}
+		return $calls;
+	}
+
 }
 

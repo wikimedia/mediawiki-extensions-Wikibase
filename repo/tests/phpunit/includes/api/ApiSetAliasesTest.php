@@ -80,7 +80,6 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 		// update the item ----------------------------------------------------------------
 		$req = array(
 			'token' => $this->getItemToken(),
-			'usekeys' => true,
 			'id' => $id,
 			'action' => 'wbsetaliases',
 			'language' => $langCode,

@@ -79,8 +79,6 @@ class ApiGetItems extends Api {
 
 		$languages = $params['languages'];
 
-		$this->setUsekeys( $params );
-
 		// This really needs a more generic solution as similar tricks will be
 		// done to other props as well, for example variants for the language
 		// attributes. It would also be nice to write something like */urls for
