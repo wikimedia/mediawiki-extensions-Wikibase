@@ -43,36 +43,22 @@ use \Wikibase\Settings as Settings;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class ApiLanguageAttributeTest extends ApiModifyItemBase {
+abstract class ApiLangAttributeBase extends ApiModifyItemBase {
 
-	public function paramProvider() {
-		return array(
-			// $handle, $attr, $langCode, $value, $exception
-			array( 'Oslo', 'label',			'en', 'Oslo', null ),
-			array( 'Oslo', 'description',	'en', 'Back to capitol of Norway', null ),
-			#array( 'Oslo', 'label',			'en', 'Oslo', 'UsageException' ),
-			#array( 'Oslo', 'description',	'en', 'Capitol of Norway', 'UsageException' ),
-			#array( 'Oslo', 'label',			'en', 'Bergen', null ),
-			#array( 'Oslo', 'description',	'en', 'Not capitol of Norway', null ),
-			array( 'Oslo', 'label',	'en', '', null ),
-			array( 'Oslo', 'description',	'en', '', null ),
-		);
-	}
 
 	/**
 	 * @dataProvider paramProvider
 	 */
-	public function testLanguageAttribute( $handle, $attr, $langCode, $value, $exception = null ) {
+	public function doLanguageAttribute( $handle, $action, $attr, $langCode, $value, $exception = null ) {
 		$id = $this->getItemId( $handle );
 
 		// update the item ----------------------------------------------------------------
 		$req = array(
 			'token' => $this->getItemToken(),
-			'usekeys' => true,
 			'id' => $id,
-			'action' => 'wbsetlanguageattribute',
+			'action' => $action,
 			'language' => $langCode,
-			$attr => $value
+			'value' => $value
 		);
 
 		try {
