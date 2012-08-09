@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//+9I\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-09T14:52:23Z",
+      "side": 1,
+      "message": "The arrows are much too small as links. Also, if there is no description, there is no way to distingush the link targets.\n\nI suggest to a) show and link the item ID (maybe only if there is no description - but I prefer to see it always), and b) maybe even link the entire description",
+      "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//++A\u003d",
         "filename": "repo/includes/api/ApiSetItem.php",
         "patchSetId": 4
