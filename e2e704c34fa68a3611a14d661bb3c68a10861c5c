@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//+y4\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-09T18:13:41Z",
+      "side": 1,
+      "message": "This version of the language fallback will use fallback for content language. There is also a version that use the users own language. Both of them have their own quirks. I think we really need a discussion on how the language fallbacks should work.\n\nAfter some back and forth I left more or less the present solution in, but note that there will always be \"something\" now as the id will always be present.",
+      "parentUuid": "AAAARX//+9s\u003d",
+      "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//+9I\u003d",
         "filename": "repo/includes/ItemDisambiguation.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-09T14:52:23Z",
       "side": 1,
       "message": "The arrows are much too small as links. Also, if there is no description, there is no way to distingush the link targets.\n\nI suggest to a) show and link the item ID (maybe only if there is no description - but I prefer to see it always), and b) maybe even link the entire description",
+      "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//+y0\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-09T18:13:41Z",
+      "side": 1,
+      "message": "Replaced it with linking on the q-thingy. I don\u0027t really like any of the options, but linking on the id is better than painting the whole page blue. I think we should figure out a better solution.",
+      "parentUuid": "AAAARX//+9I\u003d",
       "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//+yw\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-09T18:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARX//++A\u003d",
+      "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//+94\u003d",
         "filename": "repo/includes/specials/SpecialItemByLabel.php",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2012-08-09T14:43:10Z",
       "side": 1,
       "message": "don\u0027t use the description. don\u0027t tempt people to try to identify an item using language/label/description - it may be unique, but it\u0027s not stable enough. \n\nThis also means that we *always* show a discambiguation page as a result, even if only one page exists with the given language/label",
+      "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//+ys\u003d",
+        "filename": "repo/includes/specials/SpecialItemByLabel.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-09T18:13:41Z",
+      "side": 1,
+      "message": "Always shown on first post, later a POST from the form will hit the page if there is a single hit.",
+      "parentUuid": "AAAARX//+94\u003d",
       "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
