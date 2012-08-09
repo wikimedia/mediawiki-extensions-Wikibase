@@ -247,9 +247,12 @@ $messages['nn'] = array(
 
 /** Portuguese (português)
  * @author Malafaya
+ * @author SandroHc
  */
 $messages['pt'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
+	'wbc-editlinks' => 'Editar links',
+	'wbc-editlinkstitle' => 'Editar links interlínguas',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -259,6 +262,14 @@ $messages['pt-br'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
 	'wbc-editlinks' => 'Editar links',
 	'wbc-editlinkstitle' => 'Editar links interlíngua',
+);
+
+/** Romanian (română)
+ * @author Stelistcristi
+ */
+$messages['ro'] = array(
+	'wbc-editlinks' => 'Editează legăturile',
+	'wbc-editlinkstitle' => 'Editează legăturile interlingvistice',
 );
 
 /** Russian (русский)
