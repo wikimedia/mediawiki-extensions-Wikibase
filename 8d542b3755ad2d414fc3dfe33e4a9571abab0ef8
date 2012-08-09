@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX///G4\u003d",
+        "filename": "client/includes/SortUtils.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 110
+      },
+      "writtenOn": "2012-08-09T08:43:43Z",
+      "side": 1,
+      "message": "Tab inside the line",
+      "revId": "8d542b3755ad2d414fc3dfe33e4a9571abab0ef8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
