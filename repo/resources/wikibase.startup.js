@@ -116,7 +116,7 @@
 			$( wikibase ).triggerHandler( 'blockItemPageActions' );
 		}
 
-		if( !mw.config.get( 'wbEnableEdit' ) ) {
+		if( !mw.config.get( 'wbIsEditView' ) ) {
 			// no need to implement a 'disableItemPageActions' since hiding all the toolbars directly like this is
 			// not really worse than hacking the Toolbar prototype to achieve this:
 			$( '.wb-ui-propertyedittool .wb-ui-toolbar' ).hide();
