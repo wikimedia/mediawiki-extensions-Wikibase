@@ -201,6 +201,22 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	},
 
 	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface
+	 *
+	 * @return bool will return false if edit mode is active already
+	 */
+	startEditing: function() {
+		var inEditMode = !wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.startEditing.call( this );
+		if ( inEditMode ) {
+			return false;
+		} else {
+			// put keyboard focus on input element to be able to create a new list item directly
+			this._getTagadata().getHelperTag().find( 'input' ).focus();
+			return true;
+		}
+	},
+
+	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.valueCompare
 	 *
 	 * Compares all values of the two lists, normalizes the lists first. This means the values can be in random and
