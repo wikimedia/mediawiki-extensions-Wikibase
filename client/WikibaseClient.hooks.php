@@ -125,17 +125,18 @@ final class ClientHooks {
 		$parserOutput = $parser->getOutput();
 
 		if ( LangLinkHandler::doInterWikiLinks( $parser ) && LangLinkHandler::useRepoLinks( $parser ) ) {
-			$repolinks = LangLinkHandler::getLocalItemLinks( $parser );
-			LangLinkHandler::suppressRepoLinks( $parser, $repolinks );
+			if ( $repolinks = LangLinkHandler::getLocalItemLinks( $parser ) ) {
+				LangLinkHandler::suppressRepoLinks( $parser, $repolinks );
 
-			foreach ( $repolinks as $link ) {
-				// TODO: know that this site is in the wikipedia group and get links for only this group
-				// TODO: hold into account wiki-wide and page-specific settings to do the merge rather then just overriding.
-				$localkey = $link->getSite()->getField( 'local_key' );
+				foreach ( $repolinks as $link ) {
+					// TODO: know that this site is in the wikipedia group and get links for only this group
+					// TODO: hold into account wiki-wide and page-specific settings to do the merge rather then just overriding.
+					$localkey = $link->getSite()->getField( 'local_key' );
 
-				// unset self referencing interwiki link
-				if ( $localkey != $wgLanguageCode ) {
-					$parserOutput->addLanguageLink( $localkey . ':' . $link->getPage() );
+					// unset self referencing interwiki link
+					if ( $localkey != $wgLanguageCode ) {
+						$parserOutput->addLanguageLink( $localkey . ':' . $link->getPage() );
+					}
 				}
 			}
 		}
