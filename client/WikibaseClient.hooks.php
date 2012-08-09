@@ -3,6 +3,7 @@
 namespace Wikibase;
 use DatabaseUpdater;
 use \Wikibase\LangLinkHandler as LangLinkHandler;
+use \Wikibase\SortUtils as SortUtils;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -139,7 +140,7 @@ final class ClientHooks {
 			}
 		}
 
-		LangLinkHandler::maybeSortLinks( $parserOutput->getLanguageLinks() );
+		SortUtils::maybeSortLinks( $parserOutput->getLanguageLinks() );
 
 		return true;
 	}

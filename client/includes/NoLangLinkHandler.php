@@ -11,8 +11,8 @@ use \Wikibase\LangLinkHandler as LangLinkHandler;
  * @file NoLangLinkHandler.php
  * @ingroup WikibaseClient
  *
- * @licence	GNU GPL v2+
- * @author	Nikola Smolenski <smolensk@eunet.rs>
+ * @licence GNU GPL v2+
+ * @author Nikola Smolenski <smolensk@eunet.rs>
  */
 class NoLangLinkHandler {
 
