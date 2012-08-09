@@ -35,25 +35,74 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
-		if ( $this->subPage === '' ) {
-			// TODO: display a message that the user needs to specify site+title and possibly some fancy input UI
-		}
+		// Setup
+		$request = $this->getRequest();
+		$parts = ( $this->subPage === '' ) ? array() : explode( '/', $this->subPage, 2 );
+		$siteId = $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' );
+		$page = $request->getVal( 'page', isset( $parts[1] ) ? $parts[1] : '' );
+		$itemContent = null;
 
-		$parts = explode( '/', $this->subPage, 2 );
-
-		if ( count( $parts ) == 2 ) {
-			$item = Wikibase\ItemContent::getFromSiteLink( $parts[0], $parts[1] );
-
-			if ( is_null( $item ) ) {
-				// TODO: display a message that the item does not exist and possibly some fancy input UI
-			}
-			else {
-				$this->displayItem( $item );
+		// Create an item view
+		if ( isset( $siteId ) && isset( $page ) ) {
+			$itemContent = \Wikibase\ItemHandler::singleton()->getFromSiteLink( $siteId, $page );
+			if ( $itemContent !== null ) {
+				$this->displayItem( $itemContent );
 			}
 		}
-		else {
-			// TODO: display a message that the user needs to provide the title and possibly some fancy input UI
+
+		// If there is no item content post the switch form
+		if ( $itemContent === null ) {
+			$this->switchForm( $siteId, $page );
 		}
+	}
+
+	/**
+	 * Output a form to allow searching for a page
+	 *
+	 * @since 0.1
+	 *
+	 * @param string|null $site
+	 * @param string|null $page
+	 */
+	protected function switchForm( $siteId, $page ) {
+		global $wgScript;
+
+		$validSite = \Wikibase\Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA )->hasGlobalId( $siteId );
+
+		if ( isset( $siteId ) || isset( $page ) ) {
+			$this->getOutput()->addHTML(
+				Html::openElement( 'div' )
+				. $this->msg( $validSite ? 'wikibase-itembytitle-nothing-found' : 'wikibase-itembytitle-invalid-site' )
+					->params( htmlspecialchars( $siteId ), htmlspecialchars( $page ) )
+					->parse()
+				. Html::closeElement( 'div' )
+			);
+		}
+		$this->getOutput()->addHTML(
+			Html::openElement( 'form', array( 'method' => 'post', 'action' => $wgScript, 'name' => 'itembytitle', 'id' => 'mw-itembytitle-form1' ) )
+			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
+			. Xml::fieldset( $this->msg( 'wikibase-itembytitle-lookup-fieldset' )->text() )
+			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-site' )->text(), 'site', 'sitename', 12, $siteId ? htmlspecialchars( $siteId ) : '' )
+			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-page' )->text(), 'page', 'pagename', 36, $page ? htmlspecialchars( $page ) : '' )
+			. Xml::submitButton( $this->msg( 'wikibase-itembytitle-submit' )->text() )
+			. Html::closeElement( 'fieldset' )
+			. Html::closeElement( 'form' )
+		);
+		$this->getOutput()->addHTML(
+			Html::openElement( 'div' )
+			. $this->msg( 'wikibase-itembytitle-description' )->text()
+			. Html::closeElement( 'div' )
+		);
+		if ( $validSite && isset( $page ) ) {
+			$this->getOutput()->addHTML(
+				Html::openElement( 'div' )
+				. $this->msg( 'wikibase-itembytitle-create' )
+					->params( $siteId ? htmlspecialchars( $siteId ) : '', htmlspecialchars( $page ) )
+					->parse()
+				. Html::closeElement( 'div' )
+			);
+		}
+
 	}
 
 }

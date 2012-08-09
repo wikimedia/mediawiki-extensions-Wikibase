@@ -43,9 +43,9 @@ class ItemDisambiguation extends \ContextSource {
 			$this->setContext( $context );
 		}
 
-		if ( count( $this->items ) < 2 ) {
-			throw new MWException( 'Cannot disambiguate less then 2 items!' );
-		}
+		//if ( count( $this->items ) < 2 ) {
+		//	throw new MWException( 'Cannot disambiguate less then 2 items!' );
+		//}
 	}
 
 	/**
@@ -56,19 +56,36 @@ class ItemDisambiguation extends \ContextSource {
 	 * @return string
 	 */
 	public function getHTML() {
+		//global $wgContLang;
 		$langCode = $this->langCode;
 
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
 					function( ItemContent $item ) use ( $langCode ) {
+						global $wgLang;
+						// Figure out which description to use while identifying the item
+						list( $descriptionCode, $descriptionText, $descriptionLang) =
+							\Wikibase\Utils::lookupUserMultilangText(
+								$item->getItem()->getDescriptions(),
+								\Wikibase\Utils::languageChain( $langCode ),
+								array( $langCode, '', \Language::factory( $langCode ) )
+							);
 						return \Html::rawElement(
 							'li',
 							array( 'class' => 'wikibase-disambiguation' ),
 							\Linker::link(
 								$item->getTitle(),
-								htmlspecialchars( $item->getItem()->getDescription( $langCode ) )
+								// FIXME: Need a more general way to figure out the "q" thingy.
+								// This should REALLY be something more elegant, but it is sufficient for now.
+								\Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
+								. wfMessage( 'wikibase-itemlink-id-wrapper' )->params( 'q' . $item->getItem()->getId() )->escaped()
+								. \Html::closeElement( 'span' )
 							)
+							. wfMessage( 'colon-separator' )->escaped()
+							. \Html::openElement( 'span', array( 'class' => 'wb-itemlink-description', 'lang' => $descriptionLang->getCode(), 'dir' => $descriptionLang->getDir() ) )
+							. htmlspecialchars( $descriptionText )
+							. \Html::closeElement( 'span' )
 						);
 					},
 					$this->items
