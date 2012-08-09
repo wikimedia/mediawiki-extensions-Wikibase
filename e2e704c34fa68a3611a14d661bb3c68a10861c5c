@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//+9s\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-09T14:43:10Z",
+      "side": 1,
+      "message": "the preferred language for the description should be the label\u0027s language. only if that doesn\u0027t exist, do a user-language based fallback.\n\nOr maybe... what if I look up labels in a language I don\u0027t speak? The I\u0027d appreciate descriptions in my own language. \n\nWell... needs more thought. My suggestion is to use the label\u0027s language for now and schedule a discussion on the details.",
+      "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//++A\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-09T14:43:10Z",
+      "side": 1,
+      "message": "unused, please remove",
+      "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//+94\u003d",
+        "filename": "repo/includes/specials/SpecialItemByLabel.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-09T14:43:10Z",
+      "side": 1,
+      "message": "don\u0027t use the description. don\u0027t tempt people to try to identify an item using language/label/description - it may be unique, but it\u0027s not stable enough. \n\nThis also means that we *always* show a discambiguation page as a result, even if only one page exists with the given language/label",
+      "revId": "e2e704c34fa68a3611a14d661bb3c68a10861c5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
