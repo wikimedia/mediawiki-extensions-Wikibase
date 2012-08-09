@@ -3,11 +3,15 @@ Browser testing for Wikibase
 == Setup ==
 
 You need to install Ruby and RubyGems (>=1.3.6)
-Then run
-(1) "(sudo) gem install bundler" to install bundler
-(2) "bundle" in the /tests/selenium/ directory to install all necessary gems
+Then:
+(1) run "(sudo) gem install bundler" to install bundler
+(2) WINDOWS ONLY: install DevKit
+	2.1 Download DevKit from http://rubyinstaller.org/downloads
+	2.2 Unzip it to C:\devkit
+	2.3 Run "ruby dk.rb init" and finally "ruby dk.rb install"
+(2) run "bundle" in the /tests/selenium/ directory to install all necessary gems
 
-Rename "configuration.yml.sample" to "configuration.yml" and
+Copy "configuration.yml.sample", rename it to "configuration.yml" and
 set configuration parameters to your needs before running the tests!
 
 == Prerequisites for the MW instance you want to test ==
@@ -27,6 +31,12 @@ set configuration parameters to your needs before running the tests!
 * Firefox (if installed) should work out of the box.
   For other browsers you should check the corresponding Webdriver on
   http://code.google.com/p/selenium/w/list
+  See also:
+  http://code.google.com/p/selenium/wiki/OperaDriver
+  http://code.google.com/p/selenium/wiki/InternetExplorerDriver
+  http://code.google.com/p/selenium/wiki/SafariDriver
+  http://code.google.com/p/selenium/wiki/FirefoxDriver
+  http://code.google.com/p/selenium/wiki/ChromeDriver
 
 == Running the tests remotely via Selenium Grid2 ==
 
