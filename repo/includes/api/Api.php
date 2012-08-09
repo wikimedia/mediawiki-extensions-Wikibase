@@ -16,27 +16,19 @@ use User, Status, ApiBase;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 abstract class Api extends \ApiBase {
+
 	/**
-	 * Var to keep the set status for later use
-	 * @var bool how to handle the keys
-	 */
-	protected $usekeys = false;
-	
-	/**
-	 * Sets the usekeys-state for later use (and misuse)
+	 * Figure out the usekeys-state
 	 *
-	 * @param $params array parameters requested in subclass
+	 * @return bool true if the keys should be present
 	 */
-	protected function setUsekeys( array $params ) {
-		$usekeys = Settings::get( 'apiUseKeys' ) || ( isset( $params['usekeys'] ) ? $params['usekeys'] : false );
-
-		if ( $usekeys ) {
-			$format = $this->getMain()->getRequest()->getVal( 'format' );
+	protected function getUsekeys() {
+		static $withkeys = false;
+		if ( $withkeys === false ) {
 			$withkeys = Settings::get( 'formatsWithKeys' );
-			$usekeys = isset( $format ) && isset( $withkeys[$format] ) ? $withkeys[$format] : false;
 		}
-
-		$this->usekeys = $usekeys;
+		$format = $this->getMain()->getRequest()->getVal( 'format' );
+		return ( isset( $format ) && isset( $withkeys[$format] ) ) ? $withkeys[$format] : false ;
 	}
 
 	/**
@@ -52,41 +44,23 @@ abstract class Api extends \ApiBase {
 	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
-		$descriptions = array(
+		return array(
 			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
 				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
 			),
 		);
-		if ( Settings::get( 'apiUseKeys' ) ) {
-			$descriptions['nousekeys'] = array( 'Turn off use the keys. The use of keys are only used in formats that supports them,',
-				'otherwise fall back to the ordinary style which is to use keys.'
-			);
-		}
-		else {
-			$descriptions['usekeys'] = array( 'Turn on use the keys. The use of keys are only used in formats that supports them,',
-				'otherwise fall back to the ordinary style which is to use keys.'
-			);
-		}
-		return $descriptions;
 	}
 
 	/**
 	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
-		$allowedParams = array(
+		return array(
 			'gettoken' => array(
 				ApiBase::PARAM_TYPE => 'boolean',
 				ApiBase::PARAM_DFLT => false
 			),
 		);
-		if ( Settings::get( 'apiUseKeys' ) ) {
-			$allowedParams['nousekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
-		}
-		else {
-			$allowedParams['usekeys'] = array( \ApiBase::PARAM_TYPE => 'boolean' );
-		}
-		return $allowedParams;
 	}
 
 	/**
@@ -131,7 +105,7 @@ abstract class Api extends \ApiBase {
 	protected function addAliasesToResult( array $aliases, $path, $name = 'aliases', $tag = 'alias' ) {
 		$value = array();
 
-		if ( $this->usekeys ) {
+		if ( $this->getUsekeys() ) {
 			foreach ( $aliases as $languageCode => $alarr ) {
 				$arr = array();
 				foreach ( $alarr as $alias ) {
@@ -155,7 +129,7 @@ abstract class Api extends \ApiBase {
 		}
 
 		if ( $value !== array() ) {
-			if (!$this->usekeys) {
+			if ( !$this->getUsekeys() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 			$this->getResult()->addValue( $path, $name, $value );
@@ -202,12 +176,12 @@ abstract class Api extends \ApiBase {
 				}
 			}
 
-			$key = $this->usekeys ? $link->getSiteID() : $idx++;
+			$key = $this->getUsekeys() ? $link->getSiteID() : $idx++;
 			$value[$key] = $response;
 		}
 
 		if ( $value !== array() ) {
-			if ( !$this->usekeys ) {
+			if ( !$this->getUsekeys() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 
@@ -233,13 +207,13 @@ abstract class Api extends \ApiBase {
 
 		foreach ( $descriptions as $languageCode => $description ) {
 			if ( $description === '' ) {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
+				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
 					'language' => $languageCode,
 					'removed' => '',
 				);
 			}
 			else {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
+				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
 					'language' => $languageCode,
 					'value' => $description,
 				);
@@ -247,7 +221,7 @@ abstract class Api extends \ApiBase {
 		}
 
 		if ( $value !== array() ) {
-			if (!$this->usekeys) {
+			if ( !$this->getUsekeys() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 			$this->getResult()->addValue( $path, $name, $value );
@@ -272,13 +246,13 @@ abstract class Api extends \ApiBase {
 
 		foreach ( $labels as $languageCode => $label ) {
 			if ( $label === '' ) {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
+				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
 					'language' => $languageCode,
 					'removed' => '',
 				);
 			}
 			else {
-				$value[$this->usekeys ? $languageCode : $idx++] = array(
+				$value[$this->getUsekeys() ? $languageCode : $idx++] = array(
 					'language' => $languageCode,
 					'value' => $label,
 				);
@@ -286,7 +260,7 @@ abstract class Api extends \ApiBase {
 		}
 
 		if ( $value !== array() ) {
-			if (!$this->usekeys) {
+			if ( !$this->getUsekeys() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
 			$this->getResult()->addValue( $path, $name, $value );
