@@ -201,18 +201,20 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface
-	 *
-	 * @return bool will return false if edit mode is active already
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.setFocus
 	 */
-	startEditing: function() {
-		var inEditMode = !wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.startEditing.call( this );
-		if ( inEditMode ) {
-			return false;
-		} else {
-			// put keyboard focus on input element to be able to create a new list item directly
+	setFocus: function() {
+		if( this._getTagadata() !== null ) {
 			this._getTagadata().getHelperTag().find( 'input' ).focus();
-			return true;
+		}
+	},
+
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.removeFocus
+	 */
+	removeFocus: function() {
+		if( this._getTagadata() !== null ) {
+			this._getTagadata().getHelperTag().find( 'input' ).blur();
 		}
 	},
 
