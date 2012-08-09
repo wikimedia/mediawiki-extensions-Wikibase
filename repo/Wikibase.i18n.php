@@ -156,7 +156,7 @@ You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAME
 	'wikibase-item-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Addd and removed [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
 
 	// these will be removed later
 	'wikibase-item-summary-wbsetlanguageattribute-label' => 'Changed [$2] label',
