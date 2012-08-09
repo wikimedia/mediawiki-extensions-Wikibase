@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//++4\u003d",
+        "filename": "lib/includes/snak/SimpleValueSnak.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-09T14:15:01Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "AAAAQ3//7tQ\u003d",
+      "revId": "e185d8884be565b771a4f6e8b30c3f7f40a29f23",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAQ3//8fc\u003d",
         "filename": "lib/includes/snak/SimpleValueSnak.php",
         "patchSetId": 1
