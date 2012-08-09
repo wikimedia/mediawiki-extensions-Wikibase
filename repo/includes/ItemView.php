@@ -160,6 +160,7 @@ class ItemView extends \ContextSource {
 
 	protected function makeParserOptions( ) {
 		$options = ParserOptions::newFromContext( $this );
+		$options->setEditSection( false ); //NOTE: editing is disabled per default
 		return $options;
 	}
 
@@ -257,8 +258,8 @@ class ItemView extends \ContextSource {
 		$out->setPageTitle( $pout->getTitleText() );
 
 		// register JS stuff
-		$editable = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
-		self::registerJsConfigVars( $out, $item, $langCode, $editable );
+		$editableView = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
+		self::registerJsConfigVars( $out, $item, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
 
 		$out->addParserOutput( $pout );
 		return $pout;
@@ -270,21 +271,23 @@ class ItemView extends \ContextSource {
 	 *
 	 * @static
 	 *
-	 * @param OutputPage $out the OutputPage to add to
-	 * @param ItemContent       $item the item for which we want to add the JS config
+	 * @param OutputPage   $out the OutputPage to add to
+	 * @param ItemContent  $item the item for which we want to add the JS config
 	 * @param String     $langCode the language used for showing the item.
-	 * @param bool       $editable whether the item should be editable. Note that this may be overridden to false
-	 *                   based on uiser permissions.
+	 * @param bool       $editableView whether items on this page should be editable.
+	 *                                 This is independent of user permissions.
 	 *
 	 * @todo: fixme: currently, only one item can be shown per page, because the item id is in a global JS config variable.
 	 */
-	public static function registerJsConfigVars( OutputPage $out, ItemContent $item, $langCode, $editable = false  ) {
+	public static function registerJsConfigVars( OutputPage $out, ItemContent $item, $langCode, $editableView = false  ) {
 		global $wgUser;
 
-		// tell JS whether the user can edit
-		$editable = ( $editable && $item->userCanEdit( $wgUser, false ) );
+		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
+		$out->addJsConfigVars( 'wbUserIsBlocked', $wgUser->isBlockedFrom( $item->getTitle() ) ); //NOTE: deprecated
 
-		$out->addJsConfigVars( 'wbEnableEdit', $editable ); //NOTE: use this to toggle edit mode!
+		// tell JS whether the user can edit
+		$out->addJsConfigVars( 'wbUserCanEdit', $item->userCanEdit( $wgUser, false ) ); //TODO: make this a per-item info
+		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
 		// hand over the itemId to JS
 		$out->addJsConfigVars( 'wbItemId', $item->getItem()->getId() );

@@ -36,7 +36,10 @@ class SpecialCreateItem extends SpecialWikibasePage {
 		$this->checkPermissions();
 		$this->outputHeader();
 
+		$options = ParserOptions::newFromContext( $this->getContext() );
+		$options->setEditSection( true ); //NOTE: editing must be enabled
+
 		$view = new Wikibase\ItemView( $this->getContext() );
-		$view->render( Wikibase\ItemContent::newEmpty() );
+		$view->render( Wikibase\ItemContent::newEmpty(), $this->getOutput(), $options );
 	}
 }
