@@ -10,7 +10,7 @@ require 'ruby_selenium'
 
 class NewItemPage < ItemPage
   include PageObject
-  page_url WIKI_URL + "index.php/Special:CreateItem"
+  page_url WIKI_REPO_URL + "index.php/Special:CreateItem"
 
   @@item_url = ""
   @@item_id = ""
