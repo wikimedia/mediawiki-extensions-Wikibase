@@ -30,7 +30,6 @@ class SitelinksItemPage < NewItemPage
   link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
   link(:germanSitelink, :xpath => "//td[@class='wb-sitelinks-link wb-sitelinks-link-de']/a")
   span(:articleTitle, :xpath => "//h1[@id='firstHeading']/span")
-
   def getNumberOfSitelinksFromCounter
     wait_until do
       siteLinkCounter?
@@ -85,6 +84,15 @@ class SitelinksItemPage < NewItemPage
     wait_until do
       sitelinksTable?
     end
+  end
+
+  def add_sitelink(lang_code, article_title)
+    addSitelinkLink
+    self.siteIdInputField= lang_code
+    self.pageInputField= article_title
+    saveSitelinkLink
+    ajax_wait
+    wait_for_api_callback
   end
 
 end
