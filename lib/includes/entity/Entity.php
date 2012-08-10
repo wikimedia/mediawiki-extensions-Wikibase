@@ -236,4 +236,11 @@ interface Entity {
 	 */
 	public function getUndoDiff( Entity $newerEntity, Entity $olderEntity );
 
+	/**
+	 * Clears the structure.
+	 *
+	 * @since 0.1
+	 */
+	public function clear();
+
 }

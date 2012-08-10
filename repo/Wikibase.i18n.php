@@ -138,6 +138,7 @@ $1',
 	'wikibase-api-description-not-found' => 'Cannot find a previous description for this language in the item.',
 	'wikibase-api-wrong-class' => 'The content on the found page is not of correct type.', //'wikibase-api-invalid-contentmodel'
 	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.',
+	'wikibase-api-illegal-field' => 'Illegal field used in call: $1',
 
 	'wikibase-resetold' => 'reset',
 
