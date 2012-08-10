@@ -138,6 +138,7 @@ $1',
 	'wikibase-api-description-not-found' => 'Cannot find a previous description for this language in the item.',
 	'wikibase-api-wrong-class' => 'The content on the found page is not of correct type.', //'wikibase-api-invalid-contentmodel'
 	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.',
+	'wikibase-api-illegal-field' => 'Illegal field used in call: $1',
 
 	'wikibase-resetold' => 'reset',
 
@@ -322,6 +323,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'wikibase-api-session-failure' => 'Sometimes the session fails, usually because of timeouts or because the server of other reasons ends the user session. This leads to an invalid token and the user should then log in again.',
+	'wikibase-api-illegal-field' => 'There is an illegal field name in the props for the module call. This makes the call fail, but the name of failing field will be reported. 
+* $1 is the failing field name',
+
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
 	'wikibase-noitem-nopermission' => 'For some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user does not have sufficient rights to create a new item in this case.',
