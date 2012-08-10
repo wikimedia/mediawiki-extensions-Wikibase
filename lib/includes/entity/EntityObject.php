@@ -352,14 +352,25 @@ abstract class EntityObject implements Entity {
 	 * and migrating or removing elements after changes to the structure are made.
 	 * Should typically be called before using any of the other methods.
 	 *
+	 * @param bool|false $wipeExisting Unconditionally wipe out all data
+	 *
 	 * @since 0.1
 	 */
-	protected function cleanStructure() {
+	protected function cleanStructure( $wipeExisting = false ) {
 		foreach ( array( 'label', 'description', 'aliases' ) as $field ) {
-			if ( !array_key_exists( $field, $this->data ) ) {
+			if ( $wipeExisting || !array_key_exists( $field, $this->data ) ) {
 				$this->data[$field] = array();
 			}
 		}
+	}
+
+	/**
+	 * Clears the structure.
+	 *
+	 * @since 0.1
+	 */
+	public function clear() {
+		self::cleanStructure( true );
 	}
 
 	/**

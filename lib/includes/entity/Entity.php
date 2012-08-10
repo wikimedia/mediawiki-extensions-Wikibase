@@ -245,4 +245,11 @@ interface Entity {
 	 */
 	public function copy();
 
+	/**
+	 * Clears the structure.
+	 *
+	 * @since 0.1
+	 */
+	public function clear();
+
 }
