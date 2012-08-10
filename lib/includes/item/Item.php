@@ -69,5 +69,4 @@ interface Item extends Entity {
 	 * @return Item
 	 */
 	public function copy();
-
 }
