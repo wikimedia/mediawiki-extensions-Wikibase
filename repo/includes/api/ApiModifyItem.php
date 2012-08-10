@@ -175,7 +175,6 @@ abstract class ApiModifyItem extends Api {
 		}
 
 		// FIXME: we can (?) do this before we do permission checks as long as we don't save
-		$this->setUsekeys( $params );
 		$success = $this->modifyItem( $itemContent, $params );
 
 		if ( !$success ) {
