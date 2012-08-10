@@ -9,7 +9,7 @@
 class BlockUserPage
   include PageObject
 
-  page_url WIKI_URL + 'index.php?title=Special:Block'
+  page_url WIKI_REPO_URL + 'index.php?title=Special:Block'
   text_field(:block_username, :id => 'mw-bi-target')
   text_field(:expire_time, :id => 'mw-input-wpExpiry-other')
   button(:block, :class => 'mw-htmlform-submit')
