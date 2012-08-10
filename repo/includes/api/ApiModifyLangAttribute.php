@@ -43,14 +43,8 @@ abstract class ApiModifyLangAttribute extends ApiModifyItem {
 	 */
 	protected function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
-			$this->getModuleName(),
-			array(
-				/* $plural */ 1,
-				$params['language'],
-				( isset( $params['value'] ) && 0<strlen( $params['value'] ) )
-					? 'set'
-					: 'remove'
-			)
+			$this->getModuleName() . '-' . ( ( isset( $params['value'] ) && 0<strlen( $params['value'] ) ) ? 'set' : 'remove' ),
+			array( /* $plural */ 1, $params['language'] )
 		);
 	}
 
