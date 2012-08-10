@@ -148,26 +148,25 @@ to find out where it went, or [[Special:CreateItem|create a new item]]</span>.',
 You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]</span>.',
 
 	// summary and autocomment
-	'wikibase-item-summary-wbsetitem-set' => 'Updated item',
-
+	'wikibase-item-summary-wbsetitem' => 'Created an item for [$2]',
+	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
+	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Removed [$2] description',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Added site-specific [$2] link',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Removed site-specific [$2] link',
-
 	'wikibase-item-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
+
+	// are these used anywhere?
+	'wikibase-item-summary-wbsetitem-set' => 'Updated item',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
 
 	// these will be removed later
 	'wikibase-item-summary-wbsetlanguageattribute-label' => 'Changed [$2] label',
 	'wikibase-item-summary-wbsetlanguageattribute-description' => 'Changed [$2] description',
 	'wikibase-item-summary-wbsetlanguageattribute-label-description' => 'Changed [$2] label and descriptions',
-
-	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
-	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
-
-	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
-	'wikibase-item-summary-wbsetdescription-remove' => 'Removed [$2] description',
 
 	//content model names
 	'content-model-1001' => 'Wikibase item',
@@ -328,11 +327,16 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
 	'wikibase-noitem-nopermission' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user do not have sufficient rights to create a new item in this case.',
-	'wikibase-item-summary-wbsetitem-set' => 'This is the initial part of the autocomment for setting parts of, or a complete item. The message takes no arguments. See also Wikidatas glossary on [[m:Wikidata/Glossary#item|item]].',
-	'wikibase-item-summary-wbsetaliases-set' => 'Setting [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Add and removed [$2] {{plural:$1|alias|aliases}}',
+
+        // summary and autocomment
+	'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. Parameter $2 is the language code for the item page. Example edit summary is "Updated [en] label:  Egypt".',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing an item label. Parameter $2 is the language code for the item page. Example edit summary is "Removed [en] label"'
+	'wikibase-item-summary-wbsetdescription-set' => 'Automatic edit summary when creating or editing an item description. Parameter $2 is the language code for the item page. Example edit summary is "Updated [en] description:  a country in Africa"',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Automatic edit summary when removing an item description. Parameter $2 is the language code for the item page. Example edit summary is "Removed [en] description"',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Automatic edit summary when adding or editing a language link. Parameter $2 is the site code for the link target wiki, such as itwiki (Italian Wikipedia). Such an edit summary would appear in English as "Added site-specific [itwiki] link:  Italia".',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Automatic edit summary when removing a language link from a Wikidata item (page). Parameter $2 is the site code for the link target wiki, such as itwiki (Italian Wikipedia). Such an edit summary would appear in English as "Removed site-specific [itwiki] link".',
+	'wikibase-item-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing item aliases.  Parameter $2 is the language code for the item page. Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana".',
+
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 
