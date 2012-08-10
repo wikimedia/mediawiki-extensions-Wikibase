@@ -144,6 +144,140 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 		$this->assertSuccess( $res, 'item', 'id' );
 		$this->assertItemEquals( $item, $res['item'] );
+
+		// ---- set the same item again, with with fields in the json that should be ignored-----------
+		// these sets of failing data must be merged with an existing item
+		$ignoredData = array(
+			array( 'length' => 999999 ), // always ignored
+			array( 'count' => 999999 ), // always ignored
+			array( 'pageid' => 999999 ),
+			array( 'ns' => 200 ),
+			array( 'title' => 'does-not-exist' ),
+			array( 'lastrevid' => 99999999 ),
+			array( 'touched' => '2000-01-01T18:05:01Z' ),
+		);
+		foreach ( $ignoredData as $data ) {
+			try {
+				list($res,,) = $this->doApiRequest(
+					array(
+						'action' => 'wbsetitem',
+						'reason' => 'Some reason',
+						'data' => json_encode( array_merge( $data, $item ) ),
+						'token' => $token,
+						'id' => $id,
+						'exclude' => 'pageid|ns|title|lastrevid|touched'
+					),
+					null,
+					false,
+					self::$users['wbeditor']->user
+				);
+				$this->assertSuccess( $res, 'item', 'id' );
+				$this->assertItemEquals( $item, $res['item'] );
+			}
+			catch ( \UsageException $e ) {
+				$this->fail( "Got unexpected exception: $e" );
+			}
+		}
+
+		// ---- check failure to set the same item again, with illegal field values in the json -----------
+		// these sets of failing data must be merged with an existing item
+		$failingData = array(
+			array( 'pageid' => 999999 ),
+			array( 'ns' => 200 ),
+			array( 'title' => 'does-not-exist' ),
+			array( 'lastrevid' => 99999999 ),
+			array( 'touched' => '2000-01-01T18:05:01Z' ),
+		);
+		foreach ( $failingData as $data ) {
+			try {
+				list($res,,) = $this->doApiRequest(
+					array(
+						'action' => 'wbsetitem',
+						'reason' => 'Some reason',
+						'data' => json_encode( array_merge( $data, $item ) ),
+						'token' => $token,
+						'id' => $id,
+						'exclude' => ''
+					),
+					null,
+					false,
+					self::$users['wbeditor']->user
+				);
+				$this->fail( "Updating the item with wrong pageid should have failed" );
+			}
+			catch ( \UsageException $e ) {
+				$this->assertTrue( ($e->getCodeString() == 'illegal-field'), "Expected illegal-field, got unexpected exception: $e" );
+			}
+		}
+
+		// ---- check success to set the same item again, with legal field values in the json -----------
+		// these sets of failing data must be merged with an existing item
+		list($query,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbgetitems',
+				'props' => 'info',
+				'ids' => $id
+			),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+		$this->assertSuccess( $query, 'items', $id, 'id' );
+		$goodData = array(
+			array( 'pageid' => $query['items'][$id]['pageid'] ),
+			array( 'ns' => $query['items'][$id]['ns'] ),
+			array( 'title' => $query['items'][$id]['title'] ),
+			array( 'lastrevid' => $query['items'][$id]['lastrevid'] ),
+			array( 'touched' => $query['items'][$id]['touched'] ),
+		);
+		foreach ( $goodData as $data ) {
+			try {
+				list($res,,) = $this->doApiRequest(
+					array(
+						'action' => 'wbsetitem',
+						'reason' => 'Some reason',
+						'data' => json_encode( array_merge( $data, $item ) ),
+						'token' => $token,
+						'id' => $id,
+						'exclude' => ''
+					),
+					null,
+					false,
+					self::$users['wbeditor']->user
+				);
+				$this->assertSuccess( $res, 'item', 'id' );
+				$this->assertItemEquals( $item, $res['item'] );
+			}
+			catch ( \UsageException $e ) {
+				$this->fail( "Got unexpected exception: $e" );
+			}
+		}
+
+		// ---- empty the object -----------
+		// these sets of failing data must be merged with an existing item
+		foreach ( $failingData as $data ) {
+			try {
+				list($res,,) = $this->doApiRequest(
+					array(
+						'action' => 'wbsetitem',
+						'reason' => 'Some reason',
+						'data' => json_encode( array() ),
+						'token' => $token,
+						'id' => $id,
+						'clear' => true,
+						'exclude' => '',
+					),
+					null,
+					false,
+					self::$users['wbeditor']->user
+				);
+				$this->assertSuccess( $res, 'item', 'id' );
+				$this->assertItemEquals( array( 'id' => $id ), $res['item'] );
+			}
+			catch ( \UsageException $e ) {
+				$this->fail( "Got unexpected exception: $e" );
+			}
+		}
 	}
 
 	function provideBadData() {

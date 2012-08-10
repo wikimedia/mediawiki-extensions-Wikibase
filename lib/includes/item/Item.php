@@ -63,4 +63,13 @@ interface Item extends Entity {
 	 */
 	public function getSiteLink( $siteId );
 
+	/**
+	 * Returns a deep copy of the item.
+	 *
+	 * @since 0.1
+	 *
+	 * @return Item
+	 */
+	public function copy();
+
 }
