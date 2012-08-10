@@ -110,9 +110,18 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		$( wikibase ).on(
 			'stopItemPageEditMode',
 			$.proxy(
-				function( event, origin ) {
+				function( event, origin, wasPending ) {
 					if ( !this.allowsMultipleValues ) {
 						this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
+					} else if ( typeof wasPending !== 'undefined' && wasPending ) {
+						/* focus "add" button after adding a value to a multi-value property to
+						instantly allow adding another value */
+						for ( var i = 0; i < this._editableValues.length; i += 1 ) {
+							if ( this._editableValues[i] === origin ) {
+								this._toolbar.btnAdd.setFocus();
+								break;
+							}
+						}
 					}
 				}, this
 			)
