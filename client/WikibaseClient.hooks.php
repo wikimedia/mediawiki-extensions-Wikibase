@@ -34,19 +34,19 @@ final class ClientHooks {
 		if ( $type === 'mysql' || $type === 'sqlite' ) {
 			$updater->addExtensionTable(
 				'wbc_local_items',
-				dirname( __FILE__ ) . '/sql/WikibaseClient.sql'
+				__DIR__ . '/sql/WikibaseClient.sql'
 			);
 
 			$updater->addExtensionField(
 				'wbc_local_items',
 				'li_page_title',
-				dirname( __FILE__ ) . '/sql/LocalItemTitleField.sql'
+				__DIR__ . '/sql/LocalItemTitleField.sql'
 			);
 		}
 		elseif ( $type === 'postgres' ) {
 			$updater->addExtensionTable(
 				'wbc_local_items',
-				dirname( __FILE__ ) . '/sql/WikibaseClient.pg.sql'
+				__DIR__ . '/sql/WikibaseClient.pg.sql'
 			);
 		}
 		else {
@@ -78,7 +78,7 @@ final class ClientHooks {
 		);
 
 		foreach ( $testFiles as $file ) {
-			$files[] = dirname( __FILE__ ) . '/tests/phpunit/' . $file . 'Test.php';
+			$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
 		}
 
 		return true;
@@ -161,7 +161,7 @@ final class ClientHooks {
 			$settings,
 			array(
 				'namespaces' => array( NS_MAIN ),
-				'source' => array( 'dir' => dirname(__FILE__) . '/tests' ),
+				'source' => array( 'dir' => __DIR__ . '/tests' ),
 				'editURL' => '',
 				'sort' => 'none',
 				'sortPrepend' => false,

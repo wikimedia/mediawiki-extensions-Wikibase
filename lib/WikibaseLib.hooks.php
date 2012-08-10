@@ -63,32 +63,32 @@ final class LibHooks {
 		if ( $type === 'mysql' || $type === 'sqlite' ) {
 			$updater->addExtensionTable(
 				'wb_changes',
-				dirname( __FILE__ ) . '/sql/WikibaseLib.sql'
+				__DIR__ . '/sql/WikibaseLib.sql'
 			);
 
 			// TODO: move to core
 			$updater->addExtensionTable(
 				'sites',
-				dirname( __FILE__ ) . '/sql/AddSitesTable.sql'
+				__DIR__ . '/sql/AddSitesTable.sql'
 			);
 
 			// TODO: move to core
 			$updater->addExtensionField(
 				'langlinks',
 				'll_local',
-				dirname( __FILE__ ) . '/sql/AddLocalLanglinksField.sql'
+				__DIR__ . '/sql/AddLocalLanglinksField.sql'
 			);
 
 			$updater->addExtensionField(
 				'sites',
 				'site_link_navigation',
-				dirname( __FILE__ ) . '/sql/IndexSitesTable.sql'
+				__DIR__ . '/sql/IndexSitesTable.sql'
 			);
 
 			$updater->addExtensionField(
 				'sites',
 				'site_language',
-				dirname( __FILE__ ) . '/sql/MakeSitesTableMoarAwesome.sql'
+				__DIR__ . '/sql/MakeSitesTableMoarAwesome.sql'
 			);
 
 			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
@@ -96,7 +96,7 @@ final class LibHooks {
 		elseif ( $type === 'postgres' ) {
 			$updater->addExtensionTable(
 				'wb_changes',
-				dirname( __FILE__ ) . '/sql/WikibaseLib.pg.sql'
+				__DIR__ . '/sql/WikibaseLib.pg.sql'
 			);
 
 			//$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
@@ -150,7 +150,7 @@ final class LibHooks {
 		}
 
 		foreach ( $testFiles as $file ) {
-			$files[] = dirname( __FILE__ ) . '/tests/phpunit/' . $file . 'Test.php';
+			$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
 		}
 
 		return true;

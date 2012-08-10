@@ -39,7 +39,7 @@ $wgExtensionCredits['other'][] = array(
 	'descriptionmsg' => 'wbc-desc'
 );
 
-$dir = dirname( __FILE__ ) . '/';
+$dir = __DIR__ . '/';
 
 // i18n
 $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php';
@@ -71,7 +71,7 @@ $wgHooks['BeforePageDisplay'][]				= '\Wikibase\SkinHandler::onBeforePageDisplay
 
 // Resource loader modules
 $moduleTemplate = array(
-	'localBasePath' => dirname( __FILE__ ) . '/resources',
+	'localBasePath' => __DIR__ . '/resources',
 	'remoteExtPath' => 'Wikibase/client/resources',
 );
 
