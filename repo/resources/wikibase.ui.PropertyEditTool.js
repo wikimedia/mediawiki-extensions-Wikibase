@@ -96,13 +96,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			'startItemPageEditMode',
 			$.proxy(
 				function( event, origin ) {
-					if ( !this.allowsMultipleValues && this._editableValues !== null ) {
-						for ( var i = 0; i < this._editableValues.length; i += 1 ) {
-							if ( this._editableValues[i] === origin ) {
-								this._subject.addClass( this.UI_CLASS + '-ineditmode' );
-								break;
-							}
-						}
+					if (
+						!this.allowsMultipleValues &&
+						this._editableValues !== null &&
+						this.hasValue( origin )
+					) {
+						this._subject.addClass( this.UI_CLASS + '-ineditmode' );
 					}
 				}, this
 			)
@@ -110,9 +109,16 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		$( wikibase ).on(
 			'stopItemPageEditMode',
 			$.proxy(
-				function( event, origin ) {
+				function( event, origin, wasPending ) {
 					if ( !this.allowsMultipleValues ) {
 						this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
+					} else if (
+						typeof wasPending !== 'undefined' &&
+						this.hasValue( origin )
+					) {
+						/* focus "add" button after adding a value to a multi-value property to
+						instantly allow adding another value */
+						this._toolbar.btnAdd.setFocus();
 					}
 				}, this
 			)
@@ -531,6 +537,21 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			}
 		} );
 		return values;
+	},
+
+	/**
+	 * Checks whether a given EditableValue object belongs to this PropertyEditTool object.
+	 *
+	 * @param wikibase.ui.PropertyEditTool.EditableValue value
+	 * @return bool
+	 */
+	hasValue: function( value ) {
+		for ( var i = 0; i < this._editableValues.length; i += 1 ) {
+			if ( this._editableValues[i] === value ) {
+				return true;
+			}
+		}
+		return false;
 	},
 
 	/**

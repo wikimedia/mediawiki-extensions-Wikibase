@@ -33,11 +33,6 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 	 */
 	UI_CLASS: 'wb-ui-toolbar-button',
 
-	/**
-	 * @var jQuery
-	 */
-	_elem: null,
-
 	_init: function( content ) {
 		wikibase.ui.Toolbar.Label.prototype._init.call( this, content );
 

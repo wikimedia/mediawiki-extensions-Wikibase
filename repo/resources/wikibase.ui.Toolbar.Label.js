@@ -170,6 +170,20 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 		return this.stateChangeable;
 	},
 
+	/**
+	 * Set focus on this label.
+	 */
+	setFocus: function() {
+		this._elem.focus();
+	},
+
+	/**
+	 * Remove focus from this label.
+	 */
+	removeFocus: function() {
+		this._elem.blur();
+	},
+
 
 	/////////////////
 	// CONFIGURABLE:

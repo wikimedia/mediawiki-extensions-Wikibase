@@ -24,6 +24,7 @@
  *                        Parameters: (1) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
  * stopItemPageEditMode: Triggered when any edit mode on the item page is stopped
  *                       Parameters: (1) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
+ *                                   (2) bool - wasPending - whether value was a previously not existent/new value that has just been added
  */
 "use strict";
 
@@ -249,7 +250,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		var degrade = $.proxy( function() {
 			if( !this.preserveEmptyForm ) {
-				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, false ] );
 				// remove value totally
 				this.destroy();
 				this._subject.empty().remove();
@@ -362,7 +363,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			if( this.isPending() ) { // cancel pending edit...
 				promise = this.remove(); // not yet existing value, no state to go back to -> do not trigger 'afterStopEditing' here!
 			} else { // cancel...
-				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, false ] );
 				return promise;
 			}
 		} else {
@@ -377,7 +378,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		.done(
 			$.proxy( function() {
 				$( this ).triggerHandler( 'afterStopEditing', [ save, wasPending ] );
-				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, wasPending ] );
 			}, this )
 		);
 
@@ -475,7 +476,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				 * re-enable all actions when removing fails since it is just using edit mode for
 				 * disabling all actions while the remove action is being processed
 				 */
-				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, false ] );
 			}
 			self._apiCallErr( textStatus, response, apiAction );
 		} );
@@ -802,7 +803,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		 */
 		if ( !this.isPending() ) {
 			if ( disableSave && disableCancel && this.preserveEmptyForm ) {
-				$( wikibase ).triggerHandler( 'stopItemPageEditMode', this );
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, false ] );
 			} else if ( this.valueCompare( this.getInitialValue(), null ) ) {
 				$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
 			}
