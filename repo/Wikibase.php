@@ -32,7 +32,7 @@ if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c becaus
 
 // Include the WikibaseLib extension if that hasn't been done yet, since it's required for Wikibase to work.
 if ( !defined( 'WBL_VERSION' ) ) {
-	@include_once( dirname( __FILE__ ) . '/../lib/WikibaseLib.php' );
+	@include_once( __DIR__ . '/../lib/WikibaseLib.php' );
 }
 
 if ( !defined( 'WBL_VERSION' ) ) { // No version constant to check against :/
@@ -57,7 +57,7 @@ $wgExtensionCredits['other'][] = array(
 	'descriptionmsg' => 'wikibase-desc'
 );
 
-$dir = dirname( __FILE__ ) . '/';
+$dir = __DIR__ . '/';
 
 // rights
 // names should be according to other naming scheme

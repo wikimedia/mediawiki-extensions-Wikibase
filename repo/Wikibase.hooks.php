@@ -35,13 +35,13 @@ final class RepoHooks {
 		if ( $type === 'mysql' || $type === 'sqlite' ) {
 			$updater->addExtensionTable(
 				'wb_items',
-				dirname( __FILE__ ) . '/sql/Wikibase.sql'
+				__DIR__ . '/sql/Wikibase.sql'
 			);
 		}
 		elseif ( $type === 'postgres' ) {
 			$updater->addExtensionTable(
 				'wb_items',
-				dirname( __FILE__ ) . '/sql/Wikibase.sql'
+				__DIR__ . '/sql/Wikibase.sql'
 			);
 		}
 		else {
@@ -99,7 +99,7 @@ final class RepoHooks {
 		);
 
 		foreach ( $testFiles as $file ) {
-			$files[] = dirname( __FILE__ ) . '/tests/phpunit/includes/' . $file . 'Test.php';
+			$files[] = __DIR__ . '/tests/phpunit/includes/' . $file . 'Test.php';
 		}
 
 		return true;
@@ -179,7 +179,7 @@ final class RepoHooks {
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool'
 			),
-			'localBasePath' => dirname( __FILE__ ),
+			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'Wikibase/repo',
 		);
 

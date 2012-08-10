@@ -14,7 +14,7 @@
 return call_user_func( function() {
 
 	$moduleTemplate = array(
-		'localBasePath' => dirname( __FILE__ ),
+		'localBasePath' => __DIR__,
 		'remoteExtPath' =>  'Wikibase/repo/resources'
 	);
 
