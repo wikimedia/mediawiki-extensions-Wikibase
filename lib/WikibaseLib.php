@@ -129,8 +129,8 @@ $wgAutoloadClasses['Wikibase\Query'] 				= $dir . 'includes/query/Query.php';
 $wgAutoloadClasses['Wikibase\QueryObject'] 			= $dir . 'includes/query/QueryObject.php';
 
 // tests
-$wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/TestItems.php';
-$wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/EntityObjectTest.php';
+$wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/item/TestItems.php';
+$wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/entity/EntityObjectTest.php';
 
 // tests/changes
 $wgAutoloadClasses['Wikibase\tests\AliasChangeTest'] 		= $dir . 'tests/phpunit/changes/AliasChangeTest.php';
