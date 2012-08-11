@@ -177,6 +177,13 @@ $messages['ja'] = array(
 	'wbc-editlinkstitle' => '言語間リンクを編集',
 );
 
+/** Georgian (ქართული)
+ * @author David1010
+ */
+$messages['ka'] = array(
+	'wbc-editlinks' => 'ბმულების რედაქტირება',
+);
+
 /** Korean (한국어)
  * @author 아라
  */

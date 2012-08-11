@@ -165,6 +165,8 @@ You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAME
 );
 
 /** Message documentation (Message documentation)
+ * @author Amire80
+ * @author Aude
  * @author DavidL
  * @author Jeblad
  * @author Kghbln
@@ -214,11 +216,11 @@ Bubble help message to set a sitelink to a language specific page on a given clu
 This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript ui implementation]]) that removes an element of some kind, without the the user interface being put in edit mode.',
 	'wikibase-propertyedittool-full' => 'A list of elements the user is assumed to enter is now complete.',
 	'wikibase-propertyedittool-counter' => 'Parameters:
-* $1 is the sum of elements in the list currently.',
+* $1 is the sum of elements in the list currently.  The entries are the list of Wikipedia pages linked to the item.',
 	'wikibase-propertyedittool-counter-pending' => 'Parameters:
 * $1 is the sum of elements in the list plus the ones pending (still in edit mode and not saved).
 * $2 is the number of elements stored in the list (not pending).
-* $3 is the message "wikibase-propertyedittool-counter-pending-pendingsubpart" with some additional markup around, expressing how many entries in the list are pending right now.',
+* $3 is the message {{msg-mw|wikibase-propertyedittool-counter-pending-pendingsubpart}} with some additional markup around, expressing how many entries in the list are pending right now.',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => 'the number of pending elements within the list of site links and a leading "+". This will be inserted into parameter $3 of {{msg-mw|wikibase-propertyedittool-counter-pending}}.',
 	'wikibase-propertyedittool-counter-pending-tooltip' => 'Parameters:
 * $1 is the number of elements not saved yet.',
@@ -245,7 +247,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-ui-no-permissions' => 'This is a human readable version of the API error "wikibase-api-no-permission" which is shown in the UI.',
 	'wikibase-error-ui-link-exists' => 'This is a human readable version of the API error "wikibase-api-link-exists" which is shown in the UI.',
 	'wikibase-error-ui-session-failure' => 'This is a human readable version of the API error "wikibase-api-session-failure" which is shown in the UI.',
-	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|pagfe]] and [[m:Wikidata/Glossary#item|item]].',
+	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|page]] and [[m:Wikidata/Glossary#item|item]].',
 	'wikibase-error-relational-save-failed' => "Error message shown when an item's identity could not be created in the database, prior to the primary save operation.",
 	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a ite link already used by another item. Parameters:
 * $1 is the site id (interwiki prefix);
@@ -260,7 +262,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-itembytitle-lookup-page' => 'Label for the textfield holding the external page title. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'wikibase-itembytitle-submit' => 'Text for the submit button in the search form.',
 	'wikibase-itembytitle-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
-	'wikibase-itembytitle-description' => 'Further information about the search fields and whats valid values.',
+	'wikibase-itembytitle-description' => 'Further information about the search fields and the valid values.',
 	'wikibase-itembytitle-create' => 'Information about how to proceede to create a new item. Will typically contain a link to create an item from data in the textfields.',
 	'special-itembylabel' => 'The item is identified through use of the language and label, but the lookup failed and further qualification must be done. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 	'wikibase-itembylabel-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by language, label and description.',
@@ -271,11 +273,11 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-itembylabel-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
 	'wikibase-itembylabel-description' => 'Further information about the search fields and whats valid values.',
 	'special-createitem' => 'Title of the special page for creating new items.',
-	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error condition.
+	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
-	'wikibase-api-no-token' => 'This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are som exceptional error condition. The message can be shown after misconfiguration of the system.',
-	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are som exceptional error condition. This message should probably not exist in the final version.',
+	'wikibase-api-no-token' => 'This is an error message for a situation where there are no token given in the API call and it is expected. Usually this should never be shown to the user, unless there are some exceptional error conditions. The message can be shown after misconfiguration of the system.',
+	'wikibase-api-no-data' => 'This is an error message for a situation where the "data" argument to the API is lacking content. Usually this should never be shown to the user, unless there are some exceptional error condition. This message should probably not exist in the final version.',
 	'wikibase-api-client-error' => 'To verify sitelinks the repository must query the external client. Sometimes this fails, but without any possibility for the user to fix the problem.',
 	'wikibase-api-no-external-data' => 'This is an error message where the external client did not reply, either because of the repo or the client terminated the connection, or because of some other connection error.',
 	'wikibase-api-no-external-page' => 'This is an error message where the external client did reply, but either because of a faulty reply or because the page title could not be unwound, it was not possible to identify an external page.',
@@ -289,38 +291,44 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-not-recognized-language' => 'During parsing of some structure, usually coming from a JSON structure, a language identifier was expected but the found one was invalid. This leads to termination of the on-going parsing.',
 	'wikibase-api-not-recognized-siteid' => 'During parsing of some structure, usually coming from a JSON structure, a site identifier was expected but the found one was invalid. This leads to termination of the on-going parsing.',
 	'wikibase-api-no-permissions' => 'This error message is used when the user is not allowed to perform a specific action via the API. The first parameter is a wikitext list of reasons, it should be placed on a separate line.',
-	'wikibase-api-data-or-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition. {{doc-important|Do not translate "id", "site", "title" and "data".}}',
-	'wikibase-api-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are som exceptional error condition. {{doc-important|Do not translate "id", "site" and "title".}}',
-	'wikibase-api-no-such-item' => 'This is an error message for a situation where the API could not find an item, usually on an already found page. Usually this should never be shown to the user, unless there are som exceptional error condition, or the item is deleted due to a race condition.',
-	'wikibase-api-no-such-item-id' => 'This is an error message for a situation where the API could not find an item by using a specific item id. Usually this should never be shown to the user, unless there are som exceptional error condition.',
-	'wikibase-api-link-exists' => 'This is an error message for a situation where the arguments to the API requests a sitelink to be created but there already exist a similar link. Usually this should never be shown to the user, unless there are som exceptional error condition, or the link is already created due to a race condition.',
-	'wikibase-api-add-with-id' => 'This is an error message for a situation where the arguments to the API includes an id, but the operation cannot be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are som exceptional error condition.',
-	'wikibase-api-add-exists' => 'This is an error message for a situation where the API already found an item, but the operation cannot be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are som exceptional error condition, or an item is already created due to a race condition.',
-	'wikibase-api-update-without-id' => 'This is an error message for an update where the API expect to have an id, but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition.',
+	'wikibase-api-data-or-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions. {{doc-important|Do not translate "id", "site", "title" and "data".}}',
+	'wikibase-api-id-xor-wikititle' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions. {{doc-important|Do not translate "id", "site" and "title".}}',
+	'wikibase-api-no-such-item' => 'This is an error message for a situation where the API could not find an item, usually on an already found page. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the item is deleted due to a race condition.',
+	'wikibase-api-no-such-item-id' => 'This is an error message for a situation where the API could not find an item by using a specific item id. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
+	'wikibase-api-link-exists' => 'This is an error message for a situation where the arguments to the API requests a sitelink to be created but there already exist a similar link. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the link is already created due to a race condition.',
+	'wikibase-api-add-with-id' => 'This is an error message for a situation where the arguments to the API includes an id, but the operation cannot be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
+	'wikibase-api-add-exists' => 'This is an error message for a situation where the API already found an item, but the operation cannot be fullfilled because this creates a conflict. Usually this should never be shown to the user, unless there are some exceptional error conditions, or an item is already created due to a race condition.',
+	'wikibase-api-update-without-id' => 'This is an error message for an update where the API expect to have an id, but none are found. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
 	'wikibase-api-no-such-item-link' => 'This is an error message for a situation where the API could not find an item given the specific sitelink. This message will be shown to the user if he manually specifies an invalid title.',
 	'wikibase-api-create-failed' => 'This is an error message for a situation where the API tries to create an item but the operation cannot be completed. Paramters:
 * $1 contains further details as wikitext, composed from other error messages.',
-	'wikibase-api-modify-failed' => 'This is an error message for a situation where the API tries to modify an item but the operation cannot be completed. Usually this should never be shown to the user, unless there are som exceptional error condition, or the database is in maintenance mode.',
-	'wikibase-api-delete-failed' => 'This is an error message for a situation where the API tries to delete an item but the operation cannot be completed. Usually this should never be shown to the user, unless there are som exceptional error condition, or the database is in maintenance mode.',
+	'wikibase-api-modify-failed' => 'This is an error message for a situation where the API tries to modify an item but the operation cannot be completed. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the database is in maintenance mode.',
+	'wikibase-api-delete-failed' => 'This is an error message for a situation where the API tries to delete an item but the operation cannot be completed. Usually this should never be shown to the user, unless there are some exceptional error conditions, or the database is in maintenance mode.',
 	'wikibase-api-save-failed' => 'This is an error message for a situation where the API tries to save an item but the operation cannot be completed. Parameters:
 * $1 contains further details as wikitext, composed from other error messages.',
-	'wikibase-api-invalid-contentmodel' => 'This is an error message for a situation where the API somehow requested content from a page but found the contentmodel to be inconsistent with the expected one. Usually this should never be shown to the user, unless there are som exceptional error condition, or an old database is not updated correctly.',
-	'wikibase-api-alias-incomplete' => 'This is an error message for a situation where the API but somehow the alias is incomplete. Usually this should never be shown to the user, unless there are som exceptional error condition.',
-	'wikibase-api-alias-not-found' => 'This is an error message for a situation where the API expects to find a previous alias but cannot find any. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the alias.',
-	'wikibase-api-alias-found' => 'This is an error message for a situation where the API expects to find no previous alias but still finds one. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during creation of the alias.',
+	'wikibase-api-invalid-contentmodel' => 'This is an error message for a situation where the API somehow requested content from a page but found the contentmodel to be inconsistent with the expected one. Usually this should never be shown to the user, unless there are some exceptional error conditions, or an old database is not updated correctly.',
+	'wikibase-api-alias-incomplete' => 'This is an error message for a situation where the API but somehow the alias is incomplete. Usually this should never be shown to the user, unless there are some exceptional error conditions.',
+	'wikibase-api-alias-not-found' => 'This is an error message for a situation where the API expects to find a previous alias but cannot find any. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during delete of the alias.',
+	'wikibase-api-alias-found' => 'This is an error message for a situation where the API expects to find no previous alias but still finds one. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during creation of the alias.',
 	'wikibase-api-not-recognized' => 'This is an error message displayed when the API somehow falls through a list of test for what to do, and fails to find any valid operation. This is only displayed when there is an exceptional error condition.',
 	'wikibase-api-label-or-description' => 'This is an error message for a situation where the arguments to the API is inconsistent, either or both of "label" or "description" should be used but not none of them. Usually this should never be shown to the user, unless there are some exceptional error condition.
 
 {{doc-important|Do not translate the names of the arguments: "label" and "description"}}',
-	'wikibase-api-label-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the label.',
-	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are som exceptional error condition, or there is a race condition during delete of the description.',
+	'wikibase-api-label-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during delete of the label.',
+	'wikibase-api-description-not-found' => 'This is an error message for a situation where the API expects to find a label but none are found. Usually this should never be shown to the user, unless there are some exceptional error conditions, or there is a race condition during delete of the description.',
 	'wikibase-api-wrong-class' => 'This is an error message for a situation where the API expects to find a specific class or decendent thereof, but finds something else. Usually this should newer be shown to the user, unless there are some exceptional error condition, for example that the data integrity is lost.',
 	'wikibase-api-session-failure' => 'Sometimes the session fails, usually because of timeouts or because the server of other reasons ends the user session. This leads to an invalid token and the user should then log in again.',
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
-	'wikibase-noitem-nopermission' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user do not have sufficient rights to create a new item in this case.',
+	'wikibase-noitem-nopermission' => 'For some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user does not have sufficient rights to create a new item in this case.',
 	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item',
-	'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. Parameter $2 is the language code for the item page. Example edit summary is "Updated [en] label:  Egypt".',
+	'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. 
+
+Parameters: 
+
+* $2 is the language code for the item page. 
+
+Example edit summary is "Updated [en] label:  Egypt".',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing an item label. Parameter $2 is the language code for the item page. Example edit summary is "Removed [en] label"',
 	'wikibase-item-summary-wbsetdescription-set' => 'Automatic edit summary when creating or editing an item description. Parameter $2 is the language code for the item page. Example edit summary is "Updated [en] description:  a country in Africa"',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Automatic edit summary when removing an item description. Parameter $2 is the language code for the item page. Example edit summary is "Removed [en] description"',
@@ -331,6 +339,15 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-item-summary-wbsetaliases-add' => 'Automatic edit summary when adding an alias(es).  Parameter $2 is the language code for the item page, and $1 is the number of aliases that were added.',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases. Parameter $2 is the language code for the item page, and $1 is the number of aliases removed.',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
+);
+
+/** Arabic (العربية)
+ * @author Aude
+ * @author Meno25
+ */
+$messages['ar'] = array(
+	'wikibase-edit' => 'تعديل',
+	'wikibase-save' => 'حفظ',
 );
 
 /** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
@@ -795,11 +812,12 @@ Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE
 
 /** Estonian (eesti)
  * @author Avjoska
+ * @author Pikne
  */
 $messages['et'] = array(
 	'wikibase-edit' => 'redigeeri',
 	'wikibase-save' => 'salvesta',
-	'wikibase-cancel' => 'tühista',
+	'wikibase-cancel' => 'loobu',
 	'wikibase-add' => 'lisa',
 );
 
@@ -1181,15 +1199,124 @@ $messages['he'] = array(
 	'wikibase-add' => 'הוספה',
 	'wikibase-save-inprogress' => 'מתבצעת שמירה...',
 	'wikibase-remove-inprogress' => 'מתבצעת הסרה...',
-	'wikibase-label-edit-placeholder' => 'הזינו תווית',
-	'wikibase-description-edit-placeholder' => 'הזינו תיאור',
+	'wikibase-label-edit-placeholder' => 'נא להזין תווית',
+	'wikibase-description-edit-placeholder' => 'נא להזין תיאור',
 	'wikibase-sitelink-site-edit-placeholder' => 'אתר',
 	'wikibase-sitelink-page-edit-placeholder' => 'ערך',
-	'wikibase-alias-edit-placeholder' => 'הזנת כינוי',
+	'wikibase-alias-edit-placeholder' => 'נא להזין כינוי',
 	'wikibase-label-input-help-message' => 'נא להזין את הכותרת של ערכת הנתונים הזאת ב{{GRAMMAR:תחילית|$1}}.',
 	'wikibase-description-input-help-message' => 'נא להזין תיאור קצר ב{{GRAMMAR:תחילית|$1}}.',
 	'wikibase-sitelinks' => 'רשימת הדפים המקושרים לפריט הזה.',
-	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב השם נתונים, ולא ניתן להעביר דפים אליו.',
+	'wikibase-sitelinks-add' => 'הוספת קישור לקישור־אתר',
+	'wikibase-sitelinks-empty' => 'עדיין אין קישור־אתר לפריט הזה.',
+	'wikibase-sitelinks-input-help-message' => 'הגדרת קישור לדף שקשור לפריט הזה.',
+	'wikibase-remove' => 'הסרה',
+	'wikibase-propertyedittool-full' => 'רשימת הערכים מלאה',
+	'wikibase-propertyedittool-counter' => '({{PLURAL:$1|עיול אחד|$1 עיולים}})',
+	'wikibase-propertyedittool-counter-pending' => '({{PLURAL:$1|עיול $2$3|$2$3 עיולים}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|ערך אחד עדיין לא נשמר|$1 ערכים עדיין לא נשמרו}}',
+	'wikibase-sitelinksedittool-full' => 'קישורים לדפים כבר הוגדרו לכל האתרים הידועים.',
+	'wikibase-disambiguation-title' => 'פירושונים עבור "$1"',
+	'wb-special-createitem-new-item-notification' => 'פריט חדש $1 נוצר והופנה לדף שלו. חזרה אל $2.',
+	'wikibase-aliases-label' => 'מכונה גם:',
+	'wikibase-aliases-input-help-message' => 'אם ערכת הנתונים הזאת ידועה ביותר משם אחד מסוים, אפשר להזין כינויים ושמות נרדפים, כדי שאפשר יהיה למצוא אותה בשמות חלופיים.',
+	'wikibase-aliases-empty' => 'לא הוגדרו כינויים.',
+	'wikibase-restrictionedit-tooltip-message' => 'הדף הזה מוגן. לא ניתן לערוך.',
+	'wikibase-blockeduser-tooltip-message' => 'נחסמת מעריכה.',
+	'wikibase-tooltip-error-details' => 'פרטים',
+	'wikibase-error-save-generic' => 'אירעה שגיאה בעת ניסיון לבצע שמירה ובגלל זה לא ניתן להשלים את השינויים שלך.',
+	'wikibase-error-remove-generic' => 'אירעה שגיאה בעת ניסיון לבצע הסרה ובגלל זה לא ניתן להשלים את השינויים שלך.',
+	'wikibase-error-save-connection' => 'אירעה שגיאת התחברות בעת ניסיון לבצע שמירה ובגלל זה לא ניתן להשלים את השינויים שלך. נא לבדוק את חיבור האינטרנט שלך.',
+	'wikibase-error-remove-connection' => 'אירעה שגיאה בעת ניסיון לבצע הסרה ובגלל זה לא ניתן להשלים את השינויים שלך. נא לבדוק את חיבור האינטרנט שלך.',
+	'wikibase-error-save-timeout' => 'יש לנו קשיים טכניים ובגלל זה לא ניתן להשלים את השמירה שלך.',
+	'wikibase-error-remove-timeout' => 'יש לנו קשיים טכניים ובגלל זה לא ניתן להשלים את ההסרה שלך.',
+	'wikibase-error-autocomplete-connection' => 'לא ניתן לבצע שאילתה מתוך API של ויקיפדיה. נא לנסות שוב מאוחר יותר.',
+	'wikibase-error-autocomplete-response' => 'השרת ענה: $1',
+	'wikibase-error-ui-client-error' => 'החיבור לדף הלקוח נכשל. נא לנסות שוב מאוחר יותר.',
+	'wikibase-error-ui-no-external-page' => 'הערך שצוין לא נמצא באתר המתאים.',
+	'wikibase-error-ui-cant-edit' => 'אין לך הרשאה לבצע את הפעולה הזאת.',
+	'wikibase-error-ui-no-permissions' => 'אין לך מספיק הרשאות לבצע את הפעולה הזאת.',
+	'wikibase-error-ui-link-exists' => 'אין לך אפשרות לקשר לדף הזה כי פריט אחר כבר מקשר אליו.',
+	'wikibase-error-ui-session-failure' => 'השיחה שלך פגה. נא להיכנס שוב.',
+	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.',
+	'wikibase-error-relational-save-failed' => 'שמירת זהות פריט במסד הנתונים לא הצליחה.',
+	'wikibase-error-sitelink-already-used' => 'קישור אתר [[$1:$2]] כבר משמש בפריט שהמזהה שלו הוא [[$3]].',
+	'special-itembytitle' => 'פריט לפי כותרת',
+	'wikibase-itembytitle-lookup-fieldset' => 'חיפוש פריטים לפי אתר וכותרת',
+	'wikibase-itembytitle-lookup-site' => 'אתר¹&rlm;²:',
+	'wikibase-itembytitle-lookup-page' => 'דף¹:',
+	'wikibase-itembytitle-submit' => 'חיפוש',
+	'wikibase-itembytitle-nothing-found' => 'לא נמצא שום פריט בחיפוש הקודם. נא לזקק את השאילתה עם זיהוי טוב יותר של הדף החיצוני.',
+	'wikibase-itembytitle-invalid-site' => 'לא ניתן להשתמש השאילתה הקודמת לחיפוש. יש לספק מזהה אתר תקין.',
+	'wikibase-itembytitle-description' => 'אתר הוא קוד מזהה, כגון "enwiki".',
+	'wikibase-itembytitle-create' => 'אפשר גם [{{fullurl:Special:CreateItem|site=$1&page=$2}} ליצור פריט].',
+	'special-itembylabel' => 'פריט לפי תווית',
+	'wikibase-itembylabel-lookup-fieldset' => 'חיפוש פריטים לפי שפה ותווית',
+	'wikibase-itembylabel-lookup-language' => 'שפה¹&rlm;²:',
+	'wikibase-itembylabel-lookup-label' => 'תווית¹:',
+	'wikibase-itembylabel-submit' => 'חיפוש',
+	'wikibase-itembylabel-create' => 'אפשר גם [{{fullurl:Special:CreateItem|language=$1&label=$2}} ליצור פריט].',
+	'wikibase-itembylabel-nothing-found' => 'לא נמצא שום פריט בחיפוש הקודם. נא לזקק את השאילתה.',
+	'wikibase-itembylabel-invalid-langcode' => 'לא ניתן להשתמש השאילתה הקודמת לחיפוש. יש לספק מזהה שפה תקין.',
+	'wikibase-itembylabel-description' => 'ערכים שמשמשים לחיפוש צריכים להיות עיול טקסט שלם. שפה היא מזהה, כגון "en".',
+	'special-createitem' => 'יצירת פריט חדש',
+	'wikibase-api-aliases-invalid-list' => 'השתמשו באחד מהפרמטרים הבאים: "set"&rlm;, "add" או "remove".',
+	'wikibase-api-no-token' => 'לא ניתן אסימון.',
+	'wikibase-api-no-data' => 'אין נתונים שאפשר לעבד.',
+	'wikibase-api-client-error' => 'כשל באתר הלקוח החיצוני.',
+	'wikibase-api-no-external-data' => 'לא הגיעו נתונים מאתר לקוח חיצוני, אולי בגלל שגיאות התחברות.',
+	'wikibase-api-no-external-page' => 'אתר הלקוח החיצוני לא סיפק מידע על הדף.',
+	'wikibase-api-add-sitelink-failed' => 'לא ניתן לשמור את קישור האתר.',
+	'wikibase-api-remove-sitelink-failed' => 'לא ניתן להסיר את קישור האתר.',
+	'wikibase-api-cant-edit' => 'לא ניתן לערוך:
+$1',
+	'wikibase-api-json-invalid' => 'לא ניתן לפענח את מבנה ה־JSON שסופק או ליצור אותו מחדש כמבנה תקין.',
+	'wikibase-api-not-recognized-string' => 'הייתה אמורה להתקבל מחרוזת, אבל היא לא נמצאה.',
+	'wikibase-api-not-recognized-array' => 'היה אמור להתקבל מערך, אבל הוא לא נמצא.',
+	'wikibase-api-not-recognized-language' => 'מזהה השפה אינו מוּכָּר.',
+	'wikibase-api-not-recognized-siteid' => 'מזהה האתר שנמצא אינו מוּכָּר.',
+	'wikibase-api-no-permissions' => 'למשתמש שנכנס אין הרשאות מספיקות.',
+	'wikibase-api-data-or-id-xor-wikititle' => 'יש לספק או את ה־"id" של הפריט, או את הזוגות של "site" ו־"title" לדף המתאים או "data" עבור הפריט החדש.',
+	'wikibase-api-id-xor-wikititle' => 'יש לספק את ה־"id" של הפריט או זוגות של "site" ו־"title" עבור הדף המתאים.',
+	'wikibase-api-no-such-item' => 'לא נמצא פריט קיים.',
+	'wikibase-api-no-such-item-id' => 'לא נמצא פריט קיים עבור המזהה הזה.',
+	'wikibase-api-link-exists' => 'ערך בוויקי שצוין כבר מקושר.',
+	'wikibase-api-add-with-id' => 'לא ניתן להוסיף עם מזהה של פריט קיים.',
+	'wikibase-api-add-exists' => 'לא ניתן להוסיף לפריט קיים.',
+	'wikibase-api-update-without-id' => 'עדכון ללא מזהה קודם אינו אפשרי.',
+	'wikibase-api-no-such-item-link' => 'לא נמצא פריט קיים עבור הקישור הזה.',
+	'wikibase-api-create-failed' => 'ניסיון ליצור פריט חדש נכשל: $1',
+	'wikibase-api-modify-failed' => 'ניסיון לשנות את הפריט נכשל.',
+	'wikibase-api-delete-failed' => 'מחיקת פריט נכשלה.',
+	'wikibase-api-save-failed' => 'ניסיון לשמור את הפריט נכשל: $1',
+	'wikibase-api-invalid-contentmodel' => 'דגם הנתונים לדף הזה אינו תקין.',
+	'wikibase-api-alias-incomplete' => 'לא נמצאה הגדרה לכינוי של הפריט.',
+	'wikibase-api-alias-not-found' => 'לא נמצא שום כינוי קודם לפריט הזה.',
+	'wikibase-api-alias-found' => 'נמצא כינוי קודם בפריט.',
+	'wikibase-api-not-recognized' => 'הפקודה אינה מוּכֶּרֶת.',
+	'wikibase-api-label-or-description' => 'יש להשתמש ב־"label" או ב־"description" או בשניהם.',
+	'wikibase-api-label-not-found' => 'לא נמצאה תווית קודמת עבור השפה הזאת בפריט הזה.',
+	'wikibase-api-description-not-found' => 'לא ניתן למצוא תיאור קודם עבור השפה הזאת בפריט.',
+	'wikibase-api-wrong-class' => 'התוכן בדף שנמצא לא מהסוג הנכון.',
+	'wikibase-api-session-failure' => 'השיחה הנוכחית נכשלה. יש להיכנס מחדש.',
+	'wikibase-resetold' => 'איפוס',
+	'wikibase-noitem' => 'הפריט אינו קיים.
+אפשר <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים] כדי למצוא לאן הוא הלך או [[Special:CreateItem|ליצור פריט חדש]]</span>.',
+	'wikibase-noitem-nopermission' => 'הפריט אינו קיים.
+באפשרותך <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים]</span>.',
+	'wikibase-item-summary-wbsetitem' => 'נוצר פריט עבור [$2]',
+	'wikibase-item-summary-wbsetlabel-set' => 'שונתה התווית בשפה [$2]',
+	'wikibase-item-summary-wbsetlabel-remove' => 'הוסרה התווית [$2]',
+	'wikibase-item-summary-wbsetdescription-set' => 'שינוי התיאור בשפה [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'הסרה של תיאור בשפה [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'נוסף קישור ייחודי לאתר [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'הוסר קישור ייחודי לאתר [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => 'הגדרת של {{plural:$1|כינוי|כינויים}} עבור [$2]',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'הוספה והסרה של {{plural:$1|כינוי|כינויים}} עבור השפה [$2]',
+	'wikibase-item-summary-wbsetaliases-add' => 'הוספה של {{plural:$1|כינוי|כינויים}} עבור השפה [$2]',
+	'wikibase-item-summary-wbsetaliases-remove' => 'הסרה של {{plural:$1|כינוי|כינויים}} עבור [$2]',
+	'content-model-1001' => 'פריט ויקיבייס',
 );
 
 /** Upper Sorbian (hornjoserbsce)
@@ -1670,6 +1797,30 @@ $messages['ja'] = array(
 	'wikibase-resetold' => 'リセット',
 	'wikibase-noitem-nopermission' => 'この項目は存在しません。
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 関連する記録を検索]</span>できます。',
+);
+
+/** Georgian (ქართული)
+ * @author David1010
+ */
+$messages['ka'] = array(
+	'wikibase-edit' => 'რედაქტირება',
+	'wikibase-save' => 'შენახვა',
+	'wikibase-cancel' => 'გაუქმება',
+	'wikibase-add' => 'დამატება',
+	'wikibase-save-inprogress' => 'ინახება...',
+	'wikibase-remove-inprogress' => 'იშლება...',
+	'wikibase-label-edit-placeholder' => 'იარლიყის შეყვანა',
+	'wikibase-description-edit-placeholder' => 'აღწერის შეყვანა',
+	'wikibase-sitelink-site-edit-placeholder' => 'ვებ-გვერდი',
+	'wikibase-sitelink-page-edit-placeholder' => 'სტატია',
+	'wikibase-remove' => 'წაშლა',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-itembytitle-lookup-site' => 'ვებ-გვერდი¹²:',
+	'wikibase-itembytitle-lookup-page' => 'გვერდი¹:',
+	'wikibase-itembytitle-submit' => 'ძიება',
+	'wikibase-itembylabel-lookup-language' => 'ენა¹²:',
+	'wikibase-itembylabel-lookup-label' => 'იარლიყი¹:',
+	'wikibase-itembylabel-submit' => 'ძიება',
 );
 
 /** Korean (한국어)
@@ -2221,11 +2372,11 @@ $messages['nn'] = array(
 	'wikibase-label-input-help-message' => 'Lag ein merkelapp for datasettet knytt til $1.',
 	'wikibase-description-input-help-message' => 'Lag ei kort skildring for datasettet knytt til $1.',
 	'wikibase-sitelinks' => 'Sidene som er knytte til dette datasettet',
-	'wikibase-sitelinks-add' => 'Legg til ein nettstadlekk',
+	'wikibase-sitelinks-add' => 'Legg til ei nettstadlenkje',
 	'wikibase-sitelinks-empty' => 'Det fins ingen nettstadlekker',
 	'wikibase-sitelinks-input-help-message' => 'Definer ein nettstadlekk slik at den peiker på ein artikkel.',
 	'wikibase-remove' => 'fjern',
-	'wikibase-propertyedittool-full' => 'Lista av verdiar er nå komplett',
+	'wikibase-propertyedittool-full' => 'Lista av verdiar er no komplett.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|oppføring|oppføringar}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|oppføring|oppføringar}})',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
@@ -2261,12 +2412,12 @@ $messages['nn'] = array(
 	'special-createitem' => 'Lag eit nytt datasett',
 	'wikibase-api-aliases-invalid-list' => 'Bruk ein av «set» («sett»), «add» («legg til») eller «remove» («fjern») som parameter.',
 	'wikibase-api-no-token' => 'Det er ikkje gjeve nokon token.',
-	'wikibase-api-no-data' => 'Det finnes ingen data som det kan utførast operasjonar på.',
+	'wikibase-api-no-data' => 'Ingen data som det kan utførast operasjonar på.',
 	'wikibase-api-client-error' => 'Den eksterne klientnettstaden feila.',
 	'wikibase-api-no-external-data' => 'Det kom ingen data frå den eksterne klientnettstaden, muligvis på grunn av problem med nettverket.',
 	'wikibase-api-no-external-page' => 'Dnt eksterne klientnettstaden sendte ikkje tilbake sideinformasjon.',
-	'wikibase-api-add-sitelink-failed' => 'Nettstadlekken kunne ikkje lagrast.',
-	'wikibase-api-remove-sitelink-failed' => 'Nettstadlekken kunne ikkje fjernast.',
+	'wikibase-api-add-sitelink-failed' => 'Nettstadlenkja kunne ikkje lagrast.',
+	'wikibase-api-remove-sitelink-failed' => 'Nettstadlenkja kunne ikkje fjernast.',
 	'wikibase-api-cant-edit' => 'Endring er ikkje tillatt: $1',
 	'wikibase-api-json-invalid' => 'Den oppgjevne JSON-strukturen kunne ikkje bli tolka og/eller gjenskapt som ein gyldig struktur.',
 	'wikibase-api-not-recognized-string' => 'Ein text var forventa, men blei ikkje funnen.',
@@ -2282,7 +2433,7 @@ $messages['nn'] = array(
 	'wikibase-api-add-with-id' => 'Kan ikkje gjere ein «add» («legg til») med ein «id» («identifikator») for eit eksisterande datasett.',
 	'wikibase-api-add-exists' => 'Kan ikkje gjere ein «add» («legg til») med eit eksisterande datasett.',
 	'wikibase-api-update-without-id' => 'Kan ikkje «update» («oppdatere») utan ein «id» («identifikator») for eit eksisterande datasett.',
-	'wikibase-api-no-such-item-link' => 'Kunne ikkje finne eit eksisterande datasett for denne lekken.',
+	'wikibase-api-no-such-item-link' => 'Kunne ikkje finne eit eksisterande datasett for denne lenkja.',
 	'wikibase-api-create-failed' => 'Forsøket på å skape eit nytt datasett feila: $1',
 	'wikibase-api-modify-failed' => 'Forsøket på å endre eit datasett feila.',
 	'wikibase-api-delete-failed' => 'Forsøket på å fjerne eit datasett feila.',
@@ -2298,11 +2449,11 @@ $messages['nn'] = array(
 	'wikibase-api-wrong-class' => 'Innhaldet på funnen side er ikkje av korrekt type.',
 	'wikibase-api-session-failure' => 'Den inneverande brukarøkta har feila og du må oppdatere sida og logge inn på nytt.',
 	'wikibase-resetold' => 'tilbakestill',
-	'wikibase-noitem' => 'Dette datasettet finnes ikkje.
-Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]
+	'wikibase-noitem' => 'Dette datasettet finst ikkje.
+Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
 for å finne ut kva som har skjedd, eller [[Special:CreateItem|opprette eit nytt datasett]]</span>.',
-	'wikibase-noitem-nopermission' => 'Dette datasettet finnes ikkje.
-Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]
+	'wikibase-noitem-nopermission' => 'Dette datasettet finst ikkje.
+Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
 for å finne ut kva som har skjedd.',
 	'content-model-1001' => 'Wikibase datasett',
 );
@@ -2545,6 +2696,28 @@ $messages['ru'] = array(
 	'wikibase-move-error' => 'Вы не можете переименовывать страницы, которые находятся в пространстве данных, и вы не можете перемещать страницы в него.',
 );
 
+/** Sinhala (සිංහල)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['si'] = array(
+	'wikibase-edit' => 'සංස්කරණය',
+	'wikibase-save' => 'සුරකින්න',
+	'wikibase-cancel' => 'අත් හරින්න',
+	'wikibase-add' => 'එක් කරන්න',
+	'wikibase-save-inprogress' => 'සුරකිමින්...',
+	'wikibase-remove-inprogress' => 'ඉවත් කරමින්...',
+	'wikibase-label-edit-placeholder' => 'ලේබලය යොදන්න',
+	'wikibase-description-edit-placeholder' => 'විස්තරය යොදන්න',
+	'wikibase-sitelink-site-edit-placeholder' => 'අඩවිය',
+	'wikibase-sitelink-page-edit-placeholder' => 'ලිපිය',
+	'wikibase-remove' => 'ඉවත් කරන්න',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-tooltip-error-details' => 'විස්තර',
+	'wikibase-itembytitle-submit' => 'සොයන්න',
+	'wikibase-itembylabel-submit' => 'සොයන්න',
+	'wikibase-resetold' => 'නැවත සකසන්න',
+);
+
 /** Swedish (svenska)
  * @author Ainali
  * @author WikiPhoenix
@@ -2587,6 +2760,12 @@ $messages['te'] = array(
 	'wikibase-cancel' => 'రద్దుచేయి',
 	'wikibase-add' => 'చేర్చు',
 	'wikibase-remove' => 'తొలగించు',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|పద్దు|పద్దులు}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-tooltip-error-details' => 'వివరాలు',
+	'wikibase-itembytitle-submit' => 'వెతుకు',
+	'wikibase-itembylabel-lookup-language' => 'భాష¹²:',
+	'wikibase-itembylabel-submit' => 'వెతుకు',
 );
 
 /** Tagalog (Tagalog)
