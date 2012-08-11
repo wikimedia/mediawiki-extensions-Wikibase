@@ -148,7 +148,7 @@ to find out where it went, or [[Special:CreateItem|create a new item]]</span>.',
 You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]</span>.',
 
 	// summary and autocomment
-	'wikibase-item-summary-wbsetitem' => 'Created an item for [$2]',
+	'wikibase-item-summary-wbsetitem' => 'Created a new item',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
 	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
@@ -319,6 +319,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-resetold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
 	'wikibase-noitem-nopermission' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user do not have sufficient rights to create a new item in this case.',
+	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item',
 	'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. Parameter $2 is the language code for the item page. Example edit summary is "Updated [en] label:  Egypt".',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing an item label. Parameter $2 is the language code for the item page. Example edit summary is "Removed [en] label"',
 	'wikibase-item-summary-wbsetdescription-set' => 'Automatic edit summary when creating or editing an item description. Parameter $2 is the language code for the item page. Example edit summary is "Updated [en] description:  a country in Africa"',
