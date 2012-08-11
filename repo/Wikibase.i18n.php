@@ -49,14 +49,14 @@ $messages['en'] = array(
 	'wikibase-aliases-input-help-message' => 'If this data set is known under more than one particular name, you may enter aliases and synonyms, so it can be found by its alternative names.',
 	'wikibase-aliases-empty' => 'No aliases defined.',
 
-	'wikibase-restrictionedit-tooltip-message' => 'This page is protected, editing is not allowed.',
+	'wikibase-restrictionedit-tooltip-message' => 'This page is protected. Editing is not allowed.',
 	'wikibase-blockeduser-tooltip-message' => 'You are blocked from editing.',
 
 	'wikibase-tooltip-error-details' => 'Details',
-	'wikibase-error-save-generic' => 'An error occurred while trying to perform save and because of this, changes could not be completed.',
+	'wikibase-error-save-generic' => 'An error occurred while trying to perform save and because of this, your changes could not be completed.',
 	'wikibase-error-remove-generic' => 'An error occurred while trying to perform remove and because of this, your changes could not be completed.',
-	'wikibase-error-save-connection' => 'A connection error has occurred while trying to perform save, and because of this your changes could not be completed. Please check your internet connection.',
-	'wikibase-error-remove-connection' => 'A connection error occurred while trying to perform remove, and because of this your changes could not be completed. Please check your internet connection.',
+	'wikibase-error-save-connection' => 'A connection error has occurred while trying to perform save, and because of this your changes could not be completed. Please check your Internet connection.',
+	'wikibase-error-remove-connection' => 'A connection error occurred while trying to perform remove, and because of this your changes could not be completed. Please check your Internet connection.',
 	'wikibase-error-save-timeout' => 'We are experiencing technical difficulties, and because of this your "save" could not be completed.',
 	'wikibase-error-remove-timeout' => 'We are experiencing technical difficulties, and because of this your "remove" could not be completed.',
 	'wikibase-error-autocomplete-connection' => 'Could not query Wikipedia API. Please try again later.',
@@ -83,8 +83,8 @@ $messages['en'] = array(
 	'wikibase-itembytitle-lookup-site' => 'Site¹²:',
 	'wikibase-itembytitle-lookup-page' => 'Page¹:',
 	'wikibase-itembytitle-submit' => 'Search',
-	'wikibase-itembytitle-nothing-found' => 'No item was found by the previous search, you must refine the query with better identification of the external page.',
-	'wikibase-itembytitle-invalid-site' => 'The previous query could not be used for a search. You must provide a valid site identifier.',
+	'wikibase-itembytitle-nothing-found' => 'No item was found by the previous search. Please refine the query with better identification of the external page.',
+	'wikibase-itembytitle-invalid-site' => 'The previous query could not be used for a search. Please provide a valid site identifier.',
 	'wikibase-itembytitle-description' => '¹Values used for searching must be the complete text entry. ²Site is an identifier, typically "enwiki".',
 	'wikibase-itembytitle-create' => 'You can also [{{fullurl:Special:CreateItem|site=$1&page=$2}} create an item].',
 	'special-itembylabel' => 'Item by label',
@@ -109,7 +109,7 @@ $messages['en'] = array(
 	'wikibase-api-remove-sitelink-failed' => 'The site link could not be removed.',
 	'wikibase-api-cant-edit' => 'Edit not allowed:
 $1',
-	'wikibase-api-json-invalid' => 'The supplied JSON structure could not be parsed and/or recreated as a valid structure.',
+	'wikibase-api-json-invalid' => 'The supplied JSON structure could not be parsed or recreated as a valid structure.',
 	'wikibase-api-not-recognized-string' => 'A string was expected but not found.',
 	'wikibase-api-not-recognized-array' => 'An array was expected but not found.',
 	'wikibase-api-not-recognized-language' => 'The language identifier found was not recognized.',
@@ -159,7 +159,7 @@ You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAME
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
-        
+
 	//content model names
 	'content-model-1001' => 'Wikibase item',
 );
