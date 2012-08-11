@@ -95,6 +95,13 @@ $messages['ia'] = array(
 	'wikibaselib-desc' => 'Contine functionalitate commun pro le extensiones Wikibase e Wikibase Client',
 );
 
+/** Icelandic (íslenska)
+ * @author Snævar
+ */
+$messages['is'] = array(
+	'wikibaselib-desc' => 'Inniheldur almenna virkni fyrir Wikibase og Wikibase Client.',
+);
+
 /** Italian (italiano)
  * @author Beta16
  */

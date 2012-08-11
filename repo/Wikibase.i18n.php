@@ -370,6 +370,7 @@ $messages['be-tarask'] = array(
 	'wikibase-error-autocomplete-connection' => 'Не атрымалася запытаць Wikipedia API. Калі ласка, паспрабуйце пазьней.',
 	'wikibase-error-autocomplete-response' => 'Адказ сэрвэра: $1',
 	'wikibase-move-error' => 'Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.',
+	'special-itembytitle' => 'Аб’ект паводле назвы',
 	'special-itembylabel' => 'Аб’ект паводле меткі',
 	'special-createitem' => 'Стварыць новы прадмет',
 	'wikibase-api-no-token' => 'Не пазначаны token.',
@@ -510,6 +511,7 @@ $messages['de'] = array(
 Du kannst entweder die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen], um herauszufinden, was mit ihm passiert ist, oder ein [[Special:CreateItem|neues Datenobjekt erstellen]]</span>.',
 	'wikibase-noitem-nopermission' => 'Dieses Datenelement ist nicht vorhanden.
 Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>.',
+	'wikibase-item-summary-wbsetitem' => 'Erstellte ein Datenelement für [$2]',
 	'wikibase-item-summary-wbsetlabel-set' => 'Änderte [$2] Bezeichnung',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Entfernte [$2] Bezeichnung',
 	'wikibase-item-summary-wbsetdescription-set' => 'Änderte [$2] Beschreibung',
@@ -739,6 +741,7 @@ $messages['es'] = array(
 	'wikibase-move-error' => 'No puedes mover las páginas que se encuentran en el espacio de nombres de datos, y no puedes mover páginas hacia allí.',
 	'wikibase-error-relational-save-failed' => 'No se ha podido guardar la identidad del elemento en la base de datos.',
 	'wikibase-error-sitelink-already-used' => 'El enlace del sitio [[$1:$2]] ya es usado por el elemento con identificador ID [[$3]].',
+	'special-itembytitle' => 'Artículo por título',
 	'special-itembylabel' => 'Artículo por etiqueta',
 	'special-createitem' => 'Crear un nuevo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Utiliza uno de los parámetros "set", "add" o "remove".',
@@ -787,6 +790,16 @@ para averiguar adónde fue, o [[Special:CreateItem|crear un nuevo elemento]]</sp
 	'wikibase-noitem-nopermission' => 'Este elemento no existe.
 Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar los registros relacionados]</span>.',
 	'content-model-1001' => 'Elemento de Wikibase',
+);
+
+/** Estonian (eesti)
+ * @author Avjoska
+ */
+$messages['et'] = array(
+	'wikibase-edit' => 'redigeeri',
+	'wikibase-save' => 'salvesta',
+	'wikibase-cancel' => 'tühista',
+	'wikibase-add' => 'lisa',
 );
 
 /** Persian (فارسی)
@@ -1123,9 +1136,17 @@ Pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 para descubir onde está ou [[Special:CreateItem|crear un novo elemento]]</span>.',
 	'wikibase-noitem-nopermission' => 'O elemento non existe.
 Pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]</span>.',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Engadida a ligazón específica [$2]',
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Eliminada a ligazón específica [$2]',
-	'wikibase-item-summary-wbsetaliases-set' => 'Definindo [$2] {{plural:$1|pseudónimo|pseudónimos}}',
+	'wikibase-item-summary-wbsetitem' => 'Creo un elemento en [$2]',
+	'wikibase-item-summary-wbsetlabel-set' => 'Cambio a etiqueta en [$2]',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Elimino a etiqueta en [$2]',
+	'wikibase-item-summary-wbsetdescription-set' => 'Cambio a descrición en [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Elimino a descrición en [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Engado a ligazón específica a [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Elimino a ligazón específica a [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => 'Defino {{plural:$1|o pseudónimo|os pseudónimos}} en [$2]',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Engado e elimino {{plural:$1|un pseudónimo|pseudónimos}} en [$2]',
+	'wikibase-item-summary-wbsetaliases-add' => 'Engado {{plural:$1|un pseudónimo|pseudónimos}} en [$2]',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Elimino {{plural:$1|un pseudónimo|pseudónimos}} en [$2]',
 	'content-model-1001' => 'Elemento de Wikibase',
 );
 
@@ -1229,10 +1250,13 @@ $messages['hsb'] = array(
 	'wikibase-itembytitle-lookup-site' => 'Sydło¹²:',
 	'wikibase-itembytitle-lookup-page' => 'Strona¹:',
 	'wikibase-itembytitle-submit' => 'Pytać',
+	'wikibase-itembytitle-create' => 'Móžeš tež [{{fullurl:Special:CreateItem|site=$1&page=$2}} element wutworić].',
 	'special-itembylabel' => 'Zapisk po pomjenowanju',
+	'wikibase-itembylabel-lookup-fieldset' => 'Elementy po rěči a pomjenowanju pytać',
 	'wikibase-itembylabel-lookup-language' => 'Rěč¹²:',
 	'wikibase-itembylabel-lookup-label' => 'Pomjenowanje¹:',
 	'wikibase-itembylabel-submit' => 'Pytać',
+	'wikibase-itembylabel-create' => 'Móžeš tež [{{fullurl:Special:CreateItem|language=$1&label=$2}} element wutworić].',
 	'wikibase-itembylabel-description' => '¹Hódnoty, kotrež so za pytanje wužiwaja, dyrbja dospołne tekstowy zapiski być. ²Rěč je identifikator, typisce "hsb".',
 	'special-createitem' => 'Nowy element wutworić',
 	'wikibase-api-aliases-invalid-list' => 'Wužij jedyn z parametrow "set", "add" a "remove".',
@@ -1335,6 +1359,7 @@ $messages['ia'] = array(
 	'wikibase-move-error' => 'Tu non pote renominar paginas que es in le spatio de nomines de datos, e tu non pote displaciar paginas a in illo.',
 	'wikibase-error-relational-save-failed' => 'Non poteva immagazinar le identitate del elemento in le base de datos.',
 	'wikibase-error-sitelink-already-used' => 'Le ligamine de sito [[$1:$2]] es jam usate per le elemento con ID [[$3]].',
+	'special-itembytitle' => 'Objecto per titulo',
 	'special-itembylabel' => 'Objecto per etiquetta',
 	'special-createitem' => 'Crear un nove objecto',
 	'wikibase-api-aliases-invalid-list' => 'Usa un del tres parametros "set", "add" e "remove".',
@@ -1949,6 +1974,7 @@ $1',
 за да дознаете каде отишол, или да [[Special:CreateItem|создадете нов предмет]]</span>.',
 	'wikibase-noitem-nopermission' => 'Не постои таков предмет.
 Можете да ги <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате поврзаните дневници]</span>.',
+	'wikibase-item-summary-wbsetitem' => 'Создавање на предмет за [$2]',
 	'wikibase-item-summary-wbsetlabel-set' => 'Сменета етикетата на [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Отстранета етикетата на [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Сменет описот на [$2]',
@@ -2389,6 +2415,7 @@ $messages['pt-br'] = array(
 	'wikibase-move-error' => 'Você não pode mover páginas que estão no domínio de dados, além disso, você não pode mover páginas para dentro de tal domínio.',
 	'wikibase-error-relational-save-failed' => 'Não não foi possível armazenar a identidade do item no banco de dados.',
 	'wikibase-error-sitelink-already-used' => 'Link do site [[$1:$2]] já utilizado pelo item com o ID [[$3]].',
+	'special-itembytitle' => 'Item por título',
 	'special-itembylabel' => 'Item por rótulo',
 	'special-createitem' => 'Criar um novo item',
 	'wikibase-api-aliases-invalid-list' => 'Utilize um dos parâmetros "set", "add" e "remove".',
@@ -2455,11 +2482,18 @@ $messages['ro'] = array(
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-disambiguation-title' => 'Dezambiguizare pentru „$1”',
 	'wikibase-aliases-label' => 'Cunoscut și ca:',
+	'wikibase-blockeduser-tooltip-message' => 'Vi s-a blocat accesul la modificări.',
 	'wikibase-tooltip-error-details' => 'Detalii',
+	'wikibase-error-save-generic' => 'A intervenit o eroare neașteptată la încercarea de salvare și din această cauză schimbările nu au putut fi finalizate.',
+	'wikibase-error-remove-generic' => 'A intervenit o eroare neașteptată la încercarea de eliminare și din această cauză schimbările nu au putut fi finalizate.',
+	'wikibase-error-ui-session-failure' => 'Sesiunea dumneavoastră a expirat. Vă rugăm autentificați-vă iar.',
 	'wikibase-itembytitle-lookup-site' => 'Sit¹²:',
+	'wikibase-itembytitle-submit' => 'Căutare',
 	'wikibase-itembylabel-lookup-language' => 'Limbă¹²:',
 	'wikibase-itembylabel-submit' => 'Căutare',
 	'special-createitem' => 'Crează un obiect nou',
+	'wikibase-api-add-sitelink-failed' => 'Legătura sitului nu poate fi salvată.',
+	'wikibase-api-remove-sitelink-failed' => 'Legătura sitului nu poate fi eliminată.',
 	'wikibase-api-cant-edit' => 'Modificarea nepermisă:
 $1',
 	'wikibase-resetold' => 'resetare',
@@ -2675,6 +2709,7 @@ Maaari kang <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGE
 upang malaman kung saan ito napunta, o [[Special:CreateItem|lumikha ng isang bagong bagay]]</span>.',
 	'wikibase-noitem-nopermission' => 'Hindi umiiral ang bagay na ito.
 Maaari mong <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} hanapin ang mga talaan na mayroong kaugnayan]</span>.',
+	'wikibase-item-summary-wbsetitem' => 'Nilikha ang isang bagay para sa [$2]',
 	'wikibase-item-summary-wbsetlabel-set' => 'Binago ang [$2] katatakan',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Tinanggal ang [$2] katatakan',
 	'wikibase-item-summary-wbsetdescription-set' => 'Binago ang [$2] paglalarawan',

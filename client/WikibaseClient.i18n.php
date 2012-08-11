@@ -191,7 +191,7 @@ $messages['ko'] = array(
  */
 $messages['ksh'] = array(
 	'wbc-desc' => 'Madd en Aanwendong vun däm WikiData Projrammzihsaz müjjelesch.',
-	'wbc-editlinks' => 'Lenks ändere',
+	'wbc-editlinks' => 'Lengks ändere',
 	'wbc-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
 );
 
