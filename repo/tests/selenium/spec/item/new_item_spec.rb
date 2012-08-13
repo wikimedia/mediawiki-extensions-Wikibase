@@ -27,7 +27,7 @@ describe "Check functionality of create new item" do
   end
 
   context "Check for correct redirect on create new item" do
-    it "should check that the redirect preservs the correct uselang parameter" do
+    it "should check that the redirect preserves the correct uselang parameter" do
       initial_label = generate_random_string(10)
       visit_page(NewItemPage) do |page|
         page.wait_for_item_to_load

@@ -66,5 +66,5 @@ this will run all tests on remote selenium grid hub in firefox
 rake run_tests[description,chrome,remote,linux]
 this will run the description tests on a remote linux box (if available) in chrome
 
-rake run_tests[all,ie,remote,linux]
+rake run_tests[all,ie,remote,windows]
 this will run all tests on a remote windows box (if available) in internet explorer
