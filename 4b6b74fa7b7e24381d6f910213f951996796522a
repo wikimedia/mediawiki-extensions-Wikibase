@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//8RQ\u003d",
+        "filename": "lib/includes/item/Item.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-13T13:15:43Z",
+      "side": 1,
+      "message": "Already defined in Entity",
+      "revId": "4b6b74fa7b7e24381d6f910213f951996796522a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
