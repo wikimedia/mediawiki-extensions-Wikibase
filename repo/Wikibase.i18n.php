@@ -334,12 +334,21 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 * $2 is the language code for the item page.',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Automatic edit summary when removing an item description. Example edit summary is "Removed [en] description". Parameters:
 * $2 is the language code for the item page.',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Automatic edit summary when adding or editing a language link. Parameter $2 is the site code for the link target wiki, such as itwiki (Italian Wikipedia). Such an edit summary would appear in English as "Added site-specific [itwiki] link:  Italia".',
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Automatic edit summary when removing a language link from a Wikidata item (page). Parameter $2 is the site code for the link target wiki, such as itwiki (Italian Wikipedia). Such an edit summary would appear in English as "Removed site-specific [itwiki] link".',
-	'wikibase-item-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing item aliases.  Parameter $2 is the language code for the item page. Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana".',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Automatic edit summary when adding and removing aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit. Parameter $2 is the language code of the item page and $1 is the number of aliases added/removed.',
-	'wikibase-item-summary-wbsetaliases-add' => 'Automatic edit summary when adding an alias(es).  Parameter $2 is the language code for the item page, and $1 is the number of aliases that were added.',
-	'wikibase-item-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases. Parameter $2 is the language code for the item page, and $1 is the number of aliases removed.',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Automatic edit summary when adding or editing a language link. Such an edit summary would appear in English as "Added site-specific [itwiki] link:  Italia". Parameters:
+* $2 is the site code for the link target wiki, such as itwiki (Italian Wikipedia).',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Automatic edit summary when removing a language link from a Wikidata item (page). Such an edit summary would appear in English as "Removed site-specific [itwiki] link". Parameters:
+* $2 is the site code for the link target wiki, such as itwiki (Italian Wikipedia).',
+	'wikibase-item-summary-wbsetaliases-set' => 'Automatic edit summary when adding or editing item aliases.  Example for adding aliases on the English item page for Italy: "Setting [en] aliases:  Italian Republic, Repubblica italiana". Parameters:
+* $2 is the language code for the item page.',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Automatic edit summary when adding and removing aliases. A user can be in edit mode for aliases and can remove one or more aliases, while adding others in the same edit. Parameter:
+* $1 is the number of aliases added/removed;
+* $2 is the language code of the item page.',
+	'wikibase-item-summary-wbsetaliases-add' => 'Automatic edit summary when adding an alias(es). Parameters:
+* $1 is the number of aliases that were added;
+* $2 is the language code for the item page.',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases. Parameters:
+* $1 is the number of aliases that were removed;
+* $2 is the language code for the item page.',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 
@@ -412,6 +421,22 @@ $messages['br'] = array(
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-aliases-label' => 'Anvet ivez :',
 	'wikibase-tooltip-error-details' => 'Munudoù',
+);
+
+/** Catalan (català)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['ca'] = array(
+	'wikibase-edit' => 'Editar',
+	'wikibase-save' => 'Desa',
+	'wikibase-cancel' => 'Cancel.lar',
+	'wikibase-add' => 'afegir',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-tooltip-error-details' => 'Detalls',
+	'wikibase-itembytitle-lookup-page' => 'Pàgina:',
+	'wikibase-itembytitle-submit' => 'Cerca',
+	'wikibase-itembylabel-lookup-language' => 'Llengua:',
+	'wikibase-itembylabel-submit' => 'Cerca',
 );
 
 /** German (Deutsch)
@@ -1380,6 +1405,7 @@ $messages['hsb'] = array(
 	'wikibase-itembytitle-lookup-site' => 'Sydło:',
 	'wikibase-itembytitle-lookup-page' => 'Strona:',
 	'wikibase-itembytitle-submit' => 'Pytać',
+	'wikibase-itembytitle-description' => 'Sydło je identifikator, na př. "hsbwiki".',
 	'wikibase-itembytitle-create' => 'Móžeš tež [{{fullurl:Special:CreateItem|site=$1&page=$2}} element wutworić].',
 	'special-itembylabel' => 'Zapisk po pomjenowanju',
 	'wikibase-itembylabel-lookup-fieldset' => 'Elementy po rěči a pomjenowanju pytać',
@@ -1387,7 +1413,7 @@ $messages['hsb'] = array(
 	'wikibase-itembylabel-lookup-label' => 'Pomjenowanje:',
 	'wikibase-itembylabel-submit' => 'Pytać',
 	'wikibase-itembylabel-create' => 'Móžeš tež [{{fullurl:Special:CreateItem|language=$1&label=$2}} element wutworić].',
-	'wikibase-itembylabel-description' => '¹Hódnoty, kotrež so za pytanje wužiwaja, dyrbja dospołne tekstowy zapiski być. ²Rěč je identifikator, typisce "hsb".',
+	'wikibase-itembylabel-description' => 'Hódnoty, kotrež so za pytanje wužiwaja, dyrbja dospołne tekstowy zapiski być. Rěč je identifikator, na přikład "hsb".',
 	'special-createitem' => 'Nowy element wutworić',
 	'wikibase-api-aliases-invalid-list' => 'Wužij jedyn z parametrow "set", "add" a "remove".',
 	'wikibase-api-no-token' => 'Njeje so token podał.',
@@ -1432,8 +1458,17 @@ $messages['hsb'] = array(
 Móžeš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wotpowědowace protokole přepytać], zo by wuslědźił, štož je so z nim stało abo [[Special:CreateItem|wutwor nowy element]]</span>.',
 	'wikibase-noitem-nopermission' => 'Tutón element njeeksistuje.
 Móžeš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wotpowědowace protokole přepytać]</span>.',
-	'wikibase-item-summary-wbsetdescription-set' => 'Změni [$2] wopisanje',
-	'wikibase-item-summary-wbsetdescription-remove' => 'Wotstroni [$2] wopisanje',
+	'wikibase-item-summary-wbsetitem' => 'Nowy element wutworjeny',
+	'wikibase-item-summary-wbsetlabel-set' => 'Pomjenowanje za [$2] změnjene',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Pomjenowanje za [$2] wotstronjene',
+	'wikibase-item-summary-wbsetdescription-set' => 'Wopisanje za  [$2] změnjene',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Wopisanje za  [$2] wotstronjene',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Za sydło specifiski wotkaz za [$2] přidaty',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Za sydło specifiski wotkaz za [$2] wotstronjeny',
+	'wikibase-item-summary-wbsetaliases-set' => 'Postaja {{plural:$1|alias|aliasaj|aliasy|aliasy}} za [$2]',
+	'wikibase-item-summary-wbsetaliases-add-remove' => '{{plural:$1|Alias|Aliasaj|Aliasy|Aliasy}} za [$2] {{plural:$1|přidaty a wotstronjeny|přidatej a wotstronjenej|přidate a wotstronjene|přidate a wotstronjene}}',
+	'wikibase-item-summary-wbsetaliases-add' => '{{plural:$1|Alias|Aliasaj|Aliasy|Aliasy}} za [$2] {{plural:$1|přidaty|přidatej|přidate|přidate}}',
+	'wikibase-item-summary-wbsetaliases-remove' => '{{plural:$1|Alias|Aliasaj|Aliasy|Aliasy}} za [$2] {{plural:$1|wotstronjeny|wotstronjenej|wotstronjene|wotstronjene}}',
 	'content-model-1001' => 'Datowy element Wikibase',
 );
 
@@ -1818,6 +1853,7 @@ $messages['ka'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'სტატია',
 	'wikibase-remove' => 'წაშლა',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-tooltip-error-details' => 'დეტალები',
 	'wikibase-itembytitle-lookup-site' => 'ვებ-გვერდი:',
 	'wikibase-itembytitle-lookup-page' => 'გვერდი:',
 	'wikibase-itembytitle-submit' => 'ძიება',
@@ -2072,7 +2108,7 @@ $messages['mk'] = array(
 	'wikibase-itembytitle-submit' => 'Пребарај',
 	'wikibase-itembytitle-nothing-found' => 'Не пронајдов ниеден предмет. Ќе морате да го прецизирате барањето.',
 	'wikibase-itembytitle-invalid-site' => 'Не можам да го пребарувам укажаното. Мора да наведете важечка назнака за вики.',
-	'wikibase-itembytitle-description' => '¹Вредностите во пребарувањето мора да претставуваат целиот текстуален наслов на предметот. ²Викито е назнака, како на пр. „mkwiki“.',
+	'wikibase-itembytitle-description' => 'Викито е назнаката, како на пр. „mkwiki“.',
 	'wikibase-itembytitle-create' => 'Можете и да [{{fullurl:Special:CreateItem|site=$1&page=$2}} создадете предмет].',
 	'special-itembylabel' => 'Предмет по натпис',
 	'wikibase-itembylabel-lookup-fieldset' => 'Пребарување на предмети по јазик или етикета',
@@ -2082,7 +2118,7 @@ $messages['mk'] = array(
 	'wikibase-itembylabel-create' => 'Можете и да [{{fullurl:Special:CreateItem|language=$1&label=$2}} создадете предмет].',
 	'wikibase-itembylabel-nothing-found' => 'Не пронајдов ниеден предмет. Ќе морате да го прецизирате барањето.',
 	'wikibase-itembylabel-invalid-langcode' => '	Не можам да го пребарувам укажаното. Мора да наведете важечка назнака за јазик.',
-	'wikibase-itembylabel-description' => '¹Вредностите во пребарувањето мора да претставуваат целиот текстуален наслов на предметот. ²Јазикот е назнака, како на пр. „mk“.',
+	'wikibase-itembylabel-description' => 'Вредностите во пребарувањето мора да претставуваат целиот текстуален наслов на предметот. Јазикот е назнака, како на пр. „mk“.',
 	'special-createitem' => 'Создај нов предмет',
 	'wikibase-api-aliases-invalid-list' => 'Треба да го укажете зададениот параметар xor или да додадете/отстраните параметри',
 	'wikibase-api-no-token' => 'Нема зададено жетони',
@@ -2312,7 +2348,7 @@ $messages['nl'] = array(
 	'wikibase-itembytitle-submit' => 'Zoeken',
 	'wikibase-itembytitle-nothing-found' => 'Er waren geen resultaten voor de vorige zoekopdracht. Verfijn de zoekopdracht met een betere identificatie van de externe pagina.',
 	'wikibase-itembytitle-invalid-site' => 'De vorige zoekopdracht kon niet gebruikt worden om te zoeken. Geef een geldige siteidentificatie op.',
-	'wikibase-itembytitle-description' => '¹Waarden gebruikt voor zoeken moeten de volledige tekst bevatten. ²Site is een identificatie, bijvoorbeeld "enwiki".',
+	'wikibase-itembytitle-description' => 'Site is een identificatie, bijvoorbeeld "enwiki".',
 	'wikibase-itembytitle-create' => 'U kunt ook [{{fullurl:Special:CreateItem|site=$1&page=$2}} een item aanmaken].',
 	'special-itembylabel' => 'Item gesorteerd op label',
 	'wikibase-itembylabel-lookup-fieldset' => 'Naar items zoeken op taal en label',
@@ -2322,7 +2358,7 @@ $messages['nl'] = array(
 	'wikibase-itembylabel-create' => 'U kunt ook [{{fullurl:Special:CreateItem|language=$1&label=$2}} een item aanmaken].',
 	'wikibase-itembylabel-nothing-found' => 'Er zijn geen items gevonden in de vorige zoekopdracht. Verfijn de zoekopdracht.',
 	'wikibase-itembylabel-invalid-langcode' => 'De vorige zoekopdracht kon niet gebruikt worden om te zoeken. Geef een geldige taalidentificatie op.',
-	'wikibase-itembylabel-description' => '¹Waarden gebruikt voor zoeken moeten de volledige tekst bevatten. ²Taal is een identificatie, bijvoorbeeld "en".',
+	'wikibase-itembylabel-description' => 'Waarden gebruikt voor zoeken moeten de volledige tekst bevatten. Taal is een identificatie, bijvoorbeeld "en".',
 	'special-createitem' => 'Nieuw item aanmaken',
 	'wikibase-api-aliases-invalid-list' => 'Gebruik een van de parameters "set", "add" of "remove".',
 	'wikibase-api-no-token' => 'Er is geen token verstrekt.',
@@ -2373,6 +2409,12 @@ U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENA
 	'wikibase-item-summary-wbsetlabel-remove' => 'Label [$2] verwijderd',
 	'wikibase-item-summary-wbsetdescription-set' => 'Beschrijving [$2] gewijzigd',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Beschrijving [$2] verwijderd',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Sitespecifieke verwijzing voor [$2] toegevoegd',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Sitespecifieke verwijzing voor [$2] verwijderd',
+	'wikibase-item-summary-wbsetaliases-set' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] ingesteld',
+	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd',
+	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd',
+	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] verwijderd',
 	'content-model-1001' => 'Wikibaseitem',
 );
 
@@ -2659,6 +2701,7 @@ Você pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGEN
 );
 
 /** Romanian (română)
+ * @author Minisarm
  * @author Stelistcristi
  */
 $messages['ro'] = array(
@@ -2680,7 +2723,7 @@ $messages['ro'] = array(
 	'wikibase-error-save-generic' => 'A intervenit o eroare neașteptată la încercarea de salvare și din această cauză schimbările nu au putut fi finalizate.',
 	'wikibase-error-remove-generic' => 'A intervenit o eroare neașteptată la încercarea de eliminare și din această cauză schimbările nu au putut fi finalizate.',
 	'wikibase-error-ui-session-failure' => 'Sesiunea dumneavoastră a expirat. Vă rugăm autentificați-vă iar.',
-	'wikibase-itembytitle-lookup-site' => 'Sit:',
+	'wikibase-itembytitle-lookup-site' => 'Site:',
 	'wikibase-itembytitle-submit' => 'Căutare',
 	'wikibase-itembylabel-lookup-language' => 'Limbă:',
 	'wikibase-itembylabel-submit' => 'Căutare',
@@ -2791,6 +2834,7 @@ $messages['sv'] = array(
 /** Tamil (தமிழ்)
  * @author Karthi.dr
  * @author Logicwiki
+ * @author Shanmugamp7
  */
 $messages['ta'] = array(
 	'wikibase-edit' => 'தொகு',
@@ -2799,14 +2843,25 @@ $messages['ta'] = array(
 	'wikibase-add' => 'சேர்',
 	'wikibase-save-inprogress' => 'சேமிக்கப்படுகிறது...',
 	'wikibase-remove-inprogress' => 'நீக்கப்படுகிறது...',
+	'wikibase-description-edit-placeholder' => 'விவரங்களை உள்ளிடவும்',
 	'wikibase-sitelink-site-edit-placeholder' => 'தளம்',
 	'wikibase-sitelink-page-edit-placeholder' => 'கட்டுரை',
 	'wikibase-remove' => 'நீக்கு',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|பதிவு|பதிவுகள்}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|பதிவு|பதிவுகள்}})',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-disambiguation-title' => '"$1" க்கான பக்க நெறிப்படுத்தல்',
+	'wikibase-restrictionedit-tooltip-message' => 'இந்தப் பக்கம் காக்கப்பட்டுள்ளது. தொகுப்பது அனுமதிக்கப்படவில்லை.',
+	'wikibase-blockeduser-tooltip-message' => 'நீங்கள் தொகுப்பதிலிருந்து தடுக்கப்பட்டுள்ளீர்கள்.',
+	'wikibase-tooltip-error-details' => 'விவரங்கள்',
 	'wikibase-itembytitle-lookup-site' => 'தளம்:',
 	'wikibase-itembytitle-lookup-page' => 'பக்கம்:',
 	'wikibase-itembytitle-submit' => 'தேடு',
 	'wikibase-itembylabel-lookup-language' => 'மொழி:',
 	'wikibase-itembylabel-submit' => 'தேடு',
+	'wikibase-item-summary-wbsetitem' => 'ஒரு புதிய உருப்படி உருவாக்கப்பட்டது',
+	'wikibase-item-summary-wbsetdescription-set' => '[$2] விளக்கம் மாற்றப்பட்டது',
+	'wikibase-item-summary-wbsetdescription-remove' => '[$2] விளக்கம் நீக்கப்பட்டது',
 );
 
 /** Telugu (తెలుగు)
@@ -2891,7 +2946,7 @@ $messages['tl'] = array(
 	'wikibase-itembytitle-submit' => 'Maghanap',
 	'wikibase-itembytitle-nothing-found' => 'Wala natagpuan bagay sa pamamagitan ng nakaraang paghahanap, dapat mong dalisayin ang pag-uusisa sa pamamagitan ng mas mainam na pagkilala sa panlabas na pahina.',
 	'wikibase-itembytitle-invalid-site' => 'Hindi magagamit para sa isang paghahanap ang nakaraang pag-uusisa. Dapat kang magbigay ng isang katanggap-tanggap na pangkilala ng pook.',
-	'wikibase-itembytitle-description' => '¹Ang  mga halagang ginagamit para sa paghahanap ay dapat na maging ang buong lahok na teksto. ²Ang pook ay dapat na isang pangkilala, karaniwan na ang "enwiki".',
+	'wikibase-itembytitle-description' => 'Ang pook ay isang kodigo ng pangkilala, katulad ng "enwiki".',
 	'wikibase-itembytitle-create' => 'Maaari ka ring [{{fullurl:Special:CreateItem|site=$1&page=$2}} lumikha ng isang bagay].',
 	'special-itembylabel' => 'Bagay ayon sa katatakan',
 	'wikibase-itembylabel-lookup-fieldset' => 'Maghanap ng mga bagay ayon sa wika at katatakan',
@@ -2901,7 +2956,7 @@ $messages['tl'] = array(
 	'wikibase-itembylabel-create' => 'Maaari ka ring [{{fullurl:Special:CreateItem|language=$1&label=$2}} lumikha ng isang bagay].',
 	'wikibase-itembylabel-nothing-found' => 'Walang bagay na natagpuan sa pamamagitan ng nakaraang paghahanap, paki dalisayin ang pag-uusisa.',
 	'wikibase-itembylabel-invalid-langcode' => 'Hindi magagamit para sa isang paghahanap ang nakaraang pag-uusisa. Dapat kang magbigay ng isang katanggap-tanggap na pangkilala ng wika.',
-	'wikibase-itembylabel-description' => '¹Ang  mga halagang ginagamit para sa paghahanap ay dapat na maging ang buong lahok na teksto. ²Ang wika ay dapat na isang pangkilala, karaniwan na ang "en".',
+	'wikibase-itembylabel-description' => 'Ang mga halagang ginagamit para sa paghahanap ay dapat na maging ang buong lahok na teksto. Ang wika ay isang pangkilala, katulad ng "en".',
 	'special-createitem' => 'Lumikha ng isang bagong bagay',
 	'wikibase-api-aliases-invalid-list' => 'Gamitin ang kahit na isa sa mga parametrong "set", "add" at "remove".',
 	'wikibase-api-no-token' => 'Walang ibinigay na kahalip.',
