@@ -4,7 +4,7 @@
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #
-# page object for STTL language switcher
+# page object for language switcher
 
 require 'ruby_selenium'
 
@@ -12,14 +12,19 @@ class LanguageSelectorPage < NewItemPage
   include PageObject
 
   # language switcher links
-  link(:sttlLinkDe, :xpath => "//li[@class='sttl-lang-de sttl-toplang']/a")
-  link(:sttlLinkEn, :xpath => "//li[@class='sttl-lang-en sttl-toplang']/a")
+  link(:ulsOpen, :xpath => "//li[@id='pt-uls']/a")
+  text_field(:ulsLanguageFilter, :id => "languagefilter")
 
   # language specific elements
   link(:viewTabLink, :xpath => "//li[@id='ca-view']/span/a")
   link(:recentChangesLink, :xpath => "//li[@id='n-recentchanges']/a")
   link(:specialPageTabLink, :xpath => "//li[@id='ca-nstab-special']/span/a")
   link(:firstResultLink, :xpath => "//span[@class='mw-title']/a")
-  link(:moreLanguagesLink, :class => "sttl-languages-more-link")
-  list_item(:sttlLiTo, :class => "sttl-lang-to")
+  
+  def ulsSwitchLanguage(lang)
+    ulsOpen
+    self.ulsLanguageFilter= lang
+    ajax_wait
+    ulsLanguageFilter_element.send_keys :return
+  end
 end
