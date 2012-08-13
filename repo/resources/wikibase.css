@@ -147,7 +147,6 @@ table.wb-sitelinks td.wb-sitelinks-link {
 	width: 0;
 }
 
-table.wb-sitelinks tr:hover td :not( body.wb-editing-disabled ),
 table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
 	/*background-color:#5dc9f4;*/
 	background-color:#D6F3FF;
