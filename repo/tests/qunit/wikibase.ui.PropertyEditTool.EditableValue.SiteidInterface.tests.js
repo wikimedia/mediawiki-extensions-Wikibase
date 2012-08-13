@@ -114,6 +114,18 @@
 			'verified selected site'
 		);
 
+		equal(
+			this.subject.getResultSetMatch( '' ),
+			null,
+			'get result-set match from empty string'
+		);
+
+		equal(
+			this.subject.getResultSetMatch( this.siteIds[0] ),
+			this.siteIds[0],
+			'get result-set match from site-ID'
+		);
+
 	} );
 
 

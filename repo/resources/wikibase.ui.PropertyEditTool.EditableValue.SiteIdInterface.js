@@ -46,11 +46,16 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	_initInputElement: function() {
 		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
 		/**
-		 * when leaving the input box, set displayed value to from any allowed input value to correct display value
+		 * When leaving the input box, set displayed value to from any allowed input value to correct display value.
+		 * Also make sure pressing the enter key will select the first value in the auto-suggestion.
 		 *
 		 * @param event
 		 */
-		this._inputElem.on( 'blur', $.proxy( function( event ) {
+		this._inputElem.on( 'blur keypress', $.proxy( function( event ) {
+			// 'keypress' event required because pressing enter won't choose first auto-suggested value
+			if( event.type === 'keypress' && event.which !== $.ui.keyCode.ENTER ) {
+				return;
+			}
 			if ( this.getSelectedSiteId() !== null ) {
 				/*
 				 loop through complete result set since the autocomplete widget's narrowed result set
@@ -59,11 +64,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 				 this._inputElem.val( widget.data( 'menu' ).active.data( 'item.autocomplete' ).value );
 				 */
 				$.each( this._currentResults, $.proxy( function( index, element ) {
-					if ( element.site.getId() == this.getSelectedSiteId() ) {
-						this._inputElem.val(element.value );
+					if ( element.site.getId() === this.getSelectedSiteId() ) {
+						this._inputElem.val( element.value );
 					}
 				}, this ) );
 				this._onInputRegistered();
+				this._inputElem.autocomplete( "close" ); // make sure to close autocomplete
 			}
 		}, this ) );
 	},
@@ -266,6 +272,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	getResultSetMatch: function( value ) {
 		// trim and lower...
 		value = $.trim( value ).toLowerCase();
+
+		if( value === '' ) {
+			return null; // can't make a decision based on empty string
+		}
 
 		var fallbackSearch = false;
 		var fallback = null;
