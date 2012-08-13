@@ -57,7 +57,6 @@ h1.wb-firstHeading input {
 
 .wb-ui-propertyedittool-editablevalue-waitmsg {
 	margin: 0.3em;
-	font-style: italic;
 }
 
 .wb-ui-propertyedittool-editablevalue {
@@ -72,11 +71,15 @@ h1.wb-firstHeading input {
 	margin-left: 0;
 }
 
-.wb-ui-propertyedittool-ineditmode {
+.wb-ui-propertyedittool-ineditmode,
+/* propertyedittool within table is a multi-value edit tool (site-links)
+ * We might want to add a .wb-ui-multivaluepropertyedittool class later
+ */
+table.wb-ui-propertyedittool-ineditmode .wb-ui-propertyedittool-editablevalue-ineditmode td {
 	background-color:#D6F3FF;
 }
 
-/********** TOOLTIP **********/
+	/********** TOOLTIP **********/
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
 .mw-help-field-hint {
