@@ -84,6 +84,9 @@ describe "Check functionality of blocking a user" do
         page.saveDescriptionLink?.should be_false
         page.saveDescriptionLinkDisabled?.should be_true
         page.saveDescriptionLinkDisabled_element.click
+        page.wait_until do
+          page.wbTooltip?
+        end
         page.wbTooltip?.should be_true
       end
     end

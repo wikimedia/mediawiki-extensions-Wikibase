@@ -16,15 +16,23 @@
 	font-family: Arial, sans-serif;
 }
 
-.firstHeading {
+.wb-itempage .firstHeading, .page-Special_CreateItem .firstHeading {
+	display: none;
+}
+
+.wb-diffpage .firstHeading, .wb-oldrevpage .firstHeading {
+	display: block;
+}
+
+.wb-firstHeading {
 	border-bottom: 0;
 	margin-bottom: 0 !important;
 	padding-top:1px;
 	clear: both; /* so success bar after new item created won't float heading */
 }
 
-div#bodyContent {
-	margin-top: -0.4em;
+.wb-firstHeading span {
+	line-height: 100%;
 }
 
 .wb-property-container-value {
@@ -33,14 +41,6 @@ div#bodyContent {
 
 .wb-property-container {
 	margin-top: .3em;
-}
-
-.wb-itempage #contentSub:empty { /* causing a gap even when they are empty, see bug #38145 */
-	display: none;
-}
-
-.wb-itempage #jump-to-nav { /* not reacting on :empty selector, removing margin for now, see bug #38145 */
-	margin: 0;
 }
 
 .wb-hr {

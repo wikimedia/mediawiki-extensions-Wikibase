@@ -153,9 +153,6 @@ abstract class ViewEntityAction extends \ViewAction {
 					$labelText
 				)
 			);
-		} else {
-			//XXX: are we really sure?!
-			$this->getOutput()->setPageTitle( $labelText );
 		}
 	}
 

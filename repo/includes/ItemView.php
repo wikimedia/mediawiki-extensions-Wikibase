@@ -58,9 +58,21 @@ class ItemView extends \ContextSource {
 
 		$html = '';
 
+		$label = $item->getItem()->getLabel( $lang->getCode() );
 		$description = $item->getItem()->getDescription( $lang->getCode() );
 		$aliases = $item->getItem()->getAliases( $lang->getCode() );
 		$siteLinks = $item->getItem()->getSiteLinks();
+
+		/*
+		 * add an h1 for displaying the item's label; the actual firstHeading is being hidden by css
+		 * since the original MediaWiki DOM does not represent a Wikidata item's structure where the
+		 * combination of label and description is the unique "title" of an item which should not be
+		 * semantically disconnected by having elements in between, like siteSub, contentSub and
+		 * jump-to-nav
+		 */
+		$html .= Html::openElement( 'h1', array( 'class' => 'wb-firstHeading' ) );
+		$html .= Html::element( 'span', array( 'dir' => 'auto' ), $label );
+		$html .= Html::closeElement( 'h1' );
 
 		// even if description is false, we want it in any case!
 		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );

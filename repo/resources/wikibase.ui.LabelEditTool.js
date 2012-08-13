@@ -40,7 +40,7 @@ $.extend( window.wikibase.ui.LabelEditTool.prototype, {
 	 * @see wikibase.ui.PropertyEditTool._getValueElems()
 	 */
 	_getValueElems: function() {
-		return this._subject.children( 'h1.firstHeading span' );
+		return this._subject.children( 'h1.wb-firstHeading span' );
 	},
 
 	/**

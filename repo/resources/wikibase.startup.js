@@ -23,7 +23,7 @@
 
 	$( document ).ready( function() {
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
-		new wb.ui.LabelEditTool( $( '#firstHeading' ) );
+		new wb.ui.LabelEditTool( $( '.wb-firstHeading' ) );
 
 		// add an edit tool for all properties in the data view:
 		$( 'body' )

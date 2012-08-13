@@ -10,11 +10,11 @@
  * @author Daniel Werner
  */
 
-h1.firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
+h1.wb-firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	font-size: 0.5em;
 }
 
-h1.firstHeading input {
+h1.wb-firstHeading input {
 	font-family:inherit;
 	font-size:inherit;
 	height: 1.2em;

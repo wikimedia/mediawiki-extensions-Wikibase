@@ -482,6 +482,15 @@ final class RepoHooks {
 				$bodyAttrs['class'] .= ' wb-itempage';
 				// add another class with the ID of the item:
 				$bodyAttrs['class'] .= ' wb-itempage-' . $itemContent->getItem()->getId();
+
+				if ( $sk->getRequest()->getCheck( 'diff' ) ) {
+					$bodyAttrs['class'] .= ' wb-diffpage';
+				}
+
+				if ( $out->getRevisionId() !== $out->getTitle()->getLatestRevID() ) {
+					$bodyAttrs['class'] .= ' wb-oldrevpage';
+				}
+
 			}
 		}
 		return true;

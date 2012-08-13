@@ -14,7 +14,7 @@
 ( function() {
 	module( 'wikibase.ui.LabelEditTool', window.QUnit.newWbEnvironment( {
 		setup: function() {
-			this.h1 = $( '<h1/>', { 'id': 'firstHeading', 'class': 'firstHeading' } );
+			this.h1 = $( '<h1/>', { 'class': 'wb-firstHeading' } );
 			this.span = $( '<span/>', { text: 'Text' } ).appendTo( this.h1 );
 			this.subject = new window.wikibase.ui.LabelEditTool( this.h1 );
 
