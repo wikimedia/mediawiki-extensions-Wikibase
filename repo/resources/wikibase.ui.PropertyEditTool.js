@@ -96,10 +96,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			'startItemPageEditMode',
 			$.proxy(
 				function( event, origin ) {
-					if (
-						!this.allowsMultipleValues &&
-						this.hasValue( origin )
-					) {
+					if( this.hasValue( origin ) ) {
 						this._subject.addClass( this.UI_CLASS + '-ineditmode' );
 					}
 				}, this
@@ -109,10 +106,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			'stopItemPageEditMode',
 			$.proxy(
 				function( event, origin, wasPending ) {
-					if ( !this.allowsMultipleValues ) {
-						this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
-					} else if (
-						typeof wasPending !== 'undefined' && wasPending && this.hasValue( origin )
+					this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
+					if(
+						this.allowsMultipleValues
+						&& typeof wasPending !== 'undefined'
+						&& wasPending
+						&& this.hasValue( origin )
 					) {
 						/* focus "add" button after adding a value to a multi-value property to
 						instantly allow adding another value */
@@ -274,6 +273,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 */
 	_initSingleValue: function( valueElem ) {
 		var editableValue = new ( this.getEditableValuePrototype() )();
+		this._editableValues.push( editableValue );
 
 		// message to be displayed for empty input:
 		editableValue.inputPlaceholder = mw.msg( 'wikibase-' + this.getPropertyName() + '-edit-placeholder' );
@@ -304,7 +304,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			}
 		}, this ) );
 
-		this._editableValues.push( editableValue );
 		return editableValue;
 	},
 
