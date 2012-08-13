@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//8PU\u003d",
+        "filename": "client/includes/EntityCacheUpdater.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-13T14:46:01Z",
+      "side": 1,
+      "message": "Some comment about this function would be nice",
+      "revId": "47e841b23b4c5fbe054f9e1770b4ecdc037eab33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//8PY\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-13T14:46:01Z",
+      "side": 1,
+      "message": "\"its\", not \"it is\"",
+      "revId": "47e841b23b4c5fbe054f9e1770b4ecdc037eab33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//8Pc\u003d",
+        "filename": "client/includes/SiteLinkCache.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-13T14:46:01Z",
+      "side": 1,
+      "message": "?",
+      "revId": "47e841b23b4c5fbe054f9e1770b4ecdc037eab33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//8Po\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-13T14:46:01Z",
+      "side": 1,
+      "message": "Documentation please",
+      "revId": "47e841b23b4c5fbe054f9e1770b4ecdc037eab33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
