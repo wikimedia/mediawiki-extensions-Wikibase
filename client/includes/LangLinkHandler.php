@@ -18,7 +18,7 @@ use Parser, ParserOutput;
 class LangLinkHandler {
 
 	/**
-	 * Finds the corresponding item and fetches it's links from the entity cache.
+	 * Finds the corresponding item and fetches its links from the entity cache.
 	 *
 	 * @since 0.1
 	 *

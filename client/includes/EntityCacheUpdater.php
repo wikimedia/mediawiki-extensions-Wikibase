@@ -17,7 +17,7 @@ use Title;
 class EntityCacheUpdater {
 
 	/**
-	 *
+	 * Update the entity cache to reflect the provided change.
 	 *
 	 * @since 0.1
 	 *
