@@ -114,6 +114,27 @@
 			'verified selected site'
 		);
 
+		equal(
+			this.subject.getResultSetMatch( '' ),
+			null,
+			'get result-set match from empty string'
+		);
+
+		var testSite = wikibase.getSite( this.siteIds[0] );
+		var testStrings = [
+			testSite.getId(),
+			testSite.getShortName(),
+			testSite.getName() + ' (' + testSite.getId() + ')'
+		];
+
+		var self = this;
+		$.each( testStrings, function( index, val ) {
+			equal(
+				self.subject.getResultSetMatch( val ),
+				testSite.getId(),
+				'get result-set match from string "' + val + '"'
+			);
+		} );
 	} );
 
 
