@@ -57,6 +57,7 @@ h1.wb-firstHeading input {
 
 .wb-ui-propertyedittool-editablevalue-waitmsg {
 	margin: 0.3em;
+	font-style: italic;
 }
 
 .wb-ui-propertyedittool-editablevalue {
