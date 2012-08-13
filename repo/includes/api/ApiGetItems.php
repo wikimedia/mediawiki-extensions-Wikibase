@@ -121,6 +121,19 @@ class ApiGetItems extends Api {
 					// loop over all props
 					foreach ( $props as $key ) {
 						switch ( $key ) {
+						case 'info':
+							$res->addValue( $itemPath, 'pageid', intval( $page->getId() ) );
+							$title = $page->getTitle();
+							$res->addValue( $itemPath, 'ns', intval( $title->getNamespace() ) );
+							$res->addValue( $itemPath, 'title', $title->getPrefixedText() );
+							$revision = $page->getRevision();
+							if ( $revision !== null ) {
+								$res->addValue( $itemPath, 'lastrevid', intval( $revision->getId() ) );
+								$res->addValue( $itemPath, 'touched', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+								$res->addValue( $itemPath, 'length', intval( $revision->getSize() ) );
+							}
+							$res->addValue( $itemPath, 'count', intval( $page->getCount() ) );
+							break;
 						case 'aliases':
 							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
 							break;
@@ -178,8 +191,8 @@ class ApiGetItems extends Api {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'props' => array(
-				ApiBase::PARAM_TYPE => array( 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ),
-				ApiBase::PARAM_DFLT => 'sitelinks|aliases|labels|descriptions',
+				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ),
+				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'languages' => array(

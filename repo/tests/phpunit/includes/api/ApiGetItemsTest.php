@@ -83,6 +83,29 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		$this->assertSuccess( $res, 'items', $id );
 		$this->assertItemEquals( $item,  $res['items'][$id] );
 		$this->assertEquals( 1, count( $res['items'] ), "requesting a single item should return exactly one item entry" );
+		// The following comes from the props=info which is included by default
+		// Only check if they are there and seems valid, can't do much more for the moment (or could for title but then we are testing assumptions)
+		$this->assertSuccess( $res, 'items', $id, 'pageid' );
+		$this->assertTrue( is_integer( $res['items'][$id]['pageid'] ) );
+		$this->assertTrue( 0 < $res['items'][$id]['pageid'] );
+		$this->assertSuccess( $res, 'items', $id, 'ns' );
+		$this->assertTrue( is_integer( $res['items'][$id]['ns'] ) );
+		$this->assertTrue( 0 < $res['items'][$id]['ns'] );
+		$this->assertSuccess( $res, 'items', $id, 'title' );
+		$this->assertTrue( is_string( $res['items'][$id]['title'] ) );
+		$this->assertTrue( 0 < strlen( $res['items'][$id]['title'] ) );
+		$this->assertSuccess( $res, 'items', $id, 'lastrevid' );
+		$this->assertTrue( is_integer( $res['items'][$id]['lastrevid'] ) );
+		$this->assertTrue( 0 < $res['items'][$id]['lastrevid'] );
+		$this->assertSuccess( $res, 'items', $id, 'touched' );
+		$this->assertTrue( is_string( $res['items'][$id]['touched'] ) );
+		$this->assertTrue( 0 < strlen( $res['items'][$id]['touched'] ) );
+		$this->assertSuccess( $res, 'items', $id, 'length' );
+		$this->assertTrue( is_integer( $res['items'][$id]['length'] ) );
+		$this->assertTrue( 0 < $res['items'][$id]['length'] );
+		$this->assertSuccess( $res, 'items', $id, 'count' );
+		$this->assertTrue( is_integer( $res['items'][$id]['count'] ) );
+		$this->assertTrue( 0 <= $res['items'][$id]['count'] );
 	}
 
 	public function provideGetItemByTitle() {
