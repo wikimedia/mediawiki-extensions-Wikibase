@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//8P8\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-08-13T14:27:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARX//8QE\u003d",
+      "revId": "689d06555f0f3a2f5e84a1d262b4e2e52a2c78d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//8QM\u003d",
         "filename": "repo/includes/api/ApiSetItem.php",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-13T14:25:38Z",
       "side": 1,
       "message": "please remove unused code.",
+      "revId": "689d06555f0f3a2f5e84a1d262b4e2e52a2c78d3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//8P4\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-08-13T14:27:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARX//8QM\u003d",
       "revId": "689d06555f0f3a2f5e84a1d262b4e2e52a2c78d3",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
