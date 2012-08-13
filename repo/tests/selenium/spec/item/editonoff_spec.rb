@@ -51,8 +51,6 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.cancelDescriptionLink?.should be_false
         page.labelInputField= generate_random_string(10)
         page.saveLabelLink
-        page.labelInputField_element.enabled?.should be_false
-        page.descriptionInputField_element.enabled?.should be_false
         ajax_wait
         page.wait_for_api_callback
         page.wait_for_new_item_creation
@@ -93,11 +91,6 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.descriptionInputField_element.enabled?.should be_false
         page.labelInputField= generate_random_string(10)
         page.saveLabelLink
-        page.editDescriptionLink?.should be_false
-        page.labelInputField_element.enabled?.should be_false
-        page.descriptionInputField_element.enabled?.should be_false
-        page.addAliases?.should be_false
-        page.addSitelinkLink?.should be_false
         ajax_wait
         page.wait_for_api_callback
         page.editLabelLink?.should be_true
@@ -127,10 +120,6 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addSitelinkLink?.should be_true
         page.descriptionInputField= generate_random_string(20)
         page.saveDescriptionLink
-        page.descriptionInputField_element.enabled?.should be_false
-        page.editLabelLink?.should be_false
-        page.addAliases?.should be_false
-        page.addSitelinkLink?.should be_false
         ajax_wait
         page.wait_for_api_callback
         page.editLabelLink?.should be_true
@@ -176,10 +165,6 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addAliases?.should be_false
         page.addSitelinkLink?.should be_false
         page.saveSitelinkLink
-        page.editLabelLink?.should be_false
-        page.editDescriptionLink?.should be_false
-        page.addAliases?.should be_false
-        page.addSitelinkLink?.should be_false
         ajax_wait
         page.wait_for_api_callback
         page.wait_for_editLabelLink
@@ -228,10 +213,6 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addSitelinkLink?.should be_false
         page.editSitelinkLink?.should be_false
         page.saveAliases
-        page.editLabelLink?.should be_false
-        page.editDescriptionLink?.should be_false
-        page.addAliases?.should be_false
-        page.addSitelinkLink?.should be_false
         ajax_wait
         page.wait_for_api_callback
         page.editLabelLink?.should be_true
@@ -258,10 +239,6 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
         page.removeSitelinkLink
-        page.editLabelLink?.should be_false
-        page.editDescriptionLink?.should be_false
-        page.addAliases?.should be_false
-        page.addSitelinkLink?.should be_false
         ajax_wait
         page.wait_for_api_callback
         page.editLabelLink?.should be_true
@@ -271,4 +248,5 @@ describe "Check functionality of disabling/enabling edit actions" do
       end
     end
   end
+
 end
