@@ -184,6 +184,7 @@ You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAME
  * @author Kghbln
  * @author McDutchie
  * @author Purodha
+ * @author Raymond
  * @author Siebrand
  */
 $messages['qqq'] = array(
@@ -234,7 +235,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-undo-revision-error' => 'Title shown when undo or restore failed',
 	'wikibase-undo-samerev' => 'Message shown when the user attempts to undo the difference between two revisions which are both the same.',
 	'wikibase-undo-badpage' => 'Message shown when the user attempts to undo the difference between two revisions belonging to different pages. The first argument is the name of the page, the second is the revision id.  Parameter $1 is the title of the page and $2 is the revision id number.',
-	'wikibase-undo-firstrev' => 'Message shown when the user attempts to undo the very first revision of a page, that is, the page\'s creation.',
+	'wikibase-undo-firstrev' => "Message shown when the user attempts to undo the very first revision of a page, that is, the page's creation.",
 	'wikibase-propertyedittool-full' => 'A list of elements the user is assumed to enter is now complete.',
 	'wikibase-propertyedittool-counter' => 'Parameters:
 * $1 is the sum of elements in the list currently.  The entries are the list of Wikipedia pages linked to the item.',
@@ -345,7 +346,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-api-session-failure' => 'Sometimes the session fails, usually because of timeouts or because the server of other reasons ends the user session. This leads to an invalid token and the user should then log in again.',
 	'wikibase-api-illegal-field' => 'There is an illegal field name in the props for the module call. This makes the call fail, but the name of failing field will be reported.
 * $1 is the failing field name',
-	'wikibase-restoreold' => "Link text shown on the link that lets the user restore the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
+	'wikibase-restoreold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-restore-summary' => 'Edit summary for an restore action.{{Identical|wikibase-restoreold}} Parameter $1 is the revision id number and $2 is the username whose changes are being undone.',
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
 	'wikibase-noitem-nopermission' => 'For some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user does not have sufficient rights to create a new item in this case.',
@@ -584,7 +585,8 @@ $messages['de'] = array(
 	'wikibase-api-description-not-found' => 'Es wurde keine frühere Beschreibung in dieser Sprache im Datenelement gefunden.',
 	'wikibase-api-wrong-class' => 'Der Inhalt auf der gefundenen Seite entspricht nicht dem richtigen Typ.',
 	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Du musst dich daher erneut anmelden.',
-	'wikibase-restoreold' => 'wiederherstellen',
+	'wikibase-api-illegal-field' => 'Ungültiges Feld wird verwendet in Aufruf: $1',
+	'wikibase-restoreold' => 'zurücksetzen',
 	'wikibase-restore-summary' => 'Revision $1 von [[Special:Contributions/$2|$2]] wiederhergestellt',
 	'wikibase-noitem' => 'Dieses Datenelement ist nicht vorhanden.
 Du kannst entweder die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen], um herauszufinden, was mit ihm passiert ist, oder ein [[Special:CreateItem|neues Datenobjekt erstellen]]</span>.',
@@ -880,6 +882,8 @@ $messages['et'] = array(
 	'wikibase-save' => 'salvesta',
 	'wikibase-cancel' => 'loobu',
 	'wikibase-add' => 'lisa',
+	'wikibase-itembylabel-lookup-language' => 'Keel:',
+	'wikibase-itembylabel-submit' => 'Otsi',
 );
 
 /** Persian (فارسی)
@@ -1361,7 +1365,7 @@ $1',
 	'wikibase-api-description-not-found' => 'לא ניתן למצוא תיאור קודם עבור השפה הזאת בפריט.',
 	'wikibase-api-wrong-class' => 'התוכן בדף שנמצא לא מהסוג הנכון.',
 	'wikibase-api-session-failure' => 'השיחה הנוכחית נכשלה. יש להיכנס מחדש.',
-	'wikibase-resetold' => 'איפוס',
+	'wikibase-restoreold' => 'איפוס',
 	'wikibase-noitem' => 'הפריט אינו קיים.
 אפשר <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים] כדי למצוא לאן הוא הלך או [[Special:CreateItem|ליצור פריט חדש]]</span>.',
 	'wikibase-noitem-nopermission' => 'הפריט אינו קיים.
@@ -1669,7 +1673,7 @@ $messages['is'] = array(
 	'wikibase-itembytitle-lookup-page' => 'Síða:',
 	'wikibase-itembytitle-submit' => 'Leita',
 	'wikibase-itembytitle-invalid-site' => 'Gat ekki notað fyrri fyrirspurn við leit. Þú þarft að tilgreina gilt kennimerki síðunnar.',
-	'wikibase-itembytitle-description' => 'Þau ¹gildi sem eru notuð við leit þurfa að vera tæmandi texta færsla. ²Vefsvæði er kennimerki, venjulega "enwiki".',
+	'wikibase-itembytitle-description' => 'Vefsvæði er kennimerkis kóði, venjulega "enwiki".',
 	'wikibase-itembytitle-create' => 'Þú getur einnig [{{fullurl:Special:CreateItem|site=$1&page=$2}} búið til hlut].',
 	'special-itembylabel' => 'Hlutur eftir merkimiða',
 	'wikibase-itembylabel-lookup-fieldset' => 'Leita eftir hlutum eftir tungumáli og merkimiða',
@@ -1679,7 +1683,7 @@ $messages['is'] = array(
 	'wikibase-itembylabel-create' => 'Þú getur einnig [{{fullurl:Special:CreateItem|language=$1&label=$2}} búið til hlut].',
 	'wikibase-itembylabel-nothing-found' => 'Enginn hlutur fannst, vinsamlegast endurorðaðu fyrirspurnina.',
 	'wikibase-itembylabel-invalid-langcode' => 'Gat ekki notað fyrri fyrirspurn við leit. Þú þarft að tilgreina gilt kennimerki tungumálsins.',
-	'wikibase-itembylabel-description' => 'Þau ¹gildi sem eru notuð við leit þurfa að vera tæmandi texta færsla. ²Vefsvæði er kennimerki, venjulega "en".',
+	'wikibase-itembylabel-description' => 'Þau gildi sem eru notuð við leit þurfa að vera tæmandi texta færsla. Vefsvæði er kennimerki, eins og "en".',
 	'special-createitem' => 'Búa til nýjan hlut',
 	'wikibase-api-aliases-invalid-list' => 'Notaðu einn af þessum stikum „set", „add" eða „remove".',
 	'wikibase-api-no-token' => 'Enginn tóki tilgreindur.',
@@ -1734,7 +1738,7 @@ til þess að finna hvert hann fór, eða [[Special:CreateItem|búið til nýjan
 	'wikibase-item-summary-wbsetsitelink-set' => 'Bætti við vefsvæðis tengil [$2]',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Fjarlægði vefsvæðis tengil [$2]',
 	'wikibase-item-summary-wbsetaliases-set' => 'Setur [$2] {{plural:$1|samnefni}}',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Bætti og fjarlægði [$2] {{plural:$1|samnefni}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Bætti við og fjarlægði [$2] {{plural:$1|samnefni}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Bætti við [$2] {{plural:$1|samnefni|samnefnum}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Fjarlægði [$2] {{plural:$1|samnefni}}',
 	'content-model-1001' => 'Wikibase hlutur',
@@ -1742,6 +1746,7 @@ til þess að finna hvert hann fór, eða [[Special:CreateItem|búið til nýjan
 
 /** Italian (italiano)
  * @author Beta16
+ * @author Darth Kule
  */
 $messages['it'] = array(
 	'wikibase-desc' => 'Repository di dati strutturati',
@@ -1749,8 +1754,8 @@ $messages['it'] = array(
 	'wikibase-save' => 'salva',
 	'wikibase-cancel' => 'annulla',
 	'wikibase-add' => 'aggiungi',
-	'wikibase-save-inprogress' => 'Sto salvando...',
-	'wikibase-remove-inprogress' => 'Sto rimuovendo...',
+	'wikibase-save-inprogress' => 'Salvataggio in corso...',
+	'wikibase-remove-inprogress' => 'Rimozione in corso...',
 	'wikibase-label-edit-placeholder' => 'inserisci etichetta',
 	'wikibase-description-edit-placeholder' => 'inserisci descrizione',
 	'wikibase-sitelink-site-edit-placeholder' => 'sito',
@@ -1795,7 +1800,20 @@ $messages['it'] = array(
 	'wikibase-error-relational-save-failed' => "Impossibile memorizzare l'identità dell'elemento nel database.",
 	'wikibase-error-sitelink-already-used' => "Collegamento al sito [[$1:$2]] già utilizzato dall'elemento con ID [[$3]].",
 	'special-itembytitle' => 'Elementi per titolo',
+	'wikibase-itembytitle-lookup-fieldset' => 'Ricerca elementi per sito e titolo',
+	'wikibase-itembytitle-lookup-site' => 'Sito:',
+	'wikibase-itembytitle-lookup-page' => 'Pagina:',
+	'wikibase-itembytitle-submit' => 'Ricerca',
+	'wikibase-itembytitle-nothing-found' => 'Non è stato trovato alcun elemento con la ricerca precedente. Si prega di restringere la ricerca con una migliore identificazione della pagina esterna.',
+	'wikibase-itembytitle-description' => 'Sito è un codice identificativo, come "enwiki".',
+	'wikibase-itembytitle-create' => 'È inoltre possibile [{{fullurl:Special:CreateItem|site=$1&page=$2}} creare un elemento].',
 	'special-itembylabel' => 'Elementi per etichetta',
+	'wikibase-itembylabel-lookup-fieldset' => 'Ricerca elementi per lingua ed etichetta',
+	'wikibase-itembylabel-lookup-language' => 'Lingua:',
+	'wikibase-itembylabel-lookup-label' => 'Etichetta:',
+	'wikibase-itembylabel-submit' => 'Ricerca',
+	'wikibase-itembylabel-create' => 'È inoltre possibile [{{fullurl:Special:CreateItem|language=$1&label=$2}} creare un elemento].',
+	'wikibase-itembylabel-nothing-found' => 'Non è stato trovato alcun elemento con la ricerca precedente. Si prega di restringere la ricerca.',
 	'special-createitem' => 'Crea un nuovo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Utilizzare uno dei seguenti parametri: "set", "add" o "remove".',
 	'wikibase-api-no-token' => 'Non è stato fornito alcun token.',
@@ -1842,6 +1860,17 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 per sapere dov\'è ora, o [[Special:CreateItem|creare un nuovo elemento]]</span>.',
 	'wikibase-noitem-nopermission' => 'Questo elemento non esiste.
 Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare i relativi log]</span>.',
+	'wikibase-item-summary-wbsetitem' => 'Creato un nuovo elemento',
+	'wikibase-item-summary-wbsetlabel-set' => 'Cambiata etichetta [$2]',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Rimossa etichetta [$2]',
+	'wikibase-item-summary-wbsetdescription-set' => 'Cambiata descrizione [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Rimossa descrizione [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Aggiunto collegamento [$2] specifico per il sito',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Rimosso collegamento [$2] specifico per il sito',
+	'wikibase-item-summary-wbsetaliases-set' => 'Imposto {{plural:$1|alias}} [$2]',
+	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Aggiunto e rimosso|Aggiunti e rimossi}} alias [$2]',
+	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Aggiunto|Aggiunti}} alias [$2]',
+	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'content-model-1001' => 'Elemento wikibase',
 );
 
@@ -1955,10 +1984,19 @@ $messages['ko'] = array(
 	'wikibase-itembytitle-lookup-site' => '사이트:',
 	'wikibase-itembytitle-lookup-page' => '문서:',
 	'wikibase-itembytitle-submit' => '찾기',
+	'wikibase-itembytitle-nothing-found' => '이전 찾기에서 항목을 찾을 수 없습니다. 바깥 문서의 더 잘 식별하도록 쿼리를 수정하세요.',
+	'wikibase-itembytitle-invalid-site' => '이전 쿼리는 찾기에 사용할 수 없습니다. 올바른 사이트 식별자를 제공하세요.',
+	'wikibase-itembytitle-description' => '사이트는 "enwiki"와 같은 식별자 코드입니다.',
+	'wikibase-itembytitle-create' => '또한 [{{fullurl:Special:CreateItem|site=$1&page=$2}} 항목을 만들] 수 있습니다.',
 	'special-itembylabel' => '레이블별 항목',
+	'wikibase-itembylabel-lookup-fieldset' => '언어와 레이블별로 항목 찾기',
 	'wikibase-itembylabel-lookup-language' => '언어:',
 	'wikibase-itembylabel-lookup-label' => '레이블:',
 	'wikibase-itembylabel-submit' => '찾기',
+	'wikibase-itembylabel-create' => '또한 [{{fullurl:Special:CreateItem|language=$1&label=$2}} 항목을 만들] 수 있습니다.',
+	'wikibase-itembylabel-nothing-found' => '이전 찾기에서 항목을 찾을 수 없습니다. 쿼리를 수정하세요.',
+	'wikibase-itembylabel-invalid-langcode' => '이전 쿼리는 찾기에 ​​사용할 수 없습니다. 올바른 언어 식별자를 제공해야 합니다.',
+	'wikibase-itembylabel-description' => '찾기에 사용되는 값은 완전한 텍스트 항목이어야 합니다. 언어는 "en"와 같은 식별자입니다.',
 	'special-createitem' => '새 항목 만들기',
 	'wikibase-api-aliases-invalid-list' => '"set", "add"와 "remove" 변수 중 하나를 사용하세요.',
 	'wikibase-api-no-token' => '토큰을 가지지 않았습니다.',
@@ -2005,6 +2043,7 @@ $1',
 [[Special:CreateItem|새 항목을 만들]]</span>수 있습니다.',
 	'wikibase-noitem-nopermission' => '이 항목이 존재하지 않습니다.
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 관련 기록을 검색]</span>할 수 있습니다.',
+	'wikibase-item-summary-wbsetitem' => '새 항목을 만듦',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] 레이블 바꿈',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] 레이블 제거함',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2] 설명 바꿈',
@@ -2194,7 +2233,7 @@ $1',
 	'wikibase-api-wrong-class' => 'Содржината на пронајдената страница не е од бараниот тип.',
 	'wikibase-api-session-failure' => 'Тековната сесија прекина. Ќе мора да се најавите повторно.',
 	'wikibase-restoreold' => 'врати',
-	'wikibase-noitem' => 'Не постои таква ставка.
+	'wikibase-noitem' => 'Не постои таков предмет.
 Можете да ги <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате поврзаните дневници]
 за да дознаете каде отишол, или да [[Special:CreateItem|создадете нов предмет]]</span>.',
 	'wikibase-noitem-nopermission' => 'Не постои таков предмет.
@@ -2548,9 +2587,9 @@ $messages['nn'] = array(
 	'wikibase-api-description-not-found' => 'Kan ikkje finne nokon tidligare skildring på angitt språk for dette datasettet.',
 	'wikibase-api-wrong-class' => 'Innhaldet på funnen side er ikkje av korrekt type.',
 	'wikibase-api-session-failure' => 'Den inneverande brukarøkta har feila og du må oppdatere sida og logge inn på nytt.',
-        'wikibase-restoreold' => 'tilbakestill',
-	'wikibase-noitem' => 'Dette datasettet finnes ikkje.
-Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]
+	'wikibase-restoreold' => 'tilbakestill',
+	'wikibase-noitem' => 'Dette datasettet finst ikkje.
+Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
 for å finne ut kva som har skjedd, eller [[Special:CreateItem|opprette eit nytt datasett]]</span>.',
 	'wikibase-noitem-nopermission' => 'Dette datasettet finst ikkje.
 Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
@@ -2626,7 +2665,7 @@ $messages['pt'] = array(
 	'special-createitem' => 'Criar um novo item',
 	'wikibase-api-cant-edit' => 'Edição não permitida:
 $1',
-	'wikibase-resetold' => 'redefinir',
+	'wikibase-restoreold' => 'redefinir',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -2645,7 +2684,7 @@ $messages['pt-br'] = array(
 	'wikibase-description-edit-placeholder' => 'insira uma descrição',
 	'wikibase-sitelink-site-edit-placeholder' => 'site',
 	'wikibase-sitelink-page-edit-placeholder' => 'artigo',
-	'wikibase-alias-edit-placeholder' => 'insira um alias',
+	'wikibase-alias-edit-placeholder' => 'insira um nome alternativo',
 	'wikibase-label-input-help-message' => 'Insira o título deste conjunto de dados em $1.',
 	'wikibase-description-input-help-message' => 'Insira uma curta descrição em $1 .',
 	'wikibase-sitelinks' => 'Lista de páginas com links para este item',
@@ -2653,6 +2692,15 @@ $messages['pt-br'] = array(
 	'wikibase-sitelinks-empty' => 'Ainda não há qualquer página do site com links para este item.',
 	'wikibase-sitelinks-input-help-message' => 'Defina um link para uma página relacionada a este item.',
 	'wikibase-remove' => 'remover',
+	'wikibase-undo-title' => 'Desfazendo edição para "$1"',
+	'wikibase-restore-title' => 'Restaurando antiga revisão de "$1"',
+	'wikibase-partial-undo' => 'A edição pode ser parcialmente desfeita.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|mudança foi omitida porque o respectivo valor mudou desde então|mudanças foram omitidas porque os respectivos valores mudaram deste então}}.',
+	'wikibase-empty-undo' => 'Não há nada que pode ser desfeito aqui.',
+	'wikibase-undo-revision-error' => 'a ação de desfazer falhou',
+	'wikibase-undo-samerev' => 'Não foi possível desfazer: a mesma revisão foi dada para o desfazer de origem e o desfazer de destino.',
+	'wikibase-undo-badpage' => 'Má revisão: revisão $2 não pertence a [[$1]].',
+	'wikibase-undo-firstrev' => 'Não é possível desfazer a criação da página',
 	'wikibase-propertyedittool-full' => 'A lista de valores está completa.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entrada|entradas}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entrada|entradas}})',
@@ -2662,8 +2710,8 @@ $messages['pt-br'] = array(
 	'wikibase-disambiguation-title' => 'Desambiguação para "$1"',
 	'wb-special-createitem-new-item-notification' => 'Novo item $1 criado e redirecionado para sua página. De volta à $2.',
 	'wikibase-aliases-label' => 'Também conhecido como:',
-	'wikibase-aliases-input-help-message' => 'Se esse conjunto de dados é conhecido por mais de um nome específico, você pode inserir aliases e sinônimos, assim ele pode ser encontrado por seus nomes alternativos.',
-	'wikibase-aliases-empty' => 'Não há aliases definidos.',
+	'wikibase-aliases-input-help-message' => 'Se esse conjunto de dados é conhecido por mais de um nome específico, você pode inserir nomes alternativos e sinônimos, assim ele pode ser encontrado por seus outros nomes.',
+	'wikibase-aliases-empty' => 'Não há nomes alternativos definidos.',
 	'wikibase-restrictionedit-tooltip-message' => 'Esta página está protegida, a edição não é permitida.',
 	'wikibase-blockeduser-tooltip-message' => 'Você está bloqueado e, por isso, não pode editar.',
 	'wikibase-tooltip-error-details' => 'Detalhes',
@@ -2685,7 +2733,23 @@ $messages['pt-br'] = array(
 	'wikibase-error-relational-save-failed' => 'Não não foi possível armazenar a identidade do item no banco de dados.',
 	'wikibase-error-sitelink-already-used' => 'Link do site [[$1:$2]] já utilizado pelo item com o ID [[$3]].',
 	'special-itembytitle' => 'Item por título',
+	'wikibase-itembytitle-lookup-fieldset' => 'Pesquisar itens por site e título',
+	'wikibase-itembytitle-lookup-site' => 'Site:',
+	'wikibase-itembytitle-lookup-page' => 'Página:',
+	'wikibase-itembytitle-submit' => 'Pesquisa',
+	'wikibase-itembytitle-nothing-found' => 'Nenhum item foi encontrado pela pesquisa anterior. Por favor, refina a consulta com uma melhor identificação da página externa.',
+	'wikibase-itembytitle-invalid-site' => 'A consulta anterior não pôde ser utilizada para uma pesquisa. Por favor, forneça um identificador válido para o site.',
+	'wikibase-itembytitle-description' => 'O site é um código de identificação, tal como "enwiki".',
+	'wikibase-itembytitle-create' => 'Você pode também [{{fullurl:Special:CreateItem|site=$1&page=$2}} criar um item].',
 	'special-itembylabel' => 'Item por rótulo',
+	'wikibase-itembylabel-lookup-fieldset' => 'Pesquisar itens por idioma e rótulo',
+	'wikibase-itembylabel-lookup-language' => 'Idioma:',
+	'wikibase-itembylabel-lookup-label' => 'Rótulo:',
+	'wikibase-itembylabel-submit' => 'Pesquisa',
+	'wikibase-itembylabel-create' => 'Você também pode [{{fullurl:Special:CreateItem|language=$1&label=$2}} criar um item].',
+	'wikibase-itembylabel-nothing-found' => 'Nenhum item foi encontrado pela pesquisa anterior. Por favor, refina a consulta.',
+	'wikibase-itembylabel-invalid-langcode' => 'A consulta anterior não pôde ser utilizada para uma pesquisa. Você precisa fornecer um identificador válido para o idioma.',
+	'wikibase-itembylabel-description' => 'Os valores utilizados para a pesquisa precisam ter a entrada de texto completamente preenchida. O idioma é um identificador, tal como "en".',
 	'special-createitem' => 'Criar um novo item',
 	'wikibase-api-aliases-invalid-list' => 'Utilize um dos parâmetros "set", "add" e "remove".',
 	'wikibase-api-no-token' => 'Não há qualquer token dado.',
@@ -2716,21 +2780,34 @@ $messages['pt-br'] = array(
 	'wikibase-api-delete-failed' => 'Falha da tentativa de exclusão do item.',
 	'wikibase-api-save-failed' => 'Falha na tentativa de salvar o item: $1',
 	'wikibase-api-invalid-contentmodel' => 'O modelo de conteúdo para a página é inválido.',
-	'wikibase-api-alias-incomplete' => 'Não foi possível localizar uma definição do alias para o item.',
-	'wikibase-api-alias-not-found' => 'Não foi possível localizar qualquer alias anterior no item.',
-	'wikibase-api-alias-found' => 'Encontrado um alias anterior no item.',
+	'wikibase-api-alias-incomplete' => 'Não foi possível localizar uma definição do nome alternativo para o item.',
+	'wikibase-api-alias-not-found' => 'Não foi possível localizar qualquer nome alternativo anterior no item.',
+	'wikibase-api-alias-found' => 'Encontrado um nome alternativo anterior no item.',
 	'wikibase-api-not-recognized' => 'A diretiva não é reconhecida.',
 	'wikibase-api-label-or-description' => 'Use um ou ambos de "label" e "description".',
 	'wikibase-api-label-not-found' => 'Não foi possível localizar um rótulo prévio para este item nesse idioma.',
 	'wikibase-api-description-not-found' => 'Não foi possível localizar uma descrição prévia para este item nesse idioma.',
 	'wikibase-api-wrong-class' => 'O conteúdo da página encontrada não é do tipo correto.',
 	'wikibase-api-session-failure' => 'A sessão atual falhou. É necessário fazer login novamente.',
-	'wikibase-restoreold' => 'redefinir',
+	'wikibase-api-illegal-field' => 'Campo ilegal utilizado na chamada: $1',
+	'wikibase-restoreold' => 'restaurar',
+	'wikibase-restore-summary' => 'Restaurar a revisão $1 por [[Special:Contributions/$2|$2]]',
 	'wikibase-noitem' => 'Este item não existe.
 Você pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os logs relacionados]
 para saber para onde foi ou [[Special:CreateItem|criar um novo item]]</span>.',
 	'wikibase-noitem-nopermission' => 'Este item não existe.
 Você pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os logs relacionados]</span>.',
+	'wikibase-item-summary-wbsetitem' => 'Criado um novo item',
+	'wikibase-item-summary-wbsetlabel-set' => 'Alterado o rótulo [$2]',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Removido o rótulo [$2]',
+	'wikibase-item-summary-wbsetdescription-set' => 'Alterada a descrição [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Removida a descrição [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Adicionado link específico do site [$2]',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Removido link específico do site [$2]',
+	'wikibase-item-summary-wbsetaliases-set' => 'Configurando [$2] {{plural:$1|nome alternativo|nomes alternativos}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => '{{plural:$1|Nome alternativo adicionado e removido [$2]|Nomes alternativos adicionados e removidos [$2]}}',
+	'wikibase-item-summary-wbsetaliases-add' => '{{plural:$1|Nome alternativo adicionado [$2]|Nomes alternativos adicionados [$2]}}',
+	'wikibase-item-summary-wbsetaliases-remove' => '{{plural:$1|Nome alternativo removido [$2]|Nomes alternativos removidos [$2]}}',
 	'content-model-1001' => 'Item do Wikibase',
 );
 
@@ -2766,7 +2843,7 @@ $messages['ro'] = array(
 	'wikibase-api-remove-sitelink-failed' => 'Legătura sitului nu poate fi eliminată.',
 	'wikibase-api-cant-edit' => 'Modificarea nepermisă:
 $1',
-	'wikibase-resetold' => 'resetare',
+	'wikibase-restoreold' => 'resetare',
 );
 
 /** Russian (русский)
@@ -2839,7 +2916,7 @@ $messages['si'] = array(
 	'special-createitem' => 'නව අයිතමයක් තනන්න',
 	'wikibase-api-cant-edit' => 'සංස්කරණයට ඉඩ ලබා නොදේ:
 $1',
-	'wikibase-resetold' => 'නැවත සකසන්න',
+	'wikibase-restoreold' => 'නැවත සකසන්න',
 	'wikibase-item-summary-wbsetitem' => 'නව අයිතමයක් තනන ලදී',
 );
 

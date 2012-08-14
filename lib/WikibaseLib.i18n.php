@@ -123,6 +123,13 @@ $messages['mk'] = array(
 	'wikibaselib-desc' => 'Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.',
 );
 
+/** Malay (Bahasa Melayu)
+ * @author Anakmalaysia
+ */
+$messages['ms'] = array(
+	'wikibaselib-desc' => 'Memegang kefungsian sepunya untuk sambungan Wikibase dan Wikibase Client',
+);
+
 /** Norwegian Bokmål (‪norsk (bokmål)‬)
  * @author Jeblad
  */
