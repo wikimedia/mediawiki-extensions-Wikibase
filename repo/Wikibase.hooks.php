@@ -300,7 +300,7 @@ final class RepoHooks {
 				$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
 				$itemContent = $itemHandler->unserializeContent( $textEntry->old_text/* , $archiveEntry->ar_content_format */ );
 				$item = $itemContent->getItem();
-				$change = ItemDeletion::newFromItem( $item );
+				$change = EntityDeletion::newFromEntity( $item );
 
 				$change->setFields( array(
 					'revision_id' => $archiveEntry->ar_rev_id,
