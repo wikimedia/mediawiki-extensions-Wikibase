@@ -11,6 +11,9 @@ require 'ruby_selenium'
 class ItemPage < RubySelenium
   include PageObject
 
+  # logout
+  link(:logoutLink, :xpath => "//li[@id='pt-logout']/a")
+
   # edit label UI
   h1(:firstHeading, :xpath => "//h1[contains(@class, 'wb-firstHeading')]")
   div(:uiToolbar, :class => "wb-ui-toolbar")

@@ -22,21 +22,21 @@ describe "Check functionality of protected page" do
         page.protect_page
       end
       visit_page(LoginPage) do |page|
-        page.logout
+        page.logout_user
       end
     end
   end
 
   context "check functionality of protected page" do
     it "should be logged out, and check if label/description of protected item could not be edited" do
-      visit_page(LoginPage) do |page|
-        if page.logout? == true
-          page.logout_user
-        end
-      end
       on_page(NewItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
+        if page.logoutLink? == true
+          page.logoutLink
+          page.navigate_to_item
+          page.wait_for_item_to_load
+        end
         #label
         page.editLabelLink?.should be_false
         page.editLabelLinkDisabled?.should be_true
