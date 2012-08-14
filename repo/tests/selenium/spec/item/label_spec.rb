@@ -18,7 +18,7 @@ describe "Check functionality of edit label" do
         page.itemLabelSpan.should be_true
         current_label = page.itemLabelSpan
         changed_label = current_label + "_fooo"
-        @browser.title.include? current_label
+        @browser.title.include?(current_label).should be_true
         page.itemLabelSpan.should == current_label
         page.editLabelLink?.should be_true
         page.cancelLabelLink?.should be_false
