@@ -28,7 +28,7 @@ class ClientPage < RubySelenium
   link(:interwiki_en, :xpath => "//li[@class='interwiki-en']/a")
   link(:interwiki_it, :xpath => "//li[@class='interwiki-it']/a")
   link(:interwiki_hu, :xpath => "//li[@class='interwiki-hu']/a")
-  link(:interwiki_nl, :xpath => "//li[@class='interwiki-nl']/a")
+  link(:interwiki_fi, :xpath => "//li[@class='interwiki-fi']/a")
   link(:interwiki_fr, :xpath => "//li[@class='interwiki-fr']/a")
   def create_article(title, text)
     self.clientSearchInput= title

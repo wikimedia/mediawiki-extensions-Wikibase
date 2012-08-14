@@ -12,7 +12,7 @@ article_title = "Rome"
 article_text = "It's the capital of Italy!"
 item_description = "It's the capital of Italy!"
 item_sitelink_en = ["en", "Rome"]
-item_sitelinks = [["de", "Rom"], ["it", "Roma"], ["nl", "Rome (stad)"], ["hu", "Róma"]]
+item_sitelinks = [["de", "Rom"], ["it", "Roma"], ["fi", "Rooma"], ["hu", "Róma"]]
 item_sitelinks_additional = [["fr", "Rome"]]
 
 describe "Check functionality of client-repo connection" do
@@ -63,7 +63,7 @@ describe "Check functionality of client-repo connection" do
         page.count_interwiki_links.should == 4
         page.interwiki_de?.should be_true
         page.interwiki_it?.should be_true
-        page.interwiki_nl?.should be_true
+        page.interwiki_fi?.should be_true
         page.interwiki_hu?.should be_true
         page.interwiki_en?.should be_false
       end
@@ -80,7 +80,7 @@ describe "Check functionality of client-repo connection" do
         page.interwiki_it
         page.clientArticleTitle.should == item_sitelinks[1][1]
         page.navigate_to_article(article_title)
-        page.interwiki_nl
+        page.interwiki_fi
         page.clientArticleTitle.should == item_sitelinks[2][1]
         page.navigate_to_article(article_title)
         page.interwiki_hu
@@ -109,7 +109,7 @@ describe "Check functionality of client-repo connection" do
         page.count_interwiki_links.should == 5
         page.interwiki_de?.should be_true
         page.interwiki_it?.should be_true
-        page.interwiki_nl?.should be_true
+        page.interwiki_fi?.should be_true
         page.interwiki_hu?.should be_true
         page.interwiki_fr?.should be_true
         page.interwiki_en?.should be_false
@@ -132,13 +132,13 @@ describe "Check functionality of client-repo connection" do
         end
       end
     end
-=begin
+
     it "should check that no sitelinks are displayed on client" do
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title, true)
         page.clientInterwikiLinkList?.should be_false
       end
     end
-=end
+
   end
 end
