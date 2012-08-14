@@ -82,12 +82,60 @@ class ApiSetItem extends ApiModifyItem {
 				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
 			}
 			$languages = array_flip( Utils::getLanguageCodes() );
+
+			if ( isset( $params['clear'] ) && $params['clear'] ) {
+				$itemContent->getItem()->clear();
+			}
+
+			$page = $itemContent->getWikiPage();
+			if ( $page ) {
+				$title = $page->getTitle();
+				$revision = $page->getRevision();
+			}
+
 			foreach ( $data as $props => $list ) {
 				if ( !is_string( $props ) ) { // NOTE: catch json_decode returning an indexed array (list)
 					$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-string' );
 				}
+				// unconditional no-ops
+				if ( in_array( $props, array( 'length', 'count' ) ) ) {
+					continue;
+				}
+				// conditional no-ops
+				if ( isset( $params['exclude'] ) && in_array( $props, $params['exclude'] ) ) {
+					continue;
+				}
 
 				switch ($props) {
+
+				// conditional processing
+				case 'pageid':
+					if ( isset( $data[$props] ) && ($page) && $page->getId() !== $data[$props]) {
+						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'pageid' ), 'illegal-field' );
+					}
+					break;
+				case 'ns':
+					if ( isset( $data[$props] ) && isset( $title ) && $title->getNamespace() !== $data[$props]) {
+						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'namespace' ), 'illegal-field' );
+					}
+					break;
+				case 'title':
+					if ( isset( $data[$props] ) && isset( $title ) && $title->getPrefixedText() !== $data[$props]) {
+						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'title' ), 'illegal-field' );
+					}
+					break;
+				case 'lastrevid':
+					if ( isset( $data[$props] ) && isset( $revision ) && $revision->getId() !== $data[$props]) {
+						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'lastrevid' ), 'illegal-field' );
+					}
+					break;
+				case 'touched':
+					if ( isset( $data[$props] ) && isset( $revision ) &&  wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) !== $data[$props]) {
+						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'touched' ), 'illegal-field' );
+					}
+					break;
+
+				// ordinary entries
 				case 'labels':
 					if ( !is_array( $list ) ) {
 						$this->dieUsage( "Key 'labels' must refer to an array", 'not-recognized-array' );
@@ -192,8 +240,6 @@ class ApiSetItem extends ApiModifyItem {
 
 		$item = $itemContent->getItem();
 
-		$res = $this->getResult();
-
 		$this->addLabelsToResult( $item->getLabels(), 'item' );
 		$this->addDescriptionsToResult( $item->getDescriptions(), 'item' );
 		$this->addAliasesToResult( $item->getAllAliases(), 'item' );
@@ -213,6 +259,7 @@ class ApiSetItem extends ApiModifyItem {
 			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
 			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 			array( 'code' => 'add-sitelink-failed', 'info' => wfMsg( 'wikibase-api-add-sitelink-failed' ) ),
+			array( 'code' => 'illegal-field', 'info' => wfMsg( 'wikibase-api-illegal-field' ) ),
 		) );
 	}
 
@@ -236,7 +283,7 @@ class ApiSetItem extends ApiModifyItem {
 	public function isWriteMode() {
 		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite', false ) : true ;
 	}
-	
+
 	/**
 	 * @see ApiBase::getAllowedParams()
 	 */
@@ -244,6 +291,15 @@ class ApiSetItem extends ApiModifyItem {
 		return array_merge( parent::getAllowedParams(), array(
 			'data' => array(
 				ApiBase::PARAM_TYPE => 'string',
+			),
+			'exclude' => array(
+				ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'touched', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
+				ApiBase::PARAM_DFLT => 'pageid|ns|title|lastrevid|touched',
+				ApiBase::PARAM_ISMULTI => true,
+			),
+			'clear' => array(
+				ApiBase::PARAM_TYPE => 'boolean',
+				ApiBase::PARAM_DFLT => false
 			),
 		) );
 	}
@@ -255,6 +311,12 @@ class ApiSetItem extends ApiModifyItem {
 		return array_merge( parent::getParamDescription(), array(
 			'data' => array( 'The serialized object that is used as the data source.',
 				"The newly created item will be assigned an item 'id'."
+			),
+			'exclude' => array( 'List of substructures to neglect during the processing.',
+				"In addition 'length' and 'count' is always excluded."
+			),
+			'clear' => array( 'If set, the complete item is emptied before proceeding.',
+				'The item will not be saved before the item is filled with the "data", possibly with parts excluded.'
 			),
 		) );
 	}
