@@ -55,4 +55,31 @@
 
 	} );
 
+	test( 'set focus', function() {
+
+		// attach button to body in order to be able to focus it
+		$( 'body' ).append( this.button._elem );
+
+		ok(
+			document.activeElement !== this.button._elem[0],
+			'button is not focussed'
+		);
+
+		this.button.setFocus();
+
+		equal(
+			document.activeElement,
+			this.button._elem[0],
+			'set focus on button'
+		);
+
+		this.button.removeFocus();
+
+		ok(
+			document.activeElement !== this.button._elem[0],
+			'removed focus from button'
+		);
+
+	} );
+
 }() );
