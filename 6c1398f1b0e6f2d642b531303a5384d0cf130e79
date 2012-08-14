@@ -16,6 +16,24 @@
       "revId": "6c1398f1b0e6f2d642b531303a5384d0cf130e79",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//7jc\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-14T09:58:44Z",
+      "side": 1,
+      "message": "It should just be values way off so failures are assured.",
+      "parentUuid": "AAAARX//7kc\u003d",
+      "revId": "6c1398f1b0e6f2d642b531303a5384d0cf130e79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
