@@ -24,4 +24,13 @@ interface EntityDiff extends \Diff\IDiff {
 	 */
 	public function getView();
 
+	/**
+	 * Applies this diff as a patch to the given entity.
+	 *
+	 * @param Entity $entity the entity to modify
+	 *
+	 * @return void
+	 */
+	public function apply( Entity $entity );
+
 }

@@ -162,6 +162,8 @@ final class LibHooks {
 			'changes/EntityDeletion',
 			'changes/EntityRefresh',
 			'changes/EntityUpdate',
+
+			'entity/ItemDiff',
 		);
 
 		// Test compat

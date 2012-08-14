@@ -87,12 +87,12 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 		if ( $rev->userCan( \Revision::DELETED_TEXT, $user ) ) {
 			if ( $title->quickUserCan( 'edit', $user ) ) {
 				if ( $rev->isCurrent() ) {
-					$editQuery = array( 'action' => 'edit' ); //XXX: does nothing, just like view
+					$editQuery = array( 'action' => 'edit' );
 					$msg = $this->msg( 'editold' )->escaped();
 				} else {
-					$editQuery = array( 'action' => 'reset' ); //XXX: not yet implemented
-					$editQuery['oldid'] = $rev->getID();
-					$msg = $this->msg( 'wikibase-resetold' )->escaped();
+					$editQuery = array( 'action' => 'edit' );
+					$editQuery['restore'] = $rev->getID();
+					$msg = $this->msg( 'wikibase-restoreold' )->escaped();
 				}
 
 				$header .= ' (' . \Linker::linkKnown( $title, $msg, array(), $editQuery ) . ')';

@@ -3,10 +3,6 @@
 namespace Wikibase;
 
 /**
- * Handles the edit action for Wikibase items.
- *
- * @since 0.1
- *
  * @file
  * @ingroup Wikibase
  * @ingroup Action
@@ -15,7 +11,24 @@ namespace Wikibase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
+
+/**
+ * Handles the edit action for Wikibase items.
+ *
+ * @since 0.1
+ */
 class EditItemAction extends EditEntityAction {
+
+
+
+}
+
+/**
+ * Handles the submit action for Wikibase items.
+ *
+ * @since 0.1
+ */
+class SubmitItemAction extends SubmitEntityAction {
 
 
 

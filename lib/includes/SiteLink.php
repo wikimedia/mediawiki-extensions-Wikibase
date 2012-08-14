@@ -188,4 +188,23 @@ class SiteLink {
 
 		return array_unique( $siteIds );
 	}
+
+	/**
+	 * Converts a list of SiteLink objects to a structure of arrays.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $baseLinks a list of SiteLink objects
+	 * @return array an associative array with on entry for each sitelink
+	 */
+	public static function siteLinksToArray( $baseLinks ) {
+		$links = array();
+
+		/* @var SiteLink $link */
+		foreach ( $baseLinks as $link ) {
+			$links[ $link->getSiteID() ] = $link->getPage();
+		}
+
+		return $links;
+	}
 }
