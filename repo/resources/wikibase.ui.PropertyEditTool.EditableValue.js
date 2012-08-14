@@ -265,7 +265,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			}
 		}, this );
 
-		if( this.isPending() ) {
+		if( this.isPending() || this.isEmpty() && this.isNew() ) {
 			// no API call necessary since value hasn't been stored yet...
 			degrade();
 			return $.Deferred().resolve().promise(); // ...return new promise nonetheless
@@ -360,7 +360,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		if ( !save ) {
 			this._reTransform( false );
-			if( this.isPending() ) { // cancel pending edit...
+			if( this.isPending() || this.isEmpty() && this.isNew() && this.preserveEmptyForm ) { // cancel pending edit...
 				promise = this.remove(); // not yet existing value, no state to go back to -> do not trigger 'afterStopEditing' here!
 			} else { // cancel...
 				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, this.isPending() ] );
@@ -476,7 +476,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 				 * re-enable all actions when removing fails since it is just using edit mode for
 				 * disabling all actions while the remove action is being processed
 				 */
-				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, this.isPending() ] );
+				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ self, self.isPending() ] );
 			}
 			self._apiCallErr( textStatus, response, apiAction );
 		} );
@@ -629,6 +629,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * Returns true if the value is in edit mode and not stored in the database yet.
+	 * TODO: this method only works for site links and therefore should be replaced by this.isNew()
+	 * @deprecated
 	 *
 	 * @return bool
 	 */
@@ -712,6 +714,16 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	},
 
 	/**
+	 * Determines if this value is a new value that is not yet stored
+	 * TODO: this method should completely replace this.isPending() which only works for site links
+	 *
+	 * @return bool true if this is a new value
+	 */
+	isNew: function() {
+		return this.valueCompare( this.getInitialValue(), null );
+	},
+
+	/**
 	 * Returns whether the current value is valid
 	 *
 	 * @return bool
@@ -790,8 +802,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		// can't save if invalid input (except it is empty, in that case save == remove) OR same as before
 		var disableSave = ( isInvalid && !this.isEmpty() ) || this.valueCompare( this.getInitialValue(), value );
 
-		// can't cancel if empty before except the edit is pending (then it will be removed)
-		var disableCancel = !this.isPending() && this.valueCompare( this.getInitialValue(), null );
+		/*
+		when having an empty input box, edit mode is automatically started when entering the first
+		character; therefore, edit mode has to be stopped automatically (disabling cancel, save is
+		disabled anyway when the input box is empty) when emptying the box again while the box was
+		empty initially; apart from that, pending values may always be cancelled removing
+		corresponding form input from the DOM etc.
+		*/
+		var disableCancel = !this.isInEditMode() && !this.isEmpty() ||
+			!this.isPending() && this.isEmpty() && this.isNew();
 
 		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
 		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
@@ -801,12 +820,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		 * are disabled; this happens for empty values whose edit modes are triggered directly
 		 * during page loading
 		 */
-		if ( !this.isPending() ) {
-			if ( disableSave && disableCancel && this.preserveEmptyForm ) {
-				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, this.isPending() ] );
-			} else if ( this.valueCompare( this.getInitialValue(), null ) ) {
-				$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
-			}
+		if ( disableSave && disableCancel && this.preserveEmptyForm ) {
+			$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, false ] );
+		} else if ( this.isNew() ) {
+			$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
 		}
 
 	},
