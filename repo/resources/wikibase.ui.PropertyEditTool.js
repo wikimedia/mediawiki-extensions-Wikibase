@@ -112,8 +112,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 					if ( !this.allowsMultipleValues ) {
 						this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
 					} else if (
-						typeof wasPending !== 'undefined' &&
-						this.hasValue( origin )
+						typeof wasPending !== 'undefined' && wasPending && this.hasValue( origin )
 					) {
 						/* focus "add" button after adding a value to a multi-value property to
 						instantly allow adding another value */
