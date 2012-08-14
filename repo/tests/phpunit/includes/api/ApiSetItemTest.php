@@ -143,6 +143,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'item', 'id' );
+		$this->assertSuccess( $res, 'item', 'lastrevid' );
 		$this->assertItemEquals( $item, $res['item'] );
 	}
 
@@ -434,6 +435,8 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		// check return value -------------------------------------------
 		$this->assertSuccess( $res, 'item' );
 		$item = $res['item'];
+		$this->assertSuccess( $res, 'item', 'id' );
+		$this->assertSuccess( $res, 'item', 'lastrevid' );
 
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {

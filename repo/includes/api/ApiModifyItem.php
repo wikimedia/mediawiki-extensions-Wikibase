@@ -249,7 +249,16 @@ abstract class ApiModifyItem extends Api {
 					'item',
 					'id', $itemContent->getItem()->getId()
 				);
-
+				$page = $itemContent->getWikiPage();
+				if ( $page->exists() ) {
+					$revision = $page->getRevision();
+					if ( $revision !== null ) {
+						$this->getResult()->addValue(
+							'item',
+							'lastrevid', intval( $revision->getId() )
+						);
+					}
+				}
 				if ( $hasLink ) {
 					$normalized = array();
 
