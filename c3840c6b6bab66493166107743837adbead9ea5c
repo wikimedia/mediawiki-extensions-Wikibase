@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//6Io\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T17:41:58Z",
+      "side": 1,
+      "message": "underscores! o_O",
+      "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6Ik\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T17:41:58Z",
+      "side": 1,
+      "message": "please use an explicit check - empty is evil",
+      "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6Ig\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T17:41:58Z",
+      "side": 1,
+      "message": "both var names here have issues",
+      "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
