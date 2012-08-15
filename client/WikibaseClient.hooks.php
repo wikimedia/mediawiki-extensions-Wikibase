@@ -1,9 +1,6 @@
 <?php
 
 namespace Wikibase;
-use DatabaseUpdater;
-use \Wikibase\LangLinkHandler as LangLinkHandler;
-use \Wikibase\SortUtils as SortUtils;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -28,7 +25,7 @@ final class ClientHooks {
 	 *
 	 * @return boolean
 	 */
-	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
+	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
 
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
@@ -108,12 +105,12 @@ final class ClientHooks {
 				 */
 				$item = $change->getEntity();
 
-				$globalId = 'enwiki';
+				$globalId = Settings::get( 'siteGlobalID' );
 
 				$siteLink = $item->getSiteLink( $globalId );
 
 				if ( $siteLink !== null ) {
-					$title = \Title::newFromText( $siteLink->getPage() );
+					$title = Title::newFromText( $siteLink->getPage() );
 
 					if ( !is_null( $title ) && $title->getArticleID() !== 0 ) {
 						$title->invalidateCache();
@@ -143,19 +140,19 @@ final class ClientHooks {
 		$parserOutput = $parser->getOutput();
 
 		if ( LangLinkHandler::doInterWikiLinks( $parser ) && LangLinkHandler::useRepoLinks( $parser ) ) {
-			$repolinks = LangLinkHandler::getLocalItemLinks( $parser );
+			$repoLinks = LangLinkHandler::getLocalItemLinks( $parser );
 
-			if ( $repolinks !== array() ) {
-				LangLinkHandler::suppressRepoLinks( $parser, $repolinks );
+			if ( $repoLinks !== array() ) {
+				LangLinkHandler::suppressRepoLinks( $parser, $repoLinks );
 
-				foreach ( $repolinks as $link ) {
+				foreach ( $repoLinks as $link ) {
 					// TODO: know that this site is in the wikipedia group and get links for only this group
 					// TODO: hold into account wiki-wide and page-specific settings to do the merge rather then just overriding.
-					$localkey = $link->getSite()->getConfig()->getLocalId();
+					$localKey = $link->getSite()->getConfig()->getLocalId();
 
 					// unset self referencing interwiki link
-					if ( $localkey != $wgLanguageCode ) {
-						$parserOutput->addLanguageLink( $localkey . ':' . $link->getPage() );
+					if ( $localKey != $wgLanguageCode ) {
+						$parserOutput->addLanguageLink( $localKey . ':' . $link->getPage() );
 					}
 				}
 			}
@@ -185,10 +182,62 @@ final class ClientHooks {
 				'namespaces' => array( NS_MAIN ),
 				'source' => array( 'dir' => __DIR__ . '/tests' ),
 				'editURL' => '',
+				'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
+				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
 				'sort' => 'none',
 				'sortPrepend' => false,
 				'alwaysSort' => false,
 			)
+		);
+
+		return true;
+	}
+
+	/**
+	 * Adds css for the edit links sidebar link
+	 *
+	 * @param \OutputPage $out
+	 * @param \Skin $skin
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
+		// FIXME: we do NOT want to add these resources on every page where the parser is used (ie pretty much all pages)
+		$out->addModules( 'ext.wikibaseclient' );
+		return true;
+	}
+
+	/**
+	 * Displays a list of links to pages on the central wiki at the end of the language box.
+	 *
+	 * @param \Skin $skin
+	 * @param \QuickTemplate $template
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
+		global $wgLanguageCode;
+
+		if( ! $editUrl = Settings::get( 'repoBase' ) ) {
+			return true;
+		}
+
+		$title = $skin->getContext()->getTitle();
+
+		// This must be the same as in LangLinkHandler
+		// NOTE: Instead of getFullText(), we need to get a normalized title, and the server should use a locale-aware normalization function yet to be written which has the same output
+		$titleText = $title->getFullText();
+		$siteId = Settings::get( 'siteGlobalID' );
+
+		$template->data['language_urls'][] = array(
+			'href' => rtrim( $editUrl, "/" ) . "/Special:ItemByTitle/$siteId/$titleText",
+			'text' => wfMsg( 'wbc-editlinks' ),
+			'title' => wfMsg( 'wbc-editlinkstitle' ),
+			'class' => 'wbc-editpage',
 		);
 
 		return true;

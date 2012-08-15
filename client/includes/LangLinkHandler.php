@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use Parser, ParserOutput;
 
 /**
  * Handles language links.
@@ -25,11 +24,13 @@ class LangLinkHandler {
 	 * @param Parser $parser
 	 * @return array of SiteLink
 	 */
-	public static function getLocalItemLinks( Parser $parser ) {
+	public static function getLocalItemLinks( \Parser $parser ) {
 		$linkTable = SiteLinkCache::singleton();
 
+		$siteId = Settings::get( 'siteGlobalID' );
+
 		// TODO: obtain global id
-		$itemId = $linkTable->getItemIdForPage( 'enwiki', $parser->getTitle()->getFullText() );
+		$itemId = $linkTable->getItemIdForPage( $siteId, $parser->getTitle()->getFullText() );
 
 		if ( $itemId !== false ) {
 			$item = EntityCache::singleton()->getItem( $itemId );
@@ -50,7 +51,7 @@ class LangLinkHandler {
 	 * @param Parser $parser
 	 * @return boolean
 	 */
-	public static function doInterwikiLinks( Parser $parser ) {
+	public static function doInterwikiLinks( \Parser $parser ) {
 		if ( $parser->getOptions()->getInterfaceMessage() ) {
 			return false;
 		}
@@ -65,7 +66,7 @@ class LangLinkHandler {
 	 * @param Parser $parser
 	 * @return boolean
 	 */
-	public static function useRepoLinks( Parser $parser ) {
+	public static function useRepoLinks( \Parser $parser ) {
 		$title = $parser->getTitle();
 		if( !in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
 			return false;
@@ -84,7 +85,7 @@ class LangLinkHandler {
 	 *
 	 * @return true
 	 */
-	public static function suppressRepoLinks( Parser $parser, &$repoLinks ) {
+	public static function suppressRepoLinks( \Parser $parser, &$repoLinks ) {
 		$out = $parser->getOutput();
 		$nei = self::getNoExternalInterlang( $parser->getOutput() );
 
@@ -93,8 +94,7 @@ class LangLinkHandler {
 		} else if ( is_array( $repoLinks ) && is_array( $nei ) ) {
 			$siteLinksRemove = array();
 
-			// TODO: hackish until we have a way of knowing site group
-			$sitesuffix = 'wiki';
+			$siteid = Settings::get( 'globalSiteID' );
 
 			// Remove the links specified by noexternalinterlang parser function.
 			foreach( array_keys( $nei ) as $code ) {
@@ -112,7 +112,7 @@ class LangLinkHandler {
 	 *
 	 * @return Array Empty array if not set.
 	 */
-	public static function getNoExternalInterlang( ParserOutput $out ) {
+	public static function getNoExternalInterlang( \ParserOutput $out ) {
 		$nei = $out->getProperty( 'no_external_interlang' );
 
 		if( empty( $nei ) ) {
