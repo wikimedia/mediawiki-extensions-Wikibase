@@ -122,14 +122,7 @@ describe "Check functionality of client-repo connection" do
       on_page(SitelinksItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        count = 0
-        number_of_sitelinks = page.getNumberOfSitelinksFromCounter
-        while count < (number_of_sitelinks)
-          page.removeSitelinkLink
-          ajax_wait
-          page.wait_for_api_callback
-          count = count + 1
-        end
+        page.remove_all_sitelinks
       end
     end
 

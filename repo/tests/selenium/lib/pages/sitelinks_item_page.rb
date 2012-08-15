@@ -95,4 +95,15 @@ class SitelinksItemPage < NewItemPage
     wait_for_api_callback
   end
 
+  def remove_all_sitelinks
+    count = 0
+    number_of_sitelinks = getNumberOfSitelinksFromCounter
+    while count < (number_of_sitelinks)
+      removeSitelinkLink
+      ajax_wait
+      wait_for_api_callback
+      count = count + 1
+    end
+  end
+
 end
