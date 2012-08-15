@@ -105,6 +105,14 @@ $messages['fr'] = array(
 	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
 );
 
+/** Franco-Provençal (arpetan)
+ * @author ChrisPtDe
+ */
+$messages['frp'] = array(
+	'wbc-editlinks' => 'Changiér los lims',
+	'wbc-editlinkstitle' => 'Changiér los lims entèrlengoua',
+);
+
 /** Galician (galego)
  * @author Toliño
  */
