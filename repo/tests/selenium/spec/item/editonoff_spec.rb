@@ -24,7 +24,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.descriptionInputField_element.enabled?.should be_false
         page.saveLabelLink?.should be_true
         page.saveDescriptionLink?.should be_false
-        page.cancelLabelLink?.should be_false
+        page.cancelLabelLink?.should be_true
         page.cancelDescriptionLink?.should be_false
         page.labelInputField_element.clear
         page.labelInputField_element.click
@@ -40,7 +40,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.saveLabelLink?.should be_false
         page.saveDescriptionLink?.should be_true
         page.cancelLabelLink?.should be_false
-        page.cancelDescriptionLink?.should be_false
+        page.cancelDescriptionLink?.should be_true
         page.descriptionInputField_element.clear
         page.descriptionInputField_element.click
         page.labelInputField_element.enabled?.should be_true
