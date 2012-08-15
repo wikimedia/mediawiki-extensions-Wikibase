@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//6CQ\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T19:33:04Z",
+      "side": 1,
+      "message": "Looks weird, not sure I saw that one before. Wouldn\u0027t this just create an array in the memory just to immediately clean it up afterwards?",
+      "parentUuid": "AAAARX//6GQ\u003d",
+      "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//6Io\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "I think \u003d\u003d\u003d array() is better, although empty is probably fine as well, as long as you only use empty for arrays. So I\u0027m fine with this staying like it is I guess",
       "parentUuid": "AAAARX//6Gk\u003d",
+      "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6CE\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T19:33:04Z",
+      "side": 1,
+      "message": "I think $edit_url is not an array, so I guess you are actually not fine with it ;)",
+      "parentUuid": "AAAARX//6GM\u003d",
       "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
