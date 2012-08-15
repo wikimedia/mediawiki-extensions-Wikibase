@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//6IQ\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T17:46:32Z",
+      "side": 1,
+      "message": "Why did you change this? More code, less easy to maintain (this is more prone to end up as dead code)",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6II\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T17:46:32Z",
+      "side": 1,
+      "message": "naming!",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6IE\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T17:46:32Z",
+      "side": 1,
+      "message": "empty!",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6IA\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T17:46:32Z",
+      "side": 1,
+      "message": "underscore!",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6H8\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T17:46:32Z",
+      "side": 1,
+      "message": "naming!",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
