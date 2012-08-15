@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//6SU\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6SQ\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6SY\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6SM\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6SI\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "group takes an integer (at least the current site code in lib does) referred to using a constant, SITE_GROUP_* IIRC.",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6SE\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "We do not want to stick with having the site identifier in our settings. This should be something core provides. So I suggest having an utility function that returns the sites global id currently using this newly introduced setting. This will make it easy for us to switch to using this new core code later on.",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6SA\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6R8\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6R4\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6R0\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6Rw\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "Please use array_filter rather then manually keeping track of an index and doing an unset in a foreach",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6Rs\u003d",
+        "filename": "client/includes/SortUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6Ro\u003d",
+        "filename": "client/includes/SortUtils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T13:27:04Z",
+      "side": 1,
+      "message": "lowerCamelCase",
+      "revId": "a4ac1374ee43a7748e37e5298e1765a8d4a34cb0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
