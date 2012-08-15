@@ -298,11 +298,18 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		 *        already and the internal value is changed to the new value.
 		 * @param bool wasPending whether the element was pending before the edit.
 		 */
-		$( editableValue ).on( 'afterStopEditing', $.proxy( function( event, save, wasPending ) {
+		$( editableValue )
+		.on( 'afterStopEditing', function( event, save, wasPending ) {
 			if ( save && wasPending ) {
-				this._newValueHandler_onAfterStopEditing( editableValue, save, wasPending );
+				self._newValueHandler_onAfterStopEditing( editableValue, save, wasPending );
 			}
-		}, this ) );
+		} )
+		.on( 'showError', function( event, error ) {
+			self._subject.addClass( 'wb-error' );
+		} )
+		.on( 'hideError', function( event, error ) {
+			self._subject.removeClass( 'wb-error' );
+		} );
 
 		return editableValue;
 	},

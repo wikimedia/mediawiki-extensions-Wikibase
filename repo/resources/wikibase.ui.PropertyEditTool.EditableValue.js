@@ -17,14 +17,19 @@
  *                               (2) bool - save - whether save action was triggered
  *                               (3) bool - wasPending - whether value is a completely new value
  * newItemCreated: Triggered after an item has been created and the necessary API request has returned
- *                   Parameters: (1) jQuery.event
- *                               (2) JSON - item - the new item returned by the API request FIXME: this should be an
+ *                 Parameters: (1) jQuery.event
+ *                             (2) JSON - item - the new item returned by the API request FIXME: this should be an
  *                                                                                                 'Item' object!
  * startItemPageEditMode: Triggered when any edit mode on the item page is started
  *                        Parameters: (1) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
  * stopItemPageEditMode: Triggered when any edit mode on the item page is stopped
  *                       Parameters: (1) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
  *                                   (2) bool - wasPending - whether value was a previously not existent/new value that has just been added
+ *
+ * showError: Triggered when error is displayed.
+ *            Parameters: (1) object error containing details about the error, usually API related.
+ *
+ * hideError: Triggered when displayed error is removed again.
  */
 "use strict";
 
@@ -607,15 +612,18 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			? this._toolbar.editGroup.btnRemove
 			: this._toolbar.editGroup.btnSave;
 
-		this._subject.addClass( this.UI_CLASS + '-aftereditnotify' );
+		this._subject.addClass( 'wb-error' );
 
 		btn.setTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' } ) );
 		btn.getTooltip().show( true );
 		$( btn.getTooltip() ).on( 'hide', $.proxy( function() {
-			this._subject.removeClass( this.UI_CLASS + '-aftereditnotify' );
+			this._subject.removeClass( 'wb-error' );
+			$( this ).triggerHandler( 'hideError', [ error ] );
 		}, this ) );
 
 		this.setFocus(); // re-focus input
+
+		$( this ).triggerHandler( 'showError', [ error ] );
 	},
 
 	/**

@@ -60,10 +60,6 @@ h1.wb-firstHeading input {
 	font-style: italic;
 }
 
-.wb-ui-propertyedittool-editablevalue {
-
-}
-
 .wb-ui-propertyedittool-editablevalue-ineditmode {
 	white-space: nowrap;
 }
@@ -81,6 +77,12 @@ table.wb-ui-propertyedittool-ineditmode .wb-ui-propertyedittool-editablevalue-in
 }
 table.wb-ui-propertyedittool-ineditmode {
 	background-color:inherit!important;
+}
+.wb-ui-propertyedittool-ineditmode.wb-error { /* while tooltip is shown on editable value */
+	background-color: #FFDFC9;
+}
+.wb-ui-propertyedittool-editablevalue-ineditmode.wb-error td {  /* while tooltip is shown on (multi-valued) editable value */
+	background-color: #FFDFC9!important;
 }
 
 	/********** TOOLTIP **********/
