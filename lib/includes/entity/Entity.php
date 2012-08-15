@@ -8,7 +8,7 @@ namespace Wikibase;
  *
  * @since 0.1
  *
- * @file WikibaseItem.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -251,5 +251,59 @@ interface Entity {
 	 * @since 0.1
 	 */
 	public function clear();
+
+	/**
+	 * Adds a statement to the entity.
+	 * The returned statement can be used to generate a statement hash.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Statement $statement
+	 *
+	 * @return Statement
+	 */
+	public function addStatement( Statement $statement );
+
+	/**
+	 * Returns the statement with the provided statement number.
+	 * If it does not exist, an exception is thrown.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $statementNumber
+	 *
+	 * @return Statement
+	 * @throws \MWException
+	 */
+	public function getStatement( $statementNumber );
+
+	/**
+	 * Returns if the statement with the provided statement number exists.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $statementNumber
+	 *
+	 * @return boolean
+	 */
+	public function hasStatement( $statementNumber );
+
+	/**
+	 * Returns the statements belonging to this entity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return array of Statement
+	 */
+	public function getStatements();
+
+	/**
+	 * Removes the statement with the provided statement number if it exists.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $statementNumber
+	 */
+	public function removeStatement( $statementNumber );
 
 }
