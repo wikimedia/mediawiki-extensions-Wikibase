@@ -28,8 +28,10 @@ class LangLinkHandler {
 	public static function getLocalItemLinks( Parser $parser ) {
 		$linkTable = SiteLinkCache::singleton();
 
+		$siteid = Settings::get( 'siteGlobalID' );
+
 		// TODO: obtain global id
-		$itemId = $linkTable->getItemIdForPage( 'enwiki', $parser->getTitle()->getFullText() );
+		$itemId = $linkTable->getItemIdForPage( $siteid, $parser->getTitle()->getFullText() );
 
 		if ( $itemId !== false ) {
 			$item = EntityCache::singleton()->getItem( $itemId );
@@ -93,8 +95,7 @@ class LangLinkHandler {
 		} else if ( is_array( $repoLinks ) && is_array( $nei ) ) {
 			$siteLinksRemove = array();
 
-			// TODO: hackish until we have a way of knowing site group
-			$sitesuffix = 'wiki';
+			$siteid = Settings::getSetting( 'globalSiteID' );
 
 			// Remove the links specified by noexternalinterlang parser function.
 			foreach( array_keys( $nei ) as $code ) {
