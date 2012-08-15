@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//6bE\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T09:27:54Z",
+      "side": 1,
+      "message": "Please add a note here or to the isPending() or even better, to both, that they are actually the same functions and explain the problem we have in isPending() there.",
+      "revId": "219a8897a4fde59e1f083d47638e86b677c1fdcb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
