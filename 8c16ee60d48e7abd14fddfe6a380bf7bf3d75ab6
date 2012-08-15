@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//6Gg\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-15T18:06:48Z",
+      "side": 1,
+      "message": "indeed\n\n* tabs!\n* missing types (also for $template in the actual method def)\n* missing @since tag\n* missing @return tag",
+      "parentUuid": "AAAARX//6JI\u003d",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//6II\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
