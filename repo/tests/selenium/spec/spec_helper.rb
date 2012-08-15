@@ -44,7 +44,10 @@ RSpec.configure do |config|
         caps.platform = :WINDOWS
       elsif target_os == "linux"
         caps.platform = :LINUX
+      elsif target_os == "mac"
+        caps.platform = :MAC
       end
+
       @browser = Watir::Browser.new(:remote, :url => REMOTE_SELENIUM_HUB, :desired_capabilities => caps)
     else
       @browser = Watir::Browser.new(browser_type)
