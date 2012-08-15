@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use Parser, ParserOutput;
 
 /**
  * Handles language links.
@@ -25,11 +24,10 @@ class LangLinkHandler {
 	 * @param Parser $parser
 	 * @return array of SiteLink
 	 */
-	public static function getLocalItemLinks( Parser $parser ) {
+	public static function getEntityCacheLinks( Parser $parser ) {
 		$linkTable = SiteLinkCache::singleton();
 
-		// TODO: obtain global id
-		$itemId = $linkTable->getItemIdForPage( 'enwiki', $parser->getTitle()->getFullText() );
+		$itemId = $linkTable->getItemIdForPage( Settings::get( 'siteGlobalID' ), $parser->getTitle()->getFullText() );
 
 		if ( $itemId !== false ) {
 			$item = EntityCache::singleton()->getItem( $itemId );
@@ -42,19 +40,8 @@ class LangLinkHandler {
 		return array();
 	}
 
-	/**
-	 * Shall a page have interwiki links in the sidebar?
-	 *
-	 * @since 0.1
-	 *
-	 * @param Parser $parser
-	 * @return boolean
-	 */
-	public static function doInterwikiLinks( Parser $parser ) {
-		if ( $parser->getOptions()->getInterfaceMessage() ) {
-			return false;
-		}
-		return true;
+	public static function getLocalInterwikiLinks( Parser $parser ) {
+		return $parser->getOutput()->getLanguageLinks();
 	}
 
 	/**
@@ -65,13 +52,15 @@ class LangLinkHandler {
 	 * @param Parser $parser
 	 * @return boolean
 	 */
-	public static function useRepoLinks( Parser $parser ) {
+	public static function useRepoLinks( \Parser $parser ) {
 		$title = $parser->getTitle();
-		if( !in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
-			return false;
+
+		// use repolinks in only the namespaces specified in settings
+		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	/**
@@ -84,24 +73,30 @@ class LangLinkHandler {
 	 *
 	 * @return true
 	 */
-	public static function suppressRepoLinks( Parser $parser, &$repoLinks ) {
+	public static function suppressRepoLinks( \Parser $parser, &$repoLinks ) {
 		$out = $parser->getOutput();
 		$nei = self::getNoExternalInterlang( $parser->getOutput() );
 
+		// unsets all the repolinks
 		if( array_key_exists( '*', $nei ) ) {
-			$repoLinks = array();
-		} else if ( is_array( $repoLinks ) && is_array( $nei ) ) {
-			$siteLinksRemove = array();
+			$repolinks = array();
 
+		// unset only specified repolinks
+		} else if ( is_array( $repolinks ) && is_array( $nei ) ) {
 			// TODO: hackish until we have a way of knowing site group
-			$sitesuffix = 'wiki';
+			$globalId = Settings::get( 'globalSiteID' );
 
 			// Remove the links specified by noexternalinterlang parser function.
 			foreach( array_keys( $nei ) as $code ) {
-				array_push( $siteLinksRemove, SiteLink::newFromText( $code . $sitesuffix, $parser->getTitle()->mDbkeyform ) );
+				$i = 0;
+				foreach( $repolinks as $repolink ) {
+					if ( $repolink->getSiteID() == $globalID ) {
+						unset( $repolinks[$i] );
+					}
+					$i++;
+				}
 			}
 
-			$repoLinks = array_diff( $repoLinks, $siteLinksRemove );
 		}
 
 		return true;
@@ -112,7 +107,7 @@ class LangLinkHandler {
 	 *
 	 * @return Array Empty array if not set.
 	 */
-	public static function getNoExternalInterlang( ParserOutput $out ) {
+	public static function getNoExternalInterlang( \ParserOutput $out ) {
 		$nei = $out->getProperty( 'no_external_interlang' );
 
 		if( empty( $nei ) ) {
