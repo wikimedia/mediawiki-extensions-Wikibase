@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAARX//6Go\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T18:07:12Z",
+      "side": 1,
+      "message": "!empty( $repolinks )\n\nwould be faster, especially if you have huge arrays.",
+      "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//6Io\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 2
@@ -30,6 +47,24 @@
       "writtenOn": "2012-08-15T17:41:58Z",
       "side": 1,
       "message": "please use an explicit check - empty is evil",
+      "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6Gk\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T18:07:12Z",
+      "side": 1,
+      "message": "It is nice for checking for empty arrays and perhaps even in some other cases.",
+      "parentUuid": "AAAARX//6Ik\u003d",
       "revId": "c3840c6b6bab66493166107743837adbead9ea5c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
