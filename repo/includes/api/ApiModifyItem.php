@@ -277,6 +277,11 @@ abstract class ApiModifyItem extends Api {
 			}
 		}
 
+		if ( $success && $params['gettoken'] ) {
+			$user = $this->getUser();
+			$this->addTokenToResult( $user->getEditToken() );
+		}
+
 		$this->getResult()->addValue(
 			null,
 			'success',
