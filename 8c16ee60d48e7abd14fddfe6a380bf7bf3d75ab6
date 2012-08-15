@@ -19,6 +19,57 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//6Hs\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T18:01:52Z",
+      "side": 1,
+      "message": "All of this can be removed, just\n\nnamespace Wikibase;\n\nis fine and then putting the \"\\\" everywhere when referencing core classes. Seems easier for maintenance.\nEven onParserAfterParse() is currently throwing php errors because it assumes Wikibase\\Parser and Wikibase\\StripState, so they have to be added here or (preferably) use the \"\\\".",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6HU\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T18:01:52Z",
+      "side": 1,
+      "message": "this fails right now. See my comment on namespace declarations above. Also inconsistent with doxygen documentation on top.",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6JI\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T18:01:52Z",
+      "side": 1,
+      "message": "This is not consistent with other function parameters documentation",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//6II\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 1
@@ -30,6 +81,23 @@
       "writtenOn": "2012-08-15T17:46:32Z",
       "side": 1,
       "message": "naming!",
+      "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//6Hc\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-15T18:01:52Z",
+      "side": 1,
+      "message": "This setting has to be registered in onWikibaseDefaultSettings(), same file. Also the setting should be documented somewhere I guess.",
       "revId": "8c16ee60d48e7abd14fddfe6a380bf7bf3d75ab6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
