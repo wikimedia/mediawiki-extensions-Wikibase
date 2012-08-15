@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase;
-use DatabaseUpdater;
 use OutputPage, Skin;
+use DatabaseUpdater, Parser, StripState, Title;
 use \Wikibase\LangLinkHandler as LangLinkHandler;
 use \Wikibase\Settings as Settings;
 use \Wikibase\SortUtils as SortUtils;
@@ -110,9 +110,7 @@ final class ClientHooks {
 				 */
 				$item = $change->getEntity();
 
-				$globalId = Settings::get( 'siteGlobalID' );
-
-				$siteLink = $item->getSiteLink( $globalId );
+				$siteLink = $item->getSiteLink( Settings::get( 'siteGlobalID' ) );
 
 				if ( $siteLink !== null ) {
 					$title = Title::newFromText( $siteLink->getPage() );
@@ -144,28 +142,44 @@ final class ClientHooks {
 
 		$parserOutput = $parser->getOutput();
 
-		if ( LangLinkHandler::doInterWikiLinks( $parser ) && LangLinkHandler::useRepoLinks( $parser ) ) {
-			$repolinks = LangLinkHandler::getLocalItemLinks( $parser );
+		// only run this once, for the article content and not interface stuff
+		if ( ! $parser->getOptions()->getInterfaceMessage() ) {
 
-			if ( $repolinks !== array() ) {
-				LangLinkHandler::suppressRepoLinks( $parser, $repolinks );
+			if ( LangLinkHandler::useRepoLinks( $parser ) ) {
+				$repolinks = LangLinkHandler::getEntityCacheLinks( $parser );
 
-				foreach ( $repolinks as $link ) {
-					// TODO: know that this site is in the wikipedia group and get links for only this group
-					// TODO: hold into account wiki-wide and page-specific settings to do the merge rather then just overriding.
-					$localkey = $link->getSite()->getConfig()->getLocalId();
+				if ( count( $repolinks ) > 0 ) {
+					LangLinkHandler::suppressRepoLinks( $parser, $repolinks );
 
-					// unset self referencing interwiki link
-					if ( $localkey != $wgLanguageCode ) {
-						$parserOutput->addLanguageLink( $localkey . ':' . $link->getPage() );
+					$repolinkitems = array();
+					foreach ( $repolinks as $link ) {
+						// TODO: know that this site is in the wikipedia group and get links for only this group
+						$localkey = $link->getSite()->getConfig()->getLocalId();
+
+						// unset self referencing interwiki link
+						if ( $localkey != $wgLanguageCode ) {
+							$repolinkitems[] = $localkey . ':' . $link->getPage();
+						}
 					}
 				}
-			}
-		}
 
-		// Because, you know, the function might refuse to sort them.
-		// And it's all uncertain with this quantum stuff anyway...
-		SortUtils::maybeSortLinks( $parserOutput->getLanguageLinks() );
+				$locallinks = LangLinkHandler::getLocalInterwikiLinks( $parser );
+
+				// clear links from parser output and then we repopulate them
+				$parserOutput->setLanguageLinks( array() );
+
+				// merge the local and repo language links and remove duplicates
+				$langlinks = array_unique( array_merge( $repolinkitems, $locallinks ) );
+
+				// add language links to the sidebar
+				foreach( $langlinks as $langlink ) {
+					$parserOutput->addLanguageLink( $langlink );
+				}
+			}
+
+			// sort links
+			SortUtils::sortLinks( $parserOutput->getLanguageLinks() );
+		}
 
 		return true;
 	}
@@ -190,6 +204,8 @@ final class ClientHooks {
 				'sort' => 'none',
 				'sortPrepend' => false,
 				'alwaysSort' => false,
+				'siteGlobalID' => 'enwiki',
+				'siteGroup' => 'wiki'
 			)
 		);
 
