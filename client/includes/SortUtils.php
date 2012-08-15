@@ -15,26 +15,21 @@ use \Wikibase\Settings as Settings;
  * @author Nikola Smolenski <smolensk@eunet.rs>
  */
 class SortUtils {
-	protected static $sort_order = false;
-
-	/**
-	 * Sort an array of links in-place iff alwaysSort option is turned on.
-	 */
-	public static function maybeSortLinks( &$a ) {
-		if( Settings::get( 'alwaysSort' ) ) {
-			self::sortLinks( $a );
-		}
-	}
+	protected static $sortOrder = false;
 
 	/**
 	 * Sort an array of links in-place
-	 * @version	Copied from InterlanguageExtension rev 114818
+	 * @version Copied from InterlanguageExtension rev 114818
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $a
 	 */
 	public static function sortLinks( &$a ) {
 		wfProfileIn( __METHOD__ );
 
 		// Prepare the sorting array.
-		if( self::$sort_order === false ) {
+		if( self::$sortOrder === false ) {
 			if( !self::buildSortOrder() ) {
 				// If we encounter an unknown sort setting, just do nothing, for we are kind and generous.
 				wfProfileOut( __METHOD__ );
@@ -43,21 +38,29 @@ class SortUtils {
 		}
 
 		// Prepare the array for sorting.
-		foreach( $a as $k => $langlink ) {
-			$a[$k] = explode( ':', $langlink, 2 );
+		foreach( $a as $k => $langLink ) {
+			$a[$k] = explode( ':', $langLink, 2 );
 		}
 
 		usort( $a, 'self::compareLinks' );
 
 		// Restore the sorted array.
-		foreach( $a as $k => $langlink ) {
-			$a[$k] = implode( ':', $langlink );
+		foreach( $a as $k => $langLink ) {
+			$a[$k] = implode( ':', $langLink );
 		}
+
 		wfProfileOut( __METHOD__ );
 	}
 
 	/**
-	 * usort() callback function, compares the links on the basis of self::$sort_order
+	 * usort() callback function, compares the links on the basis of self::$sortOrder
+	 *
+	 * @since 0.1
+	 *
+	 * @param --- $a
+	 * @param --- $b
+	 *
+	 * @return ---
 	 */
 	protected static function compareLinks( $a, $b ) {
 		$a = $a[0];
@@ -66,22 +69,28 @@ class SortUtils {
 		if( $a == $b ) return 0;
 
 		// If we encounter an unknown language, which may happen if the sort table is not updated, we move it to the bottom.
-		$a = array_key_exists( $a, self::$sort_order )? self::$sort_order[$a]: 999999;
-		$b = array_key_exists( $b, self::$sort_order )? self::$sort_order[$b]: 999999;
+		$a = array_key_exists( $a, self::$sortOrder )? self::$sortOrder[$a]: 999999;
+		$b = array_key_exists( $b, self::$sortOrder )? self::$sortOrder[$b]: 999999;
 
 		return ( $a > $b )? 1: ( ( $a < $b )? -1: 0 );
 	}
 
 	/**
 	 * Build sort order to be used by compareLinks().
+	 * Returns true if build was successful, or fals if not ('none' or unknown sort order). 
 	 *
-	 * @return bool True if the build was successful, false if not ('none' or
-	 * 	unknown sort order).
-	 * @version $order_alphabetic from http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename&oldid=3398113
-	 * 	$order_alphabetic_revised from http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename-firstword&oldid=3395404
+	 * @version $orderAlphabetic from 
+	 *  http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename&oldid=3398113
+	 *
+	 * @version $orderAlphabeticRevised
+	 *  http://meta.wikimedia.org/w/index.php?title=MediaWiki:Interwiki_config-sorting_order-native-languagename-firstword&oldid=3395404
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
 	 */
 	public static function buildSortOrder() {
-		static $order_alphabetic = array(
+		static $orderAlphabetic = array(
 			'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc', 'roa-rup', 'frp', 'as', 'ast', 'gn',
 			'av', 'ay', 'az', 'bm', 'bn', 'bjn', 'zh-min-nan', 'nan', 'map-bms', 'ba', 'be', 'be-x-old', 'bh', 'bcl',
 			'bi', 'bg', 'bar', 'bo', 'bs', 'br', 'bxr', 'ca', 'cv', 'ceb', 'cs', 'ch', 'cbk-zam', 'ny', 'sn', 'tum',
@@ -103,7 +112,7 @@ class SortUtils {
 			'yo', 'zh-yue', 'diq', 'zea', 'bat-smg', 'zh', 'zh-tw', 'zh-cn',
 		);
 
-		static $order_alphabetic_revised = array(
+		static $orderAlphabeticRevised = array(
 			'ace', 'kbd', 'af', 'ak', 'als', 'am', 'ang', 'ab', 'ar', 'an', 'arc', 'roa-rup', 'frp', 'as', 'ast',
 			'gn', 'av', 'ay', 'az', 'bjn', 'id', 'ms', 'bm', 'bn', 'zh-min-nan', 'nan', 'map-bms', 'jv', 'su',
 			'ba', 'be', 'be-x-old', 'bh', 'bcl', 'bi', 'bar', 'bo', 'bs', 'br', 'bug', 'bg', 'bxr', 'ca', 'ceb',
@@ -128,26 +137,26 @@ class SortUtils {
 		$sort = Settings::get( 'sort' );
 		switch( $sort ) {
 			case 'code':
-				self::$sort_order = $order_alphabetic;
-				sort( self::$sort_order );
+				self::$sortOrder = $orderAlphabetic;
+				sort( self::$sortOrder );
 				break;
 			case 'alphabetic':
-				self::$sort_order = $order_alphabetic;
+				self::$sortOrder = $orderAlphabetic;
 				break;
 			case 'alphabetic_revised':
-				self::$sort_order = $order_alphabetic_revised;
+				self::$sortOrder = $orderAlphabeticRevised;
 				break;
 			case 'none':
 			default:
-				self::$sort_order = false;
+				self::$sortOrder = false;
 				return false;
 		}
 
 		$sortPrepend = Settings::get( 'sortPrepend' );
 		if( is_array( $sortPrepend ) ) {
-			self::$sort_order = array_unique( array_merge( $sortPrepend, self::$sort_order ) );
+			self::$sortOrder = array_unique( array_merge( $sortPrepend, self::$sortOrder ) );
 		}
-		self::$sort_order = array_flip( self::$sort_order );
+		self::$sortOrder = array_flip( self::$sort_order );
 
 		return true;
 	}
