@@ -18,41 +18,35 @@ class SortUtils {
 	protected static $sort_order = false;
 
 	/**
-	 * Sort an array of links in-place iff alwaysSort option is turned on.
-	 */
-	public static function maybeSortLinks( &$a ) {
-		if( Settings::get( 'alwaysSort' ) ) {
-			self::sortLinks( $a );
-		}
-	}
-
-	/**
 	 * Sort an array of links in-place
 	 * @version	Copied from InterlanguageExtension rev 114818
 	 */
 	public static function sortLinks( &$a ) {
 		wfProfileIn( __METHOD__ );
 
-		// Prepare the sorting array.
-		if( self::$sort_order === false ) {
-			if( !self::buildSortOrder() ) {
-				// If we encounter an unknown sort setting, just do nothing, for we are kind and generous.
-				wfProfileOut( __METHOD__ );
-				return;
+		if ( Settings::get( 'alwaysSort' ) ) {
+			// Prepare the sorting array.
+			if( self::$sort_order === false ) {
+				if( !self::buildSortOrder() ) {
+					// If we encounter an unknown sort setting, just do nothing, for we are kind and generous.
+					wfProfileOut( __METHOD__ );
+					return;
+				}
+			}
+
+			// Prepare the array for sorting.
+			foreach( $a as $k => $langlink ) {
+				$a[$k] = explode( ':', $langlink, 2 );
+			}
+
+			usort( $a, 'self::compareLinks' );
+
+			// Restore the sorted array.
+			foreach( $a as $k => $langlink ) {
+				$a[$k] = implode( ':', $langlink );
 			}
 		}
 
-		// Prepare the array for sorting.
-		foreach( $a as $k => $langlink ) {
-			$a[$k] = explode( ':', $langlink, 2 );
-		}
-
-		usort( $a, 'self::compareLinks' );
-
-		// Restore the sorted array.
-		foreach( $a as $k => $langlink ) {
-			$a[$k] = implode( ':', $langlink );
-		}
 		wfProfileOut( __METHOD__ );
 	}
 
