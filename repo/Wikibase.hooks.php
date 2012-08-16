@@ -59,6 +59,7 @@ final class RepoHooks {
 			'ItemMove',
 			'ItemView', 
 			'Autocomment',
+			'EditEntity',
 
 			'actions/EditEntityAction',
 
