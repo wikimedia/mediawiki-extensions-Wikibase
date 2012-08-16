@@ -219,7 +219,10 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return \Status Success indicator
 	 */
-	public function save( $summary = '', User $user = null, $flags = 0 ) {
+	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false ) {
+		// must keep this state for later cleanup
+		$isNew = $this->isNew();
+
 		// NOTE: data created by relationalSave may be left dangling if $page->doEditContent fails.
 		//       This is especially relevant when creating a new Entity.
 		// @todo: fix this by implementing transactional logic or at least clean up of things fail
@@ -228,7 +231,8 @@ abstract class EntityContent extends \AbstractContent {
 
 		if ( !$success ) {
 			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
-		} else {
+		}
+		else {
 			// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clear may cause the old content
 			//       to be loaded from the database again. This may be necessary, because EntityContent is mutable,
 			//       so the cached object might have changed.
@@ -245,11 +249,93 @@ abstract class EntityContent extends \AbstractContent {
 				$this,
 				$summary,
 				$flags | EDIT_AUTOSUMMARY,
-				false,
+				$baseRevId,
 				$user
 			);
+			if ( $isNew === true && !$status->isOk() ) {
+				// Delete any dangling new items from relationalSave?
+			}
 		}
 
 		return $status;
+	}
+
+	/**
+	 *
+	 * @param WikiPage $page
+	 * @param int      $flags
+	 * @param int      $baseRevId
+	 * @param User     $user
+	 *
+	 * @return \Status
+	 * @see Content::prepareSave()
+	 */
+	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
+		// Chain to parent
+		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
+
+		// If the prepare did not fail check if the user was last to edit
+		if ( $status->isOK() ) {
+			if ( $baseRevId !== false && ($user instanceof \User) && !$this->userWasLastToEdit( $user->getId(), $baseRevId ) ) {
+				$status->fatal( 'edit-conflict' );
+			}
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Check if no edits were made by other users since the given revision. Limit to 50 revisions for the
+	 * sake of performance.
+	 *
+	 * Note that this makes the assumption that revision ids are monotonically increasing.
+	 *
+	 * Note that this is a variation over the same idea that is used in EditPage::userWasLastToEdit() but
+	 * with the difference that this one is using the revision and not the timestamp.
+	 *
+	 * @param int|null $user the users numeric identifier
+	 * @param int|false $lastRevId the revision the user supplied
+	 *
+	 * @return bool
+	 */
+	public function userWasLastToEdit( $userId = false, $lastRevId = false ) {
+
+		// If the lastRevId is missing then skip all further test and give false.
+		// Note that without a revision id it will not be possible to do patching.
+		if ( $lastRevId === false ) {
+			return false;
+		}
+
+		// If the userId is missing then skip all further test and give false.
+		// It is only the user id that is used later on.
+		if ( $userId === false ) {
+			return false;
+		}
+
+		// If the title is missing then skip all further test and give false.
+		// There must be a title so we can get an article id
+		$title = $this->getTitle();
+		if ( $title === false ) {
+			return false;
+		}
+
+		// Scan through the revision table
+		$dbw = wfGetDB( DB_MASTER );
+		$res = $dbw->select( 'revision',
+			'rev_user',
+			array(
+				'rev_page' => $title->getArticleID(),
+				'rev_id > ' . intval( $lastRevId )
+			),
+			__METHOD__,
+			array( 'ORDER BY' => 'rev_id ASC', 'LIMIT' => 50 ) );
+		foreach ( $res as $row ) {
+			if ( $row->rev_user != $userId ) {
+				return false;
+			}
+		}
+
+		// If we're here there was no intervening edits from someone else
+		return true;
 	}
 }
