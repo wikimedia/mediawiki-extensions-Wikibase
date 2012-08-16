@@ -1215,6 +1215,20 @@ $1',
 	'content-model-1001' => 'Èlèment Wikibase',
 );
 
+/** Irish (Gaeilge)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['ga'] = array(
+	'wikibase-edit' => 'cur in eagar',
+	'wikibase-save' => 'Sábháil',
+	'wikibase-cancel' => 'Cealaigh',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-itembytitle-lookup-page' => 'Leathanach:',
+	'wikibase-itembytitle-submit' => 'Cuardaigh',
+	'wikibase-itembylabel-lookup-language' => 'Teanga:',
+	'wikibase-itembylabel-submit' => 'Cuardaigh',
+);
+
 /** Galician (galego)
  * @author Toliño
  */
@@ -3305,6 +3319,34 @@ Maaari mong <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGE
 	'wikibase-item-summary-wbsetaliases-add' => 'Idinagdag ang [$2] {{plural:$1|bansag|mga bansag}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Tinanggal ang [$2] {{plural:$1|bansag|mga bansag}}',
 	'content-model-1001' => 'Bagay ng himpilang wiki',
+);
+
+/** Vietnamese (Tiếng Việt)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['vi'] = array(
+	'wikibase-edit' => 'sửa',
+	'wikibase-save' => 'lưu',
+	'wikibase-remove' => 'loại bỏ',
+	'wikibase-tooltip-error-details' => 'Chi tiết',
+	'wikibase-itembytitle-lookup-page' => 'Trang:',
+	'wikibase-itembytitle-submit' => 'Tìm kiếm',
+	'wikibase-itembylabel-lookup-language' => 'Ngôn ngữ:',
+	'wikibase-itembylabel-submit' => 'Tìm kiếm',
+);
+
+/** Yiddish (ייִדיש)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['yi'] = array(
+	'wikibase-save' => 'אויפֿהיטן',
+	'wikibase-remove' => 'אַראָפּנעמען',
+	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-tooltip-error-details' => 'פרטים',
+	'wikibase-itembytitle-lookup-page' => 'בלאט:',
+	'wikibase-itembytitle-submit' => 'זוכן',
+	'wikibase-itembylabel-lookup-language' => 'שפּראַך:',
+	'wikibase-itembylabel-submit' => 'זוכן',
 );
 
 /** Simplified Chinese (‪中文（简体）‬)
