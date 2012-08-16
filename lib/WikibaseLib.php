@@ -101,6 +101,9 @@ $wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
 $wgAutoloadClasses['Wikibase\SitesTable'] 			= $dir . 'includes/SitesTable.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
+$wgAutoloadClasses['DataValue\DataValue'] 			= $dir . 'includes/DataValue.php';
+$wgAutoloadClasses['DataValue\DataValueObject'] 	= $dir . 'includes/DataValue.php';
+
 // includes/changes
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
 $wgAutoloadClasses['Wikibase\ChangeRow'] 			= $dir . 'includes/changes/ChangeRow.php';
@@ -131,12 +134,25 @@ $wgAutoloadClasses['Wikibase\PropertyObject'] 		= $dir . 'includes/property/Prop
 $wgAutoloadClasses['Wikibase\Query'] 				= $dir . 'includes/query/Query.php';
 $wgAutoloadClasses['Wikibase\QueryObject'] 			= $dir . 'includes/query/QueryObject.php';
 
+// includes/snak
+$wgAutoloadClasses['Wikibase\InstanceOfSnak'] 			= $dir . 'includes/snak/InstanceOfSnak.php';
+$wgAutoloadClasses['Wikibase\PropertyNoValueSnak'] 		= $dir . 'includes/snak/PropertyNoValueSnak.php';
+$wgAutoloadClasses['Wikibase\PropertySnak'] 			= $dir . 'includes/snak/PropertySnak.php';
+$wgAutoloadClasses['Wikibase\PropertySnakObject'] 		= $dir . 'includes/snak/PropertySnakObject.php';
+$wgAutoloadClasses['Wikibase\PropertyValueSnak'] 		= $dir . 'includes/snak/PropertyValueSnak.php';
+$wgAutoloadClasses['Wikibase\PropertySomeValueSnak'] 	= $dir . 'includes/snak/PropertySomeValueSnak.php';
+$wgAutoloadClasses['Wikibase\Snak'] 					= $dir . 'includes/snak/Snak.php';
+$wgAutoloadClasses['Wikibase\SnakObject'] 				= $dir . 'includes/snak/SnakObject.php';
+$wgAutoloadClasses['Wikibase\SubclassOfSnak'] 			= $dir . 'includes/snak/SubclassOfSnak.php';
+
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/item/TestItems.php';
 $wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/entity/EntityObjectTest.php';
-
-// tests/changes
 $wgAutoloadClasses['Wikibase\Test\EntityRefreshTest'] 		= $dir . 'tests/phpunit/changes/EntityRefreshTest.php';
+$wgAutoloadClasses['Wikibase\Test\PropertySnakObjectTest'] 	= $dir . 'tests/phpunit/snak/PropertySnakObjectTest.php';
+$wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/snak/SnakObjectTest.php';
+
+
 
 foreach ( array(
 			  'Settings',
