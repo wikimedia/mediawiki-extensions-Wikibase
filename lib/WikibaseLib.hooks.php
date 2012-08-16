@@ -138,17 +138,30 @@ final class LibHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
-			'ChangeNotifier',
-			'ChangeHandler',
-			'ChangesTable',
+			'changes/DiffChange',
+			'changes/EntityCreation',
+			'changes/EntityDeletion',
+			'changes/EntityRefresh',
+			'changes/EntityUpdate',
+
+			'entity/ItemDiff', // wtf is this in /entity?
+
 			'item/ItemMultilangTexts',
 			'item/ItemNewEmpty',
 			'item/ItemNewFromArray',
 			'item/ItemObject',
+
+			'property/PropertyObject',
+
+			'query/QueryObject',
+
+			'snak/PropertyValueSnak',
+
+			'ChangeNotifier',
+			'ChangeHandler',
+			'ChangesTable',
 			'LibHooks',
 			'MediaWikiSite',
-			'property/PropertyObject',
-			'query/QueryObject',
 			'SiteConfigObject',
 			'SiteLink',
 			'SiteList',
@@ -156,14 +169,6 @@ final class LibHooks {
 			'MediaWikiSite',
 			'Sites',
 			'Utils',
-
-			'changes/DiffChange',
-			'changes/EntityCreation',
-			'changes/EntityDeletion',
-			'changes/EntityRefresh',
-			'changes/EntityUpdate',
-
-			'entity/ItemDiff',
 		);
 
 		// Test compat
