@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//5Wg\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-16T14:22:21Z",
+      "side": 1,
+      "message": "I think only items should *actually* contain Statements. \"unsourced\" statements arn\u0027t Statements. For describing properties and queries, plain Snaks would be used. We have not so far encountered the need for unsourced but still qualified semi-statements.\n\nI do think everything about an item (!) should be retrievable as (!) a Statement, including label, ID, sitelinks, etc.\n\n(putting this here mainly as a reminder for the discussion next week)",
+      "revId": "6fe47b324016bc49f1523fa08a3880439ed7509d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5Wc\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-16T14:22:21Z",
+      "side": 1,
+      "message": "We\u0027ll have to think about how to best manage these statement numbers.",
+      "revId": "6fe47b324016bc49f1523fa08a3880439ed7509d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5WQ\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-16T14:22:21Z",
+      "side": 1,
+      "message": "we\u0027ll probably also want getStatementsForProperty( $propId ) and similarly hasStatementsForProperty().\n\nMaybe it should even be getStatementsForProperty( $propId, $sourceId \u003d null ) so we can optionally filter by source. Seems nicer than implementing this filter in the API or even on the client. Source IDs however as still a hazy concept. They are not the same as reference hashes.",
+      "revId": "6fe47b324016bc49f1523fa08a3880439ed7509d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
