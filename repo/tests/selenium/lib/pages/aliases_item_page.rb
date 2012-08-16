@@ -31,7 +31,6 @@ class AliasesItemPage < SitelinksItemPage
   text_field(:aliasesInputModified, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-modified']/span/input")
   text_field(:aliasesInputEqual, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-equal']/span/input")
   link(:aliasesInputRemove, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-modified']/a[@class='tagadata-close']")
-  
   def wait_for_aliases_to_load
     wait_until do
       aliasesDiv?
@@ -52,17 +51,16 @@ class AliasesItemPage < SitelinksItemPage
     return count
   end
 
-  def getLastAlias
-    listElem
+  def getNthAlias n
+    count = 1
     if aliasesList_element.exists?
       aliasesList_element.each do |aliasElem|
-        listElem = aliasElem
-      end
-    else
-      aliasesListInEditMode_element.each do |aliasElem|
-        listElem = aliasElem
+        if count == n
+          return aliasElem
+        end
+        count = count+1
       end
     end
-    return listElem
+    return false
   end
 end
