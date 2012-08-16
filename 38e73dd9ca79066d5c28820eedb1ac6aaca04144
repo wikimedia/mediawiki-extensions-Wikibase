@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//5W8\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-16T14:11:02Z",
+      "side": 1,
+      "message": "Just discussed this with Denny. According to him you basically advocated this approach and even wrote it down here: https://meta.wikimedia.org/wiki/Wikidata/Notes/Entities_and_Snaks\n\nI suggest having an option in Statement to specify if it is a normal one w/ references or a simple one w/o, the later being the type used for props and queries.",
+      "parentUuid": "AAAARX//5fM\u003d",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//5fE\u003d",
         "filename": "lib/includes/snak/InstanceOfSnak.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-16T10:03:12Z",
       "side": 1,
       "message": "Do we really want or need this? As far as I know, we are trying to avoid a type system for items, no?\n\nAnd if we want to support it, should this perhaps be \"isa\" instead of \"instanceof\"?",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5X4\u003d",
+        "filename": "lib/includes/snak/InstanceOfSnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-16T14:11:02Z",
+      "side": 1,
+      "message": "This is what\u0027s currently in the data model spec and I don\u0027t see any real issues with it, or any clearly better alternative. If you want to propose an alternate approach, it probably ought to happen on the list and include Markus.",
+      "parentUuid": "AAAARX//5fE\u003d",
       "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//5X0\u003d",
+        "filename": "lib/includes/snak/InstanceOfSnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-16T14:11:02Z",
+      "side": 1,
+      "message": "Agreed, done.",
+      "parentUuid": "AAAARX//5fI\u003d",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//5fA\u003d",
         "filename": "lib/includes/snak/PropertySnak.php",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//5W4\u003d",
+        "filename": "lib/includes/snak/PropertySnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-16T14:11:02Z",
+      "side": 1,
+      "message": "Not sure, could be. Denny disagrees. We can easily kill this later on, so for now going on the assumption we do want this stuff to be mutable.",
+      "parentUuid": "AAAARX//5fA\u003d",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//5e8\u003d",
         "filename": "lib/includes/snak/PropertyValueSnak.php",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2012-08-16T10:03:12Z",
       "side": 1,
       "message": "DataValue as opposed to... what? And where does the DataValue type come from?",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5Xs\u003d",
+        "filename": "lib/includes/snak/PropertyValueSnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-16T14:11:02Z",
+      "side": 1,
+      "message": "Extension:DataValues, which will hold a cleaned up and generalized version of SMWs existing \"DataItem\" classes and parsers/formatters/serializers for those.",
+      "parentUuid": "AAAARX//5e8\u003d",
       "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
