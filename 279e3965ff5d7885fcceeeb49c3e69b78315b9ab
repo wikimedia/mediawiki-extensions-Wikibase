@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//5d0\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-16T10:35:37Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "279e3965ff5d7885fcceeeb49c3e69b78315b9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5dw\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-16T10:35:37Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "279e3965ff5d7885fcceeeb49c3e69b78315b9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5do\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-16T10:35:37Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "279e3965ff5d7885fcceeeb49c3e69b78315b9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5ds\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-16T10:35:37Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "279e3965ff5d7885fcceeeb49c3e69b78315b9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5dY\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-16T10:35:37Z",
+      "side": 1,
+      "message": "Use compoundNames if possible",
+      "revId": "279e3965ff5d7885fcceeeb49c3e69b78315b9ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
