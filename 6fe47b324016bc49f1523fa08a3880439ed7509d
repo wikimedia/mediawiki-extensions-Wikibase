@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//5V8\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-16T14:38:06Z",
+      "side": 1,
+      "message": "\u003e \"unsourced\" statements arn\u0027t Statements\n\n\u003e everything about an item (!) should be retrievable as (!) a Statement, including label, ID, sitelinks, etc.\n\nLooks like a contradiction to me.",
+      "parentUuid": "AAAARX//5Wg\u003d",
+      "revId": "6fe47b324016bc49f1523fa08a3880439ed7509d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//5Wc\u003d",
         "filename": "lib/includes/entity/Entity.php",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//5Vw\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-16T14:38:06Z",
+      "side": 1,
+      "message": "Implementation detail. Seems pretty trivial to me, feel free to comment on the actual code in my next commit.",
+      "parentUuid": "AAAARX//5Wc\u003d",
+      "revId": "6fe47b324016bc49f1523fa08a3880439ed7509d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//5WQ\u003d",
         "filename": "lib/includes/entity/Entity.php",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2012-08-16T14:22:21Z",
       "side": 1,
       "message": "we\u0027ll probably also want getStatementsForProperty( $propId ) and similarly hasStatementsForProperty().\n\nMaybe it should even be getStatementsForProperty( $propId, $sourceId \u003d null ) so we can optionally filter by source. Seems nicer than implementing this filter in the API or even on the client. Source IDs however as still a hazy concept. They are not the same as reference hashes.",
+      "revId": "6fe47b324016bc49f1523fa08a3880439ed7509d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5Vk\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-16T14:38:06Z",
+      "side": 1,
+      "message": "Agreed, this will probably be useful - there is similar stuff in SMWs SemanticData object. As this does not affect stuff much, I suggest taking care of this either after the other things have been implemented, or even wait with it until we actually need it.",
+      "parentUuid": "AAAARX//5WQ\u003d",
       "revId": "6fe47b324016bc49f1523fa08a3880439ed7509d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
