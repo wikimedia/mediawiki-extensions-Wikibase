@@ -110,7 +110,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 
 		try {
-			$this->doApiRequest(
+			list($res,,) = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
 					'reason' => 'Some reason',
