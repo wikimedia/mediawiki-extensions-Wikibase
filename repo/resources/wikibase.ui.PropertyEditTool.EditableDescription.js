@@ -65,7 +65,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 		} else {
 			return $.extend( params, {
 				action: 'wbsetdescription',
-				value: this.getValue().toString()
+				value: this.getValue().toString(),
+				baserevid: mw.config.get( 'wgCurRevisionId' )
 			} );
 		}
 	}

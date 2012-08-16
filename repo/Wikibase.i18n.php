@@ -77,6 +77,7 @@ $messages['en'] = array(
 	'wikibase-error-ui-no-permissions' => 'You do not have sufficient rights to perform this action.',
 	'wikibase-error-ui-link-exists' => 'You cannot link to this page because another item already links to it.',
 	'wikibase-error-ui-session-failure' => 'Your session has expired. Please log in again.',
+	'wikibase-error-ui-edit-conflict' => 'There is an edit conflict. Please reload and save again.',
 
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
@@ -149,6 +150,7 @@ $1',
 	'wikibase-api-wrong-class' => 'The content on the found page is not of correct type.', //'wikibase-api-invalid-contentmodel'
 	'wikibase-api-session-failure' => 'The current session has failed. You have to log in again.',
 	'wikibase-api-illegal-field' => 'Illegal field used in call: $1',
+	'wikibase-api-edit-conflict' => 'It is detected an edit conflict and it is not possible to resolve it by patching the current revision.',
 
 	'wikibase-restoreold' => 'restore',
 	'wikibase-restore-summary' => 'Restore revision $1 by [[Special:Contributions/$2|$2]]',
@@ -275,6 +277,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-error-ui-no-permissions' => 'This is a human readable version of the API error "wikibase-api-no-permission" which is shown in the UI.',
 	'wikibase-error-ui-link-exists' => 'This is a human readable version of the API error "wikibase-api-link-exists" which is shown in the UI.',
 	'wikibase-error-ui-session-failure' => 'This is a human readable version of the API error "wikibase-api-session-failure" which is shown in the UI.',
+	'wikibase-error-ui-edit-conflict' => 'This is a human readable version of the API error "edit-conflict" which is shown in the UI.',
 	'wikibase-move-error' => 'The data namespace is blocked against moving pages within it and moving pages into it, because that will make the content inconsistent both within it and on external wikis. The message uses "pages" in this case as name for whats moved, but within the data namespace usually contains "items". See also Wikidatas glossary on [[m:Wikidata/Glossary#page|page]] and [[m:Wikidata/Glossary#item|item]].',
 	'wikibase-error-relational-save-failed' => "Error message shown when an item's identity could not be created in the database, prior to the primary save operation.",
 	'wikibase-error-sitelink-already-used' => "Error message shown when an item can't be saved because it contains a ite link already used by another item. Parameters:
@@ -356,6 +359,7 @@ Parameters:
 	'wikibase-api-session-failure' => 'Sometimes the session fails, usually because of timeouts or because the server of other reasons ends the user session. This leads to an invalid token and the user should then log in again.',
 	'wikibase-api-illegal-field' => 'There is an illegal field name in the props for the module call. This makes the call fail, but the name of failing field will be reported. Parameters:
 * $1 is the failing field name',
+	'wikibase-api-edit-conflict' => 'There is an edit conflict that that could not be resolved. This can have several resons, but thiere is only a generic message for all of them.',
 	'wikibase-restoreold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-restore-summary' => 'Edit summary for an restore action. Parameters:
 * $1 is the revision id number;
