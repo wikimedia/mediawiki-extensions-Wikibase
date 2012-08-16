@@ -233,7 +233,8 @@ class ApiSetItem extends ApiModifyItem {
 					}
 					break;
 				default:
-					$this->dieUsage( "unknown key: $props", 'not-recognized' );
+					// can reach this, because the source is basically a free form
+					$this->dieUsage( wfMsg( 'wikibase-api-not-recognized', $props ), 'not-recognized' );
 				}
 			}
 		}
@@ -260,6 +261,9 @@ class ApiSetItem extends ApiModifyItem {
 			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
 			array( 'code' => 'add-sitelink-failed', 'info' => wfMsg( 'wikibase-api-add-sitelink-failed' ) ),
 			array( 'code' => 'illegal-field', 'info' => wfMsg( 'wikibase-api-illegal-field' ) ),
+			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
+			array( 'code' => 'not-recognized-string', 'info' => wfMsg( 'wikibase-api-not-recognized-string' ) ),
+			array( 'code' => 'not-recognized-array', 'info' => wfMsg( 'wikibase-api-not-recognized-array' ) ),
 		) );
 	}
 
