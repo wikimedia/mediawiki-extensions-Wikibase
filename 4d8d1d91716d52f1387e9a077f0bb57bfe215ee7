@@ -69,6 +69,24 @@
       "revId": "4d8d1d91716d52f1387e9a077f0bb57bfe215ee7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5d8\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 54
+      },
+      "writtenOn": "2012-08-16T10:25:49Z",
+      "side": 1,
+      "message": "proceed, of course.\n\nIn Hebrew there\u0027s a word for such blunder - speaking about grammar and making a grammar mistake...",
+      "parentUuid": "AAAARX//5eI\u003d",
+      "revId": "4d8d1d91716d52f1387e9a077f0bb57bfe215ee7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
