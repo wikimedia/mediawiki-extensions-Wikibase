@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//5XQ\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-16T14:11:20Z",
+      "side": 1,
+      "message": "Assigning variables within if() looks confusing.",
+      "revId": "f9ceedeeb19f4704125eba1f060fe4b9fca76a0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5XA\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-16T14:11:20Z",
+      "side": 1,
+      "message": "shouldn\u0027t these be url-encoded? But getFullText() also returns the part behind # so I am not sure how the # would be treated, but you can also use  $title-\u003egetPrefixedDBkey() . \u0027#\u0027 .  $title-\u003egetFragment() and urlencode separately.",
+      "revId": "f9ceedeeb19f4704125eba1f060fe4b9fca76a0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
