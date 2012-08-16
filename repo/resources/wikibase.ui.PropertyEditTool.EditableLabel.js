@@ -72,7 +72,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableLabel.prototype, {
 		} else {
 			return $.extend( params, {
 				action: "wbsetlabel",
-				value: this.getValue().toString()
+				value: this.getValue().toString(),
+				baserevid: mw.config.get( 'wgCurRevisionId' )
 			} );
 		}
 	}
