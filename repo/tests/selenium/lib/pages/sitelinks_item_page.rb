@@ -29,6 +29,7 @@ class SitelinksItemPage < NewItemPage
   link(:editSitelinkLink, :xpath => "//td[@class='wb-ui-propertyedittool-editablevalue-toolbarparent']/div/div/div/a")
   link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
   link(:germanSitelink, :xpath => "//td[@class='wb-sitelinks-link wb-sitelinks-link-de']/a")
+  link(:englishSitelink, :xpath => "//td[@class='wb-sitelinks-link wb-sitelinks-link-en']/a")
   span(:articleTitle, :xpath => "//h1[@id='firstHeading']/span")
   def getNumberOfSitelinksFromCounter
     wait_until do

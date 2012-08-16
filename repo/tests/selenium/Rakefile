@@ -103,6 +103,21 @@ RSpec::Core::RakeTask.new(:spec_client_repo) do |spec|
   spec.pattern = 'spec/client/client_repo_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:spec_undo) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/special/undo_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:spec_rollback) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/special/rollback_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:spec_restore) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = 'spec/special/restore_spec.rb'
+end
+
 task :default => :run_tests
 task :item => :spec_item
 task :nonexistingitem => :spec_non_existing_item
@@ -122,6 +137,9 @@ task :delete_item => :spec_item_deletion
 task :editonoff => :spec_editonoff
 task :bugs => :spec_bugs
 task :client_repo => :spec_client_repo
+task :undo => :spec_undo
+task :rollback => :spec_rollback
+task :restore => :spec_restore
 
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
   task = args[:taskname] || :all
