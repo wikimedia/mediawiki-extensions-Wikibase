@@ -85,6 +85,7 @@ final class RepoHooks {
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
 
+			'content/EntityContent',
 			'content/EntityHandler',
 			'content/ItemContent',
 			'content/ItemHandler',

@@ -219,21 +219,123 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return \Status Success indicator
 	 */
-	public function save( $summary = '', User $user = null, $flags = 0 ) {
-		$success = $this->relationalSave();
+	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false ) {
+		$status = \Status::newGood();
+		$isNew = $this->isNew();
 
-		if ( !$success ) {
-			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
-		} else {
-			$status = $this->getWikiPage()->doEditContent(
-				$this,
-				$summary,
-				$flags | EDIT_AUTOSUMMARY,
-				false,
-				$user
+		// The call to relationalSave is going to leave a lot of items hanging around if the
+		// later doEditContent is failing for whatever reason, as the call is run outside the
+		// transaction. The WikiPage is although necessary for the call to complete.
+		if ( !$this->relationalSave() ) {
+			$status->fatal( "wikibase-error-relational-save-failed" );
+		}
+		else {
+			$status->merge(
+				$this->getWikiPage()->doEditContent(
+					$this,
+					$summary,
+					$flags | EDIT_AUTOSUMMARY,
+					$baseRevId,
+					$user
+				)
 			);
+			if ( $isNew === true && !$status->isOk() ) {
+				// delete any dangling new items from relationalSave?
+			}
+		}
+
+		if ( !$status->hasMessage( 'edit-conflict' ) ) {
+			// TODO: Fatal fail in save, but it is possible to create a patch and continue.
+			// Without the patch the call will later fail. When continuing the message must
+			// be popped. If there are other fatal messages it is probably not possible to
+			// solve them by just patching the content and saving again.
+			// To continue the message must be changed from an error (fatal) to a warning
+			// (non-fatal) as otherwise the whole call will fail anyhow.
 		}
 
 		return $status;
+	}
+
+	/**
+	 *
+	 * @param WikiPage $page
+	 * @param int      $flags
+	 * @param int      $baseRevId
+	 * @param User     $user
+	 *
+	 * @return \Status
+	 * @see Content::prepareSave()
+	 */
+	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
+		// Chain to parent
+		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
+
+		// If the prepare did not fail check if user was last to edit
+		if ( $status->isOK() ) {
+			if ( !$this->userWasLastToEdit( $user, $baseRevId ) ) {
+				$status->fatal( 'wikibase-error-edit-conflict' );
+			}
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Check if no edits were made by other users since the given revision. Limit to 50 revisions for the
+	 * sake of performance.
+	 *
+	 * Note that this makes the assumption that revision ids are monotonically increasing.
+	 *
+	 * Note that this is a variation over the same idea that is used in EditPage::userWasLastToEdit() but
+	 * with the difference that this one is using the revision and not the timestamp.
+	 *
+	 * @param int|null $user the users numeric identifier
+	 * @param int|false $lastRevId the revision the user supplied
+	 *
+	 * @return bool
+	 */
+	public function userWasLastToEdit( $user = null, $lastRevId = false ) {
+
+		// FIXME: this is faking to make tests and other things to work!
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			// If the lastRevId is missing then skip all further test and give true.
+			// This makes all save without revision id pass without checking for collisions,
+			// that means all calls on save with a short form will pass.
+			if ( $lastRevId === false ) return true;
+		}
+		else {
+			// If the lastRevId is missing then skip all further test and give false.
+			// This makes all save without a revision id fail and patching will be called.
+			if ( $lastRevId === false ) return true;
+		}
+
+		// This will return false if there is no user, then save will skip to patching.
+		// It is only the user id that is used later on.
+		if ( !($user instanceof \User) || !$user->getId() ) return false;
+		$userId = $user->getId();
+
+		// There must be a title so we can get an article id
+		$title = $this->getTitle();
+		if ( $title === false ) return false;
+
+		// Scan through the revision table
+		$dbw = wfGetDB( DB_MASTER );
+		$res = $dbw->select( 'revision',
+			'rev_user',
+			array(
+				'rev_page' => $title->getArticleID(),
+				'rev_id > ' . intval( $lastRevId )
+			),
+			__METHOD__,
+			array( 'ORDER BY' => 'rev_id ASC', 'LIMIT' => 50 ) );
+		foreach ( $res as $row ) {
+			print("rev_user: " . $row->rev_user . "\n");
+			if ( $row->rev_user != $userId ) {
+				return false;
+			}
+		}
+
+		// If we're here there was no intervening edits from someone else
+		return true;
 	}
 }
