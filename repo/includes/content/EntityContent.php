@@ -219,21 +219,69 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return \Status Success indicator
 	 */
-	public function save( $summary = '', User $user = null, $flags = 0 ) {
-		$success = $this->relationalSave();
-
-		if ( !$success ) {
-			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
-		} else {
-			$status = $this->getWikiPage()->doEditContent(
-				$this,
-				$summary,
-				$flags | EDIT_AUTOSUMMARY,
-				false,
-				$user
-			);
+	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false ) {
+		$status = \Status::newGood();
+		//if ( $user !== null && $baseRevId !== false ) {
+		//	if ( !$this->userWasLastToEdit( $user->getId(), $baseRevId ) ) {
+				// at this point we can switch to patching
+		//		$status->fatal( "wikibase-error-pending-edit-conflict" );
+		//		return $status;
+		//	}
+		//}
+		// if everything is okey do an ordinary save (and yeah, with the previous code everything is ok!)
+		if ( $status->isOk() ) {
+			$success = $this->relationalSave();
+			if ( !$success ) {
+				$status->fatal( "wikibase-error-relational-save-failed" );
+			}
+			else {
+				$status->merge(
+					$this->getWikiPage()->doEditContent(
+						$this,
+						$summary,
+						$flags | EDIT_AUTOSUMMARY,
+						$baseRevId,
+						$user
+					)
+				);
+			}
 		}
-
 		return $status;
+	}
+
+	/**
+	 * Check if no edits were made by other users since the given revision. Limit to 50 revisions for the
+	 * sake of performance.
+	 *
+	 * Note that this makes the assumption that revision ids are monotonically increasing.
+	 *
+	 * Note that this is a variation over the same idea that is used in EditPage::userWasLastToEdit() but
+	 * with the difference that this one is using the revision and not the timestamp.
+	 *
+	 * @param int $userId the users numeric identifier
+	 * @param int $lastRevId the revision the user supplied
+	 *
+	 * @return bool
+	 */
+	public function userWasLastToEdit( $userId, $lastRevId ) {
+		if ( !$userId ) return false;
+		if ( !$lastRevId ) return false;
+		$title = $this->getTitle();
+		if ( $title === false ) return false;
+		$dbw = wfGetDB( DB_MASTER );
+		$res = $dbw->select( 'revision',
+			'rev_user',
+			array(
+				'rev_page' => $title->getArticleID(),
+				'rev_id > ' . intval( $lastRevId )
+			),
+			__METHOD__,
+			array( 'ORDER BY' => 'rev_id ASC', 'LIMIT' => 50 ) );
+		foreach ( $res as $row ) {
+			if ( $row->rev_user != $userId ) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

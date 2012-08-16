@@ -232,15 +232,45 @@ abstract class ApiModifyItem extends Api {
 			$comment = $this->getTextForComment( $params, $hits );
 
 			// Do the actual save, or if it don't exist yet create it.
-			$status = $itemContent->save( Autocomment::formatTotalSummary( $comment, $summary, $lang ), $user, $this->flags  );
+			// There will be exceptions but we just leak them out ;)
+			$status = $itemContent->save(
+				Autocomment::formatTotalSummary( $comment, $summary, $lang ),
+				$user,
+				$this->flags,
+				isset( $params['baserevid'] ) ? $params['baserevid'] : false
+			);
+
 			$success = $status->isOK();
 
 			if ( !$success ) {
-				if ( $itemContent->isNew() ) {
-					$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
-				}
-				else {
-					$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
+				switch( $status->value ) {
+				case 'edit-hook-aborted': // fatal
+					$this->dieUsageMsg( 'edit-hook-aborted' );
+					break;
+				case 'edit-already-exists': // fatal
+					$this->dieUsageMsg( 'edit-already-exists' );
+					break;
+				case 'edit-no-change': // warning
+					$this->dieUsageMsg( 'edit-no-change' );
+					break;
+				case 'edit-conflict': // fatal
+					$this->dieUsageMsg( 'edit-conflict' );
+					break;
+				case 'edit-gone-missing': //fatal
+					$this->dieUsageMsg( 'edit-gone-missing' );
+					break;
+				default:
+					$this->dieUsageMsg( 'edit-unknown-error' );
+					break;
+					/*
+					if ( $itemContent->isNew() ) {
+						$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
+					}
+					else {
+						$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
+					}
+					break;
+					*/
 				}
 			}
 
@@ -349,6 +379,9 @@ abstract class ApiModifyItem extends Api {
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
+			'baserevid' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+			),
 			'token' => null,
 			'bot' => false,
 		) );
@@ -370,6 +403,9 @@ abstract class ApiModifyItem extends Api {
 			),
 			'summary' => array( 'Summary for the edit.',
 				"Will be prepended by an automatically generated comment."
+			),
+			'baserevid' => array( 'The numeric identifier for the revision.',
+				"This is used for detecting conflicts during save."
 			),
 			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
 				'During a normal reply a token can be returned spontaneously and the requester should',

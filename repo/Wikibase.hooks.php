@@ -69,6 +69,7 @@ final class RepoHooks {
 			'ItemMove',
 			'ItemView', 
 			'Autocomment',
+			//'EditEntity',
 
 			'actions/EditEntityAction',
 
@@ -84,6 +85,7 @@ final class RepoHooks {
 			'api/ApiSetItem',
 			'api/ApiSetSiteLink',
 
+			'content/EntityContent',
 			'content/EntityHandler',
 			'content/ItemContent',
 			'content/ItemHandler',
