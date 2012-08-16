@@ -19,35 +19,24 @@
 window.wikibase.utilities.jQuery.ui = window.wikibase.utilities.jQuery.ui || {};
 
 /**
- * Gets the width of the OS scrollbar
- *
- *! Copyright (c) 2008 Brandon Aaron (brandon.aaron@gmail.com || http://brandonaaron.net)
- * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
- * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
- *
- * @author Brandon Aaron (brandon.aaron@gmail.com)
+ * Gets the width of the browser's scrollbar.
  */
-( function( $, undefined ) {
-	var scrollbarWidth = 0;
+( function( $ ) {
 	$.getScrollbarWidth = function() {
-		if ( !scrollbarWidth ) {
-			if ( $.browser.msie ) {
-				var $textarea1 = $( '<textarea cols="10" rows="2"></textarea>' )
-					.css( { position: 'absolute', top: -1000, left: -1000 } ).appendTo( 'body' ),
-					$textarea2 = $( '<textarea cols="10" rows="2" style="overflow: hidden;"></textarea>' )
-						.css( { position: 'absolute', top: -1000, left: -1000 } ).appendTo( 'body' );
-				scrollbarWidth = $textarea1.width() - $textarea2.width();
-				$textarea1.add( $textarea2 ).remove();
-			} else {
-				var $div = $( '<div />' )
-					.css( { width: 100, height: 100, overflow: 'auto', position: 'absolute', top: -1000, left: -1000 } )
-					.prependTo( 'body' ).append( '<div />' ).find( 'div' )
-					.css( { width: '100%', height: 200 } );
-				scrollbarWidth = 100 - $div.width();
-				$div.parent().remove();
-			}
+		var $inner = $( '<p/>', {
+			style: 'width:100px'
+		} ),
+		$outer = $( '<div/>', {
+			style: 'position:absolute;top:-1000px;left:-1000px;visibility:hidden;width:50px;height:50px;overflow:hidden;'
+		} ).append( $inner ).appendTo( $( 'body' ) );
+		var majorWidth = $inner.width();
+		$outer.css( 'overflow', 'scroll' );
+		var minorWidth = $inner.width();
+		if ( majorWidth === minorWidth ) { // Webkit
+			minorWidth = $outer[0].clientWidth;
 		}
-		return scrollbarWidth;
+		$outer.remove();
+		return ( majorWidth - minorWidth );
 	};
 } )( jQuery );
 
