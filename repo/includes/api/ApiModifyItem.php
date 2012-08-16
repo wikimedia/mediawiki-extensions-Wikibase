@@ -231,48 +231,87 @@ abstract class ApiModifyItem extends Api {
 			// Comments are newer user supplied
 			$comment = $this->getTextForComment( $params, $hits );
 
-			// Do the actual save, or if it don't exist yet create it.
-			$status = $itemContent->save( Autocomment::formatTotalSummary( $comment, $summary, $lang ), $user, $this->flags  );
-			$success = $status->isOK();
-
-			if ( !$success ) {
-				if ( $itemContent->isNew() ) {
-					$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
-				}
-				else {
-					$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
+			// set up an editEntity if there are sufficient information
+			$baseRevisionId = isset( $params['baserevid'] ) ? $params['baserevid'] : false;
+			$editEntity = false;
+			if ( !$itemContent->isNew() ) { // TODO: what if new and accidently the same id?
+				if ( $baseRevisionId !== false ) { // TODO: Can't do patching without a base revision?
+					$revision = \Revision::newFromId( $baseRevisionId );
+					if ( !isset($revision) ) {
+						$this->dieUsage( $status->getWikiText( 'wikibase-api-no-revision' ), 'no-revision' );
+					}
+					$lastRevisionId = $revision->getTitle()->getLatestRevID();
+					$editEntity = EditEntity::newEditEntity( $itemContent->getEntity(), $baseRevisionId, $lastRevisionId );
+					// TODO: This is only a very simple check to see if the applicable diff is empty, if so
+					// it is a sure sign of edit conflict even if it can be solved.
+					if ( $editEntity->isEmpty() ) {
+						$this->dieUsage( $status->getWikiText( 'wikibase-api-patch-empty' ), 'patch-empty' );
+					}
 				}
 			}
 
-			if ( $success ) {
-				$this->getResult()->addValue(
-					'item',
-					'id', $itemContent->getItem()->getId()
-				);
-				$page = $itemContent->getWikiPage();
-				if ( $page->exists() ) {
-					$revision = $page->getRevision();
-					if ( $revision !== null ) {
-						$this->getResult()->addValue(
-							'item',
-							'lastrevid', intval( $revision->getId() )
-						);
+			// Do the actual save, or if it don't exist yet create it.
+			// There will be exceptions but we just leak them out ;)
+			$status = $itemContent->save(
+				Autocomment::formatTotalSummary( $comment, $summary, $lang ),
+				$user,
+				$this->flags,
+				$baseRevisionId,
+				$editEntity
+			);
+			$success = $status->isOK();
+
+			if ( !$status->isGood() ) {
+				// TODO: just die if there is a fatal message, but should really report all messages
+				if ( !$status->isOK() ) {
+					if ( $itemContent->isNew() ) {
+						$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+					}
+					elseif ( $status->hasMessage( 'edit-conflict' ) ) {
+						$this->dieUsage( wfMsg( 'wikibase-api-edit-conflict' ), 'edit-conflict' );
+					}
+					else {
+						$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
 					}
 				}
-				if ( $hasLink ) {
-					$normalized = array();
-
-					if ( $normTitle !== $params['title'] ) {
-						$normalized['from'] = $params['title'];
-						$normalized['to'] = $normTitle;
+				// there is only warnings at this point
+				foreach ( array( 'warning' => 'warnings' /*, 'error' => 'errors'*/ ) as $type => $set ) {
+					$errors = $status->getErrorsByType( $type );
+					if ( is_array($errors) && $errors !== array() ) {
+						$path = array( null, $set );
+						$this->getResult()->addValue( null, $set, $errors);
+						$this->getResult()->setIndexedTagName( $path, $type );
 					}
+				}
+			}
 
-					if ( $normalized !== array() ) {
-						$this->getResult()->addValue(
-							'item',
-							'normalized', $normalized
-						);
-					}
+			$this->getResult()->addValue(
+				'item',
+				'id', $itemContent->getItem()->getId()
+			);
+			$page = $itemContent->getWikiPage();
+			if ( $page->exists() ) {
+				$revision = $page->getRevision();
+				if ( $revision !== null ) {
+					$this->getResult()->addValue(
+						'item',
+						'lastrevid', intval( $revision->getId() )
+					);
+				}
+			}
+			if ( $hasLink ) {
+				$normalized = array();
+
+				if ( $normTitle !== $params['title'] ) {
+					$normalized['from'] = $params['title'];
+					$normalized['to'] = $normTitle;
+				}
+
+				if ( $normalized !== array() ) {
+					$this->getResult()->addValue(
+						'item',
+						'normalized', $normalized
+					);
 				}
 			}
 		}
@@ -287,6 +326,7 @@ abstract class ApiModifyItem extends Api {
 			'success',
 			(int)$success
 		);
+
 	}
 
 	/**
@@ -307,6 +347,8 @@ abstract class ApiModifyItem extends Api {
 			array( 'code' => 'invalid-contentmodel', 'info' => $this->msg( 'wikibase-api-invalid-contentmodel' )->text() ),
 			array( 'code' => 'no-permissions', 'info' => $this->msg( 'wikibase-api-no-permissions' )->text() ),
 			array( 'code' => 'session-failure', 'info' => $this->msg( 'wikibase-api-session-failure' )->text() ),
+			array( 'code' => 'no-revision', 'info' => wfMsg( 'wikibase-api-no-revision' ) ),
+			array( 'code' => 'patch-empty', 'info' => wfMsg( 'wikibase-api-patch-empty' ) ),
 		) );
 	}
 
@@ -348,6 +390,9 @@ abstract class ApiModifyItem extends Api {
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
+			'baserevid' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+			),
 			'token' => null,
 			'bot' => false,
 		) );
@@ -370,6 +415,9 @@ abstract class ApiModifyItem extends Api {
 			'summary' => array( 'Summary for the edit.',
 				"Will be prepended by an automatically generated comment."
 			),
+			'baserevid' => array( 'The numeric identifier for the revision.',
+				"This is used for detecting conflicts during save."
+			),
 			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
 				'During a normal reply a token can be returned spontaneously and the requester should',
 				'then start using the new token from the next request, possibly when repeating a failed',
@@ -381,4 +429,5 @@ abstract class ApiModifyItem extends Api {
 			),
 		) );
 	}
+
 }

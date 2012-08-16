@@ -22,6 +22,23 @@ abstract class EntityContent extends \AbstractContent {
 	 * @since 0.1
 	 * @var WikiPage|false
 	 */
+	protected $editEntity = false;
+
+	/**
+	 * Returns the EditEntity for the item or false if there is none.
+	 *
+	 * @since 0.1
+	 *
+	 * @return EditEntity|false
+	 */
+	public function getEditEntity() {
+		return $this->editEntity;
+	}
+
+	/**
+	 * @since 0.1
+	 * @var WikiPage|false
+	 */
 	protected $wikiPage = false;
 
 	/**
@@ -219,7 +236,13 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return \Status Success indicator
 	 */
-	public function save( $summary = '', User $user = null, $flags = 0 ) {
+	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false, $editEntity = false ) {
+		// must keep this state for later cleanup
+		$isNew = $this->isNew();
+
+		// keep the new editEntity
+		$this->editEntity = $editEntity;
+
 		// NOTE: data created by relationalSave may be left dangling if $page->doEditContent fails.
 		//       This is especially relevant when creating a new Entity.
 		// @todo: fix this by implementing transactional logic or at least clean up of things fail
@@ -228,7 +251,8 @@ abstract class EntityContent extends \AbstractContent {
 
 		if ( !$success ) {
 			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
-		} else {
+		}
+		else {
 			// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clear may cause the old content
 			//       to be loaded from the database again. This may be necessary, because EntityContent is mutable,
 			//       so the cached object might have changed.
@@ -245,11 +269,49 @@ abstract class EntityContent extends \AbstractContent {
 				$this,
 				$summary,
 				$flags | EDIT_AUTOSUMMARY,
-				false,
+				$baseRevId,
 				$user
 			);
+			if ( $isNew === true && !$status->isOk() ) {
+				// Delete any dangling new items from relationalSave?
+			}
 		}
 
 		return $status;
 	}
+
+	/**
+	 *
+	 * @param WikiPage $page
+	 * @param int      $flags
+	 * @param int      $baseRevId
+	 * @param User     $user
+	 *
+	 * @return \Status
+	 * @see Content::prepareSave()
+	 */
+	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
+		// Chain to parent
+		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
+		if ( !$status->isOK() ) {
+			return $status;
+		}
+
+		// Only do the following tests if the $editEntity is set
+		if ( $this->editEntity !== false ) {
+			// This check really depends upon what we end up using as base revision.
+			// For example this could be the base of our patched content.
+			if ( $baseRevId !== $this->editEntity->getBaseRevisionId() ) {
+				$status->fatal('wikibase-error-prepare-save-base-revision-wrong');
+			}
+
+			// This check should always be against the last observed revision
+			if ( $page->getRevision()->getId() ===  $this->editEntity->getBaseRevisionId() ) {
+				$status->fatal('wikibase-error-prepare-save-last-revision-wrong');
+			}
+		}
+
+		return $status;
+	}
+
 }
