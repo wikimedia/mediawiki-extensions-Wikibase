@@ -110,7 +110,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 
 		try {
-			$this->doApiRequest(
+			list($res,,) = $this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
 					'reason' => 'Some reason',
@@ -122,6 +122,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				self::$users['wbeditor']->user
 			);
 
+			print_r($res);
 			$this->fail( "Adding another item with the same sitelinks should have failed" );
 		}
 		catch ( \UsageException $e ) {

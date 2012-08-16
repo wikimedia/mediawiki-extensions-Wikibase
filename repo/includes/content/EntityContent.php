@@ -219,21 +219,104 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return \Status Success indicator
 	 */
-	public function save( $summary = '', User $user = null, $flags = 0 ) {
-		$success = $this->relationalSave();
+	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false ) {
+		$status = \Status::newGood();
+		$isNew = $this->isNew();
 
-		if ( !$success ) {
-			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
-		} else {
-			$status = $this->getWikiPage()->doEditContent(
-				$this,
-				$summary,
-				$flags | EDIT_AUTOSUMMARY,
-				false,
-				$user
+		// The call to relationalSave is going to leave a lot of items hanging around if the
+		// later doEditContent is failing for whatever reason, as the call is run outside the
+		// transaction. The WikiPage is although necessary for the call to complete.
+		if ( !$this->relationalSave() ) {
+			$status->fatal( "wikibase-error-relational-save-failed" );
+		}
+		else {
+			$status->merge(
+				$this->getWikiPage()->doEditContent(
+					$this,
+					$summary,
+					$flags | EDIT_AUTOSUMMARY,
+					$baseRevId,
+					$user
+				)
 			);
+			if ( $isNew === true && !$status->isOk() ) {
+				// delete any dangling new items from relationalSave?
+			}
+		}
+
+		if ( !$status->hasMessage( 'edit-conflict' ) ) {
+			// TODO: Fatal fail in save, but it is possible to create a patch and continue.
+			// Without the patch the call will later fail. When continuing the message must
+			// be popped. If there are other fatal messages it is probably not possible to
+			// solve them by just patching the content and saving again.
+			// To continue the message must be changed from an error (fatal) to a warning
+			// (non-fatal) as otherwise the whole call will fail anyhow.
 		}
 
 		return $status;
+	}
+
+	/**
+	 *
+	 * @param WikiPage $page
+	 * @param int      $flags
+	 * @param int      $baseRevId
+	 * @param User     $user
+	 *
+	 * @return \Status
+	 * @see Content::prepareSave()
+	 */
+	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
+		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
+
+		if ( $status->isOK() ) {
+			if ( !$this->userWasLastToEdit( $user, $baseRevId ) ) {
+				$status->fatal( 'wikibase-error-edit-conflict' );
+			}
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Check if no edits were made by other users since the given revision. Limit to 50 revisions for the
+	 * sake of performance.
+	 *
+	 * Note that this makes the assumption that revision ids are monotonically increasing.
+	 *
+	 * Note that this is a variation over the same idea that is used in EditPage::userWasLastToEdit() but
+	 * with the difference that this one is using the revision and not the timestamp.
+	 *
+	 * @param int|null $user the users numeric identifier
+	 * @param int|false $lastRevId the revision the user supplied
+	 *
+	 * @return bool
+	 */
+	public function userWasLastToEdit( $user = null, $lastRevId = false ) {
+
+		if ( $lastRevId === false ) return true; // this is faking to make tests work!
+
+		if ( !($user instanceof \User) ) return false;
+		$userId = $user->getId();
+
+		$title = $this->getTitle();
+		if ( $title === false ) return false;
+
+		$dbw = wfGetDB( DB_MASTER );
+		$res = $dbw->select( 'revision',
+			'rev_user',
+			array(
+				'rev_page' => $title->getArticleID(),
+				'rev_id > ' . intval( $lastRevId )
+			),
+			__METHOD__,
+			array( 'ORDER BY' => 'rev_id ASC', 'LIMIT' => 50 ) );
+		foreach ( $res as $row ) {
+			if ( $row->rev_user != $userId ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

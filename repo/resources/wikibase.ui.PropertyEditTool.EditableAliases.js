@@ -133,7 +133,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 	getApiCallParams: function( apiAction ) {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
 		params.action = 'wbsetaliases';
-		params.item = 'set';
+		params.baserevid = mw.config.get( 'wgCurRevisionId' );
+		//params.item = 'set';
 		params.set = this.getValue()[0].join( '|' );
 		return params;
 	},
