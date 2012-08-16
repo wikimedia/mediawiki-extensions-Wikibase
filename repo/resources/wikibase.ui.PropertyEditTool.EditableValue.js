@@ -857,7 +857,15 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 */
 	_interfaceHandler_onKeyPressed: function( relatedInterface, event ) {
 		if( event.which === $.ui.keyCode.ENTER ) {
-			if( this.valueCompare( this.getInitialValue(), this.getValue() ) ) {
+			if(
+				// value same as before...
+				this.valueCompare( this.getInitialValue(), this.getValue() )
+			) {
+				if( this.isNew() && !this.isValid() ) {
+					// if invalid, the user probably changed the value but valueCompare says the value is equal
+					// because both values are invalid in case initial value was empty
+					return;
+				}
 				// value not modified yet, cancel button not available but enter should also stop editing
 				this._toolbar.editGroup.btnCancel.doAction();
 			} else {
