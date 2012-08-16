@@ -232,52 +232,70 @@ abstract class ApiModifyItem extends Api {
 			$comment = $this->getTextForComment( $params, $hits );
 
 			// Do the actual save, or if it don't exist yet create it.
-			$status = $itemContent->save( Autocomment::formatTotalSummary( $comment, $summary, $lang ), $user, $this->flags  );
-			$success = $status->isOK();
+			// There will be exceptions but we just leak them out ;)
+			$status = $itemContent->save(
+				Autocomment::formatTotalSummary( $comment, $summary, $lang ),
+				$user,
+				$this->flags,
+				isset( $params['baserevid'] ) ? $params['baserevid'] : false
+			);
 
-			if ( !$success ) {
-				if ( $itemContent->isNew() ) {
-					$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
+			if ( !$status->isGood() ) {
+				// TODO: just die if there is a fatal message, but should really report all messages
+				if ( !$status->isOK() ) {
+					if ( $itemContent->isNew() ) {
+						$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+					}
+					elseif ( $status->hasMessage( 'edit-conflict' ) ) {
+						$this->dieUsage( wfMsg( 'wikibase-api-edit-conflict' ), 'edit-conflict' );
+					}
+					else {
+						$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
+					}
 				}
-				else {
-					$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
+				// there is only warnings at this point
+				foreach ( array( 'warning' => 'warnings' /*, 'error' => 'errors'*/ ) as $type => $set ) {
+					$errors = $status->getErrorsByType( $type );
+					if ( is_array($errors) && $errors !== array() ) {
+						$path = array( null, $set );
+						$this->getResult()->addValue( null, $set, $errors);
+						$this->getResult()->setIndexedTagName( $path, $type );
+					}
 				}
 			}
 
-			if ( $success ) {
-				$this->getResult()->addValue(
-					'item',
-					'id', $itemContent->getItem()->getId()
-				);
-				$page = $itemContent->getWikiPage();
-				if ( $page->exists() ) {
-					$revision = $page->getRevision();
-					if ( $revision !== null ) {
-						$this->getResult()->addValue(
-							'item',
-							'lastrevid', intval( $revision->getId() )
-						);
-					}
+			$this->getResult()->addValue(
+				'item',
+				'id', $itemContent->getItem()->getId()
+			);
+			$page = $itemContent->getWikiPage();
+			if ( $page->exists() ) {
+				$revision = $page->getRevision();
+				if ( $revision !== null ) {
+					$this->getResult()->addValue(
+						'item',
+						'lastrevid', intval( $revision->getId() )
+					);
 				}
-				if ( $hasLink ) {
-					$normalized = array();
+			}
+			if ( $hasLink ) {
+				$normalized = array();
 
-					if ( $normTitle !== $params['title'] ) {
-						$normalized['from'] = $params['title'];
-						$normalized['to'] = $normTitle;
-					}
+				if ( $normTitle !== $params['title'] ) {
+					$normalized['from'] = $params['title'];
+					$normalized['to'] = $normTitle;
+				}
 
-					if ( $normalized !== array() ) {
-						$this->getResult()->addValue(
-							'item',
-							'normalized', $normalized
-						);
-					}
+				if ( $normalized !== array() ) {
+					$this->getResult()->addValue(
+						'item',
+						'normalized', $normalized
+					);
 				}
 			}
 		}
 
-		if ( $success && $params['gettoken'] ) {
+		if ( $params['gettoken'] ) {
 			$user = $this->getUser();
 			$this->addTokenToResult( $user->getEditToken() );
 		}
@@ -349,6 +367,9 @@ abstract class ApiModifyItem extends Api {
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
+			'baserevid' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+			),
 			'token' => null,
 			'bot' => false,
 		) );
@@ -370,6 +391,9 @@ abstract class ApiModifyItem extends Api {
 			),
 			'summary' => array( 'Summary for the edit.',
 				"Will be prepended by an automatically generated comment."
+			),
+			'baserevid' => array( 'The numeric identifier for the revision.',
+				"This is used for detecting conflicts during save."
 			),
 			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
 				'During a normal reply a token can be returned spontaneously and the requester should',

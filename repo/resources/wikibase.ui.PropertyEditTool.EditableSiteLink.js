@@ -202,6 +202,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
 		params = $.extend( params, {
 			action: 'wbsetsitelink',
+			baserevid: mw.config.get( 'wgCurRevisionId' ),
 			linksite: this.siteIdInterface.getSelectedSite().getGlobalSiteId(),
 			linktitle: ( apiAction === this.API_ACTION.REMOVE || apiAction === this.API_ACTION.SAVE_TO_REMOVE ) ? '' : this.getValue()[1]
 		} );
