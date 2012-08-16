@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//5eQ\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-16T10:22:25Z",
+      "side": 1,
+      "message": "We add the bug number in the branch wherever there is a bug.\nThis is branch wikibase-api-not-recognized-39262\n\nPerhaps we should add the bug in the commit message instead, but I don\u0027t know if it really makes things easier. Seems like it is more important to find the bug while listing the branches.",
+      "parentUuid": "AAAARX//5ek\u003d",
+      "revId": "4d8d1d91716d52f1387e9a077f0bb57bfe215ee7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//5es\u003d",
         "filename": "repo/Wikibase.i18n.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-16T10:12:02Z",
       "side": 1,
       "message": "spelling: procede",
+      "revId": "4d8d1d91716d52f1387e9a077f0bb57bfe215ee7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5eI\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-08-16T10:22:25Z",
+      "side": 1,
+      "message": "proceed?",
+      "parentUuid": "AAAARX//5es\u003d",
       "revId": "4d8d1d91716d52f1387e9a077f0bb57bfe215ee7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
