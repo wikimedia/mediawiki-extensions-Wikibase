@@ -76,12 +76,21 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 			.addClass( this.UI_CLASS )
 			.addClass( 'wb-ui-propertyedittool-editablevaluelistinterface' ); // additional UI class
 
+		var self = this;
+
+		// Get events from all input elements of tagadata and register them here.
+		// NOTE: noet yet all events registered, register on demand.
+		// ToDo: this is not nice, we should use use proper event-propagation instead
 		inputElement
-		.on( 'tagadatataginserted', $.proxy( function( e, tag ) {
-			$( tag ).find( 'input' ).on( 'keypress', $.proxy( function( event ) {
-				this._onKeyPressed( event );
-			}, this ) );
-		}, this ) );
+		.on( 'tagadatataginserted', function( e, tag ) {
+			$( tag ).find( 'input' )
+			.on( 'keypress',function( event ) {
+				self._onKeyPressed( event );
+			} )
+			.on( 'keyup', function( event ) {
+				self._onKeyUp( event );
+			} );
+		} );
 
 		inputElement.tagadata( {
 			animate: false, // FIXME: when animated set to true, something won't work in there, fails silently then
