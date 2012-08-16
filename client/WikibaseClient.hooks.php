@@ -35,6 +35,11 @@ final class ClientHooks {
 			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
 
 			$updater->addExtensionTable(
+				'wbc_entity_cache',
+				__DIR__ . '/sql/WikibaseCache' . $extension
+			);
+
+			$updater->addExtensionTable(
 				'wbc_item_usage',
 				__DIR__ . '/sql/KillLocalItems.sql'
 			);
