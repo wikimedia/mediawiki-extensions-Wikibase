@@ -22,6 +22,8 @@ class LoginPage
   end
 
   def logout_user
-    logout
+    if logout?
+      logout
+    end
   end
 end
