@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//5fM\u003d",
+        "filename": "lib/includes/entity/Entity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-16T10:03:12Z",
+      "side": 1,
+      "message": "This belongs into the Item interface. Only items have statements.",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5fE\u003d",
+        "filename": "lib/includes/snak/InstanceOfSnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-16T10:03:12Z",
+      "side": 1,
+      "message": "Do we really want or need this? As far as I know, we are trying to avoid a type system for items, no?\n\nAnd if we want to support it, should this perhaps be \"isa\" instead of \"instanceof\"?",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5fI\u003d",
+        "filename": "lib/includes/snak/InstanceOfSnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-16T10:03:12Z",
+      "side": 1,
+      "message": "The name should make it clear what item this is. getClassItemId or even getClassId make more sense to me.",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5fA\u003d",
+        "filename": "lib/includes/snak/PropertySnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-16T10:03:12Z",
+      "side": 1,
+      "message": "Really? I don\u0027t think this should be mutable. Actually, in my mind, all Snaks are completely immutable.",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//5e8\u003d",
+        "filename": "lib/includes/snak/PropertyValueSnak.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-16T10:03:12Z",
+      "side": 1,
+      "message": "DataValue as opposed to... what? And where does the DataValue type come from?",
+      "revId": "38e73dd9ca79066d5c28820eedb1ac6aaca04144",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
