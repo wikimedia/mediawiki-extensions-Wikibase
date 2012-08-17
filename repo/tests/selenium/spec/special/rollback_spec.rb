@@ -73,7 +73,7 @@ describe "Check revert/rollback" do
   context "rollback functionality test" do
     it "should login as admin and rollback changes by last user" do
       visit_page(LoginPage) do |page|
-        page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       on_page(AliasesItemPage) do |page|
         page.navigate_to_item
