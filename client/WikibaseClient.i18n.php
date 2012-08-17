@@ -33,6 +33,15 @@ $messages['qqq'] = array(
 	'wbc-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizzard to edit interlanguage links.',
 );
 
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'wbc-desc' => 'Cliente pa la estensión Wikibase',
+	'wbc-editlinks' => 'Editar los enllaces',
+	'wbc-editlinkstitle' => "Editar los enllaces d'interllingua",
+);
+
 /** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
  * @author Wizardist
  */

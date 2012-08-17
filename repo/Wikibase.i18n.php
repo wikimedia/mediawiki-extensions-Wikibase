@@ -746,6 +746,7 @@ $messages['dsb'] = array(
 	'wikibase-itembylabel-lookup-label' => 'Pomjenjenje:',
 	'wikibase-itembylabel-submit' => 'Pytaś',
 	'wikibase-itembylabel-create' => 'Móžoš teke [{{fullurl:Special:CreateItem|language=$1&label=$2}} element napóraś].',
+	'wikibase-itembylabel-description' => 'Gódnoty, kótarež wužywaju se za pytanje, muse dopołne tekstowe zapiski byś. Rěc jo identifikator, na pśikład "dsb".',
 	'special-createitem' => 'Nowy element napóraś',
 	'wikibase-api-aliases-invalid-list' => 'Wužyj jaden z parametrow "set", "add" a "remove".',
 	'wikibase-api-no-token' => 'Njejo se token pódał.',
@@ -1596,7 +1597,7 @@ $messages['hsb'] = array(
 	'wikibase-itembylabel-lookup-label' => 'Pomjenowanje:',
 	'wikibase-itembylabel-submit' => 'Pytać',
 	'wikibase-itembylabel-create' => 'Móžeš tež [{{fullurl:Special:CreateItem|language=$1&label=$2}} element wutworić].',
-	'wikibase-itembylabel-description' => 'Hódnoty, kotrež so za pytanje wužiwaja, dyrbja dospołne tekstowy zapiski być. Rěč je identifikator, na přikład "hsb".',
+	'wikibase-itembylabel-description' => 'Hódnoty, kotrež so za pytanje wužiwaja, dyrbja dospołne tekstowe zapiski być. Rěč je identifikator, na přikład "hsb".',
 	'special-createitem' => 'Nowy element wutworić',
 	'wikibase-api-aliases-invalid-list' => 'Wužij jedyn z parametrow "set", "add" a "remove".',
 	'wikibase-api-no-token' => 'Njeje so token podał.',
@@ -1894,6 +1895,7 @@ til þess að finna hvert hann fór, eða [[Special:CreateItem|búið til nýjan
 /** Italian (italiano)
  * @author Beta16
  * @author Darth Kule
+ * @author F. Cosoleto
  */
 $messages['it'] = array(
 	'wikibase-desc' => 'Repository di dati strutturati',
@@ -2007,7 +2009,9 @@ $1',
 	'wikibase-api-description-not-found' => "Non è possibile trovare una descrizione precedente per questa lingua nell'elemento.",
 	'wikibase-api-wrong-class' => 'Il contenuto della pagina trovata non è di un tipo corretto.',
 	'wikibase-api-session-failure' => "La sessione corrente non è riuscita. Effettua nuovamente l'accesso.",
+	'wikibase-api-illegal-field' => 'Usato un campo non valido nella chiamata: $1',
 	'wikibase-restoreold' => 'reimposta',
+	'wikibase-restore-summary' => 'Ripristina revisione $1 di [[Special:Contributions/$2|$2]]',
 	'wikibase-noitem' => 'Questo elemento non esiste.
 Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare i relativi log]
 per sapere dov\'è ora, o [[Special:CreateItem|creare un nuovo elemento]]</span>.',
@@ -3319,6 +3323,31 @@ Maaari mong <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGE
 	'wikibase-item-summary-wbsetaliases-add' => 'Idinagdag ang [$2] {{plural:$1|bansag|mga bansag}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Tinanggal ang [$2] {{plural:$1|bansag|mga bansag}}',
 	'content-model-1001' => 'Bagay ng himpilang wiki',
+);
+
+/** Urdu (اردو)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['ur'] = array(
+	'wikibase-edit' => 'ترمیم کریں',
+	'wikibase-save' => 'محفوظ کریں',
+	'wikibase-cancel' => 'منسوخ',
+	'wikibase-add' => 'شامل کریں',
+	'wikibase-save-inprogress' => 'بچت...',
+	'wikibase-remove-inprogress' => 'اتارنے...',
+	'wikibase-label-edit-placeholder' => 'لیبل درج کریں',
+	'wikibase-description-edit-placeholder' => 'تفصیل درج کریں',
+	'wikibase-sitelink-site-edit-placeholder' => 'ویب سائٹ',
+	'wikibase-sitelink-page-edit-placeholder' => 'مضمون',
+	'wikibase-remove' => 'حذف کریں',
+	'wikibase-tooltip-error-details' => 'تفصیلات',
+	'wikibase-itembytitle-lookup-site' => 'ویب سائٹ:',
+	'wikibase-itembytitle-lookup-page' => 'صفحہ:',
+	'wikibase-itembytitle-submit' => 'تلاش',
+	'wikibase-itembylabel-lookup-language' => 'زبان:',
+	'wikibase-itembylabel-lookup-label' => 'لیبل:',
+	'wikibase-itembylabel-submit' => 'تلاش',
+	'wikibase-restoreold' => 'بحال',
 );
 
 /** Vietnamese (Tiếng Việt)

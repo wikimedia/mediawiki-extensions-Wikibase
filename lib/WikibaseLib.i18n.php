@@ -25,6 +25,13 @@ $messages['qqq'] = array(
 	'wikibaselib-desc' => '{{desc}}',
 );
 
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'wikibaselib-desc' => 'Contién les funciones comúnes pa les estensiones Wikibase y Wikibase Client.',
+);
+
 /** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
  * @author Wizardist
  */
