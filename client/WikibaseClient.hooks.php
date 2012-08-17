@@ -112,7 +112,7 @@ final class ClientHooks {
 				$siteLink = $item->getSiteLink( Settings::get( 'siteGlobalID' ) );
 
 				if ( $siteLink !== null ) {
-					$title = Title::newFromText( $siteLink->getPage() );
+					$title = \Title::newFromText( $siteLink->getPage() );
 
 					if ( !is_null( $title ) && $title->getArticleID() !== 0 ) {
 						$title->invalidateCache();
