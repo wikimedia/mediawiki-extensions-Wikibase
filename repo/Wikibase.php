@@ -69,6 +69,7 @@ $wgGroupPermissions['*']['alias-set']			= true;
 $wgGroupPermissions['*']['alias-remove']		= true;
 $wgGroupPermissions['*']['sitelink-remove']		= true;
 $wgGroupPermissions['*']['sitelink-update']		= true;
+$wgGroupPermissions['*']['linktitles-update']	= true;
 $wgGroupPermissions['*']['label-remove']		= true;
 $wgGroupPermissions['*']['label-update']		= true;
 $wgGroupPermissions['*']['description-remove']	= true;
@@ -114,6 +115,7 @@ $wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSet
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
 $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
 $wgAutoloadClasses['Wikibase\ApiSetItem'] 				= $dir . 'includes/api/ApiSetItem.php';
+$wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
 
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
@@ -150,6 +152,7 @@ $wgAPIModules['wbsetdescription'] 					= 'Wikibase\ApiSetDescription';
 $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
 $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbsetitem'] 							= 'Wikibase\ApiSetItem';
+$wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 
 
 // Special page registration
