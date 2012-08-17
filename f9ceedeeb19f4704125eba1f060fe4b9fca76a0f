@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAARX//4e4\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-08-17T10:09:43Z",
+      "side": 1,
+      "message": "Really? This can work? $type can be both \u0027mysql\u0027 or \u0027sqlite\u0027 AND \u0027postgres\u0027?????",
+      "revId": "f9ceedeeb19f4704125eba1f060fe4b9fca76a0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//4fE\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-08-17T10:09:43Z",
+      "side": 1,
+      "message": "Good thing not to have enwiki hard-coded anymore. Makes it much more useful for languages other than English. :)",
+      "revId": "f9ceedeeb19f4704125eba1f060fe4b9fca76a0f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//5XQ\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 7
