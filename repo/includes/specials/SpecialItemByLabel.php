@@ -49,12 +49,8 @@ class SpecialItemByLabel extends SpecialItemResolver {
 		// Create an item view
 		if ( isset( $language ) && isset( $label ) ) {
 			$itemContents = \Wikibase\ItemHandler::singleton()->getFromLabel( $language, $label );
-			//$itemContents = call_user_func_array(
-			//	array( \Wikibase\ItemHandler::singleton(), 'getFromLabel' ),
-			//	array( $language, $label, $description )
-			//);
-			if ( count( $itemContents ) === 1 && $this->getRequest()->wasPosted() ) {
-				$this->displayItem( $itemContents[0] );
+			if ( count( $itemContents ) === 1 ) {
+				$this->getOutput()->redirect( $itemContents[0]->getTitle()->getFullUrl() );
 			}
 			if ( 0 < count( $itemContents ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );
