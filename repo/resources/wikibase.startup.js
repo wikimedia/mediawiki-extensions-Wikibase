@@ -23,7 +23,9 @@
 
 	$( document ).ready( function() {
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
-		new wb.ui.LabelEditTool( $( '.wb-firstHeading' ) );
+		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
+			new wb.ui.LabelEditTool( $( '.wb-firstHeading' ) );
+		}
 
 		// add an edit tool for all properties in the data view:
 		$( 'body' )
