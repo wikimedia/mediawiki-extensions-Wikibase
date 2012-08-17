@@ -156,6 +156,7 @@ final class LibHooks {
 			'query/QueryObject',
 
 			'snak/PropertyValueSnak',
+			'snak/SnakList',
 
 			'ChangeNotifier',
 			'ChangeHandler',
