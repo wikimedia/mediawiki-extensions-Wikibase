@@ -13,7 +13,7 @@ describe "Check functionality of blocking a user" do
   context "create item, block user" do
     it "should create an item and block a user" do
       visit_page(LoginPage) do |page|
-        page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       visit_page(NewItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
@@ -95,7 +95,7 @@ describe "Check functionality of blocking a user" do
   context "unblock user" do
     it "should unblock the user and logout" do
       visit_page(LoginPage) do |page|
-        page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       visit_page(UnblockUserPage) do |page|
         page.unblock_user(WIKI_BLOCKED_USERNAME)

@@ -42,7 +42,7 @@ describe "Check functionality of item deletion" do
         page.firstResultSearchMatch_element.text.should == alias_b
       end
       visit_page(LoginPage) do |page|
-        page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       visit_page(DeleteItemPage) do |page|
         page.delete_item
