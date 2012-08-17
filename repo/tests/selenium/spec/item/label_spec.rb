@@ -34,6 +34,12 @@ describe "Check functionality of edit label" do
         page.editLabelLink?.should be_true
         page.cancelLabelLink?.should be_false
         page.itemLabelSpan.should == current_label
+        # checking behaviour of ESC key 
+        page.editLabelLink
+        page.labelInputField = changed_label
+        page.labelInputField_element.send_keys :escape
+        page.editLabelLink?.should be_true
+        page.itemLabelSpan.should == current_label
         page.editLabelLink
         page.labelInputField_element.clear
         page.labelInputField = changed_label

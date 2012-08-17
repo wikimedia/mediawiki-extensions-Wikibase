@@ -54,6 +54,12 @@ describe "Check functionality of add/edit/remove aliases" do
         page.cancelAliases
         page.addAliases?.should be_true
 
+        # checking behaviour of ESC key
+        page.addAliases
+        page.aliasesInputEmpty= generate_random_string(8)
+        page.aliasesInputEmpty_element.send_keys :escape
+        page.addAliases?.should be_true
+
         # again adding the aliases
         page.addAliases
         i = 0;

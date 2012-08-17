@@ -34,6 +34,12 @@ describe "Check functionality of edit description" do
         page.editDescriptionLink?.should be_true
         page.cancelDescriptionLink?.should be_false
         page.itemDescriptionSpan.should == current_description
+        # checking behaviour of ESC key
+        page.editDescriptionLink
+        page.descriptionInputField = changed_description
+        page.descriptionInputField_element.send_keys :escape
+        page.editDescriptionLink?.should be_true
+        page.itemDescriptionSpan.should == current_description
         page.editDescriptionLink
         page.descriptionInputField_element.clear
         page.descriptionInputField = changed_description
