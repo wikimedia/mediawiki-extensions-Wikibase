@@ -67,7 +67,14 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 					}
 				}, this ) );
 				this._onInputRegistered();
-				this._inputElem.autocomplete( "close" ); // make sure to close autocomplete
+				/* make sure to close auto-suggestion menu manually when pressing enter but do not
+				overwrite the widget internal blur handling for other (especially mouse) events
+				since the menu would also get closed when clicking on its scrollbar taking the focus
+				away from the menu; let the internal widget code handle the blur event / closing of
+				the menu instead */
+				if ( event.type !== 'blur' ) {
+					this._inputElem.autocomplete( 'close' );
+				}
 			}
 		}, this ) );
 	},
