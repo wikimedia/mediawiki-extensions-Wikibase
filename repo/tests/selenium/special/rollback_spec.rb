@@ -53,7 +53,8 @@ describe "Check revert/rollback" do
         ajax_wait
         page.wait_for_api_callback
         page.editAliases
-        page.aliasesInputFirst= alias_a + changed
+        page.aliasesInputFirst_element.clear
+        page.aliasesInputEmpty= alias_a + changed
         page.saveAliases
         ajax_wait
         page.wait_for_api_callback
