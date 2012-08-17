@@ -10,112 +10,112 @@ require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:all) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/*/*_spec.rb'
+  spec.pattern = '../repo/tests/selenium/*/*_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/*_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/*_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_description) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/description_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/description_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_empty_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/empty_item_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/empty_item_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_non_existing_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/non_existing_item_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/non_existing_item_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_label) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/label_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/label_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_sitelinks) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/sitelinks/*_spec.rb'
+  spec.pattern = '../repo/tests/selenium/sitelinks/*_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_newitem) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/new_item_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/new_item_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_aliases) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/aliases/*_spec.rb'
+  spec.pattern = '../repo/tests/selenium/aliases/*_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_aliases_bugs) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/aliases/aliases_bugs_spec.rb'
+  spec.pattern = '../repo/tests/selenium/aliases/aliases_bugs_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_blocked_user) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/blocked_user_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/blocked_user_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_protected_page) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/protected_page_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/protected_page_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_search) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/special/search_spec.rb'
+  spec.pattern = '../repo/tests/selenium/special/search_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_recentchanges) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/special/recent_changes_spec.rb'
+  spec.pattern = '../repo/tests/selenium/special/recent_changes_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_language_selector) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/language_selector/language_selector_spec.rb'
+  spec.pattern = '../repo/tests/selenium/language_selector/language_selector_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_item_deletion) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/delete_item_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/delete_item_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_bugs) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/bugs_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/bugs_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_editonoff) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/item/editonoff_spec.rb'
+  spec.pattern = '../repo/tests/selenium/item/editonoff_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_client_repo) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/client/client_repo_spec.rb'
+  spec.pattern = '../repo/tests/selenium/client/client_repo_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_undo) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/special/undo_spec.rb'
+  spec.pattern = '../repo/tests/selenium/special/undo_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_rollback) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/special/rollback_spec.rb'
+  spec.pattern = '../repo/tests/selenium/special/rollback_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:spec_restore) do |spec|
   spec.ruby_opts = "-I lib:spec"
-  spec.pattern = 'spec/special/restore_spec.rb'
+  spec.pattern = '../repo/tests/selenium/special/restore_spec.rb'
 end
 
 task :default => :run_tests
