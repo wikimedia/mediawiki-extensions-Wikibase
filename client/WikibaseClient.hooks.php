@@ -146,12 +146,14 @@ final class ClientHooks {
 			$useRepoLinks = LangLinkHandler::useRepoLinks( $parser );
 
 			if ( $useRepoLinks ) {
+
+				$repoLinkItems = array();
+
 				$repoLinks = LangLinkHandler::getEntityCacheLinks( $parser );
 
 				if ( count( $repoLinks ) > 0 ) {
 					LangLinkHandler::suppressRepoLinks( $parser, $repoLinks );
 
-					$repoLinkItems = array();
 					foreach ( $repoLinks as $link ) {
 						$localKey = $link->getSite()->getConfig()->getLocalId();
 
