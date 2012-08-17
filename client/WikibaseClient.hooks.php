@@ -259,10 +259,12 @@ final class ClientHooks {
 		$titleText = $title->getPartialURL();
 		$siteId = Settings::get( 'siteGlobalID' );
 
+		$itemId = SiteLinkCache::singleton()->getItemIdForPage( $siteId, $titleText );
+
 		// links to the special page
-		// TODO: use the item id to link directly to the item
+		// TODO: know what the repo namespace is
 		$template->data['language_urls'][] = array(
-			'href' => rtrim( $editUrl, "/" ) . "/Special:ItemByTitle/$siteId/$titleText",
+			'href' => rtrim( $editUrl, "/" ) . "/DataQ$itemID",
 			'text' => wfMsg( 'wbc-editlinks' ),
 			'title' => wfMsg( 'wbc-editlinkstitle' ),
 			'class' => 'wbc-editpage',
