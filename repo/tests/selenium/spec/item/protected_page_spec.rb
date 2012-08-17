@@ -16,7 +16,7 @@ describe "Check functionality of protected page" do
         page.create_new_item(generate_random_string(10), generate_random_string(20))
       end
       visit_page(LoginPage) do |page|
-        page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       on_page(ProtectedPage) do |page|
         page.protect_page
@@ -73,7 +73,7 @@ describe "Check functionality of protected page" do
   context "unprotect page" do
     it "should unprotect the page and logout" do
       visit_page(LoginPage) do |page|
-        page.login_with(WIKI_USERNAME, WIKI_PASSWORD)
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       visit_page(ProtectedPage) do |page|
         page.unprotect_page

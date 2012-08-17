@@ -16,8 +16,8 @@ set configuration parameters to your needs before running the tests!
 
 == Prerequisites for the MW instance you want to test ==
 
-* You need to have an administrator user and an ordinary user (which can be blocked
-  by the administrator) registered for the mediawiki instance you want to test
+* You need to have an administrator user, an user which can be blocked during testing and an
+  ordinary user (without admin rights) registered for the wikidata repo instance you want to test
   You have to set username and password of those users in your local configuration.yml
 * Make sure you clean the MW instance (no data items should be left)
   You can do this by running "php /lib/maintenance/deleteAllData.php" in the Wikibase extension.
