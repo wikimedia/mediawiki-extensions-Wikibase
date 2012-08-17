@@ -137,7 +137,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 			$.proxy( function( event ) {
 				// do not remove highlight when the first item is hovered with the mouse cursor
 				if (
-					event.srcElement !==
+					event.target !==
 						this._inputElem.data( 'autocomplete' ).menu.element.children().first()
 						.children('a')[0]
 				) {
