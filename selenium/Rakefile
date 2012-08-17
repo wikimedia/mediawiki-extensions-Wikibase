@@ -118,6 +118,11 @@ RSpec::Core::RakeTask.new(:spec_restore) do |spec|
   spec.pattern = '../repo/tests/selenium/special/restore_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:spec_qunit) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/qunit/*_spec.rb'
+end
+
 task :default => :run_tests
 task :item => :spec_item
 task :nonexistingitem => :spec_non_existing_item
@@ -140,6 +145,7 @@ task :client_repo => :spec_client_repo
 task :undo => :spec_undo
 task :rollback => :spec_rollback
 task :restore => :spec_restore
+task :qunit => :spec_qunit
 
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
   task = args[:taskname] || :all
