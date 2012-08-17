@@ -102,10 +102,10 @@ describe "Check undo/history/oldrevision" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
         page.undo4_element.when_present.click
-        page.undoDel.should == label + changed
-        page.undoIns.should == label
-        page.undoDelTitle.should == "label / en"
-        page.undoInsTitle.should == "label / en"
+        page.undoDel_element.when_present.text.should == label + changed
+        page.undoIns_element.when_present.text.should == label
+        page.undoDelTitle_element.when_present.text.should == "label / en"
+        page.undoInsTitle_element.when_present.text.should == "label / en"
         page.undoSave
       end
     end
@@ -129,10 +129,10 @@ describe "Check undo/history/oldrevision" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
         page.undo4_element.when_present.click
-        page.undoDel.should == description + changed
-        page.undoIns.should == description
-        page.undoDelTitle.should == "description / en"
-        page.undoInsTitle.should == "description / en"
+        page.undoDel_element.when_present.text.should == description + changed
+        page.undoIns_element.when_present.text.should == description
+        page.undoDelTitle_element.when_present.text.should == "description / en"
+        page.undoInsTitle_element.when_present.text.should == "description / en"
         page.undoSave
       end
     end
@@ -148,10 +148,10 @@ describe "Check undo/history/oldrevision" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
         page.undo1_element.when_present.click
-        page.undoDel.should == description
-        page.undoIns.should == description + changed
-        page.undoDelTitle.should == "description / en"
-        page.undoInsTitle.should == "description / en"
+        page.undoDel_element.when_present.text.should == description
+        page.undoIns_element.when_present.text.should == description + changed
+        page.undoDelTitle_element.when_present.text.should == "description / en"
+        page.undoInsTitle_element.when_present.text.should == "description / en"
         page.undoSave
       end
     end
@@ -173,10 +173,10 @@ describe "Check undo/history/oldrevision" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
         page.undo1_element.when_present.click
-        page.undoDel.should == sitelinks[1][1]
+        page.undoDel_element.when_present.text.should == sitelinks[1][1]
         page.undoIns?.should be_false
-        page.undoDelTitle.should == "links / dewiki"
-        page.undoInsTitle.should == "links / dewiki"
+        page.undoDelTitle_element.when_present.text.should == "links / dewiki"
+        page.undoInsTitle_element.when_present.text.should == "links / dewiki"
         page.undoSave
       end
     end
@@ -192,10 +192,10 @@ describe "Check undo/history/oldrevision" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
         page.undo6_element.when_present.click
-        page.undoDel.should == sitelink_changed
-        page.undoIns.should == sitelinks[0][1]
-        page.undoDelTitle.should == "links / enwiki"
-        page.undoInsTitle.should == "links / enwiki"
+        page.undoDel_element.when_present.text.should == sitelink_changed
+        page.undoIns_element.when_present.text.should == sitelinks[0][1]
+        page.undoDelTitle_element.when_present.text.should == "links / enwiki"
+        page.undoInsTitle_element.when_present.text.should == "links / enwiki"
         page.undoSave
       end
     end
@@ -212,8 +212,8 @@ describe "Check undo/history/oldrevision" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
         page.undo8_element.when_present.click
-        page.undoDel.should == alias_a + changed
-        page.undoIns.should == alias_a
+        page.undoDel_element.when_present.text.should == alias_a + changed
+        page.undoIns_element.when_present.text.should == alias_a
         page.undoSave
       end
     end
