@@ -385,6 +385,14 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 
+/** Achinese (Acèh)
+ * @author Si Gam Acèh
+ */
+$messages['ace'] = array(
+	'wikibase-itembytitle-submit' => 'Mita',
+	'wikibase-itembylabel-submit' => 'Mita',
+);
+
 /** Arabic (العربية)
  * @author Aude
  * @author Meno25
@@ -1047,6 +1055,20 @@ $1',
 	'content-model-1001' => 'مورد ویکی‌پایه',
 );
 
+/** Finnish (suomi)
+ * @author Beluga
+ */
+$messages['fi'] = array(
+	'wikibase-edit' => 'muokkaa',
+	'wikibase-save' => 'tallenna',
+	'wikibase-cancel' => 'peruuta',
+	'wikibase-add' => 'lisää',
+	'wikibase-save-inprogress' => 'Tallennetaan...',
+	'wikibase-remove-inprogress' => 'Poistetaan...',
+	'wikibase-remove' => 'poista',
+	'wikibase-itembytitle-submit' => 'Etsi',
+);
+
 /** French (français)
  * @author Alno
  * @author Brunoperel
@@ -1253,6 +1275,15 @@ $messages['gl'] = array(
 	'wikibase-sitelinks-empty' => 'Ningunha páxina do sitio ten ligazóns cara a este elemento.',
 	'wikibase-sitelinks-input-help-message' => 'Defina unha ligazón cara a unha páxina relacionada co elemento.',
 	'wikibase-remove' => 'eliminar',
+	'wikibase-undo-title' => 'Desfacer unha edición feita en "$1"',
+	'wikibase-restore-title' => 'Restaurar unha revisión vella de "$1"',
+	'wikibase-partial-undo' => 'A edición pódese desfacer parcialmente.',
+	'wikibase-omitted-undo-ops' => '{{PLURAL:$1|Omitiuse $1 cambio|Omitíronse $1 cambios}} porque {{PLURAL:$1|o valor respectivo cambiou|os valores respectivos cambiaron}} desde entón.',
+	'wikibase-empty-undo' => 'Non hai nada que se poida desfacer.',
+	'wikibase-undo-revision-error' => 'Erro ao desfacer',
+	'wikibase-undo-samerev' => 'Non se pode desfacer. A revisión que se vai desfacer é a mesma que vai quedar.',
+	'wikibase-undo-badpage' => 'Revisión incorrecta: A revisión $2 non pertence a "[[$1]]".',
+	'wikibase-undo-firstrev' => 'Non se pode desfacer a primeira edición dunha páxina',
 	'wikibase-propertyedittool-full' => 'A lista de valores está completa.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entrada|entradas}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entrada|entradas}})',
@@ -1291,7 +1322,7 @@ $messages['gl'] = array(
 	'wikibase-itembytitle-submit' => 'Procurar',
 	'wikibase-itembytitle-nothing-found' => 'Non se atopou elemento ningún na procura. Debe afinar a pescuda cunha mellor identificación da páxina externa.',
 	'wikibase-itembytitle-invalid-site' => 'A pescuda anterior non se pode usar para efectuar unha procura. Debe proporcionar un identificador de sitio válido.',
-	'wikibase-itembytitle-description' => '¹Os valores usados para a procura deben ser a entrada de texto ao completo. ²O sitio é un identificador, a miúdo "enwiki".',
+	'wikibase-itembytitle-description' => 'O sitio é un código de identificación, por exemplo "enwiki".',
 	'wikibase-itembytitle-create' => 'Tamén pode [{{fullurl:Special:CreateItem|site=$1&page=$2}} crear un elemento].',
 	'special-itembylabel' => 'Artigo por etiqueta',
 	'wikibase-itembylabel-lookup-fieldset' => 'Procurar elementos por lingua e etiqueta',
@@ -1301,7 +1332,7 @@ $messages['gl'] = array(
 	'wikibase-itembylabel-create' => 'Tamén pode [{{fullurl:Special:CreateItem|language=$1&label=$2}} crear un elemento].',
 	'wikibase-itembylabel-nothing-found' => 'Non se atopou elemento ningún na procura. Afine a pescuda.',
 	'wikibase-itembylabel-invalid-langcode' => 'A pescuda anterior non se pode usar para efectuar unha procura. Debe proporcionar un identificador de lingua válido.',
-	'wikibase-itembylabel-description' => '¹Os valores usados para a procura deben ser a entrada de texto ao completo. ²A lingua é un identificador, a miúdo "en".',
+	'wikibase-itembylabel-description' => 'Os valores usados para a procura deben ser a entrada de texto ao completo. A lingua é un identificador, por exemplo "en".',
 	'special-createitem' => 'Crear un novo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Utilice unicamente un dos parámetros "set", "add" e "remove".',
 	'wikibase-api-no-token' => 'Non se achegou ningún pase.',
@@ -1341,13 +1372,15 @@ $messages['gl'] = array(
 	'wikibase-api-description-not-found' => 'Non se pode atopar unha descrición anterior para esta lingua no elemento.',
 	'wikibase-api-wrong-class' => 'O contido da páxina atopada non é do tipo correcto.',
 	'wikibase-api-session-failure' => 'A sesión actual fallou. Ten que acceder ao sistema de novo.',
-	'wikibase-restoreold' => 'restablecer',
+	'wikibase-api-illegal-field' => 'Úsase un campo ilegal na chamada: $1',
+	'wikibase-restoreold' => 'restaurar',
+	'wikibase-restore-summary' => 'Restauro a revisión $1 feita por [[Special:Contributions/$2|$2]]',
 	'wikibase-noitem' => 'O elemento non existe.
 Pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]
 para descubir onde está ou [[Special:CreateItem|crear un novo elemento]]</span>.',
 	'wikibase-noitem-nopermission' => 'O elemento non existe.
 Pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]</span>.',
-	'wikibase-item-summary-wbsetitem' => 'Creo un elemento en [$2]',
+	'wikibase-item-summary-wbsetitem' => 'Creo un elemento novo',
 	'wikibase-item-summary-wbsetlabel-set' => 'Cambio a etiqueta en [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Elimino a etiqueta en [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Cambio a descrición en [$2]',
@@ -1551,6 +1584,7 @@ $messages['hsb'] = array(
 	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|změna je so wuwostajiła|změnje stej so wuwostajiłoj|změny su so wuwostajili|změnow je so wuwostajiło}}, dokelž {{PLURAL:$1|wotpowědna hódnota je so změniła|wotpowědnej hodnoće stej so změniłoj|wotpowědne hódnoty su so změnili|wotpowědne změny su so změnili}} wot toho časa.',
 	'wikibase-empty-undo' => 'Njeje ničo, zo da so cofnyć.',
 	'wikibase-undo-revision-error' => 'Cofnjenje je so njeporadźiło',
+	'wikibase-undo-samerev' => 'Změna njeda so cofnyć, dokelž wuchadna wersija je identiska z cilowej wersiju.',
 	'wikibase-undo-badpage' => 'Wopačna wersija: Wersija $2 k [[$1]] njesłuša.',
 	'wikibase-undo-firstrev' => 'Wutworjenje strony njeda so cofnyć',
 	'wikibase-propertyedittool-full' => 'Lisćina hódnotow je dospołna.',
@@ -1589,6 +1623,8 @@ $messages['hsb'] = array(
 	'wikibase-itembytitle-lookup-site' => 'Sydło:',
 	'wikibase-itembytitle-lookup-page' => 'Strona:',
 	'wikibase-itembytitle-submit' => 'Pytać',
+	'wikibase-itembytitle-nothing-found' => 'Přez předchadne pytanje njeje so žadyn element namakał. Prošu zlěpš naprašowanje z lěpšej identifikaciju eksterneje strony.',
+	'wikibase-itembytitle-invalid-site' => 'Předchadne naprašowanje njeda so za pytanje wužiwać. Prošu podaj płaćiwy sydłowy identifikator.',
 	'wikibase-itembytitle-description' => 'Sydło je identifikator, na př. "hsbwiki".',
 	'wikibase-itembytitle-create' => 'Móžeš tež [{{fullurl:Special:CreateItem|site=$1&page=$2}} element wutworić].',
 	'special-itembylabel' => 'Zapisk po pomjenowanju',
@@ -1597,6 +1633,8 @@ $messages['hsb'] = array(
 	'wikibase-itembylabel-lookup-label' => 'Pomjenowanje:',
 	'wikibase-itembylabel-submit' => 'Pytać',
 	'wikibase-itembylabel-create' => 'Móžeš tež [{{fullurl:Special:CreateItem|language=$1&label=$2}} element wutworić].',
+	'wikibase-itembylabel-nothing-found' => 'Přez pytanje njeje so žadyn element namakał. Prošu zlěpš naprašowanje.',
+	'wikibase-itembylabel-invalid-langcode' => 'Předchadne naprašowanje njeda so za pytanje wužiwać. Dyrbiš płaćiwy rěčny identifikator podać.',
 	'wikibase-itembylabel-description' => 'Hódnoty, kotrež so za pytanje wužiwaja, dyrbja dospołne tekstowe zapiski być. Rěč je identifikator, na přikład "hsb".',
 	'special-createitem' => 'Nowy element wutworić',
 	'wikibase-api-aliases-invalid-list' => 'Wužij jedyn z parametrow "set", "add" a "remove".',
@@ -1821,7 +1859,7 @@ $messages['is'] = array(
 	'wikibase-itembytitle-lookup-page' => 'Síða:',
 	'wikibase-itembytitle-submit' => 'Leita',
 	'wikibase-itembytitle-invalid-site' => 'Gat ekki notað fyrri fyrirspurn við leit. Þú þarft að tilgreina gilt kennimerki síðunnar.',
-	'wikibase-itembytitle-description' => 'Vefsvæði er kennimerkis kóði, venjulega "enwiki".',
+	'wikibase-itembytitle-description' => 'Vefsíða er kennimerkis kóði, venjulega "enwiki".',
 	'wikibase-itembytitle-create' => 'Þú getur einnig [{{fullurl:Special:CreateItem|site=$1&page=$2}} búið til hlut].',
 	'special-itembylabel' => 'Hlutur eftir merkimiða',
 	'wikibase-itembylabel-lookup-fieldset' => 'Leita eftir hlutum eftir tungumáli og merkimiða',
@@ -1831,7 +1869,7 @@ $messages['is'] = array(
 	'wikibase-itembylabel-create' => 'Þú getur einnig [{{fullurl:Special:CreateItem|language=$1&label=$2}} búið til hlut].',
 	'wikibase-itembylabel-nothing-found' => 'Enginn hlutur fannst, vinsamlegast endurorðaðu fyrirspurnina.',
 	'wikibase-itembylabel-invalid-langcode' => 'Gat ekki notað fyrri fyrirspurn við leit. Þú þarft að tilgreina gilt kennimerki tungumálsins.',
-	'wikibase-itembylabel-description' => 'Þau gildi sem eru notuð við leit þurfa að vera tæmandi texta færsla. Vefsvæði er kennimerki, eins og "en".',
+	'wikibase-itembylabel-description' => 'Þau gildi sem eru notuð við leit þurfa að vera tæmandi texta færsla. Tungumál er kennimerki, eins og "en".',
 	'special-createitem' => 'Búa til nýjan hlut',
 	'wikibase-api-aliases-invalid-list' => 'Notaðu einn af þessum stikum „set", „add" eða „remove".',
 	'wikibase-api-no-token' => 'Enginn tóki tilgreindur.',
@@ -1918,7 +1956,9 @@ $messages['it'] = array(
 	'wikibase-sitelinks-input-help-message' => 'Imposta un collegamento ad una pagina relativa a questo elemento.',
 	'wikibase-remove' => 'rimuovi',
 	'wikibase-undo-title' => 'Annullamento modifica a "$1"',
+	'wikibase-restore-title' => 'Ripristino precedente revisione di "$1"',
 	'wikibase-partial-undo' => 'La modifica può essere parzialmente annullata.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|modifica è|modifiche sono}} state omesse perché {{PLURAL:$1|il rispettivo valore è cambiao|i rispettivi valori sono cambiat}} da allora.',
 	'wikibase-empty-undo' => "Non c'è niente che può essere annullato qui.",
 	'wikibase-undo-revision-error' => 'Annullamento fallito',
 	'wikibase-undo-badpage' => 'Versione sbagliata: la versione $2 non appartiene a [[$1]].',
@@ -2781,6 +2821,27 @@ for å finne ut kva som har skjedd, eller [[Special:CreateItem|opprette eit nytt
 Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
 for å finne ut kva som har skjedd.',
 	'content-model-1001' => 'Wikibase datasett',
+);
+
+/** Polish (polski)
+ * @author Lazowik
+ */
+$messages['pl'] = array(
+	'wikibase-desc' => 'Repozytorium danych strukturalnych',
+	'wikibase-edit' => 'edytuj',
+	'wikibase-save' => 'zapisz',
+	'wikibase-cancel' => 'anuluj',
+	'wikibase-add' => 'dodaj',
+	'wikibase-save-inprogress' => 'Zapisywanie...',
+	'wikibase-remove-inprogress' => 'Usuwanie...',
+	'wikibase-label-edit-placeholder' => 'wpisz etykietę',
+	'wikibase-description-edit-placeholder' => 'wpisz opis',
+	'wikibase-sitelink-site-edit-placeholder' => 'strona',
+	'wikibase-sitelink-page-edit-placeholder' => 'artykuł',
+	'wikibase-alias-edit-placeholder' => 'podaj nazwę alternatywną',
+	'wikibase-label-input-help-message' => 'Podaj tytuł tego zbioru danych w języku $1m.',
+	'wikibase-description-input-help-message' => 'Podaj którki opis w $1m.',
+	'wikibase-sitelinks' => 'Lista stron połączonych z tym elementem',
 );
 
 /** Pashto (پښتو)

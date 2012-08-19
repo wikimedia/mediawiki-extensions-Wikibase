@@ -269,6 +269,15 @@ $messages['nn'] = array(
 	'wbc-editlinkstitle' => 'Endre nettstadlekkjer',
 );
 
+/** Polish (polski)
+ * @author Lazowik
+ */
+$messages['pl'] = array(
+	'wbc-desc' => 'Klient rozszerzenia Wikibase',
+	'wbc-editlinks' => 'Edytuj linki',
+	'wbc-editlinkstitle' => 'Edytuj linki wersji językowych',
+);
+
 /** Portuguese (português)
  * @author Malafaya
  * @author SandroHc

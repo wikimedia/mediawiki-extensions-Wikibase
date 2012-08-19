@@ -158,6 +158,13 @@ $messages['nn'] = array(
 	'wikibaselib-desc' => 'Felles funksjonalitet for Wikibase, det strukturerte datalageret',
 );
 
+/** Polish (polski)
+ * @author Lazowik
+ */
+$messages['pl'] = array(
+	'wikibaselib-desc' => 'Zawiera elementy wspólne dla rozszerzeń Wikibase i Wikibase Client',
+);
+
 /** Piedmontese (Piemontèis)
  * @author Borichèt
  * @author Dragonòt
