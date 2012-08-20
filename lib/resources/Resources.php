@@ -49,6 +49,40 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.datamodel' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.datamodel/wikibase.Snak.js',
+				'wikibase.datamodel/wikibase.PropertyValueSnak.js',
+				'wikibase.datamodel/wikibase.PropertySomeValueSnak.js',
+				'wikibase.datamodel/wikibase.PropertyNoValueSnak.js',
+				'wikibase.datamodel/wikibase.Claim.js',
+				'wikibase.datamodel/wikibase.Statement.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'dataValues' // DataValues extension
+			)
+		),
+
+		'wikibase.store' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.store/wikibase.EntityStore.js',
+				'wikibase.store/wikibase.Api.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel'
+			)
+		),
+
+		'wikibase.Api' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.store.js',
+			),
+			'dependencies' => array(
+				'wikibase.datamodel'
+			)
+		),
+
 		'wikibase.utilities' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
