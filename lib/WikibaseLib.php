@@ -90,6 +90,10 @@ $wgAutoloadClasses['Wikibase\ChangesTable'] 		= $dir . 'includes/ChangesTable.ph
 $wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/Claim.php';
 $wgAutoloadClasses['Wikibase\ClaimObject'] 			= $dir . 'includes/ClaimObject.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
+$wgAutoloadClasses['Wikibase\Hashable'] 			= $dir . 'includes/Hashable.php';
+$wgAutoloadClasses['Wikibase\HashArray'] 			= $dir . 'includes/HashArray.php';
+$wgAutoloadClasses['Wikibase\MapHasher'] 			= $dir . 'includes/MapHasher.php';
+$wgAutoloadClasses['Wikibase\MapValueHasher'] 		= $dir . 'includes/MapValueHasher.php';
 $wgAutoloadClasses['Wikibase\MediaWikiSite'] 		= $dir . 'includes/MediaWikiSite.php';
 $wgAutoloadClasses['Wikibase\Reference'] 			= $dir . 'includes/Reference.php';
 $wgAutoloadClasses['Wikibase\ReferenceObject'] 		= $dir . 'includes/ReferenceObject.php';
@@ -139,6 +143,12 @@ $wgAutoloadClasses['Wikibase\PropertyObject'] 		= $dir . 'includes/property/Prop
 // includes/query
 $wgAutoloadClasses['Wikibase\Query'] 				= $dir . 'includes/query/Query.php';
 $wgAutoloadClasses['Wikibase\QueryObject'] 			= $dir . 'includes/query/QueryObject.php';
+
+// includes/reference
+$wgAutoloadClasses['Wikibase\Reference'] 				= $dir . 'includes/reference/Reference.php';
+$wgAutoloadClasses['Wikibase\ReferenceList'] 			= $dir . 'includes/reference/ReferenceList.php';
+$wgAutoloadClasses['Wikibase\ReferenceObject'] 			= $dir . 'includes/reference/ReferenceObject.php';
+$wgAutoloadClasses['Wikibase\References'] 				= $dir . 'includes/reference/References.php';
 
 // includes/snak
 $wgAutoloadClasses['Wikibase\InstanceOfSnak'] 			= $dir . 'includes/snak/InstanceOfSnak.php';

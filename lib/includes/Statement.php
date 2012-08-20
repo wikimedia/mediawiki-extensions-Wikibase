@@ -14,7 +14,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Statement {
+interface Statement extends Hashable {
 
 	/**
 	 * Rank enum. Higher values are more preferred.
@@ -26,48 +26,22 @@ interface Statement {
 	const RANK_DEPRECATED = 0;
 
 	/**
-	 * Adds a new reference to the statement.
-	 * The returned reference can be used to generate a reference hash.
+	 * Returns the references attached to this statement.
 	 *
 	 * @since 0.1
 	 *
-	 * @param Reference $reference
-	 *
-	 * @return Reference
+	 * @return References
 	 */
-	public function addReference( Reference $reference );
+	public function getReferences();
 
 	/**
-	 * Updates the reference with provided hash to the provided reference.
+	 * Sets the references attached to this statement.
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $referenceHash
-	 * @param Reference $reference
-	 *
-	 * @return Reference
+	 * @param References $references
 	 */
-	public function updateReference( $referenceHash, Reference $reference );
-
-	/**
-	 * Removes the reference with provided hash, if it exists.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $referenceHash
-	 */
-	public function removeReference( $referenceHash );
-
-	/**
-	 * Returns if the statement has a reference with the provided hash.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $referenceHash
-	 *
-	 * @return boolean
-	 */
-	public function hasReference( $referenceHash );
+	public function setReferences( References $references );
 
 	/**
 	 * Sets the rank of the statement.
@@ -99,15 +73,6 @@ interface Statement {
 	public function getClaim();
 
 	/**
-	 * Returns a unique hash for the statement.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getHash();
-
-	/**
 	 * Returns the number of the statement needed to identify it within an entity.
 	 *
 	 * @since 0.1
@@ -115,5 +80,14 @@ interface Statement {
 	 * @return integer
 	 */
 	public function getNumber();
+
+	/**
+	 * Sets the entity this statement belongs to.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $entity
+	 */
+	public function setEntity( Entity $entity );
 
 }

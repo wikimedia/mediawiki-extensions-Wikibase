@@ -155,6 +155,8 @@ final class LibHooks {
 
 			'query/QueryObject',
 
+			'reference/ReferenceObject',
+
 			'snak/PropertyValueSnak',
 			'snak/SnakList',
 
@@ -163,7 +165,6 @@ final class LibHooks {
 			'ChangesTable',
 			'ClaimObject',
 			'LibHooks',
-			'ReferenceObject',
 			'MediaWikiSite',
 			'SiteConfigObject',
 			'SiteLink',
