@@ -13,143 +13,168 @@ RSpec::Core::RakeTask.new(:all) do |spec|
   spec.pattern = '../repo/tests/selenium/*/*_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_item) do |spec|
+RSpec::Core::RakeTask.new(:item) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/*_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_description) do |spec|
+RSpec::Core::RakeTask.new(:description) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/description_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_empty_item) do |spec|
+RSpec::Core::RakeTask.new(:empty_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/empty_item_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_non_existing_item) do |spec|
+RSpec::Core::RakeTask.new(:non_existing_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/non_existing_item_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_label) do |spec|
+RSpec::Core::RakeTask.new(:label) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/label_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_sitelinks) do |spec|
+RSpec::Core::RakeTask.new(:sitelinks) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/sitelinks/*_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_newitem) do |spec|
+RSpec::Core::RakeTask.new(:newitem) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/new_item_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_aliases) do |spec|
+RSpec::Core::RakeTask.new(:aliases) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/aliases/*_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_aliases_bugs) do |spec|
+RSpec::Core::RakeTask.new(:aliases_bugs) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/aliases/aliases_bugs_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_blocked_user) do |spec|
+RSpec::Core::RakeTask.new(:blocked_user) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/blocked_user_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_protected_page) do |spec|
+RSpec::Core::RakeTask.new(:protected_page) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/protected_page_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_search) do |spec|
+RSpec::Core::RakeTask.new(:search) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/search_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_recentchanges) do |spec|
+RSpec::Core::RakeTask.new(:recentchanges) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/recent_changes_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_language_selector) do |spec|
+RSpec::Core::RakeTask.new(:language_selector) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/language_selector/language_selector_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_item_deletion) do |spec|
+RSpec::Core::RakeTask.new(:item_deletion) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/delete_item_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_bugs) do |spec|
+RSpec::Core::RakeTask.new(:bugs) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/bugs_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_editonoff) do |spec|
+RSpec::Core::RakeTask.new(:editonoff) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/editonoff_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_client_repo) do |spec|
+RSpec::Core::RakeTask.new(:client_repo) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/client/client_repo_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_undo) do |spec|
+RSpec::Core::RakeTask.new(:undo) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/undo_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_rollback) do |spec|
+RSpec::Core::RakeTask.new(:rollback) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/rollback_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_restore) do |spec|
+RSpec::Core::RakeTask.new(:restore) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/restore_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:spec_qunit) do |spec|
+RSpec::Core::RakeTask.new(:qunit) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/qunit/*_spec.rb'
 end
 
-task :default => :run_tests
-task :item => :spec_item
-task :nonexistingitem => :spec_non_existing_item
-task :description => :spec_description
-task :emptyitem => :spec_empty_item
-task :label => :spec_label
-task :sitelinks => :spec_sitelinks
-task :newitem => :spec_newitem
-task :aliases => :spec_aliases
-task :aliases_bugs => :spec_aliases_bugs
-task :blocked_user => :spec_blocked_user
-task :protected_page => :spec_protected_page
-task :search => :spec_search
-task :recentchanges => :spec_recentchanges
-task :language_switcher => :spec_language_selector
-task :delete_item => :spec_item_deletion
-task :editonoff => :spec_editonoff
-task :bugs => :spec_bugs
-task :client_repo => :spec_client_repo
-task :undo => :spec_undo
-task :rollback => :spec_rollback
-task :restore => :spec_restore
-task :qunit => :spec_qunit
-
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
   task = args[:taskname] || :all
   setup_env(args[:browser], args[:remote], args[:os])
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+end
+
+task :run_all => [:run_all_local, :run_all_linux, :run_all_mac]
+
+task :run_all_local, :taskname do |t, args|
+  task = args[:taskname] || :all
+  setup_env("firefox", "", "")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+  setup_env("chrome", "", "")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+  setup_env("ie", "", "")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+end
+
+task :run_all_windows, :taskname do |t, args|
+  task = args[:taskname] || :all
+  setup_env("firefox", "remote", "windows")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+  setup_env("chrome", "remote", "windows")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+  setup_env("ie", "remote", "windows")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+end
+
+task :run_all_linux, :taskname do |t, args|
+  task = args[:taskname] || :all
+  setup_env("firefox", "remote", "linux")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+  setup_env("chrome", "remote", "linux")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+end
+
+task :run_all_mac, :taskname do |t, args|
+  task = args[:taskname] || :all
+  setup_env("firefox", "remote", "mac")
+  Rake::Task[task].reenable
+  Rake::Task[task].invoke
+  setup_env("chrome", "remote", "mac")
+  Rake::Task[task].reenable
   Rake::Task[task].invoke
 end
 
@@ -157,4 +182,10 @@ def setup_env(browser, remote, os)
   ENV["BROWSER_TYPE"] = browser
   ENV["RUN_REMOTE"] = remote
   ENV["TARGET_OS"] = os
+  puts "Using browser " + ENV["BROWSER_TYPE"] + "."
+  if ENV["RUN_REMOTE"] && ENV["RUN_REMOTE"] != ""
+    puts "Running remote on Selenium GRID using OS " + ENV["TARGET_OS"] + "."
+  else
+    puts "Running on local machine."
+  end
 end
