@@ -98,7 +98,7 @@ class ApiSetItem extends ApiModifyItem {
 					$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-string' );
 				}
 				// unconditional no-ops
-				if ( in_array( $props, array( 'length', 'count' ) ) ) {
+				if ( in_array( $props, array( 'length', 'count', 'touched' ) ) ) {
 					continue;
 				}
 				// conditional no-ops
@@ -127,11 +127,6 @@ class ApiSetItem extends ApiModifyItem {
 				case 'lastrevid':
 					if ( isset( $data[$props] ) && isset( $revision ) && $revision->getId() !== $data[$props]) {
 						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'lastrevid' ), 'illegal-field' );
-					}
-					break;
-				case 'touched':
-					if ( isset( $data[$props] ) && isset( $revision ) &&  wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) !== $data[$props]) {
-						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'touched' ), 'illegal-field' );
 					}
 					break;
 
@@ -293,8 +288,8 @@ class ApiSetItem extends ApiModifyItem {
 				ApiBase::PARAM_TYPE => 'string',
 			),
 			'exclude' => array(
-				ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'touched', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
-				ApiBase::PARAM_DFLT => 'pageid|ns|title|lastrevid|touched',
+				ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
+				ApiBase::PARAM_DFLT => '', // per default, all fields are processed
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'clear' => array(
@@ -313,7 +308,7 @@ class ApiSetItem extends ApiModifyItem {
 				"The newly created item will be assigned an item 'id'."
 			),
 			'exclude' => array( 'List of substructures to neglect during the processing.',
-				"In addition 'length' and 'count' is always excluded."
+				"In addition 'length', 'touched' and 'count' is always excluded."
 			),
 			'clear' => array( 'If set, the complete item is emptied before proceeding.',
 				'The item will not be saved before the item is filled with the "data", possibly with parts excluded.'
