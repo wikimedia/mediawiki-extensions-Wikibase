@@ -35,24 +35,6 @@ interface Claim {
 	public function setMainSnak( Snak $mainSnak );
 
 	/**
-	 * Adds the provided property snak to the list of qualifiers.
-	 *
-	 * @since 0.1
-	 *
-	 * @param PropertySnak $snak
-	 */
-	public function addQualifier( PropertySnak $snak );
-
-	/**
-	 * Removes the provided property snak to the list of qualifiers, if it exists.
-	 *
-	 * @since 0.1
-	 *
-	 * @param PropertySnak $snak
-	 */
-	public function removeQualifier( PropertySnak $snak );
-
-	/**
 	 * Gets the property snaks making up the qualifiers for this claim.
 	 *
 	 * @since 0.1
@@ -60,5 +42,14 @@ interface Claim {
 	 * @return Snaks
 	 */
 	public function getQualifiers();
+
+	/**
+	 * Sets the property snaks making up the qualifiers for this claim.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Snaks $propertySnaks
+	 */
+	public function setQualifiers( Snaks $propertySnaks );
 
 }

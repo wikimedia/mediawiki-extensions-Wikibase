@@ -161,6 +161,7 @@ final class LibHooks {
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',
+			'ClaimObject',
 			'LibHooks',
 			'ReferenceObject',
 			'MediaWikiSite',

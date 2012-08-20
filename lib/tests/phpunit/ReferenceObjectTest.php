@@ -37,8 +37,8 @@ class ReferenceObjectTest extends \MediaWikiTestCase {
 
 		$snakLists[] = new SnakList( array(
 			new PropertyValueSnak( 1, new DataValueObject() ),
-			new PropertyValueSnak( 2, new DataValueObject() ),
-			new PropertyValueSnak( 3, new DataValueObject() )
+			new \Wikibase\PropertySomeValueSnak( 2 ),
+			new \Wikibase\PropertyNoValueSnak( 3 )
 		) );
 
 		return $this->arrayWrap( $snakLists );
