@@ -46,7 +46,8 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		if ( isset( $siteId ) && isset( $page ) ) {
 			$itemContent = \Wikibase\ItemHandler::singleton()->getFromSiteLink( $siteId, $page );
 			if ( $itemContent !== null ) {
-				$this->displayItem( $itemContent );
+				$itemUrl = $itemContent->getTitle()->getFullUrl( $query );
+				$this->getOutput()->redirect( $itemUrl );
 			}
 		}
 
