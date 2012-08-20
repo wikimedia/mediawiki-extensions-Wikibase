@@ -107,5 +107,19 @@ class ItemObjectTest extends EntityObjectTest {
 		$this->assertFalse( $foo === $bar );
 	}
 
+
+	public function testClear() {
+		parent::testClear(); //NOTE: we must test the ItemObject implementation of the functionality already tested for EntityObject.
+
+		$item = $this->getNewEmpty();
+
+		$item->addSiteLink( SiteLink::newFromText( "enwiki", "Foozzle" ) );
+
+		$item->clear();
+
+		$this->assertEmpty( $item->getSiteLinks(), "sitelinks" );
+		$this->assertTrue( $item->isEmpty() );
+	}
+
 }
 	
