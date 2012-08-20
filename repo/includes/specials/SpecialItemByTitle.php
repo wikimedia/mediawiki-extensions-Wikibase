@@ -46,11 +46,30 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		if ( isset( $siteId ) && isset( $page ) ) {
 			$itemContent = \Wikibase\ItemHandler::singleton()->getFromSiteLink( $siteId, $page );
 			if ( $itemContent !== null ) {
-				$this->displayItem( $itemContent );
+				$query = array();
+				$user = $this->getUser();
+				$siteCode = \Wikibase\Sites::singleton()->getSiteByGlobalId( $siteId )->getLanguage();
+
+				// check user preferences or cookie, set by universal language selector
+				if ( $user->isAnon() ) {
+					// returns value from cookie or null
+					$userCode = $this->getRequest()->getCookie( 'language' );
+				} else {
+					// returns preference value or null
+					$userCode = $user->getOption( 'language' );
+				}
+
+				// if no lang preference, then use site lang code
+				if ( empty( $userCode ) ) {
+					$query['uselang'] = $siteCode;
+				}
+
+				$itemUrl = $itemContent->getTitle()->getFullUrl( $query );
+				$this->getOutput()->redirect( $itemUrl );
 			}
 		}
 
-		// If there is no item content post the switch form
+		// If there is no item cointent post the switch form
 		if ( $itemContent === null ) {
 			$this->switchForm( $siteId, $page );
 		}
