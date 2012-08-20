@@ -146,16 +146,17 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		$this->assertSuccess( $res, 'item', 'lastrevid' );
 		$this->assertItemEquals( $item, $res['item'] );
 
+		// @todo: split the below into a separate function
 		// ---- set the same item again, with with fields in the json that should be ignored-----------
 		// these sets of failing data must be merged with an existing item
 		$ignoredData = array(
 			array( 'length' => 999999 ), // always ignored
 			array( 'count' => 999999 ), // always ignored
+			array( 'touched' => '2000-01-01T18:05:01Z' ), // always ignored
 			array( 'pageid' => 999999 ),
 			array( 'ns' => 200 ),
 			array( 'title' => 'does-not-exist' ),
 			array( 'lastrevid' => 99999999 ),
-			array( 'touched' => '2000-01-01T18:05:01Z' ),
 		);
 		foreach ( $ignoredData as $data ) {
 			try {
@@ -166,7 +167,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 						'data' => json_encode( array_merge( $data, $item ) ),
 						'token' => $token,
 						'id' => $id,
-						'exclude' => 'pageid|ns|title|lastrevid|touched'
+						'exclude' => 'pageid|ns|title|lastrevid'
 					),
 					null,
 					false,
@@ -182,12 +183,11 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 		// ---- check failure to set the same item again, with illegal field values in the json -----------
 		// these sets of failing data must be merged with an existing item
-		$failingData = array(
+		$failingData = array( //@todo: check each of these separately, so we know that each one fails!
 			array( 'pageid' => 999999 ),
 			array( 'ns' => 200 ),
 			array( 'title' => 'does-not-exist' ),
 			array( 'lastrevid' => 99999999 ),
-			array( 'touched' => '2000-01-01T18:05:01Z' ),
 		);
 		foreach ( $failingData as $data ) {
 			try {
@@ -198,7 +198,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 						'data' => json_encode( array_merge( $data, $item ) ),
 						'token' => $token,
 						'id' => $id,
-						'exclude' => ''
+						//'exclude' => '' // make sure all critical values are checked per default
 					),
 					null,
 					false,
@@ -229,7 +229,6 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			array( 'ns' => $query['items'][$id]['ns'] ),
 			array( 'title' => $query['items'][$id]['title'] ),
 			array( 'lastrevid' => $query['items'][$id]['lastrevid'] ),
-			array( 'touched' => $query['items'][$id]['touched'] ),
 		);
 		foreach ( $goodData as $data ) {
 			try {
@@ -240,7 +239,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 						'data' => json_encode( array_merge( $data, $item ) ),
 						'token' => $token,
 						'id' => $id,
-						'exclude' => ''
+						//'exclude' => '' // make sure all critical values are checked per default
 					),
 					null,
 					false,
@@ -254,7 +253,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			}
 		}
 
-		// ---- empty the object -----------
+		// ---- empty the object ----------- // @todo: split into separate function
 		// these sets of failing data must be merged with an existing item
 		foreach ( $failingData as $data ) {
 			try {
@@ -266,7 +265,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 						'token' => $token,
 						'id' => $id,
 						'clear' => true,
-						'exclude' => '',
+						//'exclude' => '' // make sure all critical values are checked per default
 					),
 					null,
 					false,
