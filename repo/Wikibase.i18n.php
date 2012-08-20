@@ -81,7 +81,7 @@ $messages['en'] = array(
 	'wikibase-move-error' => 'You cannot move pages that are in the data namespace, and you cannot move pages into it.',
 
 	'wikibase-error-relational-save-failed' => 'Could not store item identity in the database.',
-	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item with ID [[$3]].',
+	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item with ID $3.',
 
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',

@@ -133,7 +133,8 @@ class ItemContent extends EntityContent {
 					$status->error(
 						'wikibase-error-sitelink-already-used',
 						$siteLink->getSiteID(),
-						$siteLink->getPage()
+						$siteLink->getPage(),
+						$ipsId
 					);
 				}
 			}
