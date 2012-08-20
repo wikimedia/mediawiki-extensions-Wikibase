@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//3IA\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-20T11:42:20Z",
+      "side": 1,
+      "message": "This is an instance method, so it was wrong before but still is",
+      "revId": "3d1798a285588eb812a282705422884031cdc9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//3H4\u003d",
+        "filename": "lib/tests/phpunit/entity/EntityObjectTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-20T11:42:20Z",
+      "side": 1,
+      "message": "Why do I suspect you having copies this? :D",
+      "revId": "3d1798a285588eb812a282705422884031cdc9ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
