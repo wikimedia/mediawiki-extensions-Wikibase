@@ -16,6 +16,23 @@
       "revId": "b73905b3058eb5fe22a5115d072516b64b348a79",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//3JM\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-20T10:30:35Z",
+      "side": 1,
+      "message": "if there is no item id for this page, the link should not try to point to an non-existant item. You will get to a page called \"Data:Q\"",
+      "revId": "b73905b3058eb5fe22a5115d072516b64b348a79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
