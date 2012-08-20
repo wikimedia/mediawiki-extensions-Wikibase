@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//3J8\u003d",
+        "filename": "lib/tests/phpunit/snak/PropertySnakObjectTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-20T10:01:47Z",
+      "side": 1,
+      "message": "we are checking the value returned by $omnomnom-\u003egetPropertyId() agains tthe value returned by $omnomnom-\u003egetPropertyId()? Seems a bit pointless...",
+      "revId": "4c751a988d7fce9a585ebd42f1b5db315f7f68d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//3J4\u003d",
+        "filename": "lib/tests/phpunit/snak/PropertyValueSnakTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-20T10:01:47Z",
+      "side": 1,
+      "message": "tautology much?",
+      "revId": "4c751a988d7fce9a585ebd42f1b5db315f7f68d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//3J0\u003d",
+        "filename": "lib/tests/phpunit/snak/SnakObjectTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-20T10:01:47Z",
+      "side": 1,
+      "message": "why?",
+      "revId": "4c751a988d7fce9a585ebd42f1b5db315f7f68d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
