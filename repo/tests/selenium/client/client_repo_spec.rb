@@ -23,7 +23,7 @@ describe "Check functionality of client-repo connection" do
         page.create_article(article_title, article_text)
         page.navigate_to_article(article_title)
         page.clientArticleTitle.should == article_title
-        page.clientInterwikiLinkList?.should be_false
+        page.interwiki_xxx?.should be_false
       end
     end
     it "should create a corresponding wikidata item on the repo" do
@@ -129,7 +129,7 @@ describe "Check functionality of client-repo connection" do
     it "should check that no sitelinks are displayed on client" do
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title, true)
-        page.clientInterwikiLinkList?.should be_false
+        page.interwiki_xxx?.should be_false
       end
     end
 

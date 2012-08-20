@@ -20,7 +20,6 @@ class ClientPage < RubySelenium
   text_area(:clientCreateArticleInput, :id => "wpTextbox1")
   button(:clientCreateArticleSubmit, :id => "wpSave")
   span(:clientArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
-  unordered_list(:clientInterwikiLinkList, :xpath => "//div[@id='p-lang']/div/ul")
   button(:clientPurgeSubmit, :xpath => "//form[@class='visualClear']/input[@class='mw-htmlform-submit']")
 
   #language links
@@ -30,6 +29,8 @@ class ClientPage < RubySelenium
   link(:interwiki_hu, :xpath => "//li[@class='interwiki-hu']/a")
   link(:interwiki_fi, :xpath => "//li[@class='interwiki-fi']/a")
   link(:interwiki_fr, :xpath => "//li[@class='interwiki-fr']/a")
+  link(:interwiki_xxx, :xpath => "//li[contains(@class, 'interwiki')]/a")
+
   def create_article(title, text)
     self.clientSearchInput= title
     clientSearchSubmit
@@ -56,7 +57,7 @@ class ClientPage < RubySelenium
     clientInterwikiLinkList_element.each do |listElement|
       count = count+1
     end
-    return count
+    return count-1 # decrement by 1 because "edit-link" is always shown
   end
 
 end
