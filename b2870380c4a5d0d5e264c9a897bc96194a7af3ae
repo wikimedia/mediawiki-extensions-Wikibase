@@ -16,6 +16,24 @@
       "revId": "b2870380c4a5d0d5e264c9a897bc96194a7af3ae",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//3Ic\u003d",
+        "filename": "lib/tests/phpunit/snak/PropertyValueSnakTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-20T11:18:06Z",
+      "side": 1,
+      "message": "Yeah, this catches 2 things:\n\n* Snaky programmers returning a random ID\n* God deciding to annoy you and magically change the value",
+      "parentUuid": "AAAARX//3Iw\u003d",
+      "revId": "b2870380c4a5d0d5e264c9a897bc96194a7af3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
