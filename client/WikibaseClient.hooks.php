@@ -255,18 +255,22 @@ final class ClientHooks {
 
 		$title = $skin->getContext()->getTitle();
 
-		// gets the Main part of the title, URL-encoded
-		$titleText = $title->getPartialURL();
+		// gets the Main part of the title, no underscores used in this db table
+		$titleText = $title->getText();
 		$siteId = Settings::get( 'siteGlobalID' );
 
-		// links to the special page
-		// TODO: use the item id to link directly to the item
-		$template->data['language_urls'][] = array(
-			'href' => rtrim( $editUrl, "/" ) . "/Special:ItemByTitle/$siteId/$titleText",
-			'text' => wfMsg( 'wbc-editlinks' ),
-			'title' => wfMsg( 'wbc-editlinkstitle' ),
-			'class' => 'wbc-editpage',
-		);
+		$itemId = SiteLinkCache::singleton()->getItemIdForPage( $siteId, $titleText );
+
+		if ( $itemId ) {
+			// links to the special page
+			// TODO: know what the repo namespace is
+			$template->data['language_urls'][] = array(
+				'href' => rtrim( $editUrl, "/" ) . "/Data:Q" . $itemId,
+				'text' => wfMsg( 'wbc-editlinks' ),
+				'title' => wfMsg( 'wbc-editlinkstitle' ),
+				'class' => 'wbc-editpage',
+			);
+		}
 
 		return true;
 	}
