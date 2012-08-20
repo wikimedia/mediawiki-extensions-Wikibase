@@ -182,10 +182,4 @@ def setup_env(browser, remote, os)
   ENV["BROWSER_TYPE"] = browser
   ENV["RUN_REMOTE"] = remote
   ENV["TARGET_OS"] = os
-  puts "Using browser " + ENV["BROWSER_TYPE"] + "."
-  if ENV["RUN_REMOTE"] && ENV["RUN_REMOTE"] != ""
-    puts "Running remote on Selenium GRID using OS " + ENV["TARGET_OS"] + "."
-  else
-    puts "Running on local machine."
-  end
 end
