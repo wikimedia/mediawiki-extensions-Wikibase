@@ -19,7 +19,7 @@ class ReferenceObject implements Reference {
 	/**
 	 * @since 0.1
 	 *
-	 * @var array of PropertySnak
+	 * @var Snaks (each element being a PropertySnak)
 	 */
 	protected $snaks;
 

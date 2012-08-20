@@ -17,6 +17,11 @@ namespace Wikibase;
 interface Reference {
 
 	/**
+	 * @param $snaks array of PropertySnak
+	 */
+	public function __construct( array $snaks );
+
+	/**
 	 * Returns a hash that can be used to identify the reference within a list of references (ie a statement).
 	 *
 	 * @since 0.1
@@ -30,7 +35,7 @@ interface Reference {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array of PropertySnak
+	 * @return Snaks
 	 */
 	public function getSnaks();
 
@@ -39,9 +44,9 @@ interface Reference {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $snaks array of PropertySnak
+	 * @param Snaks $propertySnaks
 	 */
-	public function setSnaks( array $snaks );
+	public function setSnaks( Snaks $propertySnaks );
 
 	/**
 	 * Creates a new reference given the statement it will belong to and the property snaks it will consist of.
@@ -49,10 +54,10 @@ interface Reference {
 	 * @since 0.1
 	 *
 	 * @param Statement $statement
-	 * @param $propertySnaks array of PropertySnak
+	 * @param Snaks $propertySnaks
 	 *
 	 * @return Reference
 	 */
-	public static function newFromSnaks( Statement $statement, array $propertySnaks );
+	public static function newFromSnaks( Statement $statement, Snaks $propertySnaks );
 
 }

@@ -57,7 +57,7 @@ interface Claim {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array of PropertySnak
+	 * @return Snaks
 	 */
 	public function getQualifiers();
 
