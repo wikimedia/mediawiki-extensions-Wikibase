@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//3Iw\u003d",
+        "filename": "lib/tests/phpunit/snak/PropertyValueSnakTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-20T10:53:57Z",
+      "side": 1,
+      "message": "that\u0027S still pretty redundant, considering $dataValue \u003d $omnomnom-\u003egetDataValue(). What are we actually trying to test here? that the value doesn\u0027t change? or what?",
+      "revId": "b2870380c4a5d0d5e264c9a897bc96194a7af3ae",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
