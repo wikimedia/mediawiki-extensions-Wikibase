@@ -46,11 +46,12 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		if ( isset( $siteId ) && isset( $page ) ) {
 			$itemContent = \Wikibase\ItemHandler::singleton()->getFromSiteLink( $siteId, $page );
 			if ( $itemContent !== null ) {
-				$this->displayItem( $itemContent );
+				$itemUrl = $itemContent->getTitle()->getFullUrl( $query );
+				$this->getOutput()->redirect( $itemUrl );
 			}
 		}
 
-		// If there is no item content post the switch form
+		// If there is no item cointent post the switch form
 		if ( $itemContent === null ) {
 			$this->switchForm( $siteId, $page );
 		}
