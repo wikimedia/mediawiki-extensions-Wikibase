@@ -73,6 +73,30 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 	}
 
 	/**
+	 * Returns if there is an element with the same hash as the provided element in the list.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Hashable $element
+	 *
+	 * @return boolean
+	 */
+	public function hasElement( Hashable $element ) {
+		return $this->hasElementHash( $element->getHash() );
+	}
+
+	/**
+	 * Removes the element with the hash of the provided element, if there is such an element in the list.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Hashable $element
+	 */
+	public function removeElement( Hashable $element ) {
+		return $this->removeByElementHash( $element->getHash() );
+	}
+
+	/**
 	 * Removes the element with the provided hash, if there is such an element in the list.
 	 *
 	 * @since 0.1
@@ -82,6 +106,25 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 	public function removeByElementHash( $elementHash ) {
 		if ( $this->hasElementHash( $elementHash ) ) {
 			$this->offsetUnset( $this->offsetHashes[$elementHash] );
+		}
+	}
+
+	/**
+	 * Adds the provided element to the list if there is no element with the same hash yet.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Hashable $element
+	 *
+	 * @return boolean Indicates if the element was added or not.
+	 */
+	public function addElement( Hashable $element ) {
+		if ( $this->hasElementHash( $element->getHash() ) ) {
+			return false;
+		}
+		else {
+			$this->append( $element );
+			return true;
 		}
 	}
 

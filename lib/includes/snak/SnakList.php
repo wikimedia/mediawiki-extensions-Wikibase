@@ -61,13 +61,7 @@ class SnakList extends HashArray implements Snaks {
 	 * @return boolean Indicates if the snak was added or not.
 	 */
 	public function addSnak( Snak $snak ) {
-		if ( $this->hasSnak( $snak ) ) {
-			return false;
-		}
-		else {
-			$this->append( $snak );
-			return true;
-		}
+		return $this->addElement( $snak );
 	}
 
 	/**

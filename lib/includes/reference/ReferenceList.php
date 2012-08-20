@@ -61,13 +61,7 @@ class ReferenceList extends HashArray implements References {
 	 * @return boolean Indicates if the reference was added or not.
 	 */
 	public function addReference( Reference $reference ) {
-		if ( $this->hasReference( $reference ) ) {
-			return false;
-		}
-		else {
-			$this->append( $reference );
-			return true;
-		}
+		return $this->addElement( $reference );
 	}
 
 	/**

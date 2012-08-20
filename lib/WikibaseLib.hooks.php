@@ -155,6 +155,7 @@ final class LibHooks {
 
 			'query/QueryObject',
 
+			'reference/ReferenceList',
 			'reference/ReferenceObject',
 
 			'snak/PropertyValueSnak',
@@ -173,6 +174,7 @@ final class LibHooks {
 			'SiteRow',
 			'MediaWikiSite',
 			'Sites',
+			'StatementObject',
 			'Utils',
 		);
 
