@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//3JA\u003d",
+        "filename": "lib/tests/phpunit/snak/PropertyValueSnakTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-20T10:37:27Z",
+      "side": 1,
+      "message": ":D I\u0027m going to post this on the code horror board of TCP :D",
+      "parentUuid": "AAAARX//3J4\u003d",
+      "revId": "4c751a988d7fce9a585ebd42f1b5db315f7f68d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//3J0\u003d",
         "filename": "lib/tests/phpunit/snak/SnakObjectTest.php",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2012-08-20T10:01:47Z",
       "side": 1,
       "message": "why?",
+      "revId": "4c751a988d7fce9a585ebd42f1b5db315f7f68d0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//3I8\u003d",
+        "filename": "lib/tests/phpunit/snak/SnakObjectTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-20T10:37:27Z",
+      "side": 1,
+      "message": "To see if the behaviour is deterministic - rather hard to get wrong, but still, costs nothing to test and there is not a lot of other stuff one can test here for",
+      "parentUuid": "AAAARX//3J0\u003d",
       "revId": "4c751a988d7fce9a585ebd42f1b5db315f7f68d0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
