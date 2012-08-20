@@ -173,6 +173,7 @@ final class LibHooks {
 			'SiteRow',
 			'MediaWikiSite',
 			'Sites',
+			'StatementObject',
 			'Utils',
 		);
 

@@ -62,7 +62,7 @@ class StatementObject implements Statement {
 	 *
 	 * @var integer, element of the Statement::RANK_ enum
 	 */
-	protected $rank;
+	protected $rank = Statement::RANK_NORMAL;
 
 	/**
 	 * @since 0.1
@@ -75,9 +75,13 @@ class StatementObject implements Statement {
 	 * Constructor.
 	 *
 	 * @since 0.1
+	 *
+	 * @param Claim $claim
+	 * @param References|null $references
 	 */
-	protected function __construct() {
-
+	protected function __construct( Claim $claim, References $references = null ) {
+		$this->claim = $claim;
+		$this->references = $references === null ? new ReferenceList() : $references;
 	}
 
 	/**
@@ -121,8 +125,15 @@ class StatementObject implements Statement {
 	 * @since 0.1
 	 *
 	 * @param integer $rank
+	 * @throws \MWException
 	 */
 	public function setRank( $rank ) {
+		$ranks = array( Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED );
+
+		if ( !in_array( $rank, $ranks, true ) ) {
+			throw new \MWException( 'Invalid rank specified for statement' );
+		}
+
 		$this->rank = $rank;
 	}
 
@@ -149,23 +160,35 @@ class StatementObject implements Statement {
 	}
 
 	/**
-	 * @see Statement::getHash
+	 * @see Statement::setClaim
+	 *
+	 * @since 0.1
+	 *
+	 * @param Claim $claim
+	 */
+	public function setClaim( Claim $claim ) {
+		$this->claim = $claim;
+	}
+
+	/**
+	 * The hash generated here is globally unique, so can be used to
+	 * identity the statement without further context.
+	 *
+	 * @see Hashable::getHash
 	 *
 	 * @since 0.1
 	 *
 	 * @return string
 	 */
 	public function getHash() {
-		return md5( implode(
-			'|',
-			array(
-				$this->entityType,
-				$this->entityId,
-				$this->number,
-				$this->claim->getHash(),
-				$this->references->getHash(),
-			)
-		) );
+		return $this->entityId . $this->entityType . $this->number
+			. md5( implode(
+				'|',
+				array(
+					$this->claim->getHash(),
+					$this->references->getHash(),
+				)
+			) );
 	}
 
 	/**
@@ -180,12 +203,18 @@ class StatementObject implements Statement {
 	}
 
 	/**
+	 * Creates a new statement for the provided entity.
+	 *
 	 * @since 0.1
 	 *
 	 * @param Entity $entity
+	 * @param Claim $claim
+	 * @param References|null $references
+	 *
+	 * @return Statement
 	 */
-	public static function newForEntity( Entity $entity ) {
-		$statement = new static();
+	public static function newForEntity( Entity $entity, Claim $claim, References $references = null ) {
+		$statement = new static( $claim, $references );
 
 		$statement->setEntity( $entity );
 

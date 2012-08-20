@@ -73,6 +73,15 @@ interface Statement extends Hashable {
 	public function getClaim();
 
 	/**
+	 * Sets the claim of the statement.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Claim $claim
+	 */
+	public function setClaim( Claim $claim );
+
+	/**
 	 * Returns the number of the statement needed to identify it within an entity.
 	 *
 	 * @since 0.1
