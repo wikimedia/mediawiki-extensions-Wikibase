@@ -14,7 +14,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Snaks extends \Traversable, \ArrayAccess, \Countable, \Serializable {
+interface Snaks extends \Traversable, \ArrayAccess, \Countable, \Serializable, Hashable {
 
 	/**
 	 * Retruns if the list contains a snak with the provided hash.
@@ -77,16 +77,5 @@ interface Snaks extends \Traversable, \ArrayAccess, \Countable, \Serializable {
 	 * @return Snak|false
 	 */
 	public function getSnak( $snakHash );
-
-	/**
-	 * Returns a hash generated from the contained snaks.
-	 * Note that the offsets of the snaks are not held into account,
-	 * so Snaks( snakA, snakB ) will have the same hash as Snaks( snakB, snakA ).
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getHash();
 
 }

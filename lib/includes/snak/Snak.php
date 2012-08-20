@@ -14,15 +14,6 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Snak extends \Serializable {
-
-	/**
-	 * Returns a hash that can be used to identify the snak within a list of snaks.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getHash();
+interface Snak extends \Serializable, Hashable {
 
 }

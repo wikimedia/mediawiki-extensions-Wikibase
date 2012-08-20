@@ -14,16 +14,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Reference {
-
-	/**
-	 * Returns a hash that can be used to identify the reference within a list of references (ie a statement).
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getHash();
+interface Reference extends Hashable {
 
 	/**
 	 * Returns the property snaks that make up this reference.

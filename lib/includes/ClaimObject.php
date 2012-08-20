@@ -89,4 +89,15 @@ class ClaimObject implements Claim {
 		$this->qualifiers = $propertySnaks;
 	}
 
+	/**
+	 * @see Claim::getHash
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getHash() {
+		return md5( $this->mainSnak->getHash() . $this->qualifiers->getHash() );
+	}
+
 }

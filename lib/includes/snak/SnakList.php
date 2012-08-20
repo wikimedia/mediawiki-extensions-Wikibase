@@ -14,16 +14,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakList extends \GenericArrayObject implements Snaks {
-
-	/**
-	 * No, these ain't drugs.
-	 *
-	 * @since 0.1
-	 *
-	 * @var array [ snak hash (string) => snak offset (string|int) ]
-	 */
-	protected $snakHashes = array();
+class SnakList extends HashArray implements Snaks {
 
 	/**
 	 * @see GenericArrayObject::getObjectType
@@ -37,49 +28,6 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	}
 
 	/**
-	 * @see GenericArrayObject::preSetElement
-	 *
-	 * @since 0.1
-	 *
-	 * @param int|string $index
-	 * @param mixed $snak
-	 *
-	 * @return boolean
-	 */
-	protected function preSetElement( $index, $snak ) {
-		/**
-		 * @var Snak $snak
-		 */
-		if ( $this->hasSnak( $snak ) ) {
-			return false;
-		}
-		else {
-			$this->snakHashes[$snak->getHash()] = $index;
-			return true;
-		}
-	}
-
-	/**
-	 * @see ArrayObject::offsetUnset
-	 *
-	 * @since 0.1
-	 *
-	 * @param mixed $index
-	 */
-	public function offsetUnset( $index ) {
-		$snak = $this->offsetGet( $index );
-
-		if ( $snak !== false ) {
-			/**
-			 * @var Snak $snak
-			 */
-			unset( $this->snakHashes[$snak->getHash()] );
-
-			parent::offsetUnset( $index );
-		}
-	}
-
-	/**
 	 * @see Snaks::hasSnakHash
 	 *
 	 * @since 0.1
@@ -89,7 +37,7 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	 * @return boolean
 	 */
 	public function hasSnakHash( $snakHash ) {
-		return array_key_exists( $snakHash, $this->snakHashes );
+		return $this->hasElementHash( $snakHash );
 	}
 
 	/**
@@ -100,9 +48,7 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	 * @param string $snakHash
 	 */
 	public function removeSnakHash( $snakHash ) {
-		if ( $this->hasSnakHash( $snakHash ) ) {
-			$this->offsetUnset( $this->snakHashes[$snakHash] );
-		}
+		$this->removeByElementHash( $snakHash );
 	}
 
 	/**
@@ -134,7 +80,7 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	 * @return boolean
 	 */
 	public function hasSnak( Snak $snak ) {
-		return $this->hasSnakHash( $snak->getHash() );
+		return $this->hasElementHash( $snak->getHash() );
 	}
 
 	/**
@@ -145,7 +91,7 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	 * @param Snak $snak
 	 */
 	public function removeSnak( Snak $snak ) {
-		$this->removeSnakHash( $snak->getHash() );
+		$this->removeByElementHash( $snak->getHash() );
 	}
 
 	/**
@@ -158,30 +104,7 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	 * @return Snak|false
 	 */
 	public function getSnak( $snakHash ) {
-		if ( $this->hasSnakHash( $snakHash ) ) {
-			return $this->offsetGet( $this->snakHashes[$snakHash] );
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * @see Snaks::getHash
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getHash() {
-		return md5( array_reduce(
-			$this->getArrayCopy(),
-			function( $concaternation, Snak $snak ) {
-				$concaternation .= $snak->getHash();
-				return $concaternation;
-			},
-			''
-		) );
+		return $this->getByElementHash( $snakHash );
 	}
 
 }
