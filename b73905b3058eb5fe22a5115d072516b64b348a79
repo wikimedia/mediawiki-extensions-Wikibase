@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//3Fo\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-08-20T13:01:19Z",
+      "side": 1,
+      "message": "this might be a bit more complicated, as namespaces get localized, etc.  Perhaps this sort of config can be shared via shared table (+ be made available in API, for clients outside of the Wikimedia cluster).  Perhaps item by title is a better solution?",
+      "parentUuid": "AAAARX//3KE\u003d",
+      "revId": "b73905b3058eb5fe22a5115d072516b64b348a79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//3JM\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-20T10:30:35Z",
       "side": 1,
       "message": "if there is no item id for this page, the link should not try to point to an non-existant item. You will get to a page called \"Data:Q\"",
+      "revId": "b73905b3058eb5fe22a5115d072516b64b348a79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//3F0\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-08-20T13:01:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARX//3JM\u003d",
       "revId": "b73905b3058eb5fe22a5115d072516b64b348a79",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
