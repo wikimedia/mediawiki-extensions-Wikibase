@@ -165,6 +165,7 @@ final class LibHooks {
 			'ChangesTable',
 			'ClaimObject',
 			'LibHooks',
+			'MapValueHasher',
 			'MediaWikiSite',
 			'SiteConfigObject',
 			'SiteLink',
