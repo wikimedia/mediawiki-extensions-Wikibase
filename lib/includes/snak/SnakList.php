@@ -115,7 +115,13 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	 * @return boolean Indicates if the snak was added or not.
 	 */
 	public function addSnak( Snak $snak ) {
-		$this->append( $snak );
+		if ( $this->hasSnak( $snak ) ) {
+			return false;
+		}
+		else {
+			$this->append( $snak );
+			return true;
+		}
 	}
 
 	/**
@@ -128,7 +134,7 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	 * @return boolean
 	 */
 	public function hasSnak( Snak $snak ) {
-		$this->hasSnakHash( $snak->getHash() );
+		return $this->hasSnakHash( $snak->getHash() );
 	}
 
 	/**
@@ -169,9 +175,10 @@ class SnakList extends \GenericArrayObject implements Snaks {
 	 */
 	public function getHash() {
 		return md5( array_reduce(
-			$this,
+			$this->getArrayCopy(),
 			function( $concaternation, Snak $snak ) {
 				$concaternation .= $snak->getHash();
+				return $concaternation;
 			},
 			''
 		) );

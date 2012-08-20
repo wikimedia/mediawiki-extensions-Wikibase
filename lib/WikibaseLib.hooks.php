@@ -162,6 +162,7 @@ final class LibHooks {
 			'ChangeHandler',
 			'ChangesTable',
 			'LibHooks',
+			'ReferenceObject',
 			'MediaWikiSite',
 			'SiteConfigObject',
 			'SiteLink',
