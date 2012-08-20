@@ -48,7 +48,7 @@ class SnakListTest extends \MediaWikiTestCase {
 	public function instanceProvider() {
 		return array_map(
 			function( array $args ) {
-				return new SnakList( array_key_exists( 0, $args ) ? $args[0] : null );
+				return array( new SnakList( array_key_exists( 0, $args ) ? $args[0] : null ) );
 			},
 			$this->constructorProvider()
 		);
@@ -78,7 +78,7 @@ class SnakListTest extends \MediaWikiTestCase {
 		/**
 		 * @var Snak $snak
 		 */
-		foreach ( $snaks as $snak ) {
+		foreach ( iterator_to_array( $snaks ) as $snak ) {
 			$this->assertTrue( $snaks->hasSnak( $snak ) );
 			$this->assertTrue( $snaks->hasSnakHash( $snak->getHash() ) );
 			$snaks->removeSnak( $snak );
@@ -98,7 +98,7 @@ class SnakListTest extends \MediaWikiTestCase {
 		/**
 		 * @var Snak $snak
 		 */
-		foreach ( $snaks as $snak ) {
+		foreach ( iterator_to_array( $snaks ) as $snak ) {
 			$this->assertTrue( $snaks->hasSnak( $snak ) );
 
 			if ( $snakCount % 2 === 0 ) {
@@ -134,7 +134,7 @@ class SnakListTest extends \MediaWikiTestCase {
 
 		$this->assertFalse( $snaks->addSnak( $snak ) );
 
-		$this->assertEquals( ++$snakCount, count( $snaks ) );
+		$this->assertEquals( $snakCount, count( $snaks ) );
 
 		$this->assertTrue( $snaks->hasSnak( $snak ) );
 	}

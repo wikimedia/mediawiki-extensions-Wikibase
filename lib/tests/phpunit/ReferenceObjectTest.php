@@ -4,6 +4,9 @@ namespace Wikibase\Test;
 use DataValue\DataValueObject as DataValueObject;
 use Wikibase\PropertyValueSnak as PropertyValueSnak;
 use Wikibase\ReferenceObject as ReferenceObject;
+use Wikibase\Reference as Reference;
+use Wikibase\SnakList as SnakList;
+use Wikibase\Snaks as Snaks;
 
 /**
  * Tests for the Wikibase\ReferenceObject class.
@@ -24,29 +27,73 @@ use Wikibase\ReferenceObject as ReferenceObject;
 class ReferenceObjectTest extends \MediaWikiTestCase {
 
 	public function snakListProvider() {
-		// TODO
 		$snakLists = array();
 
-		$snakLists[] = array(
-			new PropertyValueSnak( 1, new DataValueObject() )
+		$snakLists[] = new SnakList();
+
+		$snakLists[] = new SnakList(
+			array( new PropertyValueSnak( 1, new DataValueObject() ) )
 		);
 
-		$snakLists[] = array(
+		$snakLists[] = new SnakList( array(
 			new PropertyValueSnak( 1, new DataValueObject() ),
 			new PropertyValueSnak( 2, new DataValueObject() ),
-			new PropertyValueSnak( 3, new DataValueObject() ),
-		);
+			new PropertyValueSnak( 3, new DataValueObject() )
+		) );
 
-		return $snakLists;
+		return $this->arrayWrap( $snakLists );
+	}
+
+	public function instanceProvider() {
+		$references = array();
+
+		$references[] = new ReferenceObject();
+
+		$references[] = new ReferenceObject( new SnakList( array( new PropertyValueSnak( 1, new DataValueObject() ) ) ) );
+
+		return $this->arrayWrap( $references );
 	}
 
 	/**
 	 * @dataProvider snakListProvider
+	 *
+	 * @param \Wikibase\Snaks $snaks
 	 */
-	public function testConstructor( array $snaks ) {
-		$omnomnomReference = new ReferenceObject(  );
+	public function testConstructor( Snaks $snaks ) {
+		$omnomnomReference = new ReferenceObject( $snaks );
 
-		// TODO
+		$this->assertInstanceOf( '\Wikibase\Reference', $omnomnomReference );
+
+		$this->assertEquals( $snaks, $omnomnomReference->getSnaks() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetHash( Reference $reference ) {
+		$this->assertEquals( $reference->getHash(), $reference->getHash() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetSnaks( Reference $reference ) {
+		$snaks = $reference->getSnaks();
+
+		$this->assertInstanceOf( '\Wikibase\Snaks', $snaks );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSetSnaks( Reference $reference ) {
+		$snaks = new SnakList(
+			new PropertyValueSnak( 5, new DataValueObject() )
+		);
+
+		$reference->setSnaks( $snaks );
+
+		$this->assertEquals( $snaks, $reference->getSnaks() );
 	}
 
 }
