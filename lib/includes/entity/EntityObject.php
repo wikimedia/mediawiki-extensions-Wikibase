@@ -370,7 +370,7 @@ abstract class EntityObject implements Entity {
 	 * @since 0.1
 	 */
 	public function clear() {
-		self::cleanStructure( true );
+		$this->cleanStructure( true );
 	}
 
 	/**
