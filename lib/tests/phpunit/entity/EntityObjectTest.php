@@ -297,4 +297,19 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$this->assertFalse( $entity->isEmpty() );
 	}
 
+	public function testClear() {
+		$entity = $this->getNewEmpty();
+
+		$entity->addAliases( 'en', array( 'ohi' ) );
+		$entity->setDescription( 'en', 'o_O' );
+		$entity->setLabel( 'en', 'o_O' );
+
+		$entity->clear();
+
+		$this->assertEmpty( $entity->getLabels(), "labels" );
+		$this->assertEmpty( $entity->getDescriptions(), "descriptions" );
+		$this->assertEmpty( $entity->getAllAliases(), "aliases" );
+
+		$this->assertTrue( $entity->isEmpty() );
+	}
 }

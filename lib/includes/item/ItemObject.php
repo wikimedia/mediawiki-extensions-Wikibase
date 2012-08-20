@@ -144,22 +144,13 @@ class ItemObject extends EntityObject implements Item {
 	 * @since 0.1
 	 */
 	protected function cleanStructure( $wipeExisting = false ) {
-		parent::cleanStructure();
+		parent::cleanStructure( $wipeExisting );
 
 		foreach ( array( 'links' ) as $field ) {
 			if (  $wipeExisting || !array_key_exists( $field, $this->data ) ) {
 				$this->data[$field] = array();
 			}
 		}
-	}
-
-	/**
-	 * Clears the structure.
-	 *
-	 * @since 0.1
-	 */
-	public function clear() {
-		self::cleanStructure( true );
 	}
 
 	/**
