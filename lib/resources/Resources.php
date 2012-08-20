@@ -49,6 +49,21 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.datamodel' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.Snak.js',
+				'wikibase.PropertyValueSnak.js',
+				'wikibase.PropertySomeValueSnak.js',
+				'wikibase.PropertyNoValueSnak.js',
+				'wikibase.Claim.js',
+				'wikibase.Statement.js',
+			),
+			'dependencies' => array(
+				'wikibase',
+				'dataValues'
+			)
+		),
+
 		'wikibase.utilities' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
