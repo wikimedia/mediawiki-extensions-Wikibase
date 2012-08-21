@@ -20,6 +20,7 @@ class ClientPage < RubySelenium
   text_area(:clientCreateArticleInput, :id => "wpTextbox1")
   button(:clientCreateArticleSubmit, :id => "wpSave")
   span(:clientArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
+  unordered_list(:clientInterwikiLinkList, :xpath => "//div[@id='p-lang']/div/ul")
   button(:clientPurgeSubmit, :xpath => "//form[@class='visualClear']/input[@class='mw-htmlform-submit']")
 
   #language links
