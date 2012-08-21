@@ -134,6 +134,18 @@ $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/Specia
 $wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/SpecialItemByLabel.php';
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
+// includes/store
+$wgAutoloadClasses['Wikibase\EntityDeletionHandler'] 	= $dir . 'includes/store/EntityDeletionHandler.php';
+$wgAutoloadClasses['Wikibase\EntityUpdateHandler'] 		= $dir . 'includes/store/EntityUpdateHandler.php';
+$wgAutoloadClasses['Wikibase\Store'] 					= $dir . 'includes/store/Store.php';
+$wgAutoloadClasses['Wikibase\StoreFactory'] 			= $dir . 'includes/store/StoreFactory.php';
+
+
+// includes/store/sql
+$wgAutoloadClasses['Wikibase\EntitySQLDeletion'] 		= $dir . 'includes/store/sql/EntitySQLDeletion.php';
+$wgAutoloadClasses['Wikibase\EntitySQLUpdate'] 			= $dir . 'includes/store/sql/EntitySQLUpdate.php';
+$wgAutoloadClasses['Wikibase\SQLStore'] 				= $dir . 'includes/store/sql/SQLStore.php';
+
 // includes/updates
 $wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/updates/ItemDeletionUpdate.php';
 $wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/updates/ItemStructuredSave.php';
@@ -185,5 +197,8 @@ $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/R
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler';
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
+
+$wbStores = array();
+$wbStores['sqlstore'] = 'Wikibase\SQLStore';
 
 unset( $dir );

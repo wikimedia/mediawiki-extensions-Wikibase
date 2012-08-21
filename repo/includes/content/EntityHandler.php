@@ -213,25 +213,8 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @return array of integer
 	 */
 	public function getIdsForLabel( $language, $label, $description = null ) {
-		$dbr = wfGetDB( DB_SLAVE );
-
-		$conds = array(
-			'tpl_language' => $language,
-			'tpl_label' => $label
-		);
-
-		if ( !is_null( $description ) ) {
-			$conds['tpl_description'] = $description;
-		}
-
-		$items = $dbr->select(
-			'wb_texts_per_lang',
-			array( 'tpl_item_id' ),
-			$conds,
-			__METHOD__
-		);
-
-		return array_map( function( $item ) { return $item->tpl_item_id; }, iterator_to_array( $items ) );
+		// TODO
+		StoreFactory::getStore()->getIdsForLabel( $language, $label, $description );
 	}
 
 	/**
