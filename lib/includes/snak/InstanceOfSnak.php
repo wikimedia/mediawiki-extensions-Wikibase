@@ -53,7 +53,10 @@ class InstanceOfSnak extends SnakObject {
 	 * @param integer $itemId
 	 */
 	public function setClassItemId( $itemId ) {
-		$this->$itemId = $itemId;
+		if ( $this->$itemId !== $itemId ) {
+			$this->$itemId = $itemId;
+			$this->getSubscriptionHandler()->notifySubscribers();
+		}
 	}
 
 	/**

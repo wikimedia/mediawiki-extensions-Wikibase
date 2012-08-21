@@ -53,7 +53,10 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	 * @param integer $propertyId
 	 */
 	public function setPropertyId( $propertyId ) {
-		$this->propertyId = $propertyId;
+		if ( $propertyId !== $this->propertyId ) {
+			$this->propertyId = $propertyId;
+			$this->getSubscriptionHandler()->notifySubscribers();
+		}
 	}
 
 	/**

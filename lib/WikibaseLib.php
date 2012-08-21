@@ -110,6 +110,8 @@ $wgAutoloadClasses['Wikibase\SitesTable'] 			= $dir . 'includes/SitesTable.php';
 $wgAutoloadClasses['Wikibase\Statement'] 			= $dir . 'includes/Statement.php';
 $wgAutoloadClasses['Wikibase\StatementObject'] 		= $dir . 'includes/StatementObject.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
+$wgAutoloadClasses['Wikibase\Subscribable'] 		= $dir . 'includes/Subscribable.php';
+$wgAutoloadClasses['Wikibase\SubscriptionHandler'] 	= $dir . 'includes/SubscriptionHandler.php';
 
 $wgAutoloadClasses['DataValue\DataValue'] 			= $dir . 'includes/DataValue.php';
 $wgAutoloadClasses['DataValue\DataValueObject'] 	= $dir . 'includes/DataValue.php';

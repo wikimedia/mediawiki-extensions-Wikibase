@@ -56,7 +56,10 @@ class PropertyValueSnak extends PropertySnakObject {
 	 * @param DataValue $dataValue
 	 */
 	public function setDataValue( DataValue $dataValue ) {
-		$this->dataValue = $dataValue;
+		if ( $this->dataValue !== $dataValue ) {
+			$this->dataValue = $dataValue;
+			$this->getSubscriptionHandler()->notifySubscribers();
+		}
 	}
 
 	/**
