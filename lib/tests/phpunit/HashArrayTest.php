@@ -40,7 +40,7 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 	 *
 	 * @param \Wikibase\HashArray $array
 	 */
-	public function testHasSnak( HashArray $array ) {
+	public function testHasElement( HashArray $array ) {
 		/**
 		 * @var Hashable $hashable
 		 */

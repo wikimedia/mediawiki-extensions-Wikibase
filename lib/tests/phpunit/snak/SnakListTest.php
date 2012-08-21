@@ -7,6 +7,7 @@ use Wikibase\Snak as Snak;
 use \Wikibase\PropertyValueSnak as PropertyValueSnak;
 use \Wikibase\InstanceOfSnak as InstanceOfSnak;
 use \DataValue\DataValueObject as DataValueObject;
+use \Wikibase\Hashable as Hashable;
 
 /**
  * Tests for the Wikibase\SnakList class.
@@ -60,6 +61,79 @@ class SnakListTest extends HashArrayTest {
 				new PropertyValueSnak( 42, new DataValueObject() ),
 			) ),
 		);
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\SnakList $array
+	 */
+	public function testHasSnak( SnakList $array ) {
+		/**
+		 * @var Hashable $hashable
+		 */
+		foreach ( iterator_to_array( $array ) as $hashable ) {
+			$this->assertTrue( $array->hasSnak( $hashable ) );
+			$this->assertTrue( $array->hasSnakHash( $hashable->getHash() ) );
+			$array->removeSnak( $hashable );
+			$this->assertFalse( $array->hasSnak( $hashable ) );
+			$this->assertFalse( $array->hasSnakHash( $hashable->getHash() ) );
+		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\SnakList $array
+	 */
+	public function testRemoveSnak( SnakList $array ) {
+		$elementCount = $array->count();
+
+		/**
+		 * @var Hashable $element
+		 */
+		foreach ( iterator_to_array( $array ) as $element ) {
+			$this->assertTrue( $array->hasSnak( $element ) );
+
+			if ( $elementCount % 2 === 0 ) {
+				$array->removeSnak( $element );
+			}
+			else {
+				$array->removeSnakHash( $element->getHash() );
+			}
+
+			$this->assertFalse( $array->hasSnak( $element ) );
+			$this->assertEquals( --$elementCount, $array->count() );
+		}
+
+		$element = new \Wikibase\InstanceOfSnak( 42 );
+
+		$array->removeSnak( $element );
+		$array->removeSnakHash( $element->getHash() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\SnakList $array
+	 */
+	public function testAddSnak( SnakList $array ) {
+		$elementCount = $array->count();
+
+		$elements = $this->elementInstancesProvider();
+		$element = array_shift( $elements );
+
+		if ( !$array->hasSnak( $element ) ) {
+			++$elementCount;
+		}
+
+		$this->assertEquals( !$array->hasSnak( $element ), $array->addSnak( $element ) );
+
+		$this->assertEquals( $elementCount, $array->count() );
+
+		$this->assertFalse( $array->addSnak( $element ) );
+
+		$this->assertEquals( $elementCount, $array->count() );
 	}
 
 }
