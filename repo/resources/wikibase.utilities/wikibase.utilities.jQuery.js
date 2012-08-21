@@ -75,9 +75,7 @@
 		var promise = null;
 
 		return function() {
-			if( promise &&
-				!( promise.isResolved() || promise.isRejected() )
-				) {
+			if( promise && promise.state() === 'pending' ) {
 				// function fn called already and returned jQuery.Promise which isn't resolved yet...
 				promise.promisor.isOngoing++; // ... add note that it is ongoing (promise existed before, increment)...
 				return promise; // ... and return it

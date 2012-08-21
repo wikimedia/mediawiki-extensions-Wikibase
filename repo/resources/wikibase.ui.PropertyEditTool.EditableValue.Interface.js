@@ -168,7 +168,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'type': 'text',
 			'name': this._key,
 			'value': this.getValue(),
-			'placeholder': this.inputPlaceholder,
 			'keypress': $.proxy( this._onKeyPressed, this ),
 			'keyup':    $.proxy( this._onKeyUp, this ),
 			'keydown':  $.proxy( this._onKeyDown, this ),
@@ -176,6 +175,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			'blur':     $.proxy( this._onBlur, this ),
 			'change':   $.proxy( this._onChange, this )
 		} )
+		// setting placeholder inside the jQuery object initialisation does not work as of jQuery 1.8.0
+		.attr( 'placeholder', this.inputPlaceholder )
 		// on each change to this input check whether value was changed:
 		.eachchange( $.proxy( function( e, oldValue ) {
 			if( this.normalize( oldValue ) !== this.getValue() ) {

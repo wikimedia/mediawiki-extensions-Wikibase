@@ -80,7 +80,7 @@
 			this.editableValue.simulateApiFailure();
 
 			ok(
-				this.editableValue.remove().isRejected(),
+				this.editableValue.remove().state() === 'rejected',
 				'simulateApiFailure() we use for testing failures in the API works'
 			);
 
@@ -93,7 +93,7 @@
 			this.editableValue.simulateApiSuccess(); // initial state by default api actions in our tests are a success!
 
 			ok(
-				this.editableValue.save().isResolved(),
+				this.editableValue.save().state() === 'resolved',
 				'simulateApiSuccess() we use for testing success in the API works'
 			);
 		},
