@@ -220,12 +220,28 @@ abstract class EntityContent extends \AbstractContent {
 	 * @return \Status Success indicator
 	 */
 	public function save( $summary = '', User $user = null, $flags = 0 ) {
+		// NOTE: data created by relationalSave may be left dangling if $page->doEditContent fails.
+		//       This is especially relevant when creating a new Entity.
+		// @todo: fix this by implementing transactional logic or at least clean up of things fail
+		//        later on.
 		$success = $this->relationalSave();
 
 		if ( !$success ) {
 			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
 		} else {
-			$status = $this->getWikiPage()->doEditContent(
+			// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clear may cause the old content
+			//       to be loaded from the database again. This may be necessary, because EntityContent is mutable,
+			//       so the cached object might have changed.
+			//
+			//       The relevant test case is ItemContentTest::restRepeatedSave
+			//
+			//       We may be able to optimize this by only calling WikiPage::clear if
+			//       $this->getWikiPage()->getContent() == $this, but that needs further investigation.
+
+			$page = $this->getWikiPage();
+			$page->clear();
+
+			$status = $page->doEditContent(
 				$this,
 				$summary,
 				$flags | EDIT_AUTOSUMMARY,
