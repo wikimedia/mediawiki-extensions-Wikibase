@@ -28,15 +28,38 @@ describe "Check functionality of protected page" do
   end
 
   context "check functionality of protected page" do
-    it "should be logged out, and check if label/description of protected item could not be edited" do
+    it "should be logged in with normal user, and check if label/description of protected item could not be edited" do
+      visit_page(LoginPage) do |page|
+        page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
+      end
       on_page(NewItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
-        if page.logoutLink? == true
-          page.logoutLink
-          page.navigate_to_item
-          page.wait_for_item_to_load
-        end
+        #label
+        page.editLabelLink?.should be_false
+        page.editLabelLinkDisabled?.should be_true
+        page.editLabelLinkDisabled_element.click
+        page.wbTooltip?.should be_true
+        page.labelInputField?.should be_false
+        page.itemLabelSpan_element.click
+        # description
+        page.editDescriptionLink?.should be_false
+        page.editDescriptionLinkDisabled?.should be_true
+        page.editDescriptionLinkDisabled_element.click
+        page.wbTooltip?.should be_true
+        page.descriptionInputField?.should be_false
+      end
+    end
+  end
+
+  context "check functionality of protected page" do
+    it "should be logged out, and check if label/description of protected item could not be edited" do
+      visit_page(LoginPage) do |page|
+        page.logout_user
+      end
+      on_page(NewItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_item_to_load
         #label
         page.editLabelLink?.should be_false
         page.editLabelLinkDisabled?.should be_true
