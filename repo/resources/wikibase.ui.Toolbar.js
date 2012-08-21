@@ -78,7 +78,7 @@ window.wikibase.ui.Toolbar.prototype = {
 		this._drawToolbarElements();
 	},
 
-	appendTo: function( elem ) { // TODO: integrate the whole prototype with jQuery somehow
+	appendTo: function( elem ) {
 		if( this._elem === null ) {
 			this.draw(); // this will generate the toolbar
 		}

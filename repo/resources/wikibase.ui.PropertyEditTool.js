@@ -237,16 +237,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		return this._subject;
 	},
 
-	/*
-	 * @todo: not decided yet whether this should be implemented. This would be neded if
-	 *        label and value can be editied parallel, not if both get their own "edit"
-	 *        button though (in this case other stuff has to be refactored probably).
-	 */	/*
-	_initEditToolForLabel: function() {
-		//this._editableLabel = ...
-	},
-	*/
-
 	/**
 	* Collects all values represented within the DOM already and initializes EditableValue instances
 	* for them.
@@ -571,9 +561,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 
 	/**
 	 * Returns the related properties title
-	 *
-	 * @todo: perhaps at a later point we want to have a getProperty() method instead to return
-	 *        a proper object describing the property. Also considering different kinds of snaks.
 	 *
 	 * @var string
 	 */

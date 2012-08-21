@@ -80,7 +80,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 
 		// Get events from all input elements of tagadata and register them here.
 		// NOTE: not yet all events registered, register on demand.
-		// ToDo: this is not nice, we should use use proper event-propagation instead
+		// ToDo: this is not nice, we should use use proper event-delegation instead
 		inputElement
 		.on( 'tagadatataginserted', function( e, tag ) {
 			$( tag ).find( 'input' )

@@ -16,7 +16,7 @@
  * Basically '[edit]' which gets expanded to '[cancel|save]' when hit.
  * This also interacts with a given editable value.
  *
- * @todo might be worth refactoring this so it won't require the EditableValue as parameter.
+ * @todo Should be refactored so it can be used independently from EditableValue.
  */
 window.wikibase.ui.Toolbar.EditGroup = function( editableValue ) {
 	if( typeof editableValue != 'undefined' ) {
