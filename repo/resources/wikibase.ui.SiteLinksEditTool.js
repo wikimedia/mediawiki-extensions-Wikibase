@@ -163,7 +163,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 */
 	getEditableValuePrototype: function() {
 		// TODO: this system might be useful in other prototypes based on PropertyEditTool, implement
-		//       this in PropertyEditTool directly perhaps.
+		//       this in PropertyEditTool directly perhaps?
 		if( this._editableValuesProto !== null ) {
 			return this._editableValuesProto;
 		}

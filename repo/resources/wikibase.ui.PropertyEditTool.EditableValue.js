@@ -657,7 +657,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * Returns the current value
-	 * // TODO: should return an object representing the properties value
+	 * // TODO: should return an object representing a data value
 	 *
 	 * @return Array
 	 */
@@ -671,7 +671,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 	/**
 	 * Sets a value
-	 * // TODO: should take an object representing a properties value
+	 * // TODO: should take an object representing a data value
 	 *
 	 * @param Array|string value
 	 * @return Array value but normalized
@@ -725,7 +725,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Determines if this value is a new value that is not yet stored
 	 * TODO: this method should completely replace this.isPending() which only works for site links
 	 *
-	 * @return bool true if this is a new value
+	 * @return bool true if this is a new value, not stored in the database so far
 	 */
 	isNew: function() {
 		return this.valueCompare( this.getInitialValue(), null );
@@ -743,7 +743,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	/**
 	 * Checks whether a certain value would be valid for this editable value.
 	 *
-	 * @todo: we might want to move this into a prototype describing the property/snak later.
+	 * @todo: we might want to move this into a data value/type representing prototype later.
 	 *
 	 * @param Array value
 	 * @return bool
@@ -766,10 +766,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * When comparing the values, this will also do an normalization on the values before comparing
 	 * them, so even though they are not exactly the same perhaps, they still have the same meaning
 	 * and true will be returned.
-	 * NOTE/TODO: arrays basically empty but with missing elements (so they are considered invalid)
-	 *            are not considered empty right now.
+	 * FIXME/TODO: arrays basically empty but with missing elements (so they are considered invalid)
+	 *             are not considered empty right now.
 	 *
-	 * @todo: make this deprecated as soon as we use objects representing property values...
+	 * @todo: mark this deprecated as soon as we use objects representing property values...
 	 *
 	 * @param Array value1
 	 * @param Array value2 [optional] if not given, this will check whether value1 is empty

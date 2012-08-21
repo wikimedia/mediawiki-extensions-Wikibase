@@ -22,7 +22,7 @@
  * @licence MIT license
  * @author Daniel Werner
  *
- * TODO: Danwe: This should be refactored to introduce a 'Tag' Prototype for representing tags. Right now the whole
+ * TODO: Danwe: This could be refactored to introduce a 'Tag' Prototype for representing tags. Right now the whole
  *       thing is a mess made of functions returning/expecting either a label or a DOM node.
  * TODO: Documentation for events
  */
@@ -486,7 +486,7 @@
 			if( animate ) {
 				tag.addClass( 'tagadata-choice-removed' );
 				tag.fadeOut( 'fast' ).hide( 'blind', {direction: 'horizontal'}, 'fast',function() {
-					tag.remove(); //TODO/FIXME: danwe: This won't work for some reason, callback not called, fadeOut not happening!
+					tag.remove(); // TODO/FIXME: danwe: This won't work for some reason, callback not called, fadeOut not happening!
 				} ).dequeue();
 			} else {
 				tag.remove();
