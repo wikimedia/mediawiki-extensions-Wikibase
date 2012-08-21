@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//2bE\u003d",
+        "filename": "repo/includes/specials/SpecialItemByLabel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-08-21T11:00:42Z",
+      "side": 1,
+      "message": "This is a particulary confusing way to put things. :(",
+      "revId": "eadb6db33d2a5a2900d9992a8d4066050a919467",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
