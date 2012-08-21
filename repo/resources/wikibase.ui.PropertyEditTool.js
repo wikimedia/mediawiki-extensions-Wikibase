@@ -238,6 +238,14 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 
 	/**
+	 * Returns the node the value(s) should be appended to
+	 *
+	 * @return jQuery
+	 */
+	_getValuesParent: function() {
+		return this._subject;
+	},
+	/**
 	* Collects all values represented within the DOM already and initializes EditableValue instances
 	* for them.
 	*/
@@ -388,7 +396,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		var newValueElem = this._newEmptyValueDOM(); // get DOM for new empty value
 		newValueElem.addClass( 'wb-pending-value' );
 
-		this._subject.append( newValueElem );
+		this._getValuesParent().append( newValueElem );
 		var newValue = this._initSingleValue( newValueElem );
 
 		if ( !this.allowsFullErase ) { // on allowsFullErase, add button will be hidden when not in use

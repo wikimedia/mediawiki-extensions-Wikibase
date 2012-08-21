@@ -53,7 +53,7 @@
 	 * module( ..., newMwEnvironment( { setup: .. , teardown: ... } ) );
 	 * </code>
 	 */
-	QUnit.newWbEnvironment = ( function () {
+	QUnit.newWbEnvironment = ( function ( assert ) {
 
 		return function ( custom ) {
 			if ( typeof custom == 'undefined' ) custom = {};
@@ -69,13 +69,13 @@
 					mwEnv.setup();
 					wikibase._siteList = null; // empty cache of wikibases site details
 					if ( typeof custom.setup != 'undefined' ) {
-						custom.setup.call( this );
+						custom.setup.apply( this, arguments );
 					}
 				},
 				teardown: function () {
 					mwEnv.teardown();
 					if ( typeof custom.teardown != 'undefined' ) {
-						custom.teardown.call( this );
+						custom.teardown.apply( this, arguments );
 					}
 				}
 			};
