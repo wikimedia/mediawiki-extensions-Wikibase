@@ -41,7 +41,7 @@ class PropertyValueSnakTest extends PropertySnakObjectTest {
 	public function testGetDataValue( PropertyValueSnak $omnomnom ) {
 		$dataValue = $omnomnom->getDataValue();
 		$this->assertInstanceOf( '\DataValue\DataValue', $dataValue );
-		$this->assertEquals( $dataValue, $dataValue );
+		$this->assertEquals( $dataValue, $omnomnom->getDataValue() );
 	}
 
 }
