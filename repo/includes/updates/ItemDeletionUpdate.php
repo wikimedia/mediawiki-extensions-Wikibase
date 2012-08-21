@@ -8,7 +8,6 @@ namespace Wikibase;
  * @since 0.1
  *
  * @file
- *
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -43,34 +42,7 @@ class ItemDeletionUpdate extends \DataUpdate {
 	 * @see DeferrableUpdate::doUpdate
 	 */
 	public function doUpdate() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$id = $this->itemContent->getItem()->getId();
-
-		$dbw->begin( __METHOD__ );
-
-		$dbw->delete(
-			'wb_items',
-			array( 'item_id' => $id ),
-			__METHOD__
-		);
-
-		$updater = new SiteLinkTable( 'wb_items_per_site' );
-		$updater->deleteLinksOfItem( $this->itemContent->getItem() );
-
-		$dbw->delete(
-			'wb_texts_per_lang',
-			array( 'tpl_item_id' => $id ),
-			__METHOD__
-		);
-
-		$dbw->delete(
-			'wb_aliases',
-			array( 'alias_item_id' => $id ),
-			__METHOD__
-		);
-
-		$dbw->commit( __METHOD__ );
+		StoreFactory::getStore()->newEntityDeletionHandler()->handleDeletion( $this->itemContent->getItem() );
 
 		/**
 		 * Gets called after the deletion of an item has been comitted,
@@ -81,10 +53,6 @@ class ItemDeletionUpdate extends \DataUpdate {
 		 * @param ItemStructuredSave $this
 		 */
 		wfRunHooks( 'WikibaseItemDeletionUpdate', array( $this ) );
-
-		// TODO: we need to handle failures in this thing.
-		// If the update breaks for some reason, and stuff remains for a deleted item, how do we get rid of it?
-		// Sitelinks will cause problems since they will needlessly prohibit other items from being linked to their targets.
 	}
 
 }
