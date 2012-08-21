@@ -6,7 +6,7 @@ namespace Wikibase;
  *
  * @since 0.1
  *
- * @file Autocomment.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

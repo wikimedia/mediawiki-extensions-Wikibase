@@ -9,7 +9,7 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html;
  *
  * @since 0.1
  *
- * @file Wikibase.hooks.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

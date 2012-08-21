@@ -8,7 +8,7 @@ use \Wikibase\LangLinkHandler as LangLinkHandler;
  *
  * @since 0.1
  *
- * @file NoLangLinkHandler.php
+ * @file
  * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+

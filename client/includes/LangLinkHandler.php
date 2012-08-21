@@ -7,7 +7,7 @@ namespace Wikibase;
  *
  * @since 0.1
  *
- * @file LangLinkHandler.php
+ * @file
  * @ingroup WikibaseClient
  * @ingroup RefuctoredCode
  *

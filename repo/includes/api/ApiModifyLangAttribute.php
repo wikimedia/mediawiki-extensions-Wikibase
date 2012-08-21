@@ -9,7 +9,7 @@ use ApiBase, Language;
  *
  * @since 0.1
  *
- * @file ApiWikibaseSetDescription.php
+ * @file
  * @ingroup Wikibase
  * @ingroup API
  *

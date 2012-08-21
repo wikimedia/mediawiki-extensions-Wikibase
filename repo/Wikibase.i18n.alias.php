@@ -5,7 +5,7 @@
  *
  * @since 0.1
  *
- * @file Wikibase.alias.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

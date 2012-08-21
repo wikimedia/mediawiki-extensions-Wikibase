@@ -8,7 +8,7 @@ use User, Title, ApiBase;
  *
  * @since 0.1
  *
- * @file ApiWikibaseModifyItem.php
+ * @file
  * @ingroup Wikibase
  * @ingroup API
  *

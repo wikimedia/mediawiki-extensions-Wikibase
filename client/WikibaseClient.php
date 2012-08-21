@@ -6,7 +6,7 @@
  * Support					https://www.mediawiki.org/wiki/Extension_talk:Wikibase_Client
  * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=tree;f=client
  *
- * @file WikibaseClient.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

@@ -3,7 +3,7 @@
  * @todo: this might not be necessary or only for ui stuff when we add more js modules!
  *
  * @since 0.1
- * @file wikibase.startup.js
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

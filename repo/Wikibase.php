@@ -7,7 +7,7 @@
  * Support					https://www.mediawiki.org/wiki/Extension_talk:Wikibase
  * Source code:				https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/WikidataRepo.git
  *
- * @file Wikibase.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
