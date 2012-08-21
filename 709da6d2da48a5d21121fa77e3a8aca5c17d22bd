@@ -16,6 +16,24 @@
       "revId": "709da6d2da48a5d21121fa77e3a8aca5c17d22bd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//2bk\u003d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-21T10:54:13Z",
+      "side": 1,
+      "message": "I can\u0027t think of a place where it would happen during normal operation, but there is no guarantee that it never will, and we must not rely on that.",
+      "parentUuid": "AAAARX//2dE\u003d",
+      "revId": "709da6d2da48a5d21121fa77e3a8aca5c17d22bd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
