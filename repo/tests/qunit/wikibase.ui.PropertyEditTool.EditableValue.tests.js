@@ -18,7 +18,7 @@
 		setup: function() {
 			var node = $( '<div/>', { id: 'parent' } );
 			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
-			this.editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue;
+			this.editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue();
 
 			var toolbar = this.propertyEditTool._buildSingleValueToolbar( this.editableValue );
 			this.editableValue._init( node, toolbar );

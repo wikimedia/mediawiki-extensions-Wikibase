@@ -119,7 +119,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.editAliases?.should be_false
         page.cancelAliases?.should be_true
         page.aliasesTitle?.should be_true
-        page.aliasesListInEditMode?.should be_true
+        page.aliasesList?.should be_true
         page.aliasesInputEmpty?.should be_true
 
         # check functionality of cancel
