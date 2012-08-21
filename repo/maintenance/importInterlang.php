@@ -9,7 +9,7 @@
  *
  * @since 0.1
  *
- * @file importInterlang.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

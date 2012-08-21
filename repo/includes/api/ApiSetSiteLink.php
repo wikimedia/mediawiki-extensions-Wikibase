@@ -9,7 +9,7 @@ use ApiBase, User, Http;
  *
  * @since 0.1
  *
- * @file ApiWikibaseLinkSite.php
+ * @file
  * @ingroup Wikibase
  * @ingroup API
  *

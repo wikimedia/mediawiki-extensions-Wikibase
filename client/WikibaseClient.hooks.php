@@ -6,7 +6,7 @@ namespace Wikibase;
  *
  * @since 0.1
  *
- * @file WikibaseClient.hooks.php
+ * @file
  * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+

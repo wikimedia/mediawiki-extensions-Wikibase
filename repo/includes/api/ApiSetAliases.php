@@ -9,7 +9,7 @@ use ApiBase, User, Language;
  *
  * @since 0.1
  *
- * @file ApiWikibaseAliases.php
+ * @file
  * @ingroup Wikibase
  * @ingroup API
  *

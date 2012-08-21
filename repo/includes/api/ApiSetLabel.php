@@ -9,7 +9,7 @@ use ApiBase;
  *
  * @since 0.1
  *
- * @file ApiWikibaseSetLabel.php
+ * @file
  * @ingroup Wikibase
  * @ingroup API
  *

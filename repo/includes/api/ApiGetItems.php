@@ -8,7 +8,7 @@ use ApiBase;
  *
  * @since 0.1
  *
- * @file ApiWikibaseGetItem.php
+ * @file
  * @ingroup Wikibase
  * @ingroup API
  *

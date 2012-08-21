@@ -8,7 +8,7 @@ use \Wikibase\Settings as Settings;
  *
  * @since 0.1
  *
- * @file SortUtils.php
+ * @file
  * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+

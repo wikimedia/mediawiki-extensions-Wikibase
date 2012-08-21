@@ -9,7 +9,7 @@ use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPa
  *
  * @since 0.1
  *
- * @file WikibaseItemView.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

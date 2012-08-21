@@ -8,7 +8,7 @@ use User, Status, ApiBase;
  *
  * @since 0.1
  *
- * @file ApiWikibase.php
+ * @file
  * @ingroup Wikibase
  * @ingroup API
  *

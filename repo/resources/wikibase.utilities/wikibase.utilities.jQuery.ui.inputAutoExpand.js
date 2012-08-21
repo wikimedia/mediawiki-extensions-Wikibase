@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file wikibase.utilities.jQuery.ui.inputAutoExpand.js
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

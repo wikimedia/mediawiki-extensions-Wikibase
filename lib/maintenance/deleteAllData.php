@@ -11,7 +11,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @since 0.1
  *
- * @file DeleteAllData.php
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+

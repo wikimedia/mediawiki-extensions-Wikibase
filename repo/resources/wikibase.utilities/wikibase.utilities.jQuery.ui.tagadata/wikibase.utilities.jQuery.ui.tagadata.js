@@ -16,7 +16,7 @@
  * http://aehlke.github.com/tag-it/LICENSE
  *
  * @since 0.1
- * @file wikibase.utilities.jQuery.ui.tagadata.js
+ * @file
  * @ingroup Wikibase
  *
  * @licence MIT license
