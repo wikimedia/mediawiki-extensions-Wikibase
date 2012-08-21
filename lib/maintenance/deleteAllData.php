@@ -61,6 +61,8 @@ class DeleteAllData extends \Maintenance {
 
 			echo "done!\n";
 
+			// TODO: use Store::clear
+
 			$tables = array_merge( $tables, array(
 				'wb_items',
 				'wb_items_per_site',
