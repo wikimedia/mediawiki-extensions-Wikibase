@@ -79,7 +79,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			);
 		}
 		$this->getOutput()->addHTML(
-			Html::openElement( 'form', array( 'method' => 'post', 'action' => $wgScript, 'name' => 'itembytitle', 'id' => 'mw-itembytitle-form1' ) )
+			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itembytitle', 'id' => 'mw-itembytitle-form1' ) )
 			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
 			. Xml::fieldset( $this->msg( 'wikibase-itembytitle-lookup-fieldset' )->text() )
 			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-site' )->text(), 'site', 'sitename', 12, $siteId ? htmlspecialchars( $siteId ) : '' )
@@ -97,7 +97,11 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
 				. $this->msg( 'wikibase-itembytitle-create' )
-					->params( $siteId ? htmlspecialchars( $siteId ) : '', htmlspecialchars( $page ) )
+					->params(
+						wfUrlencode( $siteId ? $siteId : '' ),
+						wfUrlencode( $page ? $page : '' ),
+						$page ? $page : ''
+					)
 					->parse()
 				. Html::closeElement( 'div' )
 			);
