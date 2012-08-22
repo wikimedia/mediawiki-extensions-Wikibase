@@ -318,24 +318,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Called when somebody tries to edit an item directly through the API.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/APIEditBeforeSave
-	 *
-	 * @since 0.1
-	 * @param EditPage $editPage: the EditPage object
-	 * @param string $text: the new text of the article (has yet to be saved)
-	 * @param array $resultArr: data in this array will be added to the API result
-	 */
-	public static function onAPIEditBeforeSave( EditPage $editPage, string $text, array &$resultArr ) {
-		if ( $editPage->getTitle()->getContentModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	/**
 	 * Allows to add user preferences.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/GetPreferences
 	 *
