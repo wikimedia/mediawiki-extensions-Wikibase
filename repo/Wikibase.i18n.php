@@ -96,13 +96,13 @@ $messages['en'] = array(
 	'wikibase-itembytitle-nothing-found' => 'No item was found by the previous search. Please refine the query with better identification of the external page.',
 	'wikibase-itembytitle-invalid-site' => 'The previous query could not be used for a search. Please provide a valid site identifier.',
 	'wikibase-itembytitle-description' => 'Site is an identifier code, such as "enwiki".',
-	'wikibase-itembytitle-create' => 'You can also [{{fullurl:Special:CreateItem|site=$1&page=$2}} create an item].',
+	'wikibase-itembytitle-create' => 'You can also [{{fullurl:Special:CreateItem|site=$1&page=$2}} create an item with "$3"].',
 	'special-itembylabel' => 'Item by label',
 	'wikibase-itembylabel-lookup-fieldset' => 'Search for items by language and label',
 	'wikibase-itembylabel-lookup-language' => 'Language:',
 	'wikibase-itembylabel-lookup-label' => 'Label:',
 	'wikibase-itembylabel-submit' => 'Search',
-	'wikibase-itembylabel-create' => 'You can also [{{fullurl:Special:CreateItem|language=$1&label=$2}} create an item].',
+	'wikibase-itembylabel-create' => 'You can also [{{fullurl:Special:CreateItem|language=$1&label=$2}} create an item with "$3"].',
 	'wikibase-itembylabel-nothing-found' => 'No item was found by the previous search. Please refine the query.',
 	'wikibase-itembylabel-invalid-langcode' => 'The previous query could not be used for a search. You must provide a valid language identifier.',
 	'wikibase-itembylabel-description' => 'Values used for searching must be the complete text entry. Language is an identifier, such as "en".',
@@ -292,8 +292,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-itembytitle-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
 	'wikibase-itembytitle-description' => 'Further information about the search fields and the valid values.',
 	'wikibase-itembytitle-create' => 'Information about how to proceede to create a new item. Will typically contain a link to create an item from data in the textfields. Parameters:
-* $1 is a site identifier used in the URL
-* $2 is is a page name used in the URL.',
+* $1 is a site identifier used in the URL.
+* $2 is the page name used in the URL.
+* $3 is also the page name used in the URL.',
 	'special-itembylabel' => 'The item is identified through use of the language and label, but the lookup failed and further qualification must be done. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 	'wikibase-itembylabel-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by language, label and description.',
 	'wikibase-itembylabel-lookup-language' => 'Label for the textfield holding the language id.',

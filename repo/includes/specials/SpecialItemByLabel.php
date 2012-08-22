@@ -105,7 +105,7 @@ class SpecialItemByLabel extends SpecialItemResolver {
 			);
 		}
 		$this->getOutput()->addHTML(
-			Html::openElement( 'form', array( 'method' => 'post', 'action' => $wgScript, 'name' => 'itembylabel', 'id' => 'mw-itembylabel-form1' ) )
+			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itembylabel', 'id' => 'mw-itembylabel-form1' ) )
 			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
 			. Xml::fieldset( $this->msg( 'wikibase-itembylabel-lookup-fieldset' )->text() )
 			. Xml::inputLabel( $this->msg( 'wikibase-itembylabel-lookup-language' )->text(), 'language', 'languagename', 12, $langCode ? $langCode : '' )
@@ -123,7 +123,11 @@ class SpecialItemByLabel extends SpecialItemResolver {
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
 				. $this->msg( 'wikibase-itembylabel-create' )
-					->params( $langCode ? $langCode : '', $label ? $label : '' )
+					->params(
+						wfUrlencode( $langCode ? $langCode : '' ),
+						wfUrlencode( $label ? $label : '' ),
+						$label ? $label : ''
+					)
 					->parse()
 				. Html::closeElement( 'div' )
 			);
