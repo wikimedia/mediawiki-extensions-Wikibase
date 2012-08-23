@@ -16,6 +16,7 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Nikola Smolenski
  * @author Daniel Werner
+ * @author Michał Łazowik
  */
 final class RepoHooks {
 
@@ -406,6 +407,43 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Modify line endings on history page.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageHistoryLineEnding
+	 *
+	 * @since 0.1
+	 *
+	 * @param \HistoryPager $history
+	 * @param object &$row
+	 * @param string &$s
+	 * @param array &$classes
+	 *
+	 * @return boolean
+	 */
+	public static function onPageHistoryLineEnding( \HistoryPager $history, &$row, &$s, array &$classes  ) {
+		global $wgArticle;
+		$rev = new Revision( $row );
+
+		if ( in_array( $history->getTitle()->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) )
+			&& $wgArticle->getPage()->getLatest() !== $rev->getID()
+			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
+		) {
+			$link = \Linker::linkKnown(
+				$rev->getTitle(),
+				$history->msg( 'wikibase-restoreold' )->escaped(),
+				array(),
+				array(
+					'action'	=> 'edit',
+					'restore'	=> $rev->getId()
+				)
+			);
+
+			$s .= " ($link)";
+		}
+
+		return true;
+	}
+
+	/**
 	 * Alter the structured navigation links in SkinTemplates.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
 	 *
@@ -417,8 +455,46 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onPageTabs( \SkinTemplate &$sktemplate, array &$links ) {
-		if ( in_array( $sktemplate->getTitle()->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) ) ) {
+		global $wgArticle;
+
+		$title = $sktemplate->getTitle();
+		$request = $sktemplate->getRequest();
+		$user = $sktemplate->getUser();
+
+		if ( in_array( $title->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) ) ) {
 			unset( $links['views']['edit'] );
+
+			if ( $title->quickUserCan( 'edit', $user ) ) {
+				$old = $wgArticle->getOldID() > 0
+					&& $wgArticle->getOldID() !== $wgArticle->getPage()->getLatest()
+					&& !$request->getCheck( 'diff' );
+
+				$restore = $request->getCheck( 'restore' );
+
+				if ( $old || $restore ) {
+					// Old revision, so show (Restore) tab
+
+					// XXX: better way to insert into an array on specific position?
+					$i = 0;
+					foreach ( $links['views'] as $action => $vars ) {
+						if ($i > 0) {
+							$tmp[$action] = $vars;
+							unset( $links['views'][$action] );
+						}
+						$i++;
+					}
+
+					$links['views']['restore'] = array(
+						'class' => ( $restore ) ? 'selected' : false,
+						'text' => ucfirst( wfMsg( 'wikibase-restoreold' ) ),
+						'href' => $title->getLocalURL( 'action=edit&restore=' . $wgArticle->getOldID() ),
+					);
+
+					foreach ( $tmp as $action => $vars ) {
+						$links['views'][$action] = $vars;
+					}
+				}
+			}
 		}
 
 		return true;
