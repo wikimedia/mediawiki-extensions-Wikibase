@@ -16,6 +16,24 @@
       "revId": "86bcca0fcf03b85323cb78bec434c3bf22d74d20",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//1Qk\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-08-23T10:12:08Z",
+      "side": 1,
+      "message": "think we will change this back to use Special:ItemByTitle when it\u0027s ready, as the namespace issue is ugly right now but this works for now.",
+      "parentUuid": "AAAARX//1Qw\u003d",
+      "revId": "86bcca0fcf03b85323cb78bec434c3bf22d74d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
