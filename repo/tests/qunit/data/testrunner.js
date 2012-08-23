@@ -3,7 +3,7 @@
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
  * @since 0.1
- * @file testrunner.js
+ * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
@@ -11,7 +11,7 @@
  * @author H. Snater
  */
 
-( function ( $, mw, QUnit ) {
+( function ( $, mw, QUnit, undefined ) {
 	'use strict';
 
 	/**
@@ -56,7 +56,9 @@
 	QUnit.newWbEnvironment = ( function () {
 
 		return function ( custom ) {
-			if ( typeof custom == 'undefined' ) custom = {};
+			if ( custom === undefined ) {
+				custom = {};
+			}
 
 			// init a new MW environment first, so we clean up the basic config stuff
 			var mwEnv = new QUnit.newMwEnvironment( {
@@ -66,16 +68,16 @@
 
 			return {
 				setup: function () {
-					mwEnv.setup();
+					mwEnv.setup(); mw.log( wikibase._siteList );
 					wikibase._siteList = null; // empty cache of wikibases site details
-					if ( typeof custom.setup != 'undefined' ) {
-						custom.setup.call( this );
+					if ( custom.setup !== undefined ) {
+						custom.setup.apply( this, arguments );
 					}
 				},
 				teardown: function () {
 					mwEnv.teardown();
-					if ( typeof custom.teardown != 'undefined' ) {
-						custom.teardown.call( this );
+					if ( custom.teardown !== undefined ) {
+						custom.teardown.apply( this, arguments );
 					}
 				}
 			};
