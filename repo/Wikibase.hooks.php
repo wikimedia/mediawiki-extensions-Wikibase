@@ -148,6 +148,7 @@ final class RepoHooks {
 			'scripts' => array(
 				'tests/qunit/wikibase.tests.js',
 				'tests/qunit/wikibase.Site.tests.js',
+				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
 				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
 				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
 				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',

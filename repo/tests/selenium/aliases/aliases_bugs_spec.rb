@@ -34,13 +34,15 @@ describe "Check for bugs" do
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
         page.addAliases
-        page.addAliasesDivInEditMode_element.style("display").should == "none"
+        page.addAliases?.should be_false
+        #page.addAliasesDivInEditMode_element.style("display").should == "none"
         page.cancelAliases?.should be_true
         page.cancelAliases
         page.addAliases?.should be_true
         page.cancelAliases?.should be_false
         page.addAliases
-        page.addAliasesDivInEditMode_element.style("display").should == "none"
+        #page.addAliasesDivInEditMode_element.style("display").should == "none"
+        page.addAliases?.should be_false
         page.cancelAliases?.should be_true
         page.cancelAliases
       end
