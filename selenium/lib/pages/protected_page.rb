@@ -6,7 +6,7 @@
 #
 # page object for a protect page action
 
-class ProtectedPage < NewItemPage
+class ProtectedPage < ItemPage
   include PageObject
 
   button(:protect_submit, :id => 'mw-Protect-submit')

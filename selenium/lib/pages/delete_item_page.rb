@@ -6,7 +6,7 @@
 #
 # page object for delete item action
 
-class DeleteItemPage < NewItemPage
+class DeleteItemPage < ItemPage
   include PageObject
 
   button(:delete, :id => 'wpConfirmB')

@@ -16,7 +16,7 @@ describe "Check restore" do
 
   context "restore test setup" do
     it "should create item, enter label, description and aliases" do
-      visit_page(AliasesItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(label, description)
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
@@ -28,7 +28,7 @@ describe "Check restore" do
       end
     end
     it "should make some changes to item" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -54,7 +54,7 @@ describe "Check restore" do
 
   context "restore functionality test" do
     it "should restore old revision" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -65,7 +65,7 @@ describe "Check restore" do
         page.restoreLink_element.when_present.click
         page.undoSave
       end
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -78,7 +78,7 @@ describe "Check restore" do
 
   context "restore test teardown" do
     it "should remove all sitelinks" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
