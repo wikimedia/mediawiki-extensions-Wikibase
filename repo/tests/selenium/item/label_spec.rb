@@ -11,7 +11,7 @@ require 'spec_helper'
 describe "Check functionality of edit label" do
   context "Check for edit label" do
     it "should check for edit label" do
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
 
         page.firstHeading.should be_true
@@ -74,7 +74,7 @@ describe "Check functionality of edit label" do
 
   context "Check for normalization of label" do
     it "should check if normalization for item labels is working" do
-      on_page(NewItemPage) do |page|
+      on_page(ItemPage) do |page|
         label_unnormalized = "  me haz   too many       spaces inside           "
         label_normalized = "me haz too many spaces inside"
         page.editLabelLink

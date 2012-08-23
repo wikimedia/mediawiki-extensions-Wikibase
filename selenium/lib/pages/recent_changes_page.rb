@@ -6,7 +6,7 @@
 #
 # page object for recent changes special page
 
-class RecentChangesPage < NewItemPage
+class RecentChangesPage < ItemPage
   include PageObject
   page_url WIKI_REPO_URL + "index.php/Special:RecentChanges"
   unordered_list(:recentChanges, :class => "special")

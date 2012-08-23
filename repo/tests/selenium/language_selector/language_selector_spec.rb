@@ -15,10 +15,10 @@ description_de = "deutsch_" + generate_random_string(10)
 describe "Check functionality of wikidata together with ULS" do
   context "ULS test setup" do
     it "should create item, enter label and description in english and german" do
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(label_en, description_en)
       end
-      on_page(LanguageSelectorPage) do |page|
+      on_page(ItemPage) do |page|
         page.ulsSwitchLanguage("Deutsch")
         page.wait_for_item_to_load
         page.labelInputField_element.clear
@@ -38,7 +38,7 @@ describe "Check functionality of wikidata together with ULS" do
 
   context "ULS test language switching for item" do
     it "should check if language switching works for item page" do
-      on_page(LanguageSelectorPage) do |page|
+      on_page(ItemPage) do |page|
         page.ulsSwitchLanguage("English")
         page.navigate_to_item
         page.wait_for_item_to_load
@@ -58,7 +58,7 @@ describe "Check functionality of wikidata together with ULS" do
   if ENV["BROWSER_TYPE"] == "firefox"
     context "ULS test language stickiness" do
       it "should check if language is sticky when navigating to other pages" do
-        on_page(LanguageSelectorPage) do |page|
+        on_page(ItemPage) do |page|
           page.ulsSwitchLanguage("English")
           page.navigate_to_item
           page.wait_for_item_to_load

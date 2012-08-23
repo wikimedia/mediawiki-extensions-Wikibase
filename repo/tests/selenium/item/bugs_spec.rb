@@ -13,10 +13,10 @@ describe "Check for known bugs" do
     it "should check of the bug exists" do
       description_en = "english"
       description_de = "deutsch"
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(generate_random_string(10), description_en)
       end
-      on_page(NewItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item_en
         page.wait_for_item_to_load
         page.itemDescriptionSpan.should == description_en
