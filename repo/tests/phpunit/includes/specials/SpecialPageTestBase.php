@@ -17,16 +17,16 @@ namespace Wikibase\Test;
 abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
 	public function testConstructor() {
-		$this->assertInstanceOf( 'SpecialPage', new \SpecialItemByLabel() );
+		$this->assertInstanceOf( 'SpecialPage', new \SpecialItemDisambiguation() );
 	}
 
 	public function testExecute() {
-		$instance = new \SpecialItemByLabel();
+		$instance = new \SpecialItemDisambiguation();
 		$instance->execute( '' );
 
 		$this->assertTrue( true, 'Calling execute without any subpage value' );
 
-		$instance = new \SpecialItemByLabel();
+		$instance = new \SpecialItemDisambiguation();
 		$instance->execute( 'en/oHai' );
 
 		$this->assertTrue( true, 'Calling execute with a subpage value' );
