@@ -6,13 +6,13 @@
  *
  * @since 0.1
  *
- * @file SpecialItemByLabel.php
+ * @file SpecialItemDisambiguation.php
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SpecialItemByLabel extends SpecialItemResolver {
+class SpecialItemDisambiguation extends SpecialItemResolver {
 
 	/**
 	 * Constructor.
@@ -20,7 +20,7 @@ class SpecialItemByLabel extends SpecialItemResolver {
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'ItemByLabel' );
+		parent::__construct( 'ItemDisambiguation' );
 	}
 
 	/**
@@ -98,31 +98,31 @@ class SpecialItemByLabel extends SpecialItemResolver {
 		if ( isset( $langCode ) || isset( $label ) ) {
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
-				. $this->msg( $languageName !== $langCode ? 'wikibase-itembylabel-nothing-found' : 'wikibase-itembylabel-invalid-langcode' )
+				. $this->msg( $languageName !== $langCode ? 'wikibase-itemdisambiguation-nothing-found' : 'wikibase-itemdisambiguation-invalid-langcode' )
 					->params( $langCode, $label )
 					->parse()
 				. Html::closeElement( 'div' )
 			);
 		}
 		$this->getOutput()->addHTML(
-			Html::openElement( 'form', array( 'method' => 'post', 'action' => $wgScript, 'name' => 'itembylabel', 'id' => 'mw-itembylabel-form1' ) )
+			Html::openElement( 'form', array( 'method' => 'post', 'action' => $wgScript, 'name' => 'itemdisambiguation', 'id' => 'mw-itemdisambiguation-form1' ) )
 			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
-			. Xml::fieldset( $this->msg( 'wikibase-itembylabel-lookup-fieldset' )->text() )
-			. Xml::inputLabel( $this->msg( 'wikibase-itembylabel-lookup-language' )->text(), 'language', 'languagename', 12, $langCode ? $langCode : '' )
-			. Xml::inputLabel( $this->msg( 'wikibase-itembylabel-lookup-label' )->text(), 'label', 'labelname', 36, $label ? $label : '' )
-			. Xml::submitButton( $this->msg( 'wikibase-itembylabel-submit' )->text() )
+			. Xml::fieldset( $this->msg( 'wikibase-itemdisambiguation-lookup-fieldset' )->text() )
+			. Xml::inputLabel( $this->msg( 'wikibase-itemdisambiguation-lookup-language' )->text(), 'language', 'languagename', 12, $langCode ? $langCode : '' )
+			. Xml::inputLabel( $this->msg( 'wikibase-itemdisambiguation-lookup-label' )->text(), 'label', 'labelname', 36, $label ? $label : '' )
+			. Xml::submitButton( $this->msg( 'wikibase-itemdisambiguation-submit' )->text() )
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
 		$this->getOutput()->addHTML(
 			Html::openElement( 'div' )
-			. $this->msg( 'wikibase-itembylabel-description' )->text()
+			. $this->msg( 'wikibase-itemdisambiguation-description' )->text()
 			. Html::closeElement( 'div' )
 		);
 		if ( isset( $langCode ) && isset( $label ) ) {
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
-				. $this->msg( 'wikibase-itembylabel-create' )
+				. $this->msg( 'wikibase-itemdisambiguation-create' )
 					->params( $langCode ? $langCode : '', $label ? $label : '' )
 					->parse()
 				. Html::closeElement( 'div' )
