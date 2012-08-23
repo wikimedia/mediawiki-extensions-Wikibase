@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//1RE\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-23T10:06:57Z",
+      "side": 1,
+      "message": "oops",
+      "revId": "e295324ace9ff534c72d63cb3b7c57ce2a41f600",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
