@@ -8,7 +8,7 @@
 
 require 'ruby_selenium'
 
-class NewItemPage < ItemPage
+class NewItemPage < RubySelenium
   include PageObject
   page_url WIKI_REPO_URL + "index.php/Special:CreateItem"
 

@@ -8,26 +8,23 @@
 
 require 'ruby_selenium'
 
-class ItemPage < RubySelenium
+class ItemPage < NewItemPage
   include PageObject
 
-  # logout
-  link(:logoutLink, :xpath => "//li[@id='pt-logout']/a")
-
-  # edit label UI
+  # ***** ACESSORS *****
+  # label UI
   h1(:firstHeading, :xpath => "//h1[contains(@class, 'wb-firstHeading')]")
   div(:uiToolbar, :class => "wb-ui-toolbar")
   span(:itemLabelSpan, :xpath => "//h1[contains(@class, 'wb-firstHeading')]/span/span")
   link(:editLabelLink, :css => "h1.wb-firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
   link(:editLabelLinkDisabled, :css => "h1.wb-firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(1)")
   text_field(:labelInputField, :xpath => "//h1[contains(@class, 'wb-firstHeading')]/span/span/input")
-
   link(:cancelLabelLink, :css => "h1.wb-firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(2)")
   link(:saveLabelLinkDisabled, :css => "h1.wb-firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(1)")
   link(:cancelLabelLinkDisabled, :css => "h1.wb-firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(2)")
   link(:saveLabelLink, :css => "h1.wb-firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
 
-  # edit description UI
+  # description UI
   span(:itemDescriptionSpan, :xpath => "//div[@id='mw-content-text']/div/span/span")
   link(:editDescriptionLink, :css => "div.wb-ui-descriptionedittool > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
   link(:editDescriptionLinkDisabled, :css => "div.wb-ui-descriptionedittool > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(1)")
@@ -42,14 +39,60 @@ class ItemPage < RubySelenium
   # edit-tab
   list_item(:editTab, :id => "ca-edit")
 
-  #tooltip
+  # tooltips & error tooltips
   div(:wbTooltip, :class => "tipsy-inner")
-
-  # error tooltips
   div(:wbErrorDiv, :class => "wb-tooltip-error-top-message")
   div(:wbErrorDetailsDiv, :class => "wb-tooltip-error-details")
   link(:wbErrorDetailsLink, :class => "wb-tooltip-error-details-link")
 
+  # language links UI
+  table(:sitelinksTable, :class => "wb-sitelinks")
+  link(:addSitelinkLink, :css => "table.wb-sitelinks > tfoot > tr > td > div.wb-ui-toolbar > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
+  span(:siteLinkCounter, :class => "wb-ui-propertyedittool-counter")
+  text_field(:siteIdInputField, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[1]/input")
+  text_field(:pageInputField, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[2]/input")
+  text_field(:siteIdInputFieldLoading, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[1]/input[@class='ui-autocomplete-loading']")
+  text_field(:pageInputFieldLoading, :xpath => "//div[@id='mw-content-text']/table/tbody/tr/td[2]/input[@class='ui-autocomplete-loading']")
+  span(:saveSitelinkLinkDisabled, :class => "wb-ui-toolbar-button-disabled")
+  unordered_list(:siteIdAutocompleteList, :class => "ui-autocomplete", :index => 0)
+  unordered_list(:pageAutocompleteList, :class => "ui-autocomplete", :index => 1)
+  unordered_list(:editSitelinkAutocompleteList, :class => "ui-autocomplete", :index => 0)
+  link(:saveSitelinkLink, :text => "save")
+  link(:cancelSitelinkLink, :text => "cancel")
+  link(:removeSitelinkLink, :xpath => "//td[@class='wb-ui-propertyedittool-editablevalue-toolbarparent']/div/div/div/a[2]")
+  link(:editSitelinkLink, :xpath => "//td[@class='wb-ui-propertyedittool-editablevalue-toolbarparent']/div/div/div/a")
+  link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
+  link(:germanSitelink, :xpath => "//td[@class='wb-sitelinks-link wb-sitelinks-link-de']/a")
+  link(:englishSitelink, :xpath => "//td[@class='wb-sitelinks-link wb-sitelinks-link-en']/a")
+  span(:articleTitle, :xpath => "//h1[@id='firstHeading']/span")
+
+  # aliases UI
+  div(:aliasesDiv, :class => "wb-aliases")
+  span(:aliasesTitle, :class => "wb-aliases-label")
+  unordered_list(:aliasesList, :class => "wb-aliases-container")
+  div(:addAliasesDiv, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool']/div")
+  div(:addAliasesDivInEditMode, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool wb-ui-propertyedittool-ineditmode']/div")
+  link(:addAliases, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool']/div/div/a[text()='add']")
+  span(:addAliasesDisabled, :xpath => "//div[@class='wb-aliases wb-ui-propertyedittool wb-ui-aliasesedittool']/div/div/span")
+  link(:editAliases, :xpath => "//div[contains(@class, 'wb-aliases')]/div/span[contains(@class, 'wb-ui-propertyedittool-editablevalue')]/span/div/div/div/a[text()='edit']")
+  link(:saveAliases, :xpath => "//div[contains(@class, 'wb-aliases')]/div/span[contains(@class, 'wb-ui-propertyedittool-editablevalue')]/span/div/div/div/a[text()='save']")
+  link(:cancelAliases, :xpath => "//div[contains(@class, 'wb-aliases')]/div/span[contains(@class, 'wb-ui-propertyedittool-editablevalue')]/span/div/div/div/a[text()='cancel']")
+  text_field(:aliasesInputFirst, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all wb-aliases-alias']/span/input")
+  link(:aliasesInputFirstRemove, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all wb-aliases-alias']/a[@class='tagadata-close']")
+  text_field(:aliasesInputEmpty, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-empty']/span/input")
+  text_field(:aliasesInputModified, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-modified']/span/input")
+  text_field(:aliasesInputEqual, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-equal']/span/input")
+  link(:aliasesInputRemove, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-modified']/a[@class='tagadata-close']")
+
+  # ULS
+  link(:ulsOpen, :xpath => "//li[@id='pt-uls']/a")
+  text_field(:ulsLanguageFilter, :id => "languagefilter")
+  link(:viewTabLink, :xpath => "//li[@id='ca-view']/span/a")
+  link(:recentChangesLink, :xpath => "//li[@id='n-recentchanges']/a")
+  link(:specialPageTabLink, :xpath => "//li[@id='ca-nstab-special']/span/a")
+  link(:firstResultLink, :xpath => "//span[@class='mw-title']/a")
+  # ***** METHODS *****
+  # item
   def wait_for_item_to_load
     wait_until do
       uiToolbar_element.visible?
@@ -69,6 +112,119 @@ class ItemPage < RubySelenium
     wait_until do
       editLabelLink?
     end
+  end
+
+  # sitelinks
+  def getNumberOfSitelinksFromCounter
+    wait_until do
+      siteLinkCounter?
+    end
+    scanned = siteLinkCounter.scan(/\(([^)]+)\)/)
+    integerValue = scanned[0][0].to_i()
+    return integerValue
+  end
+
+  def countAutocompleteListElements(list)
+    count = 0
+    list.each do |listItem|
+      count = count+1
+    end
+    return count
+  end
+
+  def getNthElementInAutocompleteList(list, n)
+    count = 0
+    list.each do |listItem|
+      count = count+1
+      if count == n
+        return listItem
+      end
+    end
+    return false
+  end
+
+  def getNthSitelinksTableRow(n)
+    count = 0
+    sitelinksTable_element.each do |tableRow|
+      #don't count here to skip the table header
+      #count = count+1
+      if count == n
+        return tableRow
+      end
+      #count here instead
+      count = count+1
+    end
+    return false
+  end
+
+  def countExistingSitelinks
+    count = 0
+    sitelinksTable_element.each do |tableRow|
+      count = count+1
+    end
+    return count-2
+  end
+
+  def wait_for_sitelinks_to_load
+    wait_until do
+      sitelinksTable?
+    end
+  end
+
+  def add_sitelink(lang_code, article_title)
+    addSitelinkLink
+    self.siteIdInputField= lang_code
+    self.pageInputField= article_title
+    saveSitelinkLink
+    ajax_wait
+    wait_for_api_callback
+  end
+
+  def remove_all_sitelinks
+    count = 0
+    number_of_sitelinks = getNumberOfSitelinksFromCounter
+    while count < (number_of_sitelinks)
+      removeSitelinkLink
+      ajax_wait
+      wait_for_api_callback
+      count = count + 1
+    end
+  end
+
+  # aliases
+  def wait_for_aliases_to_load
+    wait_until do
+      aliasesDiv?
+    end
+  end
+
+  def countExistingAliases
+    count = 0
+    aliasesList_element.each do |aliasElem|
+      count = count+1
+    end
+    return count
+  end
+
+  def getNthAlias n
+    count = 1
+    if aliasesList_element.exists?
+      aliasesList_element.each do |aliasElem|
+        if count == n
+          return aliasElem
+        end
+        count = count+1
+      end
+    end
+    return false
+  end
+
+  # ULS
+  def ulsSwitchLanguage(lang)
+    ulsOpen
+    self.ulsLanguageFilter= lang
+    ajax_wait
+    ulsLanguageFilter_element.send_keys :return
   end
 
 end

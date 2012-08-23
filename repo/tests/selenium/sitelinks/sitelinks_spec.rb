@@ -12,7 +12,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for empty site links UI" do
     it "should check that there are no site links and if there's an add button" do
-      visit_page(SitelinksItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
         page.wait_for_sitelinks_to_load
 
@@ -41,7 +41,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for adding site link to non existing article" do
     it "should check if adding sitelink to a non existing article produces an error" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         page.countExistingSitelinks.should == 0
@@ -74,7 +74,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for adding site link UI" do
     it "should check if adding a sitelink works" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         page.countExistingSitelinks.should == 0
@@ -121,7 +121,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check if adding multiple sitelinks works" do
       count = 1
       sitelinks = [["de", "Ber", "Deutsch (de)"], ["ja", "Ber", "日本語 (ja)"], ["he", "Ber", "עברית (he)"]]
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         sitelinks.each do |sitelink|
@@ -158,7 +158,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for displaying normalized title when adding sitelink" do
     it "should check if the normalized version of the title is displayed" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         page.addSitelinkLink
@@ -197,7 +197,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for editing site links UI" do
     it "should check if editing sitelinks works" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         page.editSitelinkLink
@@ -230,7 +230,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check clicking on sitelink" do
     it "should check if the sitelink leads to the correct page" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         page.germanSitelink
@@ -241,7 +241,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for removing multiple site link UI" do
     it "should check if removing multiple sitelink works" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         numExistingSitelinks = page.countExistingSitelinks

@@ -20,7 +20,7 @@ describe "Check undo/history/oldrevision" do
 
   context "undo test setup" do
     it "should create item, enter label, description and aliases" do
-      visit_page(AliasesItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(label, description)
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
@@ -41,7 +41,7 @@ describe "Check undo/history/oldrevision" do
       end
     end
     it "should make some changes to item" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -84,7 +84,7 @@ describe "Check undo/history/oldrevision" do
         page.oldRevision5_element.when_present.click
         sleep 1
       end
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.itemLabelSpan.should == label
         page.itemDescriptionSpan.should == description
         page.getNthAlias(3).text.should == alias_c
@@ -111,7 +111,7 @@ describe "Check undo/history/oldrevision" do
       end
     end
     it "should check the effect of the undo" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -138,7 +138,7 @@ describe "Check undo/history/oldrevision" do
       end
     end
     it "should check the effect of the undo" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -157,7 +157,7 @@ describe "Check undo/history/oldrevision" do
       end
     end
     it "should check the effect of the undo" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -165,7 +165,7 @@ describe "Check undo/history/oldrevision" do
       end
     end
     it "should add a second siteling and undo the change" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -182,7 +182,7 @@ describe "Check undo/history/oldrevision" do
       end
     end
     it "should check the effect of the undo" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -201,7 +201,7 @@ describe "Check undo/history/oldrevision" do
       end
     end
     it "should check the effect of the undo" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -219,7 +219,7 @@ describe "Check undo/history/oldrevision" do
       end
     end
     it "should check the effect of the undo" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -230,7 +230,7 @@ describe "Check undo/history/oldrevision" do
 
   context "undo test teardown" do
     it "should remove all sitelinks" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load

@@ -17,7 +17,7 @@ alias_c = generate_random_string(5)
 describe "Check functionality of item deletion" do
   context "create item, add some stuff, delete the item" do
     it "should create an item, login with admin and delete it, then check if removed properly" do
-      visit_page(AliasesItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(label, description)
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load

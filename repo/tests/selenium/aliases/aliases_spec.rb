@@ -14,7 +14,7 @@ describe "Check functionality of add/edit/remove aliases" do
   context "Basic checks of aliases elements" do
     it "should check that there are no aliases" do
       # create new item
-      visit_page(AliasesItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
@@ -31,7 +31,7 @@ describe "Check functionality of add/edit/remove aliases" do
 
   context "Check functionality of adding aliases from empty aliases" do
     it "should check that adding some aliases work properly" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
         page.addAliases
@@ -82,7 +82,7 @@ describe "Check functionality of add/edit/remove aliases" do
 
   context "Check functionality of saving an alias by pressing return" do
     it "should check that adding an alias by pressing return works properly" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         num_current_aliases = page.countExistingAliases
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
@@ -110,7 +110,7 @@ describe "Check functionality of add/edit/remove aliases" do
 
   context "Check functionality and behaviour of aliases edit mode" do
     it "should check that the edit mode of aliases behaves properly" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
 
@@ -154,7 +154,7 @@ describe "Check functionality of add/edit/remove aliases" do
 
   context "Check functionality of adding more aliases" do
     it "should check that adding further aliases works properly" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
 
@@ -175,7 +175,7 @@ describe "Check functionality of add/edit/remove aliases" do
 
   context "Check functionality of duplicate-alias-detection" do
     it "should check that duplicate aliases get detected and not beeing stored" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
 
@@ -200,7 +200,7 @@ describe "Check functionality of add/edit/remove aliases" do
 
   context "Check functionality of editing existing aliases" do
     it "should check that edit existing aliases work properly" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
 
@@ -224,7 +224,7 @@ describe "Check functionality of add/edit/remove aliases" do
 
   context "Check functionality of removing aliases" do
     it "should check that removing aliases work properly" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
 

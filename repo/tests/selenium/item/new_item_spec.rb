@@ -15,7 +15,7 @@ describe "Check functionality of create new item" do
       initial_label = generate_random_string(10)
       initial_description = generate_random_string(20)
 
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.wait_for_item_to_load
         page.labelInputField.should be_true
         page.descriptionInputField.should be_true
@@ -29,10 +29,10 @@ describe "Check functionality of create new item" do
   context "Check for correct redirect on create new item" do
     it "should check that the redirect preserves the correct uselang parameter" do
       initial_label = generate_random_string(10)
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.wait_for_item_to_load
       end
-      on_page(LanguageSelectorPage) do |page|
+      on_page(ItemPage) do |page|
         page.ulsSwitchLanguage("Deutsch")
         page.wait_for_item_to_load
         page.labelInputField= initial_label
