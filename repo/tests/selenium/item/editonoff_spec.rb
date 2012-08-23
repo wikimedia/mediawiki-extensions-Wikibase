@@ -11,7 +11,7 @@ require 'spec_helper'
 describe "Check functionality of disabling/enabling edit actions" do
   context "disabling/enabling of edit actions on createItem special page" do
     it "should check if edit actions are enabled/disabled correctly on item creation" do
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.wait_for_item_to_load
         page.labelInputField_element.enabled?.should be_true
         page.descriptionInputField_element.enabled?.should be_true
@@ -60,7 +60,7 @@ describe "Check functionality of disabling/enabling edit actions" do
 
   context "disabling/enabling of edit actions while editing label" do
     it "should check if edit actions are disbled/enabled correctly when editing label" do
-      on_page(EditOnOffPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_item_to_load
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_false # because it's empty
@@ -104,7 +104,7 @@ describe "Check functionality of disabling/enabling edit actions" do
 
   context "disabling/enabling of edit actions while editing description" do
     it "should check if edit actions are disbled/enabled correctly when editing description" do
-      on_page(EditOnOffPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_item_to_load
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_false # because it's empty
@@ -143,7 +143,7 @@ describe "Check functionality of disabling/enabling edit actions" do
 
   context "disabling/enabling of edit actions while editing sitelinks" do
     it "should check if edit actions are disbled/enabled correctly when editing sitelinks" do
-      on_page(EditOnOffPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_sitelinks_to_load
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
@@ -188,7 +188,7 @@ describe "Check functionality of disabling/enabling edit actions" do
 
   context "disabling/enabling of edit actions while editing aliases" do
     it "should check if edit actions are disbled/enabled correctly when editing aliases" do
-      on_page(EditOnOffPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
@@ -231,7 +231,7 @@ describe "Check functionality of disabling/enabling edit actions" do
 
   context "disabling/enabling of edit actions while removing sitelinks" do
     it "should check if edit actions are disbled/enabled correctly when removing sitelinks" do
-      on_page(EditOnOffPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_sitelinks_to_load
         page.removeSitelinkLink?.should be_true
         page.editLabelLink?.should be_true

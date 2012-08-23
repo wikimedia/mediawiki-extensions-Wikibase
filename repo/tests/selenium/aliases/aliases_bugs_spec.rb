@@ -13,7 +13,7 @@ describe "Check for bugs" do
   context "startup" do
     it "just some simple startup checks" do
       # create new item
-      visit_page(AliasesItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
@@ -30,7 +30,7 @@ describe "Check for bugs" do
 
   context "bug: add-button appearing when it should not" do
     it "bug: add-button appearing when it should not" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
         page.addAliases
