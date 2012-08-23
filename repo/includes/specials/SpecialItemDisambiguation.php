@@ -6,13 +6,13 @@
  *
  * @since 0.1
  *
- * @file SpecialItemByLabel.php
+ * @file SpecialItemDisambiguation.php
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SpecialItemByLabel extends SpecialItemResolver {
+class SpecialItemDisambiguation extends SpecialItemResolver {
 
 	/**
 	 * Constructor.
@@ -20,7 +20,7 @@ class SpecialItemByLabel extends SpecialItemResolver {
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'ItemByLabel' );
+		parent::__construct( 'ItemDisambiguation' );
 	}
 
 	/**
