@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//1Qw\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-23T10:10:00Z",
+      "side": 1,
+      "message": "\"/Data:Q{$itemId}?uselang\u003d{$wgLanguageCode}\"\n\nmight be nicer, you use the slightly slower doublequotes anyhow.",
+      "revId": "86bcca0fcf03b85323cb78bec434c3bf22d74d20",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
