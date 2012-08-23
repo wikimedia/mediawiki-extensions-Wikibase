@@ -12,7 +12,7 @@ describe "Check functionality of edit description" do
 
   context "Check for item description UI" do
     it "should check for edit description" do
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
 
         page.itemDescriptionSpan.should be_true
@@ -71,7 +71,7 @@ describe "Check functionality of edit description" do
 
     context "Check for normalization of description" do
       it "should check if normalization for item description is working" do
-        on_page(NewItemPage) do |page|
+        on_page(ItemPage) do |page|
           description_unnormalized = "  me haz   too many       spaces inside           "
           description_normalized = "me haz too many spaces inside"
           page.editDescriptionLink

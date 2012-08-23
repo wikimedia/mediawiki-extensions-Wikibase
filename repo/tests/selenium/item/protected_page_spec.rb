@@ -12,7 +12,7 @@ require 'spec_helper'
 describe "Check functionality of protected page" do
   context "create item, protect page" do
     it "should create an item, login with admin and protect the page, then logout the admin again" do
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
       end
       visit_page(LoginPage) do |page|
@@ -32,7 +32,7 @@ describe "Check functionality of protected page" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
       end
-      on_page(NewItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         #label
@@ -57,7 +57,7 @@ describe "Check functionality of protected page" do
       visit_page(LoginPage) do |page|
         page.logout_user
       end
-      on_page(NewItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         #label
@@ -79,7 +79,7 @@ describe "Check functionality of protected page" do
 
   context "check functionality of protected page" do
     it "check if no aliases could be added to an item" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
