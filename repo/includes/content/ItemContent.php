@@ -111,8 +111,11 @@ class ItemContent extends EntityContent {
 
 		// TODO: this can work obtaining only a single row
 		// TODO: this can be batched
+		// TODO: use store
 
-		/* @var SiteLink $siteLink */
+		/**
+		 * @var SiteLink $siteLink
+		 */
 		foreach ( $this->item->getSiteLinks() as $siteLink ) {
 			$res = $dbw->select(
 				'wb_items_per_site',
@@ -259,32 +262,21 @@ class ItemContent extends EntityContent {
 	 * @return boolean Success indicator
 	 */
 	protected function relationalSave() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$fields = array();
-
 		$success = true;
 
 		if ( $this->isNew() ) {
-			$fields['item_id'] = null; // This is needed to have at least one field.
+			$idGenerator = StoreFactory::getStore()->newIdGenerator();
 
-			$success = $dbw->insert(
-				'wb_items',
-				$fields,
-				__METHOD__
-			);
+			try {
+				$id = $idGenerator->getNewId( $this->getContentHandler()->getModelID() );
+			}
+			catch ( MWException $exception ) {
+				$success = false;
+			}
 
 			if ( $success ) {
-				$this->item->setId( $dbw->insertId() );
+				$this->getEntity()->setId( $id );
 			}
-		}
-		elseif ( !empty( $fields ) ) {
-			$success = $dbw->update(
-				'wb_items',
-				$fields,
-				array( 'item_id' => $this->item->getId() ),
-				__METHOD__
-			);
 		}
 
 		return $success;
