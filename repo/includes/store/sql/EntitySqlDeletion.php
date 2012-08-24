@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntitySQLDeletion implements EntityDeletionHandler {
+class EntitySqlDeletion implements EntityDeletionHandler {
 
 	/**
 	 * @see EntityDeletionHandler::handleDeletion
@@ -28,28 +28,17 @@ class EntitySQLDeletion implements EntityDeletionHandler {
 		// TODO: split entity/item
 		$dbw = wfGetDB( DB_MASTER );
 
-		$id = $entity->getId();
-
 		$dbw->begin( __METHOD__ );
-
-		$dbw->delete(
-			'wb_items',
-			array( 'item_id' => $id ),
-			__METHOD__
-		);
 
 		$updater = new SiteLinkTable( 'wb_items_per_site' );
 		$updater->deleteLinksOfItem( $entity );
 
 		$dbw->delete(
-			'wb_texts_per_lang',
-			array( 'tpl_item_id' => $id ),
-			__METHOD__
-		);
-
-		$dbw->delete(
-			'wb_aliases',
-			array( 'alias_item_id' => $id ),
+			'wb_terms',
+			array(
+				'term_entity_id' => $entity->getId(),
+				'term_entity_type' => $entity->getType()
+			),
 			__METHOD__
 		);
 
