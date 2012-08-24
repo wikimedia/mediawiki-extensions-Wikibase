@@ -15,6 +15,4 @@ class NonExistingItemPage < RubySelenium
   span(:firstHeading, :xpath => "//h1[@id='firstHeading']/span")
   link(:specialLogLink, :css => "div#mw-content-text > div > p > span > a:nth-child(1)")
   link(:specialCreateNewItemLink, :css => "div#mw-content-text > div > p > span > a:nth-child(2)")
-  text_field(:labelInputField, :xpath => "//h1[contains(@class, 'firstHeading')]/span/span/input")
-  text_field(:descriptionInputField, :xpath => "//div[@id='mw-content-text']/div/span/span/input")
 end

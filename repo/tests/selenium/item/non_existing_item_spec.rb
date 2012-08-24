@@ -16,6 +16,9 @@ describe "Check functionality of non existing item page" do
         page.firstHeading_element.text.should == "Data:Qxy"
         page.specialCreateNewItemLink?.should be_true
         page.specialCreateNewItemLink
+      end
+      on_page(ItemPage) do |page|
+        page.wait_for_item_to_load
         page.labelInputField.should be_true
         page.descriptionInputField.should be_true
       end

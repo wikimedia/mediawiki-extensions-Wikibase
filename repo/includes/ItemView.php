@@ -58,10 +58,22 @@ class ItemView extends \ContextSource {
 
 		$html = '';
 
+		$itemId = $item->getItem()->getId();
+		if ( $itemId === null ) {
+			$itemId = 'new';
+		}
 		$label = $item->getItem()->getLabel( $lang->getCode() );
 		$description = $item->getItem()->getDescription( $lang->getCode() );
 		$aliases = $item->getItem()->getAliases( $lang->getCode() );
 		$siteLinks = $item->getItem()->getSiteLinks();
+
+		$html .= Html::openElement(
+			'div',
+			array(
+				'id' => 'wb-item-'.$itemId,
+				'class' => 'wb-item'
+			)
+		);
 
 		/*
 		 * add an h1 for displaying the item's label; the actual firstHeading is being hidden by css
@@ -70,12 +82,27 @@ class ItemView extends \ContextSource {
 		 * semantically disconnected by having elements in between, like siteSub, contentSub and
 		 * jump-to-nav
 		 */
-		$html .= Html::openElement( 'h1', array( 'class' => 'wb-firstHeading' ) );
-		$html .= Html::element( 'span', array( 'dir' => 'auto' ), $label );
+		$html .= Html::openElement( 'h1',
+			array(
+				'id' => 'wb-firstHeading-'.$itemId,
+				'class' => 'wb-firstHeading wb-value-row'
+			)
+		);
+		$html .= Html::element(
+			'span',
+			array(
+				'dir' => 'auto',
+			),
+			$label
+		);
 		$html .= Html::closeElement( 'h1' );
 
-		// even if description is false, we want it in any case!
-		$html .= Html::openElement( 'div', array( 'class' => 'wb-property-container' ) );
+		// even if description is empty, nodes have to be inserted as placeholders for an input box
+		$html .= Html::openElement( 'div',
+			array(
+				'class' => 'wb-property-container wb-value-row'
+			)
+		);
 		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
 		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
 		$html .= Html::closeElement( 'div' );
@@ -107,6 +134,12 @@ class ItemView extends \ContextSource {
 			$html .= Html::element( 'div', array( 'class' => 'wb-sitelinks-empty' ), wfMessage( 'wikibase-sitelinks-empty' ) );
 		} else {
 			$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks', 'cellspacing' => '0' ) );
+
+			$html .= Html::openElement( 'colgroup' );
+			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-site' ) );
+			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-link' ) );
+			$html .= Html::element( 'col', array( 'class' => 'wb-ui-propertyedittool-editablevalue-toolbarparent' ) );
+			$html .= Html::closeElement( 'colgroup' );
 
 			$html .= Html::openElement( 'thead' );
 			$html .= Html::openElement( 'tr' );
@@ -166,6 +199,15 @@ class ItemView extends \ContextSource {
 			}
 			$html .= Html::closeElement( 'table' );
 		}
+
+		$html .= Html::closeElement( 'div' ); // close .wb-item
+
+		$html .= Html::element( 'div',
+			array(
+				'id' => 'wb-widget-container-'.$itemId,
+				'class' => 'wb-widget-container'
+			)
+		);
 
 		return $html;
 	}

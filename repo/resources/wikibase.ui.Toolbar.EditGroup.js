@@ -142,14 +142,13 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	},
 
 	_editActionHandler: function() {
-		this.addElement( this.tooltipAnchor, 0 ); // add tooltip before edit commands
 		this.innerGroup.removeElement( this.btnEdit );
 		if ( this.displayRemoveButton ) {
 			this.innerGroup.removeElement( this.btnRemove );
 		}
 		this.innerGroup.addElement( this.btnSave );
 		this.innerGroup.addElement( this.btnCancel );
-
+		this.addElement( this.tooltipAnchor, 1 ); // add tooltip after edit commands
 		this._editableValue.startEditing();
 	},
 	_cancelActionHandler: function() {

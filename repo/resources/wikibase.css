@@ -7,7 +7,6 @@
  *
  * @license GNU GPL v2+
  * @author H. Snater
- * @author Daniel Werner
  */
 
 * {
@@ -16,18 +15,58 @@
 	font-family: Arial, sans-serif;
 }
 
+/* since a custom heading is being used on the item page, the native h1 tag has to be hidden */
 .wb-itempage .firstHeading, .page-Special_CreateItem .firstHeading {
 	display: none;
 }
-
+/* on special item pages, the native heading is still being used and shall be shown */
 .wb-diffpage .firstHeading, .wb-oldrevpage .firstHeading {
 	display: block;
 }
 
+
+/********** BASIC LAYOUT **********/
+
+#bodyContent {
+	clear: both; /* to not overlay success message */
+}
+
+/* item container */
+.wb-item {
+	width: 100%;
+	max-width: 55em;
+	float: left; /* float left to let widget container float right next to it */
+	clear: both; /* wrap around success message */
+}
+
+/* container for the value itself */
+.wb-value, .wb-gridhelper {
+	padding-right: 12em; /* width of toolbar + white space border */
+	word-wrap: break-word; /* force word wrap for that toolbar will not overlay very long values */
+	display: block; /* need to force block explicitly to achieve 100% width */
+}
+
+/* horizontal rule below the description */
+.wb-hr {
+	float: left;
+	width: 100%;
+	height: 1px;
+	margin: 0;
+}
+
+.wb-widget-container {
+	float: left;
+}
+
+/********** /BASIC LAYOUT **********/
+
+
+/********** LABEL **********/
+
 .wb-firstHeading {
 	border-bottom: 0;
-	margin-bottom: 0 !important;
-	padding-top:1px;
+	margin-bottom: 0;
+	padding-top: 0;
 	clear: both; /* so success bar after new item created won't float heading */
 }
 
@@ -35,46 +74,47 @@
 	line-height: 100%;
 }
 
-.wb-property-container-value {
-	margin: .3em;
+/* preventing layout jittering toggling between view and edit mode */
+.wb-firstHeading .wb-value {
+	line-height: 1.2em; /* adjust line height to input box height in edit mode */
+	padding: 2px; /* even out border of input box in edit mode */
 }
 
-.wb-property-container {
-	margin-top: .3em;
-}
-
-.wb-hr {
-	margin-top:0.2em;
-}
-
-wb-clear {
-	clear:both;
-}
-
-
-.wb-ui-descriptionedittool, .wb-ui-labeledittool {
-	padding: 2pt 5pt !important;
-}
+/********** /LABEL **********/
 
 
 /********** ALIASES **********/
 
+/* aliases exclusive helper div containing editable value and its toolbar but not the
+PropertyEditTool toolbar */
+.wb-gridhelper {
+	/*float: left;*/
+	display: block !important;
+	padding-left: 10px;
+}
+
 .wb-aliases, .wb-aliases-empty {
-	font-size: 84%;
-	padding: 2pt 5pt 1pt 5pt;
+	float: left; /* necessary for highlighting in edit mode */
+	width: 100%;
 }
 
 .wb-aliases-empty {
-	float: left;
+	font-size: 84%;
+	padding-left: 10px;
 }
 
 .wb-aliases-label {
+	font-size: 84%; /* using #contentSub font-size */
 	float: left;
 	font-weight: bold;
-	vertical-align: top;
 	margin-right: 1em;
-	margin-bottom: -3px; /* IE 7 would not wrap around directly but instead leave empty space underneath the label
-							for one line in some cases */
+	margin-top: 1px; /* even out border of alias values */
+	margin-bottom: -3px; /* IE 7 would not wrap around directly but instead leave empty space
+							underneath the label for one line in some cases */
+}
+
+.wb-aliases-label, .wb-aliases ul {
+	display: table-cell; /* make aliases not wrap around the aliases label */
 }
 
 .wb-aliases div {
@@ -82,89 +122,115 @@ wb-clear {
 }
 
 .wb-aliases ul {
-	display: inline;
 	margin: 0;
 	padding: 0;
 	line-height: inherit;
 }
 
+.wb-aliases ul {
+	display: inline\9; /* IE <= 9 does not support table-cell */
+}
+
 .wb-aliases li {
+	font-size: 84%;
 	float: left;
-	margin-right: 1em;
+	margin: 0.2em 1em 0.2em 0;
 	display: inline;
 	list-style-type: none;
-	margin-top: 0 !important;
 	border: 1px solid #CCC;
 	padding: 0 12px 0 7px;
 	line-height: 136%;
-	margin-bottom: 2px;
-	background-color: #F9F9F9;
+	background-color: #F8F8F8;
 }
 
 /********** /ALIASES **********/
 
 
-/********** SITE LINKS TABLE **********/
-
-table.wb-sitelinks, .wb-sitelinks-empty {
-	/*border:1px solid #5dc9f4;*/
-	margin-top:4em;
-	clear:both;
-}
-
-table.wb-sitelinks th, table.wb-sitelinks td {
-	border-bottom: 1px solid #ccc;
-	margin: 0;
-	padding: 0 5pt;
-	height: 2.25em; /* steady height when input boxes are inserted compared with padding usage */
-
-}
-table.wb-sitelinks th {
-	/*background-color:#D6F3FF;*/
-	text-align:left;
-	font-weight:normal;
-}
-	table.wb-sitelinks th h2 {
-		border-bottom:none;
-	}
+/********** SITE LINKS **********/
 
 table.wb-sitelinks {
+	table-layout: fixed; /* constrains table proportons to first row's columns (see colgroup in HTML) */
 	width: 100%;
-	max-width: 50em;
-	display: block; /* safari and chrome */
-}
-table.wb-sitelinks td.wb-sitelinks-site {
-	width: 33%;
-}
-table.wb-sitelinks td.wb-sitelinks-link {
-	/* set no width here so sitelinks width has the highest priority and this will be
-	 * shared together with the toolbar which always has a variable width (changes after "edit")
-	 */
-	width: 66%;
-}
-.wb-sitelinks td.wb-ui-propertyedittool-editablevalue-toolbarparent {
-	/* don't use more space than necessary so the rest goes to the site links */
-	width: 0;
 }
 
-table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
-	background-color:#D6F3FF;
+table.wb-sitelinks h3 {
+	padding-left: 10px;
 }
+
+table.wb-sitelinks .wb-sitelinks-site {
+	width: 33%;
+	word-wrap: break-word;
+	padding-left: 10px;
+}
+
+table.wb-sitelinks .wb-sitelinks-link {
+	width: 66%;
+	word-wrap: break-word;
+}
+
+table.wb-sitelinks, .wb-sitelinks-empty {
+	margin-top: 4em;
+	clear: both;
+}
+
+table.wb-sitelinks th {
+	text-align: left;
+}
+
+table.wb-sitelinks td {
+	height: 2.2em;
+	border-top: 1px solid #C9C9C9;
+}
+
 table.wb-sitelinks .uneven td {
-	background:#F9F9F9;
+	background: #F0F0F0;
 }
 table.wb-sitelinks .even td {
-	background:#ececec;
-}
-table.wb-sitelinks tfoot tr:hover td {
-	background-color:transparent;
-}
-table.wb-sitelinks tfoot td {
-	border:none;
+	background: #F8F8F8;
 }
 
-/********** /SITE LINKS TABLE **********/
+/********** /SITE LINKS **********/
 
-span.wb-itemlink-id {
+
+/********** jquery.ui.autocomplete **********/
+
+.ui-widget-content {
+	border-color: #C9C9C9;
+	background: white;
+}
+
+.ui-widget-content .ui-state-hover {
+	border: none;
+	background: #4C59A6;
+	color: white;
+}
+
+.ui-menu {
+	padding: 0;
+}
+
+.ui-menu .ui-menu-item a {
+	padding: 0 0.2em;
+}
+
+.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+	margin: 0;
+}
+
+/********** /jquery.ui.autocomplete **********/
+
+
+/* used to detect scrollbar width */
+.ruler {
+	display: none;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+.wb-clear {
+	clear: both;
+}
+
+span.wb-itemlink-id { /* item id within a link to an item (especially on special pages) */
 	font-size: .85em;
 }
