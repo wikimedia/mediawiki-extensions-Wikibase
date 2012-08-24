@@ -183,7 +183,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @return array of ItemContent
 	 */
 	public function getFromLabel( $language, $label, $description = null ) {
-		$ids = $this->getIdsForLabel( $language, $label, $description );
+		$ids = StoreFactory::getStore()->newTermLookup()->getItemIdsForLabel( $language, $label, $description );
 		$items = array();
 
 		foreach ( $ids as $id ) {
@@ -195,26 +195,6 @@ abstract class EntityHandler extends \ContentHandler {
 		}
 
 		return $items;
-	}
-
-	/**
-	 * Get the ids of the items corresponding to the provided language and label pair.
-	 * A description can also be provided, in which case only the id of the item with
-	 * that description will be returned (as only element in the array).
-	 *
-	 * TODO: refactor to work for all entities
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $language
-	 * @param string $label
-	 * @param string|null $description
-	 *
-	 * @return array of integer
-	 */
-	public function getIdsForLabel( $language, $label, $description = null ) {
-		// TODO
-		return StoreFactory::getStore()->getIdsForLabel( $language, $label, $description );
 	}
 
 	/**
