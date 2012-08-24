@@ -20,9 +20,9 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.addSitelinkLink?.should be_true
         page.siteLinkCounter?.should be_true
 
-        numExistingSitelinks = page.countExistingSitelinks
+        numExistingSitelinks = page.count_existing_sitelinks
         numExistingSitelinks.should == 0
-        numExistingSitelinks.should == page.getNumberOfSitelinksFromCounter
+        numExistingSitelinks.should == page.get_number_of_sitelinks_from_counter
 
         page.addSitelinkLink
         page.siteIdInputField_element.should be_true
@@ -31,10 +31,10 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.cancelSitelinkLink?.should be_true
         page.cancelSitelinkLink
 
-        page.countExistingSitelinks.should == 0
+        page.count_existing_sitelinks.should == 0
         @browser.refresh
         page.wait_for_sitelinks_to_load
-        page.countExistingSitelinks.should == 0
+        page.count_existing_sitelinks.should == 0
       end
     end
   end
@@ -44,7 +44,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        page.countExistingSitelinks.should == 0
+        page.count_existing_sitelinks.should == 0
         page.addSitelinkLink
         page.siteIdInputField_element.should be_true
         page.pageInputField_element.enabled?.should be_false
@@ -77,7 +77,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        page.countExistingSitelinks.should == 0
+        page.count_existing_sitelinks.should == 0
         page.addSitelinkLink
         page.siteIdInputField_element.should be_true
         page.pageInputField_element.enabled?.should be_false
@@ -107,11 +107,11 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.pageInputField?.should be_true
         page.cancelSitelinkLink
 
-        numExistingSitelinks = page.countExistingSitelinks
+        numExistingSitelinks = page.count_existing_sitelinks
         numExistingSitelinks.should == 1
         @browser.refresh
         page.wait_for_sitelinks_to_load
-        numExistingSitelinks = page.countExistingSitelinks
+        numExistingSitelinks = page.count_existing_sitelinks
         numExistingSitelinks.should == 1
       end
     end
@@ -125,7 +125,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         sitelinks.each do |sitelink|
-          page.countExistingSitelinks.should == count
+          page.count_existing_sitelinks.should == count
           page.addSitelinkLink
           page.siteIdInputField = sitelink[0]
           ajax_wait
@@ -146,12 +146,9 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.wait_for_api_callback
           sleep 1
           count = count+1
-          #page.getNumberOfSitelinksFromCounter.should == count
           @browser.refresh
           page.wait_for_sitelinks_to_load
-          #page.getNumberOfSitelinksFromCounter.should == count
         end
-        #page.countExistingSitelinks.should == count
       end
     end
   end
@@ -170,7 +167,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.siteIdInputField_element.send_keys :arrow_down
 
         page.siteIdAutocompleteList_element.visible?.should be_true
-        aCListElement = page.getNthElementInAutocompleteList(page.siteIdAutocompleteList_element, 1)
+        aCListElement = page.get_nth_element_in_autocomplete_list(page.siteIdAutocompleteList_element, 1)
         aCListElement.visible?.should be_true
         aCListElement.click
 
@@ -244,7 +241,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        numExistingSitelinks = page.countExistingSitelinks
+        numExistingSitelinks = page.count_existing_sitelinks
         page.removeSitelinkLink?.should be_true
         for i in 1..numExistingSitelinks
           page.removeSitelinkLink?.should be_true
@@ -254,11 +251,11 @@ describe "Check functionality of add/edit/remove sitelinks" do
 
           @browser.refresh
           page.wait_for_sitelinks_to_load
-          page.countExistingSitelinks.should == (numExistingSitelinks-i)
+          page.count_existing_sitelinks.should == (numExistingSitelinks-i)
         end
         @browser.refresh
         page.wait_for_sitelinks_to_load
-        page.countExistingSitelinks.should == 0
+        page.count_existing_sitelinks.should == 0
       end
     end
   end

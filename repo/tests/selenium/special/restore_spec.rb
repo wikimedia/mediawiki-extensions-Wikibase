@@ -71,7 +71,7 @@ describe "Check restore" do
         page.wait_for_aliases_to_load
         page.itemLabelSpan.should == label
         page.itemDescriptionSpan.should == description
-        page.getNthAlias(1).text.should == alias_a
+        page.get_nth_alias(1).text.should == alias_a
       end
     end
   end

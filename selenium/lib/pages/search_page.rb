@@ -19,7 +19,7 @@ class SearchPage < ItemPage
   span(:firstResultSearchMatch, :class => "searchmatch")
   link(:firstResultLink, :xpath => "//div[@class='mw-search-result-heading']/a")
 
-  def countSearchResults
+  def count_search_results
     count = 0
     searchResults_element.each do |resultElem|
       count = count+1

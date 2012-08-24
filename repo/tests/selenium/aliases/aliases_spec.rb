@@ -75,7 +75,7 @@ describe "Check functionality of add/edit/remove aliases" do
         @browser.refresh
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.countExistingAliases.should == NUM_INITIAL_ALIASES
+        page.count_existing_aliases.should == NUM_INITIAL_ALIASES
       end
     end
   end
@@ -83,7 +83,7 @@ describe "Check functionality of add/edit/remove aliases" do
   context "Check functionality of saving an alias by pressing return" do
     it "should check that adding an alias by pressing return works properly" do
       on_page(ItemPage) do |page|
-        num_current_aliases = page.countExistingAliases
+        num_current_aliases = page.count_existing_aliases
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
         page.editAliases
@@ -94,7 +94,7 @@ describe "Check functionality of add/edit/remove aliases" do
         @browser.refresh
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.countExistingAliases.should == (num_current_aliases + 1)
+        page.count_existing_aliases.should == (num_current_aliases + 1)
         page.editAliases
         page.aliasesInputFirstRemove
         page.saveAliases
@@ -103,7 +103,7 @@ describe "Check functionality of add/edit/remove aliases" do
         @browser.refresh
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.countExistingAliases.should == num_current_aliases
+        page.count_existing_aliases.should == num_current_aliases
       end
     end
   end
@@ -124,7 +124,7 @@ describe "Check functionality of add/edit/remove aliases" do
 
         # check functionality of cancel
         page.cancelAliases
-        page.countExistingAliases.should == NUM_INITIAL_ALIASES
+        page.count_existing_aliases.should == NUM_INITIAL_ALIASES
         page.aliasesDiv?.should be_true
         page.aliasesTitle?.should be_true
         page.aliasesList?.should be_true
@@ -168,7 +168,7 @@ describe "Check functionality of add/edit/remove aliases" do
         @browser.refresh
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.countExistingAliases.should == (NUM_INITIAL_ALIASES + 1)
+        page.count_existing_aliases.should == (NUM_INITIAL_ALIASES + 1)
       end
     end
   end
@@ -193,7 +193,7 @@ describe "Check functionality of add/edit/remove aliases" do
         @browser.refresh
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.countExistingAliases.should == (NUM_INITIAL_ALIASES + 2)
+        page.count_existing_aliases.should == (NUM_INITIAL_ALIASES + 2)
       end
     end
   end
@@ -217,7 +217,7 @@ describe "Check functionality of add/edit/remove aliases" do
         @browser.refresh
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.countExistingAliases.should == (NUM_INITIAL_ALIASES + 2)
+        page.count_existing_aliases.should == (NUM_INITIAL_ALIASES + 2)
       end
     end
   end
@@ -231,7 +231,7 @@ describe "Check functionality of add/edit/remove aliases" do
         # checking functionality of removing aliases
         page.editAliases
         page.aliasesInputFirstRemove?.should be_true
-        num_aliases = page.countExistingAliases
+        num_aliases = page.count_existing_aliases
 
         i = 0;
         while i < (num_aliases-1) do

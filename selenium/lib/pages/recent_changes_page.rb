@@ -14,7 +14,7 @@ class RecentChangesPage < ItemPage
   span(:firstResultIdSpan, :class => "wb-itemlink-id")
   link(:firstResultLink, :xpath => "//ul[@class='special']/li/span/a")
 
-  def countSearchResults
+  def count_search_results
     count = 0
     searchResults_element.each do |resultElem|
       count = count+1

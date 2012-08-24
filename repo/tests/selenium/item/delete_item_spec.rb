@@ -32,12 +32,12 @@ describe "Check functionality of item deletion" do
       visit_page(SearchPage) do |page|
         page.searchText= label
         page.searchSubmit
-        page.countSearchResults.should == 1
+        page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
         page.firstResultSearchMatch_element.text.should == label
         page.searchText= alias_b
         page.searchSubmit
-        page.countSearchResults.should == 1
+        page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
         page.firstResultSearchMatch_element.text.should == alias_b
       end
