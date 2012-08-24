@@ -61,24 +61,27 @@ class DeleteAllData extends \Maintenance {
 
 			echo "done!\n";
 
-			// TODO: use Store::clear
+			$store = StoreFactory::getStore();
+			$stores = array_flip( $GLOBALS['wbStores'] );
 
-			$tables = array_merge( $tables, array(
-				'wb_items',
-				'wb_items_per_site',
-				'wb_texts_per_lang',
-				'wb_aliases',
-			) );
+			echo 'Deleting data from the ' . $stores[get_class( $store )] . ' store...';
+
+			$store->clear();
+
+			echo "done!\n";
 		}
 
 		if ( defined( 'WBC_VERSION' ) ) {
 			$tables = array_merge( $tables, array(
-				'wbc_local_items',
+				'wbc_item_usage',
+				'wbc_query_usage',
+				'wbc_entity_cache',
+				'wbc_items_per_site',
 			) );
 		}
 
 		foreach ( $tables as $table ) {
-			echo "Truncating table $table...";
+			echo "Emptying table $table...";
 
 			$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
 

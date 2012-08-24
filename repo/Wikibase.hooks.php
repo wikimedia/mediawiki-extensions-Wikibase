@@ -30,22 +30,12 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
-		$type = $updater->getDB()->getType();
-
-		if ( $type === 'mysql' || $type === 'sqlite' ) {
-			$updater->addExtensionTable(
-				'wb_items',
-				__DIR__ . '/sql/Wikibase.sql'
-			);
-		}
-		elseif ( $type === 'postgres' ) {
-			$updater->addExtensionTable(
-				'wb_items',
-				__DIR__ . '/sql/Wikibase.sql'
-			);
-		}
-		else {
-			// TODO
+		if ( Settings::get( 'defaultStore' ) === 'sqlstore' ) {
+			/**
+			 * @var SQLStore $store
+			 */
+			$store = StoreFactory::getStore( 'sqlstore' );
+			$store->doSchemaUpdate( $updater );
 		}
 
 		return true;
@@ -97,7 +87,12 @@ final class RepoHooks {
 			'specials/SpecialItemByLabel',
 			'specials/SpecialItemByTitle',
 
+			'store/EntityDeletionHandler',
+			'store/EntityUpdateHandler',
+			'store/IdGenerator',
+			'store/StoreFactory',
 			'store/Store',
+			'store/TermLookup',
 
 			'updates/ItemDeletionUpdate',
 			'updates/ItemStructuredSave',

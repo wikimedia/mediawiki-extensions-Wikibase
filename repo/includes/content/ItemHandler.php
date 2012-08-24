@@ -109,7 +109,7 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getIdForSiteLink( $siteId, $pageName ) {
 		$dbr = wfGetDB( DB_SLAVE );
-
+		// TODO: use store
 		$result = $dbr->selectRow(
 			'wb_items_per_site',
 			array( 'ips_item_id' ),

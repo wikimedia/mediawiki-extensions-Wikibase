@@ -137,14 +137,19 @@ $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/Specia
 // includes/store
 $wgAutoloadClasses['Wikibase\EntityDeletionHandler'] 	= $dir . 'includes/store/EntityDeletionHandler.php';
 $wgAutoloadClasses['Wikibase\EntityUpdateHandler'] 		= $dir . 'includes/store/EntityUpdateHandler.php';
+$wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
 $wgAutoloadClasses['Wikibase\Store'] 					= $dir . 'includes/store/Store.php';
 $wgAutoloadClasses['Wikibase\StoreFactory'] 			= $dir . 'includes/store/StoreFactory.php';
+$wgAutoloadClasses['Wikibase\TermLookup'] 				= $dir . 'includes/store/TermLookup.php';
 
 
 // includes/store/sql
-$wgAutoloadClasses['Wikibase\EntitySQLDeletion'] 		= $dir . 'includes/store/sql/EntitySQLDeletion.php';
-$wgAutoloadClasses['Wikibase\EntitySQLUpdate'] 			= $dir . 'includes/store/sql/EntitySQLUpdate.php';
-$wgAutoloadClasses['Wikibase\SQLStore'] 				= $dir . 'includes/store/sql/SQLStore.php';
+$wgAutoloadClasses['Wikibase\EntitySqlDeletion'] 		= $dir . 'includes/store/sql/EntitySqlDeletion.php';
+$wgAutoloadClasses['Wikibase\EntitySqlUpdate'] 			= $dir . 'includes/store/sql/EntitySqlUpdate.php';
+$wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/SqlIdGenerator.php';
+$wgAutoloadClasses['Wikibase\SqlStore'] 				= $dir . 'includes/store/sql/SqlStore.php';
+$wgAutoloadClasses['Wikibase\TermSqlLookup'] 			= $dir . 'includes/store/sql/TermSqlLookup.php';
+$wgAutoloadClasses['Wikibase\TermSqlUpdater'] 			= $dir . 'includes/store/sql/TermSqlUpdater.php';
 
 // includes/updates
 $wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/updates/ItemDeletionUpdate.php';
@@ -153,7 +158,7 @@ $wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/updates/I
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
-$wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 		= $dir . 'tests/phpunit/includes/api/ApiLangAttributeBase.php';
+$wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/ApiLangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
 $wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
 
@@ -199,6 +204,6 @@ $wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
 $wbStores = array();
-$wbStores['sqlstore'] = 'Wikibase\SQLStore';
+$wbStores['sqlstore'] = 'Wikibase\SqlStore';
 
 unset( $dir );
