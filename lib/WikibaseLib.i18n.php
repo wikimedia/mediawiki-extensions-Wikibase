@@ -116,6 +116,13 @@ $messages['it'] = array(
 	'wikibaselib-desc' => 'Contiene le funzionalità comuni per le estensioni Wikibase e Wikibase Client.',
 );
 
+/** Japanese (日本語)
+ * @author Shirayuki
+ */
+$messages['ja'] = array(
+	'wikibaselib-desc' => 'ウィキベースとウィキベースクライアント拡張機能で共通の機能を保持する',
+);
+
 /** Korean (한국어)
  * @author 아라
  */

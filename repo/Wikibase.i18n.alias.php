@@ -58,9 +58,9 @@ $specialPageAliases['ko'] = array(
 
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
-	'CreateItem' => array( 'СоздајСтавка' ),
-	'ItemByTitle' => array( 'СтавкаПоНаслов' ),
-	'ItemByLabel' => array( 'СтавкаПоНатпис' ),
+	'CreateItem' => array( 'СоздајПредмет' ),
+	'ItemByTitle' => array( 'ПредметПоНаслов' ),
+	'ItemByLabel' => array( 'ПредметПоЕтикета' ),
 );
 
 /** Dutch (Nederlands) */
