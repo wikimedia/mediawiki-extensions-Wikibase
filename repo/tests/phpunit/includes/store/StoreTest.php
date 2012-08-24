@@ -21,7 +21,7 @@ use Wikibase\Store as Store;
 class StoreTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$instances = array( new \Wikibase\SQLStore() );
+		$instances = array( new \Wikibase\SqlStore() );
 
 		return $this->arrayWrap( $instances );
 	}
