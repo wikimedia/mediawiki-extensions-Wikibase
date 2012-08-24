@@ -27,14 +27,14 @@ describe "Check functionality of client-repo connection" do
       end
     end
     it "should create a corresponding wikidata item on the repo" do
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(article_title, item_description)
         page.itemLabelSpan.should == article_title
         page.itemDescriptionSpan.should == item_description
       end
     end
     it "should create an english sitelink for the item" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         page.add_sitelink(item_sitelink_en[0], item_sitelink_en[1])
@@ -45,7 +45,7 @@ describe "Check functionality of client-repo connection" do
 
   context "client-repo adding sitelinks" do
     it "should add some sitelinks to the item" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         item_sitelinks.each do |sitelink|
@@ -91,7 +91,7 @@ describe "Check functionality of client-repo connection" do
 
   context "client-repo adding some other sitelinks" do
     it "should add some more sitelinks" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         item_sitelinks_additional.each do |sitelink|
@@ -119,7 +119,7 @@ describe "Check functionality of client-repo connection" do
 
   context "client-repo removing the sitelinks from the repo and checking that they're gone on the client" do
     it "should remove all sitelinks" do
-      on_page(SitelinksItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         page.remove_all_sitelinks

@@ -21,7 +21,7 @@ describe "Check revert/rollback" do
       visit_page(LoginPage) do |page|
         page.logout_user
       end
-      visit_page(AliasesItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(label, description)
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
@@ -38,7 +38,7 @@ describe "Check revert/rollback" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
       end
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -76,7 +76,7 @@ describe "Check revert/rollback" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -86,7 +86,7 @@ describe "Check revert/rollback" do
         page.rollbackLink_element.when_present.click
         page.returnToItemLink_element.when_present.click
       end
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
@@ -103,7 +103,7 @@ describe "Check revert/rollback" do
 
   context "rollback test teardown" do
     it "should remove all sitelinks" do
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load

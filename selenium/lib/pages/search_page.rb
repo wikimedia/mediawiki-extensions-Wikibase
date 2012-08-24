@@ -6,7 +6,7 @@
 #
 # page object for search page
 
-class SearchPage < NewItemPage
+class SearchPage < ItemPage
   include PageObject
   page_url WIKI_REPO_URL + "index.php/Special:Search"
   text_field(:searchText, :id => "searchText")

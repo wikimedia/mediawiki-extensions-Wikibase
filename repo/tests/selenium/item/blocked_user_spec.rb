@@ -15,7 +15,7 @@ describe "Check functionality of blocking a user" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
       end
       visit_page(BlockUserPage) do |page|
@@ -29,7 +29,7 @@ describe "Check functionality of blocking a user" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
-      on_page(NewItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_item_to_load
         #label
@@ -54,7 +54,7 @@ describe "Check functionality of blocking a user" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
-      on_page(AliasesItemPage) do |page|
+      on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
@@ -73,7 +73,7 @@ describe "Check functionality of blocking a user" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
-      visit_page(NewItemPage) do |page|
+      visit_page(ItemPage) do |page|
         page.wait_for_item_to_load
         page.labelInputField_element.enabled?.should be_false
         page.saveLabelLink?.should be_false
