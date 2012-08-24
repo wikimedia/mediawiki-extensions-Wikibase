@@ -128,7 +128,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * to add more values.
 	 */
 	_initToolbar: function() {
-		this._toolbar = new window.wikibase.ui.Toolbar();
+		this._toolbar = new window.wikibase.ui.Toolbar( this.UI_CLASS );
 		this._toolbar.innerGroup = new window.wikibase.ui.Toolbar.Group();
 		this._toolbar.addElement( this._toolbar.innerGroup );
 

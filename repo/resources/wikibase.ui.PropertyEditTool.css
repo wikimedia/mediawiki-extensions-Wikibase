@@ -7,54 +7,49 @@
  *
  * @license GNU GPL v2+
  * @author H. Snater
- * @author Daniel Werner
  */
 
-h1.wb-firstHeading .wb-ui-propertyedittool-editablevalue-toolbarparent {
-	font-size: 0.5em;
+
+/********** BASIC LAYOUT **********/
+
+/* basically, a row in the grid layout */
+.wb-ui-propertyedittool {
+	width: 100%;
+	max-width: 55em;
+	position: relative; /* make absolute positioned toolbar align to the right edge */
+	font-size: 100%; /* font size needs to be set since it influences max-widh property */
+	float: left; /* make row to take the dimensions of its containing blocks avoiding clipping */
 }
 
-h1.wb-firstHeading input {
-	font-family:inherit;
-	font-size:inherit;
-	height: 1.2em;
-	padding: 0;
+/* toolbar container */
+.wb-ui-propertyedittool-editablevalue-toolbarparent {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 10em; /* has to be as wide as its content */
 }
 
-.wb-property-container-value {
-	margin-left: .3em;
-	margin-right: .3em;
+.wb-ui-propertyedittool-toolbar {
+	width: 10em;
+	float: right;
 }
 
-.mw-content-rtl .ui-autocomplete-loading { /* set AJAX spinner to left of the autocomplete input box in rtl */
-	background-position:left center;
+/* set AJAX spinner to left of the autocomplete input box in rtl */
+.mw-content-rtl .ui-autocomplete-loading {
+	background-position: left center;
 }
 
-.wb-ui-propertyedittool-editablevalue-index {
-	width: 0; /* don't use extra space if we have a spacey table */
-}
-
+/* counter displaying number of a PropertyEditTool's EditableValues in th UI */
 .wb-ui-propertyedittool-counter {
 	white-space: nowrap;
 }
-	.wb-ui-propertyedittool-counter-pending {
-		margin-left: .25em;
-		color: #57a7b9;
-		font-weight: bold;
-	}
-
-.wb-sitelinks th.wb-ui-propertyedittool-counterinheading {
-	text-align: right;
+.wb-ui-propertyedittool-counter-pending {
+	margin-left: .25em;
+	color: #57a7b9;
+	font-weight: bold;
 }
 
-.wb-sitelinks .wb-ui-propertyedittool-editablevalue-waiting .wb-ui-propertyedittool-editablevalue-toolbarparent {
-	text-align: center;
-}
-
-.wb-ui-propertyedittool-counter {
-	white-space: nowrap;
-}
-
+/* wait message displayed while saving or removing and editable value */
 .wb-ui-propertyedittool-editablevalue-waitmsg {
 	margin: 0.3em;
 	font-style: italic;
@@ -66,26 +61,211 @@ h1.wb-firstHeading input {
 
 .wb-property-container-value {
 	margin-left: 0;
+	display: block; /* need to force block explicitly to achieve 100% width */
 }
+
+/* disabled input element */
+.wb-ui-propertyedittool-editablevalueinterface-disabled input {
+	background-color: #F0F0F0;
+}
+
+/***** HIGHLIGHT COLOURS *****/
 
 /* propertyedittool within table is a multi-value edit tool (site-links)
- * We might want to add a .wb-ui-multivaluepropertyedittool class later
- */
+ * We might want to add a .wb-ui-multivaluepropertyedittool class later */
 .wb-ui-propertyedittool-ineditmode,
 table.wb-ui-propertyedittool-ineditmode .wb-ui-propertyedittool-editablevalue-ineditmode td {
-	background-color:#D6F3FF;
+	background-color: #D6F3FF;
 }
 table.wb-ui-propertyedittool-ineditmode {
-	background-color:inherit!important;
+	background-color: inherit !important;
 }
-.wb-ui-propertyedittool-ineditmode.wb-error { /* while tooltip is shown on editable value */
+/* while tooltip is shown on editable value */
+.wb-ui-propertyedittool-ineditmode.wb-error {
 	background-color: #FFDFC9;
 }
-.wb-ui-propertyedittool-editablevalue-ineditmode.wb-error td {  /* while tooltip is shown on (multi-valued) editable value */
-	background-color: #FFDFC9!important;
+/* while tooltip is shown on (multi-valued) editable value */
+.wb-ui-propertyedittool-editablevalue-ineditmode.wb-error td {
+	background-color: #FFDFC9 !important;
 }
 
-	/********** TOOLTIP **********/
+/***** /HIGHLIGHT COLOURS *****/
+
+/********** /BASIC LAYOUT **********/
+
+
+/********** LABEL & DESCRIPTION **********/
+
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-toolbar,
+.wb-ui-labeledittool .wb-ui-propertyedittool-toolbar {
+	display: none;
+}
+
+/***** LABEL *****/
+/* the label edit tool styles have to be customized due to the differing font sizes of the label and
+its toolbar */
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue {
+	display: block;
+	padding-right: 12em;
+	margin: .3em .3em .13em 8px; /* h1 natively has 0.17em bottom padding to avoid clipping */
+}
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue .wb-value {
+	font-size: 188%;
+	padding-right: 0;
+}
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	/* this nodes font size will affect the toolbar padding which is specified in em; therefore, the
+	font size should be the same as on every other toolbar container node */
+	font-size: 100%;
+}
+
+/* vertical positioning */
+/* the following lines are used to vertically position the toolbar on the baseline of the heading
+(label) which has a bigger font size */
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	line-height: 188%;
+	top: .3em; /* even out margin of label container in view mode */
+}
+.wb-ui-labeledittool .wb-ui-toolbar {
+	font-size: 188%;
+	line-height: 1.2em; /* adjust to height of value */
+	padding-top: 2px; /* even out border of input box */
+}
+.wb-ui-labeledittool .wb-ui-toolbar-group {
+	font-size: 100%;
+}
+.wb-ui-labeledittool .wb-ui-toolbar-group .wb-ui-toolbar-group, /* inner group (buttons) */
+.wb-ui-labeledittool .wb-ui-toolbar-group .wb-ui-toolbar-label /* tooltip */ {
+	font-size: 53%;
+	margin-bottom: 2px; /* even out border of label container in view mode */
+}
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode {
+	margin: .3em .3em .13em .8px; /* h1 natively has 0.17em bottom padding to avoid clipping */
+	padding-left: 7px;
+}
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
+	padding: 0; /* remove padding that is inserted in view mode to even out input box border */
+}
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	top: .3em;
+	/*bottom: .3em; /* even out the border of the input box + native padding of h1 */
+}
+
+.wb-ui-labeledittool input {
+	font-family: inherit;
+	font-size: inherit;
+	height: 1.2em;
+	padding: 0;
+}
+
+/***** /LABEL *****/
+
+/***** DESCRIPTION *****/
+
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue {
+	padding-left: 10px;
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
+}
+
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
+	padding-left: 8px;
+}
+
+.wb-ui-descriptionedittool .wb-value {
+	line-height: 2em; /* force height to be able to align toolbar */
+}
+
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
+	padding: 0;
+}
+
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	top: 0.1em; /* see padding-top of editablevalue container */
+	line-height: 2em;
+}
+
+.wb-ui-descriptionedittool input {
+	padding: 0;
+	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
+}
+
+/***** /DESCRIPTION *****/
+
+/********** /LABEL AND DESCRIPTION **********/
+
+
+/********** ALIASES **********/
+/* the aliases edit tool has to be customized due to different font sizes of the aliases and its
+toolbar; furthermore, the PropertyEditTool toolbar (which is displayed only when there are no
+aliases) shall be vertically be aligned to the baseline of the first row of aliases (just like the
+EditableValue's "edit" button when aliases exist) */
+
+.wb-aliases .wb-ui-propertyedittool-toolbar {
+	/* aliases PropertyEditTool toolbar should be on the same vertical level than its label since
+	it is only displayed when there are no aliases (other PropertyEditToolbars appear below the last
+	editable value */
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 10em;
+}
+
+.wb-alias li.tagadata-choice {
+	line-height: inherit;
+	padding: 0;
+}
+
+.wb-aliases .tagadata-choice input {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	font-size: 133% !important;
+}
+
+.wb-aliases .wb-ui-toolbar, .wb-aliases .wb-ui-propertyedittool-editablevalue-waitmsg {
+	/*margin-top: 1px; /* even out border of alias values */
+}
+
+.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode {
+	white-space: normal; /* required by FF for not(!) wrapping toolbar when there is only one line of aliases */
+}
+
+.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode ul {
+	/* since the aliases ul list is cloned in JS, its stashed pendant will be visible as box on the
+	edit mode highlight colour in non-Webkit browsers without making the bg colour transparent */
+	background-color: transparent;
+}
+
+/********** /ALIASES **********/
+
+
+/********** SITE LINKS **********/
+
+table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
+	background-color: #D6F3FF; /* hihglight color when editing */
+}
+
+/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
+table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	width: 10em;
+	position: static; /* clear absolute positioning */
+	float: none; /* overwrite edit section's float: right */
+}
+
+table.wb-sitelinks .wb-ui-toolbar {
+	float: none; /* prevent white space jittering for PropertyEditTool toolbar */
+}
+
+/********** /SITE LINKS **********/
+
+
+/********** TOOLTIP **********/
 
 /* TODO find nicer way to hack Webkit browsers to display tooltip image */
 .mw-help-field-hint {
@@ -160,90 +340,10 @@ table.wb-ui-propertyedittool-ineditmode {
 /********** /TOOLTIP **********/
 
 
-/********** ALIASES **********/
+/********** TAGADATA **********/
 
-.wb-aliases {
-	float: left; /* necessary for highlighting in edit mode */
-}
-
-.wb-aliases .wb-ui-propertyedittool-editablevalue {
-	display: inline;
-}
-
-.wb-alias li.tagadata-choice {
-	line-height:inherit;
+ul.tagadata {
 	padding: 0;
 }
 
-.wb-aliases .tagadata-choice input {
-	padding-top: 0 !important;
-	padding-bottom: 0 !important;
-	font-size: 133% !important;
-}
-
-.wb-aliases .wb-ui-propertyedittool-editablevalue-toolbarparent {
-	float: left;
-}
-
-.wb-aliases .wb-ui-toolbar, .wb-aliases .wb-ui-propertyedittool-editablevalue-waitmsg {
-	font-size: 120%;
-	float: left;
-	margin-top: 0;
-}
-
-.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode {
-	white-space: normal; /* required by FF for not(!) wrapping toolbar when there is only one line of aliases */
-}
-
-.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode ul {
-	background-color: transparent;
-}
-
-/********** /ALIASES **********/
-
-/********** jquery.ui.autocomplete **********/
-
-.ui-widget-content {
-	border-color: #AAA;
-	background: white;
-}
-
-.ui-widget-content .ui-state-hover {
-	border: none;
-	background: #4C59A6;
-	color: white;
-}
-
-.ui-menu {
-	padding: 0;
-}
-
-.ui-menu .ui-menu-item a {
-	padding: 0 0.2em;
-}
-
-.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
-	margin: 0;
-}
-
-/********** /jquery.ui.autocomplete **********/
-
-
-.ruler {
-	display:none;
-	font-family:inherit;
-	font-size:inherit;
-}
-
-td .wb-ui-propertyedittool-editablevalueinterface {
-	width: 100%;
-}
-.wb-ui-propertyedittool-editablevalueinterface-disabled input {
-	background-color: #eee;
-}
-
-td.wb-ui-propertyedittool-editablevalue-toolbarparent {
-	/* for toolbars in a table make sure that all toolbars are bound on the right side so when one goes into edit mode
-	   it won't break the line */
-	text-align: right;
-}
+/********** /TAGADATA **********/

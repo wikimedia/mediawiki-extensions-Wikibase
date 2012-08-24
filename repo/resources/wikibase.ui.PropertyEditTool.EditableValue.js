@@ -153,7 +153,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		this._toolbar = toolbar;
 		var tbParent = this._getToolbarParent();
 		this._toolbar.appendTo( tbParent );
-		tbParent.addClass( this.UI_CLASS + '-toolbarparent' );
+		tbParent.addClass( this.UI_CLASS + '-toolbarparent editsection' );
 
 		var indexParent = this._getIndexParent();
 		if( indexParent ) {
@@ -188,7 +188,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	_buildInterfaces: function( subject ) {
 		var interfaces = [];
 
-		var interfaceParent = $( '<span/>' ).append( subject.contents() );
+		var interfaceParent = $( '<span class="wb-value"/>' ).append( subject.contents() );
 		subject.prepend( interfaceParent );
 		interfaces.push( new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this ) );
 
