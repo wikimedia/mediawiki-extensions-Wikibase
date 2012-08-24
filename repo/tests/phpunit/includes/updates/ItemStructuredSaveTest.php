@@ -60,8 +60,6 @@ class ItemStructuredSaveTest extends \MediaWikiTestCase {
 		$item = $itemContent->getItem();
 		$id = $item->getId();
 
-		$this->assertEquals( 1, $this->countRows( 'wb_items', array( 'item_id' => $id ) ) );
-
 		$this->assertEquals(
 			count( $item->getSiteLinks() ),
 			$this->countRows( 'wb_items_per_site', array( 'ips_item_id' => $id ) )

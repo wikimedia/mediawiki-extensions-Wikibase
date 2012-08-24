@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntitySQLDeletion implements EntityDeletionHandler {
+class EntitySqlDeletion implements EntityDeletionHandler {
 
 	/**
 	 * @see EntityDeletionHandler::handleDeletion
