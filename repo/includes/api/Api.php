@@ -18,17 +18,34 @@ use User, Status, ApiBase;
 abstract class Api extends \ApiBase {
 
 	/**
-	 * Figure out the usekeys-state
+	 * Figure out the overall usekeys-state
+	 *
+	 * @return bool true if the keys should be present
+	 */
+	public static function usekeys( $format ) {
+		static $withkeys = false;
+		if ( $withkeys === false ) {
+			// Which formats to inject keys into, undefined entries are interpreted as true
+			// TODO: This array must be patched if awailable formats that does NOT support
+			// usekeys are added, changed or removed.
+			$withkeys = array(
+				'wddx' => false,
+				'wddxfm' => false,
+				'xml' => false,
+				'xmlfm' => false,
+			);
+		}
+		return ( isset( $withkeys[$format] ) ? $withkeys[$format] : true );
+	}
+
+	/**
+	 * Figure out the instance-specific usekeys-state
 	 *
 	 * @return bool true if the keys should be present
 	 */
 	protected function getUsekeys() {
-		static $withkeys = false;
-		if ( $withkeys === false ) {
-			$withkeys = Settings::get( 'formatsWithKeys' );
-		}
 		$format = $this->getMain()->getRequest()->getVal( 'format' );
-		return ( isset( $format ) && isset( $withkeys[$format] ) ) ? $withkeys[$format] : false ;
+		return Api::usekeys( isset( $format ) ? $format : 'xml' );
 	}
 
 	/**

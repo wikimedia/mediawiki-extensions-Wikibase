@@ -393,26 +393,6 @@ final class RepoHooks {
 				'apiDebugWithRights' => false,
 				'apiDebugWithTokens' => false,
 
-				// Which formats to inject keys into
-				// undefined entries are interpreted as false
-				'formatsWithKeys' => array(
-					'json' => true,
-					'jsonfm' => true,
-					'php' => false,
-					'phpfm' => false,
-					'wddx' => false,
-					'wddxfm' => false,
-					'xml' => false,
-					'xmlfm' => false,
-					'yaml' => true,
-					'yamlfm' => true,
-					'rawfm' => true,
-					'txtfm' => true,
-					'dbg' => true,
-					'dbgfm' => true,
-					'dump' => true,
-					'dumpfm' => true,
-				),
 				// settings for the user agent
 				//TODO: This should REALLY be handled somehow as without it we could run into lots of trouble
 				'clientTimeout' => 10, // this is before final timeout, without maxlag or maxage we can't hang around

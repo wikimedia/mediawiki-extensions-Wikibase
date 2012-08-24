@@ -411,9 +411,12 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	}
 
 	function providerGetItemFormat() {
+		$formats = array( 'json', 'jsonfm', 'php', 'phpfm', 'wddx', 'wddxfm', 'xml',
+			'xmlfm', 'yaml', 'yamlfm', 'rawfm', 'txt', 'txtfm', 'dbg', 'dbgfm',
+			'dump', 'dumpfm', 'none', );
 		$calls = array();
-		foreach ( Settings::get( 'formatsWithKeys' ) as $format => $usekeys) {
-			$calls[] = array( $format, $usekeys );
+		foreach ( $formats as $format ) {
+			$calls[] = array( $format, \Wikibase\Api::usekeys( $format ) );
 		}
 		return $calls;
 	}
