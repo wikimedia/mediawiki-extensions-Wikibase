@@ -18,6 +18,7 @@ use Wikibase\Hashable as Hashable;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group WUHAAA
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -35,9 +36,11 @@ class ReferenceListTest extends HashArrayTest {
 	 * @see GenericArrayObjectTest::elementInstancesProvider
 	 */
 	public function elementInstancesProvider() {
-		return array(
-			new ReferenceObject(),
-		);
+		$instances = array();
+
+		$instances[] = new ReferenceObject();
+
+		return $this->arrayWrap( $instances );
 	}
 
 	public function constructorProvider() {

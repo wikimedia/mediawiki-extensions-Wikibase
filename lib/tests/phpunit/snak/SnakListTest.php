@@ -37,11 +37,13 @@ class SnakListTest extends HashArrayTest {
 	 * @see GenericArrayObjectTest::elementInstancesProvider
 	 */
 	public function elementInstancesProvider() {
-		return array(
+		$instances = array(
 			new InstanceOfSnak( 42 ),
 			new InstanceOfSnak( 9001 ),
 			new PropertyValueSnak( 42, new DataValueObject() ),
 		);
+
+		return $this->arrayWrap( $instances );
 	}
 
 	public function constructorProvider() {
