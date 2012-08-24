@@ -202,6 +202,8 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function testSetSiteLink( $permissions, $expectedError ) {
 		#XXX: hack: clear tables first. This may create database inconsistencies.
 		#TODO: Use $this->tables_used *everywhere*, so each test cleans up after itself.
+
+		// TODO: use store
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->delete( $dbw->tableName( 'wb_items_per_site' ), '*', __METHOD__ );
 
