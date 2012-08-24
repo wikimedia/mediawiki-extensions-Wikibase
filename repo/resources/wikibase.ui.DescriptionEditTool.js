@@ -27,12 +27,8 @@ $.extend( window.wikibase.ui.DescriptionEditTool.prototype, {
 	 * @see wikibase.ui.PropertyEditTool._init()
 	 */
 	_init: function( subject ) {
-		// call prototypes _init():
+		$( subject ).addClass( 'wb-ui-descriptionedittool' ); // add class specific to this ui element
 		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
-		// add class specific to this ui element:
-		this._subject.addClass( 'wb-ui-descriptionedittool' );
-
-		this._editableValues[0]._interfaces[0].autoExpand = true;
 	},
 
 	getEditableValuePrototype: function() {
