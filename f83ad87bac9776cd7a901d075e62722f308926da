@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//0nI\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-08-24T11:19:27Z",
+      "side": 1,
+      "message": "merge conflict!",
+      "revId": "f83ad87bac9776cd7a901d075e62722f308926da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//0nM\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-08-24T11:19:27Z",
+      "side": 1,
+      "message": "what\u0027s this merge conflict stuff?",
+      "revId": "f83ad87bac9776cd7a901d075e62722f308926da",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
