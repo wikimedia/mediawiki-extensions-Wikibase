@@ -54,7 +54,7 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 		$update->doUpdate();
 
 		$id = $itemContent->getItem()->getId();
-
+		// TODO: use store
 		$this->assertEquals( 0, $this->countRows( 'wb_items', array( 'item_id' => $id ) ) );
 		$this->assertEquals( 0, $this->countRows( 'wb_items_per_site', array( 'ips_item_id' => $id ) ) );
 		$this->assertEquals( 0, $this->countRows( 'wb_aliases', array( 'alias_item_id' => $id ) ) );

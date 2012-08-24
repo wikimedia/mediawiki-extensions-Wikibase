@@ -51,7 +51,20 @@ interface Store {
 	 */
 	public function clear();
 
-	// TODO
-	public function getIdsForLabel( $language, $label, $description = null );
+	/**
+	 * Rebuilds the store.
+	 *
+	 * @since 0.1
+	 */
+	public function rebuild();
+
+	/**
+	 * Returns a new TermLookup for this store.
+	 *
+	 * @since 0.1
+	 *
+	 * @return TermLookup
+	 */
+	public function newTermLookup();
 
 }

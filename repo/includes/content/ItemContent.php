@@ -266,6 +266,7 @@ class ItemContent extends EntityContent {
 		$success = true;
 
 		if ( $this->isNew() ) {
+			// TODO: use store
 			$fields['item_id'] = null; // This is needed to have at least one field.
 
 			$success = $dbw->insert(
