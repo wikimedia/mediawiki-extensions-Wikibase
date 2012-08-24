@@ -87,7 +87,7 @@ class EditEntityActionTest extends ActionTestCase {
 				array(),  # params
 				false,    # post
 				null,     # user
-				'/class="wb-property-container"/',     # htmlPattern: should show an item
+				'/class="[^"]*\bwb-property-container\b[^"]*"/',     # htmlPattern: should show an item
 			),
 
 			array( #1: submit, no parameters
@@ -96,7 +96,7 @@ class EditEntityActionTest extends ActionTestCase {
 				array(),  # params
 				false,    # post
 				null,     # user
-				'/class="wb-property-container"/',     # htmlPattern: should show an item
+				'/class="[^"]*\bwb-property-container\b[^"]*"/',     # htmlPattern: should show an item
 			),
 
 			// -- show undo form -----------------------------------
@@ -591,7 +591,7 @@ class EditEntityActionTest extends ActionTestCase {
 				),
 				true,    # post
 				null,     # user
-				'/class="wb-property-container"/',     # htmlPattern: should show item
+				'/class="[^"]*\bwb-property-container\b[^"]*"/',     # htmlPattern: should show item
 			),
 
 		);
