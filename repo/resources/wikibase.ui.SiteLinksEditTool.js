@@ -82,12 +82,15 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	_getToolbarParent: function() {
 		// take content (table), put it into a div and also add the toolbar into the div
 		this.__toolbarParent = this.__toolbarParent || $(
-			'<td/>', { colspan: '12' }
+			'<td/>'
 		)
-		.appendTo( $( '<tr/>' )
-			.appendTo( $( '<tfoot/>' )
-				.appendTo( this._subject )
+		.appendTo(
+			$( '<tr/>' ).append(
+				$( '<td/>', { colspan: '2' } ) // empty cell moving the "add" button to the action column
 			)
+				.appendTo( $( '<tfoot/>' )
+					.appendTo( this._subject )
+				)
 		);
 		return this.__toolbarParent;
 	},
@@ -252,8 +255,16 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
  */
 window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
 	return $(
-			'<table class="wb-sitelinks" cellspacing="0"><thead><th colspan="2"><h3>' +
-			mw.message( 'wikibase-sitelinks' ).escaped()  +
-			'</h3></th></thead><tbody></tbody></table>'
+			'<table class="wb-sitelinks" cellspacing="0">' +
+				'<colgroup>' +
+					'<col class="wb-sitelinks-site" />' +
+					'<col class="wb-sitelinks-link" />' +
+					'<col class="wb-ui-propertyedittool-editablevalue-toolbarparent" />' +
+				'</colgroup>' +
+				'<thead><th colspan="2"><h3>' +
+					mw.message( 'wikibase-sitelinks' ).escaped() +
+				'</h3></th></thead>' +
+				'<tbody></tbody>' +
+			'</table>'
 	);
 };

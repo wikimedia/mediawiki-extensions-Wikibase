@@ -17,8 +17,8 @@
  * Gives basic edit toolbar functionality, serves the "[edit]" button as well as the "[cancel|save]"
  * buttons and other related stuff.
  */
-window.wikibase.ui.Toolbar = function() {
-	this._init();
+window.wikibase.ui.Toolbar = function( uiClass ) {
+	this._init( uiClass );
 };
 window.wikibase.ui.Toolbar.prototype = {
 	/**
@@ -26,6 +26,12 @@ window.wikibase.ui.Toolbar.prototype = {
 	 * Class which marks the element within the site html.
 	 */
 	UI_CLASS: 'wb-ui-toolbar',
+
+	/**
+	 * additional css class to be assigned to the toolbar container
+	 * @var String
+	 */
+	_additionalUiClass: '',
 
 	/**
 	 * @var jQuery
@@ -54,13 +60,15 @@ window.wikibase.ui.Toolbar.prototype = {
 	 * Initializes the edit toolbar for the given element.
 	 * This should normally be called directly by the constructor.
 	 */
-	_init: function() {
+	_init: function( uiClass ) {
 		if( this._elem !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
 		}
 		this._items = [];
-		//this._parent = parent;
+		if ( typeof uiClass === 'string' ) {
+			this._additionalUiClass = uiClass + '-toolbar';
+		}
 		this.draw(); // draw first to have toolbar wrapper
 		this._initToolbar();
 	},
@@ -97,7 +105,7 @@ window.wikibase.ui.Toolbar.prototype = {
 			this._elem.remove(); // remove element after parent is known
 		}
 		this._elem = $( '<div/>', {
-			'class': this.UI_CLASS
+			'class': this.UI_CLASS + ' ' + this._additionalUiClass
 		} );
 		if( parent !== null ) { // if not known yet, appendTo() wasn't called so far
 			parent.append( this._elem );
