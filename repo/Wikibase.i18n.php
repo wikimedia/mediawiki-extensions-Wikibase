@@ -824,6 +824,13 @@ Móžoš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAM
 	'content-model-1001' => 'Datowy element z Wikibase',
 );
 
+/** Canadian English (Canadian English)
+ * @author Aude
+ */
+$messages['en-ca'] = array(
+	'wikibase-desc' => 'Structured data repository',
+);
+
 /** Spanish (español)
  * @author Armando-Martin
  * @author Jewbask
@@ -900,13 +907,13 @@ $messages['es'] = array(
 	'wikibase-itembytitle-nothing-found' => 'No se encontró ningún elemento en la búsqueda anterior. Delimita la consulta con una mejor identificación de la página externa.',
 	'wikibase-itembytitle-invalid-site' => 'La consulta anterior no pudo utilizarse para realizar una búsqueda. Debe proporcionar un identificador de sitio válido.',
 	'wikibase-itembytitle-description' => 'El sitio es un código de identificación, como "enwiki".',
-	'wikibase-itembytitle-create' => 'También puede [{{fullurl:Special:CreateItem|site=$1&page=$2}} crear un elemento].',
+	'wikibase-itembytitle-create' => 'También puede [{{fullurl:Special:CreateItem|site=$1&page=$2}} crear un elemento con "$3"].',
 	'special-itembylabel' => 'Artículo por etiqueta',
 	'wikibase-itembylabel-lookup-fieldset' => 'Buscar artículos por idioma y etiqueta',
 	'wikibase-itembylabel-lookup-language' => 'Idioma:',
 	'wikibase-itembylabel-lookup-label' => 'Etiqueta:',
 	'wikibase-itembylabel-submit' => 'Buscar',
-	'wikibase-itembylabel-create' => 'También puedes [{{fullurl:Special:CreateItem|language=$1&label=$2}} crear un elemento].',
+	'wikibase-itembylabel-create' => 'También puedes [{{fullurl:Special:CreateItem|language=$1&label=$2}} crear un elemento con "$3"].',
 	'wikibase-itembylabel-nothing-found' => 'No se ha encontrado ningún elemento en la búsqueda anterior. Por favor, afina la consulta.',
 	'wikibase-itembylabel-invalid-langcode' => 'La consulta anterior no pudo utilizarse para realizar una búsqueda. Debes proporcionar un identificador de idioma válido.',
 	'wikibase-itembylabel-description' => 'Los valores utilizados para la búsqueda deben ser una entrada de texto completo. El idioma es un identificador, como "es".',
@@ -2061,6 +2068,7 @@ $messages['it'] = array(
 	'wikibase-itembytitle-lookup-page' => 'Pagina:',
 	'wikibase-itembytitle-submit' => 'Ricerca',
 	'wikibase-itembytitle-nothing-found' => 'Non è stato trovato alcun elemento con la ricerca precedente. Si prega di restringere la ricerca con una migliore identificazione della pagina esterna.',
+	'wikibase-itembytitle-invalid-site' => 'La chiave di ricerca precedente non poteva essere utilizzata per una ricerca. Fornire un identificatore valido per il sito.',
 	'wikibase-itembytitle-description' => 'Sito è un codice identificativo, come "enwiki".',
 	'wikibase-itembytitle-create' => 'È inoltre possibile [{{fullurl:Special:CreateItem|site=$1&page=$2}} creare un elemento].',
 	'special-itembylabel' => 'Elementi per etichetta',
@@ -2070,6 +2078,7 @@ $messages['it'] = array(
 	'wikibase-itembylabel-submit' => 'Ricerca',
 	'wikibase-itembylabel-create' => 'È inoltre possibile [{{fullurl:Special:CreateItem|language=$1&label=$2}} creare un elemento].',
 	'wikibase-itembylabel-nothing-found' => 'Non è stato trovato alcun elemento con la ricerca precedente. Si prega di restringere la ricerca.',
+	'wikibase-itembylabel-invalid-langcode' => 'La chiave di ricerca precedente non poteva essere utilizzata per una ricerca. È necessario fornire un identificatore valido per il sito.',
 	'special-createitem' => 'Crea un nuovo elemento',
 	'wikibase-api-aliases-invalid-list' => 'Utilizzare uno dei seguenti parametri: "set", "add" o "remove".',
 	'wikibase-api-no-token' => 'Non è stato fornito alcun token.',
@@ -2700,7 +2709,7 @@ $messages['nl'] = array(
 	'wikibase-error-ui-session-failure' => 'Uw sessie is verlopen. Meld u opnieuw aan.',
 	'wikibase-move-error' => "U kunt pagina's in de gegevensnaamruimte niet hernoemen en u kunt er geen pagina naartoe hernoemen.",
 	'wikibase-error-relational-save-failed' => 'Het was niet mogelijk de identiteit van het item op te slaan in de database.',
-	'wikibase-error-sitelink-already-used' => 'De siteverwijzing [[$1:$2]] wordt al gebruikt door item met nummer $3.',
+	'wikibase-error-sitelink-already-used' => 'De siteverwijzing [[$1:$2]] wordt al gebruikt door het item met nummer $3.',
 	'special-itembytitle' => 'Item gesorteerd op naam',
 	'wikibase-itembytitle-lookup-fieldset' => 'Items zoeken op site en paginanaam',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
