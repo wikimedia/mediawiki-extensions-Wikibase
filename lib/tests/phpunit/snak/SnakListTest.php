@@ -20,6 +20,7 @@ use \Wikibase\Hashable as Hashable;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group WUHAAA
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -37,11 +38,13 @@ class SnakListTest extends HashArrayTest {
 	 * @see GenericArrayObjectTest::elementInstancesProvider
 	 */
 	public function elementInstancesProvider() {
-		return array(
+		$instances = array(
 			new InstanceOfSnak( 42 ),
 			new InstanceOfSnak( 9001 ),
 			new PropertyValueSnak( 42, new DataValueObject() ),
 		);
+
+		return $this->arrayWrap( $this->arrayWrap( $instances ) );
 	}
 
 	public function constructorProvider() {
@@ -122,6 +125,7 @@ class SnakListTest extends HashArrayTest {
 
 		$elements = $this->elementInstancesProvider();
 		$element = array_shift( $elements );
+		$element = $element[0][0];
 
 		if ( !$array->hasSnak( $element ) ) {
 			++$elementCount;

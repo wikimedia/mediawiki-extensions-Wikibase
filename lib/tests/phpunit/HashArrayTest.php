@@ -94,6 +94,7 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 
 		$elements = $this->elementInstancesProvider();
 		$element = array_shift( $elements );
+		$element = $element[0][0];
 
 		if ( !$array->hasElement( $element ) ) {
 			++$elementCount;
@@ -120,6 +121,7 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 
 		$elements = $this->elementInstancesProvider();
 		$element = array_shift( $elements );
+		$element = $element[0][0];
 
 		$hasElement = $array->hasElement( $element );
 		$array->addElement( $element );
