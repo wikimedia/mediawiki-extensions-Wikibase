@@ -2159,8 +2159,10 @@ $messages['ja'] = array(
 	'wikibase-sitelinks-add' => 'site-link へのリンクを追加',
 	'wikibase-remove' => '除去',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-blockeduser-tooltip-message' => 'あなたは編集ブロックされています。',
 	'wikibase-tooltip-error-details' => '詳細',
-	'wikibase-error-autocomplete-response' => 'サーバーの応答：$1',
+	'wikibase-error-autocomplete-response' => 'サーバーの応答: $1',
+	'wikibase-error-ui-cant-edit' => 'この操作を行うことは許可されていません。',
 	'wikibase-itembytitle-lookup-site' => 'サイト:',
 	'wikibase-itembytitle-lookup-page' => 'ページ:',
 	'wikibase-itembytitle-submit' => '検索',
@@ -2170,9 +2172,11 @@ $messages['ja'] = array(
 	'wikibase-itembylabel-submit' => '検索',
 	'wikibase-itembylabel-create' => '[{{fullurl:Special:CreateItem|language=$1&label=$2}} 「$3」という項目を作成]することもできます。',
 	'special-createitem' => '新しい項目を作成',
+	'wikibase-api-remove-sitelink-failed' => 'サイトリンクを除去できませんでした。',
 	'wikibase-restoreold' => '復元',
 	'wikibase-noitem-nopermission' => 'この項目は存在しません。
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 関連する記録を検索]</span>できます。',
+	'wikibase-item-summary-wbsetitem' => '新しい項目を作成しました',
 	'content-model-1001' => 'ウィキベース項目',
 );
 
