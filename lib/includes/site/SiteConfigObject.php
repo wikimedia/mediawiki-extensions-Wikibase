@@ -1,11 +1,9 @@
 <?php
 
-namespace Wikibase;
-
 /**
  * Object for holing configuration for a single Site.
  *
- * @since 0.1
+ * @since 1.20
  *
  * @file
  * @ingroup Wikibase
@@ -24,7 +22,7 @@ class SiteConfigObject implements SiteConfig {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $localId
 	 * @param boolean $linkInline
@@ -44,7 +42,7 @@ class SiteConfigObject implements SiteConfig {
 	/**
 	 * @see SiteConfig::getLocalId()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return string
 	 */
@@ -55,7 +53,7 @@ class SiteConfigObject implements SiteConfig {
 	/**
 	 * @see SiteConfig::getLinkInline()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return boolean
 	 */
@@ -66,7 +64,7 @@ class SiteConfigObject implements SiteConfig {
 	/**
 	 * @see SiteConfig::getLinkNavigation()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return boolean
 	 */
@@ -77,7 +75,7 @@ class SiteConfigObject implements SiteConfig {
 	/**
 	 * @see SiteConfig::getForward()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return boolean
 	 */
@@ -88,7 +86,7 @@ class SiteConfigObject implements SiteConfig {
 	/**
 	 * @see SiteConfig::getExtraInfo()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return array
 	 */

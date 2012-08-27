@@ -6,7 +6,7 @@ use MWException;
 /**
  * Class representing a MediaWiki site.
  *
- * @since 0.1
+ * @since 1.20
  *
  * @file
  * @ingroup Wikibase
@@ -30,7 +30,7 @@ class MediaWikiSite extends SiteRow {
 	 *
 	 * @see Site::normalizePageName()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $pageName
 	 *
@@ -95,7 +95,7 @@ class MediaWikiSite extends SiteRow {
 	/**
 	 * Get normalization record for a given page title from an API response.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param array $externalData A reply from the API on a external server.
 	 * @param string $pageTitle Identifies the page at the external site, needing normalization.
@@ -166,5 +166,35 @@ class MediaWikiSite extends SiteRow {
 		return false;
 	}
 
+	/**
+	 * Returns the full file path (ie site url + relative file path).
+	 * The path should go at the $1 marker. If the $path
+	 * argument is provided, the marker will be replaced by it's value.
+	 *
+	 * @since 1.20
+	 *
+	 * @param string|false $path
+	 *
+	 * @return string
+	 */
+	//public function getFilePath( $path = false );
+
+	/**
+	 * Returns the relative page path.
+	 *
+	 * @since 1.20
+	 *
+	 * @return string
+	 */
+	//public function getRelativePagePath();
+
+	/**
+	 * Returns the relative file path.
+	 *
+	 * @since 1.20
+	 *
+	 * @return string
+	 */
+	//public function getRelativeFilePath();
 
 }

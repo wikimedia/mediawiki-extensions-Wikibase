@@ -1,12 +1,10 @@
 <?php
 
-namespace Wikibase;
-
 /**
  * Class representing a single site that can be linked to.
  * TODO: investigate if we should not use wfUrlencode instead of rawurlencode.
  *
- * @since 0.1
+ * @since 1.20
  *
  * @file
  * @ingroup Wikibase
@@ -20,7 +18,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getConfig()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return SiteConfig
 	 */
@@ -36,7 +34,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getGlobalId()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return integer
 	 */
@@ -47,7 +45,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getType()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return integer
 	 */
@@ -59,7 +57,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getGroup()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return integer
 	 */
@@ -70,7 +68,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getUrl()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return string|bool
 	 */
@@ -81,7 +79,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getPagePath()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string|false $pageName
 	 *
@@ -103,7 +101,7 @@ class SiteRow extends \ORMRow implements Site {
 	 *
 	 * @see Site::normalizePageName()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $pageName
 	 *
@@ -116,7 +114,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getFilePath()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string|false $path
 	 *
@@ -135,7 +133,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getRelativePagePath()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return string
 	 */
@@ -146,7 +144,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getRelativeFilePath()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return string
 	 */
@@ -160,7 +158,7 @@ class SiteRow extends \ORMRow implements Site {
 	 * Can be used by code that still needs the old Interwiki class,
 	 * but this should be updated, as this method will eventually be removed.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 * @deprecated since 0.1
 	 *
 	 * @return \Interwiki
@@ -179,7 +177,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getExtraData()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return array
 	 */
@@ -190,7 +188,7 @@ class SiteRow extends \ORMRow implements Site {
 	/**
 	 * @see Site::getLanguage()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return string|bool
 	 */

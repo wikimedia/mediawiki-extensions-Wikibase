@@ -1,11 +1,9 @@
 <?php
 
-namespace Wikibase;
-
 /**
  * Interface for site configuration objects.
  *
- * @since 0.1
+ * @since 1.20
  *
  * @file
  * @ingroup Wikibase
@@ -18,7 +16,7 @@ interface SiteConfig {
 	/**
 	 * Returns the local identifier (ie "en") of the site.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return string
 	 */
@@ -27,7 +25,7 @@ interface SiteConfig {
 	/**
 	 * Returns if inline links to this site should be allowed.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return boolean
 	 */
@@ -36,7 +34,7 @@ interface SiteConfig {
 	/**
 	 * returns if the sit should show up in intersite navigation interfaces.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return boolean
 	 */
@@ -46,7 +44,7 @@ interface SiteConfig {
 	 * Returns if site.tld/path/key:pageTitle should forward users to  the page on
 	 * the actual site, where "key" os either the local or global identifier.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return boolean
 	 */
@@ -59,7 +57,7 @@ interface SiteConfig {
 	 * are site type specific, ie "allow template transclusion"
 	 * for MediaWiki sites.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return array
 	 */

@@ -1,12 +1,10 @@
 <?php
 
-namespace Wikibase;
-
 /**
  * Represents the sites database table.
  * All access to this table should be done through this class.
  *
- * @since 0.1
+ * @since 1.20
  *
  * @file
  * @ingroup Wikibase
@@ -19,7 +17,7 @@ class SitesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getName()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return string
 	 */
 	public function getName() {
@@ -28,7 +26,7 @@ class SitesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getFieldPrefix()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return string
 	 */
 	public function getFieldPrefix() {
@@ -37,7 +35,7 @@ class SitesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getRowClass()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return string
 	 */
 	public function getRowClass() {
@@ -46,7 +44,7 @@ class SitesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getFields()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return array
 	 */
 	public function getFields() {
@@ -74,7 +72,7 @@ class SitesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getDefaults()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return array
 	 */
 	public function getDefaults() {
@@ -93,7 +91,7 @@ class SitesTable extends \ORMTable {
 	/**
 	 * Returns the class name for the provided site type.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param integer $siteType
 	 *
@@ -107,7 +105,7 @@ class SitesTable extends \ORMTable {
 	/**
 	 * Factory method to construct a new Wikibase\Change instance.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param array $data
 	 * @param boolean $loadDefaults

@@ -1,6 +1,5 @@
 <?php
 
-namespace Wikibase;
 use MWException;
 
 /**
@@ -9,7 +8,7 @@ use MWException;
  * TODO: ensure append works
  * TODO: ensure unset works
  *
- * @since 0.1
+ * @since 1.20
  *
  * @file
  * @ingroup Wikibase
@@ -18,78 +17,38 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteList extends \ArrayObject /* implements ORMIterator */ {
+class SiteList extends GenericArrayObject {
 
 	/**
-	 * Holds the group names (keys) pointing to an arrays
-	 * consisting of offset value pointing to their sites global identifier.
-	 * @since 0.1
-	 * @var array
+	 * @see GenericArrayObject::getObjectType
+	 *
+	 * @since 1.20
+	 *
+	 * @return string
 	 */
-	protected $groups = array();
-
+	public function getObjectType() {
+		
+	}
+	
 	/**
 	 * Local site identifiers pointing to their sites offset value.
-	 * @since 0.1
+	 * @since 1.20
 	 * @var array
 	 */
 	protected $byLocalId = array();
 
 	/**
 	 * Global site identifiers pointing to their sites offset value.
-	 * @since 0.1
+	 * @since 1.20
 	 * @var array
 	 */
 	protected $byGlobalId = array();
 
-	/**
-	 * @see SiteList::getNewOffset()
-	 * @since 0.1
-	 * @var integer
-	 */
-	protected $indexOffset = 0;
-
-	/**
-	 * Finds a new offset for when appending an element.
-	 * TODO: the base class does this, so it would be better to integrate,
-	 * but there does not appear to be any way to do this...
-	 *
-	 * @since 0.1
-	 *
-	 * @return integer
-	 */
-	protected function getNewOffset() {
-		while ( true ) {
-			if ( !$this->offsetExists( $this->indexOffset ) ) {
-				return $this->indexOffset;
-			}
-
-			$this->indexOffset++;
-		}
-	}
-
-	/**
-	 * Constructor.
-	 * @see ArrayObject::__construct
-	 *
-	 * @since 0.1
-	 *
-	 * @param null $input
-	 * @param int $flags
-	 * @param string $iterator_class
-	 */
-	public function __construct( $input = null, $flags = 0, $iterator_class = 'ArrayIterator' ) {
-		parent::__construct( array(), $flags, $iterator_class );
-
-		if ( !is_null( $input ) ) {
-			array_walk( $input, array( $this, 'append' ) );
-		}
-	}
 
 	/**
 	 * @see ArrayObject::append
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param mixed $value
 	 */
@@ -100,7 +59,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	/**
 	 * @see ArrayObject::offsetSet()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param mixed $index
 	 * @param Site $site
@@ -123,7 +82,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 * Sets the provided site.
 	 * Equivalent behaviour to parent::offsetSet, plus additional indexing.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param $index
 	 * @param Site $site
@@ -150,7 +109,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	/**
 	 * @see ArrayObject::offsetUnset()
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param mixed $index
 	 */
@@ -170,7 +129,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 * Returns all the global site identifiers.
 	 * Optionally only those belonging to the specified group.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string|null $groupName
 	 *
@@ -188,7 +147,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	/**
 	 * Returns the local identifiers.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return array
 	 */
@@ -200,7 +159,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 * Returns the names of the groups represented in this
 	 * list of sites.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return array
 	 */
@@ -213,7 +172,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 * Removes the groups without any associated sites
 	 * from the groups field.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 */
 	protected function cleanDeadGroups() {
 		$this->groups = array_filter(
@@ -227,7 +186,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	/**
 	 * Returns a Sites containing only the sites of the specified group.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $groupName
 	 *
@@ -263,7 +222,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 * Returns the Site with the provided local site id.
 	 * The site needs to exist, so if not sure, call hasLocalId first.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $localSiteId
 	 *
@@ -288,7 +247,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 * Returns the Site with the provided global site id.
 	 * The site needs to exist, so if not sure, call hasGlobalId first.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $globalSiteId
 	 *
@@ -301,7 +260,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	/**
 	 * Returns if the site list contains no sites.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return boolean
 	 */
@@ -313,7 +272,7 @@ class SiteList extends \ArrayObject /* implements ORMIterator */ {
 	 * Removes the site with the specified global id.
 	 * The site needs to exist, so if not sure, call hasGlobalId first.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $globalSiteId
 	 */
