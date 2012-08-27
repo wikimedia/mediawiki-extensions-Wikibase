@@ -97,6 +97,8 @@ final class RepoHooks {
 			'specials/SpecialItemByLabel',
 			'specials/SpecialItemByTitle',
 
+			'store/Store',
+
 			'updates/ItemDeletionUpdate',
 			'updates/ItemStructuredSave',
 		);
@@ -400,6 +402,8 @@ final class RepoHooks {
 				'clientPageOpts' => array(
 					'userAgent' => 'Wikibase',
 				),
+
+				'defaultStore' => 'sqlstore',
 			)
 		);
 
