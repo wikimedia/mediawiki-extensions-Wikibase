@@ -487,6 +487,73 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Handles a rebuild request by rebuilding all secondary storage of the repository.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/WikibaseRebuildData
+	 *
+	 * @since 0.1
+	 *
+	 * @param callable $reportMessage
+	 *
+	 * @return boolean
+	 */
+	public static function onWikibaseRebuildData( $reportMessage ) {
+		$store = StoreFactory::getStore();
+		$stores = array_flip( $GLOBALS['wbStores'] );
+
+		$reportMessage( 'Starting rebuild of the Wikibase repository ' . $stores[get_class( $store )] . ' store...' );
+
+		$store->rebuild();
+
+		$reportMessage( "done!\n" );
+
+		return true;
+	}
+
+	/**
+	 * Deletes all the data stored on the repository.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/WikibaseDeleteData
+	 *
+	 * @since 0.1
+	 *
+	 * @param callable $reportMessage
+	 *
+	 * @return boolean
+	 */
+	public static function onWikibaseDeleteData( $reportMessage ) {
+		$reportMessage( 'Deleting revisions from Data NS...' );
+
+		$dbw = wfGetDB( DB_MASTER );
+
+		$dbw->deleteJoin(
+			'revision', 'page',
+			'rev_page', 'page_id',
+			array( 'page_namespace' => WB_NS_DATA )
+		);
+
+		$reportMessage( "done!\n" );
+
+		$reportMessage( 'Deleting pages from Data NS...' );
+
+		$dbw->delete(
+			'page',
+			array( 'page_namespace' => WB_NS_DATA )
+		);
+
+		$reportMessage( "done!\n" );
+
+		$store = StoreFactory::getStore();
+		$stores = array_flip( $GLOBALS['wbStores'] );
+
+		$reportMessage( 'Deleting data from the ' . $stores[get_class( $store )] . ' store...' );
+
+		$store->clear();
+
+		$reportMessage( "done!\n" );
+
+		return true;
+	}
+
+	/**
 	 * Used to append a css class to the body, so the page can be identified as Wikibase item page.
 	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/OutputPageBodyAttributes
 	 *
