@@ -159,6 +159,22 @@ class ItemPage < RubySelenium
     end
   end
 
+  def change_label(label)
+    editLabelLink
+    self.labelInputField= label
+    saveLabelLink
+    ajax_wait
+    wait_for_api_callback
+  end
+
+  def change_description(description)
+    editDescriptionLink
+    self.descriptionInputField= description
+    saveDescriptionLink
+    ajax_wait
+    wait_for_api_callback
+  end
+
   # sitelinks
   def getNumberOfSitelinksFromCounter
     wait_until do
@@ -216,13 +232,15 @@ class ItemPage < RubySelenium
     end
   end
 
-  def add_sitelink(lang_code, article_title)
-    addSitelinkLink
-    self.siteIdInputField= lang_code
-    self.pageInputField= article_title
-    saveSitelinkLink
-    ajax_wait
-    wait_for_api_callback
+  def add_sitelinks(sitelinks)
+    sitelinks.each do |sitelink|
+      addSitelinkLink
+      self.siteIdInputField= sitelink[0]
+      self.pageInputField= sitelink[1]
+      saveSitelinkLink
+      ajax_wait
+      wait_for_api_callback
+    end
   end
 
   def remove_all_sitelinks
@@ -262,6 +280,16 @@ class ItemPage < RubySelenium
       end
     end
     return false
+  end
+
+  def add_aliases(aliases)
+    addAliases
+    aliases.each do |ali|
+      self.aliasesInputEmpty= ali
+    end
+    saveAliases
+    ajax_wait
+    wait_for_api_callback
   end
 
   # ULS

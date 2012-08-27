@@ -11,7 +11,7 @@ require 'spec_helper'
 article_title = "Rome"
 article_text = "It's the capital of Italy!"
 item_description = "It's the capital of Italy!"
-item_sitelink_en = ["en", "Rome"]
+item_sitelink_en = [["en", "Rome"]]
 item_sitelinks = [["de", "Rom"], ["it", "Roma"], ["fi", "Rooma"], ["hu", "Róma"]]
 item_sitelinks_additional = [["fr", "Rome"]]
 
@@ -37,7 +37,7 @@ describe "Check functionality of client-repo connection" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        page.add_sitelink(item_sitelink_en[0], item_sitelink_en[1])
+        page.add_sitelinks(item_sitelink_en)
         page.getNumberOfSitelinksFromCounter.should == 1
       end
     end
@@ -48,9 +48,7 @@ describe "Check functionality of client-repo connection" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        item_sitelinks.each do |sitelink|
-          page.add_sitelink(sitelink[0], sitelink[1])
-        end
+        page.add_sitelinks(item_sitelinks)
         page.getNumberOfSitelinksFromCounter.should == item_sitelinks.count + 1
       end
     end
@@ -94,9 +92,7 @@ describe "Check functionality of client-repo connection" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
-        item_sitelinks_additional.each do |sitelink|
-          page.add_sitelink(sitelink[0], sitelink[1])
-        end
+        page.add_sitelinks(item_sitelinks_additional)
         page.getNumberOfSitelinksFromCounter.should == item_sitelinks.count + 1 + item_sitelinks_additional.count
       end
     end

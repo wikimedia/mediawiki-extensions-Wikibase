@@ -32,16 +32,8 @@ describe "Check restore" do
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
-        page.editLabelLink
-        page.labelInputField= label + changed
-        page.saveLabelLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.editDescriptionLink
-        page.descriptionInputField= description + changed
-        page.saveDescriptionLink
-        ajax_wait
-        page.wait_for_api_callback
+        page.change_label(label + changed)
+        page.change_description(description + changed)
         page.editAliases
         page.aliasesInputFirst_element.clear
         page.aliasesInputEmpty= alias_a + changed
