@@ -79,7 +79,13 @@ describe "Check functionality of blocking a user" do
         page.saveLabelLink?.should be_false
         page.saveLabelLinkDisabled?.should be_true
         page.saveLabelLinkDisabled_element.click
+        page.wait_until do
+          page.wbTooltip?
+        end
         page.wbTooltip?.should be_true
+      end
+      visit_page(ItemPage) do |page|
+        page.wait_for_item_to_load
         page.descriptionInputField_element.enabled?.should be_false
         page.saveDescriptionLink?.should be_false
         page.saveDescriptionLinkDisabled?.should be_true
