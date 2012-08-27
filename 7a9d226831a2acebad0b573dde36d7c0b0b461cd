@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//zQ4\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2012-08-27T17:39:36Z",
+      "side": 1,
+      "message": "Is the removal of \"with \"$3\" \" correct? This part was added a few days ago...",
+      "revId": "7a9d226831a2acebad0b573dde36d7c0b0b461cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//zQ8\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 121
+      },
+      "writtenOn": "2012-08-27T17:39:36Z",
+      "side": 1,
+      "message": "Is the removal of \"with \"$3\" \" correct? This part was added a few days ago...",
+      "revId": "7a9d226831a2acebad0b573dde36d7c0b0b461cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
