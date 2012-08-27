@@ -25,13 +25,8 @@ describe "Check revert/rollback" do
         page.create_new_item(label, description)
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.addAliases
-        page.aliasesInputEmpty= alias_a
-        page.saveAliases
-        ajax_wait
-        page.wait_for_api_callback
-        page.add_sitelink(sitelinks[0][0], sitelinks[0][1])
-        page.add_sitelink(sitelinks[1][0], sitelinks[1][1])
+        page.add_aliases([alias_a])
+        page.add_sitelinks(sitelinks)
       end
     end
     it "should make some changes to item" do
@@ -42,16 +37,8 @@ describe "Check revert/rollback" do
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
-        page.editLabelLink
-        page.labelInputField= label + changed
-        page.saveLabelLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.editDescriptionLink
-        page.descriptionInputField= description + changed
-        page.saveDescriptionLink
-        ajax_wait
-        page.wait_for_api_callback
+        page.change_label(label + changed)
+        page.change_description(description + changed)
         page.editAliases
         page.aliasesInputFirst_element.clear
         page.aliasesInputEmpty= alias_a + changed

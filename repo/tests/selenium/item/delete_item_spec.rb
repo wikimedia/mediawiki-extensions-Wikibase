@@ -21,13 +21,7 @@ describe "Check functionality of item deletion" do
         page.create_new_item(label, description)
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.addAliases
-        page.aliasesInputEmpty= alias_a
-        page.aliasesInputEmpty= alias_b
-        page.aliasesInputEmpty= alias_c
-        page.saveAliases
-        ajax_wait
-        page.wait_for_api_callback
+        page.add_aliases([alias_a, alias_b, alias_c])
       end
       visit_page(SearchPage) do |page|
         page.searchText= label

@@ -24,14 +24,8 @@ describe "Check undo/history/oldrevision" do
         page.create_new_item(label, description)
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-        page.addAliases
-        page.aliasesInputEmpty= alias_a
-        page.aliasesInputEmpty= alias_b
-        page.aliasesInputEmpty= alias_c
-        page.saveAliases
-        ajax_wait
-        page.wait_for_api_callback
-        page.add_sitelink(sitelinks[0][0], sitelinks[0][1])
+        page.add_aliases([alias_a, alias_b, alias_c])
+        page.add_sitelinks([sitelinks[0]])
       end
     end
     it "should check revision count on history page" do
@@ -45,16 +39,8 @@ describe "Check undo/history/oldrevision" do
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
-        page.editLabelLink
-        page.labelInputField= label + changed
-        page.saveLabelLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.editDescriptionLink
-        page.descriptionInputField= description + changed
-        page.saveDescriptionLink
-        ajax_wait
-        page.wait_for_api_callback
+        page.change_label(label + changed)
+        page.change_description(description + changed)
         page.editAliases
         page.aliasesInputFirst_element.clear
         page.aliasesInputEmpty= alias_a + changed
@@ -169,7 +155,7 @@ describe "Check undo/history/oldrevision" do
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
-        page.add_sitelink(sitelinks[1][0], sitelinks[1][1])
+        page.add_sitelinks([sitelinks[1]])
       end
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
