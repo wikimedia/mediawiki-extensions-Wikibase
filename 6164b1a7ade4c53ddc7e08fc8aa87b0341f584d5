@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//ze8\u003d",
+        "filename": "repo/tests/selenium/client/client_repo_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-08-27T14:29:58Z",
+      "side": 1,
+      "message": "sure. but properties etc. will be tested seperately in another class. a seperate page-object will be added as soon as we have an UI for them.",
+      "parentUuid": "AAAARX//zoQ\u003d",
+      "revId": "6164b1a7ade4c53ddc7e08fc8aa87b0341f584d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//zoU\u003d",
         "filename": "repo/tests/selenium/client/client_repo_spec.rb",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-27T11:21:46Z",
       "side": 1,
       "message": "why don\u0027t you have a single item_sitelinks field?",
+      "revId": "6164b1a7ade4c53ddc7e08fc8aa87b0341f584d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//zfQ\u003d",
+        "filename": "repo/tests/selenium/client/client_repo_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-08-27T14:29:58Z",
+      "side": 1,
+      "message": "\u0027cause I need different sitelinks in different states of the test.",
+      "parentUuid": "AAAARX//zoU\u003d",
       "revId": "6164b1a7ade4c53ddc7e08fc8aa87b0341f584d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
