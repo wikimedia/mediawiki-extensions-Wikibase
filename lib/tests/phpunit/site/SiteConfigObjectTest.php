@@ -1,8 +1,5 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\SiteConfigObject as SiteConfigObject;
-
 /**
  * Tests for the Wikibase\SiteConfigObject class.
  *

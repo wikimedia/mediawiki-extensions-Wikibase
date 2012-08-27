@@ -1,9 +1,5 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\Site as Site;
-use ORMRowTest;
-
 /**
  * Tests for the Wikibase\SiteRow class.
  *

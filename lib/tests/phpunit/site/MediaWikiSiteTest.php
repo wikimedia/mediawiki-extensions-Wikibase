@@ -1,8 +1,5 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\Sites as Sites;
-
 /**
  * Tests for the Wikibase\MediaWikiSite class.
  *

@@ -1,9 +1,5 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\Sites as Sites;
-use Wikibase\SiteList as SiteList;
-
 /**
  * Tests for the Wikibase\SiteList class.
  *
