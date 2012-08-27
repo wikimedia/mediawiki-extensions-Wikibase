@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//zoQ\u003d",
+        "filename": "repo/tests/selenium/client/client_repo_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-27T11:21:46Z",
+      "side": 1,
+      "message": "Beware that item is only one of the entities we have - we will also need tests for properties and queries, which also have descriptions, labels and aliases. You probably want to abstract the entity stuff out to avoid more hassle later.",
+      "revId": "6164b1a7ade4c53ddc7e08fc8aa87b0341f584d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//zoU\u003d",
+        "filename": "repo/tests/selenium/client/client_repo_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-27T11:21:46Z",
+      "side": 1,
+      "message": "why don\u0027t you have a single item_sitelinks field?",
+      "revId": "6164b1a7ade4c53ddc7e08fc8aa87b0341f584d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
