@@ -15,6 +15,10 @@ namespace Wikibase;
  * which returns a hash based on the contents of the list, regardless
  * of order and keys.
  *
+ * Also note that if the Hashable elements are mutable, any modifications
+ * made to them via their mutator methods will not cause an update of
+ * their associated hash in this array.
+ *
  * @since 0.1
  *
  * @file
