@@ -1,26 +1,21 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\Sites as Sites;
-
 /**
- * Tests for the Wikibase\MediaWikiSite class.
+ * Tests for the MediaWikiSite class.
  *
  * @file
- * @since 0.1
+ * @since 1.20
  *
- * @ingroup Wikibase
+ * @ingroup Site
  * @ingroup Test
  *
- * @group Wikibase
- * @group WikibaseLib
- * @group Sites
+ * @group Site
  * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MediaWikiSiteTest extends \MediaWikiTestCase {
+class MediaWikiSiteTest extends MediaWikiTestCase {
 
 	public function setUp() {
 		parent::setUp();
@@ -34,8 +29,8 @@ class MediaWikiSiteTest extends \MediaWikiTestCase {
 	}
 
 	public function testFactoryConstruction() {
-		$this->assertInstanceOf( 'Wikibase\MediaWikiSite', Sites::newSite( array( 'type' => SITE_TYPE_MEDIAWIKI ) ) );
-		$this->assertInstanceOf( 'Wikibase\Site', Sites::newSite( array( 'type' => SITE_TYPE_MEDIAWIKI ) ) );
+		$this->assertInstanceOf( 'MediaWikiSite', Sites::newSite( array( 'type' => SITE_TYPE_MEDIAWIKI ) ) );
+		$this->assertInstanceOf( 'Site', Sites::newSite( array( 'type' => SITE_TYPE_MEDIAWIKI ) ) );
 	}
 
 	public function testNormalizePageTitle() {

@@ -1,21 +1,15 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\Site as Site;
-use ORMRowTest;
-
 /**
- * Tests for the Wikibase\SiteRow class.
+ * Tests for the SiteObject class.
  *
  * @file
- * @since 0.1
+ * @since 1.20
  *
- * @ingroup Wikibase
+ * @ingroup Site
  * @ingroup Test
  *
- * @group Wikibase
- * @group WikibaseLib
- * @group Sites
+ * @group Site
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -23,26 +17,26 @@ use ORMRowTest;
 class SiteRowTest extends ORMRowTest {
 
 	/**
-	 * @see ORMRowTest::getRowClass()
-	 * @since 0.1
+	 * @see ORMRowTest::getRowClass
+	 * @since 1.20
 	 * @return string
 	 */
 	protected function getRowClass() {
-		return '\Wikibase\SiteRow';
+		return 'SiteObject';
 	}
 
 	/**
-	 * @see ORMRowTest::getTableInstance()
-	 * @since 0.1
-	 * @return \IORMTable
+	 * @see ORMRowTest::getTableInstance
+	 * @since 1.20
+	 * @return IORMTable
 	 */
 	protected function getTableInstance() {
-		return \Wikibase\SitesTable::singleton();
+		return SitesTable::singleton();
 	}
 
 	/**
-	 * @see ORMRowTest::constructorTestProvider()
-	 * @since 0.1
+	 * @see ORMRowTest::constructorTestProvider
+	 * @since 1.20
 	 * @return array
 	 */
 	public function constructorTestProvider() {
@@ -94,7 +88,7 @@ class SiteRowTest extends ORMRowTest {
 	 * @dataProvider constructorTestProvider
 	 */
 	public function testConstructorEvenMore( array $fields ) {
-		$site = \Wikibase\SitesTable::singleton()->newRow( $fields, true );
+		$site = \SitesTable::singleton()->newRow( $fields, true );
 
 		$functionMap = array(
 			'getGlobalId',
@@ -141,7 +135,7 @@ class SiteRowTest extends ORMRowTest {
 	 * @dataProvider pathProvider
 	 */
 	public function testGetPath( $url, $filePath, $pathArgument, $expected ) {
-		$site = \Wikibase\SitesTable::singleton()->newRow( array(
+		$site = SitesTable::singleton()->newRow( array(
 			'global_key' => 'en',
 			'url' => $url,
 			'file_path' => $filePath,
@@ -167,7 +161,7 @@ class SiteRowTest extends ORMRowTest {
 	 * @dataProvider pageUrlProvider
 	 */
 	public function testGetPagePath( $url, $urlPath, $pageName, $expected ) {
-		$site = \Wikibase\SitesTable::singleton()->newRow( array(
+		$site = SitesTable::singleton()->newRow( array(
 			'global_key' => 'en',
 			'url' => $url,
 			'file_path' => '',
@@ -182,7 +176,7 @@ class SiteRowTest extends ORMRowTest {
 	 * @dataProvider constructorTestProvider
 	 */
 	public function testGetExtraData( array $fields ) {
-		$site = \Wikibase\SitesTable::singleton()->newRow( $fields, true );
+		$site = SitesTable::singleton()->newRow( $fields, true );
 
 		$this->assertInternalType( 'array', $site->getExtraData() );
 		$this->assertEquals(

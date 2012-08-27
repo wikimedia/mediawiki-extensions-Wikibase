@@ -1,26 +1,71 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\Sites as Sites;
-use Wikibase\SiteList as SiteList;
-
 /**
- * Tests for the Wikibase\SiteList class.
+ * Tests for the SiteArray class.
  *
  * @file
- * @since 0.1
+ * @since 1.20
  *
- * @ingroup Wikibase
+ * @ingroup Site
  * @ingroup Test
  *
- * @group Wikibase
- * @group WikibaseLib
- * @group Sites
+ * @group Site
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteListTest extends \MediaWikiTestCase {
+class SiteArrayTest extends GenericArrayObjectTest {
+
+	/**
+	 * @return array
+	 */
+	protected function getTestSites() {
+		$sites = array();
+
+		$site = Sites::newSite( 'enwiki' );
+		$site->setId( 1 );
+		$sites[] = $site;
+
+		$site = Sites::newSite( 'dewiki' );
+		$site->setId( 1 );
+		$sites[] = $site;
+
+		return $sites;
+	}
+
+	/**
+	 * @see GenericArrayObjectTest::elementInstancesProvider
+	 *
+	 * @since 1.20
+	 *
+	 * @return array
+	 */
+	public function elementInstancesProvider() {
+		$sites = iterator_to_array( Sites::singleton()->getSites() );
+
+		$siteArrays = array();
+
+		if ( count( $sites ) > 0 ) {
+			$siteArrays[] = array( array_shift( $sites ) );
+		}
+
+		if ( count( $sites ) > 1 ) {
+			$siteArrays[] = array( array_shift( $sites ), array_shift( $sites ) );
+		}
+
+		return $this->arrayWrap( $siteArrays );
+	}
+
+	/**
+	 * @see GenericArrayObjectTest::getInstanceClass
+	 *
+	 * @since 1.20
+	 *
+	 * @return array
+	 */
+	public function getInstanceClass() {
+		return 'SiteArray';
+	}
 
 	public function testUnset() {
 		$sites = Sites::singleton()->getAllSites();
@@ -40,8 +85,8 @@ class SiteListTest extends \MediaWikiTestCase {
 		}
 
 		$exception = null;
-		try { $sites->offsetUnset( 'sdfsedtgsrdysftu' ); } catch ( \Exception $exception ){}
-		$this->assertInstanceOf( '\Exception', $exception );
+		try { $sites->offsetUnset( 'sdfsedtgsrdysftu' ); } catch ( Exception $exception ){}
+		$this->assertInstanceOf( 'Exception', $exception );
 	}
 
 	public function siteArrayProvider() {
@@ -65,7 +110,7 @@ class SiteListTest extends \MediaWikiTestCase {
 	 * @param array $siteArray
 	 */
 	public function testConstructor( array $siteArray ) {
-		$siteList = new SiteList( $siteArray );
+		$siteList = new SiteArray( $siteArray );
 
 		$this->assertEquals( count( $siteArray ), $siteList->count() );
 	}
@@ -75,7 +120,7 @@ class SiteListTest extends \MediaWikiTestCase {
 	 * @param array $siteArray
 	 */
 	public function testIsEmpty( array $siteArray ) {
-		$siteList = new SiteList( $siteArray );
+		$siteList = new SiteArray( $siteArray );
 
 		$this->assertEquals( $siteArray === array(), $siteList->isEmpty() );
 	}
@@ -136,14 +181,14 @@ class SiteListTest extends \MediaWikiTestCase {
 
 		foreach ( $allSites->getGroupNames() as $groupName ) {
 			$group = Sites::singleton()->getGroup( $groupName );
-			$this->assertInstanceOf( '\Wikibase\SiteList', $group );
+			$this->assertInstanceOf( 'SiteList', $group );
 			$count += $group->count();
 
 			if ( !$group->isEmpty() ) {
 				$sites = iterator_to_array( $group );
 
 				foreach ( array_slice( $sites, 0, 5 ) as $site ) {
-					$this->assertInstanceOf( '\Wikibase\Site', $site );
+					$this->assertInstanceOf( 'Site', $site );
 					$this->assertEquals( $groupName, $site->getGroup() );
 				}
 			}
@@ -180,7 +225,7 @@ class SiteListTest extends \MediaWikiTestCase {
 		return array(
 			array( $sites->getAllSites() ),
 			array( $sites->getGroup( $group ), $group ),
-			array( new SiteList() ),
+			array( new SiteArray() ),
 		);
 	}
 
@@ -219,14 +264,14 @@ class SiteListTest extends \MediaWikiTestCase {
 		$sites = array_slice( Sites::singleton()->getAllSites()->getArrayCopy(), 0, 5 );
 
 		if ( count( $sites ) === 5 ) {
-			$list = new SiteList();
+			$list = new SiteArray();
 
 			foreach ( $sites as $site ) {
 				$list->append( $site );
 				$list->hasGlobalId( $site->getGlobalId() );
 			}
 
-			$list = new SiteList();
+			$list = new SiteArray();
 
 			foreach ( $sites as $site ) {
 				$list[] = $site;
@@ -235,7 +280,7 @@ class SiteListTest extends \MediaWikiTestCase {
 
 			$listSize = $list->count();
 
-			$list = new SiteList();
+			$list = new SiteArray();
 
 			foreach ( $sites as $site ) {
 				$list[] = $site;
@@ -250,7 +295,7 @@ class SiteListTest extends \MediaWikiTestCase {
 				$list->append( 42 );
 				$this->fail( 'Appending an integer to a SiteList should not work' );
 			}
-			catch ( \MWException $excption ) {}
+			catch ( MWException $excption ) {}
 
 		}
 		else {
@@ -262,7 +307,7 @@ class SiteListTest extends \MediaWikiTestCase {
 		$sites = array_slice( Sites::singleton()->getAllSites()->getArrayCopy(), 0, 5 );
 
 		if ( count( $sites ) === 5 ) {
-			$list = new SiteList();
+			$list = new SiteArray();
 
 			$site = array_shift( $sites );
 			$list->offsetSet( 42, $site );
