@@ -98,15 +98,8 @@ $wgAutoloadClasses['Wikibase\MediaWikiSite'] 		= $dir . 'includes/MediaWikiSite.
 $wgAutoloadClasses['Wikibase\Reference'] 			= $dir . 'includes/Reference.php';
 $wgAutoloadClasses['Wikibase\ReferenceObject'] 		= $dir . 'includes/ReferenceObject.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
-$wgAutoloadClasses['Wikibase\Site'] 				= $dir . 'includes/Site.php';
-$wgAutoloadClasses['Wikibase\SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
-$wgAutoloadClasses['Wikibase\SiteConfigObject'] 	= $dir . 'includes/SiteConfigObject.php';
 $wgAutoloadClasses['Wikibase\SiteLink'] 			= $dir . 'includes/SiteLink.php';
 $wgAutoloadClasses['Wikibase\SiteLinkTable'] 		= $dir . 'includes/SiteLinkTable.php';
-$wgAutoloadClasses['Wikibase\SiteList'] 			= $dir . 'includes/SiteList.php';
-$wgAutoloadClasses['Wikibase\SiteRow'] 				= $dir . 'includes/SiteRow.php';
-$wgAutoloadClasses['Wikibase\Sites'] 				= $dir . 'includes/Sites.php';
-$wgAutoloadClasses['Wikibase\SitesTable'] 			= $dir . 'includes/SitesTable.php';
 $wgAutoloadClasses['Wikibase\Statement'] 			= $dir . 'includes/Statement.php';
 $wgAutoloadClasses['Wikibase\StatementObject'] 		= $dir . 'includes/StatementObject.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
@@ -187,7 +180,7 @@ foreach ( array(
 // Hooks
 $wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\LibHooks::onSchemaUpdate';
-$wgHooks['UnitTestsList'][]					= 'Wikibase\LibHooks::registerUnitTests';
+$wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerUnitTests';
 
 
 $wgSharedTables[] = 'wb_changes';
@@ -197,3 +190,14 @@ $wgSharedTables[] = 'wb_changes';
 $egWBDefaultsFunction = null;
 
 $egWBSettings = array();
+
+
+
+$wgAutoloadClasses['Site'] 					= $dir . 'includes/Site.php';
+$wgAutoloadClasses['SiteArray'] 			= $dir . 'includes/SiteArray.php';
+$wgAutoloadClasses['SiteConfig'] 			= $dir . 'includes/SiteConfig.php';
+$wgAutoloadClasses['SiteConfigObject'] 		= $dir . 'includes/SiteConfigObject.php';
+$wgAutoloadClasses['SiteList'] 				= $dir . 'includes/SiteList.php';
+$wgAutoloadClasses['SiteObject'] 			= $dir . 'includes/SiteObject.php';
+$wgAutoloadClasses['Sites'] 				= $dir . 'includes/Sites.php';
+$wgAutoloadClasses['SitesTable'] 			= $dir . 'includes/SitesTable.php';
