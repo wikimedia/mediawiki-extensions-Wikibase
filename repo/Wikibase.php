@@ -131,7 +131,7 @@ $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryH
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
-$wgAutoloadClasses['SpecialItemByLabel'] 				= $dir . 'includes/specials/SpecialItemByLabel.php';
+$wgAutoloadClasses['SpecialItemDisambiguation'] 				= $dir . 'includes/specials/SpecialItemDisambiguation.php';
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
 // includes/store
@@ -175,7 +175,7 @@ $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
-$wgSpecialPages['ItemByLabel'] 						= 'SpecialItemByLabel';
+$wgSpecialPages['ItemDisambiguation'] 						= 'SpecialItemDisambiguation';
 
 
 // Hooks

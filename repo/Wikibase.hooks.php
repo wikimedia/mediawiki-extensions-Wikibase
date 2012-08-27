@@ -84,7 +84,7 @@ final class RepoHooks {
 			'content/QueryHandler',
 
 			'specials/SpecialCreateItem',
-			'specials/SpecialItemByLabel',
+			'specials/SpecialItemDisambiguation',
 			'specials/SpecialItemByTitle',
 
 			'store/EntityDeletionHandler',
