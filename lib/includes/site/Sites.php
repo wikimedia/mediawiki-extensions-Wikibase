@@ -1,6 +1,5 @@
 <?php
 
-namespace Wikibase;
 use MWException;
 
 /**
@@ -8,7 +7,22 @@ use MWException;
  * Holds a list of sites (ie SiteList) and takes care
  * of retrieving and caching site information when appropriate.
  *
- * @since 0.1
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @since 1.20
  *
  * @file
  * @ingroup Wikibase
@@ -19,15 +33,20 @@ use MWException;
  */
 class Sites {
 
+	const TYPE_UNKNOWN = 'unknown';
+	const TYPE_MEDIAWIKI = 'mediawiki';
+
+	const GROUP_NONE = 'none';
+
 	/**
-	 * @since 0.1
+	 * @since 1.20
 	 * @var SiteList
 	 */
 	protected $sites;
 
 	/**
 	 * Cache for requests to sites that where not found and could thus not be added to the $sites field.
-	 * @since 0.1
+	 * @since 1.20
 	 * @var array
 	 */
 	protected $nonExistingSites = array(
@@ -38,7 +57,7 @@ class Sites {
 	/**
 	 * Keeps track if all sites where fetched for caching purpouses.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 * @var boolean
 	 */
 	protected $gotAllSites = false;
@@ -46,42 +65,33 @@ class Sites {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 */
 	protected function __construct() {
 		$this->sites = new SiteList( array() );
 	}
 
-	protected static $instance = false;
-
 	/**
 	 * Returns an instance of Sites.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return Sites
 	 */
 	public static function singleton() {
-		if ( self::$instance === false ) {
-			self::$instance = new static();
+		static $instance = false;
+
+		if ( $instance === false ) {
+			$instance = new static();
 		}
 
-		return self::$instance;
-	}
-
-	/**
-	 * Clears the in-memory cache by throwing away the singleton instance.
-	 *
-	 * @since 0.1
-	 */
-	public static function clearCache() {
-		self::$instance = false;
+		return $instance;
 	}
 
 	/**
 	 * Loads the sites matching the provided conditions.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param array $conditions
 	 */
@@ -109,7 +119,7 @@ class Sites {
 	 * put into the nonExistingSites field (so subsequent
 	 * requests for these do not cause additional lookups in the db).
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param array $conditions
 	 */
@@ -188,7 +198,7 @@ class Sites {
 	 * Fetches a site based on a local identifier and returns it,
 	 * or false if there is no such site.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $localSiteId
 	 *
@@ -202,7 +212,7 @@ class Sites {
 	 * Fetches a site based on a global identifier and returns it,
 	 * or false if there is no such site.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $globalSiteId
 	 *
@@ -215,7 +225,7 @@ class Sites {
 	/**
 	 * Returns the sites that have been loaded into memory.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return SiteList
 	 */
@@ -226,7 +236,7 @@ class Sites {
 	/**
 	 * Loads all of the sites into memory.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return SiteList
 	 */
@@ -239,7 +249,7 @@ class Sites {
 	 * Returns the full url for the specified site.
 	 * A page can also be provided, which is then added to the url.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $globalSiteId
 	 * @param string $pageName
@@ -260,7 +270,7 @@ class Sites {
 	 * Returns the full path for the specified site.
 	 * A path can also be provided, which is then added to the base path.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $globalSiteId
 	 * @param string $path
@@ -281,7 +291,7 @@ class Sites {
 	 * Returns the global identifiers.
 	 * TODO: cache invalidation
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @return array
 	 */
@@ -302,7 +312,7 @@ class Sites {
 	/**
 	 * Returns the sites in a certain group.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param string $group
 	 *
@@ -316,7 +326,7 @@ class Sites {
 	/**
 	 * Convenience method to create new site objects.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param array $fields
 	 * @param bool $loadDefaults
