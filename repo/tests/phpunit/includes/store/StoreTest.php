@@ -14,6 +14,7 @@ use Wikibase\Store as Store;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @group Database
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -21,7 +22,7 @@ use Wikibase\Store as Store;
 class StoreTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$instances = array( new \Wikibase\SQLStore() );
+		$instances = array( new \Wikibase\SqlStore() );
 
 		return $this->arrayWrap( $instances );
 	}
@@ -50,6 +51,15 @@ class StoreTest extends \MediaWikiTestCase {
 	 */
 	public function testNewEntityUpdateHandler( Store $store ) {
 		$this->assertInstanceOf( '\Wikibase\EntityUpdateHandler', $store->newEntityUpdateHandler() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testRebuild( Store $store ) {
+		$store->rebuild();
+		$this->assertTrue( true );
 	}
 
 }
