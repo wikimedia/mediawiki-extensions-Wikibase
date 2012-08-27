@@ -86,7 +86,7 @@ final class Utils {
 				$languageCode = $language['code'];
 
 				foreach ( $language['site'] as $site ) {
-					Sites::newSite( array(
+					\Sites::newSite( array(  // TODO
 						'global_key' => $site['dbname'],
 						'type' => SITE_TYPE_MEDIAWIKI,
 						'group' => $groupMap[$site['code']],
@@ -118,97 +118,12 @@ final class Utils {
 
 		$dbw->delete( $dbw->tableName( 'sites' ), '*', __METHOD__ );
 
-		Sites::clearCache();
-
-		Sites::newSite( array(
-			'global_key' => 'enwiki',
-			'type' => SITE_TYPE_MEDIAWIKI,
-			'group' => SITE_GROUP_WIKIPEDIA,
-			'url' => 'https://en.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'en',
-			'language' => 'en',
-		) )->save();
-
-		Sites::newSite( array(
-			'global_key' => 'dewiki',
-			'type' => SITE_TYPE_MEDIAWIKI,
-			'group' => SITE_GROUP_WIKIPEDIA,
-			'url' => 'https://de.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'de',
-			'language' => 'de',
-		) )->save();
-
-		Sites::newSite( array(
-			'global_key' => 'nlwiki',
-			'type' => SITE_TYPE_MEDIAWIKI,
-			'group' => SITE_GROUP_WIKIPEDIA,
-			'url' => 'https://nl.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'nl',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-			'language' => 'nl',
-		) )->save();
-
-		Sites::newSite( array(
-			'global_key' => 'svwiki',
-			'url' => 'https://sv.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'sv',
-			'language' => 'sv',
-		) )->save();
-
-
-		Sites::newSite( array(
-			'global_key' => 'srwiki',
-			'type' => 0,
-			'group' => 0,
-			'url' => 'https://sr.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'sr',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-		) )->save();
-
-		Sites::newSite( array(
-			'global_key' => 'nowiki',
-			'type' => 0,
-			'group' => 0,
-			'url' => 'https://no.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'no',
-			'link_inline' => true,
-			'link_navigation' => true,
-			'forward' => true,
-		) )->save();
-
-		Sites::newSite( array(
-			'global_key' => 'nnwiki',
-			'url' => 'https://nn.wikipedia.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'nn',
-			'language' => 'nn',
-		) )->save();
-
-		Sites::newSite( array(
-			'global_key' => 'enwiktionary',
-			'url' => 'https://en.wiktionary.org',
-			'page_path' => '/wiki/$1',
-			'file_path' => '/w/$1',
-			'local_key' => 'enwiktionary',
-			'language' => 'en',
-		) )->save();
+		/**
+		 * @var \Site $site
+		 */
+		foreach ( \TestSites::getSites() as $site ) {
+			$site->save();
+		}
 
 		$dbw->commit( __METHOD__ );
 	}

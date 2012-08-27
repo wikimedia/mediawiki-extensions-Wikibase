@@ -1,25 +1,37 @@
 <?php
 
-namespace Wikibase;
-
 /**
  * Represents the sites database table.
  * All access to this table should be done through this class.
  *
- * @since 0.1
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @since 1.20
  *
  * @file
- * @ingroup Wikibase
- * @ingroup Sites
+ * @ingroup Site
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SitesTable extends \ORMTable {
+class SitesTable extends ORMTable {
 
 	/**
 	 * @see IORMTable::getName()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return string
 	 */
 	public function getName() {
@@ -28,7 +40,7 @@ class SitesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getFieldPrefix()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return string
 	 */
 	public function getFieldPrefix() {
@@ -37,16 +49,16 @@ class SitesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getRowClass()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return string
 	 */
 	public function getRowClass() {
-		return '\Wikibase\SiteRow';
+		return 'SiteObject';
 	}
 
 	/**
 	 * @see IORMTable::getFields()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return array
 	 */
 	public function getFields() {
@@ -55,18 +67,15 @@ class SitesTable extends \ORMTable {
 
 			// Site data
 			'global_key' => 'str',
-			'type' => 'int',
-			'group' => 'int',
-			'url' => 'str',
-			'page_path' => 'str',
-			'file_path' => 'str',
+			'type' => 'str',
+			'group' => 'str',
+			'source' => 'str',
 			'language' => 'str',
+			'protocol' => 'str',
+			'domain' => 'str',
 			'data' => 'array',
 
 			// Site config
-			'local_key' => 'str',
-			'link_inline' => 'bool',
-			'link_navigation' => 'bool',
 			'forward' => 'bool',
 			'config' => 'array',
 		);
@@ -74,17 +83,16 @@ class SitesTable extends \ORMTable {
 
 	/**
 	 * @see IORMTable::getDefaults()
-	 * @since 0.1
+	 * @since 1.20
 	 * @return array
 	 */
 	public function getDefaults() {
 		return array(
-			'type' => SITE_TYPE_UNKNOWN,
-			'group' => SITE_GROUP_NONE,
+			'type' => Site::TYPE_UNKNOWN,
+			'group' => Site::GROUP_NONE,
+			'source' => Site::SOURCE_LOCAL,
 			'data' => array(),
 
-			'link_inline' => false,
-			'link_navigation' => false,
 			'forward' => false,
 			'config' => array(),
 		);
@@ -93,7 +101,7 @@ class SitesTable extends \ORMTable {
 	/**
 	 * Returns the class name for the provided site type.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param integer $siteType
 	 *
@@ -101,22 +109,22 @@ class SitesTable extends \ORMTable {
 	 */
 	protected static function getClassForType( $siteType ) {
 		global $wgSiteTypes;
-		return array_key_exists( $siteType, $wgSiteTypes ) ? $wgSiteTypes[$siteType] : 'Wikibase\SiteRow';
+		return array_key_exists( $siteType, $wgSiteTypes ) ? $wgSiteTypes[$siteType] : 'SiteObject';
 	}
 
 	/**
-	 * Factory method to construct a new Wikibase\Change instance.
+	 * Factory method to construct a new Site instance.
 	 *
-	 * @since 0.1
+	 * @since 1.20
 	 *
 	 * @param array $data
 	 * @param boolean $loadDefaults
 	 *
-	 * @return Change
+	 * @return Site
 	 */
 	public function newRow( array $data, $loadDefaults = false ) {
 		if ( !array_key_exists( 'type', $data ) ) {
-			$data['type'] = SITE_TYPE_UNKNOWN;
+			$data['type'] = Site::TYPE_UNKNOWN;
 		}
 
 		$class = static::getClassForType( $data['type'] );

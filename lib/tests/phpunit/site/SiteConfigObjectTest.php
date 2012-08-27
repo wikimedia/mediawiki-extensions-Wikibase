@@ -1,25 +1,20 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\SiteConfigObject as SiteConfigObject;
-
 /**
- * Tests for the Wikibase\SiteConfigObject class.
+ * Tests for the SiteConfigObject class.
  *
  * @file
- * @since 0.1
+ * @since 1.20
  *
- * @ingroup Wikibase
+ * @ingroup Site
  * @ingroup Test
  *
- * @group Wikibase
- * @group WikibaseLib
- * @group Sites
+ * @group Site
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteConfigObjectTest extends \MediaWikiTestCase {
+class SiteConfigObjectTest extends MediaWikiTestCase {
 
 	/**
 	 * @return array
@@ -45,7 +40,7 @@ class SiteConfigObjectTest extends \MediaWikiTestCase {
 	 * @return SiteConfigObject
 	 */
 	protected function createInstance( array $args ) {
-		$configObject = new \ReflectionClass( 'Wikibase\SiteConfigObject' );
+		$configObject = new ReflectionClass( 'SiteConfigObject' );
 		return $configObject->newInstanceArgs( $args );
 	}
 
@@ -56,40 +51,7 @@ class SiteConfigObjectTest extends \MediaWikiTestCase {
 	public function testConstructor( array $args ) {
 		$configObject = $this->createInstance( $args );
 
-		$this->assertInstanceOf( 'Wikibase\SiteConfig', $configObject );
-	}
-
-	/**
-	 * @dataProvider constructorProvider
-	 * @param array $args
-	 */
-	public function testGetLocalId( array $args ) {
-		$configObject = $this->createInstance( $args );
-
-		$this->assertInternalType( 'string', $configObject->getLocalId() );
-		$this->assertEquals( $args[0], $configObject->getLocalId() );
-	}
-
-	/**
-	 * @dataProvider constructorProvider
-	 * @param array $args
-	 */
-	public function testGetLinkInline( array $args ) {
-		$configObject = $this->createInstance( $args );
-
-		$this->assertInternalType( 'boolean', $configObject->getLinkInline() );
-		$this->assertEquals( $args[1], $configObject->getLinkInline() );
-	}
-
-	/**
-	 * @dataProvider constructorProvider
-	 * @param array $args
-	 */
-	public function testGetLinkNavigation( array $args ) {
-		$configObject = $this->createInstance( $args );
-
-		$this->assertInternalType( 'boolean', $configObject->getLinkNavigation() );
-		$this->assertEquals( $args[2], $configObject->getLinkNavigation() );
+		$this->assertInstanceOf( 'SiteConfig', $configObject );
 	}
 
 	/**
