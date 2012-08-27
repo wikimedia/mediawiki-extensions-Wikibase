@@ -49,17 +49,6 @@ class PropertyValueSnak extends PropertySnakObject {
 	}
 
 	/**
-	 * Sets the value of the property value snak.
-	 *
-	 * @since 0.1
-	 *
-	 * @param DataValue $dataValue
-	 */
-	public function setDataValue( DataValue $dataValue ) {
-		$this->dataValue = $dataValue;
-	}
-
-	/**
 	 * @see Serializable::serialize
 	 *
 	 * @since 0.1

@@ -25,13 +25,4 @@ interface PropertySnak extends Snak {
 	 */
 	public function getPropertyId();
 
-	/**
-	 * Sets the id of the snaks property.
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $propertyId
-	 */
-	public function setPropertyId( $propertyId );
-
 }

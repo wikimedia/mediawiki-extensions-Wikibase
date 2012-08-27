@@ -92,6 +92,7 @@ $wgAutoloadClasses['Wikibase\ClaimObject'] 			= $dir . 'includes/ClaimObject.php
 $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\Hashable'] 			= $dir . 'includes/Hashable.php';
 $wgAutoloadClasses['Wikibase\HashArray'] 			= $dir . 'includes/HashArray.php';
+$wgAutoloadClasses['Wikibase\Immutable'] 			= $dir . 'includes/Immutable.php';
 $wgAutoloadClasses['Wikibase\MapHasher'] 			= $dir . 'includes/MapHasher.php';
 $wgAutoloadClasses['Wikibase\MapValueHasher'] 		= $dir . 'includes/MapValueHasher.php';
 $wgAutoloadClasses['Wikibase\MediaWikiSite'] 		= $dir . 'includes/MediaWikiSite.php';
