@@ -14,27 +14,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface References extends \Traversable, \ArrayAccess, \Countable, \Serializable, Hashable {
-
-	/**
-	 * Retruns if the list contains a reference with the provided hash.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $referenceHash
-	 *
-	 * @return boolean
-	 */
-	public function hasReferenceHash( $referenceHash );
-
-	/**
-	 * Removes the reference with the provided hash if it exists in the list.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $referenceHash
-	 */
-	public function removeReferenceHash( $referenceHash );
+interface References extends \Traversable, \Countable, \Serializable, Hashable {
 
 	/**
 	 * Adds the provided reference to the list, unless a reference with the same hash is already in it.
@@ -42,8 +22,6 @@ interface References extends \Traversable, \ArrayAccess, \Countable, \Serializab
 	 * @since 0.1
 	 *
 	 * @param Reference $snak
-	 *
-	 * @return boolean Indicates if the reference was added or not.
 	 */
 	public function addReference( Reference $reference );
 
@@ -67,15 +45,39 @@ interface References extends \Traversable, \ArrayAccess, \Countable, \Serializab
 	 */
 	public function removeReference( Reference $reference );
 
-	/**
-	 * Returns the reference with the provided hash, or false if there is no such reference in the list.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $referenceHash
-	 *
-	 * @return Reference|false
-	 */
-	public function getReference( $referenceHash );
-
 }
+
+//interface HashedReferences extends References {
+//
+//	/**
+//	 * Retruns if the list contains a reference with the provided hash.
+//	 *
+//	 * @since 0.1
+//	 *
+//	 * @param string $referenceHash
+//	 *
+//	 * @return boolean
+//	 */
+//	public function hasReferenceHash( $referenceHash );
+//
+//	/**
+//	 * Removes the reference with the provided hash if it exists in the list.
+//	 *
+//	 * @since 0.1
+//	 *
+//	 * @param string $referenceHash
+//	 */
+//	public function removeReferenceHash( $referenceHash );
+//
+//	/**
+//	 * Returns the reference with the provided hash, or false if there is no such reference in the list.
+//	 *
+//	 * @since 0.1
+//	 *
+//	 * @param string $referenceHash
+//	 *
+//	 * @return Reference|false
+//	 */
+//	public function getReference( $referenceHash );
+//
+//}

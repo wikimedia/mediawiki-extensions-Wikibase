@@ -18,18 +18,30 @@ use Wikibase\Hashable as Hashable;
  *
  * @group Wikibase
  * @group WikibaseLib
- * @group WUHAAA
+ * @group WikibaseReference
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ReferenceListTest extends HashArrayTest {
+class ReferenceListTest extends \MediaWikiTestCase {
 
 	/**
 	 * @see GenericArrayObjectTest::getInstanceClass
 	 */
 	public function getInstanceClass() {
 		return '\Wikibase\ReferenceList';
+	}
+
+	public function instanceProvider() {
+		$class = $this->getInstanceClass();
+
+		$instances = array();
+
+		foreach ( $this->constructorProvider() as $args ) {
+			$instances[] = array( new $class( array_key_exists( 0, $args ) ? $args[0] : null ) );
+		}
+
+		return $instances;
 	}
 
 	/**
@@ -61,10 +73,8 @@ class ReferenceListTest extends HashArrayTest {
 		 */
 		foreach ( iterator_to_array( $array ) as $hashable ) {
 			$this->assertTrue( $array->hasReference( $hashable ) );
-			$this->assertTrue( $array->hasReferenceHash( $hashable->getHash() ) );
 			$array->removeReference( $hashable );
 			$this->assertFalse( $array->hasReference( $hashable ) );
-			$this->assertFalse( $array->hasReferenceHash( $hashable->getHash() ) );
 		}
 	}
 
@@ -74,7 +84,7 @@ class ReferenceListTest extends HashArrayTest {
 	 * @param \Wikibase\ReferenceList $array
 	 */
 	public function testRemoveReference( ReferenceList $array ) {
-		$elementCount = $array->count();
+		$elementCount = count( $array );
 
 		/**
 		 * @var Hashable $element
@@ -82,15 +92,10 @@ class ReferenceListTest extends HashArrayTest {
 		foreach ( iterator_to_array( $array ) as $element ) {
 			$this->assertTrue( $array->hasReference( $element ) );
 
-			if ( $elementCount % 2 === 0 ) {
-				$array->removeReference( $element );
-			}
-			else {
-				$array->removeReferenceHash( $element->getHash() );
-			}
+			$array->removeReference( $element );
 
 			$this->assertFalse( $array->hasReference( $element ) );
-			$this->assertEquals( --$elementCount, $array->count() );
+			$this->assertEquals( --$elementCount, count( $array ) );
 		}
 
 		$elements = $this->elementInstancesProvider();
@@ -99,7 +104,6 @@ class ReferenceListTest extends HashArrayTest {
 
 		$array->removeReference( $element );
 		$array->removeReference( $element );
-		$array->removeReferenceHash( $element->getHash() );
 	}
 
 	/**
@@ -108,7 +112,7 @@ class ReferenceListTest extends HashArrayTest {
 	 * @param \Wikibase\ReferenceList $array
 	 */
 	public function testAddReference( ReferenceList $array ) {
-		$elementCount = $array->count();
+		$elementCount = count( $array );
 
 		$elements = $this->elementInstancesProvider();
 		$element = array_shift( $elements );
@@ -118,13 +122,9 @@ class ReferenceListTest extends HashArrayTest {
 			++$elementCount;
 		}
 
-		$this->assertEquals( !$array->hasReference( $element ), $array->addReference( $element ) );
+		$array->addReference( $element );
 
-		$this->assertEquals( $elementCount, $array->count() );
-
-		$this->assertFalse( $array->addReference( $element ) );
-
-		$this->assertEquals( $elementCount, $array->count() );
+		$this->assertEquals( $elementCount, count( $array ) );
 	}
 
 }
