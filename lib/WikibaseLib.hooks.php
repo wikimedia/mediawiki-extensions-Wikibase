@@ -77,49 +77,31 @@ final class LibHooks {
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
 
-		if ( $type === 'mysql' || $type === 'sqlite' ) {
+		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
+			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
+
 			$updater->addExtensionTable(
 				'wb_changes',
-				__DIR__ . '/sql/WikibaseLib.sql'
+				__DIR__ . '/sql/WikibaseLib' . $extension
 			);
 
 			// TODO: move to core
-			$updater->addExtensionTable(
+			$updater->addExtensionField(
 				'sites',
+				'site_source',
+				__DIR__ . '/sql/DropSites.sql'
+			);
+
+			$updater->addExtensionField(
+				'sites',
+				'site_source',
 				__DIR__ . '/sql/AddSitesTable.sql'
-			);
-
-			// TODO: move to core
-			$updater->addExtensionField(
-				'langlinks',
-				'll_local',
-				__DIR__ . '/sql/AddLocalLanglinksField.sql'
-			);
-
-			$updater->addExtensionField(
-				'sites',
-				'site_link_navigation',
-				__DIR__ . '/sql/IndexSitesTable.sql'
-			);
-
-			$updater->addExtensionField(
-				'sites',
-				'site_language',
-				__DIR__ . '/sql/MakeSitesTableMoarAwesome.sql'
 			);
 
 			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
 		}
-		elseif ( $type === 'postgres' ) {
-			$updater->addExtensionTable(
-				'wb_changes',
-				__DIR__ . '/sql/WikibaseLib.pg.sql'
-			);
-
-			//$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
-		}
 		else {
-			// TODO
+			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
 		}
 
 		return true;
@@ -167,15 +149,14 @@ final class LibHooks {
 			'ClaimObject',
 			'LibHooks',
 			'MapValueHasher',
-			'MediaWikiSite',
-			'SiteConfigObject',
 			'SiteLink',
-			'SiteList',
-			'SiteRow',
-			'MediaWikiSite',
-			'Sites',
 			'StatementObject',
 			'Utils',
+
+			'site/MediaWikiSite',
+			'site/SiteList',
+			'site/SiteObject',
+			'site/Sites',
 		);
 
 		// Test compat
