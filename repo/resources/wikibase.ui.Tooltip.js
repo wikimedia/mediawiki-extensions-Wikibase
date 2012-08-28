@@ -2,35 +2,29 @@
  * JavasScript for creating and managing a tooltip within the 'Wikibase' extension
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author H. Snater
- *
- * Events:
- * -------
- * hide: Triggered after the tooltip was hidden from a previously visible state.
- *                   Parameters: (1) jQuery.event
- * clickOutside: Triggered when clicking outside of the tooltip's bubble
- *                    Parameters: (1) jQuery.event
  */
-'use strict';
+( function( mw, wb, $, undefined ) {
+"use strict";
+var $PARENT = wb.ui.Base;
 
 /**
- * a generic tooltip
+ * A generic tooltip, using jQuery.tipsy internally.
+ * @constructor
+ * @see wb.ui.Base
+ * @since 0.1
  *
- * @param jQuery subject tooltip will be attached to this node
- * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
- * @param object tipsyConfig (optional, default: { gravity: 'ne' }) custom tipsy tooltip configuration
+ * @event hide: Triggered after the tooltip was hidden from a previously visible state.
+ *        (1) jQuery.Event
+ *
+ * @event clickOutside: Triggered when clicking outside of the tooltip's bubble.
+ *        (1) jQuery.Event
  */
-window.wikibase.ui.Tooltip = function( subject, tooltipContent, tipsyConfig ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject, tooltipContent, tipsyConfig );
-	}
-};
-window.wikibase.ui.Tooltip.prototype = {
+wb.ui.Tooltip = wb.utilities.inherit( $PARENT, {
 	/**
 	 * @const
 	 * Class which marks the tooltip within the site html.
@@ -79,8 +73,9 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * @param string|object tooltipContent (may contain HTML markup), may also be an object describing an API error
 	 * @param object tipsyConfig (optional) custom tipsy tooltip configuration
 	 */
-	_init: function( subject, tooltipContent, tipsyConfig ) {
-		this._subject = subject;
+	init: function( subject, tooltipContent, tipsyConfig ) {
+		$PARENT.prototype.init.apply( this, arguments );
+
 		if ( typeof tooltipContent == 'string' ) {
 			this._subject.attr( 'title', tooltipContent );
 		} else {
@@ -88,13 +83,13 @@ window.wikibase.ui.Tooltip.prototype = {
 			being set; however, setting a complex HTML structure cannot be done via the title tag, so the content is
 			stored in a custom variable that will be injected when the message is triggered to show */
 			this._subject.attr( 'title', '.' );
-			if ( typeof tooltipContent == 'object' && typeof tooltipContent.code != 'undefined' ) {
+			if ( typeof tooltipContent == 'object' && tooltipContent.code !== undefined ) {
 				this._error = tooltipContent;
 			} else {
 				this._DomContent = tooltipContent;
 			}
 		}
-		if ( typeof tipsyConfig != 'undefined' ) {
+		if (  tipsyConfig !== undefined ) {
 			this._tipsyConfig = tipsyConfig;
 		}
 		if ( this._tipsyConfig == null || typeof this._tipsyConfig.gravity == undefined ) {
@@ -110,7 +105,7 @@ window.wikibase.ui.Tooltip.prototype = {
 		$( window ).on( 'resize.wikibase.ui.tooltip', function( event ) {
 			$( '[original-title]' ).each( function( i, node ) {
 				if (
-					typeof $( node ).data( 'wikibase.ui.tooltip' ) != 'undefined'
+					$( node ).data( 'wikibase.ui.tooltip' ) !== undefined
 					&& $( node ).data( 'wikibase.ui.tooltip' )._isVisible
 				) {
 					var tooltip = $( node ).data( 'wikibase.ui.tooltip' );
@@ -200,9 +195,11 @@ window.wikibase.ui.Tooltip.prototype = {
 		if ( activate ) {
 			// only attach events when not yet attached to prevent memory leak
 			if (
-				typeof this._subject.data( 'events' ) == 'undefined' ||
-				( typeof this._subject.data( 'events' ).mouseover == 'undefined' &&
-				typeof this._subject.data( 'events' ).mouseout == 'undefined' )
+				this._subject.data( 'events' ) === undefined
+				|| (
+					this._subject.data( 'events' ).mouseover === undefined
+					&& this._subject.data( 'events' ).mouseout === undefined
+				)
 			) {
 				this._subject.on( 'mouseover', jQuery.proxy( function() { this.show(); }, this ) );
 				this._subject.on( 'mouseout', jQuery.proxy( function() { this.hide(); }, this ) );
@@ -217,12 +214,12 @@ window.wikibase.ui.Tooltip.prototype = {
 	 * query whether hover events are attached
 	 */
 	_hasEvents: function() {
-		if ( typeof this._subject.data( 'events' ) == 'undefined' ) {
+		if( this._subject.data( 'events' ) === undefined ) {
 			return false;
 		} else {
 			return (
-				typeof this._subject.data( 'events' ).mouseover != 'undefined' &&
-				typeof this._subject.data( 'events' ).mouseout != 'undefined'
+				this._subject.data( 'events' ).mouseover !== undefined &&
+				this._subject.data( 'events' ).mouseout !== undefined
 			);
 		}
 	},
@@ -326,16 +323,18 @@ window.wikibase.ui.Tooltip.prototype = {
 		this._toggleEvents( false );
 		this._tipsyConfig = null;
 		this._tipsy = null;
-	}
 
-};
+		$PARENT.prototype.destroy.apply( this, arguments );
+	}
+} );
 
 
 /**
  * extends random element (like label or interface) with a tooltip
+ * @var Object
+ * @since 0.1
  */
-window.wikibase.ui.Tooltip.ext = {
-
+wb.ui.Tooltip.ext = {
 	/**
 	 * @var wikibase.ui.Tooltip tooltip attached to this label
 	 */
@@ -344,7 +343,7 @@ window.wikibase.ui.Tooltip.ext = {
 	/**
 	 * Attaches a tooltip message to this element
 	 *
-	 * @param string|window.wikibase.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
+	 * @param string|wb.ui.Tooltip tooltip message to be displayed as tooltip or already built tooltip
 	 */
 	setTooltip: function( tooltip ) {
 		// if last tooltip was visible, we make the new one visible as well
@@ -358,8 +357,8 @@ window.wikibase.ui.Tooltip.ext = {
 		if ( typeof tooltip == 'string' ) {
 			// build new tooltip from string:
 			this._elem.attr( 'title', tooltip );
-			this._tooltip = new window.wikibase.ui.Tooltip( this._elem, tooltip );
-		} else if ( tooltip instanceof window.wikibase.ui.Tooltip ) {
+			this._tooltip = new wb.ui.Tooltip( this._elem, tooltip );
+		} else if ( tooltip instanceof wb.ui.Tooltip ) {
 			this._tooltip = tooltip;
 		}
 		// restore previous tooltips visibility:
@@ -396,10 +395,11 @@ window.wikibase.ui.Tooltip.ext = {
 	/**
 	 * Returns the element's tooltip or null in case none is set yet
 	 *
-	 * @return window.wikibase.ui.Tooltip|null
+	 * @return wb.ui.Tooltip|null
 	 */
 	getTooltip: function() {
 		return this._tooltip;
 	}
+}
 
-};
+} )( mediaWiki, wikibase, jQuery );

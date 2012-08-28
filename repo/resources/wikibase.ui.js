@@ -2,25 +2,25 @@
  * JavaScript for user interface related stuff of the 'Wikibase' extension.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
-
-// allow to use this module if the main wikibase module is not required for some reason.
-window.wikibase = window.wikibase || {};
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.
- * Make sure this won't be overriden when loading two ui modules
+ * Make sure this won't be overridden when loading two ui modules
  * in parallel without loading base module.
  * @var Object
+ * @since 0.1
  */
-window.wikibase.ui = window.wikibase.ui || {
+wb.ui = wb.ui || {};
+$.extend( wb.ui, {
 	/**
 	 * @const states of element groups
 	 * @enum number
@@ -30,4 +30,6 @@ window.wikibase.ui = window.wikibase.ui || {
 		DISABLED: 2, // all elements are disabled
 		MIXED: 3
 	}
-};
+} );
+
+} )( mediaWiki, wikibase, jQuery );

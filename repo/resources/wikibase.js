@@ -2,21 +2,25 @@
  * JavaScript for 'wikibase' extension
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
-"use strict";
-window.wikibase = new( function() {
+
+/**
+ * Global 'Wikibase' extension singleton.
+ * @since 0.1
+ */
+var wikibase = new ( function( mw, $, undefined ) {
+	"use strict";
 
 	/**
 	 * event triggered after a new wikibase item was created and successfully stored in the database via an API call
 	 * @see wikibase.ui.PropertyEditTool.EditableValue
 	 *
-	 * @param jQuery.event event
+	 * @param jQuery.Event event
 	 * @param JSON apiResponse
 	 */
 	var onNewItemCreated = function( event, apiResponse ) {
@@ -64,7 +68,7 @@ window.wikibase = new( function() {
 			if( sitesDetails.hasOwnProperty( siteId ) ) {
 				var site = sitesDetails[ siteId ];
 				site.id = siteId;
-				this._siteList[ siteId ] =  new window.wikibase.Site( site );
+				this._siteList[ siteId ] =  new this.Site( site );
 			}
 		}
 
@@ -91,30 +95,12 @@ window.wikibase = new( function() {
 		var sites = this.getSites();
 		var site = sites[ siteId ];
 
-		if( typeof site == 'undefined' ) {
+		if( site === undefined ) {
 			return null;
 		}
 		return site;
 	};
 
-} )();
+} )( mediaWiki, jQuery );
 
-if( ! Object.create ) {
-	/**
-	 * Object.create implementation from:
-	 * https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/create
-	 *
-	 * Object.create support for old browsers (IE < 9, FF < 4, Opera < 11.60)
-	 *
-	 * @param Object o
-	 * @return Object
-	 */
-	Object.create = function( o ) {
-		if( arguments.length > 1 ) {
-			throw new Error( 'This Object.create implementation only accepts the first parameter.' );
-		}
-		function F() {}
-		F.prototype = o;
-		return new F();
-	};
-}
+window.wikibase = window.wb = wikibase; // global aliases

@@ -2,7 +2,6 @@
  * JavaScript for a part of an editable property value
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -10,20 +9,24 @@
  * @author Daniel Werner
  * @author H. Snater
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
+var $PARENT = wb.ui.Base;
 
 /**
  * Serves the input interface for a part of a value like a property value and also takes care of the
  * conversion between the pure html representation and the interface itself in both directions
- *
- * @param jQuery subject
+ * @constructor
+ * @see wikibase.ui.Base
+ * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.Interface = function( subject ) {
-	if( arguments.length > 0 ) {
-		this._init.apply( this, arguments );
-	}
-};
-window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
+wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
+	// Overwritten constructor:
+	function( subject, toolbar ) {
+		if( arguments.length > 0 ) {
+			this.init.apply( this, arguments );
+		}
+	}, {
 	/**
 	 * @const
 	 * Class which marks the element within the site html.
@@ -62,18 +65,14 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	 *
 	 * @param jQuery subject
 	 */
-	_init: function( subject ) {
-		if( this._subject !== null ) {
-			// initializing twice should never happen, have to destroy first!
-			this.destroy();
-		}
-		this._subject = $( subject );
+	init: function( subject ) {
+		$PARENT.prototype.init.apply( this, arguments );
 
 		// make sure the value is normalized when initialized:
 		this.setValue( this.getValue() );
 
 		// disable interface when editing is restricted
-		$( wikibase ).on(
+		$( wb ).on(
 			'restrictItemPageActions blockItemPageActions',
 			$.proxy(
 				function( event ) {
@@ -91,6 +90,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 		if ( this.tooltip !== null ) {
 			this.removeTooltip();
 		}
+		$PARENT.prototype.destroy.call( this );
 	},
 
 	/**
@@ -143,8 +143,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 			 * FIXME: not the nicest way of getting these things via DOM, might be better to implement this into the
 			 *        related EditableValue
 			 */
-			var evCls = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS,
-				petCls = window.wikibase.ui.PropertyEditTool.prototype.UI_CLASS;
+			var evCls = wb.ui.PropertyEditTool.EditableValue.prototype.UI_CLASS,
+				petCls = wb.ui.PropertyEditTool.prototype.UI_CLASS;
 
 			this._inputElem.inputAutoExpand( {
 				maxWidth: $.proxy( function() {
@@ -381,7 +381,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	valueCompare: function( value1, value2 ) {
 		value1 = this.normalize( value1 );
 
-		if( typeof value2 == 'undefined' || value2 === null ) {
+		if( value2 === undefined || value2 === null ) {
 			// check for empty value1
 			return value1 === '' || value1 === null;
 		}
@@ -590,6 +590,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 	onBlur: null,
 
 	onChange: null
-};
+} );
 
-$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype, window.wikibase.ui.Tooltip.ext );
+$.extend( // add tooltip functionality to EditableValue
+	wb.ui.PropertyEditTool.EditableValue.Interface.prototype,
+	wb.ui.Tooltip.ext
+);
+
+} )( mediaWiki, wikibase, jQuery );

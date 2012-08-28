@@ -2,23 +2,24 @@
  * JavaScript giving information about a site of the 'Wikibase' extension.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
 
 /**
  * Offers information about a site known to the local Wikibase installation.
+ * @constructor
+ * @since 0.1
  */
-window.wikibase.Site = function( siteDetails ) {
+wb.Site = function( siteDetails ) {
 	this._siteDetails = siteDetails;
 };
-window.wikibase.Site.prototype = {
-
+wb.Site.prototype = {
 	/**
 	 * Returns the sites id.
 	 */
@@ -103,3 +104,4 @@ window.wikibase.Site.prototype = {
 	}
 
 };
+} )( mediaWiki, wikibase, jQuery );

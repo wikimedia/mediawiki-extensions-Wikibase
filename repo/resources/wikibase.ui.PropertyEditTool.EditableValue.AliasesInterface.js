@@ -2,27 +2,24 @@
  * JavaScript for a part of an items editable aliases
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-'use strict';
+( function( mw, wb, $, undefined ) {
+"use strict";
+var $PARENT = wb.ui.PropertyEditTool.EditableValue.ListInterface;
 
 /**
  * Serves the input interface for an items aliases and handles the conversion between the pure html representation
  * and the interface itself in both directions.
- *
- * @param jQuery subject
+ * @constructor
+ * @see wikibase.ui.PropertyEditTool.EditableValue.ListInterface
+ * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.apply( this, arguments );
-};
-window.wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.prototype
-	= Object.create( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.prototype );
-$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.prototype, {
+wb.ui.PropertyEditTool.EditableValue.AliasesInterface = wb.utilities.inherit( $PARENT, {
 	/**
 	 * @see wikibase.ui.PropertyEditTool.ListInterface.UI_VALUE_PIECE_CLASS
 	 * @const
@@ -33,6 +30,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface.pro
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.inputPlaceholder
 	 * @var string
 	 */
-	inputPlaceholder: window.mw.msg( 'wikibase-alias-edit-placeholder' )
+	inputPlaceholder: mw.msg( 'wikibase-alias-edit-placeholder' )
 } );
 
+} )( mediaWiki, wikibase, jQuery );

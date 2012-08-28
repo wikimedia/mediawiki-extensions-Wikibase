@@ -10,13 +10,17 @@
  * @author H. Snater
  * @author Daniel Werner
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
 
-/**
- * ui related collection of jQuery extensions of the Wikibase extension
- * @var Object
- */
-window.wikibase.utilities.jQuery.ui = window.wikibase.utilities.jQuery.ui || {};
+	/**
+	 * ui related collection of jQuery extensions of the Wikibase extension
+	 * @var Object
+	 */
+	wb.utilities.jQuery.ui = wb.utilities.jQuery.ui || {};
+
+} )( mediaWiki, wikibase, jQuery );
+
 
 /**
  * Gets the width of the browser's scrollbar.
@@ -39,6 +43,7 @@ window.wikibase.utilities.jQuery.ui = window.wikibase.utilities.jQuery.ui || {};
 		return ( majorWidth - minorWidth );
 	};
 } )( jQuery );
+
 
 /**
  * Can be used on an input element to trigger an event whenever some text was changed. This is different from the

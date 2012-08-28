@@ -2,28 +2,31 @@
  * JavaScript for 'Wikibase' property edit tool toolbar groups
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
+var $PARENT = wb.ui.Toolbar;
 
 /**
  * Represents a group of toolbar elements within a toolbar
+ * @constructor
+ * @see wb.ui.Toolbar
+ * @since 0.1
  */
-window.wikibase.ui.Toolbar.Group = function() {
-	this._init();
+wb.ui.Toolbar.Group = function() {
+	this.init();
 };
-window.wikibase.ui.Toolbar.Group.prototype = Object.create( window.wikibase.ui.Toolbar.prototype );
-$.extend( window.wikibase.ui.Toolbar.Group.prototype, {
+wb.ui.Toolbar.Group = wb.utilities.inherit( $PARENT, {
 
 	UI_CLASS: 'wb-ui-toolbar-group',
 
-	_init: function() {
-		window.wikibase.ui.Toolbar.prototype._init.call( this );
+	init: function() {
+		$PARENT.prototype.init.call( this );
 	},
 
 	_drawToolbar: function() {
@@ -41,7 +44,7 @@ $.extend( window.wikibase.ui.Toolbar.Group.prototype, {
 	},
 
 	destroy: function() {
-		window.wikibase.ui.Toolbar.prototype.destroy.call( this );
+		$PARENT.prototype.destroy.call( this );
 	},
 
 	/////////////////
@@ -49,7 +52,10 @@ $.extend( window.wikibase.ui.Toolbar.Group.prototype, {
 	/////////////////
 
 	/**
-	 * @see window.wikibase.ui.Toolbar.Group.renderItemSeparators
+	 * @see wb.ui.Toolbar.Group.renderItemSeparators
 	 */
 	renderItemSeparators: true
 } );
+
+} )( mediaWiki, wikibase, jQuery );
+

@@ -2,27 +2,23 @@
  * JavaScript for a part of an editable property value offering auto complete functionality
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
+( function( mw, wb, $, undefined ) {
+"use strict";
+var $PARENT = wb.ui.PropertyEditTool.EditableValue.Interface;
 
 /**
  * Serves an autocomplete supported input interface as part of an EditableValue
- *
- * @param jQuery subject
+ * @constructor
+ * @see wikibase.ui.PropertyEditTool.EditableValue.Interface
+ * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
-};
-window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype =
-	new window.wikibase.ui.PropertyEditTool.EditableValue.Interface();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype, {
-
+wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inherit( $PARENT, {
 	/**
 	 * timeout if auto-complete AJAX request in milliseconds
 	 * @const int
@@ -41,9 +37,9 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 */
 	_lastKeyDown: null,
 
-	_init: function( subject ) {
+	init: function( subject ) {
 		this._currentResults = [];
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
+		$PARENT.prototype.init.call( this, subject );
 	},
 
 	/**
@@ -51,7 +47,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._initInputElement
 	 */
 	_initInputElement: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement.call( this );
+		$PARENT.prototype._initInputElement.call( this );
 
 		// make autocomplete results list strech from the right side of the input box in rtl
 		if ( document.documentElement.dir == 'rtl' ) {
@@ -73,9 +69,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._buildInputElement
 	 */
 	_buildInputElement: function() {
-		// get basic input box
-		var inputElement
-			= window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
+		// get basic input box:
+		var inputElement = $PARENT.prototype._buildInputElement.call( this );
 
 		// extend input element with autocomplete
 		if ( this.ajaxParams !== null ) {
@@ -175,7 +170,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 						shortMessage: mw.msg( 'wikibase-error-autocomplete-connection' ),
 						message: mw.msg( 'wikibase-error-autocomplete-response', errorThrown )
 					};
-					this.setTooltip( new window.wikibase.ui.Tooltip(
+					this.setTooltip( new wb.ui.Tooltip(
 						this._inputElem,
 						error,
 						{ gravity: 'nw' }
@@ -276,7 +271,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._disableInputElement
 	 */
 	_disableInputElement: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._disableInputElement.call( this );
+		$PARENT.prototype._disableInputElement.call( this );
 		this._inputElem.autocomplete( "disable" );
 		this._inputElem.autocomplete( "close" );
 	},
@@ -285,7 +280,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._enableInputElement
 	 */
 	_enableInputElement: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._enableInputElement.call( this );
+		$PARENT.prototype._enableInputElement.call( this );
 		this._inputElem.autocomplete( "enable" );
 	},
 
@@ -317,3 +312,4 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterfac
 
 } );
 
+} )( mediaWiki, wikibase, jQuery );

@@ -2,7 +2,6 @@
  * JavaScript for managing editable representation of site links.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -10,18 +9,20 @@
  * @author H. Snater
  * @author Daniel Werner
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
+var $PARENT = wb.ui.PropertyEditTool.EditableValue;
 
 /**
  * Serves the input interface for a site link, extends EditableValue.
- * @see window.wikibase.ui.PropertyEditTool.EditableValue
+ * @constructor
+ * @see wikibase.ui.PropertyEditTool.EditableValue
+ * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool.EditableSiteLink = function( subject, toolbar ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject, toolbar );
-};
-window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
-
+wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.API_VALUE_KEY
+	 */
 	API_VALUE_KEY: 'sitelinks',
 
 	/**
@@ -46,7 +47,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 * @see wikibase.ui.PropertyEditTool.EditableValue._initInterfaces
 	 */
 	_initInterfaces: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._initInterfaces.call( this );
+		$PARENT.prototype._initInterfaces.call( this );
 		// make interfaces available for public since they contain interesting data:
 		this.siteIdInterface = this._interfaces.siteId;
 		this.pageNameInterface = this._interfaces.pageName;
@@ -61,13 +62,13 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	_buildInterfaces: function( subject ) {
 		var interfaces = [];
 		var tableCells = subject.children( 'td' );
-		var ev = window.wikibase.ui.PropertyEditTool.EditableValue;
+		var ev = wb.ui.PropertyEditTool.EditableValue;
 
 		// interface for choosing the source site:
 		interfaces.siteId = new ev.SiteIdInterface();
 		interfaces.siteId.inputPlaceholder = mw.msg( 'wikibase-sitelink-site-edit-placeholder' );
 		interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
-		interfaces.siteId._init( tableCells[0] );
+		interfaces.siteId.init( tableCells[0] );
 
 		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
 
@@ -93,7 +94,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 * @param relatedInterface wikibase.ui.PropertyEditTool.EditableValue.Interface
 	 */
 	_interfaceHandler_onInputRegistered: function( relatedInterface ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
+		$PARENT.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
 
 		var idInterface = this._interfaces.siteId;
 		var pageInterface = this._interfaces.pageName;
@@ -154,7 +155,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	startEditing: function() {
 		// set ignored site links again since they could have changed
 		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
-		return window.wikibase.ui.PropertyEditTool.EditableValue.prototype.startEditing.call( this );
+		return $PARENT.prototype.startEditing.call( this );
 	},
 
 	/**
@@ -171,15 +172,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 		 * corresponding interface (still) exists since it might have been destroyed when - instead
 		 * of being saved - the pending value got removed again by cancelling
 		 */
-		promise.done(
-			$.proxy(
-				function() {
-					if ( this._interfaces !== null ) {
-						this._interfaces.siteId.setActive( this.isPending() );
-					}
-				}, this
-			)
-		);
+		promise.done( $.proxy( function() {
+			if ( this._interfaces !== null ) {
+				this._interfaces.siteId.setActive( this.isPending() );
+			}
+		}, this ) );
 		return promise;
 	},
 
@@ -199,7 +196,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function( apiAction ) {
-		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
+		var params = $PARENT.prototype.getApiCallParams.call( this, apiAction );
 		params = $.extend( params, {
 			action: 'wbsetsitelink',
 			linksite: this.siteIdInterface.getSelectedSite().getGlobalSiteId(),
@@ -229,3 +226,5 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 	 */
 	ignoredSiteLinks: null
 } );
+
+} )( mediaWiki, wikibase, jQuery );

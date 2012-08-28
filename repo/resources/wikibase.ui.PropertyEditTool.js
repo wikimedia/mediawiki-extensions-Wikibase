@@ -2,26 +2,23 @@
  * JavaScript for 'Wikibase' edit forms
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
+var $PARENT = wb.ui.Base;
 
 /**
  * Module for 'Wikibase' extensions user interface functionality.
- *
+ * @constructor
+ * @see wikibase.ui.Base;
  * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool = function( subject ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject );
-	}
-};
-window.wikibase.ui.PropertyEditTool.prototype = {
+wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 	/**
 	 * @const
 	 * Class which marks a edit tool ui within the site html.
@@ -51,11 +48,10 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * Initializes the edit form for the given element.
 	 * This should normally be called directly by the constructor.
 	 */
-	_init: function( subject ) {
-		if( this._subject !== null ) {
-			// initializing twice should never happen, have to destroy first!
-			this.destroy();
-		}
+	init: function( subject ) {
+		var self = this;
+		$PARENT.prototype.init.apply( this, arguments );
+
 		this._editableValues = [];
 
 		this._subject = $( subject );
@@ -68,57 +64,44 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		this._onRefreshView( 0 );
 
 		// disabling all actions when starting an edit mode
-		$( wikibase ).on(
-			'startItemPageEditMode',
-			$.proxy(
-				function( event, origin ) {
-					this.disable( origin );
-				}, this
-			)
-		);
-
+		$( wb )
+		.on( 'startItemPageEditMode',
+			function( event, origin ) {
+				self.disable( origin );
+			}
+		)
 		// re-enabling all actions then stoping an edit mode
-		$( wikibase ).on(
-			'stopItemPageEditMode',
-			$.proxy(
-				function( event, origin ) {
-					this.enable();
-				}, this
-			)
-		);
-
+		.on( 'stopItemPageEditMode',
+			function( event, origin ) {
+				self.enable();
+			}
+		)
 		/**
 		 * highlight whole PropertyEditTool context if there may no additionally EditableValues be
 		 * added (in that case, PropertyEditTool is a container for a fixed set of EditableValues
 		 * that is being edited as a whole)
 		 */
-		$( wikibase ).on(
-			'startItemPageEditMode',
-			$.proxy(
-				function( event, origin ) {
-					if( this.hasValue( origin ) ) {
-						this._subject.addClass( this.UI_CLASS + '-ineditmode' );
-					}
-				}, this
-			)
-		);
-		$( wikibase ).on(
-			'stopItemPageEditMode',
-			$.proxy(
-				function( event, origin, wasPending ) {
-					this._subject.removeClass( this.UI_CLASS + '-ineditmode' );
-					if(
-						this.allowsMultipleValues
-						&& typeof wasPending !== 'undefined'
-						&& wasPending
-						&& this.hasValue( origin )
-					) {
-						/* focus "add" button after adding a value to a multi-value property to
-						instantly allow adding another value */
-						this._toolbar.btnAdd.setFocus();
-					}
-				}, this
-			)
+		.on( 'startItemPageEditMode',
+			function( event, origin ) {
+				if( self.hasValue( origin ) ) {
+					self._subject.addClass( self.UI_CLASS + '-ineditmode' );
+				}
+			}
+		)
+		.on( 'stopItemPageEditMode',
+			function( event, origin, wasPending ) {
+				self._subject.removeClass( self.UI_CLASS + '-ineditmode' );
+				if(
+					self.allowsMultipleValues
+					&& wasPending !== undefined
+					&& wasPending
+					&& self.hasValue( origin )
+				) {
+					/* focus "add" button after adding a value to a multi-value property to
+					instantly allow adding another value */
+					self._toolbar.btnAdd.setFocus();
+				}
+			}
 		);
 
 	},
@@ -128,20 +111,20 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * to add more values.
 	 */
 	_initToolbar: function() {
-		this._toolbar = new window.wikibase.ui.Toolbar( this.UI_CLASS );
-		this._toolbar.innerGroup = new window.wikibase.ui.Toolbar.Group();
+		this._toolbar = new wb.ui.Toolbar( this.UI_CLASS );
+		this._toolbar.innerGroup = new wb.ui.Toolbar.Group();
 		this._toolbar.addElement( this._toolbar.innerGroup );
 
 		if( this.allowsMultipleValues || this.allowsFullErase ) {
 			if ( this.allowsMultipleValues ) {
 				// toolbar group for buttons:
-				this._toolbar.lblFull = new window.wikibase.ui.Toolbar.Label(
-						'&nbsp;- ' + mw.message( 'wikibase-propertyedittool-full' ).escaped()
+				this._toolbar.lblFull = new wb.ui.Toolbar.Label(
+					'&nbsp;- ' + mw.message( 'wikibase-propertyedittool-full' ).escaped()
 				);
 			}
 
 			// only add 'add' button if we can have several values
-			this._toolbar.btnAdd = new window.wikibase.ui.Toolbar.Button( mw.msg( 'wikibase-add' ) );
+			this._toolbar.btnAdd = new wb.ui.Toolbar.Button( mw.msg( 'wikibase-add' ) );
 			$( this._toolbar.btnAdd ).on( 'action', $.proxy( function( event ) {
 				this.enterNewValue();
 			}, this ) );
@@ -165,7 +148,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 						// enabled, label with 'full' message not required
 						self._toolbar.removeElement( self._toolbar.lblFull );
 					}
-					return window.wikibase.ui.Toolbar.Button.prototype.setDisabled.call( this, disable );
+					return wb.ui.Toolbar.Button.prototype.setDisabled.call( this, disable );
 				};
 				this._toolbar.btnAdd.setDisabled( false ); // will run the code above
 			}
@@ -279,7 +262,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		var editableValueToolbar = this._buildSingleValueToolbar( editableValue );
 
 		// initialiye editable value and give appropriate toolbar on the way:
-		editableValue._init( valueElem, editableValueToolbar );
+		editableValue.init( valueElem, editableValueToolbar );
 
 		var self = this;
 		editableValue.onAfterRemove = function() {
@@ -349,12 +332,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @return wikibase.ui.Toolbar
 	 */
 	_buildSingleValueToolbar: function( editableValue ) {
-		var toolbar = new window.wikibase.ui.Toolbar();
+		var toolbar = new wb.ui.Toolbar();
 
 		// give the toolbar a edit group with basic edit commands:
-		var editGroup = new window.wikibase.ui.Toolbar.EditGroup();
+		var editGroup = new wb.ui.Toolbar.EditGroup();
 		editGroup.displayRemoveButton = this.allowsMultipleValues; // remove button if we have a list
-		editGroup._init( editableValue );
+		editGroup.init( editableValue );
 
 		toolbar.addElement( editGroup );
 		toolbar.editGroup = editGroup; // remember this
@@ -383,6 +366,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 			this._toolbar.destroy();
 			this._toolbar = null;
 		}
+		$PARENT.prototype.destroy.apply( this, arguments );
 	},
 
 	/**
@@ -577,12 +561,12 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	},
 
 	/**
-	 * defines which editable value should be used for this.
+	 * Defines which editable value should be used for this. Returns the constructor for creating such a value.
 	 *
-	 * @return window.wikibase.ui.PropertyEditTool.EditableValue
+	 * @return wb.ui.PropertyEditTool.EditableValue
 	 */
 	getEditableValuePrototype: function() {
-		return window.wikibase.ui.PropertyEditTool.EditableValue;
+		return wb.ui.PropertyEditTool.EditableValue;
 	},
 
 	/**
@@ -631,7 +615,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @return bool true if disabled
 	 */
 	isDisabled: function() {
-		return ( this.getElementsState() === wikibase.ui.ELEMENT_STATE.DISABLED );
+		return ( this.getElementsState() === wb.ui.ELEMENT_STATE.DISABLED );
 	},
 
 	/**
@@ -640,7 +624,7 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @return bool true if enabled
 	 */
 	isEnabled: function() {
-		return ( this.getElementsState() === wikibase.ui.ELEMENT_STATE.ENABLED );
+		return ( this.getElementsState() === wb.ui.ELEMENT_STATE.ENABLED );
 	},
 
 	/**
@@ -666,11 +650,11 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 		}
 
 		if ( disabled === true ) {
-			return wikibase.ui.ELEMENT_STATE.DISABLED;
+			return wb.ui.ELEMENT_STATE.DISABLED;
 		} else if ( enabled === true ) {
-			return wikibase.ui.ELEMENT_STATE.ENABLED;
+			return wb.ui.ELEMENT_STATE.ENABLED;
 		} else {
-			return wikibase.ui.ELEMENT_STATE.MIXED;
+			return wb.ui.ELEMENT_STATE.MIXED;
 		}
 	},
 
@@ -690,4 +674,6 @@ window.wikibase.ui.PropertyEditTool.prototype = {
 	 * @var bool
 	 */
 	allowsFullErase: false
-};
+} );
+
+} )( mediaWiki, wikibase, jQuery );

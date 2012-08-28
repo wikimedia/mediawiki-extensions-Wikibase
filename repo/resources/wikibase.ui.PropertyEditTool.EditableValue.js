@@ -2,51 +2,57 @@
  * JavaScript for managing editable representation of property values.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  * @author H. Snater
- *
- * Events:
- * -------
- * afterStopEditing: Triggered after having left edit mode
- *                   Parameters: (1) jQuery.event
- *                               (2) bool - save - whether save action was triggered
- *                               (3) bool - wasPending - whether value is a completely new value
- * newItemCreated: Triggered after an item has been created and the necessary API request has returned
- *                 Parameters: (1) jQuery.event
- *                             (2) JSON - item - the new item returned by the API request FIXME: this should be an
- *                                                                                                 'Item' object!
- * startItemPageEditMode: Triggered when any edit mode on the item page is started
- *                        Parameters: (1) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
- * stopItemPageEditMode: Triggered when any edit mode on the item page is stopped
- *                       Parameters: (1) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
- *                                   (2) bool - wasPending - whether value was a previously not existent/new value that has just been added
- *
- * showError: Triggered when error is displayed.
- *            Parameters: (1) object error containing details about the error, usually API related.
- *
- * hideError: Triggered when displayed error is removed again.
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
+var $PARENT = wb.ui.Base;
 
 /**
  * Manages several editable value pieces which act as converters between the pure html input and the
  * input interface. Also does the API call to store new and modify existing values as well as the
  * removal of stored values.
+ * @constructor
+ * @see wikibase.ui.Base
+ * @since 0.1
  *
- * @param jQuery subject
- * @param wikibase.ui.Toolbar toolbar
+ * @event afterStopEditing: Triggered after having left edit mode
+ *        (1) jQuery.Event
+ *        (2) bool - save - whether save action was triggered
+ *        (3) bool - wasPending - whether value is a completely new value
+ *
+ * @event newItemCreated: Triggered after an item has been created and the necessary API request has returned
+ *        (1) jQuery.Event
+ *        (2) JSON - item - the new item returned by the API request. | FIXME: this should be an 'Item' object!
+ *
+ * @event startItemPageEditMode: Triggered when any edit mode on the item page is started
+ *        (1) jQuery.Event
+ *        (2) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
+ *
+ * @event stopItemPageEditMode: Triggered when any edit mode on the item page is stopped
+ *        (1) jQuery.Event
+ *        (2) wikibase.ui.PropertyEditTool.EditableValue - origin - object which triggered the event
+ *        (3) bool - wasPending - whether value was a previously not existent/new value that has just been added
+ *
+ * @event showError: Triggered when error is displayed.
+ *        (1) jQuery.Event
+ *        (2) Object error containing details about the error, usually API related.
+ *
+ * @event hideError: Triggered when displayed error is removed again.
+ *        (1) jQuery.Event
  */
-window.wikibase.ui.PropertyEditTool.EditableValue = function( subject, toolbar ) {
-	if( typeof subject != 'undefined' && typeof toolbar != 'undefined' ) {
-		this._init( subject, toolbar );
-	}
-};
-window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
+wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
+	// Overwritten constructor:
+	function( subject, toolbar ) {
+		if( $.inArray( undefined, [ subject, toolbar ] ) ) {
+			this.init( subject, toolbar );
+		}
+	}, {
 	/**
 	 * @const
 	 * Class which marks the element within the site html.
@@ -138,12 +144,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @param jQuery subject
 	 * @param wikibase.ui.Toolbar toolbar shouldn't be initialized yet
 	 */
-	_init: function( subject, toolbar ) {
-		if( this._subject !== null ) {
-			// initializing twice should never happen, have to destroy first!
-			this.destroy();
-		}
-		this._subject = $( subject );
+	init: function( subject, toolbar ) {
+		$PARENT.prototype.init.apply( this, arguments );
 		this._subject.addClass( this.UI_CLASS );
 
 		this._pending = this._subject.hasClass( 'wb-pending-value' );
@@ -190,7 +192,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		var interfaceParent = $( '<span class="wb-value"/>' ).append( subject.contents() );
 		subject.prepend( interfaceParent );
-		interfaces.push( new window.wikibase.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this ) );
+		interfaces.push( new wb.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this ) );
 
 		return interfaces;
 	},
@@ -375,7 +377,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			promise = this.save(); // save... (will call all the API stuff)
 		}
 
-		var wasPending = ( typeof promise.promisor.wasPending !== 'undefined' )
+		var wasPending = ( promise.promisor.wasPending !== undefined )
 				? promise.promisor.wasPending
 				: this.isPending();
 		// store deferred so we can return it when this is called again while still running
@@ -586,7 +588,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 					? mw.msg( 'wikibase-error-remove-timeout' )
 					: mw.msg( 'wikibase-error-save-timeout' );
 			} else {
-				if ( typeof response.error != 'undefined' ) {
+				if ( response.error !== undefined ) {
 					error.code = response.error.code;
 					error.message = response.error.info;
 					error.shortMessage = ( this.API_ERROR_MESSAGE_MAP[ response.error.code ] !== undefined )
@@ -614,7 +616,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 
 		this._subject.addClass( 'wb-error' );
 
-		btn.setTooltip( new window.wikibase.ui.Tooltip( btn._elem, error, { gravity: 'nw' } ) );
+		btn.setTooltip( new wb.ui.Tooltip( btn._elem, error, { gravity: 'nw' } ) );
 		btn.getTooltip().show( true );
 		$( btn.getTooltip() ).on( 'hide', $.proxy( function() {
 			this._subject.removeClass( 'wb-error' );
@@ -937,7 +939,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool true if disabled
 	 */
 	isDisabled: function() {
-		return ( this.getElementsState() === wikibase.ui.ELEMENT_STATE.DISABLED );
+		return ( this.getElementsState() === wb.ui.ELEMENT_STATE.DISABLED );
 	},
 
 	/**
@@ -946,7 +948,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool true if enabled
 	 */
 	isEnabled: function() {
-		return ( this.getElementsState() === wikibase.ui.ELEMENT_STATE.ENABLED );
+		return ( this.getElementsState() === wb.ui.ELEMENT_STATE.ENABLED );
 	},
 
 	/**
@@ -970,11 +972,11 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		disabled = disabled && this._toolbar.isDisabled();
 
 		if ( disabled === true ) {
-			return wikibase.ui.ELEMENT_STATE.DISABLED;
+			return wb.ui.ELEMENT_STATE.DISABLED;
 		} else if ( enabled === true ) {
-			return wikibase.ui.ELEMENT_STATE.ENABLED;
+			return wb.ui.ELEMENT_STATE.ENABLED;
 		} else {
-			return wikibase.ui.ELEMENT_STATE.MIXED;
+			return wb.ui.ELEMENT_STATE.MIXED;
 		}
 	},
 
@@ -998,6 +1000,10 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		var span = this._subject.children( 'span' ); // span that was inserted in _buildInterfaces()
 		span.contents().detach().appendTo( this._subject );
 		span.remove();
+
+		this._subject.removeClass( this.UI_CLASS );
+
+		$PARENT.prototype.destroy.call( this );
 	},
 
 	/////////////////
@@ -1018,4 +1024,6 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * Callback called after the element was removed
 	 */
 	onAfterRemove: null
-};
+} );
+
+} )( mediaWiki, wikibase, jQuery );

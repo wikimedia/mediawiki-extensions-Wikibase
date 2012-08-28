@@ -26,8 +26,8 @@
  *       thing is a mess made of functions returning/expecting either a label or a DOM node.
  * TODO: Documentation for events
  */
-
-( function( $, mw, undefined ) {
+( function( $, undefined ) {
+	"use strict";
 
 	$.widget( 'ui.tagadata', {
 
@@ -532,4 +532,4 @@
 
 	} );
 
-} )( jQuery, window.mediaWiki );
+} )( jQuery );

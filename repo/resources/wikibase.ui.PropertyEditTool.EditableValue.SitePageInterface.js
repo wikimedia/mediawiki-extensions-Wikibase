@@ -2,7 +2,6 @@
  * JavaScript for a part of an editable property value
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -10,22 +9,24 @@
  * @author H. Snater
  * @author Daniel Werner
  */
+( function( mw, wb, $, undefined ) {
 "use strict";
+var $PARENT = wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface;
 
 /**
  * Serves the input interface to choose a wiki page from some MediaWiki installation as part of an
  * editable value
+ * @constructor
+ * @see wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface
+ * @since 0.1
  *
  * @param jQuery subject
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface = function( subject, site ) {
-	delete this.setResultSet; // no use calling that function since result set is retrieved via AJAX
-	window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.apply( this, arguments );
-};
-window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.prototype
-	= new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
-
-$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.prototype, {
+wb.ui.PropertyEditTool.EditableValue.SitePageInterface = wb.utilities.inherit( $PARENT,
+	function() {
+		delete this.setResultSet; // no use calling that function since result set is retrieved via AJAX
+		$PARENT.apply( this, arguments );
+	}, {
 	/**
 	 * Information for which site this autocomplete interface should serve input suggestions
 	 * @var wikibase.Site
@@ -33,12 +34,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 	_site: null,
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._init()
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.init()
 	 *
 	 * @param site wikibase.Site as source for the page suggestions
 	 */
-	_init: function( subject, site ) {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._init.apply( this, arguments );
+	init: function( subject, site ) {
+		$PARENT.prototype.init.apply( this, arguments );
 		if( site ) {
 			this.setSite( site );
 		}
@@ -97,8 +98,10 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.pr
 	},
 
 	destroy: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.destroy.call( this );
+		$PARENT.prototype.destroy.call( this );
 		this._site = null;
 	}
 
 } );
+
+} )( mediaWiki, wikibase, jQuery );

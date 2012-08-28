@@ -57,7 +57,7 @@
 
 	test( 'init input', function() {
 
-		this.subject._init( this.node );
+		this.subject.init( this.node );
 
 		ok(
 			this.subject._subject[0] == this.node[0],
@@ -142,7 +142,7 @@
 
 		this.subject.ignoredSiteLinks = [ wikibase.getSite( this.siteIds[1] ) ];
 
-		this.subject._init( this.node );
+		this.subject.init( this.node );
 
 		ok(
 			this.subject._subject[0] == this.node[0],
