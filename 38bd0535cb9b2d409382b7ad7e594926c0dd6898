@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//yo8\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-28T09:31:31Z",
+      "side": 1,
+      "message": "Don\u0027t use $wgArticle, it causes an error:\n\nNotice: Use of $wgArticle was deprecated in MediaWiki 1.18. [Called from Wikibase\\RepoHooks::onPageTabs in /DATA/var/www/daniel/wikidata/extensions/Wikibase/repo/Wikibase.hooks.php at line 468] in /DATA/var/www/daniel/wikidata/includes/GlobalFunctions.php on line 1070\n\nInstead of $wgArticle, use $history-\u003egetArticle()\n\nPlease make sure you have cranked PHP\u0027s error reporting all the way up for debugging:\n\nerror_reporting( E_ALL | E_STRICT );\n\nini_set( \u0027display_errors\u0027, 1 );\n\n$wgShowExceptionDetails \u003d true;\n\n$wgShowSQLErrors        \u003d true;\n\n$wgDevelopmentWarnings  \u003d true;\n\n$wgDebugToolbar \u003d true;",
+      "revId": "38bd0535cb9b2d409382b7ad7e594926c0dd6898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//ypo\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-28T09:31:31Z",
+      "side": 1,
+      "message": "this should probably use a system message for formatting, not hardcode parentacies. It seems like the respective code in HistoryPage is this:\n\n$this-\u003emsg( \u0027parentheses\u0027 )-\u003erawParams( $lang-\u003epipeList( $tools ) )-\u003eescaped();\n\nThough of course you wouldn\u0027t need a pipe list here, and you have to be careful about what has to be escaped when, etc.",
+      "revId": "38bd0535cb9b2d409382b7ad7e594926c0dd6898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//ypk\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-28T09:31:31Z",
+      "side": 1,
+      "message": "hm, tabs is one way, but i\u0027d really prefer to see the action along with the revision info just above the page content. is there no hook there?",
+      "revId": "38bd0535cb9b2d409382b7ad7e594926c0dd6898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//ypM\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-08-28T09:31:31Z",
+      "side": 1,
+      "message": "I havn\u0027t tested it, but this should work:\n\n// splice restore tab into the views array, at the second position.\n$keys \u003d array_keys( $links[\u0027views\u0027] );\n$views \u003d array_keys( $links[\u0027views\u0027] );\n\narray_splice( $keys, 1, 0, array( \u0027restore\u0027 ) );\narray_splice( $views, 1, 0, array( \u0027class\u0027 \u003d\u003e ..., ..., ... ) );\n\n$links[\u0027views\u0027] \u003d array_combine( $keys, $views );\n\n\nOr maybe even nicer (but also untested):\n\n// splice restore tab into the views array, at the second position.\n$head \u003d array_slice( $links[\u0027views\u0027], 0, 1 );\n$tail \u003d array_slice( $links[\u0027views\u0027], 1 );\n$neck \u003d array( \u0027restore\u0027 \u003d\u003e array( \u0027class\u0027 \u003d\u003e ..., ..., ... ) );\n\n$links[\u0027views\u0027] \u003d array_merge( $head, $neck, $tail );",
+      "revId": "38bd0535cb9b2d409382b7ad7e594926c0dd6898",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
