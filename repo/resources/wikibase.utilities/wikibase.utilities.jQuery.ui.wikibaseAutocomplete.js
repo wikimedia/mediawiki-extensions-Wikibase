@@ -9,10 +9,9 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
-
-
 ( function( $ ) {
+	'use strict';
+
 	/**
 	 * @example $( 'input' ).wikibaseAutocomplete( { source: ['a', 'b', 'c'] });
 	 */
