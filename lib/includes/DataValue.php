@@ -4,7 +4,7 @@
 
 namespace DataValue {
 
-	interface DataValue {
+	interface DataValue extends \Wikibase\Immutable {
 
 	}
 

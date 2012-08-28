@@ -46,17 +46,6 @@ class InstanceOfSnak extends SnakObject {
 	}
 
 	/**
-	 * Sets the item id of the class
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $itemId
-	 */
-	public function setClassItemId( $itemId ) {
-		$this->$itemId = $itemId;
-	}
-
-	/**
 	 * @see Serializable::serialize
 	 *
 	 * @since 0.1

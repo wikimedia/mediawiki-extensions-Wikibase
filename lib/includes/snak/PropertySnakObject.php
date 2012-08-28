@@ -46,17 +46,6 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	}
 
 	/**
-	 * @see PropertySnak::setPropertyId
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $propertyId
-	 */
-	public function setPropertyId( $propertyId ) {
-		$this->propertyId = $propertyId;
-	}
-
-	/**
 	 * @see Serializable::serialize
 	 *
 	 * @since 0.1
