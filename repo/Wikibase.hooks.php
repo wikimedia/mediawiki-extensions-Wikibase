@@ -16,6 +16,7 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Nikola Smolenski
  * @author Daniel Werner
+ * @author Michał Łazowik
  */
 final class RepoHooks {
 
@@ -406,6 +407,43 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Modify line endings on history page.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageHistoryLineEnding
+	 *
+	 * @since 0.1
+	 *
+	 * @param \HistoryPager $history
+	 * @param object &$row
+	 * @param string &$s
+	 * @param array &$classes
+	 *
+	 * @return boolean
+	 */
+	public static function onPageHistoryLineEnding( \HistoryPager $history, &$row, &$s, array &$classes  ) {
+		$article = $history->getArticle();
+		$rev = new Revision( $row );
+
+		if ( in_array( $history->getTitle()->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) )
+			&& $article->getPage()->getLatest() !== $rev->getID()
+			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
+		) {
+			$link = \Linker::linkKnown(
+				$rev->getTitle(),
+				$history->msg( 'wikibase-restoreold' )->escaped(),
+				array(),
+				array(
+					'action'	=> 'edit',
+					'restore'	=> $rev->getId()
+				)
+			);
+
+			$s .= " " . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
+		}
+
+		return true;
+	}
+
+	/**
 	 * Alter the structured navigation links in SkinTemplates.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SkinTemplateNavigation
 	 *
@@ -417,8 +455,32 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onPageTabs( \SkinTemplate &$sktemplate, array &$links ) {
-		if ( in_array( $sktemplate->getTitle()->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) ) ) {
+		$title = $sktemplate->getTitle();
+		$request = $sktemplate->getRequest();
+
+		if ( in_array( $title->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) ) ) {
 			unset( $links['views']['edit'] );
+
+			if ( $title->quickUserCan( 'edit', $sktemplate->getUser() ) ) {
+				$old = !$sktemplate->isRevisionCurrent()
+					&& !$request->getCheck( 'diff' );
+
+				$restore = $request->getCheck( 'restore' );
+
+				if ( $old || $restore ) {
+					// insert restore tab into views array, at the second position
+
+					$head = array_slice( $links['views'], 0, 1);
+					$tail = array_slice( $links['views'], 1 );
+					$neck['restore'] = array(
+						'class' => ( $restore ) ? 'selected' : false,
+						'text' => $sktemplate->getLanguage()->ucfirst( wfMsg( 'wikibase-restoreold' ) ),
+						'href' => $title->getLocalURL( 'action=edit&restore=' . ( ( $restore ) ? $request->getText( 'restore' ) : $sktemplate->getRevisionId() ) ),
+					);
+
+					$links['views'] = array_merge( $head, $neck, $tail );
+				}
+			}
 		}
 
 		return true;
