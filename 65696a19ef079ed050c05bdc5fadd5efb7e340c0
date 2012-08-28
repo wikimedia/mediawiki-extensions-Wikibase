@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//ymk\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2012-08-28T11:00:57Z",
+      "side": 1,
+      "message": "Do not use Title Case",
+      "revId": "65696a19ef079ed050c05bdc5fadd5efb7e340c0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
