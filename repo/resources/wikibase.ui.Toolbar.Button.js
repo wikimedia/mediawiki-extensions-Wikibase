@@ -2,58 +2,55 @@
  * JavaScript for 'Wikibase' property edit tool toolbar buttons
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  * @author H. Snater
- *
- * Events:
- * -------
- * action: Triggered when the button action is triggered by clicking or hitting enter on it
- *                   Parameters: (1) jQuery.event
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
+var $PARENT = wb.ui.Toolbar.Label
 
 /**
  * Represents a button within a wikibase.ui.Toolbar toolbar
+ * @constructor
+ * @see wb.ui.Toolbar.Label
+ * @since 0.1
  *
- * @param jQuery parent
+ * @event action: Triggered when the button action is triggered by clicking or hitting enter on it
+ *        (1) jQuery.Event
  */
-window.wikibase.ui.Toolbar.Button = function( text ) {
-	window.wikibase.ui.Toolbar.Label.call( this, text );
-};
-window.wikibase.ui.Toolbar.Button.prototype = new window.wikibase.ui.Toolbar.Label();
-$.extend( window.wikibase.ui.Toolbar.Button.prototype, {
+wb.ui.Toolbar.Button = wb.utilities.inherit( $PARENT, {
 	/**
 	 * @const
 	 * Class which marks the toolbar button within the site html.
 	 */
 	UI_CLASS: 'wb-ui-toolbar-button',
 
-	_init: function( content ) {
-		wikibase.ui.Toolbar.Label.prototype._init.call( this, content );
+	/**
+	 * @see wb.ui.Toolbar.Label.init
+	 */
+	init: function( content ) {
+		$PARENT.prototype.init.call( this, content );
 
 		// disable button and attach tooltip when editing is restricted
-		$( wikibase ).on(
+		$( wb ).on(
 			'restrictItemPageActions blockItemPageActions',
-			$.proxy(
-				function( event ) {
-					this.disable();
+			$.proxy( function( event ) {
+				this.disable();
 
-					var messageId = ( event.type === 'blockItemPageActions' )
-						? 'wikibase-blockeduser-tooltip-message'
-						: 'wikibase-restrictionedit-tooltip-message';
+				var messageId = ( event.type === 'blockItemPageActions' )
+					? 'wikibase-blockeduser-tooltip-message'
+					: 'wikibase-restrictionedit-tooltip-message';
 
-					this.setTooltip(
-						mw.message( messageId ).escaped()
-					);
+				this.setTooltip(
+					mw.message( messageId ).escaped()
+				);
 
-					this._tooltip.setGravity( 'nw' );
-				}, this
-			)
+				this._tooltip.setGravity( 'nw' );
+			}, this )
 		);
 
 	},
@@ -67,8 +64,11 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 		} );
 	},
 
+	/**
+	 * @see wb.ui.Toolbar.Label.destroy
+	 */
 	destroy: function() {
-		window.wikibase.ui.Toolbar.Label.prototype.destroy.call( this );
+		$PARENT.prototype.destroy.call( this );
 		if ( this._elem !== null ) {
 			this._elem.remove();
 		}
@@ -101,7 +101,7 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 
 		if( disable ) {
 			// create a disabled label instead of a link
-			window.wikibase.ui.Toolbar.Label.prototype._initElem.call( this, text );
+			$PARENT.prototype._initElem.call( this, text );
 		}
 		else {
 			this._initElem( text );
@@ -111,7 +111,9 @@ $.extend( window.wikibase.ui.Toolbar.Button.prototype, {
 		oldElem.replaceWith( this._elem );
 
 		// call prototypes disable function:
-		return window.wikibase.ui.Toolbar.Label.prototype.setDisabled.call( this, disable );
+		return $PARENT.prototype.setDisabled.call( this, disable );
 	}
 
 } );
+
+} )( mediaWiki, wikibase, jQuery );

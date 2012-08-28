@@ -32,19 +32,19 @@
 			this.subject.destroy();
 
 			// basic check whether initial structure was restored
-			var initialStructure = true;
+			var hasInitialStructure = true;
 			this.initialStructureMembers.each( function() {
-				initialStructure = initialStructure && $( this ).parent().is( self.subject._subject );
+				hasInitialStructure = hasInitialStructure && $( this ).parent().is( self.subject.getSubject() );
 			} );
 
 			QUnit.assert.ok(
-				initialStructure,
+				hasInitialStructure,
 				'DOM nodes from initial aliases edit tool are in the right place again'
 			);
 
 			QUnit.assert.equal(
 				this.initialStructureMembers.length + values.length,
-				this.subject._subject.children().length,
+				self.subject.getSubject().children().length,
 				'No additional DOM nodes left (except those of inserted values)'
 			);
 

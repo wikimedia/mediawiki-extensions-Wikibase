@@ -24,7 +24,7 @@
 			var propertyEditTool = new window.wikibase.ui.PropertyEditTool( this.node );
 			this.editableSiteLink = new window.wikibase.ui.PropertyEditTool.EditableSiteLink;
 			var toolbar = propertyEditTool._buildSingleValueToolbar( this.editableSiteLink );
-			this.editableSiteLink._init( this.node, toolbar );
+			this.editableSiteLink.init( this.node, toolbar );
 			this.strings = {
 				valid: [ 'test', 'test 2' ],
 				invalid: [ '' ]
