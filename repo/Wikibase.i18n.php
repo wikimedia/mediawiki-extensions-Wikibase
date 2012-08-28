@@ -34,6 +34,9 @@ $messages['en'] = array(
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
 	'wikibase-sitelinks' => 'List of pages linked to this item',
+	'wikibase-sitelinks-sitename-columnheading' => 'Language',
+	'wikibase-sitelinks-siteid-columnheading' => 'Code',
+	'wikibase-sitelinks-link-columnheading' => 'Linked Article',
 	'wikibase-sitelinks-add' => 'add a link to a site-link',
 	'wikibase-sitelinks-empty' => 'No site-link for this item yet.',
 	'wikibase-sitelinks-input-help-message' => 'Set a link to a page related to this item.',
@@ -221,6 +224,9 @@ Bubble help message for entering the label of the data set used for a specific i
 Bubble help message for entering the description of the data set used for a specific item. Takes on additional argument that is the sub site identifier, ie. "English" in nominative singular form. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-description|description]] and [[m:Wikidata/Glossary#Item|item]].',
 	'wikibase-sitelinks' => '[[File:Screenshot WikidataRepo 2012-05-13 A.png|right|0x150px]]
 Header messages for pages on a specific cluster of sites linked to this item. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#Item|item]].',
+	'wikibase-sitelinks-sitename-columnheading' => 'Site links table column heading for the column containing the language names.',
+	'wikibase-sitelinks-siteid-columnheading' => 'Site links table column heading for the column containing the language codes.',
+	'wikibase-sitelinks-link-columnheading' => 'Site links table column heading for the column containg the title/link of/to the referenced (Wikipedia) page.',
 	'wikibase-sitelinks-add' => 'Add a sitelink to a language specific page on the cluster. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'wikibase-sitelinks-empty' => 'There are no sitelinks for any of the language specific pages on the given cluster.  See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]] and [[m:Wikidata/Glossary#sitelinks-title|title]].',
 	'wikibase-sitelinks-input-help-message' => '[[File:Screenshot WikidataRepo 2012-05-13 D.png|right|0x150px]]

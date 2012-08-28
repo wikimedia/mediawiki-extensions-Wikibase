@@ -136,17 +136,44 @@ class ItemView extends \ContextSource {
 			$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks', 'cellspacing' => '0' ) );
 
 			$html .= Html::openElement( 'colgroup' );
-			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-site' ) );
+			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-sitename' ) );
+			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-siteid' ) );
 			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-link' ) );
-			$html .= Html::element( 'col', array( 'class' => 'wb-ui-propertyedittool-editablevalue-toolbarparent' ) );
+			$html .= Html::element( 'col', array(
+				'class' => 'wb-ui-propertyedittool-editablevalue-toolbarparent'
+			) );
 			$html .= Html::closeElement( 'colgroup' );
 
 			$html .= Html::openElement( 'thead' );
+
 			$html .= Html::openElement( 'tr' );
-			$html .= Html::openElement( 'th', array( 'colspan' => '2' ) );
+			$html .= Html::openElement( 'th', array( 'colspan' => '3' ) );
 			$html .= Html::element( 'h3', array(), wfMessage( 'wikibase-sitelinks' ) );
 			$html .= Html::closeElement( 'th' );
 			$html .= Html::closeElement( 'tr' );
+
+			$html .= Html::openElement( 'tr', array( 'class' => 'wb-sitelinks-columnheaders' ) );
+			$html .= Html::element(
+				'th',
+				array( 'class' => 'wb-sitelinks-sitename' ),
+				wfMessage( 'wikibase-sitelinks-sitename-columnheading' )
+			);
+			$html .= Html::element(
+				'th',
+				array( 'class' => 'wb-sitelinks-siteid' ),
+				wfMessage( 'wikibase-sitelinks-siteid-columnheading' )
+			);
+			$html .= Html::element(
+				'th',
+				array( 'class' => 'wb-sitelinks-link' ),
+				wfMessage( 'wikibase-sitelinks-link-columnheading' )
+			);
+			$html .= Html::element(
+				'th',
+				array( 'class' => 'wb-sitelinks-toolbar' )
+			);
+			$html .= Html::closeElement( 'tr' );
+
 			$html .= Html::closeElement( 'thead' );
 
 			$i = 0;
@@ -168,7 +195,7 @@ class ItemView extends \ContextSource {
 							'class' => 'wb-sitelinks-site-unknown ' . $alternatingClass )
 					);
 
-					$html .= Html::element( 'td', array( 'class' => ' wb-sitelinks-site wb-sitelinks-site-unknown' ), $link->getSiteID() );
+					$html .= Html::element( 'td', array( 'colspan' => '2', 'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-unknown' ), $link->getSiteID() );
 					$html .= Html::element( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-broken' ), $link->getPage() );
 
 					$html .= Html::closeElement( 'tr' );
@@ -182,10 +209,18 @@ class ItemView extends \ContextSource {
 					$html .= Html::element(
 						'td',
 						array(
-							'class' => ' wb-sitelinks-site wb-sitelinks-site-' . $languageCode
+							'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-' . $languageCode
 						),
 						// TODO: get an actual site name rather then just the language
-						Utils::fetchLanguageName( $languageCode ) . ' (' . $languageCode . ')'
+						Utils::fetchLanguageName( $languageCode )
+					);
+					$html .= Html::element(
+						'td',
+						array(
+							'class' => ' wb-sitelinks-siteid wb-sitelinks-siteid-' . $languageCode
+						),
+						// TODO: get an actual site id rather then just the language code
+						$languageCode
 					);
 					$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
 					$html .= Html::element(

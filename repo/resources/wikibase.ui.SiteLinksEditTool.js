@@ -39,7 +39,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 */
 	_init: function( subject ) {
 		// add colspan+1 because of toolbar td's:
-		var th = subject.find( 'th' );
+		var th = subject.find( 'th' ).first();
 
 		$( '<th/>', {
 			'class': this.UI_CLASS + '-counterinheading'
@@ -84,13 +84,17 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		this.__toolbarParent = this.__toolbarParent || $(
 			'<td/>'
 		)
+		.addClass( 'wb-sitelinks-toolbar' )
 		.appendTo(
 			$( '<tr/>' ).append(
-				$( '<td/>', { colspan: '2' } ) // empty cell moving the "add" button to the action column
+				$( '<td/>', {
+					colspan: '3',
+					'class': 'wb-empty'
+				} ) // empty cell moving the "add" button to the action column
 			)
-				.appendTo( $( '<tfoot/>' )
-					.appendTo( this._subject )
-				)
+			.appendTo(
+				$( '<tfoot/>' ).appendTo( this._subject )
+			)
 		);
 		return this.__toolbarParent;
 	},
@@ -128,6 +132,42 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 
 	/**
+	 * @see wikibase.ui.PropertyEditTool.enterNewValue
+	 *
+	 * @param value Object optional, initial value
+	 * @return newValue wikibase.ui.PropertyEditTool.EditableValue
+	 */
+	enterNewValue: function( value ) {
+		var newValue = wikibase.ui.PropertyEditTool.prototype.enterNewValue.call( this, value );
+
+		// this would be the first site link -> attach column headers
+		if ( this._editableValues.length === 1 ) {
+			$( 'table.wb-sitelinks thead' ).append(
+				$( '<tr/>' )
+					.addClass( 'wb-sitelinks-columnheaders' )
+					.append(
+					$( '<th/>' )
+						.addClass( 'wb-sitelinks-sitename' )
+						.text( mw.message( 'wikibase-sitelinks-sitename-columnheading' ).escaped() )
+				)
+					.append(
+					$( '<th/>' )
+						.addClass( 'wb-sitelinks-siteid' )
+						.text( mw.message( 'wikibase-sitelinks-siteid-columnheading' ).escaped() )
+				)
+					.append(
+					$( '<th/>' )
+						.addClass( 'wb-sitelinks-link' )
+						.text( mw.message( 'wikibase-sitelinks-link-columnheading' ).escaped() )
+				)
+					.append( $( '<th/>' ).addClass( 'wb-sitelinks-sitename' ) )
+			);
+		}
+
+		return newValue;
+	},
+
+	/**
 	 * Full when all languages are represented within
 	 * @see wikibase.ui.PropertyEditTool.isFull
 	 *
@@ -158,7 +198,9 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @return jQuery
 	 */
 	_newEmptyValueDOM: function() {
-		return $( '<tr> <td></td> <td></td> </tr>' );
+		return $( '<tr/>' )
+			.append( $( '<td colspan="2" class="wb-sitelinks-sitename"/>' ) )
+			.append( $( '<td class="wb-sitelinks-link"/>' ) );
 	},
 
 	/**
@@ -201,6 +243,9 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 					pendingValues[ i ].siteIdInterface._initSiteList();
 				}
 			}
+		}
+		if ( this._editableValues.length === 0 ) { // no more site links -> remove column headers
+			$( 'table.wb-sitelinks thead' ).children( 'tr' ).last().remove();
 		}
 	},
 
@@ -257,11 +302,12 @@ window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
 	return $(
 			'<table class="wb-sitelinks" cellspacing="0">' +
 				'<colgroup>' +
-					'<col class="wb-sitelinks-site" />' +
+					'<col class="wb-sitelinks-sitename" />' +
+					'<col class="wb-sitelinks-siteid" />' +
 					'<col class="wb-sitelinks-link" />' +
 					'<col class="wb-ui-propertyedittool-editablevalue-toolbarparent" />' +
 				'</colgroup>' +
-				'<thead><th colspan="2"><h3>' +
+				'<thead><th colspan="3"><h3>' +
 					mw.message( 'wikibase-sitelinks' ).escaped() +
 				'</h3></th></thead>' +
 				'<tbody></tbody>' +
