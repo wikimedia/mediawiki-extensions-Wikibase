@@ -202,18 +202,13 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.cancelSitelinkLink?.should be_true
         page.pageInputField_element.enabled?.should be_true
         current_page = page.pageInputField
-        new_page = "Ber"
+        new_page = "Bermuda"
         page.pageInputField = new_page
         ajax_wait
         page.wait_until do
           page.editSitelinkAutocompleteList_element.visible?
         end
-        page.pageInputField_element.send_keys :arrow_down
-        page.pageInputField_element.send_keys :arrow_down
-        page.pageInputField_element.send_keys :return
-        if page.saveSitelinkLink?
-          page.saveSitelinkLink
-        end
+        page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
 
