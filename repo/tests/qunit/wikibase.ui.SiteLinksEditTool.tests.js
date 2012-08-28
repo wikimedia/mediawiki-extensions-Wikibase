@@ -98,6 +98,11 @@
 		);
 
 		ok(
+			!newValue.valueCompare( [ '', initialValue[1] ], initialValue ),
+			'valueCompare() should recognize value with missing site-id as invalid'
+		)
+
+		ok(
 			newValue.valueCompare(
 				this.subject.getValues( true )[0].getValue(),
 				initialValue
@@ -113,7 +118,7 @@
 
 		equal(
 			newValue.stopEditing( true ).promisor.apiAction,
-			wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.SAVE,
+			newValue.API_ACTION.SAVE,
 			'stopped editing (save), true returned because value has changed (it was created)'
 		);
 
