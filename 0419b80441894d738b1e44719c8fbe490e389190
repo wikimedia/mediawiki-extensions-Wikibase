@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARX//yjc\u003d",
+        "filename": "lib/maintenance/rebuildAllData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-28T12:06:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAARX//yoM\u003d",
+      "revId": "0419b80441894d738b1e44719c8fbe490e389190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//yn8\u003d",
         "filename": "lib/maintenance/rebuildAllData.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-08-28T10:03:25Z",
       "side": 1,
       "message": "This commandline option could also be documented.",
+      "revId": "0419b80441894d738b1e44719c8fbe490e389190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//yjQ\u003d",
+        "filename": "lib/maintenance/rebuildAllData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-08-28T12:06:22Z",
+      "side": 1,
+      "message": "I did not introduce this param and am not going to document it",
+      "parentUuid": "AAAARX//yn8\u003d",
       "revId": "0419b80441894d738b1e44719c8fbe490e389190",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
