@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//yo4\u003d",
+        "filename": "repo/resources/wikibase.ui.SiteLinksEditTool.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-28T09:36:50Z",
+      "side": 1,
+      "message": "$( \u0027table.wb-sitelinks thead\u0027 ).children( \u0027tr:last\u0027 ).remove();\n\nshould be faster",
+      "revId": "1f70eb33485b88ccefab8017a6373fe297c4d196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
