@@ -2,76 +2,78 @@
  * JavaScript for 'Wikibase' property edit tool toolbar groups with basic edit functionality
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
+var $PARENT = wb.ui.Toolbar.Group
 
 /**
  * Extends the basic toolbar group element with buttons essential for editing stuff.
  * Basically '[edit]' which gets expanded to '[cancel|save]' when hit.
  * This also interacts with a given editable value.
+ * @constructor
+ * @see wb.ui.Toolbar.Group
+ * @since 0.1
  *
  * @todo Should be refactored so it can be used independently from EditableValue.
  */
-window.wikibase.ui.Toolbar.EditGroup = function( editableValue ) {
-	if( typeof editableValue != 'undefined' ) {
-		this._init();
-	}
-	//window.wikibase.ui.Toolbar.Group.call( this );
-};
-window.wikibase.ui.Toolbar.EditGroup.prototype = Object.create( window.wikibase.ui.Toolbar.Group.prototype );
-$.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
-
+wb.ui.Toolbar.EditGroup = wb.utilities.inherit( $PARENT,
+	// Overwritten constructor:
+	function( editableValue ) {
+		if( editableValue !== undefined ) {
+			this.init( editableValue );
+		}
+	}, {
 	/**
-	 * @var window.wikibase.ui.Toolbar.Button
+	 * @var wb.ui.Toolbar.Button
 	 */
 	btnEdit: null,
 
 	/**
-	 * @var window.wikibase.ui.Toolbar.Button
+	 * @var wb.ui.Toolbar.Button
 	 */
 	btnCancel: null,
 
 	/**
-	 * @var window.wikibase.ui.Toolbar.Button
+	 * @var wb.ui.Toolbar.Button
 	 */
 	btnSave: null,
 
 	/**
-	 * @var window.wikibase.ui.Toolbar.Button
+	 * @var wb.ui.Toolbar.Button
 	 */
 	btnRemove: null,
 
 	/**
-	 * @var window.wikibase.ui.PropertyEditTool.EditableValue
+	 * @var wb.ui.PropertyEditTool.EditableValue
 	 */
 	_editableValue: null,
 
 	/**
 	 * Element holding the tooltips image with the tooltip itself attached.
-	 * @var window.wikibase.ui.Toolbar.Label
+	 * @var wb.ui.Toolbar.Label
 	 */
 	tooltipAnchor: null,
 
 	/**
 	 * Inner group needed to visually separate tooltip and edit buttons, this one holds the edit buttons.
-	 * @var window.wikibase.ui.Toolbar.Group
+	 * @var wb.ui.Toolbar.Group
 	 */
 	innerGroup: null,
 
 	/**
-	 * @param window.wikibase.ui.PropertyEditTool.EditableValue editableValue the editable value
+	 * @param wb.ui.PropertyEditTool.EditableValue editableValue the editable value
 	 *        the toolbar should interact with.
 	 */
-	_init: function( editableValue ) {
+	init: function( editableValue ) {
 		this._editableValue = editableValue;
 
-		window.wikibase.ui.Toolbar.Group.prototype._init.call( this );
+		$PARENT.prototype.init.call( this );
 
 		// overwrite tooltip message when editing is restricted
 		$( wikibase ).on(
@@ -95,13 +97,13 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 
 	_initToolbar: function() {
 		// call prototypes base function to append toolbar itself:
-		window.wikibase.ui.Toolbar.prototype._initToolbar.call( this );
+		wb.ui.Toolbar.prototype._initToolbar.call( this );
 
 		// create a group inside the group so we can separate the tooltip visually
-		this.innerGroup = new window.wikibase.ui.Toolbar.Group();
+		this.innerGroup = new wb.ui.Toolbar.Group();
 		this.addElement( this.innerGroup );
 
-		this.tooltipAnchor = new window.wikibase.ui.Toolbar.Label( $( '<span/>', {
+		this.tooltipAnchor = new wb.ui.Toolbar.Label( $( '<span/>', {
 			'class': 'mw-help-field-hint',
 			style: 'display:inline;text-decoration:none;',
 			html: '&nbsp;' // TODO find nicer way to hack Webkit browsers to display tooltip image (see also css)
@@ -110,7 +112,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		this.tooltipAnchor.stateChangeable = false; // tooltip anchor has no disabled/enabled behaviour
 
 		// now create the buttons we need for basic editing:
-		var button = window.wikibase.ui.Toolbar.Button;
+		var button = wb.ui.Toolbar.Button;
 
 		this.btnEdit = new button( mw.msg( 'wikibase-edit' ) );
 		$( this.btnEdit ).on( 'action', $.proxy( function( event ) {
@@ -190,7 +192,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	},
 
 	destroy: function() {
-		window.wikibase.ui.Toolbar.Group.prototype.destroy.call( this );
+		$PARENT.prototype.destroy.call( this );
 		if ( this.innerGroup !== null ) {
 			this.innerGroup.destroy();
 			this.innerGroup = null;
@@ -222,7 +224,7 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	/////////////////
 
 	/**
-	 * @see window.wikibase.ui.Toolbar.Group.renderItemSeparators
+	 * @see wb.ui.Toolbar.Group.renderItemSeparators
 	 */
 	renderItemSeparators: false,
 
@@ -232,3 +234,5 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 	 */
 	displayRemoveButton: false
 } );
+
+} )( mediaWiki, wikibase, jQuery );

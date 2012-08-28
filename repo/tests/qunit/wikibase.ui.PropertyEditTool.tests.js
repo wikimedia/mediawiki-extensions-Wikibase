@@ -25,7 +25,7 @@
 				this.nodes.push( $( '<div/>' ) );
 				this.subjects.push( new wb.ui.PropertyEditTool( this.nodes[i] ) );
 				this.subjects[i].allowsMultipleValues = false;
-				this.subjects[i]._init( this.nodes[i] );
+				this.subjects[i].init( this.nodes[i] );
 				this.subjects[i]._initSingleValue(
 					$( '<div/>', {
 						text: 'someValue'

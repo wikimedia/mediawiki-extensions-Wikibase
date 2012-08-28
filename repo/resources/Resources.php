@@ -40,12 +40,24 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.utilities' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.utilities/wikibase.utilities.js',
+			),
+			'dependencies' => array(
+				'wikibase'
+			)
+		),
+
 		'wikibase.utilities.jQuery' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
 				'wikibase.utilities/wikibase.utilities.jQuery.js',
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
+			),
+			'dependencies' => array(
+				'wikibase.utilities'
 			)
 		),
 
@@ -82,9 +94,11 @@ return call_user_func( function() {
 			'position' => 'top'
 		),
 
+		// should be independent from the rest of Wikibase (or only use other stuff that could go into core)
 		'wikibase.ui.Toolbar' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.js',
+				'wikibase.ui.Base.js',
 				'wikibase.ui.Tooltip.js',
 				'wikibase.ui.Toolbar.js',
 				'wikibase.ui.Toolbar.Group.js',
@@ -97,7 +111,8 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'jquery.tipsy',
 				'mediawiki.legacy.shared',
-				'jquery.ui.core'
+				'jquery.ui.core',
+				'wikibase.utilities'
 			),
 			'messages' => array(
 				'wikibase-tooltip-error-details'
@@ -107,6 +122,7 @@ return call_user_func( function() {
 		'wikibase.ui.PropertyEditTool' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.js',
+				'wikibase.ui.Base.js',
 				'wikibase.ui.Toolbar.EditGroup.js', // related to EditableValue, see todo in file
 				'wikibase.ui.PropertyEditTool.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.js',
@@ -132,6 +148,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase',
 				'wikibase.ui.Toolbar',
+				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.inputAutoExpand',
 				'wikibase.utilities.jQuery.ui.tagadata',

@@ -11,16 +11,16 @@
  * @author H. Snater
  */
 ( function( $, mw, wb, undefined ) {
-	"use strict";
+	'use strict';
 
 	// make this usable without base utilities
-	wb.utilities = window.wikibase.utilities || {};
+	wb.utilities = wb.utilities || {};
 
 	/**
 	 * Collection of jQuery extensions of the Wikibase extension
 	 * @var Object
 	 */
-	wb.utilities.jQuery = window.wikibase.utilities.jQuery || {};
+	wb.utilities.jQuery = wb.utilities.jQuery || {};
 
 	/**
 	 * Helper function to remove all css classes matching a regular expression.

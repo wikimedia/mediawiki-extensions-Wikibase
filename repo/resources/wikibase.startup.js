@@ -12,14 +12,14 @@
  * Events:
  * -------
  * restrictItemPageActions: Triggered when editing is not allowed for the user.
- *                          Parameters: (1) jQuery.event
+ *                          Parameters: (1) jQuery.Event
  * blockItemPageActions:    Triggered when editing is not allowed for the user because he is blocked from the page.
- *                          Parameters: (1) jQuery.event
+ *                          Parameters: (1) jQuery.Event
  * (see TODO/FIXME about these three events where they are being triggered!)
  */
 
 ( function( $, mw, wb, undefined ) {
-	"use strict";
+	'use strict';
 
 	$( document ).ready( function() {
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
