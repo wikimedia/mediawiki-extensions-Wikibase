@@ -45,15 +45,15 @@ class ApiLinkTitles extends Api {
 
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
+			$this->dieUsage( $this->msg( 'wikibase-api-session-failure' )->text(), 'session-failure' );
 		}
 
 		if ( $params['fromsite'] === $params['tosite'] ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-fromsite-eq-tosite' ), 'fromsite-eq-tosite' );
+			$this->dieUsage( $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text(), 'fromsite-eq-tosite' );
 		}
 
 		if ( !( strlen( $params['fromtitle'] ) > 0 && strlen( $params['totitle'] ) > 0 ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-fromtitle-and-totitle' ), 'fromtitle-and-totitle' );
+			$this->dieUsage( $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text(), 'fromtitle-and-totitle' );
 		}
 
 		$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
@@ -64,7 +64,7 @@ class ApiLinkTitles extends Api {
 		// This must be tested now
 		$fromPage = $fromSite->normalizePageName( $params['fromtitle'] );
 		if ( $fromPage === false ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 		}
 		// This is used for testing purposes later
 		$fromId = ItemHandler::singleton()->getIdForSiteLink( $params['fromsite'], $fromPage );
@@ -75,7 +75,7 @@ class ApiLinkTitles extends Api {
 		// This must be tested now
 		$toPage = $toSite->normalizePageName( $params['totitle'] );
 		if ( $toPage === false ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 		}
 		// This is used for testing purposes later
 		$toId = ItemHandler::singleton()->getIdForSiteLink( $params['tosite'], $toPage );
@@ -108,11 +108,11 @@ class ApiLinkTitles extends Api {
 		}
 		elseif ( $fromId === $toId ) {
 			// no-op
-			$this->dieUsage( wfMsg( 'wikibase-api-common-item' ), 'common-item' );
+			$this->dieUsage( $this->msg( 'wikibase-api-common-item' )->text(), 'common-item' );
 		}
 		else {
 			// dissimilar items
-			$this->dieUsage( wfMsg( 'wikibase-api-no-common-item' ), 'no-common-item' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-common-item' )->text(), 'no-common-item' );
 		}
 
 		$this->addSiteLinksToResult( $return, 'item' );
@@ -162,14 +162,14 @@ class ApiLinkTitles extends Api {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'create-failed', 'info' => wfMsg( 'wikibase-api-create-failed' ) ),
-			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
-			array( 'code' => 'session-failure', 'info' => wfMsg( 'wikibase-api-session-failure' ) ),
-			array( 'code' => 'common-item', 'info' => wfMsg( 'wikibase-api-common-item' ) ),
-			array( 'code' => 'no-common-item', 'info' => wfMsg( 'wikibase-api-no-common-item' ) ),
-			array( 'code' => 'no-external-page', 'info' => wfMsg( 'wikibase-api-no-external-page' ) ),
-			array( 'code' => 'fromtitle-and-totitle', 'info' => wfMsg( 'wikibase-api-fromtitle-and-totitle' ) ),
-			array( 'code' => 'fromsite-eq-tosite', 'info' => wfMsg( 'wikibase-api-fromsite-eq-tosite' ) ),
+			array( 'code' => 'create-failed', 'info' => $this->msg( 'wikibase-api-create-failed' )->text() ),
+			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
+			array( 'code' => 'session-failure', 'info' => $this->msg( 'wikibase-api-session-failure' )->text() ),
+			array( 'code' => 'common-item', 'info' => $this->msg( 'wikibase-api-common-item' )->text() ),
+			array( 'code' => 'no-common-item', 'info' => $this->msg( 'wikibase-api-no-common-item' )->text() ),
+			array( 'code' => 'no-external-page', 'info' => $this->msg( 'wikibase-api-no-external-page' )->text() ),
+			array( 'code' => 'fromtitle-and-totitle', 'info' => $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text() ),
+			array( 'code' => 'fromsite-eq-tosite', 'info' => $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text() ),
 		) );
 	}
 	/**

@@ -32,7 +32,7 @@ abstract class SpecialWikibasePage extends SpecialPage {
 	 * @return String
 	 */
 	public function getDescription() {
-		return wfMsg( 'special-' . strtolower( $this->getName() ) );
+		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
 	}
 
 	/**

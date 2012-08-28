@@ -97,7 +97,7 @@
 
 		// make sure box will consider window size after resize:
 		AutoExpandInput.activateResizeHandler();
-	}
+	};
 
 	/**
 	 * Once called, this will make sure AutoExpandInput's will adjust on resize. When called for a second time
@@ -137,7 +137,7 @@
 		} )();
 
 		return true;
-	}
+	};
 
 	/**
 	 * Returns all active instances whose related input is still in the DOM
@@ -156,7 +156,7 @@
 		} );
 
 		return instances;
-	}
+	};
 
 	AutoExpandInput.prototype = {
 		/**

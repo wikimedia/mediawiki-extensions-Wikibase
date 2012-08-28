@@ -29,7 +29,7 @@ class ApiGetItems extends Api {
 		$params = $this->extractRequestParams();
 
 		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+			$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
 		}
 
 		$missing = 0;
@@ -41,7 +41,7 @@ class ApiGetItems extends Api {
 			$max = max( $numSites, $numTitles );
 
 			if ( $numSites === 0 || $numTitles === 0 ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+				$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
 			}
 			else {
 				$idxSites = 0;
@@ -148,7 +148,7 @@ class ApiGetItems extends Api {
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized' ), 'not-recognized' );
+							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized' )->text(), 'not-recognized' );
 						}
 					}
 				}
@@ -237,10 +237,10 @@ class ApiGetItems extends Api {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
-			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
-			array( 'code' => 'no-such-item', 'info' => wfMsg( 'wikibase-api-no-such-item' ) ),
-			array( 'code' => 'not-recognized', 'info' => wfMsg( 'wikibase-api-not-recognized' ) ),
+			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
+			array( 'code' => 'id-xor-wikititle', 'info' => $this->msg( 'wikibase-api-id-xor-wikititle' )->text() ),
+			array( 'code' => 'no-such-item', 'info' => $this->msg( 'wikibase-api-no-such-item' )->text() ),
+			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
 		) );
 	}
 

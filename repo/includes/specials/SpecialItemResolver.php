@@ -42,7 +42,7 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 * @return String
 	 */
 	public function getDescription() {
-		return wfMsg( 'special-' . strtolower( $this->getName() ) );
+		return $this->msg( 'special-' . strtolower( $this->getName() ) )->text();
 	}
 
 	/**

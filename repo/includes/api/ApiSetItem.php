@@ -56,7 +56,7 @@ class ApiSetItem extends ApiModifyItem {
 			$this->flags |= EDIT_NEW;
 			return ItemContent::newEmpty();
 		}
-		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
 	}
 
 	/**
@@ -65,7 +65,7 @@ class ApiSetItem extends ApiModifyItem {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['data'] ) OR  isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-data-or-id-xor-wikititle' ), 'data-or-id-xor-wikititle' );
+			$this->dieUsage( $this->msg( 'wikibase-api-data-or-id-xor-wikititle' )->text(), 'data-or-id-xor-wikititle' );
 		}
 	}
 
@@ -76,7 +76,7 @@ class ApiSetItem extends ApiModifyItem {
 		if ( isset( $params['data'] ) ) {
 			$data = json_decode( $params['data'], true );
 			if ( is_null( $data ) ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-json-invalid' ), 'json-invalid' );
+				$this->dieUsage( $this->msg( 'wikibase-api-json-invalid' )->text(), 'json-invalid' );
 			}
 			if ( !is_array( $data ) ) { // NOTE: json_decode will decode any JS literal or structure, not just objects!
 				$this->dieUsage( 'Top level structure must be a JSON object', 'not-recognized-array' );
@@ -111,22 +111,22 @@ class ApiSetItem extends ApiModifyItem {
 				// conditional processing
 				case 'pageid':
 					if ( isset( $data[$props] ) && ($page) && $page->getId() !== $data[$props]) {
-						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'pageid' ), 'illegal-field' );
+						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'pageid' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'ns':
 					if ( isset( $data[$props] ) && isset( $title ) && $title->getNamespace() !== $data[$props]) {
-						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'namespace' ), 'illegal-field' );
+						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'namespace' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'title':
 					if ( isset( $data[$props] ) && isset( $title ) && $title->getPrefixedText() !== $data[$props]) {
-						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'title' ), 'illegal-field' );
+						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'title' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'lastrevid':
 					if ( isset( $data[$props] ) && isset( $revision ) && $revision->getId() !== $data[$props]) {
-						$this->dieUsage( wfMsg( 'wikibase-api-illegal-field', 'lastrevid' ), 'illegal-field' );
+						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'lastrevid' )->text(), 'illegal-field' );
 					}
 					break;
 
@@ -138,7 +138,7 @@ class ApiSetItem extends ApiModifyItem {
 
 					foreach ( $list as $langCode => $value ) {
 						if ( !is_string( $value ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
+							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
 						}
 						if ( !array_key_exists( $langCode, $languages ) ) {
 							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
@@ -158,7 +158,7 @@ class ApiSetItem extends ApiModifyItem {
 
 					foreach ( $list as $langCode => $value ) {
 						if ( !is_string( $value ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
+							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
 						}
 						if ( !array_key_exists( $langCode, $languages ) ) {
 							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
@@ -178,7 +178,7 @@ class ApiSetItem extends ApiModifyItem {
 
 					foreach ( $list as $langCode => $aliases ) {
 						if ( !is_array( $aliases ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-array' ), 'not-recognized-array' );
+							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
 						}
 						if ( !array_key_exists( $langCode, $languages ) ) {
 							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
@@ -186,7 +186,7 @@ class ApiSetItem extends ApiModifyItem {
 						$newAliases = array();
 						foreach ( $aliases as $alias ) {
 							if ( !is_string( $alias ) ) {
-								$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'not-recognized-string' );
+								$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
 							}
 							$newAliases[] = Utils::squashToNFC( $alias );
 						}
@@ -201,7 +201,7 @@ class ApiSetItem extends ApiModifyItem {
 					$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
 					foreach ( $list as $siteId => $pageName ) {
 						if ( !is_string( $pageName ) ) {
-							$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-string' ), 'add-sitelink-failed' );
+							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'add-sitelink-failed' );
 						}
 
 						if ( !$group->hasGlobalId( $siteId ) ) {
@@ -215,14 +215,14 @@ class ApiSetItem extends ApiModifyItem {
 							$page = $site->normalizePageName( $pageName );
 
 							if ( $page === false ) {
-								$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'add-sitelink-failed' );
+								$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'add-sitelink-failed' );
 							}
 
 							$link = new SiteLink( $site, $page );
 							$ret = $itemContent->getItem()->addSiteLink( $link, 'set' );
 
 							if ( $ret === false ) {
-								$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
+								$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
 							}
 						}
 					}
@@ -248,13 +248,13 @@ class ApiSetItem extends ApiModifyItem {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'no-data', 'info' => wfMsg( 'wikibase-api-no-data' ) ),
-			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
-			array( 'code' => 'cant-edit', 'info' => wfMsg( 'wikibase-api-cant-edit' ) ),
-			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
-			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
-			array( 'code' => 'add-sitelink-failed', 'info' => wfMsg( 'wikibase-api-add-sitelink-failed' ) ),
-			array( 'code' => 'illegal-field', 'info' => wfMsg( 'wikibase-api-illegal-field' ) ),
+			array( 'code' => 'no-data', 'info' => $this->msg( 'wikibase-api-no-data' )->text() ),
+			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
+			array( 'code' => 'cant-edit', 'info' => $this->msg( 'wikibase-api-cant-edit' )->text() ),
+			array( 'code' => 'no-permissions', 'info' => $this->msg( 'wikibase-api-no-permissions' )->text() ),
+			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
+			array( 'code' => 'add-sitelink-failed', 'info' => $this->msg( 'wikibase-api-add-sitelink-failed' )->text() ),
+			array( 'code' => 'illegal-field', 'info' => $this->msg( 'wikibase-api-illegal-field' )->text() ),
 		) );
 	}
 

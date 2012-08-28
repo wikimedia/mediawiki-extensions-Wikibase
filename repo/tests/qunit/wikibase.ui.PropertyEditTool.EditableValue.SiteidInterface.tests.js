@@ -164,7 +164,7 @@
 		);
 
 		// set this to valid value
-		this.subject.setValue( wikibase.getSite( this.siteIds[0] ).getId() ),
+		this.subject.setValue( wikibase.getSite( this.siteIds[0] ).getId() );
 
 		equal(
 			this.subject.isValid(),
@@ -173,7 +173,7 @@
 		);
 
 		// for next test, do this the hard way since setValue() would reject invalid value (value in blacklist)
-		this.subject._inputElem.val( wikibase.getSite( this.siteIds[1] ).getId() )
+		this.subject._inputElem.val( wikibase.getSite( this.siteIds[1] ).getId() );
 
 		equal(
 			this.subject.isValid(),
@@ -200,6 +200,4 @@
 		);
 
 	} );
-
-
 }() );

@@ -22,7 +22,6 @@ use Content, Html, Linker, Skin, Status, Revision;
  * @since 0.1
  */
 abstract class EditEntityAction extends ViewEntityAction {
-
 	/**
 	 * @see Action::getName()
 	 *
@@ -290,11 +289,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @return String
 	 */
 	public function makeRestoreSummary( Revision $olderRevision, Revision $newerRevision, Revision $latestRevision ) {
-		$autoSummary = wfMsgForContent( //TODO: use translatable auto-comment!
+		$autoSummary = wfMessage( //TODO: use translatable auto-comment!
 			'wikibase-restore-summary',
 			$olderRevision->getId(),
 			$olderRevision->getUserText()
-		);
+		)->inContentLanguage()->text();
 
 		return $autoSummary;
 	}
@@ -311,11 +310,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 	 * @return String
 	 */
 	public function makeUndoSummary( Revision $olderRevision, Revision $newerRevision, Revision $latestRevision ) {
-		$autoSummary = wfMsgForContent( //TODO: use translatable auto-comment!
+		$autoSummary = wfMessage( //TODO: use translatable auto-comment!
 			'undo-summary',
 			$newerRevision->getId(),
 			$newerRevision->getUserText()
-		);
+		)->inContentLanguage()->text();
 
 		return $autoSummary;
 	}
@@ -332,7 +331,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		return Linker::linkKnown(
 			$this->getContext()->getTitle(),
-			wfMsgExt( 'cancel', array( 'parseinline' ) ),
+			wfMessage( 'cancel' )->parse(),
 			array( 'id' => 'mw-editform-cancel' ),
 			$cancelParams
 		);
@@ -438,9 +437,9 @@ abstract class EditEntityAction extends ViewEntityAction {
 			'name'      => 'wpSave',
 			'type'      => 'submit',
 			'tabindex'  => ++$tabindex,
-			'value'     => wfMsg( 'savearticle' ),
-			'accesskey' => wfMsg( 'accesskey-save' ),
-			'title'     => wfMsg( 'tooltip-save' ) . ' [' . wfMsg( 'accesskey-save' ) . ']',
+			'value'     => $this->msg( 'savearticle' )->text(),
+			'accesskey' => $this->msg( 'accesskey-save' )->text(),
+			'title'     => $this->msg( 'tooltip-save' )->text() . ' [' . $this->msg( 'accesskey-save' )->text() . ']',
 		);
 		$buttons['save'] = Html::element( 'input', $temp, '' );
 
@@ -488,7 +487,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$this->getOutput()->addHTML( "<p class='editOptions'>\n" );
 
-		$labelText = wfMsgExt( 'summary', 'parseinline' );
+		$labelText = wfMessage( 'summary' )->parse();
 		list( $label, $field ) = $this->getSummaryInput( $summary, $labelText );
 		$this->getOutput()->addHTML( $label . " " . $field );
 		$this->getOutput()->addHTML( "<p class='editButtons'>\n" );
@@ -496,7 +495,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$cancel = $this->getCancelLink();
 		if ( $cancel !== '' ) {
-			$this->getOutput()->addHTML( wfMsgExt( 'pipe-separator' , 'escapenoentities' ) );
+			$this->getOutput()->addHTML( wfMessage( 'pipe-separator' )->escaped() );
 			$this->getOutput()->addHTML( $cancel );
 		}
 

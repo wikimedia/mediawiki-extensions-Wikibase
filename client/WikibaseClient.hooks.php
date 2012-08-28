@@ -266,8 +266,8 @@ final class ClientHooks {
 			// TODO: know what the repo namespace is
 			$template->data['language_urls'][] = array(
 				'href' => rtrim( $editUrl, "/" ) . "/Data:Q" . $itemId . '?uselang=' . $wgLanguageCode,
-				'text' => wfMsg( 'wbc-editlinks' ),
-				'title' => wfMsg( 'wbc-editlinkstitle' ),
+				'text' => wfMessage( 'wbc-editlinks' )->text(),
+				'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
 				'class' => 'wbc-editpage',
 			);
 		}

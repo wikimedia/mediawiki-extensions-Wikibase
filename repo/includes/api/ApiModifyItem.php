@@ -102,7 +102,7 @@ abstract class ApiModifyItem extends Api {
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
 		if ( !( isset( $params['id'] ) XOR ( isset( $params['site'] ) && isset( $params['title'] ) ) ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-id-xor-wikititle' ), 'id-xor-wikititle' );
+			$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
 		}
 	}
 
@@ -124,7 +124,7 @@ abstract class ApiModifyItem extends Api {
 
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-session-failure' ), 'session-failure' );
+			$this->dieUsage( $this->msg( 'wikibase-api-session-failure' )->text(), 'session-failure' );
 		}
 
 		// this is really peeking into a subclass, which is not good
@@ -144,19 +144,19 @@ abstract class ApiModifyItem extends Api {
 			$itemContent = ItemHandler::singleton()->getFromId( $params['id'] );
 
 			if ( is_null( $itemContent ) ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
+				$this->dieUsage( $this->msg( 'wikibase-api-no-such-item-id' )->text(), 'no-such-item-id' );
 			}
 		}
 		elseif ( $hasLink ) {
 			$itemContent = ItemHandler::singleton()->getFromSiteLink( $params['site'], $normTitle );
 
 			if ( is_null( $itemContent ) ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-link' ), 'no-such-item-link' );
+				$this->dieUsage( $this->msg( 'wikibase-api-no-such-item-link' )->text(), 'no-such-item-link' );
 			}
 		}
 
 		if ( !is_null( $itemContent ) && !( $itemContent instanceof ItemContent ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-wrong-class' ), 'wrong-class' );
+			$this->dieUsage( $this->msg( 'wikibase-api-wrong-class' )->text(), 'wrong-class' );
 		}
 
 		if ( is_null( $itemContent ) ) {
@@ -164,7 +164,7 @@ abstract class ApiModifyItem extends Api {
 		}
 
 		if ( is_null( $itemContent ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-no-such-item-id' ), 'no-such-item-id' );
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-item-id' )->text(), 'no-such-item-id' );
 		}
 
 		// At this point only change/edit rights should be checked
@@ -178,7 +178,7 @@ abstract class ApiModifyItem extends Api {
 		$success = $this->modifyItem( $itemContent, $params );
 
 		if ( !$success ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-modify-failed' ), 'modify-failed' );
+			$this->dieUsage( $this->msg( 'wikibase-api-modify-failed' )->text(), 'modify-failed' );
 		}
 
 		if ( Settings::get( 'apiDeleteEmpty' ) && $itemContent->isEmpty() ) {
@@ -287,7 +287,6 @@ abstract class ApiModifyItem extends Api {
 			'success',
 			(int)$success
 		);
-
 	}
 
 	/**
@@ -295,19 +294,19 @@ abstract class ApiModifyItem extends Api {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'id-xor-wikititle', 'info' => wfMsg( 'wikibase-api-id-xor-wikititle' ) ),
-			array( 'code' => 'add-with-id', 'info' => wfMsg( 'wikibase-api-add-with-id' ) ),
-			array( 'code' => 'add-exists', 'info' => wfMsg( 'wikibase-api-add-exists' ) ),
-			array( 'code' => 'update-without-id', 'info' => wfMsg( 'wikibase-api-update-without-id' ) ),
-			array( 'code' => 'no-such-item-link', 'info' => wfMsg( 'wikibase-api-no-such-item-link' ) ),
-			array( 'code' => 'no-such-item-id', 'info' => wfMsg( 'wikibase-api-no-such-item-id' ) ),
-			array( 'code' => 'create-failed', 'info' => wfMsg( 'wikibase-api-create-failed' ) ),
-			array( 'code' => 'modify-failed', 'info' => wfMsg( 'wikibase-api-modify-failed' ) ),
-			array( 'code' => 'wrong-class', 'info' => wfMsg( 'wikibase-api-wrong-class' ) ),
-			array( 'code' => 'save-failed', 'info' => wfMsg( 'wikibase-api-save-failed' ) ),
-			array( 'code' => 'invalid-contentmodel', 'info' => wfMsg( 'wikibase-api-invalid-contentmodel' ) ),
-			array( 'code' => 'no-permissions', 'info' => wfMsg( 'wikibase-api-no-permissions' ) ),
-			array( 'code' => 'session-failure', 'info' => wfMsg( 'wikibase-api-session-failure' ) ),
+			array( 'code' => 'id-xor-wikititle', 'info' => $this->msg( 'wikibase-api-id-xor-wikititle' )->text() ),
+			array( 'code' => 'add-with-id', 'info' => $this->msg( 'wikibase-api-add-with-id' )->text() ),
+			array( 'code' => 'add-exists', 'info' => $this->msg( 'wikibase-api-add-exists' )->text() ),
+			array( 'code' => 'update-without-id', 'info' => $this->msg( 'wikibase-api-update-without-id' )->text() ),
+			array( 'code' => 'no-such-item-link', 'info' => $this->msg( 'wikibase-api-no-such-item-link' )->text() ),
+			array( 'code' => 'no-such-item-id', 'info' => $this->msg( 'wikibase-api-no-such-item-id' )->text() ),
+			array( 'code' => 'create-failed', 'info' => $this->msg( 'wikibase-api-create-failed' )->text() ),
+			array( 'code' => 'modify-failed', 'info' => $this->msg( 'wikibase-api-modify-failed' )->text() ),
+			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
+			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
+			array( 'code' => 'invalid-contentmodel', 'info' => $this->msg( 'wikibase-api-invalid-contentmodel' )->text() ),
+			array( 'code' => 'no-permissions', 'info' => $this->msg( 'wikibase-api-no-permissions' )->text() ),
+			array( 'code' => 'session-failure', 'info' => $this->msg( 'wikibase-api-session-failure' )->text() ),
 		) );
 	}
 
@@ -382,5 +381,4 @@ abstract class ApiModifyItem extends Api {
 			),
 		) );
 	}
-
 }

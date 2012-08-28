@@ -549,7 +549,7 @@ final class RepoHooks {
 
 		// Go on and construct the link
 		$idHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
-			. wfMsgForContent( 'wikibase-itemlink-id-wrapper', htmlspecialchars( 'q' . $item->getId() ) )
+			. wfMessage( 'wikibase-itemlink-id-wrapper', 'q' . $item->getId() )->inContentLanguage()->escaped()
 			. Html::closeElement( 'span' );
 
 		$labelHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-label', 'lang' => $labelLang->getCode(), 'dir' => $labelLang->getDir() ) )
@@ -557,16 +557,20 @@ final class RepoHooks {
 			. Html::closeElement( 'span' );
 
 		$html = Html::openElement( 'span', array( 'class' => 'wb-itemlink' ) )
-			. wfMsgForContent( 'wikibase-itemlink', $labelHtml, $idHtml )
+			. wfMessage( 'wikibase-itemlink' )->rawParams( $labelHtml, $idHtml )->inContentLanguage()->escaped()
 			. Html::closeElement( 'span' );
 
 		// Set title attribute for constructed link, and make tricks with the directionality to get it right
 		$titleText = ( $labelText !== '' )
 			? $labelLang->getDirMark() . $labelText . $wgLang->getDirMark()
 			: $target->getPrefixedText();
-		$customAttribs[ 'title' ] = ( $descriptionText !== '' )
-			? wfMsgForContent( 'wikibase-itemlink-title', $titleText, $descriptionLang->getDirMark() . $descriptionText . $wgLang->getDirMark() )
-			: $titleText; // no description, just display the title then
+		$customAttribs[ 'title' ] = ( $descriptionText !== '' ) ?
+			wfMessage(
+				'wikibase-itemlink-title',
+				$titleText,
+				$descriptionLang->getDirMark() . $descriptionText . $wgLang->getDirMark()
+			)->inContentLanguage()->text() :
+			$titleText; // no description, just display the title then
 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$wgOut->addModuleStyles( array( 'wikibase.common' ) );

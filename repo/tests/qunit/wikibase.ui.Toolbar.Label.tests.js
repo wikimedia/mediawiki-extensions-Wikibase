@@ -131,8 +131,8 @@
 
 	test( 'EVENTS: beforeDisable and beforeEnable', function() {
 		// set events:
-		this.label.beforeDisable = function() {	return false; }
-		this.label.beforeEnable = function() {	return false; }
+		this.label.beforeDisable = function() {	return false; };
+		this.label.beforeEnable = function() {	return false; };
 
 		equal(
 			this.label.setDisabled(),

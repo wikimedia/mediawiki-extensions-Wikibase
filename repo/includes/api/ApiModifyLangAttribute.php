@@ -61,7 +61,7 @@ abstract class ApiModifyLangAttribute extends ApiModifyItem {
 	 * @see ApiModifyItem::createItem()
 	 */
 	protected function createItem( array $params ) {
-		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
 		return null;
 	}
 

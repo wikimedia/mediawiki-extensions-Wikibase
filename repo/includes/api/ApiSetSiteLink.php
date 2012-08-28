@@ -75,7 +75,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 * @return ItemContent Newly created item
 	 */
 	protected function createItem( array $params ) {
-		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
 	}
 
 	/**
@@ -98,7 +98,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 			$link = $itemContent->getItem()->getSiteLink( $params['linksite'] );
 
 			if ( !$link ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-remove-sitelink-failed' ), 'remove-sitelink-failed' );
+				$this->dieUsage( $this->msg( 'wikibase-api-remove-sitelink-failed' )->text(), 'remove-sitelink-failed' );
 			}
 
 			$itemContent->getItem()->removeSiteLink( $params['linksite'] );
@@ -110,20 +110,20 @@ class ApiSetSiteLink extends ApiModifyItem {
 			$site = $group->getSiteByGlobalId( $params['linksite'] );
 
 			if ( $site === false ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-not-recognized-siteid' ), 'not-recognized-siteid' );
+				$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-siteid' )->text(), 'not-recognized-siteid' );
 			}
 
 			$page = $site->normalizePageName( $params['linktitle'] );
 
 			if ( $page === false ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-no-external-page' ), 'no-external-page' );
+				$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 			}
 
 			$link = new SiteLink( $site, $page );
 			$ret = $itemContent->getItem()->addSiteLink( $link, 'set' );
 
 			if ( $ret === false ) {
-				$this->dieUsage( wfMsg( 'wikibase-api-add-sitelink-failed' ), 'add-sitelink-failed' );
+				$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
 			}
 
 			$this->addSiteLinksToResult( array( $ret ), 'item', 'sitelinks', 'sitelink' );
@@ -137,11 +137,11 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'empty-link-title', 'info' => wfMsg( 'wikibase-api-empty-link-title' ) ),
-			array( 'code' => 'link-exists', 'info' => wfMsg( 'wikibase-api-link-exists' ) ),
-			array( 'code' => 'database-error', 'info' => wfMsg( 'wikibase-api-database-error' ) ),
-			array( 'code' => 'add-sitelink-failed', 'info' => wfMsg( 'wikibase-api-add-sitelink-failed' ) ),
-			array( 'code' => 'remove-sitelink-failed', 'info' => wfMsg( 'wikibase-api-remove-sitelink-failed' ) ),
+			array( 'code' => 'empty-link-title', 'info' => $this->msg( 'wikibase-api-empty-link-title' )->text() ),
+			array( 'code' => 'link-exists', 'info' => $this->msg( 'wikibase-api-link-exists' )->text() ),
+			array( 'code' => 'database-error', 'info' => $this->msg( 'wikibase-api-database-error' )->text() ),
+			array( 'code' => 'add-sitelink-failed', 'info' => $this->msg( 'wikibase-api-add-sitelink-failed' )->text() ),
+			array( 'code' => 'remove-sitelink-failed', 'info' => $this->msg( 'wikibase-api-remove-sitelink-failed' )->text() ),
 		) );
 	}
 
@@ -215,5 +215,4 @@ class ApiSetSiteLink extends ApiModifyItem {
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}
-
 }

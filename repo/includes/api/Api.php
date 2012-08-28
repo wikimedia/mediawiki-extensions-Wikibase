@@ -53,7 +53,7 @@ abstract class Api extends \ApiBase {
 	 */
 	public function getPossibleErrors() {
 		return array(
-			array( 'code' => 'jsonp-token-violation', 'info' => wfMsg( 'wikibase-api-jsonp-token-violation' ) ),
+			array( 'code' => 'jsonp-token-violation', 'info' => $this->msg( 'wikibase-api-jsonp-token-violation' )->text() ),
 		);
 	}
 
@@ -95,7 +95,7 @@ abstract class Api extends \ApiBase {
 		// in JSON callback mode, no tokens should be returned
 		// this will then block later updates through reuse of cached scripts
 		if ( !is_null( $this->getMain()->getRequest()->getVal( 'callback' ) ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-jsonp-token-violation' ), 'jsonp-token-violation' );
+			$this->dieUsage( $this->msg( 'wikibase-api-jsonp-token-violation' )->text(), 'jsonp-token-violation' );
 		}
 		if ( is_null( $path ) ) {
 			$path = array( null, $this->getModuleName() );

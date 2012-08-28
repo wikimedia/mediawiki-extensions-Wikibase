@@ -44,7 +44,7 @@ class ApiSetAliases extends ApiModifyItem {
 		parent::validateParameters( $params );
 
 		if ( !( ( isset( $params['add'] ) || isset( $params['remove'] ) ) XOR isset( $params['set'] ) ) ) {
-			$this->dieUsage( wfMsg( 'wikibase-api-aliases-invalid-list' ), 'aliases-invalid-list' );
+			$this->dieUsage( $this->msg( 'wikibase-api-aliases-invalid-list' )->text(), 'aliases-invalid-list' );
 		}
 	}
 
@@ -71,7 +71,7 @@ class ApiSetAliases extends ApiModifyItem {
 	 * @see ApiModifyItem::createItem()
 	 */
 	protected function createItem( array $params ) {
-		$this->dieUsage( wfMsg( 'wikibase-api-no-such-item' ), 'no-such-item' );
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
 	}
 
 	/**
@@ -121,7 +121,7 @@ class ApiSetAliases extends ApiModifyItem {
 	 */
 	public function getPossibleErrors() {
 		return array_merge( parent::getPossibleErrors(), array(
-			array( 'code' => 'aliases-invalid-list', 'info' => wfMsg( 'wikibase-api-aliases-invalid-list' ) ),
+			array( 'code' => 'aliases-invalid-list', 'info' => $this->msg( 'wikibase-api-aliases-invalid-list' )->text() ),
 		) );
 	}
 

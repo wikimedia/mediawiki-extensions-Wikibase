@@ -21,7 +21,7 @@
 				name: 'English Wikipedia',
 				pageUrl: 'http://en.wikipedia.org/wiki/$1',
 				shortName: 'English'
-			}
+			};
 			this.string = 'test';
 			this.site = new window.wikibase.Site( this.siteDetails );
 

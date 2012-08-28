@@ -116,7 +116,7 @@ class ItemView extends \ContextSource {
 			$html .= Html::element( 'div', array( 'class' => 'wb-aliases-empty' ), wfMessage( 'wikibase-aliases-empty' ) );
 		} else {
 			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
-			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMsg( 'wikibase-aliases-label' ) );
+			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMessage( 'wikibase-aliases-label' )->text() );
 			$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
 			foreach( $aliases as $alias ) {
 				$html .= Html::element(

@@ -179,15 +179,15 @@ abstract class ViewEntityAction extends \ViewAction {
 		if ( $hookResult ) {
 			// Show error message
 			if ( $oldid ) {
-				$text = wfMsgNoTrans( 'missing-article',
+				$text = wfMessage( 'missing-article',
 					$this->getTitle()->getPrefixedText(),
-					wfMsgNoTrans( 'missingarticle-rev', $oldid ) );
+					wfMessage( 'missingarticle-rev', $oldid )->plain() )->plain();
 			} elseif ( $this->getTitle()->quickUserCan( 'create', $this->getContext()->getUser() )
 				&& $this->getTitle()->quickUserCan( 'edit', $this->getContext()->getUser() )
 			) {
-				$text = wfMsgNoTrans( 'wikibase-noitem' ); // TODO: item, not entity
+				$text = wfMessage( 'wikibase-noitem' )->plain(); // TODO: item, not entity
 			} else {
-				$text = wfMsgNoTrans( 'wikibase-noitem-nopermission' ); // TODO: item, not entity
+				$text = wfMessage( 'wikibase-noitem-nopermission' )->plain(); // TODO: item, not entity
 			}
 
 			$text = "<div class='noarticletext'>\n$text\n</div>";
