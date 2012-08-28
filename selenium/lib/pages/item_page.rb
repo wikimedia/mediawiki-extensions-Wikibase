@@ -54,12 +54,11 @@ class ItemPage < RubySelenium
 
   # language links UI
   table(:sitelinksTable, :class => "wb-sitelinks")
+  element(:sitelinksTableColumnHeaders, :tr, :class => "wb-sitelinks-columnheaders")
   link(:addSitelinkLink, :css => "table.wb-sitelinks > tfoot > tr > td > div.wb-ui-toolbar > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
   span(:siteLinkCounter, :class => "wb-ui-propertyedittool-counter")
   text_field(:siteIdInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody/tr/td[1]/input")
-  text_field(:pageInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody/tr/td[2]/input")
-  text_field(:siteIdInputFieldLoading, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody/tr/td[1]/input[@class='ui-autocomplete-loading']")
-  text_field(:pageInputFieldLoading, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody/tr/td[2]/input[@class='ui-autocomplete-loading']")
+  text_field(:pageInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody/tr/td[contains(@class, 'wb-sitelinks-link')]/input")
   span(:saveSitelinkLinkDisabled, :class => "wb-ui-toolbar-button-disabled")
   unordered_list(:siteIdAutocompleteList, :class => "ui-autocomplete", :index => 0)
   unordered_list(:pageAutocompleteList, :class => "ui-autocomplete", :index => 1)
@@ -197,11 +196,14 @@ class ItemPage < RubySelenium
   end
 
   def count_existing_sitelinks
+    if sitelinksTableColumnHeaders? == false
+      return 0
+    end
     count = 0
     sitelinksTable_element.each do |tableRow|
       count = count+1
     end
-    return count-2
+    return count - 3 # subtracting two table header row and the footer row
   end
 
   def wait_for_sitelinks_to_load

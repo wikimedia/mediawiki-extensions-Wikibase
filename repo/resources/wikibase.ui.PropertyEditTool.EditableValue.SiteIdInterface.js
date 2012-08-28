@@ -259,14 +259,32 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		return value ? value : ''; // ... but make sure this won't be null!
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._setValue_inNonEditMode
+	 *
+	 * @param string value
+	 * @return bool whether the value has been changed
+	 */
 	_setValue_inNonEditMode: function( value ) {
 		// the actual value is the site id, displayed value though should be the whole site name and id in parentheses.
 		var site = window.wikibase.getSite( value );
+		// site is null in case it was initialized empty and destroy() is called... so we just handle this
 		if( site !== null ) {
-			// site is null in case it was initialized empty and destroy() is called... so we just handle this
-			value = site.getShortName() + ' (' + site.getId() + ')';
+			// split interface subject into two columns, one holding the site name, the other the site id
+			this._subject
+			.attr( 'colspan', '0' )
+			.attr( 'class', '' )
+			.addClass( 'wb-sitelinks-sitename wb-sitelinks-sitename-' + site.getId() )
+			.text( site.getShortName() )
+			.after(
+				$( '<td/>' ) // TODO interface should be independent from any DOM structure
+				.addClass( 'wb-sitelinks-siteid wb-sitelinks-siteid-' + site.getId() )
+				.text( site.getId() )
+			);
+			return true;
+		} else {
+			return false;
 		}
-		return window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._setValue_inNonEditMode.call( this, value );
 	},
 
 	/**

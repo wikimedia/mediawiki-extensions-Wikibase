@@ -401,7 +401,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype = {
 
 	/**
 	 * Called by setValue() if the value has to be injected into the static DOM nodes, not into input elements.
-
+	 *
 	 * @param string value
 	 * @return bool whether the value has been changed
 	 */

@@ -26,11 +26,11 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 10em; /* has to be as wide as its content */
+	width: 13em; /* has to be as wide as its content */
 }
 
 .wb-ui-propertyedittool-toolbar {
-	width: 10em;
+	width: 13em;
 	float: right;
 }
 
@@ -107,7 +107,7 @@ its toolbar */
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue {
 	display: block;
-	padding-right: 12em;
+	padding-right: 14em;
 	margin: .3em .3em .13em 8px; /* h1 natively has 0.17em bottom padding to avoid clipping */
 }
 
@@ -214,7 +214,7 @@ EditableValue's "edit" button when aliases exist) */
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 10em;
+	width: 13em;
 }
 
 .wb-alias li.tagadata-choice {
@@ -247,19 +247,53 @@ EditableValue's "edit" button when aliases exist) */
 
 /********** SITE LINKS **********/
 
+table.wb-sitelinks input {
+	margin: 0;
+	font-size: 1em; /* prevent font size rounding errors */
+	width: 100%;
+}
+
+table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-sitename {
+	white-space: normal;
+}
+
+table.wb-sitelinks .wb-sitelinks-link {
+	padding-left: 10px;
+}
+table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
+	padding-left: 6px; /* above value minus input border and padding */
+}
+
 table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
 	background-color: #D6F3FF; /* hihglight color when editing */
+}
+table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td.wb-sitelinks-siteid {
+	background-color: #D0EBF7;
 }
 
 /* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
 table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-toolbarparent {
-	width: 10em;
+	width: 13em;
 	position: static; /* clear absolute positioning */
 	float: none; /* overwrite edit section's float: right */
+	border-right: 1px solid #C9C9C9;
 }
 
 table.wb-sitelinks .wb-ui-toolbar {
 	float: none; /* prevent white space jittering for PropertyEditTool toolbar */
+}
+
+table.wb-sitelinks .wb-pending-value .wb-sitelinks-sitename,
+table.wb-sitelinks .wb-sitelinks-link {
+	padding-right: 16px;
+	border-right: none;
+}
+
+table.wb-sitelinks tfoot td.wb-empty {
+	border-left: 1px solid #C9C9C9;
+}
+table.wb-sitelinks tfoot td.wb-sitelinks-toolbar {
+	border-right: 1px solid #C9C9C9;
 }
 
 /********** /SITE LINKS **********/
