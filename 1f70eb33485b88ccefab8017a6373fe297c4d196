@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAARX//ym0\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-28T11:04:05Z",
+      "side": 1,
+      "message": "useless linebreak",
+      "revId": "1f70eb33485b88ccefab8017a6373fe297c4d196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARX//ym8\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-28T11:04:05Z",
+      "side": 1,
+      "message": "beter use this._getValueContainer() here instead of this._subject\n\nActually, this is pretty bad because now we just add another node net to the subject which actually still is the subject but there is not reference to that node.\n\nNot sure how to solve this or make it better right now. The thing here is, if we want to re-use it on the special pages, it should work with other structures than tables, the subject should be replacable with a div or something else and the thing should still work with it.",
+      "revId": "1f70eb33485b88ccefab8017a6373fe297c4d196",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARX//yo4\u003d",
         "filename": "repo/resources/wikibase.ui.SiteLinksEditTool.js",
         "patchSetId": 1
