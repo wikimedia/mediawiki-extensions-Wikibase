@@ -29,7 +29,9 @@ RSpec.configure do |config|
     else
       raise "No default browser defined. Please define DEFAULT_BROWSER in your local configuration.yml!"
     end
-    puts "Using browser " + browser_type + "."
+    if configs['CONSOLE_LOG']
+      puts "\nUsing browser " + browser_type + "."
+    end
     if ENV["RUN_REMOTE"] && ENV["RUN_REMOTE"] != ""
       if(ENV["TARGET_OS"])
         target_os = ENV["TARGET_OS"]
@@ -48,11 +50,24 @@ RSpec.configure do |config|
       elsif target_os == "mac"
         caps.platform = :MAC
       end
-      puts "Running remote on Selenium GRID using OS " + target_os + "."
+      if configs['CONSOLE_LOG']
+        puts "Running remote on Selenium GRID using OS " + target_os + "."
+      end
       @browser = Watir::Browser.new(:remote, :url => REMOTE_SELENIUM_HUB, :desired_capabilities => caps)
     else
-      puts "Running on local machine."
+      if configs['CONSOLE_LOG']
+        puts "Running on local machine."
+      end
       @browser = Watir::Browser.new(browser_type)
+    end
+  end
+
+  config.before(:each) do
+    if configs['CONSOLE_LOG']
+      puts "\nTest: " +
+      example.metadata[:example_group][:example_group][:description_args][0] +
+      " => " + example.metadata[:example_group][:description_args][0] +
+      " => " + example.metadata[:description_args][0]
     end
   end
 
