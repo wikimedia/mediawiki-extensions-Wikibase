@@ -131,13 +131,16 @@ class ItemContent extends EntityContent {
 				$ipsId = (int)$row->ips_item_id;
 				$itemId = $this->item->getId();
 
+				/* @var WikiPage $ipsPage */
+				$ipsPage = $this->getContentHandler()->getWikiPageForId( $ipsId );
+
 				if ( $ipsId !== $itemId ) {
 					$status->setResult( false );
 					$status->error(
 						'wikibase-error-sitelink-already-used',
 						$siteLink->getSiteID(),
 						$siteLink->getPage(),
-						$ipsId
+						$ipsPage->getTitle()->getFullText()
 					);
 				}
 			}
