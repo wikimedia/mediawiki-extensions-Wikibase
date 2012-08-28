@@ -87,7 +87,7 @@ describe "Check undo/history/oldrevision" do
       on_page(ItemPage) do |page|
         page.itemLabelSpan.should == label
         page.itemDescriptionSpan.should == description
-        page.getNthAlias(3).text.should == alias_c
+        page.get_nth_alias(3).text.should == alias_c
         page.editLabelLink?.should be_false
         page.editDescriptionLink?.should be_false
         page.addAliases?.should be_false
@@ -186,7 +186,7 @@ describe "Check undo/history/oldrevision" do
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
-        page.getNumberOfSitelinksFromCounter.should == 1
+        page.get_number_of_sitelinks_from_counter.should == 1
       end
     end
     it "should undo the change on the first language link" do
@@ -205,7 +205,7 @@ describe "Check undo/history/oldrevision" do
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
-        page.getNumberOfSitelinksFromCounter.should == 1
+        page.get_number_of_sitelinks_from_counter.should == 1
         page.englishSitelink_element.text.should == sitelinks[0][1]
       end
     end
@@ -223,7 +223,7 @@ describe "Check undo/history/oldrevision" do
         page.navigate_to_item
         page.wait_for_item_to_load
         page.wait_for_aliases_to_load
-        page.getNthAlias(3).text.should == alias_a
+        page.get_nth_alias(3).text.should == alias_a
       end
     end
   end

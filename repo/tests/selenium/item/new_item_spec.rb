@@ -33,7 +33,7 @@ describe "Check functionality of create new item" do
         page.wait_for_item_to_load
       end
       on_page(ItemPage) do |page|
-        page.ulsSwitchLanguage("Deutsch")
+        page.uls_switch_language("Deutsch")
         page.wait_for_item_to_load
         page.labelInputField= initial_label
         page.saveLabelLink

@@ -55,7 +55,7 @@ describe "Check functionality search" do
         page.searchResultDiv?.should be_true
         page.searchResults?.should be_true
         page.noResults?.should be_false
-        page.countSearchResults.should == 1
+        page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
         page.firstResultSearchMatch_element.text.should == label
       end
@@ -67,17 +67,17 @@ describe "Check functionality search" do
       visit_page(SearchPage) do |page|
         page.searchText= alias_a
         page.searchSubmit
-        page.countSearchResults.should == 1
+        page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
         page.firstResultSearchMatch_element.text.should == alias_a
         page.searchText= alias_b
         page.searchSubmit
-        page.countSearchResults.should == 1
+        page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
         page.firstResultSearchMatch_element.text.should == alias_b
         page.searchText= alias_c
         page.searchSubmit
-        page.countSearchResults.should == 1
+        page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
         page.firstResultSearchMatch_element.text.should == alias_c
       end

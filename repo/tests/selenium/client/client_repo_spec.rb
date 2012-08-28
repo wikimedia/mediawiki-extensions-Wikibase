@@ -38,7 +38,7 @@ describe "Check functionality of client-repo connection" do
         page.navigate_to_item
         page.wait_for_sitelinks_to_load
         page.add_sitelink(item_sitelink_en[0], item_sitelink_en[1])
-        page.getNumberOfSitelinksFromCounter.should == 1
+        page.get_number_of_sitelinks_from_counter.should == 1
       end
     end
   end
@@ -51,7 +51,7 @@ describe "Check functionality of client-repo connection" do
         item_sitelinks.each do |sitelink|
           page.add_sitelink(sitelink[0], sitelink[1])
         end
-        page.getNumberOfSitelinksFromCounter.should == item_sitelinks.count + 1
+        page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1
       end
     end
   end
@@ -97,7 +97,7 @@ describe "Check functionality of client-repo connection" do
         item_sitelinks_additional.each do |sitelink|
           page.add_sitelink(sitelink[0], sitelink[1])
         end
-        page.getNumberOfSitelinksFromCounter.should == item_sitelinks.count + 1 + item_sitelinks_additional.count
+        page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1 + item_sitelinks_additional.count
       end
     end
   end

@@ -160,7 +160,7 @@ class ItemPage < RubySelenium
   end
 
   # sitelinks
-  def getNumberOfSitelinksFromCounter
+  def get_number_of_sitelinks_from_counter
     wait_until do
       siteLinkCounter?
     end
@@ -169,15 +169,7 @@ class ItemPage < RubySelenium
     return integerValue
   end
 
-  def countAutocompleteListElements(list)
-    count = 0
-    list.each do |listItem|
-      count = count+1
-    end
-    return count
-  end
-
-  def getNthElementInAutocompleteList(list, n)
+  def get_nth_element_in_autocomplete_list(list, n)
     count = 0
     list.each do |listItem|
       count = count+1
@@ -188,21 +180,7 @@ class ItemPage < RubySelenium
     return false
   end
 
-  def getNthSitelinksTableRow(n)
-    count = 0
-    sitelinksTable_element.each do |tableRow|
-      #don't count here to skip the table header
-      #count = count+1
-      if count == n
-        return tableRow
-      end
-      #count here instead
-      count = count+1
-    end
-    return false
-  end
-
-  def countExistingSitelinks
+  def count_existing_sitelinks
     count = 0
     sitelinksTable_element.each do |tableRow|
       count = count+1
@@ -227,7 +205,7 @@ class ItemPage < RubySelenium
 
   def remove_all_sitelinks
     count = 0
-    number_of_sitelinks = getNumberOfSitelinksFromCounter
+    number_of_sitelinks = get_number_of_sitelinks_from_counter
     while count < (number_of_sitelinks)
       removeSitelinkLink
       ajax_wait
@@ -243,7 +221,7 @@ class ItemPage < RubySelenium
     end
   end
 
-  def countExistingAliases
+  def count_existing_aliases
     count = 0
     aliasesList_element.each do |aliasElem|
       count = count+1
@@ -251,7 +229,7 @@ class ItemPage < RubySelenium
     return count
   end
 
-  def getNthAlias n
+  def get_nth_alias n
     count = 1
     if aliasesList_element.exists?
       aliasesList_element.each do |aliasElem|
@@ -265,7 +243,7 @@ class ItemPage < RubySelenium
   end
 
   # ULS
-  def ulsSwitchLanguage(lang)
+  def uls_switch_language(lang)
     ulsOpen
     self.ulsLanguageFilter= lang
     ajax_wait
