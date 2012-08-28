@@ -9,7 +9,7 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-"use strict";
+'use strict';
 
 // Wikibase jQuery plugin for auto expanding input boxes:
 ( function( $ ) {

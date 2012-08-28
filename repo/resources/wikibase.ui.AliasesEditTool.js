@@ -2,7 +2,6 @@
  * JavaScript for 'Wikibase' edit form for an items aliases
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -10,19 +9,16 @@
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  * @author H. Snater
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
+var $PARENT = wb.ui.PropertyEditTool;
 
 /**
  * Module for 'Wikibase' extensions user interface functionality for editing an items aliases.
- *
+ * @constructor
  * @since 0.1
  */
-window.wikibase.ui.AliasesEditTool = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.call( this, subject );
-};
-
-window.wikibase.ui.AliasesEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
-$.extend( window.wikibase.ui.AliasesEditTool.prototype, {
+wb.ui.AliasesEditTool = wb.utilities.inherit( $PARENT , {
 	/**
 	 * Initializes the edit form for the aliases.
 	 * This should normally be called directly by the constructor.
@@ -30,15 +26,15 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 	 * @see wikibase.ui.PropertyEditTool._init
 	 */
 	_init: function( subject ) {
-		subject = $( subject );
 		// we need this additional block element for the grid layout; it will contain the aliases label + editable value
 		// NOTE: this is just because of the label It would be possible to add the functionality of having a label
 		//       including setter/getter functions into PropertyEditTool directly but it doesn't seem necessary
 		$( '<div/>', { 'class': 'wb-gridhelper' } ).append( subject.children() ).appendTo( subject );
 		// .wb-gridhelper will also be returned in _getValuesParent()
 
-		// call prototype's _init():
-		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
+		// call PropertyEditTool's init():
+		$PARENT.prototype._init.apply( this, arguments );
+
 		// add class specific to this ui element:
 		this._subject.addClass( 'wb-ui-aliasesedittool' );
 
@@ -73,14 +69,14 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.destroy
+	 * @see wikibase.ui.PropertyEditTool._destroy
 	 */
-	destroy: function() {
+	_destroy: function() {
 		// don't forget to remove injected node again:
 		var gridHelper = this._subject.children( '.wb-gridhelper' );
 		gridHelper.replaceWith( gridHelper.children() );
-		window.wikibase.ui.PropertyEditTool.prototype.destroy.call( this );
 
+		$PARENT.prototype._destroy.call( this );
 	},
 
 	/**
@@ -89,7 +85,7 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 	 * @return jQuery
 	 */
 	_getValuesParent: function() {
-		// grid layout helper constructed in the _init() function
+		// grid layout helper constructed in the init() function
 		return this._subject.children( '.wb-gridhelper:first' );
 	},
 
@@ -126,7 +122,7 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
 	 * @return wikibase.ui.Toolbar
 	 */
 	_buildSingleValueToolbar: function( editableValue ) {
-		var toolbar = window.wikibase.ui.PropertyEditTool.prototype._buildSingleValueToolbar.call( this, editableValue );
+		var toolbar = $PARENT.prototype._buildSingleValueToolbar.call( this, editableValue );
 
 		// determine whether to show or hide the add button when cancelling edit mode
 		$( toolbar.editGroup.btnCancel ).on( 'action', $.proxy( function( event ) {
@@ -189,10 +185,12 @@ $.extend( window.wikibase.ui.AliasesEditTool.prototype, {
  *
  * @return jQuery
  */
-window.wikibase.ui.AliasesEditTool.getEmptyStructure = function() {
+wb.ui.AliasesEditTool.getEmptyStructure = function() {
 	return $(
 		'<div class="wb-aliases">' +
 			'<span class="wb-aliases-label">' + mw.message( 'wikibase-aliases-label' ).escaped() + '</span>' +
 		'</div>'
 	);
 };
+
+} )( mediaWiki, wikibase, jQuery );
