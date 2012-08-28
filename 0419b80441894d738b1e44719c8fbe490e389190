@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//yoM\u003d",
+        "filename": "lib/maintenance/rebuildAllData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-08-28T09:46:01Z",
+      "side": 1,
+      "message": "please update the documentation.",
+      "revId": "0419b80441894d738b1e44719c8fbe490e389190",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
