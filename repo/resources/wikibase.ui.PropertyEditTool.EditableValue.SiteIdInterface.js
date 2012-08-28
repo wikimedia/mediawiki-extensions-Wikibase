@@ -2,7 +2,6 @@
  * JavaScript for a part of an editable property value for the input for a site id
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -10,33 +9,28 @@
  * @author Daniel Werner
  * @author H. Snater
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
+var $PARENT = wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface;
 
 /**
- * Serves the input interface to write a site code or to selectone. This will also validate whether
- * the site code is existing and will display the full site name if it is.
- *
- * @param jQuery subject
+ * Serves the input interface to write a site code or to select one. This will also validate whether the site code is
+ * existing and will display the full site name if it is.
+ * @constructor
+ * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface
+ * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.apply( this, arguments );
-};
-window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prototype, {
-
+wb.ui.PropertyEditTool.EditableValue.SiteIdInterface = wb.utilities.inherit( $PARENT, {
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._init
+	 */
 	_init: function( subject ) {
-		if( this._subject !== null ) {
-			// initializing twice should never happen, have to destroy first!
-			this.destroy();
-		}
-		this._subject = $( subject );
 		this._initSiteList();
-		this._subject = null; // necessary so original _init() won't destroy this
 
-		// NOTE: this isn't too nice since we don't call the parent _init() which would override the list we create
-		//       with _initSiteList() which we also can't call afterwards since the original _init() already requires
-		//       it when normalizing the initial value.
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
+		// NOTE: this isn't too nice since we don't call the $PARENT.prototype._init() which would override the list we
+		//       create with _initSiteList() which we also can't call afterwards since the original init() already
+		//       requires it when normalizing the initial value.
+		wb.ui.PropertyEditTool.EditableValue.Interface.prototype._init.call( this, subject );
 	},
 
 	/**
@@ -44,7 +38,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._initInputElement
 	 */
 	_initInputElement: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype._initInputElement.call( this );
+		$PARENT.prototype._initInputElement.call( this );
 		/*
 		 * When leaving the input box, replace current (incomplete) value with first auto-suggested value.
 		 * Also make sure pressing the enter key will select the first value in the auto-suggestion.
@@ -87,7 +81,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	_buildInputElement: function() {
 		// get basic input box
 		var inputElement
-			= window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
+			= wb.ui.PropertyEditTool.EditableValue.Interface.prototype._buildInputElement.call( this );
 
 		// extend input element with autocomplete
 		if ( this._currentResults !== null ) {
@@ -208,8 +202,8 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		}
 
 		// find out which site ids should be selectable and add them as auto selct choice
-		for ( var siteId in window.wikibase.getSites() ) {
-			var site = window.wikibase.getSite( siteId );
+		for ( var siteId in wb.getSites() ) {
+			var site = wb.getSite( siteId );
 
 			if( $.inArray( site, ignoredSites ) == -1 ) {
 				siteList.push( {
@@ -232,7 +226,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 		if( siteId === null ) {
 			return null;
 		}
-		return window.wikibase.getSite( siteId );
+		return wb.getSite( siteId );
 	},
 
 	/**
@@ -254,7 +248,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 * @return string
 	 */
 	getValue: function() {
-		var value = window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.prototype.getValue.call( this );
+		var value = $PARENT.prototype.getValue.call( this );
 		value = this.normalize( value ); // return id instead of actual value...
 		return value ? value : ''; // ... but make sure this won't be null!
 	},
@@ -267,7 +261,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 */
 	_setValue_inNonEditMode: function( value ) {
 		// the actual value is the site id, displayed value though should be the whole site name and id in parentheses.
-		var site = window.wikibase.getSite( value );
+		var site = wb.getSite( value );
 		// site is null in case it was initialized empty and destroy() is called... so we just handle this
 		if( site !== null ) {
 			// split interface subject into two columns, one holding the site name, the other the site id
@@ -319,7 +313,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 			if( suggestions.is( ':visible' ) && suggestions.length > 0 ) {
 				fallbackSearch = $( suggestions[0] ).text().toLowerCase();
 				// manually highlighting the fallback suggestion
-				if ( typeof autoComplete.menu.active === 'undefined' || autoComplete.menu.active === null ) {
+				if( autoComplete.menu.active === undefined || autoComplete.menu.active === null ) {
 					$( suggestions[0] ).children( 'a' ).addClass( 'ui-state-hover' );
 				} else if ( autoComplete.menu.active[0] !== suggestions[0] ) {
 					// removing manual highlight of first item if a different item is selected
@@ -356,7 +350,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	},
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._normalize_fromCurrentResults
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface._normalize_fromCurrentResults
 	 *
 	 * Will return the site ID if any of the site names is given.
 	 */
@@ -373,3 +367,5 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.prot
 	 */
 	ignoredSiteLinks: null
 } );
+
+} )( mediaWiki, wikibase, jQuery );

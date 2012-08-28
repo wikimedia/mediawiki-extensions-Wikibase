@@ -17,10 +17,10 @@
 		setup: function() {
 			var node = $( '<ul/>', { id: 'parent' } ).appendTo( 'body' );
 			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
-			this.subject = new window.wikibase.ui.PropertyEditTool.EditableAliases;
+			this.subject = new window.wikibase.ui.PropertyEditTool.EditableAliases();
 
 			var toolbar = this.propertyEditTool._buildSingleValueToolbar( this.subject );
-			this.subject._init( node, toolbar );
+			this.subject.init( node, toolbar );
 			this.values = [ 'a', 'b', 'c', 'd' ];
 			this.string = 'somestring';
 
