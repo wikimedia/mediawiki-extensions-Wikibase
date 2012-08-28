@@ -39,9 +39,13 @@
 	clear: both; /* wrap around success message */
 }
 
+.wb-item input {
+	padding-left: 2px;
+}
+
 /* container for the value itself */
 .wb-value, .wb-gridhelper {
-	padding-right: 12em; /* width of toolbar + white space border */
+	padding-right: 14em; /* width of toolbar + white space border */
 	word-wrap: break-word; /* force word wrap for that toolbar will not overlay very long values */
 	display: block; /* need to force block explicitly to achieve 100% width */
 }
@@ -151,21 +155,34 @@ PropertyEditTool toolbar */
 table.wb-sitelinks {
 	table-layout: fixed; /* constrains table proportons to first row's columns (see colgroup in HTML) */
 	width: 100%;
+	border-bottom: 1px solid #C9C9C9;
 }
 
 table.wb-sitelinks h3 {
 	padding-left: 10px;
 }
 
-table.wb-sitelinks .wb-sitelinks-site {
-	width: 33%;
+table.wb-sitelinks .wb-sitelinks-columnheaders {
+	background-color: #C9C9C9;
+}
+
+table.wb-sitelinks .wb-sitelinks-sitename {
+	width: 25%;
 	word-wrap: break-word;
 	padding-left: 10px;
+	border-left: 1px solid #C9C9C9;
+}
+
+table.wb-sitelinks .wb-sitelinks-siteid {
+	width: 10%;
+	padding-left: 10px;
+	white-space: nowrap;
 }
 
 table.wb-sitelinks .wb-sitelinks-link {
-	width: 66%;
+	width: 65%;
 	word-wrap: break-word;
+	border-right: 1px solid #C9C9C9;
 }
 
 table.wb-sitelinks, .wb-sitelinks-empty {
@@ -187,6 +204,12 @@ table.wb-sitelinks .uneven td {
 }
 table.wb-sitelinks .even td {
 	background: #F8F8F8;
+}
+table.wb-sitelinks .uneven td.wb-sitelinks-siteid {
+	background: #E8E8E8;
+}
+table.wb-sitelinks .even td.wb-sitelinks-siteid {
+	background: #F0F0F0;
 }
 
 /********** /SITE LINKS **********/
