@@ -73,7 +73,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableSiteLink.prototype, {
 
 		// interface for choosing a page (from the source site):
 		interfaces.pageName = new ev.SitePageInterface(
-				tableCells[1], interfaces.siteId.getSelectedSite()
+			tableCells.last(), interfaces.siteId.getSelectedSite()
 		);
 		interfaces.pageName.inputPlaceholder = mw.msg( 'wikibase-sitelink-page-edit-placeholder' );
 		interfaces.pageName.ajaxParams = {

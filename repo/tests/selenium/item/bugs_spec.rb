@@ -10,7 +10,7 @@ require 'spec_helper'
 
 describe "Check for known bugs" do
   context "description and aliases appear in wrong languages" do
-    it "should check of the bug exists" do
+    it "should check if the bug exists" do
       description_en = "english"
       description_de = "deutsch"
       visit_page(ItemPage) do |page|
