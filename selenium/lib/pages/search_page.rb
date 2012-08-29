@@ -8,7 +8,7 @@
 
 class SearchPage < ItemPage
   include PageObject
-  page_url WIKI_REPO_URL + "index.php/Special:Search"
+  page_url WIKI_REPO_URL + "Special:Search"
   text_field(:searchText, :id => "searchText")
   button(:searchSubmit, :text => "Search")
   div(:searchResultDiv, :class => "searchresults")

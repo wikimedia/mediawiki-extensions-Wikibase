@@ -9,7 +9,7 @@
 class QUnitPage
   include PageObject
 
-  page_url WIKI_REPO_URL + "index.php/Special:JavaScriptTest/qunit?filter=wikibase"
+  page_url WIKI_REPO_URL + "Special:JavaScriptTest/qunit?filter=wikibase"
   paragraph(:qunitTestResult, :id => "qunit-testresult")
   ordered_list(:qunitTestList, :id => "qunit-tests")
   list_item(:qunitTestFail, :class => "fail")
