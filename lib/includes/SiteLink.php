@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Sites, Site, MWException;
 
 /**
  * Class representing a link to another site, based upon the Sites class.
@@ -22,7 +23,7 @@ class SiteLink {
 	 * @note  : If $normalize is set, this may cause an API request to the remote site, so beware that this function may
 	 *          be slow slow and depend on an external service.
 	 *
-	 * @param String $siteID     The site's global ID, to be used with Sites::singleton()->getSiteByGlobalId().
+	 * @param String $globalSiteId     The site's global ID, to be used with Sites::singleton()->getSiteByGlobalId().
 	 * @param String $page       The target page's title
 	 * @param bool   $normalize  Whether the page title should be normalized (default: false)
 	 *
@@ -31,18 +32,18 @@ class SiteLink {
 	 * @return \Wikibase\SiteLink the new SiteLink
 	 * @throws \MWException if the $siteID isn't known.
 	 */
-	public static function newFromText( $siteID, $page, $normalize = false ) {
-		$site = Sites::singleton()->getSiteByGlobalId( $siteID );
+	public static function newFromText( $globalSiteId, $page, $normalize = false ) {
+		$site = Sites::singleton()->getSite( $globalSiteId );
 
 		if ( $site === false ) {
-			$site = Sites::newSite( array( 'global_key' => $siteID ) );
+			$site = Sites::newSite( array( 'global_key' => $globalSiteId ) );
 		}
 
 		if ( $normalize ) {
 			$normalized = $site->normalizePageName( $page );
 
 			if ( $normalized === false ) {
-				throw new \MWException( "failed to normalize title: $page" );
+				throw new MWException( "failed to normalize title: $page" );
 			}
 
 			$page = $normalized;
@@ -73,11 +74,11 @@ class SiteLink {
 	 * @param Site   $site  The site the page link points to
 	 * @param String $page  The target page's title. This is expected to already be normalized.
 	 *
-	 * @throws \MWException
+	 * @throws MWException
 	 */
 	public function __construct( Site $site, $page ) {
 		if ( !is_string( $page ) ) {
-			throw new \MWException( '$page must be a string' );
+			throw new MWException( '$page must be a string' );
 		}
 
 		$this->site = $site;
@@ -136,7 +137,7 @@ class SiteLink {
 	 *
 	 * @return String|bool The URL of the page, or false if the target site is not known to the Sites class.
 	 */
-	public function getUrl() {
+	public function getUrl() { // FIXME
 		if ( $this->site->getUrl() === null
 			|| $this->site->getUrl() === false
 			|| $this->site->getUrl() === '' ) {
@@ -182,7 +183,10 @@ class SiteLink {
 	public static function getSiteIDs( $siteLinks ) {
 		$siteIds = array();
 
-		foreach ( $siteLinks as $link /* @var SiteLink $link */) {
+		/**
+		 * @var SiteLink $link
+		 */
+		foreach ( $siteLinks as $link ) {
 			$siteIds[] = $link->getSiteID();
 		}
 
@@ -200,11 +204,14 @@ class SiteLink {
 	public static function siteLinksToArray( $baseLinks ) {
 		$links = array();
 
-		/* @var SiteLink $link */
+		/**
+		 * @var SiteLink $link
+		 */
 		foreach ( $baseLinks as $link ) {
 			$links[ $link->getSiteID() ] = $link->getPage();
 		}
 
 		return $links;
 	}
+
 }
