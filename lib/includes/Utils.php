@@ -112,7 +112,8 @@ final class Utils {
 	 * @since 0.1
 	 *
 	 * @param string $inputString The actual string to process.
-	 * @return filtered string where whitespace possibly are removed.
+	 *
+	 * @return string where whitespace possibly are removed.
 	 */
 	static public function squashWhitespace( $inputString ) {
 		return preg_replace( '/(\s+)/', ' ', preg_replace( '/(^\s+|\s+$)/', '', $inputString ) );
@@ -125,7 +126,8 @@ final class Utils {
 	 * @since 0.1
 	 *
 	 * @param string $inputString The actual string to process.
-	 * @return filtered string where whitespace possibly are removed.
+	 *
+	 * @return string where whitespace possibly are removed.
 	 */
 	static public function cleanupToNFC( $inputString ) {
 		return UtfNormal::cleanUp( $inputString );
@@ -137,7 +139,8 @@ final class Utils {
 	 * @since 0.1
 	 *
 	 * @param string $inputString
-	 * @return trimmed string on NFC form
+	 *
+	 * @return string on NFC form
 	 */
 	static public function squashToNFC( $inputString ) {
 		return self::cleanupToNFC( self::squashWhitespace( $inputString ) );
@@ -157,7 +160,8 @@ final class Utils {
 	 *
 	 * @param array $array
 	 * @param array $sequence
-	 * @return ordered array
+	 *
+	 * @return array
 	 */
 	static public function reorderArray( array $array, array $sequence ) {
 
@@ -177,7 +181,8 @@ final class Utils {
 	 *
 	 * @param array $texts the key-value pairs to check for existence
 	 * @param array $sequence the list of keys that should exist
-	 * @return ordered array
+	 *
+	 * @return array
 	 */
 	static public function filterMultilangText( array $texts = null, array $sequence = null ) {
 
