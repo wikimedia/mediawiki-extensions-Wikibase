@@ -52,7 +52,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 		static $hasSites = false;
 
 		if ( !$hasSites ) {
-			Utils::insertSitesForTests();
+			\TestSites::insertIntoDb();
 			$hasSites = true;
 		}
 	}

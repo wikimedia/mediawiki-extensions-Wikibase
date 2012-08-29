@@ -43,7 +43,7 @@ class ApiEditPageTest extends ApiTestCase {
 		parent::setUp();
 		$this->doLogin();
 
-		\Wikibase\Utils::insertSitesForTests();
+		\TestSites::insertIntoDb();
 
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;

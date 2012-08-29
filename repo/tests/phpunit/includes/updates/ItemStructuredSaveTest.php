@@ -51,7 +51,7 @@ class ItemStructuredSaveTest extends \MediaWikiTestCase {
 	 * @param ItemContent $itemContent
 	 */
 	public function testDoUpdate( ItemContent $itemContent ) {
-		\Wikibase\Utils::insertSitesForTests();
+		\TestSites::insertIntoDb();
 
 		$itemContent->save();
 		$update = new ItemStructuredSave( $itemContent );

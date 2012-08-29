@@ -45,7 +45,7 @@ interface SiteList extends Countable, Traversable, Serializable, ArrayAccess {
 	 *
 	 * @return boolean
 	 */
-	public function hasGlobalId( $globalSiteId );
+	public function hasSite( $globalSiteId );
 
 	/**
 	 * Returns the Site with the provided global site identifier.
@@ -57,7 +57,7 @@ interface SiteList extends Countable, Traversable, Serializable, ArrayAccess {
 	 *
 	 * @return Site
 	 */
-	public function getSiteByGlobalId( $globalSiteId );
+	public function getSite( $globalSiteId );
 
 	/**
 	 * Removes the site with the specified global site identifier.
@@ -67,7 +67,7 @@ interface SiteList extends Countable, Traversable, Serializable, ArrayAccess {
 	 *
 	 * @param string $globalSiteId
 	 */
-	public function removeSiteByGlobalId( $globalSiteId );
+	public function removeSite( $globalSiteId );
 
 	/**
 	 * Returns if the list contains the site with the provided site id.
@@ -76,7 +76,7 @@ interface SiteList extends Countable, Traversable, Serializable, ArrayAccess {
 	 *
 	 * @return boolean
 	 */
-	public function has( $id );
+	public function hasInternalId( $id );
 
 	/**
 	 * Returns the Site with the provided site id.
@@ -88,7 +88,7 @@ interface SiteList extends Countable, Traversable, Serializable, ArrayAccess {
 	 *
 	 * @return Site
 	 */
-	public function getSite( $id );
+	public function getSiteByInternalId( $id );
 
 	/**
 	 * Removes the site with the specified site id.
@@ -98,7 +98,7 @@ interface SiteList extends Countable, Traversable, Serializable, ArrayAccess {
 	 *
 	 * @param integer $id
 	 */
-	public function removeSite( $id );
+	public function removeSiteByInternalId( $id );
 
 	/**
 	 * Sets a site in the list. If the site was not there,

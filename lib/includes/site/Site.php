@@ -236,7 +236,7 @@ interface Site {
 	 *
 	 * @return integer
 	 */
-	public function getId();
+	public function getInternalId();
 
 	/**
 	 * Sets the internal ID of the site.
@@ -245,6 +245,6 @@ interface Site {
 	 *
 	 * @param integer $id
 	 */
-	public function setId( $id );
+	public function setInternalId( $id );
 
 }

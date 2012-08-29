@@ -325,4 +325,26 @@ class SiteObject extends ORMRow implements Site {
 		return $this->getLocalIds( 'equivalent' );
 	}
 
+	/**
+	 * @see Site::getInternalId
+	 *
+	 * @since 1.20
+	 *
+	 * @return integer
+	 */
+	public function getInternalId() {
+		return $this->getId();
+	}
+
+	/**
+	 * @see Site::setInternalId
+	 *
+	 * @since 1.20
+	 *
+	 * @param integer $id
+	 */
+	public function setInternalId( $id ) {
+		$this->setId( $id );
+	}
+
 }

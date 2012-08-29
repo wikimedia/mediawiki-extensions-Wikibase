@@ -48,7 +48,7 @@ class ApiBotEditTest extends \ApiTestCase {
 		global $wgUser;
 		parent::setUp();
 
-		\Wikibase\Utils::insertSitesForTests();
+		\TestSites::insertIntoDb();
 
 		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;

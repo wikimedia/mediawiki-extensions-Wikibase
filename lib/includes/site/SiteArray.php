@@ -68,12 +68,12 @@ class SiteArray extends GenericArrayObject implements SiteList {
 	 * @return boolean
 	 */
 	protected function preSetElement( $index, $site ) {
-		if ( $this->hasGlobalId( $site->getGlobalId() ) ) {
-			$this->removeSiteByGlobalId( $site->getGlobalId() );
+		if ( $this->hasSite( $site->getGlobalId() ) ) {
+			$this->removeSite( $site->getGlobalId() );
 		}
 
 		$this->byGlobalId[$site->getGlobalId()] = $index;
-		$this->byInternalId[$site->getId()] = $index;
+		$this->byInternalId[$site->getInternalId()] = $index;
 	}
 
 	/**
@@ -91,7 +91,7 @@ class SiteArray extends GenericArrayObject implements SiteList {
 
 		if ( $site !== false ) {
 			unset( $this->byGlobalId[$site->getGlobalId()] );
-			unset( $this->byInternalId[$site->getId()] );
+			unset( $this->byInternalId[$site->getInternalId()] );
 		}
 
 		parent::offsetUnset( $index );
@@ -109,18 +109,18 @@ class SiteArray extends GenericArrayObject implements SiteList {
 	}
 
 	/**
-	 * @see SiteList::hasGlobalId
+	 * @see SiteList::hasSite
 	 *
 	 * @param string $globalSiteId
 	 *
 	 * @return boolean
 	 */
-	public function hasGlobalId( $globalSiteId ) {
+	public function hasSite( $globalSiteId ) {
 		return array_key_exists( $globalSiteId, $this->byGlobalId );
 	}
 
 	/**
-	 * @see SiteList::getSiteByGlobalId
+	 * @see SiteList::getSite
 	 *
 	 * @since 1.20
 	 *
@@ -128,18 +128,18 @@ class SiteArray extends GenericArrayObject implements SiteList {
 	 *
 	 * @return Site
 	 */
-	public function getSiteByGlobalId( $globalSiteId ) {
+	public function getSite( $globalSiteId ) {
 		return $this->offsetGet( $this->byGlobalId[$globalSiteId] );
 	}
 
 	/**
-	 * @see SiteList::removeSiteByGlobalId
+	 * @see SiteList::removeSite
 	 *
 	 * @since 1.20
 	 *
 	 * @param string $globalSiteId
 	 */
-	public function removeSiteByGlobalId( $globalSiteId ) {
+	public function removeSite( $globalSiteId ) {
 		$this->offsetUnset( $this->byGlobalId[$globalSiteId] );
 	}
 
@@ -155,18 +155,18 @@ class SiteArray extends GenericArrayObject implements SiteList {
 	}
 
 	/**
-	 * @see SiteList::has
+	 * @see SiteList::hasInternalId
 	 *
 	 * @param integer $id
 	 *
 	 * @return boolean
 	 */
-	public function has( $id ) {
+	public function hasInternalId( $id ) {
 		return array_key_exists( $id, $this->byInternalId );
 	}
 
 	/**
-	 * @see SiteList::getSite
+	 * @see SiteList::getSiteByInternalId
 	 *
 	 * @since 1.20
 	 *
@@ -174,18 +174,18 @@ class SiteArray extends GenericArrayObject implements SiteList {
 	 *
 	 * @return Site
 	 */
-	public function getSite( $id ) {
+	public function getSiteByInternalId( $id ) {
 		return $this->offsetGet( $this->byInternalId[$id] );
 	}
 
 	/**
-	 * @see SiteList::removeSite
+	 * @see SiteList::removeSiteByInternalId
 	 *
 	 * @since 1.20
 	 *
 	 * @param integer $id
 	 */
-	public function removeSite( $id ) {
+	public function removeSiteByInternalId( $id ) {
 		$this->offsetUnset( $this->byInternalId[$id] );
 	}
 
