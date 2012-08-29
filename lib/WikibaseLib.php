@@ -193,7 +193,7 @@ $egWBSettings = array();
 $wgSiteTypes = array();
 $wgSiteTypes['mediawiki'] = 'MediaWikiSite';
 
-$wgAutoloadClasses['TestSites'] 			= $dir . 'tests/phpunit/includes/site/TestSites.php';
+$wgAutoloadClasses['TestSites'] 			= $dir . 'tests/phpunit/site/TestSites.php';
 
 $wgAutoloadClasses['Site'] 					= $dir . 'includes/site/Site.php';
 $wgAutoloadClasses['SiteArray'] 			= $dir . 'includes/site/SiteArray.php';

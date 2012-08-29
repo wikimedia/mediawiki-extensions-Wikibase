@@ -157,7 +157,7 @@ interface Site {
 	 *
 	 * @return string
 	 */
-	public function getPagePath( $pageName = false );
+	//public function getPagePath( $pageName = false ); TODO
 
 	/**
 	 * Returns the normalized, canonical form of the given page name.

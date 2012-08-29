@@ -39,7 +39,7 @@ class MediaWikiSite extends SiteObject {
 	 * @note  : If MW_PHPUNIT_TEST is set, the call to the external site is skipped, and the title is normalized using
 	 *        the local normalization rules as implemented by the Title class.
 	 *
-	 * @see Site::normalizePageName()
+	 * @see Site::normalizePageName
 	 *
 	 * @since 1.20
 	 *
@@ -53,54 +53,57 @@ class MediaWikiSite extends SiteObject {
 			throw new MWException( "\$pageTitle must be a string" );
 		}
 
-		// Build the args for the specific call
-		$args = Settings::get( 'clientPageArgs' );
-		$args['titles'] = $pageName;
+		return Title::newFromText( $pageName )->getPrefixedText();
 
-		// Go on call the external site
-		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-			// If the code is under test, don't call out to other sites. Normalize locally.
-			// Note: this may cause results to be inconsistent with the actual normalization used by the respective remote site!
-
-			$t = Title::newFromText( $pageName );
-			$ret = "{ \"query\" : { \"pages\" : { \"1\" : { \"title\" : " . FormatJson::encode( $t->getPrefixedText() ) . " } } } }";
-		} else {
-			$url = $this->getFilePath( 'api.php' ) . '?' . wfArrayToCgi( $args );
-
-			// Go on call the external site
-			$ret = Http::get( $url, Settings::get( 'clientTimeout' ), Settings::get( 'clientPageOpts' ) );
-		}
-
-		if ( $ret === false ) {
-			//TODO: log. retry?
-			return false;
-		}
-
-		if ( preg_match( '/^Waiting for [^ ]*: [0-9.-]+ seconds lagged$/', $ret ) ) {
-			//TODO: log. retry?
-			return false;
-		}
-
-		$data = FormatJson::decode( $ret, true );
-
-		if ( !is_array( $data ) ) {
-			//TODO: log.
-			return false;
-		}
-
-		$page = static::extractPageRecord( $data, $pageName );
-
-		if ( isset( $page['missing'] ) ) {
-			//TODO: log.
-			return false;
-		}
-
-		if ( !isset( $page['title'] ) ) {
-			//TODO: log.
-			return false;
-		}
-
-		return $page['title'];
+		// TODO
+//		// Build the args for the specific call
+//		$args = Settings::get( 'clientPageArgs' );
+//		$args['titles'] = $pageName;
+//
+//		// Go on call the external site
+//		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+//			// If the code is under test, don't call out to other sites. Normalize locally.
+//			// Note: this may cause results to be inconsistent with the actual normalization used by the respective remote site!
+//
+//			$t = Title::newFromText( $pageName );
+//			$ret = "{ \"query\" : { \"pages\" : { \"1\" : { \"title\" : " . FormatJson::encode( $t->getPrefixedText() ) . " } } } }";
+//		} else {
+//			$url = $this->getFilePath( 'api.php' ) . '?' . wfArrayToCgi( $args );
+//
+//			// Go on call the external site
+//			$ret = Http::get( $url, Settings::get( 'clientTimeout' ), Settings::get( 'clientPageOpts' ) );
+//		}
+//
+//		if ( $ret === false ) {
+//			//TODO: log. retry?
+//			return false;
+//		}
+//
+//		if ( preg_match( '/^Waiting for [^ ]*: [0-9.-]+ seconds lagged$/', $ret ) ) {
+//			//TODO: log. retry?
+//			return false;
+//		}
+//
+//		$data = FormatJson::decode( $ret, true );
+//
+//		if ( !is_array( $data ) ) {
+//			//TODO: log.
+//			return false;
+//		}
+//
+//		$page = static::extractPageRecord( $data, $pageName );
+//
+//		if ( isset( $page['missing'] ) ) {
+//			//TODO: log.
+//			return false;
+//		}
+//
+//		if ( !isset( $page['title'] ) ) {
+//			//TODO: log.
+//			return false;
+//		}
+//
+//		return $page['title'];
 	}
 
 	/**
@@ -178,21 +181,6 @@ class MediaWikiSite extends SiteObject {
 	}
 
 	/**
-	 * Returns the full file path (ie site url + relative file path).
-	 * The path should go at the $1 marker. If the $path
-	 * argument is provided, the marker will be replaced by it's value.
-	 *
-	 * @since 1.20
-	 *
-	 * @param string|false $path
-	 *
-	 * @return string
-	 */
-	public function getFilePath( $path = false ) {
-
-	}
-
-	/**
 	 * Returns the relative page path.
 	 *
 	 * @since 1.20
@@ -256,6 +244,46 @@ class MediaWikiSite extends SiteObject {
 	 */
 	public function setRelativeFilePath( $path ) {
 		return $this->setExtraData( 'file_path', $path );
+	}
+
+	/**
+	 * @see Site::getPagePath
+	 *
+	 * @since 1.20
+	 *
+	 * @param string|false $pageName
+	 *
+	 * @return string
+	 */
+	public function getPagePath( $pageName = false ) {
+		$pagePath = $this->getUrl() . $this->getRelativePagePath();
+
+		if ( $pageName !== false ) {
+			$pagePath = str_replace( '$1', rawurlencode( $pageName ), $pagePath );
+		}
+
+		return $pagePath;
+	}
+
+	/**
+	 * Returns the full file path (ie site url + relative file path).
+	 * The path should go at the $1 marker. If the $path
+	 * argument is provided, the marker will be replaced by it's value.
+	 *
+	 * @since 1.20
+	 *
+	 * @param string|false $path
+	 *
+	 * @return string
+	 */
+	public function getFilePath( $path = false ) {
+		$filePath = $this->getUrl() . $this->getRelativeFilePath();
+
+		if ( $filePath !== false ) {
+			$filePath = str_replace( '$1', $path, $filePath );
+		}
+
+		return $filePath;
 	}
 
 }
