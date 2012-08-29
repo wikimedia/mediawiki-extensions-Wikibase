@@ -42,18 +42,18 @@ final class TestItems {
 
 		$item = ItemObject::newEmpty();
 
-		$links = \Wikibase\Sites::singleton()->getAllSites();
+		$sites = \Sites::singleton()->getSites();
 
-		if ( $links->count() > 1 ) {
-			$item->addSiteLink( new SiteLink( $links->getIterator()->current(), 'spam' ) );
+		if ( count( $sites ) > 1 ) {
+			$item->addSiteLink( new SiteLink( $sites->getIterator()->current(), 'spam' ) );
 		}
 
 		$items[] = $item;
 
 		$item = ItemObject::newEmpty();
 
-		if ( $links->count() > 1 ) {
-			$linksIterator = $links->getIterator();
+		if ( count( $sites ) > 1 ) {
+			$linksIterator = $sites->getIterator();
 
 			$item->addSiteLink( new SiteLink( $linksIterator->current(), 'spamz' ) );
 			$linksIterator->next();

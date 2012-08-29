@@ -152,25 +152,6 @@ class SiteObject extends ORMRow implements Site {
 	}
 
 	/**
-	 * @see Site::getPagePath
-	 *
-	 * @since 1.20
-	 *
-	 * @param string|false $pageName
-	 *
-	 * @return string
-	 */
-	public function getPagePath( $pageName = false ) {
-		$pagePath = $this->getField( 'url' ) . $this->getField( 'page_path' );
-
-		if ( $pageName !== false ) {
-			$pagePath = str_replace( '$1', rawurlencode( $pageName ), $pagePath );
-		}
-
-		return $pagePath;
-	}
-
-	/**
 	 * Returns $pageName without changes.
 	 * Subclasses may override this to apply some kind of normalization.
 	 *

@@ -74,6 +74,8 @@ class SiteArray extends GenericArrayObject implements SiteList {
 
 		$this->byGlobalId[$site->getGlobalId()] = $index;
 		$this->byInternalId[$site->getInternalId()] = $index;
+
+		return true;
 	}
 
 	/**

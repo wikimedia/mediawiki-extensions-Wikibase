@@ -49,7 +49,7 @@ class ItemHandlerTest extends EntityHandlerTest {
 		 * @var ItemContent $content
 		 */
 		$content = clone $contents[1][0];
-		$content->getItem()->addSiteLink( new \Wikibase\SiteLink( \Wikibase\Sites::newSite( array( 'global_key' => 'enwiki' ) ), 'Foobar' ) );
+		$content->getItem()->addSiteLink( new \Wikibase\SiteLink( \Sites::newSite( 'enwiki' ), 'Foobar' ) );
 		$contents[] = array( $content );
 
 		return $contents;

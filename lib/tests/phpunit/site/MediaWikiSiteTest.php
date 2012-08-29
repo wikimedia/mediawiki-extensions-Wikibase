@@ -44,18 +44,65 @@ class MediaWikiSiteTest extends MediaWikiTestCase {
 	}
 
 	public function testFactoryConstruction() {
-		$this->assertInstanceOf( 'MediaWikiSite', Sites::newSite( array( 'type' => SITE_TYPE_MEDIAWIKI ) ) );
-		$this->assertInstanceOf( 'Site', Sites::newSite( array( 'type' => SITE_TYPE_MEDIAWIKI ) ) );
+		$this->assertInstanceOf( 'MediaWikiSite', MediaWikiSite::newFromGlobalId( 'enwiki' ) );
+		$this->assertInstanceOf( 'Site', MediaWikiSite::newFromGlobalId( 'enwiki' ) );
+		$this->assertInstanceOf( 'MediaWikiSite', SitesTable::singleton()->newRow( array( 'type' => Site::TYPE_MEDIAWIKI ) ) );
 	}
 
 	public function testNormalizePageTitle() {
-		$site = Sites::newSite( array( 'type' => SITE_TYPE_MEDIAWIKI ) );
+		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
 
 		//NOTE: this does not actually call out to the enwiki site to perform the normalization,
 		//      but uses a local Title object to do so. This is hardcoded on SiteLink::normalizePageTitle
 		//      for the case that MW_PHPUNIT_TEST is set.
-		$this->assertEquals( "Foo", $site->normalizePageName( " foo " ) );
+		$this->assertEquals( 'Foo', $site->normalizePageName( ' foo ' ) );
 	}
 
+	public function pathProvider() {
+		return array(
+			// url, filepath, path arg, expected
+			array( 'https://en.wikipedia.org', '/w/$1', 'api.php', 'https://en.wikipedia.org/w/api.php' ),
+			array( 'https://en.wikipedia.org', '/w/', 'api.php', 'https://en.wikipedia.org/w/' ),
+			array( 'https://en.wikipedia.org', '/foo/page.php?name=$1', 'api.php', 'https://en.wikipedia.org/foo/page.php?name=api.php' ),
+			array( 'https://en.wikipedia.org', '/w/$1', '', 'https://en.wikipedia.org/w/' ),
+			array( 'https://en.wikipedia.org', '/w/$1', 'foo/bar/api.php', 'https://en.wikipedia.org/w/foo/bar/api.php' ),
+		);
+	}
+
+	/**
+	 * @dataProvider pathProvider
+	 */
+	public function testGetPath( $url, $filePath, $pathArgument, $expected ) {
+		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
+
+		$site->setUrl( $url );
+		$site->setRelativeFilePath( $filePath );
+
+		$this->assertEquals( $expected, $site->getFilePath( $pathArgument ) );
+	}
+
+	public function pageUrlProvider() {
+		return array(
+			// url, filepath, path arg, expected
+			array( 'https://en.wikipedia.org', '/wiki/$1', 'Berlin', 'https://en.wikipedia.org/wiki/Berlin' ),
+			array( 'https://en.wikipedia.org', '/wiki/', 'Berlin', 'https://en.wikipedia.org/wiki/' ),
+			array( 'https://en.wikipedia.org', '/wiki/page.php?name=$1', 'Berlin', 'https://en.wikipedia.org/wiki/page.php?name=Berlin' ),
+			array( 'https://en.wikipedia.org', '/wiki/$1', '', 'https://en.wikipedia.org/wiki/' ),
+			array( 'https://en.wikipedia.org', '/wiki/$1', 'Berlin/sub page', 'https://en.wikipedia.org/wiki/Berlin%2Fsub%20page' ),
+			array( 'https://en.wikipedia.org', '/wiki/$1', 'Cork (city)', 'https://en.wikipedia.org/wiki/Cork%20%28city%29' ),
+		);
+	}
+
+	/**
+	 * @dataProvider pageUrlProvider
+	 */
+	public function testGetPagePath( $url, $urlPath, $pageName, $expected ) {
+		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
+
+		$site->setUrl( $url );
+		$site->setRelativePagePath( $urlPath );
+
+		$this->assertEquals( $expected, $site->getPagePath( $pageName ) );
+	}
 
 }

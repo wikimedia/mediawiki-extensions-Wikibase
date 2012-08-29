@@ -43,7 +43,7 @@ class SitesTest extends MediaWikiTestCase {
 	}
 
 	public function testGetSites() {
-		$this->assertInternalType( 'array', Sites::singleton()->getSites() );
+		$this->assertInstanceOf( 'SiteList', Sites::singleton()->getSites() );
 	}
 
 
@@ -70,8 +70,7 @@ class SitesTest extends MediaWikiTestCase {
 
 	public function testNewSite() {
 		$this->assertInstanceOf( 'Site', Sites::newSite() );
-		$this->assertInstanceOf( 'Site', Sites::newSite( array() ) );
-		$this->assertInstanceOf( 'Site', Sites::newSite( array( 'type' => SITE_TYPE_UNKNOWN ) ) );
+		$this->assertInstanceOf( 'Site', Sites::newSite( 'enwiki' ) );
 	}
 
 }
