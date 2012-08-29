@@ -92,9 +92,8 @@ final class LibHooks {
 				__DIR__ . '/sql/DropSites.sql'
 			);
 
-			$updater->addExtensionField(
-				'sites',
-				'site_source',
+			$updater->addExtensionTable(
+				'site_identifiers',
 				__DIR__ . '/sql/AddSitesTable.sql'
 			);
 
