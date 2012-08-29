@@ -401,6 +401,7 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 		} );
 
 		this._toolbar.editGroup.btnSave.removeTooltip();
+		this._toolbar.editGroup.tooltipAnchor.getTooltip().hide();
 
 		this._isInEditMode = false; // out of edit mode after interfaces are converted back to HTML
 		this._subject.removeClass( this.UI_CLASS + '-ineditmode' );

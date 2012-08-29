@@ -174,7 +174,6 @@ $.extend( window.wikibase.ui.Toolbar.EditGroup.prototype, {
 		) {
 			// ... when stopped, remove buttons for editing and display buttons for going back to edit mode
 			promise.done( $.proxy( function() {
-				this.tooltipAnchor.getTooltip().hide();
 				this.removeElement( this.tooltipAnchor );
 				this.innerGroup.removeElement( this.btnSave );
 				this.innerGroup.removeElement( this.btnCancel );
