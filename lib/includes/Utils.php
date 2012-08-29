@@ -85,16 +85,16 @@ final class Utils {
 			if ( is_array( $language ) && array_key_exists( 'code', $language ) && array_key_exists( 'site', $language ) ) {
 				$languageCode = $language['code'];
 
-				foreach ( $language['site'] as $site ) {
-					$site = \MediaWikiSite::newFromGlobalId( $site['dbname'] );
-					$site->setGroup( $groupMap[$site['code']] );
+				foreach ( $language['site'] as $siteData ) {
+					$site = \MediaWikiSite::newFromGlobalId( $siteData['dbname'] );
+					$site->setGroup( $groupMap[$siteData['code']] );
 					$site->setLanguageCode( $languageCode );
 
-					$localId = $site['code'] === 'wiki' ? $languageCode : $site['dbname'];
+					$localId = $siteData['code'] === 'wiki' ? $languageCode : $siteData['dbname'];
 					$site->addInterwikiId( $localId );
 					$site->addNavigationId( $localId );
 
-					$site->setUrl( $site['url'] );
+					$site->setUrl( $siteData['url'] );
 					$site->setRelativeFilePath( '/w/$1' );
 					$site->setRelativePagePath( '/wiki/$1' );
 
