@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 use \Wikibase\SiteLink as SiteLink;
-use \Wikibase\Site as Site;
-use \Wikibase\Sites as Sites;
+use Site;
+use Sites;
 
 /**
  * Tests for the Wikibase\SiteLink class.
@@ -30,7 +30,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 		static $hasSites = false;
 
 		if ( !$hasSites ) {
-			\Wikibase\Utils::insertSitesForTests();
+			\TestSites::insertIntoDb();
 			$hasSites = true;
 		}
 	}
@@ -47,7 +47,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	}
 
 	public function testConstructor() {
-		$site = Sites::singleton()->getSiteByGlobalId( 'enwiki' );
+		$site = Sites::singleton()->getSites()->getSiteByGlobalId( 'enwiki' );
 		$link = new SiteLink( $site, "Foo" );
 
 		$this->assertEquals( "Foo", $link->getPage() );
@@ -77,7 +77,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	public function testGetSite() {
 		$link = SiteLink::newFromText( 'enwiki', "Foo" );
 
-		$expected = Sites::singleton()->getSiteByGlobalId( "enwiki" );
+		$expected = Sites::singleton()->getSites()->getSiteByGlobalId( "enwiki" );
 		$this->assertEquals( $expected, $link->getSite() );
 	}
 

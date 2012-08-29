@@ -81,7 +81,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		static $hasSites = false;
 
 		if ( !$hasSites ) {
-			\Wikibase\Utils::insertSitesForTests();
+			\TestSites::insertIntoDb();
 			$hasSites = true;
 		}
 

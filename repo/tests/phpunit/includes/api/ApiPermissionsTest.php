@@ -43,7 +43,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		$this->permissions = $wgGroupPermissions;
 		$this->user = $wgUser;
 
-		\Wikibase\Utils::insertSitesForTests();
+		\TestSites::insertIntoDb();
 
 		# HACK!!
 		#$sites = \Wikibase\Sites::singleton( true );

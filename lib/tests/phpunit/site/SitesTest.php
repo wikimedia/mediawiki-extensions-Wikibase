@@ -3,6 +3,21 @@
 /**
  * Tests for the Sites class.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @file
  * @since 1.20
  *
@@ -10,7 +25,6 @@
  * @ingroup Test
  *
  * @group Site
- *
  * @group Database
  *
  * @licence GNU GPL v2+
@@ -20,7 +34,7 @@ class SitesTest extends MediaWikiTestCase {
 
 	public function setUp() {
 		parent::setUp();
-		\Wikibase\Utils::insertSitesForTests();
+		\TestSites::insertIntoDb();
 	}
 
 	public function testSingleton() {
@@ -29,21 +43,23 @@ class SitesTest extends MediaWikiTestCase {
 	}
 
 	public function testGetSites() {
-		$this->assertTrue( is_array( Sites::singleton()->getSites() ) );
-
+		$this->assertInternalType( 'array', Sites::singleton()->getSites() );
 	}
 
 
 	public function testGetSite() {
 		$count = 0;
-		$sites = Sites::singleton()->getAllSites();
+		$sites = Sites::singleton()->getSites();
 
+		/**
+		 * @var Site $site
+		 */
 		foreach ( $sites as $site ) {
 			$this->assertInstanceOf( 'Site', $site );
 
 			$this->assertEquals(
 				$site,
-				Sites::singleton()->getSiteByGlobalId( $site->getGlobalId() )
+				Sites::singleton()->getSite( $site->getGlobalId() )
 			);
 
 			if ( ++$count > 100 ) {

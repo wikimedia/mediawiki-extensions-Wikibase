@@ -194,6 +194,8 @@ $egWBSettings = array();
 
 
 
+$wgAutoloadClasses['TestSites'] 			= $dir . 'tests/phpunit/includes/site/TestSites.php';
+
 $wgAutoloadClasses['Site'] 					= $dir . 'includes/Site.php';
 $wgAutoloadClasses['SiteArray'] 			= $dir . 'includes/SiteArray.php';
 $wgAutoloadClasses['SiteList'] 				= $dir . 'includes/SiteList.php';

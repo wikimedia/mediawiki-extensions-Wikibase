@@ -137,8 +137,8 @@ class Sites {
 		);
 
 		foreach ( $ids as $id ) {
-			if ( $this->sites->has( $id->si_site ) ) {
-				$site = $this->sites->getSite( $id->si_site );
+			if ( $this->sites->hasInternalId( $id->si_site ) ) {
+				$site = $this->sites->getSiteByInternalId( $id->si_site );
 				$site->addLocalId( $id->si_type, $id->si_key );
 				$this->sites->setSite( $site );
 			}
@@ -160,7 +160,7 @@ class Sites {
 	 */
 	public function getSite( $globalId, $useCache = true ) {
 		if ( $useCache && $this->sites !== false ) {
-			return $this->sites->hasGlobalId( $globalId ) ? $this->sites->getSiteByGlobalId( $globalId ) : false;
+			return $this->sites->hasSite( $globalId ) ? $this->sites->getSite( $globalId ) : false;
 		}
 
 		return SitesTable::singleton()->selectRow( null, array( 'global_key' => $globalId ) );

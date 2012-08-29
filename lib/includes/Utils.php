@@ -107,28 +107,6 @@ final class Utils {
 	}
 
 	/**
-	 * Inserts sites into the database for the unit tests that need them.
-	 *
-	 * @since 0.1
-	 */
-	public static function insertSitesForTests() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$dbw->begin( __METHOD__ );
-
-		$dbw->delete( $dbw->tableName( 'sites' ), '*', __METHOD__ );
-
-		/**
-		 * @var \Site $site
-		 */
-		foreach ( \TestSites::getSites() as $site ) {
-			$site->save();
-		}
-
-		$dbw->commit( __METHOD__ );
-	}
-
-	/**
 	 * Trim initial and trailing whitespace, and compress internal ones.
 	 *
 	 * @since 0.1

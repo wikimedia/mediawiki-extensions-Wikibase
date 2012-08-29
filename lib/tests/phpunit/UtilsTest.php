@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use Wikibase\Utils as Utils;
-use Wikibase\Sites as Sites;
 
 /**
  * Tests for the Wikibase\Utils class.
@@ -17,9 +16,9 @@ use Wikibase\Sites as Sites;
  * @group WikibaseUtils
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Tobias Gritschacher
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class UtilsTest extends \MediaWikiTestCase {
 
