@@ -60,7 +60,7 @@ final class Utils {
 	 * @since 0.1
 	 */
 	public static function insertDefaultSites() {
-		if ( \Wikibase\SitesTable::singleton()->count() > 0 ) {
+		if ( \SitesTable::singleton()->count() > 0 ) {
 			return;
 		}
 
@@ -69,36 +69,36 @@ final class Utils {
 			true
 		);
 
-		wfGetDB( DB_MASTER )->begin();
-
 		$groupMap = array(
-			'wiki' => SITE_GROUP_WIKIPEDIA,
-			'wiktionary' => SITE_GROUP_WIKTIONARY,
-			'wikibooks' => SITE_GROUP_WIKIBOOKS,
-			'wikiquote' => SITE_GROUP_WIKIQUOTE,
-			'wikisource' => SITE_GROUP_WIKISOURCE,
-			'wikiversity' => SITE_GROUP_WIKIVERSITY,
-			'wikinews' => SITE_GROUP_WIKINEWS,
+			'wiki' => 'wikipedia',
+			'wiktionary' => 'wiktionary',
+			'wikibooks' => 'wikibooks',
+			'wikiquote' => 'wikiquote',
+			'wikisource' => 'wikisource',
+			'wikiversity' => 'wikiversity',
+			'wikinews' => 'wikinews',
 		);
+
+		wfGetDB( DB_MASTER )->begin();
 
 		foreach ( $languages['sitematrix'] as $language ) {
 			if ( is_array( $language ) && array_key_exists( 'code', $language ) && array_key_exists( 'site', $language ) ) {
 				$languageCode = $language['code'];
 
 				foreach ( $language['site'] as $site ) {
-					\Sites::newSite( array(  // TODO
-						'global_key' => $site['dbname'],
-						'type' => SITE_TYPE_MEDIAWIKI,
-						'group' => $groupMap[$site['code']],
-						'url' => $site['url'],
-						'page_path' => '/wiki/$1',
-						'file_path' => '/w/$1',
-						'local_key' => ($site['code'] === 'wiki') ? $languageCode : $site['dbname'] ,
-						'language' => $languageCode,
-						'link_inline' => true,
-						'link_navigation' => true,
-						'forward' => true,
-					) )->save();
+					$site = \MediaWikiSite::newFromGlobalId( $site['dbname'] );
+					$site->setGroup( $groupMap[$site['code']] );
+					$site->setLanguageCode( $languageCode );
+
+					$localId = $site['code'] === 'wiki' ? $languageCode : $site['dbname'];
+					$site->addInterwikiId( $localId );
+					$site->addNavigationId( $localId );
+
+					$site->setUrl( $site['url'] );
+					$site->setRelativeFilePath( '/w/$1' );
+					$site->setRelativePagePath( '/wiki/$1' );
+
+					$site->save();
 				}
 			}
 		}

@@ -16,6 +16,20 @@
 class MediaWikiSite extends SiteObject {
 
 	/**
+	 * @since 0.1
+	 *
+	 * @param integer $globalId
+	 *
+	 * @return MediaWikiSite
+	 */
+	public static function newFromGlobalId( $globalId ) {
+		return SitesTable::singleton()->newRow( array(
+			'type' => Site::TYPE_MEDIAWIKI,
+			'global_key' => $globalId,
+		) );
+	}
+
+	/**
 	 * Returns the normalized form of the given page title, using the normalization rules of the given site.
 	 * If the given title is a redirect, the redirect weill be resolved and the redirect target is returned.
 	 *
@@ -174,7 +188,9 @@ class MediaWikiSite extends SiteObject {
 	 *
 	 * @return string
 	 */
-	//public function getFilePath( $path = false );
+	public function getFilePath( $path = false ) {
+
+	}
 
 	/**
 	 * Returns the relative page path.
@@ -183,7 +199,9 @@ class MediaWikiSite extends SiteObject {
 	 *
 	 * @return string
 	 */
-	//public function getRelativePagePath();
+	public function getRelativePagePath() {
+		return $this->getExtraData( 'page_path', '' );
+	}
 
 	/**
 	 * Returns the relative file path.
@@ -192,6 +210,52 @@ class MediaWikiSite extends SiteObject {
 	 *
 	 * @return string
 	 */
-	//public function getRelativeFilePath();
+	public function getRelativeFilePath() {
+		return $this->getExtraData( 'file_path', '' );
+	}
+
+	/**
+	 * Returns the base URL.
+	 *
+	 * @since 1.20
+	 *
+	 * @return string
+	 */
+	public function getUrl() {
+		return $this->getExtraData( 'url', '' );
+	}
+
+	/**
+	 * Sets the base URL.
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $url
+	 */
+	public function setUrl( $url ) {
+		return $this->setExtraData( 'url', $url );
+	}
+
+	/**
+	 * Sets the relative page path.
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $path
+	 */
+	public function setRelativePagePath( $path ) {
+		return $this->setExtraData( 'page_path', $path );
+	}
+
+	/**
+	 * Sets the relative file path.
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $path
+	 */
+	public function setRelativeFilePath( $path ) {
+		return $this->setExtraData( 'file_path', $path );
+	}
 
 }

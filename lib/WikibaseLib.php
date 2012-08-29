@@ -196,9 +196,9 @@ $egWBSettings = array();
 
 $wgAutoloadClasses['TestSites'] 			= $dir . 'tests/phpunit/includes/site/TestSites.php';
 
-$wgAutoloadClasses['Site'] 					= $dir . 'includes/Site.php';
-$wgAutoloadClasses['SiteArray'] 			= $dir . 'includes/SiteArray.php';
-$wgAutoloadClasses['SiteList'] 				= $dir . 'includes/SiteList.php';
-$wgAutoloadClasses['SiteObject'] 			= $dir . 'includes/SiteObject.php';
-$wgAutoloadClasses['Sites'] 				= $dir . 'includes/Sites.php';
-$wgAutoloadClasses['SitesTable'] 			= $dir . 'includes/SitesTable.php';
+$wgAutoloadClasses['Site'] 					= $dir . 'includes/site/Site.php';
+$wgAutoloadClasses['SiteArray'] 			= $dir . 'includes/site/SiteArray.php';
+$wgAutoloadClasses['SiteList'] 				= $dir . 'includes/site/SiteList.php';
+$wgAutoloadClasses['SiteObject'] 			= $dir . 'includes/site/SiteObject.php';
+$wgAutoloadClasses['Sites'] 				= $dir . 'includes/site/Sites.php';
+$wgAutoloadClasses['SitesTable'] 			= $dir . 'includes/site/SitesTable.php';

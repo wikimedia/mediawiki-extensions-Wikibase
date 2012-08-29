@@ -187,14 +187,32 @@ class SiteObject extends ORMRow implements Site {
 	}
 
 	/**
-	 * TODO
+	 * Returns the value of a type specific field, or the value
+	 * of the $default parameter in case it's not set.
 	 *
 	 * @since 1.20
 	 *
+	 * @param string $fieldName
+	 * @param mixed $default
+	 *
 	 * @return array
 	 */
-	protected function getExtraData() {
-		return $this->getField( 'data' );
+	protected function getExtraData( $fieldName, $default = null ) {
+		$data = $this->getField( 'data' );
+		return array_key_exists( $fieldName,$data ) ? $data[$fieldName] : $default;
+	}
+
+	/**
+	 * Sets the value of a type specific field.
+	 * @since 1.20
+	 *
+	 * @param string $fieldName
+	 * @param mixed $value
+	 */
+	protected function setExtraData( $fieldName, $value = null ) {
+		$data = $this->getField( 'data' );
+		$data[$fieldName] = $value;
+		$this->setField( 'data', $data );
 	}
 
 	/**
