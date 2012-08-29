@@ -66,6 +66,6 @@ CREATE TABLE /*_*/site_identifiers (
   si_key                     varbinary(32)       NOT NULL
 ) /*$wgDBTableOptions*/;
 
-CREATE UNIQUE INDEX /*i*/site_ids_type ON /*_*/sites (si_type, si_key);
-CREATE INDEX /*i*/site_ids_site ON /*_*/sites (si_site);
-CREATE INDEX /*i*/site_ids_key ON /*_*/sites (si_key);
+CREATE UNIQUE INDEX /*i*/site_ids_type ON /*_*/site_identifiers (si_type, si_key);
+CREATE INDEX /*i*/site_ids_site ON /*_*/site_identifiers (si_site);
+CREATE INDEX /*i*/site_ids_key ON /*_*/site_identifiers (si_key);
