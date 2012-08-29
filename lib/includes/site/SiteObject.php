@@ -198,7 +198,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return array
 	 */
 	protected function getExtraData( $fieldName, $default = null ) {
-		$data = $this->getField( 'data' );
+		$data = $this->getField( 'data', array() );
 		return array_key_exists( $fieldName,$data ) ? $data[$fieldName] : $default;
 	}
 
@@ -210,7 +210,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @param mixed $value
 	 */
 	protected function setExtraData( $fieldName, $value = null ) {
-		$data = $this->getField( 'data' );
+		$data = $this->getField( 'data', array() );
 		$data[$fieldName] = $value;
 		$this->setField( 'data', $data );
 	}
@@ -290,6 +290,10 @@ class SiteObject extends ORMRow implements Site {
 	 * @param string $identifier
 	 */
 	public function addLocalId( $type, $identifier ) {
+		if ( $this->localIds === false ) {
+			$this->localIds = array();
+		}
+
 		if ( !array_key_exists( $type, $this->localIds ) ) {
 			$this->localIds[$type] = array();
 		}

@@ -71,10 +71,6 @@ define( 'SITE_GROUP_WIKINEWS', 6 );
 
 define( 'SUMMARY_MAX_LENGTH', 250 );
 
-$wgSiteTypes = array();
-
-$wgSiteTypes[SITE_TYPE_MEDIAWIKI] = 'Wikibase\MediaWikiSite';
-
 // i18n
 $wgExtensionMessagesFiles['WikibaseLib'] 			= $dir . 'WikibaseLib.i18n.php';
 
@@ -192,6 +188,10 @@ $egWBDefaultsFunction = null;
 $egWBSettings = array();
 
 
+
+
+$wgSiteTypes = array();
+$wgSiteTypes['mediawiki'] = 'MediaWikiSite';
 
 $wgAutoloadClasses['TestSites'] 			= $dir . 'tests/phpunit/includes/site/TestSites.php';
 
