@@ -8,7 +8,7 @@
 
 class RecentChangesPage < ItemPage
   include PageObject
-  page_url WIKI_REPO_URL + "index.php/Special:RecentChanges"
+  page_url WIKI_REPO_URL + "Special:RecentChanges"
   unordered_list(:recentChanges, :class => "special")
   span(:firstResultLabelSpan, :class => "wb-itemlink-label")
   span(:firstResultIdSpan, :class => "wb-itemlink-id")

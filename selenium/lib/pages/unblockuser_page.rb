@@ -9,7 +9,7 @@
 class UnblockUserPage
   include PageObject
 
-  page_url WIKI_REPO_URL + 'index.php?title=Special:Unblock'
+  page_url WIKI_REPO_URL + 'Special:Unblock'
   text_field(:unblockUsername, :id => 'mw-input-wpTarget')
   button(:unblock, :class => 'mw-htmlform-submit')
 

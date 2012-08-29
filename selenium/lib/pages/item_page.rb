@@ -11,7 +11,7 @@ require 'ruby_selenium'
 class ItemPage < RubySelenium
   include PageObject
 
-  page_url WIKI_REPO_URL + "index.php/Special:CreateItem"
+  page_url WIKI_REPO_URL + "Special:CreateItem"
   @@item_url = ""
   @@item_id = ""
 
