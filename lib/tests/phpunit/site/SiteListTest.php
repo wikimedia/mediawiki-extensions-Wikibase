@@ -52,17 +52,15 @@ class SiteListTest extends MediaWikiTestCase {
 	 * @return array
 	 */
 	public function siteArrayProvider() {
-		$sites = iterator_to_array( Sites::singleton()->getSites() );
+		$sites = TestSites::getSites();
 
 		$siteArrays = array();
 
-		if ( count( $sites ) > 0 ) {
-			$siteArrays[] = array( array_shift( $sites ) );
-		}
+		$siteArrays[] = $sites;
 
-		if ( count( $sites ) > 1 ) {
-			$siteArrays[] = array( array_shift( $sites ), array_shift( $sites ) );
-		}
+		$siteArrays[] = array( array_shift( $sites ) );
+
+		$siteArrays[] = array( array_shift( $sites ), array_shift( $sites ) );
 
 		return $this->arrayWrap( $siteArrays );
 	}
