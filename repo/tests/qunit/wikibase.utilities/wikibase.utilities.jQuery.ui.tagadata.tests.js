@@ -76,6 +76,23 @@
 			false,
 			'Tried to remove non-existent tag, should return false'
 		);
+
+		this.$getWidget().disable();
+
+		equal(
+			this.$getWidget().isDisabled(),
+			true,
+			'Disabled widget'
+		);
+
+		this.$getWidget().enable();
+
+		equal(
+			this.$getWidget().isDisabled(),
+			false,
+			'Enabled widget'
+		);
+
 	} );
 
 }() );

@@ -75,3 +75,7 @@ ul.tagadata li.tagadata-choice-equal {
 	color: red;
 	border-color: red;
 }
+
+ul.tagadata tagadata {
+	background-color: #F0F0F0;
+}
