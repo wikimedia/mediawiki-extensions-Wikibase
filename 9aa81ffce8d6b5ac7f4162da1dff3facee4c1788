@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARX//xyo\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-08-29T09:56:58Z",
+      "side": 1,
+      "message": "\"selectone\" -\u003e typo",
+      "revId": "9aa81ffce8d6b5ac7f4162da1dff3facee4c1788",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
