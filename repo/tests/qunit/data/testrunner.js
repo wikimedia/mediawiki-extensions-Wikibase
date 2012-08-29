@@ -68,7 +68,7 @@
 
 			return {
 				setup: function () {
-					mwEnv.setup(); mw.log( wikibase._siteList );
+					mwEnv.setup();
 					wikibase._siteList = null; // empty cache of wikibases site details
 					if ( custom.setup !== undefined ) {
 						custom.setup.apply( this, arguments );

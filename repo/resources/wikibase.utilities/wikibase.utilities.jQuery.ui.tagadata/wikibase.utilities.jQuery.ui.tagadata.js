@@ -505,6 +505,31 @@
 		},
 
 		/**
+		 * Disables the widget.
+		 */
+		disable: function() {
+			this.getHelperTag().remove();
+			this.tagList.find( 'input' ).blur().attr( 'disabled', 'true' );
+			this.tagList.addClass( 'tagadata-disabled' );
+		},
+
+		/**
+		 * Enables the widget.
+		 */
+		enable: function() {
+			this.tagList.find( 'input' ).removeAttr( 'disabled' );
+			this.tagList.removeClass( 'tagadata-disabled' );
+			this.getHelperTag(); // creates helper tag (if it does not exist already)
+		},
+
+		/**
+		 * Checks whether widget is disabled.
+		 */
+		isDisabled: function() {
+			return ( this.tagList.find( 'input:not([disabled])' ).length === 0 );
+		},
+
+		/**
 		 * Destroys the element and only leaves the original ul element (including all new elements)
 		 */
 		destroy: function() {
