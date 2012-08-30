@@ -128,6 +128,17 @@
 			$( wikibase ).triggerHandler( 'restrictItemPageActions' );
 		}
 
+        if ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'ItemDisambiguation' ) {
+            var siteList = new Array();
+            for ( var siteId in wikibase.getSites() ) {
+                var site = wikibase.getSite( siteId );
+                siteList.push( {
+                    'label': site.getName() + ' (' + site.getId() + ')',
+                    'value': site.getId()
+                } );
+            };
+            $('#languagename').wikibaseAutocomplete( { "source": siteList } );
+        }
 	} );
 
 } )( jQuery, mediaWiki, wikibase );
