@@ -354,4 +354,18 @@ class SiteObject extends ORMRow implements Site {
 		$this->setId( $id );
 	}
 
+	/**
+	 * @see ORMRow::save
+	 * @see Site::save
+	 *
+	 * @since 1.20
+	 *
+	 * @param string|null $functionName
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function save( $functionName = null ) {
+		// NOTE: we need to implement this explicitely, otherwise PHP will complain!
+		return parent::save( $functionName );
+	}
 }
