@@ -43,22 +43,33 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 		*/
 		var self = this;
 		if ( $.fn.inputAutoExpand ) {
-			// calculate size for all input elements initially:
-			this._getTagadata().tagList.children( 'li' ).find( 'input' ).inputAutoExpand( {
+			var expansionOptions = {
 				expandOnResize: false,
-				maxWidth: 1000
-				/* // TODO/FIXME: both solutions are not perfect, when tag larger than available space either the
-				   // input will be auto-resized and not show the whole text or we still show the whole tag but it
-				   // will break the site layout. A solution would be replacing input with textarea.
 				maxWidth: function() {
-					var tagList = self._getTagadata().tagList;
-					var origCssDisplay = tagList.css( 'display' );
-					tagList.css( 'display', 'block' );
-					var width = tagList.width();
-					tagList.css( 'display', origCssDisplay );
-					return width;
+					// TODO/FIXME: figure out why this requires at least -17, can't be because of padding + border
+					// which is only 6 for both sides
+					return self._inputElem.width() - 20;
 				}
-				*/
+				/* // TODO/FIXME: both solutions are not perfect, when tag larger than available space either the
+				 // input will be auto-resized and not show the whole text or we still show the whole tag but it
+				 // will break the site layout. A solution would be replacing input with textarea.
+				 maxWidth: function() {
+				 var tagList = self._getTagadata().tagList;
+				 var origCssDisplay = tagList.css( 'display' );
+				 tagList.css( 'display', 'block' );
+				 var width = tagList.width();
+				 tagList.css( 'display', origCssDisplay );
+				 return width;
+				 }
+				 */
+			};
+
+			// calculate size for all input elements initially:
+			this._getTagadata().tagList.children( 'li' ).find( 'input' ).inputAutoExpand( expansionOptions );
+
+			// also make sure that new helper tags will calculate size correctly:
+			this._inputElem.on( 'tagadatahelpertagadded', function( e, tag ) {
+				$( tag ).find( 'input' ).inputAutoExpand( expansionOptions )
 			} );
 		}
 	},
