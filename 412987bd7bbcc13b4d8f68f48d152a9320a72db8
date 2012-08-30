@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn///Ho\u003d",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-30T23:24:14Z",
+      "side": 1,
+      "message": "Don\u0027t quite understand the second TODO.\n\nIf I understood right you only need the Startup.js from this module. The startup is a mess anyhow and should be separated in a presenter loading edit tools for actual items (usually on item pages) and a presenter for special pages or even one for each special page.",
+      "revId": "412987bd7bbcc13b4d8f68f48d152a9320a72db8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARn///Hk\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-30T23:24:14Z",
+      "side": 1,
+      "message": "This whole thing shouldn\u0027t be done here since it\u0027s highly special page related. But then again, there is a whole lot that shouldn\u0027t exactly be done here. We need a presenter for Item related editing stuff and one or several for special pages. So perhaps add a js startup file for the special page instead, or at least another TODO",
+      "revId": "412987bd7bbcc13b4d8f68f48d152a9320a72db8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARn///IA\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-08-30T23:24:14Z",
+      "side": 1,
+      "message": "wb.getSites() ^^vv",
+      "revId": "412987bd7bbcc13b4d8f68f48d152a9320a72db8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
