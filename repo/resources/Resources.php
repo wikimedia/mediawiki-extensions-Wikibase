@@ -46,6 +46,9 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.jQuery.js',
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
+			),
+			'dependencies' => array(
+				'wikibase'
 			)
 		),
 
@@ -95,6 +98,7 @@ return call_user_func( function() {
 				'wikibase.ui.Toolbar.css'
 			),
 			'dependencies' => array(
+				'wikibase',
 				'jquery.tipsy',
 				'mediawiki.legacy.shared',
 				'jquery.ui.core'
