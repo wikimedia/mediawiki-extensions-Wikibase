@@ -100,7 +100,7 @@ $messages['en'] = array(
 	'wikibase-itembytitle-invalid-site' => 'The previous query could not be used for a search. Please provide a valid site identifier.',
 	'wikibase-itembytitle-description' => 'Site is an identifier code, such as "enwiki".',
 	'wikibase-itembytitle-create' => 'You can also [{{fullurl:Special:CreateItem|site=$1&page=$2}} create an item].',
-	'special-itemdisambiguation' => 'Item by label',
+	'special-itemdisambiguation' => 'Disambiguation: Items with the same label',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'Search for items by language and label',
 	'wikibase-itemdisambiguation-lookup-language' => 'Language:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Label:',
