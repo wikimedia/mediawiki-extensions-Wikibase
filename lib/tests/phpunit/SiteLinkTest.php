@@ -21,6 +21,7 @@ use Sites;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler <daniel.kinzler@wikimedia.de>
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SiteLinkTest extends \MediaWikiTestCase {
 
@@ -35,6 +36,22 @@ class SiteLinkTest extends \MediaWikiTestCase {
 		}
 	}
 
+	/**
+	 * Returns a site to test with.
+	 * @return \MediaWikiSite
+	 */
+	protected function getSite() {
+		$site = \MediaWikiSite::newFromGlobalId( 'enwiki' );
+		$site->setUrl( 'https://en.wikipedia.org/' );
+		$site->setRelativePagePath( 'wiki/$1' );
+
+		return $site;
+	}
+
+	protected function newFromText( $pageText ) {
+		return new SiteLink( $this->getSite(), $pageText );
+	}
+
 	public function testNewFromText() {
 		$link = SiteLink::newFromText( "enwiki", " foo " );
 		$this->assertEquals( " foo ", $link->getPage() );
@@ -47,9 +64,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	}
 
 	public function testConstructor() {
-		$site = Sites::singleton()->getSites()->getSiteByGlobalId( 'enwiki' );
-		$link = new SiteLink( $site, "Foo" );
-
+		$link = new SiteLink( $this->getSite(), "Foo" );
 		$this->assertEquals( "Foo", $link->getPage() );
 	}
 
@@ -57,8 +72,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	 * @depends testNewFromText
 	 */
 	public function testGetPage() {
-		$link = SiteLink::newFromText( 'enwiki', "Foo" );
-
+		$link = $this->newFromText( 'Foo' );
 		$this->assertEquals( "Foo", $link->getPage() );
 	}
 
@@ -66,8 +80,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	 * @depends testNewFromText
 	 */
 	public function testGetDBKey() {
-		$link = SiteLink::newFromText( 'enwiki', "Foo Bar" );
-
+		$link = $this->newFromText( 'Foo Bar' );
 		$this->assertEquals( "Foo_Bar", $link->getDBKey() );
 	}
 
@@ -75,37 +88,21 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	 * @depends testNewFromText
 	 */
 	public function testGetSite() {
-		$link = SiteLink::newFromText( 'enwiki', "Foo" );
-
-		$expected = Sites::singleton()->getSites()->getSiteByGlobalId( "enwiki" );
-		$this->assertEquals( $expected, $link->getSite() );
+		$this->assertEquals( $this->getSite(), $this->newFromText( 'Foo' )->getSite() );
 	}
 
 	/**
 	 * @depends testNewFromText
 	 */
 	public function testGetSiteID() {
-		$link = SiteLink::newFromText( "enwiki", "Foo" );
-
-		$this->assertEquals( 'enwiki', $link->getSiteID() );
-	}
-
-	/**
-	 * @depends testNewFromText
-	 */
-	public function testUrl() {
-		$link = SiteLink::newFromText( 'enwiki', "Foo Bar?/notes" );
-		$this->assertEquals( "https://en.wikipedia.org/wiki/Foo_Bar%3F%2Fnotes", $link->getUrl() );
-
-		$link = SiteLink::newFromText( 'xyzwiki', "Bla" );
-		$this->assertEquals( false, $link->getUrl(), "getUrl() should return false for unknown sites" );
+		$this->assertEquals( 'enwiki', $this->newFromText( 'Foo' )->getGlobalID() );
 	}
 
 	/**
 	 * @depends testNewFromText
 	 */
 	public function testToString() {
-		$link = SiteLink::newFromText( 'enwiki', "Foo Bar" );
+		$link = $this->newFromText( 'Foo Bar' );
 
 		$this->assertEquals( "enwiki:Foo_Bar", "$link" );
 	}
