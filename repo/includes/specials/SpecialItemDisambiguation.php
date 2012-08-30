@@ -104,6 +104,9 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 				. Html::closeElement( 'div' )
 			);
 		}
+		$sites = \Wikibase\ItemView::getSiteDetails();
+		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites ); // TODO: This should really be in a Resource loader module and not here.
+		$this->getOutput()->addModules( 'wikibase.ui.PropertyEditTool' );
 		$this->getOutput()->addHTML(
 			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itemdisambiguation', 'id' => 'mw-itemdisambiguation-form1' ) )
 			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
