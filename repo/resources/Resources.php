@@ -58,6 +58,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.utilities'
+				'jquery.ui.autocomplete'
 			)
 		),
 
@@ -153,7 +154,6 @@ return call_user_func( function() {
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.inputAutoExpand',
 				'wikibase.utilities.jQuery.ui.tagadata',
-				'jquery.ui.autocomplete',
 				'mediawiki.api',
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg' // for {{plural}} and {{gender}} support in messages
