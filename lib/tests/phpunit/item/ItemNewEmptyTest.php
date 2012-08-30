@@ -129,7 +129,9 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 			SiteLink::newFromText( 'enwiki', 'English' ),
 		);
 
-		/* @var SiteLink $link */
+		/**
+		 * @var SiteLink $link
+		 */
 		foreach ( $arr as $link ) {
 			$this->item->addSiteLink( $link );
 		}
@@ -141,7 +143,7 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 		);
 
 		foreach ( $arr as $link ) {
-			$this->item->removeSiteLink( $link->getGlobalID() );
+			$this->item->removeSiteLink( $link->getSite()->getGlobalId() );
 		}
 
 		$this->assertCount(

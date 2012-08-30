@@ -56,11 +56,11 @@ class ApiLinkTitles extends Api {
 			$this->dieUsage( $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text(), 'fromtitle-and-totitle' );
 		}
 
-		$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
+		$sites = \Sites::singleton()->getSites();
 
 		// Get all parts for the from-link
 		// Site is already tested through allowed params ;)
-		$fromSite = $group->getSiteByGlobalId( $params['fromsite'] );
+		$fromSite = $sites->getSite( $params['fromsite'] );
 		// This must be tested now
 		$fromPage = $fromSite->normalizePageName( $params['fromtitle'] );
 		if ( $fromPage === false ) {
@@ -71,7 +71,7 @@ class ApiLinkTitles extends Api {
 
 		// Get all part for the to-link
 		// Site is already tested through allowed params ;)
-		$toSite = $group->getSiteByGlobalId( $params['tosite'] );
+		$toSite = $sites->getSite( $params['tosite'] );
 		// This must be tested now
 		$toPage = $toSite->normalizePageName( $params['totitle'] );
 		if ( $toPage === false ) {
@@ -87,7 +87,6 @@ class ApiLinkTitles extends Api {
 		// Figure out which parts to use and what to create anew
 		if ( !$fromId && !$toId ) {
 			// create new item
-			$flags |= EDIT_NEW;
 			$itemContent = ItemContent::newEmpty();
 			$toLink = new SiteLink( $toSite, $toPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
@@ -204,16 +203,16 @@ class ApiLinkTitles extends Api {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
+		$sites = \Sites::singleton()->getSites();
 		return array_merge( parent::getAllowedParams(), array(
 			'tosite' => array(
-				ApiBase::PARAM_TYPE => $group->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 			),
 			'totitle' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
 			'fromsite' => array(
-				ApiBase::PARAM_TYPE => $group->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),
 			),
 			'fromtitle' => array(
 				ApiBase::PARAM_TYPE => 'string',

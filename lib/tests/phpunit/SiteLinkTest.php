@@ -95,7 +95,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	 * @depends testNewFromText
 	 */
 	public function testGetSiteID() {
-		$this->assertEquals( 'enwiki', $this->newFromText( 'Foo' )->getGlobalID() );
+		$this->assertEquals( 'enwiki', $this->newFromText( 'Foo' )->getSite()->getGlobalId() );
 	}
 
 	/**

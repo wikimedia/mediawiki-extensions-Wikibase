@@ -57,18 +57,6 @@ define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
 define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
 
-define( 'SITE_TYPE_MEDIAWIKI', 0 );
-define( 'SITE_TYPE_UNKNOWN', 1 );
-
-define( 'SITE_GROUP_NONE', -1 );
-define( 'SITE_GROUP_WIKIPEDIA', 0 );
-define( 'SITE_GROUP_WIKTIONARY', 1 );
-define( 'SITE_GROUP_WIKIBOOKS', 2 );
-define( 'SITE_GROUP_WIKIQUOTE', 3 );
-define( 'SITE_GROUP_WIKISOURCE', 4 );
-define( 'SITE_GROUP_WIKIVERSITY', 5 );
-define( 'SITE_GROUP_WIKINEWS', 6 );
-
 define( 'SUMMARY_MAX_LENGTH', 250 );
 
 // i18n

@@ -173,9 +173,12 @@ abstract class Api extends \ApiBase {
 		$value = array();
 		$idx = 0;
 
-		foreach ( $siteLinks as $link ) { /* @var SiteLink $link */
+		/**
+		 * @var SiteLink $link
+		 */
+		foreach ( $siteLinks as $link ) {
 			$response = array(
-				'site' => $link->getSiteID(),
+				'site' => $link->getSite()->getGlobalId(),
 				'title' => $link->getPage(),
 			);
 
@@ -185,7 +188,7 @@ abstract class Api extends \ApiBase {
 						//skip
 					} elseif ( $opt === 'url' ) {
 						//include full url in the result
-						$response['url'] = $link->getUrl();
+						$response['url'] = $link->getSite()->getDomain();
 					} else {
 						//include some flag in the result
 						$response[$opt] = '';
@@ -193,7 +196,7 @@ abstract class Api extends \ApiBase {
 				}
 			}
 
-			$key = $this->getUsekeys() ? $link->getSiteID() : $idx++;
+			$key = $this->getUsekeys() ? $link->getSite()->getGlobalId() : $idx++;
 			$value[$key] = $response;
 		}
 

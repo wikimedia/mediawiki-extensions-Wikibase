@@ -203,7 +203,7 @@ class MediaWikiSite extends SiteObject {
 	}
 
 	/**
-	 * Returns the base URL.
+	 * Returns the base URL, ie http://www.wikidata.org
 	 *
 	 * @since 1.20
 	 *
@@ -221,7 +221,13 @@ class MediaWikiSite extends SiteObject {
 	 * @param string $url
 	 */
 	public function setUrl( $url ) {
-		return $this->setExtraData( 'url', $url );
+		$this->setExtraData( 'url', $url );
+
+		if ( $url !== '' ) {
+			$url = strrev( $url ) . '.';
+		}
+
+		$this->setField( 'domain', $url );
 	}
 
 	/**
@@ -232,7 +238,7 @@ class MediaWikiSite extends SiteObject {
 	 * @param string $path
 	 */
 	public function setRelativePagePath( $path ) {
-		return $this->setExtraData( 'page_path', $path );
+		$this->setExtraData( 'page_path', $path );
 	}
 
 	/**
@@ -243,7 +249,7 @@ class MediaWikiSite extends SiteObject {
 	 * @param string $path
 	 */
 	public function setRelativeFilePath( $path ) {
-		return $this->setExtraData( 'file_path', $path );
+		$this->setExtraData( 'file_path', $path );
 	}
 
 	/**

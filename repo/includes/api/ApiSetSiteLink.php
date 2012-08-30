@@ -106,8 +106,8 @@ class ApiSetSiteLink extends ApiModifyItem {
 			return true;
 		}
 		else {
-			$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
-			$site = $group->getSiteByGlobalId( $params['linksite'] );
+			$sites = \Sites::singleton()->getSites();
+			$site = $sites->getSite( $params['linksite'] );
 
 			if ( $site === false ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-siteid' )->text(), 'not-recognized-siteid' );
@@ -153,11 +153,10 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
 		$allowedParams = parent::getAllowedParams();
 		return array_merge( $allowedParams, array(
 			'linksite' => array(
-				ApiBase::PARAM_TYPE => $group->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => \Sites::singleton()->getSites()->getGlobalIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'linktitle' => array(

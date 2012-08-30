@@ -198,20 +198,20 @@ class ApiSetItem extends ApiModifyItem {
 						$this->dieUsage( "Key 'sitelinks' must refer to an array", 'not-recognized-array' );
 					}
 
-					$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
+					$sites = \Sites::singleton()->getSites();
 					foreach ( $list as $siteId => $pageName ) {
 						if ( !is_string( $pageName ) ) {
 							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'add-sitelink-failed' );
 						}
 
-						if ( !$group->hasGlobalId( $siteId ) ) {
+						if ( !$sites->hasSite( $siteId ) ) {
 							$this->dieUsage( "unknown site: $siteId", 'add-sitelink-failed' );
 						}
 
 						if ( $pageName === '' ) {
 							$itemContent->getItem()->removeSiteLink( $siteId );
 						} else {
-							$site = $group->getSiteByGlobalId( $siteId );
+							$site = $sites->getSite( $siteId );
 							$page = $site->normalizePageName( $pageName );
 
 							if ( $page === false ) {
