@@ -67,6 +67,7 @@ interface Site {
 
 	/**
 	 * Sets the type of the site (ie mediawiki).
+	 * TODO: remove, we cannot change this after instantiation
 	 *
 	 * @since 1.20
 	 *
@@ -112,30 +113,31 @@ interface Site {
 
 	/**
 	 * Returns the protocol of the site, ie 'http://', 'irc://', '//'
-	 * Returns an empty string when not known.
+	 * Or false if it's not known.
 	 *
 	 * @since 1.20
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function getProtocol();
 
 	/**
 	 * Returns the domain of the site, ie en.wikipedia.org
-	 * Returns an empty string when not known.
+	 * Or false if it's not known.
 	 *
 	 * @since 1.20
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function getDomain();
 
 	/**
 	 * Returns language code of the sites primary language.
+	 * Or false if it's not known.
 	 *
 	 * @since 1.20
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function getLanguageCode();
 
@@ -147,19 +149,6 @@ interface Site {
 	 * @param string $languageCode
 	 */
 	public function setLanguageCode( $languageCode );
-
-	/**
-	 * Returns the full page path (protocol + domain + page name).
-	 * The page title should go at the $1 marker. If the $pageName
-	 * argument is provided, the marker will be replaced by it's value.
-	 *
-	 * @since 1.20
-	 *
-	 * @param string|false $pageName
-	 *
-	 * @return string
-	 */
-	//public function getPagePath( $pageName = false ); TODO
 
 	/**
 	 * Returns the normalized, canonical form of the given page name.

@@ -134,10 +134,14 @@ class SiteObject extends ORMRow implements Site {
 	 *
 	 * @since 1.20
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function getDomain() {
-		return substr( strrev( $this->getField( 'domain', '' ) ), 1 );
+		if ( !$this->hasField( 'domain' ) ) {
+			return false;
+		}
+
+		return substr( strrev( $this->getField( 'domain' ) ), 1 );
 	}
 
 	/**
@@ -145,10 +149,10 @@ class SiteObject extends ORMRow implements Site {
 	 *
 	 * @since 1.20
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function getProtocol() {
-		return $this->getField( 'protocol', '' );
+		return $this->getField( 'protocol', false );
 	}
 
 	/**
@@ -201,10 +205,10 @@ class SiteObject extends ORMRow implements Site {
 	 *
 	 * @since 1.20
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function getLanguageCode() {
-		return $this->getField( 'language' );
+		return $this->getField( 'language', false );
 	}
 
 	/**

@@ -53,57 +53,54 @@ class MediaWikiSite extends SiteObject {
 			throw new MWException( "\$pageTitle must be a string" );
 		}
 
-		return Title::newFromText( $pageName )->getPrefixedText();
+		// Build the args for the specific call
+		$args = \Wikibase\Settings::get( 'clientPageArgs' ); // FIXME
+		$args['titles'] = $pageName;
 
-		// TODO
-//		// Build the args for the specific call
-//		$args = Settings::get( 'clientPageArgs' );
-//		$args['titles'] = $pageName;
-//
-//		// Go on call the external site
-//		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-//			// If the code is under test, don't call out to other sites. Normalize locally.
-//			// Note: this may cause results to be inconsistent with the actual normalization used by the respective remote site!
-//
-//			$t = Title::newFromText( $pageName );
-//			$ret = "{ \"query\" : { \"pages\" : { \"1\" : { \"title\" : " . FormatJson::encode( $t->getPrefixedText() ) . " } } } }";
-//		} else {
-//			$url = $this->getFilePath( 'api.php' ) . '?' . wfArrayToCgi( $args );
-//
-//			// Go on call the external site
-//			$ret = Http::get( $url, Settings::get( 'clientTimeout' ), Settings::get( 'clientPageOpts' ) );
-//		}
-//
-//		if ( $ret === false ) {
-//			//TODO: log. retry?
-//			return false;
-//		}
-//
-//		if ( preg_match( '/^Waiting for [^ ]*: [0-9.-]+ seconds lagged$/', $ret ) ) {
-//			//TODO: log. retry?
-//			return false;
-//		}
-//
-//		$data = FormatJson::decode( $ret, true );
-//
-//		if ( !is_array( $data ) ) {
-//			//TODO: log.
-//			return false;
-//		}
-//
-//		$page = static::extractPageRecord( $data, $pageName );
-//
-//		if ( isset( $page['missing'] ) ) {
-//			//TODO: log.
-//			return false;
-//		}
-//
-//		if ( !isset( $page['title'] ) ) {
-//			//TODO: log.
-//			return false;
-//		}
-//
-//		return $page['title'];
+		// Go on call the external site
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			// If the code is under test, don't call out to other sites. Normalize locally.
+			// Note: this may cause results to be inconsistent with the actual normalization used by the respective remote site!
+
+			$t = Title::newFromText( $pageName );
+			$ret = "{ \"query\" : { \"pages\" : { \"1\" : { \"title\" : " . FormatJson::encode( $t->getPrefixedText() ) . " } } } }";
+		} else {
+			$url = $this->getFilePath( 'api.php' ) . '?' . wfArrayToCgi( $args );
+
+			// Go on call the external site
+			$ret = Http::get( $url, Settings::get( 'clientTimeout' ), Settings::get( 'clientPageOpts' ) );
+		}
+
+		if ( $ret === false ) {
+			//TODO: log. retry?
+			return false;
+		}
+
+		if ( preg_match( '/^Waiting for [^ ]*: [0-9.-]+ seconds lagged$/', $ret ) ) {
+			//TODO: log. retry?
+			return false;
+		}
+
+		$data = FormatJson::decode( $ret, true );
+
+		if ( !is_array( $data ) ) {
+			//TODO: log.
+			return false;
+		}
+
+		$page = static::extractPageRecord( $data, $pageName );
+
+		if ( isset( $page['missing'] ) ) {
+			//TODO: log.
+			return false;
+		}
+
+		if ( !isset( $page['title'] ) ) {
+			//TODO: log.
+			return false;
+		}
+
+		return $page['title'];
 	}
 
 	/**

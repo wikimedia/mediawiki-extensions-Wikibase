@@ -37,7 +37,7 @@ class SiteLink {
 		$site = Sites::singleton()->getSite( $globalSiteId );
 
 		if ( $site === false ) {
-			$site = Sites::newSite( array( 'global_key' => $globalSiteId ) );
+			$site = Sites::newSite( $globalSiteId );
 		}
 
 		if ( $normalize ) {

@@ -29,7 +29,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteRowTest extends ORMRowTest {
+class SiteObjectTest extends ORMRowTest {
 
 	/**
 	 * @see ORMRowTest::getRowClass
@@ -55,36 +55,120 @@ class SiteRowTest extends ORMRowTest {
 	 * @return array
 	 */
 	public function constructorTestProvider() {
-		$rows = array(
-			array( 'enwiki' ),
-		);
+		$argLists = array();
 
-		foreach ( $rows as &$args ) {
-			$fields = array(
-				'global_key' => $args[0],
-			);
+		$argLists[] = array( 'global_key' => '42' );
 
-			$args = array( $fields, true );
+		$argLists[] = array( 'global_key' => '42', 'type' => Site::TYPE_MEDIAWIKI );
+
+		$constructorArgs = array();
+
+		foreach ( $argLists as $argList ) {
+			$constructorArgs[] = array( $argList, true );
 		}
 
-		return $rows;
+		return $constructorArgs;
 	}
 
 	/**
-	 * @dataProvider constructorTestProvider
+	 * @dataProvider instanceProvider
+	 * @param Site $site
 	 */
-	public function testConstructorEvenMore( array $fields ) {
-		$site = \SitesTable::singleton()->newRow( $fields, true );
+	public function testSetInternalId( Site $site ) {
+		$site->setInternalId( 42 );
+		$this->assertEquals( 42, $site->getInternalId() );
+	}
 
-		$functionMap = array(
-			'getGlobalId',
-		);
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testGetInterwikiIds( Site $site ) {
+		$this->assertInternalType( 'array', $site->getInterwikiIds() );
+	}
 
-		reset( $fields );
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testGetNavigationIds( Site $site ) {
+		$this->assertInternalType( 'array', $site->getNavigationIds() );
+	}
 
-		foreach ( $functionMap as $functionName ) {
-			$this->assertEquals( current( $fields ), call_user_func( array( $site, $functionName ) ) );
-			next( $fields );
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testAddNavigationId( Site $site ) {
+		$site->addNavigationId( 'foobar' );
+		$this->assertTrue( in_array( 'foobar', $site->getNavigationIds(), true ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testAddInterwikiId( Site $site ) {
+		$site->addInterwikiId( 'foobar' );
+		$this->assertTrue( in_array( 'foobar', $site->getInterwikiIds(), true ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testGetLanguageCode( Site $site ) {
+		$this->assertTypeOrFalse( 'string', $site->getLanguageCode() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testSetLanguageCode( Site $site ) {
+		$site->setLanguageCode( 'en' );
+		$this->assertEquals( 'en', $site->getLanguageCode() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testNormalizePageName( Site $site ) {
+		$this->assertInternalType( 'string', $site->normalizePageName( 'Foobar' ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testGetGlobalId( Site $site ) {
+		$this->assertInternalType( 'string', $site->getGlobalId() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testSetGlobalId( Site $site ) {
+		$site->setGlobalId( 'foobar' );
+		$this->assertEquals( 'foobar', $site->getGlobalId() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testGetType( Site $site ) {
+		$this->assertInternalType( 'string', $site->getType() );
+	}
+
+	protected function assertTypeOrFalse( $type, $value ) {
+		if ( $value === false ) {
+			$this->assertTrue( true );
+		}
+		else {
+			$this->assertInternalType( $type, $value );
 		}
 	}
 
