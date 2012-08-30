@@ -470,12 +470,19 @@ final class RepoHooks {
 				if ( $old || $restore ) {
 					// insert restore tab into views array, at the second position
 
+					$revid = $restore ? $request->getText( 'restore' ) : $sktemplate->getRevisionId();
+
 					$head = array_slice( $links['views'], 0, 1);
 					$tail = array_slice( $links['views'], 1 );
 					$neck['restore'] = array(
-						'class' => ( $restore ) ? 'selected' : false,
-						'text' => $sktemplate->getLanguage()->ucfirst( wfMsg( 'wikibase-restoreold' ) ),
-						'href' => $title->getLocalURL( 'action=edit&restore=' . ( ( $restore ) ? $request->getText( 'restore' ) : $sktemplate->getRevisionId() ) ),
+						'class' => $restore ? 'selected' : false,
+						'text' => $sktemplate->getLanguage()->ucfirst(
+								wfMessage( 'wikibase-restoreold' )->text()
+							),
+						'href' => $title->getLocalURL( array(
+								'action' => 'edit',
+								'restore' => $revid )
+							),
 					);
 
 					$links['views'] = array_merge( $head, $neck, $tail );
