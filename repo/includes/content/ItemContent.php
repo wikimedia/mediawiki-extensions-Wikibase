@@ -121,7 +121,7 @@ class ItemContent extends EntityContent {
 				'wb_items_per_site',
 				array( 'ips_item_id' ),
 				array(
-					'ips_site_id' => $siteLink->getSiteID(),
+					'ips_site_id' => $siteLink->getSite()->getGlobalId(),
 					'ips_site_page' => $siteLink->getPage(),
 				),
 				__METHOD__
@@ -131,14 +131,16 @@ class ItemContent extends EntityContent {
 				$ipsId = (int)$row->ips_item_id;
 				$itemId = $this->item->getId();
 
-				/* @var WikiPage $ipsPage */
+				/**
+				 * @var WikiPage $ipsPage
+				 */
 				$ipsPage = $this->getContentHandler()->getWikiPageForId( $ipsId );
 
 				if ( $ipsId !== $itemId ) {
 					$status->setResult( false );
 					$status->error(
 						'wikibase-error-sitelink-already-used',
-						$siteLink->getSiteID(),
+						$siteLink->getSite()->getGlobalId(),
 						$siteLink->getPage(),
 						$ipsPage->getTitle()->getFullText()
 					);

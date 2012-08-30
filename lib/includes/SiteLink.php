@@ -13,6 +13,7 @@ use Sites, Site, MWException;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SiteLink {
 
@@ -108,17 +109,6 @@ class SiteLink {
 	}
 
 	/**
-	 * Returns the target site's global ID.
-	 *
-	 * @since 0.1
-	 *
-	 * @return String
-	 */
-	public function getGlobalID() {
-		return $this->site->getGlobalId();
-	}
-
-	/**
 	 * Returns the target site's Site object
 	 *
 	 * @since 0.1
@@ -137,7 +127,7 @@ class SiteLink {
 	 * @return string
 	 */
 	public function __toString() {
-		return $this->getGlobalID() . ':' . $this->getDBKey();
+		return $this->getSite()->getGlobalId() . ':' . $this->getDBKey();
 	}
 
 	/**
@@ -168,7 +158,7 @@ class SiteLink {
 		 * @var SiteLink $link
 		 */
 		foreach ( $siteLinks as $link ) {
-			$siteIds[] = $link->getGlobalID();
+			$siteIds[] = $link->getSite()->getGlobalId();
 		}
 
 		return array_unique( $siteIds );
@@ -189,7 +179,7 @@ class SiteLink {
 		 * @var SiteLink $link
 		 */
 		foreach ( $baseLinks as $link ) {
-			$links[ $link->getGlobalID() ] = $link->getPage();
+			$links[ $link->getSite()->getGlobalId() ] = $link->getPage();
 		}
 
 		return $links;

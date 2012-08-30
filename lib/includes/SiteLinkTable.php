@@ -63,7 +63,7 @@ class SiteLinkTable {
 				array_merge(
 					$idField,
 					array(
-						'ips_site_id' => $siteLink->getGlobalID(),
+						'ips_site_id' => $siteLink->getSite()->getGlobalId(),
 						'ips_site_page' => $siteLink->getPage(),
 					)
 				),

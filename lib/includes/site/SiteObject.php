@@ -137,7 +137,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string
 	 */
 	public function getDomain() {
-		return substr( strrev( $this->getField( 'domain' ) ), 1 );
+		return substr( strrev( $this->getField( 'domain', '' ) ), 1 );
 	}
 
 	/**
@@ -148,7 +148,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string
 	 */
 	public function getProtocol() {
-		return $this->getField( 'protocol' );
+		return $this->getField( 'protocol', '' );
 	}
 
 	/**

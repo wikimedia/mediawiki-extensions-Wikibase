@@ -112,6 +112,7 @@ interface Site {
 
 	/**
 	 * Returns the protocol of the site, ie 'http://', 'irc://', '//'
+	 * Returns an empty string when not known.
 	 *
 	 * @since 1.20
 	 *
@@ -121,6 +122,7 @@ interface Site {
 
 	/**
 	 * Returns the domain of the site, ie en.wikipedia.org
+	 * Returns an empty string when not known.
 	 *
 	 * @since 1.20
 	 *

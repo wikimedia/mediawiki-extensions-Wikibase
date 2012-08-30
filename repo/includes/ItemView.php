@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage;
+use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, Site;
 
 /**
  * Class for creating views for Wikibase\Item instances.
@@ -179,15 +179,17 @@ class ItemView extends \ContextSource {
 			$i = 0;
 
 			// Batch load the sites we need info about during the building of the sitelink list.
-			Sites::singleton()->loadSites( array( 'global_key' => SiteLink::getSiteIds( $siteLinks ) ) );
+			Sites::singleton()->getSites();
 
-
-			foreach( $siteLinks as $link ) { /* @var SiteLink $link */
+			/**
+			 * @var SiteLink $link
+			 */
+			foreach( $siteLinks as $link ) {
 				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
 
 				$site = $link->getSite();
 
-				if ( !$site->getUrl() ) {
+				if ( $site->getDomain() === '' ) {
 					// the link is pointing to an unknown site.
 					// XXX: hide it? make it red? strike it out?
 
@@ -195,12 +197,21 @@ class ItemView extends \ContextSource {
 							'class' => 'wb-sitelinks-site-unknown ' . $alternatingClass )
 					);
 
-					$html .= Html::element( 'td', array( 'colspan' => '2', 'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-unknown' ), $link->getSiteID() );
-					$html .= Html::element( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-broken' ), $link->getPage() );
+					$html .= Html::element(
+						'td',
+						array( 'colspan' => '2', 'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-unknown' ),
+						$link->getSite()->getGlobalId()
+					);
+
+					$html .= Html::element(
+						'td',
+						array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-broken' ),
+						$link->getPage()
+					);
 
 					$html .= Html::closeElement( 'tr' );
 				} else {
-					$languageCode = $site->getLanguage();
+					$languageCode = $site->getLanguageCode();
 
 					$html .= Html::openElement( 'tr', array(
 							'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
@@ -223,9 +234,10 @@ class ItemView extends \ContextSource {
 						$languageCode
 					);
 					$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
+
 					$html .= Html::element(
 						'a',
-						array( 'href' => $link->getUrl() ),
+						array( 'href' => $link->getSite()->getDomain() ),
 						$link->getPage()
 					);
 					$html .= Html::closeElement( 'td' );
@@ -398,16 +410,21 @@ class ItemView extends \ContextSource {
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
 
-		foreach ( Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA ) as  /** @var \Wikibase\Site $site */ $site ) {
-			$languageName = Utils::fetchLanguageName( $site->getLanguage() );
+		/**
+		 * @var Site $site
+		 */
+		foreach ( Sites::singleton()->getSites() as $site ) {
+			if ( $site->getType() === Site::TYPE_MEDIAWIKI && $site->getGroup() === 'wikipedia' ) {
+				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
 
-			$sites[$site->getLanguage()] = array(
-				'shortName' => $languageName,
-				'name' => $languageName,
-				'globalSiteId' => $site->getGlobalId(),
-				'pageUrl' => $site->getPagePath(),
-				'apiUrl' => $site->getFilePath( 'api.php' ),
-			);
+				$sites[$site->getLanguageCode()] = array(
+					'shortName' => $languageName,
+					'name' => $languageName,
+					'globalSiteId' => $site->getGlobalId(),
+					'pageUrl' => $site->getRelativePagePath(),
+					'apiUrl' => $site->getRelativePath( 'api.php' ),
+				);
+			}
 		}
 
 		return $sites;

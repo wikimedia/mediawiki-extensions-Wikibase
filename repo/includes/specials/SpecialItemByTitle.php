@@ -68,12 +68,12 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	protected function switchForm( $siteId, $page ) {
 		global $wgScript;
 
-		$validSite = \Wikibase\Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA )->hasGlobalId( $siteId );
+		$siteExists = \Sites::singleton()->getSites()->hasSite( $siteId );
 
 		if ( isset( $siteId ) || isset( $page ) ) {
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
-				. $this->msg( $validSite ? 'wikibase-itembytitle-nothing-found' : 'wikibase-itembytitle-invalid-site' )
+				. $this->msg( $siteExists ? 'wikibase-itembytitle-nothing-found' : 'wikibase-itembytitle-invalid-site' )
 					->params( htmlspecialchars( $siteId ), htmlspecialchars( $page ) )
 					->parse()
 				. Html::closeElement( 'div' )
@@ -94,7 +94,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			. $this->msg( 'wikibase-itembytitle-description' )->text()
 			. Html::closeElement( 'div' )
 		);
-		if ( $validSite && isset( $page ) ) {
+		if ( $siteExists && isset( $page ) ) {
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
 				. $this->msg( 'wikibase-itembytitle-create' )
