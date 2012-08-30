@@ -10,7 +10,7 @@ require 'ruby_selenium'
 
 class ClientPage < RubySelenium
   include PageObject
-  page_url WIKI_CLIENT_URL + "index.php"
+  page_url WIKI_CLIENT_URL
 
   #
   text_field(:clientSearchInput, :id => "searchInput")
@@ -47,7 +47,7 @@ class ClientPage < RubySelenium
     if purge
       param_purge = "?action=purge"
     end
-    navigate_to WIKI_CLIENT_URL + "index.php/" + title + param_purge
+    navigate_to WIKI_CLIENT_URL + title + param_purge
     if clientPurgeSubmit?
       clientPurgeSubmit
     end

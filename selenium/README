@@ -25,7 +25,7 @@ set configuration parameters to your needs before running the tests!
 == Running the tests on your local machine ==
 
 * In configuration.yml set the WIKI_REPO_URL to point to your local MW instance you want to test and
-  WIKI_CLIENT_URL to the connected client wiki
+  WIKI_CLIENT_URL to the connected client wiki **!!don't forget a slash in the end!!**
 * From your command line, run "rake run_tests[<taskname>,<browser>]" in the selenium directory,
   whereas <taskname> specifies the task to run, e.g. default (for all tests) or "label" for just the label tests,
   and <browser> specifies the browser you want to use for the tests, e.g. "firefox" || "chrome" || "ie".
@@ -42,7 +42,7 @@ set configuration parameters to your needs before running the tests!
 == Running the tests remotely via Selenium Grid2 ==
 
 * In configuration.yml set the WIKI_REPO_URL to point to the remote MW instance you want to test and
-  WIKI_CLIENT_URL to the connected client wiki
+  WIKI_CLIENT_URL to the connected client wiki **!!don't forget a slash in the end!!**
 * Set REMOTE_SELENIUM_HUB to point to the Selenium Hub instance
 * From your command line, run rake[browser,remote] in the selnium directory
   (where "browser" specifies the browser you want to use for the tests, e.g. "firefox")

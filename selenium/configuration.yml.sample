@@ -1,7 +1,7 @@
  DEFAULT_BROWSER: "firefox"
  SUPPORTED_BROWSERS: ["firefox", "chrome", "ie"]
- WIKI_REPO_URL: "http://localhost/wikidata-repo/"
- WIKI_CLIENT_URL: "http://localhost/wikidata-client/"
+ WIKI_REPO_URL: "http://localhost/wikidata-repo/index.php/"
+ WIKI_CLIENT_URL: "http://localhost/wikidata-client/index.php/"
  WIKI_USELANG: "en"
  WIKI_SKIN: "vector" # "vector" "monobook"
  WIKI_ADMIN_USERNAME: "Username"
