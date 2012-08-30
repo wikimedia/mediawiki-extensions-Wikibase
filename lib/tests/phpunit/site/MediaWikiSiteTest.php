@@ -58,7 +58,7 @@ class MediaWikiSiteTest extends MediaWikiTestCase {
 		$this->assertEquals( 'Foo', $site->normalizePageName( ' foo ' ) );
 	}
 
-	public function pathProvider() {
+	public function fileUrlProvider() {
 		return array(
 			// url, filepath, path arg, expected
 			array( 'https://en.wikipedia.org', '/w/$1', 'api.php', 'https://en.wikipedia.org/w/api.php' ),
@@ -70,15 +70,15 @@ class MediaWikiSiteTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider pathProvider
+	 * @dataProvider fileUrlProvider
 	 */
-	public function testGetPath( $url, $filePath, $pathArgument, $expected ) {
+	public function testGetFileUrl( $url, $filePath, $pathArgument, $expected ) {
 		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
 
 		$site->setUrl( $url );
 		$site->setRelativeFilePath( $filePath );
 
-		$this->assertEquals( $expected, $site->getFilePath( $pathArgument ) );
+		$this->assertEquals( $expected, $site->getFileUrl( $pathArgument ) );
 	}
 
 	public function pageUrlProvider() {
@@ -88,21 +88,22 @@ class MediaWikiSiteTest extends MediaWikiTestCase {
 			array( 'https://en.wikipedia.org', '/wiki/', 'Berlin', 'https://en.wikipedia.org/wiki/' ),
 			array( 'https://en.wikipedia.org', '/wiki/page.php?name=$1', 'Berlin', 'https://en.wikipedia.org/wiki/page.php?name=Berlin' ),
 			array( 'https://en.wikipedia.org', '/wiki/$1', '', 'https://en.wikipedia.org/wiki/' ),
-			array( 'https://en.wikipedia.org', '/wiki/$1', 'Berlin/sub page', 'https://en.wikipedia.org/wiki/Berlin%2Fsub%20page' ),
-			array( 'https://en.wikipedia.org', '/wiki/$1', 'Cork (city)', 'https://en.wikipedia.org/wiki/Cork%20%28city%29' ),
+			array( 'https://en.wikipedia.org', '/wiki/$1', 'Berlin/sub page', 'https://en.wikipedia.org/wiki/Berlin/sub_page' ),
+			array( 'https://en.wikipedia.org', '/wiki/$1', 'Cork (city)   ', 'https://en.wikipedia.org/wiki/Cork_(city)' ),
+			array( 'https://en.wikipedia.org', '/wiki/$1', 'M&M', 'https://en.wikipedia.org/wiki/M%26M' ),
 		);
 	}
 
 	/**
 	 * @dataProvider pageUrlProvider
 	 */
-	public function testGetPagePath( $url, $urlPath, $pageName, $expected ) {
+	public function testGetPageUrl( $url, $urlPath, $pageName, $expected ) {
 		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
 
 		$site->setUrl( $url );
 		$site->setRelativePagePath( $urlPath );
 
-		$this->assertEquals( $expected, $site->getPagePath( $pageName ) );
+		$this->assertEquals( $expected, $site->getPageUrl( $pageName ) );
 	}
 
 }

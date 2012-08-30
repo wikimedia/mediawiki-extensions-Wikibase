@@ -30,6 +30,19 @@ class MediaWikiSite extends SiteObject {
 	}
 
 	/**
+	 * Returns the database form of the given title.
+	 *
+	 * @since 0.1
+	 *
+	 * @param String $title the target page's title, in normalized form.
+	 *
+	 * @return String
+	 */
+	public function toDBKey( $title ) {
+		return str_replace( ' ', '_', $title );
+	}
+
+	/**
 	 * Returns the normalized form of the given page title, using the normalization rules of the given site.
 	 * If the given title is a redirect, the redirect weill be resolved and the redirect target is returned.
 	 *
@@ -65,7 +78,7 @@ class MediaWikiSite extends SiteObject {
 			$t = Title::newFromText( $pageName );
 			$ret = "{ \"query\" : { \"pages\" : { \"1\" : { \"title\" : " . FormatJson::encode( $t->getPrefixedText() ) . " } } } }";
 		} else {
-			$url = $this->getFilePath( 'api.php' ) . '?' . wfArrayToCgi( $args );
+			$url = $this->getFileUrl( 'api.php' ) . '?' . wfArrayToCgi( $args );
 
 			// Go on call the external site
 			$ret = Http::get( $url, Settings::get( 'clientTimeout' ), Settings::get( 'clientPageOpts' ) );
@@ -200,17 +213,6 @@ class MediaWikiSite extends SiteObject {
 	}
 
 	/**
-	 * Returns the base URL, ie http://www.wikidata.org
-	 *
-	 * @since 1.20
-	 *
-	 * @return string
-	 */
-	public function getUrl() {
-		return $this->getExtraData( 'url', '' );
-	}
-
-	/**
 	 * Sets the base URL.
 	 *
 	 * @since 1.20
@@ -258,11 +260,12 @@ class MediaWikiSite extends SiteObject {
 	 *
 	 * @return string
 	 */
-	public function getPagePath( $pageName = false ) {
-		$pagePath = $this->getUrl() . $this->getRelativePagePath();
+	public function getPageUrl( $pageName = false ) {
+		$pagePath = $this->getBaseUrl() . $this->getRelativePagePath();
 
 		if ( $pageName !== false ) {
-			$pagePath = str_replace( '$1', rawurlencode( $pageName ), $pagePath );
+			$pageName = $this->toDBKey( trim( $pageName ) );
+			$pagePath = str_replace( '$1', wfUrlencode( $pageName ), $pagePath );
 		}
 
 		return $pagePath;
@@ -279,8 +282,8 @@ class MediaWikiSite extends SiteObject {
 	 *
 	 * @return string
 	 */
-	public function getFilePath( $path = false ) {
-		$filePath = $this->getUrl() . $this->getRelativeFilePath();
+	public function getFileUrl( $path = false ) {
+		$filePath = $this->getBaseUrl() . $this->getRelativeFilePath();
 
 		if ( $filePath !== false ) {
 			$filePath = str_replace( '$1', $path, $filePath );

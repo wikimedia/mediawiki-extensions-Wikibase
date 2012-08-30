@@ -237,7 +237,7 @@ class ItemView extends \ContextSource {
 
 					$html .= Html::element(
 						'a',
-						array( 'href' => $link->getSite()->getDomain() ),
+						array( 'href' => $link->getUrl() ),
 						$link->getPage()
 					);
 					$html .= Html::closeElement( 'td' );

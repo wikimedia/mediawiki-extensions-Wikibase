@@ -188,7 +188,7 @@ abstract class Api extends \ApiBase {
 						//skip
 					} elseif ( $opt === 'url' ) {
 						//include full url in the result
-						$response['url'] = $link->getSite()->getDomain();
+						$response['url'] = $link->getUrl();
 					} else {
 						//include some flag in the result
 						$response[$opt] = '';

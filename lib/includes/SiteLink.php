@@ -98,17 +98,6 @@ class SiteLink {
 	}
 
 	/**
-	 * Returns the database form of the target page's title, to be used in MediaWiki URLs.
-	 *
-	 * @since 0.1
-	 *
-	 * @return String
-	 */
-	public function getDBKey() {
-		return self::toDBKey( $this->page );
-	}
-
-	/**
 	 * Returns the target site's Site object
 	 *
 	 * @since 0.1
@@ -120,6 +109,17 @@ class SiteLink {
 	}
 
 	/**
+	 * Returns the target's full URL
+	 *
+	 * @since 0.1
+	 *
+	 * @return string The URL
+	 */
+	public function getUrl() {
+		return $this->site->getPageUrl( $this->getPage() );
+	}
+
+	/**
 	 * Returns a string representation of this site link
 	 *
 	 * @since 0.1
@@ -127,20 +127,7 @@ class SiteLink {
 	 * @return string
 	 */
 	public function __toString() {
-		return $this->getSite()->getGlobalId() . ':' . $this->getDBKey();
-	}
-
-	/**
-	 * Returns the database form of the given title.
-	 *
-	 * @since 0.1
-	 *
-	 * @param String $title the target page's title, in normalized form.
-	 *
-	 * @return String
-	 */
-	public static function toDBKey( $title ) {
-		return str_replace( ' ', '_', $title );
+		return '[[' . $this->getSite()->getGlobalId() . ':' . $this->getPage() . ']]';
 	}
 
 	/**

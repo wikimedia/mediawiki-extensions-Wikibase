@@ -132,6 +132,15 @@ interface Site {
 	public function getDomain();
 
 	/**
+	 * Returns the full URL for the given page on that site.
+	 *
+	 * @param bool|String $page
+	 *
+	 * @return String The URL
+	 */
+	public function getPageUrl( $page = false );
+
+	/**
 	 * Returns language code of the sites primary language.
 	 * Or false if it's not known.
 	 *
@@ -155,6 +164,9 @@ interface Site {
 	 * How normalization is performed or what the properties of a normalized name are depends on the site.
 	 * The general contract of this method is that the normalized form shall refer to the same content
 	 * as the original form, and any other page name referring to the same content will have the same normalized form.
+	 *
+	 * Note that this method may call out to the target site to perform the normalization, so it may be slow
+	 * and fail due to IO errors.
 	 *
 	 * @since 1.20
 	 *

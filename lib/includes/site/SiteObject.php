@@ -156,6 +156,34 @@ class SiteObject extends ORMRow implements Site {
 	}
 
 	/**
+	 * Returns the base URL, ie http://www.wikidata.org
+	 *
+	 * @since 1.20
+	 *
+	 * @return string
+	 */
+	public function getBaseUrl() {
+		return $this->getProtocol() . $this->getDomain();
+	}
+
+	/**
+	 * Returns the full URL for the given page on that site.
+	 *
+	 * @param bool|String $pageName
+	 *
+	 * @return String The URL
+	 */
+	public function getPageUrl( $pageName = false ) {
+		$pagePath = $this->getBaseUrl();
+
+		if ( $pageName !== false ) {
+			$pagePath .= rawurlencode( $pageName );
+		}
+
+		return $pagePath;
+	}
+
+	/**
 	 * Returns $pageName without changes.
 	 * Subclasses may override this to apply some kind of normalization.
 	 *
@@ -353,5 +381,4 @@ class SiteObject extends ORMRow implements Site {
 	public function setInternalId( $id ) {
 		$this->setId( $id );
 	}
-
 }
