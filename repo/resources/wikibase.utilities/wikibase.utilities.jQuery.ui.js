@@ -54,56 +54,52 @@ window.wikibase.utilities.jQuery.ui = window.wikibase.utilities.jQuery.ui || {};
  * @version 0.1
  */
 ( function( $, undefined ) {
+
+	var initialized = false;
+
 	$.fn.eachchange = function( fn ) {
-		var monitoredInputs = $();
-
-		var isMonitoredInput = function( input ) {
-			return $.inArray( input, monitoredInputs ) >= 0;
-		};
-
-		var monitorEachChange = function( input ) {
-			if( isMonitoredInput( input ) ) {
-				return; // don't monitor stuff twice!
-			}
-
-			// remember, we are monitoring this from now on!
-			monitoredInputs.push( input );
-
-			var oldVal = input.val(); // old val to compare new one with
-			input
-			.on( 'keyup keydown mouseout blur paste mouseup', function( e ) {
-				/*
-				 * NOTE: we use 'keyup' here as well, so when holding backspace the thing still gets triggered. Also,
-				 *       for some reason in some browsers 'keydown' isn't triggered when typing fast, 'keyup' always is.
-				 * @TODO: Take care of context related changes via mouse (paste, drag, delete) and DOM
-				 *        blur is used so at least after these changes when leaving the field, something happens,
-				 *        mouseout works when dragging stuff in.
-				 *        paste and mouseup only work for IE in the context menu
-				 */
-				// compare old value with new value and trigger 'eachchange' if it differs
-				var newVal = input.val();
-				if( oldVal !== newVal ) {
-					input.trigger( 'eachchange', oldVal );
-					oldVal = input.val();
-				}
-			} )
-			.on( 'keydown', function( e ) {
-				// store value before key evaluated to make comparison afterwards
-				oldVal = input.val();
-			} );
-		};
-
 		// works for text input fields only:
-		this.filter( 'input:text' ).each( function() {
-			var input = $( this );
-
-			monitorEachChange( input );
-
-			if( fn !== undefined ) {
-				input.on( 'eachchange', fn );
-			}
-		} );
-
+		if( fn !== undefined ) {
+			this.filter( 'input:text' ).each( function() {
+				$( this ).on( 'eachchange', fn );
+			} );
+		}
 		return this; // return jQuery object
 	};
+
+	// remember old value for all inputs initially:
+	$( 'input' ).each( function() {
+		$( this ).data( 'eachchange.oldVal', $( this ).val() );
+	} );
+
+	// delegate all input events to figure out 'eachchange':
+	$( 'body' )
+	.on( 'keyup keydown mouseout blur paste mouseup', 'input', function( event ) {
+		var input = $( event.target ),
+			oldVal = input.data( 'eachchange.oldVal' ),
+			newVal = input.val();
+
+		/*
+		 * NOTE: we use 'keyup' here as well, so when holding backspace the thing still gets triggered. Also,
+		 *       for some reason in some browsers 'keydown' isn't triggered when typing fast, 'keyup' always is.
+		 * @TODO: Take care of context related changes via mouse (paste, drag, delete) and DOM
+		 *        blur is used so at least after these changes when leaving the field, something happens,
+		 *        mouseout works when dragging stuff in.
+		 *        paste and mouseup only work for IE in the context menu
+		 */
+		// compare old value with new value and trigger 'eachchange' if it differs
+		if( oldVal !== newVal ) {
+			// trigger 'eachchange' event on original input element
+			input.trigger( 'eachchange', oldVal );
+
+			// remember new value for next change
+			input.data( 'eachchange.oldVal', input.val() );
+		}
+	} )
+	.on( 'keydown', 'input', function( event ) {
+		var input = $( event.target );
+		// store value before key evaluated to make comparison afterwards
+		input.data( 'eachchange.oldVal', input.val() );
+	} );
+
 } )( jQuery );
