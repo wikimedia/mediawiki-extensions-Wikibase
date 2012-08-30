@@ -323,6 +323,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
+		var startTime = new Date().getTime();
+
 		if( this.isInEditMode() ) {
 			return false;
 		}
@@ -342,6 +344,8 @@ window.wikibase.ui.PropertyEditTool.EditableValue.prototype = {
 			$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
 		}
 
+		// give hint how long this took:
+		mw.log( 'startEditing(): ' + ( ( new Date().getTime() ) - startTime ) / 1000 + 's' );
 		return true;
 	},
 
