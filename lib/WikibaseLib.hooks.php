@@ -30,17 +30,6 @@ final class LibHooks {
 		$settings = array_merge(
 			$settings,
 			array(
-				'clientPageArgs' => array(
-					'action' => 'query',
-					'prop' => 'info',
-					'redirects' => true,
-					'converttitles' => true,
-					'format' => 'json',
-					//TODO: This should REALLY be handled somehow as without it we could run into lots of trouble
-					//'maxage' => 5, // filter down repeated clicks, don't let clicky folks loose to fast
-					//'smaxage' => 15, // give the proxy some time, don't let clicky folks loose to fast
-					//'maxlag' => 100, // time to wait on a lagging server, hanging on for 100 sec is very aggressive
-				),
 				'changeHandlers' => array(
 					'wikibase-item~add' => 'Wikibase\EntityCreation',
 					'wikibase-property~add' => 'Wikibase\EntityCreation',
