@@ -127,7 +127,15 @@
 			// firebug to show hidden nodes again to click on them:
 			$( wikibase ).triggerHandler( 'restrictItemPageActions' );
 		}
-
+        var siteList = new Array();
+        for ( var siteId in window.wikibase.getSites() ) {
+            var site = wikibase.getSite( siteId );
+                siteList.push( {
+                    'label': site.getName() + ' (' + site.getId() + ')',
+                    'value': site.getId()
+                } );
+        };
+        $('#languagename').wikibaseAutocomplete( { "source": siteList } );
 	} );
 
 } )( jQuery, mediaWiki, wikibase );
