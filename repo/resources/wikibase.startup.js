@@ -128,6 +128,19 @@
 			$( wikibase ).triggerHandler( 'restrictItemPageActions' );
 		}
 
+		// TODO: The following is for Special:ItemDisambiguation only and should move at some point
+        if ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'ItemDisambiguation' ) {
+			// this will build a drop-down for the language selection:
+            var siteList = new Array();
+            for ( var siteId in wb.getSites() ) {
+                var site = wb.getSite( siteId );
+                siteList.push( {
+                    'label': site.getName() + ' (' + site.getId() + ')',
+                    'value': site.getId()
+                } );
+            };
+            $( '#languagename' ).wikibaseAutocomplete( { "source": siteList } );
+        }
 	} );
 
 } )( jQuery, mediaWiki, wikibase );
