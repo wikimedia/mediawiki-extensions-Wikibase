@@ -32,7 +32,7 @@ $specialPageAliases['ar'] = array(
 $specialPageAliases['de'] = array(
 	'CreateItem' => array( 'Datenelement_erstellen' ),
 	'ItemByTitle' => array( 'Datenelement_nach_Name' ),
-	'ItemDisambiguation' => array( 'Datenelement_nach_Bezeichnung' ),
+	'ItemDisambiguation' => array( 'Begriffsklärung_zu_Datenelement' ),
 );
 
 /** Zazaki (Zazaki) */
