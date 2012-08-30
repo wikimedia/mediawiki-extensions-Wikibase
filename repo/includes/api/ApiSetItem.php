@@ -8,7 +8,7 @@ use ApiBase, User;
  *
  * @since 0.1
  *
- * @file
+ * @file ApiWikibaseModifyItem.php
  * @ingroup Wikibase
  * @ingroup API
  *
@@ -255,6 +255,9 @@ class ApiSetItem extends ApiModifyItem {
 			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
 			array( 'code' => 'add-sitelink-failed', 'info' => $this->msg( 'wikibase-api-add-sitelink-failed' )->text() ),
 			array( 'code' => 'illegal-field', 'info' => $this->msg( 'wikibase-api-illegal-field' )->text() ),
+			array( 'code' => 'not-recognized', 'info' => $this->msg( 'wikibase-api-not-recognized' )->text() ),
+			array( 'code' => 'not-recognized-string', 'info' => $this->msg( 'wikibase-api-not-recognized-string' )->text() ),
+			array( 'code' => 'not-recognized-array', 'info' => $this->msg( 'wikibase-api-not-recognized-array' )->text() ),
 		) );
 	}
 
@@ -288,8 +291,8 @@ class ApiSetItem extends ApiModifyItem {
 				ApiBase::PARAM_TYPE => 'string',
 			),
 			'exclude' => array(
-				ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
-				ApiBase::PARAM_DFLT => '', // per default, all fields are processed
+				ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'touched', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
+				ApiBase::PARAM_DFLT => '',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'clear' => array(
