@@ -39,7 +39,7 @@ class ItemObject extends EntityObject implements Item {
 	 * @return array|false Returns array on success, or false on failure
 	 */
 	public function addSiteLink( SiteLink $link, $updateType = 'add' ) {
-		$siteId = $link->getSiteID();
+		$siteId = $link->getGlobalID();
 
 		$success =
 			( $updateType === 'add' && !array_key_exists( $siteId, $this->data['links'] ) )

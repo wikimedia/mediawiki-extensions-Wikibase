@@ -114,7 +114,7 @@ class SiteLink {
 	 *
 	 * @return String
 	 */
-	public function getSiteID() {
+	public function getGlobalID() {
 		return $this->site->getGlobalId();
 	}
 
@@ -130,25 +130,6 @@ class SiteLink {
 	}
 
 	/**
-	 * Returns the target pages's full URL.
-	 * Note that depending on the SiteTable, the resulting URL may be protocol relative (i.e. start with //).
-	 *
-	 * @since 0.1
-	 *
-	 * @return String|bool The URL of the page, or false if the target site is not known to the Sites class.
-	 */
-	public function getUrl() { // FIXME
-		if ( $this->site->getUrl() === null
-			|| $this->site->getUrl() === false
-			|| $this->site->getUrl() === '' ) {
-
-			return false;
-		}
-
-		return $this->site->getPagePath( $this->getDBKey() );
-	}
-
-	/**
 	 * Returns a string representation of this site link
 	 *
 	 * @since 0.1
@@ -156,7 +137,7 @@ class SiteLink {
 	 * @return string
 	 */
 	public function __toString() {
-		return $this->getSiteID() . ':' . $this->getDBKey();
+		return $this->getGlobalID() . ':' . $this->getDBKey();
 	}
 
 	/**
@@ -187,7 +168,7 @@ class SiteLink {
 		 * @var SiteLink $link
 		 */
 		foreach ( $siteLinks as $link ) {
-			$siteIds[] = $link->getSiteID();
+			$siteIds[] = $link->getGlobalID();
 		}
 
 		return array_unique( $siteIds );
@@ -208,7 +189,7 @@ class SiteLink {
 		 * @var SiteLink $link
 		 */
 		foreach ( $baseLinks as $link ) {
-			$links[ $link->getSiteID() ] = $link->getPage();
+			$links[ $link->getGlobalID() ] = $link->getPage();
 		}
 
 		return $links;

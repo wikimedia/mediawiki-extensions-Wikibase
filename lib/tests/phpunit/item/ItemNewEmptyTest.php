@@ -141,7 +141,7 @@ class ItemNewEmptyTest extends \MediaWikiTestCase {
 		);
 
 		foreach ( $arr as $link ) {
-			$this->item->removeSiteLink( $link->getSiteID() );
+			$this->item->removeSiteLink( $link->getGlobalID() );
 		}
 
 		$this->assertCount(
