@@ -42,26 +42,25 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 		.css() function would return unexpected results
 		*/
 		var self = this;
-		$.each( this._getTagadata().tagList.children( 'li' ).find( 'input' ), function( i, input ) {
-			if ( $( input ).inputAutoExpand ) {
-				$( input ).inputAutoExpand( {
-					expandOnResize: false,
-					maxWidth: 1000
-					/* // TODO/FIXME: both solutions are not perfect, when tag larger than available space either the
-					   // input will be auto-resized and not show the whole text or we still show the whole tag but it
-					   // will break the site layout. A solution would be replacing input with textarea.
-					maxWidth: function() {
-						var tagList = self._getTagadata().tagList;
-						var origCssDisplay = tagList.css( 'display' );
-						tagList.css( 'display', 'block' );
-						var width = tagList.width();
-						tagList.css( 'display', origCssDisplay );
-						return width;
-					}
-					*/
-				} );
-			}
-		} );
+		if ( $.fn.inputAutoExpand ) {
+			// calculate size for all input elements initially:
+			this._getTagadata().tagList.children( 'li' ).find( 'input' ).inputAutoExpand( {
+				expandOnResize: false,
+				maxWidth: 1000
+				/* // TODO/FIXME: both solutions are not perfect, when tag larger than available space either the
+				   // input will be auto-resized and not show the whole text or we still show the whole tag but it
+				   // will break the site layout. A solution would be replacing input with textarea.
+				maxWidth: function() {
+					var tagList = self._getTagadata().tagList;
+					var origCssDisplay = tagList.css( 'display' );
+					tagList.css( 'display', 'block' );
+					var width = tagList.width();
+					tagList.css( 'display', origCssDisplay );
+					return width;
+				}
+				*/
+			} );
+		}
 	},
 
 	/**
