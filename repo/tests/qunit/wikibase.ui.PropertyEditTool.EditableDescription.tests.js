@@ -20,7 +20,7 @@
 			var propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
 			this.subject = new window.wikibase.ui.PropertyEditTool.EditableDescription;
 			var toolbar = propertyEditTool._buildSingleValueToolbar( this.subject );
-			this.subject._init( node, toolbar );
+			this.subject.init( node, toolbar );
 
 			ok(
 				this.subject instanceof window.wikibase.ui.PropertyEditTool.EditableDescription,

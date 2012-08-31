@@ -1,8 +1,7 @@
 /**
- * JavaScript for toolbars for 'Wikibase' property editing.
+ * JavaScript for toolbars used in 'Wikibase' extensions.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -11,16 +10,19 @@
  * @author H. Snater
  * @author Tobias Gritschacher
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
 
 /**
  * Gives basic edit toolbar functionality, serves the "[edit]" button as well as the "[cancel|save]"
  * buttons and other related stuff.
+ * @constructor
+ * @since 0.1
  */
-window.wikibase.ui.Toolbar = function( uiClass ) {
-	this._init( uiClass );
+wb.ui.Toolbar = function( uiClass ) {
+	this.init( uiClass );
 };
-window.wikibase.ui.Toolbar.prototype = {
+wb.ui.Toolbar.prototype = {
 	/**
 	 * @const
 	 * Class which marks the element within the site html.
@@ -60,7 +62,7 @@ window.wikibase.ui.Toolbar.prototype = {
 	 * Initializes the edit toolbar for the given element.
 	 * This should normally be called directly by the constructor.
 	 */
-	_init: function( uiClass ) {
+	init: function( uiClass ) {
 		if( this._elem !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
@@ -139,7 +141,7 @@ window.wikibase.ui.Toolbar.prototype = {
 	 * @param index where to add the element (use negative values to specify the position from the end).
 	 */
 	addElement: function( elem, index ) {
-		if( typeof index == 'undefined' ) {
+		if( index === undefined ) {
 			// add elem as last one
 			this._items.push( elem );
 		} else {
@@ -334,3 +336,5 @@ window.wikibase.ui.Toolbar.prototype = {
 	 */
 	renderItemSeparators: false
 };
+
+} )( mediaWiki, wikibase, jQuery );

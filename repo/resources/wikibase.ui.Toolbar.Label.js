@@ -2,7 +2,6 @@
  * JavaScript for 'Wikibase' property edit tool toolbar label
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -10,19 +9,20 @@
  * @author Daniel Werner
  * @author H. Snater
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
 
 /**
  * Represents a label within a wikibase.ui.Toolbar toolbar
- *
- * @param string|jQuery content
+ * @constructor
+ * @since 0.1
  */
-window.wikibase.ui.Toolbar.Label = function( content ) {
-	if( typeof content != 'undefined' ) {
-		this._init( content );
+wb.ui.Toolbar.Label = function( content ) {
+	if( content !== undefined ) {
+		this.init( content );
 	}
 };
-window.wikibase.ui.Toolbar.Label.prototype = {
+wb.ui.Toolbar.Label.prototype = {
 	/**
 	 * @const
 	 * Class which marks the ui element within the site html.
@@ -41,7 +41,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	 *
 	 * @param string|jQuery content
 	 */
-	_init: function( content ) {
+	init: function( content ) {
 		if( this._parent !== null ) {
 			// initializing twice should never happen, have to destroy first!
 			this.destroy();
@@ -120,7 +120,7 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 		if ( !this.stateChangeable ) { // state is not supposed to change, no need to do anything
 			return true;
 		}
-		if( typeof disable == 'undefined' ) {
+		if( disable === undefined ) {
 			disable = true;
 		}
 		if( this.isDisabled() == disable ) {
@@ -212,4 +212,6 @@ window.wikibase.ui.Toolbar.Label.prototype = {
 	beforeEnable: null
 };
 
-$.extend( window.wikibase.ui.Toolbar.Label.prototype, window.wikibase.ui.Tooltip.ext );
+$.extend( wb.ui.Toolbar.Label.prototype, wb.ui.Tooltip.ext );
+
+} )( mediaWiki, wikibase, jQuery );

@@ -21,7 +21,7 @@
 			this.editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue();
 
 			var toolbar = this.propertyEditTool._buildSingleValueToolbar( this.editableValue );
-			this.editableValue._init( node, toolbar );
+			this.editableValue.init( node, toolbar );
 			this.strings = {
 				valid: [ 'test', 'test 2' ],
 				invalid: [ '' ]
