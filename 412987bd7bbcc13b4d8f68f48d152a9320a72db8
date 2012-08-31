@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARn///Ag\u003d",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-08-31T09:46:47Z",
+      "side": 1,
+      "message": "Yes, there is room for refactoring. However, I don\u0027t see this as a priority now. I will update the TODO comment, though.",
+      "parentUuid": "AAAARn///Ho\u003d",
+      "revId": "412987bd7bbcc13b4d8f68f48d152a9320a72db8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARn///Hk\u003d",
         "filename": "repo/resources/wikibase.startup.js",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAAARn///Ao\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-08-31T09:46:47Z",
+      "side": 1,
+      "message": "Yes, we could do a refactoring, but then again, currently this place is as good as everywhere else. I\u0027d rather leave it here and not waste too much time on a rather minor issue.",
+      "parentUuid": "AAAARn///Hk\u003d",
+      "revId": "412987bd7bbcc13b4d8f68f48d152a9320a72db8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARn///IA\u003d",
         "filename": "repo/resources/wikibase.startup.js",
         "patchSetId": 5
@@ -47,6 +83,24 @@
       "writtenOn": "2012-08-30T23:24:14Z",
       "side": 1,
       "message": "wb.getSites() ^^vv",
+      "revId": "412987bd7bbcc13b4d8f68f48d152a9320a72db8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARn///Ak\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-08-31T09:46:47Z",
+      "side": 1,
+      "message": "Will upload new patch set to fix this.",
+      "parentUuid": "AAAARn///IA\u003d",
       "revId": "412987bd7bbcc13b4d8f68f48d152a9320a72db8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
