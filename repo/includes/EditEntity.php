@@ -435,11 +435,17 @@ class EditEntity {
 		if ( $userId === false ) {
 			return false;
 		}
+		else {
+			$user = \User::newFromId( $userId );
+			if ( !isset( $user ) ) {
+				return false;
+			}
+		}
 
 		// If the title is missing then skip all further test and give false.
 		// There must be a title so we can get an article id
 		$title = $revision->getTitle();
-		if ( !isset( $title ) ) {
+		if ( $title === null ) {
 			return false;
 		}
 
@@ -450,16 +456,16 @@ class EditEntity {
 			array(
 				'rev_page' => $title->getArticleID(),
 				'rev_id > ' . intval( $lastRevId )
+					. ' OR rev_timestamp > ' . $dbw->addQuotes( $revision->getTimestamp() ),
+				'rev_user != ' . intval( $userId )
+					. ' OR rev_user_text != ' . $dbw->addQuotes( $user->getName() ),
 			),
 			__METHOD__,
-			array( 'ORDER BY' => 'rev_id ASC', 'LIMIT' => 50 ) );
+			array( 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 ) );
+		// Traversable, not countable ;/
 		foreach ( $res as $row ) {
-			if ( $row->rev_user != $userId ) {
-				return false;
-			}
+			return false;
 		}
-
-		// If we're here there was no intervening edits from someone else
 		return true;
 	}
 
