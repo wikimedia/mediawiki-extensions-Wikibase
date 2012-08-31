@@ -79,11 +79,15 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				. Html::closeElement( 'div' )
 			);
 		}
+		$sites = \Wikibase\ItemView::getSiteDetails();
+		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites );
+		$this->getOutput()->addModules( 'wikibase.ui.PropertyEditTool' );
+
 		$this->getOutput()->addHTML(
 			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itembytitle', 'id' => 'mw-itembytitle-form1' ) )
 			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
 			. Xml::fieldset( $this->msg( 'wikibase-itembytitle-lookup-fieldset' )->text() )
-			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-site' )->text(), 'site', 'sitename', 12, $siteId ? htmlspecialchars( $siteId ) : '' )
+			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-site' )->text(), 'site', 'wb-itembytitle-sitename', 12, $siteId ? htmlspecialchars( $siteId ) : '' )
 			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-page' )->text(), 'page', 'pagename', 36, $page ? htmlspecialchars( $page ) : '' )
 			. Xml::submitButton( $this->msg( 'wikibase-itembytitle-submit' )->text() )
 			. Html::closeElement( 'fieldset' )

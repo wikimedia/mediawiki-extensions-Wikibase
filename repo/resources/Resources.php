@@ -48,7 +48,8 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
 			),
 			'dependencies' => array(
-				'wikibase'
+				'wikibase',
+				'jquery.ui.autocomplete'
 			)
 		),
 
