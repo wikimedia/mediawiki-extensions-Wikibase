@@ -111,6 +111,7 @@ class ItemPage < RubySelenium
     @@item_id = @@item_url[@@item_url.index('Data:Q')+6..-1]
     navigate_to_item
     wait_for_item_to_load
+    return @@item_id
   end
 
   def wait_for_new_item_creation
