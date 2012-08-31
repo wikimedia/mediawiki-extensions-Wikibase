@@ -72,7 +72,8 @@ wb.ui.PropertyEditTool.EditableLabel = wb.utilities.inherit( $PARENT, {
 		} else {
 			return $.extend( params, {
 				action: "wbsetlabel",
-				value: this.getValue().toString()
+				value: this.getValue().toString(),
+				baserevid: mw.config.get( 'wgCurRevisionId' )
 			} );
 		}
 	}

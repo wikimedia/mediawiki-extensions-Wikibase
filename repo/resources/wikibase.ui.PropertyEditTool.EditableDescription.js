@@ -65,7 +65,8 @@ wb.ui.PropertyEditTool.EditableDescription = wb.utilities.inherit( $PARENT, {
 		} else {
 			return $.extend( params, {
 				action: 'wbsetdescription',
-				value: this.getValue().toString()
+				value: this.getValue().toString(),
+				baserevid: mw.config.get( 'wgCurRevisionId' )
 			} );
 		}
 	}

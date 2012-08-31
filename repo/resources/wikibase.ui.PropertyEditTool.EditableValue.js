@@ -91,7 +91,9 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 		'cant-edit': 'wikibase-error-ui-cant-edit',
 		'no-permissions': 'wikibase-error-ui-no-permissions',
 		'link-exists': 'wikibase-error-ui-link-exists',
-		'session-failure': 'wikibase-error-ui-session-failure'
+		'session-failure': 'wikibase-error-ui-session-failure',
+		'edit-conflict': 'wikibase-error-ui-edit-conflict',
+		'patch-incomplete': 'wikibase-error-ui-edit-conflict'
 	},
 
 	/**
