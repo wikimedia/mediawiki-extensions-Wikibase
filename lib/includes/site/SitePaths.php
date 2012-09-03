@@ -39,7 +39,7 @@ interface SitePaths {
 	public function setPath( $pathType, $fullUrl );
 
 	/**
-	 * Returns the path of the provided type or false is there is no such path.
+	 * Returns the path of the provided type or false if there is no such path.
 	 *
 	 * @since 1.20
 	 *

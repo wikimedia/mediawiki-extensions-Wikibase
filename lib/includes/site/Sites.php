@@ -73,7 +73,7 @@ class Sites {
 		/**
 		 * @var Site $site
 		 */
-		$site = SitesTable::singleton()->newRow( array() );
+		$site = SitesTable::singleton()->newRow( array(), true );
 
 		if ( $globalId !== false ) {
 			$site->setGlobalId( $globalId );

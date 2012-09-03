@@ -26,7 +26,7 @@ class MediaWikiSite extends SiteObject {
 		return SitesTable::singleton()->newRow( array(
 			'type' => Site::TYPE_MEDIAWIKI,
 			'global_key' => $globalId,
-		) );
+		), true );
 	}
 
 	/**
