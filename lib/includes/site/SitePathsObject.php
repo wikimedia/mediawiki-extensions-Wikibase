@@ -28,6 +28,11 @@
  */
 class SitePathsObject implements SitePaths {
 
+	/**
+	 * @since 1.20
+	 *
+	 * @var array
+	 */
 	protected $paths;
 
 	/**
