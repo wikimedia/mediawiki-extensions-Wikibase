@@ -42,8 +42,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	 */
 	protected function getSite() {
 		$site = \MediaWikiSite::newFromGlobalId( 'enwiki' );
-		$site->setUrl( 'https://en.wikipedia.org/' );
-		$site->setRelativePagePath( 'wiki/$1' );
+		$site->setPagePath( 'https://en.wikipedia.org/wiki/$1' );
 
 		return $site;
 	}
