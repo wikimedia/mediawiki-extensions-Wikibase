@@ -394,7 +394,7 @@ class ItemView extends \ContextSource {
 	 * @static
 	 * @return array
 	 */
-	protected static function getSiteDetails() {
+	public static function getSiteDetails() {
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
 
