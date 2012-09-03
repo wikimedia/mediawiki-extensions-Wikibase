@@ -18,7 +18,7 @@ class NoLangLinkHandler {
 
 	/**
 	 * Register the parser function.
-	 * @param $parser Parser
+	 * @param $parser \Parser
 	 * @return bool
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
@@ -47,7 +47,7 @@ class NoLangLinkHandler {
 
 	/**
 	 * Actual parser function.
-	 * @param $parser Parser
+	 * @param $parser \Parser
 	 * @return string
 	 */
 	public static function noExternalInterlang( &$parser ) {

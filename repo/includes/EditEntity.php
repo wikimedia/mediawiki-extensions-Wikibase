@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use \Wikibase\Entity as Entity;
-use Status;
+use Status, User, Revision;
 
 /**
  * Parts of the edit interface for entities..
@@ -52,13 +52,7 @@ class EditEntity {
 
 	/**
 	 * @since 0.1
-	 * @var Empty
-	 */
-	protected $mEmpty = null;
-
-	/**
-	 * @since 0.1
-	 * @var Empty
+	 * @var boolean|null
 	 */
 	protected $mUserWasLastToEdit = null;
 
@@ -213,7 +207,7 @@ class EditEntity {
 	 * 
 	 * @since 0.1
 	 * 
-	 * @return null|Diff the entity or null if not yet available
+	 * @return null|\Diff the entity or null if not yet available
 	 */
 	public function isSuccess() {
 		if ( $this->mUserWasLastToEdit === true ) {

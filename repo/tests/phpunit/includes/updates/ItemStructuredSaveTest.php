@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 use \Wikibase\ItemStructuredSave as ItemStructuredSave;
 use \Wikibase\ItemContent as ItemContent;
-use \Wikibase\Sites as Sites;
 
 /**
  *  Tests for the Wikibase\ItemStructuredSave class.

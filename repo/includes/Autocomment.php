@@ -26,7 +26,7 @@ final class Autocomment {
 	 * @param string $pre the string before the autocomment
 	 * @param string $auto the autocomment unformatted
 	 * @param string $post the string after the autocomment
-	 * @param Titel $title use for further information
+	 * @param \Title $title use for further information
 	 * @param boolean $local shall links be generated locally or globally
 	 */
 	public static function onFormat( $data, &$comment, $pre, $auto, $post, $title, $local ) {
@@ -159,7 +159,7 @@ final class Autocomment {
 	 * @since 0.1
 	 *
 	 * @param array $parts parts to be stringed together
-	 * @param Language $lang fallback for the language if its not set
+	 * @param \Language $lang fallback for the language if its not set
 	 * @return array of counts, an escaped string and the identified language
 	 */
 	public static function formatAutoSummary( array $parts, $lang = false ) {
