@@ -78,14 +78,6 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	/**
 	 * @depends testNewFromText
 	 */
-	public function testGetDBKey() {
-		$link = $this->newFromText( 'Foo Bar' );
-		$this->assertEquals( "Foo_Bar", $link->getDBKey() );
-	}
-
-	/**
-	 * @depends testNewFromText
-	 */
 	public function testGetSite() {
 		$this->assertEquals( $this->getSite(), $this->newFromText( 'Foo' )->getSite() );
 	}
