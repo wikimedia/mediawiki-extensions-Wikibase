@@ -16,6 +16,8 @@ describe "Check functionality of wikidata together with ULS" do
   context "ULS test setup" do
     it "should create item, enter label and description in english and german" do
       visit_page(ItemPage) do |page|
+        page.uls_switch_language("English")
+        page.wait_for_item_to_load
         page.create_new_item(label_en, description_en)
       end
       on_page(ItemPage) do |page|
@@ -31,7 +33,6 @@ describe "Check functionality of wikidata together with ULS" do
         page.saveDescriptionLink
         ajax_wait
         page.wait_for_api_callback
-        page.uls_switch_language("English")
       end
     end
   end
@@ -39,8 +40,9 @@ describe "Check functionality of wikidata together with ULS" do
   context "ULS test language switching for item" do
     it "should check if language switching works for item page" do
       on_page(ItemPage) do |page|
-        page.uls_switch_language("English")
         page.navigate_to_item
+        page.wait_for_item_to_load
+        page.uls_switch_language("English")
         page.wait_for_item_to_load
         page.itemLabelSpan.should == label_en
         page.itemDescriptionSpan.should == description_en
@@ -59,8 +61,9 @@ describe "Check functionality of wikidata together with ULS" do
     context "ULS test language stickiness" do
       it "should check if language is sticky when navigating to other pages" do
         on_page(ItemPage) do |page|
-          page.uls_switch_language("English")
           page.navigate_to_item
+          page.wait_for_item_to_load
+          page.uls_switch_language("English")
           page.wait_for_item_to_load
           page.itemLabelSpan.should == label_en
           page.viewTabLink_element.text.should == "Read"

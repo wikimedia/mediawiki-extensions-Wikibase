@@ -91,6 +91,9 @@ class ItemPage < RubySelenium
   # ULS
   link(:ulsOpen, :xpath => "//li[@id='pt-uls']/a")
   text_field(:ulsLanguageFilter, :id => "languagefilter")
+  link(:ulsLanguageLink, :xpath => "//div[contains(@class, 'uls-language-block')]/ul/li/a")
+  div(:ulsDiv, :class => "uls-menu")
+
   link(:viewTabLink, :xpath => "//li[@id='ca-view']/span/a")
   link(:recentChangesLink, :xpath => "//li[@id='n-recentchanges']/a")
   link(:specialPageTabLink, :xpath => "//li[@id='ca-nstab-special']/span/a")
@@ -278,7 +281,12 @@ class ItemPage < RubySelenium
     ulsOpen
     self.ulsLanguageFilter= lang
     ajax_wait
-    ulsLanguageFilter_element.send_keys :return
+    #ulsLanguageFilter_element.send_keys :return
+    ulsLanguageLink
+    #wait_until do
+      #ulsDiv? == false
+      #ulsLanguageFilter? == false
+    #end
   end
 
 end
