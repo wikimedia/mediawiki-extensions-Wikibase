@@ -97,7 +97,7 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 	 * @param Hashable $element
 	 */
 	public function removeElement( Hashable $element ) {
-		return $this->removeByElementHash( $element->getHash() );
+		$this->removeByElementHash( $element->getHash() );
 	}
 
 	/**
