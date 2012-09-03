@@ -98,7 +98,7 @@ class SiteLink {
 	}
 
 	/**
-	 * Returns the target site's Site object
+	 * Returns the target site's Site object.
 	 *
 	 * @since 0.1
 	 *
@@ -109,7 +109,7 @@ class SiteLink {
 	}
 
 	/**
-	 * Returns the target's full URL
+	 * Returns the target's full URL.
 	 *
 	 * @since 0.1
 	 *

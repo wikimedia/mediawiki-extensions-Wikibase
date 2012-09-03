@@ -202,7 +202,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getRelativePagePath() {
-		return $this->getExtraData( 'page_path', '' );
+		return parse_url( $this->getPaths()->getPath( 'page_path' ), PHP_URL_PATH );
 	}
 
 	/**
@@ -213,24 +213,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getRelativeFilePath() {
-		return $this->getExtraData( 'file_path', '' );
-	}
-
-	/**
-	 * Sets the base URL.
-	 *
-	 * @since 1.20
-	 *
-	 * @param string $url
-	 */
-	public function setUrl( $url ) {
-		$this->setExtraData( 'url', $url );
-
-		if ( $url !== '' ) {
-			$url = strrev( $url ) . '.';
-		}
-
-		$this->setField( 'domain', $url );
+		return parse_url( $this->getPaths()->getPath( 'file_path' ), PHP_URL_PATH );
 	}
 
 	/**
@@ -240,8 +223,8 @@ class MediaWikiSite extends SiteObject {
 	 *
 	 * @param string $path
 	 */
-	public function setRelativePagePath( $path ) {
-		$this->setExtraData( 'page_path', $path );
+	public function setPagePath( $path ) {
+		$this->getPaths()->setPath( 'page_path', $path );
 	}
 
 	/**
@@ -251,8 +234,8 @@ class MediaWikiSite extends SiteObject {
 	 *
 	 * @param string $path
 	 */
-	public function setRelativeFilePath( $path ) {
-		$this->setExtraData( 'file_path', $path );
+	public function setFilePath( $path ) {
+		$this->getPaths()->setPath( 'file_path', $path );
 	}
 
 	/**
@@ -265,7 +248,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getPageUrl( $pageName = false ) {
-		$pagePath = $this->getBaseUrl() . $this->getRelativePagePath();
+		$pagePath = $this->getPaths()->getPath( 'page_path' );
 
 		if ( $pageName !== false ) {
 			$pageName = $this->toDBKey( trim( $pageName ) );
@@ -287,7 +270,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getFileUrl( $path = false ) {
-		$filePath = $this->getBaseUrl() . $this->getRelativeFilePath();
+		$filePath = $this->getPaths()->getPath( 'file_path' );
 
 		if ( $filePath !== false ) {
 			$filePath = str_replace( '$1', $path, $filePath );

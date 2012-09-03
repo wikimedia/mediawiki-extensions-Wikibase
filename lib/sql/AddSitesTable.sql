@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS /*_*/sites (
   site_language              varbinary(32)       NOT NULL,
 
   -- Protocol of the site, ie 'http://', 'irc://', '//'
+  -- This field is an index for lookups and is build from type specific data in site_data.
   site_protocol              varbinary(32)       NOT NULL,
 
   -- Domain of the site in reverse order, ie 'org.mediawiki.www.'

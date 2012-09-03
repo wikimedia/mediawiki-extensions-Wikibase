@@ -75,8 +75,7 @@ class MediaWikiSiteTest extends MediaWikiTestCase {
 	public function testGetFileUrl( $url, $filePath, $pathArgument, $expected ) {
 		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
 
-		$site->setUrl( $url );
-		$site->setRelativeFilePath( $filePath );
+		$site->setFilePath( $url . $filePath );
 
 		$this->assertEquals( $expected, $site->getFileUrl( $pathArgument ) );
 	}
@@ -100,8 +99,7 @@ class MediaWikiSiteTest extends MediaWikiTestCase {
 	public function testGetPageUrl( $url, $urlPath, $pageName, $expected ) {
 		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
 
-		$site->setUrl( $url );
-		$site->setRelativePagePath( $urlPath );
+		$site->setPagePath( $url . $urlPath );
 
 		$this->assertEquals( $expected, $site->getPageUrl( $pageName ) );
 	}

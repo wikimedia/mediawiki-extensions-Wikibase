@@ -132,11 +132,14 @@ interface Site {
 	public function getDomain();
 
 	/**
-	 * Returns the full URL for the given page on that site.
+	 * Returns the full URL for the given page on the site.
+	 * Or false if the needed information is not known.
+	 *
+	 * @since 1.20
 	 *
 	 * @param bool|String $page
 	 *
-	 * @return String The URL
+	 * @return string|false
 	 */
 	public function getPageUrl( $page = false );
 
@@ -249,5 +252,14 @@ interface Site {
 	 * @param integer $id
 	 */
 	public function setInternalId( $id );
+
+	/**
+	 * Returns the paths of the site.
+	 *
+	 * @since 1.20
+	 *
+	 * @return SitePaths
+	 */
+	public function getPaths();
 
 }

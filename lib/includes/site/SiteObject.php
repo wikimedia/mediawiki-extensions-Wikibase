@@ -3,8 +3,6 @@
 /**
  * Class representing a single site.
  *
- * TODO: investigate if we should not use wfUrlencode instead of rawurlencode.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -40,6 +38,13 @@ class SiteObject extends ORMRow implements Site {
 	 * @var array|false
 	 */
 	protected $localIds = false;
+
+	/**
+	 * @since 1.20
+	 *
+	 * @var SitePaths|false
+	 */
+	protected $paths = false;
 
 	/**
 	 * @see Site::getGlobalId
@@ -137,11 +142,13 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	public function getDomain() {
-		if ( !$this->hasField( 'domain' ) ) {
+		$path = $this->getMainPath();
+
+		if ( $path === false ) {
 			return false;
 		}
 
-		return substr( strrev( $this->getField( 'domain' ) ), 1 );
+		return parse_url( $path, PHP_URL_HOST );
 	}
 
 	/**
@@ -152,35 +159,49 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	public function getProtocol() {
-		return $this->getField( 'protocol', false );
+		$path = $this->getMainPath();
+
+		if ( $path === false ) {
+			return false;
+		}
+
+		return parse_url( $path, PHP_URL_SCHEME );
 	}
 
 	/**
-	 * Returns the base URL, ie http://www.wikidata.org
+	 * Returns the main path of the site which can be used to construct
+	 * links with and from which protocol and domain are derived.
 	 *
 	 * @since 1.20
 	 *
-	 * @return string
+	 * @return string|false
 	 */
-	public function getBaseUrl() {
-		return $this->getProtocol() . $this->getDomain();
+	protected function getMainPath() {
+		$paths = $this->getPaths()->getAll();
+		return $paths === array() ? false : reset( $paths );
 	}
 
 	/**
-	 * Returns the full URL for the given page on that site.
+	 * @see Site::getPageUrl
+	 *
+	 * @since 1.20
 	 *
 	 * @param bool|String $pageName
 	 *
-	 * @return String The URL
+	 * @return string|false
 	 */
 	public function getPageUrl( $pageName = false ) {
-		$pagePath = $this->getBaseUrl();
+		$url = $this->getMainPath();
 
-		if ( $pageName !== false ) {
-			$pagePath .= rawurlencode( $pageName );
+		if ( $url === false ) {
+			return false;
 		}
 
-		return $pagePath;
+		if ( $pageName !== false ) {
+			$url = str_replace( '$1', rawurlencode( $pageName ), $url ) ;
+		}
+
+		return $url;
 	}
 
 	/**
@@ -393,7 +414,61 @@ class SiteObject extends ORMRow implements Site {
 	 * @return boolean Success indicator
 	 */
 	public function save( $functionName = null ) {
-		// NOTE: we need to implement this explicitely, otherwise PHP will complain!
-		return parent::save( $functionName );
+		$dbw = wfGetDB( DB_MASTER );
+
+		$dbw->begin( __METHOD__ );
+
+		$this->setExtraData( 'paths', $this->getPaths()->getAll() );
+
+		$this->setField( 'protocol', $this->getProtocol() );
+		$this->setField( 'domain', strrev( $this->getDomain() ) . '.' );
+
+		$existedAlready = $this->hasIdField();
+
+		$success = parent::save( $functionName );
+
+		if ( $success && $existedAlready ) {
+			$dbw->delete(
+				'site_identifiers',
+				array( 'si_site' => $this->getId() ),
+				__METHOD__
+			);
+		}
+
+		if ( $success && $this->localIds !== false ) {
+			foreach ( $this->localIds as $type => $ids ) {
+				foreach ( $ids as $id ) {
+					$dbw->insert(
+						'site_identifiers',
+						array(
+							'si_site' => $this->getId(),
+							'si_type' => $type,
+							'si_key' => $id,
+						),
+						__METHOD__
+					);
+				}
+			}
+		}
+
+		$dbw->commit( __METHOD__ );
+
+		return $success;
 	}
+
+	/**
+	 * @see Site::getSitePaths
+	 *
+	 * @since 1.20
+	 *
+	 * @return SitePaths
+	 */
+	public function getPaths() {
+		if ( $this->paths === false ) {
+			$this->paths = new SitePathsObject( $this->getExtraData( 'paths', array() ) );
+		}
+
+		return $this->paths;
+	}
+
 }
