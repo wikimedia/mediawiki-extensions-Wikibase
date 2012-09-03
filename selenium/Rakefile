@@ -43,7 +43,7 @@ RSpec::Core::RakeTask.new(:sitelinks) do |spec|
   spec.pattern = '../repo/tests/selenium/sitelinks/*_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:newitem) do |spec|
+RSpec::Core::RakeTask.new(:new_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/new_item_spec.rb'
 end
@@ -73,7 +73,7 @@ RSpec::Core::RakeTask.new(:search) do |spec|
   spec.pattern = '../repo/tests/selenium/special/search_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:recentchanges) do |spec|
+RSpec::Core::RakeTask.new(:recent_changes) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/recent_changes_spec.rb'
 end

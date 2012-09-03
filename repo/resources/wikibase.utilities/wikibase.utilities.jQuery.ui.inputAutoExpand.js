@@ -314,7 +314,7 @@
 			if( width instanceof $ ) {
 				width = width.width();
 			}
-			return Math.round( width );
+			return Math.ceil( width ); // round it up to avoid issues where we can't round down because it wouldn't fit
 		},
 
 		getOptions: function() {

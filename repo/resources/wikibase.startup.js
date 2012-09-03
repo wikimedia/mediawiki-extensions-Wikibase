@@ -128,6 +128,31 @@
 			$( wikibase ).triggerHandler( 'restrictItemPageActions' );
 		}
 
+		// TODO: The following is for Special:ItemByTitle
+		if ( ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'ItemByTitle' )  && ( $.uls !== undefined ) ) {
+			// this will build a drop-down for the language selection:
+			var siteList = new Array();
+			for ( var siteId in wb.getSites() ) {
+				var site = wb.getSite( siteId );
+				siteList.push( {
+					'label': site.getName() + ' (' + site.getId() + ')',
+					'value': wb._siteList[site.getId()].getGlobalSiteId()
+				} );
+			};
+			$( '#wb-itembytitle-sitename' ).wikibaseAutocomplete( { "source": siteList } );
+		}
+
+		if ( ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'ItemDisambiguation' )  && ( $.uls !== undefined ) ) {
+			var langList = new Array();
+			var languages = $.uls.data.autonyms();
+			$.each( languages, function( key, value ) {
+				langList.push( {
+					'label': value + ' (' + key + ')',
+					'value': key
+				} );
+			} );
+			$( '#wb-itemdisambiguation-languagename' ).wikibaseAutocomplete( { "source": langList } );
+		}
 	} );
 
 } )( jQuery, mediaWiki, wikibase );
