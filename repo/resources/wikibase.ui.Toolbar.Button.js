@@ -11,7 +11,7 @@
  */
 ( function( mw, wb, $, undefined ) {
 'use strict';
-var $PARENT = wb.ui.Toolbar.Label
+var $PARENT = wb.ui.Toolbar.Label;
 
 /**
  * Represents a button within a wikibase.ui.Toolbar toolbar

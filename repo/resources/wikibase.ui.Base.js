@@ -112,7 +112,7 @@ wb.ui.Base.prototype = {
 		var result = this._destroy.apply( this, arguments ); // should be overwritten rather than destroy()
 		this._isDestroyed = true;
 		this._subject.removeClass( this.UI_CLASS + ' ' + this.SECONDARY_UI_CLASSES );
-		return result
+		return result;
 		// do not remove reference to subject since this could still be useful for the outside world!
 	},
 

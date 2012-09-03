@@ -10,7 +10,7 @@
  */
 ( function( mw, wb, $, undefined ) {
 'use strict';
-var $PARENT = wb.ui.Toolbar.Group
+var $PARENT = wb.ui.Toolbar.Group;
 
 /**
  * Extends the basic toolbar group element with buttons essential for editing stuff.
