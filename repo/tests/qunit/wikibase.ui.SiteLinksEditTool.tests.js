@@ -100,7 +100,7 @@
 		ok(
 			!newValue.valueCompare( [ '', initialValue[1] ], initialValue ),
 			'valueCompare() should recognize value with missing site-id as invalid'
-		)
+		);
 
 		ok(
 			newValue.valueCompare(
