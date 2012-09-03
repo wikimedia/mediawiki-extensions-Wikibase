@@ -2,7 +2,6 @@
  * JavaScript for 'Wikibase' edit form for an items site links
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -10,35 +9,33 @@
  * @author Daniel Werner < daniel.werner at wikimedia.de >
  * @author H. Snater
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
+var $PARENT = wb.ui.PropertyEditTool;
 
 /**
  * Module for 'Wikibase' extensions user interface functionality for editing the site links of an item.
+ * @constructor
+ * @see wb.ui.PropertyEditTool
+ * @since 0.1
  */
-window.wikibase.ui.SiteLinksEditTool = function( subject ) {
-	if( typeof subject != 'undefined' ) {
-		this._init( subject );
-	}
-};
-window.wikibase.ui.SiteLinksEditTool.prototype = new window.wikibase.ui.PropertyEditTool();
-$.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
+wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	/**
 	 * Shared prototype for editable site links managed by an instance of this. This allows to
 	 * directly manipulate some of all of the values properties as long as they are not overwritten
 	 * explicitly.
 	 * @see getEditableValuePrototype()
-	 * @var Function constructor for window.wikibase.ui.PropertyEditTool.EditableSiteLink
+	 * @var Function constructor for wb.ui.PropertyEditTool.EditableSiteLink
 	 *      basically.
 	 */
 	_editableValuesProto: null,
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool._init
+	 * @see wikibase.ui.PropertyEditTool.init
 	 *
 	 * @param jQuery subject
 	 */
 	_init: function( subject ) {
-		// add colspan+1 because of toolbar td's:
 		var th = subject.find( 'th' ).first();
 
 		$( '<th/>', {
@@ -49,16 +46,14 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		} ) )
 		.appendTo( th.parent() );
 
-		window.wikibase.ui.PropertyEditTool.prototype._init.call( this, subject );
-
-		//th.attr( 'colspan', parseInt( th.attr( 'colspan' ) ) + 1 );
+		$PARENT.prototype._init.call( this, subject );
 	},
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool._initToolbar
 	 */
 	_initToolbar: function() {
-		window.wikibase.ui.PropertyEditTool.prototype._initToolbar.call( this );
+		$PARENT.prototype._initToolbar.call( this );
 		// change message appearing when all language links are represented within the list
 		this._toolbar.lblFull.setContent( '&nbsp;- ' + mw.msg( 'wikibase-sitelinksedittool-full' ) );
 	},
@@ -69,7 +64,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @return wikibase.ui.Toolbar
 	 */
 	_buildSingleValueToolbar: function( editableValue ) {
-		var toolbar = window.wikibase.ui.PropertyEditTool.prototype._buildSingleValueToolbar.call( this, editableValue );
+		var toolbar = $PARENT.prototype._buildSingleValueToolbar.call( this, editableValue );
 		toolbar.editGroup.tooltipAnchor.getTooltip().setGravity( 'se' );
 		return toolbar;
 	},
@@ -103,7 +98,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @see wikibase.ui.PropertyEditTool._initEditToolForValues
 	 */
 	_initEditToolForValues: function() {
-		window.wikibase.ui.PropertyEditTool.prototype._initEditToolForValues.call( this );
+		$PARENT.prototype._initEditToolForValues.call( this );
 
 		// make sure selecting a language in EditableSiteLink only offers languages not yet chosen
 		this.getEditableValuePrototype().prototype.ignoredSiteLinks = this.getRepresentedSites();
@@ -116,7 +111,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @return wikibase.ui.PropertyEditTool.EditableValue the initialized value
 	 */
 	_initSingleValue: function( valueElem ) {
-		var editableSiteLink = window.wikibase.ui.PropertyEditTool.prototype._initSingleValue.call( this, valueElem );
+		var editableSiteLink = $PARENT.prototype._initSingleValue.call( this, valueElem );
 
 		var valElem = editableSiteLink._subject;
 
@@ -174,7 +169,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	 * @return bool
 	 */
 	isFull: function() {
-		var allSites = window.wikibase.getSites();
+		var allSites = wb.getSites();
 		var usedSites = this.getRepresentedSites();
 
 		// FIXME: in case we have sites in the DB which were removed at some point, this check will
@@ -204,7 +199,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.getEditableValuePrototype
+	 * @see wb.ui.PropertyEditTool.getEditableValuePrototype
 	 */
 	getEditableValuePrototype: function() {
 		// TODO: this system might be useful in other prototypes based on PropertyEditTool, implement
@@ -212,7 +207,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 		if( this._editableValuesProto !== null ) {
 			return this._editableValuesProto;
 		}
-		var basePrototype = window.wikibase.ui.PropertyEditTool.EditableSiteLink;
+		var basePrototype = wb.ui.PropertyEditTool.EditableSiteLink;
 
 		this._editableValuesProto = function() { basePrototype.apply( this, arguments ); };
 		this._editableValuesProto.prototype = new basePrototype();
@@ -222,12 +217,12 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool._editableValueHandler_onAfterRemove
+	 * @see wb.ui.PropertyEditTool._editableValueHandler_onAfterRemove
 	 *
 	 * @param wikibase.ui.PropertyEditTool.EditableValue
 	 */
 	_editableValueHandler_onAfterRemove: function( editableValue ) {
-		window.wikibase.ui.PropertyEditTool.prototype._editableValueHandler_onAfterRemove.call( this, editableValue );
+		$PARENT.prototype._editableValueHandler_onAfterRemove.call( this, editableValue );
 
 		// remove only site used by removed site link from list of ignored sites:
 		var removedSite = editableValue.siteIdInterface.getSelectedSite();
@@ -250,14 +245,14 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	},
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool._newValueHandler_onAfterStopEditing
+	 * @see wb.ui.PropertyEditTool._newValueHandler_onAfterStopEditing
 	 *
 	 * @param wikibase.ui.PropertyEditTool.EditableValue newValue
 	 * @param bool save
 	 * @param bool wasPending
 	 */
 	_newValueHandler_onAfterStopEditing: function( newValue, save, wasPending ) {
-		window.wikibase.ui.PropertyEditTool.prototype._newValueHandler_onAfterStopEditing.call( this, newValue, save );
+		$PARENT.prototype._newValueHandler_onAfterStopEditing.call( this, newValue, save );
 		if( save ) {
 			// add chosen site to list of sites which can not be chosen by other editable site links
 			var addedSite = newValue.siteIdInterface.getSelectedSite();
@@ -288,7 +283,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
 	/////////////////
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.prototype.allowsMultipleValues
+	 * @see wb.ui.PropertyEditTool.prototype.allowsMultipleValues
 	 */
 	allowsMultipleValues: true
 } );
@@ -298,7 +293,7 @@ $.extend( window.wikibase.ui.SiteLinksEditTool.prototype, {
  *
  * @return jQuery
  */
-window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
+wb.ui.SiteLinksEditTool.getEmptyStructure = function() {
 	return $(
 			'<table class="wb-sitelinks" cellspacing="0">' +
 				'<colgroup>' +
@@ -314,3 +309,5 @@ window.wikibase.ui.SiteLinksEditTool.getEmptyStructure = function() {
 			'</table>'
 	);
 };
+
+} )( mediaWiki, wikibase, jQuery );

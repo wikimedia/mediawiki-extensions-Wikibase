@@ -2,66 +2,72 @@
  * JavaScript for an list interface for EditableValue
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
+( function( mw, wb, $, undefined ) {
 'use strict';
+var $PARENT = wb.ui.PropertyEditTool.EditableValue.Interface;
 
 /**
  * Serves the input interface for a list of strings and handles the conversion between the pure html representation
  * and the interface itself in both directions. All values of the list belong together and must be edited at the same
  * time.
- *
- * @param jQuery subject
+ * @constructor
+ * @see wb.ui.PropertyEditTool.EditableValue.Interface
+ * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.Interface.apply( this, arguments );
-};
-window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.prototype
-	= Object.create( window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype );
-$.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.prototype, {
+wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARENT, {
 	/**
 	 * Css class which will be attached to all pieces of a value set with this interface.
 	 * @const
 	 */
 	UI_VALUE_PIECE_CLASS: 'wb-ui-propertyedittool-editablevaluelistinterface-piece',
 
-
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._initInputElement
 	 */
 	_initInputElement: function() {
-		window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype._initInputElement.call( this );
+		$PARENT.prototype._initInputElement.call( this );
 		/*
 		applying auto-expansion mechanism has to be done after tagadata's tagList has been placed within
 		the DOM since no css rules of the specified css classes are applied by then - respectively jQuery's
 		.css() function would return unexpected results
 		*/
 		var self = this;
-		$.each( this._getTagadata().tagList.children( 'li' ).find( 'input' ), function( i, input ) {
-			if ( $( input ).inputAutoExpand ) {
-				$( input ).inputAutoExpand( {
-					expandOnResize: false,
-					maxWidth: 1000
-					/* // TODO/FIXME: both solutions are not perfect, when tag larger than available space either the
-					   // input will be auto-resized and not show the whole text or we still show the whole tag but it
-					   // will break the site layout. A solution would be replacing input with textarea.
-					maxWidth: function() {
-						var tagList = self._getTagadata().tagList;
-						var origCssDisplay = tagList.css( 'display' );
-						tagList.css( 'display', 'block' );
-						var width = tagList.width();
-						tagList.css( 'display', origCssDisplay );
-						return width;
-					}
-					*/
-				} );
-			}
-		} );
+		if ( $.fn.inputAutoExpand ) {
+			var expansionOptions = {
+				expandOnResize: false,
+				maxWidth: function() {
+					// TODO/FIXME: figure out why this requires at least -17, can't be because of padding + border
+					// which is only 6 for both sides
+					return self._inputElem.width() - 20;
+				}
+				/* // TODO/FIXME: both solutions are not perfect, when tag larger than available space either the
+				 // input will be auto-resized and not show the whole text or we still show the whole tag but it
+				 // will break the site layout. A solution would be replacing input with textarea.
+				 maxWidth: function() {
+				 var tagList = self._getTagadata().tagList;
+				 var origCssDisplay = tagList.css( 'display' );
+				 tagList.css( 'display', 'block' );
+				 var width = tagList.width();
+				 tagList.css( 'display', origCssDisplay );
+				 return width;
+				 }
+				 */
+			};
+
+			// calculate size for all input elements initially:
+			this._getTagadata().tagList.children( 'li' ).find( 'input' ).inputAutoExpand( expansionOptions );
+
+			// also make sure that new helper tags will calculate size correctly:
+			this._inputElem.on( 'tagadatahelpertagadded', function( e, tag ) {
+				$( tag ).find( 'input' ).inputAutoExpand( expansionOptions )
+			} );
+		}
 	},
 
 	/**
@@ -134,7 +140,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	_getValue_inEditMode: function() {
 		var tagadata = this._getTagadata();
 		var labels = [];
-		if ( typeof tagadata !== 'undefined' ) {
+		if ( tagadata !== undefined ) {
 			var values = tagadata.getTags();
 			for( var i in values ) {
 				labels.push( tagadata.getTagLabel( values[i] ) );
@@ -318,7 +324,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 	 * @return String|null
 	 */
 	normalizePiece: function( value ) {
-		var normalized = window.wikibase.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
+		var normalized = $PARENT.prototype.normalize.call( this, value );
 		if( normalized === '' ) {
 			return null;
 		}
@@ -327,3 +333,4 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableValue.ListInterface.protot
 
 } );
 
+} )( mediaWiki, wikibase, jQuery );

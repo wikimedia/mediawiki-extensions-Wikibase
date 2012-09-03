@@ -87,7 +87,7 @@ class ApiEditPageTest extends ApiTestCase {
 		$data = $this->doApiRequest(
 			array(
 				'action' => 'query',
-				'titles' => 'Main Page',
+				'titles' => 'ApiEditPageTest_testEdit',
 				'intoken' => 'edit',
 				'prop' => 'info'
 			),
@@ -111,7 +111,7 @@ class ApiEditPageTest extends ApiTestCase {
 		$data = $this->doApiRequest(
 			array(
 				'action' => 'edit',
-				'title' => 'Main Page',
+				'title' => 'ApiEditPageTest_testEdit',
 				'text' => 'new text',
 				'token' => $pageinfo["edittoken"]
 			),

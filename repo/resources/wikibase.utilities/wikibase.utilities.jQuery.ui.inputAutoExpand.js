@@ -46,9 +46,18 @@
 			var input = $( this );
 			var inputAE = input.data( 'AutoExpandInput' );
 
+			/**
+			 * TODO/FIXME:
+			 * This could be optimized when called on several(!) input elements at the same time. The reason why this
+			 * is so slow for many input elements (e.g. with tag-a-data) is, because we insert and manipulate many DOM
+			 * elements after another instead of inserting them into the DOM in one go.
+			 * Calculating the best width for one element will involve inserting and removing a 'ruler' into the DOM
+			 * and then setting the final width of the input box (equals three re-renderings per element we calculate
+			 * the width for).
+			 */
 			if( inputAE ) {
 				// AutoExpand initialized already, update options only (will also expand)
-				inputAE.setOptions( options );
+				inputAE.setOptions( options ); // trigger re-calculation of width
 			} else {
 				// initialize new auto expand:
 				var autoExpandInput = new AutoExpandInput( this, fullOptions );
@@ -224,15 +233,18 @@
 			// Take text from input and put it into our dummy
 			// insert ruler and remove it again
 			var ruler = $( '<div/>' ).css( {
-				position: 'absolute',
-				top: -9999,
-				left: -9999,
 				width: 'auto',
 				fontSize: input.css( 'fontSize' ),
 				fontFamily: input.css( 'fontFamily' ),
 				fontWeight: input.css( 'fontWeight' ),
 				letterSpacing: input.css( 'letterSpacing' ),
-				whiteSpace: 'nowrap'
+				whiteSpace: 'nowrap',
+				// We try to not provoke a re-rendering of the browsers view-port here:
+				position: 'absolute',
+				top: 0,
+				left: 0,
+				visibility: 'hidden',
+				display: 'none'
 			} );
 
 			ruler.insertAfter( input );
@@ -280,9 +292,9 @@
 		getComfortZone: function() {
 			var width = this._o.comfortZone;
 			if( width === false ) {
-				// automatic comfort zone, calculate
-				// average of some usually broader characters
-				width = this.getWidthFor( '@%_MW' ) / 5 * 1.25;
+				// this is much faster for getting a good estimation for the perfect comfort zone compared to the
+				// method where we did "this.getWidthFor( '@%_MW' ) / 5 * 1.25;"
+				width = this.input.height();
 			}
 			return this._normalizeWidth( width );
 		},

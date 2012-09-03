@@ -40,6 +40,15 @@ return call_user_func( function() {
 			)
 		),
 
+		'wikibase.utilities' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.utilities/wikibase.utilities.js',
+			),
+			'dependencies' => array(
+				'wikibase'
+			)
+		),
+
 		'wikibase.utilities.jQuery' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
@@ -48,7 +57,7 @@ return call_user_func( function() {
 				'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
 			),
 			'dependencies' => array(
-				'wikibase'
+				'wikibase.utilities'
 			)
 		),
 
@@ -85,9 +94,11 @@ return call_user_func( function() {
 			'position' => 'top'
 		),
 
+		// should be independent from the rest of Wikibase (or only use other stuff that could go into core)
 		'wikibase.ui.Toolbar' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.js',
+				'wikibase.ui.Base.js',
 				'wikibase.ui.Tooltip.js',
 				'wikibase.ui.Toolbar.js',
 				'wikibase.ui.Toolbar.Group.js',
@@ -101,7 +112,8 @@ return call_user_func( function() {
 				'wikibase',
 				'jquery.tipsy',
 				'mediawiki.legacy.shared',
-				'jquery.ui.core'
+				'jquery.ui.core',
+				'wikibase.utilities'
 			),
 			'messages' => array(
 				'wikibase-tooltip-error-details'
@@ -111,6 +123,7 @@ return call_user_func( function() {
 		'wikibase.ui.PropertyEditTool' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.ui.js',
+				'wikibase.ui.Base.js',
 				'wikibase.ui.Toolbar.EditGroup.js', // related to EditableValue, see todo in file
 				'wikibase.ui.PropertyEditTool.js',
 				'wikibase.ui.PropertyEditTool.EditableValue.js',
@@ -136,6 +149,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase',
 				'wikibase.ui.Toolbar',
+				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.inputAutoExpand',
 				'wikibase.utilities.jQuery.ui.tagadata',
@@ -186,6 +200,7 @@ return call_user_func( function() {
 				'wikibase-error-ui-no-permissions',
 				'wikibase-error-ui-link-exists',
 				'wikibase-error-ui-session-failure',
+				'wikibase-error-ui-edit-conflict',
 				'wikibase-restrictionedit-tooltip-message',
 				'wikibase-blockeduser-tooltip-message'
 			)

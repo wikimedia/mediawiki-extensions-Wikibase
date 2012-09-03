@@ -2,7 +2,6 @@
  * JavaScript for managing editable representation of an items description.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
@@ -10,19 +9,20 @@
  * @author Daniel Werner
  * @author Tobias Gritschacher
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
+var $PARENT = wb.ui.PropertyEditTool.EditableValue;
 
 /**
  * Serves the input interface for an item description, extends EditableValue.
- *
- * @param jQuery subject
+ * @constructor
+ * @see wikibase.ui.PropertyEditTool.EditableValue
+ * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool.EditableDescription = function( subject ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject );
-};
-window.wikibase.ui.PropertyEditTool.EditableDescription.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
-
+wb.ui.PropertyEditTool.EditableDescription = wb.utilities.inherit( $PARENT, {
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.API_VALUE_KEY
+	 */
 	API_VALUE_KEY: 'descriptions',
 
 	/**
@@ -32,7 +32,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	 * @return wikibase.ui.PropertyEditTool.EditableValue.Interface[]
 	 */
 	_buildInterfaces: function( subject ) {
-		var interfaces = window.wikibase.ui.PropertyEditTool.EditableValue.prototype._buildInterfaces.call( this, subject );
+		var interfaces = $PARENT.prototype._buildInterfaces.call( this, subject );
 		interfaces[0].inputPlaceholder = mw.msg( 'wikibase-description-edit-placeholder' );
 		interfaces[0].autoExpand = true;
 
@@ -55,7 +55,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function( apiAction ) {
-		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
+		var params = $PARENT.prototype.getApiCallParams.call( this, apiAction );
 		if( mw.config.get( 'wbItemId' ) === null ) { // new item should be created
 			var newItem ='{"descriptions":{"' + mw.config.get( 'wgUserLanguage' ) + '":"' + this.getValue().toString() + '"}}';
 			return $.extend( params, {
@@ -65,8 +65,11 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableDescription.prototype, {
 		} else {
 			return $.extend( params, {
 				action: 'wbsetdescription',
-				value: this.getValue().toString()
+				value: this.getValue().toString(),
+				baserevid: mw.config.get( 'wgCurRevisionId' )
 			} );
 		}
 	}
 } );
+
+} )( mediaWiki, wikibase, jQuery );

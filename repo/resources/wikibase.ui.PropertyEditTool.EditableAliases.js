@@ -3,25 +3,23 @@
  * a single one.
  * @see https://www.mediawiki.org/wiki/Extension:Wikibase
  *
- * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-"use strict";
+( function( mw, wb, $, undefined ) {
+'use strict';
+var $PARENT = wb.ui.PropertyEditTool.EditableValue;
 
 /**
  * Serves the input interface for an items aliases, extends EditableValue.
- *
- * @param jQuery subject
+ * @constructor
+ * @see wb.ui.PropertyEditTool.EditableValue
+ * @since 0.1
  */
-window.wikibase.ui.PropertyEditTool.EditableAliases = function( subject, toolbar ) {
-	window.wikibase.ui.PropertyEditTool.EditableValue.call( this, subject, toolbar );
-};
-window.wikibase.ui.PropertyEditTool.EditableAliases.prototype = new window.wikibase.ui.PropertyEditTool.EditableValue();
-$.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
+wb.ui.PropertyEditTool.EditableAliases = wb.utilities.inherit( $PARENT, {
 
 	API_VALUE_KEY: 'aliases',
 
@@ -33,8 +31,12 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 	 */
 	_init: function( subject, toolbar ) {
 		var newSubject = $( '<span>' );
-		$( subject ).replaceWith( newSubject ).appendTo( newSubject );
-		window.wikibase.ui.PropertyEditTool.EditableValue.prototype._init.call( this, newSubject, toolbar );
+		$( this._subject ).replaceWith( newSubject ).appendTo( newSubject );
+
+		// overwrite subject // TODO: really not that nice, is it?
+		this._subject = newSubject;
+
+		$PARENT.prototype._init.call( this, newSubject, toolbar );
 	},
 
 	/**
@@ -50,7 +52,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 		var interfaceParent = $( '<div/>' );
 		subject.children( 'ul:first' ).replaceWith( interfaceParent ).appendTo( interfaceParent );
 
-		interfaces.push( new wikibase.ui.PropertyEditTool.EditableValue.AliasesInterface( interfaceParent, this ) );
+		interfaces.push( new wb.ui.PropertyEditTool.EditableValue.AliasesInterface( interfaceParent, this ) );
 
 		return interfaces;
 	},
@@ -62,7 +64,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 	 */
 	_interfaceHandler_onInputRegistered: function( relatedInterface ) {
 		if( relatedInterface.isInEditMode() ) {
-			wikibase.ui.PropertyEditTool.EditableValue.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
+			$PARENT.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
 			// always enable cancel button since it is alright to have an empty value
 			this._toolbar.editGroup.btnCancel.setDisabled( false );
 		}
@@ -121,7 +123,7 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 		if ( apiAction === this.API_ACTION.REMOVE ) {
 			apiAction = this.API_ACTION.SAVE_TO_REMOVE;
 		}
-		wikibase.ui.PropertyEditTool.EditableValue.prototype.showError.call( this, error, apiAction );
+		$PARENT.prototype.showError.call( this, error, apiAction );
 	},
 
 	/**
@@ -131,16 +133,18 @@ $.extend( window.wikibase.ui.PropertyEditTool.EditableAliases.prototype, {
 	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function( apiAction ) {
-		var params = window.wikibase.ui.PropertyEditTool.EditableValue.prototype.getApiCallParams.call( this, apiAction );
+		var params = $PARENT.prototype.getApiCallParams.call( this, apiAction );
 		params.action = 'wbsetaliases';
-		params.item = 'set';
+		params.baserevid = mw.config.get( 'wgCurRevisionId' );
 		params.set = this.getValue()[0].join( '|' );
 		return params;
 	},
 
 	/**
-	 * @see window.wikibase.ui.PropertyEditTool.EditableValue.preserveEmptyForm
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.preserveEmptyForm
 	 * @var bool
 	 */
 	preserveEmptyForm: false
 } );
+
+} )( mediaWiki, wikibase, jQuery );

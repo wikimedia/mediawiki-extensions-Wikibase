@@ -168,6 +168,27 @@ abstract class EntityHandler extends \ContentHandler {
 	}
 
 	/**
+	 * Get the item with the provided revision id, or null if there is no such item.
+	 *
+	 * Note that this returns an old entity that may not be valid anymore.
+	 *
+	 * @since 0.1
+	 *
+	 * @param integer $entityId
+	 *
+	 * @return ItemContent|null
+	 */
+	public function getFromRevision( $revisionId ) {
+		$revision = \Revision::newFromId( intval( $revisionId ) );
+
+		if ( $revision === null ) {
+			return null;
+		}
+
+		return $revision->getContent();
+	}
+
+	/**
 	 * Get the items corresponding to the provided language and label pair.
 	 * A description can also be provided, in which case only the item with
 	 * that description will be returned (as only element in the array).
@@ -183,7 +204,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @return array of ItemContent
 	 */
 	public function getFromLabel( $language, $label, $description = null ) {
-		$ids = StoreFactory::getStore()->newTermLookup()->getItemIdsForLabel( $language, $label, $description );
+		$ids = StoreFactory::getStore()->newTermLookup()->getItemIdsForLabel( $label, $language, $description );
 		$items = array();
 
 		foreach ( $ids as $id ) {
