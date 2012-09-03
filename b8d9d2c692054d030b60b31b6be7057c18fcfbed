@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn//9yo\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-03T11:54:05Z",
+      "side": 1,
+      "message": "spaces again",
+      "revId": "b8d9d2c692054d030b60b31b6be7057c18fcfbed",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
