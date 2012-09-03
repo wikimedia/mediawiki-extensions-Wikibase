@@ -20,9 +20,9 @@ abstract class EntityContent extends \AbstractContent {
 
 	/**
 	 * @since 0.1
-	 * @var WikiPage|false
+	 * @var EditEntity|false
 	 */
-	protected $editEntity = false;
+	protected $editEntity = null;
 
 	/**
 	 * Returns the EditEntity for the item or false if there is none.
@@ -236,11 +236,13 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @return \Status Success indicator
 	 */
-	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false, $editEntity = false ) {
+	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false, EditEntity $editEntity = null ) {
 		// must keep this state for later cleanup
 		$isNew = $this->isNew();
 
-		// keep the new editEntity
+		//XXX: very ugly and brittle hack to pass info to prepareEdit so we can check inside a db transaction
+		//     whether an edit has occurred after EditEntity checked for conflicts. If we had nested
+		//     database transactions, we could simply check here.
 		$this->editEntity = $editEntity;
 
 		// NOTE: data created by relationalSave may be left dangling if $page->doEditContent fails.
@@ -297,17 +299,12 @@ abstract class EntityContent extends \AbstractContent {
 			return $status;
 		}
 
-		// Only do the following tests if the $editEntity is set
-		if ( $this->editEntity !== false ) {
-			// This check really depends upon what we end up using as base revision.
-			// For example this could be the base of our patched content.
-			if ( $baseRevId !== $this->editEntity->getBaseRevisionId() ) {
-				$status->fatal('wikibase-error-prepare-save-base-revision-wrong');
-			}
-
-			// This check should always be against the last observed revision
-			if ( $page->getRevision()->getId() ===  $this->editEntity->getBaseRevisionId() ) {
-				$status->fatal('wikibase-error-prepare-save-last-revision-wrong');
+		// If editEntity is set, check whether the current revision is still what the EditEntity though it was.
+		// If it isn't, then someone managed to squeeze in an edit after we checked for conflicts.
+		if ( $this->editEntity !== null && $page->getRevision() !== null ) {
+			if ( $page->getRevision()->getId() !==  $this->editEntity->getCurrentRevisionId() ) {
+				wfDebug( 'encountered late edit conflict: current revision changed after regular conflict check.' );
+				$status->fatal('edit-conflict');
 			}
 		}
 
