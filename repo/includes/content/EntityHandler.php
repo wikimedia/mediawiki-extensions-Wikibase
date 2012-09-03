@@ -204,7 +204,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @return array of ItemContent
 	 */
 	public function getFromLabel( $language, $label, $description = null ) {
-		$ids = StoreFactory::getStore()->newTermLookup()->getItemIdsForLabel( $language, $label, $description );
+		$ids = StoreFactory::getStore()->newTermLookup()->getItemIdsForLabel( $label, $language, $description );
 		$items = array();
 
 		foreach ( $ids as $id ) {
