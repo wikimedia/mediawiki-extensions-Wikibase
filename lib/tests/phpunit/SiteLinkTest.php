@@ -95,7 +95,7 @@ class SiteLinkTest extends \MediaWikiTestCase {
 	public function testToString() {
 		$link = $this->newFromText( 'Foo Bar' );
 
-		$this->assertEquals( "enwiki:Foo_Bar", "$link" );
+		$this->assertEquals( "[[enwiki:Foo Bar]]", "$link" );
 	}
 
 	public function dataGetSiteIDs() {
