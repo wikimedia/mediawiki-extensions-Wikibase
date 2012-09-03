@@ -154,12 +154,14 @@ final class ClientHooks {
 				if ( count( $repoLinks ) > 0 ) {
 					LangLinkHandler::suppressRepoLinks( $parser, $repoLinks );
 
+					/**
+					 * @var SiteLink $link
+					 */
 					foreach ( $repoLinks as $link ) {
-						$localKey = $link->getSite()->getConfig()->getLocalId();
-
-						// unset self referencing interwiki link
-						if ( $localKey != $wgLanguageCode ) {
-							$repoLinkItems[] = $localKey . ':' . $link->getPage();
+						foreach ( $link->getSite()->getNavigationIds() as $navigationId ) {
+							if ( $navigationId !== $wgLanguageCode ) {
+								$repoLinkItems[] = $navigationId . ':' . $link->getPage();
+							}
 						}
 					}
 				}
