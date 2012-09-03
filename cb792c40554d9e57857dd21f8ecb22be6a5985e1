@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn//9z8\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 14
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-03T10:36:43Z",
+      "side": 1,
+      "message": "#languagename is a little unspecific, better use something like #wb-itemdisambiguation-languagename You have to consider that the skins DOM and other stuff is still there on special pages and could very well have or get a #sitename",
+      "revId": "cb792c40554d9e57857dd21f8ecb22be6a5985e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
