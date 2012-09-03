@@ -65,9 +65,6 @@ final class ClientHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
-//			'General',
-//			'Sorting',
-
 			'includes/CachedEntity',
 			'includes/EntityCache',
 			'includes/EntityCacheUpdater',
