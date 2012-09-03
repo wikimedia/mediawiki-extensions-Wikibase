@@ -73,6 +73,7 @@ class ApiSetItem extends ApiModifyItem {
 	 * @see ApiModifyItem::modifyItem()
 	 */
 	protected function modifyItem( ItemContent &$itemContent, array $params ) {
+		$status = \Status::newGood();
 		if ( isset( $params['data'] ) ) {
 			$data = json_decode( $params['data'], true );
 			if ( is_null( $data ) ) {
@@ -136,83 +137,88 @@ class ApiSetItem extends ApiModifyItem {
 						$this->dieUsage( "Key 'labels' must refer to an array", 'not-recognized-array' );
 					}
 
-					foreach ( $list as $langCode => $value ) {
-						if ( !is_string( $value ) ) {
-							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
-						}
-						if ( !array_key_exists( $langCode, $languages ) ) {
-							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
-						}
-						if ( $value === "" ) {
-							$itemContent->getItem()->removeLabel( $langCode );
+					foreach ( $list as $langCode => $arg ) {
+						$status->merge( $this->checkMultilangTexts( $arg, $langCode, $languages ) );
+						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
+							$itemContent->getItem()->removeLabel( $arg['language'] );
 						}
 						else {
-							$itemContent->getItem()->setLabel( $langCode, Utils::squashToNFC( $value ) );
+							$itemContent->getItem()->setLabel( $arg['language'], Utils::squashToNFC( $arg['value'] ) );
 						}
 					}
+
+					if ( !$status->isOk() ) {
+						$this->dieUsage( "whatever", 'whatever' );
+					}
+
 					break;
+
 				case 'descriptions':
 					if ( !is_array( $list ) ) {
 						$this->dieUsage( "Key 'descriptions' must refer to an array", 'not-recognized-array' );
 					}
 
-					foreach ( $list as $langCode => $value ) {
-						if ( !is_string( $value ) ) {
-							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
-						}
-						if ( !array_key_exists( $langCode, $languages ) ) {
-							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
-						}
-						if ( $value === "" ) {
-							$itemContent->getItem()->removeDescription( $langCode );
+					foreach ( $list as $langCode => $arg ) {
+						$status->merge( $this->checkMultilangTexts( $arg, $langCode, $languages ) );
+						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
+							$itemContent->getItem()->removeDescription( $arg['language'] );
 						}
 						else {
-							$itemContent->getItem()->setDescription( $langCode, Utils::squashToNFC( $value ) );
+							$itemContent->getItem()->setDescription( $arg['language'], Utils::squashToNFC( $arg['value'] ) );
 						}
 					}
+
+					if ( !$status->isOk() ) {
+						$this->dieUsage( "whatever", 'whatever' );
+					}
+
 					break;
+
 				case 'aliases':
 					if ( !is_array( $list ) ) {
 						$this->dieUsage( "Key 'aliases' must refer to an array", 'not-recognized-array' );
 					}
 
-					foreach ( $list as $langCode => $aliases ) {
-						if ( !is_array( $aliases ) ) {
-							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
-						}
-						if ( !array_key_exists( $langCode, $languages ) ) {
-							$this->dieUsage( "unknown language: $langCode", 'not-recognized-language' );
-						}
-						$newAliases = array();
-						foreach ( $aliases as $alias ) {
+					foreach ( $list as $langCode => $arg ) {
+						$status->merge( $this->checkMultilangAliases( $arg, $langCode, $languages ) );
+						$aliases = array();
+						foreach ( $arg['values'] as $alias ) {
 							if ( !is_string( $alias ) ) {
 								$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
 							}
-							$newAliases[] = Utils::squashToNFC( $alias );
+							$aliases[] = Utils::squashToNFC( $alias );
 						}
-						$itemContent->getItem()->setAliases( $langCode, $newAliases );
+						if ( array_key_exists( 'remove', $arg ) ) {
+							$itemContent->getItem()->removeAliases( $langCode, $aliases );
+						}
+						elseif ( array_key_exists( 'add', $arg ) ) {
+							$itemContent->getItem()->addAliases( $langCode, $aliases );
+						}
+						else {
+							$itemContent->getItem()->setAliases( $langCode, $aliases );
+						}
 					}
+
+					if ( !$status->isOk() ) {
+						$this->dieUsage( "whatever", 'whatever' );
+					}
+
 					break;
+
 				case 'sitelinks':
 					if ( !is_array( $list ) ) {
 						$this->dieUsage( "Key 'sitelinks' must refer to an array", 'not-recognized-array' );
 					}
 
 					$group = Sites::singleton()->getGroup( SITE_GROUP_WIKIPEDIA );
-					foreach ( $list as $siteId => $pageName ) {
-						if ( !is_string( $pageName ) ) {
-							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'add-sitelink-failed' );
+					foreach ( $list as $siteCode => $arg ) {
+						$status->merge( $this->checkSiteLinks( $arg, $siteCode, $group ) );
+						if ( array_key_exists( 'remove', $arg ) || $arg['page'] === "" ) {
+							$itemContent->getItem()->removeSiteLink( $arg['site'] );
 						}
-
-						if ( !$group->hasGlobalId( $siteId ) ) {
-							$this->dieUsage( "unknown site: $siteId", 'add-sitelink-failed' );
-						}
-
-						if ( $pageName === '' ) {
-							$itemContent->getItem()->removeSiteLink( $siteId );
-						} else {
-							$site = $group->getSiteByGlobalId( $siteId );
-							$page = $site->normalizePageName( $pageName );
+						else {
+							$site = $group->getSiteByGlobalId( $arg['site'] );
+							$page = $site->normalizePageName( $arg['page'] );
 
 							if ( $page === false ) {
 								$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'add-sitelink-failed' );
@@ -226,7 +232,9 @@ class ApiSetItem extends ApiModifyItem {
 							}
 						}
 					}
+
 					break;
+
 				default:
 					$this->dieUsage( "unknown key: $props", 'not-recognized' );
 				}
@@ -352,6 +360,105 @@ class ApiSetItem extends ApiModifyItem {
 	 */
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
+	}
+
+	/**
+	 * Check language code for texts
+	 *
+	 * @param $keyCode string: The language code used as key for lookup
+	 * @param $langCode string: The language code used in the value part
+	 * @param &$languages array: The valid language codes as an assoc array
+	 *
+	 * @return Status: The result from the comparison (always true)
+	 *
+	 * @throws UsageException
+	 */
+	public function checkMultilangTexts( $arg, $langCode, &$languages = null ) {
+		$status = \Status::newGood();
+		if ( !is_array( $arg ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
+		}
+		if ( !is_string( $arg['language'] ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+		}
+		if ( !is_numeric( $langCode ) ) {
+			if ( $langCode !== $arg['language'] ) {
+				$status->fatal( "inconsistent language: {$langCode} is not equal to {$arg['language']}", 'inconsistent-language' );
+			}
+		}
+		if ( isset( $languages ) && !array_key_exists( $arg['language'], $languages ) ) {
+			$status->fatal( "unknown language: {$arg['language']}", 'not-recognized-language' );
+		}
+		if ( !is_string( $arg['value'] ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+		}
+		return $status;
+	}
+
+	/**
+	 * Check language code for aliases
+	 *
+	 * @param $keyCode string: The language code used as key for lookup
+	 * @param $langCode string: The language code used in the value part
+	 * @param &$languages array: The valid language codes as an assoc array
+	 *
+	 * @return Status: The result from the comparison (always true)
+	 *
+	 * @throws UsageException
+	 */
+	public function checkMultilangAliases( $arg, $langCode, &$languages = null ) {
+		$status = \Status::newGood();
+		if ( !is_array( $arg ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
+		}
+		if ( !is_string( $arg['language'] ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+		}
+		if ( !is_numeric( $langCode ) ) {
+			if ( $langCode !== $arg['language'] ) {
+				$status->fatal( "inconsistent language: {$langCode} is not equal to {$arg['language']}", 'inconsistent-language' );
+			}
+		}
+		if ( isset( $languages ) && !array_key_exists( $arg['language'], $languages ) ) {
+			$status->fatal( "unknown language: {$arg['language']}", 'not-recognized-language' );
+		}
+		if ( !is_array( $arg['values'] ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+		}
+		return $status;
+	}
+
+	/**
+	 * Check language code for aliases
+	 *
+	 * @param $keyCode string: The language code used as key for lookup
+	 * @param $langCode string: The language code used in the value part
+	 * @param &$languages array: The valid language codes as an assoc array
+	 *
+	 * @return Status: The result from the comparison (always true)
+	 *
+	 * @throws UsageException
+	 */
+	public function checkSiteLinks( $arg, $siteCode, &$group = null ) {
+		$status = \Status::newGood();
+		if ( !is_array( $arg ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
+		}
+		if ( !is_string( $arg['site'] ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+		}
+		if ( !is_numeric( $siteCode ) ) {
+			if ( $siteCode !== $arg['site'] ) {
+				$status->fatal( "inconsistent site: {$siteCode} is not equal to {$arg['site']}", 'inconsistent-site' );
+			}
+		}
+		if ( isset( $group ) && !$group->hasGlobalId( $arg['site'] ) ) {
+			$status->fatal( "unknown site: {$arg['site']}", 'not-recognized-site' );
+		}
+		if ( !is_string( $arg['page'] ) ) {
+			$status->fatal( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'not-recognized-string' );
+		}
+		return $status;
 	}
 
 }
