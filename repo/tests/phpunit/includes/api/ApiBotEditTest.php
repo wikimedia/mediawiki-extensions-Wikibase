@@ -207,11 +207,11 @@ class ApiBotEditTest extends \ApiTestCase {
 		$idx = 0;
 		return array(
 			array( ++$idx, false, true, "{}" ),
-			array( $idx, true, false, '{ "labels": { "nn":"Karasjok" } }' ),
-			array( $idx, false, false, '{ "descriptions": { "nn":"Small place in Finnmark" } }' ),
+			array( $idx, true, false, '{ "labels": { "nn": { "language": "nn", "value": "Karasjok" } } }' ),
+			array( $idx, false, false, '{ "descriptions": { "nn": { "language": "nn", "value": "Small place in Finnmark" } } }' ),
 			array( ++$idx, true, true, "{}" ),
-			array( $idx, true, false, '{ "labels": { "nn":"Kautokeino" } }' ),
-			array( $idx, false, false, '{ "descriptions": { "nn":"Small place in Finnmark" } }' ),
+			array( $idx, true, false, '{ "labels": { "nn": { "language": "nn", "value": "Kautokeino" } } }' ),
+			array( $idx, false, false, '{ "descriptions": { "nn": { "language": "nn", "value": "Small place in Finnmark" } } }' ),
 		);
 	}
 

@@ -119,8 +119,8 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				continue;
 			}
 
-			foreach ( $item['sitelinks'] as $site => $title ) {
-				$calls[] = array( $handle, $site, $title );
+			foreach ( $item['sitelinks'] as $sitelink ) {
+				$calls[] = array( $handle, $sitelink['site'], $sitelink['title'] );
 			}
 		}
 
