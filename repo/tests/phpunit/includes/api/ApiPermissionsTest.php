@@ -7,6 +7,8 @@ use Wikibase\Settings as Settings;
 /**
  * Tests for permission handling in the Wikibase API.
  *
+ * This file produce errors if run standalone.
+ *
  * @file
  * @since 0.1
  *
@@ -158,7 +160,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	 */
 	function testAddItem( $permissions, $expectedError ) {
 		$itemData = array(
-			'labels' => array( 'en' => 'Test' ),
+			'labels' => array("en" => array( "language" => 'en', "value" => 'Test' ) ),
 		);
 
 		$json = new \Services_JSON();

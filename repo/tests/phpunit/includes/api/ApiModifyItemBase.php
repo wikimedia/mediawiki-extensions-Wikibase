@@ -123,112 +123,129 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			array(
 				"handle" => "Berlin",
 				"sitelinks" => array(
-					"dewiki" => "Berlin",
-					"enwiki" => "Berlin",
-					"nlwiki" => "Berlin",
-					"nnwiki" => "Berlin"
+					array( "site" => "dewiki", "title" => "Berlin" ),
+					array( "site" => "enwiki", "title" => "Berlin" ),
+					array( "site" => "nlwiki", "title" => "Berlin" ),
+					array( "site" => "nnwiki", "title" => "Berlin" ),
 				),
 				"labels" => array(
-					"de" => "Berlin",
-					"en" => "Berlin",
-					"no" => "Berlin",
-					"nn" => "Berlin"
+					array( "language" => "de", "value" => "Berlin" ),
+					array( "language" => "en", "value" => "Berlin" ),
+					array( "language" => "no", "value" => "Berlin" ),
+					array( "language" => "nn", "value" => "Berlin" ),
 				),
 				"aliases" => array(
-					"de"  => array( "Dickes B" ),
-					"en"  => array( "Dickes B" ),
-					"nl"  => array( "Dickes B" ),
+					array( array( "language" => "de", "value" => "Dickes B" ) ),
+					array( array( "language" => "en", "value" => "Dickes B" ) ),
+					array( array( "language" => "nl", "value" => "Dickes B" ) ),
 				),
 				"descriptions" => array(
-					"de"  => "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland.",
-					"en"  => "Capital city and a federated state of the Federal Republic of Germany.",
-					"no"  => "Hovedsted og delstat og i Forbundsrepublikken Tyskland.",
-					"nn"  => "Hovudstad og delstat i Forbundsrepublikken Tyskland."
+					array( "language" => "de", "value" => "Bundeshauptstadt und Regierungssitz der Bundesrepublik Deutschland." ),
+					array( "language" => "en", "value" => "Capital city and a federated state of the Federal Republic of Germany." ),
+					array( "language" => "no", "value" => "Hovedsted og delstat og i Forbundsrepublikken Tyskland." ),
+					array( "language" => "nn", "value" => "Hovudstad og delstat i Forbundsrepublikken Tyskland." ),
 				)
 			),
 			array(
 				"handle" => "London",
 				"sitelinks" => array(
-					"enwiki" => "London",
-					"dewiki" => "London",
-					"nlwiki" => "London",
-					"nnwiki" => "London"
+					array( "site" => "enwiki", "title" => "London" ),
+					array( "site" => "dewiki", "title" => "London" ),
+					array( "site" => "nlwiki", "title" => "London" ),
+					array( "site" => "nnwiki", "title" => "London" ),
 				),
 				"labels" => array(
-					"de" => "London",
-					"en" => "London",
-					"no" => "London",
-					"nn" => "London"
+					array( "language" => "de", "value" => "London" ),
+					array( "language" => "en", "value" => "London" ),
+					array( "language" => "no", "value" => "London" ),
+					array( "language" => "nn", "value" => "London" ),
 				),
 				"aliases" => array(
-					"de"  => array( "City of London", "Greater London" ),
-					"en"  => array( "City of London", "Greater London" ),
-					"nl"  => array( "City of London", "Greater London" ),
+					array(
+						array( "language" => "de", "value" => "City of London" ),
+						array( "language" => "de", "value" => "Greater London" ),
+					),
+					array(
+						array( "language" => "en", "value" => "City of London" ),
+						array( "language" => "en", "value" => "Greater London" ),
+					),
+					array(
+						array( "language" => "nl", "value" => "City of London" ),
+						array( "language" => "nl", "value" => "Greater London" ),
+					),
 				),
 				"descriptions" => array(
-					"de"  => "Hauptstadt Englands und des Vereinigten Königreiches.",
-					"en"  => "Capital city of England and the United Kingdom.",
-					"no"  => "Hovedsted i England og Storbritannia.",
-					"nn"  => "Hovudstad i England og Storbritannia."
+					array( "language" => "de", "value" => "Hauptstadt Englands und des Vereinigten Königreiches." ),
+					array( "language" => "en", "value" => "Capital city of England and the United Kingdom." ),
+					array( "language" => "no", "value" => "Hovedsted i England og Storbritannia." ),
+					array( "language" => "nn", "value" => "Hovudstad i England og Storbritannia." ),
 				)
 			),
 			array(
 				"handle" => "Oslo",
 				"sitelinks" => array(
-					"dewiki" => "Oslo",
-					"enwiki" => "Oslo",
-					"nlwiki" => "Oslo",
-					"nnwiki" => "Oslo"
+					array( "site" => "dewiki", "title" => "Oslo" ),
+					array( "site" => "enwiki", "title" => "Oslo" ),
+					array( "site" => "nlwiki", "title" => "Oslo" ),
+					array( "site" => "nnwiki", "title" => "Oslo" ),
 				),
 				"labels" => array(
-					"de" => "Oslo",
-					"en" => "Oslo",
-					"no" => "Oslo",
-					"nn" => "Oslo"
+					array( "language" => "de", "value" => "Oslo" ),
+					array( "language" => "en", "value" => "Oslo" ),
+					array( "language" => "no", "value" => "Oslo" ),
+					array( "language" => "nn", "value" => "Oslo" ),
 				),
 				"aliases" => array(
-					"de"  => array( "Oslo City" ),
-					"en"  => array( "Oslo City" ),
-					"nl"  => array( "Oslo City" ),
+					array(
+						array( "language" => "no", "value" => "Christiania" ),
+						array( "language" => "no", "value" => "Kristiania" ),
+					),
+					array(
+						array( "language" => "nn", "value" => "Christiania" ),
+						array( "language" => "nn", "value" => "Kristiania" ),
+					),
+					array( "language" => "de", "value" => "Oslo City" ),
+					array( "language" => "en", "value" => "Oslo City" ),
+					array( "language" => "nl", "value" => "Oslo City" ),
 				),
 				"descriptions" => array(
-					"de"  => "Hauptstadt der Norwegen.",
-					"en"  => "Capital city in Norway.",
-					"no"  => "Hovedsted i Norge.",
-					"nn"  => "Hovudstad i Noreg."
+					array( "language" => "de", "value" => "Hauptstadt der Norwegen." ),
+					array( "language" => "en", "value" => "Capital city in Norway." ),
+					array( "language" => "no", "value" => "Hovedsted i Norge." ),
+					array( "language" => "nn", "value" => "Hovudstad i Noreg." ),
 				)
 			),
 			array(
 				"handle" => "Episkopi",
 				"sitelinks" => array(
-					"dewiki" => "Episkopi Cantonment",
-					"enwiki" => "Episkopi Cantonment",
-					"nlwiki" => "Episkopi Cantonment"
+					array( "site" => "dewiki", "title" => "Episkopi Cantonment" ),
+					array( "site" => "enwiki", "title" => "Episkopi Cantonment" ),
+					array( "site" => "nlwiki", "title" => "Episkopi Cantonment" ),
 				),
 				"labels" => array(
-					"de" => "Episkopi Cantonment",
-					"en" => "Episkopi Cantonment",
-					"nl" => "Episkopi Cantonment"
+					array( "language" => "de", "value" => "Episkopi Cantonment" ),
+					array( "language" => "en", "value" => "Episkopi Cantonment" ),
+					array( "language" => "nl", "value" => "Episkopi Cantonment" ),
 				),
 				"aliases" => array(
-					"de"  => array( "Episkopi" ),
-					"en"  => array( "Episkopi" ),
-					"nl"  => array( "Episkopi" ),
+					array( "language" => "de", "value" => "Episkopi" ),
+					array( "language" => "en", "value" => "Episkopi" ),
+					array( "language" => "nl", "value" => "Episkopi" ),
 				),
 				"descriptions" => array(
-					"de"  => "Sitz der Verwaltung der Mittelmeerinsel Zypern.",
-					"en"  => "The capital of Akrotiri and Dhekelia.",
-					"nl"  => "Het bestuurlijke centrum van Akrotiri en Dhekelia."
+					array( "language" => "de", "value" => "Sitz der Verwaltung der Mittelmeerinsel Zypern." ),
+					array( "language" => "en", "value" => "The capital of Akrotiri and Dhekelia." ),
+					array( "language" => "nl", "value" => "Het bestuurlijke centrum van Akrotiri en Dhekelia." ),
 				)
 			),
 			array(
 				"handle" => "Leipzig",
 				"labels" => array(
-					"de" => "Leipzig",
+					array( "language" => "de", "value" => "Leipzig" ),
 				),
 				"descriptions" => array(
-					"de"  => "Stadt in Sachsen.",
-					"en"  => "City in Saxony.",
+					array( "language" => "de", "value" => "Stadt in Sachsen." ),
+					array( "language" => "en", "value" => "City in Saxony." ),
 				)
 			),
 		);
