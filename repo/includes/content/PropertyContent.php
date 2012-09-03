@@ -175,6 +175,7 @@ class PropertyContent extends EntityContent {
 	 * @since 0.1
 	 *
 	 * @return boolean Success indicator
+	 * @throws \MWException
 	 */
 	protected function relationalSave() {
 		throw new \MWException( "not yet implemented" ); //FIXME

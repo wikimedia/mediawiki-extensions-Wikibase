@@ -181,6 +181,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * @param array|null $session optional session data
 	 *
 	 * @return OutputPage
+	 * @throws \MWException
 	 */
 	protected function callAction( $action, WikiPage $page, array $params = null, $post = false, array $session = null ) {
 		if ( is_string( $action ) ) {
@@ -258,6 +259,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * Creates a test item defined by $revisions.
 	 *
 	 * @return Item
+	 * @throws \MWException
 	 */
 	public static function createTestItem( $handle, $revisions ) {
 		/* @var ItemContent $content */

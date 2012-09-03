@@ -60,65 +60,66 @@ class MediaWikiSite extends SiteObject {
 	 * @param string $pageName
 	 *
 	 * @return string
+	 * @throws MWException
 	 */
-		public function normalizePageName( $pageName ) {
-			global $egWBRemoteTitleNormalization;
+	public function normalizePageName( $pageName ) {
+		global $egWBRemoteTitleNormalization;
 
-			// Check if we have strings as arguments.
-			if ( !is_string( $pageName ) ) {
-				throw new MWException( "\$pageTitle must be a string" );
-			}
+		// Check if we have strings as arguments.
+		if ( !is_string( $pageName ) ) {
+			throw new MWException( "\$pageTitle must be a string" );
+		}
+
+		// Go on call the external site
+		if ( defined( 'MW_PHPUNIT_TEST' ) || !$egWBRemoteTitleNormalization ) {
+			// If the code is under test, don't call out to other sites, just normalize locally.
+			// Note: this may cause results to be inconsistent with the actual normalization used by the respective remote site!
+
+			$t = Title::newFromText( $pageName );
+			return $t->getPrefixedText();
+		} else {
+
+			// Build the args for the specific call
+			$args = array(
+				'action' => 'query',
+				'prop' => 'info',
+				'redirects' => true,
+				'converttitles' => true,
+				'format' => 'json',
+				'titles' => $pageName,
+				//@todo: options for maxlag and maxage
+			);
+
+			$url = $this->getFileUrl( 'api.php' ) . '?' . wfArrayToCgi( $args );
 
 			// Go on call the external site
-			if ( defined( 'MW_PHPUNIT_TEST' ) || !$egWBRemoteTitleNormalization ) {
-				// If the code is under test, don't call out to other sites, just normalize locally.
-				// Note: this may cause results to be inconsistent with the actual normalization used by the respective remote site!
-
-				$t = Title::newFromText( $pageName );
-				return $t->getPrefixedText();
-			} else {
-
-				// Build the args for the specific call
-				$args = array(
-					'action' => 'query',
-					'prop' => 'info',
-					'redirects' => true,
-					'converttitles' => true,
-					'format' => 'json',
-					'titles' => $pageName,
-					//@todo: options for maxlag and maxage
-				);
-
-				$url = $this->getFileUrl( 'api.php' ) . '?' . wfArrayToCgi( $args );
-
-				// Go on call the external site
-				// FIXME: this is using wikibase settings
-				$ret = Http::get( $url, Wikibase\Settings::get( 'clientTimeout' ), Wikibase\Settings::get( 'clientPageOpts' ) );
-			}
-
-			if ( $ret === false ) {
-				wfDebugLog( "MediaWikiSite", "call to external site failed: $url" );
-				return false;
-			}
-
-			$data = FormatJson::decode( $ret, true );
-
-			if ( !is_array( $data ) ) {
-				wfDebugLog( "MediaWikiSite", "call to <$url> returned bad json: " . $ret );
-				return false;
-			}
-
-			$page = static::extractPageRecord( $data, $pageName );
-
-			// NOTE: we don't really care if $page['missing'] is set.
-
-			if ( !isset( $page['title'] ) ) {
-				wfDebugLog( "MediaWikiSite", "call to <$url> did not return a page title! " . $ret );
-				return false;
-			}
-
-			return $page['title'];
+			// FIXME: this is using wikibase settings
+			$ret = Http::get( $url, Wikibase\Settings::get( 'clientTimeout' ), Wikibase\Settings::get( 'clientPageOpts' ) );
 		}
+
+		if ( $ret === false ) {
+			wfDebugLog( "MediaWikiSite", "call to external site failed: $url" );
+			return false;
+		}
+
+		$data = FormatJson::decode( $ret, true );
+
+		if ( !is_array( $data ) ) {
+			wfDebugLog( "MediaWikiSite", "call to <$url> returned bad json: " . $ret );
+			return false;
+		}
+
+		$page = static::extractPageRecord( $data, $pageName );
+
+		// NOTE: we don't really care if $page['missing'] is set.
+
+		if ( !isset( $page['title'] ) ) {
+			wfDebugLog( "MediaWikiSite", "call to <$url> did not return a page title! " . $ret );
+			return false;
+		}
+
+		return $page['title'];
+	}
 
 
 	/**
