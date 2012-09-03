@@ -52,6 +52,24 @@
       "revId": "65c075b5436bf5f62da876746f6e0c06ab3bd19f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARn//90I\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-03T10:34:14Z",
+      "side": 1,
+      "message": "Alright, after updating ULS it is a function... very intuitive name for a function really...",
+      "parentUuid": "AAAARn//91c\u003d",
+      "revId": "65c075b5436bf5f62da876746f6e0c06ab3bd19f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
