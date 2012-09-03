@@ -1,14 +1,12 @@
 .wbc-editpage {
-	list-style-type: none;
-	list-style-image: none;
+	list-style: none none;
 	text-align: right;
 	padding-right: .5em !important; 
 }
 
 .wbc-editpage > a {
 	padding-left: 11px;
-	background-repeat: no-repeat;
-	background-position: left center;
+	background: no-repeat left center;
 }
 
 .wbc-editpage > a:link, .wbc-editpage > a:visited {
