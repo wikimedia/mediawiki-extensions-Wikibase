@@ -28,6 +28,8 @@ final class Autocomment {
 	 * @param string $post the string after the autocomment
 	 * @param Titel $title use for further information
 	 * @param boolean $local shall links be generated locally or globally
+	 *
+	 * @return boolean
 	 */
 	public static function onFormat( $data, &$comment, $pre, $auto, $post, $title, $local ) {
 		global $wgLang, $wgTitle;

@@ -140,6 +140,8 @@ abstract class SettingsBase extends ArrayObject implements Settings {
 	 * @since 0.1
 	 *
 	 * @param array|null $doNoUse
+	 *
+	 * @throws MWException
 	 */
 	public function __construct( $doNoUse = null ) {
 		if ( $doNoUse !== array( 'do not use' ) ) {

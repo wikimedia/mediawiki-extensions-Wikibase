@@ -103,6 +103,8 @@ class EditEntity {
 	 * @param User $user the editing user
 	 * @param false|int $baseRevisionId the revision id used to get the base entity to compare against for the first diff
 	 * @param false|int $lastRevisionId the revision id used to get the last entity to compare against for the applicable diff and patching
+	 *
+	 * @throws EditEntityException
 	 */
 	public function apply( \User $user, $baseRevisionId = false, $applicableRevisionId = false ) {
 		$done = false;
