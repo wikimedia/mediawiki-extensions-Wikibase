@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, Site;
+use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, Site, MediaWikiSite;
 
 /**
  * Class for creating views for Wikibase\Item instances.
@@ -411,7 +411,7 @@ class ItemView extends \ContextSource {
 		$sites = array();
 
 		/**
-		 * @var Site $site
+		 * @var MediaWikiSite $site
 		 */
 		foreach ( Sites::singleton()->getSites() as $site ) {
 			if ( $site->getType() === Site::TYPE_MEDIAWIKI && $site->getGroup() === 'wikipedia' ) {
@@ -422,7 +422,7 @@ class ItemView extends \ContextSource {
 					'name' => $languageName,
 					'globalSiteId' => $site->getGlobalId(),
 					'pageUrl' => $site->getRelativePagePath(),
-					'apiUrl' => $site->getRelativePath( 'api.php' ),
+					'apiUrl' => $site->getFileUrl( 'api.php' ),
 				);
 			}
 		}
