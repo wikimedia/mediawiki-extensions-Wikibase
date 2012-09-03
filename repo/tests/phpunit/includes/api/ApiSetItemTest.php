@@ -43,8 +43,27 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	function testSetItem() {
 		$item = array(
 			"sitelinks" => array(
-				"dewiki" => "Foo",
+				"enwiki" => array( "site" => "enwiki", "title" => "Bar" ),
+				"dewiki" => array( "site" => "dewiki", "title" => "Foo" ),
+			),
+			"labels" => array(
+				"de" => array( "language" => "de", "value" => "Foo" ),
+				"en" => array( "language" => "en", "value" => "Bar" ),
+			),
+			"aliases" => array(
+				"de"  => array( "language" => "de", "value" => "Fuh" ),
+				"en"  => array( "language" => "en", "value" => "Baar" ),
+			),
+			"descriptions" => array(
+				"de"  => array( "language" => "de", "value" => "Metasyntaktische Veriable" ),
+				"en"  => array( "language" => "en", "value" => "Metasyntactic variable" ),
+			)
+		);
+
+		$expect = array(
+			"sitelinks" => array(
 				"enwiki" => "Bar",
+				"dewiki" => "Foo",
 			),
 			"labels" => array(
 				"de" => "Foo",
@@ -59,7 +78,6 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				"en"  => "Metasyntactic variable",
 			)
 		);
-
 		// ---- check failure without token --------------------------
 		$this->login();
 
@@ -99,22 +117,22 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'item', 'id' );
-		$this->assertItemEquals( $item, $res['item'] );
+		$this->assertItemEquals( $expect, $res['item'] );
 
 		$id = $res['item']['id'];
 
 		// ---- check failure to set the same item again, without id -----------
-		$item['labels'] = array(
-			"de" => "Foo X",
-			"en" => "Bar Y",
-		);
+		$data = array( 'labels' => array(
+				"de" => array( "language" => "de", "value" => "Foo X" ),
+				"en" => array( "language" => "en", "value" => "Bar Y" ),
+			) );
 
 		try {
 			$this->doApiRequest(
 				array(
 					'action' => 'wbsetitem',
 					'reason' => 'Some reason',
-					'data' => json_encode( $item ),
+					'data' => json_encode( array_merge( $item, $data ) ),
 					'token' => $token,
 				),
 				null,
@@ -144,7 +162,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 		$this->assertSuccess( $res, 'item', 'id' );
 		$this->assertSuccess( $res, 'item', 'lastrevid' );
-		$this->assertItemEquals( $item, $res['item'] );
+		$this->assertItemEquals( $expect, $res['item'] );
 
 		// @todo: split the below into a separate function
 		// ---- set the same item again, with with fields in the json that should be ignored-----------
@@ -174,7 +192,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					self::$users['wbeditor']->user
 				);
 				$this->assertSuccess( $res, 'item', 'id' );
-				$this->assertItemEquals( $item, $res['item'] );
+				$this->assertItemEquals( $expect, $res['item'] );
 			}
 			catch ( \UsageException $e ) {
 				$this->fail( "Got unexpected exception: $e" );
@@ -246,7 +264,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					self::$users['wbeditor']->user
 				);
 				$this->assertSuccess( $res, 'item', 'id' );
-				$this->assertItemEquals( $item, $res['item'] );
+				$this->assertItemEquals( $expect, $res['item'] );
 			}
 			catch ( \UsageException $e ) {
 				$this->fail( "Got unexpected exception: $e" );
@@ -299,11 +317,13 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			),
 
 			//-----------------------------------------------
-
+/*
 			// aliases have to be one list per language
 			array(
 				array(
-					"aliases" => array( "de" => "foo" )
+					"aliases" => array(
+						array( "language" => "de", "value" => "foo" ),
+					)
 				),
 				"not-recognized-array"
 			),
@@ -311,7 +331,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			// labels have to be one value per language
 			array(
 				array(
-					"labels" => array( "de" => array( "foo" ) )
+					"labels" => array(
+						array( "language" => "de", "value" => "foo" ),
+					)
 				),
 				"not-recognized-string"
 			),
@@ -319,17 +341,21 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			// descriptions have to be one value per language
 			array(
 				array(
-					"descriptions" => array( "de" => array( "foo" ) )
+					"descriptions" => array(
+						array( "language" => "de", "value" => "foo" ),
+					)
 				),
 				"not-recognized-string"
 			),
-
+*/
 			//-----------------------------------------------
 
 			// aliases have to use valid language codes
 			array(
 				array(
-					"aliases" => array( "*" => array( "foo" ) )
+					"aliases" => array(
+						array( "language" => "*", "value" => "foo" ),
+					)
 				),
 				"not-recognized-language"
 			),
@@ -337,7 +363,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			// labels have to use valid language codes
 			array(
 				array(
-					"labels" => array( "*" => "foo" )
+					"labels" => array(
+						array( "language" => "*", "value" => "foo" ),
+					)
 				),
 				"not-recognized-language"
 			),
@@ -345,7 +373,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			// descriptions have to use valid language codes
 			array(
 				array(
-					"descriptions" => array( "*" => "foo" )
+					"descriptions" => array(
+						array( "language" => "*", "value" => "foo" ),
+					)
 				),
 				"not-recognized-language"
 			),
@@ -423,7 +453,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				self::$users['wbeditor']->user
 			);
 
-			$this->fail( "Adding item should have failed" );
+			$this->fail( "Adding item should have failed: " . ( is_string( $data ) ? $data : json_encode( $data ) ) );
 		}
 		catch ( \UsageException $e ) {
 			$this->assertTrue( ($e->getCodeString() == $expectedErrorCode), "Expected $expectedErrorCode, got unexpected exception: $e" );
@@ -467,10 +497,10 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				'Berlin', // handle
 				array(    // input
 					'labels' => array(
-						'de' => '', // remove existing
-						'ru' => '', // remove non-existing
-						'en' => 'Stuff',  // change existing
-						'fr' => 'Berlin', // add new
+						array( "language" => 'de', "value" => '' ), // remove existing
+						array( "language" => 'ru', "value" => '' ), // remove non-existing
+						array( "language" => 'en', "value" => 'Stuff' ),  // change existing
+						array( "language" => 'fr', "value" => 'Berlin' ), // add new
 					)
 				),
 				array(    // expected
@@ -487,10 +517,10 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				'Berlin', // handle
 				array(    // input
 					'descriptions' => array(
-						'de' => '', // remove existing
-						'ru' => '', // remove non-existing
-						'en' => 'Stuff',   // change existing
-						'fr' => 'Bla bla', // add new
+						array( "language" => 'de', "value" => '' ), // remove existing
+						array( "language" => 'ru', "value" => '' ), // remove non-existing
+						array( "language" => 'en', "value" => 'Stuff' ),   // change existing
+						array( "language" => 'fr', "value" => 'Bla bla' ), // add new
 					)
 				),
 				array(    // expected
@@ -507,10 +537,12 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				'Berlin', // handle
 				array(    // input
 					'aliases' => array(
-						"de" => array(), // remove existing
-						"ru" => array(), // remove non-existing
-						"en"  => array( "Bla bla" ), // change existing
-						"fr"  => array( "Bla bla" ), // add new
+						// TODO: It should be possible to unconditionally clear the list
+						//"de" => array(), // remove existing
+						//"ru" => array(), // remove non-existing
+						array( "language" => "de", "value" => "Dickes B", "remove" => "" ), // remove existing
+						array( "language" => "en", "value" => "Bla bla" ), // change existing
+						array( "language" => "fr", "value" => "Bla bla" ), // add new
 					)
 				),
 				array(    // expected
@@ -526,10 +558,10 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				'Berlin', // handle
 				array(    // input
 					'sitelinks' => array(
-						'dewiki' => '', // remove existing
-						'srwiki' => '', // remove non-existing
-						"nnwiki" => "Berlin X", // change existing
-						"svwiki" => "Berlin X", // add new
+						array( 'site' => 'dewiki', 'title' => '' ), // remove existing
+						array( 'site' => 'srwiki', 'title' => '' ), // remove non-existing
+						array( 'site' => "nnwiki", 'title' => "Berlin X" ), // change existing
+						array( 'site' => "svwiki", 'title' => "Berlin X" ), // add new
 					)
 				),
 				array(    // expected

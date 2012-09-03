@@ -20,7 +20,7 @@ use Wikibase\ApiSetSiteLink;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group ApiGetItemsTest
+ * @group ApiSetSiteLinkTest
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -228,8 +228,9 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 
 			if ( $expectedTitle !== false && $linktitle !== '' ) {
 				$this->assertArrayHasKey( 'url', $link );
-				// this makes an assumption that the title is represented as a string that does not need
+				// This makes an assumption that the title is represented as a string that does not need
 				// normalization or url encoding
+				// TODO: Not sure why this sometimes fails during test
 				$this->assertContains( $link['title'], $link['url'] );
 			}
 			else {
