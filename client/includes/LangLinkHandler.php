@@ -48,7 +48,7 @@ class LangLinkHandler {
 	 * 
 	 * @since 0.1
 	 *
-	 * @param Parser $parser
+	 * @param \Parser $parser
 	 * @return boolean
 	 */
 	public static function useRepoLinks( \Parser $parser ) {
@@ -74,7 +74,7 @@ class LangLinkHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Parser $parser
+	 * @param \Parser $parser
 	 * @param array $repoLinks - array of \Wikibase\SiteLink objects
 	 *
 	 * @return true

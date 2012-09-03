@@ -127,13 +127,13 @@ class ActionTestCase extends MediaWikiTestCase {
 	/**
 	 * Creates an action and supplies it with a fake web request.
 	 *
-	 * @param String|Action $action the action to call, may be an action name or class name.
+	 * @param String|\Action $action the action to call, may be an action name or class name.
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool       $post posted?
 	 * @param array|null $session optional session data
 	 *
-	 * @return Action
+	 * @return \Action
 	 */
 	protected function createAction( $action, WikiPage $page, array $params = null, $post = false, $session = null ) {
 		global $wgUser,$wgLang;
@@ -174,7 +174,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * Calls the desired action using a fake web request.
 	 * This calls the Show() method on the target action.
 	 *
-	 * @param String|Action $action the action to call; may be an action name or class name
+	 * @param String|\Action $action the action to call; may be an action name or class name
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool       $post posted?
