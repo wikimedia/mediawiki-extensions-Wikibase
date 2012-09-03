@@ -58,11 +58,21 @@ final class Utils {
 	 * Inserts some sites into the sites table.
 	 *
 	 * @since 0.1
+	 *
+	 * @param lame $databaseUpdaterIsFullOfFail
+	 * @param callable $outputFunction
 	 */
-	public static function insertDefaultSites() {
+	public static function insertDefaultSites( $databaseUpdaterIsFullOfFail, $outputFunction ) {
 		if ( \SitesTable::singleton()->count() > 0 ) {
 			return;
 		}
+
+		// Compatibility with PHP < 5.4.
+		$outputMessage = function( $message ) use ( $outputFunction ) {
+			call_user_func( $outputFunction, $message );
+		};
+
+		$outputMessage( "No sites present yet, fetching from meta.wikimedia.org to populate sites table\n" );
 
 		$languages = \FormatJson::decode(
 			\Http::get( 'http://meta.wikimedia.org/w/api.php?action=sitematrix&format=json' ),
@@ -81,6 +91,8 @@ final class Utils {
 
 		wfGetDB( DB_MASTER )->begin();
 
+		$outputMessage( "Inserting obtained sites...\n" );
+
 		foreach ( $languages['sitematrix'] as $language ) {
 			if ( is_array( $language ) && array_key_exists( 'code', $language ) && array_key_exists( 'site', $language ) ) {
 				$languageCode = $language['code'];
@@ -94,9 +106,8 @@ final class Utils {
 					$site->addInterwikiId( $localId );
 					$site->addNavigationId( $localId );
 
-					$site->setUrl( $siteData['url'] );
-					$site->setRelativeFilePath( '/w/$1' );
-					$site->setRelativePagePath( '/wiki/$1' );
+					$site->setFilePath( $siteData['url'] . '/w/$1' );
+					$site->setPagePath( $siteData['url'] . '/wiki/$1' );
 
 					$site->save();
 				}
