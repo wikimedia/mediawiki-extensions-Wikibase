@@ -331,9 +331,9 @@ table.wb-sitelinks tfoot td.wb-sitelinks-toolbar {
 	}
 
 	.wb-error .tipsy-inner {
-		background-color:#FFDFC9;
+		background: #FFDFC9 none;
 		border-color:#B27631;
-		background-image: none; /* prevent propagation of background image */
+		/* prevent propagation of background image */
 	}
 
 		.wb-tooltip-error-top-message {
