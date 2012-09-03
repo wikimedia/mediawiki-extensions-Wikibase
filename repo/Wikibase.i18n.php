@@ -1153,11 +1153,12 @@ $1',
 
 /** Finnish (suomi)
  * @author Beluga
+ * @author Nike
  */
 $messages['fi'] = array(
 	'wikibase-edit' => 'muokkaa',
 	'wikibase-save' => 'tallenna',
-	'wikibase-cancel' => 'peruuta',
+	'wikibase-cancel' => 'peru',
 	'wikibase-add' => 'lisää',
 	'wikibase-save-inprogress' => 'Tallennetaan...',
 	'wikibase-remove-inprogress' => 'Poistetaan...',
@@ -2126,6 +2127,7 @@ $messages['it'] = array(
 	'wikibase-error-ui-no-permissions' => 'Non hai i diritti sufficienti per eseguire questa azione.',
 	'wikibase-error-ui-link-exists' => 'Non puoi inserire un collegamento a questa pagina perché un altro elemento già collega ad essa.',
 	'wikibase-error-ui-session-failure' => 'La sessione è scaduta. Accedi nuovamente.',
+	'wikibase-error-ui-edit-conflict' => 'Si è verificato un conflitto durante la modifica. Si prega di ricaricare e salvare di nuovo.',
 	'wikibase-move-error' => 'Non è possibile spostare le pagine che sono nel namespace dei dati e non è possibile spostare le pagine in esso.',
 	'wikibase-error-relational-save-failed' => "Impossibile memorizzare l'identità dell'elemento nel database.",
 	'wikibase-error-sitelink-already-used' => "Collegamento al sito [[$1:$2]] già utilizzato dall'elemento [[$3]].",
@@ -2165,6 +2167,7 @@ $1',
 	'wikibase-api-not-recognized-language' => "L'identificatore di lingua fornito non è stato riconosciuto.",
 	'wikibase-api-not-recognized-siteid' => "L'identificatore del sito fornito non è stato riconosciuto.",
 	'wikibase-api-no-permissions' => "L'utente connesso non ha diritti sufficienti.",
+	'wikibase-api-no-revision' => 'La versione non è stata trovata.',
 	'wikibase-api-data-or-id-xor-wikititle' => 'Fornire o l\'"id" dell\'elemento, o la coppia "site" e "title" per la pagina corrispondente. Oppure "data" per un nuovo elemento.',
 	'wikibase-api-id-xor-wikititle' => 'Fornire o l\'elemento "id" o la coppia "site" e "title" per una pagina corrispondente.',
 	'wikibase-api-no-such-item' => 'Non è possibile trovare un elemento esistente.',
@@ -3030,6 +3033,7 @@ for å finne ut kva som har skjedd.',
 );
 
 /** Polish (polski)
+ * @author BeginaFelicysym
  * @author Lazowik
  */
 $messages['pl'] = array(
@@ -3064,7 +3068,7 @@ $messages['pl'] = array(
 	'wikibase-undo-firstrev' => 'Nie można cofnąć utworzenia strony',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|pozycja|pozycje|pozycji}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|pozycja|pozycje|pozycji}})',
-	'wikibase-propertyedittool-counter-pending-tooltip' => 'Nie zapisano jeszcze $1 wartości',
+	'wikibase-propertyedittool-counter-pending-tooltip' => 'Nie zapisano jeszcze {{PLURAL:$1|jednej wartości|$1 wartości|$1 wartości}}',
 	'wikibase-sitelinksedittool-full' => 'Linki są już podane dla wszystkich znanych znanych stron.',
 	'wikibase-disambiguation-title' => 'Ujednoznacznienie "$1"',
 	'wikibase-aliases-label' => 'Inne nazwy:',
