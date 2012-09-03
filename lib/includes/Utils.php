@@ -60,17 +60,22 @@ final class Utils {
 	 * @since 0.1
 	 *
 	 * @param lame $databaseUpdaterIsFullOfFail
-	 * @param callable $outputFunction
+	 * @param callable|null $outputFunction
 	 */
-	public static function insertDefaultSites( $databaseUpdaterIsFullOfFail, $outputFunction ) {
+	public static function insertDefaultSites( $databaseUpdaterIsFullOfFail, $outputFunction = null ) {
 		if ( \SitesTable::singleton()->count() > 0 ) {
 			return;
 		}
 
-		// Compatibility with PHP < 5.4.
-		$outputMessage = function( $message ) use ( $outputFunction ) {
-			call_user_func( $outputFunction, $message );
-		};
+		if ( is_null( $outputFunction ) ) {
+			$outputMessage = function( $message ) {};
+		}
+		else {
+			// Compatibility with PHP < 5.4.
+			$outputMessage = function( $message ) use ( $outputFunction ) {
+				call_user_func( $outputFunction, $message );
+			};
+		}
 
 		$outputMessage( "No sites present yet, fetching from meta.wikimedia.org to populate sites table\n" );
 
