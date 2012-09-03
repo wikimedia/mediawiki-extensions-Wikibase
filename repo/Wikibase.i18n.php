@@ -158,6 +158,7 @@ $1',
 	'wikibase-api-illegal-field' => 'Illegal field used in call: $1',
 	'wikibase-api-edit-conflict' => 'It is detected an edit conflict and it is not possible to resolve it by patching the current revision.',
 
+	'wikibase-self-conflict' => 'Data was modified by you after you started editing.',
 	'wikibase-restoreold' => 'restore',
 	'wikibase-restore-summary' => 'Restore revision $1 by [[Special:Contributions/$2|$2]]',
 
@@ -373,6 +374,7 @@ Parameters:
 	'wikibase-api-illegal-field' => 'There is an illegal field name in the props for the module call. This makes the call fail, but the name of failing field will be reported. Parameters:
 * $1 is the failing field name',
 	'wikibase-api-edit-conflict' => 'There is an edit conflict that that could not be resolved. This can have several resons, but thiere is only a generic message for all of them.',
+	'wikibase-self-conflict' => 'Warning issued when an edit is made based on an old revision, but no conflict arises because all intermediate edits were made by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.',
 	'wikibase-restoreold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
 	'wikibase-restore-summary' => 'Edit summary for an restore action. Parameters:
 * $1 is the revision id number;
@@ -634,6 +636,7 @@ $messages['de'] = array(
 	'wikibase-api-session-failure' => 'Die aktuelle Sitzung ist abgelaufen. Du musst dich daher erneut anmelden.',
 	'wikibase-api-illegal-field' => 'Beim Aufruf wird ein ungültiges Feld verwendet: $1',
 	'wikibase-api-edit-conflict' => 'Es wurde ein Bearbeitungskonflikt entdeckt und es ist nicht möglich, ihn mit dem Patchen der aktuellen Version zu lösen.',
+	'wikibase-self-conflict' => 'Die Daten wurden verändert seit du Angefangen hast sie zu bearbeiten.',
 	'wikibase-restoreold' => 'zurücksetzen',
 	'wikibase-restore-summary' => 'Die Version $1 von [[Special:Contributions/$2|$2]] wurde wiederhergestellt.',
 	'wikibase-noitem' => 'Dieses Datenelement ist nicht vorhanden.
