@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn//914\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-03T10:12:11Z",
+      "side": 1,
+      "message": "should be $.uls.data.autonyms() otherwise it will return the method, not the autonymsByCode object.",
+      "revId": "65c075b5436bf5f62da876746f6e0c06ab3bd19f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
