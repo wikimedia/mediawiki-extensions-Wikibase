@@ -232,30 +232,16 @@ abstract class ApiModifyItem extends Api {
 			$comment = $this->getTextForComment( $params, $hits );
 
 			// set up an editEntity if there are sufficient information
-			$editEntity = false;
-			$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : false;
-			if ( !$itemContent->isNew() ) { // TODO: what if new and accidently the same id?
-				if ( $baseRevisionId ) { // TODO: Can't do patching without a base revision?
-					$lastRevisionId = $itemContent->getTitle()->getLatestRevID();
-					if ( $baseRevisionId !== $lastRevisionId ) {
-						$editEntity = EditEntity::newEditEntity( $itemContent->getEntity(), $user, $baseRevisionId, $lastRevisionId );
-						// TODO: This is only a very simple check to see if the applicable diff is complete compared to the base diff,
-						// if not it is a sure sign of edit conflict even if it can be solved.
-						if ( !$editEntity->isSuccess() ) {
-							$this->dieUsage( $status->getWikiText( 'wikibase-api-patch-incomplete' ), 'patch-incomplete' );
-						}
-					}
-				}
-			}
+			$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+			$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : null;
+
+			$editEntity = new EditEntity( $itemContent, $user, $baseRevisionId );
 
 			// Do the actual save, or if it don't exist yet create it.
 			// There will be exceptions but we just leak them out ;)
-			$status = $itemContent->save(
+			$status = $editEntity->attemptSave(
 				Autocomment::formatTotalSummary( $comment, $summary, $lang ),
-				$user,
-				$this->flags,
-				$baseRevisionId,
-				$editEntity
+				$this->flags
 			);
 			$success = $status->isOK();
 

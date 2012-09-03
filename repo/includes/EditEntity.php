@@ -2,11 +2,11 @@
 
 namespace Wikibase;
 
-use \Wikibase\Entity as Entity;
-use Status;
+use Status, Revision, User, WikiPage, Title;
 
 /**
- * Parts of the edit interface for entities..
+ * Handler for editing activity, providing a unified interface for saving modified entities while performing
+ * permission checks and handling edit conflicts.
  *
  * @since 0.1
  *
@@ -15,215 +15,363 @@ use Status;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler
  */
 class EditEntity {
 
 	/**
 	 * The original entity we use for creating the diff
 	 * @since 0.1
-	 * @var Entity
+	 * @var EntityContent
 	 */
-	protected $mOriginalEntity = null;
-
-	/**
-	 * The entity we apply the diff and then it will be "patched"
-	 * @since 0.1
-	 * @var Entity
-	 */
-	protected $mPatchedEntity = null;
+	protected $newContent = null;
 
 	/**
 	 * @since 0.1
 	 * @var Revision
 	 */
-	protected $mBaseRevisionId = false;
+	protected $baseRev = null;
+
+	/**
+	 * @since 0.1
+	 * @var int
+	 */
+	protected $baseRevId = null;
 
 	/**
 	 * @since 0.1
 	 * @var Revision
 	 */
-	protected $mApplicableRevisionId = false;
+	protected $currentRev = null;
+
+	/**
+	 * @since 0.1
+	 * @var int
+	 */
+	protected $currentRevId = null;
+
+	/**
+	 * @since 0.1
+	 * @var WikiPage
+	 */
+	protected $page = null;
 
 	/**
 	 * @since 0.1
 	 * @var Status
 	 */
-	protected $mStatus = null;
+	protected $status = null;
 
 	/**
 	 * @since 0.1
-	 * @var Empty
+	 * @var User
 	 */
-	protected $mEmpty = null;
+	protected $user = null;
 
 	/**
-	 * @since 0.1
-	 * @var Empty
-	 */
-	protected $mUserWasLastToEdit = null;
-
-	/**
-	 * Factory method for new edit entities
+	 * Constructs a new EditEntity
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity $article an entity to use as the the source
-	 * @param User $user the editing user
-	 * @param false|int $baseRevisionId the revision id used to get the base entity to compare against for the first diff
-	 * @param false|int $lastRevisionId the revision id used to get the last entity to compare against for the applicable diff and patching
-	 *
-	 * @return null|EditEntity a valid EditEntity or null if the creation failed
+	 * @param EntityContent $newContent the new entity content
+	 * @param User|null     $user       the user performing the edit (defaults to $wgUser)
+	 * @param int|null      $baseRevId  the base revision ID for conflict checking. Defaults to the current revision.
 	 */
-	public static function newEditEntity( Entity &$originalEntity, \User $user, $baseRevisionId = false, $applicableRevisionId = false ) {
-		try {
-			$editEntity = new EditEntity( $originalEntity );
-			$editEntity->apply( $user, $baseRevisionId, $applicableRevisionId );
-		}
-		catch ( EditEntityException $e ) {
-			$editEntity = null;
-		}
-		return $editEntity;
+	public function __construct( EntityContent $newContent, \User $user = null, $baseRevId = null) {
+		$this->newContent = $newContent;
+
+		$this->user = $user;
+		$this->baseRevId = $baseRevId;
 	}
 
 	/**
-	 * @since 0.1
+	 * Returns the new entity content to be saved. May be different from the content supplied to the constructor in
+	 * case the content was patched to resolve edit conflicts.
 	 *
-	 * @param Entity $article an entity to use as the the source
+	 * @return EntityContent
 	 */
-	public function __construct( Entity &$originalEntity ) {
-		$this->mStatus = \Status::newGood();
-		$this->mOriginalEntity = $originalEntity;
+	public function getNewContent() {
+		return $this->newContent;
 	}
 
 	/**
-	 * Setup to be run after the initial construction
+	 * Returns the current revision of the entity's page.
+	 * Shorthand for $this->getPage()->getRevision().
 	 *
-	 * @since 0.1
-	 *
-	 * @param User $user the editing user
-	 * @param false|int $baseRevisionId the revision id used to get the base entity to compare against for the first diff
-	 * @param false|int $lastRevisionId the revision id used to get the last entity to compare against for the applicable diff and patching
-	 *
-	 * @throws EditEntityException
+	 * @return Revision
 	 */
-	public function apply( \User $user, $baseRevisionId = false, $applicableRevisionId = false ) {
-		$done = false;
-
-		// This is for later versions where we need revisions to exist for further testing,
-		// that is we are checking their content and building diffs and patching them.
-		// For now we're only checking if they are there.
-		if ( $baseRevisionId !== false ) {
-			$baseRevision = \Revision::newFromId( $baseRevisionId );
-			if ( !isset( $baseRevision ) ) {
-				throw new EditEntityException( 'No base revision was found', 'wikibase-no-revision' );
-			}
-		}
-		if ( $applicableRevisionId !== false ) {
-			$applicableRevision = \Revision::newFromId( $applicableRevisionId );
-			if ( !isset( $applicableRevision ) ) {
-				throw new EditEntityException( 'No applicable revision was found', 'wikibase-no-revision' );
-			}
+	public function getCurrentRevision() {
+		if ( $this->isNew() ) {
+			return null;
 		}
 
-		//@todo: check whether $baseRevision refers to the same item id as the original entity
-		//@todo: check whether $applicableRevision refers to the same item id as the original entity
-		//@todo: make sure the $baseRevision is older than $applicableRevision
-
-		$this->mPatchedEntity = $this->mOriginalEntity;
-		$this->mUserWasLastToEdit = true;
-
-		$this->mStatus = \Status::newGood('ok');
-
-		// base revision is the last one
-		if ( $baseRevisionId !== false && $applicableRevisionId !== false && $baseRevisionId === $applicableRevisionId ) {
-			$this->mStatus = \Status::newGood('only-to-edit');
-			$done = true;
+		if ( $this->currentRev === null ) {
+			//NOTE: it's important to remember this, if someone calls clear() on $this->getPage(), this should NOT change!
+			$this->currentRev = $this->getPage()->getRevision();
 		}
 
-		// check if the user was the last one to edit since the given revision id
-		if ( !$done && $baseRevisionId !== false ) {
-			$this->mUserWasLastToEdit = self::userWasLastToEdit( $user->getId(), $baseRevisionId );
+		return $this->currentRev;
+	}
 
-			if ( $this->mUserWasLastToEdit ) {
-				$this->mStatus = \Status::newGood('last-to-edit');
-				$done = true;
-			}
+
+	/**
+	 * Returns the current content of the entity's page.
+	 * Shorthand for $this->getPage()->getContent().
+	 *
+	 * @return EntityContent
+	 */
+	public function getCurrentContent() {
+		if ( $this->isNew() ) {
+			return null;
 		}
+
+		return $this->getPage()->getContent();
 	}
 
 	/**
-	 * Get the base revisions id
+	 * Returns the user who performs the edit.
 	 *
-	 * @since 0.1
+	 * @return User
+	 */
+	public function getUser() {
+		global $wgUser;
+
+		if ( $this->user === null ) {
+			$this->user = $wgUser;
+		}
+
+		return $this->user;
+	}
+
+	/**
+	 * Returns the WikiPage to be edited.
+	 * Shorthand for $this->getNewContent()->getWikiPage().
 	 *
-	 * @return false|int the id for the revision or false if not yet available
+	 * @return WikiPage
+	 */
+	public function getPage() {
+		if ( $this->isNew() ) {
+			return null;
+		}
+
+		if ( $this->page === null ) {
+			$this->page = $this->getNewContent()->getWikiPage();
+		}
+
+		return $this->page;
+	}
+
+	/**
+	 * Returns the Title of the page to be edited.
+	 * Shorthand for $this->getPage()->getTitle().
+	 *
+	 * @return Title
+	 */
+	public function getTitle() {
+		if ( $this->isNew() ) {
+			return null;
+		}
+
+		return $this->newContent->getTitle();
+	}
+
+	/**
+	 * Returns whether the new content is new, that is, does not have an ID yet and thus no title, page or revisions.
+	 */
+	public function isNew() {
+		return $this->newContent->isNew();
+	}
+
+	/**
+	 * Returns the current revision ID.
+	 * Shorthand for $this->getPage()->getLatest().
+	 *
+	 * @return int
+	 */
+	public function getCurrentRevisionId() {
+		if ( $this->isNew() ) {
+			return 0;
+		}
+
+		if ( $this->currentRevId === null ) {
+			//NOTE: it's important to remember this, if someone calls clear() on $this->getPage(), this should NOT change!
+			$this->currentRevId = $this->getPage()->getLatest();
+		}
+
+		return $this->currentRevId;
+	}
+
+	/**
+	 * Returns the base revision ID.
+	 * In the trivial non-conflicting case, this will be the same as $this->getCurrentRevisionId().
+	 *
+	 * @return int
 	 */
 	public function getBaseRevisionId() {
-		return $this->mBaseRevisionId;
+		if ( $this->baseRevId === null ) {
+			$this->baseRevId = $this->getCurrentRevisionId();
+		}
+
+		return $this->baseRevId;
 	}
 
 	/**
-	 * Get the applicable revisions id
+	 * Returns the edits base revision.
+	 * In the trivial non-conflicting case, this will be the same as $this->getCurrentRevision().
 	 *
-	 * @since 0.1
-	 *
-	 * @return false|int the id for the revision or false if not yet available
+	 * @throws \MWException
+	 * @return Revision
 	 */
-	public function getApplicableRevisionId() {
-		return $this->mApplicableRevisionId;
+	public function getBaseRevision() {
+		if ( $this->baseRev === null ) {
+			$id = $this->getBaseRevisionId();
+
+			if ( $id === $this->getCurrentRevisionId() ) {
+				$this->baseRev = $this->getCurrentRevision();
+			} else {
+				$this->baseRev = Revision::newFromId( $id );
+				if ( $this->baseRev === false ) {
+					throw new \MWException( 'base revision ID: ' . $id );
+				}
+			}
+		}
+
+		return $this->baseRev;
 	}
 
 	/**
-	 * Get the original entity used to create the base patchset
+	 * Returns the content of the base revision.
+	 * Shorthand for $this->getBaseRevision()->getContent()
 	 *
-	 * @since 0.1
-	 *
-	 * @return null|Entity the entity or null if not yet available
+	 * @return EntityContent
 	 */
-	public function getOriginalEntity() {
-		return $this->mOriginalEntity;
+	public function getBaseContent() {
+		$rev = $this->getBaseRevision();
+		return $rev == null ? null : $rev->getContent();
 	}
 
 	/**
-	 * Get the patched entity, the one after applying the diff
+	 * Determines whether an edit conflict exists, that is, whether another user has edited the same item
+	 * after the base revision was created.
 	 *
-	 * Note that this entity will only be "patched" after the method applyPatch is run.
+	 * @param \Status $status An status object to update with any warnings. Note that the edit conflict as such
+	 *        will *not* be reported in the status object, since it might be fixable.
 	 *
-	 * @since 0.1
-	 *
-	 * @return null|Entity the entity or null if not yet available
+	 * @return bool
 	 */
-	public function getPatchedEntity() {
-		return $this->mPatchedEntity;
+	public function hasEditConflict( Status $status ) {
+		if ( $this->isNew() ) {
+			return false;
+		}
+
+		if ( $this->getBaseRevisionId() == $this->getCurrentRevisionId() ) {
+			return false;
+		}
+
+		if ( self::userWasLastToEdit( $this->getUser()->getId(), $this->getBaseRevisionId() ) ) {
+			$status->warning( 'wikibase-self-conflict' );
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
-	 * Get the status
-	 *
-	 * Note that this entity will only be "patched" after the method applyPatch is run.
+	 * Get the status object. Only defined after attemptSave() was called.
 	 *
 	 * @since 0.1
 	 *
 	 * @return null|Status
 	 */
 	public function getStatus() {
-		return $this->mStatus;
+		return $this->status;
 	}
 
 	/**
-	 * Does the patch covers all items from the initial diff?
-	 * 
-	 * @since 0.1
-	 * 
-	 * @return null|Diff the entity or null if not yet available
+	 * Attempts to patch an edit conflict by patching the difference between the base content and the new content into
+	 * the current content. Will fail if any conflicts are detected.
+	 *
+	 * The behaviour of this function is undefined if hasEditConflict() returns false.
+	 *
+	 * @param Status $status a status object to report details to. A successful patch fill add a warning.
+	 *        A failed patch will add a fatal error.
+	 *
+	 * @todo: implement!
+	 *
+	 * @return bool True if the conflict could be resolved, false otherwise
 	 */
-	public function isSuccess() {
-		if ( $this->mUserWasLastToEdit === true ) {
-			return true;
+	public function fixEditConflict( Status $status ) {
+		$status->error( 'edit-conflict' );
+		$status->setResult( false );
+		return false;
+	}
+
+	/**
+	 * Checks the necessary permissions to perform this edit.
+	 *
+	 * @throws \PermissionsError if the user's permissions are not sufficient
+	 *
+	 * @todo: implement by moving EntityContent::userCanEdit here!
+	 */
+	public function checkEditPermissions() {
+		//...
+	}
+
+	/**
+	 * Attempts to save the new entity content, chile first checking for permissions, edit conflicts, etc.
+	 *
+	 * @param String $summary the edit summary
+	 * @param int $flags      the edit flags (see WikiPage::toEditContent)
+	 *
+	 * @return Status Indicates success and provides detailed warnings or error messages.
+	 * @throws \MWException
+	 *
+	 * @see WikiPage::toEditContent
+	 */
+	public function attemptSave( $summary, $flags = 0 ) {
+		$this->checkEditPermissions();
+
+		$this->status = Status::newGood();
+
+		if ( !$this->status->isOK() ) {
+			return $this->status;
 		}
-		else {
-			return /* $this->isComplete() */ false;
+
+		//NOTE: Make sure the current revision is loaded and cached.
+		//      Would happen on demand anyway, but we want a well-defined point at which "current" is frozen
+		//      to a specific revision, just before the first check for edit conflicts.
+		$this->getCurrentRevision();
+		$this->getCurrentRevisionId();
+
+		$conflict = $this->hasEditConflict( $this->status );
+
+		if ( $conflict ) {
+			$fixed = $this->fixEditConflict( $this->status );
+
+			if ( $fixed ) {
+				$conflict = false;
+			}
 		}
+
+		if ( $conflict ) {
+			$this->status->error( 'edit-conflict' );
+			$this->status->setResult( false );
+		}
+
+		if ( !$this->status->isOK() ) {
+			return $this->status;
+		}
+
+		$editStatus = $this->newContent->save(
+			$summary,
+			$this->getUser(),
+			$flags | EDIT_AUTOSUMMARY,
+			$this->getCurrentRevisionId(),
+			$this
+		);
+
+		$this->status->merge( $editStatus );
+		return $this->status;
 	}
 
 	/**
