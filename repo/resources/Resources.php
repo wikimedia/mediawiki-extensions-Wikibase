@@ -205,5 +205,14 @@ return call_user_func( function() {
 				'wikibase-blockeduser-tooltip-message'
 			)
 		),
+
+
+		/* Wikibase special pages */
+
+		'wikibase.special' => $moduleTemplate + array(
+			'styles' => array(
+				'wikibase.special/wikibase.special.css'
+			)
+		)
 	);
 } );
