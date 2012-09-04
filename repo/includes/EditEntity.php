@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use Status, Revision, User, WikiPage, Title;
+use Status, Revision, User, WikiPage, Title, WebRequest;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
@@ -342,20 +342,51 @@ class EditEntity {
 	}
 
 	/**
+	 * Make sure the given WebRequest contains a valid edit token.
+	 *
+	 * @param $request WebRequest to check for tokens
+	 * @param $status Status a status object to report error details to
+	 *
+	 * @return bool true if the token is valid
+	 */
+	public function isTokenOK( WebRequest &$request, Status $status ) {
+		$token = $request->getVal( 'wpEditToken' );
+		$tokenOk = $this->getUser()->matchEditToken( $token );
+		$tokenOkExceptSuffix = $this->getUser()->matchEditTokenNoSuffix( $token );
+
+		if ( !$tokenOk ) {
+			if ( $tokenOkExceptSuffix ) {
+				$status->fatal( 'wikibase-undo-revision-error', 'token_suffix_mismatch' );
+			} else {
+				$status->fatal( 'wikibase-undo-revision-error', 'session_fail_preview' );
+			}
+
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Attempts to save the new entity content, chile first checking for permissions, edit conflicts, etc.
 	 *
-	 * @param String $summary the edit summary
-	 * @param int $flags      the edit flags (see WikiPage::toEditContent)
+	 * @param String $summary    the edit summary
+	 * @param int    $flags      the edit flags (see WikiPage::toEditContent)
+	 * @param WebRequest $request Request for checking tokens
 	 *
 	 * @return Status Indicates success and provides detailed warnings or error messages.
-	 * @throws \MWException
-	 *
-	 * @see WikiPage::toEditContent
+	 * @see      WikiPage::toEditContent
 	 */
-	public function attemptSave( $summary, $flags = 0 ) {
+	public function attemptSave( $summary, $flags = 0, WebRequest $request = null ) {
 		$this->checkEditPermissions();
 
 		$this->status = Status::newGood();
+
+		if ( $request !== null ) {
+			if ( !$this->isTokenOK( $request, $this->status ) ) {
+				return $this->status;
+			}
+		}
 
 		if ( !$this->status->isOK() ) {
 			return $this->status;
@@ -412,7 +443,7 @@ class EditEntity {
 	 * Use those ids for full lookup of the content and create applicable diffs and check if they are empty.
 	 *
 	 * @param int|null $user the users numeric identifier
-	 * @param int|false $lastRevId the revision the user supplied
+	 * @param int|bool $lastRevId the revision the user supplied (or false)
 	 *
 	 * @return bool
 	 */
