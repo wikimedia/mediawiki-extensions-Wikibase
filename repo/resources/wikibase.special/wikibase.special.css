@@ -1,0 +1,36 @@
+/**
+ * styles for Wikibase special pages
+ *
+ * @since 0.1
+ * @file
+ * @ingroup Wikibase
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater
+ */
+
+/********** Create item page **********/
+
+.mw-special-CreateItem fieldset {
+	float: left;
+}
+
+.mw-special-CreateItem label,
+.mw-special-CreateItem input.wb-input-text, .mw-special-CreateItem .wb-input-button {
+	display: block;
+	float: left;
+	clear: both;
+}
+
+.mw-special-CreateItem label {
+	margin-top: 0.5em;
+}
+
+.mw-special-CreateItem input.wb-input-text {
+	margin-bottom: 1em;
+	width: 25em;
+}
+
+.mw-special-CreateItem .wb-input-button {
+	margin-top: 1em;
+}
