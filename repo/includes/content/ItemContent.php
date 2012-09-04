@@ -193,35 +193,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * Saves the primary fields in the wb_items table.
-	 * If the item does not exist yet (ie the id is null), it will be inserted, and the id will be set.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean Success indicator
-	 */
-	protected function relationalSave() {
-		$success = true;
-
-		if ( $this->isNew() ) {
-			$idGenerator = StoreFactory::getStore()->newIdGenerator();
-
-			try {
-				$id = $idGenerator->getNewId( $this->getContentHandler()->getModelID() );
-			}
-			catch ( MWException $exception ) {
-				$success = false;
-			}
-
-			if ( $success ) {
-				$this->getEntity()->setId( $id );
-			}
-		}
-
-		return $success;
-	}
-
-	/**
 	 * Returns a new empty ItemContent.
 	 *
 	 * @since 0.1

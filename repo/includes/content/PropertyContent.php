@@ -168,16 +168,4 @@ class PropertyContent extends EntityContent {
 		);
 	}
 
-	/**
-	 * Saves the primary fields a database table and determines the entity's id.
-	 * If the entity does not exist yet (ie the id is null), it will be inserted, and the id will be set.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean Success indicator
-	 * @throws \MWException
-	 */
-	protected function relationalSave() {
-		throw new \MWException( "not yet implemented" ); //FIXME
-	}
 }
