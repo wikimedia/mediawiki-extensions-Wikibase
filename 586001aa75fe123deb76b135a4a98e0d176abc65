@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn//9Uo\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-04T11:16:18Z",
+      "side": 1,
+      "message": "Can happen because the user have made several changes from the same window. This is a result of how we are modifying things in the UI.",
+      "revId": "586001aa75fe123deb76b135a4a98e0d176abc65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARn//9Uk\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-04T11:16:18Z",
+      "side": 1,
+      "message": "Try to avoid changing other languages directly, do it through Translatewiki!",
+      "revId": "586001aa75fe123deb76b135a4a98e0d176abc65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARn//9UI\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-04T11:16:18Z",
+      "side": 1,
+      "message": "We probably need to check if there is an upcoming edit conflict before we create the EntityContent or get the base revision for the EntityContent, and this is before we can create the EditEntity, and then we do not have an instance of the class. That means this method must be static.\n\n/me thinks...",
+      "revId": "586001aa75fe123deb76b135a4a98e0d176abc65",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
