@@ -111,6 +111,11 @@ $messages['en'] = array(
 	'wikibase-itemdisambiguation-invalid-langcode' => 'The previous query could not be used for a search. You must provide a valid language identifier.',
 	'wikibase-itemdisambiguation-description' => 'Values used for searching must be the complete text entry. Language is an identifier, such as "en".',
 	'special-createitem' => 'Create a new item',
+	'wikibase-createitem-intro' => 'Please search for the item first. Encourage to fill out description.',
+	'wikibase-createitem-fieldset' => 'Create a new item',
+	'wikibase-createitem-label' => 'Label:',
+	'wikibase-createitem-description' => 'Description:',
+	'wikibase-createitem-submit' => 'Create',
 
 	// API errors
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.',
@@ -323,6 +328,11 @@ Parameters:
 	'wikibase-itemdisambiguation-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
 	'wikibase-itemdisambiguation-description' => 'Further information about the search fields and whats valid values.',
 	'special-createitem' => 'Title of the special page for creating new items.',
+	'wikibase-createitem-intro' => 'Intro text for the CreateItem special page.',
+	'wikibase-createitem-fieldset' => 'Title for the fieldset on the CreateItem special page.',
+	'wikibase-createitem-label' => 'Label for the label-textfield holding the label of the new item.',
+	'wikibase-createitem-description' => 'Label for the description-textfield holding the description of the new item.',
+	'wikibase-createitem-submit' => 'Text for the submit button on the CreateItem special page.',
 	'wikibase-api-aliases-invalid-list' => 'This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
