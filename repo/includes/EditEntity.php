@@ -464,5 +464,3 @@ class EditEntity {
 	}
 
 }
-
-class EditEntityException extends \UsageException {}
