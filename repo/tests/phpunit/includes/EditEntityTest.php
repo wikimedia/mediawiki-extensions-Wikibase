@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use \Wikibase\EntityContent as EntityContent;
 use \Wikibase\EditEntity as EditEntity;
 use \Wikibase\ItemContent as ItemContent;
 
@@ -26,95 +27,6 @@ use \Wikibase\ItemContent as ItemContent;
  *
  */
 class EditEntityTest extends \MediaWikiTestCase {
-
-	public function providerEditEntity() {
-		$fatal = \Status::newGood();
-		$fatal->setResult( false );
-
-		return array(
-			array( // #0: case I: no base rev given.
-				array(
-					'label' => array( 'en' => 'test' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-					'links' => array(),
-				),
-				false,
-				3,
-				\Status::newGood( 'ok' ),
-				array(
-					'label' => array( 'en' => 'test' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-					'links' => array(),
-				)
-			),
-			array( // #1: case II: base rev == current
-				array(
-					'label' => array( 'en' => 'test' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-					'links' => array(),
-				),
-				3,
-				3,
-				\Status::newGood( 'only-to-edit' ),
-				array(
-					'label' => array( 'en' => 'test' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-					'links' => array(),
-				)
-			),
-			array( // #2: case III: user was last to edit
-				array(
-					'label' => array( 'en' => 'test', 'de' => 'test' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-					'links' => array(),
-				),
-				2,
-				3,
-				\Status::newGood( 'last-to-edit' ),
-				array(
-					'label' => array( 'en' => 'test', 'de' => 'test' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-					'links' => array(),
-				)
-			),
-			array( // #3: case V: patch failed
-				array(
-					'label' => array( 'nl' => 'test', 'de' => 'bar' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-				),
-				0,
-				3,
-				$fatal,
-				null
-			),
-			/* // patchign not yet supported
-			array( // #4: case IV: patch successful
-				array(
-					'label' => array( 'nl' => 'test', 'dk' => 'bar' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-					'links' => array(),
-				),
-				0,
-				3,
-				\Status::newGood( 'ok' ), //TODO: should contain a warning!
-				array(
-					'label' => array( 'en' => 'bar', 'nl' => 'test', 'dk' => 'bar' ),
-					'description' => array( 'en' => 'more testing' ),
-					'aliases' => array(),
-					'links' => array(),
-				)
-			),
-			*/
-		);
-	}
 
 	private static $testRevisions = null;
 
@@ -150,52 +62,158 @@ class EditEntityTest extends \MediaWikiTestCase {
 		return self::$testRevisions;
 	}
 
-	/**
-	 * @dataProvider providerEditEntity
-	 */
-	public function testEditEntity( array $inputData, $baseRevisionIdx, $applicableRevisionIdx, \Status $expectedStatus, array $expectedData = null ) {
-		global $wgUser;
 
-		$revisions = self::getTestRevisions();
-
-		$baseRevisionId = $baseRevisionIdx !== false ? $revisions[$baseRevisionIdx]->getId() : false;
-		$applicableRevisionId = $applicableRevisionIdx !== false ? $revisions[$applicableRevisionIdx]->getId() : false;
-
-		$content = \Wikibase\ItemContent::newFromArray( $inputData );
-		$entity = $content->getEntity();
-		$editEntity = EditEntity::newEditEntity( $entity, $wgUser, $baseRevisionId, $applicableRevisionId );
-
-		$status = $editEntity->getStatus();
-
-		if ( $expectedStatus->isOK() ) {
-			//$this->assertTrue( $editEntity->isSuccess() );
-
-			$this->assertTrue( $status->isOK() );
-			$this->assertEquals( $expectedStatus->value, $status->value );
-			$this->assertArrayEquals( $expectedStatus->getWarningsArray(), $status->getWarningsArray() );
-
-			if ( $expectedData !== null ) {
-				$patched = $editEntity->getPatchedEntity();
-				$this->assertNotNull( $patched );
-
-				$data = $patched->toArray();
-				unset( $data['entity'] );
-
-				$this->assertEquals( $expectedData, $data );
-			}
-		} else {
-			$this->assertFalse( $editEntity->isSuccess() );
-			$this->assertArrayEquals( $expectedStatus->getErrorsArray(), $status->getErrorsArray() );
-		}
-
-		//TODO: we should also test that EntityContent::save and WikiPage::doEdit fail if the
-		//      true last revision is not $applicableRevisionIdx. But that needs a different
-		//      test setup.
+	public function providerHasEditConflicts() {
+		return array(
+			array( // #0: case I: no base rev given.
+				null,
+				false
+			),
+			array( // #1: case II: base rev == current
+				3,
+				false
+			),
+			array( // #2: case III: user was last to edit
+				1,
+				false,
+			),
+			array( // #3: case IV & V: conflict detected
+				0,
+				true
+			),
+		);
 	}
 
 	/**
-	 * @TODO: test userWasLastToEdit
+	 * @dataProvider providerHasEditConflicts
 	 */
+	public function testHasEditConflicts( $baseRevisionIdx, $expectedConflict ) {
+		global $wgUser;
+
+		/* @var $content \Wikibase\EntityContent */
+		/* @var $revision \Revision */
+
+		$revisions = self::getTestRevisions();
+
+		$baseRevisionId = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx]->getId() : null;
+		$revision = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx] : $revisions[ count( $revisions ) -1 ];
+		$content = $revision->getContent();
+		$entity = $content->getEntity();
+
+		$entity->clear();
+
+		// save entity ----------------------------------
+		$editEntity = new EditEntity( $content, $wgUser, $baseRevisionId );
+
+		$status = \Status::newGood();
+		$conflict = $editEntity->hasEditConflict( $status );
+		$this->assertEquals( $expectedConflict, $conflict, 'hasEditConflict()' );
+	}
+
+
+	public function providerFixEditConflicts() {
+		return array(
+			array( // #0: case IV: patch applied
+				array(
+					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt' ),
+				),
+				0,
+				false, //@todo: change this to "true" once we have full support for patching
+				null
+				/*array(
+					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt', 'en' => 'bar' ),
+				)*/
+			),
+			array( // #1: case V: patch failed
+				array(
+					'label' => array( 'nl' => 'test', 'de' => 'bar' ),
+				),
+				0,
+				false,
+				null
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider providerFixEditConflicts
+	 */
+	public function testFixEditConflicts( array $inputData, $baseRevisionIdx, $expectedFixed, array $expectedData = null ) {
+		global $wgUser;
+
+		/* @var $content \Wikibase\EntityContent */
+		/* @var $revision \Revision */
+
+		$revisions = self::getTestRevisions();
+
+		$baseRevisionId = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx]->getId() : null;
+		$revision = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx] : $revisions[ count( $revisions ) -1 ];
+		$content = $revision->getContent();
+		$entity = $content->getEntity();
+
+		// change entity ----------------------------------
+		if ( !empty( $inputData['labels'] ) ) {
+			foreach ( $inputData['labels'] as $k => $v ) {
+				$entity->setLabel( $k, $v );
+			}
+		}
+
+		if ( !empty( $inputData['description'] ) ) {
+				foreach ( $inputData['description'] as $k => $v ) {
+				$entity->setDescription( $k, $v );
+			}
+		}
+
+		if ( !empty( $inputData['aliases'] ) ) {
+			foreach ( $inputData['aliases'] as $k => $v ) {
+				$entity->setAliases( $k, $v );
+			}
+		}
+
+		// save entity ----------------------------------
+		$editEntity = new EditEntity( $content, $wgUser, $baseRevisionId );
+
+		$status = \Status::newGood();
+
+		$fixed = $editEntity->fixEditConflict( $status );
+		$this->assertEquals( $expectedFixed, $fixed, 'fixEditConflict()' );
+		$this->assertEquals( $expectedFixed, $status->isOK(), '$status->isOK()' );
+
+		if ( $expectedData !== null ) {
+			$this->assertTrue( $status->isOK(), '$status->isOK()' );
+			$this->assertArrayEquals( $expectedData, $editEntity->getNewContent()->getEntity()->toArray() );
+		}
+	}
+
+	public function testAttemptSaveWithLateConflict() {
+		global $wgUser;
+
+		$content = ItemContent::newEmpty();
+		$content->getEntity()->setLabel( 'en', 'Test' );
+		$content->save( "rev 0", $wgUser );
+
+		// create independent EntityContent instance for the same entity, and modify and save it
+		$page = \WikiPage::factory( $content->getTitle() );
+		$content2 = $page->getContent();
+		$content2->getEntity()->setLabel( 'en', 'Toast' );
+		$content2->save( 'Trolololo!' );
+
+		$editEntity = new EditEntity( $content );
+		$editEntity->getCurrentRevision(); // make sure EditEntity has page and revision
+
+		// try editing with the original $content and corresponding wikipage object
+		$content->getEntity()->setLabel( 'en', 'Trust' );
+
+		// now try to save. the conflict should still be detected
+		$status = $editEntity->attemptSave( "Testing", EDIT_UPDATE );
+
+		$this->assertFalse( $status->isOK(),
+							'saving should have failed late, with a indication of a mismatching current ID' );
+
+		$this->assertTrue( $status->hasMessage( 'edit-conflict' ),
+							'saving should have failed late, with a indication of a mismatching current ID' );
+	}
+
 	public function testUserWasLastToEdit() {
 		// EntityContent is abstract so we use the subclass ItemContent
 		// to get a concrete class to instantiate. Still note that our
