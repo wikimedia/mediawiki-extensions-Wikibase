@@ -249,13 +249,13 @@ abstract class ApiModifyItem extends Api {
 				// TODO: just die if there is a fatal message, but should really report all messages
 				if ( !$status->isOK() ) {
 					if ( $itemContent->isNew() ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-create-failed' ), 'create-failed' );
+						$this->dieUsage( $this->msg( 'wikibase-api-create-failed', $status->getWikiText() )->text(), 'create-failed' );
 					}
 					elseif ( $status->hasMessage( 'edit-conflict' ) ) {
-						$this->dieUsage( wfMsg( 'wikibase-api-edit-conflict' ), 'edit-conflict' );
+						$this->dieUsage( $this->msg( 'wikibase-api-edit-conflict', $status->getWikiText() )->text(), 'edit-conflict' );
 					}
 					else {
-						$this->dieUsage( wfMsg( 'wikibase-api-save-failed' ), 'save-failed' );
+						$this->dieUsage( $this->msg( 'wikibase-api-save-failed', $status->getWikiText() )->text(), 'save-failed' );
 					}
 				}
 				// there is only warnings at this point
@@ -331,7 +331,7 @@ abstract class ApiModifyItem extends Api {
 			array( 'code' => 'invalid-contentmodel', 'info' => $this->msg( 'wikibase-api-invalid-contentmodel' )->text() ),
 			array( 'code' => 'no-permissions', 'info' => $this->msg( 'wikibase-api-no-permissions' )->text() ),
 			array( 'code' => 'session-failure', 'info' => $this->msg( 'wikibase-api-session-failure' )->text() ),
-			array( 'code' => 'patch-empty', 'info' => wfMsg( 'wikibase-api-patch-empty' ) ),
+			array( 'code' => 'patch-empty', 'info' => $this->msg( 'wikibase-api-patch-empty' )->text() ),
 			) );
 	}
 
