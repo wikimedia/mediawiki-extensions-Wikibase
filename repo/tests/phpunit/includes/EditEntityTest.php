@@ -4,6 +4,8 @@ namespace Wikibase\Test;
 use \Wikibase\EntityContent as EntityContent;
 use \Wikibase\EditEntity as EditEntity;
 use \Wikibase\ItemContent as ItemContent;
+use \Status as Status;
+use \FauxRequest as FauxRequest;
 
 /**
  * Test EditEntity.
@@ -399,5 +401,24 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
 				. $ex->permission . ': ' . var_export( $ex->errors, true )  );
 		}
+	}
+
+	public function testIsTokenOk() {
+		global $wgUser;
+
+		$status = \Status::newGood();
+
+		$content = ItemContent::newEmpty();
+		$edit = new EditEntity( $content );
+
+		// check valid token --------------------
+		$token = $wgUser->getEditToken();
+		$request = new FauxRequest( array( 'wpEditToken' => $token ) );
+		$this->assertTrue( $edit->isTokenOK( $request, $status ), 'expected token to work: ' . $token );
+
+		// check invalid token --------------------
+		$token = "xyz";
+		$request = new FauxRequest( array( 'wpEditToken' => $token ) );
+		$this->assertFalse( $edit->isTokenOK( $request, $status ), 'expected token to not work: ' . $token );
 	}
 }
