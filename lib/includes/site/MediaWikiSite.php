@@ -93,8 +93,8 @@ class MediaWikiSite extends SiteObject {
 			$url = $this->getFileUrl( 'api.php' ) . '?' . wfArrayToCgi( $args );
 
 			// Go on call the external site
-			// FIXME: this is using wikibase settings
-			$ret = Http::get( $url, Wikibase\Settings::get( 'clientTimeout' ), Wikibase\Settings::get( 'clientPageOpts' ) );
+			//@todo: we need a good way to specify a timeout here.
+			$ret = Http::get( $url );
 		}
 
 		if ( $ret === false ) {
