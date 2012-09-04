@@ -168,6 +168,7 @@ final class RepoHooks {
 				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
 				'tests/qunit/wikibase.ui.Tooltip.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.inherit.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tests.js',
@@ -178,6 +179,7 @@ final class RepoHooks {
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
+				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool'

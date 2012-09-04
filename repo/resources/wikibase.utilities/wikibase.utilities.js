@@ -33,7 +33,7 @@
 			if( $.isFunction( constructor ) ) {
 				members = {};
 			} else {
-				members = constructor;
+				members = constructor || {}; // also support case where no parameters but base are given
 				constructor = false;
 			}
 		}
