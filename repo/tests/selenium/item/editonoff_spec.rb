@@ -9,51 +9,10 @@
 require 'spec_helper'
 
 describe "Check functionality of disabling/enabling edit actions" do
-  context "disabling/enabling of edit actions on createItem special page" do
-    it "should check if edit actions are enabled/disabled correctly on item creation" do
+  context "setup" do
+    it "should create new item" do
       visit_page(ItemPage) do |page|
-        page.wait_for_item_to_load
-        page.labelInputField_element.enabled?.should be_true
-        page.descriptionInputField_element.enabled?.should be_true
-        page.saveLabelLink?.should be_false
-        page.saveDescriptionLink?.should be_false
-        page.cancelLabelLink?.should be_false
-        page.cancelDescriptionLink?.should be_false
-        page.labelInputField= generate_random_string(10)
-        page.labelInputField_element.enabled?.should be_true
-        page.descriptionInputField_element.enabled?.should be_false
-        page.saveLabelLink?.should be_true
-        page.saveDescriptionLink?.should be_false
-        page.cancelLabelLink?.should be_true
-        page.cancelDescriptionLink?.should be_false
-        page.labelInputField_element.clear
-        page.labelInputField_element.click
-        page.labelInputField_element.enabled?.should be_true
-        page.descriptionInputField_element.enabled?.should be_true
-        page.saveLabelLink?.should be_false
-        page.saveDescriptionLink?.should be_false
-        page.cancelLabelLink?.should be_false
-        page.cancelDescriptionLink?.should be_false
-        page.descriptionInputField= generate_random_string(10)
-        page.labelInputField_element.enabled?.should be_false
-        page.descriptionInputField_element.enabled?.should be_true
-        page.saveLabelLink?.should be_false
-        page.saveDescriptionLink?.should be_true
-        page.cancelLabelLink?.should be_false
-        page.cancelDescriptionLink?.should be_true
-        page.descriptionInputField_element.clear
-        page.descriptionInputField_element.click
-        page.labelInputField_element.enabled?.should be_true
-        page.descriptionInputField_element.enabled?.should be_true
-        page.saveLabelLink?.should be_false
-        page.saveDescriptionLink?.should be_false
-        page.cancelLabelLink?.should be_false
-        page.cancelDescriptionLink?.should be_false
-        page.labelInputField= generate_random_string(10)
-        page.saveLabelLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.wait_for_new_item_creation
+        page.create_new_item(generate_random_string(10), '')
       end
     end
   end
