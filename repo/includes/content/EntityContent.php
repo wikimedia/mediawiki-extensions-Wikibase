@@ -213,71 +213,84 @@ abstract class EntityContent extends \AbstractContent {
 		return true;
 	}
 
-	/*
-	 * Saves the primary fields to a database table and determines this entity's id.
-	 * If this entity does not exist yet (ie the id is null), it will be inserted, and the id will be set.
+	/**
+	 * Assigns a fresh ID to this entity.
 	 *
-	 * @since 0.1
-	 *
-	 * @return boolean Success indicator
+	 * @throws \MWException if this entity already has an ID assigned, or something goes wrong while generating a new ID.
+	 * @return int the new ID
 	 */
-	protected abstract function relationalSave();
+	protected function grabFreshId() {
+		if ( !$this->isNew() ) {
+			throw new \MWException( "This entiy already has an ID!" );
+		}
+
+		$idGenerator = StoreFactory::getStore()->newIdGenerator();
+
+		$id = $idGenerator->getNewId( $this->getContentHandler()->getModelID() );
+
+		$this->getEntity()->setId( $id );
+
+		return $id;
+	}
 
 	/**
 	 * Saves this item.
 	 * If this item does not exist yet, it will be created (ie a new ID will be determined and a new page in the
 	 * data NS created).
 	 *
+	 * @note: if the save is triggered by any kind of user interaction, consider using EditEntity::attemptSave(), which
+	 *        automatically handles edit conflicts, permission checks, etc.
+	 *
+	 * @note: this method should not be overloaded, and should not be extended to save additional information to the
+	 *        database. Such things should be done in a way that will also be triggered when the save is performed by
+	 *        calling WikiPage::doEditContent.
+	 *
 	 * @since 0.1
 	 *
-	 * @param string $summary
-	 * @param null|User $user
-	 * @param integer $flags
+	 * @param string     $summary
+	 * @param null|User  $user
+	 * @param integer    $flags
+	 *
+	 * @param int|bool   $baseRevId
+	 * @param EditEntity $editEntity
+	 *
+	 * @see WikiPage::doEditContent
 	 *
 	 * @return \Status Success indicator
 	 */
 	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false, EditEntity $editEntity = null ) {
-		// must keep this state for later cleanup
-		$isNew = $this->isNew();
+
+		//XXX: really allow creation by default? Or require EDIT_CREATE in flags?
+		if ( $this->isNew() ) {
+			$this->grabFreshId();
+		}
 
 		//XXX: very ugly and brittle hack to pass info to prepareEdit so we can check inside a db transaction
 		//     whether an edit has occurred after EditEntity checked for conflicts. If we had nested
 		//     database transactions, we could simply check here.
 		$this->editEntity = $editEntity;
 
-		// NOTE: data created by relationalSave may be left dangling if $page->doEditContent fails.
-		//       This is especially relevant when creating a new Entity.
-		// @todo: fix this by implementing transactional logic or at least clean up of things fail
-		//        later on.
-		$success = $this->relationalSave();
+		// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clear may cause the old content
+		//       to be loaded from the database again. This may be necessary, because EntityContent is mutable,
+		//       so the cached object might have changed.
+		//
+		//       The relevant test case is ItemContentTest::restRepeatedSave
+		//
+		//       We may be able to optimize this by only calling WikiPage::clear if
+		//       $this->getWikiPage()->getContent() == $this, but that needs further investigation.
 
-		if ( !$success ) {
-			$status = \Status::newFatal( "wikibase-error-relational-save-failed" );
-		}
-		else {
-			// NOTE: make sure we start saving from a clean slate. Calling WikiPage::clear may cause the old content
-			//       to be loaded from the database again. This may be necessary, because EntityContent is mutable,
-			//       so the cached object might have changed.
-			//
-			//       The relevant test case is ItemContentTest::restRepeatedSave
-			//
-			//       We may be able to optimize this by only calling WikiPage::clear if
-			//       $this->getWikiPage()->getContent() == $this, but that needs further investigation.
+		$page = $this->getWikiPage();
+		$page->clear();
 
-			$page = $this->getWikiPage();
-			$page->clear();
+		$status = $page->doEditContent(
+			$this,
+			$summary,
+			$flags | EDIT_AUTOSUMMARY,
+			$baseRevId,
+			$user
+		);
 
-			$status = $page->doEditContent(
-				$this,
-				$summary,
-				$flags | EDIT_AUTOSUMMARY,
-				$baseRevId,
-				$user
-			);
-			if ( $isNew === true && !$status->isOk() ) {
-				// Delete any dangling new items from relationalSave?
-			}
-		}
+		$this->editEntity = null;
 
 		return $status;
 	}
