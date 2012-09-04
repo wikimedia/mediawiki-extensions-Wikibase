@@ -69,13 +69,25 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 	function setUp() {
 		global $wgGroupPermissions, $wgUser;
+		global $wgOut, $wgTitle;
 
 		parent::setUp();
 
 		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = $wgUser->getGroups();
 
-		\TestSites::insertIntoDb();
+		if ( $wgTitle === null ) {
+			$wgTitle = \Title::newFromText( "Test" );
+		}
+
+		$wgOut->setTitle( $wgTitle );
+
+		static $hasTestSites = false;
+
+		if ( !$hasTestSites ) {
+			\TestSites::insertIntoDb();
+			$hasTestSites = true;
+		}
 	}
 
 	function tearDown() {
@@ -101,20 +113,38 @@ class EditEntityTest extends \MediaWikiTestCase {
 	public function providerHasEditConflicts() {
 		return array(
 			array( // #0: case I: no base rev given.
-				null,
-				false
+				null, // input data
+				null, // base rev index
+				false, // expected conflict
 			),
 			array( // #1: case II: base rev == current
-				3,
-				false
+				null, // input data
+				3,    // base rev index
+				false // expected conflict
 			),
 			array( // #2: case III: user was last to edit
-				1,
-				false,
+				null, // input data
+				1,    // base rev index
+				false, // expected conflict
 			),
-			array( // #3: case IV & V: conflict detected
-				0,
-				true
+			array( // #3: case IV: patch applied
+				array( // input data
+					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt' ),
+				),
+				0,    // base rev index
+				true,  // expected conflict //@todo: change this to "false" once we have full support for patching
+				null    // expected data
+				/*array(
+					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt', 'en' => 'bar' ),
+				)*/
+			),
+			array( // #4: case V: patch failed
+				array( // input data
+					'label' => array( 'nl' => 'test', 'de' => 'bar' ),
+				),
+				0,    // base rev index
+				true,  // expected conflict
+				null  // expected data
 			),
 		);
 	}
@@ -122,58 +152,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider providerHasEditConflicts
 	 */
-	public function testHasEditConflicts( $baseRevisionIdx, $expectedConflict ) {
-		global $wgUser;
-
-		/* @var $content \Wikibase\EntityContent */
-		/* @var $revision \Revision */
-
-		$revisions = self::getTestRevisions();
-
-		$baseRevisionId = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx]->getId() : null;
-		$revision = is_int( $baseRevisionIdx ) ? $revisions[$baseRevisionIdx] : $revisions[ count( $revisions ) -1 ];
-		$content = $revision->getContent();
-		$entity = $content->getEntity();
-
-		$entity->clear();
-
-		// save entity ----------------------------------
-		$editEntity = new EditEntity( $content, $wgUser, $baseRevisionId );
-
-		$status = \Status::newGood();
-		$conflict = $editEntity->hasEditConflict( $status );
-		$this->assertEquals( $expectedConflict, $conflict, 'hasEditConflict()' );
-	}
-
-
-	public function providerFixEditConflicts() {
-		return array(
-			array( // #0: case IV: patch applied
-				array(
-					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt' ),
-				),
-				0,
-				false, //@todo: change this to "true" once we have full support for patching
-				null
-				/*array(
-					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt', 'en' => 'bar' ),
-				)*/
-			),
-			array( // #1: case V: patch failed
-				array(
-					'label' => array( 'nl' => 'test', 'de' => 'bar' ),
-				),
-				0,
-				false,
-				null
-			),
-		);
-	}
-
-	/**
-	 * @dataProvider providerFixEditConflicts
-	 */
-	public function testFixEditConflicts( array $inputData, $baseRevisionIdx, $expectedFixed, array $expectedData = null ) {
+	public function testHasEditConflicts( $inputData, $baseRevisionIdx, $expectedConflict, array $expectedData = null ) {
 		global $wgUser;
 
 		/* @var $content \Wikibase\EntityContent */
@@ -187,35 +166,39 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$entity = $content->getEntity();
 
 		// change entity ----------------------------------
-		if ( !empty( $inputData['labels'] ) ) {
-			foreach ( $inputData['labels'] as $k => $v ) {
-				$entity->setLabel( $k, $v );
+		if ( $inputData === null ) {
+			$entity->clear();
+		} else {
+			if ( !empty( $inputData['labels'] ) ) {
+				foreach ( $inputData['labels'] as $k => $v ) {
+					$entity->setLabel( $k, $v );
+				}
 			}
-		}
 
-		if ( !empty( $inputData['description'] ) ) {
+			if ( !empty( $inputData['description'] ) ) {
 				foreach ( $inputData['description'] as $k => $v ) {
-				$entity->setDescription( $k, $v );
+					$entity->setDescription( $k, $v );
+				}
 			}
-		}
 
-		if ( !empty( $inputData['aliases'] ) ) {
-			foreach ( $inputData['aliases'] as $k => $v ) {
-				$entity->setAliases( $k, $v );
+			if ( !empty( $inputData['aliases'] ) ) {
+				foreach ( $inputData['aliases'] as $k => $v ) {
+					$entity->setAliases( $k, $v );
+				}
 			}
 		}
 
 		// save entity ----------------------------------
 		$editEntity = new EditEntity( $content, $wgUser, $baseRevisionId );
 
-		$status = \Status::newGood();
+		$conflict = $editEntity->hasEditConflict();
 
-		$fixed = $editEntity->fixEditConflict( $status );
-		$this->assertEquals( $expectedFixed, $fixed, 'fixEditConflict()' );
-		$this->assertEquals( $expectedFixed, $status->isOK(), '$status->isOK()' );
+		$this->assertEquals( $expectedConflict, $conflict, 'hasEditConflict()' );
+		$this->assertEquals( $expectedConflict, $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ) );
+		$this->assertEquals( $expectedConflict, $editEntity->showErrorPage() );
+		$this->assertNotEquals( $expectedConflict, $editEntity->getStatus()->isOK() );
 
 		if ( $expectedData !== null ) {
-			$this->assertTrue( $status->isOK(), '$status->isOK()' );
 			$this->assertArrayEquals( $expectedData, $editEntity->getNewContent()->getEntity()->toArray() );
 		}
 	}
@@ -245,8 +228,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertFalse( $status->isOK(),
 							'saving should have failed late, with a indication of a mismatching current ID' );
 
+		$this->assertTrue( $editEntity->hasError(),
+							'saving should have failed late, with a indication of a mismatching current ID' );
+
 		$this->assertTrue( $status->hasMessage( 'edit-conflict' ),
 							'saving should have failed late, with a indication of a mismatching current ID' );
+
+		$this->assertTrue( $editEntity->showErrorPage(), 'there was an error, should show error page!' );
+
 	}
 
 	public function testUserWasLastToEdit() {
@@ -382,6 +371,10 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
 				. $ex->permission . ': ' . var_export( $ex->errors, true ) );
 		}
+
+		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK() );
+		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
+		$this->assertNotEquals( $expectedOK, $edit->showErrorPage() );
 	}
 
 	/**
@@ -401,12 +394,14 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
 				. $ex->permission . ': ' . var_export( $ex->errors, true )  );
 		}
+
+		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK() );
+		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
+		$this->assertNotEquals( $expectedOK, $edit->showErrorPage() );
 	}
 
 	public function testIsTokenOk() {
 		global $wgUser;
-
-		$status = \Status::newGood();
 
 		$content = ItemContent::newEmpty();
 		$edit = new EditEntity( $content );
@@ -414,11 +409,19 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// check valid token --------------------
 		$token = $wgUser->getEditToken();
 		$request = new FauxRequest( array( 'wpEditToken' => $token ) );
-		$this->assertTrue( $edit->isTokenOK( $request, $status ), 'expected token to work: ' . $token );
+		$this->assertTrue( $edit->isTokenOK( $request ), 'expected token to work: ' . $token );
+
+		$this->assertTrue( $edit->getStatus()->isOK() );
+		$this->assertFalse( $edit->hasError( EditEntity::TOKEN_ERROR ) );
+		$this->assertFalse( $edit->showErrorPage() );
 
 		// check invalid token --------------------
 		$token = "xyz";
 		$request = new FauxRequest( array( 'wpEditToken' => $token ) );
-		$this->assertFalse( $edit->isTokenOK( $request, $status ), 'expected token to not work: ' . $token );
+		$this->assertFalse( $edit->isTokenOK( $request ), 'expected token to not work: ' . $token );
+
+		$this->assertFalse( $edit->getStatus()->isOK() );
+		$this->assertTrue( $edit->hasError( EditEntity::TOKEN_ERROR ) );
+		$this->assertTrue( $edit->showErrorPage() );
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use Status, Revision, User, WikiPage, Title, WebRequest;
+use Status, Revision, User, WikiPage, Title, WebRequest, OutputPage;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
@@ -20,7 +20,8 @@ use Status, Revision, User, WikiPage, Title, WebRequest;
 class EditEntity {
 
 	/**
-	 * The original entity we use for creating the diff
+	 * The modified entity we are trying to save
+	 *
 	 * @since 0.1
 	 * @var EntityContent
 	 */
@@ -69,6 +70,39 @@ class EditEntity {
 	protected $user = null;
 
 	/**
+	 * Bit field for error types, using the EditEntity::XXX_ERROR constants
+	 *
+	 * @since 0.1
+	 * @var int
+	 */
+	protected $errorType = 0;
+
+	/**
+	 * indicates a permission error
+	 */
+	const PERMISSION_ERROR = 1;
+
+	/**
+	 * indicates an unresolved edit conflict
+	 */
+	const EDIT_CONFLICT_ERROR = 2;
+
+	/**
+	 * indicates a token or session error
+	 */
+	const TOKEN_ERROR = 4;
+
+	/**
+	 * indicates that an error occurred while saving
+	 */
+	const SAVE_ERROR = 8;
+
+	/**
+	 * bit mask for asking for any error.
+	 */
+	const ANY_ERROR = 0xFFFFFFFF;
+
+	/**
 	 * @since 0.1
 	 * @var array
 	 */
@@ -90,6 +124,9 @@ class EditEntity {
 
 		$this->user = $user;
 		$this->baseRevId = $baseRevId;
+
+		$this->errorType = 0;
+		$this->status = Status::newGood();
 	}
 
 	/**
@@ -259,32 +296,6 @@ class EditEntity {
 	}
 
 	/**
-	 * Determines whether an edit conflict exists, that is, whether another user has edited the same item
-	 * after the base revision was created.
-	 *
-	 * @param \Status $status An status object to update with any warnings. Note that the edit conflict as such
-	 *        will *not* be reported in the status object, since it might be fixable.
-	 *
-	 * @return bool
-	 */
-	public function hasEditConflict( Status $status ) {
-		if ( $this->isNew() ) {
-			return false;
-		}
-
-		if ( $this->getBaseRevisionId() == $this->getCurrentRevisionId() ) {
-			return false;
-		}
-
-		if ( self::userWasLastToEdit( $this->getUser()->getId(), $this->getBaseRevisionId() ) ) {
-			$status->warning( 'wikibase-self-conflict' );
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
 	 * Get the status object. Only defined after attemptSave() was called.
 	 *
 	 * @since 0.1
@@ -296,21 +307,72 @@ class EditEntity {
 	}
 
 	/**
-	 * Attempts to patch an edit conflict by patching the difference between the base content and the new content into
-	 * the current content. Will fail if any conflicts are detected.
+	 * Determines whether the last call to attemptSave was successful.
 	 *
-	 * The behaviour of this function is undefined if hasEditConflict() returns false.
+	 * @since 0.1
 	 *
-	 * @param Status $status a status object to report details to. A successful patch fill add a warning.
-	 *        A failed patch will add a fatal error.
+	 * @return bool false if attemptSave() failed, true otherwise
+	 */
+	public function isSuccess() {
+		if ( $this->errorType > 0 ) {
+			return false;
+		}
+
+		return $this->status->isOK();
+	}
+
+	/**
+	 * Checks whether this EditEntity encountered any of the given error types while executing attemptSave().
 	 *
-	 * @todo: implement!
+	 * @since 0.1
+	 *
+	 * @param int $errorType bit field using the EditEntity::XXX_ERROR constants.
+	 *            Defaults to EditEntity::ANY_ERROR.
+	 *
+	 * @return boolean true if this EditEntity encountered any of the error types in $errorType, false otherwise.
+	 */
+	public function hasError( $errorType = self::ANY_ERROR ) {
+		return ( $this->errorType & $errorType ) > 0;
+	}
+
+	/**
+	 * Determines whether an edit conflict exists, that is, whether another user has edited the same item
+	 * after the base revision was created.
+	 *
+	 * @return bool
+	 */
+	public function hasEditConflict() {
+		if ( $this->isNew() ) {
+			return false;
+		}
+
+		if ( $this->getBaseRevisionId() == $this->getCurrentRevisionId() ) {
+			return false;
+		}
+
+		if ( self::userWasLastToEdit( $this->getUser()->getId(), $this->getBaseRevisionId() ) ) {
+			$this->status->warning( 'wikibase-self-conflict' );
+			return false;
+		}
+
+		if ( $this->fixEditConflict() ) {
+			return false;
+		}
+
+		$this->status->fatal( 'edit-conflict' );
+		$this->errorType |= self::EDIT_CONFLICT_ERROR;
+
+		return true;
+	}
+
+	/**
+	 * Attempts to fix an edit conflict by patching the intended change into the current revision after
+	 * checking for conflicts.
 	 *
 	 * @return bool True if the conflict could be resolved, false otherwise
 	 */
-	public function fixEditConflict( Status $status ) {
-		$status->error( 'edit-conflict' );
-		$status->setResult( false );
+	protected function fixEditConflict() {
+		//@todo: implement this!
 		return false;
 	}
 
@@ -333,10 +395,13 @@ class EditEntity {
 	 */
 	public function checkEditPermissions() {
 		foreach ( $this->requiredPremissions as $action ) {
-			$status = $this->newContent->checkPermission( $action, $this->getUser() );
+			$permissionStatus = $this->newContent->checkPermission( $action, $this->getUser() );
 
-			if ( !$status->isOK() ) {
-				throw new \PermissionsError( $action, $status->getErrorsArray() );
+			$this->status->merge( $permissionStatus );
+
+			if ( !$this->status->isOK() ) {
+				$this->errorType |= self::PERMISSION_ERROR;
+				throw new \PermissionsError( $action, $permissionStatus->getErrorsArray() );
 			}
 		}
 	}
@@ -345,22 +410,22 @@ class EditEntity {
 	 * Make sure the given WebRequest contains a valid edit token.
 	 *
 	 * @param $request WebRequest to check for tokens
-	 * @param $status Status a status object to report error details to
 	 *
 	 * @return bool true if the token is valid
 	 */
-	public function isTokenOK( WebRequest &$request, Status $status ) {
+	public function isTokenOK( WebRequest $request ) {
 		$token = $request->getVal( 'wpEditToken' );
 		$tokenOk = $this->getUser()->matchEditToken( $token );
 		$tokenOkExceptSuffix = $this->getUser()->matchEditTokenNoSuffix( $token );
 
 		if ( !$tokenOk ) {
 			if ( $tokenOkExceptSuffix ) {
-				$status->fatal( 'wikibase-undo-revision-error', 'token_suffix_mismatch' );
+				$this->status->fatal( 'wikibase-undo-revision-error', 'token_suffix_mismatch' );
 			} else {
-				$status->fatal( 'wikibase-undo-revision-error', 'session_fail_preview' );
+				$this->status->fatal( 'wikibase-undo-revision-error', 'session_fail_preview' );
 			}
 
+			$this->errorType |= self::TOKEN_ERROR;
 			return false;
 		}
 
@@ -378,18 +443,15 @@ class EditEntity {
 	 * @see      WikiPage::toEditContent
 	 */
 	public function attemptSave( $summary, $flags = 0, WebRequest $request = null ) {
+		$this->status = Status::newGood();
+		$this->errorType = 0;
+
 		$this->checkEditPermissions();
 
-		$this->status = Status::newGood();
-
 		if ( $request !== null ) {
-			if ( !$this->isTokenOK( $request, $this->status ) ) {
+			if ( !$this->isTokenOK( $request ) ) {
 				return $this->status;
 			}
-		}
-
-		if ( !$this->status->isOK() ) {
-			return $this->status;
 		}
 
 		//NOTE: Make sure the current revision is loaded and cached.
@@ -398,22 +460,7 @@ class EditEntity {
 		$this->getCurrentRevision();
 		$this->getCurrentRevisionId();
 
-		$conflict = $this->hasEditConflict( $this->status );
-
-		if ( $conflict ) {
-			$fixed = $this->fixEditConflict( $this->status );
-
-			if ( $fixed ) {
-				$conflict = false;
-			}
-		}
-
-		if ( $conflict ) {
-			$this->status->error( 'edit-conflict' );
-			$this->status->setResult( false );
-		}
-
-		if ( !$this->status->isOK() ) {
+		if ( $this->hasEditConflict() ) {
 			return $this->status;
 		}
 
@@ -424,6 +471,10 @@ class EditEntity {
 			$this->getCurrentRevisionId(),
 			$this
 		);
+
+		if ( !$editStatus->isOK() ) {
+			$this->errorType |= self::SAVE_ERROR;
+		}
 
 		$this->status->merge( $editStatus );
 		return $this->status;
@@ -494,4 +545,91 @@ class EditEntity {
 		return true;
 	}
 
+	/**
+	 * Shows an error page showing the errors that occurred during attemptSave(), if any.
+	 *
+	 * @param OutputPage $out the output object to write output to
+	 * @param String|null $titleMessage message key for the page title
+	 *
+	 * @return bool true if an error page was shown, false if there were no errors to show.
+	 */
+	public function showErrorPage( OutputPage $out = null, $titleMessage = null ) {
+		global $wgOut;
+
+		if ( $out === null ) {
+			$out = $wgOut;
+		}
+
+		if ( $this->status === null || $this->status->isOK() ) {
+			return false;
+		}
+
+		if ( $titleMessage === null ) {
+			$out->prepareErrorPage( wfMessage( 'errorpagetitle' ) );
+		} else {
+			$out->prepareErrorPage( wfMessage( $titleMessage ), wfMessage( 'errorpagetitle' ) );
+		}
+
+		$this->showStatus( $out );
+
+		$out->returnToMain();
+
+		return true;
+	}
+
+	/**
+	 * Shows any errors or warnings from attemptSave().
+	 *
+	 * @param OutputPage $out the output object to write output to
+	 *
+	 * @return bool true if any message was shown, false if there were no errors to show.
+	 */
+	public function showStatus( OutputPage $out = null ) {
+		global $wgOut;
+
+		if ( $out === null ) {
+			$out = $wgOut;
+		}
+
+		if ( $this->status === null || $this->status->isGood() ) {
+			return false;
+		}
+
+		$text = $this->status->getMessage();
+		$out->addWikiText( $text );
+
+		return true;
+	}
+
+	/**
+	 * Die with an error corresponding to any errors that occurred during attemptSave(), if any.
+	 * Intended for use in API modules.
+	 *
+	 * If there is no error but there are warnings, they are added to the API module's result.
+	 *
+	 * @param \ApiBase $api          the API module to report the error for.
+	 * @param String   $errorCode    string Brief, arbitrary, stable string to allow easy
+	 *                               automated identification of the error, e.g., 'unknown_action'
+	 * @param int      $httpRespCode int HTTP response code
+	 * @param array    $extradata    array Data to add to the "<error>" element; array in ApiResult format
+	 */
+	public function reportApiErrors( \ApiBase $api, $errorCode, $httpRespCode = 0, $extradata = null ) {
+		if ( $this->status === null ) {
+			return;
+		}
+
+		// report all warnings
+		// XXX: also report all errors, in sequence, here, before failing on the error?
+		$errors = $this->status->getErrorsByType( 'warning' );
+		if ( is_array($errors) && $errors !== array() ) {
+			$path = array( null, 'warnings' );
+			$api->getResult()->addValue( null, 'warnings', $errors );
+			$api->getResult()->setIndexedTagName( $path, 'warning' );
+		}
+
+		if ( !$this->status->isOK() ) {
+			$description = $this->status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' );
+			$api->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
+		}
+	}
 }

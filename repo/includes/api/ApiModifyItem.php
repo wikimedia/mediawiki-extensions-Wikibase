@@ -243,30 +243,11 @@ abstract class ApiModifyItem extends Api {
 				Autocomment::formatTotalSummary( $comment, $summary, $lang ),
 				$this->flags
 			);
-			$success = $status->isOK();
 
-			if ( !$status->isGood() ) {
-				// TODO: just die if there is a fatal message, but should really report all messages
-				if ( !$status->isOK() ) {
-					if ( $itemContent->isNew() ) {
-						$this->dieUsage( $this->msg( 'wikibase-api-create-failed', $status->getWikiText() )->text(), 'create-failed' );
-					}
-					elseif ( $status->hasMessage( 'edit-conflict' ) ) {
-						$this->dieUsage( $this->msg( 'wikibase-api-edit-conflict', $status->getWikiText() )->text(), 'edit-conflict' );
-					}
-					else {
-						$this->dieUsage( $this->msg( 'wikibase-api-save-failed', $status->getWikiText() )->text(), 'save-failed' );
-					}
-				}
-				// there is only warnings at this point
-				foreach ( array( 'warning' => 'warnings' /*, 'error' => 'errors'*/ ) as $type => $set ) {
-					$errors = $status->getErrorsByType( $type );
-					if ( is_array($errors) && $errors !== array() ) {
-						$path = array( null, $set );
-						$this->getResult()->addValue( null, $set, $errors);
-						$this->getResult()->setIndexedTagName( $path, $type );
-					}
-				}
+			if ( $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ) ) {
+				$editEntity->reportApiErrors( $this, 'edit-conflict' );
+			} else if ( $editEntity->hasError() ) {
+				$editEntity->reportApiErrors( $this, 'save-failed' );
 			}
 
 			$this->getResult()->addValue(
@@ -332,7 +313,7 @@ abstract class ApiModifyItem extends Api {
 			array( 'code' => 'no-permissions', 'info' => $this->msg( 'wikibase-api-no-permissions' )->text() ),
 			array( 'code' => 'session-failure', 'info' => $this->msg( 'wikibase-api-session-failure' )->text() ),
 			array( 'code' => 'patch-empty', 'info' => $this->msg( 'wikibase-api-patch-empty' )->text() ),
-			) );
+		) );
 	}
 
 	/**
