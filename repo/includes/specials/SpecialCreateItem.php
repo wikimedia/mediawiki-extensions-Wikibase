@@ -10,6 +10,7 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jens Ohlig
  */
 class SpecialCreateItem extends SpecialWikibasePage {
 
@@ -35,11 +36,23 @@ class SpecialCreateItem extends SpecialWikibasePage {
 		$this->setHeaders();
 		$this->checkPermissions();
 		$this->outputHeader();
-
 		$options = ParserOptions::newFromContext( $this->getContext() );
 		$options->setEditSection( true ); //NOTE: editing must be enabled
+        $this->createItemForm( $options );
+  }
 
-		$view = new Wikibase\ItemView( $this->getContext() );
-		$view->render( Wikibase\ItemContent::newEmpty(), $this->getOutput(), $options );
+	public function createItemForm( $options ) {
+		$this->getOutput()->addHTML(
+			$this->msg( 'wikibase-createitem-intro' )->text()
+				. Html::openElement( 'form', array( 'method' => 'get', 'action' => "", 'name' => 'createitem', 'id' => 'mw-createitem-form1' ) )
+				. Xml::fieldset( $this->msg( 'wikibase-createitem-fieldset' )->text() )
+				. Xml::inputLabel( $this->msg( 'wikibase-createitem-label' )->text(), '', '', 12, '' )
+				. Xml::closeElement('br')
+				. Xml::inputLabel( $this->msg( 'wikibase-createitem-description' )->text(), '', '', 36, '' )
+				. Xml::closeElement( 'br' )
+				. Xml::submitButton( $this->msg( 'wikibase-createitem-submit' )->text() )
+				. Html::closeElement( 'fieldset' )
+				. Html::closeElement( 'form' )
+		);
 	}
 }
