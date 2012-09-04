@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn//9KI\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-04T16:07:56Z",
+      "side": 1,
+      "message": "Having almost equivalent looking long lines (100+) which do doesn\u0027t help with readability. How about just filling a var with the $failReason and then in the end:\n\n$this-\u003edieUsage( $this-\u003emsg( \"wikibase-api-$failReason\", $status-\u003egetWikiText() )-\u003etext(), $failReason );",
+      "revId": "ae34e945f3b3d99e3017c63a70a82e1c50d5d2df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
