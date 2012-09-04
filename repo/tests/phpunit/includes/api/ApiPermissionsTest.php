@@ -52,8 +52,14 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 	function tearDown() {
 		global $wgGroupPermissions;
+		global $wgUser;
 
 		$wgGroupPermissions = $this->permissions;
+		$wgUser = $this->user;
+
+		# reset rights cache
+		$wgUser->addGroup( "dummy" );
+		$wgUser->removeGroup( "dummy" );
 
 		parent::tearDown();
 	}
@@ -63,38 +69,20 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		return $re[0];
 	}
 
-	function applyPermissions( $permissions ) {
-		global $wgGroupPermissions;
-
-		if ( !$permissions ) {
-			return;
-		}
-
-		foreach ( $permissions as $group => $rights ) {
-			if ( !empty( $wgGroupPermissions[ $group ] ) ) {
-				$wgGroupPermissions[ $group ] = array_merge( $wgGroupPermissions[ $group ], $rights );
-			} else {
-				$wgGroupPermissions[ $group ] = $rights;
-			}
-		}
-
-		# reset rights cache
-		$this->user->addGroup( "dummy" );
-		$this->user->removeGroup( "dummy" );
-	}
-
 	function doPermissionsTest( $action, $params, $permissions, $expectedError ) {
-		$this->applyPermissions( $permissions );
+		global $wgUser;
+
+		self::applyPermissions( $permissions );
 
 		$token = null;
 
 		try {
 			if ( !Settings::get( 'apiInDebug' ) || Settings::get( 'apiDebugWithTokens', false ) ) {
-				$params[ 'token' ] = $this->user->getEditToken();
+				$params[ 'token' ] = $wgUser->getEditToken();
 			}
 
 			$params[ 'action' ] = $action;
-			list( $re, , ) = $this->doApiRequest( $params, null, false, $this->user );
+			list( $re, , ) = $this->doApiRequest( $params, null, false, $wgUser );
 
 			if ( $expectedError == null ) {
 				$this->assertArrayHasKey( 'success', $re, 'API call must report success.' );

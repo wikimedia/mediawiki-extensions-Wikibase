@@ -62,6 +62,39 @@ class EditEntityTest extends \MediaWikiTestCase {
 		return self::$testRevisions;
 	}
 
+	protected $permissions;
+	protected $userGroups;
+
+	function setUp() {
+		global $wgGroupPermissions, $wgUser;
+
+		parent::setUp();
+
+		$this->permissions = $wgGroupPermissions;
+		$this->userGroups = $wgUser->getGroups();
+
+		\TestSites::insertIntoDb();
+	}
+
+	function tearDown() {
+		global $wgGroupPermissions, $wgUser;
+
+		$wgGroupPermissions = $this->permissions;
+
+		$userGroups = $wgUser->getGroups();
+
+		foreach ( array_diff( $this->userGroups, $userGroups ) as $group ) {
+			$wgUser->addGroup( $group );
+		}
+
+		foreach ( array_diff( $userGroups, $this->userGroups ) as $group ) {
+			$wgUser->removeGroup( $group );
+		}
+
+		$wgUser->getEffectiveGroups( true ); // recache
+
+		parent::tearDown();
+	}
 
 	public function providerHasEditConflicts() {
 		return array(
@@ -274,5 +307,97 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// also check that there is a failure if we use the anon user
 		$res = EditEntity::userWasLastToEdit( $anonUser->getId(), $lastRevId );
 		$this->assertFalse( $res );
+	}
+
+	public function dataCheckEditPermissions() {
+		return array(
+			array( #0: edit and createpage allowed for new item
+				'user',
+				array( 'read' => true, 'edit' => true, 'createpage' => true ),
+				false,
+				true,
+			),
+			array( #1: edit allowed but createpage not allowed for new item
+				'user',
+				array( 'read' => true, 'edit' => true, 'createpage' => false ),
+				false,
+				false,
+			),
+			array( #2: edit allowed but createpage not allowed for existing item
+				'user',
+				array( 'read' => true, 'edit' => true, 'createpage' => false ),
+				true,
+				true,
+			),
+			array( #3: edit not allowed for existing item
+				'user',
+				array( 'read' => true, 'edit' => false ),
+				true,
+				false,
+			),
+		);
+	}
+
+	protected function prepareItemForPermissionCheck( $group, $permissions, $create ) {
+		global $wgUser;
+
+		$content = ItemContent::newEmpty();
+
+		if ( $create ) {
+			$content->getItem()->setLabel( 'de', 'Test' );
+			$content->save( "testing" );
+		}
+
+		if ( !in_array( $group, $wgUser->getEffectiveGroups() ) ) {
+			$wgUser->addGroup( $group );
+		}
+
+		if ( $permissions !== null ) {
+			ApiModifyItemBase::applyPermissions( array(
+				'*' => $permissions,
+				'user' => $permissions,
+				$group => $permissions,
+			) );
+		}
+
+		return $content;
+	}
+
+	/**
+	 * @dataProvider dataCheckEditPermissions
+	 */
+	public function testCheckEditPermissions( $group, $permissions, $create, $expectedOK ) {
+		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
+		$content->getItem()->setLabel( 'xx', 'Foo' );
+
+		$edit = new EditEntity( $content );
+
+		try {
+			$edit->checkEditPermissions();
+
+			$this->assertTrue( $expectedOK, 'this permission check was expected to fail!' );
+		} catch ( \PermissionsError $ex ) {
+			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
+				. $ex->permission . ': ' . var_export( $ex->errors, true ) );
+		}
+	}
+
+	/**
+	 * @dataProvider dataCheckEditPermissions
+	 */
+	public function testAttemptSavePermissions( $group, $permissions, $create, $expectedOK ) {
+		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
+		$content->getItem()->setLabel( 'xx', 'Foo' );
+
+		$edit = new EditEntity( $content );
+
+		try {
+			$edit->attemptSave( "testing" );
+
+			$this->assertTrue( $expectedOK, 'this permission check was expected to fail!' );
+		} catch ( \PermissionsError $ex ) {
+			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
+				. $ex->permission . ': ' . var_export( $ex->errors, true )  );
+		}
 	}
 }

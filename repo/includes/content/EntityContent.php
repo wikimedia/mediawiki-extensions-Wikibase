@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use WikiPage, Title, User;
+use WikiPage, Title, User, Status;
 
 /**
  * Abstract content object for articles representing Wikibase entities.
@@ -180,37 +180,87 @@ abstract class EntityContent extends \AbstractContent {
 		return static::newFromArray( $array );
 	}
 
+
 	/**
-	 * Determin whether the given user can edit this item. Also works for items that do not yet exist in the database.
-	 * In that case, the create permission is also checked.
+	 * Checks whether the user can perform the given action on this entity.
 	 *
-	 * @param \User $user the user to check for (default: $wgUser)
-	 * @param bool  $doExpensiveQueries whether to perform expensive checks (default: true). Should be set to false for
-	 *              quick checks for the UI, but always be true for authoritative checks.
+	 * Shorthand for $this->checkPermission( $permission )->isOK();
+	 *
+	 * @param String    $permission         the permission to check
+	 * @param null|User $user               the user to check for. If omitted, $wgUser is checked.
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May be set to false for
+	 *                                      non-critical checks.
+	 *
+	 * @return bool True if the user has the given permission, false otherwise.
+	 */
+	public function userCan( $permission, User $user = null, $doExpensiveQueries = true ) {
+		$status = $this->checkPermission( $permission, $user, $doExpensiveQueries );
+		return $status->isOK();
+	}
+
+	/**
+	 * Determine whether the given user can edit this entity.
+	 *
+	 * Shorthand for $this->userCan( 'edit' );
+	 *
+	 * @param null|User $user               the user to check for. If omitted, $wgUser is checked.
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May be set to false for
+	 *                                      non-critical checks.
 	 *
 	 * @return bool whether the user is allowed to edit this item.
 	 */
 	public function userCanEdit( \User $user = null, $doExpensiveQueries = true ) {
+		return $this->userCan( 'edit', $user, $doExpensiveQueries );
+	}
+
+	/**
+	 * Checks whether the user can perform the given action.
+	 *
+	 * @param String    $permission         the permission to check
+	 * @param null|User $user               the user to check for. If omitted, $wgUser is checked.
+	 * @param bool      $doExpensiveQueries whether to perform expensive checks (default: true). May be set to false for
+	 *                                      non-critical checks.
+	 *
+	 * @return \Status a status object representing the check's result.
+	 */
+	public function checkPermission( $permission, User $user = null, $doExpensiveQueries = true ) {
+		global $wgUser;
+		static $dummyTitle = null;
+
+		if ( !$user ) {
+			$user = $wgUser;
+		}
+
 		$title = $this->getTitle();
+		$errors = null;
 
 		if ( !$title ) {
-			$title = Title::newFromText( "DUMMY", $this->getContentHandler()->getEntityNamespace() );
+			if ( !$dummyTitle ) {
+				$dummyTitle = Title::makeTitleSafe( WB_NS_DATA, '/' );
+			}
 
-			if ( !$title->userCan( 'create', $user, $doExpensiveQueries ) ) {
-				return false;
+			$title = $dummyTitle;
+
+			if ( $permission == 'edit' ) {
+				// when checking for edit rights on an item that doesn't yet exists, check create rights first.
+
+				$errors = $title->getUserPermissionsErrors( 'createpage', $user, $doExpensiveQueries );
 			}
 		}
 
-		if ( !$title->userCan( 'read', $user, $doExpensiveQueries ) ) {
-			return false;
+		if ( empty( $errors ) ) {
+			// only do this if we don't already have errors from an earlier check, to avoid redundant messages
+			$errors = $title->getUserPermissionsErrors( $permission, $user, $doExpensiveQueries );
 		}
 
-		if ( !$title->userCan( 'edit', $user, $doExpensiveQueries ) ) {
-			return false;
+		$status = Status::newGood();
+
+		foreach ( $errors as $error ) {
+			call_user_func_array( array( $status, 'error'), $error );
+			$status->setResult( false );
 		}
 
-		//@todo: check entity-specific permissions
-		return true;
+		return $status;
 	}
 
 	/*

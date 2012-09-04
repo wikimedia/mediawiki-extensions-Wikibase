@@ -69,6 +69,14 @@ class EditEntity {
 	protected $user = null;
 
 	/**
+	 * @since 0.1
+	 * @var array
+	 */
+	protected $requiredPremissions = array(
+		'edit',
+	);
+
+	/**
 	 * Constructs a new EditEntity
 	 *
 	 * @since 0.1
@@ -307,14 +315,30 @@ class EditEntity {
 	}
 
 	/**
+	 * Adds another permission (action) to be checked by checkEditPermissions().
+	 * Per default, the 'edit' permission (and if needed, the 'create' permission) is checked.
+	 *
+	 * @param String $permission
+	 */
+	public function addRequiredPermission( $permission ) {
+		$this->requiredPremissions[] = $permission;
+	}
+
+	/**
 	 * Checks the necessary permissions to perform this edit.
+	 * Per default, the 'edit' permission (and if needed, the 'create' permission) is checked.
+	 * Use addRequiredPermission() to check more permissions.
 	 *
 	 * @throws \PermissionsError if the user's permissions are not sufficient
-	 *
-	 * @todo: implement by moving EntityContent::userCanEdit here!
 	 */
 	public function checkEditPermissions() {
-		//...
+		foreach ( $this->requiredPremissions as $action ) {
+			$status = $this->newContent->checkPermission( $action, $this->getUser() );
+
+			if ( !$status->isOK() ) {
+				throw new \PermissionsError( $action, $status->getErrorsArray() );
+			}
+		}
 	}
 
 	/**
