@@ -8,10 +8,9 @@
 
 require 'ruby_selenium'
 
-class ItemPage < RubySelenium
+class ItemPage < CreateItemPage
   include PageObject
 
-  page_url WIKI_REPO_URL + "Special:CreateItem"
   @@item_url = ""
   @@item_id = ""
 
@@ -101,19 +100,12 @@ class ItemPage < RubySelenium
   # ***** METHODS *****
   # new item
   def create_new_item(label, description)
+    self.createItemLabelField = label
+    self.createItemDescriptionField = description
+    createItemSubmit
     wait_for_item_to_load
-    self.labelInputField = label
-    saveLabelLink
-    wait_for_api_callback
-    wait_for_new_item_creation
-    self.descriptionInputField = description
-    saveDescriptionLink
-    wait_for_api_callback
-    url = current_url
-    @@item_url = url[0, url.index('?')]
+    @@item_url = current_url
     @@item_id = @@item_url[@@item_url.index('Data:Q')+6..-1]
-    navigate_to_item
-    wait_for_item_to_load
     return @@item_id
   end
 
