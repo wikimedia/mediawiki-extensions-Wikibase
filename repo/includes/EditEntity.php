@@ -2,7 +2,7 @@
 
 namespace Wikibase;
 
-use Status, Revision, User, WikiPage, Title, WebRequest;
+use Status, Revision, User, WikiPage, Title, WebRequest, OutputPage;
 
 /**
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
@@ -329,14 +329,18 @@ class EditEntity {
 	 * Per default, the 'edit' permission (and if needed, the 'create' permission) is checked.
 	 * Use addRequiredPermission() to check more permissions.
 	 *
+	 * @param $status Status a status object to report error details to
+	 *
 	 * @throws \PermissionsError if the user's permissions are not sufficient
 	 */
-	public function checkEditPermissions() {
+	public function checkEditPermissions( Status $status ) {
 		foreach ( $this->requiredPremissions as $action ) {
-			$status = $this->newContent->checkPermission( $action, $this->getUser() );
+			$permissionStatus = $this->newContent->checkPermission( $action, $this->getUser() );
+
+			$status->merge( $permissionStatus );
 
 			if ( !$status->isOK() ) {
-				throw new \PermissionsError( $action, $status->getErrorsArray() );
+				throw new \PermissionsError( $action, $permissionStatus->getErrorsArray() );
 			}
 		}
 	}
@@ -378,9 +382,9 @@ class EditEntity {
 	 * @see      WikiPage::toEditContent
 	 */
 	public function attemptSave( $summary, $flags = 0, WebRequest $request = null ) {
-		$this->checkEditPermissions();
-
 		$this->status = Status::newGood();
+
+		$this->checkEditPermissions( $this->status );
 
 		if ( $request !== null ) {
 			if ( !$this->isTokenOK( $request, $this->status ) ) {
@@ -494,4 +498,90 @@ class EditEntity {
 		return true;
 	}
 
+	/**
+	 * Shows an error page showing the errors that occurred during attemptSave(), if any.
+	 *
+	 * @param OutputPage $out the output object to write output to
+	 * @param String|null $titleMessage message key for the page title
+	 *
+	 * @return bool true if an error page was shown, false if there were no errors to show.
+	 */
+	public function showErrorPage( OutputPage $out = null, $titleMessage = null ) {
+		global $wgOut;
+
+		if ( $out === null ) {
+			$out = $wgOut;
+		}
+
+		if ( $this->status === null || $this->status->isOK() ) {
+			return false;
+		}
+
+		if ( $titleMessage === null ) {
+			$out->prepareErrorPage( wfMessage( 'errorpagetitle' ) );
+		} else {
+			$out->prepareErrorPage( wfMessage( $titleMessage ), wfMessage( 'errorpagetitle' ) );
+		}
+
+		$this->showStatus( $out );
+
+		$out->returnToMain();
+
+		return true;
+	}
+
+	/**
+	 * Shows any errors or warnings from attemptSave().
+	 *
+	 * @param OutputPage $out the output object to write output to
+	 *
+	 * @return bool true if any message was shown, false if there were no errors to show.
+	 */
+	public function showStatus( OutputPage $out = null ) {
+		global $wgOut;
+
+		if ( $out === null ) {
+			$out = $wgOut;
+		}
+
+		if ( $this->status === null || $this->status->isGood() ) {
+			return false;
+		}
+
+		$text = $this->status->getMessage();
+		$out->addWikiText( $text );
+
+		return true;
+	}
+
+	/**
+	 * Die with an error corresponding to any errors that occurred during attemptSave(), if any.
+	 * Intended for use in API modules.
+	 *
+	 * If there is no error but there are warnings, they are added to the API module's result.
+	 *
+	 * @param \ApiBase $api          the API module to report the error for.
+	 * @param String   $errorCode    string Brief, arbitrary, stable string to allow easy
+	 *                               automated identification of the error, e.g., 'unknown_action'
+	 * @param int      $httpRespCode int HTTP response code
+	 * @param array    $extradata    array Data to add to the "<error>" element; array in ApiResult format
+	 */
+	public function reportApiErrors( \ApiBase $api, $errorCode, $httpRespCode = 0, $extradata = null ) {
+		if ( $this->status === null ) {
+			return;
+		}
+
+		if ( !$this->status->isOK() ) {
+			$description = $this->status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' );
+			$api->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
+		}
+
+		// there is only warnings at this point
+		$errors = $this->status->getErrorsByType( 'warning' );
+		if ( is_array($errors) && $errors !== array() ) {
+			$path = array( null, 'warnings' );
+			$api->getResult()->addValue( null, 'warnings', $errors );
+			$api->getResult()->setIndexedTagName( $path, 'warning' );
+		}
+	}
 }

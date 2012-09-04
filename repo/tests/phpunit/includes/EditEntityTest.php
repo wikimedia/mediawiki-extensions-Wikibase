@@ -69,13 +69,25 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 	function setUp() {
 		global $wgGroupPermissions, $wgUser;
+		global $wgOut, $wgTitle;
 
 		parent::setUp();
 
 		$this->permissions = $wgGroupPermissions;
 		$this->userGroups = $wgUser->getGroups();
 
-		\TestSites::insertIntoDb();
+		if ( $wgTitle === null ) {
+			$wgTitle = \Title::newFromText( "Test" );
+		}
+
+		$wgOut->setTitle( $wgTitle );
+
+		static $hasTestSites = false;
+
+		if ( !$hasTestSites ) {
+			\TestSites::insertIntoDb();
+			$hasTestSites = true;
+		}
 	}
 
 	function tearDown() {
@@ -247,6 +259,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		$this->assertTrue( $status->hasMessage( 'edit-conflict' ),
 							'saving should have failed late, with a indication of a mismatching current ID' );
+
+		$this->assertTrue( $editEntity->showErrorPage(), 'there was an error, should show error page!' );
 	}
 
 	public function testUserWasLastToEdit() {
@@ -372,16 +386,19 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
 		$content->getItem()->setLabel( 'xx', 'Foo' );
 
+		$status = Status::newGood();
 		$edit = new EditEntity( $content );
 
 		try {
-			$edit->checkEditPermissions();
+			$edit->checkEditPermissions( $status );
 
 			$this->assertTrue( $expectedOK, 'this permission check was expected to fail!' );
 		} catch ( \PermissionsError $ex ) {
 			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
 				. $ex->permission . ': ' . var_export( $ex->errors, true ) );
 		}
+
+		$this->assertEquals( $expectedOK, $status->isOK() );
 	}
 
 	/**
@@ -397,9 +414,12 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$edit->attemptSave( "testing" );
 
 			$this->assertTrue( $expectedOK, 'this permission check was expected to fail!' );
+			$this->assertFalse( $edit->showErrorPage(), 'save was successful, should not show error page!' );
 		} catch ( \PermissionsError $ex ) {
 			$this->assertFalse( $expectedOK, 'this permission check was expected to pass! '
 				. $ex->permission . ': ' . var_export( $ex->errors, true )  );
+
+			$this->assertTrue( $edit->showErrorPage(), 'there was an error, should show error page!' );
 		}
 	}
 
