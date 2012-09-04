@@ -111,6 +111,11 @@ $messages['en'] = array(
 	'wikibase-itemdisambiguation-invalid-langcode' => 'The previous query could not be used for a search. You must provide a valid language identifier.',
 	'wikibase-itemdisambiguation-description' => 'Values used for searching must be the complete text entry. Language is an identifier, such as "en".',
 	'special-createitem' => 'Create a new item',
+	'wikibase-createitem-intro' => 'Intro text. Please search for the item first. Encourage to fill out description.',
+	'wikibase-createitem-fieldset' => 'Create a new item',
+	'wikibase-createitem-label' => 'Label:',
+	'wikibase-createitem-description' => 'Description:',
+	'wikibase-createitem-submit' => 'Submit',
 
 	// API errors
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.',
