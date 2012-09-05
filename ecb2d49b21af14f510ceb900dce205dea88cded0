@@ -33,6 +33,23 @@
       "revId": "ecb2d49b21af14f510ceb900dce205dea88cded0",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARn//8gw\u003d",
+        "filename": "repo/includes/api/ApiModifyItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-05T09:50:59Z",
+      "side": 1,
+      "message": "We need to report an edit conflict because the user must do specific actions due to this error situation.",
+      "revId": "ecb2d49b21af14f510ceb900dce205dea88cded0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
