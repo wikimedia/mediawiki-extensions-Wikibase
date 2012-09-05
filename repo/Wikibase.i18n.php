@@ -98,9 +98,7 @@ $messages['en'] = array(
 	'wikibase-itembytitle-lookup-page' => 'Page:',
 	'wikibase-itembytitle-submit' => 'Search',
 	'wikibase-itembytitle-nothing-found' => 'No item was found by the previous search. Please refine the query with better identification of the external page.',
-	'wikibase-itembytitle-invalid-site' => 'The previous query could not be used for a search. Please provide a valid site identifier.',
-	'wikibase-itembytitle-description' => 'Site is an identifier code, such as "enwiki".',
-	'wikibase-itembytitle-create' => 'You can also [{{fullurl:Special:CreateItem|site=$1&page=$2}} create an item].',
+	'wikibase-itembytitle-create' => 'No such item found, you can also [{{fullurl:Special:CreateItem|site=$1&page=$2}} create the item].',
 	'special-itemdisambiguation' => 'Disambiguation: Items with the same label',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'Search for items by language and label',
 	'wikibase-itemdisambiguation-lookup-language' => 'Language:',
@@ -304,7 +302,6 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 	'wikibase-itembytitle-lookup-page' => 'Label for the textfield holding the external page title. See also Wikidatas glossary for [[m:Wikidata/Glossary#sitelinks|sitelinks]].',
 	'wikibase-itembytitle-submit' => 'Text for the submit button in the search form.',
 	'wikibase-itembytitle-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
-	'wikibase-itembytitle-description' => 'Further information about the search fields and the valid values.',
 	'wikibase-itembytitle-create' => 'Information about how to proceede to create a new item. This message is presented when a user searched (or requested by URL) for an item by site and page title (e.g. item, linked to a particular Wikipedia page in a particular language), but no item was found that linked to that page.  This gives the user the option to create a new item with the page title as the item label.  The user will be sent to the Create Item page and the label would be pre-populated.
 
 Parameters:
