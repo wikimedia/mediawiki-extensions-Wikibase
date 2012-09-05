@@ -70,15 +70,6 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 		$siteExists = \Sites::singleton()->getSites()->hasSite( $siteId );
 
-		if ( isset( $siteId ) || isset( $page ) ) {
-			$this->getOutput()->addHTML(
-				Html::openElement( 'div' )
-				. $this->msg( $siteExists ? 'wikibase-itembytitle-nothing-found' : 'wikibase-itembytitle-invalid-site' )
-					->params( htmlspecialchars( $siteId ), htmlspecialchars( $page ) )
-					->parse()
-				. Html::closeElement( 'div' )
-			);
-		}
 		$sites = \Wikibase\ItemView::getSiteDetails();
 		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites );
 		$this->getOutput()->addModules( 'wikibase.ui.PropertyEditTool' );
@@ -92,11 +83,6 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			. Xml::submitButton( $this->msg( 'wikibase-itembytitle-submit' )->text() )
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
-		);
-		$this->getOutput()->addHTML(
-			Html::openElement( 'div' )
-			. $this->msg( 'wikibase-itembytitle-description' )->text()
-			. Html::closeElement( 'div' )
 		);
 		if ( $siteExists && isset( $page ) ) {
 			$this->getOutput()->addHTML(
