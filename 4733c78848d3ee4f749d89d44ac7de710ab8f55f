@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn//8fM\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-05T11:04:31Z",
+      "side": 1,
+      "message": "why not immediately return false here?",
+      "revId": "4733c78848d3ee4f749d89d44ac7de710ab8f55f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
