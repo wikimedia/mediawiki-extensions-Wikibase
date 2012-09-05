@@ -163,6 +163,49 @@ class SiteObjectTest extends ORMRowTest {
 		$this->assertInternalType( 'string', $site->getType() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testGetPath( Site $site ) {
+		$this->assertTypeOrFalse( 'string', $site->getPath( 'page_path' ) );
+		$this->assertTypeOrFalse( 'string', $site->getPath( 'file_path' ) );
+		$this->assertTypeOrFalse( 'string', $site->getPath( 'foobar' ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testGetAllPaths( Site $site ) {
+		$this->assertInternalType( 'array', $site->getAllPaths() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Site $site
+	 */
+	public function testSetAndRemovePath( Site $site ) {
+		$count = count( $site->getAllPaths() );
+
+		$site->setPath( 'spam', 'http://www.wikidata.org/$1' );
+		$site->setPath( 'spam', 'http://www.wikidata.org/foo/$1' );
+		$site->setPath( 'foobar', 'http://www.wikidata.org/bar/$1' );
+
+		$this->assertEquals( $count + 2, count( $site->getAllPaths() ) );
+
+		$this->assertInternalType( 'string', $site->getPath( 'foobar' ) );
+		$this->assertEquals( 'http://www.wikidata.org/foo/$1', $site->getPath( 'spam' ) );
+
+		$site->removePath( 'spam' );
+		$site->removePath( 'foobar' );
+
+		$this->assertEquals( $count, count( $site->getAllPaths() ) );
+
+		$this->assertFalse( $site->getPath( 'foobar' ) );
+		$this->assertFalse( $site->getPath( 'spam' ) );
+	}
+
 	protected function assertTypeOrFalse( $type, $value ) {
 		if ( $value === false ) {
 			$this->assertTrue( true );

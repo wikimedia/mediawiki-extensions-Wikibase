@@ -254,12 +254,43 @@ interface Site {
 	public function setInternalId( $id );
 
 	/**
-	 * Returns the paths of the site.
+	 * Sets the provided url as path of the specified type.
 	 *
 	 * @since 1.20
 	 *
-	 * @return SitePaths
+	 * @param string $pathType
+	 * @param string $fullUrl
 	 */
-	public function getPaths();
+	public function setPath( $pathType, $fullUrl );
+
+	/**
+	 * Returns the path of the provided type or false if there is no such path.
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $pathType
+	 *
+	 * @return string|false
+	 */
+	public function getPath( $pathType );
+
+	/**
+	 * Returns the paths as associative array.
+	 * The keys are path types, the values are the path urls.
+	 *
+	 * @since 1.20
+	 *
+	 * @return array of string
+	 */
+	public function getAllPaths();
+
+	/**
+	 * Removes the path of the provided type if it's set.
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $pathType
+	 */
+	public function removePath( $pathType );
 
 }

@@ -40,13 +40,6 @@ class SiteObject extends ORMRow implements Site {
 	protected $localIds = false;
 
 	/**
-	 * @since 1.20
-	 *
-	 * @var SitePaths|false
-	 */
-	protected $paths = false;
-
-	/**
 	 * @see Site::getGlobalId
 	 *
 	 * @since 1.20
@@ -177,7 +170,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	protected function getMainPath() {
-		$paths = $this->getPaths()->getAll();
+		$paths = $this->getAllPaths();
 		return $paths === array() ? false : reset( $paths );
 	}
 
@@ -418,8 +411,6 @@ class SiteObject extends ORMRow implements Site {
 
 		$dbw->begin( __METHOD__ );
 
-		$this->setExtraData( 'paths', $this->getPaths()->getAll() );
-
 		$this->setField( 'protocol', $this->getProtocol() );
 		$this->setField( 'domain', strrev( $this->getDomain() ) . '.' );
 
@@ -457,18 +448,55 @@ class SiteObject extends ORMRow implements Site {
 	}
 
 	/**
-	 * @see Site::getSitePaths
+	 * @see Site::setPath
 	 *
 	 * @since 1.20
 	 *
-	 * @return SitePaths
+	 * @param string $pathType
+	 * @param string $fullUrl
 	 */
-	public function getPaths() {
-		if ( $this->paths === false ) {
-			$this->paths = new SitePathsObject( $this->getExtraData( 'paths', array() ) );
-		}
+	public function setPath( $pathType, $fullUrl ) {
+		$paths = $this->getExtraData( 'paths', array() );
+		$paths[$pathType] = $fullUrl;
+		$this->setExtraData( 'paths', $paths );
+	}
 
-		return $this->paths;
+	/**
+	 * @see Sitres::getPath
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $pathType
+	 *
+	 * @return string|false
+	 */
+	public function getPath( $pathType ) {
+		$paths = $this->getExtraData( 'paths', array() );
+		return array_key_exists( $pathType, $paths ) ? $paths[$pathType] : false;
+	}
+
+	/**
+	 * @see Sitres::getAll
+	 *
+	 * @since 1.20
+	 *
+	 * @return array of string
+	 */
+	public function getAllPaths() {
+		return $this->getExtraData( 'paths', array() );
+	}
+
+	/**
+	 * @see Sitres::removePath
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $pathType
+	 */
+	public function removePath( $pathType ) {
+		$paths = $this->getExtraData( 'paths', array() );
+		unset( $paths[$pathType] );
+		$this->setExtraData( 'paths', $paths );
 	}
 
 }
