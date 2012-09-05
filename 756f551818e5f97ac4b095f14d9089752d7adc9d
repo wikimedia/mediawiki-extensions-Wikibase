@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn//8ZI\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2012-09-05T17:20:18Z",
+      "side": 1,
+      "message": "What\u0027s the use of this empty div now?",
+      "revId": "756f551818e5f97ac4b095f14d9089752d7adc9d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
