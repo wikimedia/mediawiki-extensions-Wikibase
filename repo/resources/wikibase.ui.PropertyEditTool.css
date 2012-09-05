@@ -331,7 +331,12 @@ table.wb-sitelinks tfoot td.wb-sitelinks-toolbar {
 	}
 
 	.wb-error .tipsy-inner {
-		background: #FFDFC9 none; /* prevent propagation of background image */
+		background-color: #FFDFC9;
+		/* on some host-client combinations the background image is propagated to the inner tooltip
+		container creating a background pattern; this broken behaviour is surpressed by explicitly
+		setting the background image to none; this, however, has to be done in a separate definition
+		after setting the background colour */
+		background-image: none;
 		border-color:#B27631;
 	}
 
