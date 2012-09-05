@@ -204,7 +204,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getRelativePagePath() {
-		return parse_url( $this->getPaths()->getPath( 'page_path' ), PHP_URL_PATH );
+		return parse_url( $this->getPath( 'page_path' ), PHP_URL_PATH );
 	}
 
 	/**
@@ -215,7 +215,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getRelativeFilePath() {
-		return parse_url( $this->getPaths()->getPath( 'file_path' ), PHP_URL_PATH );
+		return parse_url( $this->getPath( 'file_path' ), PHP_URL_PATH );
 	}
 
 	/**
@@ -226,7 +226,7 @@ class MediaWikiSite extends SiteObject {
 	 * @param string $path
 	 */
 	public function setPagePath( $path ) {
-		$this->getPaths()->setPath( 'page_path', $path );
+		$this->setPath( 'page_path', $path );
 	}
 
 	/**
@@ -237,7 +237,7 @@ class MediaWikiSite extends SiteObject {
 	 * @param string $path
 	 */
 	public function setFilePath( $path ) {
-		$this->getPaths()->setPath( 'file_path', $path );
+		$this->setPath( 'file_path', $path );
 	}
 
 	/**
@@ -250,7 +250,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getPageUrl( $pageName = false ) {
-		$pagePath = $this->getPaths()->getPath( 'page_path' );
+		$pagePath = $this->getPath( 'page_path' );
 
 		if ( $pageName !== false ) {
 			$pageName = $this->toDBKey( trim( $pageName ) );
@@ -272,7 +272,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getFileUrl( $path = false ) {
-		$filePath = $this->getPaths()->getPath( 'file_path' );
+		$filePath = $this->getPath( 'file_path' );
 
 		if ( $filePath !== false ) {
 			$filePath = str_replace( '$1', $path, $filePath );
