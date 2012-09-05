@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAARn//8hc\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2012-09-05T09:31:55Z",
+      "side": 1,
+      "message": "global is only needed if $out !\u003d\u003d null. Can be inside if().",
+      "revId": "ecb2d49b21af14f510ceb900dce205dea88cded0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAARn//8hY\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2012-09-05T09:31:55Z",
+      "side": 1,
+      "message": "global is only needed if $out !\u003d\u003d null. Can be inside if().",
+      "revId": "ecb2d49b21af14f510ceb900dce205dea88cded0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
