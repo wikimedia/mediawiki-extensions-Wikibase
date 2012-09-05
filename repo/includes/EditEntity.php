@@ -409,12 +409,11 @@ class EditEntity {
 	/**
 	 * Make sure the given WebRequest contains a valid edit token.
 	 *
-	 * @param $request WebRequest to check for tokens
+	 * @param String $token the token to check
 	 *
 	 * @return bool true if the token is valid
 	 */
-	public function isTokenOK( WebRequest $request ) {
-		$token = $request->getVal( 'wpEditToken' );
+	public function isTokenOK( $token ) {
 		$tokenOk = $this->getUser()->matchEditToken( $token );
 		$tokenOkExceptSuffix = $this->getUser()->matchEditTokenNoSuffix( $token );
 
@@ -437,21 +436,20 @@ class EditEntity {
 	 *
 	 * @param String $summary    the edit summary
 	 * @param int    $flags      the edit flags (see WikiPage::toEditContent)
-	 * @param WebRequest $request Request for checking tokens
+	 * @param String|null|bool   $token Edit token to check, or false to disable the token check. False per default.
+	 *                           Null will fail the token text, as will the empty string.
 	 *
 	 * @return Status Indicates success and provides detailed warnings or error messages.
 	 * @see      WikiPage::toEditContent
 	 */
-	public function attemptSave( $summary, $flags = 0, WebRequest $request = null ) {
+	public function attemptSave( $summary, $flags = 0, $token = false ) {
 		$this->status = Status::newGood();
 		$this->errorType = 0;
 
 		$this->checkEditPermissions();
 
-		if ( $request !== null ) {
-			if ( !$this->isTokenOK( $request ) ) {
-				return $this->status;
-			}
+		if ( $token !== false && !$this->isTokenOK( $token ) ) {
+			return $this->status;
 		}
 
 		//NOTE: Make sure the current revision is loaded and cached.
