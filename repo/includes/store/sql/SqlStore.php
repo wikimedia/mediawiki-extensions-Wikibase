@@ -139,9 +139,9 @@ class SqlStore implements Store {
 					'wb_terms',
 					__DIR__ . '/Wikibase' . $extension
 				);
-			}
 
-			$this->rebuild();
+				$this->rebuild();
+			}
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
