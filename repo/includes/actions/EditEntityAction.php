@@ -502,6 +502,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( "</p><!-- editButtons -->\n</p><!-- editOptions -->\n" );
 
 		$this->getOutput()->addHTML( "\n" . Html::hidden( "wpEditToken", $this->getUser()->getEditToken() ) . "\n" );
+		$this->getOutput()->addHTML( "\n" . Html::hidden( "wpBaseRev", $this->getTitle()->getLatestRevID() ) . "\n" );
 
 		$this->getOutput()->addHTML( Html::closeElement( 'form' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'div' ) );
@@ -549,20 +550,6 @@ class SubmitEntityAction extends EditEntityAction {
 	}
 
 	/**
-	 * Make sure the form isn't faking a user's credentials.
-	 *
-	 * @param $request \WebRequest
-	 * @return array ( $tokenOk, $tokenOkExceptSuffix )
-	 * @private
-	 */
-	function tokenOk( \WebRequest &$request ) {
-		$token = $request->getVal( 'wpEditToken' );
-		$tokenOk = $this->getUser()->matchEditToken( $token );
-		$tokenOkExceptSuffix = $this->getUser()->matchEditTokenNoSuffix( $token );
-		return array( $tokenOk, $tokenOkExceptSuffix );
-	}
-
-	/**
 	 * Show the entity using parent::show(), unless an undo operation is requested.
 	 * In that case $this->undo(); is called to perform the action after a permission check.
 	 */
@@ -607,18 +594,6 @@ class SubmitEntityAction extends EditEntityAction {
 			return;
 		}
 
-		list( $tokenOk, $tokenOkExceptSuffix ) = $this->tokenOk( $req );
-
-		if ( !$tokenOk ) {
-			if ( $tokenOkExceptSuffix ) {
-				$this->getOutput()->showErrorPage( 'wikibase-undo-revision-error', 'token_suffix_mismatch' );
-			} else {
-				$this->getOutput()->showErrorPage( 'wikibase-undo-revision-error', 'session_fail_preview' );
-			}
-
-			return;
-		}
-
 		$revisions = $this->loadRevisions();
 		if ( !$revisions->isOK() ) {
 			$this->showStatusErrorsPage( 'wikibase-undo-revision-error', $revisions );
@@ -642,6 +617,8 @@ class SubmitEntityAction extends EditEntityAction {
 		$latestContent = $latestRevision->getContent();
 
 		$diff = $newerContent->getEntity()->getDiff( $olderContent->getEntity() );
+		$edit = false;
+		$token = $this->getRequest()->getText( 'wpEditToken' );
 
 		if ( $newerRevision->getId() == $latestRevision->getId() ) { // restore
 			$summary = $req->getText( 'wpSummary' );
@@ -650,7 +627,10 @@ class SubmitEntityAction extends EditEntityAction {
 			}
 
 			if ( !$diff->isEmpty() ) {
-				$status = $olderContent->save( $summary, $this->getUser() ); // make the old content the new content.
+				// make the old content the new content.
+				// NOTE: conflict detection is not needed for a plain restore, it's not based on anything.
+				$edit = new EditEntity( $olderContent, $this->getUser() );
+				$status = $edit->attemptSave( $summary, 0, $token );
 			} else {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
@@ -667,7 +647,10 @@ class SubmitEntityAction extends EditEntityAction {
 					$summary = $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
 				}
 
-				$status = $latestContent->save( $summary, $this->getUser() );
+				$baseRevId = $this->getRequest()->getInt( 'wpBaseRev' );
+
+				$edit = new EditEntity( $latestContent, $this->getUser(), $baseRevId );
+				$status = $edit->attemptSave( $summary, 0, $token );
 			} else {
 				$status = Status::newGood();
 				$status->warning( 'wikibase-empty-undo' );
@@ -677,7 +660,7 @@ class SubmitEntityAction extends EditEntityAction {
 		if ( $status->isOK() ) {
 			$this->getOutput()->redirect( $this->getTitle()->getFullUrl() );
 		} else {
-			$this->showStatusErrorsPage( 'undo-failure', $status );
+			$edit->showErrorPage( $this->getOutput() );
 		}
 	}
 

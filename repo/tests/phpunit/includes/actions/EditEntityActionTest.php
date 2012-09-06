@@ -296,6 +296,7 @@ class EditEntityActionTest extends ActionTestCase {
 		// based upon well known test items defined in ActionTestCase::makeTestItemData
 
 		return array(
+
 			array( #0: submit with legal undo, but don't post
 				'submit', # action
 				'Berlin', # handle
@@ -561,20 +562,7 @@ class EditEntityActionTest extends ActionTestCase {
 				array(    # params
 					'wpSave' => 1,
 					'wpEditToken' => 'xyz', # bad token
-					'undo' => 0,      # current revision
-				),
-				true,    # post
-				null,     # user
-				'/session_fail_preview/',     # htmlPattern: should contain error
-			),
-
-			array( #19: submit with illegal undoafter, but wrong token
-				'submit', # action
-				'Berlin', # handle
-				array(    # params
-					'wpSave' => 1,
-					'wpEditToken' => 'xyz',  # bad token
-					'undoafter' => 0,  # current revision
+					'undo' => 0,     # current revision
 				),
 				true,    # post
 				null,     # user
@@ -582,7 +570,7 @@ class EditEntityActionTest extends ActionTestCase {
 			),
 
 			// -- incomplete form -----------------------------------
-			array( #20: submit without undo/undoafter/restore
+			array( #19: submit without undo/undoafter/restore
 				'submit', # action
 				'Berlin', # handle
 				array(    # params
