@@ -79,6 +79,11 @@ class MediaWikiSite extends SiteObject {
 			return $t->getPrefixedText();
 		} else {
 
+			// Make sure the string is normalized into NFC (due to the bug 40017)
+			// but do nothing to the whitespaces, that should work appropriately.
+			// @see https://bugzilla.wikimedia.org/show_bug.cgi?id=40017
+			$pageName = \Wikibase\Utils::cleanupToNFC( $pageName );
+
 			// Build the args for the specific call
 			$args = array(
 				'action' => 'query',
@@ -88,6 +93,10 @@ class MediaWikiSite extends SiteObject {
 				'format' => 'json',
 				'titles' => $pageName,
 				//@todo: options for maxlag and maxage
+				// Note that maxlag will lead to a long delay before a reply is made,
+				// but that maxage can avoid the extreme delay. On the other hand
+				// maxage could be nice to use anyhow as it stops unnecessary requests.
+				// Also consider smaxage if maxage is used.
 			);
 
 			$url = $this->getFileUrl( 'api.php' ) . '?' . wfArrayToCgi( $args );
