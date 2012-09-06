@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn///mQ\u003d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-06T15:09:20Z",
+      "side": 1,
+      "message": "This seems wrong to me. It is peeking into an entity and making decisions wetter it is valid on a very little fragment on the total available content. There is a method isNew in EntityContent that is closer to the test in this case, and I think it is better to use that one, but that one is in EntityContent which creates other problems.\n\nThe call is also called isValid and it seems weird to me, as verifying that the entity is valid should be part of the entity itself.",
+      "revId": "8f98ee3887d10bb511f8b57a88555022882278b3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
