@@ -162,16 +162,32 @@ class SiteObject extends ORMRow implements Site {
 	}
 
 	/**
+	 * Returns the main path type, that is the type of the path that should generally be used to construct links
+	 * to the target site.
+	 *
+	 * This default implementation returns "page_path" as the default path type. Subclasses can override this
+	 * to define a different default path type.
+	 *
+	 * @since 1.20
+	 *
+	 * @return string
+	 */
+	protected function getMainPathType() {
+		return "page_path";
+	}
+
+	/**
 	 * Returns the main path of the site which can be used to construct
 	 * links with and from which protocol and domain are derived.
+	 *
+	 * This calls $this->getMainPathType() to determine the default path type.
 	 *
 	 * @since 1.20
 	 *
 	 * @return string|false
 	 */
 	protected function getMainPath() {
-		$paths = $this->getAllPaths();
-		return $paths === array() ? false : reset( $paths );
+		return $this->getPath( $this->getMainPathType() );
 	}
 
 	/**
