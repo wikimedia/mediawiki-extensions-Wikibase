@@ -206,6 +206,79 @@ class SiteObjectTest extends ORMRowTest {
 		$this->assertFalse( $site->getPath( 'spam' ) );
 	}
 
+	public function testSetLinkPath() {
+		/* @var SiteObject $site */
+		$site = $this->getRowInstance( $this->getMockFields(), false );
+		$path = "TestPath/$1";
+
+		$site->setLinkPath( $path );
+		$this->assertEquals( $path, $site->getLinkPath() );
+	}
+
+	public function testGetLinkPathType() {
+		/* @var SiteObject $site */
+		$site = $this->getRowInstance( $this->getMockFields(), false );
+
+		$path = 'TestPath/$1';
+		$site->setLinkPath( $path );
+		$this->assertEquals( $path, $site->getPath( $site->getLinkPathType() ) );
+
+		$path = 'AnotherPath/$1';
+		$site->setPath( $site->getLinkPathType(), $path );
+		$this->assertEquals( $path, $site->getLinkPath() );
+	}
+
+	public function testSetPath() {
+		/* @var SiteObject $site */
+		$site = $this->getRowInstance( $this->getMockFields(), false );
+
+		$path = 'TestPath/$1';
+		$site->setPath( 'foo', $path );
+
+		$this->assertEquals( $path, $site->getPath( 'foo' ) );
+	}
+
+	public function provideGetPageUrl() {
+		//NOTE: the assumption that the URL is built by replacing $1
+		//      with the urlencoded version of $page
+		//      is true for SiteObject but not guaranteed for subclasses.
+		//      Subclasses need to override this provider appropriately.
+
+		return array(
+			array( #0
+				'http://acme.test/TestPath/$1',
+				'Foo',
+				'/TestPath/Foo',
+			),
+			array( #1
+				'http://acme.test/TestScript?x=$1&y=bla',
+				'Foo',
+				'TestScript?x=Foo&y=bla',
+			),
+			array( #2
+				'http://acme.test/TestPath/$1',
+				'foo & bar/xyzzy (quux-shmoox?)',
+				'/TestPath/foo%20%26%20bar%2Fxyzzy%20%28quux-shmoox%3F%29',
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetPageUrl
+	 */
+	public function testGetPageUrl( $path, $page, $expected ) {
+		/* @var SiteObject $site */
+		$site = $this->getRowInstance( $this->getMockFields(), false );
+
+		//NOTE: the assumption that getPageUrl is based on getLinkPath
+		//      is true for SiteObject but not guaranteed for subclasses.
+		//      Subclasses need to override this test case appropriately.
+		$site->setLinkPath( $path );
+		$this->assertContains( $path, $site->getPageUrl() );
+
+		$this->assertContains( $expected, $site->getPageUrl( $page ) );
+	}
+
 	protected function assertTypeOrFalse( $type, $value ) {
 		if ( $value === false ) {
 			$this->assertTrue( true );

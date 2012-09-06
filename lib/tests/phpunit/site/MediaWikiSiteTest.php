@@ -30,7 +30,7 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MediaWikiSiteTest extends MediaWikiTestCase {
+class MediaWikiSiteTest extends SiteObjectTest {
 
 	public function setUp() {
 		parent::setUp();
@@ -80,28 +80,29 @@ class MediaWikiSiteTest extends MediaWikiTestCase {
 		$this->assertEquals( $expected, $site->getFileUrl( $pathArgument ) );
 	}
 
-	public function pageUrlProvider() {
+	public function provideGetPageUrl() {
 		return array(
-			// url, filepath, path arg, expected
-			array( 'https://en.wikipedia.org', '/wiki/$1', 'Berlin', 'https://en.wikipedia.org/wiki/Berlin' ),
-			array( 'https://en.wikipedia.org', '/wiki/', 'Berlin', 'https://en.wikipedia.org/wiki/' ),
-			array( 'https://en.wikipedia.org', '/wiki/page.php?name=$1', 'Berlin', 'https://en.wikipedia.org/wiki/page.php?name=Berlin' ),
-			array( 'https://en.wikipedia.org', '/wiki/$1', '', 'https://en.wikipedia.org/wiki/' ),
-			array( 'https://en.wikipedia.org', '/wiki/$1', 'Berlin/sub page', 'https://en.wikipedia.org/wiki/Berlin/sub_page' ),
-			array( 'https://en.wikipedia.org', '/wiki/$1', 'Cork (city)   ', 'https://en.wikipedia.org/wiki/Cork_(city)' ),
-			array( 'https://en.wikipedia.org', '/wiki/$1', 'M&M', 'https://en.wikipedia.org/wiki/M%26M' ),
+			// path, page, expected substring
+			array( 'http://acme.test/wiki/$1', 'Berlin', '/wiki/Berlin' ),
+			array( 'http://acme.test/wiki/', 'Berlin', '/wiki/' ),
+			array( 'http://acme.test/w/index.php?title=$1', 'Berlin', '/w/index.php?title=Berlin' ),
+			array( 'http://acme.test/wiki/$1', '', '/wiki/' ),
+			array( 'http://acme.test/wiki/$1', 'Berlin/sub page', '/wiki/Berlin/sub_page' ),
+			array( 'http://acme.test/wiki/$1', 'Cork (city)   ', '/Cork_(city)' ),
+			array( 'http://acme.test/wiki/$1', 'M&M', '/wiki/M%26M' ),
 		);
 	}
 
 	/**
-	 * @dataProvider pageUrlProvider
+	 * @dataProvider provideGetPageUrl
 	 */
-	public function testGetPageUrl( $url, $urlPath, $pageName, $expected ) {
+	public function testGetPageUrl( $path, $page, $expected ) {
+		/* @var MediaWikiSite $site */
 		$site = MediaWikiSite::newFromGlobalId( 'enwiki' );
 
-		$site->setPagePath( $url . $urlPath );
-
-		$this->assertEquals( $expected, $site->getPageUrl( $pageName ) );
+		$site->setLinkPath( $path );
+		$this->assertContains( $path, $site->getPageUrl() );
+		$this->assertContains( $expected, $site->getPageUrl( $page ) );
 	}
 
 }
