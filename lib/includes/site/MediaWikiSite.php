@@ -111,7 +111,10 @@ class MediaWikiSite extends SiteObject {
 
 		$page = static::extractPageRecord( $data, $pageName );
 
-		// NOTE: we don't really care if $page['missing'] is set.
+		if ( isset( $page['missing'] ) ) {
+			wfDebugLog( "MediaWikiSite", "call to <$url> returned a missing page title! " . $ret );
+			return false;
+		}
 
 		if ( !isset( $page['title'] ) ) {
 			wfDebugLog( "MediaWikiSite", "call to <$url> did not return a page title! " . $ret );
