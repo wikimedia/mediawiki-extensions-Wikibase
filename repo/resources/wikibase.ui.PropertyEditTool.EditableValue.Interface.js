@@ -183,6 +183,36 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 	},
 
 	/**
+	 * Update HTML language and directionality attributes.
+	 */
+	updateLanguageAttributes: function() {
+		// apply subject's language attributes or attributes according to user language.
+		if ( this._inputElem !== null ) {
+			var lang = this.getSubject().attr( 'lang' );
+			if ( lang === undefined ) {
+				lang = mw.config.get( 'wgUserLanguage' );
+			}
+			var dir = this.getSubject().attr( 'dir' );
+			if ( typeof dir === undefined ) {
+				if ( $.uls.data.languages[lang] !== undefined ) {
+					dir = ( $.uls.data.isRtl( lang ) ) ? 'rtl' : 'ltr';
+				}
+			}
+			this._inputElem.attr( 'lang', lang ).attr( 'dir', dir );
+		}
+	},
+
+	/**
+	 * Set HTML language and directionality attributes.
+	 *
+	 * @param Object language
+	 */
+	setLanguageAttributes: function( language ) {
+		this.getSubject().attr( 'lang', language.code ).attr( 'dir', language.dir );
+		this.updateLanguageAttributes();
+	},
+
+	/**
 	 * Returns the node holding the value. This node will also hold the input box when in edit mode.
 	 * @return jQuery
 	 */

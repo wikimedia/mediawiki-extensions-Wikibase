@@ -20,7 +20,8 @@
 				id: 'en',
 				name: 'English Wikipedia',
 				pageUrl: 'http://en.wikipedia.org/wiki/$1',
-				shortName: 'English'
+				shortName: 'English',
+				languageCode: 'en'
 			};
 			this.string = 'test';
 			this.site = new window.wikibase.Site( this.siteDetails );
@@ -74,5 +75,35 @@
 
 	} );
 
+	test( 'language functions', function() {
+
+		equal(
+			this.site.getLanguageCode(),
+			'en',
+			'retrieved language code'
+		);
+
+		equal(
+			this.site.getLanguage().dir,
+			'ltr',
+			'retrieved ltr language direction'
+		);
+
+		this.site._siteDetails.languageCode = 'ar';
+
+		equal(
+			this.site.getLanguage().dir,
+			'rtl',
+			'retrieved rtl language direction'
+		);
+
+		this.site._siteDetails.languageCode = 'non-existing-code';
+
+		ok(
+			typeof this.site.getLanguage().dir === 'undefined',
+			'no failure when language direction could not be retrieved'
+		);
+
+	} );
 
 }() );
