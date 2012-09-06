@@ -136,7 +136,8 @@ wb.ui.PropertyEditTool.EditableAliases = wb.utilities.inherit( $PARENT, {
 		var params = $PARENT.prototype.getApiCallParams.call( this, apiAction );
 		params.action = 'wbsetaliases';
 		params.baserevid = mw.config.get( 'wgCurRevisionId' );
-		params.set = this.getValue()[0].join( '|' );
+		params.add = this._interfaces[0].getNewItems().join( '|' );
+		params.remove = this._interfaces[0].getRemovedItems().join( '|' );
 		return params;
 	},
 
