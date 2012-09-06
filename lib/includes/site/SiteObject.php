@@ -135,7 +135,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	public function getDomain() {
-		$path = $this->getMainPath();
+		$path = $this->getLinkPath();
 
 		if ( $path === false ) {
 			return false;
@@ -152,13 +152,33 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	public function getProtocol() {
-		$path = $this->getMainPath();
+		$path = $this->getLinkPath();
 
 		if ( $path === false ) {
 			return false;
 		}
 
 		return parse_url( $path, PHP_URL_SCHEME );
+	}
+
+	/**
+	 * Sets the path used to construct links with.
+	 *
+	 * @param string $fullUrl
+	 *
+	 * @since 1.20
+	 */
+	public function setLinkPath( $fullUrl ) {
+		$this->setPath(  Site::PATH_LINK, $fullUrl );
+	}
+
+	/**
+	 * Returns the path path used to construct links with or false if there is no such path.
+	 *
+	 * @return string|false
+	 */
+	public function getLinkPath() {
+		return $this->getPath( Site::PATH_LINK );
 	}
 
 	/**
@@ -172,22 +192,8 @@ class SiteObject extends ORMRow implements Site {
 	 *
 	 * @return string
 	 */
-	protected function getMainPathType() {
+	protected function getLinkPathType() {
 		return "page_path";
-	}
-
-	/**
-	 * Returns the main path of the site which can be used to construct
-	 * links with and from which protocol and domain are derived.
-	 *
-	 * This calls $this->getMainPathType() to determine the default path type.
-	 *
-	 * @since 1.20
-	 *
-	 * @return string|false
-	 */
-	protected function getMainPath() {
-		return $this->getPath( $this->getMainPathType() );
 	}
 
 	/**
@@ -200,7 +206,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	public function getPageUrl( $pageName = false ) {
-		$url = $this->getMainPath();
+		$url = $this->getLinkPath();
 
 		if ( $url === false ) {
 			return false;
