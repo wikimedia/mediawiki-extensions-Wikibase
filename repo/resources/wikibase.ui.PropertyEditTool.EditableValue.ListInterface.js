@@ -202,6 +202,30 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 	},
 
 	/**
+	 * Returns all items added to the list since edit mode has been entered.
+	 * If not in edit mode, this will simply return an empty array.
+	 *
+	 * @return Array
+	 */
+	getNewItems: function() {
+		return $( this.getValue() ) // current items...
+			.not( this.getInitialValue() ) // ...without initial items
+			.toArray();
+	},
+
+	/**
+	 * Returns all items removed from the list since edit mode has been entered.
+	 * If not in edit mode, this will simply return an empty array.
+	 *
+	 * @return Array
+	 */
+	getRemovedItems: function() {
+		return $( this.getInitialValue() ) // initial items...
+			.not( this.getValue() ) // ...without current items
+			.toArray();
+	},
+
+	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._disableInputElement
 	 */
 	_disableInputElement: function() {
