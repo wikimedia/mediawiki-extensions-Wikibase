@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAASn///ps\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-06T13:07:06Z",
+      "side": 1,
+      "message": "Please use an explicit check, not issue, as per coding style conventions",
+      "revId": "4733c78848d3ee4f749d89d44ac7de710ab8f55f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAARn//8fM\u003d",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 2
