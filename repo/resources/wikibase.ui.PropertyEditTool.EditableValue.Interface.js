@@ -122,6 +122,7 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 	_initInputElement: function() {
 		var initialValue = this.getValue();
 		this._inputElem = this._buildInputElement();
+		this.updateLanguageAttributes();
 
 		if( this.isDisabled() ) {
 			// disable element properly if disabled from before edit mode
@@ -180,6 +181,36 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 				this._onInputRegistered(); // only called if input really changed
 			}
 		}, this ) );
+	},
+
+	/**
+	 * Update HTML language and directionality attributes.
+	 */
+	updateLanguageAttributes: function() {
+		// apply subject's language attributes or attributes according to user language.
+		if ( this._inputElem !== null ) {
+			var lang = this.getSubject().attr( 'lang' );
+			if ( lang === undefined ) {
+				lang = mw.config.get( 'wgUserLanguage' );
+			}
+			var dir = this.getSubject().attr( 'dir' );
+			if ( typeof dir === undefined ) {
+				if ( $.uls.data.languages[lang] !== undefined ) {
+					dir = ( $.uls.data.isRtl( lang ) ) ? 'rtl' : 'ltr';
+				}
+			}
+			this._inputElem.attr( 'lang', lang ).attr( 'dir', dir );
+		}
+	},
+
+	/**
+	 * Set HTML language and directionality attributes.
+	 *
+	 * @param Object language
+	 */
+	setLanguageAttributes: function( language ) {
+		this.getSubject().attr( 'lang', language.code ).attr( 'dir', language.dir );
+		this.updateLanguageAttributes();
 	},
 
 	/**

@@ -233,7 +233,16 @@ class ItemView extends \ContextSource {
 						// TODO: get an actual site id rather then just the language code
 						$languageCode
 					);
-					$html .= Html::openElement( 'td', array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode ) );
+					/* TODO: for non-JS, also set the dir attribute on the link cell;
+					but do not build language objects for each site since it causes too much load
+					and will fail when having too much site links */
+					$html .= Html::openElement(
+						'td',
+						array(
+							'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode,
+							'lang' => $languageCode
+						)
+					);
 
 					$html .= Html::element(
 						'a',
@@ -423,6 +432,7 @@ class ItemView extends \ContextSource {
 					'globalSiteId' => $site->getGlobalId(),
 					'pageUrl' => $site->getRelativePagePath(),
 					'apiUrl' => $site->getFileUrl( 'api.php' ),
+					'languageCode' => $site->getLanguageCode()
 				);
 			}
 		}
