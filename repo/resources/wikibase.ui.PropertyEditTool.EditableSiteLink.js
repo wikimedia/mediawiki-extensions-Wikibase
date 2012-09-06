@@ -51,6 +51,13 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 		// make interfaces available for public since they contain interesting data:
 		this.siteIdInterface = this._interfaces.siteId;
 		this.pageNameInterface = this._interfaces.pageName;
+		/* TODO: Setting the language attributes on initialisation will not be required as soon as
+		the attributes are already attached in PHP for the non-JS version */
+		if ( this.siteIdInterface.getSelectedSite() !== null ) {
+			this.pageNameInterface.updateLanguageAttributes(
+				this.siteIdInterface.getSelectedSite().getLanguage()
+			);
+		}
 	},
 
 	/**
@@ -118,6 +125,8 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 
 			pageInterface._getValueContainer().removeClassByRegex( /^wb-sitelinks-link-.+/ );
 			pageInterface._getValueContainer().addClass( 'wb-sitelinks-link wb-sitelinks-link-' + siteId );
+			// directly updating the page interface's language attributes when a site is selected
+			pageInterface.updateLanguageAttributes( site.getLanguage() );
 		}
 
 		// only enable site page selector if there is a valid site id selected
@@ -155,7 +164,14 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 	startEditing: function() {
 		// set ignored site links again since they could have changed
 		this._interfaces.siteId.ignoredSiteLinks = this.ignoredSiteLinks;
-		return $PARENT.prototype.startEditing.call( this );
+		var success = $PARENT.prototype.startEditing.call( this );
+		// update language attributes when starting edit mode on an already existing site link
+		if ( !this.isNew() ) {
+			this.pageNameInterface.updateLanguageAttributes(
+				this.siteIdInterface.getSelectedSite().getLanguage()
+			);
+		}
+		return success;
 	},
 
 	/**
