@@ -20,6 +20,9 @@ namespace Wikibase\Test;
  */
 class QueryContentTest extends \MediaWikiTestCase {
 
+	public function testDummy() {
+		$this->markTestIncomplete( "no tests for QueryContent yet" );
+	}
 
 }
 	

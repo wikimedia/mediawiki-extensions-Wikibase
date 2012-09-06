@@ -20,6 +20,9 @@ namespace Wikibase\Test;
  */
 class PropertyContentTest extends \MediaWikiTestCase {
 
+	public function testDummy() {
+		$this->markTestIncomplete( "no tests for PropertyContent yet" );
+	}
 
 }
 	
