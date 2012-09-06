@@ -25,6 +25,21 @@ abstract class EntityContent extends \AbstractContent {
 	protected $editEntity = null;
 
 	/**
+	 * Checks if this EntityContent is valid for saving.
+	 *
+	 * Returns false if the entity does not have an ID set.
+	 *
+	 * @see Content::isValid()
+	 */
+	public function isValid() {
+		if ( is_null( $this->getEntity()->getId() ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Returns the EditEntity for the item or false if there is none.
 	 *
 	 * @since 0.1
