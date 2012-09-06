@@ -48,7 +48,7 @@ wb.ui.PropertyEditTool.EditableValue.SitePageInterface = wb.utilities.inherit( $
 	/**
 	 * Allows to set the site, the pages should be selected from.
 	 *
-	 * @param site wikibase.Site
+	 * @param wb.Site site
 	 */
 	setSite: function( site ) {
 		if( this._site !== null && this._site.getId() === site.getId() ) {
@@ -71,6 +71,20 @@ wb.ui.PropertyEditTool.EditableValue.SitePageInterface = wb.utilities.inherit( $
 	},
 
 	/**
+	 * @see wb.ui.PropertyEditTool.EditableValue.Interface.updateLanguageAttributes
+	 *
+	 * @param object language
+	 */
+	updateLanguageAttributes: function( language ) {
+		$PARENT.prototype.updateLanguageAttributes.call( this, language );
+		if ( this._isInEditMode ) {
+			// updating language attributes of auto-suggestion menu
+			this._inputElem.data( 'autocomplete' ).menu.element
+				.attr( 'lang', language.code ).attr( 'dir',language.dir );
+		}
+	},
+
+	/**
 	 * Just a dummy to override the validation of the page
 	 * For now the validation is done by the API only
 	 * @param value String page
@@ -83,7 +97,7 @@ wb.ui.PropertyEditTool.EditableValue.SitePageInterface = wb.utilities.inherit( $
 	/**
 	 * Returns the site set to select pages from.
 	 *
-	 * @return wikibase.Site
+	 * @return wb.Site site
 	 */
 	getSite: function() {
 		return this._site;
