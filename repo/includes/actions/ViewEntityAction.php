@@ -67,6 +67,15 @@ abstract class ViewEntityAction extends \ViewAction {
 		}
 		else {
 			$this->displayEntityContent( $content );
+
+			$editableView = $this->isPlainView();
+
+			ItemView::registerJsConfigVars(
+				$this->getOutput(),
+				$content,
+				$this->getLanguage()->getCode(),
+				$editableView
+			);
 		}
 	}
 
