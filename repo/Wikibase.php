@@ -191,7 +191,6 @@ $wgHooks['SkinTemplateNavigation'][] 				= 'Wikibase\RepoHooks::onPageTabs';
 $wgHooks['ArticleDeleteComplete'][] 				= 'Wikibase\RepoHooks::onArticleDeleteComplete';
 $wgHooks['LinkBegin'][] 							= 'Wikibase\RepoHooks::onLinkBegin';
 $wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
-//$wgHooks['FormatAutocomments'][]					= array( new Wikibase\Autocomment( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ), 'onFormat');
 $wgHooks['FormatAutocomments'][]					= array( 'Wikibase\Autocomment::onFormat', array( CONTENT_MODEL_WIKIBASE_ITEM, "wikibase-item" ) );
 $wgHooks['PageHistoryLineEnding'][]					= 'Wikibase\RepoHooks::onPageHistoryLineEnding';
 $wgHooks['WikibaseRebuildData'][] 					= 'Wikibase\RepoHooks::onWikibaseRebuildData';
