@@ -160,6 +160,7 @@ $wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/updates/I
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
 $wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/ApiLangAttributeBase.php';
+$wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
 $wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
 
@@ -176,7 +177,7 @@ $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
-$wgSpecialPages['ItemDisambiguation'] 						= 'SpecialItemDisambiguation';
+$wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 
 
 // Hooks
