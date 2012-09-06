@@ -400,28 +400,45 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $expectedOK, $edit->showErrorPage() );
 	}
 
-	public function testIsTokenOk() {
+	public function provideIsTokenOk() {
+		return array(
+			array( #0
+				true, # use a newly generated valid token
+				true, # should work
+			),
+			array( #1
+				"xyz", # use an invalid token
+				false, # should fail
+			),
+			array( #2
+				"", # use an empty token
+				false, # should fail
+			),
+			array( #3
+				null, # use no token
+				false, # should fail
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideIsTokenOk
+	 */
+	public function testIsTokenOk( $token, $shouldWork ) {
 		global $wgUser;
 
 		$content = ItemContent::newEmpty();
 		$edit = new EditEntity( $content );
 
 		// check valid token --------------------
-		$token = $wgUser->getEditToken();
-		$request = new FauxRequest( array( 'wpEditToken' => $token ) );
-		$this->assertTrue( $edit->isTokenOK( $request ), 'expected token to work: ' . $token );
+		if ( $token === true ) {
+			$token = $wgUser->getEditToken();
+		}
 
-		$this->assertTrue( $edit->getStatus()->isOK() );
-		$this->assertFalse( $edit->hasError( EditEntity::TOKEN_ERROR ) );
-		$this->assertFalse( $edit->showErrorPage() );
+		$this->assertEquals( $shouldWork, $edit->isTokenOK( $token ) );
 
-		// check invalid token --------------------
-		$token = "xyz";
-		$request = new FauxRequest( array( 'wpEditToken' => $token ) );
-		$this->assertFalse( $edit->isTokenOK( $request ), 'expected token to not work: ' . $token );
-
-		$this->assertFalse( $edit->getStatus()->isOK() );
-		$this->assertTrue( $edit->hasError( EditEntity::TOKEN_ERROR ) );
-		$this->assertTrue( $edit->showErrorPage() );
+		$this->assertEquals( $shouldWork, $edit->getStatus()->isOK() );
+		$this->assertNotEquals( $shouldWork, $edit->hasError( EditEntity::TOKEN_ERROR ) );
+		$this->assertNotEquals( $shouldWork, $edit->showErrorPage() );
 	}
 }
