@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn///mk\u003d",
+        "filename": "lib/includes/site/MediaWikiSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-06T15:03:08Z",
+      "side": 1,
+      "message": "why not remove the whole line?",
+      "revId": "fd6a1628e0166e1cb496561db9e7d88e19138ed4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
