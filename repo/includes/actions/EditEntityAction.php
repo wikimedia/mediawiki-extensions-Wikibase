@@ -156,14 +156,17 @@ abstract class EditEntityAction extends ViewEntityAction {
 	/**
 	 * @see FormlessAction::show
 	 *
-	 * Calls paren't show() action to just display the entity, unless an undo action is requested.
+	 * Calls parent's show() action to just display the entity, unless an undo action is requested.
 	 *
 	 * @since 0.1
 	 */
 	public function show() {
 		$req = $this->getRequest();
 
-		if ( $req->getCheck( 'undo' ) || $req->getCheck( 'undoafter' ) || $req->getCheck( 'restore' ) ) {
+		if ( $req->getCheck( 'redlink' ) && $req->getInt( 'redlink' ) > 0 && !$this->getTitle()->exists() ) {
+			$url = \SpecialPage::getTitleFor( "CreateItem" )->getFullURL();
+			$this->getOutput()->redirect( $url );
+		} else if ( $req->getCheck( 'undo' ) || $req->getCheck( 'undoafter' ) || $req->getCheck( 'restore' ) ) {
 			$this->showUndoForm();
 		} else {
 			parent::show();
