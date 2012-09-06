@@ -15,6 +15,10 @@
  */
 class MediaWikiSite extends SiteObject {
 
+	const PATH_FILE = 'file_path';
+
+	const PATH_PAGE = 'page_path';
+
 	/**
 	 * @since 0.1
 	 *
@@ -209,6 +213,18 @@ class MediaWikiSite extends SiteObject {
 	}
 
 	/**
+	 * @see Site::getLinkPathType
+	 * Returns Site::PATH_PAGE
+	 *
+	 * @since 1.20
+	 *
+	 * @return string
+	 */
+	public function getLinkPathType() {
+		return self::PATH_PAGE;
+	}
+
+	/**
 	 * Returns the relative page path.
 	 *
 	 * @since 1.20
@@ -216,7 +232,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getRelativePagePath() {
-		return parse_url( $this->getPath( 'page_path' ), PHP_URL_PATH );
+		return parse_url( $this->getPath( self::PATH_PAGE ), PHP_URL_PATH );
 	}
 
 	/**
@@ -227,7 +243,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getRelativeFilePath() {
-		return parse_url( $this->getPath( 'file_path' ), PHP_URL_PATH );
+		return parse_url( $this->getPath( self::PATH_FILE ), PHP_URL_PATH );
 	}
 
 	/**
@@ -238,7 +254,7 @@ class MediaWikiSite extends SiteObject {
 	 * @param string $path
 	 */
 	public function setPagePath( $path ) {
-		$this->setPath( 'page_path', $path );
+		$this->setPath( self::PATH_PAGE, $path );
 	}
 
 	/**
@@ -249,27 +265,36 @@ class MediaWikiSite extends SiteObject {
 	 * @param string $path
 	 */
 	public function setFilePath( $path ) {
-		$this->setPath( 'file_path', $path );
+		$this->setPath( self::PATH_FILE, $path );
 	}
 
 	/**
 	 * @see Site::getPagePath
 	 *
+	 * This implementation returns a URL constructed using the path returned by getLinkPath().
+	 * In addition to the default behaviour implemented by SiteObject::getPageUrl(), this
+	 * method converts the $pageName to DBKey-format by replacing spaces with underscores
+	 * before using it in the URL.
+	 *
 	 * @since 1.20
 	 *
-	 * @param string|false $pageName
+	 * @param string|false
 	 *
 	 * @return string
 	 */
 	public function getPageUrl( $pageName = false ) {
-		$pagePath = $this->getPath( 'page_path' );
+		$url = $this->getLinkPath();
+
+		if ( $url === false ) {
+			return false;
+		}
 
 		if ( $pageName !== false ) {
 			$pageName = $this->toDBKey( trim( $pageName ) );
-			$pagePath = str_replace( '$1', wfUrlencode( $pageName ), $pagePath );
+			$url = str_replace( '$1', wfUrlencode( $pageName ), $url ) ;
 		}
 
-		return $pagePath;
+		return $url;
 	}
 
 	/**
@@ -284,7 +309,7 @@ class MediaWikiSite extends SiteObject {
 	 * @return string
 	 */
 	public function getFileUrl( $path = false ) {
-		$filePath = $this->getPath( 'file_path' );
+		$filePath = $this->getPath( self::PATH_FILE );
 
 		if ( $filePath !== false ) {
 			$filePath = str_replace( '$1', $path, $filePath );

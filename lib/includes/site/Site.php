@@ -38,6 +38,8 @@ interface Site {
 
 	const SOURCE_LOCAL = 'local';
 
+	const PATH_LINK = 'link';
+
 	/**
 	 * Returns the global site identifier (ie enwiktionary).
 	 *
@@ -135,7 +137,11 @@ interface Site {
 	 * Returns the full URL for the given page on the site.
 	 * Or false if the needed information is not known.
 	 *
+	 * This generated URL is usually based upon the path returned by getLinkPath(),
+	 * but this is not a requirement.
+	 *
 	 * @since 1.20
+	 * @see Site::getLinkPath()
 	 *
 	 * @param bool|String $page
 	 *
@@ -264,6 +270,31 @@ interface Site {
 	 * @return string|false
 	 */
 	public function getPath( $pathType );
+
+	/**
+	 * Sets the path used to construct links with.
+	 * Shall be equivalent to setPath( getLinkPathType(), $fullUrl ).
+	 *
+	 * @param string $fullUrl
+	 *
+	 * @since 1.20
+	 */
+	public function setLinkPath( $fullUrl );
+
+	/**
+	 * Returns the path used to construct links with or false if there is no such path.
+	 * Shall be equivalent to getPath( getLinkPathType() ).
+	 *
+	 * @return string|false
+	 */
+	public function getLinkPath();
+
+	/**
+	 * Returns the path type used to construct links with.
+	 *
+	 * @return string|false
+	 */
+	public function getLinkPathType();
 
 	/**
 	 * Returns the paths as associative array.
