@@ -34,6 +34,41 @@
       "revId": "dd4d5bab19433c0d9904808b506931be116e2416",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn///qQ\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-06T12:58:12Z",
+      "side": 1,
+      "message": "not sure why john posted all that code from ApiModifyItem, but here\u0027S the most important bit:\n\n$status \u003d $editEntity-\u003eattemptSave( \u0027\u0027,   EDIT_AUTOSUMMARY | EDIT_NEW );\n\nyou can also have EditEntity handel the token check:\n\n$status \u003d $editEntity-\u003eattemptSave( \u0027\u0027,   EDIT_AUTOSUMMARY | EDIT_NEW, $token );\n\nOh, and you don\u0027t need to check permissions: EditEntity automatically checks the \"edit\" and, if appropriate, the \"createpage\" permissions. If you need to check more, use $editEntity-\u003eaddRequiredPermission( \"something\" ).",
+      "parentUuid": "AAAASn///qc\u003d",
+      "revId": "dd4d5bab19433c0d9904808b506931be116e2416",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn///qU\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-06T12:58:12Z",
+      "side": 1,
+      "message": "try this:\n\nif ( !$editPage-\u003eisSuccess() ) {\n    $editPage-\u003eshowErrorPage( $this-\u003egetOutput() )\n}",
+      "revId": "dd4d5bab19433c0d9904808b506931be116e2416",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
