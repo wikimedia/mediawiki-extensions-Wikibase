@@ -122,6 +122,11 @@ class EditEntity {
 	public function __construct( EntityContent $newContent, \User $user = null, $baseRevId = null) {
 		$this->newContent = $newContent;
 
+		// $baseRevId often comes from a WebRequest, so be lenient about how "nothing" is supplied
+		if ( $baseRevId === false || $baseRevId === 0 || $baseRevId === '' ) {
+			$baseRevId = null;
+		}
+
 		$this->user = $user;
 		$this->baseRevId = $baseRevId;
 
@@ -419,9 +424,9 @@ class EditEntity {
 
 		if ( !$tokenOk ) {
 			if ( $tokenOkExceptSuffix ) {
-				$this->status->fatal( 'wikibase-undo-revision-error', 'token_suffix_mismatch' );
+				$this->status->fatal( 'token_suffix_mismatch' );
 			} else {
-				$this->status->fatal( 'wikibase-undo-revision-error', 'session_fail_preview' );
+				$this->status->fatal( 'session_fail_preview' );
 			}
 
 			$this->errorType |= self::TOKEN_ERROR;
@@ -570,7 +575,7 @@ class EditEntity {
 
 		$this->showStatus( $out );
 
-		$out->returnToMain();
+		$out->returnToMain( '', $this->getTitle() );
 
 		return true;
 	}
