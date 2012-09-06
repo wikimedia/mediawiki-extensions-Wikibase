@@ -20,14 +20,16 @@
 				id: 'en',
 				name: 'English Wikipedia',
 				pageUrl: 'http://en.wikipedia.org/wiki/$1',
-				shortName: 'English'
+				shortName: 'English',
+				languageCode: 'en'
 			},
 			de: {
 				apiUrl: 'http://de.wikipedia.org/w/api.php',
 				id: 'de',
 				name: 'Deutsche Wikipedia',
 				pageUrl: 'http://de.wikipedia.org/wiki/$1',
-				shortName: 'Deutsch'
+				shortName: 'Deutsch',
+				languageCode: 'en'
 			}
 		}
 	};

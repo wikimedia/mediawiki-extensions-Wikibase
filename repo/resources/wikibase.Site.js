@@ -92,6 +92,27 @@ wb.Site.prototype = {
 	},
 
 	/**
+	 * Returns the site's language code.
+	 *
+	 * @return string language code
+	 */
+	getLanguageCode: function() {
+		return this._siteDetails.languageCode;
+	},
+
+	/**
+	 * Returns an object containing the site's language code and language direction
+	 *
+	 * @return object language code and direction
+	 */
+	getLanguage: function() {
+		return { // TODO: use a language object from the Universal Language Selector
+			code: this.getLanguageCode(),
+			dir: ( $.uls.data.isRtl( this.getLanguageCode() ) ) ? 'rtl' : 'ltr'
+		};
+	},
+
+	/**
 	 * Does the encoding for a site so it can be used within the url to the site.
 	 * This should propably be over written in case the site is not a MediaWiki installation.
 	 *

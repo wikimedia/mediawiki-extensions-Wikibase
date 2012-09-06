@@ -160,11 +160,22 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 	 * @return jQuery
 	 */
 	_buildInputElement: function() {
+		// apply subject's language attributes or attributes according to user language
+		var lang = this._subject.attr( 'lang' );
+		if ( typeof lang === 'undefined' ) {
+			lang = mw.config.get( 'wgUserLanguage' );
+		}
+		var dir = this._subject.attr( 'dir' );
+		if ( typeof dir === 'undefined' ) {
+			dir = ( $.uls.data.isRtl( mw.config.get( 'wgUserLanguage' ) ) ) ? 'rtl' : 'ltr';
+		}
 		return $( '<input/>', {
 			'class': this.UI_CLASS,
 			'type': 'text',
 			'name': this._key,
 			'value': this.getValue(),
+			'lang': lang,
+			'dir': dir,
 			'keypress': $.proxy( this._onKeyPressed, this ),
 			'keyup':    $.proxy( this._onKeyUp, this ),
 			'keydown':  $.proxy( this._onKeyDown, this ),
@@ -180,6 +191,18 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 				this._onInputRegistered(); // only called if input really changed
 			}
 		}, this ) );
+	},
+
+	/**
+	 * Update HTML language and directionality attributes
+	 *
+	 * @param object language
+	 */
+	updateLanguageAttributes: function( language ) {
+		this._subject.attr( 'lang', language.code ).attr( 'dir', language.dir );
+		if ( this._isInEditMode ) {
+			this._inputElem.attr( 'lang', language.code ).attr( 'dir', language.dir );
+		}
 	},
 
 	/**

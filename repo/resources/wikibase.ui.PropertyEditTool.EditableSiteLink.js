@@ -51,6 +51,13 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 		// make interfaces available for public since they contain interesting data:
 		this.siteIdInterface = this._interfaces.siteId;
 		this.pageNameInterface = this._interfaces.pageName;
+		/* TODO: Setting the language attributes on initilisation will not be required as soon as
+		the attributes are already attached in PHP for the non-JS version */
+		if ( this.siteIdInterface.getSelectedSite() !== null ) {
+			this.pageNameInterface.updateLanguageAttributes(
+				this.siteIdInterface.getSelectedSite().getLanguage()
+			);
+		}
 	},
 
 	/**
@@ -118,6 +125,8 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 
 			pageInterface._getValueContainer().removeClassByRegex( /^wb-sitelinks-link-.+/ );
 			pageInterface._getValueContainer().addClass( 'wb-sitelinks-link wb-sitelinks-link-' + siteId );
+			// directly updating the page interface's language attributes when a site is selected
+			pageInterface.updateLanguageAttributes( site.getLanguage() );
 		}
 
 		// only enable site page selector if there is a valid site id selected
