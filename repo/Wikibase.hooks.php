@@ -630,7 +630,7 @@ final class RepoHooks {
 		// just check whether the page is a special page and if not, disable the behavior.
 		global $wgTitle;
 
-		if( ! $wgTitle->isSpecialPage() ) {
+		if( $wgTitle === null || !$wgTitle->isSpecialPage() ) {
 			// no special page, we don't handle this for now
 			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
 			//       users language so they are cache independent.
