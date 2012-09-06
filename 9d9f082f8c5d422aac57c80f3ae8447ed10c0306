@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn///g8\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-06T17:34:22Z",
+      "side": 1,
+      "message": "should use getLinkPathType()",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn///gw\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-06T17:34:22Z",
+      "side": 1,
+      "message": "please provide a test case that makes sure getLinkPath() is consistent with setLinkPath() for all subclasses/implementations.",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn///hA\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-06T17:34:22Z",
+      "side": 1,
+      "message": "should use getLinkPathType()",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn///hE\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-06T17:34:22Z",
+      "side": 1,
+      "message": "should return Site::PATH_LINK",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
