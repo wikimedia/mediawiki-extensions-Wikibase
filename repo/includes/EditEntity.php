@@ -437,9 +437,9 @@ class EditEntity {
 
 		if ( !$tokenOk ) {
 			if ( $tokenOkExceptSuffix ) {
-				$this->status->fatal( 'wikibase-undo-revision-error', 'token_suffix_mismatch' );
+				$this->status->fatal( 'token_suffix_mismatch' );
 			} else {
-				$this->status->fatal( 'wikibase-undo-revision-error', 'session_fail_preview' );
+				$this->status->fatal( 'session_fail_preview' );
 			}
 
 			$this->errorType |= self::TOKEN_ERROR;
@@ -597,7 +597,7 @@ class EditEntity {
 
 		$this->showStatus( $out );
 
-		$out->returnToMain();
+		$out->returnToMain( '', $this->getTitle() );
 
 		return true;
 	}
