@@ -152,14 +152,20 @@ PropertyEditTool toolbar */
 
 /********** SITE LINKS **********/
 
-table.wb-sitelinks {
-	table-layout: fixed; /* constrains table proportons to first row's columns (see colgroup in HTML) */
+h2.wb-sitelinks-heading {
+	float: left;
 	width: 100%;
-	border-bottom: 1px solid #C9C9C9;
+	margin-top: 2em;
+	margin-bottom: 0.2em;
+	padding-left: 10px;
+	border-bottom: none;
 }
 
-table.wb-sitelinks h3 {
-	padding-left: 10px;
+table.wb-sitelinks {
+	table-layout: fixed; /* constrains table proportons to first row's columns (see colgroup in HTML) */
+	border-spacing: 0;
+	width: 100%;
+	border-bottom: 1px solid #C9C9C9;
 }
 
 table.wb-sitelinks .wb-sitelinks-columnheaders {
@@ -186,8 +192,11 @@ table.wb-sitelinks .wb-sitelinks-link {
 }
 
 table.wb-sitelinks, .wb-sitelinks-empty {
-	margin-top: 4em;
 	clear: both;
+}
+
+.wb-sitelinks-empty {
+	margin-top: 3em;
 }
 
 table.wb-sitelinks th {

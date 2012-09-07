@@ -278,6 +278,15 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 		return sites;
 	},
 
+	/**
+	 * @see wb.ui.PropertyEditTool._getCounterNodes
+	 *
+	 * @return jQuery
+	 */
+	_getCounterNodes: function() {
+		return this._subject.parent().find( '.wb-sitelinks-heading .wb-ui-propertyedittool-counter' );
+	},
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
@@ -302,9 +311,7 @@ wb.ui.SiteLinksEditTool.getEmptyStructure = function() {
 					'<col class="wb-sitelinks-link" />' +
 					'<col class="wb-ui-propertyedittool-editablevalue-toolbarparent" />' +
 				'</colgroup>' +
-				'<thead><th colspan="3"><h3>' +
-					mw.message( 'wikibase-sitelinks' ).escaped() +
-				'</h3></th></thead>' +
+				'<thead></thead>' +
 				'<tbody></tbody>' +
 			'</table>'
 	);
