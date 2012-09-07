@@ -17,21 +17,21 @@ sitelink_changed = "London Olympics"
 changed = "_changed"
 
 describe "Check undo/history/oldrevision" do
-
-  context "undo test setup" do
-    it "should create item, enter label, description and aliases" do
-      visit_page(ItemPage) do |page|
-        page.create_new_item(label, description)
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
-        page.add_aliases([alias_a, alias_b, alias_c])
-        page.add_sitelinks([sitelinks[0]])
-      end
+  before :all do
+    # set up: create item with aliases & sitelinks
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label, description)
+      page.wait_for_aliases_to_load
+      page.wait_for_item_to_load
+      page.add_aliases([alias_a, alias_b, alias_c])
+      page.add_sitelinks([sitelinks[0]])
     end
+  end
+  context "undo test change item & check history page" do
     it "should check revision count on history page" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
-        page.count_revisions.should == 4
+        page.count_revisions.should == 3
       end
     end
     it "should make some changes to item" do
@@ -58,7 +58,7 @@ describe "Check undo/history/oldrevision" do
     it "should check revision count on history page" do
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
-        page.count_revisions.should == 8
+        page.count_revisions.should == 7
       end
     end
   end
@@ -214,14 +214,13 @@ describe "Check undo/history/oldrevision" do
     end
   end
 
-  context "undo test teardown" do
-    it "should remove all sitelinks" do
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_item_to_load
-        page.wait_for_sitelinks_to_load
-        page.remove_all_sitelinks
-      end
+  after :all do
+    # tear down: remove all sitelinks
+    on_page(ItemPage) do |page|
+      page.navigate_to_item
+      page.wait_for_item_to_load
+      page.wait_for_sitelinks_to_load
+      page.remove_all_sitelinks
     end
   end
 end

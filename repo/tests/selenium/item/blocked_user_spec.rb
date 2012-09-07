@@ -10,17 +10,16 @@
 require 'spec_helper'
 
 describe "Check functionality of blocking a user" do
-  context "create item, block user" do
-    it "should create an item and block a user" do
-      visit_page(LoginPage) do |page|
-        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
-      end
-      visit_page(ItemPage) do |page|
-        page.create_new_item(generate_random_string(10), generate_random_string(20))
-      end
-      visit_page(BlockUserPage) do |page|
-        page.block_user(WIKI_BLOCKED_USERNAME, "1 hour")
-      end
+  before :all do
+    # setup: create an item and block the user
+    visit_page(LoginPage) do |page|
+      page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+    end
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(generate_random_string(10), generate_random_string(20))
+    end
+    visit_page(BlockUserPage) do |page|
+      page.block_user(WIKI_BLOCKED_USERNAME, "1 hour")
     end
   end
 
@@ -73,42 +72,24 @@ describe "Check functionality of blocking a user" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
-      visit_page(ItemPage) do |page|
-        page.wait_for_item_to_load
-        page.labelInputField_element.enabled?.should be_false
-        page.saveLabelLink?.should be_false
-        page.saveLabelLinkDisabled?.should be_true
-        page.saveLabelLinkDisabled_element.click
-        page.wait_until do
-          page.wbTooltip?
-        end
-        page.wbTooltip?.should be_true
-      end
-      visit_page(ItemPage) do |page|
-        page.wait_for_item_to_load
-        page.descriptionInputField_element.enabled?.should be_false
-        page.saveDescriptionLink?.should be_false
-        page.saveDescriptionLinkDisabled?.should be_true
-        page.saveDescriptionLinkDisabled_element.click
-        page.wait_until do
-          page.wbTooltip?
-        end
-        page.wbTooltip?.should be_true
+      visit_page(CreateItemPage) do |page|
+        page.createItemLabelField = generate_random_string(10)
+        page.createItemDescriptionField = generate_random_string(20)
+        page.createItemSubmit
+        page.mwFirstHeading.should == "Permissions errors"
       end
     end
   end
-
-  context "unblock user" do
-    it "should unblock the user and logout" do
-      visit_page(LoginPage) do |page|
-        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
-      end
-      visit_page(UnblockUserPage) do |page|
-        page.unblock_user(WIKI_BLOCKED_USERNAME)
-      end
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
+  after :all do
+    # tear down: unblock the user and logout
+    visit_page(LoginPage) do |page|
+      page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+    end
+    visit_page(UnblockUserPage) do |page|
+      page.unblock_user(WIKI_BLOCKED_USERNAME)
+    end
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
   end
 end
