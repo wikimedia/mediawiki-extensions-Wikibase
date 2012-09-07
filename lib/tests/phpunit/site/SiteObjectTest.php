@@ -74,15 +74,6 @@ class SiteObjectTest extends ORMRowTest {
 	 * @dataProvider instanceProvider
 	 * @param Site $site
 	 */
-	public function testSetInternalId( Site $site ) {
-		$site->setInternalId( 42 );
-		$this->assertEquals( 42, $site->getInternalId() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param Site $site
-	 */
 	public function testGetInterwikiIds( Site $site ) {
 		$this->assertInternalType( 'array', $site->getInterwikiIds() );
 	}

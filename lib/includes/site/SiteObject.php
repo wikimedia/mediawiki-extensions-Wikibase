@@ -402,17 +402,6 @@ class SiteObject extends ORMRow implements Site {
 	}
 
 	/**
-	 * @see Site::setInternalId
-	 *
-	 * @since 1.20
-	 *
-	 * @param integer $id
-	 */
-	public function setInternalId( $id ) {
-		$this->setId( $id );
-	}
-
-	/**
 	 * @see ORMRow::save
 	 * @see Site::save
 	 *

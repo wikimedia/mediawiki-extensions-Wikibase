@@ -245,15 +245,6 @@ interface Site {
 	public function getInternalId();
 
 	/**
-	 * Sets the internal ID of the site.
-	 *
-	 * @since 1.20
-	 *
-	 * @param integer $id
-	 */
-	public function setInternalId( $id );
-
-	/**
 	 * Sets the provided url as path of the specified type.
 	 *
 	 * @since 1.20
