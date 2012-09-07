@@ -106,7 +106,7 @@ $messages['en'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'Language:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Label:',
 	'wikibase-itemdisambiguation-submit' => 'Search',
-	'wikibase-itemdisambiguation-create' => 'You can also [{{fullurl:Special:CreateItem|language=$1&label=$2}} create an item].',
+	'wikibase-itembytitle-create' => 'No such item found, you can also [{{fullurl:Special:CreateItem|site=$1&page=$2}} create the item].',
 	'wikibase-itemdisambiguation-nothing-found' => 'No item was found by the previous search. Please refine the query.',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'The previous query could not be used for a search. You must provide a valid language identifier.',
 	'wikibase-itemdisambiguation-description' => 'Values used for searching must be the complete text entry. Language is an identifier, such as "en".',
@@ -382,7 +382,7 @@ Parameters:
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
 	'wikibase-noitem-nopermission' => 'For some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user does not have sufficient rights to create a new item in this case.',
 	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item.',
-	'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. Example edit summary is "Updated [en] label:  Egypt". Parameters: 
+	'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. Example edit summary is "Updated [en] label:  Egypt". Parameters:
 * $2 is the language code for the item page.',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing an item label. Example edit summary is "Removed [en] label". Parameters:
 * $2 is the language code for the item page.',
@@ -2073,7 +2073,7 @@ $1',
 	'wikibase-self-conflict' => 'Gögnunum var breytt eftir að þú byrjaðir að breyta síðunni.',
 	'wikibase-restoreold' => 'endursetja',
 	'wikibase-restore-summary' => 'Endurvekja útgáfu $1 eftir [[Special:Contributions/$2|$2]]',
-	'wikibase-noitem' => 'Þessi hlutur er ekki til. 
+	'wikibase-noitem' => 'Þessi hlutur er ekki til.
 Þú getur <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} leitað í aðgerðarskrá]
 til þess að finna hvert hann fór, eða [[Special:CreateItem|búið til nýjan hlut]]</span>.',
 	'wikibase-noitem-nopermission' => 'Þessi hlutur er ekki til.
