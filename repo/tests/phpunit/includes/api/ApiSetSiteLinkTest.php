@@ -193,6 +193,16 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 			if ( $expectedTitle !== false ) {
 				$this->assertEquals( $expectedTitle, $link['title'] );
 			}
+
+			if ( $expectedTitle !== false && $linktitle !== '' ) {
+				$this->assertArrayHasKey( 'url', $link );
+				// this makes an assumption that the title is represented as a string that does not need
+				// normalization or url encoding
+				$this->assertContains( $link['title'], $link['url'] );
+			}
+			else {
+				$this->assertArrayNotHasKey( 'url', $link );
+			}
 		} catch ( \UsageException $e ) {
 			if ( !$expectedFailure ) {
 				$this->fail( "unexpected exception: $e" );
