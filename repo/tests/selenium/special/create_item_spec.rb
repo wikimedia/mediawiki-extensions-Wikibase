@@ -20,7 +20,7 @@ describe "Check CreateItem special page" do
     it "should create a new item with label and description" do
       label = generate_random_string(10)
       description = generate_random_string(20)
-      visit_page(ItemPage) do |page|
+      visit_page(CreateItemPage) do |page|
         page.createItemLabelField = label
         page.createItemDescriptionField = description
         page.createItemSubmit
@@ -34,7 +34,7 @@ describe "Check CreateItem special page" do
     it "should create a new item with label and empty description" do
       label = generate_random_string(10)
       description = generate_random_string(20)
-      visit_page(ItemPage) do |page|
+      visit_page(CreateItemPage) do |page|
         page.createItemLabelField = label
         page.createItemSubmit
         page.wait_for_item_to_load
@@ -47,7 +47,7 @@ describe "Check CreateItem special page" do
     it "should create a new item with description and empty label" do
       label = generate_random_string(10)
       description = generate_random_string(20)
-      visit_page(ItemPage) do |page|
+      visit_page(CreateItemPage) do |page|
         page.createItemDescriptionField = description
         page.createItemSubmit
         page.wait_for_item_to_load
@@ -63,7 +63,7 @@ describe "Check CreateItem special page" do
     it "should check that the redirect preserves the correct uselang parameter" do
       label = generate_random_string(10)
       description = generate_random_string(20)
-      visit_page(ItemPage) do |page|
+      visit_page(CreateItemPage) do |page|
         page.uls_switch_language("Deutsch")
         page.createItemLabelField = label
         page.createItemDescriptionField = description

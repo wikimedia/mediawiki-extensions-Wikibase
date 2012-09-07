@@ -15,15 +15,13 @@ alias_b = generate_random_string(5)
 alias_c = generate_random_string(5)
 
 describe "Check functionality search" do
-
-  context "Search test setup" do
-    it "should create item, enter label, description and aliases" do
-      visit_page(ItemPage) do |page|
-        page.create_new_item(label, description)
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
-        page.add_aliases([alias_a, alias_b, alias_c])
-      end
+  before :all do
+    # set up: create item and add aliases
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label, description)
+      page.wait_for_aliases_to_load
+      page.wait_for_item_to_load
+      page.add_aliases([alias_a, alias_b, alias_c])
     end
   end
 
@@ -89,5 +87,9 @@ describe "Check functionality search" do
         page.itemLabelSpan.should == label
       end
     end
+  end
+
+  after :all do
+    # tear down
   end
 end

@@ -16,7 +16,9 @@ item_sitelinks = [["de", "Rom"], ["it", "Roma"], ["fi", "Rooma"], ["hu", "Róma"
 item_sitelinks_additional = [["fr", "Rome"]]
 
 describe "Check functionality of client-repo connection" do
-
+  before :all do
+    # set up
+  end
   context "client-repo test setup" do
     it "should create a new article on client" do
       visit_page(ClientPage) do |page|
@@ -27,7 +29,7 @@ describe "Check functionality of client-repo connection" do
       end
     end
     it "should create a corresponding wikidata item on the repo" do
-      visit_page(ItemPage) do |page|
+      visit_page(CreateItemPage) do |page|
         page.create_new_item(article_title, item_description)
         page.itemLabelSpan.should == article_title
         page.itemDescriptionSpan.should == item_description
@@ -128,6 +130,8 @@ describe "Check functionality of client-repo connection" do
         page.interwiki_xxx?.should be_false
       end
     end
-
+  end
+  after :all do
+    # tear down
   end
 end
