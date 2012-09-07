@@ -61,7 +61,19 @@
 				$( this ).replaceWith( wb.ui.SiteLinksEditTool.getEmptyStructure() );
 			} );
 
+			// removing site links heading to rebuild it with value counter
+			$( '.wb-sitelinks-heading' ).remove();
 			$( 'table.wb-sitelinks' ).each( function() {
+				$( this ).before(
+					$( '<h2/>' )
+					.addClass( 'wb-sitelinks-heading' )
+					.text( mw.message( 'wikibase-sitelinks' ) )
+					.append(
+						$( '<span/>' )
+						.attr( 'id', 'wb-item-' + mw.config.get('wbItemId') + '-sitelinks-counter' )
+						.addClass( 'wb-ui-propertyedittool-counter' )
+					)
+				);
 				// actual initialization
 				new wb.ui.SiteLinksEditTool( $( this ) );
 			} );
