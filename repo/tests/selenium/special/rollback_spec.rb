@@ -15,46 +15,42 @@ sitelink_changed = "Vancouver Olympics"
 changed = "_changed"
 
 describe "Check revert/rollback" do
-
-  context "rollback test setup" do
-    it "should create item, enter label, description and aliases" do
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
-      visit_page(ItemPage) do |page|
-        page.create_new_item(label, description)
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
-        page.add_aliases([alias_a])
-        page.add_sitelinks(sitelinks)
-      end
+  before :all do
+    # set up: create item, enter label, description and aliases & make some changes to item as another user
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
-    it "should make some changes to item" do
-      visit_page(LoginPage) do |page|
-        page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
-      end
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_item_to_load
-        page.wait_for_aliases_to_load
-        page.change_label(label + changed)
-        page.change_description(description + changed)
-        page.editAliases
-        page.aliasesInputFirst_element.clear
-        page.aliasesInputEmpty= alias_a + changed
-        page.saveAliases
-        ajax_wait
-        page.wait_for_api_callback
-        page.editSitelinkLink
-        page.pageInputField= sitelink_changed
-        ajax_wait
-        page.saveSitelinkLink
-        ajax_wait
-        page.wait_for_api_callback
-      end
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label, description)
+      page.wait_for_aliases_to_load
+      page.wait_for_item_to_load
+      page.add_aliases([alias_a])
+      page.add_sitelinks(sitelinks)
+    end
+    visit_page(LoginPage) do |page|
+      page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
+    end
+    on_page(ItemPage) do |page|
+      page.navigate_to_item
+      page.wait_for_item_to_load
+      page.wait_for_aliases_to_load
+      page.change_label(label + changed)
+      page.change_description(description + changed)
+      page.editAliases
+      page.aliasesInputFirst_element.clear
+      page.aliasesInputEmpty= alias_a + changed
+      page.saveAliases
+      ajax_wait
+      page.wait_for_api_callback
+      page.editSitelinkLink
+      page.pageInputField= sitelink_changed
+      ajax_wait
+      page.saveSitelinkLink
+      ajax_wait
+      page.wait_for_api_callback
+    end
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
   end
 
@@ -88,17 +84,17 @@ describe "Check revert/rollback" do
     end
   end
 
-  context "rollback test teardown" do
-    it "should remove all sitelinks" do
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_item_to_load
-        page.wait_for_sitelinks_to_load
-        page.remove_all_sitelinks
-      end
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
+  after :all do
+    # tear down: remove all sitelinks & logout
+    on_page(ItemPage) do |page|
+      page.navigate_to_item
+      page.wait_for_item_to_load
+      page.wait_for_sitelinks_to_load
+      page.remove_all_sitelinks
+    end
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
   end
+
 end

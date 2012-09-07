@@ -6,11 +6,21 @@
 #
 # page object for CreateItem special page
 
-class CreateItemPage < RubySelenium
+class CreateItemPage < ItemPage
   include PageObject
   page_url WIKI_REPO_URL + "Special:CreateItem"
 
   text_field(:createItemLabelField, :id => "wb-createitem-label")
   text_field(:createItemDescriptionField, :id => "wb-createitem-description")
   button(:createItemSubmit, :id => "wb-createitem-submit")
+
+  def create_new_item(label, description)
+    self.createItemLabelField = label
+    self.createItemDescriptionField = description
+    createItemSubmit
+    wait_for_item_to_load
+    @@item_url = current_url
+    @@item_id = @@item_url[@@item_url.index('Data:Q')+6..-1]
+    return @@item_id
+  end
 end

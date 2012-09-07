@@ -13,13 +13,15 @@ label_de = "deutsch_" + generate_random_string(5)
 description_de = "deutsch_" + generate_random_string(10)
 
 describe "Check functionality of wikidata together with ULS" do
+  before :all do
+    # set up: switch to english language and create an item with label & description
+    visit_page(CreateItemPage) do |page|
+      page.uls_switch_language("English")
+      page.create_new_item(label_en, description_en)
+    end
+  end
   context "ULS test setup" do
-    it "should create item, enter label and description in english and german" do
-      visit_page(ItemPage) do |page|
-        page.uls_switch_language("English")
-        page.wait_for_item_to_load
-        page.create_new_item(label_en, description_en)
-      end
+    it "should switch to german language and enter label and description in german" do
       on_page(ItemPage) do |page|
         page.uls_switch_language("Deutsch")
         page.wait_for_item_to_load

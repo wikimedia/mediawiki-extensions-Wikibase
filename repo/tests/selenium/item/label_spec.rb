@@ -8,18 +8,26 @@
 
 require 'spec_helper'
 
-describe "Check functionality of edit label" do
-  context "Check for edit label" do
-    it "should check for edit label" do
-      visit_page(ItemPage) do |page|
-        page.create_new_item(generate_random_string(10), generate_random_string(20))
+label = generate_random_string(10)
+label_changed = label + " Adding something."
+label_unnormalized = "  me haz   too many       spaces inside           "
+label_normalized = "me haz too many spaces inside"
 
+describe "Check functionality of edit label" do
+  before :all do
+    # set up
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label, generate_random_string(20))
+    end
+  end
+
+  context "Check for edit label" do
+    it "should check behaviour of cancel-link" do
+      on_page(ItemPage) do |page|
         page.firstHeading.should be_true
         page.itemLabelSpan.should be_true
-        current_label = page.itemLabelSpan
-        changed_label = current_label + "_fooo"
-        @browser.title.include?(current_label).should be_true
-        page.itemLabelSpan.should == current_label
+        @browser.title.include?(label).should be_true
+        page.itemLabelSpan.should == label
         page.editLabelLink?.should be_true
         page.cancelLabelLink?.should be_false
         page.editLabelLink
@@ -28,46 +36,55 @@ describe "Check functionality of edit label" do
         page.saveLabelLinkDisabled?.should be_true
         page.labelInputField.should be_true
         page.labelInputField_element.clear
-        page.labelInputField = changed_label
+        page.labelInputField = label_changed
         page.saveLabelLink?.should be_true
         page.cancelLabelLink
         page.editLabelLink?.should be_true
         page.cancelLabelLink?.should be_false
-        page.itemLabelSpan.should == current_label
-        # checking behaviour of ESC key
+        page.itemLabelSpan.should == label
+      end
+    end
+    it "should check behaviour of ESC-key" do
+      on_page(ItemPage) do |page|
         page.editLabelLink
-        page.labelInputField = changed_label
+        page.labelInputField = label_changed
         page.labelInputField_element.send_keys :escape
         page.editLabelLink?.should be_true
-        page.itemLabelSpan.should == current_label
+        page.itemLabelSpan.should == label
+      end
+    end
+    it "should check functionality of saving with save-link" do
+      on_page(ItemPage) do |page|
         page.editLabelLink
         page.labelInputField_element.clear
-        page.labelInputField = changed_label
+        page.labelInputField = label_changed
         page.saveLabelLink
         page.apiCallWaitingMessage?.should be_true
         ajax_wait
         page.wait_for_api_callback
         page.editLabelLink?.should be_true
-
-        page.itemLabelSpan.should == changed_label
+        page.itemLabelSpan.should == label_changed
         @browser.refresh
         page.wait_for_item_to_load
-        page.itemLabelSpan.should == changed_label
-        @browser.title.include? changed_label
+        page.itemLabelSpan.should == label_changed
+        @browser.title.include? label_changed
+      end
+    end
+    it "should check functionality of saving with RETURN-key" do
+      on_page(ItemPage) do |page|
         page.editLabelLink
         page.labelInputField_element.clear
-        page.labelInputField = current_label
-        page.saveLabelLink
+        page.labelInputField = label
+        page.labelInputField_element.send_keys :return
         page.apiCallWaitingMessage?.should be_true
         ajax_wait
         page.wait_for_api_callback
         page.editLabelLink?.should be_true
-
-        page.itemLabelSpan.should == current_label
+        page.itemLabelSpan.should == label
         @browser.refresh
         page.wait_for_item_to_load
-        page.itemLabelSpan.should == current_label
-        @browser.title.include? current_label
+        page.itemLabelSpan.should == label
+        @browser.title.include? label
       end
     end
   end
@@ -75,8 +92,6 @@ describe "Check functionality of edit label" do
   context "Check for normalization of label" do
     it "should check if normalization for item labels is working" do
       on_page(ItemPage) do |page|
-        label_unnormalized = "  me haz   too many       spaces inside           "
-        label_normalized = "me haz too many spaces inside"
         page.editLabelLink
         page.labelInputField_element.clear
         page.labelInputField = label_unnormalized
@@ -89,5 +104,9 @@ describe "Check functionality of edit label" do
         page.itemLabelSpan.should == label_normalized
       end
     end
+  end
+
+  after :all do
+    # tear down
   end
 end

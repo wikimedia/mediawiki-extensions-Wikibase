@@ -13,34 +13,28 @@ alias_a = generate_random_string(5)
 changed = "_changed"
 
 describe "Check restore" do
-
-  context "restore test setup" do
-    it "should create item, enter label, description and aliases" do
-      visit_page(ItemPage) do |page|
-        page.create_new_item(label, description)
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
-        page.addAliases
-        page.aliasesInputEmpty= alias_a
-        page.saveAliases
-        ajax_wait
-        page.wait_for_api_callback
-      end
-    end
-    it "should make some changes to item" do
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_item_to_load
-        page.wait_for_aliases_to_load
-        page.change_label(label + changed)
-        page.change_description(description + changed)
-        page.editAliases
-        page.aliasesInputFirst_element.clear
-        page.aliasesInputEmpty= alias_a + changed
-        page.saveAliases
-        ajax_wait
-        page.wait_for_api_callback
-      end
+  before :all do
+    # set up: create item, enter label, description and aliases & make some changes to item
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label, description)
+      page.wait_for_aliases_to_load
+      page.wait_for_item_to_load
+      page.addAliases
+      page.aliasesInputEmpty= alias_a
+      page.saveAliases
+      ajax_wait
+      page.wait_for_api_callback
+      @browser.refresh
+      page.wait_for_item_to_load
+      page.wait_for_aliases_to_load
+      page.change_label(label + changed)
+      page.change_description(description + changed)
+      page.editAliases
+      page.aliasesInputFirst_element.clear
+      page.aliasesInputEmpty= alias_a + changed
+      page.saveAliases
+      ajax_wait
+      page.wait_for_api_callback
     end
   end
 
@@ -68,14 +62,13 @@ describe "Check restore" do
     end
   end
 
-  context "restore test teardown" do
-    it "should remove all sitelinks" do
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_item_to_load
-        page.wait_for_sitelinks_to_load
-        page.remove_all_sitelinks
-      end
+  after :all do
+    # tear down: remove all sitelinks
+    on_page(ItemPage) do |page|
+      page.navigate_to_item
+      page.wait_for_item_to_load
+      page.wait_for_sitelinks_to_load
+      page.remove_all_sitelinks
     end
   end
 

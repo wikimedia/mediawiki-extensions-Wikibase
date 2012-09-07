@@ -10,14 +10,18 @@
 require 'spec_helper'
 
 describe "Check for bugs" do
+  before :all do
+    # set up
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(generate_random_string(10), generate_random_string(20))
+    end
+  end
+
   context "startup" do
     it "just some simple startup checks" do
-      # create new item
-      visit_page(ItemPage) do |page|
-        page.create_new_item(generate_random_string(10), generate_random_string(20))
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-
         # check for necessary elements
         page.aliasesDiv?.should be_true
         page.aliasesTitle?.should be_true
@@ -45,6 +49,10 @@ describe "Check for bugs" do
         page.cancelAliases
       end
     end
+  end
+
+  after :all do
+    # tear down
   end
 end
 
