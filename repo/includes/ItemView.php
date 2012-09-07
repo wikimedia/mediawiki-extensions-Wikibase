@@ -421,7 +421,7 @@ class ItemView extends \ContextSource {
 					'shortName' => $languageName,
 					'name' => $languageName,
 					'globalSiteId' => $site->getGlobalId(),
-					'pageUrl' => $site->getRelativePagePath(),
+					'pageUrl' => $site->getPageUrl(),
 					'apiUrl' => $site->getFileUrl( 'api.php' ),
 				);
 			}
