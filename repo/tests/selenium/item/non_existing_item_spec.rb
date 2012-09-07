@@ -17,10 +17,9 @@ describe "Check functionality of non existing item page" do
         page.specialCreateNewItemLink?.should be_true
         page.specialCreateNewItemLink
       end
-      on_page(ItemPage) do |page|
-        page.wait_for_item_to_load
-        page.labelInputField.should be_true
-        page.descriptionInputField.should be_true
+      on_page(CreateItemPage) do |page|
+        page.createItemLabelField.should be_true
+        page.createItemDescriptionField.should be_true
       end
     end
   end

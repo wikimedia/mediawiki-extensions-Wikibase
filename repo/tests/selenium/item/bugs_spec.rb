@@ -8,14 +8,18 @@
 
 require 'spec_helper'
 
+description_en = "english"
+description_de = "deutsch"
+
 describe "Check for known bugs" do
+  before :all do
+    # set up
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(generate_random_string(10), description_en)
+    end
+  end
   context "description and aliases appear in wrong languages" do
     it "should check if the bug exists" do
-      description_en = "english"
-      description_de = "deutsch"
-      visit_page(ItemPage) do |page|
-        page.create_new_item(generate_random_string(10), description_en)
-      end
       on_page(ItemPage) do |page|
         page.navigate_to_item_en
         page.wait_for_item_to_load
@@ -36,5 +40,8 @@ describe "Check for known bugs" do
         page.itemDescriptionSpan.should == description_de
       end
     end
+  end
+  after :all do
+    # tear down
   end
 end

@@ -11,14 +11,19 @@ require 'spec_helper'
 describe "Check functionality of add/edit/remove aliases" do
   NUM_INITIAL_ALIASES = 3
   test_alias = generate_random_string(8)
+
+  before :all do
+    # setup
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(generate_random_string(10), generate_random_string(20))
+    end
+  end
+
   context "Basic checks of aliases elements" do
     it "should check that there are no aliases" do
-      # create new item
-      visit_page(ItemPage) do |page|
-        page.create_new_item(generate_random_string(10), generate_random_string(20))
+      on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
-
         # check for necessary elements
         page.aliasesDiv?.should be_true
         page.aliasesTitle?.should be_true
@@ -248,6 +253,10 @@ describe "Check functionality of add/edit/remove aliases" do
         page.addAliases?.should be_true
       end
     end
+  end
+
+  after :all do
+    # tear down
   end
 end
 

@@ -4,16 +4,15 @@
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #
-# tests for editing story: disbaling/enabling edit actions
+# tests for editing story: disabling/enabling edit actions
 
 require 'spec_helper'
 
 describe "Check functionality of disabling/enabling edit actions" do
-  context "setup" do
-    it "should create new item" do
-      visit_page(ItemPage) do |page|
-        page.create_new_item(generate_random_string(10), '')
-      end
+  before :all do
+    # set up
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(generate_random_string(10), '')
     end
   end
 
@@ -208,4 +207,7 @@ describe "Check functionality of disabling/enabling edit actions" do
     end
   end
 
+  after :all do
+    # tear down
+  end
 end

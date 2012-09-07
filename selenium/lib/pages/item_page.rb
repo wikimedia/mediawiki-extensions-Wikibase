@@ -8,7 +8,7 @@
 
 require 'ruby_selenium'
 
-class ItemPage < CreateItemPage
+class ItemPage < RubySelenium
   include PageObject
 
   @@item_url = ""
@@ -19,6 +19,7 @@ class ItemPage < CreateItemPage
   div(:newItemNotification, :id => "wb-specialcreateitem-newitemnotification")
 
   # label UI
+  h1(:mwFirstHeading, :id => "firstHeading")
   h1(:firstHeading, :xpath => "//h1[contains(@class, 'wb-firstHeading')]")
   div(:uiToolbar, :class => "wb-ui-toolbar")
   span(:itemLabelSpan, :xpath => "//h1[contains(@class, 'wb-firstHeading')]/span/span")
@@ -98,22 +99,6 @@ class ItemPage < CreateItemPage
   link(:specialPageTabLink, :xpath => "//li[@id='ca-nstab-special']/span/a")
   link(:firstResultLink, :xpath => "//span[@class='mw-title']/a")
   # ***** METHODS *****
-  # new item
-  def create_new_item(label, description)
-    self.createItemLabelField = label
-    self.createItemDescriptionField = description
-    createItemSubmit
-    wait_for_item_to_load
-    @@item_url = current_url
-    @@item_id = @@item_url[@@item_url.index('Data:Q')+6..-1]
-    return @@item_id
-  end
-
-  def wait_for_new_item_creation
-    wait_until do
-      newItemNotification_element.visible?
-    end
-  end
 
   # item url navigation
   def navigate_to_item

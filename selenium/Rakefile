@@ -78,7 +78,7 @@ RSpec::Core::RakeTask.new(:language_selector) do |spec|
   spec.pattern = '../repo/tests/selenium/language_selector/language_selector_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:item_deletion) do |spec|
+RSpec::Core::RakeTask.new(:delete_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/delete_item_spec.rb'
 end
