@@ -14,15 +14,22 @@ namespace Wikibase\Test;
  * @group Wikibase
  * @group WikibaseQuery
  * @group WikibaseRepo
+ * @group WikibaseContent
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class QueryContentTest extends \MediaWikiTestCase {
+class QueryContentTest extends EntityContentTest {
 
-	public function testDummy() {
-		$this->markTestIncomplete( "no tests for QueryContent yet" );
+	/**
+	 * @see EntityContentTest::getContentClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	protected function getContentClass() {
+		return '\Wikibase\QueryContent';
 	}
 
 }
-	

@@ -14,15 +14,22 @@ namespace Wikibase\Test;
  * @group Wikibase
  * @group WikibaseProperty
  * @group WikibaseRepo
+ * @group WikibaseContent
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyContentTest extends \MediaWikiTestCase {
+class PropertyContentTest extends EntityContentTest {
 
-	public function testDummy() {
-		$this->markTestIncomplete( "no tests for PropertyContent yet" );
+	/**
+	 * @see EntityContentTest::getContentClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	protected function getContentClass() {
+		return '\Wikibase\PropertyContent';
 	}
 
 }
-	
