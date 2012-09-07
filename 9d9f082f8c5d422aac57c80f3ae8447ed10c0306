@@ -139,6 +139,24 @@
       "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+70\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-07T12:47:55Z",
+      "side": 1,
+      "message": "If PATH_LINK will always be used for the link path, then yes. but MediaWikiSite doesn\u0027t, as far as I can see.",
+      "parentUuid": "AAAASn//+8M\u003d",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
