@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//+3s\u003d",
+        "filename": "repo/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:09:43Z",
+      "side": 1,
+      "message": "also in this file, use getSubject()",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+3w\u003d",
+        "filename": "repo/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:09:43Z",
+      "side": 1,
+      "message": "use getSubject() which is available now!",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
