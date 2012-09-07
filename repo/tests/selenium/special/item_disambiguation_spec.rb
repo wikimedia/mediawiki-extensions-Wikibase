@@ -7,9 +7,9 @@
 
 require 'spec_helper'
 
-label_ab = "Apache"
-description_a = "Helicopter"
-description_b = "Webserver"
+label_ab = generate_random_string(10)
+description_a = generate_random_string(20)
+description_b = generate_random_string(20)
 
 describe "Check item disambiguation special page" do
 
