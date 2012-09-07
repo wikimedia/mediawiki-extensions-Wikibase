@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn///Cs\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-07T08:14:10Z",
+      "side": 1,
+      "message": "please pass $this-\u003egetUser() explicitely as the second param - it just *may* be different from $wgUser.",
+      "revId": "9039a33c747b97a159327e565ce5b87321c2d96a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn///Co\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-07T08:14:10Z",
+      "side": 1,
+      "message": "this should be an \"else if\" - showErrorPage may well return.",
+      "revId": "9039a33c747b97a159327e565ce5b87321c2d96a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
