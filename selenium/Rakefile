@@ -43,11 +43,6 @@ RSpec::Core::RakeTask.new(:sitelinks) do |spec|
   spec.pattern = '../repo/tests/selenium/sitelinks/*_spec.rb'
 end
 
-RSpec::Core::RakeTask.new(:new_item) do |spec|
-  spec.ruby_opts = "-I lib:spec"
-  spec.pattern = '../repo/tests/selenium/item/new_item_spec.rb'
-end
-
 RSpec::Core::RakeTask.new(:aliases) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/aliases/*_spec.rb'
@@ -141,6 +136,11 @@ end
 RSpec::Core::RakeTask.new(:item_by_title) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/item_by_title_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:create_item) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/special/create_item_spec.rb'
 end
 
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
