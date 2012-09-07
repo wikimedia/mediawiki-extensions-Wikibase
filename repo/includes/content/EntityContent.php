@@ -303,6 +303,9 @@ abstract class EntityContent extends \AbstractContent {
 	 * If this item does not exist yet, it will be created (ie a new ID will be determined and a new page in the
 	 * data NS created).
 	 *
+	 * @note: if the item does not have an ID yet (i.e. it was not yet created in the database), save() will
+	 *        fail with a edit-gone-missing message unless the EDIT_NEW bit is set in $flags.
+	 *
 	 * @note: if the save is triggered by any kind of user interaction, consider using EditEntity::attemptSave(), which
 	 *        automatically handles edit conflicts, permission checks, etc.
 	 *
@@ -314,7 +317,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @param string     $summary
 	 * @param null|User  $user
-	 * @param integer    $flags
+	 * @param integer    $flags flags as used by WikiPage::doEditContent, use EDIT_XXX constants.
 	 *
 	 * @param int|bool   $baseRevId
 	 * @param EditEntity $editEntity
@@ -325,9 +328,16 @@ abstract class EntityContent extends \AbstractContent {
 	 */
 	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false, EditEntity $editEntity = null ) {
 
-		//XXX: really allow creation by default? Or require EDIT_CREATE in flags?
-		if ( $this->isNew() ) {
-			$this->grabFreshId();
+		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
+			if ( $this->isNew() ) {
+				$this->grabFreshId();
+			} else {
+				return Status::newFatal( 'edit-already-exists' );
+			}
+		} else {
+			if ( $this->isNew() ) {
+				return Status::newFatal( 'edit-gone-missing' );
+			}
 		}
 
 		//XXX: very ugly and brittle hack to pass info to prepareEdit so we can check inside a db transaction

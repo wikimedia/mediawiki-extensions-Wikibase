@@ -52,7 +52,7 @@ class ItemStructuredSaveTest extends \MediaWikiTestCase {
 	public function testDoUpdate( ItemContent $itemContent ) {
 		\TestSites::insertIntoDb();
 
-		$itemContent->save();
+		$itemContent->save( '', null, EDIT_NEW );
 		$update = new ItemStructuredSave( $itemContent );
 		$update->doUpdate();
 

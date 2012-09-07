@@ -35,7 +35,6 @@ class ApiLinkTitles extends Api {
 	public function execute() {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
-		$this->flags = 0;
 
 		if ( $params['gettoken'] ) {
 			$this->addTokenToResult( $user->getEditToken() );
@@ -92,6 +91,8 @@ class ApiLinkTitles extends Api {
 			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
 			$fromLink = new SiteLink( $fromSite, $fromPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
+
+			$flags |= EDIT_NEW;
 		}
 		elseif ( !$fromId && $toId ) {
 			// reuse to-site's item
@@ -116,10 +117,7 @@ class ApiLinkTitles extends Api {
 
 		$this->addSiteLinksToResult( $return, 'item' );
 
-		if ( $this->flags & EDIT_NEW) {
-			$this->flags |= EDIT_UPDATE;
-		}
-		$this->flags = $user->isAllowed( 'bot' ) ? EDIT_FORCE_BOT : 0;
+		$flags |= $user->isAllowed( 'bot' ) ? EDIT_FORCE_BOT : 0;
 		$summary = '';
 
 		if ( $itemContent === null ) {
@@ -130,7 +128,7 @@ class ApiLinkTitles extends Api {
 		else {
 			// Do the actual save, or if it don't exist yet create it.
 			$edit = new EditEntity( $itemContent, $user );
-			$status = $edit->attemptSave( $summary, $this->flags );
+			$status = $edit->attemptSave( $summary, $flags );
 		}
 
 		if ( !$status->isOK() ) {

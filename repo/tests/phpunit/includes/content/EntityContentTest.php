@@ -125,6 +125,45 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testSaveFlags() {
+		$entityContent = $this->newEmpty();
+
+		// try to create without flags
+		$entityContent->getEntity()->setLabel( 'en', 'one' );
+		$status = $entityContent->save( 'create item' );
+		$this->assertFalse( $status->isOK(), "save should have failed" );
+		$this->assertTrue( $status->hasMessage( 'edit-gone-missing' ) );
+
+		// try to create with EDIT_UPDATE flag
+		$entityContent->getEntity()->setLabel( 'en', 'two' );
+		$status = $entityContent->save( 'create item', null, EDIT_UPDATE );
+		$this->assertFalse( $status->isOK(), "save should have failed" );
+		$this->assertTrue( $status->hasMessage( 'edit-gone-missing' ) );
+
+		// try to create with EDIT_NEW flag
+		$entityContent->getEntity()->setLabel( 'en', 'three' );
+		$status = $entityContent->save( 'create item', null, EDIT_NEW );
+		$this->assertTrue( $status->isOK(), "save failed" );
+
+		// ok, the item exists now in the database.
+
+		// try to save with EDIT_NEW flag
+		$entityContent->getEntity()->setLabel( 'en', 'four' );
+		$status = $entityContent->save( 'create item', null, EDIT_NEW );
+		$this->assertFalse( $status->isOK(), "save should have failed" );
+		$this->assertTrue( $status->hasMessage( 'edit-already-exists' ) );
+
+		// try to save with EDIT_UPDATE flag
+		$entityContent->getEntity()->setLabel( 'en', 'five' );
+		$status = $entityContent->save( 'create item', null, EDIT_UPDATE );
+		$this->assertTrue( $status->isOK(), "save failed" );
+
+		// try to save without flags
+		$entityContent->getEntity()->setLabel( 'en', 'six' );
+		$status = $entityContent->save( 'create item' );
+		$this->assertTrue( $status->isOK(), "save failed" );
+	}
+
 	public function testRepeatedSave() {
 		$entityContent = $this->newEmpty();
 
@@ -217,7 +256,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 		if ( $create ) {
 			$content->getEntity()->setLabel( 'de', 'Test' );
-			$content->save( "testing" );
+			$content->save( "testing", null, EDIT_NEW );
 		}
 
 		if ( !in_array( $group, $wgUser->getEffectiveGroups() ) ) {

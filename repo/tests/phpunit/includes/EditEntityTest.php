@@ -44,20 +44,20 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 			$itemContent = ItemContent::newEmpty();
 			$itemContent->getEntity()->setLabel('en', "foo");
-			$itemContent->save( "rev 0", $wgUser );
+			$itemContent->save( "rev 0", $wgUser, EDIT_NEW );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
 			$itemContent->getEntity()->setLabel('en', "bar");
-			$itemContent->save( "rev 1", $otherUser );
+			$itemContent->save( "rev 1", $otherUser, EDIT_UPDATE );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
 			$itemContent->getEntity()->setLabel('de', "bar");
-			$itemContent->save( "rev 2", $wgUser );
+			$itemContent->save( "rev 2", $wgUser, EDIT_UPDATE );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
 			$itemContent->getEntity()->setLabel('en', "test");
 			$itemContent->getEntity()->setDescription('en', "more testing");
-			$itemContent->save( "rev 3", $wgUser );
+			$itemContent->save( "rev 3", $wgUser, EDIT_UPDATE );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 		}
 
@@ -219,7 +219,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// create item
 		$content = ItemContent::newEmpty();
 		$content->getEntity()->setLabel( 'en', 'Test' );
-		$content->save( "rev 0", $wgUser );
+		$content->save( "rev 0", $wgUser, EDIT_NEW );
 
 
 		// begin editing the entity
@@ -234,7 +234,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$page = \WikiPage::factory( $content->getTitle() );
 		$content2 = $page->getContent();
 		$content2->getEntity()->setLabel( 'en', 'Toast' );
-		$content2->save( 'Trolololo!' );
+		$content2->save( 'Trolololo!', null, EDIT_UPDATE );
 
 		// now try to save the original edit. The conflict should still be detected
 		$status = $editEntity->attemptSave( "Testing", EDIT_UPDATE );
@@ -351,7 +351,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 		if ( $create ) {
 			$content->getItem()->setLabel( 'de', 'Test' );
-			$content->save( "testing" );
+			$content->save( "testing", null, EDIT_NEW );
 		}
 
 		if ( !in_array( $group, $wgUser->getEffectiveGroups() ) ) {
@@ -402,7 +402,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$edit = new EditEntity( $content );
 
 		try {
-			$edit->attemptSave( "testing" );
+			$edit->attemptSave( "testing", $content->isNew() ? EDIT_NEW : 0 );
 
 			$this->assertTrue( $expectedOK, 'this permission check was expected to fail!' );
 		} catch ( \PermissionsError $ex ) {
@@ -410,7 +410,7 @@ class EditEntityTest extends \MediaWikiTestCase {
 				. $ex->permission . ': ' . var_export( $ex->errors, true )  );
 		}
 
-		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK() );
+		$this->assertEquals( $expectedOK, $edit->getStatus()->isOK(), var_export( $edit->getStatus()->getErrorsArray(), true ) );
 		$this->assertNotEquals( $expectedOK, $edit->hasError( EditEntity::PERMISSION_ERROR ) );
 		$this->assertNotEquals( $expectedOK, $edit->showErrorPage() );
 	}
