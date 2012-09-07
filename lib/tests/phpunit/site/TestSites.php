@@ -96,7 +96,7 @@ class TestSites {
 
 		$dbw->begin( __METHOD__ );
 
-		$dbw->delete( $dbw->tableName( 'sites' ), '*', __METHOD__ );
+		$dbw->delete( 'sites', '*', __METHOD__ );
 
 		/**
 		 * @var \Site $site
@@ -106,6 +106,8 @@ class TestSites {
 		}
 
 		$dbw->commit( __METHOD__ );
+
+		Sites::singleton()->getSites( false ); // re-cache
 	}
 
 }
