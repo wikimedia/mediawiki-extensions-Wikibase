@@ -203,12 +203,32 @@ class EditEntityTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function testAttemptSaveWithLateConflict() {
+	public function provideAttemptSaveWithLateConflict() {
+		return array(
+			array( true, true ),
+			array( false, false ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideAttemptSaveWithLateConflict
+	 */
+	public function testAttemptSaveWithLateConflict( $baseRevId, $expectedConflict ) {
 		global $wgUser;
 
+		// create item
 		$content = ItemContent::newEmpty();
 		$content->getEntity()->setLabel( 'en', 'Test' );
 		$content->save( "rev 0", $wgUser );
+
+
+		// begin editing the entity
+		$content->getEntity()->setLabel( 'en', 'Trust' );
+
+		$editEntity = new EditEntity( $content, $wgUser, $baseRevId );
+		$editEntity->getCurrentRevision(); // make sure EditEntity has page and revision
+
+		$this->assertEquals( $baseRevId, $editEntity->doesCheckForEditConflicts(), 'doesCheckForEditConflicts()' );
 
 		// create independent EntityContent instance for the same entity, and modify and save it
 		$page = \WikiPage::factory( $content->getTitle() );
@@ -216,25 +236,20 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$content2->getEntity()->setLabel( 'en', 'Toast' );
 		$content2->save( 'Trolololo!' );
 
-		$editEntity = new EditEntity( $content );
-		$editEntity->getCurrentRevision(); // make sure EditEntity has page and revision
-
-		// try editing with the original $content and corresponding wikipage object
-		$content->getEntity()->setLabel( 'en', 'Trust' );
-
-		// now try to save. the conflict should still be detected
+		// now try to save the original edit. The conflict should still be detected
 		$status = $editEntity->attemptSave( "Testing", EDIT_UPDATE );
 
-		$this->assertFalse( $status->isOK(),
-							'saving should have failed late, with a indication of a mismatching current ID' );
+		$this->assertNotEquals( $expectedConflict, $status->isOK(),
+			'saving should have failed late if and only if a base rev was provided' );
 
-		$this->assertTrue( $editEntity->hasError(),
-							'saving should have failed late, with a indication of a mismatching current ID' );
+		$this->assertEquals( $expectedConflict, $editEntity->hasError(),
+			'saving should have failed late if and only if a base rev was provided' );
 
-		$this->assertTrue( $status->hasMessage( 'edit-conflict' ),
-							'saving should have failed late, with a indication of a mismatching current ID' );
+		$this->assertEquals( $expectedConflict, $status->hasMessage( 'edit-conflict' ),
+			'saving should have failed late if and only if a base rev was provided' );
 
-		$this->assertTrue( $editEntity->showErrorPage(), 'there was an error, should show error page!' );
+		$this->assertEquals( $expectedConflict, $editEntity->showErrorPage(),
+			'if and only if there was an error, an error page should be show' );
 
 	}
 
