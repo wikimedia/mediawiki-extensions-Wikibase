@@ -21,15 +21,25 @@
 				valid: [ 'test', 'test 2' ],
 				invalid: [ '' ]
 			};
+			this.language = {
+				rtl: {
+					code: 'fakertllang',
+					dir: 'rtl'
+				},
+				ltr: {
+					code: 'fakeltrlang',
+					dir: 'ltr'
+				}
+			};
 
 			equal(
-				this.evInterface._subject.length,
+				this.evInterface.getSubject().length,
 				1,
 				'has subject'
 			);
 
 			ok(
-				this.evInterface._subject[0] == this.node[0],
+				this.evInterface.getSubject()[0] == this.node[0],
 				'validated subject'
 			);
 
@@ -263,6 +273,89 @@
 			this.evInterface.isActive(),
 			true,
 			'activated'
+		);
+
+	} );
+
+
+	test( 'update language attributes', function() {
+
+		this.evInterface.setLanguageAttributes( this.language.ltr );
+
+		equal(
+			this.evInterface.getSubject().attr( 'lang' ),
+			this.language.ltr.code,
+			'assign ltr language code to subject'
+		);
+
+		equal(
+			this.evInterface.getSubject().attr( 'dir' ),
+			this.language.ltr.dir,
+			'assign ltr language direction to subject'
+		);
+
+		this.evInterface.setLanguageAttributes( this.language.rtl );
+
+		equal(
+			this.evInterface.getSubject().attr( 'lang' ),
+			this.language.rtl.code,
+			'assign rtl language code to subject'
+		);
+
+		equal(
+			this.evInterface.getSubject().attr( 'dir' ),
+			this.language.rtl.dir,
+			'assign rtl language direction to subject'
+		);
+
+		equal(
+			this.evInterface.startEditing(),
+			true,
+			'start editing'
+		);
+
+		equal(
+			this.evInterface._inputElem.attr( 'lang' ),
+			this.language.rtl.code,
+			'input has rtl language'
+		);
+
+		equal(
+			this.evInterface._inputElem.attr( 'dir' ),
+			this.language.rtl.dir,
+			'input has rtl direction'
+		);
+
+		this.evInterface.setLanguageAttributes( this.language.ltr );
+
+		equal(
+			this.evInterface._inputElem.attr( 'lang' ),
+			this.language.ltr.code,
+			'input has ltr language'
+		);
+
+		equal(
+			this.evInterface._inputElem.attr( 'dir' ),
+			this.language.ltr.dir,
+			'input has ltr direction'
+		);
+
+		equal(
+			this.evInterface.stopEditing(),
+			false,
+			'stop editing'
+		);
+
+		equal(
+			this.evInterface.getSubject().attr( 'lang' ),
+			this.language.ltr.code,
+			'subject has ltr language code'
+		);
+
+		equal(
+			this.evInterface.getSubject().attr( 'dir' ),
+			this.language.ltr.dir,
+			'subject has ltr direction'
 		);
 
 	} );

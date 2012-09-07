@@ -36,10 +36,20 @@
 				'en': new window.wikibase.Site( this.siteDetails.en ),
 				'de': new window.wikibase.Site( this.siteDetails.de )
 			};
+			this.language = {
+				rtl: {
+					code: 'fakertllang',
+					dir: 'rtl'
+				},
+				ltr: {
+					code: 'fakeltrlang',
+					dir: 'ltr'
+				}
+			};
 			this.subject = new window.wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface( this.node, this.sites.en );
 
 			ok(
-				this.subject._subject[0] == this.node[0],
+				this.subject.getSubject()[0] == this.node[0],
 				'validated subject'
 			);
 
@@ -74,6 +84,45 @@
 			this.subject.getSite(),
 			this.sites.de,
 			'set new site'
+		);
+
+	} );
+
+
+	test( 'update language attributes', function() {
+
+		this.subject.setLanguageAttributes( this.language.ltr );
+
+		equal(
+			this.subject.getSubject().attr( 'lang' ),
+			this.language.ltr.code,
+			'assign ltr language code to subject'
+		);
+
+		equal(
+			this.subject.getSubject().attr( 'dir' ),
+			this.language.ltr.dir,
+			'assign ltr language direction to subject'
+		);
+
+		equal(
+			this.subject.startEditing(),
+			true,
+			'start editing'
+		);
+
+		this.subject.setLanguageAttributes( this.language.rtl );
+
+		equal(
+			this.subject._inputElem.data( 'autocomplete' ).menu.element.attr( 'lang' ),
+			this.language.rtl.code,
+			'assign rtl language code to auto-complete menu'
+		);
+
+		equal(
+			this.subject._inputElem.data( 'autocomplete' ).menu.element.attr( 'dir' ),
+			this.language.rtl.dir,
+			'assign rtl language direction to auto-complete menu'
 		);
 
 	} );
