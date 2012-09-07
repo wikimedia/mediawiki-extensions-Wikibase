@@ -425,7 +425,11 @@ class SiteObject extends ORMRow implements Site {
 	public function save( $functionName = null ) {
 		$dbw = wfGetDB( DB_MASTER );
 
-		$dbw->begin( __METHOD__ );
+		$trx = $dbw->trxLevel();
+
+		if ( $trx == 0 ) {
+			$dbw->begin( __METHOD__ );
+		}
 
 		$this->setField( 'protocol', $this->getProtocol() );
 		$this->setField( 'domain', strrev( $this->getDomain() ) . '.' );
@@ -458,7 +462,9 @@ class SiteObject extends ORMRow implements Site {
 			}
 		}
 
-		$dbw->commit( __METHOD__ );
+		if ( $trx == 0 ) {
+			$dbw->commit( __METHOD__ );
+		}
 
 		return $success;
 	}
