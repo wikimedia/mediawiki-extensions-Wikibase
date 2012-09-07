@@ -124,21 +124,17 @@ class ApiLinkTitles extends Api {
 
 		if ( $itemContent === null ) {
 			// to not have an ItemContent isn't really bad at this point
+			$edit = null;
 			$status = Status::newGood( true );
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			$status = $itemContent->save( $summary, $user, $this->flags );
+			$edit = new EditEntity( $itemContent, $user );
+			$status = $edit->attemptSave( $summary, $this->flags );
 		}
-		$success = $status->isOK();
 
-		if ( !$success ) {
-			if ( $itemContent->isNew() ) {
-				$this->dieUsage( $status->getWikiText( 'wikibase-api-create-failed' ), 'create-failed' );
-			}
-			else {
-				$this->dieUsage( $status->getWikiText( 'wikibase-api-save-failed' ), 'save-failed' );
-			}
+		if ( !$status->isOK() ) {
+			$edit->reportApiErrors( $this, 'save-failed' );
 		}
 
 		if ( $itemContent !== null ) {
@@ -151,7 +147,7 @@ class ApiLinkTitles extends Api {
 		$this->getResult()->addValue(
 			null,
 			'success',
-			(int)$success
+			(int)$status->isOK()
 		);
 	}
 
