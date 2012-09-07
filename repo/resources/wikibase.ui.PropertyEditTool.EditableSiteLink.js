@@ -142,9 +142,7 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 	 * @return jQuery node the toolbar should be appended to
 	 */
 	_getToolbarParent: function() {
-		// append toolbar to new td
-		this.__toolbarParent = this.__toolbarParent || $( '<td/>' ).appendTo( this._subject );
-		return this.__toolbarParent;
+		return this._subject.children( 'td' ).last();
 	},
 
 	/**
