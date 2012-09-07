@@ -31,25 +31,6 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	_editableValuesProto: null,
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.init
-	 *
-	 * @param jQuery subject
-	 */
-	_init: function( subject ) {
-		var th = subject.find( 'th' ).first();
-
-		$( '<th/>', {
-			'class': this.UI_CLASS + '-counterinheading'
-		} )
-		.append( $( '<span/>', {
-			'class': this.UI_CLASS + '-counter'
-		} ) )
-		.appendTo( th.parent() );
-
-		$PARENT.prototype._init.call( this, subject );
-	},
-
-	/**
 	 * @see wikibase.ui.PropertyEditTool._initToolbar
 	 */
 	_initToolbar: function() {
@@ -195,7 +176,8 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	_newEmptyValueDOM: function() {
 		return $( '<tr/>' )
 			.append( $( '<td colspan="2" class="wb-sitelinks-sitename"/>' ) )
-			.append( $( '<td class="wb-sitelinks-link"/>' ) );
+			.append( $( '<td class="wb-sitelinks-link"/>' ) )
+			.append( $( '<td/>' ) ); // cell for toolbar
 	},
 
 	/**
@@ -278,6 +260,15 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 		return sites;
 	},
 
+	/**
+	 * @see wb.ui.PropertyEditTool._getCounterNodes
+	 *
+	 * @return jQuery
+	 */
+	_getCounterNodes: function() {
+		return $( '#wb-item-' + mw.config.get('wbItemId') + '-sitelinks-counter' );
+	},
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
@@ -295,18 +286,14 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
  */
 wb.ui.SiteLinksEditTool.getEmptyStructure = function() {
 	return $(
-			'<table class="wb-sitelinks" cellspacing="0">' +
-				'<colgroup>' +
-					'<col class="wb-sitelinks-sitename" />' +
-					'<col class="wb-sitelinks-siteid" />' +
-					'<col class="wb-sitelinks-link" />' +
-					'<col class="wb-ui-propertyedittool-editablevalue-toolbarparent" />' +
-				'</colgroup>' +
-				'<thead><th colspan="3"><h3>' +
-					mw.message( 'wikibase-sitelinks' ).escaped() +
-				'</h3></th></thead>' +
-				'<tbody></tbody>' +
-			'</table>'
+		'<table class="wb-sitelinks" cellspacing="0">' +
+			'<colgroup>' +
+				'<col class="wb-sitelinks-sitename" />' +
+				'<col class="wb-sitelinks-siteid" />' +
+				'<col class="wb-sitelinks-link" />' +
+				'<col class="wb-ui-propertyedittool-editablevalue-toolbarparent" />' +
+			'</colgroup>' +
+		'</table>'
 	);
 };
 

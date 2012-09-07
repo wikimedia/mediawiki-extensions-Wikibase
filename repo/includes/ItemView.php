@@ -134,7 +134,9 @@ class ItemView extends \ContextSource {
 			// no site links available for this item
 			$html .= Html::element( 'div', array( 'class' => 'wb-sitelinks-empty' ), wfMessage( 'wikibase-sitelinks-empty' ) );
 		} else {
-			$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks', 'cellspacing' => '0' ) );
+			$html .= Html::element( 'h2', array( 'class' => 'wb-sitelinks-heading' ), wfMessage( 'wikibase-sitelinks' ) );
+
+			$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks' ) );
 
 			$html .= Html::openElement( 'colgroup' );
 			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-sitename' ) );
@@ -146,12 +148,6 @@ class ItemView extends \ContextSource {
 			$html .= Html::closeElement( 'colgroup' );
 
 			$html .= Html::openElement( 'thead' );
-
-			$html .= Html::openElement( 'tr' );
-			$html .= Html::openElement( 'th', array( 'colspan' => '3' ) );
-			$html .= Html::element( 'h3', array(), wfMessage( 'wikibase-sitelinks' ) );
-			$html .= Html::closeElement( 'th' );
-			$html .= Html::closeElement( 'tr' );
 
 			$html .= Html::openElement( 'tr', array( 'class' => 'wb-sitelinks-columnheaders' ) );
 			$html .= Html::element(
@@ -263,6 +259,7 @@ class ItemView extends \ContextSource {
 						$link->getPage()
 					);
 					$html .= Html::closeElement( 'td' );
+					$html .= Html::element( 'td' );
 					$html .= Html::closeElement( 'tr' );
 				}
 			}

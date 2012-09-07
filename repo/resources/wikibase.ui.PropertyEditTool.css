@@ -247,6 +247,11 @@ EditableValue's "edit" button when aliases exist) */
 
 /********** SITE LINKS **********/
 
+.wb-sitelinks-heading .wb-ui-propertyedittool-counter {
+	font-size: 67%; /* reset to standard font size */
+	margin-left: 0.6em;
+}
+
 table.wb-sitelinks input {
 	margin: 0;
 	font-size: 1em; /* prevent font size rounding errors */
