@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//+8I\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-07T12:40:21Z",
+      "side": 1,
+      "message": "see last comment",
+      "parentUuid": "AAAASn///g8\u003d",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn///gw\u003d",
         "filename": "lib/includes/site/SiteObject.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-09-06T17:34:22Z",
       "side": 1,
       "message": "please provide a test case that makes sure getLinkPath() is consistent with setLinkPath() for all subclasses/implementations.",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+8A\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-07T12:40:21Z",
+      "side": 1,
+      "message": "todo for later, does not block core patch",
+      "parentUuid": "AAAASn///gw\u003d",
       "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//+8E\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-07T12:40:21Z",
+      "side": 1,
+      "message": "see last comment",
+      "parentUuid": "AAAASn///hA\u003d",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn///hE\u003d",
         "filename": "lib/includes/site/SiteObject.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2012-09-06T17:34:22Z",
       "side": 1,
       "message": "should return Site::PATH_LINK",
+      "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+8M\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-07T12:40:21Z",
+      "side": 1,
+      "message": "This seems actually obsolete to me. We could just use the constant everywhere, no reason to have a protected method as well.",
+      "parentUuid": "AAAASn///hE\u003d",
       "revId": "9d9f082f8c5d422aac57c80f3ae8447ed10c0306",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
