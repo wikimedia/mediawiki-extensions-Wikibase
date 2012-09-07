@@ -40,11 +40,11 @@ class TestSites {
 		$sites = array();
 
 		$site = Sites::newSite( 'foobar' );
-		$site->setInternalId( 1 );
+		//$site->setInternalId( 1 );
 		$sites[] = $site;
 
 		$site = Sites::newSite( 'enwiktionary' );
-		$site->setInternalId( 2 );
+		//$site->setInternalId( 2 );
 		$site->setGroup( 'wiktionary' );
 		$site->setType( Site::TYPE_MEDIAWIKI );
 		$site->setLanguageCode( 'en' );
@@ -52,7 +52,7 @@ class TestSites {
 		$sites[] = $site;
 
 		$site = Sites::newSite( 'dewiktionary' );
-		$site->setInternalId( 3 );
+		//$site->setInternalId( 3 );
 		$site->setGroup( 'wiktionary' );
 		$site->setType( Site::TYPE_MEDIAWIKI );
 		$site->setLanguageCode( 'de' );
@@ -61,7 +61,7 @@ class TestSites {
 		$sites[] = $site;
 
 		$site = Sites::newSite( 'spam' );
-		$site->setInternalId( 4 );
+		//$site->setInternalId( 4 );
 		$site->setGroup( 'spam' );
 		$site->setType( Site::TYPE_UNKNOWN );
 		$site->setLanguageCode( 'en' );
@@ -74,7 +74,7 @@ class TestSites {
 
 		foreach ( array( 'en', 'de', 'nl', 'sv', 'sr', 'no', 'nn' ) as $langCode ) {
 			$site = Sites::newSite( $langCode . 'wiki' );
-			$site->setInternalId( $id++ );
+			//$site->setInternalId( $id++ );
 			$site->setGroup( 'wikipedia' );
 			$site->setType( Site::TYPE_MEDIAWIKI );
 			$site->setLanguageCode( $langCode );
@@ -96,7 +96,8 @@ class TestSites {
 
 		$dbw->begin( __METHOD__ );
 
-		$dbw->delete( $dbw->tableName( 'sites' ), '*', __METHOD__ );
+		$dbw->delete( 'sites', '*', __METHOD__ );
+		$dbw->delete( 'site_identifiers', '*', __METHOD__ );
 
 		/**
 		 * @var \Site $site
@@ -106,6 +107,8 @@ class TestSites {
 		}
 
 		$dbw->commit( __METHOD__ );
+
+		Sites::singleton()->getSites( false ); // re-cache
 	}
 
 }
