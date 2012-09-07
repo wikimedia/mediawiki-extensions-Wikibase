@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//+w4\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:45:14Z",
+      "side": 1,
+      "message": "Sorry, stupid Gerrit had a linbreak here and the \"soon\" looked like it had a space inbetween... So this one can be ignored!",
+      "parentUuid": "AAAASn//+yA\u003d",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//+yg\u003d",
         "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.Interface.js",
         "patchSetId": 1
@@ -98,6 +116,24 @@
       "writtenOn": "2012-09-07T16:27:34Z",
       "side": 1,
       "message": "Object (capital O)",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+w0\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:45:14Z",
+      "side": 1,
+      "message": "not really relevant though, we do this wrong all over the place, me too.",
+      "parentUuid": "AAAASn//+yo\u003d",
       "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
