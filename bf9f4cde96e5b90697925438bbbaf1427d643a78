@@ -2,6 +2,125 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAASn//+yA\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableSiteLink.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:27:34Z",
+      "side": 1,
+      "message": "\u0027initilisation\u0027 spelling\n\n\"as so on as\" sounds a little weird, how about a simple \"because\" or \"since\"",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+yg\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.Interface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:27:34Z",
+      "side": 1,
+      "message": "if( lang \u003d\u003d\u003d undefined )\n\nwill do, since we have the \u0027undefined\u0027 from the outer closure",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+yc\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.Interface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:27:34Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+yQ\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.Interface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:27:34Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be\n\n$.uls.data.isRtl( lang )\n\notherwise the implicitly set lang attribute won\u0027t overwrite the user\u0027s language.",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+yE\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.Interface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:27:34Z",
+      "side": 1,
+      "message": "I think usually we use this.isInEditMode() or in even more cases this._inputElem",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+yo\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:27:34Z",
+      "side": 1,
+      "message": "Object (capital O)",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+yw\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-07T16:27:34Z",
+      "side": 1,
+      "message": "just \"@return wb.Site\" is enough",
+      "revId": "bf9f4cde96e5b90697925438bbbaf1427d643a78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//+3s\u003d",
         "filename": "repo/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js",
         "patchSetId": 1
