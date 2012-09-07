@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//+80\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-07T11:57:51Z",
+      "side": 0,
+      "message": "Removing this, is it intentional or is it something that was included accidental?",
+      "revId": "4d61cbd6711504d1a332ec1fdde63e813281fdac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
