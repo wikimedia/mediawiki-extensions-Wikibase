@@ -278,6 +278,15 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 		return sites;
 	},
 
+	/**
+	 * @see wb.ui.PropertyEditTool._getCounterNodes
+	 *
+	 * @return jQuery
+	 */
+	_getCounterNodes: function() {
+		return this._subject.parent().find( '.wb-sitelinks-heading .wb-ui-propertyedittool-counter' );
+	},
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
@@ -295,18 +304,14 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
  */
 wb.ui.SiteLinksEditTool.getEmptyStructure = function() {
 	return $(
-			'<table class="wb-sitelinks" cellspacing="0">' +
-				'<colgroup>' +
-					'<col class="wb-sitelinks-sitename" />' +
-					'<col class="wb-sitelinks-siteid" />' +
-					'<col class="wb-sitelinks-link" />' +
-					'<col class="wb-ui-propertyedittool-editablevalue-toolbarparent" />' +
-				'</colgroup>' +
-				'<thead><th colspan="3"><h3>' +
-					mw.message( 'wikibase-sitelinks' ).escaped() +
-				'</h3></th></thead>' +
-				'<tbody></tbody>' +
-			'</table>'
+		'<table class="wb-sitelinks" cellspacing="0">' +
+			'<colgroup>' +
+				'<col class="wb-sitelinks-sitename" />' +
+				'<col class="wb-sitelinks-siteid" />' +
+				'<col class="wb-sitelinks-link" />' +
+				'<col class="wb-ui-propertyedittool-editablevalue-toolbarparent" />' +
+			'</colgroup>' +
+		'</table>'
 	);
 };
 
