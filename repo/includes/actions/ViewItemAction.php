@@ -17,26 +17,4 @@ namespace Wikibase;
  */
 class ViewItemAction extends ViewEntityAction {
 
-	/**
-	 * @see FormlessAction::show()
-	 *
-	 * @since 0.1
-	 */
-	public function show() {
-		parent::show();
-
-		$content = $this->getContent();
-
-		$editableView = $this->isPlainView();
-
-		if ( !is_null( $content ) ) {
-			ItemView::registerJsConfigVars(
-				$this->getOutput(),
-				$this->getContent(),
-				$this->getLanguage()->getCode(),
-				$editableView
-			);
-		}
-	}
-
 }
