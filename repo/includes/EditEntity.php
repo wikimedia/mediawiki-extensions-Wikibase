@@ -117,10 +117,23 @@ class EditEntity {
 	 *
 	 * @param EntityContent $newContent the new entity content
 	 * @param User|null     $user       the user performing the edit (defaults to $wgUser)
-	 * @param int|null      $baseRevId  the base revision ID for conflict checking. Defaults to the current revision.
+	 * @param int|boolean   $baseRevId  the base revision ID for conflict checking.
+	 *                                  Defaults to false, disabling conflict checks.
+	 *                                  `true` can be used to set the base revision to the current revision:
+	 *                                  This will detect "late" edit conflicts, i.e. someone squeezing in an edit
+	 *                                  just before the actual database transaction for saving beings.
+	 *                                  The empty string and 0 are both treated as `false`, disabling conflict checks.
 	 */
-	public function __construct( EntityContent $newContent, \User $user = null, $baseRevId = null) {
+	public function __construct( EntityContent $newContent, \User $user = null, $baseRevId = false ) {
 		$this->newContent = $newContent;
+
+		if ( is_string( $baseRevId ) ) {
+			$baseRevId = intval( $baseRevId );
+		}
+
+		if ( $baseRevId === '' || $baseRevId === 0 ) {
+			$baseRevId = false;
+		}
 
 		$this->user = $user;
 		$this->baseRevId = $baseRevId;
@@ -248,12 +261,13 @@ class EditEntity {
 
 	/**
 	 * Returns the base revision ID.
+	 * If no base revision was supplied to the constructor, this will return false.
 	 * In the trivial non-conflicting case, this will be the same as $this->getCurrentRevisionId().
 	 *
-	 * @return int
+	 * @return int|boolean
 	 */
 	public function getBaseRevisionId() {
-		if ( $this->baseRevId === null ) {
+		if ( $this->baseRevId === null || $this->baseRevId === true ) {
 			$this->baseRevId = $this->getCurrentRevisionId();
 		}
 
@@ -262,6 +276,7 @@ class EditEntity {
 
 	/**
 	 * Returns the edits base revision.
+	 * If no base revision was supplied to the constructor, this will return null.
 	 * In the trivial non-conflicting case, this will be the same as $this->getCurrentRevision().
 	 *
 	 * @throws \MWException
@@ -271,7 +286,9 @@ class EditEntity {
 		if ( $this->baseRev === null ) {
 			$id = $this->getBaseRevisionId();
 
-			if ( $id === $this->getCurrentRevisionId() ) {
+			if ( $id === false ) {
+				return null;
+			} else if ( $id === $this->getCurrentRevisionId() ) {
 				$this->baseRev = $this->getCurrentRevision();
 			} else {
 				$this->baseRev = Revision::newFromId( $id );
@@ -286,6 +303,7 @@ class EditEntity {
 
 	/**
 	 * Returns the content of the base revision.
+	 * If no base revision was supplied to the constructor, this will return null.
 	 * Shorthand for $this->getBaseRevision()->getContent()
 	 *
 	 * @return EntityContent
@@ -342,7 +360,7 @@ class EditEntity {
 	 * @return bool
 	 */
 	public function hasEditConflict() {
-		if ( $this->isNew() ) {
+		if ( $this->isNew() || !$this->doesCheckForEditConflicts() ) {
 			return false;
 		}
 
@@ -466,8 +484,8 @@ class EditEntity {
 			$summary,
 			$this->getUser(),
 			$flags | EDIT_AUTOSUMMARY,
-			$this->getCurrentRevisionId(),
-			$this
+			$this->getCurrentRevisionId(), // note: this should be the parent revision, not the true base revision!
+			$this->doesCheckForEditConflicts() ? $this : null
 		);
 
 		if ( !$editStatus->isOK() ) {
@@ -476,6 +494,15 @@ class EditEntity {
 
 		$this->status->merge( $editStatus );
 		return $this->status;
+	}
+
+	/**
+	 * Whether this EditEntity will check for edit conflicts
+	 *
+	 * @return bool
+	 */
+	public function doesCheckForEditConflicts() {
+		return $this->getBaseRevisionId() !== false;
 	}
 
 	/**
