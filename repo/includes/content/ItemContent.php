@@ -174,25 +174,6 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * Load the item data from the database, overriding the data currently set.
-	 *
-	 * @since 0.1
-	 *
-	 * @throws MWException
-	 */
-	public function reload() {
-		if ( !$this->isNew() ) {
-			$itemContent = $this->getContentHandler()->getFromId( $this->item->getId() );
-
-			if ( is_null( $itemContent ) ) {
-				throw new MWException( 'Attempt to reload item failed because it could not be obtained from the db.' );
-			}
-
-			$this->item = $itemContent->getItem();
-		}
-	}
-
-	/**
 	 * Returns a new empty ItemContent.
 	 *
 	 * @since 0.1
