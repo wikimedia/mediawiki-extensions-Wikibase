@@ -12,13 +12,16 @@ description = "Country in Southeast Asia"
 sitelinks = [["en", "Malaysia"], ["fr", "Malaisie"]]
 
 describe "Check ItemByTitle special page" do
-
+  before :all do
+    # set up: switch to english, create item
+    visit_page(CreateItemPage) do |page|
+      page.uls_switch_language("english")
+      page.create_new_item(label, description)
+    end
+  end
   context "item by title test setup" do
-    it "should create item, enter label, description and add en/fr sitelinks" do
-      visit_page(ItemPage) do |page|
-        page.uls_switch_language("english")
-        page.wait_for_item_to_load
-        page.create_new_item(label, description)
+    it "should add en/fr sitelinks" do
+      on_page(ItemPage) do |page|
         page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.add_sitelinks(sitelinks)
@@ -46,14 +49,13 @@ describe "Check ItemByTitle special page" do
     end
   end
 
-  context "item by title test teardown" do
-    it "should remove all sitelinks" do
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_item_to_load
-        page.wait_for_sitelinks_to_load
-        page.remove_all_sitelinks
-      end
+  after :all do
+    # tear down: remove all sitelinks
+    on_page(ItemPage) do |page|
+      page.navigate_to_item
+      page.wait_for_item_to_load
+      page.wait_for_sitelinks_to_load
+      page.remove_all_sitelinks
     end
   end
 end

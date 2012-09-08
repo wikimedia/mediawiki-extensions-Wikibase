@@ -10,20 +10,19 @@
 require 'spec_helper'
 
 describe "Check functionality of protected page" do
-  context "create item, protect page" do
-    it "should create an item, login with admin and protect the page, then logout the admin again" do
-      visit_page(ItemPage) do |page|
-        page.create_new_item(generate_random_string(10), generate_random_string(20))
-      end
-      visit_page(LoginPage) do |page|
-        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
-      end
-      on_page(ProtectedPage) do |page|
-        page.protect_page
-      end
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
+  before :all do
+    # set up: create item, login as admin, protect page, logout
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(generate_random_string(10), generate_random_string(20))
+    end
+    visit_page(LoginPage) do |page|
+      page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+    end
+    on_page(ProtectedPage) do |page|
+      page.protect_page
+    end
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
   end
 
@@ -93,17 +92,16 @@ describe "Check functionality of protected page" do
     end
   end
 
-  context "unprotect page" do
-    it "should unprotect the page and logout" do
-      visit_page(LoginPage) do |page|
-        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
-      end
-      visit_page(ProtectedPage) do |page|
-        page.unprotect_page
-      end
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
+  after :all do
+    # tear down: login as admin, unprotect page, logout
+    visit_page(LoginPage) do |page|
+      page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+    end
+    visit_page(ProtectedPage) do |page|
+      page.unprotect_page
+    end
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
   end
 end

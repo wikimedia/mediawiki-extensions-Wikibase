@@ -18,30 +18,23 @@ item_id_a = 0
 item_id_b = 0
 
 describe "Check undelete" do
-
-  context "undelete test setup" do
-    it "should create item, enter label, description, aliases & sitelinks" do
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
-      visit_page(ItemPage) do |page|
-        item_id_a = page.create_new_item(label_a, description_a)
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
-        page.add_aliases([alias_a])
-        page.add_sitelinks(sitelinks)
-      end
+  before :all do
+    # set up: create item + aliases & sitelinks, login as admin and delete item
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
-  end
-
-  context "delete the item" do
-    it "should login as admin and delete the item" do
-      visit_page(LoginPage) do |page|
-        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
-      end
-      on_page(DeleteItemPage) do |page|
-        page.delete_item
-      end
+    visit_page(CreateItemPage) do |page|
+      item_id_a = page.create_new_item(label_a, description_a)
+      page.wait_for_aliases_to_load
+      page.wait_for_item_to_load
+      page.add_aliases([alias_a])
+      page.add_sitelinks(sitelinks)
+    end
+    visit_page(LoginPage) do |page|
+      page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+    end
+    on_page(DeleteItemPage) do |page|
+      page.delete_item
     end
   end
 
@@ -81,7 +74,7 @@ describe "Check undelete" do
       visit_page(LoginPage) do |page|
         page.logout_user
       end
-      visit_page(ItemPage) do |page|
+      visit_page(CreateItemPage) do |page|
         item_id_b = page.create_new_item(label_b, description_b)
         page.wait_for_aliases_to_load
         page.wait_for_item_to_load
@@ -110,17 +103,16 @@ describe "Check undelete" do
     end
   end
 
-  context "undelete test teardown" do
-    it "should remove all sitelinks" do
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_item_to_load
-        page.wait_for_sitelinks_to_load
-        page.remove_all_sitelinks
-      end
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
+  after :all do
+    # tear down: remove all sitelinks, logout
+    on_page(ItemPage) do |page|
+      page.navigate_to_item
+      page.wait_for_item_to_load
+      page.wait_for_sitelinks_to_load
+      page.remove_all_sitelinks
+    end
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
   end
 end

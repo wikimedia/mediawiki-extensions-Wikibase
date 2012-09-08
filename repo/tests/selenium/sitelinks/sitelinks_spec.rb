@@ -11,26 +11,27 @@ require 'spec_helper'
 describe "Check functionality of add/edit/remove sitelinks" do
 
   context "Check for empty site links UI" do
-    it "should check that there are no site links and if there's an add button" do
-      visit_page(ItemPage) do |page|
+    before :all do
+      # set up
+      visit_page(CreateItemPage) do |page|
         page.create_new_item(generate_random_string(10), generate_random_string(20))
+      end
+    end
+    it "should check that there are no site links and if there's an add button" do
+      on_page(ItemPage) do |page|
         page.wait_for_sitelinks_to_load
-
         page.sitelinksTable?.should be_true
         page.addSitelinkLink?.should be_true
         page.siteLinkCounter?.should be_true
-
         numExistingSitelinks = page.count_existing_sitelinks
         numExistingSitelinks.should == 0
         numExistingSitelinks.should == page.get_number_of_sitelinks_from_counter
-
         page.addSitelinkLink
         page.siteIdInputField_element.should be_true
         page.pageInputField.should be_true
         page.saveSitelinkLinkDisabled.should be_true
         page.cancelSitelinkLink?.should be_true
         page.cancelSitelinkLink
-
         page.count_existing_sitelinks.should == 0
         @browser.refresh
         page.wait_for_sitelinks_to_load
@@ -54,7 +55,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.siteIdAutocompleteList_element.visible?
         end
         page.siteIdAutocompleteList_element.visible?.should be_true
-
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="xyz_thisarticleshouldneverexist_xyz"
         page.siteIdInputField.should == "English (en)"
@@ -62,7 +62,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
-
         page.wbErrorDiv?.should be_true
         page.wbErrorDetailsLink?.should be_true
         page.wbErrorDetailsLink
@@ -87,7 +86,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.siteIdAutocompleteList_element.visible?
         end
         page.siteIdAutocompleteList_element.visible?.should be_true
-
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="Ber"
         page.siteIdInputField.should == "English (en)"
@@ -106,7 +104,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.siteIdInputField?.should be_false
         page.pageInputField?.should be_true
         page.cancelSitelinkLink
-
         numExistingSitelinks = page.count_existing_sitelinks
         numExistingSitelinks.should == 1
         @browser.refresh
@@ -133,7 +130,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
             page.siteIdAutocompleteList_element.visible?
           end
           page.siteIdAutocompleteList_element.visible?.should be_true
-
           page.pageInputField_element.enabled?.should be_true
           page.pageInputField = sitelink[1]
           page.siteIdInputField.should == sitelink[2]
@@ -165,12 +161,10 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.siteIdAutocompleteList_element.visible?
         end
         page.siteIdInputField_element.send_keys :arrow_down
-
         page.siteIdAutocompleteList_element.visible?.should be_true
         aCListElement = page.get_nth_element_in_autocomplete_list(page.siteIdAutocompleteList_element, 1)
         aCListElement.visible?.should be_true
         aCListElement.click
-
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField = "s"
         ajax_wait
@@ -183,7 +177,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         sleep 1 #cause there's a delay before the value is actually set in the dom -> should be changed in the UI
         page.pageArticleNormalized?.should be_true
         page.pageArticleNormalized_element.text.should == "С"
-
         @browser.refresh
         page.wait_for_sitelinks_to_load
         page.pageArticleNormalized_element.text.should == "С"
@@ -211,7 +204,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
-
         @browser.refresh
         page.wait_for_sitelinks_to_load
         page.editSitelinkLink
@@ -243,7 +235,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.removeSitelinkLink
           ajax_wait
           page.wait_for_api_callback
-
           @browser.refresh
           page.wait_for_sitelinks_to_load
           page.count_existing_sitelinks.should == (numExistingSitelinks-i)
@@ -252,6 +243,12 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
       end
+    end
+  end
+  after :all do
+    # tear down: remove all sitelinks if there remained some
+    on_page(ItemPage) do |page|
+      page.remove_all_sitelinks
     end
   end
 end

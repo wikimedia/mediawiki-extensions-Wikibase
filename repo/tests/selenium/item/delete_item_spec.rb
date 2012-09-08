@@ -15,14 +15,17 @@ alias_b = generate_random_string(5)
 alias_c = generate_random_string(5)
 
 describe "Check functionality of item deletion" do
+  before :all do
+    # set up
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label, description)
+      page.wait_for_aliases_to_load
+      page.wait_for_item_to_load
+      page.add_aliases([alias_a, alias_b, alias_c])
+    end
+  end
   context "create item, add some stuff, delete the item" do
-    it "should create an item, login with admin and delete it, then check if removed properly" do
-      visit_page(ItemPage) do |page|
-        page.create_new_item(label, description)
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
-        page.add_aliases([alias_a, alias_b, alias_c])
-      end
+    it "should login with admin and delete item, then check if it got removed properly" do
       visit_page(SearchPage) do |page|
         page.searchText= label
         page.searchSubmit
@@ -53,9 +56,12 @@ describe "Check functionality of item deletion" do
         page.searchResults?.should be_false
         page.noResults?.should be_true
       end
-      visit_page(LoginPage) do |page|
-        page.logout_user
-      end
+    end
+  end
+  after :all do
+    # tear down: logout
+    visit_page(LoginPage) do |page|
+      page.logout_user
     end
   end
 end

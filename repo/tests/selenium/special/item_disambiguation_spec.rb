@@ -12,17 +12,14 @@ description_a = generate_random_string(20)
 description_b = generate_random_string(20)
 
 describe "Check item disambiguation special page" do
-
-  context "disambiguation test setup" do
-    it "should create 2 items with same label but different description" do
-      visit_page(ItemPage) do |page|
-        page.uls_switch_language("english")
-        page.wait_for_item_to_load
-        page.create_new_item(label_ab, description_a)
-      end
-      visit_page(ItemPage) do |page|
-        page.create_new_item(label_ab, description_b)
-      end
+  before :all do
+    # set up: create 2 items with same label but different description
+    visit_page(CreateItemPage) do |page|
+      page.uls_switch_language("english")
+      page.create_new_item(label_ab, description_a)
+    end
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label_ab, description_b)
     end
   end
 
@@ -45,5 +42,7 @@ describe "Check item disambiguation special page" do
       end
     end
   end
-
+  after :all do
+    # tear down
+  end
 end

@@ -14,17 +14,15 @@ alias_b = generate_random_string(5)
 alias_c = generate_random_string(5)
 
 describe "Check functionality of recentChanges special page" do
-  context "recentChanges test setup" do
-    it "should create item, enter label, description and aliases" do
-      visit_page(ItemPage) do |page|
-        page.create_new_item(label, description)
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
-        page.add_aliases([alias_a, alias_b, alias_c])
-      end
+  before :all do
+    # set up: create item, enter label, description and aliases
+    visit_page(CreateItemPage) do |page|
+      page.create_new_item(label, description)
+      page.wait_for_aliases_to_load
+      page.wait_for_item_to_load
+      page.add_aliases([alias_a, alias_b, alias_c])
     end
   end
-
   context "check for label and ID on recentChanges" do
     it "should check if label and ID are displayed and link leads to the correct item" do
       visit_page(RecentChangesPage) do |page|
@@ -38,5 +36,8 @@ describe "Check functionality of recentChanges special page" do
         page.itemLabelSpan.should == label
       end
     end
+  end
+  after :all do
+    # tear down
   end
 end
