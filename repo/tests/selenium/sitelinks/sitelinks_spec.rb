@@ -19,6 +19,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
     end
     it "should check that there are no site links and if there's an add button" do
       on_page(ItemPage) do |page|
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.sitelinksTable?.should be_true
         page.addSitelinkLink?.should be_true
@@ -34,6 +35,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.cancelSitelinkLink
         page.count_existing_sitelinks.should == 0
         @browser.refresh
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
       end
@@ -44,6 +46,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check if adding sitelink to a non existing article produces an error" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
         page.addSitelinkLink
@@ -75,6 +78,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check if adding a sitelink works" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
         page.addSitelinkLink
@@ -97,19 +101,24 @@ describe "Check functionality of add/edit/remove sitelinks" do
         ajax_wait
         page.wait_for_api_callback
         sleep 1
-        # let's check if we are not allowed to change the siteId when editing
-        @browser.refresh
+      end
+    end
+    it "should click on sitelink to check if URL was constructed correctly" do
+      on_page(ItemPage) do |page|
+        page.englishSitelink?.should be_true
+        page.englishSitelink
+        page.articleTitle.should == "Berlin"
+      end
+    end
+    it "should check if siteId is not editable while in edit mode" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.editSitelinkLink
         page.siteIdInputField?.should be_false
         page.pageInputField?.should be_true
         page.cancelSitelinkLink
-        numExistingSitelinks = page.count_existing_sitelinks
-        numExistingSitelinks.should == 1
-        @browser.refresh
-        page.wait_for_sitelinks_to_load
-        numExistingSitelinks = page.count_existing_sitelinks
-        numExistingSitelinks.should == 1
       end
     end
   end
@@ -120,6 +129,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       sitelinks = [["de", "Ber", "Deutsch (de)"], ["ja", "Ber", "日本語 (ja)"], ["he", "Ber", "עברית (he)"]]
       on_page(ItemPage) do |page|
         page.navigate_to_item
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         sitelinks.each do |sitelink|
           page.count_existing_sitelinks.should == count
@@ -142,8 +152,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.wait_for_api_callback
           sleep 1
           count = count+1
-          @browser.refresh
-          page.wait_for_sitelinks_to_load
         end
       end
     end
@@ -153,6 +161,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check if the normalized version of the title is displayed" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.addSitelinkLink
         page.siteIdInputField = "sr"
@@ -177,10 +186,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         sleep 1 #cause there's a delay before the value is actually set in the dom -> should be changed in the UI
         page.pageArticleNormalized?.should be_true
         page.pageArticleNormalized_element.text.should == "С"
-        @browser.refresh
-        page.wait_for_sitelinks_to_load
-        page.pageArticleNormalized_element.text.should == "С"
-        page.pageArticleNormalized?.should be_true
       end
     end
   end
@@ -189,6 +194,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check if editing sitelinks works" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.editSitelinkLink
         page.saveSitelinkLinkDisabled?.should be_true
@@ -205,6 +211,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.editSitelinkLink
         page.pageInputField.should_not == current_page
@@ -216,6 +223,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check if the sitelink leads to the correct page" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.germanSitelink
         page.articleTitle.should == "Berlin"
@@ -227,6 +235,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check if removing multiple sitelink works" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         numExistingSitelinks = page.count_existing_sitelinks
         page.removeSitelinkLink?.should be_true
@@ -235,11 +244,10 @@ describe "Check functionality of add/edit/remove sitelinks" do
           page.removeSitelinkLink
           ajax_wait
           page.wait_for_api_callback
-          @browser.refresh
-          page.wait_for_sitelinks_to_load
           page.count_existing_sitelinks.should == (numExistingSitelinks-i)
         end
         @browser.refresh
+        page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
       end
