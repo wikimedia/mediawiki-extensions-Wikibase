@@ -8,7 +8,9 @@
 require 'spec_helper'
 
 describe "Check CreateItem special page" do
-
+  before :all do
+    # set up
+  end
   context "create item functionality" do
     it "should fail to create item with empty label & description" do
       visit_page(CreateItemPage) do |page|
@@ -78,4 +80,38 @@ describe "Check CreateItem special page" do
     end
   end
 
+  context "Check for permissions on item creation" do
+    it "should check that a blocked user cannot create a new item" do
+      on_page(CreateItemPage) do |page|
+        page.uls_switch_language("English")
+      end
+      visit_page(LoginPage) do |page|
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+      end
+      visit_page(BlockUserPage) do |page|
+        page.block_user(WIKI_BLOCKED_USERNAME, "1 hour")
+      end
+      visit_page(LoginPage) do |page|
+        page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
+      end
+      visit_page(CreateItemPage) do |page|
+        page.createItemLabelField = generate_random_string(10)
+        page.createItemDescriptionField = generate_random_string(20)
+        page.createItemSubmit
+        page.mwFirstHeading.should == "Permissions errors"
+      end
+    end
+  end
+  after :all do
+    # teardown: unblock user, logout
+    visit_page(LoginPage) do |page|
+      page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+    end
+    visit_page(UnblockUserPage) do |page|
+      page.unblock_user(WIKI_BLOCKED_USERNAME)
+    end
+    visit_page(LoginPage) do |page|
+      page.logout_user
+    end
+  end
 end
