@@ -324,7 +324,7 @@ Parameters:
 	'wikibase-itemdisambiguation-nothing-found' => 'Informative text that the previous search failed for some reason, and that the search arguments must be refined.',
 	'wikibase-itemdisambiguation-description' => 'Further information about the search fields and whats valid values.',
 	'special-createitem' => 'Title of the special page for creating new items.',
-	'wikibase-createitem-intro' => 'Intro text for the CreateItem special page.',
+	'wikibase-createitem-intro' => 'Intro text for the CreateItem special page. $1 is the language name of the currently set user language. The label and the description will be set for that language.',
 	'wikibase-createitem-fieldset' => 'Title for the fieldset on the CreateItem special page.',
 	'wikibase-createitem-label' => 'Label for the label-textfield holding the label of the new item.',
 	'wikibase-createitem-description' => 'Label for the description-textfield holding the description of the new item.',
