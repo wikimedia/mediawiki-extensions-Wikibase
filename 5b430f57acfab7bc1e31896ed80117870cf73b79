@@ -16,6 +16,24 @@
       "revId": "5b430f57acfab7bc1e31896ed80117870cf73b79",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//+T8\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-08T18:47:55Z",
+      "side": 1,
+      "message": "Right... hm... I guess it\u0027s not necessary to set it again here, then.",
+      "parentUuid": "AAAASn//+XE\u003d",
+      "revId": "5b430f57acfab7bc1e31896ed80117870cf73b79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
