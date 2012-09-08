@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//+XE\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-08T12:02:07Z",
+      "side": 1,
+      "message": "Note the method createItem in line 54-60 that sets this flag. This method is called at line 163 in ApiModifyItem, that is long before the call to modifyItem (at line 178) and attemptedSave (at line 242).",
+      "revId": "5b430f57acfab7bc1e31896ed80117870cf73b79",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
