@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//+Vg\u003d",
+        "filename": "lib/includes/site/SiteObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-08T15:12:42Z",
+      "side": 1,
+      "message": "Wow, fantastic naming!",
+      "revId": "8841d94c0843823f0fd96af6b2aabfbff65e79e2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
