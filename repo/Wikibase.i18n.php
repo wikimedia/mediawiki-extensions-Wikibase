@@ -1924,7 +1924,7 @@ $messages['ko'] = array(
 	'wikibase-itembytitle-nothing-found' => '이전 찾기에서 항목을 찾을 수 없습니다. 바깥 문서의 더 잘 식별하도록 쿼리를 수정하세요.',
 	'wikibase-itembytitle-invalid-site' => '이전 쿼리는 찾기에 사용할 수 없습니다. 올바른 사이트 식별자를 제공하세요.',
 	'wikibase-itembytitle-description' => '사이트는 "enwiki"와 같은 식별자 코드입니다.',
-	'wikibase-itembytitle-create' => '또한 [{{fullurl:Special:CreateItem|site=$1&page=$2}} "$3" 항목을 만들] 수 있습니다.',
+	'wikibase-itembytitle-create' => '이러한 항목을 찾을 수 없고, 또한 [{{fullurl:Special:CreateItem|site=$1&page=$2}} 항목을 만들] 수 있습니다.',
 	'special-itemdisambiguation' => '동음이의: 같은 레이블이 있는 항목',
 	'wikibase-itemdisambiguation-lookup-fieldset' => '언어와 레이블별로 항목 찾기',
 	'wikibase-itemdisambiguation-lookup-language' => '언어:',
@@ -1934,6 +1934,11 @@ $messages['ko'] = array(
 	'wikibase-itemdisambiguation-invalid-langcode' => '이전 쿼리는 찾기에 ​​사용할 수 없습니다. 올바른 언어 식별자를 제공해야 합니다.',
 	'wikibase-itemdisambiguation-description' => '찾기에 사용되는 값은 완전한 텍스트 항목이어야 합니다. 언어는 "en"와 같은 식별자입니다.',
 	'special-createitem' => '새 항목 만들기',
+	'wikibase-createitem-intro' => '새 항목을 만들기 전에 이 항목이 이미 존재하는지 여부를 확인하시기 바랍니다. 새 항목을 만들려면 최소한 $1에 레이블이나 설명을 지정해야 합니다.',
+	'wikibase-createitem-fieldset' => '새 항목 만들기',
+	'wikibase-createitem-label' => '레이블:',
+	'wikibase-createitem-description' => '설명:',
+	'wikibase-createitem-submit' => '만들기',
 	'wikibase-api-patch-incomplete' => '생성한 패치는 완전하지 않은 것으로 밝혀졌습니다.',
 	'wikibase-self-conflict' => '데이터는 편집을 시작하고 나서 당신이 수정했습니다.',
 	'wikibase-restoreold' => '복구',
@@ -2292,6 +2297,10 @@ $messages['nl'] = array(
 	'wikibase-itemdisambiguation-invalid-langcode' => 'De vorige zoekopdracht kon niet gebruikt worden om te zoeken. Geef een geldige taalidentificatie op.',
 	'wikibase-itemdisambiguation-description' => 'Waarden gebruikt voor zoeken moeten de volledige tekst bevatten. Taal is een identificatie, bijvoorbeeld "en".',
 	'special-createitem' => 'Nieuw item aanmaken',
+	'wikibase-createitem-fieldset' => 'Nieuw item aanmaken',
+	'wikibase-createitem-label' => 'Label:',
+	'wikibase-createitem-description' => 'Beschrijving:',
+	'wikibase-createitem-submit' => 'Aanmaken',
 	'wikibase-api-patch-incomplete' => 'De gemaakte wijziging was incompleet.',
 	'wikibase-self-conflict' => 'U hebt zelf de gegevens gewijzigd nadat u bent begonnen met bewerken (mogelijk in een andere browser of browservenster).',
 	'wikibase-restoreold' => 'opnieuw instellen',
@@ -2385,6 +2394,7 @@ for å finne ut kva som har skjedd.',
 /** Polish (polski)
  * @author BeginaFelicysym
  * @author Lazowik
+ * @author Matma Rex
  */
 $messages['pl'] = array(
 	'wikibase-desc' => 'Repozytorium danych strukturalnych',
@@ -2400,7 +2410,7 @@ $messages['pl'] = array(
 	'wikibase-sitelink-page-edit-placeholder' => 'artykuł',
 	'wikibase-alias-edit-placeholder' => 'wpisz nazwę alternatywną',
 	'wikibase-label-input-help-message' => 'Podaj tytuł tego zbioru danych w języku $1m.',
-	'wikibase-description-input-help-message' => 'Napisz krótki opis w $1m.',
+	'wikibase-description-input-help-message' => 'Napisz krótki opis w języku: $1.',
 	'wikibase-sitelinks' => 'Lista stron mających łącze do tego elementu',
 	'wikibase-sitelinks-sitename-columnheading' => 'Język',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
