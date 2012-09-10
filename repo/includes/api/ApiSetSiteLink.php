@@ -106,7 +106,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 			return true;
 		}
 		else {
-			$sites = \Sites::singleton()->getSites();
+			$sites = $this->getSiteLinkTargetSites();
 			$site = $sites->getSite( $params['linksite'] );
 
 			if ( $site === false ) {
@@ -156,7 +156,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 		$allowedParams = parent::getAllowedParams();
 		return array_merge( $allowedParams, array(
 			'linksite' => array(
-				ApiBase::PARAM_TYPE => \Sites::singleton()->getSites()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'linktitle' => array(

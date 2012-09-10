@@ -42,7 +42,8 @@ final class TestItems {
 
 		$item = ItemObject::newEmpty();
 
-		$sites = \Sites::singleton()->getSites();
+		$group = \Wikibase\Settings::get( 'siteLinkGroup' );
+		$sites = \Sites::singleton()->getSiteGroup( $group );
 
 		if ( count( $sites ) > 1 ) {
 			$item->addSiteLink( new SiteLink( $sites->getIterator()->current(), 'spam' ) );

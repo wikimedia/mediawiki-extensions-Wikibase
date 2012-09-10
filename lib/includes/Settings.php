@@ -337,6 +337,8 @@ class Settings extends SettingsBase {
 			'itemPrefix' => 'q',
 			'propertyPrefix' => 'p',
 			'queryPrefix' => 'query',
+
+			'siteLinkGroup' => 'wikipedia',
 		);
 
 		// allow extensions that use WikidataLib to register mode defaults

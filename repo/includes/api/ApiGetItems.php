@@ -183,7 +183,7 @@ class ApiGetItems extends Api {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
-				ApiBase::PARAM_TYPE => \Sites::singleton()->getSites()->getGlobalIdentifiers(),
+				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'titles' => array(

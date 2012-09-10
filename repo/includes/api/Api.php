@@ -332,4 +332,14 @@ abstract class Api extends \ApiBase {
 		return $status;
 	}
 
+	/**
+	 * Returns the list of sites that is suitable as a sitelink target.
+	 *
+	 * @return \SiteList
+	 */
+	protected function getSiteLinkTargetSites() {
+		$group = Settings::get( 'siteLinkGroup' );
+		return \Sites::singleton()->getSiteGroup( $group );
+	}
+
 }
