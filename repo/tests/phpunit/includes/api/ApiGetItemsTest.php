@@ -384,6 +384,56 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		}
 	}
 
+	function provideSitelinkSorting() {
+		return array(
+			array( 'Berlin' ),
+			array( 'London' ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideSitelinkSorting
+	 */
+	function testSitelinkSorting( $handle ) {
+		$this->createItems();
+		$id = $this->getItemId( $handle );
+
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbgetitems',
+				'props' => 'sitelinks',
+				'sort' => 'sitelinks',
+				'dir' => 'ascending',
+				'ids' => $id )
+		);
+
+		$this->assertSuccess( $res, 'items', $id, 'sitelinks' );
+		$last = '';
+		foreach ( $res['items'][$id]['sitelinks'] as $link ) {
+			$this->assertArrayHasKey( 'site', $link );
+			$this->assertTrue(strcmp( $last, $link['site'] ) <= 0 );
+			$last = $link['site'];
+		}
+
+		// -------------------------------------------
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbgetitems',
+				'props' => 'sitelinks',
+				'sort' => 'sitelinks',
+				'dir' => 'descending',
+				'ids' => $id )
+		);
+
+		$this->assertSuccess( $res, 'items', $id, 'sitelinks' );
+		$last = 'zzzzzzzz';
+		foreach ( $res['items'][$id]['sitelinks'] as $link ) {
+			$this->assertArrayHasKey( 'site', $link );
+			$this->assertTrue(strcmp( $last, $link['site'] ) >= 0 );
+			$last = $link['site'];
+		}
+	}
+
 	/**
 	 * @dataProvider providerGetItemFormat
 	 */

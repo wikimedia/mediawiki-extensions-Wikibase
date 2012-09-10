@@ -173,6 +173,39 @@ abstract class Api extends \ApiBase {
 		$value = array();
 		$idx = 0;
 
+		if ( isset( $options ) ) {
+			// figure out if the entries shall be sorted
+			$dir = null;
+			if ( in_array( 'ascending', $options ) ) {
+				$dir = 'ascending';
+			}
+			elseif ( in_array( 'descending', $options ) ) {
+				$dir = 'descending';
+			}
+			if ( isset( $dir ) ) {
+				// Sort the sitelinks according to their global id
+				$saftyCopy = $siteLinks; // keep a shallow copy;
+				if ( $dir === 'ascending' ) {
+					$sortOk = usort(
+						$siteLinks,
+						function( $a, $b ) {
+							return strcmp( $a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
+						}
+					);
+				} elseif ( $dir === 'descending' ) {
+					$sortOk = usort(
+						$siteLinks,
+						function( $a, $b ) {
+							return strcmp( $b->getSite()->getGlobalId(), $a->getSite()->getGlobalId() );
+						}
+					);
+				}
+				if ( !$sortOk ) {
+					$siteLinks = $saftyCopy;
+				}
+			}
+		}
+
 		/**
 		 * @var SiteLink $link
 		 */
