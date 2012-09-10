@@ -138,21 +138,27 @@
 					'label': site.getName() + ' (' + site.getId() + ')',
 					'value': wb._siteList[site.getId()].getGlobalSiteId()
 				} );
-			};
+			}
 			$( '#wb-itembytitle-sitename' ).wikibaseAutocomplete( { "source": siteList } );
 		}
 
+        // TODO: The following is for Special:ItemDisambiguation
 		if ( ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'ItemDisambiguation' )  && ( $.uls !== undefined ) ) {
 			var langList = new Array();
 			var languages = $.uls.data.autonyms();
 			$.each( languages, function( key, value ) {
 				langList.push( {
 					'label': value + ' (' + key + ')',
-					'value': key
+					'value': value + ' (' + key + ')'
 				} );
 			} );
 			$( '#wb-itemdisambiguation-languagename' ).wikibaseAutocomplete( { "source": langList } );
-		}
+            // On submit, replace human readable value like "English (en)" with actual language name ("en")
+            $( '#wb-itemdisambiguation-form1' ).submit( function() {
+                var langID = String( $( '#wb-itemdisambiguation-languagename' ).val().replace(/.*\(|\).*/gi,'') );
+                $( '#wb-itemdisambiguation-languagename' ).val( langID );
+            });
+        }
 	} );
 
 } )( jQuery, mediaWiki, wikibase );
