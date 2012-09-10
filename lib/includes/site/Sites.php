@@ -115,6 +115,31 @@ class Sites {
 	}
 
 	/**
+	 * Returns a list of sites in the given group. Calling getGroup() on any of
+	 * the sites in the resulting SiteList shall return $group.
+	 *
+	 * @since 1.20
+	 *
+	 * @param string $group th group to get.
+	 *
+	 * @return SiteList
+	 */
+	public function getSiteGroup( $group ) {
+		$sites = self::getSites();
+
+		$siteGroup = new SiteArray();
+
+		/* @var Site $site */
+		foreach ( $sites as $site ) {
+			if ( $site->getGroup() == $group ) {
+				$siteGroup->append( $site );
+			}
+		}
+
+		return $siteGroup;
+	}
+
+	/**
 	 * Fetches the site from the database and loads them into the sites field.
 	 *
 	 * @since 1.20
