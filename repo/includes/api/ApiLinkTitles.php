@@ -56,7 +56,7 @@ class ApiLinkTitles extends Api {
 			$this->dieUsage( $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text(), 'fromtitle-and-totitle' );
 		}
 
-		$sites = \Sites::singleton()->getSites();
+		$sites = $this->getSiteLinkTargetSites();
 
 		// Get all parts for the from-link
 		// Site is already tested through allowed params ;)
@@ -199,7 +199,7 @@ class ApiLinkTitles extends Api {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$sites = \Sites::singleton()->getSites();
+		$sites = $this->getSiteLinkTargetSites();
 		return array_merge( parent::getAllowedParams(), array(
 			'tosite' => array(
 				ApiBase::PARAM_TYPE => $sites->getGlobalIdentifiers(),

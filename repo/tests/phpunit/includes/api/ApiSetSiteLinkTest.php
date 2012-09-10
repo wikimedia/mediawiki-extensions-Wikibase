@@ -72,6 +72,27 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 		}
 	}
 
+	public function testSetLiteLinkWithBadSite( ) {
+		$token = $this->getItemToken();
+
+		$req = array(
+			'action' => 'wbsetsitelink',
+			'token' => $token,
+			'site' => "dewiktionary",
+			'title' => "Berlin",
+			'linksite' => "enwiki",
+			'linktitle' => "Berlin",
+		);
+
+		try {
+			list( $res,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+
+			$this->fail( "request should have failed" );
+		} catch ( \UsageException $e ) {
+			$this->assertTrue( true ); // ok
+		}
+	}
+
 	public function testSetLiteLinkWithBadTitle( ) {
 		$token = $this->getItemToken();
 
@@ -227,5 +248,25 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 		$this->resetItem( $handle );
 	}
 
+	public function testSetLiteLinkWithBadTargetSite( ) {
+		$token = $this->getItemToken();
+
+		$req = array(
+			'action' => 'wbsetsitelink',
+			'token' => $token,
+			'site' => "dewiki",
+			'title' => "Berlin",
+			'linksite' => "enwiktionary",
+			'linktitle' => "Berlin",
+		);
+
+		try {
+			list( $res,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+
+			$this->fail( "request should have failed" );
+		} catch ( \UsageException $e ) {
+			$this->assertTrue( true ); // ok
+		}
+	}
 }
 

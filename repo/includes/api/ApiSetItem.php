@@ -198,7 +198,7 @@ class ApiSetItem extends ApiModifyItem {
 						$this->dieUsage( "Key 'sitelinks' must refer to an array", 'not-recognized-array' );
 					}
 
-					$sites = \Sites::singleton()->getSites();
+					$sites = $this->getSiteLinkTargetSites();
 					foreach ( $list as $siteId => $pageName ) {
 						if ( !is_string( $pageName ) ) {
 							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-string' )->text(), 'add-sitelink-failed' );

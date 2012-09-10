@@ -178,9 +178,6 @@ class ItemView extends \ContextSource {
 
 			$i = 0;
 
-			// Batch load the sites we need info about during the building of the sitelink list.
-			Sites::singleton()->getSites();
-
 			/**
 			 * @var SiteLink $link
 			 */
@@ -418,23 +415,22 @@ class ItemView extends \ContextSource {
 	public static function getSiteDetails() {
 		// TODO: this whole construct doesn't really belong here:
 		$sites = array();
+		$group = Settings::get( 'siteLinkGroup' );
 
 		/**
 		 * @var MediaWikiSite $site
 		 */
-		foreach ( Sites::singleton()->getSites() as $site ) {
-			if ( $site->getType() === Site::TYPE_MEDIAWIKI && $site->getGroup() === 'wikipedia' ) {
-				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
+		foreach ( Sites::singleton()->getGroupSites( $group ) as $site ) {
+			$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
 
-				$sites[$site->getLanguageCode()] = array(
-					'shortName' => $languageName,
-					'name' => $languageName,
-					'globalSiteId' => $site->getGlobalId(),
-					'pageUrl' => $site->getPageUrl(),
-					'apiUrl' => $site->getFileUrl( 'api.php' ),
-					'languageCode' => $site->getLanguageCode()
-				);
-			}
+			$sites[$site->getLanguageCode()] = array(
+				'shortName' => $languageName,
+				'name' => $languageName,
+				'globalSiteId' => $site->getGlobalId(),
+				'pageUrl' => $site->getPageUrl(),
+				'apiUrl' => $site->getFileUrl( 'api.php' ),
+				'languageCode' => $site->getLanguageCode()
+			);
 		}
 
 		return $sites;
