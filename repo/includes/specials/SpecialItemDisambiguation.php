@@ -91,8 +91,8 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		$sites = \Wikibase\ItemView::getSiteDetails();
 
 		// The next two lines are here for the site ID autocompletion
-		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites );   // TODO: This should really be in a Resource loader module and not here.
-		$this->getOutput()->addModules( 'wikibase.ui.PropertyEditTool' ); // TODO: startup.js should be separated in a presenter loading edit tools for actual items (usually on item pages) and a presenter for special pages or even one for each special page.
+		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites ); // TODO: This should really be in a Resource loader module and not here.
+		$this->getOutput()->addModules( 'wikibase.special.itemDisambiguation' );
 
 		$this->getOutput()->addHTML(
 			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itemdisambiguation', 'id' => 'wb-itemdisambiguation-form1' ) )
