@@ -212,7 +212,30 @@ return call_user_func( function() {
 		'wikibase.special' => $moduleTemplate + array(
 			'styles' => array(
 				'wikibase.special/wikibase.special.css'
+			),
+			'dependencies' => array(
+				'wikibase'
 			)
-		)
+		),
+
+		'wikibase.special.itemByTitle' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.special/wikibase.special.itemByTitle.js'
+			),
+			'dependencies' => array(
+				'wikibase.special',
+				'wikibase.utilities.jQuery'
+			)
+		),
+
+		'wikibase.special.itemDisambiguation' => $moduleTemplate + array(
+			'scripts' => array(
+				'wikibase.special/wikibase.special.itemDisambiguation.js'
+			),
+			'dependencies' => array(
+				'wikibase.special',
+				'wikibase.utilities.jQuery'
+			)
+		),
 	);
 } );

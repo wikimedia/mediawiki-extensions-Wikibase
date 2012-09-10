@@ -75,7 +75,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 		$sites = \Wikibase\ItemView::getSiteDetails();
 		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites );
-		$this->getOutput()->addModules( 'wikibase.ui.PropertyEditTool' );
+		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
 
 		$this->getOutput()->addHTML(
 			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itembytitle', 'id' => 'wb-itembytitle-form1' ) )
