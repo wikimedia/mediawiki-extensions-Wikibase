@@ -111,7 +111,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		$this->getOutput()->addModules( 'wikibase.ui.PropertyEditTool' ); // TODO: startup.js should be separated in a presenter loading edit tools for actual items (usually on item pages) and a presenter for special pages or even one for each special page.
 
 		$this->getOutput()->addHTML(
-			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itemdisambiguation', 'id' => 'mw-itemdisambiguation-form1' ) )
+			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itemdisambiguation', 'id' => 'wb-itemdisambiguation-form1' ) )
 			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
 			. Xml::fieldset( $this->msg( 'wikibase-itemdisambiguation-lookup-fieldset' )->text() )
 			. Xml::inputLabel( $this->msg( 'wikibase-itemdisambiguation-lookup-language' )->text(), 'language', 'wb-itemdisambiguation-languagename', 12, $langCode ? $langCode : '' )
