@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//98o\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-10T16:11:22Z",
+      "side": 1,
+      "message": "safty? Did you mean \"safety\"?",
+      "revId": "863d27c70bcdf08c7398a38ff52a865e6ebf6a25",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
