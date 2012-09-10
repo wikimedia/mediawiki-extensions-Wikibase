@@ -182,6 +182,18 @@ class ItemView extends \ContextSource {
 			// Batch load the sites we need info about during the building of the sitelink list.
 			Sites::singleton()->getSites();
 
+			// Sort the sitelinks according to their global id
+			$saftyCopy = $siteLinks; // keep a shallow copy;
+			$sortOk = usort(
+				$siteLinks,
+				function( $a, $b ) {
+					return strcmp($a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
+				}
+			);
+			if ( !$sortOk ) {
+				$siteLinks = $saftyCopy;
+			}
+
 			/**
 			 * @var SiteLink $link
 			 */
