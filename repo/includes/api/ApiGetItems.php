@@ -81,16 +81,22 @@ class ApiGetItems extends Api {
 		// done to other props as well, for example variants for the language
 		// attributes. It would also be nice to write something like */urls for
 		// all props that can supply full urls.
+		$siteLinkOptions = array();
+		if ( in_array( 'sitelinks', $params['sort'] ) ) {
+			$siteLinkOptions[] = $params['dir'];
+		}
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
-			$siteLinkOptions = array( 'url' );
+			$siteLinkOptions[] = 'url';
 			$props = array_flip( array_values( $params['props'] ) );
 			unset( $props['sitelinks/urls'] );
 			$props['sitelinks'] = true;
 			$props = array_keys( $props );
 		}
 		else {
-			$siteLinkOptions = null;
 			$props = $params['props'];
+		}
+		if ( $siteLinkOptions === array() ) {
+			$siteLinkOptions = null;
 		}
 
 		// loop over all items
@@ -195,6 +201,18 @@ class ApiGetItems extends Api {
 				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions',
 				ApiBase::PARAM_ISMULTI => true,
 			),
+			'sort' => array(
+				// This could be done like the urls, where sitelinks/title sort on the title field
+				// and sitelinks/site sort on the site code.
+				ApiBase::PARAM_TYPE => array( 'sitelinks' ),
+				ApiBase::PARAM_DFLT => '',
+				ApiBase::PARAM_ISMULTI => true,
+			),
+			'dir' => array(
+				ApiBase::PARAM_TYPE => array( 'ascending', 'descending' ),
+				ApiBase::PARAM_DFLT => 'ascending',
+				ApiBase::PARAM_ISMULTI => false,
+			),
 			'languages' => array(
 				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
 				ApiBase::PARAM_ISMULTI => true,
@@ -216,6 +234,12 @@ class ApiGetItems extends Api {
 			),
 			'props' => array( 'The names of the properties to get back from each item.',
 				"Will be further filtered by any languages given."
+			),
+			'sort' => array( 'The names of the properties to sort.',
+				"Use together with 'dir' to give the sort order."
+			),
+			'dir' => array( 'The sort order for the given properties.',
+				"Use together with 'sort' to give the properties to sort."
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
