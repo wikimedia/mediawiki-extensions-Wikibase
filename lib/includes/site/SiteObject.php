@@ -135,7 +135,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	public function getDomain() {
-		$path = $this->getMainPath();
+		$path = $this->getLinkPath();
 
 		if ( $path === false ) {
 			return false;
@@ -152,7 +152,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	public function getProtocol() {
-		$path = $this->getMainPath();
+		$path = $this->getLinkPath();
 
 		if ( $path === false ) {
 			return false;
@@ -162,36 +162,55 @@ class SiteObject extends ORMRow implements Site {
 	}
 
 	/**
-	 * Returns the main path type, that is the type of the path that should generally be used to construct links
-	 * to the target site.
+	 * Sets the path used to construct links with.
+	 * @see Site::setLinkPath
 	 *
-	 * This default implementation returns "page_path" as the default path type. Subclasses can override this
-	 * to define a different default path type.
+	 * @param string $fullUrl
 	 *
 	 * @since 1.20
-	 *
-	 * @return string
 	 */
-	protected function getMainPathType() {
-		return "page_path";
+	public function setLinkPath( $fullUrl ) {
+		$type = $this->getLinkPathType();
+
+		if ( $type === false ) {
+			throw new MWException( "This SiteObject does not support link pathes." );
+		}
+
+		$this->setPath( $type, $fullUrl );
 	}
 
 	/**
-	 * Returns the main path of the site which can be used to construct
-	 * links with and from which protocol and domain are derived.
+	 * Returns the path path used to construct links with or false if there is no such path.
 	 *
-	 * This calls $this->getMainPathType() to determine the default path type.
-	 *
-	 * @since 1.20
+	 * @see Site::getLinkPath
 	 *
 	 * @return string|false
 	 */
-	protected function getMainPath() {
-		return $this->getPath( $this->getMainPathType() );
+	public function getLinkPath() {
+		$type = $this->getLinkPathType();
+		return $type === false ? false : $this->getPath( $type );
+	}
+
+	/**
+	 * Returns the main path type, that is the type of the path that should generally be used to construct links
+	 * to the target site.
+	 *
+	 * This default implementation returns Site::PATH_LINK as the default path type. Subclasses can override this
+	 * to define a different default path type, or return false to disable site links.
+	 *
+	 * @since 1.20
+	 * @see Site::getLinkPathType
+	 *
+	 * @return string
+	 */
+	public function getLinkPathType() {
+		return Site::PATH_LINK;
 	}
 
 	/**
 	 * @see Site::getPageUrl
+	 *
+	 * This implementation returns a URL constructed using the path returned by getLinkPath().
 	 *
 	 * @since 1.20
 	 *
@@ -200,7 +219,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @return string|false
 	 */
 	public function getPageUrl( $pageName = false ) {
-		$url = $this->getMainPath();
+		$url = $this->getLinkPath();
 
 		if ( $url === false ) {
 			return false;

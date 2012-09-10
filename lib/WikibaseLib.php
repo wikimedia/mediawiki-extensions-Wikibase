@@ -148,6 +148,8 @@ $wgAutoloadClasses['Wikibase\Test\EntityRefreshTest'] 		= $dir . 'tests/phpunit/
 $wgAutoloadClasses['Wikibase\Test\PropertySnakObjectTest'] 	= $dir . 'tests/phpunit/snak/PropertySnakObjectTest.php';
 $wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/snak/SnakObjectTest.php';
 
+$wgAutoloadClasses['SiteObjectTest'] 			= $dir . 'tests/phpunit/site/SiteObjectTest.php';
+
 
 
 foreach ( array(
