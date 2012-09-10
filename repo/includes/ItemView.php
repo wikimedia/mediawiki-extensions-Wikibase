@@ -100,6 +100,7 @@ class ItemView extends \ContextSource {
 		// even if description is empty, nodes have to be inserted as placeholders for an input box
 		$html .= Html::openElement( 'div',
 			array(
+				'dir' => 'auto',
 				'class' => 'wb-property-container wb-value-row'
 			)
 		);
