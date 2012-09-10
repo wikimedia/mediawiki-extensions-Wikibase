@@ -73,4 +73,15 @@ class SitesTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( 'Site', Sites::newSite( 'enwiki' ) );
 	}
 
+	public function testGetGroup() {
+		$wikipedias = Sites::singleton()->getSiteGroup( "wikipedia" );
+
+		$this->assertFalse( $wikipedias->isEmpty() );
+
+		/* @var Site $site */
+		foreach ( $wikipedias as $site ) {
+			$this->assertEquals( 'wikipedia', $site->getGroup() );
+		}
+	}
+
 }
