@@ -79,7 +79,7 @@ class ItemDisambiguation extends \ContextSource {
 								// FIXME: Need a more general way to figure out the "q" thingy.
 								// This should REALLY be something more elegant, but it is sufficient for now.
 								\Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
-								. wfMessage( 'wikibase-itemlink-id-wrapper' )->params( 'q' . $item->getItem()->getId() )->escaped()
+								. $item->getItem()->getLabel( $langCode  ) ? $item->getItem()->getLabel( $langCode  ) : wfMessage( 'wikibase-itemlink-id-wrapper' )->params( 'q' . $item->getItem()->getId() )->escaped()
 								. \Html::closeElement( 'span' )
 							)
 							. wfMessage( 'colon-separator' )->escaped()
