@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//+BE\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetSiteLinkTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-10T10:17:09Z",
+      "side": 1,
+      "message": "This fails already in the existing master and has nothing to do with this patchset.",
+      "revId": "68fdafc19b6b3228659add2de22e1da77f752ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
