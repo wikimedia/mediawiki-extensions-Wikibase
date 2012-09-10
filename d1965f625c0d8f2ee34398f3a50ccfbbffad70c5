@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//98I\u003d",
+        "filename": "repo/resources/wikibase.ui.SiteLinksEditTool.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-10T16:26:45Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be \".wb-sitelinks-heading, .wb-ui-propertyedittool-c\nounter\" to catch nodes with either of those classes?\n\nI don\u0027t really like how this is calling parent(), we shouldn\u0027t assume that the h2 is just there.",
+      "revId": "d1965f625c0d8f2ee34398f3a50ccfbbffad70c5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
