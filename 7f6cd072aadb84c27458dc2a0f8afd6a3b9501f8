@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//978\u003d",
+        "filename": "lib/includes/site/MediaWikiSite.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-10T16:45:07Z",
+      "side": 1,
+      "message": "If we do this, I object to having the PATH_LINK constant in Site.",
+      "revId": "7f6cd072aadb84c27458dc2a0f8afd6a3b9501f8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
