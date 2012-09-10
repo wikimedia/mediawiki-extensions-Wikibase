@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAASn//9/c\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-10T13:56:45Z",
+      "side": 1,
+      "message": "\"whatever\" ?",
+      "revId": "68fdafc19b6b3228659add2de22e1da77f752ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9/g\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-10T13:56:45Z",
+      "side": 1,
+      "message": "typo: supplied",
+      "revId": "68fdafc19b6b3228659add2de22e1da77f752ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//+BE\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiSetSiteLinkTest.php",
         "patchSetId": 3
