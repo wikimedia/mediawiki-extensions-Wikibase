@@ -166,8 +166,28 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	}
 
 	/**
+	 * Testing if we can get an item using a site that is not part of the group supported for sitelinks.
+	 * Note that this makes assumptions about which sitelinks exist in the test items.
+	 *
+	 * @group API
+	 */
+	public function testGetItemsByBadSite( ) {
+		try {
+			list( $res,, ) = $this->doApiRequest( array(
+				'action' => 'wbgetitems',
+				'sites' => 'enwiktionary',
+				'titles' => 'Berlin',
+			) );
+
+			$this->fail( "expected request to fail" );
+		} catch ( \UsageException $ex ) {
+			// ok
+		}
+	}
+
+	/**
 	 * Testing if we can get missing items if we do lookup with failing titles.
-	 * Note that this makes assumptions about which ids they have been assigned.
+	 * Note that this makes assumptions about which sitelinks they have been assigned.
 	 *
 	 * @group API
 	 */

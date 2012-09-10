@@ -68,7 +68,10 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	protected function switchForm( $siteId, $page ) {
 		global $wgScript;
 
-		$siteExists = \Sites::singleton()->getSites()->hasSite( $siteId );
+		$group = Settings::get( 'siteLinkGroup' );
+		$sites = \Sites::singleton()->getSiteGroup( $group );
+
+		$siteExists = $sites->hasSite( $siteId );
 
 		$sites = \Wikibase\ItemView::getSiteDetails();
 		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites );
