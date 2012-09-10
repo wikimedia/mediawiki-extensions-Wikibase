@@ -117,7 +117,7 @@ class ApiLinkTitles extends Api {
 
 		$this->addSiteLinksToResult( $return, 'item' );
 
-		$flags |= $user->isAllowed( 'bot' ) ? EDIT_FORCE_BOT : 0;
+		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 		$summary = '';
 
 		if ( $itemContent === null ) {
