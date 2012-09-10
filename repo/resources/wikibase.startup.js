@@ -136,12 +136,21 @@
 				var site = wb.getSite( siteId );
 				siteList.push( {
 					'label': site.getName() + ' (' + site.getId() + ')',
-					'value': wb._siteList[site.getId()].getGlobalSiteId()
+					'value': site.getName() + ' (' + site.getId() + ')',
 				} );
-			};
+			}
 			$( '#wb-itembytitle-sitename' ).wikibaseAutocomplete( { "source": siteList } );
+            // Hackety hack hack...
+            // On submit, replace human readable value like "English (en)" with actual sitename ("enwiki")
+            $( '#wb-itembytitle-form1' ).submit( function() {
+                var langID = String( $( '#wb-itembytitle-sitename' ).val().replace(/.*\(|\).*/gi,'') );
+                if ( wb._siteList[langID].getGlobalSiteId() !== undefined ) {
+                    $( '#wb-itembytitle-sitename' ).val( wb._siteList[langID].getGlobalSiteId() );
+                }
+            });
 		}
 
+		// TODO: The following is for Special:ItemDisambiguation
 		if ( ( mw.config.get( 'wgCanonicalSpecialPageName' ) === 'ItemDisambiguation' )  && ( $.uls !== undefined ) ) {
 			var langList = new Array();
 			var languages = $.uls.data.autonyms();
