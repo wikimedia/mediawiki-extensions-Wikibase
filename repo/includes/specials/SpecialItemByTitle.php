@@ -75,12 +75,12 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		$this->getOutput()->addModules( 'wikibase.ui.PropertyEditTool' );
 
 		$this->getOutput()->addHTML(
-			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itembytitle', 'id' => 'mw-itembytitle-form1' ) )
+			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itembytitle', 'id' => 'wb-itembytitle-form1' ) )
 			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
 			. Xml::fieldset( $this->msg( 'wikibase-itembytitle-lookup-fieldset' )->text() )
 			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-site' )->text(), 'site', 'wb-itembytitle-sitename', 12, $siteId ? htmlspecialchars( $siteId ) : '' )
-			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-page' )->text(), 'page', 'pagename', 36, $page ? htmlspecialchars( $page ) : '' )
-			. Xml::submitButton( $this->msg( 'wikibase-itembytitle-submit' )->text() )
+			. Xml::inputLabel( ' '. $this->msg( 'wikibase-itembytitle-lookup-page' )->text(), 'page', 'pagename', 36, $page ? htmlspecialchars( $page ) : '' )
+			. Xml::submitButton( $this->msg( 'wikibase-itembytitle-submit' )->text(), array( 'id' => 'wb-itembytitle-submit' ) )
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
