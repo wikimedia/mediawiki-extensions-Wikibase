@@ -18,8 +18,12 @@ use User, Title, ApiBase;
 abstract class ApiModifyItem extends Api {
 
 	/**
-	 * When saving a number of flags should be set
-	 * @var integer $flags how flags should be set
+	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
+	 *
+	 * @see EditEntity::attemptSave
+	 * @see WikiPage::doEditContent
+	 *
+	 * @var integer $flags
 	 */
 	protected $flags;
 
@@ -202,18 +206,16 @@ abstract class ApiModifyItem extends Api {
 			}
 		}
 		else {
-			// Allow bots to exempt some edits from bot flagging
-			// Also the EDIT_AUTOSUMMARY should be handled
-			if ( $this->flags & EDIT_NEW) {
+			// This is similar to ApiEditPage.php and what it uses at line 314
+			$this->flags |= ($user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+
+			// if the item is not up for creation, set the EDIT_UPDATE flags
+			if ( !$itemContent->isNew() && ( $this->flags & EDIT_NEW ) === 0 ) {
 				$this->flags |= EDIT_UPDATE;
 			}
-			// This is similar to ApiEditPage.php and what it uses at line 314
-			$this->flags = ($user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 
-			// Lets define this just in case
-			$hits =0;
-			$summary = '';
-			$lang = $wgContLang;
+			//NOTE: EDIT_NEW will not be set automatically. If the item doesn't exist, and EDIT_NEW was
+			//      not added to $this->flags explicitly, the save will fail.
 
 			// Is there a user supplied summary, then use it but get the hits first
 			if ( isset( $params['summary'] ) ) {

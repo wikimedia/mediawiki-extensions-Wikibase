@@ -41,7 +41,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		parent::setUp();
 
 		$this->itemContent = ItemContent::newEmpty();
-		$this->itemContent->save();
+		$this->itemContent->save( '', null, EDIT_NEW );
 
 		$title = Title::newFromText( 'wbmovetest' );
 		$this->page =  new WikiPage( $title );
@@ -54,6 +54,8 @@ class ItemMoveTest extends \MediaWikiTestCase {
 	public function testMovePrevention() {
 		// Moving a regular page into data NS onto an existing item
 		$title = $this->itemContent->getTitle();
+		$this->assertInstanceOf( 'Title', $title ); // sanity check
+
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving a regular page into data NS to an invalid location

@@ -43,13 +43,13 @@ class TermLookupTest extends \MediaWikiTestCase {
 
 		$content0 = \Wikibase\ItemContent::newEmpty();
 		$content0->setItem( $item0 );
-		$content0->save();
+		$content0->save( '', null, EDIT_NEW );
 		$id0 = $content0->getItem()->getId();
 
 		$content1 = \Wikibase\ItemContent::newEmpty();
 		$content1->setItem( $item1 );
 
-		$content1->save();
+		$content1->save( '', null, EDIT_NEW );
 		$id1 = $content1->getItem()->getId();
 
 		$ids = $lookup->getItemIdsForLabel( 'foobar' );

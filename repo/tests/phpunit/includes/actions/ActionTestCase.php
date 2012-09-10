@@ -270,11 +270,11 @@ class ActionTestCase extends MediaWikiTestCase {
 		foreach ( $revisions as $item ) {
 			if ( $content == null ) {
 				$content = ItemContent::newFromItem( $item );
-				$status = $content->save( "Creating test item '$handle'" );
+				$status = $content->save( "Creating test item '$handle'", null, EDIT_NEW );
 			} else {
 				$item->setId( $content->getItem()->getId() );
 				$content = ItemContent::newFromItem( $item );
-				$status = $content->save( "Changing test item '$handle'" );
+				$status = $content->save( "Changing test item '$handle'", null, EDIT_UPDATE );
 			}
 
 			if ( !$status->isOK() ) {

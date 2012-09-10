@@ -233,6 +233,11 @@ class ApiSetItem extends ApiModifyItem {
 			}
 		}
 
+		if ( $itemContent->isNew() ) {
+			// if the item doesn't exist yet, create it
+			$this->flags |= EDIT_NEW;
+		}
+
 		$item = $itemContent->getItem();
 
 		$this->addLabelsToResult( $item->getLabels(), 'item' );

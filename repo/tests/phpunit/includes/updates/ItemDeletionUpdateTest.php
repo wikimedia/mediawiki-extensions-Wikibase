@@ -49,7 +49,7 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 	 * @param ItemContent $itemContent
 	 */
 	public function testDoUpdate( ItemContent $itemContent ) {
-		$itemContent->save();
+		$itemContent->save( '', null, EDIT_NEW );
 		$update = new ItemDeletionUpdate( $itemContent );
 		$update->doUpdate();
 
