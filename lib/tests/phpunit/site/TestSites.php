@@ -47,6 +47,8 @@ class TestSites {
 		$site->setType( Site::TYPE_MEDIAWIKI );
 		$site->setLanguageCode( 'en' );
 		$site->addNavigationId( 'enwiktionary' );
+		$site->setPath( MediaWikiSite::PATH_PAGE, "https://en.wiktionary.org/wiki/$1" );
+		$site->setPath( MediaWikiSite::PATH_FILE, "https://en.wiktionary.org/w/$1" );
 		$sites[] = $site;
 
 		$site = Sites::newSite( 'dewiktionary' );
@@ -55,6 +57,8 @@ class TestSites {
 		$site->setLanguageCode( 'de' );
 		$site->addInterwikiId( 'dewiktionary' );
 		$site->addInterwikiId( 'wiktionaryde' );
+		$site->setPath( MediaWikiSite::PATH_PAGE, "https://de.wiktionary.org/wiki/$1" );
+		$site->setPath( MediaWikiSite::PATH_FILE, "https://de.wiktionary.org/w/$1" );
 		$sites[] = $site;
 
 		$site = Sites::newSite( 'spam' );
@@ -64,6 +68,7 @@ class TestSites {
 		$site->addNavigationId( 'spam' );
 		$site->addNavigationId( 'spamz' );
 		$site->addInterwikiId( 'spamzz' );
+		$site->setLinkPath( "http://spamzz.test/testing/" );
 		$sites[] = $site;
 
 		foreach ( array( 'en', 'de', 'nl', 'sv', 'sr', 'no', 'nn' ) as $langCode ) {
@@ -73,6 +78,8 @@ class TestSites {
 			$site->setLanguageCode( $langCode );
 			$site->addInterwikiId( $langCode );
 			$site->addNavigationId( $langCode );
+			$site->setPath( MediaWikiSite::PATH_PAGE, "https://$langCode.wikipedia.org/wiki/$1" );
+			$site->setPath( MediaWikiSite::PATH_FILE, "https://$langCode.wikipedia.org/w/$1" );
 			$sites[] = $site;
 		}
 

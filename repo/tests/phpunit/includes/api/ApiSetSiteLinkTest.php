@@ -33,6 +33,17 @@ use Wikibase\ApiSetSiteLink;
  */
 class ApiSetSiteLinkTest extends ApiModifyItemBase {
 
+	public function setup() {
+		parent::setup();
+
+		static $hasSites;
+
+		if ( !$hasSites ) {
+			\TestSites::insertIntoDb();
+			$hasSites = true;
+		}
+	}
+
 	public function testSetLiteLinkWithNoId( ) {
 		$token = $this->getItemToken();
 
