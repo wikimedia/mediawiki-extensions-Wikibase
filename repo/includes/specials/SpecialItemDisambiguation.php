@@ -61,11 +61,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 				$this->displayDisambiguationPage( $itemContents, $language );
 			}
 		}
-
-		// If there is no item content post the switch form
-		if ( $itemContents === array() ) {
-			$this->switchForm( $language, $label );
-		}
+		$this->switchForm( $language, $label );
 	}
 
 	/**
@@ -92,18 +88,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	protected function switchForm( $langCode, $label ) {
 		global $wgScript;
 
-		// Misuse language name to figure out if the code is defined
-		$languageName = \Wikibase\Utils::fetchLanguageName( $langCode );
-
-		if ( isset( $langCode ) || isset( $label ) ) {
-			$this->getOutput()->addHTML(
-				Html::openElement( 'div' )
-				. $this->msg( $languageName !== $langCode ? 'wikibase-itemdisambiguation-nothing-found' : 'wikibase-itemdisambiguation-invalid-langcode' )
-					->params( $langCode, $label )
-					->parse()
-				. Html::closeElement( 'div' )
-			);
-		}
 		$sites = \Wikibase\ItemView::getSiteDetails();
 
 		// The next two lines are here for the site ID autocompletion
@@ -120,24 +104,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
-		$this->getOutput()->addHTML(
-			Html::openElement( 'div' )
-			. $this->msg( 'wikibase-itemdisambiguation-description' )->text()
-			. Html::closeElement( 'div' )
-		);
-		if ( isset( $langCode ) && isset( $label ) ) {
-			$this->getOutput()->addHTML(
-				Html::openElement( 'div' )
-				. $this->msg( 'wikibase-itemdisambiguation-create' )
-					->params(
-						wfUrlencode( $langCode ? $langCode : '' ),
-						wfUrlencode( $label ? $label : '' ),
-						$label ? $label : ''
-					)
-					->parse()
-				. Html::closeElement( 'div' )
-			);
-		}
 	}
 
 }
