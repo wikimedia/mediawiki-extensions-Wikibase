@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//9ik\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-11T15:23:41Z",
+      "side": 1,
+      "message": "What does this method do? A nice li\u0027ll description?",
+      "revId": "8e65b8beae087677c3a749b4ed8168e18a57259e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
