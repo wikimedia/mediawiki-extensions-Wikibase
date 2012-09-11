@@ -12,10 +12,10 @@ class ItemDisambiguationPage < ItemPage
 
   text_field(:disambiguationLanguageField, :id => "wb-itemdisambiguation-languagename")
   text_field(:disambiguationLabelField, :id => "labelname")
-  button(:disambiguationSubmit, :css => "form#mw-itemdisambiguation-form1 > fieldset > input[type='submit']")
+  button(:disambiguationSubmit, :css => "form#wb-itemdisambiguation-form1 > fieldset > input[type='submit']")
   unordered_list(:disambiguationList, :class => "wikibase-disambiguation")
-  span(:disambiguationItemLink1, :class => "wb-itemlink-id", :index => 0)
-  span(:disambiguationItemLink2, :class => "wb-itemlink-id", :index => 1)
+  link(:disambiguationItemLink1, :xpath => "//ul[@class='wikibase-disambiguation']/li[1]/a")
+  link(:disambiguationItemLink2, :xpath => "//ul[@class='wikibase-disambiguation']/li[2]/a")
   def countDisambiguationElements
     count = 0
     disambiguationList_element.each do |disambigationElem|
