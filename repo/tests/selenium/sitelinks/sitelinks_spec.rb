@@ -226,7 +226,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_for_item_to_load
         page.wait_for_sitelinks_to_load
         page.germanSitelink
-        page.articleTitle.should == "Berlin"
+        page.articleTitle.should == "Bermuda"
       end
     end
   end
