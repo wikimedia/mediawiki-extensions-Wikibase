@@ -12,6 +12,6 @@ class ItemByTitlePage < ItemPage
 
   text_field(:itemByTitleSiteField, :id => "wb-itembytitle-sitename")
   text_field(:itemByTitlePageField, :id => "pagename")
-  button(:itemByTitleSubmit, :css => "form#mw-itembytitle-form1 > fieldset > input[type='submit']")
+  button(:itemByTitleSubmit, :css => "form#wb-itembytitle-form1 > fieldset > input[type='submit']")
 
 end
