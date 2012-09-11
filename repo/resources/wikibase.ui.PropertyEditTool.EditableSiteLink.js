@@ -79,9 +79,10 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 
 		interfaces.siteId.setActive( this.isPending() ); // site ID will remain once set!
 
-		// interface for choosing a page (from the source site):
+		// interface for choosing a page (from the source site)
+		// pass the second to last cell as subject since the last cell will be used by the toolbar
 		interfaces.pageName = new ev.SitePageInterface(
-			tableCells.last(), interfaces.siteId.getSelectedSite()
+			tableCells[tableCells.length-2], interfaces.siteId.getSelectedSite()
 		);
 		interfaces.pageName.inputPlaceholder = mw.msg( 'wikibase-sitelink-page-edit-placeholder' );
 		interfaces.pageName.ajaxParams = {
@@ -151,9 +152,7 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 	 * @return jQuery node the toolbar should be appended to
 	 */
 	_getToolbarParent: function() {
-		// append toolbar to new td
-		this.__toolbarParent = this.__toolbarParent || $( '<td/>' ).appendTo( this._subject );
-		return this.__toolbarParent;
+		return this._subject.children( 'td' ).last();
 	},
 
 	/**

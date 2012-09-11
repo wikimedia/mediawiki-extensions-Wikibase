@@ -184,7 +184,7 @@ class ItemPage < RubySelenium
     sitelinksTable_element.each do |tableRow|
       count = count+1
     end
-    return count - 3 # subtracting two table header row and the footer row
+    return count - 2 # subtracting the table header row and the footer row
   end
 
   def wait_for_sitelinks_to_load
