@@ -105,7 +105,7 @@ class PollForChanges extends \Maintenance {
 			self::msg( 'No new changes were found' );
 		}
 		else {
-			//self::msg( $changeCount . ' new changes were found' );
+			self::msg( $changeCount . ' new changes were found' );
 
 			$changes = iterator_to_array( $changes );
 
