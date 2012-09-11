@@ -34,7 +34,7 @@ wb.ui.PropertyEditTool.EditableDescription = wb.utilities.inherit( $PARENT, {
 	_buildInterfaces: function( subject ) {
 		var interfaces = $PARENT.prototype._buildInterfaces.call( this, subject );
 		interfaces[0].inputPlaceholder = mw.msg( 'wikibase-description-edit-placeholder' );
-		interfaces[0].autoExpand = true;
+		interfaces[0].autoExpand = false;
 
 		return interfaces;
 	},

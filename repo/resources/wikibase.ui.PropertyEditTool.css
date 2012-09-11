@@ -96,6 +96,11 @@ table.wb-ui-propertyedittool-ineditmode {
 
 /********** LABEL & DESCRIPTION **********/
 
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue,
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue {
+	padding-right: 14em; /* width of toolbar + white space border */
+}
+
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-toolbar,
 .wb-ui-labeledittool .wb-ui-propertyedittool-toolbar {
 	display: none;
@@ -107,7 +112,6 @@ its toolbar */
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue {
 	display: block;
-	padding-right: 14em;
 	margin: .3em .3em .13em 8px; /* h1 natively has 0.17em bottom padding to avoid clipping */
 }
 
@@ -158,6 +162,7 @@ its toolbar */
 }
 
 .wb-ui-labeledittool input {
+	width: 100%;
 	font-family: inherit;
 	font-size: inherit;
 	height: 1.2em;
@@ -192,6 +197,7 @@ its toolbar */
 }
 
 .wb-ui-descriptionedittool input {
+	width: 100%;
 	padding: 0;
 	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
 }
