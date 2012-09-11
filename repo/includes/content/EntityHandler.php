@@ -114,6 +114,20 @@ abstract class EntityHandler extends \ContentHandler {
 	public abstract function getEntityNamespace();
 
 	/**
+	 * @see ContentHandler::canBeUsedOn();
+	 *
+	 * This implementation returns true if and only if the given title's namespace
+	 * is the same as the one returned by $this->getEntityNamespace().
+	 *
+	 * @return bool true if $title represents a page in the appropriate entity namespace.
+	 */
+	public function canBeUsedOn( Title $title ) {
+		$ns = $this->getEntityNamespace();
+		return $ns === $title->getNamespace();
+	}
+
+
+	/**
 	 * Returns the Title object for the item with provided id.
 	 *
 	 * TODO: refactor to work for all entities
