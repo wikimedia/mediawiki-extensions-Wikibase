@@ -716,4 +716,34 @@ final class RepoHooks {
 
 		return true;
 	}
+
+	public static function onApiCheckCanExecute( \ApiBase $module, \User $user, &$message ) {
+		$entity_models = array(
+			CONTENT_MODEL_WIKIBASE_ITEM,
+			CONTENT_MODEL_WIKIBASE_PROPERTY,
+			CONTENT_MODEL_WIKIBASE_QUERY,
+		);
+
+		if ( $module instanceof \ApiEditPage ) {
+			$params = $module->extractRequestParams();
+			$pageObj = $module->getTitleOrPageId( $params );
+			$namespace = $pageObj->getTitle()->getNamespace();
+
+			foreach ( $entity_models as $model ) {
+				$handler = ContentHandler::getForModelID( $model );
+
+				if ( $handler->getEntityNamespace() == $namespace ) {
+					// trying to use ApiEditPage on an entity namespace - just fail
+					$message = array(
+						'wikibase-no-direct-editing',
+						$pageObj->getTitle()->getNsText()
+					);
+
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
 }

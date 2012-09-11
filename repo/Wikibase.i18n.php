@@ -166,6 +166,7 @@ $1', # Do not translate
 	'wikibase-self-conflict' => 'Data was modified by you after you started editing.',
 	'wikibase-restoreold' => 'restore',
 	'wikibase-restore-summary' => 'Restore revision $1 by [[Special:Contributions/$2|$2]]',
+	'wikibase-no-direct-editing' => 'Direct editing is disabled in namespace $1',
 
 	'wikibase-noitem'                    => 'This item does not exist.
 You can <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} search the related logs]
@@ -335,6 +336,8 @@ Parameters:
 	'wikibase-restore-summary' => 'Edit summary for an restore action. Parameters:
 * $1 is the revision id number;
 * $2 is the username whose changes are being undone.',
+	'wikibase-no-direct-editing' => 'Error messages if a direct (full-text) edit is attempted in an entity names. Parameters:
+* $1 is the name of the namespace for which direct editing was denied.',
 	'wikibase-noitem' => 'Of some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs or to create a new item.',
 	'wikibase-noitem-nopermission' => 'For some reason the user tried to access an item which then was detected as non-existing. This can happen when an item is deleted and clients are not yet made aware of this. A possible solution for the user is to search the logs. The user does not have sufficient rights to create a new item in this case.',
 	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item.',
