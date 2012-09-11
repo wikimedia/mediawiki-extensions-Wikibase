@@ -28,6 +28,15 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 	 */
 	protected abstract function getNewEmpty();
 
+	/**
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return Entity
+	 */
+	protected abstract function getNewFromArray( array $data );
+
 	public function labelProvider() {
 		return array(
 			array( 'en', 'spam' ),
@@ -311,5 +320,71 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$this->assertEmpty( $entity->getAllAliases(), "aliases" );
 
 		$this->assertTrue( $entity->isEmpty() );
+	}
+
+	public static function provideEquals() {
+		return array(
+			array( #0
+				array(),
+				array(),
+				true
+			),
+			array( #1
+				array( 'labels' => array() ),
+				array( 'descriptions' => null ),
+				true
+			),
+			array( #2
+				array( 'entity' => 'x23' ),
+				array(),
+				true
+			),
+			array( #3
+				array( 'entity' => 'x23' ),
+				array( 'entity' => 'x24' ),
+				false
+			),
+			array( #4
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+				array( 'labels' => array(
+					'en' => 'foo',
+				) ),
+				false
+			),
+			array( #5
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+				array( 'labels' => array(
+					'de' => 'bar',
+					'en' => 'foo',
+				) ),
+				true
+			),
+			array( #6
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO' ),
+				) ),
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO', 'xyz' ),
+				) ),
+				false
+			),
+		);
+	}
+
+	/**
+	 * @dataProvider provideEquals
+	 */
+	public function testEquals( array $a, array $b, $equals ) {
+		$itemA = $this->getNewFromArray( $a );
+		$itemB = $this->getNewFromArray( $b );
+
+		$this->assertEquals( $equals, $itemA->equals( $itemB ) );
+		$this->assertEquals( $equals, $itemB->equals( $itemA ) );
 	}
 }

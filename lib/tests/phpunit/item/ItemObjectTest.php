@@ -37,6 +37,19 @@ class ItemObjectTest extends EntityObjectTest {
 		return ItemObject::newEmpty();
 	}
 
+	/**
+	 * @see   EntityObjectTest::getNewFromArray
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return \Wikibase\Entity
+	 */
+	protected function getNewFromArray( array $data ) {
+		return ItemObject::newFromArray( $data );
+	}
+
 	public function testConstructor() {
 		$instance = new ItemObject( array() );
 

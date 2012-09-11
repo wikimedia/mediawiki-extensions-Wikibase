@@ -331,4 +331,18 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedOK, $content->userCanEdit() );
 	}
 
+	public static function provideEquals() {
+		return EntityObjectTest::provideEquals();
+	}
+
+	/**
+	 * @dataProvider provideEquals
+	 */
+	public function testEquals( array $a, array $b, $equals ) {
+		$itemA = $this->newFromArray( $a );
+		$itemB = $this->newFromArray( $b );
+
+		$this->assertEquals( $equals, $itemA->equals( $itemB ) );
+		$this->assertEquals( $equals, $itemB->equals( $itemA ) );
+	}
 }

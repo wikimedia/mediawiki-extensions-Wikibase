@@ -152,6 +152,20 @@ interface Entity {
 	public function isEmpty();
 
 	/**
+	 * Returns if the entity is equal to $that.
+	 *
+	 * Two entities are considered equal if
+	 * they have the same type, and the same content.
+	 * If both entities have an ID set, then the IDs must be equal
+	 * for the entities to be considered equal.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean true of $that this equals to $this.
+	 */
+	public function equals( Entity $that );
+
+	/**
 	 * Returns the aliases for the item in the language with the specified code.
 	 *
 	 * @since 0.1
