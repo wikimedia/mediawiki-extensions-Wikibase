@@ -158,6 +158,7 @@ its toolbar */
 }
 
 .wb-ui-labeledittool input {
+	width: 100%;
 	font-family: inherit;
 	font-size: inherit;
 	height: 1.2em;
@@ -192,6 +193,7 @@ its toolbar */
 }
 
 .wb-ui-descriptionedittool input {
+	width: 100%;
 	padding: 0;
 	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
 }
