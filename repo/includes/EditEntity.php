@@ -568,12 +568,9 @@ class EditEntity {
 					. ' OR rev_user_text != ' . $dbw->addQuotes( $user->getName() ),
 			),
 			__METHOD__,
-			array( 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 ) );
-		// Traversable, not countable ;/
-		foreach ( $res as $row ) {
-			return false;
-		}
-		return true;
+			array( 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 )
+		);
+		return $res->current() === false; // return true if query had no match
 	}
 
 	/**
