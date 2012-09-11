@@ -157,6 +157,25 @@ abstract class EntityContent extends \AbstractContent {
 	}
 
 	/**
+	 * @see Content::equals()
+	 */
+	public function equals( \Content $that = null ) {
+		if ( is_null( $that ) ) {
+			return false;
+		}
+
+		if ( $that === $this ) {
+			return true;
+		}
+
+		if ( $that->getModel() !== $this->getModel() ) {
+			return false;
+		}
+
+		return $this->getEntity()->equals( $that->getEntity() );
+	}
+
+	/**
 	 * Returns true if this content is countable as a "real" wiki page, provided
 	 * that it's also in a countable location (e.g. a current revision in the main namespace).
 	 *

@@ -23,7 +23,7 @@ class QueryObject extends EntityObject implements Query {
 	 * @return string
 	 */
 	protected function getIdPrefix() {
-		return 'query'; // TODO: decide on what to use here
+		return 'y'; // TODO: decide on what to use here
 	}
 
 	/**

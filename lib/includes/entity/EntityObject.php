@@ -393,6 +393,119 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
+	 * @see Entity::equals()
+	 *
+	 * Two entities are considered equal if
+	 * they have the same type, and the same content.
+	 * If both entities have an ID set, then the IDs must be equal
+	 * for the entities to be considered equal.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean true of $that this equals to $this.
+	 */
+	public function equals( Entity $that ) {
+		if ( $that === $this ) {
+			return true;
+		}
+
+		if ( get_class( $this ) !== get_class( $that ) ) {
+			return false;
+		}
+
+		$this_id = $this->getId();
+		$that_id = $that->getId();
+
+		if ( $this_id !== null && $that_id !== null ) {
+			if ( $this_id !== $that_id ) {
+				return false;
+			}
+		}
+
+		//@todo: ignore the order of aliases
+		$this_data = $this->toArray();
+		$that_data = $that->toArray();
+		return self::dataEquals( $this_data, $that_data, array( 'entity' ) );
+	}
+
+	/**
+	 * Determines whether two data structures are equal. $a and $b can be
+	 * of any type, but support for objects is limits. Arrays are compared
+	 * recursively. When comparing indexed arrays, the order of element is
+	 * relevant. When comparing associative arrays, the order is irrelevant.
+	 *
+	 * @param $a
+	 * @param $b
+	 * @param $skip array keys to skip
+	 *
+	 * @return bool
+	 */
+	protected static function dataEquals( &$a, &$b, $skip = null ) {
+		if ( is_array( $a ) ) {
+			if ( !is_array( $b ) ) {
+				return false;
+			}
+
+			// check everything that is in $a
+			foreach ( $a as $k => &$v ) {
+				if ( $skip !== null && in_array( $k, $skip ) ) {
+					continue;
+				}
+
+				if ( array_key_exists( $k, $b ) ) {
+					// $k is in $a and in $b
+					$w =& $b[$k];
+
+					if ( !self::dataEquals( $v, $w ) ) {
+						// $k is in both arrays, but the value isn't equal
+						return false;
+					}
+				} else { // $k is in $a but not in $b
+					if ( !( is_array( $v ) && empty( $v ) ) && $v !== null ) {
+						// $k is not in $b and $v is not an empty array or null
+						return false;
+					}
+				}
+			}
+
+			$remaining = array_diff(
+				array_keys( $b ),
+				array_keys( $a )
+			);
+
+			// check everything that is in $b but not in $a
+			foreach ( $remaining as $k ) {
+				if ( $skip !== null && in_array( $k, $skip ) ) {
+					continue;
+				}
+
+				$w =& $b[$k];
+
+				if ( !( is_array( $w ) && empty( $w ) ) && $w !== null ) {
+					// $k is not in $a and $w is not an empty array or null
+					return false;
+				}
+			}
+
+			return true;
+		} else if ( is_array( $b ) ) {
+			return false;
+		} else if ( is_object( $a ) ) {
+			if ( !is_object( $b ) ) {
+				return false;
+			}
+
+			// special handling for some types of objects here
+
+			return self::dataEquals( get_object_vars( $a ), get_object_vars( $b ) );
+		} else if ( is_object( $b ) ) {
+			return false;
+		} else {
+			return $a === $b;
+		}
+	}
+
+	/**
 	 * @see Entity::getUndoDiff
 	 *
 	 * @since 0.1
