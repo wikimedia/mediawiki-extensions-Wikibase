@@ -324,6 +324,8 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	 * @return bool will return false if edit mode is active already.
 	 */
 	startEditing: function() {
+		var startTime = new Date().getTime();
+
 		if( this.isInEditMode() ) {
 			return false;
 		}
@@ -343,6 +345,8 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 			$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
 		}
 
+		// give hint how long this took:
+		wb.log( 'startEditing(): ' + ( ( new Date().getTime() ) - startTime ) / 1000 + 's' );
 		return true;
 	},
 

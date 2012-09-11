@@ -17,6 +17,15 @@ var wikibase = new ( function( mw, $, undefined ) {
 	'use strict';
 
 	/**
+	 * same as mediaWiki.log() but prefixes the log entry with 'wb:'
+	 */
+	this.log = function() {
+		var args = $.makeArray( arguments );
+		args.unshift( 'wb:' );
+		mw.log.apply( mw.log, args );
+	};
+
+	/**
 	 * event triggered after a new wikibase item was created and successfully stored in the database via an API call
 	 * @see wikibase.ui.PropertyEditTool.EditableValue
 	 *
@@ -37,7 +46,7 @@ var wikibase = new ( function( mw, $, undefined ) {
 		}
 
 		window.location = newLocation;
-		// TODO: this is not yet near perfect and a proper workflow hast to be created. The redirect as of now is
+		// TODO: this is not yet near perfect and a proper workflow has to be created. The redirect as of now is
 		//       rather ugly in its presentation to the user.
 	};
 	$( this ).on( 'newItemCreated', onNewItemCreated );
