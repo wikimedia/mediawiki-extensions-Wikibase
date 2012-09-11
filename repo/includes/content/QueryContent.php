@@ -119,9 +119,9 @@ class QueryContent extends EntityContent {
 	 *
 	 * @return array of \DataUpdate
 	 */
-	public function getDeletionUpdates( \Title $title, \ParserOutput $parserOutput = null ) {
+	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
 		return array_merge(
-			parent::getDeletionUpdates( $title, $parserOutput ),
+			parent::getDeletionUpdates( $page, $parserOutput ),
 			array( /* new QueryDeletionUpdate( $this ) */ )
 		);
 	}

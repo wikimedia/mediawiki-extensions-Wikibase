@@ -198,16 +198,16 @@ class ItemContent extends EntityContent {
 	/**
 	 * @see Content::getDeletionUpdates
 	 *
-	 * @param \Title $title
+	 * @param \WikiPage $page
 	 * @param null|\ParserOutput $parserOutput
 	 *
 	 * @since 0.1
 	 *
 	 * @return array of \DataUpdate
 	 */
-	public function getDeletionUpdates( \Title $title, \ParserOutput $parserOutput = null ) {
+	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
 		return array_merge(
-			parent::getDeletionUpdates( $title, $parserOutput ),
+			parent::getDeletionUpdates( $page, $parserOutput ),
 			array( new ItemDeletionUpdate( $this ) )
 		);
 	}
