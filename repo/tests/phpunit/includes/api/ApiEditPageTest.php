@@ -30,100 +30,81 @@ use Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiEditPageTest extends ApiTestCase {
+class ApiEditPageTest extends ApiModifyItemBase {
 
-	protected static $baseOfItemIds = 0;
-	protected static $usepost;
-	protected static $usetoken;
-	protected static $userights;
-	protected static $data;
-	protected static $edittoken;
+	/**
+	 * @group API
+	 */
+	function testEditItemDirectly() {
+		$content = \Wikibase\ItemContent::newEmpty();
+		$content->getItem()->setLabel( "en", "Test" );
+		$status = $content->save( "testing", null, EDIT_NEW );
 
-	function setUp() {
-		parent::setUp();
-		$this->doLogin();
+		$this->assertTrue( $status->isOK(), $status->getMessage() ); // sanity check
 
-		\TestSites::insertIntoDb();
+		$this->login();
+		$token = $this->getItemToken();
 
-		self::$usepost = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
-		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
-		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
+		$content->getItem()->setLabel( "de", "Test" );
+		$data = $content->getItem()->toArray();
+		$text = json_encode( $data );
 
-		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
-			'Apitesteditor',
-			'Api Test Editor',
-			'api_test_editor@example.com',
-			array( 'wbeditor' )
-		);
+		// try to update the item with valid data via the edit action
+		try {
+			$this->doApiRequest(
+				array(
+					'action' => 'edit',
+					'pageid' => $content->getTitle()->getArticleID(),
+					'text' => $text,
+					'token' => $token,
+				)
+			);
+
+			$this->fail( "Updating an items should not be possible via action=edit" );
+		} catch ( \UsageException $ex ) {
+			//ok, pass
+			//print "\n$ex\n";
+		}
+
 	}
 
 	/**
 	 * @group API
 	 */
-	function testEdit() {
-		$data = $this->doApiRequest(
-			array(
-				'action' => 'login',
-				'lgname' => self::$users['wbeditor']->username,
-				'lgpassword' => self::$users['wbeditor']->password
-			),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
+	function testEditTextInItemNamespace() {
+		global $wgContentHandlerUseDB;
 
-		$this->doApiRequest(
-			array(
-				'action' => 'login',
-				'lgtoken' => $data[0]['login']['token'],
-				'lgname' => self::$users['wbeditor']->username,
-				'lgpassword' => self::$users['wbeditor']->password
-			),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
+		$handler = \ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+		$page = $handler->getWikiPageForId( 1234567 );
 
-		$data = $this->doApiRequest(
-			array(
-				'action' => 'query',
-				'titles' => 'ApiEditPageTest_testEdit',
-				'intoken' => 'edit',
-				'prop' => 'info'
-			),
-			null,
-			false,
-			self::$users['sysop']->user
-		);
+		$this->login();
+		$token = $this->getItemToken();
 
-		$pages = array_values( $data[0]['query']['pages'] );
-		$pageinfo = array_pop( $pages );
+		$text = "hallo welt";
 
-		$this->assertEquals(
-			34, strlen( $pageinfo["edittoken"] ),
-			"The length of the token is not 34 chars"
-		);
-		$this->assertRegExp(
-			'/\+\\\\$/', $pageinfo["edittoken"],
-			"The final chars of the token is not '+\\'"
-		);
+		// try to update the item with valid data via the edit action
+		try {
+			$this->doApiRequest(
+				array(
+					'action' => 'edit',
+					'title' => $page->getTitle()->getPrefixedText(),
+					'contentmodel' => CONTENT_MODEL_WIKITEXT,
+					'text' => $text,
+					'token' => $token,
+				)
+			);
 
-		$data = $this->doApiRequest(
-			array(
-				'action' => 'edit',
-				'title' => 'ApiEditPageTest_testEdit',
-				'text' => 'new text',
-				'token' => $pageinfo["edittoken"]
-			),
-			null,
-			false,
-			self::$users['sysop']->user
-		);
+			$this->fail( "Saving wikitext to the item namespace should not be possible." );
+		} catch ( \UsageException $ex ) {
+			//ok, pass
+			//print "\n$ex\n";
+		} catch ( \MWException $ex ) {
+			if ( !$wgContentHandlerUseDB ) {
+				$this->markTestSkipped( 'With $wgContentHandlerUseDB, attempts to use a non-default content modfel will always fail.' );
+			} else {
+				throw $ex;
+			}
+		}
 
-		$this->assertArrayHasKey( 'edit', $data[0], "Check whatever" );
-		$this->assertArrayHasKey( 'result', $data[0]['edit'], "Check result" );
-		$this->assertEquals( 'Success', $data[0]['edit']['result'], "Check success report" );
-
-		return $data;
 	}
 }
