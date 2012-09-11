@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//990\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-11T10:49:33Z",
+      "side": 1,
+      "message": "Urgh.. /me slaps head\nThere are also two other ones.",
+      "parentUuid": "AAAASn//9/c\u003d",
+      "revId": "68fdafc19b6b3228659add2de22e1da77f752ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//9/g\u003d",
         "filename": "repo/includes/api/ApiSetItem.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-09-10T13:56:45Z",
       "side": 1,
       "message": "typo: supplied",
+      "revId": "68fdafc19b6b3228659add2de22e1da77f752ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9kM\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-11T10:49:33Z",
+      "side": 1,
+      "message": "There are two of them.. :)",
+      "parentUuid": "AAAASn//9/g\u003d",
       "revId": "68fdafc19b6b3228659add2de22e1da77f752ee6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -65,6 +101,24 @@
       "side": 1,
       "message": "I think we should not just comment out failing parts in the tests. Leave it failing, then the chance is higher that someone picks it up and fixes it. Or do you know exactly why it is failing? Is it a bug in the test or is it a bg in the code? That\u0027s the question.. ^^",
       "parentUuid": "AAAASn//+BE\u003d",
+      "revId": "68fdafc19b6b3228659add2de22e1da77f752ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9kI\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetSiteLinkTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-11T10:49:33Z",
+      "side": 1,
+      "message": "Seems like this passes now. Its not really part of this patchset, so I will not go into further details.",
+      "parentUuid": "AAAASn//9k8\u003d",
       "revId": "68fdafc19b6b3228659add2de22e1da77f752ee6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
