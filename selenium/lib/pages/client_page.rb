@@ -12,11 +12,11 @@ class ClientPage < RubySelenium
   include PageObject
   page_url WIKI_CLIENT_URL
 
-  #
   text_field(:clientSearchInput, :id => "searchInput")
   button(:clientSearchSubmit, :id => "searchGoButton")
   paragraph(:clientSearchNoresult, :class => "mw-search-nonefound")
   link(:clientCreateArticleLink, :xpath => "//p[@class='mw-search-createlink']/b/a")
+  link(:clientEditLinksLink, :xpath => "//li[@class='wbc-editpage']/a")
   text_area(:clientCreateArticleInput, :id => "wpTextbox1")
   button(:clientCreateArticleSubmit, :id => "wpSave")
   span(:clientArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
@@ -31,7 +31,6 @@ class ClientPage < RubySelenium
   link(:interwiki_fi, :xpath => "//li[@class='interwiki-fi']/a")
   link(:interwiki_fr, :xpath => "//li[@class='interwiki-fr']/a")
   link(:interwiki_xxx, :xpath => "//li[contains(@class, 'interwiki')]/a")
-
   def create_article(title, text)
     self.clientSearchInput= title
     clientSearchSubmit
