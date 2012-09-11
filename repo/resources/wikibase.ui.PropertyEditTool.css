@@ -64,7 +64,13 @@
 	display: block; /* need to force block explicitly to achieve 100% width */
 }
 
-/* disabled input element */
+/* input elements */
+.wb-ui-propertyedittool-editablevalueinterface input {
+	border: 1px solid #AAA;
+	border-radius: 2px;
+}
+
+/* disabled input elements */
 .wb-ui-propertyedittool-editablevalueinterface-disabled input {
 	background-color: #F0F0F0;
 }
