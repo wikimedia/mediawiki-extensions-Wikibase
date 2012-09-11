@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//9fw\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-11T16:53:22Z",
+      "side": 1,
+      "message": "youReallyInsistOnCamelCaseEvenForLocalStuff? soMuchYouGiveAMinusOne?",
+      "parentUuid": "AAAASn//9hc\u003d",
+      "revId": "462af277bd0439813b49bf5ef5d606e117429f03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//9hY\u003d",
         "filename": "repo/includes/content/EntityHandler.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-09-11T15:54:11Z",
       "side": 1,
       "message": "why put this in a var? Not like the below line would get anything near complex otherwise...",
+      "revId": "462af277bd0439813b49bf5ef5d606e117429f03",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9f0\u003d",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-11T16:53:22Z",
+      "side": 1,
+      "message": "for easier debugging.",
+      "parentUuid": "AAAASn//9hY\u003d",
       "revId": "462af277bd0439813b49bf5ef5d606e117429f03",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
