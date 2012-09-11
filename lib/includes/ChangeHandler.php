@@ -45,6 +45,8 @@ class ChangeHandler {
 		wfRunHooks( 'WikibasePollBeforeHandle', array( $changes ) );
 
 		foreach ( $changes as /* WikibaseChange */ $change ) {
+			print( "Processing change:\n" );
+			print_r( $change );
 			wfRunHooks( 'WikibasePollHandle', array( $change ) );
 		}
 
