@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//9ho\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-11T15:50:20Z",
+      "side": 1,
+      "message": "missing space after if",
+      "revId": "6b6e14bb05c3b24636f5a2e65ee0489f8d12eaf5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
