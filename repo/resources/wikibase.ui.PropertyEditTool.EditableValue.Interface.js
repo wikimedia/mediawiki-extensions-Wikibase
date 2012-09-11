@@ -620,9 +620,12 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 	onChange: null
 } );
 
-$.extend( // add tooltip functionality to EditableValue
-	wb.ui.PropertyEditTool.EditableValue.Interface.prototype,
-	wb.ui.Tooltip.ext
-);
+// add tooltip functionality to EditableValue:
+wb.ui.Tooltip.Extension.useWith( wb.ui.PropertyEditTool.EditableValue.Interface, {
+	// overwrite required functions:
+	_getTooltipParent: function() {
+		return this._subject;
+	}
+} );
 
 } )( mediaWiki, wikibase, jQuery );
