@@ -188,28 +188,31 @@ class ApiSetItem extends ApiModifyItem {
 						}
 					}
 
-					$langSet = array();
+					$setAliases = array();
+					$addAliases = array();
+					$remAliases = array();
 					foreach ( $aliases as $langCode => $args ) {
-						$setAliases = array();
 						foreach ( $args as $arg ) {
 							$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
 							if ( array_key_exists( 'remove', $arg ) ) {
-								$itemContent->getItem()->removeAliases( $arg['language'], array( Utils::squashToNFC( $arg['value'] ) ) );
+								$remAliases[$arg['language']][] = Utils::squashToNFC( $arg['value'] );
 							}
 							elseif ( array_key_exists( 'add', $arg ) ) {
-								$itemContent->getItem()->addAliases( $arg['language'], array( Utils::squashToNFC( $arg['value'] ) ) );
+								$addAliases[$arg['language']][] = Utils::squashToNFC( $arg['value'] );
 							}
 							else {
 								$setAliases[$arg['language']][] = Utils::squashToNFC( $arg['value'] );
 							}
 						}
-						foreach ( $setAliases as $langCode => $strings ) {
-							if ( isset( $langSet[$langCode] ) ) {
-								$this->dieUsage( $this->msg( 'wikibase-api-inconsistent-values' )->text(), 'inconsistent-values' );
-							}
-							$langSet[$langCode] = true;
+					}
+					foreach ( $setAliases as $langCode => $strings ) {
 							$itemContent->getItem()->setAliases( $langCode, $strings );
-						}
+					}
+					foreach ( $remAliases as $langCode => $strings ) {
+							$itemContent->getItem()->removeAliases( $langCode, $strings );
+					}
+					foreach ( $addAliases as $langCode => $strings ) {
+							$itemContent->getItem()->addAliases( $langCode, $strings );
 					}
 
 					if ( !$status->isOk() ) {
