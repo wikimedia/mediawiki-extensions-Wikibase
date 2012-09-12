@@ -168,12 +168,14 @@ class SiteObject extends ORMRow implements Site {
 	 * @param string $fullUrl
 	 *
 	 * @since 1.20
+	 *
+	 * @throws MWException
 	 */
 	public function setLinkPath( $fullUrl ) {
 		$type = $this->getLinkPathType();
 
 		if ( $type === false ) {
-			throw new MWException( "This SiteObject does not support link pathes." );
+			throw new MWException( "This SiteObject does not support link paths." );
 		}
 
 		$this->setPath( $type, $fullUrl );
@@ -201,7 +203,7 @@ class SiteObject extends ORMRow implements Site {
 	 * @since 1.20
 	 * @see Site::getLinkPathType
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	public function getLinkPathType() {
 		return Site::PATH_LINK;
