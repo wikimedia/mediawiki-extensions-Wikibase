@@ -690,7 +690,7 @@ final class RepoHooks {
 
 		// Go on and construct the link
 		$idHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
-			. wfMessage( 'wikibase-itemlink-id-wrapper', 'q' . $item->getId() )->inContentLanguage()->escaped()
+			. wfMessage( 'wikibase-itemlink-id-wrapper', $target->getText() )->inContentLanguage()->escaped()
 			. Html::closeElement( 'span' );
 
 		$labelHtml = Html::openElement( 'span', array( 'class' => 'wb-itemlink-label', 'lang' => $labelLang->getCode(), 'dir' => $labelLang->getDir() ) )
