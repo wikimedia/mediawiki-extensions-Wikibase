@@ -109,10 +109,25 @@ final class ClientHooks {
 				$title = null;
 
 				if ( $siteLink !== null ) {
+					// check whether connecting sitelink has changed
+					// if so, purge both pages: the new and the old one and return
+					$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
+					if ( is_array( $siteLinkChangeOperations ) && array_key_exists( $siteGlobalId, $siteLinkChangeOperations ) ) {
+						$oldTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getOldValue() );
+						$newTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getNewValue() );
+						if ( !is_null( $oldTitle ) && $oldTitle->getArticleID() !== 0 ) {
+							$oldTitle->invalidateCache();
+						}
+						if ( !is_null( $newTitle ) && $newTitle->getArticleID() !== 0 ) {
+							$newTitle->invalidateCache();
+						}
+						return true;
+					}
 					$title = \Title::newFromText( $siteLink->getPage() );
 				} else {
+					// cache should be invalidated when the sitelink got removed
 					$removedSiteLinks = $change->getDiff()->getSiteLinkDiff()->getRemovedValues();
-					if( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
+					if ( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
 						$title = \Title::newFromText( $removedSiteLinks[ $siteGlobalId ] );
 					}
 				}
