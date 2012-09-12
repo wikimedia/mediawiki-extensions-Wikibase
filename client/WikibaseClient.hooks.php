@@ -31,18 +31,18 @@ final class ClientHooks {
 			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
 
 			$updater->addExtensionTable(
-				'wbc_entity_cache',
-				__DIR__ . '/sql/WikibaseCache' . $extension
+					'wbc_entity_cache',
+					__DIR__ . '/sql/WikibaseCache' . $extension
 			);
 
 			$updater->addExtensionTable(
-				'wbc_item_usage',
-				__DIR__ . '/sql/KillLocalItems.sql'
+					'wbc_item_usage',
+					__DIR__ . '/sql/KillLocalItems.sql'
 			);
 
 			$updater->addExtensionTable(
-				'wbc_item_usage',
-				__DIR__ . '/sql/WikibaseClient' . $extension
+					'wbc_item_usage',
+					__DIR__ . '/sql/WikibaseClient' . $extension
 			);
 		}
 		else {
@@ -65,9 +65,9 @@ final class ClientHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
-			'includes/CachedEntity',
-			'includes/EntityCache',
-			'includes/EntityCacheUpdater',
+				'includes/CachedEntity',
+				'includes/EntityCache',
+				'includes/EntityCacheUpdater',
 		);
 
 		foreach ( $testFiles as $file ) {
@@ -109,10 +109,25 @@ final class ClientHooks {
 				$title = null;
 
 				if ( $siteLink !== null ) {
+					// check whether connecting sitelink has changed
+					// if so, purge both pages: the new and the old one and return
+					$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
+					if ( is_array( $siteLinkChangeOperations ) && array_key_exists( $siteGlobalId, $siteLinkChangeOperations ) ) {
+						$oldTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getOldValue() );
+						$newTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getNewValue() );
+						if ( !is_null( $oldTitle ) && $oldTitle->getArticleID() !== 0 ) {
+							$oldTitle->invalidateCache();
+						}
+						if ( !is_null( $newTitle ) && $newTitle->getArticleID() !== 0 ) {
+							$newTitle->invalidateCache();
+						}
+						return true;
+					}
 					$title = \Title::newFromText( $siteLink->getPage() );
 				} else {
+					// cache should be invalidated when the sitelink got removed
 					$removedSiteLinks = $change->getDiff()->getSiteLinkDiff()->getRemovedValues();
-					if( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
+					if ( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
 						$title = \Title::newFromText( $removedSiteLinks[ $siteGlobalId ] );
 					}
 				}
@@ -204,20 +219,20 @@ final class ClientHooks {
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
 		$settings = array_merge(
-			$settings,
-			array(
-				'namespaces' => array( NS_MAIN ),
-				'source' => array( 'dir' => __DIR__ . '/tests' ),
-				'editURL' => '',
-				// temporary hack to provide default settings
-				'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
-				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
-				'sort' => 'none',
-				'sortPrepend' => false,
-				'alwaysSort' => false,
-				'siteGlobalID' => 'enwiki',
-				'siteGroup' => 'wiki'
-			)
+				$settings,
+				array(
+						'namespaces' => array( NS_MAIN ),
+						'source' => array( 'dir' => __DIR__ . '/tests' ),
+						'editURL' => '',
+						// temporary hack to provide default settings
+						'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
+						'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
+						'sort' => 'none',
+						'sortPrepend' => false,
+						'alwaysSort' => false,
+						'siteGlobalID' => 'enwiki',
+						'siteGroup' => 'wiki'
+				)
 		);
 
 		return true;
@@ -269,10 +284,10 @@ final class ClientHooks {
 			// links to the special page
 			// TODO: know what the repo namespace is
 			$template->data['language_urls'][] = array(
-				'href' => rtrim( $editUrl, "/" ) . "/Data:Q" . $itemId . '?uselang=' . $wgLanguageCode,
-				'text' => wfMessage( 'wbc-editlinks' )->text(),
-				'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
-				'class' => 'wbc-editpage',
+					'href' => rtrim( $editUrl, "/" ) . "/Data:Q" . $itemId . '?uselang=' . $wgLanguageCode,
+					'text' => wfMessage( 'wbc-editlinks' )->text(),
+					'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
+					'class' => 'wbc-editpage',
 			);
 		}
 

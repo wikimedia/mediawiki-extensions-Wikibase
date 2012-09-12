@@ -54,9 +54,6 @@ describe "Check functionality of client-repo connection" do
         page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1
       end
     end
-  end
-
-  context "client-repo checking for interwikilinks on client" do
     it "should check if interwikilinks are shown correctly on client" do
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title)
@@ -68,12 +65,8 @@ describe "Check functionality of client-repo connection" do
         page.interwiki_en?.should be_false
       end
     end
-  end
-
-  context "client-repo clicking on interwikilinks on client" do
-    it "should check if interwikilinks lead to correct website" do
+    it "should check if interwikilinks lead to correct websites" do
       on_page(ClientPage) do |page|
-        page.navigate_to_article(article_title)
         page.interwiki_de
         page.clientArticleTitle.should == item_sitelinks[0][1]
         page.navigate_to_article(article_title)
@@ -89,7 +82,7 @@ describe "Check functionality of client-repo connection" do
     end
   end
 
-  context "client-repo adding some other sitelinks" do
+  context "client-repo adding some more sitelinks" do
     it "should add some more sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -98,10 +91,61 @@ describe "Check functionality of client-repo connection" do
         page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1 + item_sitelinks_additional.count
       end
     end
+    it "should check if additional interwikilinks are shown correctly on client" do
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title)
+        page.count_interwiki_links.should == 5
+        page.interwiki_de?.should be_true
+        page.interwiki_it?.should be_true
+        page.interwiki_fi?.should be_true
+        page.interwiki_hu?.should be_true
+        page.interwiki_fr?.should be_true
+        page.interwiki_en?.should be_false
+      end
+    end
   end
 
-  context "client-repo checking for interwikilinks on client" do
-    it "should check if additional interwikilinks are shown correctly on client" do
+  context "client-repo changing connecting sitelink" do
+    it "should change the connecting sitelink" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_sitelinks_to_load
+        page.englishEditSitelinkLink
+        page.pageInputField = "Palermo"
+        ajax_wait
+        page.wait_until do
+          page.editSitelinkAutocompleteList_element.visible?
+        end
+        page.saveSitelinkLink
+        ajax_wait
+        page.wait_for_api_callback
+      end
+    end
+    it "should check that no sitelinks are displayed anymore on client" do
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title)
+        page.interwiki_xxx?.should be_false
+      end
+    end
+  end
+
+  context "client-repo changing back connecting sitelink" do
+    it "should change the connecting sitelink back to origin" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_sitelinks_to_load
+        page.englishEditSitelinkLink
+        page.pageInputField = item_sitelink_en[0][1]
+        ajax_wait
+        page.wait_until do
+          page.editSitelinkAutocompleteList_element.visible?
+        end
+        page.saveSitelinkLink
+        ajax_wait
+        page.wait_for_api_callback
+      end
+    end
+    it "should check that sitelinks are displayed again on client" do
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title)
         page.count_interwiki_links.should == 5
