@@ -67,6 +67,7 @@ class ItemPage < RubySelenium
   link(:cancelSitelinkLink, :text => "cancel")
   link(:removeSitelinkLink, :xpath => "//td[contains(@class, 'wb-ui-propertyedittool-editablevalue-toolbarparent')]/div/div/div/a[2]")
   link(:editSitelinkLink, :xpath => "//td[contains(@class, 'wb-ui-propertyedittool-editablevalue-toolbarparent')]/div/div/div/a")
+  link(:englishEditSitelinkLink, :xpath => "//tr[contains(@class, 'wb-sitelinks-en')]/td[4]/div/div/div/a")
   link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
   link(:germanSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-de')]/a")
   link(:englishSitelink, :xpath => "//td[contains(@class, 'wb-sitelinks-link-en')]/a")
