@@ -29,6 +29,8 @@
  */
 class SiteObject extends ORMRow implements Site {
 
+	const PATH_LINK = 'link';
+
 	/**
 	 * Holds the local ids for this site.
 	 * You can obtain them via @see getLocalIds
@@ -192,19 +194,20 @@ class SiteObject extends ORMRow implements Site {
 	}
 
 	/**
+	 * @see Site::getLinkPathType
+	 *
 	 * Returns the main path type, that is the type of the path that should generally be used to construct links
 	 * to the target site.
 	 *
-	 * This default implementation returns Site::PATH_LINK as the default path type. Subclasses can override this
+	 * This default implementation returns SiteObject::PATH_LINK as the default path type. Subclasses can override this
 	 * to define a different default path type, or return false to disable site links.
 	 *
 	 * @since 1.20
-	 * @see Site::getLinkPathType
 	 *
 	 * @return string
 	 */
 	public function getLinkPathType() {
-		return Site::PATH_LINK;
+		return self::PATH_LINK;
 	}
 
 	/**

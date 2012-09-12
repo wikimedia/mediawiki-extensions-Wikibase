@@ -16,7 +16,6 @@
 class MediaWikiSite extends SiteObject {
 
 	const PATH_FILE = 'file_path';
-
 	const PATH_PAGE = 'page_path';
 
 	/**

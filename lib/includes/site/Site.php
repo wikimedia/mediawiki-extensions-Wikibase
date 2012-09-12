@@ -38,8 +38,6 @@ interface Site {
 
 	const SOURCE_LOCAL = 'local';
 
-	const PATH_LINK = 'link';
-
 	/**
 	 * Returns the global site identifier (ie enwiktionary).
 	 *
