@@ -57,6 +57,7 @@ class PollForChanges extends \Maintenance {
 		$this->mDescription =
 			'Maintenance script that polls for Wikibase changes in the shared wb_changes table
 			and triggers a hook to invoke the code that needs to handle these changes.';
+		$this->addOption( 'verbose', "Print change objects to be processed" );
 
 		parent::__construct();
 	}
@@ -110,7 +111,13 @@ class PollForChanges extends \Maintenance {
 			$changes = iterator_to_array( $changes );
 
 			try {
-				ChangeHandler::singleton()->handleChanges( $changes );
+				foreach ( $changes as $change ) {
+					if ( $this->getOption( 'verbose' ) ) {
+						print "Processing change:\n";
+						print_r( $change );
+					}
+					ChangeHandler::singleton()->handleChanges( array( $change ) );
+				}
 			}
 			catch ( \Exception $ex ) {
 				$ids = array_map( function( Change $change ) { return $change->getId(); }, $changes );
