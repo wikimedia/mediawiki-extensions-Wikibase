@@ -174,26 +174,6 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * Whatever would be more appropriate during a normalization of titles during lookup.
-	 * FIXME: this is extremely badly named and is probably incorrectly placed
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $str
-	 * @return string
-	 */
-	public static function normalize( $str ) {
-
-		// ugly but works, should probably do more normalization
-		// should (?) use $wgLegalTitleChars and $wgDisableTitleConversion somehow
-		$str = preg_replace( '/^[\s_]+/', '', $str );
-		$str = preg_replace( '/[\s_]+$/', '', $str );
-		$str = preg_replace( '/[\s_]+/', ' ', $str );
-
-		return $str;
-	}
-
-	/**
 	 * @see Entity::getType
 	 *
 	 * @since 0.1
