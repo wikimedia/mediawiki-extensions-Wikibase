@@ -1,0 +1,9 @@
+Change-Id: I1626d04767ad8a8fb0d6ed80388a9f43e0a68e18
+Code-Review+2: Aude <aude.wiki@gmail.com>
+Verified+1: Aude <aude.wiki@gmail.com>
+Code-Review+1: Daniel Werner <daniel.werner@wikimedia.de>
+Submitted-by: Aude <aude.wiki@gmail.com>
+Submitted-at: Wed, 12 Sep 2012 04:52:22 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/23421
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
