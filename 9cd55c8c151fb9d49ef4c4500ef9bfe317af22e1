@@ -16,6 +16,24 @@
       "revId": "9cd55c8c151fb9d49ef4c4500ef9bfe317af22e1",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9M4\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-12T11:05:50Z",
+      "side": 1,
+      "message": "Agreed that dumping the whole object is not ideal - one can easily construct a one line summary with the relevant data, which should be more then sufficient in most cases, while dumping the whole thing will make you lose oversight.\n\nThat not every change will cause an update is an unrelated item, so should not be taken care of here.\n\nUse self::msg for outputting messages, as done elsewhere. You could add a second argument to this method indicating the verbosity level of the message, and then have the logic to figure out if it should be output in the method (this is cleaner and enables you to for instance output non-verbose and log verbose at the same time).",
+      "parentUuid": "AAAASn//9N0\u003d",
+      "revId": "9cd55c8c151fb9d49ef4c4500ef9bfe317af22e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
