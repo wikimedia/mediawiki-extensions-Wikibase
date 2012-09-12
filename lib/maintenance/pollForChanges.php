@@ -57,6 +57,7 @@ class PollForChanges extends \Maintenance {
 		$this->mDescription =
 			'Maintenance script that polls for Wikibase changes in the shared wb_changes table
 			and triggers a hook to invoke the code that needs to handle these changes.';
+		$this->addOption( 'verbose', "Print change objects to be processed" );
 
 		parent::__construct();
 	}
@@ -110,7 +111,18 @@ class PollForChanges extends \Maintenance {
 			$changes = iterator_to_array( $changes );
 
 			try {
-				ChangeHandler::singleton()->handleChanges( $changes );
+				if ( $this->getOption( 'verbose' ) ) {
+					foreach ( $changes as $change ) {
+							$fields = $change->getFields();
+							preg_match( '/wikibase-(item|[^~-]+)[-~](.+)$/', $fields[ 'type' ], $matches );
+							$type = ucfirst( $matches[ 2 ] ); // This is the verb (like "update" or "add")
+							$object = $matches[ 1 ]; // This is the object (like "item" or "property").
+							self::msg( 'Processing change: '. $type . ' for '. $object . ' ' .$fields[ 'id' ] );
+						}
+						ChangeHandler::singleton()->handleChanges( array( $change ) );
+				} else {
+					ChangeHandler::singleton()->handleChanges( $changes );
+				}
 			}
 			catch ( \Exception $ex ) {
 				$ids = array_map( function( Change $change ) { return $change->getId(); }, $changes );
