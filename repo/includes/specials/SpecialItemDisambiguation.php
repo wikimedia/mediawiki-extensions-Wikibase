@@ -46,6 +46,8 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		}
 		$itemContents = array();
 
+		$this->switchForm( $language, $label );
+
 		// Create an item view
 		if ( isset( $language ) && isset( $label ) ) {
 			$itemContents = \Wikibase\ItemHandler::singleton()->getFromLabel( $language, $label );
@@ -61,7 +63,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 				$this->displayDisambiguationPage( $itemContents, $language );
 			}
 		}
-		$this->switchForm( $language, $label );
 	}
 
 	/**
