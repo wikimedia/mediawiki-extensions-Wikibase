@@ -212,6 +212,12 @@ wb.ui.Toolbar.Label.prototype = {
 	beforeEnable: null
 };
 
-$.extend( wb.ui.Toolbar.Label.prototype, wb.ui.Tooltip.ext );
+// add tooltip functionality to EditableValue:
+wb.ui.Tooltip.Extension.useWith( wb.ui.Toolbar.Label, {
+	// overwrite required functions:
+	_getTooltipParent: function() {
+		return this._elem;
+	}
+} );
 
 } )( mediaWiki, wikibase, jQuery );

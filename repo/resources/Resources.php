@@ -101,6 +101,7 @@ return call_user_func( function() {
 				'wikibase.ui.js',
 				'wikibase.ui.Base.js',
 				'wikibase.ui.Tooltip.js',
+				'wikibase.ui.Tooltip.Extension.js',
 				'wikibase.ui.Toolbar.js',
 				'wikibase.ui.Toolbar.Group.js',
 				'wikibase.ui.Toolbar.Label.js',
