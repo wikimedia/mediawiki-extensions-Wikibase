@@ -28,6 +28,13 @@
 				// resize menu height to height of MAX_ITEMS
 				var menu = this.data('autocomplete').menu.element;
 				menu.css( 'minWidth', 'auto' );
+
+				// to display rtl and ltr correctly
+				// sometimes a rtl wiki can have ltr page names, etc.
+				menu.children().attr({
+					'dir' : 'auto'
+				});
+
 				if ( menu.children().length > MAX_ITEMS ) {
 					var fixedHeight = 0;
 					for ( var i = 0; i < MAX_ITEMS ; i++ ) {
