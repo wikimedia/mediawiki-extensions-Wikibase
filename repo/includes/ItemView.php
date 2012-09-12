@@ -71,7 +71,9 @@ class ItemView extends \ContextSource {
 			'div',
 			array(
 				'id' => 'wb-item-'.$itemId,
-				'class' => 'wb-item'
+				'class' => 'wb-item',
+				'lang' => $lang->getCode(),
+				'dir' => $lang->getDir()
 			)
 		);
 
