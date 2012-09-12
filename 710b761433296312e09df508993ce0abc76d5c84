@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//9J4\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-12T14:05:31Z",
+      "side": 1,
+      "message": "looks better, but how about put $this-\u003egetOption( \u0027verbose\u0027 ) above the foreach?  \nif verbose is not set, then no need to pass all the changes through foreach here.",
+      "revId": "710b761433296312e09df508993ce0abc76d5c84",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
