@@ -43,6 +43,7 @@ return call_user_func( function() {
 		'wikibase.utilities' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
+				'wikibase.utilities/wikibase.utilities.eventRelatedExtensions.js'
 			),
 			'dependencies' => array(
 				'wikibase'
