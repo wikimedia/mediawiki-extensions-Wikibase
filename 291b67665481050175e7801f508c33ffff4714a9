@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//9IM\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-12T16:34:35Z",
+      "side": 1,
+      "message": "I don\u0027t like that now we actually have different behaviour depending on if verbose is set or not. You could achieve similar verboseness by just displaying all changes being handled. You could then pass a message callback to the ChangeHandler to output something for every change (or whenever it can output something, for all the poll script knows it does some kind of batch stuff and does not actually have individual change handling points). Or you could change the behaviour explicitly by setting the poll batch size to 1.\n\nIn any case, this does not cause immediate issues and does give us the more verbose output we want, so this can be addressed later.",
+      "revId": "291b67665481050175e7801f508c33ffff4714a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
