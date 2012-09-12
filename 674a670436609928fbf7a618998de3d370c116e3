@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//9ME\u003d",
+        "filename": "lib/includes/ObjectComparer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-12T12:06:42Z",
+      "side": 1,
+      "message": "Feel free to fix in follow up.\n\nDon\u0027t like StructureComparer, this compares values, not the structure.",
+      "parentUuid": "AAAASn//9Mc\u003d",
+      "revId": "674a670436609928fbf7a618998de3d370c116e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//9Mk\u003d",
         "filename": "lib/includes/ObjectComparer.php",
         "patchSetId": 1
