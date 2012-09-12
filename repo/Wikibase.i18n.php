@@ -87,6 +87,7 @@ $messages['en'] = array(
 	'wikibase-error-relational-save-failed' => 'Could not store item identity in the database.',
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
 
+	'wikibase-language-id-wrapper' => ' [$1]',
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
 	'wikibase-itemlink-title' => '$1 | $2',
@@ -300,7 +301,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;
 * $3 is the title of the conflicting item.",
-	'wikibase-itemlink' => 'used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
+	'wikibase-language-id-wrapper' => 'Wrap a language link for an item, that is a link with an added "uselang" argument. This is only for making them visually different.
+* $1 is the link',
+	'wikibase-itemlink' => 'Used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
 	'wikibase-itemlink-id-wrapper' => 'Used to wrap the items id for a link to an item in parentheses or similar.',
 	'wikibase-itemlink-title' => 'Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
 	'special-itembytitle' => 'The item is identified through use of the site and title, but the lookup failed and further qualification must be done. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
