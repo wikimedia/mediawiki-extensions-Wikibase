@@ -16,6 +16,24 @@
       "revId": "fa1a8e4cd0511440adb9778056e54b21f81688df",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9Lw\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-12T12:26:40Z",
+      "side": 1,
+      "message": "It happens. e.g. when you change the connecting sitelink.\nFor example: create article \"Jimi Hendrix\" on client. Create item \"Jimi Hendrix\" with enwiki sitelink to \"Jimi Hendrix\" on wikipedia. Then change the sitelink to something else. Now $title-\u003egetArticleID() \u003d\u003d 0.",
+      "parentUuid": "AAAASn//9MU\u003d",
+      "revId": "fa1a8e4cd0511440adb9778056e54b21f81688df",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
