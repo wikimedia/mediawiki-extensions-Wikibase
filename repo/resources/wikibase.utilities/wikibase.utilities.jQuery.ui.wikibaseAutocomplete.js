@@ -28,6 +28,14 @@
 				// resize menu height to height of MAX_ITEMS
 				var menu = this.data('autocomplete').menu.element;
 				menu.css( 'minWidth', 'auto' );
+
+				// to display rtl and ltr correctly
+				menu.children().each( function() {
+					$( this ).attr({
+						'dir' : 'auto'
+					});
+				});
+
 				if ( menu.children().length > MAX_ITEMS ) {
 					var fixedHeight = 0;
 					for ( var i = 0; i < MAX_ITEMS ; i++ ) {
