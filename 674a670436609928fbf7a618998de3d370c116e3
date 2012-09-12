@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//9Mc\u003d",
+        "filename": "lib/includes/ObjectComparer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-12T11:59:08Z",
+      "side": 1,
+      "message": "Hm, objects are not really handled (at least not well). How about ArrayComparer? StructureComparer? RecursiveComparer?",
+      "revId": "674a670436609928fbf7a618998de3d370c116e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9Mk\u003d",
+        "filename": "lib/includes/ObjectComparer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-12T11:59:08Z",
+      "side": 1,
+      "message": "Yes, intentional for our use case. Passing it recursively would mean ignoring the same keys on all levels, which may not do what we wanted. \n\n$skip could be changed to contain an associative array that maps the key to true for skipping and to an array  for recursive processing. Seems to be overkill to me, though.\n\nMaybe it would be good to just remove $skip for the general case, and find another way to ignore the \u0027entity\u0027 keys in the EntityObject::equals use case. $skip was an ugly hack in EntityObject, and it\u0027s even worse here.",
+      "revId": "674a670436609928fbf7a618998de3d370c116e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//9Mg\u003d",
+        "filename": "lib/includes/ObjectComparer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-12T11:59:08Z",
+      "side": 1,
+      "message": "I didn\u0027t check, but I think all code pathes except the one for objects are tested by EntityObjectTest::testEquals.",
+      "revId": "674a670436609928fbf7a618998de3d370c116e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
