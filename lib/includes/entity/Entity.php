@@ -14,7 +14,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Entity {
+interface Entity extends Comparable {
 
 	/**
 	 * Get an array representing the Entity.
@@ -163,7 +163,7 @@ interface Entity {
 	 *
 	 * @return boolean true of $that this equals to $this.
 	 */
-	public function equals( Entity $that );
+	//public function equals( Entity $that );
 
 	/**
 	 * Returns the aliases for the item in the language with the specified code.
