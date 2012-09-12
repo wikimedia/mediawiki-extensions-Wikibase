@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//9N0\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-12T10:13:33Z",
+      "side": 1,
+      "message": "dumping the whole object seems a bit excessive and not every change will result in an update in some particular client.\n\nalso, there is $this-\u003eoutput() method for maintenance scripts",
+      "revId": "9cd55c8c151fb9d49ef4c4500ef9bfe317af22e1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
