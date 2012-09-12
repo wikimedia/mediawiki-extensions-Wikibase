@@ -39,7 +39,7 @@ var // the following are a couple of var definitions used by the tests beyond
 		else if( constructor === null ) {
 			// constructor omitted, check for right param mapping:
 			c =      wb.utilities.inherit( base, members );
-			var c2 = wb.utilities.inherit( base, function() {}, members );
+			var c2 = wb.utilities.inherit( base, c.prototype.constructor, members );
 
 			assert.deepEqual(
 				c.prototype,
@@ -73,9 +73,13 @@ var // the following are a couple of var definitions used by the tests beyond
 			);
 		}
 
+		var proto = $.extend( {}, c.prototype );
+		if( members === null || !members.hasOwnProperty( 'constructor' ) ) {
+			delete( proto.constructor ); // constructor is an extra thing, set by inherit()
+		}
 		if( members !== null ) {
 			assert.deepEqual(
-				c.prototype,
+				proto,
 				( members !== null ? members : {} ),
 				'Prototype of returned constructor has all extension properties set'
 			);
