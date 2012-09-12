@@ -110,9 +110,18 @@ final class ClientHooks {
 
 				if ( $siteLink !== null ) {
 					$title = \Title::newFromText( $siteLink->getPage() );
+
+					if ( !is_null( $title ) && $title->getArticleID() === 0 ) {
+						// cache should be invalidated when the sitelink got changed
+						$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
+						if ( is_array( $siteLinkChangeOperations ) && array_key_exists( $siteGlobalId, $siteLinkChangeOperations ) ) {
+							$title = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getOldValue() );
+						}
+					}
 				} else {
+					// cache should be invalidated when the sitelink got removed
 					$removedSiteLinks = $change->getDiff()->getSiteLinkDiff()->getRemovedValues();
-					if( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
+					if ( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
 						$title = \Title::newFromText( $removedSiteLinks[ $siteGlobalId ] );
 					}
 				}
