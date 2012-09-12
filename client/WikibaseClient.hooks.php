@@ -99,21 +99,26 @@ final class ClientHooks {
 
 			// The following code is a temporary hack to invalidate the cache.
 			// TODO: create cache invalidater that works with all clients for this cluster
-
 			if ( $mainType == Item::ENTITY_TYPE ) {
 				/**
 				 * @var Item $item
 				 */
 				$item = $change->getEntity();
-
-				$siteLink = $item->getSiteLink( Settings::get( 'siteGlobalID' ) );
+				$siteGlobalId = Settings::get( 'siteGlobalID' );
+				$siteLink = $item->getSiteLink( $siteGlobalId );
+				$title = null;
 
 				if ( $siteLink !== null ) {
 					$title = \Title::newFromText( $siteLink->getPage() );
-
-					if ( !is_null( $title ) && $title->getArticleID() !== 0 ) {
-						$title->invalidateCache();
+				} else {
+					$removedSiteLinks = $change->getDiff()->getSiteLinkDiff()->getRemovedValues();
+					if( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
+						$title = \Title::newFromText( $removedSiteLinks[ $siteGlobalId ] );
 					}
+				}
+
+				if ( !is_null( $title ) && $title->getArticleID() !== 0 ) {
+					$title->invalidateCache();
 				}
 			}
 		}

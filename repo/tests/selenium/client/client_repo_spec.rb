@@ -126,7 +126,7 @@ describe "Check functionality of client-repo connection" do
 
     it "should check that no sitelinks are displayed on client" do
       on_page(ClientPage) do |page|
-        page.navigate_to_article(article_title, true)
+        page.navigate_to_article(article_title)
         page.interwiki_xxx?.should be_false
       end
     end
