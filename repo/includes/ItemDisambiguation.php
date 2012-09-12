@@ -79,7 +79,11 @@ class ItemDisambiguation extends \ContextSource {
 								// FIXME: Need a more general way to figure out the "q" thingy.
 								// This should REALLY be something more elegant, but it is sufficient for now.
 								\Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
-								. $item->getItem()->getLabel( $langCode  ) ? $item->getItem()->getLabel( $langCode ) : wfMessage( 'wikibase-itemlink-id-wrapper' )->params( 'q' . $item->getItem()->getId() )->escaped()
+								. ( $item->getItem()->getLabel( $langCode  )
+									? $item->getItem()->getLabel( $langCode  )
+									: wfMessage( 'wikibase-itemlink-id-wrapper' )
+										->params( Settings::get( 'itemPrefix' ) . $item->getItem()->getId() )->escaped()
+								)
 								. \Html::closeElement( 'span' )
 							)
 							. \Html::openElement( 'span', array( 'class' => 'wb-itemlink-query-lang' ) )
@@ -87,7 +91,14 @@ class ItemDisambiguation extends \ContextSource {
 							. '&nbsp;[' . \Linker::link( $item->getTitle(), $langCode, array(), array( 'uselang' => $langCode ) ) . ']'
 							. \Html::closeElement( 'span' )
 							. wfMessage( 'colon-separator' )->escaped()
-							. \Html::openElement( 'span', array( 'class' => 'wb-itemlink-description', 'lang' => $descriptionLang->getCode(), 'dir' => $descriptionLang->getDir() ) )
+							. \Html::openElement(
+								'span',
+								array(
+									'class' => 'wb-itemlink-description',
+									'lang' => $descriptionLang->getCode(),
+									'dir' => $descriptionLang->getDir()
+								)
+							)
 							. htmlspecialchars( $descriptionText )
 							. \Html::closeElement( 'span' )
 						);
