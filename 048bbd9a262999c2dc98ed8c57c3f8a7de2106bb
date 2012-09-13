@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8ks\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-13T14:36:13Z",
+      "side": 1,
+      "message": "How did the above check get merged in???\n\n* isset\n* !\u003d \u0027\u0027\n\nArrr!\n\nNot relevant to this commit, so please ignore me :)",
+      "revId": "048bbd9a262999c2dc98ed8c57c3f8a7de2106bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8kk\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-13T14:36:13Z",
+      "side": 1,
+      "message": "Arrr, now you\u0027re spreading the evil :/",
+      "revId": "048bbd9a262999c2dc98ed8c57c3f8a7de2106bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8kg\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-13T14:36:13Z",
+      "side": 1,
+      "message": "else if not elseif",
+      "revId": "048bbd9a262999c2dc98ed8c57c3f8a7de2106bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
