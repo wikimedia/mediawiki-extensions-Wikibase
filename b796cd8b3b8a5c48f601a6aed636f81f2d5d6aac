@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8jM\u003d",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-09-13T15:17:06Z",
+      "side": 1,
+      "message": "Globals are bad. Language should be available in the context.",
+      "revId": "b796cd8b3b8a5c48f601a6aed636f81f2d5d6aac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
