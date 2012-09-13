@@ -41,18 +41,24 @@ class SpecialCreateItem extends SpecialWikibasePage {
 		$label = $request->getVal( 'label', isset( $parts[0] ) ? $parts[0] : '' );
 		$description = $request->getVal( 'description', isset( $parts[1] ) ? $parts[1] : '' );
 
-		if ( ( isset( $label ) && $label != '' ) || ( isset( $description ) && $description != '' ) ) {
-			$lang = $this->getLanguage()->getCode();
-			$itemContent = \Wikibase\ItemContent::newEmpty();
-			$itemContent->getEntity()->setLabel( $lang, $label );
-			$itemContent->getEntity()->setDescription( $lang, $description );
-			$editEntity = new \Wikibase\EditEntity( $itemContent, $this->getUser() );
-			$status = $editEntity->attemptSave( '', EDIT_AUTOSUMMARY|EDIT_NEW );
-			if ( !$editEntity->isSuccess() ) {
-				$editEntity->showErrorPage( $this->getOutput() );
-			} else if ( $itemContent !== null ) {
-				$itemUrl = $itemContent->getTitle()->getFullUrl();
-				$this->getOutput()->redirect( $itemUrl );
+		if ( $this->getRequest()->wasPosted() ) {
+			if ( ( isset( $label ) && $label != '' ) || ( isset( $description ) && $description != '' ) ) {
+				$lang = $this->getLanguage()->getCode();
+				$itemContent = \Wikibase\ItemContent::newEmpty();
+				if ( isset( $label ) && $label != '' ) {
+					$itemContent->getEntity()->setLabel( $lang, $label );
+				}
+				if ( isset( $description ) && $description != '' ) {
+					$itemContent->getEntity()->setDescription( $lang, $description );
+				}
+				$editEntity = new \Wikibase\EditEntity( $itemContent, $this->getUser() );
+				$status = $editEntity->attemptSave( '', EDIT_AUTOSUMMARY|EDIT_NEW, $request->getVal( 'token' ) );
+				if ( !$editEntity->isSuccess() ) {
+					$editEntity->showErrorPage( $this->getOutput() );
+				} elseif ( $itemContent !== null ) {
+					$itemUrl = $itemContent->getTitle()->getFullUrl();
+					$this->getOutput()->redirect( $itemUrl );
+				}
 			}
 		}
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
@@ -75,13 +81,14 @@ class SpecialCreateItem extends SpecialWikibasePage {
 				. Html::openElement(
 					'form',
 					array(
-						'method' => 'get',
-						'action' => '',
+						'method' => 'post',
+						'action' => $this->getTitle()->getFullUrl(),
 						'name' => 'createitem',
 						'id' => 'mw-createitem-form1'
 					)
 				)
 				. Xml::fieldset( $this->msg( 'wikibase-createitem-fieldset' )->text() )
+				. Html::hidden( 'token', $this->getUser()->getEditToken() )
 				. Xml::inputLabel(
 					$this->msg( 'wikibase-createitem-label' )->text(),
 					'label',
