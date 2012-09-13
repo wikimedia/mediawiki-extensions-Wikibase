@@ -51,10 +51,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		// Create an item view
 		if ( isset( $language ) && isset( $label ) ) {
 			$itemContents = \Wikibase\ItemHandler::singleton()->getFromLabel( $language, $label );
-			//$itemContents = call_user_func_array(
-			//	array( \Wikibase\ItemHandler::singleton(), 'getFromLabel' ),
-			//	array( $language, $label, $description )
-			//);
 			if ( count( $itemContents ) === 1 && $this->getRequest()->wasPosted() ) {
 				$this->displayItem( $itemContents[0] );
 			}
@@ -96,12 +92,61 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		$this->getOutput()->addModules( 'wikibase.special.itemDisambiguation' );
 
 		$this->getOutput()->addHTML(
-			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itemdisambiguation', 'id' => 'wb-itemdisambiguation-form1' ) )
-			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
-			. Xml::fieldset( $this->msg( 'wikibase-itemdisambiguation-lookup-fieldset' )->text() )
-			. Xml::inputLabel( $this->msg( 'wikibase-itemdisambiguation-lookup-language' )->text(), 'language', 'wb-itemdisambiguation-languagename', 12, $langCode ? $langCode : '' )
-			. Xml::inputLabel( $this->msg( 'wikibase-itemdisambiguation-lookup-label' )->text(), 'label', 'labelname', 36, $label ? $label : '' )
-			. Xml::submitButton( $this->msg( 'wikibase-itemdisambiguation-submit' )->text() )
+			Html::openElement(
+				'form',
+				array(
+					'method' => 'get',
+					'action' => $this->getTitle()->getFullUrl(),
+					'name' => 'itemdisambiguation',
+					'id' => 'wb-itemdisambiguation-form1'
+				)
+			)
+			. Html::openElement( 'fieldset' )
+			. Html::element(
+				'legend',
+				array(),
+				$this->msg( 'wikibase-itemdisambiguation-lookup-fieldset' )->text()
+			)
+			. Html::element(
+				'label',
+				array( 'for' => 'wb-itemdisambiguation-languagename' ),
+				$this->msg( 'wikibase-itemdisambiguation-lookup-language' )->text()
+			)
+			. Html::input(
+				'language',
+				$langCode ? $langCode : '',
+				'text',
+				array(
+					'id' => 'wb-itemdisambiguation-languagename',
+					'size' => 12,
+					'class' => 'wb-input-text'
+				)
+			)
+			. ' '
+			. Html::element(
+				'label',
+				array( 'for' => 'labelname' ),
+				$this->msg( 'wikibase-itemdisambiguation-lookup-label' )->text()
+			)
+			. Html::input(
+				'label',
+				$label ? $label : '',
+				'text',
+				array(
+					'id' => 'labelname',
+					'size' => 36,
+					'class' => 'wb-input-text'
+				)
+			)
+			. Html::input(
+				'submit',
+				$this->msg( 'wikibase-itemdisambiguation-submit' )->text(),
+				'submit',
+				array(
+					'id' => 'wb-itembytitle-submit',
+					'class' => 'wb-input-button'
+				)
+			)
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
