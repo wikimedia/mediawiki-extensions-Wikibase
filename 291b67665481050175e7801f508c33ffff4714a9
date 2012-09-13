@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAASn//8m4\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-09-13T09:01:56Z",
+      "side": 1,
+      "message": "O noez. I accidentally the regex logic :(",
+      "revId": "291b67665481050175e7801f508c33ffff4714a9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//9IM\u003d",
         "filename": "lib/maintenance/pollForChanges.php",
         "patchSetId": 3
