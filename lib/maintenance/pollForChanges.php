@@ -57,9 +57,20 @@ class PollForChanges extends \Maintenance {
 		$this->mDescription =
 			'Maintenance script that polls for Wikibase changes in the shared wb_changes table
 			and triggers a hook to invoke the code that needs to handle these changes.';
-		$this->addOption( 'verbose', "Print change objects to be processed" );
-		$this->addOption( 'since', 'Process changes since timestamp. Timestamp should be given in the form of "yesterday", "14 September 2012", "1 week 2 days 4 hours 2 seconds ago", "last Monday" or any other format supported by strtotime()', false, true );
 
+		$this->addOption( 'verbose', "Print change objects to be processed" );
+
+		$this->addOption( 'since', 'Process changes since timestamp. Timestamp should be given in the form of "yesterday",'
+			. ' "14 September 2012", "1 week 2 days 4 hours 2 seconds ago",'
+			. ' "last Monday" or any other format supported by strtotime()', false, true );
+
+		$this->addOption( 'startid', "Start polling at the given change_id value", false, true );
+
+		$this->addOption( 'polllimit', "Maximum number of changes to handle in one batch", false, true );
+
+		$this->addOption( 'sleepinterval', "Interval (in seconds) to sleep after processing all pending changes.", false, true );
+
+		$this->addOption( 'continueinterval', "Interval (in seconds) to sleep after processing a full batch.", false, true );
 
 		parent::__construct();
 	}
@@ -75,17 +86,16 @@ class PollForChanges extends \Maintenance {
 
 		$this->changes = ChangesTable::singleton();
 
-		$this->lastChangeId = (int)$this->getArg( 'startid', 0 );
-		$this->startTime = (int)$this->getArg( 'starttime', 0 );
-		$this->pollLimit = (int)$this->getArg( 'polllimit', Settings::get( 'pollDefaultLimit' ) );
-		$this->sleepInterval = (int)$this->getArg( 'sleepinterval', Settings::get( 'pollDefaultInterval' ) );
-		$this->continueInterval = (int)$this->getArg( 'continueinterval', Settings::get( 'pollContinueInterval' ) );
+		$this->lastChangeId = (int)$this->getOption( 'startid', 0 );
+		$this->pollLimit = (int)$this->getOption( 'polllimit', Settings::get( 'pollDefaultLimit' ) );
+		$this->sleepInterval = (int)$this->getOption( 'sleepinterval', Settings::get( 'pollDefaultInterval' ) ) * 1000;
+		$this->continueInterval = (int)$this->getOption( 'continueinterval', Settings::get( 'pollContinueInterval' ) ) * 1000;
 
-		if ( $this->getOption( 'since' ) ) {
-			$this->startTime = (int)strtotime( $this->getOption( 'since' ) );
-		}
+		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
+
 		while ( true ) {
-			usleep( $this->doPoll() * 1000 );
+			$ms = $this->doPoll();
+			usleep( $ms * 1000 );
 		}
 	}
 
