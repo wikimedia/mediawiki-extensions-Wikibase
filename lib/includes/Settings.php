@@ -48,6 +48,7 @@ class Settings extends SettingsBase {
 			'itemPrefix' => 'q',
 			'propertyPrefix' => 'p',
 			'queryPrefix' => 'query',
+			'typePrefix' => 't',
 
 			'siteLinkGroup' => 'wikipedia',
 		);

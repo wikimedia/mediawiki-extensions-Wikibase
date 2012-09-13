@@ -13,7 +13,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TypeObject extends EntityObject implements Query {
+class TypeObject extends EntityObject implements Type {
 
 	/**
 	 * @see EntityObject::getIdPrefix()
