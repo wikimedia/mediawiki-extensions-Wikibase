@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8ds\u003d",
+        "filename": "lib/includes/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-13T18:15:21Z",
+      "side": 1,
+      "message": "Please us explicit checks, else it\u0027s not clear at all that this is in fact an integer",
+      "revId": "eec2eb9a548fcedf055f08e973dd8829f3a5a201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8do\u003d",
+        "filename": "lib/includes/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-13T18:15:21Z",
+      "side": 1,
+      "message": "idem",
+      "revId": "eec2eb9a548fcedf055f08e973dd8829f3a5a201",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
