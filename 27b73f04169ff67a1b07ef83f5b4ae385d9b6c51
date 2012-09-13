@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8lg\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-13T14:16:29Z",
+      "side": 1,
+      "message": "this isn\u0027t used anywhere anymore..",
+      "revId": "27b73f04169ff67a1b07ef83f5b4ae385d9b6c51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8lU\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-13T14:16:29Z",
+      "side": 1,
+      "message": "can\u0027t we do just:\n$languageCode \u003d $repoLink-\u003egetSite()-\u003egetLanguageCode();\nif ( $languageCode \u003d\u003d $code ) {\n  unset( $repoLinks[$i] );\n}",
+      "revId": "27b73f04169ff67a1b07ef83f5b4ae385d9b6c51",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
