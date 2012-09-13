@@ -90,7 +90,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		$this->assertTrue( 0 < $res['items'][$id]['pageid'] );
 		$this->assertSuccess( $res, 'items', $id, 'ns' );
 		$this->assertTrue( is_integer( $res['items'][$id]['ns'] ) );
-		$this->assertTrue( 0 < $res['items'][$id]['ns'] );
+		$this->assertTrue( 0 <= $res['items'][$id]['ns'] );
 		$this->assertSuccess( $res, 'items', $id, 'title' );
 		$this->assertTrue( is_string( $res['items'][$id]['title'] ) );
 		$this->assertTrue( 0 < strlen( $res['items'][$id]['title'] ) );
