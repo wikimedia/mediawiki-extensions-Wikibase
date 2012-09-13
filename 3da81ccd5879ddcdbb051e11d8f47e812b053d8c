@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8ig\u003d",
+        "filename": "repo/Wikibase.i18n.namespaces.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 92
+      },
+      "writtenOn": "2012-09-13T15:48:28Z",
+      "side": 1,
+      "message": "This will clash with SMW if ever used together. Has the incompatibility been documented?",
+      "revId": "3da81ccd5879ddcdbb051e11d8f47e812b053d8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
