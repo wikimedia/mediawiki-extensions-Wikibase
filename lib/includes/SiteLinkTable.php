@@ -56,8 +56,24 @@ class SiteLinkTable {
 			$function
 		);
 
+		if ( !$success ) {
+			return false;
+		}
+
+		$siteLinks = $item->getSiteLinks();
+
+		if ( empty( $siteLinks ) ) {
+			return true;
+		}
+
+		$transactionLevel = $dbw->trxLevel();
+
+		if ( !$transactionLevel ) {
+			$dbw->begin( __METHOD__ );
+		}
+
 		/* @var SiteLink $siteLink */
-		foreach ( $item->getSiteLinks() as $siteLink ) {
+		foreach ( $siteLinks as $siteLink ) {
 			$success = $dbw->insert(
 				$this->table,
 				array_merge(
@@ -69,6 +85,10 @@ class SiteLinkTable {
 				),
 				$function
 			) && $success;
+		}
+
+		if ( !$transactionLevel ) {
+			$dbw->commit( __METHOD__ );
 		}
 
 		return $success;
