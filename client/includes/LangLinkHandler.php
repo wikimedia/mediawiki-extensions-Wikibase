@@ -92,7 +92,8 @@ class LangLinkHandler {
 			foreach( array_keys( $nei ) as $code ) {
 				$i = 0;
 				foreach( $repoLinks as $repoLink ) {
-					if ( $repoLink->getSiteID() == $code . Settings::get( 'siteGroup' ) ) {
+					$linkGlobalId = $repoLink->getSite()->getGlobalId();
+					if ( $linkGlobalId == $code . Settings::get( 'siteGroup' ) ) {
 						unset( $repoLinks[$i] );
 					}
 					$i++;
