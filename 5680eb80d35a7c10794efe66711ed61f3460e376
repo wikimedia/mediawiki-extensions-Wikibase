@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8aA\u003d",
+        "filename": "repo/resources/wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-13T20:04:01Z",
+      "side": 1,
+      "message": "just\n\nmenu.children().attr( \u0027dir\u0027: \u0027auto\u0027 );\n\nshould be sufficient since attr() will be done for the whole collection of elements.",
+      "revId": "5680eb80d35a7c10794efe66711ed61f3460e376",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
