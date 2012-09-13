@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8mQ\u003d",
+        "filename": "lib/includes/type/TypeObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-13T13:49:51Z",
+      "side": 1,
+      "message": "Should be implements Type, fixed in https://gerrit.wikimedia.org/r/#/c/23657/",
+      "revId": "e42eacb25b2a4b48466962a0006f121307fbd046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8mI\u003d",
+        "filename": "lib/includes/type/TypeObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-13T13:49:51Z",
+      "side": 1,
+      "message": "Still hardcoded in the entity object classes apparently, this should be fixed, but is another item",
+      "revId": "e42eacb25b2a4b48466962a0006f121307fbd046",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
