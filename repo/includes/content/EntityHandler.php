@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use MWException, WikiPage, Title;
+use MWException, WikiPage, Title, Content;
 
 /**
  * Base handler class for Wikibase\Entity content classes.
@@ -231,6 +231,21 @@ abstract class EntityHandler extends \ContentHandler {
 	 */
 	public function isParserCacheSupported() {
 		return false;
+	}
+
+	/**
+	 * @see Content::getPageViewLanguage
+	 *
+	 * This implementation returns the user language which is same as content language here
+	 *
+	 * @param Title        $title the page to determine the language for.
+	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
+	 *
+	 * @return \Language the page's language
+	 */
+	public function getPageViewLanguage( Title $title, Content $content = null ) {
+		$context = \RequestContext::newExtraneousContext( $title );
+		return $context->getLanguage();
 	}
 
 }
