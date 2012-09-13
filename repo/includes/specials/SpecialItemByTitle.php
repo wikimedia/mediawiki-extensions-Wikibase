@@ -66,7 +66,6 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 * @param string|null $page
 	 */
 	protected function switchForm( $siteId, $page ) {
-		global $wgScript;
 
 		$group = \Wikibase\Settings::get( 'siteLinkGroup' );
 		$sites = \Sites::singleton()->getSiteGroup( $group );
@@ -78,12 +77,60 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
 
 		$this->getOutput()->addHTML(
-			Html::openElement( 'form', array( 'method' => 'get', 'action' => $wgScript, 'name' => 'itembytitle', 'id' => 'wb-itembytitle-form1' ) )
-			. Html::hidden( 'title',  $this->getTitle()->getPrefixedText() )
-			. Xml::fieldset( $this->msg( 'wikibase-itembytitle-lookup-fieldset' )->text() )
-			. Xml::inputLabel( $this->msg( 'wikibase-itembytitle-lookup-site' )->text(), 'site', 'wb-itembytitle-sitename', 12, $siteId ? htmlspecialchars( $siteId ) : '' )
-			. Xml::inputLabel( ' '. $this->msg( 'wikibase-itembytitle-lookup-page' )->text(), 'page', 'pagename', 36, $page ? htmlspecialchars( $page ) : '' )
-			. Xml::submitButton( $this->msg( 'wikibase-itembytitle-submit' )->text(), array( 'id' => 'wb-itembytitle-submit' ) )
+			Html::openElement(
+				'form',
+				array(
+					'method' => 'get',
+					'action' => $this->getTitle()->getFullUrl(),
+					'name' => 'itembytitle',
+					'id' => 'wb-itembytitle-form1'
+				)
+			)
+			. Html::openElement( 'fieldset' )
+			. Html::element(
+				'legend',
+				array(),
+				$this->msg( 'wikibase-itembytitle-lookup-fieldset' )->text()
+			)
+			. Html::element(
+				'label',
+				array( 'for' => 'wb-itembytitle-sitename' ),
+				$this->msg( 'wikibase-itembytitle-lookup-site' )->text()
+			)
+			. Html::input(
+				'site',
+				$siteId ? htmlspecialchars( $siteId ) : '',
+				'text',
+				array(
+					'id' => 'wb-itembytitle-sitename',
+					'size' => 12
+				)
+			)
+			. ' '
+			. Html::element(
+				'label',
+				array( 'for' => 'pagename' ),
+				$this->msg( 'wikibase-itembytitle-lookup-page' )->text()
+			)
+			. Html::input(
+				'page',
+				$page ? htmlspecialchars( $page ) : '',
+				'text',
+				array(
+					'id' => 'pagename',
+					'size' => 36,
+					'class' => 'wb-input-text'
+				)
+			)
+			. Html::input(
+				'submit',
+				$this->msg( 'wikibase-itembytitle-submit' )->text(),
+				'submit',
+				array(
+					'id' => 'wb-itembytitle-submit',
+					'class' => 'wb-input-button'
+				)
+			)
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
