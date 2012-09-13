@@ -17,4 +17,10 @@ $namespaceNames = array();
 $namespaceNames['en'] = array(
 	WB_NS_DATA      => 'Data',
 	WB_NS_DATA_TALK => 'Data_talk',
+	WB_NS_PROPERTY      => 'Property',
+	WB_NS_PROPERTY_TALK => 'Property_talk',
+	WB_NS_QUERY      => 'Query',
+	WB_NS_QUERY_TALK => 'Query_talk',
+	WB_NS_TYPE      => 'Type',
+	WB_NS_TYPE_TALK => 'Type_talk',
 );
