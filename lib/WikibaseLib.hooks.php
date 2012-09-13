@@ -131,6 +131,8 @@ final class LibHooks {
 			'snak/PropertyValueSnak',
 			'snak/SnakList',
 
+			'type/TypeObject',
+
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',
