@@ -114,8 +114,7 @@ final class LibHooks {
 			'changes/EntityRefresh',
 			'changes/EntityUpdate',
 
-			'entity/ItemDiff', // wtf is this in /entity?
-
+			'item/ItemDiff',
 			'item/ItemMultilangTexts',
 			'item/ItemNewEmpty',
 			'item/ItemNewFromArray',
