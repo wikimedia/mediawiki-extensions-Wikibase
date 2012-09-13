@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//8js\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-13T14:53:00Z",
+      "side": 1,
+      "message": "Nah, its cute!",
+      "parentUuid": "AAAASn//8kk\u003d",
+      "revId": "048bbd9a262999c2dc98ed8c57c3f8a7de2106bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//8kg\u003d",
         "filename": "repo/includes/specials/SpecialCreateItem.php",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2012-09-13T14:36:13Z",
       "side": 1,
       "message": "else if not elseif",
+      "revId": "048bbd9a262999c2dc98ed8c57c3f8a7de2106bb",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8jw\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-13T14:53:00Z",
+      "side": 1,
+      "message": "Don\u0027t chain on danling else, ie. not changing this",
+      "parentUuid": "AAAASn//8kg\u003d",
       "revId": "048bbd9a262999c2dc98ed8c57c3f8a7de2106bb",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
