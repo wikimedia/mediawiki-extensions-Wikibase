@@ -41,7 +41,7 @@ class Settings extends SettingsBase {
 	 */
 	protected function getDefaultSettings() {
 		$settings = array(
-			'pollDefaultInterval' => 1000,
+			'pollDefaultInterval' => 1,
 			'pollDefaultLimit' => 100,
 			'pollContinueInterval' => 0,
 
