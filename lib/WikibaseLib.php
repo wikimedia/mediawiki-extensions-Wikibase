@@ -56,6 +56,7 @@ $dir = __DIR__ . '/';
 define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
 define( 'CONTENT_MODEL_WIKIBASE_QUERY', "wikibase-query" );
+define( 'CONTENT_MODEL_WIKIBASE_TYPE', "wikibase-type" );
 
 define( 'SUMMARY_MAX_LENGTH', 250 );
 
@@ -139,6 +140,10 @@ $wgAutoloadClasses['Wikibase\SnakList'] 				= $dir . 'includes/snak/SnakList.php
 $wgAutoloadClasses['Wikibase\SnakObject'] 				= $dir . 'includes/snak/SnakObject.php';
 $wgAutoloadClasses['Wikibase\Snaks'] 					= $dir . 'includes/snak/Snaks.php';
 $wgAutoloadClasses['Wikibase\SubclassOfSnak'] 			= $dir . 'includes/snak/SubclassOfSnak.php';
+
+// includes/query
+$wgAutoloadClasses['Wikibase\Type'] 					= $dir . 'includes/type/Type.php';
+$wgAutoloadClasses['Wikibase\TypeObject'] 				= $dir . 'includes/type/TypeObject.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/HashArrayTest.php';

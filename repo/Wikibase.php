@@ -97,14 +97,17 @@ $wgAutoloadClasses['Wikibase\EditEntityAction'] 		= $dir . 'includes/actions/Edi
 $wgAutoloadClasses['Wikibase\EditItemAction'] 			= $dir . 'includes/actions/EditItemAction.php';
 $wgAutoloadClasses['Wikibase\EditPropertyAction'] 		= $dir . 'includes/actions/EditPropertyAction.php';
 $wgAutoloadClasses['Wikibase\EditQueryAction'] 			= $dir . 'includes/actions/EditQueryAction.php';
+$wgAutoloadClasses['Wikibase\EditTypeAction'] 			= $dir . 'includes/actions/EditTypeAction.php';
 $wgAutoloadClasses['Wikibase\ViewEntityAction'] 		= $dir . 'includes/actions/ViewEntityAction.php';
 $wgAutoloadClasses['Wikibase\ViewItemAction'] 			= $dir . 'includes/actions/ViewItemAction.php';
 $wgAutoloadClasses['Wikibase\ViewPropertyAction'] 		= $dir . 'includes/actions/ViewPropertyAction.php';
 $wgAutoloadClasses['Wikibase\ViewQueryAction'] 			= $dir . 'includes/actions/ViewQueryAction.php';
+$wgAutoloadClasses['Wikibase\ViewTypeAction'] 			= $dir . 'includes/actions/ViewTypeAction.php';
 $wgAutoloadClasses['Wikibase\SubmitEntityAction'] 		= $dir . 'includes/actions/EditEntityAction.php';
 $wgAutoloadClasses['Wikibase\SubmitItemAction'] 		= $dir . 'includes/actions/EditItemAction.php';
 $wgAutoloadClasses['Wikibase\SubmitPropertyAction'] 	= $dir . 'includes/actions/EditPropertyAction.php';
 $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/EditQueryAction.php';
+$wgAutoloadClasses['Wikibase\SubmitTypeAction'] 		= $dir . 'includes/actions/EditTypeAction.php';
 
 // includes/api
 $wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
@@ -127,6 +130,8 @@ $wgAutoloadClasses['Wikibase\PropertyContent'] 			= $dir . 'includes/content/Pro
 $wgAutoloadClasses['Wikibase\PropertyHandler'] 			= $dir . 'includes/content/PropertyHandler.php';
 $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryContent.php';
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
+$wgAutoloadClasses['Wikibase\TypeContent'] 				= $dir . 'includes/content/TypeContent.php';
+$wgAutoloadClasses['Wikibase\TypeHandler'] 				= $dir . 'includes/content/TypeHandler.php';
 
 // includes/specials
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
@@ -206,6 +211,7 @@ $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/R
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler';
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
+$wgContentHandlers[CONTENT_MODEL_WIKIBASE_TYPE] = '\Wikibase\TypeHandler';
 
 $wbStores = array();
 $wbStores['sqlstore'] = 'Wikibase\SqlStore';
