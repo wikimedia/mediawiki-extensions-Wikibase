@@ -90,4 +90,28 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testGetPageLanguage() {
+		global $wgLang;
+		$oldLang = $wgLang;
+
+		$handler = $this->getHandler();
+		$title = \Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
+
+		// test whatever is there
+		$this->assertEquals( $wgLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+
+		// test fr
+		$wgLang = \Language::factory( "fr" );
+		$handler = $this->getHandler();
+		$this->assertEquals( $wgLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+
+		// test nl
+		$wgLang = \Language::factory( "nl" );
+		$handler = $this->getHandler();
+		$this->assertEquals( $wgLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+
+		// restore
+		$wgLang = $oldLang;
+	}
+
 }
