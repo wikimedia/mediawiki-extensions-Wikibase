@@ -88,19 +88,23 @@ class LangLinkHandler {
 
 			// Remove the links specified by noexternalinterlang parser function.
 			foreach ( array_keys( $nei ) as $code ) {
-				foreach ( $repoLinks as $key => &$row ) {
+				foreach ( $repoLinks as $key => &$repoLink ) {
 					// site corresponding to the $nei code specified and site group
 					$site = \SitesTable::singleton()->selectRow( null, array(
 						'language' => $code,
 						'group' => Settings::get( 'siteGroup' )
 					) );
-					$neiGlobalId = $site->getGlobalId();
 
-					// global id for the repo link
-					$repoLinkGlobalId = $row->getSite()->getGlobalId();
+					// check if site is found or not
+					if ( $site !== false ) {
+						$neiGlobalId = $site->getGlobalId();
 
-					if ( $repoLinkGlobalId == $neiGlobalId ) {
-						unset( $repoLinks[$key] );
+						// global id for the repo link
+						$repoLinkGlobalId = $repoLink->getSite()->getGlobalId();
+
+						if ( $repoLinkGlobalId == $neiGlobalId ) {
+							unset( $repoLinks[$key] );
+						}
 					}
 				}
 			}
