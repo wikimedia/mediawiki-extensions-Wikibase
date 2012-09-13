@@ -58,6 +58,8 @@ class PollForChanges extends \Maintenance {
 			'Maintenance script that polls for Wikibase changes in the shared wb_changes table
 			and triggers a hook to invoke the code that needs to handle these changes.';
 		$this->addOption( 'verbose', "Print change objects to be processed" );
+		$this->addOption( 'since', 'Process changes since timestamp. Timestamp should be given in the form of "yesterday", "14 September 2012", "1 week 2 days 4 hours 2 seconds ago", "last Monday" or any other format supported by strtotime()', false, true );
+
 
 		parent::__construct();
 	}
@@ -79,6 +81,9 @@ class PollForChanges extends \Maintenance {
 		$this->sleepInterval = (int)$this->getArg( 'sleepinterval', Settings::get( 'pollDefaultInterval' ) );
 		$this->continueInterval = (int)$this->getArg( 'continueinterval', Settings::get( 'pollContinueInterval' ) );
 
+		if ( $this->getOption( 'since' ) ) {
+			$this->startTime = (int)strtotime( $this->getOption( 'since' ) );
+		}
 		while ( true ) {
 			usleep( $this->doPoll() * 1000 );
 		}
@@ -142,7 +147,7 @@ class PollForChanges extends \Maintenance {
 		$conds = array();
 
 		if ( $this->lastChangeId === 0 && $this->startTime !== 0 ) {
-			$conds[] = 'time < ' . wfGetDB( DB_SLAVE )->addQuotes( wfTimestamp( TS_MW, $this->startTime ) );
+			$conds[] = 'time > ' . wfGetDB( DB_SLAVE )->addQuotes( wfTimestamp( TS_MW, $this->startTime ) );
 		}
 
 		if ( $this->lastChangeId !== false ) {
