@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//8hI\u003d",
+        "filename": "lib/includes/ObjectComparer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-13T16:45:41Z",
+      "side": 1,
+      "message": "All right. But if we factor this out, there should also be a separate test case for this.",
+      "parentUuid": "AAAASn//9ME\u003d",
+      "revId": "674a670436609928fbf7a618998de3d370c116e3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//9Mk\u003d",
         "filename": "lib/includes/ObjectComparer.php",
         "patchSetId": 1
