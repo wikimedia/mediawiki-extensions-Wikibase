@@ -35,7 +35,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 
 		// Setup
 		$request = $this->getRequest();
-		$parts = ( $this->subPage === '' ) ? array() : explode( '/', $this->subPage, 2 );
+		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$language = $request->getVal( 'language', isset( $parts[0] ) ? $parts[0] : '' );
 		if ( $language === '' ) {
 			$language = null;
