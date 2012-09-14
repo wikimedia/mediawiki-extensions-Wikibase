@@ -112,12 +112,21 @@ its toolbar */
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue {
 	display: block;
-	margin: .3em .3em .13em 8px; /* h1 natively has 0.17em bottom padding to avoid clipping */
+	margin: .3em .3em .13em 10px; /* h1 natively has 0.17em bottom padding to avoid clipping */
 }
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue .wb-value {
 	font-size: 188%;
 	padding-right: 0;
+}
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
+	padding: 0 0 0 2px; /* even out border of input box in edit mode */
+}
+@-moz-document url-prefix() { /* Firefox */
+	.wb-firstHeading .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
+		padding: 0 0 0 1px;
+	}
 }
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue .wb-ui-propertyedittool-editablevalue-toolbarparent {
@@ -136,7 +145,7 @@ its toolbar */
 .wb-ui-labeledittool .wb-ui-toolbar {
 	font-size: 188%;
 	line-height: 1.2em; /* adjust to height of value */
-	padding-top: 2px; /* even out border of input box */
+	padding-top: 1px; /* even out border of input box */
 }
 .wb-ui-labeledittool .wb-ui-toolbar-group {
 	font-size: 100%;
@@ -148,17 +157,12 @@ its toolbar */
 }
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode {
-	margin: .3em .3em .13em .8px; /* h1 natively has 0.17em bottom padding to avoid clipping */
-	padding-left: 7px;
-}
-
-.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
-	padding: 0; /* remove padding that is inserted in view mode to even out input box border */
+	margin: .3em .3em .13em 0; /* h1 natively has 0.17em bottom padding to avoid clipping */
+	padding-left: 6px;
 }
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-ui-propertyedittool-editablevalue-toolbarparent {
 	top: .3em;
-	/*bottom: .3em; /* even out the border of the input box + native padding of h1 */
 }
 
 .wb-ui-labeledittool input {
@@ -166,12 +170,15 @@ its toolbar */
 	font-family: inherit;
 	font-size: inherit;
 	height: 1.2em;
-	padding: 0;
 }
 
 /***** /LABEL *****/
 
 /***** DESCRIPTION *****/
+
+.wb-ui-descriptionedittool {
+	margin-top: -2px; /* move to top decreasing space between label and description */
+}
 
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue {
 	padding-left: 10px;
@@ -180,7 +187,12 @@ its toolbar */
 }
 
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
-	padding-left: 8px;
+	padding-left: 7px;
+}
+@-moz-document url-prefix() { /* Firefox */
+	.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
+		padding-left: 6px;
+	}
 }
 
 .wb-ui-descriptionedittool .wb-value {
@@ -204,7 +216,7 @@ its toolbar */
 
 /***** /DESCRIPTION *****/
 
-/********** /LABEL AND DESCRIPTION **********/
+/********** /LABEL & DESCRIPTION **********/
 
 
 /********** ALIASES **********/
@@ -249,7 +261,7 @@ EditableValue's "edit" button when aliases exist) */
 .wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode ul {
 	/* since the aliases ul list is cloned in JS, its stashed pendant will be visible as box on the
 	edit mode highlight colour in non-Webkit browsers without making the bg colour transparent */
-	background-color: transparent;
+	background: transparent;
 }
 
 /********** /ALIASES **********/
@@ -276,7 +288,12 @@ table.wb-sitelinks .wb-sitelinks-link {
 	padding-left: 10px;
 }
 table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
-	padding-left: 6px; /* above value minus input border and padding */
+	padding-left: 7px; /* above value minus input border and padding */
+}
+@-moz-document url-prefix() { /* Firefox */
+	table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
+		padding-left: 6px;
+	}
 }
 
 table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
