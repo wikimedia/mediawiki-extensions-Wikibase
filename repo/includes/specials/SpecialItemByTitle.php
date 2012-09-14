@@ -37,7 +37,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 		// Setup
 		$request = $this->getRequest();
-		$parts = ( $this->subPage === '' ) ? array() : explode( '/', $this->subPage, 2 );
+		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$siteId = $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' );
 		$page = $request->getVal( 'page', isset( $parts[1] ) ? $parts[1] : '' );
 		$itemContent = null;
