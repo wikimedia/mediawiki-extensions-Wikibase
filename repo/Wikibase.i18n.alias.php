@@ -17,6 +17,7 @@ $specialPageAliases = array();
 /** English (English) */
 $specialPageAliases['en'] = array(
 	'CreateItem' => array( 'CreateItem' ),
+	'CreateProperty' => array( 'CreateProperty' ),
 	'ItemByTitle' => array( 'ItemByTitle' ),
 	'ItemDisambiguation' => array( 'ItemDisambiguation' ),
 );

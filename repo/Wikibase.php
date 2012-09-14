@@ -130,7 +130,9 @@ $wgAutoloadClasses['Wikibase\QueryContent'] 			= $dir . 'includes/content/QueryC
 $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryHandler.php';
 
 // includes/specials
+$wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
+$wgAutoloadClasses['SpecialCreateProperty'] 			= $dir . 'includes/specials/SpecialCreateProperty.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemDisambiguation'] 				= $dir . 'includes/specials/SpecialItemDisambiguation.php';
@@ -177,6 +179,7 @@ $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+$wgSpecialPages['CreateProperty'] 					= 'SpecialCreateProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 
