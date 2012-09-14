@@ -16,6 +16,24 @@
       "revId": "3da81ccd5879ddcdbb051e11d8f47e812b053d8c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7xs\u003d",
+        "filename": "repo/Wikibase.i18n.namespaces.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-14T23:41:32Z",
+      "side": 1,
+      "message": "Good point, will discuss this with the relevant people.",
+      "parentUuid": "AAAASn//8ig\u003d",
+      "revId": "3da81ccd5879ddcdbb051e11d8f47e812b053d8c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
