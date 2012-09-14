@@ -107,45 +107,55 @@ class ItemContent extends EntityContent {
 	}
 
 	protected function checkSiteLinksForInsert( \Status $status ) {
-		$dbw = wfGetDB( DB_SLAVE );
+		$links = $this->item->getSiteLinks();
 
-		// TODO: this can work obtaining only a single row
-		// TODO: this can be batched
+		if ( empty( $links ) ) {
+			return true;
+		}
+
 		// TODO: use store
 
-		/**
-		 * @var SiteLink $siteLink
-		 */
-		foreach ( $this->item->getSiteLinks() as $siteLink ) {
-			$res = $dbw->select(
-				'wb_items_per_site',
-				array( 'ips_item_id' ),
-				array(
-					'ips_site_id' => $siteLink->getSite()->getGlobalId(),
-					'ips_site_page' => $siteLink->getPage(),
-				),
-				__METHOD__
-			);
+		$dbw = wfGetDB( DB_SLAVE );
 
-			while ( $row = $res->fetchObject() ) {
-				$ipsId = (int)$row->ips_item_id;
-				$itemId = $this->item->getId();
+		$anyOfTheLinks = '';
 
-				/**
-				 * @var WikiPage $ipsPage
-				 */
-				$ipsPage = $this->getContentHandler()->getWikiPageForId( $ipsId );
-
-				if ( $ipsId !== $itemId ) {
-					$status->setResult( false );
-					$status->error(
-						'wikibase-error-sitelink-already-used',
-						$siteLink->getSite()->getGlobalId(),
-						$siteLink->getPage(),
-						$ipsPage->getTitle()->getFullText()
-					);
-				}
+		foreach ( $links as $siteLink ) {
+			if ( $anyOfTheLinks !== '' ) {
+				$anyOfTheLinks .= "\nOR ";
 			}
+
+			$anyOfTheLinks .= '(';
+			$anyOfTheLinks .= 'ips_site_id=' . $dbw->addQuotes( $siteLink->getSite()->getGlobalId() );
+			$anyOfTheLinks .= ' AND ';
+			$anyOfTheLinks .= 'ips_site_page=' . $dbw->addQuotes( $siteLink->getPage() );
+			$anyOfTheLinks .= ')';
+		}
+
+		//TODO: $anyOfTheLinks might get very large and hit some size limit imposed by the database.
+		//      We could chop it up of we know that size limit. For MySQL, it's select @@max_allowed_packet.
+
+		$res = $dbw->select(
+			'wb_items_per_site',
+			array( 'ips_site_id', 'ips_site_page', 'ips_item_id' ),
+			"($anyOfTheLinks) AND ips_item_id != " . (int)$this->item->getId(),
+			__METHOD__
+		);
+
+		while ( $row = $res->fetchObject() ) {
+			$ipsId = (int)$row->ips_item_id;
+
+			/**
+			 * @var WikiPage $ipsPage
+			 */
+			$ipsPage = $this->getContentHandler()->getWikiPageForId( $ipsId );
+
+			//NOTE: it would be nice to generate the link here and just pass it as HTML, but Status forces all parameters to be escaped.
+			$status->fatal(
+				'wikibase-error-sitelink-already-used',
+				$row->ips_site_id,
+				$row->ips_site_page,
+				$ipsPage->getTitle()->getFullText()
+			);
 		}
 
 		return $status->isOK();
