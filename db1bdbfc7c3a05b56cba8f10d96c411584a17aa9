@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8Cg\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-14T14:09:50Z",
+      "side": 1,
+      "message": "why does the en message have only one parameter and here it explains about $1 and $2?",
+      "revId": "db1bdbfc7c3a05b56cba8f10d96c411584a17aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8CA\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-14T14:09:50Z",
+      "side": 1,
+      "message": "why comment this out?  either keep it and use this or remove it",
+      "revId": "db1bdbfc7c3a05b56cba8f10d96c411584a17aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8B4\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-14T14:09:50Z",
+      "side": 1,
+      "message": "why comment out? if not used, then remove it",
+      "revId": "db1bdbfc7c3a05b56cba8f10d96c411584a17aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8CI\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-14T14:09:50Z",
+      "side": 1,
+      "message": "globals are evil!\n\nhow about $userLangCode \u003d $this-\u003egetLanguage()-\u003egetCode(); above the return and use that?",
+      "revId": "db1bdbfc7c3a05b56cba8f10d96c411584a17aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8CE\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-14T14:09:50Z",
+      "side": 1,
+      "message": "you already get the code above in line 74; perhaps we can get it just once and use it here again.",
+      "revId": "db1bdbfc7c3a05b56cba8f10d96c411584a17aa9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
