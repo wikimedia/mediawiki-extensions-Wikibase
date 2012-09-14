@@ -107,6 +107,8 @@ class ItemContent extends EntityContent {
 	}
 
 	protected function checkSiteLinksForInsert( \Status $status ) {
+		wfProfileIn( __METHOD__ );
+
 		$dbw = wfGetDB( DB_SLAVE );
 
 		// TODO: this can work obtaining only a single row
@@ -148,6 +150,7 @@ class ItemContent extends EntityContent {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $status->isOK();
 	}
 
@@ -247,7 +250,7 @@ class ItemContent extends EntityContent {
 	 * @return \Title
 	 */
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$itemView = new ItemView( ); // @todo: construct context for title?
+		$itemView = new ItemView( );
 		return $itemView->getParserOutput( $this, $options, $generateHtml );
 	}
 }
