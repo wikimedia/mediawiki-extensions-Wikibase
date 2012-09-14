@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8Hc\u003d",
+        "filename": "repo/tests/selenium/item/non_existing_item_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-09-14T12:04:11Z",
+      "side": 1,
+      "message": "Can\u0027t we make this configurable? Now they MUST be in the main namespace...",
+      "revId": "29b2a21006295aa96f28a15ed304a28fe6ea9050",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8HY\u003d",
+        "filename": "repo/tests/selenium/special/create_item_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-09-14T12:04:11Z",
+      "side": 1,
+      "message": "Unrelated change. Tests create item, not items in main namespace.",
+      "revId": "29b2a21006295aa96f28a15ed304a28fe6ea9050",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//8HU\u003d",
+        "filename": "selenium/lib/pages/create_item_page.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-09-14T12:04:11Z",
+      "side": 1,
+      "message": "Please make namespace configurable, possibly in config.yaml",
+      "revId": "29b2a21006295aa96f28a15ed304a28fe6ea9050",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
