@@ -45,7 +45,6 @@
 
 /* container for the value itself */
 .wb-value, .wb-gridhelper {
-	padding-right: 14em; /* width of toolbar + white space border */
 	word-wrap: break-word; /* force word wrap for that toolbar will not overlay very long values */
 	display: block; /* need to force block explicitly to achieve 100% width */
 }

@@ -35,7 +35,7 @@ wb.ui.PropertyEditTool.EditableLabel = wb.utilities.inherit( $PARENT, {
 		var interfaces = $PARENT.prototype._buildInterfaces.call( this, subject );
 
 		interfaces[0].inputPlaceholder = mw.msg( 'wikibase-label-edit-placeholder' );
-		interfaces[0].autoExpand = true;
+		interfaces[0].autoExpand = false;
 
 		interfaces[0].normalize = function( value ) {
 			value = wb.ui.PropertyEditTool.EditableValue.Interface.prototype.normalize.call( this, value );
