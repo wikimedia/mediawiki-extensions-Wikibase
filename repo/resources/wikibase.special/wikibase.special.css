@@ -9,28 +9,27 @@
  * @author H. Snater
  */
 
-/********** Create item page **********/
+/********** Create item/property page **********/
 
-.mw-special-CreateItem fieldset {
+.wb-fieldset {
 	float: left;
 }
 
-.mw-special-CreateItem label,
-.mw-special-CreateItem input.wb-input-text, .mw-special-CreateItem .wb-input-button {
+.wb-label, .wb-input, .wb-button, .wb-select {
 	display: block;
 	float: left;
 	clear: both;
 }
 
-.mw-special-CreateItem label {
+.wb-label {
 	margin-top: 0.5em;
 }
 
-.mw-special-CreateItem input.wb-input-text {
+.wb-input, .wb-select {
 	margin-bottom: 1em;
 	width: 25em;
 }
 
-.mw-special-CreateItem .wb-input-button {
+.wb-button {
 	margin-top: 1em;
 }
