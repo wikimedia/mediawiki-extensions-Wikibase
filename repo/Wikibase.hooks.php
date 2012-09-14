@@ -405,6 +405,8 @@ final class RepoHooks {
 				),
 
 				'defaultStore' => 'sqlstore',
+
+				'testDataTypes' => array( 'Type 1', 'Type 2' ),
 			)
 		);
 
