@@ -40,7 +40,10 @@
 }
 
 .wb-item input {
-	padding-left: 2px;
+	/* prevent browsers from applying their default styles */
+	padding: 0 2px;
+	border: 1px solid #AAA;
+	border-radius: 0;
 }
 
 /* container for the value itself */
@@ -81,7 +84,7 @@
 /* preventing layout jittering toggling between view and edit mode */
 .wb-firstHeading .wb-value {
 	line-height: 1.2em; /* adjust line height to input box height in edit mode */
-	padding: 2px; /* even out border of input box in edit mode */
+	padding: 1px; /* even out border of input box in edit mode */
 }
 
 /********** /LABEL **********/
