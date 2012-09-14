@@ -120,7 +120,10 @@ class ItemObject extends EntityObject implements Item {
 	 * @return boolean
 	 */
 	public function isEmpty() {
+		wfProfileIn( __METHOD__ );
+
 		if ( !parent::isEmpty() ) {
+			wfProfileOut( __METHOD__ );
 			return false;
 		}
 
@@ -128,10 +131,12 @@ class ItemObject extends EntityObject implements Item {
 
 		foreach ( $fields as $field ) {
 			if ( $this->data[$field] !== array() ) {
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 

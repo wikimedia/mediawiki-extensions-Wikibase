@@ -381,14 +381,18 @@ abstract class EntityObject implements Entity {
 	 * @return boolean
 	 */
 	public function isEmpty() {
+		wfProfileIn( __METHOD__ );
+
 		$fields = array( 'label', 'description', 'aliases' );
 
 		foreach ( $fields as $field ) {
 			if ( $this->data[$field] !== array() ) {
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return true;
 	}
 
@@ -413,6 +417,8 @@ abstract class EntityObject implements Entity {
 			return false;
 		}
 
+		wfProfileIn( __METHOD__ );
+
 		/**
 		 * @var Entity $that
 		 */
@@ -421,6 +427,7 @@ abstract class EntityObject implements Entity {
 
 		if ( $thisId !== null && $thatId !== null ) {
 			if ( $thisId !== $thatId ) {
+				wfProfileOut( __METHOD__ );
 				return false;
 			}
 		}
@@ -430,7 +437,10 @@ abstract class EntityObject implements Entity {
 		$thatData = $that->toArray();
 
 		$comparer = new ObjectComparer();
-		return $comparer->dataEquals( $thisData, $thatData, array( 'entity' ) );
+		$equals = $comparer->dataEquals( $thisData, $thatData, array( 'entity' ) );
+
+		wfProfileOut( __METHOD__ );
+		return $equals;
 	}
 
 	/**
@@ -449,8 +459,13 @@ abstract class EntityObject implements Entity {
 			throw new \MWException( 'Entities passed to getUndoDiff must have the same type as the entity object.' );
 		}
 
+		wfProfileIn( __METHOD__ );
+
 		// FIXME: awareness of internal entity structure in diff code where it can be avoided (and is already in EntityDiff)
-		return $newerEntity->getDiff( $olderEntity )->getApplicableDiff( $this->toArray() );
+		$diff = $newerEntity->getDiff( $olderEntity )->getApplicableDiff( $this->toArray() );
+
+		wfProfileOut( __METHOD__ );
+		return $diff;
 	}
 
 	/**
@@ -461,13 +476,18 @@ abstract class EntityObject implements Entity {
 	 * @return Entity
 	 */
 	public function copy() {
+		wfProfileIn( __METHOD__ );
+
 		$array = array();
 
 		foreach ( $this->toArray() as $key => $value ) {
 			$array[$key] = is_object( $value ) ? clone $value : $value;
 		}
 
-		return new static( $array );
+		$copy = new static( $array );
+
+		wfProfileOut( __METHOD__ );
+		return $copy;
 	}
 
 }

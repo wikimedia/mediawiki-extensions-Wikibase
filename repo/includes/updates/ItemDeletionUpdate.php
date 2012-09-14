@@ -42,6 +42,8 @@ class ItemDeletionUpdate extends \DataUpdate {
 	 * @see DeferrableUpdate::doUpdate
 	 */
 	public function doUpdate() {
+		wfProfileIn( __METHOD__ );
+
 		StoreFactory::getStore()->newEntityDeletionHandler()->handleDeletion( $this->itemContent->getItem() );
 
 		/**
@@ -53,6 +55,8 @@ class ItemDeletionUpdate extends \DataUpdate {
 		 * @param ItemStructuredSave $this
 		 */
 		wfRunHooks( 'WikibaseItemDeletionUpdate', array( $this ) );
+
+		wfProfileOut( __METHOD__ );
 	}
 
 }
