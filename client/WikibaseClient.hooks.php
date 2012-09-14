@@ -231,7 +231,7 @@ final class ClientHooks {
 				'sortPrepend' => false,
 				'alwaysSort' => false,
 				'siteGlobalID' => 'enwiki',
-				'siteGroup' => 'wiki'
+				'siteGroup' => 'wikipedia'
 			)
 		);
 
