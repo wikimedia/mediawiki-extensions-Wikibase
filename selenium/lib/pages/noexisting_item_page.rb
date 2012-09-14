@@ -10,7 +10,7 @@ require 'ruby_selenium'
 
 class NonExistingItemPage < RubySelenium
   include PageObject
-  page_url WIKI_REPO_URL + "Data:Qxy"
+  page_url WIKI_REPO_URL + "Qxy"
 
   span(:firstHeading, :xpath => "//h1[@id='firstHeading']/span")
   link(:specialLogLink, :css => "div#mw-content-text > div > p > span > a:nth-child(1)")

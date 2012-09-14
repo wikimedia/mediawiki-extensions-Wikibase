@@ -80,6 +80,25 @@ describe "Check CreateItem special page" do
     end
   end
 
+  context "Check for GET, token, ugly URL, subpage-form" do
+    it "should check that GET does not work" do
+      label = generate_random_string(10)
+      description = generate_random_string(20)
+      visit_page(CreateItemPage) do |page|
+        page.uls_switch_language("Deutsch")
+        page.createItemLabelField = label
+        page.createItemDescriptionField = description
+        page.createItemSubmit
+        page.wait_for_item_to_load
+      end
+      on_page(ItemPage) do |page|
+        page.itemLabelSpan.should == label
+        page.itemDescriptionSpan.should == description
+        page.viewTabLink_element.text == "Lesen"
+      end
+    end
+  end
+
   context "Check for permissions on item creation" do
     it "should check that a blocked user cannot create a new item" do
       on_page(CreateItemPage) do |page|

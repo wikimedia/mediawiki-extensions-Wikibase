@@ -20,7 +20,7 @@ class CreateItemPage < ItemPage
     createItemSubmit
     wait_for_item_to_load
     @@item_url = current_url
-    @@item_id = @@item_url[@@item_url.index('Data:Q')+6..-1]
+    @@item_id = @@item_url[@@item_url.index('/Q')+2..-1]
     return @@item_id
   end
 end
