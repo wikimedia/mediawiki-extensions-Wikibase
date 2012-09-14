@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//8CY\u003d",
+        "filename": "selenium/lib/pages/undelete_item_page.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-09-14T13:44:59Z",
+      "side": 1,
+      "message": "Ha! Namespace missing!",
+      "revId": "1700757272b867ea44463f17a7f4a4da8577a152",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
