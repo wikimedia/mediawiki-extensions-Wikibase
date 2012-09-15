@@ -213,6 +213,10 @@ toolbar; furthermore, the PropertyEditTool toolbar (which is displayed only when
 aliases) shall be vertically be aligned to the baseline of the first row of aliases (just like the
 EditableValue's "edit" button when aliases exist) */
 
+.wb-ui-aliasesedittool .wb-gridhelper {
+	padding-right: 14em;
+}
+
 .wb-aliases .wb-ui-propertyedittool-toolbar {
 	/* aliases PropertyEditTool toolbar should be on the same vertical level than its label since
 	it is only displayed when there are no aliases (other PropertyEditToolbars appear below the last
