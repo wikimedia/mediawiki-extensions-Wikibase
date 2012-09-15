@@ -24,7 +24,7 @@ class ItemObject extends EntityObject implements Item {
 	 *
 	 * @return string
 	 */
-	protected function getIdPrefix() {
+	public static function getIdPrefix() {
 		return 'q';
 	}
 

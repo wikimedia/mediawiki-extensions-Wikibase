@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\ItemContent as ItemContent;
+use Wikibase\ItemObject as ItemObject;
 use Wikibase\Utils;
 use Wikibase\ItemView as ItemView;
 
@@ -63,17 +64,28 @@ class ItemViewTest extends \MediaWikiTestCase {
 	 */
 	public function testGetHtml( $itemData, $expected) {
 		self::$num++;
+		$view = new ItemView( );
 
-		$itemContent = $itemData === false ? ItemContent::newEmpty() : ItemContent::newFromArray( $itemData );
+		if ( is_string( $expected ) ) {
+			$expected = (array)$expected;
+		}
+		$expected[] = '/class\s*=\s*"wb-' . $view::VIEW_TYPE . '"/';
 
-		$itemContent->getItem()->setLabel( 'de', 'Stockholm' );
+		if( $itemData === false ) {
+			$itemContent = ItemContent::newEmpty();
+			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-new"/';
+		} else {
+			$itemData += array( 'entity' => ItemObject::getIdPrefix() . '123' );
+			$itemContent = ItemContent::newFromArray( $itemData );
+			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-' . $itemContent->getEntity()->getId() . '"/';
+		}
+
+		$itemContent->getEntity()->setLabel( 'de', 'Stockholm' );
 
 		$this->assertTrue(
 			!is_null( $itemContent ) && $itemContent !== false,
 			"Could not find an item"
 		);
-
-		$view = new ItemView( );
 
 		$this->assertTrue(
 			!is_null( $view ) && $view !== false,
@@ -82,21 +94,12 @@ class ItemViewTest extends \MediaWikiTestCase {
 
 		$html = $view->getHtml( $itemContent );
 
-		if ( is_string( $expected ) ) {
+		foreach ( $expected as $that ) {
 			$this->assertRegExp(
-				$expected,
+				$that,
 				$html,
-				"Could not find the marker '{$expected}'"
+				"Could not find the marker '{$that}'"
 			);
-		}
-		else {
-			foreach ( $expected as $that ) {
-				$this->assertRegExp(
-					$that,
-					$html,
-					"Could not find the marker '{$that}'"
-				);
-			}
 		}
 
 	}
