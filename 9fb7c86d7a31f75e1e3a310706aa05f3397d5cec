@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//7pI\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-15T15:48:25Z",
+      "side": 1,
+      "message": "parts of the docomentation is outdated.",
+      "revId": "9fb7c86d7a31f75e1e3a310706aa05f3397d5cec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7pQ\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-15T15:48:25Z",
+      "side": 1,
+      "message": "not used anymore.",
+      "revId": "9fb7c86d7a31f75e1e3a310706aa05f3397d5cec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7pM\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-15T15:48:25Z",
+      "side": 1,
+      "message": "The script doesn\u0027t really make API requests anymore.",
+      "revId": "9fb7c86d7a31f75e1e3a310706aa05f3397d5cec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
