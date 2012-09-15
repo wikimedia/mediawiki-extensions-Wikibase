@@ -84,11 +84,14 @@ abstract class EntityObject implements Entity {
 	/**
 	 * Returns a unique id prefix for the type of entity.
 	 *
+	 * @todo/fixme perhaps this should be replaced with a contant member
 	 * @since 0.1
 	 *
 	 * @return string
 	 */
-	protected abstract function getIdPrefix();
+	public static function getIdPrefix() {
+		return '';
+	}
 
 	/**
 	 * @see Entity::getId()
