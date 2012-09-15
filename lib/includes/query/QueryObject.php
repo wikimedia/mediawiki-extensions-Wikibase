@@ -22,7 +22,7 @@ class QueryObject extends EntityObject implements Query {
 	 *
 	 * @return string
 	 */
-	protected function getIdPrefix() {
+	public static function getIdPrefix() {
 		return Settings::get( 'queryPrefix' );
 	}
 

@@ -88,7 +88,9 @@ abstract class EntityObject implements Entity {
 	 *
 	 * @return string
 	 */
-	protected abstract function getIdPrefix();
+	public static function getIdPrefix() {
+		return '';
+	}
 
 	/**
 	 * @see Entity::getId()
