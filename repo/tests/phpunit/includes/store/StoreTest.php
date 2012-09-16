@@ -62,4 +62,28 @@ class StoreTest extends \MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testNewSiteLinkLookup( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\SiteLinkLookup', $store->newSiteLinkLookup() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testNewTermLookup( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\TermLookup', $store->newTermLookup() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param Store $store
+	 */
+	public function testNewIdGenerator( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\IdGenerator', $store->newIdGenerator() );
+	}
+
 }

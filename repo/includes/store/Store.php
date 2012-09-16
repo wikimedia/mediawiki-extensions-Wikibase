@@ -5,7 +5,7 @@ namespace Wikibase;
 /**
  * Store interface. All interaction with store Wikibase does on top
  * of storing pages and associated core MediaWiki indexing is done
- * throuhg this interface.
+ * through this interface.
  *
  * @since 0.1
  *
@@ -75,5 +75,14 @@ interface Store {
 	 * @return IdGenerator
 	 */
 	public function newIdGenerator();
+
+	/**
+	 * Returns a new SiteLinkLookup for this store.
+	 *
+	 * @since 0.1
+	 *
+	 * @return SiteLinkLookup
+	 */
+	public function newSiteLinkLookup();
 
 }

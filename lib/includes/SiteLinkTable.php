@@ -7,6 +7,21 @@ use MWException;
  * Represents a lookup database table for sitelinks.
  * It should have these fields: ips_item_id, ips_site_id, ips_site_page.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -14,8 +29,9 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class SiteLinkTable {
+class SiteLinkTable implements SiteLinkLookup {
 
 	/**
 	 * @since 0.1
@@ -48,13 +64,7 @@ class SiteLinkTable {
 
 		$dbw = wfGetDB( DB_MASTER );
 
-		$idField = array( 'ips_item_id' => $item->getId() );
-
-		$success = $dbw->delete(
-			$this->table,
-			$idField,
-			$function
-		);
+		$success = $this->deleteLinksOfItem( $item, $function );
 
 		if ( !$success ) {
 			return false;
@@ -72,12 +82,14 @@ class SiteLinkTable {
 			$dbw->begin( __METHOD__ );
 		}
 
-		/* @var SiteLink $siteLink */
+		/**
+		 * @var SiteLink $siteLink
+		 */
 		foreach ( $siteLinks as $siteLink ) {
 			$success = $dbw->insert(
 				$this->table,
 				array_merge(
-					$idField,
+					array( 'ips_item_id' => $item->getId() ),
 					array(
 						'ips_site_id' => $siteLink->getSite()->getGlobalId(),
 						'ips_site_page' => $siteLink->getPage(),
@@ -134,6 +146,68 @@ class SiteLinkTable {
 		);
 
 		return $result === false ? false : $result->ips_item_id;
+	}
+
+	/**
+	 * @see SiteLinkLookup::getConflictsForItem
+	 *
+	 * @since 0.1
+	 *
+	 * @param Item $item
+	 *
+	 * @return array of array
+	 */
+	public function getConflictsForItem( Item $item ) {
+		$links = $item->getSiteLinks();
+
+		if ( $links === array() ) {
+			return array();
+		}
+
+		$dbw = wfGetDB( DB_SLAVE );
+
+		$anyOfTheLinks = '';
+
+		/**
+		 * @var SiteLink $siteLink
+		 */
+		foreach ( $links as $siteLink ) {
+			if ( $anyOfTheLinks !== '' ) {
+				$anyOfTheLinks .= "\nOR ";
+			}
+
+			$anyOfTheLinks .= '(';
+			$anyOfTheLinks .= 'ips_site_id=' . $dbw->addQuotes( $siteLink->getSite()->getGlobalId() );
+			$anyOfTheLinks .= ' AND ';
+			$anyOfTheLinks .= 'ips_site_page=' . $dbw->addQuotes( $siteLink->getPage() );
+			$anyOfTheLinks .= ')';
+		}
+
+		//TODO: $anyOfTheLinks might get very large and hit some size limit imposed by the database.
+		//      We could chop it up of we know that size limit. For MySQL, it's select @@max_allowed_packet.
+
+		$conflictingLinks = $dbw->select(
+			$this->table,
+			array(
+				'ips_site_id',
+				'ips_site_page',
+				'ips_item_id',
+			),
+			"($anyOfTheLinks) AND ips_item_id != " . (int)$item->getId(),
+			__METHOD__
+		);
+
+		$conflicts = array();
+
+		foreach ( $conflictingLinks as $link ) {
+			$conflicts[] = array(
+				'siteId' => $link->ips_site_id,
+				'itemId' => (int)$link->ips_item_id,
+				'sitePage' => $link->ips_site_page,
+			);
+		}
+
+		return $conflicts;
 	}
 
 }
