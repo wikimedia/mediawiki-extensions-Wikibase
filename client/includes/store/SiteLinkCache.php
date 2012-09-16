@@ -1,10 +1,9 @@
 <?php
 
 namespace Wikibase;
-use Title;
 
 /**
- * Handler updates to the entity cache.
+ * Contains methods for interaction with the entity cache.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,43 +28,30 @@ use Title;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityCacheUpdater {
+interface SiteLinkCache extends SiteLinkLookup {
 
 	/**
-	 * Update the entity cache to reflect the provided change.
+	 * Saves the links for the provided item.
 	 *
 	 * @since 0.1
 	 *
-	 * @param Change $change
+	 * @param Item $item
+	 * @param string|null $function
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function handleChange( Change $change ) {
-		list( $entityType, $updateType ) = explode( '~', $change->getType() );
+	public function saveLinksOfItem( Item $item, $function = null );
 
-		$store = ClientStoreFactory::getStore();
-		$entityCache = $store->newEntityCache();
-
-		/**
-		 * @var Entity $entity
-		 */
-		$entity = $change->getEntity();
-
-		switch ( $updateType ) {
-			case 'remove':
-				$entityCache->deleteEntity( $entity );
-				break;
-			case 'add':
-				$entityCache->addEntity( $entity );
-				break;
-			case 'update':
-				$entityCache->updateEntity( $entity );
-				break;
-		}
-
-		// TODO: handle refresh updates and refresh for other types as well
-
-		if ( $entity->getType() == Item::ENTITY_TYPE ) {
-			$store->newSiteLinkCache()->saveLinksOfItem( $entity );
-		}
-	}
+	/**
+	 * Removes the links for the provided item.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Item $item
+	 * @param string|null $function
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function deleteLinksOfItem( Item $item, $function = null );
 
 }
