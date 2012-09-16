@@ -159,4 +159,15 @@ class SqlStore implements Store {
 		return new SqlIdGenerator( 'wb_id_counters', wfGetDB( DB_MASTER ) );
 	}
 
+	/**
+	 * @see Store::newSiteLinkLookup
+	 *
+	 * @since 0.1
+	 *
+	 * @return SiteLinkLookup
+	 */
+	public function newSiteLinkLookup() {
+		return new SiteLinkTable( 'wb_items_per_site' );
+	}
+
 }
