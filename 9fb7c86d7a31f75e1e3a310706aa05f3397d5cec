@@ -50,6 +50,23 @@
       "revId": "9fb7c86d7a31f75e1e3a310706aa05f3397d5cec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7b8\u003d",
+        "filename": "repo/maintenance/importInterlang.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 173
+      },
+      "writtenOn": "2012-09-16T13:45:16Z",
+      "side": 1,
+      "message": "Perhaps doPrint() should be used here, so that this error is printed even if --verbose is not set, like other errors.",
+      "revId": "9fb7c86d7a31f75e1e3a310706aa05f3397d5cec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
