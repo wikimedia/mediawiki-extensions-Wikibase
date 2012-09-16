@@ -42,7 +42,7 @@ class CachedEntityTest extends \ORMRowTest {
 	 * @return \IORMTable
 	 */
 	protected function getTableInstance() {
-		return \Wikibase\EntityCache::singleton();
+		return new \Wikibase\EntityCacheTable();
 	}
 
 	public function constructorTestProvider() {
