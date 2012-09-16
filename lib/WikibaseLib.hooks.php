@@ -144,6 +144,8 @@ final class LibHooks {
 			'site/SiteList',
 			'site/SiteObject',
 			'site/Sites',
+
+			'store/SiteLinkLookup',
 		);
 
 		// Test compat
