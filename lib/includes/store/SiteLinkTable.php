@@ -31,7 +31,7 @@ use MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SiteLinkTable implements SiteLinkLookup {
+class SiteLinkTable implements SiteLinkCache {
 
 	/**
 	 * @since 0.1
@@ -50,7 +50,7 @@ class SiteLinkTable implements SiteLinkLookup {
 	}
 
 	/**
-	 * Saves the links for the provided item.
+	 * @see SiteLinkCache::saveLinksOfItem
 	 *
 	 * @since 0.1
 	 *
@@ -107,7 +107,7 @@ class SiteLinkTable implements SiteLinkLookup {
 	}
 
 	/**
-	 * Removes the links for the provided item.
+	 * @see SiteLinkCache::deleteLinksOfItem
 	 *
 	 * @since 0.1
 	 *

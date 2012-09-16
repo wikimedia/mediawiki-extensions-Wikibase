@@ -92,7 +92,6 @@ final class RepoHooks {
 			'store/EntityDeletionHandler',
 			'store/EntityUpdateHandler',
 			'store/IdGenerator',
-			'store/SiteLinkLookup',
 			'store/StoreFactory',
 			'store/Store',
 			'store/TermLookup',
