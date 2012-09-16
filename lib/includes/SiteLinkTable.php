@@ -125,8 +125,7 @@ class SiteLinkTable implements SiteLinkLookup {
 	}
 
 	/**
-	 * Returns the id of the item that is equivalent to the
-	 * provided page, or false if there is none.
+	 * @see SiteLinkLookup::getItemIdForLink
 	 *
 	 * @since 0.1
 	 *
@@ -135,7 +134,7 @@ class SiteLinkTable implements SiteLinkLookup {
 	 *
 	 * @return integer|boolean
 	 */
-	public function getItemIdForPage( $globalSiteId, $pageTitle ) {
+	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
 		$result = wfGetDB( DB_SLAVE )->selectRow(
 			$this->table,
 			array( 'ips_item_id' ),
