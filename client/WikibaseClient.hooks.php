@@ -278,7 +278,8 @@ final class ClientHooks {
 		$titleText = $title->getText();
 		$siteId = Settings::get( 'siteGlobalID' );
 
-		$itemId = SiteLinkCache::singleton()->getItemIdForPage( $siteId, $titleText );
+		// TODO: create and use client store
+		$itemId = SiteLinkCache::singleton()->getItemIdForLink( $siteId, $titleText );
 
 		if ( $itemId ) {
 			// links to the special page
