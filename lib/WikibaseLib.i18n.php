@@ -130,6 +130,13 @@ $messages['ko'] = array(
 	'wikibaselib-desc' => '위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 함수 취득',
 );
 
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'wikibaselib-desc' => 'Jemeinsamme Fungxjuhne för di Projramm-Zohsäz <i lang="en">Wikibase</i> un <i lang="en">Wikibase Client</i>.',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
