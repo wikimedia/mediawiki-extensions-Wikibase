@@ -1,10 +1,9 @@
 <?php
 
 namespace Wikibase;
-use Title;
 
 /**
- * Handler updates to the entity cache.
+ * Factory for obtaining a client store instance.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,43 +28,25 @@ use Title;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityCacheUpdater {
+class ClientStoreFactory {
 
 	/**
-	 * Update the entity cache to reflect the provided change.
+	 * Returns an instance of the default store, or an alternate store
+	 * if so specified with the $store argument.
 	 *
 	 * @since 0.1
 	 *
-	 * @param Change $change
+	 * @param boolean $store
+	 *
+	 * @return ClientStore
 	 */
-	public function handleChange( Change $change ) {
-		list( $entityType, $updateType ) = explode( '~', $change->getType() );
+	public static function getStore( $store = false ) {
+		global $wbcStores;
+		$store = $store === false || !array_key_exists( $store, $wbcStores ) ? Settings::get( 'defaultClientStore' ) : $store;
 
-		$store = ClientStoreFactory::getStore();
-		$entityCache = $store->newEntityCache();
+		$class = $wbcStores[$store];
 
-		/**
-		 * @var Entity $entity
-		 */
-		$entity = $change->getEntity();
-
-		switch ( $updateType ) {
-			case 'remove':
-				$entityCache->deleteEntity( $entity );
-				break;
-			case 'add':
-				$entityCache->addEntity( $entity );
-				break;
-			case 'update':
-				$entityCache->updateEntity( $entity );
-				break;
-		}
-
-		// TODO: handle refresh updates and refresh for other types as well
-
-		if ( $entity->getType() == Item::ENTITY_TYPE ) {
-			$store->newSiteLinkCache()->saveLinksOfItem( $entity );
-		}
+		return $class::singleton();
 	}
 
 }

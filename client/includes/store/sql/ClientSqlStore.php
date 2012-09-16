@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\SiteLinkLookup as SiteLinkLookup;
+namespace Wikibase;
 
 /**
- * Tests for the Wikibase\SiteLinkLookup implementing classes.
+ * Implementation of the client store interface using an SQL backend via MediaWiki's
+ * storage abstraction layer.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,33 +21,53 @@ use Wikibase\SiteLinkLookup as SiteLinkLookup;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @file
  * @since 0.1
  *
- * @ingroup Wikibase
- * @ingroup Test
- *
- * @group Wikibase
- * @group WikibaseStore
- * @group Database
+ * @file
+ * @ingroup WikibaseClient
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkLookupTest extends \MediaWikiTestCase {
+class ClientSqlStore implements ClientStore {
 
-	public function instanceProvider() {
-		$instances = array( \Wikibase\StoreFactory::getStore( 'sqlstore' )->newSiteLinkLookup() );
+	/**
+	 * @see Store::singleton
+	 *
+	 * @since 0.1
+	 *
+	 * @return Store
+	 */
+	public static function singleton() {
+		static $instance = false;
 
-		return $this->arrayWrap( $instances );
+		if ( $instance === false ) {
+			$instance = new static();
+		}
+
+		return $instance;
 	}
 
 	/**
-	 * @dataProvider instanceProvider
+	 * @see Store::newSiteLinkCache
+	 *
+	 * @since 0.1
+	 *
+	 * @return SiteLinkCache
 	 */
-	public function testGetConflictsForItem( SiteLinkLookup $lookup ) {
-		$conflicts = $lookup->getConflictsForItem( \Wikibase\ItemObject::newEmpty() );
-		$this->assertTrue( $conflicts === array() );
+	public function newSiteLinkCache() {
+		return new SiteLinkTable( 'wbc_items_per_site' );
+	}
+
+	/**
+	 * @see Store::newEntityCache
+	 *
+	 * @since 0.1
+	 *
+	 * @return EntityCache
+	 */
+	public function newEntityCache() {
+		return new EntityCacheTable();
 	}
 
 }

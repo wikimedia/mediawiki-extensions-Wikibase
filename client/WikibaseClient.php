@@ -46,15 +46,22 @@ $wgExtensionMessagesFiles['wikibaseclient'] 		= $dir . 'WikibaseClient.i18n.php'
 $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.magic.php';
 
 // Autoloading
-$wgAutoloadClasses['Wikibase\ClientHooks'] 		= $dir . 'WikibaseClient.hooks.php';
+$wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
 
 $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.php';
-$wgAutoloadClasses['Wikibase\EntityCache'] 		= $dir . 'includes/EntityCache.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
-$wgAutoloadClasses['Wikibase\SiteLinkCache'] 		= $dir . 'includes/SiteLinkCache.php';
-$wgAutoloadClasses['Wikibase\SortUtils']                = $dir . 'includes/SortUtils.php';
+$wgAutoloadClasses['Wikibase\SortUtils']			= $dir . 'includes/SortUtils.php';
+
+// includes/store
+$wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
+$wgAutoloadClasses['Wikibase\ClientStoreFactory'] 	= $dir . 'includes/store/ClientStoreFactory.php';
+$wgAutoloadClasses['Wikibase\EntityCache'] 			= $dir . 'includes/store/EntityCache.php';
+
+// includes/store/sql
+$wgAutoloadClasses['Wikibase\ClientSqlStore'] 		= $dir . 'includes/store/sql/ClientSqlStore.php';
+$wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
 
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
@@ -87,3 +94,5 @@ $wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
 
 unset( $moduleTemplate );
 
+$wbcStores = array();
+$wbcStores['sqlstore'] = 'Wikibase\ClientSqlStore';
