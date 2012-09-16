@@ -27,7 +27,8 @@ class LangLinkHandler {
 	public static function getEntityCacheLinks( \Parser $parser ) {
 		$linkTable = SiteLinkCache::singleton();
 
-		$itemId = $linkTable->getItemIdForPage( Settings::get( 'siteGlobalID' ), $parser->getTitle()->getFullText() );
+		// TODO: create and use client store
+		$itemId = $linkTable->getItemIdForLink( Settings::get( 'siteGlobalID' ), $parser->getTitle()->getFullText() );
 
 		if ( $itemId !== false ) {
 			$item = EntityCache::singleton()->getItem( $itemId );
