@@ -7,6 +7,21 @@ use ORMTable;
  * Represents the entity cache of a single cluster.
  * Corresponds to the wbc_entity_cache table.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -15,7 +30,7 @@ use ORMTable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityCache extends ORMTable {
+class EntityCacheTable extends ORMTable implements EntityCache {
 
 	/**
 	 * @see IORMTable::getName
@@ -106,7 +121,7 @@ class EntityCache extends ORMTable {
 	 *
 	 * @return integer|false
 	 */
-	public function getCacheIdForEntity( Entity $entity ) {
+	protected function getCacheIdForEntity( Entity $entity ) {
 		$identifiers = array(
 			'entity_id' => $entity->getId(),
 			'entity_type' => $entity->getType(),
@@ -116,7 +131,7 @@ class EntityCache extends ORMTable {
 	}
 
 	/**
-	 * Returns if there currently is an entry in the cache for the provided entity.
+	 * @see EntityCache::
 	 *
 	 * @since 0.1
 	 *
@@ -129,7 +144,7 @@ class EntityCache extends ORMTable {
 	}
 
 	/**
-	 * Removes the provided entity from the cache (if present).
+	 * @see EntityCache::
 	 *
 	 * @since 0.1
 	 *
@@ -153,7 +168,7 @@ class EntityCache extends ORMTable {
 	 *
 	 * @return CachedEntity
 	 */
-	public function newRowFromEntity( Entity $entity ) {
+	protected function newRowFromEntity( Entity $entity ) {
 		return $this->newRow( array(
 			'entity_id' => $entity->getId(),
 			'entity_type' => $entity->getType(),
@@ -162,8 +177,7 @@ class EntityCache extends ORMTable {
 	}
 
 	/**
-	 * Returns the entity with provided type and entity id or false is there is no such
-	 * entity in the cache.
+	 * @see EntityCache::
 	 *
 	 * @since 0.1
 	 *
@@ -182,8 +196,7 @@ class EntityCache extends ORMTable {
 	}
 
 	/**
-	 * Returns the item with provided item id or false is there is no such
-	 * item in the cache.
+	 * @see EntityCache::getItem
 	 *
 	 * @since 0.1
 	 *
@@ -193,24 +206,6 @@ class EntityCache extends ORMTable {
 	 */
 	public function getItem( $itemId ) {
 		return $this->getEntity( Item::ENTITY_TYPE, $itemId );
-	}
-
-	/**
-	 * @see ORMTable::singleton
-	 * Overload boilerplate for type hinting.
-	 *
-	 * @since 0.1
-	 *
-	 * @return EntityCache
-	 */
-	public static function singleton() {
-		static $instance = false;
-
-		if ( $instance === false ) {
-			$instance = new static();
-		}
-
-		return $instance;
 	}
 
 }

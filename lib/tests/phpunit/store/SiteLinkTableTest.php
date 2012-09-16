@@ -15,6 +15,7 @@ use \Wikibase\SiteLinkTable as SiteLinkTable;
  * @group Wikibase
  * @group WikibaseLib
  * @group SiteLink
+ * @group WikibaseStore
  * @group Database
  *
  * @licence GNU GPL v2+
