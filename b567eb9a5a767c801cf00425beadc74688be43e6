@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//7Fs\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-17T13:35:03Z",
+      "side": 1,
+      "message": "Not a message, it\u0027s an ID attribute here ;)",
+      "parentUuid": "AAAASn//7JU\u003d",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//7JI\u003d",
         "filename": "repo/includes/EntityView.php",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAAASn//7Fo\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-17T13:35:03Z",
+      "side": 1,
+      "message": "We should, but in a follow-up. Please merge!",
+      "parentUuid": "AAAASn//7JI\u003d",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAASn//7I4\u003d",
         "filename": "repo/includes/ItemView.php",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2012-09-17T09:47:31Z",
       "side": 1,
       "message": "make parse method explicit (ie. plain(), text(), escaped() or whattever)",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7GA\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-17T13:35:03Z",
+      "side": 1,
+      "message": "I will do this in a follow-up, didn\u0027t even touch this part of the code here.",
+      "parentUuid": "AAAASn//7I4\u003d",
       "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -81,6 +135,24 @@
       "writtenOn": "2012-09-17T09:47:31Z",
       "side": 1,
       "message": "We should probably explain why we keep a safety copy, ie. the sort may fail in unpredictable ways.",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7Fw\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-17T13:35:03Z",
+      "side": 1,
+      "message": "Please, go ahead... If I remember correctly, you were the one who introduced this in the first place! This doesn\u0027t have to be part of this change set :)",
+      "parentUuid": "AAAASn//7JA\u003d",
       "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
