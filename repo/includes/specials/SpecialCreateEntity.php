@@ -16,7 +16,9 @@
 abstract class SpecialCreateEntity extends SpecialWikibasePage {
 
 	/**
-	 * @var array
+	 * Contains pieces of the sub-page name of this special page if a subpage was called.
+	 * E.g. array( 'a', 'b' ) in case of 'Special:CreateEntity/a/b'
+	 * @var string[]
 	 */
 	protected $parts = null;
 
@@ -77,10 +79,9 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Prepare arguments
+	 * Tries to extracts argument values from web request or sub-page parts
 	 *
 	 * @since 0.1
-	 *
 	 */
 	protected function prepareArguments() {
 		$this->label = $this->getRequest()->getVal( 'label', isset( $this->parts[0] ) ? $this->parts[0] : '' );
@@ -89,7 +90,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Sufficient arguments
+	 * Checks whether required arguments are set sufficiently
 	 *
 	 * @since 0.1
 	 *
