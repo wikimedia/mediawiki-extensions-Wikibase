@@ -46,28 +46,6 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 	},
 
 	/**
-	 * initialize input box
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._initInputElement
-	 */
-	_initInputElement: function() {
-		$PARENT.prototype._initInputElement.call( this );
-
-		// make autocomplete results list strech from the right side of the input box in rtl
-		if ( document.documentElement.dir == 'rtl' ) {
-			this._inputElem.data( 'autocomplete' ).options.position.my = 'right top';
-			this._inputElem.data( 'autocomplete' ).options.position.at = 'right bottom';
-		}
-
-		// since results list does not reposition automatically on resize, just close it
-		$( window ).off( 'wikibase.ui.AutocompleteInterface' ); // one resize event handler is enough for all widgets
-		$( window ).on( 'resize.wikibase.ui.AutocompleteInterface', $.proxy( function() {
-			if ( $( '.ui-autocomplete-input' ).length > 0 ) {
-				$( '.ui-autocomplete-input' ).data( 'autocomplete' ).close( {} );
-			}
-		}, this ) );
-	},
-
-	/**
 	 * create input element and initialize autocomplete
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._buildInputElement
 	 */
@@ -95,10 +73,6 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 				this._onInputRegistered();
 			}, this ) );
 		}
-
-		inputElement.on( 'autocompleteopen', $.proxy( function( event ) {
-			this._highlightMatchingCharacters();
-		}, this ) );
 
 		return inputElement;
 	},
@@ -182,18 +156,6 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 					this.setFocus(); // re-focus input
 				}
 			}, this )
-		} );
-	},
-
-	/**
-	 * highlight matching input characters in results
-	 */
-	_highlightMatchingCharacters: function() {
-		var regexp = new RegExp( '(' + $.ui.autocomplete.escapeRegex( this._inputElem.val() ) + ')', 'i' );
-		this._inputElem.data( 'autocomplete' ).menu.element.children().each( function( i ) {
-			$( this ).find( 'a' ).html(
-				$( this ).find( 'a' ).text().replace( regexp, '<b>$1</b>' )
-			);
 		} );
 	},
 
