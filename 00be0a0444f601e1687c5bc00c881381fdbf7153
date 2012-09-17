@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//6xc\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-17T21:20:33Z",
+      "side": 1,
+      "message": "If we want the user lang, we should be using $this-\u003egetLanguage() and not one of the evil globals.",
+      "revId": "00be0a0444f601e1687c5bc00c881381fdbf7153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6xY\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-17T21:20:33Z",
+      "side": 1,
+      "message": "missing spaced between (( and redundant brackets",
+      "revId": "00be0a0444f601e1687c5bc00c881381fdbf7153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6xQ\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-17T21:20:33Z",
+      "side": 1,
+      "message": "Html, not HTML",
+      "revId": "00be0a0444f601e1687c5bc00c881381fdbf7153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
