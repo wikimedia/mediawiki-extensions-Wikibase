@@ -2,7 +2,7 @@
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
- * If there are multiple items with this label, a disambiguation page is shown.
+ * A result page is shown, disambiguating between multiple results if necessary.
  *
  * @since 0.1
  *
@@ -29,36 +29,51 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @since 0.1
 	 *
 	 * @param string|null $subPage
+	 *
+	 * @return boolean if the page call was successful
 	 */
 	public function execute( $subPage ) {
-		parent::execute( $subPage );
+		if ( ! parent::execute( $subPage ) ) {
+			return false;
+		}
 
 		// Setup
+		global $wgLang;
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$language = $request->getVal( 'language', isset( $parts[0] ) ? $parts[0] : '' );
 		if ( $language === '' ) {
-			$language = null;
+			$language = $wgLang->getCode();
 		}
 		$label = $request->getVal( 'label', isset( $parts[1] ) ? $parts[1] : '' );
 		if ( $label === '' ) {
 			$label = null;
 		}
-		$itemContents = array();
 
 		$this->switchForm( $language, $label );
 
-		// Create an item view
+		// Display the result set
 		if ( isset( $language ) && isset( $label ) ) {
+			// TODO: should search over aliases as well, not just labels
 			$itemContents = \Wikibase\ItemHandler::singleton()->getFromLabel( $language, $label );
-			if ( count( $itemContents ) === 1 && $this->getRequest()->wasPosted() ) {
-				$this->displayItem( $itemContents[0] );
-			}
 			if ( 0 < count( $itemContents ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );
 				$this->displayDisambiguationPage( $itemContents, $language );
+			} else {
+				// No results found
+				if ( ( Language::isValidBuiltInCode( $language ) && ( Language::fetchLanguageName( $language ) !== "" ) )) {
+					// No valid language code
+					$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
+					if ( $language === $wgLang->getCode() ) {
+						$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-create', $label );
+					}
+				} else {
+					$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-invalid-langcode' );
+				}
 			}
 		}
+
+		return true;
 	}
 
 	/**
@@ -75,12 +90,12 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	}
 
 	/**
-	 * Output a form to allow searching for a page
+	 * Output a form to allow searching for labels
 	 *
 	 * @since 0.1
 	 *
-	 * @param string|null $site
-	 * @param string|null $page
+	 * @param string|null $langCode
+	 * @param string|null $label
 	 */
 	protected function switchForm( $langCode, $label ) {
 		global $wgScript;
@@ -135,7 +150,8 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 				array(
 					'id' => 'labelname',
 					'size' => 36,
-					'class' => 'wb-input-text'
+					'class' => 'wb-input-text',
+					'autofocus'
 				)
 			)
 			. Html::input(
