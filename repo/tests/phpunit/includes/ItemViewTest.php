@@ -59,9 +59,9 @@ class ItemViewTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseUtils
-	 * @dataProvider providerGetHTML
+	 * @dataProvider providerGetHtml
 	 */
-	public function testGetHTML( $itemData, $expected) {
+	public function testGetHtml( $itemData, $expected) {
 		self::$num++;
 
 		$itemContent = $itemData === false ? ItemContent::newEmpty() : ItemContent::newFromArray( $itemData );
@@ -80,7 +80,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 			"Could not find a view"
 		);
 
-		$html = $view->getHTML( $itemContent );
+		$html = $view->getHtml( $itemContent );
 
 		if ( is_string( $expected ) ) {
 			$this->assertRegExp(
@@ -103,7 +103,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 
 	// FIXME: this stuff is broken, AGAIN...
 	// Should use proper abstraction and not create items from arrays
-	public function providerGetHTML() {
+	public function providerGetHtml() {
 		return array(
 			array(
 				false,
