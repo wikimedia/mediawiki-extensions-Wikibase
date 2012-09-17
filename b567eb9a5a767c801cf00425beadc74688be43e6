@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//7JU\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T09:47:31Z",
+      "side": 1,
+      "message": "This makes it difficult to extract message keys in use",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7JI\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T09:47:31Z",
+      "side": 1,
+      "message": "I wonder if we should get rid of the deprecated stuff",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7I4\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T09:47:31Z",
+      "side": 1,
+      "message": "make parse method explicit (ie. plain(), text(), escaped() or whattever)",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7I0\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T09:47:31Z",
+      "side": 1,
+      "message": "make parse method explicit (ie. plain(), text(), escaped() or whattever)",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7JA\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T09:47:31Z",
+      "side": 1,
+      "message": "We should probably explain why we keep a safety copy, ie. the sort may fail in unpredictable ways.",
+      "revId": "b567eb9a5a767c801cf00425beadc74688be43e6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
