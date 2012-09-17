@@ -50,6 +50,40 @@
       "revId": "00be0a0444f601e1687c5bc00c881381fdbf7153",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6xE\u003d",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-17T21:22:03Z",
+      "side": 1,
+      "message": "Again we should be using $this-\u003egetLanguage()",
+      "revId": "00be0a0444f601e1687c5bc00c881381fdbf7153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6xA\u003d",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-17T21:22:03Z",
+      "side": 1,
+      "message": "spacfe between ))",
+      "revId": "00be0a0444f601e1687c5bc00c881381fdbf7153",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
