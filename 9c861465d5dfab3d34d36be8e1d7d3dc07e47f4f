@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//7IM\u003d",
+        "filename": "repo/includes/content/PropertyContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T10:12:48Z",
+      "side": 1,
+      "message": "Don\u0027t merge until this is fixed",
+      "revId": "9c861465d5dfab3d34d36be8e1d7d3dc07e47f4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7IQ\u003d",
+        "filename": "repo/includes/specials/SpecialCreateEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T10:12:48Z",
+      "side": 1,
+      "message": "Correct file",
+      "revId": "9c861465d5dfab3d34d36be8e1d7d3dc07e47f4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7IY\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T10:12:48Z",
+      "side": 1,
+      "message": "whitespace, also needs the correct file",
+      "revId": "9c861465d5dfab3d34d36be8e1d7d3dc07e47f4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//7IU\u003d",
+        "filename": "repo/includes/specials/SpecialCreateProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-17T10:12:48Z",
+      "side": 1,
+      "message": "whitespace, also needs the correct file",
+      "revId": "9c861465d5dfab3d34d36be8e1d7d3dc07e47f4f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
