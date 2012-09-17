@@ -71,8 +71,6 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 		= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 		= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 		= $dir . 'includes/ChangesTable.php';
-$wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/Claim.php';
-$wgAutoloadClasses['Wikibase\ClaimObject'] 			= $dir . 'includes/ClaimObject.php';
 $wgAutoloadClasses['Wikibase\Comparable'] 			= $dir . 'includes/Comparable.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\Hashable'] 			= $dir . 'includes/Hashable.php';
@@ -85,7 +83,6 @@ $wgAutoloadClasses['Wikibase\ReferenceObject'] 		= $dir . 'includes/ReferenceObj
 $wgAutoloadClasses['Wikibase\ObjectComparer'] 		= $dir . 'includes/ObjectComparer.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\SiteLink'] 			= $dir . 'includes/SiteLink.php';
-$wgAutoloadClasses['Wikibase\SiteLinkTable'] 		= $dir . 'includes/SiteLinkTable.php';
 $wgAutoloadClasses['Wikibase\Statement'] 			= $dir . 'includes/Statement.php';
 $wgAutoloadClasses['Wikibase\StatementObject'] 		= $dir . 'includes/StatementObject.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
@@ -101,6 +98,12 @@ $wgAutoloadClasses['Wikibase\EntityCreation'] 		= $dir . 'includes/changes/Entit
 $wgAutoloadClasses['Wikibase\EntityDeletion'] 		= $dir . 'includes/changes/EntityDeletion.php';
 $wgAutoloadClasses['Wikibase\EntityRefresh'] 		= $dir . 'includes/changes/EntityRefresh.php';
 $wgAutoloadClasses['Wikibase\EntityUpdate'] 		= $dir . 'includes/changes/EntityUpdate.php';
+
+// includes/claims
+$wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/claim/Claim.php';
+$wgAutoloadClasses['Wikibase\ClaimList'] 			= $dir . 'includes/claim/ClaimList.php';
+$wgAutoloadClasses['Wikibase\ClaimObject'] 			= $dir . 'includes/claim/ClaimObject.php';
+$wgAutoloadClasses['Wikibase\Claims'] 				= $dir . 'includes/claim/Claims.php';
 
 // includes/entity
 $wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/entity/Entity.php';
@@ -141,6 +144,11 @@ $wgAutoloadClasses['Wikibase\SnakList'] 				= $dir . 'includes/snak/SnakList.php
 $wgAutoloadClasses['Wikibase\SnakObject'] 				= $dir . 'includes/snak/SnakObject.php';
 $wgAutoloadClasses['Wikibase\Snaks'] 					= $dir . 'includes/snak/Snaks.php';
 $wgAutoloadClasses['Wikibase\SubclassOfSnak'] 			= $dir . 'includes/snak/SubclassOfSnak.php';
+
+// includes/store
+$wgAutoloadClasses['Wikibase\SiteLinkCache'] 			= $dir . 'includes/store/SiteLinkCache.php';
+$wgAutoloadClasses['Wikibase\SiteLinkLookup'] 			= $dir . 'includes/store/SiteLinkLookup.php';
+$wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/SiteLinkTable.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/HashArrayTest.php';

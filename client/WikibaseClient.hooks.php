@@ -66,8 +66,9 @@ final class ClientHooks {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'includes/CachedEntity',
-			'includes/EntityCache',
 			'includes/EntityCacheUpdater',
+
+			'includes/store/EntityCacheTable',
 		);
 
 		foreach ( $testFiles as $file ) {
@@ -231,7 +232,8 @@ final class ClientHooks {
 				'sortPrepend' => false,
 				'alwaysSort' => false,
 				'siteGlobalID' => 'enwiki',
-				'siteGroup' => 'wikipedia'
+				'siteGroup' => 'wikipedia',
+				'defaultClientStore' => 'sqlstore',
 			)
 		);
 
@@ -278,7 +280,7 @@ final class ClientHooks {
 		$titleText = $title->getText();
 		$siteId = Settings::get( 'siteGlobalID' );
 
-		$itemId = SiteLinkCache::singleton()->getItemIdForPage( $siteId, $titleText );
+		$itemId = ClientStoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $titleText );
 
 		if ( $itemId ) {
 			// links to the special page

@@ -42,10 +42,6 @@ class ItemDisambiguation extends \ContextSource {
 		if ( !is_null( $context ) ) {
 			$this->setContext( $context );
 		}
-
-		//if ( count( $this->items ) < 2 ) {
-		//	throw new MWException( 'Cannot disambiguate less then 2 items!' );
-		//}
 	}
 
 	/**
@@ -56,52 +52,61 @@ class ItemDisambiguation extends \ContextSource {
 	 * @return string
 	 */
 	public function getHTML() {
-		//global $wgContLang;
-		$langCode = $this->langCode;
+		$userLang = $this->getLanguage()->getCode();
+		$searchLang = $this->langCode;
 
 		return
 			'<ul class="wikibase-disambiguation">' .
 				implode( '', array_map(
-					function( ItemContent $item ) use ( $langCode ) {
-						global $wgLang;
-						// Figure out which description to use while identifying the item
-						list( $descriptionCode, $descriptionText, $descriptionLang) =
-							\Wikibase\Utils::lookupUserMultilangText(
-								$item->getItem()->getDescriptions(),
-								\Wikibase\Utils::languageChain( $langCode ),
-								array( $langCode, '', \Language::factory( $langCode ) )
-							);
-						return \Html::rawElement(
-							'li',
-							array( 'class' => 'wikibase-disambiguation' ),
+					function( ItemContent $item ) use ( $userLang, $searchLang ) {
+
+						$userLabel = $item->getItem()->getLabel( $userLang );
+						$searchLabel = $item->getItem()->getLabel( $searchLang );
+
+						// FIXME: Need a more general way to figure out the "q" thingy.
+						// This should REALLY be something more elegant, but it is sufficient for now.
+						$idLabel = \Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
+							. wfMessage( 'wikibase-itemlink-id-wrapper' )->params( $item->getTitle()->getText() )->escaped()
+							. \Html::closeElement( 'span' );
+
+						// link to the item. The text is the label in the user's language, or the id if no label exists
+						$result =
 							\Linker::link(
 								$item->getTitle(),
-								// FIXME: Need a more general way to figure out the "q" thingy.
-								// This should REALLY be something more elegant, but it is sufficient for now.
-								\Html::openElement( 'span', array( 'class' => 'wb-itemlink-id' ) )
-								. ( $item->getItem()->getLabel( $langCode  )
-									? $item->getItem()->getLabel( $langCode  )
-									: wfMessage( 'wikibase-itemlink-id-wrapper' )
-										->params( $item->getTitle()->getText() )->escaped()
-								)
-								. \Html::closeElement( 'span' )
-							)
-							. \Html::openElement( 'span', array( 'class' => 'wb-itemlink-query-lang' ) )
-							// really ugly way to add parenthesis... ;/
-							. '&nbsp;[' . \Linker::link( $item->getTitle(), $langCode, array(), array( 'uselang' => $langCode ) ) . ']'
-							. \Html::closeElement( 'span' )
-							. wfMessage( 'colon-separator' )->escaped()
-							. \Html::openElement(
-								'span',
-								array(
-									'class' => 'wb-itemlink-description',
-									'lang' => $descriptionLang->getCode(),
-									'dir' => $descriptionLang->getDir()
-								)
-							)
-							. htmlspecialchars( $descriptionText )
-							. \Html::closeElement( 'span' )
-						);
+								$userLabel ? $userLabel : $idLabel
+							);
+
+						// display the label in the searched language in case it is different than in the user language
+						if ( ( $userLang !== $searchLang ) && ( $userLabel !== $searchLabel ) ) {
+							$result = $result
+									// really ugly way to add parenthesis... ;/
+									. ' ('
+									. \Language::fetchLanguageName( $searchLang, $userLang )
+									. wfMessage( 'colon-separator' )->escaped()
+									. \Html::element(
+										'span',
+										array( 'class' => 'wb-itemlink-query-lang', 'lang' => $searchLang ),
+										$searchLabel )
+									. ')'
+									;
+						};
+
+						// display the description in the user's language
+						$description = htmlspecialchars( $item->getItem()->getDescription( $userLang ) );
+						if ( $description === "" ) {
+							// Display the ID if no description is available
+							// do not display it if the ID was already displayed, i.e. if it was used instead of the label previously
+							$result .= $userLabel ? " " . $idLabel : "";
+						} else {
+							$result .=
+								wfMessage( 'colon-separator' )->escaped()
+								. \Html::openElement( 'span', array( 'class' => 'wb-itemlink-description' ) )
+								. $description
+								. \Html::closeElement( 'span' );
+						}
+
+						$result = \Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
+						return $result;
 					},
 					$this->items
 				) ).

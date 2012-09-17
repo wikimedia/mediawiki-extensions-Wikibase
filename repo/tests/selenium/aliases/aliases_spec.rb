@@ -145,8 +145,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.aliasesInputRemove?.should be_true
         page.saveAliases?.should be_true
         page.aliasesInputModified_element.clear
-        page.aliasesInputModified_element.click
-        page.aliasesInputEmpty?.should be_true
+        page.aliasesInputRemove
         page.aliasesInputModified?.should be_false
         page.aliasesInputEmpty= "new alias"
         page.aliasesInputRemove

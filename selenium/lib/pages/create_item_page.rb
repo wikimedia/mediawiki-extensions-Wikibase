@@ -10,18 +10,20 @@ class CreateItemPage < ItemPage
   include PageObject
   page_url WIKI_REPO_URL + "Special:CreateItem"
 
-  text_field(:createItemLabelField, :id => "wb-createitem-label")
-  text_field(:createItemDescriptionField, :id => "wb-createitem-description")
-  button(:createItemSubmit, :id => "wb-createitem-submit")
+  text_field(:createItemLabelField, :id => "wb-createentity-label")
+  text_field(:createItemDescriptionField, :id => "wb-createentity-description")
+  button(:createItemSubmit, :id => "wb-createentiy-submit")
 
-  def create_new_item(label, description)
+  def create_new_item(label, description, switch_lang = true)
+    if switch_lang
+      self.uls_switch_language(LANGUAGE)
+    end
     self.createItemLabelField = label
     self.createItemDescriptionField = description
     createItemSubmit
     wait_for_item_to_load
     @@item_url = current_url
-    #@@item_id = @@item_url[@@item_url.index('/Q')+2..-1]
-    query_string = "/" + ITEM_NAMESPACE + "Q"
+    query_string = "/" + ITEM_NAMESPACE + ITEM_ID_PREFIX
     @@item_id = @@item_url[@@item_url.index(query_string)+query_string.length..-1]
     return @@item_id
   end

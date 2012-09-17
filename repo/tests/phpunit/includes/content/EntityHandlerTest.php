@@ -90,4 +90,71 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testCanBeUsedOn() {
+		$handler = $this->getHandler();
+
+		$this->assertTrue( $handler->canBeUsedOn( \Title::makeTitle( $handler->getEntityNamespace(), "1234" ) ),
+							'It should be possible to create this kind of entity in the respective entity namespace!'
+						);
+
+		$this->assertFalse( $handler->canBeUsedOn( \Title::makeTitle( NS_MEDIAWIKI, "Foo" ) ),
+							'It should be impossible to create an entity outside the respective entity namespace!'
+						);
+	}
+
+	public function testGetPageLanguage() {
+		global $wgLang, $wgContLang;
+		$oldLang = $wgLang;
+
+		$handler = $this->getHandler();
+		$title = \Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
+
+		//NOTE: currently, this tests whether getPageLanguage will always return the content language, even
+		//      if the user language is different. It's unclear whether this is actually the desired behaviour,
+		//      since Wikibase Entities are inherently multilingual, so they have no actual "page language".
+
+		// test whatever is there
+		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+
+		// test fr
+		$wgLang = \Language::factory( "fr" );
+		$handler = $this->getHandler();
+		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+
+		// test nl
+		$wgLang = \Language::factory( "nl" );
+		$handler = $this->getHandler();
+		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+
+		// restore
+		$wgLang = $oldLang;
+	}
+
+	public function testGetPageViewLanguage() {
+		global $wgLang;
+		$oldLang = $wgLang;
+
+		$handler = $this->getHandler();
+		$title = \Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
+
+		//NOTE: we expect getPageViewLanguage to return the user language, because Wikibase Entities
+		//      are always shown in the user language.
+
+		// test whatever is there
+		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
+
+		// test fr
+		$wgLang = \Language::factory( "fr" );
+		$handler = $this->getHandler();
+		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
+
+		// test nl
+		$wgLang = \Language::factory( "nl" );
+		$handler = $this->getHandler();
+		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
+
+		// restore
+		$wgLang = $oldLang;
+	}
+
 }

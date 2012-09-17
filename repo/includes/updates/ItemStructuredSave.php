@@ -53,6 +53,8 @@ class ItemStructuredSave extends \DataUpdate {
 	 * @since 0.1
 	 */
 	public function doUpdate() {
+		wfProfileIn( __METHOD__ );
+
 		StoreFactory::getStore()->newEntityUpdateHandler()->handleUpdate( $this->itemContent->getItem() );
 
 		/**
@@ -64,6 +66,8 @@ class ItemStructuredSave extends \DataUpdate {
 		 * @param ItemStructuredSave $this
 		 */
 		wfRunHooks( 'WikibaseItemStructuredSave', array( $this ) );
+
+		wfProfileOut( __METHOD__ );
 	}
 
 }

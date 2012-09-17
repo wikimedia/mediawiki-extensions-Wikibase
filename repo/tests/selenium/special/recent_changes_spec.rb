@@ -29,7 +29,7 @@ describe "Check functionality of recentChanges special page" do
         page.firstResultLabelSpan?.should be_true
         page.firstResultIdSpan?.should be_true
         page.firstResultLabelSpan.should == label
-        page.firstResultIdSpan.should == "(q" + page.get_item_id + ")"
+        page.firstResultIdSpan.should == "(" + ITEM_ID_PREFIX + page.get_item_id + ")"
         page.firstResultLink?.should be_true
         page.firstResultLink
         page.wait_for_item_to_load

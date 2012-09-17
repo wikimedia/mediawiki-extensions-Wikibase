@@ -96,6 +96,8 @@ final class RepoHooks {
 			'store/Store',
 			'store/TermLookup',
 
+			'store/sql/SqlIdGenerator',
+
 			'updates/ItemDeletionUpdate',
 			'updates/ItemStructuredSave',
 		);
@@ -123,8 +125,13 @@ final class RepoHooks {
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
 
+		// TODO: make this a little nicer
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
-			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
+			&& in_array(
+				$title->getContentModel(),
+				array( CONTENT_MODEL_WIKIBASE_ITEM, CONTENT_MODEL_WIKIBASE_PROPERTY, CONTENT_MODEL_WIKIBASE_QUERY )
+			)
+		) {
 			$pageLanguage = $language;
 		}
 
@@ -177,6 +184,7 @@ final class RepoHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.tests.js'
 			),
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
@@ -405,6 +413,18 @@ final class RepoHooks {
 				),
 
 				'defaultStore' => 'sqlstore',
+
+				'testDataTypes' => array( 'Type 1', 'Type 2' ),
+
+				'idBlacklist' => array(
+					1,
+					23,
+					42,
+					1337,
+					9001,
+					31337,
+					720101010,
+				),
 			)
 		);
 
@@ -715,6 +735,51 @@ final class RepoHooks {
 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
+
+		return true;
+	}
+
+	/**
+	 * Handler for the ApiCheckCanExecute hook in ApiMain.
+	 *
+	 * This implementation causes the execution of ApiEditPage (action=edit) to fail
+	 * for all namespaces reserved for Wikibase entities. This prevents direct text-level editing
+	 * of structured data, and it also prevents other types of content being created in these
+	 * namespaces.
+	 *
+	 * @param \ApiBase $module The API module being called
+	 * @param \User    $user   The user calling the API
+	 * @param array|string|null   $message Output-parameter holding for the message the call should fail with.
+	 *                            This can be a message key or an array as expected by ApiBase::dieUsageMsg().
+	 *
+	 * @return bool true to continue execution, false to abort and with $message as an error message.
+	 */
+	public static function onApiCheckCanExecute( \ApiBase $module, \User $user, &$message ) {
+		$entity_models = array(
+			CONTENT_MODEL_WIKIBASE_ITEM,
+			CONTENT_MODEL_WIKIBASE_PROPERTY,
+			CONTENT_MODEL_WIKIBASE_QUERY,
+		);
+
+		if ( $module instanceof \ApiEditPage ) {
+			$params = $module->extractRequestParams();
+			$pageObj = $module->getTitleOrPageId( $params );
+			$namespace = $pageObj->getTitle()->getNamespace();
+
+			foreach ( $entity_models as $model ) {
+				$handler = ContentHandler::getForModelID( $model );
+
+				if ( $handler->getEntityNamespace() == $namespace ) {
+					// trying to use ApiEditPage on an entity namespace - just fail
+					$message = array(
+						'wikibase-no-direct-editing',
+						$pageObj->getTitle()->getNsText()
+					);
+
+					return false;
+				}
+			}
+		}
 
 		return true;
 	}

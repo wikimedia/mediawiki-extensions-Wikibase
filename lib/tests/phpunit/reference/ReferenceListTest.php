@@ -25,9 +25,6 @@ use Wikibase\Hashable as Hashable;
  */
 class ReferenceListTest extends \MediaWikiTestCase {
 
-	/**
-	 * @see GenericArrayObjectTest::getInstanceClass
-	 */
 	public function getInstanceClass() {
 		return '\Wikibase\ReferenceList';
 	}
@@ -37,28 +34,26 @@ class ReferenceListTest extends \MediaWikiTestCase {
 
 		$instances = array();
 
-		foreach ( $this->constructorProvider() as $args ) {
-			$instances[] = array( new $class( array_key_exists( 0, $args ) ? $args[0] : null ) );
+		foreach ( $this->getConstructorArg() as $arg ) {
+			$instances[] = array( new $class( $arg ) );
 		}
 
 		return $instances;
 	}
 
-	/**
-	 * @see GenericArrayObjectTest::elementInstancesProvider
-	 */
-	public function elementInstancesProvider() {
+	public function getElementInstances() {
 		$instances = array();
 
 		$instances[] = new ReferenceObject();
 
-		return $this->arrayWrap( $this->arrayWrap( $instances ) );
+		return $instances;
 	}
 
-	public function constructorProvider() {
+	public function getConstructorArg() {
 		return array(
+			null,
 			array(),
-			array( new \Wikibase\ReferenceObject() ),
+			$this->getElementInstances(),
 		);
 	}
 
@@ -98,9 +93,8 @@ class ReferenceListTest extends \MediaWikiTestCase {
 			$this->assertEquals( --$elementCount, count( $array ) );
 		}
 
-		$elements = $this->elementInstancesProvider();
+		$elements = $this->getElementInstances();
 		$element = array_shift( $elements );
-		$element = $element[0][0];
 
 		$array->removeReference( $element );
 		$array->removeReference( $element );
@@ -114,9 +108,8 @@ class ReferenceListTest extends \MediaWikiTestCase {
 	public function testAddReference( ReferenceList $array ) {
 		$elementCount = count( $array );
 
-		$elements = $this->elementInstancesProvider();
+		$elements = $this->getElementInstances();
 		$element = array_shift( $elements );
-		$element = $element[0][0];
 
 		if ( !$array->hasReference( $element ) ) {
 			++$elementCount;

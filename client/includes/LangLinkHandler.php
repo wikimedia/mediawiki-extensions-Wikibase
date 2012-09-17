@@ -25,12 +25,13 @@ class LangLinkHandler {
 	 * @return array of SiteLink
 	 */
 	public static function getEntityCacheLinks( \Parser $parser ) {
-		$linkTable = SiteLinkCache::singleton();
-
-		$itemId = $linkTable->getItemIdForPage( Settings::get( 'siteGlobalID' ), $parser->getTitle()->getFullText() );
+		$itemId = ClientStoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink(
+			Settings::get( 'siteGlobalID' ),
+			$parser->getTitle()->getFullText()
+		);
 
 		if ( $itemId !== false ) {
-			$item = EntityCache::singleton()->getItem( $itemId );
+			$item = ClientStoreFactory::getStore()->newEntityCache()->getItem( $itemId );
 
 			if ( $item !== false ) {
 				return $item->getSiteLinks();

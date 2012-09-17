@@ -256,10 +256,12 @@ class ItemPage < RubySelenium
 
   # ULS
   def uls_switch_language(lang)
-    ulsOpen
-    self.ulsLanguageFilter= lang
-    ajax_wait
-    ulsLanguageLink
+    if ulsOpen_element.text != lang
+      ulsOpen
+      self.ulsLanguageFilter= lang
+      ajax_wait
+      ulsLanguageLink
+    end
   end
 
 end

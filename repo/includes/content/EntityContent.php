@@ -109,12 +109,15 @@ abstract class EntityContent extends \AbstractContent {
 	 * @return String a string representing the content in a way useful for building a full text search index.
 	 */
 	public function getTextForSearchIndex() {
+		wfProfileIn( __METHOD__ );
+
 		$text = implode( "\n", $this->getEntity()->getLabels() );
 
 		foreach ( $this->getEntity()->getAllAliases() as $aliases ) {
 			$text .= "\n" . implode( "\n", $aliases );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $text;
 	}
 
@@ -261,6 +264,8 @@ abstract class EntityContent extends \AbstractContent {
 		global $wgUser;
 		static $dummyTitle = null;
 
+		wfProfileIn( __METHOD__ );
+
 		if ( !$user ) {
 			$user = $wgUser;
 		}
@@ -294,6 +299,7 @@ abstract class EntityContent extends \AbstractContent {
 			$status->setResult( false );
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $status;
 	}
 
@@ -308,12 +314,15 @@ abstract class EntityContent extends \AbstractContent {
 			throw new \MWException( "This entiy already has an ID!" );
 		}
 
+		wfProfileIn( __METHOD__ );
+
 		$idGenerator = StoreFactory::getStore()->newIdGenerator();
 
 		$id = $idGenerator->getNewId( $this->getContentHandler()->getModelID() );
 
 		$this->getEntity()->setId( $id );
 
+		wfProfileOut( __METHOD__ );
 		return $id;
 	}
 
@@ -346,15 +355,18 @@ abstract class EntityContent extends \AbstractContent {
 	 * @return \Status Success indicator
 	 */
 	public function save( $summary = '', User $user = null, $flags = 0, $baseRevId = false, EditEntity $editEntity = null ) {
+		wfProfileIn( __METHOD__ );
 
 		if ( ( $flags & EDIT_NEW ) == EDIT_NEW ) {
 			if ( $this->isNew() ) {
 				$this->grabFreshId();
 			} else {
+				wfProfileOut( __METHOD__ );
 				return Status::newFatal( 'edit-already-exists' );
 			}
 		} else {
 			if ( $this->isNew() ) {
+				wfProfileOut( __METHOD__ );
 				return Status::newFatal( 'edit-gone-missing' );
 			}
 		}
@@ -386,6 +398,7 @@ abstract class EntityContent extends \AbstractContent {
 
 		$this->editEntity = null;
 
+		wfProfileOut( __METHOD__ );
 		return $status;
 	}
 
@@ -400,9 +413,12 @@ abstract class EntityContent extends \AbstractContent {
 	 * @see Content::prepareSave()
 	 */
 	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
+		wfProfileIn( __METHOD__ );
+
 		// Chain to parent
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 		if ( !$status->isOK() ) {
+			wfProfileOut( __METHOD__ );
 			return $status;
 		}
 
@@ -415,6 +431,7 @@ abstract class EntityContent extends \AbstractContent {
 			}
 		}
 
+		wfProfileOut( __METHOD__ );
 		return $status;
 	}
 

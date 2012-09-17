@@ -108,19 +108,7 @@ class ItemHandler extends EntityHandler {
 	 * @return false|integer
 	 */
 	public function getIdForSiteLink( $siteId, $pageName ) {
-		$dbr = wfGetDB( DB_SLAVE );
-		// TODO: use store
-		$result = $dbr->selectRow(
-			'wb_items_per_site',
-			array( 'ips_item_id' ),
-			array(
-				'ips_site_id' => $siteId,
-				'ips_site_page' => $pageName,
-			),
-			__METHOD__
-		);
-
-		return $result === false ? $result : $result->ips_item_id;
+		return StoreFactory::getStore()->newSiteLinkLookup()->getItemIdForLink( $siteId, $pageName );
 	}
 
 	/**

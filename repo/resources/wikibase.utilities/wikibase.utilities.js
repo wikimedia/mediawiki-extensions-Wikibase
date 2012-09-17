@@ -37,17 +37,17 @@
 				constructor = false;
 			}
 		}
-		var ext = constructor || function() { base.apply( this, arguments ); };
+		var NewConstructor = constructor || function() { base.apply( this, arguments ); };
 
-		var extProto = function(){}; // new constructor for avoiding base constructor and with it any side-effects
-		extProto.prototype = base.prototype;
+		var NewPrototype = function(){}; // new constructor for avoiding base constructor and with it any side-effects
+		NewPrototype.prototype = base.prototype;
 
-		ext.prototype = $.extend(
-			new extProto(),
-			{ constructor: ext }, // make sure constructor property is set properly, can be overwritten from members
+		NewConstructor.prototype = $.extend(
+			new NewPrototype(),
+			{ constructor: NewConstructor }, // make sure constructor property is set properly, can be overwritten from members
 			members
 		);
-		return ext;
+		return NewConstructor;
 	};
 
 	/**

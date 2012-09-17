@@ -34,7 +34,9 @@ class PropertyContent extends EntityContent {
 	 * @param Property $property
 	 */
 	public function __construct( Property $property ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
+		// TODO: Update this, or change it back
+		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY );
+		//parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
 
 		$this->property = $property;
 	}
@@ -139,11 +141,8 @@ class PropertyContent extends EntityContent {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$parserOutput = new ParserOutput();
-
-		$parserOutput->setText( 'TODO' ); // TODO
-
-		return $parserOutput;
+		$propertyView = new PropertyView();
+		return $propertyView->getParserOutput( $this, $options, $generateHtml );
 	}
 
 	/**
