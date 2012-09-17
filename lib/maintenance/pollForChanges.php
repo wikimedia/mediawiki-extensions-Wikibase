@@ -17,6 +17,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jens Ohlig
  */
 class PollForChanges extends \Maintenance {
 
@@ -92,6 +93,20 @@ class PollForChanges extends \Maintenance {
 		$this->continueInterval = (int)$this->getOption( 'continueinterval', Settings::get( 'pollContinueInterval' ) ) * 1000;
 
 		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
+
+		// Make sure this script only runs once
+		$lockfile = sys_get_temp_dir() . '/' . str_replace( '/','_', __FILE__ ) . '.lck';
+		if ( file_exists( $lockfile ) ) {
+			$pid = file_get_contents( $lockfile );
+			if ( checkPID( $pid ) === false ) {
+				self::msg( 'Process has died! Restarting...' );
+			} else {
+				self::msg( 'PID is still alive! Cannot run twice!' );
+				exit;
+			}
+		} else {
+			file_put_contents( $lockfile, getmypid() ); // create lockfile
+		}
 
 		while ( true ) {
 			$ms = $this->doPoll();
@@ -174,6 +189,35 @@ class PollForChanges extends \Maintenance {
 	 */
 	public static function msg( $message ) {
 		echo date( 'H:i:s' ) . ' ' . $message . "\n";
+	}
+
+	/**
+	 * Check for running PID
+	 *
+	 * @param int $pid
+	 * @return boolean
+	 */
+	protected function checkPID ( $pid ) {
+		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+			// Are we anything but Windows, i.e. some kind of Unix?
+			return posix_getsid( $pid );
+		} else {
+			// Welcome to Redmond
+			$processes = explode( "\n", shell_exec( "tasklist.exe" ));
+			foreach( $processes as $process )
+			{
+				if( strpos( "Image Name", $process ) === 0
+					|| strpos( "===", $process ) === 0 )
+					continue;
+				$matches = false;
+				preg_match( "/(.*)\s+(\d+).*$/", $process );
+				$processid = $matches[ 2 ];
+				if ( $processid === $pid ) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }
