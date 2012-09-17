@@ -24,7 +24,7 @@ class PropertyObject extends EntityObject implements Property {
 	 * @return string
 	 */
 	protected function getIdPrefix() {
-		return 'p';
+		return Settings::get( 'propertyPrefix' );
 	}
 
 	/**

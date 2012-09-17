@@ -25,7 +25,7 @@ class ItemObject extends EntityObject implements Item {
 	 * @return string
 	 */
 	protected function getIdPrefix() {
-		return 'q';
+		return Settings::get( 'itemPrefix' );
 	}
 
 	/**

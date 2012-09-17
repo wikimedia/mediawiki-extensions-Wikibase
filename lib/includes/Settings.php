@@ -47,7 +47,7 @@ class Settings extends SettingsBase {
 
 			'itemPrefix' => 'q',
 			'propertyPrefix' => 'p',
-			'queryPrefix' => 'query',
+			'queryPrefix' => 'y', // TODO: find a more suiting prefix, perhaps use 'q' and use 'i' for items then
 
 			'siteLinkGroup' => 'wikipedia',
 		);
