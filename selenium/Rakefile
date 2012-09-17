@@ -153,6 +153,11 @@ RSpec::Core::RakeTask.new(:create_item) do |spec|
   spec.pattern = '../repo/tests/selenium/special/create_item_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:edit_conflict) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/item/edit_conflict_spec.rb'
+end
+
 task :run_tests, :taskname, :browser, :remote, :os do |t, args|
   task = args[:taskname] || :all
   setup_env(args[:browser], args[:remote], args[:os])
