@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//7HY\u003d",
+        "filename": "repo/resources/wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-17T12:53:11Z",
+      "side": 1,
+      "message": "I realize this is just a refactor, but this highlighting is problematic for arabic scripts, interfering with how the letters connect.  Bolding makes no sense anyway for arabic scripts.",
+      "revId": "cbdd9200fa51d116351fffb9b91ca219de809213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
