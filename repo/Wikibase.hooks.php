@@ -177,6 +177,7 @@ final class RepoHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.tests.js'
 			),
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
