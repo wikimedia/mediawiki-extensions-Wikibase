@@ -4,7 +4,7 @@ namespace Wikibase;
 use ApiBase, Language;
 
 /**
- * API module to set the language attributes for a Wikibase item.
+ * API module to set the language attributes for a Wikibase entity.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -17,18 +17,18 @@ use ApiBase, Language;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-abstract class ApiModifyLangAttribute extends ApiModifyItem {
+abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 
 	/**
-	 * @see ApiModifyItem::getRequiredPermissions()
+	 * @see ApiModifyEntity::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Item $item, array $params ) {
-		$permissions = parent::getRequiredPermissions( $item, $params );
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 		return $permissions;
 	}
 
 	/**
-	 * @see ApiModifyItem::validateParameters()
+	 * @see ApiModifyEntity::validateParameters()
 	 */
 	protected function validateParameters( array $params ) {
 		parent::validateParameters( $params );
@@ -39,7 +39,7 @@ abstract class ApiModifyLangAttribute extends ApiModifyItem {
 	}
 
 	/**
-	 * @see  ApiModifyItem::getTextForComment()
+	 * @see  ApiModifyEntity::getTextForComment()
 	 */
 	protected function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
@@ -49,7 +49,7 @@ abstract class ApiModifyLangAttribute extends ApiModifyItem {
 	}
 
 	/**
-	 * @see  ApiModifyItem::getTextForSummary()
+	 * @see  ApiModifyEntity::getTextForSummary()
 	 */
 	protected function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
@@ -58,43 +58,40 @@ abstract class ApiModifyLangAttribute extends ApiModifyItem {
 	}
 
 	/**
-	 * @see ApiModifyItem::createItem()
-	 */
-	protected function createItem( array $params ) {
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
-		return null;
-	}
-
-	/**
-	 * @see ApiModifyItem::modifyItem()
-	 */
-	protected function modifyItem( ItemContent &$itemContent, array $params ) {
-		return true;
-	}
-
-	/**
 	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
-		return array_merge( parent::getAllowedParams(), array(
-			'language' => array(
-				ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'value' => array(
-				ApiBase::PARAM_TYPE => 'string',
-			),
-		) );
+		return array_merge(
+			parent::getAllowedParams(),
+			parent::getAllowedParamsForId(),
+			parent::getAllowedParamsForSiteLink(),
+			parent::getAllowedParamsForEntity(),
+			array(
+				'language' => array(
+					ApiBase::PARAM_TYPE => Utils::getLanguageCodes(),
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'value' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+			)
+		);
 	}
 
 	/**
 	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
-		return array_merge( parent::getParamDescription(), array(
-			'language' => 'Language for the label and description',
-			'value' => 'The value to set for the language attribute',
-		) );
+		return array_merge(
+			parent::getParamDescription(),
+			parent::getParamDescriptionForId(),
+			parent::getParamDescriptionForSiteLink(),
+			parent::getParamDescriptionForEntity(),
+			array(
+				'language' => 'Language for the label and description',
+				'value' => 'The value to set for the language attribute',
+			)
+		);
 	}
 
 	/**
