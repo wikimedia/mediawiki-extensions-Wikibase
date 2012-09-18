@@ -17,6 +17,7 @@ require_once $basePath . '/maintenance/Maintenance.php';
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jens Ohlig
  */
 class PollForChanges extends \Maintenance {
 
@@ -92,6 +93,27 @@ class PollForChanges extends \Maintenance {
 		$this->continueInterval = (int)$this->getOption( 'continueinterval', Settings::get( 'pollContinueInterval' ) ) * 1000;
 
 		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
+
+		// Make sure this script only runs once
+		if ( DIRECTORY_SEPARATOR == "\\" ) { // WINDOWS
+			$lockfileName = preg_replace( "[:|\\\|/]", "_", __FILE__ ) . '.lck';
+		} else {
+			$lockfileName = str_replace( DIRECTORY_SEPARATOR, "_", __FILE__ ) . '.lck';
+		}
+		$lockfilePath = str_replace( '\\', '/', sys_get_temp_dir() );
+		$lockfile = $lockfilePath . '/' . $lockfileName;
+		if ( file_exists( $lockfile ) ) {
+			$pid = file_get_contents( $lockfile );
+			if ( $this->checkPID( $pid ) === false ) {
+				self::msg( 'Process has died! Restarting...' );
+				file_put_contents( $lockfile, getmypid() ); // update lockfile
+			} else {
+				self::msg( 'PID is still alive! Cannot run twice!' );
+				exit;
+			}
+		} else {
+			file_put_contents( $lockfile, getmypid() ); // create lockfile
+		}
 
 		while ( true ) {
 			$ms = $this->doPoll();
@@ -174,6 +196,40 @@ class PollForChanges extends \Maintenance {
 	 */
 	public static function msg( $message ) {
 		echo date( 'H:i:s' ) . ' ' . $message . "\n";
+	}
+
+	/**
+	 * Check for running PID
+	 *
+	 * @param int $pid
+	 * @return boolean
+	 */
+	protected function checkPID ( $pid ) {
+		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) !== 'WIN' ) {
+			// Are we anything but Windows, i.e. some kind of Unix?
+			return posix_getsid( $pid );
+		} else {
+			// Welcome to Redmond
+			$processes = explode( "\n", shell_exec( "tasklist.exe" ) );
+			if ( $processes !== false && count( $processes ) > 0 ) {
+				foreach( $processes as $process ) {
+					if( strlen( $process ) > 0
+						&& ( strpos( "Image Name", $process ) === 0
+						|| strpos( "===", $process ) === 0 ) )
+						continue;
+					$matches = false;
+					preg_match( "/^(\D*)(\d+).*$/", $process, $matches );
+					$processid = 0;
+					if ( $matches !== false && count ($matches) > 1 ) {
+						$processid = $matches[ 2 ];
+					}
+					if ( $processid === $pid ) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 }
