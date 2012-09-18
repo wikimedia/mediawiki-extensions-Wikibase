@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MediaWiki entry point for the DataValues extension.
+ * MediaWiki setup for the DataValues extension.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ if ( !defined( 'DATAVALUES' ) ) {
 	define( 'DATAVALUES', true );
 }
 
-include __DIR__ . '/DataValues.php';
+global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,

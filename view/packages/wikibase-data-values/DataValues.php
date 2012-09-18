@@ -2,7 +2,6 @@
 
 /**
  * Entry point for the DataValues extension.
- * For usage as MediaWiki extension, use the DataValues.mw.php entry point.
  *
  * Documentation:	 		https://www.mediawiki.org/wiki/Extension:DataValues
  * Support					https://www.mediawiki.org/wiki/Extension_talk:DataValues
@@ -45,13 +44,20 @@
  * @ingroup DataValues
  */
 
-if ( !defined( 'DATAVALUES' ) ) {
+if ( !defined( 'DATAVALUES' ) && !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
+}
+
+if ( !defined( 'DATAVALUES' ) ) {
+	define( 'DATAVALUES', true );
 }
 
 define( 'DataValues_VERSION', '0.1' );
 
-if ( !defined( 'MEDIAWIKI' ) ) {
+if ( defined( 'MEDIAWIKI' ) ) {
+	include __DIR__ . '/DataValues.mw.php';
+}
+else {
 	spl_autoload_register( function ( $className ) {
 		static $classes = false;
 
