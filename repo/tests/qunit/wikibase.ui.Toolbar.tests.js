@@ -166,8 +166,8 @@
 		label.stateChangeable = true;
 
 		equal(
-			this.toolbar.getElementsState(),
-			wikibase.ui.ELEMENT_STATE.MIXED,
+			this.toolbar.getState(),
+			wb.ui.StateExtension.prototype.STATE.MIXED,
 			'mixed state after making label changeable'
 		);
 

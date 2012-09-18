@@ -101,67 +101,6 @@ wb.ui.Toolbar.Label.prototype = {
 	},
 
 	/**
-	 * Returns true if the element is disabled.
-	 *
-	 * @return bool
-	 */
-	isDisabled: function() {
-		return this._elem.hasClass( this.UI_CLASS + '-disabled' );
-	},
-
-	/**
-	 * Disables or enables the element. Disabled is still visible but will be presented differently
-	 * and might behave differently in some cases.
-	 *
-	 * @param bool disable true for disabling, false for enabling the element
-	 * @return bool whether the requested state was applied (might also be applied already)
-	 */
-	setDisabled: function( disable ) {
-		if ( !this.stateChangeable ) { // state is not supposed to change, no need to do anything
-			return true;
-		}
-		if( disable === undefined ) {
-			disable = true;
-		}
-		if( this.isDisabled() == disable ) {
-			return true; // no point in disabling/enabling if this is the current state
-		}
-		var cls = this.UI_CLASS + '-disabled';
-
-		if( disable ) {
-			if( this.beforeDisable !== null && this.beforeDisable() === false ) { // callback
-				return false; // cancel
-			}
-			this._elem.addClass( cls );
-		} else {
-			if( this.beforeEnable !== null && this.beforeEnable() === false ) { // callback
-				return false; // cancel
-			}
-			this._elem.removeClass( cls );
-		}
-
-		return true;
-	},
-
-	/**
-	 * Disables the element. Shorthand for setDisabled( false ).
-	 *
-	 * @return bool whether operation was successful
-	 */
-	enable: function() {
-		return this.setDisabled( false );
-	},
-
-	/**
-	 * Disables the element. Shorthand for setDisabled( true ).
-	 *
-	 * @return bool whether operation was successful
-	 */
-	disable: function() {
-		return this.setDisabled( true );
-	},
-
-	/**
 	 * Determine whether state change (enabling, disabling) is possible for this object.
 	 *
 	 * @return bool whether changing the state is possible
@@ -218,6 +157,59 @@ wb.ui.Tooltip.Extension.useWith( wb.ui.Toolbar.Label, {
 	_getTooltipParent: function() {
 		return this._elem;
 	}
+} );
+
+// add disable/enable functionality overwriting required functions
+wb.ui.StateExtension.useWith( wb.ui.Toolbar.Label, {
+
+	/**
+	 * @see wikibase.ui.StateExtension.getState
+	 *
+	 * @return Number state
+	 */
+	getState: function() {
+		return ( this._elem.hasClass( this.UI_CLASS + '-disabled' ) ) ?
+			this.STATE.DISABLED :
+			this.STATE.ENABLED;
+	},
+
+	/**
+	 * @see wikibase.ui.StateExtension._setState
+	 *
+	 * @param Number state see wb.ui.EditableValue.STATE
+	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 */
+	setState: function( state ) {
+		if ( !this.stateChangeable ) { // state is not supposed to change, no need to do anything
+			return true;
+		}
+		return wb.ui.StateExtension.prototype.setState.call( this, state );
+	},
+
+	/**
+	 * @see wikibase.ui.StateExtension._setState
+	 *
+	 * @param Number state see wb.ui.EditableValue.STATE
+	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 */
+	_setState: function( state ) {
+		var cls = this.UI_CLASS + '-disabled';
+
+		if( state === this.STATE.DISABLED ) {
+			if( this.beforeDisable !== null && this.beforeDisable() === false ) { // callback
+				return false; // cancel
+			}
+			this._elem.addClass( cls );
+		} else {
+			if( this.beforeEnable !== null && this.beforeEnable() === false ) { // callback
+				return false; // cancel
+			}
+			this._elem.removeClass( cls );
+		}
+
+		return true;
+	}
+
 } );
 
 } )( mediaWiki, wikibase, jQuery );

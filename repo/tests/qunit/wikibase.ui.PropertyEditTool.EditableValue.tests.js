@@ -194,8 +194,8 @@
 		);
 
 		equal(
-			this.editableValue.getElementsState(),
-			wikibase.ui.ELEMENT_STATE.MIXED,
+			this.editableValue.getState(),
+			wb.ui.StateExtension.prototype.STATE.MIXED,
 			'mixed state'
 		);
 
