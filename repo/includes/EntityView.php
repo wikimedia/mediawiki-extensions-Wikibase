@@ -55,19 +55,15 @@ abstract class EntityView extends \ContextSource {
 	public function getHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		$info = $this->extractEntityInfo( $entity );
-
+		$entityType = static::VIEW_TYPE;
+		$entityId = $entity->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
-
-		$entityId = $entity->getEntity()->getId();
-		if ( $entityId === null ) {
-			$entityId = 'new';
-		}
 
 		$html .= Html::openElement(
 			'div',
 			array(
-				'id' => 'wb-' . static::VIEW_TYPE . '-' . $entityId,
-				'class' => 'wb-' . static::VIEW_TYPE,
+				'id' => "wb-$entityType-$entityId",
+				'class' => "wb-entity wb-$entityType",
 				'lang' => $info['lang']->getCode(),
 				'dir' => $info['lang']->getDir()
 			)
@@ -84,7 +80,7 @@ abstract class EntityView extends \ContextSource {
 			)
 		);
 
-		return $html;
+		return $html . Html::closeElement( 'div' );
 	}
 
 	/**
