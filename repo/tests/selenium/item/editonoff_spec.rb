@@ -70,8 +70,7 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
         page.descriptionInputField= generate_random_string(20)
-        page.descriptionInputField_element.clear
-        page.descriptionInputField_element.click
+        page.cancelDescriptionLink
         page.editLabelLink?.should be_true
         page.descriptionInputField_element.enabled?.should be_true
         page.addAliases?.should be_true
