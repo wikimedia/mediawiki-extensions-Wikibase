@@ -141,11 +141,8 @@ class PropertyContent extends EntityContent {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( Title $title, $revId = null, ParserOptions $options = null, $generateHtml = true )  {
-		$parserOutput = new ParserOutput();
-
-		$parserOutput->setText( 'TODO' ); // TODO
-
-		return $parserOutput;
+		$propertyView = new PropertyView();
+		return $propertyView->getParserOutput( $this, $options, $generateHtml );
 	}
 
 	/**
