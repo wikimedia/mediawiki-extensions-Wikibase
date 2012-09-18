@@ -175,7 +175,10 @@ class ItemView extends EntityView {
 
 					$html .= Html::element(
 						'a',
-						array( 'href' => $link->getUrl() ),
+						array(
+							'href' => $link->getUrl(),
+							'dir' => 'auto'
+						),
 						$link->getPage()
 					);
 					$html .= Html::closeElement( 'td' );
