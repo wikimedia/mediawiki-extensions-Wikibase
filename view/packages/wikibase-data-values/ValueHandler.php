@@ -43,22 +43,6 @@ $incDir = dirname( __FILE__ ) . '/includes/';
 $wgAutoloadClasses['ValueHandlerHooks']				= dirname( __FILE__ ) . '/ValueHandler.hooks.php';
 $wgAutoloadClasses['ValueHandlerSettings']		  	= dirname( __FILE__ ) . '/ValueHandler.settings.php';
 
-// includes
-
-$wgAutoloadClasses['ValueParserResult']		 		= $incDir . 'ValueParserResult.php';
-$wgAutoloadClasses['ValueParserResultObject']		= $incDir . 'ValueParserResultObject.php';
-
-
-// includes/valueparser
-$wgAutoloadClasses['BoolParser']		 			= $incDir . 'valueparser/BoolParser.php';
-$wgAutoloadClasses['FloatParser']		 			= $incDir . 'valueparser/FloatParser.php';
-$wgAutoloadClasses['IntParser']		 				= $incDir . 'valueparser/IntParser.php';
-$wgAutoloadClasses['NullParser']		 			= $incDir . 'valueparser/NullParser.php';
-$wgAutoloadClasses['StringValueParser']		 		= $incDir . 'valueparser/StringValueParser.php';
-$wgAutoloadClasses['TitleParser']			 		= $incDir . 'valueparser/TitleParser.php';
-$wgAutoloadClasses['ValueParser']		 			= $incDir . 'valueparser/ValueParser.php';
-
-// includes/valuevalidator
 
 
 
