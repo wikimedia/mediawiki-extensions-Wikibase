@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//6eI\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-18T09:28:44Z",
+      "side": 1,
+      "message": "Did you test this? $this-\u003egetLanguage returns a Language object, $this-\u003elangCode is a string, so the above test will always be false (unless we have __tostring magic going on)",
+      "revId": "622e5614f6e31da05cb25140d0ab65e854e6d3f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6eE\u003d",
+        "filename": "repo/includes/specials/SpecialItemDisambiguation.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-18T09:28:44Z",
+      "side": 1,
+      "message": "Same issue, this will be a Language object.",
+      "revId": "622e5614f6e31da05cb25140d0ab65e854e6d3f2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
