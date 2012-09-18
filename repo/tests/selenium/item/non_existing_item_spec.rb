@@ -13,7 +13,7 @@ describe "Check functionality of non existing item page" do
     it "should check for link to Special:CreateItem and firstHeading" do
       visit_page(NonExistingItemPage) do |page|
         page.firstHeading.should be_true
-        page.firstHeading_element.text.should == ITEM_NAMESPACE + "Qxy"
+        page.firstHeading_element.text.should == ITEM_NAMESPACE + ITEM_ID_PREFIX + "xy"
         page.specialCreateNewItemLink?.should be_true
         page.specialCreateNewItemLink
       end
