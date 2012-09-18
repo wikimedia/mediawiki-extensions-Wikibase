@@ -113,9 +113,9 @@ $messages['en'] = array(
 	'special-createitem' => 'Create a new item',
 	'wikibase-createitem-intro' => 'Before you create a new item, consider checking whether this item already exists. To create a new one you need to specify at least the label or the description in $1.',
 	'wikibase-createitem-fieldset' => 'Create a new item',
-	'wikibase-createitem-label' => 'Label:',
-	'wikibase-createitem-description' => 'Description:',
-	'wikibase-createitem-submit' => 'Create',
+	'wikibase-createentity-label' => 'Label:',
+	'wikibase-createentity-description' => 'Description:',
+	'wikibase-createentity-submit' => 'Create',
 
 	// API errors - these messages should not be translated
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.', # Do not translate
@@ -329,9 +329,9 @@ Parameters:
 	'special-createitem' => 'Title of the special page for creating new items.',
 	'wikibase-createitem-intro' => 'Intro text for the CreateItem special page. $1 is the language name of the currently set user language. The label and the description will be set for that language.',
 	'wikibase-createitem-fieldset' => 'Title for the fieldset on the CreateItem special page.',
-	'wikibase-createitem-label' => 'Label for the label-textfield holding the label of the new item.',
-	'wikibase-createitem-description' => 'Label for the description-textfield holding the description of the new item.',
-	'wikibase-createitem-submit' => 'Text for the submit button on the CreateItem special page.',
+	'wikibase-createentity-label' => 'Label for the label-textfield holding the label of the new item.',
+	'wikibase-createentity-description' => 'Label for the description-textfield holding the description of the new item.',
+	'wikibase-createentity-submit' => 'Text for the submit button on the CreateItem special page.',
 	'wikibase-api-patch-incomplete' => '!!DO NOT TRANSLATE!! This error message is used when the API tried to patch a contribution and the patch missed some parts. This typically happens due to edit conflicts.',
 	'wikibase-self-conflict' => 'Warning issued when an edit is made based on an old revision, but no conflict arises because all intermediate edits were made by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.',
 	'wikibase-restoreold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
