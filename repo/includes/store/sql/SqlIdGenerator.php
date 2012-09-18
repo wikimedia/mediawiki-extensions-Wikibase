@@ -111,6 +111,10 @@ class SqlIdGenerator implements IdGenerator {
 			throw new \MWException( 'Could not generate a reliably unique ID.' );
 		}
 
+		if ( in_array( $id, Settings::get( 'idBlacklist' ) ) ) {
+			$id = $this->generateNewId( $type );
+		}
+
 		return $id;
 	}
 

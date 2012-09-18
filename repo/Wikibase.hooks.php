@@ -96,6 +96,8 @@ final class RepoHooks {
 			'store/Store',
 			'store/TermLookup',
 
+			'store/sql/SqlIdGenerator',
+
 			'updates/ItemDeletionUpdate',
 			'updates/ItemStructuredSave',
 		);
@@ -407,6 +409,16 @@ final class RepoHooks {
 				'defaultStore' => 'sqlstore',
 
 				'testDataTypes' => array( 'Type 1', 'Type 2' ),
+
+				'idBlacklist' => array(
+					1,
+					23,
+					42,
+					1337,
+					9001,
+					31337,
+					720101010,
+				),
 			)
 		);
 
