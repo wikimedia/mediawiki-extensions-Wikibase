@@ -4,7 +4,7 @@ namespace Wikibase;
 use User, Title, ApiBase;
 
 /**
- * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
+ * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.
  *
  * @since 0.1
  *
@@ -15,7 +15,7 @@ use User, Title, ApiBase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ApiModifyItem extends Api {
+abstract class ApiModifyEntity extends Api {
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
@@ -30,37 +30,102 @@ abstract class ApiModifyItem extends Api {
 	/**
 	 * @see  Api::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Item $item, array $params ) {
-		$permissions = parent::getRequiredPermissions( $item, $params );
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 
 		$permissions[] = 'edit';
 		return $permissions;
 	}
 
 	/**
-	 * Create the item if its missing.
+	 * Create the entity if its missing.
 	 *
 	 * @since    0.1
 	 *
 	 * @param array       $params
 	 *
-	 * @internal param \Wikibase\ItemContent $itemContent
-	 * @return ItemContent Newly created item
+	 * @internal param \Wikibase\EntityContent $entityContent
+	 * @return EntityContent Found existing entity
 	 */
-	protected abstract function createItem( array $params );
+	protected function findEntity( array $params ) {
+		$entityContent = null;
+		$entityHandler = null;
+
+		// XXX: this is a bit ugly and could be replaced by more generic lookup modules
+		list( $type, ) = explode( '/', $params['type'], 2 );
+		switch ( $type ) {
+			case 'item' :
+				$entityHandler = \Wikibase\ItemHandler::singleton();
+				break;
+			case 'property' :
+				$entityHandler = \Wikibase\PropertyHandler::singleton();
+				break;
+			case 'query' :
+				$entityHandler = \Wikibase\QueryHandler::singleton();
+				break;
+			default:
+				$this->dieUsage( "unknown key: {$type}", 'not-recognized' );
+		}
+
+		// If we have an id try that first
+		if ( isset( $params['id'] ) ) {
+			$entityContent = $entityHandler->getFromId( $params['id'] );
+
+			if ( is_null( $entityContent ) ) {
+				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-id' )->text(), 'no-such-entity-id' );
+			}
+		}
+
+		// Otherwise check if we have a link and try that
+		// note that this will not be run if the subclass doesn't allow the sitelink parameters
+		// or if the validateParameters method rejects it
+		elseif (  isset( $params['site'] ) && isset( $params['title'] ) ) {
+			$entityContent = $entityHandler->getFromSiteLink( $params['site'], Utils::squashToNFC( $params['title'] ) );
+
+			if ( is_null( $entityContent ) ) {
+				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-link' )->text(), 'no-such-entity-link' );
+			}
+		}
+
+		// If we found anything then check if it is of the correct base class
+		if ( !is_null( $entityContent ) && !( $entityContent instanceof EntityContent ) ) {
+			$this->dieUsage( $this->msg( 'wikibase-api-wrong-class' )->text(), 'wrong-class' );
+		}
+
+		if ( is_null( $entityContent ) && isset( $params['id'] ) ) {
+			// this can give wrong error in case of permission errors
+			$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-id' )->text(), 'no-such-entity-id' );
+		}
+
+		return $entityContent;
+	}
 
 	/**
-	 * Actually modify the item.
+	 * Create the entity if its missing.
+	 *
+	 * @since    0.1
+	 *
+	 * @param array       $params
+	 *
+	 * @internal param \Wikibase\EntityContent $entityContent
+	 * @return EntityContent Newly created entity
+	 */
+	protected function createEntity( array $params ) {
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
+	}
+
+	/**
+	 * Actually modify the entity.
 	 *
 	 * @since 0.1
 	 *
-	 * @param ItemContent $item
+	 * @param EntityContent $entity
 	 * @param array       $params
 	 *
-	 * @internal param \Wikibase\ItemContent $itemContent
+	 * @internal param \Wikibase\EntityContent $entityContent
 	 * @return bool Success indicator
 	 */
-	protected abstract function modifyItem( ItemContent &$item, array $params );
+	protected abstract function modifyEntity( EntityContent &$entity, array $params );
 
 	/**
 	 * Make a string for an autocomment, that can be replaced through system messages.
@@ -81,7 +146,7 @@ abstract class ApiModifyItem extends Api {
 	 * Make a string for an autosummary, that can be replaced through system messages.
 	 *
 	 * The autosummary is the final part of the total summary. This call is used if there
-	 * is no ordinary summary. If this call fails an autosummary from the item itself will
+	 * is no ordinary summary. If this call fails an autosummary from the entity itself will
 	 * be used.
 	 *
 	 * The returned array has a count that can be used for plural forms in the messages,
@@ -132,66 +197,38 @@ abstract class ApiModifyItem extends Api {
 		}
 
 		// this is really peeking into a subclass, which is not good
-		$hasData = isset( $params['data'] ) ? strlen( preg_replace( '/(^\s*|\s*$)/s', '', $params['data'] ) ) : false;
-
-		$normTitle = '';
-		$hasLink = false;
-		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$normTitle = Utils::squashToNFC( $params['title'] );
-			$hasLink = true;
-		}
-		$itemContent = null;
+		//$hasData = isset( $params['data'] ) ? strlen( preg_replace( '/(^\s*|\s*$)/s', '', $params['data'] ) ) : false;
 
 		$this->validateParameters( $params );
 
-		if ( isset( $params['id'] ) ) {
-			$itemContent = ItemHandler::singleton()->getFromId( $params['id'] );
-
-			if ( is_null( $itemContent ) ) {
-				$this->dieUsage( $this->msg( 'wikibase-api-no-such-item-id' )->text(), 'no-such-item-id' );
-			}
-		}
-		elseif ( $hasLink ) {
-			$itemContent = ItemHandler::singleton()->getFromSiteLink( $params['site'], $normTitle );
-
-			if ( is_null( $itemContent ) ) {
-				$this->dieUsage( $this->msg( 'wikibase-api-no-such-item-link' )->text(), 'no-such-item-link' );
-			}
-		}
-
-		if ( !is_null( $itemContent ) && !( $itemContent instanceof ItemContent ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-wrong-class' )->text(), 'wrong-class' );
-		}
-
-		if ( is_null( $itemContent ) ) {
-			$itemContent = $this->createItem( $params );
-		}
-
-		if ( is_null( $itemContent ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-no-such-item-id' )->text(), 'no-such-item-id' );
+		// Try to find the entity or fail and create it, or die in the process
+		$entityContent = $this->findEntity( $params );
+		if ( is_null( $entityContent ) ) {
+			$entityContent = $this->createEntity( $params );
 		}
 
 		// At this point only change/edit rights should be checked
-		$status = $this->checkPermissions( $itemContent, $user, $params );
+		$status = $this->checkPermissions( $entityContent, $user, $params );
 
 		if ( !$status->isOK() ) {
 			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 
 		// FIXME: we can (?) do this before we do permission checks as long as we don't save
-		$success = $this->modifyItem( $itemContent, $params );
+		$success = $this->modifyEntity( $entityContent, $params );
 
 		if ( !$success ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-modify-failed' )->text(), 'modify-failed' );
 		}
 
-		if ( Settings::get( 'apiDeleteEmpty' ) && $itemContent->isEmpty() ) {
-			if ( $itemContent->isNew() ) {
+		$group = self::getGroup( $entityContent );
+		if ( Settings::get( 'apiDeleteEmpty' ) && $entityContent->isEmpty() ) {
+			if ( $entityContent->isNew() ) {
 				// Delete the object if the user holds enough rights.
-				$allowed = $itemContent->userCan( 'delete' );
+				$allowed = $entityContent->userCan( 'delete' );
 				if ( $allowed ) {
 					// TODO: Delete an existing object
-					$this->getResult()->addValue( 'item', 'deleted', "" );
+					$this->getResult()->addValue( $group, 'deleted', "" );
 					// Give an error message
 					$this->dieUsage( $status->getWikiText( 'wikibase-api-not-implemented' ), 'not-implemented' );
 				}
@@ -202,19 +239,19 @@ abstract class ApiModifyItem extends Api {
 			}
 			else {
 				// Just give a message that it was newer created
-				$this->getResult()->addValue( 'item', 'newercreated', "" );
+				$this->getResult()->addValue( $group, 'newercreated', "" );
 			}
 		}
 		else {
 			// This is similar to ApiEditPage.php and what it uses at line 314
 			$this->flags |= ($user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 
-			// if the item is not up for creation, set the EDIT_UPDATE flags
-			if ( !$itemContent->isNew() && ( $this->flags & EDIT_NEW ) === 0 ) {
+			// if the entity is not up for creation, set the EDIT_UPDATE flags
+			if ( !$entityContent->isNew() && ( $this->flags & EDIT_NEW ) === 0 ) {
 				$this->flags |= EDIT_UPDATE;
 			}
 
-			//NOTE: EDIT_NEW will not be set automatically. If the item doesn't exist, and EDIT_NEW was
+			//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
 			//      not added to $this->flags explicitly, the save will fail.
 
 			// Is there a user supplied summary, then use it but get the hits first
@@ -226,7 +263,7 @@ abstract class ApiModifyItem extends Api {
 			else {
 				list( $hits, $summary, $lang ) = $this->getTextForSummary( $params );
 				if ( !is_string( $summary ) ) {
-					$summary = $itemContent->getTextForSummary( $params );
+					$summary = $entityContent->getTextForSummary( $params );
 				}
 			}
 
@@ -237,7 +274,7 @@ abstract class ApiModifyItem extends Api {
 			$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 			$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : null;
 
-			$editEntity = new EditEntity( $itemContent, $user, $baseRevisionId );
+			$editEntity = new EditEntity( $entityContent, $user, $baseRevisionId );
 
 			// Do the actual save, or if it don't exist yet create it.
 			// There will be exceptions but we just leak them out ;)
@@ -253,22 +290,23 @@ abstract class ApiModifyItem extends Api {
 			}
 
 			$this->getResult()->addValue(
-				'item',
-				'id', $itemContent->getItem()->getId()
+				$group,
+				'id', $entityContent->getEntity()->getId()
 			);
-			$page = $itemContent->getWikiPage();
+			$page = $entityContent->getWikiPage();
 			if ( $page->exists() ) {
 				$revision = $page->getRevision();
 				if ( $revision !== null ) {
 					$this->getResult()->addValue(
-						'item',
+						$group,
 						'lastrevid', intval( $revision->getId() )
 					);
 				}
 			}
-			if ( $hasLink ) {
+			if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 				$normalized = array();
 
+				$normTitle = Utils::squashToNFC( $params['title'] );
 				if ( $normTitle !== $params['title'] ) {
 					$normalized['from'] = $params['title'];
 					$normalized['to'] = $normTitle;
@@ -276,7 +314,7 @@ abstract class ApiModifyItem extends Api {
 
 				if ( $normalized !== array() ) {
 					$this->getResult()->addValue(
-						'item',
+						$group,
 						'normalized', $normalized
 					);
 				}
@@ -305,8 +343,8 @@ abstract class ApiModifyItem extends Api {
 			array( 'code' => 'add-with-id', 'info' => $this->msg( 'wikibase-api-add-with-id' )->text() ),
 			array( 'code' => 'add-exists', 'info' => $this->msg( 'wikibase-api-add-exists' )->text() ),
 			array( 'code' => 'update-without-id', 'info' => $this->msg( 'wikibase-api-update-without-id' )->text() ),
-			array( 'code' => 'no-such-item-link', 'info' => $this->msg( 'wikibase-api-no-such-item-link' )->text() ),
-			array( 'code' => 'no-such-item-id', 'info' => $this->msg( 'wikibase-api-no-such-item-id' )->text() ),
+			array( 'code' => 'no-such-entity-link', 'info' => $this->msg( 'wikibase-api-no-such-entity-link' )->text() ),
+			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
 			array( 'code' => 'create-failed', 'info' => $this->msg( 'wikibase-api-create-failed' )->text() ),
 			array( 'code' => 'modify-failed', 'info' => $this->msg( 'wikibase-api-modify-failed' )->text() ),
 			array( 'code' => 'wrong-class', 'info' => $this->msg( 'wikibase-api-wrong-class' )->text() ),
@@ -343,48 +381,102 @@ abstract class ApiModifyItem extends Api {
 	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
-		return array_merge( parent::getAllowedParams(), array(
+		return parent::getAllowedParams();
+	}
+
+	/**
+	 * @see ApiBase::getAllowedParamsForId()
+	 */
+	public function getAllowedParamsForId() {
+		return array(
 			'id' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
+		);
+	}
+
+	/**
+	 * @see ApiBase::getAllowedParamsForSiteLink()
+	 */
+	public function getAllowedParamsForSiteLink() {
+		return array(
 			'site' => array(
 				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
 			),
 			'title' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'summary' => array(
-				ApiBase::PARAM_TYPE => 'string',
-			),
+		);
+	}
+
+	/**
+	 * @see ApiBase::getAllowedParamsForEntity()
+	 */
+	public function getAllowedParamsForEntity() {
+		return array(
 			'baserevid' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 			),
+			'summary' => array(
+				ApiBase::PARAM_TYPE => 'string',
+			),
+			'type' => array(
+				ApiBase::PARAM_TYPE => array( 'item', 'property', 'query' ),
+				ApiBase::PARAM_DFLT => 'item',
+				ApiBase::PARAM_ISMULTI => false,
+			),
 			'token' => null,
 			'bot' => false,
-		) );
+		);
 	}
 
 	/**
 	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
-		return array_merge( parent::getParamDescription(), array(
-			'id' => array( 'The numeric identifier for the item.',
+		return parent::getParamDescription();
+	}
+
+	/**
+	 * @see ApiBase::getParamDescriptionForId()
+	 */
+	protected function getParamDescriptionForId() {
+		return array(
+			'id' => array( 'The numeric identifier for the entity.',
 				"Use either 'id' or 'site' and 'title' together."
 			),
+		);
+	}
+
+	/**
+	 * @see ApiBase::getParamDescriptionForSiteLink()
+	 */
+	protected function getParamDescriptionForSiteLink() {
+		return array(
 			'site' => array( 'An identifier for the site on which the page resides.',
 				"Use together with 'title' to make a complete sitelink."
 			),
 			'title' => array( 'Title of the page to associate.',
 				"Use together with 'site' to make a complete sitelink."
 			),
-			'summary' => array( 'Summary for the edit.',
-				"Will be prepended by an automatically generated comment."
-			),
+		);
+	}
+
+	/**
+	 * @see ApiBase::getParamDescriptionForEntity()
+	 */
+	protected function getParamDescriptionForEntity() {
+		return array(
 			'baserevid' => array( 'The numeric identifier for the revision.',
 				"This is used for detecting conflicts during save."
 			),
-			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
+			'summary' => array( 'Summary for the edit.',
+				"Will be prepended by an automatically generated comment."
+			),
+			'type' => array( 'A specific type of entity.',
+				"Will default to 'item' as this will be the most common type."
+			),
+			'token' => array( 'A "wbentitytoken" token previously obtained through the gettoken parameter.', // or prop=info,
 				'During a normal reply a token can be returned spontaneously and the requester should',
 				'then start using the new token from the next request, possibly when repeating a failed',
 				'request.'
@@ -393,7 +485,33 @@ abstract class ApiModifyItem extends Api {
 			'bot' => array( 'Mark this edit as bot',
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),
-		) );
+		);
 	}
 
+	/**
+	 * Get the results inner group where this data belongs
+	 *
+	 * @since 0.1
+	 *
+	 * @param $entityContent EntityContent
+	 * @return string|false the group this entity will belong to
+	 */
+	protected static function getGroup( EntityContent &$entityContent ) {
+		// XXX: this is a bit ugly and could be replaced by more generic formatter modules
+		$class = get_class( $entityContent );
+		switch ( $class ) {
+			case 'Wikibase\ItemContent':
+				$group = 'item';
+				break;
+			case 'Wikibase\PropertyContent':
+				$group = 'property';
+				break;
+			case 'Wikibase\QueryContent':
+				$group = 'query';
+				break;
+			default:
+				$group = false;
+		}
+		return $group;
+	}
 }

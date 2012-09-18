@@ -4,7 +4,7 @@ namespace Wikibase;
 use ApiBase, User, Http;
 
 /**
- * API module to associate a page on a site with a Wikibase item or remove an already made such association.
+ * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -18,13 +18,13 @@ use ApiBase, User, Http;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class ApiSetSiteLink extends ApiModifyItem {
+class ApiSetSiteLink extends ApiModifyEntity {
 
 	/**
-	 * @see  ApiModifyItem::getRequiredPermissions()
+	 * @see  ApiModifyEntity::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Item $item, array $params ) {
-		$permissions = parent::getRequiredPermissions( $item, $params );
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 
 		$permissions[] = 'sitelink-' . ( strlen( $params['linktitle'] ) ? 'update' : 'remove' );
 		return $permissions;
@@ -46,7 +46,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 	}
 
 	/**
-	 * @see  ApiModifyItem::getTextForComment()
+	 * @see  ApiModifyEntity::getTextForComment()
 	 */
 	protected function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
@@ -56,7 +56,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 	}
 
 	/**
-	 * @see  ApiModifyItem::getTextForSummary()
+	 * @see  ApiModifyEntity::getTextForSummary()
 	 */
 	protected function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
@@ -65,43 +65,22 @@ class ApiSetSiteLink extends ApiModifyItem {
 	}
 
 	/**
-	 * Create the item if its missing.
-	 *
-	 * @since    0.1
-	 *
-	 * @param array       $params
-	 *
-	 * @internal param \Wikibase\ItemContent $itemContent
-	 * @return ItemContent Newly created item
+	 * @see ApiModifyEntity::modifyEntity()
 	 */
-	protected function createItem( array $params ) {
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
-	}
-
-	/**
-	 * @see ApiModifyItem::modifyItem()
-	 *
-	 * @since 0.1
-	 *
-	 * @param ItemContent $itemContent
-	 * @param array $params
-	 *
-	 * @return boolean Success indicator
-	 */
-	protected function modifyItem( ItemContent &$itemContent, array $params ) {
+		protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 
 		if ( isset( $params['linktitle'] ) ) {
 			$params['linktitle'] = Utils::squashToNFC( $params['linktitle'] );
 		}
 
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
-			$link = $itemContent->getItem()->getSiteLink( $params['linksite'] );
+			$link = $entityContent->getEntity()->getSiteLink( $params['linksite'] );
 
 			if ( !$link ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-remove-sitelink-failed' )->text(), 'remove-sitelink-failed' );
 			}
 
-			$itemContent->getItem()->removeSiteLink( $params['linksite'] );
+			$entityContent->getEntity()->removeSiteLink( $params['linksite'] );
 			$this->addSiteLinksToResult( array( $link ), 'item', 'sitelinks', 'sitelink', array( 'removed' ) );
 			return true;
 		}
@@ -120,7 +99,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 			}
 
 			$link = new SiteLink( $site, $page );
-			$ret = $itemContent->getItem()->addSiteLink( $link, 'set' );
+			$ret = $entityContent->getEntity()->addSiteLink( $link, 'set' );
 
 			if ( $ret === false ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
@@ -153,16 +132,21 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 * @return array|bool
 	 */
 	public function getAllowedParams() {
-		$allowedParams = parent::getAllowedParams();
-		return array_merge( $allowedParams, array(
-			'linksite' => array(
-				ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
-				ApiBase::PARAM_REQUIRED => true,
-			),
-			'linktitle' => array(
-				ApiBase::PARAM_TYPE => 'string',
-			),
-		) );
+		return array_merge(
+			parent::getAllowedParams(),
+			parent::getAllowedParamsForId(),
+			parent::getAllowedParamsForSiteLink(),
+			parent::getAllowedParamsForEntity(),
+			array(
+				'linksite' => array(
+					ApiBase::PARAM_TYPE => $this->getSiteLinkTargetSites()->getGlobalIdentifiers(),
+					ApiBase::PARAM_REQUIRED => true,
+				),
+				'linktitle' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+			)
+		);
 	}
 
 	/**
@@ -172,10 +156,16 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 * @return array|bool False on no parameter descriptions
 	 */
 	public function getParamDescription() {
-		return array_merge( parent::getParamDescription(), array(
-			'linksite' => 'The identifier of the site on which the article to link resides',
-			'linktitle' => 'The title of the article to link',
-		) );
+		return array_merge(
+			parent::getParamDescription(),
+			parent::getParamDescriptionForId(),
+			parent::getParamDescriptionForSiteLink(),
+			parent::getParamDescriptionForEntity(),
+			array(
+				'linksite' => 'The identifier of the site on which the article to link resides',
+				'linktitle' => 'The title of the article to link',
+			)
+		);
 	}
 
 	/**
@@ -183,7 +173,7 @@ class ApiSetSiteLink extends ApiModifyItem {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to associate an article on a wiki with a Wikibase item or remove an already made such association.'
+			'API module to associate an article on a wiki with a Wikibase entity or remove an already made such association.'
 		);
 	}
 
