@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//6c0\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-18T11:08:09Z",
+      "side": 1,
+      "message": "Using __FILE__ as a basis is not the correct way to get separate pid files for separate wikis, because multiple wikis may use the same install base. This is especially true for the installations run by Wikimedia. Either get the PID file from the command line, or use something like wfWikiID().",
+      "revId": "105751f0194b527dc3a6a446120f147020014621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6cw\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-18T11:08:09Z",
+      "side": 1,
+      "message": "I would reserve .lck for actual lock files. This is not really a lock file. .pid is often used on unix for this, look into your /var/run directory for examples.",
+      "revId": "105751f0194b527dc3a6a446120f147020014621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6cs\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-18T11:08:09Z",
+      "side": 1,
+      "message": "Under *nix, it would be nicer to use a file in /var/run (you will see a whole bunch of .pid files there already). The file in /var/run would need to be created and chowned to the correct user for that to work though. \n\nSo: try to use /var/run/xyz under *nix (or just check if that directory exists), otherwise use the OS\u0027 temp dir.",
+      "revId": "105751f0194b527dc3a6a446120f147020014621",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
