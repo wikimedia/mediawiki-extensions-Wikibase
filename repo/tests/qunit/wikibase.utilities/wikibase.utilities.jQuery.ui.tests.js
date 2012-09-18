@@ -9,18 +9,30 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
 
-( function() {
-	module( 'wikibase.utilities.jQuery.ui', window.QUnit.newWbEnvironment() );
+( function( mw, wb, $, QUnit, undefined ) {
+	'use strict';
 
-	test( 'detecting scrollbar width', function() {
+	QUnit.module( 'wikibase.utilities.jQuery.ui', QUnit.newWbEnvironment( {
+		setup: function() {},
+		teardown: function() {}
+	} ) );
 
-		ok(
+	QUnit.test( '$.getScrollbarWidth()', function( assert ) {
+		assert.ok(
 			$.getScrollbarWidth() > 0,
 			'detected scrollbar width'
 		);
-
 	} );
 
-}() );
+	QUnit.test( '$.getInputEvent()', function( assert ) {
+		assert.ok(
+			$.getInputEvent() ===
+				'input' ||
+				'input keyup' ||
+				'keyup keydown blur cut paste mousedown mouseup mouseout',
+			'$.getInputEvent()'
+		);
+	} );
+
+}( mediaWiki, wikibase, jQuery, QUnit ) );

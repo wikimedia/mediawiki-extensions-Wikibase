@@ -24,6 +24,8 @@
 
 /**
  * Gets the width of the browser's scrollbar.
+ *
+ * @returns Integer scrollbar width
  */
 ( function( $ ) {
 	$.getScrollbarWidth = function() {
@@ -44,6 +46,29 @@
 	};
 } )( jQuery );
 
+/**
+ * Returns a string to be used for detecting any instant changes of an input box. In general, this
+ * should be just 'input' in recent browsers.
+ *
+ * @return String events
+ */
+( function( $ ) {
+	$.getInputEvent = function() {
+		var fallbackEvents = 'keyup keydown blur cut paste mousedown mouseup mouseout';
+
+		// IE (at least <= version 9) does not trigger input event when pressing backspace
+		// (version <= 8 does not support input event at all anyway)
+		if ( $.browser.msie && parseInt( ( $.browser.version.split( '.' )[0] ), 10 ) >= 9 ) {
+			return 'input keyup';
+		}
+
+		var $input = $( '<input/>' );
+		var supported = 'oninput' in $input[0];
+		delete $input;
+
+		return ( supported ) ? 'input' : fallbackEvents;
+	};
+} )( jQuery );
 
 /**
  * Can be used on an input element to trigger an event whenever some text was changed. This is different from the
@@ -76,7 +101,7 @@
 
 			var oldVal = input.val(); // old val to compare new one with
 			input
-			.on( 'keyup keydown mouseout blur paste mouseup', function( e ) {
+			.on( $.getInputEvent(), function( e ) {
 				/*
 				 * NOTE: we use 'keyup' here as well, so when holding backspace the thing still gets triggered. Also,
 				 *       for some reason in some browsers 'keydown' isn't triggered when typing fast, 'keyup' always is.
