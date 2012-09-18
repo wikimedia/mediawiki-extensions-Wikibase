@@ -233,29 +233,30 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._disableInputElement
-	 */
-	_disableInputElement: function() {
-		$PARENT.prototype._disableInputElement.call( this );
-		this._inputElem.autocomplete( "disable" );
-		this._inputElem.autocomplete( "close" );
-	},
-
-	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._enableInputElement
-	 */
-	_enableInputElement: function() {
-		$PARENT.prototype._enableInputElement.call( this );
-		this._inputElem.autocomplete( "enable" );
-	},
-
-	/**
 	 * custom onKeyDown event extension
 	 *
 	 * @param jQuery.event event
 	 */
 	onKeyDown: function( event ) {
 		this._lastKeyDown = event.keyCode;
+	},
+
+	/**
+	 * @see wikibase.ui.StateExtension.setDisabled
+	 *
+	 * @param Boolean disable true to disable, false to enable the element
+	 */
+	setDisabled: function( disable ) {
+		var success = $PARENT.prototype.setDisabled.call( this, disable );
+		if ( this._inputElem !== null ) {
+			if ( disable ) {
+				this._inputElem.autocomplete( 'disable' );
+				this._inputElem.autocomplete( 'close' );
+			} else {
+				this._inputElem.autocomplete( 'enable' );
+			}
+		}
+		return success;
 	},
 
 

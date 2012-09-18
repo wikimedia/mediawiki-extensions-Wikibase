@@ -126,7 +126,7 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 
 		if( this.isDisabled() ) {
 			// disable element properly if disabled from before edit mode
-			this._disableInputElement();
+			this.disable();
 		}
 
 		// store original text value from before input box insertion:
@@ -452,69 +452,6 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 	},
 
 	/**
-	 * Returns true if the interface is disabled.
-	 *
-	 * @return bool
-	 */
-	isDisabled: function() {
-		return this._subject.hasClass( this.UI_CLASS + '-disabled' );
-	},
-
-	/**
-	 * Convenience function to disable this interface.
-	 *
-	 * @return bool whether the operation was successful
-	 */
-	disable: function() {
-		return this.setDisabled( true );
-	},
-
-	/**
-	 * Convenience function to enable this interface.
-	 *
-	 * @return bool whether the operation was successful
-	 */
-	enable: function() {
-		return this.setDisabled( false );
-	},
-
-	/**
-	 * Disables or enables the element. Disabled is still visible but will be presented differently
-	 * and might behave differently in some cases.
-	 *
-	 * @param bool disable true for disabling, false for enabling the element
-	 * @return bool whether operation was successful
-	 */
-	setDisabled: function( disable ) {
-		if( disable ) {
-			this._subject.addClass( this.UI_CLASS + '-disabled' );
-			if( this.isInEditMode() ) {
-				this._disableInputElement();
-			}
-		} else {
-			this._subject.removeClass( this.UI_CLASS + '-disabled' );
-			if( this.isInEditMode() ) {
-				this._enableInputElement();
-			}
-		}
-		return true;
-	},
-
-	/**
-	 * disable this interface's input element
-	 */
-	_disableInputElement: function() {
-		this._inputElem.attr( 'disabled', 'true' );
-	},
-
-	/**
-	 * enable this interface's input element
-	 */
-	_enableInputElement: function() {
-		this._inputElem.removeAttr( 'disabled' );
-	},
-
-	/**
 	 * Returns whether the interface is deactivated or active. If it is deactivated, the input
 	 * interface will not be made available on startEditing()
 	 *
@@ -626,6 +563,43 @@ wb.ui.Tooltip.Extension.useWith( wb.ui.PropertyEditTool.EditableValue.Interface,
 	_getTooltipParent: function() {
 		return this._subject;
 	}
+} );
+
+// add disable/enable functionality overwriting required functions
+wb.ui.StateExtension.useWith( wb.ui.PropertyEditTool.EditableValue.Interface, {
+
+	/**
+	 * @see wikibase.ui.StateExtension.getState
+	 *
+	 * @return Number state
+	 */
+	getState: function() {
+		return ( this._subject.hasClass( this.UI_CLASS + '-disabled' ) ) ?
+			this.STATE.DISABLED :
+			this.STATE.ENABLED;
+	},
+
+	/**
+	 * @see wikibase.ui.StateExtension.setDisabled
+	 *
+	 * @param Boolean disable true to disable, false to enable the element
+	 * @return Boolean whether operation was successful
+	 */
+	setDisabled: function( disable ) {
+		if ( disable ) {
+			this._subject.addClass( this.UI_CLASS + '-disabled' );
+			if ( this._inputElem !== null ) {
+				this._inputElem.attr( 'disabled', 'true' );
+			}
+		} else {
+			this._subject.removeClass( this.UI_CLASS + '-disabled' );
+			if ( this._inputElem !== null ) {
+				this._inputElem.removeAttr( 'disabled' );
+			}
+		}
+		return true;
+	}
+
 } );
 
 } )( mediaWiki, wikibase, jQuery );

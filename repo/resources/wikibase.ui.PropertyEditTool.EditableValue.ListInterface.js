@@ -226,20 +226,6 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._disableInputElement
-	 */
-	_disableInputElement: function() {
-		this._getTagadata().disable();
-	},
-
-	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._enableInputElement
-	 */
-	_enableInputElement: function() {
-		this._getTagadata().enable();
-	},
-
-	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.setFocus
 	 */
 	setFocus: function() {
@@ -299,7 +285,7 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._enableInputElement
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.validate
 	 *
 	 * @return bool whether this interface is valid
 	 */
@@ -353,6 +339,22 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 			return null;
 		}
 		return normalized;
+	},
+
+	/**
+	 * @see wikibase.ui.StateExtension.setDisabled
+	 *
+	 * @param Boolean disable true to disable, false to enable the element
+	 */
+	setDisabled: function( disable ) {
+		if ( this._getTagadata() !== null ) {
+			if ( disable ) {
+				this._getTagadata().disable();
+			} else {
+				this._getTagadata().enable();
+			}
+		}
+		return true;
 	}
 
 } );

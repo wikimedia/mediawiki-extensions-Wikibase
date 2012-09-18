@@ -8,7 +8,6 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  * @author H. Snater
- * @author Tobias Gritschacher
  */
 ( function( mw, wb, $, undefined ) {
 'use strict';
@@ -201,84 +200,6 @@ wb.ui.Toolbar.prototype = {
 		return stateChangeable;
 	},
 
-	/**
-	 * Convenience method to disable all toolbar elements.
-	 *
-	 * @return whether all elements are disabled
-	 */
-	disable: function() {
-		return this.setDisabled( true );
-	},
-
-	/**
-	 * Convenience method to enable all toolbar elements.
-	 *
-	 * @return bool whether all elements are enabled
-	 */
-	enable: function() {
-		return this.setDisabled( false );
-	},
-
-	/**
-	 * Dis- or enable all toolbar elements.
-	 *
-	 * @param bool disable true to disable, false to enable all toolbar elements
-	 * @return bool whether the operation was successful
-	 */
-	setDisabled: function( disable ) {
-		var success = true;
-		$.each( this._items, function( i, item ) {
-			success = item.setDisabled( disable ) && success;
-		} );
-		return success;
-	},
-
-	/**
-	 * check whether all toolbar elements are disabled
-	 *
-	 * @return bool whether all toolbar elements are disabled
-	 */
-	isDisabled: function() {
-		var state = this.getElementsState();
-		return ( state === wikibase.ui.ELEMENT_STATE.DISABLED );
-	},
-
-	/**
-	 * check whether all toolbar elements are enabled
-	 *
-	 * @return bool whether all toolbar elements are enabled
-	 */
-	isEnabled: function() {
-		var state = this.getElementsState();
-		return ( state === wikibase.ui.ELEMENT_STATE.ENABLED );
-	},
-
-	/**
-	 * get state of all elements (disabled, enabled or mixed)
-	 *
-	 * @return number whether all elements are enabled (true), disabled (false) or have mixed states
-	 */
-	getElementsState: function() {
-		var disabled = true, enabled = true;
-		$.each( this._items, function( i, item ) {
-			// loop through all sub-toolbars and check dedicated toolbar elements
-			if ( item instanceof wikibase.ui.Toolbar || item.stateChangeable ) {
-				if ( item.isDisabled() ) {
-					enabled = false;
-				} else if ( !item.isDisabled() ) {
-					disabled = false;
-				}
-			}
-		} );
-		if ( disabled === true ) {
-			return wikibase.ui.ELEMENT_STATE.DISABLED;
-		} else if ( enabled === true ) {
-			return wikibase.ui.ELEMENT_STATE.ENABLED;
-		} else {
-			return wikibase.ui.ELEMENT_STATE.MIXED;
-		}
-	},
-
 	destroy: function() {
 		if( this._items !== null ) {
 			for( var i in this._items ) {
@@ -336,5 +257,51 @@ wb.ui.Toolbar.prototype = {
 	 */
 	renderItemSeparators: false
 };
+
+// add disable/enable functionality overwriting required functions
+wb.ui.StateExtension.useWith( wb.ui.Toolbar, {
+
+	/**
+	 * Determines the state (disabled, enabled or mixed) of all toolbar elements.
+	 * @see wikibase.ui.StateExtension.getState
+	 *
+	 * @return Number whether all elements are enabled (true), disabled (false) or have mixed states
+	 */
+	getState: function() {
+		var disabled = true, enabled = true;
+		$.each( this._items, function( i, item ) {
+			// loop through all sub-toolbars and check dedicated toolbar elements
+			if ( item instanceof wikibase.ui.Toolbar || item.stateChangeable ) {
+				if ( item.isDisabled() ) {
+					enabled = false;
+				} else if ( !item.isDisabled() ) {
+					disabled = false;
+				}
+			}
+		} );
+		if ( disabled === true ) {
+			return this.STATE.DISABLED;
+		} else if ( enabled === true ) {
+			return this.STATE.ENABLED;
+		} else {
+			return this.STATE.MIXED;
+		}
+	},
+
+	/**
+	 * @see wikibase.ui.StateExtension.setDisabled
+	 *
+	 * @param Boolean disable true to disable, false to enable all toolbar elements
+	 * @return Boolean whether the operation was successful
+	 */
+	setDisabled: function( disable ) {
+		var success = true;
+		$.each( this._items, function( i, item ) {
+			success = item.setDisabled( disable ) && success;
+		} );
+		return success;
+	}
+
+} );
 
 } )( mediaWiki, wikibase, jQuery );
