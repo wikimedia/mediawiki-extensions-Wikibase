@@ -27,5 +27,12 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 return array(
-
+	'DataValue' => 'datavalue/DataValue.php',
+	'DataValueObject' => 'datavalue/DataValueObject.php',
+	'GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
+	'MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
+	'MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
+	'QuantityValue' => 'datavalue/QuantityValue.php',
+	'StringValue' => 'datavalue/StringValue.php',
+	'TimeValue' => 'datavalue/TimeValue.php',
 );
