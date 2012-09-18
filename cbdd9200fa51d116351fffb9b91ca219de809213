@@ -16,6 +16,24 @@
       "revId": "cbdd9200fa51d116351fffb9b91ca219de809213",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6bM\u003d",
+        "filename": "repo/resources/wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-18T11:15:11Z",
+      "side": 1,
+      "message": "Should probably be added as a bug and not being fixed in this patchset. Its also the same solution in Mediawiki.",
+      "parentUuid": "AAAASn//7HY\u003d",
+      "revId": "cbdd9200fa51d116351fffb9b91ca219de809213",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
