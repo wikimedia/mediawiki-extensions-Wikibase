@@ -324,12 +324,12 @@ abstract class Api extends \ApiBase {
 	 * Returns the permissions that are required to perform the operation specified by
 	 * the parameters.
 	 *
-	 * @param $item Item the item to check permissions for
+	 * @param $entity Entity the entity to check permissions for
 	 * @param $params array of arguments for the module, describing the operation to be performed
 	 *
 	 * @return \Status the check's result
 	 */
-	protected function getRequiredPermissions( Item $item, array $params ) {
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = array( 'read' );
 
 		#could directly check for each module here:

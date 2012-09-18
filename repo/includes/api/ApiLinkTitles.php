@@ -18,9 +18,9 @@ use ApiBase, User, Http, Status;
 class ApiLinkTitles extends Api {
 
 	/**
-	 * @see  ApiModifyItem::getRequiredPermissions()
+	 * @see  ApiModifyEntity::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Item $item, array $params ) {
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $item, $params );
 
 		$permissions[] = 'linktitles-update';
