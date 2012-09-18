@@ -62,7 +62,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 		$( wb )
 		.on( 'startItemPageEditMode',
 			function( event, origin ) {
-				self.disable( origin );
+				self._setState( self.STATE.DISABLED, origin );
 			}
 		)
 		// re-enabling all actions then stoping an edit mode
@@ -129,23 +129,23 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 			if ( this.allowsMultipleValues ) {
 				// enable button only if this is not full yet, overwrite function directly
 				var self = this;
-				this._toolbar.btnAdd.setDisabled = function( disable ) {
+				this._toolbar.btnAdd._setState = function( state ) {
 					var isFull = self.isFull();
-					if( ! disable && self.isFull() ) {
+					if( state === this.STATE.ENABLED && self.isFull() ) {
 						// full list, don't enable 'add' button, show hint
 						self._toolbar.addElement( self._toolbar.lblFull );
-						disable = true;
+						state = this.STATE.DISABLED;
 					}
-					if( ! disable && self.isInAddMode() ) {
-						disable = true; // still adding new value, don't enable 'add' button!
+					if( state === this.STATE.ENABLED && self.isInAddMode() ) {
+						state = this.STATE.DISABLED; // still adding new value, don't enable 'add' button!
 					}
-					if( disable == false ) {
+					if( state === this.STATE.ENABLED ) {
 						// enabled, label with 'full' message not required
 						self._toolbar.removeElement( self._toolbar.lblFull );
 					}
-					return wb.ui.Toolbar.Button.prototype.setDisabled.call( this, disable );
+					return wb.ui.Toolbar.Button.prototype._setState.call( this, state );
 				};
-				this._toolbar.btnAdd.setDisabled( false ); // will run the code above
+				this._toolbar.btnAdd.enable(); // will run the code above
 			}
 		}
 
@@ -307,7 +307,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 		this._onRefreshView( elemIndex );
 
 		// enables 'add' button again if it was disabled because of full list:
-		this._toolbar.btnAdd.setDisabled( this.isInAddMode() );
+		this._toolbar.btnAdd[ this.isInAddMode() ? 'disable' : 'enable' ]();
 	},
 
 	/**
@@ -378,7 +378,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 		var newValue = this._initSingleValue( newValueElem );
 
 		if ( !this.allowsFullErase ) { // on allowsFullErase, add button will be hidden when not in use
-			this._toolbar.btnAdd.setDisabled( true ); // disable 'add' button...
+			this._toolbar.btnAdd.disable(); // disable 'add' button...
 		}
 
 		if( value ) {
@@ -399,7 +399,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 	 * @param bool wasPending whether value is a completely new value not yet stored in the database
 	 */
 	_newValueHandler_onAfterStopEditing: function( newValue, save, wasPending ) {
-		this._toolbar.btnAdd.setDisabled( false ); // ...until stop editing new item
+		this._toolbar.btnAdd.enable(); // ...until stop editing new item
 		if( save ) {
 			this._onRefreshView( $.inArray( newValue, this._editableValues ) );
 		}
@@ -563,70 +563,35 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 		return wb.ui.PropertyEditTool.EditableValue;
 	},
 
-	/**
-	 * Disable this property edit tool.
-	 *
-	 * @param wikibase.ui.EditableValue skip editable value to not disable (usually the one that
-	 *                                       triggered starting edit mode)
-	 * @return bool whether disabling was successful for all elements
-	 */
-	disable: function( skip ) {
-		var success = true;
-		if ( this._toolbar !== null ) {
-			success = success && this._toolbar.disable();
-		}
-		if ( this._editableValues !== null ) {
-			$.each( this._editableValues, function( i, editableValue ) {
-				if ( editableValue !== skip ) {
-					success = success && editableValue.disable();
-				}
-			} );
-		}
-		return success;
-	},
+
+	/////////////////
+	// CONFIGURABLE:
+	/////////////////
 
 	/**
-	 * Enable this property edit tool.
-	 *
-	 * @return bool whether enabling was successful for all elements
+	 * If true, the tool will manage several editable values and offer a remove and add command
+	 * @var bool
 	 */
-	enable: function() {
-		var success = true;
-		if ( this._toolbar !== null ) {
-			success = success && this._toolbar.enable();
-		}
-		if ( this._editableValues !== null ) {
-			$.each( this._editableValues, function( i, editableValue ) {
-				success = success && editableValue.enable();
-			} );
-		}
-		return success;
-	},
+	allowsMultipleValues: true,
 
 	/**
-	 * Returns whether this property edit tool is disabled.
-	 *
-	 * @return bool true if disabled
+	 * determines whether it is possible to fully erase all values (displaying an add button when completely empty)
+	 * @var bool
 	 */
-	isDisabled: function() {
-		return ( this.getElementsState() === wb.ui.ELEMENT_STATE.DISABLED );
-	},
+	allowsFullErase: false
+} );
+
+// add disable/enable functionality overwriting required functions
+wb.ui.StateExtension.useWith( wb.ui.PropertyEditTool, {
 
 	/**
-	 * Returns whether this property edit tool is enabled.
-	 *
-	 * @return bool true if enabled
-	 */
-	isEnabled: function() {
-		return ( this.getElementsState() === wb.ui.ELEMENT_STATE.ENABLED );
-	},
-
-	/**
-	 * Get state (disabled, enabled or mixed) of all edit tool elements (editable values and toolbar).
+	 * Determines the state (disabled, enabled or mixed) of all edit tool elements (editable values and
+	 * toolbar).
+	 * @see wikibase.ui.StateExtension.getState
 	 *
 	 * @return number whether all elements are enabled (true), disabled (false) or have mixed states
 	 */
-	getElementsState: function() {
+	getState: function() {
 		var disabled = true, enabled = true;
 
 		// check editableValues
@@ -644,30 +609,38 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 		}
 
 		if ( disabled === true ) {
-			return wb.ui.ELEMENT_STATE.DISABLED;
+			return this.STATE.DISABLED;
 		} else if ( enabled === true ) {
-			return wb.ui.ELEMENT_STATE.ENABLED;
+			return this.STATE.ENABLED;
 		} else {
-			return wb.ui.ELEMENT_STATE.MIXED;
+			return this.STATE.MIXED;
 		}
 	},
 
-
-	/////////////////
-	// CONFIGURABLE:
-	/////////////////
-
 	/**
-	 * If true, the tool will manage several editable values and offer a remove and add command
-	 * @var bool
+	 * Dis- or enables the PropertyEditTool (its toolbar and EditableValues).
+	 * @see wikibase.ui.StateExtension._setState
+	 *
+	 * @param Number state see wb.ui.EditableValue.STATE
+	 * @param wb.ui.EditableValue skip EditableValue that should not be disabled
+	 *                                 (usually the one that triggered edit mode)
+	 * @return Boolean whether the desired state has been applied (or had been applied already)
 	 */
-	allowsMultipleValues: true,
+	_setState: function( state, skip ) {
+		var success = true;
+		if ( this._toolbar !== null ) {
+			success = success && this._toolbar.setState( state );
+		}
+		if ( this._editableValues !== null ) {
+			$.each( this._editableValues, function( i, editableValue ) {
+				if ( editableValue !== skip ) {
+					success = success && editableValue.setState( state );
+				}
+			} );
+		}
+		return success;
+	}
 
-	/**
-	 * determines whether it is possible to fully erase all values (displaying an add button when completely empty)
-	 * @var bool
-	 */
-	allowsFullErase: false
 } );
 
 } )( mediaWiki, wikibase, jQuery );

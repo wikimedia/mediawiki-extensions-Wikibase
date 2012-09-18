@@ -87,23 +87,19 @@ wb.ui.Toolbar.Button = wb.utilities.inherit( $PARENT, {
 	},
 
 	/**
-	 * Disables or enables the button
-	 * @param bool disabled true for disabling, false for enabling the button.
-	 *        If the button is disabled, it can't be clicked.
-	 * @return bool whether the operation was successful
+	 * Dis- or enables the button.
+	 *
+	 * @param Number state see wb.ui.EditableValue.STATE
+	 * @return Boolean whether the desired state has been applied (or had been applied already)
 	 */
-	setDisabled: function( disable ) {
-		if( this.isDisabled() === disable ) {
-			return true;
-		}
+	_setState: function( state ) {
 		var text = this.getContent();
 		var oldElem = this._elem;
 
-		if( disable ) {
+		if( state === this.STATE.DISABLED ) {
 			// create a disabled label instead of a link
 			$PARENT.prototype._initElem.call( this, text );
-		}
-		else {
+		} else {
 			this._initElem( text );
 		}
 
@@ -111,7 +107,7 @@ wb.ui.Toolbar.Button = wb.utilities.inherit( $PARENT, {
 		oldElem.replaceWith( this._elem );
 
 		// call prototypes disable function:
-		return $PARENT.prototype.setDisabled.call( this, disable );
+		return $PARENT.prototype._setState.call( this, state );
 	}
 
 } );

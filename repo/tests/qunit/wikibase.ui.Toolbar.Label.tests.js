@@ -66,7 +66,7 @@
 		);
 
 		equal(
-			this.label.setDisabled(),
+			this.label.disable(),
 			true,
 			'disable, state changed'
 		);
@@ -78,7 +78,7 @@
 		);
 
 		equal(
-			this.label.setDisabled( true ),
+			this.label.disable(),
 			true,
 			'disabling one more'
 		);
@@ -90,7 +90,7 @@
 		);
 
 		equal(
-			this.label.setDisabled( false ),
+			this.label.enable(),
 			true,
 			'enable, state changed'
 		);
@@ -102,7 +102,7 @@
 		);
 
 		equal(
-			this.label.setDisabled( false ),
+			this.label.enable(),
 			true,
 			'enabling once more'
 		);
@@ -116,7 +116,7 @@
 		this.label.stateChangeable = false;
 
 		equal(
-			this.label.setDisabled( true ),
+			this.label.disable(),
 			true,
 			'trying to disable without state being changeable'
 		);
@@ -135,7 +135,7 @@
 		this.label.beforeEnable = function() { return false; };
 
 		equal(
-			this.label.setDisabled(),
+			this.label.disable(),
 			false,
 			'event beforeDisabled return value will cancel disable command'
 		);
@@ -149,13 +149,13 @@
 		this.label.beforeDisable = function() {	return true; };
 
 		equal(
-			this.label.setDisabled(),
+			this.label.disable(),
 			true,
 			'event beforeDisabled removed, disabled'
 		);
 
 		equal(
-			this.label.setDisabled( false ),
+			this.label.enable(),
 			false,
 			'try to enable, beforeEnabled will prevent'
 		);
@@ -169,7 +169,7 @@
 		this.label.beforeEnable = function() {	return true; };
 
 		equal(
-			this.label.setDisabled( false ),
+			this.label.enable(),
 			true,
 			'event beforeEnable removed, enable'
 		);

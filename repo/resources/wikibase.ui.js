@@ -20,16 +20,5 @@
  * @since 0.1
  */
 wb.ui = wb.ui || {};
-$.extend( wb.ui, {
-	/**
-	 * @const states of element groups
-	 * @enum number
-	 */
-	ELEMENT_STATE: {
-		ENABLED: 1, // all elements are enabled
-		DISABLED: 2, // all elements are disabled
-		MIXED: 3
-	}
-} );
 
 } )( mediaWiki, wikibase, jQuery );
