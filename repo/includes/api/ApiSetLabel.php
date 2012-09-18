@@ -4,7 +4,7 @@ namespace Wikibase;
 use ApiBase;
 
 /**
- * API module to set the label for a Wikibase item.
+ * API module to set the label for a Wikibase entity.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -20,10 +20,10 @@ use ApiBase;
 class ApiSetLabel extends ApiModifyLangAttribute {
 
 	/**
-	 * @see ApiModifyItem::getRequiredPermissions()
+	 * @see ApiModifyEntity::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Item $item, array $params ) {
-		$permissions = parent::getRequiredPermissions( $item, $params );
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 
 		$permissions[] = ( isset( $params['value'] ) && 0<strlen( $params['value'] ) )
 			? 'label-update'
@@ -32,25 +32,24 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 	}
 
 	/**
-	 * @see ApiModifyItem::modifyItem()
+	 * @see ApiModifyEntity::modifyEntity()
 	 */
-	protected function modifyItem( ItemContent &$itemContent, array $params ) {
-		$status = parent::modifyItem( $itemContent, $params );
-
-		if ( $status && isset( $params['value'] ) ) {
+	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+		if ( isset( $params['value'] ) ) {
 			$label = Utils::squashToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $label ) ) {
-				$labels = array( $language => $itemContent->getItem()->setLabel( $language, $label ) );
+				$labels = array( $language => $entityContent->getEntity()->setLabel( $language, $label ) );
 			}
 			else {
-				$itemContent->getItem()->removeLabel( $language );
+				$entityContent->getEntity()->removeLabel( $language );
 				$labels = array( $language => '' );
 			}
-			$this->addLabelsToResult( $labels, 'item' );
+
+			$this->addLabelsToResult( $labels, 'item' ); // FIXME: must be updated
 		}
 
-		return $status;
+		return true;
 	}
 
 	/**
@@ -58,7 +57,7 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to set a label for a single Wikibase item.'
+			'API module to set a label for a single Wikibase entity.'
 		);
 	}
 

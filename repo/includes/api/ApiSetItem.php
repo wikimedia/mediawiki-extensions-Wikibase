@@ -4,11 +4,11 @@ namespace Wikibase;
 use ApiBase, User;
 
 /**
- * Base class for API modules modifying a single item identified based on id xor a combination of site and page title.
+ * Derived class for API modules modifying a single item identified by id xor a combination of site and page title.
  *
  * @since 0.1
  *
- * @file ApiWikibaseModifyItem.php
+ * @file ApiWikibaseModifyEntity.php
  * @ingroup Wikibase
  * @ingroup API
  *
@@ -16,31 +16,45 @@ use ApiBase, User;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class ApiSetItem extends ApiModifyItem {
+class ApiSetItem extends ApiModifyEntity {
 
 	/**
 	 * @see  Api::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Item $item, array $params ) {
-		$permissions = parent::getRequiredPermissions( $item, $params );
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 
 		$permissions[] = 'edit';
-		$permissions[] = 'item-' . ( $item->getId() ? 'override' : 'create' );
+		$permissions[] = 'item-' . ( $entity->getId() ? 'override' : 'create' );
 		return $permissions;
 	}
 
 	/**
-	 * @see  ApiModifyItem::getTextForComment()
+	 * @see  ApiModifyEntity::findEntity()
+	 */
+	protected function findEntity( array $params ) {
+		$entityContent = parent::findEntity( $params );
+
+		// If we found anything then check if it is of the correct base class
+		if ( !is_null( $entityContent ) && !( $entityContent instanceof ItemContent ) ) {
+			$this->dieUsage( $this->msg( 'wikibase-api-wrong-class' )->text(), 'wrong-class' );
+		}
+
+		return $entityContent;
+	}
+
+	/**
+	 * @see  ApiModifyEntity::getTextForComment()
 	 */
 	protected function getTextForComment( array $params, $plural = 'none' ) {
 		return Autocomment::formatAutoComment(
-			'wbsetitem',
+			'wbsetentity',
 			array()
 		);
 	}
 
 	/**
-	 * @see  ApiModifyItem::getTextForSummary()
+	 * @see  ApiModifyEntity::getTextForSummary()
 	 */
 	protected function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
@@ -49,18 +63,18 @@ class ApiSetItem extends ApiModifyItem {
 	}
 
 	/**
-	 * @see ApiModifyItem::createItem()
+	 * @see ApiModifyEntity::createEntity()
 	 */
-	protected function createItem( array $params ) {
+	protected function createEntity( array $params ) {
 		if ( isset( $params['data'] ) ) {
 			$this->flags |= EDIT_NEW;
 			return ItemContent::newEmpty();
 		}
-		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 	}
 
 	/**
-	 * @see ApiModifyItem::validateParameters()
+	 * @see ApiModifyEntity::validateParameters()
 	 */
 	protected function validateParameters( array $params ) {
 		// note that this is changed back and could fail
@@ -70,9 +84,9 @@ class ApiSetItem extends ApiModifyItem {
 	}
 
 	/**
-	 * @see ApiModifyItem::modifyItem()
+	 * @see ApiModifyEntity::modifyEntity()
 	 */
-	protected function modifyItem( ItemContent &$itemContent, array $params ) {
+	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 		$status = \Status::newGood();
 		if ( isset( $params['data'] ) ) {
 			$data = json_decode( $params['data'], true );
@@ -85,10 +99,10 @@ class ApiSetItem extends ApiModifyItem {
 			$languages = array_flip( Utils::getLanguageCodes() );
 
 			if ( isset( $params['clear'] ) && $params['clear'] ) {
-				$itemContent->getItem()->clear();
+				$entityContent->getEntity()->clear();
 			}
 
-			$page = $itemContent->getWikiPage();
+			$page = $entityContent->getWikiPage();
 			if ( $page ) {
 				$title = $page->getTitle();
 				$revision = $page->getRevision();
@@ -140,10 +154,10 @@ class ApiSetItem extends ApiModifyItem {
 					foreach ( $list as $langCode => $arg ) {
 						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
 						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
-							$itemContent->getItem()->removeLabel( $arg['language'] );
+							$entityContent->getEntity()->removeLabel( $arg['language'] );
 						}
 						else {
-							$itemContent->getItem()->setLabel( $arg['language'], Utils::squashToNFC( $arg['value'] ) );
+							$entityContent->getEntity()->setLabel( $arg['language'], Utils::squashToNFC( $arg['value'] ) );
 						}
 					}
 
@@ -161,10 +175,10 @@ class ApiSetItem extends ApiModifyItem {
 					foreach ( $list as $langCode => $arg ) {
 						$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
 						if ( array_key_exists( 'remove', $arg ) || $arg['value'] === "" ) {
-							$itemContent->getItem()->removeDescription( $arg['language'] );
+							$entityContent->getEntity()->removeDescription( $arg['language'] );
 						}
 						else {
-							$itemContent->getItem()->setDescription( $arg['language'], Utils::squashToNFC( $arg['value'] ) );
+							$entityContent->getEntity()->setDescription( $arg['language'], Utils::squashToNFC( $arg['value'] ) );
 						}
 					}
 
@@ -206,13 +220,13 @@ class ApiSetItem extends ApiModifyItem {
 						}
 					}
 					foreach ( $setAliases as $langCode => $strings ) {
-							$itemContent->getItem()->setAliases( $langCode, $strings );
+							$entityContent->getEntity()->setAliases( $langCode, $strings );
 					}
 					foreach ( $remAliases as $langCode => $strings ) {
-							$itemContent->getItem()->removeAliases( $langCode, $strings );
+							$entityContent->getEntity()->removeAliases( $langCode, $strings );
 					}
 					foreach ( $addAliases as $langCode => $strings ) {
-							$itemContent->getItem()->addAliases( $langCode, $strings );
+							$entityContent->getEntity()->addAliases( $langCode, $strings );
 					}
 
 					if ( !$status->isOk() ) {
@@ -230,7 +244,7 @@ class ApiSetItem extends ApiModifyItem {
 					foreach ( $list as $siteId => $arg ) {
 						$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
 						if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
-							$itemContent->getItem()->removeSiteLink( $arg['site'] );
+							$entityContent->getEntity()->removeSiteLink( $arg['site'] );
 						}
 						else {
 							$site = $sites->getSite( $arg['site'] );
@@ -241,7 +255,7 @@ class ApiSetItem extends ApiModifyItem {
 							}
 
 							$link = new SiteLink( $site, $page );
-							$ret = $itemContent->getItem()->addSiteLink( $link, 'set' );
+							$ret = $entityContent->getEntity()->addSiteLink( $link, 'set' );
 
 							if ( $ret === false ) {
 								$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
@@ -261,18 +275,17 @@ class ApiSetItem extends ApiModifyItem {
 			}
 		}
 
-		// This is already done in createItem
-		if ( $itemContent->isNew() ) {
-			// if the item doesn't exist yet, create it
+		// This is already done in createEntity
+		if ( $entityContent->isNew() ) {
+			// if the entity doesn't exist yet, create it
 			$this->flags |= EDIT_NEW;
 		}
 
-		$item = $itemContent->getItem();
-
-		$this->addLabelsToResult( $item->getLabels(), 'item' );
-		$this->addDescriptionsToResult( $item->getDescriptions(), 'item' );
-		$this->addAliasesToResult( $item->getAllAliases(), 'item' );
-		$this->addSiteLinksToResult( $item->getSiteLinks(), 'item' );
+		$entity = $entityContent->getEntity();
+		$this->addLabelsToResult( $entity->getLabels(), 'item' );
+		$this->addDescriptionsToResult( $entity->getDescriptions(), 'item' );
+		$this->addAliasesToResult( $entity->getAllAliases(), 'item' );
+		$this->addSiteLinksToResult( $entity->getSiteLinks(), 'item' );
 
 		return true;
 	}
@@ -323,37 +336,49 @@ class ApiSetItem extends ApiModifyItem {
 	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
-		return array_merge( parent::getAllowedParams(), array(
-			'data' => array(
-				ApiBase::PARAM_TYPE => 'string',
-			),
-			'exclude' => array(
-				ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'touched', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
-				ApiBase::PARAM_DFLT => '',
-				ApiBase::PARAM_ISMULTI => true,
-			),
-			'clear' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false
-			),
-		) );
+		return array_merge(
+			parent::getAllowedParams(),
+			parent::getAllowedParamsForId(),
+			parent::getAllowedParamsForSiteLink(),
+			parent::getAllowedParamsForEntity(),
+			array(
+				'data' => array(
+					ApiBase::PARAM_TYPE => 'string',
+				),
+				'exclude' => array(
+					ApiBase::PARAM_TYPE => array( 'pageid', 'ns', 'title', 'lastrevid', 'touched', 'sitelinks', 'aliases', 'labels', 'descriptions' ),
+					ApiBase::PARAM_DFLT => '',
+					ApiBase::PARAM_ISMULTI => true,
+				),
+				'clear' => array(
+					ApiBase::PARAM_TYPE => 'boolean',
+					ApiBase::PARAM_DFLT => false
+				),
+			)
+		);
 	}
 
 	/**
 	 * @see ApiBase::getParamDescription()
 	 */
 	public function getParamDescription() {
-		return array_merge( parent::getParamDescription(), array(
-			'data' => array( 'The serialized object that is used as the data source.',
-				"The newly created item will be assigned an item 'id'."
-			),
-			'exclude' => array( 'List of substructures to neglect during the processing.',
-				"In addition 'length', 'touched' and 'count' is always excluded."
-			),
-			'clear' => array( 'If set, the complete item is emptied before proceeding.',
-				'The item will not be saved before the item is filled with the "data", possibly with parts excluded.'
-			),
-		) );
+		return array_merge(
+			parent::getParamDescription(),
+			parent::getParamDescriptionForId(),
+			parent::getParamDescriptionForSiteLink(),
+			parent::getParamDescriptionForEntity(),
+			array(
+				'data' => array( 'The serialized object that is used as the data source.',
+					"The newly created entity will be assigned an entity 'id'."
+				),
+				'exclude' => array( 'List of substructures to neglect during the processing.',
+					"In addition 'length', 'touched' and 'count' is always excluded."
+				),
+				'clear' => array( 'If set, the complete entity is emptied before proceeding.',
+					'The entity will not be saved before the entity is filled with the "data", possibly with parts excluded.'
+				),
+			)
+		);
 	}
 
 	/**
@@ -361,7 +386,7 @@ class ApiSetItem extends ApiModifyItem {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to create a single new Wikibase item and modify it with serialised information.'
+			'API module to create a single new Wikibase entity and modify it with serialised information.'
 		);
 	}
 
@@ -370,10 +395,10 @@ class ApiSetItem extends ApiModifyItem {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetitem&data={}&format=jsonfm'
-			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed. Report it as pretty printed json format.',
-			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
-			=> 'Set a more complete JSON structure for the item, it will be extended with an item id and the structure cleansed and completed.',
+			'api.php?action=wbsetentity&data={}&format=jsonfm'
+			=> 'Set an empty JSON structure for the entity, it will be extended with an entity id and the structure cleansed and completed. Report it as pretty printed json format.',
+			'api.php?action=wbsetentity&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			=> 'Set a more complete JSON structure for the entity, it will be extended with an entity id and the structure cleansed and completed.',
 		);
 	}
 
@@ -381,7 +406,7 @@ class ApiSetItem extends ApiModifyItem {
 	 * @see ApiBase::getHelpUrls()
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetitem';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetentity';
 	}
 
 	/**
