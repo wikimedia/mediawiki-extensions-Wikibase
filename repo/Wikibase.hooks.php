@@ -124,7 +124,12 @@ final class RepoHooks {
 		global $wgNamespaceContentModels;
 
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
-			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
+			&& ( // TODO: make this a little nicer
+				$wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM
+				|| $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_PROPERTY
+				|| $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_QUERY
+			)
+		) {
 			$pageLanguage = $language;
 		}
 
