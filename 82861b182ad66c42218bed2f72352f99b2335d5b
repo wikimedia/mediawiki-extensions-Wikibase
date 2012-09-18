@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//6as\u003d",
+        "filename": "repo/includes/ItemDisambiguation.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-18T11:31:55Z",
+      "side": 1,
+      "message": "This is a weird construct. Would make more sense to use Html::element and ditch the htmlspecialchars earlier in the code (which currently might make the comparison fail).",
+      "revId": "82861b182ad66c42218bed2f72352f99b2335d5b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
