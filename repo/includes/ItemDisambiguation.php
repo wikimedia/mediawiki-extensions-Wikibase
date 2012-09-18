@@ -52,9 +52,7 @@ class ItemDisambiguation extends \ContextSource {
 	 * @return string
 	 */
 	public function getHTML() {
-		//global $wgContLang;
-		global $wgLang;
-		$userLang = $wgLang->getCode();
+		$userLang = $this->getLanguage();
 		$searchLang = $this->langCode;
 
 		return
@@ -79,7 +77,7 @@ class ItemDisambiguation extends \ContextSource {
 							);
 
 						// display the label in the searched language in case it is different than in the user language
-						if (( $userLang !== $searchLang ) && ( $userLabel !== $searchLabel )) {
+						if ( ( $userLang !== $searchLang ) && ( $userLabel !== $searchLabel ) ) {
 							$result = $result
 									// really ugly way to add parenthesis... ;/
 									. ' ('
@@ -106,7 +104,7 @@ class ItemDisambiguation extends \ContextSource {
 								. \Html::closeElement( 'span' );
 						}
 
-						$result = \HTML::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
+						$result = \Html::rawElement( 'li', array( 'class' => 'wikibase-disambiguation' ), $result );
 						return $result;
 					},
 					$this->items

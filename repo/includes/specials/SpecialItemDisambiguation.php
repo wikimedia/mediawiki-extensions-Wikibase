@@ -38,12 +38,11 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		}
 
 		// Setup
-		global $wgLang;
 		$request = $this->getRequest();
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$language = $request->getVal( 'language', isset( $parts[0] ) ? $parts[0] : '' );
 		if ( $language === '' ) {
-			$language = $wgLang->getCode();
+			$language = $this->getLanguage();
 		}
 		$label = $request->getVal( 'label', isset( $parts[1] ) ? $parts[1] : '' );
 		if ( $label === '' ) {
@@ -61,10 +60,10 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 				$this->displayDisambiguationPage( $itemContents, $language );
 			} else {
 				// No results found
-				if ( ( Language::isValidBuiltInCode( $language ) && ( Language::fetchLanguageName( $language ) !== "" ) )) {
+				if ( ( Language::isValidBuiltInCode( $language ) && ( Language::fetchLanguageName( $language ) !== "" ) ) ) {
 					// No valid language code
 					$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
-					if ( $language === $wgLang->getCode() ) {
+					if ( $language === $this->getLanguage() ) {
 						$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-create', $label );
 					}
 				} else {
