@@ -131,7 +131,7 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 		}
 
 		// only enable site page selector if there is a valid site id selected
-		pageInterface.setDisabled( ! idInterface.isValid() );
+		pageInterface[ idInterface.isValid() ? 'enable' : 'disable' ]();
 	},
 
 	/**

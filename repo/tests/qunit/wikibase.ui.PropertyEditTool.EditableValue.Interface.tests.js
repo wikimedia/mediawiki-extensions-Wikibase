@@ -216,7 +216,7 @@
 		);
 
 		equal(
-			this.evInterface.setDisabled( true ),
+			this.evInterface.disable(),
 			true,
 			'disable'
 		);
@@ -234,7 +234,7 @@
 		);
 
 		equal(
-			this.evInterface.setDisabled( false ),
+			this.evInterface.enable(),
 			true,
 			'enable'
 		);
