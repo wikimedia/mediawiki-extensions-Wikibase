@@ -10,9 +10,9 @@ class CreateItemPage < ItemPage
   include PageObject
   page_url WIKI_REPO_URL + "Special:CreateItem"
 
-  text_field(:createItemLabelField, :id => "wb-createitem-label")
-  text_field(:createItemDescriptionField, :id => "wb-createitem-description")
-  button(:createItemSubmit, :id => "wb-createitem-submit")
+  text_field(:createItemLabelField, :id => "wb-createentity-label")
+  text_field(:createItemDescriptionField, :id => "wb-createentity-description")
+  button(:createItemSubmit, :id => "wb-createentiy-submit")
 
   def create_new_item(label, description)
     self.createItemLabelField = label
