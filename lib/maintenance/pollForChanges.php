@@ -84,7 +84,6 @@ class PollForChanges extends \Maintenance {
 			// Since people might waste time debugging odd errors when they forget to enable the extension. BTDT.
 			die( 'WikibaseLib has not been loaded.' );
 		}
-
 		$this->changes = ChangesTable::singleton();
 
 		$this->lastChangeId = (int)$this->getOption( 'startid', 0 );
@@ -95,24 +94,26 @@ class PollForChanges extends \Maintenance {
 		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
 
 		// Make sure this script only runs once
-		if ( DIRECTORY_SEPARATOR == "\\" ) { // WINDOWS
-			$lockfileName = preg_replace( "[:|\\\|/]", "_", __FILE__ ) . '.lck';
+		$pidfileName = wfWikiID() . ".pid";
+		// Let's see if we have a /var/run directory and if we can write to it (i.e. we're root)
+		if ( is_dir( '/var/run/' ) && is_writable( '/var/run/' ) ) {
+			$pidfile = '/var/run/' . $pidfileName;
+		// else use the temporary directory
 		} else {
-			$lockfileName = str_replace( DIRECTORY_SEPARATOR, "_", __FILE__ ) . '.lck';
+			$pidfilePath = str_replace( '\\', '/', sys_get_temp_dir() );
+			$pidfile = $pidfilePath . '/' . $pidfileName;
 		}
-		$lockfilePath = str_replace( '\\', '/', sys_get_temp_dir() );
-		$lockfile = $lockfilePath . '/' . $lockfileName;
-		if ( file_exists( $lockfile ) ) {
-			$pid = file_get_contents( $lockfile );
+		if ( file_exists( $pidfile ) ) {
+			$pid = file_get_contents( $pidfile );
 			if ( $this->checkPID( $pid ) === false ) {
 				self::msg( 'Process has died! Restarting...' );
-				file_put_contents( $lockfile, getmypid() ); // update lockfile
+				file_put_contents( $pidfile, getmypid() ); // update lockfile
 			} else {
 				self::msg( 'PID is still alive! Cannot run twice!' );
 				exit;
 			}
 		} else {
-			file_put_contents( $lockfile, getmypid() ); // create lockfile
+			file_put_contents( $pidfile, getmypid() ); // create lockfile
 		}
 
 		while ( true ) {
