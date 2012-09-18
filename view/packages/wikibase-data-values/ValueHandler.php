@@ -44,12 +44,10 @@ $wgAutoloadClasses['ValueHandlerHooks']				= dirname( __FILE__ ) . '/ValueHandle
 $wgAutoloadClasses['ValueHandlerSettings']		  	= dirname( __FILE__ ) . '/ValueHandler.settings.php';
 
 // includes
-$wgAutoloadClasses['ValueHandlerError']		 		= $incDir . 'ValueHandlerError.php';
-$wgAutoloadClasses['ValueHandlerErrorObject']		= $incDir . 'ValueHandlerErrorObject.php';
+
 $wgAutoloadClasses['ValueParserResult']		 		= $incDir . 'ValueParserResult.php';
 $wgAutoloadClasses['ValueParserResultObject']		= $incDir . 'ValueParserResultObject.php';
-$wgAutoloadClasses['ValueValidatorResult']		 	= $incDir . 'ValueValidatorResult.php';
-$wgAutoloadClasses['ValueValidatorResultObject']	= $incDir . 'ValueValidatorResultObject.php';
+
 
 // includes/valueparser
 $wgAutoloadClasses['BoolParser']		 			= $incDir . 'valueparser/BoolParser.php';
@@ -61,14 +59,7 @@ $wgAutoloadClasses['TitleParser']			 		= $incDir . 'valueparser/TitleParser.php'
 $wgAutoloadClasses['ValueParser']		 			= $incDir . 'valueparser/ValueParser.php';
 
 // includes/valuevalidator
-$wgAutoloadClasses['DimensionValidator']		 	= $incDir . 'valuevalidator/DimensionValidator.php';
-$wgAutoloadClasses['ListValidator']		 			= $incDir . 'valuevalidator/ListValidator.php';
-$wgAutoloadClasses['NullValidator']		 			= $incDir . 'valuevalidator/NullValidator.php';
-$wgAutoloadClasses['RangeValidator']		 		= $incDir . 'valuevalidator/RangeValidator.php';
-$wgAutoloadClasses['StringValidator']		 		= $incDir . 'valuevalidator/StringValidator.php';
-$wgAutoloadClasses['TitleValidator']		 		= $incDir . 'valuevalidator/TitleValidator.php';
-$wgAutoloadClasses['ValueValidator']		 		= $incDir . 'valuevalidator/ValueValidator.php';
-$wgAutoloadClasses['ValueValidatorObject']		 	= $incDir . 'valuevalidator/ValueValidatorObject.php';
+
 
 
 // tests
