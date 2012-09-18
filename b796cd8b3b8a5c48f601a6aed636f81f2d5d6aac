@@ -16,6 +16,24 @@
       "revId": "b796cd8b3b8a5c48f601a6aed636f81f2d5d6aac",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//6ek\u003d",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-18T08:52:35Z",
+      "side": 1,
+      "message": "The *determines* the language that should be used by the context. It says \"the native display language of this page is the user\u0027s content language\". This knowledge is specific to this kind of content. I do not see how it could be taken from the context. \n\nOne *could* provide a context as a parameter to Title::getPageViewLanguage, which would pass it on to Content::getPageViewLanguage, and then we could get the language via context-\u003euser-\u003euserLanguage. But that would require additional core changes.",
+      "parentUuid": "AAAASn//8jM\u003d",
+      "revId": "b796cd8b3b8a5c48f601a6aed636f81f2d5d6aac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
