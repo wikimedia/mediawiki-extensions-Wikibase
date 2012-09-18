@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Internationalization file for the DataValues extension.
+ * Class registration file for the DataValues library.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,12 +26,6 @@
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
+return array(
 
-$messages = array();
-
-/** English
- * @author Jeroen De Dauw
- */
-$messages['en'] = array(
-	'datavalues-desc' => 'Collection of objects representing various kinds of values',
 );
