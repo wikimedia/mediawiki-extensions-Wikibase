@@ -15,3 +15,6 @@
 
  # the namespace of the data items (e.g. "Data:" or "" for main namespace)
  ITEM_NAMESPACE: ""
+
+ # the prefix of item ids (e.g. "Q" at the moment)
+ ITEM_ID_PREFIX: "Q"
