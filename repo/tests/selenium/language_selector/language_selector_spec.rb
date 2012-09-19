@@ -17,7 +17,7 @@ describe "Check functionality of wikidata together with ULS" do
     # set up: switch to english language and create an item with label & description
     visit_page(CreateItemPage) do |page|
       page.uls_switch_language("English")
-      page.create_new_item(label_en, description_en)
+      page.create_new_item(label_en, description_en, false)
     end
   end
   context "ULS test setup" do
