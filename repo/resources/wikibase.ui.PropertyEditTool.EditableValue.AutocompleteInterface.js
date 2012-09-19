@@ -99,41 +99,13 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 					this._currentResults = response[1];
 					suggest( response[1] ); // pass array of returned values to callback
 
-					/*
-					 set value to first suggestion but select text of additional characters automatically placed
-					 allowing the first value to be selected directly but be overwritten as well;
-					 because of the API call lag, this is avoided when hitting backspace, since the value would
-					 be resetted too slow
-					 */
+					// auto-complete input box text (because of the API call lag, this is avoided
+					// when hitting backspace, since the value would be reset too slow)
 					if ( this._lastKeyDown !== 8 && response[1].length > 0 ) {
-						/*
-						 following if-statement is a work-around for a technically unexpected search
-						 behaviour: e.g. in English Wikipedia opensearch for "Allegro " returns "Allegro"
-						 as first result instead of "Allegro (music)", so auto-completion should probably
-						 be prevented here
-						 */
-						if (
-							response[1][0].toLowerCase().indexOf(
-								this._inputElem.val().toLowerCase()
-							) !== -1
-						) {
-							this.setValue( response[1][0] );
-							var start = response[0].length;
-							var end = response[1][0].length;
-							var node = this._inputElem[0];
-							if( node.createTextRange ) {
-								var selRange = node.createTextRange();
-								selRange.collapse( true );
-								selRange.moveStart( 'character', start);
-								selRange.moveEnd( 'character', end);
-								selRange.select();
-							} else if( node.setSelectionRange ) {
-								node.setSelectionRange( start, end );
-							} else if( node.selectionStart ) {
-								node.selectionStart = start;
-								node.selectionEnd = end;
-							}
-						}
+						this._inputElem.data( 'wikibaseAutocomplete' ).autocompleteString(
+							response[0],
+							response[1][0]
+						);
 					}
 					this._inputElem.data( 'autocomplete' ).element.removeClass( 'ui-autocomplete-loading' );
 				}

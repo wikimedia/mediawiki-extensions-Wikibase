@@ -105,7 +105,7 @@
 		},
 
 		/**
-		 * highlight matching input characters in results
+		 * Highlights matching characters in the result list.
 		 */
 		_highlightMatchingCharacters: function() {
 			var regexp = new RegExp(
@@ -116,6 +116,43 @@
 					$( this ).find( 'a' ).text().replace( regexp, '<b>$1</b>' )
 				);
 			} );
+		},
+
+		/**
+		 * Completes the input box with the remaining characters of a given string. The characters
+		 * of the remaining part are text-highlighted, so the will be overwritten if typing
+		 * characers is continue. Tabbing or clicking outside of the input box will leave the
+		 * completed string in the input box.
+		 *
+		 * @param String incomplete
+		 * @param String complete
+		 * @return Integer number of replaced characters
+		 */
+		autocompleteString: function( incomplete, complete ) {
+			// The following if-statement is a work-around for a technically unexpected search
+			// behaviour: e.g. in English Wikipedia opensearch for "Allegro [...]" returns "Allegro"
+			// as first result instead of "Allegro (music)", so auto-completion should probably be
+			// prevented here since it would always reset the input box's value to "Allegro"
+			if ( complete.toLowerCase().indexOf( this.element.val().toLowerCase() ) !== -1 ) {
+				this.element.val( complete );
+				var start = incomplete.length,
+					end = complete.length,
+					node = this.element[0];
+				if( node.createTextRange ) {
+					var selRange = node.createTextRange();
+					selRange.collapse( true );
+					selRange.moveStart( 'character', start);
+					selRange.moveEnd( 'character', end);
+					selRange.select();
+				} else if( node.setSelectionRange ) {
+					node.setSelectionRange( start, end );
+				} else if( node.selectionStart ) {
+					node.selectionStart = start;
+					node.selectionEnd = end;
+				}
+				return ( end - start );
+			}
+			return 0;
 		}
 
 	} );
