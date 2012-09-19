@@ -623,8 +623,11 @@ final class RepoHooks {
 		if(
 			// if custom link text is given, there is no point in overwriting it
 			$html !== null
-			// we only want to handle links to data items differently here
-			|| $target->getContentModel() !== CONTENT_MODEL_WIKIBASE_ITEM
+			// we only want to handle links to Wikibase entities differently here
+			|| !( $target->getContentModel() === CONTENT_MODEL_WIKIBASE_ITEM
+				|| $target->getContentModel() === CONTENT_MODEL_WIKIBASE_PROPERTY
+				|| $target->getContentModel() === CONTENT_MODEL_WIKIBASE_QUERY
+			)
 			// as of MW 1.20 Linker shouldn't support anything but Title anyhow
 			|| ! $target instanceof Title
 		) {
@@ -657,8 +660,8 @@ final class RepoHooks {
 			// e.g. after item was deleted.
 			return true;
 		}
-		$item = $content->getItem();
-		if ( is_null( $item ) ) {
+		$entity = $content->getEntity();
+		if ( is_null( $entity ) ) {
 			// Failed, can't continue. This could happen because there is an illegal structure that could
 			// not be parsed.
 			return true;
@@ -680,13 +683,13 @@ final class RepoHooks {
 		// use the user supplied list of acceptable languages as a filter.
 		list( $labelCode, $labelText, $labelLang) = $labelTriplet =
 			Utils::lookupMultilangText(
-				$item->getLabels( $langStore[$lang] ),
+				$entity->getLabels( $langStore[$lang] ),
 				$langStore[$lang],
 				array( $wgLang->getCode(), null, $wgLang )
 			);
 		list( $descriptionCode, $descriptionText, $descriptionLang) = $descriptionTriplet =
 			Utils::lookupMultilangText(
-				$item->getDescriptions( $langStore[$lang] ),
+				$entity->getDescriptions( $langStore[$lang] ),
 				$langStore[$lang],
 				array( $wgLang->getCode(), null, $wgLang )
 			);
