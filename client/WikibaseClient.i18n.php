@@ -349,6 +349,15 @@ $messages['tl'] = array(
 	'wbc-editlinkstitle' => 'Baguhin ang mga kawing na para sa interwika',
 );
 
+/** Vietnamese (Tiếng Việt)
+ * @author Minh Nguyen
+ */
+$messages['vi'] = array(
+	'wbc-desc' => 'Trình khách của phần mở rộng Wikibase',
+	'wbc-editlinks' => 'Sửa liên kết',
+	'wbc-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
+);
+
 /** Simplified Chinese (‪中文（简体）‬)
  * @author Linforest
  */

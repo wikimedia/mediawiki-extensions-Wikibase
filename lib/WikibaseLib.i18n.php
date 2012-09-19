@@ -201,3 +201,10 @@ $messages['tl'] = array(
 	'wikibaselib-desc' => 'Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client',
 );
 
+/** Vietnamese (Tiếng Việt)
+ * @author Minh Nguyen
+ */
+$messages['vi'] = array(
+	'wikibaselib-desc' => 'Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase',
+);
+
