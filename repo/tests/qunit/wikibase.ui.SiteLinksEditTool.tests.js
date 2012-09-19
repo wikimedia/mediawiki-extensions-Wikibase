@@ -21,7 +21,8 @@
 				name: 'English Wikipedia',
 				pageUrl: 'http://en.wikipedia.org/wiki/$1',
 				shortName: 'English',
-				languageCode: 'en'
+				languageCode: 'en',
+				globalSiteIt: 'enwiki'
 			},
 			de: {
 				apiUrl: 'http://de.wikipedia.org/w/api.php',
@@ -29,7 +30,8 @@
 				name: 'Deutsche Wikipedia',
 				pageUrl: 'http://de.wikipedia.org/wiki/$1',
 				shortName: 'Deutsch',
-				languageCode: 'en'
+				languageCode: 'de',
+				globalSiteId: 'dewiki'
 			}
 		}
 	};
@@ -37,6 +39,11 @@
 	module( 'wikibase.ui.SiteLinksEditTool', window.QUnit.newWbEnvironment( {
 		config: config,
 		setup: function() {
+
+			this.apiResponse = {
+				item: { sitelinks: { dewiki: { title: 'ein_titel' } } }
+			};
+
 			// get empty nodes we get when no links on the site yet:
 			var dom = window.wikibase.ui.SiteLinksEditTool.getEmptyStructure();
 
@@ -67,14 +74,19 @@
 
 		var initialValue = [ 'Deutsch (de)', 'Berlin' ];
 		var newValue = this.subject.enterNewValue( initialValue );
-		this.subject._editableValues[0].queryApi = function( deferred, apiAction ) { // override AJAX API call
-			deferred.resolve();
-		};
-		this.subject._editableValues[0].pageNameInterface.setResultSet( ['Berlin'] ); // set result set for validation
 
-		newValue.queryApi = function( deferred, apiAction ) { // pretend API success
-			deferred.resolve();
+		// override AJAX API call
+		this.subject._editableValues[0].queryApi = function( deferred, apiAction ) {
+			deferred.resolve( {} );
 		};
+
+		// set result set for validation
+		this.subject._editableValues[0].pageNameInterface.setResultSet( ['Berlin'] );
+
+		// pretend API success
+		newValue.queryApi = $.proxy( function( deferred, apiAction ) {
+			deferred.resolve( this.apiResponse );
+		}, this );
 
 		equal(
 			this.subject.getValues().length,

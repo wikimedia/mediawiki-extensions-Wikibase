@@ -86,7 +86,7 @@
 
 			this.editableValue.simulateApiSuccess = function() {
 				self.editableValue.queryApi = function( deferred, apiAction ) { // override AJAX API call
-					deferred.resolve().promise();
+					deferred.resolve( {} ).promise();
 				};
 			};
 

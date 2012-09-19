@@ -77,8 +77,8 @@
 		};
 		aliasesValue.remove();
 
-		assert.ok(
-			this.subject.getValues.length,
+		assert.equal(
+			this.subject.getValues().length,
 			0,
 			'Empty after removing EditableAliases instance'
 		);

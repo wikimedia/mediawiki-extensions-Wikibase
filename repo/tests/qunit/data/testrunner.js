@@ -11,7 +11,7 @@
  * @author H. Snater
  */
 
-( function ( $, mw, QUnit, undefined ) {
+( function ( $, mw, wb, QUnit, undefined ) {
 	'use strict';
 
 	/**
@@ -69,7 +69,13 @@
 			return {
 				setup: function () {
 					mwEnv.setup();
-					wikibase._siteList = null; // empty cache of wikibases site details
+
+					// remove interfering global events
+					$( wb ).off( 'newItemCreated' );
+					$( wb ).off( 'startItemPageEditMode' );
+					$( wb ).off( 'stopItemPageEditMode' );
+
+					wb._siteList = null; // empty cache of wikibases site details
 					if ( custom.setup !== undefined ) {
 						custom.setup.apply( this, arguments );
 					}
@@ -84,4 +90,4 @@
 		};
 	}() );
 
-})( jQuery, mediaWiki, QUnit );
+})( jQuery, mediaWiki, wikibase, QUnit );
