@@ -114,6 +114,8 @@ final class LibHooks {
 			'changes/EntityRefresh',
 			'changes/EntityUpdate',
 
+			'claim/ClaimList',
+
 			'item/ItemDiff',
 			'item/ItemMultilangTexts',
 			'item/ItemNewEmpty',

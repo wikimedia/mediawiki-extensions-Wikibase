@@ -71,8 +71,6 @@ $wgAutoloadClasses['Wikibase\LibHooks'] 			= $dir . 'WikibaseLib.hooks.php';
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 		= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 		= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 		= $dir . 'includes/ChangesTable.php';
-$wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/Claim.php';
-$wgAutoloadClasses['Wikibase\ClaimObject'] 			= $dir . 'includes/ClaimObject.php';
 $wgAutoloadClasses['Wikibase\Comparable'] 			= $dir . 'includes/Comparable.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\Hashable'] 			= $dir . 'includes/Hashable.php';
@@ -100,6 +98,12 @@ $wgAutoloadClasses['Wikibase\EntityCreation'] 		= $dir . 'includes/changes/Entit
 $wgAutoloadClasses['Wikibase\EntityDeletion'] 		= $dir . 'includes/changes/EntityDeletion.php';
 $wgAutoloadClasses['Wikibase\EntityRefresh'] 		= $dir . 'includes/changes/EntityRefresh.php';
 $wgAutoloadClasses['Wikibase\EntityUpdate'] 		= $dir . 'includes/changes/EntityUpdate.php';
+
+// includes/claims
+$wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/claim/Claim.php';
+$wgAutoloadClasses['Wikibase\ClaimList'] 			= $dir . 'includes/claim/ClaimList.php';
+$wgAutoloadClasses['Wikibase\ClaimObject'] 			= $dir . 'includes/claim/ClaimObject.php';
+$wgAutoloadClasses['Wikibase\Claims'] 				= $dir . 'includes/claim/Claims.php';
 
 // includes/entity
 $wgAutoloadClasses['Wikibase\Entity'] 				= $dir . 'includes/entity/Entity.php';

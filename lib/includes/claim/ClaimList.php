@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 /**
- * Implementation of the References interface.
- * @see References
+ * Implementation of the Claims interface.
+ * @see Claims
  *
  * Note that this implementation is based on SplObjectStorage and
  * is not enforcing the type of objects set via it's native methods.
@@ -34,41 +34,41 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ReferenceList extends \SplObjectStorage implements References {
+class ClaimList extends \SplObjectStorage implements Claims {
 
 	/**
-	 * @see References::addReference
+	 * @see References::addClaim
 	 *
 	 * @since 0.1
 	 *
-	 * @param Reference $reference
+	 * @param Claim $claim
 	 */
-	public function addReference( Reference $reference ) {
-		$this->attach( $reference );
+	public function addClaim( Claim $claim ) {
+		$this->attach( $claim );
 	}
 
 	/**
-	 * @see References::hasReference
+	 * @see References::hasClaim
 	 *
 	 * @since 0.1
 	 *
-	 * @param Reference $reference
+	 * @param Claim $claim
 	 *
 	 * @return boolean
 	 */
-	public function hasReference( Reference $reference ) {
-		return $this->contains( $reference );
+	public function hasClaim( Claim $claim ) {
+		return $this->contains( $claim );
 	}
 
 	/**
-	 * @see References::removeReference
+	 * @see References::removeClaim
 	 *
 	 * @since 0.1
 	 *
-	 * @param Reference $reference
+	 * @param Claim $claim
 	 */
-	public function removeReference( Reference $reference ) {
-		$this->detach( $reference );
+	public function removeClaim( Claim $claim ) {
+		$this->detach( $claim );
 	}
 
 	/**
