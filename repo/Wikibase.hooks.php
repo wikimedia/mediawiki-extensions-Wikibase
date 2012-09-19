@@ -586,16 +586,24 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
-		if ( $out->getTitle()->getContentModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
+		$contentModel = $out->getTitle()->getContentModel();
+		// TODO: add a more generic check for this into WikibaseLib's Utils.php
+		if ( $contentModel === CONTENT_MODEL_WIKIBASE_ITEM
+			|| $contentModel === CONTENT_MODEL_WIKIBASE_PROPERTY
+			|| $contentModel === CONTENT_MODEL_WIKIBASE_QUERY
+		) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
-			$itemPage = new WikiPage( $out->getTitle() );
-			$itemContent = $itemPage->getContent();
+			$entityPage = new WikiPage( $out->getTitle() );
+			$entityContent = $entityPage->getContent();
 
-			if( $itemContent !== null ) {
+			if( $entityContent !== null ) {
+				// TODO: preg_replace kind of ridiculous here, should probably change the ENTITY_TYPE constants instead
+				$entityType = preg_replace( '/^wikibase-/i', '', $entityContent->getEntity()->getType() );
+
 				// add class to body so it's clear this is a wb item:
-				$bodyAttrs['class'] .= ' wb-itempage';
+				$bodyAttrs['class'] .= " wb-entitypage wb-{$entityType}page";
 				// add another class with the ID of the item:
-				$bodyAttrs['class'] .= ' wb-itempage-' . $itemContent->getItem()->getId();
+				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntity()->getId()}";
 
 				if ( $sk->getRequest()->getCheck( 'diff' ) ) {
 					$bodyAttrs['class'] .= ' wb-diffpage';
@@ -604,7 +612,6 @@ final class RepoHooks {
 				if ( $out->getRevisionId() !== $out->getTitle()->getLatestRevID() ) {
 					$bodyAttrs['class'] .= ' wb-oldrevpage';
 				}
-
 			}
 		}
 		return true;

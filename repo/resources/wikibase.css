@@ -15,11 +15,11 @@
 	font-family: Arial, sans-serif;
 }
 
-/* since a custom heading is being used on the item page, the native h1 tag has to be hidden */
-.wb-itempage .firstHeading, .page-Special_CreateItem .firstHeading {
+/* since a custom heading is being used on the entity pages, the native h1 tag has to be hidden */
+.wb-entitypage .firstHeading {
 	display: none;
 }
-/* on special item pages, the native heading is still being used and shall be shown */
+/* on special entity pages, the native heading is still being used and shall be shown */
 .wb-diffpage .firstHeading, .wb-oldrevpage .firstHeading {
 	display: block;
 }
@@ -31,15 +31,15 @@
 	clear: both; /* to not overlay success message */
 }
 
-/* item container */
-.wb-item {
+/* entity container */
+.wb-entity {
 	width: 100%;
 	max-width: 55em;
 	float: left; /* float left to let widget container float right next to it */
 	clear: both; /* wrap around success message */
 }
 
-.wb-item input {
+.wb-entity input {
 	/* prevent browsers from applying their default styles */
 	padding: 0 2px;
 	border: 1px solid #AAA;
