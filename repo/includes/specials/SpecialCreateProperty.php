@@ -94,6 +94,7 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 			\Html::rawElement(
 				'select',
 				array(
+					'name' => 'datatype',
 					'id' => 'wb-createproperty-datatype',
 					'class' => 'wb-select'
 				),
