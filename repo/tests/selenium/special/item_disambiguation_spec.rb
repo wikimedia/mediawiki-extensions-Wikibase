@@ -15,7 +15,6 @@ describe "Check item disambiguation special page" do
   before :all do
     # set up: create 2 items with same label but different description
     visit_page(CreateItemPage) do |page|
-      page.uls_switch_language("english")
       page.create_new_item(label_ab, description_a)
     end
     visit_page(CreateItemPage) do |page|

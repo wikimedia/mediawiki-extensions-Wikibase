@@ -15,6 +15,7 @@ class CreateItemPage < ItemPage
   button(:createItemSubmit, :id => "wb-createentiy-submit")
 
   def create_new_item(label, description)
+    self.uls_switch_language(LANGUAGE)
     self.createItemLabelField = label
     self.createItemDescriptionField = description
     createItemSubmit

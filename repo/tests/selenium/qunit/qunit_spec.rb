@@ -8,7 +8,10 @@
 require 'spec_helper'
 
 describe "Running QUnit tests" do
-
+  before :all do
+    # set up
+    page.uls_switch_language(LANGUAGE)
+  end 
   context "run the tests" do
     it "should run tests and wait until they are finished" do
       visit_page(QUnitPage) do |page|

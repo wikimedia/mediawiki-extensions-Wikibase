@@ -9,6 +9,10 @@
 require 'spec_helper'
 
 describe "Check functionality of non existing item page" do
+  before :all do
+    # set up
+    page.uls_switch_language(LANGUAGE)
+  end
   context "Check functionality of non existing item page" do
     it "should check for link to Special:CreateItem and firstHeading" do
       visit_page(NonExistingItemPage) do |page|

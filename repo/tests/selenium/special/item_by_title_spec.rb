@@ -15,7 +15,6 @@ describe "Check ItemByTitle special page" do
   before :all do
     # set up: switch to english, create item
     visit_page(CreateItemPage) do |page|
-      page.uls_switch_language("english")
       page.create_new_item(label, description)
     end
   end

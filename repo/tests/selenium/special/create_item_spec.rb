@@ -10,6 +10,7 @@ require 'spec_helper'
 describe "Check CreateItem special page" do
   before :all do
     # set up
+    page.uls_switch_language(LANGUAGE)
   end
   context "create item functionality" do
     it "should fail to create item with empty label & description" do
