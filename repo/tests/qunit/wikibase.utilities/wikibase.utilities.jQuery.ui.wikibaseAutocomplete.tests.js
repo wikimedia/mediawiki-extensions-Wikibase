@@ -51,6 +51,12 @@
 			'Suggestion menu gets resized.'
 		);
 
+		assert.equal(
+			this.autocomplete.autocompleteString( this.subject.val(), 'ab' ),
+			1,
+			'Auto-completed text.'
+		);
+
 	} );
 
 
