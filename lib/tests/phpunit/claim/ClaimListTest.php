@@ -34,8 +34,8 @@ class ClaimListTest extends \MediaWikiTestCase {
 
 		$instances = array();
 
-		foreach ( $this->constructorProvider() as $args ) {
-			$instances[] = array( new $class( array_key_exists( 0, $args ) ? $args[0] : null ) );
+		foreach ( $this->getConstructorArg() as $arg ) {
+			$instances[] = array( new $class( $arg ) );
 		}
 
 		return $instances;
@@ -49,10 +49,11 @@ class ClaimListTest extends \MediaWikiTestCase {
 		return $instances;
 	}
 
-	public function constructorProvider() {
+	public function getConstructorArg() {
 		return array(
+			null,
 			array(),
-			array( $this->getElementInstances() ),
+			$this->getElementInstances(),
 		);
 	}
 
