@@ -68,8 +68,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 					if ( !$editEntity->isSuccess() ) {
 						$editEntity->showErrorPage( $this->getOutput() );
 					} elseif ( $entityContent !== null ) {
-						$itemUrl = $entityContent->getTitle()->getFullUrl();
-						$this->getOutput()->redirect( $itemUrl );
+						$entityUrl = $entityContent->getTitle()->getFullUrl();
+						$this->getOutput()->redirect( $entityUrl );
 					}
 				}
 			}
