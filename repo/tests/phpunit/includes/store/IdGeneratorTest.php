@@ -30,7 +30,7 @@ class IdGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetItemIdsForLabel( IdGenerator $generator ) {
+	public function testGetNewId( IdGenerator $generator ) {
 		/**
 		 * @var IdGenerator $clone
 		 */
