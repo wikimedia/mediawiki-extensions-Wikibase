@@ -11,10 +11,10 @@
  *
  * Events:
  * -------
- * restrictItemPageActions: Triggered when editing is not allowed for the user.
- *                          Parameters: (1) jQuery.Event
- * blockItemPageActions:    Triggered when editing is not allowed for the user because he is blocked from the page.
- *                          Parameters: (1) jQuery.Event
+ * @event restrictEntityPageActions: Triggered when editing is not allowed for the user.
+ *        (1) jQuery.Event
+ * @event blockEntityPageActions: Triggered when editing is not allowed for the user because he is blocked from the page.
+ *        (1) jQuery.Event
  * (see TODO/FIXME about these three events where they are being triggered!)
  */
 
@@ -122,22 +122,22 @@
 				) === -1
 			) {
 				// user is not allowed to edit
-				$( wikibase ).triggerHandler( 'restrictItemPageActions' );
+				$( wikibase ).triggerHandler( 'restrictEntityPageActions' );
 			}
 		}
 
 		if ( mw.config.get( 'wbUserIsBlocked' ) ) {
-			$( wikibase ).triggerHandler( 'blockItemPageActions' );
+			$( wikibase ).triggerHandler( 'blockEntityPageActions' );
 		}
 
 		if( !mw.config.get( 'wbIsEditView' ) ) {
-			// no need to implement a 'disableItemPageActions' since hiding all the toolbars directly like this is
+			// no need to implement a 'disableEntityPageActions' since hiding all the toolbars directly like this is
 			// not really worse than hacking the Toolbar prototype to achieve this:
 			$( '.wb-ui-propertyedittool .wb-ui-toolbar' ).hide();
 			$( 'body' ).addClass( 'wb-editing-disabled' );
 			// make it even harder to edit stuff, e.g. if someone is trying to be smart, using
 			// firebug to show hidden nodes again to click on them:
-			$( wikibase ).triggerHandler( 'restrictItemPageActions' );
+			$( wikibase ).triggerHandler( 'restrictEntityPageActions' );
 		}
 
 	} );

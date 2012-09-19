@@ -77,10 +77,10 @@ wb.ui.Toolbar.EditGroup = wb.utilities.inherit( $PARENT,
 
 		// overwrite tooltip message when editing is restricted
 		$( wikibase ).on(
-			'restrictItemPageActions blockItemPageActions',
+			'restrictEntityPageActions blockEntityPageActions',
 			$.proxy(
 				function( event ) {
-					var messageId = ( event.type === 'blockItemPageActions' ) ?
+					var messageId = ( event.type === 'blockEntityPageActions' ) ?
 						'wikibase-blockeduser-tooltip-message' :
 						'wikibase-restrictionedit-tooltip-message';
 
