@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use ApiTestUser;
 use \Wikibase\Settings as Settings;
 use UsageException;
 //use ApiModifyItemBase;
