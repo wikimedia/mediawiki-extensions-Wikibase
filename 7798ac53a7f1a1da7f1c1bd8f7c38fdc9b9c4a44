@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//5xI\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-19T10:29:36Z",
+      "side": 1,
+      "message": "!in_array()",
+      "revId": "7798ac53a7f1a1da7f1c1bd8f7c38fdc9b9c4a44",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
