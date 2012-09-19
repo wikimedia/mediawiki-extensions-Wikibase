@@ -125,8 +125,13 @@ final class RepoHooks {
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
 
+		// TODO: make this a little nicer
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
-			&& $wgNamespaceContentModels[$title->getNamespace()] === CONTENT_MODEL_WIKIBASE_ITEM ) {
+			&& in_array(
+				$title->getContentModel(),
+				array( CONTENT_MODEL_WIKIBASE_ITEM, CONTENT_MODEL_WIKIBASE_PROPERTY, CONTENT_MODEL_WIKIBASE_QUERY )
+			)
+		) {
 			$pageLanguage = $language;
 		}
 
