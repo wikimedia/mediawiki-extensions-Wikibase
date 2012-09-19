@@ -26,33 +26,6 @@ var wikibase = new ( function( mw, $, undefined ) {
 	};
 
 	/**
-	 * event triggered after a new wikibase item was created and successfully stored in the database via an API call
-	 * @see wikibase.ui.PropertyEditTool.EditableValue
-	 *
-	 * @param jQuery.Event event
-	 * @param JSON apiResponse
-	 */
-	var onNewItemCreated = function( event, apiResponse ) {
-		// remember a new items id globally when created!
-		mw.config.set( 'wbItemId', apiResponse.id );
-
-		// redirect to the newly created items site:
-		var newItemTitle = new mw.Title( 'Data:' + 'q' + apiResponse.id );
-		var newLocation = newItemTitle.getUrl() + '?wbitemcreated=yes';
-		var usedLanguage = mw.util.getParamValue( 'uselang' );
-		if( usedLanguage ) {
-			// if language was set, make sure to propagate it through the redirect
-			newLocation += '&uselang=' + mw.util.rawurlencode( usedLanguage );
-		}
-
-		window.location = newLocation;
-		// TODO: this is not yet near perfect and a proper workflow has to be created. The redirect as of now is
-		//       rather ugly in its presentation to the user.
-	};
-	$( this ).on( 'newItemCreated', onNewItemCreated );
-
-
-	/**
 	 * Will hold a list of all the sites after getSites() was called. This will cache the result.
 	 * @var wikibase.Site[]
 	 */

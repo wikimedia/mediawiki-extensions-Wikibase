@@ -82,31 +82,6 @@
 			$( '.wb-sitelinks-empty' ).remove();
 		}
 
-
-		if( mw.util.getParamValue( 'wbitemcreated' ) == 'yes' ) {
-			// Display notification if the item was created on 'Special:CreateItem' and we just redirected from there
-			// TODO: the parameter should be removed somehow, otherwise on a page reload it will still appear
-			var notification = $( '<div>', {
-				'id': 'wb-specialcreateitem-newitemnotification',
-				'class': 'successbox',
-				'text': mw.msg(
-					'wb-special-createitem-new-item-notification',
-					'q' + mw.config.get( 'wbItemId' ),
-					'@@@@' // link to 'Special:CreateItem'
-				)
-			} ).hide();
-
-			notification.html( notification.text().replace(
-				"@@@@", '<a href="' + ( new mw.Title( 'Special:CreateItem' ) ).getUrl() + '">' + mw.msg( 'special-createitem' ) + '</a>'
-			) );
-
-			if( $( '#siteNotice' ).length ) {
-				notification.insertAfter( $( '#siteNotice' ) ).fadeIn();
-			} else {
-				notification.prependTo( $( '#content' ) ).fadeIn();
-			}
-		}
-
 		// handle edit restrictions
 		// TODO/FIXME: most about this system sucks, especially the part where the Button constructor is hacked to disable
 		//             all buttons when this is fired. it also doesn't effect any edit tools added after this point and
