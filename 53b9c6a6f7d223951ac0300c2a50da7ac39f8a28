@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAASn//5w8\u003d",
+        "filename": "repo/resources/wikibase.ui.StateExtension.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-19T10:52:58Z",
+      "side": 1,
+      "message": "This should be changed in \"whether the state has changed\".\n\nThe original \"whether the operation was successful\" was a misleading construct of mine, which involved the callbacks we used back then which could return \"false\" to stop the change. We don\u0027t use those callbacks anymore and otherwise there is not really any case where changing the state would fail, so no need to make people check for it.",
+      "revId": "53b9c6a6f7d223951ac0300c2a50da7ac39f8a28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//5w4\u003d",
+        "filename": "repo/resources/wikibase.ui.StateExtension.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-19T10:52:58Z",
+      "side": 1,
+      "message": "I would change this function into a more generic setState( state ) if you already introduce the posiblity of multiple states. Otherwise it is not really a \"state\" extension but rather a \"DisableableObject\" or something.\n\nThis should not be an abstract function, rather some\n\nsetState: function( state ) {\n  if( state \u003d\u003d\u003d this.getState() ) {\n    return false; // state has not changed, return false\n  }\n  // (the next two lines can be added in a follow-up, doesn\u0027t have to be part of this change)\n  // ... trigger \"stateChange\"\n  // ... check whether $.Evnt.isDefaultPrevented(), if not, call:\n\n  return this._setState( state ) // or this._applyState or whatever which can then be an abstract function which only takes care of changing the state without having to care about all the stuff around it.\n}",
+      "revId": "53b9c6a6f7d223951ac0300c2a50da7ac39f8a28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAASn//5xk\u003d",
+        "filename": "repo/resources/wikibase.ui.StateExtension.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-19T10:52:58Z",
+      "side": 1,
+      "message": "documentation shouldn\u0027t be specific to editable value.\n\nSame for the last three functions.",
+      "revId": "53b9c6a6f7d223951ac0300c2a50da7ac39f8a28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
