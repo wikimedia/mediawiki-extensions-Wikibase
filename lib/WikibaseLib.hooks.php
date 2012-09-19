@@ -115,6 +115,7 @@ final class LibHooks {
 			'changes/EntityUpdate',
 
 			'claim/ClaimList',
+			'claim/ClaimObject',
 
 			'item/ItemDiff',
 			'item/ItemMultilangTexts',
@@ -135,7 +136,6 @@ final class LibHooks {
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',
-			'ClaimObject',
 			'LibHooks',
 			'MapValueHasher',
 			'SiteLink',

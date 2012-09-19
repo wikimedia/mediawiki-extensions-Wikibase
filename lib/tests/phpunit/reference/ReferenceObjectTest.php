@@ -72,6 +72,7 @@ class ReferenceObjectTest extends \MediaWikiTestCase {
 	 */
 	public function testGetHash( Reference $reference ) {
 		$this->assertEquals( $reference->getHash(), $reference->getHash() );
+		$this->assertInternalType( 'string', $reference->getHash() );
 	}
 
 	/**
