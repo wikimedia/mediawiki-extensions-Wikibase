@@ -85,8 +85,6 @@ $wgAutoloadClasses['Wikibase\ReferenceObject'] 		= $dir . 'includes/ReferenceObj
 $wgAutoloadClasses['Wikibase\ObjectComparer'] 		= $dir . 'includes/ObjectComparer.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\SiteLink'] 			= $dir . 'includes/SiteLink.php';
-$wgAutoloadClasses['Wikibase\SiteLinkLookup'] 		= $dir . 'includes/SiteLinkLookup.php';
-$wgAutoloadClasses['Wikibase\SiteLinkTable'] 		= $dir . 'includes/SiteLinkTable.php';
 $wgAutoloadClasses['Wikibase\Statement'] 			= $dir . 'includes/Statement.php';
 $wgAutoloadClasses['Wikibase\StatementObject'] 		= $dir . 'includes/StatementObject.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
@@ -142,6 +140,11 @@ $wgAutoloadClasses['Wikibase\SnakList'] 				= $dir . 'includes/snak/SnakList.php
 $wgAutoloadClasses['Wikibase\SnakObject'] 				= $dir . 'includes/snak/SnakObject.php';
 $wgAutoloadClasses['Wikibase\Snaks'] 					= $dir . 'includes/snak/Snaks.php';
 $wgAutoloadClasses['Wikibase\SubclassOfSnak'] 			= $dir . 'includes/snak/SubclassOfSnak.php';
+
+// includes/store
+$wgAutoloadClasses['Wikibase\SiteLinkCache'] 			= $dir . 'includes/store/SiteLinkCache.php';
+$wgAutoloadClasses['Wikibase\SiteLinkLookup'] 			= $dir . 'includes/store/SiteLinkLookup.php';
+$wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/SiteLinkTable.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/HashArrayTest.php';
