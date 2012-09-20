@@ -1,7 +1,9 @@
 <?php
 
+namespace DataValue\Test;
+
 /**
- * Class registration file for the DataValues library.
+ * Base for unit tests for DataValue implementing classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,27 +20,47 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since 0.1
  *
- * @file
- * @ingroup DataValues
+ * @ingroup DataValue
+ *
+ * @group DataValue
+ * @group DataValueExtensions
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-return array(
-	'DataValue\DataValue' => 'datavalue/DataValue.php',
-	'DataValue\DataValueObject' => 'datavalue/DataValueObject.php',
-//	'DataValue\GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
-//	'DataValue\MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
-//	'DataValue\MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
-//	'DataValue\QuantityValue' => 'datavalue/QuantityValue.php',
-	'DataValue\StringValue' => 'datavalue/StringValue.php',
-//	'DataValue\TimeValue' => 'datavalue/TimeValue.php',
+class StringValueTest extends DataValueTest {
 
-	'Comparable' => 'includes/Comparable.php',
-	'Hashable' => 'includes/Hashable.php',
-	'Immutable' => 'includes/Immutable.php',
+	/**
+	 * @see DataValueTest::getClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getClass() {
+		return 'DataValue\StringValue';
+	}
 
-	'DataValue\Test\DataValueTest' => 'tests/datavalue/DataValueTest.php',
-);
+	/**
+	 * @see DataValueTest::constructorProvider
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function constructorProvider() {
+		$argLists = array();
+
+		$argLists[] = array( false );
+		$argLists[] = array( false, 42 );
+		$argLists[] = array( true, 'foo' );
+		$argLists[] = array( true, '' );
+		$argLists[] = array( true, ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+
+		return $argLists;
+	}
+
+}
