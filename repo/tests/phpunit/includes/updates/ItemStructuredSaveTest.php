@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemStructuredSave as ItemStructuredSave;
+use \Wikibase\ItemModificationUpdate as ItemModificationUpdate;
 use \Wikibase\ItemContent as ItemContent;
 
 /**
@@ -32,8 +32,9 @@ use \Wikibase\ItemContent as ItemContent;
 class ItemStructuredSaveTest extends \MediaWikiTestCase {
 
 	public function testConstruct() {
-		$update = new ItemStructuredSave( ItemContent::newEmpty() );
-		$this->assertInstanceOf( '\Wikibase\ItemStructuredSave', $update );
+		$update = new ItemModificationUpdate( ItemContent::newEmpty() );
+		$this->assertInstanceOf( '\Wikibase\ItemModificationUpdate', $update );
+		$this->assertInstanceOf( '\Wikibase\EntityModificationUpdate', $update );
 		$this->assertInstanceOf( '\DataUpdate', $update );
 	}
 
@@ -53,7 +54,7 @@ class ItemStructuredSaveTest extends \MediaWikiTestCase {
 		\TestSites::insertIntoDb();
 
 		$itemContent->save( '', null, EDIT_NEW );
-		$update = new ItemStructuredSave( $itemContent );
+		$update = new ItemModificationUpdate( $itemContent );
 		$update->doUpdate();
 
 		$item = $itemContent->getItem();

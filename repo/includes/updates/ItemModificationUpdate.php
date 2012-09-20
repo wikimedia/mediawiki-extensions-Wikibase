@@ -3,7 +3,8 @@
 namespace Wikibase;
 
 /**
- * Deletion update to handle deletion of Wikibase items.
+ * Represents an update to the structured storage for a single Item.
+ * TODO: we could keep track of actual changes in a lot of cases, and so be able to do less (expensive) queries to update.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemDeletionUpdate extends EntityDeletionUpdate {
+class ItemModificationUpdate extends EntityModificationUpdate {
 
 	/**
 	 * Constructor.
@@ -50,7 +51,7 @@ class ItemDeletionUpdate extends EntityDeletionUpdate {
 	 * @param Entity $entity
 	 */
 	protected function doTypeSpecificStuff( Store $store, Entity $entity ) {
-		$store->newSiteLinkCache()->deleteLinksOfItem( $entity );
+		$store->newSiteLinkCache()->saveLinksOfItem( $entity );
 	}
 
 }

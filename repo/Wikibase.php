@@ -152,8 +152,10 @@ $wgAutoloadClasses['Wikibase\SqlStore'] 				= $dir . 'includes/store/sql/SqlStor
 $wgAutoloadClasses['Wikibase\TermSqlCache'] 			= $dir . 'includes/store/sql/TermSqlCache.php';
 
 // includes/updates
+$wgAutoloadClasses['Wikibase\EntityDeletionUpdate'] 	= $dir . 'includes/updates/EntityDeletionUpdate.php';
+$wgAutoloadClasses['Wikibase\EntityModificationUpdate'] = $dir . 'includes/updates/EntityModificationUpdate.php';
 $wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/updates/ItemDeletionUpdate.php';
-$wgAutoloadClasses['Wikibase\ItemStructuredSave'] 		= $dir . 'includes/updates/ItemStructuredSave.php';
+$wgAutoloadClasses['Wikibase\ItemModificationUpdate'] 	= $dir . 'includes/updates/ItemModificationUpdate.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';

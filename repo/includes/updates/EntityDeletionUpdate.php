@@ -1,11 +1,9 @@
 <?php
 
 namespace Wikibase;
-use Title;
 
 /**
- * Represents an update to the structured storage for a single WikibaseItem.
- * TODO: we could keep track of actual changes in a lot of cases, and so be able to do less (expensive) queries to update.
+ * Deletion update to handle deletion of Wikibase entities.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,63 +28,74 @@ use Title;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemStructuredSave extends \DataUpdate {
+class EntityDeletionUpdate extends \DataUpdate {
 
 	/**
-	 * The item to update.
-	 *
 	 * @since 0.1
-	 * @var ItemContent
+	 *
+	 * @var EntityContent
 	 */
-	protected $itemContent;
+	protected $content;
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
-	 * @param ItemContent $itemContent
+	 * @param EntityContent $content
 	 */
-	public function __construct( ItemContent $itemContent ) {
-		$this->itemContent = $itemContent;
+	public function __construct( EntityContent $content ) {
+		$this->content = $content;
 	}
 
 	/**
-	 * Returns the ItemContent that's being saved.
+	 * Returns the EntityContent that's being deleted.
 	 *
 	 * @since 0.1
 	 *
-	 * @return ItemContent
+	 * @return EntityContent
 	 */
-	public function getItemContent() {
-		return $this->itemContent;
+	public function getEntityContent() {
+		return $this->content;
 	}
 
 	/**
-	 * Perform the actual update.
+	 * @see DeferrableUpdate::doUpdate
 	 *
 	 * @since 0.1
 	 */
-	public function doUpdate() {
+	public final function doUpdate() {
 		wfProfileIn( __METHOD__ );
 
 		$store = StoreFactory::getStore();
-		$item = $this->itemContent->getItem();
+		$entity = $this->content->getEntity();
 
-		$store->newTermCache()->saveTermsOfEntity( $item );
-		$store->newSiteLinkCache()->saveLinksOfItem( $item );
+		$store->newTermCache()->deleteTermsOfEntity( $entity );
+		$this->doTypeSpecificStuff( $store, $entity );
 
 		/**
-		 * Gets called after the structured save of an item has been comitted,
-		 * allowing for extensions to do additional storage/indexing.
+		 * Gets called after the deletion of an item has been committed,
+		 * allowing for extensions to do additional cleanup.
 		 *
 		 * @since 0.1
 		 *
 		 * @param ItemStructuredSave $this
 		 */
-		wfRunHooks( 'WikibaseItemStructuredSave', array( $this ) );
+		wfRunHooks( 'WikibaseEntityDeletionUpdate', array( $this ) );
 
 		wfProfileOut( __METHOD__ );
+	}
+
+	/**
+	 * Do anything specific to the entity type.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Store $store
+	 * @param Entity $entity
+	 */
+	protected function doTypeSpecificStuff( Store $store, Entity $entity ) {
+		// Override to add behaviour.
 	}
 
 }

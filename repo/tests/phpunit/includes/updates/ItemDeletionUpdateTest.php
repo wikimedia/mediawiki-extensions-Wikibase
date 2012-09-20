@@ -34,6 +34,7 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 	public function testConstruct() {
 		$update = new ItemDeletionUpdate( \Wikibase\ItemContent::newEmpty() );
 		$this->assertInstanceOf( '\Wikibase\ItemDeletionUpdate', $update );
+		$this->assertInstanceOf( '\Wikibase\EntityDeletionUpdate', $update );
 		$this->assertInstanceOf( '\DataUpdate', $update );
 	}
 
