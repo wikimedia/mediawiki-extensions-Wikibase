@@ -382,4 +382,88 @@ final class Utils {
 		);
 	}
 
+	/**
+	 * Returns a list of namespace IDs that are designated to contain Wikibase entities.
+	 * Configured via $egWBSettings['entityNamespaces'].
+	 *
+	 * @return array An array of integer namespace IDs.
+	 */
+	public static function getEntityNamespaces() {
+		$namespaces = Settings::get( 'entityNamespaces' );
+
+		if ( !is_array( $namespaces ) ) {
+			return array();
+		}
+
+		return $namespaces;
+	}
+
+	/**
+	 * Returns a list of content model IDs that are used to represent Wikibase entities.
+	 * Configured via $egWBSettings['entityNamespaces'].
+	 *
+	 * @return array An array of string content model IDs.
+	 */
+	public static function getEntityModels() {
+		$namespaces = Settings::get( 'entityNamespaces' );
+
+		if ( !is_array( $namespaces ) ) {
+			return array();
+		}
+
+		return array_keys( $namespaces );
+	}
+
+	/**
+	 * Returns the namespace ID for the given entity content model, or false if the content model
+	 * is not a known entity model.
+	 *
+	 * The return value is based on getEntityNamespaces(), which is configured via $egWBSettings['entityNamespaces'].
+	 *
+	 * @param String $model the model ID
+	 *
+	 * @return int|bool the namespace associated with the given content model (or false if there is none)
+	 */
+	public static function getEntityNamespace( $model ) {
+		$namespaces = self::getEntityNamespaces();
+		return isset( $namespaces[$model] ) ? $namespaces[$model] : false;
+	}
+
+	/**
+	 * Determines whether the given namespace is designated to hold some kind of Wikibase entity.
+	 * Shorthand for in_array( $ns, self::getEntityNamespaces() );
+	 *
+	 * @param int $ns the namespace ID
+	 *
+	 * @return bool true iff $ns is an entity namespace
+	 */
+	public static function isEntityNamespace( $ns ) {
+		return in_array( $ns, self::getEntityNamespaces() );
+	}
+
+	/**
+	 * Determines whether the given content model is designated to hold some kind of Wikibase entity.
+	 * Shorthand for in_array( $ns, self::getEntityModels() );
+	 *
+	 * @param String $model the content model ID
+	 *
+	 * @return bool True iff $model is an entity content model
+	 */
+	public static function isEntityModel( $model ) {
+		return in_array( $model, self::getEntityModels() );
+	}
+
+	/**
+	 * Determines whether the given namespace is a core namespace, i.e. a namespace pre-defined by MediaWiki core.
+	 *
+	 * The present implementation just checks whether the namespace ID is smaller than 100, relying on the
+	 * convention that namespace IDs smaller than 100 are reserved for use by MediaWiki core.
+	 *
+	 * @param int $ns the namespace ID
+	 *
+	 * @return bool true iff $ns is a core namespace
+	 */
+	public static function isCoreNamespace( $ns ) {
+		return $ns < 100;
+	}
 }

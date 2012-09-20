@@ -123,17 +123,6 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
-	 * @see EntityHandler::getEntityNamespace
-	 *
-	 * @since 0.1
-	 *
-	 * @return integer
-	 */
-	public function getEntityNamespace() {
-		return WB_NS_DATA;
-	}
-
-	/**
 	 * Get the item corresponding to the provided site and title pair, or null if there is no such item.
 	 *
 	 * @since 0.1
