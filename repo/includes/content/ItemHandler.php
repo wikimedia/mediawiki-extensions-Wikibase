@@ -108,7 +108,7 @@ class ItemHandler extends EntityHandler {
 	 * @return false|integer
 	 */
 	public function getIdForSiteLink( $siteId, $pageName ) {
-		return StoreFactory::getStore()->newSiteLinkLookup()->getItemIdForLink( $siteId, $pageName );
+		return StoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $pageName );
 	}
 
 	/**

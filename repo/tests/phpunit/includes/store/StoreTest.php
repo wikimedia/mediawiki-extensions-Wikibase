@@ -41,22 +41,6 @@ class StoreTest extends \MediaWikiTestCase {
 	 * @dataProvider instanceProvider
 	 * @param Store $store
 	 */
-	public function testNewEntityDeletionHandler( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\EntityDeletionHandler', $store->newEntityDeletionHandler() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param Store $store
-	 */
-	public function testNewEntityUpdateHandler( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\EntityUpdateHandler', $store->newEntityUpdateHandler() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param Store $store
-	 */
 	public function testRebuild( Store $store ) {
 		$store->rebuild();
 		$this->assertTrue( true );
@@ -66,16 +50,16 @@ class StoreTest extends \MediaWikiTestCase {
 	 * @dataProvider instanceProvider
 	 * @param Store $store
 	 */
-	public function testNewSiteLinkLookup( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\SiteLinkLookup', $store->newSiteLinkLookup() );
+	public function testNewSiteLinkCache( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\SiteLinkLookup', $store->newSiteLinkCache() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
 	 * @param Store $store
 	 */
-	public function testNewTermLookup( Store $store ) {
-		$this->assertInstanceOf( '\Wikibase\TermLookup', $store->newTermLookup() );
+	public function testNewTermCache( Store $store ) {
+		$this->assertInstanceOf( '\Wikibase\TermCache', $store->newTermCache() );
 	}
 
 	/**

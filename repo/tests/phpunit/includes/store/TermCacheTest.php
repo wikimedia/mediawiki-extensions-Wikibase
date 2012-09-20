@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\TermLookup as TermLookup;
+use Wikibase\TermCache as TermCache;
 
 /**
- * Tests for the Wikibase\TermLookup implementing classes.
+ * Tests for the Wikibase\TermCache implementing classes.
  *
  * @file
  * @since 0.1
@@ -19,10 +19,10 @@ use Wikibase\TermLookup as TermLookup;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermLookupTest extends \MediaWikiTestCase {
+class TermCacheTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$instances = array( new \Wikibase\TermSqlLookup() );
+		$instances = array( \Wikibase\StoreFactory::getStore( 'sqlstore' )->newTermCache() );
 
 		return $this->arrayWrap( $instances );
 	}
@@ -30,7 +30,7 @@ class TermLookupTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetItemIdsForLabel( TermLookup $lookup ) {
+	public function testGetItemIdsForLabel( TermCache $lookup ) {
 		$item0 = \Wikibase\ItemObject::newEmpty();
 
 		$item0->setLabel( 'en', 'foobar' );
@@ -67,7 +67,7 @@ class TermLookupTest extends \MediaWikiTestCase {
 		// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
 		if ( !defined( 'MW_PHPUNIT_TEST' )
 			|| wfGetDB( DB_MASTER )->getType() !== 'mysql'
-			|| get_class( $lookup ) !== 'Wikibase\TermSqlLookup' ) {
+			|| get_class( $lookup ) !== 'Wikibase\TermSqlCache' ) {
 
 			$ids = $lookup->getItemIdsForLabel( 'foobar', 'en', 'foo bar baz' );
 			$this->assertInternalType( 'array', $ids );
