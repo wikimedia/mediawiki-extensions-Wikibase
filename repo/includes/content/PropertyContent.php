@@ -124,7 +124,7 @@ class PropertyContent extends EntityContent {
 	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
 		return array_merge(
 			parent::getDeletionUpdates( $page, $parserOutput ),
-			array( /* new PropertyDeletionUpdate( $this ) */ )
+			array( new EntityDeletionUpdate( $this ) )
 		);
 	}
 
@@ -163,7 +163,7 @@ class PropertyContent extends EntityContent {
 
 		return array_merge(
 			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
-			array( /* new PropertyStructuredSave( $content ) */ )
+			array( new EntityModificationUpdate( $this ) )
 		);
 	}
 
