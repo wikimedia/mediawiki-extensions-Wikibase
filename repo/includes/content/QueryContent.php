@@ -122,7 +122,7 @@ class QueryContent extends EntityContent {
 	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
 		return array_merge(
 			parent::getDeletionUpdates( $page, $parserOutput ),
-			array( /* new QueryDeletionUpdate( $this ) */ )
+			array( new EntityDeletionUpdate( $this ) )
 		);
 	}
 
@@ -165,7 +165,7 @@ class QueryContent extends EntityContent {
 
 		return array_merge(
 			parent::getSecondaryDataUpdates( $title, $old, $recursive, $parserOutput ),
-			array( /* new QueryStructuredSave( $content ) */ )
+			array( new EntityModificationUpdate( $this ) )
 		);
 	}
 }
