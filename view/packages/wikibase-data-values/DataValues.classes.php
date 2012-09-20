@@ -27,12 +27,16 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 return array(
-	'DataValue' => 'datavalue/DataValue.php',
-	'DataValueObject' => 'datavalue/DataValueObject.php',
-	'GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
-	'MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
-	'MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
-	'QuantityValue' => 'datavalue/QuantityValue.php',
-	'StringValue' => 'datavalue/StringValue.php',
-	'TimeValue' => 'datavalue/TimeValue.php',
+	'DataValue/DataValue' => 'datavalue/DataValue.php',
+	'DataValue/DataValueObject' => 'datavalue/DataValueObject.php',
+//	'DataValue/GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
+//	'DataValue/MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
+//	'DataValue/MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
+//	'DataValue/QuantityValue' => 'datavalue/QuantityValue.php',
+	'DataValue/StringValue' => 'datavalue/StringValue.php',
+//	'DataValue/TimeValue' => 'datavalue/TimeValue.php',
+
+	'Comparable' => 'includes/Comparable.php',
+	'Hashable' => 'includes/Hashable.php',
+	'Immutable' => 'includes/Immutable.php',
 );

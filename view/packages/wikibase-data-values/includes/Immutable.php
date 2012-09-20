@@ -1,9 +1,8 @@
 <?php
 
-namespace DataValue;
-
 /**
- * Interface for objects that represent a single data value.
+ * Interface for immutable objects.
+ * The interface does not specify any methods and merely acts as a flag.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,26 +27,4 @@ namespace DataValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable {
-
-	/**
-	 * Returns the identifier of the datavalues type.
-	 * This is not to be confused with the DataType provided by the DataTypes extension.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getType();
-
-	/**
-	 * Returns a key that can be used to sort the data value with.
-	 * It can be either numeric or a string.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string|float|int
-	 */
-	public function getSortKey();
-
-}
+interface Immutable {}

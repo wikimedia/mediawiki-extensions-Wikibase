@@ -1,9 +1,7 @@
 <?php
 
-namespace DataValue;
-
 /**
- * Interface for objects that represent a single data value.
+ * Interface for objects that have an equals method.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,26 +26,17 @@ namespace DataValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable {
+interface Comparable {
 
 	/**
-	 * Returns the identifier of the datavalues type.
-	 * This is not to be confused with the DataType provided by the DataTypes extension.
+	 * Returns if the provided value is equal to the object or not.
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
-	 */
-	public function getType();
-
-	/**
-	 * Returns a key that can be used to sort the data value with.
-	 * It can be either numeric or a string.
+	 * @param mixed $target
 	 *
-	 * @since 0.1
-	 *
-	 * @return string|float|int
+	 * @return boolean
 	 */
-	public function getSortKey();
+	public function equals( $target );
 
 }
