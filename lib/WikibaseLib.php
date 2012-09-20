@@ -181,8 +181,6 @@ $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerUnitTests';
 
 $wgSharedTables[] = 'wb_changes';
 
-$egWBRemoteTitleNormalization = true;
-
 $egWBDefaultsFunction = null;
 
 $egWBSettings = array();
