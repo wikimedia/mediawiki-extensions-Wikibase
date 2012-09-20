@@ -183,7 +183,7 @@ table.wb-sitelinks .wb-sitelinks-sitename {
 
 table.wb-sitelinks .wb-sitelinks-siteid {
 	width: 10%;
-	padding-left: 10px;
+	padding: 0 10px;
 	white-space: nowrap;
 }
 

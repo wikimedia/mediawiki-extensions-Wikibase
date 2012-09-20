@@ -273,6 +273,7 @@ wb.ui.PropertyEditTool.EditableValue.SiteIdInterface = wb.utilities.inherit( $PA
 			.after(
 				$( '<td/>' ) // TODO interface should be independent from any DOM structure
 				.addClass( 'wb-sitelinks-siteid wb-sitelinks-siteid-' + site.getId() )
+				.attr({ 'dir' : 'ltr' })
 				.text( site.getId() )
 			);
 			return true;
