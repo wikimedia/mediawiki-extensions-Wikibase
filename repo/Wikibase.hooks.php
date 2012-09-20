@@ -21,6 +21,33 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html;
 final class RepoHooks {
 
 	/**
+	 * Handler for the SetupAfterCache hook, completing setup of
+	 * content and namespace setup.
+	 *
+	 * @note: $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this point
+	 *        and should no longer be touched.
+	 */
+	public static function onSetupAfterCache() {
+		global $wgNamespaceContentModels;
+
+		$namespaces = Settings::get( 'entityNamespaces' );
+
+		if ( empty( $namespaces ) ) {
+			throw new \MWException( 'Wikibase: Incomplete configuration: '
+				. '$egWBSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
+				. 'See ExampleSettings.php for details and examples.');
+		}
+
+		foreach ( $namespaces as $model => $ns ) {
+			if ( !isset( $wgNamespaceContentModels[$ns] ) ) {
+				$wgNamespaceContentModels[$ns] = $model;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Schema update to set up the needed database tables.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
 	 *
@@ -200,18 +227,21 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Allows overriding if the pages in a certain namespace can be moved or not.
+	 * Handler for the NamespaceIsMovable hook.
+	 *
+	 * Implemented to prevent moving pages that are in an entity namespace.
+	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NamespaceIsMovable
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $index
+	 * @param integer $ns Namespace ID
 	 * @param boolean $movable
 	 *
 	 * @return boolean
 	 */
-	public static function onNamespaceIsMovable( $index, &$movable ) {
-		if ( in_array( $index, array( WB_NS_DATA, WB_NS_DATA_TALK ) ) ) {
+	public static function onNamespaceIsMovable( $ns, &$movable ) {
+		if ( Utils::isEntityNamespace( $ns ) ) {
 			$movable = false;
 		}
 
@@ -275,9 +305,8 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onArticleDeleteComplete( WikiPage &$wikiPage, User &$user, $reason, $id ) {
-		// This is a temporary hack since the archive table does not correctly have the data we need.
-		// Once this is fixed this can go, and we can use the commented out code later in this method.
-		if ( $wikiPage->getTitle()->getNamespace() !== WB_NS_DATA ) {
+		// Bail out if we are not in an entity namespace
+		if ( !Utils::isEntityNamespace( $wikiPage->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
@@ -294,12 +323,14 @@ final class RepoHooks {
 			),
 			array(
 				'ar_page_id' => $id,
-				// 'ar_content_model' => CONTENT_MODEL_WIKIBASE_ITEM,
+				'ar_content_model IS NULL OR ar_content_model IN ( ' . $dbw->makeList( Utils::getEntityModels(), LIST_COMMA ) . ')',
 			),
 			__METHOD__
 		);
 
 		if ( $archiveEntry !== false ) {
+			//FIXME: this is horrible and will not work! old_text may contain all kinds of crap, like a gziped serialized
+			//FIXME: ... object referencing an external store! Why do we even need this hook?!
 			$textEntry = $dbw->selectRow(
 				'text',
 				'old_text',
@@ -423,6 +454,8 @@ final class RepoHooks {
 					31337,
 					720101010,
 				),
+
+				'entityNamespaces' => array(),
 			)
 		);
 
@@ -554,10 +587,12 @@ final class RepoHooks {
 
 		$dbw = wfGetDB( DB_MASTER );
 
+		$namespaceList = $dbw->makeList(  Utils::getEntityNamespaces(), LIST_COMMA );
+
 		$dbw->deleteJoin(
 			'revision', 'page',
 			'rev_page', 'page_id',
-			array( 'page_namespace' => WB_NS_DATA )
+			array( 'page_namespace IN ( ' . $namespaceList . ')' )
 		);
 
 		$reportMessage( "done!\n" );
@@ -566,7 +601,7 @@ final class RepoHooks {
 
 		$dbw->delete(
 			'page',
-			array( 'page_namespace' => WB_NS_DATA )
+			array( 'page_namespace IN ( ' . $namespaceList . ')' )
 		);
 
 		$reportMessage( "done!\n" );

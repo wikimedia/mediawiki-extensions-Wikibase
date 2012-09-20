@@ -95,16 +95,5 @@ class PropertyHandler extends EntityHandler {
 		return Settings::get( 'propertyPrefix' );
 	}
 
-	/**
-	 * @see EntityHandler::getEntityNamespace
-	 *
-	 * @since 0.1
-	 *
-	 * @return integer
-	 */
-	public function getEntityNamespace() {
-		return WB_NS_PROPERTY;
-	}
-
 }
 

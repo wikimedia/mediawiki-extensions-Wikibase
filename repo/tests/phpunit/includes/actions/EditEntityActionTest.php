@@ -2,6 +2,7 @@
 namespace Wikibase\Test;
 
 use User;
+use Wikibase\Utils;
 use Wikibase\SiteLink;
 use WikiPage;
 use Page;
@@ -240,7 +241,7 @@ class EditEntityActionTest extends ActionTestCase {
 			// -- bad page -----------------------------------
 			array( #14: # non-existing page
 				'edit',   # action
-				Title::newFromText( "XXX", WB_NS_DATA ), # non-existing page
+				Title::newFromText( "XXX", Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM ) ), # non-existing page
 				array(    # params
 					'restore' => array( "London", 0 ), # ok revision
 				),
@@ -505,7 +506,7 @@ class EditEntityActionTest extends ActionTestCase {
 			// -- bad page -----------------------------------
 			array( #14: # non-existing page
 				'submit', # action
-				Title::newFromText( "XXX", WB_NS_DATA ), # non-existing page
+				Title::newFromText( "XXX", Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM ) ), # non-existing page
 				array(    # params
 					'wpSave' => 1,
 					'wpEditToken' => true, # automatic token
