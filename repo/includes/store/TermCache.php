@@ -3,9 +3,7 @@
 namespace Wikibase;
 
 /**
- * Store interface. All interaction with store Wikibase does on top
- * of storing pages and associated core MediaWiki indexing is done
- * through this interface.
+ * Interface to a cache for terms with both write and lookup methods.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,65 +28,43 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Store {
+interface TermCache {
 
 	/**
-	 * Returns an instance of the store.
+	 * Returns the ids for the items with the provided label in the specified language.
+	 *
+	 * TODO: generalize to entity
 	 *
 	 * @since 0.1
 	 *
-	 * @return Store
+	 * @param string $label
+	 * @param string|null $languageCode
+	 * @param string|null $description
+	 *
+	 * @return array of integer
 	 */
-	public static function singleton();
+	public function getItemIdsForLabel( $label, $languageCode = null, $description = null );
 
 	/**
-	 * Returns a new EntityDeletionHandler for this store.
+	 * Saves the terms of the provided entity in the term cache.
 	 *
 	 * @since 0.1
 	 *
-	 * @return EntityDeletionHandler
+	 * @param Entity $entity
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function newEntityDeletionHandler();
+	public function saveTermsOfEntity( Entity $entity );
 
 	/**
-	 * Returns a new SiteLinkCache for this store.
+	 * Deletes the terms of the provided entity from the term cache.
 	 *
 	 * @since 0.1
 	 *
-	 * @return SiteLinkCache
+	 * @param Entity $entity
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function newSiteLinkCache();
-
-	/**
-	 * Removes all data from the store.
-	 *
-	 * @since 0.1
-	 */
-	public function clear();
-
-	/**
-	 * Rebuilds the store.
-	 *
-	 * @since 0.1
-	 */
-	public function rebuild();
-
-	/**
-	 * Returns a new TermCache for this store.
-	 *
-	 * @since 0.1
-	 *
-	 * @return TermCache
-	 */
-	public function newTermCache();
-
-	/**
-	 * Returns a new IdGenerator for this store.
-	 *
-	 * @since 0.1
-	 *
-	 * @return IdGenerator
-	 */
-	public function newIdGenerator();
+	public function deleteTermsOfEntity( Entity $entity );
 
 }

@@ -103,7 +103,7 @@ class ItemContent extends EntityContent {
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 
 		if ( $status->isOK() ) {
-			$conflicts = StoreFactory::getStore()->newSiteLinkLookup()->getConflictsForItem( $this->getItem() );
+			$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem() );
 
 			foreach ( $conflicts as $conflict ) {
 				/**

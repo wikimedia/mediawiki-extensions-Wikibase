@@ -140,21 +140,16 @@ $wgAutoloadClasses['SpecialItemDisambiguation'] 				= $dir . 'includes/specials/
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
 // includes/store
-$wgAutoloadClasses['Wikibase\EntityDeletionHandler'] 	= $dir . 'includes/store/EntityDeletionHandler.php';
-$wgAutoloadClasses['Wikibase\EntityUpdateHandler'] 		= $dir . 'includes/store/EntityUpdateHandler.php';
 $wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
 $wgAutoloadClasses['Wikibase\Store'] 					= $dir . 'includes/store/Store.php';
 $wgAutoloadClasses['Wikibase\StoreFactory'] 			= $dir . 'includes/store/StoreFactory.php';
-$wgAutoloadClasses['Wikibase\TermLookup'] 				= $dir . 'includes/store/TermLookup.php';
+$wgAutoloadClasses['Wikibase\TermCache'] 				= $dir . 'includes/store/TermCache.php';
 
 
 // includes/store/sql
-$wgAutoloadClasses['Wikibase\EntitySqlDeletion'] 		= $dir . 'includes/store/sql/EntitySqlDeletion.php';
-$wgAutoloadClasses['Wikibase\EntitySqlUpdate'] 			= $dir . 'includes/store/sql/EntitySqlUpdate.php';
 $wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/SqlIdGenerator.php';
 $wgAutoloadClasses['Wikibase\SqlStore'] 				= $dir . 'includes/store/sql/SqlStore.php';
-$wgAutoloadClasses['Wikibase\TermSqlLookup'] 			= $dir . 'includes/store/sql/TermSqlLookup.php';
-$wgAutoloadClasses['Wikibase\TermSqlUpdater'] 			= $dir . 'includes/store/sql/TermSqlUpdater.php';
+$wgAutoloadClasses['Wikibase\TermSqlCache'] 			= $dir . 'includes/store/sql/TermSqlCache.php';
 
 // includes/updates
 $wgAutoloadClasses['Wikibase\ItemDeletionUpdate'] 		= $dir . 'includes/updates/ItemDeletionUpdate.php';

@@ -89,12 +89,10 @@ final class RepoHooks {
 			'specials/SpecialItemDisambiguation',
 			'specials/SpecialItemByTitle',
 
-			'store/EntityDeletionHandler',
-			'store/EntityUpdateHandler',
 			'store/IdGenerator',
 			'store/StoreFactory',
 			'store/Store',
-			'store/TermLookup',
+			'store/TermCache',
 
 			'store/sql/SqlIdGenerator',
 
