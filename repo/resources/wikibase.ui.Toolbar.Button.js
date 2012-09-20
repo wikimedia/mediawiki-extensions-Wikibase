@@ -37,11 +37,11 @@ wb.ui.Toolbar.Button = wb.utilities.inherit( $PARENT, {
 
 		// disable button and attach tooltip when editing is restricted
 		$( wb ).on(
-			'restrictItemPageActions blockItemPageActions',
+			'restrictEntityPageActions blockEntityPageActions',
 			$.proxy( function( event ) {
 				this.disable();
 
-				var messageId = ( event.type === 'blockItemPageActions' )
+				var messageId = ( event.type === 'blockEntityPageActions' )
 					? 'wikibase-blockeduser-tooltip-message'
 					: 'wikibase-restrictionedit-tooltip-message';
 

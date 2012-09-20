@@ -70,7 +70,7 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 
 		// disable interface when editing is restricted
 		$( wb ).on(
-			'restrictItemPageActions blockItemPageActions',
+			'restrictEntityPageActions blockEntityPageActions',
 			$.proxy( function( event ) {
 				this.disable();
 			}, this )
