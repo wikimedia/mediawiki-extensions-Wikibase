@@ -136,7 +136,7 @@ $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialC
 $wgAutoloadClasses['SpecialCreateProperty'] 			= $dir . 'includes/specials/SpecialCreateProperty.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
-$wgAutoloadClasses['SpecialItemDisambiguation'] 				= $dir . 'includes/specials/SpecialItemDisambiguation.php';
+$wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 
 // includes/store
