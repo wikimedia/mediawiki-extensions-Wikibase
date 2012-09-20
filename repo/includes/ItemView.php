@@ -154,11 +154,20 @@ class ItemView extends EntityView {
 						// TODO: get an actual site name rather then just the language
 						Utils::fetchLanguageName( $languageCode )
 					);
+
+					$attr = array(
+						'class' => ' wb-sitelinks-siteid wb-sitelinks-siteid-' . $languageCode
+					);
+
+					// language code column is always ltr
+					// TODO: stylize this a bit nicer with some left padding
+					if ( $this->getContext()->getLanguage()->isRtl() ) {
+						$attr['dir'] = 'ltr';
+					}
+
 					$html .= Html::element(
 						'td',
-						array(
-							'class' => ' wb-sitelinks-siteid wb-sitelinks-siteid-' . $languageCode
-						),
+						$attr,
 						// TODO: get an actual site id rather then just the language code
 						$languageCode
 					);
