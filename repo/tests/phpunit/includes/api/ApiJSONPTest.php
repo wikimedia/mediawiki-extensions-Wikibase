@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use ApiTestCase, ApiTestUser;
+use ApiTestCase, TestUser;
 
 /**
  * Tests for the ApiWikibase class.
@@ -40,7 +40,7 @@ class ApiJSONPTest extends ApiTestCase {
 		global $wgUser;
 		parent::setUp();
 
-		ApiTestCase::$users['wbeditor'] = new ApiTestUser(
+		ApiTestCase::$users['wbeditor'] = new TestUser(
 				'Apitesteditor',
 				'Api Test Editor',
 				'api_test_editor@example.com',

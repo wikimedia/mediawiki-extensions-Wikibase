@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use ApiTestCase, ApiTestUser;
+use ApiTestCase, TestUser;
 use Wikibase\Item as Item;
 use Wikibase\Settings as Settings;
 use Wikibase\ItemContent as ItemContent;
@@ -60,7 +60,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 			self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
 
-			$this->user =  new ApiTestUser(
+			$this->user =  new TestUser(
 				'Apitesteditor',
 				'Api Test Editor',
 				'api_test_editor@example.com',

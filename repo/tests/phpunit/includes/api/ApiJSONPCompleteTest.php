@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use ApiTestCase, ApiTestUser;
+use ApiTestCase, TestUser;
 use Wikibase\Settings as Settings;
 
 /**
@@ -51,7 +51,7 @@ class ApiJSONPCompleteTest extends ApiTestCase {
 		self::$num++;
 		self::$name = "wbeditor" . self::$num;
 
-		ApiTestCase::$users[self::$name] = new ApiTestUser(
+		ApiTestCase::$users[self::$name] = new TestUser(
 				'Apitesteditor',
 				'Api Test Editor',
 				'api_test_editor@example.com',

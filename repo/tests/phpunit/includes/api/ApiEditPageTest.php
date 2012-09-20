@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use ApiTestCase, ApiTestUser;
+use ApiTestCase;
 use Wikibase\Settings as Settings;
 
 /**

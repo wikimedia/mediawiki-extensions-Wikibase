@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use ApiTestCase, ApiTestUser;
+use ApiTestCase, TestUser;
 use Wikibase\Settings as Settings;
 
 /**
@@ -39,7 +39,7 @@ use Wikibase\Settings as Settings;
  */
 class ApiBotEditTest extends \ApiTestCase {
 
-	protected static $baseOfItemIds = 0;
+	protected static $baseOfItemIds = 1;
 	protected static $usepost;
 	protected static $usetoken;
 	protected static $userights;
@@ -54,7 +54,7 @@ class ApiBotEditTest extends \ApiTestCase {
 		self::$usetoken = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 		self::$userights = Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithRights' ) : true;
 
-		ApiTestCase::$users['wbbot'] = new ApiTestUser(
+		ApiTestCase::$users['wbbot'] = new TestUser(
 			'Apitestbot',
 			'Api Test Bot',
 			'api_test_bot@example.com',
