@@ -154,10 +154,13 @@ class ItemView extends EntityView {
 						// TODO: get an actual site name rather then just the language
 						Utils::fetchLanguageName( $languageCode )
 					);
+
 					$html .= Html::element(
 						'td',
 						array(
-							'class' => ' wb-sitelinks-siteid wb-sitelinks-siteid-' . $languageCode
+							'class' => ' wb-sitelinks-siteid wb-sitelinks-siteid-' . $languageCode,
+							// site id language code is always ltr
+							'dir' => 'ltr'
 						),
 						// TODO: get an actual site id rather then just the language code
 						$languageCode
