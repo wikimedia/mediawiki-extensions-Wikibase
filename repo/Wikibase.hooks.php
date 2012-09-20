@@ -304,56 +304,31 @@ final class RepoHooks {
 	 *
 	 * @return boolean
 	 */
-	public static function onArticleDeleteComplete( WikiPage &$wikiPage, User &$user, $reason, $id ) {
+	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
+		\Content $content = null, \LogEntryBase $logEntry = null
+	) {
+
+		if ( $content === null ) {
+			throw new \MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
+		}
+
 		// Bail out if we are not in an entity namespace
 		if ( !Utils::isEntityNamespace( $wikiPage->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$item = $content->getItem();
+		$change = EntityDeletion::newFromEntity( $item );
 
-		$archiveEntry = $dbw->selectRow(
-			'archive',
-			array(
-				'ar_user',
-				'ar_text_id',
-				'ar_rev_id',
-				'ar_timestamp',
-				'ar_content_format',
-			),
-			array(
-				'ar_page_id' => $id,
-				'ar_content_model IS NULL OR ar_content_model IN ( ' . $dbw->makeList( Utils::getEntityModels(), LIST_COMMA ) . ')',
-			),
-			__METHOD__
-		);
+		$change->setFields( array(
+			//'previous_revision_id' => $wikiPage->getLatest(),
+			'revision_id' => 0, // there's no current revision
+			'user_id' => $user->getId(),
+			'object_id' => $item->getId(),
+			'time' => $logEntry->getTimestamp(),
+		) );
 
-		if ( $archiveEntry !== false ) {
-			//FIXME: this is horrible and will not work! old_text may contain all kinds of crap, like a gziped serialized
-			//FIXME: ... object referencing an external store! Why do we even need this hook?!
-			$textEntry = $dbw->selectRow(
-				'text',
-				'old_text',
-				array( 'old_id' => $archiveEntry->ar_text_id ),
-				__METHOD__
-			);
-
-			if ( $textEntry !== false ) {
-				$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-				$itemContent = $itemHandler->unserializeContent( $textEntry->old_text/* , $archiveEntry->ar_content_format */ );
-				$item = $itemContent->getItem();
-				$change = EntityDeletion::newFromEntity( $item );
-
-				$change->setFields( array(
-					'revision_id' => $archiveEntry->ar_rev_id,
-					'user_id' => $archiveEntry->ar_user,
-					'object_id' => $item->getId(),
-					'time' => $archiveEntry->ar_timestamp,
-				) );
-
-				ChangeNotifier::singleton()->handleChange( $change );
-			}
-		}
+		ChangeNotifier::singleton()->handleChange( $change );
 
 		return true;
 	}
