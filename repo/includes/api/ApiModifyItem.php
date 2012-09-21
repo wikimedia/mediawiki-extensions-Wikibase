@@ -120,14 +120,13 @@ abstract class ApiModifyItem extends Api {
 		$user = $this->getUser();
 		$this->flags = 0;
 
-		if ( $params['gettoken'] ) {
-			$this->addTokenToResult( $user->getEditToken() );
-			$this->getResult()->addValue( null, 'success', (int)true );
-			return;
-		}
-
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
+			//print( "token: " . $params['token'] . "\n");
+			#//print( "usertoken: " . $user->getToken() . "\n");
+			//print( "edittoken: " . $user->getEditToken('', null) . "\n");
+			//print( "needs token: " . ($this->needsToken() ? 'true' : 'false') . "\n");
+			//print( "match token: " . ($user->matchEditToken( $params['token'] ) ? 'true' : 'false') . "\n");
 			$this->dieUsage( $this->msg( 'wikibase-api-session-failure' )->text(), 'session-failure' );
 		}
 
@@ -283,11 +282,6 @@ abstract class ApiModifyItem extends Api {
 			}
 		}
 
-		if ( $success && $params['gettoken'] ) {
-			$user = $this->getUser();
-			$this->addTokenToResult( $user->getEditToken() );
-		}
-
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -384,10 +378,10 @@ abstract class ApiModifyItem extends Api {
 			'baserevid' => array( 'The numeric identifier for the revision.',
 				"This is used for detecting conflicts during save."
 			),
-			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
-				'During a normal reply a token can be returned spontaneously and the requester should',
-				'then start using the new token from the next request, possibly when repeating a failed',
-				'request.'
+			'token' => array( 'A "edittoken" token previously obtained through the token module (prop=info).',
+				'Later it can be implemented a mechanism where a token can be returned spontaneously',
+				'and the requester should then start using the new token from the next request, possibly when',
+				'repeating a failed request.'
 			),
 			// This is similar to ApiEditPage.php and what it uses at line 527
 			'bot' => array( 'Mark this edit as bot',

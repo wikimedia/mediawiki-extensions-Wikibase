@@ -460,37 +460,6 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		}
 	}
 
-	/**
-	 * @group API
-	 */
-	function testGetToken() {
-		if ( !static::$usetoken ) {
-			$this->markTestSkipped( "tokens disabled" );
-			return;
-		}
-
-		$data = $this->doApiRequest(
-			array(
-				'action' => 'wbgetitems',
-				'ids' => '23',
-				'gettoken' => '' ),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
-
-		// this should always hold for a logged in user
-		// unless we do some additional tricks with the token
-		$this->assertEquals(
-			34, strlen( $data[0]["wbgetitems"]["itemtoken"] ),
-			"The length of the token is not 34 chars"
-		);
-		$this->assertRegExp(
-			'/\+\\\\$/', $data[0]["wbgetitems"]["itemtoken"],
-			"The final chars of the token is not '+\\'"
-		);
-	}
-
 	function provideSetItemData() {
 		return array(
 			array( #0: labels
