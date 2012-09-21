@@ -254,14 +254,14 @@ abstract class ApiModifyEntity extends Api {
 		}
 
 		$this->getResult()->addValue(
-			'item', // FIXME: must be updated
+			'entity',
 			'id', $entityContent->getEntity()->getId()
 		);
 		$page = $entityContent->getWikiPage();
 		$revision = $page->getRevision();
 		if ( $revision !== null ) {
 			$this->getResult()->addValue(
-				'item', // FIXME: must be updated
+				'entity',
 				'lastrevid', intval( $revision->getId() )
 			);
 		}
@@ -276,7 +276,7 @@ abstract class ApiModifyEntity extends Api {
 
 			if ( $normalized !== array() ) {
 				$this->getResult()->addValue(
-					'item', // FIXME: must be updated
+					'entity',
 					'normalized', $normalized
 				);
 			}

@@ -46,7 +46,7 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 				$descriptions = array( $language => '' );
 			}
 
-			$this->addDescriptionsToResult( $descriptions, 'item' ); // FIXME: must be updated
+			$this->addDescriptionsToResult( $descriptions, 'entity' );
 		}
 
 		return true;

@@ -456,7 +456,7 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 			var didSaveAction = apiAction === self.API_ACTION.SAVE || apiAction === self.API_ACTION.SAVE_TO_REMOVE;
 
 			if( didSaveAction ) {
-				var responseVal = self._getValueFromApiResponse( response.item );
+				var responseVal = self._getValueFromApiResponse( response.entity );
 				if( responseVal !== null ) { // set normalized value from response if supported by API module
 					// when saving, this is the 2nd time we set the value but this time right (normalized)!
 					// the first time, this happens in _reTransform where we make sure all interfaces stop editing.
@@ -465,7 +465,7 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 
 				if( mw.config.get( 'wbItemId' ) === null ) {
 					// if the 'save' process will create a new item, trigger the event!
-					$( window.wikibase ).triggerHandler( 'newItemCreated', response.item );
+					$( window.wikibase ).triggerHandler( 'newItemCreated', response.entity );
 				}
 			}
 

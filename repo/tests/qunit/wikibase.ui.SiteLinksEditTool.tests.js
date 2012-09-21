@@ -41,7 +41,7 @@
 		setup: function() {
 
 			this.apiResponse = {
-				item: { sitelinks: { dewiki: { title: 'ein_titel' } } }
+				entity: { sitelinks: { dewiki: { title: 'ein_titel' } } }
 			};
 
 			// get empty nodes we get when no links on the site yet:

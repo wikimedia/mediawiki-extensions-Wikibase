@@ -46,7 +46,7 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 				$labels = array( $language => '' );
 			}
 
-			$this->addLabelsToResult( $labels, 'item' ); // FIXME: must be updated
+			$this->addLabelsToResult( $labels, 'entity' );
 		}
 
 		return true;

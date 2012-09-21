@@ -80,21 +80,21 @@ class ApiSetSiteLink extends ApiModifyEntity {
 	/**
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
-		protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
 
 		if ( isset( $params['linktitle'] ) ) {
 			$params['linktitle'] = Utils::squashToNFC( $params['linktitle'] );
 		}
 
 		if ( isset( $params['linksite'] ) && ( $params['linktitle'] === '' ) ) {
-			$link = $entityContent->getEntity()->getSiteLink( $params['linksite'] );
+			$link = $entityContent->getItem()->getSiteLink( $params['linksite'] );
 
 			if ( !$link ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-remove-sitelink-failed' )->text(), 'remove-sitelink-failed' );
 			}
 
-			$entityContent->getEntity()->removeSiteLink( $params['linksite'] );
-			$this->addSiteLinksToResult( array( $link ), 'item', 'sitelinks', 'sitelink', array( 'removed' ) );
+			$entityContent->getItem()->removeSiteLink( $params['linksite'] );
+			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
 			return true;
 		}
 		else {
@@ -118,7 +118,7 @@ class ApiSetSiteLink extends ApiModifyEntity {
 				$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
 			}
 
-			$this->addSiteLinksToResult( array( $ret ), 'item', 'sitelinks', 'sitelink', array( 'url' ) );
+			$this->addSiteLinksToResult( array( $ret ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
 			return $ret !== false;
 		}
 	}
@@ -186,7 +186,7 @@ class ApiSetSiteLink extends ApiModifyEntity {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to associate an article on a wiki with a Wikibase entity or remove an already made such association.'
+			'API module to associate an article on a wiki with a Wikibase item or remove an already made such association.'
 		);
 	}
 
