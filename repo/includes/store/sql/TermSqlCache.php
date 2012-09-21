@@ -340,6 +340,10 @@ class TermSqlCache implements TermCache {
 			$matchingTerm = array();
 
 			foreach ( $obtainedTerm as $key => $value ) {
+				if ( $key === 'term_entity_id' ) {
+					$value = (int)$value;
+				}
+
 				$matchingTerm[$allowedFields[$key]] = $value;
 			}
 

@@ -178,7 +178,22 @@ class TermCacheTest extends \MediaWikiTestCase {
 			$this->assertArrayHasKey( 'entityId', $term );
 			$this->assertArrayHasKey( 'entityType', $term );
 
-			$id = (int)$term['entityId'];
+			$this->assertInternalType( 'string', $term['termLanguage'] );
+			$this->assertInternalType( 'string', $term['termText'] );
+			$this->assertInternalType( 'integer', $term['entityId'] );
+			$this->assertInternalType( 'string', $term['entityType'] );
+
+			$this->assertTrue( in_array(
+				$term['termType'],
+				array(
+					TermCache::TERM_TYPE_ALIAS,
+					TermCache::TERM_TYPE_DESCRIPTION,
+					TermCache::TERM_TYPE_LABEL
+				),
+				true
+			) );
+
+			$id = $term['entityId'];
 
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
