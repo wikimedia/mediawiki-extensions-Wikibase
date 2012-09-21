@@ -90,7 +90,7 @@ $wgAutoloadClasses['Wikibase\ItemContentDiffView'] 		= $dir . 'includes/ItemCont
 $wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisambiguation.php';
 $wgAutoloadClasses['Wikibase\EntityView']				= $dir . 'includes/EntityView.php';
 $wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
-$wgAutoloadClasses['Wikibase\PropertyView']				= $dir . 'includes/PropertyView.php';
+// $wgAutoloadClasses['Wikibase\PropertyView']				= $dir . 'includes/PropertyView.php'; // disabled for phase 1 beta
 $wgAutoloadClasses['Wikibase\Autocomment'] 				= $dir . 'includes/Autocomment.php';
 $wgAutoloadClasses['Wikibase\EditEntity'] 				= $dir . 'includes/EditEntity.php';
 
@@ -133,7 +133,7 @@ $wgAutoloadClasses['Wikibase\QueryHandler'] 			= $dir . 'includes/content/QueryH
 // includes/specials
 $wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
-$wgAutoloadClasses['SpecialCreateProperty'] 			= $dir . 'includes/specials/SpecialCreateProperty.php';
+//$wgAutoloadClasses['SpecialCreateProperty'] 			= $dir . 'includes/specials/SpecialCreateProperty.php'; // disabled for phase 1 beta
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
@@ -179,7 +179,7 @@ $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-$wgSpecialPages['CreateProperty'] 					= 'SpecialCreateProperty';
+//$wgSpecialPages['CreateProperty'] 					= 'SpecialCreateProperty'; // disabled for phase 1 beta
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 
