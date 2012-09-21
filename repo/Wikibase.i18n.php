@@ -88,6 +88,7 @@ $messages['en'] = array(
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Another query ($3) already has label "$1" associated with language code $2',
+	'wikibase-error-label-not-unique-item' => 'Another item ($3) already has label "$1" and description "$4" associated with language code $2',
 
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
@@ -385,6 +386,11 @@ Parameters:
 * $1 is label text
 * $2 is the labels language code
 * $3 is the id of the query that already has the label',
+	'wikibase-error-label-not-unique-item' => 'Error message shown when a user tries to save an item that has a non-unique label+description pair.
+* $1 is label text
+* $2 is the labels language code
+* $3 is the id of the query that already has the label
+* $4 is description text',
 );
 
 /** Achinese (Acèh)
