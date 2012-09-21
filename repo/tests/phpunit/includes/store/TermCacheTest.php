@@ -132,4 +132,61 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$this->assertTrue( $lookup->termExists( 'b42', null, 'nl' ) );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetMatchingTerms( TermCache $lookup ) {
+		$item0 = \Wikibase\ItemObject::newEmpty();
+		$item0->setLabel( 'en', 'getmatchingterms-0' );
+
+		$item1 = \Wikibase\ItemObject::newEmpty();
+		$item1->setLabel( 'nl', 'getmatchingterms-1' );
+
+		$content0 = \Wikibase\ItemContent::newEmpty();
+		$content0->setItem( $item0 );
+		$content0->save( '', null, EDIT_NEW );
+		$id0 = $content0->getItem()->getId();
+
+		$content1 = \Wikibase\ItemContent::newEmpty();
+		$content1->setItem( $item1 );
+
+		$content1->save( '', null, EDIT_NEW );
+		$id1 = $content1->getItem()->getId();
+
+		$terms = array(
+			$id0 => array(
+				'termLanguage' => 'en',
+				'termText' => 'getmatchingterms-0',
+			),
+			$id1 => array(
+				'termText' => 'getmatchingterms-1',
+			),
+		);
+
+		$actual = $lookup->getMatchingTerms( $terms );
+
+		$terms[$id1]['termLanguage'] = 'nl';
+
+		$this->assertInternalType( 'array', $actual );
+
+		foreach ( $actual as $term ) {
+			$this->assertInternalType( 'array', $term );
+
+			$this->assertArrayHasKey( 'termLanguage', $term );
+			$this->assertArrayHasKey( 'termText', $term );
+			$this->assertArrayHasKey( 'termType', $term );
+			$this->assertArrayHasKey( 'entityId', $term );
+			$this->assertArrayHasKey( 'entityType', $term );
+
+			$id = (int)$term['entityId'];
+
+			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
+
+			$expected = $terms[$id];
+
+			$this->assertEquals( $expected['termText'], $term['termText'] );
+			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );
+		}
+	}
+
 }

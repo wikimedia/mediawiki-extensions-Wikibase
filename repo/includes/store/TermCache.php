@@ -90,4 +90,45 @@ interface TermCache {
 	 */
 	public function termExists( $termValue, $termType = null, $termLanguage = null, $entityType = null );
 
+	/**
+	 * Returns the terms that match the provided conditions.
+	 *
+	 * $terms is an array of arrays where each inner array specifies a set of
+	 * conditions which are joined by AND, and the inner arrays get joined by OR.
+	 * These inner arrays can have the following keys:
+	 *
+	 * - entityType:   string
+	 * - termType:     element of the TermCache::TERM_TYPE_ enum
+	 * - termLanguage: string, language code
+	 * - termText:     string
+	 *
+	 * A default can be provided for termType and entityType via the corresponding
+	 * method parameters.
+	 *
+	 * The return value is an array in similar format where all 4 fields are set.
+	 * Example:
+	 *
+	 * array(
+	 *   array(
+	 *      entityType: item,
+	 *      termType: TERM_TYPE_LABEL,
+	 *      termLanguage: en,
+	 *      termText: foobar,
+	 *   ),
+	 *   array(
+	 *      ...
+	 *   ),
+	 *   ...
+	 * )
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $terms
+	 * @param string|null $termType
+	 * @param string|null $entityType
+	 *
+	 * @return array
+	 */
+	public function getMatchingTerms( array $terms, $termType = null, $entityType = null );
+
 }
