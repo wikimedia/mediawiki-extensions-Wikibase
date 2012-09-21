@@ -23,10 +23,12 @@ final class TestItemContents {
 	 * @return array of ItemContent
 	 */
 	public static function getItems() {
+		// @codeCoverageIgnoreStart
 		return array_map(
 			'\Wikibase\ItemContent::newFromItem',
 			TestItems::getItems()
 		);
+		// @codeCoverageIgnoreEnd
 	}
 
 }
