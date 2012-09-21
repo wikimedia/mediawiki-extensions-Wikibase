@@ -1,0 +1,10 @@
+Change-Id: I59d9c331ba8b9b162bab2a9d8e3ced04e56099ad
+Code-Review+2: Aude <aude.wiki@gmail.com>
+Verified+1: Aude <aude.wiki@gmail.com>
+Code-Review+2: Denny Vrandecic <denny.vrandecic@wikimedia.de>
+Verified+1: Denny Vrandecic <denny.vrandecic@wikimedia.de>
+Submitted-by: Aude <aude.wiki@gmail.com>
+Submitted-at: Fri, 21 Sep 2012 15:28:14 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/24547
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/master
