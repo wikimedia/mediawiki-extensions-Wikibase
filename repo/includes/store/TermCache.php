@@ -31,6 +31,15 @@ namespace Wikibase;
 interface TermCache {
 
 	/**
+	 * Term type enum.
+	 *
+	 * @since 0.1
+	 */
+	const TERM_TYPE_LABEL = 'label';
+	const TERM_TYPE_ALIAS = 'alias';
+	const TERM_TYPE_DESCRIPTION = 'description';
+
+	/**
 	 * Returns the ids for the items with the provided label in the specified language.
 	 *
 	 * TODO: generalize to entity
@@ -66,5 +75,19 @@ interface TermCache {
 	 * @return boolean Success indicator
 	 */
 	public function deleteTermsOfEntity( Entity $entity );
+
+	/**
+	 * Returns if a term with the specified parameters exists.
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $termValue
+	 * @param string|null $termType
+	 * @param string|null $termLanguage Language code
+	 * @param string|null $entityType
+	 *
+	 * @return boolean
+	 */
+	public function termExists( $termValue, $termType = null, $termLanguage = null, $entityType = null );
 
 }
