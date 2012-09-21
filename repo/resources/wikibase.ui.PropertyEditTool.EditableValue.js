@@ -458,7 +458,7 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
 
 				if( apiAction === self.API_ACTION.SAVE || apiAction === self.API_ACTION.SAVE_TO_REMOVE ) {
-					var responseVal = self._getValueFromApiResponse( response.item );
+					var responseVal = self._getValueFromApiResponse( response.entity );
 					if( responseVal !== null ) {
 						// set normalized value from response if supported by API module
 						self.setValue( responseVal );

@@ -232,7 +232,7 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 				site = wb.getSite( self._interfaces.siteId.getValue() );
 
 			if( page !== '' && site !== null ) {
-				var url = response.item.sitelinks[ site.getGlobalSiteId() ].url,
+				var url = response.entity.sitelinks[ site.getGlobalSiteId() ].url,
 					oldFn = site.getUrlTo;
 
 				// overwrite the getUrlTo function of this site object to always return the valid url returned by the

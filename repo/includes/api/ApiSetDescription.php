@@ -47,7 +47,7 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 				$itemContent->getItem()->removeDescription( $language );
 				$descriptions = array( $language => '' );
 			}
-			$this->addDescriptionsToResult( $descriptions, 'item' );
+			$this->addDescriptionsToResult( $descriptions, 'entity' );
 		}
 
 		return $status;

@@ -212,10 +212,10 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 			}
 
 			// check the response -------------------------------
-			$this->assertSuccess( $res, 'item', 'sitelinks', 0 );
-			$this->assertEquals( 1, count( $res['item']['sitelinks'] ), "expected exactly one sitelinks structure" );
+			$this->assertSuccess( $res, 'entity', 'sitelinks', 0 );
+			$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
 
-			$link = $res['item']['sitelinks'][0];
+			$link = $res['entity']['sitelinks'][0];
 			$this->assertEquals( $linksite, $link['site'] );
 
 			if ( $linktitle === '' ) {

@@ -57,7 +57,7 @@ class ApiGetItems extends Api {
 						$params['ids'][] = intval( $id );
 					}
 					else {
-						$this->getResult()->addValue( 'items', (string)(--$missing),
+						$this->getResult()->addValue( 'entities', (string)(--$missing),
 							array( 'site' => $siteId, 'title' => $title, 'missing' => "" )
 						);
 					}
@@ -102,7 +102,7 @@ class ApiGetItems extends Api {
 		// loop over all items
 		foreach ($params['ids'] as $id) {
 
-			$itemPath = array( 'items', $id );
+			$itemPath = array( 'entities', $id );
 			$res = $this->getResult();
 
 			$res->addValue( $itemPath, 'id', $id );
@@ -163,7 +163,7 @@ class ApiGetItems extends Api {
 				}
 			}
 		}
-		$this->getResult()->setIndexedTagName_internal( array( 'items' ), 'item' );
+		$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
 
 		$success = true;
 
