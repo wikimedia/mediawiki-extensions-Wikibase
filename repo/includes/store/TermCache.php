@@ -132,4 +132,23 @@ interface TermCache {
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null );
 
+	/**
+	 * Similar to @see TermCache::getMatchingTerms
+	 *
+	 * Instead of taking a single array containing term information for each element in the
+	 * outer array, an array of arrays is provided, where each element in this array
+	 * describes a term the same item should have for it's specified terms to be returned.
+	 *
+	 * The return value has the same format as TermCache::getMatchingTerms.
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $terms
+	 * @param string|null $termType
+	 * @param string|null $entityType
+	 *
+	 * @return array
+	 */
+	public function getMatchingJoinedTerms( array $terms, $termType = null, $entityType = null );
+
 }
