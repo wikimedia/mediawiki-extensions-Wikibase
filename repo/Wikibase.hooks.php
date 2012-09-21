@@ -129,7 +129,7 @@ final class RepoHooks {
 			'store/sql/SqlIdGenerator',
 
 			'updates/ItemDeletionUpdate',
-			'updates/ItemStructuredSave',
+			'updates/ItemModificationUpdate',
 		);
 
 		foreach ( $testFiles as $file ) {
