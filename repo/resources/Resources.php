@@ -10,6 +10,8 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ *
+ * @codeCoverageIgnoreStart
  */
 return call_user_func( function() {
 
@@ -241,3 +243,4 @@ return call_user_func( function() {
 		),
 	);
 } );
+// @codeCoverageIgnoreEnd
