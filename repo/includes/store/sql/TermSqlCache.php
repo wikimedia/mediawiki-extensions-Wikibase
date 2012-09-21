@@ -107,7 +107,7 @@ class TermSqlCache implements TermCache {
 		$dbw = wfGetDB( DB_MASTER );
 
 		return $dbw->delete(
-			'wb_terms',
+			$this->tableName,
 			array(
 				'term_entity_id' => $entity->getId(),
 				'term_entity_type' => $entity->getType()
@@ -134,7 +134,7 @@ class TermSqlCache implements TermCache {
 		foreach ( $entity->getDescriptions() as $languageCode => $description ) {
 			$terms[] = array(
 				'term_language' => $languageCode,
-				'term_type' => 'description',
+				'term_type' => TermCache::TERM_TYPE_DESCRIPTION,
 				'term_text' => $description,
 			);
 		}
@@ -142,7 +142,7 @@ class TermSqlCache implements TermCache {
 		foreach ( $entity->getLabels() as $languageCode => $label ) {
 			$terms[] = array(
 				'term_language' => $languageCode,
-				'term_type' => 'label',
+				'term_type' => TermCache::TERM_TYPE_LABEL,
 				'term_text' => $label,
 			);
 		}
@@ -151,7 +151,7 @@ class TermSqlCache implements TermCache {
 			foreach ( $aliases as $alias ) {
 				$terms[] = array(
 					'term_language' => $languageCode,
-					'term_type' => 'alias',
+					'term_type' => TermCache::TERM_TYPE_ALIAS,
 					'term_text' => $alias,
 				);
 			}
@@ -161,7 +161,7 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
-	 * Returns the Databse from which to read.
+	 * Returns the Database from which to read.
 	 *
 	 * @since 0.1
 	 *
@@ -189,7 +189,7 @@ class TermSqlCache implements TermCache {
 
 		$conds = array(
 			'terms0.term_text' => $label,
-			'terms0.term_type' => 'label',
+			'terms0.term_type' => TermCache::TERM_TYPE_LABEL,
 		);
 
 		$joinConds = array();
@@ -200,7 +200,7 @@ class TermSqlCache implements TermCache {
 
 		if ( !is_null( $description ) ) {
 			$conds['terms1.term_text'] = $description;
-			$conds['terms1.term_type'] = 'description';
+			$conds['terms1.term_type'] = TermCache::TERM_TYPE_DESCRIPTION;
 
 			if ( !is_null( $languageCode ) ) {
 				$conds['terms1.term_language'] = $languageCode;
@@ -223,6 +223,49 @@ class TermSqlCache implements TermCache {
 		);
 
 		return array_map( function( $item ) { return $item->term_entity_id; }, iterator_to_array( $items ) );
+	}
+
+	/**
+	 * @see TermCache::termExists
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $termValue
+	 * @param string|null $termType
+	 * @param string|null $termLanguage Language code
+	 * @param string|null $entityType
+	 *
+	 * @return boolean
+	 */
+	public function termExists( $termValue, $termType = null, $termLanguage = null, $entityType = null ) {
+		$dbr = $this->getReadDb();
+
+		$conditions = array(
+			'term_text' => $termValue,
+		);
+
+		if ( $termType !== null ) {
+			$conditions['term_type'] = $termType;
+		}
+
+		if ( $termLanguage !== null ) {
+			$conditions['term_language'] = $termLanguage;
+		}
+
+		if ( $entityType !== null ) {
+			$conditions['term_entity_type'] = $entityType;
+		}
+
+		$result = $dbr->selectRow(
+			$this->tableName,
+			array(
+				'term_entity_id',
+			),
+			$conditions,
+			__METHOD__
+		);
+
+		return $result !== false;
 	}
 
 }
