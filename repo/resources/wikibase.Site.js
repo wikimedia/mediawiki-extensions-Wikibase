@@ -74,6 +74,9 @@ wb.Site.prototype = {
 	 *       this with a API call to the foreign site (even in that case we have to know which API module to call and
 	 *       what parameters to pass in case we have a non-MW installation!)
 	 *
+	 * NOTE: for solving bug 40399 there is some additional magic in EditableSiteLink where we overwrite this function
+	 *       to cache the exact urls returned by the API after creating a new site-link.
+	 *
 	 * @param string pageTitle title of the page within the site
 	 * @return string
 	 */
