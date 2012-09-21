@@ -104,10 +104,51 @@ class ItemContent extends EntityContent {
 
 		if ( $status->isOK() ) {
 			$this->addSiteLinkConflicts( $status );
+			$this->addLabelDescriptionConflicts( $status );
 		}
 
 		wfProfileOut( __METHOD__ );
 		return $status;
+	}
+
+	/**
+	 * Adds any conflicts with items that have the same label
+	 * and description pair in the same language to the status.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Status $status
+	 */
+	protected function addLabelDescriptionConflicts( Status $status ) {
+		$labels = array();
+
+		$entity = $this->getEntity();
+
+		foreach ( $entity->getLabels() as $langCode => $labelText ) {
+			$label = array(
+				'termLanguage' => $langCode,
+				'termText' => $labelText,
+			);
+
+			$labels[] = $label;
+		}
+
+		$foundLabels = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
+			$labels,
+			TermCache::TERM_TYPE_LABEL,
+			$entity->getType()
+		);
+
+		foreach ( $foundLabels as $foundLabel ) {
+			if ( $foundLabel['entityId'] !== $entity->getId() ) {
+				$status->fatal(
+					'wikibase-error-label-not-unique-' . $entity->getType(),
+					$foundLabel['termText'],
+					$foundLabel['termLanguage'],
+					$foundLabel['entityId']
+				);
+			}
+		}
 	}
 
 	/**

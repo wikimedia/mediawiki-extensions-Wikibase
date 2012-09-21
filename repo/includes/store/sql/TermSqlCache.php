@@ -172,60 +172,6 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
-	 * @see TermCache::getItemIdsForLabel
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $label
-	 * @param string|null $languageCode
-	 * @param string|null $description
-	 *
-	 * @return array of integer
-	 */
-	public function getItemIdsForLabel( $label, $languageCode = null, $description = null ) {
-		$db = $this->getReadDb();
-
-		$tables = array( 'terms0' => $this->tableName );
-
-		$conds = array(
-			'terms0.term_text' => $label,
-			'terms0.term_type' => TermCache::TERM_TYPE_LABEL,
-		);
-
-		$joinConds = array();
-
-		if ( !is_null( $languageCode ) ) {
-			$conds['terms0.term_language'] = $languageCode;
-		}
-
-		if ( !is_null( $description ) ) {
-			$conds['terms1.term_text'] = $description;
-			$conds['terms1.term_type'] = TermCache::TERM_TYPE_DESCRIPTION;
-
-			if ( !is_null( $languageCode ) ) {
-				$conds['terms1.term_language'] = $languageCode;
-			}
-
-			$tables['terms1'] = $this->tableName;
-
-			$joinConds = array(
-				'terms1' => array( 'LEFT OUTER JOIN', array( 'terms0.term_entity_id=terms1.term_entity_id', 'terms0.term_entity_type=terms1.term_entity_type' ) ),
-			);
-		}
-
-		$items = $db->select(
-			$tables,
-			array( 'terms0.term_entity_id' ),
-			$conds,
-			__METHOD__,
-			array( 'DISTINCT' ),
-			$joinConds
-		);
-
-		return array_map( function( $item ) { return $item->term_entity_id; }, iterator_to_array( $items ) );
-	}
-
-	/**
 	 * @see TermCache::termExists
 	 *
 	 * @since 0.1
@@ -267,6 +213,64 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
+	 * @see TermCache::getItemIdsForLabel
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $label
+	 * @param string|null $languageCode
+	 * @param string|null $description
+	 *
+	 * @return array of integer
+	 */
+	public function getItemIdsForLabel( $label, $languageCode = null, $description = null ) {
+		$db = $this->getReadDb();
+
+		$tables = array( 'terms0' => $this->tableName );
+
+		$conds = array(
+			'terms0.term_text' => $label,
+			'terms0.term_type' => TermCache::TERM_TYPE_LABEL,
+		);
+
+		$joinConds = array();
+
+		if ( !is_null( $languageCode ) ) {
+			$conds['terms0.term_language'] = $languageCode;
+		}
+
+		if ( !is_null( $description ) ) {
+			$conds['terms1.term_text'] = $description;
+			$conds['terms1.term_type'] = TermCache::TERM_TYPE_DESCRIPTION;
+
+			if ( !is_null( $languageCode ) ) {
+				$conds['terms1.term_language'] = $languageCode;
+			}
+
+			$tables['terms1'] = $this->tableName;
+
+			$joinConds['terms1'] = array(
+				'LEFT OUTER JOIN',
+				array(
+					'terms0.term_entity_id=terms1.term_entity_id',
+					'terms0.term_entity_type=terms1.term_entity_type',
+				)
+			);
+		}
+
+		$items = $db->select(
+			$tables,
+			array( 'terms0.term_entity_id' ),
+			$conds,
+			__METHOD__,
+			array( 'DISTINCT' ),
+			$joinConds
+		);
+
+		return array_map( function( $item ) { return $item->term_entity_id; }, iterator_to_array( $items ) );
+	}
+
+	/**
 	 * @see TermCache::getMatchingTerms
 	 *
 	 * @since 0.1
@@ -289,49 +293,80 @@ class TermSqlCache implements TermCache {
 
 		$dbr = $this->getReadDb();
 
-		// Maps interface term fields to table fields and defaults
-		// using the methods $termType and $entityType parameters.
-		foreach ( $terms as $term ) {
-			$fullTerm = array();
+		$hasJoin = false;
 
-			if ( array_key_exists( 'termLanguage', $term ) ) {
-				$fullTerm['term_language'] = $term['termLanguage'];
+		foreach ( $terms as $termList ) {
+			$termList = false ? array_slice( $termList, 0, 2 ) : array( $termList );
+
+			$tableIndex = 0;
+
+			// Maps interface term fields to table fields and defaults
+			// using the methods $termType and $entityType parameters.
+			foreach ( $termList as $term ) {
+				$fullTerm = array();
+
+				if ( array_key_exists( 'termLanguage', $term ) ) {
+					$fullTerm['term_language'] = $term['termLanguage'];
+				}
+
+				if ( array_key_exists( 'termText', $term ) ) {
+					$fullTerm['term_text'] = $term['termText'];
+				}
+
+				if ( array_key_exists( 'termType', $term ) ) {
+					$fullTerm['term_type'] = $term['termType'];
+				}
+				elseif ( $termType !== null ) {
+					$fullTerm['term_type'] = $termType;
+				}
+
+				if ( array_key_exists( 'entityType', $term ) ) {
+					$fullTerm['term_entity_type'] = $term['entityType'];
+				}
+				elseif ( $entityType !== null ) {
+					$fullTerm['term_entity_type'] = $entityType;
+				}
+
+				$fullTerm = array_intersect_key( $fullTerm, $allowedFields );
+
+				$tableName = 'terms' . $tableIndex++;
+
+				foreach ( $fullTerm as $field => &$value ) {
+					$value = $tableName . '.' . $field . '=' . $dbr->addQuotes( $value );
+				}
+
+				$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
 			}
 
-			if ( array_key_exists( 'termText', $term ) ) {
-				$fullTerm['term_text'] = $term['termText'];
+			if ( $tableIndex > 1 ) {
+				$hasJoin = true;
 			}
-
-			if ( array_key_exists( 'termType', $term ) ) {
-				$fullTerm['term_type'] = $term['termType'];
-			}
-			elseif ( $termType !== null ) {
-				$fullTerm['term_type'] = $termType;
-			}
-
-			if ( array_key_exists( 'entityType', $term ) ) {
-				$fullTerm['term_entity_type'] = $term['entityType'];
-			}
-			elseif ( $entityType !== null ) {
-				$fullTerm['term_entity_type'] = $entityType;
-			}
-
-			$fullTerm = array_intersect_key( $fullTerm, $allowedFields );
-
-			foreach ( $fullTerm as $field => &$value ) {
-				$value = $field . '=' . $dbr->addQuotes( $value );
-			}
-
-			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
 		}
 
 		$allowedFields['term_entity_id'] = 'entityId';
 
+		$joinConds = array();
+		$tables = array( 'terms0' => $this->tableName );
+
+		if ( $hasJoin ) {
+			$tables['terms1'] = $this->tableName;
+
+			$joinConds['terms1'] = array(
+				'LEFT OUTER JOIN',
+				array(
+					'terms0.term_entity_id=terms1.term_entity_id',
+					'terms0.term_entity_type=terms1.term_entity_type',
+				)
+			);
+		}
+
 		$obtainedTerms = $dbr->select(
-			$this->tableName,
+			$tables,
 			array_keys( $allowedFields ),
 			implode( ' OR ', $conditions ),
-			__METHOD__
+			__METHOD__,
+			array(),
+			$joinConds
 		);
 
 		$matchingTerms = array();
