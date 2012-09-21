@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Title, Content, ParserOptions, ParserOutput, DataUpdate;
+use Title, Content, ParserOptions, ParserOutput, DataUpdate, WikiPage, User, Status;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -65,6 +65,46 @@ class PropertyContent extends EntityContent {
 	 */
 	public static function newFromArray( array $data ) {
 		return new static( new PropertyObject( $data ) );
+	}
+
+	/**
+	 * @see Content::prepareSave
+	 *
+	 * @since 0.1
+	 *
+	 * @param WikiPage $page
+	 * @param int      $flags
+	 * @param int      $baseRevId
+	 * @param User     $user
+	 *
+	 * @return Status
+	 */
+	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
+		wfProfileIn( __METHOD__ );
+		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
+
+		if ( $status->isOK() ) {
+			$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem() );
+
+			foreach ( $conflicts as $conflict ) {
+				/**
+				 * @var WikiPage $ipsPage
+				 */
+				$conflictingPage = $this->getContentHandler()->getWikiPageForId( $conflict['itemId'] );
+
+				// NOTE: it would be nice to generate the link here and just pass it as HTML,
+				// but Status forces all parameters to be escaped.
+				$status->fatal(
+					'wikibase-error-sitelink-already-used',
+					$conflict['siteId'],
+					$conflict['sitePage'],
+					$conflictingPage->getTitle()->getFullText()
+				);
+			}
+		}
+
+		wfProfileOut( __METHOD__ );
+		return $status;
 	}
 
 	/**
