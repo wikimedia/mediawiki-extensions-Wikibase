@@ -97,7 +97,7 @@ class ClaimObject implements Claim {
 	 * @return string
 	 */
 	public function getHash() {
-		return md5( $this->mainSnak->getHash() . $this->qualifiers->getHash() );
+		return sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() );
 	}
 
 }

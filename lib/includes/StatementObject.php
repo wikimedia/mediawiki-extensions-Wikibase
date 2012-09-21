@@ -182,7 +182,7 @@ class StatementObject implements Statement {
 	 */
 	public function getHash() {
 		return $this->entityId . $this->entityType . $this->number
-			. md5( implode(
+			. sha1( implode(
 				'|',
 				array(
 					$this->claim->getHash(),

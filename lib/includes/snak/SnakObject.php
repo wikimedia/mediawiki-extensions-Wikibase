@@ -24,7 +24,7 @@ abstract class SnakObject implements Snak {
 	 * @return string
 	 */
 	public function getHash() {
-		return md5( serialize( $this ) );
+		return sha1( serialize( $this ) );
 	}
 
 }
