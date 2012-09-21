@@ -69,6 +69,11 @@ wb.Site.prototype = {
 	/**
 	 * Returns the url to a page of the site. To get a full html ready link, use getLinkTo().
 	 *
+	 * @todo decide whether we want to stick with this method which relies on having some knowledge about the php
+	 *       Site stuff (e.g. that we have to replace $1 in this._siteDetails.pageUrl) or whether we want to replace
+	 *       this with a API call to the foreign site (even in that case we have to know which API module to call and
+	 *       what parameters to pass in case we have a non-MW installation!)
+	 *
 	 * @param string pageTitle title of the page within the site
 	 * @return string
 	 */
@@ -125,8 +130,9 @@ wb.Site.prototype = {
 	 * @return string
 	 */
 	_urlEncodeSite: function( pageTitle ) {
-		var mwPage = new mw.Title( pageTitle );
-		return mw.util.wikiUrlencode( mwPage.getPrefixedDb() );
+		// we don't create a mw.Title here since the given title should be normalized and could be one from a foreign
+		// wiki which has different namespace config!
+		return mw.util.wikiUrlencode( pageTitle );
 	}
 
 };
