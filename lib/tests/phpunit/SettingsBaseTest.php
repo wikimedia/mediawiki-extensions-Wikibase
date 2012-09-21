@@ -30,6 +30,8 @@
  */
 class SettingsBaseTest extends \MediaWikiTestCase {
 
+	// @codeCoverageIgnoreStart
+
 	public function testSingleton() {
 		$this->assertInstanceOf( '\Settings', TestSettingsList::singleton() );
 		$this->assertTrue( TestSettingsList::singleton() === TestSettingsList::singleton() );
@@ -123,5 +125,7 @@ class TestSettingsList extends SettingsBase {
 	public function getSetSettings() {
 		return static::getTestSetSettings();
 	}
+
+	// @codeCoverageIgnoreEnd
 
 }
