@@ -66,15 +66,13 @@ class MediaWikiSite extends SiteObject {
 	 * @throws MWException
 	 */
 	public function normalizePageName( $pageName ) {
-		global $egWBRemoteTitleNormalization;
-
 		// Check if we have strings as arguments.
 		if ( !is_string( $pageName ) ) {
 			throw new MWException( "\$pageTitle must be a string" );
 		}
 
 		// Go on call the external site
-		if ( defined( 'MW_PHPUNIT_TEST' ) || !$egWBRemoteTitleNormalization ) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 			// If the code is under test, don't call out to other sites, just normalize locally.
 			// Note: this may cause results to be inconsistent with the actual normalization used by the respective remote site!
 
