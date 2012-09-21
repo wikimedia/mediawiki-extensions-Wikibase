@@ -87,16 +87,10 @@ class SqlStore implements Store {
 
 		// TODO: refactor selection code out (relevant for other stores)
 
-		$contentModels = array(
-			CONTENT_MODEL_WIKIBASE_ITEM,
-			CONTENT_MODEL_WIKIBASE_PROPERTY,
-			CONTENT_MODEL_WIKIBASE_QUERY
-		);
-
 		$pages = $dbw->select(
 			array( 'page' ),
 			array( 'page_id', 'page_latest' ),
-			array( 'page_content_model' => $contentModels ),
+			array( 'page_content_model' => Utils::getEntityModels() ),
 			__METHOD__,
 			array( 'LIMIT' => 1000 ) // TODO: continuation
 		);

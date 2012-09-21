@@ -159,7 +159,7 @@ final class RepoHooks {
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& in_array(
 				$title->getContentModel(),
-				array( CONTENT_MODEL_WIKIBASE_ITEM, CONTENT_MODEL_WIKIBASE_PROPERTY, CONTENT_MODEL_WIKIBASE_QUERY )
+				Utils::getEntityModels()
 			)
 		) {
 			$pageLanguage = $language;
@@ -267,26 +267,26 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
-		if ( $article->getContent()->getModel() === CONTENT_MODEL_WIKIBASE_ITEM ) {
+		if ( Utils::isEntityModel( $article->getContent()->getModel() ) ) {
 			/**
-			 * @var $newItem Item
+			 * @var $newItem Entity
 			 */
-			$newItem = $article->getContent()->getItem();
+			$newEntity = $article->getContent()->getEntity();
 
 			if ( is_null( $revision->getParentId() ) ) {
-				$change = EntityCreation::newFromEntity( $newItem );
+				$change = EntityCreation::newFromEntity( $newEntity );
 			}
 			else {
 				$change = EntityUpdate::newFromEntities(
-					Revision::newFromId( $revision->getParentId() )->getContent()->getItem(),
-					$newItem
+					Revision::newFromId( $revision->getParentId() )->getContent()->getEntity(),
+					$newEntity
 				);
 			}
 
 			$change->setFields( array(
 				'revision_id' => $revision->getId(),
 				'user_id' => $user->getId(),
-				'object_id' => $newItem->getId(),
+				'object_id' => $newEntity->getId(),
 				'time' => $revision->getTimestamp(),
 			) );
 
@@ -460,7 +460,7 @@ final class RepoHooks {
 		$article = $history->getArticle();
 		$rev = new Revision( $row );
 
-		if ( in_array( $history->getTitle()->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) )
+		if ( Utils::isEntityModel( $history->getTitle()->getContentModel() )
 			&& $article->getPage()->getLatest() !== $rev->getID()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 		) {
@@ -495,7 +495,7 @@ final class RepoHooks {
 		$title = $sktemplate->getTitle();
 		$request = $sktemplate->getRequest();
 
-		if ( in_array( $title->getContentModel(), array( CONTENT_MODEL_WIKIBASE_ITEM ) ) ) {
+		if ( Utils::isEntityModel( $title->getContentModel() ) ) {
 			unset( $links['views']['edit'] );
 
 			if ( $title->quickUserCan( 'edit', $sktemplate->getUser() ) ) {
@@ -612,12 +612,7 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
-		$contentModel = $out->getTitle()->getContentModel();
-		// TODO: add a more generic check for this into WikibaseLib's Utils.php
-		if ( $contentModel === CONTENT_MODEL_WIKIBASE_ITEM
-			|| $contentModel === CONTENT_MODEL_WIKIBASE_PROPERTY
-			|| $contentModel === CONTENT_MODEL_WIKIBASE_QUERY
-		) {
+		if ( Utils::isEntityModel( $out->getTitle()->getContentModel() ) ) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
@@ -664,7 +659,7 @@ final class RepoHooks {
 			// we only want to handle links to Wikibase entities differently here
 			|| !in_array(
 				$target->getContentModel(),
-				array( CONTENT_MODEL_WIKIBASE_ITEM, CONTENT_MODEL_WIKIBASE_PROPERTY, CONTENT_MODEL_WIKIBASE_QUERY )
+				Utils::getEntityModels()
 			)
 			// as of MW 1.20 Linker shouldn't support anything but Title anyhow
 			|| ! $target instanceof Title
@@ -772,25 +767,22 @@ final class RepoHooks {
 	 * namespaces.
 	 *
 	 * @param \ApiBase $module The API module being called
-	 * @param \User    $user   The user calling the API
+	 * @param User    $user   The user calling the API
 	 * @param array|string|null   $message Output-parameter holding for the message the call should fail with.
 	 *                            This can be a message key or an array as expected by ApiBase::dieUsageMsg().
 	 *
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
 	 */
-	public static function onApiCheckCanExecute( \ApiBase $module, \User $user, &$message ) {
-		$entity_models = array(
-			CONTENT_MODEL_WIKIBASE_ITEM,
-			CONTENT_MODEL_WIKIBASE_PROPERTY,
-			CONTENT_MODEL_WIKIBASE_QUERY,
-		);
-
+	public static function onApiCheckCanExecute( \ApiBase $module, User $user, &$message ) {
 		if ( $module instanceof \ApiEditPage ) {
 			$params = $module->extractRequestParams();
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
 
-			foreach ( $entity_models as $model ) {
+			foreach ( Utils::getEntityModels() as $model ) {
+				/**
+				 * @var EntityHandler $handler
+				 */
 				$handler = ContentHandler::getForModelID( $model );
 
 				if ( $handler->getEntityNamespace() == $namespace ) {
@@ -807,4 +799,5 @@ final class RepoHooks {
 
 		return true;
 	}
+
 }
