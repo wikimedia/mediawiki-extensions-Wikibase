@@ -33,9 +33,27 @@ if ( !defined( 'Diff_VERSION' ) ) {
 	@include_once( __DIR__ . '/../../Diff/Diff.php' );
 }
 
-if ( !defined( 'Diff_VERSION' ) ) {
-	die( '<b>Error:</b> WikibaseLib depends on the <a href="https://www.mediawiki.org/wiki/Extension:Diff">Diff</a> extension.' );
+// Include the DataValues extension if that hasn't been done yet, since it's required for WikibaseLib to work.
+if ( !defined( 'DataValues_VERSION' ) ) {
+	@include_once( __DIR__ . '/../../DataValues/DataValues.php' );
 }
+
+$dependencies = array(
+	'Diff_VERSION' => 'Diff',
+	'DataValues_VERSION' => 'DataValues',
+	'ValueParser_VERSION' => 'ValueParser',
+	'DataTypes_VERSION' => 'DataTypes',
+);
+
+foreach ( $dependencies as $constant => $name ) {
+	if ( !defined( $constant ) ) {
+		die(
+			'<b>Error:</b> WikibaseLib depends on the <a href="https://www.mediawiki.org/wiki/Extension:'
+				. $name . '">' . $name . '</a> extension.');
+	}
+}
+
+unset( $dependencies );
 
 define( 'WBL_VERSION', '0.1 alpha' );
 
@@ -86,9 +104,6 @@ $wgAutoloadClasses['Wikibase\SiteLink'] 			= $dir . 'includes/SiteLink.php';
 $wgAutoloadClasses['Wikibase\Statement'] 			= $dir . 'includes/Statement.php';
 $wgAutoloadClasses['Wikibase\StatementObject'] 		= $dir . 'includes/StatementObject.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
-
-$wgAutoloadClasses['DataValue\DataValue'] 			= $dir . 'includes/DataValue.php';
-$wgAutoloadClasses['DataValue\DataValueObject'] 	= $dir . 'includes/DataValue.php';
 
 // includes/changes
 $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php';
