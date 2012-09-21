@@ -112,8 +112,8 @@ final class RepoHooks {
 			'content/EntityHandler',
 			'content/ItemContent',
 			'content/ItemHandler',
-			//'content/PropertyContent', // disabled for phase 1 beta
-			//'content/PropertyHandler', // disabled for phase 1 beta
+			'content/PropertyContent',
+			'content/PropertyHandler',
 			'content/QueryContent',
 			'content/QueryHandler',
 
