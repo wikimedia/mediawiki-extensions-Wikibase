@@ -453,22 +453,27 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 
 		deferred
 		.done( function( response ) {
+			var didSaveAction = apiAction === self.API_ACTION.SAVE || apiAction === self.API_ACTION.SAVE_TO_REMOVE;
+
+			if( didSaveAction ) {
+				var responseVal = self._getValueFromApiResponse( response.item );
+				if( responseVal !== null ) { // set normalized value from response if supported by API module
+					// when saving, this is the 2nd time we set the value but this time right (normalized)!
+					// the first time, this happens in _reTransform where we make sure all interfaces stop editing.
+					self.setValue( responseVal );
+				}
+
+				if( mw.config.get( 'wbItemId' ) === null ) {
+					// if the 'save' process will create a new item, trigger the event!
+					$( window.wikibase ).triggerHandler( 'newItemCreated', response.item );
+				}
+			}
+
 			// fade out wait text
 			waitMsg.fadeOut( 400, function() {
 				self._subject.removeClass( self.UI_CLASS + '-waiting' );
 
-				if( apiAction === self.API_ACTION.SAVE || apiAction === self.API_ACTION.SAVE_TO_REMOVE ) {
-					var responseVal = self._getValueFromApiResponse( response.item );
-					if( responseVal !== null ) {
-						// set normalized value from response if supported by API module
-						self.setValue( responseVal );
-					}
-
-					if( mw.config.get( 'wbItemId' ) === null ) {
-						// if the 'save' process will create a new item, trigger the event!
-						$( window.wikibase ).triggerHandler( 'newItemCreated', response.item );
-					}
-
+				if( didSaveAction ) {
 					waitMsg.remove();
 					self._toolbar._elem.fadeIn( 300 ); // only re-display toolbar if value wasn't removed
 				}
