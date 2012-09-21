@@ -36,12 +36,6 @@ class ApiLinkTitles extends Api {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
-		if ( $params['gettoken'] ) {
-			$this->addTokenToResult( $user->getEditToken() );
-			$this->getResult()->addValue( null, 'success', (int)true );
-			return;
-		}
-
 		// This is really already done with needsToken()
 		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-session-failure' )->text(), 'session-failure' );
@@ -236,10 +230,10 @@ class ApiLinkTitles extends Api {
 			'fromtitle' => array( 'Title of the page to associate.',
 				"Use together with 'fromsite' to make a complete sitelink."
 			),
-			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
-				'During a normal reply a token can be returned spontaneously and the requester should',
-				'then start using the new token from the next request, possibly when repeating a failed',
-				'request.'
+			'token' => array( 'A "edittoken" token previously obtained through the token module (prop=info).',
+				'Later it can be implemented a mechanism where a token can be returned spontaneously',
+				'and the requester should then start using the new token from the next request, possibly when',
+				'repeating a failed request.'
 			),
 		) );
 	}
