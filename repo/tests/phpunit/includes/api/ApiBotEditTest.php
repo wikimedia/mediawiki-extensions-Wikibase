@@ -109,14 +109,30 @@ class ApiBotEditTest extends \ApiTestCase {
 		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
-					'action' => 'wbsetitem',
-					'gettoken' => '' ),
+					'action' => 'query',
+					'prop' => 'info',
+					'titles' => 'Main Page', // any page goes
+					'intoken' => 'edit' ),
 				null,
 				false,
 				self::$users['wbbot']->user
 			);
 
-			$req['token'] = $first[0]['wbsetitem']['itemtoken'];
+			$pages = $first[0]["query"]["pages"];
+			foreach ( $pages as $id => $page ) {
+				if ( isset( $page['edittoken'] ) ) {
+					$req['token'] = $page["edittoken"];
+					break;
+				}
+			}
+			$this->assertEquals(
+				34, strlen( $req['token'] ),
+				"The length of the token is not 34 chars"
+			);
+			$this->assertRegExp(
+				'/\+\\\\$/', $req['token'],
+				"The final chars of the token is not '+\\'"
+			);
 		}
 		$req = array_merge(
 			$req,
@@ -147,15 +163,30 @@ class ApiBotEditTest extends \ApiTestCase {
 		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
 			$first = $this->doApiRequest(
 				array(
-					'action' => 'wbsetitem',
-					'gettoken' => ''
-				),
+					'action' => 'query',
+					'prop' => 'info',
+					'titles' => 'Main Page', // any page goes
+					'intoken' => 'edit' ),
 				null,
 				false,
 				self::$users['wbbot']->user
 			);
 
-			$req['token'] = $first[0]['wbsetitem']['itemtoken'];
+			$pages = $first[0]["query"]["pages"];
+			foreach ( $pages as $id => $page ) {
+				if ( isset( $page['edittoken'] ) ) {
+					$req['token'] = $page["edittoken"];
+					break;
+				}
+			}
+			$this->assertEquals(
+				34, strlen( $req['token'] ),
+				"The length of the token is not 34 chars"
+			);
+			$this->assertRegExp(
+				'/\+\\\\$/', $req['token'],
+				"The final chars of the token is not '+\\'"
+			);
 		}
 
 		$req = array_merge(
