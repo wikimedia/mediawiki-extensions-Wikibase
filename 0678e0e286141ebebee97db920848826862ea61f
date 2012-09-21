@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAS3///3w\u003d",
+        "filename": "lib/includes/site/MediaWikiSite.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-21T10:37:03Z",
+      "side": 1,
+      "message": "plz update the documentation as well. fix is working.",
+      "revId": "0678e0e286141ebebee97db920848826862ea61f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
