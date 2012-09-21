@@ -107,11 +107,15 @@ abstract class EntityHandler extends \ContentHandler {
 	public abstract function getEntityPrefix();
 
 	/**
+	 * @see EntityHandler::getEntityNamespace
+	 *
 	 * @since 0.1
 	 *
 	 * @return integer
 	 */
-	public abstract function getEntityNamespace();
+	final public function getEntityNamespace() {
+		return Utils::getEntityNamespace( $this->getModelID() );
+	}
 
 	/**
 	 * @see ContentHandler::canBeUsedOn();

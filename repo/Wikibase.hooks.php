@@ -21,6 +21,33 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html;
 final class RepoHooks {
 
 	/**
+	 * Handler for the SetupAfterCache hook, completing setup of
+	 * content and namespace setup.
+	 *
+	 * @note: $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this point
+	 *        and should no longer be touched.
+	 */
+	public static function onSetupAfterCache() {
+		global $wgNamespaceContentModels;
+
+		$namespaces = Settings::get( 'entityNamespaces' );
+
+		if ( empty( $namespaces ) ) {
+			throw new \MWException( 'Wikibase: Incomplete configuration: '
+				. '$egWBSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
+				. 'See ExampleSettings.php for details and examples.');
+		}
+
+		foreach ( $namespaces as $model => $ns ) {
+			if ( !isset( $wgNamespaceContentModels[$ns] ) ) {
+				$wgNamespaceContentModels[$ns] = $model;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Schema update to set up the needed database tables.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
 	 *
@@ -200,18 +227,21 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Allows overriding if the pages in a certain namespace can be moved or not.
+	 * Handler for the NamespaceIsMovable hook.
+	 *
+	 * Implemented to prevent moving pages that are in an entity namespace.
+	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NamespaceIsMovable
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $index
+	 * @param integer $ns Namespace ID
 	 * @param boolean $movable
 	 *
 	 * @return boolean
 	 */
-	public static function onNamespaceIsMovable( $index, &$movable ) {
-		if ( in_array( $index, array( WB_NS_DATA, WB_NS_DATA_TALK ) ) ) {
+	public static function onNamespaceIsMovable( $ns, &$movable ) {
+		if ( Utils::isEntityNamespace( $ns ) ) {
 			$movable = false;
 		}
 
@@ -274,55 +304,31 @@ final class RepoHooks {
 	 *
 	 * @return boolean
 	 */
-	public static function onArticleDeleteComplete( WikiPage &$wikiPage, User &$user, $reason, $id ) {
-		// This is a temporary hack since the archive table does not correctly have the data we need.
-		// Once this is fixed this can go, and we can use the commented out code later in this method.
-		if ( $wikiPage->getTitle()->getNamespace() !== WB_NS_DATA ) {
+	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
+		\Content $content = null, \LogEntryBase $logEntry = null
+	) {
+
+		if ( $content === null ) {
+			throw new \MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
+		}
+
+		// Bail out if we are not in an entity namespace
+		if ( !Utils::isEntityNamespace( $wikiPage->getTitle()->getNamespace() ) ) {
 			return true;
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$item = $content->getItem();
+		$change = EntityDeletion::newFromEntity( $item );
 
-		$archiveEntry = $dbw->selectRow(
-			'archive',
-			array(
-				'ar_user',
-				'ar_text_id',
-				'ar_rev_id',
-				'ar_timestamp',
-				'ar_content_format',
-			),
-			array(
-				'ar_page_id' => $id,
-				// 'ar_content_model' => CONTENT_MODEL_WIKIBASE_ITEM,
-			),
-			__METHOD__
-		);
+		$change->setFields( array(
+			//'previous_revision_id' => $wikiPage->getLatest(),
+			'revision_id' => 0, // there's no current revision
+			'user_id' => $user->getId(),
+			'object_id' => $item->getId(),
+			'time' => $logEntry->getTimestamp(),
+		) );
 
-		if ( $archiveEntry !== false ) {
-			$textEntry = $dbw->selectRow(
-				'text',
-				'old_text',
-				array( 'old_id' => $archiveEntry->ar_text_id ),
-				__METHOD__
-			);
-
-			if ( $textEntry !== false ) {
-				$itemHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-				$itemContent = $itemHandler->unserializeContent( $textEntry->old_text/* , $archiveEntry->ar_content_format */ );
-				$item = $itemContent->getItem();
-				$change = EntityDeletion::newFromEntity( $item );
-
-				$change->setFields( array(
-					'revision_id' => $archiveEntry->ar_rev_id,
-					'user_id' => $archiveEntry->ar_user,
-					'object_id' => $item->getId(),
-					'time' => $archiveEntry->ar_timestamp,
-				) );
-
-				ChangeNotifier::singleton()->handleChange( $change );
-			}
-		}
+		ChangeNotifier::singleton()->handleChange( $change );
 
 		return true;
 	}
@@ -423,6 +429,8 @@ final class RepoHooks {
 					31337,
 					720101010,
 				),
+
+				'entityNamespaces' => array(),
 			)
 		);
 
@@ -554,10 +562,12 @@ final class RepoHooks {
 
 		$dbw = wfGetDB( DB_MASTER );
 
+		$namespaceList = $dbw->makeList(  Utils::getEntityNamespaces(), LIST_COMMA );
+
 		$dbw->deleteJoin(
 			'revision', 'page',
 			'rev_page', 'page_id',
-			array( 'page_namespace' => WB_NS_DATA )
+			array( 'page_namespace IN ( ' . $namespaceList . ')' )
 		);
 
 		$reportMessage( "done!\n" );
@@ -566,7 +576,7 @@ final class RepoHooks {
 
 		$dbw->delete(
 			'page',
-			array( 'page_namespace' => WB_NS_DATA )
+			array( 'page_namespace IN ( ' . $namespaceList . ')' )
 		);
 
 		$reportMessage( "done!\n" );

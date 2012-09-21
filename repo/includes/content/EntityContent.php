@@ -275,7 +275,7 @@ abstract class EntityContent extends \AbstractContent {
 
 		if ( !$title ) {
 			if ( !$dummyTitle ) {
-				$dummyTitle = Title::makeTitleSafe( WB_NS_DATA, '/' );
+				$dummyTitle = Title::makeTitleSafe( $this->getContentHandler()->getEntityNamespace(), '/' );
 			}
 
 			$title = $dummyTitle;
