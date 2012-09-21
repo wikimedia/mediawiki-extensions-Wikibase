@@ -4,12 +4,27 @@ namespace Wikibase\Test;
 use Wikibase\ClaimObject as ClaimObject;
 use Wikibase\Claim as Claim;
 use Wikibase\Snak as Snak;
-use \DataValue\DataValueObject as DataValueObject;
+use \DataValue\StringValue as StringValue;
 use \Wikibase\SnakList as SnakList;
 use \Wikibase\Snaks as Snaks;
 
 /**
  * Tests for the Wikibase\ClaimObject class.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -36,7 +51,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		$argLists[] = array(
 			new \Wikibase\InstanceOfSnak( 42 ),
 			new \Wikibase\SnakList( array(
-				new \Wikibase\PropertyValueSnak( 1, new DataValueObject() ),
+				new \Wikibase\PropertyValueSnak( 1, new StringValue( 'a' ) ),
 				new \Wikibase\PropertySomeValueSnak( 2 ),
 				new \Wikibase\PropertyNoValueSnak( 3 )
 			) )
@@ -85,7 +100,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
-		$snak = new \Wikibase\PropertyValueSnak( 43, new DataValueObject() );
+		$snak = new \Wikibase\PropertyValueSnak( 43, new StringValue( 'a' ) );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
@@ -101,12 +116,12 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 
-		$qualifiers = new SnakList( array( new \Wikibase\PropertyValueSnak( 42, new DataValueObject() ) ) );
+		$qualifiers = new SnakList( array( new \Wikibase\PropertyValueSnak( 42, new StringValue( 'a' ) ) ) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 
 		$qualifiers = new SnakList( array(
-			new \Wikibase\PropertyValueSnak( 42, new DataValueObject() ),
+			new \Wikibase\PropertyValueSnak( 42, new StringValue( 'a' ) ),
 			new \Wikibase\PropertySomeValueSnak( 2 ),
 			new \Wikibase\PropertyNoValueSnak( 3 )
 		) );
