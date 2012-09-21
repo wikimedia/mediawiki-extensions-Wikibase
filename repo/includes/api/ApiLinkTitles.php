@@ -115,7 +115,7 @@ class ApiLinkTitles extends Api {
 			$this->dieUsage( $this->msg( 'wikibase-api-no-common-item' )->text(), 'no-common-item' );
 		}
 
-		$this->addSiteLinksToResult( $return, 'item' );
+		$this->addSiteLinksToResult( $return, 'entity' );
 
 		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 		$summary = '';
@@ -137,7 +137,7 @@ class ApiLinkTitles extends Api {
 
 		if ( $itemContent !== null ) {
 			$this->getResult()->addValue(
-				'item',
+				'entity',
 				'id', $itemContent->getItem()->getId()
 			);
 		}

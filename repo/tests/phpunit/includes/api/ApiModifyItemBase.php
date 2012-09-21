@@ -390,11 +390,11 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			self::$users['wbeditor']->user
 		);
 
-		if ( !isset( $res['success'] ) || !isset( $res['item'] ) ) {
+		if ( !isset( $res['success'] ) || !isset( $res['entity'] ) ) {
 			throw new \MWException( "failed to create item" );
 		}
 
-		return $res['item'];
+		return $res['entity'];
 	}
 
 	/**
@@ -461,7 +461,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 				'ids' => $id )
 		);
 
-		return $res['items'][$id];
+		return $res['entities'][$id];
 	}
 
 	/**

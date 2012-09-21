@@ -34,7 +34,7 @@
 		widgetEventPrefix: 'tagadata',
 
 		options: {
-			itemName: 'item',
+			itemName: 'entity',
 			fieldName: 'tags',
 			availableTags: [],
 

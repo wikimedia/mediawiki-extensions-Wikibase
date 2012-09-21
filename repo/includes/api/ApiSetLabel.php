@@ -47,7 +47,7 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 				$itemContent->getItem()->removeLabel( $language );
 				$labels = array( $language => '' );
 			}
-			$this->addLabelsToResult( $labels, 'item' );
+			$this->addLabelsToResult( $labels, 'entity' );
 		}
 
 		return $status;

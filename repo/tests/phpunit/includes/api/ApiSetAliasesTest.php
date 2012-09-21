@@ -91,14 +91,14 @@ class ApiSetAliasesTest extends ApiModifyItemBase {
 
 		// check return value --------------------------------------------------
 		if ( $expected ) {
-			$this->assertSuccess( $apiResponse, 'item', 'aliases' );
+			$this->assertSuccess( $apiResponse, 'entity', 'aliases' );
 
-			$aliases = self::flattenArray( $apiResponse['item']['aliases'], 'language', 'value', true );
+			$aliases = self::flattenArray( $apiResponse['entity']['aliases'], 'language', 'value', true );
 			$actual = isset( $aliases[ $langCode ] ) ? $aliases[ $langCode ] : array();
 
 			$this->assertArrayEquals( $expected, $actual );
 		} else {
-			$this->assertFalse( !empty( $apiResponse['item']['aliases'] ), "found aliases when there should be none" );
+			$this->assertFalse( !empty( $apiResponse['entity']['aliases'] ), "found aliases when there should be none" );
 		}
 
 		// check item in database --------------------------------------------------

@@ -139,14 +139,14 @@ class ApiLinkTitlesTest extends ApiModifyItemBase {
 			}
 
 			// check the response -------------------------------
-			$this->assertSuccess( $res, 'item', 'sitelinks', 0 );
+			$this->assertSuccess( $res, 'entity', 'sitelinks', 0 );
 			if ( $handle ) {
-				$this->assertEquals( 1, count( $res['item']['sitelinks'] ), "expected exactly one sitelinks structure" );
+				$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
 			}
 			else {
-				$this->assertEquals( 2, count( $res['item']['sitelinks'] ), "expected exactly two sitelinks structure" );
+				$this->assertEquals( 2, count( $res['entity']['sitelinks'] ), "expected exactly two sitelinks structure" );
 			}
-			foreach ( $res['item']['sitelinks'] as $link ) {
+			foreach ( $res['entity']['sitelinks'] as $link ) {
 				$this->assertTrue( $fromsite === $link['site'] || $tosite === $link['site'] );
 				$this->assertTrue( $fromtitle === $link['title'] || $totitle === $link['title'] );
 			}

@@ -116,10 +116,10 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			self::$users['wbeditor']->user
 		);
 
-		$this->assertSuccess( $res, 'item', 'id' );
-		$this->assertItemEquals( $expect, $res['item'] );
+		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertItemEquals( $expect, $res['entity'] );
 
-		$id = $res['item']['id'];
+		$id = $res['entity']['id'];
 
 		// ---- check failure to set the same item again, without id -----------
 		$data = array( 'labels' => array(
@@ -160,9 +160,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			self::$users['wbeditor']->user
 		);
 
-		$this->assertSuccess( $res, 'item', 'id' );
-		$this->assertSuccess( $res, 'item', 'lastrevid' );
-		$this->assertItemEquals( $expect, $res['item'] );
+		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertSuccess( $res, 'entity', 'lastrevid' );
+		$this->assertItemEquals( $expect, $res['entity'] );
 
 		// @todo: split the below into a separate function
 		// ---- set the same item again, with with fields in the json that should be ignored-----------
@@ -191,8 +191,8 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					false,
 					self::$users['wbeditor']->user
 				);
-				$this->assertSuccess( $res, 'item', 'id' );
-				$this->assertItemEquals( $expect, $res['item'] );
+				$this->assertSuccess( $res, 'entity', 'id' );
+				$this->assertItemEquals( $expect, $res['entity'] );
 			}
 			catch ( \UsageException $e ) {
 				$this->fail( "Got unexpected exception: $e" );
@@ -241,12 +241,12 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			false,
 			self::$users['wbeditor']->user
 		);
-		$this->assertSuccess( $query, 'items', $id, 'id' );
+		$this->assertSuccess( $query, 'entities', $id, 'id' );
 		$goodData = array(
-			array( 'pageid' => $query['items'][$id]['pageid'] ),
-			array( 'ns' => $query['items'][$id]['ns'] ),
-			array( 'title' => $query['items'][$id]['title'] ),
-			array( 'lastrevid' => $query['items'][$id]['lastrevid'] ),
+			array( 'pageid' => $query['entities'][$id]['pageid'] ),
+			array( 'ns' => $query['entities'][$id]['ns'] ),
+			array( 'title' => $query['entities'][$id]['title'] ),
+			array( 'lastrevid' => $query['entities'][$id]['lastrevid'] ),
 		);
 		foreach ( $goodData as $data ) {
 			try {
@@ -263,8 +263,8 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					false,
 					self::$users['wbeditor']->user
 				);
-				$this->assertSuccess( $res, 'item', 'id' );
-				$this->assertItemEquals( $expect, $res['item'] );
+				$this->assertSuccess( $res, 'entity', 'id' );
+				$this->assertItemEquals( $expect, $res['entity'] );
 			}
 			catch ( \UsageException $e ) {
 				$this->fail( "Got unexpected exception: $e" );
@@ -289,8 +289,8 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					false,
 					self::$users['wbeditor']->user
 				);
-				$this->assertSuccess( $res, 'item', 'id' );
-				$this->assertItemEquals( array( 'id' => $id ), $res['item'] );
+				$this->assertSuccess( $res, 'entity', 'id' );
+				$this->assertItemEquals( array( 'id' => $id ), $res['entity'] );
 			}
 			catch ( \UsageException $e ) {
 				$this->fail( "Got unexpected exception: $e" );
@@ -598,10 +598,10 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 
 		// check return value -------------------------------------------
-		$this->assertSuccess( $res, 'item' );
-		$item = $res['item'];
-		$this->assertSuccess( $res, 'item', 'id' );
-		$this->assertSuccess( $res, 'item', 'lastrevid' );
+		$this->assertSuccess( $res, 'entity' );
+		$item = $res['entity'];
+		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertSuccess( $res, 'entity', 'lastrevid' );
 
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {

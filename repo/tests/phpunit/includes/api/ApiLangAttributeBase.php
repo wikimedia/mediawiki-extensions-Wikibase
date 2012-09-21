@@ -80,7 +80,7 @@ abstract class ApiLangAttributeBase extends ApiModifyItemBase {
 
 		$this->assertSuccess( $apiResponse );
 
-		$item = $apiResponse['item'];
+		$item = $apiResponse['entity'];
 		$section = "{$attr}s";
 		$record = null;
 

@@ -269,10 +269,10 @@ class ApiSetItem extends ApiModifyItem {
 
 		$item = $itemContent->getItem();
 
-		$this->addLabelsToResult( $item->getLabels(), 'item' );
-		$this->addDescriptionsToResult( $item->getDescriptions(), 'item' );
-		$this->addAliasesToResult( $item->getAllAliases(), 'item' );
-		$this->addSiteLinksToResult( $item->getSiteLinks(), 'item' );
+		$this->addLabelsToResult( $item->getLabels(), 'entity' );
+		$this->addDescriptionsToResult( $item->getDescriptions(), 'entity' );
+		$this->addAliasesToResult( $item->getAllAliases(), 'entity' );
+		$this->addSiteLinksToResult( $item->getSiteLinks(), 'entity' );
 
 		return true;
 	}

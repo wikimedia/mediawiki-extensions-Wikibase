@@ -191,7 +191,7 @@ abstract class ApiModifyItem extends Api {
 				$allowed = $itemContent->userCan( 'delete' );
 				if ( $allowed ) {
 					// TODO: Delete an existing object
-					$this->getResult()->addValue( 'item', 'deleted', "" );
+					$this->getResult()->addValue( 'entity', 'deleted', "" );
 					// Give an error message
 					$this->dieUsage( $status->getWikiText( 'wikibase-api-not-implemented' ), 'not-implemented' );
 				}
@@ -202,7 +202,7 @@ abstract class ApiModifyItem extends Api {
 			}
 			else {
 				// Just give a message that it was newer created
-				$this->getResult()->addValue( 'item', 'newercreated', "" );
+				$this->getResult()->addValue( 'entity', 'newercreated', "" );
 			}
 		}
 		else {
@@ -253,15 +253,19 @@ abstract class ApiModifyItem extends Api {
 			}
 
 			$this->getResult()->addValue(
-				'item',
+				'entity',
 				'id', $itemContent->getItem()->getId()
+			);
+			$this->getResult()->addValue(
+				'entity',
+				'type', $itemContent->getEntity()->getType()
 			);
 			$page = $itemContent->getWikiPage();
 			if ( $page->exists() ) {
 				$revision = $page->getRevision();
 				if ( $revision !== null ) {
 					$this->getResult()->addValue(
-						'item',
+						'entity',
 						'lastrevid', intval( $revision->getId() )
 					);
 				}
@@ -276,7 +280,7 @@ abstract class ApiModifyItem extends Api {
 
 				if ( $normalized !== array() ) {
 					$this->getResult()->addValue(
-						'item',
+						'entity',
 						'normalized', $normalized
 					);
 				}
