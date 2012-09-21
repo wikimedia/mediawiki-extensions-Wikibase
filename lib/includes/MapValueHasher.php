@@ -54,7 +54,7 @@ class MapValueHasher implements MapHasher {
 			sort( $hashes );
 		}
 
-		return md5( implode( '|', $hashes ) );
+		return sha1( implode( '|', $hashes ) );
 	}
 
 }
