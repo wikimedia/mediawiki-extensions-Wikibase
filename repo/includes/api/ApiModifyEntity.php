@@ -276,11 +276,6 @@ abstract class ApiModifyEntity extends Api {
 			}
 		}
 
-		if ( $success && $params['gettoken'] ) {
-			$user = $this->getUser();
-			$this->addTokenToResult( $user->getEditToken() );
-		}
-
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -458,12 +453,11 @@ abstract class ApiModifyEntity extends Api {
 			'type' => array( 'A specific type of entity.',
 				"Will default to 'item' as this will be the most common type."
 			),
-			'token' => array( 'A "wbentitytoken" token previously obtained through the gettoken parameter.', // or prop=info,
-				'During a normal reply a token can be returned spontaneously and the requester should',
-				'then start using the new token from the next request, possibly when repeating a failed',
-				'request.'
+			'token' => array( 'A "edittoken" token previously obtained through the token module (prop=info).',
+				//'Later it can be implemented a mechanism where a token can be returned spontaneously',
+				//'and the requester should then start using the new token from the next request, possibly when',
+				//'repeating a failed request.'
 			),
-			// This is similar to ApiEditPage.php and what it uses at line 527
 			'bot' => array( 'Mark this edit as bot',
 				'This URL flag will only be respected if the user belongs to the group "bot".'
 			),

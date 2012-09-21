@@ -235,10 +235,10 @@ class ApiLinkTitles extends Api {
 			'fromtitle' => array( 'Title of the page to associate.',
 				"Use together with 'fromsite' to make a complete sitelink."
 			),
-			'token' => array( 'A "wbitemtoken" token previously obtained through the gettoken parameter.', // or prop=info,
-				'During a normal reply a token can be returned spontaneously and the requester should',
-				'then start using the new token from the next request, possibly when repeating a failed',
-				'request.'
+			'token' => array( 'A "edittoken" token previously obtained through the token module (prop=info).',
+				'Later it can be implemented a mechanism where a token can be returned spontaneously',
+				'and the requester should then start using the new token from the next request, possibly when',
+				'repeating a failed request.'
 			),
 		) );
 	}
