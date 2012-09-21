@@ -22,14 +22,14 @@ define( 'WB_NS_QUERY_TALK', $baseNs + 5 );
 
 // Register extra namespaces.
 $wgExtraNamespaces[WB_NS_ITEM] = 'Item';
-$wgExtraNamespaces[WB_NS_ITEM] = 'Item_talk';
+$wgExtraNamespaces[WB_NS_ITEM_TALK] = 'Item_talk';
 $wgExtraNamespaces[WB_NS_PROPERTY] = 'Property';
 $wgExtraNamespaces[WB_NS_PROPERTY_TALK] = 'Property_talk';
 $wgExtraNamespaces[WB_NS_QUERY] = 'Query';
 $wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
 
 // Tell Wikibase which namespace to use for which kind of entity
-$egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = NS_MAIN;
+$egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = WB_NS_ITEM;
 $egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY;
 $egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
 
