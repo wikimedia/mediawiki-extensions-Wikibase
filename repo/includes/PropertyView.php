@@ -1,11 +1,8 @@
 <?php
-/*
- * NOTE: This class is disabled in the phase 1 beta branch!
- *       See $wgAutoloadClasses in Wikibase.php
- */
 
 namespace Wikibase;
 use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, Site, MediaWikiSite;
+
 /**
  * Class for creating views for Wikibase\Property instances.
  * For the Wikibase\Property this basically is what the Parser is for WikitextContent.

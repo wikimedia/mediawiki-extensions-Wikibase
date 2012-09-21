@@ -1,10 +1,5 @@
 <?php
 
-/*
- * NOTE: This class is disabled in the phase 1 beta branch!
- *       See $wgSpecialPages and $wgAutoloadClasses in Wikibase.php
- */
-
 /**
  * Page for creating new Wikibase properties.
  *
