@@ -34,10 +34,7 @@ class PropertyContent extends EntityContent {
 	 * @param Property $property
 	 */
 	public function __construct( Property $property ) {
-		// TODO: Update this, or change it back
 		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY );
-		//parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
-
 		$this->property = $property;
 	}
 

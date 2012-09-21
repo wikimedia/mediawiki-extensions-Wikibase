@@ -34,7 +34,7 @@ class QueryContent extends EntityContent {
 	 * @param Query $query
 	 */
 	public function __construct( Query $query ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
+		parent::__construct( CONTENT_MODEL_WIKIBASE_QUERY );
 
 		$this->query = $query;
 	}
