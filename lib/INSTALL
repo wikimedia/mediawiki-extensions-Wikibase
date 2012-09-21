@@ -9,8 +9,13 @@ Latest version of the install file: https://gerrit.wikimedia.org/r/gitweb?p=medi
 WikibaseLib requires:
 
 * MediaWiki 1.20 or later
-* Diff 0.1 or later
 * PHP 5.3 or later
+* Diff 0.1 or later
+* DataValues 0.1 or later
+* DataTypes 0.1 or later
+* ValueParsers 0.1 or later
+
+(The last 3 can all be found in the DataValues repository.)
 
 And one of the following:
 
