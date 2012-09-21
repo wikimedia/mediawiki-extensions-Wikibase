@@ -126,18 +126,28 @@
 		 *
 		 * @param String incomplete
 		 * @param String complete
-		 * @return Integer number of replaced characters
+		 * @return Integer number of characters added (and highlighted) at the end of the incomplete string
 		 */
 		autocompleteString: function( incomplete, complete ) {
+			// if nothing to complete, just return and don't move the curser (can be annoying in this situation)
+			if( incomplete === complete ) {
+				return 0;
+			}
+
 			// The following if-statement is a work-around for a technically unexpected search
 			// behaviour: e.g. in English Wikipedia opensearch for "Allegro [...]" returns "Allegro"
 			// as first result instead of "Allegro (music)", so auto-completion should probably be
 			// prevented here since it would always reset the input box's value to "Allegro"
 			if ( complete.toLowerCase().indexOf( this.element.val().toLowerCase() ) !== -1 ) {
+				// set value to complete value...
 				this.element.val( complete );
+
+				// ... and select the suggested, not manually typed part of the value
 				var start = incomplete.length,
 					end = complete.length,
 					node = this.element[0];
+
+				// highlighting takes some browser specific implementation
 				if( node.createTextRange ) {
 					var selRange = node.createTextRange();
 					selRange.collapse( true );
@@ -145,7 +155,9 @@
 					selRange.moveEnd( 'character', end);
 					selRange.select();
 				} else if( node.setSelectionRange ) {
-					node.setSelectionRange( start, end );
+					// make a 'backward' selection so pressing arrow left won't put the cursor near the selections
+					// end but rather at the typing position
+					node.setSelectionRange( start, end, 'backward' );
 				} else if( node.selectionStart ) {
 					node.selectionStart = start;
 					node.selectionEnd = end;
