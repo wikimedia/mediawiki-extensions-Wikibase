@@ -143,7 +143,7 @@
 				!self.subject.stopEditing(false), // close edit mode for next test
 				'Stopped edit mode'
 			);
-		}
+		};
 
 		addRemoveItemsInEditModeTest(
 			[],           // initial
