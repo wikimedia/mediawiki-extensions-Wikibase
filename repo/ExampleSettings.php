@@ -48,11 +48,10 @@ $wgGroupPermissions['wbeditor']['item-set'] = true;
 
 
 
-/** Alternative settings, using the main namespace for items.
- *
- * Note: if you do that, several core tests may fail. Parser tests for instance
- * assume that the main namespace contains wikitext.
- */
+/*
+// Alternative settings, using the main namespace for items.
+// Note: if you do that, several core tests may fail. Parser tests for instance
+// assume that the main namespace contains wikitext.
 $baseNs = 100;
 
 // NOTE: do *not* define WB_NS_ITEM and WB_NS_ITEM_TALK when using a core namespace for items!
@@ -77,3 +76,4 @@ $egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPE
 $egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY; // use custom namespace
 
 // No need to mess with $wgNamespacesToBeSearchedDefault, the main namespace will be searched per default.
+*/
