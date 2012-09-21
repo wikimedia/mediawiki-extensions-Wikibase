@@ -52,7 +52,7 @@ class MediaWikiSite extends SiteObject {
 	 * @note  : This actually makes an API request to the remote site, so beware that this function is slow and depends
 	 *          on an external service.
 	 *
-	 * @note  : If MW_PHPUNIT_TEST is defined or $egWBRemoteTitleNormalization is set to false, the call to the
+	 * @note  : If MW_PHPUNIT_TEST is defined, the call to the
 	 *          external site is skipped, and the title is normalized using the local normalization rules as
 	 *          implemented by the Title class.
 	 *
