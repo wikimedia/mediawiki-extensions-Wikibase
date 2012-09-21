@@ -2,9 +2,27 @@
 
 namespace Wikibase\Test;
 use Wikibase\TermCache as TermCache;
+use Wikibase\ItemContent as ItemContent;
+use Wikibase\ItemObject as ItemObject;
+use Wikibase\Item as Item;
 
 /**
  * Tests for the Wikibase\TermCache implementing classes.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -31,9 +49,11 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider instanceProvider
+	 *
+	 * @param TermCache $lookup
 	 */
 	public function testGetItemIdsForLabel( TermCache $lookup ) {
-		$item0 = \Wikibase\ItemObject::newEmpty();
+		$item0 = ItemObject::newEmpty();
 
 		$item0->setLabel( 'en', 'foobar' );
 		$item0->setLabel( 'de', 'foobar' );
@@ -43,12 +63,12 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$item1->setLabel( 'nl', 'o_O' );
 		$item1->setDescription( 'en', 'foo bar baz' );
 
-		$content0 = \Wikibase\ItemContent::newEmpty();
+		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
 		$content0->save( '', null, EDIT_NEW );
 		$id0 = $content0->getItem()->getId();
 
-		$content1 = \Wikibase\ItemContent::newEmpty();
+		$content1 = ItemContent::newEmpty();
 		$content1->setItem( $item1 );
 
 		$content1->save( '', null, EDIT_NEW );
@@ -87,9 +107,11 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider instanceProvider
+	 *
+	 * @param TermCache $lookup
 	 */
 	public function testTermExists( TermCache $lookup ) {
-		$item = \Wikibase\ItemObject::newEmpty();
+		$item = ItemObject::newEmpty();
 
 		$item->setLabel( 'en', 'foobarz' );
 		$item->setLabel( 'de', 'foobarz' );
@@ -98,7 +120,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$item->setDescription( 'fr', 'fooz barz bazz' );
 		$item->setAliases( 'nl', array( 'a42', 'b42', 'c42' ) );
 
-		$content = \Wikibase\ItemContent::newEmpty();
+		$content = ItemContent::newEmpty();
 		$content->setItem( $item );
 		$content->save( '', null, EDIT_NEW );
 
@@ -134,20 +156,22 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider instanceProvider
+	 *
+	 * @param TermCache $lookup
 	 */
 	public function testGetMatchingTerms( TermCache $lookup ) {
-		$item0 = \Wikibase\ItemObject::newEmpty();
+		$item0 = ItemObject::newEmpty();
 		$item0->setLabel( 'en', 'getmatchingterms-0' );
 
-		$item1 = \Wikibase\ItemObject::newEmpty();
+		$item1 = ItemObject::newEmpty();
 		$item1->setLabel( 'nl', 'getmatchingterms-1' );
 
-		$content0 = \Wikibase\ItemContent::newEmpty();
+		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
 		$content0->save( '', null, EDIT_NEW );
 		$id0 = $content0->getItem()->getId();
 
-		$content1 = \Wikibase\ItemContent::newEmpty();
+		$content1 = ItemContent::newEmpty();
 		$content1->setItem( $item1 );
 
 		$content1->save( '', null, EDIT_NEW );
@@ -202,6 +226,33 @@ class TermCacheTest extends \MediaWikiTestCase {
 			$this->assertEquals( $expected['termText'], $term['termText'] );
 			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );
 		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param TermCache $lookup
+	 */
+	public function testDeleteTermsForEntity( TermCache $lookup ) {
+		$item = ItemObject::newEmpty();
+
+		$item->setLabel( 'en', 'abc' );
+		$item->setLabel( 'de', 'def' );
+		$item->setLabel( 'nl', 'ghi' );
+		$item->setDescription( 'en', 'testDeleteTermsForEntity' );
+		$item->setAliases( 'fr', array( 'o', '_', 'O' ) );
+
+		$content = ItemContent::newEmpty();
+		$content->setItem( $item );
+		$content->save( '', null, EDIT_NEW );
+
+		$this->assertTrue( $lookup->deleteTermsOfEntity( $item ) );
+
+		$this->assertFalse( $lookup->termExists( 'testDeleteTermsForEntity' ) );
+
+		$ids = $lookup->getItemIdsForLabel( 'abc' );
+
+		$this->assertTrue( !in_array( $content->getItem()->getId(), $ids, true ) );
 	}
 
 }
