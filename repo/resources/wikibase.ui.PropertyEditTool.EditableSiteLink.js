@@ -218,6 +218,38 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 		return params;
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.performApiAction
+	 */
+	performApiAction: function( apiAction ) {
+		var promise = $PARENT.prototype.performApiAction.call( this, apiAction ),
+			self = this;
+
+		// (bug 40399) for site-links we have to get the normalized link from the API result because we can't be sure
+		// of the foreign wiki configuration, even with the normalized title, we still don't know about namespaces!
+		promise.done( function( response ) {
+			var page = self._interfaces.pageName.getValue(),
+				site = wb.getSite( self._interfaces.siteId.getValue() );
+
+			if( page !== '' && site !== null ) {
+				var url = response.item.sitelinks[ site.getGlobalSiteId() ].url,
+					oldFn = site.getUrlTo;
+
+				// overwrite the getUrlTo function of this site object to always return the valid url returned by the
+				// API. This acts as a filter on top of the original function.
+				// TODO/FIXME: this is rather hacky, a real cache should be introduced to wb.Site.getUrlTo, also the
+				//             whole function should change to return a deferred and call the foreign API
+				site.getUrlTo = function( pageTitle ) {
+					if( $.trim( pageTitle ) === page ) {
+						return url;
+					}
+					return oldFn( pageTitle );
+				};
+			}
+		} );
+		return promise;
+	},
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////
