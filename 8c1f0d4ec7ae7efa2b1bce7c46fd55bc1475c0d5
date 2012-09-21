@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///1s\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "njææ..",
+      "parentUuid": "AAAAS3///54\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///50\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "Does it? It shouldn\u0027t. Only wbsetitem (wbsetentity?!) should create an item if it doesn\u0027t exists. Other modules should fail.",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///1g\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Actually the comment is completly off.. ;)",
+      "parentUuid": "AAAAS3///50\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///1Q\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Hm, someone out doing pranks could use this..",
+      "parentUuid": "AAAAS3///5s\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///5o\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "How can that ever happen?",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///1Y\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "It used to be a check for ItemContent, but the reason why it is there is some weird errors way back. It can be moved to wbsetitem I think..",
+      "parentUuid": "AAAAS3///5o\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///0s\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAS3///5k\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///5c\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "This should try to create a new entity, no if.",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///0w\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAS3///5c\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///0Q\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "We are validating these args before we use the same params to get to the entities. One way to solve this is to use submodules that adds necessary methods to do both lookup of entities and do type checking after we have identified the entity. The same class could also provide some output formatting if necessary.\n\nFor now I\u0027m going to leave this as it is, as a rewrite to use submodules are larger than just get this thing up and going with a common base class.",
+      "parentUuid": "AAAAS3///5U\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///5Q\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "Isn\u0027t this already handled by ApiBase?",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///z8\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "This was put in a long time ago due to repeated failure to get ApiBase to work properly. I\u0027ll leave this as it is now, this should be fixed in another patchset.",
+      "parentUuid": "AAAAS3///5Q\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///z0\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "It wasn\u0027t and should have been taken out back then when the permission checks was changed. Removing the fixme is trivial and I do that now.",
+      "parentUuid": "AAAAS3///5M\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///5I\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -166,6 +328,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "This check is the wrong way around. If the entity is new, there is nothing to delete.",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///yQ\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Removing this block for now.",
+      "parentUuid": "AAAAS3///5I\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///yU\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Well, it was actually your argument that we should do this.. ;)",
+      "parentUuid": "AAAAS3///5E\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///5A\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -200,6 +398,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "shouldn\u0027t this be a warning?",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///yY\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "We are more or less not using warnings at all, I think this is better as it is something the UI must act upon.",
+      "parentUuid": "AAAAS3///5A\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///yc\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Changed comment slightly",
+      "parentUuid": "AAAAS3///48\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///44\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -234,6 +468,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "If the page doesn\u0027t exist, something went horribly wrong. Can\u0027t we just assume it does exist? Or throw an exception if it doesn\u0027t?",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///yk\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "After introduction of EditEntity the test can be removed,.. probably.. Can\u0027t see that EditEntity can complete without a page being created, it should die in repoertApiErrors.",
+      "parentUuid": "AAAAS3///44\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///ys\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "To be able to get the normalized version to verify that we actually got the correct entity. This was actually removed a long time ago but reinserted through another patchset. If we remove it we should provide information about the normalization somhow or explicitly state that we do not provide any guarantee that the title used for lookup is in fact identical to the title used in the returned structure.\n\nThis is kept as it was for ApiModifyItem and should be changed in another patchset.",
+      "parentUuid": "AAAAS3///40\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///4w\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -268,6 +538,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "We can probably just kill this.",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///zI\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Not in this patchset, this has huge implications and will create a monsterpatch.",
+      "parentUuid": "AAAAS3///4w\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///zM\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "This has nothing to do with this change, and has been in there a long time. Fix it in another patchset. It seems new but its the ApiModifyItem which had these settings from the beginning.",
+      "parentUuid": "AAAAS3///4s\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///4o\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -302,6 +608,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "Having a setting to turn off the requirement of using POST is handy, but this is kind of confusing.",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///zQ\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "This has nothing to do with this change, and has been in there a long time. Fix it in another patchset. It seems new but its the ApiModifyItem which had these settings from the beginning.",
+      "parentUuid": "AAAAS3///4o\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///zU\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "This has nothing to do with this change, and has been in there a long time. Fix it in another patchset. It seems new but its the ApiModifyItem which had these settings from the beginning.",
+      "parentUuid": "AAAAS3///4k\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///4c\u003d",
         "filename": "repo/includes/api/ApiModifyEntity.php",
         "patchSetId": 2
@@ -336,6 +678,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "Only applicable to items...",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///zc\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Yes, so? It is a method and its used in later subclasses",
+      "parentUuid": "AAAAS3///4c\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -359,6 +719,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///zo\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "It doesn\u0027t really matter, but this isn\u0027t necessary anymore.",
+      "parentUuid": "AAAAS3///4Y\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///4U\u003d",
         "filename": "repo/includes/api/ApiModifyLangAttribute.php",
         "patchSetId": 2
@@ -370,6 +748,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "Why is this implemented in this abstract class? Shouldn\u0027t it just be removed?",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///yI\u003d",
+        "filename": "repo/includes/api/ApiModifyLangAttribute.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Its abstract as not all methods are implemented, but for this specific method it is chained to the parent.",
+      "parentUuid": "AAAAS3///4U\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -393,6 +789,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///yE\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "I don\u0027t think we know enough at this point to say that this can be generalized into a ApiSetEntity.",
+      "parentUuid": "AAAAS3///4A\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///4Q\u003d",
         "filename": "repo/includes/api/ApiSetItem.php",
         "patchSetId": 2
@@ -410,6 +824,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAS3///yA\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "This code will not be reached for other entities than items.",
+      "parentUuid": "AAAAS3///4Q\u003d",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAS3///4M\u003d",
         "filename": "repo/includes/api/ApiSetSiteLink.php",
         "patchSetId": 2
@@ -421,6 +853,24 @@
       "writtenOn": "2012-09-21T09:59:13Z",
       "side": 1,
       "message": "This module can only operate on items. If the Entity is not an Item, a meaningful error should be returned. Seems to cause a fatal error at the moment.",
+      "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAS3///x8\u003d",
+        "filename": "repo/includes/api/ApiSetSiteLink.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-21T15:40:44Z",
+      "side": 1,
+      "message": "Forgot to override findEntity, when this is done this code will not be reached.",
+      "parentUuid": "AAAAS3///4M\u003d",
       "revId": "8c1f0d4ec7ae7efa2b1bce7c46fd55bc1475c0d5",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
