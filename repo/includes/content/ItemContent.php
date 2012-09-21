@@ -103,27 +103,38 @@ class ItemContent extends EntityContent {
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 
 		if ( $status->isOK() ) {
-			$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem() );
-
-			foreach ( $conflicts as $conflict ) {
-				/**
-				 * @var WikiPage $ipsPage
-				 */
-				$conflictingPage = $this->getContentHandler()->getWikiPageForId( $conflict['itemId'] );
-
-				// NOTE: it would be nice to generate the link here and just pass it as HTML,
-				// but Status forces all parameters to be escaped.
-				$status->fatal(
-					'wikibase-error-sitelink-already-used',
-					$conflict['siteId'],
-					$conflict['sitePage'],
-					$conflictingPage->getTitle()->getFullText()
-				);
-			}
+			$this->addSiteLinkConflicts( $status );
 		}
 
 		wfProfileOut( __METHOD__ );
 		return $status;
+	}
+
+	/**
+	 * Adds any sitelink conflicts to the status.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Status $status
+	 */
+	protected function addSiteLinkConflicts( Status $status ) {
+		$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem() );
+
+		foreach ( $conflicts as $conflict ) {
+			/**
+			 * @var WikiPage $ipsPage
+			 */
+			$conflictingPage = $this->getContentHandler()->getWikiPageForId( $conflict['itemId'] );
+
+			// NOTE: it would be nice to generate the link here and just pass it as HTML,
+			// but Status forces all parameters to be escaped.
+			$status->fatal(
+				'wikibase-error-sitelink-already-used',
+				$conflict['siteId'],
+				$conflict['sitePage'],
+				$conflictingPage->getTitle()->getFullText()
+			);
+		}
 	}
 
 	/**
