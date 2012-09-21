@@ -290,7 +290,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	/**
 	 * Gets an item edit token. Returns a cached token if available.
 	 */
-	function getItemToken() {
+	function getItemToken( $title = 'Main Page' ) {
 		$this->init();
 
 		if ( !self::$usetoken ) {
@@ -305,14 +305,22 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 
 		$re = $this->doApiRequest(
 			array(
-				'action' => 'wbsetitem',
-				'gettoken' => '' ),
+				'action' => 'query',
+				'prop' => 'info',
+				'titles' => $title,
+				'intoken' => 'edit' ),
 			null,
 			false,
 			self::$users['wbeditor']->user
 		);
 
-		self::$token = $re[0]["wbsetitem"]["itemtoken"];
+		$pages = $re[0]["query"]["pages"];
+		foreach ( $pages as $id => $page ) {
+			if ( isset( $page['edittoken'] ) ) {
+				self::$token = $re[0]["query"]["pages"];
+				break;
+			}
+		}
 		return self::$token;
 	}
 
