@@ -246,6 +246,8 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$content->setItem( $item );
 		$content->save( '', null, EDIT_NEW );
 
+		$this->assertTrue( $lookup->termExists( 'testDeleteTermsForEntity' ) );
+
 		$this->assertTrue( $lookup->deleteTermsOfEntity( $item ) );
 
 		$this->assertFalse( $lookup->termExists( 'testDeleteTermsForEntity' ) );
@@ -253,6 +255,45 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$ids = $lookup->getItemIdsForLabel( 'abc' );
 
 		$this->assertTrue( !in_array( $content->getItem()->getId(), $ids, true ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param TermCache $lookup
+	 */
+	public function testSaveTermsOfEntity( TermCache $lookup ) {
+		$item = ItemObject::newEmpty();
+		$item->setId( 5684313142 );
+
+		$item->setLabel( 'en', 'abc' );
+		$item->setLabel( 'de', 'def' );
+		$item->setLabel( 'nl', 'ghi' );
+		$item->setDescription( 'en', 'testDeleteTermsForEntity' );
+		$item->setAliases( 'fr', array( 'o', '_', 'O' ) );
+
+		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
+
+		$this->assertTrue( $lookup->termExists(
+			'testDeleteTermsForEntity',
+			TermCache::TERM_TYPE_DESCRIPTION,
+			'en',
+			Item::ENTITY_TYPE
+		) );
+
+		$this->assertTrue( $lookup->termExists(
+			'ghi',
+			TermCache::TERM_TYPE_LABEL,
+			'nl',
+			Item::ENTITY_TYPE
+		) );
+
+		$this->assertTrue( $lookup->termExists(
+			'o',
+			TermCache::TERM_TYPE_ALIAS,
+			'fr',
+			Item::ENTITY_TYPE
+		) );
 	}
 
 }
