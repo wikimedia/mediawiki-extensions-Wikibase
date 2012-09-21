@@ -62,9 +62,6 @@ abstract class Api extends \ApiBase {
 	 */
 	public function getParamDescription() {
 		return array(
-			'gettoken' => array( 'If set, a new "modifyitem" token will be returned if the request completes.',
-				'The remaining of the call must be valid, otherwise an error can be returned without the token included.'
-			),
 		);
 	}
 
@@ -73,38 +70,7 @@ abstract class Api extends \ApiBase {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'gettoken' => array(
-				ApiBase::PARAM_TYPE => 'boolean',
-				ApiBase::PARAM_DFLT => false
-			),
 		);
-	}
-
-	/**
-	 * Add token to result
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $token new token to use
-	 * @param array|string $path where the data is located
-	 * @param string $name name used for the entry
-	 *
-	 * @return array|bool
-	 */
-	protected function addTokenToResult( $token, $path=null, $name = 'itemtoken' ) {
-		// in JSON callback mode, no tokens should be returned
-		// this will then block later updates through reuse of cached scripts
-		if ( !is_null( $this->getMain()->getRequest()->getVal( 'callback' ) ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-jsonp-token-violation' )->text(), 'jsonp-token-violation' );
-		}
-		if ( is_null( $path ) ) {
-			$path = array( null, $this->getModuleName() );
-		}
-		else if ( !is_array( $path ) ) {
-			$path = array( null, (string)$path );
-		}
-		$path = is_null( $path ) ? $path : $this->getModuleName();
-		$this->getResult()->addValue( $path, $name, $token );
 	}
 
 	/**
