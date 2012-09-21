@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html;
+use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, MWException;
 
 
 /**
@@ -24,8 +24,13 @@ final class RepoHooks {
 	 * Handler for the SetupAfterCache hook, completing setup of
 	 * content and namespace setup.
 	 *
+	 * @since 0.1
+	 *
 	 * @note: $wgExtraNamespaces and $wgNamespaceAliases have already been processed at this point
 	 *        and should no longer be touched.
+	 *
+	 * @return boolean
+	 * @throws MWException
 	 */
 	public static function onSetupAfterCache() {
 		global $wgNamespaceContentModels;
@@ -33,7 +38,7 @@ final class RepoHooks {
 		$namespaces = Settings::get( 'entityNamespaces' );
 
 		if ( empty( $namespaces ) ) {
-			throw new \MWException( 'Wikibase: Incomplete configuration: '
+			throw new MWException( 'Wikibase: Incomplete configuration: '
 				. '$egWBSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
 				. 'See ExampleSettings.php for details and examples.');
 		}
@@ -303,13 +308,14 @@ final class RepoHooks {
 	 * @param integer $id
 	 *
 	 * @return boolean
+	 * @throws MWException
 	 */
 	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
 		\Content $content = null, \LogEntryBase $logEntry = null
 	) {
 
 		if ( $content === null ) {
-			throw new \MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
+			throw new MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
 		}
 
 		// Bail out if we are not in an entity namespace

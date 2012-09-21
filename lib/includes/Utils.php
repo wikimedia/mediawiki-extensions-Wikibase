@@ -386,6 +386,8 @@ final class Utils {
 	 * Returns a list of namespace IDs that are designated to contain Wikibase entities.
 	 * Configured via $egWBSettings['entityNamespaces'].
 	 *
+	 * @since 0.1
+	 *
 	 * @return array An array of integer namespace IDs.
 	 */
 	public static function getEntityNamespaces() {
@@ -401,6 +403,8 @@ final class Utils {
 	/**
 	 * Returns a list of content model IDs that are used to represent Wikibase entities.
 	 * Configured via $egWBSettings['entityNamespaces'].
+	 *
+	 * @since 0.1
 	 *
 	 * @return array An array of string content model IDs.
 	 */
@@ -420,6 +424,8 @@ final class Utils {
 	 *
 	 * The return value is based on getEntityNamespaces(), which is configured via $egWBSettings['entityNamespaces'].
 	 *
+	 * @since 0.1
+	 *
 	 * @param String $model the model ID
 	 *
 	 * @return int|bool the namespace associated with the given content model (or false if there is none)
@@ -433,6 +439,8 @@ final class Utils {
 	 * Determines whether the given namespace is designated to hold some kind of Wikibase entity.
 	 * Shorthand for in_array( $ns, self::getEntityNamespaces() );
 	 *
+	 * @since 0.1
+	 *
 	 * @param int $ns the namespace ID
 	 *
 	 * @return bool true iff $ns is an entity namespace
@@ -444,6 +452,8 @@ final class Utils {
 	/**
 	 * Determines whether the given content model is designated to hold some kind of Wikibase entity.
 	 * Shorthand for in_array( $ns, self::getEntityModels() );
+	 *
+	 * @since 0.1
 	 *
 	 * @param String $model the content model ID
 	 *
@@ -458,6 +468,8 @@ final class Utils {
 	 *
 	 * The present implementation just checks whether the namespace ID is smaller than 100, relying on the
 	 * convention that namespace IDs smaller than 100 are reserved for use by MediaWiki core.
+	 *
+	 * @since 0.1
 	 *
 	 * @param int $ns the namespace ID
 	 *
