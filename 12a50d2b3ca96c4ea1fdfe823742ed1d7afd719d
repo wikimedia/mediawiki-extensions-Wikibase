@@ -16,6 +16,24 @@
       "revId": "12a50d2b3ca96c4ea1fdfe823742ed1d7afd719d",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH///q8\u003d",
+        "filename": "repo/tests/phpunit/includes/store/TermCacheTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-22T15:31:34Z",
+      "side": 1,
+      "message": "You mean all known term types? Perhaps. Would be nicer to simply have proper abstraction for terms, which would tackle the more serious issues that right now you have to pass around arrays in a non-obvious way (just look at how big the docs need to be). Once you have a Term class or whatever, you\u0027ll have a sane place to put the method you suggest. I\u0027m wary of making such a change though, as it might be overkill here, esp since not a lot is interacting with the term storage.",
+      "parentUuid": "AAAATH///rk\u003d",
+      "revId": "12a50d2b3ca96c4ea1fdfe823742ed1d7afd719d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
