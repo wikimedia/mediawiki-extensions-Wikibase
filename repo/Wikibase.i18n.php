@@ -86,6 +86,8 @@ $messages['en'] = array(
 
 	'wikibase-error-relational-save-failed' => 'Could not store item identity in the database.',
 	'wikibase-error-sitelink-already-used' => 'Site link [[$1:$2]] already used by item [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Another property ($3) already has label "$1" associated with language code $2',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Another query ($3) already has label "$1" associated with language code $2',
 
 	'wikibase-itemlink' => '$1 $2',
 	'wikibase-itemlink-id-wrapper' => '($1)',
@@ -375,6 +377,14 @@ Parameters:
 * $1 is the number of aliases that were removed;
 * $2 is the language code for the item page.',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Error message shown when a user tries to save a property that has a non-unique label.
+* $1 is label text
+* $2 is the labels language code
+* $3 is the id of the property that already has the label',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Error message shown when a user tries to save a query that has a non-unique label.
+* $1 is label text
+* $2 is the labels language code
+* $3 is the id of the query that already has the label',
 );
 
 /** Achinese (Acèh)

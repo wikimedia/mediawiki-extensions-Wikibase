@@ -101,6 +101,7 @@ interface TermCache {
 	 * - termType:     element of the TermCache::TERM_TYPE_ enum
 	 * - termLanguage: string, language code
 	 * - termText:     string
+	 * - entityId:     integer, only present in the result, not used when provided in the $terms
 	 *
 	 * A default can be provided for termType and entityType via the corresponding
 	 * method parameters.

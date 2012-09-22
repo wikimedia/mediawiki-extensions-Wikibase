@@ -80,7 +80,7 @@ class PropertyContent extends EntityContent {
 		wfProfileIn( __METHOD__ );
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 
-		//StoreFactory::getStore()->newTermCache()->termExists( $this->getProperty()-> );
+		$this->addLabelUniquenessConflicts( $status );
 
 		wfProfileOut( __METHOD__ );
 		return $status;
