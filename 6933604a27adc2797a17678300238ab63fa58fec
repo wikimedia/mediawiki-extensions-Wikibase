@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH///tE\u003d",
+        "filename": "repo/includes/store/TermCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-22T13:59:25Z",
+      "side": 1,
+      "message": "I would have called this parameter \"$query\" - it *is* a complex query (in disjunctive normal form).",
+      "revId": "6933604a27adc2797a17678300238ab63fa58fec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH///tA\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-22T13:59:25Z",
+      "side": 1,
+      "message": "Using this very generic query interface as the basis for all queries is convenient, but requires quite a bit of code to facilliate the abstraction, may generate non-optimal queries, and is probably only used in three or four ways.\n\nIt *is* kind of nice to have such a generic query function, and I guess we can use it for now. But please keep an eye out for the downsides of this kind of optimization.",
+      "revId": "6933604a27adc2797a17678300238ab63fa58fec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
