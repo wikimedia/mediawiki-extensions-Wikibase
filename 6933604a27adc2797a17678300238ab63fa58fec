@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAATH///mo\u003d",
+        "filename": "repo/includes/store/TermCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-22T19:31:37Z",
+      "side": 1,
+      "message": "yep, that would be nice. Complex conditions are currently not abstracted. And it would probably be annoying to be *forced* to use the abstraction layer for that stuff (though it would improve portability across databases). But it would be nice to have something like that in core.",
+      "parentUuid": "AAAATH///qw\u003d",
+      "revId": "6933604a27adc2797a17678300238ab63fa58fec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAATH///tA\u003d",
         "filename": "repo/includes/store/sql/TermSqlCache.php",
         "patchSetId": 3
