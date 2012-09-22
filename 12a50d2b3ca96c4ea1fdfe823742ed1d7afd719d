@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH///rk\u003d",
+        "filename": "repo/tests/phpunit/includes/store/TermCacheTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-22T15:12:39Z",
+      "side": 1,
+      "message": "Would be nice to have a canonical way to get all known entity types, analogous to Utils::getEntityModels()",
+      "revId": "12a50d2b3ca96c4ea1fdfe823742ed1d7afd719d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
