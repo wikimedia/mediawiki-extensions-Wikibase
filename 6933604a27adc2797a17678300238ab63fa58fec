@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAATH///qw\u003d",
+        "filename": "repo/includes/store/TermCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-22T15:46:49Z",
+      "side": 1,
+      "message": "I went with terms as you\u0027re passing in (partial) term definitions. I see where you\u0027re coming from though, really depends on how you look at the parameter.\n\nI\u0027m a bit an annoyed core does not have some better abstraction to represent such queries though. Would be better to have QueryConjunction and QueryDisjunction objects that the database functions know how to handle then passing around nested arrays and doing the concatenation/imploding yourself every time you need it.",
+      "parentUuid": "AAAATH///tE\u003d",
+      "revId": "6933604a27adc2797a17678300238ab63fa58fec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAATH///tA\u003d",
         "filename": "repo/includes/store/sql/TermSqlCache.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-09-22T13:59:25Z",
       "side": 1,
       "message": "Using this very generic query interface as the basis for all queries is convenient, but requires quite a bit of code to facilliate the abstraction, may generate non-optimal queries, and is probably only used in three or four ways.\n\nIt *is* kind of nice to have such a generic query function, and I guess we can use it for now. But please keep an eye out for the downsides of this kind of optimization.",
+      "revId": "6933604a27adc2797a17678300238ab63fa58fec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH///q0\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-22T15:46:49Z",
+      "side": 1,
+      "message": "I did consider those arguments before creating it. Note that although most methods in this interface could be making use of this one, only the two for which it makes sense to do use it.",
+      "parentUuid": "AAAATH///tA\u003d",
       "revId": "6933604a27adc2797a17678300238ab63fa58fec",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
