@@ -238,8 +238,6 @@ class TermSqlCache implements TermCache {
 	 * @return boolean
 	 */
 	public function termExists( $termValue, $termType = null, $termLanguage = null, $entityType = null ) {
-		$dbr = $this->getReadDb();
-
 		$conditions = array(
 			'term_text' => $termValue,
 		);
@@ -256,7 +254,7 @@ class TermSqlCache implements TermCache {
 			$conditions['term_entity_type'] = $entityType;
 		}
 
-		$result = $dbr->selectRow(
+		$result = $this->getReadDb()->selectRow(
 			$this->tableName,
 			array(
 				'term_entity_id',
@@ -266,6 +264,89 @@ class TermSqlCache implements TermCache {
 		);
 
 		return $result !== false;
+	}
+
+	/**
+	 * @see TermCache::getMatchingTerms
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $terms
+	 * @param string|null $termType
+	 * @param string|null $entityType
+	 *
+	 * @return array
+	 */
+	public function getMatchingTerms( array $terms, $termType = null, $entityType = null ) {
+		$conditions = array();
+
+		$allowedFields = array(
+			'term_entity_type' => 'entityType',
+			'term_type' => 'termType',
+			'term_language' => 'termLanguage',
+			'term_text' => 'termText',
+		);
+
+		$dbr = $this->getReadDb();
+
+		// Maps interface term fields to table fields and defaults
+		// using the methods $termType and $entityType parameters.
+		foreach ( $terms as $term ) {
+			$fullTerm = array();
+
+			if ( array_key_exists( 'termLanguage', $term ) ) {
+				$fullTerm['term_language'] = $term['termLanguage'];
+			}
+
+			if ( array_key_exists( 'termText', $term ) ) {
+				$fullTerm['term_text'] = $term['termText'];
+			}
+
+			if ( array_key_exists( 'termType', $term ) ) {
+				$fullTerm['term_type'] = $term['termType'];
+			}
+			elseif ( $termType !== null ) {
+				$fullTerm['term_type'] = $termType;
+			}
+
+			if ( array_key_exists( 'entityType', $term ) ) {
+				$fullTerm['term_entity_type'] = $term['entityType'];
+			}
+			elseif ( $entityType !== null ) {
+				$fullTerm['term_entity_type'] = $entityType;
+			}
+
+			$fullTerm = array_intersect_key( $fullTerm, $allowedFields );
+
+			foreach ( $fullTerm as $field => &$value ) {
+				$value = $field . '=' . $dbr->addQuotes( $value );
+			}
+
+			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
+		}
+
+		$allowedFields['term_entity_id'] = 'entityId';
+
+		$obtainedTerms = $dbr->select(
+			$this->tableName,
+			array_keys( $allowedFields ),
+			implode( ' OR ', $conditions ),
+			__METHOD__
+		);
+
+		$matchingTerms = array();
+
+		foreach ( $obtainedTerms as $obtainedTerm ) {
+			$matchingTerm = array();
+
+			foreach ( $obtainedTerm as $key => $value ) {
+				$matchingTerm[$allowedFields[$key]] = $value;
+			}
+
+			$matchingTerms[] = $matchingTerm;
+		}
+
+		return $matchingTerms;
 	}
 
 }
