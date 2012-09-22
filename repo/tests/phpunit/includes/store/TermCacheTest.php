@@ -22,7 +22,9 @@ use Wikibase\TermCache as TermCache;
 class TermCacheTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
-		$instances = array( \Wikibase\StoreFactory::getStore( 'sqlstore' )->newTermCache() );
+		$instance = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newTermCache();
+
+		$instances = array( $instance );
 
 		return $this->arrayWrap( $instances );
 	}
@@ -81,6 +83,53 @@ class TermCacheTest extends \MediaWikiTestCase {
 			$this->assertInternalType( 'array', $ids );
 			$this->assertArrayEquals( array(), $ids );
 		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testTermExists( TermCache $lookup ) {
+		$item = \Wikibase\ItemObject::newEmpty();
+
+		$item->setLabel( 'en', 'foobarz' );
+		$item->setLabel( 'de', 'foobarz' );
+		$item->setLabel( 'nl', 'bazz' );
+		$item->setDescription( 'en', 'foobarz' );
+		$item->setDescription( 'fr', 'fooz barz bazz' );
+		$item->setAliases( 'nl', array( 'a42', 'b42', 'c42' ) );
+
+		$content = \Wikibase\ItemContent::newEmpty();
+		$content->setItem( $item );
+		$content->save( '', null, EDIT_NEW );
+
+		$this->assertFalse( $lookup->termExists( 'foobarz', 'does-not-exist' ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', null, 'does-not-exist' ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', null, null, 'does-not-exist' ) );
+
+		$this->assertTrue( $lookup->termExists( 'foobarz' ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'en' ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'de' ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'de', $item::ENTITY_TYPE ) );
+
+		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'de', \Wikibase\Property::ENTITY_TYPE ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'nl' ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION, 'de' ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION, null, \Wikibase\Property::ENTITY_TYPE ) );
+		$this->assertFalse( $lookup->termExists( 'dzxfzdtrgfdrtgryfth', TermCache::TERM_TYPE_LABEL ) );
+
+		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION, 'en' ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION, 'fr' ) );
+
+		$this->assertFalse( $lookup->termExists( 'a42', TermCache::TERM_TYPE_DESCRIPTION ) );
+		$this->assertFalse( $lookup->termExists( 'b42', TermCache::TERM_TYPE_LABEL ) );
+		$this->assertTrue( $lookup->termExists( 'a42' ) );
+		$this->assertTrue( $lookup->termExists( 'b42' ) );
+		$this->assertTrue( $lookup->termExists( 'a42', TermCache::TERM_TYPE_ALIAS ) );
+		$this->assertTrue( $lookup->termExists( 'b42', TermCache::TERM_TYPE_ALIAS ) );
+		$this->assertFalse( $lookup->termExists( 'b42', TermCache::TERM_TYPE_ALIAS, 'de' ) );
+		$this->assertTrue( $lookup->termExists( 'b42', null, 'nl' ) );
 	}
 
 }
