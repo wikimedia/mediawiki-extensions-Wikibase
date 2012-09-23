@@ -307,6 +307,14 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 * $1 is the site id (interwiki prefix);
 * $2 is the title on the remote site;
 * $3 is the title of the conflicting item.",
+	'wikibase-error-label-not-unique-wikibase-property' => 'Error message shown when a user tries to save a property that has a non-unique label.
+* $1 is label text
+* $2 is the labels language code
+* $3 is the id of the property that already has the label',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Error message shown when a user tries to save a query that has a non-unique label.
+* $1 is label text
+* $2 is the labels language code
+* $3 is the id of the query that already has the label',
 	'wikibase-itemlink' => 'used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
 	'wikibase-itemlink-id-wrapper' => 'Used to wrap the items id for a link to an item in parentheses or similar.',
 	'wikibase-itemlink-title' => 'Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
@@ -377,14 +385,6 @@ Parameters:
 * $1 is the number of aliases that were removed;
 * $2 is the language code for the item page.',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Error message shown when a user tries to save a property that has a non-unique label.
-* $1 is label text
-* $2 is the labels language code
-* $3 is the id of the property that already has the label',
-	'wikibase-error-label-not-unique-wikibase-query' => 'Error message shown when a user tries to save a query that has a non-unique label.
-* $1 is label text
-* $2 is the labels language code
-* $3 is the id of the query that already has the label',
 );
 
 /** Achinese (Acèh)
@@ -566,6 +566,8 @@ $messages['de'] = array(
 	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-error-relational-save-failed' => 'Die Identität des Datenelements konnte nicht in der Datenbank gespeichert werden.',
 	'wikibase-error-sitelink-already-used' => 'Der Websitelink [[$1:$2]] wird bereits vom Datenelement [[$3]] verwendet.',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Ein anderes Attribut ($3) besitzt bereits die zugeordnete Bezeichnung „$1“ mit dem Sprachcode $2.',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Eine andere Abfrage ($3) besitzt bereits die zugeordnete Bezeichnung „$1“ mit dem Sprachcode $2.',
 	'special-itembytitle' => 'Wert nach Name',
 	'wikibase-itembytitle-lookup-fieldset' => 'Suche nach Datenelementen nach Website und Titel',
 	'wikibase-itembytitle-lookup-site' => 'Website:',
@@ -1300,6 +1302,8 @@ $messages['gl'] = array(
 	'wikibase-move-error' => 'Non pode trasladar as páxinas que se atopan no espazo de nomes de datos, e tampouco pode mover páxinas a este espazo de nomes.',
 	'wikibase-error-relational-save-failed' => 'Non se puido almacenar a identidade do elemento na base de datos.',
 	'wikibase-error-sitelink-already-used' => 'O elemento [[$3]] xa utiliza a ligazón do sitio [[$1:$2]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Outra propiedade ($3) xa ten a etiqueta "$1" asociada ao código de lingua $2',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Outra pescuda ($3) xa ten a etiqueta "$1" asociada ao código de lingua $2',
 	'special-itembytitle' => 'Artigo por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Procurar elementos por sitio e título',
 	'wikibase-itembytitle-lookup-site' => 'Sitio:',
@@ -1933,6 +1937,8 @@ $messages['ja'] = array(
 	'wikibase-error-ui-cant-edit' => 'この操作を行うことは許可されていません。',
 	'wikibase-error-ui-edit-conflict' => '編集が競合しました。再読込して再度保存してください。',
 	'wikibase-error-sitelink-already-used' => 'サイトリンク [[$1:$2]] は項目 [[$3]] が既に使用しています。',
+	'wikibase-error-label-not-unique-wikibase-property' => '言語コード $2 に関連付けられたラベル「$1」を持つ他のプロパティ ($3) が既に存在します',
+	'wikibase-error-label-not-unique-wikibase-query' => '言語コード $2 に関連付けられたラベル「$1」を持つ他のクエリ ($3) が既に存在します',
 	'wikibase-itembytitle-lookup-site' => 'サイト:',
 	'wikibase-itembytitle-lookup-page' => 'ページ:',
 	'wikibase-itembytitle-submit' => '検索',
@@ -2059,6 +2065,8 @@ $messages['ko'] = array(
 	'wikibase-move-error' => '데이터 이름공간에 있는 문서를 이동할 수 없으며 그것으로 문서를 이동할 수 없습니다.',
 	'wikibase-error-relational-save-failed' => '데이터베이스에서 항목 식별을 저장할 수 없습니다.',
 	'wikibase-error-sitelink-already-used' => '[[$1:$2]] 사이트 링크가 이미 [[$3]] 항목에 의해 사용되고 있습니다.',
+	'wikibase-error-label-not-unique-wikibase-property' => '다른 속성($3)은 이미 $2 언어 코드와 관련된 "$1" 레이블이 있습니다.',
+	'wikibase-error-label-not-unique-wikibase-query' => '다른 쿼리($3)은 이미 $2 언어 코드와 관련된 "$1" 레이블이 있습니다.',
 	'special-itembytitle' => '제목별 항목',
 	'wikibase-itembytitle-lookup-fieldset' => '사이트와 제목별로 항목 찾기',
 	'wikibase-itembytitle-lookup-site' => '사이트:',
@@ -2245,6 +2253,8 @@ $messages['mk'] = array(
 	'wikibase-move-error' => 'Не можете да преместувате страници што се наоѓаат во податочниот именски простор. Исто така не можете да преместувате други страници во него.',
 	'wikibase-error-relational-save-failed' => 'Не можев да го зачувам идентитетот на предметот во базата.',
 	'wikibase-error-sitelink-already-used' => '!Надворешната врска [[$1:$2]] веќе се користи од предметот со назнака [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Етикетата „$1“ е веќе поврзана со јазичниот код $2 во друго својство ($3)',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Етикетата „$1“ е веќе поврзана со јазичниот код $2 во друго барање ($3)',
 	'special-itembytitle' => 'Предмет по наслов',
 	'wikibase-itembytitle-lookup-fieldset' => 'Пребарување на предмети по вики или наслов',
 	'wikibase-itembytitle-lookup-site' => 'Вики:',
@@ -2264,9 +2274,9 @@ $messages['mk'] = array(
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Нажалост, укажаниот јазичен код не му е познат на системот. Кодот мора да биде важечки (на пр. „mk“).',
 	'wikibase-itemdisambiguation-description' => 'Вредностите во пребарувањето мора да претставуваат целиот текстуален наслов на предметот. Јазикот е назнака, како на пр. „mk“.',
 	'special-createproperty' => 'Создај ново својство',
-	'wikibase-createproperty-intro' => 'Пред да создадете ново својство, проверете дали истото веќе постои. За да создадете ново, ќе треба да внесете барем етикета или опис на $1.',
+	'wikibase-createproperty-intro' => 'Пред да создадете ново својство, проверете дали истото веќе постои. За да создадете ново, ќе треба да внесете барем етикета или опис на $1 и важечки тип на својство.',
 	'wikibase-createproperty-fieldset' => 'Создај ново својство',
-	'wikibase-createproperty-datatype' => 'Тип:',
+	'wikibase-createproperty-datatype' => 'Податочен тип:',
 	'special-createitem' => 'Создај нов предмет',
 	'wikibase-createitem-intro' => 'Пред да создадете нов предмет, проверете дали истиот веќе постои. За да создадете нов предмет, ќе треба да внесете барем етикета или опис на $1.',
 	'wikibase-createitem-fieldset' => 'Создај нов предмет',
