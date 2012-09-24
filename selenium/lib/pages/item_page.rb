@@ -141,7 +141,9 @@ class ItemPage < RubySelenium
   end
 
   def change_label(label)
-    editLabelLink
+    if editLabelLink?
+      editLabelLink
+    end
     self.labelInputField= label
     saveLabelLink
     ajax_wait
@@ -149,7 +151,9 @@ class ItemPage < RubySelenium
   end
 
   def change_description(description)
-    editDescriptionLink
+    if editDescriptionLink?
+      editDescriptionLink
+    end
     self.descriptionInputField= description
     saveDescriptionLink
     ajax_wait
