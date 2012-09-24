@@ -123,6 +123,7 @@ class ApiGetItems extends Api {
 					}
 
 					$item = $itemContent->getItem();
+					$res->addValue( $itemPath, 'type', $item->getType() );
 
 					// loop over all props
 					foreach ( $props as $key ) {

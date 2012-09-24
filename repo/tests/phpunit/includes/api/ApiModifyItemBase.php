@@ -557,6 +557,9 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		if ( isset( $expected['lastrevid'] ) ) {
 			$this->assertEquals( $expected['lastrevid'], $actual['lastrevid'] );
 		}
+		if ( isset( $expected['type'] ) ) {
+			$this->assertEquals( $expected['type'], $actual['type'] );
+		}
 
 		if ( isset( $expected['labels'] ) ) {
 			$data = $actual['labels'];
@@ -626,6 +629,19 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 */
 	public function assertSuccess( $response ) {
 		$this->assertArrayHasKey( 'success', $response, "Missing 'success' marker in response." );
+
+		if ( isset( $response['entity'] ) ) {
+			if ( isset( $response['entity']['type'] ) ) {
+				$this->assertTrue( \Wikibase\Utils::isEntityModel( $response['entity']['type'] ), "Missing valid 'type' in response." );
+			}
+		}
+		elseif ( isset( $response['entities'] ) ) {
+			foreach ($response['entities'] as $entity) {
+				if ( isset( $entity['type'] ) ) {
+					$this->assertTrue( \Wikibase\Utils::isEntityModel( $entity['type'] ), "Missing valid 'type' in response." );
+				}
+			}
+		}
 
 		$path = func_get_args();
 		array_shift( $path );
