@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+r8\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-24T20:22:48Z",
+      "side": 0,
+      "message": "Hmm, should have paid more attention when I merged this :|",
+      "revId": "2d50c70c5a4b59a23d75e26a8c683cdf45cebb96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
