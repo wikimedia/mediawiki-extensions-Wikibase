@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH///Ek\u003d",
+        "filename": "repo/tests/selenium/special/item_disambiguation_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-24T12:55:06Z",
+      "side": 1,
+      "message": "whitespace :o",
+      "revId": "b09fc2efb2aa512af20069d7eb0afba7953b3740",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH///Eg\u003d",
+        "filename": "repo/tests/selenium/special/item_disambiguation_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-24T12:55:06Z",
+      "side": 1,
+      "message": "whitespace is generally frowned upon, but won\u0027t break anything",
+      "revId": "b09fc2efb2aa512af20069d7eb0afba7953b3740",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
