@@ -34,7 +34,8 @@ return call_user_func( function() {
 				'wikibase.Site.js'
 			),
 			'dependencies' => array(
-				'wikibase.common'
+				'wikibase.common',
+				'jquery.uls'
 			),
 			'messages' => array(
 				'special-createitem',
