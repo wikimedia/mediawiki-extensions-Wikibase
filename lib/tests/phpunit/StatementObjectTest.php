@@ -7,7 +7,7 @@ use Wikibase\ClaimObject as ClaimObject;
 use Wikibase\Claim as Claim;
 use Wikibase\ReferenceObject as ReferenceObject;
 use Wikibase\Reference as Reference;
-use \DataValue\StringValue as StringValue;
+use \DataValues\StringValue;
 
 /**
  * Tests for the Wikibase\StatementObject class.

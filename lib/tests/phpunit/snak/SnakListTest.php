@@ -6,7 +6,7 @@ use Wikibase\Snaks as Snaks;
 use Wikibase\Snak as Snak;
 use \Wikibase\PropertyValueSnak as PropertyValueSnak;
 use \Wikibase\InstanceOfSnak as InstanceOfSnak;
-use \DataValue\StringValue as StringValue;
+use DataValues\StringValue;
 use \Wikibase\Hashable as Hashable;
 
 /**

@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use DataValue\DataValue as DataValue;
+use DataValues\DataValue;
 
 /**
  * Class representing a property value snak.
