@@ -123,6 +123,14 @@ $messages['en'] = array(
 	'wikibase-createentity-label' => 'Label:',
 	'wikibase-createentity-description' => 'Description:',
 	'wikibase-createentity-submit' => 'Create',
+	'special-setlabel' => 'Set a label',
+	'wikibase-setlabel-introfull' => 'You are setting the label in $2 for [[$1]].',
+	'wikibase-setlabel-intro' => 'This form allows you to set the label of an entity. You need to provide the ID of the entity (e.g. Q23), a language code (e.g. en) and the label to set to.',
+	'wikibase-setlabel-id' => 'ID',
+	'wikibase-setlabel-language' => 'Language',
+	'wikibase-setlabel-label' => 'Label',
+	'wikibase-setlabel-submit' => 'Set the label',
+	'wikibase-setlabel-invalid-langcode' => 'The language identifier "$1" is unknown. Please use a language identifier known to the system, such as "en".',
 
 	// API errors - these messages should not be translated
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.', # Do not translate
@@ -351,6 +359,15 @@ Parameters:
 	'wikibase-createentity-label' => 'Label for the label-textfield holding the label of the new item.',
 	'wikibase-createentity-description' => 'Label for the description-textfield holding the description of the new item.',
 	'wikibase-createentity-submit' => 'Text for the submit button on the CreateItem special page.',
+	'special-setlabel' => 'Title of the special page that allows the user to set a label for an entity',
+	'wikibase-setlabel-introfull' => 'Intro text when a label is to be set. $1 is the ID that links to the entity. $2 is the translated language name the label is to be set in.',
+	'wikibase-setlabel-intro' => 'A short text at the top of the page that allows users to set the label of an entity, explaining the form.',
+	'wikibase-setlabel-id' => 'Label for the input field to select the ID of the entity.',
+	'wikibase-setlabel-language' => 'Label for the input field to select the language the label should be set in.',
+	'wikibase-setlabel-label' => 'Label for the input field to type the label to set the entity to.',
+	'wikibase-setlabel-submit' => 'Label for the button that activates the action.',
+	'wikibase-setlabel-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code.',
+
 	'wikibase-api-patch-incomplete' => 'This error message is used when the API tried to patch a contribution and the patch missed some parts. This typically happens due to edit conflicts.',
 	'wikibase-self-conflict' => 'Warning issued when an edit is made based on an old revision, but no conflict arises because all intermediate edits were made by the same user. This may happen e.g. when editing the same item in multiple browser windows. This warning is usually not displayed.',
 	'wikibase-restoreold' => "Link text shown on the link that lets the user reset the page's content to an old revision. Must be distinct from undo and revert. Used on the diff views.",
