@@ -130,11 +130,11 @@ class ApiBotEditTest extends \ApiTestCase {
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
-		$this->assertArrayHasKey( 'item', $second[0],
-			"Must have an 'item' key in the second result from the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['item'],
-			"Must have an 'id' key in the 'item' from the second result from the API" );
-		self::$baseOfItemIds = $second[0]['item']['id'];
+		$this->assertArrayHasKey( 'entity', $second[0],
+			"Must have an 'entity' key in the second result from the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['entity'],
+			"Must have an 'id' key in the 'entity' from the second result from the API" );
+		self::$baseOfItemIds = $second[0]['entity']['id'];
 	}
 	/**
 	 * @group API
@@ -177,11 +177,11 @@ class ApiBotEditTest extends \ApiTestCase {
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
-		$this->assertArrayHasKey( 'item', $second[0],
-			"Must have an 'item' key in the second result from the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['item'],
-			"Must have an 'id' key in the 'item' from the second result from the API" );
-		$this->assertEquals( $myid, $second[0]['item']['id'],
+		$this->assertArrayHasKey( 'entity', $second[0],
+			"Must have an 'entity' key in the second result from the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['entity'],
+			"Must have an 'id' key in the 'entity' from the second result from the API" );
+		$this->assertEquals( $myid, $second[0]['entity']['id'],
 			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 
 		$req = array(

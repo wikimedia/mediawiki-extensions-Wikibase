@@ -68,6 +68,13 @@ class ApiSetAliases extends ApiModifyEntity {
 	}
 
 	/**
+	 * @see ApiModifyEntity::createEntity()
+	 */
+	protected function createEntity( array $params ) {
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
+	}
+
+	/**
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
@@ -103,7 +110,7 @@ class ApiSetAliases extends ApiModifyEntity {
 
 		$aliases = $entityContent->getEntity()->getAliases( $params['language'] );
 		if ( count( $aliases ) ) {
-			$this->addAliasesToResult( array( $params['language'] => $aliases ), 'item' ); // FIXME: must be updated
+			$this->addAliasesToResult( array( $params['language'] => $aliases ), 'entity' );
 		}
 
 		return true;

@@ -80,32 +80,32 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'items', $id );
-		$this->assertItemEquals( $item,  $res['items'][$id] );
-		$this->assertEquals( 1, count( $res['items'] ), "requesting a single item should return exactly one item entry" );
+		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertItemEquals( $item,  $res['entities'][$id] );
+		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 		// The following comes from the props=info which is included by default
 		// Only check if they are there and seems valid, can't do much more for the moment (or could for title but then we are testing assumptions)
-		$this->assertSuccess( $res, 'items', $id, 'pageid' );
-		$this->assertTrue( is_integer( $res['items'][$id]['pageid'] ) );
-		$this->assertTrue( 0 < $res['items'][$id]['pageid'] );
-		$this->assertSuccess( $res, 'items', $id, 'ns' );
-		$this->assertTrue( is_integer( $res['items'][$id]['ns'] ) );
-		$this->assertTrue( 0 <= $res['items'][$id]['ns'] );
-		$this->assertSuccess( $res, 'items', $id, 'title' );
-		$this->assertTrue( is_string( $res['items'][$id]['title'] ) );
-		$this->assertTrue( 0 < strlen( $res['items'][$id]['title'] ) );
-		$this->assertSuccess( $res, 'items', $id, 'lastrevid' );
-		$this->assertTrue( is_integer( $res['items'][$id]['lastrevid'] ) );
-		$this->assertTrue( 0 < $res['items'][$id]['lastrevid'] );
-		$this->assertSuccess( $res, 'items', $id, 'touched' );
-		$this->assertTrue( is_string( $res['items'][$id]['touched'] ) );
-		$this->assertTrue( 0 < strlen( $res['items'][$id]['touched'] ) );
-		$this->assertSuccess( $res, 'items', $id, 'length' );
-		$this->assertTrue( is_integer( $res['items'][$id]['length'] ) );
-		$this->assertTrue( 0 < $res['items'][$id]['length'] );
-		$this->assertSuccess( $res, 'items', $id, 'count' );
-		$this->assertTrue( is_integer( $res['items'][$id]['count'] ) );
-		$this->assertTrue( 0 <= $res['items'][$id]['count'] );
+		$this->assertSuccess( $res, 'entities', $id, 'pageid' );
+		$this->assertTrue( is_integer( $res['entities'][$id]['pageid'] ) );
+		$this->assertTrue( 0 < $res['entities'][$id]['pageid'] );
+		$this->assertSuccess( $res, 'entities', $id, 'ns' );
+		$this->assertTrue( is_integer( $res['entities'][$id]['ns'] ) );
+		$this->assertTrue( 0 <= $res['entities'][$id]['ns'] );
+		$this->assertSuccess( $res, 'entities', $id, 'title' );
+		$this->assertTrue( is_string( $res['entities'][$id]['title'] ) );
+		$this->assertTrue( 0 < strlen( $res['entities'][$id]['title'] ) );
+		$this->assertSuccess( $res, 'entities', $id, 'lastrevid' );
+		$this->assertTrue( is_integer( $res['entities'][$id]['lastrevid'] ) );
+		$this->assertTrue( 0 < $res['entities'][$id]['lastrevid'] );
+		$this->assertSuccess( $res, 'entities', $id, 'touched' );
+		$this->assertTrue( is_string( $res['entities'][$id]['touched'] ) );
+		$this->assertTrue( 0 < strlen( $res['entities'][$id]['touched'] ) );
+		$this->assertSuccess( $res, 'entities', $id, 'length' );
+		$this->assertTrue( is_integer( $res['entities'][$id]['length'] ) );
+		$this->assertTrue( 0 < $res['entities'][$id]['length'] );
+		$this->assertSuccess( $res, 'entities', $id, 'count' );
+		$this->assertTrue( is_integer( $res['entities'][$id]['count'] ) );
+		$this->assertTrue( 0 <= $res['entities'][$id]['count'] );
 	}
 
 	public function provideGetItemByTitle() {
@@ -143,9 +143,9 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		$item = $this->getItemOutput( $handle );
 		$id = $item['id'];
 
-		$this->assertSuccess( $res, 'items', $id );
-		$this->assertItemEquals( $item,  $res['items'][$id] );
-		$this->assertEquals( 1, count( $res['items'] ), "requesting a single item should return exactly one item entry" );
+		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertItemEquals( $item,  $res['entities'][$id] );
+		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 	}
 
 	/**
@@ -161,8 +161,8 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 			'ids' => $badid,
 		) );
 
-		$this->assertSuccess( $res, 'items', $badid, 'missing' );
-		$this->assertEquals( 1, count( $res['items'] ), "requesting a single item should return exactly one item entry" );
+		$this->assertSuccess( $res, 'entities', $badid, 'missing' );
+		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 	}
 
 	/**
@@ -198,12 +198,12 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 			'titles' => 'klaijehrnqowienxcqopweiu',
 		) );
 
-		$this->assertSuccess( $res, 'items' );
+		$this->assertSuccess( $res, 'entities' );
 
-		$keys = array_keys( $res['items'] );
+		$keys = array_keys( $res['entities'] );
 		$this->assertEquals( 1, count( $keys ), "requesting a single item should return exactly one item entry" );
 
-		$this->assertSuccess( $res, 'items', $keys[0], 'missing' );
+		$this->assertSuccess( $res, 'entities', $keys[0], 'missing' );
 	}
 
 	/**
@@ -220,12 +220,12 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 			'ids' => join( '|', $ids ),
 		) );
 
-		$this->assertSuccess( $res, 'items' );
-		$this->assertEquals( count( $ids ), count( $res['items'] ), "the actual number of items differs from the number of requested items" );
+		$this->assertSuccess( $res, 'entities' );
+		$this->assertEquals( count( $ids ), count( $res['entities'] ), "the actual number of items differs from the number of requested items" );
 
 		foreach ( $ids as $id ) {
-			$this->assertArrayHasKey( $id, $res['items'], "missing item" );
-			$this->assertEquals( $id, $res['items'][$id]['id'], "bad ID" );
+			$this->assertArrayHasKey( $id, $res['entities'], "missing item" );
+			$this->assertEquals( $id, $res['entities'][$id]['id'], "bad ID" );
 		}
 	}
 
@@ -245,14 +245,14 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 			'titles' => join( '|', $titles )
 		) );
 
-		$this->assertSuccess( $res, 'items' );
-		$this->assertEquals( count( $titles ), count( $res['items'] ), "the actual number of items differs from the number of requested items" );
+		$this->assertSuccess( $res, 'entities' );
+		$this->assertEquals( count( $titles ), count( $res['entities'] ), "the actual number of items differs from the number of requested items" );
 
 		foreach ( $handles as $handle ) {
 			$id = $this->getItemId( $handle );
 
-			$this->assertArrayHasKey( $id, $res['items'], "missing item" );
-			$this->assertEquals( $id, $res['items'][$id]['id'], "bad ID" );
+			$this->assertArrayHasKey( $id, $res['entities'], "missing item" );
+			$this->assertEquals( $id, $res['entities'][$id]['id'], "bad ID" );
 		}
 	}
 
@@ -281,9 +281,9 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'items', $id );
+		$this->assertSuccess( $res, 'entities', $id );
 
-		$item = $res['items'][$id];
+		$item = $res['entities'][$id];
 
 		foreach ( $item as $prop => $values ) {
 			if ( !is_array( $values ) ) {
@@ -332,13 +332,13 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'items', $id );
+		$this->assertSuccess( $res, 'entities', $id );
 
 		if ( $expectedProps === false ) {
 			$this->assertArrayHasKey( 'warnings', $res );
 			$this->assertArrayHasKey( 'wbgetitems', $res['warnings'] );
 		} else {
-			$this->assertArrayEquals( $expectedProps, array_keys( $res['items'][$id] ) );
+			$this->assertArrayEquals( $expectedProps, array_keys( $res['entities'][$id] ) );
 		}
 	}
 
@@ -363,9 +363,9 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'items', $id, 'sitelinks' );
+		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
 
-		foreach ( $res['items'][$id]['sitelinks'] as $link ) {
+		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayNotHasKey( 'url', $link );
 		}
 
@@ -377,9 +377,9 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'items', $id, 'sitelinks' );
+		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
 
-		foreach ( $res['items'][$id]['sitelinks'] as $link ) {
+		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'url', $link );
 		}
 	}
@@ -407,9 +407,9 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'items', $id, 'sitelinks' );
+		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
 		$last = '';
-		foreach ( $res['items'][$id]['sitelinks'] as $link ) {
+		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'site', $link );
 			$this->assertTrue(strcmp( $last, $link['site'] ) <= 0 );
 			$last = $link['site'];
@@ -425,9 +425,9 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'items', $id, 'sitelinks' );
+		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
 		$last = 'zzzzzzzz';
-		foreach ( $res['items'][$id]['sitelinks'] as $link ) {
+		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'site', $link );
 			$this->assertTrue(strcmp( $last, $link['site'] ) >= 0 );
 			$last = $link['site'];
@@ -450,11 +450,11 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'items', $id );
+		$this->assertSuccess( $res, 'entities', $id );
 		if ( $usekeys ) {
 			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
-				if ( array_key_exists( $prop, $res['items'][$id] ) ) {
-					foreach ( $res['items'][$id][$prop] as $key => $value ) {
+				if ( array_key_exists( $prop, $res['entities'][$id] ) ) {
+					foreach ( $res['entities'][$id][$prop] as $key => $value ) {
 						$this->assertTrue( is_string( $key ) );
 						if ( $field !== false ) {
 							$this->assertArrayHasKey( $field, $value );
@@ -467,8 +467,8 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		}
 		else {
 			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
-				if ( array_key_exists( $prop, $res['items'][$id] ) ) {
-					foreach ( $res['items'][$id][$prop] as $key => $value ) {
+				if ( array_key_exists( $prop, $res['entities'][$id] ) ) {
+					foreach ( $res['entities'][$id][$prop] as $key => $value ) {
 						$this->assertTrue( is_integer( $key ) );
 						if ( $field !== false ) {
 							$this->assertArrayHasKey( $field, $value );

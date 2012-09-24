@@ -282,10 +282,10 @@ class ApiSetItem extends ApiModifyEntity {
 		}
 
 		$entity = $entityContent->getEntity();
-		$this->addLabelsToResult( $entity->getLabels(), 'item' );
-		$this->addDescriptionsToResult( $entity->getDescriptions(), 'item' );
-		$this->addAliasesToResult( $entity->getAllAliases(), 'item' );
-		$this->addSiteLinksToResult( $entity->getSiteLinks(), 'item' );
+		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
+		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
+		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
+		$this->addSiteLinksToResult( $entity->getSiteLinks(), 'entity' );
 
 		return true;
 	}
@@ -369,13 +369,13 @@ class ApiSetItem extends ApiModifyEntity {
 			parent::getParamDescriptionForEntity(),
 			array(
 				'data' => array( 'The serialized object that is used as the data source.',
-					"The newly created entity will be assigned an entity 'id'."
+					"A newly created entity will be assigned an item 'id'."
 				),
 				'exclude' => array( 'List of substructures to neglect during the processing.',
 					"In addition 'length', 'touched' and 'count' is always excluded."
 				),
-				'clear' => array( 'If set, the complete entity is emptied before proceeding.',
-					'The entity will not be saved before the entity is filled with the "data", possibly with parts excluded.'
+				'clear' => array( 'If set, the complete item is emptied before proceeding.',
+					'The item will not be saved before the item is filled with the "data", possibly with parts excluded.'
 				),
 			)
 		);
@@ -386,7 +386,7 @@ class ApiSetItem extends ApiModifyEntity {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to create a single new Wikibase entity and modify it with serialised information.'
+			'API module to create a single new Wikibase item and modify it with serialised information.'
 		);
 	}
 
@@ -395,10 +395,10 @@ class ApiSetItem extends ApiModifyEntity {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetentity&data={}&format=jsonfm'
-			=> 'Set an empty JSON structure for the entity, it will be extended with an entity id and the structure cleansed and completed. Report it as pretty printed json format.',
-			'api.php?action=wbsetentity&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
-			=> 'Set a more complete JSON structure for the entity, it will be extended with an entity id and the structure cleansed and completed.',
+			'api.php?action=wbsetitem&data={}&format=jsonfm'
+			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed. Report it as pretty printed json format.',
+			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			=> 'Set a more complete JSON structure for the item, it will be extended with an item id and the structure cleansed and completed.',
 		);
 	}
 
@@ -406,7 +406,7 @@ class ApiSetItem extends ApiModifyEntity {
 	 * @see ApiBase::getHelpUrls()
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetentity';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetitem';
 	}
 
 	/**
