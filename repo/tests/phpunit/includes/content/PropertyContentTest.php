@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\PropertyContent, Wikibase\EntityContent;
 
 /**
  * Tests for the Wikibase\PropertyContent class.
@@ -30,6 +31,22 @@ class PropertyContentTest extends EntityContentTest {
 	 */
 	protected function getContentClass() {
 		return '\Wikibase\PropertyContent';
+	}
+
+	/**
+	 * @see EntityContentTest::newEmpty
+	 *
+	 * @since 0.2
+	 *
+	 * @return EntityContent
+	 */
+	protected function newEmpty() {
+		$content = PropertyContent::newEmpty();
+
+		$dataTypes = \Wikibase\Settings::get( 'dataTypes' );
+		$content->getProperty()->setDataTypeById( array_shift( $dataTypes ) );
+
+		return $content;
 	}
 
 }
