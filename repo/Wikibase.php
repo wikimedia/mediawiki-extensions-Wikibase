@@ -44,7 +44,7 @@ if ( !defined( 'WBL_VERSION' ) ) { // No version constant to check against :/
 //	die( '<b>Error:</b> Wikibase depends on the <a href="https://www.mediawiki.org/wiki/Extension:CLDR">CLDR</a> extension.' );
 //}
 
-define( 'WB_VERSION', '0.1 alpha' );
+define( 'WB_VERSION', '0.2 alpha' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
