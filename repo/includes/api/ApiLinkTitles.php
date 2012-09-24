@@ -140,6 +140,10 @@ class ApiLinkTitles extends Api {
 				'entity',
 				'id', $itemContent->getItem()->getId()
 			);
+			$this->getResult()->addValue(
+				'entity',
+				'type', $itemContent->getItem()->getType()
+			);
 		}
 
 		$this->getResult()->addValue(

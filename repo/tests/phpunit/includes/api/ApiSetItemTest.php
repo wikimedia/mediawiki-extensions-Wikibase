@@ -597,11 +597,14 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			self::$users['wbeditor']->user
 		);
 
-		// check return value -------------------------------------------
+		// check returned keys -------------------------------------------
 		$this->assertSuccess( $res, 'entity' );
 		$item = $res['entity'];
 		$this->assertSuccess( $res, 'entity', 'id' );
 		$this->assertSuccess( $res, 'entity', 'lastrevid' );
+
+		// check return value -------------------------------------------
+		$this->assertEquals( CONTENT_MODEL_WIKIBASE_ITEM,  $res['entity']['type'] );
 
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {

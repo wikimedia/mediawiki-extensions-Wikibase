@@ -83,6 +83,8 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		$this->assertSuccess( $res, 'entities', $id );
 		$this->assertItemEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
+		// This should be correct for all items we are testing
+		$this->assertEquals( CONTENT_MODEL_WIKIBASE_ITEM,  $res['entities'][$id]['type'] );
 		// The following comes from the props=info which is included by default
 		// Only check if they are there and seems valid, can't do much more for the moment (or could for title but then we are testing assumptions)
 		$this->assertSuccess( $res, 'entities', $id, 'pageid' );
@@ -304,14 +306,14 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	function provideProps() {
 		return array(
 			array( 'Berlin', '', array( 'id' ) ),
-			array( 'Berlin', 'labels', array( 'id', 'labels' ) ),
-			array( 'Berlin', 'labels|descriptions', array( 'id', 'labels', 'descriptions' ) ),
-			array( 'Berlin', 'aliases|sitelinks', array( 'id', 'aliases', 'sitelinks' ) ),
+			array( 'Berlin', 'labels', array( 'id', 'type', 'labels' ) ),
+			array( 'Berlin', 'labels|descriptions', array( 'id', 'type', 'labels', 'descriptions' ) ),
+			array( 'Berlin', 'aliases|sitelinks', array( 'id', 'type', 'aliases', 'sitelinks' ) ),
 
 			array( 'Leipzig', '', array( 'id' ) ),
-			array( 'Leipzig', 'labels|descriptions', array( 'id', 'labels', 'descriptions' ) ),
-			array( 'Leipzig', 'labels|aliases', array( 'id', 'labels' ) ),
-			array( 'Leipzig', 'sitelinks|descriptions', array( 'id', 'descriptions' ) ),
+			array( 'Leipzig', 'labels|descriptions', array( 'id', 'type', 'labels', 'descriptions' ) ),
+			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels' ) ),
+			array( 'Leipzig', 'sitelinks|descriptions', array( 'id', 'type', 'descriptions' ) ),
 
 			array( 'Berlin', 'xyz', false ),
 		);
