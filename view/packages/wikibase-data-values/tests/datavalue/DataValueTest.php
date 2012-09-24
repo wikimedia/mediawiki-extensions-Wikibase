@@ -1,6 +1,6 @@
 <?php
 
-namespace DataValue\Test;
+namespace DataValues\Test;
 
 /**
  * Base for unit tests for DataValue implementing classes.

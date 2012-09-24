@@ -1,6 +1,6 @@
 <?php
 
-namespace DataValue;
+namespace DataValues;
 
 /**
  * Class representing a time value.

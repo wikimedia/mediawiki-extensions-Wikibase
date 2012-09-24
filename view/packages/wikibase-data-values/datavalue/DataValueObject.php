@@ -1,6 +1,6 @@
 <?php
 
-namespace DataValue;
+namespace DataValues;
 
 /**
  * Base for objects that represent a single data value.

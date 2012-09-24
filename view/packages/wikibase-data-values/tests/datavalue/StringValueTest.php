@@ -1,6 +1,6 @@
 <?php
 
-namespace DataValue\Test;
+namespace DataValues\Test;
 
 /**
  * Base for unit tests for DataValue implementing classes.
@@ -41,7 +41,7 @@ class StringValueTest extends DataValueTest {
 	 * @return string
 	 */
 	public function getClass() {
-		return 'DataValue\StringValue';
+		return 'DataValues\StringValue';
 	}
 
 	/**

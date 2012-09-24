@@ -27,18 +27,19 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 return array(
-	'DataValue\DataValue' => 'datavalue/DataValue.php',
-	'DataValue\DataValueObject' => 'datavalue/DataValueObject.php',
-//	'DataValue\GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
-//	'DataValue\MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
-//	'DataValue\MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
-//	'DataValue\QuantityValue' => 'datavalue/QuantityValue.php',
-	'DataValue\StringValue' => 'datavalue/StringValue.php',
-//	'DataValue\TimeValue' => 'datavalue/TimeValue.php',
+	'DataValues\DataValue' => 'datavalue/DataValue.php',
+	'DataValues\DataValueObject' => 'datavalue/DataValueObject.php',
+//	'DataValues\GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
+//	'DataValues\MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
+//	'DataValues\MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
+	'DataValues\NumberValue' => 'datavalue/NumberValue.php',
+//	'DataValues\QuantityValue' => 'datavalue/QuantityValue.php',
+	'DataValues\StringValue' => 'datavalue/StringValue.php',
+//	'DataValues\TimeValue' => 'datavalue/TimeValue.php',
 
 	'Comparable' => 'includes/Comparable.php',
 	'Hashable' => 'includes/Hashable.php',
 	'Immutable' => 'includes/Immutable.php',
 
-	'DataValue\Test\DataValueTest' => 'tests/datavalue/DataValueTest.php',
+	'DataValues\Test\DataValueTest' => 'tests/datavalue/DataValueTest.php',
 );
