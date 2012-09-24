@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+sY\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-24T20:22:10Z",
+      "side": 1,
+      "message": "Sigh... already explained to Jens why this is not good.\n\nSetting verbose now actually changes the process workflow. And it does so in a way that the ChangeHandler can no fancy batch magic or whatever.\n\nPlease just call the underneath call always. This will not get you a message per change, but a list of messages per batch. Seems to be perfectly fine for out use case. And if you can\u0027t live with it, go implement some callback message function or so.",
+      "revId": "a0cfd7ca8db4480c1848ee880c4726bf1ebb4d95",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
