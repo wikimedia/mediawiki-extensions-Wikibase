@@ -80,7 +80,9 @@ class PropertyContent extends EntityContent {
 		wfProfileIn( __METHOD__ );
 		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
 
-		$this->addLabelUniquenessConflicts( $status );
+		if ( $status->isOK() ) {
+			$this->addLabelUniquenessConflicts( $status );
+		}
 
 		wfProfileOut( __METHOD__ );
 		return $status;
