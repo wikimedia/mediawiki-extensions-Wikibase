@@ -34,4 +34,11 @@ $messages = array();
  */
 $messages['en'] = array(
 	'datavalues-desc' => 'Collection of objects representing various kinds of values',
+	'version-datavalues' => 'DataValues',
+);
+
+/** Message documentation (Message documentation) */
+$messages['qqq'] = array(
+	'datavalues-desc' => '{{desc}}',
+	'version-datavalues' => 'Name of the DataValues extension collection, used on Special:Version',
 );

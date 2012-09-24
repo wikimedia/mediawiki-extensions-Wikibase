@@ -37,7 +37,7 @@ if ( !defined( 'DATAVALUES' ) ) {
 
 global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
 
-$wgExtensionCredits['other'][] = array(
+$wgExtensionCredits['datavalues'][] = array(
 	'path' => __FILE__,
 	'name' => 'DataValues',
 	'version' => DataValues_VERSION,
@@ -72,6 +72,22 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	foreach ( $testFiles as $file ) {
 		$files[] = __DIR__ . '/tests/' . $file . 'Test.php';
 	}
+
+	return true;
+};
+
+/**
+ * Called when generating the extensions credits, use this to change the tables headers.
+ * @see https://www.mediawiki.org/wiki/Manual:Hooks/ExtensionTypes
+ *
+ * @since 0.1
+ *
+ * @param array &$extensionTypes
+ *
+ * @return boolean
+ */
+$wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
+	$extensionTypes['datavalues'] = wfMessage( 'version-datavalues' )->text();
 
 	return true;
 };
