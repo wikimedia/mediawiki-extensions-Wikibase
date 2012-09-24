@@ -75,12 +75,10 @@ $wgHooks['ParserGetVariableValueSwitch'][]		= '\Wikibase\NoLangLinkHandler::onPa
 $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= '\Wikibase\ClientHooks::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
 
-#for pollForChanges script:
-$wgSharedTables[] = 'wb_changes';
 
-#do this if sharing another wiki's item cache:
-#$wgSharedTables[] = 'wbc_entity_cache';
-#$wgSharedTables[] = 'wbc_items_per_site';
+$wgSharedTables[] = 'wbc_entity_cache';
+$wgSharedTables[] = 'wbc_items_per_site';
+
 
 // Resource loader modules
 $moduleTemplate = array(
