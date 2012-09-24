@@ -7,7 +7,7 @@ use Wikibase\ClaimObject as ClaimObject;
 use Wikibase\Claim as Claim;
 use Wikibase\ReferenceObject as ReferenceObject;
 use Wikibase\Reference as Reference;
-use \DataValue\DataValueObject as DataValueObject;
+use \DataValue\StringValue as StringValue;
 
 /**
  * Tests for the Wikibase\StatementObject class.
@@ -64,7 +64,7 @@ class StatementObjectTest extends \MediaWikiTestCase {
 
 		$instance->setReferences( new \Wikibase\ReferenceList(
 			new ReferenceObject( new \Wikibase\SnakList(
-				new \Wikibase\PropertyValueSnak( 1, new DataValueObject() )
+				new \Wikibase\PropertyValueSnak( 1, new StringValue( 'a' ) )
 			) )
 		) );
 
@@ -86,7 +86,7 @@ class StatementObjectTest extends \MediaWikiTestCase {
 	public function testSetReferences( Statement $statement ) {
 		$references = new \Wikibase\ReferenceList(
 			new ReferenceObject( new \Wikibase\SnakList(
-				new \Wikibase\PropertyValueSnak( 1, new DataValueObject() )
+				new \Wikibase\PropertyValueSnak( 1, new StringValue( 'a' ) )
 			) )
 		);
 

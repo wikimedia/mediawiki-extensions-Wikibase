@@ -4,7 +4,7 @@ namespace Wikibase;
 use ApiBase;
 
 /**
- * API module for the language attributes for a Wikibase item.
+ * API module for the language attributes for a Wikibase entity.
  * Requires API write mode to be enabled.
  *
  * @since 0.1
@@ -20,10 +20,10 @@ use ApiBase;
 class ApiSetDescription extends ApiModifyLangAttribute {
 
 	/**
-	 * @see  ApiModifyItem::getRequiredPermissions()
+	 * @see  ApiModifyEntity::getRequiredPermissions()
 	 */
-	protected function getRequiredPermissions( Item $item, array $params ) {
-		$permissions = parent::getRequiredPermissions( $item, $params );
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 
 		$permissions[] = ( isset( $params['value'] ) && 0<strlen( $params['value'] ) )
 			? 'description-update'
@@ -32,25 +32,24 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 	}
 
 	/**
-	 * @see ApiModifyItem::modifyItem()
+	 * @see ApiModifyEntity::modifyEntity()
 	 */
-	protected function modifyItem( ItemContent &$itemContent, array $params ) {
-		$status = parent::modifyItem( $itemContent, $params );
-
-		if ( $status && isset( $params['value'] ) ) {
+	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+		if ( isset( $params['value'] ) ) {
 			$description = Utils::squashToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $description ) ) {
-				$descriptions = array( $language => $itemContent->getItem()->setDescription( $language, $description ) );
+				$descriptions = array( $language => $entityContent->getEntity()->setDescription( $language, $description ) );
 			}
 			else {
-				$itemContent->getItem()->removeDescription( $language );
+				$entityContent->getEntity()->removeDescription( $language );
 				$descriptions = array( $language => '' );
 			}
-			$this->addDescriptionsToResult( $descriptions, 'item' );
+
+			$this->addDescriptionsToResult( $descriptions, 'item' ); // FIXME: must be updated
 		}
 
-		return $status;
+		return true;
 	}
 
 	/**
@@ -58,7 +57,7 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to set a description for a single Wikibase item.'
+			'API module to set a description for a single Wikibase entity.'
 		);
 	}
 

@@ -403,6 +403,7 @@ abstract class EntityContent extends \AbstractContent {
 	}
 
 	/**
+	 * @see Content::prepareSave
 	 *
 	 * @param WikiPage $page
 	 * @param int      $flags
@@ -410,7 +411,6 @@ abstract class EntityContent extends \AbstractContent {
 	 * @param User     $user
 	 *
 	 * @return \Status
-	 * @see Content::prepareSave()
 	 */
 	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
 		wfProfileIn( __METHOD__ );
@@ -433,6 +433,46 @@ abstract class EntityContent extends \AbstractContent {
 
 		wfProfileOut( __METHOD__ );
 		return $status;
+	}
+
+	/**
+	 * Adds errors to the status if there are labels that already exist
+	 * for another entity of this type in the same language.
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Status $status
+	 */
+	protected final function addLabelUniquenessConflicts( Status $status ) {
+		$labels = array();
+
+		$entity = $this->getEntity();
+
+		foreach ( $entity->getLabels() as $langCode => $labelText ) {
+			$label = array(
+				'termLanguage' => $langCode,
+				'termText' => $labelText,
+			);
+
+			$labels[] = $label;
+		}
+
+		$foundLabels = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
+			$labels,
+			TermCache::TERM_TYPE_LABEL,
+			$entity->getType()
+		);
+
+		foreach ( $foundLabels as $foundLabel ) {
+			if ( $foundLabel['entityId'] !== $entity->getId() ) {
+				$status->fatal(
+					'wikibase-error-label-not-unique-' . $entity->getType(),
+					$foundLabel['termText'],
+					$foundLabel['termLanguage'],
+					$foundLabel['entityId']
+				);
+			}
+		}
 	}
 
 }

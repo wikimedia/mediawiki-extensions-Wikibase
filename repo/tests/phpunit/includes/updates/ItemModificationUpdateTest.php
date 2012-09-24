@@ -5,7 +5,7 @@ use \Wikibase\ItemModificationUpdate as ItemModificationUpdate;
 use \Wikibase\ItemContent as ItemContent;
 
 /**
- *  Tests for the Wikibase\ItemStructuredSave class.
+ *  Tests for the Wikibase\ItemModificationUpdate class.
  *
  * @file
  * @since 0.1
@@ -29,7 +29,7 @@ use \Wikibase\ItemContent as ItemContent;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemStructuredSaveTest extends \MediaWikiTestCase {
+class ItemModificationUpdateTest extends \MediaWikiTestCase {
 
 	public function testConstruct() {
 		$update = new ItemModificationUpdate( ItemContent::newEmpty() );
@@ -37,7 +37,6 @@ class ItemStructuredSaveTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\EntityModificationUpdate', $update );
 		$this->assertInstanceOf( '\DataUpdate', $update );
 	}
-
 
 	public function itemProvider() {
 		return array_map(
@@ -59,6 +58,8 @@ class ItemStructuredSaveTest extends \MediaWikiTestCase {
 
 		$item = $itemContent->getItem();
 		$id = $item->getId();
+
+		// TODO: use store
 
 		$this->assertEquals(
 			count( $item->getSiteLinks() ),

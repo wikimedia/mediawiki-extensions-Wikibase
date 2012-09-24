@@ -218,6 +218,41 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 		return params;
 	},
 
+	/**
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.performApiAction
+	 */
+	performApiAction: function( apiAction ) {
+		var promise = $PARENT.prototype.performApiAction.call( this, apiAction ),
+			self = this;
+
+		// (bug 40399) for site-links we want to get the normalized link from the API result to make sure we have
+		// the right links without knowing about the site type.
+		promise.done( function( response ) {
+			var item = response.item,
+				site = wb.getSite( self._interfaces.siteId.getValue() ),
+				oldFn = site.getUrlTo;
+
+			if( site === null || !item || !item.sitelinks ) {
+				return;
+			}
+			var siteLink = item.sitelinks[ site.getGlobalSiteId() ];
+
+			if( !siteLink || !siteLink.url || !siteLink.title ) {
+				return;
+			}
+
+			// overwrite the getUrlTo function of this site object to always return the valid url returned by the
+			// API without caring about the site type. This acts as a filter on top of the original function.
+			// TODO/FIXME: this is rather hacky, a real cache could be introduced to wb.Site.getUrlTo
+			site.getUrlTo = function( pageTitle ) {
+				return $.trim( pageTitle ) === siteLink.title
+					? siteLink.url // cached url returned by API
+					: oldFn.call( this, pageTitle ); // original function or more filter
+			};
+		} );
+		return promise;
+	},
+
 	/////////////////
 	// CONFIGURABLE:
 	/////////////////

@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Title, Content, ParserOptions, ParserOutput, DataUpdate;
+use Title, Content, ParserOptions, ParserOutput, DataUpdate, WikiPage, User, Status;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -62,6 +62,28 @@ class PropertyContent extends EntityContent {
 	 */
 	public static function newFromArray( array $data ) {
 		return new static( new PropertyObject( $data ) );
+	}
+
+	/**
+	 * @see Content::prepareSave
+	 *
+	 * @since 0.1
+	 *
+	 * @param WikiPage $page
+	 * @param int      $flags
+	 * @param int      $baseRevId
+	 * @param User     $user
+	 *
+	 * @return Status
+	 */
+	public function prepareSave( WikiPage $page, $flags, $baseRevId, User $user ) {
+		wfProfileIn( __METHOD__ );
+		$status = parent::prepareSave( $page, $flags, $baseRevId, $user );
+
+		$this->addLabelUniquenessConflicts( $status );
+
+		wfProfileOut( __METHOD__ );
+		return $status;
 	}
 
 	/**

@@ -107,7 +107,7 @@ class TermSqlCache implements TermCache {
 		$dbw = wfGetDB( DB_MASTER );
 
 		return $dbw->delete(
-			'wb_terms',
+			$this->tableName,
 			array(
 				'term_entity_id' => $entity->getId(),
 				'term_entity_type' => $entity->getType()
@@ -134,7 +134,7 @@ class TermSqlCache implements TermCache {
 		foreach ( $entity->getDescriptions() as $languageCode => $description ) {
 			$terms[] = array(
 				'term_language' => $languageCode,
-				'term_type' => 'description',
+				'term_type' => TermCache::TERM_TYPE_DESCRIPTION,
 				'term_text' => $description,
 			);
 		}
@@ -142,7 +142,7 @@ class TermSqlCache implements TermCache {
 		foreach ( $entity->getLabels() as $languageCode => $label ) {
 			$terms[] = array(
 				'term_language' => $languageCode,
-				'term_type' => 'label',
+				'term_type' => TermCache::TERM_TYPE_LABEL,
 				'term_text' => $label,
 			);
 		}
@@ -151,7 +151,7 @@ class TermSqlCache implements TermCache {
 			foreach ( $aliases as $alias ) {
 				$terms[] = array(
 					'term_language' => $languageCode,
-					'term_type' => 'alias',
+					'term_type' => TermCache::TERM_TYPE_ALIAS,
 					'term_text' => $alias,
 				);
 			}
@@ -161,7 +161,7 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
-	 * Returns the Databse from which to read.
+	 * Returns the Database from which to read.
 	 *
 	 * @since 0.1
 	 *
@@ -189,7 +189,7 @@ class TermSqlCache implements TermCache {
 
 		$conds = array(
 			'terms0.term_text' => $label,
-			'terms0.term_type' => 'label',
+			'terms0.term_type' => TermCache::TERM_TYPE_LABEL,
 		);
 
 		$joinConds = array();
@@ -200,7 +200,7 @@ class TermSqlCache implements TermCache {
 
 		if ( !is_null( $description ) ) {
 			$conds['terms1.term_text'] = $description;
-			$conds['terms1.term_type'] = 'description';
+			$conds['terms1.term_type'] = TermCache::TERM_TYPE_DESCRIPTION;
 
 			if ( !is_null( $languageCode ) ) {
 				$conds['terms1.term_language'] = $languageCode;
@@ -223,6 +223,134 @@ class TermSqlCache implements TermCache {
 		);
 
 		return array_map( function( $item ) { return $item->term_entity_id; }, iterator_to_array( $items ) );
+	}
+
+	/**
+	 * @see TermCache::termExists
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $termValue
+	 * @param string|null $termType
+	 * @param string|null $termLanguage Language code
+	 * @param string|null $entityType
+	 *
+	 * @return boolean
+	 */
+	public function termExists( $termValue, $termType = null, $termLanguage = null, $entityType = null ) {
+		$conditions = array(
+			'term_text' => $termValue,
+		);
+
+		if ( $termType !== null ) {
+			$conditions['term_type'] = $termType;
+		}
+
+		if ( $termLanguage !== null ) {
+			$conditions['term_language'] = $termLanguage;
+		}
+
+		if ( $entityType !== null ) {
+			$conditions['term_entity_type'] = $entityType;
+		}
+
+		$result = $this->getReadDb()->selectRow(
+			$this->tableName,
+			array(
+				'term_entity_id',
+			),
+			$conditions,
+			__METHOD__
+		);
+
+		return $result !== false;
+	}
+
+	/**
+	 * @see TermCache::getMatchingTerms
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $terms
+	 * @param string|null $termType
+	 * @param string|null $entityType
+	 *
+	 * @return array
+	 */
+	public function getMatchingTerms( array $terms, $termType = null, $entityType = null ) {
+		$conditions = array();
+
+		$allowedFields = array(
+			'term_entity_type' => 'entityType',
+			'term_type' => 'termType',
+			'term_language' => 'termLanguage',
+			'term_text' => 'termText',
+		);
+
+		$dbr = $this->getReadDb();
+
+		// Maps interface term fields to table fields and defaults
+		// using the methods $termType and $entityType parameters.
+		foreach ( $terms as $term ) {
+			$fullTerm = array();
+
+			if ( array_key_exists( 'termLanguage', $term ) ) {
+				$fullTerm['term_language'] = $term['termLanguage'];
+			}
+
+			if ( array_key_exists( 'termText', $term ) ) {
+				$fullTerm['term_text'] = $term['termText'];
+			}
+
+			if ( array_key_exists( 'termType', $term ) ) {
+				$fullTerm['term_type'] = $term['termType'];
+			}
+			elseif ( $termType !== null ) {
+				$fullTerm['term_type'] = $termType;
+			}
+
+			if ( array_key_exists( 'entityType', $term ) ) {
+				$fullTerm['term_entity_type'] = $term['entityType'];
+			}
+			elseif ( $entityType !== null ) {
+				$fullTerm['term_entity_type'] = $entityType;
+			}
+
+			$fullTerm = array_intersect_key( $fullTerm, $allowedFields );
+
+			foreach ( $fullTerm as $field => &$value ) {
+				$value = $field . '=' . $dbr->addQuotes( $value );
+			}
+
+			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
+		}
+
+		$allowedFields['term_entity_id'] = 'entityId';
+
+		$obtainedTerms = $dbr->select(
+			$this->tableName,
+			array_keys( $allowedFields ),
+			implode( ' OR ', $conditions ),
+			__METHOD__
+		);
+
+		$matchingTerms = array();
+
+		foreach ( $obtainedTerms as $obtainedTerm ) {
+			$matchingTerm = array();
+
+			foreach ( $obtainedTerm as $key => $value ) {
+				if ( $key === 'term_entity_id' ) {
+					$value = (int)$value;
+				}
+
+				$matchingTerm[$allowedFields[$key]] = $value;
+			}
+
+			$matchingTerms[] = $matchingTerm;
+		}
+
+		return $matchingTerms;
 	}
 
 }
