@@ -41,7 +41,7 @@ if ( !defined( 'DataValues_VERSION' ) ) {
 $dependencies = array(
 	'Diff_VERSION' => 'Diff',
 	'DataValues_VERSION' => 'DataValues',
-	'ValueParser_VERSION' => 'ValueParser',
+	'ValueParsers_VERSION' => 'ValueParsers',
 	'DataTypes_VERSION' => 'DataTypes',
 );
 
