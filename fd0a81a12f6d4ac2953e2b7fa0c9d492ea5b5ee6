@@ -33,6 +33,24 @@
       "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+k4\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-24T21:17:21Z",
+      "side": 1,
+      "message": "it should probably belong to the repo, no? but it should be shared by the entity that *uses* it, not the one that defines or fills it. so, by the client, NOT by the repo. So if lib is sharing it, it shouldn\u0027t.",
+      "parentUuid": "AAAATH//+rY\u003d",
+      "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
