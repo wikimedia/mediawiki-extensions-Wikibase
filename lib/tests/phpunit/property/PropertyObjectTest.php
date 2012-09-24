@@ -60,4 +60,56 @@ class PropertyObjectTest extends EntityObjectTest {
 	protected function getNewFromArray( array $data ) {
 		return PropertyObject::newFromArray( $data );
 	}
+
+	public function testGetDataType() {
+		$property = $this->getNewEmpty();
+
+		$pokemons = null;
+
+		try {
+			$property->getDataType();
+		}
+		catch ( \Exception $pokemons ) {}
+
+		$this->assertInstanceOf( '\MWException', $pokemons );
+
+		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
+			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+
+			$property->setDataType( $dataType );
+
+			$this->assertInstanceOf( '\DataTypes\DataType', $property->getDataType() );
+		}
+	}
+
+	public function testSetDataType() {
+		$property = $this->getNewEmpty();
+
+		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
+			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+
+			$property->setDataType( $dataType );
+
+			$this->assertEquals( $dataType, $property->getDataType() );
+		}
+	}
+
+	public function testSetDataTypeById() {
+		$property = $this->getNewEmpty();
+
+		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
+			$property->setDataTypeById( $dataTypeId );
+			$this->assertEquals( $dataTypeId, $property->getDataType()->getId() );
+		}
+
+		$pokemons = null;
+
+		try {
+			$property->setDataTypeById( 'this-does-not-exist' );
+		}
+		catch ( \Exception $pokemons ) {}
+
+		$this->assertInstanceOf( '\MWException', $pokemons );
+	}
+
 }

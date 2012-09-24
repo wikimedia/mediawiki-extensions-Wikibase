@@ -31,7 +31,7 @@ namespace Wikibase;
 class QueryObject extends EntityObject implements Query {
 
 	/**
-	 * @see EntityObject::getIdPrefix()
+	 * @see EntityObject::getIdPrefix
 	 *
 	 * @since 0.1
 	 *
@@ -42,6 +42,8 @@ class QueryObject extends EntityObject implements Query {
 	}
 
 	/**
+	 * @see Entity::newFromArray
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $data

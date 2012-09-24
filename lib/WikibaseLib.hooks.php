@@ -47,6 +47,10 @@ final class LibHooks {
 					'wikibase-property~refresh' => 'Wikibase\EntityRefresh',
 					'wikibase-query~refresh' => 'Wikibase\EntityRefresh',
 				),
+				'dataTypes' => array(
+					'commonsMedia',
+					//'string',
+				),
 			)
 		);
 
