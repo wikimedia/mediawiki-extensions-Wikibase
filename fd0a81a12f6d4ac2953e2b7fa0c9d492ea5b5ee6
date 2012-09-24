@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+rU\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-24T20:39:35Z",
+      "side": 1,
+      "message": "deprecated comment style",
+      "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+rY\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-24T20:39:35Z",
+      "side": 1,
+      "message": "This table belongs to lib and is already shared.",
+      "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
