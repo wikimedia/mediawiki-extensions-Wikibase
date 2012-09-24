@@ -156,8 +156,8 @@ class PollForChanges extends \Maintenance {
 							$type = ucfirst( $matches[ 2 ] ); // This is the verb (like "update" or "add")
 							$object = $matches[ 1 ]; // This is the object (like "item" or "property").
 							self::msg( 'Processing change: '. $type . ' for '. $object . ' ' .$fields[ 'id' ] );
-						}
-						ChangeHandler::singleton()->handleChanges( array( $change ) );
+							ChangeHandler::singleton()->handleChanges( array( $change ) );
+					}
 				} else {
 					ChangeHandler::singleton()->handleChanges( $changes );
 				}
