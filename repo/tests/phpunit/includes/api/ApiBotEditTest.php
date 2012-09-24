@@ -37,7 +37,7 @@ use Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiBotEditTest extends \ApiTestCase {
+class ApiBotEditTest extends ApiModifyItemBase {
 
 	protected static $baseOfItemIds = 1;
 	protected static $usepost;
@@ -67,26 +67,7 @@ class ApiBotEditTest extends \ApiTestCase {
 		);
 		$wgUser = self::$users['wbbot']->user;
 
-		\ApiQueryInfo::resetTokenCache();
-
-		// now we have to do the login with the previous user
-		$data = $this->doApiRequest( array(
-			'action' => 'login',
-			'lgname' => self::$users['wbbot']->username,
-			'lgpassword' => self::$users['wbbot']->password
-		) );
-
-		$token = $data[0]['login']['token'];
-
-		$this->doApiRequest(
-			array(
-				'action' => 'login',
-				'lgtoken' => $token,
-				'lgname' => self::$users['wbbot']->username,
-				'lgpassword' => self::$users['wbbot']->password
-			),
-			$data
-		);
+		$this->login( 'wbbot' );
 	}
 
 	/**
@@ -112,45 +93,17 @@ class ApiBotEditTest extends \ApiTestCase {
 	 * @depends testTokensAndRights
 	 */
 	function testSetItemTop() {
-		$req = array();
-		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
-			$first = $this->doApiRequest(
-				array(
-					'action' => 'query',
-					'prop' => 'info',
-					'titles' => 'Main Page', // any page goes
-					'intoken' => 'edit' ),
-				null,
-				false,
-				self::$users['wbbot']->user
-			);
+		$token = $this->getItemToken();
 
-			$pages = $first[0]["query"]["pages"];
-			foreach ( $pages as $id => $page ) {
-				if ( isset( $page['edittoken'] ) ) {
-					$req['token'] = $page["edittoken"];
-					break;
-				}
-			}
-			$this->assertEquals(
-				34, strlen( $req['token'] ),
-				"The length of the token is not 34 chars"
-			);
-			$this->assertRegExp(
-				'/\+\\\\$/', $req['token'],
-				"The final chars of the token is not '+\\'"
-			);
-		}
-		$req = array_merge(
-			$req,
-			array(
-				'action' => 'wbsetitem',
-				'summary' => 'Some reason',
-				'data' => '{}',
-			)
+		$req = array(
+			'action' => 'wbsetitem',
+			'summary' => 'Some reason',
+			'data' => '{}',
+			'token' => $token,
 		);
 
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
+
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
 		$this->assertArrayHasKey( 'item', $second[0],
@@ -166,44 +119,15 @@ class ApiBotEditTest extends \ApiTestCase {
 	 */
 	function testCreateItem( $id, $bot, $new, $data ) {
 		$myid = self::$baseOfItemIds + $id;
-		$req = array();
-		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
-			$first = $this->doApiRequest(
-				array(
-					'action' => 'query',
-					'prop' => 'info',
-					'titles' => 'Main Page', // any page goes
-					'intoken' => 'edit' ),
-				null,
-				false,
-				self::$users['wbbot']->user
-			);
+		$token = $this->getItemToken();
 
-			$pages = $first[0]["query"]["pages"];
-			foreach ( $pages as $id => $page ) {
-				if ( isset( $page['edittoken'] ) ) {
-					$req['token'] = $page["edittoken"];
-					break;
-				}
-			}
-			$this->assertEquals(
-				34, strlen( $req['token'] ),
-				"The length of the token is not 34 chars"
-			);
-			$this->assertRegExp(
-				'/\+\\\\$/', $req['token'],
-				"The final chars of the token is not '+\\'"
-			);
-		}
-
-		$req = array_merge(
-			$req,
-			array(
-				'action' => 'wbsetitem',
-				'summary' => 'Some reason',
-				'data' => $data,
-			)
+		$req = array(
+			'action' => 'wbsetitem',
+			'summary' => 'Some reason',
+			'data' => $data,
+			'token' => $token,
 		);
+
 		if ( !$new ) {
 			$req['id'] = $myid;
 		}

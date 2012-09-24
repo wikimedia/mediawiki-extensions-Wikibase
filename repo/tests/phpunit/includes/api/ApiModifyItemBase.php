@@ -43,6 +43,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	protected static $itemOutput = array(); // items in output format, using handles as keys
 
 	protected static $loginSession = null;
+	protected static $loginUser = null;
 	protected static $token = null;
 
 	protected $user = null;
@@ -254,14 +255,18 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	/**
 	 * Performs a login, if necessary, and returns the resulting session.
 	 */
-	function login() {
+	function login( $user = 'wbeditor' ) {
 		if ( !$this->isSetUp() ) {
 			throw new \MWException( "can't log in before setUp() was run." );
 		}
 
+		if ( is_string( $user ) ) {
+			$user = self::$users['wbeditor'];
+		}
+
 		$this->init();
 
-		if ( self::$loginSession ) {
+		if ( self::$loginSession && $user->username == self::$loginUser->username ) {
 			return self::$loginSession;
 		}
 
@@ -270,8 +275,8 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 
 		list($res,,) = $this->doApiRequest( array(
 			'action' => 'login',
-			'lgname' => self::$users['wbeditor']->username,
-			'lgpassword' => self::$users['wbeditor']->password
+			'lgname' => $user->username,
+			'lgpassword' => $user->password
 		) );
 
 		$token = $res['login']['token'];
@@ -280,12 +285,14 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			array(
 				'action' => 'login',
 				'lgtoken' => $token,
-				'lgname' => self::$users['wbeditor']->username,
-				'lgpassword' => self::$users['wbeditor']->password
+				'lgname' => $user->username,
+				'lgpassword' => $user->password
 			),
 			null
 		);
 
+		self::$token = null;
+		self::$loginUser = $user;
 		self::$loginSession = $session;
 		return self::$loginSession;
 	}
@@ -293,7 +300,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	/**
 	 * Gets an item edit token. Returns a cached token if available.
 	 */
-	function getItemToken( $title = 'Main Page' ) {
+	function getItemToken() {
 		$this->init();
 
 		if ( !self::$usetoken ) {
@@ -306,25 +313,16 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			return self::$token;
 		}
 
-		$re = $this->doApiRequest(
+		list($re,,) = $this->doApiRequest(
 			array(
-				'action' => 'query',
-				'prop' => 'info',
-				'titles' => $title,
-				'intoken' => 'edit' ),
+				'action' => 'tokens',
+				'type' => 'edit' ),
 			null,
 			false,
-			self::$users['wbeditor']->user
+			self::$loginUser->user
 		);
 
-		$pages = $re[0]["query"]["pages"];
-		foreach ( $pages as $id => $page ) {
-			if ( isset( $page['edittoken'] ) ) {
-				self::$token = $page['edittoken'];
-				break;
-			}
-		}
-		return self::$token;
+		return $re['tokens']['edittoken'];
 	}
 
 	/**
