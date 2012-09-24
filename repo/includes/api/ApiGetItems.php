@@ -135,7 +135,7 @@ class ApiGetItems extends Api {
 							$revision = $page->getRevision();
 							if ( $revision !== null ) {
 								$res->addValue( $itemPath, 'lastrevid', intval( $revision->getId() ) );
-								$res->addValue( $itemPath, 'touched', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
+								$res->addValue( $itemPath, 'touched', $revision->getTimestamp( TS_ISO_8601 ) );
 								$res->addValue( $itemPath, 'length', intval( $revision->getSize() ) );
 							}
 							$res->addValue( $itemPath, 'count', intval( $page->getCount() ) );
