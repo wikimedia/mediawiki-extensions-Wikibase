@@ -251,6 +251,10 @@ abstract class ApiModifyEntity extends Api {
 			'entity',
 			'id', $entityContent->getEntity()->getId()
 		);
+		$this->getResult()->addValue(
+			'entity',
+			'type', $entityContent->getEntity()->getType()
+		);
 		$page = $entityContent->getWikiPage();
 		$revision = $page->getRevision();
 		if ( $revision !== null ) {
