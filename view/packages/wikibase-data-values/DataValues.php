@@ -52,7 +52,7 @@ if ( !defined( 'DATAVALUES' ) ) {
 	define( 'DATAVALUES', true );
 }
 
-define( 'DataValues_VERSION', '0.1' );
+define( 'DataValues_VERSION', '0.1 alpha' );
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	include __DIR__ . '/DataValues.mw.php';
