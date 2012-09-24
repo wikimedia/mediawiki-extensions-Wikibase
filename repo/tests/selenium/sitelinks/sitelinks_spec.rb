@@ -183,7 +183,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.saveSitelinkLink
         ajax_wait
         page.wait_for_api_callback
-        sleep 1 #cause there's a delay before the value is actually set in the dom -> should be changed in the UI
         page.pageArticleNormalized?.should be_true
         page.pageArticleNormalized_element.text.should == "С"
       end
