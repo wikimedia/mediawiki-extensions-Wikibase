@@ -16,6 +16,7 @@ class ItemDisambiguationPage < ItemPage
   unordered_list(:disambiguationList, :class => "wikibase-disambiguation")
   link(:disambiguationItemLink1, :xpath => "//ul[@class='wikibase-disambiguation']/li[1]/a")
   link(:disambiguationItemLink2, :xpath => "//ul[@class='wikibase-disambiguation']/li[2]/a")
+  link(:disambiguationItemLink3, :xpath => "//ul[@class='wikibase-disambiguation']/li[3]/a")
   def countDisambiguationElements
     count = 0
     disambiguationList_element.each do |disambigationElem|
