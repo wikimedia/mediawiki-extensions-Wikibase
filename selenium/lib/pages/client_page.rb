@@ -16,6 +16,7 @@ class ClientPage < RubySelenium
   button(:clientSearchSubmit, :id => "searchGoButton")
   paragraph(:clientSearchNoresult, :class => "mw-search-nonefound")
   link(:clientCreateArticleLink, :xpath => "//p[@class='mw-search-createlink']/b/a")
+  link(:clientEditArticleLink, :xpath => "//li[@id='ca-edit']/span/a")
   link(:clientEditLinksLink, :xpath => "//li[@class='wbc-editpage']/a")
   text_area(:clientCreateArticleInput, :id => "wpTextbox1")
   button(:clientCreateArticleSubmit, :id => "wpSave")
@@ -30,15 +31,30 @@ class ClientPage < RubySelenium
   link(:interwiki_hu, :xpath => "//li[@class='interwiki-hu']/a")
   link(:interwiki_fi, :xpath => "//li[@class='interwiki-fi']/a")
   link(:interwiki_fr, :xpath => "//li[@class='interwiki-fr']/a")
+  link(:interwiki_af, :xpath => "//li[@class='interwiki-af']/a")
+  link(:interwiki_zh, :xpath => "//li[@class='interwiki-zh']/a")
   link(:interwiki_xxx, :xpath => "//li[contains(@class, 'interwiki')]/a")
-  def create_article(title, text)
-    self.clientSearchInput= title
+
+  #methods
+  def create_article(title, text, overwrite = false)
+    self.clientSearchInput = title
     clientSearchSubmit
     if clientSearchNoresult?
       clientCreateArticleLink
-      self.clientCreateArticleInput= text
+      self.clientCreateArticleInput = text
+      clientCreateArticleSubmit
+    elsif overwrite
+      clientEditArticleLink
+      self.clientCreateArticleInput = text
       clientCreateArticleSubmit
     end
+  end
+
+  def change_article(title, text)
+    navigate_to_article(title)
+    clientEditArticleLink
+    self.clientCreateArticleInput = text
+    clientCreateArticleSubmit
   end
 
   def navigate_to_article(title, purge = false)

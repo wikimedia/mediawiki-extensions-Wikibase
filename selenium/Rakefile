@@ -23,6 +23,11 @@ RSpec::Core::RakeTask.new(:client) do |spec|
   spec.pattern = '../client/tests/selenium/*/*_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:interwiki) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../client/tests/selenium/interwiki/*_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:item) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/*_spec.rb'
