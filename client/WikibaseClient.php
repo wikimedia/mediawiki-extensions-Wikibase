@@ -26,7 +26,7 @@ if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c becaus
 	die( "<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.\n" );
 }
 
-define( 'WBC_VERSION', '0.1 alpha' );
+define( 'WBC_VERSION', '0.2 alpha' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
