@@ -422,8 +422,6 @@ final class RepoHooks {
 
 				'defaultStore' => 'sqlstore',
 
-				'testDataTypes' => array( 'Type 1', 'Type 2' ),
-
 				'idBlacklist' => array(
 					1,
 					23,
