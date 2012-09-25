@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+Rc\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T14:08:00Z",
+      "side": 1,
+      "message": "empty action?",
+      "revId": "f7eda37d7bd4327f83f41033e0915b1ff9ca83ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+Rk\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T14:08:00Z",
+      "side": 1,
+      "message": "Use an explicit check. \u00270\u0027 evaluates to false, so such a label would not be displayed with current code",
+      "revId": "f7eda37d7bd4327f83f41033e0915b1ff9ca83ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+RU\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T14:08:00Z",
+      "side": 1,
+      "message": "This form does not have a token. You can add one using Html::hiden and $this-\u003egetUser()-\u003egetEditToken()",
+      "revId": "f7eda37d7bd4327f83f41033e0915b1ff9ca83ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
