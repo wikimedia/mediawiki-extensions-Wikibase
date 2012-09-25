@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+P4\u003d",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T14:34:21Z",
+      "side": 1,
+      "message": "This comment is incorrectly copied?",
+      "revId": "d11de8bced4885a8342bf960b5b3b8eefa6f1c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+Po\u003d",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T14:34:21Z",
+      "side": 1,
+      "message": "This name is odd, I\u0027d expect it to return an EntityHandler. getContentFromTerm would be clearer.\n\nAll similar methods in this class are using unclear names like that as well, which is because they got moved from being static methods in ItemContent at some point and no one got around to changing them yet.",
+      "revId": "d11de8bced4885a8342bf960b5b3b8eefa6f1c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+P8\u003d",
+        "filename": "repo/includes/content/EntityHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T14:34:21Z",
+      "side": 1,
+      "message": "The query selects entries from the term cache, and with these conditions, you can have multiple matches for a single entity. You probably want to not create duplicates in the returned list :)",
+      "revId": "d11de8bced4885a8342bf960b5b3b8eefa6f1c96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
