@@ -16,6 +16,24 @@
       "revId": "ea990df9136062ebbed49a0ffda8e4d0d8526f4a",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+Q8\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-25T14:12:39Z",
+      "side": 1,
+      "message": "The empty string probably means that it is the main namespace?\nWe can only work with strings here.",
+      "parentUuid": "AAAATH//+TQ\u003d",
+      "revId": "ea990df9136062ebbed49a0ffda8e4d0d8526f4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
