@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\PropertyContent;
 
 /**
  * Tests for the Wikibase\PropertyContent class.
@@ -30,6 +31,29 @@ class PropertyContentTest extends EntityContentTest {
 	 */
 	protected function getContentClass() {
 		return '\Wikibase\PropertyContent';
+	}
+
+	public function testLabelUniquenessRestriction() {
+		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+
+		$propertyContent = PropertyContent::newEmpty();
+		$propertyContent->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
+		$propertyContent->getProperty()->setLabel( 'de', 'testLabelUniquenessRestriction' );
+
+		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
+		$this->assertTrue( $status->isOK(), "property creation should work" );
+
+		$propertyContent1 = PropertyContent::newEmpty();
+		$propertyContent1->getProperty()->setLabel( 'nl', 'testLabelUniquenessRestriction' );
+
+		$status = $propertyContent1->save( 'create property', null, EDIT_NEW );
+		$this->assertTrue( $status->isOK(), "property creation should work" );
+
+		$propertyContent1->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
+
+		$status = $propertyContent1->save( 'create property' );
+		$this->assertFalse( $status->isOK(), "saving a property with duplicate label+lang should not work" );
+		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-not-unique-wikibase-property' ) );
 	}
 
 }
