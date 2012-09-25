@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+TQ\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-25T13:11:29Z",
+      "side": 1,
+      "message": "does this assume it\u0027s English?  English probably will work, as an alias, but not convinced this is the best way.\n\nalso, don\u0027t like the empty string, but suppose it works.",
+      "revId": "ea990df9136062ebbed49a0ffda8e4d0d8526f4a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
