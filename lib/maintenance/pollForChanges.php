@@ -52,6 +52,11 @@ class PollForChanges extends \Maintenance {
 	protected $continueInterval;
 
 	/**
+	 * @var bool
+	 */
+	protected $done = false;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -60,6 +65,10 @@ class PollForChanges extends \Maintenance {
 			and triggers a hook to invoke the code that needs to handle these changes.';
 
 		$this->addOption( 'verbose', "Print change objects to be processed" );
+
+		$this->addOption( 'once', "Processes one batch and exits" );
+
+		$this->addOption( 'all', "Processes changes until no more are pending, then exits" );
 
 		$this->addOption( 'since', 'Process changes since timestamp. Timestamp should be given in the form of "yesterday",'
 			. ' "14 September 2012", "1 week 2 days 4 hours 2 seconds ago",'
@@ -116,7 +125,7 @@ class PollForChanges extends \Maintenance {
 			file_put_contents( $pidfile, getmypid() ); // create lockfile
 		}
 
-		while ( true ) {
+		while ( !$this->done ) {
 			$ms = $this->doPoll();
 			usleep( $ms * 1000 );
 		}
@@ -141,7 +150,9 @@ class PollForChanges extends \Maintenance {
 		$changeCount = $changes->count();
 
 		if ( $changeCount == 0 ) {
-			self::msg( 'No new changes were found' );
+			if ( $this->getOption( 'verbose' ) ) {
+				self::msg( 'No new changes were found' );
+			}
 		}
 		else {
 			self::msg( $changeCount . ' new changes were found' );
@@ -151,11 +162,14 @@ class PollForChanges extends \Maintenance {
 			try {
 				if ( $this->getOption( 'verbose' ) ) {
 					foreach ( $changes as $change ) {
-							$fields = $change->getFields();
+							$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
 							preg_match( '/wikibase-(item|[^~-]+)[-~](.+)$/', $fields[ 'type' ], $matches );
 							$type = ucfirst( $matches[ 2 ] ); // This is the verb (like "update" or "add")
 							$object = $matches[ 1 ]; // This is the object (like "item" or "property").
-							self::msg( 'Processing change ' . $fields[ 'id' ] . ': '. $type . ' for '. $object . ' ' .$fields[ 'object_id' ] );
+
+							self::msg( 'Processing change ' . $fields[ 'id' ] . ' (' . $fields[ 'time' ] . '): '
+									. $type . ' for '. $object . ' ' . $fields[ 'object_id' ] );
+
 							ChangeHandler::singleton()->handleChanges( array( $change ) );
 					}
 				} else {
@@ -170,7 +184,25 @@ class PollForChanges extends \Maintenance {
 			$this->lastChangeId = array_pop( $changes )->getId();
 		}
 
-		return $changeCount === $this->pollLimit ? $this->continueInterval : $this->sleepInterval;
+		if ( $changeCount >= $this->pollLimit ) {
+			$sleepFor = $this->continueInterval;
+		} else {
+			$sleepFor = $this->sleepInterval;
+
+			if ( $this->getOption( 'verbose' ) ) {
+				self::msg( 'All changes processed.' );
+			}
+
+			if ( $this->getOption( 'all' ) ) {
+				$this->done = true;
+			}
+		}
+
+		if ( $this->getOption( 'once' ) ) {
+			$this->done = true;
+		}
+
+		return $sleepFor;
 	}
 
 	/**
