@@ -72,7 +72,7 @@ class LangLinkHandler {
 
 		// use repoLinks in only the namespaces specified in settings
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
-                	$nei = self::getNoExternalInterlang( $parser->getOutput() );
+                	$nei = self::getNoExternalLangLinks( $parser->getOutput() );
 
                 	// unsets all the repolinks
                 	if( array_key_exists( '*', $nei ) ) {
@@ -97,12 +97,12 @@ class LangLinkHandler {
 	 */
 	public static function suppressRepoLinks( \Parser $parser, &$repoLinks ) {
 		$out = $parser->getOutput();
-		$nei = self::getNoExternalInterlang( $out );
+		$nei = self::getNoExternalLangLinks( $out );
 
 		// unset only specified repolinks
 		if ( is_array( $repoLinks ) && is_array( $nei ) ) {
 
-			// Remove the links specified by noexternalinterlang parser function.
+			// Remove the links specified by noexternallanglinks parser function.
 			foreach ( array_keys( $nei ) as $code ) {
 				foreach ( $repoLinks as $key => &$repoLink ) {
 					// site corresponding to the $nei code specified and site group
@@ -133,8 +133,8 @@ class LangLinkHandler {
 	 *
 	 * @return Array Empty array if not set.
 	 */
-	public static function getNoExternalInterlang( \ParserOutput $out ) {
-		$nei = $out->getProperty( 'no_external_interlang' );
+	public static function getNoExternalLangLinks( \ParserOutput $out ) {
+		$nei = $out->getProperty( 'noexternallanglinks' );
 
 		if( empty( $nei ) ) {
 			$nei = array();

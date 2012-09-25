@@ -37,7 +37,7 @@ class NoLangLinkHandler {
 	 * @return bool
 	 */
 	public static function onParserFirstCallInit( &$parser ) {
-		$parser->setFunctionHook( 'noexternalinterlang', '\Wikibase\NoLangLinkHandler::noExternalInterlang', SFH_NO_HASH );
+		$parser->setFunctionHook( 'noexternallanglinks', '\Wikibase\NoLangLinkHandler::noExternalLangLinks', SFH_NO_HASH );
 		return true;
 	}
 
@@ -45,7 +45,7 @@ class NoLangLinkHandler {
 	 * Register the magic word.
 	 */
 	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
-		$aCustomVariableIds[] = 'noexternalinterlang';
+		$aCustomVariableIds[] = 'noexternallanglinks';
 		return true;
 	}
 
@@ -53,8 +53,8 @@ class NoLangLinkHandler {
 	 * Apply the magic word.
 	 */
 	public static function onParserGetVariableValueSwitch( &$parser, &$cache, &$magicWordId, &$ret ) {
-		if( $magicWordId == 'noexternalinterlang' ) {
-			self::noExternalInterlang( $parser, '*' );
+		if( $magicWordId == 'noexternallanglinks' ) {
+			self::noExternalLangLinks( $parser, '*' );
 		}
 
 		return true;
@@ -65,16 +65,16 @@ class NoLangLinkHandler {
 	 * @param $parser \Parser
 	 * @return string
 	 */
-	public static function noExternalInterlang( &$parser ) {
+	public static function noExternalLangLinks( &$parser ) {
 		$langs = func_get_args();
 		// Remove the first member, which is the parser.
 		array_shift( $langs );
 		$langs = array_flip( $langs );
 
 		$out = $parser->getOutput();
-		$nei = LangLinkHandler::getNoExternalInterlang( $out );
+		$nei = LangLinkHandler::getNoExternalLangLinks( $out );
 		$nei += $langs;
-		$out->setProperty( 'no_external_interlang', serialize( $nei ) );
+		$out->setProperty( 'noexternallanglinks', serialize( $nei ) );
 
 		return "";
 	}
