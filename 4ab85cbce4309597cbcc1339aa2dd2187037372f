@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+VQ\u003d",
+        "filename": "client/includes/NoLangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-25T12:08:20Z",
+      "side": 1,
+      "message": "please update documentation.",
+      "revId": "4ab85cbce4309597cbcc1339aa2dd2187037372f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
