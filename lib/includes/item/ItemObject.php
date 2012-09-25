@@ -33,7 +33,7 @@ namespace Wikibase;
 class ItemObject extends EntityObject implements Item {
 
 	/**
-	 * @see EntityObject::getIdPrefix()
+	 * @see EntityObject::getIdPrefix
 	 *
 	 * @since 0.1
 	 *
@@ -44,7 +44,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::addSiteLink()
+	 * @see Item::addSiteLink
 	 *
 	 * @since 0.1
 	 *
@@ -69,7 +69,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see   Item::removeSiteLink()
+	 * @see   Item::removeSiteLink
 	 *
 	 * @since 0.1
 	 *
@@ -94,7 +94,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::getSiteLinks()
+	 * @see Item::getSiteLinks
 	 *
 	 * @since 0.1
 	 *
@@ -111,7 +111,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::getSiteLink()
+	 * @see Item::getSiteLink
 	 *
 	 * @since 0.1
 	 *
@@ -128,7 +128,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::isEmpty()
+	 * @see Item::isEmpty
 	 *
 	 * @since 0.1
 	 *
@@ -151,12 +151,11 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * Cleans the internal array structure.
-	 * This consists of adding elements the code expects to be present later on
-	 * and migrating or removing elements after changes to the structure are made.
-	 * Should typically be called before using any of the other methods.
+	 * @see EntityObject::cleanStructure
 	 *
 	 * @since 0.1
+	 *
+	 * @param boolean $wipeExisting
 	 */
 	protected function cleanStructure( $wipeExisting = false ) {
 		parent::cleanStructure( $wipeExisting );
@@ -169,6 +168,8 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
+	 * @see Entity::newFromArray
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $data

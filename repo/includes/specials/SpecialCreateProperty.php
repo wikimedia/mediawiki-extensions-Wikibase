@@ -1,9 +1,11 @@
 <?php
 
+use Wikibase\PropertyContent, Wikibase\EntityContent;
+
 /**
  * Page for creating new Wikibase properties.
  *
- * @since 0.1
+ * @since 0.2
  *
  * @file 
  * @ingroup Wikibase
@@ -14,14 +16,16 @@
 class SpecialCreateProperty extends SpecialCreateEntity {
 
 	/**
-	 * @var string
+	 * @since 0.2
+	 * 
+	 * @var string|null
 	 */
-	protected $datatype = null;
+	protected $dataType = null;
 
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 */
 	public function __construct() {
 		parent::__construct( 'CreateProperty' );
@@ -32,7 +36,7 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 	 */
 	protected function prepareArguments() {
 		parent::prepareArguments();
-		$this->datatype = $this->getRequest()->getVal( 'datatype', isset( $this->parts[2] ) ? $this->parts[2] : '' );
+		$this->dataType = $this->getRequest()->getVal( 'datatype', isset( $this->parts[2] ) ? $this->parts[2] : '' );
 		return true;
 	}
 
@@ -41,7 +45,7 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 	 */
 	protected function hasSufficientArguments() {
 		// TODO: Needs refinement
-		return parent::hasSufficientArguments() && ( $this->datatype !== '' );
+		return parent::hasSufficientArguments() && ( $this->dataType !== '' );
 	}
 
 	/**
@@ -53,14 +57,30 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 
 	/**
 	 * @see SpecialCreateEntity::modifyEntity()
+	 *
+	 * @param EntityContent $propertyContent
+	 *
+	 * @return Status
 	 */
-	protected function modifyEntity( \Wikibase\EntityContent &$entity ) {
-		$status = parent::modifyEntity( $entity );
-		$lang = $this->getLanguage()->getCode();
-		if ( $this->datatype !== '' ) {
-			// how to set this and where to get it
-			//$entity->getEntity()->setDatatype( $lang, $this->datatype );
+	protected function modifyEntity( EntityContent &$propertyContent ) {
+		/**
+		 * @var PropertyContent $propertyContent
+		 */
+		$status = parent::modifyEntity( $propertyContent );
+
+		if ( $this->dataType !== '' ) {
+			// TODO: lookup property by lang+label rather then by id
+			$lang = $this->getLanguage()->getCode();
+
+			try {
+				$propertyContent->getProperty()->setDataTypeById( $this->dataType );
+			}
+			catch ( MWException $exception ) {
+				// TODO: we want a nice internationalized error message
+				$status->fatal( $exception->getText() );
+			}
 		}
+
 		return $status;
 	}
 

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\PropertyValueSnak as PropertyValueSnak;
-use \DataValue\StringValue as StringValue;
+use DataValues\StringValue;
 
 /**
  * Tests for the Wikibase\PropertyValueSnak class.
@@ -55,7 +55,7 @@ class PropertyValueSnakTest extends PropertySnakObjectTest {
 	 */
 	public function testGetDataValue( PropertyValueSnak $omnomnom ) {
 		$dataValue = $omnomnom->getDataValue();
-		$this->assertInstanceOf( '\DataValue\DataValue', $dataValue );
+		$this->assertInstanceOf( '\DataValues\DataValue', $dataValue );
 		$this->assertEquals( $dataValue, $omnomnom->getDataValue() );
 	}
 

@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use DataTypes\DataType;
+use MWException;
 
 /**
  * Represents a single Wikibase property.
@@ -32,34 +34,88 @@ namespace Wikibase;
 class PropertyObject extends EntityObject implements Property {
 
 	/**
-	 * @see EntityObject::getIdPrefix()
+	 * @since 0.2
 	 *
-	 * @since 0.1
-	 *
-	 * @return string
+	 * @var DataType|null
 	 */
-	public static function getIdPrefix() {
-		return Settings::get( 'propertyPrefix' );
+	protected $dataType = null;
+
+	/**
+	 * @see Property::getDataType
+	 *
+	 * @since 0.2
+	 *
+	 * @return DataType
+	 * @throws MWException
+	 */
+	public function getDataType() {
+		if ( $this->dataType === null ) {
+			if ( array_key_exists( 'datatype', $this->data ) ) {
+				return $this->setDataTypeById( $this->data['datatype'] );
+			}
+			else {
+				throw new MWException( 'The DataType of the property is not known' );
+			}
+		}
+		else {
+			return $this->dataType;
+		}
 	}
 
 	/**
-	 * @since 0.1
+	 * @see Property::setDataType
 	 *
-	 * @param array $data
+	 * @since 0.2
 	 *
-	 * @return Property
+	 * @param DataType $dataType
 	 */
-	public static function newFromArray( array $data ) {
-		return new static( $data );
+	public function setDataType( DataType $dataType ) {
+		$this->dataType = $dataType;
 	}
 
 	/**
-	 * @since 0.1
+	 * @see Property::setDataTypeById
 	 *
-	 * @return Property
+	 * @since 0.2
+	 *
+	 * @param string $dataTypeId
+	 *
+	 * @return DataType
+	 * @throws MWException
 	 */
-	public static function newEmpty() {
-		return self::newFromArray( array() );
+	public function setDataTypeById( $dataTypeId ) {
+		if ( is_string( $dataTypeId ) && in_array( $dataTypeId, Settings::get( 'dataTypes' ) ) ) {
+			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+
+			if ( $dataType !== null ) {
+				$this->setDataType( $dataType );
+				return $dataType;
+			}
+		}
+
+		throw new MWException( 'The DataType of the property is not valid' );
+	}
+
+	/**
+	 * @see Entity::toArray
+	 *
+	 * @since 0.2
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		$data = parent::toArray();
+
+		if ( is_null( $this->dataType ) ) {
+			if ( array_key_exists( 'datatype', $data ) ) {
+				unset( $data['datatype'] );
+			}
+		}
+		else {
+			$data['datatype'] = $this->dataType->getId();
+		}
+
+		return $data;
 	}
 
 	/**
@@ -85,6 +141,40 @@ class PropertyObject extends EntityObject implements Property {
 	public function getDiff( Entity $target ) {
 		// TODO
 		return ItemDiff::newEmpty();
+	}
+
+
+	/**
+	 * @see EntityObject::getIdPrefix
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public static function getIdPrefix() {
+		return Settings::get( 'propertyPrefix' );
+	}
+
+	/**
+	 * @see Entity::newFromArray
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return Property
+	 */
+	public static function newFromArray( array $data ) {
+		return new static( $data );
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @return Property
+	 */
+	public static function newEmpty() {
+		return self::newFromArray( array() );
 	}
 
 }

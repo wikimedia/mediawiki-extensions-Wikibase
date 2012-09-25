@@ -75,7 +75,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Entity::toArray()
+	 * @see Entity::toArray
 	 *
 	 * @since 0.1
 	 *

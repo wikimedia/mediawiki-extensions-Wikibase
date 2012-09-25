@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use DataTypes\DataType;
+use MWException;
 
 /**
  * Interface for objects that represent a single Wikibase property.
@@ -32,5 +34,33 @@ namespace Wikibase;
 interface Property extends Entity {
 
 	const ENTITY_TYPE = 'wikibase-property';
+
+	/**
+	 * Returns the DataType of the property.
+	 *
+	 * @since 0.2
+	 *
+	 * @return DataType
+	 * @throws MWException
+	 */
+	public function getDataType();
+
+	/**
+	 * Sets the DataType of the property.
+	 *
+	 * @since 0.2
+	 *
+	 * @param DataType $dataType
+	 */
+	public function setDataType( DataType $dataType );
+
+	/**
+	 * Sets the DataType of the property.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $dataTypeId
+	 */
+	public function setDataTypeById( $dataTypeId );
 
 }
