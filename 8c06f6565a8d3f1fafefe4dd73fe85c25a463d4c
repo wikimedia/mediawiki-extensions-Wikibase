@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+K8\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-25T15:47:11Z",
+      "side": 1,
+      "message": "this makes sense, however if a particular change causes an error, this doesn\u0027t help to identify which change broke it.",
+      "revId": "8c06f6565a8d3f1fafefe4dd73fe85c25a463d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
