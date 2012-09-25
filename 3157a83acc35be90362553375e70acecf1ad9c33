@@ -16,6 +16,24 @@
       "revId": "3157a83acc35be90362553375e70acecf1ad9c33",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+ME\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-25T15:17:41Z",
+      "side": 1,
+      "message": "That is a problem with Special:ItemByTitle which can be fixed separately.  \n\nRegardless of what\u0027s done here, if you enter a url such as \"Special:ItemByTitle/enwiki/South Africa\", it becomes \"South_Africa\" in Special:ItemByTitle.\n\nHere I think we should use the URL encoded form.",
+      "parentUuid": "AAAATH//+NQ\u003d",
+      "revId": "3157a83acc35be90362553375e70acecf1ad9c33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
