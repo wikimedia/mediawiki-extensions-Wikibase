@@ -379,7 +379,7 @@ class TermSqlCache implements TermCache {
 			$tableName = 'terms' . $tableIndex++;
 
 			foreach ( $fullTerm as $field => &$value ) {
-				$value = $field . '=' . $dbr->addQuotes( $value );
+				$value = $field . ' LIKE ' . $dbr->addQuotes( $value . "%" );
 
 				if ( $forJoin ) {
 					$value = $tableName . '.' . $value;
