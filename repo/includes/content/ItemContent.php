@@ -6,6 +6,21 @@ use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOu
 /**
  * Content object for articles representing Wikibase items.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -120,36 +135,69 @@ class ItemContent extends EntityContent {
 	 * @param Status $status
 	 */
 	protected function addLabelDescriptionConflicts( Status $status ) {
-		// TODO
-//		$labels = array();
-//
-//		$entity = $this->getEntity();
-//
-//		foreach ( $entity->getLabels() as $langCode => $labelText ) {
-//			$label = array(
-//				'termLanguage' => $langCode,
-//				'termText' => $labelText,
-//			);
-//
-//			$labels[] = $label;
-//		}
-//
-//		$foundLabels = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
-//			$labels,
-//			TermCache::TERM_TYPE_LABEL,
-//			$entity->getType()
-//		);
-//
-//		foreach ( $foundLabels as $foundLabel ) {
-//			if ( $foundLabel['entityId'] !== $entity->getId() ) {
-//				$status->fatal(
-//					'wikibase-error-label-not-unique-' . $entity->getType(),
-//					$foundLabel['termText'],
-//					$foundLabel['termLanguage'],
-//					$foundLabel['entityId']
-//				);
-//			}
-//		}
+		$labels = array();
+
+		$entity = $this->getEntity();
+
+		foreach ( $entity->getLabels() as $langCode => $labelText ) {
+			$description = $entity->getDescription( $langCode );
+
+			if ( $description !== false ) {
+				$label = array(
+					'termLanguage' => $langCode,
+					'termText' => $labelText,
+					'termType' => TermCache::TERM_TYPE_LABEL,
+				);
+
+				$description = array(
+					'termLanguage' => $langCode,
+					'termText' => $description,
+					'termType' => TermCache::TERM_TYPE_DESCRIPTION,
+				);
+
+				$terms[] = array( $label, $description );
+			}
+		}
+
+		$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingJoinedTerms(
+			$labels,
+			null,
+			$entity->getType()
+		);
+
+		$violatingTerms = array();
+
+		foreach ( $foundTerms as $foundTerm ) {
+			if ( $foundTerm['entityId'] !== $entity->getId() ) {
+				if ( array_key_exists( $foundTerm['entityId'], $violatingTerms ) ) {
+					$violatingPair = $violatingTerms[$foundTerm['entityId']];
+
+					if ( $foundTerm['termType'] === TermCache::TERM_TYPE_LABEL ) {
+						array_unshift( $violatingPair, $foundTerm );
+					}
+					else {
+						array_push( $violatingPair, $foundTerm );
+					}
+				}
+				else {
+					$violatingTerms[$foundTerm['entityId']] = array( $foundTerm );
+				}
+			}
+		}
+
+		foreach ( $violatingTerms as $violatingPair ) {
+			if ( count( $violatingPair ) === 2 ) {
+				list( $label, $description ) = $violatingPair;
+
+				$status->fatal(
+					'wikibase-error-label-not-unique-item',
+					$label['termText'],
+					$label['termLanguage'],
+					$label['entityId'],
+					$description['termText']
+				);
+			}
+		}
 	}
 
 	/**

@@ -286,11 +286,26 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
+	 * @see TermCache::getMatchingJoinedTerms
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $terms
+	 * @param string|null $termType
+	 * @param string|null $entityType
+	 *
+	 * @return array
+	 */
+	public function getMatchingJoinedTerms( array $terms, $termType = null, $entityType = null ) {
+		return $this->doTermSelection( $terms, $termType, $entityType, true );
+	}
+
+	/**
 	 * Similar to
 	 * @see TermCache::getMatchingTerms
 	 *
-	 * But also upports self joins when $selfJoin is set to true.
-	 * In this case one can prvide a list of terms in each outer array item.
+	 * But also supports self joins when $selfJoin is set to true.
+	 * In this case one can provide a list of terms in each outer array item.
 	 *
 	 * @since 0.1
 	 *
@@ -315,6 +330,7 @@ class TermSqlCache implements TermCache {
 
 		$joinConds = array();
 		$tables = array( 'terms0' => $this->tableName );
+		$selectionFields = array_keys( $allowedFields );
 
 		if ( $hasJoin ) {
 			$tables['terms1'] = $this->tableName;
@@ -326,11 +342,15 @@ class TermSqlCache implements TermCache {
 					'terms0.term_entity_type=terms1.term_entity_type',
 				)
 			);
+
+			foreach ( $selectionFields as &$selectionField ) {
+				$selectionField = 'terms0.' . $selectionField;
+			}
 		}
 
 		$obtainedTerms = $this->getReadDb()->select(
 			$tables,
-			array_keys( $allowedFields ),
+			$selectionFields,
 			implode( ' OR ', $conditions ),
 			__METHOD__,
 			array(),
