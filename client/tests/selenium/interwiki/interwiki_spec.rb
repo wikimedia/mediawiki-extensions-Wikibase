@@ -47,9 +47,6 @@ describe "Check client interwiki links" do
         page.navigate_to_article(article_title)
         page.clientEditLinksLink
       end
-      on_page(ItemByTitlePage) do |page|
-        page.itemByTitleSubmit
-      end
       on_page(ItemPage) do |page|
         page.wait_for_item_to_load
         page.itemLabelSpan.should == article_title
