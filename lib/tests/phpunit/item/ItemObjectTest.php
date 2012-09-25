@@ -89,7 +89,12 @@ class ItemObjectTest extends EntityObjectTest {
 		 * @var \Wikibase\Item $item
 		 */
 		foreach ( TestItems::getItems() as $item ) {
+			// getId()
 			$this->assertTrue( is_null( $item->getId() ) || is_integer( $item->getId() ) );
+			// getPrefixedId()
+			$this->assertTrue(
+				$item->getId() === null ? $item->getPrefixedId() === null : is_string( $item->getPrefixedId() )
+			);
 		}
 	}
 

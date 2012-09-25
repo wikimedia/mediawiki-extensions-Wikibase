@@ -128,6 +128,17 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
+	 * @see Entity::getPrefixedId()
+	 *
+	 * @since 0.2
+	 *
+	 * @return string|null
+	 */
+	public function getPrefixedId() {
+		return $this->getId() === null ? null : $this->getIdPrefix() . $this->getId();
+	}
+
+	/**
 	 * @see Entity::setId()
 	 *
 	 * @since 0.1
