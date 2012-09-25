@@ -134,7 +134,7 @@ $specialPageAliases['mr'] = array(
 	'CreateProperty' => array( 'वैशिष्ट्येतयारकरा' ),
 );
 
-/** Norwegian Bokmål (‪norsk (bokmål)‬) */
+/** Norwegian Bokmål (norsk (bokmål)‎) */
 $specialPageAliases['nb'] = array(
 	'CreateProperty' => array( 'Opprett_egenskap' ),
 );
@@ -162,7 +162,7 @@ $specialPageAliases['pt'] = array(
 	'CreateProperty' => array( 'Criar_propriedade' ),
 );
 
-/** Serbian (Cyrillic script) (‪српски (ћирилица)‬) */
+/** Serbian (Cyrillic script) (српски (ћирилица)‎) */
 $specialPageAliases['sr-ec'] = array(
 	'CreateProperty' => array( 'Направи_својство' ),
 );

@@ -316,6 +316,11 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 * $1 is label text
 * $2 is the labels language code
 * $3 is the id of the query that already has the label',
+	'wikibase-error-label-not-unique-item' => 'Error message shown when a user tries to save an item that has a non-unique label+description pair.
+* $1 is label text
+* $2 is the labels language code
+* $3 is the id of the query that already has the label
+* $4 is description text',
 	'wikibase-itemlink' => 'used to generate the link text for links to items. $1 is the items label, $2 the id given to "wikibase-itemlink-id-wrapper". This message can be altered to change the position of the single parts within the link.',
 	'wikibase-itemlink-id-wrapper' => 'Used to wrap the items id for a link to an item in parentheses or similar.',
 	'wikibase-itemlink-title' => 'Title attribute set in links to an item. $1 is the items label or (if not available) the prefixed page title of the item. $2 is the items description.',
@@ -386,19 +391,6 @@ Parameters:
 * $1 is the number of aliases that were removed;
 * $2 is the language code for the item page.',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Error message shown when a user tries to save a property that has a non-unique label.
-* $1 is label text
-* $2 is the labels language code
-* $3 is the id of the property that already has the label',
-	'wikibase-error-label-not-unique-wikibase-query' => 'Error message shown when a user tries to save a query that has a non-unique label.
-* $1 is label text
-* $2 is the labels language code
-* $3 is the id of the query that already has the label',
-	'wikibase-error-label-not-unique-item' => 'Error message shown when a user tries to save an item that has a non-unique label+description pair.
-* $1 is label text
-* $2 is the labels language code
-* $3 is the id of the query that already has the label
-* $4 is description text',
 );
 
 /** Achinese (Acèh)
@@ -633,7 +625,7 @@ Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPA
 	'content-model-1001' => 'Wikibase-Datenelement',
 );
 
-/** German (formal address) (‪Deutsch (Sie-Form)‬)
+/** German (formal address) (Deutsch (Sie-Form)‎)
  * @author Kghbln
  */
 $messages['de-formal'] = array(
@@ -886,6 +878,9 @@ $messages['es'] = array(
 	'wikibase-move-error' => 'No puedes mover las páginas que se encuentran en el espacio de nombres de datos, y no puedes mover páginas hacia allí.',
 	'wikibase-error-relational-save-failed' => 'No se ha podido guardar la identidad del elemento en la base de datos.',
 	'wikibase-error-sitelink-already-used' => 'El enlace del sitio [[$1:$2]] ya es usado por el elemento [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Otra propiedad ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Otra consulta ($3) ya tiene la etiqueta "$1" asociada con el código de idioma $2',
+	'wikibase-error-label-not-unique-item' => 'Otro elemento ($3) ya tiene la etiqueta "$1" y la descripción "$4" asociada con el código de idioma $2',
 	'special-itembytitle' => 'Artículo por título',
 	'wikibase-itembytitle-lookup-fieldset' => 'Búsqueda de artículos por sitio y título',
 	'wikibase-itembytitle-lookup-site' => 'Sitio:',
@@ -2669,14 +2664,22 @@ $messages['pl'] = array(
 	'wikibase-error-ui-edit-conflict' => 'Wystąpił konflikt edycji. Załaduj raz jeszcze i zapisz.',
 	'wikibase-move-error' => 'Nie można przenieść stron, które znajdują się w obszarze nazw data i nie można przenieść stron do niego.',
 	'wikibase-error-relational-save-failed' => 'Tożsamość elementu nie może być przechowywana w bazie danych.',
+	'special-itembytitle' => 'Elementy wedle tytułu',
 	'wikibase-itembytitle-lookup-site' => 'Witryna:',
 	'wikibase-itembytitle-lookup-page' => 'Strona:',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'Wyszukiwanie elementów wedle etykiety',
 	'wikibase-itemdisambiguation-lookup-language' => 'Język:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etykieta:',
 	'wikibase-itemdisambiguation-submit' => 'Szukaj',
+	'wikibase-itemdisambiguation-invalid-langcode' => 'Przepraszamy ale podany identyfikator języka nie został rozpoznany przez system. Proszę użyć prawidłowego identyfikatora jak "pl".',
+	'wikibase-createproperty-fieldset' => 'Utwórz nową właściwość',
+	'wikibase-createproperty-datatype' => 'Typ danych:',
+	'special-createitem' => 'Utwórz nowy element',
+	'wikibase-createitem-intro' => 'Przed utworzeniem nowego elementu, należy rozważyć sprawdzenie, czy ten element już istnieje. Aby utworzyć nowy, należy określić przynajmniej etykietę lub opis w  $1 .',
+	'wikibase-createitem-fieldset' => 'Utwórz nowy element',
 	'wikibase-createentity-label' => 'Etykieta:',
 	'wikibase-createentity-description' => 'Opis:',
+	'wikibase-createentity-submit' => 'Utwórz',
 	'wikibase-self-conflict' => 'Dane zostały zmodyfikowane przez ciebie po rozpoczęciu edycji.',
 	'wikibase-restoreold' => 'przywróć',
 	'wikibase-noitem' => 'Ten element nie istnieje.
