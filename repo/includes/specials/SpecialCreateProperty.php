@@ -103,11 +103,12 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 
 	protected function getDataTypes() {
 		$html = '';
-		foreach ( \Wikibase\Settings::get( 'testDataTypes' ) as $option ) {
+		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $typeId ) {
 			$html .= Html::element(
 				'option',
 				array(),
-				$option
+				$typeId
+				// \DataTypes\DataTypeFactory::singleton()->getType( $typeId )->getLabel( $this->getLanguage()->getCode() ) // TODO add this as soon as getLabel is implemented
 			);
 		}
 		return
