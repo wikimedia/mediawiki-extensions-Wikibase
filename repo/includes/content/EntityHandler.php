@@ -237,6 +237,50 @@ abstract class EntityHandler extends \ContentHandler {
 	}
 
 	/**
+	 * Get the items corresponding to the provided language and term pair.
+	 * Term means it is either a label or an alias.
+	 *
+	 * TODO: refactor to work for all entities
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $language
+	 * @param string $term
+	 * @param string|null $entityType
+	 *
+	 * @return array of ItemContent
+	 */
+	public function getFromTerm( $language, $term, $entityType = null ) {
+		$hits = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
+			array(
+				array(
+					'termType' 		=> TermCache::TERM_TYPE_LABEL,
+					'termLanguage' 	=> $language,
+					'termText' 		=> $term
+				),
+				array(
+					'termType' 		=> TermCache::TERM_TYPE_ALIAS,
+					'termLanguage' 	=> $language,
+					'termText' 		=> $term
+				)
+			),
+			null,
+			$entityType
+		);
+		$items = array();
+
+		foreach ( $hits as $hit ) {
+			$item = self::getFromId( $hit['entityId'] );
+
+			if ( !is_null( $item ) ) {
+				$items[] = $item;
+			}
+		}
+
+		return $items;
+	}
+
+	/**
 	 * Returns false to indicate that the parser cache should not be used for data items.
 	 * The html representation of Items depends on the user language, splitting the parser
 	 * cache by user language is currently problematic and would need some core changes.
