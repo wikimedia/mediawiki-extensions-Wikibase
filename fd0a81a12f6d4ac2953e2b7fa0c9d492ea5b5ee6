@@ -69,6 +69,24 @@
       "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+UE\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-25T12:46:53Z",
+      "side": 1,
+      "message": "I\u0027m saying that this table should never ever be in wgSharedTable on a wikibase repo.",
+      "parentUuid": "AAAATH//+Ys\u003d",
+      "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
