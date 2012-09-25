@@ -155,9 +155,9 @@ class PollForChanges extends \Maintenance {
 							preg_match( '/wikibase-(item|[^~-]+)[-~](.+)$/', $fields[ 'type' ], $matches );
 							$type = ucfirst( $matches[ 2 ] ); // This is the verb (like "update" or "add")
 							$object = $matches[ 1 ]; // This is the object (like "item" or "property").
-							self::msg( 'Processing change: '. $type . ' for '. $object . ' ' .$fields[ 'id' ] );
-						}
-						ChangeHandler::singleton()->handleChanges( array( $change ) );
+							self::msg( 'Processing change ' . $fields[ 'id' ] . ': '. $type . ' for '. $object . ' ' .$fields[ 'object_id' ] );
+							ChangeHandler::singleton()->handleChanges( array( $change ) );
+					}
 				} else {
 					ChangeHandler::singleton()->handleChanges( $changes );
 				}
