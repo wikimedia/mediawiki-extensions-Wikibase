@@ -51,6 +51,24 @@
       "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+Ys\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T09:31:04Z",
+      "side": 1,
+      "message": "Not sure what you\u0027re saying.\n\nRight now the table will always be shared depending on the config of the wiki using either client or repo. Your change is registering it a second time in client, not good.",
+      "parentUuid": "AAAATH//+k4\u003d",
+      "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
