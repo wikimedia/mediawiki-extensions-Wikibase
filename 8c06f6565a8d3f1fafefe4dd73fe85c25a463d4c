@@ -16,6 +16,24 @@
       "revId": "8c06f6565a8d3f1fafefe4dd73fe85c25a463d4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+Ks\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T15:52:22Z",
+      "side": 1,
+      "message": "Sure. That is not the issue I\u0027m fixing here though and is something you\u0027re entirely free to take care of in another commit.",
+      "parentUuid": "AAAATH//+K8\u003d",
+      "revId": "8c06f6565a8d3f1fafefe4dd73fe85c25a463d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
