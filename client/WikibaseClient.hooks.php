@@ -224,7 +224,6 @@ final class ClientHooks {
 			array(
 				'namespaces' => array( NS_MAIN ),
 				'source' => array( 'dir' => __DIR__ . '/tests' ),
-				'editURL' => '',
 				// temporary hack to provide default settings
 				'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
 				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
@@ -270,23 +269,25 @@ final class ClientHooks {
 		global $wgLanguageCode;
 
 		$editUrl = Settings::get( 'repoBase' );
-		if( ! $editUrl ) {
+		if( !$editUrl ) {
 			return true;
 		}
 
 		$title = $skin->getContext()->getTitle();
 
-		// gets the Main part of the title, no underscores used in this db table
+		// gets the main part of the title, no underscores used in this db table
 		$titleText = $title->getText();
+
+		// main part of title for building link
+		$titleLink = $title->getPartialURL();
 		$siteId = Settings::get( 'siteGlobalID' );
 
 		$itemId = ClientStoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $titleText );
 
 		if ( $itemId ) {
 			// links to the special page
-			// TODO: know what the repo namespace is
 			$template->data['language_urls'][] = array(
-				'href' => rtrim( $editUrl, "/" ) . "/Data:Q" . $itemId . '?uselang=' . $wgLanguageCode,
+				'href' => rtrim( $editUrl, "/" ) . "/Special:ItemByTitle/$siteId/$titleLink",
 				'text' => wfMessage( 'wbc-editlinks' )->text(),
 				'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
 				'class' => 'wbc-editpage',
