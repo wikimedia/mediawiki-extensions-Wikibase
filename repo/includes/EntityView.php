@@ -26,6 +26,19 @@ abstract class EntityView extends \ContextSource {
 	const VIEW_TYPE = 'entity';
 
 	/**
+	 * Maps entity types to the corresponding entity view.
+	 *
+	 * @since 0.2
+	 *
+	 * @var array
+	 */
+	public static $typeMap = array(
+		Item::ENTITY_TYPE => '\Wikibase\ItemView',
+		Property::ENTITY_TYPE => '\Wikibase\PropertyView',
+		Query::ENTITY_TYPE => '\Wikibase\QueryView'
+	);
+
+	/**
 	 * Constructor.
 	 *
 	 * @todo think about using IContextSource here. Parser for example uses parser options (which also can be generated
@@ -323,7 +336,7 @@ abstract class EntityView extends \ContextSource {
 
 		// register JS stuff
 		$editableView = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
-		self::registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
+		static::registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
 
 		$out->addParserOutput( $pout );
 		return $pout;
@@ -356,5 +369,24 @@ abstract class EntityView extends \ContextSource {
 		// hand over the entity's ID to JS
 		$out->addJsConfigVars( 'wb' . ucfirst( static::VIEW_TYPE ) . 'Id', $entity->getEntity()->getId() );
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
+	}
+
+
+	/**
+	 * @param EntityContent $entity
+	 * @return mixed
+	 * @throws \MWException
+	 *
+	 * @since 0.2
+	 */
+	public static function newForEntityContent( EntityContent $entity ) {
+		$type = $entity->getEntity()->getType();
+
+		if ( in_array( $type, self::$typeMap ) ) {
+			throw new \MWException( "No entity view known for handling entities of type '$type'" );
+		}
+
+		$instance = new self::$typeMap[ $type ]();
+		return $instance;
 	}
 }
