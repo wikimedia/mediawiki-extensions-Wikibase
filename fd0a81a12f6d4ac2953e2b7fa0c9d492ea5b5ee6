@@ -87,6 +87,24 @@
       "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+Tc\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T12:59:55Z",
+      "side": 1,
+      "message": "You\u0027d rather have the table in the same db as the one the repo wiki uses and rely on it being accessible from all other wikis that need the table?",
+      "parentUuid": "AAAATH//+UE\u003d",
+      "revId": "fd0a81a12f6d4ac2953e2b7fa0c9d492ea5b5ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
