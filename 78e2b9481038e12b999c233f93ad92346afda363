@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+Nk\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T14:56:21Z",
+      "side": 1,
+      "message": "return $this-\u003egetId() \u003d\u003d\u003d null ? null : $this-\u003egetIdPrefix() . $this-\u003egetId();",
+      "revId": "78e2b9481038e12b999c233f93ad92346afda363",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
