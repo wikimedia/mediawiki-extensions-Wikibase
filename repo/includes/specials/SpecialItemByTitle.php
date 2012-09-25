@@ -40,20 +40,26 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$siteId = $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' );
 		$page = $request->getVal( 'page', isset( $parts[1] ) ? $parts[1] : '' );
+
+		$pageTitle = '';
 		$itemContent = null;
 
-		// Create an item view
-		if ( isset( $siteId ) && isset( $page ) ) {
-			$itemContent = \Wikibase\ItemHandler::singleton()->getFromSiteLink( $siteId, $page );
-			if ( $itemContent !== null ) {
-				$itemUrl = $itemContent->getTitle()->getFullUrl();
-				$this->getOutput()->redirect( $itemUrl );
+		if ( !empty( $page ) ) {
+			$pageTitle = \Title::newFromText( $page )->getText();
+
+			// Create an item view
+			if ( isset( $siteId ) && isset( $pageTitle ) ) {
+				$itemContent = \Wikibase\ItemHandler::singleton()->getFromSiteLink( $siteId, $pageTitle );
+				if ( $itemContent !== null ) {
+					$itemUrl = $itemContent->getTitle()->getFullUrl();
+					$this->getOutput()->redirect( $itemUrl );
+				}
 			}
 		}
 
 		// If there is no item content post the switch form
 		if ( $itemContent === null ) {
-			$this->switchForm( $siteId, $page );
+			$this->switchForm( $siteId, $pageTitle );
 		}
 	}
 
