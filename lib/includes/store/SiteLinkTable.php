@@ -209,4 +209,15 @@ class SiteLinkTable implements SiteLinkCache {
 		return $conflicts;
 	}
 
+	/**
+	 * @see SiteLinkCache::clear
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function clear() {
+		return wfGetDB( DB_MASTER )->delete( $this->table, '*', __METHOD__ );
+	}
+
 }

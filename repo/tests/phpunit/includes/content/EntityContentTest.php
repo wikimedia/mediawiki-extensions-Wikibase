@@ -126,6 +126,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testSaveFlags() {
+		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+
 		$entityContent = $this->newEmpty();
 
 		// try to create without flags
@@ -165,6 +167,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testRepeatedSave() {
+		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+
 		$entityContent = $this->newEmpty();
 
 		// create
