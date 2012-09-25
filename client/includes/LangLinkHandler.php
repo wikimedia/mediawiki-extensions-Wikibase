@@ -57,10 +57,10 @@ class LangLinkHandler {
 	}
 
 	/**
-	 * Shall a page have interwiki links from Wikidata repo?
+	 * Checks if a page have interwiki links from Wikidata repo?
 	 * Disabled for a page when either:
 	 * - Wikidata not enabled for namespace
-	 * - nei parser function = * (suppress all repo links) 
+	 * - nel parser function = * (suppress all repo links)
 	 * 
 	 * @since 0.1
 	 *
@@ -72,10 +72,10 @@ class LangLinkHandler {
 
 		// use repoLinks in only the namespaces specified in settings
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
-                	$nei = self::getNoExternalInterlang( $parser->getOutput() );
+                	$nel = self::getNoExternalLangLinks( $parser->getOutput() );
 
                 	// unsets all the repolinks
-                	if( array_key_exists( '*', $nei ) ) {
+                	if( array_key_exists( '*', $nel ) ) {
 				return false;
 			}
 
@@ -97,15 +97,15 @@ class LangLinkHandler {
 	 */
 	public static function suppressRepoLinks( \Parser $parser, &$repoLinks ) {
 		$out = $parser->getOutput();
-		$nei = self::getNoExternalInterlang( $out );
+		$nel = self::getNoExternalLangLinks( $out );
 
 		// unset only specified repolinks
-		if ( is_array( $repoLinks ) && is_array( $nei ) ) {
+		if ( is_array( $repoLinks ) && is_array( $nel ) ) {
 
-			// Remove the links specified by noexternalinterlang parser function.
-			foreach ( array_keys( $nei ) as $code ) {
+			// Remove the links specified by noexternallanglinks parser function.
+			foreach ( array_keys( $nel ) as $code ) {
 				foreach ( $repoLinks as $key => &$repoLink ) {
-					// site corresponding to the $nei code specified and site group
+					// site corresponding to the $nel code specified and site group
 					$site = \SitesTable::singleton()->selectRow( null, array(
 						'language' => $code,
 						'group' => Settings::get( 'siteGroup' )
@@ -113,12 +113,12 @@ class LangLinkHandler {
 
 					// check if site is found or not
 					if ( $site !== false ) {
-						$neiGlobalId = $site->getGlobalId();
+						$nelGlobalId = $site->getGlobalId();
 
 						// global id for the repo link
 						$repoLinkGlobalId = $repoLink->getSite()->getGlobalId();
 
-						if ( $repoLinkGlobalId == $neiGlobalId ) {
+						if ( $repoLinkGlobalId == $nelGlobalId ) {
 							unset( $repoLinks[$key] );
 						}
 					}
@@ -133,16 +133,16 @@ class LangLinkHandler {
 	 *
 	 * @return Array Empty array if not set.
 	 */
-	public static function getNoExternalInterlang( \ParserOutput $out ) {
-		$nei = $out->getProperty( 'no_external_interlang' );
+	public static function getNoExternalLangLinks( \ParserOutput $out ) {
+		$nel = $out->getProperty( 'noexternallanglinks' );
 
-		if( empty( $nei ) ) {
-			$nei = array();
+		if( empty( $nel ) ) {
+			$nel = array();
 		} else {
-			$nei = unserialize( $nei );
+			$nel = unserialize( $nel );
 		}
 
-		return $nei;
+		return $nel;
 	}
 
 }
