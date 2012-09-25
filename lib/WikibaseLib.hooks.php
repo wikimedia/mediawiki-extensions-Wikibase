@@ -30,6 +30,16 @@ final class LibHooks {
 		$settings = array_merge(
 			$settings,
 			array(
+				'pollDefaultInterval' => 1,
+				'pollDefaultLimit' => 100,
+				'pollContinueInterval' => 0,
+
+				'itemPrefix' => 'q',
+				'propertyPrefix' => 'p',
+				'queryPrefix' => 'y', // TODO: find a more suiting prefix, perhaps use 'q' and use 'i' for items then
+
+				'siteLinkGroup' => 'wikipedia',
+
 				'changeHandlers' => array(
 					'wikibase-item~add' => 'Wikibase\EntityCreation',
 					'wikibase-property~add' => 'Wikibase\EntityCreation',

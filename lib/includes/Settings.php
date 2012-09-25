@@ -40,17 +40,7 @@ class Settings extends SettingsBase {
 	 * @return array
 	 */
 	protected function getDefaultSettings() {
-		$settings = array(
-			'pollDefaultInterval' => 1,
-			'pollDefaultLimit' => 100,
-			'pollContinueInterval' => 0,
-
-			'itemPrefix' => 'q',
-			'propertyPrefix' => 'p',
-			'queryPrefix' => 'y', // TODO: find a more suiting prefix, perhaps use 'q' and use 'i' for items then
-
-			'siteLinkGroup' => 'wikipedia',
-		);
+		$settings = array();
 
 		// allow extensions that use WikidataLib to register mode defaults
 		wfRunHooks( 'WikibaseDefaultSettings', array( &$settings ) );
