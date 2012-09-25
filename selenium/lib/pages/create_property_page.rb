@@ -6,11 +6,11 @@
 #
 # page object for CreateItem special page
 
-class CreateItemPage < CreateEntityPage
+class CreatePropertyPage < CreateEntityPage
   include PageObject
-  page_url WIKI_REPO_URL + "Special:CreateItem"
+  page_url WIKI_REPO_URL + "Special:CreateProperty"
 
-  def create_new_item(label, description, switch_lang = true)
+  def create_new_property(label, description, datatype, switch_lang = true)
     if switch_lang
       self.uls_switch_language(LANGUAGE)
     end
