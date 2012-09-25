@@ -65,16 +65,8 @@ class SqlStore implements Store {
 	 * @since 0.1
 	 */
 	public function clear() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$tables = array(
-			'wb_items_per_site',
-			'wb_terms',
-		);
-
-		foreach ( $tables as $table ) {
-			$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
-		}
+		$this->newSiteLinkCache()->clear();
+		$this->newTermCache()->clear();
 	}
 
 	/**
@@ -151,7 +143,7 @@ class SqlStore implements Store {
 	 *
 	 * @since 0.1
 	 *
-	 * @return SiteLinkLookup
+	 * @return SiteLinkCache
 	 */
 	public function newSiteLinkCache() {
 		return new SiteLinkTable( 'wb_items_per_site' );

@@ -122,7 +122,7 @@ interface TermCache {
 	 *   ...
 	 * )
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param array $terms
 	 * @param string|null $termType
@@ -141,7 +141,7 @@ interface TermCache {
 	 *
 	 * The return value has the same format as TermCache::getMatchingTerms.
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param array $terms
 	 * @param string|null $termType
@@ -150,5 +150,14 @@ interface TermCache {
 	 * @return array
 	 */
 	public function getMatchingJoinedTerms( array $terms, $termType = null, $entityType = null );
+
+	/**
+	 * Clears all terms from the cache.
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function clear();
 
 }

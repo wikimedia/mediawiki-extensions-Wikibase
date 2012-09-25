@@ -126,6 +126,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testSaveFlags() {
+		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+
 		$entityContent = $this->newEmpty();
 
 		// try to create without flags
@@ -143,7 +145,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		// try to create with EDIT_NEW flag
 		$entityContent->getEntity()->setLabel( 'en', 'three' );
 		$status = $entityContent->save( 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), "save failed" );
+		$this->assertTrue( $status->isOK(), json_encode($status->getErrorsArray()) );
 
 		// ok, the item exists now in the database.
 
@@ -165,6 +167,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testRepeatedSave() {
+		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+
 		$entityContent = $this->newEmpty();
 
 		// create
