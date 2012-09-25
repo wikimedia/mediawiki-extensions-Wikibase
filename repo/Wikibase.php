@@ -119,6 +119,7 @@ $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSi
 $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
 $wgAutoloadClasses['Wikibase\ApiSetItem'] 				= $dir . 'includes/api/ApiSetItem.php';
 $wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
+$wgAutoloadClasses['Wikibase\ApiSearchEntities'] 		= $dir . 'includes/api/ApiSearchEntities.php';
 
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
@@ -175,6 +176,7 @@ $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
 $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbsetitem'] 							= 'Wikibase\ApiSetItem';
 $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
+$wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
 
 
 // Special page registration
