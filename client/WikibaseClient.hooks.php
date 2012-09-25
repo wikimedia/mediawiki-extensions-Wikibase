@@ -224,7 +224,6 @@ final class ClientHooks {
 			array(
 				'namespaces' => array( NS_MAIN ),
 				'source' => array( 'dir' => __DIR__ . '/tests' ),
-				'editURL' => '',
 				// temporary hack to provide default settings
 				'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
 				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
@@ -234,6 +233,7 @@ final class ClientHooks {
 				'siteGlobalID' => 'enwiki',
 				'siteGroup' => 'wikipedia',
 				'defaultClientStore' => 'sqlstore',
+				'dataNamespace' => ''
 			)
 		);
 
@@ -270,7 +270,7 @@ final class ClientHooks {
 		global $wgLanguageCode;
 
 		$editUrl = Settings::get( 'repoBase' );
-		if( ! $editUrl ) {
+		if( !$editUrl ) {
 			return true;
 		}
 
@@ -284,9 +284,9 @@ final class ClientHooks {
 
 		if ( $itemId ) {
 			// links to the special page
-			// TODO: know what the repo namespace is
 			$template->data['language_urls'][] = array(
-				'href' => rtrim( $editUrl, "/" ) . "/Data:Q" . $itemId . '?uselang=' . $wgLanguageCode,
+				'href' => rtrim( $editUrl, "/" ) . '/' . Settings::get( 'dataNamespace' ) .
+							Settings::get( 'itemPrefix' ) . $itemId . '?uselang=' . $wgLanguageCode,
 				'text' => wfMessage( 'wbc-editlinks' )->text(),
 				'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
 				'class' => 'wbc-editpage',
