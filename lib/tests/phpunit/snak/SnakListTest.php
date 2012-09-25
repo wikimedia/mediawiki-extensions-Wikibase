@@ -35,6 +35,7 @@ use \Wikibase\Hashable as Hashable;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseSnak
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
