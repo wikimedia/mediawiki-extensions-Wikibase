@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+GA\u003d",
+        "filename": "repo/includes/specials/SpecialCreateProperty.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-25T17:43:21Z",
+      "side": 1,
+      "message": "This will get all datatypes, which can include datatypes we do not support in Wikibase.\n\nA list of datatype ids of supported datatypes can be obtained via Settings::get( \u0027dataTypes\u0027 ). You can simply loop over that, and if you then need the actual datatype call getType( $dataTypeId ) on the datatype factory.\n\nWe could also add a method somewhere with same return value as getTypes, but then filtered by what we support. Right now it does not seem needed though.",
+      "revId": "bf86bb3b72afc557c6f270292d2414c13f52a4d5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
