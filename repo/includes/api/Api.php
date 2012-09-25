@@ -349,16 +349,16 @@ abstract class Api extends \ApiBase {
 	 * @return Status the check's result
 	 * @todo: use this also to check for read access in ApiGetItems, etc
 	 */
-	public function checkPermissions( ItemContent $itemContent, User $user, array $params ) {
+	public function checkPermissions( EntityContent $entityContent, User $user, array $params ) {
 		if ( Settings::get( 'apiInDebug' ) && !Settings::get( 'apiDebugWithRights', false ) ) {
 			return Status::newGood();
 		}
 
-		$permissions = $this->getRequiredPermissions( $itemContent->getItem(), $params );
+		$permissions = $this->getRequiredPermissions( $entityContent->getEntity(), $params );
 		$status = Status::newGood();
 
 		foreach ( $permissions as $perm ) {
-			$permStatus = $itemContent->checkPermission( $perm, $user, true );
+			$permStatus = $entityContent->checkPermission( $perm, $user, true );
 			$status->merge( $permStatus );
 		}
 
