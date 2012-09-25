@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAATH//+Rg\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-25T14:11:46Z",
+      "side": 1,
+      "message": "Needs description of the arguments",
+      "revId": "f7eda37d7bd4327f83f41033e0915b1ff9ca83ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+RY\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-25T14:11:46Z",
+      "side": 1,
+      "message": "Whitespace",
+      "revId": "f7eda37d7bd4327f83f41033e0915b1ff9ca83ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//+RI\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-25T14:11:46Z",
+      "side": 1,
+      "message": "Remove dead code",
+      "revId": "f7eda37d7bd4327f83f41033e0915b1ff9ca83ec",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAATH//+Rc\u003d",
         "filename": "repo/includes/specials/SpecialSetLabel.php",
         "patchSetId": 1
