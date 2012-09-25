@@ -129,42 +129,44 @@
 		 * @return Integer number of characters added (and highlighted) at the end of the incomplete string
 		 */
 		autocompleteString: function( incomplete, complete ) {
-			// if nothing to complete, just return and don't move the curser (can be annoying in this situation)
-			if( incomplete === complete ) {
+			if(
+				// if nothing to complete, just return and don't move the curser (can be annoying in this situation)
+				incomplete === complete
+				// The following statement is a work-around for a technically unexpected search
+				// behaviour: e.g. in English Wikipedia opensearch for "Allegro [...]" returns "Allegro"
+				// as first result instead of "Allegro (music)", so auto-completion should probably be
+				// prevented here since it would always reset the input box's value to "Allegro"
+				|| complete.toLowerCase().indexOf( this.element.val().toLowerCase() ) === -1
+			) {
 				return 0;
 			}
 
-			// The following if-statement is a work-around for a technically unexpected search
-			// behaviour: e.g. in English Wikipedia opensearch for "Allegro [...]" returns "Allegro"
-			// as first result instead of "Allegro (music)", so auto-completion should probably be
-			// prevented here since it would always reset the input box's value to "Allegro"
-			if ( complete.toLowerCase().indexOf( this.element.val().toLowerCase() ) !== -1 ) {
-				// set value to complete value...
-				this.element.val( complete );
+			// set value to complete value...
+			this.element.val( complete );
 
-				// ... and select the suggested, not manually typed part of the value
-				var start = incomplete.length,
-					end = complete.length,
-					node = this.element[0];
+			// ... and select the suggested, not manually typed part of the value
+			var start = incomplete.length,
+				end = complete.length,
+				node = this.element[0];
 
-				// highlighting takes some browser specific implementation
-				if( node.createTextRange ) {
-					var selRange = node.createTextRange();
-					selRange.collapse( true );
-					selRange.moveStart( 'character', start);
-					selRange.moveEnd( 'character', end);
-					selRange.select();
-				} else if( node.setSelectionRange ) {
-					// make a 'backward' selection so pressing arrow left won't put the cursor near the selections
-					// end but rather at the typing position
-					node.setSelectionRange( start, end, 'backward' );
-				} else if( node.selectionStart ) {
-					node.selectionStart = start;
-					node.selectionEnd = end;
-				}
-				return ( end - start );
+			// highlighting takes some browser specific implementation
+			if( node.createTextRange ) { // opera < 10.5 and IE
+				var selRange = node.createTextRange();
+				selRange.collapse( true );
+				selRange.moveStart( 'character', start);
+				selRange.moveEnd( 'character', end);
+				selRange.select();
 			}
-			return 0;
+			else if( node.setSelectionRange ) { // major modern browsers
+				// make a 'backward' selection so pressing arrow left won't put the cursor near the selections
+				// end but rather at the typing position
+				node.setSelectionRange( start, end, 'backward' );
+			}
+			else if( node.selectionStart ) {
+				node.selectionStart = start;
+				node.selectionEnd = end;
+			}
+			return ( end - start );
 		}
 
 	} );
