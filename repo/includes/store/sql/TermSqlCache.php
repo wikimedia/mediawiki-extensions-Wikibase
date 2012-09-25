@@ -27,6 +27,7 @@ namespace Wikibase;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Jens Ohlig < jens.ohlig@wikimedia.de >
  */
 class TermSqlCache implements TermCache {
 
@@ -379,7 +380,8 @@ class TermSqlCache implements TermCache {
 			$tableName = 'terms' . $tableIndex++;
 
 			foreach ( $fullTerm as $field => &$value ) {
-				$value = $field . '=' . $dbr->addQuotes( $value );
+				// We do a case-insensitive prefix search now as the default
+				$value = 'LOWER( CONVERT( ' . $field . ' USING utf8 ) )'  . ' LIKE ' . $dbr->addQuotes( $value . "%" );
 
 				if ( $forJoin ) {
 					$value = $tableName . '.' . $value;
