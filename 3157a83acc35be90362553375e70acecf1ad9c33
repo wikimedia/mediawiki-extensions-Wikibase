@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//+NQ\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-09-25T15:01:52Z",
+      "side": 1,
+      "message": "that doesnt work for articles with spaces in the title. spaces will be replaced by underscores and the page input field on Special:ItemByTitle gets prefilled with the underscored title which will not work..",
+      "revId": "3157a83acc35be90362553375e70acecf1ad9c33",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
