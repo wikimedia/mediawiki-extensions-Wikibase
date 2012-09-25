@@ -59,7 +59,6 @@ class ItemViewTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @group WikibaseUtils
 	 * @dataProvider providerGetHtml
 	 */
 	public function testGetHtml( $itemData, $expected) {
@@ -104,7 +103,26 @@ class ItemViewTest extends \MediaWikiTestCase {
 
 	}
 
-	// FIXME: this stuff is broken, AGAIN...
+	/**
+	 * @todo move this to an EntityViewTest class at some point
+	 * @dataProvider providerNewForEntityContent
+	 */
+	public function testNewForEntityContent( $entityContent ) {
+		// test whether we get the right EntityView from an EntityContent
+		$view = ItemView::newForEntityContent( $entityContent );
+		$this->assertType(
+			ItemView::$typeMap[ $entityContent->getEntity()->getType() ],
+			$view
+		);
+	}
+
+	public function providerNewForEntityContent() {
+		return array(
+			ItemContent::newEmpty(),
+			\Wikibase\PropertyContent::newEmpty()
+		);
+	}
+
 	// Should use proper abstraction and not create items from arrays
 	public function providerGetHtml() {
 		return array(
