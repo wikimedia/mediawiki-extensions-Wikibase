@@ -49,10 +49,11 @@ interface TermCache {
 	 * @param string $label
 	 * @param string|null $languageCode
 	 * @param string|null $description
+	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
 	 * @return array of integer
 	 */
-	public function getItemIdsForLabel( $label, $languageCode = null, $description = null );
+	public function getItemIdsForLabel( $label, $languageCode = null, $description = null, $fuzzySearch = false );
 
 	/**
 	 * Saves the terms of the provided entity in the term cache.

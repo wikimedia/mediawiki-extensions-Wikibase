@@ -54,7 +54,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 		// Display the result set
 		if ( isset( $language ) && isset( $label ) ) {
 			// TODO: should search over aliases as well, not just labels
-			$itemContents = \Wikibase\ItemHandler::singleton()->getFromLabel( $language, $label );
+			$itemContents = \Wikibase\ItemHandler::singleton()->getFromLabel( $language, $label, null, true );
 			if ( 0 < count( $itemContents ) ) {
 				$this->getOutput()->setPageTitle( $this->msg( 'wikibase-disambiguation-title', $label )->escaped() );
 				$this->displayDisambiguationPage( $itemContents, $language );

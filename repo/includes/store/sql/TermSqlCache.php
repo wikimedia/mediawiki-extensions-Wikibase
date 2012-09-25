@@ -220,18 +220,21 @@ class TermSqlCache implements TermCache {
 	 * @param string $label
 	 * @param string|null $languageCode
 	 * @param string|null $description
+	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
 	 * @return array of integer
 	 */
-	public function getItemIdsForLabel( $label, $languageCode = null, $description = null ) {
+	public function getItemIdsForLabel( $label, $languageCode = null, $description = null, $fuzzySearch = false ) {
 		$db = $this->getReadDb();
 
 		$tables = array( 'terms0' => $this->tableName );
 
-		$conds = array(
-			'terms0.term_text' => $label,
-			'terms0.term_type' => TermCache::TERM_TYPE_LABEL,
-		);
+		$conds = array( 'terms0.term_type' => TermCache::TERM_TYPE_LABEL );
+		if ( $fuzzySearch ) {
+			$conds[] = 'terms0.term_text' . $db->buildLike( $label, $db->anyString() );
+		} else {
+			$conds['terms0.term_text'] = $label;
+		}
 
 		$joinConds = array();
 

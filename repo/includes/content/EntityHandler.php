@@ -218,11 +218,12 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @param string $language
 	 * @param string $label
 	 * @param string|null $description
+	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
 	 * @return array of ItemContent
 	 */
-	public function getFromLabel( $language, $label, $description = null ) {
-		$ids = StoreFactory::getStore()->newTermCache()->getItemIdsForLabel( $label, $language, $description );
+	public function getFromLabel( $language, $label, $description = null, $fuzzySearch = false ) {
+		$ids = StoreFactory::getStore()->newTermCache()->getItemIdsForLabel( $label, $language, $description, $fuzzySearch );
 		$items = array();
 
 		foreach ( $ids as $id ) {
