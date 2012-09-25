@@ -73,7 +73,7 @@ class ItemDisambiguation extends \ContextSource {
 						$result =
 							\Linker::link(
 								$item->getTitle(),
-								$userLabel ? $userLabel : $idLabel
+								$userLabel ? htmlspecialchars( $userLabel ) : $idLabel
 							);
 
 						// display the label in the searched language in case it is different than in the user language
@@ -96,7 +96,7 @@ class ItemDisambiguation extends \ContextSource {
 						if ( $description === "" ) {
 							// Display the ID if no description is available
 							// do not display it if the ID was already displayed, i.e. if it was used instead of the label previously
-							$result .= $userLabel ? " " . $idLabel : "";
+							$result .= $userLabel ? ' ' . $idLabel : '';
 						} else {
 							$result .=
 								wfMessage( 'colon-separator' )->escaped()
