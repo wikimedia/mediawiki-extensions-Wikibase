@@ -33,6 +33,7 @@ class PropertyContentTest extends EntityContentTest {
 		return '\Wikibase\PropertyContent';
 	}
 
+
 	/**
 	 * @see EntityContentTest::newEmpty
 	 *
@@ -47,6 +48,29 @@ class PropertyContentTest extends EntityContentTest {
 		$content->getProperty()->setDataTypeById( array_shift( $dataTypes ) );
 
 		return $content;
+	}
+
+	public function testLabelUniquenessRestriction() {
+		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+
+		$propertyContent = PropertyContent::newEmpty();
+		$propertyContent->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
+		$propertyContent->getProperty()->setLabel( 'de', 'testLabelUniquenessRestriction' );
+
+		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
+		$this->assertTrue( $status->isOK(), "property creation should work" );
+
+		$propertyContent1 = PropertyContent::newEmpty();
+		$propertyContent1->getProperty()->setLabel( 'nl', 'testLabelUniquenessRestriction' );
+
+		$status = $propertyContent1->save( 'create property', null, EDIT_NEW );
+		$this->assertTrue( $status->isOK(), "property creation should work" );
+
+		$propertyContent1->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
+
+		$status = $propertyContent1->save( 'create property' );
+		$this->assertFalse( $status->isOK(), "saving a property with duplicate label+lang should not work" );
+		$this->assertTrue( $status->hasMessage( 'wikibase-error-label-not-unique-wikibase-property' ) );
 	}
 
 }
