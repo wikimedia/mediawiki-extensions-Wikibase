@@ -376,11 +376,11 @@ abstract class EditEntityAction extends ViewEntityAction {
 
 		$label = null;
 		if ( $labelText ) {
-			$label = Html::rawElement( 'label', $inputAttrs['id'] ? array( 'for' => $inputAttrs['id'] ) : null, $labelText );
+			$label = Html::rawElement( 'label', $inputAttrs['id'] ? array( 'for' => $inputAttrs['id'] ) : null, htmlspecialchars( $labelText ) );
 			$label = Html::rawElement( 'span', $spanLabelAttrs, $label );
 		}
 
-		$input = Html::input( 'wpSummary', $summary, 'text', $inputAttrs );
+		$input = Html::input( 'wpSummary', htmlspecialchars( $summary ), 'text', $inputAttrs );
 
 		return array( $label, $input );
 	}
