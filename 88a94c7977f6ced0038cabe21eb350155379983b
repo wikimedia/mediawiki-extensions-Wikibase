@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9ZM\u003d",
+        "filename": "repo/resources/wikibase.startup.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2012-09-26T12:58:08Z",
+      "side": 1,
+      "message": "The if-statement ist very general now and properties will not have site links. An if-statement querying wbEntityType could be inserted below the aliases initialisation.",
+      "revId": "88a94c7977f6ced0038cabe21eb350155379983b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
