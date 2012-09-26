@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9cI\u003d",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-09-26T11:17:40Z",
+      "side": 1,
+      "message": "update to 0.2",
+      "revId": "6703b04052385675e5f2e29f9e8ea3728169aac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9cE\u003d",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-09-26T11:17:40Z",
+      "side": 1,
+      "message": "space",
+      "revId": "6703b04052385675e5f2e29f9e8ea3728169aac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9b0\u003d",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-09-26T11:17:40Z",
+      "side": 1,
+      "message": "John authored this?",
+      "revId": "6703b04052385675e5f2e29f9e8ea3728169aac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9b8\u003d",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-09-26T11:17:40Z",
+      "side": 1,
+      "message": "there should be a intro message at the top explaining this page",
+      "revId": "6703b04052385675e5f2e29f9e8ea3728169aac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
