@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "AAAATH//9YM\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-26T13:16:40Z",
+      "side": 1,
+      "message": "Indeed - the diff view here confused me. Already escaped because of using parse",
+      "parentUuid": "AAAATH//9bA\u003d",
+      "revId": "033aa822ba8865e8909b0a4f174a738db55ccacd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAATH//9cc\u003d",
         "filename": "repo/includes/specials/SpecialItemByTitle.php",
         "patchSetId": 1
