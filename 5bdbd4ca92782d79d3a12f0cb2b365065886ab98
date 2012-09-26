@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9eA\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-26T10:05:02Z",
+      "side": 1,
+      "message": "Please do an explicit check against null.",
+      "revId": "5bdbd4ca92782d79d3a12f0cb2b365065886ab98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
