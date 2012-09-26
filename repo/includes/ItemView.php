@@ -135,7 +135,7 @@ class ItemView extends EntityView {
 					$html .= Html::element(
 						'td',
 						array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-broken' ),
-						$link->getPage()
+						htmlspecialchars( $link->getPage() )
 					);
 
 					$html .= Html::closeElement( 'tr' );
@@ -182,7 +182,7 @@ class ItemView extends EntityView {
 							'href' => $link->getUrl(),
 							'dir' => 'auto'
 						),
-						$link->getPage()
+						htmlspecialchars( $link->getPage() )
 					);
 					$html .= Html::closeElement( 'td' );
 					$html .= Html::element( 'td' );
