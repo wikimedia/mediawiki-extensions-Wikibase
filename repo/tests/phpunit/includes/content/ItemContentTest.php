@@ -73,16 +73,14 @@ class ItemContentTest extends EntityContentTest {
 		$this->assertTrue( $status->isOK(), "item creation should work" );
 
 		$content1 = ItemContent::newEmpty();
-//		$content1->getItem()->setLabel( 'nl', 'label' );
-//		$content1->getItem()->setDescription( 'nl', 'description' );
+		$content1->getItem()->setLabel( 'nl', 'label' );
+		$content1->getItem()->setDescription( 'nl', 'description' );
 
 		$status = $content1->save( 'create item', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "item creation should work" );
 
 		$content1->getItem()->setLabel( 'en', 'label' );
 		$content1->getItem()->setDescription( 'en', 'description' );
-
-		//q(iterator_to_array(wfGetDB(DB_SLAVE)->select( 'wb_terms', '*' )));
 
 		$status = $content1->save( 'save item' );
 		$this->assertFalse( $status->isOK(), "saving an item with duplicate lang+label+description should not work" );
