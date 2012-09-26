@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAATH//9bw\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-26T11:19:27Z",
+      "side": 1,
+      "message": "missing qqq",
+      "revId": "6703b04052385675e5f2e29f9e8ea3728169aac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAATH//9cI\u003d",
         "filename": "repo/includes/specials/SpecialListDatatypes.php",
         "patchSetId": 3
@@ -47,6 +64,40 @@
       "writtenOn": "2012-09-26T11:17:40Z",
       "side": 1,
       "message": "John authored this?",
+      "revId": "6703b04052385675e5f2e29f9e8ea3728169aac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9bY\u003d",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-26T11:19:27Z",
+      "side": 1,
+      "message": "Incorrect author",
+      "revId": "6703b04052385675e5f2e29f9e8ea3728169aac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9bk\u003d",
+        "filename": "repo/includes/specials/SpecialListDatatypes.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-26T11:19:27Z",
+      "side": 1,
+      "message": "This is not used and is broken\n\nalso please put the namespaces and usage stuff at the top of the file, as done elsewhere in our code",
       "revId": "6703b04052385675e5f2e29f9e8ea3728169aac4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
