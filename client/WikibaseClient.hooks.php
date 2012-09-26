@@ -12,6 +12,8 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
+use Title;
+
 final class ClientHooks {
 
 	/**
@@ -91,7 +93,7 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
-		list( $mainType, ) = explode( '~', $change->getType() );
+		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
 
 		if ( array_key_exists( $mainType, EntityObject::$typeMap ) ) {
 
@@ -116,30 +118,99 @@ final class ClientHooks {
 					if ( is_array( $siteLinkChangeOperations ) && array_key_exists( $siteGlobalId, $siteLinkChangeOperations ) ) {
 						$oldTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getOldValue() );
 						$newTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getNewValue() );
-						if ( !is_null( $oldTitle ) && $oldTitle->getArticleID() !== 0 ) {
-							$oldTitle->invalidateCache();
+
+						if ( !is_null( $oldTitle ) ) {
+							self::updatePage( $oldTitle, $change, true );
 						}
-						if ( !is_null( $newTitle ) && $newTitle->getArticleID() !== 0 ) {
-							$newTitle->invalidateCache();
+
+						if ( !is_null( $newTitle ) ) {
+							self::updatePage( $newTitle, $change, false );
 						}
-						return true;
+					} else {
+						$title = \Title::newFromText( $siteLink->getPage() );
+
+						if ( !is_null( $title ) ) {
+							self::updatePage( $title, $change );
+						}
 					}
-					$title = \Title::newFromText( $siteLink->getPage() );
 				} else {
 					// cache should be invalidated when the sitelink got removed
 					$removedSiteLinks = $change->getDiff()->getSiteLinkDiff()->getRemovedValues();
 					if ( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
 						$title = \Title::newFromText( $removedSiteLinks[ $siteGlobalId ] );
-					}
-				}
 
-				if ( !is_null( $title ) && $title->getArticleID() !== 0 ) {
-					$title->invalidateCache();
+						if ( !is_null( $title ) ) {
+							self::updatePage( $title, $change, true );
+						}
+					}
 				}
 			}
 		}
 
 		return true;
+	}
+
+	/**
+	 * @param \Title $title  The Title of the page to update
+	 * @param Change $change The Change that caused the update
+	 * @param bool $gone If set, indicates that the change's entity no longer refers to the given page.
+	 */
+	protected static function updatePage( Title $title, Change $change, $gone = false ) {
+		global $wgContLang;
+
+		if ( !$title->exists() ) {
+			return;
+		}
+
+		$title->invalidateCache();
+
+		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
+		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
+
+		/* @var Entity $entity */
+		$entity = $fields['info']['entity'];
+
+		$fields['entity_type'] = $entityType;
+		unset( $fields['info'] ); //@todo: may want to preserve some stuff from the info field.
+
+		$params = array(
+			'wikibase-repo-change' => $fields
+		);
+
+		//@todo: FIXME: check CentralAuth, point to local user. Or use dummy user?
+		//@todo: XXX: what if the local user is unknown? How to point to a remote user?
+		$username = "REPO USER " . $fields['user_id'];
+		$user = \User::newFromName( $username );
+
+		$ip = isset( $fields['ip'] ) ? $fields['ip'] : null; //@todo: provide this!
+		$comment = "DATA CHANGE: $changeType of $entityType " . $entity->getId(); //@todo: i18n! //@todo: more info! Link to diff?
+
+		$label = $entity->getLabel( $wgContLang->getCode() );
+
+		if ( $label !== false ) {
+			$comment .= ' "' . $label . '"'; //@todo: i18n!
+		}
+
+		if ( isset( $fields['comment'] ) && $fields['comment'] !== '' ) { //@todo: provide comment!
+			$comment .= " ({$fields['comment']})"; //@todo: i18n!
+		}
+
+		$rc = \RecentChange::newLogEntry( $fields['time'], $title, $user, '', $ip, null, '', $title, $comment, serialize( $params ) );
+
+		$attribs = $rc->getAttributes();
+
+		$attribs['rc_type'] = RC_EDIT; //@todo: define RC_EXTERNAL in core
+		$attribs['rc_minor'] = ( isset( $fields['minor'] ) && $fields['minor'] ) ? 1 : 0; //@todo: provide this!
+		$attribs['rc_bot'] = ( isset( $fields['bot'] ) && $fields['bot'] ) ? 1 : 0; //@todo: provide this!
+
+		$attribs['rc_old_len'] = $title->getLength();
+		$attribs['rc_new_len'] = $title->getLength();
+
+		$attribs['rc_this_oldid'] = $title->getLatestRevID();
+		$attribs['rc_last_oldid'] = $title->getLatestRevID();
+
+		$rc->setAttribs( $attribs );
+		$rc->save(); //@todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
 	}
 
 	/**
