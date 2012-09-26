@@ -123,6 +123,9 @@ $messages['en'] = array(
 	'wikibase-createentity-label' => 'Label:',
 	'wikibase-createentity-description' => 'Description:',
 	'wikibase-createentity-submit' => 'Create',
+	'special-listdatatypes' => 'List of all datatypes available',
+	'wikibase-listdatatypes-intro' => 'This is a list of all datatypes currently in use on this installation:',
+
 
 	// API errors - these messages should not be translated
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.', # Do not translate
@@ -346,6 +349,8 @@ Parameters:
 	'wikibase-itemdisambiguation-create' => 'Invitation to click a link and create an item with the given label.',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Response informing that the language code is not valid. Could give an example of a valid language code.',
 	'wikibase-itemdisambiguation-description' => 'Further information about the search fields and whats valid values.',
+	'special-listdatatypes' => 'This special page returns a list of available datatypes (such as commonsMedia)',
+	'wikibase-listdatatypes-intro' => 'Intro text for the ListDatatypes special page.',
 	'special-createproperty' => 'Title of the special page for creating new properties.',
 	'wikibase-createproperty-intro' => 'Intro text for the CreateProperty special page. $1 is the language name of the currently set user language. The label and the description will be set for that language.',
 	'wikibase-createproperty-fieldset' => 'Title for the fieldset on the CreateProperty special page.',
