@@ -68,6 +68,23 @@
       "revId": "033aa822ba8865e8909b0a4f174a738db55ccacd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9bQ\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-26T11:20:56Z",
+      "side": 1,
+      "message": "for parse() to do escaping, the message needs param format \u003d \u0027escaped\u0027",
+      "revId": "033aa822ba8865e8909b0a4f174a738db55ccacd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
