@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9Zo\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-26T12:33:25Z",
+      "side": 1,
+      "message": "The value parameter is already escaped by the Html class (it\u0027s an attribute, and all attributes get escaped). Double-escaping does not solve problems, it causes problems.",
+      "revId": "8fa301cd36c6fc360656c91071a1b4a130783cc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9Zk\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-26T12:33:25Z",
+      "side": 1,
+      "message": "Hrm, I\u0027m always confused about when and how parameters passed to system messages get escaped. I think we can generally assume they are run through the wikitext sanitizer. but htmlspecilchars does not hurt in that case.",
+      "revId": "8fa301cd36c6fc360656c91071a1b4a130783cc3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
