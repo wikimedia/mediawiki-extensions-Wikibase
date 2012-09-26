@@ -135,6 +135,7 @@ $wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/Specia
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
 $wgAutoloadClasses['SpecialCreateProperty'] 			= $dir . 'includes/specials/SpecialCreateProperty.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
+$wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
@@ -182,6 +183,8 @@ $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
 $wgSpecialPages['CreateProperty'] 					= 'SpecialCreateProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
+$wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
+
 
 
 // Hooks
