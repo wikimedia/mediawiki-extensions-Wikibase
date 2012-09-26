@@ -34,6 +34,24 @@
       "revId": "8c06f6565a8d3f1fafefe4dd73fe85c25a463d4c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9Zc\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-26T12:48:03Z",
+      "side": 1,
+      "message": "Is there an *actual* issue you are fixing? Seems to me like you are fixing a *potential* problem. \n\nThe clean solution would probably be to give ChangeHandler some sort of output handler / logging object.",
+      "parentUuid": "AAAATH//+Ks\u003d",
+      "revId": "8c06f6565a8d3f1fafefe4dd73fe85c25a463d4c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
