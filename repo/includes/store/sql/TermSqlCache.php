@@ -273,7 +273,7 @@ class TermSqlCache implements TermCache {
 	/**
 	 * @see TermCache::getMatchingTerms
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param array $terms
 	 * @param string|null $termType
@@ -288,7 +288,7 @@ class TermSqlCache implements TermCache {
 	/**
 	 * @see TermCache::getMatchingJoinedTerms
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param array $terms
 	 * @param string|null $termType
@@ -307,7 +307,7 @@ class TermSqlCache implements TermCache {
 	 * But also supports self joins when $selfJoin is set to true.
 	 * In this case one can provide a list of terms in each outer array item.
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param array $terms
 	 * @param string|null $termType
@@ -361,7 +361,7 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param array $terms
 	 * @param boolean $selfJoin
@@ -429,7 +429,7 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param \ResultWrapper $obtainedTerms
 	 * @param array $fieldMap
@@ -454,6 +454,17 @@ class TermSqlCache implements TermCache {
 		}
 
 		return $matchingTerms;
+	}
+
+	/**
+	 * @see TermCache::clear
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function clear() {
+		return wfGetDB( DB_MASTER )->delete( $this->tableName, '*', __METHOD__ );
 	}
 
 }
