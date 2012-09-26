@@ -40,12 +40,18 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
 		$siteId = $request->getVal( 'site', isset( $parts[0] ) ? $parts[0] : '' );
 		$page = $request->getVal( 'page', isset( $parts[1] ) ? $parts[1] : '' );
-
+		
 		$pageTitle = '';
 		$itemContent = null;
 
 		if ( !empty( $page ) ) {
-			$pageTitle = \Title::newFromText( $page )->getText();
+			$title = \Title::newFromText( $page );
+			if ( $title ) {		
+				$pageTitle = $title->getText();
+			} else {
+				// TODO: throw error, page title contains invalid chars
+				$pageTitle = '';
+			}
 
 			// Create an item view
 			if ( isset( $siteId ) && isset( $pageTitle ) ) {
