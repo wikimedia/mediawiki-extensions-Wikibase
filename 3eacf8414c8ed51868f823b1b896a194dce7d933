@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9aw\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-26T11:32:45Z",
+      "side": 1,
+      "message": "uh, if you want to escape the content, why use rawElement? just use element(), it handles the escaping...",
+      "revId": "3eacf8414c8ed51868f823b1b896a194dce7d933",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
