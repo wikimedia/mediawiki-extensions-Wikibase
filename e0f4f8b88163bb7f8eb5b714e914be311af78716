@@ -16,6 +16,24 @@
       "revId": "e0f4f8b88163bb7f8eb5b714e914be311af78716",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//800\u003d",
+        "filename": "repo/includes/specials/SpecialCreateEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-09-26T22:22:19Z",
+      "side": 1,
+      "message": "Yes, your right, I was hunting down a bug and forgot that this needs a more generic solution in this class.",
+      "parentUuid": "AAAATH//83A\u003d",
+      "revId": "e0f4f8b88163bb7f8eb5b714e914be311af78716",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
