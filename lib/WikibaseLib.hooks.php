@@ -82,13 +82,6 @@ final class LibHooks {
 		$type = $updater->getDB()->getType();
 
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
-			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
-
-			$updater->addExtensionTable(
-				'wb_changes',
-				__DIR__ . '/sql/WikibaseLib' . $extension
-			);
-
 			// TODO: move to core
 			$updater->addExtensionField(
 				'sites',
@@ -104,7 +97,7 @@ final class LibHooks {
 			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' /*, array( $updater, 'output' )*/ ) );
 		}
 		else {
-			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
+			wfWarn( "Database type '$type' is not supported by Wikibase." );
 		}
 
 		return true;

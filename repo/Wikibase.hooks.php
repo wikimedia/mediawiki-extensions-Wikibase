@@ -63,6 +63,20 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
+		$type = $updater->getDB()->getType();
+
+		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
+			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
+
+			$updater->addExtensionTable(
+				'wb_changes',
+				__DIR__ . '/sql/changes' . $extension
+			);
+		}
+		else {
+			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
+		}
+
 		if ( Settings::get( 'defaultStore' ) === 'sqlstore' ) {
 			/**
 			 * @var SQLStore $store
