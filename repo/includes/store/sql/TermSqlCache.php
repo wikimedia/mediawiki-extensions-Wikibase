@@ -330,25 +330,32 @@ class TermSqlCache implements TermCache {
 
 		$joinConds = array();
 		$tables = array( 'terms0' => $this->tableName );
-		$selectionFields = array_keys( $allowedFields );
 
 		if ( $hasJoin ) {
 			$tables['terms1'] = $this->tableName;
 
 			$joinConds['terms1'] = array(
-				'LEFT OUTER JOIN',
+				'INNER JOIN',
 				array(
 					'terms0.term_entity_id=terms1.term_entity_id',
 					'terms0.term_entity_type=terms1.term_entity_type',
 				)
 			);
 
-			foreach ( $selectionFields as &$selectionField ) {
-				$selectionField = 'terms0.' . $selectionField;
+			$selectionFields = array();
+
+			foreach ( array_keys( $allowedFields ) as $selectionField ) {
+				$selectionFields[] = 'terms0.' . $selectionField;
+				$selectionFields[] = 'terms1.' . $selectionField . ' AS terms1' . $selectionField;
 			}
 		}
+		else {
+			$selectionFields = array_keys( $allowedFields );
+		}
 
-		$obtainedTerms = $this->getReadDb()->select(
+		$dbr = $this->getReadDb();
+
+		$obtainedTerms = $dbr->select(
 			$tables,
 			$selectionFields,
 			implode( ' OR ', $conditions ),
@@ -381,6 +388,7 @@ class TermSqlCache implements TermCache {
 			$termList = $selfJoin ? array_slice( $termList, 0, 2 ) : array( $termList );
 
 			$tableIndex = 0;
+			$termConditions = array();
 
 			// Maps interface term fields to table fields and defaults
 			// using the methods $termType and $entityType parameters.
@@ -414,15 +422,15 @@ class TermSqlCache implements TermCache {
 				$tableName = 'terms' . $tableIndex++;
 
 				foreach ( $fullTerm as $field => &$value ) {
-					$value = $tableName . '.' . $field . '=' . $dbr->addQuotes( $value );
+					$termConditions[] = $tableName . '.' . $field . '=' . $dbr->addQuotes( $value );
 				}
-
-				$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
 			}
 
 			if ( $tableIndex > 1 ) {
 				$hasJoin = true;
 			}
+
+			$conditions[] = '(' . implode( ' AND ', $termConditions ) . ')';
 		}
 
 		return array( $conditions, $hasJoin );
@@ -441,16 +449,26 @@ class TermSqlCache implements TermCache {
 
 		foreach ( $obtainedTerms as $obtainedTerm ) {
 			$matchingTerm = array();
+			$secondTerm = array();
 
 			foreach ( $obtainedTerm as $key => $value ) {
-				if ( $key === 'term_entity_id' ) {
+				if ( $key === 'term_entity_id' || $key === 'terms1term_entity_id' ) {
 					$value = (int)$value;
 				}
 
-				$matchingTerm[$fieldMap[$key]] = $value;
+				if ( strpos( $key, 'terms1' ) === 0 ) {
+					$secondTerm[$fieldMap[substr( $key, 6 )]] = $value;
+				}
+				else {
+					$matchingTerm[$fieldMap[$key]] = $value;
+				}
 			}
 
 			$matchingTerms[] = $matchingTerm;
+
+			if ( !empty( $secondTerm ) ) {
+				$matchingTerms[] = $secondTerm;
+			}
 		}
 
 		return $matchingTerms;
