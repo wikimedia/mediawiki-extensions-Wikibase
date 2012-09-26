@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAAATH//9cg\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-26T11:06:24Z",
+      "side": 1,
+      "message": "I think this should be wfMessage( \u0027wikibase-itembytitle-create\u0027 )-\u003eescaped() since we are directly outputting this here.",
+      "revId": "033aa822ba8865e8909b0a4f174a738db55ccacd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAATH//9cc\u003d",
         "filename": "repo/includes/specials/SpecialItemByTitle.php",
         "patchSetId": 1
