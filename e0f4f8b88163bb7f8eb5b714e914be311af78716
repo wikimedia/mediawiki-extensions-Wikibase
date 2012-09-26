@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//83A\u003d",
+        "filename": "repo/includes/specials/SpecialCreateEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-09-26T21:30:55Z",
+      "side": 1,
+      "message": "This seems out of place since it refers to \"property\", should be more generic in SpecialCreateEntity or am I missing something?",
+      "revId": "e0f4f8b88163bb7f8eb5b714e914be311af78716",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
