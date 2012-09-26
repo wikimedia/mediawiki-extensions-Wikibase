@@ -30,6 +30,8 @@ Then add the following code to your [[Manual:LocalSettings.php|LocalSettings.php
 # Wikibase
 require_once( "$IP/extensions/Wikibase/repo/Wikibase.php" );
 
+Run the maintenance/update.php after configuration (see following section).
+
 === Namespace setup ===
 
 You also need to configure which namespaces should be used before the extension will work.
