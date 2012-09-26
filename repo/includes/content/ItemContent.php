@@ -135,7 +135,7 @@ class ItemContent extends EntityContent {
 	 * @param Status $status
 	 */
 	protected function addLabelDescriptionConflicts( Status $status ) {
-		$labels = array();
+		$terms = array();
 
 		$entity = $this->getEntity();
 
@@ -160,7 +160,7 @@ class ItemContent extends EntityContent {
 		}
 
 		$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingJoinedTerms(
-			$labels,
+			$terms,
 			null,
 			$entity->getType()
 		);
