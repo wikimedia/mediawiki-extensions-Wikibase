@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9aI\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2012-09-26T12:13:53Z",
+      "side": 1,
+      "message": "I guess this line should be more like:\n\nif ( !in_array( $type, array_keys( self::$typeMap ) ) ) {\n\nMaybe it would make sense to write a unit test.",
+      "revId": "aeb20c49591c5849e74b1aec1014575bb3674d96",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
