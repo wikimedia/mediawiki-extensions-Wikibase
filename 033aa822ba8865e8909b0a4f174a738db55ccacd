@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9cc\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-09-26T11:04:50Z",
+      "side": 1,
+      "message": "Bug: if $page holds the string \u00270\u0027 it will not be shown correctly here. Use explicit check.\n\nStuff fed to Message::params does get escaped AFAIK. You\u0027re change thus adds double escaping.",
+      "revId": "033aa822ba8865e8909b0a4f174a738db55ccacd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
