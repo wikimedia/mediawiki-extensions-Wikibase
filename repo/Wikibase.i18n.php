@@ -123,6 +123,9 @@ $messages['en'] = array(
 	'wikibase-createentity-label' => 'Label:',
 	'wikibase-createentity-description' => 'Description:',
 	'wikibase-createentity-submit' => 'Create',
+	'special-listdatatypes' => 'List of all datatypes available',
+	'wikibase-listdatatypes-intro' => 'This is a list of all datatypes currently in use on this installation:',
+
 
 	// API errors - these messages should not be translated
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.', # Do not translate
