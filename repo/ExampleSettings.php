@@ -46,6 +46,7 @@ $egWBSettings['apiWithTokens'] = true;
 
 $wgGroupPermissions['wbeditor']['item-set'] = true;
 
+$wgSharedTables[] = 'wb_changes';
 
 
 /*
