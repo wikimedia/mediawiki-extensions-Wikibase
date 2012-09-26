@@ -17,18 +17,18 @@ describe "Check CreateItem special page" do
   context "create item functionality" do
     it "should fail to create item with empty label & description" do
       visit_page(CreateItemPage) do |page|
-        page.createItemSubmit
-        page.createItemLabelField?.should be_true
-        page.createItemDescriptionField?.should be_true
+        page.createEntitySubmit
+        page.createEntityLabelField?.should be_true
+        page.createEntityDescriptionField?.should be_true
       end
     end
     it "should create a new item with label and description" do
       label = generate_random_string(10)
       description = generate_random_string(20)
       visit_page(CreateItemPage) do |page|
-        page.createItemLabelField = label
-        page.createItemDescriptionField = description
-        page.createItemSubmit
+        page.createEntityLabelField = label
+        page.createEntityDescriptionField = description
+        page.createEntitySubmit
         page.wait_for_item_to_load
       end
       on_page(ItemPage) do |page|
@@ -40,8 +40,8 @@ describe "Check CreateItem special page" do
       label = generate_random_string(10)
       description = generate_random_string(20)
       visit_page(CreateItemPage) do |page|
-        page.createItemLabelField = label
-        page.createItemSubmit
+        page.createEntityLabelField = label
+        page.createEntitySubmit
         page.wait_for_item_to_load
       end
       on_page(ItemPage) do |page|
@@ -53,8 +53,8 @@ describe "Check CreateItem special page" do
       label = generate_random_string(10)
       description = generate_random_string(20)
       visit_page(CreateItemPage) do |page|
-        page.createItemDescriptionField = description
-        page.createItemSubmit
+        page.createEntityDescriptionField = description
+        page.createEntitySubmit
         page.wait_for_item_to_load
       end
       on_page(ItemPage) do |page|
@@ -70,9 +70,9 @@ describe "Check CreateItem special page" do
       description = generate_random_string(20)
       visit_page(CreateItemPage) do |page|
         page.uls_switch_language("Deutsch")
-        page.createItemLabelField = label
-        page.createItemDescriptionField = description
-        page.createItemSubmit
+        page.createEntityLabelField = label
+        page.createEntityDescriptionField = description
+        page.createEntitySubmit
         page.wait_for_item_to_load
       end
       on_page(ItemPage) do |page|
@@ -98,9 +98,9 @@ describe "Check CreateItem special page" do
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       visit_page(CreateItemPage) do |page|
-        page.createItemLabelField = generate_random_string(10)
-        page.createItemDescriptionField = generate_random_string(20)
-        page.createItemSubmit
+        page.createEntityLabelField = generate_random_string(10)
+        page.createEntityDescriptionField = generate_random_string(20)
+        page.createEntitySubmit
         page.mwFirstHeading.should == "Permissions errors"
       end
     end

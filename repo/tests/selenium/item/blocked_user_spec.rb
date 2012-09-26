@@ -73,9 +73,9 @@ describe "Check functionality of blocking a user" do
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       visit_page(CreateItemPage) do |page|
-        page.createItemLabelField = generate_random_string(10)
-        page.createItemDescriptionField = generate_random_string(20)
-        page.createItemSubmit
+        page.createEntityLabelField = generate_random_string(10)
+        page.createEntityDescriptionField = generate_random_string(20)
+        page.createEntitySubmit
         page.mwFirstHeading.should == "Permissions errors"
       end
     end
