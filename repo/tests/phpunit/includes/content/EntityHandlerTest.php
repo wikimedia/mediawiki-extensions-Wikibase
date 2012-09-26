@@ -76,6 +76,16 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( $this->getClassName(), $entityHandler );
 	}
 
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \Wikibase\EntityHandler $entityHandler
+	 */
+	public function testGetSpecialPageForCreation( EntityHandler $entityHandler ) {
+		$specialPageName = $entityHandler->getSpecialPageForCreation();
+		$this->assertTrue( $specialPageName === null || is_string( $specialPageName ) );
+	}
+
 	/**
 	 * @dataProvider contentProvider
 	 * @param EntityContent $content

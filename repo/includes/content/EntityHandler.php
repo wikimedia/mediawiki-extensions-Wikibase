@@ -267,4 +267,14 @@ abstract class EntityHandler extends \ContentHandler {
 		return $wgLang;
 	}
 
+	/**
+	 * Returns the name of the special page responsible for creating a page for this type of entity content.
+	 * Returns null if there is no such special page.
+	 * @since 0.2
+	 *
+	 * @return string|null
+	 */
+	public function getSpecialPageForCreation() {
+		return null;
+	}
 }
