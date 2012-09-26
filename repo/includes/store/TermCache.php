@@ -133,6 +133,8 @@ interface TermCache {
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null );
 
 	/**
+	 * TODO: update docs
+	 *
 	 * Similar to @see TermCache::getMatchingTerms
 	 *
 	 * Instead of taking a single array containing term information for each element in the
@@ -146,10 +148,12 @@ interface TermCache {
 	 * @param array $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
+	 * @param integer|null $excludeId
+	 * @param string|null $excludeType
 	 *
 	 * @return array
 	 */
-	public function getMatchingJoinedTerms( array $terms, $termType = null, $entityType = null );
+	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, $excludeId = null, $excludeType = null );
 
 	/**
 	 * Clears all terms from the cache.

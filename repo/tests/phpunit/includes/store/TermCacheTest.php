@@ -310,7 +310,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 *
 	 * @param TermCache $lookup
 	 */
-	public function testGetMatchingJoinedTerms( TermCache $lookup ) {
+	public function testGetMatchingTermCombination( TermCache $lookup ) {
 		if ( defined( 'MW_PHPUNIT_TEST' )
 			&& wfGetDB( DB_MASTER )->getType() === 'mysql'
 			&& get_class( $lookup ) === 'Wikibase\TermSqlCache' ) {
@@ -323,19 +323,10 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$item0->setLabel( 'en', 'joinedterms-0' );
 		$item0->setDescription( 'de', 'joinedterms-d0' );
 
-		$item1 = ItemObject::newEmpty();
-		$item1->setLabel( 'nl', 'joinedterms-1' );
-
 		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
 		$content0->save( '', null, EDIT_NEW );
 		$id0 = $content0->getItem()->getId();
-
-		$content1 = ItemContent::newEmpty();
-		$content1->setItem( $item1 );
-
-		$content1->save( '', null, EDIT_NEW );
-		$id1 = $content1->getItem()->getId();
 
 		$terms = array(
 			$id0 => array(
@@ -349,17 +340,9 @@ class TermCacheTest extends \MediaWikiTestCase {
 					'termType' => TermCache::TERM_TYPE_DESCRIPTION,
 				)
 			),
-			$id1 => array(
-				array(
-					'termText' => 'joinedterms-1',
-				)
-			),
 		);
 
-		$actual = $lookup->getMatchingJoinedTerms( $terms );
-
-		$terms[$id0][0]['termType'] = TermCache::TERM_TYPE_LABEL;
-		$terms[$id1][0]['termLanguage'] = 'nl';
+		$actual = $lookup->getMatchingTermCombination( $terms );
 
 		$this->assertInternalType( 'array', $actual );
 
@@ -368,14 +351,17 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 			$id = $term['entityId'];
 
-			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
+			$this->assertEquals( $id0, $id );
 
-			$isFirstElement = $id === $id1 || $term['termText'] === 'joinedterms-0';
+			$isFirstElement = $term['termText'] === 'joinedterms-0';
 			$expected = $terms[$id][$isFirstElement ? 0 : 1];
 
 			$this->assertEquals( $expected['termText'], $term['termText'] );
 			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );
 		}
+
+		$actual = $lookup->getMatchingTermCombination( $terms, null, null, $id0, Item::ENTITY_TYPE );
+		$this->assertTrue( $actual === array() );
 	}
 
 }

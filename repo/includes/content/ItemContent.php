@@ -159,35 +159,17 @@ class ItemContent extends EntityContent {
 			}
 		}
 
-		$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingJoinedTerms(
-			$terms,
-			null,
-			$entity->getType()
-		);
+		if ( !empty( $terms ) ) {
+			$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingTermCombination(
+				$terms,
+				null,
+				$entity->getType(),
+				$entity->getId(),
+				$entity->getType()
+			);
 
-		$violatingTerms = array();
-
-		foreach ( $foundTerms as $foundTerm ) {
-			if ( $foundTerm['entityId'] !== $entity->getId() ) {
-				if ( array_key_exists( $foundTerm['entityId'], $violatingTerms ) ) {
-					$violatingPair = $violatingTerms[$foundTerm['entityId']];
-
-					if ( $foundTerm['termType'] === TermCache::TERM_TYPE_LABEL ) {
-						array_unshift( $violatingPair, $foundTerm );
-					}
-					else {
-						array_push( $violatingPair, $foundTerm );
-					}
-				}
-				else {
-					$violatingTerms[$foundTerm['entityId']] = array( $foundTerm );
-				}
-			}
-		}
-
-		foreach ( $violatingTerms as $violatingPair ) {
-			if ( count( $violatingPair ) === 2 ) {
-				list( $label, $description ) = $violatingPair;
+			if ( !empty( $foundTerms ) ) {
+				list( $label, $description ) = $foundTerms;
 
 				$status->fatal(
 					'wikibase-error-label-not-unique-item',
