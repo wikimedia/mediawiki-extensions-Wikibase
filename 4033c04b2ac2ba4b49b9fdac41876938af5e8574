@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9Yk\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-26T13:20:52Z",
+      "side": 1,
+      "message": "spacing!",
+      "revId": "4033c04b2ac2ba4b49b9fdac41876938af5e8574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9Yg\u003d",
+        "filename": "repo/includes/specials/SpecialItemByTitle.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-26T13:20:52Z",
+      "side": 1,
+      "message": "the message has only 2 params:\n\n\u0027wikibase-itembytitle-create\u0027 \u003d\u003e \u0027You can also [{{fullurl:Special:CreateItem|site\u003d$1\u0026page\u003d$2}} create an item].\u0027,\n\nI think we can eliminate the 3rd one.",
+      "revId": "4033c04b2ac2ba4b49b9fdac41876938af5e8574",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
