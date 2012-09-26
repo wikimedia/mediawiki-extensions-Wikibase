@@ -251,6 +251,15 @@ interface Entity extends Comparable {
 	public function getType();
 
 	/**
+	 * Returns the name of the entity's type in a localized form.
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType();
+
+	/**
 	 * Creates a diff between the entity and provided target.
 	 *
 	 * @since 0.1

@@ -130,6 +130,17 @@ class PropertyObject extends EntityObject implements Property {
 	}
 
 	/**
+	 * @see Entity::getLocalType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType() {
+		return wfMessage( 'wikibaselib-entity-property' )->parse();
+	}
+
+	/**
 	 * @see Entity::getDiff
 	 *
 	 * @since 0.1
