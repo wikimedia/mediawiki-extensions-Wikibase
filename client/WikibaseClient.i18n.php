@@ -326,6 +326,13 @@ $messages['sr-ec'] = array(
 	'wbc-editlinkstitle' => 'Уређивање међујезичких веза',
 );
 
+/** Serbian (Latin script) (srpski (latinica)‎) */
+$messages['sr-el'] = array(
+	'wbc-desc' => 'Klijent za proširenje Vikibaza',
+	'wbc-editlinks' => 'Uredi veze',
+	'wbc-editlinkstitle' => 'Uređivanje međujezičkih veza',
+);
+
 /** Swedish (svenska)
  * @author Ainali
  */
@@ -365,5 +372,12 @@ $messages['zh-hans'] = array(
 	'wbc-desc' => 'Wikibase扩展客户端',
 	'wbc-editlinks' => '编辑链接',
 	'wbc-editlinkstitle' => '编辑跨语言链接',
+);
+
+/** Traditional Chinese (中文（繁體）‎) */
+$messages['zh-hant'] = array(
+	'wbc-desc' => 'Wikibase擴展客戶端',
+	'wbc-editlinks' => '編輯鏈接',
+	'wbc-editlinkstitle' => '編輯跨語言鏈接',
 );
 
