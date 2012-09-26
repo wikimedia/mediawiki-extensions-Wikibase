@@ -152,8 +152,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				. $this->msg( 'wikibase-itembytitle-create' )
 					->params(
 						wfUrlencode( $siteId ? $siteId : '' ),
-						wfUrlencode( $page ? $page : '' ),
-						$page ? $page : ''
+						wfUrlencode( $page ? $page : '' )
 					)
 					->parse()
 				. Html::closeElement( 'div' )
