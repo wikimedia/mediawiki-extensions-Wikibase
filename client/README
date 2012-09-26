@@ -8,8 +8,8 @@ Latest version of the readme file: https://gerrit.wikimedia.org/r/gitweb?p=media
 Wikibase Client is a client for the Wikibase extension, which acts as a structured data repository.
 
 === Feature overview ===
-
-* ...
+* Accessing and displaying sitelinks from a repository
+* Parser function for the interplay between locally and externally defined sitelinks
 
 == Credits to other projects ==
 
