@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATH//9Xo\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-26T13:37:01Z",
+      "side": 1,
+      "message": "There is a bit of inconsistency regarding namespaces and \"use\" for core classes. Jeroen doesn\u0027t like doing it this way.  I don\u0027t care but some consistency would be nice.",
+      "revId": "8c4c8679ee4caea4597dfd8b361f7099a2ec0ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9Xk\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-26T13:37:01Z",
+      "side": 1,
+      "message": "if we use \"use\" for Title class and namespace stuff, we don\u0027t need the slash here.  With the slash, it still works though.",
+      "revId": "8c4c8679ee4caea4597dfd8b361f7099a2ec0ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATH//9Xg\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-09-26T13:37:01Z",
+      "side": 1,
+      "message": "inconsistency with \\Title and Title",
+      "revId": "8c4c8679ee4caea4597dfd8b361f7099a2ec0ce5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
