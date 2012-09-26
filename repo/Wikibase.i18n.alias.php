@@ -20,6 +20,7 @@ $specialPageAliases['en'] = array(
 	'CreateProperty' => array( 'CreateProperty' ),
 	'ItemByTitle' => array( 'ItemByTitle' ),
 	'ItemDisambiguation' => array( 'ItemDisambiguation' ),
+	'ListDatatypes' => array( 'ListDatatypes' ),
 );
 
 /** Arabic (العربية) */
