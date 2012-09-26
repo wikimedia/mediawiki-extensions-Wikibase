@@ -39,7 +39,7 @@
 			}
 		} );
 
-		if( mw.config.get( 'wbItemId' ) !== null ) {
+		if( mw.config.get( 'wbEntityId' ) !== null ) {
 			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
 			// needed for running the page without JS
 			$( '.wb-aliases-empty' )
@@ -70,7 +70,7 @@
 					.text( mw.message( 'wikibase-sitelinks' ) )
 					.append(
 						$( '<span/>' )
-						.attr( 'id', 'wb-item-' + mw.config.get('wbItemId') + '-sitelinks-counter' )
+						.attr( 'id', 'wb-item-' + mw.config.get('wbEntityId') + '-sitelinks-counter' )
 						.addClass( 'wb-ui-propertyedittool-counter' )
 					)
 				);

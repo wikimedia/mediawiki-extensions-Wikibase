@@ -56,7 +56,7 @@ wb.ui.PropertyEditTool.EditableDescription = wb.utilities.inherit( $PARENT, {
 	 */
 	getApiCallParams: function( apiAction ) {
 		var params = $PARENT.prototype.getApiCallParams.call( this, apiAction );
-		if( mw.config.get( 'wbItemId' ) === null ) { // new item should be created
+		if( mw.config.get( 'wbEntityId' ) === null ) { // new item should be created
 			var newItem ='{"descriptions":{"' + mw.config.get( 'wgUserLanguage' ) + '":"' + this.getValue().toString() + '"}}';
 			return $.extend( params, {
 				action: "wbsetitem",

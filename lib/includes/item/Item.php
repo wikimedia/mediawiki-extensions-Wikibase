@@ -31,6 +31,7 @@ namespace Wikibase;
  */
 interface Item extends Entity {
 
+	// TODO: remove prefix, consider client cache stuff
 	const ENTITY_TYPE = 'wikibase-item';
 
 	/**

@@ -367,7 +367,8 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
 		// hand over the entity's ID to JS
-		$out->addJsConfigVars( 'wb' . ucfirst( static::VIEW_TYPE ) . 'Id', $entity->getEntity()->getId() );
+		$out->addJsConfigVars( 'wbEntityId', $entity->getEntity()->getId() );
+		$out->addJsConfigVars( 'wbEntityType', static::VIEW_TYPE ); //TODO: use $entity->getEntity()->getType after prefixes got removed there
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 	}
 
