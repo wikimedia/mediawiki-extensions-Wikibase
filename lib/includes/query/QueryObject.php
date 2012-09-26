@@ -75,6 +75,17 @@ class QueryObject extends EntityObject implements Query {
 	}
 
 	/**
+	 * @see Entity::getLocalType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalType() {
+		return wfMessage( 'wikibaselib-entity-query' )->parse();
+	}
+
+	/**
 	 * @see Entity::getDiff
 	 *
 	 * @since 0.1
