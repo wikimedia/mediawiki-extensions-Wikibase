@@ -147,7 +147,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 					->params(
 						wfUrlencode( $siteId ? $siteId : '' ),
 						wfUrlencode( $page ? $page : '' ),
-						$page ? $page : ''
+						$page ? htmlspecialchars( $page ) : ''
 					)
 					->parse()
 				. Html::closeElement( 'div' )
