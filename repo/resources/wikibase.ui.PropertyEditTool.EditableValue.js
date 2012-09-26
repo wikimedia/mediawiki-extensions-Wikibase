@@ -463,7 +463,7 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 					self.setValue( responseVal );
 				}
 
-				if( mw.config.get( 'wbItemId' ) === null ) {
+				if( mw.config.get( 'wbEntityId' ) === null ) {
 					// if the 'save' process will create a new item, trigger the event!
 					$( window.wikibase ).triggerHandler( 'newItemCreated', response.entity );
 				}
@@ -555,15 +555,16 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	 * @return Object containing the API call specific parameters
 	 */
 	getApiCallParams: function( apiAction ) {
-		var itemId = mw.config.get( 'wbItemId' );
+		var entityId = mw.config.get( 'wbEntityId' );
 		var params = {
 			language: mw.config.get( 'wgUserLanguage' ),
 			token: mw.user.tokens.get( 'editToken' )
 		};
 
-		if( itemId !== null ) {
+		if( entityId !== null ) {
 			// API param can only be used if item exists
-			params.id = itemId;
+			params.type = mw.config.get( 'wbEntityType' );
+			params.id = entityId;
 			params.item = 'set';
 		} else {
 			// add a new item, ID will be received in APIs return value

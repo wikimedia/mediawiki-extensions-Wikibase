@@ -266,7 +266,7 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	 * @return jQuery
 	 */
 	_getCounterNodes: function() {
-		return $( '#wb-item-' + mw.config.get('wbItemId') + '-sitelinks-counter' );
+		return $( '#wb-item-' + mw.config.get('wbEntityId') + '-sitelinks-counter' );
 	},
 
 	/////////////////
