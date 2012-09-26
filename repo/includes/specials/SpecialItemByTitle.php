@@ -45,7 +45,13 @@ class SpecialItemByTitle extends SpecialItemResolver {
 		$itemContent = null;
 
 		if ( !empty( $page ) ) {
-			$pageTitle = \Title::newFromText( $page )->getText();
+			$title = \Title::newFromText( $page );
+			if ( $title !== null ) {
+				$pageTitle = $title->getText();
+			} else {
+				// TODO: throw error, page title contains invalid chars
+				$pageTitle = '';
+			}
 
 			// Create an item view
 			if ( isset( $siteId ) && isset( $pageTitle ) ) {
