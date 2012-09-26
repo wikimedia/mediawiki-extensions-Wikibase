@@ -68,7 +68,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string|null $site
+	 * @param string|null $siteId
 	 * @param string|null $page
 	 */
 	protected function switchForm( $siteId, $page ) {
@@ -105,7 +105,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			)
 			. Html::input(
 				'site',
-				$siteId ? htmlspecialchars( $siteId ) : '',
+				isset( $siteId)  ? htmlspecialchars( $siteId ) : '',
 				'text',
 				array(
 					'id' => 'wb-itembytitle-sitename',
@@ -120,7 +120,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			)
 			. Html::input(
 				'page',
-				$page ? htmlspecialchars( $page ) : '',
+				isset( $page ) ? htmlspecialchars( $page ) : '',
 				'text',
 				array(
 					'id' => 'pagename',
@@ -145,9 +145,9 @@ class SpecialItemByTitle extends SpecialItemResolver {
 				Html::openElement( 'div' )
 				. $this->msg( 'wikibase-itembytitle-create' )
 					->params(
-						wfUrlencode( $siteId ? $siteId : '' ),
-						wfUrlencode( $page ? $page : '' ),
-						$page ? $page : ''
+						wfUrlencode( isset( $siteId ) ? $siteId : '' ),
+						wfUrlencode( isset( $page) ? $page : '' ),
+						isset( $page)  ? htmlspecialchars( $page ) : ''
 					)
 					->parse()
 				. Html::closeElement( 'div' )
