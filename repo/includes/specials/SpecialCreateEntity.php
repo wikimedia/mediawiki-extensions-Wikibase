@@ -176,7 +176,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Building the HTML form for creating a new item.
+	 * Building the HTML create form for creating a new item.
 	 *
 	 * @since 0.1
 	 *
@@ -206,7 +206,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 				. Html::element(
 					'legend',
 					array( 'class' => 'wb-legend' ),
-					$legend
+					$legend ? htmlspecialchars( $legend ) : ''
 				)
 				. Html::hidden(
 					'token',
