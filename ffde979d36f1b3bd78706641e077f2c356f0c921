@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATX///zo\u003d",
+        "filename": "repo/includes/actions/ViewEntityAction.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-27T15:20:08Z",
+      "side": 1,
+      "message": "why -\u003eplain and not -\u003etext? That seems dangerous, and unnecessary.",
+      "revId": "ffde979d36f1b3bd78706641e077f2c356f0c921",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATX///zk\u003d",
+        "filename": "repo/tests/phpunit/includes/content/EntityHandlerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-09-27T15:20:08Z",
+      "side": 1,
+      "message": "could assert SpecialPage::exists( $specialPageName )",
+      "revId": "ffde979d36f1b3bd78706641e077f2c356f0c921",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
