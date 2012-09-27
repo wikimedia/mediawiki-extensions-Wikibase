@@ -67,7 +67,7 @@ final class Utils {
 		// No sites present yet, fetching from meta.wikimedia.org to populate sites table
 
 		$languages = \FormatJson::decode(
-			\Http::get( 'http://meta.wikimedia.org/w/api.php?action=sitematrix&format=json' ),
+			\Http::get( 'https://meta.wikimedia.org/w/api.php?action=sitematrix&format=json' ),
 			true
 		);
 
