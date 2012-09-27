@@ -201,6 +201,17 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
+	 * @see Entity::getLocalType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType() {
+		return wfMessage( 'wikibaselib-entity-item' )->parse();
+	}
+
+	/**
 	 * @see Entity::getDiff
 	 *
 	 * @since 0.1
