@@ -40,7 +40,7 @@ class ChangeRow extends ORMRow implements Change {
 	protected $user = false;
 
 	/**
-	 * Returns the user that made the change.
+	 * @see Change::getUser
 	 *
 	 * @since 0.1
 	 *
@@ -55,7 +55,7 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
-	 * Returns the age of the change in seconds.
+	 * @see Change::getAge
 	 *
 	 * @since 0.1
 	 *
@@ -66,8 +66,18 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
-	 * Returns whether the change is empty.
-	 * If it's empty, it can be ignored.
+	 * @see Change::getTime
+	 *
+	 * @since 0.2
+	 *
+	 * @return string TS_MW
+	 */
+	public function getTime() {
+		return $this->getField( 'time' );
+	}
+
+	/**
+	 * @see Change::isEmpty
 	 *
 	 * @since 0.1
 	 *
@@ -102,7 +112,7 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
-	 * Returns the type of change.
+	 * @see Change::getType
 	 *
 	 * @since 0.1
 	 *
@@ -110,6 +120,17 @@ class ChangeRow extends ORMRow implements Change {
 	 */
 	public function getType() {
 		return 'change';
+	}
+
+	/**
+	 * @see Change::getObjectId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getObjectId() {
+		return $this->getField( 'object_id' );
 	}
 
 }

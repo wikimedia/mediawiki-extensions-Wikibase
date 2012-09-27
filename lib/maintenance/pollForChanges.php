@@ -162,17 +162,16 @@ class PollForChanges extends \Maintenance {
 			try {
 				if ( $this->getOption( 'verbose' ) ) {
 					/**
-					 * @var Change $fields
+					 * @var Change $change
 					 */
 					foreach ( $changes as $change ) {
-							$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-							preg_match( '/wikibase-(item|[^~-]+)[-~](.+)$/', $fields[ 'type' ], $matches );
+							preg_match( '/wikibase-(item|[^~-]+)[-~](.+)$/', $change->getType(), $matches );
 							$type = ucfirst( $matches[ 2 ] ); // This is the verb (like "update" or "add")
 							$object = $matches[ 1 ]; // This is the object (like "item" or "property").
 
 							self::msg(
-								'Processing change ' . $fields[ 'id' ] . ' (' . $fields[ 'time' ] . '): '
-									. $type . ' for '. $object . ' ' . $fields[ 'object_id' ]
+								'Processing change ' . $change->getId() . ' (' . $change->getTime() . '): '
+									. $type . ' for '. $object . ' ' . $change->getObjectId()
 							);
 					}
 				}
