@@ -111,34 +111,44 @@ final class ClientHooks {
 				$siteLink = $item->getSiteLink( $siteGlobalId );
 				$title = null;
 
+				$info = $change->getField( 'info' );
+
 				if ( $siteLink !== null ) {
+					$page = $siteLink->getPage();
+
 					// check whether connecting sitelink has changed
 					// if so, purge both pages: the new and the old one and return
-					$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
-					if ( is_array( $siteLinkChangeOperations ) && array_key_exists( $siteGlobalId, $siteLinkChangeOperations ) ) {
-						$oldTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getOldValue() );
-						$newTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getNewValue() );
+					if ( array_key_exists( 'diff', $info ) ) {
+						$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
 
-						if ( !is_null( $oldTitle ) ) {
-							self::updatePage( $oldTitle, $change, true );
-						}
+						if ( is_array( $siteLinkChangeOperations ) && array_key_exists( $siteGlobalId, $siteLinkChangeOperations ) ) {
+							$oldTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getOldValue() );
+							$newTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getNewValue() );
 
-						if ( !is_null( $newTitle ) ) {
-							self::updatePage( $newTitle, $change, false );
+							if ( !is_null( $oldTitle ) ) {
+								self::updatePage( $oldTitle, $change, true );
+							}
+
+							if ( !is_null( $newTitle ) ) {
+								self::updatePage( $newTitle, $change, false );
+							}
+						} else {
+							$title = \Title::newFromText( $page );
+							if ( !is_null( $title ) ) {
+								self::updatePage( $title, $change );
+							}
 						}
 					} else {
-						$title = \Title::newFromText( $siteLink->getPage() );
-
+						$title = \Title::newFromText( $page );
 						if ( !is_null( $title ) ) {
 							self::updatePage( $title, $change );
 						}
 					}
-				} else {
+				} else if ( array_key_exists( 'diff', $info ) ) {
 					// cache should be invalidated when the sitelink got removed
 					$removedSiteLinks = $change->getDiff()->getSiteLinkDiff()->getRemovedValues();
 					if ( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
 						$title = \Title::newFromText( $removedSiteLinks[ $siteGlobalId ] );
-
 						if ( !is_null( $title ) ) {
 							self::updatePage( $title, $change, true );
 						}
