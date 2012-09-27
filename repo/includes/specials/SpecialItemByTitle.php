@@ -72,8 +72,6 @@ class SpecialItemByTitle extends SpecialItemResolver {
 
 		$siteExists = $sites->hasSite( $siteId );
 
-		$sites = \Wikibase\ItemView::getSiteDetails();
-		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites );
 		$this->getOutput()->addModules( 'wikibase.special.itemByTitle' );
 
 		$this->getOutput()->addHTML(

@@ -195,46 +195,4 @@ class ItemView extends EntityView {
 		return $html . Html::closeElement( 'div' ); // close .wb-item
 	}
 
-	/**
-	 * @see EntityView::registerJsConfigVars
-	 */
-	public static function registerJsConfigVars( OutputPage $out, EntityContent $item, $langCode, $editableView = false  ) {
-		// add default entity variables
-		parent::registerJsConfigVars( $out, $item, $langCode, $editableView );
-
-		// register site details
-		//@todo: make this a separate resource module!
-		$sites = static::getSiteDetails();
-		$out->addJsConfigVars( 'wbSiteDetails', $sites );
-	}
-
-	/**
-	 * Returns a list of all the sites that can be used as a target for a site link.
-	 *
-	 * @static
-	 * @return array
-	 */
-	public static function getSiteDetails() {
-		// TODO: this whole construct doesn't really belong here:
-		$sites = array();
-
-		/**
-		 * @var MediaWikiSite $site
-		 */
-		foreach ( Sites::singleton()->getSites() as $site ) {
-			if ( $site->getType() === Site::TYPE_MEDIAWIKI && $site->getGroup() === 'wikipedia' ) {
-				$languageName = Utils::fetchLanguageName( $site->getLanguageCode() );
-
-				$sites[$site->getLanguageCode()] = array(
-					'shortName' => $languageName,
-					'name' => $languageName,
-					'globalSiteId' => $site->getGlobalId(),
-					'pageUrl' => $site->getPageUrl(),
-					'apiUrl' => $site->getFileUrl( 'api.php' ),
-					'languageCode' => $site->getLanguageCode()
-				);
-			}
-		}
-		return $sites;
-	}
 }
