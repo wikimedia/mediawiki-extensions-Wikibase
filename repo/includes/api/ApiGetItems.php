@@ -23,10 +23,21 @@ class ApiGetItems extends Api {
 	}
 
 	/**
+	 * @see  Api::getRequiredPermissions()
+	 */
+	protected function getRequiredPermissions( Entity $entity, array $params ) {
+		$permissions = parent::getRequiredPermissions( $entity, $params );
+
+		$permissions[] = $entity->getType() . '-read';
+		return $permissions;
+	}
+
+	/**
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
+		$user = $this->getUser();
 
 		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
@@ -119,6 +130,12 @@ class ApiGetItems extends Api {
 					$itemContent = $page->getContent();
 
 					if ( is_null( $itemContent ) ) {
+						continue;
+					}
+
+					$status = $this->checkPermissions( $itemContent, $user, $params );
+					if ( !$status->isOk() ) {
+						$res->addValue( $itemPath, 'forbidden', $status->getMessage() );
 						continue;
 					}
 

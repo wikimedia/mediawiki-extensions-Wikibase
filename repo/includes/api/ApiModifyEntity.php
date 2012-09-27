@@ -34,6 +34,7 @@ abstract class ApiModifyEntity extends Api {
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
 
+		$permissions[] = $entity->getType() . '-read';
 		$permissions[] = 'edit';
 		return $permissions;
 	}

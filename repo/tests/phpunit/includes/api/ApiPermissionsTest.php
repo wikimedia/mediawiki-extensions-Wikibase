@@ -97,6 +97,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 				$this->assertEquals( $expectedError, $ex->getCodeString(), 'API did not return expected error code. Got error message ' . $ex );
 			}
 		}
+		return ( ( isset( $re ) && is_array( $re ) && $re !== array() ) ? $re : array() );
 	}
 
 	function provideEditPermissions() {
@@ -104,6 +105,14 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 			array( #0
 				null, # normal permissions
 				null # no error
+			),
+
+			array( #1
+				array( # permissions
+					'*'    => array( 'read' => false ),
+					'user' => array( 'read' => false )
+				),
+				'readapidenied' # error
 			),
 
 			array( #2
@@ -135,7 +144,16 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideAddItemPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #4
+		$permissions[] = array( #5
+			array( # permissions
+				'*'    => array( 'item-read' => false ),
+				'user' => array( 'item-read' => false )
+			),
+			'cant-edit' # error
+		);
+
+
+		$permissions[] = array( #6
 			array( # permissions
 				'*'    => array( 'createpage' => false ),
 				'user' => array( 'createpage' => false )
@@ -144,7 +162,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		);
 
 
-		$permissions[] = array( #5
+		$permissions[] = array( #7
 			array( # permissions
 				'*'    => array( 'item-create' => false ),
 				'user' => array( 'item-create' => false )
@@ -175,7 +193,16 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideSetSiteLinkPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #4
+		$permissions[] = array( #5
+			array( # permissions
+				'*'    => array( 'item-read' => false ),
+				'user' => array( 'item-read' => false )
+			),
+			'cant-edit' # error
+		);
+
+
+		$permissions[] = array( #6
 			array( # permissions
 				'*'    => array( 'sitelink-update' => false ),
 				'user' => array( 'sitelink-update' => false )
@@ -209,7 +236,16 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideSetLabelPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #4
+		$permissions[] = array( #5
+			array( # permissions
+				'*'    => array( 'item-read' => false ),
+				'user' => array( 'item-read' => false )
+			),
+			'cant-edit' # error
+		);
+
+
+		$permissions[] = array( #6
 			array( # permissions
 				'*'    => array( 'label-update' => false ),
 				'user' => array( 'label-update' => false )
@@ -236,7 +272,16 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideSetDescriptionPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #4
+		$permissions[] = array( #5
+			array( # permissions
+				'*'    => array( 'item-read' => false ),
+				'user' => array( 'item-read' => false )
+			),
+			'cant-edit' # error
+		);
+
+
+		$permissions[] = array( #6
 			array( # permissions
 				'*'    => array( 'description-update' => false ),
 				'user' => array( 'description-update' => false )
@@ -258,6 +303,49 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		);
 
 		$this->doPermissionsTest( 'wbsetdescription', $params, $permissions, $expectedError );
+	}
+
+	function provideGetItemsPermissions() {
+		return array(
+			array( #0
+				null, # normal permissions
+				null, # no error
+				null
+			),
+
+			array( #1
+				array( # permissions
+					'*'    => array( 'read' => false ),
+					'user' => array( 'read' => false )
+				),
+				'readapidenied', # error
+				null
+			),
+
+			array( #2
+				array( # permissions
+					'*'    => array( 'item-read' => false ),
+					'user' => array( 'item-read' => false )
+				),
+				null, # no error
+				'forbidden'
+			)
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetItemsPermissions
+	 */
+	function testGetItems( $permissions, $expectedError, $additional ) {
+		$id = $this->getItemId( "Oslo" );
+		$params = array(
+			'ids' => $id,
+		);
+
+		$res = $this->doPermissionsTest( 'wbgetitems', $params, $permissions, $expectedError );
+		if ( isset( $additional ) ) {
+			$this->assertSuccess( $res, 'entities', $id, $additional );
+		}
 	}
 
 }

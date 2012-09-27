@@ -23,6 +23,7 @@ class ApiLinkTitles extends Api {
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $item, $params );
 
+		$permissions[] = $entity->getType() . '-read';
 		$permissions[] = 'linktitles-update';
 		return $permissions;
 	}

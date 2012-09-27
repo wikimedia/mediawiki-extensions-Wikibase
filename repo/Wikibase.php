@@ -61,6 +61,9 @@ $dir = __DIR__ . '/';
 
 // rights
 // names should be according to other naming scheme
+$wgGroupPermissions['*']['item-read']			= true;
+$wgGroupPermissions['*']['property-read']		= true;
+$wgGroupPermissions['*']['query-read']			= true;
 $wgGroupPermissions['*']['item-override']		= true;
 $wgGroupPermissions['*']['item-create']			= true;
 $wgGroupPermissions['*']['item-remove']			= true;
