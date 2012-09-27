@@ -214,7 +214,7 @@ $wgContentHandlers[CONTENT_MODEL_WIKIBASE_ITEM] = '\Wikibase\ItemHandler';
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_PROPERTY] = '\Wikibase\PropertyHandler';
 $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
-$wbStores = array();
-$wbStores['sqlstore'] = 'Wikibase\SqlStore';
+$wgWBStores = array();
+$wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
 
 unset( $dir );

@@ -26,10 +26,10 @@ class StoreFactory {
 	 * @return Store
 	 */
 	public static function getStore( $store = false ) {
-		global $wbStores;
-		$store = $store === false || !array_key_exists( $store, $wbStores ) ? Settings::get( 'defaultStore' ) : $store;
+		global $wgWBStores;
+		$store = $store === false || !array_key_exists( $store, $wgWBStores ) ? Settings::get( 'defaultStore' ) : $store;
 
-		$class = $wbStores[$store];
+		$class = $wgWBStores[$store];
 
 		return $class::singleton();
 	}

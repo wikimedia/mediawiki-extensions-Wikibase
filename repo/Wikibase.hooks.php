@@ -540,7 +540,7 @@ final class RepoHooks {
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
 		$store = StoreFactory::getStore();
-		$stores = array_flip( $GLOBALS['wbStores'] );
+		$stores = array_flip( $GLOBALS['wgWBStores'] );
 
 		$reportMessage( 'Starting rebuild of the Wikibase repository ' . $stores[get_class( $store )] . ' store...' );
 
@@ -586,7 +586,7 @@ final class RepoHooks {
 		$reportMessage( "done!\n" );
 
 		$store = StoreFactory::getStore();
-		$stores = array_flip( $GLOBALS['wbStores'] );
+		$stores = array_flip( $GLOBALS['wgWBStores'] );
 
 		$reportMessage( 'Deleting data from the ' . $stores[get_class( $store )] . ' store...' );
 
