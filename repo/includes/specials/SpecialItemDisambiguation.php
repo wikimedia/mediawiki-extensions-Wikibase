@@ -97,10 +97,6 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @param string|null $label
 	 */
 	protected function switchForm( $langCode, $label ) {
-		$sites = \Wikibase\ItemView::getSiteDetails();
-
-		// The next two lines are here for the site ID autocompletion
-		$this->getOutput()->addJsConfigVars( 'wbSiteDetails', $sites ); // TODO: This should really be in a Resource loader module and not here.
 		$this->getOutput()->addModules( 'wikibase.special.itemDisambiguation' );
 
 		$this->getOutput()->addHTML(
