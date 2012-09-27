@@ -466,7 +466,7 @@ abstract class EntityContent extends \AbstractContent {
 		foreach ( $foundLabels as $foundLabel ) {
 			if ( $foundLabel['entityId'] !== $entity->getId() ) {
 				$status->fatal(
-					'wikibase-error-label-not-unique-' . $entity->getType(),
+					'wikibase-error-label-not-unique-wikibase-' . $entity->getType(),
 					$foundLabel['termText'],
 					$foundLabel['termLanguage'],
 					$foundLabel['entityId']

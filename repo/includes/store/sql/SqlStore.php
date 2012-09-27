@@ -82,7 +82,7 @@ class SqlStore implements Store {
 		$pages = $dbw->select(
 			array( 'page' ),
 			array( 'page_id', 'page_latest' ),
-			array( 'page_content_model' => Utils::getEntityModels() ),
+			array( 'page_content_model' => Utils::getEntityContentModels() ),
 			__METHOD__,
 			array( 'LIMIT' => 1000 ) // TODO: continuation
 		);

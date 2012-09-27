@@ -53,7 +53,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		$this->assertItemEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 		// This should be correct for all items we are testing
-		$this->assertEquals( CONTENT_MODEL_WIKIBASE_ITEM,  $res['entities'][$id]['type'] );
+		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entities'][$id]['type'] );
 		// The following comes from the props=info which is included by default
 		// Only check if they are there and seems valid, can't do much more for the moment (or could for title but then we are testing assumptions)
 		$this->assertSuccess( $res, 'entities', $id, 'pageid' );

@@ -632,13 +632,13 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 
 		if ( isset( $response['entity'] ) ) {
 			if ( isset( $response['entity']['type'] ) ) {
-				$this->assertTrue( \Wikibase\Utils::isEntityModel( $response['entity']['type'] ), "Missing valid 'type' in response." );
+				$this->assertTrue( \Wikibase\Utils::isEntityType( $response['entity']['type'] ), "Missing valid 'type' in response." );
 			}
 		}
 		elseif ( isset( $response['entities'] ) ) {
 			foreach ($response['entities'] as $entity) {
 				if ( isset( $entity['type'] ) ) {
-					$this->assertTrue( \Wikibase\Utils::isEntityModel( $entity['type'] ), "Missing valid 'type' in response." );
+					$this->assertTrue( \Wikibase\Utils::isEntityType( $entity['type'] ), "Missing valid 'type' in response." );
 				}
 			}
 		}

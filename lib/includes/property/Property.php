@@ -33,7 +33,7 @@ use MWException;
  */
 interface Property extends Entity {
 
-	const ENTITY_TYPE = 'wikibase-property';
+	const ENTITY_TYPE = 'property';
 
 	/**
 	 * Returns the DataType of the property.
