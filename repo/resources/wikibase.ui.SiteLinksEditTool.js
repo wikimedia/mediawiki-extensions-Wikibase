@@ -118,6 +118,10 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 
 		// this would be the first site link -> attach column headers
 		if ( this._editableValues.length === 1 ) {
+			// insert table header if it does not exist yet
+			if ( $( 'table.wb-sitelinks thead' ).length === 0 ) {
+				$( 'table.wb-sitelinks' ).children( 'colgroup' ).after( $( '<thead/>' ) );
+			}
 			$( 'table.wb-sitelinks thead' ).append(
 				$( '<tr/>' )
 					.addClass( 'wb-sitelinks-columnheaders' )
