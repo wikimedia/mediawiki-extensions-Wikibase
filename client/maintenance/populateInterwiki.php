@@ -42,7 +42,7 @@ TEXT;
 	}
 
 	protected function fetchLinks() {
-		$url = 'http://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&sifilteriw=local&format=json';
+		$url = 'https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&sifilteriw=local&format=json';
 
 		$json = Http::get( $url );
 		$data = FormatJSON::decode( $json, true );
