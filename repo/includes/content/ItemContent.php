@@ -119,7 +119,13 @@ class ItemContent extends EntityContent {
 
 		if ( $status->isOK() ) {
 			$this->addSiteLinkConflicts( $status );
-			$this->addLabelDescriptionConflicts( $status );
+
+			// Do not run this when running test using MySQL as self joins fail on temporary tables.
+			if ( !defined( 'MW_PHPUNIT_TEST' )
+				|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
+				|| wfGetDB( DB_SLAVE )->getType() !== 'mysql' ) {
+				$this->addLabelDescriptionConflicts( $status );
+			}
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -135,7 +141,7 @@ class ItemContent extends EntityContent {
 	 * @param Status $status
 	 */
 	protected function addLabelDescriptionConflicts( Status $status ) {
-		$labels = array();
+		$terms = array();
 
 		$entity = $this->getEntity();
 
@@ -159,35 +165,17 @@ class ItemContent extends EntityContent {
 			}
 		}
 
-		$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingJoinedTerms(
-			$labels,
-			null,
-			$entity->getType()
-		);
+		if ( !empty( $terms ) ) {
+			$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingTermCombination(
+				$terms,
+				null,
+				$entity->getType(),
+				$entity->getId(),
+				$entity->getType()
+			);
 
-		$violatingTerms = array();
-
-		foreach ( $foundTerms as $foundTerm ) {
-			if ( $foundTerm['entityId'] !== $entity->getId() ) {
-				if ( array_key_exists( $foundTerm['entityId'], $violatingTerms ) ) {
-					$violatingPair = $violatingTerms[$foundTerm['entityId']];
-
-					if ( $foundTerm['termType'] === TermCache::TERM_TYPE_LABEL ) {
-						array_unshift( $violatingPair, $foundTerm );
-					}
-					else {
-						array_push( $violatingPair, $foundTerm );
-					}
-				}
-				else {
-					$violatingTerms[$foundTerm['entityId']] = array( $foundTerm );
-				}
-			}
-		}
-
-		foreach ( $violatingTerms as $violatingPair ) {
-			if ( count( $violatingPair ) === 2 ) {
-				list( $label, $description ) = $violatingPair;
+			if ( !empty( $foundTerms ) ) {
+				list( $label, $description ) = $foundTerms;
 
 				$status->fatal(
 					'wikibase-error-label-not-unique-item',

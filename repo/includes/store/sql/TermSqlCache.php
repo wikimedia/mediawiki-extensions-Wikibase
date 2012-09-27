@@ -45,6 +45,21 @@ class TermSqlCache implements TermCache {
 	protected $tableName;
 
 	/**
+	 * Maps table fields to TermCache interface field names.
+	 *
+	 * @since 0.2
+	 *
+	 * @var array
+	 */
+	protected $termFieldMap = array(
+		'term_entity_type' => 'entityType',
+		'term_type' => 'termType',
+		'term_language' => 'termLanguage',
+		'term_text' => 'termText',
+		'term_entity_id' => 'entityId',
+	);
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -286,161 +301,94 @@ class TermSqlCache implements TermCache {
 	 * @return array
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null ) {
-		return $this->doTermSelection( $terms, $termType, $entityType );
-	}
+		$conditions = $this->termsToConditions( $terms, $termType, $entityType );
 
-	/**
-	 * @see TermCache::getMatchingJoinedTerms
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
-	 *
-	 * @return array
-	 */
-	public function getMatchingJoinedTerms( array $terms, $termType = null, $entityType = null ) {
-		return $this->doTermSelection( $terms, $termType, $entityType, true );
-	}
-
-	/**
-	 * Similar to
-	 * @see TermCache::getMatchingTerms
-	 *
-	 * But also supports self joins when $selfJoin is set to true.
-	 * In this case one can provide a list of terms in each outer array item.
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $terms
-	 * @param string|null $termType
-	 * @param string|null $entityType
-	 * @param boolean $selfJoin
-	 *
-	 * @return array
-	 */
-	protected function doTermSelection( array $terms, $termType = null, $entityType = null, $selfJoin = false ) {
-		$allowedFields = array(
-			'term_entity_type' => 'entityType',
-			'term_type' => 'termType',
-			'term_language' => 'termLanguage',
-			'term_text' => 'termText',
-		);
-
-		list( $conditions, $hasJoin ) = $this->termsToConditions( $terms, $selfJoin, $allowedFields, $termType, $entityType );
-
-		$allowedFields['term_entity_id'] = 'entityId';
-
-		$joinConds = array();
-		$tables = array( 'terms0' => $this->tableName );
-		$selectionFields = array_keys( $allowedFields );
-
-		if ( $hasJoin ) {
-			$tables['terms1'] = $this->tableName;
-
-			$joinConds['terms1'] = array(
-				'LEFT OUTER JOIN',
-				array(
-					'terms0.term_entity_id=terms1.term_entity_id',
-					'terms0.term_entity_type=terms1.term_entity_type',
-				)
-			);
-
-			foreach ( $selectionFields as &$selectionField ) {
-				$selectionField = 'terms0.' . $selectionField;
-			}
-		}
-
-		$obtainedTerms = $this->getReadDb()->select(
-			$tables,
-			$selectionFields,
-			implode( ' OR ', $conditions ),
-			__METHOD__,
-			array(),
-			$joinConds
-		);
-
-		return $this->buildTermResult( $obtainedTerms, $allowedFields );
-	}
-
-	/**
-	 * @since 0.2
-	 *
-	 * @param array $terms
-	 * @param boolean $selfJoin
-	 * @param array $allowedFields
-	 * @param string $termType
-	 * @param string $entityType
-	 *
-	 * @return array[ array, boolean ]
-	 */
-	protected function termsToConditions( array $terms, $selfJoin, array $allowedFields, $termType, $entityType ) {
-		$hasJoin = false;
-		$conditions = array();
+		$selectionFields = array_keys( $this->termFieldMap );
 
 		$dbr = $this->getReadDb();
 
-		foreach ( $terms as $termList ) {
-			$termList = $selfJoin ? array_slice( $termList, 0, 2 ) : array( $termList );
+		$obtainedTerms = $dbr->select(
+			$this->tableName,
+			$selectionFields,
+			implode( ' OR ', $conditions ),
+			__METHOD__
+		);
 
-			$tableIndex = 0;
-
-			// Maps interface term fields to table fields and defaults
-			// using the methods $termType and $entityType parameters.
-			foreach ( $termList as $term ) {
-				$fullTerm = array();
-
-				if ( array_key_exists( 'termLanguage', $term ) ) {
-					$fullTerm['term_language'] = $term['termLanguage'];
-				}
-
-				if ( array_key_exists( 'termText', $term ) ) {
-					$fullTerm['term_text'] = $term['termText'];
-				}
-
-				if ( array_key_exists( 'termType', $term ) ) {
-					$fullTerm['term_type'] = $term['termType'];
-				}
-				elseif ( $termType !== null ) {
-					$fullTerm['term_type'] = $termType;
-				}
-
-				if ( array_key_exists( 'entityType', $term ) ) {
-					$fullTerm['term_entity_type'] = $term['entityType'];
-				}
-				elseif ( $entityType !== null ) {
-					$fullTerm['term_entity_type'] = $entityType;
-				}
-
-				$fullTerm = array_intersect_key( $fullTerm, $allowedFields );
-
-				$tableName = 'terms' . $tableIndex++;
-
-				foreach ( $fullTerm as $field => &$value ) {
-					$value = $tableName . '.' . $field . '=' . $dbr->addQuotes( $value );
-				}
-
-				$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
-			}
-
-			if ( $tableIndex > 1 ) {
-				$hasJoin = true;
-			}
-		}
-
-		return array( $conditions, $hasJoin );
+		return $this->buildTermResult( $obtainedTerms );
 	}
 
 	/**
 	 * @since 0.2
 	 *
-	 * @param \ResultWrapper $obtainedTerms
-	 * @param array $fieldMap
+	 * @param array $terms
+	 * @param string $termType
+	 * @param string $entityType
+	 * @param boolean $forJoin
+	 *            If the provided terms are used for a join.
+	 *            If so, the fields of each term get prefixed with a table name starting with terms0 and counting up.
 	 *
 	 * @return array
 	 */
-	protected function buildTermResult( \ResultWrapper $obtainedTerms, array $fieldMap ) {
+	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false ) {
+		$conditions = array();
+		$tableIndex = 0;
+
+		$dbr = $this->getReadDb();
+
+		foreach ( $terms as $term ) {
+			$fullTerm = array();
+
+			if ( array_key_exists( 'termLanguage', $term ) ) {
+				$fullTerm['term_language'] = $term['termLanguage'];
+			}
+
+			if ( array_key_exists( 'termText', $term ) ) {
+				$fullTerm['term_text'] = $term['termText'];
+			}
+
+			if ( array_key_exists( 'termType', $term ) ) {
+				$fullTerm['term_type'] = $term['termType'];
+			}
+			elseif ( $termType !== null ) {
+				$fullTerm['term_type'] = $termType;
+			}
+
+			if ( array_key_exists( 'entityType', $term ) ) {
+				$fullTerm['term_entity_type'] = $term['entityType'];
+			}
+			elseif ( $entityType !== null ) {
+				$fullTerm['term_entity_type'] = $entityType;
+			}
+
+			$fullTerm = array_intersect_key( $fullTerm, $this->termFieldMap );
+
+			$tableName = 'terms' . $tableIndex++;
+
+			foreach ( $fullTerm as $field => &$value ) {
+				$value = $field . '=' . $dbr->addQuotes( $value );
+
+				if ( $forJoin ) {
+					$value = $tableName . '.' . $value;
+				}
+			}
+
+			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
+		}
+
+		return $conditions;
+	}
+
+	/**
+	 * Modifies the provided terms to use the field names expected by the interface
+	 * rather then the table field names. Also ensures the values are of the correct type.
+	 *
+	 * @since 0.2
+	 *
+	 * @param \Iterator|array $obtainedTerms PHP fails for not having a common iterator/array thing :<0
+	 *
+	 * @return array
+	 */
+	protected function buildTermResult( $obtainedTerms ) {
 		$matchingTerms = array();
 
 		foreach ( $obtainedTerms as $obtainedTerm ) {
@@ -451,7 +399,7 @@ class TermSqlCache implements TermCache {
 					$value = (int)$value;
 				}
 
-				$matchingTerm[$fieldMap[$key]] = $value;
+				$matchingTerm[$this->termFieldMap[$key]] = $value;
 			}
 
 			$matchingTerms[] = $matchingTerm;
@@ -469,6 +417,131 @@ class TermSqlCache implements TermCache {
 	 */
 	public function clear() {
 		return wfGetDB( DB_MASTER )->delete( $this->tableName, '*', __METHOD__ );
+	}
+
+	/**
+	 * @see TermCache::getMatchingTermCombination
+	 *
+	 * Note: the interface specifies capability for only a single join, which in this implementation
+	 * is enforced by the $joinCount var. The code itself however could handle multiple joins.
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $terms
+	 * @param string|null $termType
+	 * @param string|null $entityType
+	 * @param integer|null $excludeId
+	 * @param string|null $excludeType
+	 *
+	 * @return array
+	 */
+	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, $excludeId = null, $excludeType = null ) {
+		if ( empty( $terms ) ) {
+			return array();
+		}
+
+		$conditions = array();
+		$joinCount = 1;
+
+		$dbr = $this->getReadDb();
+
+		foreach ( $terms as $termList ) {
+			// Limit the operation to a single join.
+			$termList = array_slice( $termList, 0, $joinCount + 1 );
+
+			$combinationConds = $this->termsToConditions( $termList, $termType, $entityType, true );
+
+			$exclusionConds = array();
+
+			if ( $excludeId !== null ) {
+				$exclusionConds[] = 'terms0.term_entity_id <> ' . $dbr->addQuotes( $excludeId );
+			}
+
+			if ( $excludeType !== null ) {
+				$exclusionConds[] = 'terms0.term_entity_type <> ' . $dbr->addQuotes( $excludeType );
+			}
+
+			if ( !empty( $exclusionConds ) ) {
+				$combinationConds[] = '(' . implode( ' OR ', $exclusionConds ) . ')';
+			}
+
+			$conditions[] = implode( ' AND ', $combinationConds );
+		}
+
+		$tables = array();
+		$fieldsToSelect = array();
+		$joinConds = array();
+
+		for ( $tableIndex = 0; $tableIndex <= $joinCount; $tableIndex++ ) {
+			$tableName = 'terms' . $tableIndex;
+			$tables[$tableName] = $this->tableName;
+
+			foreach ( array_keys( $this->termFieldMap ) as $fieldName ) {
+				$fieldsToSelect[] = $tableName . '.' . $fieldName . ' AS ' . $tableName . $fieldName;
+			}
+
+			if ( $tableIndex !== 0 ) {
+				$joinConds[$tableName] = array(
+					'INNER JOIN',
+					array(
+						'terms0.term_entity_id=' . $tableName . '.term_entity_id',
+						'terms0.term_entity_type=' . $tableName . '.term_entity_type',
+					)
+				);
+			}
+		}
+
+		$obtainedTerms = $dbr->select(
+			$tables,
+			$fieldsToSelect,
+			implode( ' OR ', $conditions ),
+			__METHOD__,
+			array( 'LIMIT' => 1 ),
+			$joinConds
+		);
+
+		return $this->buildTermResult( $this->getNormalizedJoinResult( $obtainedTerms, $joinCount ) );
+	}
+
+	/**
+	 * Takes the result of a query with joins and turns it into a row per term.
+	 *
+	 * Also ditches any successive results PDO manages to add to the first one,
+	 * so the behaviour appears to be the same as when running the query against
+	 * the database directly without PDO messing the the result up.
+	 *
+	 * @since 0.2
+	 *
+	 * @param \ResultWrapper $obtainedTerms
+	 * @param integer $joinCount
+	 *
+	 * @return array
+	 */
+	protected function getNormalizedJoinResult( \ResultWrapper $obtainedTerms, $joinCount ) {
+		$resultTerms = array();
+
+		foreach ( $obtainedTerms as $obtainedTerm ) {
+			$obtainedTerm = (array)$obtainedTerm;
+
+			for ( $tableIndex = 0; $tableIndex <= $joinCount; $tableIndex++ ) {
+				$tableName = 'terms' . $tableIndex;
+				$resultTerm = array();
+
+				foreach ( array_keys( $this->termFieldMap ) as $fieldName ) {
+					$fullFieldName = $tableName . $fieldName;
+
+					if ( array_key_exists( $fullFieldName, $obtainedTerm ) ) {
+						$resultTerm[$fieldName] = $obtainedTerm[$fullFieldName];
+					}
+				}
+
+				if ( !empty( $resultTerm ) ) {
+					$resultTerms[] = $resultTerm;
+				}
+			}
+		}
+
+		return $resultTerms;
 	}
 
 }
