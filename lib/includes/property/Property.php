@@ -31,6 +31,6 @@ namespace Wikibase;
  */
 interface Property extends Entity {
 
-	const ENTITY_TYPE = 'wikibase-property';
+	const ENTITY_TYPE = 'property';
 
 }

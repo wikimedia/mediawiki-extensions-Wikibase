@@ -159,7 +159,7 @@ final class RepoHooks {
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& in_array(
 				$title->getContentModel(),
-				Utils::getEntityModels()
+				Utils::getEntityContentModels()
 			)
 		) {
 			$pageLanguage = $language;
@@ -267,7 +267,7 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
-		if ( Utils::isEntityModel( $article->getContent()->getModel() ) ) {
+		if ( Utils::isEntityContentModel( $article->getContent()->getModel() ) ) {
 			/**
 			 * @var $newItem Entity
 			 */
@@ -460,7 +460,7 @@ final class RepoHooks {
 		$article = $history->getArticle();
 		$rev = new Revision( $row );
 
-		if ( Utils::isEntityModel( $history->getTitle()->getContentModel() )
+		if ( Utils::isEntityContentModel( $history->getTitle()->getContentModel() )
 			&& $article->getPage()->getLatest() !== $rev->getID()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 		) {
@@ -495,7 +495,7 @@ final class RepoHooks {
 		$title = $sktemplate->getTitle();
 		$request = $sktemplate->getRequest();
 
-		if ( Utils::isEntityModel( $title->getContentModel() ) ) {
+		if ( Utils::isEntityContentModel( $title->getContentModel() ) ) {
 			unset( $links['views']['edit'] );
 
 			if ( $title->quickUserCan( 'edit', $sktemplate->getUser() ) ) {
@@ -612,7 +612,7 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
-		if ( Utils::isEntityModel( $out->getTitle()->getContentModel() ) ) {
+		if ( Utils::isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
@@ -659,7 +659,7 @@ final class RepoHooks {
 			// we only want to handle links to Wikibase entities differently here
 			|| !in_array(
 				$target->getContentModel(),
-				Utils::getEntityModels()
+				Utils::getEntityContentModels()
 			)
 			// as of MW 1.20 Linker shouldn't support anything but Title anyhow
 			|| ! $target instanceof Title
@@ -779,7 +779,7 @@ final class RepoHooks {
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
 
-			foreach ( Utils::getEntityModels() as $model ) {
+			foreach ( Utils::getEntityContentModels() as $model ) {
 				/**
 				 * @var EntityHandler $handler
 				 */

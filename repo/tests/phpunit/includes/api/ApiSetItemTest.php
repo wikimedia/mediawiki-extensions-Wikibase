@@ -598,10 +598,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 
 		// check return value -------------------------------------------
-		$this->assertSuccess( $res, 'item' );
-		$item = $res['item'];
-		$this->assertSuccess( $res, 'item', 'id' );
-		$this->assertSuccess( $res, 'item', 'lastrevid' );
+		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );
 
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {

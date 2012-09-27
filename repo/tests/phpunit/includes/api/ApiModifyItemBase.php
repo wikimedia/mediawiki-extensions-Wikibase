@@ -618,6 +618,19 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	public function assertSuccess( $response ) {
 		$this->assertArrayHasKey( 'success', $response, "Missing 'success' marker in response." );
 
+		if ( isset( $response['entity'] ) ) {
+			if ( isset( $response['entity']['type'] ) ) {
+				$this->assertTrue( \Wikibase\Utils::isEntityType( $response['entity']['type'] ), "Missing valid 'type' in response." );
+			}
+		}
+		elseif ( isset( $response['entities'] ) ) {
+			foreach ($response['entities'] as $entity) {
+				if ( isset( $entity['type'] ) ) {
+					$this->assertTrue( \Wikibase\Utils::isEntityType( $entity['type'] ), "Missing valid 'type' in response." );
+				}
+			}
+		}
+
 		$path = func_get_args();
 		array_shift( $path );
 
