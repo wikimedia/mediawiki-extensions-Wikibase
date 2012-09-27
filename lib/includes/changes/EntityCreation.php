@@ -58,7 +58,7 @@ class EntityCreation extends EntityRefresh {
 	 * @return string
 	 */
 	public function getType() {
-		return $this->getEntity()->getType() . '-add';
+		return $this->getEntity()->getType() . '~add';
 	}
 
 }
