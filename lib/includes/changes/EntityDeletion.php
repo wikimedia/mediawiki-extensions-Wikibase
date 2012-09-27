@@ -38,7 +38,7 @@ class EntityDeletion extends EntityCreation {
 	 * @return string
 	 */
 	public function getType() {
-		return $this->getEntity()->getType() . '-remove';
+		return $this->getEntity()->getType() . '~remove';
 	}
 
 }

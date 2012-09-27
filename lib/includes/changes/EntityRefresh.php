@@ -86,7 +86,7 @@ class EntityRefresh extends ChangeRow {
 	 * @return string
 	 */
 	public function getType() {
-		return $this->getEntity()->getType() . '-refresh';
+		return $this->getEntity()->getType() . '~refresh';
 	}
 
 	/**
