@@ -41,10 +41,10 @@ class ClientStoreFactory {
 	 * @return ClientStore
 	 */
 	public static function getStore( $store = false ) {
-		global $wbcStores;
-		$store = $store === false || !array_key_exists( $store, $wbcStores ) ? Settings::get( 'defaultClientStore' ) : $store;
+		global $wgWBCStores;
+		$store = $store === false || !array_key_exists( $store, $wgWBCStores ) ? Settings::get( 'defaultClientStore' ) : $store;
 
-		$class = $wbcStores[$store];
+		$class = $wgWBCStores[$store];
 
 		return $class::singleton();
 	}
