@@ -9,12 +9,6 @@
  * @author H. Snater
  */
 
-* {
-	/* defining Arial as default font working around problematic font metrics of Helvetica applied
-	in Firefox and Opera on Mac cutting off high characters like "Å" in some cases */
-	font-family: Arial, sans-serif;
-}
-
 /* since a custom heading is being used on the entity pages, the native h1 tag has to be hidden */
 .wb-entitypage .firstHeading {
 	display: none;
