@@ -576,6 +576,9 @@ class EditEntity {
 	/**
 	 * Shows an error page showing the errors that occurred during attemptSave(), if any.
 	 *
+	 * If $titleMessage is set it is made an assumption that the page is still the original
+	 * one, and there should be no link back from a special error page.
+	 *
 	 * @param OutputPage $out the output object to write output to
 	 * @param String|null $titleMessage message key for the page title
 	 *
@@ -600,7 +603,9 @@ class EditEntity {
 
 		$this->showStatus( $out );
 
-		$out->returnToMain( '', $this->getTitle() );
+		if ( !isset( $titleMessage ) ) {
+			$out->returnToMain( '', $this->getTitle() );
+		}
 
 		return true;
 	}
@@ -624,7 +629,8 @@ class EditEntity {
 		}
 
 		$text = $this->status->getMessage();
-		$out->addWikiText( $text );
+
+		$out->addHTML( \Html::element( 'div', array( 'class' => 'error' ), $text ) );
 
 		return true;
 	}
