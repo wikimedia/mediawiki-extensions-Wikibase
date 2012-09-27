@@ -614,10 +614,9 @@ $messages['de'] = array(
 	'wikibase-restoreold' => 'zurücksetzen',
 	'wikibase-restore-summary' => 'Die Version $1 von [[Special:Contributions/$2|$2]] wurde wiederhergestellt.',
 	'wikibase-no-direct-editing' => 'Das direkte Bearbeiten im Namensraum $1 wurde deaktiviert.',
-	'wikibase-noitem' => 'Dieses Datenelement ist nicht vorhanden.
-Du kannst entweder die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen], um herauszufinden, was mit ihm passiert ist, oder ein [[Special:CreateItem|neues Datenobjekt erstellen]]</span>.',
-	'wikibase-noitem-nopermission' => 'Dieses Datenelement ist nicht vorhanden.
-Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>.',
+	'wikibase-noentity' => 'Dieser Datensatz ist nicht vorhanden.
+Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>, um herauszufinden was mit ihm passiert ist.',
+	'wikibase-noentity-createone' => 'Du kannst auch [[$1|ein neues erstellen]].',
 	'wikibase-item-summary-wbsetitem' => 'Erstellte ein neues Datenelement',
 	'wikibase-item-summary-wbsetlabel-set' => 'Änderte [$2] Bezeichnung',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Entfernte [$2] Bezeichnung',
@@ -659,10 +658,9 @@ $messages['de-formal'] = array(
 	'wikibase-createproperty-intro' => 'Prüfen Sie bitte, ob das Attribut bereits vorhanden ist, bevor Sie ein neues erstellen. Um ein neues Attribut zu erstellen, müssen Sie mindestens die Bezeichnung oder die Beschreibung auf $1, sowie einen gültigen Datentyp angeben.',
 	'wikibase-createitem-intro' => 'Prüfen Sie bitte, ob das Datenelement bereits vorhanden ist, bevor Sie ein neues erstellen. Um ein neues Datenelement zu erstellen, müssen Sie mindestens die Bezeichnung oder die Beschreibung auf $1 angeben.',
 	'wikibase-self-conflict' => 'Die Daten wurden verändert, seitdem Sie damit angefangen haben, sie zu bearbeiten.',
-	'wikibase-noitem' => 'Dieses Datenelement ist nicht vorhanden.
-Sie können entweder die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen], um herauszufinden, was mit ihm passiert ist, oder ein [[Special:CreateItem|neues Datenobjekt erstellen]]</span>.',
-	'wikibase-noitem-nopermission' => 'Dieses Datenelement ist nicht vorhanden.
-Sie können die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>.',
+	'wikibase-noentity' => 'Dieser Datensatz ist nicht vorhanden.
+Sie können die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>, um herauszufinden was mit ihm passiert ist.',
+	'wikibase-noentity-createone' => 'Sie können auch [[$1|ein neues erstellen]].',
 );
 
 /** Zazaki (Zazaki)
@@ -784,15 +782,15 @@ $messages['dsb'] = array(
 	'wikibase-createentity-label' => 'Pomjenjenje:',
 	'wikibase-createentity-description' => 'Wopisanje:',
 	'wikibase-createentity-submit' => 'Napóraś',
+	'special-listdatatypes' => 'Lisćina wšych k dispoziciji stojecych datowych typow',
+	'wikibase-listdatatypes-intro' => 'To jo lisćina wšych datowych typow, kótarež wužywaju se tuchylu w toś tej instalaciji:',
 	'wikibase-api-patch-incomplete' => 'Napórany patch jo se ako njedopołny wopokazał.',
 	'wikibase-self-conflict' => 'Daty su se wót tebje změnili, wót togo až sy zachopił je wobźěłowaś.',
 	'wikibase-restoreold' => 'slědk stajiś',
 	'wikibase-restore-summary' => 'Wersiju $1 wót [[Special:Contributions/$2|$2]] wótnowiś',
 	'wikibase-no-direct-editing' => 'Direktne wobźěłowanje w mjenjowem rumje $1 jo se znjemóžniło.',
-	'wikibase-noitem' => 'Toś ten element njeeksistěrujo.
-Móžoš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wótpowědujuce protokole pśepytaś], aby wuslěźił, což jo se z nim stało abo [[Special:CreateItem|napóraj element]]</span>.',
-	'wikibase-noitem-nopermission' => 'Toś ten element njeeksistěrujo.
-Móžoš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wótpowědujuce protokole pśepytaś]</span>.',
+	'wikibase-noentity' => 'Toś ta datowa sajźba njeeksistěrujo. Móžoš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wótpowědujuce protokole pśepytaś]</span>, aby wuslěźił, což jo se jej stało.',
+	'wikibase-noentity-createone' => 'Móžoš teke [[$1|nowu napóraś]].',
 	'wikibase-item-summary-wbsetitem' => 'Nowy element napórany',
 	'wikibase-item-summary-wbsetlabel-set' => 'Pomjenjenje za [$2] změnjone',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Pomjenjenje za [$2] wótpórane',
@@ -917,16 +915,13 @@ $messages['es'] = array(
 	'wikibase-createentity-label' => 'Etiqueta:',
 	'wikibase-createentity-description' => 'Descripción',
 	'wikibase-createentity-submit' => 'Crear',
+	'special-listdatatypes' => 'Enumerar todos los tipos de datos disponibles',
+	'wikibase-listdatatypes-intro' => 'Esta es una lista de todos los tipos de datos en uso actualmente en esta instalación:',
 	'wikibase-api-patch-incomplete' => 'El parche generado resultó estar incompleto.',
 	'wikibase-self-conflict' => 'Los datos fueron modificados por ti después de comenzar la edición.',
 	'wikibase-restoreold' => 'reestablecer',
 	'wikibase-restore-summary' => 'Restaurar la revisión $1 por [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'La edición directa está desactivada en el espacio de nombres $1',
-	'wikibase-noitem' => 'Este elemento no existe.
-Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar los registros relacionados]
-para averiguar adónde fue, o [[Special:CreateItem|crear un nuevo elemento]]</span>.',
-	'wikibase-noitem-nopermission' => 'Este elemento no existe.
-Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar los registros relacionados]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'Crear un nuevo elemento',
 	'wikibase-item-summary-wbsetlabel-set' => 'La etiqueta [$2] ha cambiado',
 	'wikibase-item-summary-wbsetlabel-remove' => 'La etiqueta [$2] ha sido eliminada',
@@ -1183,11 +1178,6 @@ $messages['fr'] = array(
 	'wikibase-itemdisambiguation-invalid-langcode' => "La requête précédente n'a pas pu être utilisée pour effectuer une recherche. Vous devez fournir un identificateur de langue valide.",
 	'special-createitem' => 'Créer un nouvel élément',
 	'wikibase-restoreold' => 'réinitialiser',
-	'wikibase-noitem' => 'Cet élément n\'existe pas.
-Vous pouvez <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} rechercher dans les journaux correspondants]
-pour trouver d\'où cela vient, ou [[Special:CreateItem|créer un nouvel élément]]</span>.',
-	'wikibase-noitem-nopermission' => 'Cet élément n’existe pas.
-Vous pouvez <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page = {{FULLPAGENAMEE}}}} recherchez les journaux connexes]</span>.',
 	'wikibase-item-summary-wbsetaliases-set' => 'Paramètre [ $2 ] {{plural:$1|alias|alias}}',
 	'content-model-1001' => 'Élément Wikibase',
 );
@@ -1352,16 +1342,16 @@ $messages['gl'] = array(
 	'wikibase-createentity-label' => 'Etiqueta:',
 	'wikibase-createentity-description' => 'Descrición:',
 	'wikibase-createentity-submit' => 'Crear',
+	'special-listdatatypes' => 'Lista de todos os tipos de datos dispoñibles',
+	'wikibase-listdatatypes-intro' => 'Esta é unha lista de todos os tipos de datos en uso actualmente nesta instalación:',
 	'wikibase-api-patch-incomplete' => 'O parche xerado resultou estar incompleto.',
 	'wikibase-self-conflict' => 'Vostede modificou os datos despois de comezar esta edición.',
 	'wikibase-restoreold' => 'restaurar',
 	'wikibase-restore-summary' => 'Restauro a revisión $1 feita por [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'A edición directa está desactivada no espazo de nomes "$1"',
-	'wikibase-noitem' => 'O elemento non existe.
-Pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]
-para descubir onde está ou [[Special:CreateItem|crear un novo elemento]]</span>.',
-	'wikibase-noitem-nopermission' => 'O elemento non existe.
-Pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]</span>.',
+	'wikibase-noentity' => 'O conxunto de datos non existe. Pode
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]</span> para descubrir onde foi parar.',
+	'wikibase-noentity-createone' => 'Tamén pode [[$1|crear un novo]].',
 	'wikibase-item-summary-wbsetitem' => 'Creo un elemento novo',
 	'wikibase-item-summary-wbsetlabel-set' => 'Cambio a etiqueta en [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Elimino a etiqueta en [$2]',
@@ -1607,15 +1597,15 @@ $messages['hsb'] = array(
 	'wikibase-createentity-label' => 'Pomjenowanje:',
 	'wikibase-createentity-description' => 'Wopisanje:',
 	'wikibase-createentity-submit' => 'Wutworić',
+	'special-listdatatypes' => 'Lisćina wšěch k dispoziciji stejacych datowych typow',
+	'wikibase-listdatatypes-intro' => 'To je lisćina wšěch datowych typow, kotrež so w tutej instalaciji tuchwilu wužiwaja:',
 	'wikibase-api-patch-incomplete' => 'Wutworjeny patch je so jako njedospołny wopokazał.',
 	'wikibase-self-conflict' => 'Daty su so wot tebje změnili, wot toho zo sy započał je wobdźěłować.',
 	'wikibase-restoreold' => 'wróćo stajić',
 	'wikibase-restore-summary' => 'Wersiju $1 wot [[Special:Contributions/$2|$2]] wobnowić',
 	'wikibase-no-direct-editing' => 'Direktne wobdźěłowanje w mjenowym rumje $1 je znjemóžnjene.',
-	'wikibase-noitem' => 'Tutón element njeeksistuje.
-Móžeš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wotpowědowace protokole přepytać], zo by wuslědźił, štož je so z nim stało abo [[Special:CreateItem|wutwor nowy element]]</span>.',
-	'wikibase-noitem-nopermission' => 'Tutón element njeeksistuje.
-Móžeš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wotpowědowace protokole přepytać]</span>.',
+	'wikibase-noentity' => 'Tuta datowa sadźba njeeksistuje. Móžeš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wotpowědowace protokole přepytać]</span>, zo by wuslědźił, štož je so jej stało.',
+	'wikibase-noentity-createone' => 'Móžeš tež [[$1|nowu wutworić]].',
 	'wikibase-item-summary-wbsetitem' => 'Nowy element wutworjeny',
 	'wikibase-item-summary-wbsetlabel-set' => 'Pomjenowanje za [$2] změnjene',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Pomjenowanje za [$2] wotstronjene',
@@ -1788,11 +1778,6 @@ $messages['is'] = array(
 	'wikibase-self-conflict' => 'Gögnunum var breytt eftir að þú byrjaðir að breyta síðunni.',
 	'wikibase-restoreold' => 'endursetja',
 	'wikibase-restore-summary' => 'Endurvekja útgáfu $1 eftir [[Special:Contributions/$2|$2]]',
-	'wikibase-noitem' => 'Þessi hlutur er ekki til. 
-Þú getur <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} leitað í aðgerðarskrá]
-til þess að finna hvert hann fór, eða [[Special:CreateItem|búið til nýjan hlut]]</span>.',
-	'wikibase-noitem-nopermission' => 'Þessi hlutur er ekki til.
-Þú getur <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} leitað í aðgerðarskránni]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'Búa til nýjan hlut',
 	'wikibase-item-summary-wbsetlabel-set' => 'Breytti [$2] merkimiða',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Fjarlægði [$2] merkimiða',
@@ -1907,16 +1892,13 @@ $messages['it'] = array(
 	'wikibase-createentity-label' => 'Etichetta:',
 	'wikibase-createentity-description' => 'Descrizione:',
 	'wikibase-createentity-submit' => 'Crea',
+	'special-listdatatypes' => 'Elenco di tutti i tipi di dati disponibili',
+	'wikibase-listdatatypes-intro' => 'Questo è un elenco di tutti i tipi di dati attualmente in uso su questa installazione:',
 	'wikibase-api-patch-incomplete' => 'La patch generata è incompleta.',
 	'wikibase-self-conflict' => 'I dati sono stati modificati dopo che hai iniziato a scrivere.',
 	'wikibase-restoreold' => 'reimposta',
 	'wikibase-restore-summary' => 'Ripristina revisione $1 di [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'La modifica diretta è stata disabilitata nel namespace $1',
-	'wikibase-noitem' => 'Questo elemento non esiste.
-Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare i relativi log]
-per sapere dov\'è ora, o [[Special:CreateItem|creare un nuovo elemento]]</span>.',
-	'wikibase-noitem-nopermission' => 'Questo elemento non esiste.
-Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare i relativi log]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'Creato un nuovo elemento',
 	'wikibase-item-summary-wbsetlabel-set' => 'Cambiata etichetta [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Rimossa etichetta [$2]',
@@ -1990,8 +1972,6 @@ $messages['ja'] = array(
 	'wikibase-self-conflict' => 'あなたの編集開始以降に、データが変更されました。',
 	'wikibase-restoreold' => '復元',
 	'wikibase-no-direct-editing' => '$1 名前空間では直接の編集は無効になっています',
-	'wikibase-noitem-nopermission' => 'この項目は存在しません。
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 関連する記録を検索]</span>できます。',
 	'wikibase-item-summary-wbsetitem' => '新しい項目を作成しました',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] のラベルを変更しました',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] のラベルを除去しました',
@@ -2123,16 +2103,13 @@ $messages['ko'] = array(
 	'wikibase-createentity-label' => '레이블:',
 	'wikibase-createentity-description' => '설명:',
 	'wikibase-createentity-submit' => '만들기',
+	'special-listdatatypes' => '사용 가능한 모든 데이터 유형 목록',
+	'wikibase-listdatatypes-intro' => '현재 이 설치에 사용하는 모든 데이터 유형의 목록입니다 :',
 	'wikibase-api-patch-incomplete' => '생성한 패치는 완전하지 않은 것으로 밝혀졌습니다.',
 	'wikibase-self-conflict' => '데이터는 편집을 시작하고 나서 당신이 수정했습니다.',
 	'wikibase-restoreold' => '복구',
 	'wikibase-restore-summary' => '[[Special:Contributions/$2|$2]] 사용자에 의해 $1 판을 복구함',
 	'wikibase-no-direct-editing' => '$1 이름공간에서 직접 편집은 비활성화되어 있습니다.',
-	'wikibase-noitem' => '이 항목이 존재하지 않습니다.
-그것이 어디로 갔는지 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 관련 기록을 검색]하거나
-[[Special:CreateItem|새 항목을 만들]]</span>수 있습니다.',
-	'wikibase-noitem-nopermission' => '이 항목이 존재하지 않습니다.
-<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 관련 기록을 검색]</span>할 수 있습니다.',
 	'wikibase-item-summary-wbsetitem' => '새 항목을 만듦',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] 레이블 바꿈',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] 레이블 제거함',
@@ -2312,16 +2289,13 @@ $messages['mk'] = array(
 	'wikibase-createentity-label' => 'Етикета:',
 	'wikibase-createentity-description' => 'Опис:',
 	'wikibase-createentity-submit' => 'Создај',
+	'special-listdatatypes' => 'Список на сите податочни типови на располагање',
+	'wikibase-listdatatypes-intro' => 'Ова е список на сите податочни типови што моментално се користат во оваа инсталација:',
 	'wikibase-api-patch-incomplete' => 'Се испостави дека создадената крпеница е нецелосна.',
 	'wikibase-self-conflict' => 'Ги имате изменето податоците откако почнавте да уредувате.',
 	'wikibase-restoreold' => 'врати',
 	'wikibase-restore-summary' => 'Враќање на ревизијата $1 од [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Директното уредување е оневозможено во именскиот простор $1',
-	'wikibase-noitem' => 'Не постои таков предмет.
-Можете да ги <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате поврзаните дневници]
-за да дознаете каде отишол, или да [[Special:CreateItem|создадете нов предмет]]</span>.',
-	'wikibase-noitem-nopermission' => 'Не постои таков предмет.
-Можете да ги <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате поврзаните дневници]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'Создавање на нов предмет',
 	'wikibase-item-summary-wbsetlabel-set' => 'Сменета етикетата на [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Отстранета етикетата на [$2]',
@@ -2501,10 +2475,6 @@ $messages['nl'] = array(
 	'wikibase-self-conflict' => 'U hebt zelf de gegevens gewijzigd nadat u bent begonnen met bewerken (mogelijk in een andere browser of browservenster).',
 	'wikibase-restoreold' => 'opnieuw instellen',
 	'wikibase-restore-summary' => 'Versie $1 van [[Special:Contributions/$2|$2]] teruggeplaatst',
-	'wikibase-noitem' => 'Dit item bestaat niet.
-U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} bijbehorende logboeken doorzoeken] om uit te vinden waar het is gebleven of een [[Special:CreateItem|niet item aanmaken]]</span>.',
-	'wikibase-noitem-nopermission' => 'Dit item bestaat niet.
-U kunt de <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} bijbehorende logboeken doorzoeken]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'Nieuw item aangemaakt',
 	'wikibase-item-summary-wbsetlabel-set' => 'Label [$2] gewijzigd.',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Label [$2] verwijderd',
@@ -2698,11 +2668,6 @@ $messages['pl'] = array(
 	'wikibase-createentity-submit' => 'Utwórz',
 	'wikibase-self-conflict' => 'Dane zostały zmodyfikowane przez ciebie po rozpoczęciu edycji.',
 	'wikibase-restoreold' => 'przywróć',
-	'wikibase-noitem' => 'Ten element nie istnieje.
-Możesz <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} przeszukać powiązane wpisy dziennika]
- aby dowiedzieć się, gdzie został przeniesiony lub [[Special:CreateItem|utworzyć nowy element]]</span>.',
-	'wikibase-noitem-nopermission' => 'Ten element nie istnieje.
-Możesz <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} przeszukać powiązane wpisy dziennika]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'Utworzono nowy element',
 	'content-model-1001' => 'Element Wikibase',
 );
@@ -2879,11 +2844,6 @@ $messages['pt-br'] = array(
 	'wikibase-restoreold' => 'restaurar',
 	'wikibase-restore-summary' => 'Restaurar a revisão $1 por [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'A edição direta está desabilitada no domínio $1',
-	'wikibase-noitem' => 'Este item não existe.
-Você pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os logs relacionados]
-para saber para onde foi ou [[Special:CreateItem|criar um novo item]]</span>.',
-	'wikibase-noitem-nopermission' => 'Este item não existe.
-Você pode <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pesquisar os logs relacionados]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'Criado um novo item',
 	'wikibase-item-summary-wbsetlabel-set' => 'Alterado o rótulo [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removido o rótulo [$2]',

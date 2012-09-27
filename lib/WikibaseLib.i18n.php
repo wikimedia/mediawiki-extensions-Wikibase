@@ -47,9 +47,13 @@ $messages['be-tarask'] = array(
 
 /** German (Deutsch)
  * @author Kghbln
+ * @author Metalhead64
  */
 $messages['de'] = array(
 	'wikibaselib-desc' => 'Stellt den Erweiterungen Wikibase und Wikibase Client gemeinsam genutzte Funktionen bereit',
+	'wikibaselib-entity-item' => 'Datenelement',
+	'wikibaselib-entity-property' => 'Attribut',
+	'wikibaselib-entity-query' => 'Abfrage',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -57,6 +61,9 @@ $messages['de'] = array(
  */
 $messages['dsb'] = array(
 	'wikibaselib-desc' => 'Stoj powšyknu funkcionalnosć za rozšyrjeni Wikibase a Wikibase Client k dispoziciji',
+	'wikibaselib-entity-item' => 'element',
+	'wikibaselib-entity-property' => 'kakosć',
+	'wikibaselib-entity-query' => 'wótpšašanje',
 );
 
 /** Spanish (español)
@@ -84,7 +91,10 @@ $messages['fr'] = array(
  * @author Toliño
  */
 $messages['gl'] = array(
-	'wikibaselib-desc' => 'Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client.',
+	'wikibaselib-desc' => 'Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client',
+	'wikibaselib-entity-item' => 'elemento',
+	'wikibaselib-entity-property' => 'propiedade',
+	'wikibaselib-entity-query' => 'pescuda',
 );
 
 /** Hebrew (עברית)
@@ -99,6 +109,9 @@ $messages['he'] = array(
  */
 $messages['hsb'] = array(
 	'wikibaselib-desc' => 'Steji powšitkownu funkcionalnosć za rozšěrjeni Wikibase a Wikibase Client k dispoziciji',
+	'wikibaselib-entity-item' => 'element',
+	'wikibaselib-entity-property' => 'kajkosć',
+	'wikibaselib-entity-query' => 'naprašowanje',
 );
 
 /** Interlingua (interlingua)
