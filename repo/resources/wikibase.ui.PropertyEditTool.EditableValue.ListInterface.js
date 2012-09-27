@@ -226,20 +226,6 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._disableInputElement
-	 */
-	_disableInputElement: function() {
-		this._getTagadata().disable();
-	},
-
-	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._enableInputElement
-	 */
-	_enableInputElement: function() {
-		this._getTagadata().enable();
-	},
-
-	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.setFocus
 	 */
 	setFocus: function() {
@@ -299,7 +285,7 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 	},
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._enableInputElement
+	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface.validate
 	 *
 	 * @return bool whether this interface is valid
 	 */
@@ -353,6 +339,23 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 			return null;
 		}
 		return normalized;
+	},
+
+	/**
+	 * @see wikibase.ui.StateExtension._setState
+	 *
+	 * @param Number state see wb.ui.EditableValue.STATE
+	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 */
+	_setState: function( state ) {
+		if ( this._getTagadata() !== null ) {
+			if ( state === this.STATE.DISABLED ) {
+				this._getTagadata().disable();
+			} else {
+				this._getTagadata().enable();
+			}
+		}
+		return true;
 	}
 
 } );

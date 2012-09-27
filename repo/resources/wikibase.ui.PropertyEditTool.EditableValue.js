@@ -830,8 +830,8 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 		var disableCancel = !this.isInEditMode() && !this.isEmpty() ||
 			!this.isPending() && this.isEmpty() && this.isNew();
 
-		this._toolbar.editGroup.btnSave.setDisabled( disableSave );
-		this._toolbar.editGroup.btnCancel.setDisabled( disableCancel );
+		this._toolbar.editGroup.btnSave[ disableSave ? 'disable' : 'enable' ]();
+		this._toolbar.editGroup.btnCancel[ disableCancel ? 'disable' : 'enable' ]();
 
 		/**
 		 * propagade stopping of edit mode (enabling other actions) when all editable value actions
@@ -902,93 +902,6 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	_interfaceHandler_onBlur: function( relatedInterface, event ) { },
 
 	/**
-	 * Convenience method to disable this editable value.
-	 *
-	 * @return bool whether the operation was successful
-	 */
-	disable: function() {
-		return this.setDisabled( true );
-	},
-
-	/**
-	 * Convenience method to enable this editable value.
-	 *
-	 * @return bool whether the operation was successful
-	 */
-	enable: function() {
-		return this.setDisabled( false );
-	},
-
-	/**
-	 * Dis- or enables this editable value.
-	 *
-	 * @param bool disable true to disable, false to enable
-	 * @return bool whether the operation was successful
-	 */
-	setDisabled: function( disable ) {
-		var success = true;
-		$.each( this._interfaces, function( i, interf ) {
-			success = success && interf.setDisabled( disable );
-		} );
-		/**
-		 * prevent altering the actions' states of the editable values that are in edit mode already
-		 * (referring to editable values that are empty when loading the page, instantly triggering
-		 * edit mode; without excluding them, their actions would be enabled as well
-		 */
-		if ( !this.isInEditMode() && this._toolbar !== null ) {
-			success = success && this._toolbar.setDisabled( disable );
-		}
-		return success;
-	},
-
-	/**
-	 * Returns whether this editable value is disabled.
-	 *
-	 * @return bool true if disabled
-	 */
-	isDisabled: function() {
-		return ( this.getElementsState() === wb.ui.ELEMENT_STATE.DISABLED );
-	},
-
-	/**
-	 * Returns whether this editable value is enabled.
-	 *
-	 * @return bool true if enabled
-	 */
-	isEnabled: function() {
-		return ( this.getElementsState() === wb.ui.ELEMENT_STATE.ENABLED );
-	},
-
-	/**
-	 * Get state (disabled, enabled or mixed) of all editable value elements (interfaces and toolbar).
-	 *
-	 * @return number whether all elements are enabled (true), disabled (false) or have mixed states
-	 */
-	getElementsState: function() {
-		var disabled = true, enabled = true;
-
-		// check interfaces
-		$.each( this._interfaces, function( i, interf ) {
-			if ( interf.isDisabled() ) {
-				enabled = false;
-			} else if ( !interf.isDisabled() ) {
-				disabled = false;
-			}
-		} );
-		// check toolbar
-		enabled = enabled && this._toolbar.isEnabled();
-		disabled = disabled && this._toolbar.isDisabled();
-
-		if ( disabled === true ) {
-			return wb.ui.ELEMENT_STATE.DISABLED;
-		} else if ( enabled === true ) {
-			return wb.ui.ELEMENT_STATE.ENABLED;
-		} else {
-			return wb.ui.ELEMENT_STATE.MIXED;
-		}
-	},
-
-	/**
 	 * Removes all traces of this ui element from the DOM, so the represented value is still visible but not
 	 * interactive anymore.
 	 *
@@ -1030,6 +943,61 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	 * Callback called after the element was removed
 	 */
 	onAfterRemove: null
+} );
+
+// add disable/enable functionality overwriting required functions
+wb.ui.StateExtension.useWith( wb.ui.PropertyEditTool.EditableValue, {
+
+	/**
+	 * Determines the state (disabled, enabled or mixed) of all EditableValue elements (interfaces
+	 * and toolbar).
+	 * @see wikibase.ui.StateExtension.getState
+	 */
+	getState: function() {
+		var disabled = true, enabled = true;
+
+		// check interfaces
+		$.each( this._interfaces, function( i, interf ) {
+			if ( interf.isDisabled() ) {
+				enabled = false;
+			} else if ( !interf.isDisabled() ) {
+				disabled = false;
+			}
+		} );
+		// check toolbar
+		enabled = enabled && this._toolbar.isEnabled();
+		disabled = disabled && this._toolbar.isDisabled();
+
+		if ( disabled === true ) {
+			return this.STATE.DISABLED;
+		} else if ( enabled === true ) {
+			return this.STATE.ENABLED;
+		} else {
+			return this.STATE.MIXED;
+		}
+	},
+
+	/**
+	 * Dis- or enables the EditableValue (its toolbar and interfaces).
+	 * @see wikibase.ui.StateExtension._setState
+	 *
+	 * @param Number state see wb.ui.EditableValue.STATE
+	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 */
+	_setState: function( state ) {
+		var success = true;
+		$.each( this._interfaces, function( i, interf ) {
+			success = success && interf.setState( state );
+		} );
+		// prevent altering the actions' states of the EditableValues that are in edit mode already
+		// (referring to EditableValues that are empty when loading the page, instantly triggering
+		// edit mode; without excluding them, their actions would be enabled as well)
+		if ( !this.isInEditMode() && this._toolbar !== null ) {
+			success = success && this._toolbar.setState( state );
+		}
+		return success;
+	}
+
 } );
 
 } )( mediaWiki, wikibase, jQuery );

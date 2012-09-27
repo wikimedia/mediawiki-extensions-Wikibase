@@ -66,7 +66,7 @@ wb.ui.PropertyEditTool.EditableAliases = wb.utilities.inherit( $PARENT, {
 		if( relatedInterface.isInEditMode() ) {
 			$PARENT.prototype._interfaceHandler_onInputRegistered.call( this, relatedInterface );
 			// always enable cancel button since it is alright to have an empty value
-			this._toolbar.editGroup.btnCancel.setDisabled( false );
+			this._toolbar.editGroup.btnCancel.enable();
 		}
 	},
 
