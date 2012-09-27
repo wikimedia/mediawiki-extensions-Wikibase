@@ -94,5 +94,5 @@ $wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
 
 unset( $moduleTemplate );
 
-$wbcStores = array();
-$wbcStores['sqlstore'] = 'Wikibase\ClientSqlStore';
+$wgWBClientStores = array();
+$wgWBClientStores['sqlstore'] = 'Wikibase\ClientSqlStore';
