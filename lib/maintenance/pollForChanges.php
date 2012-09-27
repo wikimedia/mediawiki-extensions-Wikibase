@@ -165,7 +165,8 @@ class PollForChanges extends \Maintenance {
 					 * @var Change $change
 					 */
 					foreach ( $changes as $change ) {
-							preg_match( '/wikibase-(item|[^~-]+)[-~](.+)$/', $change->getType(), $matches );
+							$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
+							preg_match( '/wikibase-(item|property|query)~(.+)$/', $fields[ 'type' ], $matches );
 							$type = ucfirst( $matches[ 2 ] ); // This is the verb (like "update" or "add")
 							$object = $matches[ 1 ]; // This is the object (like "item" or "property").
 
