@@ -137,5 +137,14 @@ class ItemHandler extends EntityHandler {
 		return $id === false ? null : $this->getFromId( $id );
 	}
 
+	/**
+	 * @see EntityHandler::getSpecialPageForCreation
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getSpecialPageForCreation() {
+		return 'CreateItem';
+	}
 }
 
