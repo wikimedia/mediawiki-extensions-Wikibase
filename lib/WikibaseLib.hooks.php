@@ -94,7 +94,7 @@ final class LibHooks {
 				__DIR__ . '/sql/AddSitesTable.sql'
 			);
 
-			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' /*, array( $updater, 'output' )*/ ) );
+			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by Wikibase." );
