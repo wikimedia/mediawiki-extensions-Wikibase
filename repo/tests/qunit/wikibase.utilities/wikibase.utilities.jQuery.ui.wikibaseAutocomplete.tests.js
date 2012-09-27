@@ -51,14 +51,14 @@
 			'Suggestion menu gets resized.'
 		);
 
-		// TODO/FIXME the following test was failing in FF, make sure this is a valid test or fix the related function
-		/*
+		// Firefox will throw an error when the input element is not part of the DOM while trying to
+		// set the selection range which is part of the following assertion
+		$( 'body' ).append( this.subject );
 		assert.equal(
 			this.autocomplete.autocompleteString( this.subject.val(), 'ab' ),
 			1,
 			'Auto-completed text.'
 		);
-		*/
 
 	} );
 
