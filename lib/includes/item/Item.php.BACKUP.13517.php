@@ -31,7 +31,11 @@ namespace Wikibase;
  */
 interface Item extends Entity {
 
+<<<<<<< HEAD
+	const ENTITY_TYPE = 'wikibase-item';
+=======
 	const ENTITY_TYPE = 'item';
+>>>>>>> daf4ff6... Remove pointless wikibase- prefix
 
 	/**
 	 * Adds a site link.

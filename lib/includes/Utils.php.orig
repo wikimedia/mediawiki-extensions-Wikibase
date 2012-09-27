@@ -488,6 +488,9 @@ final class Utils {
 	public static function isCoreNamespace( $ns ) {
 		return $ns < 100;
 	}
+<<<<<<< HEAD
+}
+=======
 
 	/**
 	 * Returns if the provided string is a valid entity type identifier.
@@ -503,3 +506,4 @@ final class Utils {
 	}
 
 }
+>>>>>>> daf4ff6... Remove pointless wikibase- prefix

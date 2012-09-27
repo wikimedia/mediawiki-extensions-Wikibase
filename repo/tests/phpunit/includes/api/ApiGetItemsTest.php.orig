@@ -80,11 +80,17 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
+<<<<<<< HEAD
+		$this->assertSuccess( $res, 'items', $id );
+		$this->assertItemEquals( $item,  $res['items'][$id] );
+		$this->assertEquals( 1, count( $res['items'] ), "requesting a single item should return exactly one item entry" );
+=======
 		$this->assertSuccess( $res, 'entities', $id );
 		$this->assertItemEquals( $item,  $res['entities'][$id] );
 		$this->assertEquals( 1, count( $res['entities'] ), "requesting a single item should return exactly one item entry" );
 		// This should be correct for all items we are testing
 		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entities'][$id]['type'] );
+>>>>>>> daf4ff6... Remove pointless wikibase- prefix
 		// The following comes from the props=info which is included by default
 		// Only check if they are there and seems valid, can't do much more for the moment (or could for title but then we are testing assumptions)
 		$this->assertSuccess( $res, 'items', $id, 'pageid' );

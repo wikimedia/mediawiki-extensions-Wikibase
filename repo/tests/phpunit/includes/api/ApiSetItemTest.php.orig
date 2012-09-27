@@ -598,7 +598,14 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 
 		// check return value -------------------------------------------
+<<<<<<< HEAD
+		$this->assertSuccess( $res, 'item' );
+		$item = $res['item'];
+		$this->assertSuccess( $res, 'item', 'id' );
+		$this->assertSuccess( $res, 'item', 'lastrevid' );
+=======
 		$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );
+>>>>>>> daf4ff6... Remove pointless wikibase- prefix
 
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {

@@ -33,6 +33,7 @@ abstract class EntityObject implements Entity {
 
 	/**
 	 * Maps entity types to objects representing the corresponding entity.
+	 * TODO: put this on a better place.
 	 *
 	 * @since 0.1
 	 *
