@@ -3,7 +3,7 @@
 namespace DataValues\Test;
 
 /**
- * Tests for the DataValues\StringValue class.
+ * Tests for the DataValues\NumberValue class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ namespace DataValues\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StringValueTest extends DataValueTest {
+class NumberValueTest extends DataValueTest {
 
 	/**
 	 * @see DataValueTest::getClass
@@ -41,7 +41,7 @@ class StringValueTest extends DataValueTest {
 	 * @return string
 	 */
 	public function getClass() {
-		return 'DataValues\StringValue';
+		return 'DataValues\NumberValue';
 	}
 
 	/**
@@ -55,10 +55,22 @@ class StringValueTest extends DataValueTest {
 		$argLists = array();
 
 		$argLists[] = array( false );
-		$argLists[] = array( false, 42 );
-		$argLists[] = array( true, 'foo' );
-		$argLists[] = array( true, '' );
-		$argLists[] = array( true, ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+		$argLists[] = array( true, 42 );
+		$argLists[] = array( true, -42 );
+		$argLists[] = array( true, 4.2 );
+		$argLists[] = array( true, -4.2 );
+		$argLists[] = array( true, 0 );
+		$argLists[] = array( false, 'foo' );
+		$argLists[] = array( false, '' );
+		$argLists[] = array( false, '0' );
+		$argLists[] = array( false, '42' );
+		$argLists[] = array( false, '-42' );
+		$argLists[] = array( false, '4.2' );
+		$argLists[] = array( false, '-4.2' );
+		$argLists[] = array( false, false );
+		$argLists[] = array( false, true );
+		$argLists[] = array( false, null );
+		$argLists[] = array( false, '0x20' );
 
 		return $argLists;
 	}
