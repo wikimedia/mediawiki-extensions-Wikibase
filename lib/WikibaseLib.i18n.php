@@ -71,6 +71,9 @@ $messages['dsb'] = array(
  */
 $messages['es'] = array(
 	'wikibaselib-desc' => 'Contiene una funcionalidad común para las extensiones de Wikibase y Wikibase Client.',
+	'wikibaselib-entity-item' => 'elemento',
+	'wikibaselib-entity-property' => 'propiedad',
+	'wikibaselib-entity-query' => 'consulta',
 );
 
 /** Persian (فارسی)
@@ -133,6 +136,9 @@ $messages['is'] = array(
  */
 $messages['it'] = array(
 	'wikibaselib-desc' => 'Contiene le funzionalità comuni per le estensioni Wikibase e Wikibase Client.',
+	'wikibaselib-entity-item' => 'elemento',
+	'wikibaselib-entity-property' => 'proprietà',
+	'wikibaselib-entity-query' => 'interrogazione',
 );
 
 /** Japanese (日本語)
@@ -140,6 +146,9 @@ $messages['it'] = array(
  */
 $messages['ja'] = array(
 	'wikibaselib-desc' => 'ウィキベースとウィキベースクライアント拡張機能で共通の機能を保持する',
+	'wikibaselib-entity-item' => '項目',
+	'wikibaselib-entity-property' => 'プロパティ',
+	'wikibaselib-entity-query' => 'クエリ',
 );
 
 /** Korean (한국어)
@@ -161,6 +170,9 @@ $messages['ksh'] = array(
  */
 $messages['mk'] = array(
 	'wikibaselib-desc' => 'Содржи почести функции за додатоците Викибаза и Клиент на Викибазата.',
+	'wikibaselib-entity-item' => 'предмет',
+	'wikibaselib-entity-property' => 'својство',
+	'wikibaselib-entity-query' => 'барање',
 );
 
 /** Malay (Bahasa Melayu)
