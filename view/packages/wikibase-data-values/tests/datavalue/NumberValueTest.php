@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues\Test;
+use DataValues\NumberValue;
 
 /**
  * Tests for the DataValues\NumberValue class.
@@ -73,6 +74,15 @@ class NumberValueTest extends DataValueTest {
 		$argLists[] = array( false, '0x20' );
 
 		return $argLists;
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \DataValues\NumberValue $number
+	 * @param array $arguments
+	 */
+	public function testGetValue( NumberValue $number, array $arguments ) {
+		$this->assertEquals( $arguments[0], $number->getValue() );
 	}
 
 }

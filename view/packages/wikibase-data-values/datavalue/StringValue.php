@@ -101,4 +101,15 @@ class StringValue extends DataValueObject {
 		return $this->value;
 	}
 
+	/**
+	 * Returns the string.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getValue() {
+		return $this->value;
+	}
+
 }

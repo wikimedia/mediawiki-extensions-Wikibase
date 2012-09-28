@@ -104,4 +104,15 @@ class NumberValue extends DataValueObject {
 		return $this->value;
 	}
 
+	/**
+	 * Returns the number.
+	 *
+	 * @since 0.1
+	 *
+	 * @return int|float
+	 */
+	public function getValue() {
+		return $this->value;
+	}
+
 }
