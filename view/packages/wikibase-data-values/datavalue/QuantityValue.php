@@ -145,4 +145,37 @@ class QuantityValue extends DataValueObject {
 		return $this->value;
 	}
 
+	/**
+	 * Returns the value held by this quantity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return int|float
+	 */
+	public function getValue() {
+		return $this->value;
+	}
+
+	/**
+	 * Returns the accuracy held by this quantity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return int|float|null
+	 */
+	public function getAccuracy() {
+		return $this->accuracy;
+	}
+
+	/**
+	 * Returns the unit held by this quantity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string|null
+	 */
+	public function getUnit() {
+		return $this->unit;
+	}
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues\Test;
+use DataValues\QuantityValue;
 
 /**
  * Tests for the DataValues\QuantityValue class.
@@ -100,6 +101,35 @@ class QuantityValueTest extends DataValueTest {
 		$argLists[] = array( false, -4.2, 'm', '-4.2' );
 
 		return $argLists;
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \DataValues\QuantityValue $quantity
+	 * @param array $arguments
+	 */
+	public function testGetValue( QuantityValue $quantity, array $arguments ) {
+		$this->assertEquals( $arguments[0], $quantity->getValue() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \DataValues\QuantityValue $quantity
+	 * @param array $arguments
+	 */
+	public function testGetUnit( QuantityValue $quantity, array $arguments ) {
+		$expected = count( $arguments ) > 1 ? $arguments[1] : null;
+		$this->assertEquals( $expected, $quantity->getUnit() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \DataValues\QuantityValue $quantity
+	 * @param array $arguments
+	 */
+	public function testGetAccuracy( QuantityValue $quantity, array $arguments ) {
+		$expected = count( $arguments ) > 2 ? $arguments[2] : null;
+		$this->assertEquals( $expected, $quantity->getAccuracy() );
 	}
 
 }
