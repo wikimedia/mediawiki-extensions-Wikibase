@@ -237,7 +237,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$content2->save( 'Trolololo!', null, EDIT_UPDATE );
 
 		// now try to save the original edit. The conflict should still be detected
-		$status = $editEntity->attemptSave( "Testing", EDIT_UPDATE );
+		$token = $wgUser->getEditToken();
+		$status = $editEntity->attemptSave( "Testing", EDIT_UPDATE, $token );
 
 		$this->assertNotEquals( $expectedConflict, $status->isOK(),
 			'saving should have failed late if and only if a base rev was provided' );
@@ -396,13 +397,17 @@ class EditEntityTest extends \MediaWikiTestCase {
 	 * @dataProvider dataCheckEditPermissions
 	 */
 	public function testAttemptSavePermissions( $group, $permissions, $create, $expectedOK ) {
+		global $wgUser;
+
 		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
 		$content->getItem()->setLabel( 'xx', 'Foo' );
+
+		$token = $wgUser->getEditToken();
 
 		$edit = new EditEntity( $content );
 
 		try {
-			$edit->attemptSave( "testing", $content->isNew() ? EDIT_NEW : 0 );
+			$edit->attemptSave( "testing", ( $content->isNew() ? EDIT_NEW : 0 ), $token );
 
 			$this->assertTrue( $expectedOK, 'this permission check was expected to fail!' );
 		} catch ( \PermissionsError $ex ) {
