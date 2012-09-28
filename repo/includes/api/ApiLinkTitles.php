@@ -36,11 +36,6 @@ class ApiLinkTitles extends Api {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
-		// This is really already done with needsToken()
-		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-session-failure' )->text(), 'session-failure' );
-		}
-
 		if ( $params['fromsite'] === $params['tosite'] ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text(), 'fromsite-eq-tosite' );
 		}
@@ -121,12 +116,22 @@ class ApiLinkTitles extends Api {
 		}
 		else {
 			// Do the actual save, or if it don't exist yet create it.
-			$edit = new EditEntity( $itemContent, $user );
-			$status = $edit->attemptSave( $summary, $flags );
-		}
+			$editEntity = new EditEntity( $itemContent, $user );
+			$status = $editEntity->attemptSave(
+				$summary,
+				$flags,
+				( $this->needsToken() ? $params['token'] : false )
+			);
 
-		if ( !$status->isOK() ) {
-			$edit->reportApiErrors( $this, 'save-failed' );
+			if ( $editEntity->hasError( EditEntity::TOKEN_ERROR ) ) {
+				$editEntity->reportApiErrors( $this, 'session-failure' );
+			}
+			elseif ( $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ) ) {
+				$editEntity->reportApiErrors( $this, 'edit-conflict' );
+			}
+			elseif ( $editEntity->hasError() ) {
+				$editEntity->reportApiErrors( $this, 'save-failed' );
+			}
 		}
 
 		if ( $itemContent !== null ) {

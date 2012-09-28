@@ -176,11 +176,6 @@ abstract class ApiModifyEntity extends Api {
 		$user = $this->getUser();
 		$this->flags = 0;
 
-		// This is really already done with needsToken()
-		if ( $this->needsToken() && !$user->matchEditToken( $params['token'] ) ) {
-			$this->dieUsage( $this->msg( 'wikibase-api-session-failure' )->text(), 'session-failure' );
-		}
-
 		$this->validateParameters( $params );
 
 		// Try to find the entity or fail and create it, or die in the process
@@ -238,12 +233,17 @@ abstract class ApiModifyEntity extends Api {
 		// There will be exceptions but we just leak them out ;)
 		$status = $editEntity->attemptSave(
 			Autocomment::formatTotalSummary( $comment, $summary, $lang ),
-			$this->flags
+			$this->flags,
+			( $this->needsToken() ? $params['token'] : false )
 		);
 
-		if ( $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ) ) {
+		if ( $editEntity->hasError( EditEntity::TOKEN_ERROR ) ) {
+			$editEntity->reportApiErrors( $this, 'session-failure' );
+		}
+		elseif ( $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ) ) {
 			$editEntity->reportApiErrors( $this, 'edit-conflict' );
-		} else if ( $editEntity->hasError() ) {
+		}
+		elseif ( $editEntity->hasError() ) {
 			$editEntity->reportApiErrors( $this, 'save-failed' );
 		}
 

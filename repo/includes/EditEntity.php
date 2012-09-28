@@ -454,21 +454,23 @@ class EditEntity {
 	 *
 	 * @param String $summary    the edit summary
 	 * @param int    $flags      the edit flags (see WikiPage::toEditContent)
-	 * @param String|null|bool   $token Edit token to check, or false to disable the token check. False per default.
+	 * @param String|null|false  $token Edit token to check, or false to disable the token check. Null per default.
 	 *                           Null will fail the token text, as will the empty string.
 	 *
 	 * @return Status Indicates success and provides detailed warnings or error messages.
 	 * @see      WikiPage::toEditContent
 	 */
-	public function attemptSave( $summary, $flags = 0, $token = false ) {
+	public function attemptSave( $summary, $flags = 0, $token = null ) {
 		$this->status = Status::newGood();
 		$this->errorType = 0;
 
-		$this->checkEditPermissions();
-
 		if ( $token !== false && !$this->isTokenOK( $token ) ) {
+			$this->status->fatal( 'session-failure' );
+			$this->errorType |= self::TOKEN_ERROR;
 			return $this->status;
 		}
+
+		$this->checkEditPermissions();
 
 		//NOTE: Make sure the current revision is loaded and cached.
 		//      Would happen on demand anyway, but we want a well-defined point at which "current" is frozen
