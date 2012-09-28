@@ -33,7 +33,7 @@ return array(
 //	'DataValues\MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
 //	'DataValues\MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
 	'DataValues\NumberValue' => 'datavalue/NumberValue.php',
-//	'DataValues\QuantityValue' => 'datavalue/QuantityValue.php',
+	'DataValues\QuantityValue' => 'datavalue/QuantityValue.php',
 	'DataValues\StringValue' => 'datavalue/StringValue.php',
 //	'DataValues\TimeValue' => 'datavalue/TimeValue.php',
 
