@@ -38,6 +38,7 @@ return array(
 	'DataValues\QuantityValue' => 'datavalue/QuantityValue.php',
 	'DataValues\StringValue' => 'datavalue/StringValue.php',
 //	'DataValues\TimeValue' => 'datavalue/TimeValue.php',
+	'DataValues\UnknownValue' => 'datavalue/UnknownValue.php',
 
 	'Comparable' => 'includes/Comparable.php',
 	'Hashable' => 'includes/Hashable.php',
