@@ -195,8 +195,6 @@ $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\LibHooks::onSchemaUpdate
 $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerUnitTests';
 
 
-$egWBDefaultsFunction = null;
-
 $egWBSettings = array();
 
 
