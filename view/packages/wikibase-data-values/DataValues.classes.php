@@ -31,7 +31,7 @@ return array(
 	'DataValues\DataValue' => 'datavalue/DataValue.php',
 	'DataValues\DataValueObject' => 'datavalue/DataValueObject.php',
 //	'DataValues\GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
-//	'DataValues\MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
+	'DataValues\MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
 //	'DataValues\MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
 	'DataValues\NumberValue' => 'datavalue/NumberValue.php',
 	'DataValues\QuantityValue' => 'datavalue/QuantityValue.php',

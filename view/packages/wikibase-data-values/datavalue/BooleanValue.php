@@ -73,7 +73,7 @@ class BooleanValue extends DataValueObject {
 	 *
 	 * @param string $value
 	 *
-	 * @return StringValue
+	 * @return BooleanValue
 	 */
 	public function unserialize( $value ) {
 		$this->__construct( $value === '1' );
