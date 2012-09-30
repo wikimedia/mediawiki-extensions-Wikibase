@@ -33,6 +33,7 @@ return array(
 //	'DataValues\GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
 	'DataValues\MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
 	'DataValues\MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
+	'DataValues\MediaWikiTitleValue' => 'datavalue/MediaWikiTitleValue.php',
 //	'DataValues\MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
 	'DataValues\NumberValue' => 'datavalue/NumberValue.php',
 	'DataValues\QuantityValue' => 'datavalue/QuantityValue.php',
