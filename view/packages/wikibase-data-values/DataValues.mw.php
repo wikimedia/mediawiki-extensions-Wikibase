@@ -66,6 +66,7 @@ foreach ( include( __DIR__ . '/DataValues.classes.php' ) as $class => $file ) {
  */
 $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	$testFiles = array(
+		'datavalue/BooleanValue',
 		'datavalue/NumberValue',
 		'datavalue/QuantityValue',
 		'datavalue/StringValue',

@@ -27,6 +27,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 return array(
+	'DataValues\BooleanValue' => 'datavalue/BooleanValue.php',
 	'DataValues\DataValue' => 'datavalue/DataValue.php',
 	'DataValues\DataValueObject' => 'datavalue/DataValueObject.php',
 //	'DataValues\GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
