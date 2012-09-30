@@ -417,7 +417,7 @@ $messages['ar'] = array(
 	'wikibase-restoreold' => 'استرجاع',
 );
 
-/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
@@ -446,6 +446,8 @@ $messages['be-tarask'] = array(
 	'wikibase-undo-title' => 'Скасаваньне праўкі «$1»',
 	'wikibase-restore-title' => 'Аднаўленьне старой вэрсіі «$1»',
 	'wikibase-partial-undo' => 'Гэтае рэдагаваньне можа быць часткова скасаванае.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|зьмена была прапушчаная|былі прапушчаныя|было прапушчана}}, бо {{PLURAL:$1|адпаведнае значэньне|адпаведныя значэньні}} былі зьмененыя пасьля.',
+	'wikibase-empty-undo' => 'Няма чаго скасоўваць.',
 	'wikibase-propertyedittool-full' => 'Сьпіс значэньняў выкананы.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|запіс|запісы|запісаў}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|запіс|запісы|запісаў}})',
@@ -2482,6 +2484,7 @@ $messages['nl'] = array(
 	'wikibase-itemdisambiguation-create' => 'U kunt ook [{{fullurl:Special:CreateItem|label=$1}} een item met "$3" aanmaken].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'De vorige zoekopdracht kon niet gebruikt worden om te zoeken. Geef een geldige taalidentificatie op.',
 	'wikibase-itemdisambiguation-description' => 'Waarden gebruikt voor zoeken moeten de volledige tekst bevatten. Taal is een identificatie, bijvoorbeeld "en".',
+	'special-createproperty' => 'Nieuwe eigenschap aanmaken',
 	'wikibase-createproperty-datatype' => 'Gegevenstype:',
 	'special-createitem' => 'Nieuw item aanmaken',
 	'wikibase-createitem-fieldset' => 'Nieuw item aanmaken',
@@ -2612,6 +2615,7 @@ for å finne ut kva som har skjedd.',
  * @author BeginaFelicysym
  * @author Lazowik
  * @author Matma Rex
+ * @author Wizardist
  */
 $messages['pl'] = array(
 	'wikibase-desc' => 'Repozytorium danych strukturalnych',
@@ -2637,7 +2641,7 @@ $messages['pl'] = array(
 	'wikibase-undo-title' => 'Cofanie edycji "$1"',
 	'wikibase-restore-title' => 'Przywracanie poprzedniej wersji "$1"',
 	'wikibase-partial-undo' => 'Ta edycja może być częściowo cofnięta.',
-	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1!|zmiana została pominięta|zmiany zostały pominięte|zmian zostało pominiętych}} ponieważ dane zostały w międzyczasie zmienione.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|zmiana została pominięta|zmiany zostały pominięte|zmian zostało pominiętych}} ponieważ dane zostały w międzyczasie zmienione.',
 	'wikibase-empty-undo' => 'Nie można niczego przywrócić.',
 	'wikibase-undo-revision-error' => 'Cofnięcie nie powiodło się',
 	'wikibase-undo-samerev' => 'Nie można cofnąć, podano tę samą wersję jako źródło i cel.',
@@ -2664,6 +2668,7 @@ $messages['pl'] = array(
 	'wikibase-error-autocomplete-connection' => 'Nie można połączyć się z API Wikipedii. Spróbuj ponownie później.',
 	'wikibase-error-autocomplete-response' => 'Serwer odpowiedział: $1',
 	'wikibase-error-ui-client-error' => 'Połączenie z klientem nie powiodło się. Spróbuj ponownie później.',
+	'wikibase-error-ui-session-failure' => 'Twoja sesja wygasła. Proszę zalogować się ponownie.',
 	'wikibase-error-ui-edit-conflict' => 'Wystąpił konflikt edycji. Załaduj raz jeszcze i zapisz.',
 	'wikibase-move-error' => 'Nie można przenieść stron, które znajdują się w obszarze nazw data i nie można przenieść stron do niego.',
 	'wikibase-error-relational-save-failed' => 'Tożsamość elementu nie może być przechowywana w bazie danych.',
@@ -2674,6 +2679,7 @@ $messages['pl'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'Język:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etykieta:',
 	'wikibase-itemdisambiguation-submit' => 'Szukaj',
+	'wikibase-itemdisambiguation-nothing-found' => 'Niestety, nie znaleziono żadnego elementu z tą etykietą.',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Przepraszamy ale podany identyfikator języka nie został rozpoznany przez system. Proszę użyć prawidłowego identyfikatora jak "pl".',
 	'wikibase-createproperty-fieldset' => 'Utwórz nową właściwość',
 	'wikibase-createproperty-datatype' => 'Typ danych:',

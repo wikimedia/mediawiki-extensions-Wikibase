@@ -38,11 +38,14 @@ $messages['ast'] = array(
 	'wikibaselib-desc' => 'Contién les funciones comúnes pa les estensiones Wikibase y Wikibase Client.',
 );
 
-/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
 	'wikibaselib-desc' => 'Утрымлівае агульны функцыянал пашырэньняў Wikibase і Wikibase Client.',
+	'wikibaselib-entity-item' => 'элемэнт',
+	'wikibaselib-entity-property' => 'уласьцівасьць',
+	'wikibaselib-entity-query' => 'запыт',
 );
 
 /** German (Deutsch)
@@ -204,10 +207,14 @@ $messages['nn'] = array(
 );
 
 /** Polish (polski)
+ * @author BeginaFelicysym
  * @author Lazowik
  */
 $messages['pl'] = array(
 	'wikibaselib-desc' => 'Zawiera elementy wspólne dla rozszerzeń Wikibase i Wikibase Client',
+	'wikibaselib-entity-item' => 'element',
+	'wikibaselib-entity-property' => 'właściwość',
+	'wikibaselib-entity-query' => 'zapytanie',
 );
 
 /** Piedmontese (Piemontèis)
