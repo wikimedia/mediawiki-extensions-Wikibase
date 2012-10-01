@@ -19,7 +19,7 @@ describe "Check functionality of recentChanges special page" do
     visit_page(CreateItemPage) do |page|
       page.create_new_item(label, description)
       page.wait_for_aliases_to_load
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.add_aliases([alias_a, alias_b, alias_c])
     end
   end
@@ -32,8 +32,8 @@ describe "Check functionality of recentChanges special page" do
         page.firstResultIdSpan.should == "(" + ITEM_ID_PREFIX + page.get_item_id + ")"
         page.firstResultLink?.should be_true
         page.firstResultLink
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label
       end
     end
   end

@@ -23,7 +23,7 @@ describe "Check revert/rollback" do
     visit_page(CreateItemPage) do |page|
       page.create_new_item(label, description)
       page.wait_for_aliases_to_load
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.add_aliases([alias_a])
       page.add_sitelinks(sitelinks)
     end
@@ -32,7 +32,7 @@ describe "Check revert/rollback" do
     end
     on_page(ItemPage) do |page|
       page.navigate_to_item
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.wait_for_aliases_to_load
       page.change_label(label + changed)
       page.change_description(description + changed)
@@ -61,7 +61,7 @@ describe "Check revert/rollback" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
       end
       on_page(HistoryPage) do |page|
@@ -71,10 +71,10 @@ describe "Check revert/rollback" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
-        page.itemLabelSpan.should == label
-        page.itemDescriptionSpan.should == description
+        page.entityLabelSpan.should == label
+        page.entityDescriptionSpan.should == description
         page.get_nth_alias(1).text.should == alias_a
         page.englishSitelink_element.text.should == sitelinks[0][1]
       end
@@ -88,7 +88,7 @@ describe "Check revert/rollback" do
     # tear down: remove all sitelinks & logout
     on_page(ItemPage) do |page|
       page.navigate_to_item
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end

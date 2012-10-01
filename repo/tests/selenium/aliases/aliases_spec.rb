@@ -23,7 +23,7 @@ describe "Check functionality of add/edit/remove aliases" do
     it "should check that there are no aliases" do
       on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         # check for necessary elements
         page.aliasesDiv?.should be_true
         page.aliasesTitle?.should be_true
@@ -38,7 +38,7 @@ describe "Check functionality of add/edit/remove aliases" do
     it "should check that adding some aliases work properly" do
       on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.addAliases
         page.cancelAliases?.should be_true
         page.saveAliases?.should be_false
@@ -79,7 +79,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.count_existing_aliases.should == NUM_INITIAL_ALIASES
       end
     end
@@ -90,7 +90,7 @@ describe "Check functionality of add/edit/remove aliases" do
       on_page(ItemPage) do |page|
         num_current_aliases = page.count_existing_aliases
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.editAliases
         page.aliasesInputEmpty= generate_random_string(8)
         page.aliasesInputModified_element.send_keys :return
@@ -98,7 +98,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.count_existing_aliases.should == (num_current_aliases + 1)
         page.editAliases
         page.aliasesInputFirstRemove
@@ -107,7 +107,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.count_existing_aliases.should == num_current_aliases
       end
     end
@@ -117,7 +117,7 @@ describe "Check functionality of add/edit/remove aliases" do
     it "should check that the edit mode of aliases behaves properly" do
       on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
 
         # check edit aliases mode
         page.editAliases
@@ -160,7 +160,7 @@ describe "Check functionality of add/edit/remove aliases" do
     it "should check that adding further aliases works properly" do
       on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
 
         # check functionality of adding aliases
         test_alias = generate_random_string(8)
@@ -171,7 +171,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.count_existing_aliases.should == (NUM_INITIAL_ALIASES + 1)
       end
     end
@@ -181,7 +181,7 @@ describe "Check functionality of add/edit/remove aliases" do
     it "should check that duplicate aliases get detected and not beeing stored" do
       on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
 
         # checking detection of duplicate aliases
         page.editAliases
@@ -196,7 +196,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.count_existing_aliases.should == (NUM_INITIAL_ALIASES + 2)
       end
     end
@@ -206,7 +206,7 @@ describe "Check functionality of add/edit/remove aliases" do
     it "should check that edit existing aliases work properly" do
       on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
 
         # checking functionality of editing aliases
         page.editAliases
@@ -220,7 +220,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.count_existing_aliases.should == (NUM_INITIAL_ALIASES + 2)
       end
     end
@@ -230,7 +230,7 @@ describe "Check functionality of add/edit/remove aliases" do
     it "should check that removing aliases work properly" do
       on_page(ItemPage) do |page|
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
 
         # checking functionality of removing aliases
         page.editAliases
@@ -248,7 +248,7 @@ describe "Check functionality of add/edit/remove aliases" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.addAliases?.should be_true
       end
     end

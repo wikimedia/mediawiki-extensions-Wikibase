@@ -48,9 +48,9 @@ describe "Check client interwiki links" do
         page.clientEditLinksLink
       end
       on_page(ItemPage) do |page|
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == article_title
-        page.itemDescriptionSpan.should == item_description
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == article_title
+        page.entityDescriptionSpan.should == item_description
       end
     end
   end
