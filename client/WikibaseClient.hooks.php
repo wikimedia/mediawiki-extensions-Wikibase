@@ -94,6 +94,9 @@ final class ClientHooks {
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
 		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
+		
+		// strip the wikibase- prefix
+		$mainType = preg_replace( '/^wikibase-/', '', $mainType );
 
 		if ( array_key_exists( $mainType, EntityObject::$typeMap ) ) {
 
