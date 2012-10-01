@@ -187,13 +187,10 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	 * @return wikibase.ui.PropertyEditTool.EditableValue.Interface[]
 	 */
 	_buildInterfaces: function( subject ) {
-		var interfaces = [];
+		var interfaceParent = subject.children( '.wb-value' ).first();
+		var simpleInterface = new wb.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this );
 
-		var interfaceParent = $( '<span class="wb-value"/>' ).append( subject.contents() );
-		subject.prepend( interfaceParent );
-		interfaces.push( new wb.ui.PropertyEditTool.EditableValue.Interface( interfaceParent, this ) );
-
-		return interfaces;
+		return [ simpleInterface ];
 	},
 
 	/**

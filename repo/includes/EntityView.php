@@ -192,18 +192,32 @@ abstract class EntityView extends \ContextSource {
 	 */
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$info = $this->extractEntityInfo( $entity );
+
+		// add an h1 for displaying the entity's label; the actual firstHeading is being hidden by
+		// css since the original MediaWiki DOM does not represent a Wikidata entity's structure
+		// where the combination of label and description is the unique "title" of an entity which
+		// should not be semantically disconnected by having elements in between, like siteSub,
+		// contentSub and jump-to-nav
 		$html = Html::openElement( 'h1',
 			array(
 				'id' => 'wb-firstHeading-' . $info['id'],
 				'class' => 'wb-firstHeading wb-value-row'
 			)
 		);
+		$html .= Html::openElement(
+			'span',
+			array( 'dir' => 'auto' )
+		);
 		$html .= Html::element(
 			'span',
-			array( 'dir' => 'auto' ),
+			array( 'class' => 'wb-value' ),
 			$entity->getEntity()->getLabel( $info['lang']->getCode() )
 		);
-		return $html . Html::closeElement( 'h1' );
+		$html .= $this->getHtmlForEditSection( $entity, $lang );
+		$html .= Html::closeElement( 'span' );
+		$html .= Html::closeElement( 'h1' );
+
+		return $html;
 	}
 
 	/**
@@ -226,8 +240,21 @@ abstract class EntityView extends \ContextSource {
 				'class' => 'wb-property-container wb-value-row'
 			)
 		);
-		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
-		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
+		$html .= Html::element(
+			'div',
+			array( 'class' => 'wb-property-container-key', 'title' => 'description' )
+		);
+		$html .= Html::openElement(
+			'span',
+			array( 'class' => 'wb-property-container-value' )
+		);
+		$html .= Html::element(
+			'span',
+			array( 'class' => 'wb-value' ),
+			$description
+		);
+		$html .= $this->getHtmlForEditSection( $entity, $lang );
+		$html .= Html::closeElement( 'span' );
 		$html .= Html::closeElement( 'div' );
 
 		$html .= Html::element( 'hr', array( 'class' => 'wb-hr' ) );
@@ -245,12 +272,6 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
-		/*
-		 * add an h1 for displaying the entity's label; the actual firstHeading is being hidden by css since the
-		 * original MediaWiki DOM does not represent a Wikidata entity's structure where the combination of label and
-		 * description is the unique "title" of an entity which should not be semantically disconnected by having
-		 * elements in between, like siteSub, contentSub and jump-to-nav
-		 */
 		$info = $this->extractEntityInfo( $entity );
 		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
 		$html = '';
@@ -280,10 +301,13 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.2
 	 *
-	 * @return string
+	 * @param EntityContent $entity
+	 * @param Language|null $lang
+	 * @param String $tag
+	 * @return String
 	 */
-	public function getHtmlForEditSection( EntityContent $entity, Language $lang = null ) {
-		$html = HTML::openElement( 'span', array( 'class' => 'editsection' ) );
+	public function getHtmlForEditSection( EntityContent $entity, Language $lang = null, $tag = 'span' ) {
+		$html = HTML::openElement( $tag, array( 'class' => 'editsection' ) );
 		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar' ) );
 		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar-group' ) );
 
@@ -291,12 +315,12 @@ abstract class EntityView extends \ContextSource {
 		$html .= '[' . HTML::element(
 			'a',
 			array( 'href' => '', 'class' => 'wb-ui-toolbar-button' ),
-			wfMessage( 'wikibase-edit' )
+			wfMessage( 'wikibase-edit' )->text()
 		) . ']';
 
 		$html .= Html::closeElement( 'div' );
 		$html .= Html::closeElement( 'div' );
-		$html .= Html::closeElement( 'span' );
+		$html .= Html::closeElement( $tag );
 
 		return $html;
 	}
