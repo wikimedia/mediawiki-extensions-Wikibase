@@ -274,6 +274,34 @@ abstract class EntityView extends \ContextSource {
 	}
 
 	/**
+	 * Returns a toolbar with an edit link for a single statement. Equivalent to edit toolbar in JavaScript but with
+	 * an edit link pointing to a special page where the statement can be edited. In case JavaScript is available, this
+	 * toolbar will be removed an replaced with the interactive JavaScript one.
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getHtmlForEditSection( EntityContent $entity, Language $lang = null ) {
+		$html = HTML::openElement( 'span', array( 'class' => 'editsection' ) );
+		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar' ) );
+		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar-group' ) );
+
+		// [ edit ] button:
+		$html .= '[' . HTML::element(
+			'a',
+			array( 'href' => '', 'class' => 'wb-ui-toolbar-button' ),
+			wfMessage( 'wikibase-edit' )
+		) . ']';
+
+		$html .= Html::closeElement( 'div' );
+		$html .= Html::closeElement( 'div' );
+		$html .= Html::closeElement( 'span' );
+
+		return $html;
+	}
+
+	/**
 	 * Helper function returning language and id information bundled in an array.
 	 *
 	 * @since 0.1
