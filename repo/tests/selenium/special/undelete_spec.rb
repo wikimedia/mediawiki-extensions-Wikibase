@@ -26,7 +26,7 @@ describe "Check undelete" do
     visit_page(CreateItemPage) do |page|
       item_id_a = page.create_new_item(label_a, description_a)
       page.wait_for_aliases_to_load
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.add_aliases([alias_a])
       page.add_sitelinks(sitelinks)
     end
@@ -48,7 +48,7 @@ describe "Check undelete" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.itemLabelSpan.should == label_a
         page.itemDescriptionSpan.should == description_a
@@ -77,7 +77,7 @@ describe "Check undelete" do
       visit_page(CreateItemPage) do |page|
         item_id_b = page.create_new_item(label_b, description_b)
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.add_aliases([alias_b])
         page.add_sitelinks(sitelinks)
       end
@@ -93,7 +93,7 @@ describe "Check undelete" do
         page.undelete_item(item_id_a)
         page.undeleteErrorDiv?.should be_true
         page.conflictingItemLink
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.itemLabelSpan.should == label_b
         page.itemDescriptionSpan.should == description_b
@@ -107,7 +107,7 @@ describe "Check undelete" do
     # tear down: remove all sitelinks, logout
     on_page(ItemPage) do |page|
       page.navigate_to_item
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end

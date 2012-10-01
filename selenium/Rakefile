@@ -158,6 +158,11 @@ RSpec::Core::RakeTask.new(:create_item) do |spec|
   spec.pattern = '../repo/tests/selenium/special/create_item_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:create_property) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/special/create_property_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:edit_conflict) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/edit_conflict_spec.rb'

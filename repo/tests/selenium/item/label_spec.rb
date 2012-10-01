@@ -65,7 +65,7 @@ describe "Check functionality of edit label" do
         page.editLabelLink?.should be_true
         page.itemLabelSpan.should == label_changed
         @browser.refresh
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemLabelSpan.should == label_changed
         @browser.title.include? label_changed
       end
@@ -82,7 +82,7 @@ describe "Check functionality of edit label" do
         page.editLabelLink?.should be_true
         page.itemLabelSpan.should == label
         @browser.refresh
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemLabelSpan.should == label
         @browser.title.include? label
       end
@@ -100,7 +100,7 @@ describe "Check functionality of edit label" do
         page.wait_for_api_callback
         page.itemLabelSpan.should == label_normalized
         @browser.refresh
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemLabelSpan.should == label_normalized
       end
     end

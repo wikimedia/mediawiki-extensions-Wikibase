@@ -4,11 +4,13 @@
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #
-# page object for CreateItem special page
+# page object for CreateProperty special page
 
 class CreatePropertyPage < CreateEntityPage
   include PageObject
   page_url WIKI_REPO_URL + "Special:CreateProperty"
+
+  select_list(:createPropertyDatatype, :id => 'wb-createproperty-datatype' )
 
   def create_new_property(label, description, datatype, switch_lang = true)
     if switch_lang
@@ -16,11 +18,12 @@ class CreatePropertyPage < CreateEntityPage
     end
     self.createEntityLabelField = label
     self.createEntityDescriptionField = description
+    self.createPropertyDatatype = datatype
     createEntitySubmit
-    wait_for_item_to_load
-    @@item_url = current_url
-    query_string = "/" + ITEM_NAMESPACE + ITEM_ID_PREFIX
-    @@item_id = @@item_url[@@item_url.index(query_string)+query_string.length..-1]
-    return @@item_id
+    wait_for_entity_to_load
+    @@property_url = current_url
+    query_string = "/" + PROPERTY_NAMESPACE + PROPERTY_ID_PREFIX
+    @@property_id = @@property_url[@@property_url.index(query_string)+query_string.length..-1]
+    return @@property_id
   end
 end

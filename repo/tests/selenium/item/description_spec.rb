@@ -26,7 +26,7 @@ describe "Check functionality of edit description" do
       on_page(ItemPage) do |page|
         page.itemDescriptionSpan.should be_true
         page.itemDescriptionSpan.should == description
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.editDescriptionLink?.should be_true
         page.cancelDescriptionLink?.should be_false
         page.editDescriptionLink
@@ -64,7 +64,7 @@ describe "Check functionality of edit description" do
         page.itemDescriptionSpan.should == description_changed
         page.editDescriptionLink?.should be_true
         @browser.refresh
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description_changed
       end
     end
@@ -80,7 +80,7 @@ describe "Check functionality of edit description" do
         page.itemDescriptionSpan.should == description
         page.editDescriptionLink?.should be_true
         @browser.refresh
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description
       end
     end
@@ -97,7 +97,7 @@ describe "Check functionality of edit description" do
         page.wait_for_api_callback
         page.itemDescriptionSpan.should == description_normalized
         @browser.refresh
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description_normalized
       end
     end

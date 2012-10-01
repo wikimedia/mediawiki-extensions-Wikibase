@@ -17,7 +17,7 @@ class CreateItemPage < CreateEntityPage
     self.createEntityLabelField = label
     self.createEntityDescriptionField = description
     createEntitySubmit
-    wait_for_item_to_load
+    wait_for_entity_to_load
     @@item_url = current_url
     query_string = "/" + ITEM_NAMESPACE + ITEM_ID_PREFIX
     @@item_id = @@item_url[@@item_url.index(query_string)+query_string.length..-1]
