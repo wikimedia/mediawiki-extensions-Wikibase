@@ -185,7 +185,7 @@ class ItemView extends EntityView {
 						$link->getPage()
 					);
 					$html .= Html::closeElement( 'td' );
-					$html .= Html::element( 'td' );
+					$html .= $this->getHtmlForEditSection( $item, $lang, 'td' );
 					$html .= Html::closeElement( 'tr' );
 				}
 			}
