@@ -111,7 +111,7 @@ class EntityUpdate extends DiffChange {
 	 * @return string
 	 */
 	public final function getType() {
-		return 'wikibase-' . $this->getEntity()->getType() . '~update';
+		return $this->getEntity()->getType() . '~update';
 	}
 
 }
