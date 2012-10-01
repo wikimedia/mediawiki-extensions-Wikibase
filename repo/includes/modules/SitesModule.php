@@ -22,16 +22,20 @@ use ResourceLoaderModule, ResourceLoaderContext, MediaWikiSite, Site, Sites;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.2
+ * @todo This modules content should be invalidated whenever sites stuff (config) changes
  *
  * @file
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Werner < daniel.werner@wikimedia.de >
  */
 class SitesModule extends ResourceLoaderModule {
 
 	/**
+	 * Used to propagate information about sites to JavaScript.
+	 * Sites infos will be available in 'wbSiteDetails' config var.
 	 * @see ResourceLoaderModule::getScript
 	 *
 	 * @since 0.2
@@ -61,7 +65,19 @@ class SitesModule extends ResourceLoaderModule {
 			}
 		}
 
-		return 'window.wbSiteDetails = ' . \FormatJson::encode( $sites ) . ';';
+		$jsonSites = \FormatJson::encode( $sites );
+		return "mediaWiki.config.set( 'wbSiteDetails', $jsonSites );";
+	}
+
+	/**
+	 * @see ResourceLoaderModule::getDependencies
+	 *
+	 * @since 0.2
+	 *
+	 * @return array
+	 */
+	public function getDependencies() {
+		return array( 'mediawiki.legacy.config' );
 	}
 
 }
