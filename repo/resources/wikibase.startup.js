@@ -22,6 +22,9 @@
 	'use strict';
 
 	$( document ).ready( function() {
+		$( 'td.editsection' ).empty();
+		$( 'span.editsection' ).remove();
+
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
 			new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] );
