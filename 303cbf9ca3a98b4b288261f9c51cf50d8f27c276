@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATX//+TI\u003d",
+        "filename": "lib/includes/site/MediaWikiSite.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-01T10:24:07Z",
+      "side": 1,
+      "message": "how about preg_match( \u0027#^//#\u0027, $url ) or even preg_replace( \u0027#^//#\u0027, \u0027https://\u0027, $url )...",
+      "revId": "303cbf9ca3a98b4b288261f9c51cf50d8f27c276",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
