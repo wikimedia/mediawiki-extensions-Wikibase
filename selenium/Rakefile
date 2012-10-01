@@ -33,6 +33,11 @@ RSpec::Core::RakeTask.new(:item) do |spec|
   spec.pattern = '../repo/tests/selenium/item/*_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:property) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/property/*_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:description) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/item/description_spec.rb'
@@ -156,6 +161,11 @@ end
 RSpec::Core::RakeTask.new(:create_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/create_item_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:create_property) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/special/create_property_spec.rb'
 end
 
 RSpec::Core::RakeTask.new(:edit_conflict) do |spec|
