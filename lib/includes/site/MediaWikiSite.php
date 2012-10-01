@@ -101,6 +101,11 @@ class MediaWikiSite extends SiteObject {
 			);
 
 			$url = $this->getFileUrl( 'api.php' ) . '?' . wfArrayToCgi( $args );
+			// protocol-relative base URL should default to using https
+			$startsWith =  '//';
+			if ( preg_match( "#^$startsWith(.*)$#i", $url ) !== 0 ) {
+				$url = 'https:' . $url;
+			}
 
 			// Go on call the external site
 			//@todo: we need a good way to specify a timeout here.
