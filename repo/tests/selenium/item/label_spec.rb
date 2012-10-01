@@ -25,9 +25,9 @@ describe "Check functionality of edit label" do
     it "should check behaviour of cancel-link" do
       on_page(ItemPage) do |page|
         page.firstHeading.should be_true
-        page.itemLabelSpan.should be_true
+        page.entityLabelSpan.should be_true
         @browser.title.include?(label).should be_true
-        page.itemLabelSpan.should == label
+        page.entityLabelSpan.should == label
         page.editLabelLink?.should be_true
         page.cancelLabelLink?.should be_false
         page.editLabelLink
@@ -41,7 +41,7 @@ describe "Check functionality of edit label" do
         page.cancelLabelLink
         page.editLabelLink?.should be_true
         page.cancelLabelLink?.should be_false
-        page.itemLabelSpan.should == label
+        page.entityLabelSpan.should == label
       end
     end
     it "should check behaviour of ESC-key" do
@@ -50,7 +50,7 @@ describe "Check functionality of edit label" do
         page.labelInputField = label_changed
         page.labelInputField_element.send_keys :escape
         page.editLabelLink?.should be_true
-        page.itemLabelSpan.should == label
+        page.entityLabelSpan.should == label
       end
     end
     it "should check functionality of saving with save-link" do
@@ -63,10 +63,10 @@ describe "Check functionality of edit label" do
         ajax_wait
         page.wait_for_api_callback
         page.editLabelLink?.should be_true
-        page.itemLabelSpan.should == label_changed
+        page.entityLabelSpan.should == label_changed
         @browser.refresh
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label_changed
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label_changed
         @browser.title.include? label_changed
       end
     end
@@ -80,10 +80,10 @@ describe "Check functionality of edit label" do
         ajax_wait
         page.wait_for_api_callback
         page.editLabelLink?.should be_true
-        page.itemLabelSpan.should == label
+        page.entityLabelSpan.should == label
         @browser.refresh
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label
         @browser.title.include? label
       end
     end
@@ -98,10 +98,10 @@ describe "Check functionality of edit label" do
         page.saveLabelLink
         ajax_wait
         page.wait_for_api_callback
-        page.itemLabelSpan.should == label_normalized
+        page.entityLabelSpan.should == label_normalized
         @browser.refresh
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label_normalized
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label_normalized
       end
     end
   end

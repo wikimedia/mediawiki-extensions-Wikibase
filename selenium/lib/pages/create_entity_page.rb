@@ -6,7 +6,7 @@
 #
 # page object for CreateEntity special page base class
 
-class CreateEntityPage < ItemPage
+class CreateEntityPage < EntityPage
   include PageObject
 
   text_field(:createEntityLabelField, :id => "wb-createentity-label")
