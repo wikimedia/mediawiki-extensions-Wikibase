@@ -103,6 +103,17 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
+	 * @see ORMRow::getId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
 	 * @since 0.1
 	 */
 	protected function postConstruct() {
