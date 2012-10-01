@@ -22,7 +22,7 @@ describe "Check undo/history/oldrevision" do
     visit_page(CreateItemPage) do |page|
       page.create_new_item(label, description)
       page.wait_for_aliases_to_load
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.add_aliases([alias_a, alias_b, alias_c])
       page.add_sitelinks([sitelinks[0]])
     end
@@ -37,7 +37,7 @@ describe "Check undo/history/oldrevision" do
     it "should make some changes to item" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.change_label(label + changed)
         page.change_description(description + changed)
@@ -99,7 +99,7 @@ describe "Check undo/history/oldrevision" do
     it "should check the effect of the undo" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.itemLabelSpan.should == label
       end
@@ -126,7 +126,7 @@ describe "Check undo/history/oldrevision" do
     it "should check the effect of the undo" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.itemDescriptionSpan.should == description
       end
@@ -145,7 +145,7 @@ describe "Check undo/history/oldrevision" do
     it "should check the effect of the undo" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.itemDescriptionSpan.should == description + changed
       end
@@ -153,7 +153,7 @@ describe "Check undo/history/oldrevision" do
     it "should add a second siteling and undo the change" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.add_sitelinks([sitelinks[1]])
       end
@@ -170,7 +170,7 @@ describe "Check undo/history/oldrevision" do
     it "should check the effect of the undo" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.get_number_of_sitelinks_from_counter.should == 1
       end
@@ -189,7 +189,7 @@ describe "Check undo/history/oldrevision" do
     it "should check the effect of the undo" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.get_number_of_sitelinks_from_counter.should == 1
         page.englishSitelink_element.text.should == sitelinks[0][1]
@@ -207,7 +207,7 @@ describe "Check undo/history/oldrevision" do
     it "should check the effect of the undo" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.get_nth_alias(3).text.should == alias_a
       end
@@ -218,7 +218,7 @@ describe "Check undo/history/oldrevision" do
     # tear down: remove all sitelinks
     on_page(ItemPage) do |page|
       page.navigate_to_item
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end

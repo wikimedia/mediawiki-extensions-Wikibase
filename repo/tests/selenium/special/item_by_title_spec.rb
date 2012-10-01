@@ -21,7 +21,7 @@ describe "Check ItemByTitle special page" do
   context "item by title test setup" do
     it "should add en/fr sitelinks" do
       on_page(ItemPage) do |page|
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_sitelinks_to_load
         page.add_sitelinks(sitelinks)
       end
@@ -34,14 +34,14 @@ describe "Check ItemByTitle special page" do
         page.itemByTitleSiteField = sitelinks[0][0] + "wiki"
         page.itemByTitlePageField = sitelinks[0][1]
         page.itemByTitleSubmit
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemLabelSpan.should == label
         page.itemDescriptionSpan.should == description
         @browser.back
         page.itemByTitleSiteField = sitelinks[1][0] + "wiki"
         page.itemByTitlePageField = sitelinks[1][1]
         page.itemByTitleSubmit
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemLabelSpan.should == label
         page.itemDescriptionSpan.should == description
       end
@@ -52,7 +52,7 @@ describe "Check ItemByTitle special page" do
     # tear down: remove all sitelinks
     on_page(ItemPage) do |page|
       page.navigate_to_item
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
