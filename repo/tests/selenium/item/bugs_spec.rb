@@ -22,10 +22,10 @@ describe "Check for known bugs" do
     it "should check if the bug exists" do
       on_page(ItemPage) do |page|
         page.navigate_to_item_en
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description_en
         page.navigate_to_item_de
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should_not == description_en
         page.descriptionInputField_element.clear
         page.descriptionInputField = description_de
@@ -33,10 +33,10 @@ describe "Check for known bugs" do
         ajax_wait
         page.wait_for_api_callback
         page.navigate_to_item_en
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description_en
         page.navigate_to_item_de
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description_de
       end
     end

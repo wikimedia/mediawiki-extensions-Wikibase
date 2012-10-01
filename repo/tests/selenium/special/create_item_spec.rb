@@ -29,7 +29,7 @@ describe "Check CreateItem special page" do
         page.createEntityLabelField = label
         page.createEntityDescriptionField = description
         page.createEntitySubmit
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
       end
       on_page(ItemPage) do |page|
         page.itemLabelSpan.should == label
@@ -42,7 +42,7 @@ describe "Check CreateItem special page" do
       visit_page(CreateItemPage) do |page|
         page.createEntityLabelField = label
         page.createEntitySubmit
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
       end
       on_page(ItemPage) do |page|
         page.itemLabelSpan.should == label
@@ -55,7 +55,7 @@ describe "Check CreateItem special page" do
       visit_page(CreateItemPage) do |page|
         page.createEntityDescriptionField = description
         page.createEntitySubmit
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
       end
       on_page(ItemPage) do |page|
         page.itemDescriptionSpan.should == description
@@ -73,7 +73,7 @@ describe "Check CreateItem special page" do
         page.createEntityLabelField = label
         page.createEntityDescriptionField = description
         page.createEntitySubmit
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
       end
       on_page(ItemPage) do |page|
         page.itemLabelSpan.should == label

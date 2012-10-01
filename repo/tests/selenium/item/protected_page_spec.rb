@@ -33,7 +33,7 @@ describe "Check functionality of protected page" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         #label
         page.editLabelLink?.should be_false
         page.editLabelLinkDisabled?.should be_true
@@ -58,7 +58,7 @@ describe "Check functionality of protected page" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         #label
         page.editLabelLink?.should be_false
         page.editLabelLinkDisabled?.should be_true
@@ -81,7 +81,7 @@ describe "Check functionality of protected page" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.addAliases?.should be_false
         page.addAliasesDisabled?.should be_true
         page.addAliasesDisabled_element.click

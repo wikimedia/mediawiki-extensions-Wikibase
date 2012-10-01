@@ -35,7 +35,7 @@ describe "Check edit-conflicts" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description
         page.editDescriptionLink
         page.descriptionInputField = description_user1
@@ -54,7 +54,7 @@ describe "Check edit-conflicts" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description_user1
         page.editDescriptionLink
         page.descriptionInputField = description_user2
@@ -72,7 +72,7 @@ describe "Check edit-conflicts" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         js_snippet = "mw.config.set('wgCurRevisionId', " + old_revid.to_s() + ");"
         @browser.execute_script(js_snippet)
         old_revid.should == @browser.execute_script("return mw.config.get('wgCurRevisionId');")
@@ -140,7 +140,7 @@ describe "Check edit-conflicts" do
     it "should be possible to edit description after a reload" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.itemDescriptionSpan.should == description_user2
         page.editDescriptionLink
         page.descriptionInputField = description_user1
@@ -167,7 +167,7 @@ describe "Check edit-conflicts" do
       on_page(ItemPage) do |page|
         page.add_aliases([alias_a])
         @browser.refresh
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.wait_for_aliases_to_load
         page.get_nth_alias(1).text.should == alias_a
       end
@@ -186,7 +186,7 @@ describe "Check edit-conflicts" do
     # tear down: remove all sitelinks if there are some; logout
     on_page(ItemPage) do |page|
       page.navigate_to_item
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
