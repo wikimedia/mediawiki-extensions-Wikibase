@@ -23,30 +23,6 @@
 
 
 /**
- * Gets the width of the browser's scrollbar.
- *
- * @returns Integer scrollbar width
- */
-( function( $ ) {
-	$.getScrollbarWidth = function() {
-		var $inner = $( '<p/>', {
-			style: 'width:100px'
-		} ),
-		$outer = $( '<div/>', {
-			style: 'position:absolute;top:-1000px;left:-1000px;visibility:hidden;width:50px;height:50px;overflow:hidden;'
-		} ).append( $inner ).appendTo( $( 'body' ) );
-		var majorWidth = $inner.width();
-		$outer.css( 'overflow', 'scroll' );
-		var minorWidth = $inner.width();
-		if ( majorWidth === minorWidth ) { // Webkit
-			minorWidth = $outer[0].clientWidth;
-		}
-		$outer.remove();
-		return ( majorWidth - minorWidth );
-	};
-} )( jQuery );
-
-/**
  * Returns a string to be used for detecting any instant changes of an input box. In general, this
  * should be just 'input' in recent browsers.
  *

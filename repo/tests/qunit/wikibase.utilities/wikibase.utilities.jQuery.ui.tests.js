@@ -18,13 +18,6 @@
 		teardown: function() {}
 	} ) );
 
-	QUnit.test( '$.getScrollbarWidth()', function( assert ) {
-		assert.ok(
-			$.getScrollbarWidth() > 0,
-			'detected scrollbar width'
-		);
-	} );
-
 	QUnit.test( '$.getInputEvent()', function( assert ) {
 		assert.ok(
 			$.getInputEvent() ===
