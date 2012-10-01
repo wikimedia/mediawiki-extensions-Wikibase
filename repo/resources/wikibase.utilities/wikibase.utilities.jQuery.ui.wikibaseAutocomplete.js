@@ -28,8 +28,15 @@
 	$.widget( 'wb.autocomplete', $.ui.autocomplete, {
 
 		options: {
-			maxItems: 10 // maximum number of list items; show scrollbar if exceeded
+			maxItems: 10, // maximum number of list items; show scrollbar if exceeded
+			timeout: 8000 // ajax request timeout in milliseconds
 		},
+
+		/**
+		 * caching the key's code that was pressed last
+		 * @var Integer
+		 */
+		_lastKeyDown: null,
 
 		_create: function() {
 			$.ui.autocomplete.prototype._create.call( this );
@@ -37,6 +44,10 @@
 			this.element.on( 'autocompleteopen', $.proxy( function( event ) {
 				this._updateDirection();
 				this._highlightMatchingCharacters();
+			}, this ) );
+
+			this.element.on( 'keydown', $.proxy( function( event ) {
+				this._lastKeyDown = event.keyCode;
 			}, this ) );
 
 			// since results list does not reposition automatically on resize, just close it

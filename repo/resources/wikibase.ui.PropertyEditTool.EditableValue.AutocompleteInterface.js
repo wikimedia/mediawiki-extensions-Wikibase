@@ -20,22 +20,10 @@ var $PARENT = wb.ui.PropertyEditTool.EditableValue.Interface;
  */
 wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inherit( $PARENT, {
 	/**
-	 * timeout if auto-complete AJAX request in milliseconds
-	 * @const int
-	 */
-	TIMEOUT: 8000,
-
-	/**
 	 * current result set of strings used for validation
 	 * @var Array
 	 */
 	_currentResults: null,
-
-	/**
-	 * to prevent text highlighting when pressing backspace, keyCode is stored onKeyDown event
-	 * @var int
-	 */
-	_lastKeyDown: null,
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue.Interface._init
@@ -88,7 +76,7 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 			url: this.url,
 			dataType: 'jsonp',
 			data:  $.extend( {}, this.ajaxParams, { 'search': request.term } ),
-			timeout: this.TIMEOUT,
+			timeout: this._inputElem.data( 'wikibaseAutocomplete' ).options.timeout,
 			success: $.proxy( function( response ) {
 				if ( ! this.isInEditMode() ) {
 					// in a few rare cases this could happen. For example when just switching a char from lower
@@ -101,7 +89,7 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 
 					// auto-complete input box text (because of the API call lag, this is avoided
 					// when hitting backspace, since the value would be reset too slow)
-					if ( this._lastKeyDown !== 8 && response[1].length > 0 ) {
+					if ( this._inputElem.data( 'wikibaseAutocomplete' )._lastKeyDown !== 8 && response[1].length > 0 ) {
 						this._inputElem.data( 'wikibaseAutocomplete' ).autocompleteString(
 							response[0],
 							response[1][0]
@@ -202,15 +190,6 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 		return ( match === null )
 			? value // not found, return string "unnormalized" but don't return null since it could still be valid!
 			: match;
-	},
-
-	/**
-	 * custom onKeyDown event extension
-	 *
-	 * @param jQuery.event event
-	 */
-	onKeyDown: function( event ) {
-		this._lastKeyDown = event.keyCode;
 	},
 
 	/**
