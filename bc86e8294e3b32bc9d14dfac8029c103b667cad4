@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATX//+Nc\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-01T14:17:09Z",
+      "side": 1,
+      "message": "Please don\u0027t name EntityContent objects $entity - people might assume $entity is an Entity.\n\nBoth params are unused and the method itself is not called - a bit incomplete no?",
+      "revId": "bc86e8294e3b32bc9d14dfac8029c103b667cad4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATX//+NY\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-01T14:17:09Z",
+      "side": 1,
+      "message": "Calling -\u003etext is nicer then replying on the __toString magic",
+      "revId": "bc86e8294e3b32bc9d14dfac8029c103b667cad4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
