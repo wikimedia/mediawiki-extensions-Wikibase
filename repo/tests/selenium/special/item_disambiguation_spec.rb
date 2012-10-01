@@ -18,9 +18,9 @@ describe "Check item disambiguation special page" do
     visit_page(CreateItemPage) do |page|
       page.uls_switch_language("English")
       page.create_new_item(label_abc, description_a)
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.uls_switch_language("Deutsch")
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.change_label(label_ac_in_de)
       page.uls_switch_language("English")
     end
@@ -29,9 +29,9 @@ describe "Check item disambiguation special page" do
     end
     visit_page(CreateItemPage) do |page|
       page.create_new_item(label_abc, "")
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.uls_switch_language("Deutsch")
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.change_label(label_ac_in_de)
       page.uls_switch_language("English")
     end
@@ -53,24 +53,24 @@ describe "Check item disambiguation special page" do
         page.disambiguationSubmit
         page.countDisambiguationElements.should == 3
         page.disambiguationItemLink1_element.click
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label_abc
-        page.itemDescriptionSpan.should == description_a
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label_abc
+        page.entityDescriptionSpan.should == description_a
         @browser.back
         page.wait_until do
           page.disambiguationItemLink1?
         end
         page.disambiguationItemLink2_element.click
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label_abc
-        page.itemDescriptionSpan.should == description_b
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label_abc
+        page.entityDescriptionSpan.should == description_b
         @browser.back
         page.wait_until do
           page.disambiguationItemLink1?
         end
         page.disambiguationItemLink3_element.click
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label_abc
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label_abc
       end
     end
     it "should search for item by label in other language" do
@@ -83,16 +83,16 @@ describe "Check item disambiguation special page" do
         end
         page.countDisambiguationElements.should == 2
         page.disambiguationItemLink1_element.click
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label_abc
-        page.itemDescriptionSpan.should == description_a
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label_abc
+        page.entityDescriptionSpan.should == description_a
         @browser.back
         page.wait_until do
           page.disambiguationItemLink1?
         end
         page.disambiguationItemLink2_element.click
-        page.wait_for_item_to_load
-        page.itemLabelSpan.should == label_abc
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == label_abc
       end
     end
   end

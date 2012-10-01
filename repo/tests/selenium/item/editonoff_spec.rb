@@ -19,7 +19,7 @@ describe "Check functionality of disabling/enabling edit actions" do
   context "disabling/enabling of edit actions while editing label" do
     it "should check if edit actions are disbled/enabled correctly when editing label" do
       on_page(ItemPage) do |page|
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_false # because it's empty
         page.descriptionInputField_element.enabled?.should be_true
@@ -63,7 +63,7 @@ describe "Check functionality of disabling/enabling edit actions" do
   context "disabling/enabling of edit actions while editing description" do
     it "should check if edit actions are disbled/enabled correctly when editing description" do
       on_page(ItemPage) do |page|
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_false # because it's empty
         page.descriptionInputField_element.enabled?.should be_true
