@@ -100,6 +100,7 @@ class UnknownValue extends DataValueObject {
 
 	/**
 	 * Returns the value.
+	 * @see DataValue::getValue
 	 *
 	 * @since 0.1
 	 *

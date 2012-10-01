@@ -50,4 +50,20 @@ interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable {
 	 */
 	public function getSortKey();
 
+	/**
+	 * Returns the value contained by the DataValue. If this value is not simple and
+	 * does not have it's own type that represents it, the DataValue itself will be returned.
+	 * In essence, this method returns the "simplest" representation of the value.
+	 *
+	 * Example:
+	 * - NumberDataValue returns a float or integer
+	 * - MediaWikiTitleValue returns a Title object
+	 * - QuantityValue returns itself
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getValue();
+
 }

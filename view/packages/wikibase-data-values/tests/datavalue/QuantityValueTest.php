@@ -109,7 +109,16 @@ class QuantityValueTest extends DataValueTest {
 	 * @param array $arguments
 	 */
 	public function testGetValue( QuantityValue $quantity, array $arguments ) {
-		$this->assertEquals( $arguments[0], $quantity->getValue() );
+		$this->assertInstanceOf( $this->getClass(), $quantity->getValue() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \DataValues\QuantityValue $quantity
+	 * @param array $arguments
+	 */
+	public function testGetAmount( QuantityValue $quantity, array $arguments ) {
+		$this->assertEquals( $arguments[0], $quantity->getAmount() );
 	}
 
 	/**

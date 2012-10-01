@@ -138,4 +138,16 @@ class MultilingualTextValue extends DataValueObject {
 		return $values;
 	}
 
+	/**
+	 * Returns the multilingual text value
+	 * @see DataValue::getValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getValue() {
+		return $this;
+	}
+
 }

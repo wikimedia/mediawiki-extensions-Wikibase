@@ -122,4 +122,13 @@ class MultilingualTextTest extends DataValueTest {
 		$this->assertArrayEquals( $arguments[0], $monolingualValues, false, true );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \DataValues\MultilingualTextValue $texts
+	 * @param array $arguments
+	 */
+	public function testGetValue( MultilingualTextValue $texts, array $arguments ) {
+		$this->assertInstanceOf( $this->getClass(), $texts->getValue() );
+	}
+
 }

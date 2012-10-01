@@ -59,14 +59,14 @@ class QuantityValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @param int|float $value
+	 * @param int|float $amount
 	 * @param string|null $unit
 	 * @param int|float|null $accuracy
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( $value, $unit = null, $accuracy = null ) {
-		if ( !is_int( $value ) && !is_float( $value ) ) {
+	public function __construct( $amount, $unit = null, $accuracy = null ) {
+		if ( !is_int( $amount ) && !is_float( $amount ) ) {
 			throw new InvalidArgumentException( 'Can only construct QuantityValue from floats or integers' );
 		}
 
@@ -78,7 +78,7 @@ class QuantityValue extends DataValueObject {
 			throw new InvalidArgumentException( 'The unit of a QuantityValue needs to be a string' );
 		}
 
-		$this->value = $value;
+		$this->value = $amount;
 		$this->unit = $unit;
 		$this->accuracy = $accuracy;
 	}
@@ -146,13 +146,25 @@ class QuantityValue extends DataValueObject {
 	}
 
 	/**
-	 * Returns the value held by this quantity.
+	 * Returns the quantity object.
+	 * @see DataValue::getValue
 	 *
 	 * @since 0.1
 	 *
 	 * @return int|float
 	 */
 	public function getValue() {
+		return $this;
+	}
+
+	/**
+	 * Returns the amount held by this quantity.
+	 *
+	 * @since 0.1
+	 *
+	 * @return int|float
+	 */
+	public function getAmount() {
 		return $this->value;
 	}
 

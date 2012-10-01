@@ -99,6 +99,7 @@ class MediaWikiTitleValue extends DataValueObject {
 
 	/**
 	 * Returns the Title object.
+	 * @see DataValue::getValue
 	 *
 	 * @since 0.1
 	 *

@@ -106,6 +106,7 @@ class NumberValue extends DataValueObject {
 
 	/**
 	 * Returns the number.
+	 * DataValue::getValue
 	 *
 	 * @since 0.1
 	 *

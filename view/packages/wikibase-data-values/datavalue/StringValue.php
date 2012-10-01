@@ -103,6 +103,7 @@ class StringValue extends DataValueObject {
 
 	/**
 	 * Returns the string.
+	 * @see DataValue::getValue
 	 *
 	 * @since 0.1
 	 *

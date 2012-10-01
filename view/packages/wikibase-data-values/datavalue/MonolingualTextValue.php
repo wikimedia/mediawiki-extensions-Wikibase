@@ -124,6 +124,7 @@ class MonolingualTextValue extends DataValueObject {
 
 	/**
 	 * Returns the text.
+	 * @see DataValue::getValue
 	 *
 	 * @since 0.1
 	 *

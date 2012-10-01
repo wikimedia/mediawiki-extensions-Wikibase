@@ -103,6 +103,7 @@ class BooleanValue extends DataValueObject {
 
 	/**
 	 * Returns the boolean.
+	 * @see DataValue::getValue
 	 *
 	 * @since 0.1
 	 *
