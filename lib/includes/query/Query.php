@@ -30,6 +30,6 @@ namespace Wikibase;
  */
 interface Query extends Entity {
 
-	const ENTITY_TYPE = 'query';
+	const ENTITY_TYPE = 'wikibase-query';
 
 }

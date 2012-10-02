@@ -383,11 +383,12 @@ final class Utils {
 	}
 
 	/**
-	 * Returns a list of entity content model ids pointing to the ids of the namespaces in which they reside.
+	 * Returns a list of namespace IDs that are designated to contain Wikibase entities.
+	 * Configured via $egWBSettings['entityNamespaces'].
 	 *
 	 * @since 0.1
 	 *
-	 * @return array [ content model id (string) -> namespace id (integer) ]
+	 * @return array An array of integer namespace IDs.
 	 */
 	public static function getEntityNamespaces() {
 		$namespaces = Settings::get( 'entityNamespaces' );
@@ -407,7 +408,7 @@ final class Utils {
 	 *
 	 * @return array An array of string content model IDs.
 	 */
-	public static function getEntityContentModels() {
+	public static function getEntityModels() {
 		$namespaces = Settings::get( 'entityNamespaces' );
 
 		if ( !is_array( $namespaces ) ) {
@@ -415,17 +416,6 @@ final class Utils {
 		}
 
 		return array_keys( $namespaces );
-	}
-
-	/**
-	 * Returns the type identifiers of the entities.
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
-	 */
-	public static function getEntityTypes() {
-		return array_keys( EntityObject::$typeMap );
 	}
 
 	/**
@@ -469,8 +459,8 @@ final class Utils {
 	 *
 	 * @return bool True iff $model is an entity content model
 	 */
-	public static function isEntityContentModel( $model ) {
-		return in_array( $model, self::getEntityContentModels() );
+	public static function isEntityModel( $model ) {
+		return in_array( $model, self::getEntityModels() );
 	}
 
 	/**
@@ -488,18 +478,4 @@ final class Utils {
 	public static function isCoreNamespace( $ns ) {
 		return $ns < 100;
 	}
-
-	/**
-	 * Returns if the provided string is a valid entity type identifier.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $type
-	 *
-	 * @return boolean
-	 */
-	public static function isEntityType( $type ) {
-		return in_array( $type, self::getEntityTypes() );
-	}
-
 }
