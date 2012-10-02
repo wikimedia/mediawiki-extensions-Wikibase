@@ -139,7 +139,6 @@ class ItemViewTest extends \MediaWikiTestCase {
 				array(
 					'/"wb-sitelinks"/',
 					'/"wb-sitelinks-en uneven"/',
-				//	'/<a>\s*Oslo\s*<\/a>/'
 				)
 			),
 			array(
@@ -153,8 +152,6 @@ class ItemViewTest extends \MediaWikiTestCase {
 					'/"wb-sitelinks"/',
 					'/"wb-sitelinks-de uneven"/',
 					'/"wb-sitelinks-en even"/',
-				//	'/<a>\s*Oslo\s*<\/a>/',
-				//	'/<a>\s*Stockholm\s*<\/a>/'
 				)
 			),
 			array(
@@ -168,8 +165,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 				),
 				array(
 					'/"wb-sitelinks"/',
-					'/<span class="wb-property-container-value">\s*Capitol of Norway\s*<\/span>/',
-				//	'/<a>\s*Oslo\s*<\/a>/'
+					'/<span class="wb-value">\s*Capitol of Norway\s*<\/span>/',
 				)
 			),
 		);
