@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATn///XA\u003d",
+        "filename": "selenium/configuration.yml.sample",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-10-02T10:15:22Z",
+      "side": 1,
+      "message": "Heh. This should be commented out for easy copying to the local configuration.yml",
+      "revId": "42cd3af8a30bb078df49ae70cdbf1cfc68ab3ed8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
