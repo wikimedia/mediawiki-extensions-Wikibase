@@ -39,7 +39,7 @@ final class RepoHooks {
 
 		if ( empty( $namespaces ) ) {
 			throw new MWException( 'Wikibase: Incomplete configuration: '
-				. '$egWBSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
+				. '$wgWBSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
 				. 'See ExampleSettings.php for details and examples.');
 		}
 
