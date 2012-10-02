@@ -331,13 +331,11 @@ final class RepoHooks {
 		}
 
 		// Bail out if we are not in an entity namespace
-		if ( !Utils::isEntityNamespace( $wikiPage->getTitle()->getNamespace() ) ) {
+		if ( !in_array( $content->getModel(), Utils::getEntityContentModels() ) ) {
 			return true;
 		}
-
 		$item = $content->getItem();
 		$change = EntityDeletion::newFromEntity( $item );
-
 		$change->setFields( array(
 			//'previous_revision_id' => $wikiPage->getLatest(),
 			'revision_id' => 0, // there's no current revision
