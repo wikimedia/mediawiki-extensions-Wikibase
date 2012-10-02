@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATn///Kw\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-02T15:28:45Z",
+      "side": 1,
+      "message": "suggest to disable this also, as i get incomplete test warnings when running this on client only.",
+      "revId": "746c43d646026aa4f09e8c328aeaba6c2a2b9655",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAATn///K4\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-02T15:28:45Z",
+      "side": 1,
+      "message": "i would also disable this, as i get incomplete test warnings running this test on the client (w/o repo)",
+      "revId": "746c43d646026aa4f09e8c328aeaba6c2a2b9655",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
