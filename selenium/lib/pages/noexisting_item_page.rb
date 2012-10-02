@@ -14,5 +14,5 @@ class NonExistingItemPage < RubySelenium
 
   span(:firstHeading, :xpath => "//h1[@id='firstHeading']/span")
   link(:specialLogLink, :css => "div#mw-content-text > div > p > span > a:nth-child(1)")
-  link(:specialCreateNewItemLink, :css => "div#mw-content-text > div > p > span > a:nth-child(2)")
+  link(:specialCreateNewItemLink, :css => "div#mw-content-text > div > p > a:nth-child(2)")
 end

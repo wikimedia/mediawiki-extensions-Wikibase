@@ -3,87 +3,84 @@
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #
-# tests for CreateItem special page
+# tests for CreateProperty special page
 
 require 'spec_helper'
 
-describe "Check CreateItem special page" do
+describe "Check CreateProperty special page" do
   before :all do
     # set up: switch language
-    visit_page(CreateItemPage) do |page|
+    visit_page(CreatePropertyPage) do |page|
       page.uls_switch_language(LANGUAGE)
     end
   end
-  context "create item functionality" do
+
+  context "create property functionality" do
+    it "should create a new property with label, description & datatype" do
+      label = generate_random_string(10)
+      description = generate_random_string(20)
+      visit_page(CreatePropertyPage) do |page|
+        page.createEntityLabelField = label
+        page.createEntityDescriptionField = description
+        page.createEntitySubmit
+        page.wait_for_entity_to_load
+      end
+      on_page(PropertyPage) do |page|
+        page.entityLabelSpan.should == label
+        page.entityDescriptionSpan.should == description
+      end
+    end
+    it "should create a new property with label and empty description" do
+      label = generate_random_string(10)
+      visit_page(CreatePropertyPage) do |page|
+        page.createEntityLabelField = label
+        page.createEntitySubmit
+        page.wait_for_entity_to_load
+      end
+      on_page(PropertyPage) do |page|
+        page.entityLabelSpan.should == label
+        page.descriptionInputField?.should be_true
+      end
+    end
+  end
+
+  context "create property error behaviour" do
     it "should fail to create item with empty label & description" do
-      visit_page(CreateItemPage) do |page|
+      visit_page(CreatePropertyPage) do |page|
         page.createEntitySubmit
         page.createEntityLabelField?.should be_true
         page.createEntityDescriptionField?.should be_true
       end
     end
-    it "should create a new item with label and description" do
-      label = generate_random_string(10)
+    it "should fail to create a new property with description and empty label" do
       description = generate_random_string(20)
-      visit_page(CreateItemPage) do |page|
-        page.createEntityLabelField = label
+      visit_page(CreatePropertyPage) do |page|
         page.createEntityDescriptionField = description
         page.createEntitySubmit
-        page.wait_for_entity_to_load
-      end
-      on_page(ItemPage) do |page|
-        page.entityLabelSpan.should == label
-        page.entityDescriptionSpan.should == description
+        page.createEntityLabelField?.should be_true
+        page.createEntityDescriptionField?.should be_true
       end
     end
-    it "should create a new item with label and empty description" do
+    it "should fail to create a new property with same label as another property" do
+      description_a = generate_random_string(20)
+      description_b = generate_random_string(20)
       label = generate_random_string(10)
-      visit_page(CreateItemPage) do |page|
+      visit_page(CreatePropertyPage) do |page|
         page.createEntityLabelField = label
+        page.createEntityDescriptionField = description_a
         page.createEntitySubmit
         page.wait_for_entity_to_load
       end
-      on_page(ItemPage) do |page|
-        page.entityLabelSpan.should == label
-        page.descriptionInputField?.should be_true
-      end
-    end
-    it "should create a new item with description and empty label" do
-      description = generate_random_string(20)
-      visit_page(CreateItemPage) do |page|
-        page.createEntityDescriptionField = description
-        page.createEntitySubmit
-        page.wait_for_entity_to_load
-      end
-      on_page(ItemPage) do |page|
-        page.entityDescriptionSpan.should == description
-        page.labelInputField?.should be_true
-      end
-    end
-  end
-
-  context "Check for correct redirect on create new item" do
-    it "should check that the redirect preserves the correct uselang parameter" do
-      label = generate_random_string(10)
-      description = generate_random_string(20)
-      visit_page(CreateItemPage) do |page|
-        page.uls_switch_language("Deutsch")
+      visit_page(CreatePropertyPage) do |page|
         page.createEntityLabelField = label
-        page.createEntityDescriptionField = description
+        page.createEntityDescriptionField = description_b
         page.createEntitySubmit
-        page.wait_for_entity_to_load
-      end
-      on_page(ItemPage) do |page|
-        page.entityLabelSpan.should == label
-        page.entityDescriptionSpan.should == description
-        page.viewTabLink_element.text == "Lesen"
+        page.createEntityLabelField?.should be_true
+        page.createEntityDescriptionField?.should be_true
       end
     end
-  end
-
-  context "Check for permissions on item creation" do
-    it "should check that a blocked user cannot create a new item" do
-      on_page(CreateItemPage) do |page|
+    it "should check that a blocked user cannot create a new property" do
+      on_page(CreatePropertyPage) do |page|
         page.uls_switch_language("English")
       end
       visit_page(LoginPage) do |page|
@@ -95,7 +92,7 @@ describe "Check CreateItem special page" do
       visit_page(LoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
-      visit_page(CreateItemPage) do |page|
+      visit_page(CreatePropertyPage) do |page|
         page.createEntityLabelField = generate_random_string(10)
         page.createEntityDescriptionField = generate_random_string(20)
         page.createEntitySubmit
@@ -103,6 +100,7 @@ describe "Check CreateItem special page" do
       end
     end
   end
+
   after :all do
     # teardown: unblock user, logout
     visit_page(LoginPage) do |page|
