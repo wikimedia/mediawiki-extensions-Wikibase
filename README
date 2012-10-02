@@ -1,11 +1,15 @@
-Wikibase as an extension of MediaWiki that allows for the creation, maintenance, dissemination, and usage of
-structured data in MediaWiki.
+== Package ==
 
 The Wikibase package consists of three interconnected extensions:
 
 * Wikibase (in the directory repo)
 * Wikibase Client (in the directory client)
 * WikibaseLib (in the directory lib)
+
+== About ==
+
+These extensions allow for the creation, maintenance, dissemination,
+and usage of structured data in MediaWiki.
 
 The repo is the extension for the repository. It allows the creation and maintenance of structured data. This is
 planned to be used on wikidata.org once it is launched.
@@ -17,8 +21,9 @@ The lib bundles common code that is used by both the client and the repo.
 
 Note that in each of the directories you will also find README notes for each of the extensions.
 
-More information:
-http://meta.wikimedia.org/wiki/Wikidata
+== Wikidata ==
 
-To be released on:
-http://wikidata.org
+These extensions where created by the Wikidata team for the Wikidata project.
+More information on this project can be found at http://meta.wikimedia.org/wiki/Wikidata
+
+The Wikidata project uses the Wikibase extensions at http://wikidata.org

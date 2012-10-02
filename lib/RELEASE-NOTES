@@ -16,3 +16,12 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 Initial release with these features:
 
 * Shared Data structures for Wikibase client and repo
+
+TODO: put this somewhere:
+
+* Maintenances of sitelinks in the repository
+* Labeling and describing items in the repository
+* Clients that can use the sitelinks from a central repository
+* Introduction of the structred data as a content type in MediaWiki
+* API to access the structured data
+* Rich user interface for editing sitelinks
