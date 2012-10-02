@@ -4,13 +4,13 @@
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #
-# page object for CreateProperty special page
+# page object for NewProperty special page
 
-class CreatePropertyPage < CreateEntityPage
+class NewPropertyPage < CreateEntityPage
   include PageObject
-  page_url WIKI_REPO_URL + "Special:CreateProperty"
+  page_url WIKI_REPO_URL + "Special:NewProperty"
 
-  select_list(:createPropertyDatatype, :id => 'wb-createproperty-datatype' )
+  select_list(:newPropertyDatatype, :id => 'wb-newproperty-datatype' )
 
   def create_new_property(label, description, datatype = "item", switch_lang = true)
     if switch_lang
@@ -18,7 +18,7 @@ class CreatePropertyPage < CreateEntityPage
     end
     self.createEntityLabelField = label
     self.createEntityDescriptionField = description
-    self.createPropertyDatatype = datatype
+    self.newPropertyDatatype = datatype
     createEntitySubmit
     wait_for_entity_to_load
     @@property_url = current_url
