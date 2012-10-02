@@ -490,11 +490,15 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 			self._apiCallErr( textStatus, response, apiAction );
 		} );
 
-		/**
-		 * disabling actions and input box during saving (success will stop edit mode, so no
-		 * re-enabling is necessary in that case)
-		 */
+		// disabling input box during saving (success will stop edit mode, so no re-enabling is
+		// necessary in that case)
 		this.disable();
+
+		// "force" disabling the toolbar; required due to the special treatment of empty labels /
+		// descriptions (see this._setState()) which prevents the toolbar from being enabled when
+		// saving an empty value
+		this._toolbar.disable();
+
 		this._toolbar._elem.fadeOut( 200, $.proxy( function() {
 			waitMsg.fadeIn( 200 );
 			// do the actual API request and trigger jQuery.Deferred stuff:
