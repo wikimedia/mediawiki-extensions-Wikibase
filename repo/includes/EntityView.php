@@ -117,6 +117,9 @@ abstract class EntityView extends \ContextSource {
 		// even if description is empty, nodes have to be inserted as placeholders for an input box
 		$html .= $this->getHtmlForDescription( $entity, $lang, $editable );
 
+		// separator line after description
+		$html .= Html::element( 'hr', array( 'class' => 'wb-hr' ) );
+
 		// aliases:
 		$html .= $this->getHtmlForAliases( $entity, $lang, $editable );
 
@@ -256,8 +259,6 @@ abstract class EntityView extends \ContextSource {
 		$html .= $this->getHtmlForEditSection( $entity, $lang );
 		$html .= Html::closeElement( 'span' );
 		$html .= Html::closeElement( 'div' );
-
-		$html .= Html::element( 'hr', array( 'class' => 'wb-hr' ) );
 		return $html;
 	}
 
