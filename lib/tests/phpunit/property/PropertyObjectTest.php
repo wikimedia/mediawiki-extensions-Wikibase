@@ -31,6 +31,7 @@ use \Wikibase\Property as Property;
  * @group Wikibase
  * @group WikibaseProperty
  * @group WikibaseLib
+ * @group PropertyObjectTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
