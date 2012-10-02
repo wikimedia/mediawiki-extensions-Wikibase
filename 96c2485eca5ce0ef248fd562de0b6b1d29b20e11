@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAATn///W0\u003d",
+        "filename": "client/maintenance/populateInterwiki.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-02T10:17:47Z",
+      "side": 1,
+      "message": "Please us explicit check for null.",
+      "revId": "96c2485eca5ce0ef248fd562de0b6b1d29b20e11",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
