@@ -57,19 +57,36 @@ final class Utils {
 	 * Temporary helper function.
 	 * Inserts some sites into the sites table.
 	 *
+	 * @param \DatabaseUpdater $updater database updater. Not used. Present to be compatible with DatabaseUpdater::addExtensionUpdate
+	 * @param String           $url     The URL of the API to fetch the sites from. Defaults to 'https://meta.wikimedia.org/w/api.php'
+	 *
+	 * @throws \MWException if an error occurs.
 	 * @since 0.1
 	 */
-	public static function insertDefaultSites() {
+	public static function insertDefaultSites( $updater = null, $url = 'https://meta.wikimedia.org/w/api.php' ) {
 		if ( \SitesTable::singleton()->count() > 0 ) {
 			return;
 		}
 
-		// No sites present yet, fetching from meta.wikimedia.org to populate sites table
+		// No sites present yet, fetching from api to populate sites table
+
+		$url .= '?action=sitematrix&format=json';
+
+		//NOTE: the raiseException option needs change Iad3995a6 to be merged, otherwise it is ignored.
+		$json = \Http::get( $url, 'default', array( 'raiseException' => true ) );
+
+		if ( !$json ) {
+			throw new \MWException( "Got no data from $url" );
+		}
 
 		$languages = \FormatJson::decode(
-			\Http::get( 'https://meta.wikimedia.org/w/api.php?action=sitematrix&format=json' ),
+			$json,
 			true
 		);
+
+		if ( !is_array( $languages ) ) {
+			throw new \MWException( "Failed to parse JSON from $url" );
+		}
 
 		$groupMap = array(
 			'wiki' => 'wikipedia',
