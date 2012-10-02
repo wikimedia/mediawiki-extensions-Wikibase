@@ -8,7 +8,7 @@ use MWException, SettingsBase;
  * More info can be found at https://www.mediawiki.org/wiki/Extension:Wikibase#Settings
  *
  * NOTICE:
- * Changing one of these settings can be done by assigning to $egWBSettings,
+ * Changing one of these settings can be done by assigning to $wgWBSettings,
  * AFTER the inclusion of the extension itself.
  *
  * @since 0.1
@@ -29,7 +29,7 @@ class Settings extends SettingsBase {
 	 * @return array
 	 */
 	protected function getSetSettings() {
-		return $GLOBALS['egWBSettings'];
+		return $GLOBALS['wgWBSettings'];
 	}
 
 	/**

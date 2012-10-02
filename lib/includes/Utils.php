@@ -388,7 +388,7 @@ final class Utils {
 
 	/**
 	 * Returns a list of content model IDs that are used to represent Wikibase entities.
-	 * Configured via $egWBSettings['entityNamespaces'].
+	 * Configured via $wgWBSettings['entityNamespaces'].
 	 *
 	 * @since 0.1
 	 *
@@ -419,7 +419,7 @@ final class Utils {
 	 * Returns the namespace ID for the given entity content model, or false if the content model
 	 * is not a known entity model.
 	 *
-	 * The return value is based on getEntityNamespaces(), which is configured via $egWBSettings['entityNamespaces'].
+	 * The return value is based on getEntityNamespaces(), which is configured via $wgWBSettings['entityNamespaces'].
 	 *
 	 * @since 0.1
 	 *
