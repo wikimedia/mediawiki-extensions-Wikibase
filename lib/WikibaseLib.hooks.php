@@ -115,7 +115,7 @@ final class LibHooks {
 			'changes/EntityUpdate',
 
 			'claim/ClaimList',
-			'claim/ClaimObject',
+			//'claim/ClaimObject', // disabled for beta branch
 
 			'item/ItemDiff',
 			'item/ItemMultilangTexts',
@@ -128,10 +128,10 @@ final class LibHooks {
 			'query/QueryObject',
 
 			'reference/ReferenceList',
-			'reference/ReferenceObject',
+			//'reference/ReferenceObject', // disabled for beta branch
 
-			'snak/PropertyValueSnak',
-			'snak/SnakList',
+			//'snak/PropertyValueSnak', // disabled for beta branch
+			//'snak/SnakList', // disabled for beta branch
 
 			'ChangeNotifier',
 			'ChangeHandler',

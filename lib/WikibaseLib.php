@@ -40,9 +40,6 @@ if ( !defined( 'DataValues_VERSION' ) ) {
 
 $dependencies = array(
 	'Diff_VERSION' => 'Diff',
-	'DataValues_VERSION' => 'DataValues',
-	'ValueParser_VERSION' => 'ValueParser',
-	'DataTypes_VERSION' => 'DataTypes',
 );
 
 foreach ( $dependencies as $constant => $name ) {
