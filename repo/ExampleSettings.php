@@ -29,20 +29,20 @@ $wgExtraNamespaces[WB_NS_QUERY] = 'Query';
 $wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
 
 // Tell Wikibase which namespace to use for which kind of entity
-$egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = WB_NS_ITEM;
-$egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY;
-$egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
+$wgWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = WB_NS_ITEM;
+$wgWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY;
+$wgWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY;
 
-// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $egWBSettings
+// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBSettings
 
 // Tell MediaWIki to search the item namespace
 $wgNamespacesToBeSearchedDefault[WB_NS_ITEM] = true;
 
 // More things to play with
-$egWBSettings['apiInDebug'] = false;
-$egWBSettings['apiInTest'] = false;
-$egWBSettings['apiWithRights'] = true;
-$egWBSettings['apiWithTokens'] = true;
+$wgWBSettings['apiInDebug'] = false;
+$wgWBSettings['apiInTest'] = false;
+$wgWBSettings['apiWithRights'] = true;
+$wgWBSettings['apiWithTokens'] = true;
 
 $wgGroupPermissions['wbeditor']['item-set'] = true;
 
@@ -72,9 +72,9 @@ $wgExtraNamespaces[WB_NS_QUERY] = 'Query';
 $wgExtraNamespaces[WB_NS_QUERY_TALK] = 'Query_talk';
 
 // Tell Wikibase which namespace to use for which kind of entity
-$egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = NS_MAIN; // <=== Use main namespace for items!!!
-$egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY; // use custom namespace
-$egWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY; // use custom namespace
+$wgWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_ITEM] = NS_MAIN; // <=== Use main namespace for items!!!
+$wgWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_PROPERTY] = WB_NS_PROPERTY; // use custom namespace
+$wgWBSettings['entityNamespaces'][CONTENT_MODEL_WIKIBASE_QUERY] = WB_NS_QUERY; // use custom namespace
 
 // No need to mess with $wgNamespacesToBeSearchedDefault, the main namespace will be searched per default.
 */
