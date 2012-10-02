@@ -16,7 +16,7 @@ description_changed = description + " stuff"
 describe "Check functionality of property view" do
   before :all do
     # set up: create property
-    visit_page(CreatePropertyPage) do |page|
+    visit_page(NewPropertyPage) do |page|
       page.create_new_property(label, description)
     end
   end
