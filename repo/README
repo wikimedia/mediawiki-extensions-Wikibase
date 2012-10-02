@@ -8,8 +8,11 @@ Latest version of the readme file: https://gerrit.wikimedia.org/r/gitweb?p=media
 Wikibase is a MediaWiki extension that acts as a structured data repository.
 
 === Feature overview ===
-
-* ...
+* Maintenances of sitelinks
+* Labeling and describing items
+* Introduction of the structred data as a content type in MediaWiki
+* API to access the structured data
+* Rich user interface for editing sitelinks
 
 == Credits to other projects ==
 

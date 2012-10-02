@@ -1,0 +1,19 @@
+These are the release notes for the Wikibase package.
+
+Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:WikibaseLib
+Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Wikibase.git;a=blob;f=lib/RELEASE-NOTES
+
+
+
+=== Version 0.2 ===
+(dev)
+* ...
+
+=== Version 0.1 ===
+Initial release with these features:
+* Maintenances of sitelinks in the repository
+* Labeling and describing items in the repository
+* Clients that can use the sitelinks from a central repository
+* Introduction of the structred data as a content type in MediaWiki
+* API to access the structured data
+* Rich user interface for editing sitelinks

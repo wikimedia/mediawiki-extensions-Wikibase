@@ -15,4 +15,5 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 Initial release with these features:
 
-* ...
+* Accessing and displaying sitelinks from a repository
+* Parser function for the interplay between locally and externally defined sitelinks
