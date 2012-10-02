@@ -117,6 +117,9 @@ abstract class EntityView extends \ContextSource {
 		// even if description is empty, nodes have to be inserted as placeholders for an input box
 		$html .= $this->getHtmlForDescription( $entity, $lang, $editable );
 
+		// separator line after description
+		$html .= Html::element( 'hr', array( 'class' => 'wb-hr' ) );
+
 		// aliases:
 		$html .= $this->getHtmlForAliases( $entity, $lang, $editable );
 
@@ -192,6 +195,12 @@ abstract class EntityView extends \ContextSource {
 	 */
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$info = $this->extractEntityInfo( $entity );
+		/*
+		 * add an h1 for displaying the entity's label; the actual firstHeading is being hidden by css since the
+		 * original MediaWiki DOM does not represent a Wikidata entity's structure where the combination of label and
+		 * description is the unique 'title' of an entity which should not be semantically disconnected by having
+		 * elements in between, like siteSub, contentSub and jump-to-nav
+		 */
 		$html = Html::openElement( 'h1',
 			array(
 				'id' => 'wb-firstHeading-' . $info['id'],
@@ -229,8 +238,6 @@ abstract class EntityView extends \ContextSource {
 		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
 		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
 		$html .= Html::closeElement( 'div' );
-
-		$html .= Html::element( 'hr', array( 'class' => 'wb-hr' ) );
 		return $html;
 	}
 
@@ -245,12 +252,6 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
-		/*
-		 * add an h1 for displaying the entity's label; the actual firstHeading is being hidden by css since the
-		 * original MediaWiki DOM does not represent a Wikidata entity's structure where the combination of label and
-		 * description is the unique "title" of an entity which should not be semantically disconnected by having
-		 * elements in between, like siteSub, contentSub and jump-to-nav
-		 */
 		$info = $this->extractEntityInfo( $entity );
 		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
 		$html = '';
