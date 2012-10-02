@@ -136,7 +136,7 @@ $wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesM
 // includes/specials
 $wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
-$wgAutoloadClasses['SpecialCreateProperty'] 			= $dir . 'includes/specials/SpecialCreateProperty.php';
+$wgAutoloadClasses['SpecialNewProperty'] 			= $dir . 'includes/specials/SpecialNewProperty.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
@@ -183,7 +183,7 @@ $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-$wgSpecialPages['CreateProperty'] 					= 'SpecialCreateProperty';
+$wgSpecialPages['NewProperty'] 					= 'SpecialNewProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 $wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';

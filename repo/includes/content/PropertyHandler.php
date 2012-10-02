@@ -102,7 +102,7 @@ class PropertyHandler extends EntityHandler {
 	 * @return string
 	 */
 	public function getSpecialPageForCreation() {
-		return 'CreateProperty';
+		return 'NewProperty';
 	}
 }
 

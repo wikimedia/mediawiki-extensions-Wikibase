@@ -13,7 +13,7 @@ use Wikibase\PropertyContent, Wikibase\EntityContent;
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class SpecialCreateProperty extends SpecialCreateEntity {
+class SpecialNewProperty extends SpecialCreateEntity {
 
 	/**
 	 * @since 0.2
@@ -28,7 +28,7 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 	 * @since 0.2
 	 */
 	public function __construct() {
-		parent::__construct( 'CreateProperty' );
+		parent::__construct( 'NewProperty' );
 	}
 
 	/**
@@ -92,10 +92,10 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 			. Html::element(
 				'label',
 				array(
-					'for' => 'wb-createproperty-datatype',
+					'for' => 'wb-newproperty-datatype',
 					'class' => 'wb-label'
 				),
-				$this->msg( 'wikibase-createproperty-datatype' )->text()
+				$this->msg( 'wikibase-newproperty-datatype' )->text()
 			)
 			. $this->getDataTypes()
 			. Html::element( 'br' );
@@ -116,7 +116,7 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 				'select',
 				array(
 					'name' => 'datatype',
-					'id' => 'wb-createproperty-datatype',
+					'id' => 'wb-newproperty-datatype',
 					'class' => 'wb-select'
 				),
 				$html
@@ -127,7 +127,7 @@ class SpecialCreateProperty extends SpecialCreateEntity {
 	 * @see SpecialCreateEntity::getLegend()
 	 */
 	protected function getLegend() {
-		return $this->msg( 'wikibase-createproperty-fieldset' );
+		return $this->msg( 'wikibase-newproperty-fieldset' );
 	}
 
 }
