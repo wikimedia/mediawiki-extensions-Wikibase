@@ -22,30 +22,54 @@ require_once $basePath . '/maintenance/Maintenance.php';
 class PopulateInterwiki extends Maintenance {
 
 	public function __construct() {
-		parent::__construct();
-
 		$this->mDescription = <<<TEXT
-This script will populate the interwiki table, pulling in interwiki links 
-that are used on Wikipedia.
+This script will populate the interwiki table, pulling in interwiki links that are used on Wikipedia
+or another MediaWiki wiki.
 
-When the script has finished, it will make a note of this in the database, and
-will not run again without the --force option.
+When the script has finished, it will make a note of this in the database, and will not run again
+without the --force option.
+
+--source parameter is the url for the source wiki api, such as "https://en.wikipedia.org/w/api.php"
+from which the script fetches the interwiki data and uses here to populate this wiki's interwiki
+database table.
 TEXT;
 
-		$this->addOption( 'force', 'Run regardless of whether the database says it\'s been run already' );
+		$this->addOption( 'source', 'Source wiki for interwiki table, such as https://en.wikipedia.org/w/api.php', false, true );
+		$this->addOption( 'force', 'Run regardless of whether the database says it has been run already.' );
+
+		parent::__construct();
 	}
 
 	public function execute() {
 		$force = $this->getOption( 'force', false );
+		$this->source = $this->getOption( 'source', 'https://en.wikipedia.org/w/api.php' );
 		$data = $this->fetchLinks();
 		$this->doPopulate( $data, $force );
 	}
 
 	protected function fetchLinks() {
-		$url = 'https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=interwikimap&sifilteriw=local&format=json';
+		$params = array(
+			'action' => 'query',
+			'meta' => 'siteinfo',
+			'siprop' => 'interwikimap',
+			'sifilteriw' => 'local',
+			'format' => 'json'
+		);
+
+		// todo: is valid
+		if ( !empty ( $this->source ) ) {
+			try {
+				// make sure this has the '?'
+				$baseUrl = rtrim( $this->source, '?' ) . '?';
+			} catch( Exception $e ) {
+				$this->error( "Error: Invalid api source" );
+			}
+		}
+
+		$url = $baseUrl . wfArrayToCgi( $params );
 
 		$json = Http::get( $url );
-		$data = FormatJSON::decode( $json, true );
+		$data = FormatJson::decode( $json, true );
 
 		return $data['query']['interwikimap'];
 	}
