@@ -35,6 +35,8 @@ use \Wikibase\ItemObject as ItemObject;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class ItemMultilangTextsTest extends \MediaWikiTestCase {
+
+	//@todo: make this a baseclass to use with all types of entitites.
 	
 	/**
 	 * @var Item

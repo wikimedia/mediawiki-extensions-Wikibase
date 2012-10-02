@@ -45,6 +45,8 @@ use Wikibase\ItemView as ItemView;
  */
 class ItemViewTest extends \MediaWikiTestCase {
 
+	//@todo: make this a baseclass to use with all types of entities.
+
 	protected static $num = -1;
 
 	public function setUp() {

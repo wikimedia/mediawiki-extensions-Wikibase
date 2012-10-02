@@ -39,7 +39,9 @@ use \Wikibase\SiteLink as SiteLink;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class ItemNewEmptyTest extends \MediaWikiTestCase {
-	
+
+	//@todo: make this a baseclass to use with all types of entitites.
+
 	/**
 	 * @var ItemObject
 	 */

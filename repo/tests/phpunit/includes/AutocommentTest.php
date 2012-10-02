@@ -38,7 +38,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 	}
 
 	public function providerOnFormat() {
-		return array(
+		return array( //@todo: test other types of entities too!
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",

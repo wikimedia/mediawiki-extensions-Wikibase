@@ -30,6 +30,7 @@ use \Wikibase\ItemContent as ItemContent;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ItemDeletionUpdateTest extends \MediaWikiTestCase {
+	//@todo: make this a baseclass to use with all types of entities.
 
 	public function testConstruct() {
 		$update = new ItemDeletionUpdate( \Wikibase\ItemContent::newEmpty() );
