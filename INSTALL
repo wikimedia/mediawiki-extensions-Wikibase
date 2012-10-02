@@ -1,7 +1,7 @@
-This packages three interrelated MediaWiki extensions:
+This package contains three interrelated MediaWiki extensions:
 
 * Wikibase (in the subdirectory repo)
-* Wikibase Lib (in the subdirectory lib)
-* WikibaseClient (in the subdirectory client)
+* WikibaseLib (in the subdirectory lib)
+* Wikibase Client (in the subdirectory client)
 
-Installation is described in the INSTALL file in the given subdirectory.
+Installation instructions for each can be found in the INSTALL file in the given subdirectory.
