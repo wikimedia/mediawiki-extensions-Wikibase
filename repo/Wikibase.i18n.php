@@ -1070,11 +1070,6 @@ $messages['fa'] = array(
 	'wikibase-self-conflict' => 'پس از شروع به ویرایش اطلاعات توسط شما تغییر یافته است',
 	'wikibase-restoreold' => 'بازیابی',
 	'wikibase-restore-summary' => 'نسخهٔ  $1 بدست [[Special:Contributions/$2|$2]] بازگردانده شد',
-	'wikibase-noitem' => 'این مورد وجود ندارد.
-می‌توانید <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} سیاه‌های مرتبط را جست‌وجو کنید]
-تا ببینید کجا رفته است، یا [[Special:CreateItem|یک مورد نو بسازید]]</span>.',
-	'wikibase-noitem-nopermission' => 'این مورد وجود ندارد.
-می‌توانید <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} سیاهه‌های مرتبط را جست‌وجو کنید]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'ایجاد یک مورد جدید',
 	'wikibase-item-summary-wbsetlabel-set' => 'برچسب [ $2 ] تغییریافت',
 	'wikibase-item-summary-wbsetlabel-remove' => 'برچسب [ $2 ] حذف شد',
@@ -1178,7 +1173,7 @@ $messages['fr'] = array(
 	'special-itemdisambiguation' => 'Homonymie : Éléments avec la même étiquette',
 	'wikibase-itemdisambiguation-lookup-language' => 'Langue :',
 	'wikibase-itemdisambiguation-submit' => 'Rechercher',
-	'wikibase-itemdisambiguation-nothing-found' => "Aucun élément n'a été trouvé par la recherche précédente, veuillez affiner la requête.",
+	'wikibase-itemdisambiguation-nothing-found' => "Désolé, aucun élément avec cette étiquette n'a été trouvé.",
 	'wikibase-itemdisambiguation-invalid-langcode' => "La requête précédente n'a pas pu être utilisée pour effectuer une recherche. Vous devez fournir un identificateur de langue valide.",
 	'special-createitem' => 'Créer un nouvel élément',
 	'wikibase-restoreold' => 'réinitialiser',
@@ -1485,10 +1480,6 @@ $messages['he'] = array(
 	'wikibase-restoreold' => 'איפוס',
 	'wikibase-restore-summary' => 'שחזור גרסה $1 מאת [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'עריכה ישירה כבויה במרחב השם $1',
-	'wikibase-noitem' => 'הפריט אינו קיים.
-אפשר <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים] כדי למצוא לאן הוא הלך או [[Special:CreateItem|ליצור פריט חדש]]</span>.',
-	'wikibase-noitem-nopermission' => 'הפריט אינו קיים.
-באפשרותך <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'נוצר פריט חדש',
 	'wikibase-item-summary-wbsetlabel-set' => 'שונתה התווית בשפה [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'הוסרה התווית [$2]',
@@ -1680,11 +1671,6 @@ $messages['ia'] = array(
 	'special-itemdisambiguation' => 'Objecto per etiquetta',
 	'special-createitem' => 'Crear un nove objecto',
 	'wikibase-restoreold' => 'reinitialisar',
-	'wikibase-noitem' => 'Iste elemento non existe.
-Tu pote <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercar in le registros associate]
-pro localisar lo, o [[Special:CreateItem|crear un nove elemento]]</span>.',
-	'wikibase-noitem-nopermission' => 'Iste elemento non existe.
-Tu pote <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercar lo in le registros associate]</span>.',
 	'content-model-1001' => 'Elemento de Wikibase',
 );
 
@@ -2148,7 +2134,7 @@ $messages['ksh'] = array(
 	'wikibase-tooltip-error-details' => 'Einzelheite',
 );
 
-/** Kurdish (Latin script) (‪Kurdî (latînî)‬)
+/** Kurdish (Latin script) (Kurdî (latînî)‎)
  * @author George Animal
  */
 $messages['ku-latn'] = array(
@@ -2329,7 +2315,7 @@ $messages['mk'] = array(
 	'content-model-1001' => 'Предмет во Викибазата',
 );
 
-/** Norwegian Bokmål (‪norsk (bokmål)‬)
+/** Norwegian Bokmål (norsk (bokmål)‎)
  * @author Jeblad
  */
 $messages['nb'] = array(
@@ -2387,12 +2373,6 @@ $messages['nb'] = array(
 	'special-itemdisambiguation' => 'Et datasett er identifisert via etikett',
 	'special-createitem' => 'Lag et nytt datasett',
 	'wikibase-restoreold' => 'tilbakestill',
-	'wikibase-noitem' => 'Dette datasettet finnes ikke.
-Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]
-for å finne ut hva som har skjedd, eller [[Special:CreateItem|opprette et nytt datasett]]</span>.',
-	'wikibase-noitem-nopermission' => 'Dette datasettet finnes ikke.
-Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]
-for å finne ut hva som har skjedd.',
 	'content-model-1001' => 'Wikibase datasett',
 );
 
@@ -2509,7 +2489,7 @@ $messages['nl'] = array(
 	'content-model-1001' => 'Wikibaseitem',
 );
 
-/** Norwegian Nynorsk (‪norsk (nynorsk)‬)
+/** Norwegian Nynorsk (norsk (nynorsk)‎)
  * @author Jeblad
  * @author Njardarlogar
  */
@@ -2592,12 +2572,6 @@ $messages['nn'] = array(
 	'wikibase-createentity-submit' => 'Opprett',
 	'wikibase-restoreold' => 'attopprett',
 	'wikibase-restore-summary' => 'Attoppretta versjon $1 av [[Special:Contributions/$2|$2]]',
-	'wikibase-noitem' => 'Dette datasettet finst ikkje.
-Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
-for å finne ut kva som har skjedd, eller [[Special:CreateItem|opprette eit nytt datasett]]</span>.',
-	'wikibase-noitem-nopermission' => 'Dette datasettet finst ikkje.
-Du kan  <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søkje i aktuelle loggar]
-for å finne ut kva som har skjedd.',
 	'wikibase-item-summary-wbsetitem' => 'Oppretta eit nytt datasett',
 	'wikibase-item-summary-wbsetlabel-set' => 'Endra [$2]-merkelapp',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Fjerna [$2]-merkelapp',
@@ -2916,10 +2890,6 @@ $messages['ro'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'Limbă:',
 	'wikibase-itemdisambiguation-submit' => 'Caută',
 	'special-createitem' => 'Creare element nou',
-	'wikibase-api-add-sitelink-failed' => 'Legătura sitului nu poate fi salvată.',
-	'wikibase-api-remove-sitelink-failed' => 'Legătura sitului nu poate fi eliminată.',
-	'wikibase-api-cant-edit' => 'Modificare nepermisă:
-$1',
 	'wikibase-restoreold' => 'restaurare',
 );
 
@@ -2991,8 +2961,6 @@ $messages['si'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'භාෂාව:',
 	'wikibase-itemdisambiguation-submit' => 'සොයන්න',
 	'special-createitem' => 'නව අයිතමයක් තනන්න',
-	'wikibase-api-cant-edit' => 'සංස්කරණයට ඉඩ ලබා නොදේ:
-$1',
 	'wikibase-restoreold' => 'නැවත සකසන්න',
 	'wikibase-item-summary-wbsetitem' => 'නව අයිතමයක් තනන ලදී',
 );
@@ -3047,6 +3015,9 @@ $messages['ta'] = array(
 	'wikibase-itembytitle-submit' => 'தேடு',
 	'wikibase-itemdisambiguation-lookup-language' => 'மொழி:',
 	'wikibase-itemdisambiguation-submit' => 'தேடு',
+	'wikibase-item-summary-wbsetitem' => 'ஒரு புதிய உருப்படி உருவாக்கப்பட்டது',
+	'wikibase-item-summary-wbsetdescription-set' => '[$2] விளக்கம் மாற்றப்பட்டது',
+	'wikibase-item-summary-wbsetdescription-remove' => '[$2] விளக்கம் நீக்கப்பட்டது',
 );
 
 /** Telugu (తెలుగు)
@@ -3160,11 +3131,6 @@ $messages['tl'] = array(
 	'wikibase-self-conflict' => 'Binago mo ang dato pagkaraan mong simulan ang pamamatnugot.',
 	'wikibase-restoreold' => 'itakdang muli',
 	'wikibase-restore-summary' => 'Ipanumbalik ang rebisyong $1 ni [[Special:Contributions/$2|$2]]',
-	'wikibase-noitem' => 'Hindi umiiral ang bagay na ito.
-Maaari kang <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} maghanap sa kaugnay na mga talaan]
-upang malaman kung saan ito napunta, o [[Special:CreateItem|lumikha ng isang bagong bagay]]</span>.',
-	'wikibase-noitem-nopermission' => 'Hindi umiiral ang bagay na ito.
-Maaari mong <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} hanapin ang mga talaan na mayroong kaugnayan]</span>.',
 	'wikibase-item-summary-wbsetitem' => 'Nilikha ang isang bagong bagay',
 	'wikibase-item-summary-wbsetlabel-set' => 'Binago ang [$2] katatakan',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Tinanggal ang [$2] katatakan',
@@ -3238,7 +3204,7 @@ $messages['yi'] = array(
 	'wikibase-itemdisambiguation-submit' => 'זוכן',
 );
 
-/** Simplified Chinese (‪中文（简体）‬)
+/** Simplified Chinese (中文（简体）‎)
  * @author Dimension
  * @author Linforest
  * @author Shirayuki

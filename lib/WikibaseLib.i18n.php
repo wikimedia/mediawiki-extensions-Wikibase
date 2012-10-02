@@ -24,10 +24,12 @@ $messages['en'] = array(
 	'datatypes-type-wikibase-item' => 'Item',
 );
 
-/** Message documentation (Message documentation) */
+/** Message documentation (Message documentation)
+ * @author Waldir
+ */
 $messages['qqq'] = array(
 	'wikibaselib-desc' => '{{desc}}',
-	'wikibaselib-entity-item' => 'How we refer to entities of type item. See also Wikidatas glossary on [[m:Wikidata/Glossary#item|item]].',
+	'wikibaselib-entity-item' => "How we refer to entities of type item. See also Wikidata's glossary on [[m:Wikidata/Glossary#item|item]].",
 	'wikibaselib-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
 	'wikibaselib-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
 	'datatypes-type-wikibase-item' => 'The name of a data type',
@@ -187,7 +189,7 @@ $messages['ms'] = array(
 	'wikibaselib-desc' => 'Memegang kefungsian sepunya untuk sambungan Wikibase dan Wikibase Client',
 );
 
-/** Norwegian Bokmål (‪norsk (bokmål)‬)
+/** Norwegian Bokmål (norsk (bokmål)‎)
  * @author Jeblad
  */
 $messages['nb'] = array(
@@ -201,7 +203,7 @@ $messages['nl'] = array(
 	'wikibaselib-desc' => 'Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client',
 );
 
-/** Norwegian Nynorsk (‪norsk (nynorsk)‬)
+/** Norwegian Nynorsk (norsk (nynorsk)‎)
  * @author Jeblad
  */
 $messages['nn'] = array(
@@ -225,6 +227,16 @@ $messages['pl'] = array(
  */
 $messages['pms'] = array(
 	'wikibaselib-desc' => "A conten dle funsionalità comun-e a j'estension Wikibase e Wikibase Client",
+);
+
+/** Portuguese (português)
+ * @author Waldir
+ */
+$messages['pt'] = array(
+	'wikibaselib-desc' => 'Contém funcionalidades comuns para as extensões Wikibase e Wikibase Client',
+	'wikibaselib-entity-item' => 'elemento',
+	'wikibaselib-entity-property' => 'propriedade',
+	'wikibaselib-entity-query' => 'consulta',
 );
 
 /** Brazilian Portuguese (português do Brasil)
