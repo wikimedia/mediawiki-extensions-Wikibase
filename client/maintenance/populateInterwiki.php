@@ -44,7 +44,11 @@ TEXT;
 		$force = $this->getOption( 'force', false );
 		$this->source = $this->getOption( 'source', 'https://en.wikipedia.org/w/api.php' );
 		$data = $this->fetchLinks();
-		$this->doPopulate( $data, $force );
+		if ( $data === false ) {
+			$this->error( "Error during fetching data." );
+		} else {
+			$this->doPopulate( $data, $force );
+		}
 	}
 
 	protected function fetchLinks() {
@@ -71,7 +75,11 @@ TEXT;
 		$json = Http::get( $url );
 		$data = FormatJson::decode( $json, true );
 
-		return $data['query']['interwikimap'];
+		if ( $data ) {
+			return $data['query']['interwikimap'];
+		} else {
+			return false;
+		}
 	}
 
 	protected function doPopulate( $data, $force ) {
