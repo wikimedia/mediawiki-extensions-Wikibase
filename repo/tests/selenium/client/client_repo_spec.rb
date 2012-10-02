@@ -16,6 +16,7 @@ item_description = "It's the capital of Italy!"
 item_sitelink_en = [["en", "Rome"]]
 item_sitelinks = [["de", "Rom"], ["it", "Roma"], ["fi", "Rooma"], ["hu", "Róma"]]
 item_sitelinks_additional = [["fr", "Rome"]]
+item_id = 0
 
 describe "Check functionality of client-repo connection" do
   before :all do
@@ -24,7 +25,7 @@ describe "Check functionality of client-repo connection" do
       page.create_article(article_title_a, article_text_a, true)
     end
     visit_page(CreateItemPage) do |page|
-      page.create_new_item(article_title_a, item_description)
+      item_id = page.create_new_item(article_title_a, item_description)
       page.add_sitelinks(item_sitelink_en)
     end
   end
@@ -185,6 +186,42 @@ describe "Check functionality of client-repo connection" do
     end
   end
 
+  context "client-repo deleting/restoring item" do
+    it "should delete item & that no sitelinks are shown on client" do
+      visit_page(LoginPage) do |page|
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+      end
+      on_page(DeleteItemPage) do |page|
+        page.delete_item
+      end
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title_a)
+        page.interwiki_xxx?.should be_false
+      end
+    end
+    it "should undelete item & check that sitelinks are shown again on client" do
+      visit_page(LoginPage) do |page|
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+      end
+      on_page(UndeleteItemPage) do |page|
+        page.undelete_item(item_id)
+      end
+=begin
+      # not implemented yet! undeleting an item is not propagated to the client
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title_a)
+        page.count_interwiki_links.should == 5
+        page.interwiki_de?.should be_true
+        page.interwiki_it?.should be_true
+        page.interwiki_fi?.should be_true
+        page.interwiki_hu?.should be_true
+        page.interwiki_fr?.should be_true
+        page.interwiki_en?.should be_false
+      end
+=end
+    end
+  end
+
   context "client-repo removing the sitelinks from the repo and checking that they're gone on the client" do
     it "should remove all sitelinks" do
       on_page(ItemPage) do |page|
@@ -203,7 +240,11 @@ describe "Check functionality of client-repo connection" do
       end
     end
   end
+
   after :all do
-    # tear down
+    # tear down: logout
+    visit_page(LoginPage) do |page|
+      page.logout_user
+    end
   end
 end
