@@ -106,12 +106,7 @@ class PropertyObject extends EntityObject implements Property {
 	public function toArray() {
 		$data = parent::toArray();
 
-		if ( is_null( $this->dataType ) ) {
-			if ( array_key_exists( 'datatype', $data ) ) {
-				unset( $data['datatype'] );
-			}
-		}
-		else {
+		if ( $this->dataType !== null ) {
 			$data['datatype'] = $this->dataType->getId();
 		}
 
