@@ -127,9 +127,43 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @since 0.1
 	 *
+	 * @param boolean $withPrefix Optionally include prefix, such as 'wikibase-'
+	 *
 	 * @return string
 	 */
-	public function getType() {
+	public function getType( $withPrefix = true ) {
+		$changeType = $this->getChangeType();
+		if ( $changeType === 'change' ) {
+			return $changeType;
+		}
+
+		return $this->getEntityType( $withPrefix ) . '~' . $changeType;
+	}
+
+	/**
+	 * @see Change::getEntityType
+	 *
+	 * @since 0.2
+	 *
+	 * @param boolean $withPrefix Optionally include prefix, such as 'wikibase-'
+	 *
+	 * @return string
+	 */
+	public function getEntityType( $withPrefix = true ) {
+		if ( $withPrefix ) {
+			return 'wikibase-' . $this->getEntity()->getType();
+		}
+		return $this->getEntity()->getType();
+	}
+
+	/**
+	 * @see Change::getChangeType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getChangeType() {
 		return 'change';
 	}
 

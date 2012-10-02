@@ -79,14 +79,14 @@ class EntityRefresh extends DiffChange {
 	}
 
 	/**
-	 * @see Change::getType
+	 * @see Change::getChangeType
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @return string
 	 */
-	public function getType() {
-		return 'wikibase-' . $this->getEntity()->getType() . '~refresh';
+	public function getChangeType() {
+		return 'refresh';
 	}
 
 	/**
