@@ -1,0 +1,8 @@
+Change-Id: Ie596ceb6c3026f5ccfa4633b69c447b21f0a6ecf
+Code-Review+2: Anja Jentzsch <anja.jentzsch@wikimedia.de>
+Verified+1: Anja Jentzsch <anja.jentzsch@wikimedia.de>
+Submitted-by: Anja Jentzsch <anja.jentzsch@wikimedia.de>
+Submitted-at: Tue, 02 Oct 2012 09:15:57 +0000
+Reviewed-on: https://gerrit.wikimedia.org/r/26008
+Project: mediawiki/extensions/Wikibase
+Branch: refs/heads/wikidata-wmfphase1beta
