@@ -35,7 +35,7 @@ use Wikibase\Settings as Settings;
 class ApiPermissionsTest extends ApiModifyItemBase {
 
 	protected $permissions;
-	protected $user;
+	protected $old_user;
 
 	function setUp() {
 		global $wgGroupPermissions, $wgUser;
@@ -43,7 +43,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		parent::setUp();
 
 		$this->permissions = $wgGroupPermissions;
-		$this->user = $wgUser;
+		$this->old_user = $wgUser;
 
 		\TestSites::insertIntoDb();
 
@@ -57,7 +57,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		global $wgUser;
 
 		$wgGroupPermissions = $this->permissions;
-		$wgUser = $this->user;
+		$wgUser = $this->old_user;
 
 		# reset rights cache
 		$wgUser->addGroup( "dummy" );
@@ -99,13 +99,25 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		}
 	}
 
-	function provideEditPermissions() {
+	function provideReadPermissions() {
 		return array(
 			array( #0
 				null, # normal permissions
 				null # no error
 			),
 
+			array( #1
+				array( # permissions
+					'*'    => array( 'read' => false ),
+					'user' => array( 'read' => false )
+				),
+				'readapidenied' # error
+			),
+		);
+	}
+
+	function provideEditPermissions() {
+		return array_merge( $this->provideReadPermissions(), array(
 			array( #2
 				array( # permissions
 					'*'    => array( 'edit' => false ),
@@ -129,13 +141,30 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 				),
 				'readapidenied' # error
 			),
+		) );
+	}
+
+
+	function provideGetItemsPermissions() {
+		$permissions = $this->provideReadPermissions();
+		return $permissions;
+	}
+
+	/**
+	 * @dataProvider provideGetItemsPermissions
+	 */
+	function testGetItems( $permissions, $expectedError ) {
+		$params = array(
+			'ids' => $this->getItemId( "Oslo" ),
 		);
+
+		$this->doPermissionsTest( 'wbgetitems', $params, $permissions, $expectedError );
 	}
 
 	function provideAddItemPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #4
+		$permissions[] = array( #5
 			array( # permissions
 				'*'    => array( 'createpage' => false ),
 				'user' => array( 'createpage' => false )
@@ -144,7 +173,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		);
 
 
-		$permissions[] = array( #5
+		$permissions[] = array( #6
 			array( # permissions
 				'*'    => array( 'item-create' => false ),
 				'user' => array( 'item-create' => false )
@@ -175,7 +204,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideSetSiteLinkPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #4
+		$permissions[] = array( #5
 			array( # permissions
 				'*'    => array( 'sitelink-update' => false ),
 				'user' => array( 'sitelink-update' => false )
@@ -209,7 +238,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideSetLabelPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #4
+		$permissions[] = array( #5
 			array( # permissions
 				'*'    => array( 'label-update' => false ),
 				'user' => array( 'label-update' => false )
@@ -236,7 +265,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideSetDescriptionPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #4
+		$permissions[] = array( #5
 			array( # permissions
 				'*'    => array( 'description-update' => false ),
 				'user' => array( 'description-update' => false )
