@@ -61,6 +61,7 @@ $messages['de'] = array(
 	'wikibaselib-entity-item' => 'Datenelement',
 	'wikibaselib-entity-property' => 'Attribut',
 	'wikibaselib-entity-query' => 'Abfrage',
+	'datatypes-type-wikibase-item' => 'Datenelement',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -81,6 +82,7 @@ $messages['es'] = array(
 	'wikibaselib-entity-item' => 'elemento',
 	'wikibaselib-entity-property' => 'propiedad',
 	'wikibaselib-entity-query' => 'consulta',
+	'datatypes-type-wikibase-item' => 'Elemento',
 );
 
 /** Persian (فارسی)
@@ -122,6 +124,7 @@ $messages['hsb'] = array(
 	'wikibaselib-entity-item' => 'element',
 	'wikibaselib-entity-property' => 'kajkosć',
 	'wikibaselib-entity-query' => 'naprašowanje',
+	'datatypes-type-wikibase-item' => 'Element',
 );
 
 /** Interlingua (interlingua)
@@ -180,6 +183,7 @@ $messages['mk'] = array(
 	'wikibaselib-entity-item' => 'предмет',
 	'wikibaselib-entity-property' => 'својство',
 	'wikibaselib-entity-query' => 'барање',
+	'datatypes-type-wikibase-item' => 'Предмет',
 );
 
 /** Malay (Bahasa Melayu)
