@@ -169,9 +169,7 @@ abstract class EntityHandler extends \ContentHandler {
 	}
 
 	/**
-	 * Get the item with the provided id if it's available to the specified audience.
-	 * If the specified audience does not have the ability to view this
-	 * revision, if there is no such item, null will be returned.
+	 * Get the item with the provided id, or null if there is no such item.
 	 *
 	 * TODO: refactor to work for all entities
 	 *
@@ -179,19 +177,12 @@ abstract class EntityHandler extends \ContentHandler {
 	 *
 	 * @param integer $entityId
 	 *
-	 * @param $audience Integer: one of:
-	 *      Revision::FOR_PUBLIC       to be displayed to all users
-	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
-	 *      Revision::RAW              get the text regardless of permissions
-
-	 *
 	 * @return ItemContent|null
 	 */
-
-	public function getFromId( $entityId, $audience = \Revision::FOR_PUBLIC ) {
+	public function getFromId( $entityId ) {
 		// TODO: since we already did the trouble of getting a WikiPage here,
 		// we probably want to keep a copy of it in the Content object.
-		return $this->getWikiPageForId( $entityId )->getContent( $audience );
+		return $this->getWikiPageForId( $entityId )->getContent();
 	}
 
 	/**
