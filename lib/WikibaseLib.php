@@ -188,6 +188,10 @@ foreach ( array(
 }
 
 
+$wgDataTypes['wikibase-item'] = array(
+	'datavalue' => 'number',
+);
+
 
 // Hooks
 $wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';

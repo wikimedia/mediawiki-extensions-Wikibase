@@ -21,6 +21,7 @@ $messages['en'] = array(
 	'wikibaselib-entity-item' => 'item',
 	'wikibaselib-entity-property' => 'property',
 	'wikibaselib-entity-query' => 'query',
+	'datatypes-type-wikibase-item' => 'Item',
 );
 
 /** Message documentation (Message documentation) */
@@ -29,6 +30,7 @@ $messages['qqq'] = array(
 	'wikibaselib-entity-item' => 'How we refer to entities of type item. See also Wikidatas glossary on [[m:Wikidata/Glossary#item|item]].',
 	'wikibaselib-entity-property' => 'How we refer to entities of type property. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
 	'wikibaselib-entity-query' => 'How we refer to entities of type query. See also Wikidatas glossary on [[m:Wikidata/Glossary#entity|entity]].',
+	'datatypes-type-wikibase-item' => 'The name of a data type',
 );
 
 /** Asturian (asturianu)
