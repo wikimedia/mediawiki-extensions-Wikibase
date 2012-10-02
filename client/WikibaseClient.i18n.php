@@ -42,7 +42,7 @@ $messages['ast'] = array(
 	'wbc-editlinkstitle' => "Editar los enllaces d'interllingua",
 );
 
-/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
@@ -219,7 +219,7 @@ $messages['ksh'] = array(
 	'wbc-editlinkstitle' => 'Donn de Lenks zwesche der Schprooche aanbränge udder aanpaße',
 );
 
-/** Kurdish (Latin script) (‪Kurdî (latînî)‬)
+/** Kurdish (Latin script) (Kurdî (latînî)‎)
  * @author George Animal
  */
 $messages['ku-latn'] = array(
@@ -242,7 +242,7 @@ $messages['mk'] = array(
 	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
 );
 
-/** Norwegian Bokmål (‪norsk (bokmål)‬)
+/** Norwegian Bokmål (norsk (bokmål)‎)
  * @author Jeblad
  */
 $messages['nb'] = array(
@@ -260,7 +260,7 @@ $messages['nl'] = array(
 	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
 );
 
-/** Norwegian Nynorsk (‪norsk (nynorsk)‬)
+/** Norwegian Nynorsk (norsk (nynorsk)‎)
  * @author Jeblad
  */
 $messages['nn'] = array(
@@ -316,7 +316,7 @@ $messages['ru'] = array(
 	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
 );
 
-/** Serbian (Cyrillic script) (‪српски (ћирилица)‬)
+/** Serbian (Cyrillic script) (српски (ћирилица)‎)
  * @author Nikola Smolenski
  * @author Rancher
  */
@@ -365,7 +365,7 @@ $messages['vi'] = array(
 	'wbc-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
 );
 
-/** Simplified Chinese (‪中文（简体）‬)
+/** Simplified Chinese (中文（简体）‎)
  * @author Linforest
  */
 $messages['zh-hans'] = array(
