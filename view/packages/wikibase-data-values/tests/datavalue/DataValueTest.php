@@ -129,6 +129,7 @@ abstract class DataValueTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Hashable', $value );
 		$this->assertInstanceOf( '\Comparable', $value );
 		$this->assertInstanceOf( '\Serializable', $value );
+		$this->assertInstanceOf( '\Copyable', $value );
 		$this->assertInstanceOf( '\DataValues\DataValue', $value );
 	}
 
@@ -146,6 +147,44 @@ abstract class DataValueTest extends \MediaWikiTestCase {
 
 		$this->assertTrue( $value->equals( $unserialized ) );
 		$this->assertEquals( $value, $unserialized );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testEquals( DataValue $value, array $arguments ) {
+		$this->assertTrue( $value->equals( $value ) );
+
+		foreach ( array( true, false, null, 'foo', 42, array(), 4.2 ) as $otherValue ) {
+			$this->assertFalse( $value->equals( $otherValue ) );
+		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testGetHash( DataValue $value, array $arguments ) {
+		$hash = $value->getHash();
+
+		$this->assertInternalType( 'string', $hash );
+		$this->assertEquals( $hash, $value->getHash() );
+		$this->assertEquals( $hash, $value->getCopy()->getHash() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testGetCopy( DataValue $value, array $arguments ) {
+		$copy = $value->getCopy();
+
+		$this->assertInstanceOf( '\DataValues\DataValue', $copy );
+		$this->assertTrue( $value->equals( $copy ) );
 	}
 
 }
