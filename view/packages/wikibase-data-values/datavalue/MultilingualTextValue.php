@@ -38,29 +38,34 @@ class MultilingualTextValue extends DataValueObject {
 	 *
 	 * @var array
 	 */
-	protected $texts;
+	protected $texts = array();
 
 	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $texts
+	 * @param $monolingualValues array of MonolingualTextValue
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $texts ) {
-		foreach ( $texts as $languageCode => $text ) {
-			if ( !is_string( $languageCode ) ) {
-				throw new InvalidArgumentException( 'Can only construct MultilingualTextValue from string language codes' );
+	public function __construct( array $monolingualValues ) {
+		/**
+		 * @var MonolingualTextValue $monolingualValue
+		 */
+		foreach ( $monolingualValues as $monolingualValue ) {
+			if ( !( $monolingualValue instanceof MonolingualTextValue ) ) {
+				throw new InvalidArgumentException( 'Can only construct MultilingualTextValue from MonolingualTextValue objects' );
 			}
 
-			if ( !is_string( $text ) ) {
-				throw new InvalidArgumentException( 'Can only construct MultilingualTextValue from string text values' );
+			$langCode = $monolingualValue->getLanguageCode();
+
+			if ( array_key_exists( $langCode, $this->texts ) ) {
+				throw new InvalidArgumentException( 'Can only add a single MonolingualTextValue per language to a MultilingualTextValue' );
 			}
+
+			$this->texts[$langCode] = $monolingualValue;
 		}
-
-		$this->texts = $texts;
 	}
 
 	/**
@@ -106,19 +111,7 @@ class MultilingualTextValue extends DataValueObject {
 	 * @return string|float|int
 	 */
 	public function getSortKey() {
-		return empty( $this->texts ) ? '' : reset( $this->texts );
-	}
-
-	/**
-	 * Returns the texts in an associative array with language codes pointing to their associated texts.
-	 * This is the same format as the one that can be fed to the constructor.
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function getTexts() {
-		return $this->texts;
+		return empty( $this->texts ) ? '' : reset( $this->texts )->getSortKey();
 	}
 
 	/**
@@ -128,14 +121,8 @@ class MultilingualTextValue extends DataValueObject {
 	 *
 	 * @return array of MonolingualTextValue
 	 */
-	public function getMonolingualTextValues() {
-		$values = array();
-
-		foreach ( $this->texts as $languageCode => $text ) {
-			$values[] = new MonolingualTextValue( $languageCode, $text );
-		}
-
-		return $values;
+	public function getTexts() {
+		return $this->texts;
 	}
 
 	/**

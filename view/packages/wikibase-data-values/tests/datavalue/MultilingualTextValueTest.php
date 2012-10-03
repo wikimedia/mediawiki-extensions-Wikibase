@@ -70,12 +70,16 @@ class MultilingualTextTest extends DataValueTest {
 		$argLists[] = array( false, '', 'foo' );
 		$argLists[] = array( false, 'en', 'foo' );
 		$argLists[] = array( false, 'en', ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' );
+		$argLists[] = array( false, new MonolingualTextValue( 'en', 'foo' ) );
 
 		$argLists[] = array( true, array() );
-		$argLists[] = array( true, array( 'en' => 'foo' ) );
-		$argLists[] = array( true, array( 'en' => 'foo', 'de' => 'foo' ) );
-		$argLists[] = array( true, array( 'en' => 'foo', 'de' => 'bar' ) );
-		$argLists[] = array( true, array( 'en' => 'foo', 'de' => ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' ) );
+		$argLists[] = array( true, array( new MonolingualTextValue( 'en', 'foo' ) ) );
+		$argLists[] = array( true, array( new MonolingualTextValue( 'en', 'foo' ), new MonolingualTextValue( 'de', 'foo' ) ) );
+		$argLists[] = array( true, array( new MonolingualTextValue( 'en', 'foo' ), new MonolingualTextValue( 'de', 'bar' ) ) );
+		$argLists[] = array( true, array(
+			new MonolingualTextValue( 'en', 'foo' ),
+			new MonolingualTextValue( 'de', ' foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz ' )
+		) );
 
 		$argLists[] = array( false, array( 'foo' ) );
 		$argLists[] = array( false, array( 42 => 'foo' ) );
@@ -85,6 +89,9 @@ class MultilingualTextTest extends DataValueTest {
 		$argLists[] = array( false, array( 'en' => true ) );
 		$argLists[] = array( false, array( 'en' => array() ) );
 		$argLists[] = array( false, array( 'en' => 4.2 ) );
+
+		$argLists[] = array( false, array( new MonolingualTextValue( 'en', 'foo' ), false ) );
+		$argLists[] = array( false, array( new MonolingualTextValue( 'en', 'foo' ), 'foobar' ) );
 
 		return $argLists;
 	}
@@ -96,18 +103,6 @@ class MultilingualTextTest extends DataValueTest {
 	 */
 	public function testGetTexts( MultilingualTextValue $texts, array $arguments ) {
 		$actual = $texts->getTexts();
-		$this->assertInternalType( 'array', $actual );
-		$this->assertArrayEquals( $arguments[0], $actual, false, true );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 * @param \DataValues\MultilingualTextValue $texts
-	 * @param array $arguments
-	 */
-	public function testGetMonolingualTextValues( MultilingualTextValue $texts, array $arguments ) {
-		$actual = $texts->getMonolingualTextValues();
-		$monolingualValues = array();
 
 		$this->assertInternalType( 'array', $actual );
 
@@ -116,10 +111,9 @@ class MultilingualTextTest extends DataValueTest {
 		 */
 		foreach ( $actual as $monolingualValue ) {
 			$this->assertInstanceOf( '\DataValues\MonolingualTextValue', $monolingualValue );
-			$monolingualValues[$monolingualValue->getLanguageCode()] = $monolingualValue->getValue();
 		}
 
-		$this->assertArrayEquals( $arguments[0], $monolingualValues, false, true );
+		$this->assertArrayEquals( $arguments[0], $actual );
 	}
 
 	/**
