@@ -107,6 +107,7 @@ $messages['gl'] = array(
 	'wikibaselib-entity-item' => 'elemento',
 	'wikibaselib-entity-property' => 'propiedade',
 	'wikibaselib-entity-query' => 'pescuda',
+	'datatypes-type-wikibase-item' => 'Elemento',
 );
 
 /** Hebrew (עברית)
@@ -159,6 +160,7 @@ $messages['ja'] = array(
 	'wikibaselib-entity-item' => '項目',
 	'wikibaselib-entity-property' => 'プロパティ',
 	'wikibaselib-entity-query' => 'クエリ',
+	'datatypes-type-wikibase-item' => '項目',
 );
 
 /** Korean (한국어)
@@ -166,6 +168,10 @@ $messages['ja'] = array(
  */
 $messages['ko'] = array(
 	'wikibaselib-desc' => '위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 함수 취득',
+	'wikibaselib-entity-item' => '항목',
+	'wikibaselib-entity-property' => '속성',
+	'wikibaselib-entity-query' => '쿼리',
+	'datatypes-type-wikibase-item' => '항목',
 );
 
 /** Colognian (Ripoarisch)
