@@ -79,7 +79,7 @@ class StatementObject implements Statement {
 	 * @param Claim $claim
 	 * @param References|null $references
 	 */
-	protected function __construct( Claim $claim, References $references = null ) {
+	public function __construct( Claim $claim, References $references = null ) {
 		$this->claim = $claim;
 		$this->references = $references === null ? new ReferenceList() : $references;
 	}
