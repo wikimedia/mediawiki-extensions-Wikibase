@@ -42,7 +42,7 @@ class PropertyView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForDataType( EntityContent $property, Language $lang = null, $editable = true ) {
-		$info = $this->extractEntityInfo( $property );
+		$info = $this->extractEntityInfo( $property, $lang );
 
 		// todo: use the right stuff to have a string giving information about the property's data type
 		//$datatype = $property->getEntity()->getDatatype( $info['lang']->getCode() );

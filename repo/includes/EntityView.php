@@ -67,7 +67,7 @@ abstract class EntityView extends \ContextSource {
 	 */
 	public function getHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
-		$info = $this->extractEntityInfo( $entity );
+		$info = $this->extractEntityInfo( $entity, $lang );
 		$entityType = static::VIEW_TYPE;
 		$entityId = $entity->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
@@ -194,7 +194,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$info = $this->extractEntityInfo( $entity );
+		$info = $this->extractEntityInfo( $entity, $lang );
 
 		// add an h1 for displaying the entity's label; the actual firstHeading is being hidden by
 		// css since the original MediaWiki DOM does not represent a Wikidata entity's structure
@@ -234,7 +234,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForDescription( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$info = $this->extractEntityInfo( $entity );
+		$info = $this->extractEntityInfo( $entity, $lang );
 		$description = $entity->getEntity()->getDescription( $info['lang']->getCode() );
 
 		$html = Html::openElement( 'div',
@@ -273,7 +273,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$info = $this->extractEntityInfo( $entity );
+		$info = $this->extractEntityInfo( $entity, $lang );
 		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
 		$html = '';
 
@@ -281,7 +281,7 @@ abstract class EntityView extends \ContextSource {
 			// no aliases available for this entity
 			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases-empty' ) );
 			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-empty-note' ), wfMessage( 'wikibase-aliases-empty' )->text() );
-			$html .= $this->getHtmlForEditSection( $entity, $lang ); // TODO: link should say 'add' instead of 'edit' in this case
+			$html .= $this->getHtmlForEditSection( $entity, $lang, 'span', 'add' );
 			$html .= Html::closeElement( 'div' );
 		} else {
 			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
@@ -310,10 +310,11 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param EntityContent $entity
 	 * @param Language|null $lang
-	 * @param String $tag
+	 * @param String $tag allows to specify the type of the outer node
+	 * @param String $action by default 'edit', for aliases this could also be 'add'
 	 * @return String
 	 */
-	public function getHtmlForEditSection( EntityContent $entity, Language $lang = null, $tag = 'span' ) {
+	public function getHtmlForEditSection( EntityContent $entity, Language $lang = null, $tag = 'span', $action = 'edit' ) {
 		$html = HTML::openElement( $tag, array( 'class' => 'editsection' ) );
 		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar' ) );
 		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar-group' ) );
@@ -322,7 +323,7 @@ abstract class EntityView extends \ContextSource {
 		$html .= '[' . HTML::element(
 			'a',
 			array( 'href' => '', 'class' => 'wb-ui-toolbar-button' ),
-			wfMessage( 'wikibase-edit' )->text()
+			wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text()
 		) . ']';
 
 		$html .= Html::closeElement( 'div' );
