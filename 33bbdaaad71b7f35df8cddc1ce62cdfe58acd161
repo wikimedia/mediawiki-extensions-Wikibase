@@ -53,6 +53,23 @@
     },
     {
       "key": {
+        "uuid": "AAAAXn////U\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-04T07:39:29Z",
+      "side": 1,
+      "message": "attemptSave now requires the token parameter. so this will give an PHP error.",
+      "revId": "33bbdaaad71b7f35df8cddc1ce62cdfe58acd161",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAATn///Ms\u003d",
         "filename": "repo/includes/specials/SpecialSetLabel.php",
         "patchSetId": 2
