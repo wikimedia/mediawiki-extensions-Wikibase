@@ -28,7 +28,6 @@
 		},
 		teardown: function() {
 			var self = this;
-			var values = this.subject.getValues();
 			this.subject.destroy();
 
 			// basic check whether initial structure was restored
@@ -43,7 +42,7 @@
 			);
 
 			QUnit.assert.equal(
-				this.initialStructureMembers.length + values.length,
+				this.initialStructureMembers.length + this.subject.getValues().length,
 				self.subject.getSubject().children().length,
 				'No additional DOM nodes left (except those of inserted values)'
 			);
