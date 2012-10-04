@@ -20,7 +20,7 @@ item_id_b = 0
 describe "Check undelete" do
   before :all do
     # set up: create item + aliases & sitelinks, login as admin and delete item
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
     visit_page(CreateItemPage) do |page|
@@ -30,7 +30,7 @@ describe "Check undelete" do
       page.add_aliases([alias_a])
       page.add_sitelinks(sitelinks)
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
     end
     on_page(DeleteItemPage) do |page|
@@ -40,7 +40,7 @@ describe "Check undelete" do
 
   context "undelete the item" do
     it "should login as admin and undelete the item" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       on_page(UndeleteItemPage) do |page|
@@ -60,7 +60,7 @@ describe "Check undelete" do
 
   context "delete the item again" do
     it "should login as admin and delete the item" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       on_page(DeleteItemPage) do |page|
@@ -71,7 +71,7 @@ describe "Check undelete" do
 
   context "create a second item with same sitelinks as our first item" do
     it "should create item and add sitelinks" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.logout_user
       end
       visit_page(CreateItemPage) do |page|
@@ -86,7 +86,7 @@ describe "Check undelete" do
 
   context "trying to undelete first item" do
     it "should login as admin and try to undelete the first item" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       on_page(UndeleteItemPage) do |page|
@@ -111,7 +111,7 @@ describe "Check undelete" do
       page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end

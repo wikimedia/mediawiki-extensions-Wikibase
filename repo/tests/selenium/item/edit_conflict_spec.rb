@@ -20,7 +20,7 @@ old_revid = 0
 describe "Check edit-conflicts" do
   before :all do
     # set up: logout, create item as anonymous user
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
     visit_page(CreateItemPage) do |page|
@@ -30,7 +30,7 @@ describe "Check edit-conflicts" do
 
   context "check behaviour on edit conflicts" do
     it "should login as user 1, change description and save revid" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
       end
       on_page(ItemPage) do |page|
@@ -49,7 +49,7 @@ describe "Check edit-conflicts" do
     end
 
     it "should login as user 2 (anon), change and description" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.logout_user
       end
       on_page(ItemPage) do |page|
@@ -67,7 +67,7 @@ describe "Check edit-conflicts" do
     end
 
     it "should login as user 1 again & inject old revid" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
       end
       on_page(ItemPage) do |page|
@@ -190,7 +190,7 @@ describe "Check edit-conflicts" do
       page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end

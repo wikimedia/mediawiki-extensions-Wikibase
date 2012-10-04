@@ -12,7 +12,7 @@ require 'spec_helper'
 describe "Check functionality of blocking a user" do
   before :all do
     # setup: create an item and block the user
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
     end
     visit_page(CreateItemPage) do |page|
@@ -25,7 +25,7 @@ describe "Check functionality of blocking a user" do
 
   context "check functionality of blocking a user" do
     it "should login as blocked user and check if he cannot edit label/description" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       on_page(ItemPage) do |page|
@@ -50,7 +50,7 @@ describe "Check functionality of blocking a user" do
 
   context "check functionality of blocking a user" do
     it "should login as blocked user and check if he cannot add aliases" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       on_page(ItemPage) do |page|
@@ -69,7 +69,7 @@ describe "Check functionality of blocking a user" do
 
   context "check functionality of blocking a user" do
     it "should login as blocked user and check he is blocked from item creation" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       visit_page(CreateItemPage) do |page|
@@ -82,13 +82,13 @@ describe "Check functionality of blocking a user" do
   end
   after :all do
     # tear down: unblock the user and logout
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
     end
     visit_page(UnblockUserPage) do |page|
       page.unblock_user(WIKI_BLOCKED_USERNAME)
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end

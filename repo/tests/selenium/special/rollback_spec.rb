@@ -17,7 +17,7 @@ changed = "_changed"
 describe "Check revert/rollback" do
   before :all do
     # set up: create item, enter label, description and aliases & make some changes to item as another user
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
     visit_page(CreateItemPage) do |page|
@@ -27,7 +27,7 @@ describe "Check revert/rollback" do
       page.add_aliases([alias_a])
       page.add_sitelinks(sitelinks)
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
     end
     on_page(ItemPage) do |page|
@@ -49,14 +49,14 @@ describe "Check revert/rollback" do
       ajax_wait
       page.wait_for_api_callback
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end
 
   context "rollback functionality test" do
     it "should login as admin and rollback changes by last user" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       on_page(ItemPage) do |page|
@@ -78,7 +78,7 @@ describe "Check revert/rollback" do
         page.get_nth_alias(1).text.should == alias_a
         page.englishSitelink_element.text.should == sitelinks[0][1]
       end
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.logout_user
       end
     end
@@ -92,7 +92,7 @@ describe "Check revert/rollback" do
       page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end

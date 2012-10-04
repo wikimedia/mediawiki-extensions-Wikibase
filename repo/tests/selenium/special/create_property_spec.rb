@@ -83,13 +83,13 @@ describe "Check NewProperty special page" do
       on_page(NewPropertyPage) do |page|
         page.uls_switch_language("English")
       end
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       visit_page(BlockUserPage) do |page|
         page.block_user(WIKI_BLOCKED_USERNAME, "1 hour")
       end
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       visit_page(NewPropertyPage) do |page|
@@ -103,13 +103,13 @@ describe "Check NewProperty special page" do
 
   after :all do
     # teardown: unblock user, logout
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
     end
     visit_page(UnblockUserPage) do |page|
       page.unblock_user(WIKI_BLOCKED_USERNAME)
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end
