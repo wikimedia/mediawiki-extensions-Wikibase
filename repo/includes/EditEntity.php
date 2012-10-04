@@ -452,19 +452,22 @@ class EditEntity {
 	/**
 	 * Attempts to save the new entity content, chile first checking for permissions, edit conflicts, etc.
 	 *
-	 * @param String $summary    the edit summary
-	 * @param int    $flags      the edit flags (see WikiPage::toEditContent)
-	 * @param String|null|false  $token Edit token to check, or false to disable the token check. Null per default.
+	 * @param String $summary    The edit summary
+	 * @param int    $flags      The edit flags (see WikiPage::toEditContent)
+	 * @param String|bool $token Edit token to check, or false to disable the token check.
 	 *                           Null will fail the token text, as will the empty string.
 	 *
 	 * @return Status Indicates success and provides detailed warnings or error messages.
 	 * @see      WikiPage::toEditContent
 	 */
-	public function attemptSave( $summary, $flags = 0, $token = null ) {
+	public function attemptSave( $summary, $flags, $token ) {
 		$this->status = Status::newGood();
 		$this->errorType = 0;
 
 		if ( $token !== false && !$this->isTokenOK( $token ) ) {
+			//@todo: This is redundant to the error code set in isTokenOK().
+			//       We should figure out which error codes the callers expect,
+			//       and only set the correct error code, in one place, probably here.
 			$this->status->fatal( 'session-failure' );
 			$this->errorType |= self::TOKEN_ERROR;
 			return $this->status;
