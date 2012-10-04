@@ -97,6 +97,25 @@ wb.ui.PropertyEditTool.EditableAliases = wb.utilities.inherit( $PARENT, {
 	},
 
 	/**
+	 * Removes injected nodes in addition to parent's destroy routine.
+	 *
+	 * @see wikibase.ui.PropertyEditTool.EditableValue._destroy
+	 */
+	_destroy: function() {
+		var originalSubject = this._subject.find( 'ul:first' );
+
+		// div injected in this._buildInterfaces()
+		this._subject.find( 'ul:first' ).parent().replaceWith( this._subject.find( 'ul:first' ) );
+
+		// span injected in this._init()
+		this._subject.replaceWith( this._subject.children() );
+
+		this._subject = originalSubject;
+
+		$PARENT.prototype._destroy.call( this );
+	},
+
+	/**
 	 * Sets a value
 	 * @see wikibase.ui.PropertyEditTool.EditableValue
 	 *

@@ -78,9 +78,10 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 	 */
 	_buildInputElement: function() {
 		// nodes will be removed and replaced with genereated input interface, so we clone them for initialization:
-		var inputElement = this._subject.children( 'ul:first' ).clone()
-			.addClass( this.UI_CLASS )
-			.addClass( 'wb-ui-propertyedittool-editablevaluelistinterface' ); // additional UI class
+		var inputElement = this._subject.children( 'ul:first' ).clone();
+
+		// additional UI class
+		this._subject.addClass( 'wb-ui-propertyedittool-editablevaluelistinterface' );
 
 		var self = this;
 

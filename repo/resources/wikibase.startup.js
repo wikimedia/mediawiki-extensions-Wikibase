@@ -22,7 +22,10 @@
 	'use strict';
 
 	$( document ).ready( function() {
+		// remove HTML edit links with links to special pages
+		// for site-links we don't want to remove the table cell representing the edit section
 		$( 'td.editsection' ).empty();
+		// for all other values we remove the whole edit section
 		$( 'span.editsection' ).remove();
 
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
