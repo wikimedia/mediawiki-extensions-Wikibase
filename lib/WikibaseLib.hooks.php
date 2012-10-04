@@ -141,21 +141,23 @@ final class LibHooks {
 			'snak/PropertyValueSnak',
 			'snak/SnakList',
 
+//			'statement/StatementList',
+			'statement/StatementObject',
+
+			'store/SiteLinkLookup',
+
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',
 			'LibHooks',
 			'MapValueHasher',
 			'SiteLink',
-			'StatementObject',
 			'Utils',
 
 			'site/MediaWikiSite',
 			'site/SiteList',
 			'site/SiteObject',
 			'site/Sites',
-
-			'store/SiteLinkLookup',
 		);
 
 		// Test compat
