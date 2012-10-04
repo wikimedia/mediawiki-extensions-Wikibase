@@ -404,35 +404,6 @@ final class Utils {
 	}
 
 	/**
-	 * Returns a list of content model IDs that are used to represent Wikibase entities.
-	 * Configured via $wgWBSettings['entityNamespaces'].
-	 *
-	 * @since 0.1
-	 *
-	 * @return array An array of string content model IDs.
-	 */
-	public static function getEntityContentModels() {
-		$namespaces = Settings::get( 'entityNamespaces' );
-
-		if ( !is_array( $namespaces ) ) {
-			return array();
-		}
-
-		return array_keys( $namespaces );
-	}
-
-	/**
-	 * Returns the type identifiers of the entities.
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
-	 */
-	public static function getEntityTypes() {
-		return array_keys( EntityObject::$typeMap );
-	}
-
-	/**
 	 * Returns the namespace ID for the given entity content model, or false if the content model
 	 * is not a known entity model.
 	 *
@@ -464,20 +435,6 @@ final class Utils {
 	}
 
 	/**
-	 * Determines whether the given content model is designated to hold some kind of Wikibase entity.
-	 * Shorthand for in_array( $ns, self::getEntityModels() );
-	 *
-	 * @since 0.1
-	 *
-	 * @param String $model the content model ID
-	 *
-	 * @return bool True iff $model is an entity content model
-	 */
-	public static function isEntityContentModel( $model ) {
-		return in_array( $model, self::getEntityContentModels() );
-	}
-
-	/**
 	 * Determines whether the given namespace is a core namespace, i.e. a namespace pre-defined by MediaWiki core.
 	 *
 	 * The present implementation just checks whether the namespace ID is smaller than 100, relying on the
@@ -491,19 +448,6 @@ final class Utils {
 	 */
 	public static function isCoreNamespace( $ns ) {
 		return $ns < 100;
-	}
-
-	/**
-	 * Returns if the provided string is a valid entity type identifier.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $type
-	 *
-	 * @return boolean
-	 */
-	public static function isEntityType( $type ) {
-		return in_array( $type, self::getEntityTypes() );
 	}
 
 }

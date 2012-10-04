@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User;
+use ApiBase, User, Status;
 
 /**
  * Derived class for API modules modifying a single item identified by id xor a combination of site and page title.
@@ -87,7 +87,7 @@ class ApiSetItem extends ApiModifyEntity {
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
-		$status = \Status::newGood();
+		$status = Status::newGood();
 		if ( isset( $params['data'] ) ) {
 			$data = json_decode( $params['data'], true );
 			if ( is_null( $data ) ) {
@@ -424,11 +424,9 @@ class ApiSetItem extends ApiModifyEntity {
 	 * @param &$languages array: The valid language codes as an assoc array
 	 *
 	 * @return Status: The result from the comparison (always true)
-	 *
-	 * @throws UsageException
 	 */
 	public function checkMultilangArgs( $arg, $langCode, &$languages = null ) {
-		$status = \Status::newGood();
+		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
 		}
@@ -457,11 +455,9 @@ class ApiSetItem extends ApiModifyEntity {
 	 * @param &$sites array: The valid site codes as an assoc array
 	 *
 	 * @return Status: Always a good status
-	 *
-	 * @throws UsageException
 	 */
 	public function checkSiteLinks( $arg, $siteCode, &$sites = null ) {
-		$status = \Status::newGood();
+		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );
 		}

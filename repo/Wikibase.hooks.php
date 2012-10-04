@@ -121,6 +121,7 @@ final class RepoHooks {
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
 
+			'content/EntityContentFactory',
 			'content/EntityHandler',
 			'content/ItemContent',
 			'content/ItemHandler',
@@ -171,7 +172,7 @@ final class RepoHooks {
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& in_array(
 				$title->getContentModel(),
-				Utils::getEntityContentModels()
+				EntityContentFactory::singleton()->getEntityContentModels()
 			)
 		) {
 			$pageLanguage = $language;
@@ -279,7 +280,7 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
-		if ( Utils::isEntityContentModel( $article->getContent()->getModel() ) ) {
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $article->getContent()->getModel() ) ) {
 			/**
 			 * @var $newEntity Entity
 			 */
@@ -330,7 +331,7 @@ final class RepoHooks {
 		}
 
 		// Bail out if we are not in an entity namespace
-		if ( !in_array( $content->getModel(), Utils::getEntityContentModels() ) ) {
+		if ( !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
 			return true;
 		}
 		$item = $content->getItem();
@@ -465,7 +466,7 @@ final class RepoHooks {
 		$article = $history->getArticle();
 		$rev = new Revision( $row );
 
-		if ( Utils::isEntityContentModel( $history->getTitle()->getContentModel() )
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $history->getTitle()->getContentModel() )
 			&& $article->getPage()->getLatest() !== $rev->getID()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 		) {
@@ -500,7 +501,7 @@ final class RepoHooks {
 		$title = $sktemplate->getTitle();
 		$request = $sktemplate->getRequest();
 
-		if ( Utils::isEntityContentModel( $title->getContentModel() ) ) {
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $title->getContentModel() ) ) {
 			unset( $links['views']['edit'] );
 
 			if ( $title->quickUserCan( 'edit', $sktemplate->getUser() ) ) {
@@ -617,7 +618,7 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
-		if ( Utils::isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
@@ -664,7 +665,7 @@ final class RepoHooks {
 			// we only want to handle links to Wikibase entities differently here
 			|| !in_array(
 				$target->getContentModel(),
-				Utils::getEntityContentModels()
+				EntityContentFactory::singleton()->getEntityContentModels()
 			)
 			// as of MW 1.20 Linker shouldn't support anything but Title anyhow
 			|| ! $target instanceof Title
@@ -784,7 +785,7 @@ final class RepoHooks {
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
 
-			foreach ( Utils::getEntityContentModels() as $model ) {
+			foreach ( EntityContentFactory::singleton()->getEntityContentModels() as $model ) {
 				/**
 				 * @var EntityHandler $handler
 				 */

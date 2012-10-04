@@ -49,38 +49,23 @@ abstract class ApiModifyEntity extends Api {
 	 */
 	protected function findEntity( array $params ) {
 		$entityContent = null;
-		$entityHandler = null;
-
-		// XXX: this is a bit ugly and could be replaced by more generic lookup modules
-		list( $type, ) = explode( '/', $params['type'], 2 );
-		switch ( $type ) {
-			case 'item' :
-				$entityHandler = \Wikibase\ItemHandler::singleton();
-				break;
-			case 'property' :
-				$entityHandler = \Wikibase\PropertyHandler::singleton();
-				break;
-			case 'query' :
-				$entityHandler = \Wikibase\QueryHandler::singleton();
-				break;
-			default:
-				$this->dieUsage( "unknown key: {$type}", 'not-recognized' );
-		}
 
 		// If we have an id try that first
 		if ( isset( $params['id'] ) ) {
-			$entityContent = $entityHandler->getFromId( $params['id'] );
+			$entityContent = EntityContentFactory::singleton()->getFromId( $params['type'], $params['id'] );
 
 			if ( is_null( $entityContent ) ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-id' )->text(), 'no-such-entity-id' );
 			}
 		}
-
 		// Otherwise check if we have a link and try that
 		// note that this will not be run if the subclass doesn't allow the sitelink parameters
 		// or if the validateParameters method rejects it
-		elseif ( $type === 'item' && isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$entityContent = $entityHandler->getFromSiteLink( $params['site'], Utils::squashToNFC( $params['title'] ) );
+		elseif ( $params['type'] === 'item' && isset( $params['site'] ) && isset( $params['title'] ) ) {
+			$entityContent = ItemHandler::singleton()->getFromSiteLink(
+				$params['site'],
+				Utils::squashToNFC( $params['title'] )
+			);
 
 			if ( is_null( $entityContent ) ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-link' )->text(), 'no-such-entity-link' );
