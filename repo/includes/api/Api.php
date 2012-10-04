@@ -20,22 +20,26 @@ abstract class Api extends \ApiBase {
 	/**
 	 * Figure out the overall usekeys-state
 	 *
+	 * @param string $format
+	 *
 	 * @return bool true if the keys should be present
 	 */
 	public static function usekeys( $format ) {
-		static $withkeys = false;
-		if ( $withkeys === false ) {
+		static $withKeys = false;
+
+		if ( $withKeys === false ) {
 			// Which formats to inject keys into, undefined entries are interpreted as true
 			// TODO: This array must be patched if awailable formats that does NOT support
 			// usekeys are added, changed or removed.
-			$withkeys = array(
+			$withKeys = array(
 				'wddx' => false,
 				'wddxfm' => false,
 				'xml' => false,
 				'xmlfm' => false,
 			);
 		}
-		return ( isset( $withkeys[$format] ) ? $withkeys[$format] : true );
+
+		return isset( $withKeys[$format] ) ? $withKeys[$format] : true;
 	}
 
 	/**
@@ -148,13 +152,21 @@ abstract class Api extends \ApiBase {
 			elseif ( in_array( 'descending', $options ) ) {
 				$dir = 'descending';
 			}
+
 			if ( isset( $dir ) ) {
 				// Sort the sitelinks according to their global id
 				$saftyCopy = $siteLinks; // keep a shallow copy;
+
+				$sortOk = false;
+
 				if ( $dir === 'ascending' ) {
 					$sortOk = usort(
 						$siteLinks,
 						function( $a, $b ) {
+							/**
+							 * @var SiteLink $a
+							 * @var SiteLink $b
+							 */
 							return strcmp( $a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
 						}
 					);
@@ -162,10 +174,15 @@ abstract class Api extends \ApiBase {
 					$sortOk = usort(
 						$siteLinks,
 						function( $a, $b ) {
+							/**
+							 * @var SiteLink $a
+							 * @var SiteLink $b
+							 */
 							return strcmp( $b->getSite()->getGlobalId(), $a->getSite()->getGlobalId() );
 						}
 					);
 				}
+
 				if ( !$sortOk ) {
 					$siteLinks = $saftyCopy;
 				}
@@ -243,6 +260,7 @@ abstract class Api extends \ApiBase {
 			if ( !$this->getUsekeys() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
+
 			$this->getResult()->addValue( $path, $name, $value );
 		}
 	}
@@ -282,6 +300,7 @@ abstract class Api extends \ApiBase {
 			if ( !$this->getUsekeys() ) {
 				$this->getResult()->setIndexedTagName( $value, $tag );
 			}
+
 			$this->getResult()->addValue( $path, $name, $value );
 		}
 	}
