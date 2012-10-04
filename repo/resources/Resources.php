@@ -100,6 +100,7 @@ return call_user_func( function() {
 			'scripts' => '../tests/qunit/data/testrunner.js',
 			'dependencies' => array(
 				'mediawiki.tests.qunit.testrunner',
+				'wikibase'
 			),
 			'position' => 'top'
 		),
