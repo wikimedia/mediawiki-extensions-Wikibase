@@ -496,7 +496,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			}
 		}
 
-		# reset rights cache
+		// reset rights cache
 		$wgUser->addGroup( "dummy" );
 		$wgUser->removeGroup( "dummy" );
 	}

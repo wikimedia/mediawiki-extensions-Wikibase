@@ -462,7 +462,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 	function provideSetItemData() {
 		return array(
-			array( #0: labels
+			array( //0: labels
 				'Berlin', // handle
 				array(    // input
 					'labels' => array(
@@ -482,7 +482,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				),
 			),
 
-			array( #1: descriptions
+			array( //1: descriptions
 				'Berlin', // handle
 				array(    // input
 					'descriptions' => array(
@@ -502,7 +502,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				),
 			),
 
-			array( #2: aliases
+			array( //2: aliases
 				'Berlin', // handle
 				array(    // input
 					'aliases' => array(
@@ -523,7 +523,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				),
 			),
 
-			array( #3: sitelinks
+			array( //3: sitelinks
 				'Berlin', // handle
 				array(    // input
 					'sitelinks' => array(

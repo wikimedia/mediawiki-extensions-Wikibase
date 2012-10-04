@@ -61,7 +61,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function dataGetTextForSearchIndex() {
 		return array( // runs
-			array( // #0
+			array( // //0
 				array( // data
 					'label' => array( 'en' => 'Test', 'de' => 'Testen' ),
 					'aliases' => array( 'en' => array( 'abc', 'cde' ), 'de' => array( 'xyz', 'uvw' ) )
@@ -208,42 +208,42 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	public function dataCheckPermissions() {
 		// FIXME: this is testing for some specific configuration and will break if the config is changed
 		return array(
-			array( #0: read allowed
+			array( //0: read allowed
 				'read',
 				'user',
 				array( 'read' => true ),
 				false,
 				true,
 			),
-			array( #1: edit and createpage allowed for new item
+			array( //1: edit and createpage allowed for new item
 				'edit',
 				'user',
 				array( 'read' => true, 'edit' => true, 'createpage' => true ),
 				false,
 				true,
 			),
-			array( #2: edit allowed but createpage not allowed for new item
+			array( //2: edit allowed but createpage not allowed for new item
 				'edit',
 				'user',
 				array( 'read' => true, 'edit' => true, 'createpage' => false ),
 				false,
 				false,
 			),
-			array( #3: edit allowed but createpage not allowed for existing item
+			array( //3: edit allowed but createpage not allowed for existing item
 				'edit',
 				'user',
 				array( 'read' => true, 'edit' => true, 'createpage' => false ),
 				true,
 				true,
 			),
-			array( #4: edit not allowed for existing item
+			array( //4: edit not allowed for existing item
 				'edit',
 				'user',
 				array( 'read' => true, 'edit' => false ),
 				true,
 				false,
 			),
-			array( #5: delete not allowed
+			array( //5: delete not allowed
 				'delete',
 				'user',
 				array( 'read' => true, 'delete' => false ),
@@ -303,22 +303,22 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function dataUserCanEdit() {
 		return array(
-			array( #0: edit and createpage allowed for new item
+			array( //0: edit and createpage allowed for new item
 				array( 'read' => true, 'edit' => true, 'createpage' => true ),
 				false,
 				true,
 			),
-			array( #1: edit allowed but createpage not allowed for new item
+			array( //1: edit allowed but createpage not allowed for new item
 				array( 'read' => true, 'edit' => true, 'createpage' => false ),
 				false,
 				false,
 			),
-			array( #2: edit allowed but createpage not allowed for existing item
+			array( //2: edit allowed but createpage not allowed for existing item
 				array( 'read' => true, 'edit' => true, 'createpage' => false ),
 				true,
 				true,
 			),
-			array( #3: edit not allowed for existing item
+			array( //3: edit not allowed for existing item
 				array( 'read' => true, 'edit' => false ),
 				true,
 				false,
