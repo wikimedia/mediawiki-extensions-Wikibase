@@ -105,7 +105,7 @@ final class ClientHooks {
 
 			// The following code is a temporary hack to invalidate the cache.
 			// TODO: create cache invalidater that works with all clients for this cluster
-			if ( $mainType == Item::ENTITY_TYPE ) {
+			if ( $mainType == Item::ENTITY_TYPE ) { //FIXME: handle all kinds of entities!
 				/**
 				 * @var Item $item
 				 */

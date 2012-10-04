@@ -36,7 +36,7 @@ class ApiEditPageTest extends ApiModifyItemBase {
 	 * @group API
 	 */
 	function testEditItemDirectly() {
-		$content = \Wikibase\ItemContent::newEmpty();
+		$content = \Wikibase\ItemContent::newEmpty(); //@todo: do this with all kinds of entities.
 		$content->getItem()->setLabel( "en", "Test" );
 		$status = $content->save( "testing", null, EDIT_NEW );
 
@@ -74,7 +74,7 @@ class ApiEditPageTest extends ApiModifyItemBase {
 	function testEditTextInItemNamespace() {
 		global $wgContentHandlerUseDB;
 
-		$handler = \ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+		$handler = \ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM ); //@todo: check other types of entities too!
 		$page = $handler->getWikiPageForId( 1234567 );
 
 		$this->login();

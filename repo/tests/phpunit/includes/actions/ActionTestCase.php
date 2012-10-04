@@ -261,7 +261,7 @@ class ActionTestCase extends MediaWikiTestCase {
 	 * @return Item
 	 * @throws \MWException
 	 */
-	public static function createTestItem( $handle, $revisions ) {
+	public static function createTestItem( $handle, $revisions ) { //@todo: provide this for all kinds of entities.
 		/* @var ItemContent $content */
 		/* @var Item $item */
 

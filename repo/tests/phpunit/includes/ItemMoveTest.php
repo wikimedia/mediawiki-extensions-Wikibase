@@ -25,6 +25,8 @@ use WikiPage, Title, WikitextContent;
  */
 class ItemMoveTest extends \MediaWikiTestCase {
 
+	//@todo: make this a baseclass to use with all types of entities.
+
 	/**
 	 * @var ItemContent
 	 */
@@ -60,7 +62,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving a regular page into data NS to an invalid location
-		$title = Title::newFromText( $this->page->getTitle()->getText(), Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM ) );
+		$title = Title::newFromText( $this->page->getTitle()->getText(), Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM ) ); //@todo: test other types of entities too!
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving a regular page into data NS to an empty (but valid) location

@@ -36,7 +36,9 @@ use \Wikibase\ItemObject as ItemObject;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class ItemNewFromArrayTest extends \MediaWikiTestCase {
-	
+
+	//@todo: make this a baseclass to use with all types of entitites.
+
 	/**
 	 * Enter description here ...
 	 * @var Item

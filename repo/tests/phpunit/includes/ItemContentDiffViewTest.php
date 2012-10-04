@@ -22,6 +22,8 @@ use Wikibase\ItemContent as ItemContent;
  */
 class ItemDiffViewTest extends \MediaWikiTestCase {
 
+	//@todo: make this a baseclass to use with all types of entities.
+
 	public function testConstructor() {
 		new ItemContentDiffView( \RequestContext::getMain() );
 	}
