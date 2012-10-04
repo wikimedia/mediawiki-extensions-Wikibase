@@ -18,6 +18,9 @@ class ClientPage < RubySelenium
   link(:clientCreateArticleLink, :xpath => "//p[@class='mw-search-createlink']/b/a")
   link(:clientEditArticleLink, :xpath => "//li[@id='ca-edit']/span/a")
   link(:clientEditLinksLink, :xpath => "//li[@class='wbc-editpage']/a")
+  link(:clientActionsMenu, :xpath => "//div[@id='p-cactions']/h5/a")
+  link(:clientWatchArticle, :xpath => "//li[@id='ca-watch']/a")
+  link(:clientUnwatchArticle, :xpath => "//li[@id='ca-unwatch']/a")
   text_area(:clientCreateArticleInput, :id => "wpTextbox1")
   button(:clientCreateArticleSubmit, :id => "wpSave")
   span(:clientArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
@@ -34,7 +37,6 @@ class ClientPage < RubySelenium
   link(:interwiki_af, :xpath => "//li[@class='interwiki-af']/a")
   link(:interwiki_zh, :xpath => "//li[@class='interwiki-zh']/a")
   link(:interwiki_xxx, :xpath => "//li[contains(@class, 'interwiki')]/a")
-
   #methods
   def create_article(title, text, overwrite = false)
     self.clientSearchInput = title
@@ -76,4 +78,19 @@ class ClientPage < RubySelenium
     return count-1 # decrement by 1 because "edit-link" is always shown
   end
 
+  def watch_article(title)
+    navigate_to_article(title)
+    clientActionsMenu
+    if clientWatchArticle?
+      clientWatchArticle
+    end
+  end
+
+  def unwatch_article(title)
+    navigate_to_article(title)
+    clientActionsMenu
+    if clientUnwatchArticle?
+      clientUnwatchArticle
+    end
+  end
 end
