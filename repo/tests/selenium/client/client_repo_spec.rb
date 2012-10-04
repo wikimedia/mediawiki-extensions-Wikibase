@@ -72,6 +72,18 @@ describe "Check functionality of client-repo connection" do
         page.clientArticleTitle.should == item_sitelinks[3][1]
       end
     end
+    it "should add page to watchlist & check propagation of changes to watchlist" do
+      visit_page(ClientLoginPage) do |page|
+        page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
+      end
+      on_page(ClientPage) do |page|
+        page.watch_article(article_title_a)
+      end
+      visit_page(WatchlistPage) do |page|
+        page.wlArticleComment1.include?(article_title_a).should be_true
+        page.wlArticleComment1.include?(item_id).should be_true
+      end
+    end
     it "should add additional sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
@@ -242,8 +254,11 @@ describe "Check functionality of client-repo connection" do
   end
 
   after :all do
-    # tear down: logout
-    visit_page(LoginPage) do |page|
+    # tear down: unwatch article, logout
+    visit_page(ClientPage) do |page|
+      page.unwatch_article(article_title_a)
+    end
+    visit_page(ClientLoginPage) do |page|
       page.logout_user
     end
   end
