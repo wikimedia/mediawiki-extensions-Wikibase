@@ -11,6 +11,8 @@ require 'ruby_selenium'
 class PropertyPage < EntityPage
   include PageObject
 
+  div(:datatype, :class => "wb-datatype")
+
   # ***** METHODS *****
   # item url navigation
   def navigate_to_property
