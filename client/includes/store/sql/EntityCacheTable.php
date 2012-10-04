@@ -208,4 +208,14 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 		return $this->getEntity( Item::ENTITY_TYPE, $itemId );
 	}
 
+	/**
+	 * @see EntityCache::clear
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function clear() {
+		return wfGetDB( DB_MASTER )->delete( $this->getName(), '*', __METHOD__ );
+	}
 }

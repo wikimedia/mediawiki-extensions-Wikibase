@@ -82,6 +82,28 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Deletes all the data stored on the repository.
+	 *
+	 * @since 0.2
+	 *
+	 * @param callable $reportMessage
+	 *
+	 * @return boolean
+	 */
+        public static function onWikibaseDeleteData( $reportMessage ) {
+		$store = ClientStoreFactory::getStore();
+		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
+
+		$reportMessage( "Deleting data from the " . $stores[get_class( $store )] . " store..." );
+
+		$store->clear();
+
+		$reportMessage( "done!\n" );
+
+		return true;
+	}
+
+	/**
 	 * When the poll script finds a new change or set of changes, it will fire
 	 * this hook for each change, so it can be handled appropriately.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/WikibasePollHandle
