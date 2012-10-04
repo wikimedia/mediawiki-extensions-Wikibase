@@ -155,4 +155,3 @@ class ItemObjectTest extends EntityObjectTest {
 	}
 
 }
-	

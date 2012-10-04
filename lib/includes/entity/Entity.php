@@ -300,57 +300,11 @@ interface Entity extends Comparable {
 	public function clear();
 
 	/**
-	 * Adds a statement to the entity.
-	 * The returned statement can be used to generate a statement hash.
+	 * Stubs the entity as far as possible.
+	 * This is useful when one wants to conserve memory.
 	 *
-	 * @since 0.1
-	 *
-	 * @param Statement $statement
-	 *
-	 * @return Statement
+	 * @since 0.2
 	 */
-	//public function addStatement( Statement $statement );
-
-	/**
-	 * Returns the statement with the provided statement number.
-	 * If it does not exist, an exception is thrown.
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $statementNumber
-	 *
-	 * @return Statement
-	 * @throws \MWException
-	 */
-	//public function getStatement( $statementNumber );
-
-	/**
-	 * Returns if the statement with the provided statement number exists.
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $statementNumber
-	 *
-	 * @return boolean
-	 */
-	//public function hasStatement( $statementNumber );
-
-	/**
-	 * Returns the statements belonging to this entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @return array of Statement
-	 */
-	//public function getStatements();
-
-	/**
-	 * Removes the statement with the provided statement number if it exists.
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $statementNumber
-	 */
-	//public function removeStatement( $statementNumber );
+	public function stub();
 
 }

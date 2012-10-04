@@ -519,4 +519,13 @@ abstract class EntityObject implements Entity {
 		return $copy;
 	}
 
+	/**
+	 * @see Entity::stub
+	 *
+	 * @since 0.2
+	 */
+	public function stub() {
+		// stub :D
+	}
+
 }
