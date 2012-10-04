@@ -40,20 +40,19 @@ interface TermCache {
 	const TERM_TYPE_DESCRIPTION = 'description';
 
 	/**
-	 * Returns the ids for the items with the provided label in the specified language.
-	 *
-	 * TODO: generalize to entity
+	 * Returns the type, id tuples for the entities with the provided label in the specified language.
 	 *
 	 * @since 0.1
 	 *
 	 * @param string $label
 	 * @param string|null $languageCode
 	 * @param string|null $description
+	 * @param string|null $entityType
 	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
-	 * @return array of integer
+	 * @return array of array( entity type, entity id )
 	 */
-	public function getItemIdsForLabel( $label, $languageCode = null, $description = null, $fuzzySearch = false );
+	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false );
 
 	/**
 	 * Saves the terms of the provided entity in the term cache.

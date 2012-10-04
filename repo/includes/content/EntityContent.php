@@ -65,7 +65,12 @@ abstract class EntityContent extends \AbstractContent {
 	 */
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
-			$this->wikiPage = $this->isNew() ? false : $this->getContentHandler()->getWikiPageForId( $this->getEntity()->getId() );
+			if ( !$this->isNew() ) {
+				$this->wikiPage = EntityContentFactory::singleton()->getWikiPageForId(
+					$this->getEntity()->getType(),
+					$this->getEntity()->getId()
+				);
+			}
 		}
 
 		return $this->wikiPage;

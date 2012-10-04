@@ -93,7 +93,7 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getContentFromSiteLink( $siteId, $pageName ) {
 		$id = $this->getIdForSiteLink( $siteId, $pageName );
-		return $id === false ? null : self::getFromId( $id );
+		return $id === false ? null : EntityContentFactory::singleton()->getFromId( Item::ENTITY_TYPE, $id );
 	}
 
 	/**
@@ -134,7 +134,7 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getFromSiteLink( $siteId, $pageName ) {
 		$id = $this->getIdForSiteLink( $siteId, $pageName );
-		return $id === false ? null : $this->getFromId( $id );
+		return $id === false ? null : EntityContentFactory::singleton()->getFromId( Item::ENTITY_TYPE, $id );
 	}
 
 	/**

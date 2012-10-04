@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\Entity, Wikibase\EntityContent;
+
 /**
  * Page for creating new Wikibase entities.
  *
@@ -33,15 +35,6 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	protected $description = null;
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 0.1
-	 */
-	public function __construct( $page ) {
-		parent::__construct( $page );
-	}
-
-	/**
 	 * Main method.
 	 *
 	 * @since 0.1
@@ -54,19 +47,22 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 		$this->setHeaders();
 		$this->outputHeader();
 
-		$this->parts = ( $subPage === '' ) ? array() : explode( '/', $subPage );
+		$this->parts = ( $subPage === '' ? array() : explode( '/', $subPage ) );
 		$this->prepareArguments();
 
-		if ( $this->getRequest()->wasPosted() && $this->getRequest()->getVal( 'token' ) !== null ) {
+		if ( $this->getRequest()->wasPosted()
+			&&  $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) ) ) {
+
 			if ( $this->hasSufficientArguments() ) {
 				$entityContent = $this->createEntity();
-				$entity = $entityContent->getEntity();
+
 				$status = $this->modifyEntity( $entityContent );
+
 				if ( $status->isOk() ) {
 					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() );
-					$status = $editEntity->attemptSave( '', EDIT_AUTOSUMMARY|EDIT_NEW, $this->getRequest()->getVal( 'token' ) );
+					$editEntity->attemptSave( '', EDIT_AUTOSUMMARY|EDIT_NEW, $this->getRequest()->getVal( 'token' ) );
+
 					if ( !$editEntity->isSuccess() ) {
-						//$editEntity->showErrorPage( $this->getOutput(), 'special-createproperty' );
 						$editEntity->showStatus( $this->getOutput() );
 					} elseif ( $entityContent !== null ) {
 						$entityUrl = $entityContent->getTitle()->getFullUrl();
@@ -75,6 +71,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 				}
 			}
 		}
+
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 		$this->createForm( $this->getLegend(), $this->additionalFormElements() );
 	}
@@ -98,7 +95,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * @return bool
 	 */
 	protected function hasSufficientArguments() {
-		return ( $this->label !== '' || $this->description !== '' );
+		return $this->label !== '' || $this->description !== '';
 	}
 
 	/**

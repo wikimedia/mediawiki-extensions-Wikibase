@@ -74,8 +74,7 @@ class ApiEditPageTest extends ApiModifyItemBase {
 	function testEditTextInItemNamespace() {
 		global $wgContentHandlerUseDB;
 
-		$handler = \ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM ); //@todo: check other types of entities too!
-		$page = $handler->getWikiPageForId( 1234567 );
+		$page = \Wikibase\EntityContentFactory::singleton()->getWikiPageForId( \Wikibase\Item::ENTITY_TYPE, 1234567 );
 
 		$this->login();
 		$token = $this->getItemToken();
