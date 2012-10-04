@@ -12,7 +12,7 @@ class NewPropertyPage < CreateEntityPage
 
   select_list(:newPropertyDatatype, :id => 'wb-newproperty-datatype' )
 
-  def create_new_property(label, description, datatype = "item", switch_lang = true)
+  def create_new_property(label, description, datatype = "wikibase-item", switch_lang = true)
     if switch_lang
       self.uls_switch_language(LANGUAGE)
     end
