@@ -42,6 +42,7 @@ return array(
 	'DataValues\UnknownValue' => 'datavalue/UnknownValue.php',
 
 	'Comparable' => 'includes/Comparable.php',
+	'Copyable' => 'includes/Copyable.php',
 	'Hashable' => 'includes/Hashable.php',
 	'Immutable' => 'includes/Immutable.php',
 

@@ -28,7 +28,7 @@ namespace DataValues;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable {
+interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable, \Copyable {
 
 	/**
 	 * Returns the identifier of the datavalues type.

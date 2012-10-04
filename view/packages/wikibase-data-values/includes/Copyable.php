@@ -1,9 +1,7 @@
 <?php
 
-namespace DataValues;
-
 /**
- * Base for objects that represent a single data value.
+ * Interface for objects that have a getHash method.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,42 +26,15 @@ namespace DataValues;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class DataValueObject implements DataValue {
+interface Copyable {
 
 	/**
-	 * @see Hashable::getHash
+	 * Returns a deep copy of the object.
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return Copyable
 	 */
-	public function getHash() {
-		return md5( serialize( $this ) );
-	}
-
-	/**
-	 * @see Comparable::equals
-	 *
-	 * @since 0.1
-	 *
-	 * @param mixed $value
-	 *
-	 * @return boolean
-	 */
-	public function equals( $value ) {
-		return $value === $this ||
-			( is_object( $value ) && get_class( $value ) == get_called_class() && serialize( $value ) === serialize( $this ) );
-	}
-
-	/**
-	 * @see Copyable::getCopy
-	 *
-	 * @since 0.1
-	 *
-	 * @return DataValue
-	 */
-	public function getCopy() {
-		return unserialize( serialize( $this ) );
-	}
+	public function getCopy();
 
 }
