@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAan///9w\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-04T15:57:30Z",
+      "side": 1,
+      "message": "still the token is missing",
+      "revId": "6577a04411ee58098850e04f038961bd0b4cd3d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
