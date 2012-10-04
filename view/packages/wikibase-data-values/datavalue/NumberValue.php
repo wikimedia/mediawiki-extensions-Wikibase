@@ -66,7 +66,7 @@ class NumberValue extends DataValueObject {
 	 * @return int|float
 	 */
 	public function serialize() {
-		return $this->value;
+		return serialize( $this->value );
 	}
 
 	/**
@@ -79,7 +79,7 @@ class NumberValue extends DataValueObject {
 	 * @return NumberValue
 	 */
 	public function unserialize( $value ) {
-		$this->__construct( $value );
+		$this->__construct( unserialize( $value ) );
 	}
 
 	/**

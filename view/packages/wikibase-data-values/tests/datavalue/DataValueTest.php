@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues\Test;
+use DataValues\DataValue;
 
 /**
  * Base for unit tests for DataValue implementing classes.
@@ -116,6 +117,35 @@ abstract class DataValueTest extends \MediaWikiTestCase {
 				$this->assertFalse( $valid );
 			}
 		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testImplements( DataValue $value, array $arguments ) {
+		$this->assertInstanceOf( '\Immutable', $value );
+		$this->assertInstanceOf( '\Hashable', $value );
+		$this->assertInstanceOf( '\Comparable', $value );
+		$this->assertInstanceOf( '\Serializable', $value );
+		$this->assertInstanceOf( '\DataValues\DataValue', $value );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testSerialization( DataValue $value, array $arguments ) {
+		$serialization = serialize( $value );
+		$this->assertInternalType( 'string', $serialization );
+
+		$unserialized = unserialize( $serialization );
+		$this->assertInstanceOf( '\DataValues\DataValue', $unserialized );
+
+		$this->assertTrue( $value->equals( $unserialized ) );
+		$this->assertEquals( $value, $unserialized );
 	}
 
 }
