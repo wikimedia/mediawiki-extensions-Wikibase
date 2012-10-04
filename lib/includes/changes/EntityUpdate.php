@@ -33,22 +33,6 @@ class EntityUpdate extends DiffChange {
 	/**
 	 * @since 0.1
 	 *
-	 * @return Entity
-	 * @throws \MWException
-	 */
-	public function getEntity() {
-		$info = $this->getField( 'info' );
-
-		if ( !array_key_exists( 'entity', $info ) ) {
-			throw new \MWException( 'Cannot get the entity when it has not been set yet.' );
-		}
-
-		return $info['entity'];
-	}
-
-	/**
-	 * @since 0.1
-	 *
 	 * @param Entity $entity
 	 */
 	public function setEntity( Entity $entity ) {

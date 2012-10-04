@@ -123,6 +123,22 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
+	 * @since 0.2
+	 *
+	 * @return Entity
+	 * @throws \MWException
+	 */
+	public function getEntity() {
+		$info = $this->getField( 'info' );
+
+		if ( !array_key_exists( 'entity', $info ) ) {
+			throw new \MWException( 'Cannot get the entity when it has not been set yet.' );
+		}
+
+		return $info['entity'];
+	}
+
+	/**
 	 * @see Change::getType
 	 *
 	 * @since 0.1
