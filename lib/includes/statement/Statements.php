@@ -20,7 +20,7 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.2
  *
  * @file
  * @ingroup Wikibase
@@ -33,7 +33,7 @@ interface Statements extends \Traversable, \Countable, \Serializable, Hashable {
 	/**
 	 * Adds the provided statement to the list.
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param Statement $statement
 	 */
@@ -42,7 +42,7 @@ interface Statements extends \Traversable, \Countable, \Serializable, Hashable {
 	/**
 	 * Returns if the list contains a statement with the same hash as the provided statement.
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param Statement $statement
 	 *
@@ -53,7 +53,7 @@ interface Statements extends \Traversable, \Countable, \Serializable, Hashable {
 	/**
 	 * Removes the statement with the same hash as the provided reference if such a statement exists in the list.
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param Statement $statement
 	 */
