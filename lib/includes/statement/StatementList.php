@@ -37,7 +37,7 @@ namespace Wikibase;
 class StatementList extends \SplObjectStorage implements Statements {
 
 	/**
-	 * @see Statements::addClaim
+	 * @see Statements::addStatement
 	 *
 	 * @since 0.2
 	 *
@@ -48,7 +48,7 @@ class StatementList extends \SplObjectStorage implements Statements {
 	}
 
 	/**
-	 * @see Statements::hasClaim
+	 * @see Statements::hasStatement
 	 *
 	 * @since 0.2
 	 *
@@ -61,7 +61,7 @@ class StatementList extends \SplObjectStorage implements Statements {
 	}
 
 	/**
-	 * @see Statements::removeClaim
+	 * @see Statements::removeStatement
 	 *
 	 * @since 0.2
 	 *
@@ -91,6 +91,17 @@ class StatementList extends \SplObjectStorage implements Statements {
 		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
 
 		return $hasher->hash( iterator_to_array( $this ) );
+	}
+
+	/**
+	 * @see StatementAggregate::getStatements
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	public function getStatements() {
+		return $this;
 	}
 
 }

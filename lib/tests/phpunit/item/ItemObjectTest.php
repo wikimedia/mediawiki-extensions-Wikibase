@@ -34,6 +34,7 @@ use \Wikibase\SiteLink as SiteLink;
  * @group Wikibase
  * @group WikibaseItem
  * @group WikibaseLib
+ * @group WikibaseItemObjectTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -154,5 +155,38 @@ class ItemObjectTest extends EntityObjectTest {
 		$this->assertTrue( $item->isEmpty() );
 	}
 
+	public function itemProvider() {
+		$items = array();
+
+		$items[] = ItemObject::newEmpty();
+
+		$item = ItemObject::newEmpty();
+		$item->setDescription( 'en', 'foo' );
+		$items[] = $item;
+
+		$item = ItemObject::newEmpty();
+		$item->setDescription( 'en', 'foo' );
+		$item->setDescription( 'de', 'foo' );
+		$item->setLabel( 'en', 'foo' );
+		$item->setAliases( 'de', array( 'bar', 'baz' ) );
+		$items[] = $item;
+
+		$item = $item->copy();
+		$item->addStatement( new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+
+		return $this->arrayWrap( $items );
+	}
+
+	/**
+	 * @dataProvider itemProvider
+	 *
+	 * @param Item $item
+	 */
+	public function testHasStatements( Item $item ) {
+		$has = $item->hasStatements();
+		$this->assertInternalType( 'boolean', $has );
+
+		$this->assertEquals( count( $item->getStatements() ) !== 0, $has );
+	}
+
 }
-	

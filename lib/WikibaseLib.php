@@ -160,10 +160,11 @@ $wgAutoloadClasses['Wikibase\Snaks'] 					= $dir . 'includes/snak/Snaks.php';
 $wgAutoloadClasses['Wikibase\SubclassOfSnak'] 			= $dir . 'includes/snak/SubclassOfSnak.php';
 
 // includes/statement
-$wgAutoloadClasses['Wikibase\Statement'] 			= $dir . 'includes/statement/Statement.php';
-$wgAutoloadClasses['Wikibase\StatementList'] 		= $dir . 'includes/statement/StatementList.php';
-$wgAutoloadClasses['Wikibase\StatementObject'] 		= $dir . 'includes/statement/StatementObject.php';
-$wgAutoloadClasses['Wikibase\Statements'] 			= $dir . 'includes/statement/Statements.php';
+$wgAutoloadClasses['Wikibase\Statement'] 				= $dir . 'includes/statement/Statement.php';
+$wgAutoloadClasses['Wikibase\StatementAggregate'] 		= $dir . 'includes/statement/StatementAggregate.php';
+$wgAutoloadClasses['Wikibase\StatementList'] 			= $dir . 'includes/statement/StatementList.php';
+$wgAutoloadClasses['Wikibase\StatementObject'] 			= $dir . 'includes/statement/StatementObject.php';
+$wgAutoloadClasses['Wikibase\Statements'] 				= $dir . 'includes/statement/Statements.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\SiteLinkCache'] 			= $dir . 'includes/store/SiteLinkCache.php';
