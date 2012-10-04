@@ -54,11 +54,11 @@ final class Autocomment {
 
 					// add pre and post fragments
 					if ( $pre ) {
-						# written summary $presep autocomment (summary /* section */)
+						// written summary $presep autocomment (summary /* section */)
 						$pre .= wfMessage( 'autocomment-prefix' )->escaped();
 					}
 					if ( $post ) {
-						# autocomment $postsep written summary (/* section */ summary)
+						// autocomment $postsep written summary (/* section */ summary)
 						$auto .= wfMessage( 'colon-separator' )->escaped();
 					}
 

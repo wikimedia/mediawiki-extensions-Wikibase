@@ -165,8 +165,8 @@ abstract class EntityView extends \ContextSource {
 			$pout->setText( $html );
 		}
 
-		#@todo (phase 2) would be nice to put pagelinks (entity references) and categorylinks (from special properties)...
-		#@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
+		//@todo (phase 2) would be nice to put pagelinks (entity references) and categorylinks (from special properties)...
+		//@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
 
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array( 'wikibase.common' ) );

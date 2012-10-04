@@ -422,21 +422,21 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 	public function provideIsTokenOk() {
 		return array(
-			array( #0
-				true, # use a newly generated valid token
-				true, # should work
+			array( //0
+				true, // use a newly generated valid token
+				true, // should work
 			),
-			array( #1
-				"xyz", # use an invalid token
-				false, # should fail
+			array( //1
+				"xyz", // use an invalid token
+				false, // should fail
 			),
-			array( #2
-				"", # use an empty token
-				false, # should fail
+			array( //2
+				"", // use an empty token
+				false, // should fail
 			),
-			array( #3
-				null, # use no token
-				false, # should fail
+			array( //3
+				null, // use no token
+				false, // should fail
 			),
 		);
 	}

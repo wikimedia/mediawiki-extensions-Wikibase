@@ -49,7 +49,7 @@ abstract class EntityHandler extends \ContentHandler {
 			$format = $this->getDefaultFormat();
 		}
 
-		#FIXME: assert $content is a WikibaseContent instance
+		//FIXME: assert $content is a WikibaseContent instance
 		$data = $content->getNativeData();
 
 		switch ( $format ) {
@@ -82,10 +82,10 @@ abstract class EntityHandler extends \ContentHandler {
 
 		switch ( $format ) {
 			case CONTENT_FORMAT_SERIALIZED:
-				$data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
+				$data = unserialize( $blob ); //FIXME: suppress notice on failed serialization!
 				break;
 			case CONTENT_FORMAT_JSON:
-				$data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
+				$data = json_decode( $blob, true ); //FIXME: suppress notice on failed serialization!
 				break;
 			default:
 				throw new MWException( "serialization format $format is not supported for Wikibase content model" );

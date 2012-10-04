@@ -298,9 +298,9 @@ abstract class Api extends \ApiBase {
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = array( 'read' );
 
-		#could directly check for each module here:
-		#$modulePermission = $this->getModuleName();
-		#$permissions[] = $modulePermission;
+		//could directly check for each module here:
+		//$modulePermission = $this->getModuleName();
+		//$permissions[] = $modulePermission;
 
 		return $permissions;
 	}

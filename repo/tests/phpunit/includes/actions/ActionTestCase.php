@@ -55,7 +55,7 @@ class ActionTestCase extends MediaWikiTestCase {
 		\ApiQueryInfo::resetTokenCache();
 
 		if ( $this->permissionsChanged ) {
-			# reset rights cache
+			// reset rights cache
 			$wgUser->addGroup( "dummy" );
 			$wgUser->removeGroup( "dummy" );
 		}
@@ -80,7 +80,7 @@ class ActionTestCase extends MediaWikiTestCase {
 
 		$this->permissionsChanged = true;
 
-		# reset rights cache
+		// reset rights cache
 		$wgUser->addGroup( "dummy" );
 		$wgUser->removeGroup( "dummy" );
 	}

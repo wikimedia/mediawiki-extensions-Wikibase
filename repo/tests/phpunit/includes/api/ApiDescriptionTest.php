@@ -50,8 +50,8 @@ class ApiDescriptionTest extends ApiLangAttributeBase {
 		return array(
 			// $handle, $langCode, $value, $exception
 			array( 'Oslo', 'en', 'Back to capitol of Norway', null ),
-			#array( 'Oslo', 'en', 'Capitol of Norway', 'UsageException' ),
-			#array( 'Oslo', 'en', 'Not capitol of Norway', null ),
+			//array( 'Oslo', 'en', 'Capitol of Norway', 'UsageException' ),
+			//array( 'Oslo', 'en', 'Not capitol of Norway', null ),
 			array( 'Oslo', 'en', '', null ),
 		);
 	}

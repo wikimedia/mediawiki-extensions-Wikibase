@@ -50,8 +50,8 @@ class ApiLabelTest extends ApiLangAttributeBase {
 		return array(
 			// $handle, $langCode, $value, $exception
 			array( 'Oslo', 'en', 'Oslo', null ),
-			#array( 'Oslo', 'en', 'Oslo', 'UsageException' ),
-			#array( 'Oslo', 'en', 'Bergen', null ),
+			//array( 'Oslo', 'en', 'Oslo', 'UsageException' ),
+			//array( 'Oslo', 'en', 'Bergen', null ),
 			array( 'Oslo', 'en', '', null ),
 		);
 	}
