@@ -202,7 +202,7 @@ class ItemContent extends EntityContent {
 			/**
 			 * @var WikiPage $ipsPage
 			 */
-			$conflictingPage = $this->getContentHandler()->getWikiPageForId( $conflict['itemId'] );
+			$conflictingPage = EntityContentFactory::singleton()->getWikiPageForId( Item::ENTITY_TYPE, $conflict['itemId'] );
 
 			// NOTE: it would be nice to generate the link here and just pass it as HTML,
 			// but Status forces all parameters to be escaped.

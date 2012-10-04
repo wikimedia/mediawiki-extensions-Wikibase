@@ -109,7 +109,7 @@ class ApiGetItems extends Api {
 
 			// later we do a getContent but only if props are defined
 			if ( $params['props'] !== array() ) {
-				$page = ItemHandler::singleton()->getWikiPageForId( $id );
+				$page = EntityContentFactory::singleton()->getWikiPageForId( Item::ENTITY_TYPE, $id );
 
 				if ( $page->exists() ) {
 					// as long as getWikiPageForId only returns ids for legal items this holds
