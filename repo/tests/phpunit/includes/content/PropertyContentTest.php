@@ -71,12 +71,14 @@ class PropertyContentTest extends EntityContentTest {
 		$propertyContent = PropertyContent::newEmpty();
 		$propertyContent->getProperty()->setLabel( 'en', 'testLabelUniquenessRestriction' );
 		$propertyContent->getProperty()->setLabel( 'de', 'testLabelUniquenessRestriction' );
+		$propertyContent->getProperty()->setDataTypeById( 'wikibase-item' );
 
 		$status = $propertyContent->save( 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );
 
 		$propertyContent1 = PropertyContent::newEmpty();
 		$propertyContent1->getProperty()->setLabel( 'nl', 'testLabelUniquenessRestriction' );
+		$propertyContent1->getProperty()->setDataTypeById( 'wikibase-item' );
 
 		$status = $propertyContent1->save( 'create property', null, EDIT_NEW );
 		$this->assertTrue( $status->isOK(), "property creation should work" );

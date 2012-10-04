@@ -124,6 +124,16 @@ describe "Check functionality of property view" do
     end
   end
 
+  context "Check for data type" do
+    it "should check that the data type is displayed correctly" do
+      on_page(PropertyPage) do |page|
+        page.navigate_to_property
+        page.wait_for_entity_to_load
+        page.datatype.include? "wikibase-item"
+      end
+    end
+  end
+
   after :all do
     # tear down
   end
