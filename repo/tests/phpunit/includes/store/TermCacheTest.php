@@ -52,7 +52,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 *
 	 * @param TermCache $lookup
 	 */
-	public function testGetItemIdsForLabel( TermCache $lookup ) {
+	public function testGetEntityIdsForLabel( TermCache $lookup ) {
 		$item0 = ItemObject::newEmpty();
 
 		$item0->setLabel( 'en', 'foobar' );
@@ -74,16 +74,19 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$content1->save( '', null, EDIT_NEW );
 		$id1 = $content1->getItem()->getId();
 
-		$ids = $lookup->getItemIdsForLabel( 'foobar' );
+		$ids = $lookup->getEntityIdsForLabel( 'foobar' );
 		$this->assertInternalType( 'array', $ids );
+		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 		$this->assertArrayEquals( array( $id0, $id1 ), $ids );
 
-		$ids = $lookup->getItemIdsForLabel( 'baz', 'nl' );
+		$ids = $lookup->getEntityIdsForLabel( 'baz', 'nl' );
 		$this->assertInternalType( 'array', $ids );
+		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 		$this->assertArrayEquals( array( $id0 ), $ids );
 
-		$ids = $lookup->getItemIdsForLabel( 'o_O', 'nl' );
+		$ids = $lookup->getEntityIdsForLabel( 'o_O', 'nl' );
 		$this->assertInternalType( 'array', $ids );
+		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 		$this->assertArrayEquals( array( $id1 ), $ids );
 
 		// Mysql fails (http://bugs.mysql.com/bug.php?id=10327), so we cannot test this properly when using MySQL.
@@ -91,16 +94,19 @@ class TermCacheTest extends \MediaWikiTestCase {
 			|| wfGetDB( DB_MASTER )->getType() !== 'mysql'
 			|| get_class( $lookup ) !== 'Wikibase\TermSqlCache' ) {
 
-			$ids = $lookup->getItemIdsForLabel( 'foobar', 'en', 'foo bar baz' );
+			$ids = $lookup->getEntityIdsForLabel( 'foobar', 'en', 'foo bar baz' );
 			$this->assertInternalType( 'array', $ids );
+			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 			$this->assertArrayEquals( array( $id1 ), $ids );
 
-			$ids = $lookup->getItemIdsForLabel( 'foobar', null, 'foo bar baz' );
+			$ids = $lookup->getEntityIdsForLabel( 'foobar', null, 'foo bar baz' );
 			$this->assertInternalType( 'array', $ids );
+			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 			$this->assertArrayEquals( array( $id1 ), $ids );
 
-			$ids = $lookup->getItemIdsForLabel( 'foobar', 'nl', 'foo bar baz' );
+			$ids = $lookup->getEntityIdsForLabel( 'foobar', 'nl', 'foo bar baz' );
 			$this->assertInternalType( 'array', $ids );
+			$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 			$this->assertArrayEquals( array(), $ids );
 		}
 	}
@@ -231,7 +237,8 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$this->assertFalse( $lookup->termExists( 'testDeleteTermsForEntity' ) );
 
-		$ids = $lookup->getItemIdsForLabel( 'abc' );
+		$ids = $lookup->getEntityIdsForLabel( 'abc' );
+		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 
 		$this->assertTrue( !in_array( $content->getItem()->getId(), $ids, true ) );
 	}

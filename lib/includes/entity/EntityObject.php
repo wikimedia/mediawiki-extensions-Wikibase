@@ -32,20 +32,6 @@ namespace Wikibase;
 abstract class EntityObject implements Entity {
 
 	/**
-	 * Maps entity types to objects representing the corresponding entity.
-	 * TODO: put this on a better place.
-	 *
-	 * @since 0.1
-	 *
-	 * @var array
-	 */
-	public static $typeMap = array(
-		Item::ENTITY_TYPE => '\Wikibase\ItemObject',
-		Property::ENTITY_TYPE => '\Wikibase\PropertyObject',
-		Query::ENTITY_TYPE => '\Wikibase\QueryObject'
-	);
-
-	/**
 	 * @since 0.1
 	 * @var array
 	 */

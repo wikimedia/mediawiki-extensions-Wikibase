@@ -85,13 +85,13 @@ class ApiLinkTitles extends Api {
 		}
 		elseif ( !$fromId && $toId ) {
 			// reuse to-site's item
-			$itemContent = ItemHandler::singleton()->getFromId( $toId );
+			$itemContent = EntityContentFactory::singleton()->getFromId( Item::ENTITY_TYPE, $toId );
 			$fromLink = new SiteLink( $fromSite, $fromPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
 		}
 		elseif ( $fromId && !$toId ) {
 			// reuse from-site's item
-			$itemContent = ItemHandler::singleton()->getFromId( $fromId );
+			$itemContent = EntityContentFactory::singleton()->getFromId( Item::ENTITY_TYPE, $fromId );
 			$toLink = new SiteLink( $toSite, $toPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
 		}

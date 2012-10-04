@@ -228,18 +228,19 @@ class TermSqlCache implements TermCache {
 	}
 
 	/**
-	 * @see TermCache::getItemIdsForLabel
+	 * @see TermCache::getEntityIdsForLabel
 	 *
 	 * @since 0.1
 	 *
 	 * @param string $label
 	 * @param string|null $languageCode
 	 * @param string|null $description
+	 * @param string|null $entityType
 	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
-	 * @return array of integer
+	 * @return array of array( entity type, entity id )
 	 */
-	public function getItemIdsForLabel( $label, $languageCode = null, $description = null, $fuzzySearch = false ) {
+	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false ) {
 		$fuzzySearch = false; // TODO switched off for now until we have a solution for limiting the results
 		$db = $this->getReadDb();
 
@@ -256,6 +257,10 @@ class TermSqlCache implements TermCache {
 
 		if ( !is_null( $languageCode ) ) {
 			$conds['terms0.term_language'] = $languageCode;
+		}
+
+		if ( !is_null( $entityType ) ) {
+			$conds['terms0.term_entity_type'] = $entityType;
 		}
 
 		if ( !is_null( $description ) ) {
@@ -277,16 +282,21 @@ class TermSqlCache implements TermCache {
 			);
 		}
 
-		$items = $db->select(
+		$entities = $db->select(
 			$tables,
-			array( 'terms0.term_entity_id' ),
+			array( 'terms0.term_entity_id', 'terms0.term_entity_type' ),
 			$conds,
 			__METHOD__,
 			array( 'DISTINCT' ),
 			$joinConds
 		);
 
-		return array_map( function( $item ) { return $item->term_entity_id; }, iterator_to_array( $items ) );
+		return array_map(
+			function( $entity ) {
+				return array( $entity->term_entity_type, $entity->term_entity_id );
+			},
+			iterator_to_array( $entities )
+		);
 	}
 
 	/**
