@@ -6,6 +6,8 @@
  WIKI_SKIN: "vector" # "vector" "monobook"
  WIKI_ADMIN_USERNAME: "Username"
  WIKI_ADMIN_PASSWORD: "Password"
+ CLIENT_ADMIN_USERNAME: "Username"
+ CLIENT_ADMIN_PASSWORD: "Password"
  WIKI_BLOCKED_USERNAME: "Username"
  WIKI_BLOCKED_PASSWORD: "Password"
  WIKI_ORDINARY_USERNAME: "Username"

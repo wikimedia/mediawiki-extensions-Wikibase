@@ -16,6 +16,7 @@ item_description = "It's the capital of Italy!"
 item_sitelink_en = [["en", "Rome"]]
 item_sitelinks = [["de", "Rom"], ["it", "Roma"], ["fi", "Rooma"], ["hu", "Róma"]]
 item_sitelinks_additional = [["fr", "Rome"]]
+item_id = 0
 
 describe "Check functionality of client-repo connection" do
   before :all do
@@ -24,7 +25,7 @@ describe "Check functionality of client-repo connection" do
       page.create_article(article_title_a, article_text_a, true)
     end
     visit_page(CreateItemPage) do |page|
-      page.create_new_item(article_title_a, item_description)
+      item_id = page.create_new_item(article_title_a, item_description)
       page.add_sitelinks(item_sitelink_en)
     end
   end
@@ -69,6 +70,18 @@ describe "Check functionality of client-repo connection" do
         page.navigate_to_article(article_title_a)
         page.interwiki_hu
         page.clientArticleTitle.should == item_sitelinks[3][1]
+      end
+    end
+    it "should add page to watchlist & check propagation of changes to watchlist" do
+      visit_page(ClientLoginPage) do |page|
+        page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
+      end
+      on_page(ClientPage) do |page|
+        page.watch_article(article_title_a)
+      end
+      visit_page(WatchlistPage) do |page|
+        page.wlArticleComment1.include?(article_title_a).should be_true
+        page.wlArticleComment1.include?(item_id).should be_true
       end
     end
     it "should add additional sitelinks" do
@@ -204,6 +217,12 @@ describe "Check functionality of client-repo connection" do
     end
   end
   after :all do
-    # tear down
+    # tear down: unwatch article, logout
+    visit_page(ClientPage) do |page|
+      page.unwatch_article(article_title_a)
+    end
+    visit_page(ClientLoginPage) do |page|
+      page.logout_user
+    end
   end
 end
