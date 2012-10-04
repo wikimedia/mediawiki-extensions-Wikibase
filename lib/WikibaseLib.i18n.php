@@ -115,6 +115,10 @@ $messages['gl'] = array(
  */
 $messages['he'] = array(
 	'wikibaselib-desc' => 'הפעולות המשותפות להרחבות Wikibase ו־Wikibase Client',
+	'wikibaselib-entity-item' => 'פריט',
+	'wikibaselib-entity-property' => 'מאפיין',
+	'wikibaselib-entity-query' => 'שאילתה',
+	'datatypes-type-wikibase-item' => 'פריט',
 );
 
 /** Upper Sorbian (hornjoserbsce)

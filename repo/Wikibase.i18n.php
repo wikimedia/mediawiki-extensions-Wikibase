@@ -1451,6 +1451,7 @@ $messages['he'] = array(
 	'wikibase-move-error' => 'לא ניתן להעביר דפים במרחב נתונים, ולא ניתן להעביר דפים אליו.',
 	'wikibase-error-relational-save-failed' => 'שמירת זהות פריט במסד הנתונים לא הצליחה.',
 	'wikibase-error-sitelink-already-used' => 'קישור אתר [[$1:$2]] כבר משמש בפריט שהמזהה שלו הוא [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'למאפיין אחר ($3) כבר יש תווית "$1" שמזוהה עם קוד השפה $2',
 	'special-itembytitle' => 'פריט לפי כותרת',
 	'wikibase-itembytitle-lookup-fieldset' => 'חיפוש פריטים לפי אתר וכותרת',
 	'wikibase-itembytitle-lookup-site' => 'אתר¹&rlm;²:',
