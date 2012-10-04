@@ -102,30 +102,6 @@ class UtilsTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testGetEntityContentModels() {
-		$this->assertInternalType( 'array', Utils::getEntityContentModels() );
-	}
-
-	public function testGetEntityTypes() {
-		$this->assertInternalType( 'array', Utils::getEntityTypes() );
-	}
-
-	public function testIsEntityType() {
-		foreach ( Utils::getEntityTypes() as $type ) {
-			$this->assertTrue( Utils::isEntityType( $type ) );
-		}
-
-		$this->assertFalse( Utils::isEntityType( 'this-does-not-exist' ) );
-	}
-
-	public function testIsEntityContentModel() {
-		foreach ( Utils::getEntityContentModels() as $type ) {
-			$this->assertTrue( Utils::isEntityContentModel( $type ) );
-		}
-
-		$this->assertFalse( Utils::isEntityContentModel( 'this-does-not-exist' ) );
-	}
-
 	public function testGetEntityNamespaces() {
 		$this->assertInternalType( 'array', Utils::getEntityNamespaces() );
 	}
