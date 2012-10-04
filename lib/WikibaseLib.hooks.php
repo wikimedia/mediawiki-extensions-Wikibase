@@ -62,6 +62,7 @@ final class LibHooks {
 					'commonsMedia',
 					//'string',
 				),
+				'entityNamespaces' => array()
 			)
 		);
 

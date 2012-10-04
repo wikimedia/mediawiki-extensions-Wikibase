@@ -442,9 +442,7 @@ final class RepoHooks {
 					9001,
 					31337,
 					720101010,
-				),
-
-				'entityNamespaces' => array(),
+				)
 			)
 		);
 
