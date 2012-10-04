@@ -26,7 +26,7 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.2
  *
  * @file
  * @ingroup Wikibase
@@ -39,7 +39,7 @@ class StatementList extends \SplObjectStorage implements Statements {
 	/**
 	 * @see Statements::addClaim
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param Statement $statement
 	 */
@@ -50,7 +50,7 @@ class StatementList extends \SplObjectStorage implements Statements {
 	/**
 	 * @see Statements::hasClaim
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param Statement $statement
 	 *
@@ -63,7 +63,7 @@ class StatementList extends \SplObjectStorage implements Statements {
 	/**
 	 * @see Statements::removeClaim
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param Statement $statement
 	 */
@@ -74,7 +74,7 @@ class StatementList extends \SplObjectStorage implements Statements {
 	/**
 	 * @see Hashable::getHash
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param MapHasher $mapHasher
 	 *

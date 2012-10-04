@@ -28,7 +28,7 @@ use Wikibase\PropertyNoValueSnak;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.1
+ * @since 0.2
  *
  * @ingroup WikibaseLib
  * @ingroup Test
