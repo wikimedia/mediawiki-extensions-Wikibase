@@ -42,26 +42,10 @@ use \DataValues\StringValue;
  */
 class StatementObjectTest extends \MediaWikiTestCase {
 
-	public function testNewForEntity() {
-		$entity = \Wikibase\ItemObject::newEmpty();
-		$entity->setId( 42 );
-
-		$instance = StatementObject::newForEntity( $entity, new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
-
-		$this->assertInstanceOf( '\Wikibase\Statement', $instance );
-	}
-
 	public function instanceProvider() {
 		$instances = array();
 
-		$entity = \Wikibase\ItemObject::newEmpty();
-		$entity->setId( 42 );
-
-		$newEntity = clone $entity;
-		$newEntity->setId( 43 );
-		$newEntity->addAliases( 'en', array( 'foo', 'bar', 'baz' ) );
-
-		$baseInstance = StatementObject::newForEntity( $entity, new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$baseInstance = new StatementObject( new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
 
 		$instances[] = $baseInstance;
 
@@ -71,7 +55,6 @@ class StatementObjectTest extends \MediaWikiTestCase {
 		$instances[] = $instance;
 
 		$newInstance = clone $instance;
-		$newInstance->setEntity( $newEntity );
 
 		$instances[] = $newInstance;
 

@@ -1,11 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\StatementList as StatementList;
-use Wikibase\Statements as Statements;
-use Wikibase\Statement as Statement;
-use Wikibase\StatementObject as StatementObject;
-use Wikibase\Hashable as Hashable;
+use Wikibase\StatementList;
+use Wikibase\Statements;
+use Wikibase\Statement;
+use Wikibase\StatementObject;
+use Wikibase\Hashable;
+use Wikibase\ClaimObject;
+use Wikibase\PropertyNoValueSnak;
 
 /**
  * Tests for the Wikibase\StatementList class.
@@ -59,7 +61,14 @@ class StatementListTest extends \MediaWikiTestCase {
 	public function getElementInstances() {
 		$instances = array();
 
-		$instances[] = new \Wikibase\StatementObject( new \Wikibase\InstanceOfSnak( 42 ) );
+		$instances[] = new StatementObject( new ClaimObject( new PropertyNoValueSnak( 42 ) ) );
+
+		$instances[] = new StatementObject(
+			new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ),
+			new \Wikibase\ReferenceList(
+				new \Wikibase\ReferenceObject( new \Wikibase\SnakList( new PropertyNoValueSnak( 23 ) ) )
+			)
+		);
 
 		return $instances;
 	}

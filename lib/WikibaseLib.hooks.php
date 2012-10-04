@@ -141,7 +141,7 @@ final class LibHooks {
 			'snak/PropertyValueSnak',
 			'snak/SnakList',
 
-//			'statement/StatementList',
+			'statement/StatementList',
 			'statement/StatementObject',
 
 			'store/SiteLinkLookup',

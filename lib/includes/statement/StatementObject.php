@@ -32,33 +32,6 @@ namespace Wikibase;
 class StatementObject implements Statement {
 
 	/**
-	 * The id of the entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @var integer
-	 */
-	protected $entityId;
-
-	/**
-	 * The type of the entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @var string
-	 */
-	protected $entityType;
-
-	/**
-	 * The number of the statement within the entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @var integer
-	 */
-	protected $statementNumber;
-
-	/**
 	 * @since 0.1
 	 *
 	 * @var Claim
@@ -80,13 +53,6 @@ class StatementObject implements Statement {
 	protected $rank = Statement::RANK_NORMAL;
 
 	/**
-	 * @since 0.1
-	 *
-	 * @var integer
-	 */
-	protected $number;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -97,19 +63,6 @@ class StatementObject implements Statement {
 	public function __construct( Claim $claim, References $references = null ) {
 		$this->claim = $claim;
 		$this->references = $references === null ? new ReferenceList() : $references;
-	}
-
-	/**
-	 * @see Statement::setEntity
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $entity
-	 */
-	public function setEntity( Entity $entity ) {
-		$this->entityId = $entity->getId();
-		$this->entityType = $entity->getType();
-		$this->number = 42; // TODO
 	}
 
 	/**
@@ -196,44 +149,13 @@ class StatementObject implements Statement {
 	 * @return string
 	 */
 	public function getHash() {
-		return $this->entityId . $this->entityType . $this->number
-			. sha1( implode(
-				'|',
-				array(
-					$this->claim->getHash(),
-					$this->references->getHash(),
-				)
-			) );
-	}
-
-	/**
-	 * @see Statement::getNumber
-	 *
-	 * @since 0.1
-	 *
-	 * @return integer
-	 */
-	public function getNumber() {
-		return $this->number;
-	}
-
-	/**
-	 * Creates a new statement for the provided entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $entity
-	 * @param Claim $claim
-	 * @param References|null $references
-	 *
-	 * @return Statement
-	 */
-	public static function newForEntity( Entity $entity, Claim $claim, References $references = null ) {
-		$statement = new static( $claim, $references );
-
-		$statement->setEntity( $entity );
-
-		return $statement;
+		return sha1( implode(
+			'|',
+			array(
+				$this->claim->getHash(),
+				$this->references->getHash(),
+			)
+		) );
 	}
 
 }

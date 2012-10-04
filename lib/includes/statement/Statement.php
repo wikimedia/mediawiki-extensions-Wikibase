@@ -96,22 +96,4 @@ interface Statement extends Hashable {
 	 */
 	public function setClaim( Claim $claim );
 
-	/**
-	 * Returns the number of the statement needed to identify it within an entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @return integer
-	 */
-	public function getNumber();
-
-	/**
-	 * Sets the entity this statement belongs to.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $entity
-	 */
-	public function setEntity( Entity $entity );
-
 }
