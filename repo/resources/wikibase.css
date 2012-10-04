@@ -262,3 +262,15 @@ table.wb-sitelinks .even td.wb-sitelinks-siteid {
 span.wb-itemlink-id { /* item id within a link to an item (especially on special pages) */
 	font-size: .85em;
 }
+
+
+/********** PROPERTY PAGE **********/
+
+.wb-propertypage .wb-datatype {
+	float: left;
+	clear: both;
+	margin-left: 10px;
+	margin-top: 2em;
+}
+
+/********** /PROPERTY PAGE **********/

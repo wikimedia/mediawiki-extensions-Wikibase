@@ -14,6 +14,7 @@ use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPa
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author H. Snater
  */
 class PropertyView extends EntityView {
 
@@ -21,12 +22,16 @@ class PropertyView extends EntityView {
 
 	/**
 	 * @see EntityView::getInnerHtml
+	 *
+	 * @param PropertyContent $property
 	 */
 	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true ) {
 		$html = parent::getInnerHtml( $property, $lang, $editable );
 
 		// add data value to default entity stuff
-		$html .= $this->getHtmlForDataType( $property, $lang, $editable );
+		/** @var PropertyContent $property */
+		$html .= $this->getHtmlForDataType( $property->getProperty()->getDataType(), $lang, $editable );
+		// TODO: figure out where to display type information more nicely
 
 		return $html;
 	}
@@ -36,20 +41,20 @@ class PropertyView extends EntityView {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent $property the property to render
+	 * @param \DataTypes\DataType $dataType the data type to render
 	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
-	public function getHtmlForDataType( EntityContent $property, Language $lang = null, $editable = true ) {
-		$info = $this->extractEntityInfo( $property );
-
-		// todo: use the right stuff to have a string giving information about the property's data type
-		//$datatype = $property->getEntity()->getDatatype( $info['lang']->getCode() );
+	public function getHtmlForDataType( \DataTypes\DataType $dataType, Language $lang = null, $editable = true ) {
+		$langCode = null;
+		if ( $lang !== null ) {
+			$langCode = $lang->getCode();
+		}
 		return Html::element(
 			'div',
 			array( 'class' => 'wb-datatype wb-value-row' ),
-			'' //$datatype
+			$dataType->getLabel( $langCode ) . ' (' . $dataType->getId() . ')'
 		);
 	}
 }
