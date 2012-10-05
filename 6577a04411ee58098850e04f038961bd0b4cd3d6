@@ -16,6 +16,23 @@
       "revId": "6577a04411ee58098850e04f038961bd0b4cd3d6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen////o\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-10-05T07:56:25Z",
+      "side": 1,
+      "message": "Please pass the token to attemptSave",
+      "revId": "6577a04411ee58098850e04f038961bd0b4cd3d6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
