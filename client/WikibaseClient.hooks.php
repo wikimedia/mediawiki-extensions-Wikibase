@@ -98,7 +98,7 @@ final class ClientHooks {
 		// strip the wikibase- prefix
 		$mainType = preg_replace( '/^wikibase-/', '', $mainType );
 
-		if ( array_key_exists( $mainType, EntityObject::$typeMap ) ) {
+		if ( in_array( $mainType, EntityFactory::singleton()->getEntityTypes() ) ) {
 
 			$cacheUpdater = new EntityCacheUpdater();
 			$cacheUpdater->handleChange( $change );
