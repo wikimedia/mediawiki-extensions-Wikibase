@@ -106,6 +106,7 @@ $wgAutoloadClasses['Wikibase\DiffChange'] 			= $dir . 'includes/changes/DiffChan
 $wgAutoloadClasses['Wikibase\EntityCreation'] 		= $dir . 'includes/changes/EntityCreation.php';
 $wgAutoloadClasses['Wikibase\EntityDeletion'] 		= $dir . 'includes/changes/EntityDeletion.php';
 $wgAutoloadClasses['Wikibase\EntityRefresh'] 		= $dir . 'includes/changes/EntityRefresh.php';
+$wgAutoloadClasses['Wikibase\EntityRestore']		= $dir . 'includes/changes/EntityRestore.php';
 $wgAutoloadClasses['Wikibase\EntityUpdate'] 		= $dir . 'includes/changes/EntityUpdate.php';
 
 // includes/claims
