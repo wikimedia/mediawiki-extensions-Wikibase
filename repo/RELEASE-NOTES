@@ -11,11 +11,12 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 *
 
 === Version 0.1 ===
-(???)
+(2012-1?-??)
 
 Initial release with these features:
-* Maintenances of sitelinks
-* Labeling and describing items
-* Introduction of the structred data as a content type in MediaWiki
-* API to access the structured data
-* Rich user interface for editing sitelinks
+* Items can be created, modified and deleted, and have most functionality associated with normal articles
+* Items have internationalized labels, descriptions and aliases
+* Items have associated sitelinks which can be propagated automatically to clients
+* Editing of items can be done via the rich user interface
+* An API to access and modify Items
+
