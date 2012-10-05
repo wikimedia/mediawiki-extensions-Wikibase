@@ -41,11 +41,10 @@ abstract class ApiModifyEntity extends Api {
 	/**
 	 * Find the entity.
 	 *
-	 * @since    0.1
+	 * @since 0.1
 	 *
-	 * @param array       $params
+	 * @param array $params
 	 *
-	 * @internal param \Wikibase\EntityContent $entityContent
 	 * @return EntityContent Found existing entity
 	 */
 	protected function findEntity( array $params ) {
@@ -170,8 +169,6 @@ abstract class ApiModifyEntity extends Api {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
-		global $wgContLang;
-
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 		$this->flags = 0;
@@ -198,7 +195,7 @@ abstract class ApiModifyEntity extends Api {
 		}
 
 		// This is similar to ApiEditPage.php and what it uses at line 314
-		$this->flags |= ($user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+		$this->flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 
 		// if the entity is not up for creation, set the EDIT_UPDATE flags
 		if ( !$entityContent->isNew() && ( $this->flags & EDIT_NEW ) === 0 ) {
@@ -251,18 +248,22 @@ abstract class ApiModifyEntity extends Api {
 			'entity',
 			'id', $entityContent->getEntity()->getId()
 		);
+
 		$this->getResult()->addValue(
 			'entity',
 			'type', $entityContent->getEntity()->getType()
 		);
+
 		$page = $entityContent->getWikiPage();
 		$revision = $page->getRevision();
+
 		if ( $revision !== null ) {
 			$this->getResult()->addValue(
 				'entity',
 				'lastrevid', intval( $revision->getId() )
 			);
 		}
+
 		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 			$normalized = array();
 
@@ -285,7 +286,6 @@ abstract class ApiModifyEntity extends Api {
 			'success',
 			(int)$success
 		);
-
 	}
 
 	/**
