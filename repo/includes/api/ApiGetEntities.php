@@ -16,7 +16,7 @@ use ApiBase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ApiGetItems extends Api {
+class ApiGetEntities extends Api {
 
 	public function __construct( $main, $action ) {
 		parent::__construct( $main, $action );
@@ -269,11 +269,11 @@ class ApiGetItems extends Api {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbgetitems&ids=42'
+			'api.php?action=wbgetentities&ids=42'
 			=> 'Get item number 42 with language attributes in all available languages',
-			'api.php?action=wbgetitems&ids=42&languages=en'
+			'api.php?action=wbgetentities&ids=42&languages=en'
 			=> 'Get item number 42 with language attributes in English language',
-			'api.php?action=wbgetitems&sites=en&titles=Berlin&languages=en'
+			'api.php?action=wbgetentities&sites=en&titles=Berlin&languages=en'
 			=> 'Get the item for page "Berlin" on the site "en", with language attributes in English language',
 		);
 	}
@@ -282,7 +282,7 @@ class ApiGetItems extends Api {
 	 * @see ApiBase::getHelpUrls()
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbgetitems';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbgetentities';
 	}
 
 	/**
