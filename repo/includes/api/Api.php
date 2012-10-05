@@ -313,7 +313,7 @@ abstract class Api extends \ApiBase {
 	 * @param $params array of arguments for the module, passed for ModifyItem
 	 *
 	 * @return Status the check's result
-	 * @todo: use this also to check for read access in ApiGetItems, etc
+	 * @todo: use this also to check for read access in ApiGetEntities, etc
 	 */
 	public function checkPermissions( EntityContent $entityContent, User $user, array $params ) {
 		if ( Settings::get( 'apiInDebug' ) && !Settings::get( 'apiDebugWithRights', false ) ) {
