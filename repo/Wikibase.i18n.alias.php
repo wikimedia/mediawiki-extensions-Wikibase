@@ -30,6 +30,11 @@ $specialPageAliases['ar'] = array(
 	'ItemDisambiguation' => array( 'المدخلات_بالعلامة' ),
 );
 
+/** Aramaic (ܐܪܡܝܐ) */
+$specialPageAliases['arc'] = array(
+	'NewProperty' => array( 'ܕܝܠܝܘܬ̈ܐ_ܚܕ̈ܬܬܐ' ),
+);
+
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
 	'CreateItem' => array( 'Neues_Datenelement_erstellen' ),
@@ -56,8 +61,10 @@ $specialPageAliases['is'] = array(
 /** Korean (한국어) */
 $specialPageAliases['ko'] = array(
 	'CreateItem' => array( '항목만들기', '아이템만들기' ),
+	'NewProperty' => array( '새속성' ),
 	'ItemByTitle' => array( '제목별항목', '제목별아이템' ),
 	'ItemDisambiguation' => array( '레이블별항목', '라벨별항목', '레이블별아이템', '라벨별아이템' ),
+	'ListDatatypes' => array( '데이터유형목록' ),
 );
 
 /** Macedonian (македонски) */

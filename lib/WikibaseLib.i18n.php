@@ -154,6 +154,7 @@ $messages['it'] = array(
 	'wikibaselib-entity-item' => 'elemento',
 	'wikibaselib-entity-property' => 'proprietà',
 	'wikibaselib-entity-query' => 'interrogazione',
+	'datatypes-type-wikibase-item' => 'Elemento',
 );
 
 /** Japanese (日本語)
