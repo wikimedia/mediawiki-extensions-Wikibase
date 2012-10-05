@@ -11,17 +11,15 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 *
 
 === Version 0.1 ===
-(???)
+(2012-1?-??)
 
 Initial release with these features:
 
-* Shared Data structures for Wikibase client and repo
-
-TODO: put this somewhere:
-
-* Maintenances of sitelinks in the repository
-* Labeling and describing items in the repository
-* Clients that can use the sitelinks from a central repository
-* Introduction of the structred data as a content type in MediaWiki
-* API to access the structured data
-* Rich user interface for editing sitelinks
+* Objects to represent entities and items
+* Objects to represent SiteLinks
+* Change propagation system using a shared table
+** Objects to represent changes
+** ChangeNotifier and ChangeHandler interfaces
+** Maintenance script pollForChanges to detect new changes
+* Store interfaces for SiteLink lookups and SiteLink caching
+* Maintenance scripts to rebuild or delete all data
