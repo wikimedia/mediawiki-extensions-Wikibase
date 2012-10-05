@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAfX////8\u003d",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-05T09:47:20Z",
+      "side": 1,
+      "message": "the code loading the class is looking for class ApiCreateClaim",
+      "revId": "ccc40d01616df555d64480470318c2c2b229db4d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
