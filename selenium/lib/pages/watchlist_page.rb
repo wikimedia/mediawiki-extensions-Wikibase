@@ -10,7 +10,8 @@ class WatchlistPage
   include PageObject
 
   page_url WIKI_CLIENT_URL + 'Special:Watchlist'
-  link(:wlArticleLink1, :xpath => "//ul[contains(@class, 'special')]/li/span[contains(@class, 'mw-title')]/a")
-  span(:wlArticleComment1, :xpath => "//ul[contains(@class, 'special')]/li/span[contains(@class, 'comment')]")
+
+  link(:wlArticleLink1, :xpath => "//ul[@class='special']/li/a[2]")
+  list_item(:wlArticleComment1, :xpath => "//ul[contains(@class, 'special')]/li")
 
 end

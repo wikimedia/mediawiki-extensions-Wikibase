@@ -4,11 +4,10 @@
 # Author:: Tobias Gritschacher (tobias.gritschacher@wikimedia.de)
 # License:: GNU GPL v2+
 #
-# page object for recent changes special page
+# base page object for recent changes special page
 
 class RecentChangesPage < ItemPage
   include PageObject
-  page_url WIKI_REPO_URL + "Special:RecentChanges"
   unordered_list(:recentChanges, :class => "special")
   span(:firstResultLabelSpan, :class => "wb-itemlink-label")
   span(:firstResultIdSpan, :class => "wb-itemlink-id")
