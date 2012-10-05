@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAf3////0\u003d",
+        "filename": "repo/tests/phpunit/TestItemContents.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-05T10:53:36Z",
+      "side": 1,
+      "message": "But you\u0027re not changing the class and file names?",
+      "revId": "eefb6dc03e355ba1def62d6940e97568837d75cd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
