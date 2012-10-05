@@ -38,7 +38,7 @@ describe "Check functionality of item deletion" do
         page.firstResultLabelSpan_element.text.should == label
         page.firstResultSearchMatch_element.text.should == alias_b
       end
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       visit_page(DeleteItemPage) do |page|
@@ -60,7 +60,7 @@ describe "Check functionality of item deletion" do
   end
   after :all do
     # tear down: logout
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end
