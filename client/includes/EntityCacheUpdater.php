@@ -59,10 +59,13 @@ class EntityCacheUpdater {
 			case 'update':
 				$entityCache->updateEntity( $entity );
 				break;
+			case 'restore':
+				$entityCache->updateEntity( $entity );
+				break;
 		}
 
 		// TODO: handle refresh updates and refresh for other types as well
-
+		// TODO: handle entities other than items
 		if ( $entity->getType() == Item::ENTITY_TYPE ) {
 			$store->newSiteLinkCache()->saveLinksOfItem( $entity );
 		}

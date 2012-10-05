@@ -187,8 +187,8 @@ describe "Check functionality of client-repo connection" do
   end
 
   context "client-repo deleting/restoring item" do
-    it "should delete item & that no sitelinks are shown on client" do
-      visit_page(LoginPage) do |page|
+    it "should delete item & check that no sitelinks are shown on client" do
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       on_page(DeleteItemPage) do |page|
@@ -200,14 +200,12 @@ describe "Check functionality of client-repo connection" do
       end
     end
     it "should undelete item & check that sitelinks are shown again on client" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       on_page(UndeleteItemPage) do |page|
         page.undelete_item(item_id)
       end
-=begin
-      # not implemented yet! undeleting an item is not propagated to the client
       on_page(ClientPage) do |page|
         page.navigate_to_article(article_title_a)
         page.count_interwiki_links.should == 5
@@ -218,7 +216,6 @@ describe "Check functionality of client-repo connection" do
         page.interwiki_fr?.should be_true
         page.interwiki_en?.should be_false
       end
-=end
     end
   end
 
@@ -243,7 +240,7 @@ describe "Check functionality of client-repo connection" do
 
   after :all do
     # tear down: logout
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end
