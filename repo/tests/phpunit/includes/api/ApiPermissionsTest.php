@@ -141,20 +141,20 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	}
 
 
-	function provideGetItemsPermissions() {
+	function provideGetEntitiesPermissions() {
 		$permissions = $this->provideReadPermissions();
 		return $permissions;
 	}
 
 	/**
-	 * @dataProvider provideGetItemsPermissions
+	 * @dataProvider provideGetEntitiesPermissions
 	 */
-	function testGetItems( $permissions, $expectedError ) {
+	function testGetEntities( $permissions, $expectedError ) {
 		$params = array(
 			'ids' => $this->getItemId( "Oslo" ),
 		);
 
-		$this->doPermissionsTest( 'wbgetitems', $params, $permissions, $expectedError );
+		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
 
 	function provideAddItemPermissions() {

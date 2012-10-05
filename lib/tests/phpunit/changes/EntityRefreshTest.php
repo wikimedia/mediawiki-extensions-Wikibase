@@ -37,7 +37,7 @@ use Wikibase\Entity as Entity;
  */
 class EntityRefreshTest extends \MediaWikiTestCase {
 
-	protected function getEntities() {
+	protected function getItems() {
 		$entities = array();
 
 		$emptyEntities = array(
@@ -67,7 +67,7 @@ class EntityRefreshTest extends \MediaWikiTestCase {
 			function( Entity $entity ) {
 				return array( $entity );
 			},
-			$this->getEntities()
+			$this->getItems()
 		);
 	}
 
@@ -82,7 +82,7 @@ class EntityRefreshTest extends \MediaWikiTestCase {
 			function( Entity $entity ) use ( $class ) {
 				return array( $class::newFromEntity( $entity ) );
 			},
-			$this->getEntities()
+			$this->getItems()
 		);
 	}
 
@@ -116,7 +116,7 @@ class EntityRefreshTest extends \MediaWikiTestCase {
 		 * @var Entity $entity
 		 * @var EntityRefresh $entityRefresh
 		 */
-		foreach ( $this->getEntities() as $entity ) {
+		foreach ( $this->getItems() as $entity ) {
 			$entityRefresh->setEntity( $entity );
 			$this->assertEquals( $entity, $entityRefresh->getEntity() );
 		}
