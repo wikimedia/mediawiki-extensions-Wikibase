@@ -20,7 +20,7 @@ use Wikibase\Settings as Settings;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group ApiGetItemsTest
+ * @group ApiGetEntitiesTest
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -31,7 +31,7 @@ use Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiGetItemsTest extends ApiModifyItemBase {
+class ApiGetEntitiesTest extends ApiModifyItemBase {
 
 
 	/**
@@ -45,7 +45,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'ids' => $id )
 		);
 
@@ -106,7 +106,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	 */
 	public function testGetItemByTitle( $handle, $site, $title ) {
 		list($res,,) = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
+			'action' => 'wbgetentities',
 			'sites' => $site,
 			'titles' => $title,
 		) );
@@ -125,10 +125,10 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	 *
 	 * @group API
 	 */
-	public function testGetItemsByBadId( ) {
+	public function testGetEntitiesByBadId( ) {
 		$badid =  123456789;
 		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
+			'action' => 'wbgetentities',
 			'ids' => $badid,
 		) );
 
@@ -142,10 +142,10 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	 *
 	 * @group API
 	 */
-	public function testGetItemsByBadSite( ) {
+	public function testGetEntitiesByBadSite( ) {
 		try {
 			list( $res,, ) = $this->doApiRequest( array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'sites' => 'enwiktionary',
 				'titles' => 'Berlin',
 			) );
@@ -162,9 +162,9 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	 *
 	 * @group API
 	 */
-	public function testGetItemsByBadTitle( ) {
+	public function testGetEntitiesByBadTitle( ) {
 		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
+			'action' => 'wbgetentities',
 			'sites' => 'enwiki',
 			'titles' => 'klaijehrnqowienxcqopweiu',
 		) );
@@ -182,12 +182,12 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	 *
 	 * @group API
 	 */
-	public function testGetItemsMultipleIds() {
+	public function testGetEntitiesMultipleIds() {
 		$handles = $this->getItemHandles();
 		$ids = array_map( array( $this, 'getItemId' ), $handles );
 
 		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
+			'action' => 'wbgetentities',
 			'ids' => join( '|', $ids ),
 		) );
 
@@ -205,13 +205,13 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 	 *
 	 * @group API
 	 */
-	public function testGetItemsMultipleSiteLinks() {
+	public function testGetEntitiesMultipleSiteLinks() {
 		$handles = array( 'Berlin', 'London', 'Oslo' );
 		$sites = array( 'dewiki', 'enwiki', 'nlwiki' );
 		$titles = array( 'Berlin', 'London', 'Oslo' );
 
 		list( $res,, ) = $this->doApiRequest( array(
-			'action' => 'wbgetitems',
+			'action' => 'wbgetentities',
 			'sites' => join( '|', $sites ),
 			'titles' => join( '|', $titles )
 		) );
@@ -247,7 +247,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'languages' => join( '|', $languages ),
 				'ids' => $id )
 		);
@@ -298,7 +298,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'props' => $props,
 				'ids' => $id )
 		);
@@ -307,7 +307,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 
 		if ( $expectedProps === false ) {
 			$this->assertArrayHasKey( 'warnings', $res );
-			$this->assertArrayHasKey( 'wbgetitems', $res['warnings'] );
+			$this->assertArrayHasKey( 'wbgetentities', $res['warnings'] );
 		} else {
 			$this->assertArrayEquals( $expectedProps, array_keys( $res['entities'][$id] ) );
 		}
@@ -329,7 +329,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'props' => 'sitelinks',
 				'ids' => $id )
 		);
@@ -343,7 +343,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		// -------------------------------------------
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'props' => 'sitelinks|sitelinks/urls',
 				'ids' => $id )
 		);
@@ -371,7 +371,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'props' => 'sitelinks',
 				'sort' => 'sitelinks',
 				'dir' => 'ascending',
@@ -389,7 +389,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 		// -------------------------------------------
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'props' => 'sitelinks',
 				'sort' => 'sitelinks',
 				'dir' => 'descending',
@@ -416,7 +416,7 @@ class ApiGetItemsTest extends ApiModifyItemBase {
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'format' => $format,
 				'ids' => $id )
 		);
