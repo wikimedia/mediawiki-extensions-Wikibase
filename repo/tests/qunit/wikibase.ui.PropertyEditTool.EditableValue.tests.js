@@ -77,12 +77,16 @@
 				};
 			};
 
+			// have to change value because if value isNew and empty, there will be no API call
+			this.editableValue.setValue( this.strings.valid[0] );
 			this.editableValue.simulateApiFailure();
 
 			ok(
 				this.editableValue.remove().state() === 'rejected',
 				'simulateApiFailure() we use for testing failures in the API works'
 			);
+
+			this.editableValue.setValue( '' ); // reset to initial state
 
 			this.editableValue.simulateApiSuccess = function() {
 				self.editableValue.queryApi = function( deferred, apiAction ) { // override AJAX API call
@@ -130,9 +134,21 @@
 		);
 
 		equal(
-			this.editableValue.isPending(),
+			this.editableValue.isPending(), // see todo in EditableValue. This behaves strange, use isNew()
 			false,
 			'value is not pending'
+		);
+
+		equal(
+			this.editableValue.isNew(),
+			true,
+			'value is new'
+		);
+
+		equal(
+			this.editableValue.isEmpty(),
+			true,
+			'value is empty'
 		);
 
 		equal(
