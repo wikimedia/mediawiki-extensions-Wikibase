@@ -233,7 +233,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		// these sets of failing data must be merged with an existing item
 		list($query,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'props' => 'info',
 				'ids' => $id
 			),
