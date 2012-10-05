@@ -152,9 +152,15 @@
 		);
 
 		equal(
+			this.editableValue.valueCompare( this.editableValue.getValue(), '' ),
+			true,
+			'value is empty string'
+		);
+
+		equal(
 			this.editableValue.isInEditMode(),
-			false,
-			'not in edit mode'
+			true,
+			'in edit mode initially because empty string is initial value'
 		);
 
 		ok(
