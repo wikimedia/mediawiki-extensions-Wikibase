@@ -466,7 +466,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	function loadItem( $id ) {
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
 				'ids' => $id )
 		);
 

@@ -22,11 +22,11 @@ final class TestItemContents {
 	 * @since 0.1
 	 * @return array of ItemContent
 	 */
-	public static function getItems() {
+	public static function getEntities() {
 		// @codeCoverageIgnoreStart
 		return array_map(
 			'\Wikibase\ItemContent::newFromItem',
-			TestItems::getItems()
+			TestItems::getEntities()
 		);
 		// @codeCoverageIgnoreEnd
 	}

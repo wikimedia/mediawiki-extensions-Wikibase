@@ -41,7 +41,7 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 	public function itemProvider() {
 		return array_map(
 			function( ItemContent $itemContent ) { return array( $itemContent ); },
-			\Wikibase\Test\TestItemContents::getItems()
+			\Wikibase\Test\TestItemContents::getEntities()
 		);
 	}
 

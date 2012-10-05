@@ -110,7 +110,7 @@ $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/Ed
 
 // includes/api
 $wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
-$wgAutoloadClasses['Wikibase\ApiGetItems'] 				= $dir . 'includes/api/ApiGetItems.php';
+$wgAutoloadClasses['Wikibase\ApiGetEntities'] 				= $dir . 'includes/api/ApiGetEntities.php';
 $wgAutoloadClasses['Wikibase\ApiModifyEntity'] 			= $dir . 'includes/api/ApiModifyEntity.php';
 $wgAutoloadClasses['Wikibase\ApiModifyLangAttribute'] 	= $dir . 'includes/api/ApiModifyLangAttribute.php';
 $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
@@ -172,7 +172,7 @@ $wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/in
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 			= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 
 // API module registration
-$wgAPIModules['wbgetitems'] 						= 'Wikibase\ApiGetItems';
+$wgAPIModules['wbgetentities'] 						= 'Wikibase\ApiGetEntities';
 $wgAPIModules['wbsetlabel'] 						= 'Wikibase\ApiSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'Wikibase\ApiSetDescription';
 $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';

@@ -112,7 +112,7 @@ final class RepoHooks {
 
 			'api/ApiBotEdit',
 			'api/ApiEditPage',
-			'api/ApiGetItems',
+			'api/ApiGetEntities',
 			'api/ApiLabel',
 			'api/ApiDescription',
 			'api/ApiPermissions',
