@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAen////0\u003d",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-05T07:57:07Z",
+      "side": 1,
+      "message": "can we ever have more than one type of entity per namespace?  it there a way to do this check without basing it on namespaces",
+      "revId": "1876ebb883edfcf22f2fa99112129561d1536e60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAen////4\u003d",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-05T07:57:07Z",
+      "side": 1,
+      "message": "entityId, not just itemId",
+      "revId": "1876ebb883edfcf22f2fa99112129561d1536e60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
