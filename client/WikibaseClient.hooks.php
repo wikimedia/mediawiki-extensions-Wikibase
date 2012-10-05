@@ -165,7 +165,7 @@ final class ClientHooks {
 							}
 						}
 					} else {
-						// handle item deletion
+						// handle item deletion or restore
 						$title = \Title::newFromText( $page );
 						if ( !is_null( $title ) ) {
 							self::updatePage( $title, $change );

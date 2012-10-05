@@ -56,6 +56,10 @@ final class LibHooks {
 					'wikibase-item~refresh' => 'Wikibase\EntityRefresh',
 					'wikibase-property~refresh' => 'Wikibase\EntityRefresh',
 					'wikibase-query~refresh' => 'Wikibase\EntityRefresh',
+
+					'wikibase-item~restore' => 'Wikibase\EntityRestore',
+					'wikibase-property~restore' => 'Wikibase\EntityRestore',
+					'wikibase-query~restore' => 'Wikibase\EntityRestore',
 				),
 				'dataTypes' => array(
 					'wikibase-item',
