@@ -11,9 +11,11 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 *
 
 === Version 0.1 ===
-(???)
+(2012-1?-??)
 
 Initial release with these features:
 
-* Accessing and displaying sitelinks from a repository
-* Parser function for the interplay between locally and externally defined sitelinks
+* Handling of changes to entities from a remote Wikibase repository
+* Local entity cache that can be shared with other client wikis
+* Display of repository siteslinks as interlanguage links
+* #noexternallanglinks parser function to surpress display of non-local languagelinks, optionally limited by languages
