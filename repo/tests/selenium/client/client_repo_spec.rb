@@ -84,6 +84,12 @@ describe "Check functionality of client-repo connection" do
         page.wlArticleComment1.include?(item_id).should be_true
       end
     end
+    it "should check for propagation of changes to client recent changes" do
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultUserLink_element.text.include?("REPO USER").should be_true
+        page.clientFirstResultLabelLink_element.text.should == article_title_a
+      end
+    end
     it "should add additional sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item

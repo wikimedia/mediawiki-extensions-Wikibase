@@ -24,7 +24,7 @@ describe "Check functionality of recentChanges special page" do
   end
   context "check for label and ID on recentChanges" do
     it "should check if label and ID are displayed and link leads to the correct item" do
-      visit_page(RecentChangesPage) do |page|
+      visit_page(RepoRecentChangesPage) do |page|
         page.firstResultLabelSpan?.should be_true
         page.firstResultIdSpan?.should be_true
         page.firstResultLabelSpan.should == label
