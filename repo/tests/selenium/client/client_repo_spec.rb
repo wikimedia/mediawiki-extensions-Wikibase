@@ -38,7 +38,10 @@ describe "Check functionality of client-repo connection" do
         page.interwiki_xxx?.should be_false
       end
     end
-    it "should add some sitelinks to the item" do
+    it "should login as user & add some sitelinks to the item" do
+      visit_page(RepoLoginPage) do |page|
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+      end
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
@@ -80,8 +83,38 @@ describe "Check functionality of client-repo connection" do
         page.watch_article(article_title_a)
       end
       visit_page(WatchlistPage) do |page|
-        page.wlArticleComment1.include?(article_title_a).should be_true
-        page.wlArticleComment1.include?(item_id).should be_true
+        page.wlArticleLink1_element.text.should == article_title_a
+        page.wlArticleIDLink1_element.text.include?(item_id).should be_true
+      end
+    end
+    it "should check for propagation of changes to client recent changes" do
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultDiffLink?.should be_true
+        page.clientFirstResultUserLink_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_true
+        page.clientFirstResultLabelLink_element.text.should == article_title_a
+        page.clientFirstResultIDLink_element.text.include?(item_id).should be_true
+      end
+    end
+    it "should check links in recent changes entries" do
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultUserLink
+      end
+      visit_page(ItemPage) do |page|
+        page.mwFirstHeading.downcase.should == "user:" + ADMIN_USERNAME.downcase
+      end
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultLabelLink
+      end
+      visit_page(ItemPage) do |page|
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == article_titel_a
+      end
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultIDLink
+      end
+      visit_page(ItemPage) do |page|
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == article_titel_a
       end
     end
     it "should add additional sitelinks" do
