@@ -350,6 +350,39 @@ final class RepoHooks {
 	}
 
 	/**
+	 * Handle changes for undeletions
+	 *
+	 * @since 0.2
+	 *
+	 * @param Title $title
+	 * @param bool $created
+	 * @param string $comment
+	 *
+	 * @return bool
+	 */
+	public static function onArticleUndelete( Title $title, $created, $comment ) {
+		$revId = $title->getLatestRevID();
+		$content = EntityContentFactory::singleton()->getFromRevision( $revId );
+		$entity = $content->getEntity();
+		$rev = Revision::newFromId( $revId );		
+		
+		$change = EntityRestore::newFromEntity( $entity );
+
+		// TODO: Use timestamp of log entry, but needs core change.
+		// This hook is called before the log entry is created.
+		$change->setFields( array(
+			'revision_id' => $revId,
+			'user_id' => $rev->getUser(),
+			'object_id' => $entity->getId(),
+			'time' => wfTimestamp( TS_MW, wfTimestampNow() )
+		) );		
+
+		ChangeNotifier::singleton()->handleChange( $change );
+
+		return true;
+	}
+
+	/**
 	 * Allows to add user preferences.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/GetPreferences
 	 *
