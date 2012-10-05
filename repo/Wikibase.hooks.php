@@ -5,7 +5,7 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, M
 
 
 /**
- * File defining the hook handlers for the Wikibase Client extension.
+ * File defining the hook handlers for the Wikibase extension.
  *
  * @since 0.1
  *
@@ -281,14 +281,13 @@ final class RepoHooks {
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
 		if ( Utils::isEntityContentModel( $article->getContent()->getModel() ) ) {
 			/**
-			 * @var $newItem Entity
+			 * @var $newEntity Entity
 			 */
 			$newEntity = $article->getContent()->getEntity();
 
 			if ( is_null( $revision->getParentId() ) ) {
 				$change = EntityCreation::newFromEntity( $newEntity );
-			}
-			else {
+			} else {
 				$change = EntityUpdate::newFromEntities(
 					Revision::newFromId( $revision->getParentId() )->getContent()->getEntity(),
 					$newEntity
