@@ -261,6 +261,17 @@ $messages['pt-br'] = array(
 	'wikibaselib-desc' => 'Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client',
 );
 
+/** Russian (русский)
+ * @author Amire80
+ */
+$messages['ru'] = array(
+	'wikibaselib-desc' => 'Общие функции расширений Wikibase и Wikibase Client',
+	'wikibaselib-entity-item' => 'предмет',
+	'wikibaselib-entity-property' => 'свойство',
+	'wikibaselib-entity-query' => 'запрос',
+	'datatypes-type-wikibase-item' => 'Предмет',
+);
+
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */

@@ -2907,6 +2907,7 @@ $messages['ro'] = array(
 );
 
 /** Russian (русский)
+ * @author Amire80
  * @author Kaganer
  * @author Ole Yves
  * @author Александр Сигачёв
@@ -2921,15 +2922,15 @@ $messages['ru'] = array(
 	'wikibase-remove-inprogress' => 'Удаление…',
 	'wikibase-label-edit-placeholder' => 'введите метку',
 	'wikibase-description-edit-placeholder' => 'введите описание',
-	'wikibase-sitelink-site-edit-placeholder' => 'Укажите сайт',
-	'wikibase-sitelink-page-edit-placeholder' => 'Укажите страницу',
+	'wikibase-sitelink-site-edit-placeholder' => 'сайт',
+	'wikibase-sitelink-page-edit-placeholder' => 'статья',
 	'wikibase-label-input-help-message' => 'Введите название этого набора данных в $1.',
 	'wikibase-description-input-help-message' => 'Введите краткое описание в $1.',
 	'wikibase-sitelinks' => 'Список страниц, ссылающихся на этот элемент',
 	'wikibase-sitelinks-add' => 'добавить ссылку на страницу сайта',
 	'wikibase-sitelinks-empty' => 'Ни одна страница сайта ещё не ссылается сюда.',
 	'wikibase-sitelinks-input-help-message' => 'Поставьте ссылку на страницу, относящуюся к этому пункту.',
-	'wikibase-remove' => 'убрать',
+	'wikibase-remove' => 'удалить',
 	'wikibase-propertyedittool-full' => 'Список значений уже полон.',
 	'wikibase-propertyedittool-counter' => '($1 запис{{PLURAL:$1|ь|и|ей}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 запис{{PLURAL:$1|ь|и|ей}})',
