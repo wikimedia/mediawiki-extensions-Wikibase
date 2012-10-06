@@ -32,6 +32,8 @@ interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable, \
 
 	/**
 	 * Returns the identifier of the datavalues type.
+	 * This should be the same value as the key in $wgDataValues.
+	 *
 	 * This is not to be confused with the DataType provided by the DataTypes extension.
 	 *
 	 * @since 0.1
