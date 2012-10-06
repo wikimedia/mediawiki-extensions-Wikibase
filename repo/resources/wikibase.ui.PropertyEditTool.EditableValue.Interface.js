@@ -422,7 +422,7 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 	 * @return bool whether the value has been changed
 	 */
 	_setValue_inEditMode: function( value ) {
-		this._inputElem.attr( 'value', value );
+		this._inputElem.val( value );
 		return true;
 	},
 
