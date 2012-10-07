@@ -123,6 +123,8 @@ final class LibHooks {
 			'changes/EntityRefresh',
 			'changes/EntityUpdate',
 
+			'claim/ClaimAggregate',
+			'claim/ClaimListAccess',
 			'claim/ClaimList',
 			'claim/ClaimObject',
 

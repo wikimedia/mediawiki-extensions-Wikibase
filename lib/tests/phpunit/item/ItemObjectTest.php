@@ -173,6 +173,7 @@ class ItemObjectTest extends EntityObjectTest {
 
 		$item = $item->copy();
 		$item->addStatement( new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+		$items[] = $item;
 
 		return $this->arrayWrap( $items );
 	}

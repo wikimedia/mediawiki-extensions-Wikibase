@@ -63,4 +63,13 @@ interface Property extends Entity, ClaimListAccess {
 	 */
 	public function setDataTypeById( $dataTypeId );
 
+	/**
+	 * Convenience function to check if the property contains any claims.
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims();
+
 }

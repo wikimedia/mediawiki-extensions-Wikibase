@@ -28,8 +28,17 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Query extends Entity {
+interface Query extends Entity, ClaimListAccess {
 
 	const ENTITY_TYPE = 'query';
+
+	/**
+	 * Convenience function to check if the query contains any claims.
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims();
 
 }
