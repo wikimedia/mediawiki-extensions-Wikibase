@@ -212,12 +212,21 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	},
 
 	/**
-	 * returns the toolbar of this EditableValue
+	 * Returns the toolbar of this EditableValue.
 	 *
 	 * @return wikibase.ui.Toolbar
 	 */
 	getToolbar: function() {
 		return this._toolbar;
+	},
+
+	/**
+	 * Returns whether there is a toolbar which allows the user interaction with this EditableValue.
+	 *
+	 * @return Boolean
+	 */
+	hasToolbar: function() {
+		return !!this._toolbar;
 	},
 
 	/**
@@ -522,11 +531,11 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	 * response is not compatible.
 	 *
 	 * @param array response
-	 * @return string|null
+	 * @return array|null // TODO should be a DataValue object
 	 */
 	_getValueFromApiResponse: function( response ) {
 		return ( this.API_VALUE_KEY !== null )
-			? response[ this.API_VALUE_KEY ][ window.mw.config.get( 'wgUserLanguage' ) ].value
+			? [ response[ this.API_VALUE_KEY ][ mw.config.get( 'wgUserLanguage' ) ].value ]
 			: null;
 	},
 
@@ -735,6 +744,9 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	/**
 	 * Determines if this value is a new value that is not yet stored
 	 * TODO: this method should completely replace this.isPending() which only works for site links
+	 * TODO: re-evaluate if above does actually make sense. We have two cases:
+	 *       - 1: entirely new value, no value set before (new, e.g. newly added site-link)
+	 *       - 2: changed value but save() not yet called (pending?)
 	 *
 	 * @return bool true if this is a new value, not stored in the database so far
 	 */
@@ -955,48 +967,78 @@ wb.ui.StateExtension.useWith( wb.ui.PropertyEditTool.EditableValue, {
 	 * @see wikibase.ui.StateExtension.getState
 	 */
 	getState: function() {
-		var disabled = true, enabled = true;
+		// consider toolbars state if toolbar is set
+		var state = this.hasToolbar() ? this._toolbar.getState() : undefined;
 
 		// check interfaces
 		$.each( this._interfaces, function( i, interf ) {
-			if ( interf.isDisabled() ) {
-				enabled = false;
-			} else if ( !interf.isDisabled() ) {
-				disabled = false;
+			var currentState = interf.getState();
+
+			if( state !== currentState) {
+				if( state === undefined ) {
+					state = currentState;
+				} else {
+					// state of this element different from others -> mixed state
+					state = this.STATE.MIXED;
+					return false; // no point in checking other states, we are mixed!
+				}
 			}
 		} );
-		// check toolbar
-		enabled = enabled && this._toolbar.isEnabled();
-		disabled = disabled && this._toolbar.isDisabled();
 
-		if ( disabled === true ) {
-			return this.STATE.DISABLED;
-		} else if ( enabled === true ) {
-			return this.STATE.ENABLED;
-		} else {
-			return this.STATE.MIXED;
-		}
+		return state;
 	},
 
 	/**
 	 * Dis- or enables the EditableValue (its toolbar and interfaces).
 	 * @see wikibase.ui.StateExtension._setState
 	 *
+	 * @todo there is still the bug that calling disable() and then enable() will not re-initiate the disabled state
+	 *       of certain toolbar buttons. E.g. if 'save' was disabled for some reason (e.g. initial value didn't change).
+	 *       One solution could be to change the state system so all elements always keep their state but if the parent
+	 *       is disabled,
+	 *
 	 * @param Number state see wb.ui.EditableValue.STATE
 	 * @return Boolean whether the desired state has been applied (or had been applied already)
 	 */
 	_setState: function( state ) {
 		var success = true;
+
+		// propagate state to all interfaces:
 		$.each( this._interfaces, function( i, interf ) {
-			success = success && interf.setState( state );
+			success = interf.setState( state ) && success;
 		} );
-		// prevent altering the actions' states of the EditableValues that are in edit mode already
-		// (referring to EditableValues that are empty when loading the page, instantly triggering
-		// edit mode; without excluding them, their actions would be enabled as well)
-		if ( !this.isInEditMode() && this._toolbar !== null ) {
-			success = success && this._toolbar.setState( state );
+
+		// propagate state to toolbar if toolbar is set
+		if( this.hasToolbar() ) {
+			var lockedToolbarState = this.hasLockedToolbarState();
+
+			// do only propagate state to toolbar if the state of the toolbar is not locked by some special rule
+			if( lockedToolbarState === false || lockedToolbarState === state ) {
+				this._toolbar.setState( state );
+			}
+			success = success && ( this._toolbar.getState() === state ); // consider toolbar state in both cases
 		}
 		return success;
+	},
+
+	/**
+	 * Returns whether and which of the toolbar states can currently not be changed by using EditableValue.setState().
+	 * If this returns anything but false, EditableValue.setState() might return EditableValue.STATE_MIXED because the
+	 * toolbar can't change its state at this point.
+	 * It should still be possible to do EditableValue.getToolbar().setState( state ) if the state should be enforced.
+	 *
+	 * @since 0.2
+	 *
+	 * @return false|Number false if not locked or one of EditableValue.STATE's enums if a particular state is enforced.
+	 */
+	hasLockedToolbarState: function() {
+		if( this.isInEditMode() && this.preserveEmptyForm && this.isEmpty() ) {
+			// toolbar always disabled if in edit mode but empty if empty form should be preserved.
+			// this is for label/description which display an empty form ready for input when empty. The toolbar though
+			// should be disabled until something is entered there even though the EditableValue itself is enabled.
+			return this.STATE.DISABLED;
+		}
+		return false;
 	}
 
 } );

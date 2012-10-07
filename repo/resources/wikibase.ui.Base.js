@@ -65,6 +65,9 @@ wb.ui.Base.prototype = {
 
 		// make sure we have a jQuery object, not a plain DOM node:
 		this._subject = arguments[0] = subject = $( subject );
+		if( subject.length !== 1 ) {
+			throw new Error( 'wb.ui.Base.init() requires exactly one subject node representing the UI elements root' );
+		}
 
 		// add UI classes to subject.
 		// They should be set before _init() so UI element styles are applied during initialization. This could be
