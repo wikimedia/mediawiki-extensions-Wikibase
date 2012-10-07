@@ -82,6 +82,12 @@ var
 			};
 		};
 
+		// overwrite _getValueFromApiResponse so save() gets some server sided validated value from fake API call.
+		// TODO: this is not nice! Some better way to do this should be investigated.
+		editableValue._getValueFromApiResponse = function() {
+			return this.getValue();
+		};
+
 		// apply options or other overwrites:
 		$.extend( editableValue, overwrites || {} );
 
@@ -101,7 +107,7 @@ var
 
 
 	QUnit.test( 'test helper functions for testing EditableValue properly', function( assert ) {
-		var subject = $( '<div/>', { id: 'parent' } ),
+		var subject = $( '<div id="parent"><div class="wb-value"/></div>' ),
 			ev = newTestEV( subject );
 
 		assert.ok(
@@ -164,7 +170,7 @@ var
 	} );
 
 	QUnit.test( 'initial check', function( assert ) {
-		var ev = newTestEV( $( '<div/>' ) );
+		var ev = newTestEV( $( '<div><div class="wb-value"/></div>' ) );
 
 		assert.equal(
 			ev.getInputHelpMessage(),
@@ -190,6 +196,12 @@ var
 			'value is empty'
 		);
 
+		ev.stopEditing(); // TODO: test returned promise
+		assert.ok(
+			ev.isInEditMode(),
+			'can\'t go out of edit mode if empty (no) value'
+		);
+
 		assert.equal(
 			ev.valueCompare( ev.getValue(), '' ),
 			true,
@@ -211,18 +223,30 @@ var
 
 
 	QUnit.test( 'dis- and enabling', function( assert ) {
-		var ev = newTestEV( $( '<div/>' ) );
+		var ev = newTestEV( $( '<div><div class="wb-value"/></div>' ) );
+
+		assert.equal(
+			ev.getState(),
+			ev.STATE.MIXED,
+			'Mixed state in the beginning because in edit mode (since empty value)'
+		);
 
 		assert.equal(
 			ev.enable(),
-			true,
-			'enabling'
+			false,
+			'can\'t fully enable because of empty value, toolbar stays disabled'
 		);
-		
+
+		assert.ok(
+			ev.getToolbar().isDisabled(),
+			'Toolbar is disabled'
+		);
+
+		ev.setValue( DATAVALUES.VALID[0] );
 		assert.equal(
 			ev.isEnabled(),
 			true,
-			'is enabled'
+			'is fully enabled after valid value was set'
 		);
 
 		assert.equal(
@@ -231,16 +255,9 @@ var
 			'not disabled'
 		);
 
-		assert.equal(
-			ev.disable(),
-			true,
-			'disabling'
-		);
-
-		assert.equal(
-			ev.isDisabled(),
-			true,
-			'disabled'
+		assert.ok(
+			ev.disable() === true && ev.isDisabled() === true,
+			'disabled successfully'
 		);
 
 		assert.equal(
@@ -249,10 +266,9 @@ var
 			'not enabled'
 		);
 
-		assert.equal(
-			ev.getToolbar().enable(),
-			true,
-			'enabling toolbar'
+		assert.ok(
+			ev.getToolbar().enable() === true && ev.getToolbar().isEnabled() === true,
+			'enabled toolbar successfully'
 		);
 
 		assert.equal(
@@ -295,7 +311,7 @@ var
 
 
 	QUnit.test( 'edit', function( assert ) {
-		var ev = newTestEV( $( '<div/>' ) );
+		var ev = newTestEV( $( '<div><div class="wb-value"/></div>' ) );
 
 		assert.equal(
 			ev.startEditing(),
@@ -431,7 +447,7 @@ var
 	} );
 
 	QUnit.test( 'error handling', function( assert ) {
-		var ev = newTestEV( $( '<div/>' ) );
+		var ev = newTestEV( $( '<div><div class="wb-value"/></div>' ) );
 
 		ev.simulateApiFailure();
 
