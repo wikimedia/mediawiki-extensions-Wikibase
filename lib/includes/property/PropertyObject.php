@@ -291,4 +291,51 @@ class PropertyObject extends EntityObject implements Property {
 		$this->data['claims'] = $this->getStubbedClaims( $this->data['claims'] );
 	}
 
+	/**
+	 * @see Item::isEmpty
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return parent::isEmpty()
+			&& $this->data['links'] === array()
+			&& !$this->hasStatements();
+	}
+
+	/**
+	 * @see Property::hasClaims
+	 *
+	 * On top of being a convenience function, this implementation allows for doing
+	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims() {
+		if ( $this->claims === null ) {
+			return $this->data['claims'] !== array();
+		}
+		else {
+			return count( $this->claims ) > 0;
+		}
+	}
+
+	/**
+	 * @see EntityObject::cleanStructure
+	 *
+	 * @since 0.1
+	 *
+	 * @param boolean $wipeExisting
+	 */
+	protected function cleanStructure( $wipeExisting = false ) {
+		parent::cleanStructure( $wipeExisting );
+
+		if (  $wipeExisting || !array_key_exists( 'claims', $this->data ) ) {
+			$this->data['claims'] = array();
+		}
+	}
+
 }
