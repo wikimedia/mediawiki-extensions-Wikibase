@@ -41,6 +41,13 @@ class PropertyObject extends EntityObject implements Property {
 	protected $dataType = null;
 
 	/**
+	 * @since 0.2
+	 *
+	 * @var Claims|null
+	 */
+	protected $claims;
+
+	/**
 	 * @see Property::getDataType
 	 *
 	 * @since 0.2
@@ -181,6 +188,107 @@ class PropertyObject extends EntityObject implements Property {
 	 */
 	public static function newEmpty() {
 		return self::newFromArray( array() );
+	}
+
+	/**
+	 * @see ClaimListAccess::addClaim
+	 *
+	 * @since 0.2
+	 *
+	 * @param Claim $claim
+	 */
+	public function addClaim( Claim $claim ) {
+		$this->unstubClaims();
+		$this->claims->addClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimListAccess::hasClaim
+	 *
+	 * @since 0.2
+	 *
+	 * @param Claim $claim
+	 *
+	 * @return boolean
+	 */
+	public function hasClaim( Claim $claim ) {
+		$this->unstubClaims();
+		return $this->claims->hasClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimListAccess::removeClaim
+	 *
+	 * @since 0.2
+	 *
+	 * @param Claim $claim
+	 */
+	public function removeClaim( Claim $claim ) {
+		$this->unstubClaims();
+		$this->claims->removeClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimAggregate::getClaims
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	public function getClaims() {
+		$this->unstubClaims();
+		return clone $this->claims;
+	}
+
+	/**
+	 * Unsturbs the statements from the JSON into the $statements field
+	 * if this field is not already set.
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	protected function unstubClaims() {
+		if ( $this->claims === null ) {
+			$this->claims = new ClaimList();
+
+			foreach ( $this->data['claims'] as $statementSerialization ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$this->claims->addClaim( unserialize( $statementSerialization ) );
+			}
+		}
+	}
+
+	/**
+	 * Takes the claims element of the $data array of an item and writes the claims to it as stubs.
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $claims
+	 *
+	 * @return array
+	 */
+	protected function getStubbedClaims( array $claims ) {
+		if ( $this->claims !== null ) {
+			$claims = array();
+
+			foreach ( $this->claims as $claim ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$claims[] = serialize( $claim );
+			}
+		}
+
+		return $claims;
+	}
+
+	/**
+	 * @see Entity::stub
+	 *
+	 * @since 0.2
+	 */
+	public function stub() {
+		parent::stub();
+		$this->data['claims'] = $this->getStubbedClaims( $this->data['claims'] );
 	}
 
 }

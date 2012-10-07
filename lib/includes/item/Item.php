@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Item extends Entity, StatementAggregate {
+interface Item extends Entity, StatementListAccess, StatementAggregate {
 
 	const ENTITY_TYPE = 'item';
 

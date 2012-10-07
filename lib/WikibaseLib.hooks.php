@@ -145,6 +145,7 @@ final class LibHooks {
 			'snak/SnakList',
 
 			'statement/StatementAggregate',
+			'statement/StatementListAccess',
 			'statement/StatementList',
 			'statement/StatementObject',
 

@@ -93,15 +93,4 @@ class StatementList extends \SplObjectStorage implements Statements {
 		return $hasher->hash( iterator_to_array( $this ) );
 	}
 
-	/**
-	 * @see StatementAggregate::getStatements
-	 *
-	 * @since 0.2
-	 *
-	 * @return Statements
-	 */
-	public function getStatements() {
-		return $this;
-	}
-
 }

@@ -28,6 +28,6 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Statements extends StatementAggregate, \Traversable, \Countable, \Serializable, Hashable {
+interface Statements extends StatementListAccess, \Traversable, \Countable, \Serializable, Hashable {
 
 }

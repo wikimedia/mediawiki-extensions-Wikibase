@@ -31,7 +31,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Property extends Entity {
+interface Property extends Entity, ClaimListAccess {
 
 	const ENTITY_TYPE = 'property';
 

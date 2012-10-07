@@ -1,11 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\StatementAggregate;
-use Wikibase\Statement;
+use \Wikibase\StatementListAccess;
 
 /**
- * Tests for the Wikibase\StatementAggregate implementing classes.
+ * Tests for the Wikibase\StatementListAccess implementing classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,31 +34,29 @@ use Wikibase\Statement;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementAggregateTest extends \MediaWikiTestCase {
+class StatementListAccessTest extends \MediaWikiTestCase {
 
 	public function statementTestProvider() {
 		$statements = array();
 
 		$statements[] = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
 
-		$aggregates = array();
+		$lists = array();
 
-		$item = \Wikibase\ItemObject::newEmpty();
-		$item->setStatements( new \Wikibase\StatementList( $statements ) );
-
-		$aggregates[] = $item;
+		$lists[] = \Wikibase\ItemObject::newEmpty();
+		$lists[] = new \Wikibase\StatementList();
 
 		$argLists = array();
 
 		/**
-		 * @var StatementAggregate $aggregate
+		 * @var StatementListAccess $list
 		 */
-		foreach ( $aggregates as $aggregate ) {
+		foreach ( $lists as $list ) {
 			foreach ( $statements as $statement ) {
-				$argLists[] = array( clone $aggregate, array( $statement ) );
+				$argLists[] = array( clone $list, array( $statement ) );
 			}
 
-			$argLists[] = array( clone $aggregate, $statements );
+			$argLists[] = array( clone $list, $statements );
 		}
 
 		return $argLists;
@@ -68,31 +65,17 @@ class StatementAggregateTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider statementTestProvider
 	 *
-	 * @param StatementAggregate $aggregate
+	 * @param StatementListAccess $list
 	 * @param array $statements
 	 */
-	public function testAllOfTheStuff( StatementAggregate $aggregate, array $statements ) {
-		$obtainedStatements = $aggregate->getStatements();
-		$this->assertInstanceOf( '\Wikibase\Statements', $obtainedStatements );
-
-		// Below code tests if the statements in the statementAggregate indeed do not get modified.
-
-		$unmodifiedStatements = serialize( $obtainedStatements );
-
-		/**
-		 * @var Statement $statement
-		 */
-		foreach ( $obtainedStatements as $statement ) {
-			$statement->setRank( Statement::RANK_DEPRECATED );
-		}
-
+	public function testAllOfTheStuff( StatementListAccess $list, array $statements ) {
 		foreach ( $statements as $statement ) {
-			$obtainedStatements->addStatement( $statement );
+			$list->addStatement( $statement );
+			$this->assertTrue( $list->hasStatement( $statement ) );
+
+			$list->removeStatement( $statement );
+			$this->assertFalse( $list->hasStatement( $statement ) );
 		}
-
-		$freshlyObtained = $aggregate->getStatements();
-
-		$this->assertEquals( $unmodifiedStatements, serialize( $freshlyObtained ) );
 	}
 
 }
