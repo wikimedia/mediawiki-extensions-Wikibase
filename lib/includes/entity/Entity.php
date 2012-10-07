@@ -42,17 +42,6 @@ interface Entity extends Comparable {
 	public function toArray();
 
 	/**
-	 * Creates a new Entity from the provided array of data.
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $data
-	 *
-	 * @return Entity
-	 */
-	public static function newFromArray( array $data );
-
-	/**
 	 * Returns the id of the entity or null if it is not in the datastore yet.
 	 *
 	 * @since 0.1
