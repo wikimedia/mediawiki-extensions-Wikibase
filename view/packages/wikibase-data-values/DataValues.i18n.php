@@ -42,3 +42,60 @@ $messages['qqq'] = array(
 	'datavalues-desc' => '{{desc}}',
 	'version-datavalues' => 'Name of the DataValues extension collection, used on Special:Version',
 );
+
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
+ * @author Wizardist
+ */
+$messages['be-tarask'] = array(
+	'datavalues-desc' => 'Збор аб’ектаў для прадстаўленьне розных відаў значэньняў',
+	'version-datavalues' => 'DataValues',
+);
+
+/** German (Deutsch)
+ * @author Metalhead64
+ */
+$messages['de'] = array(
+	'datavalues-desc' => 'Sammlungen von Objekten, die verschiedene Wertarten darstellen',
+	'version-datavalues' => 'Datenwerte',
+);
+
+/** Upper Sorbian (hornjoserbsce)
+ * @author Michawiki
+ */
+$messages['hsb'] = array(
+	'datavalues-desc' => 'zběrka objektow, kotrež wšelake typy hódnotow předstajeja',
+	'version-datavalues' => 'Datowe hódnoty',
+);
+
+/** Italian (italiano)
+ * @author Beta16
+ */
+$messages['it'] = array(
+	'datavalues-desc' => 'Collezione di oggetti per rappresentare vari tipi di valori',
+	'version-datavalues' => 'DataValues',
+);
+
+/** Japanese (日本語)
+ * @author Shirayuki
+ */
+$messages['ja'] = array(
+	'datavalues-desc' => 'さまざまな型の値を表現するオブジェクトのコレクション',
+	'version-datavalues' => 'データの値',
+);
+
+/** Korean (한국어)
+ * @author 아라
+ */
+$messages['ko'] = array(
+	'datavalues-desc' => '값의 다양한 종류을 나타내는 개체 모음집',
+	'version-datavalues' => '데이터값',
+);
+
+/** Macedonian (македонски)
+ * @author Bjankuloski06
+ */
+$messages['mk'] = array(
+	'datavalues-desc' => 'Збир предмети што претставуваат разни видови на вредности',
+	'version-datavalues' => 'ПодаточниВредности',
+);
+
