@@ -89,8 +89,11 @@ wb.ui.PropertyEditTool.EditableValue.SitePageInterface = wb.utilities.inherit( $
 			var dir = this._inputElem.attr( 'dir' );
 			if ( typeof dir === undefined ) {
 				if ( $.uls.data.languages[lang] !== undefined ) {
-					dir = ( $.uls.data.isRtl( lang ) ) ? 'rtl' : 'ltr';
+					dir = $.uls.data.getDir( lang );
 				}
+			}
+			if ( typeof dir === undefined ) {
+				dir = 'auto'; // Shouldn't happen, but go figure
 			}
 			this._inputElem.data( 'autocomplete' ).menu.element
 				.attr( 'lang', lang ).attr( 'dir', dir );
