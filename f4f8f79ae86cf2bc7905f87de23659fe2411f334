@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAx3////o\u003d",
+        "filename": "repo/resources/wikibase.Site.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 110
+      },
+      "writtenOn": "2012-10-08T13:05:25Z",
+      "side": 1,
+      "message": "ULS does not return or plan to return any object other than selected language code. (not related to this commit, but a note about this TODO)",
+      "revId": "f4f8f79ae86cf2bc7905f87de23659fe2411f334",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
