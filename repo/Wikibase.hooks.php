@@ -318,9 +318,12 @@ final class RepoHooks {
 	 * @param User $user
 	 * @param string $reason
 	 * @param integer $id
+	 * @param \Content $content
+	 * @param \LogEntryBase $logEntry
+	 *
+	 * @throws MWException
 	 *
 	 * @return boolean
-	 * @throws MWException
 	 */
 	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
 		\Content $content = null, \LogEntryBase $logEntry = null
