@@ -9,71 +9,67 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
 
-( function() {
-	module( 'wikibase.ui.LabelEditTool', window.QUnit.newWbEnvironment( {
+( function( mw, wb, $, QUnit, undefined ) {
+	'use strict';
+
+	QUnit.module( 'wikibase.ui.LabelEditTool', QUnit.newWbEnvironment( {
 		setup: function() {
 			this.h1 = $( '<h1/>', { 'class': 'wb-firstHeading' } );
-			this.span = $( '<span/>', { text: 'Text' } ).appendTo( this.h1 );
-			this.subject = new window.wikibase.ui.LabelEditTool( this.h1 );
-
-			ok(
-				this.subject instanceof window.wikibase.ui.LabelEditTool,
-				'instantiated HeadingEditTool'
-			);
-
+			this.span = $( '<span/>' ).append( $( '<span/>', {
+				'class': 'wb-value',
+				text: 'Text'
+			} ) ).appendTo( this.h1 );
+			this.subject = new wb.ui.LabelEditTool( this.h1 );
 		},
-		teardown: function() {
-			this.subject.destroy();
-
-			equal(
-				this.h1.children().length,
-				1,
-				'cleaned DOM'
-			);
-
-			equal(
-				this.h1.children()[0],
-				this.span[0],
-				'span child remains'
-			);
-
-			this.subject = null;
-			this.span = null;
-			this.h1 = null;
-		}
-
+		teardown: function() {}
 	} ) );
 
+	QUnit.test( 'basic check', function( assert ) {
 
-	test( 'basic check', function() {
+		assert.ok(
+			this.subject instanceof wb.ui.LabelEditTool,
+			'instantiated HeadingEditTool'
+		);
 
-		equal(
+		assert.equal(
 			this.subject._getValueElems()[0],
 			this.span[0],
 			'checked getting value element'
 		);
 
-		equal(
+		assert.equal(
 			this.subject.getPropertyName(),
 			'label',
 			'property name is label'
 		);
 
-		equal(
+		assert.equal(
 			this.subject.getEditableValuePrototype(),
-			window.wikibase.ui.PropertyEditTool.EditableLabel,
+			wb.ui.PropertyEditTool.EditableLabel,
 			'retrieved prototype'
 		);
 
-		equal(
+		assert.equal(
 			this.subject.allowsMultipleValues,
 			false,
 			'does not allow multiple values'
 		);
 
+		this.subject.destroy();
+
+		assert.equal(
+			this.h1.children().length + this.h1.children().first().children().length,
+			1,
+			'cleaned DOM'
+		);
+
+		assert.equal(
+			this.h1.children()[0],
+			this.span[0],
+			'span child remains'
+		);
+
 	} );
 
-
-}() );
+}( mediaWiki, wikibase, jQuery, QUnit ) );
