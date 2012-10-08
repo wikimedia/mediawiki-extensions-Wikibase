@@ -51,7 +51,8 @@ return call_user_func( function() {
 		'wikibase.utilities' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
-				'wikibase.utilities/wikibase.utilities.eventRelatedExtensions.js'
+				'wikibase.utilities/wikibase.utilities.eventRelatedExtensions.js',
+				'wikibase.utilities/wikibase.utilities.ui.StateExtension.js',
 			),
 			'dependencies' => array(
 				'wikibase'
@@ -110,7 +111,6 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.ui.js',
 				'wikibase.ui.Base.js',
-				'wikibase.ui.StateExtension.js',
 				'wikibase.ui.Tooltip.js',
 				'wikibase.ui.Tooltip.Extension.js',
 				'wikibase.ui.Toolbar.js',

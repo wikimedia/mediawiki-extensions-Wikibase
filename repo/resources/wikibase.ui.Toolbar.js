@@ -259,13 +259,10 @@ wb.ui.Toolbar.prototype = {
 };
 
 // add disable/enable functionality overwriting required functions
-wb.ui.StateExtension.useWith( wb.ui.Toolbar, {
-
+wb.utilities.ui.StateExtension.useWith( wb.ui.Toolbar, {
 	/**
 	 * Determines the state (disabled, enabled or mixed) of all toolbar elements.
-	 * @see wikibase.ui.StateExtension.getState
-	 *
-	 * @return Number whether all elements are enabled (true), disabled (false) or have mixed states
+	 * @see wb.utilities.ui.StateExtension.getState
 	 */
 	getState: function() {
 		var disabled = true, enabled = true;
@@ -289,10 +286,7 @@ wb.ui.StateExtension.useWith( wb.ui.Toolbar, {
 	},
 
 	/**
-	 * @see wikibase.ui.StateExtension._setState
-	 *
-	 * @param Number state see wb.ui.EditableValue.STATE
-	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 * @see wb.utilities.ui.StateExtension._setState
 	 */
 	_setState: function( state ) {
 		var success = true;

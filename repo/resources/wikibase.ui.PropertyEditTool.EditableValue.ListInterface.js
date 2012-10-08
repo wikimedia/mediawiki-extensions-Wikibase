@@ -343,10 +343,7 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 	},
 
 	/**
-	 * @see wikibase.ui.StateExtension._setState
-	 *
-	 * @param Number state see wb.ui.EditableValue.STATE
-	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 * @see wb.utilities.ui.StateExtension._setState
 	 */
 	_setState: function( state ) {
 		if ( this._getTagadata() !== null ) {
