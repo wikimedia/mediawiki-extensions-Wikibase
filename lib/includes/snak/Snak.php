@@ -25,4 +25,13 @@ interface Snak extends \Serializable, Hashable, Immutable {
 	 */
 	public function getPropertyId();
 
+	/**
+	 * Returns a string that can be used to identify the type of snak.
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getType();
+
 }

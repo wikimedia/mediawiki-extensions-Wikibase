@@ -27,4 +27,15 @@ class SubclassOfSnak extends InstanceOfSnak {
 		return -2;
 	}
 
+	/**
+	 * @see Snak::getType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'subclass';
+	}
+
 }

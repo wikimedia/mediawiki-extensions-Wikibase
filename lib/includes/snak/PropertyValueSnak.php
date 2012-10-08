@@ -70,4 +70,15 @@ class PropertyValueSnak extends PropertySnakObject {
 		list( $this->propertyId, $this->dataValue ) = unserialize( $serialized );
 	}
 
+	/**
+	 * @see Snak::getType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'value';
+	}
+
 }

@@ -16,6 +16,15 @@ namespace Wikibase;
  */
 class PropertyNoValueSnak extends PropertySnakObject {
 
-
+	/**
+	 * @see Snak::getType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'novalue';
+	}
 
 }

@@ -78,4 +78,15 @@ class InstanceOfSnak extends SnakObject {
 		return -1;
 	}
 
+	/**
+	 * @see Snak::getType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return 'instance';
+	}
+
 }
