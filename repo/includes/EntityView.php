@@ -279,9 +279,13 @@ abstract class EntityView extends \ContextSource {
 
 		if( empty( $aliases ) ) {
 			// no aliases available for this entity
-			$html .= Html::element( 'div', array( 'class' => 'wb-aliases-empty' ), wfMessage( 'wikibase-aliases-empty' ) );
+			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases-empty' ) );
+			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-empty-note' ), wfMessage( 'wikibase-aliases-empty' )->text() );
+			$html .= $this->getHtmlForEditSection( $entity, $lang ); // TODO: link should say 'add' instead of 'edit' in this case
+			$html .= Html::closeElement( 'div' );
 		} else {
 			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
+			$html .= Html::openElement( 'div', array( 'class' => 'wb-gridhelper' ) );
 			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMessage( 'wikibase-aliases-label' )->text() );
 			$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
 			foreach( $aliases as $alias ) {
@@ -290,6 +294,8 @@ abstract class EntityView extends \ContextSource {
 				);
 			}
 			$html .= Html::closeElement( 'ul' );
+			$html .= Html::closeElement( 'div' );
+			$html .= $this->getHtmlForEditSection( $entity, $lang );
 			$html .= Html::closeElement( 'div' );
 		}
 		return $html;

@@ -505,7 +505,9 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 	 * @return wikibase.ui.PropertyEditTool.EditableValue[]
 	 */
 	getValues: function( getPendingValues ) {
-		if( getPendingValues ) {
+		if ( this._editableValues === null ) {
+			return [];
+		} else if( getPendingValues ) {
 			return this._editableValues.slice();
 		}
 

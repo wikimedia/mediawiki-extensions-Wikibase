@@ -26,12 +26,6 @@ wb.ui.AliasesEditTool = wb.utilities.inherit( $PARENT , {
 	 * @see wikibase.ui.PropertyEditTool._init
 	 */
 	_init: function( subject ) {
-		// we need this additional block element for the grid layout; it will contain the aliases label + editable value
-		// NOTE: this is just because of the label It would be possible to add the functionality of having a label
-		//       including setter/getter functions into PropertyEditTool directly but it doesn't seem necessary
-		$( '<div/>', { 'class': 'wb-gridhelper' } ).append( subject.children() ).appendTo( subject );
-		// .wb-gridhelper will also be returned in _getValuesParent()
-
 		// call PropertyEditTool's init():
 		$PARENT.prototype._init.apply( this, arguments );
 
@@ -66,17 +60,6 @@ wb.ui.AliasesEditTool = wb.utilities.inherit( $PARENT , {
 			)
 		);
 
-	},
-
-	/**
-	 * @see wikibase.ui.PropertyEditTool._destroy
-	 */
-	_destroy: function() {
-		// don't forget to remove injected node again:
-		var gridHelper = this._subject.children( '.wb-gridhelper' );
-		gridHelper.replaceWith( gridHelper.children() );
-
-		$PARENT.prototype._destroy.call( this );
 	},
 
 	/**
@@ -182,13 +165,16 @@ wb.ui.AliasesEditTool = wb.utilities.inherit( $PARENT , {
 
 /**
  * Returns the basic DOM structure sufficient for a new wikibase.ui.AliasEditTool
+ * @static
  *
  * @return jQuery
  */
 wb.ui.AliasesEditTool.getEmptyStructure = function() {
 	return $(
 		'<div class="wb-aliases">' +
-			'<span class="wb-aliases-label">' + mw.message( 'wikibase-aliases-label' ).escaped() + '</span>' +
+			'<div class="wb-gridhelper">' +
+				'<span class="wb-aliases-label">' + mw.message( 'wikibase-aliases-label' ).escaped() + '</span>' +
+			'</div>' +
 		'</div>'
 	);
 };

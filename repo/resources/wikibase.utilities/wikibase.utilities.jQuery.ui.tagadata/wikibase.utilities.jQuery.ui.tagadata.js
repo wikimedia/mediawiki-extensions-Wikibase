@@ -536,7 +536,7 @@
 			var self = this;
 
 			this.tagList
-			.removeClass( 'tagadata ui-widget ui-widget-content ui-corner-all' )
+			.removeClass( 'tagadata ui-widget ui-widget-content ui-corner-all tagadata-enabled tagadata-disabled' )
 			.off( 'click.tagadata' );
 
 			this.tagList.children( 'li' ).each( function() {
