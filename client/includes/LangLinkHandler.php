@@ -131,6 +131,8 @@ class LangLinkHandler {
 	/**
 	 * Get no_external_interlang parser property.
 	 *
+	 * @param \ParserOutput
+	 *
 	 * @return Array Empty array if not set.
 	 */
 	public static function getNoExternalLangLinks( \ParserOutput $out ) {
