@@ -276,11 +276,14 @@ class ApiLinkTitles extends Api {
 	}
 
 	/**
-	 * Returns a string that identifies the version of this class.
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.1
+	 *
 	 * @return string
 	 */
 	public function getVersion() {
-		return __CLASS__ . ': $Id$';
+		return __CLASS__ . '-' . WB_VERSION;
 	}
 
 }
