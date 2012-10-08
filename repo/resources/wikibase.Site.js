@@ -117,7 +117,7 @@ wb.Site.prototype = {
 		var dir;
 		// language might not be defined in ULS
 		if ( $.uls.data.languages[this.getLanguageCode()] ) {
-			dir = ( $.uls.data.isRtl( this.getLanguageCode() ) ) ? 'rtl' : 'ltr';
+			dir = $.uls.data.getDir( this.getLanguageCode() );
 		}
 		return { // TODO: use a language object from the Universal Language Selector
 			code: this.getLanguageCode(),

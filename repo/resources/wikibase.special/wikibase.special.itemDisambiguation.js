@@ -19,7 +19,7 @@
 		// TODO/FIXME: this should rather use wb.PropertyEditTool.EditableSiteLink fir mimicking the exact same behavior
 
 		var langList = new Array();
-		var languages = $.uls.data.autonyms();
+		var languages = $.uls.data.getAutonyms();
 		$.each( languages, function( key, value ) {
 			langList.push( {
 				'label': value + ' (' + key + ')',
