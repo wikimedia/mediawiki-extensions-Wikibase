@@ -338,9 +338,9 @@ final class ClientHooks {
 				// temporary hack to provide default settings
 				'repoBase' => 'https://wikidata-test-repo.wikimedia.de/wiki/',
 				'repoApi' => 'https://wikidata-test-repo.wikimedia.de/w/api.php',
-				'sort' => 'none',
+				'sort' => 'code',
 				'sortPrepend' => false,
-				'alwaysSort' => false,
+				'alwaysSort' => true,
 				'siteGlobalID' => 'enwiki',
 				'siteGroup' => 'wikipedia',
 				'defaultClientStore' => 'sqlstore',
