@@ -202,12 +202,21 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 	},
 
 	/**
-	 * returns the toolbar of this PropertyEditTool
+	 * returns the toolbar of this PropertyEditTool or null if it doesn't have one.
 	 *
-	 * @return wikibase.ui.Toolbar
+	 * @return wikibase.ui.Toolbar|null
 	 */
 	getToolbar: function() {
 		return this._toolbar;
+	},
+
+	/**
+	 * Returns whether there is a toolbar which allows the user interaction with this PropertyEditTool.
+	 *
+	 * @return Boolean
+	 */
+	hasToolbar: function() {
+		return !!this._toolbar;
 	},
 
 	/**
@@ -600,46 +609,45 @@ wb.utilities.ui.StateExtension.useWith( wb.ui.PropertyEditTool, {
 	 * @see wb.utilities.ui.StateExtension.getState
 	 */
 	getState: function() {
-		var disabled = true, enabled = true;
+		// consider toolbars state if toolbar is set
+		var state = this.hasToolbar() ? this._toolbar.getState() : undefined;
 
-		// check editableValues
+		// check interfaces
 		$.each( this._editableValues, function( i, editableValue ) {
-			if ( editableValue.isDisabled() ) {
-				enabled = false;
-			} else if ( !editableValue.isDisabled() ) {
-				disabled = false;
+			var currentState = editableValue.getState();
+
+			if( state !== currentState) {
+				if( state === undefined ) {
+					state = currentState;
+				} else {
+					// state of this element different from others -> mixed state
+					state = this.STATE.MIXED;
+					return false; // no point in checking other states, we are mixed!
+				}
 			}
 		} );
-		// check toolbar (disabled in specified cases anyhow by design)
-		if ( this.allowsMultipleValues && !this.isFull() || this.allowsFullErase ) {
-			enabled = enabled && this._toolbar.isEnabled();
-			disabled = disabled && this._toolbar.isDisabled();
-		}
-
-		if ( disabled === true ) {
-			return this.STATE.DISABLED;
-		} else if ( enabled === true ) {
-			return this.STATE.ENABLED;
-		} else {
-			return this.STATE.MIXED;
-		}
+		return state;
 	},
 
 	/**
-	 * Dis- or enables the PropertyEditTool (its toolbar and EditableValues).
+	 * Dis- or enables the PropertyEditTool (its toolbar and values).
 	 * @see wb.utilities.ui.StateExtension._setState
+	 *
+	 * @param wb.ui.PropertyEditTool.EditableValue skip can be one value which should not be affected
 	 */
 	_setState: function( state, skip ) {
 		var success = true;
-		if ( this._toolbar !== null ) {
+
+		// propagate state to all interfaces:
+		$.each( this._editableValues, function( i, editableValue ) {
+			if ( editableValue !== skip ) {
+				success = editableValue.setState( state ) && success;
+			}
+		} );
+
+		// propagate state to toolbar if toolbar is set
+		if( this.hasToolbar() ) {
 			success = this._toolbar.setState( state ) && success;
-		}
-		if ( this._editableValues !== null ) {
-			$.each( this._editableValues, function( i, editableValue ) {
-				if ( editableValue !== skip ) {
-					success = editableValue.setState( state ) && success;
-				}
-			} );
 		}
 		return success;
 	}

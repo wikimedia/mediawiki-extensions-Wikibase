@@ -268,7 +268,7 @@ wb.utilities.ui.StateExtension.useWith( wb.ui.Toolbar, {
 		var disabled = true, enabled = true;
 		$.each( this._items, function( i, item ) {
 			// loop through all sub-toolbars and check dedicated toolbar elements
-			if ( item instanceof wikibase.ui.Toolbar || item.stateChangeable ) {
+			if ( item instanceof wb.ui.Toolbar || item.stateChangeable ) {
 				if ( item.isDisabled() ) {
 					enabled = false;
 				} else if ( !item.isDisabled() ) {
