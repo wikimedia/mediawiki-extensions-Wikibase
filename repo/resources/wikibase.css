@@ -217,6 +217,10 @@ table.wb-sitelinks .even td.wb-sitelinks-siteid {
 	background: #F0F0F0;
 }
 
+table.wb-sitelinks tfoot td:first-child { /** td which displays message if site-links are complete */
+	padding-left: 10px;
+	padding-right: 10px;
+}
 /********** /SITE LINKS **********/
 
 

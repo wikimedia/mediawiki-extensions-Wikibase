@@ -111,13 +111,6 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 		this._toolbar.addElement( this._toolbar.innerGroup );
 
 		if( this.allowsMultipleValues || this.allowsFullErase ) {
-			if ( this.allowsMultipleValues ) {
-				// toolbar group for buttons:
-				this._toolbar.lblFull = new wb.ui.Toolbar.Label(
-					'&nbsp;- ' + mw.message( 'wikibase-propertyedittool-full' ).escaped()
-				);
-			}
-
 			// only add 'add' button if we can have several values
 			this._toolbar.btnAdd = new wb.ui.Toolbar.Button( mw.msg( 'wikibase-add' ) );
 			$( this._toolbar.btnAdd ).on( 'action', $.proxy( function( event ) {
@@ -129,23 +122,29 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 			if ( this.allowsMultipleValues ) {
 				// enable button only if this is not full yet, overwrite function directly
 				var self = this;
-				this._toolbar.btnAdd._setState = function( state ) {
-					var isFull = self.isFull();
-					if( state === this.STATE.ENABLED && self.isFull() ) {
-						// full list, don't enable 'add' button, show hint
-						self._toolbar.addElement( self._toolbar.lblFull );
-						state = this.STATE.DISABLED;
-					}
-					if( state === this.STATE.ENABLED && self.isInAddMode() ) {
-						state = this.STATE.DISABLED; // still adding new value, don't enable 'add' button!
-					}
+				this._toolbar.btnAdd.setState = function( state ) {
+					var origState = state;
 					if( state === this.STATE.ENABLED ) {
-						// enabled, label with 'full' message not required
-						self._toolbar.removeElement( self._toolbar.lblFull );
+						if( self.isFull() ) {
+							// full list, don't enable 'add' button, show hint
+							self._subject.find( 'tfoot td' ).first().text( self.fullListMessage );
+							state = this.STATE.DISABLED;
+						}
+						else if( self.isInAddMode() ) {
+							state = this.STATE.DISABLED; // still adding new value, don't enable 'add' button!
+						}
+						else {
+							// enabled, label with 'full' message not required
+							self._subject.find( 'tfoot td' ).first().text( '' );
+						}
 					}
-					return wb.ui.Toolbar.Button.prototype._setState.call( this, state );
+					// call original set state with the state we want to inject
+					wb.ui.Toolbar.Button.prototype.setState.call( this, state );
+
+					// only return success if intended state is set now
+					return origState === self._toolbar.btnAdd.getState();
 				};
-				this._toolbar.btnAdd.enable(); // will run the code above
+				this._toolbar.btnAdd.enable(); // will run the code above initially
 			}
 		}
 
@@ -580,7 +579,13 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 	 * determines whether it is possible to fully erase all values (displaying an add button when completely empty)
 	 * @var bool
 	 */
-	allowsFullErase: false
+	allowsFullErase: false,
+
+	/**
+	 * If multiple values are allowed, this message will be displayed if the collection is considered full.
+	 * @var String
+	 */
+	fullListMessage: mw.message( 'wikibase-propertyedittool-full' )
 } );
 
 // add disable/enable functionality overwriting required functions
