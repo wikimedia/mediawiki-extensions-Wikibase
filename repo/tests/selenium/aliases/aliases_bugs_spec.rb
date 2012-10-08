@@ -20,7 +20,6 @@ describe "Check for bugs" do
   context "startup" do
     it "just some simple startup checks" do
       on_page(ItemPage) do |page|
-        page.wait_for_aliases_to_load
         page.wait_for_entity_to_load
         # check for necessary elements
         page.aliasesDiv?.should be_true
@@ -35,7 +34,6 @@ describe "Check for bugs" do
   context "bug: add-button appearing when it should not" do
     it "bug: add-button appearing when it should not" do
       on_page(ItemPage) do |page|
-        page.wait_for_aliases_to_load
         page.wait_for_entity_to_load
         page.addAliases
         page.addAliases?.should be_false

@@ -55,7 +55,6 @@ describe "Check functionality of blocking a user" do
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_aliases_to_load
         page.wait_for_entity_to_load
         page.addAliases?.should be_false
         page.addAliasesDisabled?.should be_true

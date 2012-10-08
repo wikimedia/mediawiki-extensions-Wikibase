@@ -41,7 +41,7 @@ describe "Check functionality of client-repo connection" do
     it "should add some sitelinks to the item" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.add_sitelinks(item_sitelinks)
         page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1
       end
@@ -87,7 +87,7 @@ describe "Check functionality of client-repo connection" do
     it "should add additional sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.add_sitelinks(item_sitelinks_additional)
         page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1 + item_sitelinks_additional.count
       end
@@ -113,7 +113,7 @@ describe "Check functionality of client-repo connection" do
     it "should change the connecting sitelink to a nonexisting article" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.englishEditSitelinkLink
         page.pageInputField = "Philippeville"
         ajax_wait
@@ -140,7 +140,7 @@ describe "Check functionality of client-repo connection" do
     it "should change the connecting sitelink to an existing article" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.englishEditSitelinkLink
         page.pageInputField = article_title_b
         ajax_wait
@@ -172,7 +172,7 @@ describe "Check functionality of client-repo connection" do
     it "should change the connecting sitelink back to origin" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.englishEditSitelinkLink
         page.pageInputField = item_sitelink_en[0][1]
         ajax_wait
@@ -235,7 +235,7 @@ describe "Check functionality of client-repo connection" do
     it "should remove all sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.remove_all_sitelinks
       end
     end

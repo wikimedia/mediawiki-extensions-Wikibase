@@ -80,7 +80,6 @@ describe "Check functionality of protected page" do
     it "check if no aliases could be added to an item" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_aliases_to_load
         page.wait_for_entity_to_load
         page.addAliases?.should be_false
         page.addAliasesDisabled?.should be_true

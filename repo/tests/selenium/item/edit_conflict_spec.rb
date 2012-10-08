@@ -168,7 +168,6 @@ describe "Check edit-conflicts" do
         page.add_aliases([alias_a])
         @browser.refresh
         page.wait_for_entity_to_load
-        page.wait_for_aliases_to_load
         page.get_nth_alias(1).text.should == alias_a
       end
     end
@@ -176,7 +175,7 @@ describe "Check edit-conflicts" do
     it "should be possible to add sitelink after a reload" do
       on_page(ItemPage) do |page|
         page.add_sitelinks([sitelinks])
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.get_number_of_sitelinks_from_counter.should == 1
       end
     end
@@ -187,7 +186,6 @@ describe "Check edit-conflicts" do
     on_page(ItemPage) do |page|
       page.navigate_to_item
       page.wait_for_entity_to_load
-      page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
     visit_page(RepoLoginPage) do |page|
