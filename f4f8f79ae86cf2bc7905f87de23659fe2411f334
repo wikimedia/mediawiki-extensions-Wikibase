@@ -16,6 +16,24 @@
       "revId": "f4f8f79ae86cf2bc7905f87de23659fe2411f334",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAx3///9s\u003d",
+        "filename": "repo/resources/wikibase.Site.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-08T13:48:07Z",
+      "side": 1,
+      "message": "Thanks for the info. I guess this should be \u0027in case ULS provides one\u0027. Could come in handy though.",
+      "parentUuid": "AAAAx3////o\u003d",
+      "revId": "f4f8f79ae86cf2bc7905f87de23659fe2411f334",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
