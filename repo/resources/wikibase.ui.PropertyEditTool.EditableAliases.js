@@ -81,8 +81,6 @@ wb.ui.PropertyEditTool.EditableAliases = wb.utilities.inherit( $PARENT, {
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue._getValueFromApiResponse
-	 *
-	 * @return array|null
 	 */
 	_getValueFromApiResponse: function( response ) {
 		if ( !$.isArray( response[ this.API_VALUE_KEY ][ window.mw.config.get( 'wgUserLanguage' ) ] ) ) {

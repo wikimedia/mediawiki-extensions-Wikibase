@@ -136,9 +136,6 @@ wb.ui.PropertyEditTool.EditableSiteLink = wb.utilities.inherit( $PARENT, {
 
 	/**
 	 * @see wikibase.ui.PropertyEditTool.EditableValue._getValueFromApiResponse
-	 *
-	 * @param array response
-	 * @return string|null
 	 */
 	_getValueFromApiResponse: function( response ) {
 		var siteId = this._interfaces.siteId.getSelectedSite().getId();
