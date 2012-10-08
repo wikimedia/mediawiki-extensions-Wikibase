@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAw3////k\u003d",
+        "filename": "repo/tests/phpunit/includes/updates/ItemDeletionUpdateTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-08T10:03:26Z",
+      "side": 1,
+      "message": "this still gives me an error when running PHPUnit tests: Call to undefined method Wikibase\\Test\\TestItemContents::getEntities()",
+      "revId": "679cf666aca90bf1d7af51dc08fbad506cb696af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
