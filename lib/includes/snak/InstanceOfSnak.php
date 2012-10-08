@@ -67,4 +67,15 @@ class InstanceOfSnak extends SnakObject {
 		$this->itemId = unserialize( $serialized );
 	}
 
+	/**
+	 * @see Snak::getPropertyId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getPropertyId() {
+		return -1;
+	}
+
 }
