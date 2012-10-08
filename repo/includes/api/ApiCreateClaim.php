@@ -62,23 +62,8 @@ class ApiCreateClaim extends ApiBase {
 			}
 		}
 
-		if ( in_array( $params['snaktype'], array( 'instance', 'subclass' ) ) ) {
-			if ( !isset( $params['item'] ) ) {
-				$this->dieUsage( 'An item ID needs to be provided when creating a claim with InstanceOf or SubclassOf snak', 'claim-item-id-missing' );
-			}
-
-			if ( isset( $params['property'] ) ) {
-				$this->dieUsage( 'You cannot provide a property ID when creating a claim with InstanceOf or SubclassOf snak', 'claim-property-id-set' );
-			}
-		}
-		else {
-			if ( !isset( $params['property'] ) ) {
-				$this->dieUsage( 'A property ID needs to be provided when creating a claim with a PropertySnak', 'claim-property-id-missing' );
-			}
-
-			if ( isset( $params['item'] ) ) {
-				$this->dieUsage( 'You cannot provide an item ID when creating a claim with PropertySnak snak', 'claim-item-id-set' );
-			}
+		if ( !isset( $params['property'] ) ) {
+			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a PropertySnak', 'claim-property-id-missing' );
 		}
 	}
 
@@ -96,14 +81,10 @@ class ApiCreateClaim extends ApiBase {
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'snaktype' => array(
-				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue', 'instance', 'subclass' ),
+				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
 			'property' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => false,
-			),
-			'item' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => false,
 			),
@@ -125,7 +106,6 @@ class ApiCreateClaim extends ApiBase {
 		return array(
 			'entity' => 'Id of the entity you are adding the statement to',
 			'property' => 'Id of the property when creating a claim with a snak consisting of a property',
-			'item' => 'Id of the item when creating a claim with a snak consisting of an item',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
 			'snaktype' => 'The type of the snak',
 		);

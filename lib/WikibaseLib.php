@@ -144,7 +144,6 @@ $wgAutoloadClasses['Wikibase\ReferenceObject'] 			= $dir . 'includes/reference/R
 $wgAutoloadClasses['Wikibase\References'] 				= $dir . 'includes/reference/References.php';
 
 // includes/snak
-$wgAutoloadClasses['Wikibase\InstanceOfSnak'] 			= $dir . 'includes/snak/InstanceOfSnak.php';
 $wgAutoloadClasses['Wikibase\PropertyNoValueSnak'] 		= $dir . 'includes/snak/PropertyNoValueSnak.php';
 $wgAutoloadClasses['Wikibase\PropertySnak'] 			= $dir . 'includes/snak/PropertySnak.php';
 $wgAutoloadClasses['Wikibase\PropertySnakObject'] 		= $dir . 'includes/snak/PropertySnakObject.php';
@@ -154,7 +153,6 @@ $wgAutoloadClasses['Wikibase\Snak'] 					= $dir . 'includes/snak/Snak.php';
 $wgAutoloadClasses['Wikibase\SnakList'] 				= $dir . 'includes/snak/SnakList.php';
 $wgAutoloadClasses['Wikibase\SnakObject'] 				= $dir . 'includes/snak/SnakObject.php';
 $wgAutoloadClasses['Wikibase\Snaks'] 					= $dir . 'includes/snak/Snaks.php';
-$wgAutoloadClasses['Wikibase\SubclassOfSnak'] 			= $dir . 'includes/snak/SubclassOfSnak.php';
 
 // includes/statement
 $wgAutoloadClasses['Wikibase\Statement'] 				= $dir . 'includes/statement/Statement.php';

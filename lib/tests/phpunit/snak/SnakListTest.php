@@ -1,13 +1,13 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\SnakList as SnakList;
+use Wikibase\SnakList;
 use Wikibase\Snaks as Snaks;
 use Wikibase\Snak as Snak;
-use \Wikibase\PropertyValueSnak as PropertyValueSnak;
-use \Wikibase\InstanceOfSnak as InstanceOfSnak;
+use Wikibase\PropertyValueSnak;
 use DataValues\StringValue;
-use \Wikibase\Hashable as Hashable;
+use Wikibase\Hashable;
+use Wikibase\PropertyNoValueSnak;
 
 /**
  * Tests for the Wikibase\SnakList class.
@@ -54,8 +54,8 @@ class SnakListTest extends HashArrayTest {
 	 */
 	public function elementInstancesProvider() {
 		$instances = array(
-			new InstanceOfSnak( 42 ),
-			new InstanceOfSnak( 9001 ),
+			new PropertyNoValueSnak( 42 ),
+			new PropertyNoValueSnak( 9001 ),
 			new PropertyValueSnak( 42, new StringValue( 'a' ) ),
 		);
 
@@ -67,15 +67,15 @@ class SnakListTest extends HashArrayTest {
 			array(),
 			array( array() ),
 			array( array(
-				new InstanceOfSnak( 42 )
+				new PropertyNoValueSnak( 42 )
 			) ),
 			array( array(
-				new InstanceOfSnak( 42 ),
-				new InstanceOfSnak( 9001 ),
+				new PropertyNoValueSnak( 42 ),
+				new PropertyNoValueSnak( 9001 ),
 			) ),
 			array( array(
-				new InstanceOfSnak( 42 ),
-				new InstanceOfSnak( 9001 ),
+				new PropertyNoValueSnak( 42 ),
+				new PropertyNoValueSnak( 9001 ),
 				new PropertyValueSnak( 42, new StringValue( 'a' ) ),
 			) ),
 		);
@@ -124,7 +124,7 @@ class SnakListTest extends HashArrayTest {
 			$this->assertEquals( --$elementCount, $array->count() );
 		}
 
-		$element = new \Wikibase\InstanceOfSnak( 42 );
+		$element = new PropertyNoValueSnak( 42 );
 
 		$array->removeSnak( $element );
 		$array->removeSnakHash( $element->getHash() );

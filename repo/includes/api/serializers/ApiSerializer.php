@@ -86,10 +86,6 @@ class StatementSerializer implements ApiSerializer {
 
 		$mainSnak = $statement->getClaim()->getMainSnak();
 
-		$entityFactory = EntityFactory::singleton();
-
-		$serialization['property'] = $entityFactory->getPrefixedId( Property::ENTITY_TYPE, $mainSnak->getPropertyId() );
-
 		$snakSerializer = new SnakSerializer();
 		$serialization['value'] = $snakSerializer->getSerialized( $apiResult, $mainSnak );
 
@@ -124,12 +120,7 @@ class SnakSerializer implements ApiSerializer {
 
 		$entityFactory = EntityFactory::singleton();
 
-		if ( in_array( $snak->getType(), array( 'instance', 'subclass' ) ) ) {
-			$serialization['item'] = $entityFactory->getPrefixedId( Item::ENTITY_TYPE, $snak->getItemId() );
-		}
-		else {
-			$serialization['property'] = $entityFactory->getPrefixedId( Property::ENTITY_TYPE, $snak->getPropertyId() );
-		}
+		$serialization['property'] = $entityFactory->getPrefixedId( Property::ENTITY_TYPE, $snak->getPropertyId() );
 
 		if ( $snak->getType() === 'value' ) {
 			$serialization['value'] = $snak->getDataValue();
