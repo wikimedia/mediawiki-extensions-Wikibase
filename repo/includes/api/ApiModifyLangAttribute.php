@@ -20,14 +20,6 @@ use ApiBase, Language;
 abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 
 	/**
-	 * @see ApiModifyEntity::getRequiredPermissions()
-	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
-		return $permissions;
-	}
-
-	/**
 	 * @see ApiModifyEntity::validateParameters()
 	 */
 	protected function validateParameters( array $params ) {
@@ -92,14 +84,6 @@ abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 				'value' => 'The value to set for the language attribute',
 			)
 		);
-	}
-
-	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-		) );
 	}
 
 }

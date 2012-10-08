@@ -217,4 +217,5 @@ class ApiSetSiteLink extends ApiModifyEntity {
 	public function getVersion() {
 		return __CLASS__ . ': $Id$';
 	}
+
 }
