@@ -14,6 +14,7 @@ class ClientPage < RubySelenium
 
   text_field(:clientSearchInput, :id => "searchInput")
   button(:clientSearchSubmit, :id => "searchGoButton")
+  button(:clientSearchSubmitFancy, :id => "searchButton")
   paragraph(:clientSearchNoresult, :class => "mw-search-nonefound")
   link(:clientCreateArticleLink, :xpath => "//p[@class='mw-search-createlink']/b/a")
   link(:clientEditArticleLink, :xpath => "//li[@id='ca-edit']/span/a")
@@ -40,7 +41,11 @@ class ClientPage < RubySelenium
   #methods
   def create_article(title, text, overwrite = false)
     self.clientSearchInput = title
-    clientSearchSubmit
+    if clientSearchSubmit?
+      clientSearchSubmit
+    else
+      clientSearchSubmitFancy
+    end
     if clientSearchNoresult?
       clientCreateArticleLink
       self.clientCreateArticleInput = text
