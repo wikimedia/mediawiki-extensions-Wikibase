@@ -77,6 +77,7 @@ $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay
 $wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['WikibaseDefaultSettings'][]                   = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
 $wgHooks['WikibaseDeleteData'][]			= '\Wikibase\ClientHooks::onWikibaseDeleteData';
+$wgHooks['WikibaseRebuildData'][]			= '\Wikibase\ClientHooks::onWikibaseRebuildData';
 
 $wgSharedTables[] = 'wbc_entity_cache';
 $wgSharedTables[] = 'wbc_items_per_site';

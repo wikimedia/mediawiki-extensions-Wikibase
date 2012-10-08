@@ -81,15 +81,15 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Deletes all the data stored on the repository.
-	 *
-	 * @since 0.2
-	 *
-	 * @param callable $reportMessage
-	 *
-	 * @return boolean
-	 */
-        public static function onWikibaseDeleteData( $reportMessage ) {
+ * Deletes all the data stored on the repository.
+ *
+ * @since 0.2
+ *
+ * @param callable $reportMessage
+ *
+ * @return boolean
+ */
+	public static function onWikibaseDeleteData( $reportMessage ) {
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 
@@ -101,6 +101,26 @@ final class ClientHooks {
 
 		return true;
 	}
+
+	/**
+	 * Rebuilds all the data stored on the repository.
+	 *
+	 * @since 0.2
+	 *
+	 * @param callable $reportMessage
+	 *
+	 * @return boolean
+	 */
+	public static function onWikibaseRebuildData( $reportMessage ) {
+		$store = ClientStoreFactory::getStore();
+		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
+
+	    $reportMessage( 'Starting rebuild of the Wikibase repository ' . $stores[get_class( $store )] . ' store...' );
+		$store->rebuild();
+		$reportMessage( "done!\n" );
+		return true;
+	}
+
 
 	/**
 	 * When the poll script finds a new change or set of changes, it will fire
