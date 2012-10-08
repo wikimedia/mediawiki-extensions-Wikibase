@@ -284,5 +284,9 @@ $messages['tl'] = array(
  */
 $messages['vi'] = array(
 	'wikibaselib-desc' => 'Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase',
+	'wikibaselib-entity-item' => 'khoản mục',
+	'wikibaselib-entity-property' => 'thuộc tính',
+	'wikibaselib-entity-query' => 'truy vấn',
+	'datatypes-type-wikibase-item' => 'Khoản mục',
 );
 
