@@ -157,6 +157,10 @@ $wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/Sq
 $wgAutoloadClasses['Wikibase\SqlStore'] 				= $dir . 'includes/store/sql/SqlStore.php';
 $wgAutoloadClasses['Wikibase\TermSqlCache'] 			= $dir . 'includes/store/sql/TermSqlCache.php';
 
+// includes/store/solr
+$wgAutoloadClasses['Wikibase\SolrStore'] 				= $dir . 'includes/store/solr/SolrStore.php';
+$wgAutoloadClasses['Wikibase\TermSolrCache'] 			= $dir . 'includes/store/solr/TermSolrCache.php';
+
 // includes/updates
 $wgAutoloadClasses['Wikibase\EntityDeletionUpdate'] 	= $dir . 'includes/updates/EntityDeletionUpdate.php';
 $wgAutoloadClasses['Wikibase\EntityModificationUpdate'] = $dir . 'includes/updates/EntityModificationUpdate.php';
@@ -222,5 +226,6 @@ $wgContentHandlers[CONTENT_MODEL_WIKIBASE_QUERY] = '\Wikibase\QueryHandler';
 
 $wgWBStores = array();
 $wgWBStores['sqlstore'] = 'Wikibase\SqlStore';
+$wgWBStores['solrstore'] = 'Wikibase\SolrStore';
 
 unset( $dir );

@@ -1,0 +1,21 @@
+This feature is experimental.
+
+You need to have a Solr instance running on the standard port.
+The schema.xml file describes an example schema for the
+Solr instance.
+
+You also need to have Solarium available. Add a local setting
+$wgWBSolarium = "../../path/to/solarium/Autoloader.php";
+
+In your local settings you can then switch to the Solr store
+with the following line:
+
+$wgWBSettings['defaultStore'] = 'solrstore';
+
+You can also if you like include the solr special search page,
+but this is only for testing and deving. This shouldn't be
+in the deployment version at all.
+
+require_once( "$IP/extensions/Wikibase/repo/includes/specials/SpecialSolrSearch.php" );
+$wgSpecialPages['SolrSearch'] = 'SpecialSolrSearch';
+
