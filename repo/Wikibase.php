@@ -121,6 +121,15 @@ $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAli
 $wgAutoloadClasses['Wikibase\ApiSetItem'] 				= $dir . 'includes/api/ApiSetItem.php';
 $wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
 
+// includes/api/serializers
+$wgAutoloadClasses['Wikibase\ApiSerializationOptions'] 	= $dir . 'includes/api/serializers/ApiSerializationOptions.php';
+$wgAutoloadClasses['Wikibase\ApiSerializer'] 			= $dir . 'includes/api/serializers/ApiSerializer.php';
+$wgAutoloadClasses['Wikibase\ApiSerializerObject'] 		= $dir . 'includes/api/serializers/ApiSerializerObject.php';
+$wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/api/serializers/EntitySerializer.php';
+$wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/api/serializers/SnakSerializer.php';
+$wgAutoloadClasses['Wikibase\StatementSerializer'] 		= $dir . 'includes/api/serializers/StatementSerializer.php';
+$wgAutoloadClasses['Wikibase\StatementsSerializer'] 	= $dir . 'includes/api/serializers/StatementsSerializer.php';
+
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
 $wgAutoloadClasses['Wikibase\EntityContentFactory'] 	= $dir . 'includes/content/EntityContentFactory.php';
@@ -165,13 +174,14 @@ $wgAutoloadClasses['Wikibase\ItemModificationUpdate'] 	= $dir . 'includes/update
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
+$wgAutoloadClasses['Wikibase\Test\ApiSerializerBaseTest'] 	= $dir . 'tests/phpunit/includes/api/serializers/ApiSerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
 $wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/ApiLangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
 $wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
-$wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 			= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
+$wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 
 // API module registration
 $wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';

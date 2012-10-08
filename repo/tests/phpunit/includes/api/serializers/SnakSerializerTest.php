@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase;
-use MWException;
+namespace Wikibase\Test;
+use Wikibase\ApiSerializerObject;
 
 /**
- * API serializer for Statements objects.
+ * Tests for the Wikibase\SnakSerializer class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,53 +21,45 @@ use MWException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since 0.2
  *
- * @file
  * @ingroup Wikibase
+ * @ingroup Test
+ *
+ * @group Wikibase
+ * @group WikibaseApiSerialization
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementsSerializer extends ApiSerializerObject {
+class SnakSerializerTest extends ApiSerializerBaseTest {
 
 	/**
-	 * @see ApiSerializer::getSerialized
+	 * @see ApiSerializerBaseTest::getClass
 	 *
 	 * @since 0.2
 	 *
-	 * @param mixed $object
+	 * @return string
+	 */
+	protected function getClass() {
+		return '\Wikibase\SnakSerializer';
+	}
+
+	/**
+	 * @see ApiSerializerBaseTest::validProvider
+	 *
+	 * @since 0.2
 	 *
 	 * @return array
-	 * @throws MWException
 	 */
-	public function getSerialized( $object ) {
-		if ( !( $object instanceof Statements ) ) {
-			throw new MWException( 'StatementsSerializer can only serialize Statements objects' );
-		}
+	public function validProvider() {
+		$validArgs = array();
 
-		$serialization = array();
+		$validArgs[] = new \Wikibase\PropertyNoValueSnak( 1 );
+		$validArgs[] = new \Wikibase\PropertySomeValueSnak( 42 );
 
-		$props = array(); // TODO
-
-		$statementSerializer = new StatementSerializer( $this->getResult() );
-
-		foreach ( $props as $prop ) {
-			$statements = array(); // TODO
-
-			foreach ( $statements as &$statement ) {
-				$statement = $statementSerializer->getSerialized( $statement );
-			}
-
-			$this->getResult()->setIndexedTagName( $statements, 'statement' );
-
-			$serialization[42 /* TODO propid */] = $statements;
-		}
-
-		$this->getResult()->setIndexedTagName( $serialization, 'property' );
-
-		return $serialization;
+		return $this->arrayWrap( $validArgs );
 	}
 
 }
-
