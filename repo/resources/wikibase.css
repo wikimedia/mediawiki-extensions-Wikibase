@@ -217,6 +217,11 @@ table.wb-sitelinks .even td.wb-sitelinks-siteid {
 	background: #F0F0F0;
 }
 
+table.wb-sitelinks tfoot td.wb-sitelinks-placeholder {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 /********** /SITE LINKS **********/
 
 
