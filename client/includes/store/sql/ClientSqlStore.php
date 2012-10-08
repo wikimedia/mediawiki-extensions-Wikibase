@@ -70,4 +70,24 @@ class ClientSqlStore implements ClientStore {
 		return new EntityCacheTable();
 	}
 
+	/**
+	 * Delete client store data
+	 *
+	 * @since 0.2
+	 */
+	public function clear() {
+		$this->newSiteLinkCache()->clear();
+		$this->newEntityCache()->clear();
+
+                $tables = array(
+                        'wbc_item_usage',
+                        'wbc_query_usage',
+                );
+
+                $dbw = wfGetDB( DB_MASTER );
+
+                foreach ( $tables as $table ) {
+                        $dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
+                }
+	}
 }

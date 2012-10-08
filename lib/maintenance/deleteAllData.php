@@ -42,30 +42,6 @@ class DeleteAllData extends \Maintenance {
 
 		wfRunHooks( 'WikibaseDeleteData', array( $report ) );
 
-		$dbw = wfGetDB( DB_MASTER );
-
-		$tables = array(
-			'wb_changes',
-		);
-
-		// TODO: put in client
-		if ( defined( 'WBC_VERSION' ) ) {
-			$tables = array_merge( $tables, array(
-				'wbc_item_usage',
-				'wbc_query_usage',
-				'wbc_entity_cache',
-				'wbc_items_per_site',
-			) );
-		}
-
-		foreach ( $tables as $table ) {
-			echo "Emptying table $table...";
-
-			$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
-
-			echo "done!\n";
-		}
-
 		$report( <<<EOT
 Some tasty bits there... omnomnom...
 

@@ -570,9 +570,14 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onWikibaseDeleteData( $reportMessage ) {
-		$reportMessage( 'Deleting revisions from Data NS...' );
+		$reportMessage( 'Deleting data from changes table...' );
 
 		$dbw = wfGetDB( DB_MASTER );
+		$dbw->delete( 'wb_changes', '*', __METHOD__ );
+
+		$reportMessage( "done!\n" );
+
+		$reportMessage( 'Deleting revisions from Data NS...' );
 
 		$namespaceList = $dbw->makeList(  Utils::getEntityNamespaces(), LIST_COMMA );
 

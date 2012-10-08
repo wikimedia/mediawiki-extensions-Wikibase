@@ -57,4 +57,10 @@ interface ClientStore {
 	 */
 	public function newEntityCache();
 
+	/**
+	 * Removes all data from the store.
+	 *
+	 * @since 0.2
+	 */
+	public function clear();
 }

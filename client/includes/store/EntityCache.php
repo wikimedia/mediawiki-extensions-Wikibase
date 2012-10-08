@@ -104,4 +104,13 @@ interface EntityCache {
 	 */
 	public function getItem( $itemId );
 
+	/**
+	 * Clears the entity cache table
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean success indicator
+	 */
+	public function clear();
+
 }
