@@ -10,15 +10,15 @@
  * @author H. Snater
  * @author Daniel Werner
  */
-'use strict';
 
+( function( mw, wb, $, QUnit, undefined ) {
+	'use strict';
 
-( function () {
-	module( 'wikibase.ui.PropertyEditTool.EditableValue', window.QUnit.newWbEnvironment( {
+	QUnit.module( 'wikibase.ui.PropertyEditTool.EditableValue', QUnit.newWbEnvironment( {
 		setup: function() {
 			var node = $( '<div/>', { id: 'parent' } );
-			this.propertyEditTool = new window.wikibase.ui.PropertyEditTool( node );
-			this.editableValue = new window.wikibase.ui.PropertyEditTool.EditableValue();
+			this.propertyEditTool = new wb.ui.PropertyEditTool( node );
+			this.editableValue = new wb.ui.PropertyEditTool.EditableValue();
 
 			var toolbar = this.propertyEditTool._buildSingleValueToolbar( this.editableValue );
 			this.editableValue.init( node, toolbar );
@@ -47,21 +47,21 @@
 				}
 			];
 
-			equal(
+			QUnit.assert.equal(
 				this.editableValue._getToolbarParent().parent().attr( 'id' ),
 				'parent',
 				'parent node for toolbar exists'
 			);
 
-			equal(
+			QUnit.assert.equal(
 				this.editableValue.getSubject()[0],
 				node[0],
 				'verified subject node'
 			);
 
-			ok(
-				this.editableValue._interfaces.length == 1
-					&& this.editableValue._interfaces[0] instanceof window.wikibase.ui.PropertyEditTool.EditableValue.Interface,
+			QUnit.assert.ok(
+				this.editableValue._interfaces.length === 1
+					&& this.editableValue._interfaces[0] instanceof wb.ui.PropertyEditTool.EditableValue.Interface,
 				'initialized one interface'
 			);
 
@@ -81,7 +81,7 @@
 			this.editableValue.setValue( this.strings.valid[0] );
 			this.editableValue.simulateApiFailure();
 
-			ok(
+			QUnit.assert.ok(
 				this.editableValue.remove().state() === 'rejected',
 				'simulateApiFailure() we use for testing failures in the API works'
 			);
@@ -96,7 +96,7 @@
 
 			this.editableValue.simulateApiSuccess(); // initial state by default api actions in our tests are a success!
 
-			ok(
+			QUnit.assert.ok(
 				this.editableValue.save().state() === 'resolved',
 				'simulateApiSuccess() we use for testing success in the API works'
 			);
@@ -104,13 +104,13 @@
 		teardown: function() {
 			this.editableValue.destroy();
 
-			equal(
+			QUnit.assert.equal(
 				this.editableValue._toolbar,
 				null,
 				'destroyed toolbar'
 			);
 
-			equal(
+			QUnit.assert.equal(
 				this.editableValue._instances,
 				null,
 				'destroyed instances'
@@ -125,45 +125,44 @@
 	} ) );
 
 
-	test( 'initial check', function() {
-
-		equal(
+	QUnit.test( 'initial check', function( assert ) {
+		assert.equal(
 			this.editableValue.getInputHelpMessage(),
 			'',
 			'checked help message'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isPending(), // see todo in EditableValue. This behaves strange, use isNew()
 			false,
 			'value is not pending'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isNew(),
 			true,
 			'value is new'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isEmpty(),
 			true,
 			'value is empty'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.valueCompare( this.editableValue.getValue(), '' ),
 			true,
 			'value is empty string'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isInEditMode(),
 			true,
 			'in edit mode initially because empty string is initial value'
 		);
 
-		ok(
+		assert.ok(
 			this.editableValue.getToolbar() instanceof wikibase.ui.Toolbar,
 			'instantiated toolbar'
 		);
@@ -171,81 +170,80 @@
 	} );
 
 
-	test( 'dis- and enabling', function() {
-
-		equal(
+	QUnit.test( 'dis- and enabling', function( assert ) {
+		assert.equal(
 			this.editableValue.enable(),
 			true,
 			'enabling'
 		);
 		
-		equal(
+		assert.equal(
 			this.editableValue.isEnabled(),
 			true,
 			'is enabled'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isDisabled(),
 			false,
 			'not disabled'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.disable(),
 			true,
 			'disabling'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isDisabled(),
 			true,
 			'disabled'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isEnabled(),
 			false,
 			'not enabled'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.getToolbar().enable(),
 			true,
 			'enabling toolbar'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.getState(),
 			wb.ui.StateExtension.prototype.STATE.MIXED,
 			'mixed state'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isDisabled(),
 			false,
 			'not disabled'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isEnabled(),
 			false,
 			'not enabled'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.enable(),
 			true,
 			'enabling'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isEnabled(),
 			true,
 			'is enabled'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isDisabled(),
 			false,
 			'is not disabled'
@@ -254,134 +252,133 @@
 	} );
 
 
-	test( 'edit', function() {
-
-		equal(
+	QUnit.test( 'edit', function( assert ) {
+		assert.equal(
 			this.editableValue.startEditing(),
 			true,
 			'started edit mode'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isInEditMode(),
 			true,
 			'is in edit mode'
 		);
 
-		this.editableValue.setValue( this.strings['valid'][0] );
+		this.editableValue.setValue( this.strings.valid[0] );
 
-		ok(
-			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['valid'][0],
+		assert.ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings.valid[0],
 			'changed value'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.stopEditing( false ).promisor.apiAction,
 			wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE,
 			"stopped edit mode, don't save value"
 		);
 
-		ok(
-			this.editableValue.getValue()[0] != this.strings['valid'][0],
+		assert.ok(
+			this.editableValue.getValue()[0] != this.strings.valid[0],
 			'value not saved after leaving edit mode without saving value'
 		);
 
 		var deferred = this.editableValue.stopEditing( false );
 
-		equal(
+		assert.equal(
 			deferred.promisor.apiAction,
 			wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE,
 			'stop edit mode again'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.startEditing(),
 			true,
 			'started edit mode'
 		);
 
-		this.editableValue.setValue( this.strings['valid'][0] );
+		this.editableValue.setValue( this.strings.valid[0] );
 
-		ok(
-			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['valid'][0],
+		assert.ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings.valid[0],
 			'changed value'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.stopEditing( true ).promisor.apiAction,
 			wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.SAVE,
 			'stopped edit mode, save'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isInEditMode(),
 			false,
 			'is not in edit mode'
 		);
 
-		this.editableValue.setValue( this.strings['valid'][1] );
+		this.editableValue.setValue( this.strings.valid[1] );
 
-		ok(
-			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['valid'][1],
+		assert.ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings.valid[1],
 			'changed value'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.startEditing(),
 			true,
 			'started edit mode'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.startEditing(),
 			false,
 			'try to start edit mode again'
 		);
 
-		equal(
-			this.editableValue.validate( [this.strings['invalid'][0]] ),
+		assert.equal(
+			this.editableValue.validate( [ this.strings.invalid[0] ] ),
 			false,
 			'empty value not validated'
 		);
 
-		equal(
-			this.editableValue.validate( [this.strings['valid'][0]] ),
+		assert.equal(
+			this.editableValue.validate( [this.strings.valid[0]] ),
 			true,
 			'validated input'
 		);
 
-		this.editableValue.setValue( this.strings['invalid'][0] );
+		this.editableValue.setValue( this.strings.invalid[0] );
 
-		ok(
-			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] == this.strings['invalid'][0],
+		assert.ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getValue()[0] === this.strings.invalid[0],
 			'set empty value'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.isEmpty(),
 			true,
 			'editable value is empty'
 		);
 
-		ok(
-			this.editableValue.getValue() instanceof Array && this.editableValue.getInitialValue()[0] == this.strings['valid'][1],
+		assert.ok(
+			this.editableValue.getValue() instanceof Array && this.editableValue.getInitialValue()[0] === this.strings.valid[1],
 			'checked initial value'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.valueCompare( this.editableValue.getValue(), this.editableValue.getInitialValue() ),
 			false,
 			'compared current and initial value'
 		);
 
-		this.editableValue.setValue( this.strings['valid'][1] );
+		this.editableValue.setValue( this.strings.valid[1] );
 
-		ok(
-			this.editableValue.getValue() == this.strings['valid'][1],
+		assert.ok(
+			this.editableValue.getValue() == this.strings.valid[1],
 			'reset value to initial value'
 		);
 
-		equal(
+		assert.equal(
 			this.editableValue.valueCompare( this.editableValue.getValue(), this.editableValue.getInitialValue() ),
 			true,
 			'compared current and initial value'
@@ -391,14 +388,13 @@
 
 	} );
 
-	test( 'error handling', function() {
-
+	QUnit.test( 'error handling', function( assert ) {
 		this.editableValue.simulateApiFailure();
 
 		this.editableValue.startEditing();
-		this.editableValue.setValue( this.strings['valid'][0] );
+		this.editableValue.setValue( this.strings.valid[0] );
 
-		equal(
+		assert.equal(
 			this.editableValue.isInEditMode(),
 			true,
 			'started editing ans set value'
@@ -406,14 +402,14 @@
 
 		this.editableValue.stopEditing( true );
 
-		equal(
+		assert.equal(
 			this.editableValue.isInEditMode(),
 			true,
 			'is still in edit mode after receiving error'
 		);
 
-		ok(
-			this.editableValue._toolbar.editGroup.btnSave._tooltip instanceof window.wikibase.ui.Tooltip,
+		assert.ok(
+			this.editableValue._toolbar.editGroup.btnSave._tooltip instanceof wb.ui.Tooltip,
 			'attached tooltip to save button'
 		);
 
@@ -421,7 +417,7 @@
 
 		this.editableValue.stopEditing();
 
-		equal(
+		assert.equal(
 			this.editableValue.isInEditMode(),
 			false,
 			'cancelled editing'
@@ -432,7 +428,7 @@
 		this.editableValue.preserveEmptyForm = true;
 		this.editableValue.remove();
 
-		equal(
+		assert.equal(
 			this.editableValue.getValue()[0],
 			this.editableValue.getInitialValue()[0],
 			'emptied input interface resetting to default value and preserving the input interface'
@@ -441,16 +437,16 @@
 		this.editableValue.preserveEmptyForm = false;
 		this.editableValue.remove();
 
-		ok(
-			this.editableValue._toolbar.editGroup.btnRemove.getTooltip() instanceof window.wikibase.ui.Tooltip,
+		assert.ok(
+			this.editableValue._toolbar.editGroup.btnRemove.getTooltip() instanceof wb.ui.Tooltip,
 			'attached tooltip to remove button after trying to remove with API action'
 		);
 
 		this.editableValue.simulateApiFailure( 1 );
 		this.editableValue.startEditing();
-		this.editableValue.setValue( this.strings['valid'][0] );
+		this.editableValue.setValue( this.strings.valid[0] );
 		this.editableValue.stopEditing( true );
-		equal(
+		assert.equal(
 			this.editableValue._toolbar.editGroup.btnSave._tooltip._error.shortMessage,
 			mw.msg( 'wikibase-error-save-generic' ),
 			"when getting unknown error-code from API, generic message should be shown"
@@ -458,9 +454,9 @@
 
 		this.editableValue.simulateApiFailure( 2 );
 		this.editableValue.startEditing();
-		this.editableValue.setValue( this.strings['valid'][0] );
+		this.editableValue.setValue( this.strings.valid[0] );
 		this.editableValue.stopEditing( true );
-		equal(
+		assert.equal(
 			this.editableValue._toolbar.editGroup.btnSave._tooltip._error.shortMessage,
 			mw.msg( 'wikibase-error-ui-client-error' ),
 			"when getting an registered error-code from API, the corresponding message should be shown"
@@ -468,5 +464,4 @@
 
 	} );
 
-
-}() );
+}( mediaWiki, wikibase, jQuery, QUnit ) );
