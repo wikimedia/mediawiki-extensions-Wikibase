@@ -193,10 +193,13 @@ wb.ui.PropertyEditTool.EditableValue.Interface = wb.utilities.inherit( $PARENT,
 				lang = mw.config.get( 'wgUserLanguage' );
 			}
 			var dir = this.getSubject().attr( 'dir' );
-			if ( typeof dir === undefined ) {
+			if ( dir === undefined ) {
 				if ( $.uls.data.languages[lang] !== undefined ) {
-					dir = ( $.uls.data.isRtl( lang ) ) ? 'rtl' : 'ltr';
+					dir = $.uls.data.getDir( lang );
 				}
+			}
+			if ( dir === undefined ) {
+				dir = 'auto'; // Shouldn't happen, but go figure
 			}
 			this._inputElem.attr( 'lang', lang ).attr( 'dir', dir );
 		}
