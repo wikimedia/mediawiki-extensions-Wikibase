@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAx3///9E\u003d",
+        "filename": "repo/resources/wikibase.Site.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-08T13:52:07Z",
+      "side": 1,
+      "message": "you can use wb.log() for this.",
+      "revId": "2cf38892b2d4a5844a4e487ebeb283cb5715d5a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
