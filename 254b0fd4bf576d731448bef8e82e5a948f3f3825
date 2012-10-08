@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAwn////w\u003d",
+        "filename": "client/includes/LangLinkHandler.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-08T09:03:25Z",
+      "side": 1,
+      "message": "Missing variable name. There is a lot of sloppy docs, we should perhaps check it all. Also there are two different ways to document @param, we should choose one of them.",
+      "revId": "254b0fd4bf576d731448bef8e82e5a948f3f3825",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAwn////s\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-08T09:03:25Z",
+      "side": 1,
+      "message": "..and this remainds me that we throw exceptions several places that isn\u0027t documented. We also lack a statement if we shall document exceptions thrown from functions and methods used in other functions and methods.\n\nIe. function A use function B, and function B throws an exception. Should function A also document the thrown exception, or only function B.",
+      "revId": "254b0fd4bf576d731448bef8e82e5a948f3f3825",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
