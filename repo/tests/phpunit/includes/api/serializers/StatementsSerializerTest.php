@@ -56,12 +56,24 @@ class StatementsSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$validArgs[] = new \Wikibase\StatementList();
-
 		$statement = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
-		$validArgs[] = new \Wikibase\StatementList( array( $statement ) );
+		$statementList = new \Wikibase\StatementList( array( $statement ) );
 
-		return $this->arrayWrap( $validArgs );
+		$validArgs = $this->arrayWrap( $validArgs );
+
+		$validArgs[] = array(
+			new \Wikibase\StatementList(),
+			array(),
+		);
+
+//		$validArgs[] = array(
+//			$statementList,
+//			array(
+//
+//			),
+//		);
+
+		return $validArgs;
 	}
 
 }

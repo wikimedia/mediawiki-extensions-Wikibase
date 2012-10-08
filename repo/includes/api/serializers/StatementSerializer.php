@@ -51,7 +51,7 @@ class StatementSerializer extends ApiSerializerObject {
 		$mainSnak = $statement->getClaim()->getMainSnak();
 
 		$snakSerializer = new SnakSerializer( $this->getResult() );
-		$serialization['value'] = $snakSerializer->getSerialized( $mainSnak );
+		$serialization['mainsnak'] = $snakSerializer->getSerialized( $mainSnak );
 
 		// TODO
 

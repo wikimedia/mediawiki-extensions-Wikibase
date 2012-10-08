@@ -60,7 +60,20 @@ class StatementSerializerTest extends ApiSerializerBaseTest {
 
 		$validArgs[] = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 1 ) ) );
 
-		return $this->arrayWrap( $validArgs );
+		$validArgs = $this->arrayWrap( $validArgs );
+
+		$validArgs[] = array(
+			new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 2 ) ) ),
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'p2',
+				)
+				// TODO
+			),
+		);
+
+		return $validArgs;
 	}
 
 }

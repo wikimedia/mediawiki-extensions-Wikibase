@@ -56,10 +56,32 @@ class SnakSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$validArgs[] = new \Wikibase\PropertyNoValueSnak( 1 );
-		$validArgs[] = new \Wikibase\PropertySomeValueSnak( 42 );
+		$validArgs[] = array(
+			new \Wikibase\PropertyNoValueSnak( 1 ),
+			array(
+				'snaktype' => 'novalue',
+				'property' => 'p1',
+			)
+		);
 
-		return $this->arrayWrap( $validArgs );
+		$validArgs[] = array(
+			new \Wikibase\PropertySomeValueSnak( 2 ),
+			array(
+				'snaktype' => 'somevalue',
+				'property' => 'p2',
+			)
+		);
+
+		$validArgs[] = array(
+			new \Wikibase\PropertyValueSnak( 3, new \DataValues\StringValue( 'ohi' ) ),
+			array(
+				'snaktype' => 'value',
+				'property' => 'p3',
+				'value' => new \DataValues\StringValue( 'ohi' ), // TODO
+			)
+		);
+
+		return $validArgs;
 	}
 
 }
