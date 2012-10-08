@@ -12,7 +12,6 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-use Title;
 
 final class ClientHooks {
 
@@ -188,11 +187,15 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Registers change with recent changes and performs other updates
+	 *
+	 * @since 0.2
+	 *
 	 * @param \Title $title  The Title of the page to update
 	 * @param Change $change The Change that caused the update
 	 * @param bool $gone If set, indicates that the change's entity no longer refers to the given page.
 	 */
-	protected static function updatePage( Title $title, Change $change, $gone = false ) {
+	protected static function updatePage( \Title $title, Change $change, $gone = false ) {
 		global $wgContLang;
 
 		if ( !$title->exists() ) {
