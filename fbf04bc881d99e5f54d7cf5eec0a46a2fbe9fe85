@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAxH////0\u003d",
+        "filename": "lib/tests/phpunit/changes/EntityRefreshTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-08T10:29:34Z",
+      "side": 1,
+      "message": "why are you renaming it here now? that\u0027s not necessary. it should stay entity in this file..",
+      "revId": "fbf04bc881d99e5f54d7cf5eec0a46a2fbe9fe85",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
