@@ -135,7 +135,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::isEmpty
+	 * @see Entity::isEmpty
 	 *
 	 * @since 0.1
 	 *

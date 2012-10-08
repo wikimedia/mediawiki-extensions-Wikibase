@@ -207,4 +207,49 @@ class QueryObject extends EntityObject implements Query {
 		$this->data['claims'] = $this->getStubbedClaims( $this->data['claims'] );
 	}
 
+	/**
+	 * @see Entity::isEmpty
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return parent::isEmpty() && !$this->hasClaims();
+	}
+
+	/**
+	 * @see Query::hasClaims
+	 *
+	 * On top of being a convenience function, this implementation allows for doing
+	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims() {
+		if ( $this->claims === null ) {
+			return $this->data['claims'] !== array();
+		}
+		else {
+			return count( $this->claims ) > 0;
+		}
+	}
+
+	/**
+	 * @see EntityObject::cleanStructure
+	 *
+	 * @since 0.2
+	 *
+	 * @param boolean $wipeExisting
+	 */
+	protected function cleanStructure( $wipeExisting = false ) {
+		parent::cleanStructure( $wipeExisting );
+
+		if (  $wipeExisting || !array_key_exists( 'claims', $this->data ) ) {
+			$this->data['claims'] = array();
+		}
+	}
+
 }

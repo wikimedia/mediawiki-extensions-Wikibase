@@ -92,7 +92,7 @@ class StatementAggregateTest extends \MediaWikiTestCase {
 
 		$freshlyObtained = $aggregate->getStatements();
 
-		$this->assertEquals( $unmodifiedStatements, serialize( $freshlyObtained ) );
+		$this->assertEquals( $unmodifiedStatements, serialize( $freshlyObtained ), 'Was able to modify statements via StatementAggregate::getStatements' );
 	}
 
 }

@@ -113,4 +113,39 @@ class PropertyObjectTest extends EntityObjectTest {
 		$this->assertInstanceOf( '\MWException', $pokemons );
 	}
 
+	public function propertyProvider() {
+		$objects = array();
+
+		$objects[] = PropertyObject::newEmpty();
+
+		$entity = PropertyObject::newEmpty();
+		$entity->setDescription( 'en', 'foo' );
+		$objects[] = $entity;
+
+		$entity = PropertyObject::newEmpty();
+		$entity->setDescription( 'en', 'foo' );
+		$entity->setDescription( 'de', 'foo' );
+		$entity->setLabel( 'en', 'foo' );
+		$entity->setAliases( 'de', array( 'bar', 'baz' ) );
+		$objects[] = $entity;
+
+		$entity = $entity->copy();
+		$entity->addClaim( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$objects[] = $entity;
+
+		return $this->arrayWrap( $objects );
+	}
+
+	/**
+	 * @dataProvider itemProvider
+	 *
+	 * @param Property $property
+	 */
+	public function testHasStatements( Property $property ) {
+		$has = $property->hasClaims();
+		$this->assertInternalType( 'boolean', $has );
+
+		$this->assertEquals( count( $property->getClaims() ) !== 0, $has );
+	}
+
 }
