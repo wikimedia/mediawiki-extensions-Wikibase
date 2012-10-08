@@ -143,6 +143,32 @@ class EntityContentFactory {
 	}
 
 	/**
+	 * Get the entity content for the entity with the provided id
+	 * if it's available to the specified audience.
+	 * If the specified audience does not have the ability to view this
+	 * revision, if there is no such item, null will be returned.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $prefixedId
+	 *
+	 * @param $audience Integer: one of:
+	 *      Revision::FOR_PUBLIC       to be displayed to all users
+	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
+	 *      Revision::RAW              get the text regardless of permissions
+	 *
+	 * @return EntityContent|null
+	 */
+	public function getFromPrefixedId( $prefixedId, $audience = \Revision::FOR_PUBLIC ) {
+		$entityFactory = EntityFactory::singleton();
+
+		$type = $entityFactory->getEntityTypeFromPrefixedId( $prefixedId );
+		$id = $entityFactory->getUnprefixedId( $prefixedId );
+
+		return $this->getFromId( $type, $id, $audience );
+	}
+
+	/**
 	 * Get the entity content with the provided revision id, or null if there is no such entity content.
 	 *
 	 * Note that this returns an old content that may not be valid anymore.

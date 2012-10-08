@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase;
+use ApiBase, MWException;
 
 /**
  * API module for creating statements.
@@ -39,9 +39,32 @@ class ApiCreateClaim extends ApiBase {
 	public function execute() {
 		$this->checkParameterRequirements();
 
-		$params = $this->extractRequestParams();
+		$entity = $this->getEntity();
 
-		// TODO
+		if ( $entity === null ) {
+			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
+		}
+
+		$snak = $this->getSnakInstance();
+
+		$claim = new ClaimObject( $snak );
+
+		if ( $entity->getType() === Item::ENTITY_TYPE ) {
+			$entity->addStatement( new StatementObject( $claim ) );
+		}
+		else {
+			$entity->addClaim( $claim );
+		}
+
+		// TODO: save entity
+		// TODO: add claim reference
+		// TODO: transform claim to API output
+
+		$this->getResult()->addValue(
+			null,
+			'claim',
+			serialize( $claim )
+		);
 	}
 
 	/**
@@ -80,6 +103,66 @@ class ApiCreateClaim extends ApiBase {
 				$this->dieUsage( 'You cannot provide an item ID when creating a claim with PropertySnak snak', 'claim-item-id-set' );
 			}
 		}
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @return Entity|null
+	 */
+	protected function getEntity() {
+		$params = $this->extractRequestParams();
+
+		$entityContent = EntityContentFactory::singleton()->getFromPrefixedId( $params['entity'] );
+
+		return $entityContent === null ? null : $entityContent->getEntity();
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @return Snak
+	 * @throws MWException
+	 */
+	protected function getSnakInstance() {
+		$params = $this->extractRequestParams();
+
+		$entityFactory = EntityFactory::singleton();
+
+		if ( in_array( $params['snaktype'], array( 'instance', 'subclass' ) ) ) {
+			$itemId = $entityFactory->getUnprefixedId( $params['item'] );
+
+			switch ( $params['snaktype'] ) {
+				case 'instance':
+					$snak = new InstanceOfSnak( $itemId );
+					break;
+				case 'subclass':
+					$snak = new SubclassOfSnak( $itemId );
+					break;
+			}
+		}
+		else {
+			$propertyId = $entityFactory->getUnprefixedId( $params['property'] );
+
+			switch ( $params['snaktype'] ) {
+				case 'value':
+					$dataValue = new \DataValues\StringValue( '' ); // TODO
+					$snak = new PropertyValueSnak( $propertyId, $dataValue );
+					break;
+				case 'novalue':
+					$snak = new PropertyNoValueSnak( $propertyId );
+					break;
+				case 'somevalue':
+					$snak = new PropertySomeValueSnak( $propertyId );
+					break;
+			}
+		}
+
+		if ( !isset( $snak ) ) {
+			throw new MWException( '$snak was not set to an instance of Snak' );
+		}
+
+		return $snak;
 	}
 
 	/**
