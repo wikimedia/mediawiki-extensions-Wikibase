@@ -16,13 +16,4 @@ namespace Wikibase;
  */
 interface PropertySnak extends Snak {
 
-	/**
-	 * Returns the id of the snaks property.
-	 *
-	 * @since 0.1
-	 *
-	 * @return integer
-	 */
-	public function getPropertyId();
-
 }

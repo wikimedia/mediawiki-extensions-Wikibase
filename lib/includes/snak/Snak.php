@@ -16,4 +16,13 @@ namespace Wikibase;
  */
 interface Snak extends \Serializable, Hashable, Immutable {
 
+	/**
+	 * Returns the id of the snaks property.
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getPropertyId();
+
 }

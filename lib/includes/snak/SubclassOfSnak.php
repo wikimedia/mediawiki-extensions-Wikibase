@@ -16,6 +16,15 @@ namespace Wikibase;
  */
 class SubclassOfSnak extends InstanceOfSnak {
 
-
+	/**
+	 * @see Snak::getPropertyId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getPropertyId() {
+		return -2;
+	}
 
 }
