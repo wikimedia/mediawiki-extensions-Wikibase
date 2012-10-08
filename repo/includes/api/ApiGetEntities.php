@@ -18,10 +18,6 @@ use ApiBase;
  */
 class ApiGetEntities extends Api {
 
-	public function __construct( $main, $action ) {
-		parent::__construct( $main, $action );
-	}
-
 	/**
 	 * @see ApiBase::execute()
 	 */
