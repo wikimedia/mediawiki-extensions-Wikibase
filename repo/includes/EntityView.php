@@ -310,22 +310,29 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @param EntityContent $entity
 	 * @param Language|null $lang
-	 * @param String $tag allows to specify the type of the outer node
-	 * @param String $action by default 'edit', for aliases this could also be 'add'
+	 * @param string $tag allows to specify the type of the outer node
+	 * @param string $action by default 'edit', for aliases this could also be 'add'
+	 * @param bool $enabled can be set to false to display the button disabled
 	 * @return String
 	 */
-	public function getHtmlForEditSection( EntityContent $entity, Language $lang = null, $tag = 'span', $action = 'edit' ) {
+	public function getHtmlForEditSection(
+		EntityContent $entity, Language $lang = null, $tag = 'span', $action = 'edit', $enabled = true
+	) {
 		$html = HTML::openElement( $tag, array( 'class' => 'editsection' ) );
 		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar' ) );
 		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar-group' ) );
+		$html .= '[';
 
-		// [ edit ] button:
-		$html .= '[' . HTML::element(
-			'a',
-			array( 'href' => '', 'class' => 'wb-ui-toolbar-button' ),
+		// '[ button ]' button part:
+		$html .= HTML::element(
+			$enabled ? 'a' : 'span',
+			array( // todo: add link to special page for non-JS editing
+				'href' => '', 'class' => 'wb-ui-toolbar-button' . ( $enabled ? '' : ' wb-ui-toolbar-button-disabled' )
+			),
 			wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text()
-		) . ']';
+		);
 
+		$html .= ']';
 		$html .= Html::closeElement( 'div' );
 		$html .= Html::closeElement( 'div' );
 		$html .= Html::closeElement( $tag );

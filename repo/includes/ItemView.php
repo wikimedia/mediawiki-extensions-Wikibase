@@ -187,11 +187,19 @@ class ItemView extends EntityView {
 			}
 		}
 
-		// add button
+		// built table footer with button to add site-links, consider list could be complete!
+		$isFull = count( $siteLinks ) >= count( Sites::singleton()->getSites() );
+
 		$html .= Html::openElement( 'tfoot' );
+
+		// add button
 		$html .= Html::openElement( 'tr' );
-		$html .= Html::element( 'td', array( 'colspan' => '3', 'class' => 'wb-sitelinks-placeholder' ) );
-		$html .= $this->getHtmlForEditSection( $item, $lang, 'td', 'add' );
+		$html .= Html::element(
+			'td',
+			array( 'colspan' => '3', 'class' => 'wb-sitelinks-placeholder' ),
+			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->text() : ''
+		);
+		$html .= $this->getHtmlForEditSection( $item, $lang, 'td', 'add', !$isFull );
 		$html .= Html::closeElement( 'tr' );
 		$html .= Html::closeElement( 'tfoot' );
 
