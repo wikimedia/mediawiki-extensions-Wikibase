@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAyX////c\u003d",
+        "filename": "lib/tests/phpunit/claim/ClaimListTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-08T15:13:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAAyX////o\u003d",
+      "revId": "4e652cd9eaeff418b1207b06ae4e5e61e78f52c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAyH////s\u003d",
         "filename": "lib/tests/phpunit/claim/ClaimObjectTest.php",
         "patchSetId": 1
