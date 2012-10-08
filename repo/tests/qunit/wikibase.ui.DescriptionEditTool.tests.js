@@ -9,65 +9,57 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
 
+( function( mw, wb, $, QUnit, undefined ) {
+	'use strict';
 
-( function() {
-	module( 'wikibase.ui.DescriptionEditTool', window.QUnit.newWbEnvironment( {
+	QUnit.module( 'wikibase.ui.DescriptionEditTool', QUnit.newWbEnvironment( {
 		setup: function() {
 			this.parentNode = $( '<div/>' );
 			this.text = 'Text';
-			this.node = $( '<div/>', {
+			this.node = $( '<div/>' ).append( $( '<div/>', {
 				text: this.text,
 				'class': 'wb-property-container-value'
-			} );
+			} ) );
 			this.parentNode.append( this.node );
-			this.subject = new window.wikibase.ui.DescriptionEditTool( this.parentNode );
-
-			ok(
-				this.subject instanceof window.wikibase.ui.DescriptionEditTool,
-				'instantiated DescriptionEditTool'
-			);
-
+			this.subject = new wb.ui.DescriptionEditTool( this.parentNode );
 		},
-		teardown: function() {
-			this.subject.destroy();
-
-			equal(
-				this.node.children().length,
-				0,
-				'cleaned DOM'
-			);
-
-			equal(
-				this.node.text(),
-				this.text,
-				'plain text remains'
-			);
-
-			this.subject = null;
-			this.span = null;
-			this.h1 = null;
-		}
-
+		teardown: function() {}
 	} ) );
 
+	QUnit.test( 'basic check', function( assert ) {
 
-	test( 'basic check', function() {
+		assert.ok(
+			this.subject instanceof wb.ui.DescriptionEditTool,
+			'instantiated DescriptionEditTool'
+		);
 
-		equal(
+		assert.equal(
 			this.subject.getEditableValuePrototype(),
-			window.wikibase.ui.PropertyEditTool.EditableDescription,
+			wb.ui.PropertyEditTool.EditableDescription,
 			'retrieved prototype'
 		);
 
-		equal(
+		assert.equal(
 			this.subject.allowsMultipleValues,
 			false,
 			'does not allow multiple values'
 		);
 
+		this.subject.destroy();
+
+		assert.equal(
+			this.node.children().length + this.node.children().first().children().length,
+			1,
+			'cleaned DOM'
+		);
+
+		assert.equal(
+			this.node.text(),
+			this.text,
+			'plain text remains'
+		);
+
 	} );
 
-
-}() );
+}( mediaWiki, wikibase, jQuery, QUnit ) );
