@@ -495,7 +495,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 	 * @return jQuery
 	 */
 	_newEmptyValueDOM: function() {
-		return $( '<span/>' );
+		return $( '<span><span class="wb-value" /></span>' );
 	},
 
 	/**
