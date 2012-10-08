@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- * Tests for the Wikibase\StatementSerializer class.
+ * Tests for the Wikibase\SnaksSerializer class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementSerializerTest extends ApiSerializerBaseTest {
+class SnaksSerializerTest extends ApiSerializerBaseTest {
 
 	/**
 	 * @see ApiSerializerBaseTest::getClass
@@ -42,7 +42,7 @@ class StatementSerializerTest extends ApiSerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\StatementSerializer';
+		return '\Wikibase\SnaksSerializer';
 	}
 
 	/**
@@ -55,23 +55,25 @@ class StatementSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$validArgs[] = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$snak0 = new \Wikibase\PropertyNoValueSnak( 42 );
+		$snak1 = new \Wikibase\PropertySomeValueSnak( 1 );
+		$snak2 = new \Wikibase\PropertyValueSnak( 2, new \DataValues\StringValue( 'ohi' ) );
 
-		$validArgs[] = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 1 ) ) );
+		$validArgs[] = new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
 		$validArgs[] = array(
-			new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 2 ) ) ),
-			array(
-				'mainsnak' => array(
-					'snaktype' => 'novalue',
-					'property' => 'p2',
-				),
-				'qualifiers' => array(),
-				// TODO
-			),
+			new \Wikibase\SnakList(),
+			array(),
 		);
+
+//		$validArgs[] = array(
+//			new \Wikibase\SnakList( array( $snak0, $snak2 ) ),
+//			array(
+//
+//			),
+//		);
 
 		return $validArgs;
 	}

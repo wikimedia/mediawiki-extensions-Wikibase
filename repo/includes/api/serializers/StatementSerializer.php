@@ -48,10 +48,13 @@ class StatementSerializer extends ApiSerializerObject {
 
 		$serialization = array();
 
-		$mainSnak = $statement->getClaim()->getMainSnak();
+		$claim = $statement->getClaim();
 
-		$snakSerializer = new SnakSerializer( $this->getResult() );
-		$serialization['mainsnak'] = $snakSerializer->getSerialized( $mainSnak );
+		$snakSerializer = new SnakSerializer( $this->getResult(), $this->options );
+		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
+
+		$snaksSerializer = new SnaksSerializer( $this->getResult(), $this->options );
+		$serialization['qualifiers'] = $snaksSerializer->getSerialized( $claim->getQualifiers() );
 
 		// TODO
 
