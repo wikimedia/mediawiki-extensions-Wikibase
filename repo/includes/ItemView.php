@@ -85,10 +85,7 @@ class ItemView extends EntityView {
 				array( 'class' => 'wb-sitelinks-link' ),
 				wfMessage( 'wikibase-sitelinks-link-columnheading' )
 			);
-			$html .= Html::element(
-				'th',
-				array( 'class' => 'wb-sitelinks-toolbar' )
-			);
+			$html .= Html::element( 'th' );
 			$html .= Html::closeElement( 'tr' );
 
 			$html .= Html::closeElement( 'thead' );
@@ -189,7 +186,17 @@ class ItemView extends EntityView {
 					$html .= Html::closeElement( 'tr' );
 				}
 			}
+
+			// add button
+			$html .= Html::openElement( 'tfoot' );
+			$html .= Html::openElement( 'tr' );
+			$html .= Html::element( 'td', array( 'colspan' => '3', 'class' => 'wb-empty' ) );
+			$html .= $this->getHtmlForEditSection( $item, $lang, 'td', 'add' );
+			$html .= Html::closeElement( 'tr' );
+			$html .= Html::closeElement( 'tfoot' );
+
 			$html .= Html::closeElement( 'table' );
+
 		}
 
 		return $html . Html::closeElement( 'div' ); // close .wb-item

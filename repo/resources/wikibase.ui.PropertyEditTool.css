@@ -324,8 +324,9 @@ table.wb-sitelinks .wb-sitelinks-link {
 table.wb-sitelinks tfoot td.wb-empty {
 	border-left: 1px solid #C9C9C9;
 }
-table.wb-sitelinks tfoot td.wb-sitelinks-toolbar {
+table.wb-sitelinks tfoot td.editsection {
 	border-right: 1px solid #C9C9C9;
+	float: none;
 }
 
 /********** /SITE LINKS **********/

@@ -56,23 +56,7 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	 * @return jQuery
 	 */
 	_getToolbarParent: function() {
-		// take content (table), put it into a div and also add the toolbar into the div
-		this.__toolbarParent = this.__toolbarParent || $(
-			'<td/>'
-		)
-		.addClass( 'wb-sitelinks-toolbar' )
-		.appendTo(
-			$( '<tr/>' ).append(
-				$( '<td/>', {
-					colspan: '3',
-					'class': 'wb-empty'
-				} ) // empty cell moving the "add" button to the action column
-			)
-			.appendTo(
-				$( '<tfoot/>' ).appendTo( this._subject )
-			)
-		);
-		return this.__toolbarParent;
+		return $( 'tfoot .editsection' );
 	},
 
 	/**
@@ -168,8 +152,8 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	 * @return jQuery[]
 	 */
 	_getValueElems: function() {
-		// select all rows but not heading!
-		return this._subject.find( 'tr:not(:has(th))' );
+		// select all rows but neither heading nor footer!
+		return this._subject.find( 'tbody tr' );
 	},
 
 	/**
