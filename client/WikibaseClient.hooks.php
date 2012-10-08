@@ -103,6 +103,30 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Rebuilds all the data stored on the repository.
+	 * This hook will probably be called manually when the
+	 * rebuildAllData script is run on the client.
+	 * @todo Be smarter and call this hook from pollForChanges
+	 *
+	 * @since 0.2
+	 *
+	 * @param callable $reportMessage
+	 *
+	 * @return boolean
+	 */
+	public static function onWikibaseRebuildData( $reportMessage ) {
+		$store = ClientStoreFactory::getStore();
+		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
+
+		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )] . " store..." );
+
+		$store->rebuild();
+
+		$reportMessage( "done!\n" );
+
+		return true;
+	}
+	/**
 	 * When the poll script finds a new change or set of changes, it will fire
 	 * this hook for each change, so it can be handled appropriately.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/WikibasePollHandle
