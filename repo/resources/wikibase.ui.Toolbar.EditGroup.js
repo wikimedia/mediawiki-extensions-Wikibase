@@ -171,8 +171,9 @@ wb.ui.Toolbar.EditGroup = wb.utilities.inherit( $PARENT,
 		// trigger the stop editing...
 		var promise = this._editableValue.stopEditing( save );
 
-		if(    promise.promisor.apiAction === wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.SAVE
-			|| promise.promisor.apiAction === wikibase.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE
+		if(    promise.promisor.apiAction === wb.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.SAVE
+			|| ( promise.promisor.apiAction === wb.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE
+				&& ( !this._editableValue.preserveEmptyForm || !this._editableValue.isEmpty() ) )
 		) {
 			// ... when stopped, remove buttons for editing and display buttons for going back to edit mode
 			promise.done( $.proxy( function() {
