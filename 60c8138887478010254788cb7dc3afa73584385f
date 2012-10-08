@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAyH////Y\u003d",
+        "filename": "repo/resources/wikibase.ui.PropertyEditTool.EditableValue.Interface.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-08T14:54:13Z",
+      "side": 1,
+      "message": "Not really related, but it seems weird that getDir() returns undefined in case the language is not there. I would expect an error to be thrown or getting \u0027auto\u0027 directly.",
+      "revId": "60c8138887478010254788cb7dc3afa73584385f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
