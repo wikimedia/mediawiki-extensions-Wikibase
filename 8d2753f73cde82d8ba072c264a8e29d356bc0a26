@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAyn///+Y\u003d",
+        "filename": "repo/includes/store/solr/SolrStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-08T16:13:10Z",
+      "side": 1,
+      "message": "update",
+      "revId": "8d2753f73cde82d8ba072c264a8e29d356bc0a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAyn///+U\u003d",
+        "filename": "repo/includes/store/solr/SolrStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-08T16:13:10Z",
+      "side": 1,
+      "message": "update",
+      "revId": "8d2753f73cde82d8ba072c264a8e29d356bc0a26",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
