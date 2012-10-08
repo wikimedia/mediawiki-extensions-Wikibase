@@ -50,22 +50,20 @@ class ItemView extends EntityView {
 		$siteLinks = $item->getItem()->getSiteLinks();
 		$html = '';
 
-		if( empty( $siteLinks ) ) {
-			// no site links available for this item
-			$html .= Html::element( 'div', array( 'class' => 'wb-sitelinks-empty' ), wfMessage( 'wikibase-sitelinks-empty' ) );
-		} else {
-			$html .= Html::element( 'h2', array( 'class' => 'wb-sitelinks-heading' ), wfMessage( 'wikibase-sitelinks' ) );
+		$html .= Html::element( 'h2', array( 'class' => 'wb-sitelinks-heading' ), wfMessage( 'wikibase-sitelinks' ) );
 
-			$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks' ) );
+		$html .= Html::openElement( 'table', array( 'class' => 'wb-sitelinks' ) );
 
-			$html .= Html::openElement( 'colgroup' );
-			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-sitename' ) );
-			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-siteid' ) );
-			$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-link' ) );
-			$html .= Html::element( 'col', array(
-				'class' => 'wb-ui-propertyedittool-editablevalue-toolbarparent'
-			) );
-			$html .= Html::closeElement( 'colgroup' );
+		$html .= Html::openElement( 'colgroup' );
+		$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-sitename' ) );
+		$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-siteid' ) );
+		$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-link' ) );
+		$html .= Html::element( 'col', array(
+			'class' => 'wb-ui-propertyedittool-editablevalue-toolbarparent'
+		) );
+		$html .= Html::closeElement( 'colgroup' );
+
+		if( !empty( $siteLinks ) ) {
 
 			$html .= Html::openElement( 'thead' );
 
@@ -85,112 +83,119 @@ class ItemView extends EntityView {
 				array( 'class' => 'wb-sitelinks-link' ),
 				wfMessage( 'wikibase-sitelinks-link-columnheading' )
 			);
-			$html .= Html::element(
-				'th',
-				array( 'class' => 'wb-sitelinks-toolbar' )
-			);
+			$html .= Html::element( 'th' );
 			$html .= Html::closeElement( 'tr' );
 
 			$html .= Html::closeElement( 'thead' );
 
-			$i = 0;
-
-			// Batch load the sites we need info about during the building of the sitelink list.
-			Sites::singleton()->getSites();
-
-			// Sort the sitelinks according to their global id
-			$safetyCopy = $siteLinks; // keep a shallow copy;
-			$sortOk = usort(
-				$siteLinks,
-				function( $a, $b ) {
-					return strcmp($a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
-				}
-			);
-			if ( !$sortOk ) {
-				$siteLinks = $safetyCopy;
-			}
-
-			/**
-			 * @var SiteLink $link
-			 */
-			foreach( $siteLinks as $link ) {
-				$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
-
-				$site = $link->getSite();
-
-				if ( $site->getDomain() === '' ) {
-					// the link is pointing to an unknown site.
-					// XXX: hide it? make it red? strike it out?
-
-					$html .= Html::openElement( 'tr', array(
-							'class' => 'wb-sitelinks-site-unknown ' . $alternatingClass )
-					);
-
-					$html .= Html::element(
-						'td',
-						array( 'colspan' => '2', 'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-unknown' ),
-						$link->getSite()->getGlobalId()
-					);
-
-					$html .= Html::element(
-						'td',
-						array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-broken' ),
-						$link->getPage()
-					);
-
-					$html .= Html::closeElement( 'tr' );
-				} else {
-					$languageCode = $site->getLanguageCode();
-
-					$html .= Html::openElement( 'tr', array(
-							'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
-					);
-
-					$html .= Html::element(
-						'td',
-						array(
-							'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-' . $languageCode
-						),
-						// TODO: get an actual site name rather then just the language
-						Utils::fetchLanguageName( $languageCode )
-					);
-
-					$html .= Html::element(
-						'td',
-						array(
-							'class' => ' wb-sitelinks-siteid wb-sitelinks-siteid-' . $languageCode,
-							// site id language code is always ltr
-							'dir' => 'ltr'
-						),
-						// TODO: get an actual site id rather then just the language code
-						$languageCode
-					);
-					/* TODO: for non-JS, also set the dir attribute on the link cell;
-					but do not build language objects for each site since it causes too much load
-					and will fail when having too much site links */
-					$html .= Html::openElement(
-						'td',
-						array(
-							'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode,
-							'lang' => $languageCode
-						)
-					);
-
-					$html .= Html::element(
-						'a',
-						array(
-							'href' => $link->getUrl(),
-							'dir' => 'auto'
-						),
-						$link->getPage()
-					);
-					$html .= Html::closeElement( 'td' );
-					$html .= $this->getHtmlForEditSection( $item, $lang, 'td' );
-					$html .= Html::closeElement( 'tr' );
-				}
-			}
-			$html .= Html::closeElement( 'table' );
 		}
+
+		$i = 0;
+
+		// Batch load the sites we need info about during the building of the sitelink list.
+		Sites::singleton()->getSites();
+
+		// Sort the sitelinks according to their global id
+		$safetyCopy = $siteLinks; // keep a shallow copy;
+		$sortOk = usort(
+			$siteLinks,
+			function( $a, $b ) {
+				return strcmp($a->getSite()->getGlobalId(), $b->getSite()->getGlobalId() );
+			}
+		);
+		if ( !$sortOk ) {
+			$siteLinks = $safetyCopy;
+		}
+
+		/**
+		 * @var SiteLink $link
+		 */
+		foreach( $siteLinks as $link ) {
+			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+
+			$site = $link->getSite();
+
+			if ( $site->getDomain() === '' ) {
+				// the link is pointing to an unknown site.
+				// XXX: hide it? make it red? strike it out?
+
+				$html .= Html::openElement( 'tr', array(
+						'class' => 'wb-sitelinks-site-unknown ' . $alternatingClass )
+				);
+
+				$html .= Html::element(
+					'td',
+					array( 'colspan' => '2', 'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-unknown' ),
+					$link->getSite()->getGlobalId()
+				);
+
+				$html .= Html::element(
+					'td',
+					array( 'class' => 'wb-sitelinks-link wb-sitelinks-link-broken' ),
+					$link->getPage()
+				);
+
+				$html .= Html::closeElement( 'tr' );
+			} else {
+				$languageCode = $site->getLanguageCode();
+
+				$html .= Html::openElement( 'tr', array(
+						'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
+				);
+
+				$html .= Html::element(
+					'td',
+					array(
+						'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-' . $languageCode
+					),
+					// TODO: get an actual site name rather then just the language
+					Utils::fetchLanguageName( $languageCode )
+				);
+
+				$html .= Html::element(
+					'td',
+					array(
+						'class' => ' wb-sitelinks-siteid wb-sitelinks-siteid-' . $languageCode,
+						// site id language code is always ltr
+						'dir' => 'ltr'
+					),
+					// TODO: get an actual site id rather then just the language code
+					$languageCode
+				);
+				/* TODO: for non-JS, also set the dir attribute on the link cell;
+				but do not build language objects for each site since it causes too much load
+				and will fail when having too much site links */
+				$html .= Html::openElement(
+					'td',
+					array(
+						'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode,
+						'lang' => $languageCode
+					)
+				);
+
+				$html .= Html::element(
+					'a',
+					array(
+						'href' => $link->getUrl(),
+						'dir' => 'auto'
+					),
+					$link->getPage()
+				);
+				$html .= Html::closeElement( 'td' );
+				$html .= $this->getHtmlForEditSection( $item, $lang, 'td' );
+				$html .= Html::closeElement( 'tr' );
+			}
+		}
+
+		// add button
+		$html .= Html::openElement( 'tfoot' );
+		$html .= Html::openElement( 'tr' );
+		$html .= Html::element( 'td', array( 'colspan' => '3', 'class' => 'wb-empty' ) );
+		$html .= $this->getHtmlForEditSection( $item, $lang, 'td', 'add' );
+		$html .= Html::closeElement( 'tr' );
+		$html .= Html::closeElement( 'tfoot' );
+
+		$html .= Html::closeElement( 'table' );
 
 		return $html . Html::closeElement( 'div' ); // close .wb-item
 	}
