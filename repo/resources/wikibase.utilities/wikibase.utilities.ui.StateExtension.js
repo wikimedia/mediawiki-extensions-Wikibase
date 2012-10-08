@@ -11,21 +11,24 @@
 ( function( mw, wb, $, undefined ) {
 	'use strict';
 
+	// make sure wb.utilities.ui exists, move this into its own file as soon as there are more than this utility!
+	wb.utilities.ui = wb.utilities.ui || {};
+
 	/**
 	 * Allows to extend random elements with enable/disable functionality.
 	 * @constructor
 	 * @extension
 	 *
-	 * @example wb.ui.StateExtension.useWith( SomeConstructor, {
+	 * @example wb.utilities.ui.StateExtension.useWith( SomeConstructor, {
 	 *   getState: function() { ... },
 	 *   _setState: function( state ) { ... }
 	 * } );
 	 * SomeConstructor.disable();
 	 * SomeConstructor.isEnabled();
 	 *
-	 * @since 0.1
+	 * @since 0.2 (moved from wb.ui.StateExtension which was available in 0.1)
 	 */
-	wb.ui.StateExtension = wb.utilities.newExtension( {
+	wb.utilities.ui.StateExtension = wb.utilities.newExtension( {
 		/**
 		 * @const states of elements / element groups
 		 * @enum Number
@@ -50,17 +53,15 @@
 		 *
 		 * @param Number state
 		 *
-		 * @return Boolean whether the operation was successfull
+		 * @return Boolean whether the operation was successful
 		 */
 		_setState: wb.utilities.abstractFunction,
 
 		/**
 		 * Sets the object's state.
 		 *
-		 * @param Boolean true to disable or false to enable
-		 *
-		 * @return Boolean whether the desired state has been applied (state has been changed or
-		 *                 object already has the desired state)
+		 * @param Number state one of wb.ui.EditableValue.STATE
+		 * @return Boolean whether the desired state has been applied (or had been applied already)
 		 */
 		setState: function( state ) {
 			if( state === this.getState() ) {

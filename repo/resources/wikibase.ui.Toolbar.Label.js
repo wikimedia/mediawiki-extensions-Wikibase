@@ -160,12 +160,9 @@ wb.ui.Tooltip.Extension.useWith( wb.ui.Toolbar.Label, {
 } );
 
 // add disable/enable functionality overwriting required functions
-wb.ui.StateExtension.useWith( wb.ui.Toolbar.Label, {
-
+wb.utilities.ui.StateExtension.useWith( wb.ui.Toolbar.Label, {
 	/**
-	 * @see wikibase.ui.StateExtension.getState
-	 *
-	 * @return Number state
+	 * @see wb.utilities.ui.StateExtension.getState
 	 */
 	getState: function() {
 		return ( this._elem.hasClass( this.UI_CLASS + '-disabled' ) ) ?
@@ -174,23 +171,17 @@ wb.ui.StateExtension.useWith( wb.ui.Toolbar.Label, {
 	},
 
 	/**
-	 * @see wikibase.ui.StateExtension._setState
-	 *
-	 * @param Number state see wb.ui.EditableValue.STATE
-	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 * @see wb.utilities.ui.StateExtension.setState
 	 */
 	setState: function( state ) {
 		if ( !this.stateChangeable ) { // state is not supposed to change, no need to do anything
 			return true;
 		}
-		return wb.ui.StateExtension.prototype.setState.call( this, state );
+		return wb.utilities.ui.StateExtension.prototype.setState.call( this, state );
 	},
 
 	/**
-	 * @see wikibase.ui.StateExtension._setState
-	 *
-	 * @param Number state see wb.ui.EditableValue.STATE
-	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 * @see wb.utilities.ui.StateExtension._setState
 	 */
 	_setState: function( state ) {
 		var cls = this.UI_CLASS + '-disabled';

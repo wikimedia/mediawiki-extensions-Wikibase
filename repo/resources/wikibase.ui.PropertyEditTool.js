@@ -582,14 +582,10 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 } );
 
 // add disable/enable functionality overwriting required functions
-wb.ui.StateExtension.useWith( wb.ui.PropertyEditTool, {
-
+wb.utilities.ui.StateExtension.useWith( wb.ui.PropertyEditTool, {
 	/**
-	 * Determines the state (disabled, enabled or mixed) of all edit tool elements (editable values and
-	 * toolbar).
-	 * @see wikibase.ui.StateExtension.getState
-	 *
-	 * @return number whether all elements are enabled (true), disabled (false) or have mixed states
+	 * Determines the state (disabled, enabled or mixed) of all edit tool elements (editable values and toolbar).
+	 * @see wb.utilities.ui.StateExtension.getState
 	 */
 	getState: function() {
 		var disabled = true, enabled = true;
@@ -619,22 +615,17 @@ wb.ui.StateExtension.useWith( wb.ui.PropertyEditTool, {
 
 	/**
 	 * Dis- or enables the PropertyEditTool (its toolbar and EditableValues).
-	 * @see wikibase.ui.StateExtension._setState
-	 *
-	 * @param Number state see wb.ui.EditableValue.STATE
-	 * @param wb.ui.EditableValue skip EditableValue that should not be disabled
-	 *                                 (usually the one that triggered edit mode)
-	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 * @see wb.utilities.ui.StateExtension._setState
 	 */
 	_setState: function( state, skip ) {
 		var success = true;
 		if ( this._toolbar !== null ) {
-			success = success && this._toolbar.setState( state );
+			success = this._toolbar.setState( state ) && success;
 		}
 		if ( this._editableValues !== null ) {
 			$.each( this._editableValues, function( i, editableValue ) {
 				if ( editableValue !== skip ) {
-					success = success && editableValue.setState( state );
+					success = editableValue.setState( state ) && success;
 				}
 			} );
 		}
