@@ -65,6 +65,7 @@ foreach ( include( __DIR__ . '/DataValues.classes.php' ) as $class => $file ) {
  * @return boolean
  */
 $wgHooks['UnitTestsList'][] = function( array &$files ) {
+	// @codeCoverageIgnoreStart
 	$testFiles = array(
 		'datavalue/BooleanValue',
 		'datavalue/MonolingualTextValue',
@@ -81,6 +82,7 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	}
 
 	return true;
+	// @codeCoverageIgnoreEnd
 };
 
 /**
@@ -94,7 +96,9 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
  * @return boolean
  */
 $wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
+	// @codeCoverageIgnoreStart
 	$extensionTypes['datavalues'] = wfMessage( 'version-datavalues' )->text();
 
 	return true;
+	// @codeCoverageIgnoreEnd
 };
