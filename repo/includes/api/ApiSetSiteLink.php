@@ -14,8 +14,8 @@ use ApiBase, User, Http;
  * @ingroup API
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
 class ApiSetSiteLink extends ApiModifyEntity {
