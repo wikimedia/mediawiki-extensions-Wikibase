@@ -40,12 +40,12 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 	public function constructorProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new \Wikibase\InstanceOfSnak( 42 ) );
+		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
-		$argLists[] = array( new \Wikibase\InstanceOfSnak( 42 ), new SnakList() );
+		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( 42 ), new SnakList() );
 
 		$argLists[] = array(
-			new \Wikibase\InstanceOfSnak( 42 ),
+			new \Wikibase\PropertyNoValueSnak( 42 ),
 			new \Wikibase\SnakList( array(
 				new \Wikibase\PropertyValueSnak( 1, new StringValue( 'a' ) ),
 				new \Wikibase\PropertySomeValueSnak( 2 ),
@@ -100,7 +100,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
-		$snak = new \Wikibase\InstanceOfSnak( 42 );
+		$snak = new \Wikibase\PropertyNoValueSnak( 42 );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 	}

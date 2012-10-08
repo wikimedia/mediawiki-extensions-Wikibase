@@ -78,7 +78,7 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 			$this->assertEquals( --$elementCount, $array->count() );
 		}
 
-		$element = new \Wikibase\InstanceOfSnak( 42 );
+		$element = new \Wikibase\PropertyNoValueSnak( 42 );
 
 		$array->removeElement( $element );
 		$array->removeByElementHash( $element->getHash() );

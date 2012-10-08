@@ -45,12 +45,6 @@ class SnakTest extends \MediaWikiTestCase {
 		$snaks[] = new \Wikibase\PropertySomeValueSnak( 1 );
 		$snaks[] = new \Wikibase\PropertySomeValueSnak( 42 );
 
-		$snaks[] = new \Wikibase\InstanceOfSnak( 1 );
-		$snaks[] = new \Wikibase\InstanceOfSnak( 42 );
-
-		$snaks[] = new \Wikibase\SubclassOfSnak( 1 );
-		$snaks[] = new \Wikibase\SubclassOfSnak( 42 );
-
 		$values = array();
 
 		$values[] = new \DataValues\StringValue( 'Ohi there!' );
