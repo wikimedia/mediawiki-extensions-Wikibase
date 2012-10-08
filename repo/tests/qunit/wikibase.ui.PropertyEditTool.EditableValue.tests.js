@@ -99,12 +99,10 @@ var
 		return editableValue;
 	};
 
-
 	QUnit.module( 'wikibase.ui.PropertyEditTool.EditableValue', QUnit.newWbEnvironment( {
 		setup: function() {},
 		teardown: function() {}
 	} ) );
-
 
 	QUnit.test( 'test helper functions for testing EditableValue properly', function( assert ) {
 		var subject = $( '<div id="parent"><div class="wb-value"/></div>' ),
@@ -196,7 +194,7 @@ var
 			'value is empty'
 		);
 
-		ev.stopEditing(); // TODO: test returned promise
+		ev.stopEditing( true ); // TODO: test returned promise
 		assert.ok(
 			ev.isInEditMode(),
 			'can\'t go out of edit mode if empty (no) value'
@@ -220,7 +218,6 @@ var
 		);
 
 	} );
-
 
 	QUnit.test( 'dis- and enabling', function( assert ) {
 		var ev = newTestEV( $( '<div><div class="wb-value"/></div>' ) );
@@ -309,14 +306,13 @@ var
 
 	} );
 
-
 	QUnit.test( 'edit', function( assert ) {
 		var ev = newTestEV( $( '<div><div class="wb-value"/></div>' ) );
 
 		assert.equal(
 			ev.startEditing(),
-			true,
-			'started edit mode'
+			false,
+			'EditableValue is in edit mode initially, so startEditing() returns false'
 		);
 
 		assert.equal(
@@ -326,7 +322,6 @@ var
 		);
 
 		ev.setValue( DATAVALUES.VALID[0] ); // set value in edit mode
-
 		assert.ok(
 			ev.getValue() instanceof Array
 				&& ev.valueCompare( ev.getValue(), DATAVALUES.VALID[0] ),
@@ -336,7 +331,7 @@ var
 		assert.equal(
 			ev.stopEditing( false ).promisor.apiAction, // leave edit mode, don't save value
 			wb.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE,
-			"stopped edit mode without saving value"
+			'stopped edit mode without saving value'
 		);
 
 		assert.ok(
@@ -347,13 +342,13 @@ var
 		assert.equal(
 			ev.stopEditing( false ).promisor.apiAction,
 			wb.ui.PropertyEditTool.EditableValue.prototype.API_ACTION.NONE,
-			'stop edit mode again'
+			'stop edit mode again, do not save, no API action performed'
 		);
 
 		assert.equal(
-			ev.startEditing(),
+			ev.preserveEmptyForm === true && ev.isInEditMode() === true,
 			true,
-			'started edit mode'
+			'still in edit mode because \'preserveEmptyForm\' option is set and no value (empty)'
 		);
 
 		ev.setValue( DATAVALUES.VALID[0] );
@@ -443,7 +438,6 @@ var
 		);
 
 		ev.remove();
-
 	} );
 
 	QUnit.test( 'error handling', function( assert ) {
@@ -460,7 +454,11 @@ var
 			'started editing ans set value'
 		);
 
-		ev.stopEditing( true );
+		assert.equal(
+			ev.stopEditing( true ).state(),
+			'rejected',
+			'save while leaving edit mode has failed'
+		);
 
 		assert.equal(
 			ev.isInEditMode(),
@@ -469,13 +467,17 @@ var
 		);
 
 		assert.ok(
-			ev._toolbar.editGroup.btnSave._tooltip instanceof wb.ui.Tooltip,
+			ev._toolbar.editGroup.btnSave.getTooltip() instanceof wb.ui.Tooltip,
 			'attached tooltip to save button'
 		);
 
 		ev.simulateApiSuccess();
 
-		ev.stopEditing();
+		assert.equal(
+			ev.stopEditing( true ).state(),
+			'resolved',
+			'save while leaving edit mode was successful'
+		);
 
 		assert.equal(
 			ev.isInEditMode(),
@@ -507,7 +509,7 @@ var
 		ev.setValue( DATAVALUES.VALID[0] );
 		ev.stopEditing( true );
 		assert.equal(
-			ev._toolbar.editGroup.btnSave._tooltip._error.shortMessage,
+			ev._toolbar.editGroup.btnSave.getTooltip()._error.shortMessage,
 			mw.msg( 'wikibase-error-save-generic' ),
 			"when getting unknown error-code from API, generic message should be shown"
 		);
@@ -517,7 +519,7 @@ var
 		ev.setValue( DATAVALUES.VALID[0] );
 		ev.stopEditing( true );
 		assert.equal(
-			ev._toolbar.editGroup.btnSave._tooltip._error.shortMessage,
+			ev._toolbar.editGroup.btnSave.getTooltip()._error.shortMessage,
 			mw.msg( 'wikibase-error-ui-client-error' ),
 			"when getting an registered error-code from API, the corresponding message should be shown"
 		);
