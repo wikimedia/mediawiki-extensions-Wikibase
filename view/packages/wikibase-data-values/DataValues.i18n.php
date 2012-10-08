@@ -59,6 +59,13 @@ $messages['de'] = array(
 	'version-datavalues' => 'Datenwerte',
 );
 
+/** Spanish (español)
+ * @author Armando-Martin
+ */
+$messages['es'] = array(
+	'datavalues-desc' => 'Colección de objetos que representan varias clases de valores',
+);
+
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
