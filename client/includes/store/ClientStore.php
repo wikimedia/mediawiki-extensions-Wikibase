@@ -63,4 +63,11 @@ interface ClientStore {
 	 * @since 0.2
 	 */
 	public function clear();
+
+	/**
+	 * Rebuilds all data in the store.
+	 *
+	 * @since 0.2
+	 */
+	public function rebuild();
 }

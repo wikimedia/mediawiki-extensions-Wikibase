@@ -218,4 +218,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	public function clear() {
 		return wfGetDB( DB_MASTER )->delete( $this->getName(), '*', __METHOD__ );
 	}
+	public function rebuild() {
+
+	}
 }
