@@ -111,7 +111,9 @@ $wgAutoloadClasses['Wikibase\EntityUpdate'] 		= $dir . 'includes/changes/EntityU
 
 // includes/claims
 $wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/claim/Claim.php';
+$wgAutoloadClasses['Wikibase\ClaimAggregate'] 		= $dir . 'includes/claim/ClaimAggregate.php';
 $wgAutoloadClasses['Wikibase\ClaimList'] 			= $dir . 'includes/claim/ClaimList.php';
+$wgAutoloadClasses['Wikibase\ClaimListAccess'] 		= $dir . 'includes/claim/ClaimListAccess.php';
 $wgAutoloadClasses['Wikibase\ClaimObject'] 			= $dir . 'includes/claim/ClaimObject.php';
 $wgAutoloadClasses['Wikibase\Claims'] 				= $dir . 'includes/claim/Claims.php';
 
@@ -160,6 +162,7 @@ $wgAutoloadClasses['Wikibase\SubclassOfSnak'] 			= $dir . 'includes/snak/Subclas
 $wgAutoloadClasses['Wikibase\Statement'] 				= $dir . 'includes/statement/Statement.php';
 $wgAutoloadClasses['Wikibase\StatementAggregate'] 		= $dir . 'includes/statement/StatementAggregate.php';
 $wgAutoloadClasses['Wikibase\StatementList'] 			= $dir . 'includes/statement/StatementList.php';
+$wgAutoloadClasses['Wikibase\StatementListAccess'] 		= $dir . 'includes/statement/StatementListAccess.php';
 $wgAutoloadClasses['Wikibase\StatementObject'] 			= $dir . 'includes/statement/StatementObject.php';
 $wgAutoloadClasses['Wikibase\Statements'] 				= $dir . 'includes/statement/Statements.php';
 

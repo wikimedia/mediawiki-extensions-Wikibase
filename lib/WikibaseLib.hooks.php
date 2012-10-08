@@ -127,6 +127,8 @@ final class LibHooks {
 			'changes/EntityRefresh',
 			'changes/EntityUpdate',
 
+			'claim/ClaimAggregate',
+			'claim/ClaimListAccess',
 			'claim/ClaimList',
 			'claim/ClaimObject',
 
@@ -149,6 +151,7 @@ final class LibHooks {
 			'snak/SnakList',
 
 			'statement/StatementAggregate',
+			'statement/StatementListAccess',
 			'statement/StatementList',
 			'statement/StatementObject',
 

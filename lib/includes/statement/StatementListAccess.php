@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Interface for objects that contain Statement objects to create an external Statements object.
+ * Interface for objects that can be accessed as a list of Statement objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,17 +28,35 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface StatementAggregate {
+interface StatementListAccess {
 
 	/**
-	 * Returns the statements contained by this StatementAggregate.
-	 * This is a read-only interface. Changes to obtained
-	 * statements will NOT be reflected in the StatementAggregate.
+	 * Adds the provided statement to the list.
 	 *
 	 * @since 0.2
 	 *
-	 * @return Statements
+	 * @param Statement $statement
 	 */
-	public function getStatements();
+	public function addStatement( Statement $statement );
+
+	/**
+	 * Returns if the list contains a statement with the same hash as the provided statement.
+	 *
+	 * @since 0.2
+	 *
+	 * @param Statement $statement
+	 *
+	 * @return boolean
+	 */
+	public function hasStatement( Statement $statement );
+
+	/**
+	 * Removes the statement with the same hash as the provided reference if such a statement exists in the list.
+	 *
+	 * @since 0.2
+	 *
+	 * @param Statement $statement
+	 */
+	public function removeStatement( Statement $statement );
 
 }

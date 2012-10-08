@@ -31,6 +31,13 @@ namespace Wikibase;
 class QueryObject extends EntityObject implements Query {
 
 	/**
+	 * @since 0.2
+	 *
+	 * @var Claims|null
+	 */
+	protected $claims;
+
+	/**
 	 * @see EntityObject::getIdPrefix
 	 *
 	 * @since 0.1
@@ -97,6 +104,152 @@ class QueryObject extends EntityObject implements Query {
 	public function getDiff( Entity $target ) {
 		// TODO
 		return ItemDiff::newEmpty();
+	}
+
+	/**
+	 * @see ClaimListAccess::addClaim
+	 *
+	 * @since 0.2
+	 *
+	 * @param Claim $claim
+	 */
+	public function addClaim( Claim $claim ) {
+		$this->unstubClaims();
+		$this->claims->addClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimListAccess::hasClaim
+	 *
+	 * @since 0.2
+	 *
+	 * @param Claim $claim
+	 *
+	 * @return boolean
+	 */
+	public function hasClaim( Claim $claim ) {
+		$this->unstubClaims();
+		return $this->claims->hasClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimListAccess::removeClaim
+	 *
+	 * @since 0.2
+	 *
+	 * @param Claim $claim
+	 */
+	public function removeClaim( Claim $claim ) {
+		$this->unstubClaims();
+		$this->claims->removeClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimAggregate::getClaims
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	public function getClaims() {
+		$this->unstubClaims();
+		return clone $this->claims;
+	}
+
+	/**
+	 * Unsturbs the statements from the JSON into the $statements field
+	 * if this field is not already set.
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	protected function unstubClaims() {
+		if ( $this->claims === null ) {
+			$this->claims = new ClaimList();
+
+			foreach ( $this->data['claims'] as $statementSerialization ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$this->claims->addClaim( unserialize( $statementSerialization ) );
+			}
+		}
+	}
+
+	/**
+	 * Takes the claims element of the $data array of an item and writes the claims to it as stubs.
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $claims
+	 *
+	 * @return array
+	 */
+	protected function getStubbedClaims( array $claims ) {
+		if ( $this->claims !== null ) {
+			$claims = array();
+
+			foreach ( $this->claims as $claim ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$claims[] = serialize( $claim );
+			}
+		}
+
+		return $claims;
+	}
+
+	/**
+	 * @see Entity::stub
+	 *
+	 * @since 0.2
+	 */
+	public function stub() {
+		parent::stub();
+		$this->data['claims'] = $this->getStubbedClaims( $this->data['claims'] );
+	}
+
+	/**
+	 * @see Entity::isEmpty
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return parent::isEmpty() && !$this->hasClaims();
+	}
+
+	/**
+	 * @see Query::hasClaims
+	 *
+	 * On top of being a convenience function, this implementation allows for doing
+	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims() {
+		if ( $this->claims === null ) {
+			return $this->data['claims'] !== array();
+		}
+		else {
+			return count( $this->claims ) > 0;
+		}
+	}
+
+	/**
+	 * @see EntityObject::cleanStructure
+	 *
+	 * @since 0.2
+	 *
+	 * @param boolean $wipeExisting
+	 */
+	protected function cleanStructure( $wipeExisting = false ) {
+		parent::cleanStructure( $wipeExisting );
+
+		if (  $wipeExisting || !array_key_exists( 'claims', $this->data ) ) {
+			$this->data['claims'] = array();
+		}
 	}
 
 }

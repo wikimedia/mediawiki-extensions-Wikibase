@@ -28,35 +28,6 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Claims extends \Traversable, \Countable, \Serializable, Hashable {
-
-	/**
-	 * Adds the provided claims to the list.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Claim $claim
-	 */
-	public function addClaim( Claim $claim );
-
-	/**
-	 * Returns if the list contains a claim with the same hash as the provided claim.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Claim $claim
-	 *
-	 * @return boolean
-	 */
-	public function hasClaim( Claim $claim );
-
-	/**
-	 * Removes the claim with the same hash as the provided reference if such a claim exists in the list.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Claim $claim
-	 */
-	public function removeClaim( Claim $claim );
+interface Claims extends ClaimListAccess, \Traversable, \Countable, \Serializable, Hashable {
 
 }

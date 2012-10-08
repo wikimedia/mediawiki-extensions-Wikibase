@@ -144,13 +144,4 @@ class StatementListTest extends \MediaWikiTestCase {
 		$this->assertEquals( $elementCount, count( $array ) );
 	}
 
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param \Wikibase\StatementList $array
-	 */
-	public function testGetStatements( StatementList $array ) {
-		$this->assertEquals( $array, $array->getStatements() );
-	}
-
 }
