@@ -321,7 +321,7 @@ table.wb-sitelinks .wb-sitelinks-link {
 	border-right: none;
 }
 
-table.wb-sitelinks tfoot td.wb-empty {
+table.wb-sitelinks tfoot td.wb-sitelinks-placeholder {
 	border-left: 1px solid #C9C9C9;
 }
 table.wb-sitelinks tfoot td.editsection {

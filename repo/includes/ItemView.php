@@ -190,7 +190,7 @@ class ItemView extends EntityView {
 		// add button
 		$html .= Html::openElement( 'tfoot' );
 		$html .= Html::openElement( 'tr' );
-		$html .= Html::element( 'td', array( 'colspan' => '3', 'class' => 'wb-empty' ) );
+		$html .= Html::element( 'td', array( 'colspan' => '3', 'class' => 'wb-sitelinks-placeholder' ) );
 		$html .= $this->getHtmlForEditSection( $item, $lang, 'td', 'add' );
 		$html .= Html::closeElement( 'tr' );
 		$html .= Html::closeElement( 'tfoot' );
