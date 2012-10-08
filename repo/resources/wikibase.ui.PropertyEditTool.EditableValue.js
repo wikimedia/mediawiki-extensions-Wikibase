@@ -260,6 +260,7 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 	remove: $.PersistentPromisor( function() {
 		$( wikibase ).triggerHandler( 'startItemPageEditMode', this );
 
+		var promise, action;
 		var degrade = $.proxy( function() {
 			if( !this.preserveEmptyForm ) {
 				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, this.isPending() ] );
@@ -277,18 +278,23 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 			}
 		}, this );
 
-		if( this.isPending() || this.isEmpty() && this.isNew() ) {
+		if( this.isPending() || ( this.isEmpty() && this.isNew() ) ) {
 			// no API call necessary since value hasn't been stored yet...
 			degrade();
-			return $.Deferred().resolve().promise(); // ...return new promise nonetheless
+			promise = $.Deferred().resolve().promise(); // ...return new promise nonetheless
+			action = this.API_ACTION.NONE;
 		} else {
-			var action = this.preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
+			action = this.preserveEmptyForm ? this.API_ACTION.SAVE_TO_REMOVE : this.API_ACTION.REMOVE;
 
 			// store deferred so we can return it when this is called again while still running
-			return this.performApiAction( action )
+			promise = this.performApiAction( action )
 				.done( degrade )
 				.promise();
 		}
+		promise.promisor = {
+			apiAction: action
+		};
+		return promise;
 	} ),
 
 	/**
@@ -314,9 +320,10 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 				this._subject.removeClass( 'wb-pending-value' );
 			}, this ) );
 			promise = deferred.promise();
-			promise.promisor = {};
-			promise.promisor.apiAction = this.API_ACTION.SAVE;
-			promise.promisor.wasPending = wasPending;
+			promise.promisor = {
+				apiAction: this.API_ACTION.SAVE,
+				wasPending: wasPending
+			};
 		}
 		return promise;
 	} ),
@@ -374,7 +381,7 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 
 		if ( !save ) {
 			this._reTransform( false );
-			if( this.isPending() || this.isEmpty() && this.isNew() && this.preserveEmptyForm ) { // cancel pending edit...
+			if( this.isPending() || ( this.preserveEmptyForm && this.isEmpty() && this.isNew() ) ) { // cancel pending edit...
 				promise = this.remove(); // not yet existing value, no state to go back to -> do not trigger 'afterStopEditing' here!
 			} else { // cancel...
 				$( wikibase ).triggerHandler( 'stopItemPageEditMode', [ this, this.isPending() ] );

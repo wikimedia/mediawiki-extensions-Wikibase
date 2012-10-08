@@ -23,6 +23,9 @@ var $PARENT = wb.ui.Base;
  *
  * @event clickOutside: Triggered when clicking outside of the tooltip's bubble.
  *        (1) jQuery.Event
+ *
+ * @todo add function for identifying whether tooltip represents an error. Error content and normal content handling
+ *       could be handled together and more generic.
  */
 wb.ui.Tooltip = wb.utilities.inherit( $PARENT, {
 	/**
