@@ -241,7 +241,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Statements::addStatement
+	 * @see StatementListAccess::addStatement
 	 *
 	 * @since 0.2
 	 *
@@ -253,7 +253,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Statements::hasStatement
+	 * @see StatementListAccess::hasStatement
 	 *
 	 * @since 0.2
 	 *
@@ -267,7 +267,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Statements::removeStatement
+	 * @see StatementListAccess::removeStatement
 	 *
 	 * @since 0.2
 	 *
@@ -287,11 +287,11 @@ class ItemObject extends EntityObject implements Item {
 	 */
 	public function getStatements() {
 		$this->unstubStatements();
-		return $this->statements;
+		return clone $this->statements;
 	}
 
 	/**
-	 * Unsturbs the statements from the JSOn into the $statements field
+	 * Unsturbs the statements from the JSON into the $statements field
 	 * if this field is not already set.
 	 *
 	 * @since 0.2
@@ -365,6 +365,19 @@ class ItemObject extends EntityObject implements Item {
 		$data['statements'] = $this->getStubbedStatements( $data['statements'] );
 
 		return $data;
+	}
+
+	/**
+	 * @see ClaimAggregate::getClaims
+	 *
+	 * @since 0.2
+	 *
+	 * @return Claims
+	 */
+	public function getClaims() {
+		$claims = array(); // TODO
+
+		return new ClaimList( $claims );
 	}
 
 }
