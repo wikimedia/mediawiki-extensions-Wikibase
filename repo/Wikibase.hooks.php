@@ -337,13 +337,13 @@ final class RepoHooks {
 		if ( !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
 			return true;
 		}
-		$item = $content->getItem();
-		$change = EntityDeletion::newFromEntity( $item );
+		$entity = $content->getEntity();
+		$change = EntityDeletion::newFromEntity( $entity );
 		$change->setFields( array(
 			//'previous_revision_id' => $wikiPage->getLatest(),
 			'revision_id' => 0, // there's no current revision
 			'user_id' => $user->getId(),
-			'object_id' => $item->getId(),
+			'object_id' => $entity->getId(),
 			'time' => $logEntry->getTimestamp(),
 		) );
 
