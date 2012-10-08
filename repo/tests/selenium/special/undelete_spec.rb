@@ -25,7 +25,6 @@ describe "Check undelete" do
     end
     visit_page(CreateItemPage) do |page|
       item_id_a = page.create_new_item(label_a, description_a)
-      page.wait_for_aliases_to_load
       page.wait_for_entity_to_load
       page.add_aliases([alias_a])
       page.add_sitelinks(sitelinks)
@@ -49,7 +48,6 @@ describe "Check undelete" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_aliases_to_load
         page.entityLabelSpan.should == label_a
         page.entityDescriptionSpan.should == description_a
         page.get_number_of_sitelinks_from_counter.should == 2
@@ -76,7 +74,6 @@ describe "Check undelete" do
       end
       visit_page(CreateItemPage) do |page|
         item_id_b = page.create_new_item(label_b, description_b)
-        page.wait_for_aliases_to_load
         page.wait_for_entity_to_load
         page.add_aliases([alias_b])
         page.add_sitelinks(sitelinks)
@@ -94,7 +91,6 @@ describe "Check undelete" do
         page.undeleteErrorDiv?.should be_true
         page.conflictingItemLink
         page.wait_for_entity_to_load
-        page.wait_for_aliases_to_load
         page.entityLabelSpan.should == label_b
         page.entityDescriptionSpan.should == description_b
         page.get_number_of_sitelinks_from_counter.should == 2
@@ -108,7 +104,6 @@ describe "Check undelete" do
     on_page(ItemPage) do |page|
       page.navigate_to_item
       page.wait_for_entity_to_load
-      page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
     visit_page(RepoLoginPage) do |page|

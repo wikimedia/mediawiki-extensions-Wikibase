@@ -19,7 +19,6 @@ describe "Check functionality search" do
     # set up: create item and add aliases
     visit_page(CreateItemPage) do |page|
       page.create_new_item(label, description)
-      page.wait_for_aliases_to_load
       page.wait_for_entity_to_load
       page.add_aliases([alias_a, alias_b, alias_c])
     end

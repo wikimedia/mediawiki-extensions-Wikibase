@@ -83,7 +83,6 @@ describe "Check functionality of property view" do
       on_page(PropertyPage) do |page|
         page.navigate_to_property
         page.wait_for_entity_to_load
-        page.wait_for_aliases_to_load
         page.addAliases
         i = 0;
         while i < 3 do
@@ -94,7 +93,6 @@ describe "Check functionality of property view" do
         ajax_wait
         page.wait_for_api_callback
         @browser.refresh
-        page.wait_for_aliases_to_load
         page.wait_for_entity_to_load
         page.count_existing_aliases.should == 3
       end
@@ -103,7 +101,6 @@ describe "Check functionality of property view" do
       on_page(PropertyPage) do |page|
         page.navigate_to_property
         page.wait_for_entity_to_load
-        page.wait_for_aliases_to_load
         page.editAliases
         page.aliasesInputFirstRemove?.should be_true
         num_aliases = page.count_existing_aliases
@@ -118,7 +115,6 @@ describe "Check functionality of property view" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_entity_to_load
-        page.wait_for_aliases_to_load
         page.addAliases?.should be_true
       end
     end

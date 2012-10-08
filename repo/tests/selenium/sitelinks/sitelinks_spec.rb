@@ -20,7 +20,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
     it "should check that there are no site links and if there's an add button" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.sitelinksTable?.should be_true
         page.addSitelinkLink?.should be_true
         page.siteLinkCounter?.should be_true
@@ -36,7 +35,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.count_existing_sitelinks.should == 0
         @browser.refresh
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
       end
     end
@@ -47,7 +45,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
         page.addSitelinkLink
         page.siteIdInputField_element.should be_true
@@ -79,7 +76,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
         page.addSitelinkLink
         page.siteIdInputField_element.should be_true
@@ -114,7 +110,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.editSitelinkLink
         page.siteIdInputField?.should be_false
         page.pageInputField?.should be_true
@@ -130,7 +125,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         sitelinks.each do |sitelink|
           page.count_existing_sitelinks.should == count
           page.addSitelinkLink
@@ -162,7 +156,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.addSitelinkLink
         page.siteIdInputField = "sr"
         ajax_wait
@@ -194,7 +187,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.editSitelinkLink
         page.saveSitelinkLinkDisabled?.should be_true
         page.cancelSitelinkLink?.should be_true
@@ -211,7 +203,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_for_api_callback
         @browser.refresh
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.editSitelinkLink
         page.pageInputField.should_not == current_page
       end
@@ -223,7 +214,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.germanSitelink
         page.articleTitle.should == "Bermuda"
       end
@@ -235,7 +225,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         numExistingSitelinks = page.count_existing_sitelinks
         page.removeSitelinkLink?.should be_true
         for i in 1..numExistingSitelinks
@@ -247,7 +236,6 @@ describe "Check functionality of add/edit/remove sitelinks" do
         end
         @browser.refresh
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.count_existing_sitelinks.should == 0
       end
     end

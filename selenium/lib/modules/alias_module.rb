@@ -23,13 +23,8 @@ module AliasPage
   text_field(:aliasesInputModified, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-modified']/span/input")
   text_field(:aliasesInputEqual, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-equal']/span/input")
   link(:aliasesInputRemove, :xpath => "//li[@class='tagadata-choice ui-widget-content ui-state-default ui-corner-all tagadata-choice-modified']/a[@class='tagadata-close']")
-  # aliases methods
-  def wait_for_aliases_to_load
-    wait_until do
-      aliasesDiv?
-    end
-  end
 
+  # aliases methods
   def count_existing_aliases
     count = 0
     aliasesList_element.each do |aliasElem|

@@ -60,12 +60,6 @@ module SitelinkPage
     return count - 2 # subtracting the table header row and the footer row
   end
 
-  def wait_for_sitelinks_to_load
-    wait_until do
-      sitelinksTable?
-    end
-  end
-
   def add_sitelinks(sitelinks)
     sitelinks.each do |sitelink|
       addSitelinkLink

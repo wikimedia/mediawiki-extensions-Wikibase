@@ -22,7 +22,6 @@ describe "Check ItemByTitle special page" do
     it "should add en/fr sitelinks" do
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
-        page.wait_for_sitelinks_to_load
         page.add_sitelinks(sitelinks)
       end
     end
@@ -53,7 +52,6 @@ describe "Check ItemByTitle special page" do
     on_page(ItemPage) do |page|
       page.navigate_to_item
       page.wait_for_entity_to_load
-      page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
   end

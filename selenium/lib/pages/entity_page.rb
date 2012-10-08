@@ -23,7 +23,7 @@ class EntityPage < RubySelenium
   # label UI
   h1(:mwFirstHeading, :id => "firstHeading")
   h1(:firstHeading, :xpath => "//h1[contains(@class, 'wb-firstHeading')]")
-  div(:uiToolbar, :class => "wb-ui-toolbar")
+  h1(:uiPropertyEdittool, :class => "wb-ui-propertyedittool")
   span(:entityLabelSpan, :xpath => "//h1[contains(@class, 'wb-firstHeading')]/span/span")
   link(:editLabelLink, :css => "h1.wb-firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
   link(:editLabelLinkDisabled, :css => "h1.wb-firstHeading > span > span.wb-ui-propertyedittool-editablevalue-toolbarparent > div.wb-ui-toolbar > div.wb-ui-toolbar-group > div.wb-ui-toolbar-group > span.wb-ui-toolbar-button-disabled:nth-child(1)")
@@ -66,7 +66,7 @@ class EntityPage < RubySelenium
 
   def wait_for_entity_to_load
     wait_until do
-      uiToolbar_element.visible?
+      uiPropertyEdittool_element.visible?
     end
   end
 

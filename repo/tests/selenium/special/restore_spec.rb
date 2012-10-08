@@ -17,7 +17,6 @@ describe "Check restore" do
     # set up: create item, enter label, description and aliases & make some changes to item
     visit_page(CreateItemPage) do |page|
       page.create_new_item(label, description)
-      page.wait_for_aliases_to_load
       page.wait_for_entity_to_load
       page.addAliases
       page.aliasesInputEmpty= alias_a
@@ -26,7 +25,6 @@ describe "Check restore" do
       page.wait_for_api_callback
       @browser.refresh
       page.wait_for_entity_to_load
-      page.wait_for_aliases_to_load
       page.change_label(label + changed)
       page.change_description(description + changed)
       page.editAliases
@@ -43,7 +41,6 @@ describe "Check restore" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_aliases_to_load
       end
       on_page(HistoryPage) do |page|
         page.navigate_to_item_history
@@ -54,7 +51,6 @@ describe "Check restore" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.wait_for_aliases_to_load
         page.entityLabelSpan.should == label
         page.entityDescriptionSpan.should == description
         page.get_nth_alias(1).text.should == alias_a
@@ -67,7 +63,6 @@ describe "Check restore" do
     on_page(ItemPage) do |page|
       page.navigate_to_item
       page.wait_for_entity_to_load
-      page.wait_for_sitelinks_to_load
       page.remove_all_sitelinks
     end
   end
