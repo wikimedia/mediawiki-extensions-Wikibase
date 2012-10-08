@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAAAyX////o\u003d",
+        "filename": "lib/tests/phpunit/claim/ClaimListTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-08T15:13:27Z",
+      "side": 1,
+      "message": "Sorry, misunderstood.",
+      "parentUuid": "AAAAyX////8\u003d",
+      "revId": "4e652cd9eaeff418b1207b06ae4e5e61e78f52c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAAyH////s\u003d",
         "filename": "lib/tests/phpunit/claim/ClaimObjectTest.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "It\u0027s not. The operation needs to work when the main snak is not set (4 lines back) and when it is set (here).",
       "parentUuid": "AAAAyH////s\u003d",
+      "revId": "4e652cd9eaeff418b1207b06ae4e5e61e78f52c7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAyX////k\u003d",
+        "filename": "lib/tests/phpunit/claim/ClaimObjectTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-08T15:13:27Z",
+      "side": 1,
+      "message": "Sorry, how is this different from the case in line 95?",
+      "parentUuid": "AAAAyX////4\u003d",
       "revId": "4e652cd9eaeff418b1207b06ae4e5e61e78f52c7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
