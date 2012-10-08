@@ -90,4 +90,13 @@ class ClientSqlStore implements ClientStore {
                         $dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
                 }
 	}
+
+	/**
+	 * Rebuild client store data
+	 *
+	 * @since 0.2
+	 */
+	public function rebuild() {
+		$this->clear();
+	}
 }
