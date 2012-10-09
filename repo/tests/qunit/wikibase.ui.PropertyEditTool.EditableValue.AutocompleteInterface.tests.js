@@ -95,7 +95,7 @@
 		// overriding AJAX request handling
 		this.autocomplete._inputElem.data( 'wikibaseAutocomplete' ).source = $.proxy(
 			function( request, suggest ) {
-				this.autocomplete._currentResults = this.resultSet;console.log(1);
+				this.autocomplete._currentResults = this.resultSet;
 				suggest( this.resultSet );
 			},
 			this
