@@ -30,4 +30,11 @@ namespace Wikibase;
  */
 interface Claims extends ClaimListAccess, \Traversable, \Countable, \Serializable, Hashable {
 
+	/**
+	 * Removes duplicates bases on hash value.
+	 *
+	 * @since 0.2
+	 */
+	public function removeDuplicates();
+
 }
