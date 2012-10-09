@@ -67,16 +67,16 @@ foreach ( include( __DIR__ . '/DataValues.classes.php' ) as $class => $file ) {
 $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	// @codeCoverageIgnoreStart
 	$testFiles = array(
-		'datavalue/BooleanValue',
-		'datavalue/GeoCoordinateValue',
-		'datavalue/IriValue',
-		'datavalue/MediaWikiTitleValue',
-		'datavalue/MonolingualTextValue',
-		'datavalue/MultilingualTextValue',
-		'datavalue/NumberValue',
-		'datavalue/QuantityValue',
-		'datavalue/StringValue',
-		'datavalue/UnknownValue',
+		'includes/values/BooleanValue',
+		'includes/values/GeoCoordinateValue',
+		'includes/values/IriValue',
+		'includes/values/MediaWikiTitleValue',
+		'includes/values/MonolingualTextValue',
+		'includes/values/MultilingualTextValue',
+		'includes/values/NumberValue',
+		'includes/values/QuantityValue',
+		'includes/values/StringValue',
+		'includes/values/UnknownValue',
 	);
 
 	foreach ( $testFiles as $file ) {

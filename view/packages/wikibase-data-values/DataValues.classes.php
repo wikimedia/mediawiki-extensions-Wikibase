@@ -27,24 +27,25 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 return array(
-	'DataValues\BooleanValue' => 'datavalue/BooleanValue.php',
-	'DataValues\DataValue' => 'datavalue/DataValue.php',
-	'DataValues\DataValueObject' => 'datavalue/DataValueObject.php',
-	'DataValues\GeoCoordinateValue' => 'datavalue/GeoCoordinateValue.php',
-	'DataValues\IriValue' => 'datavalue/IriValue.php',
-	'DataValues\MonolingualTextValue' => 'datavalue/MonolingualTextValue.php',
-	'DataValues\MultilingualTextValue' => 'datavalue/MultilingualTextValue.php',
-	'DataValues\MediaWikiTitleValue' => 'datavalue/MediaWikiTitleValue.php',
-	'DataValues\NumberValue' => 'datavalue/NumberValue.php',
-	'DataValues\QuantityValue' => 'datavalue/QuantityValue.php',
-	'DataValues\StringValue' => 'datavalue/StringValue.php',
-//	'DataValues\TimeValue' => 'datavalue/TimeValue.php',
-	'DataValues\UnknownValue' => 'datavalue/UnknownValue.php',
+	'DataValues\BooleanValue' => 'includes/values/BooleanValue.php',
+	'DataValues\GeoCoordinateValue' => 'includes/values/GeoCoordinateValue.php',
+	'DataValues\IriValue' => 'includes/values/IriValue.php',
+	'DataValues\MonolingualTextValue' => 'includes/values/MonolingualTextValue.php',
+	'DataValues\MultilingualTextValue' => 'includes/values/MultilingualTextValue.php',
+	'DataValues\MediaWikiTitleValue' => 'includes/values/MediaWikiTitleValue.php',
+	'DataValues\NumberValue' => 'includes/values/NumberValue.php',
+	'DataValues\QuantityValue' => 'includes/values/QuantityValue.php',
+	'DataValues\StringValue' => 'includes/values/StringValue.php',
+//	'DataValues\TimeValue' => 'includes/values/TimeValue.php',
+	'DataValues\UnknownValue' => 'includes/values/UnknownValue.php',
+
+	'DataValues\DataValue' => 'includes/DataValue.php',
+	'DataValues\DataValueObject' => 'includes/DataValueObject.php',
 
 	'Comparable' => 'includes/Comparable.php',
 	'Copyable' => 'includes/Copyable.php',
 	'Hashable' => 'includes/Hashable.php',
 	'Immutable' => 'includes/Immutable.php',
 
-	'DataValues\Test\DataValueTest' => 'tests/datavalue/DataValueTest.php',
+	'DataValues\Test\DataValueTest' => 'tests/includes/DataValueTest.php',
 );
