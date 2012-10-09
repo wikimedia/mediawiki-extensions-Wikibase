@@ -966,12 +966,10 @@ wb.ui.PropertyEditTool.EditableValue = wb.utilities.inherit( $PARENT,
 } );
 
 // add disable/enable functionality overwriting required functions
-wb.ui.StateExtension.useWith( wb.ui.PropertyEditTool.EditableValue, {
-
+wb.utilities.ui.StateExtension.useWith( wb.ui.PropertyEditTool.EditableValue, {
 	/**
-	 * Determines the state (disabled, enabled or mixed) of all EditableValue elements (interfaces
-	 * and toolbar).
-	 * @see wikibase.ui.StateExtension.getState
+	 * Determines the state (disabled, enabled or mixed) of all EditableValue elements (interfaces and toolbar).
+	 * @see wb.utilities.ui.StateExtension.getState
 	 */
 	getState: function() {
 		// consider toolbars state if toolbar is set
@@ -997,15 +995,12 @@ wb.ui.StateExtension.useWith( wb.ui.PropertyEditTool.EditableValue, {
 
 	/**
 	 * Dis- or enables the EditableValue (its toolbar and interfaces).
-	 * @see wikibase.ui.StateExtension._setState
+	 * @see wb.utilities.ui.StateExtension._setState
 	 *
 	 * @todo there is still the bug that calling disable() and then enable() will not re-initiate the disabled state
 	 *       of certain toolbar buttons. E.g. if 'save' was disabled for some reason (e.g. initial value didn't change).
 	 *       One solution could be to change the state system so all elements always keep their state but if the parent
-	 *       is disabled,
-	 *
-	 * @param Number state see wb.ui.EditableValue.STATE
-	 * @return Boolean whether the desired state has been applied (or had been applied already)
+	 *       is disabled
 	 */
 	_setState: function( state ) {
 		var success = true;

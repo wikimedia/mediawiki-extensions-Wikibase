@@ -167,7 +167,7 @@
 
 		equal(
 			this.toolbar.getState(),
-			wb.ui.StateExtension.prototype.STATE.MIXED,
+			wb.utilities.ui.StateExtension.prototype.STATE.MIXED,
 			'mixed state after making label changeable'
 		);
 
