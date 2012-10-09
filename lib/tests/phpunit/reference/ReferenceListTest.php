@@ -86,6 +86,8 @@ class ReferenceListTest extends \MediaWikiTestCase {
 			$array->removeReference( $hashable );
 			$this->assertFalse( $array->hasReference( $hashable ) );
 		}
+
+		$this->assertTrue( true );
 	}
 
 	/**
@@ -113,6 +115,8 @@ class ReferenceListTest extends \MediaWikiTestCase {
 
 		$array->removeReference( $element );
 		$array->removeReference( $element );
+
+		$this->assertTrue( true );
 	}
 
 	/**

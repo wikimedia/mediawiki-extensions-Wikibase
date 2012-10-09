@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test;
 use Wikibase\ClaimList as ClaimList;
-use Wikibase\Claims as Claims;
-use Wikibase\Claim as Claim;
 use Wikibase\ClaimObject as ClaimObject;
 use Wikibase\Hashable as Hashable;
 
@@ -86,6 +84,8 @@ class ClaimListTest extends \MediaWikiTestCase {
 			$array->removeClaim( $hashable );
 			$this->assertFalse( $array->hasClaim( $hashable ) );
 		}
+
+		$this->assertTrue( true );
 	}
 
 	/**
@@ -113,6 +113,8 @@ class ClaimListTest extends \MediaWikiTestCase {
 
 		$array->removeClaim( $element );
 		$array->removeClaim( $element );
+
+		$this->assertTrue( true );
 	}
 
 	/**
