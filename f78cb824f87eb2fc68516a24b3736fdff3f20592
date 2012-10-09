@@ -69,6 +69,24 @@
       "revId": "f78cb824f87eb2fc68516a24b3736fdff3f20592",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA2X////k\u003d",
+        "filename": "repo/tests/phpunit/includes/api/serializers/SnaksSerializerTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-09T11:39:31Z",
+      "side": 1,
+      "message": "That\u0027s what I said. When adding commented out code, include explanation why or don\u0027t do it.",
+      "parentUuid": "AAAA2H///94\u003d",
+      "revId": "f78cb824f87eb2fc68516a24b3736fdff3f20592",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
