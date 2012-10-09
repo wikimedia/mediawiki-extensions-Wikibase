@@ -187,12 +187,8 @@ table.wb-sitelinks .wb-sitelinks-link {
 	border-right: 1px solid #C9C9C9;
 }
 
-table.wb-sitelinks, .wb-sitelinks-empty {
+table.wb-sitelinks {
 	clear: both;
-}
-
-.wb-sitelinks-empty {
-	margin-top: 3em;
 }
 
 table.wb-sitelinks th {

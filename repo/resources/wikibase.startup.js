@@ -60,13 +60,6 @@
 				new wb.ui.AliasesEditTool( this );
 			} );
 
-			// if there are no site links yet, we have to create the table for it to initialize the ui
-			// without JS this is not required, so we build it here manually
-			$( '.wb-sitelinks-empty' )
-			.each( function() {
-				$( this ).replaceWith( wb.ui.SiteLinksEditTool.getEmptyStructure() );
-			} );
-
 			// removing site links heading to rebuild it with value counter
 			$( '.wb-sitelinks-heading' ).remove();
 			$( 'table.wb-sitelinks' ).each( function() {
@@ -83,9 +76,6 @@
 				// actual initialization
 				new wb.ui.SiteLinksEditTool( $( this ) );
 			} );
-		} else {
-			// site-links are only editable if item exists, not on 'Special:CreateItem'
-			$( '.wb-sitelinks-empty' ).remove();
 		}
 
 		// handle edit restrictions
