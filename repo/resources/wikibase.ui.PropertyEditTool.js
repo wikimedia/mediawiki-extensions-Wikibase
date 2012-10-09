@@ -165,7 +165,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 		if( this.allowsMultipleValues ) {
 			return false; // allow infinite number of values
 		} else {
-			return this._editableValues === null || this._editableValues.length < 1;
+			return this._editableValues !== null && this._editableValues.length > 0;
 		}
 	},
 
@@ -269,7 +269,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 
 		var editableValueToolbar = this._buildSingleValueToolbar( editableValue );
 
-		// initialiye editable value and give appropriate toolbar on the way:
+		// initialize editable value and give appropriate toolbar on the way:
 		editableValue.init( valueElem, editableValueToolbar );
 
 		var self = this;
@@ -390,7 +390,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 		this._getValuesParent().append( newValueElem );
 		var newValue = this._initSingleValue( newValueElem );
 
-		if ( !this.allowsFullErase ) { // on allowsFullErase, add button will be hidden when not in use
+		if( this.allowsMultipleValues && !this.allowsFullErase ) { // on allowsFullErase, add button will be hidden when not in use
 			this._toolbar.btnAdd.disable(); // disable 'add' button...
 		}
 
@@ -524,7 +524,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 			return this._editableValues.slice();
 		}
 
-		var values = new Array();
+		var values = [];
 		$.each( this._editableValues, function( index, elem ) {
 			// don't collect pending elements
 			if( ! elem.isPending() ) {
@@ -551,7 +551,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 	 * @return wikibase.ui.PropertyEditTool.EditableValue[]
 	 */
 	getPendingValues: function() {
-		var values = new Array();
+		var values = [];
 		$.each( this._editableValues, function( index, elem ) {
 			if( elem.isPending() ) {
 				values.push( elem );
