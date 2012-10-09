@@ -52,10 +52,11 @@ $messages['be-tarask'] = array(
 );
 
 /** German (Deutsch)
+ * @author Kghbln
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'datavalues-desc' => 'Sammlungen von Objekten, die verschiedene Wertarten darstellen',
+	'datavalues-desc' => 'Stellt eine Sammlung von Objekten bereit, die verschiedene Wertearten darstellen',
 	'version-datavalues' => 'Datenwerte',
 );
 
@@ -64,6 +65,14 @@ $messages['de'] = array(
  */
 $messages['es'] = array(
 	'datavalues-desc' => 'Colección de objetos que representan varias clases de valores',
+);
+
+/** Galician (galego)
+ * @author Toliño
+ */
+$messages['gl'] = array(
+	'datavalues-desc' => 'Colección de obxectos que representan varios tipos de valores',
+	'version-datavalues' => 'Valores de datos',
 );
 
 /** Upper Sorbian (hornjoserbsce)
