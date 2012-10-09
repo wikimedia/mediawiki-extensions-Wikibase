@@ -9,38 +9,38 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
 
+( function( mw, wb, $, QUnit, undefined ) {
+	'use strict';
 
-( function () {
-	module( 'wikibase', window.QUnit.newWbEnvironment() );
+	QUnit.module( 'wikibase', QUnit.newWbEnvironment() );
 
-	test( 'basic', function() {
+	QUnit.test( 'basic', function( assert ) {
 
-		expect( 4 );
+		QUnit.expect( 4 );
 
-		ok(
-			window.wikibase instanceof Object,
+		assert.ok(
+			wb instanceof Object,
 			'initiated wikibase object'
 		);
 
-		ok(
-			window.wikibase.getSites() instanceof Object,
+		assert.ok(
+			wb.getSites() instanceof Object,
 			'gettings sites resturns object'
 		);
 
-		equal(
-			window.wikibase.getSite( 'xy' ),
+		assert.equal(
+			wb.getSite( 'xy' ),
 			null,
 			'trying to get invalid site returns null'
 		);
 
-		equal(
-			window.wikibase.hasSite( 'xy' ),
+		assert.equal(
+			wb.hasSite( 'xy' ),
 			false,
 			'trying to check for invalid site returns false'
 		);
 
 	} );
 
-}() );
+}( mediaWiki, wikibase, jQuery, QUnit ) );
