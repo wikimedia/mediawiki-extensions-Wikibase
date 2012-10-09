@@ -220,6 +220,22 @@ describe "Check functionality of add/edit/remove sitelinks" do
     end
   end
 
+  context "Check behaviour on maximum sitelinks reached" do
+    it "should check correct message when maximum number of sitelinks are reached" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.addSitelinkLink?.should be_true
+        @browser.execute_script("wb.ui.SiteLinksEditTool.prototype.isFull = function() { return true; };")
+        page.add_sitelinks([["fr", "Croissant"]])
+        page.addSitelinkLink?.should be_false
+        @browser.refresh
+        page.wait_for_entity_to_load
+        page.addSitelinkLink?.should be_true
+      end
+    end
+  end
+
   context "Check for removing multiple site link UI" do
     it "should check if removing multiple sitelink works" do
       on_page(ItemPage) do |page|

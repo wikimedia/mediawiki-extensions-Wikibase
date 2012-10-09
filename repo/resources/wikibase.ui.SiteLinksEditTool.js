@@ -31,15 +31,6 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	_editableValuesProto: null,
 
 	/**
-	 * @see wikibase.ui.PropertyEditTool._initToolbar
-	 */
-	_initToolbar: function() {
-		$PARENT.prototype._initToolbar.call( this );
-		// change message appearing when all language links are represented within the list
-		this._toolbar.lblFull.setContent( '&nbsp;- ' + mw.msg( 'wikibase-sitelinksedittool-full' ) );
-	},
-
-	/**
 	 * @see wikibase.ui.PropertyEditTool._buildSingleValueToolbar
 	 *
 	 * @return wikibase.ui.Toolbar
@@ -264,7 +255,12 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	/**
 	 * @see wb.ui.PropertyEditTool.prototype.allowsMultipleValues
 	 */
-	allowsMultipleValues: true
+	allowsMultipleValues: true,
+
+	/**
+	 * @see wb.ui.PropertyEditTool.prototype.fullListMessage
+	 */
+	fullListMessage: mw.msg( 'wikibase-sitelinksedittool-full' )
 } );
 
 /**
