@@ -77,6 +77,12 @@
 			'correctly polled index of button'
 		);
 
+		equal(
+			this.toolbar.getElements().length,
+			2,
+			'two elements added overall'
+		);
+
 		var second_label = new window.wikibase.ui.Toolbar.Label( 'second label text' );
 
 		this.toolbar.addElement( second_label, 1 );

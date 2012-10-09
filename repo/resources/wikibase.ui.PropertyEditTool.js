@@ -609,8 +609,19 @@ wb.utilities.ui.StateExtension.useWith( wb.ui.PropertyEditTool, {
 	 * @see wb.utilities.ui.StateExtension.getState
 	 */
 	getState: function() {
+		var state,
+			toolbar = this._toolbar;
+
 		// consider toolbars state if toolbar is set
-		var state = this.hasToolbar() ? this._toolbar.getState() : undefined;
+		if( this.hasToolbar() ) {
+			// (bug workaround) if toolbar empty, don't consider toolbars state since it always returns ENABLED...
+			$.each( toolbar.getElements(), function( i, toolbarElem ) {
+				if( toolbarElem.isStateChangeable() ) { // ... also ignore elements whose state can't be changed!
+					state = toolbar.getState();
+					return false;
+				}
+			} )
+		}
 
 		// check interfaces
 		$.each( this._editableValues, function( i, editableValue ) {

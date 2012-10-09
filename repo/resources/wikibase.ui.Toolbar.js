@@ -134,6 +134,16 @@ wb.ui.Toolbar.prototype = {
 	},
 
 	/**
+	 * Returns all toolbar elements of this toolbar (e.g. labels, buttons, etc.)
+	 * @since 0.2
+	 *
+	 * @return wb.ui.Toolbar.Label[]
+	 */
+	getElements: function() {
+		return this._items.slice(); // don't allow direct access to internal array to outside world
+	},
+
+	/**
 	 * This will add a toolbar element, e.g. a label or a button to the toolbar at the given index.
 	 *
 	 * @param Object elem toolbar content element (e.g. a group, button or label).
@@ -265,24 +275,29 @@ wb.utilities.ui.StateExtension.useWith( wb.ui.Toolbar, {
 	 * @see wb.utilities.ui.StateExtension.getState
 	 */
 	getState: function() {
-		var disabled = true, enabled = true;
+		var state;
 		$.each( this._items, function( i, item ) {
-			// loop through all sub-toolbars and check dedicated toolbar elements
-			if ( item instanceof wb.ui.Toolbar || item.stateChangeable ) {
-				if ( item.isDisabled() ) {
-					enabled = false;
-				} else if ( !item.isDisabled() ) {
-					disabled = false;
+			if( !item.isStateChangeable() ) {
+				return true; // ignore element if state is locked at the moment
+			}
+			var currentState = item.getState();
+
+			if( state !== currentState) {
+				if( state === undefined ) {
+					state = currentState;
+				} else {
+					// state of this element different from others -> mixed state
+					state = this.STATE.MIXED;
+					return false; // no point in checking other states, we are mixed!
 				}
 			}
 		} );
-		if ( disabled === true ) {
-			return this.STATE.DISABLED;
-		} else if ( enabled === true ) {
+		if( state === undefined ) {
+			// TODO/FIXME: This is quite ugly: Assume toolbar.disable(), remove last button, toolbar.getState()
+			//             which would then return enabled instead of disabled.
 			return this.STATE.ENABLED;
-		} else {
-			return this.STATE.MIXED;
 		}
+		return state;
 	},
 
 	/**
