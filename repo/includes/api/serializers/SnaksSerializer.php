@@ -4,7 +4,7 @@ namespace Wikibase;
 use MWException;
 
 /**
- * API serializer for Statements objects.
+ * API serializer for Snaks objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,45 +29,42 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementsSerializer extends ApiSerializerObject {
+class SnaksSerializer extends ApiSerializerObject {
 
 	/**
 	 * @see ApiSerializer::getSerialized
 	 *
 	 * @since 0.2
 	 *
-	 * @param mixed $object
+	 * @param mixed $snaks
 	 *
 	 * @return array
 	 * @throws MWException
 	 */
-	public function getSerialized( $object ) {
-		if ( !( $object instanceof Statements ) ) {
-			throw new MWException( 'StatementsSerializer can only serialize Statements objects' );
+	public function getSerialized( $snaks ) {
+		if ( !( $snaks instanceof Snaks ) ) {
+			throw new MWException( 'SnaksSerializer can only serialize Snaks objects' );
 		}
 
 		$serialization = array();
 
 		$props = array(); // TODO
 
-		$statementSerializer = new StatementSerializer( $this->getResult(), $this->options );
+		$snakSerializer = new SnakSerializer( $this->getResult() );
 
 		foreach ( $props as $prop ) {
-			$statements = array(); // TODO
+			$serializedSnaks = array();
 
-			foreach ( $statements as &$statement ) {
-				$statement = $statementSerializer->getSerialized( $statement );
+			foreach ( $snaks as $snak ) {
+				$serializedSnaks[] = $snakSerializer->getSerialized( $snak );
 			}
 
-			$this->getResult()->setIndexedTagName( $statements, 'statement' );
+			$this->getResult()->setIndexedTagName( $serializedSnaks, 'snak' );
 
-			$serialization[42 /* TODO propid */] = $statements;
+			$serialization[42 /* TODO propid */] = $serializedSnaks;
 		}
-
-		$this->getResult()->setIndexedTagName( $serialization, 'property' );
 
 		return $serialization;
 	}
 
 }
-
