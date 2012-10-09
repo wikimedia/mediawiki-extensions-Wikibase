@@ -67,7 +67,7 @@
 			if( state === this.getState() ) {
 				return true; // already has the desired state
 			}
-			return this._setState( state );
+			return this._setState.apply( this, arguments );
 		},
 
 		/**
