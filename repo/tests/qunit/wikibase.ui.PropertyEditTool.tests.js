@@ -63,8 +63,8 @@
 
 		assert.equal(
 			this.subjects[0].isFull(),
-			true,
-			'is full'
+			false,
+			'is not full'
 		);
 
 		assert.equal(
@@ -177,8 +177,8 @@
 
 		assert.equal(
 			this.subjects[0].isFull(),
-			true,
-			'is full'
+			false,
+			'is not full'
 		);
 
 		this.subjects[0].allowsMultipleValues = false;
