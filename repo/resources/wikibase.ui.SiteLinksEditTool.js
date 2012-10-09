@@ -267,22 +267,4 @@ wb.ui.SiteLinksEditTool = wb.utilities.inherit( $PARENT, {
 	allowsMultipleValues: true
 } );
 
-/**
- * Returns the basic DOM structure sufficient for a new wikibase.ui.SiteLinksEditTool
- *
- * @return jQuery
- */
-wb.ui.SiteLinksEditTool.getEmptyStructure = function() {
-	return $(
-		'<table class="wb-sitelinks" cellspacing="0">' +
-			'<colgroup>' +
-				'<col class="wb-sitelinks-sitename" />' +
-				'<col class="wb-sitelinks-siteid" />' +
-				'<col class="wb-sitelinks-link" />' +
-				'<col class="wb-ui-propertyedittool-editablevalue-toolbarparent" />' +
-			'</colgroup>' +
-		'</table>'
-	);
-};
-
 } )( mediaWiki, wikibase, jQuery );
