@@ -28,7 +28,7 @@ class ApiWikibaseSearchByName extends ApiBase {
 	 */
 	public function execute() {
 		// TODO: implement this
-		}
+	}
 
 	/**
 	 * Returns an array of allowed parameters (parameter name) => (default

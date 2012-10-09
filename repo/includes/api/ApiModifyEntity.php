@@ -316,13 +316,6 @@ abstract class ApiModifyEntity extends Api {
 	}
 
 	/**
-	 * @see ApiBase::getAllowedParams()
-	 */
-	public function getAllowedParams() {
-		return parent::getAllowedParams();
-	}
-
-	/**
 	 * Get allowed params for the identification of the entity
 	 * Lookup through an id is common for all entities
 	 *
@@ -380,13 +373,6 @@ abstract class ApiModifyEntity extends Api {
 			'token' => null,
 			'bot' => false,
 		);
-	}
-
-	/**
-	 * @see ApiBase::getParamDescription()
-	 */
-	public function getParamDescription() {
-		return parent::getParamDescription();
 	}
 
 	/**
