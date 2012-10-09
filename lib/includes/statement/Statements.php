@@ -30,4 +30,11 @@ namespace Wikibase;
  */
 interface Statements extends StatementListAccess, \Traversable, \Countable, \Serializable, Hashable {
 
+	/**
+	 * Removes duplicates bases on hash value.
+	 *
+	 * @since 0.2
+	 */
+	public function removeDuplicates();
+
 }

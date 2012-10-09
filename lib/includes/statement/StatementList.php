@@ -34,7 +34,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementList extends \SplObjectStorage implements Statements {
+class StatementList extends HashableObjectStorage implements Statements {
 
 	/**
 	 * @see Statements::addStatement
@@ -69,28 +69,6 @@ class StatementList extends \SplObjectStorage implements Statements {
 	 */
 	public function removeStatement( Statement $statement ) {
 		$this->detach( $statement );
-	}
-
-	/**
-	 * @see Hashable::getHash
-	 *
-	 * @since 0.2
-	 *
-	 * @param MapHasher $mapHasher
-	 *
-	 * @return string
-	 */
-	public function getHash() {
-		// We cannot have this as optional arg, because then we're no longer
-		// implementing the Hashable interface properly according to PHP...
-		$args = func_get_args();
-
-		/**
-		 * @var MapHasher $hasher
-		 */
-		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
-
-		return $hasher->hash( iterator_to_array( $this ) );
 	}
 
 }

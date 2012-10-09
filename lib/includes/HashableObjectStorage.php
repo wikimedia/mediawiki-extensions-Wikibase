@@ -3,8 +3,7 @@
 namespace Wikibase;
 
 /**
- * Implementation of the Claims interface.
- * @see Claims
+ * Object storage for Hashable objects.
  *
  * Note that this implementation is based on SplObjectStorage and
  * is not enforcing the type of objects set via it's native methods.
@@ -26,7 +25,7 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.2
  *
  * @file
  * @ingroup Wikibase
@@ -34,41 +33,51 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimList extends HashableObjectStorage implements Claims {
+class HashableObjectStorage extends \SplObjectStorage implements Hashable {
 
 	/**
-	 * @see References::addClaim
+	 * Removes duplicates bases on hash value.
 	 *
-	 * @since 0.1
-	 *
-	 * @param Claim $claim
+	 * @since 0.2
 	 */
-	public function addClaim( Claim $claim ) {
-		$this->attach( $claim );
+	public function removeDuplicates() {
+		$knownHashes = array();
+
+		/**
+		 * @var Hashable $hashable
+		 */
+		foreach ( iterator_to_array( $this ) as $hashable ) {
+			$hash = $hashable->getHash();
+
+			if ( in_array( $hash, $knownHashes ) ) {
+				$this->detach( $hashable );
+			}
+			else {
+				$knownHashes[] = $hash;
+			}
+		}
 	}
 
 	/**
-	 * @see References::hasClaim
+	 * @see Hashable::getHash
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
-	 * @param Claim $claim
+	 * @param MapHasher $mapHasher
 	 *
-	 * @return boolean
+	 * @return string
 	 */
-	public function hasClaim( Claim $claim ) {
-		return $this->contains( $claim );
-	}
+	public function getHash() {
+		// We cannot have this as optional arg, because then we're no longer
+		// implementing the Hashable interface properly according to PHP...
+		$args = func_get_args();
 
-	/**
-	 * @see References::removeClaim
-	 *
-	 * @since 0.1
-	 *
-	 * @param Claim $claim
-	 */
-	public function removeClaim( Claim $claim ) {
-		$this->detach( $claim );
+		/**
+		 * @var MapHasher $hasher
+		 */
+		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
+
+		return $hasher->hash( iterator_to_array( $this ) );
 	}
 
 }

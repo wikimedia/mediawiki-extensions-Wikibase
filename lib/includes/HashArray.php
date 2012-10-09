@@ -5,7 +5,7 @@ namespace Wikibase;
 /**
  * Generic array object with lookups based on hashes of the elements.
  *
- * Elements need to implement Hashable.
+ * Elements need to implement Hashable and Immutable.
  *
  * Only a single element per hash can exist in the list. If the hash
  * of an element being added already exists in the list, the element
