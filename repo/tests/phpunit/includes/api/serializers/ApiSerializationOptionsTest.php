@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase;
-use ApiResult, MWException;
+namespace Wikibase\Test;
+use Wikibase\ApiSerializationOptions;
 
 /**
- * Interface for serializers that take an object and transform it into API output.
+ * Tests for the Wikibase\ApiSerializationOptions class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,44 +21,23 @@ use ApiResult, MWException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since 0.2
  *
- * @file
  * @ingroup Wikibase
+ * @ingroup Test
+ *
+ * @group Wikibase
+ * @group WikibaseApiSerialization
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface ApiSerializer {
+class ApiSerializationOptionsTest extends \MediaWikiTestCase {
 
-	/**
-	 * Serializes the provided object to API output and returns this serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param mixed $object
-	 *
-	 * @return array
-	 */
-	public function getSerialized( $object );
-
-	/**
-	 * Sets the options to use during serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param ApiSerializationOptions $options
-	 */
-	public function setOptions( ApiSerializationOptions $options );
-
-	/**
-	 * Sets the ApiResult to use during serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param ApiResult $apiResult
-	 */
-	public function setApiResult( ApiResult $apiResult );
+	public function testConstructor() {
+		$instance = new ApiSerializationOptions();
+		$this->assertTrue( true );
+	}
 
 }
-

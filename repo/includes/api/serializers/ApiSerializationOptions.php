@@ -1,10 +1,9 @@
 <?php
 
 namespace Wikibase;
-use ApiResult, MWException;
 
 /**
- * Interface for serializers that take an object and transform it into API output.
+ * Options for ApiSerializer objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,36 +28,8 @@ use ApiResult, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface ApiSerializer {
+class ApiSerializationOptions {
 
-	/**
-	 * Serializes the provided object to API output and returns this serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param mixed $object
-	 *
-	 * @return array
-	 */
-	public function getSerialized( $object );
 
-	/**
-	 * Sets the options to use during serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param ApiSerializationOptions $options
-	 */
-	public function setOptions( ApiSerializationOptions $options );
-
-	/**
-	 * Sets the ApiResult to use during serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param ApiResult $apiResult
-	 */
-	public function setApiResult( ApiResult $apiResult );
 
 }
-

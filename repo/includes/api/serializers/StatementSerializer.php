@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase;
-use ApiResult, MWException;
+use MWException;
 
 /**
- * Interface for serializers that take an object and transform it into API output.
+ * API serializer for Statement objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,36 +29,33 @@ use ApiResult, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface ApiSerializer {
+class StatementSerializer extends ApiSerializerObject {
 
 	/**
-	 * Serializes the provided object to API output and returns this serialization.
+	 * @see ApiSerializer::getSerialized
 	 *
 	 * @since 0.2
 	 *
-	 * @param mixed $object
+	 * @param mixed $statement
 	 *
 	 * @return array
+	 * @throws MWException
 	 */
-	public function getSerialized( $object );
+	public function getSerialized( $statement ) {
+		if ( !( $statement instanceof Statement ) ) {
+			throw new MWException( 'StatementSerializer can only serialize Statement objects' );
+		}
 
-	/**
-	 * Sets the options to use during serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param ApiSerializationOptions $options
-	 */
-	public function setOptions( ApiSerializationOptions $options );
+		$serialization = array();
 
-	/**
-	 * Sets the ApiResult to use during serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param ApiResult $apiResult
-	 */
-	public function setApiResult( ApiResult $apiResult );
+		$mainSnak = $statement->getClaim()->getMainSnak();
+
+		$snakSerializer = new SnakSerializer( $this->getResult() );
+		$serialization['mainsnak'] = $snakSerializer->getSerialized( $mainSnak );
+
+		// TODO
+
+		return $serialization;
+	}
 
 }
-
