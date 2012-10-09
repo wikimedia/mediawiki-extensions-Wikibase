@@ -9,9 +9,9 @@
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
-'use strict';
 
-( function() {
+( function( mw, wb, $, QUnit, undefined ) {
+	'use strict';
 
 	var config = {
 		'wbSiteDetails': {
@@ -36,7 +36,7 @@
 		}
 	};
 
-	module( 'wikibase.ui.SiteLinksEditTool', window.QUnit.newWbEnvironment( {
+	QUnit.module( 'wikibase.ui.SiteLinksEditTool', QUnit.newWbEnvironment( {
 		config: config,
 		setup: function() {
 
@@ -45,32 +45,21 @@
 			};
 
 			// get empty nodes we get when no links on the site yet:
-			var dom = window.wikibase.ui.SiteLinksEditTool.getEmptyStructure();
+			var dom = wb.ui.SiteLinksEditTool.getEmptyStructure();
 
 			// initialize:
-			this.subject = new window.wikibase.ui.SiteLinksEditTool( dom );
-
-			ok(
-				this.subject._editableValues instanceof Array,
-				'editable values initiated correctly'
-			);
-
+			this.subject = new wb.ui.SiteLinksEditTool( dom );
 		},
-		teardown: function() {
-			this.subject.destroy();
-
-			equal(
-				this.subject._editableValues,
-				null,
-				'destroyed editable values'
-			);
-
-			this.subject = null;
-		}
+		teardown: function() {}
 	} ) );
 
 
-	test( 'adding a new editable site link', function() {
+	QUnit.test( 'adding a new editable site link', function( assert ) {
+
+		assert.ok(
+			this.subject._editableValues instanceof Array,
+			'editable values initiated correctly'
+		);
 
 		var initialValue = [ 'Deutsch (de)', 'Berlin' ];
 		var newValue = this.subject.enterNewValue( initialValue );
@@ -88,35 +77,35 @@
 			deferred.resolve( this.apiResponse );
 		}, this );
 
-		equal(
+		assert.equal(
 			this.subject.getValues().length,
 			0,
 			'getValues() should return no elements since the new one is still pending'
 		);
 
-		equal(
+		assert.equal(
 			this.subject.getValues( true ).length,
 			1,
 			'getValues( true ) should return the pending element'
 		);
 
-		ok(
+		assert.ok(
 			typeof ( this.subject.getValues( true )[0] ) === 'object', // same as newValue
 			'newly inserted value returned by enterNewValue( value )'
 		);
 
-		ok(
-			newValue instanceof window.wikibase.ui.PropertyEditTool.EditableSiteLink
+		assert.ok(
+			newValue instanceof wb.ui.PropertyEditTool.EditableSiteLink
 			&& newValue instanceof this.subject.getEditableValuePrototype(),
 			'editable values have the right prototype'
 		);
 
-		ok(
+		assert.ok(
 			!newValue.valueCompare( [ '', initialValue[1] ], initialValue ),
 			'valueCompare() should recognize value with missing site-id as invalid'
 		);
 
-		ok(
+		assert.ok(
 			newValue.valueCompare(
 				this.subject.getValues( true )[0].getValue(),
 				initialValue
@@ -124,19 +113,27 @@
 			'new value has the value set in enterNewValue( value )'
 		);
 
-		equal(
+		assert.equal(
 			newValue.startEditing(),
 			false,
 			'start editing already active, call function again'
 		);
 
-		equal(
+		assert.equal(
 			newValue.stopEditing( true ).promisor.apiAction,
 			newValue.API_ACTION.SAVE,
 			'stopped editing (save), true returned because value has changed (it was created)'
 		);
 
+		this.subject.destroy();
+
+		assert.equal(
+			this.subject._editableValues,
+			null,
+			'destroyed editable values'
+		);
+
 	} );
 
 
-}() );
+}( mediaWiki, wikibase, jQuery, QUnit ) );

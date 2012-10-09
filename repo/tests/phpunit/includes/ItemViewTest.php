@@ -63,12 +63,12 @@ class ItemViewTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider providerGetHtml
 	 */
-	public function testGetHtml( $itemData, $expected) {
+	public function testGetHtml( $itemData, $expected ) {
 		self::$num++;
-		$view = new ItemView( );
+		$view = new ItemView();
 
 		if ( is_string( $expected ) ) {
-			$expected = (array)$expected;
+			$expected = ( array )$expected;
 		}
 		$expected[] = '/class\s*=\s*"wb-entity wb-' . $view::VIEW_TYPE . '"/';
 
@@ -130,7 +130,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 		return array(
 			array(
 				false,
-				'/"wb-sitelinks-empty"/'
+				'/"wb-sitelinks"/'
 			),
 			array(
 				array(
