@@ -51,6 +51,8 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 			$this->assertFalse( $array->hasElement( $hashable ) );
 			$this->assertFalse( $array->hasElementHash( $hashable->getHash() ) );
 		}
+
+		$this->assertTrue( true );
 	}
 
 	/**
@@ -82,6 +84,8 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 
 		$array->removeElement( $element );
 		$array->removeByElementHash( $element->getHash() );
+
+		$this->assertTrue( true );
 	}
 
 	/**

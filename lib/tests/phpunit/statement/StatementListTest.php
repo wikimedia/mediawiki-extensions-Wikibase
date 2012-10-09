@@ -95,6 +95,8 @@ class StatementListTest extends \MediaWikiTestCase {
 			$array->removeStatement( $hashable );
 			$this->assertFalse( $array->hasStatement( $hashable ) );
 		}
+
+		$this->assertTrue( true );
 	}
 
 	/**
@@ -122,6 +124,8 @@ class StatementListTest extends \MediaWikiTestCase {
 
 		$array->removeStatement( $element );
 		$array->removeStatement( $element );
+
+		$this->assertTrue( true );
 	}
 
 	/**

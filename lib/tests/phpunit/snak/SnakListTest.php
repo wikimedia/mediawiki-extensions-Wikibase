@@ -97,6 +97,8 @@ class SnakListTest extends HashArrayTest {
 			$this->assertFalse( $array->hasSnak( $hashable ) );
 			$this->assertFalse( $array->hasSnakHash( $hashable->getHash() ) );
 		}
+
+		$this->assertTrue( true );
 	}
 
 	/**
@@ -128,6 +130,8 @@ class SnakListTest extends HashArrayTest {
 
 		$array->removeSnak( $element );
 		$array->removeSnakHash( $element->getHash() );
+
+		$this->assertTrue( true );
 	}
 
 	/**
