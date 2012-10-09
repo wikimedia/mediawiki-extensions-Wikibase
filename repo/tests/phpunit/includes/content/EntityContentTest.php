@@ -209,15 +209,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
 
 		// save unchanged
-		if ( $this->getContentClass() === '\Wikibase\ItemContent' ) {
-			$prev_id = $entityContent->getWikiPage()->getLatest();
-			$status = $entityContent->save( 'save unmodified', null, EDIT_UPDATE );
-			$this->assertTrue( $status->isOK(), "save failed" );
-			$this->assertEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should stay the same if no change was made" );
-		}
-		else {
-			$this->markTestIncomplete( 'No change of ID for saving of same content should still be done for non-item entities' );
-		}
+		$prev_id = $entityContent->getWikiPage()->getLatest();
+		$status = $entityContent->save( 'save unmodified', null, EDIT_UPDATE );
+		$this->assertTrue( $status->isOK(), "save failed" );
+		$this->assertEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should stay the same if no change was made" );
 	}
 
 	public function dataCheckPermissions() {
