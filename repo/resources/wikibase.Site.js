@@ -114,13 +114,23 @@ wb.Site.prototype = {
 	 * @return object language code and direction
 	 */
 	getLanguage: function() {
-		var dir;
+		var dir = 'ltr',
+			languageCode = this.getLanguageCode();
+
 		// language might not be defined in ULS
-		if ( $.uls.data.languages[this.getLanguageCode()] ) {
-			dir = $.uls.data.getDir( this.getLanguageCode() );
+		if ( $.uls.data.languages[languageCode] ) {
+			if ( $.uls.data.isRtl( languageCode ) ) {
+				dir = 'rtl';
+			}
+		} else {
+			// TODO: This should probably be logged somehow,
+			// because it really shouldn't happen.
+			dir = 'auto';
 		}
-		return { // TODO: use a language object from the Universal Language Selector
-			code: this.getLanguageCode(),
+
+		// TODO: use a language object from the Universal Language Selector
+		return {
+			code: languageCode,
 			dir: dir
 		};
 	},
