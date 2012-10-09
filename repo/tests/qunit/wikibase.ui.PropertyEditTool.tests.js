@@ -186,7 +186,7 @@
 		assert.equal(
 			this.subjects[0].isFull(),
 			false,
-			'is not full'
+			'is not full when using multiple values option'
 		);
 
 		assert.equal(
@@ -236,6 +236,8 @@
 			'1st edit tool is still enabled'
 		);
 
+		var pet = this.subjects[2];
+		pet.disable();
 		assert.equal(
 			this.subjects[2].isDisabled(),
 			true,
