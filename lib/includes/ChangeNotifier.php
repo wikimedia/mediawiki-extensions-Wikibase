@@ -35,58 +35,6 @@ class ChangeNotifier {
 	}
 
 	/**
-	 * @since 0.1
-	 * @var bool
-	 */
-	protected $inTranscation = false;
-
-	/**
-	 * The changes stashed in the current transaction.
-	 *
-	 * @since 0.1
-	 * @var array of Change
-	 */
-	protected $changes = array();
-
-	/**
-	 * Begin a transaction.
-	 * During the transaction any changes provided will be stashed
-	 * and only be committed at the point commit is called.
-	 *
-	 * @since 0.1
-	 */
-	public function begin() {
-		$this->inTranscation = true;
-	}
-
-	/**
-	 * Commit all of the stashed changes.
-	 *
-	 * @since 0.1
-	 *
-	 * @return \Status
-	 */
-	public function commit() {
-		if ( $this->inTranscation ) {
-			$this->inTranscation = false;
-			$this->handleChanges( $this->changes );
-		}
-
-		return \Status::newGood();
-	}
-
-	/**
-	 * Returns if a transaction is open or not.
-	 *
-	 * @since 0.1
-	 *
-	 * @return bool
-	 */
-	public function isInTranscation() {
-		return $this->inTranscation;
-	}
-
-	/**
 	 * Handles the provided change.
 	 *
 	 * @since 0.1
@@ -109,28 +57,9 @@ class ChangeNotifier {
 	 * @return \Status
 	 */
 	public function handleChanges( array $changes ) {
-		if ( $changes !== array() ) {
-			/**
-			 * @var Change $change
-			 */
-			if ( $this->inTranscation ) {
-				foreach ( $changes as $change ) {
-					if ( !$change->isEmpty() ) {
-						$this->changes[] = $change;
-					}
-				}
-			}
-			else {
-				$dbw = wfGetDB( DB_MASTER );
-
-				$dbw->begin( __METHOD__ );
-
-				foreach ( $changes as $change ) {
-					$change->save();
-				}
-
-				$dbw->commit( __METHOD__ );
-			}
+		foreach ( $changes as $change ) {
+			//XXX: the Change interface does not define save().
+			$change->save();
 		}
 
 		return \Status::newGood();
