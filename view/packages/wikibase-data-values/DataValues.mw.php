@@ -69,6 +69,7 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
 	$testFiles = array(
 		'datavalue/BooleanValue',
 		'datavalue/GeoCoordinateValue',
+		'datavalue/IriValue',
 		'datavalue/MediaWikiTitleValue',
 		'datavalue/MonolingualTextValue',
 		'datavalue/MultilingualTextValue',
