@@ -9,11 +9,11 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
 
+( function( mw, wb, $, QUnit, undefined ) {
+	'use strict';
 
-( function () {
-	module( 'wikibase.Site', window.QUnit.newWbEnvironment( {
+	QUnit.module( 'wikibase.Site', QUnit.newWbEnvironment( {
 		setup: function() {
 			this.siteDetails = {
 				apiUrl: 'http://en.wikipedia.org/w/api.php',
@@ -24,50 +24,48 @@
 				languageCode: 'en'
 			};
 			this.string = 'test';
-			this.site = new window.wikibase.Site( this.siteDetails );
-
-			ok(
-				this.site._siteDetails == this.siteDetails,
-				'set site details'
-			);
-
+			this.site = new wb.Site( this.siteDetails );
 		},
-		teardown: function() {
-			this.site = null;
-			this.siteDetails = null;
-		}
-
+		teardown: function() {}
 	} ) );
 
+	QUnit.test( 'check init', function( assert ) {
 
-	test( 'check init', function() {
+		assert.equal(
+			this.site._siteDetails,
+			this.siteDetails,
+			'set site details'
+		);
 
-		ok(
-			this.site.getId() == this.siteDetails.id,
+		assert.equal(
+			this.site.getId(),
+			this.siteDetails.id,
 			'verified site id'
 		);
 
-		ok(
-			this.site.getName() == this.siteDetails.name,
+		assert.equal(
+			this.site.getName(),
+			this.siteDetails.name,
 			'verified site id'
 		);
 
-		ok(
-			this.site.getShortName() == this.siteDetails.shortName,
+		assert.equal(
+			this.site.getShortName(),
+			this.siteDetails.shortName,
 			'verified site id'
 		);
 
-		ok(
-			this.site.getApi() == this.siteDetails.apiUrl,
+		assert.equal(
+			this.site.getApi(),
+			this.siteDetails.apiUrl,
 			'verified site id'
 		);
 
 	} );
 
+	QUnit.test( 'link handling', function( assert ) {
 
-	test( 'link handling', function() {
-
-		equal(
+		assert.equal(
 			this.site.getLinkTo( this.string )[0].nodeName,
 			'A',
 			'created DOM node for link'
@@ -75,15 +73,15 @@
 
 	} );
 
-	test( 'language functions', function() {
+	QUnit.test( 'language functions', function( assert ) {
 
-		equal(
+		assert.equal(
 			this.site.getLanguageCode(),
 			'en',
 			'retrieved language code'
 		);
 
-		equal(
+		assert.equal(
 			this.site.getLanguage().dir,
 			'ltr',
 			'retrieved ltr language direction'
@@ -91,7 +89,7 @@
 
 		this.site._siteDetails.languageCode = 'ar';
 
-		equal(
+		assert.equal(
 			this.site.getLanguage().dir,
 			'rtl',
 			'retrieved rtl language direction'
@@ -99,11 +97,12 @@
 
 		this.site._siteDetails.languageCode = 'non-existing-code';
 
-		ok(
-			typeof this.site.getLanguage().dir === 'undefined',
-			'no failure when language direction could not be retrieved'
+		assert.equal(
+			this.site.getLanguage().dir,
+			'auto',
+			'received "auto" when no special language direction could be retrieved'
 		);
 
 	} );
 
-}() );
+}( mediaWiki, wikibase, jQuery, QUnit ) );
