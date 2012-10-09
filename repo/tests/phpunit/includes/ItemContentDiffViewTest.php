@@ -26,6 +26,7 @@ class ItemDiffViewTest extends \MediaWikiTestCase {
 
 	public function testConstructor() {
 		new ItemContentDiffView( \RequestContext::getMain() );
+		$this->assertTrue( true );
 	}
 
 	public function itemProvider() {
