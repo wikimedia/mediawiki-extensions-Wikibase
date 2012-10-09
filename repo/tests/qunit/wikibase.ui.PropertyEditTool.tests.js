@@ -13,184 +13,228 @@
 ( function( mw, wb, $, QUnit, undefined ) {
 	'use strict';
 
+var
+	/**
+	 * Factory for creating a new PropertyEdiTool suited for testing.
+	 *
+	 * @param jQuery subject
+	 * @param Object overwrites allows to give properties which will be overwritten in the fabricated PropertyEditTool
+	 * @return wb.ui.PropertyEditTool.EditableValue
+	 */
+	newTestPET = function( subject, overwrites ) {
+		var propertyEditTool = new wb.ui.PropertyEditTool(); // required for creating suited toolbar
+
+		// apply options or other overwrites:
+		$.extend(
+			propertyEditTool,
+			{ allowsMultipleValues: false }, // TODO: shouldn't change default here
+			overwrites || {}
+		);
+
+		propertyEditTool.init( subject );
+
+		return propertyEditTool;
+	},
+	/**
+	 * Convenience function for testing to create a new EditableValue within the PropertyEditTool.
+	 * The given value has to be non-empty, otherwise edit mode will be triggered for the value.
+	 *
+	 * TODO: there should really be a way in PropertyEditTool to do this. Right now this only works because value
+	 *       is non-empty string and we dont use the public enterNewValue() function which would mark the new value
+	 *       as pending. Both (empty value or pending) would trigger edit mode immediately. The second bad thing is
+	 *       that edit mode can't be closed with saving the new value because an API call would be triggered!
+	 *
+	 * @return EditableValue
+	 */
+	addValueToPET = function( propertyEditTool, value ) {
+		return propertyEditTool._initSingleValue(
+			$( '<div/>' ).append( $( '<div/>', {
+				'class': 'wb-value',
+				text: value
+			} ) )
+		);
+	};
+
 	QUnit.module( 'wikibase.ui.PropertyEditTool', QUnit.newWbEnvironment( {
-		setup: function() {
-			this.nodes = [
-				$( '<div/>' )
-			];
-			this.subjects = [
-				new wb.ui.PropertyEditTool( this.nodes[0] )
-			];
-			for ( var i = 1; i <= 2; i += 1 ) {
-				this.nodes.push( $( '<div/>' ) );
-				this.subjects.push( new wb.ui.PropertyEditTool( this.nodes[i] ) );
-				this.subjects[i].allowsMultipleValues = false;
-				this.subjects[i].init( this.nodes[i] );
-				this.subjects[i]._initSingleValue(
-					$( '<div/>' ).append( $( '<div/>', {
-						'class': 'wb-value',
-						text: 'someValue'
-					} ) )
-				);
-			}
-		},
+		setup: function() {},
 		teardown: function() {}
 	} ) );
 
 
-	QUnit.test( 'initial check', function( assert ) {
+	QUnit.test( 'test helper functions for testing PropertyEditTool', function( assert ) {
+		var subject = $( '<div/>' ),
+			pet = newTestPET( subject );
 
-		var self = this;
-		$.each ( this.subjects, function( i, subject ) {
+		assert.ok(
+			pet instanceof wb.ui.PropertyEditTool,
+			'PropertyEditTool test factory returned sufficient instance'
+		);
 
-			assert.ok(
-				subject._toolbar instanceof wb.ui.Toolbar,
-				'instantiated toolbar of property edit tool #' + i
-			);
+		QUnit.assert.equal(
+			pet.getSubject()[0],
+			subject[0],
+			'verified subject node of new PropertyEditTool'
+		);
 
-			assert.equal(
-				subject._getToolbarParent().html(),
-				self.nodes[i].html(),
-				'placed property edit tool #' + i + ' in DOM'
-			);
-
-			assert.ok(
-				subject._editableValues instanceof Array,
-				'editable values of property edit tool #' + i + ' initiated correctly'
-			);
-
-		} );
+		var newVal = addValueToPET( pet, 'foo' );
+		assert.ok(
+			newVal instanceof wb.ui.PropertyEditTool.EditableValue,
+			'addValueToPET() helper returns EditableValue object'
+		);
 
 		assert.equal(
-			this.subjects[0].isFull(),
-			false,
+			pet.getValues( false )[0], // only non-pending values
+			newVal,
+			'Value has really been added'
+		);
+
+		// tests after destroy()
+		pet.destroy();
+
+		QUnit.assert.equal(
+			pet.getToolbar(),
+			null,
+			'destroyed toolbar'
+		);
+	} );
+
+
+	QUnit.test( 'initial check', function( assert ) {
+		var subject = $( '<div/>' ),
+			pet = newTestPET( subject );
+
+		assert.ok(
+			pet.getToolbar() instanceof wb.ui.Toolbar,
+			'instantiated toolbar of property edit tool'
+		);
+
+		assert.equal(
+			pet._getToolbarParent()[0],
+			subject[0],
+			'placed property edit tool in DOM'
+		);
+
+		assert.ok(
+			pet.getValues() instanceof Array,
+			'editable values of property edit tool initiated correctly'
+		);
+
+		assert.ok(
+			!pet.isFull(),
 			'is not full'
 		);
 
-		assert.equal(
-			this.subjects[0].isInEditMode(),
-			false,
+		assert.ok(
+			!pet.isInEditMode(),
 			'is not in edit mode'
 		);
 
-		assert.equal(
-			this.subjects[0].isInAddMode(),
-			false,
+		assert.ok(
+			!pet.isInAddMode(),
 			'is not in add mode'
 		);
 
 		assert.equal(
-			this.subjects[0]._getValueElems().length,
+			pet._getValueElems().length,
 			0,
 			'has no elements with values'
 		);
 
 		assert.ok(
-			this.subjects[0].getToolbar() instanceof wb.ui.Toolbar,
+			pet.getToolbar() instanceof wb.ui.Toolbar,
 			'instantiated toolbar'
 		);
 
-		$.each( this.subjects, function( i, subject ) {
-			subject.destroy();
+		pet.destroy();
 
-			assert.equal(
-				subject._editableValues,
-				null,
-				'destroyed editable values of property edit tool #' + i
-			);
-
-			assert.equal(
-				subject._subject.children().length,
-				0,
-				'cleaned DOM from property edit tool #' + i
-			);
-
-		} );
-
+		assert.equal(
+			pet.getSubject().children().length,
+			0,
+			'cleaned DOM of property edit tool'
+		);
 	} );
 
 
 	QUnit.test( 'editable values', function( assert ) {
+		var pet = newTestPET( $( '<div/>' ) );
 
 		assert.ok(
-			this.subjects[0]._initSingleValue(
+			pet._initSingleValue(
 				$( '<div><div class="wb-value"></div></div>' )
 			) instanceof wb.ui.PropertyEditTool.EditableValue,
 			'initiated editable value component'
 		);
 
 		assert.equal(
-			this.subjects[0]._editableValues.length,
+			pet._editableValues.length,
 			1,
 			'stored editable value'
 		);
 
 		assert.ok(
-			this.subjects[0]._editableValues[0]._toolbar instanceof wb.ui.Toolbar,
+			pet._editableValues[0]._toolbar instanceof wb.ui.Toolbar,
 			'instantiated toolbar for editable value'
 		);
 
 		assert.ok(
-			this.subjects[0]._editableValues[0]._toolbar.editGroup instanceof wb.ui.Toolbar.EditGroup,
+			pet._editableValues[0]._toolbar.editGroup instanceof wb.ui.Toolbar.EditGroup,
 			'instantiated edit group for editable value toolbar'
 		);
 
 		assert.equal(
-			this.subjects[0].getIndexOf( this.subjects[0]._editableValues[0] ),
+			pet.getIndexOf( pet._editableValues[0] ),
 			0,
 			'checked index of editable value'
 		);
 
 		assert.ok(
-			this.subjects[0].getValues().length === this.subjects[0].getValues( true ).length,
+			pet.getValues().length === pet.getValues( true ).length,
 			'checked getValues()'
 		);
 
 		assert.ok(
-			this.subjects[0].enterNewValue( '' ) instanceof wb.ui.PropertyEditTool.EditableValue,
+			pet.enterNewValue( '' ) instanceof wb.ui.PropertyEditTool.EditableValue,
 			'instantiated editable value for entering a new value'
 		);
 
 		assert.equal(
-			this.subjects[0].getValues().length,
+			pet.getValues().length,
 			1,
 			'one value that is not pending'
 		);
 
 		assert.equal(
-			this.subjects[0].getValues( true ).length,
+			pet.getValues( true ).length,
 			2,
 			'two values including pending values'
 		);
 
 		assert.equal(
-			this.subjects[0].isInAddMode(),
+			pet.isInAddMode(),
 			true,
 			'is in add mode'
 		);
 
 		assert.equal(
-			this.subjects[0].isInEditMode(),
+			pet.isInEditMode(),
 			true,
 			'is in edit mode'
 		);
 
-		assert.equal(
-			this.subjects[0].isFull(),
-			false,
-			'is not full'
-		);
-
-		this.subjects[0].allowsMultipleValues = false;
-
-		assert.equal(
-			this.subjects[0].isFull(),
-			false,
+		pet.allowsMultipleValues = true;
+		assert.ok(
+			!pet.isFull(),
 			'is not full when using multiple values option'
 		);
 
+		pet.allowsMultipleValues = false;
+		assert.ok(
+			pet.isFull(),
+			'is full when not using multiple values option'
+		);
+
 		assert.equal(
-			this.subjects[0]._subject.children().length,
+			pet.getSubject().children().length,
 			2,
 			'checked DOM'
 		);
@@ -199,79 +243,82 @@
 
 
 	QUnit.test( 'multiple PropertyEditTools', function( assert ) {
+		var pet1 = newTestPET( $( '<div/>' ) ),
+			pet2 = newTestPET( $( '<div/>' ) );
+
+		addValueToPET( pet1, 'foo' );
+		addValueToPET( pet2, 'baa' );
 
 		assert.equal(
-			this.subjects[1].isEnabled(),
+			pet1.isEnabled(),
 			true,
 			'1st edit tool is enabled'
 		);
 
 		assert.equal(
-			this.subjects[1].isEnabled(),
+			pet2.isEnabled(),
 			true,
 			'2nd edit tool is enabled'
 		);
 
 		assert.equal(
-			this.subjects[1]._editableValues[0].startEditing(),
+			pet1.getValues()[0].startEditing(),
 			true,
 			'started edit mode for 1st edit tool'
 		);
 
 		assert.equal(
-			this.subjects[1]._subject.hasClass( this.subjects[1].UI_CLASS + '-ineditmode' ),
+			pet1.getSubject().hasClass( pet1.UI_CLASS + '-ineditmode' ),
 			true,
 			'highlighted 1st property edit tool'
 		);
 
 		assert.equal(
-			this.subjects[2]._subject.hasClass( this.subjects[2].UI_CLASS + '-ineditmode' ),
+			pet2.getSubject().hasClass( pet2.UI_CLASS + '-ineditmode' ),
 			false,
 			'2nd property is not highlighted'
 		);
 
 		assert.equal(
-			this.subjects[1].isEnabled(),
+			pet1.isEnabled(),
 			true,
 			'1st edit tool is still enabled'
 		);
 
-		var pet = this.subjects[2];
-		pet.disable();
 		assert.equal(
-			this.subjects[2].isDisabled(),
+			pet2.isDisabled(),
 			true,
 			'2nd edit tool is disabled'
 		);
 
 		assert.equal(
-			this.subjects[2].isEnabled(),
+			pet2.isEnabled(),
 			false,
 			'2nd edit tool is not enabled'
 		);
 
-		this.subjects[1]._editableValues[0].stopEditing();
+		pet1.getValues()[0].stopEditing();
 
 		assert.equal(
-			this.subjects[2].isEnabled(),
+			pet2.isEnabled(),
 			true,
 			'2nd edit tool is enabled'
 		);
 
 		assert.equal(
-			this.subjects[1]._subject.hasClass( this.subjects[1].UI_CLASS + '-ineditmode' ),
+			pet1.getSubject().hasClass( pet1.UI_CLASS + '-ineditmode' ),
 			false,
 			'removed highlight on 1st property edit tool'
 		);
 
 		assert.equal(
-			this.subjects[2]._subject.hasClass( this.subjects[2].UI_CLASS + '-ineditmode' ),
+			pet2.getSubject().hasClass( pet2.UI_CLASS + '-ineditmode' ),
 			false,
 			'2nd property is not highlighted'
 		);
 
 		assert.equal(
-			this.subjects[1].isEnabled(),
+			pet1.isEnabled(),
 			true,
 			'1st edit tool is enabled'
 		);
