@@ -163,7 +163,7 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 	 */
 	isFull: function() {
 		if( this.allowsMultipleValues ) {
-			return true;
+			return false; // allow infinite number of values
 		} else {
 			return this._editableValues === null || this._editableValues.length < 1;
 		}
