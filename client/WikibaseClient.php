@@ -22,8 +22,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
 
-if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.\n" );
+if ( version_compare( $wgVersion, '1.21a', '<' ) ) { // Needs to be 1.21a because version_compare() works in confusing ways.
+	die( "<b>Error:</b> Wikibase requires MediaWiki 1.21 alpha or above.\n" );
 }
 
 define( 'WBC_VERSION', '0.2 alpha' );
@@ -50,9 +50,11 @@ $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php
 
 $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
+$wgAutoloadClasses['Wikibase\ExternalChangesList']      = $dir . 'includes/ExternalChangesList.php';
+$wgAutoloadClasses['Wikibase\ExternalRecentChange']	= $dir . 'includes/ExternalRecentChange.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
-$wgAutoloadClasses['Wikibase\SortUtils']			= $dir . 'includes/SortUtils.php';
+$wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
@@ -66,6 +68,7 @@ $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/En
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
+$wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 $wgHooks['ParserAfterParse'][]				= '\Wikibase\ClientHooks::onParserAfterParse';
 $wgHooks['ParserFirstCallInit'][]			= '\Wikibase\NoLangLinkHandler::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\NoLangLinkHandler::onMagicWordwgVariableIDs';
