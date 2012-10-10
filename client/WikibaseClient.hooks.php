@@ -233,53 +233,85 @@ final class ClientHooks {
 
 		$title->invalidateCache();
 
-		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
+		$rev = SharedRevision::newFromChange( $change );
 
-		/* @var Entity $entity */
-		$entity = $fields['info']['entity'];
+		if ( $rev !== false ) {
+			$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
+			list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
 
-		$fields['entity_type'] = $entityType;
-		unset( $fields['info'] ); //@todo: may want to preserve some stuff from the info field.
+			/* @var Entity $entity */
+			$entity = $fields['info']['entity'];
 
-		$params = array(
-			'wikibase-repo-change' => $fields
-		);
+			$fields['entity_type'] = $entityType;
+			unset( $fields['info'] ); //@todo: may want to preserve some stuff from the info field.
 
-		//@todo: FIXME: check CentralAuth, point to local user. Or use dummy user?
-		//@todo: XXX: what if the local user is unknown? How to point to a remote user?
-		$username = "REPO USER " . $fields['user_id'];
-		$user = \User::newFromName( $username );
+			$params = array(
+				'wikibase-repo-change' => $fields,
+				'source' => Settings::get( 'repoBase' ),
+			);
 
-		$ip = isset( $fields['ip'] ) ? $fields['ip'] : null; //@todo: provide this!
-		$comment = "DATA CHANGE: $changeType of $entityType " . $entity->getId(); //@todo: i18n! //@todo: more info! Link to diff?
 
-		$label = $entity->getLabel( $wgContLang->getCode() );
+			// todo: move to another class
+			$dbname = Settings::get( 'changesDB' );
+			$repodb = wfGetLB( $dbname )->getConnection( DB_MASTER, array(), $dbname );
+			$row = $repodb->selectRow(
+				'user',
+				'*',
+				array(
+					'user_id' => $rev->rev_user
+				)
+			);
 
-		if ( $label !== false ) {
-			$comment .= ' "' . $label . '"'; //@todo: i18n!
+			$user = \User::newFromRow( $row );
+			$ip = isset( $fields['ip'] ) ? $fields['ip'] : ''; //@todo: provide this!
+			$comment = $rev->rev_comment;
+
+			$rc = \RecentChange::newLogEntry( $fields['time'], $title, $user, '', $ip, null, '', $title, $comment, null );
+
+			$attribs = $rc->getAttributes();
+
+			$attribs['rc_user'] = $user;
+			$attribs['rc_user_text'] = $rev->rev_user_text;
+
+			// todo: defined in core, patch pending
+			// see https://gerrit.wikimedia.org/r/#/c/27147/
+			$attribs['rc_type'] = RC_EXTERNAL;
+			$attribs['rc_minor'] = ( isset( $fields['minor'] ) && $fields['minor'] ) ? 1 : 0; //@todo: provide this!
+			$attribs['rc_bot'] = ( isset( $fields['bot'] ) && $fields['bot'] ) ? 1 : 0; //@todo: provide this!
+
+			$attribs['rc_old_len'] = $title->getLength();
+			$attribs['rc_new_len'] = $title->getLength();
+
+			$attribs['rc_this_oldid'] = $title->getLatestRevID();
+			$attribs['rc_last_oldid'] = $title->getLatestRevID();
+			$attribs['rc_params'] = serialize( $params );
+
+			$rc->setAttribs( $attribs );
+
+			$rc->save(); //@todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
 		}
+	}
 
-		if ( isset( $fields['comment'] ) && $fields['comment'] !== '' ) { //@todo: provide comment!
-			$comment .= " ({$fields['comment']})"; //@todo: i18n!
+	/**
+	 * Hook for formatting recent changes linkes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OldChangesListRecentChangesLine
+	 *
+	 * @since 0.2
+	 *
+	 * @param \ChangesList $changesList
+	 * @param string $s
+	 * @param \RecentChange $rc
+	 *
+	 * @return bool
+	 */
+	public static function onOldChangesListRecentChangesLine( &$changesList, &$s, $rc ) {
+		$rcType = $rc->getAttribute( 'rc_type' );
+		if ( $rcType == 5 ) {
+			// todo: check if external source is wikibase
+			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
+			RecentChangeFormatter::changeLine( &$changesList, &$s, $rc );
 		}
-
-		$rc = \RecentChange::newLogEntry( $fields['time'], $title, $user, '', $ip, null, '', $title, $comment, serialize( $params ) );
-
-		$attribs = $rc->getAttributes();
-
-		$attribs['rc_type'] = RC_EDIT; //@todo: define RC_EXTERNAL in core
-		$attribs['rc_minor'] = ( isset( $fields['minor'] ) && $fields['minor'] ) ? 1 : 0; //@todo: provide this!
-		$attribs['rc_bot'] = ( isset( $fields['bot'] ) && $fields['bot'] ) ? 1 : 0; //@todo: provide this!
-
-		$attribs['rc_old_len'] = $title->getLength();
-		$attribs['rc_new_len'] = $title->getLength();
-
-		$attribs['rc_this_oldid'] = $title->getLatestRevID();
-		$attribs['rc_last_oldid'] = $title->getLatestRevID();
-
-		$rc->setAttribs( $attribs );
-		$rc->save(); //@todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
+		return true;
 	}
 
 	/**

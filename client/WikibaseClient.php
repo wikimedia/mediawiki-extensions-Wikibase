@@ -52,7 +52,9 @@ $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.ph
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
-$wgAutoloadClasses['Wikibase\SortUtils']			= $dir . 'includes/SortUtils.php';
+$wgAutoloadClasses['Wikibase\RecentChangeFormatter']	= $dir . 'includes/RecentChangeFormatter.php';
+$wgAutoloadClasses['Wikibase\SharedRevision']		= $dir . 'includes/SharedRevision.php';
+$wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
