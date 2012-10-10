@@ -233,6 +233,12 @@ final class ClientHooks {
 
 		$title->invalidateCache();
 
+		$rcinfo = $change->getRCInfo();
+
+		if( ! is_array( $rcinfo ) ) {
+			return false;
+		}
+
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
 		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
 
@@ -243,43 +249,78 @@ final class ClientHooks {
 		unset( $fields['info'] ); //@todo: may want to preserve some stuff from the info field.
 
 		$params = array(
-			'wikibase-repo-change' => $fields
+			'wikibase-repo-change' => $fields,
+			'source' => Settings::get( 'repoBase' ),
+			'rc-external-data' => array(
+				'rc_curid' => $rcinfo['rc_curid'],
+				'rc_this_oldid' => $rcinfo['rc_this_oldid'],
+				'rc_last_oldid' => $rcinfo['rc_last_oldid'],
+				'rc_user' => 0,
+				'rc_user_text' => $rcinfo['rc_user_text'],
+			)
 		);
 
-		//@todo: FIXME: check CentralAuth, point to local user. Or use dummy user?
-		//@todo: XXX: what if the local user is unknown? How to point to a remote user?
-		$username = "REPO USER " . $fields['user_id'];
-		$user = \User::newFromName( $username );
-
-		$ip = isset( $fields['ip'] ) ? $fields['ip'] : null; //@todo: provide this!
-		$comment = "DATA CHANGE: $changeType of $entityType " . $entity->getId(); //@todo: i18n! //@todo: more info! Link to diff?
-
-		$label = $entity->getLabel( $wgContLang->getCode() );
-
-		if ( $label !== false ) {
-			$comment .= ' "' . $label . '"'; //@todo: i18n!
+		if ( isset( $rcinfo['rc_user'] ) ) {
+			$params['rc-external-data']['rc_user'] = $rcinfo['rc_user'];
 		}
 
-		if ( isset( $fields['comment'] ) && $fields['comment'] !== '' ) { //@todo: provide comment!
-			$comment .= " ({$fields['comment']})"; //@todo: i18n!
-		}
+		// dummy anon user
+		$user = \User::newFromId( 0 );
 
-		$rc = \RecentChange::newLogEntry( $fields['time'], $title, $user, '', $ip, null, '', $title, $comment, serialize( $params ) );
+		$ip = isset( $fields['ip'] ) ? $fields['ip'] : ''; //@todo: provide this!
+
+		// todo: make nice
+		$comment = 'wikidata change';
+		$rc = ExternalRecentChange::newExternalLogEntry( $fields['time'], $title, $user, '',
+			$ip, null, '', $title, $comment, null );
 
 		$attribs = $rc->getAttributes();
 
-		$attribs['rc_type'] = RC_EDIT; //@todo: define RC_EXTERNAL in core
-		$attribs['rc_minor'] = ( isset( $fields['minor'] ) && $fields['minor'] ) ? 1 : 0; //@todo: provide this!
-		$attribs['rc_bot'] = ( isset( $fields['bot'] ) && $fields['bot'] ) ? 1 : 0; //@todo: provide this!
+		// dummy anon user
+		$attribs['rc_user'] = $user;
+		$attribs['rc_user_text'] = $rcinfo['rc_user_text'];
+		$attribs['rc_type'] = RC_EXTERNAL;
+
+		// todo: provide these
+		$attribs['rc_minor'] = ( isset( $fields['minor'] ) && $fields['minor'] ) ? 1 : 0;
+		$attribs['rc_bot'] = ( isset( $fields['bot'] ) && $fields['bot'] ) ? 1 : 0;
 
 		$attribs['rc_old_len'] = $title->getLength();
 		$attribs['rc_new_len'] = $title->getLength();
-
 		$attribs['rc_this_oldid'] = $title->getLatestRevID();
 		$attribs['rc_last_oldid'] = $title->getLatestRevID();
+		$attribs['rc_params'] = serialize( $params );
 
 		$rc->setAttribs( $attribs );
-		$rc->save(); //@todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
+
+		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
+		$rc->save();
+	}
+
+	/**
+	 * Hook for formatting recent changes linkes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OldChangesListRecentChangesLine
+	 *
+	 * @since 0.2
+	 *
+	 * @param \ChangesList $changesList
+	 * @param string $s
+	 * @param \RecentChange $rc
+	 *
+	 * @return bool
+	 */
+	public static function onOldChangesListRecentChangesLine( &$changesList, &$s, $rc ) {
+		$rcType = $rc->getAttribute( 'rc_type' );
+		if ( $rcType == RC_EXTERNAL ) {
+			// todo: check if external source is wikibase
+			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
+			if ( array_key_exists( 'rc-external-data', $params ) &&
+				array_key_exists( 'wikibase-repo-change', $params ) ) {
+				$line = ExternalChangesList::changesLine( $changesList, $rc );
+				$s = $line;
+			}
+		}
+		return true;
 	}
 
 	/**
