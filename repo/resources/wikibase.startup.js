@@ -28,6 +28,9 @@
 		// for all other values we remove the whole edit section
 		$( 'span.editsection' ).remove();
 
+		// remove all infos about empty values which are displayed in non-JS
+		$( '.wb-value-empty' ).empty().removeClass( 'wb-value-empty' );
+
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
 			new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] );

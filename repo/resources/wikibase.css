@@ -82,6 +82,10 @@
 	display: block; /* need to force block explicitly to achieve 100% width */
 }
 
+.wb-value-empty {
+	color: #A1A1A1;
+}
+
 /********** /BASIC LAYOUT **********/
 
 
@@ -200,6 +204,7 @@ PropertyEditTool toolbar */
 .wb-aliases-empty {
 	font-size: 84%;
 	padding-left: 10px;
+	color: #A1A1A1;
 }
 
 .wb-aliases-label {
