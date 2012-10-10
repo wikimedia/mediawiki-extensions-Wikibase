@@ -228,6 +228,7 @@ final class RepoHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.inherit.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.ui.StateExtension.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tests.js',
