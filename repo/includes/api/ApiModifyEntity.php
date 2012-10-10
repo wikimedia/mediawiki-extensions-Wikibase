@@ -52,7 +52,13 @@ abstract class ApiModifyEntity extends Api {
 
 		// If we have an id try that first
 		if ( isset( $params['id'] ) ) {
-			$entityContent = EntityContentFactory::singleton()->getFromId( $params['type'], $params['id'] );
+			$entityContentFactory = EntityContentFactory::singleton();
+			try {
+				$entityContent = $entityContentFactory->getFromPrefixedId( $params['id'], \Revision::FOR_THIS_USER );
+			}
+			catch ( \MWException $e ) {
+				$entityContent = $entityContentFactory->getFromId( $params['type'], $params['id'], \Revision::FOR_THIS_USER );
+			}
 
 			if ( is_null( $entityContent ) ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-id' )->text(), 'no-such-entity-id' );
@@ -326,7 +332,7 @@ abstract class ApiModifyEntity extends Api {
 	public function getAllowedParamsForId() {
 		return array(
 			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_TYPE => 'string',
 			),
 		);
 	}

@@ -79,6 +79,25 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		$this->assertTrue( 0 <= $res['entities'][$id]['count'] );
 	}
 
+	/**
+	 * @dataProvider provideItemHandles
+	 */
+	function testGetItemByPrefixedId( $handle ) {
+		$this->createItems();
+
+		$item = $this->getItemOutput( $handle );
+		$id = $item['id'];
+
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbgetentities',
+				'ids' => 'q' . $id )
+		);
+
+		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertItemEquals( $item,  $res['entities'][$id] );
+	}
+
 	public function provideGetItemByTitle() {
 		$calls = array();
 		$handles = $this->getItemHandles();

@@ -119,6 +119,24 @@ class EntityContentFactory {
 	}
 
 	/**
+	 * Returns the WikiPage object for the item with provided prefixed id.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $prefixedId
+	 *
+	 * @return WikiPage
+	 */
+	public function getWikiPageForPrefixedId( $prefixedId ) {
+		$entityFactory = EntityFactory::singleton();
+
+		$type = $entityFactory->getEntityTypeFromPrefixedId( $prefixedId );
+		$id = $entityFactory->getUnprefixedId( $prefixedId );
+
+		return new WikiPage( $this->getTitleForId( $type, $id ) );
+	}
+
+	/**
 	 * Get the entity content for the entity with the provided id
 	 * if it's available to the specified audience.
 	 * If the specified audience does not have the ability to view this
