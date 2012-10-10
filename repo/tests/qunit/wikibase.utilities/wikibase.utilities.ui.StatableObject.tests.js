@@ -1,7 +1,7 @@
 /**
- * QUnit tests for wikibase.utilities.ui.StateExtension
+ * QUnit tests for wikibase.utilities.ui.StatableObject
  *
- * @since 0.1
+ * @since 0.2
  * @file
  * @ingroup Wikibase
  *
@@ -11,7 +11,7 @@
 ( function( mw, wb, $, QUnit, undefined ) {
 	'use strict';
 
-	QUnit.module( 'wikibase.utilities.ui.StateExtension', QUnit.newWbEnvironment( {
+	QUnit.module( 'wikibase.utilities.ui.StatableObject', QUnit.newWbEnvironment( {
 		setup: function() {},
 		teardown: function() {}
 	} ) );
@@ -21,8 +21,8 @@
 			this.state = this.STATE.DISABLED;
 		};
 
-		// Define constructor implementing StateExtension:
-		wb.utilities.ui.StateExtension.useWith( StatableObj, {
+		// Define constructor implementing StatableObject:
+		wb.utilities.ui.StatableObject.useWith( StatableObj, {
 			getState: function() {
 				return this.state;
 			},
@@ -38,8 +38,8 @@
 
 		assert.deepEqual(
 			StatableObj.prototype.STATE,
-			wb.utilities.ui.StateExtension.prototype.STATE,
-			'New, with StateExtension extended constructor has STATE enum in its prototype'
+			wb.utilities.ui.StatableObject.prototype.STATE,
+			'New, with StatableObject extended constructor has STATE enum in its prototype'
 		);
 
 		var stateObj = new StatableObj(), // new instance using the constructor above
@@ -48,7 +48,7 @@
 		assert.deepEqual(
 			STATE,
 			StatableObj.prototype.STATE,
-			'Instance of new StateExtension constructor has STATE enum'
+			'Instance of new StatableObject constructor has STATE enum'
 		);
 
 		/**
@@ -103,7 +103,7 @@
 	QUnit.test( 'Test without implementing abstract functions', function( assert ) {
 		var StatableObj = function() {};
 
-		wb.utilities.ui.StateExtension.useWith( StatableObj, {} );
+		wb.utilities.ui.StatableObject.useWith( StatableObj, {} );
 
 		assert.throws(
 			function() {

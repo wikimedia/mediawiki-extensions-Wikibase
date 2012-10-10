@@ -150,7 +150,7 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 	},
 
 	/**
-	 * @see wb.utilities.ui.StateExtension._setState
+	 * @see wb.utilities.ui.StatableObject._setState
 	 *
 	 * @param Number state see wb.ui.EditableValue.STATE
 	 * @return Boolean whether the desired state has been applied (or had been applied already)

@@ -269,10 +269,10 @@ wb.ui.Toolbar.prototype = {
 };
 
 // add disable/enable functionality overwriting required functions
-wb.utilities.ui.StateExtension.useWith( wb.ui.Toolbar, {
+wb.utilities.ui.StatableObject.useWith( wb.ui.Toolbar, {
 	/**
 	 * Determines the state (disabled, enabled or mixed) of all toolbar elements.
-	 * @see wb.utilities.ui.StateExtension.getState
+	 * @see wb.utilities.ui.StatableObject.getState
 	 */
 	getState: function() {
 		var state;
@@ -301,7 +301,7 @@ wb.utilities.ui.StateExtension.useWith( wb.ui.Toolbar, {
 	},
 
 	/**
-	 * @see wb.utilities.ui.StateExtension._setState
+	 * @see wb.utilities.ui.StatableObject._setState
 	 */
 	_setState: function( state ) {
 		var success = true;

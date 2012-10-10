@@ -603,10 +603,10 @@ wb.ui.PropertyEditTool = wb.utilities.inherit( $PARENT, {
 } );
 
 // add disable/enable functionality overwriting required functions
-wb.utilities.ui.StateExtension.useWith( wb.ui.PropertyEditTool, {
+wb.utilities.ui.StatableObject.useWith( wb.ui.PropertyEditTool, {
 	/**
 	 * Determines the state (disabled, enabled or mixed) of all edit tool elements (editable values and toolbar).
-	 * @see wb.utilities.ui.StateExtension.getState
+	 * @see wb.utilities.ui.StatableObject.getState
 	 */
 	getState: function() {
 		var state,
@@ -642,7 +642,7 @@ wb.utilities.ui.StateExtension.useWith( wb.ui.PropertyEditTool, {
 
 	/**
 	 * Dis- or enables the PropertyEditTool (its toolbar and values).
-	 * @see wb.utilities.ui.StateExtension._setState
+	 * @see wb.utilities.ui.StatableObject._setState
 	 *
 	 * @param wb.ui.PropertyEditTool.EditableValue skip can be one value which should not be affected
 	 */

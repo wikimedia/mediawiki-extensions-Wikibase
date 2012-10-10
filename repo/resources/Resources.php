@@ -53,7 +53,7 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
 				'wikibase.utilities/wikibase.utilities.eventRelatedExtensions.js',
-				'wikibase.utilities/wikibase.utilities.ui.StateExtension.js',
+				'wikibase.utilities/wikibase.utilities.ui.StatableObject.js',
 			),
 			'dependencies' => array(
 				'wikibase'

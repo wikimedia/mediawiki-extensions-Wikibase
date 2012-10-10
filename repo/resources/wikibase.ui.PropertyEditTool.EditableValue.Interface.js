@@ -568,9 +568,9 @@ wb.ui.Tooltip.Extension.useWith( wb.ui.PropertyEditTool.EditableValue.Interface,
 } );
 
 // add disable/enable functionality overwriting required functions
-wb.utilities.ui.StateExtension.useWith( wb.ui.PropertyEditTool.EditableValue.Interface, {
+wb.utilities.ui.StatableObject.useWith( wb.ui.PropertyEditTool.EditableValue.Interface, {
 	/**
-	 * @see wb.utilities.ui.StateExtension.getState
+	 * @see wb.utilities.ui.StatableObject.getState
 	 */
 	getState: function() {
 		return ( this._subject.hasClass( this.UI_CLASS + '-disabled' ) )
@@ -579,7 +579,7 @@ wb.utilities.ui.StateExtension.useWith( wb.ui.PropertyEditTool.EditableValue.Int
 	},
 
 	/**
-	 * @see wb.utilities.ui.StateExtension._setState
+	 * @see wb.utilities.ui.StatableObject._setState
 	 */
 	_setState: function( state ) {
 		if ( state === this.STATE.DISABLED ) {

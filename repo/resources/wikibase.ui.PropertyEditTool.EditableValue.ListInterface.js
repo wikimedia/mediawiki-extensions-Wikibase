@@ -343,7 +343,7 @@ wb.ui.PropertyEditTool.EditableValue.ListInterface = wb.utilities.inherit( $PARE
 	},
 
 	/**
-	 * @see wb.utilities.ui.StateExtension._setState
+	 * @see wb.utilities.ui.StatableObject._setState
 	 */
 	_setState: function( state ) {
 		if ( this._getTagadata() !== null ) {
