@@ -28,6 +28,10 @@ if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c becaus
 
 define( 'WBC_VERSION', '0.2 alpha' );
 
+if ( !defined( 'RC_EXTERNAL' ) ) {
+        define( 'RC_EXTERNAL', 5 );
+}
+
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
 	'name' => 'Wikibase Client',
@@ -50,9 +54,11 @@ $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php
 
 $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
+$wgAutoloadClasses['Wikibase\ExternalChangesList']      = $dir . 'includes/ExternalChangesList.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
-$wgAutoloadClasses['Wikibase\SortUtils']			= $dir . 'includes/SortUtils.php';
+$wgAutoloadClasses['Wikibase\SharedRevision']		= $dir . 'includes/SharedRevision.php';
+$wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
@@ -66,6 +72,7 @@ $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/En
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
 $wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
+$wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 $wgHooks['ParserAfterParse'][]				= '\Wikibase\ClientHooks::onParserAfterParse';
 $wgHooks['ParserFirstCallInit'][]			= '\Wikibase\NoLangLinkHandler::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\NoLangLinkHandler::onMagicWordwgVariableIDs';
