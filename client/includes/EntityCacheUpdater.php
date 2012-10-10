@@ -43,6 +43,7 @@ class EntityCacheUpdater {
 
 		$store = ClientStoreFactory::getStore();
 		$entityCache = $store->newEntityCache();
+		$siteLinkCache = $store->newSiteLinkCache();
 
 		/**
 		 * @var Entity $entity
@@ -52,6 +53,7 @@ class EntityCacheUpdater {
 		switch ( $updateType ) {
 			case 'remove':
 				$entityCache->deleteEntity( $entity );
+				$siteLinkCache->deleteLinksOfItem( $entity );
 				break;
 			case 'add':
 				$entityCache->addEntity( $entity );
@@ -66,7 +68,7 @@ class EntityCacheUpdater {
 
 		// TODO: handle refresh updates and refresh for other types as well
 		// TODO: handle entities other than items
-		if ( $entity->getType() == Item::ENTITY_TYPE ) {
+		if ( $entity->getType() == Item::ENTITY_TYPE && $updateType != 'remove' ) {
 			$store->newSiteLinkCache()->saveLinksOfItem( $entity );
 		}
 	}
