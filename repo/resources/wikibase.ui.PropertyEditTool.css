@@ -12,23 +12,6 @@
 
 /********** BASIC LAYOUT **********/
 
-/* basically, a row in the grid layout */
-.wb-ui-propertyedittool {
-	width: 100%;
-	max-width: 55em;
-	position: relative; /* make absolute positioned toolbar align to the right edge */
-	font-size: 100%; /* font size needs to be set since it influences max-widh property */
-	float: left; /* make row to take the dimensions of its containing blocks avoiding clipping */
-}
-
-/* toolbar container */
-.wb-ui-propertyedittool-editablevalue-toolbarparent {
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 13em; /* has to be as wide as its content */
-}
-
 .wb-ui-propertyedittool-toolbar {
 	width: 13em;
 	float: right;
@@ -57,11 +40,6 @@
 
 .wb-ui-propertyedittool-editablevalue-ineditmode {
 	white-space: nowrap;
-}
-
-.wb-property-container-value {
-	margin-left: 0;
-	display: block; /* need to force block explicitly to achieve 100% width */
 }
 
 /* disabled input element */
@@ -96,29 +74,12 @@ table.wb-ui-propertyedittool-ineditmode {
 
 /********** LABEL & DESCRIPTION **********/
 
-.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue,
-.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue {
-	padding-right: 14em; /* width of toolbar + white space border */
-}
-
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-toolbar,
 .wb-ui-labeledittool .wb-ui-propertyedittool-toolbar {
 	display: none;
 }
 
 /***** LABEL *****/
-/* the label edit tool styles have to be customized due to the differing font sizes of the label and
-its toolbar */
-
-.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue {
-	display: block;
-	margin: .3em .3em .13em 10px; /* h1 natively has 0.17em bottom padding to avoid clipping */
-}
-
-.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue .wb-value {
-	font-size: 188%;
-	padding-right: 0;
-}
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
 	padding: 0 0 0 2px; /* even out border of input box in edit mode */
@@ -127,33 +88,6 @@ its toolbar */
 	.wb-firstHeading .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
 		padding: 0 0 0 1px;
 	}
-}
-
-.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue .wb-ui-propertyedittool-editablevalue-toolbarparent {
-	/* this nodes font size will affect the toolbar padding which is specified in em; therefore, the
-	font size should be the same as on every other toolbar container node */
-	font-size: 100%;
-}
-
-/* vertical positioning */
-/* the following lines are used to vertically position the toolbar on the baseline of the heading
-(label) which has a bigger font size */
-.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-toolbarparent {
-	line-height: 188%;
-	top: .3em; /* even out margin of label container in view mode */
-}
-.wb-ui-labeledittool .wb-ui-toolbar {
-	font-size: 188%;
-	line-height: 1.2em; /* adjust to height of value */
-	padding-top: 1px; /* even out border of input box */
-}
-.wb-ui-labeledittool .wb-ui-toolbar-group {
-	font-size: 100%;
-}
-.wb-ui-labeledittool .wb-ui-toolbar-group .wb-ui-toolbar-group, /* inner group (buttons) */
-.wb-ui-labeledittool .wb-ui-toolbar-group .wb-ui-toolbar-label /* tooltip */ {
-	font-size: 53%;
-	margin-bottom: 2px; /* even out border of label container in view mode */
 }
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode {
@@ -176,16 +110,6 @@ its toolbar */
 
 /***** DESCRIPTION *****/
 
-.wb-ui-descriptionedittool {
-	margin-top: -2px; /* move to top decreasing space between label and description */
-}
-
-.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue {
-	padding-left: 10px;
-	padding-top: 0.1em;
-	padding-bottom: 0.1em;
-}
-
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
 	padding-left: 7px;
 }
@@ -195,22 +119,13 @@ its toolbar */
 	}
 }
 
-.wb-ui-descriptionedittool .wb-value {
-	line-height: 2em; /* force height to be able to align toolbar */
-}
-
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
 	padding: 0;
 }
 
-.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-toolbarparent {
-	top: 0.1em; /* see padding-top of editablevalue container */
-	line-height: 2em;
-}
-
 .wb-ui-descriptionedittool input {
 	width: 100%;
-	padding: 0;
+	padding: 0 0 0 2px;
 	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
 }
 
@@ -220,24 +135,6 @@ its toolbar */
 
 
 /********** ALIASES **********/
-/* the aliases edit tool has to be customized due to different font sizes of the aliases and its
-toolbar; furthermore, the PropertyEditTool toolbar (which is displayed only when there are no
-aliases) shall be vertically be aligned to the baseline of the first row of aliases (just like the
-EditableValue's "edit" button when aliases exist) */
-
-.wb-ui-aliasesedittool .wb-gridhelper {
-	padding-right: 14em;
-}
-
-.wb-aliases .wb-ui-propertyedittool-toolbar {
-	/* aliases PropertyEditTool toolbar should be on the same vertical level than its label since
-	it is only displayed when there are no aliases (other PropertyEditToolbars appear below the last
-	editable value */
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 13em;
-}
 
 .wb-alias li.tagadata-choice {
 	line-height: inherit;
@@ -248,10 +145,6 @@ EditableValue's "edit" button when aliases exist) */
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 	font-size: 133% !important;
-}
-
-.wb-aliases .wb-ui-toolbar, .wb-aliases .wb-ui-propertyedittool-editablevalue-waitmsg {
-	/*margin-top: 1px; /* even out border of alias values */
 }
 
 .wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode {
@@ -272,6 +165,7 @@ EditableValue's "edit" button when aliases exist) */
 .wb-sitelinks-heading .wb-ui-propertyedittool-counter {
 	font-size: 67%; /* reset to standard font size */
 	margin-left: 0.6em;
+	line-height: 100%; /* prevent white space below heading */
 }
 
 table.wb-sitelinks input {
@@ -284,9 +178,6 @@ table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelink
 	white-space: normal;
 }
 
-table.wb-sitelinks .wb-sitelinks-link {
-	padding-left: 10px;
-}
 table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
 	padding-left: 7px; /* above value minus input border and padding */
 }
@@ -303,30 +194,8 @@ table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td.wb-site
 	background-color: #D0EBF7;
 }
 
-/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
-table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-toolbarparent {
-	width: 13em;
-	position: static; /* clear absolute positioning */
-	float: none; /* overwrite edit section's float: right */
-	border-right: 1px solid #C9C9C9;
-}
-
 table.wb-sitelinks .wb-ui-toolbar {
 	float: none; /* prevent white space jittering for PropertyEditTool toolbar */
-}
-
-table.wb-sitelinks .wb-pending-value .wb-sitelinks-sitename,
-table.wb-sitelinks .wb-sitelinks-link {
-	padding-right: 16px;
-	border-right: none;
-}
-
-table.wb-sitelinks tfoot td.wb-sitelinks-placeholder {
-	border-left: 1px solid #C9C9C9;
-}
-table.wb-sitelinks tfoot td.editsection {
-	border-right: 1px solid #C9C9C9;
-	float: none;
 }
 
 /********** /SITE LINKS **********/

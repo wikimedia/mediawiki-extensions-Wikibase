@@ -24,7 +24,8 @@ return call_user_func( function() {
 		// common styles independent from JavaScript being enabled or disabled
 		'wikibase.common' => $moduleTemplate + array(
 			'styles' => array(
-				'wikibase.css'
+				'wikibase.css',
+				'wikibase.ui.Toolbar.css'
 			)
 		),
 
@@ -118,11 +119,9 @@ return call_user_func( function() {
 				'wikibase.ui.Toolbar.Label.js',
 				'wikibase.ui.Toolbar.Button.js'
 			),
-			'styles' => array(
-				'wikibase.ui.Toolbar.css'
-			),
 			'dependencies' => array(
 				'wikibase',
+				'wikibase.common',
 				'jquery.tipsy',
 				'mediawiki.legacy.shared',
 				'jquery.ui.core',

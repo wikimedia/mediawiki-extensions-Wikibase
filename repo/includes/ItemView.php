@@ -59,7 +59,7 @@ class ItemView extends EntityView {
 		$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-siteid' ) );
 		$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-link' ) );
 		$html .= Html::element( 'col', array(
-			'class' => 'wb-ui-propertyedittool-editablevalue-toolbarparent'
+			'class' => 'editsection'
 		) );
 		$html .= Html::closeElement( 'colgroup' );
 

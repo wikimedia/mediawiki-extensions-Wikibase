@@ -14,7 +14,8 @@
 	display: none;
 }
 /* on special entity pages, the native heading is still being used and shall be shown */
-.wb-diffpage .firstHeading, .wb-oldrevpage .firstHeading {
+.wb-diffpage .firstHeading,
+.wb-oldrevpage .firstHeading {
 	display: block;
 }
 
@@ -41,7 +42,8 @@
 }
 
 /* container for the value itself */
-.wb-value, .wb-gridhelper {
+.wb-value,
+.wb-gridhelper {
 	word-wrap: break-word; /* force word wrap for that toolbar will not overlay very long values */
 	display: block; /* need to force block explicitly to achieve 100% width */
 }
@@ -58,8 +60,37 @@
 	float: left;
 }
 
+/* basically, a row in the grid layout */
+.wb-value-row {
+	width: 100%;
+	max-width: 55em;
+	position: relative; /* make absolute positioned toolbar align to the right edge */
+	font-size: 100%; /* font size needs to be set since it influences max-widh property */
+	float: left; /* make row to take the dimensions of its containing blocks avoiding clipping */
+}
+
+/* toolbar container */
+.wb-entitypage .editsection {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 13em; /* has to be as wide as its content */
+}
+
+.wb-value-container {
+	margin-left: 0;
+	display: block; /* need to force block explicitly to achieve 100% width */
+}
+
 /********** /BASIC LAYOUT **********/
 
+
+/********** LABEL & DESCRIPTION **********/
+
+.wb-ui-labeledittool .wb-value-container,
+.wb-ui-descriptionedittool .wb-value-container {
+	padding-right: 14em; /* width of toolbar + white space border */
+}
 
 /********** LABEL **********/
 
@@ -80,20 +111,88 @@
 	padding: 1px; /* even out border of input box in edit mode */
 }
 
+/* the label edit tool styles have to be further customized due to the differing font sizes of the
+label and its toolbar */
+
+.wb-firstHeading .wb-value-container {
+	display: block;
+	margin: .3em .3em .13em 10px; /* h1 natively has 0.17em bottom padding to avoid clipping */
+}
+
+.wb-firstHeading .wb-value {
+	font-size: 188%;
+	padding-right: 0;
+}
+
+.wb-firstHeading .editsection {
+	/* this nodes font size will affect the toolbar padding which is specified in em; therefore, the
+	font size should be the same as on every other toolbar container node */
+	font-size: 100%;
+}
+
+/* vertical positioning */
+/* the following lines are used to vertically position the toolbar on the baseline of the heading
+(label) which has a bigger font size */
+.wb-firstHeading .editsection {
+	line-height: 188%;
+	top: .3em; /* even out margin of label container in view mode */
+}
+.wb-firstHeading .wb-ui-toolbar {
+	font-size: 188%;
+	line-height: 1.2em; /* adjust to height of value */
+	padding-top: 1px; /* even out border of input box */
+}
+.wb-firstHeading .wb-ui-toolbar-group {
+	font-size: 53%;
+	margin-bottom: 2px;
+}
+.wb-firstHeading .wb-ui-toolbar-group .wb-ui-toolbar-group, /* inner group (buttons) */
+.wb-firstHeading .wb-ui-toolbar-group .wb-ui-toolbar-label /* tooltip */ {
+	font-size: 100%;
+	margin-bottom: 0; /* even out border of label container in view mode */
+}
+
 /********** /LABEL **********/
+
+/********** DESCRIPTION **********/
+
+.wb-description {
+	margin-top: -2px; /* move to top decreasing space between label and description */
+}
+
+.wb-description .wb-value-container {
+	padding-left: 10px;
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
+}
+
+.wb-description .wb-value {
+	line-height: 2em; /* force height to be able to align toolbar */
+}
+
+.wb-description .editsection {
+	top: 0.1em; /* see padding-top of editablevalue container */
+	line-height: 2em;
+}
+
+/********** /DESCRIPTION **********/
+
+/********** /LABEL & DESCRIPTION **********/
 
 
 /********** ALIASES **********/
 
 /* aliases exclusive helper div containing editable value and its toolbar but not the
 PropertyEditTool toolbar */
-.wb-gridhelper {
-	/*float: left;*/
+.wb-aliases .wb-gridhelper {
 	display: block !important;
 	padding-left: 10px;
+	padding-right: 14em;
+	position: relative;
 }
 
-.wb-aliases, .wb-aliases-empty {
+.wb-aliases,
+.wb-aliases-empty {
 	float: left; /* necessary for highlighting in edit mode */
 	width: 100%;
 }
@@ -113,8 +212,9 @@ PropertyEditTool toolbar */
 							underneath the label for one line in some cases */
 }
 
-.wb-aliases-label, .wb-aliases ul {
-	display: table-cell; /* make aliases not wrap around the aliases label */
+.wb-aliases-label,
+.wb-aliases ul {
+	overflow: auto;
 }
 
 .wb-aliases div {
@@ -127,10 +227,6 @@ PropertyEditTool toolbar */
 	line-height: inherit;
 }
 
-.wb-aliases ul {
-	display: inline\9; /* IE <= 9 does not support table-cell */
-}
-
 .wb-aliases li {
 	font-size: 84%;
 	float: left;
@@ -141,6 +237,21 @@ PropertyEditTool toolbar */
 	padding: 0 12px 0 7px;
 	line-height: 136%;
 	background-color: #F8F8F8;
+}
+
+/* the aliases edit tool has to be customized due to different font sizes of the aliases and its
+toolbar; furthermore, the PropertyEditTool toolbar (which is displayed only when there are no
+aliases) shall be vertically be aligned to the baseline of the first row of aliases (just like the
+EditableValue's "edit" button when aliases exist) */
+
+.wb-aliases .editsection {
+	/* aliases PropertyEditTool toolbar should be on the same vertical level than its label since
+	it is only displayed when there are no aliases (other PropertyEditToolbars appear below the last
+	editable value */
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 13em;
 }
 
 /********** /ALIASES **********/
@@ -213,9 +324,28 @@ table.wb-sitelinks .even td.wb-sitelinks-siteid {
 	background: #F0F0F0;
 }
 
+table.wb-sitelinks .wb-sitelinks-link {
+	padding-left: 10px;
+}
+
+table.wb-sitelinks .wb-pending-value .wb-sitelinks-sitename,
+table.wb-sitelinks .wb-sitelinks-link {
+	padding-right: 16px;
+	border-right: none;
+}
+
+/* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
+table.wb-sitelinks .editsection {
+	width: 13em;
+	position: static; /* clear absolute positioning */
+	float: none; /* overwrite edit section's float: right */
+	border-right: 1px solid #C9C9C9;
+}
+
 table.wb-sitelinks tfoot td.wb-sitelinks-placeholder {
 	padding-left: 10px;
 	padding-right: 10px;
+	border-left: 1px solid #C9C9C9;
 }
 
 /********** /SITE LINKS **********/
@@ -242,7 +372,8 @@ table.wb-sitelinks tfoot td.wb-sitelinks-placeholder {
 	padding: 0 0.2em;
 }
 
-.ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
 	margin: 0;
 }
 

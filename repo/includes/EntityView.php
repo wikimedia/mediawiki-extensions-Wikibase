@@ -209,7 +209,7 @@ abstract class EntityView extends \ContextSource {
 		);
 		$html .= Html::openElement(
 			'span',
-			array( 'dir' => 'auto' )
+			array( 'dir' => 'auto', 'class' => 'wb-value-container' )
 		);
 		$html .= Html::element(
 			'span',
@@ -240,7 +240,7 @@ abstract class EntityView extends \ContextSource {
 		$html = Html::openElement( 'div',
 			array(
 				'dir' => 'auto',
-				'class' => 'wb-property-container wb-value-row'
+				'class' => 'wb-property-container wb-value-row wb-description'
 			)
 		);
 		$html .= Html::element(
@@ -249,7 +249,7 @@ abstract class EntityView extends \ContextSource {
 		);
 		$html .= Html::openElement(
 			'span',
-			array( 'class' => 'wb-property-container-value' )
+			array( 'class' => 'wb-property-container-value wb-value-container' )
 		);
 		$html .= Html::element(
 			'span',
@@ -294,8 +294,8 @@ abstract class EntityView extends \ContextSource {
 				);
 			}
 			$html .= Html::closeElement( 'ul' );
-			$html .= Html::closeElement( 'div' );
 			$html .= $this->getHtmlForEditSection( $entity, $lang );
+			$html .= Html::closeElement( 'div' );
 			$html .= Html::closeElement( 'div' );
 		}
 		return $html;
