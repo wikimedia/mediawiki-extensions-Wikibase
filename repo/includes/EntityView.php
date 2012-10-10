@@ -195,6 +195,12 @@ abstract class EntityView extends \ContextSource {
 	 */
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$info = $this->extractEntityInfo( $entity, $lang );
+		$label = $entity->getEntity()->getLabel( $info['lang']->getCode() );
+		$valueClass = 'wb-value';
+		if ( empty( $label ) ) {
+			$label = wfMessage( 'wikibase-label-empty' )->text();
+			$valueClass .= ' wb-value-empty';
+		}
 
 		// add an h1 for displaying the entity's label; the actual firstHeading is being hidden by
 		// css since the original MediaWiki DOM does not represent a Wikidata entity's structure
@@ -213,8 +219,8 @@ abstract class EntityView extends \ContextSource {
 		);
 		$html .= Html::element(
 			'span',
-			array( 'class' => 'wb-value' ),
-			$entity->getEntity()->getLabel( $info['lang']->getCode() )
+			array( 'class' => $valueClass ),
+			$label
 		);
 		$html .= $this->getHtmlForEditSection( $entity, $lang );
 		$html .= Html::closeElement( 'span' );
@@ -236,6 +242,11 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForDescription( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$description = $entity->getEntity()->getDescription( $info['lang']->getCode() );
+		$valueClass = 'wb-value';
+		if ( empty( $description ) ) {
+			$description = wfMessage( 'wikibase-description-empty' )->text();
+			$valueClass .= ' wb-value-empty';
+		}
 
 		$html = Html::openElement( 'div',
 			array(
@@ -253,7 +264,7 @@ abstract class EntityView extends \ContextSource {
 		);
 		$html .= Html::element(
 			'span',
-			array( 'class' => 'wb-value' ),
+			array( 'class' => $valueClass ),
 			$description
 		);
 		$html .= $this->getHtmlForEditSection( $entity, $lang );
