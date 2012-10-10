@@ -19,7 +19,7 @@
 	 * @constructor
 	 * @extension
 	 *
-	 * @example wb.utilities.ui.StateExtension.useWith( SomeConstructor, {
+	 * @example wb.utilities.ui.StatableObject.useWith( SomeConstructor, {
 	 *   getState: function() { ... },
 	 *   _setState: function( state ) { ... }
 	 * } );
@@ -28,7 +28,7 @@
 	 *
 	 * @since 0.2 (moved from wb.ui.StateExtension which was available in 0.1)
 	 */
-	wb.utilities.ui.StateExtension = wb.utilities.newExtension( {
+	wb.utilities.ui.StatableObject = wb.utilities.newExtension( {
 		/**
 		 * @const states of elements / element groups
 		 * @enum Number
