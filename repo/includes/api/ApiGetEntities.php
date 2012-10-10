@@ -107,12 +107,12 @@ class ApiGetEntities extends Api {
 				// we are not using the type, we are only trying to get it to see if it fails
 				$type = $entityFactory->getEntityTypeFromPrefixedId( $id );
 				$numId = $entityFactory->getUnprefixedId( $id );
-				$itemPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
-				$res->addValue( $itemPath, 'id', $numId );
+				$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
+				$res->addValue( $entityPath, 'id', $numId );
 			}
 			catch ( \MWException $e ) {
-				$itemPath = array( 'entities', $id );
-				$res->addValue( $itemPath, 'id', $id );
+				$entityPath = array( 'entities', $id );
+				$res->addValue( $entityPath, 'id', $id );
 			}
 
 			// later we do a getContent but only if props are defined
@@ -127,44 +127,46 @@ class ApiGetEntities extends Api {
 				if ( $page->exists() ) {
 					// as long as getWikiPageForId only returns ids for legal items this holds
 					/**
-					 * @var $itemContent ItemContent
+					 * @var $entityContent EntityContent
 					 */
-					$itemContent = $page->getContent();
+					$entityContent = $page->getContent();
 
-					if ( is_null( $itemContent ) ) {
+					if ( is_null( $entityContent ) ) {
 						continue;
 					}
 
-					$item = $itemContent->getItem();
-					$res->addValue( $itemPath, 'type', $item->getType() );
+					// TODO: Onwards from here we need a formatter object of some kind to generate the output
+					// Basically split of "printing" for specific entities, now we only handles items.
+					$entity = $entityContent->getItem();
+					$res->addValue( $entityPath, 'type', $entity->getType() );
 
 					// loop over all props
 					foreach ( $props as $key ) {
 						switch ( $key ) {
 						case 'info':
-							$res->addValue( $itemPath, 'pageid', intval( $page->getId() ) );
+							$res->addValue( $entityPath, 'pageid', intval( $page->getId() ) );
 							$title = $page->getTitle();
-							$res->addValue( $itemPath, 'ns', intval( $title->getNamespace() ) );
-							$res->addValue( $itemPath, 'title', $title->getPrefixedText() );
+							$res->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
+							$res->addValue( $entityPath, 'title', $title->getPrefixedText() );
 							$revision = $page->getRevision();
 							if ( $revision !== null ) {
-								$res->addValue( $itemPath, 'lastrevid', intval( $revision->getId() ) );
-								$res->addValue( $itemPath, 'touched', $revision->getTimestamp( TS_ISO_8601 ) );
-								$res->addValue( $itemPath, 'length', intval( $revision->getSize() ) );
+								$res->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
+								$res->addValue( $entityPath, 'touched', $revision->getTimestamp( TS_ISO_8601 ) );
+								$res->addValue( $entityPath, 'length', intval( $revision->getSize() ) );
 							}
-							$res->addValue( $itemPath, 'count', intval( $page->getCount() ) );
+							$res->addValue( $entityPath, 'count', intval( $page->getCount() ) );
 							break;
 						case 'aliases':
-							$this->addAliasesToResult( $item->getAllAliases( $languages ), $itemPath );
+							$this->addAliasesToResult( $entity->getAllAliases( $languages ), $entityPath );
 							break;
 						case 'sitelinks':
-							$this->addSiteLinksToResult( $item->getSiteLinks(), $itemPath, 'sitelinks', 'sitelink', $siteLinkOptions );
+							$this->addSiteLinksToResult( $entity->getSiteLinks(), $entityPath, 'sitelinks', 'sitelink', $siteLinkOptions );
 							break;
 						case 'descriptions':
-							$this->addDescriptionsToResult( $item->getDescriptions( $languages ), $itemPath );
+							$this->addDescriptionsToResult( $entity->getDescriptions( $languages ), $entityPath );
 							break;
 						case 'labels':
-							$this->addLabelsToResult( $item->getLabels( $languages ), $itemPath );
+							$this->addLabelsToResult( $entity->getLabels( $languages ), $entityPath );
 							break;
 						default:
 							// should never be here, because it should be something for the earlyer cases
@@ -173,7 +175,7 @@ class ApiGetEntities extends Api {
 					}
 				}
 				else {
-					$this->getResult()->addValue( $itemPath, 'missing', "" );
+					$this->getResult()->addValue( $entityPath, 'missing', "" );
 				}
 			}
 		}
