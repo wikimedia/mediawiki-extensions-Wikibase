@@ -233,10 +233,10 @@ This is a generic placeholder message used while a save is in progress, and repl
 	'wikibase-remove-inprogress' => '[[File:Screenshot WikidataRepo 2012-05-25 L.png|right|350px]]
 [[File:Screenshot WikidataRepo 2012-05-25 M.png|right|350px]]
 This is a generic placeholder message used while a remove is in progress, and replaces the edit and remove.',
-	'wikibase-label-empty' => 'Placeholder message displayed instead of the item\'s label in case no label has been specified yet. This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)',
+	'wikibase-label-empty' => "Placeholder message displayed instead of the item's label in case no label has been specified yet. This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-label-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new label. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-label|label]].',
-	'wikibase-description-empty' => 'Placeholder message displayed instead of the item\'s description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)',
+	'wikibase-description-empty' => "Placeholder message displayed instead of the item's description in case no description has been specified yet.  This message is displayed only when the user has JavaScript disabled. (When JavaScript is enabled, an input box will be displayed instead.)",
 	'wikibase-description-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 G.png|right|0x150px]]
 This is a generic text used as a placeholder while editing a new description. See also Wikidatas glossary on [[m:Wikidata/Glossary#languageattribute-description|description]].',
 	'wikibase-sitelink-site-edit-placeholder' => '[[File:Screenshot WikidataRepo 2012-05-13 E.png|right|0x150px]]
