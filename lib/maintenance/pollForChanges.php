@@ -82,6 +82,8 @@ class PollForChanges extends \Maintenance {
 
 		$this->addOption( 'continueinterval', "Interval (in seconds) to sleep after processing a full batch.", false, true );
 
+		$this->addOption( 'rebuildrc', "Rebuild recent changes" );
+
 		parent::__construct();
 	}
 
@@ -123,6 +125,14 @@ class PollForChanges extends \Maintenance {
 			}
 		} else {
 			file_put_contents( $pidfile, getmypid() ); // create lockfile
+		}
+
+		if ( $this->getOption( 'rebuildrc' ) ) {
+			$dbw = wfGetDB( DB_MASTER );
+			$dbw->delete(
+				'recentchanges',
+				array( 'rc_type' => 5 )
+			);
 		}
 
 		while ( !$this->done ) {
