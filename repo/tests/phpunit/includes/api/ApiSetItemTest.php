@@ -164,6 +164,27 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		$this->assertSuccess( $res, 'entity', 'lastrevid' );
 		$this->assertItemEquals( $expect, $res['entity'] );
 
+		// ---- check success of update with prefixed id --------------------------
+		$data = array( 'labels' => array(
+				"de" => array( "language" => "de", "value" => "Foo XX" ),
+				"en" => array( "language" => "en", "value" => "Bar YY" ),
+			) );
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbsetitem',
+				'reason' => 'Some other reason',
+				'data' => json_encode( array_merge( $item, $data ) ),
+				'token' => $token,
+				'id' => 'q' . $id,
+			),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+
+		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertEquals( $id, $res['entity']['id'] );
+
 		// @todo: split the below into a separate function
 		// ---- set the same item again, with with fields in the json that should be ignored-----------
 		// these sets of failing data must be merged with an existing item

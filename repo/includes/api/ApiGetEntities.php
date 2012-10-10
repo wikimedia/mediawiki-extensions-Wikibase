@@ -95,17 +95,34 @@ class ApiGetEntities extends Api {
 			$siteLinkOptions = null;
 		}
 
+		$entityFactory = EntityFactory::singleton();
+		$entityContentFactory = EntityContentFactory::singleton();
+
 		// loop over all items
 		foreach ($params['ids'] as $id) {
 
-			$itemPath = array( 'entities', $id );
 			$res = $this->getResult();
 
-			$res->addValue( $itemPath, 'id', $id );
+			try {
+				// we are not using the type, we are only trying to get it to see if it fails
+				$type = $entityFactory->getEntityTypeFromPrefixedId( $id );
+				$numId = $entityFactory->getUnprefixedId( $id );
+				$itemPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
+				$res->addValue( $itemPath, 'id', $numId );
+			}
+			catch ( \MWException $e ) {
+				$itemPath = array( 'entities', $id );
+				$res->addValue( $itemPath, 'id', $id );
+			}
 
 			// later we do a getContent but only if props are defined
 			if ( $params['props'] !== array() ) {
-				$page = EntityContentFactory::singleton()->getWikiPageForId( Item::ENTITY_TYPE, $id );
+				try {
+					$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
+				}
+				catch ( \MWException $e ) {
+					$page = $entityContentFactory->getWikiPageForId( Item::ENTITY_TYPE, $id );
+				}
 
 				if ( $page->exists() ) {
 					// as long as getWikiPageForId only returns ids for legal items this holds
@@ -160,8 +177,9 @@ class ApiGetEntities extends Api {
 				}
 			}
 		}
-		$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
-
+		if ( !$this->getUsekeys() ) {
+			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
+		}
 		$success = true;
 
 		$this->getResult()->addValue(
@@ -177,7 +195,7 @@ class ApiGetEntities extends Api {
 	public function getAllowedParams() {
 		return array_merge( parent::getAllowedParams(), array(
 			'ids' => array(
-				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sites' => array(
