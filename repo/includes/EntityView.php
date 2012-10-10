@@ -290,9 +290,11 @@ abstract class EntityView extends \ContextSource {
 
 		if( empty( $aliases ) ) {
 			// no aliases available for this entity
-			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases-empty' ) );
-			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-empty-note' ), wfMessage( 'wikibase-aliases-empty' )->text() );
+			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases wb-aliases-empty' ) );
+			$html .= Html::openElement( 'div', array( 'class' => 'wb-gridhelper' ) );
+			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label wb-value-empty' ), wfMessage( 'wikibase-aliases-empty' )->text() );
 			$html .= $this->getHtmlForEditSection( $entity, $lang, 'span', 'add' );
+			$html .= Html::closeElement( 'div' );
 			$html .= Html::closeElement( 'div' );
 		} else {
 			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );

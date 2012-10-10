@@ -186,6 +186,12 @@ label and its toolbar */
 
 /********** ALIASES **********/
 
+.wb-aliases,
+.wb-aliases-empty {
+	float: left; /* necessary for highlighting in edit mode */
+	width: 100%;
+}
+
 /* aliases exclusive helper div containing editable value and its toolbar but not the
 PropertyEditTool toolbar */
 .wb-aliases .wb-gridhelper {
@@ -193,18 +199,6 @@ PropertyEditTool toolbar */
 	padding-left: 10px;
 	padding-right: 14em;
 	position: relative;
-}
-
-.wb-aliases,
-.wb-aliases-empty {
-	float: left; /* necessary for highlighting in edit mode */
-	width: 100%;
-}
-
-.wb-aliases-empty {
-	font-size: 84%;
-	padding-left: 10px;
-	color: #A1A1A1;
 }
 
 .wb-aliases-label {
@@ -215,6 +209,10 @@ PropertyEditTool toolbar */
 	margin-top: 1px; /* even out border of alias values */
 	margin-bottom: -3px; /* IE 7 would not wrap around directly but instead leave empty space
 							underneath the label for one line in some cases */
+}
+
+.wb-aliases-empty .wb-aliases-label {
+	font-weight: normal;
 }
 
 .wb-aliases-label,
