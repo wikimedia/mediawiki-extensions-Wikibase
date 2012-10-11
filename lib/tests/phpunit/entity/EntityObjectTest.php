@@ -357,7 +357,7 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 			array( #3
 				array( 'entity' => 'x23' ),
 				array( 'entity' => 'x24' ),
-				false
+				true
 			),
 			array( #4
 				array( 'labels' => array(
