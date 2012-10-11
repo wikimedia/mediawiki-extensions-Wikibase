@@ -31,8 +31,8 @@ wb.ui.Toolbar.Group = wb.utilities.inherit( $PARENT, {
 
 	_drawToolbar: function() {
 		if( this._elem === null ) {
-			// create outer div for group only the first time
-			this._elem = $( '<div/>', {
+			// create outer span for group the first time only
+			this._elem = $( '<span/>', {
 				'class': this.UI_CLASS
 			} );
 		}

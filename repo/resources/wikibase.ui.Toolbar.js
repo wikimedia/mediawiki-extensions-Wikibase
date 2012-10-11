@@ -105,7 +105,7 @@ wb.ui.Toolbar.prototype = {
 			parent = this._elem.parent();
 			this._elem.remove(); // remove element after parent is known
 		}
-		this._elem = $( '<div/>', {
+		this._elem = $( '<span/>', {
 			'class': this.UI_CLASS + ' ' + this._additionalUiClass
 		} );
 		if( parent !== null ) { // if not known yet, appendTo() wasn't called so far
