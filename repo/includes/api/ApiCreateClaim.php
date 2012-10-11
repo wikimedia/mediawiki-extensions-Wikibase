@@ -49,21 +49,28 @@ class ApiCreateClaim extends ApiBase {
 
 		$claim = new ClaimObject( $snak );
 
+		// If the entity is an item, we create a statement rather then a claim.
 		if ( $entity->getType() === Item::ENTITY_TYPE ) {
-			$entity->addStatement( new StatementObject( $claim ) );
+			$statement = new StatementObject( $claim );
+			$entity->addStatement( $statement );
+
+			$serializer = new StatementSerializer( $this->getResult() );
+			$createdObject = $serializer->getSerialized( $statement );
 		}
 		else {
 			$entity->addClaim( $claim );
+
+			$serializer = new ClaimSerializer( $this->getResult() );
+			$createdObject = $serializer->getSerialized( $claim );
 		}
 
 		// TODO: save entity
 		// TODO: add claim reference
-		// TODO: transform claim to API output
 
 		$this->getResult()->addValue(
 			null,
 			'claim',
-			serialize( $claim )
+			$createdObject
 		);
 	}
 
