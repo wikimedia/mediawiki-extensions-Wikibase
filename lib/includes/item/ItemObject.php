@@ -375,9 +375,20 @@ class ItemObject extends EntityObject implements Item {
 	 * @return Claims
 	 */
 	public function getClaims() {
-		$claims = array(); // TODO
+		$claims = new ClaimList();
 
-		return new ClaimList( $claims );
+		$this->unstubStatements();
+
+		/**
+		 * @var Statement $statement
+		 */
+		foreach ( $this->statements as $statement ) {
+			if ( $statement->getRank() === Statement::RANK_NORMAL ) {
+				$claims->addClaim( $statement->getClaim() );
+			}
+		}
+
+		return $claims;
 	}
 
 }
