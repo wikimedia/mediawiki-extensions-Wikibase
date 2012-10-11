@@ -4,7 +4,7 @@ namespace Wikibase;
 use MWException;
 
 /**
- * API serializer for Snaks objects.
+ * API serializer for Claim objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,45 +29,29 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnaksSerializer extends ApiSerializerObject {
+class ClaimSerializer extends ApiSerializerObject {
 
 	/**
 	 * @see ApiSerializer::getSerialized
 	 *
 	 * @since 0.2
 	 *
-	 * @param mixed $snaks
+	 * @param mixed $claim
 	 *
 	 * @return array
 	 * @throws MWException
 	 */
-	public function getSerialized( $snaks ) {
-		if ( !( $snaks instanceof Snaks ) ) {
-			throw new MWException( 'SnaksSerializer can only serialize Snaks objects' );
+	public function getSerialized( $claim ) {
+		if ( !( $claim instanceof Claim ) ) {
+			throw new MWException( 'ClaimSerializer can only serialize Claim objects' );
 		}
 
-		$serialization = array();
+		$snakSerializer = new SnakSerializer( $this->getResult(), $this->options );
+		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		// FIXME: "iterator => array => iterator" is stupid
-		$snaks = new ByPropertyIdArray( iterator_to_array( $snaks ) );
-		$snaks->buildIndex();
-
-		$snakSerializer = new SnakSerializer( $this->getResult() );
-
-		$entityFactory = EntityFactory::singleton();
-
-		foreach ( $snaks->getPropertyIds() as $propertyId ) {
-			$serializedSnaks = array();
-
-			foreach ( $snaks->getByPropertyId( $propertyId ) as $snak ) {
-				$serializedSnaks[] = $snakSerializer->getSerialized( $snak );
-			}
-
-			$this->getResult()->setIndexedTagName( $serializedSnaks, 'snak' );
-
-			$propertyId = $entityFactory->getPrefixedId( Property::ENTITY_TYPE, $propertyId );
-			$serialization[$propertyId] = $serializedSnaks;
-		}
+		$qualifierSerializer = new SnakSerializer( $this->getResult(), $this->options );
+		$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $qualifierSerializer, $this->getResult(), $this->options );
+		$serialization['qualifiers'] = $snaksSerializer->getSerialized( $claim->getQualifiers() );
 
 		return $serialization;
 	}

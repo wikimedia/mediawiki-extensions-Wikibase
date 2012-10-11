@@ -46,17 +46,15 @@ class StatementSerializer extends ApiSerializerObject {
 			throw new MWException( 'StatementSerializer can only serialize Statement objects' );
 		}
 
-		$serialization = array();
+		$claimSerializer = new ClaimSerializer( $this->getResult(), $this->options );
+		$serialization = $claimSerializer->getSerialized( $statement->getClaim() );
 
-		$claim = $statement->getClaim();
+		$serialization['rank'] = $statement->getRank();
 
-		$snakSerializer = new SnakSerializer( $this->getResult(), $this->options );
-		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
+		$referenceSerializer = new SnakSerializer( $this->getResult(), $this->options );
+		$snaksSerializer = new ByPropertyListSerializer( 'reference', $referenceSerializer, $this->getResult(), $this->options );
 
-		$snaksSerializer = new SnaksSerializer( $this->getResult(), $this->options );
-		$serialization['qualifiers'] = $snaksSerializer->getSerialized( $claim->getQualifiers() );
-
-		// TODO
+		$serialization['references'] = $snaksSerializer->getSerialized( $statement->getReferences() );
 
 		return $serialization;
 	}

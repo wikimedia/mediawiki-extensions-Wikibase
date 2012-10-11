@@ -3,7 +3,7 @@
 namespace Wikibase\Test;
 
 /**
- * Tests for the Wikibase\SnaksSerializer class.
+ * Tests for the Wikibase\ClaimSerializer class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnaksSerializerTest extends ApiSerializerBaseTest {
+class ClaimSerializerTest extends ApiSerializerBaseTest {
 
 	/**
 	 * @see ApiSerializerBaseTest::getClass
@@ -42,7 +42,7 @@ class SnaksSerializerTest extends ApiSerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\SnaksSerializer';
+		return '\Wikibase\ClaimSerializer';
 	}
 
 	/**
@@ -55,39 +55,20 @@ class SnaksSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$snak0 = new \Wikibase\PropertyNoValueSnak( 42 );
-		$snak1 = new \Wikibase\PropertySomeValueSnak( 2 );
-		$snak2 = new \Wikibase\PropertyValueSnak( 2, new \DataValues\StringValue( 'ohi' ) );
+		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
-		$validArgs[] = new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) );
+		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 1 ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
 		$validArgs[] = array(
-			new \Wikibase\SnakList(),
-			array(),
-		);
-
-		$validArgs[] = array(
-			new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) ),
+			new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ),
 			array(
-				'p42' => array(
-					0 => array(
-						'snaktype' => 'novalue',
-						'property' => 'p42',
-					),
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'p42',
 				),
-				'p2' => array(
-					0 => array(
-						'snaktype' => 'somevalue',
-						'property' => 'p2',
-					),
-					1 => array(
-						'snaktype' => 'value',
-						'property' => 'p2',
-						'value' => serialize(new \DataValues\StringValue( 'ohi' )), // TODO
-					),
-				),
+				'qualifiers' => array(),
 			),
 		);
 
