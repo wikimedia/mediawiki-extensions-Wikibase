@@ -346,7 +346,58 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideEquals() {
-		return EntityObjectTest::provideEquals();
+		return array(
+			array( #0
+				array(),
+				array(),
+				true
+			),
+			array( #1
+				array( 'labels' => array() ),
+				array( 'descriptions' => null ),
+				true
+			),
+			array( #2
+				array( 'entity' => 'x23' ),
+				array(),
+				true
+			),
+			array( #3
+				array( 'entity' => 'x23' ),
+				array( 'entity' => 'x24' ),
+				false
+			),
+			array( #4
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+				array( 'labels' => array(
+					'en' => 'foo',
+				) ),
+				false
+			),
+			array( #5
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+				array( 'labels' => array(
+					'de' => 'bar',
+					'en' => 'foo',
+				) ),
+				true
+			),
+			array( #6
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO' ),
+				) ),
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO', 'xyz' ),
+				) ),
+				false
+			),
+		);
 	}
 
 	/**

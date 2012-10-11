@@ -180,6 +180,15 @@ abstract class EntityContent extends \AbstractContent {
 			return false;
 		}
 
+		$thisId = $this->getEntity()->getPrefixedId();
+		$thatId = $that->getEntity()->getPrefixedId();
+
+		if ( $thisId !== null && $thatId !== null ) {
+			if ( $thisId !== $thatId ) {
+				return false;
+			}
+		}
+
 		return $this->getEntity()->equals( $that->getEntity() );
 	}
 

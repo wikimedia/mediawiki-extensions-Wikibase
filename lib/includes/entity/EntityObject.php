@@ -414,10 +414,10 @@ abstract class EntityObject implements Entity {
 	/**
 	 * @see Comparable::equals
 	 *
-	 * Two entities are considered equal if
-	 * they have the same type, and the same content.
-	 * If both entities have an ID set, then the IDs must be equal
-	 * for the entities to be considered equal.
+	 * Tow entities are considered equal if they are of the same
+	 * type and have the same value. The value does not include
+	 * the id, so entities with the same value but different id
+	 * are considered equal.
 	 *
 	 * @since 0.1
 	 *
@@ -433,19 +433,6 @@ abstract class EntityObject implements Entity {
 		}
 
 		wfProfileIn( __METHOD__ );
-
-		/**
-		 * @var Entity $that
-		 */
-		$thisId = $this->getId();
-		$thatId = $that->getId();
-
-		if ( $thisId !== null && $thatId !== null ) {
-			if ( $thisId !== $thatId ) {
-				wfProfileOut( __METHOD__ );
-				return false;
-			}
-		}
 
 		//@todo: ignore the order of aliases
 		$thisData = $this->toArray();
