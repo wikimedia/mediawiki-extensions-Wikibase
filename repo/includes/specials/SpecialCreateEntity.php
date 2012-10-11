@@ -62,8 +62,12 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() );
 					$editEntity->attemptSave( '', EDIT_AUTOSUMMARY|EDIT_NEW, $this->getRequest()->getVal( 'token' ) );
 
+					$out = $this->getOutput();
+
 					if ( !$editEntity->isSuccess() ) {
-						$editEntity->showStatus( $this->getOutput() );
+						$out->addHTML( '<div class="error">' );
+						$out->addWikiText( $editEntity->getStatus()->getWikiText() );
+						$out->addHTML( '</div>' );
 					} elseif ( $entityContent !== null ) {
 						$entityUrl = $entityContent->getTitle()->getFullUrl();
 						$this->getOutput()->redirect( $entityUrl );

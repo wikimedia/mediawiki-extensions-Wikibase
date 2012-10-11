@@ -616,31 +616,6 @@ class EditEntity {
 	}
 
 	/**
-	 * Shows any errors or warnings from attemptSave().
-	 *
-	 * @param OutputPage $out the output object to write output to
-	 *
-	 * @return bool true if any message was shown, false if there were no errors to show.
-	 */
-	public function showStatus( OutputPage $out = null ) {
-		global $wgOut;
-
-		if ( $out === null ) {
-			$out = $wgOut;
-		}
-
-		if ( $this->status === null || $this->status->isGood() ) {
-			return false;
-		}
-
-		$text = $this->status->getMessage();
-
-		$out->addHTML( \Html::element( 'div', array( 'class' => 'error' ), $text ) );
-
-		return true;
-	}
-
-	/**
 	 * Die with an error corresponding to any errors that occurred during attemptSave(), if any.
 	 * Intended for use in API modules.
 	 *
