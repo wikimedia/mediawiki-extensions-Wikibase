@@ -332,8 +332,8 @@ abstract class EntityView extends \ContextSource {
 		EntityContent $entity, Language $lang = null, $tag = 'span', $action = 'edit', $enabled = true
 	) {
 		$html = HTML::openElement( $tag, array( 'class' => 'editsection' ) );
-		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar' ) );
-		$html .= HTML::openElement( 'div', array( 'class' => 'wb-ui-toolbar-group' ) );
+		$html .= HTML::openElement( 'span', array( 'class' => 'wb-ui-toolbar' ) );
+		$html .= HTML::openElement( 'span', array( 'class' => 'wb-ui-toolbar-group' ) );
 		$html .= '[';
 
 		// '[ button ]' button part:
@@ -346,8 +346,8 @@ abstract class EntityView extends \ContextSource {
 		);
 
 		$html .= ']';
-		$html .= Html::closeElement( 'div' );
-		$html .= Html::closeElement( 'div' );
+		$html .= Html::closeElement( 'span' );
+		$html .= Html::closeElement( 'span' );
 		$html .= Html::closeElement( $tag );
 
 		return $html;
