@@ -311,6 +311,10 @@ class TermSqlCache implements TermCache {
 	 * @return array
 	 */
 	public function getMatchingTerms( array $terms, $termType = null, $entityType = null ) {
+		if ( empty( $terms ) ) {
+			return array();
+		}
+
 		$conditions = $this->termsToConditions( $terms, $termType, $entityType );
 
 		$selectionFields = array_keys( $this->termFieldMap );
