@@ -48,20 +48,25 @@ class SnaksSerializer extends ApiSerializerObject {
 
 		$serialization = array();
 
-		$props = array(); // TODO
+		// FIXME: "iterator => array => iterator" is stupid
+		$snaks = new ByPropertyIdArray( iterator_to_array( $snaks ) );
+		$snaks->buildIndex();
 
 		$snakSerializer = new SnakSerializer( $this->getResult() );
 
-		foreach ( $props as $prop ) {
+		$entityFactory = EntityFactory::singleton();
+
+		foreach ( $snaks->getPropertyIds() as $propertyId ) {
 			$serializedSnaks = array();
 
-			foreach ( $snaks as $snak ) {
+			foreach ( $snaks->getByPropertyId( $propertyId ) as $snak ) {
 				$serializedSnaks[] = $snakSerializer->getSerialized( $snak );
 			}
 
 			$this->getResult()->setIndexedTagName( $serializedSnaks, 'snak' );
 
-			$serialization[42 /* TODO propid */] = $serializedSnaks;
+			$propertyId = $entityFactory->getPrefixedId( Property::ENTITY_TYPE, $propertyId );
+			$serialization[$propertyId] = $serializedSnaks;
 		}
 
 		return $serialization;

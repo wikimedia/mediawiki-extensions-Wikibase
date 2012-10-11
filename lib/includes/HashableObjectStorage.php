@@ -34,6 +34,21 @@ namespace Wikibase;
 class HashableObjectStorage extends \SplObjectStorage implements Hashable {
 
 	/**
+	 * Constructor.
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $objects
+	 */
+	public function __construct( array $objects = null ) {
+		if ( $objects !== null ) {
+			foreach ( $objects as $object ) {
+				$this->attach( $object );
+			}
+		}
+	}
+
+	/**
 	 * Removes duplicates bases on hash value.
 	 *
 	 * @since 0.2

@@ -56,8 +56,10 @@ class StatementsSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$statement = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
-		$statementList = new \Wikibase\StatementList( array( $statement ) );
+		$statement0 = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$statement1 = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 42 ) ) );
+		$statement2 = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 1 ) ) );
+		$statementList = new \Wikibase\StatementList( array( $statement0, $statement1, $statement2 ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
@@ -66,12 +68,39 @@ class StatementsSerializerTest extends ApiSerializerBaseTest {
 			array(),
 		);
 
-//		$validArgs[] = array(
-//			$statementList,
-//			array(
-//
-//			),
-//		);
+		$validArgs[] = array(
+			$statementList,
+			array(
+				'p42' => array(
+					0 => array(
+						'mainsnak' => array(
+							'snaktype' => 'novalue',
+							'property' => 'p42',
+						),
+						'qualifiers' => array(),
+						// TODO
+					),
+					1 => array(
+						'mainsnak' => array(
+							'snaktype' => 'somevalue',
+							'property' => 'p42',
+						),
+						'qualifiers' => array(),
+						// TODO
+					),
+				),
+				'p1' => array(
+					0 => array(
+						'mainsnak' => array(
+							'snaktype' => 'novalue',
+							'property' => 'p1',
+						),
+						'qualifiers' => array(),
+						// TODO
+					),
+				),
+			),
+		);
 
 		return $validArgs;
 	}

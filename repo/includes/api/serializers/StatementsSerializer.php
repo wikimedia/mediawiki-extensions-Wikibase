@@ -36,32 +36,37 @@ class StatementsSerializer extends ApiSerializerObject {
 	 *
 	 * @since 0.2
 	 *
-	 * @param mixed $object
+	 * @param mixed $statements
 	 *
 	 * @return array
 	 * @throws MWException
 	 */
-	public function getSerialized( $object ) {
-		if ( !( $object instanceof Statements ) ) {
+	public function getSerialized( $statements ) {
+		if ( !( $statements instanceof Statements ) ) {
 			throw new MWException( 'StatementsSerializer can only serialize Statements objects' );
 		}
 
 		$serialization = array();
 
-		$props = array(); // TODO
+		// FIXME: "iterator => array => iterator" is stupid
+		$statements = new ByPropertyIdArray( iterator_to_array( $statements ) );
+		$statements->buildIndex();
 
 		$statementSerializer = new StatementSerializer( $this->getResult(), $this->options );
 
-		foreach ( $props as $prop ) {
-			$statements = array(); // TODO
+		$entityFactory = EntityFactory::singleton();
 
-			foreach ( $statements as &$statement ) {
-				$statement = $statementSerializer->getSerialized( $statement );
+		foreach ( $statements->getPropertyIds() as $propertyId ) {
+			$serializedStatements = array();
+
+			foreach ( $statements->getByPropertyId( $propertyId ) as $statement ) {
+				$serializedStatements[] = $statementSerializer->getSerialized( $statement );
 			}
 
-			$this->getResult()->setIndexedTagName( $statements, 'statement' );
+			$this->getResult()->setIndexedTagName( $serializedStatements, 'statement' );
 
-			$serialization[42 /* TODO propid */] = $statements;
+			$propertyId = $entityFactory->getPrefixedId( Property::ENTITY_TYPE, $propertyId );
+			$serialization[$propertyId] = $serializedStatements;
 		}
 
 		$this->getResult()->setIndexedTagName( $serialization, 'property' );

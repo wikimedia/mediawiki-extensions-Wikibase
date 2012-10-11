@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 
 /**
  * Helper for doing indexed lookups of objects by property id.
@@ -44,9 +45,9 @@ class ByPropertyIdArray extends \ArrayObject {
 	/**
 	 * @since 0.2
 	 *
-	 * @var array of string|integer
+	 * @var null|array of string|integer
 	 */
-	protected $byId = array();
+	protected $byId = null;
 
 	/**
 	 * Builds the index for doing lookups by property id.
@@ -73,8 +74,13 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @since 0.2
 	 *
 	 * @return array of string|integer
+	 * @throws MWException
 	 */
 	public function getPropertyIds() {
+		if ( $this->byId === null ) {
+			throw new MWException( 'Index not build, call buildIndex first' );
+		}
+
 		return array_keys( $this->byId );
 	}
 
@@ -88,6 +94,10 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @return array of object
 	 */
 	public function getByPropertyId( $propertyId ) {
+		if ( $this->byId === null ) {
+			throw new MWException( 'Index not build, call buildIndex first' );
+		}
+
 		return $this->byId[$propertyId];
 	}
 

@@ -56,7 +56,7 @@ class SnakSerializer extends ApiSerializerObject {
 
 		if ( $snak->getType() === 'value' ) {
 			// TODO: serialize DV
-			$serialization['value'] = $snak->getDataValue();
+			$serialization['value'] = serialize($snak->getDataValue());
 		}
 
 		return $serialization;

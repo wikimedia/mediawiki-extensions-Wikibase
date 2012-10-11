@@ -77,7 +77,7 @@ class StatementAggregateTest extends \MediaWikiTestCase {
 
 		// Below code tests if the statements in the statementAggregate indeed do not get modified.
 
-		$unmodifiedStatements = serialize( $obtainedStatements );
+		$unmodifiedStatements = clone $obtainedStatements;
 
 		/**
 		 * @var Statement $statement
@@ -92,7 +92,15 @@ class StatementAggregateTest extends \MediaWikiTestCase {
 
 		$freshlyObtained = $aggregate->getStatements();
 
-		$this->assertEquals( $unmodifiedStatements, serialize( $freshlyObtained ), 'Was able to modify statements via StatementAggregate::getStatements' );
+		$this->assertArrayEquals(
+			iterator_to_array( $unmodifiedStatements ),
+			iterator_to_array( $freshlyObtained ),
+			'Was able to modify statements via StatementAggregate::getStatements'
+		);
+
+		foreach ( $freshlyObtained as $obtainedStatement ) {
+			$this->assertTrue( $unmodifiedStatements->hasStatement( $obtainedStatement ) );
+		}
 	}
 
 }
