@@ -158,4 +158,15 @@ class StatementObject implements Statement {
 		) );
 	}
 
+	/**
+	 * @see Statement::getPropertyId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getPropertyId() {
+		return $this->getClaim()->getMainSnak()->getPropertyId();
+	}
+
 }

@@ -138,4 +138,14 @@ class StatementObjectTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( '\Wikibase\Claim', $statement->getClaim() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetPropertyId( Statement $statement ) {
+		$this->assertEquals(
+			$statement->getClaim()->getMainSnak()->getPropertyId(),
+			$statement->getPropertyId()
+		);
+	}
+
 }

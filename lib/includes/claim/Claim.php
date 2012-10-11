@@ -67,4 +67,14 @@ interface Claim extends Hashable {
 	 */
 	public function setQualifiers( Snaks $propertySnaks );
 
+	/**
+	 * Returns the id of the property of the main snak.
+	 * Short for ->getMainSnak()->getPropertyId()
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getPropertyId();
+
 }

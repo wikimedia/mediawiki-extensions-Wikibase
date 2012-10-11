@@ -115,4 +115,15 @@ class ClaimObject implements Claim {
 		return sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() );
 	}
 
+	/**
+	 * @see Claim::getPropertyId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getPropertyId() {
+		return $this->getMainSnak()->getPropertyId();
+	}
+
 }
