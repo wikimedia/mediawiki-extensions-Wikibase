@@ -56,7 +56,7 @@ class SnaksSerializerTest extends ApiSerializerBaseTest {
 		$validArgs = array();
 
 		$snak0 = new \Wikibase\PropertyNoValueSnak( 42 );
-		$snak1 = new \Wikibase\PropertySomeValueSnak( 1 );
+		$snak1 = new \Wikibase\PropertySomeValueSnak( 2 );
 		$snak2 = new \Wikibase\PropertyValueSnak( 2, new \DataValues\StringValue( 'ohi' ) );
 
 		$validArgs[] = new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) );
@@ -68,12 +68,28 @@ class SnaksSerializerTest extends ApiSerializerBaseTest {
 			array(),
 		);
 
-//		$validArgs[] = array(
-//			new \Wikibase\SnakList( array( $snak0, $snak2 ) ),
-//			array(
-//
-//			),
-//		);
+		$validArgs[] = array(
+			new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) ),
+			array(
+				'p42' => array(
+					0 => array(
+						'snaktype' => 'novalue',
+						'property' => 'p42',
+					),
+				),
+				'p2' => array(
+					0 => array(
+						'snaktype' => 'somevalue',
+						'property' => 'p2',
+					),
+					1 => array(
+						'snaktype' => 'value',
+						'property' => 'p2',
+						'value' => serialize(new \DataValues\StringValue( 'ohi' )), // TODO
+					),
+				),
+			),
+		);
 
 		return $validArgs;
 	}

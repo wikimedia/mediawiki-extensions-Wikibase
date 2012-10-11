@@ -77,7 +77,7 @@ class SnakSerializerTest extends ApiSerializerBaseTest {
 			array(
 				'snaktype' => 'value',
 				'property' => 'p3',
-				'value' => new \DataValues\StringValue( 'ohi' ), // TODO
+				'value' => serialize(new \DataValues\StringValue( 'ohi' )), // TODO
 			)
 		);
 
