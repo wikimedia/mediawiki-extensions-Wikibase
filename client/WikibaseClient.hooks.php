@@ -365,8 +365,8 @@ final class ClientHooks {
 				'namespaces' => array( NS_MAIN ),
 				'source' => array( 'dir' => __DIR__ . '/tests' ),
 				// temporary hack to provide default settings
-				'repoBase' => 'https://wikidata-test-repo.wikimedia.de/wiki/',
-				'repoApi' => 'https://wikidata-test-repo.wikimedia.de/w/api.php',
+				'repoBase' => 'http://wikidata-test-repo.wikimedia.de/wiki/',
+				'repoApi' => 'http://wikidata-test-repo.wikimedia.de/w/api.php',
 				'sort' => 'code',
 				'sortPrepend' => false,
 				'alwaysSort' => true,
