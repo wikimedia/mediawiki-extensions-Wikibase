@@ -205,7 +205,7 @@ class ItemView extends EntityView {
 
 		$html .= Html::closeElement( 'table' );
 
-		return $html . Html::closeElement( 'div' ); // close .wb-item
+		return $html;
 	}
 
 }
