@@ -622,7 +622,7 @@ class EditEntity {
 	 *
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
-	public function showStatus( OutputPage $out = null ) {
+	protected function showStatus( OutputPage $out = null ) {
 		global $wgOut;
 
 		if ( $out === null ) {
