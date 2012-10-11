@@ -112,6 +112,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 *
 	 * @since 0.1
 	 *
+	 * @param \Wikibase\EntityContent &$entity
+	 *
 	 * @return Status
 	 */
 	protected function modifyEntity( \Wikibase\EntityContent &$entity ) {
@@ -178,8 +180,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $label initial value for the label input box
-	 * @param string $description initial value for the description input box
+	 * @param string|null $legend initial value for the label input box
+	 * @param string $additionalHtml initial value for the description input box
 	 */
 	public function createForm( $legend = null, $additionalHtml = '' ) {
 		$this->getOutput()->addHTML(

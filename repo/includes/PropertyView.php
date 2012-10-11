@@ -24,6 +24,8 @@ class PropertyView extends EntityView {
 	 * @see EntityView::getInnerHtml
 	 *
 	 * @param PropertyContent $property
+	 *
+	 * @return string
 	 */
 	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true ) {
 		$html = parent::getInnerHtml( $property, $lang, $editable );

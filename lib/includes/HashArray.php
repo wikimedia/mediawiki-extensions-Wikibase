@@ -44,14 +44,11 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 	 * @since 0.1
 	 *
 	 * @param int|string $index
-	 * @param mixed $snak
+	 * @param Hashable $hashable
 	 *
 	 * @return boolean
 	 */
 	protected function preSetElement( $index, $hashable ) {
-		/**
-		 * @var Hashable $hashable
-		 */
 		$hash = $hashable->getHash();
 
 		if ( $this->hasElementHash( $hash ) ) {

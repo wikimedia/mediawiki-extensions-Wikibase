@@ -32,8 +32,6 @@ abstract class ViewEntityAction extends \ViewAction {
 	/**
 	 * Returns the content of the page being viewed.
 	 *
-	 * @param \Article $article
-	 *
 	 * @return EntityContent|null
 	 */
 	protected function getContent() {

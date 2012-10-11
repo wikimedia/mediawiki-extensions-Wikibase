@@ -62,6 +62,8 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	 * @since 0.1
 	 *
 	 * @param string $serialized
+	 *
+	 * @return PropertySnak
 	 */
 	public function unserialize( $serialized ) {
 		$this->propertyId = unserialize( $serialized );
