@@ -112,13 +112,13 @@ final class LibHooks {
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
-	 * @since 0.1
+	 * @since 0.2 (as registerUnitTests in 0.1)
 	 *
 	 * @param array $files
 	 *
 	 * @return boolean
 	 */
-	public static function registerUnitTests( array &$files ) {
+	public static function registerPhpUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'changes/DiffChange',
@@ -186,4 +186,67 @@ final class LibHooks {
 		// @codeCoverageIgnoreEnd
 	}
 
+	/**
+	 * Add new javascript testing modules. This is called after the addition of MediaWiki core test suites.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
+	 *
+	 * @since 0.2 (in repo as RepoHooks::onResourceLoaderTestModules in 0.1)
+	 *
+	 * @param array &$testModules
+	 * @param \ResourceLoader &$resourceLoader
+	 *
+	 * @return boolean
+	 */
+	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
+		$testModules['qunit']['wikibase.tests'] = array(
+			'scripts' => array(
+				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/wikibase.Site.tests.js',
+				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
+				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
+				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
+				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableAliases.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
+				'tests/qunit/wikibase.ui.Tooltip.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.inherit.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.tests.js'
+			),
+			'dependencies' => array(
+				'wikibase.tests.qunit.testrunner',
+				'wikibase',
+				'wikibase.utilities',
+				'wikibase.utilities.jQuery',
+				'wikibase.ui.Toolbar',
+				'wikibase.ui.PropertyEditTool'
+			),
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'Wikibase/lib',
+		);
+
+		return true;
+	}
 }

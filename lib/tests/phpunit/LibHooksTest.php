@@ -29,7 +29,7 @@ class LibHooksTest extends \MediaWikiTestCase {
 	public function testRegisterUnitTests() {
 		$files = array();
 
-		$this->assertTrue( LibHooks::registerUnitTests( $files ) );
+		$this->assertTrue( LibHooks::registerPhpUnitTests( $files ) );
 
 		$this->assertTrue( count( $files ) > 0 );
 	}

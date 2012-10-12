@@ -200,12 +200,15 @@ $wgDataTypes['wikibase-item'] = array(
 // Hooks
 $wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';
 $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\LibHooks::onSchemaUpdate';
-$wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerUnitTests';
+$wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';
+$wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTests';
+
+
+// Resource Loader Modules:
+$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
 
 $wgWBSettings = array();
-
-
 
 
 $wgSiteTypes = array();
@@ -222,3 +225,5 @@ $wgAutoloadClasses['SitePathsObject'] 		= $dir . 'includes/site/SitePathsObject.
 $wgAutoloadClasses['Sites'] 				= $dir . 'includes/site/Sites.php';
 $wgAutoloadClasses['SitesTable'] 			= $dir . 'includes/site/SitesTable.php';
 $wgAutoloadClasses['MediaWikiSite'] 		= $dir . 'includes/site/MediaWikiSite.php';
+
+unset( $dir );
