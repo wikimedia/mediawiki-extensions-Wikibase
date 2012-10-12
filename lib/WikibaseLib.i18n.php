@@ -144,6 +144,10 @@ $messages['ia'] = array(
  */
 $messages['is'] = array(
 	'wikibaselib-desc' => 'Inniheldur almenna virkni fyrir Wikibase og Wikibase Client.',
+	'wikibaselib-entity-item' => 'hlutur',
+	'wikibaselib-entity-property' => 'eiginleiki',
+	'wikibaselib-entity-query' => 'fyrirspurn',
+	'datatypes-type-wikibase-item' => 'Hlutur',
 );
 
 /** Italian (italiano)
