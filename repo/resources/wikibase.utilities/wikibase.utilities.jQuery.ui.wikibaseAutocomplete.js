@@ -16,9 +16,9 @@
 	 * This widget adds a few enhancements to jquery.ui.autocomplete, e.g. adding a scrollbar when a
 	 * certain number of items is listed in the suggestion list, highlighting matching characters
 	 * in the suggestions and dealing with language direction.
-	 * Specifying 'url' and 'ajaxParams' parameters will trigger using a custom function to handle
-	 * the server response (_handleResponse()). Alternatively, an array may be passed as source or
-	 * a completely custom function - both is covered by native jquery.ui.autocomplete
+	 * Specifying 'ajax.url' and 'ajax.params' parameters will trigger using a custom function to
+	 * handle the server response (_handleResponse()). Alternatively, an array may be passed as
+	 * source or a completely custom function - both is covered by native jquery.ui.autocomplete
 	 * functionality.
 	 * See jquery.ui.autocomplete for further documentation - just listing additional options here.
 	 *
@@ -26,8 +26,10 @@
 	 * @desc Creates a simple auto-completion input element passing an array as result set.
 	 *
 	 * @example $( 'input' ).wikibaseAutocomplete( {
-	 *   url: <url>,
-	 *   ajaxParams: { <additional parameters> },
+	 *   ajax: {
+	 *     url: <url>,
+	 *     params: { <additional parameters> }
+	 *   }
 	 * } );
 	 * @desc Creates an auto-completion input element fetching suggestions via AJAX.
 	 *
@@ -35,15 +37,15 @@
 	 *         the suggestion list will be made scrollable.
 	 *         Default value: 10
 	 *
-	 * @option url {String} (optional) URL to fetch suggestions from (if these shall be queried via
-	 *         AJAX)
+	 * @option ajax.url {String} (optional) URL to fetch suggestions from (if these shall be queried
+	 *         via AJAX)
 	 *         Default value: null
 	 *
-	 * @option ajaxParams {Object} (optional) Additional AJAX parameters (if suggestions shall be
+	 * @option ajax.params {Object} (optional) Additional AJAX parameters (if suggestions shall be
 	 *         retrievend via AJAX)
 	 *         Default value: null
 	 *
-	 * @option timeout {Integer} (optional) AJAX timeout in milliseconds.
+	 * @option ajax.timeout {Integer} (optional) AJAX timeout in milliseconds.
 	 *         Default value: 8000
 	 */
 	$.widget( 'wb.autocomplete', $.ui.autocomplete, {
@@ -51,9 +53,11 @@
 		// additional options
 		options: {
 			maxItems: 10,
-			url: null,
-			ajaxParams: null,
-			timeout: 8000
+			ajax: {
+				url: null,
+				params: null,
+				timeout: 8000
+			}
 		},
 
 		/**
@@ -66,7 +70,7 @@
 		 * @see jquery.ui.autocomplete._create
 		 */
 		_create: function() {
-			if ( this.options.source === null && this.options.ajaxParams !== null ) {
+			if ( this.options.source === null && this.options.ajax.params !== null ) {
 				this.options.source = this._handleResponse;
 			}
 
@@ -103,10 +107,10 @@
 		 */
 		_handleResponse: function( request, suggest ) {
 			$.ajax( {
-				url: this.options.url,
+				url: this.options.ajax.url,
 				dataType: 'jsonp',
-				data:  $.extend( {}, this.options.ajaxParams, { 'search': request.term } ),
-				timeout: this.options.timeout,
+				data:  $.extend( {}, this.options.ajax.params, { 'search': request.term } ),
+				timeout: this.options.ajax.timeout,
 				success: $.proxy( function( response ) {
 					if ( response[0] === this.element.val() ) {
 						suggest( response[1] ); // pass array of returned values to callback

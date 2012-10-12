@@ -43,8 +43,10 @@ wb.ui.PropertyEditTool.EditableValue.AutocompleteInterface = wb.utilities.inheri
 
 		// extend input element with autocomplete
 		inputElement.wikibaseAutocomplete( {
-			url: this.url,
-			ajaxParams: this.ajaxParams,
+			ajax: {
+				url: this.url,
+				params: this.ajaxParams
+			},
 			source: ( this.ajaxParams === null ) ? this._currentResults : null
 		} );
 

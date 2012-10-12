@@ -57,7 +57,7 @@ wb.ui.PropertyEditTool.EditableValue.SitePageInterface = wb.utilities.inherit( $
 
 		this.url = site.getApi();
 		if ( this._inputElem !== null ) { // notify widget (if it exists already) of url change
-			this._inputElem.data( 'wikibaseAutocomplete' ).options.url = site.getApi();
+			this._inputElem.data( 'wikibaseAutocomplete' ).options.ajax.url = site.getApi();
 		}
 		this._site = site;
 
