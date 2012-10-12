@@ -189,7 +189,7 @@ abstract class EntityView extends \ContextSource {
 		$pout->addModuleStyles( array( 'wikibase.common' ) );
 
 		// make sure required client sided resources will be loaded:
-		$pout->addModules( 'wikibase.ui.PropertyEditTool' );
+		$pout->addModules( 'wikibase.ui.entityViewInit' );
 
 		//FIXME: some places, like Special:CreateItem, don't want to override the page title.
 		//       But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
