@@ -60,6 +60,13 @@ $messages['de'] = array(
 	'version-datavalues' => 'Datenwerte',
 );
 
+/** Zazaki (Zazaki)
+ * @author Erdemaslancan
+ */
+$messages['diq'] = array(
+	'version-datavalues' => 'ErcaMalumat',
+);
+
 /** Spanish (español)
  * @author Armando-Martin
  */
