@@ -45,7 +45,7 @@ class StatementObjectTest extends \MediaWikiTestCase {
 	public function instanceProvider() {
 		$instances = array();
 
-		$baseInstance = new StatementObject( new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$baseInstance = new StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
 		$instances[] = $baseInstance;
 
@@ -125,17 +125,8 @@ class StatementObjectTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testSetClaim( Statement $statement ) {
-		$claim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 50 ) );
-		$statement->setClaim( $claim );
-		$this->assertEquals( $claim, $statement->getClaim() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetClaim( Statement $statement ) {
-		$this->assertInstanceOf( '\Wikibase\Claim', $statement->getClaim() );
+	public function testIsClaim( Statement $statement ) {
+		$this->assertInstanceOf( '\Wikibase\Claim', $statement );
 	}
 
 	/**
@@ -143,7 +134,7 @@ class StatementObjectTest extends \MediaWikiTestCase {
 	 */
 	public function testGetPropertyId( Statement $statement ) {
 		$this->assertEquals(
-			$statement->getClaim()->getMainSnak()->getPropertyId(),
+			$statement->getMainSnak()->getPropertyId(),
 			$statement->getPropertyId()
 		);
 	}

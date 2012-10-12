@@ -383,9 +383,9 @@ class ItemObject extends EntityObject implements Item {
 		 * @var Statement $statement
 		 */
 		foreach ( $this->statements as $statement ) {
-			if ( $statement->getRank() === Statement::RANK_NORMAL ) {
-				$claims->addClaim( $statement->getClaim() );
-			}
+			//if ( $statement->getRank() === Statement::RANK_NORMAL ) {
+			$claims->addClaim( $statement );
+			//}
 		}
 
 		return $claims;

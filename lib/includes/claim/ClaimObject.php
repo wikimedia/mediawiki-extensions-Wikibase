@@ -48,6 +48,13 @@ class ClaimObject implements Claim {
 	protected $qualifiers;
 
 	/**
+	 * @since 0.2
+	 *
+	 * @var string
+	 */
+	protected $guid;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
@@ -58,6 +65,7 @@ class ClaimObject implements Claim {
 	public function __construct( Snak $mainSnak, Snaks $qualifiers = null ) {
 		$this->mainSnak = $mainSnak;
 		$this->qualifiers = $qualifiers === null ? new SnakList() : $qualifiers;
+		$this->guid = Utils::getGuid();
 	}
 
 	/**
@@ -105,7 +113,7 @@ class ClaimObject implements Claim {
 	}
 
 	/**
-	 * @see Claim::getHash
+	 * @see Hashable::getHash
 	 *
 	 * @since 0.1
 	 *
@@ -124,6 +132,17 @@ class ClaimObject implements Claim {
 	 */
 	public function getPropertyId() {
 		return $this->getMainSnak()->getPropertyId();
+	}
+
+	/**
+	 * @see Claim::getGuid
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getGuid() {
+		return $this->guid;
 	}
 
 }

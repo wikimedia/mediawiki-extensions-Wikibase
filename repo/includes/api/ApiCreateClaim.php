@@ -47,30 +47,23 @@ class ApiCreateClaim extends ApiBase {
 
 		$snak = $this->getSnakInstance();
 
-		$claim = new ClaimObject( $snak );
+		$class = $entity->getType() === Item::ENTITY_TYPE ? 'Wikibase\StatementObject' : 'Wikibase\ClaimObject';
 
-		// If the entity is an item, we create a statement rather then a claim.
-		if ( $entity->getType() === Item::ENTITY_TYPE ) {
-			$statement = new StatementObject( $claim );
-			$entity->addStatement( $statement );
+		/**
+		 * @var Claim $claim
+		 */
+		$claim = new $class( $snak );
 
-			$serializer = new StatementSerializer( $this->getResult() );
-			$createdObject = $serializer->getSerialized( $statement );
-		}
-		else {
-			$entity->addClaim( $claim );
-
-			$serializer = new ClaimSerializer( $this->getResult() );
-			$createdObject = $serializer->getSerialized( $claim );
-		}
+		$serializer = new ClaimSerializer( $this->getResult() );
+		$serializedClaim = $serializer->getSerialized( $claim );
 
 		// TODO: save entity
-		// TODO: add claim reference
+		// TODO: add claim reference: $claim->getGuid()
 
 		$this->getResult()->addValue(
 			null,
 			'claim',
-			$createdObject
+			$serializedClaim
 		);
 	}
 

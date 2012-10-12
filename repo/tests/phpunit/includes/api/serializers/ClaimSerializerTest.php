@@ -72,6 +72,21 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 			),
 		);
 
+		$statement = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 2 ) );
+
+		$validArgs[] = array(
+			$statement,
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'p2',
+				),
+				'qualifiers' => array(),
+				'references' => array(),
+				'rank' => $statement->getRank(),
+			),
+		);
+
 		return $validArgs;
 	}
 

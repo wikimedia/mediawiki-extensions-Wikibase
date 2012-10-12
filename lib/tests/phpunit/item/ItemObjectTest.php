@@ -176,7 +176,7 @@ class ItemObjectTest extends EntityObjectTest {
 		 * @var Item $item;
 		 */
 		$item = $item->copy();
-		$item->addStatement( new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+		$item->addStatement( new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
 		$items[] = $item;
 
 		return $this->arrayWrap( $items );
@@ -205,12 +205,12 @@ class ItemObjectTest extends EntityObjectTest {
 
 		$statements = $item->getStatements();
 
-		$statements = array_filter(
-			iterator_to_array( $statements ),
-			function( Statement $statement ) {
-				return $statement->getRank() === Statement::RANK_NORMAL;
-			}
-		);
+//		$statements = array_filter(
+//			iterator_to_array( $statements ),
+//			function( Statement $statement ) {
+//				return $statement->getRank() === Statement::RANK_NORMAL;
+//			}
+//		);
 
 		$this->assertEquals(
 			count( $statements ),
@@ -222,7 +222,7 @@ class ItemObjectTest extends EntityObjectTest {
 		 * @var Statement $statement
 		 */
 		foreach ( $statements as $statement ) {
-			$this->assertTrue( $claims->hasClaim( $statement->getClaim() ) );
+			$this->assertTrue( $claims->hasClaim( $statement ) );
 		}
 	}
 

@@ -77,4 +77,13 @@ interface Claim extends Hashable {
 	 */
 	public function getPropertyId();
 
+	/**
+	 * Returns the GUID of the Claim.
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getGuid();
+
 }

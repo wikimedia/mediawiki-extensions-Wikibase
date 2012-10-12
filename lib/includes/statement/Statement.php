@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Statement extends Hashable {
+interface Statement extends Claim {
 
 	/**
 	 * Rank enum. Higher values are more preferred.
@@ -77,24 +77,6 @@ interface Statement extends Hashable {
 	 * @return integer
 	 */
 	public function getRank();
-
-	/**
-	 * Returns the claim of the statement.
-	 *
-	 * @since 0.1
-	 *
-	 * @return Claim
-	 */
-	public function getClaim();
-
-	/**
-	 * Sets the claim of the statement.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Claim $claim
-	 */
-	public function setClaim( Claim $claim );
 
 	/**
 	 * Returns the id of the property of the main snak of the claim.

@@ -29,14 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementObject implements Statement {
-
-	/**
-	 * @since 0.1
-	 *
-	 * @var Claim
-	 */
-	protected $claim;
+class StatementObject extends ClaimObject implements Statement {
 
 	/**
 	 * @since 0.1
@@ -57,11 +50,12 @@ class StatementObject implements Statement {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Claim $claim
+	 * @param Snak $mainSnak
+	 * @param Snaks|null $qualifiers
 	 * @param References|null $references
 	 */
-	public function __construct( Claim $claim, References $references = null ) {
-		$this->claim = $claim;
+	public function __construct( Snak $mainSnak, Snaks $qualifiers = null, References $references = null ) {
+		parent::__construct( $mainSnak, $qualifiers );
 		$this->references = $references === null ? new ReferenceList() : $references;
 	}
 
@@ -117,31 +111,6 @@ class StatementObject implements Statement {
 	}
 
 	/**
-	 * @see Statement::getClaim
-	 *
-	 * @since 0.1
-	 *
-	 * @return Claim
-	 */
-	public function getClaim() {
-		return $this->claim;
-	}
-
-	/**
-	 * @see Statement::setClaim
-	 *
-	 * @since 0.1
-	 *
-	 * @param Claim $claim
-	 */
-	public function setClaim( Claim $claim ) {
-		$this->claim = $claim;
-	}
-
-	/**
-	 * The hash generated here is globally unique, so can be used to
-	 * identity the statement without further context.
-	 *
 	 * @see Hashable::getHash
 	 *
 	 * @since 0.1
@@ -152,21 +121,11 @@ class StatementObject implements Statement {
 		return sha1( implode(
 			'|',
 			array(
-				$this->claim->getHash(),
+				parent::getHash(),
+				$this->rank,
 				$this->references->getHash(),
 			)
 		) );
-	}
-
-	/**
-	 * @see Statement::getPropertyId
-	 *
-	 * @since 0.2
-	 *
-	 * @return integer
-	 */
-	public function getPropertyId() {
-		return $this->getClaim()->getMainSnak()->getPropertyId();
 	}
 
 }
