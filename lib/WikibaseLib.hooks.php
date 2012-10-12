@@ -141,6 +141,8 @@ final class LibHooks {
 			'SiteLink',
 			'StatementObject',
 			'Utils',
+
+			'store/SiteLinkLookup',
 		);
 
 		// Test compat
