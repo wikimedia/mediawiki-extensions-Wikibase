@@ -141,13 +141,6 @@ final class LibHooks {
 			'SiteLink',
 			'StatementObject',
 			'Utils',
-
-			'site/MediaWikiSite',
-			'site/SiteList',
-			'site/SiteObject',
-			'site/Sites',
-
-			'store/SiteLinkLookup',
 		);
 
 		// Test compat
