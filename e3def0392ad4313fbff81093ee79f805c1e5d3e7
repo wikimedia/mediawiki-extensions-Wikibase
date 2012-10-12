@@ -16,6 +16,24 @@
       "revId": "e3def0392ad4313fbff81093ee79f805c1e5d3e7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABDX////Q\u003d",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-12T17:29:52Z",
+      "side": 1,
+      "message": "This is not the style guide. Either way, this ternary no longer exists since I removed it in a follow up commit",
+      "parentUuid": "AAABDX////Y\u003d",
+      "revId": "e3def0392ad4313fbff81093ee79f805c1e5d3e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
