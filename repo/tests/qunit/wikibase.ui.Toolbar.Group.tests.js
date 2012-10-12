@@ -9,54 +9,49 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
 
+( function( mw, wb, $, QUnit ) {
+	'use strict';
 
-( function() {
-	module( 'wikibase.ui.Toolbar.Group', window.QUnit.newWbEnvironment( {
+	QUnit.module( 'wikibase.ui.Toolbar.Group', QUnit.newWbEnvironment( {
 		setup: function() {
-			this.subject = new window.wikibase.ui.Toolbar.Group();
-
-			ok(
-				this.subject instanceof window.wikibase.ui.Toolbar.Group,
-				'instantiated group'
-			);
-
+			this.subject = new wb.ui.Toolbar.Group();
 		},
-		teardown: function() {
-			this.subject.destroy();
-
-			equal(
-				this.subject._elem,
-				null
-			);
-
-			this.subject = null;
-		}
+		teardown: function() {}
 	} ) );
 
+	QUnit.test( 'basic', function( assert ) {
 
-	test( 'basic', function() {
+		assert.ok(
+			this.subject instanceof wb.ui.Toolbar.Group,
+			'instantiated group'
+		);
 
-		equal(
+		assert.equal(
 			this.subject._elem.length,
 			1,
 			'created DOM structure'
 		);
 
-		equal(
+		assert.equal(
 			this.subject._elem[0].nodeName,
-			'DIV',
-			'child element is a DIV'
+			'SPAN',
+			'child element is a SPAN'
 		);
 
-		equal(
+		assert.equal(
 			this.subject.renderItemSeparators,
 			true,
 			'render item separators'
 		);
 
+		this.subject.destroy();
+
+		assert.equal(
+			this.subject._elem,
+			null
+		);
+
 	} );
 
-
-}() );
+}( mediaWiki, wikibase, jQuery, QUnit ) );
