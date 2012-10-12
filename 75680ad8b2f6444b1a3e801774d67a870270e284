@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABC3///98\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-12T13:56:46Z",
+      "side": 1,
+      "message": "* default missing for $attribs.\n* what happens if $target is FALSE?",
+      "revId": "75680ad8b2f6444b1a3e801774d67a870270e284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABC3///90\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-12T13:56:46Z",
+      "side": 1,
+      "message": "\"/\" is missing for the URL. e.g.\nhttp://localhost/mediawiki/index.phpQ1201",
+      "revId": "75680ad8b2f6444b1a3e801774d67a870270e284",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
