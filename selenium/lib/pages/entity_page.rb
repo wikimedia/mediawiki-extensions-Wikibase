@@ -48,6 +48,9 @@ class EntityPage < RubySelenium
   # edit-tab
   list_item(:editTab, :id => "ca-edit")
 
+  # spinner
+  div(:entitySpinner, :xpath => "//div[contains(@class, 'wb-entity-spinner')]")
+
   # tooltips & error tooltips
   div(:wbTooltip, :class => "tipsy-inner")
   div(:wbErrorDiv, :class => "wb-tooltip-error-top-message")
@@ -66,7 +69,7 @@ class EntityPage < RubySelenium
 
   def wait_for_entity_to_load
     wait_until do
-      uiPropertyEdittool_element.visible?
+      entitySpinner? == false
     end
   end
 
