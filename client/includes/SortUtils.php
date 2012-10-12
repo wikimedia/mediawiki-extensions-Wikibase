@@ -72,10 +72,10 @@ class SortUtils {
 	 *
 	 * @since 0.1
 	 *
-	 * @param --- $a
-	 * @param --- $b
+	 * @param mixed $a
+	 * @param mixed $b
 	 *
-	 * @return ---
+	 * @return integer
 	 */
 	protected static function compareLinks( $a, $b ) {
 		$a = $a[0];

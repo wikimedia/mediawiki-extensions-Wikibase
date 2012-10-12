@@ -74,8 +74,8 @@ class SpecialItemByTitle extends SpecialItemResolver {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string|null $site
-	 * @param string|null $page
+	 * @param string $siteId
+	 * @param string $page
 	 */
 	protected function switchForm( $siteId, $page ) {
 

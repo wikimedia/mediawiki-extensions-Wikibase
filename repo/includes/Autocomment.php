@@ -161,7 +161,8 @@ final class Autocomment {
 	 * @since 0.1
 	 *
 	 * @param array $parts parts to be stringed together
-	 * @param \Language $lang fallback for the language if its not set
+	 * @param \Language|boolean $lang fallback for the language if its not set
+	 *
 	 * @return array of counts, an escaped string and the identified language
 	 */
 	public static function formatAutoSummary( array $parts, $lang = false ) {
@@ -193,6 +194,7 @@ final class Autocomment {
 	 * @param string $comment initial part to go in a comment
 	 * @param string $summary final part that is a easilly trucable string
 	 * @param int $length total length of the string
+	 *
 	 * @return string to be used for the summary
 	 */
 	public static function formatTotalSummary( $comment, $summary, $lang = false, $length = SUMMARY_MAX_LENGTH ) {
