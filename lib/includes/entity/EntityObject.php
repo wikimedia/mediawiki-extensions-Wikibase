@@ -69,18 +69,8 @@ abstract class EntityObject implements Entity {
 	 * @return array
 	 */
 	public function toArray() {
-		$data = $this->data;
-
-		if ( is_null( $this->getId() ) ) {
-			if ( array_key_exists( 'entity', $data ) ) {
-				unset( $data['entity'] );
-			}
-		}
-		else {
-			$data['entity'] = $this->getIdPrefix() . $this->getId();
-		}
-
-		return $data;
+		$this->stub();
+		return $this->data;
 	}
 
 	/**
@@ -421,14 +411,16 @@ abstract class EntityObject implements Entity {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean true of $that this equals to $this.
+	 * @param mixed $that
+	 *
+	 * @return boolean
 	 */
 	public function equals( $that ) {
 		if ( $that === $this ) {
 			return true;
 		}
 
-		if ( get_class( $this ) !== get_class( $that ) ) {
+		if ( !is_object( $that ) || ( get_class( $this ) !== get_class( $that ) ) ) {
 			return false;
 		}
 
@@ -498,7 +490,16 @@ abstract class EntityObject implements Entity {
 	 * @since 0.2
 	 */
 	public function stub() {
-		// stub :D
+		$data = $this->data;
+
+		if ( is_null( $this->getId() ) ) {
+			if ( array_key_exists( 'entity', $data ) ) {
+				unset( $data['entity'] );
+			}
+		}
+		else {
+			$data['entity'] = $this->getIdPrefix() . $this->getId();
+		}
 	}
 
 }

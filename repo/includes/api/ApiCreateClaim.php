@@ -39,32 +39,75 @@ class ApiCreateClaim extends ApiBase {
 	public function execute() {
 		$this->checkParameterRequirements();
 
-		$entity = $this->getEntity();
+		$claim = $this->addClaim();
 
-		if ( $entity === null ) {
+		$serializer = new ClaimSerializer( $this->getResult() );
+		$serializedClaim = $serializer->getSerialized( $claim );
+
+		$this->getResult()->addValue(
+			'claims',
+			$claim->getGuid(),
+			$serializedClaim
+		);
+	}
+
+	/**
+	 * Constructs a new Claim based on the arguments provided to the API,
+	 * adds it to the Entity and saves it.
+	 *
+	 * On success, the added Claim is returned. Else null is returned.
+	 *
+	 * @since 0.2
+	 *
+	 * @return Claim|null
+	 * @throws MWException
+	 */
+	protected function addClaim() {
+		$entityContent = $this->getEntityContent();
+		$entity = $entityContent->getEntity();
+
+		if ( $entityContent === null ) {
 			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
 		}
 
 		$snak = $this->getSnakInstance();
 
-		$class = $entity->getType() === Item::ENTITY_TYPE ? 'Wikibase\StatementObject' : 'Wikibase\ClaimObject';
+		$isStatement = false;
+
+		if ( $entity instanceof StatementListAccess ) {
+			$class = 'Wikibase\StatementObject';
+			$isStatement = true;
+		}
+		elseif ( $entity instanceof ClaimListAccess ) {
+			$class = 'Wikibase\ClaimObject';
+		}
+		else {
+			throw new MWException( 'Entity does not support adding Claim objects' );
+		}
 
 		/**
 		 * @var Claim $claim
 		 */
 		$claim = new $class( $snak );
 
-		$serializer = new ClaimSerializer( $this->getResult() );
-		$serializedClaim = $serializer->getSerialized( $claim );
+		if ( $isStatement ) {
+			$entity->addStatement( $claim );
+		}
+		else {
+			$entity->addClaim( $claim );
+		}
 
-		// TODO: save entity
-		// TODO: add claim reference: $claim->getGuid()
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
+		$editEntity = new EditEntity( $entityContent, $this->getUser(), $baseRevisionId );
 
-		$this->getResult()->addValue(
-			null,
-			'claim',
-			$serializedClaim
+		$status = $editEntity->attemptSave(
+			Autocomment::formatTotalSummary( '', '', $this->getLanguage() ),
+			EDIT_UPDATE,
+			isset( $params['token'] ) ? $params['token'] : false
 		);
+
+		return $claim;
 	}
 
 	/**
@@ -93,14 +136,14 @@ class ApiCreateClaim extends ApiBase {
 	/**
 	 * @since 0.2
 	 *
-	 * @return Entity|null
+	 * @return EntityContent|null
 	 */
-	protected function getEntity() {
+	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
 		$entityContent = EntityContentFactory::singleton()->getFromPrefixedId( $params['entity'] );
 
-		return $entityContent === null ? null : $entityContent->getEntity();
+		return $entityContent === null ? null : $entityContent;
 	}
 
 	/**
@@ -175,6 +218,10 @@ class ApiCreateClaim extends ApiBase {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => false,
 			),
+			'token' => null,
+			'baserevid' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+			),
 		);
 	}
 
@@ -191,6 +238,10 @@ class ApiCreateClaim extends ApiBase {
 			'property' => 'Id of the property when creating a claim with a snak consisting of a property',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
 			'snaktype' => 'The type of the snak',
+			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
+			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
+				"This is used for detecting conflicts during save."
+			),
 		);
 	}
 

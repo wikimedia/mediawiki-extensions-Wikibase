@@ -425,7 +425,7 @@ abstract class ApiModifyEntity extends Api {
 	 */
 	protected function getParamDescriptionForEntity() {
 		return array(
-			'baserevid' => array( 'The numeric identifier for the revision.',
+			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
 			),
 			'summary' => array( 'Summary for the edit.',
