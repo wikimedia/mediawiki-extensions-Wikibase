@@ -404,7 +404,7 @@ abstract class EntityObject implements Entity {
 	/**
 	 * @see Comparable::equals
 	 *
-	 * Tow entities are considered equal if they are of the same
+	 * Two entities are considered equal if they are of the same
 	 * type and have the same value. The value does not include
 	 * the id, so entities with the same value but different id
 	 * are considered equal.
