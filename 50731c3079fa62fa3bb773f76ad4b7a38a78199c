@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABDX////8\u003d",
+        "filename": "lib/includes/item/ItemObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-12T17:18:56Z",
+      "side": 1,
+      "message": "should that not be PREFERRED or else !\u003d\u003d DEPRECATED?",
+      "revId": "50731c3079fa62fa3bb773f76ad4b7a38a78199c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
