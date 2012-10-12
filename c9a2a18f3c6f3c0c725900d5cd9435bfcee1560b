@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABDX///88\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-12T17:48:05Z",
+      "side": 1,
+      "message": "Should use getPrefixedId (in a follow up)",
+      "revId": "c9a2a18f3c6f3c0c725900d5cd9435bfcee1560b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
