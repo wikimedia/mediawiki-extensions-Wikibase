@@ -16,6 +16,91 @@
       "revId": "3cf9e7835a0e7803d1879e57b13dc68c830e4e3e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABDn///+Q\u003d",
+        "filename": "importProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-12T18:29:05Z",
+      "side": 1,
+      "message": "Hmm, I haven\u0027t seen exception included before, is it not working without?",
+      "revId": "3cf9e7835a0e7803d1879e57b13dc68c830e4e3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABDn///+I\u003d",
+        "filename": "importProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-12T18:29:05Z",
+      "side": 1,
+      "message": "Don\u0027t all maintenance scripts have --quiet option, can\u0027t it be used?\n\nSpace",
+      "revId": "3cf9e7835a0e7803d1879e57b13dc68c830e4e3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABDn///9k\u003d",
+        "filename": "importProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-12T18:29:05Z",
+      "side": 1,
+      "message": "You are overwriting the existing value here, is it intentional?",
+      "revId": "3cf9e7835a0e7803d1879e57b13dc68c830e4e3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABDn///9o\u003d",
+        "filename": "importProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-12T18:29:05Z",
+      "side": 1,
+      "message": "Variable is always defined, use \u003d\u003d\u003d array()",
+      "revId": "3cf9e7835a0e7803d1879e57b13dc68c830e4e3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABDn///9s\u003d",
+        "filename": "importProperties.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-12T18:29:05Z",
+      "side": 1,
+      "message": "Some spaces here used for indentation.",
+      "revId": "3cf9e7835a0e7803d1879e57b13dc68c830e4e3e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
