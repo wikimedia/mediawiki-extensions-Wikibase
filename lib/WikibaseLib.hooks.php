@@ -166,11 +166,6 @@ final class LibHooks {
 			'MapValueHasher',
 			'SiteLink',
 			'Utils',
-
-			'site/MediaWikiSite',
-			'site/SiteList',
-			'site/SiteObject',
-			'site/Sites',
 		);
 
 		// Test compat
