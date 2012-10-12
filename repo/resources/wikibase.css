@@ -408,4 +408,9 @@ span.wb-itemlink-id { /* item id within a link to an item (especially on special
 	margin-top: 2em;
 }
 
+.wb-propertypage .wb-datatype span {
+	display: inline;
+	margin-right: .3em;
+}
+
 /********** /PROPERTY PAGE **********/

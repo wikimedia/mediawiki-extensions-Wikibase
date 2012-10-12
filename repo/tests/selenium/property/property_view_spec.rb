@@ -125,7 +125,7 @@ describe "Check functionality of property view" do
       on_page(PropertyPage) do |page|
         page.navigate_to_property
         page.wait_for_entity_to_load
-        page.datatype.include? "wikibase-item"
+        page.datatype.include? "Item"
       end
     end
   end
