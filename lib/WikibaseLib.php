@@ -192,22 +192,12 @@ $wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\LibHooks::onSchemaUpdate
 $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerUnitTests';
 
 
-$wgWBSettings = array();
+$wgSharedTables[] = 'wb_changes';
+
+$egWBDefaultsFunction = null;
+
+$egWBSettings = array();
 
 
 
-
-$wgSiteTypes = array();
-$wgSiteTypes['mediawiki'] = 'MediaWikiSite';
-
-$wgAutoloadClasses['TestSites'] 			= $dir . 'tests/phpunit/site/TestSites.php';
-
-$wgAutoloadClasses['Site'] 					= $dir . 'includes/site/Site.php';
-$wgAutoloadClasses['SiteArray'] 			= $dir . 'includes/site/SiteArray.php';
-$wgAutoloadClasses['SiteList'] 				= $dir . 'includes/site/SiteList.php';
-$wgAutoloadClasses['SiteObject'] 			= $dir . 'includes/site/SiteObject.php';
-$wgAutoloadClasses['SitePaths'] 			= $dir . 'includes/site/SitePaths.php';
-$wgAutoloadClasses['SitePathsObject'] 		= $dir . 'includes/site/SitePathsObject.php';
-$wgAutoloadClasses['Sites'] 				= $dir . 'includes/site/Sites.php';
-$wgAutoloadClasses['SitesTable'] 			= $dir . 'includes/site/SitesTable.php';
-$wgAutoloadClasses['MediaWikiSite'] 		= $dir . 'includes/site/MediaWikiSite.php';
+unset( $dir );

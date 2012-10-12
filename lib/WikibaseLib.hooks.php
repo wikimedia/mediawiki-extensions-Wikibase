@@ -142,11 +142,6 @@ final class LibHooks {
 			'StatementObject',
 			'Utils',
 
-			'site/MediaWikiSite',
-			'site/SiteList',
-			'site/SiteObject',
-			'site/Sites',
-
 			'store/SiteLinkLookup',
 		);
 
