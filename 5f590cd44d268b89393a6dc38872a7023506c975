@@ -16,6 +16,24 @@
       "revId": "5f590cd44d268b89393a6dc38872a7023506c975",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABDH///7g\u003d",
+        "filename": "lib/includes/claim/Claim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-12T17:05:48Z",
+      "side": 1,
+      "message": "when doing stuff such as merging claim objects or so - any situation where you want to set the GUID of a new or existing Claim to that of an existing one. Perhaps we do not run into this... then again, it\u0027s one line of implementation.",
+      "parentUuid": "AAABDH///8E\u003d",
+      "revId": "5f590cd44d268b89393a6dc38872a7023506c975",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
