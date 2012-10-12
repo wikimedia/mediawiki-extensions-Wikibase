@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABDX////Y\u003d",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-12T17:27:47Z",
+      "side": 1,
+      "message": "Style: put condition in () for ternary operator. (Or isn\u0027t that in the style guide?)",
+      "revId": "e3def0392ad4313fbff81093ee79f805c1e5d3e7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
