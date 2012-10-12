@@ -9,127 +9,129 @@
  * @licence GNU GPL v2+
  * @author H. Snater
  */
-'use strict';
 
+( function( mw, wb, $, QUnit ) {
+	'use strict';
 
-( function() {
-	module( 'wikibase.ui.Toolbar', window.QUnit.newWbEnvironment( {
+	module( 'wikibase.ui.Toolbar', QUnit.newWbEnvironment( {
 		setup: function() {
-			this.toolbar = new window.wikibase.ui.Toolbar();
-
-			ok(
-				this.toolbar._items instanceof Array,
-				'initiated items array'
-			);
-
-			equal(
-				this.toolbar._elem[0].nodeName,
-				'DIV',
-				'placed in DOM'
-			);
-
+			this.toolbar = new wb.ui.Toolbar();
 		},
-		teardown: function() {
-			this.toolbar.destroy();
-
-			equal(
-				this.toolbar._items,
-				null,
-				'destroyed items'
-			);
-
-			equal(
-				this.toolbar._elem,
-				null,
-				'destroyed _elem'
-			);
-
-		}
+		teardown: function() {}
 
 	} ) );
 
+	QUnit.test( 'init and destroy', function( assert ) {
 
-	test( 'fill and remove', function() {
+		assert.ok(
+			this.toolbar._items instanceof Array,
+			'initiated items array'
+		);
 
-		var label = new window.wikibase.ui.Toolbar.Label( 'label text' );
+		assert.equal(
+			this.toolbar._elem[0].nodeName,
+			'SPAN',
+			'placed in DOM'
+		);
+
+		this.toolbar.destroy();
+
+		assert.equal(
+			this.toolbar._items,
+			null,
+			'destroyed items'
+		);
+
+		assert.equal(
+			this.toolbar._elem,
+			null,
+			'destroyed _elem'
+		);
+
+	} );
+
+
+	QUnit.test( 'fill and remove', function( assert ) {
+
+		var label = new wb.ui.Toolbar.Label( 'label text' );
 
 		this.toolbar.addElement( label );
 
-		equal(
+		assert.equal(
 			this.toolbar.hasElement( label ),
 			true,
 			'added label to toolbar'
 		);
 
-		var button = new window.wikibase.ui.Toolbar.Button( 'button text' );
+		var button = new wb.ui.Toolbar.Button( 'button text' );
 
 		this.toolbar.addElement( button );
 
-		equal(
+		assert.equal(
 			this.toolbar.hasElement( button ),
 			true,
 			'added a button to toolbar'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.getIndexOf( button ),
 			1,
 			'correctly polled index of button'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.getElements().length,
 			2,
 			'two elements added overall'
 		);
 
-		var second_label = new window.wikibase.ui.Toolbar.Label( 'second label text' );
+		var second_label = new wb.ui.Toolbar.Label( 'second label text' );
 
 		this.toolbar.addElement( second_label, 1 );
 
-		equal(
+		assert.equal(
 			this.toolbar.hasElement( second_label ),
 			true,
 			'inserted a label as second element to toolbar'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.getIndexOf( second_label ),
 			1,
 			'correctly polled index of label'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar._elem.children().length,
 			3,
 			'checked DOM: toolbar element has 3 children'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.removeElement( second_label ),
 			true,
 			'removed second label'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar._elem.children().length,
 			2,
 			'checked DOM: toolbar element has 2 two children'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.getIndexOf( second_label ),
 			-1,
 			'second label not referenced anymore'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.hide(),
 			true,
 			'hide toolbar'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.show(),
 			true,
 			'show toolbar'
@@ -137,33 +139,33 @@
 
 	} );
 
-	test( 'dis- and enabling', function() {
-		var label = new window.wikibase.ui.Toolbar.Label( 'label text' );
+	QUnit.test( 'dis- and enabling', function( assert ) {
+		var label = new wb.ui.Toolbar.Label( 'label text' );
 		label.stateChangeable = false;
 		this.toolbar.addElement( label );
 
-		equal(
+		assert.equal(
 			this.toolbar.isStateChangeable(),
 			false,
 			'toolbar state is not changeable (no elements that are changeable)'
 		);
 
-		var button = new window.wikibase.ui.Toolbar.Button( 'button text' );
+		var button = new wb.ui.Toolbar.Button( 'button text' );
 		this.toolbar.addElement( button );
 
-		equal(
+		assert.equal(
 			this.toolbar.isStateChangeable(),
 			true,
 			'toolbar state is changeable'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.disable(),
 			true,
 			'disabling toolbar'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.isDisabled(),
 			true,
 			'toolbar is disabled'
@@ -171,49 +173,49 @@
 
 		label.stateChangeable = true;
 
-		equal(
+		assert.equal(
 			this.toolbar.getState(),
 			wb.utilities.ui.StatableObject.prototype.STATE.MIXED,
 			'mixed state after making label changeable'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.isDisabled(),
 			false,
 			'toolbar is not disabled (since element states are mixed)'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.isEnabled(),
 			false,
 			'toolbar is not enabled (since element states are mixed)'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.enable(),
 			true,
 			'enabling toolbar'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.isEnabled(),
 			true,
 			'toolbar is enabled'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.disable(),
 			true,
 			'disabling toolbar'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.isDisabled(),
 			true,
 			'toolbar is disabled'
 		);
 
-		equal(
+		assert.equal(
 			this.toolbar.isEnabled(),
 			false,
 			'toolbar is not enabled'
@@ -221,4 +223,4 @@
 
 	} );
 
-}() );
+}( mediaWiki, wikibase, jQuery, QUnit ) );
