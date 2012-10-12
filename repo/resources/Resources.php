@@ -17,7 +17,8 @@ return call_user_func( function() {
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' =>  'Wikibase/repo/resources'
+		'remoteExtPath' =>  'Wikibase/repo/resources',
+		'position' => 'top' // reducing the time between DOM construction and JS initialisation
 	);
 
 	return array(
