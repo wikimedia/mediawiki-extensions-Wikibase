@@ -21,6 +21,15 @@
 ( function( $, mw, wb, undefined ) {
 	'use strict';
 
+	// remove entity loading spinner on error
+	// (the file this snippet is in has to be loaded "top" in ResourceLoader)
+	window.onerror = function( message, file, line ) {
+		$( '.wb-entity' ).fadeTo( 0, 1, function() {
+			$( '.wb-entity-spinner' ).remove();
+		} );
+		return true;
+	};
+
 	$( document ).ready( function() {
 		// remove HTML edit links with links to special pages
 		// for site-links we don't want to remove the table cell representing the edit section
