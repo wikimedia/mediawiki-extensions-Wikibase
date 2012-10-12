@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABDX////I\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-12T17:31:00Z",
+      "side": 1,
+      "message": "typo: Tow -\u003e Two",
+      "revId": "868bb17b867c3c14c635dc9c6d84d0d0c07bef49",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
