@@ -40,7 +40,7 @@ use \DataValues\StringValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementObjectTest extends \MediaWikiTestCase {
+class StatementObjectTest extends ClaimObjectTest {
 
 	public function instanceProvider() {
 		$instances = array();
@@ -132,7 +132,7 @@ class StatementObjectTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetPropertyId( Statement $statement ) {
+	public function testGetPropertyId( Claim $statement ) {
 		$this->assertEquals(
 			$statement->getMainSnak()->getPropertyId(),
 			$statement->getPropertyId()

@@ -45,8 +45,8 @@ class ApiCreateClaim extends ApiBase {
 		$serializedClaim = $serializer->getSerialized( $claim );
 
 		$this->getResult()->addValue(
-			'claims',
-			$claim->getGuid(),
+			null,
+			'claim',
 			$serializedClaim
 		);
 	}

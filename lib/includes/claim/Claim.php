@@ -86,4 +86,13 @@ interface Claim extends Hashable {
 	 */
 	public function getGuid();
 
+	/**
+	 * Sets the GUID of the Claim.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $guid
+	 */
+	public function setGuid( $guid );
+
 }

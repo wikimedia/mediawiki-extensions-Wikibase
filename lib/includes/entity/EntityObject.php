@@ -490,15 +490,13 @@ abstract class EntityObject implements Entity {
 	 * @since 0.2
 	 */
 	public function stub() {
-		$data = $this->data;
-
 		if ( is_null( $this->getId() ) ) {
-			if ( array_key_exists( 'entity', $data ) ) {
-				unset( $data['entity'] );
+			if ( array_key_exists( 'entity', $this->data ) ) {
+				unset( $this->data['entity'] );
 			}
 		}
 		else {
-			$data['entity'] = $this->getIdPrefix() . $this->getId();
+			$this->data['entity'] = $this->getIdPrefix() . $this->getId();
 		}
 	}
 
