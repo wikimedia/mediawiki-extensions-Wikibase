@@ -114,6 +114,11 @@
 			$( wikibase ).triggerHandler( 'restrictEntityPageActions' );
 		}
 
+		// remove loading spinner after JavaScript has kicked in
+		$( '.wb-entity' ).fadeTo( 0, 1, function() {
+			$( '.wb-entity-spinner' ).remove();
+		} );
+
 	} );
 
 } )( jQuery, mediaWiki, wikibase );

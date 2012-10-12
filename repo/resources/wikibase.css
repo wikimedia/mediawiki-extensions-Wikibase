@@ -86,6 +86,13 @@
 	color: #A1A1A1;
 }
 
+div.wb-entity-spinner { /* loading spinner positioning (animation is taken from .mw-small-spinner) */
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	z-index: 99;
+}
+
 /********** /BASIC LAYOUT **********/
 
 

@@ -93,7 +93,24 @@ abstract class EntityView extends \ContextSource {
 			)
 		);
 
-		return $html . Html::closeElement( 'div' );
+		$html .= Html::closeElement( 'div' );
+
+		// show loading spinner as long as JavaScript is initialising;
+		// the fastest way to show the loading spinner is placing the script right after the
+		// corresponsing html
+		$html .= Html::inlineScript(
+			'$( ".wb-entity" ).fadeTo( 0, .3 ).after( function() {
+				var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
+				$div.css( "top", $div.height() + "px" );
+				$div.css(
+					( "' . $info['lang']->getDir() . '" === "rtl" ) ? "right" : "left",
+					( parseInt( $( this ).width() / 2 ) - $div.width() / 2 ) + "px"
+				);
+				return $div;
+			} );'
+		);
+
+		return $html;
 	}
 
 	/**
