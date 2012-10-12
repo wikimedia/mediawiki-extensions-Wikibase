@@ -106,9 +106,8 @@ class SpecialNewProperty extends SpecialCreateEntity {
 		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $typeId ) {
 			$html .= Html::element(
 				'option',
-				array(),
-				$typeId
-				// \DataTypes\DataTypeFactory::singleton()->getType( $typeId )->getLabel( $this->getLanguage()->getCode() ) // TODO add this as soon as getLabel is implemented
+				array( 'value' => $typeId ),
+				\DataTypes\DataTypeFactory::singleton()->getType( $typeId )->getLabel( $this->getLanguage()->getCode() )
 			);
 		}
 		return

@@ -50,10 +50,26 @@ class PropertyView extends EntityView {
 		if( $lang === null ) {
 			$lang = $this->getLanguage();
 		}
-		return Html::element(
+
+		$html = Html::openElement(
 			'div',
-			array( 'class' => 'wb-datatype wb-value-row' ),
-			$dataType->getLabel( $lang->getCode() ) . ' (' . $dataType->getId() . ')'
+			array( 'class' => 'wb-datatype wb-value-row' )
 		);
+
+		$html .= Html::element(
+			'span',
+			array( 'class' => 'wb-datatype-label' ),
+			wfMessage( 'wikibase-datatype-label' )->text()
+		);
+
+		$html .= Html::element(
+			'span',
+			array( 'class' => 'wb-value' ),
+			$dataType->getLabel( $lang->getCode() )
+		);
+
+		$html .= Html::closeElement( 'div' );
+
+		return $html;
 	}
 }
