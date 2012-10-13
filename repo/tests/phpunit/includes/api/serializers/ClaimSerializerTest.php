@@ -61,9 +61,12 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
+		$claim = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+
 		$validArgs[] = array(
-			new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ),
+			$claim,
 			array(
+				'id' => $claim->getGuid(),
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
 					'property' => 'p42',
@@ -77,6 +80,7 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 		$validArgs[] = array(
 			$statement,
 			array(
+				'id' => $statement->getGuid(),
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
 					'property' => 'p2',

@@ -137,4 +137,21 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSetGuid( Claim $claim ) {
+		$claim->setGuid( 'foo-bar-baz' );
+		$this->assertEquals( 'foo-bar-baz', $claim->getGuid() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetGuid( Claim $claim ) {
+		$guid = $claim->getGuid();
+		$this->assertInternalType( 'string', $guid );
+		$this->assertEquals( $guid, $claim->getGuid() );
+	}
+
 }

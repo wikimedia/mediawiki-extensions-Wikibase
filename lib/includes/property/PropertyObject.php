@@ -337,3 +337,4 @@ class PropertyObject extends EntityObject implements Property {
 	}
 
 }
+

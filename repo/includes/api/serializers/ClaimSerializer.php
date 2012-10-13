@@ -46,6 +46,8 @@ class ClaimSerializer extends ApiSerializerObject {
 			throw new MWException( 'ClaimSerializer can only serialize Claim objects' );
 		}
 
+		$serialization['id'] = $claim->getGuid();
+
 		$snakSerializer = new SnakSerializer( $this->getResult(), $this->options );
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 

@@ -69,18 +69,8 @@ abstract class EntityObject implements Entity {
 	 * @return array
 	 */
 	public function toArray() {
-		$data = $this->data;
-
-		if ( is_null( $this->getId() ) ) {
-			if ( array_key_exists( 'entity', $data ) ) {
-				unset( $data['entity'] );
-			}
-		}
-		else {
-			$data['entity'] = $this->getIdPrefix() . $this->getId();
-		}
-
-		return $data;
+		$this->stub();
+		return $this->data;
 	}
 
 	/**
@@ -414,38 +404,27 @@ abstract class EntityObject implements Entity {
 	/**
 	 * @see Comparable::equals
 	 *
-	 * Two entities are considered equal if
-	 * they have the same type, and the same content.
-	 * If both entities have an ID set, then the IDs must be equal
-	 * for the entities to be considered equal.
+	 * Tow entities are considered equal if they are of the same
+	 * type and have the same value. The value does not include
+	 * the id, so entities with the same value but different id
+	 * are considered equal.
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean true of $that this equals to $this.
+	 * @param mixed $that
+	 *
+	 * @return boolean
 	 */
 	public function equals( $that ) {
 		if ( $that === $this ) {
 			return true;
 		}
 
-		if ( get_class( $this ) !== get_class( $that ) ) {
+		if ( !is_object( $that ) || ( get_class( $this ) !== get_class( $that ) ) ) {
 			return false;
 		}
 
 		wfProfileIn( __METHOD__ );
-
-		/**
-		 * @var Entity $that
-		 */
-		$thisId = $this->getId();
-		$thatId = $that->getId();
-
-		if ( $thisId !== null && $thatId !== null ) {
-			if ( $thisId !== $thatId ) {
-				wfProfileOut( __METHOD__ );
-				return false;
-			}
-		}
 
 		//@todo: ignore the order of aliases
 		$thisData = $this->toArray();
@@ -511,7 +490,14 @@ abstract class EntityObject implements Entity {
 	 * @since 0.2
 	 */
 	public function stub() {
-		// stub :D
+		if ( is_null( $this->getId() ) ) {
+			if ( array_key_exists( 'entity', $this->data ) ) {
+				unset( $this->data['entity'] );
+			}
+		}
+		else {
+			$this->data['entity'] = $this->getIdPrefix() . $this->getId();
+		}
 	}
 
 }
