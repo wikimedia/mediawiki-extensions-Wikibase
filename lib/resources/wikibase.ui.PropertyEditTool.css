@@ -145,6 +145,7 @@ table.wb-ui-propertyedittool-ineditmode {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 	font-size: 133% !important;
+	direction: ltr; /* to be flipped */
 }
 
 .wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode {
