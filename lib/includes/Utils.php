@@ -368,7 +368,7 @@ final class Utils {
 	 *
 	 * @return string
 	 */
-	public static function getGUID() {
+	public static function getGuid() {
 		if ( function_exists( 'com_create_guid' ) ) {
 			return trim( com_create_guid(), '{}' );
 		}

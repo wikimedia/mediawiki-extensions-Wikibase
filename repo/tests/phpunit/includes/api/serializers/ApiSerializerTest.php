@@ -41,8 +41,10 @@ class ApiSerializerTest extends \MediaWikiTestCase {
 		$apiResult = new \ApiResult( new \ApiMain() );
 
 		$serializers[] = new \Wikibase\SnakSerializer( $apiResult );
-		$serializers[] = new \Wikibase\StatementSerializer( $apiResult );
-		$serializers[] = new \Wikibase\StatementsSerializer( $apiResult );
+		$serializers[] = new \Wikibase\ClaimSerializer( $apiResult );
+
+		$snakSetailizer = new \Wikibase\SnakSerializer( new \ApiResult( new \ApiMain() ) );
+		$serializers[] = new \Wikibase\ByPropertyListSerializer( 'test', $snakSetailizer, new \ApiResult( new \ApiMain() ) );
 
 		return $this->arrayWrap( $serializers );
 	}

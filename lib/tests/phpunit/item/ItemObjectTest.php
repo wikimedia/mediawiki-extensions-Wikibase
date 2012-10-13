@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemObject as ItemObject;
-use \Wikibase\Item as Item;
-use \Wikibase\SiteLink as SiteLink;
+use Wikibase\ItemObject;
+use Wikibase\Item;
+use Wikibase\SiteLink;
+use Wikibase\Statement;
 
 /**
  * Tests for the Wikibase\ItemObject class.
@@ -171,8 +172,11 @@ class ItemObjectTest extends EntityObjectTest {
 		$item->setAliases( 'de', array( 'bar', 'baz' ) );
 		$items[] = $item;
 
+		/**
+		 * @var Item $item;
+		 */
 		$item = $item->copy();
-		$item->addStatement( new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) ) );
+		$item->addStatement( new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
 		$items[] = $item;
 
 		return $this->arrayWrap( $items );
@@ -188,6 +192,38 @@ class ItemObjectTest extends EntityObjectTest {
 		$this->assertInternalType( 'boolean', $has );
 
 		$this->assertEquals( count( $item->getStatements() ) !== 0, $has );
+	}
+
+	/**
+	 * @dataProvider itemProvider
+	 *
+	 * @param Item $item
+	 */
+	public function testGetClaims( Item $item ) {
+		$claims = $item->getClaims();
+		$this->assertInstanceOf( '\Wikibase\Claims', $claims );
+
+		$statements = $item->getStatements();
+
+//		$statements = array_filter(
+//			iterator_to_array( $statements ),
+//			function( Statement $statement ) {
+//				return $statement->getRank() === Statement::RANK_NORMAL;
+//			}
+//		);
+
+		$this->assertEquals(
+			count( $statements ),
+			count( $claims ),
+			'The length of the lists returned by getClaims and getStatements does not match'
+		);
+
+		/**
+		 * @var Statement $statement
+		 */
+		foreach ( $statements as $statement ) {
+			$this->assertTrue( $claims->hasClaim( $statement ) );
+		}
 	}
 
 }

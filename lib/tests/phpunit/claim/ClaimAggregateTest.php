@@ -76,7 +76,7 @@ class ClaimAggregateTest extends \MediaWikiTestCase {
 
 		// Below code tests if the Claims in the ClaimAggregate indeed do not get modified.
 
-		$unmodifiedClaims = serialize( $obtainedClaims );
+		$unmodifiedClaims = clone $obtainedClaims;
 
 		$qualifiers = new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'ohi' ) ) ) );
 
@@ -93,7 +93,15 @@ class ClaimAggregateTest extends \MediaWikiTestCase {
 
 		$freshlyObtained = $aggregate->getClaims();
 
-		$this->assertEquals( $unmodifiedClaims, serialize( $freshlyObtained ), 'Was able to modify claims via ClaimAggregate::getClaims' );
+		$this->assertArrayEquals(
+			iterator_to_array( $unmodifiedClaims ),
+			iterator_to_array( $freshlyObtained ),
+			'Was able to modify statements via ClaimAggregate::getClaims'
+		);
+
+		foreach ( $freshlyObtained as $obtainedClaim ) {
+			$this->assertTrue( $unmodifiedClaims->hasClaim( $obtainedClaim ) );
+		}
 	}
 
 }

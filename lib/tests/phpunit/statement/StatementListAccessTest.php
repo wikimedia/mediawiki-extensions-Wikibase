@@ -39,7 +39,7 @@ class StatementListAccessTest extends \MediaWikiTestCase {
 	public function statementTestProvider() {
 		$statements = array();
 
-		$statements[] = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$statements[] = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
 		$lists = array();
 

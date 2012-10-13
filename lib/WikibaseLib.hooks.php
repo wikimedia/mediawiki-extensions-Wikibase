@@ -158,6 +158,7 @@ final class LibHooks {
 
 			'store/SiteLinkLookup',
 
+			'ByPropertyIdArray',
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',

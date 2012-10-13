@@ -1,10 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ApiSerializerObject;
 
 /**
- * Tests for the Wikibase\StatementsSerializer class.
+ * Tests for the Wikibase\ClaimSerializer class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +32,7 @@ use Wikibase\ApiSerializerObject;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementsSerializerTest extends ApiSerializerBaseTest {
+class ClaimSerializerTest extends ApiSerializerBaseTest {
 
 	/**
 	 * @see ApiSerializerBaseTest::getClass
@@ -43,7 +42,7 @@ class StatementsSerializerTest extends ApiSerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\StatementsSerializer';
+		return '\Wikibase\ClaimSerializer';
 	}
 
 	/**
@@ -56,22 +55,37 @@ class StatementsSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$statement = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
-		$statementList = new \Wikibase\StatementList( array( $statement ) );
+		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+
+		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 1 ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
 		$validArgs[] = array(
-			new \Wikibase\StatementList(),
-			array(),
+			new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ),
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'p42',
+				),
+				'qualifiers' => array(),
+			),
 		);
 
-//		$validArgs[] = array(
-//			$statementList,
-//			array(
-//
-//			),
-//		);
+		$statement = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 2 ) );
+
+		$validArgs[] = array(
+			$statement,
+			array(
+				'mainsnak' => array(
+					'snaktype' => 'novalue',
+					'property' => 'p2',
+				),
+				'qualifiers' => array(),
+				'references' => array(),
+				'rank' => $statement->getRank(),
+			),
+		);
 
 		return $validArgs;
 	}

@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\ByPropertyListSerializer;;
 
 /**
- * Tests for the Wikibase\StatementSerializer class.
+ * Tests for the Wikibase\ByPropertyListSerializer class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +33,7 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementSerializerTest extends ApiSerializerBaseTest {
+class ByPropertyListSerializerTest extends ApiSerializerBaseTest {
 
 	/**
 	 * @see ApiSerializerBaseTest::getClass
@@ -42,7 +43,17 @@ class StatementSerializerTest extends ApiSerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\StatementSerializer';
+		return '\Wikibase\ByPropertyListSerializer';
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @return ByPropertyListSerializer
+	 */
+	protected function getInstance() {
+		$snakSetailizer = new \Wikibase\SnakSerializer( new \ApiResult( new \ApiMain() ) );
+		return new ByPropertyListSerializer( 'test', $snakSetailizer, new \ApiResult( new \ApiMain() ) );
 	}
 
 	/**
@@ -55,21 +66,39 @@ class StatementSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$validArgs[] = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$snak0 = new \Wikibase\PropertyNoValueSnak( 42 );
+		$snak1 = new \Wikibase\PropertySomeValueSnak( 2 );
+		$snak2 = new \Wikibase\PropertyValueSnak( 2, new \DataValues\StringValue( 'ohi' ) );
 
-		$validArgs[] = new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 1 ) ) );
+		$validArgs[] = new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
 		$validArgs[] = array(
-			new \Wikibase\StatementObject( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 2 ) ) ),
+			new \Wikibase\SnakList(),
+			array(),
+		);
+
+		$validArgs[] = array(
+			new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) ),
 			array(
-				'mainsnak' => array(
-					'snaktype' => 'novalue',
-					'property' => 'p2',
+				'p42' => array(
+					0 => array(
+						'snaktype' => 'novalue',
+						'property' => 'p42',
+					),
 				),
-				'qualifiers' => array(),
-				// TODO
+				'p2' => array(
+					0 => array(
+						'snaktype' => 'somevalue',
+						'property' => 'p2',
+					),
+					1 => array(
+						'snaktype' => 'value',
+						'property' => 'p2',
+						'value' => serialize(new \DataValues\StringValue( 'ohi' )), // TODO
+					),
+				),
 			),
 		);
 

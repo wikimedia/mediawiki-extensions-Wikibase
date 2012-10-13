@@ -58,7 +58,9 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
 		return array_map(
-			function( Snak $snak, Snaks $qualifiers = null ) {
+			function( array $arguments ) {
+				$snak = $arguments[0];
+				$qualifiers = array_key_exists( 1, $arguments ) ? $arguments[1] : null;
 				return array( new ClaimObject( $snak, $qualifiers ) );
 			},
 			$this->constructorProvider()
@@ -123,6 +125,16 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetPropertyId( Claim $claim ) {
+		$this->assertEquals(
+			$claim->getMainSnak()->getPropertyId(),
+			$claim->getPropertyId()
+		);
 	}
 
 }

@@ -124,11 +124,10 @@ $wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTi
 $wgAutoloadClasses['Wikibase\ApiSerializationOptions'] 	= $dir . 'includes/api/serializers/ApiSerializationOptions.php';
 $wgAutoloadClasses['Wikibase\ApiSerializer'] 			= $dir . 'includes/api/serializers/ApiSerializer.php';
 $wgAutoloadClasses['Wikibase\ApiSerializerObject'] 		= $dir . 'includes/api/serializers/ApiSerializerObject.php';
+$wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/api/serializers/ByPropertyListSerializer.php';
+$wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/api/serializers/ClaimSerializer.php';
 $wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/api/serializers/EntitySerializer.php';
 $wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/api/serializers/SnakSerializer.php';
-$wgAutoloadClasses['Wikibase\SnaksSerializer'] 			= $dir . 'includes/api/serializers/SnaksSerializer.php';
-$wgAutoloadClasses['Wikibase\StatementSerializer'] 		= $dir . 'includes/api/serializers/StatementSerializer.php';
-$wgAutoloadClasses['Wikibase\StatementsSerializer'] 	= $dir . 'includes/api/serializers/StatementsSerializer.php';
 
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
