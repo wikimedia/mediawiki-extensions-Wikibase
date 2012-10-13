@@ -259,7 +259,9 @@ table.wb-sitelinks .wb-ui-toolbar {
 			}
 		.wb-tooltip-error-details {
 			display:none;
-			float:left;
+			/* These error messages are always displayed in English. */
+			/* @noflip */ float:left;
+			/* @noflip */ text-align:left;
 			clear:both;
 			margin-top:.2em;
 			margin-bottom:.6em;
