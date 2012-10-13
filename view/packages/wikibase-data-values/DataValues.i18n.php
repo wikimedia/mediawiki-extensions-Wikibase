@@ -82,6 +82,14 @@ $messages['gl'] = array(
 	'version-datavalues' => 'Valores de datos',
 );
 
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'datavalues-desc' => 'אוסף של עצמים שמייצגים סוגים שונים של ערכים',
+	'version-datavalues' => 'DataValues',
+);
+
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
