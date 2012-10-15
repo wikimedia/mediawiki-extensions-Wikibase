@@ -317,7 +317,7 @@ final class RepoHooks {
 		}
 
 		// Bail out if we are not in an entity namespace
-		if ( !Utils::isEntityNamespace( $wikiPage->getTitle()->getNamespace() ) ) {
+		if ( !( $content instanceof ItemContent ) ) {
 			return true;
 		}
 
