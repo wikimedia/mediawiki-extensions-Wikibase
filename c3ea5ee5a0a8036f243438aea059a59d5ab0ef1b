@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//+uw\u003d",
+        "filename": "repo/includes/api/ApiGetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T11:11:55Z",
+      "side": 1,
+      "message": "if isPrefixedId returned a boolean, which would be much more inline with the rest of our code anyway, then you could just do \n\n$isPrefixed \u003d $entityFactory-\u003eisPrefixedId( $id )\n\nand not have the odd stuff in the if",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+u4\u003d",
+        "filename": "repo/includes/api/ApiGetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T11:11:55Z",
+      "side": 1,
+      "message": "$isPrefixed is a boolean, so no need to do a strict check against true",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+us\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T11:11:55Z",
+      "side": 1,
+      "message": "implicit check, one more reason to have the method return a boolean\n\nsuppose you change the internals of the method to use something that results in a boolean, then I\u0027d be silly to have to convert that to an int no?",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+uo\u003d",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T11:11:55Z",
+      "side": 1,
+      "message": "We do we have this here? I see no added value.",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
