@@ -190,4 +190,18 @@ class QuantityValue extends DataValueObject {
 		return $this->unit;
 	}
 
+	/**
+	 * @see DataValue::getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getArrayValue() {
+		return array(
+			'unit' => $this->unit,
+			'accuracy' => $this->accuracy,
+			'value' => $this->value,
+		);
+	}
 }

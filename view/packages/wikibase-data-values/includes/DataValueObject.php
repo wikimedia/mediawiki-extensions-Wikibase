@@ -66,4 +66,15 @@ abstract class DataValueObject implements DataValue {
 		return unserialize( serialize( $this ) );
 	}
 
+	/**
+	 * @see DataValue::getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getArrayValue() {
+		return $this->getValue();
+	}
+
 }

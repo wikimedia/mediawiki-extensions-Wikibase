@@ -238,4 +238,20 @@ class GeoCoordinateValue extends DataValueObject {
 		return $this->globe;
 	}
 
+	/**
+	 * @see DataValue::getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getArrayValue() {
+		return array(
+			'latitude' => $this->latitude,
+			'longitude' => $this->longitude,
+			'altitude' => $this->altitude,
+			'globe' => $this->globe,
+		);
+	}
+
 }

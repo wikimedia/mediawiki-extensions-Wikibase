@@ -257,4 +257,20 @@ class IriValue extends DataValueObject {
 		return array( $scheme, $hierpart, $query, $fragment );
 	}
 
+	/**
+	 * @see DataValue::getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getArrayValue() {
+		return array(
+			'scheme' => $this->scheme,
+			'fragment' => $this->fragment,
+			'query' => $this->query,
+			'hierarchicalpart' => $this->hierarchicalPart,
+		);
+	}
+
 }

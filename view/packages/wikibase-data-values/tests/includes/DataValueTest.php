@@ -187,4 +187,24 @@ abstract class DataValueTest extends \MediaWikiTestCase {
 		$this->assertTrue( $value->equals( $copy ) );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testGetValueSimple( DataValue $value, array $arguments ) {
+		$value->getValue();
+		$this->assertTrue( true );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param DataValue $value
+	 * @param array $arguments
+	 */
+	public function testGetArrayValueSimple( DataValue $value, array $arguments ) {
+		$value->getArrayValue();
+		$this->assertTrue( true );
+	}
+
 }
