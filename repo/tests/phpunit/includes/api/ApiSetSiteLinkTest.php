@@ -273,7 +273,7 @@ class ApiSetSiteLinkTest extends ApiModifyItemBase {
 		);
 
 		try {
-			list( $res,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 
 			$this->fail( "request should have failed" );
 		} catch ( \UsageException $e ) {

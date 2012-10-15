@@ -46,7 +46,6 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinks( EntityContent $item, Language $lang = null, $editable = true ) {
-		$info = $this->extractEntityInfo( $item, $lang );
 		$siteLinks = $item->getItem()->getSiteLinks();
 		$html = '';
 
