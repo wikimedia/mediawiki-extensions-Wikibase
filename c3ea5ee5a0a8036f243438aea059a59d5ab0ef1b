@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//+uY\u003d",
+        "filename": "repo/includes/api/ApiGetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-15T11:23:12Z",
+      "side": 1,
+      "message": "It is possible to return only a boolean but that would imply that the settings always makes sense, which I doubt will be the case.",
+      "parentUuid": "AAABEn//+uw\u003d",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//+u4\u003d",
         "filename": "repo/includes/api/ApiGetEntities.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-10-15T11:11:55Z",
       "side": 1,
       "message": "$isPrefixed is a boolean, so no need to do a strict check against true",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+uU\u003d",
+        "filename": "repo/includes/api/ApiGetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-15T11:23:12Z",
+      "side": 1,
+      "message": "Its you who wants every check to be explicit. Make up your mind.",
+      "parentUuid": "AAABEn//+u4\u003d",
       "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//+uQ\u003d",
+        "filename": "repo/includes/api/ApiModifyEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-15T11:23:12Z",
+      "side": 1,
+      "message": "It is an implicit check, it was intentional.",
+      "parentUuid": "AAABEn//+us\u003d",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//+uo\u003d",
         "filename": "repo/includes/content/EntityContentFactory.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2012-10-15T11:11:55Z",
       "side": 1,
       "message": "We do we have this here? I see no added value.",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+uA\u003d",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-15T11:23:12Z",
+      "side": 1,
+      "message": "It seems to me it is used more frequently from EntityContentFactory than EntityFactory, but it can be removed.",
+      "parentUuid": "AAABEn//+uo\u003d",
       "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
