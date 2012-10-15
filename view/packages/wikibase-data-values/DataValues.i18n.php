@@ -62,9 +62,10 @@ $messages['de'] = array(
 
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
+ * @author Mirzali
  */
 $messages['diq'] = array(
-	'version-datavalues' => 'ErcaMalumat',
+	'version-datavalues' => 'ErcayêMelumati',
 );
 
 /** Spanish (español)
