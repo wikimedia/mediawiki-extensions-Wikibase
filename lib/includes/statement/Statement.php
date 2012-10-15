@@ -78,14 +78,4 @@ interface Statement extends Claim {
 	 */
 	public function getRank();
 
-	/**
-	 * Returns the id of the property of the main snak of the claim.
-	 * Short for ->getClaim()->getMainSnak()->getPropertyId()
-	 *
-	 * @since 0.2
-	 *
-	 * @return integer
-	 */
-	public function getPropertyId();
-
 }
