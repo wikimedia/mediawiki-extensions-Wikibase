@@ -307,8 +307,14 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onArticleUndelete( Title $title, $created, $comment ) {
+		$entityContentFactory = EntityContentFactory::singleton();
+
+		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
+			return true;
+		}
+
 		$revId = $title->getLatestRevID();
-		$content = EntityContentFactory::singleton()->getFromRevision( $revId );
+		$content = $entityContentFactory->getFromRevision( $revId );
 		$entity = $content->getEntity();
 		$rev = Revision::newFromId( $revId );
 
