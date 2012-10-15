@@ -3,7 +3,7 @@
  * File for Wikibase resourceloader modules.
  * When included this returns an array with all the modules introduced by Wikibase.
  *
- * @since 0.1
+ * @since 0.2
  *
  * @file
  * @ingroup Wikibase
@@ -52,7 +52,7 @@ return call_user_func( function() {
 		'wikibase.utilities' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
-				'wikibase.utilities/wikibase.utilities.eventRelatedExtensions.js',
+				'wikibase.utilities/wikibase.utilities.ObservableObject.js',
 				'wikibase.utilities/wikibase.utilities.ui.StatableObject.js',
 			),
 			'dependencies' => array(
@@ -123,7 +123,8 @@ return call_user_func( function() {
 				'jquery.tipsy',
 				'mediawiki.legacy.shared',
 				'jquery.ui.core',
-				'wikibase.utilities'
+				'wikibase.utilities',
+				'wikibase.utilities.jQuery'
 			),
 			'messages' => array(
 				'wikibase-tooltip-error-details'
