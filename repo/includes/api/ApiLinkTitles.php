@@ -189,7 +189,7 @@ class ApiLinkTitles extends Api {
 	 * @return bool
 	 */
 	public function isWriteMode() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
+		return true ;
 	}
 
 	/**

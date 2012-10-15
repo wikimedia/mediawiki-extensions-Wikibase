@@ -318,7 +318,7 @@ abstract class ApiModifyEntity extends Api {
 	 * @see ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
+		return true ;
 	}
 
 	/**

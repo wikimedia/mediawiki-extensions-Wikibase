@@ -312,27 +312,6 @@ class ApiSetItem extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see ApiBase::needsToken()
-	 */
-	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ;
-	}
-
-	/**
-	 * @see ApiBase::mustBePosted()
-	 */
-	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost', false ) : true ;
-	}
-
-	/**
-	 * @see ApiBase::isWriteMode()
-	 */
-	public function isWriteMode() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite', false ) : true ;
-	}
-
-	/**
 	 * @see ApiBase::getAllowedParams()
 	 */
 	public function getAllowedParams() {
