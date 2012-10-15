@@ -64,12 +64,10 @@ return call_user_func( function() {
 			'scripts' => array(
 				'wikibase.utilities/wikibase.utilities.js',
 				'wikibase.utilities/wikibase.utilities.jQuery.js',
-				'wikibase.utilities/wikibase.utilities.jQuery.ui.js',
-				'wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.js'
+				'wikibase.utilities/wikibase.utilities.jQuery.ui.js'
 			),
 			'dependencies' => array(
-				'wikibase.utilities',
-				'jquery.ui.autocomplete'
+				'wikibase.utilities'
 			)
 		),
 
@@ -164,6 +162,7 @@ return call_user_func( function() {
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.inputAutoExpand',
 				'wikibase.utilities.jQuery.ui.tagadata',
+				'wikibase.jquery.ui',
 				'mediawiki.api',
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg' // for {{plural}} and {{gender}} support in messages
@@ -214,6 +213,16 @@ return call_user_func( function() {
 				'wikibase-blockeduser-tooltip-message'
 			)
 		),
+
+		'wikibase.jquery.ui' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.wikibaseAutocomplete.js'
+			),
+			'dependencies' => array(
+				'jquery.ui.autocomplete'
+			)
+		)
+
 	);
 } );
 // @codeCoverageIgnoreEnd

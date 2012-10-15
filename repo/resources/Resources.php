@@ -51,7 +51,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.special',
-				'wikibase.utilities.jQuery'
+				'wikibase.utilities.jQuery',
+				'wikibase.jquery.ui'
 			)
 		),
 
@@ -61,7 +62,8 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase.special',
-				'wikibase.utilities.jQuery'
+				'wikibase.utilities.jQuery',
+				'wikibase.jquery.ui'
 			)
 		),
 	);
