@@ -26,7 +26,7 @@ class ClientPage < RubySelenium
   button(:clientCreateArticleSubmit, :id => "wpSave")
   span(:clientArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
   unordered_list(:clientInterwikiLinkList, :xpath => "//div[@id='p-lang']/div/ul")
-  button(:clientPurgeSubmit, :xpath => "//form[@class='visualClear']/input[@class='mw-htmlform-submit']")
+  button(:clientActionConfirmationButton, :xpath => "//form[@class='visualClear']/input[@class='mw-htmlform-submit']")
 
   #language links
   link(:interwiki_de, :xpath => "//li[@class='interwiki-de']/a")
@@ -70,8 +70,8 @@ class ClientPage < RubySelenium
       param_purge = "?action=purge"
     end
     navigate_to WIKI_CLIENT_URL + title + param_purge
-    if clientPurgeSubmit?
-      clientPurgeSubmit
+    if clientActionConfirmationButton?
+      clientActionConfirmationButton
     end
   end
 
@@ -85,17 +85,17 @@ class ClientPage < RubySelenium
 
   def watch_article(title)
     navigate_to_article(title)
-    clientActionsMenu
-    if clientWatchArticle?
-      clientWatchArticle
+    navigate_to(current_url + "?action=watch")
+    if clientActionConfirmationButton?
+      clientActionConfirmationButton
     end
   end
 
   def unwatch_article(title)
     navigate_to_article(title)
-    clientActionsMenu
-    if clientUnwatchArticle?
-      clientUnwatchArticle
+    navigate_to(current_url + "?action=unwatch")
+    if clientActionConfirmationButton?
+      clientActionConfirmationButton
     end
   end
 end
