@@ -263,6 +263,10 @@ $messages['pt'] = array(
  */
 $messages['pt-br'] = array(
 	'wikibaselib-desc' => 'Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client',
+	'wikibaselib-entity-item' => 'item',
+	'wikibaselib-entity-property' => 'propriedade',
+	'wikibaselib-entity-query' => 'consulta',
+	'datatypes-type-wikibase-item' => 'Item',
 );
 
 /** Russian (русский)

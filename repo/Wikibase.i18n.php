@@ -825,6 +825,7 @@ $messages['en-ca'] = array(
 /** Spanish (español)
  * @author Armando-Martin
  * @author Jewbask
+ * @author Maor X
  * @author McDutchie
  * @author Mr.Ajedrez
  * @author Savh
@@ -1876,6 +1877,7 @@ $messages['it'] = array(
 	'wikibase-aliases-label' => 'Anche conosciuto come:',
 	'wikibase-aliases-input-help-message' => 'Se questo insieme di dati è conosciuto con più di un nome, è possibile inserire alias e sinonimi, in modo che possa essere trovato anche tramite i suoi nomi alternativi.',
 	'wikibase-aliases-empty' => 'Nessun alias definito.',
+	'wikibase-datatype-label' => 'Tipo di dato:',
 	'wikibase-restrictionedit-tooltip-message' => 'Questa pagina è protetta, la modifica non è consentita.',
 	'wikibase-blockeduser-tooltip-message' => 'Sei stato bloccato, non puoi fare modifiche.',
 	'wikibase-tooltip-error-details' => 'Dettagli',
@@ -2110,6 +2112,7 @@ $messages['ko'] = array(
 	'wikibase-aliases-label' => '다른 이름:',
 	'wikibase-aliases-input-help-message' => '이 데이터 집합이 하나 이상의 특정 이름으로 알려져 있다면 별명과 동의명을 입력할 수 있기 때문에 이는 그 대체 이름으로 찾을 수 있습니다.',
 	'wikibase-aliases-empty' => '별명이 정의되지 않았습니다.',
+	'wikibase-datatype-label' => '데이터 유형:',
 	'wikibase-restrictionedit-tooltip-message' => '이 문서는 보호되어 있어, 편집을 허용하지 않습니다.',
 	'wikibase-blockeduser-tooltip-message' => '편집에서 차단됩니다.',
 	'wikibase-tooltip-error-details' => '자세한 사항',
@@ -2527,15 +2530,15 @@ $messages['nl'] = array(
 	'wikibase-itembytitle-nothing-found' => 'Er waren geen resultaten voor de vorige zoekopdracht. Verfijn de zoekopdracht met een betere identificatie van de externe pagina.',
 	'wikibase-itembytitle-invalid-site' => 'De vorige zoekopdracht kon niet gebruikt worden om te zoeken. Geef een geldige siteidentificatie op.',
 	'wikibase-itembytitle-description' => 'Site is een identificatie, bijvoorbeeld "enwiki".',
-	'wikibase-itembytitle-create' => 'U kunt ook [{{fullurl:Special:CreateItem|site=$1&page=$2}} een item met "$3" aanmaken].',
+	'wikibase-itembytitle-create' => 'U kunt ook [{{fullurl:Special:CreateItem|site=$1&page=$2}} een item aanmaken].',
 	'special-itemdisambiguation' => 'Disambigueren: items met hetzelfde label',
-	'wikibase-itemdisambiguation-lookup-fieldset' => 'Naar items zoeken op taal en label',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Naar items zoeken op label',
 	'wikibase-itemdisambiguation-lookup-language' => 'Taal:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Label:',
 	'wikibase-itemdisambiguation-submit' => 'Zoeken',
-	'wikibase-itemdisambiguation-nothing-found' => 'Er zijn geen items gevonden in de vorige zoekopdracht. Verfijn de zoekopdracht.',
-	'wikibase-itemdisambiguation-create' => 'U kunt ook [{{fullurl:Special:CreateItem|label=$1}} een item met "$3" aanmaken].',
-	'wikibase-itemdisambiguation-invalid-langcode' => 'De vorige zoekopdracht kon niet gebruikt worden om te zoeken. Geef een geldige taalidentificatie op.',
+	'wikibase-itemdisambiguation-nothing-found' => 'Er zijn geen items gevonden met dat label.',
+	'wikibase-itemdisambiguation-create' => 'U kunt [{{fullurl:Special:CreateItem|label=$1}} het item aanmaken].',
+	'wikibase-itemdisambiguation-invalid-langcode' => 'De taalidentificatie die u hebt opgegeven is niet bekend in het systeem. Gebruik een geldige taalidentificatie zoals "en".',
 	'wikibase-itemdisambiguation-description' => 'Waarden gebruikt voor zoeken moeten de volledige tekst bevatten. Taal is een identificatie, bijvoorbeeld "en".',
 	'special-newproperty' => 'Nieuwe eigenschap aanmaken',
 	'wikibase-newproperty-datatype' => 'Gegevenstype:',
