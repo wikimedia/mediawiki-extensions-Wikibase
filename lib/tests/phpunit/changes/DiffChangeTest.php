@@ -69,4 +69,3 @@ class DiffChangeTest extends \MediaWikiTestCase {
 	}
 
 }
-	
