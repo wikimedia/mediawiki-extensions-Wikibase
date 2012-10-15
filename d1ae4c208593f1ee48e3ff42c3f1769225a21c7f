@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//+vE\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-15T11:19:07Z",
+      "side": 1,
+      "message": "True. But not a blocker.",
+      "parentUuid": "AAABEn//+vQ\u003d",
+      "revId": "d1ae4c208593f1ee48e3ff42c3f1769225a21c7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//+vM\u003d",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-10-15T10:58:08Z",
       "side": 1,
       "message": "We\u0027re now only checking for items\n\nWhy are you not checking the content type? instanceof is not so nice, esp if it easily can be avoided",
+      "revId": "d1ae4c208593f1ee48e3ff42c3f1769225a21c7f",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+uM\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-15T11:19:07Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll just the the code from the master branch (while fixing the comment - it\u0027s also wrong there)\n\nBut: why is instanceof not so nice? Honestly, in a case like this, it seems to be the Right Thing (tm). It checks exactly what I want to know: whether the object I have implements ItemContent (or eventually, EntityContent).  I could use isEntityContentModel too. But why and how is that better?",
+      "parentUuid": "AAABEn//+vM\u003d",
       "revId": "d1ae4c208593f1ee48e3ff42c3f1769225a21c7f",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
