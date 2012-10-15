@@ -195,9 +195,11 @@ interface Entity extends Comparable, ClaimAggregate {
 	 *
 	 * @since 0.1
 	 *
+	 * @param array|null $languages
+	 *
 	 * @return array
 	 */
-	public function getAllAliases();
+	public function getAllAliases( array $languages = null );
 
 	/**
 	 * Sets the aliases for the item in the language with the specified code.

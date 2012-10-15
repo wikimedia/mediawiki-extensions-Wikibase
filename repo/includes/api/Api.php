@@ -80,6 +80,9 @@ abstract class Api extends \ApiBase {
 	/**
 	 * Add aliases to result
 	 *
+	 * @deprecated
+	 * TODO: remove, now in EntitySerializer
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $aliases the aliases to set in the result
@@ -125,6 +128,9 @@ abstract class Api extends \ApiBase {
 
 	/**
 	 * Add sitelinks to result
+	 *
+	 * @deprecated
+	 * TODO: move to EntitySerializer
 	 *
 	 * @since 0.1
 	 *
@@ -228,6 +234,9 @@ abstract class Api extends \ApiBase {
 	/**
 	 * Add descriptions to result
 	 *
+	 * @deprecated
+	 * TODO: remove, now in EntitySerializer
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $descriptions the descriptions to insert in the result
@@ -267,6 +276,9 @@ abstract class Api extends \ApiBase {
 
 	/**
 	 * Add labels to result
+	 *
+	 * @deprecated
+	 * TODO: remove, now in EntitySerializer
 	 *
 	 * @since 0.1
 	 *
