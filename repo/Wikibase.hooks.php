@@ -316,19 +316,18 @@ final class RepoHooks {
 			throw new MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
 		}
 
-		// Bail out if we are not in an entity namespace
-		if ( !Utils::isEntityNamespace( $wikiPage->getTitle()->getNamespace() ) ) {
+		// Bail out if we are not looking at an entity
+		if ( !in_array( $content->getModel(), Utils::getEntityContentModels() ) ) {
 			return true;
 		}
-
-		$item = $content->getItem();
-		$change = EntityDeletion::newFromEntity( $item );
+		$entity = $content->getEntity();
+		$change = EntityDeletion::newFromEntity( $entity );
 
 		$change->setFields( array(
 			//'previous_revision_id' => $wikiPage->getLatest(),
 			'revision_id' => 0, // there's no current revision
 			'user_id' => $user->getId(),
-			'object_id' => $item->getId(),
+			'object_id' => $entity->getId(),
 			'time' => $logEntry->getTimestamp(),
 		) );
 
