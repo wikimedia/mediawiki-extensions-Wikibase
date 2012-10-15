@@ -102,25 +102,25 @@ class ApiGetEntities extends Api {
 		foreach ($params['ids'] as $id) {
 
 			$res = $this->getResult();
+			$isPrefixed = $entityFactory->isPrefixedId( $id );
 
-			try {
-				// we are not using the type, we are only trying to get it to see if it fails
-				$type = $entityFactory->getEntityTypeFromPrefixedId( $id );
+			if ( $isPrefixed ) {
 				$numId = $entityFactory->getUnprefixedId( $id );
 				$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
 				$res->addValue( $entityPath, 'id', $numId );
 			}
-			catch ( \MWException $e ) {
+			else {
 				$entityPath = array( 'entities', $id );
 				$res->addValue( $entityPath, 'id', $id );
 			}
 
 			// later we do a getContent but only if props are defined
 			if ( $params['props'] !== array() ) {
-				try {
+				if ( $isPrefixed ) {
 					$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
 				}
-				catch ( \MWException $e ) {
+				else {
+					// to use anything else for prefixless ids than 'item' could get very confusing
 					$page = $entityContentFactory->getWikiPageForId( Item::ENTITY_TYPE, $id );
 				}
 

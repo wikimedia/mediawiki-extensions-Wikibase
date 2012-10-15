@@ -72,6 +72,32 @@ class EntityFactory {
 	 *
 	 * @param string $id
 	 *
+	 * @return bool true if a prefix is found, false if it does not
+	 */
+	public function isPrefixedId( $id ) {
+		static $regex = false;
+
+		if ( $regex === false ) {
+			$typeList = array();
+
+			foreach ( self::$prefixMap as $setting => $entityType ) {
+				$typeList[] = preg_quote( Settings::get( $setting ), '/' );
+			}
+
+			// This could create problems if parts of prefixes are reused,
+			// or if someone gets the brilliant idea of using an empty string as prefix
+			$regex = '/^(' . implode( '|', $typeList) . ')\d/';
+		}
+
+		// note that this hides errors due to malformed prefixes
+		return preg_match( $regex, $id) === 1;
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @param string $id
+	 *
 	 * @return string
 	 * @throws \MWException
 	 */
