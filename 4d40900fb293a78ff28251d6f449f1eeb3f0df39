@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//+6w\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-15T08:31:59Z",
+      "side": 1,
+      "message": "Is there any clear and typical usecase where this should be false? Setting this to false means isWriteMode will return false for modules that usually changes things, that is they will not anymore demand write rights. Even during debuging it would be very seldom to turn off checking of write rights, so I think this is wrong.",
+      "revId": "4d40900fb293a78ff28251d6f449f1eeb3f0df39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
