@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//+b4\u003d",
+        "filename": "lib/tests/phpunit/changes/ChangeRowTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T19:37:47Z",
+      "side": 1,
+      "message": "indenting is messed up at several places",
+      "revId": "6186de0a56b887f92312e0cb15958044989a7a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+b0\u003d",
+        "filename": "lib/tests/phpunit/changes/ChangeRowTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T19:37:47Z",
+      "side": 1,
+      "message": "Why are you copying the base class method here?",
+      "revId": "6186de0a56b887f92312e0cb15958044989a7a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+bw\u003d",
+        "filename": "lib/tests/phpunit/changes/ChangeRowTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T19:37:47Z",
+      "side": 1,
+      "message": "Again, why did you copy this? And why is it creating an instance that it only returns (which is not used anywhere then)?",
+      "revId": "6186de0a56b887f92312e0cb15958044989a7a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+bs\u003d",
+        "filename": "lib/tests/phpunit/changes/ChangeRowTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T19:37:47Z",
+      "side": 1,
+      "message": "And again, it should work just fine if you left this up to the base class",
+      "revId": "6186de0a56b887f92312e0cb15958044989a7a40",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
