@@ -406,8 +406,6 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
-		global $wgLanguageCode;
-
 		$editUrl = Settings::get( 'repoBase' );
 		if( !$editUrl ) {
 			return true;
