@@ -173,7 +173,7 @@ class ApiLinkTitles extends Api {
 	 * @return bool
 	 */
 	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 	}
 
 	/**
@@ -181,7 +181,7 @@ class ApiLinkTitles extends Api {
 	 * @return bool
 	 */
 	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 	}
 
 	/**
@@ -189,7 +189,7 @@ class ApiLinkTitles extends Api {
 	 * @return bool
 	 */
 	public function isWriteMode() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
+		return true;
 	}
 
 	/**
