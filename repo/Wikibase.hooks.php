@@ -397,8 +397,7 @@ final class RepoHooks {
 				'apiInDebug' => false,
 
 				// Additional settings for API when debugging is on to
-				// facilitate testing, do not turn on in production!
-				'apiDebugWithWrite' => true,
+				// facilitate testing.
 				'apiDebugWithPost' => false,
 				'apiDebugWithRights' => false,
 				'apiDebugWithTokens' => false,
