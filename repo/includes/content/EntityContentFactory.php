@@ -137,6 +137,18 @@ class EntityContentFactory {
 	}
 
 	/**
+	 * Is the given id prefixed?
+	 * @since 0.2
+	 *
+	 * @param string $id
+	 *
+	 * @return 1|0|false 1 if a prefix is found, 0 if it does not, or FALSE if an error occurred.
+	 */
+	public function isPrefixedId( $id ) {
+		return EntityFactory::singleton()->isPrefixedId( $id );
+	}
+
+	/**
 	 * Get the entity content for the entity with the provided id
 	 * if it's available to the specified audience.
 	 * If the specified audience does not have the ability to view this

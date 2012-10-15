@@ -53,10 +53,10 @@ abstract class ApiModifyEntity extends Api {
 		// If we have an id try that first
 		if ( isset( $params['id'] ) ) {
 			$entityContentFactory = EntityContentFactory::singleton();
-			try {
+			if ( $entityContentFactory->isPrefixedId( $params['id'] ) ) {
 				$entityContent = $entityContentFactory->getFromPrefixedId( $params['id'], \Revision::FOR_THIS_USER );
 			}
-			catch ( \MWException $e ) {
+			else {
 				$entityContent = $entityContentFactory->getFromId( $params['type'], $params['id'], \Revision::FOR_THIS_USER );
 			}
 
