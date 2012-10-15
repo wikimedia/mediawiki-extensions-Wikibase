@@ -178,4 +178,50 @@ class ChangeRow extends ORMRow implements Change {
 		return $this->getField( 'object_id' );
 	}
 
+	/**
+	 * Get recent changes info from changes data
+	 *
+	 * @since 0.2
+	 *
+	 * @return array
+	 * @throws \MWException
+	 */
+	public function getRCInfo() {
+		$info = $this->getField( 'info' );
+
+		if ( !array_key_exists( 'rc', $info ) ) {
+			throw new \MWException( 'Cannot rc info when it has not been set yet.' );
+		}
+
+		return $info['rc'];
+	}
+
+	/**
+	 * Store recent changes info in changes
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $rc
+	 */
+	public function setRCInfo( $rc ) {
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+
+		$validKeys = array(
+			'rc_curid',
+			'rc_this_oldid',
+			'rc_last_oldid',
+			'rc_user',
+			'rc_user_text'
+		);
+
+		foreach ( array_keys( $rc ) as $key ) {
+			if ( !in_array( $key, $validKeys ) ) {
+				unset( $rc[$key] );
+			}
+		}
+
+		$info['rc'] = $rc;
+		$this->setField( 'info', $info );
+	}
+
 }
