@@ -2,11 +2,8 @@
 
 namespace Wikibase\Test;
 use Wikibase\StatementList;
-use Wikibase\Statements;
-use Wikibase\Statement;
 use Wikibase\StatementObject;
 use Wikibase\Hashable;
-use Wikibase\ClaimObject;
 use Wikibase\PropertyNoValueSnak;
 
 /**

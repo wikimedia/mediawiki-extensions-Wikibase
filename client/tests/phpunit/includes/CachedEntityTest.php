@@ -1,8 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\CachedEntity as CachedEntity;
-use Wikibase\EntityCache as EntityCache;
 use Wikibase\Item as Item;
 use Wikibase\Property as Property;
 use Wikibase\ItemObject as ItemObject;

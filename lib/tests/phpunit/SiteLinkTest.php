@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use \Wikibase\SiteLink as SiteLink;
-use Site;
 use Sites;
 
 /**

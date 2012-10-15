@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use Diff\MapDiff as MapDiff;
-use Diff\ListDiff as ListDiff;
 use Wikibase\ChangesTable as ChangesTable;
 
 /**

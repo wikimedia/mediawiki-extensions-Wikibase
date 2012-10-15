@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\EntityCache as EntityCache;
 use \Wikibase\EntityCacheTable as EntityCacheTable;
 use \Wikibase\Entity as Entity;
 

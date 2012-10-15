@@ -3,7 +3,6 @@
 namespace Wikibase;
 use Diff\MapDiff as MapDiff;
 use Diff\DiffOp;
-use Diff\IDiff as IDiff;
 
 
 /**

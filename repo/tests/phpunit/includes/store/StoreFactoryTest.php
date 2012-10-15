@@ -1,8 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Store as Store;
-use Wikibase\StoreFactory as StoreFactory;
+use Wikibase\StoreFactory;
 
 /**
  * Tests for the Wikibase\StoreFactory class.

@@ -1,9 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemHandler as ItemHandler;
 use Wikibase\Utils;
-use \Wikibase\Item as Item;
 use \Wikibase\ItemContent as ItemContent;
 use WikiPage, Title, WikitextContent;
 

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use Wikibase\ApiSetSiteLink;
 
 /**
  * Additional tests for ApiLinkSite API module.

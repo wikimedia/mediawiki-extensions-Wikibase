@@ -1,8 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-//use ApiLangAttributeBase;
-use \Wikibase\Settings as Settings;
 
 /**
  * Tests for the ApiWikibaseSetDescription API module.

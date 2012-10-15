@@ -1,8 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Item as Item;
-use Diff\MapDiff as MapDiff;
+use Diff\MapDiff;
 
 /**
  * Tests for the Wikibase\DiffChange class.

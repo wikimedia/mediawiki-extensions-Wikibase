@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use User, WebRequest, WikiPage, Action, IContextSource;
+use User, WebRequest, WikiPage, Action;
 use RequestContext;
 use FauxRequest;
 use MediaWikiTestCase;

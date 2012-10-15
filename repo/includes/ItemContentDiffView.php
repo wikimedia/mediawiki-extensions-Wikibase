@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use Content, Html;
 
 /**
  * Difference view for Wikibase items.

@@ -5,11 +5,7 @@ use User;
 use Wikibase\Utils;
 use Wikibase\SiteLink;
 use WikiPage;
-use Page;
 use Title;
-
-use \Wikibase\Item;
-use \Wikibase\ItemContent;
 
 /**
  * Tests for blocking of direct editing.

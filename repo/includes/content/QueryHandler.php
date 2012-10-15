@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Title, Content, ParserOptions, ParserOutput;
+use Title, ParserOutput;
 
 /**
  * Content handler for Wikibase items.

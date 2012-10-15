@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use Wikibase\Settings as Settings;
 
 /**
  * Tests for setting sitelinks throug from-to -pairs.

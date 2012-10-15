@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Http;
+use ApiBase, User;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
