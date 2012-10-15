@@ -203,7 +203,7 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @param array $rc
 	 */
-	public function setRCInfo( $rc ) {
+	public function setRCInfo( $rc, $override = true ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 
 		$validKeys = array(
@@ -220,7 +220,12 @@ class ChangeRow extends ORMRow implements Change {
 			}
 		}
 
-		$info['rc'] = $rc;
+		if ( $override ) {
+			$info['rc'] = array_merge( $info['rc'], $rc );
+		} else {
+			$info['rc'] = array_merge( $rc, $info['rc'] );
+		}
+
 		$this->setField( 'info', $info );
 	}
 
