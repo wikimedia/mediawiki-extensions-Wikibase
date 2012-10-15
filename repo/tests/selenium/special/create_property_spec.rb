@@ -42,20 +42,23 @@ describe "Check NewProperty special page" do
         page.descriptionInputField?.should be_true
       end
     end
+    it "should create a new property with description and empty label" do
+      description = generate_random_string(20)
+      visit_page(NewPropertyPage) do |page|
+        page.createEntityDescriptionField = description
+        page.createEntitySubmit
+        page.wait_for_entity_to_load
+      end
+      on_page(PropertyPage) do |page|
+        page.entityDescriptionSpan.should == description
+        page.labelInputField?.should be_true
+      end
+    end
   end
 
   context "create property error behaviour" do
     it "should fail to create item with empty label & description" do
       visit_page(NewPropertyPage) do |page|
-        page.createEntitySubmit
-        page.createEntityLabelField?.should be_true
-        page.createEntityDescriptionField?.should be_true
-      end
-    end
-    it "should fail to create a new property with description and empty label" do
-      description = generate_random_string(20)
-      visit_page(NewPropertyPage) do |page|
-        page.createEntityDescriptionField = description
         page.createEntitySubmit
         page.createEntityLabelField?.should be_true
         page.createEntityDescriptionField?.should be_true
