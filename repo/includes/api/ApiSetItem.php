@@ -194,6 +194,7 @@ class ApiSetItem extends ApiModifyEntity {
 					}
 
 					$aliases = array();
+
 					foreach ( $list as $langCode => $arg ) {
 						if ( intval( $langCode ) ) {
 							$aliases[] = ( array_values($arg) === $arg ) ? $arg : array( $arg );
@@ -205,6 +206,7 @@ class ApiSetItem extends ApiModifyEntity {
 					$setAliases = array();
 					$addAliases = array();
 					$remAliases = array();
+
 					foreach ( $aliases as $langCode => $args ) {
 						foreach ( $args as $arg ) {
 							$status->merge( $this->checkMultilangArgs( $arg, $langCode, $languages ) );
@@ -233,6 +235,11 @@ class ApiSetItem extends ApiModifyEntity {
 						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
 
+					unset( $aliases );
+					unset( $setAliases );
+					unset( $addAliases );
+					unset( $remAliases );
+
 					break;
 
 				case 'sitelinks':
@@ -241,6 +248,7 @@ class ApiSetItem extends ApiModifyEntity {
 					}
 
 					$sites = $this->getSiteLinkTargetSites();
+
 					foreach ( $list as $siteId => $arg ) {
 						$status->merge( $this->checkSiteLinks( $arg, $siteId, $sites ) );
 						if ( array_key_exists( 'remove', $arg ) || $arg['title'] === "" ) {
@@ -260,12 +268,19 @@ class ApiSetItem extends ApiModifyEntity {
 							if ( $ret === false ) {
 								$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
 							}
+
+							unset( $site );
+							unset( $page );
+							unset( $link );
+							unset( $ret );
 						}
 					}
 
 					if ( !$status->isOk() ) {
 						$this->dieUsage( "Contained status: $1", $status->getWikiText() );
 					}
+
+					unset( $sites );
 
 					break;
 
