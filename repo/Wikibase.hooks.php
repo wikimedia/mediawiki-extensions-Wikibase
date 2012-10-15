@@ -104,7 +104,7 @@ final class RepoHooks {
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
-			'ItemView', 
+			'ItemView',
 			'Autocomment',
 			'EditEntity',
 
@@ -245,6 +245,15 @@ final class RepoHooks {
 				'time' => $revision->getTimestamp(),
 			) );
 
+			$change->setRCInfo( array(
+				'rc_user_id' => $revision->getUser(),
+				'rc_user_text' => $revision->getUserText(),
+				'rc_curid' => $revision->getPage(),
+				'rc_this_oldid' => $revision->getId(),
+				'rc_last_oldid' => $revision->getParentId(),
+				'kittens' => 'muffin',
+			) );
+
 			ChangeNotifier::singleton()->handleChange( $change );
 		}
 
@@ -288,6 +297,15 @@ final class RepoHooks {
 			'user_id' => $user->getId(),
 			'object_id' => $entity->getId(),
 			'time' => $logEntry->getTimestamp(),
+		) );
+
+		// TODO!
+		$change->setRCInfo( array(
+			'rc_user_id' => $user->getId(),
+//			'rc_user_text' => $revision->getUserText(),
+//			'rc_curid' => $revision->getPage(),
+//			'rc_this_oldid' => $revision->getId(),
+//			'rc_last_oldid' => $revision->getParentId(),
 		) );
 
 		ChangeNotifier::singleton()->handleChange( $change );
