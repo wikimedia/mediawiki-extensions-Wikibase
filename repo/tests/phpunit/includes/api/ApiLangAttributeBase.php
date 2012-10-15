@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\Settings as Settings;
 
 /**
  * Tests for the ApiWikibaseSetAliases API module.

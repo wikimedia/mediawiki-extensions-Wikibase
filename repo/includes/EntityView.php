@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, Site, MediaWikiSite;
+use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, MediaWikiSite;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.

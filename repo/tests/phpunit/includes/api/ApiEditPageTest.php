@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use Wikibase\Settings as Settings;
 
 /**
  * Tests for blocking of direct editing.

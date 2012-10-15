@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput, DataUpdate;
+use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput;
 
 /**
  * Content object for articles representing Wikibase items.

@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test;
 use Wikibase\SnakList;
-use Wikibase\Snaks as Snaks;
-use Wikibase\Snak as Snak;
 use Wikibase\PropertyValueSnak;
 use DataValues\StringValue;
 use Wikibase\Hashable;

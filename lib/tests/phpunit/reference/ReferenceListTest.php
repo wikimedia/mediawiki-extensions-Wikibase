@@ -2,8 +2,6 @@
 
 namespace Wikibase\Test;
 use Wikibase\ReferenceList as ReferenceList;
-use Wikibase\References as References;
-use Wikibase\Reference as Reference;
 use Wikibase\ReferenceObject as ReferenceObject;
 use Wikibase\Hashable as Hashable;
 

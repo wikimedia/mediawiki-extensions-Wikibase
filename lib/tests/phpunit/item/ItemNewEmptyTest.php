@@ -2,7 +2,6 @@
 
 namespace Wikibase\Test;
 use \Wikibase\ItemObject as ItemObject;
-use \Wikibase\Item as Item;
 use \Wikibase\SiteLink as SiteLink;
 
 /**

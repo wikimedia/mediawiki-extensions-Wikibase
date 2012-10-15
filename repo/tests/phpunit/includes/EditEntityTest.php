@@ -5,7 +5,6 @@ use \Wikibase\EntityContent as EntityContent;
 use \Wikibase\EditEntity as EditEntity;
 use \Wikibase\ItemContent as ItemContent;
 use \Status as Status;
-use \FauxRequest as FauxRequest;
 
 /**
  * Test EditEntity.

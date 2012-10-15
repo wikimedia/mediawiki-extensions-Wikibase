@@ -3,10 +3,8 @@
 namespace Wikibase\Test;
 use Wikibase\StatementObject as StatementObject;
 use Wikibase\Statement as Statement;
-use Wikibase\ClaimObject as ClaimObject;
 use Wikibase\Claim as Claim;
 use Wikibase\ReferenceObject as ReferenceObject;
-use Wikibase\Reference as Reference;
 use \DataValues\StringValue;
 
 /**

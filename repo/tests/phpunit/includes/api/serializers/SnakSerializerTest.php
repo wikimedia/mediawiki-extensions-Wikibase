@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ApiSerializerObject;
 
 /**
  * Tests for the Wikibase\SnakSerializer class.

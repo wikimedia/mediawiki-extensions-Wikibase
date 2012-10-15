@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use User, Title, WikiPage, Content, RequestContext;
+use User, Title, WikiPage, RequestContext;
 
 /**
  * Content handler for Wikibase items.
