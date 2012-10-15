@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//+qs\u003d",
+        "filename": "repo/includes/api/ApiGetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T13:34:13Z",
+      "side": 1,
+      "message": "\"The settings\"? What settings?\n\nEither something is a prefixed id or it\u0027s not right? That\u0027s a boolean.",
+      "parentUuid": "AAABEn//+uY\u003d",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//+u4\u003d",
         "filename": "repo/includes/api/ApiGetEntities.php",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Its you who wants every check to be explicit. Make up your mind.",
       "parentUuid": "AAABEn//+u4\u003d",
+      "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+qo\u003d",
+        "filename": "repo/includes/api/ApiGetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-15T13:34:13Z",
+      "side": 1,
+      "message": "Since it is a boolean, the check is already explicit enough - there is no possible type confusion.\n\nThink a bit about what you are doing with adding \u003d\u003d\u003d true. Is it not the case you end up with the exact same value in any possible case of the algorithm? You can add more \u003d\u003d\u003d true by that reasoning :)\n\n$isPrefixed \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true \u003d\u003d\u003d true // for great justice",
+      "parentUuid": "AAABEn//+uU\u003d",
       "revId": "c3ea5ee5a0a8036f243438aea059a59d5ab0ef1b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
