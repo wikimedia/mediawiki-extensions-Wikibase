@@ -135,6 +135,8 @@ $wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/ItemObject.
 
 // includes/property
 $wgAutoloadClasses['Wikibase\Property'] 			= $dir . 'includes/property/Property.php';
+$wgAutoloadClasses['Wikibase\PropertyDiff'] 		= $dir . 'includes/property/PropertyDiff.php';
+$wgAutoloadClasses['Wikibase\PropertyDiffView'] 	= $dir . 'includes/property/PropertyDiffView.php';
 $wgAutoloadClasses['Wikibase\PropertyObject'] 		= $dir . 'includes/property/PropertyObject.php';
 
 // includes/query
