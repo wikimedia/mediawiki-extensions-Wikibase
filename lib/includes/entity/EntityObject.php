@@ -198,7 +198,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getAliases()
+	 * @see Entity::getAliases()
 	 *
 	 * @since 0.1
 	 *
@@ -212,11 +212,12 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getAllAliases()
+	 * @see Entity::getAllAliases()
 	 *
 	 * @since 0.1
 	 *
-	 * @param $languages
+	 * @param array|null $languages
+	 *
 	 * @return array
 	 */
 	public function getAllAliases( array $languages = null ) {
@@ -230,7 +231,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::setAliases()
+	 * @see Entity::setAliases()
 	 *
 	 * @since 0.1
 	 *
@@ -242,7 +243,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::addAliases()
+	 * @see Entity::addAliases()
 	 *
 	 * @since 0.1
 	 *
@@ -260,7 +261,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::removeAliases()
+	 * @see Entity::removeAliases()
 	 *
 	 * @since 0.1
 	 *
@@ -278,7 +279,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getDescriptions()
+	 * @see Entity::getDescriptions()
 	 *
 	 * @since 0.1
 	 *
@@ -291,7 +292,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getLabels()
+	 * @see Entity::getLabels()
 	 *
 	 * @since 0.1
 	 *
@@ -304,7 +305,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getDescription()
+	 * @see Entity::getDescription()
 	 *
 	 * @since 0.1
 	 *
@@ -318,7 +319,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getLabel()
+	 * @see Entity::getLabel()
 	 *
 	 * @since 0.1
 	 *

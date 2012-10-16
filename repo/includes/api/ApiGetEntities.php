@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase;
+use ApiBase, MWException;
 
 /**
  * API module to get the data for one or more Wikibase items.
@@ -13,8 +13,8 @@ use ApiBase;
  * @ingroup API
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ApiGetEntities extends Api {
 
@@ -71,18 +71,7 @@ class ApiGetEntities extends Api {
 
 		$params['ids'] = array_unique( $params['ids'], SORT_NUMERIC );
 
-		$languages = $params['languages'];
-
-		// This really needs a more generic solution as similar tricks will be
-		// done to other props as well, for example variants for the language
-		// attributes. It would also be nice to write something like */urls for
-		// all props that can supply full urls.
-		$siteLinkOptions = array();
-		if ( in_array( 'sitelinks', $params['sort'] ) ) {
-			$siteLinkOptions[] = $params['dir'];
-		}
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
-			$siteLinkOptions[] = 'url';
 			$props = array_flip( array_values( $params['props'] ) );
 			unset( $props['sitelinks/urls'] );
 			$props['sitelinks'] = true;
@@ -91,94 +80,19 @@ class ApiGetEntities extends Api {
 		else {
 			$props = $params['props'];
 		}
-		if ( $siteLinkOptions === array() ) {
-			$siteLinkOptions = null;
-		}
 
-		$entityFactory = EntityFactory::singleton();
-		$entityContentFactory = EntityContentFactory::singleton();
+		$options = new EntitySerializationOptions();
+		$options->setLanguages( $params['languages'] );
+		$options->setProps( $props );
+		$options->setUseKeys( $this->getUsekeys() );
+
+		$entitySerializer = new EntitySerializer( $this->getResult(), $options );
 
 		// loop over all items
-		foreach ($params['ids'] as $id) {
-
-			$res = $this->getResult();
-
-			try {
-				// we are not using the type, we are only trying to get it to see if it fails
-				$type = $entityFactory->getEntityTypeFromPrefixedId( $id );
-				$numId = $entityFactory->getUnprefixedId( $id );
-				$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
-				$res->addValue( $entityPath, 'id', $numId );
-			}
-			catch ( \MWException $e ) {
-				$entityPath = array( 'entities', $id );
-				$res->addValue( $entityPath, 'id', $id );
-			}
-
-			// later we do a getContent but only if props are defined
-			if ( $params['props'] !== array() ) {
-				try {
-					$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
-				}
-				catch ( \MWException $e ) {
-					$page = $entityContentFactory->getWikiPageForId( Item::ENTITY_TYPE, $id );
-				}
-
-				if ( $page->exists() ) {
-					// as long as getWikiPageForId only returns ids for legal items this holds
-					/**
-					 * @var $entityContent EntityContent
-					 */
-					$entityContent = $page->getContent();
-
-					if ( is_null( $entityContent ) ) {
-						continue;
-					}
-
-					// TODO: Onwards from here we need a formatter object of some kind to generate the output
-					// Basically split of "printing" for specific entities, now we only handles items.
-					$entity = $entityContent->getItem();
-					$res->addValue( $entityPath, 'type', $entity->getType() );
-
-					// loop over all props
-					foreach ( $props as $key ) {
-						switch ( $key ) {
-						case 'info':
-							$res->addValue( $entityPath, 'pageid', intval( $page->getId() ) );
-							$title = $page->getTitle();
-							$res->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
-							$res->addValue( $entityPath, 'title', $title->getPrefixedText() );
-							$revision = $page->getRevision();
-							if ( $revision !== null ) {
-								$res->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
-								$res->addValue( $entityPath, 'touched', $revision->getTimestamp( TS_ISO_8601 ) );
-								$res->addValue( $entityPath, 'length', intval( $revision->getSize() ) );
-							}
-							$res->addValue( $entityPath, 'count', intval( $page->getCount() ) );
-							break;
-						case 'aliases':
-							$this->addAliasesToResult( $entity->getAllAliases( $languages ), $entityPath );
-							break;
-						case 'sitelinks':
-							$this->addSiteLinksToResult( $entity->getSiteLinks(), $entityPath, 'sitelinks', 'sitelink', $siteLinkOptions );
-							break;
-						case 'descriptions':
-							$this->addDescriptionsToResult( $entity->getDescriptions( $languages ), $entityPath );
-							break;
-						case 'labels':
-							$this->addLabelsToResult( $entity->getLabels( $languages ), $entityPath );
-							break;
-						default:
-							// should never be here, because it should be something for the earlyer cases
-							$this->dieUsage( $this->msg( 'wikibase-api-not-recognized' )->text(), 'not-recognized' );
-						}
-					}
-				}
-				else {
-					$this->getResult()->addValue( $entityPath, 'missing', "" );
-				}
-			}
+		foreach ( $params['ids'] as $entityId ) {
+			$this->handleEntity( $entityId, $params, $props, $entitySerializer );
 		}
+
 		if ( !$this->getUsekeys() ) {
 			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
 		}
@@ -189,6 +103,107 @@ class ApiGetEntities extends Api {
 			'success',
 			(int)$success
 		);
+	}
+
+	/**
+	 * Fetches the entity with provided id and adds its serialization to the output.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $id
+	 * @param array $params
+	 * @param array $props
+	 * @param EntitySerializer $entitySerializer
+	 *
+	 * @throws MWException
+	 */
+	protected function handleEntity( $id, array $params, array $props, EntitySerializer $entitySerializer ) {
+		$entityFactory = EntityFactory::singleton();
+		$entityContentFactory = EntityContentFactory::singleton();
+
+		$res = $this->getResult();
+
+		try {
+			// we are not using the type, we are only trying to get it to see if it fails
+			$entityFactory->getEntityTypeFromPrefixedId( $id );
+			$numId = $entityFactory->getUnprefixedId( $id );
+			$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
+		}
+		catch ( MWException $e ) {
+			$entityPath = array( 'entities', $id );
+		}
+
+		// later we do a getContent but only if props are defined
+		if ( $params['props'] !== array() ) {
+			try {
+				$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
+			}
+			catch ( MWException $e ) {
+				$page = $entityContentFactory->getWikiPageForId( Item::ENTITY_TYPE, $id );
+			}
+
+			if ( $page->exists() ) {
+				// as long as getWikiPageForId only returns ids for legal items this holds
+				/**
+				 * @var $entityContent EntityContent
+				 */
+				$entityContent = $page->getContent();
+
+				if ( is_null( $entityContent ) ) {
+					return;
+				}
+
+				if ( in_array( 'info', $props ) ) {
+					$res->addValue( $entityPath, 'pageid', intval( $page->getId() ) );
+					$title = $page->getTitle();
+					$res->addValue( $entityPath, 'ns', intval( $title->getNamespace() ) );
+					$res->addValue( $entityPath, 'title', $title->getPrefixedText() );
+					$revision = $page->getRevision();
+
+					if ( $revision !== null ) {
+						$res->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
+						$res->addValue( $entityPath, 'touched', $revision->getTimestamp( TS_ISO_8601 ) );
+						$res->addValue( $entityPath, 'length', intval( $revision->getSize() ) );
+					}
+
+					$res->addValue( $entityPath, 'count', intval( $page->getCount() ) );
+				}
+
+				$entity = $entityContent->getEntity();
+
+				// FIXME: move to serializer
+				if ( in_array( 'sitelinks', $props ) ) {
+					// This really needs a more generic solution as similar tricks will be
+					// done to other props as well, for example variants for the language
+					// attributes. It would also be nice to write something like */urls for
+					// all props that can supply full urls.
+					$siteLinkOptions = array();
+
+					if ( in_array( 'sitelinks', $params['sort'] ) ) {
+						$siteLinkOptions[] = $params['dir'];
+					}
+
+					if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
+						$siteLinkOptions[] = 'url';
+					}
+
+					if ( $siteLinkOptions === array() ) {
+						$siteLinkOptions = null;
+					}
+
+					$this->addSiteLinksToResult( $entity->getSiteLinks(), $entityPath, 'sitelinks', 'sitelink', $siteLinkOptions );
+				}
+
+				$entitySerialization = $entitySerializer->getSerialized( $entity );
+
+				foreach ( $entitySerialization as $key => $value ) {
+					$res->addValue( $entityPath, $key, $value );
+				}
+			}
+			else {
+				$this->getResult()->addValue( $entityPath, 'missing', "" );
+			}
+		}
 	}
 
 	/**
