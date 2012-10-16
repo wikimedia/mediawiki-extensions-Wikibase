@@ -361,42 +361,6 @@ table.wb-sitelinks tfoot td.wb-sitelinks-placeholder {
 /********** /SITE LINKS **********/
 
 
-/********** jquery.ui.autocomplete **********/
-
-.ui-widget-content {
-	border-color: #C9C9C9;
-	background: white;
-}
-
-.ui-widget-content .ui-state-hover {
-	border: none;
-	background: #4C59A6;
-	color: white;
-}
-
-.ui-menu {
-	padding: 0;
-}
-
-.ui-menu .ui-menu-item a {
-	padding: 0 0.2em;
-}
-
-.ui-menu .ui-menu-item a.ui-state-hover,
-.ui-menu .ui-menu-item a.ui-state-active {
-	margin: 0;
-}
-
-/********** /jquery.ui.autocomplete **********/
-
-
-/* used to detect scrollbar width */
-.ruler {
-	display: none;
-	font-family: inherit;
-	font-size: inherit;
-}
-
 .wb-clear {
 	clear: both;
 }
