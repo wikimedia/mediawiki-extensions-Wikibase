@@ -39,9 +39,25 @@ class EntitySerializer extends ApiSerializerObject {
 	 *
 	 * @since 0.2
 	 *
-	 * @var EntitySerializationOptions|null
+	 * @var EntitySerializationOptions
 	 */
 	protected $options;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.2
+	 *
+	 * @param \ApiResult $apiResult
+	 * @param EntitySerializationOptions|null $options
+	 */
+	public function __construct( \ApiResult $apiResult, EntitySerializationOptions $options = null ) {
+		if ( $options === null ) {
+			$options = new EntitySerializationOptions();
+		}
+
+		parent::__construct( $apiResult, $options );
+	}
 
 	/**
 	 * @see ApiSerializer::getSerialized
@@ -53,12 +69,12 @@ class EntitySerializer extends ApiSerializerObject {
 	 * @return array
 	 * @throws MWException
 	 */
-	public function getSerialized( $entity ) {
+	public final function getSerialized( $entity ) {
 		if ( !( $entity instanceof Entity ) ) {
 			throw new MWException( 'EntitySerializer can only serialize Entity objects' );
 		}
 
-		$serialization = array();
+		$serialization = $this->getEntityTypeSpecificSerialization( $entity );
 
 		$serialization['id'] = $entity->getPrefixedId();
 		$serialization['type'] = $entity->getType();
@@ -67,10 +83,6 @@ class EntitySerializer extends ApiSerializerObject {
 			switch ( $key ) {
 				case 'aliases':
 					$serialization['aliases'] = $this->getAliasesSerialization( $entity );
-					break;
-				case 'sitelinks':
-					// TODO
-					//$this->addSiteLinksToResult( $entity->getSiteLinks(), $entityPath, 'sitelinks', 'sitelink', $siteLinkOptions );
 					break;
 				case 'descriptions':
 					$serialization['descriptions'] = $this->getDescriptionsSerialization( $entity );
@@ -85,6 +97,20 @@ class EntitySerializer extends ApiSerializerObject {
 	}
 
 	/**
+	 * Extension point for subclasses.
+	 *
+	 * @since 0.2
+	 *
+	 * @param Entity $entity
+	 *
+	 * @return array
+	 */
+	protected function getEntityTypeSpecificSerialization( Entity $entity ) {
+		// Stub, override expected
+		return array();
+	}
+
+	/**
 	 * Returns the aliases in an array ready for serialization.
 	 *
 	 * @since 0.2
@@ -93,7 +119,7 @@ class EntitySerializer extends ApiSerializerObject {
 	 *
 	 * @return array
 	 */
-	protected function getAliasesSerialization( Entity $entity ) {
+	protected final function getAliasesSerialization( Entity $entity ) {
 		$value = array();
 
 		$aliases = $entity->getAllAliases( $this->options->getLanguages() );
@@ -139,7 +165,7 @@ class EntitySerializer extends ApiSerializerObject {
 	 *
 	 * @return array
 	 */
-	protected function getDescriptionsSerialization( Entity $entity ) {
+	protected final function getDescriptionsSerialization( Entity $entity ) {
 		$value = array();
 		$idx = 0;
 
@@ -178,7 +204,7 @@ class EntitySerializer extends ApiSerializerObject {
 	 *
 	 * @return array
 	 */
-	protected function getLabelsSerialization( Entity $entity ) {
+	protected final function getLabelsSerialization( Entity $entity ) {
 		$value = array();
 		$idx = 0;
 

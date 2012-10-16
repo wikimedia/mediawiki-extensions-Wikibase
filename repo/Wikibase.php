@@ -129,6 +129,7 @@ $wgAutoloadClasses['Wikibase\ApiSerializerObject'] 		= $dir . 'includes/api/seri
 $wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/api/serializers/ByPropertyListSerializer.php';
 $wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/api/serializers/ClaimSerializer.php';
 $wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/api/serializers/EntitySerializer.php';
+$wgAutoloadClasses['Wikibase\ItemSerializer'] 			= $dir . 'includes/api/serializers/ItemSerializer.php';
 $wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/api/serializers/SnakSerializer.php';
 
 // includes/content
@@ -148,7 +149,7 @@ $wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesM
 // includes/specials
 $wgAutoloadClasses['SpecialCreateEntity'] 				= $dir . 'includes/specials/SpecialCreateEntity.php';
 $wgAutoloadClasses['SpecialCreateItem'] 				= $dir . 'includes/specials/SpecialCreateItem.php';
-$wgAutoloadClasses['SpecialNewProperty'] 			= $dir . 'includes/specials/SpecialNewProperty.php';
+$wgAutoloadClasses['SpecialNewProperty'] 				= $dir . 'includes/specials/SpecialNewProperty.php';
 $wgAutoloadClasses['SpecialItemByTitle'] 				= $dir . 'includes/specials/SpecialItemByTitle.php';
 $wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/SpecialListDatatypes.php';
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
@@ -175,14 +176,14 @@ $wgAutoloadClasses['Wikibase\ItemModificationUpdate'] 	= $dir . 'includes/update
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
+$wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
 $wgAutoloadClasses['Wikibase\Test\ApiSerializerBaseTest'] 	= $dir . 'tests/phpunit/includes/api/serializers/ApiSerializerBaseTest.php';
+$wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpunit/includes/api/serializers/EntitySerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
 $wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/ApiLangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit/includes/specials/SpecialPageTestBase.php';
-$wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
-$wgAutoloadClasses['Wikibase\Test\EntityHandlerTest'] 		= $dir . 'tests/phpunit/includes/content/EntityHandlerTest.php';
 
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\ApiGetEntities';

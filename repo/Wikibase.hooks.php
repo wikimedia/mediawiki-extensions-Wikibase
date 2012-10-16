@@ -125,6 +125,7 @@ final class RepoHooks {
 			'api/serializers/ApiSerializer',
 			'api/serializers/ByPropertyListSerializer',
 			'api/serializers/ClaimSerializer',
+			'api/serializers/ItemSerializer',
 			'api/serializers/SnakSerializer',
 
 			'content/EntityContentFactory',

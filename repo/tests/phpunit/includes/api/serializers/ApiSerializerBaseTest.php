@@ -64,8 +64,12 @@ abstract class ApiSerializerBaseTest extends \MediaWikiTestCase {
 	 *
 	 * @since 0.2
 	 */
-	public function testGetSerializedValid( $input, array $expected = null ) {
+	public function testGetSerializedValid( $input, array $expected = null, \Wikibase\ApiSerializationOptions $options = null ) {
 		$serializer = $this->getInstance();
+
+		if ( $options !== null ) {
+			$serializer->setOptions( $options );
+		}
 
 		$output = $serializer->getSerialized( $input );
 		$this->assertInternalType( 'array', $output );
