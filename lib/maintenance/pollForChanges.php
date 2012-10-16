@@ -93,6 +93,7 @@ class PollForChanges extends \Maintenance {
 			// Since people might waste time debugging odd errors when they forget to enable the extension. BTDT.
 			die( 'WikibaseLib has not been loaded.' );
 		}
+
 		$this->changes = ChangesTable::singleton();
 
 		$this->lastChangeId = (int)$this->getOption( 'startid', 0 );
@@ -125,10 +126,20 @@ class PollForChanges extends \Maintenance {
 			file_put_contents( $pidfile, getmypid() ); // create lockfile
 		}
 
+		$changesWiki = Settings::get( 'changesDatabase' );
+
+		if ( $changesWiki ) {
+			self::msg( "Polling changes from $changesWiki." );
+		} else {
+			self::msg( "Polling changes from local wiki." );
+		}
+
 		while ( !$this->done ) {
 			$ms = $this->doPoll();
 			usleep( $ms * 1000 );
 		}
+
+		unlink( $pidfile ); // delete lockfile on normal exit
 	}
 
 	/**
