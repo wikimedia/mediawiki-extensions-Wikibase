@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9sg\u003d",
+        "filename": "client/ExampleSettings.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-16T20:35:24Z",
+      "side": 1,
+      "message": "I would prefer if settings\u0027 description are capitalized (Base URL, Base URL, The global site ID), to be more coherent with comments below .",
+      "revId": "ae109285e121281a102b92b2e1c7b7fa63141b7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9sQ\u003d",
+        "filename": "lib/includes/ChangesTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-16T20:35:24Z",
+      "side": 1,
+      "message": "According the way Jeroen De Dauw comments constructor, I suggest to add something like:\n\n/**\n * Constructor.\n *\n * @since 0.1\n */",
+      "revId": "ae109285e121281a102b92b2e1c7b7fa63141b7e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
