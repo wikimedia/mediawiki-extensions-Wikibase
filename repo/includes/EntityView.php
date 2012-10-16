@@ -98,8 +98,8 @@ abstract class EntityView extends \ContextSource {
 		// show loading spinner as long as JavaScript is initialising;
 		// the fastest way to show the loading spinner is placing the script right after the
 		// corresponsing html
-		$html .= Html::inlineScript(
-			'$( ".wb-entity" ).fadeTo( 0, .3 ).after( function() {
+		$html .= Html::inlineScript( '
+			$( ".wb-entity" ).fadeTo( 0, .3 ).after( function() {
 				var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
 				$div.css( "top", $div.height() + "px" );
 				$div.css(
@@ -107,8 +107,18 @@ abstract class EntityView extends \ContextSource {
 					( parseInt( $( this ).width() / 2 ) - $div.width() / 2 ) + "px"
 				);
 				return $div;
-			} );'
-		);
+			} );
+
+			// Remove loading spinner after a couple of seconds in any case. (e.g. some resource
+			// might not have been loaded silently, so JavaScript is not initialising)
+			// Additionally attaching to window.error would only make sense before any other
+			// JavaScript is parsed. Since the JavaScript is loaded in the header, it does not make
+			// any sense to attach to window.error here.
+			window.setTimeout( function() {
+				$( ".wb-entity" ).fadeTo( 0, 1 );
+				$( ".wb-entity-spinner" ).remove();
+			}, 7000 );
+		' );
 
 		return $html;
 	}
