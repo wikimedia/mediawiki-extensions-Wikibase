@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9ps\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-16T22:06:16Z",
+      "side": 1,
+      "message": "\"timeout.\" (t missing)",
+      "revId": "d41b5a7862a0d646bb5ae606c11f389871b94e98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9po\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-16T22:06:16Z",
+      "side": 1,
+      "message": "\"There are\"",
+      "revId": "d41b5a7862a0d646bb5ae606c11f389871b94e98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9pc\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-16T22:06:16Z",
+      "side": 1,
+      "message": "Please consider to add what changes.",
+      "revId": "d41b5a7862a0d646bb5ae606c11f389871b94e98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9pU\u003d",
+        "filename": "repo/includes/api/ApiSetItem.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-16T22:06:16Z",
+      "side": 1,
+      "message": "It seems so:\nhttps://svn.mediawiki.org/doc/Title_8php_source.html#l00671",
+      "revId": "d41b5a7862a0d646bb5ae606c11f389871b94e98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9pY\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiSetItemTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-16T22:06:16Z",
+      "side": 1,
+      "message": "Check",
+      "revId": "d41b5a7862a0d646bb5ae606c11f389871b94e98",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
