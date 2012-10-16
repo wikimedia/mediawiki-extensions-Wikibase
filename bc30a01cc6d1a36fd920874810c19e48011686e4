@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//99o\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-16T13:24:34Z",
+      "side": 1,
+      "message": "Please provide a unit test for this",
+      "revId": "bc30a01cc6d1a36fd920874810c19e48011686e4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
