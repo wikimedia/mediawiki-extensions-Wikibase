@@ -17,6 +17,7 @@ $messages = array();
  * @author Tobias Gritschacher
  * @author John Erling Blad
  * @author Jens Ohlig
+ * @author Dereckson
  */
 $messages['en'] = array(
 	'wikibase-desc' => 'Structured data repository',
@@ -198,6 +199,7 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-rc-deleted' => '$1 deleted',
 
 	//content model names
 	'content-model-1001' => 'Wikibase item',
@@ -214,6 +216,7 @@ to find out where it went.',
  * @author Raymond
  * @author Shirayuki
  * @author Siebrand
+ * @author Dereckson
  */
 $messages['qqq'] = array(
 	'wikibase-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
@@ -399,6 +402,8 @@ Parameters:
 	'wikibase-item-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases. Parameters:
 * $1 is the number of aliases that were removed;
 * $2 is the language code for the item page.',
+	'wikibase-rc-deleted' => 'The Wikidata recent change message when an associated item has been deleted. Parameters:
+* $1 is the title of the deleted associated item.',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 
