@@ -203,9 +203,8 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @param array $rc
 	 */
-	public function setRCInfo( $rc, $override = true ) {
+	public function setRCInfo( $rc ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-
 		$validKeys = array(
 			'rc_curid',
 			'rc_this_oldid',
@@ -214,19 +213,15 @@ class ChangeRow extends ORMRow implements Change {
 			'rc_user_text'
 		);
 
-		foreach ( array_keys( $rc ) as $key ) {
-			if ( !in_array( $key, $validKeys ) ) {
-				unset( $rc[$key] );
+		if ( is_array( $rc ) ) {
+			foreach ( array_keys( $rc ) as $key ) {
+				if ( !in_array( $key, $validKeys ) ) {
+					unset( $rc[$key] );
+				}
 			}
+			$info['rc'] = $rc;
+			$this->setField( 'info', $info );
 		}
-
-		if ( $override ) {
-			$info['rc'] = array_merge( $info['rc'], $rc );
-		} else {
-			$info['rc'] = array_merge( $rc, $info['rc'] );
-		}
-
-		$this->setField( 'info', $info );
 	}
 
 }
