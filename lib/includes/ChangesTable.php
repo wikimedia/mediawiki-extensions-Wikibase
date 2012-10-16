@@ -17,6 +17,15 @@ use MWException;
 class ChangesTable extends \ORMTable {
 
 	/**
+	 * Constructor.
+	 *
+	 * @since 0.1
+	 */
+	public function __construct() {
+		$this->setTargetWiki( Settings::get( 'changesDatabase' ) );
+	}
+
+	/**
 	 * @see IORMTable::getName()
 	 * @since 0.1
 	 * @return string
