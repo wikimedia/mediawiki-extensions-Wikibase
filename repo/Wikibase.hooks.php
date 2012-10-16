@@ -251,6 +251,7 @@ final class RepoHooks {
 				'rc_curid' => $revision->getPage(),
 				'rc_this_oldid' => $revision->getId(),
 				'rc_last_oldid' => $revision->getParentId(),
+				'rc_comment' => $revision->getComment(),
 			) );
 
 			ChangeNotifier::singleton()->handleChange( $change );
@@ -298,13 +299,14 @@ final class RepoHooks {
 			'time' => $logEntry->getTimestamp(),
 		) );
 
-		// TODO!
 		$change->setRCInfo( array(
 			'rc_user_id' => $user->getId(),
-//			'rc_user_text' => $revision->getUserText(),
-//			'rc_curid' => $revision->getPage(),
-//			'rc_this_oldid' => $revision->getId(),
-//			'rc_last_oldid' => $revision->getParentId(),
+			'rc_user_text' => $user->getName(),
+			'rc_curid' => 0,
+			'rc_this_oldid' => 0,
+			'rc_last_oldid' => 0,
+			// todo: make nicer and i18n
+			'rc_comment' => $wikiPage->getTitle()->getText() . " deleted."
 		) );
 
 		ChangeNotifier::singleton()->handleChange( $change );
