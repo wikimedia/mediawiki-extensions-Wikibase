@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//96g\u003d",
+        "filename": "repo/includes/specials/SpecialSelLabel.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-16T15:02:19Z",
+      "side": 1,
+      "message": "class name wrong, and probably want to extend from the other class with the same name? Clearly this code has not been tested at all",
+      "revId": "f2a3b91d89bc07f4348667e791ae3ec70978342d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//97A\u003d",
+        "filename": "repo/includes/specials/SpecialSelLabel.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-16T15:02:19Z",
+      "side": 1,
+      "message": "incorrect docs, missing @since",
+      "revId": "f2a3b91d89bc07f4348667e791ae3ec70978342d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//97E\u003d",
+        "filename": "repo/includes/specials/SpecialSelLabel.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-16T15:02:19Z",
+      "side": 1,
+      "message": "??",
+      "revId": "f2a3b91d89bc07f4348667e791ae3ec70978342d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//968\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-16T15:02:19Z",
+      "side": 1,
+      "message": "incorrect docs, missing @since",
+      "revId": "f2a3b91d89bc07f4348667e791ae3ec70978342d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//960\u003d",
+        "filename": "repo/includes/specials/SpecialSetEntity.php",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-16T15:02:19Z",
+      "side": 1,
+      "message": "does not return boolean",
+      "revId": "f2a3b91d89bc07f4348667e791ae3ec70978342d",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
