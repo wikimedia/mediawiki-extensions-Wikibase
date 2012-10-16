@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//+Fw\u003d",
+        "filename": "lib/tests/phpunit/changes/TestChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-16T09:35:26Z",
+      "side": 1,
+      "message": "Sems to have spaces here.",
+      "revId": "033ce51d486ea2343f166f9082093ae7658f5414",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//+Fs\u003d",
+        "filename": "lib/tests/phpunit/changes/TestChanges.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-16T09:35:26Z",
+      "side": 1,
+      "message": "And here",
+      "revId": "033ce51d486ea2343f166f9082093ae7658f5414",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
