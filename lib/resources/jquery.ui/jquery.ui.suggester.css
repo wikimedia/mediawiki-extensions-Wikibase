@@ -16,6 +16,11 @@
 	color: white;
 }
 
+.ui-suggester-list .ui-state-hover a,
+.ui-suggester-list .ui-state-hover a:hover {
+	color: white;
+}
+
 .ui-suggester-list {
 	padding: 0;
 }
