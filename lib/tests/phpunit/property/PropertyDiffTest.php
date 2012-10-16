@@ -1,11 +1,10 @@
 <?php
 namespace Wikibase\Test;
-use Wikibase\SiteLink;
-use Wikibase\Item;
-use Wikibase\ItemObject;
+use Wikibase\Property;
+use Wikibase\PropertyObject;
 
 /**
- * Tests for the Wikibase\EntityObject deriving classes.
+ * Tests for the Wikibase\PropertyObject deriving classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,15 +32,16 @@ use Wikibase\ItemObject;
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  */
 
-class ItemDiffTest extends EntityDiffTest {
-
+class PropertyDiffTest extends EntityDiffTest {
 	public function provideApplyData() {
+
 		$tests = array();
 
 		// #0: add label
-		$a = ItemObject::newEmpty();
+		$a = PropertyObject::newEmpty();
 		$a->setLabel( 'en', 'Test' );
 
 		$b = $a->copy();
@@ -50,7 +50,7 @@ class ItemDiffTest extends EntityDiffTest {
 		$tests[] = array( $a, $b );
 
 		// #1: remove label
-		$a = ItemObject::newEmpty();
+		$a = PropertyObject::newEmpty();
 		$a->setLabel( 'en', 'Test' );
 		$a->setLabel( 'de', 'Test' );
 
@@ -60,14 +60,14 @@ class ItemDiffTest extends EntityDiffTest {
 		$tests[] = array( $a, $b );
 
 		// #2: change label
-		$a = ItemObject::newEmpty();
+		$a = PropertyObject::newEmpty();
 		$a->setLabel( 'en', 'Test' );
 
 		$b = $a->copy();
 		$b->setLabel( 'en', 'Test!!!' );
 
 		// #3: add description ------------------------------
-		$a = ItemObject::newEmpty();
+		$a = PropertyObject::newEmpty();
 		$a->setDescription( 'en', 'Test' );
 
 		$b = $a->copy();
@@ -76,7 +76,7 @@ class ItemDiffTest extends EntityDiffTest {
 		$tests[] = array( $a, $b );
 
 		// #4: remove description
-		$a = ItemObject::newEmpty();
+		$a = PropertyObject::newEmpty();
 		$a->setDescription( 'en', 'Test' );
 		$a->setDescription( 'de', 'Test' );
 
@@ -86,7 +86,7 @@ class ItemDiffTest extends EntityDiffTest {
 		$tests[] = array( $a, $b );
 
 		// #5: change description
-		$a = ItemObject::newEmpty();
+		$a = PropertyObject::newEmpty();
 		$a->setDescription( 'en', 'Test' );
 
 		$b = $a->copy();
@@ -94,85 +94,17 @@ class ItemDiffTest extends EntityDiffTest {
 
 		$tests[] = array( $a, $b );
 
-		// #6: add alias ------------------------------
-		$a = ItemObject::newEmpty();
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->addAliases( 'en', array( 'Quux' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #7: add alias language
-		$a = ItemObject::newEmpty();
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->addAliases( 'de', array( 'Quux' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #8: remove alias
-		$a = ItemObject::newEmpty();
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->removeAliases( 'en', array( 'Foo' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #9: remove alias language
-		$a = ItemObject::newEmpty();
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->removeAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #10: add link ------------------------------
-		$a = ItemObject::newEmpty();
-		$a->addSiteLink( SiteLink::newFromText( 'enwiki', 'Test' ) );
-
-		$b = $a->copy();
-		$b->addSiteLink( SiteLink::newFromText(  'dewiki', 'Test' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #11: remove link
-		$a = ItemObject::newEmpty();
-		$a->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test' ), 'set' );
-		$a->addSiteLink( SiteLink::newFromText(  'dewiki', 'Test' ), 'set' );
-
-		$b = $a->copy();
-		$b->removeSiteLink( 'enwiki' );
-
-		$tests[] = array( $a, $b );
-
-		// #12: change link
-		$a = ItemObject::newEmpty();
-		$a->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test' ), 'set' );
-
-		$b = $a->copy();
-		$b->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test!!!' ), 'set' );
-
-		$tests[] = array( $a, $b );
-
 		return $tests;
 	}
-
 	/**
 	 *
 	 * @dataProvider provideApplyData
 	 */
-	public function testApply( Item $a, Item $b ) {
+	public function testApply( Property $a, Property $b ) {
 		$diff = $a->getDiff( $b );
 		$diff->apply( $a );
 
 		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
 		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
-		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
-		$this->assertArrayEquals( SiteLink::siteLinksToArray( $a->getSiteLinks() ), SiteLink::siteLinksToArray( $b->getSiteLinks() ) );
 	}
-
 }
