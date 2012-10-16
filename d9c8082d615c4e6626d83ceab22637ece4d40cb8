@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9+E\u003d",
+        "filename": "lib/includes/changes/ChangeRow.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-16T13:22:44Z",
+      "side": 1,
+      "message": "That seems a bit harsh - why not just return null? Otherwise, any old entry in the changes table is going to trigger this exception, afaics.",
+      "revId": "d9c8082d615c4e6626d83ceab22637ece4d40cb8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
