@@ -183,17 +183,16 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @since 0.2
 	 *
-	 * @return array
-	 * @throws \MWException
+	 * @return array|bool
 	 */
 	public function getRCInfo() {
-		$info = $this->getField( 'info' );
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 
-		if ( !array_key_exists( 'rc', $info ) ) {
-			throw new \MWException( 'Cannot rc info when it has not been set yet.' );
+		if ( array_key_exists( 'rc', $info ) ) {
+			return $info['rc'];
 		}
 
-		return $info['rc'];
+		return false;
 	}
 
 	/**
@@ -203,9 +202,8 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @param array $rc
 	 */
-	public function setRCInfo( $rc, $override = true ) {
+	public function setRCInfo( array $rc ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-
 		$validKeys = array(
 			'rc_curid',
 			'rc_this_oldid',
@@ -214,19 +212,15 @@ class ChangeRow extends ORMRow implements Change {
 			'rc_user_text'
 		);
 
-		foreach ( array_keys( $rc ) as $key ) {
-			if ( !in_array( $key, $validKeys ) ) {
-				unset( $rc[$key] );
+		if ( is_array( $rc ) ) {
+			foreach ( array_keys( $rc ) as $key ) {
+				if ( !in_array( $key, $validKeys ) ) {
+					unset( $rc[$key] );
+				}
 			}
+			$info['rc'] = $rc;
+			$this->setField( 'info', $info );
 		}
-
-		if ( $override ) {
-			$info['rc'] = array_merge( $info['rc'], $rc );
-		} else {
-			$info['rc'] = array_merge( $rc, $info['rc'] );
-		}
-
-		$this->setField( 'info', $info );
 	}
 
 }
