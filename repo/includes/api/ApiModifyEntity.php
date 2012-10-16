@@ -158,6 +158,8 @@ abstract class ApiModifyEntity extends Api {
 
 	/**
 	 * @see ApiBase::execute()
+	 *
+	 * @since 0.1
 	 */
 	public function execute() {
 		$params = $this->extractRequestParams();
