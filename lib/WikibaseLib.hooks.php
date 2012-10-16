@@ -140,6 +140,7 @@ final class LibHooks {
 			'item/ItemNewFromArray',
 			'item/ItemObject',
 
+			'property/PropertyDiff',
 			'property/PropertyObject',
 
 			'query/QueryObject',
