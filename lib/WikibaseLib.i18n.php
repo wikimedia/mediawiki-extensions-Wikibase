@@ -90,6 +90,10 @@ $messages['es'] = array(
  */
 $messages['fa'] = array(
 	'wikibaselib-desc' => 'نگهداری موارد اساسی برای ویکی‌پایه و افزونه‌های وابسته به ویکی‌پایه',
+	'wikibaselib-entity-item' => 'مورد',
+	'wikibaselib-entity-property' => 'خاصیت',
+	'wikibaselib-entity-query' => 'کوئری',
+	'datatypes-type-wikibase-item' => 'مورد',
 );
 
 /** French (français)

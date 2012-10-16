@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
+use Wikibase\Settings as Settings;
 
 /**
  * Tests for the ApiWikibase class.
@@ -35,49 +36,55 @@ use ApiTestCase;
  * Some of the tests takes more time, and needs therefor longer time before they can be aborted
  * as non-functional. The reason why tests are aborted is assumed to be set up of temporal databases
  * that hold the first tests in a pending state awaiting access to the database.
- * @group medium
+ * @group large
  */
 class ApiSetItemTest extends ApiModifyItemBase {
 
-	function testSetItem() {
-		$item = array(
-			"sitelinks" => array(
-				"enwiki" => array( "site" => "enwiki", "title" => "Bar" ),
-				"dewiki" => array( "site" => "dewiki", "title" => "Foo" ),
-			),
-			"labels" => array(
-				"de" => array( "language" => "de", "value" => "Foo" ),
-				"en" => array( "language" => "en", "value" => "Bar" ),
-			),
-			"aliases" => array(
-				"de"  => array( "language" => "de", "value" => "Fuh" ),
-				"en"  => array( "language" => "en", "value" => "Baar" ),
-			),
-			"descriptions" => array(
-				"de"  => array( "language" => "de", "value" => "Metasyntaktische Veriable" ),
-				"en"  => array( "language" => "en", "value" => "Metasyntactic variable" ),
-			)
-		);
+	static public $id = null;
 
-		$expect = array(
-			"sitelinks" => array(
-				"enwiki" => "Bar",
-				"dewiki" => "Foo",
-			),
-			"labels" => array(
-				"de" => "Foo",
-				"en" => "Bar",
-			),
-			"aliases" => array(
-				"de"  => array( "Fuh" ),
-				"en"  => array( "Baar" ),
-			),
-			"descriptions" => array(
-				"de"  => "Metasyntaktische Veriable",
-				"en"  => "Metasyntactic variable",
-			)
-		);
-		// ---- check failure without token --------------------------
+	static public $item = array(
+		"sitelinks" => array(
+			"enwiki" => array( "site" => "enwiki", "title" => "Bar" ),
+			"dewiki" => array( "site" => "dewiki", "title" => "Foo" ),
+		),
+		"labels" => array(
+			"de" => array( "language" => "de", "value" => "Foo" ),
+			"en" => array( "language" => "en", "value" => "Bar" ),
+		),
+		"aliases" => array(
+			"de"  => array( "language" => "de", "value" => "Fuh" ),
+			"en"  => array( "language" => "en", "value" => "Baar" ),
+		),
+		"descriptions" => array(
+			"de"  => array( "language" => "de", "value" => "Metasyntaktische Veriable" ),
+			"en"  => array( "language" => "en", "value" => "Metasyntactic variable" ),
+		)
+	);
+
+	static public $expect = array(
+		"sitelinks" => array(
+			"enwiki" => "Bar",
+			"dewiki" => "Foo",
+		),
+		"labels" => array(
+			"de" => "Foo",
+			"en" => "Bar",
+		),
+		"aliases" => array(
+			"de"  => array( "Fuh" ),
+			"en"  => array( "Baar" ),
+		),
+		"descriptions" => array(
+			"de"  => "Metasyntaktische Veriable",
+			"en"  => "Metasyntactic variable",
+		)
+	);
+
+
+	/**
+	 * Check if an item can not be created whithout a token
+	 */
+	function testSetItemNoToken() {
 		$this->login();
 
 		if ( self::$usetoken ) {
@@ -86,7 +93,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					array(
 						'action' => 'wbsetitem',
 						'reason' => 'Some reason',
-						'data' => json_encode( $item ),
+						'data' => json_encode( self::$item ),
 					),
 					null,
 					false,
@@ -99,15 +106,20 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				$this->assertTrue( ($e->getCodeString() == 'session-failure'), "Expected session-failure, got unexpected exception: $e" );
 			}
 		}
+	}
 
-		// ---- check success with token --------------------------
+	/**
+	 * Check if an item can be created when a token is supplied
+	 * note that upon completion the id will be stored for later reuse
+	 */
+	function testSetItemWithToken() {
 		$token = $this->getItemToken();
 
 		list($res,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbsetitem',
 				'reason' => 'Some reason',
-				'data' => json_encode( $item ),
+				'data' => json_encode( self::$item ),
 				'token' => $token,
 			),
 			null,
@@ -116,11 +128,18 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'entity', 'id' );
-		$this->assertItemEquals( $expect, $res['entity'] );
+		$this->assertItemEquals( self::$expect, $res['entity'] );
 
-		$id = $res['entity']['id'];
+		// Oh my God, its an ugly secondary effect!
+		self::$id = $res['entity']['id']; // this will be with the prefix
+	}
 
-		// ---- check failure to set the same item again, without id -----------
+	/**
+	 * Check failure to set the same item again, without id
+	 */
+	function testSetItemNoId() {
+		$token = $this->getItemToken();
+
 		$data = array( 'labels' => array(
 				"de" => array( "language" => "de", "value" => "Foo X" ),
 				"en" => array( "language" => "en", "value" => "Bar Y" ),
@@ -131,7 +150,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				array(
 					'action' => 'wbsetitem',
 					'reason' => 'Some reason',
-					'data' => json_encode( array_merge( $item, $data ) ),
+					'data' => json_encode( array_merge( self::$item, $data ) ),
 					'token' => $token,
 				),
 				null,
@@ -144,15 +163,21 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		catch ( \UsageException $e ) {
 			$this->assertTrue( ($e->getCodeString() == 'save-failed'), "Expected set-sitelink-failed, got unexpected exception: $e" );
 		}
+	}
 
-		// ---- check success of update with id --------------------------
+	/**
+	 * Check success of item update with a valid id
+	 */
+	function testSetItemWithId() {
+		$token = $this->getItemToken();
+
 		list($res,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbsetitem',
 				'reason' => 'Some reason',
-				'data' => json_encode( $item ),
+				'data' => json_encode( self::$item ),
 				'token' => $token,
-				'id' => $id,
+				'id' => self::$id,
 			),
 			null,
 			false,
@@ -161,31 +186,15 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 		$this->assertSuccess( $res, 'entity', 'id' );
 		$this->assertSuccess( $res, 'entity', 'lastrevid' );
-		$this->assertItemEquals( $expect, $res['entity'] );
+		$this->assertItemEquals( self::$expect, $res['entity'] );
+	}
 
-		// ---- check success of update with prefixed id --------------------------
-		$data = array( 'labels' => array(
-				"de" => array( "language" => "de", "value" => "Foo XX" ),
-				"en" => array( "language" => "en", "value" => "Bar YY" ),
-			) );
-		list($res,,) = $this->doApiRequest(
-			array(
-				'action' => 'wbsetitem',
-				'reason' => 'Some other reason',
-				'data' => json_encode( array_merge( $item, $data ) ),
-				'token' => $token,
-				'id' => 'q' . $id,
-			),
-			null,
-			false,
-			self::$users['wbeditor']->user
-		);
+	/**
+	 * Check success when the item is set again, with fields in the json that should be ignored
+	 */
+	function testSetItemWithIgnoredData() {
+		$token = $this->getItemToken();
 
-		$this->assertSuccess( $res, 'entity', 'id' );
-		$this->assertEquals( $id, $res['entity']['id'] );
-
-		// @todo: split the below into a separate function
-		// ---- set the same item again, with with fields in the json that should be ignored-----------
 		// these sets of failing data must be merged with an existing item
 		$ignoredData = array(
 			array( 'length' => 999999 ), // always ignored
@@ -202,9 +211,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					array(
 						'action' => 'wbsetitem',
 						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( $data, $item ) ),
+						'data' => json_encode( array_merge( self::$item, $data ) ),
 						'token' => $token,
-						'id' => $id,
+						'id' => self::$id, // will now use default type
 						'exclude' => 'pageid|ns|title|lastrevid'
 					),
 					null,
@@ -212,14 +221,20 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					self::$users['wbeditor']->user
 				);
 				$this->assertSuccess( $res, 'entity', 'id' );
-				$this->assertItemEquals( $expect, $res['entity'] );
+				$this->assertItemEquals( self::$expect, $res['entity'] );
 			}
 			catch ( \UsageException $e ) {
 				$this->fail( "Got unexpected exception: $e" );
 			}
 		}
+	}
 
-		// ---- check failure to set the same item again, with illegal field values in the json -----------
+	/**
+	 * Check failure to set the same item again, with illegal field values in the json
+	 */
+	function testSetItemWithIllegalData() {
+		$token = $this->getItemToken();
+
 		// these sets of failing data must be merged with an existing item
 		$failingData = array( //@todo: check each of these separately, so we know that each one fails!
 			array( 'pageid' => 999999 ),
@@ -233,50 +248,59 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					array(
 						'action' => 'wbsetitem',
 						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( $data, $item ) ),
+						'data' => json_encode( array_merge( self::$item, $data ) ),
 						'token' => $token,
-						'id' => $id,
+						'id' => self::$id,
 						//'exclude' => '' // make sure all critical values are checked per default
 					),
 					null,
 					false,
 					self::$users['wbeditor']->user
 				);
-				$this->fail( "Updating the item with wrong pageid should have failed" );
+				$this->fail( "Updating the item with wrong data should have failed" );
 			}
 			catch ( \UsageException $e ) {
 				$this->assertTrue( ($e->getCodeString() == 'illegal-field'), "Expected illegal-field, got unexpected exception: $e" );
 			}
 		}
+	}
 
-		// ---- check success to set the same item again, with legal field values in the json -----------
-		// these sets of failing data must be merged with an existing item
+	/**
+	 * Check success to set the same item again, with legal field values in the json
+	 */
+	function testSetItemWithLegalData() {
+		$token = $this->getItemToken();
+
+		// request the test data from the item itself
 		list($query,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
 				'props' => 'info',
-				'ids' => $id
+				'ids' => self::$id
 			),
 			null,
 			false,
 			self::$users['wbeditor']->user
 		);
-		$this->assertSuccess( $query, 'entities', $id, 'id' );
+		$this->assertSuccess( $query, 'entities', self::$id, 'id' );
+
+		// these sets of failing data must be merged with an existing item
 		$goodData = array(
-			array( 'pageid' => $query['entities'][$id]['pageid'] ),
-			array( 'ns' => $query['entities'][$id]['ns'] ),
-			array( 'title' => $query['entities'][$id]['title'] ),
-			array( 'lastrevid' => $query['entities'][$id]['lastrevid'] ),
+			array( 'pageid' => $query['entities'][self::$id]['pageid'] ),
+			array( 'ns' => $query['entities'][self::$id]['ns'] ),
+			array( 'title' => $query['entities'][self::$id]['title'] ),
+			array( 'lastrevid' => $query['entities'][self::$id]['lastrevid'] ),
 		);
+
 		foreach ( $goodData as $data ) {
 			try {
 				list($res,,) = $this->doApiRequest(
 					array(
 						'action' => 'wbsetitem',
 						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( $data, $item ) ),
+						'data' => json_encode( array_merge( $data, self::$item ) ),
 						'token' => $token,
-						'id' => $id,
+						'id' => self::$id,
 						//'exclude' => '' // make sure all critical values are checked per default
 					),
 					null,
@@ -284,37 +308,40 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					self::$users['wbeditor']->user
 				);
 				$this->assertSuccess( $res, 'entity', 'id' );
-				$this->assertItemEquals( $expect, $res['entity'] );
+				$this->assertItemEquals( self::$expect, $res['entity'] );
 			}
 			catch ( \UsageException $e ) {
 				$this->fail( "Got unexpected exception: $e" );
 			}
 		}
+	}
 
-		// ---- empty the object ----------- // @todo: split into separate function
-		// these sets of failing data must be merged with an existing item
-		foreach ( $failingData as $data ) {
-			try {
-				list($res,,) = $this->doApiRequest(
-					array(
-						'action' => 'wbsetitem',
-						'reason' => 'Some reason',
-						'data' => json_encode( array() ),
-						'token' => $token,
-						'id' => $id,
-						'clear' => true,
-						//'exclude' => '' // make sure all critical values are checked per default
-					),
-					null,
-					false,
-					self::$users['wbeditor']->user
-				);
-				$this->assertSuccess( $res, 'entity', 'id' );
-				$this->assertItemEquals( array( 'id' => $id ), $res['entity'] );
-			}
-			catch ( \UsageException $e ) {
-				$this->fail( "Got unexpected exception: $e" );
-			}
+	/**
+	 * Check if it possible to clear out the content of the object
+	 */
+	function testSetItemEmptyData() {
+		$token = $this->getItemToken();
+
+		try {
+			list($res,,) = $this->doApiRequest(
+				array(
+					'action' => 'wbsetitem',
+					'reason' => 'Some reason',
+					'data' => json_encode( array() ),
+					'token' => $token,
+					'id' => self::$id,
+					'clear' => true,
+					//'exclude' => '' // make sure all critical values are checked per default
+				),
+				null,
+				false,
+				self::$users['wbeditor']->user
+			);
+			$this->assertSuccess( $res, 'entity', 'id' );
+			$this->assertItemEquals( array( 'id' => self::$id ), $res['entity'] );
+		}
+		catch ( \UsageException $e ) {
+			$this->fail( "Got unexpected exception: $e" );
 		}
 	}
 

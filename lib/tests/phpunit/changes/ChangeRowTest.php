@@ -131,4 +131,33 @@ class ChangeRowTest extends \ORMRowTest {
 			$changeRow->getRCInfo()
 		);
 	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSetInvalidRCInfo( $changeRow ) {
+		$changeRow->setRCInfo( array(
+			'rc_kittens' => 3,
+			'rc_user' => 0,
+			'rc_user_text' => '171.80.182.208'
+		) );
+		$this->assertEquals(
+			array(
+				'rc_user' => 0,
+				'rc_user_text' => '171.80.182.208'
+			),
+			$changeRow->getRCInfo()
+		);
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetEmptyRCInfo( $changeRow ) {
+		$changeRow->setField( 'info', array() );
+		$this->assertEquals(
+			false,
+			$changeRow->getRCInfo()
+		);
+	}
 }
