@@ -305,8 +305,11 @@ final class RepoHooks {
 			'rc_curid' => 0,
 			'rc_this_oldid' => 0,
 			'rc_last_oldid' => 0,
-			// todo: make nicer and i18n
-			'rc_comment' => $wikiPage->getTitle()->getText() . " deleted."
+			'rc_comment' => wfMessage('wikibase-rc-deleted')
+			                        ->escaped()
+			                        ->rawParams(
+			                        	$wikiPage->getTitle()->getText()
+						),
 		) );
 
 		ChangeNotifier::singleton()->handleChange( $change );
