@@ -217,7 +217,7 @@ return call_user_func( function() {
 
 		'wikibase.jquery.ui' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.ui/jquery.ui.wikibaseAutocomplete.js'
+				'jquery.ui/jquery.ui.wikibaseautocomplete.js'
 			),
 			'dependencies' => array(
 				'jquery.ui.autocomplete'
