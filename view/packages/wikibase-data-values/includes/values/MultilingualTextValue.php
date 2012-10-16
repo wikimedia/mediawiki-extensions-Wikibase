@@ -131,7 +131,7 @@ class MultilingualTextValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string
+	 * @return MultilingualTextValue
 	 */
 	public function getValue() {
 		return $this;

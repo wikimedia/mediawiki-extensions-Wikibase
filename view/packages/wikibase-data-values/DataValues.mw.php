@@ -35,7 +35,7 @@ if ( !defined( 'DATAVALUES' ) ) {
 	define( 'DATAVALUES', true );
 }
 
-global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks;
+global $wgExtensionCredits, $wgExtensionMessagesFiles, $wgAutoloadClasses, $wgHooks, $wgResourceModules;
 
 $wgExtensionCredits['datavalues'][] = array(
 	'path' => __FILE__,
@@ -104,3 +104,9 @@ $wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
 	return true;
 	// @codeCoverageIgnoreEnd
 };
+
+// Resource Loader Modules:
+$wgResourceModules = array_merge(
+	$wgResourceModules,
+	include( __DIR__ . '/resources/Resources.php' )
+);
