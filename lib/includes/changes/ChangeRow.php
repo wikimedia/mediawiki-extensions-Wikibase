@@ -205,6 +205,7 @@ class ChangeRow extends ORMRow implements Change {
 	public function setRCInfo( array $rc ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		$validKeys = array(
+			'rc_comment',
 			'rc_curid',
 			'rc_this_oldid',
 			'rc_last_oldid',
