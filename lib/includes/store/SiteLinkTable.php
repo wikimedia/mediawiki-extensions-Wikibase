@@ -70,6 +70,10 @@ class SiteLinkTable implements SiteLinkCache {
 			return false;
 		}
 
+		if ( is_null( $item->getId() ) ) {
+			return true;
+		}
+
 		$siteLinks = $item->getSiteLinks();
 
 		if ( empty( $siteLinks ) ) {
