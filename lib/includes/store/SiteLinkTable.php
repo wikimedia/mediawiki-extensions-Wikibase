@@ -62,8 +62,12 @@ class SiteLinkTable implements SiteLinkCache {
 	public function saveLinksOfItem( Item $item, $function = null ) {
 		$function = is_null( $function ) ? __METHOD__ : $function;
 
-		$dbw = wfGetDB( DB_MASTER );
+		if ( is_null( $item->getId() ) ) {
+			return false;
+		}
 
+		$dbw = wfGetDB( DB_MASTER );
+	
 		$success = $this->deleteLinksOfItem( $item, $function );
 
 		if ( !$success ) {
