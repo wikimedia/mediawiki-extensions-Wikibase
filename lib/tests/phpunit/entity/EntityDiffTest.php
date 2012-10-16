@@ -52,7 +52,7 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 		return $entity;
 	}
 
-	public function provideApplyData( $entityType ) {
+	public function makeData( $entityType ) {
 		$tests = array();
 
 		// #0: add label
@@ -149,7 +149,7 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 
 	/**
 	 *
-	 * @dataProvider provideApplyData
+	 * @dataProvider makeData
 	 */
 	public function testApply( Entity $a, Entity $b ) {
 		$diff = $a->getDiff( $b );

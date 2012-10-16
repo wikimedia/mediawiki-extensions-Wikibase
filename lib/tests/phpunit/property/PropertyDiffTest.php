@@ -33,8 +33,9 @@ use \Wikibase\Entity;
  */
 
 class PropertyDiffTest extends EntityDiffTest {
+
 	public function provideApplyData() {
-		return ( parent::provideApplyData( "Property" ) );
+		return $this::makeData( "Property" );
 	}
 
 	/**
@@ -42,6 +43,11 @@ class PropertyDiffTest extends EntityDiffTest {
 	 * @dataProvider provideApplyData
 	 */
 	public function testApply( Entity $a, Entity $b ) {
-		return ( parent::testApply( $a, $b ) );
+		$diff = $a->getDiff( $b );
+		$diff->apply( $a );
+
+		$this->assertArrayEquals( $a->getLabels(), $b->getLabels() );
+		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
+		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
 	}
 }

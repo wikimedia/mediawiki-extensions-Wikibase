@@ -48,7 +48,7 @@ class ItemDiffTest extends EntityDiffTest {
 
 	public function provideApplyData() {
 		$originalTests = array();
-		$originalTests[] = parent::provideApplyData( "Item" );
+		$originalTests[] = parent::makeData( "Item" );
 		$tests = array();
 		// add link ------------------------------
 		$a = ItemObject::newEmpty();
