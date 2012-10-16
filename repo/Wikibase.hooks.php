@@ -665,16 +665,15 @@ final class RepoHooks {
 	 * @return bool true
 	 */
 	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query, &$options, &$ret ) {
+		//NOTE: the model returned by Title::getContentModel() is not reliable, see bug 37209
+		$model = $target->getContentModel();
+		$entityModels = EntityContentFactory::singleton()->getEntityContentModels();
+
 		if(
 			// if custom link text is given, there is no point in overwriting it
 			$html !== null
 			// we only want to handle links to Wikibase entities differently here
-			|| !in_array(
-				$target->getContentModel(),
-				EntityContentFactory::singleton()->getEntityContentModels()
-			)
-			// as of MW 1.20 Linker shouldn't support anything but Title anyhow
-			|| ! $target instanceof Title
+			|| !in_array( $model, $entityModels )
 		) {
 			return true;
 		}
@@ -700,9 +699,12 @@ final class RepoHooks {
 			return true;
 		}
 		$content = $page->getContent();
-		if ( is_null( $content ) ) {
+		if ( is_null( $content ) || !( $content instanceof EntityContent ) ) {
 			// Failed, can't continue. This could happen because the content is empty (page doesn't exist),
 			// e.g. after item was deleted.
+
+			// Due to bug 37209, we may also get non-entity content here, despite checking
+			// Title::getContentModel up front.
 			return true;
 		}
 		$entity = $content->getEntity();
