@@ -16,6 +16,24 @@
       "revId": "f33b5c9ace04b00e994530ee5d2f02e82460972b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9gk\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-17T09:08:30Z",
+      "side": 1,
+      "message": "Comma is misplaced. Should be:\n\u0027wikibase-rc-deleted\u0027 \u003d\u003e \u0027$1 deleted\u0027,",
+      "parentUuid": "AAABEn//9hE\u003d",
+      "revId": "f33b5c9ace04b00e994530ee5d2f02e82460972b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
