@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9iY\u003d",
+        "filename": "lib/tests/qunit/jquery.ui/jquery.ui.suggester.tests.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-17T08:47:40Z",
+      "side": 1,
+      "message": "fix! :)",
+      "revId": "0a0182ac4f9fe175b96ad49b47f11293f16099a5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
