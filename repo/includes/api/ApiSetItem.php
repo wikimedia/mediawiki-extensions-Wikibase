@@ -125,22 +125,23 @@ class ApiSetItem extends ApiModifyEntity {
 
 				// conditional processing
 				case 'pageid':
-					if ( isset( $data[$props] ) && ($page) && $page->getId() !== $data[$props]) {
+					if ( isset( $data[$props] ) && ( is_object($page) ? $page->getId() !== $data[$props] : true ) ) {
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'pageid' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'ns':
-					if ( isset( $data[$props] ) && isset( $title ) && $title->getNamespace() !== $data[$props]) {
+					// not completly convinced that we can use title to get the namespace in this case
+					if ( isset( $data[$props] ) && ( is_object( $title ) ? $title->getNamespace() !== $data[$props] : true ) ) {
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'namespace' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'title':
-					if ( isset( $data[$props] ) && isset( $title ) && $title->getPrefixedText() !== $data[$props]) {
+					if ( isset( $data[$props] ) && ( is_object( $title ) ? $title->getPrefixedText() !== $data[$props] : true ) ) {
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'title' )->text(), 'illegal-field' );
 					}
 					break;
 				case 'lastrevid':
-					if ( isset( $data[$props] ) && isset( $revision ) && $revision->getId() !== $data[$props]) {
+					if ( isset( $data[$props] ) && ( is_object( $revision ) ? $revision->getId() !== $data[$props] : true ) ) {
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'lastrevid' )->text(), 'illegal-field' );
 					}
 					break;
