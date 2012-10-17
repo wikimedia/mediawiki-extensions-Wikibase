@@ -16,6 +16,24 @@
       "revId": "f6f3ad59683b8115ea19fac2bb7b66e3de053e8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9cs\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-17T10:47:28Z",
+      "side": 1,
+      "message": "In that case you don\u0027t need to use rawParams either. Well, in any case it should be just a normal param.",
+      "parentUuid": "AAABEn//9d8\u003d",
+      "revId": "f6f3ad59683b8115ea19fac2bb7b66e3de053e8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
