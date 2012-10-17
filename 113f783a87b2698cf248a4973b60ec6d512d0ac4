@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9PE\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiModifyItemBase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-17T18:22:12Z",
+      "side": 1,
+      "message": "not sure what\u0027s going on here, but this seems rather odd...",
+      "revId": "113f783a87b2698cf248a4973b60ec6d512d0ac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
