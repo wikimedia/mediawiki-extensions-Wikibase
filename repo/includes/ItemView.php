@@ -137,7 +137,6 @@ class ItemView extends EntityView {
 				$html .= Html::closeElement( 'tr' );
 			} else {
 				$languageCode = $site->getLanguageCode();
-				$language = Language::factory( $languageCode );
 
 				$html .= Html::openElement( 'tr', array(
 						'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
@@ -146,9 +145,7 @@ class ItemView extends EntityView {
 				$html .= Html::element(
 					'td',
 					array(
-						'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-' . $languageCode,
-						'lang' => $languageCode,
-						'dir' => $language->getDir()
+						'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-' . $languageCode
 					),
 					// TODO: get an actual site name rather then just the language
 					Utils::fetchLanguageName( $languageCode )
