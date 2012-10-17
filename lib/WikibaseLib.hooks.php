@@ -137,6 +137,7 @@ final class LibHooks {
 
 			'entity/EntityDiff',
 			'entity/EntityFactory',
+			'entity/EntityFactoryIsPrefixedId',
 
 			'item/ItemDiff',
 			'item/ItemMultilangTexts',
