@@ -36,7 +36,7 @@ class MultilingualTextValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @var array
+	 * @var array of MonolingualTextValue
 	 */
 	protected $texts = array();
 
@@ -135,6 +135,26 @@ class MultilingualTextValue extends DataValueObject {
 	 */
 	public function getValue() {
 		return $this;
+	}
+
+	/**
+	 * @see DataValue::getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getArrayValue() {
+		$values = array();
+
+		/**
+		 * @var MonolingualTextValue $text
+		 */
+		foreach ( $this->texts as $text ) {
+			$values[$text->getLanguageCode()] = $text->getValue();
+		}
+
+		return $values;
 	}
 
 }

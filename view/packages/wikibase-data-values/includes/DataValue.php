@@ -68,4 +68,19 @@ interface DataValue extends \Hashable, \Comparable, \Serializable, \Immutable, \
 	 */
 	public function getValue();
 
+	/**
+	 * Returns the value in array form.
+	 *
+	 * For simple values (ie a string) the return value will be equal to that of @see getValue.
+	 *
+	 * Complex DataValues can provide a nicer implementation though, for instance a
+	 * geographical coordinate value could provide an array with keys latitude,
+	 * longitude and altitude, each pointing to a simple float value.
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getArrayValue();
+
 }

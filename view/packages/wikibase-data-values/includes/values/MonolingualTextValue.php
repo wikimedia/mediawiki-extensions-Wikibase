@@ -145,4 +145,18 @@ class MonolingualTextValue extends DataValueObject {
 		return $this->language;
 	}
 
+	/**
+	 * @see DataValue::getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function getArrayValue() {
+		return array(
+			'text' => $this->value,
+			'language' => $this->language,
+		);
+	}
+
 }
