@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9hM\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "not yet.  saving it as an ordinary change is not good, unless we want to go the route of having log items for this stuff.",
+      "parentUuid": "AAABEn//9j0\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9j4\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 11
@@ -30,6 +48,24 @@
       "writtenOn": "2012-10-17T08:48:38Z",
       "side": 1,
       "message": "why is this indented?",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9hA\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "mistake",
+      "parentUuid": "AAABEn//9j4\u003d",
       "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9hI\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "good idea",
+      "parentUuid": "AAABEn//9jY\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9jI\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 11
@@ -64,6 +118,24 @@
       "writtenOn": "2012-10-17T08:48:38Z",
       "side": 1,
       "message": "we already have the key \"wikibase-repo-change\". Couldn\u0027t the rc stuff just stay in the change, as it was originally? \n\nAnyway, of it\u0027s getting it\u0027s own top-level key, the two keys should be consistent. Like \"wikibase-repo-rc\" and \"wikibase-repo-wbc\" or something. A common prefix would be good.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9gE\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "that\u0027s the plan.",
+      "parentUuid": "AAABEn//9jI\u003d",
       "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9hY\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "see followup change",
+      "parentUuid": "AAABEn//9jE\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9jQ\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 11
@@ -98,6 +188,24 @@
       "writtenOn": "2012-10-17T08:48:38Z",
       "side": 1,
       "message": "Shouldn\u0027t this be an int? It\u0027s an object now...",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9hc\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "no, it takes an object. icky yes and the core code for RC is icky :(",
+      "parentUuid": "AAABEn//9jQ\u003d",
       "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9g8\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "yay! :)",
+      "parentUuid": "AAABEn//9jM\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9jA\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 11
@@ -132,6 +258,24 @@
       "writtenOn": "2012-10-17T08:48:38Z",
       "side": 1,
       "message": "got an idea? Maybe we could search rc by timestamp first, and then look into every change with the same timestamp, checking whether it has the same change id.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9gU\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "that\u0027s what i was thinking or maybe can think of a better idea",
+      "parentUuid": "AAABEn//9jA\u003d",
       "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9g0\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "yep",
+      "parentUuid": "AAABEn//9i0\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9iw\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 11
@@ -166,6 +328,24 @@
       "writtenOn": "2012-10-17T08:48:38Z",
       "side": 1,
       "message": "Both *have* to exist? Seems pretty strict. But ok, there\u0027s probably no need for B/C just yet.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9hQ\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "agree and we can combine them into one array",
+      "parentUuid": "AAABEn//9iw\u003d",
       "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9gQ\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "yes, although this means we need to bump up the MW core version requirement",
+      "parentUuid": "AAABEn//9is\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9io\u003d",
         "filename": "client/includes/ExternalChangesList.php",
         "patchSetId": 11
@@ -200,6 +398,24 @@
       "writtenOn": "2012-10-17T08:48:38Z",
       "side": 1,
       "message": "The name seems odd to me. \"ChangesTable\" wraps the database table, \"ExternalChangesList\" sounds like somethign that holds a list of changes.\n\nHow about \"RepoChangeView\" or \"RepoChangeFormatter\"?",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9iA\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "There is a core class \"ChangesList\" and the intention here is to extend that, if possible but I\u0027m fine with another name.",
+      "parentUuid": "AAABEn//9io\u003d",
       "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9ho\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "it is not in the core code, but agree that would be nice.",
+      "parentUuid": "AAABEn//9ik\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9ic\u003d",
         "filename": "client/includes/ExternalChangesList.php",
         "patchSetId": 11
@@ -234,6 +468,24 @@
       "writtenOn": "2012-10-17T08:48:38Z",
       "side": 1,
       "message": "We could also get the entity\u0027s label in the wiki\u0027s content language. Anyway, accessing entityData as an array seems very icky. Can we just construct an Entity object from that data somehow?",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9h8\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "I\u0027m sure that can be done",
+      "parentUuid": "AAABEn//9ic\u003d",
       "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9h4\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "true, it should be.",
+      "parentUuid": "AAABEn//9ig\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9iU\u003d",
         "filename": "client/includes/ExternalRecentChange.php",
         "patchSetId": 11
@@ -274,6 +544,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9gM\u003d",
+        "filename": "client/includes/ExternalRecentChange.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "yes, ugh!  the recent change core class needs refactoring and hope here to simply things, at least for external changes.",
+      "parentUuid": "AAABEn//9iU\u003d",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9iM\u003d",
         "filename": "lib/maintenance/pollForChanges.php",
         "patchSetId": 11
@@ -285,6 +573,24 @@
       "writtenOn": "2012-10-17T08:48:38Z",
       "side": 1,
       "message": "use constant!",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9gI\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-10-17T09:25:29Z",
+      "side": 1,
+      "message": "done in the next patch",
+      "parentUuid": "AAABEn//9iM\u003d",
       "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
