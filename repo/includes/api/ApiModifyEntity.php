@@ -52,13 +52,14 @@ abstract class ApiModifyEntity extends Api {
 
 		// If we have an id try that first
 		if ( isset( $params['id'] ) ) {
+			$entityFactory = EntityFactory::singleton();
 			$entityContentFactory = EntityContentFactory::singleton();
-			try {
-				$entityContent = $entityContentFactory->getFromPrefixedId( $params['id'], \Revision::FOR_THIS_USER );
+
+			if ( !$entityFactory->isPrefixedId( $id ) ) {
+				$id = $entityFactory->getPrefixedId( $params['type'] ? $params['type'] : Item::ENTITY_TYPE, $entityId );
 			}
-			catch ( \MWException $e ) {
-				$entityContent = $entityContentFactory->getFromId( $params['type'], $params['id'], \Revision::FOR_THIS_USER );
-			}
+
+			$entityContent = $entityContentFactory->getFromPrefixedId( $params['id'], \Revision::FOR_THIS_USER );
 
 			if ( is_null( $entityContent ) ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-id' )->text(), 'no-such-entity-id' );

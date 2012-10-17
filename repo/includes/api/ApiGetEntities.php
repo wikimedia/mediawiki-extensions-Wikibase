@@ -50,7 +50,7 @@ class ApiGetEntities extends Api {
 					$id = ItemHandler::singleton()->getIdForSiteLink( $siteId, $title );
 
 					if ( $id ) {
-						$params['ids'][] = intval( $id );
+						$params['ids'][] = ItemObject::getIdPrefix() . intval( $id );
 					}
 					else {
 						$this->getResult()->addValue( 'entities', (string)(--$missing),
@@ -122,26 +122,18 @@ class ApiGetEntities extends Api {
 		$entityContentFactory = EntityContentFactory::singleton();
 
 		$res = $this->getResult();
+		if ( !$entityFactory->isPrefixedId( $id ) ) {
+			$id = $entityFactory->getPrefixedId( $params['type'] ? $params['type'] : Item::ENTITY_TYPE, $entityId );
+		}
 
-		try {
-			// we are not using the type, we are only trying to get it to see if it fails
-			$entityFactory->getEntityTypeFromPrefixedId( $id );
-			$numId = $entityFactory->getUnprefixedId( $id );
-			$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
-		}
-		catch ( MWException $e ) {
-			$entityPath = array( 'entities', $id );
-		}
+		$entityPath = array( 'entities', $id );
+		// $numId = $entityFactory->getUnprefixedId( $id );
+		// $entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
 
 		// later we do a getContent but only if props are defined
 		if ( $params['props'] !== array() ) {
-			try {
-				$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
-			}
-			catch ( MWException $e ) {
-				$page = $entityContentFactory->getWikiPageForId( Item::ENTITY_TYPE, $id );
-			}
 
+			$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
 			if ( $page->exists() ) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				/**
