@@ -122,23 +122,22 @@ class ApiGetEntities extends Api {
 		$entityContentFactory = EntityContentFactory::singleton();
 
 		$res = $this->getResult();
+		$isPrefixed = $entityFactory->isPrefixedId( $id );
 
-		try {
-			// we are not using the type, we are only trying to get it to see if it fails
-			$entityFactory->getEntityTypeFromPrefixedId( $id );
+		if ( $isPrefixed ) {
 			$numId = $entityFactory->getUnprefixedId( $id );
 			$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
 		}
-		catch ( MWException $e ) {
+		else {
 			$entityPath = array( 'entities', $id );
 		}
 
 		// later we do a getContent but only if props are defined
 		if ( $params['props'] !== array() ) {
-			try {
+			if ( $isPrefixed ) {
 				$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
 			}
-			catch ( MWException $e ) {
+			else {
 				$page = $entityContentFactory->getWikiPageForId( Item::ENTITY_TYPE, $id );
 			}
 
