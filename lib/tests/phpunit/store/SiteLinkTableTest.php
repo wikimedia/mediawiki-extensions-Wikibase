@@ -29,6 +29,9 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider constructorProvider
+	 */
 	public function testConstructor( $tableName ) {
 		$instance = new SiteLinkTable( $tableName );
 

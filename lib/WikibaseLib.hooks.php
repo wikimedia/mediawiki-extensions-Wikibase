@@ -162,6 +162,7 @@ final class LibHooks {
 			'statement/StatementObject',
 
 			'store/SiteLinkLookup',
+			'store/SiteLinkTable',
 
 			'ByPropertyIdArray',
 			'ChangeNotifier',
