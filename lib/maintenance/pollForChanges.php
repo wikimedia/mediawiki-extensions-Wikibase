@@ -82,6 +82,8 @@ class PollForChanges extends \Maintenance {
 
 		$this->addOption( 'continueinterval', "Interval (in seconds) to sleep after processing a full batch.", false, true );
 
+		$this->addOption( 'rebuildrc', "Rebuild recent changes" );
+
 		parent::__construct();
 	}
 
@@ -132,6 +134,14 @@ class PollForChanges extends \Maintenance {
 			self::msg( "Polling changes from $changesWiki." );
 		} else {
 			self::msg( "Polling changes from local wiki." );
+		}
+		
+		if ( $this->getOption( 'rebuildrc' ) ) {
+			$dbw = wfGetDB( DB_MASTER );
+			$dbw->delete(
+				'recentchanges',
+				array( 'rc_type' => RC_EXTERNAL )
+			);
 		}
 
 		while ( !$this->done ) {
