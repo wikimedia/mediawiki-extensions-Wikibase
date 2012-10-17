@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9ZY\u003d",
+        "filename": "repo/includes/api/ApiGetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T12:45:33Z",
+      "side": 1,
+      "message": "This is confusing. Can we in the beginning check whether $id is prefixed, and if its not, make it prefixed - so we don\u0027t have to check over and over again?",
+      "revId": "15699a9a491bba4ca51ecf1c709ce323d720f225",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
