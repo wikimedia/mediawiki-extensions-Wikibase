@@ -50,7 +50,7 @@ class ApiGetEntities extends Api {
 					$id = ItemHandler::singleton()->getIdForSiteLink( $siteId, $title );
 
 					if ( $id ) {
-						$params['ids'][] = intval( $id );
+						$params['ids'][] = ItemObject::getIdPrefix() . intval( $id );
 					}
 					else {
 						$this->getResult()->addValue( 'entities', (string)(--$missing),
@@ -69,7 +69,7 @@ class ApiGetEntities extends Api {
 			}
 		}
 
-		$params['ids'] = array_unique( $params['ids'], SORT_NUMERIC );
+		$params['ids'] = array_unique( $params['ids'] );
 
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
 			$props = array_flip( array_values( $params['props'] ) );
@@ -203,6 +203,10 @@ class ApiGetEntities extends Api {
 			else {
 				$this->getResult()->addValue( $entityPath, 'missing', "" );
 			}
+		} else {
+			$type = $entityFactory->getEntityTypeFromPrefixedId( $id );
+			$this->getResult()->addValue( $entityPath, 'id', $id );
+			$this->getResult()->addValue( $entityPath, 'type', $type );
 		}
 	}
 

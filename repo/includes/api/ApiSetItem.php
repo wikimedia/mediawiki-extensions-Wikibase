@@ -102,6 +102,8 @@ class ApiSetItem extends ApiModifyEntity {
 				$entityContent->getEntity()->clear();
 			}
 
+			$title = null;
+			$revision = null;
 			$page = $entityContent->getWikiPage();
 			if ( $page ) {
 				$title = $page->getTitle();
@@ -125,7 +127,7 @@ class ApiSetItem extends ApiModifyEntity {
 
 				// conditional processing
 				case 'pageid':
-					if ( isset( $data[$props] ) && ( is_object($page) ? $page->getId() !== $data[$props] : true ) ) {
+					if ( isset( $data[$props] ) && ( is_object( $page ) ? $page->getId() !== $data[$props] : true ) ) {
 						$this->dieUsage( $this->msg( 'wikibase-api-illegal-field', 'pageid' )->text(), 'illegal-field' );
 					}
 					break;
@@ -256,22 +258,22 @@ class ApiSetItem extends ApiModifyEntity {
 							$entityContent->getEntity()->removeSiteLink( $arg['site'] );
 						}
 						else {
-							$site = $sites->getSite( $arg['site'] );
-							$page = $site->normalizePageName( $arg['title'] );
+							$linkSite = $sites->getSite( $arg['site'] );
+							$linkPage = $linkSite->normalizePageName( $arg['title'] );
 
-							if ( $page === false ) {
+							if ( $linkPage === false ) {
 								$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'add-sitelink-failed' );
 							}
 
-							$link = new SiteLink( $site, $page );
+							$link = new SiteLink( $linkSite, $linkPage );
 							$ret = $entityContent->getEntity()->addSiteLink( $link, 'set' );
 
 							if ( $ret === false ) {
 								$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
 							}
 
-							unset( $site );
-							unset( $page );
+							unset( $linkSite );
+							unset( $linkPage );
 							unset( $link );
 							unset( $ret );
 						}

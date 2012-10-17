@@ -129,9 +129,12 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 		$this->assertSuccess( $res, 'entity', 'id' );
 		$this->assertItemEquals( self::$expect, $res['entity'] );
+		$this->assertRegExp( '/^' . \Wikibase\ItemObject::getIdPrefix() . '\d+$/',
+				$res['entity']['id'],
+				'Expected a qualfied ID with prefix' );
 
 		// Oh my God, its an ugly secondary effect!
-		self::$id = $res['entity']['id']; // this will be with the prefix
+		self::$id = $res['entity']['id'];
 	}
 
 	/**
@@ -276,6 +279,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			array(
 				'action' => 'wbgetentities',
 				'props' => 'info',
+				'format' => 'json', // make sure IDs are used as keys
 				'ids' => self::$id
 			),
 			null,
@@ -634,7 +638,8 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {
 			$this->assertArrayHasKey( $key, $item );
-			$this->assertArrayEquals( $exp, static::flattenValues( $key, $item[$key] ) );
+			$this->assertArrayEquals( static::flattenValues( $key, $exp ),
+										static::flattenValues( $key, $item[$key] ) );
 		}
 
 		// cleanup ------------------------------------------------------

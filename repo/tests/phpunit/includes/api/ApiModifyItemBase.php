@@ -374,6 +374,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	function setItem( $data, $token ) {
 		$params = array(
 			'action' => 'wbsetitem',
+			'format' => 'json', // make sure IDs are used as keys.
 			'token' => $token,
 		);
 
@@ -465,6 +466,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		list($res,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
+				'format' => 'json', // make sure IDs are used as keys.
 				'ids' => $id )
 		);
 
@@ -512,19 +514,30 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 * @param string $keyField the name of the field in each entry that shall be used as the key in the flat structure
 	 * @param string $valueField the name of the field in each entry that shall be used as the value in the flat structure
 	 * @param bool $multiValue whether the value in the flat structure shall be an indexed array of values instead of a single value.
+	 * @param array $into optional aggregator.
 	 *
 	 * @return array array the flat version of $data
 	 */
-	public static function flattenArray( $data, $keyField, $valueField, $multiValue = false ) {
-		$re = array();
+	public static function flattenArray( $data, $keyField, $valueField, $multiValue = false, array &$into = null ) {
+		if ( $into === null ) {
+			$into = array();
+		}
 
 		foreach ( $data as $index => $value ) {
-			if ( is_int( $index) && is_array( $value )
-				&& isset( $value[$keyField] ) && isset( $value[$valueField] ) ) {
-
-				// found "deep" entry in the array
-				$k = $value[ $keyField ];
-				$v = $value[ $valueField ];
+			if ( is_array( $value ) ) {
+				if ( isset( $value[$keyField] ) && isset( $value[$valueField] ) ) {
+					// found "deep" entry in the array
+					$k = $value[ $keyField ];
+					$v = $value[ $valueField ];
+				} elseif ( isset( $value[0] ) && !is_array( $value[0] ) && $multiValue ) {
+					// found "flat" multi-value entry in the array
+					$k = $index;
+					$v = $value;
+				} else {
+					// found list, recurse
+					self::flattenArray( $value, $keyField, $valueField, $multiValue, $into );
+					continue;
+				}
 			} else {
 				// found "flat" entry in the array
 				$k = $index;
@@ -532,13 +545,17 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			}
 
 			if ( $multiValue ) {
-				$re[$k][] = $v;
+				if ( is_array( $v ) ) {
+					$into[$k] = empty( $into[$k] ) ? $v : array_merge( $into[$k], $v );
+				} else {
+					$into[$k][] = $v;
+				}
 			} else {
-				$re[$k] = $v;
+				$into[$k] = $v;
 			}
 		}
 
-		return $re;
+		return $into;
 	}
 
 	/**
@@ -560,59 +577,35 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		}
 
 		if ( isset( $expected['labels'] ) ) {
-			$data = $actual['labels'];
-
-			// find out whether $expected is in "flat" form
-			$flat = !isset( $expected['labels'][0] );
-
-			if ( $flat ) { // convert to flat form if necessary
-				$data = self::flattenArray( $data, 'language', 'value' );
-			}
+			$data = self::flattenArray( $actual['labels'], 'language', 'value' );
+			$exp = self::flattenArray( $expected['labels'], 'language', 'value' );
 
 			// keys are significant in flat form
-			$this->assertArrayEquals( $expected['labels'], $data, false, $flat );
+			$this->assertArrayEquals( $exp, $data, false, true );
 		}
 
 		if ( isset( $expected['descriptions'] ) ) {
-			$data = $actual['descriptions'];
-
-			// find out whether $expected is in "flat" form
-			$flat = !isset( $expected['descriptions'][0] );
-
-			if ( $flat ) { // convert to flat form if necessary
-				$data = self::flattenArray( $data, 'language', 'value' );
-			}
+			$data = self::flattenArray( $actual['descriptions'], 'language', 'value' );
+			$exp = self::flattenArray( $expected['descriptions'], 'language', 'value' );
 
 			// keys are significant in flat form
-			$this->assertArrayEquals( $expected['descriptions'], $data, false, $flat );
+			$this->assertArrayEquals( $exp, $data, false, true );
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {
-			$data = $actual['sitelinks'];
-
-			// find out whether $expected is in "flat" form
-			$flat = !isset( $expected['sitelinks'][0] );
-
-			if ( $flat ) { // convert to flat form if necessary
-				$data = self::flattenArray( $data, 'site', 'title' );
-			}
+			$data = self::flattenArray( $actual['sitelinks'], 'site', 'title' );
+			$exp = self::flattenArray( $expected['sitelinks'], 'site', 'title' );
 
 			// keys are significant in flat form
-			$this->assertArrayEquals( $expected['sitelinks'], $data, false, $flat );
+			$this->assertArrayEquals( $exp, $data, false, true );
 		}
 
 		if ( isset( $expected['aliases'] ) ) {
-			$data = $actual['aliases'];
-
-			// find out whether $expected is in "flat" form
-			$flat = !isset( $expected['aliases'][0] );
-
-			if ( $flat ) { // convert to flat form if necessary
-				$data = self::flattenArray( $data, 'language', 'value', true );
-			}
+			$data = self::flattenArray( $actual['aliases'], 'language', 'value', true );
+			$exp = self::flattenArray( $expected['aliases'], 'language', 'value', true );
 
 			// keys are significant in flat form
-			$this->assertArrayEquals( $expected['aliases'], $data, false, $flat );
+			$this->assertArrayEquals( $exp, $data, false, true );
 		}
 	}
 
