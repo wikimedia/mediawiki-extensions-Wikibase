@@ -26,6 +26,9 @@ class ExternalChangesList {
 		$entityData = $params['wikibase-repo-change'];
 		$entityTitle = self::titleTextFromEntityData( $entityData );
 
+		$parts = explode( '~', $entityData['type'] );
+		$changeType = $parts[1];
+
 		$repoIndex = str_replace( 'api.php', 'index.php', Settings::get( 'repoApi' ) );
 
 		// build a diff link from an RC
@@ -87,16 +90,14 @@ class ExternalChangesList {
 			$userlinks .= " (";
 			$userlinks .= self::userTalkLink( $userName );
 			$userlinks .= " | ";
-			// TODO: localize
+			// TODO: localizie
 			$userlinks .= self::userContribsLink( $userName, 'contribs' );
 			$userlinks .= ")";
 		}
 
 		$line .= $userlinks;
 
-		$comment = " (" . $rc->getAttribute( 'rc_comment' ) . ")";
-
-		$line .= $comment;
+		$line .= self::autoEditSummary( $changeType );
 		$line .= "</li>";
 
 		return $line;
@@ -228,6 +229,35 @@ class ExternalChangesList {
 			$ns = $ns . ':';
 		}
 		return self::repoLink( $entityText, $entityText, array( 'class' => 'wb-entity-link' ) );
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @param array $entityData
+	 *
+	 * return string
+	 */
+	public static function autoEditSummary( $changeType ) {
+		//todo i18n
+	 	$comment = '';
+		switch( $changeType ) {
+			case 'update':
+				$comment = 'Language links updated';
+				break;
+			case 'remove':
+				$comment = 'Language links removed';
+				break;
+			case 'delete':
+				$comment = 'Associated Wikidata item unlinked. Language links removed';
+				break;
+			case 'restore':
+				$comment = 'Associated Wikidata item undeleted. Language links restored';
+				break;
+			default:
+				break;
+		}
+		return  \Linker::commentBlock( $comment );
 	}
 
 	/**
