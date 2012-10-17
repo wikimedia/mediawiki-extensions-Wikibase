@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9Zs\u003d",
+        "filename": "lib/tests/phpunit/entity/EntityFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T12:41:04Z",
+      "side": 1,
+      "message": "PLease make a concrete test class, like ItemFactoryTest, and register it, so this test is actually run.",
+      "revId": "e7a23b6d3e30926d16ef4fb4bcfe9f29e312c6ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9Zw\u003d",
+        "filename": "lib/tests/phpunit/entity/EntityFactoryTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T12:41:04Z",
+      "side": 1,
+      "message": "$user is undefined",
+      "revId": "e7a23b6d3e30926d16ef4fb4bcfe9f29e312c6ca",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
