@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9ds\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T10:28:12Z",
+      "side": 1,
+      "message": "this is an error case, should return false or even throw an exception",
+      "revId": "e6d645a104979e887e8764cc6afdcefce73df5af",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
