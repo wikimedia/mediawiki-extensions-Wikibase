@@ -16,6 +16,24 @@
       "revId": "113f783a87b2698cf248a4973b60ec6d512d0ac4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9N0\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiModifyItemBase.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T18:49:14Z",
+      "side": 1,
+      "message": "Most tests want to be able to access the item in the call\u0027s result by looking it up by ID. That only works if the API is operating in \"usekeys\" mode. \"usekeys\" depends on the format, and is turned off for XML (and XMLFM). XMLFM is the API\u0027s default format.\n\nThus, if you don\u0027t specify the format, you don\u0027t get meaningful keys to look up your items in the result. This was not noticed before, because the numeric IDs where also used as the list indexes, they just got ignored in XML. Now that we are using prefixed IDs, that doesn\u0027t work any more.",
+      "parentUuid": "AAABEn//9PE\u003d",
+      "revId": "113f783a87b2698cf248a4973b60ec6d512d0ac4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
