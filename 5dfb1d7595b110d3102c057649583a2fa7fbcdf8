@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9j0\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "is there *nothing* useful to do if there is no RC info?",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9j4\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "why is this indented?",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9jY\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "Do we really want to record the full URL over and over again? Shouldn\u0027t a wiki ID be sufficient?\n\nThinking about it: The settings could just have the repo\u0027s global ID. We could then get a Site object for that and construct page and API URLs from that.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9jI\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "we already have the key \"wikibase-repo-change\". Couldn\u0027t the rc stuff just stay in the change, as it was originally? \n\nAnyway, of it\u0027s getting it\u0027s own top-level key, the two keys should be consistent. Like \"wikibase-repo-rc\" and \"wikibase-repo-wbc\" or something. A common prefix would be good.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9jE\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "We do have the original summary now, right? We should use it here. The \"Wikidata Change\" thing could be injected when rendering rows.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9jQ\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an int? It\u0027s an object now...",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9jM\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "that was merged.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9jA\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "got an idea? Maybe we could search rc by timestamp first, and then look into every change with the same timestamp, checking whether it has the same change id.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9i0\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "5?! Please use RC_EXTERNAL!",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9iw\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "Both *have* to exist? Seems pretty strict. But ok, there\u0027s probably no need for B/C just yet.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9is\u003d",
+        "filename": "client/WikibaseClient.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "I934a86eb is merged",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9io\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "The name seems odd to me. \"ChangesTable\" wraps the database table, \"ExternalChangesList\" sounds like somethign that holds a list of changes.\n\nHow about \"RepoChangeView\" or \"RepoChangeFormatter\"?",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9ik\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "should this be localized?",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9ic\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "We could also get the entity\u0027s label in the wiki\u0027s content language. Anyway, accessing entityData as an array seems very icky. Can we just construct an Entity object from that data somehow?",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9ig\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "$id is always set here.",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9iU\u003d",
+        "filename": "client/includes/ExternalRecentChange.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "Ugh! There are assignments in the parameter list! And \u0026$foo at call time is deprecated. Copy\u0026Paste is not your friend ;)",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9iM\u003d",
+        "filename": "lib/maintenance/pollForChanges.php",
+        "patchSetId": 11
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T08:48:38Z",
+      "side": 1,
+      "message": "use constant!",
+      "revId": "5dfb1d7595b110d3102c057649583a2fa7fbcdf8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
