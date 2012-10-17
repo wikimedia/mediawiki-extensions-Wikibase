@@ -45,6 +45,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		list($res,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
+				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id )
 		);
 
@@ -90,7 +91,8 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		list($res,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
-				'ids' => 'q' . $id )
+				'format' => 'json', // make sure IDs are used as keys
+				'ids' => $id )
 		);
 
 		$this->assertSuccess( $res, 'entities', $id );
@@ -127,6 +129,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			'action' => 'wbgetentities',
 			'sites' => $site,
 			'titles' => $title,
+			'format' => 'json', // make sure IDs are used as keys
 		) );
 
 		$item = $this->getItemOutput( $handle );
@@ -206,6 +209,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 
 		list( $res,, ) = $this->doApiRequest( array(
 			'action' => 'wbgetentities',
+			'format' => 'json', // make sure IDs are used as keys
 			'ids' => join( '|', $ids ),
 		) );
 
@@ -230,6 +234,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 
 		list( $res,, ) = $this->doApiRequest( array(
 			'action' => 'wbgetentities',
+			'format' => 'json', // make sure IDs are used as keys
 			'sites' => join( '|', $sites ),
 			'titles' => join( '|', $titles )
 		) );
@@ -267,6 +272,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			array(
 				'action' => 'wbgetentities',
 				'languages' => join( '|', $languages ),
+				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id )
 		);
 
@@ -292,14 +298,14 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 
 	function provideProps() {
 		return array(
-			array( 'Berlin', '', array( 'id' ) ),
+			array( 'Berlin', '', array( 'id', 'type' ) ),
 			array( 'Berlin', 'labels', array( 'id', 'type', 'labels' ) ),
 			array( 'Berlin', 'labels|descriptions', array( 'id', 'type', 'labels', 'descriptions' ) ),
 			array( 'Berlin', 'aliases|sitelinks', array( 'id', 'type', 'aliases', 'sitelinks' ) ),
 
-			array( 'Leipzig', '', array( 'id' ) ),
+			array( 'Leipzig', '', array( 'id', 'type' ) ),
 			array( 'Leipzig', 'labels|descriptions', array( 'id', 'type', 'labels', 'descriptions' ) ),
-			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels' ) ),
+			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels', 'aliases' ) ),
 			array( 'Leipzig', 'sitelinks|descriptions', array( 'id', 'type', 'descriptions' ) ),
 
 			array( 'Berlin', 'xyz', false ),
@@ -318,6 +324,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			array(
 				'action' => 'wbgetentities',
 				'props' => $props,
+				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id )
 		);
 
@@ -349,6 +356,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			array(
 				'action' => 'wbgetentities',
 				'props' => 'sitelinks',
+				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id )
 		);
 
@@ -363,6 +371,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			array(
 				'action' => 'wbgetentities',
 				'props' => 'sitelinks|sitelinks/urls',
+				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id )
 		);
 
@@ -393,6 +402,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 				'props' => 'sitelinks',
 				'sort' => 'sitelinks',
 				'dir' => 'ascending',
+				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id )
 		);
 
@@ -411,6 +421,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 				'props' => 'sitelinks',
 				'sort' => 'sitelinks',
 				'dir' => 'descending',
+				'format' => 'json', // make sure IDs are used as keys
 				'ids' => $id )
 		);
 
@@ -439,8 +450,8 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 				'ids' => $id )
 		);
 
-		$this->assertSuccess( $res, 'entities', $id );
 		if ( $usekeys ) {
+			$this->assertSuccess( $res, 'entities', $id );
 			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
 				if ( array_key_exists( $prop, $res['entities'][$id] ) ) {
 					foreach ( $res['entities'][$id][$prop] as $key => $value ) {
@@ -455,9 +466,14 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			}
 		}
 		else {
+			$this->assertSuccess( $res, 'entities' );
+
+			$keys = array_keys( $res['entities'] );
+			$n = $keys[0];
+
 			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
-				if ( array_key_exists( $prop, $res['entities'][$id] ) ) {
-					foreach ( $res['entities'][$id][$prop] as $key => $value ) {
+				if ( array_key_exists( $prop, $res['entities'][$n] ) ) {
+					foreach ( $res['entities'][$n][$prop] as $key => $value ) {
 						$this->assertTrue( is_integer( $key ) );
 						if ( $field !== false ) {
 							$this->assertArrayHasKey( $field, $value );

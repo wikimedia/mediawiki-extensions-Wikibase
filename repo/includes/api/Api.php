@@ -49,7 +49,7 @@ abstract class Api extends \ApiBase {
 	 */
 	protected function getUsekeys() {
 		$format = $this->getMain()->getRequest()->getVal( 'format' );
-		return Api::usekeys( isset( $format ) ? $format : 'xml' );
+		return Api::usekeys( $format !== null ? $format : \ApiMain::API_DEFAULT_FORMAT );
 	}
 
 	/**
