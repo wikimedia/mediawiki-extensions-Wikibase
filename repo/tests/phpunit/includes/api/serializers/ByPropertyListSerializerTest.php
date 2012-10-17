@@ -66,9 +66,11 @@ class ByPropertyListSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
+		$dataValue0 = new \DataValues\StringValue( 'ohi' );
+
 		$snak0 = new \Wikibase\PropertyNoValueSnak( 42 );
 		$snak1 = new \Wikibase\PropertySomeValueSnak( 2 );
-		$snak2 = new \Wikibase\PropertyValueSnak( 2, new \DataValues\StringValue( 'ohi' ) );
+		$snak2 = new \Wikibase\PropertyValueSnak( 2, $dataValue0 );
 
 		$validArgs[] = new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) );
 
@@ -96,7 +98,7 @@ class ByPropertyListSerializerTest extends ApiSerializerBaseTest {
 					1 => array(
 						'snaktype' => 'value',
 						'property' => 'p2',
-						'value' => serialize(new \DataValues\StringValue( 'ohi' )), // TODO
+						'value' => $dataValue0->getArrayValue(),
 					),
 				),
 			),
