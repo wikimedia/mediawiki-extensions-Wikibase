@@ -40,6 +40,8 @@ final class LibHooks {
 
 				'siteLinkGroup' => 'wikipedia',
 
+				'changesDatabase' => false, // local by default. Set to something LBFactory understands.
+
 				'changeHandlers' => array(
 					'wikibase-item~add' => 'Wikibase\EntityCreation',
 					'wikibase-property~add' => 'Wikibase\EntityCreation',
