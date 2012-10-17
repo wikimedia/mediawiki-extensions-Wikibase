@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9T4\u003d",
+        "filename": "lib/resources/wikibase.Claim.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-17T16:22:28Z",
+      "side": 1,
+      "message": "do not return a copy, but be consistent with the other function and return a reference",
+      "revId": "6d0c0a37657f54374a70abe0130d46686a4a4b30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9Ts\u003d",
+        "filename": "lib/resources/wikibase.EntityStore.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-17T16:22:28Z",
+      "side": 1,
+      "message": "rename qualifier to something not overloaded",
+      "revId": "6d0c0a37657f54374a70abe0130d46686a4a4b30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9UI\u003d",
+        "filename": "lib/resources/wikibase.PropertyNoValue.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-17T16:22:28Z",
+      "side": 1,
+      "message": "Does not need a constructor",
+      "revId": "6d0c0a37657f54374a70abe0130d46686a4a4b30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9UA\u003d",
+        "filename": "lib/resources/wikibase.PropertyValueSnak.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-17T16:22:28Z",
+      "side": 1,
+      "message": "should go away",
+      "revId": "6d0c0a37657f54374a70abe0130d46686a4a4b30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9T0\u003d",
+        "filename": "lib/resources/wikibase.Statement.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-10-17T16:22:28Z",
+      "side": 1,
+      "message": "do not return the copy but a reference",
+      "revId": "6d0c0a37657f54374a70abe0130d46686a4a4b30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
