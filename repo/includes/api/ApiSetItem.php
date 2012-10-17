@@ -257,13 +257,13 @@ class ApiSetItem extends ApiModifyEntity {
 						}
 						else {
 							$site = $sites->getSite( $arg['site'] );
-							$page = $site->normalizePageName( $arg['title'] );
+							$pageName = $site->normalizePageName( $arg['title'] );
 
-							if ( $page === false ) {
+							if ( $pageName === false ) {
 								$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'add-sitelink-failed' );
 							}
 
-							$link = new SiteLink( $site, $page );
+							$link = new SiteLink( $site, $pageName );
 							$ret = $entityContent->getEntity()->addSiteLink( $link, 'set' );
 
 							if ( $ret === false ) {
@@ -271,7 +271,7 @@ class ApiSetItem extends ApiModifyEntity {
 							}
 
 							unset( $site );
-							unset( $page );
+							unset( $pageName );
 							unset( $link );
 							unset( $ret );
 						}
