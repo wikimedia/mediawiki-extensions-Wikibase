@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAABEn//9kk\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-17T07:03:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAABEn//9kw\u003d",
+      "revId": "b2282e673e09270f34ad38b868abaa64ead486e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABEn//9k0\u003d",
         "filename": "repo/Wikibase.hooks.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-10-17T06:48:06Z",
       "side": 1,
       "message": "Mixes spaces and tabs.\n\nOutput function like -\u003eescaped must be last, it doesn\u0027t return $this.",
+      "revId": "b2282e673e09270f34ad38b868abaa64ead486e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9ko\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-17T07:03:23Z",
+      "side": 1,
+      "message": "Lines 309-311: 3 tabs are used, as we\u0027re at the third code logic indentation. Spaces for vertical alignment from the last tab.\n\nLine 312:buggy\n\n_________\n\nDone.",
+      "parentUuid": "AAABEn//9k0\u003d",
       "revId": "b2282e673e09270f34ad38b868abaa64ead486e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
