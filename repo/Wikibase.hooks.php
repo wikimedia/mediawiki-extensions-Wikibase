@@ -109,6 +109,7 @@ final class RepoHooks {
 			'EditEntity',
 
 			'actions/EditEntityAction',
+			'entity/EntityFactoryIsPrefixedId',
 
 			'api/ApiBotEdit',
 			'api/ApiEditPage',
