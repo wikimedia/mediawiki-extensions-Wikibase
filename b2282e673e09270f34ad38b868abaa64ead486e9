@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9kw\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-17T06:48:06Z",
+      "side": 1,
+      "message": "Add spaces.",
+      "revId": "b2282e673e09270f34ad38b868abaa64ead486e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9k0\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-17T06:48:06Z",
+      "side": 1,
+      "message": "Mixes spaces and tabs.\n\nOutput function like -\u003eescaped must be last, it doesn\u0027t return $this.",
+      "revId": "b2282e673e09270f34ad38b868abaa64ead486e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
