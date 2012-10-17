@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9d8\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T10:21:26Z",
+      "side": 1,
+      "message": "Why escaped? We are not outputting HTML here. -\u003eplain() should be used, because we are constructing a plain value to be stored in the database.",
+      "revId": "f6f3ad59683b8115ea19fac2bb7b66e3de053e8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
