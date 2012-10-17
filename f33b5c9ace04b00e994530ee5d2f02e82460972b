@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABEn//9hE\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-17T09:01:23Z",
+      "side": 1,
+      "message": "switched \"\u0027,\" with \",\u0027\" and this fails\nParse error: syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting \u0027)\u0027 in /home/john/Workspace/Wikibase/repo/Wikibase.i18n.php on line 205",
+      "revId": "f33b5c9ace04b00e994530ee5d2f02e82460972b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
