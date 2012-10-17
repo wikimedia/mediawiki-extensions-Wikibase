@@ -32,6 +32,7 @@ use Wikibase\EntityFactory;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 abstract class EntityFactoryTest extends \MediaWikiTestCase {
 
@@ -45,6 +46,31 @@ abstract class EntityFactoryTest extends \MediaWikiTestCase {
 		}
 
 		$this->assertFalse( EntityFactory::singleton()->isEntityType( 'this-does-not-exist' ) );
+	}
+
+	public function provideIsPrefixed() {
+		$data = array();
+		$numbers = array( '0', '1', '23', '456', '7890' );
+		$prefixMap = PHPUnit_Framework_Assert::readAttribute($user, '$prefixMap');
+		$typeList = array();
+		foreach ( $prefixMap as $setting => $entityType ) {
+			$typeList[] = preg_quote( Settings::get( $setting ), '/' );
+		}
+		foreach ( $typeList as $prefix ) {
+			foreach ( $numbers as $num ) {
+				$data[] = array( "{$num}", false );
+				$data[] = array( "{$prefix}", false );
+				$data[] = array( "{$prefix}{$num}", true );
+				$data[] = array( "{$num}{$prefix}", false );
+			}
+		}
+	}
+
+	/**
+	 * @dataProvider provideIsPrefixed
+	 */
+	public function testIsPrefixed( $id, $expect ) {
+		$this->assertEquals( $expect, EntityFactory::singleton()->isPrefixedId( $id ) );
 	}
 
 }
