@@ -55,8 +55,10 @@ class SnakSerializer extends ApiSerializerObject {
 		$serialization['property'] = $entityFactory->getPrefixedId( Property::ENTITY_TYPE, $snak->getPropertyId() );
 
 		if ( $snak->getType() === 'value' ) {
-			// TODO: serialize DV
-			$serialization['value'] = serialize($snak->getDataValue());
+			/**
+			 * @var PropertyValueSnak $snak
+			 */
+			$serialization['value'] = $snak->getDataValue()->getArrayValue();
 		}
 
 		return $serialization;
