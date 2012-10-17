@@ -52,6 +52,24 @@
       "revId": "f6f3ad59683b8115ea19fac2bb7b66e3de053e8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9aM\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-17T12:28:34Z",
+      "side": 1,
+      "message": "So? why would that be problematic?\n\nEscaping for database access is done automatically internally. And HTML escapes woudn\u0027t be the right thing for the database anyway. Escaping it here will cause \u0026quot; to show up literally in the comments.",
+      "parentUuid": "AAABEn//9bI\u003d",
+      "revId": "f6f3ad59683b8115ea19fac2bb7b66e3de053e8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
