@@ -34,6 +34,24 @@
       "revId": "f6f3ad59683b8115ea19fac2bb7b66e3de053e8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9bI\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 287
+      },
+      "writtenOn": "2012-10-17T11:52:36Z",
+      "side": 1,
+      "message": "I had in mind wikiPage titles with quotes, like L\u0027éléphant or Alpha \"beta\" gamma.",
+      "parentUuid": "AAABEn//9cs\u003d",
+      "revId": "f6f3ad59683b8115ea19fac2bb7b66e3de053e8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
