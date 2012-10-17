@@ -69,6 +69,24 @@
       "revId": "b2282e673e09270f34ad38b868abaa64ead486e9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABEn//9c0\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-10-17T10:46:05Z",
+      "side": 1,
+      "message": "Personally I don\u0027t like vertical alignment this way, the tabs are enough. This way is more common in MediaWiki.",
+      "parentUuid": "AAABEn//9ko\u003d",
+      "revId": "b2282e673e09270f34ad38b868abaa64ead486e9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
