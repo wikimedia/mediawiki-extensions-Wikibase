@@ -110,7 +110,7 @@ class ApiBotEditTest extends ApiModifyItemBase {
 			"Must have an 'entity' key in the second result from the API" );
 		$this->assertArrayHasKey( 'id', $second[0]['entity'],
 			"Must have an 'id' key in the 'entity' from the second result from the API" );
-		self::$baseOfItemIds = $second[0]['entity']['id'];
+		self::$baseOfItemIds = preg_replace( '/^[^\d]+/', '', $second[0]['entity']['id'] );
 	}
 	/**
 	 * @group API
@@ -118,7 +118,7 @@ class ApiBotEditTest extends ApiModifyItemBase {
 	 * @dataProvider providerCreateItem
 	 */
 	function testCreateItem( $id, $bot, $new, $data ) {
-		$myid = self::$baseOfItemIds + $id;
+		$myid = \Wikibase\ItemObject::getIdPrefix() . ( self::$baseOfItemIds + $id );
 		$token = $this->getItemToken();
 
 		$req = array(

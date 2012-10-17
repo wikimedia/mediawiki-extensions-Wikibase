@@ -237,7 +237,7 @@ abstract class ApiModifyEntity extends Api {
 
 		$this->getResult()->addValue(
 			'entity',
-			'id', $entityContent->getEntity()->getId()
+			'id', $entityContent->getEntity()->getPrefixedId()
 		);
 
 		$this->getResult()->addValue(
