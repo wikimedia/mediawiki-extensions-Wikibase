@@ -27,9 +27,6 @@ use Wikibase\EntityObject;
  * @ingroup WikibaseLib
  * @ingroup Test
  *
- * @group Wikibase
- * @group WikibaseLib
- *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
@@ -52,7 +49,7 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 		return $entity;
 	}
 
-	public function provideApplyData( $entityType ) {
+	protected function generateApplyData( $entityType ) {
 		$tests = array();
 
 		// #0: add label
