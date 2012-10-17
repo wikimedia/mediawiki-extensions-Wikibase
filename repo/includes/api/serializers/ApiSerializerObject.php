@@ -45,7 +45,7 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @var ApiSerializationOptions|null
+	 * @var ApiSerializationOptions
 	 */
 	protected $options;
 
@@ -59,6 +59,11 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 */
 	public function __construct( ApiResult $apiResult, ApiSerializationOptions $options = null ) {
 		$this->apiResult = $apiResult;
+
+		if ( $options === null ) {
+			$options = new ApiSerializationOptions();
+		}
+
 		$this->options = $options;
 	}
 
@@ -103,10 +108,6 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 * @return ApiSerializationOptions
 	 */
 	protected final function getOptions() {
-		if ( $this->options === null ) {
-			$this->options = new ApiSerializationOptions();
-		}
-
 		return $this->options;
 	}
 
