@@ -33,7 +33,116 @@ use Wikibase\EntityFactory;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntityFactoryTest extends \MediaWikiTestCase {
+class EntityFactoryTest extends \MediaWikiTestCase {
+
+	public function provideGetParts() {
+		$data = array();
+		$numbers = array( '0', '1', '23' );
+		$prefixes = EntityFactory::singleton()->getEntityPrefixes();
+		foreach ( $prefixes as $prefix ) {
+			foreach ( $numbers as $num ) {
+				$data[] = array( "{$num}", array( "{$num}", '', $num, '' ) );
+				$data[] = array( "{$prefix}", array() );
+				$data[] = array( "{$prefix}{$num}", array( "{$prefix}{$num}", $prefix, $num, '' ) );
+				$data[] = array( "{$num}{$prefix}", array() );
+				$data[] = array( "{$prefix}{$num}#foobar", array( "{$prefix}{$num}#foobar", $prefix, $num, '#foobar' ) );
+				$data[] = array( "{$prefix}{$num}#", array( "{$prefix}{$num}#", $prefix, $num, '#' ) );
+			}
+		}
+		return $data;
+	}
+
+	/**
+	 * @dataProvider provideGetParts
+	 */
+	public function testGetParts( $id, $expect ) {
+		$this->assertEquals( $expect, EntityFactory::singleton()->GetParts( $id ) );
+	}
+
+	public function provideIsPrefixed() {
+		$data = array();
+		$numbers = array( '0', '1', '23', '456', '7890' );
+		$prefixes = EntityFactory::singleton()->getEntityPrefixes();
+		foreach ( $prefixes as $prefix ) {
+			foreach ( $numbers as $num ) {
+				$data[] = array( "{$num}", false );
+				$data[] = array( "{$prefix}", false );
+				$data[] = array( "{$prefix}{$num}", true );
+				$data[] = array( "{$num}{$prefix}", false );
+			}
+		}
+		return $data;
+	}
+
+	/**
+	 * @dataProvider provideIsPrefixed
+	 */
+	public function testIsPrefixed( $id, $expect ) {
+		$this->assertEquals( $expect, EntityFactory::singleton()->isPrefixedId( $id ) );
+	}
+
+	public function provideGetEntityTypeFromPrefixedId() {
+		return array(
+			array( \Wikibase\ItemObject::getIdPrefix() . '123', \Wikibase\Item::ENTITY_TYPE ),
+			array( \Wikibase\QueryObject::getIdPrefix() . '123', \Wikibase\Query::ENTITY_TYPE ),
+			array( \Wikibase\PropertyObject::getIdPrefix() . '123', \Wikibase\Property::ENTITY_TYPE ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetEntityTypeFromPrefixedId
+	 */
+	public function testGetEntityTypeFromPrefixedId( $id, $expect ) {
+		$this->assertEquals( $expect, EntityFactory::singleton()->getEntityTypeFromPrefixedId( $id ) );
+	}
+
+	public function provideGetPrefixedId() {
+		return array(
+			array( \Wikibase\Item::ENTITY_TYPE, '123', \Wikibase\ItemObject::getIdPrefix() . '123' ),
+			array( \Wikibase\Query::ENTITY_TYPE, '123', \Wikibase\QueryObject::getIdPrefix() . '123' ),
+			array( \Wikibase\Property::ENTITY_TYPE, '123', \Wikibase\PropertyObject::getIdPrefix() . '123' ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetPrefixedId
+	 */
+	public function testGetPrefixedId( $type, $id, $expect ) {
+		$this->assertEquals( $expect, EntityFactory::singleton()->getPrefixedId( $type, $id ) );
+	}
+
+	public function provideGetUnprefixedId() {
+		return array(
+			array( \Wikibase\ItemObject::getIdPrefix() . '123', 123 ),
+			array( \Wikibase\QueryObject::getIdPrefix() . '123', 123 ),
+			array( \Wikibase\PropertyObject::getIdPrefix() . '123', 123 ),
+		);
+	}
+
+	/**
+	 * @dataProvider provideGetUnprefixedId
+	 */
+	public function testGetUnprefixedId( $id, $expect ) {
+		$this->assertEquals( $expect, EntityFactory::singleton()->getUnprefixedId( $id ) );
+	}
+
+	public function provideGetFragment() {
+		$data = array();
+		$prefixes = EntityFactory::singleton()->getEntityPrefixes();
+		foreach ( $prefixes as $prefix ) {
+			$data[] = array( $prefix . '123#foobar', 'foobar' );
+			$data[] = array( $prefix . '123#', '' );
+			$data[] = array( $prefix . '123', '' );
+		}
+		return $data;
+	}
+
+	/**
+	 * @dataProvider provideGetFragment
+	 */
+	public function testGetFragment( $id, $expect ) {
+		$this->assertEquals( $expect, EntityFactory::singleton()->getFragment( $id ) );
+	}
 
 	public function testGetEntityTypes() {
 		$this->assertInternalType( 'array', EntityFactory::singleton()->getEntityTypes() );
