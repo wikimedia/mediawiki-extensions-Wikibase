@@ -28,6 +28,7 @@ use MWException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author John Erling Blad < jeblad@gmail.com >
  */
 class EntityFactory {
 
@@ -68,37 +69,56 @@ class EntityFactory {
 	}
 
 	/**
+	 * Get individual parts of an id
+	 *
 	 * @since 0.2
 	 *
 	 * @param string $id
 	 *
-	 * @return bool true if a prefix is found, false if it does not
+	 * @return the actual id broken up in prefix, number, hash and fragment and fragment alone
 	 */
-	public function isPrefixedId( $id ) {
+	protected static function getIdParts( $id ) {
 		static $regex = false;
 
 		if ( $regex === false ) {
-			$typeList = array();
-
-			foreach ( self::$prefixMap as $setting => $entityType ) {
-				$typeList[] = preg_quote( Settings::get( $setting ), '/' );
-			}
-
-			// This could create problems if parts of prefixes are reused,
-			// or if someone gets the brilliant idea of using an empty string as prefix
-			$regex = '/^(' . implode( '|', $typeList) . ')\d/';
+			$prefixes = array_map(
+				function( $prefix ) {
+					if ( $prefix === '' ) {
+						throw new MWException( 'Registered entity identifier prefix is an empty string.' );
+					}
+					return preg_quote( $prefix, '/' );
+				},
+				self::getEntityPrefixes()
+			);
+			$regex = '/^(' . implode( '|', $prefixes ) . '|)(\d+)(#.*|)$/';
 		}
 
-		// note that this hides errors due to malformed prefixes
-		return preg_match( $regex, $id) === 1;
+		preg_match( $regex, $id, $matches );
+		return $matches;
 	}
 
 	/**
+	 * Predicate to check if there is a prefix in place
 	 * @since 0.2
 	 *
 	 * @param string $id
 	 *
-	 * @return string
+	 * @return bool true if a prefix is found, false if it is not found
+	 */
+	public function isPrefixedId( $id ) {
+		$parts = self::getIdParts( $id );
+		return ( isset( $parts[1] ) && $parts[1] !== '' );
+	}
+
+	/**
+	 * Get the named entity type from an id
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $id
+	 *
+	 * @return string|false the entity type, or false if supplied a typeless id
+	 *         false is not returned because code is commented out
 	 * @throws \MWException
 	 */
 	public function getEntityTypeFromPrefixedId( $id ) {
@@ -112,23 +132,32 @@ class EntityFactory {
 			}
 		}
 
-		// TODO: get rid of assumption length=1
-		$prefix = substr( $id, 0, 1 );
+		$parts = self::getIdParts( $id );
 
-		if ( !array_key_exists( $prefix, $typeMap ) ) {
-			throw new MWException( 'Unregistered entity identifier prefix "' . $prefix . '".' );
+		// this crashes with present code, add later when we are not relying
+		// on this code throwing exceptions
+		//if ( !isset( $parts[1] ) || $parts[1] === '' ) {
+		//	return false;
+		//}
+
+		if ( !isset( $parts[1] ) || !array_key_exists( $parts[1], $typeMap ) ) {
+			throw new MWException( 'Unregistered entity identifier prefix "' . $parts[1] . '".' );
 		}
 
-		return $typeMap[$prefix];
+		return $typeMap[$parts[1]];
 	}
 
 	/**
+	 * Get the id with the type qualifier prepended
+	 *
+	 * This method assumes the $entityId is purely numeric
+	 *
 	 * @since 0.2
 	 *
 	 * @param string $entityType
 	 * @param integer $entityId
 	 *
-	 * @return string
+	 * @return string|false the prefixed id, or false if it can't be found
 	 */
 	public function getPrefixedId( $entityType, $entityId ) {
 		static $prefixMap = false;
@@ -145,15 +174,66 @@ class EntityFactory {
 	}
 
 	/**
+	 * Get the unprefixed version of the id
+	 *
+	 * This method will strip any existing qualifiers and fragments
+	 *
 	 * @since 0.2
 	 *
-	 * @param string$prefixedId
+	 * @param string $prefixedId
 	 *
-	 * @return integer
+	 * @return integer|false the unprefixed id, or false if it can't be found
 	 */
 	public function getUnprefixedId( $prefixedId ) {
-		// TODO: get rid of assumption length=1
-		return (int)substr( $prefixedId, 1 );
+		$parts = self::getIdParts( $prefixedId );
+
+		if ( !isset( $parts[2] ) || $parts[2] === '' ) {
+			return false;
+		}
+
+		return (int)$parts[2];
+	}
+
+	/**
+	 * Get the fragment from the id
+	 *
+	 * This method will not include the fragment separator
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $id
+	 *
+	 * @return string|false the unprefixed id, or false if it can't be found
+	 */
+	public function getIdFragment( $id ) {
+		$parts = self::getIdParts( $id );
+
+		if ( !isset( $parts[3] ) ) {
+			return false;
+		}
+
+		return ( $parts[3] === '' ? '' : substr( $parts[3], 1 ) );
+	}
+
+	/**
+	 * Returns the prefixes for the identifiers of the entities.
+	 *
+	 * @since 0.2
+	 *
+	 * @return array all allowed prefixes
+	 */
+	public static function getEntityPrefixes() {
+		static $prefixes = false;
+
+		if ( $prefixes === false ) {
+			$prefixes = array();
+
+			foreach ( self::$prefixMap as $setting => $entityType ) {
+				$prefixes[] = Settings::get( $setting );
+			}
+
+		}
+		return $prefixes;
 	}
 
 	/**
@@ -161,20 +241,20 @@ class EntityFactory {
 	 *
 	 * @since 0.2
 	 *
-	 * @return array
+	 * @return array all available type identifiers
 	 */
 	public function getEntityTypes() {
 		return array_keys( self::$typeMap );
 	}
 
 	/**
-	 * Returns if the provided string is a valid entity type identifier.
+	 * Predicate if the provided string is a valid entity type identifier.
 	 *
 	 * @since 0.2
 	 *
 	 * @param string $type
 	 *
-	 * @return boolean
+	 * @return boolean true if valid, false if not
 	 */
 	public function isEntityType( $type ) {
 		return array_key_exists( $type, self::$typeMap );
