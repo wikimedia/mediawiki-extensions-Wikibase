@@ -1,8 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\MapHasher as MapHasher;
-use Wikibase\MapValueHasher as MapValueHasher;
+use Wikibase\MapValueHasher;
 
 /**
  * Tests for the Wikibase\MapValueHasher class.
