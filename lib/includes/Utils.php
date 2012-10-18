@@ -98,7 +98,12 @@ final class Utils {
 			'wikinews' => 'wikinews',
 		);
 
-		wfGetDB( DB_MASTER )->begin();
+		$dbw = wfGetDB( DB_MASTER );
+		$doTrx = ( $dbw->trxLevel() === 0 );
+
+		if ( $doTrx ) {
+			$dbw->begin();
+		}
 
 		// Inserting obtained sites...
 
@@ -123,7 +128,9 @@ final class Utils {
 			}
 		}
 
-		wfGetDB( DB_MASTER )->commit();
+		if ( $doTrx ) {
+			$dbw->commit();
+		}
 	}
 
 	/**
