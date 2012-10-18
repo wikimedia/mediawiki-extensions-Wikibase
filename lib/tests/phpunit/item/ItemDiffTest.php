@@ -30,6 +30,7 @@ use Wikibase\ItemObject;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -48,7 +49,7 @@ class ItemDiffTest extends EntityDiffTest {
 
 	public function provideApplyData() {
 		$originalTests = array();
-		$originalTests[] = parent::provideApplyData( "Item" );
+		$originalTests[] = parent::generateApplyData( "Item" );
 		$tests = array();
 		// add link ------------------------------
 		$a = ItemObject::newEmpty();
@@ -86,6 +87,8 @@ class ItemDiffTest extends EntityDiffTest {
 	 * @dataProvider provideApplyData
 	 */
 	public function testApply( \Wikibase\Entity $a, \Wikibase\Entity $b ) {
+		parent::testApply( $a, $b);
+
 		$diff = $a->getDiff( $b );
 		$diff->apply( $a );
 

@@ -27,6 +27,7 @@ use \Wikibase\Entity;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Jens Ohlig <jens.ohlig@wikimedia.de>
@@ -34,7 +35,7 @@ use \Wikibase\Entity;
 
 class PropertyDiffTest extends EntityDiffTest {
 	public function provideApplyData() {
-		return ( parent::provideApplyData( "Property" ) );
+		return parent::generateApplyData( "Property" );
 	}
 
 	/**
@@ -42,6 +43,6 @@ class PropertyDiffTest extends EntityDiffTest {
 	 * @dataProvider provideApplyData
 	 */
 	public function testApply( Entity $a, Entity $b ) {
-		return ( parent::testApply( $a, $b ) );
+		parent::testApply( $a, $b );
 	}
 }
