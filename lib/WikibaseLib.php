@@ -186,7 +186,6 @@ $wgAutoloadClasses['Wikibase\Test\TemplateTest'] 		= $dir . 'tests/phpunit/Templ
 $wgAutoloadClasses['Wikibase\Test\TemplateStoreTest'] 	= $dir . 'tests/phpunit/TemplateStoreTest.php';
 $wgAutoloadClasses['Wikibase\Test\TestChanges']				= $dir . 'tests/phpunit/changes/TestChanges.php';
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/item/TestItems.php';
-$wgAutoloadClasses['Wikibase\Test\EntityFactoryTest'] 		= $dir . 'tests/phpunit/entity/EntityFactoryTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/entity/EntityObjectTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityRefreshTest'] 		= $dir . 'tests/phpunit/changes/EntityRefreshTest.php';
 $wgAutoloadClasses['Wikibase\Test\PropertySnakObjectTest'] 	= $dir . 'tests/phpunit/snak/PropertySnakObjectTest.php';
