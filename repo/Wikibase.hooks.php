@@ -105,7 +105,6 @@ final class RepoHooks {
 			'ItemContentDiffView',
 			'ItemMove',
 			'ItemView',
-			'Autocomment',
 			'EditEntity',
 
 			'actions/EditEntityAction',

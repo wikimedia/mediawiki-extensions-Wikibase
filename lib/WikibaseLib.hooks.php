@@ -164,6 +164,7 @@ final class LibHooks {
 			'store/SiteLinkLookup',
 			'store/SiteLinkTable',
 
+			'Autocomment',
 			'ByPropertyIdArray',
 			'ChangeNotifier',
 			'ChangeHandler',

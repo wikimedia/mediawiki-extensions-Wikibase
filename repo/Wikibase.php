@@ -91,7 +91,6 @@ $wgAutoloadClasses['Wikibase\ItemDisambiguation'] 		= $dir . 'includes/ItemDisam
 $wgAutoloadClasses['Wikibase\EntityView']				= $dir . 'includes/EntityView.php';
 $wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
 $wgAutoloadClasses['Wikibase\PropertyView']				= $dir . 'includes/PropertyView.php';
-$wgAutoloadClasses['Wikibase\Autocomment'] 				= $dir . 'includes/Autocomment.php';
 $wgAutoloadClasses['Wikibase\EditEntity'] 				= $dir . 'includes/EditEntity.php';
 
 // includes/actions
