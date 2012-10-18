@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABFX///ek\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-18T16:58:49Z",
+      "side": 1,
+      "message": "Gah...",
+      "revId": "e36cc8bda3813bc5209a7f75d129c8a943db57ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
