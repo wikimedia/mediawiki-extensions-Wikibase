@@ -112,7 +112,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.wait_for_entity_to_load
         page.editSitelinkLink
         page.siteIdInputField?.should be_false
-        page.pageInputField?.should be_true
+        page.pageInputFieldExistingSiteLink?.should be_true
         page.cancelSitelinkLink
       end
     end
@@ -190,10 +190,10 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.editSitelinkLink
         page.saveSitelinkLinkDisabled?.should be_true
         page.cancelSitelinkLink?.should be_true
-        page.pageInputField_element.enabled?.should be_true
-        current_page = page.pageInputField
+        page.pageInputFieldExistingSiteLink_element.enabled?.should be_true
+        current_page = page.pageInputFieldExistingSiteLink
         new_page = "Bermuda"
-        page.pageInputField = new_page
+        page.pageInputFieldExistingSiteLink = new_page
         ajax_wait
         page.wait_until do
           page.editSitelinkAutocompleteList_element.visible?
@@ -204,7 +204,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         @browser.refresh
         page.wait_for_entity_to_load
         page.editSitelinkLink
-        page.pageInputField.should_not == current_page
+        page.pageInputFieldExistingSiteLink.should_not == current_page
       end
     end
   end

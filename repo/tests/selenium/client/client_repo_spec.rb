@@ -147,7 +147,7 @@ describe "Check functionality of client-repo connection" do
         page.navigate_to_item
         page.wait_for_entity_to_load
         page.englishEditSitelinkLink
-        page.pageInputField = "Philippeville"
+        page.pageInputFieldExistingSiteLink = "Philippeville"
         ajax_wait
         page.wait_until do
           page.editSitelinkAutocompleteList_element.visible?
@@ -174,7 +174,7 @@ describe "Check functionality of client-repo connection" do
         page.navigate_to_item
         page.wait_for_entity_to_load
         page.englishEditSitelinkLink
-        page.pageInputField = article_title_b
+        page.pageInputFieldExistingSiteLink = article_title_b
         ajax_wait
         page.wait_until do
           page.editSitelinkAutocompleteList_element.visible?
@@ -206,7 +206,7 @@ describe "Check functionality of client-repo connection" do
         page.navigate_to_item
         page.wait_for_entity_to_load
         page.englishEditSitelinkLink
-        page.pageInputField = item_sitelink_en[0][1]
+        page.pageInputFieldExistingSiteLink = item_sitelink_en[0][1]
         ajax_wait
         page.wait_until do
           page.editSitelinkAutocompleteList_element.visible?
