@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Http, Status;
+use ApiBase, User, Status;
 
 /**
  * API module to associate two pages on two different sites with a Wikibase item .

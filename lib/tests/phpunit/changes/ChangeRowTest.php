@@ -1,8 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ChangesTable as ChangesTable;
-use \Wikibase\ChangeRow as ChangeRow;
+use \Wikibase\ChangesTable;
 
 /**
  * Tests for the Wikibase\DiffChange class.

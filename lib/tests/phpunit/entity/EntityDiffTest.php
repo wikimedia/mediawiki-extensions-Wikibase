@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Test;
 use Wikibase\Entity;
-use Wikibase\EntityObject;
 
 /**
  * Tests for the Wikibase\EntityObject deriving classes.

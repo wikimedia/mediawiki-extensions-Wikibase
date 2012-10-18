@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Content, Html, Linker, Skin, Status, Revision;
+use  Html, Linker, Skin, Status, Revision;
 
 /**
  * @file
