@@ -70,8 +70,10 @@ $specialPageAliases['ko'] = array(
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
 	'CreateItem' => array( 'СоздајПредмет' ),
+	'NewProperty' => array( 'НовоСвојство' ),
 	'ItemByTitle' => array( 'ПредметПоНаслов' ),
 	'ItemDisambiguation' => array( 'ПредметПоЕтикета' ),
+	'ListDatatypes' => array( 'СписокПодаточниТипови' ),
 );
 
 /** Dutch (Nederlands) */

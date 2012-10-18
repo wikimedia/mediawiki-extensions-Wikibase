@@ -262,11 +262,12 @@ $messages['nl'] = array(
 
 /** Norwegian Nynorsk (norsk (nynorsk)‎)
  * @author Jeblad
+ * @author Njardarlogar
  */
 $messages['nn'] = array(
-	'wbc-desc' => 'Klientutviding for Wikibase, det strukturerte datalageret',
-	'wbc-editlinks' => 'Endre lekker',
-	'wbc-editlinkstitle' => 'Endre nettstadlekkjer',
+	'wbc-desc' => 'Klient for Wikibase-utvidinga',
+	'wbc-editlinks' => 'Endra lenkjer',
+	'wbc-editlinkstitle' => 'Endra mellomspråklege lenkjer',
 );
 
 /** Polish (polski)

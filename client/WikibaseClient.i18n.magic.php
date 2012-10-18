@@ -27,3 +27,8 @@ $magicWords['de'] = array(
 $magicWords['ko'] = array(
 	'noexternallanglinks' => array( 0, '바깥언어링크없음', '바깥언어고리없음' ),
 );
+
+/** Macedonian (македонски) */
+$magicWords['mk'] = array(
+	'noexternallanglinks' => array( 0, 'безнадворјазврски' ),
+);
