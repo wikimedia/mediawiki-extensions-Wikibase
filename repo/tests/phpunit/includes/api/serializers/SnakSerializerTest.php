@@ -71,12 +71,14 @@ class SnakSerializerTest extends ApiSerializerBaseTest {
 			)
 		);
 
+		$dataValue = new \DataValues\StringValue( 'ohi' );
+
 		$validArgs[] = array(
-			new \Wikibase\PropertyValueSnak( 3, new \DataValues\StringValue( 'ohi' ) ),
+			new \Wikibase\PropertyValueSnak( 3, $dataValue ),
 			array(
 				'snaktype' => 'value',
 				'property' => 'p3',
-				'value' => serialize(new \DataValues\StringValue( 'ohi' )), // TODO
+				'value' => $dataValue->getArrayValue(),
 			)
 		);
 
