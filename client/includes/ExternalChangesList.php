@@ -69,7 +69,12 @@ class ExternalChangesList {
 		$line .= self::changeSeparator();
 
 		$line .= \Linker::link( \Title::newFromText( $rc->getAttribute( 'rc_title' ) ) );
-		$line .= ' (' . self::entityLink( $entityData )  . ')';
+
+		$entityLink = self::entityLink( $entityData );
+		if ( $entityLink !== false ) {
+			$line .= ' (' . self::entityLink( $entityData )  . ')';
+		}
+
 		$line .= $cl->insertTimestamp( $line, $rc );
 
 		if ( \User::isIP( $userName ) ) {
@@ -97,25 +102,56 @@ class ExternalChangesList {
 		return $line;
 	}
 
-	public static function changeSeparator() {
+	/**
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	protected static function changeSeparator() {
 		return ' <span class="mw-changeslist-separator">. .</span> ';
 	}
 
-	public static function diffLink( $url, $text, $attribs = array() ) {
+	/**
+	 * @since 0.2
+	 *
+	 * @param string $url
+	 * @param string $text
+	 * @param array $attribs
+	 *
+	 * @return string
+	 */
+	protected static function diffLink( $url, $text, $attribs = array() ) {
 		// build a diff link from an RC
 		$attribs['href'] = $url;
 		return \Html::rawElement( 'a', $attribs, $text );
 	}
 
-	public static function historyLink( $url, $text, $attribs = array() ) {
+	/**
+	 * @since 0.2
+	 *
+	 * @param string $url
+	 * @param string $text
+	 * @param array $attribs
+	 *
+	 * @return string
+	 */
+	protected static function historyLink( $url, $text, $attribs = array() ) {
 		$attribs['href'] = $url;
 		return \Html::rawElement( 'a', $attribs, $text );
 	}
 
-	public static function repoLink( $target, $text, $attribs = array() ) {
-		$baseUrl = Settings::get( 'repoBase' );
-		$baseUrl = rtrim( $baseUrl, '/' );
-		$url = $baseUrl . '/' . htmlspecialchars( $target );
+	/**
+	 * @since 0.2
+	 *
+	 * @param string $target
+	 * @param string $text
+	 * @param array $attribs
+	 *
+	 * @return string
+	 */
+	protected static function repoLink( $target, $text, $attribs = array() ) {
+		$url = ClientUtils::baseUrl() . $target;
+		//htmlspecialchars( $target );
 		$class = 'plainlinks';
 		if ( array_key_exists( 'class', $attribs ) ) {
 			$class .= ' ' . $attribs['class'];
@@ -127,40 +163,118 @@ class ExternalChangesList {
 		return \Html::rawElement( 'a', $attribs, $text );
 	}
 
-	public static function userLink( $userName ) {
+	/**
+	 * @since 0.2
+	 *
+	 * @param string $userName
+	 *
+	 * @return string
+	 */
+	protected static function userLink( $userName ) {
 		$link = "User:$userName";
 		return self::repoLink( $link, $userName );
 	}
 
-	public static function userContribsLink( $userName, $text ) {
+	/**
+	 * @since 0.2
+	 *
+	 * @param string $userName
+	 * @param string $text
+	 *
+	 * return string
+	 */
+	protected static function userContribsLink( $userName, $text ) {
 		$link = "Special:Contributions/$userName";
 		return self::repoLink( $link, $text );
 	}
 
-	public static function userTalkLink( $userName ) {
+	/**
+	 * @since 0.2
+	 *
+	 * @param string $userName
+	 *
+	 * @return string
+	 */
+	protected static function userTalkLink( $userName ) {
 		$link = "User_talk:$userName";
 		return self::repoLink( $link, 'talk' );
 	}
 
-	public static function entityLink( $entityData ) {
+	/**
+	 * @since 0.2
+	 *
+	 * @param \RecentChange $rc
+	 * @param array $entityData
+	 *
+	 * return string
+	 */
+	protected static function entityLink( $entityData ) {
 		$entityText = self::titleTextFromEntityData( $entityData );
-		return self::repoLink( $entityText, $entityText, array( 'class' => 'wb-entity-link' ) );
+		$entityId = self::titleTextFromEntityData( $entityData, false );
+
+		if ( $entityText === false ) {
+			return false;
+		}
+
+		return self::repoLink( $entityText, $entityId, array( 'class' => 'wb-entity-link' ) );
 	}
 
-	public static function titleTextFromEntityData( $entityData ) {
+	/**
+	 * @since 0.2
+	 *
+	 * @param array $entityData
+	 *
+	 * @return string
+	 */
+	protected static function getNamespace( $entityData ) {
+		$nsList = Settings::get('repoNamespaces');
+		$ns = null;
+
+		switch( $entityData['entity_type'] ) {
+			case 'wikibase-item':
+				$ns = $nsList['wikibase-item'];
+				break;
+			case 'wikibase-property':
+				$ns = $nsList['wikibase-property'];
+				break;
+			default:
+				// invalid entity type
+				// todo: query data type
+				return false;
+		}
+		if ( ! empty( $ns ) ) {
+			$ns = $ns . ':';
+		}
+		return $ns;
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @param array $entityData
+	 * @param bool $namespace include namespace in title, such as Item:Q1
+	 * return string
+	 */
+	protected static function titleTextFromEntityData( $entityData, $namespace = true ) {
 		$prefix = null;
+		$titleText = '';
+
 		$id = $entityData['object_id'];
 		if ( $entityData['entity_type'] == 'wikibase-item' ) {
 			// TODO: work for all types of entities, etc.
-			// TODO: do not hardcode the prefix!
-			$prefix = 'Q';
+			$prefix = strtoupper( Settings::get( 'itemPrefix' ) );
 		}
 
 		// TODO: $id is valid? what do do with links to deleted items?
 		if ( ( $prefix !== null ) && ( isset( $id ) ) ) {
-			return $prefix . $id;
+			$titleText = $prefix . $id;
 		}
 
-		return false;
+		if ( $namespace ) {
+			$ns = self::getNamespace( $entityData );
+			$titleText = $ns . $titleText;
+		}
+
+		return $titleText;
 	}
 }

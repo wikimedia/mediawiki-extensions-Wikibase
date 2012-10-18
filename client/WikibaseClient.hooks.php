@@ -414,6 +414,11 @@ final class ClientHooks {
 				'siteGlobalID' => 'enwiki',
 				'siteGroup' => 'wikipedia',
 				'defaultClientStore' => 'sqlstore',
+				// default for repo items in main namespace
+				'repoNamespaces' => array(
+					'wikibase-item' => '',
+					'wikibase-property' => 'Property'
+				)
 			)
 		);
 
