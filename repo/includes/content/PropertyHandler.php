@@ -32,6 +32,16 @@ class PropertyHandler extends EntityHandler {
 
 		return $instance;
 	}
+	/**
+	 * @see ContentHandler::getDiffEngineClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	protected function getDiffEngineClass() {
+		return '\Wikibase\ItemContentDiffView';
+	}
 
 	/**
 	 * @see ContentHandler::makeEmptyContent

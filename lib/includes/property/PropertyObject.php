@@ -152,8 +152,7 @@ class PropertyObject extends EntityObject implements Property {
 	 * @return PropertyDiff
 	 */
 	public function getDiff( Entity $target ) {
-		// TODO
-		return ItemDiff::newEmpty();
+		return PropertyDiff::newFromProperties( $this, $target );
 	}
 
 
