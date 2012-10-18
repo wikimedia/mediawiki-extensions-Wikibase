@@ -82,7 +82,10 @@ class ItemView extends EntityView {
 				array( 'class' => 'wb-sitelinks-link' ),
 				wfMessage( 'wikibase-sitelinks-link-columnheading' )
 			);
-			$html .= Html::element( 'th' );
+			$html .= Html::element(
+				'th',
+				array( 'class' => 'unsortable' ) // prevent column from being sortable
+			);
 			$html .= Html::closeElement( 'tr' );
 
 			$html .= Html::closeElement( 'thead' );

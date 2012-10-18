@@ -41,7 +41,7 @@ describe "Check revert/rollback" do
       ajax_wait
       page.wait_for_api_callback
       page.editSitelinkLink
-      page.pageInputField= sitelink_changed
+      page.pageInputFieldExistingSiteLink= sitelink_changed
       ajax_wait
       page.saveSitelinkLink
       ajax_wait

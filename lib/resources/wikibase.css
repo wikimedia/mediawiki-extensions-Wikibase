@@ -29,7 +29,7 @@
 /* entity container */
 .wb-entity {
 	width: 100%;
-	max-width: 55em;
+	max-width: 60em;
 	float: left; /* float left to let widget container float right next to it */
 	clear: both; /* wrap around success message */
 }
@@ -63,7 +63,7 @@
 /* basically, a row in the grid layout */
 .wb-value-row {
 	width: 100%;
-	max-width: 55em;
+	max-width: 60em;
 	position: relative; /* make absolute positioned toolbar align to the right edge */
 	font-size: 100%; /* font size needs to be set since it influences max-widh property */
 	float: left; /* make row to take the dimensions of its containing blocks avoiding clipping */
@@ -290,20 +290,20 @@ table.wb-sitelinks .wb-sitelinks-columnheaders {
 }
 
 table.wb-sitelinks .wb-sitelinks-sitename {
-	width: 25%;
+	width: 24%;
 	word-wrap: break-word;
 	padding-left: 10px;
 	border-left: 1px solid #C9C9C9;
 }
 
 table.wb-sitelinks .wb-sitelinks-siteid {
-	width: 10%;
+	width: 12%;
 	padding: 0 10px;
 	white-space: nowrap;
 }
 
 table.wb-sitelinks .wb-sitelinks-link {
-	width: 65%;
+	width: 64%;
 	word-wrap: break-word;
 	border-right: 1px solid #C9C9C9;
 }

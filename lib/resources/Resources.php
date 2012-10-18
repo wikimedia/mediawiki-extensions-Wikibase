@@ -166,7 +166,8 @@ return call_user_func( function() {
 				'wikibase.jquery.ui',
 				'mediawiki.api',
 				'mediawiki.Title',
-				'mediawiki.jqueryMsg' // for {{plural}} and {{gender}} support in messages
+				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
+				'jquery.tablesorter'
 			),
 			'messages' => array(
 				'wikibase-cancel',
