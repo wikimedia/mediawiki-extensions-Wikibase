@@ -73,6 +73,7 @@ $messages['diq'] = array(
  */
 $messages['es'] = array(
 	'datavalues-desc' => 'Colección de objetos que representan varias clases de valores',
+	'version-datavalues' => 'Valores de datos',
 );
 
 /** Galician (galego)
