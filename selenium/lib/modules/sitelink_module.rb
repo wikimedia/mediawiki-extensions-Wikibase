@@ -11,6 +11,11 @@ module SitelinkPage
   # sitelinks UI elements
   table(:sitelinksTable, :class => "wb-sitelinks")
   element(:sitelinksTableColumnHeaders, :tr, :class => "wb-sitelinks-columnheaders")
+  element(:sitelinksHeaderLanguage, :th, :class => "wb-sitelinks-sitename")
+  element(:sitelinksHeaderCode, :th, :class => "wb-sitelinks-siteid")
+  element(:sitelinksHeaderLink, :th, :class => "wb-sitelinks-link")
+  element(:sitelinksTableBody, :tbody, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tbody")
+  element(:sitelinksTableLanguage, :td, :index => 1)
   link(:addSitelinkLink, :css => "table.wb-sitelinks > tfoot > tr > td > span.wb-ui-toolbar > span.wb-ui-toolbar-group > a.wb-ui-toolbar-button:nth-child(1)")
   span(:siteLinkCounter, :class => "wb-ui-propertyedittool-counter")
   text_field(:siteIdInputField, :xpath => "//table[contains(@class, 'wb-sitelinks')]/tfoot/tr/td[1]/input")
@@ -48,6 +53,10 @@ module SitelinkPage
       end
     end
     return false
+  end
+
+  def get_text_from_sitelist_table(x, y)
+    return sitelinksTable_element[x][y].text
   end
 
   def count_existing_sitelinks
