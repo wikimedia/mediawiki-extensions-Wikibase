@@ -170,6 +170,7 @@ final class LibHooks {
 			'ChangeHandler',
 			'ChangesTable',
 			'HashableObjectStorage',
+			'HtmlTemplateStore',
 			'LibHooks',
 			'MapValueHasher',
 			'SiteLink',

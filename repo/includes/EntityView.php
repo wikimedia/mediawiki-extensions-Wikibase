@@ -358,26 +358,24 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForEditSection(
 		EntityContent $entity, Language $lang = null, $tag = 'span', $action = 'edit', $enabled = true
 	) {
-		$html = HTML::openElement( $tag, array( 'class' => 'editsection' ) );
-		$html .= HTML::openElement( 'span', array( 'class' => 'wb-ui-toolbar' ) );
-		$html .= HTML::openElement( 'span', array( 'class' => 'wb-ui-toolbar-group' ) );
-		$html .= '[';
+		$buttonLabel = wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text();
 
-		// '[ button ]' button part:
-		$html .= HTML::element(
-			$enabled ? 'a' : 'span',
-			array( // todo: add link to special page for non-JS editing
-				'href' => '', 'class' => 'wb-ui-toolbar-button' . ( $enabled ? '' : ' wb-ui-toolbar-button-disabled' )
-			),
-			wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text()
-		);
+		$button = ( $enabled ) ?
+			new HtmlTemplate(
+				'editsection-button',
+				array(
+					$buttonLabel,
+					'' // todo: add link to special page for non-JS editing
+				)
+			) :
+			new HtmlTemplate(
+				'editsection-button-disabled',
+				array( $buttonLabel )
+			);
 
-		$html .= ']';
-		$html .= Html::closeElement( 'span' );
-		$html .= Html::closeElement( 'span' );
-		$html .= Html::closeElement( $tag );
+		$editsection = new HtmlTemplate( 'editsection', array( $tag, $button->text() ) );
 
-		return $html;
+		return $editsection->text();
 	}
 
 	/**
