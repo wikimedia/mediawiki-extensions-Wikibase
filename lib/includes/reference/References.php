@@ -28,7 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface References extends \Traversable, \Countable, \Serializable, Hashable {
+interface References extends \Traversable, \Countable, \Serializable {
 
 	/**
 	 * Adds the provided reference to the list.

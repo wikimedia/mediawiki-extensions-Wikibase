@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Traversable;
 
 /**
  * Interface for objects that can hash a map (ie associative array).
@@ -36,10 +37,10 @@ interface MapHasher {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $map array of Hashable
+	 * @param $map Traversable|array of Hashable
 	 *
 	 * @return string
 	 */
-	public function hash( array $map );
+	public function hash( $map );
 
 }

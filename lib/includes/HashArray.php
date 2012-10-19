@@ -186,7 +186,7 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 		 */
 		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
 
-		return $hasher->hash( $this->getArrayCopy() );
+		return $hasher->hash( $this );
 	}
 
 }

@@ -118,12 +118,14 @@ class StatementObject extends ClaimObject implements Statement {
 	 * @return string
 	 */
 	public function getHash() {
+		$hasher = new MapValueHasher();
+
 		return sha1( implode(
 			'|',
 			array(
 				parent::getHash(),
 				$this->rank,
-				$this->references->getHash(),
+				$hasher->hash( $this->references ),
 			)
 		) );
 	}
