@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAABFX//+7Q\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-19T12:42:49Z",
+      "side": 1,
+      "message": "Fixed in an yet unpublished followup",
+      "parentUuid": "AAABFX//++Y\u003d",
+      "revId": "6b1ce14f421d5390252bd1fe8e85ae5f174049a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAABFX//++U\u003d",
         "filename": "lib/includes/entity/EntityFactory.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-10-19T08:56:45Z",
       "side": 1,
       "message": "\" )\"",
+      "revId": "6b1ce14f421d5390252bd1fe8e85ae5f174049a4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//+7M\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-19T12:42:49Z",
+      "side": 1,
+      "message": "Fixed in an yet unpublished followup",
+      "parentUuid": "AAABFX//++U\u003d",
       "revId": "6b1ce14f421d5390252bd1fe8e85ae5f174049a4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
