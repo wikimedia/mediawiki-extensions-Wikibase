@@ -64,6 +64,7 @@ $messages['de'] = array(
 	'wikibaselib-entity-property' => 'Attribut',
 	'wikibaselib-entity-query' => 'Abfrage',
 	'datatypes-type-wikibase-item' => 'Datenelement',
+	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -74,6 +75,8 @@ $messages['dsb'] = array(
 	'wikibaselib-entity-item' => 'element',
 	'wikibaselib-entity-property' => 'kakosć',
 	'wikibaselib-entity-query' => 'wótpšašanje',
+	'datatypes-type-wikibase-item' => 'Element',
+	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
 );
 
 /** Spanish (español)
@@ -85,6 +88,7 @@ $messages['es'] = array(
 	'wikibaselib-entity-property' => 'propiedad',
 	'wikibaselib-entity-query' => 'consulta',
 	'datatypes-type-wikibase-item' => 'Elemento',
+	'datatypes-type-commonsMedia' => 'Archivo multimedia Commons',
 );
 
 /** Persian (فارسی)
@@ -114,6 +118,7 @@ $messages['gl'] = array(
 	'wikibaselib-entity-property' => 'propiedade',
 	'wikibaselib-entity-query' => 'pescuda',
 	'datatypes-type-wikibase-item' => 'Elemento',
+	'datatypes-type-commonsMedia' => 'Ficheiro multimedia de Commons',
 );
 
 /** Hebrew (עברית)
@@ -136,6 +141,7 @@ $messages['hsb'] = array(
 	'wikibaselib-entity-property' => 'kajkosć',
 	'wikibaselib-entity-query' => 'naprašowanje',
 	'datatypes-type-wikibase-item' => 'Element',
+	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
 );
 
 /** Interlingua (interlingua)
@@ -165,6 +171,7 @@ $messages['it'] = array(
 	'wikibaselib-entity-property' => 'proprietà',
 	'wikibaselib-entity-query' => 'interrogazione',
 	'datatypes-type-wikibase-item' => 'Elemento',
+	'datatypes-type-commonsMedia' => 'File multimediale su Commons',
 );
 
 /** Japanese (日本語)
@@ -176,6 +183,7 @@ $messages['ja'] = array(
 	'wikibaselib-entity-property' => 'プロパティ',
 	'wikibaselib-entity-query' => 'クエリ',
 	'datatypes-type-wikibase-item' => '項目',
+	'datatypes-type-commonsMedia' => 'コモンズのメディアファイル',
 );
 
 /** Korean (한국어)
@@ -187,6 +195,7 @@ $messages['ko'] = array(
 	'wikibaselib-entity-property' => '속성',
 	'wikibaselib-entity-query' => '쿼리',
 	'datatypes-type-wikibase-item' => '항목',
+	'datatypes-type-commonsMedia' => '공용 미디어 파일',
 );
 
 /** Colognian (Ripoarisch)

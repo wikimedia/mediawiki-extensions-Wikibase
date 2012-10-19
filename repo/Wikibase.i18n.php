@@ -499,12 +499,13 @@ $messages['br'] = array(
 );
 
 /** Catalan (català)
+ * @author Pginer
  * @author පසිඳු කාවින්ද
  */
 $messages['ca'] = array(
 	'wikibase-edit' => 'Editar',
 	'wikibase-save' => 'Desa',
-	'wikibase-cancel' => 'Cancel.lar',
+	'wikibase-cancel' => 'cancel·lar',
 	'wikibase-add' => 'afegir',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-tooltip-error-details' => 'Detalls',
