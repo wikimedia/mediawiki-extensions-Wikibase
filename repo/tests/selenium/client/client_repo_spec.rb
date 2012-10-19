@@ -113,7 +113,7 @@ describe "Check functionality of client-repo connection" do
       end
       on_page(ItemPage) do |page|
         page.wait_for_entity_to_load
-        page.entityLabelSpan.should == article_titel_a
+        page.entityLabelSpan.should == article_title_a
       end
     end
     it "should add additional sitelinks" do
