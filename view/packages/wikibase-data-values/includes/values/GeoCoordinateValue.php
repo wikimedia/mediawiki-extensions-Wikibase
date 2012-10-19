@@ -148,9 +148,14 @@ class GeoCoordinateValue extends DataValueObject {
 	 * @param string $value
 	 *
 	 * @return MonolingualTextValue
+	 * @throws InvalidArgumentException
 	 */
 	public function unserialize( $value ) {
 		$data = explode( '|', $value, 4 );
+
+		if ( count( $data ) < 2 ) {
+			throw new InvalidArgumentException( 'Invalid serialization provided in ' . __METHOD__ );
+		}
 
 		$this->__construct(
 			(float)$data[0],
