@@ -71,26 +71,4 @@ class ReferenceList extends \SplObjectStorage implements References {
 		$this->detach( $reference );
 	}
 
-	/**
-	 * @see Hashable::getHash
-	 *
-	 * @since 0.1
-	 *
-	 * @param MapHasher $mapHasher
-	 *
-	 * @return string
-	 */
-	public function getHash() {
-		// We cannot have this as optional arg, because then we're no longer
-		// implementing the Hashable interface properly according to PHP...
-		$args = func_get_args();
-
-		/**
-		 * @var MapHasher $hasher
-		 */
-		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
-
-		return $hasher->hash( iterator_to_array( $this ) );
-	}
-
 }

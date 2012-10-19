@@ -51,6 +51,9 @@ class MapValueHasherTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $hash, $hasher->hash( $map1 ) );
 
+		$map4 = new \ArrayObject( $map0 );
+		$this->assertEquals( $hash, $hasher->hash( $map4 ) );
+
 		$map2 = $map0;
 		unset( $map2['foo'] );
 

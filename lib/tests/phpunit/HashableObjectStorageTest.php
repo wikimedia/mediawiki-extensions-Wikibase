@@ -76,38 +76,42 @@ class HashableObjectStorageTest extends \MediaWikiTestCase {
 		);
 	}
 
-	public function testGetHash() {
-		$list = new HashableObjectStorage();
 
-		$hash = $list->getHash();
-		$this->assertInternalType( 'string', $hash );
+	// Temporary disabled since we temporary removed this
+	// due to clash with splObjectStorage::getHash added in PHP 5.4
 
-		$one = new HashableObject( 1 );
-		$two = new HashableObject( 1 );
-
-		$list->attach( $one );
-		$list->attach( $two );
-
-		$newHash = $list->getHash();
-
-		$this->assertNotEquals(
-			$hash,
-			$newHash,
-			'The hash of HashableObjectStorage with different content should be different'
-		);
-
-		$list->detach( $one );
-		$list->detach( $two );
-
-		$list->attach( $two );
-		$list->attach( $one );
-
-		$this->assertEquals(
-			$newHash,
-			$list->getHash(),
-			'The hash of HashableObjectStorage with the same elements in different order should be the same'
-		);
-	}
+//	public function testGetHash() {
+//		$list = new HashableObjectStorage();
+//
+//		$hash = $list->getHash();
+//		$this->assertInternalType( 'string', $hash );
+//
+//		$one = new HashableObject( 1 );
+//		$two = new HashableObject( 1 );
+//
+//		$list->attach( $one );
+//		$list->attach( $two );
+//
+//		$newHash = $list->getHash();
+//
+//		$this->assertNotEquals(
+//			$hash,
+//			$newHash,
+//			'The hash of HashableObjectStorage with different content should be different'
+//		);
+//
+//		$list->detach( $one );
+//		$list->detach( $two );
+//
+//		$list->attach( $two );
+//		$list->attach( $one );
+//
+//		$this->assertEquals(
+//			$newHash,
+//			$list->getHash(),
+//			'The hash of HashableObjectStorage with the same elements in different order should be the same'
+//		);
+//	}
 
 }
 
