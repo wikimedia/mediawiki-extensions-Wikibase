@@ -236,6 +236,35 @@ describe "Check functionality of add/edit/remove sitelinks" do
     end
   end
 
+  context "Check sorting of sitelinks table" do
+    it "should check correct sorting of sitelinks" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.get_text_from_sitelist_table(1, 1).should == "de"
+        page.get_text_from_sitelist_table(2, 1).should == "en"
+        page.get_text_from_sitelist_table(3, 1).should == "fr"
+        page.get_text_from_sitelist_table(4, 1).should == "he"
+        page.get_text_from_sitelist_table(5, 1).should == "ja"
+        page.get_text_from_sitelist_table(6, 1).should == "sr"
+        page.sitelinksHeaderLanguage_element.click
+        page.get_text_from_sitelist_table(1, 1).should == "de"
+        page.get_text_from_sitelist_table(2, 1).should == "en"
+        page.get_text_from_sitelist_table(3, 1).should == "fr"
+        page.get_text_from_sitelist_table(4, 1).should == "sr"
+        page.get_text_from_sitelist_table(5, 1).should == "he"
+        page.get_text_from_sitelist_table(6, 1).should == "ja"
+        page.sitelinksHeaderCode_element.click
+        page.get_text_from_sitelist_table(1, 1).should == "de"
+        page.get_text_from_sitelist_table(2, 1).should == "en"
+        page.get_text_from_sitelist_table(3, 1).should == "fr"
+        page.get_text_from_sitelist_table(4, 1).should == "he"
+        page.get_text_from_sitelist_table(5, 1).should == "ja"
+        page.get_text_from_sitelist_table(6, 1).should == "sr"
+      end
+    end
+  end
+
   context "Check for removing multiple site link UI" do
     it "should check if removing multiple sitelink works" do
       on_page(ItemPage) do |page|
