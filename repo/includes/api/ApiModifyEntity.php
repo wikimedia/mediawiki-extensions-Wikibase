@@ -50,24 +50,28 @@ abstract class ApiModifyEntity extends Api {
 	protected function findEntity( array $params ) {
 		$entityContent = null;
 
-		// If we have an id try that first
+		// If we have an id try that first. If the id isn't prefixed, assume it refers to an item.
 		if ( isset( $params['id'] ) ) {
+			$id = $params['id'];
+
+			$entityFactory = EntityFactory::singleton();
 			$entityContentFactory = EntityContentFactory::singleton();
-			try {
-				$entityContent = $entityContentFactory->getFromPrefixedId( $params['id'], \Revision::FOR_THIS_USER );
+
+			if ( !$entityFactory->isPrefixedId( $id ) ) {
+				$id = ItemObject::getIdPrefix() . $id;
+				$this->getResult()->setWarning( 'Assuming plain numeric ID refers to an item. '
+						. 'Please use qualified IDs instead.' );
 			}
-			catch ( \MWException $e ) {
-				$entityContent = $entityContentFactory->getFromId( $params['type'], $params['id'], \Revision::FOR_THIS_USER );
-			}
+
+			$entityContent = $entityContentFactory->getFromPrefixedId( $id, \Revision::FOR_THIS_USER );
 
 			if ( is_null( $entityContent ) ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-id' )->text(), 'no-such-entity-id' );
 			}
 		}
-		// Otherwise check if we have a link and try that
-		// note that this will not be run if the subclass doesn't allow the sitelink parameters
-		// or if the validateParameters method rejects it
-		elseif ( $params['type'] === 'item' && isset( $params['site'] ) && isset( $params['title'] ) ) {
+		// Otherwise check if we have a link and try that.
+		// This will always result in an item, because only items have sitelinks.
+		elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 			$entityContent = ItemHandler::singleton()->getFromSiteLink(
 				$params['site'],
 				Utils::squashToNFC( $params['title'] )
@@ -371,11 +375,6 @@ abstract class ApiModifyEntity extends Api {
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'type' => array(
-				ApiBase::PARAM_TYPE => array( 'item', 'property', 'query' ),
-				ApiBase::PARAM_DFLT => 'item',
-				ApiBase::PARAM_ISMULTI => false,
-			),
 			'token' => null,
 			'bot' => false,
 		);
@@ -391,7 +390,7 @@ abstract class ApiModifyEntity extends Api {
 	 */
 	protected function getParamDescriptionForId() {
 		return array(
-			'id' => array( 'The numeric identifier for the entity.',
+			'id' => array( 'The identifier for the entity, including the prefix.',
 				"Use either 'id' or 'site' and 'title' together."
 			),
 		);
