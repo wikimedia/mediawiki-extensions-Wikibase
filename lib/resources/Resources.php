@@ -33,6 +33,10 @@ return call_user_func( function() {
 			'class' => 'Wikibase\SitesModule',
 		),
 
+		'wikibase.templates' => $moduleTemplate + array(
+			'class' => 'Wikibase\TemplateProvider',
+		),
+
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
@@ -41,6 +45,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.common',
 				'wikibase.sites',
+				'wikibase.templates',
 				'jquery.uls'
 			),
 			'messages' => array(

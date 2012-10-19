@@ -141,51 +141,19 @@ class ItemView extends EntityView {
 			} else {
 				$languageCode = $site->getLanguageCode();
 
-				$html .= Html::openElement( 'tr', array(
-						'class' => 'wb-sitelinks-' . $languageCode . ' ' . $alternatingClass )
-				);
-
-				$html .= Html::element(
-					'td',
-					array(
-						'class' => ' wb-sitelinks-sitename wb-sitelinks-sitename-' . $languageCode
-					),
-					// TODO: get an actual site name rather then just the language
-					Utils::fetchLanguageName( $languageCode )
-				);
-
-				$html .= Html::element(
-					'td',
-					array(
-						'class' => ' wb-sitelinks-siteid wb-sitelinks-siteid-' . $languageCode,
-						// site id language code is always ltr
-						'dir' => 'ltr'
-					),
-					// TODO: get an actual site id rather then just the language code
-					$languageCode
-				);
-				/* TODO: for non-JS, also set the dir attribute on the link cell;
-				but do not build language objects for each site since it causes too much load
-				and will fail when having too much site links */
-				$html .= Html::openElement(
-					'td',
-					array(
-						'class' => 'wb-sitelinks-link wb-sitelinks-link-' . $languageCode,
-						'lang' => $languageCode
-					)
-				);
-
-				$html .= Html::element(
-					'a',
-					array(
-						'href' => $link->getUrl(),
-						'dir' => 'auto'
-					),
-					$link->getPage()
-				);
-				$html .= Html::closeElement( 'td' );
-				$html .= $this->getHtmlForEditSection( $item, $lang, 'td' );
-				$html .= Html::closeElement( 'tr' );
+				// TODO: for non-JS, also set the dir attribute on the link cell;
+				// but do not build language objects for each site since it causes too much load
+				// and will fail when having too much site links
+				$template = new HtmlTemplate( 'wb-sitelink', array(
+					$languageCode,
+					$alternatingClass,
+					Utils::fetchLanguageName( $languageCode ), // TODO: get an actual site name rather then just the language
+					$languageCode, // TODO: get an actual site id rather then just the language code
+					$link->getUrl(),
+					$link->getPage(),
+					$this->getHtmlForEditSection( $item, $lang, 'td' )
+				) );
+				$html .= $template->text();
 			}
 		}
 
