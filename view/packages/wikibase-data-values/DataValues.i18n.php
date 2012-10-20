@@ -132,3 +132,10 @@ $messages['mk'] = array(
 	'version-datavalues' => 'ПодаточниВредности',
 );
 
+/** Dutch (Nederlands)
+ * @author Siebrand
+ */
+$messages['nl'] = array(
+	'version-datavalues' => 'Gegevenswaarden',
+);
+
