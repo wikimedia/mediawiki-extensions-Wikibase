@@ -100,6 +100,7 @@ $messages['fa'] = array(
 	'wikibaselib-entity-property' => 'خاصیت',
 	'wikibaselib-entity-query' => 'کوئری',
 	'datatypes-type-wikibase-item' => 'مورد',
+	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
 );
 
 /** French (français)
@@ -214,6 +215,7 @@ $messages['mk'] = array(
 	'wikibaselib-entity-property' => 'својство',
 	'wikibaselib-entity-query' => 'барање',
 	'datatypes-type-wikibase-item' => 'Предмет',
+	'datatypes-type-commonsMedia' => 'Медиумска податотека од Ризницата',
 );
 
 /** Malay (Bahasa Melayu)
