@@ -207,6 +207,33 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
+	 * Check success of item update with a valid id
+	 */
+	function testSetItemWithNumericId() {
+		$token = $this->getItemToken();
+
+		$numId = preg_replace( '/^[a-z]*/', '', self::$id );
+
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbsetitem',
+				'reason' => 'Some reason',
+				'data' => json_encode( self::$item ),
+				'token' => $token,
+				'id' => $numId,
+			),
+			null,
+			false,
+			self::$users['wbeditor']->user
+		);
+
+		$this->assertSuccess( $res, 'entity', 'id' );
+		$this->assertSuccess( $res, 'entity', 'lastrevid' );
+		$this->assertItemEquals( self::$expect, $res['entity'] );
+		$this->assertArrayHasKey( 'warnings', $res ); // there should be a B/C warning
+	}
+
+	/**
 	 * Check success when the item is set again, with fields in the json that should be ignored
 	 */
 	function testSetItemWithIgnoredData() {
