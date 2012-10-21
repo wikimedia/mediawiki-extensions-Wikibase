@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Autocomment as Autocomment;
+use Wikibase\Autocomment;
 
 /**
  * Test Autocomment.

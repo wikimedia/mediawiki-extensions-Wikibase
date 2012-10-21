@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemDeletionUpdate as ItemDeletionUpdate;
-use \Wikibase\ItemContent as ItemContent;
+use \Wikibase\ItemDeletionUpdate;
+use \Wikibase\ItemContent;
 
 /**
  * Tests for the Wikibase\ItemDeletionUpdate class.

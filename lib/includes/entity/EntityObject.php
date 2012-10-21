@@ -451,7 +451,7 @@ abstract class EntityObject implements Entity {
 	 */
 	public function getUndoDiff( Entity $newerEntity, Entity $olderEntity ) {
 		if ( $newerEntity->getType() !== $this->getType() || $olderEntity->getType() !== $this->getType() ) {
-			throw new \MWException( 'Entities passed to getUndoDiff must have the same type as the entity object.' );
+			throw new \MWException( 'Entities passed to getUndoDiff must have the same type' );
 		}
 
 		wfProfileIn( __METHOD__ );

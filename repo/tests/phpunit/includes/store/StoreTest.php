@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Store as Store;
+use Wikibase\Store;
 
 /**
  * Tests for the Wikibase\Store implementing classes.

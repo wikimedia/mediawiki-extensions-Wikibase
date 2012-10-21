@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Diff\MapDiff as MapDiff;
+use Diff\MapDiff;
 
 /**
  * Represents a diff between two WikibaseProperty instances.

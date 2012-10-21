@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\HashArray as HashArray;
-use Wikibase\Hashable as Hashable;
+use Wikibase\HashArray;
+use Wikibase\Hashable;
 
 /**
  * Tests for the Wikibase\HashArray class.

@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\EntityCacheTable as EntityCacheTable;
-use \Wikibase\Entity as Entity;
+use \Wikibase\EntityCacheTable;
+use \Wikibase\Entity;
 
 /**
  * Tests for the Wikibase\EntityCacheTable class.

@@ -1,9 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ClaimList as ClaimList;
-use Wikibase\ClaimObject as ClaimObject;
-use Wikibase\Hashable as Hashable;
+use Wikibase\ClaimList;
+use Wikibase\ClaimObject;
+use Wikibase\Hashable;
 
 /**
  * Tests for the Wikibase\ClaimList class.

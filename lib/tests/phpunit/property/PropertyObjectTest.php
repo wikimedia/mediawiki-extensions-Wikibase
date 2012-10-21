@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\PropertyObject as PropertyObject;
-use \Wikibase\Property as Property;
+use \Wikibase\PropertyObject;
+use \Wikibase\Property;
 
 /**
  * Tests for the Wikibase\PropertyObject class.

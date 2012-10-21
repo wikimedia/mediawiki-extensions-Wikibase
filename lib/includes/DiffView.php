@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 use Html;
-use Diff\IDiff as IDiff;
-use Diff\IDiffOp as IDiffOp;
+use Diff\IDiff;
+use Diff\IDiffOp;
 
 /**
  * Class for generating views of IDiff objects.

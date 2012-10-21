@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemObject as ItemObject;
+use \Wikibase\ItemObject;
 
 /**
  * Test change data for ChangeRowTest

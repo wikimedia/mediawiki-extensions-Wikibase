@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\HtmlTemplateStore as HtmlTemplateStore;
+use Wikibase\HtmlTemplateStore;
 
 /**
  * Tests for the Wikibase\HtmlTemplateStore class.

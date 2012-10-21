@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Utils;
-use \Wikibase\ItemContent as ItemContent;
+use \Wikibase\ItemContent;
 use WikiPage, Title, WikitextContent;
 
 /**

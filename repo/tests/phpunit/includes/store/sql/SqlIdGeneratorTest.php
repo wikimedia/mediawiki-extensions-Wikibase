@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\IdGenerator as IdGenerator;
+use Wikibase\IdGenerator;
 
 /**
  * Tests for the Wikibase\SqlIdGenerator class that are not in IdGeneratorTest.

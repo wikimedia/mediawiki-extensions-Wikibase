@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemContent as ItemContent;
+use \Wikibase\ItemContent;
 
 /**
  * Tests for the Wikibase\ItemHandler class.

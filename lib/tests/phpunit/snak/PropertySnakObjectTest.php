@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\PropertySnak as PropertySnak;
+use Wikibase\PropertySnak;
 
 /**
  * Tests for the Wikibase\PropertySnakObject class.

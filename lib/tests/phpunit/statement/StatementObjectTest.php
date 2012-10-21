@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\StatementObject as StatementObject;
-use Wikibase\Statement as Statement;
-use Wikibase\Claim as Claim;
-use Wikibase\ReferenceObject as ReferenceObject;
+use Wikibase\StatementObject;
+use Wikibase\Statement;
+use Wikibase\Claim;
+use Wikibase\ReferenceObject;
 use \DataValues\StringValue;
 
 /**

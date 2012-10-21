@@ -1,9 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ItemContentDiffView as ItemContentDiffView;
-use Wikibase\Item as Item;
-use Wikibase\ItemContent as ItemContent;
+use Wikibase\ItemContentDiffView;
+use Wikibase\Item;
+use Wikibase\ItemContent;
 
 /**
  * Test for the Wikibase\ItemDiffView class.

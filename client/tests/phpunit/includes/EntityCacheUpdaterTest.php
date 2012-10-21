@@ -1,9 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\EntityCacheUpdater as EntityCacheUpdater;
-use \Wikibase\EntityUpdate as EntityUpdate;
-use \Wikibase\ItemObject as ItemObject;
+use Wikibase\EntityCacheUpdater;
+use \Wikibase\EntityUpdate;
+use \Wikibase\ItemObject;
 
 /**
  * Tests for the Wikibase\EntityCacheUpdater class.

@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\EntityContent as EntityContent;
-use \Wikibase\EditEntity as EditEntity;
-use \Wikibase\ItemContent as ItemContent;
-use \Status as Status;
+use \Wikibase\EntityContent;
+use \Wikibase\EditEntity;
+use \Wikibase\ItemContent;
+use \Status;
 
 /**
  * Test EditEntity.

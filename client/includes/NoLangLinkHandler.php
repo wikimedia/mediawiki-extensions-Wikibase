@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use \Wikibase\LangLinkHandler as LangLinkHandler;
+use Wikibase\LangLinkHandler;
 
 /**
  * Handles the NOEXTERNALLANGLINKS parser function.

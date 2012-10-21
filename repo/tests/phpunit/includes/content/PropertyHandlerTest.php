@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\PropertyContent as PropertyContent;
+use \Wikibase\PropertyContent;
 
 /**
  * Tests for the Wikibase\PropertyHandler class.

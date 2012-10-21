@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Item as Item;
-use Wikibase\Property as Property;
-use Wikibase\ItemObject as ItemObject;
-use Wikibase\PropertyObject as PropertyObject;
+use Wikibase\Item;
+use Wikibase\Property;
+use Wikibase\ItemObject;
+use Wikibase\PropertyObject;
 
 /**
  * Tests for the Wikibase\CachedEntity class.
