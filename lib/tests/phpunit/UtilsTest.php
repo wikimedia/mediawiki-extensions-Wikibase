@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Utils as Utils;
+use Wikibase\Utils;
 
 /**
  * Tests for the Wikibase\Utils class.

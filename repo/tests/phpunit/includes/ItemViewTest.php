@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ItemContent as ItemContent;
-use Wikibase\ItemObject as ItemObject;
+use Wikibase\ItemContent;
+use Wikibase\ItemObject;
 use Wikibase\Utils;
-use Wikibase\ItemView as ItemView;
+use Wikibase\ItemView;
 
 /**
  * Test WikibaseItemView.

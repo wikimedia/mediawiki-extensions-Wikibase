@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Diff\MapDiff as MapDiff;
-use Wikibase\ChangesTable as ChangesTable;
+use Diff\MapDiff;
+use Wikibase\ChangesTable;
 
 /**
  * Tests for the Wikibase\ChangesTable class.

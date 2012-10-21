@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\QueryObject as QueryObject;
-use \Wikibase\Query as Query;
+use \Wikibase\QueryObject;
+use \Wikibase\Query;
 
 /**
  * Tests for the Wikibase\QueryObject class.

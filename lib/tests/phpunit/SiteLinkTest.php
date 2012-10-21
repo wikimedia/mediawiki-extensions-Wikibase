@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\SiteLink as SiteLink;
+use \Wikibase\SiteLink;
 use Sites;
 
 /**

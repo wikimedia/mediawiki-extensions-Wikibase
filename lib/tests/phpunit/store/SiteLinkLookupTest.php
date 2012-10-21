@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\SiteLinkLookup as SiteLinkLookup;
+use Wikibase\SiteLinkLookup;
 
 /**
  * Tests for the Wikibase\SiteLinkLookup implementing classes.

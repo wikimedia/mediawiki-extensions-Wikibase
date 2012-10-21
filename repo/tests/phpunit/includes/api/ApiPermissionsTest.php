@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use Wikibase\Settings as Settings;
+use Wikibase\Settings;
 
 /**
  * Tests for permission handling in the Wikibase API.

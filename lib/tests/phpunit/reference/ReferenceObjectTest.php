@@ -2,11 +2,11 @@
 
 namespace Wikibase\Test;
 use DataValues\StringValue;
-use Wikibase\PropertyValueSnak as PropertyValueSnak;
-use Wikibase\ReferenceObject as ReferenceObject;
-use Wikibase\Reference as Reference;
-use Wikibase\SnakList as SnakList;
-use Wikibase\Snaks as Snaks;
+use Wikibase\PropertyValueSnak;
+use Wikibase\ReferenceObject;
+use Wikibase\Reference;
+use Wikibase\SnakList;
+use Wikibase\Snaks;
 
 /**
  * Tests for the Wikibase\ReferenceObject class.

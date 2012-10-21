@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\SiteLinkTable as SiteLinkTable;
+use \Wikibase\SiteLinkTable;
 
 /**
  * Tests for the Wikibase\SiteLinkTable class.

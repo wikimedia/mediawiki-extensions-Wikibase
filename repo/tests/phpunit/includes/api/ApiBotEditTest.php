@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase, TestUser;
-use Wikibase\Settings as Settings;
+use Wikibase\Settings;
 
 /**
  * Tests for the ApiWikibase class.

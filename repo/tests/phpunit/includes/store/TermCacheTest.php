@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\TermCache as TermCache;
-use Wikibase\ItemContent as ItemContent;
-use Wikibase\ItemObject as ItemObject;
-use Wikibase\Item as Item;
+use Wikibase\TermCache;
+use Wikibase\ItemContent;
+use Wikibase\ItemObject;
+use Wikibase\Item;
 
 /**
  * Tests for the Wikibase\TermCache implementing classes.

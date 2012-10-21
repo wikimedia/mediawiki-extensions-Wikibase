@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\LibHooks as LibHooks;
+use Wikibase\LibHooks;
 
 /**
  * Tests for the Wikibase\LibHooks class.

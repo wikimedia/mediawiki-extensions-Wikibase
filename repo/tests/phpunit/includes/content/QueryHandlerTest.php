@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\QueryContent as QueryContent;
+use \Wikibase\QueryContent;
 
 /**
  * Tests for the Wikibase\QueryHandler class.

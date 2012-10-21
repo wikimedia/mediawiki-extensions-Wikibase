@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemModificationUpdate as ItemModificationUpdate;
-use \Wikibase\ItemContent as ItemContent;
+use \Wikibase\ItemModificationUpdate;
+use \Wikibase\ItemContent;
 
 /**
  *  Tests for the Wikibase\ItemModificationUpdate class.

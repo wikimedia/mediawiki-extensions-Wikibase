@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ChangeHandler as ChangeHandler;
-use Wikibase\ItemObject as ItemObject;
-use Wikibase\EntityCreation as EntityCreation;
-use Wikibase\EntityDeletion as EntityDeletion;
+use Wikibase\ChangeHandler;
+use Wikibase\ItemObject;
+use Wikibase\EntityCreation;
+use Wikibase\EntityDeletion;
 
 /**
  * Tests for the Wikibase\ChangeHandler class.

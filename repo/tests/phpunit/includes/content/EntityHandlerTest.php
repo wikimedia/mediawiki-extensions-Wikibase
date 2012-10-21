@@ -2,8 +2,8 @@
 
 namespace Wikibase\Test;
 use ContentHandler;
-use Wikibase\EntityHandler as EntityHandler;
-use Wikibase\EntityContent as EntityContent;
+use Wikibase\EntityHandler;
+use Wikibase\EntityContent;
 
 /**
  *  Tests for the Wikibase\EntityHandler class.

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase, TestUser;
-use Wikibase\Settings as Settings;
+use Wikibase\Settings;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
