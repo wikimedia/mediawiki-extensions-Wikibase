@@ -77,6 +77,21 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		$this->assertSuccess( $res, 'entities', $id, 'count' );
 		$this->assertTrue( is_integer( $res['entities'][$id]['count'] ) );
 		$this->assertTrue( 0 <= $res['entities'][$id]['count'] );
+
+		// check with numeric ID (B/C mode)
+		$numId = preg_replace( '/^[a-z]*/', '', $id );
+		list($res,,) = $this->doApiRequest(
+			array(
+				'action' => 'wbgetentities',
+				'format' => 'json', // make sure IDs are used as keys
+				'ids' => $numId )
+		);
+
+		$this->assertSuccess( $res, 'entities', $id );
+		$this->assertItemEquals( $item,  $res['entities'][$id] );
+		$this->assertArrayHasKey( 'warnings', $res ); // there should be a B/C warning
+
+		//@todo: check non-item
 	}
 
 	/**

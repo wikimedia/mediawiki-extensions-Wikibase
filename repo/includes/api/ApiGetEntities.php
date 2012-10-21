@@ -69,6 +69,16 @@ class ApiGetEntities extends Api {
 			}
 		}
 
+		// B/C: assume non-prefixed IDs refer to items
+		$entityFactory = EntityFactory::singleton();
+		foreach ( $params['ids'] as $i => $id ) {
+			if ( !$entityFactory->isPrefixedId( $id ) ) {
+				$params['ids'][$i] = ItemObject::getIdPrefix() . $id;
+				$this->getResult()->setWarning( 'Assuming plain numeric ID refers to an item. '
+						. 'Please use qualified IDs instead.' );
+			}
+		}
+
 		$params['ids'] = array_unique( $params['ids'] );
 
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
@@ -123,24 +133,12 @@ class ApiGetEntities extends Api {
 
 		$res = $this->getResult();
 
-		try {
-			// we are not using the type, we are only trying to get it to see if it fails
-			$entityFactory->getEntityTypeFromPrefixedId( $id );
-			$numId = $entityFactory->getUnprefixedId( $id );
-			$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
-		}
-		catch ( MWException $e ) {
-			$entityPath = array( 'entities', $id );
-		}
+		$numId = $entityFactory->getUnprefixedId( $id );
+		$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
 
 		// later we do a getContent but only if props are defined
 		if ( $params['props'] !== array() ) {
-			try {
-				$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
-			}
-			catch ( MWException $e ) {
-				$page = $entityContentFactory->getWikiPageForId( Item::ENTITY_TYPE, $id );
-			}
+			$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
 
 			if ( $page->exists() ) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
