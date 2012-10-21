@@ -16,7 +16,7 @@ var PARENT = dv.DataValue,
  *
  * @constructor
  * @extends dv.Value
- * @since 0.2
+ * @since 0.1
  *
  * @param {String} languageCode
  * @param {String} value

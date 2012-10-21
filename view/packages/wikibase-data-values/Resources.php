@@ -31,7 +31,7 @@
 return call_user_func( function() {
 
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__,
+		'localBasePath' => __DIR__ . '/resources',
 		'remoteExtPath' =>  'DataValues/DataValues/resources',
 	);
 
@@ -44,7 +44,7 @@ return call_user_func( function() {
 
 		'dataValues.DataValue' => $moduleTemplate + array(
 			'scripts' => array(
-				'dataValues.DataValue.js',
+				'DataValue.js',
 			),
 			'dependencies' => array(
 				'dataValues',
@@ -54,9 +54,9 @@ return call_user_func( function() {
 
 		'dataValues.values' => $moduleTemplate + array(
 			'scripts' => array(
-				'dataValues.StringValue.js',
-				'dataValues.MonolingualTextValue.js',
-				'dataValues.MultilingualTextValue.js',
+				'values/StringValue.js',
+				'values/MonolingualTextValue.js',
+				'values/MultilingualTextValue.js',
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
@@ -65,13 +65,13 @@ return call_user_func( function() {
 
 		'dataValues.util' => $moduleTemplate + array(
 			'scripts' => array(
-				'dataValues.util/dataValues.util.js',
+				'dataValues.util.js',
 			),
 			'dependencies' => array(
 				'dataValues',
 			),
 		),
 	);
-	
+
 } );
 // @codeCoverageIgnoreEnd
