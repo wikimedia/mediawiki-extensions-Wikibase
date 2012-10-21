@@ -7,7 +7,7 @@
 ( function( dv, $, undefined ) {
 'use strict';
 
-var PARENT = dv.Value,
+var PARENT = dv.DataValue,
 	constructor = function( value ) {};
 
 /**
@@ -19,7 +19,7 @@ var PARENT = dv.Value,
  *
  * @param {String} value
  */
-dv.String = dv.util.inherit( PARENT, constructor, {
+dv.StringValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
 	 * @see dv.Value.getType

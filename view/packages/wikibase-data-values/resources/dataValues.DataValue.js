@@ -15,8 +15,8 @@
  * @abstract
  * @since 0.2
  */
-dv.Value = function() {};
-dv.Value.prototype = {
+dv.DataValue = function() {};
+dv.DataValue.prototype = {
 
 	/**
 	 * Returns the most basic representation of this Object's value.

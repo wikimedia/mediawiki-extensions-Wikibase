@@ -7,7 +7,7 @@
 ( function( dv, $, undefined ) {
 'use strict';
 
-var PARENT = dv.Value,
+var PARENT = dv.DataValue,
 	constructor = function( languageCode, value ) {};
 
 /**
@@ -21,7 +21,7 @@ var PARENT = dv.Value,
  * @param {String} languageCode
  * @param {String} value
  */
-dv.MonolingualText = dv.util.inherit( PARENT, constructor, {
+dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
 	 * @see dv.Value.getType
