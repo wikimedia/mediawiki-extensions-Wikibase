@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABFX//9CA\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-22T13:56:05Z",
+      "side": 1,
+      "message": "todo is done, isn\u0027t it?",
+      "revId": "f2d72147da9476df03197fdfbfac1f179484f398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//9CE\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-22T13:56:05Z",
+      "side": 1,
+      "message": "shouldn\u0027t we remove the commented out block?",
+      "revId": "f2d72147da9476df03197fdfbfac1f179484f398",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
