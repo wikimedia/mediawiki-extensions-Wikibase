@@ -151,6 +151,7 @@ $wgAutoloadClasses['SpecialListDatatypes'] 				= $dir . 'includes/specials/Speci
 $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/SpecialItemResolver.php';
 $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
+$wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSetLabel.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
@@ -198,7 +199,7 @@ $wgSpecialPages['NewProperty'] 					= 'SpecialNewProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 $wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
-
+$wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 
 
 // Hooks
