@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABFX//87s\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-22T13:36:21Z",
+      "side": 1,
+      "message": "denny?",
+      "revId": "fc855521fda86456138a6a700f3c7a615497cd39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//87g\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-22T13:36:21Z",
+      "side": 1,
+      "message": "Looks like this method is doing to much stuff, I\u0027d try to split it up",
+      "revId": "fc855521fda86456138a6a700f3c7a615497cd39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//87o\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-22T13:36:21Z",
+      "side": 1,
+      "message": "odd indent here",
+      "revId": "fc855521fda86456138a6a700f3c7a615497cd39",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
