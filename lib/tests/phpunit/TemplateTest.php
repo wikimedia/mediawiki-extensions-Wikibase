@@ -1,11 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\HtmlTemplateStore;
-use Wikibase\HtmlTemplate;
+use Wikibase\TemplateStore;
+use Wikibase\Template;
 
 /**
- * Tests for the Wikibase\HtmlTemplate class.
+ * Tests for the Wikibase\Template class.
  *
  * @file
  * @since 0.1
@@ -19,15 +19,15 @@ use Wikibase\HtmlTemplate;
  * @licence GNU GPL v2+
  * @author H. Snater <mediawiki@snater.com>
  */
-class HtmlTemplateTest extends \MediaWikiTestCase {
+class TemplateTest extends \MediaWikiTestCase {
 
 	/**
 	 * @group WikibaseLib
 	 * @dataProvider providerText
 	 */
 	public function testText( $html ) {
-		HtmlTemplateStore::singleton()->addTemplate( 'tmpl1', $html );
-		$template = new HtmlTemplate( 'tmpl1', array( 'param' ) );
+		TemplateStore::singleton()->addTemplate( 'tmpl1', $html );
+		$template = new Template( 'tmpl1', array( 'param' ) );
 		$this->assertHTMLEquals( $template->text(), str_replace( '$1', 'param', $html ) );
 	}
 

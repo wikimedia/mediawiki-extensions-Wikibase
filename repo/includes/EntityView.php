@@ -376,19 +376,19 @@ abstract class EntityView extends \ContextSource {
 		$buttonLabel = wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text();
 
 		$button = ( $enabled ) ?
-			new HtmlTemplate(
+			new Template(
 				'wb-editsection-button',
 				array(
 					$buttonLabel,
 					'' // todo: add link to special page for non-JS editing
 				)
 			) :
-			new HtmlTemplate(
+			new Template(
 				'wb-editsection-button-disabled',
 				array( $buttonLabel )
 			);
 
-		$editsection = new HtmlTemplate( 'wb-editsection', array( $tag, $button->text() ) );
+		$editsection = new Template( 'wb-editsection', array( $tag, $button->text() ) );
 
 		return $editsection->text();
 	}

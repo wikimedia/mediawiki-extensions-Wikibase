@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Allows storing and accessing of HTML templates (e.g. snippets commonly used in server-side HTML
+ * Allows storing and accessing of templates (e.g. snippets commonly used in server-side HTML
  * generation and client-side JavaScript processing).
  *
  * @since 0.2
@@ -18,7 +18,7 @@ namespace Wikibase;
 /**
  * Stores plain HTML templates.
  */
-class HtmlTemplateStore {
+class TemplateStore {
 	/**
 	 * @var array
 	 */
@@ -67,7 +67,7 @@ class HtmlTemplateStore {
 	/**
 	 * Singleton pattern integration.
 	 *
-	 * @return HtmlTemplateStore
+	 * @return TemplateStore
 	 */
 	public static function singleton() {
 		static $instance = false;
@@ -83,7 +83,7 @@ class HtmlTemplateStore {
 /**
  * Represents a HTML template that can contain placeholders just like MediWiki messages.
  */
-class HtmlTemplate extends \Message {
+class Template extends \Message {
 
 	/**
 	 * Fetch a HTML template from the template store.
@@ -93,7 +93,7 @@ class HtmlTemplate extends \Message {
 	 */
 	function fetchMessage() {
 		if ( !isset( $this->message ) ) {
-			$cache = HtmlTemplateStore::singleton();
+			$cache = TemplateStore::singleton();
 			$this->message = $cache->getTemplate( $this->key );
 		}
 		return $this->message;
