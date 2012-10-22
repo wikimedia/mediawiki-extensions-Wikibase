@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Contains HTML templates commonly used in server-side HTML generation and client-side JavaScript
+ * Contains templates commonly used in server-side output generation and client-side JavaScript
  * processing.
  *
  * @since 0.2
@@ -27,6 +27,16 @@ return call_user_func( function() {
 		<span class="wb-ui-toolbar-group">[$2]</span>
 	</span>
 </$1>
+HTML;
+
+	$templates['wb-editsection-toolbar'] =
+<<<HTML
+<span class="wb-ui-toolbar">$1</span>
+HTML;
+
+	$templates['wb-editsection-toolbargroup'] =
+<<<HTML
+<span class="wb-ui-toolbargroup">[$1]</span>
 HTML;
 
 	$templates['wb-editsection-button'] =

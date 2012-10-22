@@ -92,8 +92,8 @@ $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\Hashable'] 			= $dir . 'includes/Hashable.php';
 $wgAutoloadClasses['Wikibase\HashableObjectStorage']= $dir . 'includes/HashableObjectStorage.php';
 $wgAutoloadClasses['Wikibase\HashArray'] 			= $dir . 'includes/HashArray.php';
-$wgAutoloadClasses['Wikibase\HtmlTemplate'] 		= $dir . 'includes/HtmlTemplateStore.php';
-$wgAutoloadClasses['Wikibase\HtmlTemplateStore'] 	= $dir . 'includes/HtmlTemplateStore.php';
+$wgAutoloadClasses['Wikibase\Template'] 			= $dir . 'includes/TemplateStore.php';
+$wgAutoloadClasses['Wikibase\TemplateStore'] 		= $dir . 'includes/TemplateStore.php';
 $wgAutoloadClasses['Wikibase\Immutable'] 			= $dir . 'includes/Immutable.php';
 $wgAutoloadClasses['Wikibase\MapHasher'] 			= $dir . 'includes/MapHasher.php';
 $wgAutoloadClasses['Wikibase\MapValueHasher'] 		= $dir . 'includes/MapValueHasher.php';
@@ -182,8 +182,8 @@ $wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/SiteLin
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/HashArrayTest.php';
-$wgAutoloadClasses['Wikibase\Test\HtmlTemplateTest'] 		= $dir . 'tests/phpunit/HtmlTemplateTest.php';
-$wgAutoloadClasses['Wikibase\Test\HtmlTemplateStoreTest'] 	= $dir . 'tests/phpunit/HtmlTemplateStoreTest.php';
+$wgAutoloadClasses['Wikibase\Test\TemplateTest'] 		= $dir . 'tests/phpunit/TemplateTest.php';
+$wgAutoloadClasses['Wikibase\Test\TemplateStoreTest'] 	= $dir . 'tests/phpunit/TemplateStoreTest.php';
 $wgAutoloadClasses['Wikibase\Test\TestChanges']				= $dir . 'tests/phpunit/changes/TestChanges.php';
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/item/TestItems.php';
 $wgAutoloadClasses['Wikibase\Test\EntityFactoryTest'] 		= $dir . 'tests/phpunit/entity/EntityFactoryTest.php';
@@ -219,7 +219,7 @@ $wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTe
 
 
 // register HTML templates
-\Wikibase\HtmlTemplateStore::singleton()->addTemplates( include( "$dir/resources/HtmlTemplates.php" ) );
+\Wikibase\TemplateStore::singleton()->addTemplates( include( "$dir/resources/templates.php" ) );
 
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );

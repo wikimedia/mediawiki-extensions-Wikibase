@@ -159,7 +159,7 @@ class ItemView extends EntityView {
 				// TODO: for non-JS, also set the dir attribute on the link cell;
 				// but do not build language objects for each site since it causes too much load
 				// and will fail when having too much site links
-				$template = new HtmlTemplate( 'wb-sitelink', array(
+				$template = new Template( 'wb-sitelink', array(
 					$languageCode,
 					$alternatingClass,
 					Utils::fetchLanguageName( $languageCode ), // TODO: get an actual site name rather then just the language
