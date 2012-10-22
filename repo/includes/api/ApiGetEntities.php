@@ -133,6 +133,8 @@ class ApiGetEntities extends Api {
 
 		$res = $this->getResult();
 
+		// key should be numeric to get the correct behaviour
+		// note that this setting depends upon "setIndexedTagName_internal"
 		$numId = $entityFactory->getUnprefixedId( $id );
 		$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
 
@@ -147,10 +149,15 @@ class ApiGetEntities extends Api {
 				 */
 				$entityContent = $page->getContent();
 
+				// this should not happen unless a page is not what we assume it to be
+				// that is, we want this to be a little more solid if something ges wrong
 				if ( is_null( $entityContent ) ) {
+					$res->addValue( $entityPath, 'id', $id );
+					$res->addValue( $entityPath, 'illegal', "" );
 					return;
 				}
 
+				// default stuff to add that comes from the title/page/revision
 				if ( in_array( 'info', $props ) ) {
 					$res->addValue( $entityPath, 'pageid', intval( $page->getId() ) );
 					$title = $page->getTitle();
@@ -199,12 +206,12 @@ class ApiGetEntities extends Api {
 				}
 			}
 			else {
-				$this->getResult()->addValue( $entityPath, 'missing', "" );
+				$res->addValue( $entityPath, 'missing', "" );
 			}
 		} else {
 			$type = $entityFactory->getEntityTypeFromPrefixedId( $id );
-			$this->getResult()->addValue( $entityPath, 'id', $id );
-			$this->getResult()->addValue( $entityPath, 'type', $type );
+			$res->addValue( $entityPath, 'id', $id );
+			$res->addValue( $entityPath, 'type', $type );
 		}
 	}
 
@@ -265,10 +272,12 @@ class ApiGetEntities extends Api {
 				"Will be further filtered by any languages given."
 			),
 			'sort' => array( 'The names of the properties to sort.',
-				"Use together with 'dir' to give the sort order."
+				"Use together with 'dir' to give the sort order.",
+				"Note that this will change due to name clash (ie. sort should work on all entities)."
 			),
 			'dir' => array( 'The sort order for the given properties.',
-				"Use together with 'sort' to give the properties to sort."
+				"Use together with 'sort' to give the properties to sort.",
+				"Note that this will change due to name clash (ie. dir should work on all entities)."
 			),
 			'languages' => array( 'By default the internationalized values are returned in all available languages.',
 				'This parameter allows filtering these down to one or more languages by providing one or more language codes.'
