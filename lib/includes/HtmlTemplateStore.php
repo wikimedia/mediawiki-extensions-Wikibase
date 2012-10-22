@@ -61,7 +61,7 @@ class HtmlTemplateStore {
 	 * @param string $html
 	 */
 	public function addTemplate( $key, $html ) {
-		$this->templates[$key] = $html;
+		$this->templates[$key] = str_replace( "\t", '', $html );
 	}
 
 	/**
