@@ -237,6 +237,10 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'wikibaselib-desc' => 'Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client',
+	'wikibaselib-entity-item' => 'item',
+	'wikibaselib-entity-property' => 'eigenschap',
+	'wikibaselib-entity-query' => 'zoekopdracht',
+	'datatypes-type-wikibase-item' => 'Item',
 );
 
 /** Norwegian Nynorsk (norsk (nynorsk)‎)
@@ -284,6 +288,7 @@ $messages['pt-br'] = array(
 	'wikibaselib-entity-property' => 'propriedade',
 	'wikibaselib-entity-query' => 'consulta',
 	'datatypes-type-wikibase-item' => 'Item',
+	'datatypes-type-commonsMedia' => 'Arquivo de mídia do Commons',
 );
 
 /** Russian (русский)
@@ -314,4 +319,3 @@ $messages['vi'] = array(
 	'wikibaselib-entity-query' => 'truy vấn',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
 );
-
