@@ -193,6 +193,7 @@ final class Autocomment {
 	 *
 	 * @param string $comment initial part to go in a comment
 	 * @param string $summary final part that is a easilly trucable string
+	 * @param string $lang language to use when truncating the string
 	 * @param int $length total length of the string
 	 *
 	 * @return string to be used for the summary
@@ -211,8 +212,52 @@ final class Autocomment {
 		if ( $summary !== "" ) {
 			$mergedString .= ($mergedString === "" ? "" : " ") . $lang->truncate( $summary, $length - strlen( $mergedString ) );
 		}
+
 		// leftover entities should be removed, but its not clear how this shall be done
 		return $mergedString;
 	}
 
+	/**
+	 * Build the summary by call to the module
+	 *
+	 * If this is used for other classes than api modules it could be necessary to change
+	 * its internal logic
+	 *
+	 * @since 0.1
+	 *
+	 * @param ApiAutocomment $module an api module that support ApiAutocomment
+	 *
+	 * @return string to be used for the summary
+	 */
+	public static function buildApiSummary( $module, $params = null, $entityContent = null ) {
+		// check if we must pull in the request params
+		if ( !isset( $params ) ) {
+			$params = $module->extractRequestParams();
+		}
+
+		// Is there a user supplied summary, then use it but get the hits first
+		if ( isset( $params['summary'] ) ) {
+			list( $hits, $summary, $lang ) = $module->getTextForSummary( $params );
+			$summary = $params['summary'];
+		}
+
+		// otherwise try to construct something
+		else {
+			list( $hits, $summary, $lang ) = $module->getTextForSummary( $params );
+			if ( !is_string( $summary ) ) {
+				if ( isset( $entityContent ) ) {
+					$summary = $entityContent->getTextForSummary( $params );
+				}
+				else {
+					$summary = '';
+				}
+			}
+		}
+
+		// Comments are newer user supplied
+		$comment = $module->getTextForComment( $params, $hits );
+
+		// format the overall string and return it
+		return Autocomment::formatTotalSummary( $comment, $summary, $lang );
+	}
 }

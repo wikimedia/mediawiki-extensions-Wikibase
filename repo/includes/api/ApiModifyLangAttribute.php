@@ -31,9 +31,9 @@ abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForComment()
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function getTextForComment( array $params, $plural = 1 ) {
+	public function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
 			$this->getModuleName() . '-' . ( ( isset( $params['value'] ) && 0<strlen( $params['value'] ) ) ? 'set' : 'remove' ),
 			array( /* $plural */ 1, $params['language'] )
@@ -41,9 +41,9 @@ abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForSummary()
+	 * @see  ApiAutocomment::getTextForSummary()
 	 */
-	protected function getTextForSummary( array $params ) {
+	public function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
 			Autocomment::pickValuesFromParams( $params, 'value' )
 		);
