@@ -42,6 +42,11 @@ $messages['qqq'] = array(
  */
 $messages['ast'] = array(
 	'wikibaselib-desc' => 'Contién les funciones comúnes pa les estensiones Wikibase y Wikibase Client.',
+	'wikibaselib-entity-item' => 'elementu',
+	'wikibaselib-entity-property' => 'propiedá',
+	'wikibaselib-entity-query' => 'consulta',
+	'datatypes-type-wikibase-item' => 'Elementu',
+	'datatypes-type-commonsMedia' => 'Ficheru multimedia de Commons',
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
