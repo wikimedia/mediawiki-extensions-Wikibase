@@ -94,6 +94,10 @@ class ExternalChangesList {
 
 		$line .= $userlinks;
 
+		$parts = explode( '~', $entityData['type'] );
+		$changeType = $parts[1];
+		$line .= self::autoComment( $changeType );
+
 		$comment = " (" . $rc->getAttribute( 'rc_comment' ) . ")";
 
 		$line .= $comment;
@@ -276,5 +280,27 @@ class ExternalChangesList {
 		}
 
 		return $titleText;
+	}
+
+	protected static function autoComment( $changeType ) {
+		// todo i18n
+		$comment = '';
+		switch( $changeType ) {
+			case 'update':
+				$comment = wfMessage( 'wbc-comment-langlinks-updated' )->text();
+				break;
+			case 'remove':
+				$comment = wfMessage( 'wbc-comment-langlinks-removed' )->text();
+				break;
+			case 'delete':
+				$comment = wfMessage( 'wbc-comment-langlinks-deleted' )->text();
+				break;
+			case 'restore':
+				$comment = wfMessage( 'wbc-comment-langlinks-restore' )->text();
+				break;
+			case 'default':
+				break;
+		}
+		return  \Linker::commentBlock( $comment );
 	}
 }

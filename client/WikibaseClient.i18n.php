@@ -14,20 +14,31 @@
 $messages = array();
 
 /** English
+ * @author Katie Filbert
  * @author Jeroen De Dauw
  * @author Nikola Smolenski
  */
 $messages['en'] = array(
 	'wbc-desc' => 'Client for the Wikibase extension',
+	'wbc-comment-langlinks-delete' => 'Associated Wikidata item deleted. Language links removed.',
+	'wbc-comment-langlinks-remove' => 'This page has been unlinked from Wikidata item. Language links removed',
+	'wbc-comment-langlinks-restore' => 'Associated Wikidata item undeleted. Language links resto
+red',
+	'wbc-comment-langlinks-update' => 'Language links updated',
 	'wbc-editlinks' => 'Edit links',
 	'wbc-editlinkstitle' => 'Edit interlanguage links',
 );
 
 /** Message documentation (Message documentation)
+ * @author Katie Filbert
  * @author Jeblad
  */
 $messages['qqq'] = array(
 	'wbc-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
+	'wbc-comment-langlinks-delete' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item connected to a page gets deleted. This results in all the language links being removed from the page on the client.',
+	'wbc-comment-langlinks-remove' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a site link to a page gets removed. This results in the associated item being disconnected from the client page and all the language links being removed.',
+	'wbc-comment-langlinks-restore' => 'Autocomment message for client (e.g. Wikipedia) recent changes when a Wikidata item gets undeleted and has a site link to this page. Language links get readded to the client page.',
+	'wbc-comment-langlinks-update' => 'Autocomment message for client (e.g. Wikipedia) recent changes when site links for a linked Wikidata item get changed. This results in language links being updated on the client page.',
 	'wbc-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
 	'wbc-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizzard to edit interlanguage links.',
