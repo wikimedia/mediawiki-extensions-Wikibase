@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABFX//9Cs\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-22T10:54:41Z",
+      "side": 1,
+      "message": "please use tabs",
+      "revId": "9b75d70ef5924f3551cd7c756fd14205bcdf0140",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
