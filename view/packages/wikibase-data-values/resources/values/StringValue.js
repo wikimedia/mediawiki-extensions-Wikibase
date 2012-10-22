@@ -27,35 +27,55 @@ var PARENT = dv.DataValue,
 dv.StringValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
-	 * @see dv.Value.getType
+	 * @see dv.DataValue.getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return String
 	 */
 	getType: function() {
 		return 'string';
 	},
 
 	/**
-	 * @see dv.Value.getSortKey
+	 * @see dv.DataValue.getSortKey
+	 *
+	 * @since 0.1
+	 *
+	 * @return String|Number
 	 */
 	getSortKey: function() {
 		return this.value;
 	},
 
 	/**
-	 * @see dv.Value.getValue
+	 * @see dv.DataValue.getValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
 	 */
 	getValue: function() {
 		return this.value;
 	},
 
 	/**
-	 * @see dv.Value.equals
+	 * @see dv.DataValue.equals
+	 *
+	 * @since 0.1
+	 *
+	 * @return Boolean
 	 */
 	equals: function( value ) {
 		return this.value == value;
 	},
 
 	/**
-	 * @see dv.Value.toJSON
+	 * @see dv.DataValue.toJSON
+	 *
+	 * @since 0.1
+	 *
+	 * @return Object
 	 */
 	toJSON: function( value ) {
 		return this.value;

@@ -11,19 +11,57 @@
 ( function( dv, $, QUnit, undefined ) {
 	'use strict';
 
-	QUnit.module( 'dataValues.StringValue', QUnit.newMwEnvironment() );
+	var PARENT = dv.tests.DataValueTest,
+		constructor = function() {
+		};
 
-	QUnit.test( 'constructor tests', function() {
-		var values = [
-			'',
-			'foo',
-			'foo bar baz'
-		];
+	/**
+	 * Constructor for creating a test object for the string DataValue.
+	 *
+	 * @constructor
+	 * @extends dv.tests.DataValueTest
+	 * @since 0.1
+	 */
+	dv.tests.StringValueTest = dv.util.inherit( PARENT, constructor, {
 
-		for ( var value in values ) {
-			var instance = new dv.StringValue( value );
-			QUnit.strictEqual( instance.getValue(), value );
+		/**
+		 * @see dv.tests.DataValueTest.getObject
+		 */
+		getObject: function() {
+			return dv.StringValue;
+		},
+
+		/**
+		 * @see dv.tests.DataValueTest.getConstructorArguments
+		 */
+		getConstructorArguments: function() {
+			return [
+				[ '' ],
+				[ 'foo' ],
+				[ ' foo bar baz foo bar baz. foo bar baz ' ]
+			];
 		}
+
 	} );
+
+	var test = new dv.tests.StringValueTest();
+
+	test.runTests( 'dataValues.StringValue' );
+
+	// TODO
+//	QUnit.test( 'constructor, getValue, getSortKey, getJSON', function() {
+//		var values = [
+//			'',
+//			'foo',
+//			'foo bar baz'
+//		];
+//
+//		for ( var value in values ) {
+//			var instance = new dv.StringValue( value );
+//			QUnit.strictEqual( instance.getValue(), value );
+//			QUnit.strictEqual( instance.getSortKey(), value );
+//			QUnit.strictEqual( instance.toJSON(), value );
+//		}
+//	} );
 
 }( dataValues, jQuery, QUnit ) );

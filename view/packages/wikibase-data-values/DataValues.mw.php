@@ -102,12 +102,21 @@ $wgHooks['ResourceLoaderTestModules'][] = function ( array &$testModules, \Resou
 		'remoteExtPath' => 'DataValues/DataValues',
 	);
 
+	$testModules['qunit']['ext.dataValues.tests'] = $moduleTemplate + array(
+		'scripts' => array(
+			'tests/qunit/DataValue.tests.js',
+		),
+		'dependencies' => array(
+			'dataValues.values',
+		),
+	);
+
 	$testModules['qunit']['ext.dataValues.values'] = $moduleTemplate + array(
 		'scripts' => array(
 			'tests/qunit/values/StringValue.tests.js',
 		),
 		'dependencies' => array(
-			'dataValues.values',
+			'ext.dataValues.tests',
 		),
 	);
 

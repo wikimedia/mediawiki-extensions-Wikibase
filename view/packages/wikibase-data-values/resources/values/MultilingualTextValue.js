@@ -23,7 +23,7 @@ var PARENT = dv.DataValue,
 dv.MultilingualTextValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
-	 * @see dv.Value.getType
+	 * @see dv.DataValue.getType
 	 */
 	getType: function() {
 		return 'multilingualtext';
