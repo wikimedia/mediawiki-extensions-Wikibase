@@ -24,7 +24,7 @@ return call_user_func( function() {
 <<<HTML
 <$1 class="editsection">
 	<span class="wb-ui-toolbar">
-		<span class="wb-ui-toolbar">[$2]</span>
+		<span class="wb-ui-toolbar-group">[$2]</span>
 	</span>
 </$1>
 HTML;
