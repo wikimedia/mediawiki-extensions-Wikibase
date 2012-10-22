@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABFX//8X0\u003d",
+        "filename": "lib/tests/phpunit/HtmlTemplateTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 34
+      },
+      "writtenOn": "2012-10-22T23:32:58Z",
+      "side": 1,
+      "message": "Instead of using str_replace, this should be given an exact hardcoded string from the provider.\n\nNow it is asserting that 1 + 1 \u003d 2, which is silly. It is testing HtmlTemplate does what HtmlTemplate does (which uses str_replace also via Message::toString).",
+      "revId": "e4f8f6f05959263af19965c4e17beaab2d3aedbf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
