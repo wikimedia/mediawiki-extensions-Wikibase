@@ -279,6 +279,7 @@ h2.wb-sitelinks-heading {
 }
 
 table.wb-sitelinks {
+	table-layout: fixed;
 	border-spacing: 0;
 	width: 100%;
 	border-bottom: 1px solid #C9C9C9;
@@ -289,20 +290,20 @@ table.wb-sitelinks .wb-sitelinks-columnheaders {
 }
 
 table.wb-sitelinks .wb-sitelinks-sitename {
-	width: 25%;
+	width: 24%;
 	word-wrap: break-word;
 	padding-left: 10px;
 	border-left: 1px solid #C9C9C9;
 }
 
 table.wb-sitelinks .wb-sitelinks-siteid {
-	width: 10%;
+	width: 13%;
 	padding: 0 10px;
 	white-space: nowrap;
 }
 
 table.wb-sitelinks .wb-sitelinks-link {
-	width: 65%;
+	width: 63%;
 	word-wrap: break-word;
 	border-right: 1px solid #C9C9C9;
 }

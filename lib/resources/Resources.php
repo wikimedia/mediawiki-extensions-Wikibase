@@ -33,10 +33,6 @@ return call_user_func( function() {
 			'class' => 'Wikibase\SitesModule',
 		),
 
-		'wikibase.templates' => $moduleTemplate + array(
-			'class' => 'Wikibase\TemplateProvider',
-		),
-
 		'wikibase' => $moduleTemplate + array(
 			'scripts' => array(
 				'wikibase.js',
@@ -219,6 +215,11 @@ return call_user_func( function() {
 				'wikibase-restrictionedit-tooltip-message',
 				'wikibase-blockeduser-tooltip-message'
 			)
+		),
+
+		'wikibase.templates' => $moduleTemplate + array(
+			'class' => 'Wikibase\TemplateProvider',
+			'scripts' => 'templates.js'
 		),
 
 		'wikibase.jquery.ui' => $moduleTemplate + array(

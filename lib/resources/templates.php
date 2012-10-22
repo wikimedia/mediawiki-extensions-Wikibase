@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 /**
- * Contains HTML templates commonly used in server-side HTML generation and client-side JavaScript
+ * Contains templates commonly used in server-side output generation and client-side JavaScript
  * processing.
  *
  * @since 0.2
