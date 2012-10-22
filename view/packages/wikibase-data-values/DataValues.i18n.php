@@ -37,7 +37,8 @@ $messages['en'] = array(
 	'version-datavalues' => 'DataValues',
 );
 
-/** Message documentation (Message documentation) */
+/** Message documentation (Message documentation)
+ */
 $messages['qqq'] = array(
 	'datavalues-desc' => '{{desc}}',
 	'version-datavalues' => 'Name of the DataValues extension collection, used on Special:Version',
@@ -138,4 +139,3 @@ $messages['mk'] = array(
 $messages['nl'] = array(
 	'version-datavalues' => 'Gegevenswaarden',
 );
-
