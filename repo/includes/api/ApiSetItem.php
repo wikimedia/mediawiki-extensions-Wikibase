@@ -44,9 +44,9 @@ class ApiSetItem extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForComment()
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function getTextForComment( array $params, $plural = 'none' ) {
+	public function getTextForComment( array $params, $plural = 'none' ) {
 		return Autocomment::formatAutoComment(
 			'wbsetentity',
 			array()
@@ -54,9 +54,9 @@ class ApiSetItem extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForSummary()
+	 * @see  ApiAutocomment::getTextForSummary()
 	 */
-	protected function getTextForSummary( array $params ) {
+	public function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
 			array()
 		);

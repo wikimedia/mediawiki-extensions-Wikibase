@@ -29,7 +29,7 @@ use ApiBase, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiCreateClaim extends ApiBase {
+class ApiCreateClaim extends ApiBase /* implements ApiAutocomments */ {
 
 	/**
 	 * @see ApiBase::execute

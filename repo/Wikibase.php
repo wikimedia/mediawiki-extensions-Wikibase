@@ -109,6 +109,7 @@ $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/Ed
 
 // includes/api
 $wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
+$wgAutoloadClasses['Wikibase\ApiAutocomment'] 			= $dir . 'includes/api/ApiAutocomment.php';
 $wgAutoloadClasses['Wikibase\ApiGetEntities'] 			= $dir . 'includes/api/ApiGetEntities.php';
 $wgAutoloadClasses['Wikibase\ApiCreateClaim'] 			= $dir . 'includes/api/ApiCreateClaim.php';
 $wgAutoloadClasses['Wikibase\ApiModifyEntity'] 			= $dir . 'includes/api/ApiModifyEntity.php';
