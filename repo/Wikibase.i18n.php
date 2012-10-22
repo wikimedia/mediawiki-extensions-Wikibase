@@ -198,6 +198,10 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Added and removed [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
+	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] {{plural:$1|page|pages}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Create {{plural:$1|a value claim|value claims}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Create {{plural:$1|a novalue claim|novalue claims}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Create {{plural:$1|a somevalue claim|somevalue claims}}',
 
 	//content model names
 	'content-model-1001' => 'Wikibase item',
@@ -399,7 +403,20 @@ Parameters:
 	'wikibase-item-summary-wbsetaliases-remove' => 'Automatic edit summary when a user removes one or more aliases. Parameters:
 * $1 is the number of aliases that were removed;
 * $2 is the language code for the item page.',
-	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
+	'wikibase-item-summary-wblinktitles-connect' => 'Automatic edit summary when connecting page(s). Parameters:
+* $1 is the number of pages that were connected;
+* $2 is the site code for the from-page;
+* $3 is the site code for the to-page.',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Automatic edit summary when a value is used. Parameters:
+* $1 is the number of values and/or properties set;
+* $2 is the id for the containing entity.',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Automatic edit summary when no value is used. Parameters:
+* $1 is the number of values and/or properties set (that is 0 - zero);
+* $2 is the id for the containing entity.',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Automatic edit summary when there should be a value but it is unknown. Parameters:
+* $1 is the number of values and/or properties set (that is 0 - zero);
+* $2 is the id for the containing entity.',
+'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 
 /** Achinese (Acèh)

@@ -49,9 +49,9 @@ class ApiSetAliases extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForComment()
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function getTextForComment( array $params, $plural = 1 ) {
+	public function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
 			'wbsetaliases-' . implode( '-', Autocomment::pickKeysFromParams( $params, 'set', 'add', 'remove' ) ),
 			array( $plural, $params['language'] )
@@ -59,9 +59,9 @@ class ApiSetAliases extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForSummary()
+	 * @see  ApiAutocomment::getTextForSummary()
 	 */
-	protected function getTextForSummary( array $params ) {
+	public function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
 			Autocomment::pickValuesFromParams( $params, 'set', 'add', 'remove' )
 		);
