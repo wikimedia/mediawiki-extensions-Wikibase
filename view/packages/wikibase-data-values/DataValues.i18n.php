@@ -137,5 +137,6 @@ $messages['mk'] = array(
  * @author Siebrand
  */
 $messages['nl'] = array(
+	'datavalues-desc' => 'Verzameling objecten die verschillende soorten waarden vertegenwoordigen',
 	'version-datavalues' => 'Gegevenswaarden',
 );
