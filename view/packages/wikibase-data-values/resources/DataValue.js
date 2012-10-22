@@ -13,7 +13,7 @@
  *
  * @constructor
  * @abstract
- * @since 0.2
+ * @since 0.1
  */
 dv.DataValue = function() {};
 dv.DataValue.prototype = {
@@ -21,12 +21,16 @@ dv.DataValue.prototype = {
 	/**
 	 * Returns the most basic representation of this Object's value.
 	 *
+	 * @since 0.1
+	 *
 	 * @return mixed
 	 */
 	getValue: dv.util.abstractMember,
 
 	/**
 	 * Returns the type identifier for this data value.
+	 *
+	 * @since 0.1
 	 *
 	 * @return String
 	 */
@@ -39,12 +43,16 @@ dv.DataValue.prototype = {
 	 * NOTE: this could very well be set by the API, together with the value. Since the value is
 	 *       immutable, this won't change as well and there is no need for having the logic here.
 	 *
+	 * @since 0.1
+	 *
 	 * @return String|Number
 	 */
 	getSortKey: dv.util.abstractMember,
 
 	/**
 	 * Returns a simple JSON structure representing this data value.
+	 *
+	 * @since 0.1
 	 *
 	 * @return Object
 	 */
@@ -53,7 +61,10 @@ dv.DataValue.prototype = {
 	/**
 	 * Returns whether this value equals some other given value.
 	 *
+	 * @since 0.1
+	 *
 	 * @param dataValue DataValue
+	 *
 	 * @return Boolean
 	 */
 	equals: dv.util.abstractMember

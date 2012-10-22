@@ -97,16 +97,29 @@ $wgHooks['UnitTestsList'][] = function( array &$files ) {
  * @return boolean
  */
 $wgHooks['ResourceLoaderTestModules'][] = function ( array &$testModules, \ResourceLoader &$resourceLoader ) {
-	$testModules['qunit']['dataValues.util.tests'] = array(
+	$moduleTemplate = array(
+		'localBasePath' => __DIR__,
+		'remoteExtPath' => 'DataValues/DataValues',
+	);
+
+	$testModules['qunit']['ext.dataValues.values'] = $moduleTemplate + array(
+		'scripts' => array(
+			'tests/qunit/values/StringValue.tests.js',
+		),
+		'dependencies' => array(
+			'dataValues.values',
+		),
+	);
+
+	$testModules['qunit']['ext.dataValues.util'] = $moduleTemplate + array(
 		'scripts' => array(
 			'tests/qunit/dataValues.util.inherit.tests.js',
 		),
 		'dependencies' => array(
 			'dataValues.util',
 		),
-		'localBasePath' => __DIR__,
-		'remoteExtPath' => 'DataValues/DataValues',
 	);
+
 	return true;
 };
 
@@ -131,5 +144,5 @@ $wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
 // Resource Loader Modules:
 $wgResourceModules = array_merge(
 	$wgResourceModules,
-	include( __DIR__ . '/resources/Resources.php' )
+	include( __DIR__ . '/Resources.php' )
 );
