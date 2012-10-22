@@ -7,3 +7,4 @@
 !.gitreview
 selenium/configuration.yml
 selenium/Gemfile.lock
+/selenium/chromedriver.log
