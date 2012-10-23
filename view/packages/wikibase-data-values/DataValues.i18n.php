@@ -140,3 +140,11 @@ $messages['nl'] = array(
 	'datavalues-desc' => 'Verzameling objecten die verschillende soorten waarden vertegenwoordigen',
 	'version-datavalues' => 'Gegevenswaarden',
 );
+
+/** Yiddish (ייִדיש)
+ * @author פוילישער
+ */
+$messages['yi'] = array(
+	'datavalues-desc' => 'זאמלונג פון אביעקטן וואס רעפרעזענטירן פארשידענע סארטן ווערטן',
+	'version-datavalues' => 'דאטנווערטן',
+);
