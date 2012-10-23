@@ -206,6 +206,7 @@ final class LibHooks {
 	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
 		$testModules['qunit']['wikibase.tests'] = array(
 			'scripts' => array(
+				'tests/qunit/templates.tests.js',
 				'tests/qunit/wikibase.tests.js',
 				'tests/qunit/wikibase.Site.tests.js',
 				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
