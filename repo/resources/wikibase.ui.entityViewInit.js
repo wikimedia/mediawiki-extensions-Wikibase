@@ -40,7 +40,7 @@
 		$( 'body' )
 		.find( '.wb-property-container' )
 		.each( function() {
-			// TODO: Make this nicer when we have implemented a JS class for properties
+			// TODO: Make this nicer when we have implemented the data model
 			if( $( this ).children( '.wb-property-container-key' ).attr( 'title') === 'description' ) {
 				new wb.ui.DescriptionEditTool( this );
 			} else {
