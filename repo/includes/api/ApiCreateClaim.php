@@ -86,11 +86,11 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 */
 	protected function addClaim() {
 		$entityContent = $this->getEntityContent();
-		$entity = $entityContent->getEntity();
-
 		if ( $entityContent === null ) {
 			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
 		}
+
+		$entity = $entityContent->getEntity();
 
 		$snak = $this->getSnakInstance();
 
@@ -134,15 +134,15 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 
 	/**
 	 * Checks if the required parameters are set and the ones that make no sense given the
-	 * snaktype value are not set.
+	 * type value are not set.
 	 *
 	 * @since 0.2
 	 */
 	protected function checkParameterRequirements() {
 		$params = $this->extractRequestParams();
 
-		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
-			if ( $params['snaktype'] == 'value' ) {
+		if ( $params['type'] == 'value' XOR isset( $params['value'] ) ) {
+			if ( $params['type'] == 'value' ) {
 				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'claim-value-missing' );
 			}
 			else {
@@ -163,7 +163,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
-		$entityContent = EntityContentFactory::singleton()->getFromPrefixedId( $params['entity'] );
+		$entityContent = EntityContentFactory::singleton()->getFromPrefixedId( $params['id'] );
 
 		return $entityContent === null ? null : $entityContent;
 	}
@@ -179,33 +179,19 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 
 		$entityFactory = EntityFactory::singleton();
 
-		if ( in_array( $params['snaktype'], array( 'instance', 'subclass' ) ) ) {
-			$itemId = $entityFactory->getUnprefixedId( $params['item'] );
+		$propertyId = $entityFactory->getUnprefixedId( $params['property'] );
 
-			switch ( $params['snaktype'] ) {
-				case 'instance':
-					$snak = new InstanceOfSnak( $itemId );
-					break;
-				case 'subclass':
-					$snak = new SubclassOfSnak( $itemId );
-					break;
-			}
-		}
-		else {
-			$propertyId = $entityFactory->getUnprefixedId( $params['property'] );
-
-			switch ( $params['snaktype'] ) {
-				case 'value':
-					$dataValue = new \DataValues\StringValue( '' ); // TODO
-					$snak = new PropertyValueSnak( $propertyId, $dataValue );
-					break;
-				case 'novalue':
-					$snak = new PropertyNoValueSnak( $propertyId );
-					break;
-				case 'somevalue':
-					$snak = new PropertySomeValueSnak( $propertyId );
-					break;
-			}
+		switch ( $params['type'] ) {
+			case 'value':
+				$dataValue = new \DataValues\StringValue( '' ); // TODO
+				$snak = new PropertyValueSnak( $propertyId, $dataValue );
+				break;
+			case 'novalue':
+				$snak = new PropertyNoValueSnak( $propertyId );
+				break;
+			case 'somevalue':
+				$snak = new PropertySomeValueSnak( $propertyId );
+				break;
 		}
 
 		if ( !isset( $snak ) ) {
@@ -224,11 +210,11 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'entity' => array(
+			'id' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'snaktype' => array(
+			'type' => array(
 				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
@@ -256,10 +242,10 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 */
 	public function getParamDescription() {
 		return array(
-			'entity' => 'Id of the entity you are adding the statement to',
+			'id' => 'Id of the entity you are adding the statement to',
 			'property' => 'Id of the property when creating a claim with a snak consisting of a property',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
-			'snaktype' => 'The type of the snak',
+			'type' => 'The type of the snak',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
