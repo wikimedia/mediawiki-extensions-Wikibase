@@ -134,6 +134,7 @@ final class RepoHooks {
 			'api/ApiSetItem',
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
+			'api/ApiCreateClaim',
 
 			'api/serializers/ApiSerializationOptions',
 			'api/serializers/ApiSerializer',
