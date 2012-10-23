@@ -166,6 +166,7 @@ $messages['is'] = array(
 	'wikibaselib-entity-property' => 'eiginleiki',
 	'wikibaselib-entity-query' => 'fyrirspurn',
 	'datatypes-type-wikibase-item' => 'Hlutur',
+	'datatypes-type-commonsMedia' => 'Commons margmiðlunarskrá',
 );
 
 /** Italian (italiano)
