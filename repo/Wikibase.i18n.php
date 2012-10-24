@@ -488,7 +488,7 @@ Parameters:
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Automatic edit summary when there should be a value but it is unknown. Parameters:
 * $1 is the number of values and/or properties set (that is 0 - zero);
 * $2 is the id for the containing entity.',
-'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
+	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 
 /** Achinese (Acèh)
@@ -737,9 +737,10 @@ Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPA
 	'wikibase-item-summary-wbsetsitelink-set' => 'Fügte websitespezifischen [$2] Link hinzu',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Entfernte websitespezifischen [$2] Link',
 	'wikibase-item-summary-wbsetaliases-set' => 'Legte [$2] {{PLURAL:$1|Alias|Aliasse}} fest',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Entfernte sowie fügte [$2] {{PLURAL:$1|Aalias|Aliasse}} hinzu',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Entfernte sowie fügte [$2] {{PLURAL:$1|Alias|Aliasse}} hinzu',
 	'wikibase-item-summary-wbsetaliases-add' => 'Fügte [$2] {{PLURAL:$1|Alias|Aliasse}} hinzu',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Entfernte [$2] {{PLURAL:$1|Alias|Aliasse}}',
+	'wikibase-item-summary-wblinktitles-connect' => 'Verbundene [$2↔$3] {{PLURAL:$1|Seite|Seiten}}',
 	'content-model-1001' => 'Wikibase-Datenelement',
 );
 
