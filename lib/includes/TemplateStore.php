@@ -16,7 +16,7 @@ namespace Wikibase;
  */
 
 /**
- * Stores plain HTML templates.
+ * Stores plain templates.
  */
 class TemplateStore {
 	/**
@@ -49,8 +49,8 @@ class TemplateStore {
 	 * @param array $templates
 	 */
 	public function addTemplates( $templates ) {
-		foreach ( $templates AS $key => $html ) {
-			$this->addTemplate( $key, $html );
+		foreach ( $templates AS $key => $snippet ) {
+			$this->addTemplate( $key, $snippet );
 		}
 	}
 
@@ -60,8 +60,8 @@ class TemplateStore {
 	 * @param string $key
 	 * @param string $html
 	 */
-	public function addTemplate( $key, $html ) {
-		$this->templates[$key] = str_replace( "\t", '', $html );
+	public function addTemplate( $key, $snippet ) {
+		$this->templates[$key] = str_replace( "\t", '', $snippet );
 	}
 
 	/**
@@ -81,15 +81,15 @@ class TemplateStore {
 }
 
 /**
- * Represents a HTML template that can contain placeholders just like MediWiki messages.
+ * Represents a template that can contain placeholders just like MediWiki messages.
  */
 class Template extends \Message {
 
 	/**
-	 * Fetch a HTML template from the template store.
+	 * Fetch a template from the template store.
 	 * @see \Message.fetchMessage()
 	 *
-	 * @return string HTML template
+	 * @return string template
 	 */
 	function fetchMessage() {
 		if ( !isset( $this->message ) ) {

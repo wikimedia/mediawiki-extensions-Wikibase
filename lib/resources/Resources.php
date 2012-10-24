@@ -252,7 +252,7 @@ return call_user_func( function() {
 		),
 
 		'wikibase.templates' => $moduleTemplate + array(
-			'class' => 'Wikibase\TemplateProvider',
+			'class' => 'Wikibase\TemplateModule',
 			'scripts' => 'templates.js'
 		),
 

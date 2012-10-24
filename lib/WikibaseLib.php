@@ -154,7 +154,7 @@ $wgAutoloadClasses['Wikibase\References'] 				= $dir . 'includes/reference/Refer
 
 // includes/modules
 $wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesModule.php';
-$wgAutoloadClasses['Wikibase\TemplateProvider'] 		= $dir . 'includes/modules/TemplateProvider.php';
+$wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/TemplateModule.php';
 
 // includes/snak
 $wgAutoloadClasses['Wikibase\PropertyNoValueSnak'] 		= $dir . 'includes/snak/PropertyNoValueSnak.php';

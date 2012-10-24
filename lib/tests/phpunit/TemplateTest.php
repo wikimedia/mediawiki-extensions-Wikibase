@@ -28,7 +28,7 @@ class TemplateTest extends \MediaWikiTestCase {
 	public function testText( $html ) {
 		TemplateStore::singleton()->addTemplate( 'tmpl1', $html );
 		$template = new Template( 'tmpl1', array( 'param' ) );
-		$this->assertHTMLEquals( $template->text(), str_replace( '$1', 'param', $html ) );
+		$this->assertHTMLEquals( $template->text(), '<div>param</div>' );
 	}
 
 	public function providerText() {
