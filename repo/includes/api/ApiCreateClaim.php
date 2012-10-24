@@ -29,7 +29,29 @@ use ApiBase, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiCreateClaim extends ApiBase {
+class ApiCreateClaim extends ApiBase implements ApiAutocomment {
+
+	/**
+	 * @see  ApiAutocomment::getTextForComment()
+	 */
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			'wbcreateclaim-' . $params['snaktype'],
+			array(
+				/*plural */ (int)isset( $params['value'] ) + (int)isset( $params['property'] )
+			)
+		);
+	}
+
+	/**
+	 * @see  ApiAutocomment::getTextForSummary()
+	 */
+	public function getTextForSummary( array $params ) {
+		$parts = array();
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
+		);
+	}
 
 	/**
 	 * @see ApiBase::execute
@@ -102,7 +124,7 @@ class ApiCreateClaim extends ApiBase {
 		$editEntity = new EditEntity( $entityContent, $this->getUser(), $baseRevisionId );
 
 		$status = $editEntity->attemptSave(
-			Autocomment::formatTotalSummary( '', '', $this->getLanguage() ),
+			Autocomment::buildApiSummary( $this, null, $entityContent ),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : false
 		);
