@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABFX//7IM\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T12:10:29Z",
+      "side": 1,
+      "message": "When the following test kicks in this will produce failing code. Put the if-statement first and let it be something like\n\n$fieldName \u003d $forJoin ? \"$tableName.$field\" : $field);\n$quotedValue \u003d $dbr-\u003eaddQuotes( $value . \"_%\" );\n$value \u003d \"LOWER( CONVERT( $fieldName USING utf8 ) ) LIKE $quotedValue\";",
+      "revId": "f640e56ed9ad05c58b5068d8fc1435070eee6648",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
