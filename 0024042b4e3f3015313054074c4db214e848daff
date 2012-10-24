@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABFX//7Ns\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "Add (Bug 40391, bug 40392) in front of the line.",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7Ms\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "Check the requested params to see if they are sane, especially check if the text is non-empty. If it is empty call on $this-\u003edieUsage( \u0027sometext\u0027, \u0027search-text-empty\u0027 );",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7M4\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "Add the text from the search",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7M8\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "If zero hits the following is not necessary",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7M0\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "Skip to the continuation value if appropriate and include the number of items according to the limit. Break the loop when the limit is reached.",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7Nc\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "This should include continuation.",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7NY\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "This should include continuation.",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7Mo\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "Add definition for \u0027search-text-empty\u0027",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7Mg\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-24T10:02:10Z",
+      "side": 1,
+      "message": "Also add quotes for underscore (_)",
+      "revId": "0024042b4e3f3015313054074c4db214e848daff",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
