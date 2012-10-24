@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABFX//7KA\u003d",
+        "filename": "lib/resources/wikibase.ui.Base.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-24T11:04:49Z",
+      "side": 1,
+      "message": "@since missing",
+      "revId": "b891c87b72926dc58feef9390c3a8cec3831c20b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7KI\u003d",
+        "filename": "lib/resources/wikibase.ui.Base.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-24T11:04:49Z",
+      "side": 1,
+      "message": "@since missing",
+      "revId": "b891c87b72926dc58feef9390c3a8cec3831c20b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7KU\u003d",
+        "filename": "lib/resources/wikibase.ui.Base.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-24T11:04:49Z",
+      "side": 1,
+      "message": "$.extend( this._options, options )\n\nshould be sufficient here.",
+      "revId": "b891c87b72926dc58feef9390c3a8cec3831c20b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7KM\u003d",
+        "filename": "lib/resources/wikibase.ui.Base.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-24T11:04:49Z",
+      "side": 1,
+      "message": "@since missing",
+      "revId": "b891c87b72926dc58feef9390c3a8cec3831c20b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABFX//7KE\u003d",
+        "filename": "lib/resources/wikibase.ui.Base.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-24T11:04:49Z",
+      "side": 1,
+      "message": "@since missing",
+      "revId": "b891c87b72926dc58feef9390c3a8cec3831c20b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
