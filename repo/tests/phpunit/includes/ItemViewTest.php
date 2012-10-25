@@ -93,7 +93,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 		} else {
 			$itemData += array( 'entity' => ItemObject::getIdPrefix() . '123' );
 			$itemContent = ItemContent::newFromArray( $itemData );
-			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-' . $itemContent->getEntity()->getId() . '"/';
+			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-' . $itemContent->getEntity()->getPrefixedId() . '"/';
 		}
 
 		$itemContent->getEntity()->setLabel( 'de', 'Stockholm' );
