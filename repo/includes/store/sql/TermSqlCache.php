@@ -316,7 +316,7 @@ class TermSqlCache implements TermCache {
 			return array();
 		}
 
-		$conditions = $this->termsToConditions( $terms, $termType, $entityType );
+		$conditions = $this->termsToConditions( $terms, $termType, $entityType, false, true );
 
 		$selectionFields = array_keys( $this->termFieldMap );
 
@@ -335,16 +335,46 @@ class TermSqlCache implements TermCache {
 	/**
 	 * @since 0.2
 	 *
+	 * @param $fullTerm
+	 *
+	 */
+	protected function compareTerms ( $fullTerm, $forMatch, $forJoin, $dbr, $tableName ) {
+		if ( $forMatch === true ) {
+			foreach ( $fullTerm as $field => &$value ) {
+
+				// We do a case-insensitive prefix search now as the default
+				if ( $forJoin === false ) {
+					$value = 'LOWER( CONVERT( ' . $field . ' USING utf8 ) )'  . ' LIKE ' . $dbr->addQuotes( $value . "%" );
+				} else {
+					$value = $tableName . '.' .  $field;
+				}
+			}
+
+		}
+		else {
+			foreach ( $fullTerm as $field => &$value ) {
+				$value = $field . '=' . $dbr->addQuotes( $value );
+
+				if ( $forJoin ) {
+					$value = $tableName . '.' . $value;
+				}
+			}
+		}
+	}
+	/**
+	 * @since 0.2
+	 *
 	 * @param array $terms
 	 * @param string $termType
 	 * @param string $entityType
 	 * @param boolean $forJoin
 	 *            If the provided terms are used for a join.
 	 *            If so, the fields of each term get prefixed with a table name starting with terms0 and counting up.
+	 * @param boolean $forMatch
 	 *
 	 * @return array
 	 */
-	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false ) {
+	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false, $forMatch = false ) {
 		$conditions = array();
 		$tableIndex = 0;
 
@@ -379,17 +409,7 @@ class TermSqlCache implements TermCache {
 
 			$tableName = 'terms' . $tableIndex++;
 
-			foreach ( $fullTerm as $field => &$value ) {
-				// We do a case-insensitive prefix search now as the default
-				// TODO: This will fail in mysterious ways because it should not be a prefix search
-				// in a lot of cases but full match. It must be stripped out and put in another function.
-				if ( $forJoin === false ) {
-					$value = 'LOWER( CONVERT( ' . $field . ' USING utf8 ) )'  . ' LIKE ' . $dbr->addQuotes( $value . "%" );
-				}
-				else {
-					$value = $tableName . '.' . $field . '=' . $dbr->addQuotes( $value );
-				}
-			}
+			compareTerms( $fullTerm, true, $forJoin, $dbr, $tableName, $forMatch );
 
 			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
 		}
