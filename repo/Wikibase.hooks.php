@@ -441,6 +441,9 @@ final class RepoHooks {
 				'apiDebugWithRights' => false,
 				'apiDebugWithTokens' => false,
 
+				// UI with statements
+				'uiWithStatements' => false,
+
 				// settings for the user agent
 				//TODO: This should REALLY be handled somehow as without it we could run into lots of trouble
 				'clientTimeout' => 10, // this is before final timeout, without maxlag or maxage we can't hang around
