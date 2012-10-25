@@ -102,24 +102,51 @@ class ApiSearchEntities extends ApiBase {
 				$entry['descriptions'] = $entity->getDescription( $params['language'] );
 			}
 			if ( $entity->getAliases( $params['language'] ) !== array() ) {
-				$entry['aliases'] = $entity->getAliases( $params['language'] );
-				foreach ( $entity->getAliases( $params['language'] ) as $alias ) {
-					$pos = strpos(  $alias, $params['search'] );
-					if ( $pos !== false ) {
-						$aliasscore = strlen( $params['search'] ) / strlen( $alias );
-						if ( $aliasscore > $score ) {
-							$score = $aliasscore;
-						}
+				// Set aliases to false if they don't match the search
+				$matches = function( $array, $search ) {
+					foreach ( $array as $key => $value ) {
+						$array[$key] = ( strpos( $value, $search ) !== false ? $value : false );
+					}
+					return $array;
+				};
+				// Filter out all aliases that don't match the search.
+				$entry['aliases'] = array_filter(
+					$matches( $entity->getAliases( $params['language'], $params['search'] ), $params['search'] )
+				);
+				foreach ( $entry['aliases'] as $alias ) {
+					$aliasscore = strlen( $params['search'] ) / strlen( $alias );
+					if ( $aliasscore > $score ) {
+						$score = $aliasscore;
 					}
 				}
 				$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
 			}
-			if ( $score !== 0 ) {
+			if ( $score > 0 ) {
 				$entry['score'] = $score;
 			}
 			$entries[] = $entry;
 		}
 
+		// Do continuation and pass moreoffset if limit isn't 0
+		if ( $params['limit'] !== 0 ) {
+			$moreoffset = array();
+			$moreoffset['moreoffset'] = $params['offset'] + $params['limit'] +1;
+			if ( $params['offset'] !== 0 ) {
+				$entries = array_slice($entries, $params['offset'], ( $moreoffset['moreoffset'] + $params['limit'] ) - count( $entries ) ) ;
+			} else {
+				$entries = array_slice($entries, 0, $params['limit']);
+			}
+			if ( $moreoffset['moreoffset'] < count( $hits ) || $moreoffset['moreoffset'] === count( $hits ) ) {
+				if ( $moreoffset['moreoffset'] === count( $hits ) ) {
+					$moreoffset['moreoffset'] = $moreoffset['moreoffset'] - 1;
+				}
+				$this->getResult()->addValue(
+					null,
+					'search',
+					$moreoffset
+				);
+			}
+		}
 		$this->getResult()->addValue(
 			null,
 			'search',
@@ -156,6 +183,10 @@ class ApiSearchEntities extends ApiBase {
 				ApiBase::PARAM_DFLT => 'item',
 			),
 			'limit' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_DFLT => 0,
+			),
+			'offset' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_DFLT => 0,
 			),
