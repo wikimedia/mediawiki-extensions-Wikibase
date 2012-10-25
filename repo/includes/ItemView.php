@@ -44,8 +44,70 @@ class ItemView extends EntityView {
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$html = parent::getInnerHtml( $entity, $lang, $editable );
 
+		// add statements to default entity stuff
+		// TODO: Remove the setting when this goes live
+		if ( Settings::get( 'uiWithStatements' ) ) {
+			$html .= $this->getHtmlForStatements( $entity, $lang, $editable );
+		}
+
 		// add site-links to default entity stuff
 		$html .= $this->getHtmlForSiteLinks( $entity, $lang, $editable );
+
+		return $html;
+	}
+
+	/**
+	 * Builds and returns the HTML representing a WikibaseEntity's statements.
+	 *
+	 * @since 0.1
+	 *
+	 * @param EntityContent $item the entity to render
+	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 * @return string
+	 */
+	public function getHtmlForStatements( EntityContent $item, Language $lang = null, $editable = true ) {
+		global $wgLang;
+		// TODO: Get rid of this
+		if ( !isset( $lang ) ) {
+			$lang = $wgLang;
+		}
+		$statements = $item->getItem()->getStatements();
+		$html = '&nbsp;';
+
+		$html .= Html::element( 'h2', array( 'class' => 'wb-statements-heading' ), wfMessage( 'wikibase-statements' ) );
+
+		$i = 0;
+
+		/**
+		 * @var SiteLink $link
+		 */
+		foreach( $statements as $statement ) {
+			//$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+
+			$languageCode = $lang->getCode();
+			$property = EntityContentFactory::singleton()->getFromId(Property::ENTITY_TYPE, $statement->getPropertyId());
+			$link = \Linker::link(
+				$property->getTitle(),
+				htmlspecialchars( $property->getEntity()->getLabel($languageCode) )
+			);
+
+			// TODO: for non-JS, also set the dir attribute on the link cell;
+			// but do not build language objects for each site since it causes too much load
+			// and will fail when having too much site links
+			$template = new Template( 'wb-statement', array(
+				$statement->getGuid(),
+				$link,
+				Utils::fetchLanguageName( $languageCode ), // TODO: get an actual site name rather then just the language
+				$this->getHtmlForEditSection( $item, $lang, 'div' )
+			) );
+			$html .= $template->text();
+		}
+
+		// add button
+		$html .= Html::openElement( 'div' );
+		$html .= $this->getHtmlForEditSection( $item, $lang, 'span', 'add' );
+		$html .= Html::closeElement( 'div' );
 
 		return $html;
 	}
@@ -72,9 +134,7 @@ class ItemView extends EntityView {
 		$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-sitename' ) );
 		$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-siteid' ) );
 		$html .= Html::element( 'col', array( 'class' => 'wb-sitelinks-link' ) );
-		$html .= Html::element( 'col', array(
-			'class' => 'editsection'
-		) );
+		$html .= Html::element( 'col', array( 'class' => 'editsection' ) );
 		$html .= Html::closeElement( 'colgroup' );
 
 		if( !empty( $siteLinks ) ) {
