@@ -1594,6 +1594,7 @@ $messages['gl'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Engado e elimino {{plural:$1|un pseudónimo|pseudónimos}} en [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => 'Engado {{plural:$1|un pseudónimo|pseudónimos}} en [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Elimino {{plural:$1|un pseudónimo|pseudónimos}} en [$2]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Conecto [$2↔$3] {{plural:$1|unha páxina|páxinas}}',
 	'content-model-1001' => 'Elemento de Wikibase',
 );
 
@@ -2275,6 +2276,7 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Aggiunto e rimosso|Aggiunti e rimossi}} alias [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Aggiunto|Aggiunti}} alias [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
+	'wikibase-item-summary-wblinktitles-connect' => 'Connessioni [$2↔$3] {{plural:$1|pagina|pagine}}',
 	'content-model-1001' => 'Elemento wikibase',
 );
 
@@ -2362,11 +2364,14 @@ $messages['ja'] = array(
 	'wikibase-restoreold' => '復元',
 	'wikibase-no-direct-editing' => '$1 名前空間では直接の編集は無効になっています',
 	'wikibase-noentity-createone' => '[[$1|新規作成]]することもできます。',
-	'wikibase-item-summary-wbsetitem' => '項目を新規作成しました',
-	'wikibase-item-summary-wbsetlabel-set' => '[$2] のラベルを変更しました',
-	'wikibase-item-summary-wbsetlabel-remove' => '[$2] のラベルを除去しました',
-	'wikibase-item-summary-wbsetdescription-set' => '[$2] の説明を変更しました',
-	'wikibase-item-summary-wbsetdescription-remove' => '[$2] の説明を除去しました',
+	'wikibase-item-summary-wbsetitem' => '項目を新規作成',
+	'wikibase-item-summary-wbsetlabel-set' => '[$2] のラベルを変更',
+	'wikibase-item-summary-wbsetlabel-remove' => '[$2] のラベルを除去',
+	'wikibase-item-summary-wbsetdescription-set' => '[$2] の説明を変更',
+	'wikibase-item-summary-wbsetdescription-remove' => '[$2] の説明を除去',
+	'wikibase-item-summary-wbsetsitelink-set' => 'サイト固有の [$2] リンクを追加',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'サイト固有の [$2] リンクを除去',
+	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] {{plural:$1|ページ}}を接続',
 	'content-model-1001' => 'ウィキベース項目',
 );
 
@@ -2729,8 +2734,12 @@ $messages['mk'] = array(
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Отстранета врската за конкретно вики [$2]',
 	'wikibase-item-summary-wbsetaliases-set' => 'Задавање на [$2] {{plural:$1|алијас|алијаси}}',
 	'wikibase-item-summary-wbsetaliases-add-remove' => '{{plural:$1|Додаден и отстранет алијасот|Додадени и отстранети алијасите}} [$2]',
-	'wikibase-item-summary-wbsetaliases-add' => 'Додадено [$2] {{plural:$1|алијас|алијаси}}',
-	'wikibase-item-summary-wbsetaliases-remove' => 'Отстрането [$2] {{plural:$1|алијас|алијаси}}',
+	'wikibase-item-summary-wbsetaliases-add' => '{{plural:$1|Додаден|Додадени}} [$2] {{plural:$1|алијас|алијаси}}',
+	'wikibase-item-summary-wbsetaliases-remove' => '{{plural:$1|Отстранет|Отстранети}} [$2] {{plural:$1|алијас|алијаси}}',
+	'wikibase-item-summary-wblinktitles-connect' => '{{plural:$1|Поврзана|Поврзани}} [$2↔$3] {{plural:$1|страница|страници}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Создај {{plural:$1|вредносно тврдење|вредносни тврдења}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Создај {{plural:$1|безвредносно тврдење|безвредносни тврдења}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Создај {{plural:$1|тврдење за некоја вредност|тврдења за некои вредности}}',
 	'content-model-1001' => 'Предмет во Викибазата',
 );
 
