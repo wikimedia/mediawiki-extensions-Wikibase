@@ -92,14 +92,14 @@ class ApiSearchEntities extends ApiBase {
 			$entity = $hit->getEntity();
 			$entry['id'] = $entity->getId();
 			if ( $entity->getLabel( $params['language'] ) !== false ) {
-				$entry['labels'] = $entity->getLabel( $params['language'] );
+				$entry['label'] = $entity->getLabel( $params['language'] );
 				$pos = strpos( $entity->getLabel( $params['language'] ), $params['search'] );
 				if ( $pos !== false ) {
 					$score = strlen( $params['search'] ) / strlen( $entity->getLabel( $params['language'] ) );
 				}
 			}
 			if ( $entity->getDescription( $params['language'] ) !== false ) {
-				$entry['descriptions'] = $entity->getDescription( $params['language'] );
+				$entry['description'] = $entity->getDescription( $params['language'] );
 			}
 			if ( $entity->getAliases( $params['language'] ) !== array() ) {
 				$entry['aliases'] = $entity->getAliases( $params['language'] );
