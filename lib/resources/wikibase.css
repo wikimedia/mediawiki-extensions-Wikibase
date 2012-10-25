@@ -360,6 +360,39 @@ table.wb-sitelinks tfoot td.wb-sitelinks-placeholder {
 
 /********** /SITE LINKS **********/
 
+/********** SITE LINKS **********/
+
+div.wb-statements {
+	position: relative;
+	border: 1px solid #C9C9C9;
+	background: #F0F0F0;
+	margin-bottom: 1em;
+}
+
+div.wb-statements-head {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom:0;
+	width: 20%;
+	padding: 10px;
+	background: #E8E8E8;
+	border-right: 1px solid #C9C9C9;
+}
+
+div.wb-statements-body {
+	position: relative;
+	margin-left: 25%;
+	margin-left: -moz-calc(20% + 2em + 1px);
+	margin-left: -webkit-calc(20% + 2em + 1px);
+	margin-left: -o-calc(20% + 2em + 1px);
+	margin-left: calc(20% + 2em + 1px);
+	margin-right: 0;
+	padding: 10px;
+}
+
+/********** /STATEMENTS **********/
+
 
 .wb-clear {
 	clear: both;
