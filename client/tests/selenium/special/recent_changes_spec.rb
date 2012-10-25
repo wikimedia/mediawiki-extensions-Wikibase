@@ -109,7 +109,7 @@ describe "Check client interwiki links" do
     # tear down: remove sitelinks, remove noexternallanglinks from article
     on_page(ItemPage) do |page|
       page.navigate_to_item
-      page.wait_for_sitelinks_to_load
+      page.wait_for_entity_to_load
       page.remove_all_sitelinks
     end
     on_page(ClientPage) do |page|
