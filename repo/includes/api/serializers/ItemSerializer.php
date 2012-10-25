@@ -53,6 +53,46 @@ class ItemSerializer extends EntitySerializer {
 			$serialization['sitelinks'] = $this->getSiteLinksSerialization( $item );
 		}
 
+		if ( in_array( 'statements', $this->options->getProps() ) ) {
+			$serialization['statements'] = $this->getStatementsSerialization( $item );
+		}
+
+		return $serialization;
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @param Item $item
+	 *
+	 * @return array
+	 */
+	protected function getStatementsSerialization( Item $item ) {
+		$serialization = array();
+
+		$includeStatements = in_array( 'statements', $this->options->getProps() );
+		$statements = $item->getStatements();
+
+		$claimSerializer = new ClaimSerializer( $this->getResult(), $this->options );
+
+		/**
+		 * @var Statement $statement
+		 */
+		foreach ( $statements as $statement ) {
+			if ( $includeStatements ) {
+				if ( $this->options->shouldUseKeys() ) {
+					$serialization[$statement->getGuid()] = $claimSerializer->getSerialized( $statement );
+				}
+				else {
+					$serialization[] = $claimSerializer->getSerialized( $statement );
+				}
+			}
+		}
+
+		if ( !$this->options->shouldUseKeys() ) {
+			$this->getResult()->setIndexedTagName( $serialization, 'statement' );
+		}
+
 		return $serialization;
 	}
 
@@ -87,6 +127,10 @@ class ItemSerializer extends EntitySerializer {
 			else {
 				$serialization[] = $response;
 			}
+		}
+
+		if ( !$this->options->shouldUseKeys() ) {
+			$this->getResult()->setIndexedTagName( $serialization, 'sitelink' );
 		}
 
 		return $serialization;

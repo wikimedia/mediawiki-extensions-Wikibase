@@ -74,10 +74,9 @@ class EntitySerializer extends ApiSerializerObject {
 			throw new MWException( 'EntitySerializer can only serialize Entity objects' );
 		}
 
-		$serialization = $this->getEntityTypeSpecificSerialization( $entity );
-
 		$serialization['id'] = $entity->getPrefixedId();
 		$serialization['type'] = $entity->getType();
+
 
 		foreach ( $this->options->getProps() as $key ) {
 			switch ( $key ) {
@@ -93,7 +92,7 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
-		return $serialization;
+		return array_merge( $serialization, $this->getEntityTypeSpecificSerialization( $entity ) );
 	}
 
 	/**
