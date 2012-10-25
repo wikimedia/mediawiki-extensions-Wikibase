@@ -47,7 +47,8 @@ class ApiSearchEntities extends ApiBase {
 				)
 			),
 			null,
-			$entityType
+			$entityType,
+			true // Do a prefix search!
 		);
 
 		$entities = array();
