@@ -311,12 +311,16 @@ class TermSqlCache implements TermCache {
 	 *
 	 * @return array
 	 */
-	public function getMatchingTerms( array $terms, $termType = null, $entityType = null ) {
+	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, $prefixSearch = false ) {
 		if ( empty( $terms ) ) {
 			return array();
 		}
 
-		$conditions = $this->termsToConditions( $terms, $termType, $entityType );
+		if ( $prefixSearch === false ) {
+			$conditions = $this->termsToConditions( $terms, $termType, $entityType, false ); // We don't do a prefix search
+		} else {
+			$conditions = $this->termsToConditionsPrefixSearch( $terms, $termType, $entityType, false ); // Let's do a prefix search!
+		}
 
 		$selectionFields = array_keys( $this->termFieldMap );
 
@@ -332,6 +336,36 @@ class TermSqlCache implements TermCache {
 		return $this->buildTermResult( $obtainedTerms );
 	}
 
+
+	/**
+	 * @since 0.2
+	 *
+	 * @param $fullTerm
+	 *
+	 */
+	protected function compareTerms ( $fullTerm, $forMatch, $forJoin, $dbr, $tableName ) {
+		if ( $forMatch === true ) {
+			foreach ( $fullTerm as $field => &$value ) {
+
+				// We do a case-insensitive prefix search now as the default
+				if ( $forJoin === false ) {
+					$value = 'LOWER( CONVERT( ' . $field . ' USING utf8 ) )'  . ' LIKE ' . $dbr->addQuotes( $value . "%" );
+				} else {
+					$value = $tableName . '.' .  $field;
+				}
+			}
+
+		}
+		else {
+			foreach ( $fullTerm as $field => &$value ) {
+				$value = $field . '=' . $dbr->addQuotes( $value );
+
+				if ( $forJoin ) {
+					$value = $tableName . '.' . $value;
+				}
+			}
+		}
+	}
 	/**
 	 * @since 0.2
 	 *
@@ -341,10 +375,11 @@ class TermSqlCache implements TermCache {
 	 * @param boolean $forJoin
 	 *            If the provided terms are used for a join.
 	 *            If so, the fields of each term get prefixed with a table name starting with terms0 and counting up.
+	 * @param boolean $forMatch
 	 *
 	 * @return array
 	 */
-	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false ) {
+	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false, $forMatch = false ) {
 		$conditions = array();
 		$tableIndex = 0;
 
@@ -380,14 +415,10 @@ class TermSqlCache implements TermCache {
 			$tableName = 'terms' . $tableIndex++;
 
 			foreach ( $fullTerm as $field => &$value ) {
-				// We do a case-insensitive prefix search now as the default
-				// TODO: This will fail in mysterious ways because it should not be a prefix search
-				// in a lot of cases but full match. It must be stripped out and put in another function.
-				if ( $forJoin === false ) {
-					$value = 'LOWER( CONVERT( ' . $field . ' USING utf8 ) )'  . ' LIKE ' . $dbr->addQuotes( $value . "%" );
-				}
-				else {
-					$value = $tableName . '.' . $field . '=' . $dbr->addQuotes( $value );
+				$value = $field . '=' . $dbr->addQuotes( $value );
+
+				if ( $forJoin ) {
+					$value = $tableName . '.' . $value;
 				}
 			}
 
@@ -397,6 +428,69 @@ class TermSqlCache implements TermCache {
 		return $conditions;
 	}
 
+	/**
+	 * @since 0.2
+	 *
+	 * This is the variant for prefix search
+	 *
+	 * @param array $terms
+	 * @param string $termType
+	 * @param string $entityType
+	 * @param boolean $forJoin
+	 *            If the provided terms are used for a join.
+	 *            If so, the fields of each term get prefixed with a table name starting with terms0 and counting up.
+	 * @param boolean $forMatch
+	 *
+	 * @return array
+	 */
+	protected function termsToConditionsPrefixSearch( array $terms, $termType, $entityType, $forJoin = false ) {
+		$conditions = array();
+		$tableIndex = 0;
+
+		$dbr = $this->getReadDb();
+
+		foreach ( $terms as $term ) {
+			$fullTerm = array();
+
+			if ( array_key_exists( 'termLanguage', $term ) ) {
+				$fullTerm['term_language'] = $term['termLanguage'];
+			}
+
+			if ( array_key_exists( 'termText', $term ) ) {
+				$fullTerm['term_text'] = $term['termText'];
+			}
+
+			if ( array_key_exists( 'termType', $term ) ) {
+				$fullTerm['term_type'] = $term['termType'];
+			}
+			elseif ( $termType !== null ) {
+				$fullTerm['term_type'] = $termType;
+			}
+
+			if ( array_key_exists( 'entityType', $term ) ) {
+				$fullTerm['term_entity_type'] = $term['entityType'];
+			}
+			elseif ( $entityType !== null ) {
+				$fullTerm['term_entity_type'] = $entityType;
+			}
+
+			$fullTerm = array_intersect_key( $fullTerm, $this->termFieldMap );
+
+			$tableName = 'terms' . $tableIndex++;
+
+			foreach ( $fullTerm as $field => &$value ) {
+				$value = $field . '=' . $dbr->addQuotes( $value );
+
+				if ( $forJoin ) {
+					$value = $tableName . '.' . $value;
+				}
+			}
+
+			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
+		}
+
+		return $conditions;
+	}
 	/**
 	 * Modifies the provided terms to use the field names expected by the interface
 	 * rather then the table field names. Also ensures the values are of the correct type.
