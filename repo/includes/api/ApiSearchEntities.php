@@ -93,31 +93,65 @@ class ApiSearchEntities extends ApiBase {
 			$entry['id'] = $entity->getId();
 			if ( $entity->getLabel( $params['language'] ) !== false ) {
 				$entry['labels'] = $entity->getLabel( $params['language'] );
-				$pos = strpos( $entity->getLabel( $params['language'] ), $params['search'] );
-				if ( $pos !== false ) {
-					$score = strlen( $params['search'] ) / strlen( $entity->getLabel( $params['language'] ) );
-				}
+				$score = strlen( $params['search'] ) / strlen( $entity->getLabel( $params['language'] ) );
 			}
 			if ( $entity->getDescription( $params['language'] ) !== false ) {
 				$entry['descriptions'] = $entity->getDescription( $params['language'] );
 			}
-			if ( $entity->getAliases( $params['language'] ) !== array() ) {
-				$entry['aliases'] = $entity->getAliases( $params['language'] );
-				foreach ( $entity->getAliases( $params['language'] ) as $alias ) {
-					$pos = strpos(  $alias, $params['search'] );
-					if ( $pos !== false ) {
-						$aliasscore = strlen( $params['search'] ) / strlen( $alias );
-						if ( $aliasscore > $score ) {
-							$score = $aliasscore;
-						}
-					}
+
+			$entry['aliases'] = $entity->getAliases( $params['language'], $params['search'] );
+			foreach ( $entry['aliases'] as $key => $value ) {
+				if ( preg_match( "/^" . $params['search'] . "/i", $entry['aliases'][$key] ) === 0 ) {
+					unset( $entry['aliases'][$key] );
 				}
-				$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
 			}
-			if ( $score !== 0 ) {
+			foreach ( $entry['aliases'] as $alias ) {
+				$aliasscore = strlen( $params['search'] ) / strlen( $alias );
+				if ( $aliasscore > $score ) {
+					$score = $aliasscore;
+				}
+			}
+			$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
+			if ( $score > 0 ) {
 				$entry['score'] = $score;
 			}
-			$entries[] = $entry;
+			if ( !in_array( $entry, $entries ) ) {
+				$entries[] = $entry;
+			}
+		}
+
+		// Sort by score
+		$sortArray = array();
+		foreach( $entries as $entry ){
+			foreach( $entry as $key=>$value){
+				if( !isset( $sortArray[$key] ) ){
+					$sortArray[$key] = array();
+				}
+				$sortArray[$key][] = $value;
+			}
+		}
+		$orderby = "score";
+		array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
+
+		// Do continuation and pass offset in search-continue structure if limit isn't 0
+		if ( $params['limit'] !== 0 ) {
+			$searchcontinue = array();
+			$searchcontinue['search-continue']['offset'] = $params['offset'] + $params['limit'] +1;
+			if ( $params['offset'] !== 0 ) {
+				$entries = array_slice($entries, $params['offset'], ( $searchcontinue['search-continue']['offset'] + $params['limit'] ) - count( $entries ) ) ;
+			} else {
+				$entries = array_slice($entries, 0, $params['limit']);
+			}
+			if ( $searchcontinue['search-continue']['offset'] < count( $hits ) || $searchcontinue['search-continue']['offset'] === count( $hits ) ) {
+				if ( $searchcontinue['search-continue']['offset'] === count( $hits ) ) {
+					$searchcontinue['search-continue']['offset'] =  $searchcontinue['search-continue']['offset'] -1;
+				}
+				$this->getResult()->addValue(
+					null,
+					'search',
+					$searchcontinue
+				);
+			}
 		}
 
 		$this->getResult()->addValue(
@@ -126,6 +160,7 @@ class ApiSearchEntities extends ApiBase {
 			$entries
 		);
 		$this->getResult()->setIndexedTagName_internal( array( 'search' ), 'entity' );
+
 		$this->getResult()->addValue(
 			null,
 			'success',
@@ -159,6 +194,10 @@ class ApiSearchEntities extends ApiBase {
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_DFLT => 0,
 			),
+			'offset' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_DFLT => 0,
+			),
 		);
 	}
 
@@ -173,6 +212,7 @@ class ApiSearchEntities extends ApiBase {
 			'type' => 'Search for this type of entity.',
 			'limit' => array( 'Limit to this number of non-exact matches',
 				"The value '0' will return all found matches." ),
+			'offset' => 'Offset where to continue when in a (limited) search continuation',
 		);
 	}
 
