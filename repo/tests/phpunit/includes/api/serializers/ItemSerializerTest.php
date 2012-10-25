@@ -89,10 +89,12 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 			array(
 				'id' => $item->getPrefixedId(),
 				'type' => $item->getType(),
-				'aliases' => array(),
-				'labels' => array(),
-				'descriptions' => array(),
-				'sitelinks' => array(),
+				// Commented out because empty structures should
+				// not be reported by the API, so can't be tested
+				//'aliases' => array(),
+				//'labels' => array(),
+				//'descriptions' => array(),
+				//'sitelinks' => array(),
 			),
 			$options,
 		);

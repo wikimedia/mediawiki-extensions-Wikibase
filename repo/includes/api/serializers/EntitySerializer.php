@@ -74,26 +74,33 @@ class EntitySerializer extends ApiSerializerObject {
 			throw new MWException( 'EntitySerializer can only serialize Entity objects' );
 		}
 
-		$serialization = $this->getEntityTypeSpecificSerialization( $entity );
-
 		$serialization['id'] = $entity->getPrefixedId();
 		$serialization['type'] = $entity->getType();
 
 		foreach ( $this->options->getProps() as $key ) {
 			switch ( $key ) {
 				case 'aliases':
-					$serialization['aliases'] = $this->getAliasesSerialization( $entity );
+					$aliases = $this->getAliasesSerialization( $entity );
+					if ( $aliases !== false ) {
+						$serialization['aliases'] = $aliases;
+					}
 					break;
 				case 'descriptions':
-					$serialization['descriptions'] = $this->getDescriptionsSerialization( $entity );
+					$descriptions = $this->getDescriptionsSerialization( $entity );
+					if ( $descriptions !== false ) {
+						$serialization['descriptions'] = $descriptions;
+					}
 					break;
 				case 'labels':
-					$serialization['labels'] = $this->getLabelsSerialization( $entity );
+					$labels = $this->getLabelsSerialization( $entity );
+					if ( $labels !== false ) {
+						$serialization['labels'] = $labels;
+					}
 					break;
 			}
 		}
 
-		return $serialization;
+		return array_merge( $serialization, $this->getEntityTypeSpecificSerialization( $entity ) );
 	}
 
 	/**
@@ -147,6 +154,10 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
+		if ( $value === array() ) {
+			return false;
+		}
+
 		if ( $value !== array() ) {
 			if ( !$this->options->shouldUseKeys() ) {
 				$this->getResult()->setIndexedTagName( $value, 'alias' );
@@ -186,6 +197,10 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
+		if ( $value === array() ) {
+			return false;
+		}
+
 		if ( $value !== array() ) {
 			if ( !$this->options->shouldUseKeys() ) {
 				$this->getResult()->setIndexedTagName( $value, 'description' );
@@ -223,6 +238,10 @@ class EntitySerializer extends ApiSerializerObject {
 					'value' => $label,
 				);
 			}
+		}
+
+		if ( $value === array() ) {
+			return false;
 		}
 
 		if ( $value !== array() ) {
