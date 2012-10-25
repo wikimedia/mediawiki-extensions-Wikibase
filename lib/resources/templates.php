@@ -51,5 +51,14 @@ HTML;
 </tr>
 HTML;
 
+	$templates['wb-statement'] =
+<<<HTML
+<div class="wb-statements wb-statements-$1">
+	<div class="wb-statements-body">$1</div>
+	<div class="wb-statements-head">$2</div>
+	$4
+</div>
+HTML;
+
 	return $templates;
 } );
