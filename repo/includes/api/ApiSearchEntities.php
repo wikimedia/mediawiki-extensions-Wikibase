@@ -102,14 +102,20 @@ class ApiSearchEntities extends ApiBase {
 				$entry['descriptions'] = $entity->getDescription( $params['language'] );
 			}
 			if ( $entity->getAliases( $params['language'] ) !== array() ) {
-				$entry['aliases'] = $entity->getAliases( $params['language'] );
-				foreach ( $entity->getAliases( $params['language'] ) as $alias ) {
-					$pos = strpos(  $alias, $params['search'] );
-					if ( $pos !== false ) {
-						$aliasscore = strlen( $params['search'] ) / strlen( $alias );
-						if ( $aliasscore > $score ) {
-							$score = $aliasscore;
-						}
+				// Filter out all aliases that don't match the search.
+				$matches = function( $array, $search ) {
+					foreach ( $array as $key => $value ) {
+						$array[$key] = ( strpos( $value, $search ) !== false ? $value : false );
+					}
+					return $array;
+				};
+				$entry['aliases'] = array_filter(
+					$matches( $entity->getAliases( $params['language'], $params['search'] ), $params['search'] )
+				);
+				foreach ( $entry['aliases'] as $alias ) {
+					$aliasscore = strlen( $params['search'] ) / strlen( $alias );
+					if ( $aliasscore > $score ) {
+						$score = $aliasscore;
 					}
 				}
 				$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
@@ -119,7 +125,24 @@ class ApiSearchEntities extends ApiBase {
 			}
 			$entries[] = $entry;
 		}
-
+		
+		if ( $params['limit'] !== 0 ) {
+			$original_entries = $entries;
+			if ( $params['offset'] !== 0 ) {
+				$entries = array_slice($entries, $params['offset'], $params['limit']);
+			} else {
+				$entries = array_slice($entries, 0, $params['limit']);
+			}
+			$moreoffset = array();
+			$moreoffset['moreoffset'] = $params['offset'] + $params['limit'] +1;
+			if ( $moreoffset['moreoffset'] <= count( $original_entries ) ) {
+				$this->getResult()->addValue(
+					null,
+					'search',
+					$moreoffset
+				);
+			}
+		}
 		$this->getResult()->addValue(
 			null,
 			'search',
@@ -156,6 +179,10 @@ class ApiSearchEntities extends ApiBase {
 				ApiBase::PARAM_DFLT => 'item',
 			),
 			'limit' => array(
+				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_DFLT => 0,
+			),
+			'offset' => array(
 				ApiBase::PARAM_TYPE => 'integer',
 				ApiBase::PARAM_DFLT => 0,
 			),
