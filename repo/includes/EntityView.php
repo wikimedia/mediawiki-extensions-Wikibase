@@ -84,7 +84,7 @@ abstract class EntityView extends \ContextSource {
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$entityType = static::VIEW_TYPE;
-		$entityId = $entity->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
+		$entityId = $entity->getEntity()->getPrefixedId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
 
 		$html .= Html::openElement(
@@ -408,7 +408,7 @@ abstract class EntityView extends \ContextSource {
 		}
 		return array(
 			'lang' => $lang,
-			'id' => $entity->getEntity()->getId()
+			'id' => $entity->getEntity()->getPrefixedId()
 		);
 	}
 
@@ -487,7 +487,7 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
 		// hand over the entity's ID to JS
-		$out->addJsConfigVars( 'wbEntityId', $entity->getEntity()->getId() );
+		$out->addJsConfigVars( 'wbEntityId', $entity->getEntity()->getPrefixedId() );
 		$out->addJsConfigVars( 'wbEntityType', static::VIEW_TYPE ); //TODO: use $entity->getEntity()->getType after prefixes got removed there
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 	}
