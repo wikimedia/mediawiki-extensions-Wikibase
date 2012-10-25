@@ -381,11 +381,13 @@ class TermSqlCache implements TermCache {
 
 			foreach ( $fullTerm as $field => &$value ) {
 				// We do a case-insensitive prefix search now as the default
+				// TODO: This will fail in mysterious ways because it should not be a prefix search
+				// in a lot of cases but full match. It must be stripped out and put in another function.
 				if ( $forJoin === false ) {
 					$value = 'LOWER( CONVERT( ' . $field . ' USING utf8 ) )'  . ' LIKE ' . $dbr->addQuotes( $value . "%" );
 				}
 				else {
-					$value = $tableName . '.' .  $field;
+					$value = $tableName . '.' . $field . '=' . $dbr->addQuotes( $value );
 				}
 			}
 
