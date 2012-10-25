@@ -71,7 +71,7 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => 'p42',
 				),
-				'qualifiers' => array(),
+				//'qualifiers' => array(),
 			),
 		);
 
@@ -85,8 +85,8 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => 'p2',
 				),
-				'qualifiers' => array(),
-				'references' => array(),
+				//'qualifiers' => array(),
+				//'references' => array(),
 				'rank' => $statement->getRank(),
 			),
 		);

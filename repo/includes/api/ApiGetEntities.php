@@ -83,24 +83,31 @@ class ApiGetEntities extends Api {
 
 		if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
 			$props = array_flip( array_values( $params['props'] ) );
-			unset( $props['sitelinks/urls'] );
+			//unset( $props['sitelinks/urls'] );
 			$props['sitelinks'] = true;
 			$props = array_keys( $props );
 		}
 		else {
 			$props = $params['props'];
 		}
-
 		$options = new EntitySerializationOptions();
 		$options->setLanguages( $params['languages'] );
+		$options->setSortDirection( $params['dir'] );
 		$options->setProps( $props );
 		$options->setUseKeys( $this->getUsekeys() );
 
 		$entitySerializer = new EntitySerializer( $this->getResult(), $options );
+		$itemSerializer = new ItemSerializer( $this->getResult(), $options );
 
 		// loop over all items
 		foreach ( $params['ids'] as $entityId ) {
-			$this->handleEntity( $entityId, $params, $props, $entitySerializer );
+			switch ( EntityFactory::singleton()->getEntityTypeFromPrefixedId( $entityId ) ) {
+			case 'item':
+				$this->handleEntity( $entityId, $params, $props, $itemSerializer );
+				break;
+			default:
+				$this->handleEntity( $entityId, $params, $props, $entitySerializer );
+			}
 		}
 
 		if ( !$this->getUsekeys() ) {
@@ -175,30 +182,6 @@ class ApiGetEntities extends Api {
 				}
 
 				$entity = $entityContent->getEntity();
-
-				// FIXME: move to serializer
-				if ( in_array( 'sitelinks', $props ) ) {
-					// This really needs a more generic solution as similar tricks will be
-					// done to other props as well, for example variants for the language
-					// attributes. It would also be nice to write something like */urls for
-					// all props that can supply full urls.
-					$siteLinkOptions = array();
-
-					if ( in_array( 'sitelinks', $params['sort'] ) ) {
-						$siteLinkOptions[] = $params['dir'];
-					}
-
-					if ( in_array( 'sitelinks/urls', $params['props'] ) ) {
-						$siteLinkOptions[] = 'url';
-					}
-
-					if ( $siteLinkOptions === array() ) {
-						$siteLinkOptions = null;
-					}
-
-					$this->addSiteLinksToResult( $entity->getSiteLinks(), $entityPath, 'sitelinks', 'sitelink', $siteLinkOptions );
-				}
-
 				$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 				foreach ( $entitySerialization as $key => $value ) {
@@ -233,8 +216,8 @@ class ApiGetEntities extends Api {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'props' => array(
-				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ),
-				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions',
+				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls', 'statements' ),
+				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|statements',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sort' => array(
@@ -245,8 +228,12 @@ class ApiGetEntities extends Api {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'dir' => array(
-				ApiBase::PARAM_TYPE => array( 'ascending', 'descending' ),
-				ApiBase::PARAM_DFLT => 'ascending',
+				ApiBase::PARAM_TYPE => array(
+					EntitySerializationOptions::SORT_ASC,
+					EntitySerializationOptions::SORT_DESC,
+					EntitySerializationOptions::SORT_NONE
+				),
+				ApiBase::PARAM_DFLT => EntitySerializationOptions::SORT_ASC,
 				ApiBase::PARAM_ISMULTI => false,
 			),
 			'languages' => array(

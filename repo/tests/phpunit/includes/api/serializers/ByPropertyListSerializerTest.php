@@ -76,10 +76,10 @@ class ByPropertyListSerializerTest extends ApiSerializerBaseTest {
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
-		$validArgs[] = array(
-			new \Wikibase\SnakList(),
-			array(),
-		);
+		//$validArgs[] = array(
+		//	new \Wikibase\SnakList(),
+		//	array(),
+		//);
 
 		$validArgs[] = array(
 			new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) ),

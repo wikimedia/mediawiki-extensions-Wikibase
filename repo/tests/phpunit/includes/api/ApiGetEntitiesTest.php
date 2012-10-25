@@ -335,7 +335,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 
 			array( 'Leipzig', '', array( 'id', 'type' ) ),
 			array( 'Leipzig', 'labels|descriptions', array( 'id', 'type', 'labels', 'descriptions' ) ),
-			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels', 'aliases' ) ),
+			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels' ) ), // removed aliases, no data
 			array( 'Leipzig', 'sitelinks|descriptions', array( 'id', 'type', 'descriptions' ) ),
 
 			array( 'Berlin', 'xyz', false ),
@@ -437,6 +437,8 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
+		//print(">>>>>>>> ascending\n");
+		//print_r($res['entities'][$id]['sitelinks']);
 		$last = '';
 		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'site', $link );
@@ -456,6 +458,8 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		);
 
 		$this->assertSuccess( $res, 'entities', $id, 'sitelinks' );
+		//print(">>>>>>>> descending\n");
+		//print_r($res['entities'][$id]['sitelinks']);
 		$last = 'zzzzzzzz';
 		foreach ( $res['entities'][$id]['sitelinks'] as $link ) {
 			$this->assertArrayHasKey( 'site', $link );
