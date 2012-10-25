@@ -141,6 +141,13 @@ $messages['nl'] = array(
 	'version-datavalues' => 'Gegevenswaarden',
 );
 
+/** Tamil (தமிழ்)
+ * @author மதனாஹரன்
+ */
+$messages['ta'] = array(
+	'version-datavalues' => 'தரவுப்பெறுமானங்கள்',
+);
+
 /** Yiddish (ייִדיש)
  * @author פוילישער
  */
