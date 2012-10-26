@@ -229,6 +229,11 @@ $messages['mk'] = array(
  */
 $messages['ms'] = array(
 	'wikibaselib-desc' => 'Memegang kefungsian sepunya untuk sambungan Wikibase dan Wikibase Client',
+	'wikibaselib-entity-item' => 'perkara',
+	'wikibaselib-entity-property' => 'sifat',
+	'wikibaselib-entity-query' => 'pertanyaan',
+	'datatypes-type-wikibase-item' => 'Perkara',
+	'datatypes-type-commonsMedia' => 'Fail media Commons',
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)

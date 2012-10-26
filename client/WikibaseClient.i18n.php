@@ -29,8 +29,8 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
- * @author Katie Filbert
  * @author Jeblad
+ * @author Katie Filbert
  */
 $messages['qqq'] = array(
 	'wbc-desc' => '{{desc}} See also [[m:Wikidata/Glossary#Wikidata|Wikidata]].',
@@ -57,6 +57,10 @@ $messages['ast'] = array(
  */
 $messages['be-tarask'] = array(
 	'wbc-desc' => 'Кліент пашырэньня Wikibase',
+	'wbc-comment-langlinks-delete' => 'Злучаны аб’ект Вікізьвестак выдалены. Будуць выдаленыя моўныя спасылкі.',
+	'wbc-comment-langlinks-remove' => 'Гэтая старонка была адлучаная да аб’екту Вікізьвестак. Моўныя спасылкі выдаленыя',
+	'wbc-comment-langlinks-restore' => 'Злучаны аб’ект Вікізьвестак адноўлены. Будуць адноўленыя моўныя спасылкі',
+	'wbc-comment-langlinks-update' => 'Моўныя спасылкі абноўленыя',
 	'wbc-editlinks' => 'Рэдагаваць спасылкі',
 	'wbc-editlinkstitle' => 'Рэдагаваць міжмоўныя спасылкі',
 );
@@ -71,10 +75,15 @@ $messages['br'] = array(
 
 /** German (Deutsch)
  * @author Kghbln
+ * @author Metalhead64
  * @author Purodha
  */
 $messages['de'] = array(
 	'wbc-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
+	'wbc-comment-langlinks-delete' => 'Zugeordnetes Wikidata-Element gelöscht. Sprachlinks entfernt.',
+	'wbc-comment-langlinks-remove' => 'Diese Seite wurde vom Wikidata-Element entlinkt. Sprachlinks entfernt.',
+	'wbc-comment-langlinks-restore' => 'Zugeordnetes Wikidata-Element wiederhergestellt. Sprachlinks wiederhergestellt.',
+	'wbc-comment-langlinks-update' => 'Sprachlinks aktualisiert',
 	'wbc-editlinks' => 'Links bearbeiten',
 	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
 );
@@ -100,6 +109,10 @@ $messages['dsb'] = array(
  */
 $messages['es'] = array(
 	'wbc-desc' => 'Cliente para la extensión Wikibase',
+	'wbc-comment-langlinks-delete' => 'Se ha borrado un artículo asociado a Wikidata. Se han eliminado los enlaces de idioma.',
+	'wbc-comment-langlinks-remove' => 'Se ha eliminado un enlace a esta página de un artículo de Wikidata. Se han eliminado los enlaces de idioma.',
+	'wbc-comment-langlinks-restore' => 'Se ha restaurado un artículo asociadoa Wikidata. Se han restaurado los enlaces de idioma.',
+	'wbc-comment-langlinks-update' => 'Se han actualizado los enlaces de idioma.',
 	'wbc-editlinks' => 'Editar los enlaces',
 	'wbc-editlinkstitle' => 'Editar enlaces de interlengua',
 );
@@ -199,7 +212,11 @@ $messages['it'] = array(
  * @author Shirayuki
  */
 $messages['ja'] = array(
-	'wbc-desc' => 'Wikibase拡張機能のクライアント',
+	'wbc-desc' => 'Wikibase 拡張機能のクライアント',
+	'wbc-comment-langlinks-delete' => '関連付けられたウィキデータ項目は削除されました。言語リンクを除去しました。',
+	'wbc-comment-langlinks-remove' => 'このページはウィキデータ項目からリンク解除されました。言語リンクを除去しました',
+	'wbc-comment-langlinks-restore' => '関連付けられたウィキデータ項目が復元されました。言語リンクを復元しました。',
+	'wbc-comment-langlinks-update' => '言語リンクを更新しました',
 	'wbc-editlinks' => 'リンクを編集',
 	'wbc-editlinkstitle' => '言語間リンクを編集',
 );
@@ -250,6 +267,19 @@ $messages['mk'] = array(
 	'wbc-desc' => 'Клиент за додатокот „Викибаза“',
 	'wbc-editlinks' => 'Уреди врски',
 	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
+);
+
+/** Malay (Bahasa Melayu)
+ * @author Anakmalaysia
+ */
+$messages['ms'] = array(
+	'wbc-desc' => 'Pelanggan sambungan Wikibase',
+	'wbc-comment-langlinks-delete' => 'Perkara Wikidata yang berkenaan dihapuskan. Pautan bahasa dipadamkan.',
+	'wbc-comment-langlinks-remove' => 'Halaman ini telah dinyahpautkan dari perkara Wikidata. Pautan bahasa dipadamkan.',
+	'wbc-comment-langlinks-restore' => 'Perkara Wikidata yang berkenaan dinyahhapus. Pautan bahasa dipulihkan.',
+	'wbc-comment-langlinks-update' => 'Pautan bahasa dikemaskinikan',
+	'wbc-editlinks' => 'Sunting pautan',
+	'wbc-editlinkstitle' => 'Sunting pautan antara bahasa',
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
