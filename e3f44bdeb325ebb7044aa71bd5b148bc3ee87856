@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABUH////U\u003d",
+        "filename": "repo/tests/phpunit/includes/store/TermCacheTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-26T09:51:18Z",
+      "side": 1,
+      "message": "eyy, you could add your name.",
+      "revId": "e3f44bdeb325ebb7044aa71bd5b148bc3ee87856",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
