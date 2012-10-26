@@ -198,7 +198,8 @@ return call_user_func( function() {
 				'wikibase.utilities.jQuery',
 				'wikibase.utilities.jQuery.ui.inputAutoExpand',
 				'wikibase.utilities.jQuery.ui.tagadata',
-				'wikibase.jquery.ui',
+				'jquery.ui.suggester',
+				'jquery.ui.entityselector',
 				'mediawiki.api',
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
@@ -256,15 +257,28 @@ return call_user_func( function() {
 			'scripts' => 'templates.js'
 		),
 
-		'wikibase.jquery.ui' => $moduleTemplate + array(
+		'jquery.ui.suggester' => $moduleTemplate + array(
 			'scripts' => array(
 				'jquery.ui/jquery.ui.suggester.js'
 			),
 			'styles' => array(
-				'jquery.ui/jquery.ui.suggester.css'
+				'jquery.ui/themes/default/jquery.ui.suggester.css'
 			),
 			'dependencies' => array(
 				'jquery.ui.autocomplete'
+			)
+		),
+
+		'jquery.ui.entityselector' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.entityselector.js'
+			),
+			'styles' => array(
+				'jquery.ui/themes/default/jquery.ui.entityselector.css'
+			),
+			'dependencies' => array(
+				'jquery.ui.suggester',
+				'jquery.ui.resizable'
 			)
 		)
 
