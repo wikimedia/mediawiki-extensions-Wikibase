@@ -22,19 +22,25 @@ return call_user_func( function() {
 
 	$templates['wb-editsection'] =
 <<<HTML
-<$1 class="editsection">
-	<span class="wb-ui-toolbar">
-		<span class="wb-ui-toolbar-group">[$2]</span>
-	</span>
-</$1>
+<$1 class="editsection">$2</$1>
 HTML;
 
-	$templates['wb-editsection-button'] =
+	$templates['wb-toolbar'] =
+<<<HTML
+<span class="wb-ui-toolbar">$1</span>
+HTML;
+
+	$templates['wb-toolbar-group'] =
+<<<HTML
+<span class="wb-ui-toolbar-group">[$1]</span>
+HTML;
+
+	$templates['wb-toolbar-button'] =
 <<<HTML
 <a href="$2" class="wb-ui-toolbar-button">$1</a>
 HTML;
 
-	$templates['wb-editsection-button-disabled'] =
+	$templates['wb-toolbar-button-disabled'] =
 <<<HTML
 <span class="wb-ui-toolbar-button wb-ui-toolbar-button-disabled">$1</span>
 HTML;

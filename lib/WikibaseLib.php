@@ -221,6 +221,23 @@ $wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTe
 // register HTML templates
 \Wikibase\TemplateStore::singleton()->addTemplates( include( "$dir/resources/templates.php" ) );
 
+/**
+ * Shorthand function to retrieve a template filled with the specified parameters.
+ * @param $key \string template key
+ * Varargs: normal template parameters
+ * @return \Wikibase\Template
+ * @since 0.2
+ */
+function wfTemplate( $key /*...*/) {
+	$params = func_get_args();
+	array_shift( $params );
+	if ( isset( $params[0] ) && is_array( $params[0] ) ) {
+		$params = $params[0];
+	}
+	$template = new \Wikibase\Template( $key, $params );
+	return $template->text();
+}
+
 // Resource Loader Modules:
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
