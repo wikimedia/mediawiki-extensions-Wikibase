@@ -16,6 +16,24 @@
       "revId": "7e98235627994bf368d9ca40a638f90954356edd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABUX////c\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-26T10:14:04Z",
+      "side": 1,
+      "message": "Copypaste of numbers can be confusing..",
+      "parentUuid": "AAABUH////A\u003d",
+      "revId": "7e98235627994bf368d9ca40a638f90954356edd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
