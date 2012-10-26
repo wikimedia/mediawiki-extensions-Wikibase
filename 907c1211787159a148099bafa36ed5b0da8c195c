@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABUX////o\u003d",
+        "filename": "repo/tests/phpunit/includes/store/TermCacheTest.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-10-26T10:10:57Z",
+      "side": 1,
+      "message": "This won\u0027t work anymore once If0733ba9 is merged. Pass \"true\" to do a prefix search.",
+      "revId": "907c1211787159a148099bafa36ed5b0da8c195c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
