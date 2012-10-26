@@ -22,8 +22,7 @@ $messages['en'] = array(
 	'wbc-desc' => 'Client for the Wikibase extension',
 	'wbc-comment-langlinks-delete' => 'Associated Wikidata item deleted. Language links removed.',
 	'wbc-comment-langlinks-remove' => 'This page has been unlinked from Wikidata item. Language links removed',
-	'wbc-comment-langlinks-restore' => 'Associated Wikidata item undeleted. Language links resto
-red',
+	'wbc-comment-langlinks-restore' => 'Associated Wikidata item undeleted. Language links restored',
 	'wbc-comment-langlinks-update' => 'Language links updated',
 	'wbc-editlinks' => 'Edit links',
 	'wbc-editlinkstitle' => 'Edit interlanguage links',
