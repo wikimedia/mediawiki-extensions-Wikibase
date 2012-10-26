@@ -36,6 +36,7 @@ use Wikibase\Item;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  */
 class TermCacheTest extends \MediaWikiTestCase {
 
@@ -207,6 +208,71 @@ class TermCacheTest extends \MediaWikiTestCase {
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
 			$expected = $terms[$id];
+
+			$this->assertEquals( $expected['termText'], $term['termText'] );
+			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );
+		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param TermCache $lookup
+	 */
+	public function testGetMatchingPrefixTerms( TermCache $lookup ) {
+		$item0 = ItemObject::newEmpty();
+		$item0->setLabel( 'en', 'prefix' );
+
+		$item1 = ItemObject::newEmpty();
+		$item1->setLabel( 'nl', 'postfix' );
+
+		$content0 = ItemContent::newEmpty();
+		$content0->setItem( $item0 );
+		$content0->save( '', null, EDIT_NEW );
+		$id0 = $content0->getItem()->getId();
+
+		$content1 = ItemContent::newEmpty();
+		$content1->setItem( $item1 );
+
+		$content1->save( '', null, EDIT_NEW );
+		$id1 = $content1->getItem()->getId();
+
+		$terms = array(
+			$id0 => array(
+				'termLanguage' => 'en',
+				'termText' => 'preF',
+			),
+			$id1 => array(
+				'termText' => 'post',
+			),
+		);
+
+		$terms_expected = array(
+			$id0 => array(
+				'termLanguage' => 'en',
+				'termText' => 'prefix',
+			),
+			$id1 => array(
+				'termText' => 'postfix',
+			),
+		);
+
+		$actual = $lookup->getMatchingTerms( $terms, null, null, true );
+
+		$terms[$id1]['termLanguage'] = 'nl';
+		$terms_expected[$id1]['termLanguage'] = 'nl';
+
+		$this->assertInternalType( 'array', $actual );
+		$this->assertEquals(sizeof($actual), sizeof($terms_expected));
+
+		foreach ( $actual as $term ) {
+			$this->testTermArrayStructure( $term );
+
+			$id = $term['entityId'];
+
+			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
+
+			$expected = $terms_expected[$id];
 
 			$this->assertEquals( $expected['termText'], $term['termText'] );
 			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );
