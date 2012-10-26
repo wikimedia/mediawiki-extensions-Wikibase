@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABU3////w\u003d",
+        "filename": "repo/tests/phpunit/includes/store/TermCacheTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-26T11:49:29Z",
+      "side": 1,
+      "message": "* this won\u0027t work. you have to do $lookup-\u003egetMatchingTerms( $terms, null, null, true );\n\n* in general, also setting $prefixSearch to false here would not cause the test to fail. is that how it is supposed to be? probably you should use more sensitive testdata.",
+      "revId": "56b977af5734d569bfea44decab346bd659bfa68",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
