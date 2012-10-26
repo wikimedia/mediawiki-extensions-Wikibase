@@ -1,0 +1,55 @@
+/**
+ * Default/Vector styles for jquery.ui.entityselector
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+
+.ui-entityselector-input {
+	padding: .2em;
+}
+
+.ui-entityselector-list {
+	padding: 0;
+	overflow-x: hidden;
+}
+
+.ui-entityselector-list li,
+.ui-entityselector-list li.ui-state-hover{
+	border-top: 1px dotted #C9C9C9;
+}
+
+.ui-entityselector-list li.first {
+	border-top: none;
+}
+
+.ui-entityselector-list .ui-entityselector-label,
+.ui-entityselector-list .ui-entityselector-description,
+.ui-entityselector-list .ui-entityselector-aliases {
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.ui-entityselector-list li .ui-entityselector-section-container,
+.ui-entityselector-list .ui-menu-item a.ui-state-hover,
+.ui-entityselector-list .ui-menu-item a.ui-state-active {
+	margin: .4em .2em;
+}
+
+.ui-entityselector-list .ui-entityselector-section-container {
+	line-height: 1.3;
+}
+
+.ui-entityselector-label {
+	font-weight: bold;
+}
+
+.ui-entityselector-aliases {
+	font-style: italic;
+}
+
+.ui-entityselector-list .ui-resizable-s {
+	bottom: 0; /* prevent unintationally showing a scrollbar by setting negative bottom offset */
+}

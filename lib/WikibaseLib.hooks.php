@@ -241,7 +241,8 @@ final class LibHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
-				'tests/qunit/jquery.ui/jquery.ui.suggester.tests.js'
+				'tests/qunit/jquery.ui/jquery.ui.suggester.tests.js',
+				'tests/qunit/jquery.ui/jquery.ui.entityselector.tests.js'
 			),
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
@@ -250,7 +251,8 @@ final class LibHooks {
 				'wikibase.utilities.jQuery',
 				'wikibase.ui.Toolbar',
 				'wikibase.ui.PropertyEditTool',
-				'wikibase.jquery.ui'
+				'jquery.ui.suggester',
+				'jquery.ui.entityselector'
 			),
 			'localBasePath' => __DIR__,
 			'remoteExtPath' => 'Wikibase/lib',
