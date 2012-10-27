@@ -177,6 +177,7 @@ $messages['he'] = array(
  */
 $messages['hsb'] = array(
 	'wbc-desc' => 'Klient za rozšěrjenje Wikibase',
+	'wbc-comment-langlinks-update' => 'Rěčne wotkazy zaktualizowane',
 	'wbc-editlinks' => 'Wotkazy wobdźěłać',
 	'wbc-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
 );
@@ -233,6 +234,10 @@ $messages['ka'] = array(
  */
 $messages['ko'] = array(
 	'wbc-desc' => '위키베이스 확장 기능을 위한 클라이언트',
+	'wbc-comment-langlinks-delete' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
+	'wbc-comment-langlinks-remove' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다',
+	'wbc-comment-langlinks-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다',
+	'wbc-comment-langlinks-update' => '언어 링크를 업데이트했습니다',
 	'wbc-editlinks' => '링크 편집',
 	'wbc-editlinkstitle' => '인터언어 링크 편집',
 );
@@ -265,6 +270,10 @@ $messages['lb'] = array(
  */
 $messages['mk'] = array(
 	'wbc-desc' => 'Клиент за додатокот „Викибаза“',
+	'wbc-comment-langlinks-delete' => 'Здружениот предмет од Википодатоците е избришан. Јазичните врски се избришани.',
+	'wbc-comment-langlinks-remove' => 'На оваа страница ѝ е раскината врската со елементот од Википодатоците. Јазичните врски се отстранети.',
+	'wbc-comment-langlinks-restore' => 'Здружениот предмет од Википодатоците е повратен. Јазичните врски се повратени.',
+	'wbc-comment-langlinks-update' => 'Јазичните врски се подновени',
 	'wbc-editlinks' => 'Уреди врски',
 	'wbc-editlinkstitle' => 'Уредување на меѓујазични врски',
 );
