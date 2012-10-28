@@ -252,6 +252,7 @@ $messages['nl'] = array(
 	'wikibaselib-entity-property' => 'eigenschap',
 	'wikibaselib-entity-query' => 'zoekopdracht',
 	'datatypes-type-wikibase-item' => 'Item',
+	'datatypes-type-commonsMedia' => 'Mediabestand van Commons',
 );
 
 /** Norwegian Nynorsk (norsk (nynorsk)‎)

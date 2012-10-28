@@ -177,6 +177,9 @@ $messages['he'] = array(
  */
 $messages['hsb'] = array(
 	'wbc-desc' => 'Klient za rozšěrjenje Wikibase',
+	'wbc-comment-langlinks-delete' => 'Přirjadowany element Wikidata zhašany. Rěčne wotkazy wotstronjene.',
+	'wbc-comment-langlinks-remove' => 'Tuta strona hižo wotkazowy cil element Wikidata hižo njeje. Rěčne wotkazy wotstronjene.',
+	'wbc-comment-langlinks-restore' => 'Přirjadowany element Wikidata zaso wobnowjeny. Rěčne wotkazy wobnowjene.',
 	'wbc-comment-langlinks-update' => 'Rěčne wotkazy zaktualizowane',
 	'wbc-editlinks' => 'Wotkazy wobdźěłać',
 	'wbc-editlinkstitle' => 'Mjezyrěčne wotkazy wobdźěłać',
@@ -205,6 +208,10 @@ $messages['is'] = array(
  */
 $messages['it'] = array(
 	'wbc-desc' => "Client per l'estensione Wikibase",
+	'wbc-comment-langlinks-delete' => "L'elemento di Wikidata associato è stato cancellato. I collegamenti interlinguistici sono stati rimossi.",
+	'wbc-comment-langlinks-remove' => "Questa pagina è stata scollegata dall'elemento di Wikidata. I collegamenti interlinguistici sono stati rimossi.",
+	'wbc-comment-langlinks-restore' => "La cancellazione dell'elemento di Wikidata associato è stata annullata. I collegamenti interlinguistici sono stati ripristinati.",
+	'wbc-comment-langlinks-update' => 'I collegamenti interlinguistici sono stati aggiornati.',
 	'wbc-editlinks' => 'Modifica collegamenti',
 	'wbc-editlinkstitle' => 'Modifica collegamenti interlingua',
 );
@@ -305,6 +312,10 @@ $messages['nb'] = array(
  */
 $messages['nl'] = array(
 	'wbc-desc' => 'Client voor de uitbreiding Wikibase',
+	'wbc-comment-langlinks-delete' => 'Bijbehorend Wikidataitem verwijderd. Taalverwijzingen verwijderd.',
+	'wbc-comment-langlinks-remove' => 'Deze pagina is ontkoppeld van het Wikidataitem. Taalverwijzingen zijn verwijderd',
+	'wbc-comment-langlinks-restore' => 'Gekoppeld Wikidataitem teruggeplaatst. Taalverwijzingen teruggeplaatst',
+	'wbc-comment-langlinks-update' => 'Taalverwijzingen bijgewerkt',
 	'wbc-editlinks' => 'Verwijzingen bewerken',
 	'wbc-editlinkstitle' => 'Intertaalverwijzingen bewerken',
 );
