@@ -63,6 +63,26 @@ HTML;
 </span>
 HTML;
 
+	$templates['wb-aliases-wrapper'] =
+<<<HTML
+<div class="wb-aliases $1">
+	<div class="wb-gridhelper">
+		<span class="wb-aliases-label $2">$3</span>
+		$4
+	</div>
+</div>
+HTML;
+
+	$templates['wb-aliases'] =
+<<<HTML
+<ul class="wb-aliases-container">$1</ul>
+HTML;
+
+	$templates['wb-alias'] =
+<<<HTML
+<li class="wb-aliases-alias">$1</li>
+HTML;
+
 	$templates['wb-editsection'] =
 <<<HTML
 <$1 class="editsection">$2</$1>

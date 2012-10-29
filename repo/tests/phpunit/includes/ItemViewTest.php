@@ -182,7 +182,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 				),
 				array(
 					'/"wb-sitelinks"/',
-					'/<span class="wb-value">\s*Capitol of Norway\s*<\/span>/',
+					'/<span class="wb-value ">\s*Capitol of Norway\s*<\/span>/',
 				)
 			),
 		);
