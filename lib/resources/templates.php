@@ -20,6 +20,49 @@ namespace Wikibase;
 return call_user_func( function() {
 	$templates = array();
 
+	$templates['wb-entity'] =
+// container reserved for widgets, will be displayed on the right side if there is space
+// TODO: no point in inserting this here, is there? Should be generated in JS!
+<<<HTML
+<div id="wb-$1-$2" class="wb-entity wb-$1" lang="$3" dir="$4">$5</div>
+<div id="wb-widget-container-$2" class="wb-widget-container"></div>
+HTML;
+
+
+	$templates['wb-entity-content'] =
+<<<HTML
+$1
+$2
+<hr class="wb-hr" />
+$3
+HTML;
+
+	$templates['wb-label'] =
+// add an h1 for displaying the entity's label; the actual firstHeading is being hidden by
+// css since the original MediaWiki DOM does not represent a Wikidata entity's structure
+// where the combination of label and description is the unique "title" of an entity which
+// should not be semantically disconnected by having elements in between, like siteSub,
+// contentSub and jump-to-nav
+<<<HTML
+<h1 id="wb-firstHeading-$1" class="wb-firstHeading wb-value-row">$2</h1>
+HTML;
+
+	$templates['wb-description'] =
+<<<HTML
+<div class="wb-property-container wb-value-row wb-description" dir="auto">
+	<div class="wb-property-container-key" title="description"></div>
+	$1
+</div>
+HTML;
+
+	$templates['wb-property'] =
+<<<HTML
+<span class="wb-property-container-value wb-value-container" dir="auto">
+	<span class="wb-value $1">$2</span>
+	$3
+</span>
+HTML;
+
 	$templates['wb-editsection'] =
 <<<HTML
 <$1 class="editsection">$2</$1>
