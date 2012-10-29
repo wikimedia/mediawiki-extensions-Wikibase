@@ -35,15 +35,6 @@ use ApiResult, MWException;
 class EntitySerializer extends ApiSerializerObject {
 
 	/**
-	 * @see ApiSerializerObject::$options
-	 *
-	 * @since 0.2
-	 *
-	 * @var EntitySerializationOptions
-	 */
-	protected $options;
-
-	/**
 	 * Constructor.
 	 *
 	 * @since 0.2

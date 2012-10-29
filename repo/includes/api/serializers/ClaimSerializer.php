@@ -32,6 +32,22 @@ use MWException;
 class ClaimSerializer extends ApiSerializerObject {
 
 	/**
+	 * Constructor.
+	 *
+	 * @since 0.2
+	 *
+	 * @param \ApiResult $apiResult
+	 * @param EntitySerializationOptions|null $options
+	 */
+	public function __construct( \ApiResult $apiResult, EntitySerializationOptions $options = null ) {
+		if ( $options === null ) {
+			$options = new EntitySerializationOptions();
+		}
+
+		parent::__construct( $apiResult, $options );
+	}
+
+	/**
 	 * @see ApiSerializer::getSerialized
 	 *
 	 * @since 0.2
@@ -48,24 +64,29 @@ class ClaimSerializer extends ApiSerializerObject {
 
 		$serialization['id'] = $claim->getGuid();
 
+		$serialization['type'] = ( $claim instanceof Statement ) ? 'statement' : 'claim';
+
 		$snakSerializer = new SnakSerializer( $this->getResult(), $this->options );
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $snakSerializer, $this->getResult(), $this->options );
-		$qualifiers = $snaksSerializer->getSerialized( $claim->getQualifiers() );
-		if ($qualifiers !== false ) {
-			$serialization['qualifiers'] = $qualifiers;
+		if ( isset( $this->options ) && in_array( 'qualifiers', $this->options->getProps() ) ) {
+			$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $snakSerializer, $this->getResult(), $this->options );
+			$qualifiers = $snaksSerializer->getSerialized( $claim->getQualifiers() );
+			if ($qualifiers !== false ) {
+				$serialization['qualifiers'] = $qualifiers;
+			}
 		}
 
 		if ( $claim instanceof Statement ) {
 			$serialization['rank'] = $claim->getRank();
 
-			$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->getResult(), $this->options );
-			$references = $snaksSerializer->getSerialized( $claim->getReferences() );
-			if ( $references !== false ) {
-				$serialization['references'] = $references;
+			if ( isset( $this->options ) && in_array( 'references', $this->options->getProps() ) ) {
+				$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->getResult(), $this->options );
+				$references = $snaksSerializer->getSerialized( $claim->getReferences() );
+				if ( $references !== false ) {
+					$serialization['references'] = $references;
+				}
 			}
-
 		}
 
 		return $serialization;

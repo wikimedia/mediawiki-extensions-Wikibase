@@ -69,6 +69,7 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 			$claim,
 			array(
 				'id' => $claim->getGuid(),
+				'type' => 'claim',
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
 					'property' => 'p42',
@@ -85,6 +86,7 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 			$statement,
 			array(
 				'id' => $statement->getGuid(),
+				'type' => 'statement',
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
 					'property' => 'p42',

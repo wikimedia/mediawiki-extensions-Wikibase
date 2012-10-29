@@ -119,6 +119,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 		$claim = new $class( $snak );
 
 		if ( $isStatement ) {
+			$claim->setGuid( Utils::getGuid() );
 			$entity->addStatement( $claim );
 		}
 		else {
