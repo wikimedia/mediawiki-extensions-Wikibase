@@ -94,7 +94,7 @@ class EntityContentFactory {
 	public function getTitleForId( $entityType, $entityId ) {
 		$id = intval( $entityId );
 
-		if ( $id <= 0 ) {
+		if ( $id < 0 ) {
 			throw new MWException( 'entityId must be a positive integer, not ' . var_export( $entityId , true ) );
 		}
 
