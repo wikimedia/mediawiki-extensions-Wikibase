@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABrX///+M\u003d",
+        "filename": "repo/tests/phpunit/includes/store/TermCacheTest.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-10-29T13:19:44Z",
+      "side": 1,
+      "message": "spaces. ;)",
+      "revId": "461ee9f8978a0a6e6e54751f7ce25aa75ce8fe78",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
