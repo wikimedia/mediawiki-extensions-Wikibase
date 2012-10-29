@@ -67,7 +67,11 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 	 * @return Boolean
 	 */
 	equals: function( value ) {
-		return this.value == value;
+		if ( !( value instanceof dv.StringValue ) ) {
+			return false;
+		}
+
+		return this.value === value.getValue();
 	},
 
 	/**

@@ -85,6 +85,8 @@
 
 			QUnit.test( 'testConstructor', function( assert ) { self.testConstructor( assert ); } );
 			QUnit.test( 'testGetSortKey', function( assert ) { self.testGetSortKey( assert ); } );
+			QUnit.test( 'testToJSON', function( assert ) { self.testToJSON( assert ); } );
+			QUnit.test( 'testEquals', function( assert ) { self.testEquals( assert ); } );
 		},
 
 		/**
@@ -131,6 +133,69 @@
 				assert.ok(
 					keyType === 'string' || keyType === 'number',
 					'return value is a string or number'
+				);
+			}
+		},
+
+		/**
+		 * Tests the toJSON method.
+		 *
+		 * @since 0.1
+		 *
+		 * @param {QUnit} assert
+		 */
+		testToJSON: function( assert ) {
+			var
+				instances = this.getInstances(),
+				i,
+				jsonValue;
+
+			for ( i in instances ) {
+				jsonValue = instances[i].toJSON();
+				assert.ok( true ); // TODO: add meaningful assertion
+			}
+		},
+
+		/**
+		 * Tests the getValue method.
+		 *
+		 * @since 0.1
+		 *
+		 * @param {QUnit} assert
+		 */
+		testGetValue: function( assert ) {
+			var
+				instances = this.getInstances(),
+				i,
+				value;
+
+			for ( i in instances ) {
+				value = instances[i].getValue();
+				assert.ok( true ); // TODO: add meaningful assertion
+			}
+		},
+
+		/**
+		 * Tests the equals method.
+		 *
+		 * @since 0.1
+		 *
+		 * @param {QUnit} assert
+		 */
+		testEquals: function( assert ) {
+			var
+				instances = this.getInstances(),
+				i;
+
+			for ( i in instances ) {
+				assert.ok(
+					instances[i].equals( instances[i] ),
+					'instance is equal to itself'
+				);
+
+				assert.ok(
+					!instances[i].equals( 42 ),
+					'instance is not equal to 42'
 				);
 			}
 		}
