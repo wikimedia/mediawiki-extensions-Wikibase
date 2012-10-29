@@ -47,20 +47,23 @@ class ClaimSerializer extends ApiSerializerObject {
 		}
 
 		$serialization['id'] = $claim->getGuid();
+		//$serialization['hash'] = $claim->getHash();
 
 		$snakSerializer = new SnakSerializer( $this->getResult(), $this->options );
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $snakSerializer, $this->getResult(), $this->options );
-		$serialization['qualifiers'] = $snaksSerializer->getSerialized( $claim->getQualifiers() );
+		if ( isset( $this->options ) && in_array( 'qualifiers', $this->options->getProps() ) ) {
+			$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $snakSerializer, $this->getResult(), $this->options );
+			$serialization['qualifiers'] = $snaksSerializer->getSerialized( $claim->getQualifiers() );
+		}
 
 		if ( $claim instanceof Statement ) {
 			$serialization['rank'] = $claim->getRank();
 
-			$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->getResult(), $this->options );
-
-			$serialization['references'] = $snaksSerializer->getSerialized( $claim->getReferences() );
-
+			if ( isset( $this->options ) && in_array( 'references', $this->options->getProps() ) ) {
+				$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->getResult(), $this->options );
+				$serialization['references'] = $snaksSerializer->getSerialized( $claim->getReferences() );
+			}
 		}
 
 		return $serialization;
