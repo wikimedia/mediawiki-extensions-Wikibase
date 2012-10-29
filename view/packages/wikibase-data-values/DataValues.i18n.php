@@ -77,6 +77,14 @@ $messages['es'] = array(
 	'version-datavalues' => 'Valores de datos',
 );
 
+/** French (français)
+ * @author Gomoko
+ */
+$messages['fr'] = array(
+	'datavalues-desc' => "Collection d'objets représentant différences sortes de valeurs",
+	'version-datavalues' => 'DataValues',
+);
+
 /** Galician (galego)
  * @author Toliño
  */
