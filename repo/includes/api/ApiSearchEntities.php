@@ -132,7 +132,7 @@ class ApiSearchEntities extends ApiBase {
 			}
 		}
 		$orderby = "score";
-		array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
+		if ( $entries !== array() ) array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
 
 		// Do continuation and pass offset in search-continue structure if limit isn't 0
 		if ( $params['limit'] !== 0 ) {
