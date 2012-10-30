@@ -23,7 +23,7 @@ final class ClientHooks {
 	 *
 	 * @param \DatabaseUpdater $updater
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
 		$type = $updater->getDB()->getType();
@@ -61,7 +61,7 @@ final class ClientHooks {
 	 *
 	 * @param array $files
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
@@ -87,7 +87,7 @@ final class ClientHooks {
 	 *
 	 * @param callable $reportMessage
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
         public static function onWikibaseDeleteData( $reportMessage ) {
 		$store = ClientStoreFactory::getStore();
@@ -112,7 +112,7 @@ final class ClientHooks {
 	 *
 	 * @param callable $reportMessage
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
 		$store = ClientStoreFactory::getStore();
@@ -140,7 +140,7 @@ final class ClientHooks {
 	 *
 	 * @param Change $change
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
 		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
@@ -223,6 +223,7 @@ final class ClientHooks {
 	 * @param \Title $title  The Title of the page to update
 	 * @param Change $change The Change that caused the update
 	 * @param bool $gone If set, indicates that the change's entity no longer refers to the given page.
+	 *
 	 * @return bool
 	 */
 	protected static function updatePage( \Title $title, Change $change, $gone = false ) {
@@ -234,7 +235,7 @@ final class ClientHooks {
 
 		$rcinfo = $change->getRCInfo();
 
-		if( ! is_array( $rcinfo ) ) {
+		if ( ! is_array( $rcinfo ) ) {
 			return false;
 		}
 
@@ -242,55 +243,20 @@ final class ClientHooks {
 		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
 
 		$fields['entity_type'] = $entityType;
-		unset( $fields['info'] ); //@todo: may want to preserve some stuff from the info field.
+		$fields['source'] = Settings::get( 'repoBase' );
+		unset( $fields['info'] );
 
 		$params = array(
-			'wikibase-repo-change' => $fields,
-			'source' => Settings::get( 'repoBase' ),
-			'rc-external-data' => array(
-				'rc_curid' => $rcinfo['rc_curid'],
-				'rc_this_oldid' => $rcinfo['rc_this_oldid'],
-				'rc_last_oldid' => $rcinfo['rc_last_oldid'],
-				'rc_user' => 0,
-				'rc_user_text' => $rcinfo['rc_user_text'],
-			)
+			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
-
-		if ( isset( $rcinfo['rc_user'] ) ) {
-			$params['rc-external-data']['rc_user'] = $rcinfo['rc_user'];
-		}
-
-		// dummy anon user
-		$user = \User::newFromId( 0 );
 
 		$ip = isset( $fields['ip'] ) ? $fields['ip'] : ''; //@todo: provide this!
 
-		// todo: make nice
-		$comment = 'wikidata change';
-		$rc = ExternalRecentChange::newExternalLogEntry( $fields['time'], $title, $user, '',
-			$ip, null, '', $title, $comment, null );
-
-		$attribs = $rc->getAttributes();
-
-		// dummy anon user
-		$attribs['rc_user'] = $user;
-		$attribs['rc_user_text'] = $rcinfo['rc_user_text'];
-		$attribs['rc_type'] = RC_EXTERNAL;
-
-		// todo: provide these
-		$attribs['rc_minor'] = ( isset( $fields['minor'] ) && $fields['minor'] ) ? 1 : 0;
-		$attribs['rc_bot'] = ( isset( $fields['bot'] ) && $fields['bot'] ) ? 1 : 0;
-
-		$attribs['rc_old_len'] = $title->getLength();
-		$attribs['rc_new_len'] = $title->getLength();
-		$attribs['rc_this_oldid'] = $title->getLatestRevID();
-		$attribs['rc_last_oldid'] = $title->getLatestRevID();
-		$attribs['rc_params'] = serialize( $params );
-
-		$rc->setAttribs( $attribs );
+		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
 		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
 		$rc->save();
+
 		return true;
 	}
 
@@ -309,10 +275,8 @@ final class ClientHooks {
 	public static function onOldChangesListRecentChangesLine( &$changesList, &$s, $rc ) {
 		$rcType = $rc->getAttribute( 'rc_type' );
 		if ( $rcType == RC_EXTERNAL ) {
-			// todo: check if external source is wikibase
 			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
-			if ( array_key_exists( 'rc-external-data', $params ) &&
-				array_key_exists( 'wikibase-repo-change', $params ) ) {
+			if ( array_key_exists( 'wikibase-repo-change', $params ) ) {
 				$line = ExternalChangesList::changesLine( $changesList, $rc );
 				$s = $line;
 			}
@@ -330,7 +294,7 @@ final class ClientHooks {
 	 * @param string $text
 	 * @param \StripState $stripState
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
 		global $wgLanguageCode;
@@ -394,7 +358,7 @@ final class ClientHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
 		$settings = array_merge(
@@ -430,7 +394,7 @@ final class ClientHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
 		$title = $out->getTitle();
@@ -450,7 +414,7 @@ final class ClientHooks {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
 		if ( empty( $template->data['language_urls'] ) ) {
