@@ -22,6 +22,7 @@ final class Autocomment {
 	 * Typically this could be links that moves to and highlight some
 	 * section within the item itself.
 	 *
+	 * @param $data
 	 * @param string $comment reference to the finalized autocomment
 	 * @param string $pre the string before the autocomment
 	 * @param string $auto the autocomment unformatted
@@ -193,7 +194,7 @@ final class Autocomment {
 	 *
 	 * @param string $comment initial part to go in a comment
 	 * @param string $summary final part that is a easilly trucable string
-	 * @param string $lang language to use when truncating the string
+	 * @param bool|string $lang language to use when truncating the string
 	 * @param int $length total length of the string
 	 *
 	 * @return string to be used for the summary
@@ -227,6 +228,8 @@ final class Autocomment {
 	 *
 	 * @param ApiAutocomment $module an api module that support ApiAutocomment
 	 *
+	 * @param null|array $params
+	 * @param null|EntityContent $entityContent
 	 * @return string to be used for the summary
 	 */
 	public static function buildApiSummary( $module, $params = null, $entityContent = null ) {

@@ -38,8 +38,9 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 *
-	 * @param PropertyContent $property
-	 *
+	 * @param \Wikibase\EntityContent|\Wikibase\PropertyContent $property
+	 * @param \Language $lang
+	 * @param bool $editable
 	 * @return string
 	 */
 	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true ) {

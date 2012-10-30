@@ -21,7 +21,7 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 	 * @see  ApiModifyEntity::getRequiredPermissions()
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $item, $params );
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 
 		$permissions[] = 'linktitles-update';
 		return $permissions;
@@ -126,7 +126,6 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 		$this->addSiteLinksToResult( $return, 'entity' );
 
 		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-		$summary = '';
 
 		if ( $itemContent === null ) {
 			// to not have an ItemContent isn't really bad at this point

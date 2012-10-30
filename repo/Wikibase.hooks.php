@@ -673,7 +673,7 @@ final class RepoHooks {
 	 *
 	 * @param \DummyLinker $skin
 	 * @param Title $target
-	 * @param string $text
+	 * @param string $html
 	 * @param array $customAttribs
 	 * @param string $query
 	 * @param array $options
