@@ -168,6 +168,10 @@ $messages['gsw'] = array(
  */
 $messages['he'] = array(
 	'wbc-desc' => 'לקוח להרחבה Wikibase',
+	'wbc-comment-langlinks-delete' => 'הפריט המשויך בוויקינתונים נמחק. קישורי שפה הוסרו.',
+	'wbc-comment-langlinks-remove' => 'הקישור של הדף הזה לפריט בוויקינתונים בוטל. קישורי השפה הוסרו.',
+	'wbc-comment-langlinks-restore' => 'הפריט המשויך בוויקינתונים שחזר. קישורי השפה שוחזרו',
+	'wbc-comment-langlinks-update' => 'קישורי השפה עודכנו',
 	'wbc-editlinks' => 'עריכת קישורים',
 	'wbc-editlinkstitle' => 'עריכת קישורים בין־לשוניים',
 );

@@ -567,6 +567,11 @@ $messages['be-tarask'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'Метка:',
 	'wikibase-itemdisambiguation-submit' => 'Шукаць',
 	'special-createitem' => 'Стварыць новы прадмет',
+	'wikibase-createitem-fieldset' => 'Стварыць новы прадмет',
+	'wikibase-createentity-label' => 'Метка:',
+	'wikibase-createentity-description' => 'Апісаньне:',
+	'wikibase-createentity-submit' => 'Стварыць',
+	'special-setlabel' => 'Вызначце метку',
 );
 
 /** Breton (brezhoneg)
@@ -589,13 +594,14 @@ $messages['br'] = array(
 
 /** Catalan (català)
  * @author Pginer
+ * @author Toniher
  * @author පසිඳු කාවින්ද
  */
 $messages['ca'] = array(
-	'wikibase-edit' => 'Editar',
-	'wikibase-save' => 'Desa',
-	'wikibase-cancel' => 'cancel·lar',
-	'wikibase-add' => 'afegir',
+	'wikibase-edit' => 'edita',
+	'wikibase-save' => 'desa',
+	'wikibase-cancel' => 'cancel·la',
+	'wikibase-add' => 'afegeix',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
 	'wikibase-tooltip-error-details' => 'Detalls',
 	'wikibase-itembytitle-lookup-page' => 'Pàgina:',
@@ -727,15 +733,15 @@ $messages['de'] = array(
 Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>, um herauszufinden was mit ihm passiert ist.',
 	'wikibase-noentity-createone' => 'Du kannst auch [[$1|ein neues erstellen]].',
 	'wikibase-item-summary-wbsetitem' => 'Erstellte ein neues Datenelement',
-	'wikibase-item-summary-wbsetlabel-set' => 'Änderte [$2] Bezeichnung',
-	'wikibase-item-summary-wbsetlabel-remove' => 'Entfernte [$2] Bezeichnung',
-	'wikibase-item-summary-wbsetdescription-set' => 'Änderte [$2] Beschreibung',
-	'wikibase-item-summary-wbsetdescription-remove' => 'Entfernte [$2] Beschreibung',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Fügte websitespezifischen [$2] Link hinzu',
+	'wikibase-item-summary-wbsetlabel-set' => 'Änderte Bezeichnung für [$2]',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Entfernte Bezeichnung für [$2]',
+	'wikibase-item-summary-wbsetdescription-set' => 'Änderte Beschreibung für [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Entfernte Beschreibung für [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Fügte websitespezifischen Link für [$2] hinzu',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Entfernte websitespezifischen [$2] Link',
-	'wikibase-item-summary-wbsetaliases-set' => 'Legte [$2] {{PLURAL:$1|Alias|Aliasse}} fest',
-	'wikibase-item-summary-wbsetaliases-add-remove' => 'Entfernte sowie fügte [$2] {{PLURAL:$1|Alias|Aliasse}} hinzu',
-	'wikibase-item-summary-wbsetaliases-add' => 'Fügte [$2] {{PLURAL:$1|Alias|Aliasse}} hinzu',
+	'wikibase-item-summary-wbsetaliases-set' => 'Legte {{PLURAL:$1|Alias|Aliasse}} für [$2] fest',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Entfernte sowie fügte {{PLURAL:$1|Alias|Aliasse}} für [$2] hinzu',
+	'wikibase-item-summary-wbsetaliases-add' => 'Fügte {{PLURAL:$1|Alias|Aliasse}} für [$2] hinzu',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Entfernte [$2] {{PLURAL:$1|Alias|Aliasse}}',
 	'wikibase-item-summary-wblinktitles-connect' => 'Verbundene [$2↔$3] {{PLURAL:$1|Seite|Seiten}}',
 	'content-model-1001' => 'Wikibase-Datenelement',
@@ -1231,6 +1237,7 @@ $messages['fa'] = array(
  * @author Beluga
  * @author Crt
  * @author Nike
+ * @author Stryn
  */
 $messages['fi'] = array(
 	'wikibase-edit' => 'muokkaa',
@@ -1239,9 +1246,11 @@ $messages['fi'] = array(
 	'wikibase-add' => 'lisää',
 	'wikibase-save-inprogress' => 'Tallennetaan...',
 	'wikibase-remove-inprogress' => 'Poistetaan...',
+	'wikibase-sitelinks' => 'Luettelo tähän kohteeseen linkitetyistä sivuista',
 	'wikibase-remove' => 'poista',
 	'wikibase-error-autocomplete-response' => 'Palvelin vastasi: $1',
 	'wikibase-itembytitle-submit' => 'Etsi',
+	'special-createitem' => 'Luo uusi nimike',
 	'wikibase-createentity-submit' => 'Luo',
 	'wikibase-setlabel-id' => 'Tunniste',
 );
@@ -1555,7 +1564,9 @@ $messages['he'] = array(
 	'wikibase-add' => 'הוספה',
 	'wikibase-save-inprogress' => 'מתבצעת שמירה...',
 	'wikibase-remove-inprogress' => 'מתבצעת הסרה...',
+	'wikibase-label-empty' => 'טרם הוגדרה תווית.',
 	'wikibase-label-edit-placeholder' => 'נא להזין תווית',
+	'wikibase-description-empty' => 'טרם הוגדר תיאור.',
 	'wikibase-description-edit-placeholder' => 'נא להזין תיאור',
 	'wikibase-sitelink-site-edit-placeholder' => 'אתר',
 	'wikibase-sitelink-page-edit-placeholder' => 'ערך',
@@ -1643,6 +1654,15 @@ $messages['he'] = array(
 	'wikibase-createentity-label' => 'תווית:',
 	'wikibase-createentity-description' => 'תיאור:',
 	'wikibase-createentity-submit' => 'יצירה',
+	'special-setlabel' => 'הגדרת תווית',
+	'wikibase-setlabel-introfull' => 'נא לכתוב תווית ב$2 עבור [[$1}}.', # Fuzzy
+	'wikibase-setlabel-intro' => 'הטופס הזה מאפשר לך להגדיר תווית לישות. יש לספק את המזהה של הישות (למשל Q23), את קוד השפה (למשל en) ואת התווית.',
+	'wikibase-setlabel-id' => 'מזהה',
+	'wikibase-setlabel-language' => 'שפה',
+	'wikibase-setlabel-label' => 'תווית',
+	'wikibase-setlabel-submit' => 'הגדרת תווית',
+	'wikibase-setlabel-invalid-langcode' => 'מזהה השפה "$1" אינו ידוע. נא להשתמש במזהה שפה שידוע למערכת, כגון "en".',
+	'wikibase-setlabel-invalid-id' => 'המזהה "$1" אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.',
 	'special-listdatatypes' => 'רשימת כל סוגי הנתונים',
 	'wikibase-listdatatypes-intro' => 'זוהי רשימה של כל סוגי הנתונים שמשמשים בהתקנה הזאת:',
 	'wikibase-api-patch-incomplete' => 'מסתבר שהטלאי שיוצר אינו שלם.',
@@ -1663,7 +1683,20 @@ $messages['he'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'הוספה והסרה של {{plural:$1|כינוי|כינויים}} עבור השפה [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => 'הוספה של {{plural:$1|כינוי|כינויים}} עבור השפה [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'הסרה של {{plural:$1|כינוי|כינויים}} עבור [$2]',
+	'wikibase-item-summary-wblinktitles-connect' => 'קישור {{plural:$1|דף|דפים}} בין השפות [$2↔$3]',
+	'wikibase-item-summary-wbcreateclaim-value' => 'יצירת {{plural:$1|טענת ערך|טענות ערכים}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'יצרת {{plural:$1|טענה ללא ערך|טענות ללא ערך}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'יצירת {{plural:$1|טענה|טענות}} עם ערך בלתי־ידוע',
 	'content-model-1001' => 'פריט ויקיבייס',
+);
+
+/** Croatian (hrvatski)
+ * @author Denny
+ */
+$messages['hr'] = array(
+	'wikibase-edit' => 'uredi',
+	'wikibase-save' => 'spremi',
+	'wikibase-cancel' => 'odustani',
 );
 
 /** Upper Sorbian (hornjoserbsce)
@@ -3040,7 +3073,7 @@ $messages['pl'] = array(
 	'wikibase-sitelink-site-edit-placeholder' => 'strona',
 	'wikibase-sitelink-page-edit-placeholder' => 'artykuł',
 	'wikibase-alias-edit-placeholder' => 'wpisz nazwę alternatywną',
-	'wikibase-label-input-help-message' => 'Podaj tytuł tego zbioru danych w języku $1m.', # Fuzzy
+	'wikibase-label-input-help-message' => 'Podaj tytuł tego zbioru danych w języku: $1.',
 	'wikibase-description-input-help-message' => 'Napisz krótki opis w języku: $1.',
 	'wikibase-sitelinks' => 'Lista stron mających łącze do tego elementu',
 	'wikibase-sitelinks-sitename-columnheading' => 'Język',
@@ -3625,6 +3658,12 @@ $messages['uz'] = array(
 	'wikibase-cancel' => 'voz kech',
 	'wikibase-sitelink-page-edit-placeholder' => 'maqola',
 	'wikibase-remove' => 'oʻchirish',
+	'wikibase-itembytitle-lookup-page' => 'Sahifa:',
+	'wikibase-itembytitle-submit' => 'Qidiruv',
+	'wikibase-itemdisambiguation-lookup-language' => 'Til:',
+	'wikibase-itemdisambiguation-submit' => 'Qidiruv',
+	'wikibase-createentity-submit' => 'Yaratish',
+	'wikibase-setlabel-language' => 'Til',
 );
 
 /** Vietnamese (Tiếng Việt)

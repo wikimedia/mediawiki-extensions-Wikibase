@@ -136,6 +136,7 @@ $messages['he'] = array(
 	'wikibaselib-entity-property' => 'מאפיין',
 	'wikibaselib-entity-query' => 'שאילתה',
 	'datatypes-type-wikibase-item' => 'פריט',
+	'datatypes-type-commonsMedia' => 'קובץ מדיה בוויקישיתוף',
 );
 
 /** Upper Sorbian (hornjoserbsce)
