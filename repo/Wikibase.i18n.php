@@ -1229,7 +1229,6 @@ $messages['fa'] = array(
 
 /** Finnish (suomi)
  * @author Beluga
- * @author Crt
  * @author Nike
  */
 $messages['fi'] = array(
@@ -1240,10 +1239,7 @@ $messages['fi'] = array(
 	'wikibase-save-inprogress' => 'Tallennetaan...',
 	'wikibase-remove-inprogress' => 'Poistetaan...',
 	'wikibase-remove' => 'poista',
-	'wikibase-error-autocomplete-response' => 'Palvelin vastasi: $1',
 	'wikibase-itembytitle-submit' => 'Etsi',
-	'wikibase-createentity-submit' => 'Luo',
-	'wikibase-setlabel-id' => 'Tunniste',
 );
 
 /** French (français)
@@ -3614,17 +3610,6 @@ $messages['ur'] = array(
 	'wikibase-itemdisambiguation-lookup-label' => 'لیبل:',
 	'wikibase-itemdisambiguation-submit' => 'تلاش',
 	'wikibase-restoreold' => 'بحال',
-);
-
-/** Uzbek (oʻzbekcha)
- * @author Casual
- */
-$messages['uz'] = array(
-	'wikibase-edit' => 'tahrirlash',
-	'wikibase-save' => 'saqla',
-	'wikibase-cancel' => 'voz kech',
-	'wikibase-sitelink-page-edit-placeholder' => 'maqola',
-	'wikibase-remove' => 'oʻchirish',
 );
 
 /** Vietnamese (Tiếng Việt)

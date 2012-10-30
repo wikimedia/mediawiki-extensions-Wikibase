@@ -187,7 +187,7 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 	 *
 	 * @since 0.1
 	 *
-	 * @param MapHasher $mapHasher
+	 * @internal param \Wikibase\MapHasher $mapHasher
 	 *
 	 * @return string
 	 */

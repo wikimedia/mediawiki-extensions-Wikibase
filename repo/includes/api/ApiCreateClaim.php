@@ -47,7 +47,6 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 * @see  ApiAutocomment::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		$parts = array();
 		return Autocomment::formatAutoSummary(
 			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
 		);

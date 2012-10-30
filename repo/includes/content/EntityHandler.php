@@ -76,7 +76,6 @@ abstract class EntityHandler extends \ContentHandler {
 				break;
 			default:
 				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
-				break;
 		}
 
 		return $blob;
@@ -138,6 +137,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * This implementation returns true if and only if the given title's namespace
 	 * is the same as the one returned by $this->getEntityNamespace().
 	 *
+	 * @param \Title $title
 	 * @return bool true if $title represents a page in the appropriate entity namespace.
 	 */
 	public function canBeUsedOn( Title $title ) {

@@ -288,7 +288,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 		foreach ( $failingData as $data ) {
 			try {
-				list($res,,) = $this->doApiRequest(
+				$this->doApiRequest(
 					array(
 						'action' => 'wbsetitem',
 						'reason' => 'Some reason',

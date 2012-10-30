@@ -98,6 +98,7 @@ class ItemSerializer extends EntitySerializer {
 	 *
 	 * @since 0.2
 	 *
+	 * @param Item $item
 	 * @return array
 	 */
 	protected function getSortedSiteLinks( Item $item ) {
