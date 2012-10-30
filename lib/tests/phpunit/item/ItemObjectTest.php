@@ -73,7 +73,10 @@ class ItemObjectTest extends EntityObjectTest {
 		$this->assertInstanceOf( 'Wikibase\Item', $instance );
 
 		$exception = null;
-		try { $instance = new ItemObject( 'Exception throws you!' ); } catch ( \Exception $exception ){}
+		try {
+			new ItemObject( 'Exception throws you!' );
+		} catch ( \Exception $exception )
+		{}
 		$this->assertInstanceOf( '\Exception', $exception );
 	}
 

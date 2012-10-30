@@ -91,6 +91,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	 *
 	 * @param string|integer $propertyId
 	 *
+	 * @throws \MWException
 	 * @return array of object
 	 * @throws MWException
 	 */

@@ -223,10 +223,11 @@ final class ClientHooks {
 	 * @param \Title $title  The Title of the page to update
 	 * @param Change $change The Change that caused the update
 	 * @param bool $gone If set, indicates that the change's entity no longer refers to the given page.
+	 * @return bool
 	 */
 	protected static function updatePage( \Title $title, Change $change, $gone = false ) {
 		if ( !$title->exists() ) {
-			return;
+			return false;
 		}
 
 		$title->invalidateCache();
@@ -239,9 +240,6 @@ final class ClientHooks {
 
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
 		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
-
-		/* @var Entity $entity */
-		$entity = $fields['info']['entity'];
 
 		$fields['entity_type'] = $entityType;
 		unset( $fields['info'] ); //@todo: may want to preserve some stuff from the info field.
@@ -293,6 +291,7 @@ final class ClientHooks {
 
 		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
 		$rc->save();
+		return true;
 	}
 
 	/**
