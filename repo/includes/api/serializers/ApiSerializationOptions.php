@@ -213,6 +213,8 @@ class EntitySerializationOptions extends ApiSerializationOptions {
 	 * @since 0.2
 	 *
 	 * @param string $sortDirection Element of the EntitySerializationOptions::SORT_ enum
+	 * @throws \MWException
+	 * @return void
 	 */
 	public function setSortDirection( $sortDirection ) {
 		if ( !in_array( $sortDirection, array( self::SORT_ASC, self::SORT_DESC, self::SORT_NONE ) ) ) {

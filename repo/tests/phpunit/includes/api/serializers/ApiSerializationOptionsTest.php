@@ -36,7 +36,7 @@ use Wikibase\ApiSerializationOptions;
 class ApiSerializationOptionsTest extends \MediaWikiTestCase {
 
 	public function testConstructor() {
-		$instance = new ApiSerializationOptions();
+		new ApiSerializationOptions();
 		$this->assertTrue( true );
 	}
 

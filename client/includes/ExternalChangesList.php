@@ -18,7 +18,6 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	public static function changesLine( &$cl, $rc ) {
-		$repoBase = Settings::get( 'repoBase' );
 		$userName = $rc->getAttribute( 'rc_user_text' );
 
 		$params = unserialize( $rc->getAttribute( 'rc_params' ) );
@@ -75,7 +74,7 @@ class ExternalChangesList {
 			$line .= ' (' . self::entityLink( $entityData )  . ')';
 		}
 
-		$line .= $cl->insertTimestamp( $line, $rc );
+		$cl->insertTimestamp( $line, $rc );
 
 		if ( \User::isIP( $userName ) ) {
 			$userlinks = self::userContribsLink( $userName, $userName );
@@ -182,7 +181,7 @@ class ExternalChangesList {
 	 * @param string $userName
 	 * @param string $text
 	 *
-	 * return string
+	 * @return string
 	 */
 	protected static function userContribsLink( $userName, $text ) {
 		$link = "Special:Contributions/$userName";
@@ -204,10 +203,9 @@ class ExternalChangesList {
 	/**
 	 * @since 0.2
 	 *
-	 * @param \RecentChange $rc
 	 * @param array $entityData
 	 *
-	 * return string
+	 * @return string
 	 */
 	protected static function entityLink( $entityData ) {
 		$entityText = self::titleTextFromEntityData( $entityData );
@@ -254,7 +252,7 @@ class ExternalChangesList {
 	 *
 	 * @param array $entityData
 	 * @param bool $namespace include namespace in title, such as Item:Q1
-	 * return string
+	 * @return string
 	 */
 	protected static function titleTextFromEntityData( $entityData, $namespace = true ) {
 		$prefix = null;

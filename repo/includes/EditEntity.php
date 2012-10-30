@@ -538,7 +538,7 @@ class EditEntity {
 	 * TODO: Change this into an instance level member and store the ids for later lookup.
 	 * Use those ids for full lookup of the content and create applicable diffs and check if they are empty.
 	 *
-	 * @param int|null $user the users numeric identifier
+	 * @param int|bool $userId the users numeric identifier
 	 * @param int|bool $lastRevId the revision the user supplied (or false)
 	 *
 	 * @return bool

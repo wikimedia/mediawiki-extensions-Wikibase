@@ -294,7 +294,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 
 		$token = $res['login']['token'];
 
-		list($res,,$session) = $this->doApiRequest(
+		list(,,$session) = $this->doApiRequest(
 			array(
 				'action' => 'login',
 				'lgtoken' => $token,
