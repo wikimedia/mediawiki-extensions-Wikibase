@@ -253,6 +253,8 @@ final class RepoHooks {
 				);
 			}
 
+			$bot = in_array( 'bot', $user->getRights() );
+
 			$change->setFields( array(
 				'revision_id' => $revision->getId(),
 				'user_id' => $user->getId(),
@@ -263,6 +265,7 @@ final class RepoHooks {
 			$change->setRCInfo( array(
 				'rc_user_id' => $revision->getUser(),
 				'rc_user_text' => $revision->getUserText(),
+				'rc_bot' => $bot,
 				'rc_curid' => $revision->getPage(),
 				'rc_this_oldid' => $revision->getId(),
 				'rc_last_oldid' => $revision->getParentId(),
