@@ -263,6 +263,7 @@ final class RepoHooks {
 			$change->setRCInfo( array(
 				'rc_user_id' => $revision->getUser(),
 				'rc_user_text' => $revision->getUserText(),
+				'rc_bot' => in_array( 'bot', $user->getRights() ),
 				'rc_curid' => $revision->getPage(),
 				'rc_this_oldid' => $revision->getId(),
 				'rc_last_oldid' => $revision->getParentId(),

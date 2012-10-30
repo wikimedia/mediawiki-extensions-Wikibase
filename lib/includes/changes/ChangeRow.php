@@ -207,6 +207,7 @@ class ChangeRow extends ORMRow implements Change {
 		$validKeys = array(
 			'rc_comment',
 			'rc_curid',
+			'rc_bot',
 			'rc_this_oldid',
 			'rc_last_oldid',
 			'rc_user',
