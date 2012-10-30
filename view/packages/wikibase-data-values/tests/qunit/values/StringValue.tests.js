@@ -48,20 +48,4 @@
 
 	test.runTests( 'dataValues.StringValue' );
 
-	// TODO
-//	QUnit.test( 'constructor, getValue, getSortKey, getJSON', function() {
-//		var values = [
-//			'',
-//			'foo',
-//			'foo bar baz'
-//		];
-//
-//		for ( var value in values ) {
-//			var instance = new dv.StringValue( value );
-//			QUnit.strictEqual( instance.getValue(), value );
-//			QUnit.strictEqual( instance.getSortKey(), value );
-//			QUnit.strictEqual( instance.toJSON(), value );
-//		}
-//	} );
-
 }( dataValues, jQuery, QUnit ) );
