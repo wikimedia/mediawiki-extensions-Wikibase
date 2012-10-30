@@ -52,14 +52,18 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 	 * @since 0.1
 	 */
 	public function execute() {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
 		if ( $params['fromsite'] === $params['tosite'] ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-fromsite-eq-tosite' )->text(), 'fromsite-eq-tosite' );
 		}
 
 		if ( !( strlen( $params['fromtitle'] ) > 0 && strlen( $params['totitle'] ) > 0 ) ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-fromtitle-and-totitle' )->text(), 'fromtitle-and-totitle' );
 		}
 
@@ -71,6 +75,7 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 		// This must be tested now
 		$fromPage = $fromSite->normalizePageName( $params['fromtitle'] );
 		if ( $fromPage === false ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 		}
 		// This is used for testing purposes later
@@ -82,6 +87,7 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 		// This must be tested now
 		$toPage = $toSite->normalizePageName( $params['totitle'] );
 		if ( $toPage === false ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 		}
 		// This is used for testing purposes later
@@ -116,10 +122,12 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 		}
 		elseif ( $fromId === $toId ) {
 			// no-op
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-common-item' )->text(), 'common-item' );
 		}
 		else {
 			// dissimilar items
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-no-common-item' )->text(), 'no-common-item' );
 		}
 
@@ -169,6 +177,7 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 			'success',
 			(int)$status->isOK()
 		);
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

@@ -81,6 +81,7 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$entityType = static::VIEW_TYPE;
@@ -135,6 +136,7 @@ abstract class EntityView extends \ContextSource {
 			}, 7000 );
 		' );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 

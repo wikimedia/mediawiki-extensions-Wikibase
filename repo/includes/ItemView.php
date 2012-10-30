@@ -42,11 +42,13 @@ class ItemView extends EntityView {
 	 * @see EntityView::getInnerHtml
 	 */
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 		$html = parent::getInnerHtml( $entity, $lang, $editable );
 
 		// add site-links to default entity stuff
 		$html .= $this->getHtmlForSiteLinks( $entity, $lang, $editable );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
@@ -61,6 +63,8 @@ class ItemView extends EntityView {
 	 * @return string
 	 */
 	public function getHtmlForSiteLinks( EntityContent $item, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$siteLinks = $item->getItem()->getSiteLinks();
 		$html = '';
 
@@ -189,6 +193,7 @@ class ItemView extends EntityView {
 
 		$html .= Html::closeElement( 'table' );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 

@@ -59,6 +59,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 * @since 0.2
 	 */
 	public function execute() {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 		$this->checkParameterRequirements();
 
 		$claim = $this->addClaim();
@@ -71,6 +72,8 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 			'claim',
 			$serializedClaim
 		);
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**
@@ -85,8 +88,11 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 * @throws MWException
 	 */
 	protected function addClaim() {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$entityContent = $this->getEntityContent();
 		if ( $entityContent === null ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
 		}
 
@@ -104,6 +110,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 			$class = 'Wikibase\ClaimObject';
 		}
 		else {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			throw new MWException( 'Entity does not support adding Claim objects' );
 		}
 
@@ -129,6 +136,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 			isset( $params['token'] ) ? $params['token'] : false
 		);
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $claim;
 	}
 
