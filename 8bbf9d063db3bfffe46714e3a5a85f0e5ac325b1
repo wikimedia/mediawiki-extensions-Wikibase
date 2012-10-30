@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAB1X///90\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T19:40:01Z",
+      "side": 1,
+      "message": "should be -In",
+      "revId": "8bbf9d063db3bfffe46714e3a5a85f0e5ac325b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB1X///9k\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T19:40:01Z",
+      "side": 1,
+      "message": "Should be -In",
+      "revId": "8bbf9d063db3bfffe46714e3a5a85f0e5ac325b1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
