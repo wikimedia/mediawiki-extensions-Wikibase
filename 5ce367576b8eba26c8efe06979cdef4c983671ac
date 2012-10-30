@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABzn////A\u003d",
+        "filename": "lib/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "Should probably be string|null, false just clutter things up",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABzn////I\u003d",
+        "filename": "lib/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "array|null",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABzn////E\u003d",
+        "filename": "lib/includes/Autocomment.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "EntityContent|null",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABz3////c\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "We don\u0027t handle boolean in general, only the specific value false",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB0H////c\u003d",
+        "filename": "repo/includes/api/ApiLinkTitles.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "Nice one! :)",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABz3////Y\u003d",
+        "filename": "repo/includes/api/serializers/ApiSerializationOptions.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "why? could be nice to always return something though..",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB0H////8\u003d",
+        "filename": "repo/includes/content/ItemContent.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "Should perhaps have a comment about the use of false and how it is interpreted when it comes to the bitfields.. Not sure. That is we assume false to be zero for all bitfields, that is if any bitfield is set then we have a tru and if all are unset we have a false.",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB0H////0\u003d",
+        "filename": "repo/includes/specials/SpecialNewProperty.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "Not sure if this comment makes sense anymore",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB0H////4\u003d",
+        "filename": "repo/includes/specials/SpecialNewProperty.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "Here we need $lang, but the implementation is partial",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB0H////w\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "The actual string to set as a label",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB0H////s\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "Why mark it as void?",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB0H////g\u003d",
+        "filename": "repo/maintenance/importProperties.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-10-30T13:57:16Z",
+      "side": 1,
+      "message": "This should be called $links ... ;/",
+      "revId": "5ce367576b8eba26c8efe06979cdef4c983671ac",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
