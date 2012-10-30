@@ -18,11 +18,11 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	public static function changesLine( &$cl, $rc ) {
+
 		$repoBase = Settings::get( 'repoBase' );
 		$userName = $rc->getAttribute( 'rc_user_text' );
 
 		$params = unserialize( $rc->getAttribute( 'rc_params' ) );
-		$rcInfo = $params['rc-external-data'];
 		$entityData = $params['wikibase-repo-change'];
 		$entityTitle = self::titleTextFromEntityData( $entityData );
 
@@ -31,9 +31,9 @@ class ExternalChangesList {
 		// build a diff link from an RC
 		$diffParams = array(
 			'title' => $entityTitle,
-			'curid' => $rcInfo['rc_curid'],
-			'diff' => $rcInfo['rc_this_oldid'],
-			'oldid' => $rcInfo['rc_last_oldid']
+			'curid' => $entityData['rc_curid'],
+			'diff' => $entityData['rc_this_oldid'],
+			'oldid' => $entityData['rc_last_oldid']
 		);
 
 		$diffQuery = wfArrayToCgi( $diffParams );
@@ -52,7 +52,7 @@ class ExternalChangesList {
 
 		$historyQuery = wfArrayToCgi( array(
 			'title' => $entityTitle,
-			'curid' => $rcInfo['rc_curid'],
+			'curid' => $entityData['rc_curid'],
 			'action' => 'history'
 		) );
 		$historyUrl = $repoIndex . '?' . $historyQuery;
