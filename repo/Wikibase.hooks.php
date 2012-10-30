@@ -48,11 +48,14 @@ final class RepoHooks {
 	 * @throws MWException
 	 */
 	public static function onSetupAfterCache() {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		global $wgNamespaceContentModels;
 
 		$namespaces = Settings::get( 'entityNamespaces' );
 
 		if ( empty( $namespaces ) ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			throw new MWException( 'Wikibase: Incomplete configuration: '
 				. '$wgWBSettings["entityNamespaces"] has to be set to an array mapping content model IDs to namespace IDs. '
 				. 'See ExampleSettings.php for details and examples.');
@@ -64,6 +67,7 @@ final class RepoHooks {
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -187,6 +191,8 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		global $wgNamespaceContentModels;
 
 		// TODO: make this a little nicer
@@ -199,6 +205,7 @@ final class RepoHooks {
 			$pageLanguage = $language;
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -217,10 +224,13 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onNamespaceIsMovable( $ns, &$movable ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		if ( Utils::isEntityNamespace( $ns ) ) {
 			$movable = false;
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -238,6 +248,8 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		if ( EntityContentFactory::singleton()->isEntityContentModel( $article->getContent()->getModel() ) ) {
 			/**
 			 * @var $newEntity Entity
@@ -272,6 +284,7 @@ final class RepoHooks {
 			ChangeNotifier::singleton()->handleChange( $change );
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -295,13 +308,16 @@ final class RepoHooks {
 	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
 		\Content $content = null, \LogEntryBase $logEntry = null
 	) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( $content === null ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			throw new MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
 		}
 
 		// Bail out if we are not in an entity namespace
 		if ( !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 		$entity = $content->getEntity();
@@ -325,6 +341,7 @@ final class RepoHooks {
 
 		ChangeNotifier::singleton()->handleChange( $change );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -340,9 +357,12 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onArticleUndelete( Title $title, $created, $comment ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$entityContentFactory = EntityContentFactory::singleton();
 
 		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
@@ -364,6 +384,7 @@ final class RepoHooks {
 
 		ChangeNotifier::singleton()->handleChange( $change );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -382,6 +403,8 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onGetPreferences( User $user, array &$preferences ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$preferences['wb-languages'] = array(
 			'type' => 'multiselect',
 			'usecheckboxes' => false,
@@ -391,6 +414,7 @@ final class RepoHooks {
 			'prefix' => 'wb-languages-',
 		);
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -403,10 +427,13 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onUserGetDefaultOptions( array &$defaultOptions ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		// pre-select default language in the list of fallback languages
 		$defaultLang = $defaultOptions['language'];
 		$defaultOptions[ 'wb-languages-' . $defaultLang ] = 1;
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -480,6 +507,8 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onPageHistoryLineEnding( \HistoryPager $history, &$row, &$s, array &$classes  ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$article = $history->getArticle();
 		$rev = new Revision( $row );
 
@@ -500,6 +529,7 @@ final class RepoHooks {
 			$s .= " " . $history->msg( 'parentheses' )->rawParams( $link )->escaped();
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -515,6 +545,8 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onPageTabs( \SkinTemplate &$sktemplate, array &$links ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$title = $sktemplate->getTitle();
 		$request = $sktemplate->getRequest();
 
@@ -550,6 +582,7 @@ final class RepoHooks {
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -564,6 +597,8 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$store = StoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBStores'] );
 
@@ -573,6 +608,7 @@ final class RepoHooks {
 
 		$reportMessage( "done!\n" );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -587,6 +623,8 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onWikibaseDeleteData( $reportMessage ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$reportMessage( 'Deleting data from changes table...' );
 
 		$dbw = wfGetDB( DB_MASTER );
@@ -624,6 +662,7 @@ final class RepoHooks {
 
 		$reportMessage( "done!\n" );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -640,6 +679,8 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		if ( EntityContentFactory::singleton()->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
 			$entityPage = new WikiPage( $out->getTitle() );
@@ -663,6 +704,8 @@ final class RepoHooks {
 				}
 			}
 		}
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -681,6 +724,8 @@ final class RepoHooks {
 	 * @return bool true
 	 */
 	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query, &$options, &$ret ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		//NOTE: the model returned by Title::getContentModel() is not reliable, see bug 37209
 		$model = $target->getContentModel();
 		$entityModels = EntityContentFactory::singleton()->getEntityContentModels();
@@ -691,6 +736,7 @@ final class RepoHooks {
 			// we only want to handle links to Wikibase entities differently here
 			|| !in_array( $model, $entityModels )
 		) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
@@ -702,6 +748,7 @@ final class RepoHooks {
 			// no special page, we don't handle this for now
 			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
 			//       users language so they are cache independent.
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
@@ -712,6 +759,7 @@ final class RepoHooks {
 		$page = new WikiPage( $target );
 		if ( is_null( $page ) ) {
 			// Failed, can't continue. This should not happen.
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 		$content = $page->getContent();
@@ -721,12 +769,14 @@ final class RepoHooks {
 
 			// Due to bug 37209, we may also get non-entity content here, despite checking
 			// Title::getContentModel up front.
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 		$entity = $content->getEntity();
 		if ( is_null( $entity ) ) {
 			// Failed, can't continue. This could happen because there is an illegal structure that could
 			// not be parsed.
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
@@ -785,6 +835,7 @@ final class RepoHooks {
 		// add wikibase styles in all cases, so we can format the link properly:
 		$wgOut->addModuleStyles( array( 'wikibase.common' ) );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -804,6 +855,8 @@ final class RepoHooks {
 	 * @return bool true to continue execution, false to abort and with $message as an error message.
 	 */
 	public static function onApiCheckCanExecute( \ApiBase $module, User $user, &$message ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		if ( $module instanceof \ApiEditPage ) {
 			$params = $module->extractRequestParams();
 			$pageObj = $module->getTitleOrPageId( $params );
@@ -822,11 +875,13 @@ final class RepoHooks {
 						$pageObj->getTitle()->getNsText()
 					);
 
+					wfProfileOut( "Wikibase-" . __METHOD__ );
 					return false;
 				}
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 

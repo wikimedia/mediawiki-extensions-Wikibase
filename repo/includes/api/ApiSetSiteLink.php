@@ -81,6 +81,7 @@ class ApiSetSiteLink extends ApiModifyEntity {
 	 * @see ApiModifyEntity::modifyEntity()
 	 */
 	protected function modifyEntity( EntityContent &$entityContent, array $params ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( isset( $params['linktitle'] ) ) {
 			$params['linktitle'] = Utils::squashToNFC( $params['linktitle'] );
@@ -90,6 +91,7 @@ class ApiSetSiteLink extends ApiModifyEntity {
 			$link = $entityContent->getItem()->getSiteLink( $params['linksite'] );
 
 			if ( !$link ) {
+				wfProfileOut( "Wikibase-" . __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-remove-sitelink-failed' )->text(), 'remove-sitelink-failed' );
 			}
 
@@ -102,12 +104,14 @@ class ApiSetSiteLink extends ApiModifyEntity {
 			$site = $sites->getSite( $params['linksite'] );
 
 			if ( $site === false ) {
+				wfProfileOut( "Wikibase-" . __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-siteid' )->text(), 'not-recognized-siteid' );
 			}
 
 			$page = $site->normalizePageName( $params['linktitle'] );
 
 			if ( $page === false ) {
+				wfProfileOut( "Wikibase-" . __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-no-external-page' )->text(), 'no-external-page' );
 			}
 
@@ -115,10 +119,12 @@ class ApiSetSiteLink extends ApiModifyEntity {
 			$ret = $entityContent->getEntity()->addSiteLink( $link, 'set' );
 
 			if ( $ret === false ) {
+				wfProfileOut( "Wikibase-" . __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
 			}
 
 			$this->addSiteLinksToResult( array( $ret ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return $ret !== false;
 		}
 	}

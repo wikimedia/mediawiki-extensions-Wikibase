@@ -476,6 +476,8 @@ class EditEntity {
 	 * @see      WikiPage::toEditContent
 	 */
 	public function attemptSave( $summary, $flags, $token ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$this->status = Status::newGood();
 		$this->errorType = 0;
 
@@ -485,6 +487,7 @@ class EditEntity {
 			//       and only set the correct error code, in one place, probably here.
 			$this->status->fatal( 'session-failure' );
 			$this->errorType |= self::TOKEN_ERROR;
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return $this->status;
 		}
 
@@ -497,6 +500,7 @@ class EditEntity {
 		$this->getCurrentRevisionId();
 
 		if ( $this->hasEditConflict() ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return $this->status;
 		}
 
@@ -513,6 +517,7 @@ class EditEntity {
 		}
 
 		$this->status->merge( $editStatus );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $this->status;
 	}
 
@@ -544,15 +549,18 @@ class EditEntity {
 	 * @return bool
 	 */
 	public static function userWasLastToEdit( $userId = false, $lastRevId = false ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		// If the lastRevId is missing then skip all further test and give false.
 		// Note that without a revision id it will not be possible to do patching.
 		if ( $lastRevId === false ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 		else {
 			$revision = \Revision::newFromId( $lastRevId );
 			if ( !isset( $revision ) ) {
+				wfProfileOut( "Wikibase-" . __METHOD__ );
 				return false;
 			}
 		}
@@ -560,11 +568,13 @@ class EditEntity {
 		// If the userId is missing then skip all further test and give false.
 		// It is only the user id that is used later on.
 		if ( $userId === false ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 		else {
 			$user = \User::newFromId( $userId );
 			if ( !isset( $user ) ) {
+				wfProfileOut( "Wikibase-" . __METHOD__ );
 				return false;
 			}
 		}
@@ -573,6 +583,7 @@ class EditEntity {
 		// There must be a title so we can get an article id
 		$title = $revision->getTitle();
 		if ( $title === null ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 
@@ -590,6 +601,7 @@ class EditEntity {
 			__METHOD__,
 			array( 'ORDER BY' => 'rev_timestamp ASC', 'LIMIT' => 1 )
 		);
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $res->current() === false; // return true if query had no match
 	}
 
@@ -605,6 +617,8 @@ class EditEntity {
 	 * @return bool true if an error page was shown, false if there were no errors to show.
 	 */
 	public function showErrorPage( OutputPage $out = null, $titleMessage = null ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		global $wgOut;
 
 		if ( $out === null ) {
@@ -612,6 +626,7 @@ class EditEntity {
 		}
 
 		if ( $this->status === null || $this->status->isOK() ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 
@@ -627,6 +642,7 @@ class EditEntity {
 			$out->returnToMain( '', $this->getTitle() );
 		}
 
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -638,6 +654,8 @@ class EditEntity {
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
 	protected function showStatus( OutputPage $out = null ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		global $wgOut;
 
 		if ( $out === null ) {
@@ -645,6 +663,7 @@ class EditEntity {
 		}
 
 		if ( $this->status === null || $this->status->isGood() ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 
@@ -652,6 +671,7 @@ class EditEntity {
 
 		$out->addHTML( \Html::element( 'div', array( 'class' => 'error' ), $text ) );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -668,7 +688,9 @@ class EditEntity {
 	 * @param array    $extradata    array Data to add to the "<error>" element; array in ApiResult format
 	 */
 	public function reportApiErrors( \ApiBase $api, $errorCode, $httpRespCode = 0, $extradata = null ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 		if ( $this->status === null ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return;
 		}
 
@@ -685,5 +707,7 @@ class EditEntity {
 			$description = $this->status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' );
 			$api->dieUsage( $description, $errorCode, $httpRespCode, $extradata );
 		}
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 }

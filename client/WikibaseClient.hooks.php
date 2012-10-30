@@ -89,7 +89,9 @@ final class ClientHooks {
 	 *
 	 * @return boolean
 	 */
-        public static function onWikibaseDeleteData( $reportMessage ) {
+	public static function onWikibaseDeleteData( $reportMessage ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 
@@ -99,6 +101,7 @@ final class ClientHooks {
 
 		$reportMessage( "done!\n" );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -115,6 +118,8 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )] . " store on the client..." );
@@ -128,6 +133,8 @@ final class ClientHooks {
 		);
 		ChangeHandler::singleton()->handleChanges( iterator_to_array( $changes ) );
 		$reportMessage( "done!\n" );
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -143,6 +150,8 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
 
 		// strip the wikibase- prefix
@@ -212,6 +221,7 @@ final class ClientHooks {
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -225,6 +235,8 @@ final class ClientHooks {
 	 * @param bool $gone If set, indicates that the change's entity no longer refers to the given page.
 	 */
 	protected static function updatePage( \Title $title, Change $change, $gone = false ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		global $wgContLang;
 
 		if ( !$title->exists() ) {
@@ -295,6 +307,8 @@ final class ClientHooks {
 
 		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
 		$rc->save();
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**
@@ -310,6 +324,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOldChangesListRecentChangesLine( &$changesList, &$s, $rc ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$rcType = $rc->getAttribute( 'rc_type' );
 		if ( $rcType == RC_EXTERNAL ) {
 			// todo: check if external source is wikibase
@@ -320,6 +336,8 @@ final class ClientHooks {
 				$s = $line;
 			}
 		}
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -336,6 +354,8 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		global $wgLanguageCode;
 
 		$parserOutput = $parser->getOutput();
@@ -386,6 +406,7 @@ final class ClientHooks {
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -436,8 +457,10 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 		// FIXME: we do NOT want to add these resources on every page where the parser is used (ie pretty much all pages)
 		$out->addModules( 'ext.wikibaseclient' );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -452,6 +475,8 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$editUrl = Settings::get( 'repoBase' );
 		if( !$editUrl ) {
 			return true;
@@ -478,6 +503,7 @@ final class ClientHooks {
 			);
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 

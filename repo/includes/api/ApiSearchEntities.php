@@ -68,6 +68,8 @@ class ApiSearchEntities extends ApiBase {
 	 * @see ApiBase::execute()
 	*/
 	public function execute() {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$params = $this->extractRequestParams();
 		$hits = $this->searchEntities( $params['language'], $params['search'], $params['type'] );
 
@@ -171,6 +173,7 @@ class ApiSearchEntities extends ApiBase {
 				$searchcontinue
 			);
 		}
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

@@ -81,6 +81,8 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$entityType = static::VIEW_TYPE;
@@ -135,6 +137,7 @@ abstract class EntityView extends \ContextSource {
 			}, 7000 );
 		' );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
@@ -150,6 +153,8 @@ abstract class EntityView extends \ContextSource {
 	 * @return array
 	 */
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$html = '';
 
 		//label:
@@ -165,6 +170,7 @@ abstract class EntityView extends \ContextSource {
 		// aliases:
 		$html .= $this->getHtmlForAliases( $entity, $lang, $editable );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
@@ -236,6 +242,8 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$label = $entity->getEntity()->getLabel( $info['lang']->getCode() );
 		$valueClass = 'wb-value';
@@ -268,6 +276,7 @@ abstract class EntityView extends \ContextSource {
 		$html .= Html::closeElement( 'span' );
 		$html .= Html::closeElement( 'h1' );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
@@ -282,6 +291,8 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForDescription( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$description = $entity->getEntity()->getDescription( $info['lang']->getCode() );
 		$valueClass = 'wb-value';
@@ -312,6 +323,8 @@ abstract class EntityView extends \ContextSource {
 		$html .= $this->getHtmlForEditSection( $entity, $lang );
 		$html .= Html::closeElement( 'span' );
 		$html .= Html::closeElement( 'div' );
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
@@ -326,6 +339,8 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
 		$html = '';
@@ -353,6 +368,8 @@ abstract class EntityView extends \ContextSource {
 			$html .= Html::closeElement( 'div' );
 			$html .= Html::closeElement( 'div' );
 		}
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
@@ -373,6 +390,8 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForEditSection(
 		EntityContent $entity, Language $lang = null, $tag = 'span', $action = 'edit', $enabled = true
 	) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$buttonLabel = wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text();
 
 		$button = ( $enabled ) ?
@@ -384,6 +403,7 @@ abstract class EntityView extends \ContextSource {
 				$buttonLabel
 			);
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return wfTemplate( 'wb-editsection',
 			$tag,
 			wfTemplate( 'wb-toolbar',
