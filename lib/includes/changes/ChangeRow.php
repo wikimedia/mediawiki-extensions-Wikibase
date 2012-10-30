@@ -35,7 +35,7 @@ class ChangeRow extends ORMRow implements Change {
 	 * Field for caching the linked user.
 	 *
 	 * @since 0.1
-	 * @var User|false
+	 * @var User|bool
 	 */
 	protected $user = false;
 

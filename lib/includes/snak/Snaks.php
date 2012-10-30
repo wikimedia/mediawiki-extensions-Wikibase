@@ -89,7 +89,7 @@ interface Snaks extends \Traversable, \ArrayAccess, \Countable, \Serializable, H
 	 *
 	 * @param string $snakHash
 	 *
-	 * @return Snak|false
+	 * @return Snak|bool
 	 */
 	public function getSnak( $snakHash );
 

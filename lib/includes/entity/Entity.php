@@ -139,7 +139,7 @@ interface Entity extends Comparable, ClaimAggregate {
 	 *
 	 * @param string $langCode
 	 *
-	 * @return string|false
+	 * @return string|bool
 	 */
 	public function getDescription( $langCode );
 
@@ -151,7 +151,7 @@ interface Entity extends Comparable, ClaimAggregate {
 	 *
 	 * @param string $langCode
 	 *
-	 * @return string|false
+	 * @return string|bool
 	 */
 	public function getLabel( $langCode );
 

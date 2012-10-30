@@ -110,7 +110,7 @@ class SnakList extends HashArray implements Snaks {
 	 *
 	 * @param string $snakHash
 	 *
-	 * @return Snak|false
+	 * @return Snak|bool
 	 */
 	public function getSnak( $snakHash ) {
 		return $this->getByElementHash( $snakHash );

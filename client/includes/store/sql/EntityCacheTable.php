@@ -119,7 +119,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 *
 	 * @param Entity $entity
 	 *
-	 * @return integer|false
+	 * @return integer|bool
 	 */
 	protected function getCacheIdForEntity( Entity $entity ) {
 		$identifiers = array(

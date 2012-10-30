@@ -151,7 +151,7 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 	 *
 	 * @param string $elementHash
 	 *
-	 * @return mixed|false
+	 * @return mixed|bool
 	 */
 	public function getByElementHash( $elementHash ) {
 		if ( $this->hasElementHash( $elementHash ) ) {
