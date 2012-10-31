@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Iterator, DatabaseBase;
 
 /**
  * Term lookup cache.
@@ -173,6 +174,10 @@ class TermSqlCache implements TermCache {
 			}
 		}
 
+		foreach ( $terms as &$term ) {
+			$term['term_search_key'] = strtolower( Utils::squashToNFC( $term['term_text'] ) );
+		}
+
 		return $terms;
 	}
 
@@ -308,20 +313,16 @@ class TermSqlCache implements TermCache {
 	 * @param array $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
-	 * @param boolean $prefixSearch
+	 * @param array $options
 	 *
 	 * @return array
 	 */
-	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, $prefixSearch = false ) {
+	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() ) {
 		if ( empty( $terms ) ) {
 			return array();
 		}
 
-		if ( $prefixSearch === false ) {
-			$conditions = $this->termsToConditions( $terms, $termType, $entityType, false ); // We don't do a prefix search
-		} else {
-			$conditions = $this->termsToConditionsPrefixSearch( $terms, $termType, $entityType, false ); // Let's do a prefix search!
-		}
+		$conditions = $this->termsToConditions( $terms, $termType, $entityType, false, $options );
 
 		$selectionFields = array_keys( $this->termFieldMap );
 
@@ -346,10 +347,19 @@ class TermSqlCache implements TermCache {
 	 * @param boolean $forJoin
 	 *            If the provided terms are used for a join.
 	 *            If so, the fields of each term get prefixed with a table name starting with terms0 and counting up.
+	 * @param array $options
 	 *
 	 * @return array
 	 */
-	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false ) {
+	protected function termsToConditions( array $terms, $termType, $entityType, $forJoin = false, array $options = array() ) {
+		$options = array_merge(
+			array(
+				'caseSensitive' => true,
+				'prefixSearch' => false,
+			),
+			$options
+		);
+
 		$conditions = array();
 		$tableIndex = 0;
 
@@ -363,7 +373,21 @@ class TermSqlCache implements TermCache {
 			}
 
 			if ( array_key_exists( 'termText', $term ) ) {
-				$fullTerm['term_text'] = $term['termText'];
+				if ( $options['caseSensitive'] ) {
+					$textField = 'term_text';
+					$text = $term['termText'];
+				}
+				else {
+					$textField = 'term_search_key';
+					$text = strtolower( Utils::squashToNFC( $term['termText'] ) );
+				}
+
+				if ( $options['prefixSearch'] ) {
+					$fullTerm[] = $textField . ' LIKE ' . $dbr->addQuotes( $text . '%' );
+				}
+				else {
+					$fullTerm[$textField] = $text;
+				}
 			}
 
 			if ( array_key_exists( 'termType', $term ) ) {
@@ -380,12 +404,12 @@ class TermSqlCache implements TermCache {
 				$fullTerm['term_entity_type'] = $entityType;
 			}
 
-			$fullTerm = array_intersect_key( $fullTerm, $this->termFieldMap );
-
 			$tableName = 'terms' . $tableIndex++;
 
 			foreach ( $fullTerm as $field => &$value ) {
-				$value = $field . '=' . $dbr->addQuotes( $value );
+				if ( !is_int( $field ) ) {
+					$value = $field . '=' . $dbr->addQuotes( $value );
+				}
 
 				if ( $forJoin ) {
 					$value = $tableName . '.' . $value;
@@ -398,68 +422,6 @@ class TermSqlCache implements TermCache {
 		return $conditions;
 	}
 
-	/**
-	 * @since 0.2
-	 *
-	 * This is the variant for prefix search
-	 *
-	 * @param array $terms
-	 * @param string $termType
-	 * @param string $entityType
-	 * @param boolean $forJoin
-	 *            If the provided terms are used for a join.
-	 *            If so, the fields of each term get prefixed with a table name starting with terms0 and counting up.
-	 *
-	 * @return array
-	 */
-	protected function termsToConditionsPrefixSearch( array $terms, $termType, $entityType, $forJoin = false ) {
-		$conditions = array();
-		$tableIndex = 0;
-
-		$dbr = $this->getReadDb();
-
-		foreach ( $terms as $term ) {
-			$fullTerm = array();
-
-			if ( array_key_exists( 'termLanguage', $term ) ) {
-				$fullTerm['term_language'] = $term['termLanguage'];
-			}
-
-			if ( array_key_exists( 'termText', $term ) ) {
-				$fullTerm['term_text'] = $term['termText'];
-			}
-
-			if ( array_key_exists( 'termType', $term ) ) {
-				$fullTerm['term_type'] = $term['termType'];
-			}
-			elseif ( $termType !== null ) {
-				$fullTerm['term_type'] = $termType;
-			}
-
-			if ( array_key_exists( 'entityType', $term ) ) {
-				$fullTerm['term_entity_type'] = $term['entityType'];
-			}
-			elseif ( $entityType !== null ) {
-				$fullTerm['term_entity_type'] = $entityType;
-			}
-
-			$fullTerm = array_intersect_key( $fullTerm, $this->termFieldMap );
-
-			$tableName = 'terms' . $tableIndex++;
-			foreach ( $fullTerm as $field => &$value ) {
-				if ( $forJoin === false ) {
-					$value = 'LOWER( CONVERT( ' . $field . ' USING utf8 ) )'  . ' LIKE ' . $dbr->addQuotes( $value . "%" );
-				}
-				else {
-					$value = $tableName . '.' . $field . '=' . $dbr->addQuotes( $value );
-				}
-			}
-
-			$conditions[] = '(' . implode( ' AND ', $fullTerm ) . ')';
-		}
-
-		return $conditions;
-	}
 	/**
 	 * Modifies the provided terms to use the field names expected by the interface
 	 * rather then the table field names. Also ensures the values are of the correct type.
@@ -624,6 +586,113 @@ class TermSqlCache implements TermCache {
 		}
 
 		return $resultTerms;
+	}
+
+	/**
+	 * Rebuild the search key field term_search_key from the source term_text field.
+	 *
+	 * FIXME: for some unknown reason some rows are skipped in the rebuild
+	 *
+	 * @since 0.2
+	 */
+	public function rebuildSearchKey() {
+		$dbw = wfGetDB( DB_MASTER );
+
+		$entityId = -1;
+		$entityType = '';
+		$language = '';
+		$type = '';
+		$text = '';
+
+		$limit = 10;
+
+		$hasMoreResults = true;
+
+		while ( $hasMoreResults ) {
+			$terms = $dbw->select(
+				$this->tableName,
+				array(
+					'term_entity_id',
+					'term_entity_type',
+					'term_language',
+					'term_type',
+					'term_text',
+				),
+				array(
+					'term_entity_id >= ' . $dbw->addQuotes( $entityId ),
+					'term_entity_type >= ' . $dbw->addQuotes( $entityType ),
+					'term_language >= ' . $dbw->addQuotes( $language ),
+					'term_type >= ' . $dbw->addQuotes( $type ),
+					'term_text >= ' . $dbw->addQuotes( $text ),
+				),
+				__METHOD__,
+				array(
+					'LIMIT' => $limit,
+					'ORDER BY term_entity_id, term_entity_type, term_language, term_type, term_text ASC, ASC, ASC, ASC, ASC'
+				)
+			);
+
+			$continuationTerm = $this->rebuildSearchKeyForTerms( $terms, $dbw, $limit );
+
+			if ( $continuationTerm === null ) {
+				$hasMoreResults = false;
+			}
+			else {
+				$entityId = $continuationTerm->term_entity_id;
+				$entityType = $continuationTerm->term_entity_type;
+				$language = $continuationTerm->term_language;
+				$type = $continuationTerm->term_type;
+				$text = $continuationTerm->term_text;
+			}
+		}
+	}
+
+	/**
+	 * @since 0.2
+	 *
+	 * @param Iterator $terms
+	 * @param DatabaseBase $dbw
+	 * @param integer $limit
+	 *
+	 * @return object|null The continuation term if there is one or null
+	 */
+	protected function rebuildSearchKeyForTerms( Iterator $terms, DatabaseBase $dbw, $limit ) {
+		$termNumber = 0;
+
+		$doTrx = $dbw->trxLevel() === 0;
+
+		if ( $doTrx ) {
+			$dbw->begin();
+		}
+
+		$hasMoreResults = false;
+
+		foreach ( $terms as $term ) {
+			$dbw->update(
+				$this->tableName,
+				array(
+					'term_search_key' => strtolower( Utils::squashToNFC( $term->term_text ) )
+				),
+				array(
+					'term_entity_id' => $term->term_entity_id,
+					'term_entity_type' => $term->term_entity_type,
+					'term_language' => $term->term_language,
+					'term_type' => $term->term_type,
+					'term_text' => $term->term_text,
+				),
+				__METHOD__
+			);
+
+			if ( ++$termNumber >= $limit ) {
+				$hasMoreResults = true;
+			}
+		}
+
+		if ( $doTrx ) {
+			$dbw->commit();
+		}
+
+		return $hasMoreResults ? $term : null;
 	}
 
 }
