@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAB7X///6A\u003d",
+        "filename": "repo/includes/store/TermCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-31T16:07:08Z",
+      "side": 1,
+      "message": "would be good to document the well known / accepted options here, along with the info whether they are optional or mendatory for implementations to support.",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///58\u003d",
+        "filename": "repo/includes/store/sql/AddLowercaseTerms.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-31T16:07:08Z",
+      "side": 1,
+      "message": "\"lowercase\" is a bit too specific. I\u0027d suggest \"term_normalized_text\" or simply \"term_search_key\".",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///54\u003d",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-31T16:07:08Z",
+      "side": 1,
+      "message": "We want to do this if the field does NOT exist, right?...",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///50\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-31T16:07:08Z",
+      "side": 1,
+      "message": "please also trim leading and trailing whitespace. No make sure the normalization is consistent when indexing and searching, create a helper method like normalizeSearchTerm() or some such.",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///5U\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-31T16:07:08Z",
+      "side": 1,
+      "message": "I think the search should always be applied to the one normalized column. That way, other kinds of normalization may be used as well. If we want only exact matches, we can still filter the result programmatically.\n\nBut this point is arguable, I don\u0027t feel too strongly about it, as long as other kinds of normalization are applied to all versions of the term used for search.",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///5o\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-31T16:07:08Z",
+      "side": 1,
+      "message": "See above: use common normalization function  normalizeSearchTerm() or some such.",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///5A\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-31T16:07:08Z",
+      "side": 1,
+      "message": "So, we ignore integer keys? why? please at least comment",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///48\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-10-31T16:07:08Z",
+      "side": 1,
+      "message": "...and yet another place where we should be using a unified helper function for normalization.",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
