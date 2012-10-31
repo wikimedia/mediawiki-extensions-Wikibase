@@ -9,6 +9,8 @@
 require_once( "$IP/extensions/Wikibase/lib/WikibaseLib.php");
 require_once( "$IP/extensions/Wikibase/client/WikibaseClient.php");
 
+$wgWBExternalRecentChanges = true;
+
 // Base URL for building links to the repository.
 $wgWBSettings['repoBase'] = "http://repo.example.org/wiki/";
 
@@ -22,6 +24,8 @@ $wgWBSettings['siteGlobalID'] = "mywiki";
 // This requires the given database name to be known to LBFactory, see
 // $wgLBFactoryConf below.
 $wgWBSettings['changesDatabase'] = "repo";
+
+$wgWBSettings['enableRC'] = true;
 
 $wgLBFactoryConf = array(
 	// In order to seamlessly access a remote wiki, as the pollForChanges script needs to do,
