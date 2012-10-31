@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAB8X///7k\u003d",
+        "filename": "lib/WikibaseLib.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-31T20:45:14Z",
+      "side": 1,
+      "message": "recordChanges would be a better name. Comment is also assuming wb_changes is used for storage - you don\u0027t know (or should not know) that from outside of the change system",
+      "revId": "486412d99f93c5245e40aa2fe2d00785cf05f168",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
