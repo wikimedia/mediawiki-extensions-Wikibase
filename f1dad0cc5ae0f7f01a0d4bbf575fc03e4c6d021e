@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAB63////g\u003d",
+        "filename": "lib/tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-31T12:02:37Z",
+      "side": 1,
+      "message": "consider making those two member variables privates within the closure. Just as in the EditableValue.tests.js. They are basically constants and it is nicer if you read STINGS.VALID rather than this.strings.valid in the tests.",
+      "revId": "f1dad0cc5ae0f7f01a0d4bbf575fc03e4c6d021e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
