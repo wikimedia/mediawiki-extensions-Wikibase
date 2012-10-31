@@ -108,6 +108,7 @@ class SqlStore implements Store {
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
 			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
 
+			// Update from 0.1.
 			if ( !$db->tableExists( 'wb_terms' ) ) {
 				$updater->dropTable( 'wb_items_per_site' );
 				$updater->dropTable( 'wb_items' );
@@ -120,6 +121,17 @@ class SqlStore implements Store {
 				);
 
 				$this->rebuild();
+			}
+
+			// Update from 0.1 or 0.2.
+			if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
+				$updater->addExtensionField(
+					'wb_terms',
+					'term_search_key',
+					__DIR__ . '/AddTermsSearchKey' . $extension
+				);
+
+				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildTermsSearchKey' );
 			}
 		}
 		else {

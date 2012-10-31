@@ -298,4 +298,13 @@ interface Entity extends Comparable, ClaimAggregate {
 	 */
 	public function stub();
 
+	/**
+	 * Returns all the labels, descriptions and aliases as Term objects.
+	 *
+	 * @since 0.2
+	 *
+	 * @return array of Term
+	 */
+	public function getTerms();
+
 }
