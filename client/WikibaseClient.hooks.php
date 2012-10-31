@@ -233,6 +233,10 @@ final class ClientHooks {
 
 		$title->invalidateCache();
 
+		if ( $wgWBExternalRecentChanges === false ) {
+			return true;
+		}
+
 		$rcinfo = $change->getRCInfo();
 
 		if( ! is_array( $rcinfo ) ) {

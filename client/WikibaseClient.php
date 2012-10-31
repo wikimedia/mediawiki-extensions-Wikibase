@@ -87,6 +87,7 @@ $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWiki
 $wgSharedTables[] = 'wbc_entity_cache';
 $wgSharedTables[] = 'wbc_items_per_site';
 
+$wgWBExternalRecentChanges = true;
 
 // Resource loader modules
 $moduleTemplate = array(
