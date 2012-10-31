@@ -89,7 +89,7 @@ final class ClientHooks {
 	 *
 	 * @return boolean
 	 */
-        public static function onWikibaseDeleteData( $reportMessage ) {
+	public static function onWikibaseDeleteData( $reportMessage ) {
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 
@@ -231,6 +231,10 @@ final class ClientHooks {
 
 		$title->invalidateCache();
 
+		if ( Settings::get( 'injectChanges' )  === false ) {
+			return true;
+		}
+
 		$rcinfo = $change->getRCInfo();
 
 		if( ! is_array( $rcinfo ) ) {
@@ -293,6 +297,13 @@ final class ClientHooks {
 
 		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
 		$rc->save();
+	}
+
+	public static function onSpecialRecentChangesQuery( &$conds, &$tables, &$join_conds, $opts, &$query_options, &$fields ) {
+		if ( Settings::get( 'showExternalChanges' ) === false ) {
+			$conds[] = 'rc_type != ' . RC_EXTERNAL;
+		}
+		return true;
 	}
 
 	/**
@@ -411,6 +422,8 @@ final class ClientHooks {
 				'alwaysSort' => true,
 				'siteGlobalID' => 'enwiki',
 				'siteGroup' => 'wikipedia',
+				'injectChanges' => true,
+				'showExternalChanges' => true,
 				'defaultClientStore' => 'sqlstore',
 				// default for repo items in main namespace
 				'repoNamespaces' => array(
