@@ -83,11 +83,6 @@ $wgHooks['WikibaseDefaultSettings'][]                   = '\Wikibase\ClientHooks
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
 
-
-$wgSharedTables[] = 'wbc_entity_cache';
-$wgSharedTables[] = 'wbc_items_per_site';
-
-
 // Resource loader modules
 $moduleTemplate = array(
 	'localBasePath' => __DIR__ . '/resources',
