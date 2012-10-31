@@ -123,14 +123,24 @@ class MonolingualTextValue extends DataValueObject {
 	}
 
 	/**
-	 * Returns the text.
 	 * @see DataValue::getValue
+	 *
+	 * @since 0.1
+	 *
+	 * @return MonolingualTextValue
+	 */
+	public function getValue() {
+		return $this;
+	}
+
+	/**
+	 * Returns the text.
 	 *
 	 * @since 0.1
 	 *
 	 * @return string
 	 */
-	public function getValue() {
+	public function getText() {
 		return $this->value;
 	}
 

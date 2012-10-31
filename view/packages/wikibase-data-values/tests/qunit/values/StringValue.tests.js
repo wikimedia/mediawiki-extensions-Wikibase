@@ -1,6 +1,4 @@
 /**
- * QUnit tests for inherit() function for more prototypal inheritance convenience.
- *
  * @since 0.1
  * @file
  * @ingroup DataValues

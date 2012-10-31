@@ -81,14 +81,18 @@
 		runTests: function( moduleName ) {
 			QUnit.module( moduleName, QUnit.newMwEnvironment() );
 
-			var self = this,
-				property;
+			var self = this;
 
-			for ( property in self ) {
+			$.each( this, function( property, value ) {
 				if ( property.substring( 0, 4 ) === 'test' && $.isFunction( self[property] ) ) {
-					QUnit.test( property, function( assert ) { self[property].call( self, assert ); } );
+					QUnit.test(
+						property,
+						function( assert ) {
+							self[property].call( self, assert );
+						}
+					);
 				}
-			}
+			} );
 		},
 
 		/**
@@ -100,13 +104,12 @@
 		 */
 		testConstructor: function( assert ) {
 			var
-				self = this,
 				constructorArgs = this.getConstructorArguments(),
 				i,
 				instance;
 
 			for ( i in constructorArgs ) {
-				instance = self.getInstance( constructorArgs[i] );
+				instance = this.getInstance( constructorArgs[i] );
 
 				assert.equal(
 					typeof( instance.getType() ),

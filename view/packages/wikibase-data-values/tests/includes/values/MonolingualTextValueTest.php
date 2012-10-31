@@ -79,8 +79,8 @@ class MonolingualTextTest extends DataValueTest {
 	 * @param \DataValues\MonolingualTextValue $text
 	 * @param array $arguments
 	 */
-	public function testGetValue( MonolingualTextValue $text, array $arguments ) {
-		$this->assertEquals( $arguments[1], $text->getValue() );
+	public function testGetText( MonolingualTextValue $text, array $arguments ) {
+		$this->assertEquals( $arguments[1], $text->getText() );
 	}
 
 	/**
