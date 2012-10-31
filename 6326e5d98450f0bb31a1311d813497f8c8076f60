@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAB7n///84\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-31T18:31:43Z",
+      "side": 1,
+      "message": "no point in doing this for each statement. Actually, is there any need for adding the language code into the DOM at all in this case?",
+      "revId": "6326e5d98450f0bb31a1311d813497f8c8076f60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7n///80\u003d",
+        "filename": "repo/includes/ItemView.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-31T18:31:43Z",
+      "side": 1,
+      "message": "same as above.",
+      "revId": "6326e5d98450f0bb31a1311d813497f8c8076f60",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
