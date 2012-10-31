@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 use ApiTestCase, TestUser;
 use Wikibase\Settings;
+use Wikibase\Utils;
+use Title;
 
 /**
  * Tests for the ApiWikibase class.
@@ -37,6 +39,8 @@ use Wikibase\Settings;
  *
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
+ * @author Daniel Kinzler < daniel.kinzler@wikimedia.de >
+ * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  *
  * @group API
  * @group Wikibase
@@ -92,7 +96,7 @@ class ApiBotEditTest extends ApiModifyItemBase {
 	 */
 	function testTokensAndRights() {
 		// check if there is a production-like environment available
-		if (!self::$usetoken || !self::$userights) {
+		if ( !self::$usetoken || !self::$userights ) {
 			$this->markTestSkipped(
 				"The current setup does not include use of tokens or user rights"
 			);
@@ -127,14 +131,15 @@ class ApiBotEditTest extends ApiModifyItemBase {
 			"Must have an 'id' key in the 'entity' from the second result from the API" );
 		self::$baseOfItemIds = preg_replace( '/^[^\d]+/', '', $second[0]['entity']['id'] );
 	}
+
 	/**
 	 * @group API
 	 * @depends testTokensAndRights
 	 * @dataProvider providerCreateItem
 	 */
-	function testCreateItem( $id, $bot, $new, $data ) {
-		$myid = \Wikibase\ItemObject::getIdPrefix() . ( self::$baseOfItemIds + $id );
+	function testCreateItem( $handle, $bot, $new, $data ) {
 		$token = $this->getItemToken();
+		$myid = null;
 
 		$req = array(
 			'action' => 'wbeditentity',
@@ -144,6 +149,7 @@ class ApiBotEditTest extends ApiModifyItemBase {
 		);
 
 		if ( !$new ) {
+			$myid = $this->getItemId( $handle );
 			$req['id'] = $myid;
 		}
 		if ( $bot ) {
@@ -158,37 +164,62 @@ class ApiBotEditTest extends ApiModifyItemBase {
 			"Must have an 'entity' key in the second result from the API" );
 		$this->assertArrayHasKey( 'id', $second[0]['entity'],
 			"Must have an 'id' key in the 'entity' from the second result from the API" );
-		$this->assertEquals( $myid, $second[0]['entity']['id'],
-			"Must have the value '{$myid}' for the 'id' in the result from the API" );
+
+		if ( $myid ) {
+			$this->assertEquals( $myid, $second[0]['entity']['id'],
+				"Must have the value '{$myid}' for the 'id' in the result from the API" );
+		}
+
+		if ( $new ) {
+			// register new object for use by subsequent test cases
+			$this->createItems(); // make sure self::$itemOutput is initialized first.
+			self::$itemOutput[$handle] = $second[0]['entity'];
+			$myid = $second[0]['entity']['id'];
+		}
 
 		$req = array(
 				'action' => 'query',
 				'list' => 'recentchanges',
-				'rcprop' => 'title|flags'
+				'rcprop' => 'title|flags',
+				'rctoponly' => '1',
+				'rclimit' => 50, // hope that no more than 50 edits where made in the last second
 		);
 		$third = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
 
 		$this->assertArrayHasKey( 'query', $third[0],
-			"Must have a 'query' key in the third result from the API" );
+			"Must have a 'query' key in the result from the API" );
 		$this->assertArrayHasKey( 'recentchanges', $third[0]['query'],
-			"Must have a 'recentchanges' key in 'query' subset of the third result from the API" );
-		$this->assertArrayHasKey( '0', $third[0]['query']['recentchanges'],
-			"Must have a '0' key in 'recentchanges' subset of the third result from the API" );
-		$this->assertTrue( $new == array_key_exists( 'new', $third[0]['query']['recentchanges']['0'] ),
-			"Must" . ( $new ? '' : ' not ' ) . "have a 'new' key in the rc-entry of the third result from the API" );
-		$this->assertTrue( $bot == array_key_exists( 'bot', $third[0]['query']['recentchanges']['0'] ),
-			"Must" . ( $bot ? '' : ' not ' ) . "have a 'bot' key in the rc-entry of the third result from the API" );
+			"Must have a 'recentchanges' key in 'query' subset of the result from the API" );
+
+		//NOTE: the order of the entries in recentchanges is undefined if multiple
+		//      edits were done in the same second.
+		$change = null;
+		$itemNs = Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );
+		foreach ( $third[0]['query']['recentchanges'] as $rc ) {
+			$title = Title::newFromText( $rc['title'] );
+			// XXX: strtoupper is a bit arcane, would ne nice to have a utility function for prefixed id -> title.
+			if ( ( $title->getNamespace() == $itemNs ) && ( $title->getText() === strtoupper( $myid ) ) ) {
+				$change = $rc;
+				break;
+			}
+		}
+
+		$this->assertNotNull( $change, 'no change matching ID ' . $myid . ' found in recentchanges feed!' );
+
+		$this->assertTrue( $new == array_key_exists( 'new', $change ),
+			"Must" . ( $new ? '' : ' not ' ) . "have a 'new' key in the rc-entry of the result from the API" );
+		$this->assertTrue( $bot == array_key_exists( 'bot', $change ),
+			"Must" . ( $bot ? '' : ' not ' ) . "have a 'bot' key in the rc-entry of the result from the API" );
 	}
 
 	function providerCreateItem() {
-		$idx = 0;
 		return array(
-			array( ++$idx, false, true, "{}" ),
-			array( $idx, true, false, '{ "labels": { "nn": { "language": "nn", "value": "Karasjok" } } }' ),
-			array( $idx, false, false, '{ "descriptions": { "nn": { "language": "nn", "value": "Small place in Finnmark" } } }' ),
-			array( ++$idx, true, true, "{}" ),
-			array( $idx, true, false, '{ "labels": { "nn": { "language": "nn", "value": "Kautokeino" } } }' ),
-			array( $idx, false, false, '{ "descriptions": { "nn": { "language": "nn", "value": "Small place in Finnmark" } } }' ),
+			array( 'One', false, true, "{}" ),
+			array( 'One', true, false, '{ "labels": { "nn": { "language": "nn", "value": "Karasjok" } } }' ),
+			array( 'One', false, false, '{ "descriptions": { "nn": { "language": "nn", "value": "Small place in Finnmark" } } }' ),
+			array( 'Two', true, true, "{}" ),
+			array( 'Two', true, false, '{ "labels": { "nn": { "language": "nn", "value": "Kautokeino" } } }' ),
+			array( 'Two', false, false, '{ "descriptions": { "nn": { "language": "nn", "value": "Small place in Finnmark" } } }' ),
 		);
 	}
 
