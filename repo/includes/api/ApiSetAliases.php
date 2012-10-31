@@ -108,10 +108,7 @@ class ApiSetAliases extends ApiModifyEntity {
 			);
 		}
 
-		$aliases = $entityContent->getEntity()->getAliases( $params['language'] );
-		if ( count( $aliases ) ) {
-			$this->addAliasesToResult( array( $params['language'] => $aliases ), 'entity' );
-		}
+		$this->serializeItem( $entityContent->getEntity(), 'aliases' );
 
 		return true;
 	}

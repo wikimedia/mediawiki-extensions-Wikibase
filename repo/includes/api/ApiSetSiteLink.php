@@ -94,8 +94,8 @@ class ApiSetSiteLink extends ApiModifyEntity {
 			}
 
 			$entityContent->getItem()->removeSiteLink( $params['linksite'] );
-			$this->addSiteLinksToResult( array( $link ), 'entity', 'sitelinks', 'sitelink', array( 'removed' ) );
-			return true;
+
+			$success = true;
 		}
 		else {
 			$sites = $this->getSiteLinkTargetSites();
@@ -118,9 +118,12 @@ class ApiSetSiteLink extends ApiModifyEntity {
 				$this->dieUsage( $this->msg( 'wikibase-api-add-sitelink-failed' )->text(), 'add-sitelink-failed' );
 			}
 
-			$this->addSiteLinksToResult( array( $ret ), 'entity', 'sitelinks', 'sitelink', array( 'url' ) );
-			return $ret !== false;
+			$success = $ret !== false;
 		}
+
+		$this->serializeItem( $entityContent->getEntity(), 'sitelinks' );
+
+		return $success;
 	}
 
 	/**
