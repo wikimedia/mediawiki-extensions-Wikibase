@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAAB7X///4M\u003d",
+        "filename": "repo/includes/store/TermCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-31T16:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAB7X///6A\u003d",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAB7X///58\u003d",
         "filename": "repo/includes/store/sql/AddLowercaseTerms.sql",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-10-31T16:07:08Z",
       "side": 1,
       "message": "\"lowercase\" is a bit too specific. I\u0027d suggest \"term_normalized_text\" or simply \"term_search_key\".",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///4Q\u003d",
+        "filename": "repo/includes/store/sql/AddLowercaseTerms.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-31T16:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "AAAB7X///58\u003d",
       "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAAB7X///4U\u003d",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-31T16:31:35Z",
+      "side": 1,
+      "message": ":D yeah, \"temporary\" removed this for testing purposes\n\nGood catch :)",
+      "parentUuid": "AAAB7X///54\u003d",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAB7X///50\u003d",
         "filename": "repo/includes/store/sql/TermSqlCache.php",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2012-10-31T16:07:08Z",
       "side": 1,
       "message": "please also trim leading and trailing whitespace. No make sure the normalization is consistent when indexing and searching, create a helper method like normalizeSearchTerm() or some such.",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///38\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-31T16:31:35Z",
+      "side": 1,
+      "message": "Agree - will fix in follow up commit",
+      "parentUuid": "AAAB7X///50\u003d",
       "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAAB7X///34\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-31T16:31:35Z",
+      "side": 1,
+      "message": "Right. We can improve this later if needed",
+      "parentUuid": "AAAB7X///5U\u003d",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAB7X///5o\u003d",
         "filename": "repo/includes/store/sql/TermSqlCache.php",
         "patchSetId": 1
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "AAAB7X///30\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-31T16:31:35Z",
+      "side": 1,
+      "message": "see above :p",
+      "parentUuid": "AAAB7X///5o\u003d",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAB7X///5A\u003d",
         "filename": "repo/includes/store/sql/TermSqlCache.php",
         "patchSetId": 1
@@ -115,6 +223,24 @@
       "writtenOn": "2012-10-31T16:07:08Z",
       "side": 1,
       "message": "So, we ignore integer keys? why? please at least comment",
+      "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAB7X///3w\u003d",
+        "filename": "repo/includes/store/sql/TermSqlCache.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-10-31T16:31:35Z",
+      "side": 1,
+      "message": "Look at the below line, makes clear why ints don\u0027t make sense. Ints you get when creating a query condition specified as string (because it\u0027s not a simple equality). Same behaviour as MW has in it\u0027s db functions. Like I already mentioned, would be nicer if this was in it\u0027s own query construction stuff since it\u0027s not specific to terms and would then not clutter this code.",
+      "parentUuid": "AAAB7X///5A\u003d",
       "revId": "b3c769c34d14120944ad050ec8c7ef5047b6bd34",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
