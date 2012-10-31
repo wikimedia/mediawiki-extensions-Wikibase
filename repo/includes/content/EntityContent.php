@@ -478,27 +478,30 @@ abstract class EntityContent extends \AbstractContent {
 		$entity = $this->getEntity();
 
 		foreach ( $entity->getLabels() as $langCode => $labelText ) {
-			$label = array(
+			$label = new Term( array(
 				'termLanguage' => $langCode,
 				'termText' => $labelText,
-			);
+			) );
 
 			$labels[] = $label;
 		}
 
 		$foundLabels = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
 			$labels,
-			TermCache::TERM_TYPE_LABEL,
+			Term::TYPE_LABEL,
 			$entity->getType()
 		);
 
+		/**
+		 * @var Term $foundLabel
+		 */
 		foreach ( $foundLabels as $foundLabel ) {
-			if ( $foundLabel['entityId'] !== $entity->getId() ) {
+			if ( $foundLabel->getEntityId() !== $entity->getId() ) {
 				$status->fatal(
 					'wikibase-error-label-not-unique-wikibase-' . $entity->getType(),
-					$foundLabel['termText'],
-					$foundLabel['termLanguage'],
-					$foundLabel['entityId']
+					$foundLabel->getText(),
+					$foundLabel->getLanguage(),
+					$foundLabel->getEntityId()
 				);
 			}
 		}

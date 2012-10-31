@@ -102,6 +102,7 @@ $wgAutoloadClasses['Wikibase\ReferenceObject'] 		= $dir . 'includes/ReferenceObj
 $wgAutoloadClasses['Wikibase\ObjectComparer'] 		= $dir . 'includes/ObjectComparer.php';
 $wgAutoloadClasses['Wikibase\Settings'] 			= $dir . 'includes/Settings.php';
 $wgAutoloadClasses['Wikibase\SiteLink'] 			= $dir . 'includes/SiteLink.php';
+$wgAutoloadClasses['Wikibase\Term'] 				= $dir . 'includes/Term.php';
 $wgAutoloadClasses['Wikibase\Utils'] 				= $dir . 'includes/Utils.php';
 
 // includes/changes

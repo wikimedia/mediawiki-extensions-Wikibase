@@ -31,15 +31,6 @@ namespace Wikibase;
 interface TermCache {
 
 	/**
-	 * Term type enum.
-	 *
-	 * @since 0.1
-	 */
-	const TERM_TYPE_LABEL = 'label';
-	const TERM_TYPE_ALIAS = 'alias';
-	const TERM_TYPE_DESCRIPTION = 'description';
-
-	/**
 	 * Returns the type, id tuples for the entities with the provided label in the specified language.
 	 *
 	 * @since 0.1
@@ -93,34 +84,14 @@ interface TermCache {
 	/**
 	 * Returns the terms that match the provided conditions.
 	 *
-	 * $terms is an array of arrays where each inner array specifies a set of
-	 * conditions which are joined by AND, and the inner arrays get joined by OR.
-	 * These inner arrays can have the following keys:
-	 *
-	 * - entityType:   string
-	 * - termType:     element of the TermCache::TERM_TYPE_ enum
-	 * - termLanguage: string, language code
-	 * - termText:     string
-	 * - entityId:     integer, only present in the result, not used when provided in the $terms
+	 * $terms is an array of Term objects. Terms are joined by OR.
+	 * The fields of the terms are joined by AND.
 	 *
 	 * A default can be provided for termType and entityType via the corresponding
 	 * method parameters.
 	 *
-	 * The return value is an array in similar format where all 4 fields are set.
-	 * Example:
-	 *
-	 * array(
-	 *   array(
-	 *      entityType: item,
-	 *      termType: TERM_TYPE_LABEL,
-	 *      termLanguage: en,
-	 *      termText: foobar,
-	 *   ),
-	 *   array(
-	 *      ...
-	 *   ),
-	 *   ...
-	 * )
+	 * The return value is an array of Terms where entityId, entityType,
+	 * termType, termLanguage, termText are all set.
 	 *
 	 * @since 0.2
 	 *
@@ -141,11 +112,7 @@ interface TermCache {
 	 *
 	 * Similar to @see TermCache::getMatchingTerms
 	 *
-	 * Instead of taking a single array containing term information for each element in the
-	 * outer array, an array of arrays is provided, where each element in this array
-	 * describes a term the same item should have for it's specified terms to be returned.
 	 *
-	 * The return value has the same format as TermCache::getMatchingTerms.
 	 *
 	 * @since 0.2
 	 *

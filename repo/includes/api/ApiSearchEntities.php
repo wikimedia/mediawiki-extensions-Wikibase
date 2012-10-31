@@ -33,18 +33,18 @@ class ApiSearchEntities extends ApiBase {
 	 */
 	public function searchEntities( $language, $term, $entityType = null ) {
 
-		$hits = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
+		$terms = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
 			array(
-				array(
-					'termType' 		=> TermCache::TERM_TYPE_LABEL,
+				new Term( array(
+					'termType' 		=> Term::TYPE_LABEL,
 					'termLanguage' 	=> $language,
 					'termText' 		=> $term
-				),
-				array(
-					'termType' 		=> TermCache::TERM_TYPE_ALIAS,
+				) ),
+				new Term( array(
+					'termType' 		=> Term::TYPE_ALIAS,
 					'termLanguage' 	=> $language,
 					'termText' 		=> $term
-				)
+				) )
 			),
 			null,
 			$entityType,
@@ -56,10 +56,13 @@ class ApiSearchEntities extends ApiBase {
 
 		$entities = array();
 
-		foreach ( $hits as $hit ) {
-			$entity = \Wikibase\EntityContentFactory::singleton()->getFromId( $entityType, $hit['entityId'] );
+		/**
+		 * @var Term $term
+		 */
+		foreach ( $terms as $term ) {
+			$entity = \Wikibase\EntityContentFactory::singleton()->getFromId( $entityType, $term->getEntityId() );
 
-			if ( !is_null( $entity ) ) {
+			if ( $entity !== null ) {
 				$entities[] = $entity;
 			}
 		}
