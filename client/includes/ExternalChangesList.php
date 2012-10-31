@@ -33,8 +33,8 @@ class ExternalChangesList {
 
 		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
 			// todo i18n
-			$deletionLog = self::repoLink( 'Special:Log/delete', 'Deletion log' );
-			$line .= '(' . $deletionLog . ')';
+			$deletionLog = self::repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
+			$line .= wfMessage( 'parentheses' )->rawParams( $deletionLog );
 		} else {
 
 			// build a diff link from an RC
@@ -49,7 +49,7 @@ class ExternalChangesList {
 			$diffUrl = $repoIndex . '?' . $diffQuery;
 			$diffLink = self::diffLink(
 				$diffUrl,
-				$cl->msg( 'diff' )->escaped(),
+				wfMessage( 'diff' )->escaped(),
 				array(
 					'class' => 'plainlinks',
 					'tabindex' => $rc->counter
@@ -57,7 +57,7 @@ class ExternalChangesList {
 			);
 
 			$line = '';
-			$line .= '(' . $diffLink . ' | ';
+			$line .= wfMessage( 'parentheses' )->rawParams( $diffLink )->escaped();
 
 			$historyQuery = wfArrayToCgi( array(
 				'title' => $entityTitle,
@@ -68,7 +68,7 @@ class ExternalChangesList {
 
 			$line .= self::historyLink(
 				$historyUrl,
-				$cl->msg( 'hist' )->escaped(),
+				wfMessage( 'hist' )->escaped(),
 				array(
 					'class' => 'plainlinks'
 				)
@@ -84,7 +84,8 @@ class ExternalChangesList {
 		if ( $changeType === 'update' ) {
 			$entityLink = self::entityLink( $entityData );
 			if ( $entityLink !== false ) {
-				$line .= ' (' . self::entityLink( $entityData )  . ')';
+				$line .= wfMessage( 'parentheses' )->rawParams(
+					self::entityLink( $entityData ) )->escaped();
 			}
 		}
 
@@ -92,17 +93,18 @@ class ExternalChangesList {
 
 		if ( \User::isIP( $userName ) ) {
 			$userlinks = self::userContribsLink( $userName, $userName );
-			$userlinks .= " (";
-			$userlinks .= self::userTalkLink( $userName );
-			$userlinks .= ")";
+			$userlinks .= wfMessage( 'parentheses' )->rawParams( self::userTalkLink( $userName ) )->escaped();
 		} else {
 			$userlinks = self::userLink( $userName );
-			$userlinks .= " (";
-			$userlinks .= self::userTalkLink( $userName );
-			$userlinks .= " | ";
-			// TODO: localize
-			$userlinks .= self::userContribsLink( $userName, 'contribs' );
-			$userlinks .= ")";
+			$usertools = array(
+				self::userTalkLink( $userName ),
+				self::userContribsLink( $userName, wfMessage( 'contribslink' ) )
+			);
+
+			$userlinks .= wfMessage( 'word-separator' )->plain()
+				. '<span class="mw-usertoollinks">'
+				. wfMessage( 'parentheses' )->rawParams( $cl->getLanguage()->pipeList( $usertools ) )->escaped()
+				. '</span>';
 		}
 
 		$line .= $userlinks;
@@ -110,8 +112,6 @@ class ExternalChangesList {
 		$parts = explode( '~', $entityData['type'] );
 		$changeType = $parts[1];
 		$line .= self::autoComment( $changeType );
-
-		$line .= "</li>";
 
 		return $line;
 	}
@@ -304,10 +304,6 @@ class ExternalChangesList {
 			case 'update':
 				$comment = wfMessage( 'wbc-comment-langlinks-update' )->text();
 				break;
-			// todo: make change types clearer
-			// case 'remove':
-			//	$comment = wfMessage( 'wbc-comment-langlinks-remove' )->text();
-			//	break;
 			case 'remove':
 				$comment = wfMessage( 'wbc-comment-langlinks-delete' )->text();
 				break;
