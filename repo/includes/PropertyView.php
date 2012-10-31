@@ -29,7 +29,7 @@ use Html, ParserOutput, Title, Language, OutputPage, Sites, MediaWikiSite;
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
- * @author H. Snater
+ * @author H. Snater < mediawiki@snater.com >
  */
 class PropertyView extends EntityView {
 
@@ -38,8 +38,9 @@ class PropertyView extends EntityView {
 	/**
 	 * @see EntityView::getInnerHtml
 	 *
-	 * @param PropertyContent $property
-	 *
+	 * @param EntityContent $property
+	 * @param \Language|null $lang
+	 * @param bool $editable
 	 * @return string
 	 */
 	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true ) {
@@ -59,7 +60,7 @@ class PropertyView extends EntityView {
 	 * @since 0.1
 	 *
 	 * @param \DataTypes\DataType $dataType the data type to render
-	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
@@ -67,26 +68,9 @@ class PropertyView extends EntityView {
 		if( $lang === null ) {
 			$lang = $this->getLanguage();
 		}
-
-		$html = Html::openElement(
-			'div',
-			array( 'class' => 'wb-datatype wb-value-row' )
-		);
-
-		$html .= Html::element(
-			'span',
-			array( 'class' => 'wb-datatype-label' ),
-			wfMessage( 'wikibase-datatype-label' )->text()
-		);
-
-		$html .= Html::element(
-			'span',
-			array( 'class' => 'wb-value' ),
+		return wfTemplate( 'wb-property-datatype',
+			wfMessage( 'wikibase-datatype-label' )->text(),
 			$dataType->getLabel( $lang->getCode() )
 		);
-
-		$html .= Html::closeElement( 'div' );
-
-		return $html;
 	}
 }

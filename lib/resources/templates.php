@@ -113,5 +113,13 @@ HTML;
 </tr>
 HTML;
 
+	$templates['wb-property-datatype'] =
+<<<HTML
+<div class="wb-datatype wb-value-row">
+	<span class="wb-datatype-label">$1</span>
+	<span class="wb-value">$2</span>
+</div>
+HTML;
+
 	return $templates;
 } );
