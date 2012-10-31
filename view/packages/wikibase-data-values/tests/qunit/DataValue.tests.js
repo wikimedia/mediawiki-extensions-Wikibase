@@ -81,12 +81,14 @@
 		runTests: function( moduleName ) {
 			QUnit.module( moduleName, QUnit.newMwEnvironment() );
 
-			var self = this;
+			var self = this,
+				property;
 
-			QUnit.test( 'testConstructor', function( assert ) { self.testConstructor( assert ); } );
-			QUnit.test( 'testGetSortKey', function( assert ) { self.testGetSortKey( assert ); } );
-			QUnit.test( 'testToJSON', function( assert ) { self.testToJSON( assert ); } );
-			QUnit.test( 'testEquals', function( assert ) { self.testEquals( assert ); } );
+			for ( property in self ) {
+				if ( property.substring( 0, 4 ) === 'test' && $.isFunction( self[property] ) ) {
+					QUnit.test( property, function( assert ) { self[property].call( self, assert ); } );
+				}
+			}
 		},
 
 		/**
