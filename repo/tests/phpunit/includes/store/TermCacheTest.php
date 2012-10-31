@@ -201,7 +201,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'array', $actual );
 
 		foreach ( $actual as $term ) {
-			$this->testTermArrayStructure( $term );
+			$this->assertTermArrayStructure( $term );
 
 			$id = $term['entityId'];
 
@@ -266,7 +266,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$this->assertEquals( sizeof( $actual ), sizeof( $terms_expected ) );
 
 		foreach ( $actual as $term ) {
-			$this->testTermArrayStructure( $term );
+			$this->assertTermArrayStructure( $term );
 
 			$id = $term['entityId'];
 
@@ -353,7 +353,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 *
 	 * @param array $term
 	 */
-	protected function testTermArrayStructure( array $term ) {
+	protected function assertTermArrayStructure( array $term ) {
 		$this->assertInternalType( 'array', $term );
 
 		$this->assertArrayHasKey( 'termLanguage', $term );
@@ -420,7 +420,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'array', $actual );
 
 		foreach ( $actual as $term ) {
-			$this->testTermArrayStructure( $term );
+			$this->assertTermArrayStructure( $term );
 
 			$id = $term['entityId'];
 
