@@ -72,12 +72,16 @@ class ChangeNotifier {
 	 * @return \Status
 	 */
 	public function handleChanges( array $changes ) {
+		if ( !Settings::get( 'useChangesTable' ) ) {
+			return \Status::newGood( false );
+		}
+
 		foreach ( $changes as $change ) {
 			//XXX: the Change interface does not define save().
 			$change->save();
 		}
 
-		return \Status::newGood();
+		return \Status::newGood( true );
 	}
 
 }

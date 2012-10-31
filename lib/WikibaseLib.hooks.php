@@ -34,6 +34,8 @@ final class LibHooks {
 				'pollDefaultLimit' => 100,
 				'pollContinueInterval' => 0,
 
+				'useChangesTable' => true, // whether changes get recorded to wb_changes
+
 				'itemPrefix' => 'q',
 				'propertyPrefix' => 'p',
 				'queryPrefix' => 'y', // TODO: find a more suiting prefix, perhaps use 'q' and use 'i' for items then
