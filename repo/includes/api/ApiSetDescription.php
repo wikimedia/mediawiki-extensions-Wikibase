@@ -39,15 +39,14 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 			$description = Utils::squashToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $description ) ) {
-				$descriptions = array( $language => $entityContent->getEntity()->setDescription( $language, $description ) );
+				$entityContent->getEntity()->setDescription( $language, $description );
 			}
 			else {
 				$entityContent->getEntity()->removeDescription( $language );
-				$descriptions = array( $language => '' );
 			}
-
-			$this->addDescriptionsToResult( $descriptions, 'entity' );
 		}
+
+		$this->serializeItem( $entityContent->getEntity(), 'descriptions' );
 
 		return true;
 	}

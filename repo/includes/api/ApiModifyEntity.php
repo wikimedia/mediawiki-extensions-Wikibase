@@ -191,16 +191,6 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 			$editEntity->reportApiErrors( $this, 'save-failed' );
 		}
 
-		$this->getResult()->addValue(
-			'entity',
-			'id', $entityContent->getEntity()->getPrefixedId()
-		);
-
-		$this->getResult()->addValue(
-			'entity',
-			'type', $entityContent->getEntity()->getType()
-		);
-
 		$page = $entityContent->getWikiPage();
 		$revision = $page->getRevision();
 
@@ -233,6 +223,28 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 			'success',
 			(int)$success
 		);
+	}
+
+	/**
+	 * Serialize an item with vararg entries
+	 */
+	public function serializeItem( Entity &$entity ) {
+		$entries = func_get_args();
+		array_shift( $entries );
+		$entries = array_merge( array( 'info' ), $entries );
+
+		$options = new EntitySerializationOptions();
+		$options->setProps( $entries );
+		$options->setUseKeys( $this->getUsekeys() );
+
+		$entitySerializer = new ItemSerializer( $this->getResult(), $options );
+
+		$entitySerialization = $entitySerializer->getSerialized( $entityContent->getEntity() );
+		$entityPath = array( 'entity' );
+		$res = $this->getResult();
+		foreach ( $entitySerialization as $key => $value ) {
+			$res->addValue( $entityPath, $key, $value );
+		}
 	}
 
 	/**

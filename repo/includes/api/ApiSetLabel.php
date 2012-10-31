@@ -39,15 +39,14 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 			$label = Utils::squashToNFC( $params['value'] );
 			$language = $params['language'];
 			if ( 0 < strlen( $label ) ) {
-				$labels = array( $language => $entityContent->getEntity()->setLabel( $language, $label ) );
+				$entityContent->getEntity()->setLabel( $language, $label );
 			}
 			else {
 				$entityContent->getEntity()->removeLabel( $language );
-				$labels = array( $language => '' );
 			}
-
-			$this->addLabelsToResult( $labels, 'entity' );
 		}
+
+		$this->serializeItem( $entityContent->getEntity(), 'labels' );
 
 		return true;
 	}

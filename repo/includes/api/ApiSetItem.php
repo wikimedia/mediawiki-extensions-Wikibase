@@ -299,11 +299,7 @@ class ApiSetItem extends ApiModifyEntity {
 			$this->flags |= EDIT_NEW;
 		}
 
-		$entity = $entityContent->getEntity();
-		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
-		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
-		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
-		$this->addSiteLinksToResult( $entity->getSiteLinks(), 'entity' );
+		$this->serializeItem( $entityContent->getEntity(), 'labels', 'descriptions', 'aliases', 'sitelinks' );
 
 		return true;
 	}
