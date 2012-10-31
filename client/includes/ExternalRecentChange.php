@@ -25,9 +25,9 @@ class ExternalRecentChange {
 	protected function buildAttributes( $attribs, $title ) {
 		$changeInfo = $attribs['wikibase-repo-change'];
 
-		$bot = false;
+		$isBot = false;
 		if ( array_key_exists( 'rc_bot', $changeInfo ) ) {
-			$bot = $changeInfo['rc_bot'];
+			$isBot = $changeInfo['rc_bot'];
 		}
 
         $this->mAttribs = array(
@@ -37,7 +37,7 @@ class ExternalRecentChange {
 			'rc_user_text' => $changeInfo['rc_user_text'],
 			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
-			'rc_bot' => $bot,
+			'rc_bot' => $isBot,
 			'rc_old_len' => $title->getLength(),
 			'rc_new_len' => $title->getLength(),
 			'rc_this_oldid' => $title->getLatestRevID(),
