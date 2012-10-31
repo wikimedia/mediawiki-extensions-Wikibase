@@ -501,4 +501,49 @@ abstract class EntityObject implements Entity {
 		}
 	}
 
+	/**
+	 * @see Entity::getTerms
+	 *
+	 * @since 0.2
+	 *
+	 * @return array of Term
+	 */
+	public function getTerms() {
+		$terms = array();
+
+		foreach ( $this->getDescriptions() as $languageCode => $description ) {
+			$term = new Term();
+
+			$term->setLanguage( $languageCode );
+			$term->setType( Term::TYPE_DESCRIPTION );
+			$term->setText( $description );
+
+			$terms[] = $term;
+		}
+
+		foreach ( $this->getLabels() as $languageCode => $label ) {
+			$term = new Term();
+
+			$term->setLanguage( $languageCode );
+			$term->setType( Term::TYPE_LABEL );
+			$term->setText( $label );
+
+			$terms[] = $term;
+		}
+
+		foreach ( $this->getAllAliases() as $languageCode => $aliases ) {
+			foreach ( $aliases as $alias ) {
+				$term = new Term();
+
+				$term->setLanguage( $languageCode );
+				$term->setType( Term::TYPE_ALIAS );
+				$term->setText( $alias );
+
+				$terms[] = $term;
+			}
+		}
+
+		return $terms;
+	}
+
 }

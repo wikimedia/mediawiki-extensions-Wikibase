@@ -149,17 +149,17 @@ class ItemContent extends EntityContent {
 			$description = $entity->getDescription( $langCode );
 
 			if ( $description !== false ) {
-				$label = array(
+				$label = new Term( array(
 					'termLanguage' => $langCode,
 					'termText' => $labelText,
-					'termType' => TermCache::TERM_TYPE_LABEL,
-				);
+					'termType' => Term::TYPE_LABEL,
+				) );
 
-				$description = array(
+				$description = new Term( array(
 					'termLanguage' => $langCode,
 					'termText' => $description,
-					'termType' => TermCache::TERM_TYPE_DESCRIPTION,
-				);
+					'termType' => Term::TYPE_DESCRIPTION,
+				) );
 
 				$terms[] = array( $label, $description );
 			}
@@ -175,14 +175,18 @@ class ItemContent extends EntityContent {
 			);
 
 			if ( !empty( $foundTerms ) ) {
+				/**
+				 * @var Term $label
+				 * @var Term $description
+				 */
 				list( $label, $description ) = $foundTerms;
 
 				$status->fatal(
 					'wikibase-error-label-not-unique-item',
-					$label['termText'],
-					$label['termLanguage'],
-					$label['entityId'],
-					$description['termText']
+					$label->getText(),
+					$label->getLanguage(),
+					$label->getEntityId(),
+					$description->getText()
 				);
 			}
 		}
