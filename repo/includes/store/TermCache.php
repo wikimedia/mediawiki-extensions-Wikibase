@@ -127,10 +127,11 @@ interface TermCache {
 	 * @param array $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
+	 * @param array $options
 	 *
 	 * @return array
 	 */
-	public function getMatchingTerms( array $terms, $termType = null, $entityType = null );
+	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() );
 
 	/**
 	 * TODO: update docs

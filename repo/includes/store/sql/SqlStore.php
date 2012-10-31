@@ -121,6 +121,16 @@ class SqlStore implements Store {
 
 				$this->rebuild();
 			}
+
+			if ( $db->fieldExists( 'wb_terms', 'term_lowercase_text' ) ) {
+				$updater->addExtensionField(
+					'wb_terms',
+					'term_lowercase_text',
+					__DIR__ . '/AddLowercaseTerms' . $extension
+				);
+
+				$this->newTermCache()->rebuildLowercaseIndex();
+			}
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
