@@ -35,8 +35,7 @@ CREATE TABLE IF NOT EXISTS /*_*/wb_terms (
   term_entity_type           VARBINARY(32)       NOT NULL, -- Type of the entity
   term_language              VARBINARY(32)       NOT NULL, -- Language code
   term_type                  VARBINARY(32)       NOT NULL, -- Term type
-  term_text                  VARCHAR(255)        NOT NULL, -- The term text
-  term_search_key            VARCHAR(255)        NOT NULL -- The term text, lowercase for case-insensitive lookups
+  term_text                  VARCHAR(255)        NOT NULL -- The alias text
 ) /*$wgDBTableOptions*/;
 
 CREATE INDEX /*i*/wb_terms_entity_id ON /*_*/wb_terms (term_entity_id);
@@ -44,4 +43,3 @@ CREATE INDEX /*i*/wb_terms_entity_type ON /*_*/wb_terms (term_entity_type);
 CREATE INDEX /*i*/wb_terms_language ON /*_*/wb_terms (term_language);
 CREATE INDEX /*i*/wb_terms_type ON /*_*/wb_terms (term_type);
 CREATE INDEX /*i*/wb_terms_text ON /*_*/wb_terms (term_text);
-CREATE INDEX /*i*/wb_terms_search_key ON /*_*/wb_terms (term_search_key);

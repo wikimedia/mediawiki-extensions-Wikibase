@@ -127,14 +127,10 @@ interface TermCache {
 	 * @param array $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
-	 * @param array $options
-	 *        Accepted options are:
-	 *        - caseSensitive: boolean, default true
-	 *        - prefixSearch: boolean, default false
 	 *
 	 * @return array
 	 */
-	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() );
+	public function getMatchingTerms( array $terms, $termType = null, $entityType = null );
 
 	/**
 	 * TODO: update docs

@@ -33,7 +33,6 @@ use Wikibase\Item;
  * @group Wikibase
  * @group WikibaseStore
  * @group Database
- * @group TermCacheTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -248,7 +247,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 			),
 		);
 
-		$expectedTerms = array(
+		$terms_expected = array(
 			$id0 => array(
 				'termLanguage' => 'en',
 				'termText' => 'prefix',
@@ -258,18 +257,13 @@ class TermCacheTest extends \MediaWikiTestCase {
 			),
 		);
 
-		$options = array(
-			'caseSensitive' => false,
-			'prefixSearch' => true,
-		);
-
-		$actual = $lookup->getMatchingTerms( $terms, null, null, $options );
+		$actual = $lookup->getMatchingTerms( $terms, null, null, true );
 
 		$terms[$id1]['termLanguage'] = 'nl';
-		$expectedTerms[$id1]['termLanguage'] = 'nl';
+		$terms_expected[$id1]['termLanguage'] = 'nl';
 
 		$this->assertInternalType( 'array', $actual );
-		$this->assertEquals( count( $expectedTerms ), count( $actual ) );
+		$this->assertEquals( sizeof( $actual ), sizeof( $terms_expected ) );
 
 		foreach ( $actual as $term ) {
 			$this->assertTermArrayStructure( $term );
@@ -278,7 +272,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
-			$expected = $expectedTerms[$id];
+			$expected = $terms_expected[$id];
 
 			$this->assertEquals( $expected['termText'], $term['termText'] );
 			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );

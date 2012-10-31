@@ -48,10 +48,7 @@ class ApiSearchEntities extends ApiBase {
 			),
 			null,
 			$entityType,
-			array(
-				'caseSensitive' => false,
-				'prefixSearch' => true,
-			)
+			true // Do a prefix search!
 		);
 
 		$entities = array();

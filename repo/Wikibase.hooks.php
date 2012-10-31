@@ -161,7 +161,6 @@ final class RepoHooks {
 			'store/TermCache',
 
 			'store/sql/SqlIdGenerator',
-			'store/sql/TermSqlCache',
 
 			'updates/ItemDeletionUpdate',
 			'updates/ItemModificationUpdate',

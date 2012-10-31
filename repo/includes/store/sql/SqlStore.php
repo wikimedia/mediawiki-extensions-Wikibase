@@ -121,16 +121,6 @@ class SqlStore implements Store {
 
 				$this->rebuild();
 			}
-
-			if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
-				$updater->addExtensionField(
-					'wb_terms',
-					'term_search_key',
-					__DIR__ . '/AddTermsSearchKey' . $extension
-				);
-
-				$this->newTermCache()->rebuildSearchKey();
-			}
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
