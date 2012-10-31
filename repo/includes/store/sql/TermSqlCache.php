@@ -97,11 +97,14 @@ class TermSqlCache implements TermCache {
 			__METHOD__
 		);
 
-		foreach ( $this->getEntityTerms( $entity ) as $term ) {
+		/**
+		 * @var Term $term
+		 */
+		foreach ( $entity->getTerms() as $term ) {
 			$success = $dbw->insert(
 				$this->tableName,
 				array_merge(
-					$term,
+					$this->getTermFields( $term ),
 					$entityIdentifiers
 				),
 				__METHOD__
@@ -109,6 +112,24 @@ class TermSqlCache implements TermCache {
 		}
 
 		return $success;
+	}
+
+	/**
+	 * Returns an array with the database table fields for the provided term.
+	 *
+	 * @since 0.2
+	 *
+	 * @param Term $term
+	 *
+	 * @return array
+	 */
+	protected function getTermFields( Term $term ) {
+		return array(
+			'term_language' => $term->getLanguage(),
+			'term_type' => $term->getType(),
+			'term_text' => $term->getText(),
+			'term_search_key' => $term->getNormalizedText(),
+		);
 	}
 
 	/**
@@ -134,51 +155,6 @@ class TermSqlCache implements TermCache {
 
 		// TODO: failures here cause data that block valid stuff from being created to just stick around forever.
 		// We probably want some extra handling here.
-	}
-
-	/**
-	 * Returns a list with all the terms for the entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @param Entity $entity
-	 *
-	 * @return array
-	 */
-	protected function getEntityTerms( Entity $entity ) {
-		$terms = array();
-
-		foreach ( $entity->getDescriptions() as $languageCode => $description ) {
-			$terms[] = array(
-				'term_language' => $languageCode,
-				'term_type' => TermCache::TERM_TYPE_DESCRIPTION,
-				'term_text' => $description,
-			);
-		}
-
-		foreach ( $entity->getLabels() as $languageCode => $label ) {
-			$terms[] = array(
-				'term_language' => $languageCode,
-				'term_type' => TermCache::TERM_TYPE_LABEL,
-				'term_text' => $label,
-			);
-		}
-
-		foreach ( $entity->getAllAliases() as $languageCode => $aliases ) {
-			foreach ( $aliases as $alias ) {
-				$terms[] = array(
-					'term_language' => $languageCode,
-					'term_type' => TermCache::TERM_TYPE_ALIAS,
-					'term_text' => $alias,
-				);
-			}
-		}
-
-		foreach ( $terms as &$term ) {
-			$term['term_search_key'] = strtolower( Utils::squashToNFC( $term['term_text'] ) );
-		}
-
-		return $terms;
 	}
 
 	/**
@@ -252,7 +228,7 @@ class TermSqlCache implements TermCache {
 
 		$tables = array( 'terms0' => $this->tableName );
 
-		$conds = array( 'terms0.term_type' => TermCache::TERM_TYPE_LABEL );
+		$conds = array( 'terms0.term_type' => Term::TYPE_LABEL );
 		if ( $fuzzySearch ) {
 			$conds[] = 'terms0.term_text' . $db->buildLike( $label, $db->anyString() );
 		} else {
@@ -271,7 +247,7 @@ class TermSqlCache implements TermCache {
 
 		if ( !is_null( $description ) ) {
 			$conds['terms1.term_text'] = $description;
-			$conds['terms1.term_type'] = TermCache::TERM_TYPE_DESCRIPTION;
+			$conds['terms1.term_type'] = Term::TYPE_DESCRIPTION;
 
 			if ( !is_null( $languageCode ) ) {
 				$conds['terms1.term_language'] = $languageCode;
@@ -365,21 +341,27 @@ class TermSqlCache implements TermCache {
 
 		$dbr = $this->getReadDb();
 
+		/**
+		 * @var Term $term
+		 */
 		foreach ( $terms as $term ) {
 			$fullTerm = array();
 
-			if ( array_key_exists( 'termLanguage', $term ) ) {
-				$fullTerm['term_language'] = $term['termLanguage'];
+			$language = $term->getLanguage();
+
+			if ( $language !== null ) {
+				$fullTerm['term_language'] = $language;
 			}
 
-			if ( array_key_exists( 'termText', $term ) ) {
+			$text = $term->getText();
+
+			if ( $text !== null ) {
 				if ( $options['caseSensitive'] ) {
 					$textField = 'term_text';
-					$text = $term['termText'];
 				}
 				else {
 					$textField = 'term_search_key';
-					$text = strtolower( Utils::squashToNFC( $term['termText'] ) );
+					$text = $term->getNormalizedText();
 				}
 
 				if ( $options['prefixSearch'] ) {
@@ -390,15 +372,15 @@ class TermSqlCache implements TermCache {
 				}
 			}
 
-			if ( array_key_exists( 'termType', $term ) ) {
-				$fullTerm['term_type'] = $term['termType'];
+			if ( $term->getType() !== null ) {
+				$fullTerm['term_type'] = $term->getType();
 			}
 			elseif ( $termType !== null ) {
 				$fullTerm['term_type'] = $termType;
 			}
 
-			if ( array_key_exists( 'entityType', $term ) ) {
-				$fullTerm['term_entity_type'] = $term['entityType'];
+			if ( $term->getEntityType() !== null ) {
+				$fullTerm['term_entity_type'] = $term->getEntityType();
 			}
 			elseif ( $entityType !== null ) {
 				$fullTerm['term_entity_type'] = $entityType;
@@ -446,7 +428,7 @@ class TermSqlCache implements TermCache {
 				$matchingTerm[$this->termFieldMap[$key]] = $value;
 			}
 
-			$matchingTerms[] = $matchingTerm;
+			$matchingTerms[] = new Term( $matchingTerm );
 		}
 
 		return $matchingTerms;
@@ -671,7 +653,7 @@ class TermSqlCache implements TermCache {
 			$dbw->update(
 				$this->tableName,
 				array(
-					'term_search_key' => strtolower( Utils::squashToNFC( $term->term_text ) )
+					'term_search_key' => Term::normalizeText( $term->term_text )
 				),
 				array(
 					'term_entity_id' => $term->term_entity_id,

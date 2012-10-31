@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\TermSqlCache;
-use Wikibase\TermCache;
+use Wikibase\Term;
 
 /**
  * Tests for the Wikibase\TermSqlCache class.
@@ -81,25 +81,22 @@ class TermSqlCacheTest extends \MediaWikiTestCase {
 
 		$termCache->rebuildSearchKey();
 
-		$terms = array(
-			array(
-				'termLanguage' => $languageCode,
-				'termText' => $searchText
-			)
-		);
+		$term = new Term();
+		$term->setLanguage( $languageCode );
+		$term->setText( $searchText );
 
 		$options = array(
 			'caseSensitive' => false,
 		);
 
-		$obtainedTerms = $termCache->getMatchingTerms( $terms, TermCache::TERM_TYPE_LABEL, \Wikibase\ItemObject::ENTITY_TYPE, $options );
+		$obtainedTerms = $termCache->getMatchingTerms( array( $term ), Term::TYPE_LABEL, \Wikibase\ItemObject::ENTITY_TYPE, $options );
 
 		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
 
 		if ( $matches ) {
 			$obtainedTerm = array_shift( $obtainedTerms );
 
-			$this->assertEquals( $termText, $obtainedTerm['termText'] );
+			$this->assertEquals( $termText, $obtainedTerm->getText() );
 		}
 	}
 

@@ -5,6 +5,7 @@ use Wikibase\TermCache;
 use Wikibase\ItemContent;
 use Wikibase\ItemObject;
 use Wikibase\Item;
+use Wikibase\Term;
 
 /**
  * Tests for the Wikibase\TermCache implementing classes.
@@ -137,28 +138,28 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$this->assertFalse( $lookup->termExists( 'foobarz', null, null, 'does-not-exist' ) );
 
 		$this->assertTrue( $lookup->termExists( 'foobarz' ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'en' ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'de' ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'de', $item::ENTITY_TYPE ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'en' ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de' ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de', $item::ENTITY_TYPE ) );
 
-		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'de', \Wikibase\Property::ENTITY_TYPE ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_LABEL, 'nl' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION, 'de' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION, null, \Wikibase\Property::ENTITY_TYPE ) );
-		$this->assertFalse( $lookup->termExists( 'dzxfzdtrgfdrtgryfth', TermCache::TERM_TYPE_LABEL ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'de', \Wikibase\Property::ENTITY_TYPE ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_LABEL, 'nl' ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, 'de' ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, null, \Wikibase\Property::ENTITY_TYPE ) );
+		$this->assertFalse( $lookup->termExists( 'dzxfzdtrgfdrtgryfth', Term::TYPE_LABEL ) );
 
-		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION ) );
-		$this->assertTrue( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION, 'en' ) );
-		$this->assertFalse( $lookup->termExists( 'foobarz', TermCache::TERM_TYPE_DESCRIPTION, 'fr' ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION ) );
+		$this->assertTrue( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, 'en' ) );
+		$this->assertFalse( $lookup->termExists( 'foobarz', Term::TYPE_DESCRIPTION, 'fr' ) );
 
-		$this->assertFalse( $lookup->termExists( 'a42', TermCache::TERM_TYPE_DESCRIPTION ) );
-		$this->assertFalse( $lookup->termExists( 'b42', TermCache::TERM_TYPE_LABEL ) );
+		$this->assertFalse( $lookup->termExists( 'a42', Term::TYPE_DESCRIPTION ) );
+		$this->assertFalse( $lookup->termExists( 'b42', Term::TYPE_LABEL ) );
 		$this->assertTrue( $lookup->termExists( 'a42' ) );
 		$this->assertTrue( $lookup->termExists( 'b42' ) );
-		$this->assertTrue( $lookup->termExists( 'a42', TermCache::TERM_TYPE_ALIAS ) );
-		$this->assertTrue( $lookup->termExists( 'b42', TermCache::TERM_TYPE_ALIAS ) );
-		$this->assertFalse( $lookup->termExists( 'b42', TermCache::TERM_TYPE_ALIAS, 'de' ) );
+		$this->assertTrue( $lookup->termExists( 'a42', Term::TYPE_ALIAS ) );
+		$this->assertTrue( $lookup->termExists( 'b42', Term::TYPE_ALIAS ) );
+		$this->assertFalse( $lookup->termExists( 'b42', Term::TYPE_ALIAS, 'de' ) );
 		$this->assertTrue( $lookup->termExists( 'b42', null, 'nl' ) );
 	}
 
@@ -186,32 +187,34 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$id1 = $content1->getItem()->getId();
 
 		$terms = array(
-			$id0 => array(
+			$id0 => new Term( array(
 				'termLanguage' => 'en',
 				'termText' => 'getmatchingterms-0',
-			),
-			$id1 => array(
+			) ),
+			$id1 => new Term( array(
 				'termText' => 'getmatchingterms-1',
-			),
+			) ),
 		);
 
 		$actual = $lookup->getMatchingTerms( $terms );
 
-		$terms[$id1]['termLanguage'] = 'nl';
+		$terms[$id1]->setLanguage( 'nl' );
 
 		$this->assertInternalType( 'array', $actual );
 
+		/**
+		 * @var Term $term
+		 * @var Term $expected
+		 */
 		foreach ( $actual as $term ) {
-			$this->testTermArrayStructure( $term );
-
-			$id = $term['entityId'];
+			$id = $term->getEntityId();
 
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
 			$expected = $terms[$id];
 
-			$this->assertEquals( $expected['termText'], $term['termText'] );
-			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );
+			$this->assertEquals( $expected->getText(), $term->getText() );
+			$this->assertEquals( $expected->getLanguage(), $term->getLanguage() );
 		}
 	}
 
@@ -239,23 +242,23 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$id1 = $content1->getItem()->getId();
 
 		$terms = array(
-			$id0 => array(
+			$id0 => new Term( array(
 				'termLanguage' => 'en',
 				'termText' => 'preF',
-			),
-			$id1 => array(
+			) ),
+			$id1 => new Term( array(
 				'termText' => 'post',
-			),
+			) ),
 		);
 
 		$expectedTerms = array(
-			$id0 => array(
+			$id0 => new Term( array(
 				'termLanguage' => 'en',
 				'termText' => 'prefix',
-			),
-			$id1 => array(
+			) ),
+			$id1 => new Term( array(
 				'termText' => 'postfix',
-			),
+			) ),
 		);
 
 		$options = array(
@@ -265,23 +268,25 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$actual = $lookup->getMatchingTerms( $terms, null, null, $options );
 
-		$terms[$id1]['termLanguage'] = 'nl';
-		$expectedTerms[$id1]['termLanguage'] = 'nl';
+		$terms[$id1]->setLanguage( 'nl' );
+		$expectedTerms[$id1]->setLanguage( 'nl' );
 
 		$this->assertInternalType( 'array', $actual );
 		$this->assertEquals( count( $expectedTerms ), count( $actual ) );
 
+		/**
+		 * @var Term $term
+		 * @var Term $expected
+		 */
 		foreach ( $actual as $term ) {
-			$this->testTermArrayStructure( $term );
-
-			$id = $term['entityId'];
+			$id = $term->getEntityId();
 
 			$this->assertTrue( in_array( $id, array( $id0, $id1 ), true ) );
 
 			$expected = $expectedTerms[$id];
 
-			$this->assertEquals( $expected['termText'], $term['termText'] );
-			$this->assertEquals( $expected['termLanguage'], $term['termLanguage'] );
+			$this->assertEquals( $expected->getText(), $term->getText() );
+			$this->assertEquals( $expected->getLanguage(), $term->getLanguage() );
 		}
 	}
 
@@ -334,53 +339,23 @@ class TermCacheTest extends \MediaWikiTestCase {
 
 		$this->assertTrue( $lookup->termExists(
 			'testDeleteTermsForEntity',
-			TermCache::TERM_TYPE_DESCRIPTION,
+			Term::TYPE_DESCRIPTION,
 			'en',
 			Item::ENTITY_TYPE
 		) );
 
 		$this->assertTrue( $lookup->termExists(
 			'ghi',
-			TermCache::TERM_TYPE_LABEL,
+			Term::TYPE_LABEL,
 			'nl',
 			Item::ENTITY_TYPE
 		) );
 
 		$this->assertTrue( $lookup->termExists(
 			'o',
-			TermCache::TERM_TYPE_ALIAS,
+			Term::TYPE_ALIAS,
 			'fr',
 			Item::ENTITY_TYPE
-		) );
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @param array $term
-	 */
-	protected function testTermArrayStructure( array $term ) {
-		$this->assertInternalType( 'array', $term );
-
-		$this->assertArrayHasKey( 'termLanguage', $term );
-		$this->assertArrayHasKey( 'termText', $term );
-		$this->assertArrayHasKey( 'termType', $term );
-		$this->assertArrayHasKey( 'entityId', $term );
-		$this->assertArrayHasKey( 'entityType', $term );
-
-		$this->assertInternalType( 'string', $term['termLanguage'] );
-		$this->assertInternalType( 'string', $term['termText'] );
-		$this->assertInternalType( 'integer', $term['entityId'] );
-		$this->assertInternalType( 'string', $term['entityType'] );
-
-		$this->assertTrue( in_array(
-			$term['termType'],
-			array(
-				TermCache::TERM_TYPE_ALIAS,
-				TermCache::TERM_TYPE_DESCRIPTION,
-				TermCache::TERM_TYPE_LABEL
-			),
-			true
 		) );
 	}
 
@@ -416,7 +391,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 				array(
 					'termLanguage' => 'de',
 					'termText' => 'joinedterms-d0',
-					'termType' => TermCache::TERM_TYPE_DESCRIPTION,
+					'termType' => Term::TYPE_DESCRIPTION,
 				)
 			),
 		);
@@ -426,8 +401,6 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$this->assertInternalType( 'array', $actual );
 
 		foreach ( $actual as $term ) {
-			$this->testTermArrayStructure( $term );
-
 			$id = $term['entityId'];
 
 			$this->assertEquals( $id0, $id );
