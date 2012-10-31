@@ -9,4 +9,11 @@ WikibaseLib holds common code for the Wikibase and WikibaseClient extensions.
 
 === Feature overview ===
 
-* ...
+* Objects to represent entities and items
+* Objects to represent SiteLinks
+* Change propagation system using a shared table
+** Objects to represent changes
+** ChangeNotifier and ChangeHandler interfaces
+** Maintenance script pollForChanges to detect new changes
+* Store interfaces for SiteLink lookups and SiteLink caching
+* Maintenance scripts to rebuild or delete all data
