@@ -54,17 +54,49 @@ final class Utils {
 	}
 
 	/**
-	 * Temporary helper function.
-	 * Inserts some sites into the sites table.
+	 * Inserts some sites into the sites table, if the sites table is currently empty.
+	 * Called when update.php is run. The initial sites are loaded from https://meta.wikimedia.org.
 	 *
+	 * @param \DatabaseUpdater $updater database updater. Not used. Present to be compatible with DatabaseUpdater::addExtensionUpdate
+	 *
+	 * @throws \MWException if an error occurs.
 	 * @since 0.1
 	 */
-	public static function insertDefaultSites() {
+	public static function insertDefaultSites( $updater = null ) {
 		if ( \SitesTable::singleton()->count() > 0 ) {
 			return;
 		}
 
-		// No sites present yet, fetching from meta.wikimedia.org to populate sites table
+		self::insertDefaultSites( 'https://meta.wikimedia.org/w/api.php' );
+	}
+
+	/**
+	 * Inserts sites from another wiki into the sites table. The other wiki must run the
+	 * WikiMatrix extension.
+	 *
+	 * @note This should move into core, together with the populateSitesTable.php script.
+	 *
+	 * @param String           $url     The URL of the API to fetch the sites from.
+	 *                         Defaults to 'https://meta.wikimedia.org/w/api.php'
+	 *
+	 * @param String|bool      $stripProtocol Causes any leading http or https to be stripped from URLs, forcing
+	 *                         the remote sites to be references in a protocol-relative way.
+	 *
+	 * @throws \MWException if an error occurs.
+	 * @since 0.1
+	 */
+	public static function insertSitesFrom( $url, $stripProtocol = false ) {
+
+		// No sites present yet, fetching from api to populate sites table
+
+		$url .= '?action=sitematrix&format=json';
+
+		//NOTE: the raiseException option needs change Iad3995a6 to be merged, otherwise it is ignored.
+		$json = \Http::get( $url, 'default', array( 'raiseException' => true ) );
+
+		if ( !$json ) {
+			throw new \MWException( "Got no data from $url" );
+		}
 
 		$languages = \FormatJson::decode(
 			\Http::get( 'https://meta.wikimedia.org/w/api.php?action=sitematrix&format=json' ),
@@ -84,13 +116,18 @@ final class Utils {
 		wfGetDB( DB_MASTER )->begin();
 
 		// Inserting obtained sites...
-
 		foreach ( $languages['sitematrix'] as $language ) {
 			if ( is_array( $language ) && array_key_exists( 'code', $language ) && array_key_exists( 'site', $language ) ) {
 				$languageCode = $language['code'];
 
 				foreach ( $language['site'] as $siteData ) {
-					$site = \MediaWikiSite::newFromGlobalId( $siteData['dbname'] );
+					$sites = \Sites::singleton();
+					$site = \Sites::singleton()->getSite( $siteData['dbname'] );
+
+					if ( !$site ) {
+						$site = \MediaWikiSite::newFromGlobalId( $siteData['dbname'] );
+					}
+
 					$site->setGroup( $groupMap[$siteData['code']] );
 					$site->setLanguageCode( $languageCode );
 
@@ -98,15 +135,25 @@ final class Utils {
 					$site->addInterwikiId( $localId );
 					$site->addNavigationId( $localId );
 
-					$site->setFilePath( $siteData['url'] . '/w/$1' );
-					$site->setPagePath( $siteData['url'] . '/wiki/$1' );
+					$url = $siteData['url'];
+
+					if ( $stripProtocol === 'stripProtocol' ) {
+						$url = preg_replace( '@^https?:@', '', $url );
+					}
+
+					$site->setFilePath( $url . '/w/$1' );
+					$site->setPagePath( $url . '/wiki/$1' );
 
 					$site->save();
 				}
 			}
 		}
 
-		wfGetDB( DB_MASTER )->commit();
+		if ( $doTrx ) {
+			$dbw->commit();
+		}
+
+		\Sites::singleton()->getSites( false ); // re-cache
 	}
 
 	/**
