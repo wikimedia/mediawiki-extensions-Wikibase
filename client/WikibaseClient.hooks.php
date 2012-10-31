@@ -231,6 +231,10 @@ final class ClientHooks {
 
 		$title->invalidateCache();
 
+		if ( Settings::get( 'enableRC' )  === false ) {
+			return true;
+		}
+
 		$rcinfo = $change->getRCInfo();
 
 		if( ! is_array( $rcinfo ) ) {
@@ -411,6 +415,7 @@ final class ClientHooks {
 				'alwaysSort' => true,
 				'siteGlobalID' => 'enwiki',
 				'siteGroup' => 'wikipedia',
+				'enableRC' => true,
 				'defaultClientStore' => 'sqlstore',
 				// default for repo items in main namespace
 				'repoNamespaces' => array(
