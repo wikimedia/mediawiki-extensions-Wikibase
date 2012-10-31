@@ -23,55 +23,68 @@ class ExternalChangesList {
 
 		$params = unserialize( $rc->getAttribute( 'rc_params' ) );
 		$entityData = $params['wikibase-repo-change'];
+		$parts = explode( '~', $entityData['type'] );
+		$changeType = $parts[1];
+
 		$entityTitle = self::titleTextFromEntityData( $entityData );
 
 		$repoIndex = str_replace( 'api.php', 'index.php', Settings::get( 'repoApi' ) );
 
-		// build a diff link from an RC
-		$diffParams = array(
-			'title' => $entityTitle,
-			'curid' => $entityData['rc_curid'],
-			'diff' => $entityData['rc_this_oldid'],
-			'oldid' => $entityData['rc_last_oldid']
-		);
+		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
+			// todo i18n
+			$deletionLog = self::repoLink( 'Special:Log/delete', 'Deletion log' );
+			$line .= '(' . $deletionLog . ')';
+		} else {
 
-		$diffQuery = wfArrayToCgi( $diffParams );
-		$diffUrl = $repoIndex . '?' . $diffQuery;
-		$diffLink = self::diffLink(
-			$diffUrl,
-			$cl->msg( 'diff' )->escaped(),
-			array(
-				'class' => 'plainlinks',
-				'tabindex' => $rc->counter
-			)
-		);
+			// build a diff link from an RC
+			$diffParams = array(
+				'title' => $entityTitle,
+				'curid' => $entityData['rc_curid'],
+				'diff' => $entityData['rc_this_oldid'],
+				'oldid' => $entityData['rc_last_oldid']
+			);
 
-		$line = '';
-		$line .= '(' . $diffLink . ' | ';
+			$diffQuery = wfArrayToCgi( $diffParams );
+			$diffUrl = $repoIndex . '?' . $diffQuery;
+			$diffLink = self::diffLink(
+				$diffUrl,
+				$cl->msg( 'diff' )->escaped(),
+				array(
+					'class' => 'plainlinks',
+					'tabindex' => $rc->counter
+				)
+			);
 
-		$historyQuery = wfArrayToCgi( array(
-			'title' => $entityTitle,
-			'curid' => $entityData['rc_curid'],
-			'action' => 'history'
-		) );
-		$historyUrl = $repoIndex . '?' . $historyQuery;
+			$line = '';
+			$line .= '(' . $diffLink . ' | ';
 
-		$line .= self::historyLink(
-			$historyUrl,
-			$cl->msg( 'hist' )->escaped(),
-			array(
-				'class' => 'plainlinks'
-			)
-		);
+			$historyQuery = wfArrayToCgi( array(
+				'title' => $entityTitle,
+				'curid' => $entityData['rc_curid'],
+				'action' => 'history'
+			) );
+			$historyUrl = $repoIndex . '?' . $historyQuery;
 
-		$line .= ')';
+			$line .= self::historyLink(
+				$historyUrl,
+				$cl->msg( 'hist' )->escaped(),
+				array(
+					'class' => 'plainlinks'
+				)
+			);
+
+			$line .= ')';
+		}
+
 		$line .= self::changeSeparator();
 
 		$line .= \Linker::link( \Title::newFromText( $rc->getAttribute( 'rc_title' ) ) );
 
-		$entityLink = self::entityLink( $entityData );
-		if ( $entityLink !== false ) {
-			$line .= ' (' . self::entityLink( $entityData )  . ')';
+		if ( $changeType === 'update' ) {
+			$entityLink = self::entityLink( $entityData );
+			if ( $entityLink !== false ) {
+				$line .= ' (' . self::entityLink( $entityData )  . ')';
+			}
 		}
 
 		$cl->insertTimestamp( $line, $rc );
