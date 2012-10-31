@@ -189,7 +189,7 @@ $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit
 
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\ApiGetEntities';
-$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';
+//$wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';
 $wgAPIModules['wbsetlabel'] 						= 'Wikibase\ApiSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'Wikibase\ApiSetDescription';
 $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
@@ -201,10 +201,10 @@ $wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-$wgSpecialPages['NewProperty'] 					= 'SpecialNewProperty';
+//$wgSpecialPages['NewProperty'] 					= 'SpecialNewProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
-$wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
+//$wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
 $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
 
 
