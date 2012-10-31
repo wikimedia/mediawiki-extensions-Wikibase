@@ -68,11 +68,16 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		global $wgUser;
 
 		$wgGroupPermissions = $this->permissions;
-		$wgUser = $this->old_user;
 
-		// reset rights cache
-		$wgUser->addGroup( "dummy" );
-		$wgUser->removeGroup( "dummy" );
+		if ( $this->old_user ) { // should not be null, but sometimes, it is
+			$wgUser = $this->old_user;
+		}
+
+		if ( $wgUser ) { // should not be null, but sometimes, it is
+			// reset rights cache
+			$wgUser->addGroup( "dummy" );
+			$wgUser->removeGroup( "dummy" );
+		}
 
 		parent::tearDown();
 	}
