@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAB7n///8c\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-10-31T18:33:27Z",
+      "side": 1,
+      "message": "in_array already returns a bool, no need for turnary",
+      "revId": "2a1e9eac9231476df8139c884433419176ccdef3",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
