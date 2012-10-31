@@ -258,32 +258,28 @@ abstract class EntityView extends \ContextSource {
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
-		$html = '';
 
-		if( empty( $aliases ) ) {
-			// no aliases available for this entity
-			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases wb-aliases-empty' ) );
-			$html .= Html::openElement( 'div', array( 'class' => 'wb-gridhelper' ) );
-			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label wb-value-empty' ), wfMessage( 'wikibase-aliases-empty' )->text() );
-			$html .= $this->getHtmlForEditSection( $entity, $lang, 'span', 'add' );
-			$html .= Html::closeElement( 'div' );
-			$html .= Html::closeElement( 'div' );
+		if ( empty( $aliases ) ) {
+			return wfTemplate( 'wb-aliases-wrapper',
+				'wb-aliases-empty',
+				'wb-value-empty',
+				wfMessage( 'wikibase-aliases-empty' )->text(),
+				$this->getHtmlForEditSection( $entity, $lang, 'span', 'add' )
+			);
 		} else {
-			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
-			$html .= Html::openElement( 'div', array( 'class' => 'wb-gridhelper' ) );
-			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMessage( 'wikibase-aliases-label' )->text() );
-			$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
+			$aliasesHtml = '';
 			foreach( $aliases as $alias ) {
-				$html .= Html::element(
-					'li', array( 'class' => 'wb-aliases-alias' ), $alias
-				);
+				$aliasesHtml .= wfTemplate( 'wb-alias', $alias );
 			}
-			$html .= Html::closeElement( 'ul' );
-			$html .= $this->getHtmlForEditSection( $entity, $lang );
-			$html .= Html::closeElement( 'div' );
-			$html .= Html::closeElement( 'div' );
+			$aliasList = wfTemplate( 'wb-aliases', $aliasesHtml );
+
+			return wfTemplate( 'wb-aliases-wrapper',
+				'',
+				'',
+				wfMessage( 'wikibase-aliases-label' )->text(),
+				$aliasList . $this->getHtmlForEditSection( $entity, $lang )
+			);
 		}
-		return $html;
 	}
 
 	/**
