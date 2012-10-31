@@ -30,6 +30,7 @@ final class LibHooks {
 		$settings = array_merge(
 			$settings,
 			array(
+				'useChangesTable' => true, // whether changes get recorded to wb_changes
 				'changeHandlers' => array(
 					'wikibase-item~add' => 'Wikibase\EntityCreation',
 					'wikibase-property~add' => 'Wikibase\EntityCreation',
