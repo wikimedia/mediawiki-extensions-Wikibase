@@ -70,8 +70,6 @@ class SpecialNewProperty extends SpecialCreateEntity {
 
 		if ( $this->dataType !== '' ) {
 			// TODO: lookup property by lang+label rather then by id
-			$lang = $this->getLanguage()->getCode();
-
 			try {
 				$propertyContent->getProperty()->setDataTypeById( $this->dataType );
 			}

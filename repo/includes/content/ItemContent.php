@@ -225,14 +225,14 @@ class ItemContent extends EntityContent {
 	 * @since 0.1
 	 *
 	 * @param $reason string delete reason for deletion log
-	 * @param $suppress int bitfield
-	 * 	Revision::DELETED_TEXT
-	 * 	Revision::DELETED_COMMENT
-	 * 	Revision::DELETED_USER
-	 * 	Revision::DELETED_RESTRICTED
+	 * @param bool|int $suppress int bitfield
+	 *     Revision::DELETED_TEXT
+	 *     Revision::DELETED_COMMENT
+	 *     Revision::DELETED_USER
+	 *     Revision::DELETED_RESTRICTED
 	 * @param $id int article ID
 	 * @param $commit boolean defaults to true, triggers transaction end
-	 * @param &$error Array of errors to append to
+	 * @param Array|string $error
 	 * @param $user User The deleting user
 	 *
 	 * @return int: One of WikiPage::DELETE_* constants
