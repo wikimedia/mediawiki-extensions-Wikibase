@@ -149,9 +149,7 @@ final class Utils {
 			}
 		}
 
-		if ( $doTrx ) {
-			$dbw->commit();
-		}
+		wfGetDB( DB_MASTER )->commit();
 
 		\Sites::singleton()->getSites( false ); // re-cache
 	}
