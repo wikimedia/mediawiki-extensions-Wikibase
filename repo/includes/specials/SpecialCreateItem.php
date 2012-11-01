@@ -13,6 +13,17 @@
  */
 class SpecialCreateItem extends SpecialCreateEntity {
 
+
+	/**
+	 * @var string|null
+	 */
+	protected $site = null;
+
+	/**
+	 * @var string|null
+	 */
+	protected $page = null;
+
 	/**
 	 * Constructor.
 	 *
@@ -23,10 +34,87 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	}
 
 	/**
+	 * @see SpecialCreateEntity::prepareArguments()
+	 */
+	protected function prepareArguments() {
+		parent::prepareArguments();
+		$this->site = $this->getRequest()->getVal( 'site', null );
+		$this->page = $this->getRequest()->getVal( 'page', null );
+		return true;
+	}
+
+	/**
 	 * @see SpecialCreateEntity::createEntity()
 	 */
 	protected function createEntity() {
 		return \Wikibase\ItemContent::newEmpty();
+	}
+
+	/**
+	 * @see SpecialCreateEntity::modifyEntity()
+	 */
+	protected function modifyEntity( \Wikibase\EntityContent &$itemContent ) {
+		$status = parent::modifyEntity( $itemContent );
+		if ( $this->site !== null && $this->page !== null ) {
+			try {
+				$link = \Wikibase\SiteLink::newFromText( $this->site, $this->page, $normalize = true );
+				$itemContent->getItem()->addSiteLink( $link, 'add' );
+			} catch ( MWException $exception ) {
+				// TODO: Show a notice but don't block the creation
+			}
+		}
+		return $status;
+	}
+
+	/**
+	 * @see SpecialCreateEntity::additionalFormElements()
+	 */
+	protected function additionalFormElements() {
+		if ( $this->site === null || $this->page === null ) {
+			return parent::additionalFormElements();
+		}
+
+		return parent::additionalFormElements()
+		. Html::element(
+			'site',
+			array(
+				'for' => 'wb-createitem-site',
+				'class' => 'wb-label'
+			),
+			$this->msg( 'wikibase-createitem-site' )->text()
+		)
+		. Html::input(
+			'site',
+			$this->site,
+			'text',
+			array(
+				'id' => 'wb-createitem-site',
+				'size' => 12,
+				'class' => 'wb-input',
+				'readonly' => 'readonly'
+			)
+		)
+		. Html::element( 'br' )
+		. Html::element(
+			'page',
+			array(
+				'for' => 'wb-createitem-page',
+				'class' => 'wb-label'
+			),
+			$this->msg( 'wikibase-createitem-page' )->text()
+		)
+		. Html::input(
+			'page',
+			$this->page,
+			'text',
+			array(
+				'id' => 'wb-createitem-page',
+				'size' => 12,
+				'class' => 'wb-input',
+				'readonly' => 'readonly'
+			)
+		)
+		. Html::element( 'br' );
 	}
 
 	/**
