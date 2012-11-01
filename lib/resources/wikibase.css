@@ -118,7 +118,7 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 
 /* preventing layout jittering toggling between view and edit mode */
 .wb-firstHeading .wb-value {
-	line-height: 1.2em; /* adjust line height to input box height in edit mode */
+	line-height: 1.2; /* adjust line height to input box height in edit mode */
 	padding: 1px; /* even out border of input box in edit mode */
 }
 
@@ -150,7 +150,7 @@ label and its toolbar */
 }
 .wb-firstHeading .wb-ui-toolbar {
 	font-size: 188%;
-	line-height: 1.2em; /* adjust to height of value */
+	line-height: 1.2; /* adjust to height of value */
 	padding-top: 1px; /* even out border of input box */
 }
 .wb-firstHeading .wb-ui-toolbar-group {
@@ -178,12 +178,12 @@ label and its toolbar */
 }
 
 .wb-description .wb-value {
-	line-height: 2em; /* force height to be able to align toolbar */
+	line-height: 2; /* force height to be able to align toolbar */
 }
 
 .wb-description .editsection {
 	top: 0.1em; /* see padding-top of editablevalue container */
-	line-height: 2em;
+	line-height: 2;
 }
 
 /********** /DESCRIPTION **********/
