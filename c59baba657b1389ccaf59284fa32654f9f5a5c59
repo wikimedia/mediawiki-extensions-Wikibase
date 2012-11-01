@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "AAACBX///1U\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-01T15:37:57Z",
+      "side": 1,
+      "message": "Agree with current approach of using wgCurRevisionId is bad. Suggest using a parameter and not storing such state in an API object. If the API/store interaction layer is kept very thin, it will be simpler to understand and debug. You can then always build something that keeps track of state on top if this is useful for some purpose.",
+      "parentUuid": "AAACAn///78\u003d",
+      "revId": "c59baba657b1389ccaf59284fa32654f9f5a5c59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACAn///7k\u003d",
         "filename": "lib/resources/wikibase.store/wikibase.Api.js",
         "patchSetId": 1
