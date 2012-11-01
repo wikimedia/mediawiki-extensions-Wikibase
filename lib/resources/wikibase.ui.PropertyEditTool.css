@@ -106,6 +106,19 @@ table.wb-ui-propertyedittool-ineditmode {
 	height: 1.2em;
 }
 
+/* The wait message displayed when saving the label has to be customized due to differging font
+sizes and line heights within the heading */
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-waitmsg {
+	display: inline-block;
+	font-size: 188%;
+	line-height: 1.2;
+	padding-top: 1px;
+	margin: 0;
+}
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-waitmsg span {
+	font-size: 53%;
+}
+
 /***** /LABEL *****/
 
 /***** DESCRIPTION *****/
