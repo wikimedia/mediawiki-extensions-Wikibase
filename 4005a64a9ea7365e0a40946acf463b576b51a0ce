@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACBX///4w\u003d",
+        "filename": "client/resources/Resources.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-01T15:18:07Z",
+      "side": 1,
+      "message": "Why \u0027ext.wikibaseclient.init\u0027 ? I thought \u0027ext.wikibaseclient\u0027 is sufficient.",
+      "revId": "4005a64a9ea7365e0a40946acf463b576b51a0ce",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
