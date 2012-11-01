@@ -209,7 +209,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 			'data' => $json->encode( $itemData ),
 		);
 
-		$this->doPermissionsTest( 'wbsetitem', $params, $permissions, $expectedError );
+		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
 	function provideSetSiteLinkPermissions() {

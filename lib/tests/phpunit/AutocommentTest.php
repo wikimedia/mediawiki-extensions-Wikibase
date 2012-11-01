@@ -58,7 +58,7 @@ class AutocommentTest extends \MediaWikiTestCase {
 			array(
 				CONTENT_MODEL_WIKIBASE_ITEM,
 				"wikibase-item",
-				'foo', 'wbsetitem', 'bar',
+				'foo', 'wbeditentity', 'bar',
 				'Title',
 				false,
 				'!foo- ‎<span dir="auto"><span class="autocomment">.*?</span>bar</span>!'
