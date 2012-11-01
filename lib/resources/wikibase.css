@@ -1,12 +1,12 @@
 /**
- * common styles independent from JavaScript being enabled or disabled
+ * Common styles independent from JavaScript being enabled or disabled.
  *
  * @since 0.1
  * @file
  * @ingroup Wikibase
  *
  * @license GNU GPL v2+
- * @author H. Snater
+ * @author H. Snater < mediawiki@snater.com >
  */
 
 /* since a custom heading is being used on the entity pages, the native h1 tag has to be hidden */
@@ -279,7 +279,6 @@ h2.wb-sitelinks-heading {
 }
 
 table.wb-sitelinks {
-	table-layout: fixed;
 	border-spacing: 0;
 	width: 100%;
 	border-bottom: 1px solid #C9C9C9;
@@ -290,20 +289,20 @@ table.wb-sitelinks .wb-sitelinks-columnheaders {
 }
 
 table.wb-sitelinks .wb-sitelinks-sitename {
-	width: 24%;
+	width: 25%;
 	word-wrap: break-word;
 	padding-left: 10px;
 	border-left: 1px solid #C9C9C9;
 }
 
 table.wb-sitelinks .wb-sitelinks-siteid {
-	width: 13%;
+	width: 10%;
 	padding: 0 10px;
 	white-space: nowrap;
 }
 
 table.wb-sitelinks .wb-sitelinks-link {
-	width: 63%;
+	width: 65%;
 	word-wrap: break-word;
 	border-right: 1px solid #C9C9C9;
 }
@@ -350,6 +349,21 @@ table.wb-sitelinks .editsection {
 	position: static; /* clear absolute positioning */
 	float: none; /* overwrite edit section's float: right */
 	border-right: 1px solid #C9C9C9;
+	padding: 0;
+	margin-left: 0; /* reset edit section's margin which is set in the toolbar group instead;
+	                applying margin to the edit section cell should not have any effect at all */
+}
+
+table.wb-sitelinks .editsection .wb-ui-toolbar {
+	width: 13em; /* additionally assign width to toolbar to enforce width in no-JS version */
+}
+
+table.wb-sitelinks .editsection .wb-ui-toolbar .wb-ui-toolbar-group {
+	margin-left: 1px; /* even out table cell's right border */
+}
+
+table.wb-sitelinks .editsection .wb-ui-toolbar .wb-ui-toolbar-group .wb-ui-toolbar-group {
+	margin-left: 0; /* do not apply margin to nested toolbar groups */
 }
 
 table.wb-sitelinks tfoot td.wb-sitelinks-placeholder {
