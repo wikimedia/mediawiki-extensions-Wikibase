@@ -111,7 +111,7 @@ class ApiBotEditTest extends ApiModifyItemBase {
 		$token = $this->getItemToken();
 
 		$req = array(
-			'action' => 'wbsetitem',
+			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
 			'data' => '{}',
 			'token' => $token,
@@ -137,7 +137,7 @@ class ApiBotEditTest extends ApiModifyItemBase {
 		$token = $this->getItemToken();
 
 		$req = array(
-			'action' => 'wbsetitem',
+			'action' => 'wbeditentity',
 			'summary' => 'Some reason',
 			'data' => $data,
 			'token' => $token,

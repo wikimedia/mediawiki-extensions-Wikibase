@@ -196,7 +196,7 @@ to find out where it went.',
 	'wikibase-noentity-createone' => 'You can also [[$1|create a new one]].',
 
 	// summary and autocomment
-	'wikibase-item-summary-wbsetitem' => 'Created a new item',
+	'wikibase-item-summary-wbeditentity' => 'Created a new item',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changed [$2] label',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removed [$2] label',
 	'wikibase-item-summary-wbsetdescription-set' => 'Changed [$2] description',
@@ -451,7 +451,7 @@ Parameters:
 * $1 is the name of the namespace for which direct editing was denied.',
 	'wikibase-noentity' => 'Of some reason the user tried to access an entity which then was detected as non-existing. This can happen when an entity is deleted and clients are not yet made aware of this.',
 	'wikibase-noentity-createone' => 'Put immediately after "wikibase-noentity" if the user has the right to create an entity of the given type. This message tells the user that he can create one and gives a link in $1 to the special page where this can be done.',
-	'wikibase-item-summary-wbsetitem' => 'Automatic edit summary generated when creating a new item.',
+	'wikibase-item-summary-wbeditentity' => 'Automatic edit summary generated when creating a new item.',
 	'wikibase-item-summary-wbsetlabel-set' => 'Automatic edit summary generated when editing an item label, which appears in the h1 heading at top of the page. Example edit summary is "Updated [en] label:  Egypt". Parameters:
 * $2 is the language code for the item page.',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Automatic edit summary generated when removing an item label. Example edit summary is "Removed [en] label". Parameters:
@@ -732,7 +732,7 @@ $messages['de'] = array(
 	'wikibase-noentity' => 'Dieser Datensatz ist nicht vorhanden.
 Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} entsprechenden Logbücher danach durchsuchen]</span>, um herauszufinden was mit ihm passiert ist.',
 	'wikibase-noentity-createone' => 'Du kannst auch [[$1|ein neues erstellen]].',
-	'wikibase-item-summary-wbsetitem' => 'Erstellte ein neues Datenelement',
+	'wikibase-item-summary-wbeditentity' => 'Erstellte ein neues Datenelement',
 	'wikibase-item-summary-wbsetlabel-set' => 'Änderte Bezeichnung für [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Entfernte Bezeichnung für [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Änderte Beschreibung für [$2]',
@@ -911,7 +911,7 @@ $messages['dsb'] = array(
 	'wikibase-no-direct-editing' => 'Direktne wobźěłowanje w mjenjowem rumje $1 jo se znjemóžniło.',
 	'wikibase-noentity' => 'Toś ta datowa sajźba njeeksistěrujo. Móžoš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wótpowědujuce protokole pśepytaś]</span>, aby wuslěźił, což jo se jej stało.',
 	'wikibase-noentity-createone' => 'Móžoš teke [[$1|nowu napóraś]].',
-	'wikibase-item-summary-wbsetitem' => 'Nowy element napórany',
+	'wikibase-item-summary-wbeditentity' => 'Nowy element napórany',
 	'wikibase-item-summary-wbsetlabel-set' => 'Pomjenjenje za [$2] změnjone',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Pomjenjenje za [$2] wótpórane',
 	'wikibase-item-summary-wbsetdescription-set' => 'Wopisanje za  [$2] změnjone',
@@ -1057,7 +1057,7 @@ $messages['es'] = array(
 	'wikibase-no-direct-editing' => 'La edición directa está desactivada en el espacio de nombres $1',
 	'wikibase-noentity' => 'Este conjunto de datos no existe. Puedes <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} buscar los registros relacionados]</span> para saber donde se pueden encontrar.',
 	'wikibase-noentity-createone' => 'También puedes [[$1|crear uno nuevo]].',
-	'wikibase-item-summary-wbsetitem' => 'Crear un nuevo elemento',
+	'wikibase-item-summary-wbeditentity' => 'Crear un nuevo elemento',
 	'wikibase-item-summary-wbsetlabel-set' => 'La etiqueta [$2] ha cambiado',
 	'wikibase-item-summary-wbsetlabel-remove' => 'La etiqueta [$2] ha sido eliminada',
 	'wikibase-item-summary-wbsetdescription-set' => 'La descripción [$2] ha cambiado',
@@ -1219,7 +1219,7 @@ $messages['fa'] = array(
 	'wikibase-noentity' => 'این مورد وجود ندارد.
 می‌توانید <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} سیاهه‌های مرتبط را جست‌وجو کنید]</span>',
 	'wikibase-noentity-createone' => 'شما همچنین می توانید [[$1|یک مورد جدید بسازید]].',
-	'wikibase-item-summary-wbsetitem' => 'ایجاد یک مورد جدید',
+	'wikibase-item-summary-wbeditentity' => 'ایجاد یک مورد جدید',
 	'wikibase-item-summary-wbsetlabel-set' => 'برچسب [ $2 ] تغییریافت',
 	'wikibase-item-summary-wbsetlabel-remove' => 'برچسب [ $2 ] حذف شد',
 	'wikibase-item-summary-wbsetdescription-set' => 'توضیحات [ $2 ] تغییر یافت',
@@ -1519,7 +1519,7 @@ $messages['gl'] = array(
 	'wikibase-noentity' => 'O conxunto de datos non existe. Pode
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} procurar nos rexistros relacionados]</span> para descubrir onde foi parar.',
 	'wikibase-noentity-createone' => 'Tamén pode [[$1|crear un novo]].',
-	'wikibase-item-summary-wbsetitem' => 'Creo un elemento novo',
+	'wikibase-item-summary-wbeditentity' => 'Creo un elemento novo',
 	'wikibase-item-summary-wbsetlabel-set' => 'Cambio a etiqueta en [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Elimino a etiqueta en [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Cambio a descrición en [$2]',
@@ -1672,7 +1672,7 @@ $messages['he'] = array(
 	'wikibase-no-direct-editing' => 'עריכה ישירה כבויה במרחב השם $1',
 	'wikibase-noentity' => 'ערכת הנתונים הזאת אינה קיימת. ניתן <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} לחפש ביומנים הקשורים]</span> כדי למצוא לאן היא נעלמה.',
 	'wikibase-noentity-createone' => 'אפשר גם [[$1|ליצור אחת חדשה]].',
-	'wikibase-item-summary-wbsetitem' => 'נוצר פריט חדש',
+	'wikibase-item-summary-wbeditentity' => 'נוצר פריט חדש',
 	'wikibase-item-summary-wbsetlabel-set' => 'שונתה התווית בשפה [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'הוסרה התווית [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'שינוי התיאור בשפה [$2]',
@@ -1818,7 +1818,7 @@ $messages['hsb'] = array(
 	'wikibase-no-direct-editing' => 'Direktne wobdźěłowanje w mjenowym rumje $1 je znjemóžnjene.',
 	'wikibase-noentity' => 'Tuta datowa sadźba njeeksistuje. Móžeš <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} wotpowědowace protokole přepytać]</span>, zo by wuslědźił, štož je so jej stało.',
 	'wikibase-noentity-createone' => 'Móžeš tež [[$1|nowu wutworić]].',
-	'wikibase-item-summary-wbsetitem' => 'Nowy element wutworjeny',
+	'wikibase-item-summary-wbeditentity' => 'Nowy element wutworjeny',
 	'wikibase-item-summary-wbsetlabel-set' => 'Pomjenowanje za [$2] změnjene',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Pomjenowanje za [$2] wotstronjene',
 	'wikibase-item-summary-wbsetdescription-set' => 'Wopisanje za  [$2] změnjene',
@@ -2011,7 +2011,7 @@ $messages['is'] = array(
 	'wikibase-noentity' => 'Þessi gagnagerð er ekki til.
 Þú getur <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} leitað í aðgerðarskránni]</span>.',
 	'wikibase-noentity-createone' => 'Þú getur líka [[$1|búið til nýjan]].',
-	'wikibase-item-summary-wbsetitem' => 'Búa til nýjan hlut',
+	'wikibase-item-summary-wbeditentity' => 'Búa til nýjan hlut',
 	'wikibase-item-summary-wbsetlabel-set' => 'Breytti [$2] merkimiða',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Fjarlægði [$2] merkimiða',
 	'wikibase-item-summary-wbsetdescription-set' => 'Breytti [$2] lýsingu',
@@ -2148,7 +2148,7 @@ $messages['it'] = array(
 	'wikibase-noentity' => 'Questo set di dati non esiste.
 Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} cercare i relativi log]</span> per sapere dove è andato.',
 	'wikibase-noentity-createone' => 'Puoi anche [[$1|crearne uno nuovo]].',
-	'wikibase-item-summary-wbsetitem' => 'Creato un nuovo elemento',
+	'wikibase-item-summary-wbeditentity' => 'Creato un nuovo elemento',
 	'wikibase-item-summary-wbsetlabel-set' => 'Cambiata etichetta [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Rimossa etichetta [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Cambiata descrizione [$2]',
@@ -2248,7 +2248,7 @@ $messages['ja'] = array(
 	'wikibase-restoreold' => '復元',
 	'wikibase-no-direct-editing' => '$1 名前空間では直接の編集は無効になっています',
 	'wikibase-noentity-createone' => '[[$1|新規作成]]することもできます。',
-	'wikibase-item-summary-wbsetitem' => '項目を新規作成',
+	'wikibase-item-summary-wbeditentity' => '項目を新規作成',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] のラベルを変更',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] のラベルを除去',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2] の説明を変更',
@@ -2404,7 +2404,7 @@ $messages['ko'] = array(
 	'wikibase-noentity' => '이 데이터 집합이 존재하지 않습니다.
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 관련 기록을 찾을]</span> 수 있습니다.',
 	'wikibase-noentity-createone' => '또한 [[$1|새 항목을 만들 수 있습니다]].',
-	'wikibase-item-summary-wbsetitem' => '새 항목을 만듦',
+	'wikibase-item-summary-wbeditentity' => '새 항목을 만듦',
 	'wikibase-item-summary-wbsetlabel-set' => '[$2] 레이블 바꿈',
 	'wikibase-item-summary-wbsetlabel-remove' => '[$2] 레이블 제거함',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2] 설명 바꿈',
@@ -2617,7 +2617,7 @@ $messages['mk'] = array(
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} пребарате по поврзаните дневници]</span>
 зада дознаете каде отишол',
 	'wikibase-noentity-createone' => 'Можете и да [[$1|создадете нов]].',
-	'wikibase-item-summary-wbsetitem' => 'Создавање на нов предмет',
+	'wikibase-item-summary-wbeditentity' => 'Создавање на нов предмет',
 	'wikibase-item-summary-wbsetlabel-set' => 'Сменета етикетата на [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Отстранета етикетата на [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Сменет описот на [$2]',
@@ -2755,7 +2755,7 @@ $messages['ms'] = array(
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} mencari log-log yang berkaitan]</span>
 untuk mencari di mana set data itu.',
 	'wikibase-noentity-createone' => 'Anda juga boleh [[$1|mencipta set data yang baru]].',
-	'wikibase-item-summary-wbsetitem' => 'Perkara baru dicipta',
+	'wikibase-item-summary-wbeditentity' => 'Perkara baru dicipta',
 	'wikibase-item-summary-wbsetlabel-set' => 'Label [$2] ditukar',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Label [$2] dibuang',
 	'wikibase-item-summary-wbsetdescription-set' => 'Keterangan [$2] diubah',
@@ -2944,7 +2944,7 @@ $messages['nl'] = array(
 	'wikibase-restoreold' => 'opnieuw instellen',
 	'wikibase-restore-summary' => 'Versie $1 van [[Special:Contributions/$2|$2]] teruggeplaatst',
 	'wikibase-no-direct-editing' => 'Rechtstreeks bewerken is niet mogelijk in de naamruimte $1',
-	'wikibase-item-summary-wbsetitem' => 'Nieuw item aangemaakt',
+	'wikibase-item-summary-wbeditentity' => 'Nieuw item aangemaakt',
 	'wikibase-item-summary-wbsetlabel-set' => 'Label [$2] gewijzigd.',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Label [$2] verwijderd',
 	'wikibase-item-summary-wbsetdescription-set' => 'Beschrijving [$2] gewijzigd',
@@ -3041,7 +3041,7 @@ $messages['nn'] = array(
 	'wikibase-createentity-submit' => 'Opprett',
 	'wikibase-restoreold' => 'attopprett',
 	'wikibase-restore-summary' => 'Attoppretta versjon $1 av [[Special:Contributions/$2|$2]]',
-	'wikibase-item-summary-wbsetitem' => 'Oppretta eit nytt datasett',
+	'wikibase-item-summary-wbeditentity' => 'Oppretta eit nytt datasett',
 	'wikibase-item-summary-wbsetlabel-set' => 'Endra [$2]-merkelapp',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Fjerna [$2]-merkelapp',
 	'wikibase-item-summary-wbsetdescription-set' => 'Endra [$2]-skildring',
@@ -3134,7 +3134,7 @@ $messages['pl'] = array(
 	'wikibase-createentity-submit' => 'Utwórz',
 	'wikibase-self-conflict' => 'Dane zostały zmodyfikowane przez ciebie po rozpoczęciu edycji.',
 	'wikibase-restoreold' => 'przywróć',
-	'wikibase-item-summary-wbsetitem' => 'Utworzono nowy element',
+	'wikibase-item-summary-wbeditentity' => 'Utworzono nowy element',
 	'content-model-1001' => 'Element Wikibase',
 );
 
@@ -3326,7 +3326,7 @@ $messages['pt-br'] = array(
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} Pesquisar os logs relacionados]</span> 
 para descobrir para onde ele foi.',
 	'wikibase-noentity-createone' => 'Você também pode [[$1|criar um novo]].',
-	'wikibase-item-summary-wbsetitem' => 'Criado um novo item',
+	'wikibase-item-summary-wbeditentity' => 'Criado um novo item',
 	'wikibase-item-summary-wbsetlabel-set' => 'Alterado o nome [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Removido o nome [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Alterada a descrição [$2]',
@@ -3441,7 +3441,7 @@ $messages['si'] = array(
 	'wikibase-itemdisambiguation-submit' => 'සොයන්න',
 	'special-createitem' => 'නව අයිතමයක් තනන්න',
 	'wikibase-restoreold' => 'නැවත සකසන්න',
-	'wikibase-item-summary-wbsetitem' => 'නව අයිතමයක් තනන ලදී',
+	'wikibase-item-summary-wbeditentity' => 'නව අයිතමයක් තනන ලදී',
 );
 
 /** Swedish (svenska)
@@ -3494,7 +3494,7 @@ $messages['ta'] = array(
 	'wikibase-itembytitle-submit' => 'தேடு',
 	'wikibase-itemdisambiguation-lookup-language' => 'மொழி:',
 	'wikibase-itemdisambiguation-submit' => 'தேடு',
-	'wikibase-item-summary-wbsetitem' => 'ஒரு புதிய உருப்படி உருவாக்கப்பட்டது',
+	'wikibase-item-summary-wbeditentity' => 'ஒரு புதிய உருப்படி உருவாக்கப்பட்டது',
 	'wikibase-item-summary-wbsetdescription-set' => '[$2] விளக்கம் மாற்றப்பட்டது',
 	'wikibase-item-summary-wbsetdescription-remove' => '[$2] விளக்கம் நீக்கப்பட்டது',
 );
@@ -3610,7 +3610,7 @@ $messages['tl'] = array(
 	'wikibase-self-conflict' => 'Binago mo ang dato pagkaraan mong simulan ang pamamatnugot.',
 	'wikibase-restoreold' => 'itakdang muli',
 	'wikibase-restore-summary' => 'Ipanumbalik ang rebisyong $1 ni [[Special:Contributions/$2|$2]]',
-	'wikibase-item-summary-wbsetitem' => 'Nilikha ang isang bagong bagay',
+	'wikibase-item-summary-wbeditentity' => 'Nilikha ang isang bagong bagay',
 	'wikibase-item-summary-wbsetlabel-set' => 'Binago ang [$2] katatakan',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Tinanggal ang [$2] katatakan',
 	'wikibase-item-summary-wbsetdescription-set' => 'Binago ang [$2] paglalarawan',
@@ -3699,7 +3699,7 @@ $messages['vi'] = array(
 	'wikibase-createentity-description' => 'Miêu tả:',
 	'wikibase-createentity-submit' => 'Tạo',
 	'wikibase-restoreold' => 'phục hồi',
-	'wikibase-item-summary-wbsetitem' => 'Đã tạo khoản mục mới',
+	'wikibase-item-summary-wbeditentity' => 'Đã tạo khoản mục mới',
 	'content-model-1001' => 'khoản mục Wikibase',
 );
 
