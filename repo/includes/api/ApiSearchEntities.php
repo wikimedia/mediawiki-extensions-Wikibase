@@ -97,7 +97,7 @@ class ApiSearchEntities extends ApiBase {
 			$score = 0;
 			$entry = array();
 			$entity = $hit->getEntity();
-			$entry['id'] = $entity->getId();
+			$entry['id'] = $entity->getPrefixedId();
 			if ( $entity->getLabel( $params['language'] ) !== false ) {
 				$entry['labels'] = $entity->getLabel( $params['language'] );
 				$score = strlen( $params['search'] ) / strlen( $entity->getLabel( $params['language'] ) );
