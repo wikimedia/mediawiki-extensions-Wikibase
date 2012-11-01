@@ -261,6 +261,12 @@ class ApiEditEntity extends ApiModifyEntity {
 					break;
 
 				case 'sitelinks':
+					// TODO: This is a temporary fix that should be handled properly with an
+					// injector/inputter class that is specific for the given entity
+					if ( $entityContent->getEntity()->getType() !== Item::ENTITY_TYPE ) {
+						$this->dieUsage( "key can't be handled: $props", 'not-recognized' );
+					}
+
 					if ( !is_array( $list ) ) {
 						$this->dieUsage( "Key 'sitelinks' must refer to an array", 'not-recognized-array' );
 					}
@@ -318,7 +324,12 @@ class ApiEditEntity extends ApiModifyEntity {
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
-		$this->addSiteLinksToResult( $entity->getSiteLinks(), 'entity' );
+
+		// TODO: This is a temporary fix that should be handled properly with a
+		// serializer class that is specific for the given entity
+		if ( $entityContent->getEntity()->getType() === Item::ENTITY_TYPE ) {
+			$this->addSiteLinksToResult( $entity->getSiteLinks(), 'entity' );
+		}
 
 		return true;
 	}
