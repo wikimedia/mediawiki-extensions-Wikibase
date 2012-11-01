@@ -82,7 +82,8 @@ class SpecialSetLabel extends SpecialWikibasePage {
 
 			$entityContent->getEntity()->setLabel( $language, $label );
 			$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() );
-			$status = $editEntity->attemptSave( '', EDIT_AUTOSUMMARY,  $request->getVal( 'wpEditToken' ) );
+			$editEntity->attemptSave( '', EDIT_AUTOSUMMARY,  $request->getVal( 'wpEditToken' ) );
+
 			if ( !($editEntity->isSuccess()) ) {
 				$editEntity->showErrorPage( $this->getOutput() );
             } else if ( $entityContent !== null ) {

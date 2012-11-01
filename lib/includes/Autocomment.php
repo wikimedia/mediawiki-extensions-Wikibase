@@ -96,7 +96,7 @@ final class Autocomment {
 		$filtered = array_merge( $common, array_intersect_key( $params, $common ) );
 
 		$values = array();
-		foreach ( $filtered as $k => $v ) {
+		foreach ( $filtered as $v ) {
 			if ( is_string( $v ) && $v !== '' ) {
 				$values[] = $v;
 			}

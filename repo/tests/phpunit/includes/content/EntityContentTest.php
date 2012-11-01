@@ -304,7 +304,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	public function testUserCan( $action, $group, $permissions, $create, $expectedOK ) {
 		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
 
-		$status = $content->checkPermission( $action );
+		$content->checkPermission( $action );
 
 		$this->assertEquals( $expectedOK, $content->userCan( $action ) );
 	}
