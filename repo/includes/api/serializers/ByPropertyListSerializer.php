@@ -51,7 +51,7 @@ class ByPropertyListSerializer extends ApiSerializerObject {
 	 *
 	 * @since 0.2
 	 *
-	 * @param ApiResult $elementName
+	 * @param string $elementName
 	 * @param ApiSerializer $elementSerializer
 	 * @param ApiResult $apiResult
 	 * @param ApiSerializationOptions|null $options
