@@ -436,8 +436,12 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
-		// FIXME: we do NOT want to add these resources on every page where the parser is used (ie pretty much all pages)
-		$out->addModules( 'ext.wikibaseclient' );
+		$title = $out->getTitle();
+
+		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
+			$out->addModules( 'ext.wikibaseclient.init' );
+		}
+
 		return true;
 	}
 
@@ -452,30 +456,38 @@ final class ClientHooks {
 	 * @return boolean
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
-		$editUrl = Settings::get( 'repoBase' );
-		if( !$editUrl ) {
+		if ( empty( $template->data['language_urls'] ) ) {
 			return true;
 		}
 
 		$title = $skin->getContext()->getTitle();
+		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
 
-		// gets the main part of the title, no underscores used in this db table
-		$titleText = $title->getText();
+			$editUrl = Settings::get( 'repoBase' );
+			if( !$editUrl ) {
+				return true;
+			}
 
-		// main part of title for building link
-		$titleLink = $title->getPartialURL();
-		$siteId = Settings::get( 'siteGlobalID' );
+			$title = $skin->getContext()->getTitle();
 
-		$itemId = ClientStoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $titleText );
+			// gets the main part of the title, no underscores used in this db table
+			$titleText = $title->getText();
 
-		if ( $itemId ) {
-			// links to the special page
-			$template->data['language_urls'][] = array(
-				'href' => rtrim( $editUrl, "/" ) . "/Special:ItemByTitle/$siteId/$titleLink",
-				'text' => wfMessage( 'wbc-editlinks' )->text(),
-				'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
-				'class' => 'wbc-editpage',
-			);
+			// main part of title for building link
+			$titleLink = $title->getPartialURL();
+			$siteId = Settings::get( 'siteGlobalID' );
+
+			$itemId = ClientStoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink( $siteId, $titleText );
+
+			if ( $itemId ) {
+				// links to the special page
+				$template->data['language_urls'][] = array(
+					'href' => rtrim( $editUrl, "/" ) . "/Special:ItemByTitle/$siteId/$titleLink",
+					'text' => wfMessage( 'wbc-editlinks' )->text(),
+					'title' => wfMessage( 'wbc-editlinkstitle' )->text(),
+					'class' => 'wbc-editpage',
+				);
+			}
 		}
 
 		return true;
