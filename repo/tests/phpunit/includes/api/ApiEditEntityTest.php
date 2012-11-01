@@ -288,7 +288,7 @@ class ApiEditEntityTest extends ApiModifyItemBase {
 		);
 		foreach ( $failingData as $data ) {
 			try {
-				list($res,,) = $this->doApiRequest(
+				$this->doApiRequest(
 					array(
 						'action' => 'wbeditentity',
 						'reason' => 'Some reason',

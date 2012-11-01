@@ -47,7 +47,6 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 * @see  ApiAutocomment::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		$parts = array();
 		return Autocomment::formatAutoSummary(
 			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
 		);
@@ -123,7 +122,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new EditEntity( $entityContent, $this->getUser(), $baseRevisionId );
 
-		$status = $editEntity->attemptSave(
+		$editEntity->attemptSave(
 			Autocomment::buildApiSummary( $this, null, $entityContent ),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : false

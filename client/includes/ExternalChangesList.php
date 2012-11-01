@@ -18,7 +18,6 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	public static function changesLine( &$cl, $rc ) {
-		$repoBase = Settings::get( 'repoBase' );
 		$userName = $rc->getAttribute( 'rc_user_text' );
 
 		$params = unserialize( $rc->getAttribute( 'rc_params' ) );
