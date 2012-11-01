@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACAn///70\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-01T11:34:31Z",
+      "side": 1,
+      "message": "This whole function should be pretty obsolete. See next comment.",
+      "revId": "c59baba657b1389ccaf59284fa32654f9f5a5c59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACAn///78\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-01T11:34:31Z",
+      "side": 1,
+      "message": "Should probably not be done this way. It should not be assumed that this item is the one from the \"current item view\".\n\nEither there has to be a parameter for the revision, or the whole Api should be a Object which has to be initiated, taking the base rev in its constructor. When the action was successful, the base rev could be updated within the object automatically.\n\nNot sure which approach would be the better one right now.",
+      "revId": "c59baba657b1389ccaf59284fa32654f9f5a5c59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACAn///7k\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-01T11:34:31Z",
+      "side": 1,
+      "message": "Depending on the approch chosen in the comment above, this whole api class could just as well extend the mw.Api or at least create just one mw.Api object and store it internally.\n\nThis function would be obsolete as well, above functions could simply use:\n\nreturn api.post( ... )",
+      "revId": "c59baba657b1389ccaf59284fa32654f9f5a5c59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
