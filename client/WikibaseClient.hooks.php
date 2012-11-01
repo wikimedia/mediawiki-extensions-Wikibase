@@ -225,8 +225,6 @@ final class ClientHooks {
 	 * @param bool $gone If set, indicates that the change's entity no longer refers to the given page.
 	 */
 	protected static function updatePage( \Title $title, Change $change, $gone = false ) {
-		global $wgContLang;
-
 		if ( !$title->exists() ) {
 			return;
 		}
