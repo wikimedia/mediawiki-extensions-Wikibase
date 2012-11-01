@@ -240,7 +240,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 		// TODO: use store
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->delete( $dbw->tableName( 'wb_items_per_site' ), '*', __METHOD__ );
+		$dbw->delete( 'wb_items_per_site', '*', __METHOD__ );
 
 		$params = array(
 			'id' => $this->getItemId( "Oslo" ),
