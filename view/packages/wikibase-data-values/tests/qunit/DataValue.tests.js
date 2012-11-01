@@ -207,4 +207,34 @@
 
 	};
 
+	/**
+	 * Creates and returns a test method for a getter.
+	 * Only works for simpler getters, ie those that return one of the arguments provided to the constructor.
+	 *
+	 * @since 0.1
+	 *
+	 * @param {Number} argNumber
+	 * @param {String} functionName
+	 *
+	 * @return {Function}
+	 */
+	dv.tests.DataValueTest.createGetterTest = function( argNumber, functionName ) {
+		return function() {
+			var
+				constructorArgs = this.getConstructorArguments(),
+				i,
+				instance;
+
+			for ( i in constructorArgs ) {
+				instance = this.getInstance( constructorArgs[i] );
+
+				assert.strictEqual(
+					instance[functionName].call( instance ),
+					constructorArgs[i][argNumber],
+					functionName + ' must return the value that was provided as argument ' + argNumber + ' in the constructor'
+				);
+			}
+		};
+	};
+
 }( dataValues, jQuery, QUnit ) );

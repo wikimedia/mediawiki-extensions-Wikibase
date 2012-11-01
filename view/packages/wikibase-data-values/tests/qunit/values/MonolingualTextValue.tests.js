@@ -45,44 +45,14 @@
 		 *
 		 * @param {QUnit} assert
 		 */
-		testGetText: function( assert ) {
-			var
-				constructorArgs = this.getConstructorArguments(),
-				i,
-				instance;
-
-			for ( i in constructorArgs ) {
-				instance = this.getInstance( constructorArgs[i] );
-
-				assert.strictEqual(
-					instance.getText(),
-					constructorArgs[i][1],
-					'getText must return the value that was provided as second argument in the constructor'
-				);
-			}
-		},
+		testGetText: PARENT.createGetterTest( 1, 'getText' ),
 
 		/**
 		 * Tests the getText function.
 		 *
 		 * @param {QUnit} assert
 		 */
-		testGetLanguageCode: function( assert ) {
-			var
-				constructorArgs = this.getConstructorArguments(),
-				i,
-				instance;
-
-			for ( i in constructorArgs ) {
-				instance = this.getInstance( constructorArgs[i] );
-
-				assert.strictEqual(
-					instance.getLanguageCode(),
-					constructorArgs[i][0],
-					'getLanguageCode must return the value that was provided as first argument in the constructor'
-				);
-			}
-		}
+		testGetLanguageCode: PARENT.createGetterTest( 0, 'getLanguageCode' )
 
 	} );
 
