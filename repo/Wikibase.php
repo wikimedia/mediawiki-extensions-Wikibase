@@ -131,6 +131,7 @@ $wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/api/s
 $wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/api/serializers/ClaimSerializer.php';
 $wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/api/serializers/EntitySerializer.php';
 $wgAutoloadClasses['Wikibase\ItemSerializer'] 			= $dir . 'includes/api/serializers/ItemSerializer.php';
+$wgAutoloadClasses['Wikibase\PropertySerializer'] 		= $dir . 'includes/api/serializers/PropertySerializer.php';
 $wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/api/serializers/SnakSerializer.php';
 
 // includes/content
