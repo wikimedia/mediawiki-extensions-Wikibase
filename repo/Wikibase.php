@@ -201,7 +201,7 @@ $wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-$wgSpecialPages['NewProperty'] 					= 'SpecialNewProperty';
+$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 $wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
@@ -217,7 +217,7 @@ $wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable
 $wgHooks['NewRevisionFromEditComplete'][]			= 'Wikibase\RepoHooks::onNewRevisionFromEditComplete';
 $wgHooks['SkinTemplateNavigation'][] 				= 'Wikibase\RepoHooks::onPageTabs';
 $wgHooks['ArticleDeleteComplete'][] 				= 'Wikibase\RepoHooks::onArticleDeleteComplete';
-$wgHooks['ArticleUndelete'][]					= 'Wikibase\RepoHooks::onArticleUndelete';
+$wgHooks['ArticleUndelete'][]						= 'Wikibase\RepoHooks::onArticleUndelete';
 $wgHooks['LinkBegin'][] 							= 'Wikibase\RepoHooks::onLinkBegin';
 $wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
 //FIXME: handle other types of entities with autocomments too!
