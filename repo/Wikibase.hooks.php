@@ -298,12 +298,8 @@ final class RepoHooks {
 		\Content $content = null, \LogEntryBase $logEntry = null
 	) {
 
-		if ( $content === null ) {
-			throw new MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
-		}
-
 		// Bail out if we are not in an entity namespace
-		if ( !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
+		if ( !$content || !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
 			return true;
 		}
 		$entity = $content->getEntity();
@@ -350,21 +346,24 @@ final class RepoHooks {
 
 		$revId = $title->getLatestRevID();
 		$content = $entityContentFactory->getFromRevision( $revId );
-		$entity = $content->getEntity();
-		$rev = Revision::newFromId( $revId );
 
-		$change = EntityRestore::newFromEntity( $entity );
+		if ( $content ) {
+			$entity = $content->getEntity();
+			$rev = Revision::newFromId( $revId );
 
-		// TODO: Use timestamp of log entry, but needs core change.
-		// This hook is called before the log entry is created.
-		$change->setFields( array(
-			'revision_id' => $revId,
-			'user_id' => $rev->getUser(),
-			'object_id' => $entity->getId(),
-			'time' => wfTimestamp( TS_MW, wfTimestampNow() )
-		) );
+			$change = EntityRestore::newFromEntity( $entity );
 
-		ChangeNotifier::singleton()->handleChange( $change );
+			// TODO: Use timestamp of log entry, but needs core change.
+			// This hook is called before the log entry is created.
+			$change->setFields( array(
+				'revision_id' => $revId,
+				'user_id' => $rev->getUser(),
+				'object_id' => $entity->getId(),
+				'time' => wfTimestamp( TS_MW, wfTimestampNow() )
+			) );
+
+			ChangeNotifier::singleton()->handleChange( $change );
+		}
 
 		return true;
 	}
