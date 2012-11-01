@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACDn///+I\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-01T21:59:41Z",
+      "side": 1,
+      "message": "I don\u0027t really wee what we gain by having these fields and setting them here in this method. $this-\u003egetRequest() is available so you can get the data when you need it. I suggest deleting this method and the two fields it sets.",
+      "revId": "678877532842693eb3f43612241750a184d332b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACDn///+Q\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-01T21:59:41Z",
+      "side": 1,
+      "message": "The last argument is not valid. Either true or false, but not \"$normalize \u003d true\".",
+      "revId": "678877532842693eb3f43612241750a184d332b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACDn///+M\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-01T21:59:41Z",
+      "side": 1,
+      "message": "why would you get an exception here?",
+      "revId": "678877532842693eb3f43612241750a184d332b2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
