@@ -92,6 +92,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	 * @param string|integer $propertyId
 	 *
 	 * @return array of object
+	 * @throws MWException
 	 */
 	public function getByPropertyId( $propertyId ) {
 		if ( $this->byId === null ) {
