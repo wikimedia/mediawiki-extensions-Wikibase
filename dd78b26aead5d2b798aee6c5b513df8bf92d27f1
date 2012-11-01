@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACBX///4I\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-01T15:20:06Z",
+      "side": 1,
+      "message": "isBot would be a better name. Could just as well have not have the local var in this case I guess",
+      "revId": "dd78b26aead5d2b798aee6c5b513df8bf92d27f1",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
