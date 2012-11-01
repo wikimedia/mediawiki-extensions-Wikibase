@@ -3,6 +3,7 @@
  * @ingroup DataValues
  * @licence GNU GPL v2+
  * @author Daniel Werner
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 ( function( dv, $, undefined ) {
 'use strict';
