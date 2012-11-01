@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACBX///4k\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-01T15:14:39Z",
+      "side": 1,
+      "message": "does this really need to be public? Do we need it from anywhere outside of this class? (If possible it\u0027d be better to never deal with the parts yourself). \n\nIf we do need it outside, then this should ofc remain public, but have a better name. $entityFactory-\u003egetParts() is not clear at all. What parts... ? getIdParts would be better",
+      "revId": "b1ce49d489d071c542686fd3e90eb4309c713772",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACBX///4c\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-01T15:14:39Z",
+      "side": 1,
+      "message": "again, do we need this outside? If so, getIdFragment",
+      "revId": "b1ce49d489d071c542686fd3e90eb4309c713772",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
