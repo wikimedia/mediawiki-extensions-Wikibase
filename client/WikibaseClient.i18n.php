@@ -127,12 +127,23 @@ $messages['fa'] = array(
 	'wbc-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
 );
 
+/** Finnish (suomi)
+ * @author Stryn
+ */
+$messages['fi'] = array(
+	'wbc-comment-langlinks-update' => 'Kielilinkit päivitetty',
+	'wbc-editlinks' => 'Muokkaa linkkejä',
+	'wbc-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
+);
+
 /** French (français)
  * @author Gomoko
+ * @author Ltrlg
  * @author Wyz
  */
 $messages['fr'] = array(
 	'wbc-desc' => 'Client pour l’extension Wikibase',
+	'wbc-comment-langlinks-update' => 'Liens interlangues mis à jour',
 	'wbc-editlinks' => 'Modifier les liens',
 	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
 );
@@ -203,6 +214,9 @@ $messages['ia'] = array(
  */
 $messages['is'] = array(
 	'wbc-desc' => 'Biðlari fyrir Wikibase viðbótina',
+	'wbc-comment-langlinks-delete' => 'Tengdum Wikidata hlut eytt. Tungumálatenglar fjarlægðir.',
+	'wbc-comment-langlinks-remove' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir',
+	'wbc-comment-langlinks-restore' => 'Tengdur Wikidata hlut endurvakinn. Tungumálatenglar endurvaktir.',
 	'wbc-editlinks' => 'Breyta tenglum',
 	'wbc-editlinkstitle' => 'Breyta tungumálatenglum',
 );
@@ -337,30 +351,45 @@ $messages['nn'] = array(
 /** Polish (polski)
  * @author BeginaFelicysym
  * @author Lazowik
+ * @author Maćko
  */
 $messages['pl'] = array(
 	'wbc-desc' => 'Klient rozszerzenia Wikibase',
+	'wbc-comment-langlinks-delete' => 'Powiązany obiekt Wikidata usunięty. Linki językowe usunięte.',
+	'wbc-comment-langlinks-remove' => 'Ta strona została odlinkowana od obiektu Wikidata. Linki językowe usunięte',
+	'wbc-comment-langlinks-restore' => 'Powiązany obiekt Wikidata przywrócony. Linki językowe przywrócone',
+	'wbc-comment-langlinks-update' => 'Linki językowe zaktualizowane',
 	'wbc-editlinks' => 'Edytuj linki',
 	'wbc-editlinkstitle' => 'Edytuj linki wersji językowych',
 );
 
 /** Portuguese (português)
+ * @author Helder.wiki
  * @author Malafaya
  * @author SandroHc
  */
 $messages['pt'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
+	'wbc-comment-langlinks-delete' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
+	'wbc-comment-langlinks-remove' => 'Esta página foi desvinculada do item do Wikidata. Os links para outros idiomas foram removidos',
+	'wbc-comment-langlinks-restore' => 'O item do Wikidata associado foi restaurado. Os links para outros idiomas foram restaurados',
+	'wbc-comment-langlinks-update' => 'Foram atualizados os links para outros idiomas',
 	'wbc-editlinks' => 'Editar links',
 	'wbc-editlinkstitle' => 'Editar links interlínguas',
 );
 
 /** Brazilian Portuguese (português do Brasil)
+ * @author Helder.wiki
  * @author Jaideraf
  */
 $messages['pt-br'] = array(
 	'wbc-desc' => 'Cliente para a extensão Wikibase',
+	'wbc-comment-langlinks-delete' => 'O item associado no Wikidata foi eliminado. Foram removidos os links para outros idiomas.',
+	'wbc-comment-langlinks-remove' => 'Esta página foi desvinculada do item do Wikidata. Os links para outros idiomas foram removidos',
+	'wbc-comment-langlinks-restore' => 'O item do Wikidata associado foi restaurado. Os links para outros idiomas foram restaurados',
+	'wbc-comment-langlinks-update' => 'Foram atualizados os links para outros idiomas',
 	'wbc-editlinks' => 'Editar links',
-	'wbc-editlinkstitle' => 'Editar links interlíngua',
+	'wbc-editlinkstitle' => 'Editar links para outros idiomas',
 );
 
 /** Romanian (română)
@@ -401,9 +430,12 @@ $messages['sr-el'] = array(
 
 /** Swedish (svenska)
  * @author Ainali
+ * @author Lokal Profil
  */
 $messages['sv'] = array(
 	'wbc-desc' => 'Klient för tillägget Wikibase',
+	'wbc-comment-langlinks-update' => 'Språklänkar uppdaterade',
+	'wbc-editlinks' => 'Redigera länkar',
 );
 
 /** Telugu (తెలుగు)
@@ -427,15 +459,24 @@ $messages['tl'] = array(
  */
 $messages['vi'] = array(
 	'wbc-desc' => 'Trình khách của phần mở rộng Wikibase',
+	'wbc-comment-langlinks-delete' => 'Đã xóa khoản mục liên kết Wikidata. Đã dời các liên kết ngôn ngữ.',
+	'wbc-comment-langlinks-remove' => 'Đã gỡ liên kết đến khoản mục Wikidata khỏi trang này. Đã dời các liên kết ngôn ngữ.',
+	'wbc-comment-langlinks-restore' => 'Đã phục hồi khoản mục liên kết Wikidata. Đã phục hồi các liên kết ngôn ngữ.',
+	'wbc-comment-langlinks-update' => 'Đã cập nhật các liên kết ngôn ngữ',
 	'wbc-editlinks' => 'Sửa liên kết',
 	'wbc-editlinkstitle' => 'Sửa liên kết giữa ngôn ngữ',
 );
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Linforest
+ * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
 	'wbc-desc' => 'Wikibase扩展客户端',
+	'wbc-comment-langlinks-delete' => '关联的 Wikidata 项已删除。删除语言链接。',
+	'wbc-comment-langlinks-remove' => '此页已在 Wikidata 被解除链接。删除语言链接',
+	'wbc-comment-langlinks-restore' => '关联的 Wikidata 项删除已被恢复。恢复语言链接',
+	'wbc-comment-langlinks-update' => '语言链接更新',
 	'wbc-editlinks' => '编辑链接',
 	'wbc-editlinkstitle' => '编辑跨语言链接',
 );
