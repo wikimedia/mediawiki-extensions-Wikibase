@@ -425,6 +425,10 @@ abstract class EntityContent extends \AbstractContent {
 			$user
 		);
 
+		if( $status->isGood() && EDIT_NEW ) {
+			StoreFactory::getStore()->newEntityPerPage()->addEntityContent( $this );
+		}
+
 		$this->editEntity = null;
 
 		wfProfileOut( __METHOD__ );
