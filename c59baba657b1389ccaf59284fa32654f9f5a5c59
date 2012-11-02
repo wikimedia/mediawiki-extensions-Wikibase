@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "AAACGn///+E\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-02T12:17:20Z",
+      "side": 1,
+      "message": "I thought about it some more, lets go with that simple approach.",
+      "parentUuid": "AAACBX///1U\u003d",
+      "revId": "c59baba657b1389ccaf59284fa32654f9f5a5c59",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACAn///7k\u003d",
         "filename": "lib/resources/wikibase.store/wikibase.Api.js",
         "patchSetId": 1
