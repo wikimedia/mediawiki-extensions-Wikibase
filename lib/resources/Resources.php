@@ -199,6 +199,7 @@ return call_user_func( function() {
 				'wikibase.utilities.jQuery.ui.inputAutoExpand',
 				'wikibase.utilities.jQuery.ui.tagadata',
 				'jquery.ui.suggester',
+				'jquery.ui.siteselector',
 				'jquery.ui.entityselector',
 				'mediawiki.api',
 				'mediawiki.Title',
@@ -266,6 +267,16 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'jquery.ui.autocomplete'
+			)
+		),
+
+		'jquery.ui.siteselector' => $moduleTemplate + array(
+			'scripts' => array(
+				'jquery.ui/jquery.ui.siteselector.js'
+			),
+			'dependencies' => array(
+				'jquery.ui.suggester',
+				'jquery.ui.resizable'
 			)
 		),
 
