@@ -978,7 +978,21 @@ $messages['eo'] = array(
 	'wikibase-save' => 'Konservu',
 	'wikibase-cancel' => 'Nuligu',
 	'wikibase-add' => 'aldonu',
+	'wikibase-save-inprogress' => 'Konservante',
+	'wikibase-remove-inprogress' => 'Forigante',
+	'wikibase-label-empty' => 'Neniu etikedo difinita',
+	'wikibase-label-edit-placeholder' => 'enigu etikedon',
+	'wikibase-description-empty' => 'Neniu priskribo jam difinita',
+	'wikibase-description-edit-placeholder' => 'Enigu priskribon',
+	'wikibase-sitelink-site-edit-placeholder' => 'retejo',
+	'wikibase-sitelink-page-edit-placeholder' => 'artikolo',
+	'wikibase-alias-edit-placeholder' => 'enigu kromnomon',
+	'wikibase-label-input-help-message' => 'Enigu la titolon de ĉi tiu datumo en $1',
+	'wikibase-description-input-help-message' => 'enigu mallongan priskribon en $1',
 	'wikibase-sitelinks' => 'Listo de paĝoj ligitaj al ĉi tiu ero',
+	'wikibase-sitelinks-sitename-columnheading' => 'Lingvo',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kodo',
+	'wikibase-sitelinks-link-columnheading' => 'Ligita artikolo',
 );
 
 /** Spanish (español)
