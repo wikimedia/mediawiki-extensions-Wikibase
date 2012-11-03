@@ -183,14 +183,13 @@ final class RepoHooks {
 	 * @since 0.1
 	 *
 	 * @param Title $title
-	 * @param Language &$pageLanguage
+	 * @param Language|string &$pageLanguage the page content language (either an object or a language code)
 	 * @param Language|\StubUserLang $language
 	 *
 	 * @return boolean
 	 */
-	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
+	public static function onPageContentLanguage( Title $title, &$pageLanguage, $language ) {
 		global $wgNamespaceContentModels;
-
 		// TODO: make this a little nicer
 		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
 			&& in_array(
@@ -198,7 +197,19 @@ final class RepoHooks {
 				EntityContentFactory::singleton()->getEntityContentModels()
 			)
 		) {
-			$pageLanguage = $language;
+
+			if ( is_string( $pageLanguage ) ) {
+				// set as string
+				$pageLanguage = $language->getCode();
+			}
+			elseif ( is_object( $pageLanguage ) ) {
+				// set as object
+				$pageLanguage = $language;
+			}
+			else {
+				// throw exception
+				throw new MWException( "Invalid language reference" );
+			}
 		}
 
 		return true;
