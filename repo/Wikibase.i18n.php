@@ -619,6 +619,12 @@ $messages['ca'] = array(
 	'wikibase-save-inprogress' => "S'està desant…",
 	'wikibase-remove-inprogress' => "S'està suprimint…",
 	'wikibase-label-empty' => "No s'ha definit encara cap etiqueta.",
+	'wikibase-label-edit-placeholder' => 'introduïu una etiqueta',
+	'wikibase-description-empty' => "No s'ha definit cap descripció encara.",
+	'wikibase-description-edit-placeholder' => 'introduïu una descripció',
+	'wikibase-sitelink-site-edit-placeholder' => 'lloc',
+	'wikibase-sitelink-page-edit-placeholder' => 'article',
+	'wikibase-alias-edit-placeholder' => 'introduïu un àlies',
 	'wikibase-sitelinks-sitename-columnheading' => 'Llengua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codi',
 	'wikibase-sitelinks-link-columnheading' => 'Article enllaçat',
@@ -636,6 +642,7 @@ $messages['ca'] = array(
 	'wikibase-createentity-description' => 'Descripció:',
 	'wikibase-createentity-submit' => 'Crea',
 	'wikibase-setlabel-id' => 'ID',
+	'wikibase-restoreold' => 'restaura',
 );
 
 /** German (Deutsch)
@@ -962,6 +969,18 @@ $messages['en-ca'] = array(
 	'wikibase-desc' => 'Structured data repository',
 );
 
+/** Esperanto (Esperanto)
+ * @author ArnoLagrange
+ */
+$messages['eo'] = array(
+	'wikibase-desc' => 'Deponejo por strukturitaj datumoj',
+	'wikibase-edit' => 'Redaktu',
+	'wikibase-save' => 'Konservu',
+	'wikibase-cancel' => 'Nuligu',
+	'wikibase-add' => 'aldonu',
+	'wikibase-sitelinks' => 'Listo de paĝoj ligitaj al ĉi tiu ero',
+);
+
 /** Spanish (español)
  * @author Armando-Martin
  * @author Jewbask
@@ -1281,8 +1300,11 @@ $messages['fi'] = array(
 	'wikibase-remove' => 'poista',
 	'wikibase-undo-title' => 'Kumotaan kohteeseen $1 tehty muokkaus',
 	'wikibase-undo-revision-error' => 'Kumoaminen epäonnistui',
+	'wikibase-restrictionedit-tooltip-message' => 'Tämä sivu on suojattu. Muokkaaminen ei ole sallittua.',
+	'wikibase-blockeduser-tooltip-message' => 'Sinulta on estetty muokkaaminen.',
 	'wikibase-tooltip-error-details' => 'Tiedot',
 	'wikibase-error-autocomplete-response' => 'Palvelin vastasi: $1',
+	'wikibase-error-ui-cant-edit' => 'Sinulla ei ole oikeutta suorittaa tätä toimintoa.',
 	'wikibase-itembytitle-submit' => 'Etsi',
 	'wikibase-itemdisambiguation-lookup-language' => 'Kieli',
 	'wikibase-itemdisambiguation-lookup-label' => 'Otsikko',
@@ -1313,6 +1335,8 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
  * @author Crochet.david
  * @author DavidL
  * @author Gomoko
+ * @author Hello71
+ * @author Jitrixis
  * @author Linedwell
  * @author Ltrlg
  * @author Tititou36
@@ -1326,6 +1350,7 @@ $messages['fr'] = array(
 	'wikibase-add' => 'ajouter',
 	'wikibase-save-inprogress' => 'Sauvegarde en cours...',
 	'wikibase-remove-inprogress' => 'Suppression en cours...',
+	'wikibase-label-empty' => 'Pas de libellé défini',
 	'wikibase-label-edit-placeholder' => 'saisir un libellé',
 	'wikibase-description-empty' => 'Aucune description pour le moment',
 	'wikibase-description-edit-placeholder' => 'saisir une description',
@@ -1342,6 +1367,14 @@ $messages['fr'] = array(
 	'wikibase-sitelinks-empty' => 'Pas encore de site-lien pour cet élément.',
 	'wikibase-sitelinks-input-help-message' => 'Créer un lien vers une page relative à cet élément.',
 	'wikibase-remove' => 'supprimer',
+	'wikibase-undo-title' => 'Annuler l’édition de « $1 »',
+	'wikibase-restore-title' => 'Restauration d’une ancienne révision de « $1 »',
+	'wikibase-partial-undo' => 'La modification peut être partiellement annulée.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|changement a|changements ont}} été omis parce que les valeurs respectives ont changées lors de votre modification.',
+	'wikibase-empty-undo' => "Il n'y a rien qui peut être annulée ici.",
+	'wikibase-undo-revision-error' => 'Annulation a échoué',
+	'wikibase-undo-samerev' => "Impossible d'annuler, la version de base et la version cible données sont les mêmes.",
+	'wikibase-undo-badpage' => "Numéro de version erroné : la révision $2 n'appartient pas à [[$1]].",
 	'wikibase-undo-firstrev' => "Impossible d'annuler la création de la page",
 	'wikibase-propertyedittool-full' => 'La liste des valeurs est complète.',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entrée|entrées}})',
@@ -1354,6 +1387,7 @@ $messages['fr'] = array(
 	'wikibase-aliases-label' => 'Alias :',
 	'wikibase-aliases-input-help-message' => "Si cet ensemble de données est connu sous plus d'un nom particulier, vous pouvez entrer des alias et des synonymes, afin qu'il puisse être trouvé par ses autres noms.",
 	'wikibase-aliases-empty' => 'Aucun alias défini.',
+	'wikibase-datatype-label' => 'Type de données :',
 	'wikibase-restrictionedit-tooltip-message' => "Cette page est protégée, l'édition n'est pas autorisée.",
 	'wikibase-blockeduser-tooltip-message' => 'Vous avez été bloqué en édition.',
 	'wikibase-tooltip-error-details' => 'Détails',
@@ -1375,6 +1409,9 @@ $messages['fr'] = array(
 	'wikibase-move-error' => 'Vous ne pouvez pas déplacer des pages situées dans l\'espace de nom "data", ni déplacer des pages vers cet espace de nom.',
 	'wikibase-error-relational-save-failed' => "Impossible d'enregistrer l'identité de l'objet dans la base de données.",
 	'wikibase-error-sitelink-already-used' => "Le lien du site [[$1:$2]] est déjà utilisé par l'objet [[$3]].",
+	'wikibase-error-label-not-unique-wikibase-property' => 'Une autre propriété ($3) a déjà un libellé "$1" associé au code de langage $2',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Une autre requête ($3) a déjà le libellé "$1" associé au code de langage $2',
+	'wikibase-error-label-not-unique-item' => 'Une autre élément ($3) a déjà le libellé "$1" et la description "$4" associé au code de langage $2',
 	'special-itembytitle' => 'Article par titre',
 	'wikibase-itembytitle-lookup-fieldset' => 'Rechercher des éléments par site et par titre',
 	'wikibase-itembytitle-lookup-site' => 'Site :',
@@ -1382,13 +1419,34 @@ $messages['fr'] = array(
 	'wikibase-itembytitle-submit' => 'Rechercher',
 	'wikibase-itembytitle-nothing-found' => "Aucun élément n'a été trouvé lors de la recherche précédente, vous devez affiner la requête avec une meilleure identification de la page externe.",
 	'wikibase-itembytitle-invalid-site' => "La requête précédente n'a pas pu être utilisée pour effectuer une recherche. Vous devez fournir un identificateur de site valide.",
+	'wikibase-itembytitle-description' => 'Le site web est un code d\'identification, tel que "frwiki".',
+	'wikibase-itembytitle-create' => 'Vous pouvez également [{{fullurl:Special:CreateItem|site = $1 & page = $2 }} créer un nouvel élément].',
 	'special-itemdisambiguation' => 'Homonymie : Éléments avec la même étiquette',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Rechercher des éléments par étiquette',
 	'wikibase-itemdisambiguation-lookup-language' => 'Langue :',
+	'wikibase-itemdisambiguation-lookup-label' => 'Libellé :',
 	'wikibase-itemdisambiguation-submit' => 'Rechercher',
 	'wikibase-itemdisambiguation-nothing-found' => "Désolé, aucun élément avec cette étiquette n'a été trouvé.",
+	'wikibase-itemdisambiguation-create' => 'Vous pouvez [{{fullurl:Special:CreateItem|label=$1}} créer l’élément].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Le code de langue que vous avez donné n’est pas reconnu par le système, désolé. Veuillez utiliser un code valide, par exemple « en ».',
+	'special-newproperty' => 'Créer une nouvelle propriété',
+	'wikibase-newproperty-fieldset' => 'Créer une nouvelle propriété',
+	'wikibase-newproperty-datatype' => 'Type de données :',
 	'special-createitem' => 'Créer un nouvel élément',
+	'wikibase-createitem-fieldset' => 'Créer un nouvel élément',
+	'wikibase-createentity-label' => 'Libellé :',
+	'wikibase-createentity-description' => 'Description :',
+	'wikibase-createentity-submit' => 'Créer',
+	'special-setlabel' => 'Définir une étiquette',
+	'wikibase-setlabel-id' => 'Identifiant',
+	'wikibase-setlabel-language' => 'Langue',
+	'wikibase-setlabel-invalid-langcode' => 'L\'identificateur de langue "$1" est inconnu. S\'il vous plaît utiliser un identificateur de langue connu du système, par exemple "fr".',
+	'wikibase-listdatatypes-intro' => "Ceci est une liste de tous les types de données en cours d'utilisation sur cette installation:",
 	'wikibase-restoreold' => 'réinitialiser',
+	'wikibase-noentity' => 'Cet ensemble de données n\'existe pas. Vous pouvez
+<span class="plainlinks">[{{fullurl: {{#Special:Log}} |page = {{FULLPAGENAMEE}}} Rechercher les journaux connexes]</span>
+pour savoir où il allait.', # Fuzzy
+	'wikibase-item-summary-wbeditentity' => 'Crée un nouvel élément',
 	'wikibase-item-summary-wbsetaliases-set' => 'Paramètre [ $2 ] {{plural:$1|alias|alias}}',
 	'content-model-1001' => 'Élément Wikibase',
 );
