@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACLn///9g\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:51:44Z",
+      "side": 1,
+      "message": "member variables are null by default, so \"\u003d null\" is not necessarily needed.",
+      "revId": "6d09e57e99df21333bdc7740a6f2d42158909f28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACLn///9c\u003d",
+        "filename": "repo/includes/specials/SpecialCreateItem.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:51:44Z",
+      "side": 1,
+      "message": "page? I haven\u0027t heard of such html element.",
+      "revId": "6d09e57e99df21333bdc7740a6f2d42158909f28",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
