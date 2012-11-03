@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACLn///+Q\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:48:29Z",
+      "side": 1,
+      "message": "\"List\" feels a bit redundant but not a problem",
+      "revId": "6cd28bd87068fca65796bc7510f1609d3587acea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACLn///+I\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:48:29Z",
+      "side": 1,
+      "message": "Messages cannot contain trailing whitespace.",
+      "revId": "6cd28bd87068fca65796bc7510f1609d3587acea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACLn///+E\u003d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:48:29Z",
+      "side": 1,
+      "message": "\"if (\"\n\nEDIT_NEW is constant, did you mean $flags \u0026 EDIT_NEW or something?",
+      "revId": "6cd28bd87068fca65796bc7510f1609d3587acea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACLn///+A\u003d",
+        "filename": "repo/includes/specials/SpecialListEntitiesWithoutLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:48:29Z",
+      "side": 1,
+      "message": "Input -\u003e input, there is also Xml::submitButton",
+      "revId": "6cd28bd87068fca65796bc7510f1609d3587acea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACLn///90\u003d",
+        "filename": "repo/includes/specials/SpecialListEntitiesWithoutLabel.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:48:29Z",
+      "side": 1,
+      "message": "This doesn\u0027t hnadle table prefixes and probably doesn\u0027t work in all databases?",
+      "revId": "6cd28bd87068fca65796bc7510f1609d3587acea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACLn///9w\u003d",
+        "filename": "repo/includes/store/sql/AddEntitiesPerPage.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:48:29Z",
+      "side": 1,
+      "message": "does not align with the lines above?",
+      "revId": "6cd28bd87068fca65796bc7510f1609d3587acea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACLn///9o\u003d",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:48:29Z",
+      "side": 1,
+      "message": "This method does not return anything.",
+      "revId": "6cd28bd87068fca65796bc7510f1609d3587acea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACLn///9s\u003d",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-03T08:48:29Z",
+      "side": 1,
+      "message": "Wont this always select the same 1000 titles if there is more than 1000?",
+      "revId": "6cd28bd87068fca65796bc7510f1609d3587acea",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
