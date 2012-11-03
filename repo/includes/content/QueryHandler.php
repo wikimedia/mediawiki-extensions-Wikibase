@@ -68,6 +68,7 @@ class QueryHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
+			'history' => '\Wikibase\HistoryQueryAction',
 			'view' => '\Wikibase\ViewQueryAction',
 			'edit' => '\Wikibase\EditQueryAction',
 			'submit' => '\Wikibase\SubmitQueryAction',

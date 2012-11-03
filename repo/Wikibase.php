@@ -94,6 +94,10 @@ $wgAutoloadClasses['Wikibase\ItemView'] 				= $dir . 'includes/ItemView.php';
 $wgAutoloadClasses['Wikibase\PropertyView']				= $dir . 'includes/PropertyView.php';
 
 // includes/actions
+$wgAutoloadClasses['Wikibase\HistoryEntityAction'] 		= $dir . 'includes/actions/HistoryEntityAction.php';
+$wgAutoloadClasses['Wikibase\HistoryItemAction'] 		= $dir . 'includes/actions/HistoryItemAction.php';
+$wgAutoloadClasses['Wikibase\HistoryPropertyAction'] 		= $dir . 'includes/actions/HistoryPropertyAction.php';
+$wgAutoloadClasses['Wikibase\HistoryQueryAction'] 		= $dir . 'includes/actions/HistoryQueryAction.php';
 $wgAutoloadClasses['Wikibase\EditEntityAction'] 		= $dir . 'includes/actions/EditEntityAction.php';
 $wgAutoloadClasses['Wikibase\EditItemAction'] 			= $dir . 'includes/actions/EditItemAction.php';
 $wgAutoloadClasses['Wikibase\EditPropertyAction'] 		= $dir . 'includes/actions/EditPropertyAction.php';
