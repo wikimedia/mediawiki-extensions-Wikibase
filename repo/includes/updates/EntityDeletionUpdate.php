@@ -73,6 +73,8 @@ class EntityDeletionUpdate extends \DataUpdate {
 		$store->newTermCache()->deleteTermsOfEntity( $entity );
 		$this->doTypeSpecificStuff( $store, $entity );
 
+		$store->newEntityPerPage()->deleteEntityContent( $this->content );
+
 		/**
 		 * Gets called after the deletion of an item has been committed,
 		 * allowing for extensions to do additional cleanup.

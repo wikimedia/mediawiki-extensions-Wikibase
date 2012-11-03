@@ -3,9 +3,7 @@
 namespace Wikibase;
 
 /**
- * Store interface. All interaction with store Wikibase does on top
- * of storing pages and associated core MediaWiki indexing is done
- * through this interface.
+ * Interface to a table that join wiki pages and entities.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,66 +26,47 @@ namespace Wikibase;
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Thomas Pellissier Tanon
  */
-interface Store {
+interface EntityPerPage {
 
 	/**
-	 * Returns an instance of the store.
+	 * Adds a new link between an entity and a page
 	 *
 	 * @since 0.1
 	 *
-	 * @return Store
+	 * @param EntityContent $entityContent
+	 *
+	 * @return boolean Success indicator
 	 */
-	public static function singleton();
+	public function addEntityContent( EntityContent $entityContent );
 
 	/**
-	 * Returns a new SiteLinkCache for this store.
+	 * Removes the new link between an entity and a page
 	 *
 	 * @since 0.1
 	 *
-	 * @return SiteLinkCache
+	 * @param EntityContent $entityContent
+	 *
+	 * @return boolean Success indicator
 	 */
-	public function newSiteLinkCache();
+	public function deleteEntityContent( EntityContent $entityContent );
 
 	/**
-	 * Removes all data from the store.
+	 * Clears the table
 	 *
 	 * @since 0.1
+	 *
+	 * @return boolean Success indicator
 	 */
 	public function clear();
 
 	/**
-	 * Rebuilds the store.
+	 * Rebuilds the table
 	 *
 	 * @since 0.1
+	 *
+	 * @return boolean success indicator
 	 */
 	public function rebuild();
-
-	/**
-	 * Returns a new TermCache for this store.
-	 *
-	 * @since 0.1
-	 *
-	 * @return TermCache
-	 */
-	public function newTermCache();
-
-	/**
-	 * Returns a new IdGenerator for this store.
-	 *
-	 * @since 0.1
-	 *
-	 * @return IdGenerator
-	 */
-	public function newIdGenerator();
-
-	/**
-	 * Return a new EntityPerPage
-	 *
-	 * @since 0.1
-	 *
-	 * @return EntityPerPage
-	 */
-	public function newEntityPerPage();
 }
