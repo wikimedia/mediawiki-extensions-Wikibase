@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACMX////Q\u003d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-03T11:12:38Z",
+      "side": 1,
+      "message": "Not sure if I get this right, but I have a problem with \"entities per page\". It doesn\u0027t really make sense to me.",
+      "revId": "7f263cd463e4ca98eff77752c5dc61960987a423",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACMn////w\u003d",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-03T11:12:38Z",
+      "side": 1,
+      "message": "in_array($this-\u003elanguage, Utils::getLanguageCodes() )",
+      "revId": "7f263cd463e4ca98eff77752c5dc61960987a423",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACMn////Y\u003d",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-03T11:12:38Z",
+      "side": 1,
+      "message": "There should be some kind of paging",
+      "revId": "7f263cd463e4ca98eff77752c5dc61960987a423",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACMn////g\u003d",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-03T11:12:38Z",
+      "side": 1,
+      "message": "Should use fallback languages to avoid id-only links, but I\u0027m not quite sure what the rationale is and why the title is used here.\n\nSee Wikibase.hooks.php onLinkBegin for how to use labels.\n\nLinks with a label in a fallback language is much easier to understand.\n\nAlso note that this list might be huge.",
+      "revId": "7f263cd463e4ca98eff77752c5dc61960987a423",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACMX////U\u003d",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-03T11:12:38Z",
+      "side": 1,
+      "message": "Is this the correct author?",
+      "revId": "7f263cd463e4ca98eff77752c5dc61960987a423",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
