@@ -137,7 +137,10 @@ $messages['en'] = array(
 	'wikibase-setlabel-invalid-id' => 'The ID "$1" is unknown to the system. Please use a valid entity ID.',
 	'special-listdatatypes' => 'List of all datatypes available',
 	'wikibase-listdatatypes-intro' => 'This is a list of all datatypes currently in use on this installation:',
-
+	'special-entitieswithoutlabel' => 'List of the entities without label',
+	'wikibase-entitieswithoutlabel-legend' => 'Get list of the entities without label',
+	'wikibase-entitieswithoutlabel-label-language' => 'Language:',
+	'wikibase-entitieswithoutlabel-submit' => 'Find',
 
 	// API errors - these messages should not be translated
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.', # Do not translate
@@ -391,6 +394,11 @@ Parameters:
 	'wikibase-setlabel-invalid-id' => 'Response informing that the selected entity ID is not valid. $1 is the invalid ID.',
 	'special-listdatatypes' => 'This special page returns a list of available datatypes (such as commonsMedia)',
 	'wikibase-listdatatypes-intro' => 'Intro text for the ListDatatypes special page.',
+	'special-entitieswithoutlabel' => 'This special page returns a list of entities without label for a given language',
+	'wikibase-entitieswithoutlabel-legend' => 'Legend of the form that allow to change the language.',
+	'wikibase-entitieswithoutlabel-label-language' => 'Label for the input field to change the language.',
+	'wikibase-entitieswithoutlabel-submit' => 'Label for the button that activate the action.',
+
 	'wikibase-api-aliases-invalid-list' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
