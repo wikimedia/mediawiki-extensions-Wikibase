@@ -85,6 +85,18 @@ $messages['dsb'] = array(
 	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
 );
 
+/** Esperanto (Esperanto)
+ * @author ArnoLagrange
+ */
+$messages['eo'] = array(
+	'wikibaselib-desc' => 'Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo',
+	'wikibaselib-entity-item' => 'ero',
+	'wikibaselib-entity-property' => 'Atributo',
+	'wikibaselib-entity-query' => 'Serĉomendo',
+	'datatypes-type-wikibase-item' => 'Ero',
+	'datatypes-type-commonsMedia' => 'Multrimeda dosiero en Komunejo',
+);
+
 /** Spanish (español)
  * @author Armando-Martin
  */

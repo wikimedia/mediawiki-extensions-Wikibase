@@ -104,6 +104,19 @@ $messages['dsb'] = array(
 	'wbc-editlinkstitle' => 'Mjazyrěcne wótkaze wobźěłaś',
 );
 
+/** Esperanto (Esperanto)
+ * @author ArnoLagrange
+ */
+$messages['eo'] = array(
+	'wbc-desc' => 'Kliento por la Vikidatuma etendaĵo',
+	'wbc-comment-langlinks-delete' => 'Ligita vikidatuma ero estis forigita. La lingvaj ligiloj estis forviŝitaj.',
+	'wbc-comment-langlinks-remove' => 'Ĉi tiu paĝo estis malligita de vikidatuma ero. La lingvaj ligiloj estis forviŝitaj.',
+	'wbc-comment-langlinks-restore' => 'Ligita vikidatuma ero estis restarigita. La lingvaj ligiloj ankaŭ estis restarigitaj.',
+	'wbc-comment-langlinks-update' => 'Lingvaj ligiloj ĝisdatigitaj',
+	'wbc-editlinks' => 'Redaktu ligilojn',
+	'wbc-editlinkstitle' => 'Redaktu interlingvajn ligilojn',
+);
+
 /** Spanish (español)
  * @author Armando-Martin
  */
