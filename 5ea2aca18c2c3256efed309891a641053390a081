@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACPX///5A\u003d",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-04T00:24:33Z",
+      "side": 1,
+      "message": "should be @since 0.3",
+      "revId": "5ea2aca18c2c3256efed309891a641053390a081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACPX///48\u003d",
+        "filename": "repo/includes/specials/SpecialEntitiesWithoutLabel.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-04T00:24:33Z",
+      "side": 1,
+      "message": "Nothing outside of the store layer should be touching any of the wikibase tables. This will break for installs that make use of another SQL implementation or storage engine (ie lucene).\n\nThis seems like something that should go in the TermCache (which is badly named since it\u0027s not a cache but a lookup facility) in a method such as getEntitiesWithoutTerm( ... )",
+      "revId": "5ea2aca18c2c3256efed309891a641053390a081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACPX///5E\u003d",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-04T00:24:33Z",
+      "side": 1,
+      "message": "Should be @since 0.3",
+      "revId": "5ea2aca18c2c3256efed309891a641053390a081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACPX///40\u003d",
+        "filename": "repo/includes/store/sql/AddEntitiesPerPage.sql",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-04T00:24:33Z",
+      "side": 1,
+      "message": "Not sure if we have any use for this. We used to have such a map in the early stages of the project but then dropped it since it turned out we did not need it.",
+      "revId": "5ea2aca18c2c3256efed309891a641053390a081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACPX///5I\u003d",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-04T00:24:33Z",
+      "side": 1,
+      "message": "why do you need this rebuilding stuff?",
+      "revId": "5ea2aca18c2c3256efed309891a641053390a081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
