@@ -8,14 +8,14 @@
 	'use strict';
 
 	/**
-	 * Module for 'DataValues' extensions utilities.
+	 * Module for utilities of the DataValues extension.
 	 * @since 0.1
 	 * @type Object
 	 */
 	dv.util = {};
 
 	/**
-	 * Helper for prototypal inheritance.
+	 * Helper for prototypical inheritance.
 	 * @since 0.1
 	 *
 	 * @param {Function} base Constructor which will be used for the prototype chain.

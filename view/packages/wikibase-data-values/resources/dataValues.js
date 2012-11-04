@@ -3,14 +3,14 @@
  * @see https://www.mediawiki.org/wiki/Extension:DataValues
  *
  * @file
- * @ingroup DataValue
+ * @ingroup DataValues
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner
  */
 
 /**
- * Global 'DataValues' object
+ * Global 'dataValues' object
  * @since 0.1
  * @type Object
  */

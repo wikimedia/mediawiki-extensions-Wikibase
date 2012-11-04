@@ -152,7 +152,7 @@ $wgHooks['ExtensionTypes'][] = function( array &$extensionTypes ) {
 	// @codeCoverageIgnoreEnd
 };
 
-// Resource Loader Modules:
+// Resource Loader module registration
 $wgResourceModules = array_merge(
 	$wgResourceModules,
 	include( __DIR__ . '/Resources.php' )

@@ -42,6 +42,8 @@
 		 *
 		 * @since 0.1
 		 *
+		 * @param {Array} constructorArguments
+		 *
 		 * @return dv.DataValue
 		 */
 		getInstance: function( constructorArguments ) {
