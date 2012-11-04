@@ -10,7 +10,7 @@
 
 var PARENT = dv.DataValue,
 	constructor = function( monoLingualValues ) {
-		this.texts = monoLingualValues;
+		this._texts = monoLingualValues;
 	};
 
 /**
@@ -18,7 +18,7 @@ var PARENT = dv.DataValue,
  * monolingual text values with the same meaning in different languages.
  *
  * @constructor
- * @extends dv.Value
+ * @extends dv.DataValue
  * @since 0.1
  *
  * @param {dv.MonolingualTextValue[]} monoLingualValues
@@ -41,10 +41,10 @@ dv.MultilingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String|Number
+	 * @return String
 	 */
 	getSortKey: function() {
-		return this.texts.length < 1 ? '' : this.texts[0].getSortKey();
+		return this._texts.length < 1 ? '' : this._texts[0].getSortKey();
 	},
 
 	/**
@@ -62,16 +62,13 @@ dv.MultilingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 * @see dv.DataValue.equals
 	 *
 	 * @since 0.1
-	 *
-	 * @return Boolean
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.MultilingualTextValue ) ) {
 			return false;
 		}
 
-		var
-			a = this.toJSON(),
+		var a = this.toJSON(),
 			b = value.toJSON();
 
 		return !( a > b || b < a );
@@ -84,27 +81,25 @@ dv.MultilingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @return Object
 	 */
-	toJSON: function( value ) {
-		var
-			texts = [],
-			i;
+	toJSON: function() {
+		var texts = [];
 
-		for ( i in this.texts ) {
-			texts[this.texts[i].getLanguageCode()] = this.texts[i].getText();
+		for ( var i in this._texts ) {
+			texts[this._texts[i].getLanguageCode()] = this._texts[i].getText();
 		}
 
 		return texts;
 	},
 
 	/**
-	 * Returns the text.
+	 * Returns the text in all languages available.
 	 *
 	 * @since 0.1
 	 *
 	 * @return Array
 	 */
 	getTexts: function() {
-		return this.texts;
+		return this._texts;
 	}
 
 } );

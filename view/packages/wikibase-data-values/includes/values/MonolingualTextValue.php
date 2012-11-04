@@ -116,9 +116,10 @@ class MonolingualTextValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @return string|float|int
+	 * @return string
 	 */
 	public function getSortKey() {
+		// TODO: we might want to re-think this key. Perhaps the language should simply be omitted.
 		return $this->language . $this->value;
 	}
 

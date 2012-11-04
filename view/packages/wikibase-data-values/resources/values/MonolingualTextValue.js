@@ -9,9 +9,9 @@
 'use strict';
 
 var PARENT = dv.DataValue,
-	constructor = function( languageCode, value ) {
-		this.languageCode = languageCode;
-		this.text = value;
+	constructor = function( languageCode, text ) {
+		this._languageCode = languageCode;
+		this._text = text;
 	};
 
 /**
@@ -19,7 +19,7 @@ var PARENT = dv.DataValue,
  * dedicated to one specific language.
  *
  * @constructor
- * @extends dv.Value
+ * @extends dv.DataValue
  * @since 0.1
  *
  * @param {String} languageCode
@@ -43,10 +43,10 @@ dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String|Number
+	 * @return String
 	 */
 	getSortKey: function() {
-		return this.languageCode + this.text;
+		return this._languageCode + this._text;
 	},
 
 	/**
@@ -54,7 +54,7 @@ dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return mixed
+	 * @return dv.MonolingualTextValue
 	 */
 	getValue: function() {
 		return this;
@@ -64,26 +64,22 @@ dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 * @see dv.DataValue.equals
 	 *
 	 * @since 0.1
-	 *
-	 * @return Boolean
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.MonolingualTextValue ) ) {
 			return false;
 		}
 
-		return this.text === value.getText() && this.languageCode === value.getLanguageCode();
+		return this.getText() === value.getText() && this._languageCode === value.getLanguageCode();
 	},
 
 	/**
 	 * @see dv.DataValue.toJSON
 	 *
 	 * @since 0.1
-	 *
-	 * @return Object
 	 */
-	toJSON: function( value ) {
-		return this.value;
+	toJSON: function() {
+		return this._text;
 	},
 
 	/**
@@ -91,10 +87,10 @@ dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return mixed
+	 * @return String
 	 */
 	getText: function() {
-		return this.text;
+		return this._text;
 	},
 
 	/**
@@ -105,7 +101,7 @@ dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 * @return String
 	 */
 	getLanguageCode: function() {
-		return this.languageCode;
+		return this._languageCode;
 	}
 
 } );

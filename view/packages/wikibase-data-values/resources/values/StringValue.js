@@ -12,14 +12,14 @@
 
 var PARENT = dv.DataValue,
 	constructor = function( value ) {
-		this.value = value;
+		this._value = value;
 	};
 
 /**
  * Constructor for creating a data value representing a string.
  *
  * @constructor
- * @extends dv.Value
+ * @extends dv.DataValue
  * @since 0.1
  *
  * @param {String} value
@@ -30,8 +30,6 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 	 * @see dv.DataValue.getType
 	 *
 	 * @since 0.1
-	 *
-	 * @return String
 	 */
 	getType: function() {
 		return 'string';
@@ -42,10 +40,10 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String|Number
+	 * @return String
 	 */
 	getSortKey: function() {
-		return this.value;
+		return this._value;
 	},
 
 	/**
@@ -53,36 +51,32 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return mixed
+	 * @return String
 	 */
 	getValue: function() {
-		return this.value;
+		return this._value;
 	},
 
 	/**
 	 * @see dv.DataValue.equals
 	 *
 	 * @since 0.1
-	 *
-	 * @return Boolean
 	 */
 	equals: function( value ) {
 		if ( !( value instanceof dv.StringValue ) ) {
 			return false;
 		}
 
-		return this.value === value.getValue();
+		return this.getValue() === value.getValue();
 	},
 
 	/**
 	 * @see dv.DataValue.toJSON
 	 *
 	 * @since 0.1
-	 *
-	 * @return Object
 	 */
-	toJSON: function( value ) {
-		return this.value;
+	toJSON: function() {
+		return this._value;
 	}
 
 } );
