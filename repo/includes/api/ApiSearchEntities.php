@@ -71,6 +71,69 @@ class ApiSearchEntities extends ApiBase {
 	}
 
 	/**
+	 * Order returned search array by score
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $results
+	 * @param string $language
+	 * @param string $search
+	 *
+	 * @return array $entries
+	 */
+
+	private function sortByScore( $results, $language, $search ) {
+		$entries = array();
+		foreach ( $results as $result ) {
+			$score = 0;
+			$entry = array();
+			$entity = $result->getEntity();
+			$entry['id'] = $entity->getPrefixedId();
+			if ( $entity->getLabel( $language ) !== false ) {
+				$entry['label'] = $entity->getLabel( $language );
+				$score = strlen( $search ) / strlen( $entity->getLabel( $language ) );
+			}
+			if ( $entity->getDescription( $language ) !== false ) {
+				$entry['description'] = $entity->getDescription( $language );
+			}
+
+			$entry['aliases'] = $entity->getAliases( $language, $search );
+			foreach ( $entry['aliases'] as $key => $value ) {
+				if ( preg_match( "/^" . $search . "/i", $entry['aliases'][$key] ) === 0 ) {
+					unset( $entry['aliases'][$key] );
+				}
+			}
+			foreach ( $entry['aliases'] as $alias ) {
+				$aliasscore = strlen( $search ) / strlen( $alias );
+				if ( $aliasscore > $score ) {
+					$score = $aliasscore;
+				}
+			}
+			$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
+			if ( $score > 0 ) {
+				$entry['score'] = $score;
+			}
+			if ( !in_array( $entry, $entries ) ) {
+				$entries[] = $entry;
+			}
+		}
+		// Do the actual sort by score
+		$sortArray = array();
+		foreach( $entries as $entry ){
+			foreach( $entry as $key=>$value){
+				if( !isset( $sortArray[$key] ) ){
+					$sortArray[$key] = array();
+				}
+				$sortArray[$key][] = $value;
+			}
+		}
+		$orderby = "score";
+		if ( $entries !== array() ) array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
+
+		return $entries;
+	}
+
+	/**
 	 * @see ApiBase::execute()
 	*/
 	public function execute() {
@@ -92,53 +155,7 @@ class ApiSearchEntities extends ApiBase {
 			array()
 		);
 
-		$entries = array();
-		foreach ( $hits as $hit ) {
-			$score = 0;
-			$entry = array();
-			$entity = $hit->getEntity();
-			$entry['id'] = $entity->getPrefixedId();
-			if ( $entity->getLabel( $params['language'] ) !== false ) {
-				$entry['label'] = $entity->getLabel( $params['language'] );
-				$score = strlen( $params['search'] ) / strlen( $entity->getLabel( $params['language'] ) );
-			}
-			if ( $entity->getDescription( $params['language'] ) !== false ) {
-				$entry['description'] = $entity->getDescription( $params['language'] );
-			}
-
-			$entry['aliases'] = $entity->getAliases( $params['language'], $params['search'] );
-			foreach ( $entry['aliases'] as $key => $value ) {
-				if ( preg_match( "/^" . $params['search'] . "/i", $entry['aliases'][$key] ) === 0 ) {
-					unset( $entry['aliases'][$key] );
-				}
-			}
-			foreach ( $entry['aliases'] as $alias ) {
-				$aliasscore = strlen( $params['search'] ) / strlen( $alias );
-				if ( $aliasscore > $score ) {
-					$score = $aliasscore;
-				}
-			}
-			$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
-			if ( $score > 0 ) {
-				$entry['score'] = $score;
-			}
-			if ( !in_array( $entry, $entries ) ) {
-				$entries[] = $entry;
-			}
-		}
-
-		// Sort by score
-		$sortArray = array();
-		foreach( $entries as $entry ){
-			foreach( $entry as $key=>$value){
-				if( !isset( $sortArray[$key] ) ){
-					$sortArray[$key] = array();
-				}
-				$sortArray[$key][] = $value;
-			}
-		}
-		$orderby = "score";
-		if ( $entries !== array() ) array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
+		$entries = $this->sortByScore( $hits, $params['language'], $params['search'] );
 
 		// Do continuation and pass offset in search-continue structure if limit isn't 0
 		if ( $params['limit'] !== 0 ) {
@@ -185,9 +202,6 @@ class ApiSearchEntities extends ApiBase {
 	public function getAllowedParams() {
 		// TODO: We probably need a flag for fuzzy searches. This is
 		// only a boolean flag.
-		// TODO: We need paging, and this can be done at least
-		// in two different ways. Initially we make the implementation
-		// without paging.
 		return array(
 			'search' => array(
 				ApiBase::PARAM_TYPE => 'string',
@@ -203,7 +217,7 @@ class ApiSearchEntities extends ApiBase {
 			),
 			'limit' => array(
 				ApiBase::PARAM_TYPE => 'integer',
-				ApiBase::PARAM_DFLT => 0,
+				ApiBase::PARAM_DFLT => 7,
 			),
 			'continue' => array(
 				ApiBase::PARAM_TYPE => 'integer',
