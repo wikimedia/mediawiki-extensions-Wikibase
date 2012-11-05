@@ -216,8 +216,7 @@ abstract class EntityContent extends \AbstractContent {
 	 * @return boolean
 	 */
 	public function isCountable( $hasLinks = null ) {
-		// TODO: implement
-		return false;
+		return !$this->getEntity()->isEmpty();
 	}
 
 	/**
