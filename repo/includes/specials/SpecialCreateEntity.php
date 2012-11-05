@@ -1,6 +1,7 @@
 <?php
 
 use Wikibase\Entity, Wikibase\EntityContent;
+use Wikibase\Autocomment;
 
 /**
  * Page for creating new Wikibase entities.
@@ -59,8 +60,20 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 				$status = $this->modifyEntity( $entityContent );
 
 				if ( $status->isOk() ) {
+					list( $counts, $summary, $lang) = Autocomment::formatAutoSummary(
+						array( $this->label, $this->description ),
+						$this->getLanguage()
+					);
+					$comment = Autocomment::formatAutoComment(
+						'special-create-' . $entityContent->getEntity()->getType(),
+						array( $counts, $this->getLanguage()->getCode() )
+					);
 					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() );
-					$editEntity->attemptSave( '', EDIT_AUTOSUMMARY|EDIT_NEW, $this->getRequest()->getVal( 'token' ) );
+					$editEntity->attemptSave(
+						AutoComment::formatTotalSummary( $comment, $summary, $lang ),
+						EDIT_AUTOSUMMARY|EDIT_NEW,
+						$this->getRequest()->getVal( 'token' )
+					);
 
 					$out = $this->getOutput();
 
