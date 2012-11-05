@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACbn////k\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "why a newline between comment and method? :p",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////g\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "actually could use some newlines here. Separating blocks of assignments and control structures tends to make code a lot more readable. See below for example",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////c\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////Y\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////U\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////Q\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////M\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////I\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////E\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn///+8\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////A\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn///+0\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn///+4\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn///+w\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "space below - and of course I meant newline :)",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACbn////o\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T14:33:45Z",
+      "side": 1,
+      "message": "missing brackets",
+      "revId": "f5567cf1be93a23f9306efb3204280837ba0a3f6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
