@@ -116,6 +116,7 @@ final class RepoHooks {
 	public static function registerUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
+			'Autocomment',
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
