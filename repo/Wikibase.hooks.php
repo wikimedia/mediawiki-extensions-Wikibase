@@ -177,34 +177,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * In Wikidata namespace, page content language is the same as the current user language.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageContentLanguage
-	 *
-	 * @since 0.1
-	 *
-	 * @param Title $title
-	 * @param Language &$pageLanguage
-	 * @param Language|\StubUserLang $language
-	 *
-	 * @return boolean
-	 */
-	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
-		global $wgNamespaceContentModels;
-
-		// TODO: make this a little nicer
-		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
-			&& in_array(
-				$title->getContentModel(),
-				EntityContentFactory::singleton()->getEntityContentModels()
-			)
-		) {
-			$pageLanguage = $language;
-		}
-
-		return true;
-	}
-
-	/**
 	 * Handler for the NamespaceIsMovable hook.
 	 *
 	 * Implemented to prevent moving pages that are in an entity namespace.
