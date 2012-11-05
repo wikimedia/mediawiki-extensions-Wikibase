@@ -131,11 +131,14 @@ abstract class EntityContent extends \AbstractContent {
 	public function getTextForSearchIndex() {
 		wfProfileIn( __METHOD__ );
 
-		$text = implode( "\n", $this->getEntity()->getLabels() );
-
+		$terms = $this->getEntity()->getLabels();
 		foreach ( $this->getEntity()->getAllAliases() as $aliases ) {
-			$text .= "\n" . implode( "\n", $aliases );
+			$terms = array_merge( $terms, $aliases );
 		}
+		$text = implode( "; ", array_unique( array_values( $terms ) ) );
+
+		$descs = $this->getEntity()->getDescriptions();
+		$text .= "\n" . implode( "\n", array_unique( array_values( $descs ) ) );
 
 		wfProfileOut( __METHOD__ );
 		return $text;
