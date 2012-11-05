@@ -37,7 +37,7 @@ class LangLinkHandler {
 	 * @since 0.1
 	 *
 	 * @param \Parser $parser
-	 * @return array of SiteLink
+	 * @return SiteLink[]
 	 */
 	public static function getEntityCacheLinks( \Parser $parser ) {
 		$itemId = ClientStoreFactory::getStore()->newSiteLinkCache()->getItemIdForLink(
@@ -91,9 +91,9 @@ class LangLinkHandler {
 	 * @since 0.1
 	 *
 	 * @param \Parser $parser
-	 * @param array $repoLinks - array of \Wikibase\SiteLink objects
+	 * @param SiteLink[] $repoLinks
 	 *
-	 * @return true
+	 * @return boolean true
 	 */
 	public static function suppressRepoLinks( \Parser $parser, &$repoLinks ) {
 		$out = $parser->getOutput();

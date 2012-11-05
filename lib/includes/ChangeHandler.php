@@ -54,12 +54,12 @@ class ChangeHandler {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $changes array of Change
+	 * @param Change[] $changes
 	 */
 	public function handleChanges( array $changes ) {
 		wfRunHooks( 'WikibasePollBeforeHandle', array( $changes ) );
 
-		foreach ( $changes as /* WikibaseChange */ $change ) {
+		foreach ( $changes as $change ) {
 			wfRunHooks( 'WikibasePollHandle', array( $change ) );
 		}
 

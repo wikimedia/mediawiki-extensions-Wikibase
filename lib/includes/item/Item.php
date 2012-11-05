@@ -63,7 +63,7 @@ interface Item extends Entity, StatementListAccess, StatementAggregate {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array an array of SiteLink objects
+	 * @return SiteLink[]
 	 */
 	public function getSiteLinks();
 

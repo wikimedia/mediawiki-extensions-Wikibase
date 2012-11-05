@@ -55,7 +55,7 @@ class MapValueHasher implements MapHasher {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $map Traversable|array of Hashable
+	 * @param Hashable[] $map
 	 *
 	 * @return string
 	 * @throws MWException

@@ -44,9 +44,9 @@ class ItemDisambiguation extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $items array of ItemContent
+	 * @param ItemContent[] $items
 	 * @param string $langCode
-	 * @param $context IContextSource|null
+	 * @param IContextSource|null $context
 	 *
 	 * @thorws MWException
 	 */
