@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput;
+use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput, DataUpdate;
 
 /**
  * Content object for articles representing Wikibase items.
@@ -271,7 +271,7 @@ class ItemContent extends EntityContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array of \DataUpdate
+	 * @return DataUpdate[]
 	 */
 	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
 		return array_merge(
@@ -281,7 +281,7 @@ class ItemContent extends EntityContent {
 	}
 
 	/**
-	 * @see   ContentHandler::getSecondaryDataUpdates
+	 * @see ContentHandler::getSecondaryDataUpdates
 	 *
 	 * @since 0.1
 	 *

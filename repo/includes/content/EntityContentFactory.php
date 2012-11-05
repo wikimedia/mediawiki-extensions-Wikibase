@@ -220,7 +220,7 @@ class EntityContentFactory {
 	 * @param string|null $entityType
 	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
-	 * @return array of EntityContent
+	 * @return EntityContent[]
 	 */
 	public function getFromLabel( $language, $label, $description = null, $entityType = null, $fuzzySearch = false ) {
 		$entityIds = StoreFactory::getStore()->newTermCache()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );

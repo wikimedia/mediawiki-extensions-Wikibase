@@ -19,7 +19,7 @@ final class TestItemContents {
 
 	/**
 	 * @since 0.1
-	 * @return array of ItemContent
+	 * @return ItemContent[]
 	 */
 	public static function getItems() {
 		// @codeCoverageIgnoreStart
