@@ -23,6 +23,9 @@ $wgWBSettings['siteGlobalID'] = "mywiki";
 // $wgLBFactoryConf below.
 $wgWBSettings['changesDatabase'] = "repo";
 
+$wgWBSettings['injectRecentChanges'] = true;
+$wgWBSettings['showExternalRecentChanges'] = true;
+
 $wgLBFactoryConf = array(
 	// In order to seamlessly access a remote wiki, as the pollForChanges script needs to do,
 	// LBFactory_Multi must be used.
