@@ -294,7 +294,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 
 		$token = $res['login']['token'];
 
-		list($res,,$session) = $this->doApiRequest(
+		list(,,$session) = $this->doApiRequest(
 			array(
 				'action' => 'login',
 				'lgtoken' => $token,
@@ -388,7 +388,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 */
 	function setItem( $data, $token ) {
 		$params = array(
-			'action' => 'wbsetitem',
+			'action' => 'wbeditentity',
 			'format' => 'json', // make sure IDs are used as keys.
 			'token' => $token,
 		);

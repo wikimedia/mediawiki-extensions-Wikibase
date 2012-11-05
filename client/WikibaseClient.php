@@ -84,18 +84,7 @@ $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikib
 $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
 
 // Resource loader modules
-$moduleTemplate = array(
-	'localBasePath' => __DIR__ . '/resources',
-	'remoteExtPath' => 'Wikibase/client/resources',
-);
-
-$wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
-	'styles' => array(
-		'ext.wikibaseclient.css'
-	),
-);
-
-unset( $moduleTemplate );
+$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
 $wgWBClientStores = array();
 $wgWBClientStores['sqlstore'] = 'Wikibase\ClientSqlStore';

@@ -4,7 +4,7 @@ namespace Wikibase;
 use ApiBase, User, Status;
 
 /**
- * Derived class for API modules modifying a single item identified by id xor a combination of site and page title.
+ * Derived class for API modules modifying a single entity identified by id xor a combination of site and page title.
  *
  * @since 0.1
  *
@@ -16,7 +16,7 @@ use ApiBase, User, Status;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-class ApiSetItem extends ApiModifyEntity {
+class ApiEditEntity extends ApiModifyEntity {
 
 	/**
 	 * @see  Api::getRequiredPermissions()
@@ -24,8 +24,9 @@ class ApiSetItem extends ApiModifyEntity {
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
 		$permissions = parent::getRequiredPermissions( $entity, $params );
 
+		$type = $entity->getType();
 		$permissions[] = 'edit';
-		$permissions[] = 'item-' . ( $entity->getId() ? 'override' : 'create' );
+		$permissions[] = $type . '-' . ( $entity->getId() ? 'override' : 'create' );
 		return $permissions;
 	}
 
@@ -36,7 +37,7 @@ class ApiSetItem extends ApiModifyEntity {
 		$entityContent = parent::findEntity( $params );
 
 		// If we found anything then check if it is of the correct base class
-		if ( !is_null( $entityContent ) && !( $entityContent instanceof ItemContent ) ) {
+		if ( is_object( $entityContent ) && !( $entityContent instanceof EntityContent ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-wrong-class' )->text(), 'wrong-class' );
 		}
 
@@ -68,7 +69,21 @@ class ApiSetItem extends ApiModifyEntity {
 	protected function createEntity( array $params ) {
 		if ( isset( $params['data'] ) ) {
 			$this->flags |= EDIT_NEW;
-			return ItemContent::newEmpty();
+			if ( isset($params['id']) ) {
+				switch ( $params['data'] ) {
+				case 'item':
+					return ItemContent::newEmpty();
+				case 'property':
+					return PropertyContent::newEmpty();
+				case 'query':
+					return QueryContent::newEmpty();
+				default:
+					$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
+				}
+			}
+			else {
+				return ItemContent::newEmpty();
+			}
 		}
 		$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity' )->text(), 'no-such-entity' );
 	}
@@ -246,6 +261,12 @@ class ApiSetItem extends ApiModifyEntity {
 					break;
 
 				case 'sitelinks':
+					// TODO: This is a temporary fix that should be handled properly with an
+					// injector/inputter class that is specific for the given entity
+					if ( $entityContent->getEntity()->getType() !== Item::ENTITY_TYPE ) {
+						$this->dieUsage( "key can't be handled: $props", 'not-recognized' );
+					}
+
 					if ( !is_array( $list ) ) {
 						$this->dieUsage( "Key 'sitelinks' must refer to an array", 'not-recognized-array' );
 					}
@@ -303,7 +324,12 @@ class ApiSetItem extends ApiModifyEntity {
 		$this->addLabelsToResult( $entity->getLabels(), 'entity' );
 		$this->addDescriptionsToResult( $entity->getDescriptions(), 'entity' );
 		$this->addAliasesToResult( $entity->getAllAliases(), 'entity' );
-		$this->addSiteLinksToResult( $entity->getSiteLinks(), 'entity' );
+
+		// TODO: This is a temporary fix that should be handled properly with a
+		// serializer class that is specific for the given entity
+		if ( $entityContent->getEntity()->getType() === Item::ENTITY_TYPE ) {
+			$this->addSiteLinksToResult( $entity->getSiteLinks(), 'entity' );
+		}
 
 		return true;
 	}
@@ -366,13 +392,13 @@ class ApiSetItem extends ApiModifyEntity {
 			parent::getParamDescriptionForEntity(),
 			array(
 				'data' => array( 'The serialized object that is used as the data source.',
-					"A newly created entity will be assigned an item 'id'."
+					"A newly created entity will be assigned an 'id'."
 				),
 				'exclude' => array( 'List of substructures to neglect during the processing.',
 					"In addition 'length', 'touched' and 'count' is always excluded."
 				),
-				'clear' => array( 'If set, the complete item is emptied before proceeding.',
-					'The item will not be saved before the item is filled with the "data", possibly with parts excluded.'
+				'clear' => array( 'If set, the complete emptied is emptied before proceeding.',
+					'The entity will not be saved before it is filled with the "data", possibly with parts excluded.'
 				),
 			)
 		);
@@ -383,7 +409,7 @@ class ApiSetItem extends ApiModifyEntity {
 	 */
 	public function getDescription() {
 		return array(
-			'API module to create a single new Wikibase item and modify it with serialised information.'
+			'API module to create a single new Wikibase entity and modify it with serialised information.'
 		);
 	}
 
@@ -392,10 +418,10 @@ class ApiSetItem extends ApiModifyEntity {
 	 */
 	protected function getExamples() {
 		return array(
-			'api.php?action=wbsetitem&data={}&format=jsonfm'
-			=> 'Set an empty JSON structure for the item, it will be extended with an item id and the structure cleansed and completed. Report it as pretty printed json format.',
-			'api.php?action=wbsetitem&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
-			=> 'Set a more complete JSON structure for the item, it will be extended with an item id and the structure cleansed and completed.',
+			'api.php?action=wbeditentity&data={}&format=jsonfm'
+			=> 'Set an empty JSON structure for the entity, it will be extended with an id and the structure cleansed and completed. Report it as pretty printed json format.',
+			'api.php?action=wbeditentity&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			=> 'Set a more complete JSON structure for the entity, it will be extended with an id and the structure cleansed and completed.',
 		);
 	}
 
@@ -403,7 +429,7 @@ class ApiSetItem extends ApiModifyEntity {
 	 * @see ApiBase::getHelpUrls()
 	 */
 	public function getHelpUrls() {
-		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetitem';
+		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbeditentity';
 	}
 
 	/**

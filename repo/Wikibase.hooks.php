@@ -131,7 +131,7 @@ final class RepoHooks {
 			'api/ApiDescription',
 			'api/ApiPermissions',
 			'api/ApiSetAliases',
-			'api/ApiSetItem',
+			'api/ApiEditEntity',
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
 
@@ -140,6 +140,7 @@ final class RepoHooks {
 			'api/serializers/ByPropertyListSerializer',
 			'api/serializers/ClaimSerializer',
 			'api/serializers/ItemSerializer',
+			'api/serializers/PropertySerializer',
 			'api/serializers/SnakSerializer',
 
 			'content/EntityContentFactory',
@@ -264,6 +265,7 @@ final class RepoHooks {
 			$change->setRCInfo( array(
 				'rc_user_id' => $revision->getUser(),
 				'rc_user_text' => $revision->getUserText(),
+				'rc_bot' => in_array( 'bot', $user->getRights() ),
 				'rc_curid' => $revision->getPage(),
 				'rc_this_oldid' => $revision->getId(),
 				'rc_last_oldid' => $revision->getParentId(),
@@ -297,12 +299,8 @@ final class RepoHooks {
 		\Content $content = null, \LogEntryBase $logEntry = null
 	) {
 
-		if ( $content === null ) {
-			throw new MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
-		}
-
 		// Bail out if we are not in an entity namespace
-		if ( !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
+		if ( !$content || !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
 			return true;
 		}
 		$entity = $content->getEntity();
@@ -349,21 +347,24 @@ final class RepoHooks {
 
 		$revId = $title->getLatestRevID();
 		$content = $entityContentFactory->getFromRevision( $revId );
-		$entity = $content->getEntity();
-		$rev = Revision::newFromId( $revId );
 
-		$change = EntityRestore::newFromEntity( $entity );
+		if ( $content ) {
+			$entity = $content->getEntity();
+			$rev = Revision::newFromId( $revId );
 
-		// TODO: Use timestamp of log entry, but needs core change.
-		// This hook is called before the log entry is created.
-		$change->setFields( array(
-			'revision_id' => $revId,
-			'user_id' => $rev->getUser(),
-			'object_id' => $entity->getId(),
-			'time' => wfTimestamp( TS_MW, wfTimestampNow() )
-		) );
+			$change = EntityRestore::newFromEntity( $entity );
 
-		ChangeNotifier::singleton()->handleChange( $change );
+			// TODO: Use timestamp of log entry, but needs core change.
+			// This hook is called before the log entry is created.
+			$change->setFields( array(
+				'revision_id' => $revId,
+				'user_id' => $rev->getUser(),
+				'object_id' => $entity->getId(),
+				'time' => wfTimestamp( TS_MW, wfTimestampNow() )
+			) );
+
+			ChangeNotifier::singleton()->handleChange( $change );
+		}
 
 		return true;
 	}
@@ -674,7 +675,7 @@ final class RepoHooks {
 	 *
 	 * @param \DummyLinker $skin
 	 * @param Title $target
-	 * @param string $text
+	 * @param string $html
 	 * @param array $customAttribs
 	 * @param string $query
 	 * @param array $options

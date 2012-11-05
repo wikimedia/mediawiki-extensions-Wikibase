@@ -41,7 +41,7 @@ use ApiTestCase;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group ApiSetItemTest
+ * @group ApiEditEntityTest
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -52,11 +52,11 @@ use ApiTestCase;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group large
  */
-class ApiSetItemTest extends ApiModifyItemBase {
+class ApiEditEntityTest extends ApiModifyItemBase {
 
 	static public $id = null;
 
-	static public $item = array(
+	static public $entity = array(
 		"sitelinks" => array(
 			"enwiki" => array( "site" => "enwiki", "title" => "Bar" ),
 			"dewiki" => array( "site" => "dewiki", "title" => "Foo" ),
@@ -96,25 +96,25 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 
 	/**
-	 * Check if an item can not be created whithout a token
+	 * Check if an entity can not be created whithout a token
 	 */
-	function testSetItemNoToken() {
+	function testEditEntityNoToken() {
 		$this->login();
 
 		if ( self::$usetoken ) {
 			try {
 				$this->doApiRequest(
 					array(
-						'action' => 'wbsetitem',
+						'action' => 'wbeditentity',
 						'reason' => 'Some reason',
-						'data' => json_encode( self::$item ),
+						'data' => json_encode( self::$entity ),
 					),
 					null,
 					false,
 					self::$users['wbeditor']->user
 				);
 
-				$this->fail( "Adding an item without a token should have failed" );
+				$this->fail( "Adding an entity without a token should have failed" );
 			}
 			catch ( \UsageException $e ) {
 				$this->assertTrue( ($e->getCodeString() == 'session-failure'), "Expected session-failure, got unexpected exception: $e" );
@@ -123,17 +123,17 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * Check if an item can be created when a token is supplied
+	 * Check if an entity can be created when a token is supplied
 	 * note that upon completion the id will be stored for later reuse
 	 */
-	function testSetItemWithToken() {
+	function testEditEntityWithToken() {
 		$token = $this->getItemToken();
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbsetitem',
+				'action' => 'wbeditentity',
 				'reason' => 'Some reason',
-				'data' => json_encode( self::$item ),
+				'data' => json_encode( self::$entity ),
 				'token' => $token,
 			),
 			null,
@@ -152,9 +152,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * Check failure to set the same item again, without id
+	 * Check failure to set the same entity again, without id
 	 */
-	function testSetItemNoId() {
+	function testEditEntityNoId() {
 		$token = $this->getItemToken();
 
 		$data = array( 'labels' => array(
@@ -165,9 +165,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		try {
 			$this->doApiRequest(
 				array(
-					'action' => 'wbsetitem',
+					'action' => 'wbeditentity',
 					'reason' => 'Some reason',
-					'data' => json_encode( array_merge( self::$item, $data ) ),
+					'data' => json_encode( array_merge( self::$entity, $data ) ),
 					'token' => $token,
 				),
 				null,
@@ -175,7 +175,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				self::$users['wbeditor']->user
 			);
 
-			$this->fail( "Adding another item with the same sitelinks should have failed" );
+			$this->fail( "Adding another entity with the same sitelinks should have failed" );
 		}
 		catch ( \UsageException $e ) {
 			$this->assertTrue( ($e->getCodeString() == 'save-failed'), "Expected set-sitelink-failed, got unexpected exception: $e" );
@@ -183,16 +183,16 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * Check success of item update with a valid id
+	 * Check success of entity update with a valid id
 	 */
-	function testSetItemWithId() {
+	function testEditEntityWithId() {
 		$token = $this->getItemToken();
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbsetitem',
+				'action' => 'wbeditentity',
 				'reason' => 'Some reason',
-				'data' => json_encode( self::$item ),
+				'data' => json_encode( self::$entity ),
 				'token' => $token,
 				'id' => self::$id,
 			),
@@ -207,18 +207,18 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * Check success of item update with a valid id
+	 * Check success of entity update with a valid id
 	 */
-	function testSetItemWithNumericId() {
+	function testEditEntityWithNumericId() {
 		$token = $this->getItemToken();
 
 		$numId = preg_replace( '/^[a-z]*/', '', self::$id );
 
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbsetitem',
+				'action' => 'wbeditentity',
 				'reason' => 'Some reason',
-				'data' => json_encode( self::$item ),
+				'data' => json_encode( self::$entity ),
 				'token' => $token,
 				'id' => $numId,
 			),
@@ -234,12 +234,12 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * Check success when the item is set again, with fields in the json that should be ignored
+	 * Check success when the entity is set again, with fields in the json that should be ignored
 	 */
-	function testSetItemWithIgnoredData() {
+	function testEditEntityWithIgnoredData() {
 		$token = $this->getItemToken();
 
-		// these sets of failing data must be merged with an existing item
+		// these sets of failing data must be merged with an existing entity
 		$ignoredData = array(
 			array( 'length' => 999999 ), // always ignored
 			array( 'count' => 999999 ), // always ignored
@@ -253,9 +253,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			try {
 				list($res,,) = $this->doApiRequest(
 					array(
-						'action' => 'wbsetitem',
+						'action' => 'wbeditentity',
 						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( self::$item, $data ) ),
+						'data' => json_encode( array_merge( self::$entity, $data ) ),
 						'token' => $token,
 						'id' => self::$id, // will now use default type
 						'exclude' => 'pageid|ns|title|lastrevid'
@@ -274,12 +274,12 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * Check failure to set the same item again, with illegal field values in the json
+	 * Check failure to set the same entity again, with illegal field values in the json
 	 */
-	function testSetItemWithIllegalData() {
+	function testEditEntityWithIllegalData() {
 		$token = $this->getItemToken();
 
-		// these sets of failing data must be merged with an existing item
+		// these sets of failing data must be merged with an existing entity
 		$failingData = array( //@todo: check each of these separately, so we know that each one fails!
 			array( 'pageid' => 999999 ),
 			array( 'ns' => 200 ),
@@ -288,11 +288,11 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 		foreach ( $failingData as $data ) {
 			try {
-				list($res,,) = $this->doApiRequest(
+				$this->doApiRequest(
 					array(
-						'action' => 'wbsetitem',
+						'action' => 'wbeditentity',
 						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( self::$item, $data ) ),
+						'data' => json_encode( array_merge( self::$entity, $data ) ),
 						'token' => $token,
 						'id' => self::$id,
 						//'exclude' => '' // make sure all critical values are checked per default
@@ -301,7 +301,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 					false,
 					self::$users['wbeditor']->user
 				);
-				$this->fail( "Updating the item with wrong data should have failed" );
+				$this->fail( "Updating the entity with wrong data should have failed" );
 			}
 			catch ( \UsageException $e ) {
 				$this->assertTrue( ($e->getCodeString() == 'illegal-field'), "Expected illegal-field, got unexpected exception: $e" );
@@ -310,12 +310,12 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * Check success to set the same item again, with legal field values in the json
+	 * Check success to set the same entity again, with legal field values in the json
 	 */
-	function testSetItemWithLegalData() {
+	function testEditEntityWithLegalData() {
 		$token = $this->getItemToken();
 
-		// request the test data from the item itself
+		// request the test data from the entity itself
 		list($query,,) = $this->doApiRequest(
 			array(
 				'action' => 'wbgetentities',
@@ -329,7 +329,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 		);
 		$this->assertSuccess( $query, 'entities', self::$id, 'id' );
 
-		// these sets of failing data must be merged with an existing item
+		// these sets of failing data must be merged with an existing entity
 		$goodData = array(
 			array( 'pageid' => $query['entities'][self::$id]['pageid'] ),
 			array( 'ns' => $query['entities'][self::$id]['ns'] ),
@@ -341,9 +341,9 @@ class ApiSetItemTest extends ApiModifyItemBase {
 			try {
 				list($res,,) = $this->doApiRequest(
 					array(
-						'action' => 'wbsetitem',
+						'action' => 'wbeditentity',
 						'reason' => 'Some reason',
-						'data' => json_encode( array_merge( $data, self::$item ) ),
+						'data' => json_encode( array_merge( $data, self::$entity ) ),
 						'token' => $token,
 						'id' => self::$id,
 						//'exclude' => '' // make sure all critical values are checked per default
@@ -364,13 +364,13 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	/**
 	 * Check if it possible to clear out the content of the object
 	 */
-	function testSetItemEmptyData() {
+	function testEditEntityEmptyData() {
 		$token = $this->getItemToken();
 
 		try {
 			list($res,,) = $this->doApiRequest(
 				array(
-					'action' => 'wbsetitem',
+					'action' => 'wbeditentity',
 					'reason' => 'Some reason',
 					'data' => json_encode( array() ),
 					'token' => $token,
@@ -529,13 +529,13 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	/**
 	 * @dataProvider provideBadData
 	 */
-	function testSetItemBadData( $data, $expectedErrorCode ) {
+	function testEditEntityBadData( $data, $expectedErrorCode ) {
 		$token = $this->getItemToken();
 
 		try {
 			$this->doApiRequest(
 				array(
-					'action' => 'wbsetitem',
+					'action' => 'wbeditentity',
 					'reason' => 'Some reason',
 					'data' => is_string( $data ) ? $data : json_encode( $data ),
 					'token' => $token,
@@ -545,14 +545,14 @@ class ApiSetItemTest extends ApiModifyItemBase {
 				self::$users['wbeditor']->user
 			);
 
-			$this->fail( "Adding item should have failed: " . ( is_string( $data ) ? $data : json_encode( $data ) ) );
+			$this->fail( "Adding entity should have failed: " . ( is_string( $data ) ? $data : json_encode( $data ) ) );
 		}
 		catch ( \UsageException $e ) {
 			$this->assertTrue( ($e->getCodeString() == $expectedErrorCode), "Expected $expectedErrorCode, got unexpected exception: $e" );
 		}
 	}
 
-	function provideSetItemData() {
+	function provideEditEntityData() {
 		return array(
 			array( //0: labels
 				'Berlin', // handle
@@ -638,16 +638,16 @@ class ApiSetItemTest extends ApiModifyItemBase {
 	}
 
 	/**
-	 * @dataProvider provideSetItemData
+	 * @dataProvider provideEditEntityData
 	 */
-	function testSetItemData( $handle, $data, $expected = null ) {
+	function testEditEntityData( $handle, $data, $expected = null ) {
 		$id = $this->getItemId( $handle );
 		$token = $this->getItemToken();
 
-		// wbsetitem ------------------------------------------------------
+		// wbsetentity ------------------------------------------------------
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbsetitem',
+				'action' => 'wbeditentity',
 				'reason' => 'Some reason',
 				'data' => json_encode( $data ),
 				'token' => $token,
@@ -660,7 +660,7 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 		// check returned keys -------------------------------------------
 		$this->assertSuccess( $res, 'entity' );
-		$item = $res['entity'];
+		$entity = $res['entity'];
 		$this->assertSuccess( $res, 'entity', 'id' );
 		$this->assertSuccess( $res, 'entity', 'lastrevid' );
 
@@ -669,18 +669,18 @@ class ApiSetItemTest extends ApiModifyItemBase {
 
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {
-			$this->assertArrayHasKey( $key, $item );
-			$this->assertArrayEquals( $exp, static::flattenValues( $key, $item[$key] ) );
+			$this->assertArrayHasKey( $key, $entity );
+			$this->assertArrayEquals( $exp, static::flattenValues( $key, $entity[$key] ) );
 		}
 
-		// check item in database -------------------------------------------
-		$item = $this->loadItem( $id );
+		// check entity in database -------------------------------------------
+		$entity = $this->loadItem( $id );
 
 		// check relevant entries
 		foreach ( $expected as $key => $exp ) {
-			$this->assertArrayHasKey( $key, $item );
+			$this->assertArrayHasKey( $key, $entity );
 			$this->assertArrayEquals( static::flattenValues( $key, $exp ),
-										static::flattenValues( $key, $item[$key] ) );
+										static::flattenValues( $key, $entity[$key] ) );
 		}
 
 		// cleanup ------------------------------------------------------

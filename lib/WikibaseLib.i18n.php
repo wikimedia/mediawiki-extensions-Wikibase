@@ -60,15 +60,16 @@ $messages['be-tarask'] = array(
 );
 
 /** German (Deutsch)
+ * @author G.Hagedorn
  * @author Kghbln
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'wikibaselib-desc' => 'Stellt den Erweiterungen Wikibase und Wikibase Client gemeinsam genutzte Funktionen bereit',
-	'wikibaselib-entity-item' => 'Datenelement',
-	'wikibaselib-entity-property' => 'Attribut',
+	'wikibaselib-desc' => 'Stellt von den Erweiterungen Wikibase und Wikibase Client gemeinsam genutzte Funktionen bereit',
+	'wikibaselib-entity-item' => 'Datenobjekt',
+	'wikibaselib-entity-property' => 'Eigenschaft',
 	'wikibaselib-entity-query' => 'Abfrage',
-	'datatypes-type-wikibase-item' => 'Datenelement',
+	'datatypes-type-wikibase-item' => 'Datenobjekt',
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
 );
 
@@ -82,6 +83,18 @@ $messages['dsb'] = array(
 	'wikibaselib-entity-query' => 'wótpšašanje',
 	'datatypes-type-wikibase-item' => 'Element',
 	'datatypes-type-commonsMedia' => 'Medijowa dataja na Wikimedia Commons',
+);
+
+/** Esperanto (Esperanto)
+ * @author ArnoLagrange
+ */
+$messages['eo'] = array(
+	'wikibaselib-desc' => 'Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo',
+	'wikibaselib-entity-item' => 'ero',
+	'wikibaselib-entity-property' => 'Atributo',
+	'wikibaselib-entity-query' => 'Serĉomendo',
+	'datatypes-type-wikibase-item' => 'Ero',
+	'datatypes-type-commonsMedia' => 'Multrimeda dosiero en Komunejo',
 );
 
 /** Spanish (español)
@@ -109,10 +122,16 @@ $messages['fa'] = array(
 );
 
 /** French (français)
+ * @author Arkanosis
  * @author Wyz
  */
 $messages['fr'] = array(
 	'wikibaselib-desc' => 'Regroupe des fonctionnalités communes aux extensions Wikibase et Wikibase Client',
+	'wikibaselib-entity-item' => 'élément',
+	'wikibaselib-entity-property' => 'propriété',
+	'wikibaselib-entity-query' => 'requête',
+	'datatypes-type-wikibase-item' => 'Élément',
+	'datatypes-type-commonsMedia' => 'Fichier multimédia de Commons',
 );
 
 /** Galician (galego)
@@ -266,12 +285,14 @@ $messages['nn'] = array(
 /** Polish (polski)
  * @author BeginaFelicysym
  * @author Lazowik
+ * @author Maćko
  */
 $messages['pl'] = array(
 	'wikibaselib-desc' => 'Zawiera elementy wspólne dla rozszerzeń Wikibase i Wikibase Client',
 	'wikibaselib-entity-item' => 'element',
 	'wikibaselib-entity-property' => 'właściwość',
 	'wikibaselib-entity-query' => 'zapytanie',
+	'datatypes-type-wikibase-item' => 'Obiekt',
 );
 
 /** Piedmontese (Piemontèis)
@@ -283,6 +304,7 @@ $messages['pms'] = array(
 );
 
 /** Portuguese (português)
+ * @author Helder.wiki
  * @author Waldir
  */
 $messages['pt'] = array(
@@ -290,6 +312,8 @@ $messages['pt'] = array(
 	'wikibaselib-entity-item' => 'elemento',
 	'wikibaselib-entity-property' => 'propriedade',
 	'wikibaselib-entity-query' => 'consulta',
+	'datatypes-type-wikibase-item' => 'Item',
+	'datatypes-type-commonsMedia' => 'Ficheiro de mídia do Commons',
 );
 
 /** Brazilian Portuguese (português do Brasil)
@@ -331,4 +355,16 @@ $messages['vi'] = array(
 	'wikibaselib-entity-property' => 'thuộc tính',
 	'wikibaselib-entity-query' => 'truy vấn',
 	'datatypes-type-wikibase-item' => 'Khoản mục',
+	'datatypes-type-commonsMedia' => 'Tập tin phương tiện Commons',
+);
+
+/** Simplified Chinese (中文（简体）‎)
+ * @author Yfdyh000
+ */
+$messages['zh-hans'] = array(
+	'wikibaselib-entity-item' => '项目',
+	'wikibaselib-entity-property' => '属性',
+	'wikibaselib-entity-query' => '查询',
+	'datatypes-type-wikibase-item' => '项目',
+	'datatypes-type-commonsMedia' => '共享媒体文件',
 );

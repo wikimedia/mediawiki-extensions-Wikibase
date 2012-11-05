@@ -272,7 +272,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// EntityContent is abstract so we use the subclass ItemContent
 		// to get a concrete class to instantiate. Still note that our
 		// test target is EntityContent::userWasLastToEdit.
-		$limit = 50;
 		$anonUser = \User::newFromId(0);
 		$sysopUser = \User::newFromId(1);
 		$itemContent = \Wikibase\ItemContent::newEmpty();

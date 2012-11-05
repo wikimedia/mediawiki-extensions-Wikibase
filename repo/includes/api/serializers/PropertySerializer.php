@@ -1,10 +1,10 @@
 <?php
 
-namespace Wikibase\Test;
-use Wikibase\ApiSerializationOptions;
+namespace Wikibase;
+use MWException;
 
 /**
- * Tests for the Wikibase\ApiSerializationOptions class.
+ * API serializer for properties.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,23 +21,36 @@ use Wikibase\ApiSerializationOptions;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @since 0.3
+ *
  * @file
- * @since 0.2
- *
  * @ingroup Wikibase
- * @ingroup Test
- *
- * @group Wikibase
- * @group WikibaseApiSerialization
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiSerializationOptionsTest extends \MediaWikiTestCase {
+class PropertySerializer extends EntitySerializer {
 
-	public function testConstructor() {
-		new ApiSerializationOptions();
-		$this->assertTrue( true );
+	/**
+	 * @see EntitySerializer::getEntityTypeSpecificSerialization
+	 *
+	 * @since 0.3
+	 *
+	 * @param Entity $property
+	 *
+	 * @return array
+	 * @throws MWException
+	 */
+	protected function getEntityTypeSpecificSerialization( Entity $property ) {
+		if ( !( $property instanceof Property ) ) {
+			throw new MWException( 'PropertySerializer can only serialize Property implementing objects' );
+		}
+
+		$serialization = array();
+
+		$serialization['datatype'] = $property->getDataType()->getId();
+
+		return $serialization;
 	}
 
 }

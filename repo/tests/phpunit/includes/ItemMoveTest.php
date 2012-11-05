@@ -59,7 +59,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$this->itemContent = ItemContent::newEmpty();
 		$this->itemContent->save( '', null, EDIT_NEW );
 
-		$title = Title::newFromText( 'wbmovetest' );
+		$title = Title::newFromText( 'wbmovetest', $this->getDefaultWikitextNS() );
 		$this->page =  new WikiPage( $title );
 		$this->page->doEditContent( new WikitextContent( 'foobar' ), 'test' );
 	}

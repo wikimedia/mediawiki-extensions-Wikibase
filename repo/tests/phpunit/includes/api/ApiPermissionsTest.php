@@ -68,11 +68,16 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		global $wgUser;
 
 		$wgGroupPermissions = $this->permissions;
-		$wgUser = $this->old_user;
 
-		// reset rights cache
-		$wgUser->addGroup( "dummy" );
-		$wgUser->removeGroup( "dummy" );
+		if ( $this->old_user ) { // should not be null, but sometimes, it is
+			$wgUser = $this->old_user;
+		}
+
+		if ( $wgUser ) { // should not be null, but sometimes, it is
+			// reset rights cache
+			$wgUser->addGroup( "dummy" );
+			$wgUser->removeGroup( "dummy" );
+		}
 
 		parent::tearDown();
 	}
@@ -209,7 +214,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 			'data' => $json->encode( $itemData ),
 		);
 
-		$this->doPermissionsTest( 'wbsetitem', $params, $permissions, $expectedError );
+		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
 	function provideSetSiteLinkPermissions() {
@@ -235,7 +240,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 		// TODO: use store
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->delete( $dbw->tableName( 'wb_items_per_site' ), '*', __METHOD__ );
+		$dbw->delete( 'wb_items_per_site', '*', __METHOD__ );
 
 		$params = array(
 			'id' => $this->getItemId( "Oslo" ),

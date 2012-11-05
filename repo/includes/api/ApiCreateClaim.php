@@ -36,7 +36,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 */
 	public function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
-			'wbcreateclaim-' . $params['type'],
+			'wbcreateclaim-' . $params['snaktype'],
 			array(
 				/*plural */ (int)isset( $params['value'] ) + (int)isset( $params['property'] )
 			)
@@ -47,7 +47,6 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 * @see  ApiAutocomment::getTextForSummary()
 	 */
 	public function getTextForSummary( array $params ) {
-		$parts = array();
 		return Autocomment::formatAutoSummary(
 			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
 		);
@@ -123,7 +122,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : false;
 		$editEntity = new EditEntity( $entityContent, $this->getUser(), $baseRevisionId );
 
-		$status = $editEntity->attemptSave(
+		$editEntity->attemptSave(
 			Autocomment::buildApiSummary( $this, null, $entityContent ),
 			EDIT_UPDATE,
 			isset( $params['token'] ) ? $params['token'] : false
@@ -134,15 +133,15 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 
 	/**
 	 * Checks if the required parameters are set and the ones that make no sense given the
-	 * type value are not set.
+	 * snaktype value are not set.
 	 *
 	 * @since 0.2
 	 */
 	protected function checkParameterRequirements() {
 		$params = $this->extractRequestParams();
 
-		if ( $params['type'] == 'value' XOR isset( $params['value'] ) ) {
-			if ( $params['type'] == 'value' ) {
+		if ( $params['snaktype'] == 'value' XOR isset( $params['value'] ) ) {
+			if ( $params['snaktype'] == 'value' ) {
 				$this->dieUsage( 'A value needs to be provided when creating a claim with PropertyValueSnak snak', 'claim-value-missing' );
 			}
 			else {
@@ -181,7 +180,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 
 		$propertyId = $entityFactory->getUnprefixedId( $params['property'] );
 
-		switch ( $params['type'] ) {
+		switch ( $params['snaktype'] ) {
 			case 'value':
 				$dataValue = new \DataValues\StringValue( '' ); // TODO
 				$snak = new PropertyValueSnak( $propertyId, $dataValue );
@@ -214,7 +213,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
-			'type' => array(
+			'snaktype' => array(
 				ApiBase::PARAM_TYPE => array( 'value', 'novalue', 'somevalue' ),
 				ApiBase::PARAM_REQUIRED => true,
 			),
@@ -245,7 +244,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 			'id' => 'Id of the entity you are adding the statement to',
 			'property' => 'Id of the property when creating a claim with a snak consisting of a property',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
-			'type' => 'The type of the snak',
+			'snaktype' => 'The type of the snak',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
 			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."

@@ -77,7 +77,7 @@ class importProperties extends Maintenance {
 					continue;
 				}
 				if ( ( $this->only !== 0 ) && ( $this->only !== $count ) ) {
-					if ($this->only < $count) {
+					if ( $this->only < $count ) {
 						break;
 					}
 					continue;
@@ -106,7 +106,7 @@ class importProperties extends Maintenance {
 	}
 
 	/**
-	 * @param Array $links An associative array of interlanguage links, mapping site IDs to page titles on that site.
+	 * @param Array $data An associative array of interlanguage links, mapping site IDs to page titles on that site.
 	 *
 	 * @return bool true if the item was created, false otherwise
 	 */

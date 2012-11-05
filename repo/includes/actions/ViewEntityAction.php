@@ -147,7 +147,12 @@ abstract class ViewEntityAction extends \ViewAction {
 			);
 */
 		// FIXME: this replaces the stuff above
-		$labelText = $content->getEntity()->getLabel($langCode);
+		$labelText = $content->getEntity()->getLabel( $langCode );
+
+		if ( $labelText === false ) {
+			$labelText = strtoupper( $content->getEntity()->getPrefixedId() );
+		}
+
 		// Create and set the title.
 		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
 			$out->setPageTitle(

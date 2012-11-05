@@ -195,7 +195,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 	 */
 	public function testGetEntitiesByBadSite( ) {
 		try {
-			list( $res,, ) = $this->doApiRequest( array(
+			$this->doApiRequest( array(
 				'action' => 'wbgetentities',
 				'sites' => 'enwiktionary',
 				'titles' => 'Berlin',

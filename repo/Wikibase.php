@@ -118,7 +118,7 @@ $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabe
 $wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
 $wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
-$wgAutoloadClasses['Wikibase\ApiSetItem'] 				= $dir . 'includes/api/ApiSetItem.php';
+$wgAutoloadClasses['Wikibase\ApiEditEntity'] 			= $dir . 'includes/api/ApiEditEntity.php';
 $wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
 $wgAutoloadClasses['Wikibase\ApiSearchEntities'] 		= $dir . 'includes/api/ApiSearchEntities.php';
 
@@ -131,6 +131,7 @@ $wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/api/s
 $wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/api/serializers/ClaimSerializer.php';
 $wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/api/serializers/EntitySerializer.php';
 $wgAutoloadClasses['Wikibase\ItemSerializer'] 			= $dir . 'includes/api/serializers/ItemSerializer.php';
+$wgAutoloadClasses['Wikibase\PropertySerializer'] 		= $dir . 'includes/api/serializers/PropertySerializer.php';
 $wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/api/serializers/SnakSerializer.php';
 
 // includes/content
@@ -194,14 +195,18 @@ $wgAPIModules['wbsetlabel'] 						= 'Wikibase\ApiSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'Wikibase\ApiSetDescription';
 $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
 $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
-$wgAPIModules['wbsetitem'] 							= 'Wikibase\ApiSetItem';
+$wgAPIModules['wbeditentity'] 						= 'Wikibase\ApiEditEntity';
 $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 //$wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
 
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+<<<<<<< HEAD
 //$wgSpecialPages['NewProperty'] 					= 'SpecialNewProperty';
+=======
+$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
+>>>>>>> master
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 //$wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
@@ -217,7 +222,7 @@ $wgHooks['NamespaceIsMovable'][]					= 'Wikibase\RepoHooks::onNamespaceIsMovable
 $wgHooks['NewRevisionFromEditComplete'][]			= 'Wikibase\RepoHooks::onNewRevisionFromEditComplete';
 $wgHooks['SkinTemplateNavigation'][] 				= 'Wikibase\RepoHooks::onPageTabs';
 $wgHooks['ArticleDeleteComplete'][] 				= 'Wikibase\RepoHooks::onArticleDeleteComplete';
-$wgHooks['ArticleUndelete'][]					= 'Wikibase\RepoHooks::onArticleUndelete';
+$wgHooks['ArticleUndelete'][]						= 'Wikibase\RepoHooks::onArticleUndelete';
 $wgHooks['LinkBegin'][] 							= 'Wikibase\RepoHooks::onLinkBegin';
 $wgHooks['OutputPageBodyAttributes'][] 				= 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
 //FIXME: handle other types of entities with autocomments too!

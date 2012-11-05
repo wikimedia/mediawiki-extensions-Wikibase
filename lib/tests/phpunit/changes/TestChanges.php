@@ -54,7 +54,7 @@ final class TestChanges {
 		return $item;
 	}
 
-	public function getChange() {
+	public static function getChange() {
 		return array(
 			'type' => 'wikibase-item~add',
 			'time' => '20120515104713',

@@ -58,7 +58,7 @@ class TemplateStore {
 	 * Adds a single template to the store.
 	 *
 	 * @param string $key
-	 * @param string $html
+	 * @param string $snippet
 	 */
 	public function addTemplate( $key, $snippet ) {
 		$this->templates[$key] = str_replace( "\t", '', $snippet );
