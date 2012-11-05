@@ -36,7 +36,7 @@ class MultilingualTextValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @var array of MonolingualTextValue
+	 * @var MonolingualTextValue[]
 	 */
 	protected $texts = array();
 
@@ -45,14 +45,11 @@ class MultilingualTextValue extends DataValueObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $monolingualValues array of MonolingualTextValue
+	 * @param MonolingualTextValue[] $monolingualValues
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $monolingualValues ) {
-		/**
-		 * @var MonolingualTextValue $monolingualValue
-		 */
 		foreach ( $monolingualValues as $monolingualValue ) {
 			if ( !( $monolingualValue instanceof MonolingualTextValue ) ) {
 				throw new InvalidArgumentException( 'Can only construct MultilingualTextValue from MonolingualTextValue objects' );
