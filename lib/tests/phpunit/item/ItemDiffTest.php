@@ -1,8 +1,6 @@
 <?php
 namespace Wikibase\Test;
 use Wikibase\SiteLink;
-use Wikibase\ItemDiff;
-use Wikibase\Item;
 use Wikibase\ItemObject;
 
 /**
@@ -31,107 +29,28 @@ use Wikibase\ItemObject;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
+ * @author Jens Ohlig <jens.ohlig@wikimedia.de>
  */
 
-class ItemDiffTest extends \MediaWikiTestCase {
+class ItemDiffTest extends EntityDiffTest {
+
+	private function flatten( array $array ) {
+		$return = array();
+		array_walk_recursive( $array, function( $a, $b ) use ( &$return ) {
+				$return[$b] = $a; }
+		);
+		return $return;
+	}
 
 	public function provideApplyData() {
+		$originalTests = array();
+		$originalTests[] = parent::generateApplyData( "Item" );
 		$tests = array();
-
-		// #0: add label
-		$a = ItemObject::newEmpty();
-		$a->setLabel( 'en', 'Test' );
-
-		$b = $a->copy();
-		$b->setLabel( 'de', 'Test' );
-
-		$tests[] = array( $a, $b );
-
-		// #1: remove label
-		$a = ItemObject::newEmpty();
-		$a->setLabel( 'en', 'Test' );
-		$a->setLabel( 'de', 'Test' );
-
-		$b = $a->copy();
-		$b->removeLabel( array( 'en' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #2: change label
-		$a = ItemObject::newEmpty();
-		$a->setLabel( 'en', 'Test' );
-
-		$b = $a->copy();
-		$b->setLabel( 'en', 'Test!!!' );
-
-		// #3: add description ------------------------------
-		$a = ItemObject::newEmpty();
-		$a->setDescription( 'en', 'Test' );
-
-		$b = $a->copy();
-		$b->setDescription( 'de', 'Test' );
-
-		$tests[] = array( $a, $b );
-
-		// #4: remove description
-		$a = ItemObject::newEmpty();
-		$a->setDescription( 'en', 'Test' );
-		$a->setDescription( 'de', 'Test' );
-
-		$b = $a->copy();
-		$b->removeDescription( array( 'en' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #5: change description
-		$a = ItemObject::newEmpty();
-		$a->setDescription( 'en', 'Test' );
-
-		$b = $a->copy();
-		$b->setDescription( 'en', 'Test!!!' );
-
-		$tests[] = array( $a, $b );
-
-		// #6: add alias ------------------------------
-		$a = ItemObject::newEmpty();
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->addAliases( 'en', array( 'Quux' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #7: add alias language
-		$a = ItemObject::newEmpty();
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->addAliases( 'de', array( 'Quux' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #8: remove alias
-		$a = ItemObject::newEmpty();
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->removeAliases( 'en', array( 'Foo' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #9: remove alias language
-		$a = ItemObject::newEmpty();
-		$a->addAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$b = $a->copy();
-		$b->removeAliases( 'en', array( 'Foo', 'Bar' ) );
-
-		$tests[] = array( $a, $b );
-
-		// #10: add link ------------------------------
+		// add link ------------------------------
 		$a = ItemObject::newEmpty();
 		$a->addSiteLink( SiteLink::newFromText( 'enwiki', 'Test' ) );
 
@@ -140,7 +59,7 @@ class ItemDiffTest extends \MediaWikiTestCase {
 
 		$tests[] = array( $a, $b );
 
-		// #11: remove link
+		// remove link
 		$a = ItemObject::newEmpty();
 		$a->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test' ), 'set' );
 		$a->addSiteLink( SiteLink::newFromText(  'dewiki', 'Test' ), 'set' );
@@ -150,7 +69,7 @@ class ItemDiffTest extends \MediaWikiTestCase {
 
 		$tests[] = array( $a, $b );
 
-		// #12: change link
+		// change link
 		$a = ItemObject::newEmpty();
 		$a->addSiteLink( SiteLink::newFromText(  'enwiki', 'Test' ), 'set' );
 
@@ -159,14 +78,16 @@ class ItemDiffTest extends \MediaWikiTestCase {
 
 		$tests[] = array( $a, $b );
 
-		return $tests;
+		return $this->flatten ( array_merge( $originalTests, $tests ) );
 	}
 
 	/**
 	 *
 	 * @dataProvider provideApplyData
 	 */
-	public function testApply( Item $a, Item $b ) {
+	public function testApply( \Wikibase\Entity $a, \Wikibase\Entity $b ) {
+		parent::testApply( $a, $b);
+
 		$diff = $a->getDiff( $b );
 		$diff->apply( $a );
 

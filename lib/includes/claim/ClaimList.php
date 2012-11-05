@@ -9,7 +9,7 @@ namespace Wikibase;
  * Note that this implementation is based on SplObjectStorage and
  * is not enforcing the type of objects set via it's native methods.
  * Therefore one can add non-Reference-implementing objects when
- * not sticking to the methods of the References interface.
+ * not sticking to the methods of the Claims interface.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimList extends \SplObjectStorage implements Claims {
+class ClaimList extends HashableObjectStorage implements Claims {
 
 	/**
 	 * @see References::addClaim
@@ -69,28 +69,6 @@ class ClaimList extends \SplObjectStorage implements Claims {
 	 */
 	public function removeClaim( Claim $claim ) {
 		$this->detach( $claim );
-	}
-
-	/**
-	 * @see Hashable::getHash
-	 *
-	 * @since 0.1
-	 *
-	 * @param MapHasher $mapHasher
-	 *
-	 * @return string
-	 */
-	public function getHash() {
-		// We cannot have this as optional arg, because then we're no longer
-		// implementing the Hashable interface properly according to PHP...
-		$args = func_get_args();
-
-		/**
-		 * @var MapHasher $hasher
-		 */
-		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
-
-		return $hasher->hash( iterator_to_array( $this ) );
 	}
 
 }

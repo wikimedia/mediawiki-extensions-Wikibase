@@ -2,10 +2,24 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use Wikibase\Settings as Settings;
 
 /**
  * Tests for setting sitelinks throug from-to -pairs.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -47,7 +61,7 @@ class ApiLinkTitlesTest extends ApiModifyItemBase {
 		);
 
 		try {
-			list( $res,, ) = $this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
+			$this->doApiRequest( $req, null, false, self::$users['wbeditor']->user );
 
 			$this->fail( "request should have failed" );
 		} catch ( \UsageException $e ) {
@@ -139,14 +153,15 @@ class ApiLinkTitlesTest extends ApiModifyItemBase {
 			}
 
 			// check the response -------------------------------
-			$this->assertSuccess( $res, 'item', 'sitelinks', 0 );
+			$this->assertSuccess( $res, 'entity', 'sitelinks', 0 );
+			$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );
 			if ( $handle ) {
-				$this->assertEquals( 1, count( $res['item']['sitelinks'] ), "expected exactly one sitelinks structure" );
+				$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );
 			}
 			else {
-				$this->assertEquals( 2, count( $res['item']['sitelinks'] ), "expected exactly two sitelinks structure" );
+				$this->assertEquals( 2, count( $res['entity']['sitelinks'] ), "expected exactly two sitelinks structure" );
 			}
-			foreach ( $res['item']['sitelinks'] as $link ) {
+			foreach ( $res['entity']['sitelinks'] as $link ) {
 				$this->assertTrue( $fromsite === $link['site'] || $tosite === $link['site'] );
 				$this->assertTrue( $fromtitle === $link['title'] || $totitle === $link['title'] );
 			}

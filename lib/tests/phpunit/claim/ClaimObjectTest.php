@@ -1,12 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ClaimObject as ClaimObject;
-use Wikibase\Claim as Claim;
-use Wikibase\Snak as Snak;
-use \DataValue\StringValue as StringValue;
-use \Wikibase\SnakList as SnakList;
-use \Wikibase\Snaks as Snaks;
+use Wikibase\ClaimObject, Wikibase\Claim, Wikibase\Snak, Wikibase\SnakList, Wikibase\Snaks;
+use DataValues\StringValue;
 
 /**
  * Tests for the Wikibase\ClaimObject class.
@@ -44,12 +40,12 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 	public function constructorProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new \Wikibase\InstanceOfSnak( 42 ) );
+		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
-		$argLists[] = array( new \Wikibase\InstanceOfSnak( 42 ), new SnakList() );
+		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( 42 ), new SnakList() );
 
 		$argLists[] = array(
-			new \Wikibase\InstanceOfSnak( 42 ),
+			new \Wikibase\PropertyNoValueSnak( 42 ),
 			new \Wikibase\SnakList( array(
 				new \Wikibase\PropertyValueSnak( 1, new StringValue( 'a' ) ),
 				new \Wikibase\PropertySomeValueSnak( 2 ),
@@ -62,7 +58,9 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 
 	public function instanceProvider() {
 		return array_map(
-			function( Snak $snak, Snaks $qualifiers = null ) {
+			function( array $arguments ) {
+				$snak = $arguments[0];
+				$qualifiers = array_key_exists( 1, $arguments ) ? $arguments[1] : null;
 				return array( new ClaimObject( $snak, $qualifiers ) );
 			},
 			$this->constructorProvider()
@@ -104,7 +102,7 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
-		$snak = new \Wikibase\InstanceOfSnak( 42 );
+		$snak = new \Wikibase\PropertyNoValueSnak( 42 );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 	}
@@ -127,6 +125,33 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetPropertyId( Claim $claim ) {
+		$this->assertEquals(
+			$claim->getMainSnak()->getPropertyId(),
+			$claim->getPropertyId()
+		);
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSetGuid( Claim $claim ) {
+		$claim->setGuid( 'foo-bar-baz' );
+		$this->assertEquals( 'foo-bar-baz', $claim->getGuid() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetGuid( Claim $claim ) {
+		$guid = $claim->getGuid();
+		$this->assertInternalType( 'string', $guid );
+		$this->assertEquals( $guid, $claim->getGuid() );
 	}
 
 }

@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\EntityUpdate as EntityUpdate;
-use Wikibase\Entity as Entity;
+use Wikibase\EntityUpdate;
+use Wikibase\Entity;
 
 /**
  * Tests for the Wikibase\EntityUpdate class.

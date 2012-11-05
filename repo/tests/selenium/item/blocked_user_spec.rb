@@ -12,7 +12,7 @@ require 'spec_helper'
 describe "Check functionality of blocking a user" do
   before :all do
     # setup: create an item and block the user
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
     end
     visit_page(CreateItemPage) do |page|
@@ -25,19 +25,19 @@ describe "Check functionality of blocking a user" do
 
   context "check functionality of blocking a user" do
     it "should login as blocked user and check if he cannot edit label/description" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         #label
         page.editLabelLink?.should be_false
         page.editLabelLinkDisabled?.should be_true
         page.editLabelLinkDisabled_element.click
         page.wbTooltip?.should be_true
         page.labelInputField?.should be_false
-        page.itemLabelSpan_element.click
+        page.entityLabelSpan_element.click
         # description
         page.editDescriptionLink?.should be_false
         page.editDescriptionLinkDisabled?.should be_true
@@ -50,13 +50,12 @@ describe "Check functionality of blocking a user" do
 
   context "check functionality of blocking a user" do
     it "should login as blocked user and check if he cannot add aliases" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_aliases_to_load
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         page.addAliases?.should be_false
         page.addAliasesDisabled?.should be_true
         page.addAliasesDisabled_element.click
@@ -69,26 +68,26 @@ describe "Check functionality of blocking a user" do
 
   context "check functionality of blocking a user" do
     it "should login as blocked user and check he is blocked from item creation" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_BLOCKED_USERNAME, WIKI_BLOCKED_PASSWORD)
       end
       visit_page(CreateItemPage) do |page|
-        page.createItemLabelField = generate_random_string(10)
-        page.createItemDescriptionField = generate_random_string(20)
-        page.createItemSubmit
+        page.createEntityLabelField = generate_random_string(10)
+        page.createEntityDescriptionField = generate_random_string(20)
+        page.createEntitySubmit
         page.mwFirstHeading.should == "Permissions errors"
       end
     end
   end
   after :all do
     # tear down: unblock the user and logout
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
     end
     visit_page(UnblockUserPage) do |page|
       page.unblock_user(WIKI_BLOCKED_USERNAME)
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end

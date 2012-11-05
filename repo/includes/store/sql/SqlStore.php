@@ -65,16 +65,8 @@ class SqlStore implements Store {
 	 * @since 0.1
 	 */
 	public function clear() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		$tables = array(
-			'wb_items_per_site',
-			'wb_terms',
-		);
-
-		foreach ( $tables as $table ) {
-			$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
-		}
+		$this->newSiteLinkCache()->clear();
+		$this->newTermCache()->clear();
 	}
 
 	/**
@@ -90,7 +82,7 @@ class SqlStore implements Store {
 		$pages = $dbw->select(
 			array( 'page' ),
 			array( 'page_id', 'page_latest' ),
-			array( 'page_content_model' => Utils::getEntityContentModels() ),
+			array( 'page_content_model' => EntityContentFactory::singleton()->getEntityContentModels() ),
 			__METHOD__,
 			array( 'LIMIT' => 1000 ) // TODO: continuation
 		);
@@ -116,6 +108,7 @@ class SqlStore implements Store {
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
 			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
 
+			// Update from 0.1.
 			if ( !$db->tableExists( 'wb_terms' ) ) {
 				$updater->dropTable( 'wb_items_per_site' );
 				$updater->dropTable( 'wb_items' );
@@ -128,6 +121,17 @@ class SqlStore implements Store {
 				);
 
 				$this->rebuild();
+			}
+
+			// Update from 0.1 or 0.2.
+			if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
+				$updater->addExtensionField(
+					'wb_terms',
+					'term_search_key',
+					__DIR__ . '/AddTermsSearchKey' . $extension
+				);
+
+				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildTermsSearchKey' );
 			}
 		}
 		else {
@@ -151,7 +155,7 @@ class SqlStore implements Store {
 	 *
 	 * @since 0.1
 	 *
-	 * @return SiteLinkLookup
+	 * @return SiteLinkCache
 	 */
 	public function newSiteLinkCache() {
 		return new SiteLinkTable( 'wb_items_per_site' );

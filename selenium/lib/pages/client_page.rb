@@ -14,14 +14,19 @@ class ClientPage < RubySelenium
 
   text_field(:clientSearchInput, :id => "searchInput")
   button(:clientSearchSubmit, :id => "searchGoButton")
+  button(:clientSearchSubmitFancy, :id => "searchButton")
   paragraph(:clientSearchNoresult, :class => "mw-search-nonefound")
   link(:clientCreateArticleLink, :xpath => "//p[@class='mw-search-createlink']/b/a")
+  link(:clientEditArticleLink, :xpath => "//li[@id='ca-edit']/span/a")
   link(:clientEditLinksLink, :xpath => "//li[@class='wbc-editpage']/a")
+  link(:clientActionsMenu, :xpath => "//div[@id='p-cactions']/h5/a")
+  link(:clientWatchArticle, :xpath => "//li[@id='ca-watch']/a")
+  link(:clientUnwatchArticle, :xpath => "//li[@id='ca-unwatch']/a")
   text_area(:clientCreateArticleInput, :id => "wpTextbox1")
   button(:clientCreateArticleSubmit, :id => "wpSave")
   span(:clientArticleTitle, :xpath => "//h1[@id='firstHeading']/span")
   unordered_list(:clientInterwikiLinkList, :xpath => "//div[@id='p-lang']/div/ul")
-  button(:clientPurgeSubmit, :xpath => "//form[@class='visualClear']/input[@class='mw-htmlform-submit']")
+  button(:clientActionConfirmationButton, :xpath => "//form[@class='visualClear']/input[@class='mw-htmlform-submit']")
 
   #language links
   link(:interwiki_de, :xpath => "//li[@class='interwiki-de']/a")
@@ -30,15 +35,33 @@ class ClientPage < RubySelenium
   link(:interwiki_hu, :xpath => "//li[@class='interwiki-hu']/a")
   link(:interwiki_fi, :xpath => "//li[@class='interwiki-fi']/a")
   link(:interwiki_fr, :xpath => "//li[@class='interwiki-fr']/a")
+  link(:interwiki_af, :xpath => "//li[@class='interwiki-af']/a")
+  link(:interwiki_zh, :xpath => "//li[@class='interwiki-zh']/a")
   link(:interwiki_xxx, :xpath => "//li[contains(@class, 'interwiki')]/a")
-  def create_article(title, text)
-    self.clientSearchInput= title
-    clientSearchSubmit
+  #methods
+  def create_article(title, text, overwrite = false)
+    self.clientSearchInput = title
+    if clientSearchSubmit?
+      clientSearchSubmit
+    else
+      clientSearchSubmitFancy
+    end
     if clientSearchNoresult?
       clientCreateArticleLink
-      self.clientCreateArticleInput= text
+      self.clientCreateArticleInput = text
+      clientCreateArticleSubmit
+    elsif overwrite
+      clientEditArticleLink
+      self.clientCreateArticleInput = text
       clientCreateArticleSubmit
     end
+  end
+
+  def change_article(title, text)
+    navigate_to_article(title)
+    clientEditArticleLink
+    self.clientCreateArticleInput = text
+    clientCreateArticleSubmit
   end
 
   def navigate_to_article(title, purge = false)
@@ -47,8 +70,8 @@ class ClientPage < RubySelenium
       param_purge = "?action=purge"
     end
     navigate_to WIKI_CLIENT_URL + title + param_purge
-    if clientPurgeSubmit?
-      clientPurgeSubmit
+    if clientActionConfirmationButton?
+      clientActionConfirmationButton
     end
   end
 
@@ -60,4 +83,19 @@ class ClientPage < RubySelenium
     return count-1 # decrement by 1 because "edit-link" is always shown
   end
 
+  def watch_article(title)
+    navigate_to_article(title)
+    navigate_to(current_url + "?action=watch")
+    if clientActionConfirmationButton?
+      clientActionConfirmationButton
+    end
+  end
+
+  def unwatch_article(title)
+    navigate_to_article(title)
+    navigate_to(current_url + "?action=unwatch")
+    if clientActionConfirmationButton?
+      clientActionConfirmationButton
+    end
+  end
 end

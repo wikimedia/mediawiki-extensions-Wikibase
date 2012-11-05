@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Http, Status;
+use ApiBase, User, Status;
 
 /**
  * API module to associate two pages on two different sites with a Wikibase item .
@@ -15,16 +15,35 @@ use ApiBase, User, Http, Status;
  *
  * @licence GNU GPL v2+
  */
-class ApiLinkTitles extends Api {
+class ApiLinkTitles extends Api implements ApiAutocomment {
 
 	/**
 	 * @see  ApiModifyEntity::getRequiredPermissions()
 	 */
 	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $item, $params );
+		$permissions = parent::getRequiredPermissions( $entity, $params );
 
 		$permissions[] = 'linktitles-update';
 		return $permissions;
+	}
+
+	/**
+	 * @see  ApiAutocomment::getTextForComment()
+	 */
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			'wblinktitles-connect',
+			array( /*$plural*/ 2, $params['fromsite'], $params['tosite'] )
+		);
+	}
+
+	/**
+	 * @see  ApiAutocomment::getTextForSummary()
+	 */
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			array( $params['fromtitle'], $params['totitle'] )
+		);
 	}
 
 	/**
@@ -85,13 +104,13 @@ class ApiLinkTitles extends Api {
 		}
 		elseif ( !$fromId && $toId ) {
 			// reuse to-site's item
-			$itemContent = ItemHandler::singleton()->getFromId( $toId );
+			$itemContent = EntityContentFactory::singleton()->getFromId( Item::ENTITY_TYPE, $toId );
 			$fromLink = new SiteLink( $fromSite, $fromPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $fromLink, 'set' );
 		}
 		elseif ( $fromId && !$toId ) {
 			// reuse from-site's item
-			$itemContent = ItemHandler::singleton()->getFromId( $fromId );
+			$itemContent = EntityContentFactory::singleton()->getFromId( Item::ENTITY_TYPE, $fromId );
 			$toLink = new SiteLink( $toSite, $toPage );
 			$return[] = $itemContent->getItem()->addSiteLink( $toLink, 'set' );
 		}
@@ -104,10 +123,9 @@ class ApiLinkTitles extends Api {
 			$this->dieUsage( $this->msg( 'wikibase-api-no-common-item' )->text(), 'no-common-item' );
 		}
 
-		$this->addSiteLinksToResult( $return, 'item' );
+		$this->addSiteLinksToResult( $return, 'entity' );
 
 		$flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
-		$summary = '';
 
 		if ( $itemContent === null ) {
 			// to not have an ItemContent isn't really bad at this point
@@ -118,7 +136,7 @@ class ApiLinkTitles extends Api {
 			// Do the actual save, or if it don't exist yet create it.
 			$editEntity = new EditEntity( $itemContent, $user );
 			$status = $editEntity->attemptSave(
-				$summary,
+				Autocomment::buildApiSummary( $this, $params, $itemContent ),
 				$flags,
 				( $this->needsToken() ? $params['token'] : false )
 			);
@@ -136,8 +154,12 @@ class ApiLinkTitles extends Api {
 
 		if ( $itemContent !== null ) {
 			$this->getResult()->addValue(
-				'item',
+				'entity',
 				'id', $itemContent->getItem()->getId()
+			);
+			$this->getResult()->addValue(
+				'entity',
+				'type', $itemContent->getItem()->getType()
 			);
 		}
 
@@ -169,7 +191,7 @@ class ApiLinkTitles extends Api {
 	 * @return bool
 	 */
 	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 	}
 
 	/**
@@ -177,7 +199,7 @@ class ApiLinkTitles extends Api {
 	 * @return bool
 	 */
 	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 	}
 
 	/**
@@ -185,7 +207,7 @@ class ApiLinkTitles extends Api {
 	 * @return bool
 	 */
 	public function isWriteMode() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
+		return true;
 	}
 
 	/**
@@ -272,11 +294,14 @@ class ApiLinkTitles extends Api {
 	}
 
 	/**
-	 * Returns a string that identifies the version of this class.
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.1
+	 *
 	 * @return string
 	 */
 	public function getVersion() {
-		return __CLASS__ . ': $Id$';
+		return __CLASS__ . '-' . WB_VERSION;
 	}
 
 }

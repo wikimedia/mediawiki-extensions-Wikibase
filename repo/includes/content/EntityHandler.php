@@ -7,6 +7,21 @@ use MWException, WikiPage, Title, Content;
  * Base handler class for Wikibase\Entity content classes.
  * TODO: interface for enforcing singleton
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -49,7 +64,7 @@ abstract class EntityHandler extends \ContentHandler {
 			$format = $this->getDefaultFormat();
 		}
 
-		#FIXME: assert $content is a WikibaseContent instance
+		//FIXME: assert $content is a WikibaseContent instance
 		$data = $content->getNativeData();
 
 		switch ( $format ) {
@@ -61,7 +76,6 @@ abstract class EntityHandler extends \ContentHandler {
 				break;
 			default:
 				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
-				break;
 		}
 
 		return $blob;
@@ -82,10 +96,10 @@ abstract class EntityHandler extends \ContentHandler {
 
 		switch ( $format ) {
 			case CONTENT_FORMAT_SERIALIZED:
-				$data = unserialize( $blob ); #FIXME: suppress notice on failed serialization!
+				$data = unserialize( $blob ); //FIXME: suppress notice on failed serialization!
 				break;
 			case CONTENT_FORMAT_JSON:
-				$data = json_decode( $blob, true ); #FIXME: suppress notice on failed serialization!
+				$data = json_decode( $blob, true ); //FIXME: suppress notice on failed serialization!
 				break;
 			default:
 				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
@@ -123,6 +137,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * This implementation returns true if and only if the given title's namespace
 	 * is the same as the one returned by $this->getEntityNamespace().
 	 *
+	 * @param \Title $title
 	 * @return bool true if $title represents a page in the appropriate entity namespace.
 	 */
 	public function canBeUsedOn( Title $title ) {
@@ -130,125 +145,12 @@ abstract class EntityHandler extends \ContentHandler {
 		return $ns === $title->getNamespace();
 	}
 
-
-	/**
-	 * Returns the Title object for the item with provided id.
-	 *
-	 * TODO: refactor to work for all entities
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $entityId
-	 *
-	 * @throws MWException
-	 * @return Title
-	 */
-	public function getTitleForId( $entityId ) {
-		$id = intval( $entityId );
-
-		if ( $id <= 0 ) {
-			throw new MWException( 'itemId must be a positive integer, not ' . var_export( $entityId , true ) );
-		}
-
-		return Title::newFromText( $this->getEntityPrefix() . $id, $this->getEntityNamespace() );
-	}
-
-	/**
-	 * Returns the WikiPage object for the item with provided id.
-	 *
-	 * TODO: refactor to work for all entities
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $entityId
-	 *
-	 * @return WikiPage
-	 */
-	public function getWikiPageForId( $entityId ) {
-		return new WikiPage( $this->getTitleForId( $entityId ) );
-	}
-
-	/**
-	 * Get the item with the provided id if it's available to the specified audience.
-	 * If the specified audience does not have the ability to view this
-	 * revision, if there is no such item, null will be returned.
-	 *
-	 * TODO: refactor to work for all entities
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $entityId
-	 *
-	 * @param $audience Integer: one of:
-	 *      Revision::FOR_PUBLIC       to be displayed to all users
-	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
-	 *      Revision::RAW              get the text regardless of permissions
-
-	 *
-	 * @return ItemContent|null
-	 */
-
-	public function getFromId( $entityId, $audience = \Revision::FOR_PUBLIC ) {
-		// TODO: since we already did the trouble of getting a WikiPage here,
-		// we probably want to keep a copy of it in the Content object.
-		return $this->getWikiPageForId( $entityId )->getContent( $audience );
-	}
-
-	/**
-	 * Get the item with the provided revision id, or null if there is no such item.
-	 *
-	 * Note that this returns an old entity that may not be valid anymore.
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $entityId
-	 *
-	 * @return ItemContent|null
-	 */
-	public function getFromRevision( $revisionId ) {
-		$revision = \Revision::newFromId( intval( $revisionId ) );
-
-		if ( $revision === null ) {
-			return null;
-		}
-
-		return $revision->getContent();
-	}
-
-	/**
-	 * Get the items corresponding to the provided language and label pair.
-	 * A description can also be provided, in which case only the item with
-	 * that description will be returned (as only element in the array).
-	 *
-	 * TODO: refactor to work for all entities
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $language
-	 * @param string $label
-	 * @param string|null $description
-	 *
-	 * @return array of ItemContent
-	 */
-	public function getFromLabel( $language, $label, $description = null ) {
-		$ids = StoreFactory::getStore()->newTermCache()->getItemIdsForLabel( $label, $language, $description );
-		$items = array();
-
-		foreach ( $ids as $id ) {
-			$item = self::getFromId( $id );
-
-			if ( !is_null( $item ) ) {
-				$items[] = $item;
-			}
-		}
-
-		return $items;
-	}
-
 	/**
 	 * Returns false to indicate that the parser cache should not be used for data items.
 	 * The html representation of Items depends on the user language, splitting the parser
 	 * cache by user language is currently problematic and would need some core changes.
+	 *
+	 * @note: see also note on getPageLanguage()
 	 *
 	 * @see ContentHandler::isParserCacheSupported
 	 *
@@ -263,7 +165,8 @@ abstract class EntityHandler extends \ContentHandler {
 	/**
 	 * @see Content::getPageViewLanguage
 	 *
-	 * This implementation returns the user language which is same as content language here
+	 * This implementation returns the user language, because entities get rendered in
+	 * the user's language. The PageContentLanguage hook is bypassed.
 	 *
 	 * @param Title        $title the page to determine the language for.
 	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
@@ -275,4 +178,37 @@ abstract class EntityHandler extends \ContentHandler {
 		return $wgLang;
 	}
 
+	/**
+	 * @see Content::getPageLanguage
+	 *
+	 * This implementation unconditionally returns the wiki's content language.
+	 * The PageContentLanguage hook is bypassed.
+	 *
+	 * @note: Ideally, this would return 'mul' to indicate multilingual content. But MediaWiki
+	 * currently doesn't support that.
+	 *
+	 * @note: in several places in mediawiki, most importantly the parser cache, getPageLanguage
+	 * is used in places where getPageViewLanguage would be more appropriate. This is the reason that
+	 * isParserCacheSupported() is overridden to return false.
+	 *
+	 * @param Title        $title the page to determine the language for.
+	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
+	 *
+	 * @return \Language the page's language
+	 */
+	public function getPageLanguage( Title $title, Content $content = null ) {
+		global $wgContLang;
+		return $wgContLang;
+	}
+
+	/**
+	 * Returns the name of the special page responsible for creating a page for this type of entity content.
+	 * Returns null if there is no such special page.
+	 * @since 0.2
+	 *
+	 * @return string|null
+	 */
+	public function getSpecialPageForCreation() {
+		return null;
+	}
 }

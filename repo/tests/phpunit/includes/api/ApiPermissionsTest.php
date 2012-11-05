@@ -2,12 +2,27 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use Wikibase\Settings as Settings;
+use Wikibase\Settings;
 
 /**
  * Tests for permission handling in the Wikibase API.
  *
  * This file produce errors if run standalone.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -46,10 +61,6 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		$this->old_user = $wgUser;
 
 		\TestSites::insertIntoDb();
-
-		# HACK!!
-		#$sites = \Wikibase\Sites::singleton( true );
-		#$sites->loadSites();
 	}
 
 	function tearDown() {
@@ -57,11 +68,16 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 		global $wgUser;
 
 		$wgGroupPermissions = $this->permissions;
-		$wgUser = $this->old_user;
 
-		# reset rights cache
-		$wgUser->addGroup( "dummy" );
-		$wgUser->removeGroup( "dummy" );
+		if ( $this->old_user ) { // should not be null, but sometimes, it is
+			$wgUser = $this->old_user;
+		}
+
+		if ( $wgUser ) { // should not be null, but sometimes, it is
+			// reset rights cache
+			$wgUser->addGroup( "dummy" );
+			$wgUser->removeGroup( "dummy" );
+		}
 
 		parent::tearDown();
 	}
@@ -101,84 +117,84 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 	function provideReadPermissions() {
 		return array(
-			array( #0
-				null, # normal permissions
-				null # no error
+			array( //0
+				null, // normal permissions
+				null // no error
 			),
 
-			array( #1
-				array( # permissions
+			array( //1
+				array( // permissions
 					'*'    => array( 'read' => false ),
 					'user' => array( 'read' => false )
 				),
-				'readapidenied' # error
+				'readapidenied' // error
 			),
 		);
 	}
 
 	function provideEditPermissions() {
 		return array_merge( $this->provideReadPermissions(), array(
-			array( #2
-				array( # permissions
+			array( //2
+				array( // permissions
 					'*'    => array( 'edit' => false ),
 					'user' => array( 'edit' => false )
 				),
-				'cant-edit' # error
+				'cant-edit' // error
 			),
 
-			array( #3
-				array( # permissions
+			array( //3
+				array( // permissions
 					'*'    => array( 'writeapi' => false ),
 					'user' => array( 'writeapi' => false )
 				),
-				'writeapidenied' # error
+				'writeapidenied' // error
 			),
 
-			array( #4
-				array( # permissions
+			array( //4
+				array( // permissions
 					'*'    => array( 'read' => false ),
 					'user' => array( 'read' => false )
 				),
-				'readapidenied' # error
+				'readapidenied' // error
 			),
 		) );
 	}
 
 
-	function provideGetItemsPermissions() {
+	function provideGetEntitiesPermissions() {
 		$permissions = $this->provideReadPermissions();
 		return $permissions;
 	}
 
 	/**
-	 * @dataProvider provideGetItemsPermissions
+	 * @dataProvider provideGetEntitiesPermissions
 	 */
-	function testGetItems( $permissions, $expectedError ) {
+	function testGetEntities( $permissions, $expectedError ) {
 		$params = array(
 			'ids' => $this->getItemId( "Oslo" ),
 		);
 
-		$this->doPermissionsTest( 'wbgetitems', $params, $permissions, $expectedError );
+		$this->doPermissionsTest( 'wbgetentities', $params, $permissions, $expectedError );
 	}
 
 	function provideAddItemPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #5
-			array( # permissions
+		$permissions[] = array( //5
+			array( // permissions
 				'*'    => array( 'createpage' => false ),
 				'user' => array( 'createpage' => false )
 			),
-			'cant-edit' # error
+			'cant-edit' // error
 		);
 
 
-		$permissions[] = array( #6
-			array( # permissions
+		$permissions[] = array( //6
+			array( // permissions
 				'*'    => array( 'item-create' => false ),
 				'user' => array( 'item-create' => false )
 			),
-			'cant-edit' # error
+			'cant-edit' // error
 		);
 
 		return $permissions;
@@ -198,7 +214,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 			'data' => $json->encode( $itemData ),
 		);
 
-		$this->doPermissionsTest( 'wbsetitem', $params, $permissions, $expectedError );
+		$this->doPermissionsTest( 'wbeditentity', $params, $permissions, $expectedError );
 	}
 
 	function provideSetSiteLinkPermissions() {
@@ -224,7 +240,7 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 
 		// TODO: use store
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->delete( $dbw->tableName( 'wb_items_per_site' ), '*', __METHOD__ );
+		$dbw->delete( 'wb_items_per_site', '*', __METHOD__ );
 
 		$params = array(
 			'id' => $this->getItemId( "Oslo" ),
@@ -238,12 +254,12 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideSetLabelPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #5
-			array( # permissions
+		$permissions[] = array( //5
+			array( // permissions
 				'*'    => array( 'label-update' => false ),
 				'user' => array( 'label-update' => false )
 			),
-			'cant-edit' # error
+			'cant-edit' // error
 		);
 
 		return $permissions;
@@ -265,12 +281,12 @@ class ApiPermissionsTest extends ApiModifyItemBase {
 	function provideSetDescriptionPermissions() {
 		$permissions = $this->provideEditPermissions();
 
-		$permissions[] = array( #5
-			array( # permissions
+		$permissions[] = array( //5
+			array( // permissions
 				'*'    => array( 'description-update' => false ),
 				'user' => array( 'description-update' => false )
 			),
-			'cant-edit' # error
+			'cant-edit' // error
 		);
 
 		return $permissions;

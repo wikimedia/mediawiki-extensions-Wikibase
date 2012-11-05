@@ -17,7 +17,8 @@ require 'page-object'
 require 'page-object/page_factory'
 require 'require_all'
 
-require_all 'lib/pages'
+require_all 'lib'
+
 configs = YAML::load( File.open( 'configuration.yml' ) )
 RSpec.configure do |config|
   config.include PageObject::PageFactory

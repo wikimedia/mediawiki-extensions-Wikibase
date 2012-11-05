@@ -5,7 +5,7 @@ namespace Wikibase;
 /**
  * Generic array object with lookups based on hashes of the elements.
  *
- * Elements need to implement Hashable.
+ * Elements need to implement Hashable and Immutable.
  *
  * Only a single element per hash can exist in the list. If the hash
  * of an element being added already exists in the list, the element
@@ -18,6 +18,21 @@ namespace Wikibase;
  * Also note that if the Hashable elements are mutable, any modifications
  * made to them via their mutator methods will not cause an update of
  * their associated hash in this array.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.1
  *
@@ -44,14 +59,11 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 	 * @since 0.1
 	 *
 	 * @param int|string $index
-	 * @param mixed $snak
+	 * @param Hashable $hashable
 	 *
 	 * @return boolean
 	 */
 	protected function preSetElement( $index, $hashable ) {
-		/**
-		 * @var Hashable $hashable
-		 */
 		$hash = $hashable->getHash();
 
 		if ( $this->hasElementHash( $hash ) ) {
@@ -175,7 +187,7 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 	 *
 	 * @since 0.1
 	 *
-	 * @param MapHasher $mapHasher
+	 * @internal param \Wikibase\MapHasher $mapHasher
 	 *
 	 * @return string
 	 */
@@ -189,7 +201,7 @@ abstract class HashArray extends \GenericArrayObject implements Hashable {
 		 */
 		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
 
-		return $hasher->hash( $this->getArrayCopy() );
+		return $hasher->hash( $this );
 	}
 
 }

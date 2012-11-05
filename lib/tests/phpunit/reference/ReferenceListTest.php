@@ -1,11 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ReferenceList as ReferenceList;
-use Wikibase\References as References;
-use Wikibase\Reference as Reference;
-use Wikibase\ReferenceObject as ReferenceObject;
-use Wikibase\Hashable as Hashable;
+use Wikibase\ReferenceList;
+use Wikibase\ReferenceObject;
+use Wikibase\Hashable;
 
 /**
  * Tests for the Wikibase\ReferenceList class.
@@ -86,6 +84,8 @@ class ReferenceListTest extends \MediaWikiTestCase {
 			$array->removeReference( $hashable );
 			$this->assertFalse( $array->hasReference( $hashable ) );
 		}
+
+		$this->assertTrue( true );
 	}
 
 	/**
@@ -113,6 +113,8 @@ class ReferenceListTest extends \MediaWikiTestCase {
 
 		$array->removeReference( $element );
 		$array->removeReference( $element );
+
+		$this->assertTrue( true );
 	}
 
 	/**

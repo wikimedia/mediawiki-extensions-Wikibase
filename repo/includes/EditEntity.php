@@ -8,6 +8,21 @@ use Status, Revision, User, WikiPage, Title, WebRequest, OutputPage;
  * Handler for editing activity, providing a unified interface for saving modified entities while performing
  * permission checks and handling edit conflicts.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -452,19 +467,22 @@ class EditEntity {
 	/**
 	 * Attempts to save the new entity content, chile first checking for permissions, edit conflicts, etc.
 	 *
-	 * @param String $summary    the edit summary
-	 * @param int    $flags      the edit flags (see WikiPage::toEditContent)
-	 * @param String|null|false  $token Edit token to check, or false to disable the token check. Null per default.
+	 * @param String $summary    The edit summary
+	 * @param int    $flags      The edit flags (see WikiPage::toEditContent)
+	 * @param String|bool $token Edit token to check, or false to disable the token check.
 	 *                           Null will fail the token text, as will the empty string.
 	 *
 	 * @return Status Indicates success and provides detailed warnings or error messages.
 	 * @see      WikiPage::toEditContent
 	 */
-	public function attemptSave( $summary, $flags = 0, $token = null ) {
+	public function attemptSave( $summary, $flags, $token ) {
 		$this->status = Status::newGood();
 		$this->errorType = 0;
 
 		if ( $token !== false && !$this->isTokenOK( $token ) ) {
+			//@todo: This is redundant to the error code set in isTokenOK().
+			//       We should figure out which error codes the callers expect,
+			//       and only set the correct error code, in one place, probably here.
 			$this->status->fatal( 'session-failure' );
 			$this->errorType |= self::TOKEN_ERROR;
 			return $this->status;
@@ -520,7 +538,7 @@ class EditEntity {
 	 * TODO: Change this into an instance level member and store the ids for later lookup.
 	 * Use those ids for full lookup of the content and create applicable diffs and check if they are empty.
 	 *
-	 * @param int|null $user the users numeric identifier
+	 * @param int|bool $userId the users numeric identifier
 	 * @param int|bool $lastRevId the revision the user supplied (or false)
 	 *
 	 * @return bool
@@ -578,6 +596,9 @@ class EditEntity {
 	/**
 	 * Shows an error page showing the errors that occurred during attemptSave(), if any.
 	 *
+	 * If $titleMessage is set it is made an assumption that the page is still the original
+	 * one, and there should be no link back from a special error page.
+	 *
 	 * @param OutputPage $out the output object to write output to
 	 * @param String|null $titleMessage message key for the page title
 	 *
@@ -602,7 +623,9 @@ class EditEntity {
 
 		$this->showStatus( $out );
 
-		$out->returnToMain( '', $this->getTitle() );
+		if ( !isset( $titleMessage ) ) {
+			$out->returnToMain( '', $this->getTitle() );
+		}
 
 		return true;
 	}
@@ -614,7 +637,7 @@ class EditEntity {
 	 *
 	 * @return bool true if any message was shown, false if there were no errors to show.
 	 */
-	public function showStatus( OutputPage $out = null ) {
+	protected function showStatus( OutputPage $out = null ) {
 		global $wgOut;
 
 		if ( $out === null ) {
@@ -626,7 +649,8 @@ class EditEntity {
 		}
 
 		$text = $this->status->getMessage();
-		$out->addWikiText( $text );
+
+		$out->addHTML( \Html::element( 'div', array( 'class' => 'error' ), $text ) );
 
 		return true;
 	}

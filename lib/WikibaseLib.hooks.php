@@ -30,7 +30,20 @@ final class LibHooks {
 		$settings = array_merge(
 			$settings,
 			array(
+				'pollDefaultInterval' => 1,
+				'pollDefaultLimit' => 100,
+				'pollContinueInterval' => 0,
+
 				'useChangesTable' => true, // whether changes get recorded to wb_changes
+
+				'itemPrefix' => 'q',
+				'propertyPrefix' => 'p',
+				'queryPrefix' => 'y', // TODO: find a more suiting prefix, perhaps use 'q' and use 'i' for items then
+
+				'siteLinkGroup' => 'wikipedia',
+
+				'changesDatabase' => false, // local by default. Set to something LBFactory understands.
+
 				'changeHandlers' => array(
 					'wikibase-item~add' => 'Wikibase\EntityCreation',
 					'wikibase-property~add' => 'Wikibase\EntityCreation',
@@ -47,7 +60,17 @@ final class LibHooks {
 					'wikibase-item~refresh' => 'Wikibase\EntityRefresh',
 					'wikibase-property~refresh' => 'Wikibase\EntityRefresh',
 					'wikibase-query~refresh' => 'Wikibase\EntityRefresh',
+
+					'wikibase-item~restore' => 'Wikibase\EntityRestore',
+					'wikibase-property~restore' => 'Wikibase\EntityRestore',
+					'wikibase-query~restore' => 'Wikibase\EntityRestore',
 				),
+				'dataTypes' => array(
+					'wikibase-item',
+					'commonsMedia',
+					//'string',
+				),
+				'entityNamespaces' => array()
 			)
 		);
 
@@ -68,13 +91,6 @@ final class LibHooks {
 		$type = $updater->getDB()->getType();
 
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
-			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
-
-			$updater->addExtensionTable(
-				'wb_changes',
-				__DIR__ . '/sql/WikibaseLib' . $extension
-			);
-
 			// TODO: move to core
 			$updater->addExtensionField(
 				'sites',
@@ -90,7 +106,7 @@ final class LibHooks {
 			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
 		}
 		else {
-			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
+			wfWarn( "Database type '$type' is not supported by Wikibase." );
 		}
 
 		return true;
@@ -100,13 +116,13 @@ final class LibHooks {
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
-	 * @since 0.1
+	 * @since 0.2 (as registerUnitTests in 0.1)
 	 *
 	 * @param array $files
 	 *
 	 * @return boolean
 	 */
-	public static function registerUnitTests( array &$files ) {
+	public static function registerPhpUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'changes/DiffChange',
@@ -115,8 +131,15 @@ final class LibHooks {
 			'changes/EntityRefresh',
 			'changes/EntityUpdate',
 
+			'claim/ClaimAggregate',
+			'claim/ClaimListAccess',
 			'claim/ClaimList',
-			//'claim/ClaimObject', // disabled for beta branch
+			'claim/ClaimObject',
+
+
+			'entity/EntityDiff',
+			'entity/EntityFactory',
+			'entity/EntityFactoryIsPrefixedId',
 
 			'item/ItemDiff',
 			'item/ItemMultilangTexts',
@@ -124,26 +147,38 @@ final class LibHooks {
 			'item/ItemNewFromArray',
 			'item/ItemObject',
 
+			'property/PropertyDiff',
 			'property/PropertyObject',
 
 			'query/QueryObject',
 
 			'reference/ReferenceList',
-			//'reference/ReferenceObject', // disabled for beta branch
+			'reference/ReferenceObject',
 
-			//'snak/PropertyValueSnak', // disabled for beta branch
-			//'snak/SnakList', // disabled for beta branch
+			'snak/PropertyValueSnak',
+			'snak/SnakList',
+			'snak/Snak',
 
+			'statement/StatementAggregate',
+			'statement/StatementListAccess',
+			'statement/StatementList',
+			'statement/StatementObject',
+
+			'store/SiteLinkLookup',
+			'store/SiteLinkTable',
+
+			'Autocomment',
+			'ByPropertyIdArray',
 			'ChangeNotifier',
 			'ChangeHandler',
 			'ChangesTable',
+			'HashableObjectStorage',
+			'Template',
+			'TemplateStore',
 			'LibHooks',
 			'MapValueHasher',
 			'SiteLink',
-			'StatementObject',
 			'Utils',
-
-			'store/SiteLinkLookup',
 		);
 
 		// Test compat
@@ -159,4 +194,72 @@ final class LibHooks {
 		// @codeCoverageIgnoreEnd
 	}
 
+	/**
+	 * Add new javascript testing modules. This is called after the addition of MediaWiki core test suites.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
+	 *
+	 * @since 0.2 (in repo as RepoHooks::onResourceLoaderTestModules in 0.1)
+	 *
+	 * @param array &$testModules
+	 * @param \ResourceLoader &$resourceLoader
+	 *
+	 * @return boolean
+	 */
+	public static function registerQUnitTests( array &$testModules, \ResourceLoader &$resourceLoader ) {
+		$testModules['qunit']['wikibase.tests'] = array(
+			'scripts' => array(
+				'tests/qunit/templates.tests.js',
+				'tests/qunit/wikibase.tests.js',
+				'tests/qunit/wikibase.Site.tests.js',
+				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
+				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
+				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
+				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableAliases.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
+				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
+				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
+				'tests/qunit/wikibase.ui.Tooltip.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.inherit.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.ui.StatableObject.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.NativeEventHandler.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
+				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
+				'tests/qunit/jquery.ui/jquery.ui.suggester.tests.js',
+				'tests/qunit/jquery.ui/jquery.ui.entityselector.tests.js'
+			),
+			'dependencies' => array(
+				'wikibase.tests.qunit.testrunner',
+				'wikibase',
+				'wikibase.utilities',
+				'wikibase.utilities.jQuery',
+				'wikibase.ui.Toolbar',
+				'wikibase.ui.PropertyEditTool',
+				'jquery.ui.suggester',
+				'jquery.ui.entityselector'
+			),
+			'localBasePath' => __DIR__,
+			'remoteExtPath' => 'Wikibase/lib',
+		);
+
+		return true;
+	}
 }

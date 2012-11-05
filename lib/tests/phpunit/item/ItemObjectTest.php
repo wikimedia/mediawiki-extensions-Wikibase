@@ -1,9 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemObject as ItemObject;
-use \Wikibase\Item as Item;
-use \Wikibase\SiteLink as SiteLink;
+use Wikibase\ItemObject;
+use Wikibase\Item;
+use Wikibase\SiteLink;
+use Wikibase\Statement;
 
 /**
  * Tests for the Wikibase\ItemObject class.
@@ -34,6 +35,7 @@ use \Wikibase\SiteLink as SiteLink;
  * @group Wikibase
  * @group WikibaseItem
  * @group WikibaseLib
+ * @group WikibaseItemObjectTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -71,7 +73,10 @@ class ItemObjectTest extends EntityObjectTest {
 		$this->assertInstanceOf( 'Wikibase\Item', $instance );
 
 		$exception = null;
-		try { $instance = new ItemObject( 'Exception throws you!' ); } catch ( \Exception $exception ){}
+		try {
+			new ItemObject( 'Exception throws you!' );
+		} catch ( \Exception $exception )
+		{}
 		$this->assertInstanceOf( '\Exception', $exception );
 	}
 
@@ -89,7 +94,12 @@ class ItemObjectTest extends EntityObjectTest {
 		 * @var \Wikibase\Item $item
 		 */
 		foreach ( TestItems::getItems() as $item ) {
+			// getId()
 			$this->assertTrue( is_null( $item->getId() ) || is_integer( $item->getId() ) );
+			// getPrefixedId()
+			$this->assertTrue(
+				$item->getId() === null ? $item->getPrefixedId() === null : is_string( $item->getPrefixedId() )
+			);
 		}
 	}
 
@@ -149,5 +159,74 @@ class ItemObjectTest extends EntityObjectTest {
 		$this->assertTrue( $item->isEmpty() );
 	}
 
+	public function itemProvider() {
+		$items = array();
+
+		$items[] = ItemObject::newEmpty();
+
+		$item = ItemObject::newEmpty();
+		$item->setDescription( 'en', 'foo' );
+		$items[] = $item;
+
+		$item = ItemObject::newEmpty();
+		$item->setDescription( 'en', 'foo' );
+		$item->setDescription( 'de', 'foo' );
+		$item->setLabel( 'en', 'foo' );
+		$item->setAliases( 'de', array( 'bar', 'baz' ) );
+		$items[] = $item;
+
+		/**
+		 * @var Item $item;
+		 */
+		$item = $item->copy();
+		$item->addStatement( new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$items[] = $item;
+
+		return $this->arrayWrap( $items );
+	}
+
+	/**
+	 * @dataProvider itemProvider
+	 *
+	 * @param Item $item
+	 */
+	public function testHasStatements( Item $item ) {
+		$has = $item->hasStatements();
+		$this->assertInternalType( 'boolean', $has );
+
+		$this->assertEquals( count( $item->getStatements() ) !== 0, $has );
+	}
+
+	/**
+	 * @dataProvider itemProvider
+	 *
+	 * @param Item $item
+	 */
+	public function testGetClaims( Item $item ) {
+		$claims = $item->getClaims();
+		$this->assertInstanceOf( '\Wikibase\Claims', $claims );
+
+		$statements = $item->getStatements();
+
+//		$statements = array_filter(
+//			iterator_to_array( $statements ),
+//			function( Statement $statement ) {
+//				return $statement->getRank() === Statement::RANK_NORMAL;
+//			}
+//		);
+
+		$this->assertEquals(
+			count( $statements ),
+			count( $claims ),
+			'The length of the lists returned by getClaims and getStatements does not match'
+		);
+
+		/**
+		 * @var Statement $statement
+		 */
+		foreach ( $statements as $statement ) {
+			$this->assertTrue( $claims->hasClaim( $statement ) );
+		}
+	}
+
 }
-	

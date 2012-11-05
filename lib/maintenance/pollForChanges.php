@@ -10,6 +10,21 @@ require_once $basePath . '/maintenance/Maintenance.php';
  * Maintenance script that polls for Wikibase changes in the shared wb_changes table
  * and triggers a hook to invoke the code that needs to handle these changes.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -52,6 +67,11 @@ class PollForChanges extends \Maintenance {
 	protected $continueInterval;
 
 	/**
+	 * @var bool
+	 */
+	protected $done = false;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -60,6 +80,10 @@ class PollForChanges extends \Maintenance {
 			and triggers a hook to invoke the code that needs to handle these changes.';
 
 		$this->addOption( 'verbose', "Print change objects to be processed" );
+
+		$this->addOption( 'once', "Processes one batch and exits" );
+
+		$this->addOption( 'all', "Processes changes until no more are pending, then exits" );
 
 		$this->addOption( 'since', 'Process changes since timestamp. Timestamp should be given in the form of "yesterday",'
 			. ' "14 September 2012", "1 week 2 days 4 hours 2 seconds ago",'
@@ -73,6 +97,8 @@ class PollForChanges extends \Maintenance {
 
 		$this->addOption( 'continueinterval', "Interval (in seconds) to sleep after processing a full batch.", false, true );
 
+		$this->addOption( 'rebuildrc', "Rebuild recent changes" );
+
 		parent::__construct();
 	}
 
@@ -84,6 +110,7 @@ class PollForChanges extends \Maintenance {
 			// Since people might waste time debugging odd errors when they forget to enable the extension. BTDT.
 			die( 'WikibaseLib has not been loaded.' );
 		}
+
 		$this->changes = ChangesTable::singleton();
 
 		$this->lastChangeId = (int)$this->getOption( 'startid', 0 );
@@ -116,10 +143,28 @@ class PollForChanges extends \Maintenance {
 			file_put_contents( $pidfile, getmypid() ); // create lockfile
 		}
 
-		while ( true ) {
+		$changesWiki = Settings::get( 'changesDatabase' );
+
+		if ( $changesWiki ) {
+			self::msg( "Polling changes from $changesWiki." );
+		} else {
+			self::msg( "Polling changes from local wiki." );
+		}
+		
+		if ( $this->getOption( 'rebuildrc' ) ) {
+			$dbw = wfGetDB( DB_MASTER );
+			$dbw->delete(
+				'recentchanges',
+				array( 'rc_type' => RC_EXTERNAL )
+			);
+		}
+
+		while ( !$this->done ) {
 			$ms = $this->doPoll();
 			usleep( $ms * 1000 );
 		}
+
+		unlink( $pidfile ); // delete lockfile on normal exit
 	}
 
 	/**
@@ -141,7 +186,9 @@ class PollForChanges extends \Maintenance {
 		$changeCount = $changes->count();
 
 		if ( $changeCount == 0 ) {
-			self::msg( 'No new changes were found' );
+			if ( $this->getOption( 'verbose' ) ) {
+				self::msg( 'No new changes were found' );
+			}
 		}
 		else {
 			self::msg( $changeCount . ' new changes were found' );
@@ -150,17 +197,23 @@ class PollForChanges extends \Maintenance {
 
 			try {
 				if ( $this->getOption( 'verbose' ) ) {
+					/**
+					 * @var Change $change
+					 */
 					foreach ( $changes as $change ) {
-							$fields = $change->getFields();
-							preg_match( '/wikibase-(item|[^~-]+)[-~](.+)$/', $fields[ 'type' ], $matches );
+							$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
+							preg_match( '/wikibase-(item|property|query)~(.+)$/', $fields[ 'type' ], $matches );
 							$type = ucfirst( $matches[ 2 ] ); // This is the verb (like "update" or "add")
 							$object = $matches[ 1 ]; // This is the object (like "item" or "property").
-							self::msg( 'Processing change: '. $type . ' for '. $object . ' ' .$fields[ 'id' ] );
-						}
-						ChangeHandler::singleton()->handleChanges( array( $change ) );
-				} else {
-					ChangeHandler::singleton()->handleChanges( $changes );
+
+							self::msg(
+								'Processing change ' . $change->getId() . ' (' . $change->getTime() . '): '
+									. $type . ' for '. $object . ' ' . $change->getObjectId()
+							);
+					}
 				}
+
+				ChangeHandler::singleton()->handleChanges( $changes );
 			}
 			catch ( \Exception $ex ) {
 				$ids = array_map( function( Change $change ) { return $change->getId(); }, $changes );
@@ -170,7 +223,25 @@ class PollForChanges extends \Maintenance {
 			$this->lastChangeId = array_pop( $changes )->getId();
 		}
 
-		return $changeCount === $this->pollLimit ? $this->continueInterval : $this->sleepInterval;
+		if ( $changeCount >= $this->pollLimit ) {
+			$sleepFor = $this->continueInterval;
+		} else {
+			$sleepFor = $this->sleepInterval;
+
+			if ( $this->getOption( 'verbose' ) ) {
+				self::msg( 'All changes processed.' );
+			}
+
+			if ( $this->getOption( 'all' ) ) {
+				$this->done = true;
+			}
+		}
+
+		if ( $this->getOption( 'once' ) ) {
+			$this->done = true;
+		}
+
+		return $sleepFor;
 	}
 
 	/**

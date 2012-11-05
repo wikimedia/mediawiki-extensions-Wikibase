@@ -5,9 +5,17 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 
-=== Version 0.1 ===
+=== Version 0.2 ===
 (dev)
+
+*
+
+=== Version 0.1 ===
+(2012-11-01)
 
 Initial release with these features:
 
-* ...
+* Handling of changes to entities from a remote Wikibase repository
+* Local entity cache that can be shared with other client wikis
+* Display of repository siteslinks as interlanguage links
+* #noexternallanglinks parser function to surpress display of non-local languagelinks, optionally limited by languages

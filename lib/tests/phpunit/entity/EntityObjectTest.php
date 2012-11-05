@@ -1,8 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\EntityObject as EntityObject;
-use \Wikibase\Entity as Entity;
+use Wikibase\Entity;
 
 /**
  * Tests for the Wikibase\EntityObject deriving classes.
@@ -357,7 +356,7 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 			array( #3
 				array( 'entity' => 'x23' ),
 				array( 'entity' => 'x24' ),
-				false
+				true
 			),
 			array( #4
 				array( 'labels' => array(
@@ -402,4 +401,32 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$this->assertEquals( $equals, $itemA->equals( $itemB ) );
 		$this->assertEquals( $equals, $itemB->equals( $itemA ) );
 	}
+
+	public function stubTestProvider() {
+		$entities = array();
+
+		$entities[] = $this->getNewEmpty();
+
+		$entity = $this->getNewEmpty();
+		$entity->setAliases( 'en', array( 'o', 'noez' ) );
+		$entity->setLabel( 'de', 'spam' );
+		$entity->setDescription( 'en', 'foo bar baz' );
+
+		$entities[] = $entity;
+
+		return $entities;
+	}
+
+	/**
+	 * @dataProvider stubTestProvider
+	 *
+	 * @param \Wikibase\Entity $entity
+	 */
+	public function testStub( Entity $entity ) {
+		$copy = $entity->copy();
+		$entity->stub();
+
+		$this->assertTrue( $entity->equals( $copy ) );
+	}
+
 }

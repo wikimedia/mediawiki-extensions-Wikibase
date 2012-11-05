@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Entity extends Comparable {
+interface Entity extends Comparable, ClaimAggregate {
 
 	/**
 	 * Get an array representing the Entity.
@@ -42,17 +42,6 @@ interface Entity extends Comparable {
 	public function toArray();
 
 	/**
-	 * Creates a new Entity from the provided array of data.
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $data
-	 *
-	 * @return Entity
-	 */
-	public static function newFromArray( array $data );
-
-	/**
 	 * Returns the id of the entity or null if it is not in the datastore yet.
 	 *
 	 * @since 0.1
@@ -60,6 +49,15 @@ interface Entity extends Comparable {
 	 * @return integer|null
 	 */
 	public function getId();
+
+	/**
+	 * Returns a prefixed version of the entity's id or null if it is not in the datastore yet.
+	 *
+	 * @since 0.2
+	 *
+	 * @return string|null
+	 */
+	public function getPrefixedId();
 
 	/**
 	 * Sets the ID.
@@ -197,9 +195,11 @@ interface Entity extends Comparable {
 	 *
 	 * @since 0.1
 	 *
+	 * @param array|null $languages
+	 *
 	 * @return array
 	 */
-	public function getAllAliases();
+	public function getAllAliases( array $languages = null );
 
 	/**
 	 * Sets the aliases for the item in the language with the specified code.
@@ -242,6 +242,15 @@ interface Entity extends Comparable {
 	public function getType();
 
 	/**
+	 * Returns the name of the entity's type in a localized form.
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType();
+
+	/**
 	 * Creates a diff between the entity and provided target.
 	 *
 	 * @since 0.1
@@ -282,57 +291,20 @@ interface Entity extends Comparable {
 	public function clear();
 
 	/**
-	 * Adds a statement to the entity.
-	 * The returned statement can be used to generate a statement hash.
+	 * Stubs the entity as far as possible.
+	 * This is useful when one wants to conserve memory.
 	 *
-	 * @since 0.1
-	 *
-	 * @param Statement $statement
-	 *
-	 * @return Statement
+	 * @since 0.2
 	 */
-	//public function addStatement( Statement $statement );
+	public function stub();
 
 	/**
-	 * Returns the statement with the provided statement number.
-	 * If it does not exist, an exception is thrown.
+	 * Returns all the labels, descriptions and aliases as Term objects.
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
-	 * @param integer $statementNumber
-	 *
-	 * @return Statement
-	 * @throws \MWException
+	 * @return array of Term
 	 */
-	//public function getStatement( $statementNumber );
-
-	/**
-	 * Returns if the statement with the provided statement number exists.
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $statementNumber
-	 *
-	 * @return boolean
-	 */
-	//public function hasStatement( $statementNumber );
-
-	/**
-	 * Returns the statements belonging to this entity.
-	 *
-	 * @since 0.1
-	 *
-	 * @return array of Statement
-	 */
-	//public function getStatements();
-
-	/**
-	 * Removes the statement with the provided statement number if it exists.
-	 *
-	 * @since 0.1
-	 *
-	 * @param integer $statementNumber
-	 */
-	//public function removeStatement( $statementNumber );
+	public function getTerms();
 
 }

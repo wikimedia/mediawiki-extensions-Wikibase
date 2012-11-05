@@ -20,14 +20,6 @@ use ApiBase, Language;
 abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 
 	/**
-	 * @see ApiModifyEntity::getRequiredPermissions()
-	 */
-	protected function getRequiredPermissions( Entity $entity, array $params ) {
-		$permissions = parent::getRequiredPermissions( $entity, $params );
-		return $permissions;
-	}
-
-	/**
 	 * @see ApiModifyEntity::validateParameters()
 	 */
 	protected function validateParameters( array $params ) {
@@ -39,9 +31,9 @@ abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForComment()
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function getTextForComment( array $params, $plural = 1 ) {
+	public function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
 			$this->getModuleName() . '-' . ( ( isset( $params['value'] ) && 0<strlen( $params['value'] ) ) ? 'set' : 'remove' ),
 			array( /* $plural */ 1, $params['language'] )
@@ -49,9 +41,9 @@ abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForSummary()
+	 * @see  ApiAutocomment::getTextForSummary()
 	 */
-	protected function getTextForSummary( array $params ) {
+	public function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
 			Autocomment::pickValuesFromParams( $params, 'value' )
 		);
@@ -92,14 +84,6 @@ abstract class ApiModifyLangAttribute extends ApiModifyEntity {
 				'value' => 'The value to set for the language attribute',
 			)
 		);
-	}
-
-	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-		) );
 	}
 
 }

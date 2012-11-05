@@ -7,6 +7,21 @@ use WikiPage, Title, User, Status;
 /**
  * Abstract content object for articles representing Wikibase entities.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -65,7 +80,12 @@ abstract class EntityContent extends \AbstractContent {
 	 */
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
-			$this->wikiPage = $this->isNew() ? false : $this->getContentHandler()->getWikiPageForId( $this->getEntity()->getId() );
+			if ( !$this->isNew() ) {
+				$this->wikiPage = EntityContentFactory::singleton()->getWikiPageForId(
+					$this->getEntity()->getType(),
+					$this->getEntity()->getId()
+				);
+			}
 		}
 
 		return $this->wikiPage;
@@ -173,6 +193,15 @@ abstract class EntityContent extends \AbstractContent {
 
 		if ( $that->getModel() !== $this->getModel() ) {
 			return false;
+		}
+
+		$thisId = $this->getEntity()->getPrefixedId();
+		$thatId = $that->getEntity()->getPrefixedId();
+
+		if ( $thisId !== null && $thatId !== null ) {
+			if ( $thisId !== $thatId ) {
+				return false;
+			}
 		}
 
 		return $this->getEntity()->equals( $that->getEntity() );
@@ -449,27 +478,30 @@ abstract class EntityContent extends \AbstractContent {
 		$entity = $this->getEntity();
 
 		foreach ( $entity->getLabels() as $langCode => $labelText ) {
-			$label = array(
+			$label = new Term( array(
 				'termLanguage' => $langCode,
 				'termText' => $labelText,
-			);
+			) );
 
 			$labels[] = $label;
 		}
 
 		$foundLabels = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
 			$labels,
-			TermCache::TERM_TYPE_LABEL,
+			Term::TYPE_LABEL,
 			$entity->getType()
 		);
 
+		/**
+		 * @var Term $foundLabel
+		 */
 		foreach ( $foundLabels as $foundLabel ) {
-			if ( $foundLabel['entityId'] !== $entity->getId() ) {
+			if ( $foundLabel->getEntityId() !== $entity->getId() ) {
 				$status->fatal(
 					'wikibase-error-label-not-unique-wikibase-' . $entity->getType(),
-					$foundLabel['termText'],
-					$foundLabel['termLanguage'],
-					$foundLabel['entityId']
+					$foundLabel->getText(),
+					$foundLabel->getLanguage(),
+					$foundLabel->getEntityId()
 				);
 			}
 		}

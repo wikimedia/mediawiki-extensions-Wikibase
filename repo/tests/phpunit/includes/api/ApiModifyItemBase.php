@@ -2,9 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase, TestUser;
-use Wikibase\Item as Item;
-use Wikibase\Settings as Settings;
-use Wikibase\ItemContent as ItemContent;
+use Wikibase\Settings;
 
 /**
  * Base class for test classes that test the API modules that derive from ApiWikibaseModifyItem.
@@ -21,6 +19,21 @@ use Wikibase\ItemContent as ItemContent;
  * fail. It seems impossible to store the item ids back somehow and at the same time not being
  * dependant on some magically correct solution. That is we could use GetItemId but then we
  * would imply that this module in fact is correct.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -43,6 +56,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	protected static $itemOutput = array(); // items in output format, using handles as keys
 
 	protected static $loginSession = null;
+	protected static $loginUser = null;
 	protected static $token = null;
 
 	protected $user = null;
@@ -254,14 +268,18 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	/**
 	 * Performs a login, if necessary, and returns the resulting session.
 	 */
-	function login() {
+	function login( $user = 'wbeditor' ) {
 		if ( !$this->isSetUp() ) {
 			throw new \MWException( "can't log in before setUp() was run." );
 		}
 
+		if ( is_string( $user ) ) {
+			$user = self::$users['wbeditor'];
+		}
+
 		$this->init();
 
-		if ( self::$loginSession ) {
+		if ( self::$loginSession && $user->username == self::$loginUser->username ) {
 			return self::$loginSession;
 		}
 
@@ -270,22 +288,24 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 
 		list($res,,) = $this->doApiRequest( array(
 			'action' => 'login',
-			'lgname' => self::$users['wbeditor']->username,
-			'lgpassword' => self::$users['wbeditor']->password
+			'lgname' => $user->username,
+			'lgpassword' => $user->password
 		) );
 
 		$token = $res['login']['token'];
 
-		list($res,,$session) = $this->doApiRequest(
+		list(,,$session) = $this->doApiRequest(
 			array(
 				'action' => 'login',
 				'lgtoken' => $token,
-				'lgname' => self::$users['wbeditor']->username,
-				'lgpassword' => self::$users['wbeditor']->password
+				'lgname' => $user->username,
+				'lgpassword' => $user->password
 			),
 			null
 		);
 
+		self::$token = null;
+		self::$loginUser = $user;
 		self::$loginSession = $session;
 		return self::$loginSession;
 	}
@@ -293,7 +313,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	/**
 	 * Gets an item edit token. Returns a cached token if available.
 	 */
-	function getItemToken( $title = 'Main Page' ) {
+	function getItemToken() {
 		$this->init();
 
 		if ( !self::$usetoken ) {
@@ -306,25 +326,16 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			return self::$token;
 		}
 
-		$re = $this->doApiRequest(
+		list($re,,) = $this->doApiRequest(
 			array(
-				'action' => 'query',
-				'prop' => 'info',
-				'titles' => $title,
-				'intoken' => 'edit' ),
+				'action' => 'tokens',
+				'type' => 'edit' ),
 			null,
 			false,
-			self::$users['wbeditor']->user
+			self::$loginUser->user
 		);
 
-		$pages = $re[0]["query"]["pages"];
-		foreach ( $pages as $id => $page ) {
-			if ( isset( $page['edittoken'] ) ) {
-				self::$token = $page['edittoken'];
-				break;
-			}
-		}
-		return self::$token;
+		return $re['tokens']['edittoken'];
 	}
 
 	/**
@@ -377,7 +388,8 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 */
 	function setItem( $data, $token ) {
 		$params = array(
-			'action' => 'wbsetitem',
+			'action' => 'wbeditentity',
+			'format' => 'json', // make sure IDs are used as keys.
 			'token' => $token,
 		);
 
@@ -401,11 +413,11 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			self::$users['wbeditor']->user
 		);
 
-		if ( !isset( $res['success'] ) || !isset( $res['item'] ) ) {
+		if ( !isset( $res['success'] ) || !isset( $res['entity'] ) ) {
 			throw new \MWException( "failed to create item" );
 		}
 
-		return $res['item'];
+		return $res['entity'];
 	}
 
 	/**
@@ -468,11 +480,12 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	function loadItem( $id ) {
 		list($res,,) = $this->doApiRequest(
 			array(
-				'action' => 'wbgetitems',
+				'action' => 'wbgetentities',
+				'format' => 'json', // make sure IDs are used as keys.
 				'ids' => $id )
 		);
 
-		return $res['items'][$id];
+		return $res['entities'][$id];
 	}
 
 	/**
@@ -498,7 +511,7 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			}
 		}
 
-		# reset rights cache
+		// reset rights cache
 		$wgUser->addGroup( "dummy" );
 		$wgUser->removeGroup( "dummy" );
 	}
@@ -516,19 +529,30 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 	 * @param string $keyField the name of the field in each entry that shall be used as the key in the flat structure
 	 * @param string $valueField the name of the field in each entry that shall be used as the value in the flat structure
 	 * @param bool $multiValue whether the value in the flat structure shall be an indexed array of values instead of a single value.
+	 * @param array $into optional aggregator.
 	 *
 	 * @return array array the flat version of $data
 	 */
-	public static function flattenArray( $data, $keyField, $valueField, $multiValue = false ) {
-		$re = array();
+	public static function flattenArray( $data, $keyField, $valueField, $multiValue = false, array &$into = null ) {
+		if ( $into === null ) {
+			$into = array();
+		}
 
 		foreach ( $data as $index => $value ) {
-			if ( is_int( $index) && is_array( $value )
-				&& isset( $value[$keyField] ) && isset( $value[$valueField] ) ) {
-
-				// found "deep" entry in the array
-				$k = $value[ $keyField ];
-				$v = $value[ $valueField ];
+			if ( is_array( $value ) ) {
+				if ( isset( $value[$keyField] ) && isset( $value[$valueField] ) ) {
+					// found "deep" entry in the array
+					$k = $value[ $keyField ];
+					$v = $value[ $valueField ];
+				} elseif ( isset( $value[0] ) && !is_array( $value[0] ) && $multiValue ) {
+					// found "flat" multi-value entry in the array
+					$k = $index;
+					$v = $value;
+				} else {
+					// found list, recurse
+					self::flattenArray( $value, $keyField, $valueField, $multiValue, $into );
+					continue;
+				}
 			} else {
 				// found "flat" entry in the array
 				$k = $index;
@@ -536,13 +560,17 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 			}
 
 			if ( $multiValue ) {
-				$re[$k][] = $v;
+				if ( is_array( $v ) ) {
+					$into[$k] = empty( $into[$k] ) ? $v : array_merge( $into[$k], $v );
+				} else {
+					$into[$k][] = $v;
+				}
 			} else {
-				$re[$k] = $v;
+				$into[$k] = $v;
 			}
 		}
 
-		return $re;
+		return $into;
 	}
 
 	/**
@@ -559,61 +587,40 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 		if ( isset( $expected['lastrevid'] ) ) {
 			$this->assertEquals( $expected['lastrevid'], $actual['lastrevid'] );
 		}
+		if ( isset( $expected['type'] ) ) {
+			$this->assertEquals( $expected['type'], $actual['type'] );
+		}
 
 		if ( isset( $expected['labels'] ) ) {
-			$data = $actual['labels'];
-
-			// find out whether $expected is in "flat" form
-			$flat = !isset( $expected['labels'][0] );
-
-			if ( $flat ) { // convert to flat form if necessary
-				$data = self::flattenArray( $data, 'language', 'value' );
-			}
+			$data = self::flattenArray( $actual['labels'], 'language', 'value' );
+			$exp = self::flattenArray( $expected['labels'], 'language', 'value' );
 
 			// keys are significant in flat form
-			$this->assertArrayEquals( $expected['labels'], $data, false, $flat );
+			$this->assertArrayEquals( $exp, $data, false, true );
 		}
 
 		if ( isset( $expected['descriptions'] ) ) {
-			$data = $actual['descriptions'];
-
-			// find out whether $expected is in "flat" form
-			$flat = !isset( $expected['descriptions'][0] );
-
-			if ( $flat ) { // convert to flat form if necessary
-				$data = self::flattenArray( $data, 'language', 'value' );
-			}
+			$data = self::flattenArray( $actual['descriptions'], 'language', 'value' );
+			$exp = self::flattenArray( $expected['descriptions'], 'language', 'value' );
 
 			// keys are significant in flat form
-			$this->assertArrayEquals( $expected['descriptions'], $data, false, $flat );
+			$this->assertArrayEquals( $exp, $data, false, true );
 		}
 
 		if ( isset( $expected['sitelinks'] ) ) {
-			$data = $actual['sitelinks'];
-
-			// find out whether $expected is in "flat" form
-			$flat = !isset( $expected['sitelinks'][0] );
-
-			if ( $flat ) { // convert to flat form if necessary
-				$data = self::flattenArray( $data, 'site', 'title' );
-			}
+			$data = self::flattenArray( $actual['sitelinks'], 'site', 'title' );
+			$exp = self::flattenArray( $expected['sitelinks'], 'site', 'title' );
 
 			// keys are significant in flat form
-			$this->assertArrayEquals( $expected['sitelinks'], $data, false, $flat );
+			$this->assertArrayEquals( $exp, $data, false, true );
 		}
 
 		if ( isset( $expected['aliases'] ) ) {
-			$data = $actual['aliases'];
-
-			// find out whether $expected is in "flat" form
-			$flat = !isset( $expected['aliases'][0] );
-
-			if ( $flat ) { // convert to flat form if necessary
-				$data = self::flattenArray( $data, 'language', 'value', true );
-			}
+			$data = self::flattenArray( $actual['aliases'], 'language', 'value', true );
+			$exp = self::flattenArray( $expected['aliases'], 'language', 'value', true );
 
 			// keys are significant in flat form
-			$this->assertArrayEquals( $expected['aliases'], $data, false, $flat );
+			$this->assertArrayEquals( $exp, $data, false, true );
 		}
 	}
 
@@ -631,13 +638,13 @@ abstract class ApiModifyItemBase extends ApiTestCase {
 
 		if ( isset( $response['entity'] ) ) {
 			if ( isset( $response['entity']['type'] ) ) {
-				$this->assertTrue( \Wikibase\Utils::isEntityType( $response['entity']['type'] ), "Missing valid 'type' in response." );
+				$this->assertTrue( \Wikibase\EntityFactory::singleton()->isEntityType( $response['entity']['type'] ), "Missing valid 'type' in response." );
 			}
 		}
 		elseif ( isset( $response['entities'] ) ) {
 			foreach ($response['entities'] as $entity) {
 				if ( isset( $entity['type'] ) ) {
-					$this->assertTrue( \Wikibase\Utils::isEntityType( $entity['type'] ), "Missing valid 'type' in response." );
+					$this->assertTrue( \Wikibase\EntityFactory::singleton()->isEntityType( $entity['type'] ), "Missing valid 'type' in response." );
 				}
 			}
 		}

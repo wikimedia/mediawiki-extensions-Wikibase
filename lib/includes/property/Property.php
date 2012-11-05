@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use DataTypes\DataType;
+use MWException;
 
 /**
  * Interface for objects that represent a single Wikibase property.
@@ -29,8 +31,45 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Property extends Entity {
+interface Property extends Entity, ClaimListAccess {
 
 	const ENTITY_TYPE = 'property';
+
+	/**
+	 * Returns the DataType of the property.
+	 *
+	 * @since 0.2
+	 *
+	 * @return DataType
+	 * @throws MWException
+	 */
+	public function getDataType();
+
+	/**
+	 * Sets the DataType of the property.
+	 *
+	 * @since 0.2
+	 *
+	 * @param DataType $dataType
+	 */
+	public function setDataType( DataType $dataType );
+
+	/**
+	 * Sets the DataType of the property.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $dataTypeId
+	 */
+	public function setDataTypeById( $dataTypeId );
+
+	/**
+	 * Convenience function to check if the property contains any claims.
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims();
 
 }

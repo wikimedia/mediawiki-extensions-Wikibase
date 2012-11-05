@@ -20,7 +20,7 @@ old_revid = 0
 describe "Check edit-conflicts" do
   before :all do
     # set up: logout, create item as anonymous user
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
     visit_page(CreateItemPage) do |page|
@@ -30,49 +30,49 @@ describe "Check edit-conflicts" do
 
   context "check behaviour on edit conflicts" do
     it "should login as user 1, change description and save revid" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
-        page.itemDescriptionSpan.should == description
+        page.wait_for_entity_to_load
+        page.entityDescriptionSpan.should == description
         page.editDescriptionLink
         page.descriptionInputField = description_user1
         page.saveDescriptionLink
         ajax_wait
         page.wait_for_api_callback
-        page.itemDescriptionSpan.should == description_user1
+        page.entityDescriptionSpan.should == description_user1
         old_revid = @browser.execute_script("return mw.config.get('wgCurRevisionId');")
         old_revid.should > 0
       end
     end
 
     it "should login as user 2 (anon), change and description" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.logout_user
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
-        page.itemDescriptionSpan.should == description_user1
+        page.wait_for_entity_to_load
+        page.entityDescriptionSpan.should == description_user1
         page.editDescriptionLink
         page.descriptionInputField = description_user2
         page.saveDescriptionLink
         ajax_wait
         page.wait_for_api_callback
-        page.itemDescriptionSpan.should == description_user2
+        page.entityDescriptionSpan.should == description_user2
         old_revid.should_not == @browser.execute_script("return mw.config.get('wgCurRevisionId');")
       end
     end
 
     it "should login as user 1 again & inject old revid" do
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ORDINARY_USERNAME, WIKI_ORDINARY_PASSWORD)
       end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
+        page.wait_for_entity_to_load
         js_snippet = "mw.config.set('wgCurRevisionId', " + old_revid.to_s() + ");"
         @browser.execute_script(js_snippet)
         old_revid.should == @browser.execute_script("return mw.config.get('wgCurRevisionId');")
@@ -105,7 +105,7 @@ describe "Check edit-conflicts" do
 
     it "should complain about edit conflict when changing description" do
       on_page(ItemPage) do |page|
-        page.itemDescriptionSpan.should == description_user2
+        page.entityDescriptionSpan.should == description_user2
         page.editDescriptionLink
         page.descriptionInputField = description_user1
         page.saveDescriptionLink
@@ -122,7 +122,7 @@ describe "Check edit-conflicts" do
 
     it "should complain about edit conflict when editing label" do
       on_page(ItemPage) do |page|
-        page.itemLabelSpan.should == label
+        page.entityLabelSpan.should == label
         page.editLabelLink
         page.labelInputField = label_user1
         page.saveLabelLink
@@ -140,26 +140,26 @@ describe "Check edit-conflicts" do
     it "should be possible to edit description after a reload" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_item_to_load
-        page.itemDescriptionSpan.should == description_user2
+        page.wait_for_entity_to_load
+        page.entityDescriptionSpan.should == description_user2
         page.editDescriptionLink
         page.descriptionInputField = description_user1
         page.saveDescriptionLink
         ajax_wait
         page.wait_for_api_callback
-        page.itemDescriptionSpan.should == description_user1
+        page.entityDescriptionSpan.should == description_user1
       end
     end
 
     it "should be possible to to edit label after a reload" do
       on_page(ItemPage) do |page|
-        page.itemLabelSpan.should == label
+        page.entityLabelSpan.should == label
         page.editLabelLink
         page.labelInputField = label_user1
         page.saveLabelLink
         ajax_wait
         page.wait_for_api_callback
-        page.itemLabelSpan.should == label_user1
+        page.entityLabelSpan.should == label_user1
       end
     end
 
@@ -167,8 +167,7 @@ describe "Check edit-conflicts" do
       on_page(ItemPage) do |page|
         page.add_aliases([alias_a])
         @browser.refresh
-        page.wait_for_item_to_load
-        page.wait_for_aliases_to_load
+        page.wait_for_entity_to_load
         page.get_nth_alias(1).text.should == alias_a
       end
     end
@@ -176,7 +175,7 @@ describe "Check edit-conflicts" do
     it "should be possible to add sitelink after a reload" do
       on_page(ItemPage) do |page|
         page.add_sitelinks([sitelinks])
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.get_number_of_sitelinks_from_counter.should == 1
       end
     end
@@ -186,11 +185,10 @@ describe "Check edit-conflicts" do
     # tear down: remove all sitelinks if there are some; logout
     on_page(ItemPage) do |page|
       page.navigate_to_item
-      page.wait_for_item_to_load
-      page.wait_for_sitelinks_to_load
+      page.wait_for_entity_to_load
       page.remove_all_sitelinks
     end
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end

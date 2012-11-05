@@ -24,8 +24,8 @@ describe "Check functionality of non existing item page" do
         page.specialCreateNewItemLink
       end
       on_page(CreateItemPage) do |page|
-        page.createItemLabelField.should be_true
-        page.createItemDescriptionField.should be_true
+        page.createEntityLabelField.should be_true
+        page.createEntityDescriptionField.should be_true
       end
     end
   end

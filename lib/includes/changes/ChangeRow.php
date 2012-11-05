@@ -40,7 +40,7 @@ class ChangeRow extends ORMRow implements Change {
 	protected $user = false;
 
 	/**
-	 * Returns the user that made the change.
+	 * @see Change::getUser
 	 *
 	 * @since 0.1
 	 *
@@ -55,7 +55,7 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
-	 * Returns the age of the change in seconds.
+	 * @see Change::getAge
 	 *
 	 * @since 0.1
 	 *
@@ -66,8 +66,18 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
-	 * Returns whether the change is empty.
-	 * If it's empty, it can be ignored.
+	 * @see Change::getTime
+	 *
+	 * @since 0.2
+	 *
+	 * @return string TS_MW
+	 */
+	public function getTime() {
+		return $this->getField( 'time' );
+	}
+
+	/**
+	 * @see Change::isEmpty
 	 *
 	 * @since 0.1
 	 *
@@ -93,6 +103,17 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
+	 * @see ORMRow::getId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getId() {
+		return parent::getId();
+	}
+
+	/**
 	 * @since 0.1
 	 */
 	protected function postConstruct() {
@@ -102,14 +123,106 @@ class ChangeRow extends ORMRow implements Change {
 	}
 
 	/**
-	 * Returns the type of change.
+	 * @see Change::getType
 	 *
 	 * @since 0.1
 	 *
+	 * @param boolean $withPrefix Optionally include prefix, such as 'wikibase-'
+	 *
 	 * @return string
 	 */
-	public function getType() {
+	public function getType( $withPrefix = true ) {
+		$changeType = $this->getChangeType();
+		if ( $changeType === 'change' ) {
+			return $changeType;
+		}
+
+		return $this->getEntityType( $withPrefix ) . '~' . $changeType;
+	}
+
+	/**
+	 * @see Change::getEntityType
+	 *
+	 * @since 0.2
+	 *
+	 * @param boolean $withPrefix Optionally include prefix, such as 'wikibase-'
+	 *
+	 * @return string
+	 */
+	public function getEntityType( $withPrefix = true ) {
+		if ( $withPrefix ) {
+			return 'wikibase-' . $this->getEntity()->getType();
+		}
+		return $this->getEntity()->getType();
+	}
+
+	/**
+	 * @see Change::getChangeType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getChangeType() {
 		return 'change';
+	}
+
+	/**
+	 * @see Change::getObjectId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getObjectId() {
+		return $this->getField( 'object_id' );
+	}
+
+	/**
+	 * Get recent changes info from changes data
+	 *
+	 * @since 0.2
+	 *
+	 * @return array|bool
+	 */
+	public function getRCInfo() {
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+
+		if ( array_key_exists( 'rc', $info ) ) {
+			return $info['rc'];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Store recent changes info in changes
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $rc
+	 */
+	public function setRCInfo( array $rc ) {
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+		$validKeys = array(
+			'rc_comment',
+			'rc_curid',
+			'rc_bot',
+			'rc_this_oldid',
+			'rc_last_oldid',
+			'rc_user',
+			'rc_user_text'
+		);
+
+		if ( is_array( $rc ) ) {
+			foreach ( array_keys( $rc ) as $key ) {
+				if ( !in_array( $key, $validKeys ) ) {
+					unset( $rc[$key] );
+				}
+			}
+			$info['rc'] = $rc;
+			$this->setField( 'info', $info );
+		}
 	}
 
 }

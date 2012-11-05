@@ -46,6 +46,7 @@ class CreatedBlacklistedItems extends \Maintenance {
 		};
 
 		$items = array(
+			0 => 'Off-by-one error',
 			1 => 'Universe',
 			2 => 'Earth',
 			3 => 'Life',

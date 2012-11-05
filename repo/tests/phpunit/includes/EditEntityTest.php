@@ -1,14 +1,28 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\EntityContent as EntityContent;
-use \Wikibase\EditEntity as EditEntity;
-use \Wikibase\ItemContent as ItemContent;
-use \Status as Status;
-use \FauxRequest as FauxRequest;
+use \Wikibase\EntityContent;
+use \Wikibase\EditEntity;
+use \Wikibase\ItemContent;
+use \Status;
 
 /**
  * Test EditEntity.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -258,7 +272,6 @@ class EditEntityTest extends \MediaWikiTestCase {
 		// EntityContent is abstract so we use the subclass ItemContent
 		// to get a concrete class to instantiate. Still note that our
 		// test target is EntityContent::userWasLastToEdit.
-		$limit = 50;
 		$anonUser = \User::newFromId(0);
 		$sysopUser = \User::newFromId(1);
 		$itemContent = \Wikibase\ItemContent::newEmpty();
@@ -422,21 +435,21 @@ class EditEntityTest extends \MediaWikiTestCase {
 
 	public function provideIsTokenOk() {
 		return array(
-			array( #0
-				true, # use a newly generated valid token
-				true, # should work
+			array( //0
+				true, // use a newly generated valid token
+				true, // should work
 			),
-			array( #1
-				"xyz", # use an invalid token
-				false, # should fail
+			array( //1
+				"xyz", // use an invalid token
+				false, // should fail
 			),
-			array( #2
-				"", # use an empty token
-				false, # should fail
+			array( //2
+				"", // use an empty token
+				false, // should fail
 			),
-			array( #3
-				null, # use no token
-				false, # should fail
+			array( //3
+				null, // use no token
+				false, // should fail
 			),
 		);
 	}

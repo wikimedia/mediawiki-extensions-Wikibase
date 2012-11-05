@@ -49,9 +49,9 @@ class ApiSetAliases extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForComment()
+	 * @see  ApiAutocomment::getTextForComment()
 	 */
-	protected function getTextForComment( array $params, $plural = 1 ) {
+	public function getTextForComment( array $params, $plural = 1 ) {
 		return Autocomment::formatAutoComment(
 			'wbsetaliases-' . implode( '-', Autocomment::pickKeysFromParams( $params, 'set', 'add', 'remove' ) ),
 			array( $plural, $params['language'] )
@@ -59,12 +59,19 @@ class ApiSetAliases extends ApiModifyEntity {
 	}
 
 	/**
-	 * @see  ApiModifyEntity::getTextForSummary()
+	 * @see  ApiAutocomment::getTextForSummary()
 	 */
-	protected function getTextForSummary( array $params ) {
+	public function getTextForSummary( array $params ) {
 		return Autocomment::formatAutoSummary(
 			Autocomment::pickValuesFromParams( $params, 'set', 'add', 'remove' )
 		);
+	}
+
+	/**
+	 * @see ApiModifyEntity::createEntity()
+	 */
+	protected function createEntity( array $params ) {
+		$this->dieUsage( $this->msg( 'wikibase-api-no-such-item' )->text(), 'no-such-item' );
 	}
 
 	/**
@@ -103,7 +110,7 @@ class ApiSetAliases extends ApiModifyEntity {
 
 		$aliases = $entityContent->getEntity()->getAliases( $params['language'] );
 		if ( count( $aliases ) ) {
-			$this->addAliasesToResult( array( $params['language'] => $aliases ), 'item' ); // FIXME: must be updated
+			$this->addAliasesToResult( array( $params['language'] => $aliases ), 'entity' );
 		}
 
 		return true;
@@ -198,12 +205,15 @@ class ApiSetAliases extends ApiModifyEntity {
 		return 'https://www.mediawiki.org/wiki/Extension:Wikibase/API#wbsetaliases';
 	}
 
-
 	/**
-	 * @see ApiBase::getVersion()
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
 	 */
 	public function getVersion() {
-		return __CLASS__ . ': $Id$';
+		return __CLASS__ . '-' . WB_VERSION;
 	}
 
 }

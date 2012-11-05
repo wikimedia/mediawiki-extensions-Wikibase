@@ -9,7 +9,8 @@ Wikibase Client is a client for the Wikibase extension, which acts as a structur
 
 === Feature overview ===
 
-* ...
+* Accessing and displaying sitelinks from a repository
+* Parser function for the interplay between locally and externally defined sitelinks
 
 == Credits to other projects ==
 

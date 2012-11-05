@@ -32,8 +32,6 @@ abstract class ViewEntityAction extends \ViewAction {
 	/**
 	 * Returns the content of the page being viewed.
 	 *
-	 * @param \Article $article
-	 *
 	 * @return EntityContent|null
 	 */
 	protected function getContent() {
@@ -68,13 +66,14 @@ abstract class ViewEntityAction extends \ViewAction {
 		else {
 			$this->displayEntityContent( $content );
 
-			$editableView = $this->isPlainView();
+			$isEditableView = $this->isPlainView();
 
-			ItemView::registerJsConfigVars(
+			$view = EntityView::newForEntityContent( $content );
+			$view::registerJsConfigVars(
 				$this->getOutput(),
 				$content,
 				$this->getLanguage()->getCode(),
-				$editableView
+				$isEditableView
 			);
 		}
 	}
@@ -148,7 +147,12 @@ abstract class ViewEntityAction extends \ViewAction {
 			);
 */
 		// FIXME: this replaces the stuff above
-		$labelText = $content->getEntity()->getLabel($langCode);
+		$labelText = $content->getEntity()->getLabel( $langCode );
+
+		if ( $labelText === false ) {
+			$labelText = strtoupper( $content->getEntity()->getPrefixedId() );
+		}
+
 		// Create and set the title.
 		if ( $this->getContext()->getRequest()->getCheck( 'diff' ) ) {
 			$out->setPageTitle(
@@ -191,12 +195,27 @@ abstract class ViewEntityAction extends \ViewAction {
 				$text = wfMessage( 'missing-article',
 					$this->getTitle()->getPrefixedText(),
 					wfMessage( 'missingarticle-rev', $oldid )->plain() )->plain();
-			} elseif ( $this->getTitle()->quickUserCan( 'create', $this->getContext()->getUser() )
-				&& $this->getTitle()->quickUserCan( 'edit', $this->getContext()->getUser() )
-			) {
-				$text = wfMessage( 'wikibase-noitem' )->plain(); // TODO: item, not entity
 			} else {
-				$text = wfMessage( 'wikibase-noitem-nopermission' )->plain(); // TODO: item, not entity
+				/** @var $entityHandler EntityHandler */
+				$entityHandler = \ContentHandler::getForTitle( $this->getTitle() );
+				$entityCreationPage = $entityHandler->getSpecialPageForCreation();
+
+				$text = wfMessage( 'wikibase-noentity' )->plain();
+
+				if( $entityCreationPage !== null
+					&& $this->getTitle()->quickUserCan( 'create', $this->getContext()->getUser() )
+					&& $this->getTitle()->quickUserCan( 'edit', $this->getContext()->getUser() )
+				) {
+					/*
+					 * add text with link to special page for creating an entity of that type if possible and
+					 * if user has the rights for it
+					 */
+					$createEntityPage = \SpecialPage::getTitleFor( $entityCreationPage );
+					$text .= ' ' . wfMessage(
+						'wikibase-noentity-createone',
+						$createEntityPage->getPrefixedText() // TODO: might be nicer to use an 'action=create' instead
+					)->plain();
+				}
 			}
 
 			$text = "<div class='noarticletext'>\n$text\n</div>";

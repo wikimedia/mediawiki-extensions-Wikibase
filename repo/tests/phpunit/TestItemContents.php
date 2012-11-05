@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemContent as ItemContent;
 
 /**
  * Holds ItemContent objects for testing proposes.

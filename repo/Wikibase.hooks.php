@@ -5,7 +5,22 @@ use Title, Language, User, Revision, WikiPage, EditPage, ContentHandler, Html, M
 
 
 /**
- * File defining the hook handlers for the Wikibase Client extension.
+ * File defining the hook handlers for the Wikibase extension.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.1
  *
@@ -63,6 +78,20 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
+		$type = $updater->getDB()->getType();
+
+		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
+			$extension = $type === 'postgres' ? '.pg.sql' : '.sql';
+
+			$updater->addExtensionTable(
+				'wb_changes',
+				__DIR__ . '/sql/changes' . $extension
+			);
+		}
+		else {
+			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
+		}
+
 		if ( Settings::get( 'defaultStore' ) === 'sqlstore' ) {
 			/**
 			 * @var SQLStore $store
@@ -90,28 +119,36 @@ final class RepoHooks {
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
-			'ItemView', 
-			'Autocomment',
+			'ItemView',
 			'EditEntity',
 
 			'actions/EditEntityAction',
 
 			'api/ApiBotEdit',
 			'api/ApiEditPage',
-			'api/ApiGetItems',
+			'api/ApiGetEntities',
 			'api/ApiLabel',
 			'api/ApiDescription',
 			'api/ApiPermissions',
 			'api/ApiSetAliases',
-			'api/ApiSetItem',
+			'api/ApiEditEntity',
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
 
+			'api/serializers/ApiSerializationOptions',
+			'api/serializers/ApiSerializer',
+			'api/serializers/ByPropertyListSerializer',
+			'api/serializers/ClaimSerializer',
+			'api/serializers/ItemSerializer',
+			'api/serializers/PropertySerializer',
+			'api/serializers/SnakSerializer',
+
+			'content/EntityContentFactory',
 			'content/EntityHandler',
 			'content/ItemContent',
 			'content/ItemHandler',
-			//'content/PropertyContent', // disabled for phase 1 beta
-			//'content/PropertyHandler', // disabled for phase 1 beta
+			'content/PropertyContent',
+			'content/PropertyHandler',
 			'content/QueryContent',
 			'content/QueryHandler',
 
@@ -125,6 +162,7 @@ final class RepoHooks {
 			'store/TermCache',
 
 			'store/sql/SqlIdGenerator',
+			'store/sql/TermSqlCache',
 
 			'updates/ItemDeletionUpdate',
 			'updates/ItemModificationUpdate',
@@ -136,97 +174,6 @@ final class RepoHooks {
 
 		return true;
 		// @codeCoverageIgnoreEnd
-	}
-
-	/**
-	 * In Wikidata namespace, page content language is the same as the current user language.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageContentLanguage
-	 *
-	 * @since 0.1
-	 *
-	 * @param Title $title
-	 * @param Language &$pageLanguage
-	 * @param Language|\StubUserLang $language
-	 *
-	 * @return boolean
-	 */
-	public static function onPageContentLanguage( Title $title, Language &$pageLanguage, $language ) {
-		global $wgNamespaceContentModels;
-
-		// TODO: make this a little nicer
-		if( array_key_exists( $title->getNamespace(), $wgNamespaceContentModels )
-			&& in_array(
-				$title->getContentModel(),
-				Utils::getEntityContentModels()
-			)
-		) {
-			$pageLanguage = $language;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Add new javascript testing modules. This is called after the addition of MediaWiki core test suites.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
-	 *
-	 * @since 0.1
-	 *
-	 * @param array &$testModules
-	 * @param \ResourceLoader &$resourceLoader
-	 *
-	 * @return boolean
-	 */
-	public static function onResourceLoaderTestModules( array &$testModules, \ResourceLoader &$resourceLoader ) {
-		$testModules['qunit']['wikibase.tests'] = array(
-			'scripts' => array(
-				'tests/qunit/wikibase.tests.js',
-				'tests/qunit/wikibase.Site.tests.js',
-				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
-				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
-				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
-				'tests/qunit/wikibase.ui.SiteLinksEditTool.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableAliases.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableDescription.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableLabel.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableSiteLink.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.AutocompleteInterface.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.Interface.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SiteIdInterface.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.SitePageInterface.tests.js',
-				'tests/qunit/wikibase.ui.PropertyEditTool.EditableValue.ListInterface.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.EditGroup.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.Group.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
-				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
-				'tests/qunit/wikibase.ui.Tooltip.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.inherit.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.PersistentPromisor.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
-				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.wikibaseAutocomplete.tests.js'
-			),
-			'dependencies' => array(
-				'wikibase.tests.qunit.testrunner',
-				'wikibase',
-				'wikibase.utilities',
-				'wikibase.utilities.jQuery',
-				'wikibase.ui.Toolbar',
-				'wikibase.ui.PropertyEditTool'
-			),
-			'localBasePath' => __DIR__,
-			'remoteExtPath' => 'Wikibase/repo',
-		);
-
-		return true;
 	}
 
 	/**
@@ -265,16 +212,15 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onNewRevisionFromEditComplete( $article, Revision $revision, $baseID, User $user ) {
-		if ( Utils::isEntityContentModel( $article->getContent()->getModel() ) ) {
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $article->getContent()->getModel() ) ) {
 			/**
-			 * @var $newItem Entity
+			 * @var $newEntity Entity
 			 */
 			$newEntity = $article->getContent()->getEntity();
 
 			if ( is_null( $revision->getParentId() ) ) {
 				$change = EntityCreation::newFromEntity( $newEntity );
-			}
-			else {
+			} else {
 				$change = EntityUpdate::newFromEntities(
 					Revision::newFromId( $revision->getParentId() )->getContent()->getEntity(),
 					$newEntity
@@ -286,6 +232,16 @@ final class RepoHooks {
 				'user_id' => $user->getId(),
 				'object_id' => $newEntity->getId(),
 				'time' => $revision->getTimestamp(),
+			) );
+
+			$change->setRCInfo( array(
+				'rc_user_id' => $revision->getUser(),
+				'rc_user_text' => $revision->getUserText(),
+				'rc_bot' => in_array( 'bot', $user->getRights() ),
+				'rc_curid' => $revision->getPage(),
+				'rc_this_oldid' => $revision->getId(),
+				'rc_last_oldid' => $revision->getParentId(),
+				'rc_comment' => $revision->getComment(),
 			) );
 
 			ChangeNotifier::singleton()->handleChange( $change );
@@ -304,25 +260,23 @@ final class RepoHooks {
 	 * @param User $user
 	 * @param string $reason
 	 * @param integer $id
+	 * @param \Content $content
+	 * @param \LogEntryBase $logEntry
+	 *
+	 * @throws MWException
 	 *
 	 * @return boolean
-	 * @throws MWException
 	 */
 	public static function onArticleDeleteComplete( WikiPage $wikiPage, User $user, $reason, $id,
 		\Content $content = null, \LogEntryBase $logEntry = null
 	) {
 
-		if ( $content === null ) {
-			throw new MWException( 'Hook ArticleDeleteComplete is missing an argument, please update your MediaWiki installation!' );
-		}
-
-		// Bail out if we are not looking at an entity
-		if ( !in_array( $content->getModel(), Utils::getEntityContentModels() ) ) {
+		// Bail out if we are not in an entity namespace
+		if ( !$content || !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
 			return true;
 		}
 		$entity = $content->getEntity();
 		$change = EntityDeletion::newFromEntity( $entity );
-
 		$change->setFields( array(
 			//'previous_revision_id' => $wikiPage->getLatest(),
 			'revision_id' => 0, // there's no current revision
@@ -331,7 +285,58 @@ final class RepoHooks {
 			'time' => $logEntry->getTimestamp(),
 		) );
 
+		$change->setRCInfo( array(
+			'rc_user_id' => $user->getId(),
+			'rc_user_text' => $user->getName(),
+			'rc_curid' => 0,
+			'rc_this_oldid' => 0,
+			'rc_last_oldid' => 0,
+			'rc_comment' => $wikiPage->getTitle()->getText() . " deleted.",
+		) );
+
 		ChangeNotifier::singleton()->handleChange( $change );
+
+		return true;
+	}
+
+	/**
+	 * Handle changes for undeletions
+	 *
+	 * @since 0.2
+	 *
+	 * @param Title $title
+	 * @param bool $created
+	 * @param string $comment
+	 *
+	 * @return bool
+	 */
+	public static function onArticleUndelete( Title $title, $created, $comment ) {
+		$entityContentFactory = EntityContentFactory::singleton();
+
+		if ( !$entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
+			return true;
+		}
+
+		$revId = $title->getLatestRevID();
+		$content = $entityContentFactory->getFromRevision( $revId );
+
+		if ( $content ) {
+			$entity = $content->getEntity();
+			$rev = Revision::newFromId( $revId );
+
+			$change = EntityRestore::newFromEntity( $entity );
+
+			// TODO: Use timestamp of log entry, but needs core change.
+			// This hook is called before the log entry is created.
+			$change->setFields( array(
+				'revision_id' => $revId,
+				'user_id' => $rev->getUser(),
+				'object_id' => $entity->getId(),
+				'time' => wfTimestamp( TS_MW, wfTimestampNow() )
+			) );
+
+			ChangeNotifier::singleton()->handleChange( $change );
+		}
 
 		return true;
 	}
@@ -405,8 +410,7 @@ final class RepoHooks {
 				'apiInDebug' => false,
 
 				// Additional settings for API when debugging is on to
-				// facilitate testing, do not turn on in production!
-				'apiDebugWithWrite' => true,
+				// facilitate testing.
 				'apiDebugWithPost' => false,
 				'apiDebugWithRights' => false,
 				'apiDebugWithTokens' => false,
@@ -421,8 +425,6 @@ final class RepoHooks {
 
 				'defaultStore' => 'sqlstore',
 
-				'testDataTypes' => array( 'Type 1', 'Type 2' ),
-
 				'idBlacklist' => array(
 					1,
 					23,
@@ -431,9 +433,7 @@ final class RepoHooks {
 					9001,
 					31337,
 					720101010,
-				),
-
-				'entityNamespaces' => array(),
+				)
 			)
 		);
 
@@ -457,7 +457,7 @@ final class RepoHooks {
 		$article = $history->getArticle();
 		$rev = new Revision( $row );
 
-		if ( Utils::isEntityContentModel( $history->getTitle()->getContentModel() )
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $history->getTitle()->getContentModel() )
 			&& $article->getPage()->getLatest() !== $rev->getID()
 			&& $rev->getTitle()->quickUserCan( 'edit', $history->getUser() )
 		) {
@@ -492,7 +492,7 @@ final class RepoHooks {
 		$title = $sktemplate->getTitle();
 		$request = $sktemplate->getRequest();
 
-		if ( Utils::isEntityContentModel( $title->getContentModel() ) ) {
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $title->getContentModel() ) ) {
 			unset( $links['views']['edit'] );
 
 			if ( $title->quickUserCan( 'edit', $sktemplate->getUser() ) ) {
@@ -561,9 +561,14 @@ final class RepoHooks {
 	 * @return boolean
 	 */
 	public static function onWikibaseDeleteData( $reportMessage ) {
-		$reportMessage( 'Deleting revisions from Data NS...' );
+		$reportMessage( 'Deleting data from changes table...' );
 
 		$dbw = wfGetDB( DB_MASTER );
+		$dbw->delete( 'wb_changes', '*', __METHOD__ );
+
+		$reportMessage( "done!\n" );
+
+		$reportMessage( 'Deleting revisions from Data NS...' );
 
 		$namespaceList = $dbw->makeList(  Utils::getEntityNamespaces(), LIST_COMMA );
 
@@ -609,7 +614,7 @@ final class RepoHooks {
 	 * @return bool
 	 */
 	public static function onOutputPageBodyAttributes( \OutputPage $out, \Skin $sk, array &$bodyAttrs ) {
-		if ( Utils::isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $out->getTitle()->getContentModel() ) ) {
 			// we only add the classes, if there is an actual item and not just an empty Page in the right namespace
 			$entityPage = new WikiPage( $out->getTitle() );
 			$entityContent = $entityPage->getContent();
@@ -642,7 +647,7 @@ final class RepoHooks {
 	 *
 	 * @param \DummyLinker $skin
 	 * @param Title $target
-	 * @param string $text
+	 * @param string $html
 	 * @param array $customAttribs
 	 * @param string $query
 	 * @param array $options
@@ -650,16 +655,15 @@ final class RepoHooks {
 	 * @return bool true
 	 */
 	public static function onLinkBegin( $skin, $target, &$html, array &$customAttribs, &$query, &$options, &$ret ) {
+		//NOTE: the model returned by Title::getContentModel() is not reliable, see bug 37209
+		$model = $target->getContentModel();
+		$entityModels = EntityContentFactory::singleton()->getEntityContentModels();
+
 		if(
 			// if custom link text is given, there is no point in overwriting it
 			$html !== null
 			// we only want to handle links to Wikibase entities differently here
-			|| !in_array(
-				$target->getContentModel(),
-				Utils::getEntityContentModels()
-			)
-			// as of MW 1.20 Linker shouldn't support anything but Title anyhow
-			|| ! $target instanceof Title
+			|| !in_array( $model, $entityModels )
 		) {
 			return true;
 		}
@@ -685,9 +689,12 @@ final class RepoHooks {
 			return true;
 		}
 		$content = $page->getContent();
-		if ( is_null( $content ) ) {
+		if ( is_null( $content ) || !( $content instanceof EntityContent ) ) {
 			// Failed, can't continue. This could happen because the content is empty (page doesn't exist),
 			// e.g. after item was deleted.
+
+			// Due to bug 37209, we may also get non-entity content here, despite checking
+			// Title::getContentModel up front.
 			return true;
 		}
 		$entity = $content->getEntity();
@@ -776,7 +783,7 @@ final class RepoHooks {
 			$pageObj = $module->getTitleOrPageId( $params );
 			$namespace = $pageObj->getTitle()->getNamespace();
 
-			foreach ( Utils::getEntityContentModels() as $model ) {
+			foreach ( EntityContentFactory::singleton()->getEntityContentModels() as $model ) {
 				/**
 				 * @var EntityHandler $handler
 				 */

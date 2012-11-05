@@ -1,9 +1,8 @@
 <?php
 
 namespace Wikibase;
-use Diff\MapDiff as MapDiff;
+use Diff\MapDiff;
 use Diff\DiffOp;
-use Diff\IDiff as IDiff;
 
 
 /**
@@ -70,13 +69,11 @@ abstract class EntityDiffObject extends MapDiff implements EntityDiff {
 	 * @since 0.1
 	 *
 	 * @param Entity $entity
-	 * @return Boolean
 	 */
 	public function apply( Entity $entity ) {
 		$this->applyAliases( $this->getAliasesDiff(), $entity );
 		$this->applyLabels( $this->getLabelsDiff(), $entity );
 		$this->applyDescriptions( $this->getDescriptionsDiff(), $entity );
-		return true;
 	}
 
 	/**

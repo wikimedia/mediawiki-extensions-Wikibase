@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 
-use User, WebRequest, WikiPage, Action, IContextSource;
+use User, WebRequest, WikiPage, Action;
 use RequestContext;
 use FauxRequest;
 use MediaWikiTestCase;
@@ -14,6 +14,21 @@ use \Wikibase\ItemObject;
 use \Wikibase\ItemContent;
 
 /**
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @ingroup Wikibase
  * @ingroup Test
@@ -55,7 +70,7 @@ class ActionTestCase extends MediaWikiTestCase {
 		\ApiQueryInfo::resetTokenCache();
 
 		if ( $this->permissionsChanged ) {
-			# reset rights cache
+			// reset rights cache
 			$wgUser->addGroup( "dummy" );
 			$wgUser->removeGroup( "dummy" );
 		}
@@ -80,7 +95,7 @@ class ActionTestCase extends MediaWikiTestCase {
 
 		$this->permissionsChanged = true;
 
-		# reset rights cache
+		// reset rights cache
 		$wgUser->addGroup( "dummy" );
 		$wgUser->removeGroup( "dummy" );
 	}
@@ -258,10 +273,13 @@ class ActionTestCase extends MediaWikiTestCase {
 	/**
 	 * Creates a test item defined by $revisions.
 	 *
+	 * @param string $handle
+	 * @param array $revisions
+	 *
 	 * @return Item
 	 * @throws \MWException
 	 */
-	public static function createTestItem( $handle, $revisions ) {
+	public static function createTestItem( $handle, array $revisions ) { //@todo: provide this for all kinds of entities.
 		/* @var ItemContent $content */
 		/* @var Item $item */
 

@@ -1,14 +1,27 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemHandler as ItemHandler;
 use Wikibase\Utils;
-use \Wikibase\Item as Item;
-use \Wikibase\ItemContent as ItemContent;
+use \Wikibase\ItemContent;
 use WikiPage, Title, WikitextContent;
 
 /**
  * Tests prevention of moving pages in and out of the data NS.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -24,6 +37,8 @@ use WikiPage, Title, WikitextContent;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class ItemMoveTest extends \MediaWikiTestCase {
+
+	//@todo: make this a baseclass to use with all types of entities.
 
 	/**
 	 * @var ItemContent
@@ -44,7 +59,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$this->itemContent = ItemContent::newEmpty();
 		$this->itemContent->save( '', null, EDIT_NEW );
 
-		$title = Title::newFromText( 'wbmovetest' );
+		$title = Title::newFromText( 'wbmovetest', $this->getDefaultWikitextNS() );
 		$this->page =  new WikiPage( $title );
 		$this->page->doEditContent( new WikitextContent( 'foobar' ), 'test' );
 	}
@@ -60,7 +75,7 @@ class ItemMoveTest extends \MediaWikiTestCase {
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving a regular page into data NS to an invalid location
-		$title = Title::newFromText( $this->page->getTitle()->getText(), Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM ) );
+		$title = Title::newFromText( $this->page->getTitle()->getText(), Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM ) ); //@todo: test other types of entities too!
 		$this->assertFalse( $this->page->getTitle()->moveTo( $title ) === true );
 
 		// Moving a regular page into data NS to an empty (but valid) location

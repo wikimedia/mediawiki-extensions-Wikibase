@@ -16,7 +16,7 @@ use User, Title, ApiBase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-abstract class ApiModifyEntity extends Api {
+abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 
 	/**
 	 * Flags to pass to EditEntity::attemptSave; use with the EDIT_XXX constants.
@@ -41,47 +41,41 @@ abstract class ApiModifyEntity extends Api {
 	/**
 	 * Find the entity.
 	 *
-	 * @since    0.1
+	 * @since 0.1
 	 *
-	 * @param array       $params
+	 * @param array $params
 	 *
-	 * @internal param \Wikibase\EntityContent $entityContent
 	 * @return EntityContent Found existing entity
 	 */
 	protected function findEntity( array $params ) {
 		$entityContent = null;
-		$entityHandler = null;
 
-		// XXX: this is a bit ugly and could be replaced by more generic lookup modules
-		list( $type, ) = explode( '/', $params['type'], 2 );
-		switch ( $type ) {
-			case 'item' :
-				$entityHandler = \Wikibase\ItemHandler::singleton();
-				break;
-			case 'property' :
-				$entityHandler = \Wikibase\PropertyHandler::singleton();
-				break;
-			case 'query' :
-				$entityHandler = \Wikibase\QueryHandler::singleton();
-				break;
-			default:
-				$this->dieUsage( "unknown key: {$type}", 'not-recognized' );
-		}
-
-		// If we have an id try that first
+		// If we have an id try that first. If the id isn't prefixed, assume it refers to an item.
 		if ( isset( $params['id'] ) ) {
-			$entityContent = $entityHandler->getFromId( $params['id'] );
+			$id = $params['id'];
+
+			$entityFactory = EntityFactory::singleton();
+			$entityContentFactory = EntityContentFactory::singleton();
+
+			if ( !$entityFactory->isPrefixedId( $id ) ) {
+				$id = ItemObject::getIdPrefix() . $id;
+				$this->getResult()->setWarning( 'Assuming plain numeric ID refers to an item. '
+						. 'Please use qualified IDs instead.' );
+			}
+
+			$entityContent = $entityContentFactory->getFromPrefixedId( $id, \Revision::FOR_THIS_USER );
 
 			if ( is_null( $entityContent ) ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-id' )->text(), 'no-such-entity-id' );
 			}
 		}
-
-		// Otherwise check if we have a link and try that
-		// note that this will not be run if the subclass doesn't allow the sitelink parameters
-		// or if the validateParameters method rejects it
-		elseif ( $type === 'item' && isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$entityContent = $entityHandler->getFromSiteLink( $params['site'], Utils::squashToNFC( $params['title'] ) );
+		// Otherwise check if we have a link and try that.
+		// This will always result in an item, because only items have sitelinks.
+		elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
+			$entityContent = ItemHandler::singleton()->getFromSiteLink(
+				$params['site'],
+				Utils::squashToNFC( $params['title'] )
+			);
 
 			if ( is_null( $entityContent ) ) {
 				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-link' )->text(), 'no-such-entity-link' );
@@ -119,40 +113,6 @@ abstract class ApiModifyEntity extends Api {
 	protected abstract function modifyEntity( EntityContent &$entity, array $params );
 
 	/**
-	 * Make a string for an autocomment, that can be replaced through system messages.
-	 *
-	 * The autocomment is the initial part of the total summary. It is used to
-	 * explain the overall purpose with the change. If its later replaced by a
-	 * system message then it should not use any user supplied text as arg.
-	 *
-	 * @since 0.1
-	 *
-	 * @param $params array with parameters from the call to the module
-	 * @param $plural integer|string the number used for plural forms
-	 * @return string that can be used as an autocomment
-	 */
-	protected abstract function getTextForComment( array $params, $plural = 'none' );
-
-	/**
-	 * Make a string for an autosummary, that can be replaced through system messages.
-	 *
-	 * The autosummary is the final part of the total summary. This call is used if there
-	 * is no ordinary summary. If this call fails an autosummary from the entity itself will
-	 * be used.
-	 *
-	 * The returned array has a count that can be used for plural forms in the messages,
-	 * but exact interpretation is somewhat undefined.
-	 *
-	 * FIXME: How do we handle direction.
-	 *
-	 * @since 0.1
-	 *
-	 * @param $params array with parameters from the call to the module
-	 * @return array where the array( int, false|string ) is a count and a string that can be used as an autosummary
-	 */
-	protected abstract function getTextForSummary( array $params );
-
-	/**
 	 * Make sure the required parameters are provided and that they are valid.
 	 *
 	 * @since 0.1
@@ -168,10 +128,10 @@ abstract class ApiModifyEntity extends Api {
 
 	/**
 	 * @see ApiBase::execute()
+	 *
+	 * @since 0.1
 	 */
 	public function execute() {
-		global $wgContLang;
-
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 		$this->flags = 0;
@@ -198,7 +158,7 @@ abstract class ApiModifyEntity extends Api {
 		}
 
 		// This is similar to ApiEditPage.php and what it uses at line 314
-		$this->flags |= ($user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
+		$this->flags |= ( $user->isAllowed( 'bot' ) && $params['bot'] ) ? EDIT_FORCE_BOT : 0;
 
 		// if the entity is not up for creation, set the EDIT_UPDATE flags
 		if ( !$entityContent->isNew() && ( $this->flags & EDIT_NEW ) === 0 ) {
@@ -208,22 +168,6 @@ abstract class ApiModifyEntity extends Api {
 		//NOTE: EDIT_NEW will not be set automatically. If the entity doesn't exist, and EDIT_NEW was
 		//      not added to $this->flags explicitly, the save will fail.
 
-		// Is there a user supplied summary, then use it but get the hits first
-		if ( isset( $params['summary'] ) ) {
-			list( $hits, $summary, $lang ) = $this->getTextForSummary( $params );
-			$summary = $params['summary'];
-		}
-		// otherwise try to construct something
-		else {
-			list( $hits, $summary, $lang ) = $this->getTextForSummary( $params );
-			if ( !is_string( $summary ) ) {
-				$summary = $entityContent->getTextForSummary( $params );
-			}
-		}
-
-		// Comments are newer user supplied
-		$comment = $this->getTextForComment( $params, $hits );
-
 		// collect information and create an EditEntity
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
 		$baseRevisionId = $baseRevisionId > 0 ? $baseRevisionId : null;
@@ -231,8 +175,8 @@ abstract class ApiModifyEntity extends Api {
 
 		// Do the actual save, or if it don't exist yet create it.
 		// There will be exceptions but we just leak them out ;)
-		$status = $editEntity->attemptSave(
-			Autocomment::formatTotalSummary( $comment, $summary, $lang ),
+		$editEntity->attemptSave(
+			Autocomment::buildApiSummary( $this, $params, $entityContent ),
 			$this->flags,
 			( $this->needsToken() ? $params['token'] : false )
 		);
@@ -248,17 +192,25 @@ abstract class ApiModifyEntity extends Api {
 		}
 
 		$this->getResult()->addValue(
-			'item', // FIXME: must be updated
-			'id', $entityContent->getEntity()->getId()
+			'entity',
+			'id', $entityContent->getEntity()->getPrefixedId()
 		);
+
+		$this->getResult()->addValue(
+			'entity',
+			'type', $entityContent->getEntity()->getType()
+		);
+
 		$page = $entityContent->getWikiPage();
 		$revision = $page->getRevision();
+
 		if ( $revision !== null ) {
 			$this->getResult()->addValue(
-				'item', // FIXME: must be updated
+				'entity',
 				'lastrevid', intval( $revision->getId() )
 			);
 		}
+
 		if ( isset( $params['site'] ) && isset( $params['title'] ) ) {
 			$normalized = array();
 
@@ -270,7 +222,7 @@ abstract class ApiModifyEntity extends Api {
 
 			if ( $normalized !== array() ) {
 				$this->getResult()->addValue(
-					'item', // FIXME: must be updated
+					'entity',
 					'normalized', $normalized
 				);
 			}
@@ -281,7 +233,6 @@ abstract class ApiModifyEntity extends Api {
 			'success',
 			(int)$success
 		);
-
 	}
 
 	/**
@@ -309,28 +260,21 @@ abstract class ApiModifyEntity extends Api {
 	 * @see ApiBase::needsToken()
 	 */
 	public function needsToken() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens' ) : true;
 	}
 
 	/**
 	 * @see ApiBase::mustBePosted()
 	 */
 	public function mustBePosted() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true ;
+		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithPost' ) : true;
 	}
 
 	/**
 	 * @see ApiBase::isWriteMode()
 	 */
 	public function isWriteMode() {
-		return Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithWrite' ) : true ;
-	}
-
-	/**
-	 * @see ApiBase::getAllowedParams()
-	 */
-	public function getAllowedParams() {
-		return parent::getAllowedParams();
+		return true;
 	}
 
 	/**
@@ -344,7 +288,7 @@ abstract class ApiModifyEntity extends Api {
 	public function getAllowedParamsForId() {
 		return array(
 			'id' => array(
-				ApiBase::PARAM_TYPE => 'integer',
+				ApiBase::PARAM_TYPE => 'string',
 			),
 		);
 	}
@@ -383,21 +327,9 @@ abstract class ApiModifyEntity extends Api {
 			'summary' => array(
 				ApiBase::PARAM_TYPE => 'string',
 			),
-			'type' => array(
-				ApiBase::PARAM_TYPE => array( 'item', 'property', 'query' ),
-				ApiBase::PARAM_DFLT => 'item',
-				ApiBase::PARAM_ISMULTI => false,
-			),
 			'token' => null,
 			'bot' => false,
 		);
-	}
-
-	/**
-	 * @see ApiBase::getParamDescription()
-	 */
-	public function getParamDescription() {
-		return parent::getParamDescription();
 	}
 
 	/**
@@ -410,7 +342,7 @@ abstract class ApiModifyEntity extends Api {
 	 */
 	protected function getParamDescriptionForId() {
 		return array(
-			'id' => array( 'The numeric identifier for the entity.',
+			'id' => array( 'The identifier for the entity, including the prefix.',
 				"Use either 'id' or 'site' and 'title' together."
 			),
 		);
@@ -444,7 +376,7 @@ abstract class ApiModifyEntity extends Api {
 	 */
 	protected function getParamDescriptionForEntity() {
 		return array(
-			'baserevid' => array( 'The numeric identifier for the revision.',
+			'baserevid' => array( 'The numeric identifier for the revision to base the modification on.',
 				"This is used for detecting conflicts during save."
 			),
 			'summary' => array( 'Summary for the edit.',

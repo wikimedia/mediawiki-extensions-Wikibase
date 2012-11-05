@@ -24,9 +24,9 @@ describe "Check functionality of edit description" do
   context "Check for item description UI" do
     it "should check behaviour of cancel-link" do
       on_page(ItemPage) do |page|
-        page.itemDescriptionSpan.should be_true
-        page.itemDescriptionSpan.should == description
-        page.wait_for_item_to_load
+        page.entityDescriptionSpan.should be_true
+        page.entityDescriptionSpan.should == description
+        page.wait_for_entity_to_load
         page.editDescriptionLink?.should be_true
         page.cancelDescriptionLink?.should be_false
         page.editDescriptionLink
@@ -40,7 +40,7 @@ describe "Check functionality of edit description" do
         page.cancelDescriptionLink
         page.editDescriptionLink?.should be_true
         page.cancelDescriptionLink?.should be_false
-        page.itemDescriptionSpan.should == description
+        page.entityDescriptionSpan.should == description
       end
     end
     it "should check behaviour of ESC-key" do
@@ -49,7 +49,7 @@ describe "Check functionality of edit description" do
         page.descriptionInputField = description_changed
         page.descriptionInputField_element.send_keys :escape
         page.editDescriptionLink?.should be_true
-        page.itemDescriptionSpan.should == description
+        page.entityDescriptionSpan.should == description
       end
     end
     it "should check functionality of saving description with save-link" do
@@ -61,11 +61,11 @@ describe "Check functionality of edit description" do
         page.apiCallWaitingMessage?.should be_true
         ajax_wait
         page.wait_for_api_callback
-        page.itemDescriptionSpan.should == description_changed
+        page.entityDescriptionSpan.should == description_changed
         page.editDescriptionLink?.should be_true
         @browser.refresh
-        page.wait_for_item_to_load
-        page.itemDescriptionSpan.should == description_changed
+        page.wait_for_entity_to_load
+        page.entityDescriptionSpan.should == description_changed
       end
     end
     it "should check functionality of saving the description with RETURN-key" do
@@ -77,11 +77,11 @@ describe "Check functionality of edit description" do
         page.apiCallWaitingMessage?.should be_true
         ajax_wait
         page.wait_for_api_callback
-        page.itemDescriptionSpan.should == description
+        page.entityDescriptionSpan.should == description
         page.editDescriptionLink?.should be_true
         @browser.refresh
-        page.wait_for_item_to_load
-        page.itemDescriptionSpan.should == description
+        page.wait_for_entity_to_load
+        page.entityDescriptionSpan.should == description
       end
     end
   end
@@ -95,10 +95,10 @@ describe "Check functionality of edit description" do
         page.saveDescriptionLink
         ajax_wait
         page.wait_for_api_callback
-        page.itemDescriptionSpan.should == description_normalized
+        page.entityDescriptionSpan.should == description_normalized
         @browser.refresh
-        page.wait_for_item_to_load
-        page.itemDescriptionSpan.should == description_normalized
+        page.wait_for_entity_to_load
+        page.entityDescriptionSpan.should == description_normalized
       end
     end
   end

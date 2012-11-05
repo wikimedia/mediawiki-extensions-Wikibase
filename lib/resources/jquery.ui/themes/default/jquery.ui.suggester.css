@@ -1,0 +1,35 @@
+/**
+ * Default/Vector styles for jquery.ui.suggester
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater <mediawiki@snater.com>
+ */
+
+.ui-suggester-list {
+	border-color: #C9C9C9;
+	background: white;
+}
+
+.ui-suggester-list .ui-state-hover {
+	border: none;
+	background: #4C59A6;
+	color: white;
+}
+
+.ui-suggester-list .ui-state-hover a,
+.ui-suggester-list .ui-state-hover a:hover {
+	color: white;
+}
+
+.ui-suggester-list {
+	padding: 0;
+}
+
+.ui-suggester-list .ui-menu-item a {
+	padding: 0 0.2em;
+}
+
+.ui-suggester-list .ui-menu-item a.ui-state-hover,
+.ui-suggester-list .ui-menu-item a.ui-state-active {
+	margin: 0;
+}

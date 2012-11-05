@@ -6,6 +6,21 @@ use Content, Html;
 /**
  * Difference view for Wikibase entities.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -30,7 +45,7 @@ abstract class EntityContentDiffView extends \DifferenceEngine {
 	public function __construct( $context = null, $old = 0, $new = 0, $rcid = 0, $refreshCache = false, $unhide = false ) {
 		parent::__construct( $context, $old, $new, $rcid, $refreshCache, $unhide );
 
-		$this->mRefreshCache = true; #FIXME: debug only!
+		$this->mRefreshCache = true; //FIXME: debug only!
 	}
 
 	/**

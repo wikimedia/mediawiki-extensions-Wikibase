@@ -33,7 +33,14 @@ namespace Wikibase;
 class ItemObject extends EntityObject implements Item {
 
 	/**
-	 * @see EntityObject::getIdPrefix()
+	 * @since 0.2
+	 *
+	 * @var Statements|null
+	 */
+	protected $statements = null;
+
+	/**
+	 * @see EntityObject::getIdPrefix
 	 *
 	 * @since 0.1
 	 *
@@ -44,7 +51,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::addSiteLink()
+	 * @see Item::addSiteLink
 	 *
 	 * @since 0.1
 	 *
@@ -69,7 +76,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see   Item::removeSiteLink()
+	 * @see   Item::removeSiteLink
 	 *
 	 * @since 0.1
 	 *
@@ -94,7 +101,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::getSiteLinks()
+	 * @see Item::getSiteLinks
 	 *
 	 * @since 0.1
 	 *
@@ -111,7 +118,7 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::getSiteLink()
+	 * @see Item::getSiteLink
 	 *
 	 * @since 0.1
 	 *
@@ -128,40 +135,48 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
-	 * @see Item::isEmpty()
+	 * @see Entity::isEmpty
 	 *
 	 * @since 0.1
 	 *
 	 * @return boolean
 	 */
 	public function isEmpty() {
-		if ( !parent::isEmpty() ) {
-			return false;
-		}
-
-		$fields = array( 'links' );
-
-		foreach ( $fields as $field ) {
-			if ( $this->data[$field] !== array() ) {
-				return false;
-			}
-		}
-
-		return true;
+		return parent::isEmpty()
+			&& $this->data['links'] === array()
+			&& !$this->hasStatements();
 	}
 
 	/**
-	 * Cleans the internal array structure.
-	 * This consists of adding elements the code expects to be present later on
-	 * and migrating or removing elements after changes to the structure are made.
-	 * Should typically be called before using any of the other methods.
+	 * @see Item::hasStatements
+	 *
+	 * On top of being a convenience function, this implementation allows for doing
+	 * the check without forcing an unstub in contrast to count( $item->getStatements() ).
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasStatements() {
+		if ( $this->statements === null ) {
+			return $this->data['statements'] !== array();
+		}
+		else {
+			return count( $this->statements ) > 0;
+		}
+	}
+
+	/**
+	 * @see EntityObject::cleanStructure
 	 *
 	 * @since 0.1
+	 *
+	 * @param boolean $wipeExisting
 	 */
 	protected function cleanStructure( $wipeExisting = false ) {
 		parent::cleanStructure( $wipeExisting );
 
-		foreach ( array( 'links' ) as $field ) {
+		foreach ( array( 'links', 'statements' ) as $field ) {
 			if (  $wipeExisting || !array_key_exists( $field, $this->data ) ) {
 				$this->data[$field] = array();
 			}
@@ -169,6 +184,8 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
+	 * @see Entity::newFromArray
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $data
@@ -200,6 +217,17 @@ class ItemObject extends EntityObject implements Item {
 	}
 
 	/**
+	 * @see Entity::getLocalType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType() {
+		return wfMessage( 'wikibaselib-entity-item' )->parse();
+	}
+
+	/**
 	 * @see Entity::getDiff
 	 *
 	 * @since 0.1
@@ -210,6 +238,157 @@ class ItemObject extends EntityObject implements Item {
 	 */
 	public function getDiff( Entity $target ) {
 		return ItemDiff::newFromItems( $this, $target );
+	}
+
+	/**
+	 * @see StatementListAccess::addStatement
+	 *
+	 * @since 0.2
+	 *
+	 * @param Statement $statement
+	 */
+	public function addStatement( Statement $statement ) {
+		$this->unstubStatements();
+		$this->statements->addStatement( $statement );
+	}
+
+	/**
+	 * @see StatementListAccess::hasStatement
+	 *
+	 * @since 0.2
+	 *
+	 * @param Statement $statement
+	 *
+	 * @return boolean
+	 */
+	public function hasStatement( Statement $statement ) {
+		$this->unstubStatements();
+		return $this->statements->hasStatement( $statement );
+	}
+
+	/**
+	 * @see StatementListAccess::removeStatement
+	 *
+	 * @since 0.2
+	 *
+	 * @param Statement $statement
+	 */
+	public function removeStatement( Statement $statement ) {
+		$this->unstubStatements();
+		$this->statements->removeStatement( $statement );
+	}
+
+	/**
+	 * @see StatementAggregate::getStatements
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	public function getStatements() {
+		$this->unstubStatements();
+		return clone $this->statements;
+	}
+
+	/**
+	 * Unsturbs the statements from the JSON into the $statements field
+	 * if this field is not already set.
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	protected function unstubStatements() {
+		if ( $this->statements === null ) {
+			$this->statements = new StatementList();
+
+			foreach ( $this->data['statements'] as $statementSerialization ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$this->statements->addStatement( unserialize( $statementSerialization ) );
+			}
+		}
+	}
+
+	/**
+	 * Takes the statements element of the $data array of an item and writes the statements to it as stubs.
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $statements
+	 *
+	 * @return array
+	 */
+	protected function getStubbedStatements( array $statements ) {
+		if ( $this->statements !== null ) {
+			$statements = array();
+
+			foreach ( $this->statements as $statement ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$statements[] = serialize( $statement );
+			}
+		}
+
+		return $statements;
+	}
+
+	/**
+	 * @see Entity::stub
+	 *
+	 * @since 0.2
+	 */
+	public function stub() {
+		parent::stub();
+		$this->data['statements'] = $this->getStubbedStatements( $this->data['statements'] );
+	}
+
+	/**
+	 * @see Item::setStatements
+	 *
+	 * @since 0.2
+	 *
+	 * @param Statements $statements
+	 */
+	public function setStatements( Statements $statements ) {
+		$this->statements = $statements;
+	}
+
+	/**
+	 * @see Entity::toArray
+	 *
+	 * @since 0.2
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		$data = parent::toArray();
+
+		$data['statements'] = $this->getStubbedStatements( $data['statements'] );
+
+		return $data;
+	}
+
+	/**
+	 * @see ClaimAggregate::getClaims
+	 *
+	 * @since 0.2
+	 *
+	 * @return Claims
+	 */
+	public function getClaims() {
+		$claims = new ClaimList();
+
+		$this->unstubStatements();
+
+		/**
+		 * @var Statement $statement
+		 */
+		foreach ( $this->statements as $statement ) {
+			//if ( $statement->getRank() === Statement::RANK_NORMAL ) {
+			$claims->addClaim( $statement );
+			//}
+		}
+
+		return $claims;
 	}
 
 }

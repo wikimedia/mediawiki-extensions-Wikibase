@@ -86,7 +86,7 @@ abstract class SpecialItemResolver extends SpecialWikibasePage {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Wikibase\ItemContent $item
+	 * @param Wikibase\ItemContent $itemContent
 	 */
 	protected function displayItem( Wikibase\ItemContent $itemContent ) {
 		$view = new Wikibase\ItemView( $this->getContext() );

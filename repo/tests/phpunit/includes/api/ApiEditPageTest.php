@@ -2,10 +2,24 @@
 
 namespace Wikibase\Test;
 use ApiTestCase;
-use Wikibase\Settings as Settings;
 
 /**
  * Tests for blocking of direct editing.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -36,7 +50,7 @@ class ApiEditPageTest extends ApiModifyItemBase {
 	 * @group API
 	 */
 	function testEditItemDirectly() {
-		$content = \Wikibase\ItemContent::newEmpty();
+		$content = \Wikibase\ItemContent::newEmpty(); //@todo: do this with all kinds of entities.
 		$content->getItem()->setLabel( "en", "Test" );
 		$status = $content->save( "testing", null, EDIT_NEW );
 
@@ -74,8 +88,7 @@ class ApiEditPageTest extends ApiModifyItemBase {
 	function testEditTextInItemNamespace() {
 		global $wgContentHandlerUseDB;
 
-		$handler = \ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
-		$page = $handler->getWikiPageForId( 1234567 );
+		$page = \Wikibase\EntityContentFactory::singleton()->getWikiPageForId( \Wikibase\Item::ENTITY_TYPE, 1234567 );
 
 		$this->login();
 		$token = $this->getItemToken();

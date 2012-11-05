@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\Snak as Snak;
+use Wikibase\Snak;
 
 /**
  * Tests for the Wikibase\SnakObject class.

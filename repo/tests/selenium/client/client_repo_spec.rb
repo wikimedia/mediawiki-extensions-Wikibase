@@ -8,56 +8,51 @@
 
 require 'spec_helper'
 
-article_title = "Rome"
-article_text = "It's the capital of Italy!"
+article_title_a = "Rome"
+article_text_a = "It's the capital of Italy!"
+article_title_b = "Palermo"
+article_text_b = "It's a town on Sicily!"
 item_description = "It's the capital of Italy!"
 item_sitelink_en = [["en", "Rome"]]
 item_sitelinks = [["de", "Rom"], ["it", "Roma"], ["fi", "Rooma"], ["hu", "Róma"]]
 item_sitelinks_additional = [["fr", "Rome"]]
+item_id = 0
 
 describe "Check functionality of client-repo connection" do
   before :all do
-    # set up
-  end
-  context "client-repo test setup" do
-    it "should create a new article on client" do
-      visit_page(ClientPage) do |page|
-        page.create_article(article_title, article_text)
-        page.navigate_to_article(article_title)
-        page.clientArticleTitle.should == article_title
-        page.interwiki_xxx?.should be_false
-      end
+    # set up: create article & item & add connecting sitelink
+    visit_page(ClientPage) do |page|
+      page.create_article(article_title_a, article_text_a, true)
     end
-    it "should create a corresponding wikidata item on the repo" do
-      visit_page(CreateItemPage) do |page|
-        page.create_new_item(article_title, item_description)
-        page.itemLabelSpan.should == article_title
-        page.itemDescriptionSpan.should == item_description
-      end
-    end
-    it "should create an english sitelink for the item" do
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_sitelinks_to_load
-        page.add_sitelinks(item_sitelink_en)
-        page.get_number_of_sitelinks_from_counter.should == 1
-      end
+    visit_page(CreateItemPage) do |page|
+      item_id = page.create_new_item(article_title_a, item_description)
+      page.add_sitelinks(item_sitelink_en)
     end
   end
 
-  context "client-repo adding sitelinks" do
-    it "should add some sitelinks to the item" do
+  context "client-repo adding/removing sitelinks" do
+    it "should check article and that there are no interwikilinks yet" do
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title_a)
+        page.clientArticleTitle.should == article_title_a
+        page.interwiki_xxx?.should be_false
+      end
+    end
+    it "should login as user & add some sitelinks to the item" do
+      visit_page(RepoLoginPage) do |page|
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+      end
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.add_sitelinks(item_sitelinks)
         page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1
       end
     end
     it "should check if interwikilinks are shown correctly on client" do
       on_page(ClientPage) do |page|
-        page.navigate_to_article(article_title)
-        page.count_interwiki_links.should == 4
+        page.navigate_to_article(article_title_a)
+        page.count_interwiki_links.should == item_sitelinks.count
         page.interwiki_de?.should be_true
         page.interwiki_it?.should be_true
         page.interwiki_fi?.should be_true
@@ -69,32 +64,73 @@ describe "Check functionality of client-repo connection" do
       on_page(ClientPage) do |page|
         page.interwiki_de
         page.clientArticleTitle.should == item_sitelinks[0][1]
-        page.navigate_to_article(article_title)
+        page.navigate_to_article(article_title_a)
         page.interwiki_it
         page.clientArticleTitle.should == item_sitelinks[1][1]
-        page.navigate_to_article(article_title)
+        page.navigate_to_article(article_title_a)
         page.interwiki_fi
         page.clientArticleTitle.should == item_sitelinks[2][1]
-        page.navigate_to_article(article_title)
+        page.navigate_to_article(article_title_a)
         page.interwiki_hu
         page.clientArticleTitle.should == item_sitelinks[3][1]
+      end
+    end
+    it "should add page to watchlist & check propagation of changes to watchlist" do
+      visit_page(ClientLoginPage) do |page|
+        page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
+      end
+      on_page(ClientPage) do |page|
+        page.watch_article(article_title_a)
+      end
+      visit_page(WatchlistPage) do |page|
+        page.wlArticleLink1_element.text.should == article_title_a
+        page.wlArticleIDLink1_element.text.include?(item_id).should be_true
+      end
+    end
+    it "should check for propagation of changes to client recent changes" do
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultDiffLink?.should be_true
+        page.clientFirstResultUserLink_element.text.downcase.include?(WIKI_ADMIN_USERNAME.downcase).should be_true
+        page.clientFirstResultLabelLink_element.text.should == article_title_a
+        page.clientFirstResultIDLink_element.text.include?(item_id).should be_true
+      end
+    end
+    it "should check links in recent changes entries" do
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultUserLink
+      end
+      on_page(ItemPage) do |page|
+        page.mwFirstHeading.downcase.should == "user:" + WIKI_ADMIN_USERNAME.downcase
+      end
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultLabelLink
+      end
+      on_page(ClientPage) do |page|
+        page.clientArticleTitle.should == article_title_a
+      end
+      visit_page(ClientRecentChangesPage) do |page|
+        page.clientFirstResultIDLink
+      end
+      on_page(ItemPage) do |page|
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == article_title_a
+      end
+    end
+    it "should add additional sitelinks" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.add_sitelinks(item_sitelinks_additional)
+        page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1 + item_sitelinks_additional.count
       end
     end
   end
 
   context "client-repo adding some more sitelinks" do
-    it "should add some more sitelinks" do
-      on_page(ItemPage) do |page|
-        page.navigate_to_item
-        page.wait_for_sitelinks_to_load
-        page.add_sitelinks(item_sitelinks_additional)
-        page.get_number_of_sitelinks_from_counter.should == item_sitelinks.count + 1 + item_sitelinks_additional.count
-      end
-    end
     it "should check if additional interwikilinks are shown correctly on client" do
       on_page(ClientPage) do |page|
-        page.navigate_to_article(article_title)
-        page.count_interwiki_links.should == 5
+        page.navigate_to_article(article_title_a)
+        page.count_interwiki_links.should == item_sitelinks.count + item_sitelinks_additional.count
         page.interwiki_de?.should be_true
         page.interwiki_it?.should be_true
         page.interwiki_fi?.should be_true
@@ -105,13 +141,13 @@ describe "Check functionality of client-repo connection" do
     end
   end
 
-  context "client-repo changing connecting sitelink" do
-    it "should change the connecting sitelink" do
+  context "client-repo check behaviour on changing connecting sitelink" do
+    it "should change the connecting sitelink to a nonexisting article" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.englishEditSitelinkLink
-        page.pageInputField = "Palermo"
+        page.pageInputFieldExistingSiteLink = "Philippeville"
         ajax_wait
         page.wait_until do
           page.editSitelinkAutocompleteList_element.visible?
@@ -123,8 +159,43 @@ describe "Check functionality of client-repo connection" do
     end
     it "should check that no sitelinks are displayed anymore on client" do
       on_page(ClientPage) do |page|
-        page.navigate_to_article(article_title)
+        page.navigate_to_article(article_title_a)
         page.interwiki_xxx?.should be_false
+      end
+    end
+    it "should create a second article" do
+      visit_page(ClientPage) do |page|
+        page.create_article(article_title_b, article_text_b, true)
+        page.interwiki_xxx?.should be_false
+      end
+    end
+    it "should change the connecting sitelink to an existing article" do
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.englishEditSitelinkLink
+        page.pageInputFieldExistingSiteLink = article_title_b
+        ajax_wait
+        page.wait_until do
+          page.editSitelinkAutocompleteList_element.visible?
+        end
+        page.saveSitelinkLink
+        ajax_wait
+        page.wait_for_api_callback
+      end
+    end
+    it "should check that sitelinks are now displayed on article b instead of a" do
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title_a)
+        page.interwiki_xxx?.should be_false
+        page.navigate_to_article(article_title_b)
+        page.count_interwiki_links.should == item_sitelinks.count + item_sitelinks_additional.count
+        page.interwiki_de?.should be_true
+        page.interwiki_it?.should be_true
+        page.interwiki_fi?.should be_true
+        page.interwiki_hu?.should be_true
+        page.interwiki_fr?.should be_true
+        page.interwiki_en?.should be_false
       end
     end
   end
@@ -133,9 +204,9 @@ describe "Check functionality of client-repo connection" do
     it "should change the connecting sitelink back to origin" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.englishEditSitelinkLink
-        page.pageInputField = item_sitelink_en[0][1]
+        page.pageInputFieldExistingSiteLink = item_sitelink_en[0][1]
         ajax_wait
         page.wait_until do
           page.editSitelinkAutocompleteList_element.visible?
@@ -147,7 +218,40 @@ describe "Check functionality of client-repo connection" do
     end
     it "should check that sitelinks are displayed again on client" do
       on_page(ClientPage) do |page|
-        page.navigate_to_article(article_title)
+        page.navigate_to_article(article_title_a)
+        page.count_interwiki_links.should == 5
+        page.interwiki_de?.should be_true
+        page.interwiki_it?.should be_true
+        page.interwiki_fi?.should be_true
+        page.interwiki_hu?.should be_true
+        page.interwiki_fr?.should be_true
+        page.interwiki_en?.should be_false
+      end
+    end
+  end
+
+  context "client-repo deleting/restoring item" do
+    it "should delete item & check that no sitelinks are shown on client" do
+      visit_page(RepoLoginPage) do |page|
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+      end
+      on_page(DeleteItemPage) do |page|
+        page.delete_item
+      end
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title_a)
+        page.interwiki_xxx?.should be_false
+      end
+    end
+    it "should undelete item & check that sitelinks are shown again on client" do
+      visit_page(RepoLoginPage) do |page|
+        page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
+      end
+      on_page(UndeleteItemPage) do |page|
+        page.undelete_item(item_id)
+      end
+      on_page(ClientPage) do |page|
+        page.navigate_to_article(article_title_a)
         page.count_interwiki_links.should == 5
         page.interwiki_de?.should be_true
         page.interwiki_it?.should be_true
@@ -163,19 +267,31 @@ describe "Check functionality of client-repo connection" do
     it "should remove all sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
-        page.wait_for_sitelinks_to_load
+        page.wait_for_entity_to_load
         page.remove_all_sitelinks
       end
     end
 
-    it "should check that no sitelinks are displayed on client" do
+    it "should check that no sitelinks are displayed for article a & b" do
       on_page(ClientPage) do |page|
-        page.navigate_to_article(article_title)
+        page.navigate_to_article(article_title_a)
+        page.interwiki_xxx?.should be_false
+        page.navigate_to_article(article_title_b)
         page.interwiki_xxx?.should be_false
       end
     end
   end
+
   after :all do
-    # tear down
+    # tear down: unwatch article, logout on repo & client
+    visit_page(RepoLoginPage) do |page|
+      page.logout_user
+    end
+    visit_page(ClientPage) do |page|
+      page.unwatch_article(article_title_a)
+    end
+    visit_page(ClientLoginPage) do |page|
+      page.logout_user
+    end
   end
 end

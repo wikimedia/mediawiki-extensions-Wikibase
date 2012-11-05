@@ -1,9 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use Diff\MapDiff as MapDiff;
-use Diff\ListDiff as ListDiff;
-use Wikibase\ChangesTable as ChangesTable;
+use Diff\MapDiff;
+use Wikibase\ChangesTable;
 
 /**
  * Tests for the Wikibase\ChangesTable class.
@@ -35,6 +34,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 			array(
 				array(
 					'type' => 'item-update',
+					'time' => '20120101000000',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
@@ -48,6 +48,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 			array(
 				array(
 					'type' => 'item-update',
+					'time' => '20120101000000',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
@@ -82,20 +83,21 @@ class ChangesTableTest extends \MediaWikiTestCase {
 
 		$change = $changesTable->newRow( $data, $loadDefaults );
 
-		$this->assertTrue( $change->save() );
-
+		$this->assertTrue( $change->save(), "failed to save new change" );
 		$id = $change->getId();
 
-		$this->assertEquals( 1, $changesTable->count( array( 'id' => $id ) ) );
+		$this->assertTrue( $id !== null, 'After saving, the change\'s ID should no longer be null!' );
 
 		$obtainedChange = $changesTable->selectRow( null, array( 'id' => $id ) );
+		$this->assertTrue( $obtainedChange !== false, 'Change could not be loaded via ORMTable!' );
+
+		$this->assertEquals( 1, $changesTable->count( array( 'id' => $id ) ) );
 
 		foreach ( array( 'revision_id', 'object_id', 'user_id', 'type' ) as $field ) {
 			$this->assertEquals( $data[$field], $obtainedChange->getField( $field ) );
 		}
 
 		$this->assertTrue( $obtainedChange->remove() );
-
 		$this->assertEquals( 0, $changesTable->count( array( 'id' => $id ) ) );
 	}
 

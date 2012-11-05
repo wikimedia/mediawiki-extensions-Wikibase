@@ -1,9 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemObject as ItemObject;
-use \Wikibase\Item as Item;
-use \Wikibase\SiteLink as SiteLink;
+use \Wikibase\ItemObject;
+use \Wikibase\SiteLink;
 
 /**
  * Tests for the Wikibase\Item class.
@@ -39,7 +38,9 @@ use \Wikibase\SiteLink as SiteLink;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class ItemNewEmptyTest extends \MediaWikiTestCase {
-	
+
+	//@todo: make this a baseclass to use with all types of entitites.
+
 	/**
 	 * @var ItemObject
 	 */

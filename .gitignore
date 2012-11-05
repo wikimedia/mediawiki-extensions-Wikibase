@@ -5,3 +5,5 @@
 
 !.gitignore
 !.gitreview
+selenium/configuration.yml
+selenium/Gemfile.lock

@@ -9,6 +9,21 @@ require_once $basePath . '/maintenance/Maintenance.php';
 /**
  * Maintenance script for deleting all Wikibase data.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -42,29 +57,42 @@ class DeleteAllData extends \Maintenance {
 
 		wfRunHooks( 'WikibaseDeleteData', array( $report ) );
 
-		$dbw = wfGetDB( DB_MASTER );
+		$report( <<<EOT
+Some tasty bits there... omnomnom...
 
-		$tables = array(
-			'wb_changes',
+	                 ......                             ..          ,,
+                 ..=~..                             ZD.   ....:=,.
+                 ..:++=..     .,.     .:        .....M....,=+++...
+                 ...=+++~......:~.....~= ..   ...~==.7.:+++++=.. .
+                  . :+++++~.. .,+=...,++...  ..~++=..:++++++~...
+                    .+++++++~..:++=..~++,.. .:++++~===+++++=.
+                    .~++++++++~:++++:=++=..~++++++++:=++++:..
+           ....     ..++++++++++++=+M7IM~+++++=+=+++8++++:.
+           .=:...... .,++++++++++:M:::::~D~~:M...I++M+++:.
+          ...,=+=,... .=++++++++++++?N ......M. .?++I++=..
+            ...:+++=,...+++++++++O.M..  .O= ,. +..++~+=.
+        .MD. ....+++++==~+++++++:...M,M,NMMMMM, ...~=+,..           ....
+     .=.$:::~.....+++++++++++++++M.7M.MMMMMMMMM.   Z+~.......      ..,==..
+     .M::::::M... .~+++++++++++++++.7MMMMMMMMMM.   M+,,~==+,.....~=++=.
+     .M:::::::?..:=+++++++++++++++=, .:MMMMMMMM  ..8+++++:...,==+++=...
+       M~::::::M...=+++++++++++++++=,...MMMMMMN ..?7=+++,.~+++++=:...
+       .M:::~~~8....,++++++++++++++=M   MMMMMMM...77N+++++++++=,..
+       ...:+=NOM. ....~+++++++++==I++Z  .?MMMN  .Z7I7=++++++=,..
+            ..?OZ~++++++++++++~N==++++?,.......=O77I7O+++++~......
+        ......,~OO?+++++++++I++++++++++DIZ8DDZ7777777O++++,..........
+       ..~++++=::8ON=++++=N=+++++++++++=77777777777777~+++++++++++++++=:..
+          ,+++++++DZ8=+8=+++++++++++++++D7I77777777777N+++++++++++++++++:.
+          .~+++++++:8O?++++++++++++++++++II777777777777=++++++++++=:......
+          ..=+++++++=DON=++++++++++++++++D77777777777I7=++++++~,..
+          ...=++++++++8O8=+++++++++++++++OI777777777777=++=:......
+            ..:++++++++~OO??++++++++++++~?I777777777777=++=,.
+......... .....,++++++++~8ZN++++++++++++~77777777777777=++++:...................
+
+                                  DELETED
+                             ALL OF THE DATAS!
+
+EOT
 		);
-
-		// TODO: put in client
-		if ( defined( 'WBC_VERSION' ) ) {
-			$tables = array_merge( $tables, array(
-				'wbc_item_usage',
-				'wbc_query_usage',
-				'wbc_entity_cache',
-				'wbc_items_per_site',
-			) );
-		}
-
-		foreach ( $tables as $table ) {
-			echo "Emptying table $table...";
-
-			$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
-
-			echo "done!\n";
-		}
 	}
 
 }

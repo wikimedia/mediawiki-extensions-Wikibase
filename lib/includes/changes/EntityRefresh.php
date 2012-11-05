@@ -28,7 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityRefresh extends ChangeRow {
+class EntityRefresh extends DiffChange {
 
 	/**
 	 * @since 0.1
@@ -79,14 +79,14 @@ class EntityRefresh extends ChangeRow {
 	}
 
 	/**
-	 * @see Change::getType
+	 * @see Change::getChangeType
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @return string
 	 */
-	public function getType() {
-		return 'wikibase-' . $this->getEntity()->getType() . '-refresh';
+	public function getChangeType() {
+		return 'refresh';
 	}
 
 	/**

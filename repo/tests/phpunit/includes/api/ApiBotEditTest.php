@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use ApiTestCase, TestUser;
-use Wikibase\Settings as Settings;
+use Wikibase\Settings;
 
 /**
  * Tests for the ApiWikibase class.
@@ -13,6 +13,21 @@ use Wikibase\Settings as Settings;
  * BE WARNED: the tests depend on execution order of the methods and the methods are interdependent,
  * so stuff will fail if you move methods around or make changes to them without matching changes in
  * all methods depending on them.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -37,7 +52,7 @@ use Wikibase\Settings as Settings;
  * that hold the first tests in a pending state awaiting access to the database.
  * @group medium
  */
-class ApiBotEditTest extends \ApiTestCase {
+class ApiBotEditTest extends ApiModifyItemBase {
 
 	protected static $baseOfItemIds = 1;
 	protected static $usepost;
@@ -67,26 +82,7 @@ class ApiBotEditTest extends \ApiTestCase {
 		);
 		$wgUser = self::$users['wbbot']->user;
 
-		\ApiQueryInfo::resetTokenCache();
-
-		// now we have to do the login with the previous user
-		$data = $this->doApiRequest( array(
-			'action' => 'login',
-			'lgname' => self::$users['wbbot']->username,
-			'lgpassword' => self::$users['wbbot']->password
-		) );
-
-		$token = $data[0]['login']['token'];
-
-		$this->doApiRequest(
-			array(
-				'action' => 'login',
-				'lgtoken' => $token,
-				'lgname' => self::$users['wbbot']->username,
-				'lgpassword' => self::$users['wbbot']->password
-			),
-			$data
-		);
+		$this->login( 'wbbot' );
 	}
 
 	/**
@@ -112,52 +108,24 @@ class ApiBotEditTest extends \ApiTestCase {
 	 * @depends testTokensAndRights
 	 */
 	function testSetItemTop() {
-		$req = array();
-		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
-			$first = $this->doApiRequest(
-				array(
-					'action' => 'query',
-					'prop' => 'info',
-					'titles' => 'Main Page', // any page goes
-					'intoken' => 'edit' ),
-				null,
-				false,
-				self::$users['wbbot']->user
-			);
+		$token = $this->getItemToken();
 
-			$pages = $first[0]["query"]["pages"];
-			foreach ( $pages as $id => $page ) {
-				if ( isset( $page['edittoken'] ) ) {
-					$req['token'] = $page["edittoken"];
-					break;
-				}
-			}
-			$this->assertEquals(
-				34, strlen( $req['token'] ),
-				"The length of the token is not 34 chars"
-			);
-			$this->assertRegExp(
-				'/\+\\\\$/', $req['token'],
-				"The final chars of the token is not '+\\'"
-			);
-		}
-		$req = array_merge(
-			$req,
-			array(
-				'action' => 'wbsetitem',
-				'summary' => 'Some reason',
-				'data' => '{}',
-			)
+		$req = array(
+			'action' => 'wbeditentity',
+			'summary' => 'Some reason',
+			'data' => '{}',
+			'token' => $token,
 		);
 
 		$second = $this->doApiRequest( $req, null, false, self::$users['wbbot']->user );
+
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
-		$this->assertArrayHasKey( 'item', $second[0],
-			"Must have an 'item' key in the second result from the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['item'],
-			"Must have an 'id' key in the 'item' from the second result from the API" );
-		self::$baseOfItemIds = $second[0]['item']['id'];
+		$this->assertArrayHasKey( 'entity', $second[0],
+			"Must have an 'entity' key in the second result from the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['entity'],
+			"Must have an 'id' key in the 'entity' from the second result from the API" );
+		self::$baseOfItemIds = preg_replace( '/^[^\d]+/', '', $second[0]['entity']['id'] );
 	}
 	/**
 	 * @group API
@@ -165,45 +133,16 @@ class ApiBotEditTest extends \ApiTestCase {
 	 * @dataProvider providerCreateItem
 	 */
 	function testCreateItem( $id, $bot, $new, $data ) {
-		$myid = self::$baseOfItemIds + $id;
-		$req = array();
-		if ( Settings::get( 'apiInDebug' ) ? Settings::get( 'apiDebugWithTokens', false ) : true ) {
-			$first = $this->doApiRequest(
-				array(
-					'action' => 'query',
-					'prop' => 'info',
-					'titles' => 'Main Page', // any page goes
-					'intoken' => 'edit' ),
-				null,
-				false,
-				self::$users['wbbot']->user
-			);
+		$myid = \Wikibase\ItemObject::getIdPrefix() . ( self::$baseOfItemIds + $id );
+		$token = $this->getItemToken();
 
-			$pages = $first[0]["query"]["pages"];
-			foreach ( $pages as $id => $page ) {
-				if ( isset( $page['edittoken'] ) ) {
-					$req['token'] = $page["edittoken"];
-					break;
-				}
-			}
-			$this->assertEquals(
-				34, strlen( $req['token'] ),
-				"The length of the token is not 34 chars"
-			);
-			$this->assertRegExp(
-				'/\+\\\\$/', $req['token'],
-				"The final chars of the token is not '+\\'"
-			);
-		}
-
-		$req = array_merge(
-			$req,
-			array(
-				'action' => 'wbsetitem',
-				'summary' => 'Some reason',
-				'data' => $data,
-			)
+		$req = array(
+			'action' => 'wbeditentity',
+			'summary' => 'Some reason',
+			'data' => $data,
+			'token' => $token,
 		);
+
 		if ( !$new ) {
 			$req['id'] = $myid;
 		}
@@ -215,11 +154,11 @@ class ApiBotEditTest extends \ApiTestCase {
 
 		$this->assertArrayHasKey( 'success', $second[0],
 			"Must have an 'success' key in the second result from the API" );
-		$this->assertArrayHasKey( 'item', $second[0],
-			"Must have an 'item' key in the second result from the API" );
-		$this->assertArrayHasKey( 'id', $second[0]['item'],
-			"Must have an 'id' key in the 'item' from the second result from the API" );
-		$this->assertEquals( $myid, $second[0]['item']['id'],
+		$this->assertArrayHasKey( 'entity', $second[0],
+			"Must have an 'entity' key in the second result from the API" );
+		$this->assertArrayHasKey( 'id', $second[0]['entity'],
+			"Must have an 'id' key in the 'entity' from the second result from the API" );
+		$this->assertEquals( $myid, $second[0]['entity']['id'],
 			"Must have the value '{$myid}' for the 'id' in the result from the API" );
 
 		$req = array(

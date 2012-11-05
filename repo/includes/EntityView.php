@@ -1,11 +1,26 @@
 <?php
 
 namespace Wikibase;
-use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, Site, MediaWikiSite;
+use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPage, Sites, MediaWikiSite;
 
 /**
  * Base class for creating views for all different kinds of Wikibase\Entity.
  * For the Wikibase\Entity this basically is what the Parser is for WikitextContent.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.1
  *
@@ -17,13 +32,25 @@ use Html, ParserOptions, ParserOutput, Title, Language, IContextSource, OutputPa
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
- * @author H. Snater
+ * @author H. Snater < mediawiki at snater.com >
  * @author Daniel Werner
- * @author Daniel Kinzler
  */
 abstract class EntityView extends \ContextSource {
 
 	const VIEW_TYPE = 'entity';
+
+	/**
+	 * Maps entity types to the corresponding entity view.
+	 *
+	 * @since 0.2
+	 *
+	 * @var array
+	 */
+	public static $typeMap = array(
+		Item::ENTITY_TYPE => '\Wikibase\ItemView',
+		Property::ENTITY_TYPE => '\Wikibase\PropertyView',
+		Query::ENTITY_TYPE => '\Wikibase\QueryView'
+	);
 
 	/**
 	 * Constructor.
@@ -48,39 +75,51 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param EntityContent $entity the entity to render
-	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
 	public function getHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
-		$info = $this->extractEntityInfo( $entity );
+		$info = $this->extractEntityInfo( $entity, $lang );
 		$entityType = static::VIEW_TYPE;
-		$entityId = $entity->getEntity()->getId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
+		$entityId = $entity->getEntity()->getPrefixedId() ?: 'new'; // if id is not set, use 'new' suffix for css classes
 		$html = '';
 
-		$html .= Html::openElement(
-			'div',
-			array(
-				'id' => "wb-$entityType-$entityId",
-				'class' => "wb-entity wb-$entityType",
-				'lang' => $info['lang']->getCode(),
-				'dir' => $info['lang']->getDir()
-			)
+		$html .= wfTemplate( 'wb-entity',
+			$entityType,
+			$entityId,
+			$info['lang']->getCode(),
+			$info['lang']->getDir(),
+			$this->getInnerHtml( $entity, $lang, $editable )
 		);
 
-		$html .= $this->getInnerHtml( $entity, $lang, $editable );
+		// show loading spinner as long as JavaScript is initialising;
+		// the fastest way to show the loading spinner is placing the script right after the
+		// corresponsing html
+		$html .= Html::inlineScript( '
+			$( ".wb-entity" ).fadeTo( 0, .3 ).after( function() {
+				var $div = $( "<div/>" ).addClass( "wb-entity-spinner mw-small-spinner" );
+				$div.css( "top", $div.height() + "px" );
+				$div.css(
+					( "' . $info['lang']->getDir() . '" === "rtl" ) ? "right" : "left",
+					( parseInt( $( this ).width() / 2 ) - $div.width() / 2 ) + "px"
+				);
+				return $div;
+			} );
 
-		// container reserved for widgets, will be displayed on the right side if there is space
-		// TODO: no point in inserting this here, is there? Should be generated in JS!
-		$html .= Html::element( 'div',
-			array(
-				'id' => "wb-widget-container-$entityId",
-				'class' => 'wb-widget-container'
-			)
-		);
+			// Remove loading spinner after a couple of seconds in any case. (e.g. some resource
+			// might not have been loaded silently, so JavaScript is not initialising)
+			// Additionally attaching to window.error would only make sense before any other
+			// JavaScript is parsed. Since the JavaScript is loaded in the header, it does not make
+			// any sense to attach to window.error here.
+			window.setTimeout( function() {
+				$( ".wb-entity" ).fadeTo( 0, 1 );
+				$( ".wb-entity-spinner" ).remove();
+			}, 7000 );
+		' );
 
-		return $html . Html::closeElement( 'div' );
+		return $html;
 	}
 
 	/**
@@ -92,22 +131,14 @@ abstract class EntityView extends \ContextSource {
 	 * @param EntityContent $entity
 	 * @param \Language $lang
 	 * @param bool $editable
-	 * @return array
+	 * @return string
 	 */
 	public function getInnerHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$html = '';
-
-		//label:
-		$html .= $this->getHtmlForLabel( $entity, $lang, $editable );
-
-		// description:
-		// even if description is empty, nodes have to be inserted as placeholders for an input box
-		$html .= $this->getHtmlForDescription( $entity, $lang, $editable );
-
-		// aliases:
-		$html .= $this->getHtmlForAliases( $entity, $lang, $editable );
-
-		return $html;
+		return wfTemplate( 'wb-entity-content',
+			$this->getHtmlForLabel( $entity, $lang, $editable ),
+			$this->getHtmlForDescription( $entity, $lang, $editable ),
+			$this->getHtmlForAliases( $entity, $lang, $editable )
+		);
 	}
 
 	protected function makeParserOptions( ) {
@@ -122,7 +153,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param EntityContent       $entity the entity to analyze/render
-	 * @param null|ParserOptions  $options parser options. If nto provided, the local context will be used to create generic parser options.
+	 * @param null|\ParserOptions  $options parser options. If nto provided, the local context will be used to create generic parser options.
 	 * @param bool                $generateHtml whether to generate HTML. Set to false if only interested in meta-info. default: true.
 	 *
 	 * @return ParserOutput
@@ -149,14 +180,14 @@ abstract class EntityView extends \ContextSource {
 			$pout->setText( $html );
 		}
 
-		#@todo (phase 2) would be nice to put pagelinks (entity references) and categorylinks (from special properties)...
-		#@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
+		//@todo (phase 2) would be nice to put pagelinks (entity references) and categorylinks (from special properties)...
+		//@todo:          ...as well as languagelinks/sisterlinks into the ParserOutput.
 
 		// make css available for JavaScript-less browsers
 		$pout->addModuleStyles( array( 'wikibase.common' ) );
 
 		// make sure required client sided resources will be loaded:
-		$pout->addModules( 'wikibase.ui.PropertyEditTool' );
+		$pout->addModules( 'wikibase.ui.entityViewInit' );
 
 		//FIXME: some places, like Special:CreateItem, don't want to override the page title.
 		//       But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
@@ -173,24 +204,22 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param EntityContent $entity the entity to render
-	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
 	public function getHtmlForLabel( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$info = $this->extractEntityInfo( $entity );
-		$html = Html::openElement( 'h1',
-			array(
-				'id' => 'wb-firstHeading-' . $info['id'],
-				'class' => 'wb-firstHeading wb-value-row'
+		$info = $this->extractEntityInfo( $entity, $lang );
+		$label = $entity->getEntity()->getLabel( $info['lang']->getCode() );
+
+		return wfTemplate( 'wb-label',
+			$info['id'],
+			wfTemplate( 'wb-property',
+				empty( $label ) ? 'wb-value-empty' : '',
+				empty( $label ) ? wfMessage( 'wikibase-label-empty' )->text() : $label,
+				$this->getHtmlForEditSection( $entity, $lang )
 			)
 		);
-		$html .= Html::element(
-			'span',
-			array( 'dir' => 'auto' ),
-			$entity->getEntity()->getLabel( $info['lang']->getCode() )
-		);
-		return $html . Html::closeElement( 'h1' );
 	}
 
 	/**
@@ -199,26 +228,21 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param EntityContent $entity the entity to render
-	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
 	public function getHtmlForDescription( EntityContent $entity, Language $lang = null, $editable = true ) {
-		$info = $this->extractEntityInfo( $entity );
+		$info = $this->extractEntityInfo( $entity, $lang );
 		$description = $entity->getEntity()->getDescription( $info['lang']->getCode() );
 
-		$html = Html::openElement( 'div',
-			array(
-				'dir' => 'auto',
-				'class' => 'wb-property-container wb-value-row'
+		return wfTemplate( 'wb-description',
+			wfTemplate( 'wb-property',
+				empty( $description ) ? 'wb-value-empty' : '',
+				empty( $description ) ? wfMessage( 'wikibase-description-empty' )->text() : $description,
+				$this->getHtmlForEditSection( $entity, $lang )
 			)
 		);
-		$html .= Html::element( 'div', array( 'class' => 'wb-property-container-key', 'title' => 'description' ) );
-		$html .= Html::element( 'span', array( 'class' => 'wb-property-container-value'), $description );
-		$html .= Html::closeElement( 'div' );
-
-		$html .= Html::element( 'hr', array( 'class' => 'wb-hr' ) );
-		return $html;
 	}
 
 	/**
@@ -227,37 +251,71 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param EntityContent $entity the entity to render
-	 * @param Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
 	 * @param bool $editable whether editing is allowed (enabled edit links)
 	 * @return string
 	 */
 	public function getHtmlForAliases( EntityContent $entity, Language $lang = null, $editable = true ) {
-		/*
-		 * add an h1 for displaying the entity's label; the actual firstHeading is being hidden by css since the
-		 * original MediaWiki DOM does not represent a Wikidata entity's structure where the combination of label and
-		 * description is the unique "title" of an entity which should not be semantically disconnected by having
-		 * elements in between, like siteSub, contentSub and jump-to-nav
-		 */
-		$info = $this->extractEntityInfo( $entity );
+		$info = $this->extractEntityInfo( $entity, $lang );
 		$aliases = $entity->getEntity()->getAliases( $info['lang']->getCode() );
-		$html = '';
 
-		if( empty( $aliases ) ) {
-			// no aliases available for this entity
-			$html .= Html::element( 'div', array( 'class' => 'wb-aliases-empty' ), wfMessage( 'wikibase-aliases-empty' ) );
+		if ( empty( $aliases ) ) {
+			return wfTemplate( 'wb-aliases-wrapper',
+				'wb-aliases-empty',
+				'wb-value-empty',
+				wfMessage( 'wikibase-aliases-empty' )->text(),
+				$this->getHtmlForEditSection( $entity, $lang, 'span', 'add' )
+			);
 		} else {
-			$html .= Html::openElement( 'div', array( 'class' => 'wb-aliases' ) );
-			$html .= Html::element( 'span', array( 'class' => 'wb-aliases-label' ), wfMessage( 'wikibase-aliases-label' )->text() );
-			$html .= Html::openElement( 'ul', array( 'class' => 'wb-aliases-container' ) );
+			$aliasesHtml = '';
 			foreach( $aliases as $alias ) {
-				$html .= Html::element(
-					'li', array( 'class' => 'wb-aliases-alias' ), $alias
-				);
+				$aliasesHtml .= wfTemplate( 'wb-alias', $alias );
 			}
-			$html .= Html::closeElement( 'ul' );
-			$html .= Html::closeElement( 'div' );
+			$aliasList = wfTemplate( 'wb-aliases', $aliasesHtml );
+
+			return wfTemplate( 'wb-aliases-wrapper',
+				'',
+				'',
+				wfMessage( 'wikibase-aliases-label' )->text(),
+				$aliasList . $this->getHtmlForEditSection( $entity, $lang )
+			);
 		}
-		return $html;
+	}
+
+	/**
+	 * Returns a toolbar with an edit link for a single statement. Equivalent to edit toolbar in JavaScript but with
+	 * an edit link pointing to a special page where the statement can be edited. In case JavaScript is available, this
+	 * toolbar will be removed an replaced with the interactive JavaScript one.
+	 *
+	 * @since 0.2
+	 *
+	 * @param EntityContent $entity
+	 * @param \Language|null $lang
+	 * @param string $tag allows to specify the type of the outer node
+	 * @param string $action by default 'edit', for aliases this could also be 'add'
+	 * @param bool $enabled can be set to false to display the button disabled
+	 * @return string
+	 */
+	public function getHtmlForEditSection(
+		EntityContent $entity, Language $lang = null, $tag = 'span', $action = 'edit', $enabled = true
+	) {
+		$buttonLabel = wfMessage( $action === 'add' ? 'wikibase-add' : 'wikibase-edit' )->text();
+
+		$button = ( $enabled ) ?
+			wfTemplate( 'wb-toolbar-button',
+				$buttonLabel,
+				'' // todo: add link to special page for non-JS editing
+			) :
+			wfTemplate( 'wb-toolbar-button-disabled',
+				$buttonLabel
+			);
+
+		return wfTemplate( 'wb-editsection',
+			$tag,
+			wfTemplate( 'wb-toolbar',
+				wfTemplate( 'wb-toolbar-group', $button )
+			)
+		);
 	}
 
 	/**
@@ -266,7 +324,7 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param EntityContent $entity
-	 * @param Language|null $lang
+	 * @param \Language|null $lang
 	 * @return array
 	 */
 	protected function extractEntityInfo( EntityContent $entity, Language $lang = null ) {
@@ -275,7 +333,7 @@ abstract class EntityView extends \ContextSource {
 		}
 		return array(
 			'lang' => $lang,
-			'id' => $entity->getEntity()->getId()
+			'id' => $entity->getEntity()->getPrefixedId()
 		);
 	}
 
@@ -284,12 +342,12 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityContent      $entity the entity to output
-	 * @param null|OutputPage    $out the output page to write to. If not given, the local context will be used.
-	 * @param null|ParserOptions $options parser options to use for rendering. If not given, the local context will be used.
-	 * @param null|ParserOutput  $pout optional parser object - provide this if you already have a parser options for
-	 *                           this entity, to avoid redundant rendering.
-	 * @return ParserOutput the parser output, for further processing.
+	 * @param EntityContent       $entity the entity to output
+	 * @param null|\OutputPage    $out the output page to write to. If not given, the local context will be used.
+	 * @param null|\ParserOptions $options parser options to use for rendering. If not given, the local context will be used.
+	 * @param null|\ParserOutput  $pout optional parser object - provide this if you already have a parser options for
+	 *                            this entity, to avoid redundant rendering.
+	 * @return \ParserOutput the parser output, for further processing.
 	 *
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
@@ -323,7 +381,7 @@ abstract class EntityView extends \ContextSource {
 
 		// register JS stuff
 		$editableView = $options->getEditSection(); //XXX: apparently, EditSections isn't included in the parser cache key?!
-		self::registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
+		static::registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
 
 		$out->addParserOutput( $pout );
 		return $pout;
@@ -335,11 +393,11 @@ abstract class EntityView extends \ContextSource {
 	 *
 	 * @since 0.1
 	 *
-	 * @param OutputPage    $out the OutputPage to add to
-	 * @param EntityContent $entity the entity for which we want to add the JS config
-	 * @param string        $langCode the language used for showing the entity.
-	 * @param bool          $editableView whether entities on this page should be editable.
-	 *                      This is independent of user permissions.
+	 * @param \OutputPage    $out the OutputPage to add to
+	 * @param EntityContent  $entity the entity for which we want to add the JS config
+	 * @param string         $langCode the language used for showing the entity.
+	 * @param bool           $editableView whether entities on this page should be editable.
+	 *                       This is independent of user permissions.
 	 *
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
@@ -354,7 +412,29 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
 		// hand over the entity's ID to JS
-		$out->addJsConfigVars( 'wb' . ucfirst( static::VIEW_TYPE ) . 'Id', $entity->getEntity()->getId() );
+		$out->addJsConfigVars( 'wbEntityId', $entity->getEntity()->getPrefixedId() );
+		$out->addJsConfigVars( 'wbEntityType', static::VIEW_TYPE ); //TODO: use $entity->getEntity()->getType after prefixes got removed there
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
+	}
+
+
+	/**
+	 * Returns a new view which is suited to render different variations of EntityContent.
+	 *
+	 * @param EntityContent $entity
+	 * @return mixed
+	 * @throws \MWException
+	 *
+	 * @since 0.2
+	 */
+	public static function newForEntityContent( EntityContent $entity ) {
+		$type = $entity->getEntity()->getType();
+
+		if ( !in_array( $type, array_keys( self::$typeMap ) ) ) {
+			throw new \MWException( "No entity view known for handling entities of type '$type'" );
+		}
+
+		$instance = new self::$typeMap[ $type ]();
+		return $instance;
 	}
 }

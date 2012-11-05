@@ -1,0 +1,304 @@
+/**
+ * Style for 'Wikibase' property edit tools
+ *
+ * @since 0.1
+ * @file
+ * @ingroup Wikibase
+ *
+ * @license GNU GPL v2+
+ * @author H. Snater
+ */
+
+
+/********** BASIC LAYOUT **********/
+
+.wb-ui-propertyedittool-toolbar {
+	width: 13em;
+	float: right;
+}
+
+/* set AJAX spinner to left of the autocomplete input box in rtl */
+.mw-content-rtl .ui-autocomplete-loading {
+	background-position: left center;
+}
+
+/* counter displaying number of a PropertyEditTool's EditableValues in th UI */
+.wb-ui-propertyedittool-counter {
+	white-space: nowrap;
+}
+.wb-ui-propertyedittool-counter-pending {
+	margin-left: .25em;
+	color: #57a7b9;
+	font-weight: bold;
+}
+
+/* wait message displayed while saving or removing and editable value */
+.wb-ui-propertyedittool-editablevalue-waitmsg {
+	margin: 0.3em;
+	font-style: italic;
+}
+
+.wb-ui-propertyedittool-editablevalue-ineditmode {
+	white-space: nowrap;
+}
+
+/* disabled input element */
+.wb-ui-propertyedittool-editablevalueinterface-disabled input {
+	background-color: #F0F0F0;
+}
+
+/***** HIGHLIGHT COLOURS *****/
+
+/* propertyedittool within table is a multi-value edit tool (site-links)
+ * We might want to add a .wb-ui-multivaluepropertyedittool class later */
+.wb-ui-propertyedittool-ineditmode,
+table.wb-ui-propertyedittool-ineditmode .wb-ui-propertyedittool-editablevalue-ineditmode td {
+	background-color: #D6F3FF;
+}
+table.wb-ui-propertyedittool-ineditmode {
+	background-color: inherit !important;
+}
+/* while tooltip is shown on editable value */
+.wb-ui-propertyedittool-ineditmode.wb-error {
+	background-color: #FFDFC9;
+}
+/* while tooltip is shown on (multi-valued) editable value */
+.wb-ui-propertyedittool-editablevalue-ineditmode.wb-error td {
+	background-color: #FFDFC9 !important;
+}
+
+/***** /HIGHLIGHT COLOURS *****/
+
+/********** /BASIC LAYOUT **********/
+
+
+/********** LABEL & DESCRIPTION **********/
+
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-toolbar,
+.wb-ui-labeledittool .wb-ui-propertyedittool-toolbar {
+	display: none;
+}
+
+/***** LABEL *****/
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
+	padding: 0 0 0 2px; /* even out border of input box in edit mode */
+}
+@-moz-document url-prefix() { /* Firefox */
+	.wb-firstHeading .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
+		padding: 0 0 0 1px;
+	}
+}
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode {
+	margin: .3em .3em .13em 0; /* h1 natively has 0.17em bottom padding to avoid clipping */
+	padding-left: 6px;
+}
+
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-ui-propertyedittool-editablevalue-toolbarparent {
+	top: .3em;
+}
+
+.wb-ui-labeledittool input {
+	width: 100%;
+	font-family: inherit;
+	font-size: inherit;
+	height: 1.2em;
+}
+
+/* The wait message displayed when saving the label has to be customized due to differging font
+sizes and line heights within the heading */
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-waitmsg {
+	display: inline-block;
+	font-size: 188%;
+	line-height: 1.2;
+	padding-top: 1px;
+	margin: 0;
+}
+.wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-waitmsg span {
+	font-size: 53%;
+}
+
+/***** /LABEL *****/
+
+/***** DESCRIPTION *****/
+
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
+	padding-left: 7px;
+}
+@-moz-document url-prefix() { /* Firefox */
+	.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
+		padding-left: 6px;
+	}
+}
+
+.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
+	padding: 0;
+}
+
+.wb-ui-descriptionedittool input {
+	width: 100%;
+	padding: 0 0 0 2px;
+	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
+}
+
+/***** /DESCRIPTION *****/
+
+/********** /LABEL & DESCRIPTION **********/
+
+
+/********** ALIASES **********/
+
+.wb-alias li.tagadata-choice {
+	line-height: inherit;
+	padding: 0;
+}
+
+.wb-aliases .tagadata-choice input {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	font-size: 133% !important;
+}
+
+.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode {
+	white-space: normal; /* required by FF for not(!) wrapping toolbar when there is only one line of aliases */
+}
+
+.wb-aliases .wb-ui-propertyedittool-editablevalue-ineditmode ul {
+	/* since the aliases ul list is cloned in JS, its stashed pendant will be visible as box on the
+	edit mode highlight colour in non-Webkit browsers without making the bg colour transparent */
+	background: transparent;
+}
+
+/********** /ALIASES **********/
+
+
+/********** SITE LINKS **********/
+
+.wb-sitelinks-heading .wb-ui-propertyedittool-counter {
+	font-size: 67%; /* reset to standard font size */
+	margin-left: 0.6em;
+	line-height: 100%; /* prevent white space below heading */
+}
+
+table.wb-sitelinks input {
+	margin: 0;
+	font-size: 1em; /* prevent font size rounding errors */
+	width: 100%;
+}
+
+table.wb-sitelinks .wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-sitename {
+	white-space: normal;
+}
+
+table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
+	padding-left: 7px; /* above value minus input border and padding */
+}
+@-moz-document url-prefix() { /* Firefox */
+	table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode .wb-sitelinks-link {
+		padding-left: 6px;
+	}
+}
+
+table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td {
+	background-color: #D6F3FF; /* hihglight color when editing */
+}
+table.wb-sitelinks tr.wb-ui-propertyedittool-editablevalue-ineditmode td.wb-sitelinks-siteid {
+	background-color: #D0EBF7;
+}
+
+table.wb-sitelinks .wb-ui-toolbar {
+	float: none; /* prevent white space jittering for PropertyEditTool toolbar */
+}
+
+/********** /SITE LINKS **********/
+
+
+/********** TOOLTIP **********/
+
+/* TODO find nicer way to hack Webkit browsers to display tooltip image */
+.mw-help-field-hint {
+	height:11px;
+	width:11px;
+}
+
+.tipsy-ne, .tipsy-nw {
+	padding-top:12px;
+}
+	.tipsy-arrow {
+		/* @embed */ background-image:url(images/tipsy.png);
+	}
+	.tipsy-ne .tipsy-arrow, .tipsy-nw .tipsy-arrow {
+		background-position:-13px -1px;
+	}
+	.tipsy-se .tipsy-arrow, .tipsy-sw .tipsy-arrow {
+		 background-position:-14px -26px;
+	}
+
+	.tipsy-inner {
+		overflow-y:auto;
+	}
+
+	/***** ERROR TOOLTIP *****/
+
+	.wb-error .tipsy-arrow {
+		/* @embed */ background-image:url(images/tipsy-error.png)
+	}
+
+	.wb-error .tipsy-inner {
+		background-color: #FFDFC9;
+		/* on some host-client combinations the background image is propagated to the inner tooltip
+		container creating a background pattern; this broken behaviour is surpressed by explicitly
+		setting the background image to none; this, however, has to be done in a separate definition
+		after setting the background colour */
+		background-image: none;
+		border-color:#B27631;
+	}
+
+		.wb-tooltip-error-top-message {
+			float:left;
+			border-bottom:1px dotted #B27631;
+			padding-bottom:1em;
+		}
+		.wb-tooltip-error-details-link {
+			float:left;
+			clear:both;
+			margin-top:.5em;
+			white-space:nowrap;
+		}
+			.wb-tooltip-error-details-link .ui-icon {
+				display:block;
+				float:left;
+			}
+		.wb-tooltip-error-details {
+			display:none;
+			/* These error messages are always displayed in English. */
+			/* @noflip */ float:left;
+			/* @noflip */ text-align:left;
+			clear:both;
+			margin-top:.2em;
+			margin-bottom:.6em;
+			font-family:'Courier New', Courier, 'Andale Mono', serif;
+			background-color:#FFF2E4;
+			padding:.2em;
+			border-radius:5px;
+			font-size: .9em;
+		}
+
+	/***** /ERROR TOOLTIP *****/
+
+.ui-state-highlight {
+	background: transparent !important;
+	border:none;
+}
+
+/********** /TOOLTIP **********/
+
+
+/********** TAGADATA **********/
+
+ul.tagadata {
+	padding: 0;
+}
+
+/********** /TAGADATA **********/

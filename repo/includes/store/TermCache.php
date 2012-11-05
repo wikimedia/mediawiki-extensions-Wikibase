@@ -31,28 +31,19 @@ namespace Wikibase;
 interface TermCache {
 
 	/**
-	 * Term type enum.
-	 *
-	 * @since 0.1
-	 */
-	const TERM_TYPE_LABEL = 'label';
-	const TERM_TYPE_ALIAS = 'alias';
-	const TERM_TYPE_DESCRIPTION = 'description';
-
-	/**
-	 * Returns the ids for the items with the provided label in the specified language.
-	 *
-	 * TODO: generalize to entity
+	 * Returns the type, id tuples for the entities with the provided label in the specified language.
 	 *
 	 * @since 0.1
 	 *
 	 * @param string $label
 	 * @param string|null $languageCode
 	 * @param string|null $description
+	 * @param string|null $entityType
+	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
-	 * @return array of integer
+	 * @return array of array( entity type, entity id )
 	 */
-	public function getItemIdsForLabel( $label, $languageCode = null, $description = null );
+	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false );
 
 	/**
 	 * Saves the terms of the provided entity in the term cache.
@@ -93,43 +84,55 @@ interface TermCache {
 	/**
 	 * Returns the terms that match the provided conditions.
 	 *
-	 * $terms is an array of arrays where each inner array specifies a set of
-	 * conditions which are joined by AND, and the inner arrays get joined by OR.
-	 * These inner arrays can have the following keys:
-	 *
-	 * - entityType:   string
-	 * - termType:     element of the TermCache::TERM_TYPE_ enum
-	 * - termLanguage: string, language code
-	 * - termText:     string
-	 * - entityId:     integer, only present in the result, not used when provided in the $terms
+	 * $terms is an array of Term objects. Terms are joined by OR.
+	 * The fields of the terms are joined by AND.
 	 *
 	 * A default can be provided for termType and entityType via the corresponding
 	 * method parameters.
 	 *
-	 * The return value is an array in similar format where all 4 fields are set.
-	 * Example:
+	 * The return value is an array of Terms where entityId, entityType,
+	 * termType, termLanguage, termText are all set.
 	 *
-	 * array(
-	 *   array(
-	 *      entityType: item,
-	 *      termType: TERM_TYPE_LABEL,
-	 *      termLanguage: en,
-	 *      termText: foobar,
-	 *   ),
-	 *   array(
-	 *      ...
-	 *   ),
-	 *   ...
-	 * )
-	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
 	 * @param array $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
+	 * @param array $options
+	 *        Accepted options are:
+	 *        - caseSensitive: boolean, default true
+	 *        - prefixSearch: boolean, default false
 	 *
 	 * @return array
 	 */
-	public function getMatchingTerms( array $terms, $termType = null, $entityType = null );
+	public function getMatchingTerms( array $terms, $termType = null, $entityType = null, array $options = array() );
+
+	/**
+	 * TODO: update docs
+	 *
+	 * Similar to @see TermCache::getMatchingTerms
+	 *
+	 *
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $terms
+	 * @param string|null $termType
+	 * @param string|null $entityType
+	 * @param integer|null $excludeId
+	 * @param string|null $excludeType
+	 *
+	 * @return array
+	 */
+	public function getMatchingTermCombination( array $terms, $termType = null, $entityType = null, $excludeId = null, $excludeType = null );
+
+	/**
+	 * Clears all terms from the cache.
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean Success indicator
+	 */
+	public function clear();
 
 }

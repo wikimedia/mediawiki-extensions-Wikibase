@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\SiteLinkTable as SiteLinkTable;
+use \Wikibase\SiteLinkTable;
 
 /**
  * Tests for the Wikibase\SiteLinkTable class.
@@ -29,6 +29,9 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider constructorProvider
+	 */
 	public function testConstructor( $tableName ) {
 		$instance = new SiteLinkTable( $tableName );
 

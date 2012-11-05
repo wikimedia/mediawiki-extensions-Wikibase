@@ -15,30 +15,20 @@ $magicWords = array();
 
 /** English (English) */
 $magicWords['en'] = array(
-	'noexternalinterlang' => array( 0, 'noexternalinterlang' ),
+	'noexternallanglinks' => array( 0, 'noexternallanglinks' ),
 );
 
-/** Arabic (العربية) */
-$magicWords['ar'] = array(
-	'noexternalinterlang' => array( 0, 'لا_لغة_إنترويكي_خارجية' ),
+/** German (Deutsch) */
+$magicWords['de'] = array(
+	'noexternallanglinks' => array( 0, 'keineexternensprachlinks', 'keine_externen_sprachlinks' ),
 );
 
 /** Korean (한국어) */
 $magicWords['ko'] = array(
-	'noexternalinterlang' => array( 0, '바깥인터언어없음' ),
+	'noexternallanglinks' => array( 0, '바깥언어링크없음', '바깥언어고리없음' ),
 );
 
 /** Macedonian (македонски) */
 $magicWords['mk'] = array(
-	'noexternalinterlang' => array( 0, 'безнадворешнимеѓујазични' ),
-);
-
-/** Dutch (Nederlands) */
-$magicWords['nl'] = array(
-	'noexternalinterlang' => array( 0, 'geenexterneintertaal' ),
-);
-
-/** Serbian (српски / srpski) */
-$magicWords['sr'] = array(
-	'noexternalinterlang' => array( 0, 'безспољашњихмеђујез', 'bezspoljašnjihmeđujez' ),
+	'noexternallanglinks' => array( 0, 'безнадворјазврски' ),
 );

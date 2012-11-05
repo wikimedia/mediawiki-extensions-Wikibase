@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ItemContent as ItemContent;
-use Wikibase\ItemObject as ItemObject;
+use Wikibase\ItemContent;
+use Wikibase\ItemObject;
 use Wikibase\Utils;
-use Wikibase\ItemView as ItemView;
+use Wikibase\ItemView;
 
 /**
  * Test WikibaseItemView.
@@ -21,6 +21,21 @@ use Wikibase\ItemView as ItemView;
  * fail. It seems impossible to store the item ids back somehow and at the same time not being
  * dependant on some magically correct solution. That is we could use GetItemId but then we
  * would imply that this module in fact is correct.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -45,6 +60,8 @@ use Wikibase\ItemView as ItemView;
  */
 class ItemViewTest extends \MediaWikiTestCase {
 
+	//@todo: make this a baseclass to use with all types of entities.
+
 	protected static $num = -1;
 
 	public function setUp() {
@@ -59,15 +76,14 @@ class ItemViewTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @group WikibaseUtils
 	 * @dataProvider providerGetHtml
 	 */
-	public function testGetHtml( $itemData, $expected) {
+	public function testGetHtml( $itemData, $expected ) {
 		self::$num++;
-		$view = new ItemView( );
+		$view = new ItemView();
 
 		if ( is_string( $expected ) ) {
-			$expected = (array)$expected;
+			$expected = ( array )$expected;
 		}
 		$expected[] = '/class\s*=\s*"wb-entity wb-' . $view::VIEW_TYPE . '"/';
 
@@ -77,7 +93,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 		} else {
 			$itemData += array( 'entity' => ItemObject::getIdPrefix() . '123' );
 			$itemContent = ItemContent::newFromArray( $itemData );
-			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-' . $itemContent->getEntity()->getId() . '"/';
+			$expected[] = '/id\s*=\s*"wb-' . $view::VIEW_TYPE . '-' . $itemContent->getEntity()->getPrefixedId() . '"/';
 		}
 
 		$itemContent->getEntity()->setLabel( 'de', 'Stockholm' );
@@ -104,13 +120,32 @@ class ItemViewTest extends \MediaWikiTestCase {
 
 	}
 
-	// FIXME: this stuff is broken, AGAIN...
+	/**
+	 * @todo move this to an EntityViewTest class at some point
+	 * @dataProvider providerNewForEntityContent
+	 */
+	public function testNewForEntityContent( $entityContent ) {
+		// test whether we get the right EntityView from an EntityContent
+		$view = ItemView::newForEntityContent( $entityContent );
+		$this->assertType(
+			ItemView::$typeMap[ $entityContent->getEntity()->getType() ],
+			$view
+		);
+	}
+
+	public function providerNewForEntityContent() {
+		return array(
+			array( ItemContent::newEmpty() ),
+			array( \Wikibase\PropertyContent::newEmpty() )
+		);
+	}
+
 	// Should use proper abstraction and not create items from arrays
 	public function providerGetHtml() {
 		return array(
 			array(
 				false,
-				'/"wb-sitelinks-empty"/'
+				'/"wb-sitelinks"/'
 			),
 			array(
 				array(
@@ -121,7 +156,6 @@ class ItemViewTest extends \MediaWikiTestCase {
 				array(
 					'/"wb-sitelinks"/',
 					'/"wb-sitelinks-en uneven"/',
-				//	'/<a>\s*Oslo\s*<\/a>/'
 				)
 			),
 			array(
@@ -135,8 +169,6 @@ class ItemViewTest extends \MediaWikiTestCase {
 					'/"wb-sitelinks"/',
 					'/"wb-sitelinks-de uneven"/',
 					'/"wb-sitelinks-en even"/',
-				//	'/<a>\s*Oslo\s*<\/a>/',
-				//	'/<a>\s*Stockholm\s*<\/a>/'
 				)
 			),
 			array(
@@ -150,8 +182,7 @@ class ItemViewTest extends \MediaWikiTestCase {
 				),
 				array(
 					'/"wb-sitelinks"/',
-					'/<span class="wb-property-container-value">\s*Capitol of Norway\s*<\/span>/',
-				//	'/<a>\s*Oslo\s*<\/a>/'
+					'/<span class="wb-value ">\s*Capitol of Norway\s*<\/span>/',
 				)
 			),
 		);

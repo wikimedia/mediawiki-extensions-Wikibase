@@ -28,7 +28,7 @@ class ApiWikibaseSearchByName extends ApiBase {
 	 */
 	public function execute() {
 		// TODO: implement this
-		}
+	}
 
 	/**
 	 * Returns an array of allowed parameters (parameter name) => (default
@@ -105,11 +105,14 @@ class ApiWikibaseSearchByName extends ApiBase {
 	}
 
 	/**
-	 * Returns a string that identifies the version of this class.
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.1
+	 *
 	 * @return string
 	 */
 	public function getVersion() {
-		return __CLASS__ . ': $Id$';
+		return __CLASS__ . '-' . WB_VERSION;
 	}
 
 }

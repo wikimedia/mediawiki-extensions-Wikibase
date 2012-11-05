@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\Entity, Wikibase\EntityContent;
+
 /**
  * Page for creating new Wikibase entities.
  *
@@ -33,15 +35,6 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	protected $description = null;
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 0.1
-	 */
-	public function __construct( $page ) {
-		parent::__construct( $page );
-	}
-
-	/**
 	 * Main method.
 	 *
 	 * @since 0.1
@@ -54,19 +47,27 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 		$this->setHeaders();
 		$this->outputHeader();
 
-		$this->parts = ( $subPage === '' ) ? array() : explode( '/', $subPage );
+		$this->parts = ( $subPage === '' ? array() : explode( '/', $subPage ) );
 		$this->prepareArguments();
 
-		if ( $this->getRequest()->wasPosted() && $this->getRequest()->getVal( 'token' ) !== null ) {
+		if ( $this->getRequest()->wasPosted()
+			&&  $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) ) ) {
+
 			if ( $this->hasSufficientArguments() ) {
 				$entityContent = $this->createEntity();
-				$entity = $entityContent->getEntity();
+
 				$status = $this->modifyEntity( $entityContent );
+
 				if ( $status->isOk() ) {
 					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() );
-					$status = $editEntity->attemptSave( '', EDIT_AUTOSUMMARY|EDIT_NEW, $this->getRequest()->getVal( 'token' ) );
+					$editEntity->attemptSave( '', EDIT_AUTOSUMMARY|EDIT_NEW, $this->getRequest()->getVal( 'token' ) );
+
+					$out = $this->getOutput();
+
 					if ( !$editEntity->isSuccess() ) {
-						$editEntity->showErrorPage( $this->getOutput() );
+						$out->addHTML( '<div class="error">' );
+						$out->addWikiText( $editEntity->getStatus()->getWikiText() );
+						$out->addHTML( '</div>' );
 					} elseif ( $entityContent !== null ) {
 						$entityUrl = $entityContent->getTitle()->getFullUrl();
 						$this->getOutput()->redirect( $entityUrl );
@@ -74,6 +75,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 				}
 			}
 		}
+
 		$this->getOutput()->addModuleStyles( array( 'wikibase.special' ) );
 		$this->createForm( $this->getLegend(), $this->additionalFormElements() );
 	}
@@ -97,7 +99,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * @return bool
 	 */
 	protected function hasSufficientArguments() {
-		return ( $this->label !== '' || $this->description !== '' );
+		return $this->label !== '' || $this->description !== '';
 	}
 
 	/**
@@ -113,6 +115,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * Attempt to modify entity
 	 *
 	 * @since 0.1
+	 *
+	 * @param \Wikibase\EntityContent &$entity
 	 *
 	 * @return Status
 	 */
@@ -180,8 +184,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $label initial value for the label input box
-	 * @param string $description initial value for the description input box
+	 * @param string|null $legend initial value for the label input box
+	 * @param string $additionalHtml initial value for the description input box
 	 */
 	public function createForm( $legend = null, $additionalHtml = '' ) {
 		$this->getOutput()->addHTML(

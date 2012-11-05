@@ -1,6 +1,8 @@
 <?php
 
 namespace Wikibase;
+use DataTypes\DataType;
+use MWException;
 
 /**
  * Represents a single Wikibase property.
@@ -32,7 +34,130 @@ namespace Wikibase;
 class PropertyObject extends EntityObject implements Property {
 
 	/**
-	 * @see EntityObject::getIdPrefix()
+	 * @since 0.2
+	 *
+	 * @var DataType|null
+	 */
+	protected $dataType = null;
+
+	/**
+	 * @since 0.2
+	 *
+	 * @var Claims|null
+	 */
+	protected $claims;
+
+	/**
+	 * @see Property::getDataType
+	 *
+	 * @since 0.2
+	 *
+	 * @return DataType
+	 * @throws MWException
+	 */
+	public function getDataType() {
+		if ( $this->dataType === null ) {
+			if ( array_key_exists( 'datatype', $this->data ) ) {
+				return $this->setDataTypeById( $this->data['datatype'] );
+			}
+			else {
+				throw new MWException( 'The DataType of the property is not known' );
+			}
+		}
+		else {
+			return $this->dataType;
+		}
+	}
+
+	/**
+	 * @see Property::setDataType
+	 *
+	 * @since 0.2
+	 *
+	 * @param DataType $dataType
+	 */
+	public function setDataType( DataType $dataType ) {
+		$this->dataType = $dataType;
+	}
+
+	/**
+	 * @see Property::setDataTypeById
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $dataTypeId
+	 *
+	 * @return DataType
+	 * @throws MWException
+	 */
+	public function setDataTypeById( $dataTypeId ) {
+		if ( is_string( $dataTypeId ) && in_array( $dataTypeId, Settings::get( 'dataTypes' ) ) ) {
+			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+
+			if ( $dataType !== null ) {
+				$this->setDataType( $dataType );
+				return $dataType;
+			}
+		}
+
+		throw new MWException( 'The DataType of the property is not valid' );
+	}
+
+	/**
+	 * @see Entity::toArray
+	 *
+	 * @since 0.2
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		$data = parent::toArray();
+
+		if ( $this->dataType !== null ) {
+			$data['datatype'] = $this->dataType->getId();
+		}
+
+		return $data;
+	}
+
+	/**
+	 * @see Entity::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getType() {
+		return Property::ENTITY_TYPE;
+	}
+
+	/**
+	 * @see Entity::getLocalType
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getLocalizedType() {
+		return wfMessage( 'wikibaselib-entity-property' )->parse();
+	}
+
+	/**
+	 * @see Entity::getDiff
+	 *
+	 * @since 0.1
+	 *
+	 * @param Entity $target
+	 *
+	 * @return PropertyDiff
+	 */
+	public function getDiff( Entity $target ) {
+		return PropertyDiff::newFromProperties( $this, $target );
+	}
+
+
+	/**
+	 * @see EntityObject::getIdPrefix
 	 *
 	 * @since 0.1
 	 *
@@ -43,6 +168,8 @@ class PropertyObject extends EntityObject implements Property {
 	}
 
 	/**
+	 * @see Entity::newFromArray
+	 *
 	 * @since 0.1
 	 *
 	 * @param array $data
@@ -63,28 +190,150 @@ class PropertyObject extends EntityObject implements Property {
 	}
 
 	/**
-	 * @see Entity::getType
+	 * @see ClaimListAccess::addClaim
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
-	 * @return string
+	 * @param Claim $claim
 	 */
-	public function getType() {
-		return Property::ENTITY_TYPE;
+	public function addClaim( Claim $claim ) {
+		$this->unstubClaims();
+		$this->claims->addClaim( $claim );
 	}
 
 	/**
-	 * @see Entity::getDiff
+	 * @see ClaimListAccess::hasClaim
 	 *
-	 * @since 0.1
+	 * @since 0.2
 	 *
-	 * @param Entity $target
+	 * @param Claim $claim
 	 *
-	 * @return PropertyDiff
+	 * @return boolean
 	 */
-	public function getDiff( Entity $target ) {
-		// TODO
-		return ItemDiff::newEmpty();
+	public function hasClaim( Claim $claim ) {
+		$this->unstubClaims();
+		return $this->claims->hasClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimListAccess::removeClaim
+	 *
+	 * @since 0.2
+	 *
+	 * @param Claim $claim
+	 */
+	public function removeClaim( Claim $claim ) {
+		$this->unstubClaims();
+		$this->claims->removeClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimAggregate::getClaims
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	public function getClaims() {
+		$this->unstubClaims();
+		return clone $this->claims;
+	}
+
+	/**
+	 * Unsturbs the statements from the JSON into the $statements field
+	 * if this field is not already set.
+	 *
+	 * @since 0.2
+	 *
+	 * @return Statements
+	 */
+	protected function unstubClaims() {
+		if ( $this->claims === null ) {
+			$this->claims = new ClaimList();
+
+			foreach ( $this->data['claims'] as $statementSerialization ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$this->claims->addClaim( unserialize( $statementSerialization ) );
+			}
+		}
+	}
+
+	/**
+	 * Takes the claims element of the $data array of an item and writes the claims to it as stubs.
+	 *
+	 * @since 0.2
+	 *
+	 * @param array $claims
+	 *
+	 * @return array
+	 */
+	protected function getStubbedClaims( array $claims ) {
+		if ( $this->claims !== null ) {
+			$claims = array();
+
+			foreach ( $this->claims as $claim ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$claims[] = serialize( $claim );
+			}
+		}
+
+		return $claims;
+	}
+
+	/**
+	 * @see Entity::stub
+	 *
+	 * @since 0.2
+	 */
+	public function stub() {
+		parent::stub();
+		$this->data['claims'] = $this->getStubbedClaims( $this->data['claims'] );
+	}
+
+	/**
+	 * @see Entity::isEmpty
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return parent::isEmpty() && !$this->hasClaims();
+	}
+
+	/**
+	 * @see Property::hasClaims
+	 *
+	 * On top of being a convenience function, this implementation allows for doing
+	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims() {
+		if ( $this->claims === null ) {
+			return $this->data['claims'] !== array();
+		}
+		else {
+			return count( $this->claims ) > 0;
+		}
+	}
+
+	/**
+	 * @see EntityObject::cleanStructure
+	 *
+	 * @since 0.2
+	 *
+	 * @param boolean $wipeExisting
+	 */
+	protected function cleanStructure( $wipeExisting = false ) {
+		parent::cleanStructure( $wipeExisting );
+
+		if (  $wipeExisting || !array_key_exists( 'claims', $this->data ) ) {
+			$this->data['claims'] = array();
+		}
 	}
 
 }
+

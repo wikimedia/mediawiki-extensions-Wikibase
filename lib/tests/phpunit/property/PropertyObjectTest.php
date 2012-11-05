@@ -1,8 +1,8 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\PropertyObject as PropertyObject;
-use \Wikibase\Property as Property;
+use \Wikibase\PropertyObject;
+use \Wikibase\Property;
 
 /**
  * Tests for the Wikibase\PropertyObject class.
@@ -31,6 +31,7 @@ use \Wikibase\Property as Property;
  * @group Wikibase
  * @group WikibaseProperty
  * @group WikibaseLib
+ * @group PropertyObjectTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -60,4 +61,91 @@ class PropertyObjectTest extends EntityObjectTest {
 	protected function getNewFromArray( array $data ) {
 		return PropertyObject::newFromArray( $data );
 	}
+
+	public function testGetDataType() {
+		$property = $this->getNewEmpty();
+
+		$pokemons = null;
+
+		try {
+			$property->getDataType();
+		}
+		catch ( \Exception $pokemons ) {}
+
+		$this->assertInstanceOf( '\MWException', $pokemons );
+
+		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
+			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+
+			$property->setDataType( $dataType );
+
+			$this->assertInstanceOf( '\DataTypes\DataType', $property->getDataType() );
+		}
+	}
+
+	public function testSetDataType() {
+		$property = $this->getNewEmpty();
+
+		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
+			$dataType = \DataTypes\DataTypeFactory::singleton()->getType( $dataTypeId );
+
+			$property->setDataType( $dataType );
+
+			$this->assertEquals( $dataType, $property->getDataType() );
+		}
+	}
+
+	public function testSetDataTypeById() {
+		$property = $this->getNewEmpty();
+
+		foreach ( \Wikibase\Settings::get( 'dataTypes' ) as $dataTypeId ) {
+			$property->setDataTypeById( $dataTypeId );
+			$this->assertEquals( $dataTypeId, $property->getDataType()->getId() );
+		}
+
+		$pokemons = null;
+
+		try {
+			$property->setDataTypeById( 'this-does-not-exist' );
+		}
+		catch ( \Exception $pokemons ) {}
+
+		$this->assertInstanceOf( '\MWException', $pokemons );
+	}
+
+	public function propertyProvider() {
+		$objects = array();
+
+		$objects[] = PropertyObject::newEmpty();
+
+		$entity = PropertyObject::newEmpty();
+		$entity->setDescription( 'en', 'foo' );
+		$objects[] = $entity;
+
+		$entity = PropertyObject::newEmpty();
+		$entity->setDescription( 'en', 'foo' );
+		$entity->setDescription( 'de', 'foo' );
+		$entity->setLabel( 'en', 'foo' );
+		$entity->setAliases( 'de', array( 'bar', 'baz' ) );
+		$objects[] = $entity;
+
+		$entity = $entity->copy();
+		$entity->addClaim( new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$objects[] = $entity;
+
+		return $this->arrayWrap( $objects );
+	}
+
+	/**
+	 * @dataProvider itemProvider
+	 *
+	 * @param Property $property
+	 */
+	public function testHasStatements( Property $property ) {
+		$has = $property->hasClaims();
+		$this->assertInternalType( 'boolean', $has );
+
+		$this->assertEquals( count( $property->getClaims() ) !== 0, $has );
+	}
+
 }

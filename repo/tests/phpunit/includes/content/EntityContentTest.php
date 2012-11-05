@@ -1,11 +1,25 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\EntityHandler as EntityHandler;
-use Wikibase\EntityContent as EntityContent;
+use Wikibase\EntityContent;
 
 /**
- *  Tests for the Wikibase\EntityContent class.
+ * Tests for the Wikibase\EntityContent class.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -61,7 +75,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function dataGetTextForSearchIndex() {
 		return array( // runs
-			array( // #0
+			array( // //0
 				array( // data
 					'label' => array( 'en' => 'Test', 'de' => 'Testen' ),
 					'aliases' => array( 'en' => array( 'abc', 'cde' ), 'de' => array( 'xyz', 'uvw' ) )
@@ -126,6 +140,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testSaveFlags() {
+		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+
 		$entityContent = $this->newEmpty();
 
 		// try to create without flags
@@ -143,7 +159,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		// try to create with EDIT_NEW flag
 		$entityContent->getEntity()->setLabel( 'en', 'three' );
 		$status = $entityContent->save( 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), "save failed" );
+		$this->assertTrue( $status->isOK(), $entityContent->getEntity()->getId() );
 
 		// ok, the item exists now in the database.
 
@@ -165,6 +181,8 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public function testRepeatedSave() {
+		\Wikibase\StoreFactory::getStore()->newTermCache()->clear();
+
 		$entityContent = $this->newEmpty();
 
 		// create
@@ -190,56 +208,51 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should change on edit" );
 
 		// save unchanged
-		if ( $this->getContentClass() === '\Wikibase\ItemContent' ) {
-			$prev_id = $entityContent->getWikiPage()->getLatest();
-			$status = $entityContent->save( 'save unmodified', null, EDIT_UPDATE );
-			$this->assertTrue( $status->isOK(), "save failed" );
-			$this->assertEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should stay the same if no change was made" );
-		}
-		else {
-			$this->markTestIncomplete( 'No change of ID for saving of same content should still be done for non-item entities' );
-		}
+		$prev_id = $entityContent->getWikiPage()->getLatest();
+		$status = $entityContent->save( 'save unmodified', null, EDIT_UPDATE );
+		$this->assertTrue( $status->isOK(), "save failed" );
+		$this->assertEquals( $prev_id, $entityContent->getWikiPage()->getLatest(), "revision ID should stay the same if no change was made" );
 	}
 
 	public function dataCheckPermissions() {
 		// FIXME: this is testing for some specific configuration and will break if the config is changed
 		return array(
-			array( #0: read allowed
+			array( //0: read allowed
 				'read',
 				'user',
 				array( 'read' => true ),
 				false,
 				true,
 			),
-			array( #1: edit and createpage allowed for new item
+			array( //1: edit and createpage allowed for new item
 				'edit',
 				'user',
 				array( 'read' => true, 'edit' => true, 'createpage' => true ),
 				false,
 				true,
 			),
-			array( #2: edit allowed but createpage not allowed for new item
+			array( //2: edit allowed but createpage not allowed for new item
 				'edit',
 				'user',
 				array( 'read' => true, 'edit' => true, 'createpage' => false ),
 				false,
 				false,
 			),
-			array( #3: edit allowed but createpage not allowed for existing item
+			array( //3: edit allowed but createpage not allowed for existing item
 				'edit',
 				'user',
 				array( 'read' => true, 'edit' => true, 'createpage' => false ),
 				true,
 				true,
 			),
-			array( #4: edit not allowed for existing item
+			array( //4: edit not allowed for existing item
 				'edit',
 				'user',
 				array( 'read' => true, 'edit' => false ),
 				true,
 				false,
 			),
-			array( #5: delete not allowed
+			array( //5: delete not allowed
 				'delete',
 				'user',
 				array( 'read' => true, 'delete' => false ),
@@ -291,7 +304,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	public function testUserCan( $action, $group, $permissions, $create, $expectedOK ) {
 		$content = $this->prepareItemForPermissionCheck( $group, $permissions, $create );
 
-		$status = $content->checkPermission( $action );
+		$content->checkPermission( $action );
 
 		$this->assertEquals( $expectedOK, $content->userCan( $action ) );
 	}
@@ -299,22 +312,22 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 
 	public function dataUserCanEdit() {
 		return array(
-			array( #0: edit and createpage allowed for new item
+			array( //0: edit and createpage allowed for new item
 				array( 'read' => true, 'edit' => true, 'createpage' => true ),
 				false,
 				true,
 			),
-			array( #1: edit allowed but createpage not allowed for new item
+			array( //1: edit allowed but createpage not allowed for new item
 				array( 'read' => true, 'edit' => true, 'createpage' => false ),
 				false,
 				false,
 			),
-			array( #2: edit allowed but createpage not allowed for existing item
+			array( //2: edit allowed but createpage not allowed for existing item
 				array( 'read' => true, 'edit' => true, 'createpage' => false ),
 				true,
 				true,
 			),
-			array( #3: edit not allowed for existing item
+			array( //3: edit not allowed for existing item
 				array( 'read' => true, 'edit' => false ),
 				true,
 				false,
@@ -332,7 +345,58 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 	}
 
 	public static function provideEquals() {
-		return EntityObjectTest::provideEquals();
+		return array(
+			array( #0
+				array(),
+				array(),
+				true
+			),
+			array( #1
+				array( 'labels' => array() ),
+				array( 'descriptions' => null ),
+				true
+			),
+			array( #2
+				array( 'entity' => 'x23' ),
+				array(),
+				true
+			),
+			array( #3
+				array( 'entity' => 'x23' ),
+				array( 'entity' => 'x24' ),
+				false
+			),
+			array( #4
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+				array( 'labels' => array(
+					'en' => 'foo',
+				) ),
+				false
+			),
+			array( #5
+				array( 'labels' => array(
+					'en' => 'foo',
+					'de' => 'bar',
+				) ),
+				array( 'labels' => array(
+					'de' => 'bar',
+					'en' => 'foo',
+				) ),
+				true
+			),
+			array( #6
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO' ),
+				) ),
+				array( 'aliases' => array(
+					'en' => array( 'foo', 'FOO', 'xyz' ),
+				) ),
+				false
+			),
+		);
 	}
 
 	/**

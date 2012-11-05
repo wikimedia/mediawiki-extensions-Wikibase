@@ -1,11 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ClaimList as ClaimList;
-use Wikibase\Claims as Claims;
-use Wikibase\Claim as Claim;
-use Wikibase\ClaimObject as ClaimObject;
-use Wikibase\Hashable as Hashable;
+use Wikibase\ClaimList;
+use Wikibase\ClaimObject;
+use Wikibase\Hashable;
 
 /**
  * Tests for the Wikibase\ClaimList class.
@@ -59,7 +57,7 @@ class ClaimListTest extends \MediaWikiTestCase {
 	public function getElementInstances() {
 		$instances = array();
 
-		$instances[] = new \Wikibase\ClaimObject( new \Wikibase\InstanceOfSnak( 42 ) );
+		$instances[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
 
 		return $instances;
 	}
@@ -86,6 +84,8 @@ class ClaimListTest extends \MediaWikiTestCase {
 			$array->removeClaim( $hashable );
 			$this->assertFalse( $array->hasClaim( $hashable ) );
 		}
+
+		$this->assertTrue( true );
 	}
 
 	/**
@@ -113,6 +113,8 @@ class ClaimListTest extends \MediaWikiTestCase {
 
 		$array->removeClaim( $element );
 		$array->removeClaim( $element );
+
+		$this->assertTrue( true );
 	}
 
 	/**

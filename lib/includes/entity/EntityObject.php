@@ -32,20 +32,6 @@ namespace Wikibase;
 abstract class EntityObject implements Entity {
 
 	/**
-	 * Maps entity types to objects representing the corresponding entity.
-	 * TODO: put this on a better place.
-	 *
-	 * @since 0.1
-	 *
-	 * @var array
-	 */
-	public static $typeMap = array(
-		Item::ENTITY_TYPE => '\Wikibase\ItemObject',
-		Property::ENTITY_TYPE => '\Wikibase\PropertyObject',
-		Query::ENTITY_TYPE => '\Wikibase\QueryObject'
-	);
-
-	/**
 	 * @since 0.1
 	 * @var array
 	 */
@@ -76,25 +62,15 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Entity::toArray()
+	 * @see Entity::toArray
 	 *
 	 * @since 0.1
 	 *
 	 * @return array
 	 */
 	public function toArray() {
-		$data = $this->data;
-
-		if ( is_null( $this->getId() ) ) {
-			if ( array_key_exists( 'entity', $data ) ) {
-				unset( $data['entity'] );
-			}
-		}
-		else {
-			$data['entity'] = $this->getIdPrefix() . $this->getId();
-		}
-
-		return $data;
+		$this->stub();
+		return $this->data;
 	}
 
 	/**
@@ -126,6 +102,17 @@ abstract class EntityObject implements Entity {
 		}
 
 		return $this->id;
+	}
+
+	/**
+	 * @see Entity::getPrefixedId()
+	 *
+	 * @since 0.2
+	 *
+	 * @return string|null
+	 */
+	public function getPrefixedId() {
+		return $this->getId() === null ? null : $this->getIdPrefix() . $this->getId();
 	}
 
 	/**
@@ -211,7 +198,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getAliases()
+	 * @see Entity::getAliases()
 	 *
 	 * @since 0.1
 	 *
@@ -225,11 +212,12 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getAllAliases()
+	 * @see Entity::getAllAliases()
 	 *
 	 * @since 0.1
 	 *
-	 * @param $languages
+	 * @param array|null $languages
+	 *
 	 * @return array
 	 */
 	public function getAllAliases( array $languages = null ) {
@@ -243,7 +231,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::setAliases()
+	 * @see Entity::setAliases()
 	 *
 	 * @since 0.1
 	 *
@@ -255,7 +243,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::addAliases()
+	 * @see Entity::addAliases()
 	 *
 	 * @since 0.1
 	 *
@@ -273,7 +261,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::removeAliases()
+	 * @see Entity::removeAliases()
 	 *
 	 * @since 0.1
 	 *
@@ -291,7 +279,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getDescriptions()
+	 * @see Entity::getDescriptions()
 	 *
 	 * @since 0.1
 	 *
@@ -304,7 +292,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getLabels()
+	 * @see Entity::getLabels()
 	 *
 	 * @since 0.1
 	 *
@@ -317,7 +305,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getDescription()
+	 * @see Entity::getDescription()
 	 *
 	 * @since 0.1
 	 *
@@ -331,7 +319,7 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Item::getLabel()
+	 * @see Entity::getLabel()
 	 *
 	 * @since 0.1
 	 *
@@ -417,38 +405,27 @@ abstract class EntityObject implements Entity {
 	/**
 	 * @see Comparable::equals
 	 *
-	 * Two entities are considered equal if
-	 * they have the same type, and the same content.
-	 * If both entities have an ID set, then the IDs must be equal
-	 * for the entities to be considered equal.
+	 * Two entities are considered equal if they are of the same
+	 * type and have the same value. The value does not include
+	 * the id, so entities with the same value but different id
+	 * are considered equal.
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean true of $that this equals to $this.
+	 * @param mixed $that
+	 *
+	 * @return boolean
 	 */
 	public function equals( $that ) {
 		if ( $that === $this ) {
 			return true;
 		}
 
-		if ( get_class( $this ) !== get_class( $that ) ) {
+		if ( !is_object( $that ) || ( get_class( $this ) !== get_class( $that ) ) ) {
 			return false;
 		}
 
 		wfProfileIn( __METHOD__ );
-
-		/**
-		 * @var Entity $that
-		 */
-		$thisId = $this->getId();
-		$thatId = $that->getId();
-
-		if ( $thisId !== null && $thatId !== null ) {
-			if ( $thisId !== $thatId ) {
-				wfProfileOut( __METHOD__ );
-				return false;
-			}
-		}
 
 		//@todo: ignore the order of aliases
 		$thisData = $this->toArray();
@@ -474,7 +451,7 @@ abstract class EntityObject implements Entity {
 	 */
 	public function getUndoDiff( Entity $newerEntity, Entity $olderEntity ) {
 		if ( $newerEntity->getType() !== $this->getType() || $olderEntity->getType() !== $this->getType() ) {
-			throw new \MWException( 'Entities passed to getUndoDiff must have the same type as the entity object.' );
+			throw new \MWException( 'Entities passed to getUndoDiff must have the same type' );
 		}
 
 		wfProfileIn( __METHOD__ );
@@ -506,6 +483,67 @@ abstract class EntityObject implements Entity {
 
 		wfProfileOut( __METHOD__ );
 		return $copy;
+	}
+
+	/**
+	 * @see Entity::stub
+	 *
+	 * @since 0.2
+	 */
+	public function stub() {
+		if ( is_null( $this->getId() ) ) {
+			if ( array_key_exists( 'entity', $this->data ) ) {
+				unset( $this->data['entity'] );
+			}
+		}
+		else {
+			$this->data['entity'] = $this->getIdPrefix() . $this->getId();
+		}
+	}
+
+	/**
+	 * @see Entity::getTerms
+	 *
+	 * @since 0.2
+	 *
+	 * @return array of Term
+	 */
+	public function getTerms() {
+		$terms = array();
+
+		foreach ( $this->getDescriptions() as $languageCode => $description ) {
+			$term = new Term();
+
+			$term->setLanguage( $languageCode );
+			$term->setType( Term::TYPE_DESCRIPTION );
+			$term->setText( $description );
+
+			$terms[] = $term;
+		}
+
+		foreach ( $this->getLabels() as $languageCode => $label ) {
+			$term = new Term();
+
+			$term->setLanguage( $languageCode );
+			$term->setType( Term::TYPE_LABEL );
+			$term->setText( $label );
+
+			$terms[] = $term;
+		}
+
+		foreach ( $this->getAllAliases() as $languageCode => $aliases ) {
+			foreach ( $aliases as $alias ) {
+				$term = new Term();
+
+				$term->setLanguage( $languageCode );
+				$term->setType( Term::TYPE_ALIAS );
+				$term->setText( $alias );
+
+				$terms[] = $term;
+			}
+		}
+
+		return $terms;
 	}
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Diff\IDiff as IDiff;
+use Diff\IDiff;
 
 /**
  * Class for changes that can be represented as a IDiff.

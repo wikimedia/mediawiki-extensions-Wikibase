@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 
 /**
  * Class that represents a single Wikibase claim.
@@ -46,6 +47,13 @@ class ClaimObject implements Claim {
 	 * @var Snaks
 	 */
 	protected $qualifiers;
+
+	/**
+	 * @since 0.2
+	 *
+	 * @var string|null
+	 */
+	protected $guid = null;
 
 	/**
 	 * Constructor.
@@ -105,7 +113,7 @@ class ClaimObject implements Claim {
 	}
 
 	/**
-	 * @see Claim::getHash
+	 * @see Hashable::getHash
 	 *
 	 * @since 0.1
 	 *
@@ -113,6 +121,49 @@ class ClaimObject implements Claim {
 	 */
 	public function getHash() {
 		return sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() );
+	}
+
+	/**
+	 * @see Claim::getPropertyId
+	 *
+	 * @since 0.2
+	 *
+	 * @return integer
+	 */
+	public function getPropertyId() {
+		return $this->getMainSnak()->getPropertyId();
+	}
+
+	/**
+	 * @see Claim::getGuid
+	 *
+	 * @since 0.2
+	 *
+	 * @return string
+	 */
+	public function getGuid() {
+		if ( $this->guid === null ) {
+			$this->guid = Utils::getGuid();
+		}
+
+		return $this->guid;
+	}
+
+	/**
+	 * @see Claim::setGuid
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $guid
+	 *
+	 * @throws MWException
+	 */
+	public function setGuid( $guid ) {
+		if ( !is_string( $guid ) ) {
+			throw new MWException( 'Can only set the GUID to string values' );
+		}
+
+		$this->guid = $guid;
 	}
 
 }

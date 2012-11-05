@@ -22,11 +22,11 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
 
-if ( version_compare( $wgVersion, '1.20c', '<' ) ) { // Needs to be 1.20c because version_compare() works in confusing ways.
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.20 or above.\n" );
+if ( version_compare( $wgVersion, '1.21a', '<' ) ) { // Needs to be 1.21a because version_compare() works in confusing ways.
+	die( "<b>Error:</b> Wikibase requires MediaWiki 1.21 alpha or above.\n" );
 }
 
-define( 'WBC_VERSION', '0.1 alpha' );
+define( 'WBC_VERSION', '0.2 beta' );
 
 $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
@@ -49,10 +49,13 @@ $wgExtensionMessagesFiles['wikibaseclientmagic']	= $dir . 'WikibaseClient.i18n.m
 $wgAutoloadClasses['Wikibase\ClientHooks'] 			= $dir . 'WikibaseClient.hooks.php';
 
 $wgAutoloadClasses['Wikibase\CachedEntity'] 		= $dir . 'includes/CachedEntity.php';
+$wgAutoloadClasses['Wikibase\ClientUtils']		= $dir . 'includes/ClientUtils.php';
 $wgAutoloadClasses['Wikibase\EntityCacheUpdater'] 	= $dir . 'includes/EntityCacheUpdater.php';
+$wgAutoloadClasses['Wikibase\ExternalChangesList']      = $dir . 'includes/ExternalChangesList.php';
+$wgAutoloadClasses['Wikibase\ExternalRecentChange']	= $dir . 'includes/ExternalRecentChange.php';
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
-$wgAutoloadClasses['Wikibase\SortUtils']			= $dir . 'includes/SortUtils.php';
+$wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
@@ -65,9 +68,8 @@ $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/En
 
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
-$wgHooks['WikibasePollHandle'][]			= '\Wikibase\ClientHooks::onWikibasePollHandle';
 $wgHooks['LoadExtensionSchemaUpdates'][] 		= '\Wikibase\ClientHooks::onSchemaUpdate';
-$wgHooks['WikibaseDefaultSettings'][]			= '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
+$wgHooks['OldChangesListRecentChangesLine'][]		= '\Wikibase\ClientHooks::onOldChangesListRecentChangesLine';
 $wgHooks['ParserAfterParse'][]				= '\Wikibase\ClientHooks::onParserAfterParse';
 $wgHooks['ParserFirstCallInit'][]			= '\Wikibase\NoLangLinkHandler::onParserFirstCallInit';
 $wgHooks['MagicWordwgVariableIDs'][]			= '\Wikibase\NoLangLinkHandler::onMagicWordwgVariableIDs';
@@ -75,24 +77,14 @@ $wgHooks['ParserGetVariableValueSwitch'][]		= '\Wikibase\NoLangLinkHandler::onPa
 $wgHooks['SkinTemplateOutputPageBeforeExec'][]		= '\Wikibase\ClientHooks::onSkinTemplateOutputPageBeforeExec';
 $wgHooks['BeforePageDisplay'][]				= '\Wikibase\ClientHooks::onBeforePageDisplay';
 
-
-$wgSharedTables[] = 'wbc_entity_cache';
-$wgSharedTables[] = 'wbc_items_per_site';
-
+// extension hooks
+$wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks::onWikibasePollHandle';
+$wgHooks['WikibaseDefaultSettings'][]                   = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
+$wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
+$wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
 
 // Resource loader modules
-$moduleTemplate = array(
-	'localBasePath' => __DIR__ . '/resources',
-	'remoteExtPath' => 'Wikibase/client/resources',
-);
-
-$wgResourceModules['ext.wikibaseclient'] = $moduleTemplate + array(
-	'styles' => array(
-		'ext.wikibaseclient.css'
-	),
-);
-
-unset( $moduleTemplate );
+$wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
 $wgWBClientStores = array();
 $wgWBClientStores['sqlstore'] = 'Wikibase\ClientSqlStore';

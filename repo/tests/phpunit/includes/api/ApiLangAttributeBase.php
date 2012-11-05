@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\Settings as Settings;
 
 /**
  * Tests for the ApiWikibaseSetAliases API module.
@@ -18,6 +17,21 @@ use \Wikibase\Settings as Settings;
  * fail. It seems impossible to store the item ids back somehow and at the same time not being
  * dependant on some magically correct solution. That is we could use GetItemId but then we
  * would imply that this module in fact is correct.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
  * @since 0.1
@@ -80,7 +94,7 @@ abstract class ApiLangAttributeBase extends ApiModifyItemBase {
 
 		$this->assertSuccess( $apiResponse );
 
-		$item = $apiResponse['item'];
+		$item = $apiResponse['entity'];
 		$section = "{$attr}s";
 		$record = null;
 

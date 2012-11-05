@@ -1,10 +1,25 @@
 <?php
 
 namespace Wikibase;
-use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput, DataUpdate;
+use Title, WikiPage, User, MWException, Content, Status, ParserOptions, ParserOutput;
 
 /**
  * Content object for articles representing Wikibase items.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
  *
  * @since 0.1
  *
@@ -104,10 +119,77 @@ class ItemContent extends EntityContent {
 
 		if ( $status->isOK() ) {
 			$this->addSiteLinkConflicts( $status );
+
+			// Do not run this when running test using MySQL as self joins fail on temporary tables.
+			if ( !defined( 'MW_PHPUNIT_TEST' )
+				|| !( StoreFactory::getStore() instanceof \Wikibase\SqlStore )
+				|| wfGetDB( DB_SLAVE )->getType() !== 'mysql' ) {
+				$this->addLabelDescriptionConflicts( $status );
+			}
 		}
 
 		wfProfileOut( __METHOD__ );
 		return $status;
+	}
+
+	/**
+	 * Adds any conflicts with items that have the same label
+	 * and description pair in the same language to the status.
+	 *
+	 * @since 0.1
+	 *
+	 * @param Status $status
+	 */
+	protected function addLabelDescriptionConflicts( Status $status ) {
+		$terms = array();
+
+		$entity = $this->getEntity();
+
+		foreach ( $entity->getLabels() as $langCode => $labelText ) {
+			$description = $entity->getDescription( $langCode );
+
+			if ( $description !== false ) {
+				$label = new Term( array(
+					'termLanguage' => $langCode,
+					'termText' => $labelText,
+					'termType' => Term::TYPE_LABEL,
+				) );
+
+				$description = new Term( array(
+					'termLanguage' => $langCode,
+					'termText' => $description,
+					'termType' => Term::TYPE_DESCRIPTION,
+				) );
+
+				$terms[] = array( $label, $description );
+			}
+		}
+
+		if ( !empty( $terms ) ) {
+			$foundTerms = StoreFactory::getStore()->newTermCache()->getMatchingTermCombination(
+				$terms,
+				null,
+				$entity->getType(),
+				$entity->getId(),
+				$entity->getType()
+			);
+
+			if ( !empty( $foundTerms ) ) {
+				/**
+				 * @var Term $label
+				 * @var Term $description
+				 */
+				list( $label, $description ) = $foundTerms;
+
+				$status->fatal(
+					'wikibase-error-label-not-unique-item',
+					$label->getText(),
+					$label->getLanguage(),
+					$label->getEntityId(),
+					$description->getText()
+				);
+			}
+		}
 	}
 
 	/**
@@ -124,7 +206,7 @@ class ItemContent extends EntityContent {
 			/**
 			 * @var WikiPage $ipsPage
 			 */
-			$conflictingPage = $this->getContentHandler()->getWikiPageForId( $conflict['itemId'] );
+			$conflictingPage = EntityContentFactory::singleton()->getWikiPageForId( Item::ENTITY_TYPE, $conflict['itemId'] );
 
 			// NOTE: it would be nice to generate the link here and just pass it as HTML,
 			// but Status forces all parameters to be escaped.
@@ -143,14 +225,14 @@ class ItemContent extends EntityContent {
 	 * @since 0.1
 	 *
 	 * @param $reason string delete reason for deletion log
-	 * @param $suppress int bitfield
-	 * 	Revision::DELETED_TEXT
-	 * 	Revision::DELETED_COMMENT
-	 * 	Revision::DELETED_USER
-	 * 	Revision::DELETED_RESTRICTED
+	 * @param bool|int $suppress int bitfield
+	 *     Revision::DELETED_TEXT
+	 *     Revision::DELETED_COMMENT
+	 *     Revision::DELETED_USER
+	 *     Revision::DELETED_RESTRICTED
 	 * @param $id int article ID
 	 * @param $commit boolean defaults to true, triggers transaction end
-	 * @param &$error Array of errors to append to
+	 * @param Array|string $error
 	 * @param $user User The deleting user
 	 *
 	 * @return int: One of WikiPage::DELETE_* constants

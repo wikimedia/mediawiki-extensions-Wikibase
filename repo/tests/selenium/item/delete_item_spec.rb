@@ -19,8 +19,7 @@ describe "Check functionality of item deletion" do
     # set up
     visit_page(CreateItemPage) do |page|
       page.create_new_item(label, description)
-      page.wait_for_aliases_to_load
-      page.wait_for_item_to_load
+      page.wait_for_entity_to_load
       page.add_aliases([alias_a, alias_b, alias_c])
     end
   end
@@ -38,7 +37,7 @@ describe "Check functionality of item deletion" do
         page.firstResultLabelSpan_element.text.should == label
         page.firstResultSearchMatch_element.text.should == alias_b
       end
-      visit_page(LoginPage) do |page|
+      visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
       end
       visit_page(DeleteItemPage) do |page|
@@ -60,7 +59,7 @@ describe "Check functionality of item deletion" do
   end
   after :all do
     # tear down: logout
-    visit_page(LoginPage) do |page|
+    visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
   end

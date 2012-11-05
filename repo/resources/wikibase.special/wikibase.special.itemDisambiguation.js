@@ -19,14 +19,14 @@
 		// TODO/FIXME: this should rather use wb.PropertyEditTool.EditableSiteLink fir mimicking the exact same behavior
 
 		var langList = new Array();
-		var languages = $.uls.data.autonyms();
+		var languages = $.uls.data.getAutonyms();
 		$.each( languages, function( key, value ) {
 			langList.push( {
 				'label': value + ' (' + key + ')',
 				'value': value + ' (' + key + ')'
 			} );
 		} );
-		$( '#wb-itemdisambiguation-languagename' ).wikibaseAutocomplete( { "source": langList } );
+		$( '#wb-itemdisambiguation-languagename' ).suggester( { "source": langList } );
 
 		// On submit, replace human readable value like "English (en)" with actual language name ("en")
 		$( '#wb-itemdisambiguation-form1' ).submit( function( event ) {

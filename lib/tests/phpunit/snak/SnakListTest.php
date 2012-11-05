@@ -1,13 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\SnakList as SnakList;
-use Wikibase\Snaks as Snaks;
-use Wikibase\Snak as Snak;
-use \Wikibase\PropertyValueSnak as PropertyValueSnak;
-use \Wikibase\InstanceOfSnak as InstanceOfSnak;
-use \DataValue\StringValue as StringValue;
-use \Wikibase\Hashable as Hashable;
+use Wikibase\SnakList;
+use Wikibase\PropertyValueSnak;
+use DataValues\StringValue;
+use Wikibase\Hashable;
+use Wikibase\PropertyNoValueSnak;
 
 /**
  * Tests for the Wikibase\SnakList class.
@@ -35,6 +33,7 @@ use \Wikibase\Hashable as Hashable;
  *
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseSnak
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -53,8 +52,8 @@ class SnakListTest extends HashArrayTest {
 	 */
 	public function elementInstancesProvider() {
 		$instances = array(
-			new InstanceOfSnak( 42 ),
-			new InstanceOfSnak( 9001 ),
+			new PropertyNoValueSnak( 42 ),
+			new PropertyNoValueSnak( 9001 ),
 			new PropertyValueSnak( 42, new StringValue( 'a' ) ),
 		);
 
@@ -66,15 +65,15 @@ class SnakListTest extends HashArrayTest {
 			array(),
 			array( array() ),
 			array( array(
-				new InstanceOfSnak( 42 )
+				new PropertyNoValueSnak( 42 )
 			) ),
 			array( array(
-				new InstanceOfSnak( 42 ),
-				new InstanceOfSnak( 9001 ),
+				new PropertyNoValueSnak( 42 ),
+				new PropertyNoValueSnak( 9001 ),
 			) ),
 			array( array(
-				new InstanceOfSnak( 42 ),
-				new InstanceOfSnak( 9001 ),
+				new PropertyNoValueSnak( 42 ),
+				new PropertyNoValueSnak( 9001 ),
 				new PropertyValueSnak( 42, new StringValue( 'a' ) ),
 			) ),
 		);
@@ -96,6 +95,8 @@ class SnakListTest extends HashArrayTest {
 			$this->assertFalse( $array->hasSnak( $hashable ) );
 			$this->assertFalse( $array->hasSnakHash( $hashable->getHash() ) );
 		}
+
+		$this->assertTrue( true );
 	}
 
 	/**
@@ -123,10 +124,12 @@ class SnakListTest extends HashArrayTest {
 			$this->assertEquals( --$elementCount, $array->count() );
 		}
 
-		$element = new \Wikibase\InstanceOfSnak( 42 );
+		$element = new PropertyNoValueSnak( 42 );
 
 		$array->removeSnak( $element );
 		$array->removeSnakHash( $element->getHash() );
+
+		$this->assertTrue( true );
 	}
 
 	/**

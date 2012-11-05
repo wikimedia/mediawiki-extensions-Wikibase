@@ -6,6 +6,21 @@ use Sanitizer, UtfNormal, Language;
 /**
  * Utility functions for Wikibase.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file
@@ -99,9 +114,13 @@ final class Utils {
 		}
 
 		$languages = \FormatJson::decode(
-			\Http::get( 'https://meta.wikimedia.org/w/api.php?action=sitematrix&format=json' ),
+			$json,
 			true
 		);
+
+		if ( !is_array( $languages ) ) {
+			throw new \MWException( "Failed to parse JSON from $url" );
+		}
 
 		$groupMap = array(
 			'wiki' => 'wikipedia',
@@ -113,7 +132,12 @@ final class Utils {
 			'wikinews' => 'wikinews',
 		);
 
-		wfGetDB( DB_MASTER )->begin();
+		$dbw = wfGetDB( DB_MASTER );
+		$doTrx = ( $dbw->trxLevel() === 0 );
+
+		if ( $doTrx ) {
+			$dbw->begin();
+		}
 
 		// Inserting obtained sites...
 		foreach ( $languages['sitematrix'] as $language ) {
@@ -149,7 +173,9 @@ final class Utils {
 			}
 		}
 
-		wfGetDB( DB_MASTER )->commit();
+		if ( $doTrx ) {
+			$dbw->commit();
+		}
 
 		\Sites::singleton()->getSites( false ); // re-cache
 	}
@@ -396,7 +422,7 @@ final class Utils {
 	 *
 	 * @return string
 	 */
-	public static function getGUID() {
+	public static function getGuid() {
 		if ( function_exists( 'com_create_guid' ) ) {
 			return trim( com_create_guid(), '{}' );
 		}
@@ -432,35 +458,6 @@ final class Utils {
 	}
 
 	/**
-	 * Returns a list of content model IDs that are used to represent Wikibase entities.
-	 * Configured via $wgWBSettings['entityNamespaces'].
-	 *
-	 * @since 0.1
-	 *
-	 * @return array An array of string content model IDs.
-	 */
-	public static function getEntityContentModels() {
-		$namespaces = Settings::get( 'entityNamespaces' );
-
-		if ( !is_array( $namespaces ) ) {
-			return array();
-		}
-
-		return array_keys( $namespaces );
-	}
-
-	/**
-	 * Returns the type identifiers of the entities.
-	 *
-	 * @since 0.2
-	 *
-	 * @return array
-	 */
-	public static function getEntityTypes() {
-		return array_keys( EntityObject::$typeMap );
-	}
-
-	/**
 	 * Returns the namespace ID for the given entity content model, or false if the content model
 	 * is not a known entity model.
 	 *
@@ -492,20 +489,6 @@ final class Utils {
 	}
 
 	/**
-	 * Determines whether the given content model is designated to hold some kind of Wikibase entity.
-	 * Shorthand for in_array( $ns, self::getEntityModels() );
-	 *
-	 * @since 0.1
-	 *
-	 * @param String $model the content model ID
-	 *
-	 * @return bool True iff $model is an entity content model
-	 */
-	public static function isEntityContentModel( $model ) {
-		return in_array( $model, self::getEntityContentModels() );
-	}
-
-	/**
 	 * Determines whether the given namespace is a core namespace, i.e. a namespace pre-defined by MediaWiki core.
 	 *
 	 * The present implementation just checks whether the namespace ID is smaller than 100, relying on the
@@ -519,19 +502,6 @@ final class Utils {
 	 */
 	public static function isCoreNamespace( $ns ) {
 		return $ns < 100;
-	}
-
-	/**
-	 * Returns if the provided string is a valid entity type identifier.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $type
-	 *
-	 * @return boolean
-	 */
-	public static function isEntityType( $type ) {
-		return in_array( $type, self::getEntityTypes() );
 	}
 
 }

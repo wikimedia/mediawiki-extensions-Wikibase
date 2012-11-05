@@ -46,7 +46,7 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 				$descriptions = array( $language => '' );
 			}
 
-			$this->addDescriptionsToResult( $descriptions, 'item' ); // FIXME: must be updated
+			$this->addDescriptionsToResult( $descriptions, 'entity' );
 		}
 
 		return true;
@@ -59,14 +59,6 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 		return array(
 			'API module to set a description for a single Wikibase entity.'
 		);
-	}
-
-	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-		) );
 	}
 
 	/**
@@ -87,10 +79,14 @@ class ApiSetDescription extends ApiModifyLangAttribute {
 	}
 
 	/**
-	 * @see ApiBase::getVersion()
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
 	 */
 	public function getVersion() {
-		return __CLASS__ . ': $Id$';
+		return __CLASS__ . '-' . WB_VERSION;
 	}
 
 }

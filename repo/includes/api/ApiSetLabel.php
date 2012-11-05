@@ -46,7 +46,7 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 				$labels = array( $language => '' );
 			}
 
-			$this->addLabelsToResult( $labels, 'item' ); // FIXME: must be updated
+			$this->addLabelsToResult( $labels, 'entity' );
 		}
 
 		return true;
@@ -59,14 +59,6 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 		return array(
 			'API module to set a label for a single Wikibase entity.'
 		);
-	}
-
-	/**
-	 * @see ApiBase::getPossibleErrors()
-	 */
-	public function getPossibleErrors() {
-		return array_merge( parent::getPossibleErrors(), array(
-		) );
 	}
 
 	/**
@@ -87,10 +79,14 @@ class ApiSetLabel extends ApiModifyLangAttribute {
 	}
 
 	/**
-	 * @see ApiBase::getVersion()
+	 * @see ApiBase::getVersion
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
 	 */
 	public function getVersion() {
-		return __CLASS__ . ': $Id$';
+		return __CLASS__ . '-' . WB_VERSION;
 	}
 
 }
