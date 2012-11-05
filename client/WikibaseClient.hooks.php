@@ -285,6 +285,32 @@ final class ClientHooks {
 	}
 
 	/**
+	 * Modifies watchlist query to include external changes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialWatchlistQuery
+	 *
+	 * @since 0.2
+	 *
+	 * @param array &$conds
+	 * @param array &$tables
+	 * @param array &$join_conds
+	 * @param array &$fields
+	 *
+	 * @return bool
+	 */
+	public static function onSpecialWatchlistQuery( &$conds, &$tables, &$join_conds, &$fields ) {
+		$newConds = array();
+		foreach( $conds as $k => $v ) {
+			if ( $v ===  'rc_this_oldid=page_latest OR rc_type=3' ) {
+				$newConds[$k] = 'rc_this_oldid=page_latest OR rc_type=3 OR rc_type=5';
+			} else {
+				$newConds[$k] = $v;
+			}
+		}
+		$conds = $newConds;
+		return true;
+	}
+
+	/**
 	 * Hook runs after internal parsing
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserAfterParse
 	 *
