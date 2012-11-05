@@ -495,24 +495,16 @@ Parameters:
 * $3 is the site code for the to-page.',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Automatic edit summary when a value is used. Parameters:
 * $1 is the number of values and/or properties set;
-* $2 is the id for the containing entity.',
+* $2 is the id for the containing entity.', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Automatic edit summary when no value is used. Parameters:
 * $1 is the number of values and/or properties set (that is 0 - zero);
-* $2 is the id for the containing entity.',
+* $2 is the id for the containing entity.', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Automatic edit summary when there should be a value but it is unknown. Parameters:
 * $1 is the number of values and/or properties set (that is 0 - zero);
-* $2 is the id for the containing entity.',
+* $2 is the id for the containing entity.', # Fuzzy
 	'wikibase-item-summary-special-create-item' => 'Automatic edit summary when creating an item, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
-	'wikibase-item-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
-* $1 is the number of values set (that is 0 - zero);
-* $2 is the language code of the entity page during creation.',
-	'wikibase-item-summary-special-create-query' => 'Automatic edit summary when creating a query, and supplying one or more values. Parameters:
-* $1 is the number of values set (that is 0 - zero);
-* $2 is the language code of the entity page during creation.',
-	'wikibase-item-summary-special-create-property' => '',
-	'wikibase-item-summary-special-create-query' => '',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 
@@ -1129,9 +1121,9 @@ por trovi de kie ĝi venis.',
 	'wikibase-item-summary-wbsetaliases-add' => 'Aldonis {{plural:$1|kromnomon|kromnomojn}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Forigis {{plural:$1|kromnomon|kromnomojn}} [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Konektis [$2↔$3] {{plural:$1|paĝon|paĝojn}}',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Kreu {{plural:$1|valordeklaron|valordeklarojn}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Kreu {{plural:$1|nevalordeklaron|nevalordeklarojn}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Kreu {{plural:$1|valordeklaron|valordeklarojn}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Kreu {{plural:$1|valordeklaron|valordeklarojn}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Kreu {{plural:$1|nevalordeklaron|nevalordeklarojn}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Kreu {{plural:$1|valordeklaron|valordeklarojn}}', # Fuzzy
 	'content-model-1001' => 'Vikidatumbazero',
 );
 
@@ -1412,6 +1404,12 @@ $messages['fa'] = array(
 	'wikibase-createentity-label' => 'برچسب:',
 	'wikibase-createentity-description' => 'توضیحات:',
 	'wikibase-createentity-submit' => 'ساختن',
+	'special-setlabel' => 'تنظیم یک برچسب',
+	'wikibase-setlabel-introfull' => 'شما در حال تنظیم برچسب در $2 برای [[$1]] هستید.',
+	'wikibase-setlabel-id' => 'شناسه',
+	'wikibase-setlabel-language' => 'زبان',
+	'wikibase-setlabel-label' => 'برچسب',
+	'wikibase-setlabel-submit' => 'تنظیم یک برچسب',
 	'special-listdatatypes' => 'فهرست تمام داده‌های موجود',
 	'wikibase-listdatatypes-intro' => 'این فهرست همهٔ داده‌های موجود در این نصب است:',
 	'wikibase-api-patch-incomplete' => 'بسته ساخته شده ناقص مانده است',
@@ -1583,7 +1581,9 @@ $messages['fr'] = array(
 	'wikibase-itemdisambiguation-nothing-found' => "Désolé, aucun élément avec cette étiquette n'a été trouvé.",
 	'wikibase-itemdisambiguation-create' => 'Vous pouvez [{{fullurl:Special:CreateItem|label=$1}} créer l’élément].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Le code de langue que vous avez donné n’est pas reconnu par le système, désolé. Veuillez utiliser un code valide, par exemple « en ».',
+	'wikibase-itemdisambiguation-description' => 'Les valeurs utilisées pour la recherche doivent être le texte entier. La langue est un identifiant, comme "en".',
 	'special-newproperty' => 'Créer une nouvelle propriété',
+	'wikibase-newproperty-intro' => 'Avant de créer une nouvelle propriété, veuillez vérifier si cette propriété existe déjà. Pour en créer une nouvelle, vous devez spécifier au moins son libellé ou sa description en $1, et un type de propriété valide.',
 	'wikibase-newproperty-fieldset' => 'Créer une nouvelle propriété',
 	'wikibase-newproperty-datatype' => 'Type de données :',
 	'special-createitem' => 'Créer un nouvel élément',
@@ -1593,25 +1593,39 @@ $messages['fr'] = array(
 	'wikibase-createentity-description' => 'Description :',
 	'wikibase-createentity-submit' => 'Créer',
 	'special-setlabel' => 'Définir une étiquette',
+	'wikibase-setlabel-introfull' => 'Vous fixez le libellé en $2 pour [[$1]].',
+	'wikibase-setlabel-intro' => "Ce formulaire vous permet de fixer le libellé d'une entité. Vous devez fournir l'ID de l'entité (par ex. Q23), un code de langue (par ex. en) et le libellé à positionner.",
 	'wikibase-setlabel-id' => 'Identifiant',
 	'wikibase-setlabel-language' => 'Langue',
+	'wikibase-setlabel-label' => 'Libellé',
+	'wikibase-setlabel-submit' => 'Fixer le libellé',
 	'wikibase-setlabel-invalid-langcode' => 'L\'identificateur de langue "$1" est inconnu. S\'il vous plaît utiliser un identificateur de langue connu du système, par exemple "fr".',
+	'wikibase-setlabel-invalid-id' => 'L\'ID "$1" est inconnu du système. Veuillez utiliser un ID d\'entité valide.',
 	'special-listdatatypes' => 'Liste de tous les types de données disponibles',
 	'wikibase-listdatatypes-intro' => "Ceci est une liste de tous les types de données en cours d'utilisation sur cette installation:",
+	'wikibase-api-patch-incomplete' => "La rustine générée s'avère être incomplète.",
 	'wikibase-self-conflict' => 'Données a été modifiées par vous après que vous avez commencé à éditer.',
 	'wikibase-restoreold' => 'réinitialiser',
+	'wikibase-restore-summary' => 'Restaurer la révision $1 par [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => "Modification directe est désactivée dans l'espace $1",
 	'wikibase-noentity' => 'Cet ensemble de données n’existe pas. Vous pouvez
 <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} consulter les journaux]</span> pour plus d’informations.',
+	'wikibase-noentity-createone' => 'Vous pouvez aussi [[$1|en créer une nouvelle]].',
 	'wikibase-item-summary-wbeditentity' => 'Crée un nouvel élément',
 	'wikibase-item-summary-wbsetlabel-set' => 'Changement de l’étiquette [$2]',
 	'wikibase-item-summary-wbsetlabel-remove' => 'Retrait de l’étiquette [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Modification de la description [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Retrait de la description [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Liens [$2] spécifique au site ajouté',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Lien [$2] spécifique au site supprimé',
 	'wikibase-item-summary-wbsetaliases-set' => 'Paramètre [ $2 ] {{plural:$1|alias|alias}}',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Ajout et retrait {{plural:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => 'Ajout {{plural:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Retrait {{plural:$1|d’un alias|d’alias}} [$2]',
+	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] {{plural:$1|page connectée|pages connectées}}',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{plural:$1|une valeur revendiquée créée|valeurs revendiquées créées}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{plural:$1|une revendication sans valeur créée|revendications sans valeur créées}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => "{{plural:$1|une revendication d'une valeur quelconque créée|revendications d'une valeur quelconque créées}}", # Fuzzy
 	'content-model-1001' => 'Élément Wikibase',
 );
 
@@ -1962,9 +1976,9 @@ $messages['he'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => 'הוספה של {{plural:$1|כינוי|כינויים}} עבור השפה [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'הסרה של {{plural:$1|כינוי|כינויים}} עבור [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => 'קישור {{plural:$1|דף|דפים}} בין השפות [$2↔$3]',
-	'wikibase-item-summary-wbcreateclaim-value' => 'יצירת {{plural:$1|טענת ערך|טענות ערכים}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'יצרת {{plural:$1|טענה ללא ערך|טענות ללא ערך}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'יצירת {{plural:$1|טענה|טענות}} עם ערך בלתי־ידוע',
+	'wikibase-item-summary-wbcreateclaim-value' => 'יצירת {{plural:$1|טענת ערך|טענות ערכים}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'יצרת {{plural:$1|טענה ללא ערך|טענות ללא ערך}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'יצירת {{plural:$1|טענה|טענות}} עם ערך בלתי־ידוע', # Fuzzy
 	'content-model-1001' => 'פריט ויקיבייס',
 );
 
@@ -2168,6 +2182,144 @@ $messages['ia'] = array(
 	'special-createitem' => 'Crear un nove objecto',
 	'wikibase-restoreold' => 'reinitialisar',
 	'content-model-1001' => 'Elemento de Wikibase',
+);
+
+/** Iloko (Ilokano)
+ * @author Lam-ang
+ */
+$messages['ilo'] = array(
+	'wikibase-desc' => 'Nabalabala a pagidulinan ti datos',
+	'wikibase-edit' => 'urnosen',
+	'wikibase-save' => 'idulin',
+	'wikibase-cancel' => 'ukasen',
+	'wikibase-add' => 'agnayon',
+	'wikibase-save-inprogress' => 'Agiduldulin…',
+	'wikibase-remove-inprogress' => 'Agik-ikkat…',
+	'wikibase-label-empty' => 'Awan pay ti etiketa a naipalawag.',
+	'wikibase-label-edit-placeholder' => 'ikabil ti etiketa',
+	'wikibase-description-empty' => 'Awan pay ti deskripsion a naipalawag.',
+	'wikibase-description-edit-placeholder' => 'ikabil ti deskripsion',
+	'wikibase-sitelink-site-edit-placeholder' => 'sitio',
+	'wikibase-sitelink-page-edit-placeholder' => 'artikulo',
+	'wikibase-alias-edit-placeholder' => 'agikabil ti sabali a nagan',
+	'wikibase-label-input-help-message' => 'Ikabil ti titulo ti daytoy nga agasmang ti datos ti $1.',
+	'wikibase-description-input-help-message' => 'Agikabil ti ababa a deskripsion ti $1.',
+	'wikibase-sitelinks' => 'Listaan dagiti panid a naisilpo ti daytoy a banag',
+	'wikibase-sitelinks-sitename-columnheading' => 'Pagsasao',
+	'wikibase-sitelinks-siteid-columnheading' => 'Kodigo',
+	'wikibase-sitelinks-link-columnheading' => 'Naisilpo nga artikulo',
+	'wikibase-sitelinks-add' => 'agnayon ti silpo iti sitio a silpo',
+	'wikibase-sitelinks-empty' => 'Awan pay ti sitio a silpo para iti daytoy a banag.',
+	'wikibase-sitelinks-input-help-message' => 'Idisso ti silpo iti maysa a panid a mainaig ti daytoy a banag.',
+	'wikibase-remove' => 'ikkaten',
+	'wikibase-undo-title' => 'Agibabbabawi ti panagurnos iti "$1"',
+	'wikibase-restore-title' => 'Agisubsubli ti daan a panagbaliw ti "$1"',
+	'wikibase-partial-undo' => 'Daytoy a panagurnos ket mabalin laeng ti bassit a panagibabawi.',
+	'wikibase-omitted-undo-ops' => '{{PLURAL:$1|Ti panangibaliw a|Dagiti panagibaliw a}} $1 ket naikkaten gapu ti mainaig a {{PLURAL:$1|pateg|patpateg}} ket nagbaliw  manen manipud idin.',
+	'wikibase-empty-undo' => 'Awan ti mabalin a maibabawi ditoy.',
+	'wikibase-undo-revision-error' => 'Ti panagibabawi ket napaay',
+	'wikibase-undo-samerev' => 'Saan a maibabawi, kapadpada ti naited a panagbalbaliw para iti panagibabawi a nagibatayan ken puntaan a panagibabawi.',
+	'wikibase-undo-badpage' => 'Madi a panagibalbaliw: Ti panagbalbaliw a $2 ket saan a tagikua ti [[$1]].',
+	'wikibase-undo-firstrev' => 'Saan a mabalin nga ibabawi ti panagpartuat ti panid',
+	'wikibase-propertyedittool-full' => 'Nalpasen ti listaan dagiti pateg.',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|a naikabil|a naikabkabil}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|a naikabil|a naikabkabil}})',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Maysa a pateg|$1 a patpateg}} ket saan pay a naidulin',
+	'wikibase-sitelinksedittool-full' => 'Dagiti silpo ti pampanid ket naidisson para kadagiti amin a sitio.',
+	'wikibase-disambiguation-title' => 'Panangipalpalawag para iti "$1"',
+	'wb-special-createitem-new-item-notification' => 'Baro a banag ti $1 ti napartuat ken naibaw-ing ti panidna. Agsubli idiay $2.',
+	'wikibase-aliases-label' => 'Naamammoan pay a kas ti:',
+	'wikibase-aliases-input-help-message' => 'No ti agasmang ti datos ket naamammoan ti adadu ngem maysa a naisangsangayan a nagan, mabalinmo ti agikabil kadagiti sabali a nagan wenno sinonimo, tapno mabirukan babaen kadagiti sabsabali a naganna.',
+	'wikibase-aliases-empty' => 'Awan dagiti sabali a nagan a naipalawag.',
+	'wikibase-datatype-label' => 'Kita ti datos:',
+	'wikibase-restrictionedit-tooltip-message' => 'Daytoy a panid ket nasalkniban. Saan a maipalubos ti agurnos.',
+	'wikibase-blockeduser-tooltip-message' => 'Naseraanka manipud ti panagurnos.',
+	'wikibase-tooltip-error-details' => 'Dagiti salaysay',
+	'wikibase-error-save-generic' => 'Ada biddut a napasamak bayat nga agar-aramidka ti panagidulin iti daytoy, saan a malpas dagiti panagibalbaliwmo.',
+	'wikibase-error-remove-generic' => 'Adda biddut a napasamak bayat nga agar-aramidka ti panagikkat ti daytoy, saan a malpas dagiti panagibalbaliwmo.',
+	'wikibase-error-save-connection' => 'Adda biddut napasamak ti panakaikapet bayat nga agar-aramid ti panagidulin, ken gapu ti daytoy dagiti panagibalwbaliwmo ket saan a malpas. Pangngaasi a kitaem ti panakaikapetmo ti internet.',
+	'wikibase-error-remove-connection' => 'Adda biddut napasamak ti panakaikapet bayat nga agar-aramid ti panagikkat, ken gapu ti daytoy dagiti panagibalwbaliwmo ket saan a malpas. Pangngaasi a kitaem ti panakaikapetmo ti internet.',
+	'wikibase-error-save-timeout' => 'Makasansanay kami kadagiti teknikal a parikut, ken gapu ti daytoy ti "indulinmo" ket saan a malpas.',
+	'wikibase-error-remove-timeout' => 'Makasansanay kami kadagiti teknikal a parikut, ken gapu ti daytoy ti "panagikkatmo" ket saan a malpas.',
+	'wikibase-error-autocomplete-connection' => 'Saan a makagun-od ti Wikipedia API. Pangngaasi a padasem manen no madamdama.',
+	'wikibase-error-autocomplete-response' => 'Simmungbat ti server: $1',
+	'wikibase-error-ui-client-error' => 'Ti panakaikapet ti kliente apanid ket napaay. Pangngaasi a padasem manen no madamdama.',
+	'wikibase-error-ui-no-external-page' => 'Ti naitudon nga artikulo ket saan a mabirukan idiay maipada a sitio.',
+	'wikibase-error-ui-cant-edit' => 'Saanmo a mabalin ti agaramid ti daytoy a tignay.',
+	'wikibase-error-ui-no-permissions' => 'Awan ti umanay a karbengam nga agaramid ti daytoy a tignay.',
+	'wikibase-error-ui-link-exists' => 'Saanka a makasilpo ti daytoy a panid gaputa adda ti maysa a banagen a nakasilpo ti daytoy.',
+	'wikibase-error-ui-session-failure' => 'Ti gimongam ket nagpason. Pangngaasi a sumrekka manen.',
+	'wikibase-error-ui-edit-conflict' => 'Adda kasinnupiat a panagurnos. Pangngaasi nga ikarga ken idulin manen.',
+	'wikibase-move-error' => 'Saanmo a mabalin nga iyalis dagiti panid nga adda datos a nagan ti lugar, ken saanmo a mabalin ti agiyalis kadagiti panid iti daytoy.',
+	'wikibase-error-relational-save-failed' => 'Saan a mabalin nga ipenpen ti kinasiasino ti banag idiay pagibatayan ti datos.',
+	'wikibase-error-sitelink-already-used' => 'Ti sitio a silpo ti [[$1:$2]] ket maususaren babaen ti banag ti [[$3]].',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Adda ti tagikua ti ($3) nga adda etiketana ti "$1" a mainaig ti pagsasao a kodigo ti $2',
+	'wikibase-error-label-not-unique-wikibase-query' => 'Adda sabali a panagbiruk ti ($3) nga adda etiketana ti "$1" a mainaig ti pagsasao a kodigo ti $2',
+	'wikibase-error-label-not-unique-item' => 'Adda sabali a banag ti ($3) nga adda etiketana ti  "$1" ken panagipalpalawag ti "$4" a mainaig ti pagsasao a kodigo ti $2',
+	'special-itembytitle' => 'Banag babaen ti titulo',
+	'wikibase-itembytitle-lookup-fieldset' => 'Agbiruk para kadagiti banag babaen ti sitio ken titulo',
+	'wikibase-itembytitle-lookup-site' => 'Sitio:',
+	'wikibase-itembytitle-lookup-page' => 'Panid:',
+	'wikibase-itembytitle-submit' => 'Biruken',
+	'wikibase-itembytitle-nothing-found' => 'Awan ti banag a nabirukan babaen ti dati a panabiruk. Pangngaasi a pasayaatan ti panagsapul nga adda ti nasaysayaat a panagilasin ti akin-ruar a panid.',
+	'wikibase-itembytitle-invalid-site' => 'Ti dati a panagsapul ket saan amabalin nga usaren para iti maysa apanagbiruk. Pangngaasi a mangited ti umiso a panagilasin ti sitio.',
+	'wikibase-itembytitle-description' => 'Ti sitio ket panagilasin akodigo, a kas ti "enwiki".',
+	'wikibase-itembytitle-create' => 'Mabalinmo pay ti [{{fullurl:Special:CreateItem|site=$1&page=$2}} agpartuat ti maysa abanag].',
+	'special-itemdisambiguation' => 'Panagipalpalawag: Dagiti banag nga adda ti agpapada nga etiketa',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Agbiruk para kadagiti banag babaen ti etiketa',
+	'wikibase-itemdisambiguation-lookup-language' => 'Pagsasao:',
+	'wikibase-itemdisambiguation-lookup-label' => 'Etiketa:',
+	'wikibase-itemdisambiguation-submit' => 'Biruken',
+	'wikibase-itemdisambiguation-nothing-found' => 'Pasensia, awan ti banag a nabirukan ti dayta nga etiketa.',
+	'wikibase-itemdisambiguation-create' => 'Mabalinmo ti [{{fullurl:Special:CreateItem|label=$1}} agpartuat ti banag].',
+	'wikibase-itemdisambiguation-invalid-langcode' => 'Pasensia, ti pagsasao a panagilasin nga intedmo ket di ammo ti sistema. Pangngaasi nga agusar ti umiso a panagilasin a kas ti "en".',
+	'wikibase-itemdisambiguation-description' => 'Dagiti pateg a panagbiruk ket nasken a ti kompleto a panagikabil ti testo. Ti pagsasao ket maysa apanagilasin, a kas ti such as "en".',
+	'special-newproperty' => 'Agpartuat ti baro a tagikua',
+	'wikibase-newproperty-intro' => 'Sakbay nga agaramidka ti baro a tagikua, ipagarupam akitaen dagiti addan a tagikua. Ti panagpartuat ti maysa a baro nasken nga ibagam ti etiketa wenno ti panagipalpalawag ti $1, ken ti maysa nga umiso a kita ti tagikua.',
+	'wikibase-newproperty-fieldset' => 'Agpartuat ti baro a tagikua',
+	'wikibase-newproperty-datatype' => 'Kita ti datos:',
+	'special-createitem' => 'Agpartuat ti baro a banag',
+	'wikibase-createitem-intro' => 'Sakbay nga agaramidka ti baro a tagikua, ipagarupam akitaen dagiti addan a tagikua. Ti panagpartuat ti maysa a baro nasken nga ibagam ti etiketa wenno ti panagipalpalawag ti $1.',
+	'wikibase-createitem-fieldset' => 'Agpartuat ti baro a banag',
+	'wikibase-createentity-label' => 'Etiketa:',
+	'wikibase-createentity-description' => 'Deskripsion:',
+	'wikibase-createentity-submit' => 'Agaramid',
+	'special-setlabel' => 'Agidisso ti etiketa',
+	'wikibase-setlabel-introfull' => 'Agidisdissoka ti etiketa iti $2 para iti [[$1]].',
+	'wikibase-setlabel-intro' => 'Daytoy a porma ket mangpalubos kaniam nga agidisso ti etiketa ti nakabuklan. Nasken a mangitedka ti ID ti nakabuklan (e.g. Q23), ti maysa a kodigo ti pagsasao (e.g. en) ken ti etiketa a pagidissoan.',
+	'wikibase-setlabel-id' => 'ID',
+	'wikibase-setlabel-language' => 'Pagsasao',
+	'wikibase-setlabel-label' => 'Etiketa',
+	'wikibase-setlabel-submit' => 'Agidisso ti etiketa',
+	'wikibase-setlabel-invalid-langcode' => 'Ti panagilasin ti pagsasao ti "$1" ket di ammo. Pangngaasi nga agusar ti panagilasin ti pagsasao nga ammo ti sistema, a kas ti such as "en".',
+	'wikibase-setlabel-invalid-id' => 'Ti ID ti "$1" ket di ammo ti sistema. Pangngaasi nga agusar ti umiso a nakabuklan ti ID>',
+	'special-listdatatypes' => 'Ilista amin a kita ti datos a magun-od',
+	'wikibase-listdatatypes-intro' => 'Daytoy ket listaan a amina kita ti datos nga agdama nga inususar ti daytoy a pagikabilan.',
+	'wikibase-api-patch-incomplete' => 'Ti naaramid a takop ket saan a kompleto.',
+	'wikibase-self-conflict' => 'Ti datos ket binalbaliwam kalpasan idi nangrugika a nagurnos.',
+	'wikibase-restoreold' => 'isubli',
+	'wikibase-restore-summary' => 'Isubli ti panagbalbaliw ti $1 babaen ti [[Special:Contributions/$2|$2]]',
+	'wikibase-no-direct-editing' => 'Ti dagus apanagurnos ket nabaldado idiay nagan ti lugar ti $1',
+	'wikibase-noentity' => 'Daytoy nga agsmang ti datos ket awan. Mabalinmo ti
+<span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} kadagiti mainaig a listaan]</span>
+tapno birukem ti napananda.',
+	'wikibase-noentity-createone' => 'Mabalinmo pay ti [[$1|agpartuat ti maysa a baro]].',
+	'wikibase-item-summary-wbeditentity' => 'Agpartuat ti baro a banag',
+	'wikibase-item-summary-wbsetlabel-set' => 'Sinukatan ti [$2] nga etiketa',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Inikkat ti [$2] nga etiketa',
+	'wikibase-item-summary-wbsetdescription-set' => 'Sinukatan ti [$2] a deskripsion',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Inikkat ti [$2] a deskripsion',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Nagnayon ti naidumduma ti sitio a [$2] a silpo',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Nagikkat ti naidumduma ti sitio a [$2] a silpo',
+	'wikibase-item-summary-wbsetaliases-set' => 'Agikabkabil ti [$2] {{plural:$1|a sabali a nagan|a sabali a nagnagan}}',
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Nagnayon ken nagikkat mti [$2] {{plural:$1|a sabali a nagan|a sabali a nagnagan}}',
+	'wikibase-item-summary-wbsetaliases-add' => 'Nagnayon ti [$2] {{plural:$1|a sabali a nagan|a sabali a nagnagan}}',
+	'wikibase-item-summary-wbsetaliases-remove' => 'Nagikkat ti [$2] {{plural:$1|a sabali a nagan|a sabali a nagnagan}}',
+	'wikibase-item-summary-wblinktitles-connect' => 'Inkapet ti[$2↔$3] {{plural:$1|a panid|a pampanid}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Agpartuat {{plural:$1|ti maysa a pateg ti panagtunton|kadagiti pateg ti panagtunton}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Agpartuat {{plural:$1|ti maysa nga awan pategna a panagtunton|kadagiti awan pategna a panagtunton}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Agpartuat {{plural:$1|ti adda bassit a pategna a panagtunton|kadagiti adda bassit a pategna a panagtunton}}', # Fuzzy
+	'content-model-1001' => 'Wikibase a banag',
 );
 
 /** Icelandic (íslenska)
@@ -2442,9 +2594,9 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Aggiunto|Aggiunti}} alias [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Rimosso|Rimossi}} alias [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Connessioni [$2↔$3] {{plural:$1|pagina|pagine}}',
-	'wikibase-item-summary-wbcreateclaim-value' => "Crea {{plural:$1|un valore dell'asserzione|il valore delle asserzioni}}",
-	'wikibase-item-summary-wbcreateclaim-novalue' => "Crea {{plural:$1|un nonvalore dell'asserzione|il nonvalore delle asserzioni}}",
-	'wikibase-item-summary-wbcreateclaim-somevalue' => "Crea {{plural:$1|un qualche valore dell'asserzione|qualche valore delle asserzioni}}",
+	'wikibase-item-summary-wbcreateclaim-value' => "Crea {{plural:$1|un valore dell'asserzione|il valore delle asserzioni}}", # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => "Crea {{plural:$1|un nonvalore dell'asserzione|il nonvalore delle asserzioni}}", # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => "Crea {{plural:$1|un qualche valore dell'asserzione|qualche valore delle asserzioni}}", # Fuzzy
 	'content-model-1001' => 'Elemento wikibase',
 );
 
@@ -2701,9 +2853,9 @@ $messages['ko'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '[$2] {{plural:$1|별명}} 추가함',
 	'wikibase-item-summary-wbsetaliases-remove' => '[$2] {{plural:$1|별명}} 제거함',
 	'wikibase-item-summary-wblinktitles-connect' => '[$2↔$3] {{plural:$1|문서}} 연결함',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{plural:$1|값 주장}} 만들기',
-	'wikibase-item-summary-wbcreateclaim-novalue' => '{{plural:$1|없는값 주장}} 만들기',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{plural:$1|어떤값  주장}} 만들기',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{plural:$1|값 주장}} 만들기', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{plural:$1|없는값 주장}} 만들기', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{plural:$1|어떤값  주장}} 만들기', # Fuzzy
 	'content-model-1001' => '위키베이스 항목',
 );
 
@@ -2890,6 +3042,11 @@ $messages['mk'] = array(
 	'special-createitem' => 'Создај нов предмет',
 	'wikibase-createitem-intro' => 'Пред да создадете нов предмет, проверете дали истиот веќе постои. За да создадете нов предмет, ќе треба да внесете барем етикета или опис на $1.',
 	'wikibase-createitem-fieldset' => 'Создај нов предмет',
+	'wikibase-createitem-site' => 'Мрежно место на првата врзана страница',
+	'wikibase-createitem-page' => 'Име на првата врзана страница',
+	'wikibase-createitem-no-external-page' => 'Укажаната страница не е најдена на соодветното мрежно место.',
+	'wikibase-createitem-add-sitelink-failed' => 'Не можев да ја зачувам врската.',
+	'wikibase-createitem-not-recognized-siteid' => 'Не можев да ја препознаам укажаната назнака.',
 	'wikibase-createentity-label' => 'Етикета:',
 	'wikibase-createentity-description' => 'Опис:',
 	'wikibase-createentity-submit' => 'Создај',
@@ -2925,9 +3082,12 @@ $messages['mk'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '{{plural:$1|Додаден|Додадени}} [$2] {{plural:$1|алијас|алијаси}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{plural:$1|Отстранет|Отстранети}} [$2] {{plural:$1|алијас|алијаси}}',
 	'wikibase-item-summary-wblinktitles-connect' => '{{plural:$1|Поврзана|Поврзани}} [$2↔$3] {{plural:$1|страница|страници}}',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Создај {{plural:$1|вредносно тврдење|вредносни тврдења}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Создај {{plural:$1|безвредносно тврдење|безвредносни тврдења}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Создај {{plural:$1|тврдење за некоја вредност|тврдења за некои вредности}}',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{plural:$1|Создадено вредносно тврдење|Создадени вредносни тврдења}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{plural:$1|Создадено безвредносно тврдење|Создадени безвредносни тврдења}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{plural:$1|Создадено тврдење за некоја вредност|Создадени тврдења за некои вредности}}',
+	'wikibase-item-summary-special-create-item' => 'Создаден предмет за [$2] со {{plural:$1|вредноста|вредностите}}',
+	'wikibase-item-summary-special-create-property' => 'Создадено својство за [$2] со {{plural:$1|вредноста|вредностите}}',
+	'wikibase-item-summary-special-create-query' => 'Создадено барање за [$2] со {{plural:$1|вредноста|вредностите}}',
 	'content-model-1001' => 'Предмет во Викибазата',
 );
 
@@ -3063,9 +3223,9 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-wbsetaliases-add' => 'Menambahkan {{plural:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Membuang {{plural:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Menyambungkan {{plural:$1|halaman|halaman-halaman}} [$2↔$3]',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Mencipta {{plural:$1|tuntutan nilai|tuntutan-tuntutan nilai}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Mencipta {{plural:$1|tuntutan tanpa nilai|tuntutan-tuntutan tanpa nilai}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Mencipta {{plural:$1|tuntutan separa nilai|tuntutan-tuntutan separa nilai}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Mencipta {{plural:$1|tuntutan nilai|tuntutan-tuntutan nilai}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Mencipta {{plural:$1|tuntutan tanpa nilai|tuntutan-tuntutan tanpa nilai}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Mencipta {{plural:$1|tuntutan separa nilai|tuntutan-tuntutan separa nilai}}', # Fuzzy
 	'content-model-1001' => 'Perkara Wikibase',
 );
 
@@ -4192,9 +4352,9 @@ $messages['vi'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1}}Đã thêm tên khác [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1}}Đã dời tên khác [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => '{{PLURAL:$1}}Đã kết nối [$2↔$3] trang',
-	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1}}Tạo lời khẳng định có giá trị',
-	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1}}Tạo lời khẳng định không có giá trị.',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1}}Tạo lời khẳng định có một số giá trị',
+	'wikibase-item-summary-wbcreateclaim-value' => '{{PLURAL:$1}}Tạo lời khẳng định có giá trị', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1}}Tạo lời khẳng định không có giá trị.', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1}}Tạo lời khẳng định có một số giá trị', # Fuzzy
 	'content-model-1001' => 'khoản mục Wikibase',
 );
 
@@ -4475,8 +4635,8 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '設置[$2]的{{plural:$1|别名}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '移除[$2]的{{plural:$1|别名}}',
 	'wikibase-item-summary-wblinktitles-connect' => '連接[$2↔$3]{{plural:$1|頁面}}',
-	'wikibase-item-summary-wbcreateclaim-value' => '創建{{plural:$1|數值聲稱}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => '創建{{plural:$1|無數值聲稱}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '創建{{plural:$1|半數值聲稱}}',
+	'wikibase-item-summary-wbcreateclaim-value' => '創建{{plural:$1|數值聲稱}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-novalue' => '創建{{plural:$1|無數值聲稱}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '創建{{plural:$1|半數值聲稱}}', # Fuzzy
 	'content-model-1001' => 'Wikibase項目',
 );

@@ -136,6 +136,10 @@ $messages['es'] = array(
  */
 $messages['fa'] = array(
 	'wbc-desc' => 'سرویس‌گیرنده برای افزونهٔ ویکی‌پایه',
+	'wbc-comment-langlinks-delete' => 'پیوند آیتم ویکی‌داده حذف گردید.پیوند زبان حذف شد.',
+	'wbc-comment-langlinks-remove' => 'این صفحه از آیتم ویکی‌داده قطع پیوند شد.پیوند زبان حذف شد.',
+	'wbc-comment-langlinks-restore' => 'پیوند آیتم ویکی‌داده بازیابی شد.پیوند زبان بازیابی شد.',
+	'wbc-comment-langlinks-update' => 'پیوند زبان‌ها به روز شد',
 	'wbc-editlinks' => 'ویرایش پیوندها',
 	'wbc-editlinkstitle' => 'افزودن پیوندهای میان‌ویکی',
 );
@@ -156,6 +160,9 @@ $messages['fi'] = array(
  */
 $messages['fr'] = array(
 	'wbc-desc' => 'Client pour l’extension Wikibase',
+	'wbc-comment-langlinks-delete' => 'Élément Wikidata associé supprimé. Liens de langue supprimés.',
+	'wbc-comment-langlinks-remove' => "Cette page a été déliée de l'élément Wikidata. Liens de langue supprimés",
+	'wbc-comment-langlinks-restore' => "Suppression de l'élément Wikidata associé annulée. Liens de langue rétablis",
 	'wbc-comment-langlinks-update' => 'Liens interlangues mis à jour',
 	'wbc-editlinks' => 'Modifier les liens',
 	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
