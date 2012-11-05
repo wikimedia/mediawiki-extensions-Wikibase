@@ -150,6 +150,8 @@ abstract class EntityHandler extends \ContentHandler {
 	 * The html representation of Items depends on the user language, splitting the parser
 	 * cache by user language is currently problematic and would need some core changes.
 	 *
+	 * @note: see also note on getPageLanguage()
+	 *
 	 * @see ContentHandler::isParserCacheSupported
 	 *
 	 * @since 0.1
@@ -163,7 +165,8 @@ abstract class EntityHandler extends \ContentHandler {
 	/**
 	 * @see Content::getPageViewLanguage
 	 *
-	 * This implementation returns the user language which is same as content language here
+	 * This implementation returns the user language, because entities get rendered in
+	 * the user's language. The PageContentLanguage hook is bypassed.
 	 *
 	 * @param Title        $title the page to determine the language for.
 	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
@@ -173,6 +176,29 @@ abstract class EntityHandler extends \ContentHandler {
 	public function getPageViewLanguage( Title $title, Content $content = null ) {
 		global $wgLang;
 		return $wgLang;
+	}
+
+	/**
+	 * @see Content::getPageLanguage
+	 *
+	 * This implementation unconditionally returns the wiki's content language.
+	 * The PageContentLanguage hook is bypassed.
+	 *
+	 * @note: Ideally, this would return 'mul' to indicate multilingual content. But MediaWiki
+	 * currently doesn't support that.
+	 *
+	 * @note: in several places in mediawiki, most importantly the parser cache, getPageLanguage
+	 * is used in places where getPageViewLanguage would be more appropriate. This is the reason that
+	 * isParserCacheSupported() is overridden to return false.
+	 *
+	 * @param Title        $title the page to determine the language for.
+	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
+	 *
+	 * @return \Language the page's language
+	 */
+	public function getPageLanguage( Title $title, Content $content = null ) {
+		global $wgContLang;
+		return $wgContLang;
 	}
 
 	/**

@@ -128,8 +128,7 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetPageLanguage() {
-		global $wgLang, $wgContLang;
-		$oldLang = $wgLang;
+		global $wgContLang;
 
 		$handler = $this->getHandler();
 		$title = \Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
@@ -142,22 +141,19 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 
 		// test fr
-		$wgLang = \Language::factory( "fr" );
+		$this->setMwGlobals( 'wgLang', \Language::factory( "fr" ) );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 
 		// test nl
-		$wgLang = \Language::factory( "nl" );
+		$this->setMwGlobals( 'wgLang', \Language::factory( "nl" ) );
+		$this->setMwGlobals( 'wgContLang', \Language::factory( "fr" ) );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
-
-		// restore
-		$wgLang = $oldLang;
 	}
 
 	public function testGetPageViewLanguage() {
 		global $wgLang;
-		$oldLang = $wgLang;
 
 		$handler = $this->getHandler();
 		$title = \Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
@@ -169,17 +165,14 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 
 		// test fr
-		$wgLang = \Language::factory( "fr" );
+		$this->setMwGlobals( 'wgLang', \Language::factory( "fr" ) );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 
 		// test nl
-		$wgLang = \Language::factory( "nl" );
+		$this->setMwGlobals( 'wgLang', \Language::factory( "nl" ) );
 		$handler = $this->getHandler();
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
-
-		// restore
-		$wgLang = $oldLang;
 	}
 
 }
