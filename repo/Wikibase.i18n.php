@@ -213,9 +213,12 @@ to find out where it went.',
 	'wikibase-item-summary-wbsetaliases-add' => 'Added [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Removed [$2] {{plural:$1|alias|aliases}}',
 	'wikibase-item-summary-wblinktitles-connect' => 'Connected [$2↔$3] {{plural:$1|page|pages}}',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Create {{plural:$1|a value claim|value claims}}',
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Create {{plural:$1|a novalue claim|novalue claims}}',
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Create {{plural:$1|a somevalue claim|somevalue claims}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Created {{plural:$1|a value claim|value claims}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Created {{plural:$1|a novalue claim|novalue claims}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Created {{plural:$1|a somevalue claim|somevalue claims}}',
+	'wikibase-item-summary-special-create-item' => 'Created an [$2] item with {{plural:$1|value|values}}',
+	'wikibase-item-summary-special-create-property' => 'Created a [$2] property with {{plural:$1|value|values}}',
+	'wikibase-item-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}',
 
 	//content model names
 	'content-model-1001' => 'Wikibase item',
@@ -499,6 +502,17 @@ Parameters:
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Automatic edit summary when there should be a value but it is unknown. Parameters:
 * $1 is the number of values and/or properties set (that is 0 - zero);
 * $2 is the id for the containing entity.',
+	'wikibase-item-summary-special-create-item' => 'Automatic edit summary when creating an item, and supplying one or more values. Parameters:
+* $1 is the number of values set (that is 0 - zero);
+* $2 is the language code of the entity page during creation.',
+	'wikibase-item-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
+* $1 is the number of values set (that is 0 - zero);
+* $2 is the language code of the entity page during creation.',
+	'wikibase-item-summary-special-create-query' => 'Automatic edit summary when creating a query, and supplying one or more values. Parameters:
+* $1 is the number of values set (that is 0 - zero);
+* $2 is the language code of the entity page during creation.',
+	'wikibase-item-summary-special-create-property' => '',
+	'wikibase-item-summary-special-create-query' => '',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
 );
 
