@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACa3///8M\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T12:41:46Z",
+      "side": 1,
+      "message": "oh my... sometimes MW makes me despair :|",
+      "revId": "8b50f8cc54973f9df92e7bdb3f280d2ac77da5ab",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
