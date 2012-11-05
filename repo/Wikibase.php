@@ -202,11 +202,7 @@ $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
-<<<<<<< HEAD
 //$wgSpecialPages['NewProperty'] 					= 'SpecialNewProperty';
-=======
-$wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
->>>>>>> master
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 //$wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
