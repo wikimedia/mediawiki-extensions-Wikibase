@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAACaX///88\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-05T11:11:08Z",
+      "side": 1,
+      "message": "It is used in testing, but I guess we can hack around and set it to protected if we really want that. It would probably be easier to test the method if we make it static.\nChanged name and set it to protected.",
+      "parentUuid": "AAACBX///4k\u003d",
+      "revId": "b1ce49d489d071c542686fd3e90eb4309c713772",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACBX///4c\u003d",
         "filename": "lib/includes/entity/EntityFactory.php",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-01T15:14:39Z",
       "side": 1,
       "message": "again, do we need this outside? If so, getIdFragment",
+      "revId": "b1ce49d489d071c542686fd3e90eb4309c713772",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACan////4\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-05T11:11:08Z",
+      "side": 1,
+      "message": "Yes we need this, but there should be a better name",
+      "parentUuid": "AAACBX///4c\u003d",
       "revId": "b1ce49d489d071c542686fd3e90eb4309c713772",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
