@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "AAACbX////s\u003d",
+        "filename": "repo/includes/store/sql/AddEntitiesPerPage.sql",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-05T13:41:18Z",
+      "side": 1,
+      "message": "As per IRC discussion, agree we should have this",
+      "parentUuid": "AAACPX///40\u003d",
+      "revId": "5ea2aca18c2c3256efed309891a641053390a081",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACPX///5I\u003d",
         "filename": "repo/includes/store/sql/SqlStore.php",
         "patchSetId": 4
