@@ -97,9 +97,9 @@ class ApiSearchEntities extends ApiBase {
 				$entry['description'] = $entity->getDescription( $language );
 			}
 
-			$entry['aliases'] = $entity->getAliases( $language, $search );
+			$entry['aliases'] = $entity->getAliases( $language, preg_quote( $search ) );
 			foreach ( $entry['aliases'] as $key => $value ) {
-				if ( preg_match( "/^" . $search . "/i", $entry['aliases'][$key] ) === 0 ) {
+				if ( preg_match( "/^" . preg_quote( $search ) . "/i", $entry['aliases'][$key] ) === 0 ) {
 					unset( $entry['aliases'][$key] );
 				}
 			}
@@ -138,13 +138,13 @@ class ApiSearchEntities extends ApiBase {
 	*/
 	public function execute() {
 		$params = $this->extractRequestParams();
-		$hits = $this->searchEntities( $params['language'], $params['search'], $params['type'] );
+		$entries = $this->sortByScore( $this->searchEntities( $params['language'], $params['search'], $params['type'] ), $params['language'], $params['search'] );
 
 		$this->getResult()->addValue(
 			null,
 			'searchinfo',
 			array(
-				'totalhits' => count( $hits ),
+				'totalhits' => count( $entries ),
 				'search' => $params['search']
 			)
 		);
@@ -155,23 +155,18 @@ class ApiSearchEntities extends ApiBase {
 			array()
 		);
 
-		$entries = $this->sortByScore( $hits, $params['language'], $params['search'] );
-
-		// Do continuation and pass offset in search-continue structure if limit isn't 0
-		if ( $params['limit'] !== 0 ) {
-			$searchcontinue = array();
-			$searchcontinue['search']['continue'] = $params['continue'] + $params['limit'] +1;
-			if ( $params['continue'] !== 0 ) {
-				$entries = array_slice($entries, $params['continue'], ( $searchcontinue['search']['continue'] + $params['limit'] ) - count( $entries ) ) ;
+		if ( count( $entries ) >= $params['limit'] && ( $params['limit'] !== 0 ) ) {
+			$continue = $params['continue'];
+			$limit = $params['limit'];
+			if ( ( $continue + $limit ) <= ( count( $entries ) - 1) ) {
+				$searchcontinue['search']['continue'] = $continue + $limit + 1;
+			}
+			if ( count( $entries ) - 1 >= $continue + $limit ) {
+				$entries = array_slice( $entries, $continue, $limit );
 			} else {
-				$entries = array_slice($entries, 0, $params['limit']);
+				$entries = array_slice( $entries, $continue - 1 );
 			}
-			if ( $searchcontinue['search']['continue'] < count( $hits ) || $searchcontinue['search']['continue'] === count( $hits ) ) {
-				if ( $searchcontinue['search']['continue'] === count( $hits ) ) {
-					$searchcontinue['search']['continue'] =  $searchcontinue['search']['continue'] -1;
-				}
 
-			}
 		}
 
 		$this->getResult()->addValue(
@@ -179,6 +174,7 @@ class ApiSearchEntities extends ApiBase {
 			'search',
 			$entries
 		);
+
 		$this->getResult()->setIndexedTagName_internal( array( 'search' ), 'entity' );
 
 		$this->getResult()->addValue(
@@ -187,7 +183,7 @@ class ApiSearchEntities extends ApiBase {
 			(int)true
 		);
 
-		if ( isset( $searchcontinue ) && ( sizeof( $entries ) === $params['limit'] )) {
+		if ( isset( $searchcontinue ) && ( ( count( $entries ) - 1 )  >= $params['limit'] )) {
 			$this->getResult()->addValue(
 				null,
 				'search-continue',
