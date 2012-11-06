@@ -155,7 +155,7 @@ class ApiLinkTitles extends Api implements ApiAutocomment {
 		if ( $itemContent !== null ) {
 			$this->getResult()->addValue(
 				'entity',
-				'id', $itemContent->getItem()->getId()
+				'id', $itemContent->getItem()->getId()->getNumericId()
 			);
 			$this->getResult()->addValue(
 				'entity',

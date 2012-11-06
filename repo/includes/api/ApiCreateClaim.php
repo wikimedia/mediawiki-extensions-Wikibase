@@ -176,9 +176,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	protected function getSnakInstance() {
 		$params = $this->extractRequestParams();
 
-		$entityFactory = EntityFactory::singleton();
-
-		$propertyId = $entityFactory->getUnprefixedId( $params['property'] );
+		$propertyId = EntityId::newFromPrefixedId( $params['property'] );
 
 		switch ( $params['snaktype'] ) {
 			case 'value':

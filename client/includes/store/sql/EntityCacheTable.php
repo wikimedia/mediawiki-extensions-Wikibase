@@ -123,7 +123,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 */
 	protected function getCacheIdForEntity( Entity $entity ) {
 		$identifiers = array(
-			'entity_id' => $entity->getId(),
+			'entity_id' => $entity->getId()->getNumericId(),
 			'entity_type' => $entity->getType(),
 		);
 
@@ -154,7 +154,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 */
 	public function deleteEntity( Entity $entity ) {
 		return $this->delete( array(
-			'entity_id' => $entity->getId(),
+			'entity_id' => $entity->getId()->getNumericId(),
 			'entity_type' => $entity->getType(),
 		), __METHOD__ );
 	}
@@ -170,7 +170,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 */
 	protected function newRowFromEntity( Entity $entity ) {
 		return $this->newRow( array(
-			'entity_id' => $entity->getId(),
+			'entity_id' => $entity->getId()->getNumericId(),
 			'entity_type' => $entity->getType(),
 			'entity_data' => $entity,
 		) );

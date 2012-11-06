@@ -47,13 +47,13 @@ class ReferenceObjectTest extends \MediaWikiTestCase {
 		$snakLists[] = new SnakList();
 
 		$snakLists[] = new SnakList(
-			array( new PropertyValueSnak( 1, new StringValue( 'a' ) ) )
+			array( new PropertyValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ), new StringValue( 'a' ) ) )
 		);
 
 		$snakLists[] = new SnakList( array(
-			new PropertyValueSnak( 1, new StringValue( 'a' ) ),
-			new \Wikibase\PropertySomeValueSnak( 2 ),
-			new \Wikibase\PropertyNoValueSnak( 3 )
+			new PropertyValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ), new StringValue( 'a' ) ),
+			new \Wikibase\PropertySomeValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 ) ),
+			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 3 ) )
 		) );
 
 		return $this->arrayWrap( $snakLists );

@@ -93,7 +93,7 @@ class SiteLinkTable implements SiteLinkCache {
 			$success = $dbw->insert(
 				$this->table,
 				array_merge(
-					array( 'ips_item_id' => $item->getId() ),
+					array( 'ips_item_id' => $item->getId()->getNumericId() ),
 					array(
 						'ips_site_id' => $siteLink->getSite()->getGlobalId(),
 						'ips_site_page' => $siteLink->getPage(),
@@ -123,7 +123,7 @@ class SiteLinkTable implements SiteLinkCache {
 	public function deleteLinksOfItem( Item $item, $function = null ) {
 		return wfGetDB( DB_MASTER )->delete(
 			$this->table,
-			array( 'ips_item_id' => $item->getId() ),
+			array( 'ips_item_id' => $item->getId()->getNumericId() ),
 			is_null( $function ) ? __METHOD__ : $function
 		);
 	}
@@ -196,7 +196,7 @@ class SiteLinkTable implements SiteLinkCache {
 				'ips_site_page',
 				'ips_item_id',
 			),
-			"($anyOfTheLinks) AND ips_item_id != " . (int)$item->getId(),
+			"($anyOfTheLinks) AND ips_item_id != " . $item->getId()->getNumericId(),
 			__METHOD__
 		);
 

@@ -44,7 +44,7 @@ class PropertyValueSnak extends PropertySnakObject {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $propertyId
+	 * @param EntityId $propertyId
 	 * @param DataValue $dataValue
 	 */
 	public function __construct( $propertyId, DataValue $dataValue ) {

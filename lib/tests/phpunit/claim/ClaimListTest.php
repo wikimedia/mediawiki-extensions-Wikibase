@@ -57,7 +57,9 @@ class ClaimListTest extends \MediaWikiTestCase {
 	public function getElementInstances() {
 		$instances = array();
 
-		$instances[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$instances[] = new \Wikibase\ClaimObject(
+			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) )
+		);
 
 		return $instances;
 	}

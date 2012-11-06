@@ -83,57 +83,31 @@ class EntityContentFactory {
 	/**
 	 * Returns the Title object for the item with provided id.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
-	 * @param string $entityType
-	 * @param integer $entityId
+	 * @param EntityId $id
 	 *
 	 * @throws MWException
 	 * @return Title
 	 */
-	public function getTitleForId( $entityType, $entityId ) {
-		$id = intval( $entityId );
-
-		if ( $id < 0 ) {
-			throw new MWException( 'entityId must be a positive integer, not ' . var_export( $entityId , true ) );
-		}
-
+	public function getTitleForId( EntityId $id ) {
 		return Title::newFromText(
-			EntityFactory::singleton()->getPrefixedId( $entityType, $entityId ),
-			Utils::getEntityNamespace( self::$typeMap[$entityType] )
+			$id->getPrefixedId(),
+			Utils::getEntityNamespace( self::$typeMap[$id->getEntityType()] )
 		);
 	}
 
 	/**
 	 * Returns the WikiPage object for the item with provided id.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
-	 * @param string $entityType
-	 * @param integer $entityId
-	 *
-	 * @return WikiPage
-	 */
-	public function getWikiPageForId( $entityType, $entityId ) {
-		return new WikiPage( $this->getTitleForId( $entityType, $entityId ) );
-	}
-
-	/**
-	 * Returns the WikiPage object for the item with provided prefixed id.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $prefixedId
+	 * @param EntityId
 	 *
 	 * @return WikiPage
 	 */
-	public function getWikiPageForPrefixedId( $prefixedId ) {
-		$entityFactory = EntityFactory::singleton();
-
-		$type = $entityFactory->getEntityTypeFromPrefixedId( $prefixedId );
-		$id = $entityFactory->getUnprefixedId( $prefixedId );
-
-		return new WikiPage( $this->getTitleForId( $type, $id ) );
+	public function getWikiPageForId( EntityId $id ) {
+		return new WikiPage( $this->getTitleForId( $id ) );
 	}
 
 	/**
@@ -142,10 +116,9 @@ class EntityContentFactory {
 	 * If the specified audience does not have the ability to view this
 	 * revision, if there is no such item, null will be returned.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
-	 * @param string $entityType
-	 * @param integer $entityId
+	 * @param EntityId $id
 	 *
 	 * @param $audience Integer: one of:
 	 *      Revision::FOR_PUBLIC       to be displayed to all users
@@ -154,36 +127,10 @@ class EntityContentFactory {
 	 *
 	 * @return EntityContent|null
 	 */
-	public function getFromId( $entityType, $entityId, $audience = \Revision::FOR_PUBLIC ) {
+	public function getFromId( EntityId $id, $audience = \Revision::FOR_PUBLIC ) {
 		// TODO: since we already did the trouble of getting a WikiPage here,
 		// we probably want to keep a copy of it in the Content object.
-		return $this->getWikiPageForId( $entityType, $entityId )->getContent( $audience );
-	}
-
-	/**
-	 * Get the entity content for the entity with the provided id
-	 * if it's available to the specified audience.
-	 * If the specified audience does not have the ability to view this
-	 * revision, if there is no such item, null will be returned.
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $prefixedId
-	 *
-	 * @param $audience Integer: one of:
-	 *      Revision::FOR_PUBLIC       to be displayed to all users
-	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
-	 *      Revision::RAW              get the text regardless of permissions
-	 *
-	 * @return EntityContent|null
-	 */
-	public function getFromPrefixedId( $prefixedId, $audience = \Revision::FOR_PUBLIC ) {
-		$entityFactory = EntityFactory::singleton();
-
-		$type = $entityFactory->getEntityTypeFromPrefixedId( $prefixedId );
-		$id = $entityFactory->getUnprefixedId( $prefixedId );
-
-		return $this->getFromId( $type, $id, $audience );
+		return $this->getWikiPageForId( $id )->getContent( $audience );
 	}
 
 	/**
@@ -228,7 +175,7 @@ class EntityContentFactory {
 
 		foreach ( $entityIds as $entityId ) {
 			list( $type, $id ) = $entityId;
-			$entity = self::getFromId( $type, $id );
+			$entity = self::getFromId( new EntityId( $type, $id ) );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;

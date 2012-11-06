@@ -72,7 +72,7 @@ class ApiGetEntities extends Api {
 		// B/C: assume non-prefixed IDs refer to items
 		$entityFactory = EntityFactory::singleton();
 		foreach ( $params['ids'] as $i => $id ) {
-			if ( !$entityFactory->isPrefixedId( $id ) ) {
+			if ( !EntityId::isPrefixedId( $id ) ) {
 				$params['ids'][$i] = ItemObject::getIdPrefix() . $id;
 				$this->getResult()->setWarning( 'Assuming plain numeric ID refers to an item. '
 						. 'Please use qualified IDs instead.' );
@@ -128,19 +128,22 @@ class ApiGetEntities extends Api {
 	 * @throws MWException
 	 */
 	protected function handleEntity( $id, array $params, array $props, EntitySerializer $entitySerializer ) {
-		$entityFactory = EntityFactory::singleton();
 		$entityContentFactory = EntityContentFactory::singleton();
 
 		$res = $this->getResult();
 
+		$id = EntityId::newFromPrefixedId( $id );
+
 		// key should be numeric to get the correct behaviour
 		// note that this setting depends upon "setIndexedTagName_internal"
-		$numId = $entityFactory->getUnprefixedId( $id );
-		$entityPath = array( 'entities', $this->getUsekeys() ? $id: $numId );
+		$entityPath = array(
+			'entities',
+			$this->getUsekeys() ? $id->getPrefixedId() : $id->getNumericId()
+		);
 
 		// later we do a getContent but only if props are defined
 		if ( $params['props'] !== array() ) {
-			$page = $entityContentFactory->getWikiPageForPrefixedId( $id );
+			$page = $entityContentFactory->getWikiPageForId( $id );
 
 			if ( $page->exists() ) {
 				// as long as getWikiPageForId only returns ids for legal items this holds
@@ -152,7 +155,7 @@ class ApiGetEntities extends Api {
 				// this should not happen unless a page is not what we assume it to be
 				// that is, we want this to be a little more solid if something ges wrong
 				if ( is_null( $entityContent ) ) {
-					$res->addValue( $entityPath, 'id', $id );
+					$res->addValue( $entityPath, 'id', $id->getPrefixedId() );
 					$res->addValue( $entityPath, 'illegal', "" );
 					return;
 				}
@@ -209,9 +212,8 @@ class ApiGetEntities extends Api {
 				$res->addValue( $entityPath, 'missing', "" );
 			}
 		} else {
-			$type = $entityFactory->getEntityTypeFromPrefixedId( $id );
-			$res->addValue( $entityPath, 'id', $id );
-			$res->addValue( $entityPath, 'type', $type );
+			$res->addValue( $entityPath, 'id', $id->getPrefixedId() );
+			$res->addValue( $entityPath, 'type', $id->getEntityType() );
 		}
 	}
 

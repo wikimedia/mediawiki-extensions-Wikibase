@@ -109,7 +109,7 @@ interface Change {
 	 *
 	 * @since 0.2
 	 *
-	 * @return integer
+	 * @return string
 	 */
 	public function getObjectId();
 

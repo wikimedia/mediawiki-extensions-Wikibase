@@ -55,10 +55,12 @@ final class TestChanges {
 	}
 
 	public static function getChange() {
+		$id = new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, 182 );
+
 		return array(
 			'type' => 'wikibase-item~add',
 			'time' => '20120515104713',
-			'object_id' => 182,
+			'object_id' => $id->getPrefixedId(),
 			'revision_id' => 452,
 			'user_id' => 0,
 			'info' => array(

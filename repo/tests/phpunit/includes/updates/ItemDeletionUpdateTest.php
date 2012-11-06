@@ -70,7 +70,7 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 		$update = new ItemDeletionUpdate( $itemContent );
 		$update->doUpdate();
 
-		$id = $itemContent->getItem()->getId();
+		$id = $itemContent->getItem()->getId()->getNumericId();
 		// TODO: use store
 		$this->assertEquals( 0, $this->countRows( 'wb_items_per_site', array( 'ips_item_id' => $id ) ) );
 	}

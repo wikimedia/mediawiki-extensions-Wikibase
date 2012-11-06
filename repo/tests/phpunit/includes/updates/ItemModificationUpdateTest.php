@@ -58,7 +58,7 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 		$update->doUpdate();
 
 		$item = $itemContent->getItem();
-		$id = $item->getId();
+		$id = $item->getId()->getNumericId();
 
 		// TODO: use store
 

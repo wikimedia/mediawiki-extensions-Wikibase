@@ -26,7 +26,7 @@ class ApiEditEntity extends ApiModifyEntity {
 
 		$type = $entity->getType();
 		$permissions[] = 'edit';
-		$permissions[] = $type . '-' . ( $entity->getId() ? 'override' : 'create' );
+		$permissions[] = $type . '-' . ( $entity->getId() === null ? 'create' : 'override' );
 		return $permissions;
 	}
 

@@ -159,7 +159,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		// try to create with EDIT_NEW flag
 		$entityContent->getEntity()->setLabel( 'en', 'three' );
 		$status = $entityContent->save( 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), $entityContent->getEntity()->getId() );
+		$this->assertTrue( $status->isOK(), $entityContent->getEntity()->getId()->getPrefixedId() );
 
 		// ok, the item exists now in the database.
 

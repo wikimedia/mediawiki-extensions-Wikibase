@@ -68,9 +68,12 @@ class ByPropertyListSerializerTest extends ApiSerializerBaseTest {
 
 		$dataValue0 = new \DataValues\StringValue( 'ohi' );
 
-		$snak0 = new \Wikibase\PropertyNoValueSnak( 42 );
-		$snak1 = new \Wikibase\PropertySomeValueSnak( 2 );
-		$snak2 = new \Wikibase\PropertyValueSnak( 2, $dataValue0 );
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id2 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 );
+
+		$snak0 = new \Wikibase\PropertyNoValueSnak( $id42 );
+		$snak1 = new \Wikibase\PropertySomeValueSnak( $id2 );
+		$snak2 = new \Wikibase\PropertyValueSnak( $id2, $dataValue0 );
 
 		$validArgs[] = new \Wikibase\SnakList( array( $snak0, $snak1, $snak2 ) );
 

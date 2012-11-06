@@ -43,7 +43,9 @@ class StatementObjectTest extends ClaimObjectTest {
 	public function instanceProvider() {
 		$instances = array();
 
-		$baseInstance = new StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+
+		$baseInstance = new StatementObject( new \Wikibase\PropertyNoValueSnak( $id42 ) );
 
 		$instances[] = $baseInstance;
 

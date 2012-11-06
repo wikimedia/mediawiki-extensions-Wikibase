@@ -82,7 +82,6 @@ abstract class EntityContent extends \AbstractContent {
 		if ( $this->wikiPage === false ) {
 			if ( !$this->isNew() ) {
 				$this->wikiPage = EntityContentFactory::singleton()->getWikiPageForId(
-					$this->getEntity()->getType(),
 					$this->getEntity()->getId()
 				);
 			}
@@ -499,7 +498,7 @@ abstract class EntityContent extends \AbstractContent {
 		 * @var Term $foundLabel
 		 */
 		foreach ( $foundLabels as $foundLabel ) {
-			if ( $foundLabel->getEntityId() !== $entity->getId() ) {
+			if ( $foundLabel->getEntityId() !== $entity->getId()->getNumericId() ) {
 				$status->fatal(
 					'wikibase-error-label-not-unique-wikibase-' . $entity->getType(),
 					$foundLabel->getText(),

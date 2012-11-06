@@ -58,13 +58,16 @@ class StatementListTest extends \MediaWikiTestCase {
 	public function getElementInstances() {
 		$instances = array();
 
-		$instances[] = new StatementObject( new PropertyNoValueSnak( 42 ) );
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id23 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 23 );
+
+		$instances[] = new StatementObject( new PropertyNoValueSnak( $id42 ) );
 
 		$instances[] = new StatementObject(
-			new \Wikibase\PropertyNoValueSnak( 42 ),
+			new \Wikibase\PropertyNoValueSnak( $id42 ),
 			null,
 			new \Wikibase\ReferenceList(
-				new \Wikibase\ReferenceObject( new \Wikibase\SnakList( new PropertyNoValueSnak( 23 ) ) )
+				new \Wikibase\ReferenceObject( new \Wikibase\SnakList( new PropertyNoValueSnak( $id23 ) ) )
 			)
 		);
 
