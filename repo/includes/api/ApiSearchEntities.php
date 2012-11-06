@@ -97,18 +97,22 @@ class ApiSearchEntities extends ApiBase {
 				$entry['description'] = $entity->getDescription( $language );
 			}
 
-			$entry['aliases'] = $entity->getAliases( $language, $search );
-			foreach ( $entry['aliases'] as $key => $value ) {
-				if ( preg_match( "/^" . $search . "/i", $entry['aliases'][$key] ) === 0 ) {
-					unset( $entry['aliases'][$key] );
+			$aliases = $entity->getAliases( $language, $search );
+			$entry['aliases'] = array();
+
+			foreach ( $aliases as $alias ) {
+				if ( preg_match( "/^" . $search . "/i", $alias ) !== 0 ) {
+					$entry['aliases'][] = $alias;
 				}
 			}
+
 			foreach ( $entry['aliases'] as $alias ) {
 				$aliasscore = strlen( $search ) / strlen( $alias );
 				if ( $aliasscore > $score ) {
 					$score = $aliasscore;
 				}
 			}
+
 			$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
 			if ( $score > 0 ) {
 				$entry['score'] = $score;
@@ -128,7 +132,9 @@ class ApiSearchEntities extends ApiBase {
 			}
 		}
 		$orderby = "score";
-		if ( $entries !== array() ) array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
+		if ( $entries !== array() ) {
+			array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
+		}
 
 		return $entries;
 	}
