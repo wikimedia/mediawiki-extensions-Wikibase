@@ -172,7 +172,7 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @since 0.2
 	 *
-	 * @return integer
+	 * @return string
 	 */
 	public function getObjectId() {
 		return $this->getField( 'object_id' );

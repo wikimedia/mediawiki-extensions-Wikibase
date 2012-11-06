@@ -82,7 +82,6 @@ abstract class EntityContent extends \AbstractContent {
 		if ( $this->wikiPage === false ) {
 			if ( !$this->isNew() ) {
 				$this->wikiPage = EntityContentFactory::singleton()->getWikiPageForId(
-					$this->getEntity()->getType(),
 					$this->getEntity()->getId()
 				);
 			}
@@ -339,7 +338,7 @@ abstract class EntityContent extends \AbstractContent {
 	 */
 	protected function grabFreshId() {
 		if ( !$this->isNew() ) {
-			throw new \MWException( "This entiy already has an ID!" );
+			throw new \MWException( "This entity already has an ID!" );
 		}
 
 		wfProfileIn( __METHOD__ );
@@ -399,7 +398,7 @@ abstract class EntityContent extends \AbstractContent {
 			}
 		}
 
-		//XXX: very ugly and brittle hack to pass info to prepareEdit so we can check inside a db transaction
+		//XXX: very ugly and brittle hack to pass info to prepareSave so we can check inside a db transaction
 		//     whether an edit has occurred after EditEntity checked for conflicts. If we had nested
 		//     database transactions, we could simply check here.
 		$this->editEntity = $editEntity;
@@ -499,7 +498,7 @@ abstract class EntityContent extends \AbstractContent {
 		 * @var Term $foundLabel
 		 */
 		foreach ( $foundLabels as $foundLabel ) {
-			if ( $foundLabel->getEntityId() !== $entity->getId() ) {
+			if ( $foundLabel->getEntityId() !== $entity->getId()->getNumericId() ) {
 				$status->fatal(
 					'wikibase-error-label-not-unique-wikibase-' . $entity->getType(),
 					$foundLabel->getText(),

@@ -128,6 +128,7 @@ $wgAutoloadClasses['Wikibase\EntityDiff'] 			= $dir . 'includes/entity/EntityDif
 $wgAutoloadClasses['Wikibase\EntityDiffObject'] 	= $dir . 'includes/entity/EntityDiffObject.php';
 $wgAutoloadClasses['Wikibase\EntityDiffView'] 		= $dir . 'includes/entity/EntityDiffView.php';
 $wgAutoloadClasses['Wikibase\EntityFactory'] 		= $dir . 'includes/entity/EntityFactory.php';
+$wgAutoloadClasses['Wikibase\EntityId'] 			= $dir . 'includes/entity/EntityId.php';
 $wgAutoloadClasses['Wikibase\EntityObject'] 		= $dir . 'includes/entity/EntityObject.php';
 
 // includes/item

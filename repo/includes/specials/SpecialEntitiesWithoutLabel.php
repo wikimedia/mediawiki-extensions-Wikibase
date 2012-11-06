@@ -1,5 +1,7 @@
 <?php
 
+use Wikibase\EntityId;
+
 /**
  * Page for listing entities without label.
  *
@@ -77,7 +79,9 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	 *
 	 * @param integer $offset
 	 * @param integer $limit
-	 * @return array
+	 *
+	 * @return EntityId[]
+	 * TODO: it's a bit odd that this returns an array of EntityId
 	 */
 	protected function getResult( $offset = 0, $limit = 0 ) {
 		$entityPerPage = \Wikibase\StoreFactory::getStore( 'sqlstore' )->newEntityPerPage();
@@ -95,4 +99,5 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	protected function getTitleForNavigation() {
 		return $this->getTitle( $this->language );
 	}
+
 }

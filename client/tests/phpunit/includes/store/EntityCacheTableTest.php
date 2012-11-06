@@ -89,7 +89,7 @@ class EntityCacheTest extends ORMTableTest {
 		$this->assertTrue( $table->addEntity( $entity ) );
 		$this->assertTrue( $table->hasEntity( $entity ) );
 
-		$obtainedEntity = $table->getEntity( $entity->getType(), $entity->getId() );
+		$obtainedEntity = $table->getEntity( $entity->getType(), $entity->getId()->getNumericId() );
 
 		$this->assertTrue( $entity->getDiff( $obtainedEntity )->isEmpty() );
 
@@ -129,7 +129,7 @@ class EntityCacheTest extends ORMTableTest {
 
 		$this->assertTrue( $table->updateEntity( $entity ) );
 
-		$obtainedEntity = $table->getEntity( $entity->getType(), $entity->getId() );
+		$obtainedEntity = $table->getEntity( $entity->getType(), $entity->getId()->getNumericId() );
 
 		$this->assertTrue( $entity->getDiff( $obtainedEntity )->isEmpty() );
 	}

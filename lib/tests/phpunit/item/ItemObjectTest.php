@@ -95,7 +95,7 @@ class ItemObjectTest extends EntityObjectTest {
 		 */
 		foreach ( TestItems::getItems() as $item ) {
 			// getId()
-			$this->assertTrue( is_null( $item->getId() ) || is_integer( $item->getId() ) );
+			$this->assertTrue( is_null( $item->getId() ) || $item->getId() instanceof \Wikibase\EntityId );
 			// getPrefixedId()
 			$this->assertTrue(
 				$item->getId() === null ? $item->getPrefixedId() === null : is_string( $item->getPrefixedId() )
@@ -109,7 +109,7 @@ class ItemObjectTest extends EntityObjectTest {
 		 */
 		foreach ( TestItems::getItems() as $item ) {
 			$item->setId( 42 );
-			$this->assertEquals( 42, $item->getId() );
+			$this->assertEquals( 42, $item->getId()->getNumericId() );
 		}
 	}
 
@@ -135,16 +135,6 @@ class ItemObjectTest extends EntityObjectTest {
 
 		$this->assertFalse( $item->isEmpty() );
 	}
-
-	public function testCopy() {
-		$foo = ItemObject::newEmpty();
-		$bar = $foo->copy();
-
-		$this->assertInstanceOf( '\Wikibase\Item', $bar );
-		$this->assertEquals( $foo, $bar );
-		$this->assertFalse( $foo === $bar );
-	}
-
 
 	public function testClear() {
 		parent::testClear(); //NOTE: we must test the ItemObject implementation of the functionality already tested for EntityObject.
@@ -179,7 +169,9 @@ class ItemObjectTest extends EntityObjectTest {
 		 * @var Item $item;
 		 */
 		$item = $item->copy();
-		$item->addStatement( new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) ) );
+		$item->addStatement( new \Wikibase\StatementObject(
+			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) )
+		) );
 		$items[] = $item;
 
 		return $this->arrayWrap( $items );

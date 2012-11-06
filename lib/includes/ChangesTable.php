@@ -79,7 +79,7 @@ class ChangesTable extends \ORMTable {
 			'type' => 'str',
 			'time' => 'str', // TS_MW
 			'info' => 'blob',
-			'object_id' => 'int',
+			'object_id' => 'str',
 			'user_id' => 'int',
 			'revision_id' => 'int',
 		);
@@ -100,7 +100,7 @@ class ChangesTable extends \ORMTable {
 	}
 
 	/**
-	 * Factory method to construct a new WikibaseChange instance.
+	 * Factory method to construct a new Wikibase\Change instance.
 	 *
 	 * @since 0.1
 	 *

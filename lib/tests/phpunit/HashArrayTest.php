@@ -95,7 +95,7 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 			$this->assertEquals( --$elementCount, $array->count() );
 		}
 
-		$element = new \Wikibase\PropertyNoValueSnak( 42 );
+		$element = new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) );
 
 		$array->removeElement( $element );
 		$array->removeByElementHash( $element->getHash() );

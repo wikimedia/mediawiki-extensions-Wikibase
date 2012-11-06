@@ -41,7 +41,7 @@ abstract class PropertySnakObjectTest extends SnakObjectTest {
 	 */
 	public function testGetPropertyId( PropertySnak $omnomnom ) {
 		$id = $omnomnom->getPropertyId();
-		$this->assertInternalType( 'integer', $id );
+		$this->assertInstanceOf( '\Wikibase\EntityId', $id );
 		$this->assertEquals( $id, $omnomnom->getPropertyId() );
 	}
 

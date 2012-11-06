@@ -1,7 +1,10 @@
 <?php
 
+use Wikibase\EntityId;
+
 /**
- * Base for special pages that show the result of a Query. Rewriting of QueryPage but with abstraction of the storage system and without cache support.
+ * Base for special pages that show the result of a Query. Rewriting of QueryPage but
+ * with abstraction of the storage system and without cache support.
  *
  * @since 0.3
  *
@@ -48,12 +51,14 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @since 0.3
 	 *
-	 * @param array $entity array( entity type, entity id )
-	 * @return string|false
+	 * @param EntityId $entityId
+	 * TODO: just getting an ID here is odd
+	 *
+	 * @return string
 	 */
-	protected function formatRow( array $entity ) {
+	protected function formatRow( EntityId $entityId ) {
 		try {
-			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entity[0], $entity[1] );
+			$title = \Wikibase\EntityContentFactory::singleton()->getTitleForId( $entityId );
 			return Linker::linkKnown( $title );
 		} catch ( MWException $e ) {
 		}
@@ -66,7 +71,8 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @param integer $offset
 	 * @param integer $limit
-	 * @return array
+	 *
+	 * @return EntityId[]
 	 */
 	protected abstract function getResult( $offset = 0, $limit = 0 );
 
@@ -125,13 +131,11 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	 *
 	 * @since 0.3
 	 *
-	 * @param $results array
+	 * @param EntityId[] $results
 	 * @param integer $num number of available result rows
 	 * @param integer $offset paging offset
 	 */
 	protected function outputResults( array $results, $num, $offset ) {
-		global $wgLang;
-
 		if ( $num > 0 ) {
 			$html = "\n<ol start='" . ( $offset + 1 ) . "' class='special'>\n";
 			for ( $i = 0; $i < $num; $i++ ) {
@@ -156,4 +160,5 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	protected function getTitleForNavigation() {
 		return $this->getTitle();
 	}
+
 }

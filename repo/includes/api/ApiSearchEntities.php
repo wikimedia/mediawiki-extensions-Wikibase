@@ -61,7 +61,7 @@ class ApiSearchEntities extends ApiBase {
 		 * @var Term $term
 		 */
 		foreach ( $terms as $term ) {
-			$entity = \Wikibase\EntityContentFactory::singleton()->getFromId( $entityType, $term->getEntityId() );
+			$entity = \Wikibase\EntityContentFactory::singleton()->getFromId( new EntityId( $entityType, $term->getEntityId() ) );
 
 			if ( $entity !== null ) {
 				$entities[] = $entity;

@@ -39,8 +39,13 @@ class ClaimListAccessTest extends \MediaWikiTestCase {
 	public function claimTestProvider() {
 		$claims = array();
 
-		$claims[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claims[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'ohi' ) ) );
+		$claims[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak(
+			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 )
+		) );
+		$claims[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyValueSnak(
+			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 23 ),
+			new \DataValues\StringValue( 'ohi' )
+		) );
 
 		$lists = array();
 

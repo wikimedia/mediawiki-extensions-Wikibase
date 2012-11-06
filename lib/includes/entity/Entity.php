@@ -44,9 +44,9 @@ interface Entity extends Comparable, ClaimAggregate {
 	/**
 	 * Returns the id of the entity or null if it is not in the datastore yet.
 	 *
-	 * @since 0.1
+	 * @since 0.1 return type changed in 0.3
 	 *
-	 * @return integer|null
+	 * @return EntityId|null
 	 */
 	public function getId();
 

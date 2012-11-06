@@ -170,7 +170,7 @@ class ItemContent extends EntityContent {
 				$terms,
 				null,
 				$entity->getType(),
-				$entity->getId(),
+				$entity->getId() === null ? null : $entity->getId()->getNumericId(),
 				$entity->getType()
 			);
 
@@ -203,10 +203,12 @@ class ItemContent extends EntityContent {
 		$conflicts = StoreFactory::getStore()->newSiteLinkCache()->getConflictsForItem( $this->getItem() );
 
 		foreach ( $conflicts as $conflict ) {
+			$id = new EntityId( Item::ENTITY_TYPE, $conflict['itemId'] );
+
 			/**
 			 * @var WikiPage $ipsPage
 			 */
-			$conflictingPage = EntityContentFactory::singleton()->getWikiPageForId( Item::ENTITY_TYPE, $conflict['itemId'] );
+			$conflictingPage = EntityContentFactory::singleton()->getWikiPageForId( $id );
 
 			// NOTE: it would be nice to generate the link here and just pass it as HTML,
 			// but Status forces all parameters to be escaped.
