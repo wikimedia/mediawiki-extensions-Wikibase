@@ -114,13 +114,17 @@ class EntityPerPageTable implements EntityPerPage {
 			$pages = $dbw->select(
 				array( 'page' ),
 				array( 'page_title' ),
-				array( 'page_namespace' => array( WB_NS_ITEM, WB_NS_PROPERTY, WB_NS_QUERY ) ),
+				array( 'page_namespace' => Utils::getEntityNamespaces() ),
 				__METHOD__,
 				array( 'LIMIT' => 1000, 'OFFSET' => $begin )
 			);
+
 			foreach ( $pages as $pageRow ) {
 				$entityContent = $entityContentFactory->getFromPrefixedId( $pageRow->page_title, \Revision::RAW );
-				$this->addEntityContent( $entityContent );
+
+				if ( $entityContent !== null ) {
+					$this->addEntityContent( $entityContent );
+				}
 			}
 			$begin += 1000;
 		} while ( $pages->numRows() === 1000 );
@@ -151,7 +155,7 @@ class EntityPerPageTable implements EntityPerPage {
 		}
 
 		if ( $entityType !== null ) {
-			$condisions[] .= 'epp_entity_type = ' . $dbr->addQuotes( $entityType );
+			$condisions[] = 'epp_entity_type = ' . $dbr->addQuotes( $entityType );
 		}
 
 		$rows = $dbr->select(

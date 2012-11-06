@@ -132,7 +132,7 @@ class EntityFactory {
 			}
 		}
 
-		$parts = self::getIdParts( $id );
+		$parts = self::getIdParts( strtolower( $id ) );
 
 		// this crashes with present code, add later when we are not relying
 		// on this code throwing exceptions
