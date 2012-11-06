@@ -20,7 +20,7 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.3
+ * @since 0.2
  *
  * @file
  * @ingroup Wikibase
@@ -33,7 +33,7 @@ interface EntityPerPage {
 	/**
 	 * Adds a new link between an entity and a page
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @param EntityContent $entityContent
 	 *
@@ -44,7 +44,7 @@ interface EntityPerPage {
 	/**
 	 * Removes the new link between an entity and a page
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @param EntityContent $entityContent
 	 *
@@ -55,7 +55,7 @@ interface EntityPerPage {
 	/**
 	 * Clears the table
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @return boolean Success indicator
 	 */
@@ -64,7 +64,7 @@ interface EntityPerPage {
 	/**
 	 * Rebuilds the table
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @return boolean success indicator
 	 */
@@ -74,7 +74,7 @@ interface EntityPerPage {
 	/**
 	 * Return all entities without a specify term
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @param string $termType Can be any member of the Term::TYPE_ enum
 	 * @param string|null $language Restrict the search for one language. By default the search is done for all languages.

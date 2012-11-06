@@ -3,7 +3,7 @@
 /**
  * Page for listing page without label.
  *
- * @since 0.3
+ * @since 0.2
  *
  * @file
  * @ingroup Wikibase
@@ -16,7 +16,7 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	/**
 	 * The language used
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @var string
 	 */
@@ -30,10 +30,10 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibasePage::execute
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @param string $subPage
-	 * @return bollean
+	 * @return boolean
 	 */
 	public function execute( $subPage ) {
 		if ( !parent::execute( $subPage ) ) {
@@ -73,7 +73,7 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibaseQueryPage::getResult
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @param integer $offset
 	 * @param integer $limit
@@ -88,7 +88,7 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 	/**
 	 * @see SpecialWikibaseQueryPage::getTitleForNavigation
 	 *
-	 * @since 0.3
+	 * @since 0.2
 	 *
 	 * @return Title
 	 */
