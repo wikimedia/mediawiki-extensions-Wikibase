@@ -42,7 +42,7 @@ abstract class EntityObject implements Entity {
 	 * Integer when set. False when not initialized. Null when the item is new and unsaved.
 	 *
 	 * @since 0.1
-	 * @var integer|bool|null
+	 * @var EntityId|bool|null
 	 */
 	protected $id = false;
 
@@ -85,16 +85,16 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Entity::getId()
+	 * @see Entity::getId
 	 *
-	 * @since 0.1
+	 * @since 0.1 return type changed in 0.3
 	 *
-	 * @return integer|null
+	 * @return EntityId|null
 	 */
 	public function getId() {
 		if ( $this->id === false ) {
 			if ( array_key_exists( 'entity', $this->data ) ) {
-				$this->id = (int)substr( $this->data['entity'], strlen( $this->getIdPrefix() ) );
+				$this->id = EntityId::newFromPrefixedId( $this->data['entity'] );
 			}
 			else {
 				$this->id = null;
@@ -105,29 +105,30 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
-	 * @see Entity::getPrefixedId()
+	 * @see Entity::getPrefixedId
 	 *
 	 * @since 0.2
 	 *
 	 * @return string|null
 	 */
 	public function getPrefixedId() {
-		return $this->getId() === null ? null : $this->getIdPrefix() . $this->getId();
+		return $this->getId() === null ? null : $this->getId()->getPrefixedId();
 	}
 
 	/**
-	 * @see Entity::setId()
+	 * @see Entity::setId
+	 * TODO: update to use EntityId
 	 *
 	 * @since 0.1
 	 *
 	 * @param integer $id
 	 */
 	public function setId( $id ) {
-		$this->id = $id;
+		$this->id = new EntityId( $this->getType(), $id );
 	}
 
 	/**
-	 * @see Entity::setLabel()
+	 * @see Entity::setLabel
 	 *
 	 * @since 0.1
 	 *
@@ -497,7 +498,7 @@ abstract class EntityObject implements Entity {
 			}
 		}
 		else {
-			$this->data['entity'] = $this->getIdPrefix() . $this->getId();
+			$this->data['entity'] = $this->getPrefixedId();
 		}
 	}
 

@@ -162,7 +162,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
-		$entityContent = EntityContentFactory::singleton()->getFromPrefixedId( $params['id'] );
+		$entityContent = EntityContentFactory::singleton()->getFromId( EntityId::newFromPrefixedId( $params['id'] ) );
 
 		return $entityContent === null ? null : $entityContent;
 	}
@@ -176,9 +176,7 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	protected function getSnakInstance() {
 		$params = $this->extractRequestParams();
 
-		$entityFactory = EntityFactory::singleton();
-
-		$propertyId = $entityFactory->getUnprefixedId( $params['property'] );
+		$propertyId = EntityId::newFromPrefixedId( $params['property'] );
 
 		switch ( $params['snaktype'] ) {
 			case 'value':

@@ -42,6 +42,8 @@ interface TermCache {
 	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
 	 *
 	 * @return array of array( entity type, entity id )
+	 *
+	 * TODO: update to use Term and EntityId interfaces
 	 */
 	public function getEntityIdsForLabel( $label, $languageCode = null, $description = null, $entityType = null, $fuzzySearch = false );
 

@@ -402,7 +402,7 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$this->assertEquals( $equals, $itemB->equals( $itemA ) );
 	}
 
-	public function stubTestProvider() {
+	public function instanceProvider() {
 		$entities = array();
 
 		$entities[] = $this->getNewEmpty();
@@ -414,11 +414,23 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 
 		$entities[] = $entity;
 
-		return $entities;
+		$entity = clone $entity;
+
+		$entity->setId( 42 );
+
+		$entities[] = $entity;
+
+		$entity = $this->getNewEmpty();
+
+		$entity->setId( 42 );
+
+		$entities[] = $entity;
+
+		return $this->arrayWrap( $entities );
 	}
 
 	/**
-	 * @dataProvider stubTestProvider
+	 * @dataProvider instanceProvider
 	 *
 	 * @param \Wikibase\Entity $entity
 	 */
@@ -427,6 +439,23 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$entity->stub();
 
 		$this->assertTrue( $entity->equals( $copy ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\Entity $entity
+	 */
+	public function testCopy( Entity $entity ) {
+		$copy = $entity->copy();
+
+		// The equality method alone is not enough since it does not check the IDs.
+		$this->assertTrue( $entity->equals( $copy ) );
+		$this->assertEquals( $entity->getPrefixedId(), $copy->getPrefixedId() );
+
+		// More checks that should also pass
+		$this->assertEquals( $entity, $copy );
+		$this->assertFalse( $entity === $copy );
 	}
 
 }

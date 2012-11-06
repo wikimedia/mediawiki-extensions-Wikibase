@@ -16,6 +16,7 @@ use \Wikibase\ItemContent;
  * @group Wikibase
  * @group WikibaseRepo
  * @group DataUpdate
+ * @group ItemModificationUpdateTest
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -52,33 +53,27 @@ class ItemModificationUpdateTest extends \MediaWikiTestCase {
 	 */
 	public function testDoUpdate( ItemContent $itemContent ) {
 		\TestSites::insertIntoDb();
+		$linkLookup = \Wikibase\StoreFactory::getStore()->newSiteLinkCache();
 
 		$itemContent->save( '', null, EDIT_NEW );
+
 		$update = new ItemModificationUpdate( $itemContent );
 		$update->doUpdate();
 
 		$item = $itemContent->getItem();
-		$id = $item->getId();
 
-		// TODO: use store
+		$expected = count( $item->getSiteLinks() );
+		$actual = $linkLookup->countLinks( array( $item->getId()->getNumericId() ) );
 
 		$this->assertEquals(
-			count( $item->getSiteLinks() ),
-			$this->countRows( 'wb_items_per_site', array( 'ips_item_id' => $id ) )
+			$expected,
+			$actual
 		);
 
 		// TODO: verify terms
 
 		$update = new \Wikibase\ItemDeletionUpdate( $itemContent );
 		$update->doUpdate();
-	}
-
-	protected function countRows( $table, array $conds = array() ) {
-		return wfGetDB( DB_SLAVE )->selectRow(
-			$table,
-			array( 'COUNT(*) AS rowcount' ),
-			$conds
-		)->rowcount;
 	}
 
 }

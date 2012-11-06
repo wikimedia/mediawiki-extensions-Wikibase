@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\ReferenceList;
 use Wikibase\ReferenceObject;
 use Wikibase\Hashable;
+use Wikibase\Reference;
 
 /**
  * Tests for the Wikibase\ReferenceList class.
@@ -77,7 +78,7 @@ class ReferenceListTest extends \MediaWikiTestCase {
 	 */
 	public function testHasReference( ReferenceList $array ) {
 		/**
-		 * @var Hashable $hashable
+		 * @var Reference $hashable
 		 */
 		foreach ( iterator_to_array( $array ) as $hashable ) {
 			$this->assertTrue( $array->hasReference( $hashable ) );
@@ -97,7 +98,7 @@ class ReferenceListTest extends \MediaWikiTestCase {
 		$elementCount = count( $array );
 
 		/**
-		 * @var Hashable $element
+		 * @var Reference $element
 		 */
 		foreach ( iterator_to_array( $array ) as $element ) {
 			$this->assertTrue( $array->hasReference( $element ) );

@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiBase, User, Status;
+use ApiBase, User, Status, SiteList;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of site and page title.
@@ -26,7 +26,7 @@ class ApiEditEntity extends ApiModifyEntity {
 
 		$type = $entity->getType();
 		$permissions[] = 'edit';
-		$permissions[] = $type . '-' . ( $entity->getId() ? 'override' : 'create' );
+		$permissions[] = $type . '-' . ( $entity->getId() === null ? 'create' : 'override' );
 		return $permissions;
 	}
 
@@ -479,11 +479,11 @@ class ApiEditEntity extends ApiModifyEntity {
 	 *
 	 * @param $arg Array: The argument array to verify
 	 * @param $siteCode string: The site code used in the argument
-	 * @param &$sites array: The valid site codes as an assoc array
+	 * @param &$sites SiteList: The valid site codes as an assoc array
 	 *
 	 * @return Status: Always a good status
 	 */
-	public function checkSiteLinks( $arg, $siteCode, &$sites = null ) {
+	public function checkSiteLinks( $arg, $siteCode, SiteList &$sites = null ) {
 		$status = Status::newGood();
 		if ( !is_array( $arg ) ) {
 			$this->dieUsage( $this->msg( 'wikibase-api-not-recognized-array' )->text(), 'not-recognized-array' );

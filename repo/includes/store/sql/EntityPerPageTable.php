@@ -46,7 +46,7 @@ class EntityPerPageTable implements EntityPerPage {
 			'wb_entity_per_page',
 			'epp_page_id',
 			array(
-				'epp_entity_id' => $entityContent->getEntity()->getId(),
+				'epp_entity_id' => $entityContent->getEntity()->getId()->getNumericId(),
 				'epp_entity_type' => $entityContent->getEntity()->getType()
 			),
 			__METHOD__
@@ -59,7 +59,7 @@ class EntityPerPageTable implements EntityPerPage {
 		return $dbw->insert(
 			'wb_entity_per_page',
 			array(
-				'epp_entity_id' => $entityContent->getEntity()->getId(),
+				'epp_entity_id' => $entityContent->getEntity()->getId()->getNumericId(),
 				'epp_entity_type' => $entityContent->getEntity()->getType(),
 				'epp_page_id' => $entityContent->getTitle()->getArticleID()
 			),
@@ -81,7 +81,7 @@ class EntityPerPageTable implements EntityPerPage {
 		return $dbw->delete(
 			'wb_entity_per_page',
 			array(
-				'epp_entity_id' => $entityContent->getEntity()->getId(),
+				'epp_entity_id' => $entityContent->getEntity()->getId()->getNumericId(),
 				'epp_entity_type' => $entityContent->getEntity()->getType()
 			),
 			__METHOD__
@@ -120,7 +120,7 @@ class EntityPerPageTable implements EntityPerPage {
 			);
 
 			foreach ( $pages as $pageRow ) {
-				$entityContent = $entityContentFactory->getFromPrefixedId( $pageRow->page_title, \Revision::RAW );
+				$entityContent = $entityContentFactory->getFromId( EntityId::newFromPrefixedId( $pageRow->page_title ), \Revision::RAW );
 
 				if ( $entityContent !== null ) {
 					$this->addEntityContent( $entityContent );

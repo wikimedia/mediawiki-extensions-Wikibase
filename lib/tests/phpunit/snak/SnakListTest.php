@@ -5,6 +5,7 @@ use Wikibase\SnakList;
 use Wikibase\PropertyValueSnak;
 use DataValues\StringValue;
 use Wikibase\Hashable;
+use Wikibase\Snak;
 use Wikibase\PropertyNoValueSnak;
 
 /**
@@ -51,30 +52,35 @@ class SnakListTest extends HashArrayTest {
 	 * @see GenericArrayObjectTest::elementInstancesProvider
 	 */
 	public function elementInstancesProvider() {
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+
 		$instances = array(
-			new PropertyNoValueSnak( 42 ),
-			new PropertyNoValueSnak( 9001 ),
-			new PropertyValueSnak( 42, new StringValue( 'a' ) ),
+			new PropertyNoValueSnak( $id42 ),
+			new PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 9001 ) ),
+			new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
 		);
 
 		return $this->arrayWrap( $this->arrayWrap( $instances ) );
 	}
 
 	public function constructorProvider() {
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+		$id9001 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 9001 );
+
 		return array(
 			array(),
 			array( array() ),
 			array( array(
-				new PropertyNoValueSnak( 42 )
+				new PropertyNoValueSnak( $id42 )
 			) ),
 			array( array(
-				new PropertyNoValueSnak( 42 ),
-				new PropertyNoValueSnak( 9001 ),
+				new PropertyNoValueSnak( $id42 ),
+				new PropertyNoValueSnak( $id9001 ),
 			) ),
 			array( array(
-				new PropertyNoValueSnak( 42 ),
-				new PropertyNoValueSnak( 9001 ),
-				new PropertyValueSnak( 42, new StringValue( 'a' ) ),
+				new PropertyNoValueSnak( $id42 ),
+				new PropertyNoValueSnak( $id9001 ),
+				new PropertyValueSnak( $id42, new StringValue( 'a' ) ),
 			) ),
 		);
 	}
@@ -86,7 +92,7 @@ class SnakListTest extends HashArrayTest {
 	 */
 	public function testHasSnak( SnakList $array ) {
 		/**
-		 * @var Hashable $hashable
+		 * @var Snak $hashable
 		 */
 		foreach ( iterator_to_array( $array ) as $hashable ) {
 			$this->assertTrue( $array->hasSnak( $hashable ) );
@@ -108,7 +114,7 @@ class SnakListTest extends HashArrayTest {
 		$elementCount = $array->count();
 
 		/**
-		 * @var Hashable $element
+		 * @var Snak $element
 		 */
 		foreach ( iterator_to_array( $array ) as $element ) {
 			$this->assertTrue( $array->hasSnak( $element ) );
@@ -124,7 +130,7 @@ class SnakListTest extends HashArrayTest {
 			$this->assertEquals( --$elementCount, $array->count() );
 		}
 
-		$element = new PropertyNoValueSnak( 42 );
+		$element = new PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) );
 
 		$array->removeSnak( $element );
 		$array->removeSnakHash( $element->getHash() );

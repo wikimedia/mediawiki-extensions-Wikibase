@@ -70,17 +70,10 @@ class ItemDeletionUpdateTest extends \MediaWikiTestCase {
 		$update = new ItemDeletionUpdate( $itemContent );
 		$update->doUpdate();
 
-		$id = $itemContent->getItem()->getId();
-		// TODO: use store
-		$this->assertEquals( 0, $this->countRows( 'wb_items_per_site', array( 'ips_item_id' => $id ) ) );
-	}
+		$id = $itemContent->getItem()->getId()->getNumericId();
 
-	protected function countRows( $table, array $conds = array() ) {
-		return wfGetDB( DB_SLAVE )->selectRow(
-			$table,
-			array( 'COUNT(*) AS rowcount' ),
-			$conds
-		)->rowcount;
+		$linkLookup = \Wikibase\StoreFactory::getStore()->newSiteLinkCache();
+		$this->assertEquals( 0, $linkLookup->countLinks( array( $id ) ) );
 	}
 
 }

@@ -56,7 +56,7 @@ class SpecialSetLabel extends SpecialWikibasePage {
 				if ( ( $pureId === 0 ) && ( strtolower( $id ) !== strtolower( $prefix ) . "0" ) ) {
 					$entityContent = null;
 				} else {
-					$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( \Wikibase\Item::ENTITY_TYPE, $pureId );
+					$entityContent = \Wikibase\EntityContentFactory::singleton()->getFromId( new \Wikibase\EntityId( \Wikibase\Item::ENTITY_TYPE, $pureId ) );
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 
 /**
  * Base class for property snaks.
@@ -34,7 +35,7 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	/**
 	 * @since 0.1
 	 *
-	 * @var integer
+	 * @var EntityId
 	 */
 	protected $propertyId;
 
@@ -43,9 +44,26 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $propertyId
+	 * @param EntityId $propertyId
+	 *
+	 * @throws MWException
 	 */
 	public function __construct( $propertyId ) {
+		// The first two checks here are for compat with passing an integer.
+		// The integer passing is deprecated.
+		// TODO: update
+		if ( is_int( $propertyId ) ) {
+			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
+		}
+
+		if ( !$propertyId instanceof EntityId ) {
+			throw new MWException( '$propertyId should be a EntityId' );
+		}
+
+		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
+			throw new MWException( 'The $propertyId of a property snak can only be an ID of a Property object' );
+		}
+
 		$this->propertyId = $propertyId;
 	}
 
@@ -54,7 +72,7 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	 *
 	 * @since 0.1
 	 *
-	 * @return integer
+	 * @return EntityId
 	 */
 	public function getPropertyId() {
 		return $this->propertyId;
@@ -68,7 +86,7 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( $this->propertyId );
+		return serialize( $this->propertyId->getNumericId() );
 	}
 
 	/**
@@ -81,7 +99,7 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	 * @return PropertySnak
 	 */
 	public function unserialize( $serialized ) {
-		$this->propertyId = unserialize( $serialized );
+		$this->propertyId = new EntityId( Property::ENTITY_TYPE, (int)unserialize( $serialized ) );
 	}
 
 }

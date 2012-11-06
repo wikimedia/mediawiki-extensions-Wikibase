@@ -87,7 +87,7 @@ class TermSqlCache implements TermCache {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$entityIdentifiers = array(
-			'term_entity_id' => $entity->getId(),
+			'term_entity_id' => $entity->getId()->getNumericId(),
 			'term_entity_type' => $entity->getType()
 		);
 
@@ -147,7 +147,7 @@ class TermSqlCache implements TermCache {
 		return $dbw->delete(
 			$this->tableName,
 			array(
-				'term_entity_id' => $entity->getId(),
+				'term_entity_id' => $entity->getId()->getNumericId(),
 				'term_entity_type' => $entity->getType()
 			),
 			__METHOD__

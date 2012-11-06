@@ -159,7 +159,7 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		// try to create with EDIT_NEW flag
 		$entityContent->getEntity()->setLabel( 'en', 'three' );
 		$status = $entityContent->save( 'create item', null, EDIT_NEW );
-		$this->assertTrue( $status->isOK(), $entityContent->getEntity()->getId() );
+		$this->assertTrue( $status->isOK(), $entityContent->getEntity()->getId()->getPrefixedId() );
 
 		// ok, the item exists now in the database.
 
@@ -357,13 +357,13 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 				true
 			),
 			array( #2
-				array( 'entity' => 'x23' ),
+				array( 'entity' => 'q23' ),
 				array(),
 				true
 			),
 			array( #3
-				array( 'entity' => 'x23' ),
-				array( 'entity' => 'x24' ),
+				array( 'entity' => 'q23' ),
+				array( 'entity' => 'q24' ),
 				false
 			),
 			array( #4
@@ -406,7 +406,10 @@ abstract class EntityContentTest extends \MediaWikiTestCase {
 		$itemA = $this->newFromArray( $a );
 		$itemB = $this->newFromArray( $b );
 
-		$this->assertEquals( $equals, $itemA->equals( $itemB ) );
-		$this->assertEquals( $equals, $itemB->equals( $itemA ) );
+		$actual = $itemA->equals( $itemB );
+		$this->assertEquals( $equals, $actual );
+
+		$actual = $itemB->equals( $itemA );
+		$this->assertEquals( $equals, $actual );
 	}
 }
