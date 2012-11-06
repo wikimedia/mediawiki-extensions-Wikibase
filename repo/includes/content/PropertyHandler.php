@@ -78,6 +78,7 @@ class PropertyHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
+			'history' => '\Wikibase\HistoryPropertyAction',
 			'view' => '\Wikibase\ViewPropertyAction',
 			'edit' => '\Wikibase\EditPropertyAction',
 			'submit' => '\Wikibase\SubmitPropertyAction',

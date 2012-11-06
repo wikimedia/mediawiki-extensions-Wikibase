@@ -69,6 +69,7 @@ class ItemHandler extends EntityHandler {
 	 */
 	public function getActionOverrides() {
 		return array(
+			'history' => '\Wikibase\HistoryItemAction',
 			'view' => '\Wikibase\ViewItemAction',
 			'edit' => '\Wikibase\EditItemAction',
 			'submit' => '\Wikibase\SubmitItemAction',
