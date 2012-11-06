@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACk3////8\u003d",
+        "filename": "repo/includes/content/EntityContent.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T20:21:23Z",
+      "side": 1,
+      "message": "You probably want to put this in repo/includes/updates/EntityModificationUpdate",
+      "revId": "6525335f8dcb605e65d60eb9d604b46e672d093a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACk3////4\u003d",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T20:21:23Z",
+      "side": 1,
+      "message": "Html::openElement",
+      "revId": "6525335f8dcb605e65d60eb9d604b46e672d093a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACk3////0\u003d",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T20:21:23Z",
+      "side": 1,
+      "message": "please use comments with //\n\ntypically the code is also more readable if you put the comments above the line they are associated with rather then at the end of it",
+      "revId": "6525335f8dcb605e65d60eb9d604b46e672d093a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACk3////o\u003d",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T20:21:23Z",
+      "side": 1,
+      "message": "Opening",
+      "revId": "6525335f8dcb605e65d60eb9d604b46e672d093a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACk3////s\u003d",
+        "filename": "repo/includes/specials/SpecialWikibaseQueryPage.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T20:21:23Z",
+      "side": 1,
+      "message": "Think you forgot something here :)",
+      "revId": "6525335f8dcb605e65d60eb9d604b46e672d093a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACk3////Q\u003d",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T20:21:23Z",
+      "side": 1,
+      "message": "please use !\u003d\u003d to do checks against null, esp if the value can be a string\n\nphp \u003e var_dump(\u0027\u0027!\u003dnull);\nbool(false)",
+      "revId": "6525335f8dcb605e65d60eb9d604b46e672d093a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACk3////Y\u003d",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T20:21:23Z",
+      "side": 1,
+      "message": "tab",
+      "revId": "6525335f8dcb605e65d60eb9d604b46e672d093a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
