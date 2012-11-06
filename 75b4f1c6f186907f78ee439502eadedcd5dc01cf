@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAACg3///+s\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-11-06T10:39:13Z",
+      "side": 1,
+      "message": "Done in next patchset.",
+      "parentUuid": "AAACbn///8g\u003d",
+      "revId": "75b4f1c6f186907f78ee439502eadedcd5dc01cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACbn///8k\u003d",
         "filename": "repo/includes/api/ApiSearchEntities.php",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-05T15:48:14Z",
       "side": 1,
       "message": "If you want to remove the continuation element and have it available later as well, you can use array_pop",
+      "revId": "75b4f1c6f186907f78ee439502eadedcd5dc01cf",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACg3///+w\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-11-06T10:39:13Z",
+      "side": 1,
+      "message": "No, that\u0027s not what I want to do here. It\u0027s more a problem with array sizes and starting to count at 0 or 1.",
+      "parentUuid": "AAACbn///8k\u003d",
       "revId": "75b4f1c6f186907f78ee439502eadedcd5dc01cf",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
