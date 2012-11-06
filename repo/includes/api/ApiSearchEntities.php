@@ -85,33 +85,25 @@ class ApiSearchEntities extends ApiBase {
 	private function sortByScore( $results, $language, $search ) {
 		$entries = array();
 		foreach ( $results as $result ) {
-			$score = 0;
 			$entry = array();
 			$entity = $result->getEntity();
 			$entry['id'] = $entity->getPrefixedId();
 			if ( $entity->getLabel( $language ) !== false ) {
 				$entry['label'] = $entity->getLabel( $language );
-				$score = strlen( $search ) / strlen( $entity->getLabel( $language ) );
 			}
 			if ( $entity->getDescription( $language ) !== false ) {
 				$entry['description'] = $entity->getDescription( $language );
 			}
-
-			$aliases = $entity->getAliases( $language, preg_quote( $search ) );
-			$entry['aliases'] = array();
-
-			foreach ( $aliases as $alias ) {
-				if ( preg_match( "/^" . preg_quote( $search ) . "/i", $alias ) !== 0 ) {
-					$entry['aliases'][] = $alias;
-				}
-			}
-			foreach ( $entry['aliases'] as $alias ) {
-				$aliasscore = strlen( $search ) / strlen( $alias );
-				if ( $aliasscore > $score ) {
-					$score = $aliasscore;
+			// Only include matching aliases
+			$entry['aliases'] = $entity->getAliases( $language, $search );
+			foreach ( $entry['aliases'] as $key => $value ) {
+				if ( preg_match( "/^" . $search . "/i", $entry['aliases'][$key] ) === 0 ) {
+					unset( $entry['aliases'][$key] );
 				}
 			}
 			$this->getResult()->setIndexedTagName( $entry['aliases'], 'alias' );
+			$scoreCalculator = new TermMatchScoreCalculator( $entry, $search );
+			$score = $scoreCalculator->calculateScore();
 			if ( $score > 0 ) {
 				$entry['score'] = $score;
 			}
