@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAChH////Y\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-06T11:00:08Z",
+      "side": 1,
+      "message": "The $search must be escaped otherwise some search strings will act like regular patterns",
+      "revId": "c8fa512beeaf3215eb153dc37567db1e4fa0b9b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAChH////g\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-06T11:00:08Z",
+      "side": 1,
+      "message": "+1, insert space",
+      "revId": "c8fa512beeaf3215eb153dc37567db1e4fa0b9b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAChH////o\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-06T11:00:08Z",
+      "side": 1,
+      "message": "-1, insert space",
+      "revId": "c8fa512beeaf3215eb153dc37567db1e4fa0b9b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAChH////k\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-06T11:00:08Z",
+      "side": 1,
+      "message": "-1, insert space",
+      "revId": "c8fa512beeaf3215eb153dc37567db1e4fa0b9b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAChH////c\u003d",
+        "filename": "repo/includes/api/ApiSearchEntities.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-06T11:00:08Z",
+      "side": 1,
+      "message": "-1, insert space",
+      "revId": "c8fa512beeaf3215eb153dc37567db1e4fa0b9b6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
