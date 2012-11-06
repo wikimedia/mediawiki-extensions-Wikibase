@@ -11,6 +11,6 @@ class CreateEntityPage < EntityPage
 
   text_field(:createEntityLabelField, :id => "wb-createentity-label")
   text_field(:createEntityDescriptionField, :id => "wb-createentity-description")
-  button(:createEntitySubmit, :id => "wb-createentiy-submit")
+  button(:createEntitySubmit, :id => "wb-createentity-submit")
 
 end

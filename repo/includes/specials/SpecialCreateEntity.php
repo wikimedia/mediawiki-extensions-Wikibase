@@ -240,7 +240,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 					$this->msg( 'wikibase-createentity-submit' )->text(),
 					'submit',
 					array(
-						'id' => 'wb-createentiy-submit',
+						'id' => 'wb-createentity-submit',
 						'class' => 'wb-button'
 					)
 				)
