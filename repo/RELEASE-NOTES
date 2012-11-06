@@ -8,7 +8,10 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 === Version 0.2 ===
 (dev)
 
-*
+* Added Special:SetLabel
+* Added Special:EntitiesWithoutLabel
+* Added wbsearchentities API module
+* Renamed wbsetitem API module to wbsetentity
 
 === Version 0.1 ===
 (2012-11-01)
