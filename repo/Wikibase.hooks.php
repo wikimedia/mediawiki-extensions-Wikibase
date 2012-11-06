@@ -805,4 +805,35 @@ final class RepoHooks {
 		return true;
 	}
 
+	public static function onShowSearchHit( \SpecialSearch $searchPage, \SearchResult $result, $terms,
+		&$link, &$redirect, &$section, &$extract,
+		&$score, &$size, &$date, &$related,
+		&$html
+	) {
+		$model = $result->getTitle()->getContentModel();
+
+		if ( EntityContentFactory::singleton()->isEntityContentModel( $model ) ) {
+			$lang = $searchPage->getLanguage();
+			$page = WikiPage::factory( $result->getTitle() );
+
+			/* @var EntityContent $content */
+			$content = $page->getContent();
+
+			if ( $content ) {
+				$entity = $content->getEntity();
+				$description = $entity->getDescription( $lang->getCode() ); // TODO: language fallback!
+
+				if ( $description !== false && $description !== '' ) {
+					$attr = array( 'class' => 'wb-itemlink-description' );
+					$link .= wfMessage( 'colon-separator' )->text();
+					$link .= Html::element( 'span', $attr, $description );
+				}
+			}
+
+			// TODO: set $extract to  something useful.
+		}
+
+		return true;
+	}
+
 }
