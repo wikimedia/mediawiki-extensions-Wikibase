@@ -133,6 +133,17 @@ class SqlStore implements Store {
 
 				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildTermsSearchKey' );
 			}
+
+			// Update from 0.1. or 0.2.
+			if ( !$db->tableExists( 'wb_entity_per_page' ) ) {
+
+				$updater->addExtensionTable(
+					'wb_entity_per_page',
+					__DIR__ . '/AddEntityPerPage' . $extension
+				);
+
+				$updater->addPostDatabaseUpdateMaintenance( 'Wikibase\RebuildEntityPerPage' );
+			}
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
@@ -161,4 +172,14 @@ class SqlStore implements Store {
 		return new SiteLinkTable( 'wb_items_per_site' );
 	}
 
+	/**
+	 * @see Store::EntityPerPage
+	 *
+	 * @since 0.3
+	 *
+	 * @return EntityPerPage
+	 */
+	public function newEntityPerPage() {
+		return new EntityPerPageTable();
+	}
 }

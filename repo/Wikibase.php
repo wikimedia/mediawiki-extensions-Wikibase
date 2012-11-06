@@ -155,18 +155,21 @@ $wgAutoloadClasses['SpecialItemResolver'] 				= $dir . 'includes/specials/Specia
 $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/SpecialItemDisambiguation.php';
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 $wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSetLabel.php';
+$wgAutoloadClasses['SpecialWikibaseQueryPage']			= $dir . 'includes/specials/SpecialWikibaseQueryPage.php';
+$wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	= $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
 $wgAutoloadClasses['Wikibase\Store'] 					= $dir . 'includes/store/Store.php';
 $wgAutoloadClasses['Wikibase\StoreFactory'] 			= $dir . 'includes/store/StoreFactory.php';
 $wgAutoloadClasses['Wikibase\TermCache'] 				= $dir . 'includes/store/TermCache.php';
-
+$wgAutoloadClasses['Wikibase\EntityPerPage']			= $dir . 'includes/store/EntityPerPage.php';
 
 // includes/store/sql
 $wgAutoloadClasses['Wikibase\SqlIdGenerator'] 			= $dir . 'includes/store/sql/SqlIdGenerator.php';
 $wgAutoloadClasses['Wikibase\SqlStore'] 				= $dir . 'includes/store/sql/SqlStore.php';
 $wgAutoloadClasses['Wikibase\TermSqlCache'] 			= $dir . 'includes/store/sql/TermSqlCache.php';
+$wgAutoloadClasses['Wikibase\EntityPerPageTable']		= $dir . 'includes/store/sql/EntityPerPageTable.php';
 
 // includes/updates
 $wgAutoloadClasses['Wikibase\EntityDeletionUpdate'] 	= $dir . 'includes/updates/EntityDeletionUpdate.php';
@@ -176,6 +179,7 @@ $wgAutoloadClasses['Wikibase\ItemModificationUpdate'] 	= $dir . 'includes/update
 
 // maintenance
 $wgAutoloadClasses['Wikibase\RebuildTermsSearchKey'] 	= $dir . 'maintenance/rebuildTermsSearchKey.php';
+$wgAutoloadClasses['Wikibase\RebuildEntityPerPage'] 	= $dir . 'maintenance/rebuildEntityPerPage.php';
 
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
@@ -207,6 +211,7 @@ $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';
 $wgSpecialPages['ListDatatypes']        			= 'SpecialListDatatypes';
 $wgSpecialPages['SetLabel'] 						= 'SpecialSetLabel';
+$wgSpecialPages['EntitiesWithoutLabel'] 			= 'SpecialEntitiesWithoutLabel';
 
 
 // Hooks
