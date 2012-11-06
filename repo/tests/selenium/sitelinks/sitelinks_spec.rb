@@ -168,7 +168,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         aCListElement.visible?.should be_true
         aCListElement.click
         page.pageInputField_element.enabled?.should be_true
-        page.pageInputField = "s"
+        page.pageInputField = "Helijum"
         ajax_wait
         page.wait_until do
           page.pageAutocompleteList_element.visible?
@@ -177,7 +177,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
         ajax_wait
         page.wait_for_api_callback
         page.pageArticleNormalized?.should be_true
-        page.pageArticleNormalized_element.text.should == "С"
+        page.pageArticleNormalized_element.text.should == "Хелијум"
       end
     end
   end
