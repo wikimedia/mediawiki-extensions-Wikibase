@@ -161,8 +161,8 @@ class EntityPerPageTable implements EntityPerPage {
 		$rows = $dbr->select(
 			array( 'wb_entity_per_page', 'wb_terms' ),
 			array(
+				'entity_id' => 'epp_entity_id',
 				'entity_type' => 'epp_entity_type',
-				'entity_id' => 'epp_entity_id'
 			),
 			$conditions,
 			__METHOD__,
