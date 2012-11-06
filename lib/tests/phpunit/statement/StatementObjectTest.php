@@ -43,7 +43,9 @@ class StatementObjectTest extends ClaimObjectTest {
 	public function instanceProvider() {
 		$instances = array();
 
-		$baseInstance = new StatementObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+
+		$baseInstance = new StatementObject( new \Wikibase\PropertyNoValueSnak( $id42 ) );
 
 		$instances[] = $baseInstance;
 
@@ -60,7 +62,7 @@ class StatementObjectTest extends ClaimObjectTest {
 
 		$instance->setReferences( new \Wikibase\ReferenceList(
 			new ReferenceObject( new \Wikibase\SnakList(
-				new \Wikibase\PropertyValueSnak( 1, new StringValue( 'a' ) )
+				new \Wikibase\PropertyValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ), new StringValue( 'a' ) )
 			) )
 		) );
 
@@ -82,7 +84,10 @@ class StatementObjectTest extends ClaimObjectTest {
 	public function testSetReferences( Statement $statement ) {
 		$references = new \Wikibase\ReferenceList(
 			new ReferenceObject( new \Wikibase\SnakList(
-				new \Wikibase\PropertyValueSnak( 1, new StringValue( 'a' ) )
+				new \Wikibase\PropertyValueSnak(
+					new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ),
+					new StringValue( 'a' )
+				)
 			) )
 		);
 

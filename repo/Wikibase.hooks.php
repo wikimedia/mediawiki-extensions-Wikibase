@@ -87,6 +87,16 @@ final class RepoHooks {
 				'wb_changes',
 				__DIR__ . '/sql/changes' . $extension
 			);
+
+			if ( !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
+				$updater->addExtensionUpdate( array(
+					'applyPatch',
+					__DIR__ . '/sql/ChangeChangeObjectId.sql',
+					true
+				) );
+
+				$updater->insertUpdateRow( 'ChangeChangeObjectId.sql' );
+			}
 		}
 		else {
 			wfWarn( "Database type '$type' is not supported by the Wikibase repository." );
@@ -231,7 +241,7 @@ final class RepoHooks {
 			$change->setFields( array(
 				'revision_id' => $revision->getId(),
 				'user_id' => $user->getId(),
-				'object_id' => $newEntity->getId(),
+				'object_id' => $newEntity->getId()->getPrefixedId(),
 				'time' => $revision->getTimestamp(),
 			) );
 
@@ -276,13 +286,17 @@ final class RepoHooks {
 		if ( !$content || !in_array( $content->getModel(), EntityContentFactory::singleton()->getEntityContentModels() ) ) {
 			return true;
 		}
+
+		/**
+		 * @var Entity $entity
+		 */
 		$entity = $content->getEntity();
 		$change = EntityDeletion::newFromEntity( $entity );
 		$change->setFields( array(
 			//'previous_revision_id' => $wikiPage->getLatest(),
 			'revision_id' => 0, // there's no current revision
 			'user_id' => $user->getId(),
-			'object_id' => $entity->getId(),
+			'object_id' => $entity->getId()->getPrefixedId(),
 			'time' => $logEntry->getTimestamp(),
 		) );
 
@@ -332,7 +346,7 @@ final class RepoHooks {
 			$change->setFields( array(
 				'revision_id' => $revId,
 				'user_id' => $rev->getUser(),
-				'object_id' => $entity->getId(),
+				'object_id' => $entity->getId()->getPrefixedId(),
 				'time' => wfTimestamp( TS_MW, wfTimestampNow() )
 			) );
 
@@ -627,7 +641,7 @@ final class RepoHooks {
 				// add class to body so it's clear this is a wb item:
 				$bodyAttrs['class'] .= " wb-entitypage wb-{$entityType}page";
 				// add another class with the ID of the item:
-				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntity()->getId()}";
+				$bodyAttrs['class'] .= " wb-{$entityType}page-{$entityContent->getEntity()->getId()->getPrefixedId()}";
 
 				if ( $sk->getRequest()->getCheck( 'diff' ) ) {
 					$bodyAttrs['class'] .= ' wb-diffpage';

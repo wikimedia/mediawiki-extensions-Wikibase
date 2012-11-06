@@ -69,13 +69,13 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
 		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId();
+		$id0 = $content0->getItem()->getId()->getNumericId();
 
 		$content1 = ItemContent::newEmpty();
 		$content1->setItem( $item1 );
 
 		$content1->save( '', null, EDIT_NEW );
-		$id1 = $content1->getItem()->getId();
+		$id1 = $content1->getItem()->getId()->getNumericId();
 
 		$ids = $lookup->getEntityIdsForLabel( 'foobar' );
 		$this->assertInternalType( 'array', $ids );
@@ -178,13 +178,13 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
 		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId();
+		$id0 = $content0->getItem()->getId()->getNumericId();
 
 		$content1 = ItemContent::newEmpty();
 		$content1->setItem( $item1 );
 
 		$content1->save( '', null, EDIT_NEW );
-		$id1 = $content1->getItem()->getId();
+		$id1 = $content1->getItem()->getId()->getNumericId();
 
 		$terms = array(
 			$id0 => new Term( array(
@@ -233,13 +233,13 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
 		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId();
+		$id0 = $content0->getItem()->getId()->getNumericId();
 
 		$content1 = ItemContent::newEmpty();
 		$content1->setItem( $item1 );
 
 		$content1->save( '', null, EDIT_NEW );
-		$id1 = $content1->getItem()->getId();
+		$id1 = $content1->getItem()->getId()->getNumericId();
 
 		$terms = array(
 			$id0 => new Term( array(
@@ -317,7 +317,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$ids = $lookup->getEntityIdsForLabel( 'abc' );
 		$ids = array_map( function( $id ) { return $id[1]; }, $ids );
 
-		$this->assertTrue( !in_array( $content->getItem()->getId(), $ids, true ) );
+		$this->assertTrue( !in_array( $content->getItem()->getId()->getNumericId(), $ids, true ) );
 	}
 
 	/**
@@ -380,7 +380,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 		$content0 = ItemContent::newEmpty();
 		$content0->setItem( $item0 );
 		$content0->save( '', null, EDIT_NEW );
-		$id0 = $content0->getItem()->getId();
+		$id0 = $content0->getItem()->getId()->getNumericId();
 
 		$terms = array(
 			$id0 => array(

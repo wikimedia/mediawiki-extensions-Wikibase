@@ -39,11 +39,11 @@ class SnakTest extends \MediaWikiTestCase {
 	public function snakProvider() {
 		$snaks = array();
 
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( 1 );
-		$snaks[] = new \Wikibase\PropertyNoValueSnak( 42 );
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( 1 );
-		$snaks[] = new \Wikibase\PropertySomeValueSnak( 42 );
+		$snaks[] = new \Wikibase\PropertyNoValueSnak( $id42 );
+
+		$snaks[] = new \Wikibase\PropertySomeValueSnak( $id42 );
 
 		$values = array();
 
@@ -52,7 +52,7 @@ class SnakTest extends \MediaWikiTestCase {
 		$values[] = new \DataValues\QuantityValue( 4.2, 'm', 1 );
 
 		foreach ( $values as $value ) {
-			$snaks[] = new \Wikibase\PropertyValueSnak( 1, $value );
+			$snaks[] = new \Wikibase\PropertyValueSnak( $id42, $value );
 		}
 
 		return $this->arrayWrap( $snaks );
@@ -71,7 +71,7 @@ class SnakTest extends \MediaWikiTestCase {
 	 * @param Snak $snak
 	 */
 	public function testGetPropertyId( Snak $snak ) {
-		$this->assertInternalType( 'integer', $snak->getPropertyId() );
+		$this->assertInstanceOf( '\Wikibase\EntityId', $snak->getPropertyId() );
 	}
 
 	/**

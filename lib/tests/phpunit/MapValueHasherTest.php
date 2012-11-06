@@ -37,10 +37,10 @@ class MapValueHasherTest extends \MediaWikiTestCase {
 		$hasher = new MapValueHasher();
 
 		$map0 = array(
-			'foo' => new \Wikibase\PropertyNoValueSnak( 1 ),
-			'bar' => new \Wikibase\PropertyNoValueSnak( 2 ),
-			42 => new \Wikibase\PropertyNoValueSnak( 42 ),
-			new \Wikibase\PropertyNoValueSnak( 9001 ),
+			'foo' => new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ) ),
+			'bar' => new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 ) ),
+			42 => new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) ),
+			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 9001 ) ),
 		);
 
 		$hash = $hasher->hash( $map0 );
@@ -60,7 +60,7 @@ class MapValueHasherTest extends \MediaWikiTestCase {
 		$this->assertNotEquals( $hash, $hasher->hash( $map2 ) );
 
 		$map3 = $map0;
-		$map3['foo'] = new \Wikibase\PropertyNoValueSnak( 5 );
+		$map3['foo'] = new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 5 ) );
 
 		$this->assertNotEquals( $hash, $hasher->hash( $map3 ) );
 	}

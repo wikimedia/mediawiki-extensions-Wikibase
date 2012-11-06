@@ -55,13 +55,15 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$id = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( 1 ) );
+		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( $id ) );
+
+		$validArgs[] = new \Wikibase\ClaimObject( new \Wikibase\PropertySomeValueSnak( $id ) );
 
 		$validArgs = $this->arrayWrap( $validArgs );
 
-		$claim = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$claim = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( $id ) );
 
 		$validArgs[] = array(
 			$claim,
@@ -77,7 +79,7 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 			),
 		);
 
-		$statement = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( 2 ) );
+		$statement = new \Wikibase\StatementObject( new \Wikibase\PropertyNoValueSnak( $id ) );
 
 		$validArgs[] = array(
 			$statement,
@@ -85,7 +87,7 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 				'id' => $statement->getGuid(),
 				'mainsnak' => array(
 					'snaktype' => 'novalue',
-					'property' => 'p2',
+					'property' => 'p42',
 				),
 				// Commented out because empty structures should
 				// not be reported by the API, so can't be tested

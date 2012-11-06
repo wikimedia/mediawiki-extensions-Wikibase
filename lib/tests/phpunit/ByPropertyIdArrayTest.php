@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ByPropertyIdArray;
+use Wikibase\ByPropertyIdArray, Wikibase\EntityId, Wikibase\Property, Wikibase\PropertySnak;
 
 /**
  * Tests for the Wikibase\ByPropertyIdArray class.
@@ -40,11 +40,11 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 		$lists = array();
 
 		$snaks = array(
-			new \Wikibase\PropertyNoValueSnak( 42 ),
-			new \Wikibase\PropertySomeValueSnak( 42 ),
-			new \Wikibase\PropertySomeValueSnak( 10 ),
-			new \Wikibase\PropertySomeValueSnak( 1 ),
-			new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'ohi' ) ),
+			new \Wikibase\PropertyNoValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
+			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 42 ) ),
+			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ) ),
+			new \Wikibase\PropertySomeValueSnak( new EntityId( Property::ENTITY_TYPE, 1 ) ),
+			new \Wikibase\PropertyValueSnak( new EntityId( Property::ENTITY_TYPE, 10 ), new \DataValues\StringValue( 'ohi' ) ),
 		);
 
 		$lists[] = $snaks;
@@ -68,7 +68,7 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider listProvider
-	 * @param array $objects
+	 * @param PropertySnak[] $objects
 	 */
 	public function testGetIds( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );
@@ -76,7 +76,7 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 		$expected = array();
 
 		foreach ( $objects as $object ) {
-			$expected[] = $object->getPropertyId();
+			$expected[] = $object->getPropertyId()->getNumericId();
 		}
 
 		$expected = array_unique( $expected );
@@ -96,7 +96,7 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 		$ids = array();
 
 		foreach ( $objects as $object ) {
-			$ids[] = $object->getPropertyId();
+			$ids[] = $object->getPropertyId()->getNumericId();
 		}
 
 		$ids = array_unique( $ids );
@@ -108,7 +108,7 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 		foreach ( $ids as $id ) {
 			foreach ( $indexedArray->getByPropertyId( $id ) as $obtainedObject ) {
 				$allObtainedObjects[] = $obtainedObject;
-				$this->assertEquals( $id, $obtainedObject->getPropertyId() );
+				$this->assertEquals( $id, $obtainedObject->getPropertyId()->getNumericId() );
 			}
 		}
 

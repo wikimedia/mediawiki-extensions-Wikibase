@@ -39,21 +39,22 @@ final class TestItems {
 	 * @return Item[]
 	 */
 	public static function getItems() {
-		$items = array( ItemObject::newEmpty() );
+		$items = array();
 
+		//$items[] = ItemObject::newEmpty();
 
 		$item = ItemObject::newEmpty();
 
 		$item->setDescription( 'en', 'foo' );
 		$item->setLabel( 'en', 'bar' );
 
-		$items[] = $item;
+		//$items[] = $item;
 
 		$item = ItemObject::newEmpty();
 
 		$item->addAliases( 'en', array( 'foobar', 'baz' ) );
 
-		$items[] = $item;
+		//$items[] = $item;
 
 		$item = ItemObject::newEmpty();
 
@@ -64,7 +65,7 @@ final class TestItems {
 			$item->addSiteLink( new SiteLink( $sites->getIterator()->current(), 'spam' ) );
 		}
 
-		$items[] = $item;
+		//$items[] = $item;
 
 		$item = ItemObject::newEmpty();
 

@@ -40,16 +40,18 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 	public function constructorProvider() {
 		$argLists = array();
 
-		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( 42 ), new SnakList() );
+		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+
+		$argLists[] = array( new \Wikibase\PropertyNoValueSnak( $id42 ), new SnakList() );
 
 		$argLists[] = array(
-			new \Wikibase\PropertyNoValueSnak( 42 ),
+			new \Wikibase\PropertyNoValueSnak( $id42 ),
 			new \Wikibase\SnakList( array(
-				new \Wikibase\PropertyValueSnak( 1, new StringValue( 'a' ) ),
-				new \Wikibase\PropertySomeValueSnak( 2 ),
-				new \Wikibase\PropertyNoValueSnak( 3 )
+				new \Wikibase\PropertyValueSnak( $id42, new StringValue( 'a' ) ),
+				new \Wikibase\PropertySomeValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ) ),
+				new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 ) )
 			) )
 		);
 
@@ -92,36 +94,40 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 	}
 
 	public function testSetMainSnak() {
-		$claim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$snak = new \Wikibase\PropertyNoValueSnak( 41 );
+		$claim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( $id42 ) );
+
+		$snak = new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 41 ) );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
-		$snak = new \Wikibase\PropertyValueSnak( 43, new StringValue( 'a' ) );
+		$snak = new \Wikibase\PropertyValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 43 ), new StringValue( 'a' ) );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 
-		$snak = new \Wikibase\PropertyNoValueSnak( 42 );
+		$snak = new \Wikibase\PropertyNoValueSnak( $id42 );
 		$claim->setMainSnak( $snak );
 		$this->assertEquals( $snak, $claim->getMainSnak() );
 	}
 
 	public function testSetQualifiers() {
-		$claim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+
+		$claim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( $id42 ) );
 
 		$qualifiers = new SnakList();
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 
-		$qualifiers = new SnakList( array( new \Wikibase\PropertyValueSnak( 42, new StringValue( 'a' ) ) ) );
+		$qualifiers = new SnakList( array( new \Wikibase\PropertyValueSnak( $id42, new StringValue( 'a' ) ) ) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );
 
 		$qualifiers = new SnakList( array(
-			new \Wikibase\PropertyValueSnak( 42, new StringValue( 'a' ) ),
-			new \Wikibase\PropertySomeValueSnak( 2 ),
-			new \Wikibase\PropertyNoValueSnak( 3 )
+			new \Wikibase\PropertyValueSnak( $id42, new StringValue( 'a' ) ),
+			new \Wikibase\PropertySomeValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 2 ) ),
+			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 3 ) )
 		) );
 		$claim->setQualifiers( $qualifiers );
 		$this->assertEquals( $qualifiers, $claim->getQualifiers() );

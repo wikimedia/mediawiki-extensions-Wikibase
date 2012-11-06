@@ -45,7 +45,7 @@ class ByPropertyIdArray extends \ArrayObject {
 	/**
 	 * @since 0.2
 	 *
-	 * @var null|array of string|integer
+	 * @var null|object[]
 	 */
 	protected $byId = null;
 
@@ -58,7 +58,7 @@ class ByPropertyIdArray extends \ArrayObject {
 		$this->byId = array();
 
 		foreach ( $this as $object ) {
-			$propertyId = $object->getPropertyId();
+			$propertyId = $object->getPropertyId()->getNumericId();
 
 			if ( !array_key_exists( $propertyId, $this->byId ) ) {
 				$this->byId[$propertyId] = array();
@@ -69,11 +69,11 @@ class ByPropertyIdArray extends \ArrayObject {
 	}
 
 	/**
-	 * Returns the property ids in the index.
+	 * Returns the property ids in the index as integers.
 	 *
 	 * @since 0.2
 	 *
-	 * @return array of string|integer
+	 * @return integer[]
 	 * @throws MWException
 	 */
 	public function getPropertyIds() {
@@ -89,10 +89,9 @@ class ByPropertyIdArray extends \ArrayObject {
 	 *
 	 * @since 0.2
 	 *
-	 * @param string|integer $propertyId
+	 * @param integer $propertyId
 	 *
-	 * @throws \MWException
-	 * @return array of object
+	 * @return object[]
 	 * @throws MWException
 	 */
 	public function getByPropertyId( $propertyId ) {

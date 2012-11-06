@@ -36,7 +36,7 @@ interface Snak extends \Serializable, Hashable, Immutable {
 	 *
 	 * @since 0.2
 	 *
-	 * @return integer
+	 * @return EntityId
 	 */
 	public function getPropertyId();
 

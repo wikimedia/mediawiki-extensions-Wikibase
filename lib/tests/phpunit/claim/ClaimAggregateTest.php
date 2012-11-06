@@ -40,8 +40,13 @@ class ClaimAggregateTest extends \MediaWikiTestCase {
 	public function ClaimTestProvider() {
 		$claims = array();
 
-		$claims[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
-		$claims[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'ohi' ) ) );
+		$claims[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak(
+			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 )
+		) );
+		$claims[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyValueSnak(
+			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 23 ),
+			new \DataValues\StringValue( 'ohi' )
+		) );
 
 		$aggregates = array();
 
@@ -78,7 +83,10 @@ class ClaimAggregateTest extends \MediaWikiTestCase {
 
 		$unmodifiedClaims = clone $obtainedClaims;
 
-		$qualifiers = new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak( 10, new \DataValues\StringValue( 'ohi' ) ) ) );
+		$qualifiers = new \Wikibase\SnakList( array( new \Wikibase\PropertyValueSnak(
+			new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 10 ),
+			new \DataValues\StringValue( 'ohi' )
+		) ) );
 
 		/**
 		 * @var Claim $claim

@@ -3,6 +3,8 @@
 namespace Wikibase\Test;
 use Diff\MapDiff;
 use Wikibase\ChangesTable;
+use Wikibase\Item;
+use Wikibase\EntityId;
 
 /**
  * Tests for the Wikibase\ChangesTable class.
@@ -30,6 +32,8 @@ use Wikibase\ChangesTable;
 class ChangesTableTest extends \MediaWikiTestCase {
 
 	public function newFromArrayProvider() {
+		$id = new EntityId( Item::ENTITY_TYPE, 42 );
+
 		return array(
 			array(
 				array(
@@ -37,7 +41,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 					'time' => '20120101000000',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
-					'object_id' => 42,
+					'object_id' => $id->getPrefixedId(),
 					'info' => array(
 						'entity' => \Wikibase\ItemObject::newEmpty(),
 						'diff' => \Wikibase\ItemDiff::newEmpty(),
@@ -51,7 +55,7 @@ class ChangesTableTest extends \MediaWikiTestCase {
 					'time' => '20120101000000',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
-					'object_id' => 42,
+					'object_id' => $id->getPrefixedId(),
 					'info' => array(
 						'entity' => \Wikibase\ItemObject::newEmpty(),
 						'diff' => \Wikibase\ItemDiff::newEmpty(),

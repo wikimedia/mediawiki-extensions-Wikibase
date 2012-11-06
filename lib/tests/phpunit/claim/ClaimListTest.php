@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\ClaimList;
 use Wikibase\ClaimObject;
 use Wikibase\Hashable;
+use Wikibase\Claim;
 
 /**
  * Tests for the Wikibase\ClaimList class.
@@ -57,7 +58,9 @@ class ClaimListTest extends \MediaWikiTestCase {
 	public function getElementInstances() {
 		$instances = array();
 
-		$instances[] = new \Wikibase\ClaimObject( new \Wikibase\PropertyNoValueSnak( 42 ) );
+		$instances[] = new \Wikibase\ClaimObject(
+			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) )
+		);
 
 		return $instances;
 	}
@@ -77,7 +80,7 @@ class ClaimListTest extends \MediaWikiTestCase {
 	 */
 	public function testHasClaim( ClaimList $array ) {
 		/**
-		 * @var Hashable $hashable
+		 * @var Claim $hashable
 		 */
 		foreach ( iterator_to_array( $array ) as $hashable ) {
 			$this->assertTrue( $array->hasClaim( $hashable ) );
@@ -97,7 +100,7 @@ class ClaimListTest extends \MediaWikiTestCase {
 		$elementCount = count( $array );
 
 		/**
-		 * @var Hashable $element
+		 * @var Claim $element
 		 */
 		foreach ( iterator_to_array( $array ) as $element ) {
 			$this->assertTrue( $array->hasClaim( $element ) );

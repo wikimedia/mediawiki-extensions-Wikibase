@@ -93,7 +93,7 @@ class SiteLinkTable implements SiteLinkCache {
 			$success = $dbw->insert(
 				$this->table,
 				array_merge(
-					array( 'ips_item_id' => $item->getId() ),
+					array( 'ips_item_id' => $item->getId()->getNumericId() ),
 					array(
 						'ips_site_id' => $siteLink->getSite()->getGlobalId(),
 						'ips_site_page' => $siteLink->getPage(),
@@ -123,7 +123,7 @@ class SiteLinkTable implements SiteLinkCache {
 	public function deleteLinksOfItem( Item $item, $function = null ) {
 		return wfGetDB( DB_MASTER )->delete(
 			$this->table,
-			array( 'ips_item_id' => $item->getId() ),
+			array( 'ips_item_id' => $item->getId()->getNumericId() ),
 			is_null( $function ) ? __METHOD__ : $function
 		);
 	}
@@ -148,7 +148,7 @@ class SiteLinkTable implements SiteLinkCache {
 			)
 		);
 
-		return $result === false ? false : $result->ips_item_id;
+		return $result === false ? false : (int)$result->ips_item_id;
 	}
 
 	/**
@@ -167,7 +167,7 @@ class SiteLinkTable implements SiteLinkCache {
 			return array();
 		}
 
-		$dbw = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_SLAVE );
 
 		$anyOfTheLinks = '';
 
@@ -180,23 +180,23 @@ class SiteLinkTable implements SiteLinkCache {
 			}
 
 			$anyOfTheLinks .= '(';
-			$anyOfTheLinks .= 'ips_site_id=' . $dbw->addQuotes( $siteLink->getSite()->getGlobalId() );
+			$anyOfTheLinks .= 'ips_site_id=' . $dbr->addQuotes( $siteLink->getSite()->getGlobalId() );
 			$anyOfTheLinks .= ' AND ';
-			$anyOfTheLinks .= 'ips_site_page=' . $dbw->addQuotes( $siteLink->getPage() );
+			$anyOfTheLinks .= 'ips_site_page=' . $dbr->addQuotes( $siteLink->getPage() );
 			$anyOfTheLinks .= ')';
 		}
 
 		//TODO: $anyOfTheLinks might get very large and hit some size limit imposed by the database.
 		//      We could chop it up of we know that size limit. For MySQL, it's select @@max_allowed_packet.
 
-		$conflictingLinks = $dbw->select(
+		$conflictingLinks = $dbr->select(
 			$this->table,
 			array(
 				'ips_site_id',
 				'ips_site_page',
 				'ips_item_id',
 			),
-			"($anyOfTheLinks) AND ips_item_id != " . (int)$item->getId(),
+			"($anyOfTheLinks) AND ips_item_id != " . $item->getId()->getNumericId(),
 			__METHOD__
 		);
 
@@ -222,6 +222,94 @@ class SiteLinkTable implements SiteLinkCache {
 	 */
 	public function clear() {
 		return wfGetDB( DB_MASTER )->delete( $this->table, '*', __METHOD__ );
+	}
+
+	/**
+	 * @see SiteLinkLookup::countLinks
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $itemIds
+	 * @param array $siteIds
+	 * @param array $pageNames
+	 *
+	 * @return integer
+	 */
+	public function countLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
+		$dbr = wfGetDB( DB_SLAVE );
+
+		$conditions = array();
+
+		if ( $itemIds !== array() ) {
+			$conditions['ips_item_id'] = $itemIds;
+		}
+
+		if ( $siteIds !== array() ) {
+			$conditions['ips_site_id'] = $siteIds;
+		}
+
+		if ( $pageNames !== array() ) {
+			$conditions['ips_site_page'] = $pageNames;
+		}
+
+		return $dbr->selectRow(
+			$this->table,
+			array( 'COUNT(*) AS rowcount' ),
+			$conditions,
+			__METHOD__
+		)->rowcount;
+	}
+
+	/**
+	 * @see SiteLinkLookup::getLinks
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $itemIds
+	 * @param array $siteIds
+	 * @param array $pageNames
+	 *
+	 * @return array[]
+	 */
+	public function getLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
+		$dbr = wfGetDB( DB_SLAVE );
+
+		$conditions = array();
+
+		if ( $itemIds !== array() ) {
+			$conditions['ips_item_id'] = $itemIds;
+		}
+
+		if ( $siteIds !== array() ) {
+			$conditions['ips_site_id'] = $siteIds;
+		}
+
+		if ( $pageNames !== array() ) {
+			$conditions['ips_site_page'] = $pageNames;
+		}
+
+		$links = $dbr->select(
+			$this->table,
+			array(
+				'ips_site_id',
+				'ips_site_page',
+				'ips_item_id',
+			),
+			$conditions,
+			__METHOD__
+		);
+
+		$siteLinks = array();
+
+		foreach ( $links as $link ) {
+			$siteLinks[] = array(
+				$link->ips_site_id,
+				$link->ips_site_page,
+				$link->ips_item_id,
+			);
+		}
+
+		return $siteLinks;
 	}
 
 }

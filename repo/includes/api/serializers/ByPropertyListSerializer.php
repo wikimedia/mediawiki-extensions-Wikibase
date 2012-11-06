@@ -84,8 +84,6 @@ class ByPropertyListSerializer extends ApiSerializerObject {
 		$objects = new ByPropertyIdArray( iterator_to_array( $objects ) );
 		$objects->buildIndex();
 
-		$entityFactory = EntityFactory::singleton();
-
 		foreach ( $objects->getPropertyIds() as $propertyId ) {
 			$serializedObjects = array();
 
@@ -95,8 +93,8 @@ class ByPropertyListSerializer extends ApiSerializerObject {
 
 			$this->getResult()->setIndexedTagName( $serializedObjects, $this->elementName );
 
-			$propertyId = $entityFactory->getPrefixedId( Property::ENTITY_TYPE, $propertyId );
-			$serialization[$propertyId] = $serializedObjects;
+			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
+			$serialization[$propertyId->getPrefixedId()] = $serializedObjects;
 		}
 
 		if ( $serialization === array() ) {
