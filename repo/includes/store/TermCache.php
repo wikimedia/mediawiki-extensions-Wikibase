@@ -95,7 +95,7 @@ interface TermCache {
 	 *
 	 * @since 0.2
 	 *
-	 * @param array $terms
+	 * @param Term[] $terms
 	 * @param string|null $termType
 	 * @param string|null $entityType
 	 * @param array $options

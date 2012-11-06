@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Title, Content, ParserOptions, ParserOutput, WikiPage, User, Status;
+use Title, Content, ParserOptions, ParserOutput, WikiPage, User, Status, DataUpdate;
 
 /**
  * Content object for articles representing Wikibase properties.
@@ -155,7 +155,7 @@ class PropertyContent extends EntityContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array of \DataUpdate
+	 * @return DataUpdate[]
 	 */
 	public function getDeletionUpdates( \WikiPage $page, \ParserOutput $parserOutput = null ) {
 		return array_merge(
@@ -192,7 +192,7 @@ class PropertyContent extends EntityContent {
 	 *
 	 * @param null|ParserOutput $parserOutput
 	 *
-	 * @return array of \DataUpdate
+	 * @return DataUpdate[]
 	 */
 	public function getSecondaryDataUpdates( Title $title, Content $old = null,
 		$recursive = false, ParserOutput $parserOutput = null ) {

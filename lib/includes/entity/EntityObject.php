@@ -506,7 +506,7 @@ abstract class EntityObject implements Entity {
 	 *
 	 * @since 0.2
 	 *
-	 * @return array of Term
+	 * @return Term[]
 	 */
 	public function getTerms() {
 		$terms = array();

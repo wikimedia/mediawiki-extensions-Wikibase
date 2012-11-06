@@ -67,7 +67,7 @@ class ChangeNotifier {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $changes array of Change
+	 * @param Change[] $changes
 	 *
 	 * @return \Status
 	 */

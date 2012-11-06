@@ -1,8 +1,9 @@
 <?php
 
 namespace Wikibase\Test;
-use \Wikibase\ItemObject;
-use \Wikibase\SiteLink;
+use Wikibase\ItemObject;
+use Wikibase\SiteLink;
+use Wikibase\Item;
 
 /**
  * Holds Item objects for testing proposes.
@@ -35,7 +36,7 @@ final class TestItems {
 
 	/**
 	 * @since 0.1
-	 * @return array of Item
+	 * @return Item[]
 	 */
 	public static function getItems() {
 		$items = array( ItemObject::newEmpty() );

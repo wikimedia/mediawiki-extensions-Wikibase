@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\ItemContent;
 
 /**
  * Holds ItemContent objects for testing proposes.
@@ -19,7 +20,7 @@ final class TestItemContents {
 
 	/**
 	 * @since 0.1
-	 * @return array of ItemContent
+	 * @return ItemContent[]
 	 */
 	public static function getItems() {
 		// @codeCoverageIgnoreStart
