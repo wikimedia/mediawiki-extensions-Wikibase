@@ -830,7 +830,7 @@ final class RepoHooks {
 				}
 			}
 
-			// TODO: set $extract to  something useful.
+			$extract = ''; // TODO: set this to something useful.
 		}
 
 		return true;
