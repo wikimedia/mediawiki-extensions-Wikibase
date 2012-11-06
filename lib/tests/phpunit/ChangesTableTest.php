@@ -33,13 +33,13 @@ class ChangesTableTest extends \MediaWikiTestCase {
 		return array(
 			array(
 				array(
-					'type' => 'item-update',
+					'type' => 'wikibase-item~update',
 					'time' => '20120101000000',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
 					'info' => array(
-						'item' => \Wikibase\ItemObject::newEmpty(),
+						'entity' => \Wikibase\ItemObject::newEmpty(),
 						'diff' => \Wikibase\ItemDiff::newEmpty(),
 					)
 				),
@@ -47,13 +47,13 @@ class ChangesTableTest extends \MediaWikiTestCase {
 			),
 			array(
 				array(
-					'type' => 'item-update',
+					'type' => 'wikibase-item~update',
 					'time' => '20120101000000',
 					'user_id' => $GLOBALS['wgUser']->getId(),
 					'revision_id' => 9001,
 					'object_id' => 42,
 					'info' => array(
-						'item' => \Wikibase\ItemObject::newEmpty(),
+						'entity' => \Wikibase\ItemObject::newEmpty(),
 						'diff' => \Wikibase\ItemDiff::newEmpty(),
 					)
 				),
@@ -73,6 +73,16 @@ class ChangesTableTest extends \MediaWikiTestCase {
 		foreach ( array( 'revision_id', 'object_id', 'user_id', 'type' ) as $field ) {
 			$this->assertEquals( $data[$field], $change->getField( $field ) );
 		}
+	}
+
+	/**
+	 * @dataProvider newFromArrayProvider
+	 */
+	public function testGetClassForType( array $data, $loadDefaults = false ) {
+		$change = ChangesTable::singleton()->newRow( $data, $loadDefaults );
+
+		// todo: test for more entity and change types
+		$this->assertEquals( 'Wikibase\EntityUpdate', ChangesTable::getClassForType( $data['type'] ) );
 	}
 
 	/**
@@ -102,4 +112,4 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	}
 
 }
-	
+
