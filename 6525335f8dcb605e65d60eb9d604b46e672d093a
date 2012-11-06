@@ -104,6 +104,23 @@
     },
     {
       "key": {
+        "uuid": "AAACk3///+w\u003d",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T20:26:36Z",
+      "side": 1,
+      "message": "I\u0027d really prefer to not touch the page and revision tables here at all. You\u0027d have to lose the sort by rev_timestamp for that, but perhaps we don\u0027t need this sort to begin with. If you just select the entity id and entity type from the wb_entity_per_page table, you can still construct Title objects easily enough using EntityContentFactory::singleton()-\u003egetTitleForId( $entityType, $entityId );\n\nThis makes the interface less dependent on MW core and allows us to do stuff such as use it on a client that has no access to the page and revision tables of it\u0027s associated repo.",
+      "revId": "6525335f8dcb605e65d60eb9d604b46e672d093a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACk3////Y\u003d",
         "filename": "repo/includes/store/sql/EntityPerPageTable.php",
         "patchSetId": 6
