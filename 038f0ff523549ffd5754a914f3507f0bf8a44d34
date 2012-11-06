@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAClX///+M\u003d",
+        "filename": "repo/includes/store/sql/EntityPerPageTable.php",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-06T21:31:56Z",
+      "side": 1,
+      "message": "Better to use Utils::getEntityNamespaces() here rather then hardcoding the list",
+      "revId": "038f0ff523549ffd5754a914f3507f0bf8a44d34",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
