@@ -36,7 +36,7 @@ use \Wikibase\ItemObject;
  */
 final class TestChanges {
 
-	protected function getItem() {
+	protected static function getItem() {
 		$item = ItemObject::newEmpty();
 		$item->setLabel( 'en', 'Venezuela' );
 		$item->setDescription( 'en', 'a country' );
