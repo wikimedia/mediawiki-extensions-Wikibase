@@ -113,7 +113,7 @@ class EntityFactory {
 		}
 
 		// TODO: get rid of assumption length=1
-		$prefix = substr( $id, 0, 1 );
+		$prefix = substr( strtolower( $id ), 0, 1 );
 
 		if ( !array_key_exists( $prefix, $typeMap ) ) {
 			throw new MWException( 'Unregistered entity identifier prefix "' . $prefix . '".' );
