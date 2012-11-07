@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACsH///0Q\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T19:17:54Z",
+      "side": 1,
+      "message": "missing wfProfileOut call",
+      "revId": "56677b5e92c50379a641cde115096b7d42c69e86",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
