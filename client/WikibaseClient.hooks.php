@@ -264,6 +264,29 @@ final class ClientHooks {
 		return true;
 	}
 
+	public static function onSpecialMovepageAfterMove( $movePage, &$oldTitle, &$newTitle ) {
+		$siteLinkTable = new SiteLinkTable( 'wbc_items_per_site' );
+		$titleText = $oldTitle->getText();
+		$globalId = Settings::get( 'siteGlobalID' );
+		$itemId = $siteLinkTable->getItemIdForLink(
+			$globalId,
+			$titleText
+		);
+		if ( $itemId !== false ) {
+			$itemByTitle = Settings::get( 'repoBase' ) . $globalId . '/' . $titleText;
+			$movePage->getOutput()->addHTML(
+				\Html::rawElement(
+					'div',
+					array( 'id' => 'wbc-after-page-move' ),
+					wfMessage( 'wbc-after-page-move' )->rawParams(
+						$itemByTitle
+					)->text()
+				)
+			);
+		}
+		return true;
+	}
+
 	public static function onSpecialRecentChangesQuery( &$conds, &$tables, &$join_conds, $opts, &$query_options, &$fields ) {
 		if ( Settings::get( 'showExternalRecentChanges' ) === false ) {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;

@@ -1,3 +1,7 @@
+#wbc-after-page-move a {
+    font-weight: bold;
+}
+
 .wbc-editpage {
 	list-style: none none;
 	text-align: right;
