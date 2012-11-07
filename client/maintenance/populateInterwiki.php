@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use Http, FormatJSON, Maintenance;
+use Http, FormatJSON, Maintenance, Exception;
 
 /**
  * Maintenance script that populates the interwiki table with list of sites 
