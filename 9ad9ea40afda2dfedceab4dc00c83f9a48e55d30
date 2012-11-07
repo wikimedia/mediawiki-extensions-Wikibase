@@ -16,6 +16,23 @@
       "revId": "9ad9ea40afda2dfedceab4dc00c83f9a48e55d30",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACsX///+U\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-07T20:09:20Z",
+      "side": 1,
+      "message": "The correct way to do this:\n\n$itemNs \u003d Utils::getEntityNamespace( CONTENT_MODEL_WIKIBASE_ITEM );\n\n$title \u003d Title::newFromText( $rc[\u0027title\u0027] );\nif ( $title-\u003egetNamespace() \u003d\u003d $itemNs ) { ... }",
+      "revId": "9ad9ea40afda2dfedceab4dc00c83f9a48e55d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
