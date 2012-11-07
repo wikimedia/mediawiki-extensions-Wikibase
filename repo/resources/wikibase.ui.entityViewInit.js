@@ -8,14 +8,6 @@
  *
  * @licence GNU GPL v2+
  * @author Daniel Werner < daniel.werner at wikimedia.de >
- *
- * Events:
- * -------
- * @event restrictEntityPageActions: Triggered when editing is not allowed for the user.
- *        (1) jQuery.Event
- * @event blockEntityPageActions: Triggered when editing is not allowed for the user because he is blocked from the page.
- *        (1) jQuery.Event
- * (see TODO/FIXME about these three events where they are being triggered!)
  */
 
 ( function( $, mw, wb, undefined ) {
