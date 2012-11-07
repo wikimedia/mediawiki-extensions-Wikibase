@@ -44,6 +44,8 @@ class PropertyView extends EntityView {
 	 * @return string
 	 */
 	public function getInnerHtml( EntityContent $property, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$html = parent::getInnerHtml( $property, $lang, $editable );
 
 		// add data value to default entity stuff
@@ -51,6 +53,7 @@ class PropertyView extends EntityView {
 		$html .= $this->getHtmlForDataType( $property->getProperty()->getDataType(), $lang, $editable );
 		// TODO: figure out where to display type information more nicely
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
