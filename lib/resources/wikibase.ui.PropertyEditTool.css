@@ -6,7 +6,7 @@
  * @ingroup Wikibase
  *
  * @license GNU GPL v2+
- * @author H. Snater
+ * @author H. Snater < mediawiki@snater.com >
  */
 
 
@@ -82,17 +82,11 @@ table.wb-ui-propertyedittool-ineditmode {
 /***** LABEL *****/
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
-	padding: 0 0 0 2px; /* even out border of input box in edit mode */
-}
-@-moz-document url-prefix() { /* Firefox */
-	.wb-firstHeading .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
-		padding: 0 0 0 1px;
-	}
+	padding: 0; /* even out border of input box in edit mode */
 }
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode {
-	margin: .3em .3em .13em 0; /* h1 natively has 0.17em bottom padding to avoid clipping */
-	padding-left: 6px;
+	margin-left: 7px; /* h1 natively has 0.17em bottom padding to avoid clipping */
 }
 
 .wb-ui-labeledittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-ui-propertyedittool-editablevalue-toolbarparent {
@@ -124,12 +118,8 @@ sizes and line heights within the heading */
 /***** DESCRIPTION *****/
 
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
+	margin-right: .3em;
 	padding-left: 7px;
-}
-@-moz-document url-prefix() { /* Firefox */
-	.wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode {
-		padding-left: 6px;
-	}
 }
 
 .wb-ui-descriptionedittool .wb-ui-propertyedittool-editablevalue-ineditmode .wb-value {
@@ -138,7 +128,7 @@ sizes and line heights within the heading */
 
 .wb-ui-descriptionedittool input {
 	width: 100%;
-	padding: 0 0 0 2px;
+	padding: 0 2px;
 	font-size: 1em; /* prevent IE from automatically resizing the font within the input box */
 }
 
