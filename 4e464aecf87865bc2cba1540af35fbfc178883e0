@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACsH///0k\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T19:15:39Z",
+      "side": 1,
+      "message": "missing type checks in the method itself",
+      "revId": "4e464aecf87865bc2cba1540af35fbfc178883e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACsH///0o\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T19:15:39Z",
+      "side": 1,
+      "message": "Please get the thing via the store. \n\nClientStoreFactory::getStore()-\u003enewSiteLinkCache()",
+      "revId": "4e464aecf87865bc2cba1540af35fbfc178883e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACsH///0g\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T19:15:39Z",
+      "side": 1,
+      "message": "This thing is also missing type checks but ofc was not changed here",
+      "revId": "4e464aecf87865bc2cba1540af35fbfc178883e0",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
