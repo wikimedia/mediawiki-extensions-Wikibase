@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAACtn////4\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "Yes, let\u0027s also do that check. Can be done in follow up",
+      "parentUuid": "AAACsn///+U\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACsn///+Y\u003d",
         "filename": "lib/includes/entity/EntityId.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-07T21:27:59Z",
       "side": 1,
       "message": "this does not return false if the prefix is not found, i.e. the documentation does not fit",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtn////0\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "good catch, forgot to update that part :)",
+      "parentUuid": "AAACsn///+Y\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAACtn////w\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "I actually removed the other code related to the hash part as it seems to me it was added at the wrong place. Forgot these bits though.",
+      "parentUuid": "AAACsn///5Y\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACsn///5U\u003d",
         "filename": "lib/includes/entity/EntityId.php",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2012-11-07T21:27:59Z",
       "side": 1,
       "message": "i think the docu for return is wrong. the first element is not the id, the second one is (you are using [1] to refer to the id throughout)",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtn////s\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "Yes - I actually got confused by this and spend 15 minutes debugging before I noticed the actual issue\n\nStuff returned is array( prefixed id, id prefix, numerical part, hash )",
+      "parentUuid": "AAACsn///5U\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAACtn////k\u003d",
+        "filename": "lib/includes/snak/PropertySnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "Why would we use the prefixed id? It contains redundant info (ie the entity type) and thus blow up the serialization for no good reason",
+      "parentUuid": "AAACs3////s\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACs3////o\u003d",
         "filename": "lib/includes/store/SiteLinkLookup.php",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2012-11-07T21:27:59Z",
       "side": 1,
       "message": "shouldnt that return an entityID?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtn////Y\u003d",
+        "filename": "lib/includes/store/SiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "Oh, you mean getItemIdForLink? This is one of the things I have not updated yet but that could be updated yes.",
+      "parentUuid": "AAACs3////o\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "AAACtn////U\u003d",
+        "filename": "lib/includes/store/SiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "I spend some time debugging something that appeared to be a bug in the item updates, so while poking at the stuff there tackled the todos to update that code to use the store, which is what these methods are for. Not strictly related to the Entityid stuff, but oh well :)",
+      "parentUuid": "AAACs3////k\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACs3///+w\u003d",
         "filename": "lib/tests/phpunit/entity/EntityIdTest.php",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2012-11-07T21:27:59Z",
       "side": 1,
       "message": "assertFalse, not asser?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtn////E\u003d",
+        "filename": "lib/tests/phpunit/entity/EntityIdTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "heh - you\u0027re right. This should produce fatal errors. There must be something else wrong that caused this test not to be run for me.",
+      "parentUuid": "AAACs3///+w\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "AAACtn////A\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "Yeah. And preferably before we actually start using the changes table, else we need to make sure the data in it does not get messed up",
+      "parentUuid": "AAACs3///+k\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACs3///+U\u003d",
         "filename": "repo/includes/specials/SpecialSetLabel.php",
         "patchSetId": 3
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "AAACtn///+k\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "by ItemID?\n\nI went *sigh* when seeing this code but refrained from poking at it to not blow up the commit even more",
+      "parentUuid": "AAACs3///+U\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACtH////0\u003d",
         "filename": "repo/tests/phpunit/includes/api/serializers/SnakSerializerTest.php",
         "patchSetId": 3
@@ -183,6 +363,24 @@
       "writtenOn": "2012-11-07T21:27:59Z",
       "side": 1,
       "message": "nothing to change in this changeset, but should it be hardcoded the p?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtn///+c\u003d",
+        "filename": "repo/tests/phpunit/includes/api/serializers/SnakSerializerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T22:50:17Z",
+      "side": 1,
+      "message": "we have quite a few tests that have this hardcoded. Guess it\u0027s trivial to change it now, at least here\n\n\u0027property\u0027 \u003d\u003e $id-\u003egetPrefixedId()",
+      "parentUuid": "AAACtH////0\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
