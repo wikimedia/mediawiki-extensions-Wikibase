@@ -90,7 +90,7 @@ interface References extends \Traversable, \Countable, \Serializable {
 //	 *
 //	 * @param string $referenceHash
 //	 *
-//	 * @return Reference|false
+//	 * @return Reference|bool
 //	 */
 //	public function getReference( $referenceHash );
 //

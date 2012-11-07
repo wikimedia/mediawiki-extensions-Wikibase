@@ -58,7 +58,7 @@ class ItemObject extends EntityObject implements Item {
 	 * @param SiteLink $link the link to the target page
 	 * @param string $updateType
 	 *
-	 * @return array|false Returns array on success, or false on failure
+	 * @return array|bool Returns array on success, or false on failure
 	 */
 	public function addSiteLink( SiteLink $link, $updateType = 'add' ) {
 		$siteId = $link->getSite()->getGlobalId();

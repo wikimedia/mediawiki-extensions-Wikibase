@@ -35,7 +35,7 @@ abstract class EntityContent extends \AbstractContent {
 
 	/**
 	 * @since 0.1
-	 * @var EditEntity|false
+	 * @var EditEntity|bool
 	 */
 	protected $editEntity = null;
 
@@ -59,7 +59,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @return EditEntity|false
+	 * @return EditEntity|bool
 	 */
 	public function getEditEntity() {
 		return $this->editEntity;
@@ -67,7 +67,7 @@ abstract class EntityContent extends \AbstractContent {
 
 	/**
 	 * @since 0.1
-	 * @var WikiPage|false
+	 * @var WikiPage|bool
 	 */
 	protected $wikiPage = false;
 
@@ -76,7 +76,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @return WikiPage|false
+	 * @return WikiPage|bool
 	 */
 	public function getWikiPage() {
 		if ( $this->wikiPage === false ) {
@@ -96,7 +96,7 @@ abstract class EntityContent extends \AbstractContent {
 	 *
 	 * @since 0.1
 	 *
-	 * @return Title|false
+	 * @return Title|bool
 	 */
 	public function getTitle() {
 		$wikiPage = $this->getWikiPage();

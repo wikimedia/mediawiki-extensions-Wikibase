@@ -42,7 +42,7 @@ abstract class EntityObject implements Entity {
 	 * Integer when set. False when not initialized. Null when the item is new and unsaved.
 	 *
 	 * @since 0.1
-	 * @var integer|false|null
+	 * @var integer|bool|null
 	 */
 	protected $id = false;
 
@@ -311,7 +311,7 @@ abstract class EntityObject implements Entity {
 	 *
 	 * @param string $langCode
 	 *
-	 * @return string|false
+	 * @return string|bool
 	 */
 	public function getDescription( $langCode ) {
 		return array_key_exists( $langCode, $this->data['description'] )
@@ -325,7 +325,7 @@ abstract class EntityObject implements Entity {
 	 *
 	 * @param string $langCode
 	 *
-	 * @return string|false
+	 * @return string|bool
 	 */
 	public function getLabel( $langCode ) {
 		return array_key_exists( $langCode, $this->data['label'] )
@@ -358,7 +358,7 @@ abstract class EntityObject implements Entity {
 	 * and migrating or removing elements after changes to the structure are made.
 	 * Should typically be called before using any of the other methods.
 	 *
-	 * @param bool|false $wipeExisting Unconditionally wipe out all data
+	 * @param bool|bool $wipeExisting Unconditionally wipe out all data
 	 *
 	 * @since 0.1
 	 */
