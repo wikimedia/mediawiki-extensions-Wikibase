@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Page for listing page without label.
+ * Page for listing entities without label.
  *
  * @since 0.2
  *
