@@ -11,6 +11,9 @@ return call_user_func( function() {
 		'ext.wikibaseclient.init' => $moduleTemplate + array(
 			'styles' => 'ext.wikibaseclient.css'
 		),
+		'ext.wikibaseclient.page-move' => $moduleTemplate + array(
+			'styles' => 'ext.wikibaseclient.page-move.css'
+		),
 	);
 
 } );
