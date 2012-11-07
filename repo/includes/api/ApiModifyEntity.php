@@ -132,6 +132,8 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 	 * @since 0.1
 	 */
 	public function execute() {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 		$this->flags = 0;
@@ -148,12 +150,14 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 		$status = $this->checkPermissions( $entityContent, $user, $params );
 
 		if ( !$status->isOK() ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $status->getWikiText( 'wikibase-api-cant-edit', 'wikibase-api-cant-edit' ), 'cant-edit' );
 		}
 
 		$success = $this->modifyEntity( $entityContent, $params );
 
 		if ( !$success ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-modify-failed' )->text(), 'modify-failed' );
 		}
 
@@ -233,6 +237,8 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 			'success',
 			(int)$success
 		);
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**

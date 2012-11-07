@@ -32,6 +32,7 @@ class ApiSearchEntities extends ApiBase {
 	 * @return EntityContent[]
 	 */
 	public function searchEntities( $language, $term, $entityType = null ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$terms = StoreFactory::getStore()->newTermCache()->getMatchingTerms(
 			array(
@@ -67,6 +68,7 @@ class ApiSearchEntities extends ApiBase {
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $entities;
 	}
 
@@ -83,6 +85,8 @@ class ApiSearchEntities extends ApiBase {
 	 */
 
 	private function sortByScore( $results, $language, $search ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$entries = array();
 		foreach ( $results as $result ) {
 			$entry = array();
@@ -126,6 +130,7 @@ class ApiSearchEntities extends ApiBase {
 			array_multisort( $sortArray[$orderby], SORT_DESC, $entries );
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $entries;
 	}
 
@@ -133,6 +138,8 @@ class ApiSearchEntities extends ApiBase {
 	 * @see ApiBase::execute()
 	*/
 	public function execute() {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$params = $this->extractRequestParams();
 		$entries = $this->sortByScore(
 			$this->searchEntities( $params['language'], $params['search'], $params['type'] ),
@@ -187,6 +194,8 @@ class ApiSearchEntities extends ApiBase {
 			'success',
 			(int)true
 		);
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**
