@@ -35,6 +35,7 @@ $1
 $2
 <hr class="wb-hr" />
 $3
+$4
 HTML;
 
 	$templates['wb-label'] =
@@ -106,6 +107,49 @@ HTML;
 	$templates['wb-toolbar-button-disabled'] =
 <<<HTML
 <span class="wb-ui-toolbar-button wb-ui-toolbar-button-disabled">$1</span>
+HTML;
+
+	$templates['wb-terms-heading'] =
+		<<<HTML
+		<h2 class="wb-terms-heading">$1</h2>
+HTML;
+
+$templates['wb-terms-table'] =
+<<<HTML
+<table class="wb-terms">
+	<colgroup>
+		<col class="wb-terms-language" />
+		<col class="wb-terms-term" />
+		<col class="editsection" />
+	</colgroup>
+	<tbody>$1</tbody>
+	<tfoot>$2</tfoot>
+</table>
+HTML;
+
+$templates['wb-term'] =
+<<<HTML
+<tr class="wb-terms-label wb-terms-$1 $2">
+	<td class="wb-terms-language wb-terms-language-$1" rowspan="2">$3</td>
+	<td class="wb-terms-label wb-terms-label-$1">
+		$4
+	</td>
+	$6
+</tr>
+<tr class="wb-terms-description wb-terms-$1 $2">
+	<td class="wb-terms-description wb-terms-description-$1">
+		$5
+	</td>
+	$7
+</tr>
+HTML;
+
+$templates['wb-terms-tfoot'] =
+<<<HTML
+<tr>
+	<td colspan="2" class="wb-terms-placeholder">$1</td>
+	$2
+</tr>
 HTML;
 
 	$templates['wb-sitelinks-heading'] =

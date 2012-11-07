@@ -137,7 +137,8 @@ abstract class EntityView extends \ContextSource {
 		return wfTemplate( 'wb-entity-content',
 			$this->getHtmlForLabel( $entity, $lang, $editable ),
 			$this->getHtmlForDescription( $entity, $lang, $editable ),
-			$this->getHtmlForAliases( $entity, $lang, $editable )
+			$this->getHtmlForAliases( $entity, $lang, $editable ),
+			$this->getHtmlForLanguageTerms( $entity, $lang, $editable )
 		);
 	}
 
@@ -280,6 +281,103 @@ abstract class EntityView extends \ContextSource {
 				$aliasList . $this->getHtmlForEditSection( $entity, $lang )
 			);
 		}
+	}
+
+	/**
+	 * Selects the languages for the terms to display on first try, based on the current user and the available
+	 * languages.
+	 *
+	 * @since 0.3
+	 *
+	 * @param Entity $entity
+	 * @param \Language $lang
+	 * @param User $user
+	 * @return array of langcode => array( label, description )
+	 */
+	private function selectTerms( Entity $entity, Language $lang = null, \User $user ) {
+		$labels = $entity->getLabels();
+		$descriptions = $entity->getDescriptions();
+
+		$userLanguages = \Babel::getUserLanguages( $user );
+
+		// get the union of languages of the labels and descriptions
+		$languages = array_unique( array_merge ( array_keys( $labels ), array_keys( $descriptions ) ) );
+
+		// remove the current language
+		if ( ( $lang !== null ) && in_array( $lang->getCode(), $languages ) ) {
+			$languages = array_diff( $languages, array( $lang->getCode() ) );
+		}
+
+		if ( count( $languages ) < 1 ) return array();
+
+		$result = array();
+		if ( count( $languages ) < 10 ) {
+			foreach ( $languages as $language ) {
+				\MWDebug::log( $language );
+				$label = array_key_exists( $language, $labels ) ? $labels[$language] : null;
+				$description = array_key_exists( $language, $descriptions ) ? $descriptions[$language] : null;
+				if ( in_array( $language, $userLanguages ) ) {
+					\MWDebug::log( 'hit' );
+					$result[$language] = array( $label, $description );
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Builds and returns the HTML representing a WikibaseEntity's collection of terms.
+	 *
+	 * @since 0.3
+	 *
+	 * @param EntityContent $entity the entity to render
+	 * @param \Language|null $lang the language to use for rendering. if not given, the local context will be used.
+	 * @param bool $editable whether editing is allowed (enabled edit links)
+	 * @return string
+	 */
+	public function getHtmlForLanguageTerms( EntityContent $entity, Language $lang = null, $editable = true ) {
+
+		$html = $thead = $tbody = $tfoot = '';
+
+		$labels = $entity->getEntity()->getLabels();
+		$descriptions = $entity->getEntity()->getDescriptions();
+
+		$html .= wfTemplate( 'wb-terms-heading', wfMessage( 'wikibase-terms' ) );
+
+		$i = 0;
+
+		$languages = Utils::getLanguageCodes();
+
+		foreach( $languages as $language ) {
+			if ( !array_key_exists( $language, $labels ) && !array_key_exists( $language, $descriptions ) ) continue;
+
+			$label = array_key_exists( $language, $labels ) ? $labels[$language] : false;
+			$description = array_key_exists( $language, $descriptions ) ? $descriptions[$language] : false;
+
+			$alternatingClass = ( $i++ % 2 ) ? 'even' : 'uneven';
+
+			$tbody .= wfTemplate( 'wb-term',
+				$language,
+				$alternatingClass,
+				Utils::fetchLanguageName( $language ),
+				$label ? $label : '<em>' . wfMessage( 'wikibase-label-empty' ) . '</em>',
+				$description ? $description : '<em>' . wfMessage( 'wikibase-description-empty' ) . '</em>',
+				$this->getHtmlForEditSection( $entity, $lang, 'td' ),
+				$this->getHtmlForEditSection( $entity, $lang, 'td' )
+			);
+		}
+
+		// built table footer with button to add site-links, consider list could be complete!
+		//$isFull = count( $siteLinks ) >= count( Sites::singleton()->getSites() );
+		$isFull = false;
+
+		$tfoot = wfTemplate( 'wb-terms-tfoot',
+			$isFull ? wfMessage( 'wikibase-sitelinksedittool-full' )->text() : '',
+			$this->getHtmlForEditSection( $entity, $lang, 'td', 'add', !$isFull )
+		);
+
+		return $html . wfTemplate( 'wb-terms-table', $tbody, $tfoot );
 	}
 
 	/**

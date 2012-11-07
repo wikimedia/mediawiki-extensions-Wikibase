@@ -35,6 +35,7 @@ $messages['en'] = array(
 	'wikibase-alias-edit-placeholder' => 'enter an alias',
 	'wikibase-label-input-help-message' => 'Enter the title of this data set in $1.',
 	'wikibase-description-input-help-message' => 'Enter a short description in $1.',
+	'wikibase-terms' => 'In other languages',
 	'wikibase-sitelinks' => 'List of pages linked to this item',
 	'wikibase-sitelinks-sitename-columnheading' => 'Language',
 	'wikibase-sitelinks-siteid-columnheading' => 'Code',
