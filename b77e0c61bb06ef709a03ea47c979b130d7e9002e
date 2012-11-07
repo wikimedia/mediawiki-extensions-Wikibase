@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACsH///1I\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-07T19:03:30Z",
+      "side": 1,
+      "message": "I would omit the documentation here as it will merge conflict with https://gerrit.wikimedia.org/r/#/c/32235/",
+      "revId": "b77e0c61bb06ef709a03ea47c979b130d7e9002e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
