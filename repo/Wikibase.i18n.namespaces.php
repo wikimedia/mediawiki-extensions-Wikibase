@@ -80,3 +80,31 @@ $namespaceNames['de'] = array(
 	WB_NS_QUERY      => 'Abfrage',
 	WB_NS_QUERY_TALK => 'Abfragediskussion',
 );
+
+$namespaceNames['he'] = array(
+	WB_NS_DATA      => 'נתונים',      // legacy
+	WB_NS_DATA_TALK => 'שיחת_נתונים', // legacy
+
+	WB_NS_ITEM      => 'פריט',
+	WB_NS_ITEM_TALK => 'שיחת_פריט',
+
+	WB_NS_PROPERTY      => 'מאפיין',
+	WB_NS_PROPERTY_TALK => 'שיחת_מאפיין',
+
+	WB_NS_QUERY      => 'שאילתה',
+	WB_NS_QUERY_TALK => 'שיחת_שאילתה',
+);
+
+$namespaceNames['ru'] = array(
+	WB_NS_DATA      => 'Данные',            // legacy
+	WB_NS_DATA_TALK => 'Обсуждение_данных', // legacy
+
+	WB_NS_ITEM      => 'Предмет',
+	WB_NS_ITEM_TALK => 'Обсуждение_предмета',
+
+	WB_NS_PROPERTY      => 'Свойство',
+	WB_NS_PROPERTY_TALK => 'Обсуждение_свойства',
+
+	WB_NS_QUERY      => 'Запрос',
+	WB_NS_QUERY_TALK => 'Обсуждение_запроса',
+);
