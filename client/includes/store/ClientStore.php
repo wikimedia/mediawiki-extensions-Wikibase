@@ -31,15 +31,6 @@ namespace Wikibase;
 interface ClientStore {
 
 	/**
-	 * Returns an instance of the store.
-	 *
-	 * @since 0.1
-	 *
-	 * @return ClientStore
-	 */
-	public static function singleton();
-
-	/**
 	 * Returns a new SiteLinkCache for this store.
 	 *
 	 * @since 0.1
