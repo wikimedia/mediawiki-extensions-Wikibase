@@ -29,7 +29,7 @@ class ApiSearchEntities extends ApiBase {
 	 * @param string $term
 	 * @param string|null $entityType
 	 *
-	 * @return array of EntityContent
+	 * @return EntityContent[]
 	 */
 	public function searchEntities( $language, $term, $entityType = null ) {
 
@@ -75,7 +75,7 @@ class ApiSearchEntities extends ApiBase {
 	 *
 	 * @since 0.2
 	 *
-	 * @param array $results
+	 * @param EntityContent[] $results
 	 * @param string $language
 	 * @param string $search
 	 *
