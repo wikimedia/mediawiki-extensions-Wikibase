@@ -55,7 +55,7 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 		$output->addHTML(
 			Html::openElement( 'form', array( 'action' => $this->getTitle()->getLocalURL() ) ) .
 			Html::openElement( 'fieldset' ) .
-			Html::element( 'legend', null, $this->msg( 'wikibase-entitieswithoutlabel-legend' )->text() ) .
+			Html::element( 'legend', array(), $this->msg( 'wikibase-entitieswithoutlabel-legend' )->text() ) .
 			Html::openElement( 'p' ) .
 			Html::element( 'label', array( 'for' => 'language' ), $this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text() )  . ' ' .
 			Html::input( 'language', $this->language ) .

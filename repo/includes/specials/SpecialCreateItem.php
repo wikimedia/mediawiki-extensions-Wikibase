@@ -44,9 +44,9 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::createEntity()
+	 * @see SpecialCreateEntity::createEntityContent
 	 */
-	protected function createEntity() {
+	protected function createEntityContent() {
 		return \Wikibase\ItemContent::newEmpty();
 	}
 

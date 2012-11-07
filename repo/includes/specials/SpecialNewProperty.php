@@ -49,9 +49,9 @@ class SpecialNewProperty extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::createEntity()
+	 * @see SpecialCreateEntity::createEntityContent
 	 */
-	protected function createEntity() {
+	protected function createEntityContent() {
 		return \Wikibase\PropertyContent::newEmpty();
 	}
 
