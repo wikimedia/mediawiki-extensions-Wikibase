@@ -80,6 +80,8 @@ abstract class EntityView extends \ContextSource {
 	 * @return string
 	 */
 	public function getHtml( EntityContent $entity, Language $lang = null, $editable = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		//NOTE: even though $editable is unused at the moment, we will need it for the JS-less editing model.
 		$info = $this->extractEntityInfo( $entity, $lang );
 		$entityType = static::VIEW_TYPE;
@@ -119,6 +121,7 @@ abstract class EntityView extends \ContextSource {
 			}, 7000 );
 		' );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $html;
 	}
 
@@ -159,6 +162,8 @@ abstract class EntityView extends \ContextSource {
 	 * @return ParserOutput
 	 */
 	public function getParserOutput( EntityContent $entity, ParserOptions $options = null, $generateHtml = true ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		if ( !$options ) {
 			$options = $this->makeParserOptions();
 		}
@@ -195,6 +200,7 @@ abstract class EntityView extends \ContextSource {
 		// set the display title
 		//$pout->setTitleText( $entity>getLabel( $langCode ) );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $pout;
 	}
 
@@ -352,6 +358,8 @@ abstract class EntityView extends \ContextSource {
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
 	public function render( EntityContent $entity, OutputPage $out = null, ParserOptions $options = null, ParserOutput $pout = null ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$isPoutSet = $pout !== null;
 
 		if ( !$out ) {
@@ -384,6 +392,7 @@ abstract class EntityView extends \ContextSource {
 		static::registerJsConfigVars( $out, $entity, $langCode, $editableView ); //XXX: $editableView should *not* reflect user permissions
 
 		$out->addParserOutput( $pout );
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return $pout;
 	}
 
@@ -402,6 +411,8 @@ abstract class EntityView extends \ContextSource {
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
 	public static function registerJsConfigVars( OutputPage $out, EntityContent $entity, $langCode, $editableView = false  ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		global $wgUser;
 
 		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
@@ -415,6 +426,8 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbEntityId', $entity->getEntity()->getPrefixedId() );
 		$out->addJsConfigVars( 'wbEntityType', static::VIEW_TYPE ); //TODO: use $entity->getEntity()->getType after prefixes got removed there
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 
