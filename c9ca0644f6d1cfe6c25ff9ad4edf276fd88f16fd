@@ -72,6 +72,23 @@
     },
     {
       "key": {
+        "uuid": "AAACt3////o\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-07T23:59:00Z",
+      "side": 1,
+      "message": "Count will always be 0 or 4, but index [3] can be an empty string. At index [2] there will always be a string with characters 0-9.",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACsn///5Y\u003d",
         "filename": "lib/includes/entity/EntityId.php",
         "patchSetId": 3
@@ -100,6 +117,24 @@
       "writtenOn": "2012-11-07T22:50:17Z",
       "side": 1,
       "message": "I actually removed the other code related to the hash part as it seems to me it was added at the wrong place. Forgot these bits though.",
+      "parentUuid": "AAACsn///5Y\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtn///+8\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-07T23:59:00Z",
+      "side": 1,
+      "message": "character hash (#)",
       "parentUuid": "AAACsn///5Y\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
@@ -136,6 +171,41 @@
       "side": 1,
       "message": "Yes - I actually got confused by this and spend 15 minutes debugging before I noticed the actual issue\n\nStuff returned is array( prefixed id, id prefix, numerical part, hash )",
       "parentUuid": "AAACsn///5U\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtn///+A\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-07T23:59:00Z",
+      "side": 1,
+      "message": "Arrays returned will always have the complete matched pattern at position 0, its implicit. This pattern matches the complete string or nothing at all. Later patterns (the parentized stuff) counts from position 1.\n\n[0] \u003d\u003e total matched pattern\n[1] \u003d\u003e one of the listed prefixes\n[2] \u003d\u003e the numeric id\n[3] \u003d\u003e an empty string or the hash mark and any additional stuff (this isn\u0027t as documented)",
+      "parentUuid": "AAACsn///5U\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACt3////k\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-07T23:59:00Z",
+      "side": 1,
+      "message": "Is this correct? Or should it be\n$this-\u003egetId()-\u003egetPrefixedId()",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
