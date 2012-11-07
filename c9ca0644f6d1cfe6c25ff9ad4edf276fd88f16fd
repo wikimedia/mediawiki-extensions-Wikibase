@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACsn///+U\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "shouldn\u0027t we also check if entityType is in prefixMap, or else if entityType is a possible entityType?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACsn///+Y\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "this does not return false if the prefix is not found, i.e. the documentation does not fit",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACsn///5Y\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "what is the hash part?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACsn///5U\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "i think the docu for return is wrong. the first element is not the id, the second one is (you are using [1] to refer to the id throughout)",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACs3////s\u003d",
+        "filename": "lib/includes/snak/PropertySnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "does not need to be changed now (as it would break behaviour), but why do we use the numeric and not the prefixed ID here? (ignore this comment, I probably would need to read the actual implementations to figure that out)",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACs3////o\u003d",
+        "filename": "lib/includes/store/SiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "shouldnt that return an entityID?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACs3////k\u003d",
+        "filename": "lib/includes/store/SiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "i don\u0027t think this is actually part of this changeset??",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACs3///+w\u003d",
+        "filename": "lib/tests/phpunit/entity/EntityIdTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "assertFalse, not asser?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACs3///+k\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "We must ensure to run this on wikidata.org as well, as they do not run update.php",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACs3///+U\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "Oh, this code is still here? This should be handled by ItemID now. Does not have to happen in this changeset obviously, but this should have gone a while ago... darn...",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtH////0\u003d",
+        "filename": "repo/tests/phpunit/includes/api/serializers/SnakSerializerTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "nothing to change in this changeset, but should it be hardcoded the p?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACtH////w\u003d",
+        "filename": "repo/tests/phpunit/includes/content/EntityContentTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-07T21:27:59Z",
+      "side": 1,
+      "message": "nothing to change in this changeset, but should it be hardcoded the q?",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
