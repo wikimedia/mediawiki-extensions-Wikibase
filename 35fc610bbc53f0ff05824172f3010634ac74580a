@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACrH////A\u003d",
+        "filename": "repo/includes/store/TermMatchScoreCalculator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T13:19:50Z",
+      "side": 1,
+      "message": "this should be 0.3",
+      "revId": "35fc610bbc53f0ff05824172f3010634ac74580a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACrH////U\u003d",
+        "filename": "repo/includes/store/TermMatchScoreCalculator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T13:19:50Z",
+      "side": 1,
+      "message": "{ should be on the same line",
+      "revId": "35fc610bbc53f0ff05824172f3010634ac74580a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACrH////Q\u003d",
+        "filename": "repo/includes/store/TermMatchScoreCalculator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T13:19:50Z",
+      "side": 1,
+      "message": "please use protected/private/public",
+      "revId": "35fc610bbc53f0ff05824172f3010634ac74580a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACrH////M\u003d",
+        "filename": "repo/includes/store/TermMatchScoreCalculator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T13:19:50Z",
+      "side": 1,
+      "message": "Probably want to take an Entity here rather then the current $entry array",
+      "revId": "35fc610bbc53f0ff05824172f3010634ac74580a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACrH////I\u003d",
+        "filename": "repo/includes/store/TermMatchScoreCalculator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T13:19:50Z",
+      "side": 1,
+      "message": "Perhaps it\u0027s nicer to have the arguments here so you don\u0027t need to create a calculator object for each term. It\u0027s very likely you want to score them all with the same options anyway.",
+      "revId": "35fc610bbc53f0ff05824172f3010634ac74580a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACrH////E\u003d",
+        "filename": "repo/includes/store/TermMatchScoreCalculator.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-07T13:19:50Z",
+      "side": 1,
+      "message": "don\u0027t forget the since tags :)",
+      "revId": "35fc610bbc53f0ff05824172f3010634ac74580a",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
