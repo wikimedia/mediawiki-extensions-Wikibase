@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACsH///2A\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-07T18:50:20Z",
+      "side": 1,
+      "message": "This works as long as I have $wgLanguageCode \u003d \"en\" or my namespaces set to English names.  It might be okay for a test case though.\n\nNitpicky, per coding style guidelines, there should be spaces between the variable name $wgExtraNamespaces[100] and the parenthesis so it\u0027s:\n\nisset( $wgExtraNamespaces[100] )",
+      "revId": "9ad9ea40afda2dfedceab4dc00c83f9a48e55d30",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
