@@ -32,7 +32,6 @@ class ExternalChangesList {
 		$line = '';
 
 		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
-			// todo i18n
 			$deletionLog = self::repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
 			$line .= wfMessage( 'parentheses' )->rawParams( $deletionLog );
 		} else {
@@ -82,8 +81,8 @@ class ExternalChangesList {
 		if ( $changeType === 'update' ) {
 			$entityLink = self::entityLink( $entityData );
 			if ( $entityLink !== false ) {
-				$line .= wfMessage( 'parentheses' )->rawParams(
-					self::entityLink( $entityData ) )->escaped();
+				$line .= wfMessage( 'word-separator' )->plain()
+				 . wfMessage( 'parentheses' )->rawParams( self::entityLink( $entityData ) )->escaped();
 			}
 		}
 
@@ -91,12 +90,13 @@ class ExternalChangesList {
 
 		if ( \User::isIP( $userName ) ) {
 			$userlinks = self::userContribsLink( $userName, $userName );
-			$userlinks .= wfMessage( 'parentheses' )->rawParams( self::userTalkLink( $userName ) )->escaped();
+			$userlinks .= wfMessage( 'word-separator' )->plain()
+				. wfMessage( 'parentheses' )->rawParams( self::userTalkLink( $userName ) )->escaped();
 		} else {
 			$userlinks = self::userLink( $userName );
 			$usertools = array(
 				self::userTalkLink( $userName ),
-				self::userContribsLink( $userName, wfMessage( 'contribslink' ) )
+				self::userContribsLink( $userName )
 			);
 
 			$userlinks .= wfMessage( 'word-separator' )->plain()
@@ -163,7 +163,7 @@ class ExternalChangesList {
 	 */
 	protected static function repoLink( $target, $text, $attribs = array() ) {
 		$url = ClientUtils::baseUrl() . $target;
-		//htmlspecialchars( $target );
+
 		$class = 'plainlinks';
 		if ( array_key_exists( 'class', $attribs ) ) {
 			$class .= ' ' . $attribs['class'];
@@ -184,7 +184,10 @@ class ExternalChangesList {
 	 */
 	protected static function userLink( $userName ) {
 		$link = "User:$userName";
-		return self::repoLink( $link, $userName );
+		$attribs = array(
+			 'class' => 'mw-userlink'
+		);
+		return self::repoLink( $link, $userName, $attribs );
 	}
 
 	/**
@@ -195,8 +198,11 @@ class ExternalChangesList {
 	 *
 	 * @return string
 	 */
-	protected static function userContribsLink( $userName, $text ) {
+	protected static function userContribsLink( $userName, $text = null ) {
 		$link = "Special:Contributions/$userName";
+		if ( $text === null ) {
+			$text = wfMessage( 'contribslink' );
+		}
 		return self::repoLink( $link, $text );
 	}
 
@@ -209,7 +215,8 @@ class ExternalChangesList {
 	 */
 	protected static function userTalkLink( $userName ) {
 		$link = "User_talk:$userName";
-		return self::repoLink( $link, 'talk' );
+		$text = wfMessage( 'talkpagelinktext' )->escaped();
+		return self::repoLink( $link, $text );
 	}
 
 	/**
@@ -277,7 +284,6 @@ class ExternalChangesList {
 			$prefix = strtoupper( Settings::get( 'itemPrefix' ) );
 		}
 
-		// TODO: $id is valid? what do do with links to deleted items?
 		if ( ( $prefix !== null ) && ( isset( $id ) ) ) {
 			$titleText = $prefix . $id;
 		}
@@ -296,7 +302,6 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	protected static function autoComment( $changeType ) {
-		// todo i18n
 		$comment = '';
 		switch( $changeType ) {
 			case 'update':
