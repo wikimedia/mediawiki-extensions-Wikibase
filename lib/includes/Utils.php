@@ -82,7 +82,7 @@ final class Utils {
 			return;
 		}
 
-		self::insertDefaultSites( 'https://meta.wikimedia.org/w/api.php' );
+		self::insertSitesFrom( 'https://meta.wikimedia.org/w/api.php' );
 	}
 
 	/**
