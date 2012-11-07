@@ -315,7 +315,8 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialRecentChangesQuery( &$conds, &$tables, &$join_conds, $opts, &$query_options, &$fields ) {
+	public static function onSpecialRecentChangesQuery( array &$conds, array &$tables, array &$join_conds,
+		\FormOptions $opts, array &$query_options, array &$fields ) {
 		if ( Settings::get( 'showExternalRecentChanges' ) === false ) {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
@@ -334,7 +335,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onOldChangesListRecentChangesLine( &$changesList, &$s, $rc ) {
+	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s, \RecentChange $rc ) {
 		$rcType = $rc->getAttribute( 'rc_type' );
 		if ( $rcType == RC_EXTERNAL ) {
 			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
@@ -359,7 +360,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	public static function onSpecialWatchlistQuery( &$conds, &$tables, &$join_conds, &$fields ) {
+	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields ) {
 		$newConds = array();
 		foreach( $conds as $k => $v ) {
 			if ( $v ===  'rc_this_oldid=page_latest OR rc_type=3' ) {
