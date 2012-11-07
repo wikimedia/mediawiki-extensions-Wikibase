@@ -22,9 +22,12 @@ class ApiGetEntities extends Api {
 	 * @see ApiBase::execute()
 	 */
 	public function execute() {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$params = $this->extractRequestParams();
 
 		if ( !( isset( $params['ids'] ) XOR ( isset( $params['sites'] ) && isset( $params['titles'] ) ) ) ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
 		}
 
@@ -37,6 +40,7 @@ class ApiGetEntities extends Api {
 			$max = max( $numSites, $numTitles );
 
 			if ( $numSites === 0 || $numTitles === 0 ) {
+				wfProfileOut( "Wikibase-" . __METHOD__ );
 				$this->dieUsage( $this->msg( 'wikibase-api-id-xor-wikititle' )->text(), 'id-xor-wikititle' );
 			}
 			else {
@@ -119,6 +123,8 @@ class ApiGetEntities extends Api {
 			'success',
 			(int)$success
 		);
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**
@@ -134,6 +140,8 @@ class ApiGetEntities extends Api {
 	 * @throws MWException
 	 */
 	protected function handleEntity( $id, array $params, array $props, EntitySerializer $entitySerializer ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$entityFactory = EntityFactory::singleton();
 		$entityContentFactory = EntityContentFactory::singleton();
 
@@ -195,6 +203,7 @@ class ApiGetEntities extends Api {
 			$res->addValue( $entityPath, 'id', $id );
 			$res->addValue( $entityPath, 'type', $type );
 		}
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
 
 	/**
