@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase;
 
 /**
@@ -30,15 +31,17 @@ namespace Wikibase;
  */
 
 class TermMatchScoreCalculator {
+
 	protected $entry;
 	protected $searchLength;
 
 	/**
 	 * Constructor
 	 *
-	 * @param array entry
-	 * @param string $search
 	 * @since 0.3
+	 *
+	 * @param array $entry
+	 * @param string $search
 	 */
 	public function __construct( array $entry, $search ) {
 		$this->entry = $entry;
@@ -49,16 +52,21 @@ class TermMatchScoreCalculator {
 	 * Calculate score
 	 *
 	 * @since 0.3
+	 *
 	 * @returns integer $score
 	 */
 	public function calculateScore() {
 		$score = $this->searchLength / strlen( $this->entry['label'] );
+
 		foreach ( $this->entry['aliases'] as $alias ) {
-			$aliasscore = $this->searchLength / strlen( $alias );
-			if ( $aliasscore > $score ) {
-				$score = $aliasscore;
+			$aliasScore = $this->searchLength / strlen( $alias );
+
+			if ( $aliasScore > $score ) {
+				$score = $aliasScore;
 			}
 		}
+
 		return $score;
 	}
+
 }
