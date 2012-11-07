@@ -352,7 +352,7 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 * $1 is label text
 * $2 is the labels language code
 * $3 is the id of the query that already has the label',
-	'wikibase-error-label-not-unique-item' => 'Error message shown when a user tries to save an item that has a non-unique label+description pair.
+	'wikibase-error-label-not-unique-item' => 'Error message shown when a user tries to save an item that has a non-unique label+description pair. Parameters:
 * $1 is label text
 * $2 is the labels language code
 * $3 is the id of the query that already has the label
@@ -399,7 +399,9 @@ Parameters:
 	'wikibase-createentity-description' => 'Label for the description-textfield holding the description of the new item.',
 	'wikibase-createentity-submit' => 'Text for the submit button on the CreateItem special page.',
 	'special-setlabel' => 'Title of the special page that allows the user to set a label for an entity',
-	'wikibase-setlabel-introfull' => 'Intro text when a label is to be set. $1 is the ID that links to the entity. $2 is the translated language name the label is to be set in.',
+	'wikibase-setlabel-introfull' => 'Intro text when a label is to be set. Parameters:
+* $1 is the ID that links to the entity;
+* $2 is the translated language name the label is to be set in.',
 	'wikibase-setlabel-intro' => 'A short text at the top of the page that allows users to set the label of an entity, explaining the form.',
 	'wikibase-setlabel-id' => 'Label for the input field to select the ID of the entity.',
 	'wikibase-setlabel-language' => 'Label for the input field to select the language the label should be set in.',
@@ -421,7 +423,6 @@ Parameters:
 	'wikibase-entitieswithoutlabel-label-language' => 'Label for the input field to change the language.',
 	'wikibase-entitieswithoutlabel-submit' => 'Label for the button that activate the action.',
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Error message shown when the language code passed in parameter is invalid. $1 is invalid language code.',
-
 	'wikibase-api-aliases-invalid-list' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
@@ -511,14 +512,11 @@ Parameters:
 * $2 is the site code for the from-page;
 * $3 is the site code for the to-page.',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Automatic edit summary when a value is used. Parameters:
-* $1 is the number of values and/or properties set;
-* $2 is the id for the containing entity.', # Fuzzy
+* $1 is the number of value claims set',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Automatic edit summary when no value is used. Parameters:
-* $1 is the number of values and/or properties set (that is 0 - zero);
-* $2 is the id for the containing entity.', # Fuzzy
+* $1 is the number of novalue claims set.',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Automatic edit summary when there should be a value but it is unknown. Parameters:
-* $1 is the number of values and/or properties set (that is 0 - zero);
-* $2 is the id for the containing entity.', # Fuzzy
+* $1 is the number of somevalue claims set.',
 	'wikibase-item-summary-special-create-item' => 'Automatic edit summary when creating an item, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
@@ -751,10 +749,10 @@ $messages['de'] = array(
 	'wikibase-move-error' => 'Du kannst keine Seiten aus dem Datennamensraum heraus- bzw. in ihn hineinverschieben.',
 	'wikibase-error-relational-save-failed' => 'Die Identität des Datenelements konnte nicht in der Datenbank gespeichert werden.',
 	'wikibase-error-sitelink-already-used' => 'Der Websitelink [[$1:$2]] wird bereits vom Datenobjekt [[$3]] verwendet.',
-	'wikibase-error-label-not-unique-wikibase-property' => 'Ein anderes Attribut ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
+	'wikibase-error-label-not-unique-wikibase-property' => 'Eine andere Eigenschaft ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Eine andere Abfrage ($3) hat bereits die Bezeichnung „$1“, die dem Sprachcode $2 zugeordnet ist.',
 	'wikibase-error-label-not-unique-item' => 'Ein anderes Datenobjekt ($3) hat bereits die Bezeichnung „$1“ und die Beschreibung „$4“, die dem Sprachcode $2 zugeordnet ist.',
-	'special-itembytitle' => 'Wert nach Name',
+	'special-itembytitle' => 'Datenobjekte nach Titel',
 	'wikibase-itembytitle-lookup-fieldset' => 'Suche nach Datenelementen nach Website und Titel',
 	'wikibase-itembytitle-lookup-site' => 'Website:',
 	'wikibase-itembytitle-lookup-page' => 'Seite:',
@@ -783,7 +781,7 @@ $messages['de'] = array(
 	'wikibase-createitem-page' => 'Titel der ersten verlinkten Seite',
 	'wikibase-createitem-no-external-page' => 'Die angegebene Seite konnte nicht auf der dazugehörigen Website gefunden werden.',
 	'wikibase-createitem-add-sitelink-failed' => 'Der Websitelink konnte nicht gespeichert werden.',
-	'wikibase-createitem-not-recognized-siteid' => 'Die bereitgestellte Websitekennung wurde nicht erkannt.',
+	'wikibase-createitem-not-recognized-siteid' => 'Die Kennung der Website wurde nicht erkannt.',
 	'wikibase-createentity-label' => 'Bezeichnung:',
 	'wikibase-createentity-description' => 'Beschreibung:',
 	'wikibase-createentity-submit' => 'Erstellen',
@@ -800,6 +798,11 @@ $messages['de'] = array(
 	'wikibase-listdatatypes-intro' => 'Dies ist eine Liste aller Datentypen, die derzeit in dieser Installation verwendet werden:',
 	'wikibase-history-title-with-label' => 'Versionsgeschichte von „$2“ ($1)',
 	'wikibase-history-title-without-label' => 'Versionsgeschichte von ($1)',
+	'special-entitieswithoutlabel' => 'Liste der Objekte ohne Bezeichnung',
+	'wikibase-entitieswithoutlabel-legend' => 'Liste der Objekte ohne Bezeichnung holen',
+	'wikibase-entitieswithoutlabel-label-language' => 'Sprache:',
+	'wikibase-entitieswithoutlabel-submit' => 'Suchen',
+	'wikibase-entitieswithoutlabel-invalid-language' => '„$1“ ist kein gültiger Sprachcode.',
 	'wikibase-api-patch-incomplete' => 'Der generierte Patch erwies sich als unvollständig.',
 	'wikibase-self-conflict' => 'Die Daten wurden verändert, seitdem du damit angefangen hast, sie zu bearbeiten.',
 	'wikibase-restoreold' => 'zurücksetzen',
@@ -824,7 +827,7 @@ Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPA
 	'wikibase-item-summary-wbcreateclaim-novalue' => '{{PLURAL:$1|Eine Novalue-Aussage|Novalue-Aussagen}} erstellt',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{PLURAL:$1|Eine Somevalue-Aussage|Somevalue-Aussagen}} erstellt',
 	'wikibase-item-summary-special-create-item' => 'Erstellte ein [$2]-Element mit {{PLURAL:$1|Wert|Werten}}',
-	'wikibase-item-summary-special-create-property' => 'Erstellte ein [$2]-Attribut mit {{PLURAL:$1|Wert|Werten}}',
+	'wikibase-item-summary-special-create-property' => 'Erstellte eine [$2]-Eigenschaft mit {{PLURAL:$1|Wert|Werten}}',
 	'wikibase-item-summary-special-create-query' => 'Erstellte eine [$2]-Abfrage mit {{PLURAL:$1|Wert|Werten}}',
 	'content-model-1001' => 'Wikibase-Datenobjekt',
 );
@@ -1504,6 +1507,9 @@ $messages['fi'] = array(
 	'wikibase-setlabel-language' => 'Kieli',
 	'wikibase-setlabel-label' => 'Otsikko',
 	'wikibase-setlabel-submit' => 'Aseta otsikko',
+	'wikibase-entitieswithoutlabel-label-language' => 'Kieli:',
+	'wikibase-entitieswithoutlabel-submit' => 'Etsi:',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" ei ole kelvollinen kielikoodi.',
 	'wikibase-self-conflict' => 'Olet muokannut kohdetta toisaalla sen jälkeen, kun aloitit muokkaamisen tässä.',
 	'wikibase-restoreold' => 'palauta',
 	'wikibase-restore-summary' => 'Käyttäjän [[Special:Contributions/$2|$2]] tekemän muokkauksen $1 palautus',
@@ -1511,6 +1517,13 @@ $messages['fi'] = array(
 	'wikibase-noentity' => 'Valitsemaasi kohdetta ei löytynyt.
 Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} etsiä tähän kohteeseen viittaavasta lokista]</span> löytääksesi mitä sille on tehty.',
 	'wikibase-noentity-createone' => 'Voit myös [[$1|luoda uuden]].',
+	'wikibase-item-summary-wbeditentity' => 'Luotu uusi nimike',
+	'wikibase-item-summary-wbsetlabel-set' => 'Muutettu [$2]-otsikko',
+	'wikibase-item-summary-wbsetlabel-remove' => 'Poistettu [$2]-otsikko',
+	'wikibase-item-summary-wbsetdescription-set' => 'Muutettu [$2]-kuvaus',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Poistettu [$2]-kuvaus',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Lisätty sivustokohtainen [$2]-linkki',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Poistettu sivustokohtainen [$2]-linkki',
 );
 
 /** French (français)
@@ -1640,6 +1653,13 @@ $messages['fr'] = array(
 	'wikibase-setlabel-invalid-id' => 'L\'ID "$1" est inconnu du système. Veuillez utiliser un ID d\'entité valide.',
 	'special-listdatatypes' => 'Liste de tous les types de données disponibles',
 	'wikibase-listdatatypes-intro' => "Ceci est une liste de tous les types de données en cours d'utilisation sur cette installation:",
+	'wikibase-history-title-with-label' => 'Historique des révisions de "$2" ($1)',
+	'wikibase-history-title-without-label' => 'Historique des révisions de ($1)',
+	'special-entitieswithoutlabel' => 'Liste des entités sans libellé',
+	'wikibase-entitieswithoutlabel-legend' => 'Récupérer la liste des entités sans libellé',
+	'wikibase-entitieswithoutlabel-label-language' => 'Langue:',
+	'wikibase-entitieswithoutlabel-submit' => 'Rechercher',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" n\'est pas un code de langue valide.',
 	'wikibase-api-patch-incomplete' => "La rustine générée s'avère être incomplète.",
 	'wikibase-self-conflict' => 'Données a été modifiées par vous après que vous avez commencé à éditer.',
 	'wikibase-restoreold' => 'réinitialiser',
@@ -2002,6 +2022,13 @@ $messages['he'] = array(
 	'wikibase-setlabel-invalid-id' => 'המזהה "$1" אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.',
 	'special-listdatatypes' => 'רשימת כל סוגי הנתונים',
 	'wikibase-listdatatypes-intro' => 'זוהי רשימה של כל סוגי הנתונים שמשמשים בהתקנה הזאת:',
+	'wikibase-history-title-with-label' => 'היסטוריית הגרסאות של "$2" (מזהה: $1)',
+	'wikibase-history-title-without-label' => 'היסטוריית הגרסאות של ($1)',
+	'special-entitieswithoutlabel' => 'רשימת ישויות ללא תווית',
+	'wikibase-entitieswithoutlabel-legend' => 'לקבל רשימת ישויות ללא תווית',
+	'wikibase-entitieswithoutlabel-label-language' => 'שפה:',
+	'wikibase-entitieswithoutlabel-submit' => 'למצוא',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" אינו קוד שפה תקין.',
 	'wikibase-api-patch-incomplete' => 'מסתבר שהטלאי שיוצר אינו שלם.',
 	'wikibase-self-conflict' => 'שינית את הנתונים אחרי שהתחלת לערוך.',
 	'wikibase-restoreold' => 'איפוס',
@@ -2627,6 +2654,13 @@ $messages['it'] = array(
 	'wikibase-setlabel-invalid-id' => 'L\'ID "$1" è sconosciuto al sistema. Utilizza un ID di entità valido.',
 	'special-listdatatypes' => 'Elenco di tutti i tipi di dati disponibili',
 	'wikibase-listdatatypes-intro' => 'Questo è un elenco di tutti i tipi di dati attualmente in uso su questa installazione:',
+	'wikibase-history-title-with-label' => 'Cronologia di "$2" ($1)',
+	'wikibase-history-title-without-label' => 'Cronologia di ($1)',
+	'special-entitieswithoutlabel' => 'Elenco delle entità senza etichetta',
+	'wikibase-entitieswithoutlabel-legend' => "Permette di ottenere l'elenco delle entità senza etichetta",
+	'wikibase-entitieswithoutlabel-label-language' => 'Lingua:',
+	'wikibase-entitieswithoutlabel-submit' => 'Trova',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" non è un codice di lingua valido.',
 	'wikibase-api-patch-incomplete' => 'La patch generata è incompleta.',
 	'wikibase-self-conflict' => 'I dati sono stati modificati dopo che hai iniziato a scrivere.',
 	'wikibase-restoreold' => 'ripristina',
@@ -2740,6 +2774,8 @@ $messages['ja'] = array(
 	'wikibase-setlabel-invalid-id' => 'ID「$1」はシステムに登録されていません。有効なエンティティ ID を使用してください。',
 	'special-listdatatypes' => '利用できるすべてのデータ型の一覧',
 	'wikibase-listdatatypes-intro' => 'ここでは、インストールされているもので現在使用しているデータ型をすべて列挙しています:',
+	'wikibase-history-title-with-label' => '「$2」($1) の変更履歴',
+	'wikibase-history-title-without-label' => '($1) の変更履歴',
 	'wikibase-api-patch-incomplete' => '生成されるパッチが不完全であることが判明しました。',
 	'wikibase-self-conflict' => 'あなたの編集開始以降に、データが変更されました。',
 	'wikibase-restoreold' => '復元',
@@ -3253,6 +3289,11 @@ $messages['ms'] = array(
 	'special-createitem' => 'Cipta perkara baru',
 	'wikibase-createitem-intro' => 'Sebelum mencipta perkara baru, sila pastikan sama ada perkara ini sudah wujud atau tidak. Untuk mencipta perkara baru, anda perlu menyatakan sekurang-kurangnya label atau keterangannya dalam $1.',
 	'wikibase-createitem-fieldset' => 'Cipta perkara baru',
+	'wikibase-createitem-site' => 'Tapak halaman terpaut pertama',
+	'wikibase-createitem-page' => 'Nama halaman terpaut pertama',
+	'wikibase-createitem-no-external-page' => 'Halaman yang dinyatakan tidak terdapat dalam tapak yang berkenaan.',
+	'wikibase-createitem-add-sitelink-failed' => 'Pautan halaman itu tidak dapat disimpan.',
+	'wikibase-createitem-not-recognized-siteid' => 'Pengenal tapak yang diberikan tidak dikenali.',
 	'wikibase-createentity-label' => 'Label:',
 	'wikibase-createentity-description' => 'Keterangan:',
 	'wikibase-createentity-submit' => 'Cipta',
@@ -3267,6 +3308,8 @@ $messages['ms'] = array(
 	'wikibase-setlabel-invalid-id' => 'ID "$1" tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.',
 	'special-listdatatypes' => 'Senarai semua jenis data yang ada',
 	'wikibase-listdatatypes-intro' => 'Ini ialah senarai semua jenis data yang sedang digunakan dalam pemasangan ini:',
+	'wikibase-history-title-with-label' => 'Semakan sejarah "$2" ($1)',
+	'wikibase-history-title-without-label' => 'Sejarah semakan ($1)',
 	'wikibase-api-patch-incomplete' => 'Tampung yang dihasilkan rupanya tidak lengkap.',
 	'wikibase-self-conflict' => 'Data diubahsuai oleh anda selepas anda mula menyunting.',
 	'wikibase-restoreold' => 'pulihkan',
@@ -3288,9 +3331,12 @@ untuk mencari di mana set data itu.',
 	'wikibase-item-summary-wbsetaliases-add' => 'Menambahkan {{plural:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Membuang {{plural:$1|nama lain|nama-nama lain}} [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Menyambungkan {{plural:$1|halaman|halaman-halaman}} [$2↔$3]',
-	'wikibase-item-summary-wbcreateclaim-value' => 'Mencipta {{plural:$1|tuntutan nilai|tuntutan-tuntutan nilai}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-novalue' => 'Mencipta {{plural:$1|tuntutan tanpa nilai|tuntutan-tuntutan tanpa nilai}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Mencipta {{plural:$1|tuntutan separa nilai|tuntutan-tuntutan separa nilai}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-value' => '{{plural:$1|Tuntutan nilai|Tuntutan-tuntutan nilai}} dicipta',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '{{plural:$1|Tuntutan tanpa nilai|Tuntutan-tuntutan tanpa nilai}} dicipta',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '{{plural:$1|Tuntutan separa nilai|Tuntutan-tuntutan separa nilai}} dicipta',
+	'wikibase-item-summary-special-create-item' => 'Perkara [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
+	'wikibase-item-summary-special-create-property' => 'Sifat [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
+	'wikibase-item-summary-special-create-query' => 'Pertanyaan [$2] dicipta dengan {{plural:$1|nilai|nilai-nilai}}',
 	'content-model-1001' => 'Perkara Wikibase',
 );
 
@@ -3431,6 +3477,7 @@ $messages['nl'] = array(
 	'wikibase-error-sitelink-already-used' => 'De siteverwijzing [[$1:$2]] wordt al gebruikt door het item [[$3]].',
 	'wikibase-error-label-not-unique-wikibase-property' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere eigenschap ($3)',
 	'wikibase-error-label-not-unique-wikibase-query' => 'Het label "$1" is al gekoppeld met taalcode $2 voor een andere zoekopdracht ($3)',
+	'wikibase-error-label-not-unique-item' => 'Een ander item ($3) is al gekoppeld met het label "$1" en de beschrijving "$4" voor de taalcode $2',
 	'special-itembytitle' => 'Item gesorteerd op naam',
 	'wikibase-itembytitle-lookup-fieldset' => 'Items zoeken op site en paginanaam',
 	'wikibase-itembytitle-lookup-site' => 'Site:',
@@ -3454,12 +3501,30 @@ $messages['nl'] = array(
 	'wikibase-newproperty-datatype' => 'Gegevenstype:',
 	'special-createitem' => 'Nieuw item aanmaken',
 	'wikibase-createitem-fieldset' => 'Nieuw item aanmaken',
+	'wikibase-createitem-site' => 'Site van de eerst verwijzende pagina',
+	'wikibase-createitem-page' => 'Naam van de eerste verwezen pagina',
+	'wikibase-createitem-no-external-page' => 'De opgegeven pagina kon niet worden gevonden op de overeenkomende site.',
+	'wikibase-createitem-add-sitelink-failed' => 'De siteverwijzing kon niet worden opgeslagen.',
+	'wikibase-createitem-not-recognized-siteid' => 'De opgegeven siteidentificatie is niet herkend.',
 	'wikibase-createentity-label' => 'Label:',
 	'wikibase-createentity-description' => 'Beschrijving:',
 	'wikibase-createentity-submit' => 'Aanmaken',
+	'special-setlabel' => 'Label instellen',
+	'wikibase-setlabel-introfull' => 'U bent het label voor [[$1]] aan het instellen in het $2.',
 	'wikibase-setlabel-id' => 'ID',
 	'wikibase-setlabel-language' => 'Taal',
 	'wikibase-setlabel-label' => 'Label',
+	'wikibase-setlabel-submit' => 'Label instellen',
+	'wikibase-setlabel-invalid-id' => 'Het ID is "$1" is niet bekend in het systeem. Gebruik een geldig entiteits-ID.',
+	'special-listdatatypes' => 'Lijst met alle beschikbare gegevenstypen',
+	'wikibase-listdatatypes-intro' => 'Dit is een lijst met alle gegevenstypen die op dit moment in gebruik zijn in deze wiki:',
+	'wikibase-history-title-with-label' => '$2 ($1): versiegeschiedenis',
+	'wikibase-history-title-without-label' => '$1: versiegeschiedenis',
+	'special-entitieswithoutlabel' => 'Lijst met de entiteiten zonder label',
+	'wikibase-entitieswithoutlabel-legend' => 'Entiteiten zonder label opvragen',
+	'wikibase-entitieswithoutlabel-label-language' => 'Taal:',
+	'wikibase-entitieswithoutlabel-submit' => 'Zoeken',
+	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is geen geldige taalcode.',
 	'wikibase-api-patch-incomplete' => 'De gemaakte wijziging was incompleet.',
 	'wikibase-self-conflict' => 'U hebt zelf de gegevens gewijzigd nadat u bent begonnen met bewerken (mogelijk in een andere browser of browservenster).',
 	'wikibase-restoreold' => 'opnieuw instellen',
@@ -3477,6 +3542,13 @@ $messages['nl'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd',
 	'wikibase-item-summary-wbsetaliases-add' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] toegevoegd en verwijderd',
 	'wikibase-item-summary-wbsetaliases-remove' => '{{PLURAL:$1|Alias|$1 aliassen}} voor [$2] verwijderd',
+	'wikibase-item-summary-wblinktitles-connect' => "{{PLURAL:$1|Pagina|Pagina's}} gekoppeld [$2↔$3]",
+	'wikibase-item-summary-wbcreateclaim-value' => 'Waardeclaim{{PLURAL:$1||s}} aangemaakt',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Claim{{PLURAL:$1||s}} zonder waarde aangemaakt',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Claim{{PLURAL:$1||s}} met waarde aangemaakt',
+	'wikibase-item-summary-special-create-item' => 'Item voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
+	'wikibase-item-summary-special-create-property' => 'Eigenschap voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
+	'wikibase-item-summary-special-create-query' => 'Zoekopdracht voor [$2] met waarde{{PLURAL:$1||n}} aangemaakt',
 	'content-model-1001' => 'Wikibaseitem',
 );
 
