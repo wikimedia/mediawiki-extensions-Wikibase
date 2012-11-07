@@ -156,26 +156,7 @@ describe "Check functionality of add/edit/remove sitelinks" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.addSitelinkLink
-        page.siteIdInputField = "sr"
-        ajax_wait
-        page.wait_until do
-          page.siteIdAutocompleteList_element.visible?
-        end
-        page.siteIdInputField_element.send_keys :arrow_down
-        page.siteIdAutocompleteList_element.visible?.should be_true
-        aCListElement = page.get_nth_element_in_autocomplete_list(page.siteIdAutocompleteList_element, 1)
-        aCListElement.visible?.should be_true
-        aCListElement.click
-        page.pageInputField_element.enabled?.should be_true
-        page.pageInputField = "Helijum"
-        ajax_wait
-        page.wait_until do
-          page.pageAutocompleteList_element.visible?
-        end
-        page.saveSitelinkLink
-        ajax_wait
-        page.wait_for_api_callback
+        page.add_sitelinks([["sr", "Helijum"]])
         page.pageArticleNormalized?.should be_true
         page.pageArticleNormalized_element.text.should == "Хелијум"
       end
