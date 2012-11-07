@@ -264,6 +264,57 @@ final class ClientHooks {
 		return true;
 	}
 
+	/**
+	 * Hook for injecting a message on [[Special:MovePage]]
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialMovepageAfterMove
+	 *
+	 * @since 0.3
+	 *
+	 * @param \MovePageForm $movePage
+	 * @param \Title &$oldTitle
+	 * @param \Title &$newTitle
+	 *
+	 * @return bool
+	 */
+	public static function onSpecialMovepageAfterMove( \MovePageForm $movePage, \Title &$oldTitle, \Title &$newTitle ) {
+		$siteLinkCache = ClientStoreFactory::getStore()->newSiteLinkCache();
+		$titleText = $oldTitle->getText();
+		$globalId = Settings::get( 'siteGlobalID' );
+		$itemId = $siteLinkCache->getItemIdForLink(
+			$globalId,
+			$titleText
+		);
+		if ( $itemId !== false ) {
+			$itemByTitle = Settings::get( 'repoBase' ) . $globalId . '/' . $oldTitle->getDBkey();
+			$out = $movePage->getOutput();
+			$out->addModules( 'ext.wikibaseclient.page-move' );
+			$out->addHTML(
+				\Html::rawElement(
+					'div',
+					array( 'id' => 'wbc-after-page-move',
+							'class' => 'plainlinks' ),
+					wfMessage( 'wbc-after-page-move', $itemByTitle )->parse()
+				)
+			);
+		}
+		return true;
+	}
+
+	/**
+	 * Hook for modifying the query for fetching recent changes
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialRecentChangesQuery
+	 *
+	 * @since 0.2
+	 *
+	 * @param &$conds[]
+	 * @param &$tables[]
+	 * @param &$join_conds[]
+	 * @param \FormOptions $opts
+	 * @param &$query_options[]
+	 * @param &$fields[]
+	 *
+	 * @return bool
+	 */
 	public static function onSpecialRecentChangesQuery( &$conds, &$tables, &$join_conds, $opts, &$query_options, &$fields ) {
 		if ( Settings::get( 'showExternalRecentChanges' ) === false ) {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
