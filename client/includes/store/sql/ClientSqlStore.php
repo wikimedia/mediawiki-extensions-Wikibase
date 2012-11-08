@@ -79,16 +79,16 @@ class ClientSqlStore implements ClientStore {
 		$this->newSiteLinkCache()->clear();
 		$this->newEntityCache()->clear();
 
-                $tables = array(
-                        'wbc_item_usage',
-                        'wbc_query_usage',
-                );
+		$tables = array(
+				'wbc_item_usage',
+				'wbc_query_usage',
+		);
 
-                $dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_MASTER );
 
-                foreach ( $tables as $table ) {
-                        $dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
-                }
+		foreach ( $tables as $table ) {
+				$dbw->delete( $dbw->tableName( $table ), '*', __METHOD__ );
+		}
 	}
 
 	/**
@@ -99,4 +99,5 @@ class ClientSqlStore implements ClientStore {
 	public function rebuild() {
 		$this->clear();
 	}
+
 }
