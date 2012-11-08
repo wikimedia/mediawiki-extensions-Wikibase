@@ -87,8 +87,8 @@ class ItemView extends EntityView {
 
 				$tbody .= wfTemplate( 'wb-sitelink-unknown',
 					$alternatingClass,
-					$link->getSite()->getGlobalId(),
-					$link->getPage(),
+					htmlspecialchars( $link->getSite()->getGlobalId() ),
+					htmlspecialchars( $link->getPage() ),
 					$this->getHtmlForEditSection( $item, $lang, 'td' )
 				);
 
@@ -101,10 +101,10 @@ class ItemView extends EntityView {
 				$tbody .= wfTemplate( 'wb-sitelink',
 					$languageCode,
 					$alternatingClass,
-					Utils::fetchLanguageName( $languageCode ), // TODO: get an actual site name rather then just the language
-					$languageCode, // TODO: get an actual site id rather then just the language code
-					$link->getUrl(),
-					$link->getPage(),
+					htmlspecialchars( Utils::fetchLanguageName( $languageCode ) ), // TODO: get an actual site name rather then just the language
+					htmlspecialchars( $languageCode ), // TODO: get an actual site id rather then just the language code
+					htmlspecialchars( $link->getUrl() ),
+					htmlspecialchars( $link->getPage() ),
 					$this->getHtmlForEditSection( $item, $lang, 'td' )
 				);
 			}
