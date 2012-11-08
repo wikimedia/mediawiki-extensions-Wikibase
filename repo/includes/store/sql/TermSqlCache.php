@@ -275,7 +275,7 @@ class TermSqlCache implements TermCache {
 
 		return array_map(
 			function( $entity ) {
-				return array( $entity->term_entity_type, $entity->term_entity_id );
+				return array( $entity->term_entity_type, intval( $entity->term_entity_id ) );
 			},
 			iterator_to_array( $entities )
 		);
