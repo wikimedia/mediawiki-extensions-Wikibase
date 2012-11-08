@@ -181,6 +181,10 @@ $messages['frp'] = array(
  */
 $messages['gl'] = array(
 	'wbc-desc' => 'Cliente para a extensión Wikibase',
+	'wbc-comment-langlinks-delete' => 'Borrouse un elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
+	'wbc-comment-langlinks-remove' => 'Esta páxina foi desligada do elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas',
+	'wbc-comment-langlinks-restore' => 'Restaurouse un elemento de Wikidata asociado. Recuperáronse as ligazóns lingüísticas',
+	'wbc-comment-langlinks-update' => 'Actualizáronse as ligazóns lingüísticas',
 	'wbc-editlinks' => 'Editar as ligazóns',
 	'wbc-editlinkstitle' => 'Editar as ligazóns interlingüísticas',
 );
