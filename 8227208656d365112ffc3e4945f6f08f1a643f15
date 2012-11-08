@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "AAACxn///+w\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-08T12:17:26Z",
+      "side": 1,
+      "message": "Can we get the namespace prefix here without hardcoding it?  I can imagine this test failing if I have everything setup on my wiki, say in German.",
+      "revId": "8227208656d365112ffc3e4945f6f08f1a643f15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACxn////E\u003d",
         "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
         "patchSetId": 5
