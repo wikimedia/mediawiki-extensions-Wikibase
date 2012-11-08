@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "AAACyX////4\u003d",
+        "filename": "lib/includes/entity/EntityId.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-08T13:40:53Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "AAACtn////4\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACsn///+Y\u003d",
         "filename": "lib/includes/entity/EntityId.php",
         "patchSetId": 3
@@ -247,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "AAACyX////0\u003d",
+        "filename": "lib/includes/snak/PropertySnakObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-08T13:40:53Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "AAACtn////k\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACs3////o\u003d",
         "filename": "lib/includes/store/SiteLinkLookup.php",
         "patchSetId": 3
@@ -276,6 +312,24 @@
       "side": 1,
       "message": "Oh, you mean getItemIdForLink? This is one of the things I have not updated yet but that could be updated yes.",
       "parentUuid": "AAACs3////o\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACyX////w\u003d",
+        "filename": "lib/includes/store/SiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-08T13:40:53Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "AAACtn////Y\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -317,6 +371,24 @@
     },
     {
       "key": {
+        "uuid": "AAACyX////s\u003d",
+        "filename": "lib/includes/store/SiteLinkLookup.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-08T13:40:53Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "AAACtn////U\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAACs3///+w\u003d",
         "filename": "lib/tests/phpunit/entity/EntityIdTest.php",
         "patchSetId": 3
@@ -346,6 +418,24 @@
       "side": 1,
       "message": "heh - you\u0027re right. This should produce fatal errors. There must be something else wrong that caused this test not to be run for me.",
       "parentUuid": "AAACs3///+w\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACyX////o\u003d",
+        "filename": "lib/tests/phpunit/entity/EntityIdTest.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-08T13:40:53Z",
+      "side": 1,
+      "message": "Can you check that?",
+      "parentUuid": "AAACtn////E\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -416,6 +506,24 @@
       "side": 1,
       "message": "by ItemID?\n\nI went *sigh* when seeing this code but refrained from poking at it to not blow up the commit even more",
       "parentUuid": "AAACs3///+U\u003d",
+      "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACyX////k\u003d",
+        "filename": "repo/includes/specials/SpecialSetLabel.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 247
+      },
+      "writtenOn": "2012-11-08T13:40:53Z",
+      "side": 1,
+      "message": "Understandable. Should be done in some follow up patchset.",
+      "parentUuid": "AAACtn///+k\u003d",
       "revId": "c9ca0644f6d1cfe6c25ff9ad4edf276fd88f16fd",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
