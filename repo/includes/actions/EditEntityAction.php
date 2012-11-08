@@ -225,7 +225,7 @@ abstract class EditEntityAction extends ViewEntityAction {
 		}
 
 		if ( !$restore ) {
-			$omitted = self::countAtomicOps( $diff ) - self::countAtomicOps( $appDiff );
+			$omitted = $diff->count() - $appDiff->count();
 
 			if ( !$appDiff->isEmpty() ) {
 				$this->getOutput()->addHTML( Html::openElement("p") );
@@ -507,32 +507,6 @@ abstract class EditEntityAction extends ViewEntityAction {
 		$this->getOutput()->addHTML( Html::closeElement( 'form' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'div' ) );
 	}
-
-	/**
-	 * Recursively counts the atomic operations in the given diff.
-	 *
-	 * @todo: this should be a utility method in the Diff class
-	 *
-	 * @since 0.1
-	 *
-	 * @param \Diff\IDiffOp $diff
-	 *
-	 * @return int the num,ber of atomic operations
-	 */
-	public static function countAtomicOps( \Diff\IDiffOp $diff ) {
-
-		if ( $diff->isAtomic() ) {
-			return 1;
-		}
-
-		$count = 0;
-
-		foreach ( $diff as $op ) {
-			$count += self::countAtomicOps( $op );
-		}
-
-		return $count;
-	}
 }
 
 
@@ -647,9 +621,9 @@ class SubmitEntityAction extends EditEntityAction {
 					$summary = $this->makeUndoSummary( $olderRevision, $newerRevision, $latestRevision );
 				}
 
-				$baseRevId = $this->getRequest()->getInt( 'wpBaseRev' );
-
-				$edit = new EditEntity( $latestContent, $this->getUser(), $baseRevId );
+				//NOTE: use latest revision as base revision - we are saving patched content
+				//      based on the latest revision.
+				$edit = new EditEntity( $latestContent, $this->getUser(), $latestRevision->getId() );
 				$status = $edit->attemptSave( $summary, 0, $token );
 			} else {
 				$status = Status::newGood();
