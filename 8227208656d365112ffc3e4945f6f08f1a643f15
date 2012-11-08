@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAACxn////M\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-08T12:11:51Z",
+      "side": 1,
+      "message": "trim() works on strings, not on Title objects.\nTo get the title text without the namespace prefix, use $title-\u003egetText()\n\nAlso, use ucfirst to convert the first letter to upper case (prefixes may contain multiple letters, they are configurable).",
+      "revId": "8227208656d365112ffc3e4945f6f08f1a643f15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACxn////E\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-08T12:11:51Z",
+      "side": 1,
+      "message": "break, not $break! We found the correct change and want to exit the loop!",
+      "revId": "8227208656d365112ffc3e4945f6f08f1a643f15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAACxn///+8\u003d",
+        "filename": "repo/tests/phpunit/includes/api/ApiBotEditTest.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-08T12:11:51Z",
+      "side": 1,
+      "message": "What is this elseif branch for? Why check titles that are in the wrong namespace? and if we don\u0027t care about the namespace, why look at it in the first place? I think the elseif can just go.",
+      "revId": "8227208656d365112ffc3e4945f6f08f1a643f15",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
