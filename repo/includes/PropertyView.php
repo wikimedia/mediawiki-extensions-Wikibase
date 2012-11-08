@@ -73,7 +73,7 @@ class PropertyView extends EntityView {
 		}
 		return wfTemplate( 'wb-property-datatype',
 			wfMessage( 'wikibase-datatype-label' )->text(),
-			$dataType->getLabel( $lang->getCode() )
+			htmlspecialchars( $dataType->getLabel( $lang->getCode() ) )
 		);
 	}
 }

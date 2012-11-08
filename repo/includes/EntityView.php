@@ -222,7 +222,7 @@ abstract class EntityView extends \ContextSource {
 			$info['id'],
 			wfTemplate( 'wb-property',
 				empty( $label ) ? 'wb-value-empty' : '',
-				empty( $label ) ? wfMessage( 'wikibase-label-empty' )->text() : $label,
+				empty( $label ) ? wfMessage( 'wikibase-label-empty' )->text() : htmlspecialchars( $label ),
 				$this->getHtmlForEditSection( $entity, $lang )
 			)
 		);
@@ -245,7 +245,7 @@ abstract class EntityView extends \ContextSource {
 		return wfTemplate( 'wb-description',
 			wfTemplate( 'wb-property',
 				empty( $description ) ? 'wb-value-empty' : '',
-				empty( $description ) ? wfMessage( 'wikibase-description-empty' )->text() : $description,
+				empty( $description ) ? wfMessage( 'wikibase-description-empty' )->text() : htmlspecialchars( $description ),
 				$this->getHtmlForEditSection( $entity, $lang )
 			)
 		);
@@ -275,7 +275,7 @@ abstract class EntityView extends \ContextSource {
 		} else {
 			$aliasesHtml = '';
 			foreach( $aliases as $alias ) {
-				$aliasesHtml .= wfTemplate( 'wb-alias', $alias );
+				$aliasesHtml .= wfTemplate( 'wb-alias', htmlspecialchars( $alias ) );
 			}
 			$aliasList = wfTemplate( 'wb-aliases', $aliasesHtml );
 
