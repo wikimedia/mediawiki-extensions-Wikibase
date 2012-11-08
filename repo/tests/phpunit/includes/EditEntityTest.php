@@ -61,14 +61,17 @@ class EditEntityTest extends \MediaWikiTestCase {
 			$itemContent->save( "rev 0", $wgUser, EDIT_NEW );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
+			$itemContent = $itemContent->copy();
 			$itemContent->getEntity()->setLabel('en', "bar");
 			$itemContent->save( "rev 1", $otherUser, EDIT_UPDATE );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
+			$itemContent = $itemContent->copy();
 			$itemContent->getEntity()->setLabel('de', "bar");
 			$itemContent->save( "rev 2", $wgUser, EDIT_UPDATE );
 			self::$testRevisions[] = $itemContent->getWikiPage()->getRevision();
 
+			$itemContent = $itemContent->copy();
 			$itemContent->getEntity()->setLabel('en', "test");
 			$itemContent->getEntity()->setDescription('en', "more testing");
 			$itemContent->save( "rev 3", $wgUser, EDIT_UPDATE );
@@ -124,49 +127,67 @@ class EditEntityTest extends \MediaWikiTestCase {
 		parent::tearDown();
 	}
 
-	public function providerHasEditConflicts() {
+	public function provideHasEditConflict() {
+		/*
+		 * Test Revisions:
+		 * #0: labels: array( 'en' => 'foo' );
+		 * #1: labels: array( 'en' => 'bar' ); // by other user
+		 * #2: labels: array( 'en' => 'bar', 'de' => 'bar' );
+		 * #3: labels: array( 'en' => 'test', 'de' => 'bar' );
+		*/
+
 		return array(
 			array( // #0: case I: no base rev given.
-				null, // input data
-				null, // base rev index
+				null,  // input data
+				null,  // base rev index
 				false, // expected conflict
+				false, // expected fix
 			),
 			array( // #1: case II: base rev == current
-				null, // input data
-				3,    // base rev index
-				false // expected conflict
+				null,  // input data
+				3,     // base rev index
+				false, // expected conflict
+				false, // expected fix
 			),
 			array( // #2: case III: user was last to edit
-				null, // input data
-				1,    // base rev index
-				false, // expected conflict
+				array( // input data
+					'label' => array( 'de' => 'yarrr' ),
+				),
+				1,     // base rev index
+				true,  // expected conflict
+				true,  // expected fix
+				array( // expected data
+					'label' => array( 'en' => 'test', 'de' => 'yarrr' ),
+				)
 			),
 			array( // #3: case IV: patch applied
 				array( // input data
 					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt' ),
 				),
-				0,    // base rev index
-				true,  // expected conflict //@todo: change this to "false" once we have full support for patching
-				null    // expected data
-				/*array(
-					'label' => array( 'nl' => 'test', 'fr' => 'frrrrtt', 'en' => 'bar' ),
-				)*/
+				0,     // base rev index
+				true,  // expected conflict
+				true,  // expected fix
+				array( // expected data
+					'label' => array( 'de' => 'bar', 'en' => 'test',
+					                  'nl' => 'test', 'fr' => 'frrrrtt' ),
+				)
 			),
-			array( // #4: case V: patch failed
+			array( // #4: case V: patch failed, expect a conflict
 				array( // input data
 					'label' => array( 'nl' => 'test', 'de' => 'bar' ),
 				),
-				0,    // base rev index
+				0,     // base rev index
 				true,  // expected conflict
-				null  // expected data
+				false, // expected fix
+				null   // expected data
 			),
 		);
 	}
 
 	/**
-	 * @dataProvider providerHasEditConflicts
+	 * @dataProvider provideHasEditConflict
 	 */
-	public function testHasEditConflicts( $inputData, $baseRevisionIdx, $expectedConflict, array $expectedData = null ) {
+	public function testHasEditConflict( $inputData, $baseRevisionIdx, $expectedConflict, $expectedFix, array $expectedData = null ) {
 		global $wgUser;
 
 		/* @var $content \Wikibase\EntityContent */
@@ -183,8 +204,8 @@ class EditEntityTest extends \MediaWikiTestCase {
 		if ( $inputData === null ) {
 			$entity->clear();
 		} else {
-			if ( !empty( $inputData['labels'] ) ) {
-				foreach ( $inputData['labels'] as $k => $v ) {
+			if ( !empty( $inputData['label'] ) ) {
+				foreach ( $inputData['label'] as $k => $v ) {
 					$entity->setLabel( $k, $v );
 				}
 			}
@@ -206,14 +227,29 @@ class EditEntityTest extends \MediaWikiTestCase {
 		$editEntity = new EditEntity( $content, $wgUser, $baseRevisionId );
 
 		$conflict = $editEntity->hasEditConflict();
-
 		$this->assertEquals( $expectedConflict, $conflict, 'hasEditConflict()' );
-		$this->assertEquals( $expectedConflict, $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ) );
-		$this->assertEquals( $expectedConflict, $editEntity->showErrorPage() );
-		$this->assertNotEquals( $expectedConflict, $editEntity->getStatus()->isOK() );
+
+		if ( $conflict ) {
+			$fixed = $editEntity->fixEditConflict();
+			$this->assertEquals( $expectedFix, $fixed, 'fixEditConflict()' );
+		}
+
+		/*
+		 * //TODO: make EditEntity report errors without saving content!
+		$expectedFailure = ( $expectedConflict && !$expectedFix );
+
+		$this->assertEquals( $expectedFailure, $editEntity->hasError( EditEntity::EDIT_CONFLICT_ERROR ), 'hasError()' );
+		$this->assertEquals( $expectedFailure, $editEntity->showErrorPage(), 'showErrorPage' );
+		$this->assertNotEquals( $expectedFailure, $editEntity->getStatus()->isOK(), 'isOK()' );
+		*/
 
 		if ( $expectedData !== null ) {
-			$this->assertArrayEquals( $expectedData, $editEntity->getNewContent()->getEntity()->toArray() );
+			$data = $editEntity->getNewContent()->getEntity()->toArray();
+
+			foreach ( $expectedData as $key => $expectedValue ) {
+				$actualValue = $data[$key];
+				$this->assertArrayEquals( $expectedValue, $actualValue );
+			}
 		}
 	}
 
