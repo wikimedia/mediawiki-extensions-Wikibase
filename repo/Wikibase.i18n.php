@@ -372,6 +372,9 @@ This is a generic text used for a link (fig. 3 on [[m:Wikidata/Notes/JavaScript 
 Parameters:
 * $1 is the site identifier used in the URL.
 * $2 is the page name on escaped form for use in the URL.',
+	'wikibase-itemdisambiguation-invalid-site' => 'Response informing that the site code is not valid. Could give an example of a valid site code.
+
+"site identifier" together with "wiki" is the same as "site code" on Wikipedia.',
 	'special-itemdisambiguation' => 'This special page returns all items with a given label. It provides an interface to disambiguate them. See also Wikidatas glossary for [[m:Wikidata/Glossary#languageattribute-label|label]] and [[m:Wikidata/Glossary#Items|items]].',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'This is the title for the fieldset on the special page for further refining the search. This is the search by language and label.',
 	'wikibase-itemdisambiguation-lookup-language' => 'Label for the textfield holding the language id.',
@@ -518,6 +521,12 @@ Parameters:
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Automatic edit summary when there should be a value but it is unknown. Parameters:
 * $1 is the number of somevalue claims set.',
 	'wikibase-item-summary-special-create-item' => 'Automatic edit summary when creating an item, and supplying one or more values. Parameters:
+* $1 is the number of values set (that is 0 - zero);
+* $2 is the language code of the entity page during creation.',
+	'wikibase-item-summary-special-create-property' => 'Automatic edit summary when creating a property, and supplying one or more values. Parameters:
+* $1 is the number of values set (that is 0 - zero);
+* $2 is the language code of the entity page during creation.',
+	'wikibase-item-summary-special-create-query' => 'Automatic edit summary when creating a query, and supplying one or more values. Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
