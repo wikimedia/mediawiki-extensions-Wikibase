@@ -25,7 +25,23 @@
 
 		// add an edit tool for the main label. This will be integrated into the heading nicely:
 		if ( $( '.wb-firstHeading' ).length ) { // Special pages do not have a custom wb heading
-			new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] );
+			var labelEditTool = new wb.ui.LabelEditTool( $( '.wb-firstHeading' )[0] );
+			var editableLabel = labelEditTool.getValues( true )[0]; // [0] will always be set
+
+			// make sure we update the 'title' tag of the page when label changes
+			editableLabel.on( 'afterStopEditing', function() {
+				var value;
+
+				if( editableLabel.isEmpty() ) {
+					value = mw.config.get( 'wgTitle' );
+				} else {
+					value = editableLabel.getValue()[0];
+				}
+				value += ' - ' + mw.config.get( 'wgSiteName' );
+
+				// update 'title' tag
+				$( 'html title' ).text( value );
+			} );
 		}
 
 		// add an edit tool for all properties in the data view:
