@@ -63,23 +63,36 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 						. 'Please use qualified IDs instead.' );
 			}
 
-			$entityContent = $entityContentFactory->getFromId( EntityId::newFromPrefixedId( $id ), \Revision::FOR_THIS_USER );
+			$entityTitle = $entityContentFactory->getTitleForId( EntityId::newFromPrefixedId( $id ), \Revision::FOR_THIS_USER );
 
-			if ( is_null( $entityContent ) ) {
-				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-id' )->text(), 'no-such-entity-id' );
+			if ( is_null( $entityTitle ) ) {
+				$this->dieUsage( "No entity found matching ID $id", 'no-such-entity-id' );
 			}
 		}
 		// Otherwise check if we have a link and try that.
 		// This will always result in an item, because only items have sitelinks.
 		elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
-			$entityContent = ItemHandler::singleton()->getFromSiteLink(
+			$entityTitle = ItemHandler::singleton()->getTitleFromSiteLink(
 				$params['site'],
 				Utils::squashToNFC( $params['title'] )
 			);
 
-			if ( is_null( $entityContent ) ) {
-				$this->dieUsage( $this->msg( 'wikibase-api-no-such-entity-link' )->text(), 'no-such-entity-link' );
+			if ( is_null( $entityTitle ) ) {
+				$this->dieUsage( $this->msg( "No entity found matching site link " .
+					$params['site'] . ":" . $params['title'] )->text(),
+					'no-such-entity-link' );
 			}
+		} else {
+			return null;
+		}
+
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityContent = $this->loadEntityContent( $entityTitle, $baseRevisionId );
+
+		if ( is_null( $entityContent ) ) {
+			$this->dieUsage( "Can't access item content of " .
+				$entityTitle->getPrefixedDBkey() .
+				", revision may have been deleted.", 'no-such-entity' );
 		}
 
 		return $entityContent;
@@ -250,8 +263,8 @@ abstract class ApiModifyEntity extends Api implements ApiAutocomment {
 			array( 'code' => 'add-with-id', 'info' => $this->msg( 'wikibase-api-add-with-id' )->text() ),
 			array( 'code' => 'add-exists', 'info' => $this->msg( 'wikibase-api-add-exists' )->text() ),
 			array( 'code' => 'update-without-id', 'info' => $this->msg( 'wikibase-api-update-without-id' )->text() ),
-			array( 'code' => 'no-such-entity-link', 'info' => $this->msg( 'wikibase-api-no-such-entity-link' )->text() ),
-			array( 'code' => 'no-such-entity-id', 'info' => $this->msg( 'wikibase-api-no-such-entity-id' )->text() ),
+			array( 'code' => 'no-such-entity-link', 'info' => 'No item found with the given sitelink' ),
+			array( 'code' => 'no-such-entity-id', 'info' => 'No item found with the given ID' ),
 			array( 'code' => 'create-failed', 'info' => $this->msg( 'wikibase-api-create-failed' )->text() ),
 			array( 'code' => 'modify-failed', 'info' => $this->msg( 'wikibase-api-modify-failed' )->text() ),
 			array( 'code' => 'save-failed', 'info' => $this->msg( 'wikibase-api-save-failed' )->text() ),
