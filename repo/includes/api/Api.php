@@ -58,6 +58,8 @@ abstract class Api extends \ApiBase {
 	public function getPossibleErrors() {
 		return array(
 			array( 'code' => 'jsonp-token-violation', 'info' => $this->msg( 'wikibase-api-jsonp-token-violation' )->text() ),
+			array( 'code' => 'no-such-entity-revision', 'info' => 'The given revision ID doesn\'t exist in the specified entity.'  ),
+			array( 'code' => 'cant-load-entity-content', 'info' => 'Can\'t load the content of the given page or revision.'  ),
 		);
 	}
 
@@ -372,4 +374,52 @@ abstract class Api extends \ApiBase {
 		return \Sites::singleton()->getSiteGroup( $group );
 	}
 
+
+	/**
+	 * Load the entity content of the given revision.
+	 *
+	 * Will fail by calling dieUsage() if the revision can not be found or can not be loaded.
+	 *
+	 * @since 0.3
+	 *
+	 * @param \Title   $title   : the title of the page to load the revision for
+	 * @param bool|int $revId   : the revision to load. If not given, the current revision will be loaded.
+	 * @param int      $audience
+	 * @param \User    $user
+	 * @param int      $audience: the audience to load this for, see Revision::FOR_XXX constants and
+	 *                          Revision::getContent().
+	 * @param \User    $user    : the user to consider if $audience == Revision::FOR_THIS_USER
+	 *
+	 * @return EntityContent|null the revision's content, or null if not available.
+	 */
+	protected function loadEntityContent( \Title $title, $revId = false,
+		$audience = \Revision::FOR_PUBLIC,
+		\User $user = null
+	) {
+		if ( $revId === null || $revId === false || $revId === 0 ) {
+			$page = \WikiPage::factory( $title );
+			$content = $page->getContent( $audience, $user );
+		} else {
+			$rev = \Revision::newFromId( $revId );
+
+			if ( !$rev ) {
+				$this->dieUsage( "Revision not found: $revId", 'no-such-entity-revision' );
+			}
+
+			if ( $rev->getPage() != $title->getArticleID() ) {
+				$this->dieUsage( "Revision $revId does not belong to " .
+					$title->getPrefixedDBkey(), 'no-such-entity-revision' );
+			}
+
+			$content = $rev->getContent( $audience, $user );
+		}
+
+		if ( is_null( $content ) ) {
+			$this->dieUsage( "Can't access item content of " .
+				$title->getPrefixedDBkey() .
+				", revision may have been deleted.", 'cant-load-entity-content' );
+		}
+
+		return $content;
+	}
 }

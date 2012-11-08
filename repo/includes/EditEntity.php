@@ -391,33 +391,52 @@ class EditEntity {
 			return false;
 		}
 
-		if ( self::userWasLastToEdit( $this->getUser()->getId(), $this->getBaseRevisionId() ) ) {
-			$this->status->warning( 'wikibase-self-conflict' );
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return false;
-		}
-
-		if ( $this->fixEditConflict() ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return false;
-		}
-
-		$this->status->fatal( 'edit-conflict' );
-		$this->errorType |= self::EDIT_CONFLICT_ERROR;
-
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
 	/**
 	 * Attempts to fix an edit conflict by patching the intended change into the current revision after
-	 * checking for conflicts.
+	 * checking for conflicts. This modifies $this->newContent.
 	 *
 	 * @return bool True if the conflict could be resolved, false otherwise
 	 */
-	protected function fixEditConflict() {
-		//@todo: implement this!
-		return false;
+	public function fixEditConflict() {
+		$base = $this->getBaseContent();
+		$current = $this->getCurrentContent();
+		$new = $this->getNewContent();
+
+		// calculate patch against base revision
+		//FIXME: can $current or $base be null?!
+		$patch = $base->getEntity()->getDiff( $new->getEntity() ); // diff from base to new
+
+		if ( $patch->isEmpty() ) {
+			// we didn't technically fix anything, but if there is nothing to change,
+			// the edit will apply cleanly.
+			return true;
+		}
+
+		// detect conflicts against current revision
+		$cleanPatch = $patch->getApplicableDiff( $current->getEntity()->toArray() );
+		$conflicts = self::countAtomicOps( $patch ) - self::countAtomicOps( $cleanPatch );
+
+		if ( $conflicts > 0 ) {
+			// patch doesn't apply cleanly. If it's a self-conflict apply anyway.
+
+			if ( self::userWasLastToEdit( $this->getUser()->getId(), $this->getBaseRevisionId() ) ) {
+				$this->status->warning( 'wikibase-self-conflict-patched' );
+			} else {
+				// there are unresolvable conflicts.
+				return false;
+			}
+		}
+
+		// apply the patch( base -> new ) to the current revision.
+		$this->newContent = $current->copy();
+		$patch->apply( $this->newContent->getEntity() );
+
+		$this->status->warning( 'wikibase-conflict-patched' );
+		return true;
 	}
 
 	/**
@@ -517,8 +536,13 @@ class EditEntity {
 		$this->getCurrentRevisionId();
 
 		if ( $this->hasEditConflict() ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return $this->status;
+			if ( !$this->fixEditConflict() ) {
+				$this->status->fatal( 'edit-conflict' );
+				$this->errorType |= self::EDIT_CONFLICT_ERROR;
+
+				wfProfileOut( "Wikibase-" . __METHOD__ );
+				return $this->status;
+			}
 		}
 
 		$editStatus = $this->newContent->save(
@@ -725,5 +749,33 @@ class EditEntity {
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
+	}
+
+	/**
+	 * Recursively counts the atomic operations in the given diff.
+	 *
+	 * @todo: this should be a utility method in the Diff class
+	 *
+	 * @since 0.1
+	 *
+	 * @param \Diff\IDiffOp $diff
+	 *
+	 * @return int the num,ber of atomic operations
+	 */
+	public static function countAtomicOps( \Diff\IDiffOp $diff ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
+		if ( $diff->isAtomic() ) {
+			return 1;
+		}
+
+		$count = 0;
+
+		foreach ( $diff as $op ) {
+			$count += self::countAtomicOps( $op );
+		}
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
+		return $count;
 	}
 }
