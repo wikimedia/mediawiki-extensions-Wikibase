@@ -202,7 +202,7 @@ $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';
 $wgAPIModules['wbsetaliases'] 						= 'Wikibase\ApiSetAliases';
 $wgAPIModules['wbeditentity'] 						= 'Wikibase\ApiEditEntity';
 $wgAPIModules['wblinktitles'] 						= 'Wikibase\ApiLinkTitles';
-//$wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
+$wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
 
 
 // Special page registration
