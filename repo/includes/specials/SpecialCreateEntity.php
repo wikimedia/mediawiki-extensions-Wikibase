@@ -55,7 +55,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 			&&  $this->getUser()->matchEditToken( $this->getRequest()->getVal( 'token' ) ) ) {
 
 			if ( $this->hasSufficientArguments() ) {
-				$entityContent = $this->createEntity();
+				$entityContent = $this->createEntityContent();
 
 				$status = $this->modifyEntity( $entityContent );
 
@@ -125,9 +125,9 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 *
 	 * @since 0.1
 	 *
-	 * @return Entity Created entity content of correct subtype
+	 * @return EntityContent Created entity content of correct subtype
 	 */
-	abstract protected function createEntity();
+	abstract protected function createEntityContent();
 
 	/**
 	 * Attempt to modify entity
