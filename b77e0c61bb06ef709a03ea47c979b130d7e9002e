@@ -34,6 +34,24 @@
       "revId": "b77e0c61bb06ef709a03ea47c979b130d7e9002e",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAC53///+w\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-09T12:50:24Z",
+      "side": 1,
+      "message": "I have no idea how this happen.. ;?",
+      "parentUuid": "AAACsH///00\u003d",
+      "revId": "b77e0c61bb06ef709a03ea47c979b130d7e9002e",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
