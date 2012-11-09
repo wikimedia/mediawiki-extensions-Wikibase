@@ -245,7 +245,7 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	protected static function getNamespace( $entityData ) {
-		$nsList = Settings::get('repoNamespaces');
+		$nsList = Settings::get( 'repoNamespaces' );
 		$ns = null;
 
 		switch( $entityData['entity_type'] ) {
@@ -275,17 +275,10 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	protected static function titleTextFromEntityData( $entityData, $namespace = true ) {
-		$prefix = null;
 		$titleText = '';
 
-		$id = $entityData['object_id'];
-		if ( $entityData['entity_type'] == 'wikibase-item' ) {
-			// TODO: work for all types of entities, etc.
-			$prefix = strtoupper( Settings::get( 'itemPrefix' ) );
-		}
-
-		if ( ( $prefix !== null ) && ( isset( $id ) ) ) {
-			$titleText = $prefix . $id;
+		if ( isset( $entityData['object_id'] ) ) {
+			$titleText = $entityData['object_id'];
 		}
 
 		if ( $namespace ) {
