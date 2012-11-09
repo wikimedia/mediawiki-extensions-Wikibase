@@ -190,8 +190,8 @@ final class Utils {
 	 * @return string where whitespace possibly are removed.
 	 */
 	static public function squashWhitespace( $inputString ) {
-		return preg_replace( '/(\s+)/', ' ', preg_replace( '/(^\s+|\s+$)/', '', $inputString ) );
-		//return preg_replace( '/(^\s+|\s+$)/', '', Sanitizer::normalizeWhitespace( $inputString ) );
+		$trimmed = preg_replace( '/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $inputString );
+		return preg_replace('/[\pZ\pC]+/u', ' ', $trimmed );
 	}
 
 	/**
@@ -222,7 +222,7 @@ final class Utils {
 
 	/**
 	 * Reorder an array with keys with the order given by a second array.
-	 * 
+	 *
 	 * Note that this function will do an intersection and then organize
 	 * the resulting array in the order given by the array in the second
 	 * argument. The sorting is not by the keys, but by the order the
