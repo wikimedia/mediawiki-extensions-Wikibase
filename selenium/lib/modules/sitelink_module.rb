@@ -74,6 +74,9 @@ module SitelinkPage
     sitelinks.each do |sitelink|
       addSitelinkLink
       self.siteIdInputField= sitelink[0]
+      wait_until do
+        self.pageInputField_element.enabled?
+      end
       self.pageInputField= sitelink[1]
       saveSitelinkLink
       ajax_wait
