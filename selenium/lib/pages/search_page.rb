@@ -16,7 +16,6 @@ class SearchPage < ItemPage
   paragraph(:noResults, :class => "mw-search-nonefound")
   span(:firstResultLabelSpan, :class => "wb-itemlink-label")
   span(:firstResultIdSpan, :class => "wb-itemlink-id")
-  span(:firstResultSearchMatch, :class => "searchmatch")
   link(:firstResultLink, :xpath => "//div[@class='mw-search-result-heading']/a")
 
   def count_search_results

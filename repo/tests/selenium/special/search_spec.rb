@@ -48,7 +48,6 @@ describe "Check functionality search" do
         page.noResults?.should be_false
         page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
-        page.firstResultSearchMatch_element.text.should == label
       end
     end
   end
@@ -60,17 +59,14 @@ describe "Check functionality search" do
         page.searchSubmit
         page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
-        page.firstResultSearchMatch_element.text.should == alias_a
         page.searchText= alias_b
         page.searchSubmit
         page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
-        page.firstResultSearchMatch_element.text.should == alias_b
         page.searchText= alias_c
         page.searchSubmit
         page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
-        page.firstResultSearchMatch_element.text.should == alias_c
       end
     end
   end

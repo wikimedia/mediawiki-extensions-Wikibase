@@ -30,12 +30,10 @@ describe "Check functionality of item deletion" do
         page.searchSubmit
         page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
-        page.firstResultSearchMatch_element.text.should == label
         page.searchText= alias_b
         page.searchSubmit
         page.count_search_results.should == 1
         page.firstResultLabelSpan_element.text.should == label
-        page.firstResultSearchMatch_element.text.should == alias_b
       end
       visit_page(RepoLoginPage) do |page|
         page.login_with(WIKI_ADMIN_USERNAME, WIKI_ADMIN_PASSWORD)
