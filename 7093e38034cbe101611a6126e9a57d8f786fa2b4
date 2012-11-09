@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAC7n///+0\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-09T17:48:02Z",
+      "side": 1,
+      "message": "Inconsistent escaping: text() vs. htmlspecialchars",
+      "revId": "7093e38034cbe101611a6126e9a57d8f786fa2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAC7n///+w\u003d",
+        "filename": "repo/includes/EntityView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-09T17:48:02Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "7093e38034cbe101611a6126e9a57d8f786fa2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAC7n///+s\u003d",
+        "filename": "repo/includes/PropertyView.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-09T17:48:02Z",
+      "side": 1,
+      "message": "Should be escaped?",
+      "revId": "7093e38034cbe101611a6126e9a57d8f786fa2b4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
