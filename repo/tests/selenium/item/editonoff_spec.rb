@@ -195,11 +195,11 @@ describe "Check functionality of disabling/enabling edit actions" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
-        page.removeSitelinkLink?.should be_true
         page.editLabelLink?.should be_true
         page.editDescriptionLink?.should be_true
         page.addAliases?.should be_true
         page.addSitelinkLink?.should be_true
+        page.editSitelinkLink
         page.removeSitelinkLink
         ajax_wait
         page.wait_for_api_callback
