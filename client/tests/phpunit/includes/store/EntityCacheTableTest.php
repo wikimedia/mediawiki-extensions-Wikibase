@@ -96,7 +96,7 @@ class EntityCacheTest extends ORMTableTest {
 		$obtainedEntity = $table->selectRow(
 			null,
 			array(
-				'entity_id' => $entity->getId(),
+				'entity_id' => $entity->getId()->getNumericId(),
 				'entity_type' => $entity->getType(),
 			)
 		)->getEntity();
