@@ -26,6 +26,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSchemaUpdate( \DatabaseUpdater $updater ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$type = $updater->getDB()->getType();
 
 		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
@@ -50,6 +52,7 @@ final class ClientHooks {
 			wfWarn( "Database type '$type' is not supported by Wikibase Client." );
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -90,6 +93,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseDeleteData( $reportMessage ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 
@@ -99,6 +104,7 @@ final class ClientHooks {
 
 		$reportMessage( "done!\n" );
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -115,6 +121,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseRebuildData( $reportMessage ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$store = ClientStoreFactory::getStore();
 		$stores = array_flip( $GLOBALS['wgWBClientStores'] );
 		$reportMessage( "Rebuilding all data in the " . $stores[get_class( $store )] . " store on the client..." );
@@ -128,6 +136,8 @@ final class ClientHooks {
 		);
 		ChangeHandler::singleton()->handleChanges( iterator_to_array( $changes ) );
 		$reportMessage( "done!\n" );
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -143,6 +153,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibasePollHandle( Change $change ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
 
 		// strip the wikibase- prefix
@@ -212,6 +224,7 @@ final class ClientHooks {
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -227,19 +240,24 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	protected static function updatePage( \Title $title, Change $change, $gone = false ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		if ( !$title->exists() ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 
 		$title->invalidateCache();
 
 		if ( Settings::get( 'injectRecentChanges' )  === false ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
 		$rcinfo = $change->getRCInfo();
 
 		if ( ! is_array( $rcinfo ) ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 
@@ -261,6 +279,7 @@ final class ClientHooks {
 		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
 		$rc->save();
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -317,9 +336,13 @@ final class ClientHooks {
 	 */
 	public static function onSpecialRecentChangesQuery( array &$conds, array &$tables, array &$join_conds,
 		\FormOptions $opts, array &$query_options, array &$fields ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		if ( Settings::get( 'showExternalRecentChanges' ) === false ) {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -336,6 +359,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onOldChangesListRecentChangesLine( \ChangesList &$changesList, &$s, \RecentChange $rc ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$rcType = $rc->getAttribute( 'rc_type' );
 		if ( $rcType == RC_EXTERNAL ) {
 			$params = unserialize( $rc->getAttribute( 'rc_params' ) );
@@ -344,6 +369,8 @@ final class ClientHooks {
 				$s = $line;
 			}
 		}
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -361,6 +388,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSpecialWatchlistQuery( array &$conds, array &$tables, array &$join_conds, array &$fields ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$newConds = array();
 		foreach( $conds as $k => $v ) {
 			if ( $v ===  'rc_this_oldid=page_latest OR rc_type=3' ) {
@@ -370,6 +399,8 @@ final class ClientHooks {
 			}
 		}
 		$conds = $newConds;
+
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -386,6 +417,7 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onParserAfterParse( \Parser &$parser, &$text, \StripState $stripState ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
 		global $wgLanguageCode;
 
 		$parserOutput = $parser->getOutput();
@@ -436,6 +468,7 @@ final class ClientHooks {
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -450,6 +483,8 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onWikibaseDefaultSettings( array &$settings ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$settings = array_merge(
 			$settings,
 			array(
@@ -474,6 +509,7 @@ final class ClientHooks {
 			)
 		);
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -488,12 +524,15 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onBeforePageDisplay( \OutputPage $out, \Skin $skin ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		$title = $out->getTitle();
 
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
 			$out->addModules( 'ext.wikibaseclient.init' );
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
@@ -508,7 +547,10 @@ final class ClientHooks {
 	 * @return bool
 	 */
 	public static function onSkinTemplateOutputPageBeforeExec( \Skin &$skin, \QuickTemplate &$template ) {
+		wfProfileIn( "Wikibase-" . __METHOD__ );
+
 		if ( empty( $template->data['language_urls'] ) ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return true;
 		}
 
@@ -517,6 +559,7 @@ final class ClientHooks {
 
 			$editUrl = Settings::get( 'repoBase' );
 			if( !$editUrl ) {
+				wfProfileOut( "Wikibase-" . __METHOD__ );
 				return true;
 			}
 
@@ -542,6 +585,7 @@ final class ClientHooks {
 			}
 		}
 
+		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
 	}
 
