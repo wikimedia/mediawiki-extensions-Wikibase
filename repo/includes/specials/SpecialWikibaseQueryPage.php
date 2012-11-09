@@ -65,7 +65,7 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Return the result of the query as an array of array( entity type, entity id )
+	 * Return the result of the query
 	 *
 	 * @since 0.3
 	 *
