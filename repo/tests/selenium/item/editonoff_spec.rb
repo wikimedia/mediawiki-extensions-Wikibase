@@ -117,6 +117,9 @@ describe "Check functionality of disabling/enabling edit actions" do
         page.siteIdInputField_element.should be_true
         page.pageInputField_element.enabled?.should be_false
         page.siteIdInputField="en"
+        page.wait_until do
+          page.pageInputField_element.enabled?
+        end
         page.pageInputField_element.enabled?.should be_true
         page.pageInputField="Germany"
         page.saveSitelinkLink?.should be_true
