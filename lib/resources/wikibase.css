@@ -29,7 +29,7 @@
 /* entity container */
 .wb-entity {
 	width: 100%;
-	max-width: 60em;
+	max-width: 65em;
 	float: left; /* float left to let widget container float right next to it */
 	clear: both; /* wrap around success message */
 }
@@ -63,7 +63,7 @@
 /* basically, a row in the grid layout */
 .wb-value-row {
 	width: 100%;
-	max-width: 60em;
+	max-width: 65em;
 	position: relative; /* make absolute positioned toolbar align to the right edge */
 	font-size: 100%; /* font size needs to be set since it influences max-widh property */
 	float: left; /* make row to take the dimensions of its containing blocks avoiding clipping */
@@ -74,7 +74,7 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 13em; /* has to be as wide as its content */
+	width: 18em; /* has to be as wide as its content */
 }
 
 .wb-value-container {
@@ -100,7 +100,7 @@ div.wb-entity-spinner { /* loading spinner positioning (animation is taken from 
 
 .wb-ui-labeledittool .wb-value-container,
 .wb-ui-descriptionedittool .wb-value-container {
-	padding-right: 14em; /* width of toolbar + white space border */
+	padding-right: 19em; /* width of toolbar + white space border */
 }
 
 /********** LABEL **********/
@@ -200,7 +200,7 @@ PropertyEditTool toolbar */
 .wb-aliases .wb-gridhelper {
 	display: block !important;
 	padding-left: 10px;
-	padding-right: 14em;
+	padding-right: 19em;
 	position: relative;
 }
 
@@ -257,7 +257,7 @@ EditableValue's "edit" button when aliases exist) */
 	position: absolute;
 	top: 0;
 	right: 0;
-	width: 13em;
+	width: 18em;
 }
 
 /********** /ALIASES **********/
@@ -341,7 +341,7 @@ table.wb-sitelinks .wb-sitelinks-link {
 
 /* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
 table.wb-sitelinks .editsection {
-	width: 13em;
+	width: 18em;
 	position: static; /* clear absolute positioning */
 	float: none; /* overwrite edit section's float: right */
 	border-right: 1px solid #C9C9C9;
@@ -351,7 +351,7 @@ table.wb-sitelinks .editsection {
 }
 
 table.wb-sitelinks .editsection .wb-ui-toolbar {
-	width: 13em; /* additionally assign width to toolbar to enforce width in no-JS version */
+	width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
 }
 
 table.wb-sitelinks .editsection .wb-ui-toolbar .wb-ui-toolbar-group {

@@ -27,7 +27,7 @@ module SitelinkPage
   unordered_list(:editSitelinkAutocompleteList, :class => "ui-autocomplete", :index => 0)
   link(:saveSitelinkLink, :text => "save")
   link(:cancelSitelinkLink, :text => "cancel")
-  link(:removeSitelinkLink, :xpath => "//td[contains(@class, 'wb-ui-propertyedittool-editablevalue-toolbarparent')]/span/span/span/a[2]")
+  link(:removeSitelinkLink, :text => "remove")
   link(:editSitelinkLink, :xpath => "//td[contains(@class, 'wb-ui-propertyedittool-editablevalue-toolbarparent')]/span/span/span/a")
   link(:englishEditSitelinkLink, :xpath => "//tr[contains(@class, 'wb-sitelinks-en')]/td[4]/span/span/span/a")
   link(:pageArticleNormalized, :css => "td.wb-sitelinks-link-sr > a")
@@ -88,6 +88,7 @@ module SitelinkPage
     count = 0
     number_of_sitelinks = get_number_of_sitelinks_from_counter
     while count < (number_of_sitelinks)
+      editSitelinkLink
       removeSitelinkLink
       ajax_wait
       wait_for_api_callback

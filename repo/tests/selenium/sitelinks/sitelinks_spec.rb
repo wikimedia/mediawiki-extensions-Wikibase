@@ -259,8 +259,8 @@ describe "Check functionality of add/edit/remove sitelinks" do
         page.navigate_to_item
         page.wait_for_entity_to_load
         numExistingSitelinks = page.count_existing_sitelinks
-        page.removeSitelinkLink?.should be_true
         for i in 1..numExistingSitelinks
+          page.editSitelinkLink
           page.removeSitelinkLink?.should be_true
           page.removeSitelinkLink
           ajax_wait
