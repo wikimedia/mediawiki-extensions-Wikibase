@@ -241,6 +241,7 @@ $messages['is'] = array(
 	'wbc-comment-langlinks-delete' => 'Tengdum Wikidata hlut eytt. Tungumálatenglar fjarlægðir.',
 	'wbc-comment-langlinks-remove' => 'Þessi síða hefur verið aftengd Wikidata hlut. Tungumálatenglar fjarlægðir',
 	'wbc-comment-langlinks-restore' => 'Tengdur Wikidata hlut endurvakinn. Tungumálatenglar endurvaktir.',
+	'wbc-comment-langlinks-update' => 'Vefsvæðis tenglar uppfærðir',
 	'wbc-editlinks' => 'Breyta tenglum',
 	'wbc-editlinkstitle' => 'Breyta tungumálatenglum',
 );
@@ -430,6 +431,10 @@ $messages['ro'] = array(
  */
 $messages['ru'] = array(
 	'wbc-desc' => 'Клиент для расширения Wikibase',
+	'wbc-comment-langlinks-delete' => 'Связанный элемент Викиданных удалён. Языковые ссылки ликвидированы.',
+	'wbc-comment-langlinks-remove' => 'Связь этой страницы с элементом Викиданных была разорвана. Языковые ссылки удалены',
+	'wbc-comment-langlinks-restore' => 'Удаление связанного элемента Викиданных отменено. Языковые ссылки восстановлены',
+	'wbc-comment-langlinks-update' => 'Языковые ссылки обновлены',
 	'wbc-editlinks' => 'Редактировать ссылки',
 	'wbc-editlinkstitle' => 'Редактировать межъязыковые ссылки',
 );
