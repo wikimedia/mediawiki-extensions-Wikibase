@@ -228,6 +228,21 @@ to find out where it went.',
 
 	//content model names
 	'content-model-1001' => 'Wikibase item',
+
+	// User rights
+	'right-item-override' => 'Override an item',
+	'right-item-create' => 'Create an item',
+	'right-item-remove' => 'Remove an item',
+	'right-alias-add' => 'Add an alias',
+	'right-alias-set' => 'Set an alias',
+	'right-alias-remove' => 'Remove an alias',
+	'right-sitelink-remove' => 'Remove a sitelink',
+	'right-sitelink-update' => 'Update a sitelink',
+	'right-linktitles-update' => 'Update a link title',
+	'right-label-remove' => 'Remove a label',
+	'right-label-update' => 'Update a label',
+	'right-description-remove' => 'Remove a description',
+	'right-description-update' => 'Update a description',
 );
 
 /** Message documentation (Message documentation)
@@ -527,6 +542,19 @@ Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'content-model-1001' => 'This is the human readable form of the identifier for Wikibase items, or the name of the Wikibase item content model as it is used when describing what type of content a page contains.',
+	'right-item-override' => '{{doc-right|item-override}}',
+	'right-item-create' => '{{doc-right|item-create}}',
+	'right-item-remove' => '{{doc-right|item-remove}}',
+	'right-alias-add' => '{{doc-right|alias-add}}',
+	'right-alias-set' => '{{doc-right|alias-set}}',
+	'right-alias-remove' => '{{doc-right|alias-remove}}',
+	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}',
+	'right-sitelink-update' => '{{doc-right|sitelink-update}}',
+	'right-linktitles-update' => '{{doc-right|linktitles-update}}',
+	'right-label-remove' => '{{doc-right|label-remove}}',
+	'right-label-update' => '{{doc-right|label-update}}',
+	'right-description-remove' => '{{doc-right|description-remove}}',
+	'right-description-update' => '{{doc-right|description-update}}',
 );
 
 /** Achinese (Acèh)

@@ -61,17 +61,17 @@ $dir = __DIR__ . '/';
 
 // rights
 // names should be according to other naming scheme
-$wgGroupPermissions['*']['item-override']		= true;
-$wgGroupPermissions['*']['item-create']			= true;
-$wgGroupPermissions['*']['item-remove']			= true;
-$wgGroupPermissions['*']['alias-add']			= true;
-$wgGroupPermissions['*']['alias-set']			= true;
-$wgGroupPermissions['*']['alias-remove']		= true;
-$wgGroupPermissions['*']['sitelink-remove']		= true;
-$wgGroupPermissions['*']['sitelink-update']		= true;
+$wgGroupPermissions['*']['item-override']	= true;
+$wgGroupPermissions['*']['item-create']		= true;
+$wgGroupPermissions['*']['item-remove']		= true;
+$wgGroupPermissions['*']['alias-add']		= true;
+$wgGroupPermissions['*']['alias-set']		= true;
+$wgGroupPermissions['*']['alias-remove']	= true;
+$wgGroupPermissions['*']['sitelink-remove']	= true;
+$wgGroupPermissions['*']['sitelink-update']	= true;
 $wgGroupPermissions['*']['linktitles-update']	= true;
-$wgGroupPermissions['*']['label-remove']		= true;
-$wgGroupPermissions['*']['label-update']		= true;
+$wgGroupPermissions['*']['label-remove']	= true;
+$wgGroupPermissions['*']['label-update']	= true;
 $wgGroupPermissions['*']['description-remove']	= true;
 $wgGroupPermissions['*']['description-update']	= true;
 
