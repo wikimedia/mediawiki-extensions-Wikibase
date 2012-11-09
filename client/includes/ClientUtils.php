@@ -33,7 +33,7 @@ final class ClientUtils {
 	 *
 	 * @return string
 	 */
-        public static function baseUrl() {
+	public static function baseUrl() {
 		$baseUrl = Settings::get( 'repoBase' );
 		$baseUrl = rtrim( $baseUrl, '/' );
 		return $baseUrl . '/';

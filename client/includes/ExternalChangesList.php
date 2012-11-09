@@ -27,6 +27,11 @@ class ExternalChangesList {
 
 		$entityTitle = self::titleTextFromEntityData( $entityData );
 
+		if ( $entityTitle === false ) {
+			wfDebug( 'Invalid entity data in external change.' );
+			return false;
+		}
+
 		$repoIndex = str_replace( 'api.php', 'index.php', Settings::get( 'repoApi' ) );
 
 		$line = '';
@@ -245,7 +250,7 @@ class ExternalChangesList {
 	 * @return string
 	 */
 	protected static function getNamespace( $entityData ) {
-		$nsList = Settings::get('repoNamespaces');
+		$nsList = Settings::get( 'repoNamespaces' );
 		$ns = null;
 
 		switch( $entityData['entity_type'] ) {
@@ -272,28 +277,30 @@ class ExternalChangesList {
 	 * @param array $entityData
 	 * @param bool $namespace include namespace in title, such as Item:Q1
 	 *
-	 * @return string
+	 * @return string|bool
 	 */
 	protected static function titleTextFromEntityData( $entityData, $namespace = true ) {
-		$prefix = null;
-		$titleText = '';
+		if ( isset( $entityData['object_id'] ) ) {
+			$entityId = $entityData['object_id'];
 
-		$id = $entityData['object_id'];
-		if ( $entityData['entity_type'] == 'wikibase-item' ) {
-			// TODO: work for all types of entities, etc.
-			$prefix = strtoupper( Settings::get( 'itemPrefix' ) );
+			if ( is_numeric( $entityId ) ) {
+				$entity = ItemObject::newEmpty();
+				$entity->setId( intval( $entityId ) );
+				$titleText = strtoupper( $entity->getPrefixedId() );
+			}
+
+			if ( $namespace ) {
+				$ns = self::getNamespace( $entityData );
+				$titleText = $ns . $titleText;
+			}
+
 		}
 
-		if ( ( $prefix !== null ) && ( isset( $id ) ) ) {
-			$titleText = $prefix . $id;
+		if ( $titleText !== null ) {
+			return $titleText;
 		}
 
-		if ( $namespace ) {
-			$ns = self::getNamespace( $entityData );
-			$titleText = $ns . $titleText;
-		}
-
-		return $titleText;
+		return false;
 	}
 
 	/**
