@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAC7n////M\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-09T17:45:27Z",
+      "side": 1,
+      "message": "-\u003eescaped()",
+      "revId": "f9b3b7c3cb3570113f17c674aa8642aa8c9bc006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAC7n////I\u003d",
+        "filename": "client/includes/ExternalChangesList.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2012-11-09T17:45:27Z",
+      "side": 1,
+      "message": "why did you change $cl-\u003emsg to wfMessage?",
+      "revId": "f9b3b7c3cb3570113f17c674aa8642aa8c9bc006",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
