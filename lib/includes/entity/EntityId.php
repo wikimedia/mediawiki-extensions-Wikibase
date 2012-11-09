@@ -190,8 +190,6 @@ class EntityId {
 	protected static function getEntityTypeForPrefix( $prefix ) {
 		static $typeMap = false;
 
-		$prefix = strtoupper( $prefix );
-
 		if ( $typeMap === false ) {
 			$typeMap = array();
 
@@ -222,8 +220,7 @@ class EntityId {
 				$prefixes[] = preg_quote( Settings::get( $setting ) );
 			}
 
-			//case insensitive in order to support IDs like q6 and not Q6
-			$regex = '/^(' . implode( '|', $prefixes ) . '|)(\d+)(#.*|)$/i';
+			$regex = '/^(' . implode( '|', $prefixes ) . '|)(\d+)(#.*|)$/';
 		}
 
 		preg_match( $regex, $id, $matches );
