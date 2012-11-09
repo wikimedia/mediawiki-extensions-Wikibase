@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAC9H///3s\u003d",
+        "filename": "client/tests/phpunit/includes/store/EntityCacheTableTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-09T22:39:11Z",
+      "side": 1,
+      "message": "You changed behaviour here. Before it would run delete once when there was such an entity and once when there is none. Now it\u0027s run twice when there is none. So please add a addEntity at the top of the method or undo this part of the change",
+      "revId": "e43efa2bbd239bf7ee32c63a8efbd02ad47a5452",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
