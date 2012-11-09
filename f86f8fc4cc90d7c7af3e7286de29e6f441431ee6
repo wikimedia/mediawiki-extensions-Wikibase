@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAC9X////w\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-09T23:04:22Z",
+      "side": 1,
+      "message": "don\u0027t think we want this filtering stuff in the API - we might well need it elsewhere, for instance in the non-JS entity view stuff.",
+      "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAC9X////8\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-09T23:04:22Z",
+      "side": 1,
+      "message": "Let\u0027s keep the serialization stuff out of any specific API module? Else we\u0027re back where we started...",
+      "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAC9X////g\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-09T23:04:22Z",
+      "side": 1,
+      "message": "I\u0027m not convinced we ave use for this option, and am not fond of how the props arrays are passed to the serializers. And if it\u0027s not really needed, and we expose it, we will end up needing to continue supporting it for no good reason.\n\nNo hard objection here, but I suggest asking other people (esp Denny) for feedback on this.",
+      "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
