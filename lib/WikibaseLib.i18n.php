@@ -121,6 +121,17 @@ $messages['fa'] = array(
 	'datatypes-type-commonsMedia' => 'پرونده‌های ویکی‌انبار',
 );
 
+/** Finnish (suomi)
+ * @author Stryn
+ */
+$messages['fi'] = array(
+	'wikibaselib-entity-item' => 'kohde',
+	'wikibaselib-entity-property' => 'ominaisuus',
+	'wikibaselib-entity-query' => 'kysely',
+	'datatypes-type-wikibase-item' => 'Kohde',
+	'datatypes-type-commonsMedia' => 'Commonsin mediatiedosto',
+);
+
 /** French (français)
  * @author Arkanosis
  * @author Wyz
@@ -330,13 +341,15 @@ $messages['pt-br'] = array(
 
 /** Russian (русский)
  * @author Amire80
+ * @author Kaganer
  */
 $messages['ru'] = array(
 	'wikibaselib-desc' => 'Общие функции расширений Wikibase и Wikibase Client',
-	'wikibaselib-entity-item' => 'предмет',
+	'wikibaselib-entity-item' => 'элемент',
 	'wikibaselib-entity-property' => 'свойство',
 	'wikibaselib-entity-query' => 'запрос',
-	'datatypes-type-wikibase-item' => 'Предмет',
+	'datatypes-type-wikibase-item' => 'Элемент',
+	'datatypes-type-commonsMedia' => 'Медиафайл на Викисклде',
 );
 
 /** Tagalog (Tagalog)

@@ -76,11 +76,26 @@ $specialPageAliases['mk'] = array(
 	'ItemByTitle' => array( 'ПредметПоНаслов' ),
 	'ItemDisambiguation' => array( 'ПредметПоЕтикета' ),
 	'ListDatatypes' => array( 'СписокПодаточниТипови' ),
+	'SetLabel' => array( 'ЗадајЕтикета' ),
 );
 
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = array(
 	'CreateItem' => array( 'ItemAanmaken' ),
+	'NewProperty' => array( 'NieuweEigenschap' ),
 	'ItemByTitle' => array( 'ItemPerTitel' ),
 	'ItemDisambiguation' => array( 'ItemPerLabel' ),
+	'ListDatatypes' => array( 'GegevenstypenWeergeven' ),
+	'SetLabel' => array( 'LabelInstellen' ),
+	'EntitiesWithoutLabel' => array( 'EntiteitenZonderLabel' ),
+);
+
+/** Simplified Chinese (中文（简体）‎) */
+$specialPageAliases['zh-hans'] = array(
+	'CreateItem' => array( '创建项目' ),
+	'NewProperty' => array( '新建属性' ),
+	'ItemByTitle' => array( '按标题搜索项目' ),
+	'ItemDisambiguation' => array( '项目消歧义' ),
+	'ListDatatypes' => array( '列出数据类型' ),
+	'SetLabel' => array( '设置标签' ),
 );
