@@ -99,6 +99,8 @@ abstract class EntityObject implements Entity {
 			else {
 				$this->id = null;
 			}
+		} else if ( is_integer( $this->id ) ) {
+			$this->id = EntityId::newFromPrefixedId( $this->getIdPrefix() . $this->id );
 		}
 
 		return $this->id;
