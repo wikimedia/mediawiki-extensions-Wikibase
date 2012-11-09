@@ -36,7 +36,7 @@ use \Wikibase\Entity;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityCacheTest extends ORMTableTest {
+class EntityCacheTest extends \ORMTableTest {
 
 	/**
 	 * @see ORMTableTest::getRowClass
@@ -102,14 +102,14 @@ class EntityCacheTest extends ORMTableTest {
 		)->getEntity();
 
 		$this->assertTrue( $entity->getDiff( $obtainedEntity )->isEmpty() );
-
-		$this->testDeleteEntity( $entity );
 	}
 
 	/**
+	 * @depends testAddEntity
+	 * @dataProvider entityProvider
 	 * @param \Wikibase\Entity $entity
 	 */
-	protected function testDeleteEntity( Entity $entity ) {
+	public function testDeleteEntity( Entity $entity ) {
 		$this->assertTrue( $this->getTable()->deleteEntity( $entity ) );
 		$this->assertFalse( $this->getTable()->hasEntity( $entity ) );
 		$this->assertTrue( $this->getTable()->deleteEntity( $entity ) );
@@ -132,43 +132,6 @@ class EntityCacheTest extends ORMTableTest {
 		$obtainedEntity = $table->getEntity( $entity->getType(), $entity->getId()->getNumericId() );
 
 		$this->assertTrue( $entity->getDiff( $obtainedEntity )->isEmpty() );
-	}
-
-}
-
-abstract class ORMTableTest extends \MediaWikiTestCase {
-
-	/**
-	 * @since 1.20
-	 * @return string
-	 */
-	protected abstract function getTableClass();
-
-	/**
-	 * @since 1.20
-	 * @return \IORMTable
-	 */
-	public function getTable() {
-		$class = $this->getTableClass();
-		return $class::singleton();
-	}
-
-	/**
-	 * @since 1.20
-	 * @return string
-	 */
-	public function getRowClass() {
-		return $this->getTable()->getRowClass();
-	}
-
-	/**
-	 * @since 1.20
-	 */
-	public function testSingleton() {
-		$class = $this->getTableClass();
-
-		$this->assertInstanceOf( $class, $class::singleton() );
-		$this->assertTrue( $class::singleton() === $class::singleton() );
 	}
 
 }
