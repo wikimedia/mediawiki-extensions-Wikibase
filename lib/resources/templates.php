@@ -149,10 +149,10 @@ HTML;
 	$templates['wb-sitelink'] =
 <<<HTML
 <tr class="wb-sitelinks-$1 $2">
-	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$1">$3</td>
+	<td class="wb-sitelinks-sitename wb-sitelinks-sitename-$1" lang="$1">$3</td>
 	<td class="wb-sitelinks-siteid wb-sitelinks-siteid-$1">$4</td>
-	<td class="wb-sitelinks-link wb-sitelinks-link-$1">
-		<a href="$5" dir="auto">$6</a>
+	<td class="wb-sitelinks-link wb-sitelinks-link-$1" lang="$1">
+		<a href="$5" hreflang="$1" dir="auto">$6</a>
 	</td>
 	$7
 </tr>
