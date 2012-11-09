@@ -157,14 +157,27 @@ abstract class EntityObject implements Entity {
 
 	/**
 	 * @see Entity::setId
-	 * TODO: update to use EntityId
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $id
+	 * @param EntityId|integer $id Can be EntityId since 0.3
+	 *
+	 * @throws MWException
 	 */
 	public function setId( $id ) {
-		$this->id = new EntityId( $this->getType(), $id );
+		if ( $id instanceof EntityId ) {
+			if ( $id->getEntityType() !== $this->getType() ) {
+				throw new MWException( 'Attempt to set an EntityId with mismatching entity type' );
+			}
+
+			$this->id = $id;
+		}
+		else if ( is_integer( $id ) ) {
+			$this->id = new EntityId( $this->getType(), $id );
+		}
+		else {
+			throw new MWException( __METHOD__ . ' only accepts EntityId and integer' );
+		}
 	}
 
 	/**

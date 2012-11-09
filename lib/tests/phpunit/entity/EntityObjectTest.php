@@ -2,6 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\Entity;
+use Wikibase\EntityId;
 
 /**
  * Tests for the Wikibase\EntityObject deriving classes.
@@ -458,6 +459,7 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$this->assertFalse( $entity === $copy );
 	}
 
+
 	/**
 	 * @dataProvider instanceProvider
 	 *
@@ -472,6 +474,49 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 
 		$this->assertTrue( $entity->equals( $instance ) );
 		$this->assertEquals( $entity->getPrefixedId(), $instance->getPrefixedId() );
+	}
+
+	public function baseIdProvider() {
+		$ids = array();
+
+		$ids[] = 0;
+		$ids[] = 42;
+		$ids[] = 9001;
+
+		$type = $this->getNewEmpty()->getType();
+
+		foreach ( array_values( $ids ) as $id ) {
+			$ids[] = new EntityId( $type, $id );
+		}
+
+		return $this->arrayWrap( $ids );
+	}
+
+	/**
+	 * @dataProvider baseIdProvider
+	 */
+	public function testSetIdBase( $id ) {
+		$entity = $this->getNewEmpty();
+
+		$this->assertEquals( null, $entity->getId(), 'Getting an ID from an empty entity should return null' );
+
+		$entity->setId( $id );
+
+		$this->assertEquals(
+			$entity->getType(),
+			$entity->getId()->getEntityType(),
+			'Entity type of returned ID is correct'
+		);
+
+		if ( $id instanceof EntityId ) {
+			$id = $id->getNumericId();
+		}
+
+		$this->assertEquals( $id, $entity->getId()->getNumericId(), 'Numeric part of returned entity id is correct' );
+
+		$entity->setId( 42 );
+
+		$this->assertEquals( 42, $entity->getId()->getNumericId(), 'Numeric part of returned id is still correct' );
 	}
 
 }
