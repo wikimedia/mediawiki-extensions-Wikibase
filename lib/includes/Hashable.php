@@ -5,6 +5,8 @@ namespace Wikibase;
 /**
  * Interface for objects with a getHash method.
  *
+ * TODO: remove
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -28,18 +30,6 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Hashable {
-
-	/**
-	 * Returns a hash of the object.
-	 * This hash is based on the objects value and identifiers, but not on the instance.
-	 * In other words, calling getHash on a clone of an unmodified object will always
-	 * result in the same hash.
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getHash();
+interface Hashable extends \Hashable {
 
 }
