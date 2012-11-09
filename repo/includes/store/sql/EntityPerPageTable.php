@@ -120,10 +120,14 @@ class EntityPerPageTable implements EntityPerPage {
 			);
 
 			foreach ( $pages as $pageRow ) {
-				$entityContent = $entityContentFactory->getFromId( EntityId::newFromPrefixedId( $pageRow->page_title ), \Revision::RAW );
+				$id = EntityId::newFromPrefixedId( $pageRow->page_title );
 
-				if ( $entityContent !== null ) {
-					$this->addEntityContent( $entityContent );
+				if ( $id !== null ) {
+					$entityContent = $entityContentFactory->getFromId( $id, \Revision::RAW );
+
+					if ( $entityContent !== null ) {
+						$this->addEntityContent( $entityContent );
+					}
 				}
 			}
 			$begin += 1000;

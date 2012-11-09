@@ -65,7 +65,7 @@ interface Entity extends Comparable, ClaimAggregate {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $id
+	 * @param EntityId|integer $id
 	 */
 	public function setId( $id );
 
