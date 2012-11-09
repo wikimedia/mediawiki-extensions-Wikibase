@@ -32,3 +32,13 @@ $magicWords['ko'] = array(
 $magicWords['mk'] = array(
 	'noexternallanglinks' => array( 0, 'безнадворјазврски' ),
 );
+
+/** Malayalam (മലയാളം) */
+$magicWords['ml'] = array(
+	'noexternallanglinks' => array( 0, 'ബാഹ്യഭാഷാകണ്ണികൾവേണ്ട' ),
+);
+
+/** Dutch (Nederlands) */
+$magicWords['nl'] = array(
+	'noexternallanglinks' => array( 0, 'geenexternetaalverwijzingen' ),
+);
