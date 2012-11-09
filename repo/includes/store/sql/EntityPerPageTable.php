@@ -141,7 +141,7 @@ class EntityPerPageTable implements EntityPerPage {
 	 * @param string|null $entityType Can be "item", "property" or "query". By default the search is done for all entities.
 	 * @param integer $limit Limit of the query.
 	 * @param integer $offset Offset of the query.
-	 * @return array of array( entity type, entity id )
+	 * @return EntityId[]
 	 */
 	public function getEntitiesWithoutTerm( $termType, $language = null, $entityType = null, $limit = 50, $offset = 0 ) {
 		$dbr = wfGetDB( DB_SLAVE );
@@ -176,7 +176,7 @@ class EntityPerPageTable implements EntityPerPage {
 
 		$entities = array();
 		foreach ( $rows as $row ) {
-			$entities[] = array( $row->entity_type, $row->entity_id );
+			$entities[] = new EntityId( $row->entity_type, (int)$row->entity_id );
 		}
 		return $entities;
 	}
