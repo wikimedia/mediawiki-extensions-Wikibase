@@ -467,6 +467,13 @@ $messages['sv'] = array(
 	'wbc-editlinks' => 'Redigera länkar',
 );
 
+/** Tamil (தமிழ்)
+ * @author மதனாஹரன்
+ */
+$messages['ta'] = array(
+	'wbc-editlinks' => 'இணைப்புக்களைத் தொகு',
+);
+
 /** Telugu (తెలుగు)
  * @author Veeven
  */

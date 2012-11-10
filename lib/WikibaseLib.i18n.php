@@ -352,6 +352,16 @@ $messages['ru'] = array(
 	'datatypes-type-commonsMedia' => 'Медиафайл на Викисклде',
 );
 
+/** Tamil (தமிழ்)
+ * @author மதனாஹரன்
+ */
+$messages['ta'] = array(
+	'wikibaselib-entity-item' => 'உருப்படி',
+	'wikibaselib-entity-query' => 'வினவல்',
+	'datatypes-type-wikibase-item' => 'உருப்படி',
+	'datatypes-type-commonsMedia' => 'பொதுவூடகக் கோப்பு',
+);
+
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */
