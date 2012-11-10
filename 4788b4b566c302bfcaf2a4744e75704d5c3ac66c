@@ -52,6 +52,24 @@
       "revId": "4788b4b566c302bfcaf2a4744e75704d5c3ac66c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADDn////4\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-10T20:00:08Z",
+      "side": 1,
+      "message": "Well, \\pC seems to be control characters - we don\u0027t really want them, anyway. Hm... what about directionality markers, though?",
+      "parentUuid": "AAADDX////Q\u003d",
+      "revId": "4788b4b566c302bfcaf2a4744e75704d5c3ac66c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
