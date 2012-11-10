@@ -80,22 +80,13 @@ class EntitySerializer extends ApiSerializerObject {
 		foreach ( $this->options->getProps() as $key ) {
 			switch ( $key ) {
 				case 'aliases':
-					$aliases = $this->getAliasesSerialization( $entity );
-					if ( $aliases !== false ) {
-						$serialization['aliases'] = $aliases;
-					}
+					$serialization['aliases'] = $this->getAliasesSerialization( $entity );
 					break;
 				case 'descriptions':
-					$descriptions = $this->getDescriptionsSerialization( $entity );
-					if ( $descriptions !== false ) {
-						$serialization['descriptions'] = $descriptions;
-					}
+					$serialization['descriptions'] = $this->getDescriptionsSerialization( $entity );
 					break;
 				case 'labels':
-					$labels = $this->getLabelsSerialization( $entity );
-					if ( $labels !== false ) {
-						$serialization['labels'] = $labels;
-					}
+					$serialization['labels'] = $this->getLabelsSerialization( $entity );
 					break;
 			}
 		}
@@ -154,14 +145,8 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
-		if ( $value === array() ) {
-			return false;
-		}
-
-		if ( $value !== array() ) {
-			if ( !$this->options->shouldUseKeys() ) {
-				$this->getResult()->setIndexedTagName( $value, 'alias' );
-			}
+		if ( !$this->options->shouldUseKeys() ) {
+			$this->getResult()->setIndexedTagName( $value, 'alias' );
 		}
 
 		return $value;
@@ -197,14 +182,8 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
-		if ( $value === array() ) {
-			return false;
-		}
-
-		if ( $value !== array() ) {
-			if ( !$this->options->shouldUseKeys() ) {
-				$this->getResult()->setIndexedTagName( $value, 'description' );
-			}
+		if ( !$this->options->shouldUseKeys() ) {
+			$this->getResult()->setIndexedTagName( $value, 'description' );
 		}
 
 		return $value;
@@ -240,14 +219,8 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
-		if ( $value === array() ) {
-			return false;
-		}
-
-		if ( $value !== array() ) {
-			if ( !$this->options->shouldUseKeys() ) {
-				$this->getResult()->setIndexedTagName( $value, 'label' );
-			}
+		if ( !$this->options->shouldUseKeys() ) {
+			$this->getResult()->setIndexedTagName( $value, 'label' );
 		}
 
 		return $value;
