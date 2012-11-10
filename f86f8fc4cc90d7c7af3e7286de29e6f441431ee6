@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "AAADCX////g\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-10T15:07:37Z",
+      "side": 1,
+      "message": "we no longer have this method",
+      "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAC9X////w\u003d",
         "filename": "repo/includes/api/ApiGetClaims.php",
         "patchSetId": 3
@@ -53,6 +70,40 @@
     },
     {
       "key": {
+        "uuid": "AAADCX////o\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-10T15:07:37Z",
+      "side": 1,
+      "message": "those ifs are not following the coding conventions",
+      "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADCX////k\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-10T15:07:37Z",
+      "side": 1,
+      "message": "A ClaimAggregate can have statements, so this logic is broken",
+      "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAC9X////8\u003d",
         "filename": "repo/includes/api/ApiGetClaims.php",
         "patchSetId": 3
@@ -64,6 +115,23 @@
       "writtenOn": "2012-11-09T23:04:22Z",
       "side": 1,
       "message": "Let\u0027s keep the serialization stuff out of any specific API module? Else we\u0027re back where we started...",
+      "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADCX////U\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-10T15:07:37Z",
+      "side": 1,
+      "message": "the logic of this serialization is also wrong, since it does not follow our spec of having per-property access https://meta.wikimedia.org/wiki/Wikidata/Development/Phase_2_JSON\n\nshould use ByPropertyListSerializer",
       "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
