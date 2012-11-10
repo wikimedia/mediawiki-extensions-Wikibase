@@ -1,6 +1,7 @@
 <?php
 
 namespace DataValues;
+use InvalidArgumentException;
 
 /**
  * Interface for objects that represent a single data value.

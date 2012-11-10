@@ -273,4 +273,18 @@ class IriValue extends DataValueObject {
 		);
 	}
 
+	/**
+	 * Constructs a new instance of the DataValue from the provided data.
+	 * This can round-trip with @see getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return DataValue
+	 */
+	public static function newFromArray( array $data ) {
+		return new static( $data['scheme'], $data['hierarchicalpart'], $data['query'], $data['fragment'] );
+	}
+
 }

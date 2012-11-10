@@ -40,6 +40,7 @@ return array(
 	'DataValues\UnknownValue' => 'includes/values/UnknownValue.php',
 
 	'DataValues\DataValue' => 'includes/DataValue.php',
+	'DataValues\DataValueFactory' => 'includes/DataValueFactory.php',
 	'DataValues\DataValueObject' => 'includes/DataValueObject.php',
 
 	'Comparable' => 'includes/Comparable.php',

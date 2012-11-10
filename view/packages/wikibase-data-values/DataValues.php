@@ -76,11 +76,14 @@ else {
 global $wgDataValues;
 $wgDataValues = array();
 
-$wgDataValues['geocoordinate'] = 'DataValue\GeoCoordinateValue';
-//$wgDataValues['iri'] = 'DataValue\IriValue';
-$wgDataValues['monolingualtext'] = 'DataValue\MonolingualValue';
-$wgDataValues['multilingualtext'] = 'DataValue\MultilingualValue';
+$wgDataValues['boolean'] = 'DataValues\BooleanValue';
+$wgDataValues['geocoordinate'] = 'DataValues\GeoCoordinateValue';
+$wgDataValues['iri'] = 'DataValues\IriValue';
+$wgDataValues['mediawikititle'] = 'DataValues\MediaWikiTitleValue';
+$wgDataValues['monolingualtext'] = 'DataValues\MonolingualTextValue';
+$wgDataValues['multilingualtext'] = 'DataValues\MultilingualTextValue';
 $wgDataValues['number'] = 'DataValues\NumberValue';
-$wgDataValues['quantity'] = 'DataValue\QuantityValue';
+$wgDataValues['quantity'] = 'DataValues\QuantityValue';
 $wgDataValues['string'] = 'DataValues\StringValue';
-//$wgDataValues['time'] = 'DataValue\TimeValue';
+$wgDataValues['unknown'] = 'DataValues\UnknownValue';
+//$wgDataValues['time'] = 'DataValues\TimeValue';

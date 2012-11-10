@@ -148,10 +148,30 @@ class MultilingualTextValue extends DataValueObject {
 		 * @var MonolingualTextValue $text
 		 */
 		foreach ( $this->texts as $text ) {
-			$values[$text->getLanguageCode()] = $text->getValue();
+			$values[] = $text->getArrayValue();
 		}
 
 		return $values;
+	}
+
+	/**
+	 * Constructs a new instance of the DataValue from the provided data.
+	 * This can round-trip with @see getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @param array $data
+	 *
+	 * @return DataValue
+	 */
+	public static function newFromArray( array $data ) {
+		$values = array();
+
+		foreach ( $data as $monolingualValue ) {
+			$values[] = MonolingualTextValue::newFromArray( $monolingualValue );
+		}
+
+		return new static( $values );
 	}
 
 }

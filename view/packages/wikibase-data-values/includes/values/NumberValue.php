@@ -116,4 +116,18 @@ class NumberValue extends DataValueObject {
 		return $this->value;
 	}
 
+	/**
+	 * Constructs a new instance of the DataValue from the provided data.
+	 * This can round-trip with @see getArrayValue
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $data
+	 *
+	 * @return DataValue
+	 */
+	public static function newFromArray( $data ) {
+		return new static( $data );
+	}
+
 }
