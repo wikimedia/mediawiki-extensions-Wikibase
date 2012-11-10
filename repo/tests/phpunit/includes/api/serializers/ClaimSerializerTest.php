@@ -73,9 +73,8 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => 'p42',
 				),
-				// Commented out because empty structures should
-				// not be reported by the API, so can't be tested
-				//'qualifiers' => array(),
+				'qualifiers' => array(),
+				'type' => 'claim',
 			),
 		);
 
@@ -89,11 +88,10 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 					'snaktype' => 'novalue',
 					'property' => 'p42',
 				),
-				// Commented out because empty structures should
-				// not be reported by the API, so can't be tested
-				//'qualifiers' => array(),
-				//'references' => array(),
+				'qualifiers' => array(),
+				'references' => array(),
 				'rank' => $statement->getRank(),
+				'type' => 'statement',
 			),
 		);
 
