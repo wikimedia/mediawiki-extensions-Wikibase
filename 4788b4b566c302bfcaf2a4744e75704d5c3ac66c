@@ -16,6 +16,24 @@
       "revId": "4788b4b566c302bfcaf2a4744e75704d5c3ac66c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADDX////Q\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-10T17:50:59Z",
+      "side": 1,
+      "message": "Note that \\s is a shortcut for a character class and it contains more than just a single space. If unicode references are turned on this should be the same as \\pZ aka \"sparator\". The sequence \\pC is \"other\" and this is a whole bunch of things that might not be whats usually described as a \"space\".",
+      "parentUuid": "AAADBn////Q\u003d",
+      "revId": "4788b4b566c302bfcaf2a4744e75704d5c3ac66c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
