@@ -97,10 +97,6 @@ class ByPropertyListSerializer extends ApiSerializerObject {
 			$serialization[$propertyId->getPrefixedId()] = $serializedObjects;
 		}
 
-		if ( $serialization === array() ) {
-			return false;
-		}
-
 		$this->getResult()->setIndexedTagName( $serialization, 'property' );
 
 		return $serialization;

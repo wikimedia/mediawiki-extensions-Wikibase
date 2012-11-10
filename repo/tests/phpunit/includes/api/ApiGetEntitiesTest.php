@@ -335,7 +335,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 
 			array( 'Leipzig', '', array( 'id', 'type' ) ),
 			array( 'Leipzig', 'labels|descriptions', array( 'id', 'type', 'labels', 'descriptions' ) ),
-			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels' ) ), // removed aliases, no data
+			array( 'Leipzig', 'labels|aliases', array( 'id', 'type', 'labels', 'aliases' ) ),
 			array( 'Leipzig', 'sitelinks|descriptions', array( 'id', 'type', 'descriptions' ) ),
 
 			array( 'Berlin', 'xyz', false ),

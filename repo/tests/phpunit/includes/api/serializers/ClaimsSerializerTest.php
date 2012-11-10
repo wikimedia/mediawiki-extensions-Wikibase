@@ -1,10 +1,14 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ItemObject, Wikibase\Item;
+use Wikibase\EntityId;
+use Wikibase\PropertyNoValueSnak;
+use Wikibase\PropertySomeValueSnak;
+use Wikibase\ClaimObject;
+use Wikibase\StatementObject;
 
 /**
- * Tests for the Wikibase\ItemSerializer class.
+ * Tests for the Wikibase\ClaimsSerializer class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +26,7 @@ use Wikibase\ItemObject, Wikibase\Item;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.2
+ * @since 0.3
  *
  * @ingroup Wikibase
  * @ingroup Test
@@ -33,7 +37,7 @@ use Wikibase\ItemObject, Wikibase\Item;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemSerializerTest extends EntitySerializerBaseTest {
+class ClaimsSerializerTest extends ApiSerializerBaseTest {
 
 	/**
 	 * @see ApiSerializerBaseTest::getClass
@@ -43,20 +47,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	 * @return string
 	 */
 	protected function getClass() {
-		return '\Wikibase\ItemSerializer';
-	}
-
-	/**
-	 * @see EntitySerializerBaseTest::getEntityInstance
-	 *
-	 * @since 0.2
-	 *
-	 * @return Item
-	 */
-	protected function getEntityInstance() {
-		$item = ItemObject::newEmpty();
-		$item->setId( 42 );
-		return $item;
+		return '\Wikibase\ClaimsSerializer';
 	}
 
 	/**
@@ -69,39 +60,28 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	public function validProvider() {
 		$validArgs = array();
 
-		$validArgs = $this->arrayWrap( $validArgs );
+		$propertyId = new EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
 
-		$item = $this->getEntityInstance();
-
-		$validArgs[] = array(
-			$item,
-			array(
-				'id' => $item->getPrefixedId(),
-				'type' => $item->getType(),
-			),
+		$claims = array(
+			new ClaimObject( new PropertyNoValueSnak( $propertyId ) ),
+			new ClaimObject( new PropertySomeValueSnak( new EntityId( \Wikibase\Property::ENTITY_TYPE, 1 ) ) ),
+			new StatementObject( new PropertyNoValueSnak( $propertyId ) ),
 		);
 
-		$options = new \Wikibase\EntitySerializationOptions();
-		$options->setProps( array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls' ) );
+		$claimSerializer = new \Wikibase\ClaimSerializer( new \ApiResult( new \ApiMain() ) );
 
 		$validArgs[] = array(
-			$item,
+			new \Wikibase\ClaimList( $claims ),
 			array(
-				'id' => $item->getPrefixedId(),
-				'type' => $item->getType(),
-				'aliases' => array(),
-				'labels' => array(),
-				'descriptions' => array(),
-				'sitelinks' => array(),
+				'p42' => array(
+					$claimSerializer->getSerialized( $claims[0] ),
+					$claimSerializer->getSerialized( $claims[2] ),
+				),
+				'p1' => array(
+					$claimSerializer->getSerialized( $claims[1] ),
+				),
 			),
-			$options,
 		);
-
-		foreach ( $this->semiValidProvider() as $argList ) {
-			//$argList[1]['required'] = null;
-
-			$validArgs[] = $argList;
-		}
 
 		return $validArgs;
 	}
