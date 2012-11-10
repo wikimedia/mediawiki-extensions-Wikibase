@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "AAADCH////8\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-10T15:03:34Z",
+      "side": 1,
+      "message": "wrong @since",
+      "revId": "f86f8fc4cc90d7c7af3e7286de29e6f441431ee6",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAAC9X////w\u003d",
         "filename": "repo/includes/api/ApiGetClaims.php",
         "patchSetId": 3
