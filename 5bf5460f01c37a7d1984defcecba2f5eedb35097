@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADD3///9A\u003d",
+        "filename": "lib/resources/templates.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-10T19:54:59Z",
+      "side": 1,
+      "message": "This should have dir\u003d\"auto\"",
+      "revId": "5bf5460f01c37a7d1984defcecba2f5eedb35097",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
