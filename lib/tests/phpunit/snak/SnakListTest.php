@@ -4,7 +4,6 @@ namespace Wikibase\Test;
 use Wikibase\SnakList;
 use Wikibase\PropertyValueSnak;
 use DataValues\StringValue;
-use Wikibase\Hashable;
 use Wikibase\Snak;
 use Wikibase\PropertyNoValueSnak;
 
