@@ -88,6 +88,24 @@
       "revId": "4788b4b566c302bfcaf2a4744e75704d5c3ac66c",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADEH///4E\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-10T21:03:01Z",
+      "side": 1,
+      "message": "For the fun of it:\n* Unix uses lf which is \\n\n* Windows uses cr-lf which is \\r\\n\n* Acorn and Risc uses lf-cr which is \\n\\r\n* Commodore and a bunch of Apple uses cr which is \\r\nand the list keeps on\n\nPerl is kind of smart with \\n and it works on all variations. Also \\s works on whitespace, which is also \\n in addition to \\t.\n\nThis is what should be flagged as a line terminator,\nand therefor should be squashed as whitespace\n(or rather \\pZl and \\Zp), and some of them can be\nused together with other control characters\n* LF: Line Feed, U+000A\n* VT: Vertical Tab, U+000B\n* FF: Form Feed, U+000C\n* CR: Carriage Return, U+000D\n* CR+LF: CR (U+000D) followed by LF (U+000A)\n* NEL: Next Line, U+0085\n* LS: Line Separator, U+2028\n* PS: Paragraph Separator, U+2029\n\nI think squashing repeated occurrences of \\pZ and calling it squashing of whitespace is correct, also squashing control characters are not completly correct but close enough.\n\nIts kind of funny how messed up whitespace are...",
+      "parentUuid": "AAADEH////o\u003d",
+      "revId": "4788b4b566c302bfcaf2a4744e75704d5c3ac66c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
