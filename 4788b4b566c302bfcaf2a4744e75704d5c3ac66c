@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADBn////Q\u003d",
+        "filename": "lib/includes/Utils.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-10T13:47:41Z",
+      "side": 1,
+      "message": "That second pattern should just be: preg_replace(\u0027/[\\pZ\\pC]+/u\u0027, \u0027 \u0027, $trimmed );\n\n[\\pZ\\pC]+|[\\pZ\\pC]+ is just checking for the same thing twice, that\u0027s confusing.",
+      "revId": "4788b4b566c302bfcaf2a4744e75704d5c3ac66c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
