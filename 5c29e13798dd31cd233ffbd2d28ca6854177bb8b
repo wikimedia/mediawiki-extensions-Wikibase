@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADCH////k\u003d",
+        "filename": "repo/includes/api/serializers/ClaimSerializer.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-10T14:51:49Z",
+      "side": 1,
+      "message": "how does this make sense in any way? it can not be false here... o_O!",
+      "revId": "5c29e13798dd31cd233ffbd2d28ca6854177bb8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
