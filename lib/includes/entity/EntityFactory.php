@@ -79,10 +79,43 @@ class EntityFactory {
 	 *
 	 * @param string $type
 	 *
-	 * @return boolean true if valid, false if not
+	 * @return bool
 	 */
 	public function isEntityType( $type ) {
 		return array_key_exists( $type, self::$typeMap );
 	}
 
+	/**
+	 * New entity from serialized data
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $data
+	 *
+	 * @return Entity|null
+	 */
+	public static function newFromSerialized( $data ) {
+		$unserialized = \FormatJson::decode( $data, true );
+
+		if ( is_array( $unserialized ) && array_key_exists( 'entity', $unserialized ) ) {
+			// determine which type of entity to construct
+			$entityId = EntityId::newFromPrefixedId( $unserialized['entity'] );
+
+			if ( $entityId !== null ) {
+				$entityType = $entityId->getEntityType();
+				$class = self::$typeMap[$entityType];
+
+				if ( is_array( $unserialized ) && array_key_exists( 'v', $unserialized ) ) {
+					unset( $unserialized['v'] );
+					$entity = $class::newFromArray( $unserialized );
+				} else {
+					$entity = $class::newFromArray( $unserialized );
+				}
+				$entity->setId( $entityId->getNumericId() );
+				return $entity;
+			}
+		}
+
+		return null;
+	}
 }

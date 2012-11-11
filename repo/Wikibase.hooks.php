@@ -253,7 +253,7 @@ final class RepoHooks {
 				'time' => $revision->getTimestamp(),
 			) );
 
-			$change->setRCInfo( array(
+			$change->setMetadata( array(
 				'rc_user_id' => $revision->getUser(),
 				'rc_user_text' => $revision->getUserText(),
 				'rc_bot' => in_array( 'bot', $user->getRights() ),
@@ -311,7 +311,7 @@ final class RepoHooks {
 			'time' => $logEntry->getTimestamp(),
 		) );
 
-		$change->setRCInfo( array(
+		$change->setMetadata( array(
 			'rc_user_id' => $user->getId(),
 			'rc_user_text' => $user->getName(),
 			'rc_curid' => 0,
