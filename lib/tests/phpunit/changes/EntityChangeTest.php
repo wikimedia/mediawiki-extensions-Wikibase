@@ -22,7 +22,7 @@ use \Wikibase\ChangesTable;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.2
+ * @since 0.3
  *
  * @ingroup WikibaseLib
  * @ingroup Test
@@ -35,20 +35,24 @@ use \Wikibase\ChangesTable;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ChangeRowTest extends \ORMRowTest {
+class EntityChangeTest extends \ORMRowTest {
 
 	/**
 	 * @see ORMRowTest::getRowClass
-	 * @since 0.2
+	 * @since 0.3
 	 * @return string
 	 */
 	protected function getRowClass() {
-		return '\Wikibase\ChangeRow';
+		return '\Wikibase\EntityChange';
+	}
+
+	protected function getClass() {
+		return 'Wikibase\EntityChange';
 	}
 
 	/**
 	 * @see ORMRowTest::getRowClass
-	 * @since 0.2
+	 * @since 0.3
 	 * @return string
 	 */
 	protected function getTableInstance() {
@@ -63,38 +67,67 @@ class ChangeRowTest extends \ORMRowTest {
 
 	/**
 	 * @dataProvider instanceProvider
+	 * @since 0.3
 	 */
-	public function testGetUser( $changeRow ) {
-		$this->assertInstanceOf( '\User', $changeRow->getUser() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetAge( $changeRow ) {
+	public function testGetMetadata( $entityChange ) {
 		$this->assertEquals(
-			time() - (int)wfTimestamp( TS_UNIX, '20120515104713' ),
-			$changeRow->getAge()
+			array(
+				'rc_user' => 0,
+				'rc_user_text' => '208.80.152.201'
+			),
+			$entityChange->getMetadata()
 		);
 	}
 
 	/**
 	 * @dataProvider instanceProvider
+	 * @since 0.3
 	 */
-	public function testGetTime( $changeRow ) {
+	public function testMetadata( $entityChange ) {
+		$entityChange->setMetadata(
+			array(
+				'rc_user' => 0,
+				'rc_user_text' => '171.80.182.208'
+			),
+			true
+		);
 		$this->assertEquals(
-			'20120515104713',
-			$changeRow->getTime()
+			array(
+				'rc_user' => 0,
+				'rc_user_text' => '171.80.182.208'
+			),
+			$entityChange->getMetadata()
 		);
 	}
 
 	/**
 	 * @dataProvider instanceProvider
+	 * @since 0.3
 	 */
-	public function testGetObjectId( $changeRow ) {
+	public function testSetInvalidMetadata( $entityChange ) {
+		$entityChange->setMetadata( array(
+			'rc_kittens' => 3,
+			'rc_user' => 0,
+			'rc_user_text' => '171.80.182.208'
+		) );
 		$this->assertEquals(
-			'q182',
-			$changeRow->getObjectId()
+			array(
+				'rc_user' => 0,
+				'rc_user_text' => '171.80.182.208'
+			),
+			$entityChange->getMetadata()
+		);
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @since 0.3
+	 */
+	public function testGetEmptyMetadata( $entityChange ) {
+		$entityChange->setField( 'info', array() );
+		$this->assertEquals(
+			false,
+			$entityChange->getMetadata()
 		);
 	}
 }
