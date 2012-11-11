@@ -28,34 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityUpdate extends DiffChange {
-
-	/**
-	 * @since 0.1
-	 *
-	 * @return Entity
-	 * @throws \MWException
-	 */
-	public function getEntity() {
-		$info = $this->getField( 'info' );
-
-		if ( !array_key_exists( 'entity', $info ) ) {
-			throw new \MWException( 'Cannot get the entity when it has not been set yet.' );
-		}
-
-		return $info['entity'];
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @param Entity $entity
-	 */
-	public function setEntity( Entity $entity ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$info['entity'] = $entity;
-		$this->setField( 'info', $info );
-	}
+class EntityUpdate extends EntityChange {
 
 	/**
 	 * @since 0.1
