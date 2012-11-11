@@ -16,11 +16,11 @@ use Wikibase\Autocomment;
  * @author Jens Ohlig
  * @author John Erling Blad < jeblad@gmail.com >
  */
-abstract class SpecialCreateEntity extends SpecialWikibasePage {
+abstract class SpecialNewEntity extends SpecialWikibasePage {
 
 	/**
 	 * Contains pieces of the sub-page name of this special page if a subpage was called.
-	 * E.g. array( 'a', 'b' ) in case of 'Special:CreateEntity/a/b'
+	 * E.g. array( 'a', 'b' ) in case of 'Special:NewEntity/a/b'
 	 * @var string[]
 	 */
 	protected $parts = null;
@@ -66,7 +66,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 						$this->getLanguage()
 					);
 					$comment = Autocomment::formatAutoComment(
-						'special-create-' . $entityContent->getEntity()->getType(),
+						//'wbcreate' . $entityContent->getEntity()->getType() . '-new',
+						'wbcreate-new',
 						array( $counts, $this->getLanguage()->getCode() )
 					);
 					$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() );
@@ -160,17 +161,17 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 		return Html::element(
 			'label',
 			array(
-				'for' => 'wb-createentity-label',
+				'for' => 'wb-newentity-label',
 				'class' => 'wb-label'
 			),
-			$this->msg( 'wikibase-createentity-label' )->text()
+			$this->msg( 'wikibase-newentity-label' )->text()
 		)
 		. Html::input(
 			'label',
 			$this->label ? htmlspecialchars( $this->label ) : '',
 			'text',
 			array(
-				'id' => 'wb-createentity-label',
+				'id' => 'wb-newentity-label',
 				'size' => 12,
 				'class' => 'wb-input'
 			)
@@ -179,17 +180,17 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 		. Html::element(
 			'label',
 			array(
-				'for' => 'wb-createentity-description',
+				'for' => 'wb-newentity-description',
 				'class' => 'wb-label'
 			),
-			$this->msg( 'wikibase-createentity-description' )->text()
+			$this->msg( 'wikibase-newentity-description' )->text()
 		)
 		. Html::input(
 			'description',
 			$this->description ? htmlspecialchars( $this->description ) : '',
 			'text',
 			array(
-				'id' => 'wb-createentity-description',
+				'id' => 'wb-newentity-description',
 				'size' => 36,
 				'class' => 'wb-input'
 			)
@@ -208,7 +209,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	public function createForm( $legend = null, $additionalHtml = '' ) {
 		$this->getOutput()->addHTML(
 		/*
-				$this->msg( 'wikibase-createentity-intro' )->params(
+				$this->msg( 'wikibase-newentity-intro' )->params(
 					Language::fetchLanguageName( $this->getLanguage()->getCode() )
 				)->text()
 				. */ Html::openElement(
@@ -216,8 +217,8 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 					array(
 						'method' => 'post',
 						'action' => $this->getTitle()->getFullUrl(),
-						'name' => 'createentity',
-						'id' => 'mw-createentity-form1',
+						'name' => 'newentity',
+						'id' => 'mw-newentity-form1',
 						'class' => 'wb-form'
 					)
 				)
@@ -237,10 +238,10 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 				. $additionalHtml
 				. Html::input(
 					'submit',
-					$this->msg( 'wikibase-createentity-submit' )->text(),
+					$this->msg( 'wikibase-newentity-submit' )->text(),
 					'submit',
 					array(
-						'id' => 'wb-createentity-submit',
+						'id' => 'wb-newentity-submit',
 						'class' => 'wb-button'
 					)
 				)
