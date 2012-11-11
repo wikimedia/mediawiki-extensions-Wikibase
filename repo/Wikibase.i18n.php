@@ -673,6 +673,8 @@ $messages['br'] = array(
 );
 
 /** Catalan (català)
+ * @author Arnaugir
+ * @author Grondin
  * @author Pginer
  * @author Toniher
  * @author පසිඳු කාවින්ද
@@ -685,27 +687,62 @@ $messages['ca'] = array(
 	'wikibase-add' => 'afegeix',
 	'wikibase-save-inprogress' => "S'està desant…",
 	'wikibase-remove-inprogress' => "S'està suprimint…",
-	'wikibase-label-empty' => "No s'ha definit encara cap etiqueta.",
+	'wikibase-label-empty' => "Encara no s'ha definit cap etiqueta.",
 	'wikibase-label-edit-placeholder' => 'introduïu una etiqueta',
-	'wikibase-description-empty' => "No s'ha definit cap descripció encara.",
+	'wikibase-description-empty' => "Encara no s'ha definit cap descripció.",
 	'wikibase-description-edit-placeholder' => 'introduïu una descripció',
 	'wikibase-sitelink-site-edit-placeholder' => 'lloc',
 	'wikibase-sitelink-page-edit-placeholder' => 'article',
 	'wikibase-alias-edit-placeholder' => 'introduïu un àlies',
+	'wikibase-label-input-help-message' => "Introduïu el títol d'aquesta data utilitzada a $1.",
+	'wikibase-description-input-help-message' => 'Introduïu una breu descripció de  $1 .',
+	'wikibase-sitelinks' => 'Llista de les pàgines vinculades a aquest element',
 	'wikibase-sitelinks-sitename-columnheading' => 'Llengua',
 	'wikibase-sitelinks-siteid-columnheading' => 'Codi',
 	'wikibase-sitelinks-link-columnheading' => 'Article enllaçat',
+	'wikibase-sitelinks-add' => "afegir un enllaç a un lloc web d'enllaç",
+	'wikibase-sitelinks-empty' => 'Encara no hi ha enllaços del lloc per aquest element.',
 	'wikibase-remove' => 'suprimeix',
+	'wikibase-undo-revision-error' => 'Ha fallat en desfer',
+	'wikibase-propertyedittool-full' => 'La llista de valors és completa.',
+	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|entrada|entrades}})',
+	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|entrada|entrades}})',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
+	'wikibase-propertyedittool-counter-pending-tooltip' => '{{PLURAL:$1|Un valor|$1 valors}} encara no han estat desats',
+	'wikibase-disambiguation-title' => 'Desambiguació de "$1"',
+	'wb-special-createitem-new-item-notification' => "S'ha creat el nou element $1 i s'ha redirigit a la seva pàgina. Torna a $2.",
 	'wikibase-aliases-label' => 'També conegut com:',
+	'wikibase-aliases-empty' => 'Cap àlies definit',
 	'wikibase-datatype-label' => 'Tipus de dades:',
+	'wikibase-restrictionedit-tooltip-message' => "Aquesta pàgina està protegida. No s'autoritza cap edició.",
+	'wikibase-blockeduser-tooltip-message' => 'Estàs bloquejat per editar.',
 	'wikibase-tooltip-error-details' => 'Detalls',
 	'wikibase-error-autocomplete-response' => 'El servidor ha respost: $1',
+	'wikibase-error-ui-cant-edit' => 'No teniu permís per dur a terme aquesta acció.',
+	'wikibase-error-ui-no-permissions' => 'No teniu els drets necessaris per a dur a terme aquesta acció.',
+	'wikibase-error-ui-link-exists' => 'No pots enllaçar a aquesta pàgina perquè ja hi ha un altre element que hi enllaça.',
+	'wikibase-error-ui-edit-conflict' => "Hi ha hagut un conflicte d'edició. Si us plau, recarrega la pàgina i desa de nou.",
+	'wikibase-error-relational-save-failed' => "No s'ha pogut desar l'identitat de l'element a la base de dades.",
+	'special-itembytitle' => 'Element per títol',
+	'wikibase-itembytitle-lookup-fieldset' => 'Cerca elements per lloc i títol',
+	'wikibase-itembytitle-lookup-site' => 'Lloc:',
 	'wikibase-itembytitle-lookup-page' => 'Pàgina:',
 	'wikibase-itembytitle-submit' => 'Cerca',
+	'wikibase-itembytitle-create' => 'També pots [{{fullurl:Special:CreateItem|site=$1&page=$2}} crear un element].',
+	'special-itemdisambiguation' => 'Desambiguació: Elements amb la mateixa etiqueta',
+	'wikibase-itemdisambiguation-lookup-fieldset' => 'Cerca elements per etiqueta',
 	'wikibase-itemdisambiguation-lookup-language' => 'Llengua:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiqueta:',
 	'wikibase-itemdisambiguation-submit' => 'Cerca',
+	'wikibase-itemdisambiguation-nothing-found' => "No s'ha trobat cap element amb aquella etiqueta.",
+	'wikibase-itemdisambiguation-create' => "Podeu [{{fullurl:Special:CreateItem|label=$1}} crear l'element].",
+	'special-newproperty' => 'Crea una propietat nova',
+	'wikibase-newproperty-fieldset' => 'Crea una propietat nova',
+	'wikibase-newproperty-datatype' => 'Tipus de dades:',
+	'special-createitem' => 'Crea un element nou',
+	'wikibase-createitem-fieldset' => 'Crea un element nou',
+	'wikibase-createitem-page' => 'Nom de la primera pàgina enllaçada',
+	'wikibase-createentity-label' => 'Etiqueta:',
 	'wikibase-createentity-description' => 'Descripció:',
 	'wikibase-createentity-submit' => 'Crea',
 	'wikibase-setlabel-id' => 'ID',
@@ -1211,6 +1248,7 @@ por trovi de kie ĝi venis.',
 
 /** Spanish (español)
  * @author Armando-Martin
+ * @author Dalton2
  * @author Jewbask
  * @author Maor X
  * @author McDutchie
@@ -1310,7 +1348,7 @@ $messages['es'] = array(
 	'wikibase-newproperty-intro' => 'Antes de crear una nueva propiedad, considerea la posibilidad de comprobar si ya existe esta propiedad. Para crear una nueva es necesario especificar por lo menos la etiqueta o la descripción en $1, y un tipo de propiedad válida.',
 	'wikibase-newproperty-fieldset' => 'Crear una nueva propiedad',
 	'wikibase-newproperty-datatype' => 'Tipo de dato:',
-	'special-createitem' => 'Crear un nuevo elemento',
+	'special-createitem' => 'Crear nuevo elemento',
 	'wikibase-createitem-intro' => 'Antes de crear un nuevo elemento, considera la posibilidad de comprobar si ya existe este elemento. Para crear uno nuevo es necesario especificar por lo menos la etiqueta o la descripción en $1.',
 	'wikibase-createitem-fieldset' => 'Crear un nuevo elemento',
 	'wikibase-createentity-label' => 'Etiqueta:',
@@ -2659,9 +2697,10 @@ $messages['is'] = array(
  * @author Darth Kule
  * @author F. Cosoleto
  * @author Raoli
+ * @author Yiyi
  */
 $messages['it'] = array(
-	'wikibase-desc' => 'Repository di dati strutturati',
+	'wikibase-desc' => 'Archivio di dati strutturati',
 	'wikibase-edit' => 'modifica',
 	'wikibase-save' => 'salva',
 	'wikibase-cancel' => 'annulla',
@@ -2688,7 +2727,7 @@ $messages['it'] = array(
 	'wikibase-undo-title' => 'Annullamento modifica a "$1"',
 	'wikibase-restore-title' => 'Ripristino vecchia versione di "$1"',
 	'wikibase-partial-undo' => 'La modifica può essere parzialmente annullata.',
-	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|modifica è|modifiche sono}} state omesse perché {{PLURAL:$1|il rispettivo valore è cambiao|i rispettivi valori sono cambiat}} da allora.',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|modifica è stata omessa|modifiche sono state omesse}} perché {{PLURAL:$1|il rispettivo valore è cambiao|i rispettivi valori sono cambiat}} da allora.',
 	'wikibase-empty-undo' => "Non c'è niente che può essere annullato qui.",
 	'wikibase-undo-revision-error' => 'Annullamento fallito',
 	'wikibase-undo-samerev' => 'Impossibile annullare, la versione da annullare e la versione da ripristinare sono la stessa.',
@@ -2739,7 +2778,7 @@ $messages['it'] = array(
 	'wikibase-itembytitle-lookup-page' => 'Pagina:',
 	'wikibase-itembytitle-submit' => 'Ricerca',
 	'wikibase-itembytitle-nothing-found' => 'Non è stato trovato alcun elemento con la ricerca precedente. Si prega di restringere la ricerca con una migliore identificazione della pagina esterna.',
-	'wikibase-itembytitle-invalid-site' => 'La chiave di ricerca precedente non poteva essere utilizzata per una ricerca. Fornire un identificatore valido per il sito.',
+	'wikibase-itembytitle-invalid-site' => 'La precedente chiave di ricerca non poteva essere utilizzata per una ricerca. Fornire un identificatore valido per il sito.',
 	'wikibase-itembytitle-description' => 'Sito è un codice identificativo, come "enwiki".',
 	'wikibase-itembytitle-create' => "È possibile [{{fullurl:Special:CreateItem|site=$1&page=$2}} creare l'elemento].",
 	'special-itemdisambiguation' => 'Disambiguazione: elementi con la stessa etichetta',
@@ -2751,13 +2790,13 @@ $messages['it'] = array(
 	'wikibase-itemdisambiguation-create' => "È possibile [{{fullurl:Special:CreateItem|label=$1}} creare l'elemento].",
 	'wikibase-itemdisambiguation-invalid-langcode' => 'L\'identificatore di lingua inserito è sconosciuto al sistema. Usare un identificatore valido, per esempio "en".',
 	'wikibase-itemdisambiguation-description' => 'I valori utilizzati per la ricerca devono comprendere il testo completo dell\'elemento. La lingua è un identificatore, ad esempio "it".',
-	'special-newproperty' => 'Creare una nuova proprietà',
+	'special-newproperty' => 'Creare nuova proprietà',
 	'wikibase-newproperty-intro' => "Prima di creare una nuova proprietà è opportuno verificare se questa proprietà esiste già. Per crearne una nuova è necessario specificare almeno l'etichetta o la descrizione in $1 e un tipo di proprietà valido.",
-	'wikibase-newproperty-fieldset' => 'Creare una nuova proprietà',
+	'wikibase-newproperty-fieldset' => 'Creare nuova proprietà',
 	'wikibase-newproperty-datatype' => 'Tipo di dato:',
-	'special-createitem' => 'Crea un nuovo elemento',
+	'special-createitem' => 'Crea nuovo elemento',
 	'wikibase-createitem-intro' => "Prima di creare un nuovo elemento, è opportuno verificare se questo elemento esiste già. Per crearne uno nuovo, è necessario specificare almeno l'etichetta o la descrizione in $1.",
-	'wikibase-createitem-fieldset' => 'Crea un nuovo elemento',
+	'wikibase-createitem-fieldset' => 'Crea nuovo elemento',
 	'wikibase-createitem-site' => 'Sito della prima pagina collegata',
 	'wikibase-createitem-page' => 'Nome della prima pagina collegata',
 	'wikibase-createitem-no-external-page' => 'La pagina specificata non è stata trovata sul sito corrispondente.',
@@ -2811,6 +2850,19 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-special-create-property' => 'Creata una proprietà [$2] con {{plural:$1|valore|valori}}',
 	'wikibase-item-summary-special-create-query' => "Creata un'interrogazione [$2] con {{plural:$1|valore|valori}}",
 	'content-model-1001' => 'Elemento wikibase',
+	'right-item-override' => 'Sovrascrivere un elemento',
+	'right-item-create' => 'Creare un elemento',
+	'right-item-remove' => 'Rimuovere un elemento',
+	'right-alias-add' => 'Aggiungere un alias',
+	'right-alias-set' => 'Impostare un alias',
+	'right-alias-remove' => 'Rimuovere un alias',
+	'right-sitelink-remove' => 'Rimuovere un link di lingua',
+	'right-sitelink-update' => 'Aggiornare un link di lingua',
+	'right-linktitles-update' => 'Aggiornare un link del titolo',
+	'right-label-remove' => "Rimuovere un'etichetta",
+	'right-label-update' => "Aggiornare un'etichetta",
+	'right-description-remove' => 'Rimuovere una descrizione',
+	'right-description-update' => 'Aggiorna una descrizione',
 );
 
 /** Japanese (日本語)
@@ -3613,7 +3665,7 @@ $messages['nb'] = array(
 	'wikibase-itembytitle-nothing-found' => 'Ingen datasett ble funnet av det forrige søket. Forbedre spørringen med en bedre identifisering av den eksterne siden.',
 	'wikibase-itembytitle-description' => 'Nettsted er en identifikator, slik som «enwiki»',
 	'wikibase-itembytitle-create' => 'Du kan også [{{fullurl:Special:CreateItem|site=$1&page=$2}} opprette et datasett].',
-	'special-itemdisambiguation' => 'Flertydig: Datasett med samme merkelapp',
+	'special-itemdisambiguation' => 'Flertydig: Datasett med samme etikett',
 	'wikibase-itemdisambiguation-lookup-fieldset' => 'Søk etter datasett med etikett',
 	'wikibase-itemdisambiguation-lookup-language' => 'Språk:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etikett:',
@@ -4516,6 +4568,7 @@ $messages['te'] = array(
 	'wikibase-save' => 'భద్రపరచు',
 	'wikibase-cancel' => 'రద్దుచేయి',
 	'wikibase-add' => 'చేర్చు',
+	'wikibase-sitelinks-sitename-columnheading' => 'భాష',
 	'wikibase-remove' => 'తొలగించు',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|పద్దు|పద్దులు}})',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
@@ -4523,6 +4576,9 @@ $messages['te'] = array(
 	'wikibase-itembytitle-submit' => 'వెతుకు',
 	'wikibase-itemdisambiguation-lookup-language' => 'భాష:',
 	'wikibase-itemdisambiguation-submit' => 'వెతుకు',
+	'wikibase-createentity-description' => 'వివరణ:',
+	'wikibase-setlabel-language' => 'భాష',
+	'wikibase-entitieswithoutlabel-label-language' => 'భాష:',
 );
 
 /** Tagalog (Tagalog)
