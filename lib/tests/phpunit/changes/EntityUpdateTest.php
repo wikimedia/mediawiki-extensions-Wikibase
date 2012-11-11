@@ -33,9 +33,14 @@ use Wikibase\Entity;
  * @group WikibaseChange
  *
  * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class EntityUpdateTest extends \MediaWikiTestCase {
+
+	protected function getClass() {
+		return 'Wikibase\EntityUpdate';
+	}
 
 	/**
 	 * @since 0.1
@@ -55,7 +60,8 @@ class EntityUpdateTest extends \MediaWikiTestCase {
 		 * @var Entity $oldEntity
 		 */
 		foreach ( $oldEntities as $oldEntity ) {
-			$oldEntity->setId( 42 );
+			$oldEntity->setId( 110 );
+			$oldEntity->stub();
 			$oldEntity->setDescription( 'en', 'foobar' );
 
 			$newEntity = $oldEntity->copy();
@@ -81,10 +87,6 @@ class EntityUpdateTest extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'Wikibase\EntityUpdate', $entityUpdate );
 
 		$this->assertEquals( $newEntity, $entityUpdate->getEntity() );
-
 		$this->assertEquals( $oldEntity->getDiff( $newEntity ), $entityUpdate->getDiff() );
 	}
-
-
 }
-	
