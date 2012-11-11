@@ -127,43 +127,9 @@ class ChangeRow extends ORMRow implements Change {
 	 *
 	 * @since 0.1
 	 *
-	 * @param boolean $withPrefix Optionally include prefix, such as 'wikibase-'
-	 *
 	 * @return string
 	 */
-	public function getType( $withPrefix = true ) {
-		$changeType = $this->getChangeType();
-		if ( $changeType === 'change' ) {
-			return $changeType;
-		}
-
-		return $this->getEntityType( $withPrefix ) . '~' . $changeType;
-	}
-
-	/**
-	 * @see Change::getEntityType
-	 *
-	 * @since 0.2
-	 *
-	 * @param boolean $withPrefix Optionally include prefix, such as 'wikibase-'
-	 *
-	 * @return string
-	 */
-	public function getEntityType( $withPrefix = true ) {
-		if ( $withPrefix ) {
-			return 'wikibase-' . $this->getEntity()->getType();
-		}
-		return $this->getEntity()->getType();
-	}
-
-	/**
-	 * @see Change::getChangeType
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getChangeType() {
+	public function getType() {
 		return 'change';
 	}
 
@@ -176,53 +142,6 @@ class ChangeRow extends ORMRow implements Change {
 	 */
 	public function getObjectId() {
 		return $this->getField( 'object_id' );
-	}
-
-	/**
-	 * Get recent changes info from changes data
-	 *
-	 * @since 0.2
-	 *
-	 * @return array|bool
-	 */
-	public function getRCInfo() {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-
-		if ( array_key_exists( 'rc', $info ) ) {
-			return $info['rc'];
-		}
-
-		return false;
-	}
-
-	/**
-	 * Store recent changes info in changes
-	 *
-	 * @since 0.2
-	 *
-	 * @param array $rc
-	 */
-	public function setRCInfo( array $rc ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$validKeys = array(
-			'rc_comment',
-			'rc_curid',
-			'rc_bot',
-			'rc_this_oldid',
-			'rc_last_oldid',
-			'rc_user',
-			'rc_user_text'
-		);
-
-		if ( is_array( $rc ) ) {
-			foreach ( array_keys( $rc ) as $key ) {
-				if ( !in_array( $key, $validKeys ) ) {
-					unset( $rc[$key] );
-				}
-			}
-			$info['rc'] = $rc;
-			$this->setField( 'info', $info );
-		}
 	}
 
 }

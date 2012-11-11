@@ -93,70 +93,8 @@ class ChangeRowTest extends \ORMRowTest {
 	 */
 	public function testGetObjectId( $changeRow ) {
 		$this->assertEquals(
-			182,
+			'q182',
 			$changeRow->getObjectId()
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetRCInfo( $changeRow ) {
-		$this->assertEquals(
-			array(
-				'rc_user' => 0,
-				'rc_user_text' => '208.80.152.201'
-			),
-			$changeRow->getRCInfo()
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSetRCInfo( $changeRow ) {
-		$changeRow->setRCInfo(
-			array(
-				'rc_user' => 0,
-				'rc_user_text' => '171.80.182.208'
-			),
-			true
-		);
-		$this->assertEquals(
-			array(
-				'rc_user' => 0,
-				'rc_user_text' => '171.80.182.208'
-			),
-			$changeRow->getRCInfo()
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSetInvalidRCInfo( $changeRow ) {
-		$changeRow->setRCInfo( array(
-			'rc_kittens' => 3,
-			'rc_user' => 0,
-			'rc_user_text' => '171.80.182.208'
-		) );
-		$this->assertEquals(
-			array(
-				'rc_user' => 0,
-				'rc_user_text' => '171.80.182.208'
-			),
-			$changeRow->getRCInfo()
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetEmptyRCInfo( $changeRow ) {
-		$changeRow->setField( 'info', array() );
-		$this->assertEquals(
-			false,
-			$changeRow->getRCInfo()
 		);
 	}
 }
