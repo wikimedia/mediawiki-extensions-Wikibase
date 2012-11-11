@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use \ORMRow, \User;
+use ORMRow, User;
 
 /**
  * Class representing a single change (ie a row in the wb_changes).
@@ -132,7 +132,10 @@ class ChangeRow extends ORMRow implements Change {
 	 * @return string
 	 */
 	public function getType( $withPrefix = true ) {
+		// FIXME: relies on methods not present in this class (they are in some deriving ones)
+
 		$changeType = $this->getChangeType();
+
 		if ( $changeType === 'change' ) {
 			return $changeType;
 		}
@@ -150,6 +153,8 @@ class ChangeRow extends ORMRow implements Change {
 	 * @return string
 	 */
 	public function getEntityType( $withPrefix = true ) {
+		// FIXME: relies on methods not present in this class (they are in some deriving ones)
+
 		if ( $withPrefix ) {
 			return 'wikibase-' . $this->getEntity()->getType();
 		}
