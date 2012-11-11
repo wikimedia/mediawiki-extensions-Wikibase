@@ -161,7 +161,8 @@ $wgAutoloadClasses['SpecialItemDisambiguation'] 		= $dir . 'includes/specials/Sp
 $wgAutoloadClasses['SpecialWikibasePage'] 				= $dir . 'includes/specials/SpecialWikibasePage.php';
 $wgAutoloadClasses['SpecialSetLabel'] 					= $dir . 'includes/specials/SpecialSetLabel.php';
 $wgAutoloadClasses['SpecialWikibaseQueryPage']			= $dir . 'includes/specials/SpecialWikibaseQueryPage.php';
-$wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	= $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
+$wgAutoloadClasses['SpecialEntitiesWithoutLabel'] 	    = $dir . 'includes/specials/SpecialEntitiesWithoutLabel.php';
+$wgAutoloadClasses['SpecialEntityData'] 				= $dir . 'includes/specials/SpecialEntityData.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\IdGenerator'] 				= $dir . 'includes/store/IdGenerator.php';
@@ -212,6 +213,7 @@ $wgAPIModules['wbsearchentities'] 					= 'Wikibase\ApiSearchEntities';
 
 // Special page registration
 $wgSpecialPages['CreateItem'] 						= 'SpecialCreateItem';
+$wgSpecialPages['EntityData'] 						= 'SpecialEntityData';
 $wgSpecialPages['NewProperty'] 						= 'SpecialNewProperty';
 $wgSpecialPages['ItemByTitle'] 						= 'SpecialItemByTitle';
 $wgSpecialPages['ItemDisambiguation'] 				= 'SpecialItemDisambiguation';

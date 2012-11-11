@@ -149,6 +149,10 @@ $messages['en'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Language:',
 	'wikibase-entitieswithoutlabel-submit' => 'Find',
 	'wikibase-entitieswithoutlabel-invalid-language' => '"$1" is not a valid language code.',
+	'wikibase-entitydata-not-found' => "No entity with ID $1 was found.",
+	'wikibase-entitydata-unsupported-format' => "The data format $1 is not supported by this interface.",
+	'wikibase-entitydata-title' => 'Entity Data',
+	'wikibase-entitydata-text' => 'This page provides a linked data interface to entity values. Please provide the entity ID in the URL, using subpage syntax.',
 
 	// API errors - these messages should not be translated
 	'wikibase-api-aliases-invalid-list' => 'Use either one of "set", "add" and "remove" parameters.', # Do not translate
@@ -440,6 +444,11 @@ Parameters:
 	'wikibase-entitieswithoutlabel-label-language' => 'Label for the input field to change the language.',
 	'wikibase-entitieswithoutlabel-submit' => 'Label for the button that activate the action.',
 	'wikibase-entitieswithoutlabel-invalid-language' => 'Error message shown when the language code passed in parameter is invalid. $1 is invalid language code.',
+	'wikibase-entitydata-not-found' => "Error shown when no entity with the given ID could be found.",
+	'wikibase-entitydata-unsupported-format' => "Error shown when the requested output format is not supported for entity data.",
+	'wikibase-entitydata-title' => 'Title shown on the special page when a form or text is presented',
+	'wikibase-entitydata-text' => 'Explanatory text shown on the special page.',
+
 	'wikibase-api-aliases-invalid-list' => '!!DO NOT TRANSLATE!! This is an error message for a situation where the arguments to the API is inconsistent. Usually this should never be shown to the user, unless there are some exceptional error conditions.
 
 {{doc-important|Do not translate the names of the arguments: "set", "add" and "remove"}}',
