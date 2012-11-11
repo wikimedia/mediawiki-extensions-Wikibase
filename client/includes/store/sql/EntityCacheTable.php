@@ -169,8 +169,13 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 * @return CachedEntity
 	 */
 	protected function newRowFromEntity( Entity $entity ) {
+		$entityId = $entity->getId();
+		if ( $entityId instanceof EntityId ) {
+			$entityId = $entityId->getNumericId();
+		}
+
 		return $this->newRow( array(
-			'entity_id' => $entity->getId()->getNumericId(),
+			'entity_id' => $entityId,
 			'entity_type' => $entity->getType(),
 			'entity_data' => $entity,
 		) );
