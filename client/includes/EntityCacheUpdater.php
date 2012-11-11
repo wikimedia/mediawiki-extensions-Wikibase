@@ -56,7 +56,9 @@ class EntityCacheUpdater {
 				$siteLinkCache->deleteLinksOfItem( $entity );
 				break;
 			case 'add':
-				$entityCache->addEntity( $entity );
+				if ( $entityCache->hasEntity( $entity ) === false ) {
+					$entityCache->addEntity( $entity );
+				}
 				break;
 			case 'update':
 				$entityCache->updateEntity( $entity );
