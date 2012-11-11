@@ -122,8 +122,13 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 * @return integer|bool
 	 */
 	protected function getCacheIdForEntity( Entity $entity ) {
+		$entityId = $entity->getId();
+		if ( $entityId instanceof EntityId ) {
+			$entityId = $entityId->getNumericId();
+		}
+
 		$identifiers = array(
-			'entity_id' => $entity->getId()->getNumericId(),
+			'entity_id' => $entityId,
 			'entity_type' => $entity->getType(),
 		);
 
@@ -145,7 +150,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 
 	/**
 	 * @see EntityCache::deleteEntity
-	 *
+	 i*
 	 * @since 0.1
 	 *
 	 * @param Entity $entity
@@ -169,8 +174,13 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 * @return CachedEntity
 	 */
 	protected function newRowFromEntity( Entity $entity ) {
+		$entityId = $entity->getId();
+		if ( $entityId instanceof EntityId ) {
+			$entityId = $entityId->getNumericId();
+		}
+
 		return $this->newRow( array(
-			'entity_id' => $entity->getId()->getNumericId(),
+			'entity_id' => $entityId,
 			'entity_type' => $entity->getType(),
 			'entity_data' => $entity,
 		) );
