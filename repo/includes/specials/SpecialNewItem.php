@@ -11,7 +11,7 @@
  * @licence GNU GPL v2+
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class SpecialCreateItem extends SpecialCreateEntity {
+class SpecialNewItem extends SpecialNewEntity {
 
 
 	/**
@@ -30,11 +30,11 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	 * @since 0.1
 	 */
 	public function __construct() {
-		parent::__construct( 'CreateItem' );
+		parent::__construct( 'NewItem' );
 	}
 
 	/**
-	 * @see SpecialCreateEntity::prepareArguments()
+	 * @see SpecialNewEntity::prepareArguments()
 	 */
 	protected function prepareArguments() {
 		parent::prepareArguments();
@@ -44,14 +44,14 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::createEntityContent
+	 * @see SpecialNewEntity::createEntityContent
 	 */
 	protected function createEntityContent() {
 		return \Wikibase\ItemContent::newEmpty();
 	}
 
 	/**
-	 * @see SpecialCreateEntity::modifyEntity()
+	 * @see SpecialNewEntity::modifyEntity()
 	 */
 	protected function modifyEntity( \Wikibase\EntityContent &$itemContent ) {
 		$status = parent::modifyEntity( $itemContent );
@@ -59,20 +59,20 @@ class SpecialCreateItem extends SpecialCreateEntity {
 		if ( $this->site !== null && $this->page !== null ) {
 			$site = \Sites::singleton()->getSite( $this->site );
 			if ( $site === false ) {
-				$status->error( 'wikibase-createitem-not-recognized-siteid' );
+				$status->error( 'wikibase-newitem-not-recognized-siteid' );
 				return $status;
 			}
 
 			$page = $site->normalizePageName( $this->page );
 			if ( $page === false ) {
-				$status->error( 'wikibase-createitem-no-external-page' );
+				$status->error( 'wikibase-newitem-no-external-page' );
 				return $status;
 			}
 
 			$link = new \Wikibase\SiteLink( $site, $page );
 			$ret = $itemContent->getItem()->addSiteLink( $link, 'add' );
 			if ( $ret === false ) {
-				$status->error( 'wikibase-createitem-add-sitelink-failed' );
+				$status->error( 'wikibase-newitem-add-sitelink-failed' );
 				return $status;
 			}
 		}
@@ -81,7 +81,7 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::additionalFormElements()
+	 * @see SpecialNewEntity::additionalFormElements()
 	 */
 	protected function additionalFormElements() {
 		if ( $this->site === null || $this->page === null ) {
@@ -92,17 +92,17 @@ class SpecialCreateItem extends SpecialCreateEntity {
 		. Html::element(
 			'label',
 			array(
-				'for' => 'wb-createitem-site',
+				'for' => 'wb-newitem-site',
 				'class' => 'wb-label'
 			),
-			$this->msg( 'wikibase-createitem-site' )->text()
+			$this->msg( 'wikibase-newitem-site' )->text()
 		)
 		. Html::input(
 			'site',
 			$this->site,
 			'text',
 			array(
-				'id' => 'wb-createitem-site',
+				'id' => 'wb-newitem-site',
 				'size' => 12,
 				'class' => 'wb-input',
 				'readonly' => 'readonly'
@@ -112,17 +112,17 @@ class SpecialCreateItem extends SpecialCreateEntity {
 		. Html::element(
 			'label',
 			array(
-				'for' => 'wb-createitem-page',
+				'for' => 'wb-newitem-page',
 				'class' => 'wb-label'
 			),
-			$this->msg( 'wikibase-createitem-page' )->text()
+			$this->msg( 'wikibase-newitem-page' )->text()
 		)
 		. Html::input(
 			'page',
 			$this->page,
 			'text',
 			array(
-				'id' => 'wb-createitem-page',
+				'id' => 'wb-newitem-page',
 				'size' => 12,
 				'class' => 'wb-input',
 				'readonly' => 'readonly'
@@ -132,10 +132,10 @@ class SpecialCreateItem extends SpecialCreateEntity {
 	}
 
 	/**
-	 * @see SpecialCreateEntity::getLegend()
+	 * @see SpecialNewEntity::getLegend()
 	 */
 	protected function getLegend() {
-		return $this->msg( 'wikibase-createitem-fieldset' );
+		return $this->msg( 'wikibase-newitem-fieldset' );
 	}
 
 }

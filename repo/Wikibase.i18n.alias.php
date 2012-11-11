@@ -16,7 +16,7 @@ $specialPageAliases = array();
 
 /** English (English) */
 $specialPageAliases['en'] = array(
-	'CreateItem' => array( 'CreateItem' ),
+	'NewItem' => array( 'NewItem' ),
 	'NewProperty' => array( 'NewProperty' ),
 	'ItemByTitle' => array( 'ItemByTitle' ),
 	'ItemDisambiguation' => array( 'ItemDisambiguation' ),
@@ -27,7 +27,7 @@ $specialPageAliases['en'] = array(
 
 /** Arabic (العربية) */
 $specialPageAliases['ar'] = array(
-	'CreateItem' => array( 'إنشاء_مدخلة' ),
+	'NewItem' => array( 'إنشاء_مدخلة' ),
 	'ItemByTitle' => array( 'المدخلات_بالعنوان' ),
 	'ItemDisambiguation' => array( 'المدخلات_بالعلامة' ),
 );
@@ -39,7 +39,7 @@ $specialPageAliases['arc'] = array(
 
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
-	'CreateItem' => array( 'Neues_Datenelement_erstellen' ),
+	'NewItem' => array( 'Neues_Datenelement_erstellen' ),
 	'NewProperty' => array( 'Neues_Attribut_erstellen' ),
 	'ItemByTitle' => array( 'Datenelement_nach_Name' ),
 	'ItemDisambiguation' => array( 'Begriffsklärung_zu_Datenelement' ),
@@ -48,21 +48,21 @@ $specialPageAliases['de'] = array(
 
 /** Zazaki (Zazaki) */
 $specialPageAliases['diq'] = array(
-	'CreateItem' => array( 'LeteVırazê' ),
+	'NewItem' => array( 'LeteVırazê' ),
 	'ItemByTitle' => array( 'SernuşteyêLeti' ),
 	'ItemDisambiguation' => array( 'EtiketêLeti' ),
 );
 
 /** Icelandic (íslenska) */
 $specialPageAliases['is'] = array(
-	'CreateItem' => array( 'Búa_til_hlut' ),
+	'NewItem' => array( 'Búa_til_hlut' ),
 	'ItemByTitle' => array( 'Hlutur_eftir_nafni' ),
 	'ItemDisambiguation' => array( 'Hlutur_eftir_merkimiða' ),
 );
 
 /** Korean (한국어) */
 $specialPageAliases['ko'] = array(
-	'CreateItem' => array( '항목만들기', '아이템만들기' ),
+	'NewItem' => array( '항목만들기', '아이템만들기' ),
 	'NewProperty' => array( '새속성' ),
 	'ItemByTitle' => array( '제목별항목', '제목별아이템' ),
 	'ItemDisambiguation' => array( '레이블별항목', '라벨별항목', '레이블별아이템', '라벨별아이템' ),
@@ -71,7 +71,7 @@ $specialPageAliases['ko'] = array(
 
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
-	'CreateItem' => array( 'СоздајПредмет' ),
+	'NewItem' => array( 'СоздајПредмет' ),
 	'NewProperty' => array( 'НовоСвојство' ),
 	'ItemByTitle' => array( 'ПредметПоНаслов' ),
 	'ItemDisambiguation' => array( 'ПредметПоЕтикета' ),
@@ -81,7 +81,7 @@ $specialPageAliases['mk'] = array(
 
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = array(
-	'CreateItem' => array( 'ItemAanmaken' ),
+	'NewItem' => array( 'ItemAanmaken' ),
 	'NewProperty' => array( 'NieuweEigenschap' ),
 	'ItemByTitle' => array( 'ItemPerTitel' ),
 	'ItemDisambiguation' => array( 'ItemPerLabel' ),
@@ -92,7 +92,7 @@ $specialPageAliases['nl'] = array(
 
 /** Simplified Chinese (中文（简体）‎) */
 $specialPageAliases['zh-hans'] = array(
-	'CreateItem' => array( '创建项目' ),
+	'NewItem' => array( '创建项目' ),
 	'NewProperty' => array( '新建属性' ),
 	'ItemByTitle' => array( '按标题搜索项目' ),
 	'ItemDisambiguation' => array( '项目消歧义' ),
