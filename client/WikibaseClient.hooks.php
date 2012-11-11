@@ -254,7 +254,7 @@ final class ClientHooks {
 			return true;
 		}
 
-		$rcinfo = $change->getRCInfo();
+		$rcinfo = $change->getMetadata();
 
 		if ( ! is_array( $rcinfo ) ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );

@@ -79,7 +79,7 @@ class EntityFactory {
 	 *
 	 * @param string $type
 	 *
-	 * @return boolean true if valid, false if not
+	 * @return bool
 	 */
 	public function isEntityType( $type ) {
 		return array_key_exists( $type, self::$typeMap );

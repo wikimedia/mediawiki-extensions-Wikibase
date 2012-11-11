@@ -65,11 +65,34 @@ final class TestChanges {
 			'user_id' => 0,
 			'info' => array(
 				'entity' => self::getItem(),
-				'rc' => array(
+				'metadata' => array(
 					'rc_user' => 0,
 					'rc_user_text' => '208.80.152.201'
 				)
 			 )
 		);
+	}
+
+    public static function getEntities() {
+		$entityList = array();
+
+		$entities = array(
+			\Wikibase\ItemObject::newEmpty(),
+			\Wikibase\PropertyObject::newEmpty(),
+			\Wikibase\QueryObject::newEmpty(),
+		);
+
+		foreach( $entities as $entity ) {
+			$entityList[] = $entity;
+
+			$entity->setId( 112 );
+			$entity->stub();
+			$entity->setLabel( 'ja', '\u30d3\u30fc\u30eb' );
+
+			$entityList[] = $entity;
+		}
+
+
+		return $entityList;
 	}
 }

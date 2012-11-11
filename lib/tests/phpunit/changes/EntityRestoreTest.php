@@ -1,9 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Test;
+use Wikibase\EntityRestore;
+use Wikibase\Entity;
 
 /**
- * Represents the deletion of an entity.
+ * Tests for the Wikibase\EntityRefresh class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,25 +22,24 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since 0.1
  *
- * @file
  * @ingroup WikibaseLib
+ * @ingroup Test
+ *
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseChange
  *
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityRestore extends EntityChange {
+class EntityRestoreTest extends EntityChangeTest {
 
-	/**
-	 * @see Change::getChangeType
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getChangeType() {
-		return 'restore';
+	protected function getClass() {
+		return 'Wikibase\EntityRestore';
 	}
 
 }

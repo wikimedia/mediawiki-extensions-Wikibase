@@ -43,7 +43,6 @@ class DiffChange extends ChangeRow {
 		if ( !array_key_exists( 'diff', $info ) ) {
 			throw new \MWException( 'Cannot get the diff when it has not been set yet.' );
 		}
-
 		return $info['diff'];
 	}
 
