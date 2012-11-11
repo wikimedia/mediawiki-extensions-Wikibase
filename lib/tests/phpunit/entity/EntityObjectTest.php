@@ -458,4 +458,20 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		$this->assertFalse( $entity === $copy );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\Entity $entity
+	 */
+	public function testSerialize( Entity $entity ) {
+		$string = serialize( $entity );
+
+		$this->assertInternalType( 'string', $string );
+
+		$instance = unserialize( $string );
+
+		$this->assertTrue( $entity->equals( $instance ) );
+		$this->assertEquals( $entity->getPrefixedId(), $instance->getPrefixedId() );
+	}
+
 }
