@@ -69,15 +69,6 @@ interface Change {
 	public function getType();
 
 	/**
-	 * Returns the entity type for a change.
-	 *
-	 * @since 0.2
-	 *
-	 * @return string
-	 */
-	public function getEntityType();
-
-	/**
 	 * Returns the change type
 	 *
 	 * @since 0.2

@@ -28,7 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityDeletion extends EntityCreation {
+class EntityDeletion extends EntityChange {
 
 	/**
 	 * @see Change::getChangeType
