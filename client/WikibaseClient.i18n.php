@@ -73,6 +73,20 @@ $messages['br'] = array(
 	'wbc-editlinkstitle' => 'Kemmañ al liammoù etreyezhel',
 );
 
+/** Catalan (català)
+ * @author Grondin
+ * @author Àlex
+ */
+$messages['ca'] = array(
+	'wbc-desc' => "Client per l'extensió Wikibase",
+	'wbc-comment-langlinks-delete' => "Element associat de Wikidata suprimit. Enllaços d'idiomes eliminats.",
+	'wbc-comment-langlinks-remove' => "S'ha desenllaçat aquesta pàgina de l'article de Wikidata. Els enllaços d'idioma s'han eliminat.",
+	'wbc-comment-langlinks-restore' => "Element associat de Wikidata recuperat. Enllaços d'idioma restaurats.",
+	'wbc-comment-langlinks-update' => "Enllaços d'idiomes actualitzats.",
+	'wbc-editlinks' => 'Modifica els enllaços',
+	'wbc-editlinkstitle' => 'Modifica enllaços interlingües',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  * @author Metalhead64

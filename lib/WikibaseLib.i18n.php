@@ -59,6 +59,19 @@ $messages['be-tarask'] = array(
 	'wikibaselib-entity-query' => 'запыт',
 );
 
+/** Catalan (català)
+ * @author Arnaugir
+ * @author Grondin
+ */
+$messages['ca'] = array(
+	'wikibaselib-desc' => 'Té la funcionalitat comuna per les extensions de Wikibase i de Wikibase Client',
+	'wikibaselib-entity-item' => 'element',
+	'wikibaselib-entity-property' => 'propietat',
+	'wikibaselib-entity-query' => 'consulta',
+	'datatypes-type-wikibase-item' => 'Element',
+	'datatypes-type-commonsMedia' => 'Fitxer multimèdia de Commons',
+);
+
 /** German (Deutsch)
  * @author G.Hagedorn
  * @author Kghbln
@@ -295,6 +308,7 @@ $messages['nn'] = array(
 
 /** Polish (polski)
  * @author BeginaFelicysym
+ * @author Kpjas
  * @author Lazowik
  * @author Maćko
  */
@@ -304,6 +318,7 @@ $messages['pl'] = array(
 	'wikibaselib-entity-property' => 'właściwość',
 	'wikibaselib-entity-query' => 'zapytanie',
 	'datatypes-type-wikibase-item' => 'Obiekt',
+	'datatypes-type-commonsMedia' => 'Plik multimedialny na Commons',
 );
 
 /** Piedmontese (Piemontèis)
