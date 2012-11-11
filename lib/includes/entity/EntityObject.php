@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use MWException;
 
 /**
  * Represents a single Wikibase entity.
@@ -71,6 +72,45 @@ abstract class EntityObject implements Entity {
 	public function toArray() {
 		$this->stub();
 		return $this->data;
+	}
+
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function serialize() {
+		$data = $this->toArray();
+
+		// Add an identifier for the serialization version so we can switch behaviour in
+		// the unserializer to avoid breaking compatibility after certain changes.
+		$data['v'] = 1;
+
+		return \FormatJson::encode( $data );
+	}
+
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $value
+	 *
+	 * @return Entity
+	 * @throws MWException
+	 */
+	public function unserialize( $value ) {
+		$unserialized = \FormatJson::decode( $value, true );
+
+		if ( is_array( $unserialized ) && array_key_exists( 'v', $unserialized ) ) {
+			unset( $unserialized['v'] );
+
+			return $this->__construct( $unserialized );
+		}
+
+		throw new MWException( 'Invalid serialization passed to Entity unserializer' );
 	}
 
 	/**
