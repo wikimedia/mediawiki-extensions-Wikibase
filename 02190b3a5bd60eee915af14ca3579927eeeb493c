@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADFH///+g\u003d",
+        "filename": "repo/Wikibase.i18n.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 4680,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-11T01:20:51Z",
+      "side": 0,
+      "message": "You don\u0027t need to remove all the instances of a message in all the languages.  Just remove the english one and translatewiki takes care of the rest.",
+      "revId": "02190b3a5bd60eee915af14ca3579927eeeb493c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
