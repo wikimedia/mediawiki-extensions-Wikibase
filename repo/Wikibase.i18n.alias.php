@@ -17,8 +17,8 @@ $specialPageAliases = array();
 /** English (English) */
 $specialPageAliases['en'] = array(
 	'EntityData' => array( 'EntityData' ),
-	'CreateItem' => array( 'CreateItem' ),
-	'NewProperty' => array( 'NewProperty' ),
+	'NewItem' => array( 'NewItem', 'CreateItem' ),
+	'NewProperty' => array( 'NewProperty', 'CreateProperty' ),
 	'ItemByTitle' => array( 'ItemByTitle' ),
 	'ItemDisambiguation' => array( 'ItemDisambiguation' ),
 	'ListDatatypes' => array( 'ListDatatypes' ),
@@ -30,7 +30,7 @@ $specialPageAliases['en'] = array(
 
 /** Arabic (العربية) */
 $specialPageAliases['ar'] = array(
-	'CreateItem' => array( 'إنشاء_مدخلة' ),
+	'NewItem' => array( 'إنشاء_مدخلة' ),
 	'ItemByTitle' => array( 'المدخلات_بالعنوان' ),
 	'ItemDisambiguation' => array( 'المدخلات_بالعلامة' ),
 );
@@ -42,7 +42,7 @@ $specialPageAliases['arc'] = array(
 
 /** буряад (буряад) */
 $specialPageAliases['bxr'] = array(
-	'CreateItem' => array( 'Зүйл_үүсхэхэ' ),
+	'NewItem' => array( 'Зүйл_үүсхэхэ' ),
 	'NewProperty' => array( 'Шэнэ_шэнжэ_шанар' ),
 	'ItemByTitle' => array( 'Нэрээр_жагсааха' ),
 	'ItemDisambiguation' => array( 'Дэлгэрэнгы_нэрэ' ),
@@ -51,7 +51,7 @@ $specialPageAliases['bxr'] = array(
 /** German (Deutsch) */
 $specialPageAliases['de'] = array(
 	'EntityData' => array( 'Objektdaten' ),
-	'CreateItem' => array( 'Neues_Datenelement_erstellen' ),
+	'NewItem' => array( 'Neues_Datenelement_erstellen' ),
 	'NewProperty' => array( 'Neues_Attribut_erstellen' ),
 	'ItemByTitle' => array( 'Datenelement_nach_Name' ),
 	'ItemDisambiguation' => array( 'Begriffsklärung_zu_Datenelement' ),
@@ -64,7 +64,7 @@ $specialPageAliases['de'] = array(
 
 /** Zazaki (Zazaki) */
 $specialPageAliases['diq'] = array(
-	'CreateItem' => array( 'LeteVırazê' ),
+	'NewItem' => array( 'LeteVırazê' ),
 	'NewProperty' => array( 'XısusiyetêNewey' ),
 	'ItemByTitle' => array( 'SernuşteyêLeti' ),
 	'ItemDisambiguation' => array( 'EtiketêLeti' ),
@@ -75,7 +75,7 @@ $specialPageAliases['diq'] = array(
 /** Spanish (español) */
 $specialPageAliases['es'] = array(
 	'EntityData' => array( 'DatosDeEntidad' ),
-	'CreateItem' => array( 'CrearElemento' ),
+	'NewItem' => array( 'CrearElemento' ),
 	'NewProperty' => array( 'NuevaPropiedad' ),
 	'ItemByTitle' => array( 'ElementoPorTítulo' ),
 	'ItemDisambiguation' => array( 'DesambiguaciónDeElementos' ),
@@ -86,7 +86,7 @@ $specialPageAliases['es'] = array(
 
 /** Finnish (suomi) */
 $specialPageAliases['fi'] = array(
-	'CreateItem' => array( 'Luo_kohde' ),
+	'NewItem' => array( 'Luo_kohde' ),
 	'NewProperty' => array( 'Uusi_ominaisuus' ),
 	'ItemByTitle' => array( 'Hae_kohdetta_otsikolla' ),
 	'ItemDisambiguation' => array( 'Kohteet_samalla_nimellä' ),
@@ -98,7 +98,7 @@ $specialPageAliases['fi'] = array(
 
 /** Icelandic (íslenska) */
 $specialPageAliases['is'] = array(
-	'CreateItem' => array( 'Búa_til_hlut' ),
+	'NewItem' => array( 'Búa_til_hlut' ),
 	'NewProperty' => array( 'Ný_staðhæfing' ),
 	'ItemByTitle' => array( 'Hlutur_eftir_nafni' ),
 	'ItemDisambiguation' => array( 'Hlutur_eftir_merkimiða' ),
@@ -110,7 +110,7 @@ $specialPageAliases['is'] = array(
 /** Italian (italiano) */
 $specialPageAliases['it'] = array(
 	'EntityData' => array( 'DatiEntità' ),
-	'CreateItem' => array( 'CreaElemento' ),
+	'NewItem' => array( 'CreaElemento' ),
 	'NewProperty' => array( 'NuovaProprietà' ),
 	'ItemByTitle' => array( 'ElementiPerTitolo' ),
 	'ItemDisambiguation' => array( 'ElementiDisambigui' ),
@@ -127,7 +127,7 @@ $specialPageAliases['ja'] = array(
 /** Korean (한국어) */
 $specialPageAliases['ko'] = array(
 	'EntityData' => array( '항목데이터' ),
-	'CreateItem' => array( '항목만들기', '아이템만들기' ),
+	'NewItem' => array( '항목만들기', '아이템만들기' ),
 	'NewProperty' => array( '새속성' ),
 	'ItemByTitle' => array( '제목별항목', '제목별아이템' ),
 	'ItemDisambiguation' => array( '레이블별항목', '라벨별항목', '레이블별아이템', '라벨별아이템' ),
@@ -141,7 +141,7 @@ $specialPageAliases['ko'] = array(
 /** Macedonian (македонски) */
 $specialPageAliases['mk'] = array(
 	'EntityData' => array( 'ЕдиницаПодаток' ),
-	'CreateItem' => array( 'СоздајПредмет' ),
+	'NewItem' => array( 'СоздајПредмет' ),
 	'NewProperty' => array( 'НовоСвојство' ),
 	'ItemByTitle' => array( 'ПредметПоНаслов' ),
 	'ItemDisambiguation' => array( 'ПредметПоЕтикета' ),
@@ -153,7 +153,7 @@ $specialPageAliases['mk'] = array(
 /** Dutch (Nederlands) */
 $specialPageAliases['nl'] = array(
 	'EntityData' => array( 'Entiteitsgegevens' ),
-	'CreateItem' => array( 'ItemAanmaken' ),
+	'NewItem' => array( 'ItemAanmaken' ),
 	'NewProperty' => array( 'NieuweEigenschap' ),
 	'ItemByTitle' => array( 'ItemPerTitel' ),
 	'ItemDisambiguation' => array( 'ItemPerLabel' ),
@@ -167,7 +167,7 @@ $specialPageAliases['nl'] = array(
 /** Sicilian (sicilianu) */
 $specialPageAliases['scn'] = array(
 	'EntityData' => array( 'DatiEntità' ),
-	'CreateItem' => array( 'CreaElemento' ),
+	'NewItem' => array( 'CreaElemento' ),
 	'NewProperty' => array( 'NuovaProprietà' ),
 	'ItemByTitle' => array( 'ElementiPerTitolo' ),
 	'ItemDisambiguation' => array( 'ElementiDisambigui' ),
@@ -179,7 +179,7 @@ $specialPageAliases['scn'] = array(
 /** Vietnamese (Tiếng Việt) */
 $specialPageAliases['vi'] = array(
 	'EntityData' => array( 'Dữ_liệu_thực_thể' ),
-	'CreateItem' => array( 'Tạo_khoản_mục' ),
+	'NewItem' => array( 'Tạo_khoản_mục' ),
 	'NewProperty' => array( 'Thuộc_tính_mới' ),
 	'ItemDisambiguation' => array( 'Định_hướng_khoản_mục' ),
 	'ListDatatypes' => array( 'Danh_sách_kiểu_dữ_liệu' ),
@@ -189,7 +189,7 @@ $specialPageAliases['vi'] = array(
 
 /** Simplified Chinese (中文（简体）‎) */
 $specialPageAliases['zh-hans'] = array(
-	'CreateItem' => array( '创建项目' ),
+	'NewItem' => array( '创建项目' ),
 	'NewProperty' => array( '新建属性' ),
 	'ItemByTitle' => array( '按标题搜索项目' ),
 	'ItemDisambiguation' => array( '项目消歧义' ),
