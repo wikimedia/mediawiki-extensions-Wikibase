@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADJX////c\u003d",
+        "filename": "client/includes/store/sql/EntityCacheTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T21:50:51Z",
+      "side": 1,
+      "message": "This check should never fail at this point - the method returns either an EntityId or null, and null is not something that this method can use. Rather then putting in such a check that makes it silently fail, I\u0027d change it to something like\n\nif ( $entityId \u003d\u003d\u003d ) { throw new MWException( \u0027Got an Entity with no Id\u0027 ) }",
+      "revId": "62cc657f475f590023cde92d6135a31034a49890",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADJX////Y\u003d",
+        "filename": "client/includes/store/sql/EntityCacheTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T21:50:51Z",
+      "side": 1,
+      "message": "same story here",
+      "revId": "62cc657f475f590023cde92d6135a31034a49890",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADJX////U\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T21:50:51Z",
+      "side": 1,
+      "message": "same story once more",
+      "revId": "62cc657f475f590023cde92d6135a31034a49890",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADJX////Q\u003d",
+        "filename": "lib/includes/store/SiteLinkTable.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T21:50:51Z",
+      "side": 1,
+      "message": "and again",
+      "revId": "62cc657f475f590023cde92d6135a31034a49890",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
