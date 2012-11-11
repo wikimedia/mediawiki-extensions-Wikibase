@@ -28,7 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EntityRestore extends EntityRefresh {
+class EntityRestore extends EntityChange {
 
 	/**
 	 * @see Change::getChangeType
