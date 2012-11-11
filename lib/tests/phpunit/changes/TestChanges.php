@@ -65,7 +65,7 @@ final class TestChanges {
 			'user_id' => 0,
 			'info' => array(
 				'entity' => self::getItem(),
-				'rc' => array(
+				'metadata' => array(
 					'rc_user' => 0,
 					'rc_user_text' => '208.80.152.201'
 				)
