@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADJX///+k\u003d",
+        "filename": "lib/includes/changes/ChangeRow.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T22:02:10Z",
+      "side": 1,
+      "message": "property",
+      "revId": "8ec39739987c4752a826baa6158ab9c7fcff7818",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADJX///+c\u003d",
+        "filename": "lib/includes/changes/ChangeRow.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T22:02:10Z",
+      "side": 1,
+      "message": "wtf, why do we have TWO methods to get the type of the change??",
+      "revId": "8ec39739987c4752a826baa6158ab9c7fcff7818",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADJX///+Y\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T22:02:10Z",
+      "side": 1,
+      "message": "this collides with a method in the base class that does something else and is badly named\n\nbad indent as well",
+      "revId": "8ec39739987c4752a826baa6158ab9c7fcff7818",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
