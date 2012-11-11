@@ -1,9 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\EntityDeletion;
+use Wikibase\Entity;
 
 /**
- * Tests for the Wikibase\EntityDeletion class.
+ * Tests for the Wikibase\EntityRefresh class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,13 +33,29 @@ namespace Wikibase\Test;
  * @group WikibaseChange
  *
  * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityDeletionTest extends EntityRefreshTest {
+class EntityDeletionTest extends \MediaWikiTestCase {
 
 	protected function getClass() {
 		return 'Wikibase\EntityDeletion';
 	}
 
+	public function newFromEntitiesProvider() {
+		return TestChanges::getEntities();
+	}
+
+	/**
+	 * @dataProvider newFromEntitiesProvider
+	 *
+	 * @param \Wikibase\Entity $entity
+	 */
+	public function testNewFromEntity( Entity $entity ) {
+		$class = $this->getClass();
+		$entityDeletion = $class::newFromEntity( $entity );
+		$this->assertInstanceOf( $class, $entityDeletion );
+		$this->assertEquals( $entity, $entityDeletion->getEntity() );
+	}
+
 }
-	

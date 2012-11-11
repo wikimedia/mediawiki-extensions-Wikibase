@@ -43,7 +43,6 @@ class DiffChange extends ChangeRow {
 		if ( !array_key_exists( 'diff', $info ) ) {
 			throw new \MWException( 'Cannot get the diff when it has not been set yet.' );
 		}
-
 		return $info['diff'];
 	}
 
@@ -53,9 +52,10 @@ class DiffChange extends ChangeRow {
 	 * @param IDiff $diff
 	 */
 	public function setDiff( IDiff $diff ) {
+		$fields = $this->table->getFields();
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		$info['diff'] = $diff;
-		$this->setField( 'info', $info );
+		$this->fields['info'] = $info;
 	}
 
 	/**

@@ -1,9 +1,11 @@
 <?php
 
 namespace Wikibase\Test;
+use Wikibase\EntityCreation;
+use Wikibase\Entity;
 
 /**
- * Tests for the Wikibase\EntityCreation class.
+ * Tests for the Wikibase\EntityRefresh class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,13 +33,29 @@ namespace Wikibase\Test;
  * @group WikibaseChange
  *
  * @licence GNU GPL v2+
+ * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityCreationTest extends EntityRefreshTest {
+class EntityCreationTest extends \MediaWikiTestCase {
 
 	protected function getClass() {
 		return 'Wikibase\EntityCreation';
 	}
 
+	public function newFromEntitiesProvider() {
+		return TestChanges::getEntities();
+	}
+
+	/**
+	 * @dataProvider newFromEntitiesProvider
+	 *
+	 * @param \Wikibase\Entity $entity
+	 */
+	public function testNewFromEntity( Entity $entity ) {
+		$class = $this->getClass();
+		$entityCreation = $class::newFromEntity( $entity );
+		$this->assertInstanceOf( $class, $entityCreation );
+		$this->assertEquals( $entity, $entityCreation->getEntity() );
+	}
+
 }
-	
