@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "AAADFX////g\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-11T02:34:57Z",
+      "side": 1,
+      "message": "Resolved in this context mean that a patchset could be created and that it seems to be sound. It does not mean that the patched content can be saved. After patching the new content can be the same as the the previous content, which means that save will fail as there is no change.",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADFX////c\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-11T02:34:57Z",
+      "side": 1,
+      "message": "Empty patch means that the save will fail.",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADFH////k\u003d",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 2
@@ -13,6 +47,23 @@
       "writtenOn": "2012-11-11T00:54:59Z",
       "side": 1,
       "message": "@since tag is wrong\n\nbut that does not matter, since you\u0027re todo is right, this should not be here\n\nand it has been in Diff for quite a while.\n\ncount( $diffOp )\n\nwill give you what you\u0027re doing here",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADFX////Q\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-11T02:34:57Z",
+      "side": 1,
+      "message": "Need base?",
       "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
