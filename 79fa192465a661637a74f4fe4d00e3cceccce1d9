@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADFH////k\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T00:54:59Z",
+      "side": 1,
+      "message": "@since tag is wrong\n\nbut that does not matter, since you\u0027re todo is right, this should not be here\n\nand it has been in Diff for quite a while.\n\ncount( $diffOp )\n\nwill give you what you\u0027re doing here",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADFH////g\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T00:54:59Z",
+      "side": 1,
+      "message": "Looks like something that should be, or perhaps already is, in EntityContentFactory",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADFH////c\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T00:54:59Z",
+      "side": 1,
+      "message": "can has explicit null check? :)",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADFH////Y\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T00:54:59Z",
+      "side": 1,
+      "message": "please to name it $revision? :p",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADFH////U\u003d",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-11T00:54:59Z",
+      "side": 1,
+      "message": "why this change? this class is not using anything from this module after your changes as far as I can see...",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
