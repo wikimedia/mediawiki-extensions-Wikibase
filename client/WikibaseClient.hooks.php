@@ -155,25 +155,31 @@ final class ClientHooks {
 	public static function onWikibasePollHandle( Change $change ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
+		if ( ! ( $change instanceof EntityChange ) ) {
+			return true;
+		}
 
-		// strip the wikibase- prefix
-		$mainType = preg_replace( '/^wikibase-/', '', $mainType );
+		$mainType = $change->getEntityType( false );
 
 		if ( in_array( $mainType, EntityFactory::singleton()->getEntityTypes() ) ) {
+
+			if ( $mainType !== Item::ENTITY_TYPE ) {
+				// not handling properties or queries yet here
+				return true;
+			}
 
 			$cacheUpdater = new EntityCacheUpdater();
 			$cacheUpdater->handleChange( $change );
 
 			// The following code is a temporary hack to invalidate the cache.
 			// TODO: create cache invalidater that works with all clients for this cluster
-			if ( $mainType == Item::ENTITY_TYPE ) { //FIXME: handle all kinds of entities!
+			if ( in_array( $mainType, EntityFactory::singleton()->getEntityTypes() ) ) {
 				/**
 				 * @var Item $item
 				 */
-				$item = $change->getEntity();
+				$entity = $change->getEntity();
 				$siteGlobalId = Settings::get( 'siteGlobalID' );
-				$siteLink = $item->getSiteLink( $siteGlobalId );
+				$siteLink = $entity->getSiteLink( $siteGlobalId );
 				$title = null;
 
 				$info = $change->getField( 'info' );
@@ -182,26 +188,37 @@ final class ClientHooks {
 					$page = $siteLink->getPage();
 
 					if ( array_key_exists( 'diff', $info ) ) {
-						$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
+						$siteLinkDiff = $change->getSiteLinkDiff();
 
-						// handle when a link to this client is changed to some other page
-						// remove lang links on the old page, add them to new page that item links to
-						if ( is_array( $siteLinkChangeOperations ) && array_key_exists( $siteGlobalId, $siteLinkChangeOperations ) ) {
-							$oldTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getOldValue() );
-							$newTitle = \Title::newFromText( $siteLinkChangeOperations[ $siteGlobalId ]->getNewValue() );
+						$siteLinkAdditions = $siteLinkDiff->getAdditions();
+						$siteLinkRemovals = $siteLinkDiff->getRemovals();
+						$siteLinkChanges = $change->getSiteLinkChangeOperations();
 
-							if ( !is_null( $oldTitle ) ) {
-								self::updatePage( $oldTitle, $change, true );
-							}
-
-							if ( !is_null( $newTitle ) ) {
-								self::updatePage( $newTitle, $change, false );
-							}
-						// a lang link was added or removed
-						} else {
+						// site link added
+						if ( !empty( $siteLinkAdditions ) ) {
 							$title = \Title::newFromText( $page );
 							if ( !is_null( $title ) ) {
 								self::updatePage( $title, $change );
+							}
+						} else if ( !empty( $siteLinkRemovals ) ) {
+							$title = \Title::newFromText( $page );
+							if ( !is_null( $title ) ) {
+								self::updatePage( $title, $change );
+							}
+						} else if ( !empty( $siteLinkChanges ) ) {
+							// handle when a link to this client is changed to some other page
+							// remove lang links on the old page, add them to new page that item links to
+							if ( is_array( $siteLinkChanges ) && array_key_exists( $siteGlobalId, $siteLinkChanges ) ) {
+								$oldTitle = $change->getOldTitle( $siteGlobalId );
+								$newTitle = $change->getNewTitle( $siteGlobalId );
+
+								if ( !is_null( $oldTitle ) ) {
+									self::updatePage( $oldTitle, $change, true );
+								}
+
+								if ( !is_null( $newTitle ) ) {
+									self::updatePage( $newTitle, $change, false );
+								}
 							}
 						}
 					} else {
@@ -209,15 +226,6 @@ final class ClientHooks {
 						$title = \Title::newFromText( $page );
 						if ( !is_null( $title ) ) {
 							self::updatePage( $title, $change );
-						}
-					}
-				} else if ( array_key_exists( 'diff', $info ) ) {
-					// cache should be invalidated when the sitelink got removed
-					$removedSiteLinks = $change->getDiff()->getSiteLinkDiff()->getRemovedValues();
-					if ( is_array( $removedSiteLinks ) && array_key_exists( $siteGlobalId, $removedSiteLinks ) ) {
-						$title = \Title::newFromText( $removedSiteLinks[ $siteGlobalId ] );
-						if ( !is_null( $title ) ) {
-							self::updatePage( $title, $change, true );
 						}
 					}
 				}
@@ -262,17 +270,12 @@ final class ClientHooks {
 		}
 
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
-
-		$fields['entity_type'] = $entityType;
-		$fields['source'] = Settings::get( 'repoBase' );
+		$fields['entity_type'] = $change->getEntityType();
 		unset( $fields['info'] );
 
 		$params = array(
 			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
-
-		$ip = isset( $fields['ip'] ) ? $fields['ip'] : ''; //@todo: provide this!
 
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
