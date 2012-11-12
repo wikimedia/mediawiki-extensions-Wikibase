@@ -31,146 +31,142 @@ namespace Wikibase;
  */
 class EntityChange extends DiffChange {
 
-	/**
-	 * @since 0.3
-	 *
-	 * @return Entity
-	 * @throws \MWException
-	 */
-	public function getEntity() {
+/**
+ * @since 0.3
+ *
+ * @return Entity
+ * @throws \MWException
+ */
+public function getEntity() {
+	$info = $this->getField( 'info' );
+
+	if ( !array_key_exists( 'entity', $info ) ) {
+		throw new \MWException( 'Cannot get the entity when it has not been set yet.' );
+	}
+
+	return $info['entity'];
+}
+
+/**
+ * @since 0.3
+ *
+ * @param Entity $entity
+ */
+public function setEntity( Entity $entity ) {
+	$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+	$info['entity'] = $entity;
+	$this->setField( 'info', $info );
+}
+
+/**
+ * Returns whether the entity in the change is empty.
+ * If it's empty, it can be ignored.
+ *
+ * @since 0.3
+ *
+ * @return bool
+ */
+public function isEmpty() {
+	if ( $this->hasField( 'info' ) ) {
 		$info = $this->getField( 'info' );
 
-		if ( !array_key_exists( 'entity', $info ) ) {
-			throw new \MWException( 'Cannot get the entity when it has not been set yet.' );
+		if ( array_key_exists( 'entity', $info ) && !$info['entity']->isEmpty() ) {
+			return false;
 		}
-
-		return $info['entity'];
 	}
 
-	/**
-	 * @since 0.3
-	 *
-	 * @param Entity $entity
-	 */
-	public function setEntity( Entity $entity ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$info['entity'] = $entity;
-		$this->setField( 'info', $info );
+	return true;
+}
+
+/**
+ * @since 0.3
+ *
+ * @param Entity $entity
+ * @param array|null $fields
+ *
+ * @return EntityChange
+ */
+public static function newFromEntity( Entity $entity, array $fields = null ) {
+	$instance = new static(
+		ChangesTable::singleton(),
+		$fields,
+		true
+	);
+
+	if ( !$instance->hasField( 'info' ) ) {
+		$info = array();
+		$instance->setField( 'info', $info );
 	}
 
-	/**
-	 * Returns whether the entity in the change is empty.
-	 * If it's empty, it can be ignored.
-	 *
-	 * @since 0.3
-	 *
-	 * @return bool
-	 */
-	public function isEmpty() {
-		if ( $this->hasField( 'info' ) ) {
-			$info = $this->getField( 'info' );
-
-			if ( array_key_exists( 'entity', $info ) && !$info['entity']->isEmpty() ) {
-				return false;
-			}
-		}
-
-		return true;
+	$info = $instance->getField( 'info' );
+	if ( !array_key_exists( 'entity', $info ) ) {
+		$instance->setEntity( $entity );
 	}
 
-	/**
-	 * @since 0.3
-	 *
-	 * @param Entity $entity
-	 * @param array|null $fields
-	 *
-	 * @return EntityChange
-	 */
-	public static function newFromEntity( Entity $entity, array $fields = null ) {
-		$instance = new static(
-			ChangesTable::singleton(),
-			$fields,
-			true
-		);
+	$type = 'wikibase-' . $entity->getType() . '~' . $instance->getChangeType();
+	$instance->setField( 'type', $type );
 
-		if ( !$instance->hasField( 'info' ) ) {
-			$info = array();
-			$instance->setField( 'info', $info );
-		}
+	return $instance;
+}
 
-		$info = $instance->getField( 'info' );
-		if ( !array_key_exists( 'entity', $info ) ) {
-			$instance->setEntity( $entity );
-		}
+/**
+ * @since 0.3
+ *
+ * @return string
+ */
+public function getType() {
+	return $this->getEntityType() . '~' . $this->getChangeType();
+}
 
-		$type = 'wikibase-' . $entity->getType() . '~' . $instance->getChangeType();
-		$instance->setField( 'type', $type );
-
-		return $instance;
+/**
+ * @since 0.3
+ *
+ * @return string
+ */
+public function getEntityType() {
+	$entity = $this->getEntity();
+	if ( $entity !== null ) {
+		return $entity->getType();
 	}
+	return null;
+}
 
-	/**
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getType() {
-		return $this->getEntityType() . '~' . $this->getChangeType();
+/**
+ * @see Change::getChangeType
+ *
+ * @since 0.3
+ *
+ * @return string
+ */
+public function getChangeType() {
+	return 'change';
+}
+
+/**
+ * @since 0.3
+ *
+ * @return array|bool
+ */
+public function getMetadata() {
+	$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+	if ( array_key_exists( 'metadata', $info ) ) {
+		return $info['metadata'];
 	}
+}
 
-	/**
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getEntityType() {
-		$entity = $this->getEntity();
-		if ( $entity !== null ) {
-			return $entity->getType();
-		}
-		return null;
-	}
-
-	/**
-	 * @see Change::getChangeType
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public function getChangeType() {
-		return 'change';
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @return array|bool
-	 */
-	public function getMetadata() {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		if ( ( is_array( $info ) ) && ( array_key_exists( 'metadata', $info ) ) ) {
-			return $info['metadata'];
-		}
-
-		return false;
-	}
-
-	/**
-	 * @since 0.3
-	 *
-	 * @param array $rc
-	 */
-	public function setMetadata( array $metadata ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+/**
+ * @since 0.3
+ *
+ * @param array $metadata
+ */
+public function setMetadata( array $metadata ) {
 		$validKeys = array(
-			'rc_comment',
-			'rc_curid',
-			'rc_bot',
-			'rc_this_oldid',
-			'rc_last_oldid',
-			'rc_user',
-			'rc_user_text'
+			'comment',
+			'page_id',
+			'bot',
+			'rev_id',
+			'parent_id',
+			'user_text',
 		);
 
 		if ( is_array( $metadata ) ) {
@@ -179,17 +175,65 @@ class EntityChange extends DiffChange {
 					unset( $metadata[$key] );
 				}
 			}
-			$info['metadata'] = $metadata;
-			$this->setField( 'info', $info );
-		}
 
-		return false;
+		$metadata['comment'] = $this->getComment();
+
+		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+		$info['metadata'] = $metadata;
+		$this->setField( 'info', $info );
+
+		return true;
 	}
 
-	/**
-	 * @since 0.1
-	 */
-	protected function postConstruct() {
+	return false;
+}
 
-	}
+/**
+ * @since 0.3
+ *
+ * @return string
+ */
+public function getComment() {
+	return '';
+}
+
+/**
+ * @since 0.1
+ */
+protected function postConstruct() {
+
+}
+
+/**
+ * @since 0.3
+ *
+ * @param \Revision $revision
+ */
+public function setMetadataFromRevision( \Revision $revision ) {
+	$user = \User::newFromId( $revision->getUser() );
+
+	$this->setMetadata( array(
+		'user_text' => $revision->getUserText(),
+		'bot' => in_array( 'bot', $user->getRights() ),
+		'page_id' => $revision->getPage(),
+		'rev_id' => $revision->getId(),
+		'parent_id' => $revision->getParentId(),
+		'comment' => '',
+	) );
+}
+
+/**
+ * @since 0.3
+ *
+ * @param \User $user
+ */
+public function setMetadataFromUser( \User $user ) {
+	$this->setMetadata( array(
+		'user_text' => $user->getName(),
+		'page_id' => 0,
+		'rev_id' => 0,
+		'parent_id' => 0,
+		'comment' => '',
+	) );
+}
 }
