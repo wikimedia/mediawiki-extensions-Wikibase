@@ -45,25 +45,25 @@ final class LibHooks {
 				'changesDatabase' => false, // local by default. Set to something LBFactory understands.
 
 				'changeHandlers' => array(
-					'wikibase-item~add' => 'Wikibase\EntityCreation',
-					'wikibase-property~add' => 'Wikibase\EntityCreation',
-					'wikibase-query~add' => 'Wikibase\EntityCreation',
+					'wikibase-item~add' => 'Wikibase\ItemChange',
+					'wikibase-property~add' => 'Wikibase\EntityChange',
+					'wikibase-query~add' => 'Wikibase\EntityChange',
 
-					'wikibase-item~update' => 'Wikibase\EntityUpdate',
-					'wikibase-property~update' => 'Wikibase\EntityUpdate',
-					'wikibase-query~update' => 'Wikibase\EntityUpdate',
+					'wikibase-item~update' => 'Wikibase\ItemChange',
+					'wikibase-property~update' => 'Wikibase\EntityChange',
+					'wikibase-query~update' => 'Wikibase\EntityChange',
 
-					'wikibase-item~remove' => 'Wikibase\EntityDeletion',
-					'wikibase-property~remove' => 'Wikibase\EntityDeletion',
-					'wikibase-query~remove' => 'Wikibase\EntityDeletion',
+					'wikibase-item~remove' => 'Wikibase\ItemChange',
+					'wikibase-property~remove' => 'Wikibase\EntityChange',
+					'wikibase-query~remove' => 'Wikibase\EntityChange',
 
-					'wikibase-item~refresh' => 'Wikibase\EntityRefresh',
-					'wikibase-property~refresh' => 'Wikibase\EntityRefresh',
-					'wikibase-query~refresh' => 'Wikibase\EntityRefresh',
+					'wikibase-item~refresh' => 'Wikibase\ItemChange',
+					'wikibase-property~refresh' => 'Wikibase\EntityChange',
+					'wikibase-query~refresh' => 'Wikibase\EntityChange',
 
-					'wikibase-item~restore' => 'Wikibase\EntityRestore',
-					'wikibase-property~restore' => 'Wikibase\EntityRestore',
-					'wikibase-query~restore' => 'Wikibase\EntityRestore',
+					'wikibase-item~restore' => 'Wikibase\ItemChange',
+					'wikibase-property~restore' => 'Wikibase\EntityChange',
+					'wikibase-query~restore' => 'Wikibase\EntityChange',
 				),
 				'dataTypes' => array(
 					'wikibase-item',
@@ -93,10 +93,6 @@ final class LibHooks {
 			'changes/ChangeRow',
 			'changes/DiffChange',
 			'changes/EntityChange',
-			'changes/EntityCreation',
-			'changes/EntityDeletion',
-			'changes/EntityRefresh',
-			'changes/EntityUpdate',
 
 			'claim/ClaimAggregate',
 			'claim/ClaimListAccess',

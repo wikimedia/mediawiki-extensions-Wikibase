@@ -3,8 +3,6 @@
 namespace Wikibase;
 
 /**
- * Represents the deletion of an entity.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -20,7 +18,7 @@ namespace Wikibase;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.3
  *
  * @file
  * @ingroup WikibaseLib
@@ -28,17 +26,21 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EntityRestore extends EntityChange {
+class ItemChange extends EntityChange {
 
 	/**
-	 * @see Change::getChangeType
+	 * @since 0.3
 	 *
-	 * @since 0.2
-	 *
-	 * @return string
+	 * @return \Diff\MapDiff|bool
+	 * @throws \MWException
 	 */
-	public function getChangeType() {
-		return 'restore';
-	}
+	public function getSiteLinkDiff() {
+		$diff = $this->getDiff();
 
+		if ( !$diff instanceof ItemDiff ) {
+			throw new \MWException( 'Cannot get sitelink diff for ' . get_class( $diff ) . '.' );
+		}
+
+		return $this->getDiff()->getSiteLinkDiff();
+	}
 }

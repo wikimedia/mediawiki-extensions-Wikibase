@@ -41,14 +41,19 @@ class EntityCacheUpdater {
 	public function handleChange( Change $change ) {
 		list( $entityType, $updateType ) = explode( '~', $change->getType() );
 
-		$store = ClientStoreFactory::getStore();
-		$entityCache = $store->newEntityCache();
-		$siteLinkCache = $store->newSiteLinkCache();
-
 		/**
 		 * @var Entity $entity
 		 */
 		$entity = $change->getEntity();
+
+		if ( !$entity->getId() ) {
+			// the entity doesn't have an ID, so it's transient and should not be stored.
+			return;
+		}
+
+		$store = ClientStoreFactory::getStore();
+		$entityCache = $store->newEntityCache();
+		$siteLinkCache = $store->newSiteLinkCache();
 
 		switch ( $updateType ) {
 			case 'remove':
