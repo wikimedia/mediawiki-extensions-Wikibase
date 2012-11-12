@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADO3////M\u003d",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-12T18:12:44Z",
+      "side": 1,
+      "message": "Did not answer my question: why are you changing this?",
+      "revId": "12bc108d34284db0974a30937f84c559fd6f5793",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
