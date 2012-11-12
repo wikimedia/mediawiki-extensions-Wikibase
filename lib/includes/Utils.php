@@ -129,6 +129,7 @@ final class Utils {
 			'wikiquote' => 'wikiquote',
 			'wikisource' => 'wikisource',
 			'wikiversity' => 'wikiversity',
+			'wikivoyage' => 'wikivoyage',
 			'wikinews' => 'wikinews',
 		);
 
@@ -222,7 +223,7 @@ final class Utils {
 
 	/**
 	 * Reorder an array with keys with the order given by a second array.
-	 * 
+	 *
 	 * Note that this function will do an intersection and then organize
 	 * the resulting array in the order given by the array in the second
 	 * argument. The sorting is not by the keys, but by the order the
