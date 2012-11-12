@@ -74,6 +74,7 @@ $messages['br'] = array(
 );
 
 /** Catalan (català)
+ * @author Arnaugir
  * @author Grondin
  * @author Àlex
  */
@@ -82,7 +83,7 @@ $messages['ca'] = array(
 	'wbc-comment-langlinks-delete' => "Element associat de Wikidata suprimit. Enllaços d'idiomes eliminats.",
 	'wbc-comment-langlinks-remove' => "S'ha desenllaçat aquesta pàgina de l'article de Wikidata. Els enllaços d'idioma s'han eliminat.",
 	'wbc-comment-langlinks-restore' => "Element associat de Wikidata recuperat. Enllaços d'idioma restaurats.",
-	'wbc-comment-langlinks-update' => "Enllaços d'idiomes actualitzats.",
+	'wbc-comment-langlinks-update' => "Enllaços d'idioma actualitzats.",
 	'wbc-editlinks' => 'Modifica els enllaços',
 	'wbc-editlinkstitle' => 'Modifica enllaços interlingües',
 );
@@ -133,13 +134,14 @@ $messages['eo'] = array(
 
 /** Spanish (español)
  * @author Armando-Martin
+ * @author Dalton2
  */
 $messages['es'] = array(
 	'wbc-desc' => 'Cliente para la extensión Wikibase',
-	'wbc-comment-langlinks-delete' => 'Se ha borrado un artículo asociado a Wikidata. Se han eliminado los enlaces de idioma.',
-	'wbc-comment-langlinks-remove' => 'Se ha eliminado un enlace a esta página de un artículo de Wikidata. Se han eliminado los enlaces de idioma.',
-	'wbc-comment-langlinks-restore' => 'Se ha restaurado un artículo asociadoa Wikidata. Se han restaurado los enlaces de idioma.',
-	'wbc-comment-langlinks-update' => 'Se han actualizado los enlaces de idioma.',
+	'wbc-comment-langlinks-delete' => 'Se ha borrado un elemento asociado a Wikidata. Se han eliminado los enlaces lingüísticos.',
+	'wbc-comment-langlinks-remove' => 'Esta página ha sido desenlazada de un elemento de Wikidata. Se han eliminado los enlaces lingüísticos',
+	'wbc-comment-langlinks-restore' => 'Se ha restaurado un elemento asociado a Wikidata. Se han restaurado los enlaces de idioma',
+	'wbc-comment-langlinks-update' => 'Se han actualizado los enlaces lingüísticos',
 	'wbc-editlinks' => 'Editar los enlaces',
 	'wbc-editlinkstitle' => 'Editar enlaces de interlengua',
 );
@@ -519,14 +521,15 @@ $messages['vi'] = array(
 
 /** Simplified Chinese (中文（简体）‎)
  * @author Linforest
+ * @author Shizhao
  * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
 	'wbc-desc' => 'Wikibase扩展客户端',
-	'wbc-comment-langlinks-delete' => '关联的 Wikidata 项已删除。删除语言链接。',
-	'wbc-comment-langlinks-remove' => '此页已在 Wikidata 被解除链接。删除语言链接',
-	'wbc-comment-langlinks-restore' => '关联的 Wikidata 项删除已被恢复。恢复语言链接',
-	'wbc-comment-langlinks-update' => '语言链接更新',
+	'wbc-comment-langlinks-delete' => '关联的维基数据项目已删除。语言链接已移除。',
+	'wbc-comment-langlinks-remove' => '本页已在维基数据解除链接。语言链接已移除。',
+	'wbc-comment-langlinks-restore' => '关联的维基数据项目已恢复。恢复语言链接',
+	'wbc-comment-langlinks-update' => '语言链接已更新',
 	'wbc-editlinks' => '编辑链接',
 	'wbc-editlinkstitle' => '编辑跨语言链接',
 );
