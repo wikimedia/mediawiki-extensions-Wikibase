@@ -97,7 +97,7 @@ class PollForChanges extends \Maintenance {
 
 		$this->addOption( 'continueinterval', "Interval (in seconds) to sleep after processing a full batch.", false, true );
 
-		$this->addOption( 'rebuildrc', "Rebuild recent changes" );
+		$this->addOption( 'rebuild', "Rebuild client data" );
 
 		parent::__construct();
 	}
@@ -150,13 +150,17 @@ class PollForChanges extends \Maintenance {
 		} else {
 			self::msg( "Polling changes from local wiki." );
 		}
-		
-		if ( $this->getOption( 'rebuildrc' ) ) {
+
+		if ( $this->getOption( 'rebuild' ) ) {
 			$dbw = wfGetDB( DB_MASTER );
 			$dbw->delete(
 				'recentchanges',
-				array( 'rc_type' => RC_EXTERNAL )
+				array( 'rc_type' => RC_EXTERNAL ),
+				__METHOD__
 			);
+
+			$dbw->delete( 'wbc_items_per_site', '*', __METHOD__ );
+			$dbw->delete( 'wbc_entity_cache', '*', __METHOD__ );
 		}
 
 		while ( !$this->done ) {
