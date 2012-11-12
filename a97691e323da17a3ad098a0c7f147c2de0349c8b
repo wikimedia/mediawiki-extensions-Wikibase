@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADMH////M\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-12T11:48:11Z",
+      "side": 1,
+      "message": "should there also be a static factory method, such as in EntityFactory, to create an entity from the serialized JSON data?",
+      "revId": "a97691e323da17a3ad098a0c7f147c2de0349c8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADMH////U\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-12T11:48:11Z",
+      "side": 1,
+      "message": "This could use the prefixed entity id in the json to determine what type of entity to construct.",
+      "revId": "a97691e323da17a3ad098a0c7f147c2de0349c8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
