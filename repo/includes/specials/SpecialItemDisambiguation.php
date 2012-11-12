@@ -50,7 +50,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 	 * @return boolean if the page call was successful
 	 */
 	public function execute( $subPage ) {
-		if ( ! parent::execute( $subPage ) ) {
+		if ( !parent::execute( $subPage ) ) {
 			return false;
 		}
 
@@ -63,10 +63,11 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 			$language = $this->getLanguage()->getCode();
 		}
 
-		$label = $request->getVal( 'label', isset( $parts[1] ) ? $parts[1] : '' );
-
-		if ( $label === '' ) {
-			$label = null;
+		if ( $request->getCheck( 'label' ) ) {
+			$label = $request->getText( 'label' );
+		}
+		else {
+			$label = isset( $parts[1] ) ? str_replace( '_', ' ', $parts[1] ) : '';
 		}
 
 		$this->switchForm( $language, $label );

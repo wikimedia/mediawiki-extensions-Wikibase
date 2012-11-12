@@ -161,7 +161,7 @@ class SpecialItemByTitle extends SpecialItemResolver {
 			. Html::closeElement( 'fieldset' )
 			. Html::closeElement( 'form' )
 		);
-		
+
 		if ( $siteExists && isset( $page ) ) {
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
