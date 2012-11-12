@@ -31,6 +31,11 @@ namespace Wikibase;
  */
 class EntityChange extends DiffChange {
 
+	const UPDATE =  'update';
+	const ADD =     'add';
+	const REMOVE =  'remove';
+	const RESTORE = 'restore';
+
 	/**
 	 * @since 0.3
 	 *
@@ -81,41 +86,10 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
-	 * @param Entity $entity
-	 * @param array|null $fields
-	 *
-	 * @return EntityChange
-	 */
-	public static function newFromEntity( Entity $entity, array $fields = null ) {
-		$instance = new static(
-			ChangesTable::singleton(),
-			$fields,
-			true
-		);
-
-		if ( !$instance->hasField( 'info' ) ) {
-			$info = array();
-			$instance->setField( 'info', $info );
-		}
-
-		$info = $instance->getField( 'info' );
-		if ( !array_key_exists( 'entity', $info ) ) {
-			$instance->setEntity( $entity );
-		}
-
-		$type = 'wikibase-' . $entity->getType() . '~' . $instance->getChangeType();
-		$instance->setField( 'type', $type );
-
-		return $instance;
-	}
-
-	/**
-	 * @since 0.3
-	 *
 	 * @return string
 	 */
 	public function getType() {
-		return $this->getEntityType() . '~' . $this->getChangeType();
+		return $this->getField( 'type' );
 	}
 
 	/**
@@ -138,8 +112,10 @@ class EntityChange extends DiffChange {
 	 *
 	 * @return string
 	 */
-	public function getChangeType() {
-		return 'change';
+	public function getAction() {
+		list(, $action ) = explode( '~', $this->getType(), 2 );
+
+		return $action;
 	}
 
 	/**
@@ -149,7 +125,7 @@ class EntityChange extends DiffChange {
 	 */
 	public function getMetadata() {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		if ( ( is_array( $info ) ) && ( array_key_exists( 'metadata', $info ) ) ) {
+		if ( array_key_exists( 'metadata', $info ) ) {
 			return $info['metadata'];
 		}
 
@@ -159,18 +135,18 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
-	 * @param array $rc
+	 * @param array $metadata
+	 *
+	 * @return bool
 	 */
 	public function setMetadata( array $metadata ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 		$validKeys = array(
-			'rc_comment',
-			'rc_curid',
-			'rc_bot',
-			'rc_this_oldid',
-			'rc_last_oldid',
-			'rc_user',
-			'rc_user_text'
+			'comment',
+			'page_id',
+			'bot',
+			'rev_id',
+			'parent_id',
+			'user_text',
 		);
 
 		if ( is_array( $metadata ) ) {
@@ -179,11 +155,26 @@ class EntityChange extends DiffChange {
 					unset( $metadata[$key] );
 				}
 			}
+
+			$metadata['comment'] = $this->getComment();
+
+			$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
 			$info['metadata'] = $metadata;
 			$this->setField( 'info', $info );
+
+			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function getComment() {
+		return 'wbc-comment-' . $this->getAction();
 	}
 
 	/**
@@ -192,4 +183,115 @@ class EntityChange extends DiffChange {
 	protected function postConstruct() {
 
 	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param \RecentChange $rc
+	 */
+	public function setMetadataFromRC( \RecentChange $rc ) {
+		$this->setMetadata( array(
+			'user_text' => $rc->getAttribute( 'rc_user_text' ),
+			'bot' => $rc->getAttribute( 'rc_bot' ),
+			'page_id' => $rc->getAttribute( 'rc_cur_id' ),
+			'rev_id' => $rc->getAttribute( 'rc_this_oldid' ),
+			'parent_id' => $rc->getAttribute( 'rc_last_oldid' ),
+			'comment' => '',
+		) );
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param \User $user
+	 */
+	public function setMetadataFromUser( \User $user ) {
+		$this->setMetadata( array(
+			'user_text' => $user->getName(),
+			'page_id' => 0,
+			'rev_id' => 0,
+			'parent_id' => 0,
+			'comment' => '',
+		) );
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param string $action The action name
+	 * @param Entity $entity
+	 * @param array $fields additional fields to set
+	 *
+	 * @return EntityChange
+	 */
+	protected static function newFromEntity( $action, Entity $entity, array $fields = null ) {
+		//FIXME: use factory based on $entity->getType()
+		if ( $entity instanceof Item ) {
+			$class = '\Wikibase\ItemChange';
+		} else {
+			$class = '\Wikibase\EntityChange';
+		}
+
+		$instance = new $class(
+			ChangesTable::singleton(),
+			$fields,
+			true
+		);
+
+		if ( !$instance->hasField( 'info' ) ) {
+			$info = array();
+			$instance->setField( 'info', $info );
+		}
+
+		$info = $instance->getField( 'info' );
+		if ( !array_key_exists( 'entity', $info ) ) {
+			$instance->setEntity( $entity );
+		}
+
+		// determines which class will be used when loading teh change from the database
+		// @todo get rid of ugly cruft
+		$type = 'wikibase-' . $entity->getType() . '~' . $action;
+		$instance->setField( 'type', $type );
+
+		return $instance;
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @param string $action The action name
+	 * @param        $action
+	 * @param Entity $oldEntity
+	 * @param Entity $newEntity
+	 * @param array  $fields additional fields to set
+	 *
+	 * @return EntityChange
+	 * @throws \MWException
+	 */
+	public static function newFromUpdate( $action, Entity $oldEntity = null, Entity $newEntity = null, array $fields = null ) {
+		if ( $oldEntity === null && $newEntity === null ) {
+			throw new \MWException( 'Either $oldEntity or $newEntity must be give.' );
+		}
+
+		if ( $oldEntity === null ) {
+			$oldEntity = EntityFactory::singleton()->newEmpty( $newEntity->getType() );
+		} elseif ( $newEntity === null ) {
+			$newEntity = EntityFactory::singleton()->newEmpty( $oldEntity->getType() );
+		}
+
+		$type = $oldEntity->getType();
+
+		if ( $type !== $newEntity->getType() ) {
+			throw new \MWException( 'Entity type mismatch' );
+		}
+
+		/**
+		 * @var EntityChange $instance
+		 */
+		$instance = self::newFromEntity( $action, $newEntity, $fields );
+		$instance->setDiff( $oldEntity->getDiff( $newEntity ) );
+
+		return $instance;
+	}
+
 }

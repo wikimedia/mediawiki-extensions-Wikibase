@@ -106,11 +106,7 @@ $wgAutoloadClasses['Wikibase\Change'] 				= $dir . 'includes/changes/Change.php'
 $wgAutoloadClasses['Wikibase\ChangeRow'] 			= $dir . 'includes/changes/ChangeRow.php';
 $wgAutoloadClasses['Wikibase\DiffChange'] 			= $dir . 'includes/changes/DiffChange.php';
 $wgAutoloadClasses['Wikibase\EntityChange']			= $dir . 'includes/changes/EntityChange.php';
-$wgAutoloadClasses['Wikibase\EntityCreation'] 		= $dir . 'includes/changes/EntityCreation.php';
-$wgAutoloadClasses['Wikibase\EntityDeletion'] 		= $dir . 'includes/changes/EntityDeletion.php';
-$wgAutoloadClasses['Wikibase\EntityRefresh'] 		= $dir . 'includes/changes/EntityRefresh.php';
-$wgAutoloadClasses['Wikibase\EntityRestore']		= $dir . 'includes/changes/EntityRestore.php';
-$wgAutoloadClasses['Wikibase\EntityUpdate'] 		= $dir . 'includes/changes/EntityUpdate.php';
+$wgAutoloadClasses['Wikibase\ItemChange']			= $dir . 'includes/changes/ItemChange.php';
 
 // includes/claims
 $wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/claim/Claim.php';

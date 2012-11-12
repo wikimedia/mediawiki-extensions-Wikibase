@@ -16,6 +16,7 @@ use Wikibase\EntityId;
  * @ingroup Test
  * @group Wikibase
  * @group WikibaseLib
+ * @group WikibaseChange
  *
  * The database group has as a side effect that temporal database tables are created. This makes
  * it possible to test without poisoning a production database.
@@ -82,11 +83,9 @@ class ChangesTableTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider newFromArrayProvider
 	 */
-	public function testGetClassForType( array $data, $loadDefaults = false ) {
-		$change = ChangesTable::singleton()->newRow( $data, $loadDefaults );
-
+	public function testGetClassForType( array $data ) {
 		// todo: test for more entity and change types
-		$this->assertEquals( 'Wikibase\EntityUpdate', ChangesTable::getClassForType( $data['type'] ) );
+		$this->assertEquals( 'Wikibase\ItemChange', ChangesTable::getClassForType( $data['type'] ) );
 	}
 
 	/**
