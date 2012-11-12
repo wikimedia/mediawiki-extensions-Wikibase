@@ -155,10 +155,7 @@ final class ClientHooks {
 	public static function onWikibasePollHandle( Change $change ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
-
-		// strip the wikibase- prefix
-		$mainType = preg_replace( '/^wikibase-/', '', $mainType );
+		$mainType = $change->getEntityType( false );
 
 		if ( in_array( $mainType, EntityFactory::singleton()->getEntityTypes() ) ) {
 
@@ -171,9 +168,9 @@ final class ClientHooks {
 				/**
 				 * @var Item $item
 				 */
-				$item = $change->getEntity();
+				$entity = $change->getEntity();
 				$siteGlobalId = Settings::get( 'siteGlobalID' );
-				$siteLink = $item->getSiteLink( $siteGlobalId );
+				$siteLink = $entity->getSiteLink( $siteGlobalId );
 				$title = null;
 
 				$info = $change->getField( 'info' );
@@ -262,17 +259,13 @@ final class ClientHooks {
 		}
 
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
-
-		$fields['entity_type'] = $entityType;
+		$fields['entity_type'] = $change->getEntityType();
 		$fields['source'] = Settings::get( 'repoBase' );
 		unset( $fields['info'] );
 
 		$params = array(
 			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
-
-		$ip = isset( $fields['ip'] ) ? $fields['ip'] : ''; //@todo: provide this!
 
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
