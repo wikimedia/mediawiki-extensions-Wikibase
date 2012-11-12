@@ -45,23 +45,23 @@ final class LibHooks {
 				'changesDatabase' => false, // local by default. Set to something LBFactory understands.
 
 				'changeHandlers' => array(
-					'wikibase-item~add' => 'Wikibase\EntityCreation',
+					'wikibase-item~add' => 'Wikibase\ItemCreation',
 					'wikibase-property~add' => 'Wikibase\EntityCreation',
 					'wikibase-query~add' => 'Wikibase\EntityCreation',
 
-					'wikibase-item~update' => 'Wikibase\EntityUpdate',
+					'wikibase-item~update' => 'Wikibase\ItemUpdate',
 					'wikibase-property~update' => 'Wikibase\EntityUpdate',
 					'wikibase-query~update' => 'Wikibase\EntityUpdate',
 
-					'wikibase-item~remove' => 'Wikibase\EntityDeletion',
+					'wikibase-item~remove' => 'Wikibase\ItemDeletion',
 					'wikibase-property~remove' => 'Wikibase\EntityDeletion',
 					'wikibase-query~remove' => 'Wikibase\EntityDeletion',
 
-					'wikibase-item~refresh' => 'Wikibase\EntityRefresh',
+					'wikibase-item~refresh' => 'Wikibase\ItemRefresh',
 					'wikibase-property~refresh' => 'Wikibase\EntityRefresh',
 					'wikibase-query~refresh' => 'Wikibase\EntityRefresh',
 
-					'wikibase-item~restore' => 'Wikibase\EntityRestore',
+					'wikibase-item~restore' => 'Wikibase\ItemRestore',
 					'wikibase-property~restore' => 'Wikibase\EntityRestore',
 					'wikibase-query~restore' => 'Wikibase\EntityRestore',
 				),
