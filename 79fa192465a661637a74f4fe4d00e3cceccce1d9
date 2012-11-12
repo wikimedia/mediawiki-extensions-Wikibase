@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "AAADOn////E\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-12T18:12:50Z",
+      "side": 1,
+      "message": "Behaviour of this method has not changed since it was added AFAIK",
+      "parentUuid": "AAADOH///+I\u003d",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADFX////Q\u003d",
         "filename": "repo/includes/actions/EditEntityAction.php",
         "patchSetId": 2
@@ -224,6 +242,24 @@
       "side": 1,
       "message": "if a variable is known to be an object or null/false, i think $obj is actually clearer and less error prone. I was actually told off in other places for using an explicite check in this case.",
       "parentUuid": "AAADFH////c\u003d",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADO3////c\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-12T18:12:50Z",
+      "side": 1,
+      "message": "But it can only be null right, not false? and what\u0027s the reason to not have an explicit check?",
+      "parentUuid": "AAADFX////o\u003d",
       "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
