@@ -41,25 +41,27 @@ class EntityCacheUpdater {
 	public function handleChange( Change $change ) {
 		list( $entityType, $updateType ) = explode( '~', $change->getType() );
 
-		$store = ClientStoreFactory::getStore();
-		$entityCache = $store->newEntityCache();
-		$siteLinkCache = $store->newSiteLinkCache();
-
 		/**
 		 * @var Entity $entity
 		 */
 		$entity = $change->getEntity();
+		$id = $change->getEntityId();
+
+		$store = ClientStoreFactory::getStore();
+		$entityCache = $store->newEntityCache();
+		$siteLinkCache = $store->newSiteLinkCache();
 
 		switch ( $updateType ) {
 			case 'remove':
-				$entityCache->deleteEntity( $entity );
-				$siteLinkCache->deleteLinksOfItem( $entity );
+				$entityCache->deleteEntity( $id );
+				$siteLinkCache->deleteLinksOfItem( $id );
 				break;
 			case 'add':
 				if ( $entityCache->hasEntity( $entity ) === false ) {
 					$entityCache->addEntity( $entity );
+					break;
 				}
-				break;
+				// Else fall through to 'update' case.
 			case 'update':
 				$entityCache->updateEntity( $entity );
 				break;

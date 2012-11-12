@@ -230,30 +230,20 @@ final class RepoHooks {
 			 */
 			$newEntity = $article->getContent()->getEntity();
 
-			if ( is_null( $revision->getParentId() ) ) {
-				$change = EntityCreation::newFromEntity( $newEntity );
-			} else {
-				$change = EntityUpdate::newFromEntities(
-					Revision::newFromId( $revision->getParentId() )->getContent()->getEntity(),
-					$newEntity
-				);
-			}
+			$parent = is_null( $revision->getParentId() )
+				? null : Revision::newFromId( $revision->getParentId() );
+
+			$change = EntityChange::newFromUpdate(
+				$parent ? EntityChange::UPDATE : EntityChange::ADD,
+				$parent ? $parent->getContent()->getEntity() : null,
+				$newEntity
+			);
 
 			$change->setFields( array(
 				'revision_id' => $revision->getId(),
 				'user_id' => $user->getId(),
 				'object_id' => $newEntity->getId()->getPrefixedId(),
 				'time' => $revision->getTimestamp(),
-			) );
-
-			$change->setMetadata( array(
-				'rc_user_id' => $revision->getUser(),
-				'rc_user_text' => $revision->getUserText(),
-				'rc_bot' => in_array( 'bot', $user->getRights() ),
-				'rc_curid' => $revision->getPage(),
-				'rc_this_oldid' => $revision->getId(),
-				'rc_last_oldid' => $revision->getParentId(),
-				'rc_comment' => $revision->getComment(),
 			) );
 
 			ChangeNotifier::singleton()->handleChange( $change );
@@ -295,23 +285,15 @@ final class RepoHooks {
 		 * @var Entity $entity
 		 */
 		$entity = $content->getEntity();
-		$change = EntityDeletion::newFromEntity( $entity );
-		$change->setFields( array(
-			//'previous_revision_id' => $wikiPage->getLatest(),
+
+		$change = EntityChange::newFromUpdate( EntityChange::REMOVE, $entity, null, array(
 			'revision_id' => 0, // there's no current revision
 			'user_id' => $user->getId(),
 			'object_id' => $entity->getId()->getPrefixedId(),
 			'time' => $logEntry->getTimestamp(),
 		) );
 
-		$change->setMetadata( array(
-			'rc_user_id' => $user->getId(),
-			'rc_user_text' => $user->getName(),
-			'rc_curid' => 0,
-			'rc_this_oldid' => 0,
-			'rc_last_oldid' => 0,
-			'rc_comment' => $wikiPage->getTitle()->getText() . " deleted.",
-		) );
+		$change->setMetadataFromUser( $user );
 
 		ChangeNotifier::singleton()->handleChange( $change );
 
@@ -344,23 +326,42 @@ final class RepoHooks {
 
 		if ( $content ) {
 			$entity = $content->getEntity();
+
 			$rev = Revision::newFromId( $revId );
 
-			$change = EntityRestore::newFromEntity( $entity );
-
-			// TODO: Use timestamp of log entry, but needs core change.
-			// This hook is called before the log entry is created.
-			$change->setFields( array(
+			$userId = $rev->getUser();
+			$change = EntityChange::newFromUpdate( EntityChange::RESTORE, null, $entity, array(
+				// TODO: Use timestamp of log entry, but needs core change.
+				// This hook is called before the log entry is created.
 				'revision_id' => $revId,
-				'user_id' => $rev->getUser(),
+				'user_id' => $userId,
 				'object_id' => $entity->getId()->getPrefixedId(),
 				'time' => wfTimestamp( TS_MW, wfTimestampNow() )
 			) );
+
+			$user = User::newFromId( $userId );
+			$change->setMetadataFromUser( $user );
 
 			ChangeNotifier::singleton()->handleChange( $change );
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
+		return true;
+	}
+
+	public static function onRecentChangeSave( $rc ) {
+		if ( $rc->getAttribute( 'rc_log_type' ) === null ) {
+			$revision = \Revision::newFromId( $rc->getAttribute( 'rc_this_oldid' ) );
+			$change = ChangesTable::singleton()->selectRow(
+				null,
+				array( 'revision_id' => $rc->getAttribute( 'rc_this_oldid' ) )
+			);
+
+			if ( $change ) {
+				$change->setMetadataFromRC( $rc );
+				$change->save();
+			}
+		}
 		return true;
 	}
 

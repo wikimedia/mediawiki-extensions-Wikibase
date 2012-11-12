@@ -148,14 +148,14 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity $entity
+	 * @param EntityId $id the ID of the entity to deleted
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteEntity( Entity $entity ) {
+	public function deleteEntity( EntityId $id ) {
 		return $this->delete( array(
-			'entity_id' => $entity->getId()->getNumericId(),
-			'entity_type' => $entity->getType(),
+			'entity_id' => $id->getNumericId(),
+			'entity_type' => $id->getEntityType(),
 		), __METHOD__ );
 	}
 

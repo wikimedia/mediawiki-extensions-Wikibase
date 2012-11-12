@@ -584,7 +584,7 @@ abstract class EntityObject implements Entity {
 			$this->data['entity'] = $this->getPrefixedId();
 		}
 
-		$this->data['claims'] = $this->getStubbedClaims( $this->data['claims'] );
+		$this->data['claims'] = $this->getStubbedClaims( empty( $this->data['claims'] ) ? array() : $this->data['claims'] );
 	}
 
 	/**

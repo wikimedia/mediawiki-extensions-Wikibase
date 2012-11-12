@@ -47,12 +47,12 @@ interface SiteLinkCache extends SiteLinkLookup {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param EntityId $itemId
 	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteLinksOfItem( Item $item, $function = null );
+	public function deleteLinksOfItem( EntityId $itemId, $function = null );
 
 	/**
 	 * Clears all sitelinks from the cache.

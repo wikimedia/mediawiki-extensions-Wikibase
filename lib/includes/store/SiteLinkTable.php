@@ -68,7 +68,7 @@ class SiteLinkTable implements SiteLinkCache {
 
 		$dbw = wfGetDB( DB_MASTER );
 	
-		$success = $this->deleteLinksOfItem( $item, $function );
+		$success = $this->deleteLinksOfItem( $item->getId(), $function );
 
 		if ( !$success ) {
 			return false;
@@ -115,15 +115,15 @@ class SiteLinkTable implements SiteLinkCache {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Item $item
+	 * @param EntityId $itemId
 	 * @param string|null $function
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteLinksOfItem( Item $item, $function = null ) {
+	public function deleteLinksOfItem( EntityId $itemId, $function = null ) {
 		return wfGetDB( DB_MASTER )->delete(
 			$this->table,
-			array( 'ips_item_id' => $item->getId()->getNumericId() ),
+			array( 'ips_item_id' => $itemId->getNumericId() ),
 			is_null( $function ) ? __METHOD__ : $function
 		);
 	}

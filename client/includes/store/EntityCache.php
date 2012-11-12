@@ -73,11 +73,11 @@ interface EntityCache {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity $entity
+	 * @param EntityId $id the ID of the entity to deleted
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function deleteEntity( Entity $entity );
+	public function deleteEntity( EntityId $id );
 
 	/**
 	 * Returns the entity with provided type and entity id or false is there is no such
