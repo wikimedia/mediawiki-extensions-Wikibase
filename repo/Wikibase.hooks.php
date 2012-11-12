@@ -241,7 +241,12 @@ final class RepoHooks {
 			if ( is_null( $revision->getParentId() ) ) {
 				$change = EntityCreation::newFromEntity( $newEntity );
 			} else {
-				$change = EntityUpdate::newFromEntities(
+				if ( $newEntity->getType() === Item::ENTITY_TYPE ) {
+					$class = '\Wikibase\ItemUpdate';
+				} else {
+					$class = '\Wikibase\EntityUpdate';
+				}
+				$change = $class::newFromEntities(
 					Revision::newFromId( $revision->getParentId() )->getContent()->getEntity(),
 					$newEntity
 				);
@@ -254,15 +259,8 @@ final class RepoHooks {
 				'time' => $revision->getTimestamp(),
 			) );
 
-			$change->setMetadata( array(
-				'rc_user_id' => $revision->getUser(),
-				'rc_user_text' => $revision->getUserText(),
-				'rc_bot' => in_array( 'bot', $user->getRights() ),
-				'rc_curid' => $revision->getPage(),
-				'rc_this_oldid' => $revision->getId(),
-				'rc_last_oldid' => $revision->getParentId(),
-				'rc_comment' => $revision->getComment(),
-			) );
+			$change->setChangeRevision( ChangeRevisionObject::newFromRevision( $revision ) );
+			$change->setMetadata( $changeRevision );
 
 			ChangeNotifier::singleton()->handleChange( $change );
 		}
@@ -305,21 +303,14 @@ final class RepoHooks {
 		$entity = $content->getEntity();
 		$change = EntityDeletion::newFromEntity( $entity );
 		$change->setFields( array(
-			//'previous_revision_id' => $wikiPage->getLatest(),
 			'revision_id' => 0, // there's no current revision
 			'user_id' => $user->getId(),
 			'object_id' => $entity->getId()->getPrefixedId(),
 			'time' => $logEntry->getTimestamp(),
 		) );
 
-		$change->setMetadata( array(
-			'rc_user_id' => $user->getId(),
-			'rc_user_text' => $user->getName(),
-			'rc_curid' => 0,
-			'rc_this_oldid' => 0,
-			'rc_last_oldid' => 0,
-			'rc_comment' => $wikiPage->getTitle()->getText() . " deleted.",
-		) );
+		$change->setChangeRevision( ChangeRevisionObject::newFromUser( $user ) );
+		$change->setMetadata( $changeRevision );
 
 		ChangeNotifier::singleton()->handleChange( $change );
 
@@ -355,15 +346,20 @@ final class RepoHooks {
 			$rev = Revision::newFromId( $revId );
 
 			$change = EntityRestore::newFromEntity( $entity );
+			$userId = $rev->getUser();
 
 			// TODO: Use timestamp of log entry, but needs core change.
 			// This hook is called before the log entry is created.
 			$change->setFields( array(
 				'revision_id' => $revId,
-				'user_id' => $rev->getUser(),
+				'user_id' => $userId,
 				'object_id' => $entity->getId()->getPrefixedId(),
 				'time' => wfTimestamp( TS_MW, wfTimestampNow() )
 			) );
+
+			$user = User::newFromId( $userId );
+			$change->setChangeRevision( ChangeRevisionObject::newFromUser( $user ) );
+			$change->setMetadata( $changeRevision );
 
 			ChangeNotifier::singleton()->handleChange( $change );
 		}

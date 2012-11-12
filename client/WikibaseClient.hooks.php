@@ -155,10 +155,7 @@ final class ClientHooks {
 	public static function onWikibasePollHandle( Change $change ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		list( $mainType, ) = explode( '~', $change->getType() ); //@todo: ugh! provide getter for entity type!
-
-		// strip the wikibase- prefix
-		$mainType = preg_replace( '/^wikibase-/', '', $mainType );
+		$mainType = $change->getEntityType( false );
 
 		if ( in_array( $mainType, EntityFactory::singleton()->getEntityTypes() ) ) {
 
@@ -167,13 +164,13 @@ final class ClientHooks {
 
 			// The following code is a temporary hack to invalidate the cache.
 			// TODO: create cache invalidater that works with all clients for this cluster
-			if ( $mainType == Item::ENTITY_TYPE ) { //FIXME: handle all kinds of entities!
+			if ( in_array( $mainType, EntityFactory::singleton()->getEntityTypes() ) ) {
 				/**
 				 * @var Item $item
 				 */
-				$item = $change->getEntity();
+				$entity = $change->getEntity();
 				$siteGlobalId = Settings::get( 'siteGlobalID' );
-				$siteLink = $item->getSiteLink( $siteGlobalId );
+				$siteLink = $entity->getSiteLink( $siteGlobalId );
 				$title = null;
 
 				$info = $change->getField( 'info' );
@@ -182,7 +179,7 @@ final class ClientHooks {
 					$page = $siteLink->getPage();
 
 					if ( array_key_exists( 'diff', $info ) ) {
-						$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
+						$siteLinkChangeOperations = $change->getSiteLinkChangeOperations();
 
 						// handle when a link to this client is changed to some other page
 						// remove lang links on the old page, add them to new page that item links to
@@ -262,17 +259,13 @@ final class ClientHooks {
 		}
 
 		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		list( $entityType, $changeType ) = explode( '~', $change->getType() ); //@todo: ugh! provide getters!
-
-		$fields['entity_type'] = $entityType;
+		$fields['entity_type'] = $change->getEntityType();
 		$fields['source'] = Settings::get( 'repoBase' );
 		unset( $fields['info'] );
 
 		$params = array(
 			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
 		);
-
-		$ip = isset( $fields['ip'] ) ? $fields['ip'] : ''; //@todo: provide this!
 
 		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
 
