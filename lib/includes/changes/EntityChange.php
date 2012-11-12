@@ -33,6 +33,12 @@ class EntityChange extends DiffChange {
 
 	/**
 	 * @since 0.3
+	 * @var ChangeRevision
+	 */
+	protected $changeRevision;
+
+	/**
+	 * @since 0.3
 	 *
 	 * @return Entity
 	 * @throws \MWException
@@ -145,12 +151,57 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
+	 * @param ChangeRevision $changeRevision
+	 */
+	public function setChangeRevision( ChangeRevision $changeRevision ) {
+		$this->changeRevision = $changeRevision;
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @return ChangeRevision
+	 */
+	public function getChangeRevision() {
+		return $this->changeRevision;
+	}
+
+	/**
+	 * @since 0.3
+	 *
 	 * @return array|bool
 	 */
 	public function getMetadata() {
+		if ( $this->changeRevision === null ) {
+			$this->changeRevision= ChangeRevisionObject::newEmpty();
+		}
+
+		if ( $this->changeRevision->getMetadata() === false ) {
+			$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
+			if ( array_key_exists( 'metadata', $info ) ) {
+				$this->setMetadata( $info['metadata'] );
+			}
+		}
+
+		return $this->changeRevision->getMetadata();
+	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param array $metadata
+	 */
+	public function setMetadata( array $metadata ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		if ( ( is_array( $info ) ) && ( array_key_exists( 'metadata', $info ) ) ) {
-			return $info['metadata'];
+
+		if ( $this->changeRevision !== null ) {
+			if ( $metadata !== false ) {
+				$metadata['comment'] = $this->getAutocomment();
+				$this->changeRevision->setMetadata( $metadata );
+				$info['metadata'] = $metadata;
+    	        $this->setField( 'info', $info );
+				return true;
+			}
 		}
 
 		return false;
@@ -159,31 +210,10 @@ class EntityChange extends DiffChange {
 	/**
 	 * @since 0.3
 	 *
-	 * @param array $rc
+	 * @return string
 	 */
-	public function setMetadata( array $metadata ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$validKeys = array(
-			'rc_comment',
-			'rc_curid',
-			'rc_bot',
-			'rc_this_oldid',
-			'rc_last_oldid',
-			'rc_user',
-			'rc_user_text'
-		);
-
-		if ( is_array( $metadata ) ) {
-			foreach ( array_keys( $metadata ) as $key ) {
-				if ( !in_array( $key, $validKeys ) ) {
-					unset( $metadata[$key] );
-				}
-			}
-			$info['metadata'] = $metadata;
-			$this->setField( 'info', $info );
-		}
-
-		return false;
+	public function getAutocomment() {
+		return '';
 	}
 
 	/**
