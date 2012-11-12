@@ -47,7 +47,7 @@ class EntityUpdate extends EntityChange {
 		}
 
 		$typeMap = array(
-			Item::ENTITY_TYPE => '\Wikibase\EntityUpdate',
+			Item::ENTITY_TYPE => '\Wikibase\ItemUpdate',
 			Property::ENTITY_TYPE => '\Wikibase\EntityUpdate',
 			Query::ENTITY_TYPE => '\Wikibase\EntityUpdate',
 		);
@@ -88,5 +88,4 @@ class EntityUpdate extends EntityChange {
 	public final function getChangeType() {
 		return 'update';
 	}
-
 }
