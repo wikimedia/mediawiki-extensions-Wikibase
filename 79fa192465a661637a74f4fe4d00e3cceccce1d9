@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADOH///+4\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-12T16:39:21Z",
+      "side": 1,
+      "message": "Correct: it only means that the edit got successfully merged into the latest revision.\n\nHowever, note that if you try to save unchanged content, the save will not fail. It will not create a new revision, but still tell you that it was successful.",
+      "parentUuid": "AAADFX////g\u003d",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADFX////c\u003d",
         "filename": "repo/includes/EditEntity.php",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-11T02:34:57Z",
       "side": 1,
       "message": "Empty patch means that the save will fail.",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADOH///+0\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-12T16:39:21Z",
+      "side": 1,
+      "message": "No it doesn\u0027t. See above. The edit then has no effect, but that\u0027s nto the same as failing. Anyway, have a look at the code of Revision::doEditContent, starting from this line:\n\n$changed \u003d !$content-\u003eequals( $old_content );",
+      "parentUuid": "AAADFX////c\u003d",
       "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAADOH///+I\u003d",
+        "filename": "repo/includes/EditEntity.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-12T16:39:21Z",
+      "side": 1,
+      "message": "Ah. When I tried that a while back, it was counting everything, not just atomic ops. Now it seems to do what I need. Thanks!",
+      "parentUuid": "AAADFH////k\u003d",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADFX////Q\u003d",
         "filename": "repo/includes/actions/EditEntityAction.php",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2012-11-11T02:34:57Z",
       "side": 1,
       "message": "Need base?",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADOH///+E\u003d",
+        "filename": "repo/includes/actions/EditEntityAction.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-12T16:39:21Z",
+      "side": 1,
+      "message": "No. The intention is to restore the given revision as it was. Why and how would we patch? This is not an edit that is based on anything.",
+      "parentUuid": "AAADFX////Q\u003d",
       "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "AAADOH///90\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-12T16:39:21Z",
+      "side": 1,
+      "message": "This mainly deals with the relevant failure modes, so it\u0027s handy to have it here.",
+      "parentUuid": "AAADFH////g\u003d",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADFH////c\u003d",
         "filename": "repo/includes/api/Api.php",
         "patchSetId": 2
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "AAADFX////o\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-12T16:39:21Z",
+      "side": 1,
+      "message": "if a variable is known to be an object or null/false, i think $obj is actually clearer and less error prone. I was actually told off in other places for using an explicite check in this case.",
+      "parentUuid": "AAADFH////c\u003d",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADFH////Y\u003d",
         "filename": "repo/includes/api/Api.php",
         "patchSetId": 2
@@ -115,6 +223,24 @@
       "writtenOn": "2012-11-11T00:54:59Z",
       "side": 1,
       "message": "please to name it $revision? :p",
+      "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADOH///+A\u003d",
+        "filename": "repo/includes/api/Api.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-12T16:39:21Z",
+      "side": 1,
+      "message": "bah. oh, ok.",
+      "parentUuid": "AAADFH////Y\u003d",
       "revId": "79fa192465a661637a74f4fe4d00e3cceccce1d9",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
