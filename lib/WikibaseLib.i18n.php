@@ -112,14 +112,15 @@ $messages['eo'] = array(
 
 /** Spanish (español)
  * @author Armando-Martin
+ * @author Dalton2
  */
 $messages['es'] = array(
-	'wikibaselib-desc' => 'Contiene una funcionalidad común para las extensiones de Wikibase y Wikibase Client.',
+	'wikibaselib-desc' => 'Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.',
 	'wikibaselib-entity-item' => 'elemento',
 	'wikibaselib-entity-property' => 'propiedad',
 	'wikibaselib-entity-query' => 'consulta',
 	'datatypes-type-wikibase-item' => 'Elemento',
-	'datatypes-type-commonsMedia' => 'Archivo multimedia Commons',
+	'datatypes-type-commonsMedia' => 'Archivo multimedia de Commons',
 );
 
 /** Persian (فارسی)
@@ -397,6 +398,7 @@ $messages['vi'] = array(
 );
 
 /** Simplified Chinese (中文（简体）‎)
+ * @author Shizhao
  * @author Yfdyh000
  */
 $messages['zh-hans'] = array(
@@ -404,5 +406,5 @@ $messages['zh-hans'] = array(
 	'wikibaselib-entity-property' => '属性',
 	'wikibaselib-entity-query' => '查询',
 	'datatypes-type-wikibase-item' => '项目',
-	'datatypes-type-commonsMedia' => '共享媒体文件',
+	'datatypes-type-commonsMedia' => '共享资源媒体文件',
 );
