@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADJn////g\u003d",
+        "filename": "client/includes/EntityCacheUpdater.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-12T00:14:29Z",
+      "side": 1,
+      "message": "if ( !$entityCache-\u003ehasEntity( $entity ) ) {\n\nthis method returns a boolean, so no need to do a strict check",
+      "revId": "d8b54745434a29d1c128070610f2b85765fe1553",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
