@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 use Wikibase\ReferenceList;
 use Wikibase\ReferenceObject;
-use Wikibase\Hashable;
 use Wikibase\Reference;
 
 /**

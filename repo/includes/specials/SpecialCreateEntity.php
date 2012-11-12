@@ -1,6 +1,6 @@
 <?php
 
-use Wikibase\Entity, Wikibase\EntityContent;
+use Wikibase\EntityContent;
 use Wikibase\Autocomment;
 
 /**

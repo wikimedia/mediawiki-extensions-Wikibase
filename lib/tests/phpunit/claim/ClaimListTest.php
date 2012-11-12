@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 use Wikibase\ClaimList;
 use Wikibase\ClaimObject;
-use Wikibase\Hashable;
 use Wikibase\Claim;
 
 /**

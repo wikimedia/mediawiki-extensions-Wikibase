@@ -3,7 +3,6 @@
 namespace Wikibase\Test;
 use Wikibase\StatementList;
 use Wikibase\StatementObject;
-use Wikibase\Hashable;
 use Wikibase\PropertyNoValueSnak;
 use Wikibase\Statement;
 
