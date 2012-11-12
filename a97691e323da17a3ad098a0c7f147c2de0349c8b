@@ -19,6 +19,41 @@
     },
     {
       "key": {
+        "uuid": "AAADOH///+w\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-12T16:14:38Z",
+      "side": 1,
+      "message": "should not be static, see Serializable interface",
+      "parentUuid": "AAADMH////M\u003d",
+      "revId": "a97691e323da17a3ad098a0c7f147c2de0349c8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADOH///+o\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-12T16:14:38Z",
+      "side": 1,
+      "message": "this is likely to not work, will add a test and try to fix if indeed broken",
+      "revId": "a97691e323da17a3ad098a0c7f147c2de0349c8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADMH////U\u003d",
         "filename": "lib/includes/entity/EntityObject.php",
         "patchSetId": 2
@@ -30,6 +65,24 @@
       "writtenOn": "2012-11-12T11:48:11Z",
       "side": 1,
       "message": "This could use the prefixed entity id in the json to determine what type of entity to construct.",
+      "revId": "a97691e323da17a3ad098a0c7f147c2de0349c8b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADOH///+s\u003d",
+        "filename": "lib/includes/entity/EntityObject.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-12T16:14:38Z",
+      "side": 1,
+      "message": "this is not needed, see Serializable interface",
+      "parentUuid": "AAADMH////U\u003d",
       "revId": "a97691e323da17a3ad098a0c7f147c2de0349c8b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
