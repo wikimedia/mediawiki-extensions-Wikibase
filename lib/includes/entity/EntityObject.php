@@ -114,6 +114,18 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
+	 * @since 0.3
+	 *
+	 * @deprecated Do not rely on this method being present, it will be removed soonish.
+	 */
+	public function __wakeup() {
+		// Compatibility with 0.1 and 0.2 serializations.
+		if ( is_int( $this->id ) ) {
+			$this->id = new EntityId( $this->getType(), $this->id );
+		}
+	}
+
+	/**
 	 * Returns a unique id prefix for the type of entity.
 	 *
 	 * @since 0.1
