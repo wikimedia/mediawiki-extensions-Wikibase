@@ -4,12 +4,29 @@
  * Enables accessing items by providing the label of the item and the language of the label.
  * A result page is shown, disambiguating between multiple results if necessary.
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
  * @since 0.1
  *
  * @file SpecialItemDisambiguation.php
  * @ingroup Wikibase
  *
  * @licence GNU GPL v2+
+ *
+ * @author John Erling Blad < jeblad@gmail.com >
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class SpecialItemDisambiguation extends SpecialItemResolver {
@@ -39,12 +56,15 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 
 		// Setup
 		$request = $this->getRequest();
-		$parts = ( $subPage === '' ) ? array() : explode( '/', $subPage, 2 );
+		$parts = $subPage === '' ? array() : explode( '/', $subPage, 2 );
 		$language = $request->getVal( 'language', isset( $parts[0] ) ? $parts[0] : '' );
+
 		if ( $language === '' ) {
 			$language = $this->getLanguage()->getCode();
 		}
+
 		$label = $request->getVal( 'label', isset( $parts[1] ) ? $parts[1] : '' );
+
 		if ( $label === '' ) {
 			$label = null;
 		}
@@ -64,6 +84,7 @@ class SpecialItemDisambiguation extends SpecialItemResolver {
 				if ( ( Language::isValidBuiltInCode( $language ) && ( Language::fetchLanguageName( $language ) !== "" ) ) ) {
 					// No valid language code
 					$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
+
 					if ( $language === $this->getLanguage()->getCode() ) {
 						$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-create', $label );
 					}
