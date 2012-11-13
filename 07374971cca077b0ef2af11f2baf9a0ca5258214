@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADUn///+M\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T18:21:45Z",
+      "side": 1,
+      "message": "jquery.json",
+      "revId": "07374971cca077b0ef2af11f2baf9a0ca5258214",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
