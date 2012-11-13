@@ -125,7 +125,9 @@ final class LibHooks {
 	public static function registerPhpUnitTests( array &$files ) {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
+			'changes/ChangeRow',
 			'changes/DiffChange',
+			'changes/EntityChange',
 			'changes/EntityCreation',
 			'changes/EntityDeletion',
 			'changes/EntityRefresh',

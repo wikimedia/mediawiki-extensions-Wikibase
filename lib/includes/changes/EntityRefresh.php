@@ -28,55 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityRefresh extends DiffChange {
-
-	/**
-	 * @since 0.1
-	 *
-	 * @return Entity
-	 * @throws \MWException
-	 */
-	public function getEntity() {
-		$info = $this->getField( 'info' );
-
-		if ( !array_key_exists( 'entity', $info ) ) {
-			throw new \MWException( 'Cannot get the entity when it has not been set yet.' );
-		}
-
-		return $info['entity'];
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @param Entity $entity
-	 */
-	public function setEntity( Entity $entity ) {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$info['entity'] = $entity;
-		$this->setField( 'info', $info );
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @param Entity $entity
-	 * @param array|null $fields
-	 *
-	 * @return EntityRefresh
-	 */
-	public static function newFromEntity( Entity $entity, array $fields = null ) {
-		$instance = new static(
-			ChangesTable::singleton(),
-			$fields,
-			true
-		);
-
-		$instance->setEntity( $entity );
-		$instance->setField( 'type', $instance->getType() );
-
-		return $instance;
-	}
+class EntityRefresh extends EntityChange {
 
 	/**
 	 * @see Change::getChangeType
