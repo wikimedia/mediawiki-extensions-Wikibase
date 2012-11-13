@@ -52,20 +52,15 @@ class ClaimSerializer extends ApiSerializerObject {
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
 		$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $snakSerializer, $this->getResult(), $this->options );
-		$qualifiers = $snaksSerializer->getSerialized( $claim->getQualifiers() );
-		if ($qualifiers !== false ) {
-			$serialization['qualifiers'] = $qualifiers;
-		}
+		$serialization['qualifiers'] = $snaksSerializer->getSerialized( $claim->getQualifiers() );
+
+		$serialization['type'] = $claim instanceof Statement ? 'statement' : 'claim';
 
 		if ( $claim instanceof Statement ) {
 			$serialization['rank'] = $claim->getRank();
 
 			$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->getResult(), $this->options );
-			$references = $snaksSerializer->getSerialized( $claim->getReferences() );
-			if ( $references !== false ) {
-				$serialization['references'] = $references;
-			}
-
+			$serialization['references'] = $snaksSerializer->getSerialized( $claim->getReferences() );
 		}
 
 		return $serialization;
