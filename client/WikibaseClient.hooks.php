@@ -179,7 +179,7 @@ final class ClientHooks {
 					$page = $siteLink->getPage();
 
 					if ( array_key_exists( 'diff', $info ) ) {
-						$siteLinkChangeOperations = $change->getDiff()->getSiteLinkDiff()->getTypeOperations( 'change' );
+						$siteLinkChangeOperations = $change->getSiteLinkChangeOperations();
 
 						// handle when a link to this client is changed to some other page
 						// remove lang links on the old page, add them to new page that item links to
