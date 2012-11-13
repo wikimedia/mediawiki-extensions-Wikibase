@@ -115,6 +115,10 @@ $wgAutoloadClasses['Wikibase\EntityRefresh'] 		= $dir . 'includes/changes/Entity
 $wgAutoloadClasses['Wikibase\EntityRestore']		= $dir . 'includes/changes/EntityRestore.php';
 $wgAutoloadClasses['Wikibase\EntityUpdate'] 		= $dir . 'includes/changes/EntityUpdate.php';
 
+// includes/changes - revision
+$wgAutoloadClasses['Wikibase\ChangeRevision']		= $dir . 'includes/changes/ChangeRevision.php';
+$wgAutoloadClasses['Wikibase\ChangeRevisionObject']	= $dir . 'includes/changes/ChangeRevisionObject.php';
+
 // includes/claims
 $wgAutoloadClasses['Wikibase\Claim'] 				= $dir . 'includes/claim/Claim.php';
 $wgAutoloadClasses['Wikibase\ClaimAggregate'] 		= $dir . 'includes/claim/ClaimAggregate.php';

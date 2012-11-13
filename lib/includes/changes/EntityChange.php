@@ -33,6 +33,12 @@ class EntityChange extends DiffChange {
 
 	/**
 	 * @since 0.3
+	 * @var ChangeRevision
+	 */
+	protected $changeRevision;
+
+	/**
+	 * @since 0.3
 	 *
 	 * @return Entity
 	 * @throws \MWException
@@ -148,39 +154,24 @@ class EntityChange extends DiffChange {
 	 * @return array|bool
 	 */
 	public function getMetadata() {
-		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		if ( ( is_array( $info ) ) && ( array_key_exists( 'metadata', $info ) ) ) {
-			return $info['metadata'];
-		}
-
-		return false;
+		return $this->changeRevision->getMetadata();
 	}
 
 	/**
 	 * @since 0.3
 	 *
-	 * @param array $rc
+	 * @param array $metadata
 	 */
-	public function setMetadata( array $metadata ) {
+	public function setMetadata( ChangeRevision $changeRevision ) {
 		$info = $this->hasField( 'info' ) ? $this->getField( 'info' ) : array();
-		$validKeys = array(
-			'rc_comment',
-			'rc_curid',
-			'rc_bot',
-			'rc_this_oldid',
-			'rc_last_oldid',
-			'rc_user',
-			'rc_user_text'
-		);
 
-		if ( is_array( $metadata ) ) {
-			foreach ( array_keys( $metadata ) as $key ) {
-				if ( !in_array( $key, $validKeys ) ) {
-					unset( $metadata[$key] );
-				}
-			}
+		$this->changeRevision = $changeRevision;
+		$metadata = $this->changeRevision->getMetadata();
+
+		if ( $metadata !== false ) {
 			$info['metadata'] = $metadata;
-			$this->setField( 'info', $info );
+            $this->setField( 'info', $info );
+			return true;
 		}
 
 		return false;
