@@ -87,6 +87,23 @@
     },
     {
       "key": {
+        "uuid": "AAADT3///48\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-13T15:05:55Z",
+      "side": 1,
+      "message": "newFromEntity handles setting the type. this overrides ChangeRow",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADT3///9E\u003d",
         "filename": "lib/includes/changes/EntityUpdate.php",
         "patchSetId": 14
