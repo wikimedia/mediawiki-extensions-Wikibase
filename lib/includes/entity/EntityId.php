@@ -46,7 +46,7 @@ use MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class EntityId {
+class EntityId implements \Immutable {
 
 	/**
 	 * The type of the entity to which the ID belongs.

@@ -5,6 +5,8 @@ namespace Wikibase;
 /**
  * Interface for immutable objects.
  *
+ * TODO: remove
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -28,6 +30,6 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Immutable {
+interface Immutable extends \Immutable {
 
 }
