@@ -199,8 +199,8 @@ return call_user_func( function() {
 				'wikibase.utilities.jQuery.ui.inputAutoExpand',
 				'wikibase.utilities.jQuery.ui.tagadata',
 				'jquery.ui.suggester',
-				'jquery.ui.siteselector',
 				'jquery.ui.entityselector',
+				'jquery.wikibase.siteselector',
 				'mediawiki.api',
 				'mediawiki.Title',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
@@ -270,13 +270,13 @@ return call_user_func( function() {
 			)
 		),
 
-		'jquery.ui.siteselector' => $moduleTemplate + array(
+		'jquery.wikibase.siteselector' => $moduleTemplate + array(
 			'scripts' => array(
-				'jquery.ui/jquery.ui.siteselector.js'
+				'jquery.wikibase/jquery.wikibase.siteselector.js'
 			),
 			'dependencies' => array(
 				'jquery.ui.suggester',
-				'jquery.ui.resizable'
+				'wikibase'
 			)
 		),
 
