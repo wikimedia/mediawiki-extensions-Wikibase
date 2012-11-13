@@ -88,5 +88,4 @@ class EntityUpdate extends EntityChange {
 	public final function getChangeType() {
 		return 'update';
 	}
-
 }
