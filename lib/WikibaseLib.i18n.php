@@ -282,10 +282,16 @@ $messages['ms'] = array(
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
+ * @author Event
  * @author Jeblad
  */
 $messages['nb'] = array(
 	'wikibaselib-desc' => 'Felles funksjonalitet for Wikibase, det strukturerte datalageret',
+	'wikibaselib-entity-item' => 'objekt',
+	'wikibaselib-entity-property' => 'egenskap',
+	'wikibaselib-entity-query' => 'spørring',
+	'datatypes-type-wikibase-item' => 'Objekt',
+	'datatypes-type-commonsMedia' => 'Commons mediafil',
 );
 
 /** Dutch (Nederlands)

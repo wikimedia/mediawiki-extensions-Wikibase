@@ -579,6 +579,13 @@ $messages['ar'] = array(
 	'wikibase-restoreold' => 'استرجاع',
 );
 
+/** South Azerbaijani (South Azerbaijani)
+ * @author Erdemaslancan
+ */
+$messages['azb'] = array(
+	'wikibase-itembytitle-lookup-page' => 'مقاله:',
+);
+
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
@@ -1298,7 +1305,7 @@ $messages['es'] = array(
 	'wikibase-sitelinksedittool-full' => 'Los enlaces a las páginas están ya definidos para todos los sitios conocidos.',
 	'wikibase-disambiguation-title' => 'Desambiguación para "$1"',
 	'wb-special-createitem-new-item-notification' => 'Nuevo elemento $1 creado y redirigido a la página correspondiente. Volver a  $2.',
-	'wikibase-aliases-label' => 'También conocido como:',
+	'wikibase-aliases-label' => 'Alias y nombres alternativos:',
 	'wikibase-aliases-input-help-message' => 'Si este conjunto de datos es conocido bajo más de un nombre en particular, puede escribir sus alias y sinónimos, para que así pueda ser encontrado por sus nombres alternativos.',
 	'wikibase-aliases-empty' => 'No hay alias definidos.',
 	'wikibase-datatype-label' => 'Tipo de dato:',
@@ -1647,6 +1654,12 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetdescription-remove' => 'Poistettu [$2]-kuvaus',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Lisätty sivustokohtainen [$2]-linkki',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Poistettu sivustokohtainen [$2]-linkki',
+	'right-alias-add' => 'Lisätä alias',
+	'right-alias-remove' => 'Poistaa alias',
+	'right-label-remove' => 'Poistaa otsikko',
+	'right-label-update' => 'Päivittää otsikko',
+	'right-description-remove' => 'Poistaa kuvaus',
+	'right-description-update' => 'Päivittää kuvaus',
 );
 
 /** French (français)
@@ -1797,8 +1810,8 @@ $messages['fr'] = array(
 	'wikibase-item-summary-wbsetlabel-remove' => 'Retrait de l’étiquette [$2]',
 	'wikibase-item-summary-wbsetdescription-set' => 'Modification de la description [$2]',
 	'wikibase-item-summary-wbsetdescription-remove' => 'Retrait de la description [$2]',
-	'wikibase-item-summary-wbsetsitelink-set' => 'Liens [$2] spécifique au site ajouté',
-	'wikibase-item-summary-wbsetsitelink-remove' => 'Lien [$2] spécifique au site supprimé',
+	'wikibase-item-summary-wbsetsitelink-set' => 'Liens spécifique au site [$2] ajouté',
+	'wikibase-item-summary-wbsetsitelink-remove' => 'Lien spécifique au site [$2] supprimé',
 	'wikibase-item-summary-wbsetaliases-set' => 'Paramètre [ $2 ] {{plural:$1|alias|alias}}',
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Ajout et retrait {{plural:$1|d’un alias|d’alias}} [$2]',
 	'wikibase-item-summary-wbsetaliases-add' => 'Ajout {{plural:$1|d’un alias|d’alias}} [$2]',
@@ -1811,6 +1824,12 @@ $messages['fr'] = array(
 	'wikibase-item-summary-special-create-property' => 'Une propriété [$2] créée avec {{plural:$1|une valeur|des valeurs}}',
 	'wikibase-item-summary-special-create-query' => 'Une requête [$2] créée avec {{plural:$1|une valeur|des valeurs}}',
 	'content-model-1001' => 'Élément Wikibase',
+	'right-item-create' => 'Créer un nouvel élément',
+	'right-alias-add' => 'Ajouter des alias',
+	'right-alias-set' => 'Modifier des alias',
+	'right-alias-remove' => 'Retirer des alias',
+	'right-description-remove' => 'Retirer des descriptions',
+	'right-description-update' => 'Modifier des descriptions',
 );
 
 /** Franco-Provençal (arpetan)
@@ -2523,6 +2542,11 @@ $messages['ilo'] = array(
 	'special-createitem' => 'Agpartuat ti baro a banag',
 	'wikibase-createitem-intro' => 'Sakbay nga agaramidka ti baro a tagikua, ipagarupam akitaen dagiti addan a tagikua. Ti panagpartuat ti maysa a baro nasken nga ibagam ti etiketa wenno ti panagipalpalawag ti $1.',
 	'wikibase-createitem-fieldset' => 'Agpartuat ti baro a banag',
+	'wikibase-createitem-site' => 'Sitio ti immuna a naisilpo a panid',
+	'wikibase-createitem-page' => 'Nagan ti immuna a naisilpo a panid',
+	'wikibase-createitem-no-external-page' => 'Ti naitudon a panid ket saan a mabirukan idiay kapadpadana a sitio.',
+	'wikibase-createitem-add-sitelink-failed' => 'Ti silpo ti sitio ket saan a maidulin.',
+	'wikibase-createitem-not-recognized-siteid' => 'Ti naited a panakainaganan ti sitio ket saan a mabigbigan.',
 	'wikibase-createentity-label' => 'Etiketa:',
 	'wikibase-createentity-description' => 'Deskripsion:',
 	'wikibase-createentity-submit' => 'Agaramid',
@@ -2537,6 +2561,13 @@ $messages['ilo'] = array(
 	'wikibase-setlabel-invalid-id' => 'Ti ID ti "$1" ket di ammo ti sistema. Pangngaasi nga agusar ti umiso a nakabuklan ti ID>',
 	'special-listdatatypes' => 'Ilista amin a kita ti datos a magun-od',
 	'wikibase-listdatatypes-intro' => 'Daytoy ket listaan a amina kita ti datos nga agdama nga inususar ti daytoy a pagikabilan.',
+	'wikibase-history-title-with-label' => 'Panagbalbaliw a pakasaritaan iti "$2" ($1)',
+	'wikibase-history-title-without-label' => 'Panagbalbaliw a pakasaritaan iti ($1)',
+	'special-entitieswithoutlabel' => 'Listaan dagiti entidad nga awan ti etiketana',
+	'wikibase-entitieswithoutlabel-legend' => 'Agala kadagiti entidad nga awan ti etiketana',
+	'wikibase-entitieswithoutlabel-label-language' => 'Pagsasao:',
+	'wikibase-entitieswithoutlabel-submit' => 'Biruken',
+	'wikibase-entitieswithoutlabel-invalid-language' => 'Ti "$1" ket saan nga umiso a kodigo ti pagsasao.',
 	'wikibase-api-patch-incomplete' => 'Ti naaramid a takop ket saan a kompleto.',
 	'wikibase-self-conflict' => 'Ti datos ket binalbaliwam kalpasan idi nangrugika a nagurnos.',
 	'wikibase-restoreold' => 'isubli',
@@ -2561,7 +2592,23 @@ tapno birukem ti napananda.',
 	'wikibase-item-summary-wbcreateclaim-value' => 'Nagpartuat {{plural:$1|ti maysa a pateg ti panagtunton|kadagiti pateg ti panagtunton}}',
 	'wikibase-item-summary-wbcreateclaim-novalue' => 'Nagpartuat {{plural:$1|ti maysa nga awan pategna a panagtunton|kadagiti awan pategna a panagtunton}}',
 	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Nagpartuat {{plural:$1|ti adda bassit a pategna a panagtunton|kadagiti adda bassit a pategna a panagtunton}}',
+	'wikibase-item-summary-special-create-item' => 'Nagpartuat ti [$2] ti banag iti {{plural:$1|a pateg|a patpateg}}',
+	'wikibase-item-summary-special-create-property' => 'Nagpartuat ti [$2] a tagikua iti {{plural:$1|a pateg|a patpateg}}',
+	'wikibase-item-summary-special-create-query' => 'Nagpartuat ti [$2] ti panagbiruk iti {{plural:$1|a pateg|a patpateg}}',
 	'content-model-1001' => 'Wikibase a banag',
+	'right-item-override' => 'Baliwan ti maysa a banag',
+	'right-item-create' => 'Agpartuat ti maysa a banag',
+	'right-item-remove' => 'Agikkat ti maysa a banag',
+	'right-alias-add' => 'Agnayon ti sabali a nagan',
+	'right-alias-set' => 'Agikabil ti sabali a nagan',
+	'right-alias-remove' => 'Ikkaten ti maysa a banag',
+	'right-sitelink-remove' => 'Ikkaten ti maysa a silpo ti sitio',
+	'right-sitelink-update' => 'Pabaruen ti maysa asilpo ti sitio',
+	'right-linktitles-update' => 'Pabaruen ti maysa a silpo ti titulo',
+	'right-label-remove' => 'Ikkaten ti maysa nga etiketa',
+	'right-label-update' => 'Pabaruen ti maysa nga etiketa',
+	'right-description-remove' => 'Ikkaten ti maysa a deskripsion',
+	'right-description-update' => 'Pabaruen ti maysa a deskripsion',
 );
 
 /** Icelandic (íslenska)
@@ -2807,11 +2854,11 @@ $messages['it'] = array(
 	'wikibase-itemdisambiguation-description' => 'I valori utilizzati per la ricerca devono comprendere il testo completo dell\'elemento. La lingua è un identificatore, ad esempio "it".',
 	'special-newproperty' => 'Crea nuova proprietà',
 	'wikibase-newproperty-intro' => "Prima di creare una nuova proprietà è opportuno verificare se questa proprietà esiste già. Per crearne una nuova è necessario specificare almeno l'etichetta o la descrizione in $1 e un tipo di proprietà valido.",
-	'wikibase-newproperty-fieldset' => 'Crea una nuova proprietà',
+	'wikibase-newproperty-fieldset' => 'Crea nuova proprietà',
 	'wikibase-newproperty-datatype' => 'Tipo di dato:',
 	'special-createitem' => 'Crea nuovo elemento',
 	'wikibase-createitem-intro' => "Prima di creare un nuovo elemento, è opportuno verificare se questo elemento esiste già. Per crearne uno nuovo, è necessario specificare almeno l'etichetta o la descrizione in $1.",
-	'wikibase-createitem-fieldset' => 'Crea un nuovo elemento',
+	'wikibase-createitem-fieldset' => 'Crea nuovo elemento',
 	'wikibase-createitem-site' => 'Sito della prima pagina collegata',
 	'wikibase-createitem-page' => 'Nome della prima pagina collegata',
 	'wikibase-createitem-no-external-page' => 'La pagina specificata non è stata trovata sul sito corrispondente.',
@@ -3086,7 +3133,7 @@ $messages['ko'] = array(
 	'wikibase-aliases-empty' => '별명이 정의되지 않았습니다.',
 	'wikibase-datatype-label' => '데이터 유형:',
 	'wikibase-restrictionedit-tooltip-message' => '이 문서는 보호되어 있어, 편집을 허용하지 않습니다.',
-	'wikibase-blockeduser-tooltip-message' => '편집에서 차단됩니다.',
+	'wikibase-blockeduser-tooltip-message' => '편집에서 차단되어 있습니다.',
 	'wikibase-tooltip-error-details' => '자세한 사항',
 	'wikibase-error-save-generic' => '저장을 수행하는 동안 오류가 발생했고 이 때문에 바뀜을 완료할 수 없습니다.',
 	'wikibase-error-remove-generic' => '삭제를 수행하는 동안 오류가 발생했고 이 때문에 바뀜을 완료할 수 없습니다.',
@@ -3603,6 +3650,7 @@ untuk mencari di mana set data itu.',
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
+ * @author Event
  * @author Jeblad
  */
 $messages['nb'] = array(
@@ -3631,12 +3679,15 @@ $messages['nb'] = array(
 	'wikibase-sitelinks-input-help-message' => 'Definer en nettstedslenke slik at den peker på en artikkel.',
 	'wikibase-remove' => 'fjern',
 	'wikibase-undo-title' => 'Fjernet endringen av «$1»',
+	'wikibase-restore-title' => 'Gjenoppretter gammel versjon "$1"',
 	'wikibase-partial-undo' => 'Redigeringen kan bare delvis bli omgjort.',
-	'wikibase-undo-revision-error' => 'Fjerning av endringen feilet',
-	'wikibase-undo-samerev' => 'Kan ikke fjerne endringen, samme revisjon oppgitt for «base» og «target».',
+	'wikibase-omitted-undo-ops' => '$1 {{PLURAL:$1|endring|endringer}} har blitt utelatt fordi {{PLURAL:$1|den tilhørende verdien|de tilhørende verdiene}} har endret seg etter dette.',
+	'wikibase-empty-undo' => 'Her er det ingenting som kan omgjøres.',
+	'wikibase-undo-revision-error' => 'Tilbakestilling av endringen feilet',
+	'wikibase-undo-samerev' => 'Kan ikke tilbakestille endringen fordi samme revisjon er oppgitt for «base» og «target».',
 	'wikibase-undo-badpage' => 'Ugyldig revisjon: Revisjonen $2 hører ikke til [[$1]]',
 	'wikibase-undo-firstrev' => 'Kan ikke fjerne opprettelsen av siden',
-	'wikibase-propertyedittool-full' => 'Lista av verdier er nå komplett',
+	'wikibase-propertyedittool-full' => 'Listen av verdier er nå komplett',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|oppføring|oppføringer}})',
 	'wikibase-propertyedittool-counter-pending' => '($2$3 {{PLURAL:$1|oppføring|oppføringer}})',
 	'wikibase-propertyedittool-counter-pending-pendingsubpart' => '+$1',
@@ -3678,6 +3729,7 @@ $messages['nb'] = array(
 	'wikibase-itembytitle-lookup-page' => 'Side:',
 	'wikibase-itembytitle-submit' => 'Søk:',
 	'wikibase-itembytitle-nothing-found' => 'Ingen datasett ble funnet av det forrige søket. Forbedre spørringen med en bedre identifisering av den eksterne siden.',
+	'wikibase-itembytitle-invalid-site' => 'Forrige spørring kunne ikke brukes som søk. Vær vennlig å angi et gyldig nettsted.',
 	'wikibase-itembytitle-description' => 'Nettsted er en identifikator, slik som «enwiki»',
 	'wikibase-itembytitle-create' => 'Du kan også [{{fullurl:Special:CreateItem|site=$1&page=$2}} opprette et datasett].',
 	'special-itemdisambiguation' => 'Flertydig: Datasett med samme etikett',
@@ -3688,11 +3740,14 @@ $messages['nb'] = array(
 	'wikibase-itemdisambiguation-nothing-found' => 'Beklager, ingen datasett med den etiketten ble funnet.',
 	'wikibase-itemdisambiguation-create' => 'Du kan [{{fullurl:Special:CreateItem|label=$1}} opprette et datasett].',
 	'wikibase-itemdisambiguation-invalid-langcode' => 'Beklager, språkidentifikatoren du har oppgitt er ukjent. Bruk en gyldig identifikator slik som «en».',
-	'special-newproperty' => 'Lag en ny egenskap',
+	'wikibase-itemdisambiguation-description' => 'Verdier brukt for å søke må være den fullstendige tekstangivelsen. Språk er en identifikator slik som "nb".',
+	'special-newproperty' => 'Opprett en ny egenskap',
+	'wikibase-newproperty-intro' => 'Før du oppretter en ny egenskap undersøk først om denne egenskapen allerede finnes. For å opprette en ny egenskap må det som minimum angis etikett og beskrivelse i $1, samt en gyldig egenskapstype.',
 	'wikibase-newproperty-fieldset' => 'Lag en ny egenskap',
 	'wikibase-newproperty-datatype' => 'Datatype:',
 	'special-createitem' => 'Lag et nytt datasett',
-	'wikibase-createitem-fieldset' => 'Lag et nytt datasett',
+	'wikibase-createitem-intro' => 'Før du oppretter et nytt element undersøk først om dette elementet allerede finnes. For å opprette ett nytt element må det som minimum angis etikett og beskrivelse i $1.',
+	'wikibase-createitem-fieldset' => 'Opprettt et nytt objekt',
 	'wikibase-createitem-site' => 'Nettsted for første nettstedlenke',
 	'wikibase-createitem-page' => 'Tittel for første nettstedlenke',
 	'wikibase-createitem-no-external-page' => 'Den oppgitte tittel ble ikke funnet på nettstedet',
@@ -3744,7 +3799,20 @@ for å finne ut hva som har skjedd.',
 	'wikibase-item-summary-special-create-item' => 'Opprettet et [$2] datasett med {{plural:$1|verdi|verdiene}}',
 	'wikibase-item-summary-special-create-property' => 'Opprettet en [$2] egenskap med {{plural:$1|verdi|verdiene}}',
 	'wikibase-item-summary-special-create-query' => 'Opprettet et [$2] søk med {{plural:$1|verdi|verdiene}}',
-	'content-model-1001' => 'Wikibase datasett',
+	'content-model-1001' => 'Wikibase-objekt',
+	'right-item-override' => 'Overstyr et objekt',
+	'right-item-create' => 'Opprett et objekt',
+	'right-item-remove' => 'Fjern et objekt',
+	'right-alias-add' => 'Legg til et alias',
+	'right-alias-set' => 'Sett et alias',
+	'right-alias-remove' => 'Fjern et alias',
+	'right-sitelink-remove' => 'Fjern en nettstedslenke',
+	'right-sitelink-update' => 'Oppdater en nettstedslenke',
+	'right-linktitles-update' => 'Oppdater en lenketittel',
+	'right-label-remove' => 'Fjern en etikett',
+	'right-label-update' => 'Oppdater en etikett',
+	'right-description-remove' => 'Fjern en beskrivelse',
+	'right-description-update' => 'Oppdater en beskrivelse',
 );
 
 /** Dutch (Nederlands)
@@ -4342,6 +4410,7 @@ $messages['ro'] = array(
  * @author Amire80
  * @author Kaganer
  * @author Ole Yves
+ * @author ShinePhantom
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
@@ -4394,10 +4463,13 @@ $messages['ru'] = array(
 	'wikibase-error-remove-generic' => 'Произошла ошибка при попытке выполнить удаление, поэтому ваши изменения не могут быть завершены.',
 	'wikibase-error-save-connection' => 'При попытке выполнить сохранение произошла ошибка подключения, поэтому ваши изменения не могут быть завершены. Пожалуйста, проверьте своё подключение к интернету.',
 	'wikibase-error-remove-connection' => 'При попытке выполнить удаление произошла ошибка подключения, поэтому ваши изменения не могут быть завершены. Пожалуйста, проверьте своё подключение к интернету.',
-	'wikibase-error-save-timeout' => 'Мы переживаем технические трудности, поэтому ваше изменение не может быть завершено.',
+	'wikibase-error-save-timeout' => 'Мы испытываем технические трудности, поэтому ваше изменение не может быть завершено.',
 	'wikibase-error-remove-timeout' => 'Мы переживаем технические трудности, поэтому ваше удаление не может быть завершено.',
 	'wikibase-error-autocomplete-connection' => 'Не удалось запросить API Википедии. Пожалуйста, попробуйте снова позже.',
 	'wikibase-error-autocomplete-response' => 'Сервер ответил: $1',
+	'wikibase-error-ui-no-permissions' => 'У вас не хватает прав для выполнения данной операции.',
+	'wikibase-error-ui-session-failure' => 'Ваша сессия истекла. Пожалуйста, войдите в систему снова.',
+	'wikibase-error-ui-edit-conflict' => 'Существует конфликт редактирования. Перезагрузите и сохраните снова.',
 	'wikibase-move-error' => 'Вы не можете переименовывать страницы, которые находятся в пространстве данных, и вы не можете перемещать страницы в него.',
 	'special-itembytitle' => 'Элементы по названию',
 	'wikibase-itembytitle-lookup-fieldset' => 'Искать элементы по сайту и названию',
@@ -5132,7 +5204,7 @@ $messages['zh-hant'] = array(
 	'wikibase-alias-edit-placeholder' => '輸入別稱',
 	'wikibase-label-input-help-message' => '採用$1輸入該數據集的標題。',
 	'wikibase-description-input-help-message' => '採用$1輸入簡要說明。',
-	'wikibase-sitelinks' => '鏈接到此項的頁面清單',
+	'wikibase-sitelinks' => '鏈接到此項目的頁面清單',
 	'wikibase-sitelinks-sitename-columnheading' => '語言',
 	'wikibase-sitelinks-siteid-columnheading' => '代碼',
 	'wikibase-sitelinks-link-columnheading' => '已連結的條目',
@@ -5210,6 +5282,11 @@ $messages['zh-hant'] = array(
 	'special-createitem' => '創建一個新項目',
 	'wikibase-createitem-intro' => '創建一個新屬性之前，考慮檢查該屬性是否已經存在。要創建一個新屬性，您需要於$1指定至少一個標籤或描述。',
 	'wikibase-createitem-fieldset' => '創建一個新項目',
+	'wikibase-createitem-site' => '首頁面所在的維基項目',
+	'wikibase-createitem-page' => '首頁面的名稱',
+	'wikibase-createitem-no-external-page' => '相應維基項目無法找到指定條目。',
+	'wikibase-createitem-add-sitelink-failed' => '無法保存此連結。',
+	'wikibase-createitem-not-recognized-siteid' => '提供的網站識別符無法辨識。',
 	'wikibase-createentity-label' => '標籤：',
 	'wikibase-createentity-description' => '描述：',
 	'wikibase-createentity-submit' => '創建',
@@ -5224,6 +5301,13 @@ $messages['zh-hant'] = array(
 	'wikibase-setlabel-invalid-id' => 'ID「$1」未知。請使用有效的實體ID。',
 	'special-listdatatypes' => '所有可用的數據類型',
 	'wikibase-listdatatypes-intro' => '此列表為目前安裝中使用的所有數據類型：',
+	'wikibase-history-title-with-label' => '「$2」($1)的歷史記錄',
+	'wikibase-history-title-without-label' => '($1)的歷史記錄',
+	'special-entitieswithoutlabel' => '沒有標籤的實體列表',
+	'wikibase-entitieswithoutlabel-legend' => '獲取沒有標籤的實體的列表',
+	'wikibase-entitieswithoutlabel-label-language' => '語言：',
+	'wikibase-entitieswithoutlabel-submit' => '尋找',
+	'wikibase-entitieswithoutlabel-invalid-language' => '「$1」不是有效的語言代碼。',
 	'wikibase-api-patch-incomplete' => '產生的修補不完整。',
 	'wikibase-self-conflict' => '在您開始編輯後數據已被修改。',
 	'wikibase-restoreold' => '恢復',
@@ -5246,5 +5330,21 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-wbcreateclaim-value' => '創建{{plural:$1|數值聲稱}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-novalue' => '創建{{plural:$1|無數值聲稱}}', # Fuzzy
 	'wikibase-item-summary-wbcreateclaim-somevalue' => '創建{{plural:$1|半數值聲稱}}', # Fuzzy
+	'wikibase-item-summary-special-create-item' => '創建含{{plural:$1|數值}}的[$2]項目',
+	'wikibase-item-summary-special-create-property' => '創建含{{plural:$1|數值}}的[$2]屬性',
+	'wikibase-item-summary-special-create-query' => '創建含{{plural:$1|數值}}的[$2]查詢',
 	'content-model-1001' => 'Wikibase項目',
+	'right-item-override' => '覆蓋項目',
+	'right-item-create' => '創建項目',
+	'right-item-remove' => '刪除項目',
+	'right-alias-add' => '新增別名',
+	'right-alias-set' => '設置別名',
+	'right-alias-remove' => '刪除別名',
+	'right-sitelink-remove' => '刪除維基項目連結',
+	'right-sitelink-update' => '更新維基項目連結',
+	'right-linktitles-update' => '更新連結標題',
+	'right-label-remove' => '移除標籤',
+	'right-label-update' => '更新標籤',
+	'right-description-remove' => '移除說明',
+	'right-description-update' => '更新說明',
 );

@@ -178,7 +178,7 @@ $messages['fr'] = array(
 	'wbc-desc' => 'Client pour l’extension Wikibase',
 	'wbc-comment-langlinks-delete' => 'Élément Wikidata associé supprimé. Liens de langue supprimés.',
 	'wbc-comment-langlinks-remove' => "Cette page a été déliée de l'élément Wikidata. Liens de langue supprimés",
-	'wbc-comment-langlinks-restore' => "Suppression de l'élément Wikidata associé annulée. Liens de langue rétablis",
+	'wbc-comment-langlinks-restore' => 'Élément Wikidata associé restauré. Liens de langue rétablis',
 	'wbc-comment-langlinks-update' => 'Liens interlangues mis à jour',
 	'wbc-editlinks' => 'Modifier les liens',
 	'wbc-editlinkstitle' => 'Modifier les liens interlangue',
@@ -358,12 +358,17 @@ $messages['ms'] = array(
 );
 
 /** Norwegian Bokmål (norsk (bokmål)‎)
+ * @author Event
  * @author Jeblad
  */
 $messages['nb'] = array(
 	'wbc-desc' => 'Klientutvidelse for Wikibase, det strukturerte datalageret',
+	'wbc-comment-langlinks-delete' => 'Tilknyttet Wikidata-objekt slettet. Språklenker fjernet.',
+	'wbc-comment-langlinks-remove' => 'Denne siden har mistet lenken til Wikidata-objektet. Språklenker er fjernet',
+	'wbc-comment-langlinks-restore' => 'Tilhørende Wikidata-ojbekt er gjenopprettet sammen med språklenkene',
+	'wbc-comment-langlinks-update' => 'Språklenker er oppdatert',
 	'wbc-editlinks' => 'Rediger lenker',
-	'wbc-editlinkstitle' => 'Rediger nettstedlenker',
+	'wbc-editlinkstitle' => 'Rediger språkspesifikke lenker',
 );
 
 /** Dutch (Nederlands)
