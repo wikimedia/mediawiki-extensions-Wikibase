@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADUX///8A\u003d",
+        "filename": "lib/includes/changes/EntityUpdate.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T17:36:42Z",
+      "side": 1,
+      "message": "$type is not used",
+      "revId": "b02a649fb15191e995e8662ba8a9240aaa404332",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
