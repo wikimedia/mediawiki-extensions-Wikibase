@@ -243,6 +243,11 @@ class ExternalChangesList {
 	}
 
 	/**
+	 * TODO: returning a string as namespace like this is odd.
+	 * Returning the namespace ID would make more sense.
+	 * If the result of this is not handled to a Title object
+	 * we miss out on proper localization and stuff.
+	 *
 	 * @since 0.2
 	 *
 	 * @param array $entityData
@@ -275,28 +280,33 @@ class ExternalChangesList {
 	 * @since 0.2
 	 *
 	 * @param array $entityData
-	 * @param bool $namespace include namespace in title, such as Item:Q1
+	 * @param bool $includeNamespace include namespace in title, such as Item:Q1
 	 *
 	 * @return string|bool
 	 */
-	protected static function titleTextFromEntityData( $entityData, $namespace = true ) {
+	protected static function titleTextFromEntityData( $entityData, $includeNamespace = true ) {
 		if ( isset( $entityData['object_id'] ) ) {
 			$entityId = $entityData['object_id'];
 
-			if ( is_numeric( $entityId ) ) {
-				$entity = ItemObject::newEmpty();
-				$entity->setId( intval( $entityId ) );
-				$titleText = strtoupper( $entity->getPrefixedId() );
+			if ( ctype_digit( $entityId ) || is_numeric( $entityId ) ) {
+				// FIXME: this is evil; we seem to have lost all encapsulation at this point,
+				// so some refactoring is needed to have sane access to the info here.
+				$entityType = explode( '-', $entityData['entity_type'], 2 );
+
+				$entityId = new EntityId( $entityType, (int)$entityId );
+			}
+			else {
+				$entityId = EntityId::newFromPrefixedId( $entityId );
 			}
 
-			if ( $namespace ) {
+			// TODO: ideally the uppercasing would be handled by a Title object
+			$titleText = strtoupper( $entityId->getPrefixedId() );
+
+			if ( $includeNamespace ) {
 				$ns = self::getNamespace( $entityData );
-				$titleText = $ns . $titleText;
+				$titleText = $ns . $entityId->getPrefixedId();
 			}
 
-		}
-
-		if ( $titleText !== null ) {
 			return $titleText;
 		}
 
