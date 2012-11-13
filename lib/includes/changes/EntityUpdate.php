@@ -61,8 +61,10 @@ class EntityUpdate extends EntityChange {
 			true
 		);
 
+		$changeType = 'wikibase-' . $newEntity->getType() . '~' . $instance->getChangeType();
+		$instance->setField( 'type', $changeType );
+
 		$instance->setEntity( $newEntity );
-		$instance->setField( 'type', $instance->getType() );
 		$instance->setDiff( $oldEntity->getDiff( $newEntity ) );
 
 		return $instance;
