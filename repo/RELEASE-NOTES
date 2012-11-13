@@ -5,13 +5,21 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 
-=== Version 0.2 ===
+=== Version 0.3 ===
 (dev)
+
+* Added Special:ListDatatypes
+* Added Special:NewProperty
+
+=== Version 0.2 ===
+(???)
 
 * Added Special:SetLabel
 * Added Special:EntitiesWithoutLabel
 * Added wbsearchentities API module
 * Renamed wbsetitem API module to wbsetentity
+* Added wb_entity_per_page table
+* Most serialization in the API is done via new API serializers
 
 === Version 0.1 ===
 (2012-11-01)

@@ -4,6 +4,7 @@ namespace Wikibase;
 
 // TODO: watched pages should be bold in RC
 // TODO: Pages which have been changed since you last visited them are shown in bold
+// TODO: document
 
 class ExternalChangesList {
 
