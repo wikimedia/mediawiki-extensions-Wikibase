@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADT3///9s\u003d",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "this var is not used?",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///9w\u003d",
+        "filename": "lib/includes/changes/DiffChange.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "What\u0027s this change good for?",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///9g\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "bad indent",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///9c\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "What is the prefix thing good for? Using it leads to inconsistencies with the real entity type identifiers and requires additional maps and conversions to be made :(\n\nThe method is also not needed all that much, as you can do getEntity()-\u003egetType()",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///9U\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "not needed?",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///9E\u003d",
+        "filename": "lib/includes/changes/EntityUpdate.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "We have the new entity and a diff, thus we can compute the old entity from that if needed.\n\nPeople are complaining about the size of the changes storage already, let\u0027s not blow it up needlessly",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///88\u003d",
+        "filename": "lib/includes/entity/EntityFactory.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "Please use unserialize( $entity ). No need to have another implementation (and lot\u0027s of reasons to not have it).\n\nWhere are you using this anyway?",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///80\u003d",
+        "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "ident",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///84\u003d",
+        "filename": "lib/tests/phpunit/changes/EntityChangeTest.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "ident",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///8k\u003d",
+        "filename": "lib/tests/phpunit/changes/TestChanges.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "ident",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADT3///8o\u003d",
+        "filename": "lib/tests/phpunit/changes/TestChanges.php",
+        "patchSetId": 14
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-13T14:28:12Z",
+      "side": 1,
+      "message": "ident",
+      "revId": "0786a95f9b4cd063ca1ab2c75f86f24bdaa04032",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
