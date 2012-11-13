@@ -111,4 +111,17 @@ abstract class ApiSerializerObject implements ApiSerializer {
 		return $this->options;
 	}
 
+	/**
+	 * Turns associative arrays into objects when needed.
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $data
+	 */
+	protected function makeAssociative( array &$data ) {
+		if ( $this->options->shouldUseKeys() ) {
+			$data = (object)$data;
+		}
+	}
+
 }
