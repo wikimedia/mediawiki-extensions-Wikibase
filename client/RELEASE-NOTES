@@ -5,10 +5,17 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 
-=== Version 0.2 ===
+=== Version 0.3 ===
 (dev)
 
-*
+* Added suggestion to update item on the repository when moving a page
+
+=== Version 0.2 ===
+(???)
+
+* Added methods to purge the entity cache and client store
+* Added ExternalChangesList
+* Improved handling of changes
 
 === Version 0.1 ===
 (2012-11-01)

@@ -5,10 +5,22 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 
-=== Version 0.2 ===
+=== Version 0.3 ===
 (dev)
 
-*
+* Introduced EntityId interface
+* Implemented proper serialization in EntityObject
+* Improved Change classes
+* Added countLinks and getLinks in SiteLinkLookup
+
+=== Version 0.2 ===
+(???)
+
+* Statements are now claims, instead of objects containing a claim
+* Implemented PropertyObject and QueryObject
+* Added ByPropertyIdArray
+* Added TemplateStore
+* Added Term interface
 
 === Version 0.1 ===
 (2012-11-01)
