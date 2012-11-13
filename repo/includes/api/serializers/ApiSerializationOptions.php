@@ -31,7 +31,42 @@ use MWException;
  */
 class ApiSerializationOptions {
 
+	/**
+	 * If keys should be used in the serialization.
+	 *
+	 * @since 0.3
+	 *
+	 * @var boolean
+	 */
+	protected $useKeys = true;
 
+	/**
+	 * Sets if keys should be used in the serialization.
+	 *
+	 * @since 0.3
+	 *
+	 * @param boolean $useKeys
+	 *
+	 * @throws MWException
+	 */
+	public function setUseKeys( $useKeys ) {
+		if ( !is_bool( $useKeys ) ) {
+			throw new MWException( __METHOD__ . ' expects a boolean' );
+		}
+
+		$this->useKeys = $useKeys;
+	}
+
+	/**
+	 * Returns if keys should be used in the serialization.
+	 *
+	 * @since 0.3
+	 *
+	 * @return boolean
+	 */
+	public function shouldUseKeys() {
+		return $this->useKeys;
+	}
 
 }
 
@@ -66,15 +101,6 @@ class EntitySerializationOptions extends ApiSerializationOptions {
 	const SORT_ASC = 'ascending';
 	const SORT_DESC = 'descending';
 	const SORT_NONE = 'none';
-
-	/**
-	 * If keys should be used in the serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @var boolean
-	 */
-	protected $useKeys = true;
 
 	/**
 	 * The optional properties of the entity that should be included in the serialization.
@@ -112,34 +138,6 @@ class EntitySerializationOptions extends ApiSerializationOptions {
 	 * @var string Element of the EntitySerializationOptions::SORT_ enum
 	 */
 	protected $sortDirection = self::SORT_NONE;
-
-	/**
-	 * Sets if keys should be used in the serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @param boolean $useKeys
-	 *
-	 * @throws MWException
-	 */
-	public function setUseKeys( $useKeys ) {
-		if ( !is_bool( $useKeys ) ) {
-			throw new MWException( __METHOD__ . ' expects a boolean' );
-		}
-
-		$this->useKeys = $useKeys;
-	}
-
-	/**
-	 * Returns if keys should be used in the serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @return boolean
-	 */
-	public function shouldUseKeys() {
-		return $this->useKeys;
-	}
 
 	/**
 	 * Sets the optional properties of the entity that should be included in the serialization.

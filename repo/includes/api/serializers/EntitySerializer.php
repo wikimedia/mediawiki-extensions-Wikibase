@@ -145,7 +145,10 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
-		if ( !$this->options->shouldUseKeys() ) {
+		if ( $this->options->shouldUseKeys() ) {
+			$this->makeAssociative( $serialization );
+		}
+		else {
 			$this->getResult()->setIndexedTagName( $value, 'alias' );
 		}
 
@@ -182,7 +185,10 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
-		if ( !$this->options->shouldUseKeys() ) {
+		if ( $this->options->shouldUseKeys() ) {
+			$this->makeAssociative( $serialization );
+		}
+		else {
 			$this->getResult()->setIndexedTagName( $value, 'description' );
 		}
 
@@ -219,7 +225,10 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
-		if ( !$this->options->shouldUseKeys() ) {
+		if ( $this->options->shouldUseKeys() ) {
+			$this->makeAssociative( $serialization );
+		}
+		else {
 			$this->getResult()->setIndexedTagName( $value, 'label' );
 		}
 
