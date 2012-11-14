@@ -81,7 +81,7 @@ class EntityDeletionUpdate extends \DataUpdate {
 		 *
 		 * @since 0.1
 		 *
-		 * @param ItemStructuredSave $this
+		 * @param EntityDeletionUpdate $this
 		 */
 		wfRunHooks( 'WikibaseEntityDeletionUpdate', array( $this ) );
 

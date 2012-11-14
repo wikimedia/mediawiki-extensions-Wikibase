@@ -114,8 +114,6 @@ interface TermCache {
 	 *
 	 * Similar to @see TermCache::getMatchingTerms
 	 *
-	 *
-	 *
 	 * @since 0.2
 	 *
 	 * @param array $terms
