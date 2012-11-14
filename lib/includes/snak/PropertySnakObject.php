@@ -49,13 +49,6 @@ abstract class PropertySnakObject extends SnakObject implements PropertySnak {
 	 * @throws MWException
 	 */
 	public function __construct( $propertyId ) {
-		// The first two checks here are for compat with passing an integer.
-		// The integer passing is deprecated.
-		// TODO: update
-		if ( is_int( $propertyId ) ) {
-			$propertyId = new EntityId( Property::ENTITY_TYPE, $propertyId );
-		}
-
 		if ( !$propertyId instanceof EntityId ) {
 			throw new MWException( '$propertyId should be a EntityId' );
 		}

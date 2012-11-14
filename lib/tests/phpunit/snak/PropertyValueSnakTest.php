@@ -40,12 +40,21 @@ use DataValues\StringValue;
 class PropertyValueSnakTest extends PropertySnakObjectTest {
 
 	public function constructorProvider() {
-		return array(
+		$argLists = array(
 			array( true, 1, new StringValue( 'a' ) ),
 			array( true, 9001, new StringValue( 'a' ) ),
 			array( false ),
 			array( false, 42 ),
+			array( false, 9001, 'a' ),
 		);
+
+		foreach ( $argLists as &$argList ) {
+			if ( count( $argList ) > 1 ) {
+				$argList[1] = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, $argList[1] );
+			}
+		}
+
+		return $argLists;
 	}
 
 	public function getClass() {
