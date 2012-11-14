@@ -4,7 +4,7 @@ use Wikibase\SiteLink;
 use Wikibase\ItemObject;
 
 /**
- * Tests for the Wikibase\EntityObject deriving classes.
+ * Tests for the Wikibase\ItemDiff class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

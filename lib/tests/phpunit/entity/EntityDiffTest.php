@@ -3,7 +3,7 @@ namespace Wikibase\Test;
 use Wikibase\Entity;
 
 /**
- * Tests for the Wikibase\EntityObject deriving classes.
+ * Tests for the Wikibase\EntityDiff deriving classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +25,10 @@ use Wikibase\Entity;
  *
  * @ingroup WikibaseLib
  * @ingroup Test
+ *
+ * @group Wikibase
+ * @group WikibaseLib
+ * @group WikibaseDiff
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
@@ -224,13 +228,13 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 *
 	 * @dataProvider provideConflictDetection
 	 */
 	public function testConflictDetection( Entity $base, Entity $current, Entity $new, $expectedConflicts ) {
 		$patch = $base->getDiff( $new ); // diff from base to new
 
-		$cleanPatch = $patch->getApplicableDiff( $current->toArray() );
+		$current = $current->toArray();
+		$cleanPatch = $patch->getApplicableDiff( $current );
 		$conflicts = $patch->count() - $cleanPatch->count();
 
 		$this->assertEquals( $expectedConflicts, $conflicts, "check number of conflicts detected" );

@@ -1,8 +1,8 @@
 <?php
 namespace Wikibase\Test;
-use \Wikibase\Entity;
+use Wikibase\Entity;
 /**
- * Tests for the Wikibase\PropertyObject deriving classes.
+ * Tests for the Wikibase\PropertyDiff class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@ use \Wikibase\Entity;
  */
 
 class PropertyDiffTest extends EntityDiffTest {
+
 	public function provideApplyData() {
 		return parent::generateApplyData( \Wikibase\Property::ENTITY_TYPE );
 	}
@@ -45,4 +46,5 @@ class PropertyDiffTest extends EntityDiffTest {
 	public function testApply( Entity $a, Entity $b ) {
 		parent::testApply( $a, $b );
 	}
+
 }
