@@ -115,7 +115,7 @@ class HashableObjectStorageTest extends \MediaWikiTestCase {
 
 }
 
-class HashableObject implements Hashable {
+class HashableObject implements \Hashable {
 
 	protected $var;
 

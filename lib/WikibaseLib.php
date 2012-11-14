@@ -88,7 +88,6 @@ $wgAutoloadClasses['Wikibase\ChangeNotifier'] 		= $dir . 'includes/ChangeNotifie
 $wgAutoloadClasses['Wikibase\ChangesTable'] 		= $dir . 'includes/ChangesTable.php';
 $wgAutoloadClasses['Wikibase\Comparable'] 			= $dir . 'includes/Comparable.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
-$wgAutoloadClasses['Wikibase\Hashable'] 			= $dir . 'includes/Hashable.php';
 $wgAutoloadClasses['Wikibase\HashableObjectStorage']= $dir . 'includes/HashableObjectStorage.php';
 $wgAutoloadClasses['Wikibase\HashArray'] 			= $dir . 'includes/HashArray.php';
 $wgAutoloadClasses['Wikibase\Template'] 			= $dir . 'includes/TemplateStore.php';

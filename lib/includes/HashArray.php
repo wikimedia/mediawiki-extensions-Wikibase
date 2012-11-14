@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Hashable;
 
 /**
  * Generic array object with lookups based on hashes of the elements.
@@ -42,7 +43,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArray extends \GenericArrayObject implements Hashable {
+abstract class HashArray extends \GenericArrayObject implements \Hashable {
 
 	/**
 	 * Maps element hashes to their offsets.
