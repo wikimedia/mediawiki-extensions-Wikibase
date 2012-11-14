@@ -84,20 +84,30 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	 *
 	 * @since 0.2
 	 *
-	 * @return Claim|null
+	 * @return Claim
 	 * @throws MWException
 	 */
 	protected function addClaim() {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$entityContent = $this->getEntityContent();
+
 		if ( $entityContent === null ) {
 			$this->dieUsage( 'Entity not found, snak not created', 'entity-not-found' );
 		}
 
 		$entity = $entityContent->getEntity();
 
-		$snak = $this->getSnakInstance();
+		// It is possible we get an exception from this method because of specifying
+		// a non existing-property, specifying an entity id for an entity with wrong
+		// entity type or providing an invalid DataValue.
+		try {
+			$snak = $this->getSnakInstance();
+		}
+		catch ( \Exception $ex ) {
+			wfProfileOut( "Wikibase-" . __METHOD__ );
+			$this->dieUsageMsg( $ex->getMessage() );
+		}
 
 		$isStatement = false;
 
@@ -186,10 +196,13 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 
 		$propertyId = EntityId::newFromPrefixedId( $params['property'] );
 
+		if ( $propertyId !== Property::ENTITY_TYPE ) {
+			throw new MWException( 'Expected an EntityId of a property' );
+		}
+
 		switch ( $params['snaktype'] ) {
 			case 'value':
-				$dataValue = new \DataValues\StringValue( '' ); // TODO
-				$snak = new PropertyValueSnak( $propertyId, $dataValue );
+				$snak = PropertyValueSnak::newFromPropertyValue( $propertyId, $params['value'] );
 				break;
 			case 'novalue':
 				$snak = new PropertyNoValueSnak( $propertyId );

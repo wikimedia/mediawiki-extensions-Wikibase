@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiResult;
+use ApiResult, MWException;
 
 /**
  * Base class for ApiSerializers.
@@ -54,10 +54,10 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @param ApiResult $apiResult
-	 * @param ApiSerializationOptions $options
+	 * @param ApiResult|null $apiResult
+	 * @param ApiSerializationOptions|null $options
 	 */
-	public function __construct( ApiResult $apiResult, ApiSerializationOptions $options = null ) {
+	public function __construct( ApiResult $apiResult = null, ApiSerializationOptions $options = null ) {
 		$this->apiResult = $apiResult;
 
 		if ( $options === null ) {
@@ -95,8 +95,13 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 * @since 0.2
 	 *
 	 * @return ApiResult
+	 * @throws MWException
 	 */
 	protected final function getResult() {
+		if ( $this->apiResult === null ) {
+			throw new MWException( 'The API result object has not been set' );
+		}
+
 		return $this->apiResult;
 	}
 

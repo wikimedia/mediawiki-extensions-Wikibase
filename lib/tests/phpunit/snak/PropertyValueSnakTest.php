@@ -32,6 +32,8 @@ use DataValues\StringValue;
  * @group WikibaseLib
  * @group WikibaseSnak
  *
+ * @group Database
+ *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
@@ -56,7 +58,46 @@ class PropertyValueSnakTest extends PropertySnakObjectTest {
 	public function testGetDataValue( PropertyValueSnak $omnomnom ) {
 		$dataValue = $omnomnom->getDataValue();
 		$this->assertInstanceOf( '\DataValues\DataValue', $dataValue );
-		$this->assertEquals( $dataValue, $omnomnom->getDataValue() );
+		$this->assertTrue( $dataValue->equals( $omnomnom->getDataValue() ) );
+	}
+
+	public function newFromPropertyValueProvider() {
+		$argLists = array();
+
+		$property = \Wikibase\PropertyObject::newFromType( 'wikibase-item' );
+		$property->setId( 852645 );
+
+		$argLists[] = array( clone $property, new \DataValues\NumberValue( 42 ) );
+		$argLists[] = array( clone $property, new \DataValues\NumberValue( 9001 ) );
+
+		$property->setId( 852642 );
+
+		$argLists[] = array( clone $property, new \DataValues\NumberValue( 9001 ) );
+
+		$property->setDataType( \DataTypes\DataTypeFactory::singleton()->getType( 'commonsMedia' ) );
+
+		$argLists[] = array( clone $property, new \DataValues\StringValue( 'https://commons.wikimedia.org/wiki/Wikidata' ) );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider newFromPropertyValueProvider
+	 */
+	public function testNewFromPropertyValue( \Wikibase\Property $property, \DataValues\DataValue $dataValue ) {
+		// We need to make sure the property exists since otherwise
+		// we cannot obtain it based on id in the method being tested.
+		$content = \Wikibase\PropertyContent::newFromProperty( $property );
+		$content->save();
+
+		$instance = PropertyValueSnak::newFromPropertyValue(
+			$property->getId(),
+			$dataValue->getArrayValue()
+		);
+
+		$this->assertInstanceOf( '\Wikibase\PropertyValueSnak', $instance );
+		$this->assertTrue( $instance->getDataValue()->equals( $dataValue ) );
+		$this->assertEquals( $property->getPrefixedId(), $instance->getPropertyId()->getPrefixedId() );
 	}
 
 }
