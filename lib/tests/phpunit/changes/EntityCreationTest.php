@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\EntityCreation;
 use Wikibase\Entity;
 
 /**

@@ -1,8 +1,6 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\EntityDeletion;
-use Wikibase\Entity;
 
 /**
  * Tests for the Wikibase\EntityRefresh class.
