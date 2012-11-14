@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADYn///7k\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-14T12:35:15Z",
+      "side": 1,
+      "message": "You are assuming an EntityChange here. Reasonable in this context I guess, but not technically guaranteed. Could be fixed simply by doing this first:\n\nif ( !( $change instanceof EntityChange) ) {\n  return true;\n}",
+      "revId": "52931b4c6d7434a3ba2d3c3d4b58af9a40e10a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADYn///7g\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-14T12:35:15Z",
+      "side": 1,
+      "message": "Will fail horribly for non-items.\nActually, everything we do here is based on sitelinks, and thus only applies to items.\nWe will probably want to do some other magic when Properties or Queries change, but that\u0027s still in the future. The current logic only works on items.",
+      "revId": "52931b4c6d7434a3ba2d3c3d4b58af9a40e10a27",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
