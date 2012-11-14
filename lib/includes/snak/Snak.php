@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Snak extends \Serializable, \Hashable, \Immutable {
+interface Snak extends \Serializable, \Hashable, \Immutable, \Comparable {
 
 	/**
 	 * Returns the id of the snaks property.

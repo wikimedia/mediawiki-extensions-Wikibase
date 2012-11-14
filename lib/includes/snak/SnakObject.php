@@ -1,7 +1,6 @@
 <?php
 
 namespace Wikibase;
-use Comparable;
 
 /**
  * Base class for snaks.
@@ -30,7 +29,7 @@ use Comparable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class SnakObject implements Snak, Comparable {
+abstract class SnakObject implements Snak {
 
 	/**
 	 * @see Snak::getHash
