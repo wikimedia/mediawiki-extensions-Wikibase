@@ -327,7 +327,7 @@ class TermCacheTest extends \MediaWikiTestCase {
 	 */
 	public function testSaveTermsOfEntity( TermCache $lookup ) {
 		$item = ItemObject::newEmpty();
-		$item->setId( 5684313142 );
+		$item->setId( 568431314 );
 
 		$item->setLabel( 'en', 'abc' );
 		$item->setLabel( 'de', 'def' );
