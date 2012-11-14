@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use DataValues\DataValue;
+use MWException;
 
 /**
  * Class representing a property value snak.
@@ -71,7 +72,7 @@ class PropertyValueSnak extends PropertySnakObject {
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( array( $this->propertyId, $this->dataValue ) );
+		return serialize( array( $this->propertyId->getNumericId(), $this->dataValue ) );
 	}
 
 	/**
@@ -84,7 +85,12 @@ class PropertyValueSnak extends PropertySnakObject {
 	 * @return PropertyValueSnak
 	 */
 	public function unserialize( $serialized ) {
-		list( $this->propertyId, $this->dataValue ) = unserialize( $serialized );
+		list( $propertyId, $dataValue ) = unserialize( $serialized );
+
+		$this->__construct(
+			new EntityId( Property::ENTITY_TYPE, $propertyId ),
+			$dataValue
+		);
 	}
 
 	/**
@@ -96,6 +102,39 @@ class PropertyValueSnak extends PropertySnakObject {
 	 */
 	public function getType() {
 		return 'value';
+	}
+
+	/**
+	 * Returns a new PropertyValueSnak constructed from the provided value.
+	 * The DataValue
+	 *
+	 * @since 0.3
+	 *
+	 * @param EntityId $propertyId
+	 * @param mixed $rawDataValue
+	 *
+	 * @return PropertyValueSnak
+	 * @throws MWException
+	 */
+	public static function newFromPropertyValue( EntityId $propertyId, $rawDataValue ) {
+		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
+			throw new MWException( 'Expected an EntityId of a property' );
+		}
+
+		$content = EntityContentFactory::singleton()->getFromId( $propertyId );
+
+		if ( $content === null ) {
+			throw new MWException( 'Cannot create a DataValue for a non-existing property' );
+		}
+
+		/**
+		 * @var Property $property
+		 */
+		$property = $content->getEntity();
+
+		$dataValue = $property->newDataValue( $rawDataValue );
+
+		return new static( $propertyId, $dataValue );
 	}
 
 }

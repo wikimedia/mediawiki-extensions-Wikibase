@@ -182,4 +182,5 @@ class SqlStore implements Store {
 	public function newEntityPerPage() {
 		return new EntityPerPageTable();
 	}
+
 }

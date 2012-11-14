@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiResult;
+use ApiResult, MWException;
 
 /**
  * Base class for ApiSerializers.
@@ -55,7 +55,7 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 * @since 0.2
 	 *
 	 * @param ApiResult $apiResult
-	 * @param ApiSerializationOptions $options
+	 * @param ApiSerializationOptions|null $options
 	 */
 	public function __construct( ApiResult $apiResult, ApiSerializationOptions $options = null ) {
 		$this->apiResult = $apiResult;
@@ -95,6 +95,7 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 * @since 0.2
 	 *
 	 * @return ApiResult
+	 * @throws MWException
 	 */
 	protected final function getResult() {
 		return $this->apiResult;

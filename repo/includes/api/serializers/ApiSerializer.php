@@ -5,6 +5,9 @@ use ApiResult, MWException;
 
 /**
  * Interface for serializers that take an object and transform it into API output.
+ * Note: the term "serialize" is use loosely here. Internal objects are turned into API structures.
+ *
+ * If an unserializer is available, you can roundtrip via ApiUnserializer::getUnserialized
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +35,7 @@ use ApiResult, MWException;
 interface ApiSerializer {
 
 	/**
-	 * Serializes the provided object to API output and returns this serialization.
+	 * Turns the provided object to API output and returns this serialization.
 	 *
 	 * @since 0.2
 	 *
@@ -61,4 +64,3 @@ interface ApiSerializer {
 	public function setApiResult( ApiResult $apiResult );
 
 }
-

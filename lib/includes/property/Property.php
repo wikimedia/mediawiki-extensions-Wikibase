@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use DataTypes\DataType;
+use DataValues\DataValue;
 use MWException;
 
 /**
@@ -71,5 +72,16 @@ interface Property extends Entity, ClaimListAccess {
 	 * @return boolean
 	 */
 	public function hasClaims();
+
+	/**
+	 * Factory for creating new DataValue objects for the property.
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $rawDataValue The value that can be obtained via $dataValue->toArray()
+	 *
+	 * @return DataValue
+	 */
+	public function newDataValue( $rawDataValue );
 
 }

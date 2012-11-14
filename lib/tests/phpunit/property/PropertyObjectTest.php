@@ -150,4 +150,34 @@ class PropertyObjectTest extends EntityObjectTest {
 		$this->assertEquals( count( $property->getClaims() ) !== 0, $has );
 	}
 
+	public function newDataValueProvider() {
+		$argLists = array();
+
+		$property = \Wikibase\PropertyObject::newFromType( 'wikibase-item' );
+		$property->setId( 852645 );
+
+		$argLists[] = array( clone $property, new \DataValues\NumberValue( 42 ) );
+		$argLists[] = array( clone $property, new \DataValues\NumberValue( 9001 ) );
+
+		$property->setId( 852642 );
+
+		$argLists[] = array( clone $property, new \DataValues\NumberValue( 9001 ) );
+
+		$property->setDataType( \DataTypes\DataTypeFactory::singleton()->getType( 'commonsMedia' ) );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider newDataValueProvider
+	 *
+	 * @param \Wikibase\Property $property
+	 * @param \DataValues\DataValue $dataValue
+	 */
+	public function testNewDataValue( Property $property, \DataValues\DataValue $dataValue ) {
+		$newDataValue = $property->newDataValue( $dataValue->getArrayValue() );
+
+		$this->assertTrue( $dataValue->equals( $newDataValue ) );
+	}
+
 }
