@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH///9o\u003d",
+        "filename": "repo/includes/content/EntityContentFactory.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-14T14:15:27Z",
+      "side": 1,
+      "message": "bleh, stuff got moved around, nothing changed though",
+      "revId": "321cbf5e387ccd1fd4792248571e644f4fa41216",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
