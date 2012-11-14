@@ -14,7 +14,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Reference extends Hashable {
+interface Reference extends \Hashable {
 
 	/**
 	 * Returns the property snaks that make up this reference.

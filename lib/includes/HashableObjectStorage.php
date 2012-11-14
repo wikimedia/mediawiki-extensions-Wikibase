@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Hashable;
 
 /**
  * Object storage for Hashable objects.

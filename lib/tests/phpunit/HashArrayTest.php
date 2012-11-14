@@ -2,7 +2,7 @@
 
 namespace Wikibase\Test;
 use Wikibase\HashArray;
-use Wikibase\Hashable;
+use Hashable;
 
 /**
  * Tests for the Wikibase\HashArray class.
