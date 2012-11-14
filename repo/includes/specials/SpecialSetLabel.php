@@ -96,7 +96,7 @@ class SpecialSetLabel extends SpecialWikibasePage {
 		if ( ( $entityContent !== null ) && ( $language !== null ) && $this->getRequest()->wasPosted() ) {
 
 			$entityContent->getEntity()->setLabel( $language, $label );
-			$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() );
+			$editEntity = new \Wikibase\EditEntity( $entityContent, $this->getUser() ); //TODO: need conflict detection??
 			$editEntity->attemptSave( '', EDIT_AUTOSUMMARY,  $request->getVal( 'wpEditToken' ) );
 			if ( !($editEntity->isSuccess()) ) {
 				$editEntity->showErrorPage( $this->getOutput() );

@@ -154,6 +154,28 @@ class ItemHandler extends EntityHandler {
 	}
 
 	/**
+	 * Get the title of the item corresponding to the provided site and title pair,
+	 * or null if there is no such item.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $siteId
+	 * @param string $pageName
+	 *
+	 * @return Title|null
+	 */
+	public function getTitleFromSiteLink( $siteId, $pageName ) {
+		$id = $this->getIdForSiteLink( $siteId, $pageName );
+
+		if ( $id === false ) {
+			return null;
+		}
+
+		$eid = new EntityId( Item::ENTITY_TYPE, $id );
+		return EntityContentFactory::singleton()->getTitleForId( $eid );
+	}
+
+	/**
 	 * @see EntityHandler::getSpecialPageForCreation
 	 * @since 0.2
 	 *

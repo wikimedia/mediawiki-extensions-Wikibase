@@ -29,7 +29,7 @@ use ApiBase, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiCreateClaim extends ApiBase implements ApiAutocomment {
+class ApiCreateClaim extends Api implements ApiAutocomment {
 
 	/**
 	 * @see  ApiAutocomment::getTextForComment()
@@ -170,9 +170,10 @@ class ApiCreateClaim extends ApiBase implements ApiAutocomment {
 	protected function getEntityContent() {
 		$params = $this->extractRequestParams();
 
-		$entityContent = EntityContentFactory::singleton()->getFromId( EntityId::newFromPrefixedId( $params['id'] ) );
+		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
+		$entityTitle = EntityContentFactory::singleton()->getTitleForId( EntityId::newFromPrefixedId( $params['id'] ) );
 
-		return $entityContent === null ? null : $entityContent;
+		return $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
 
 	/**
