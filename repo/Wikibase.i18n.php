@@ -581,7 +581,7 @@ $messages['ar'] = array(
 	'wikibase-restoreold' => 'استرجاع',
 );
 
-/** South Azerbaijani (South Azerbaijani)
+/** تورکجه (تورکجه)
  * @author Erdemaslancan
  */
 $messages['azb'] = array(
@@ -749,12 +749,47 @@ $messages['ca'] = array(
 	'wikibase-newproperty-datatype' => 'Tipus de dades:',
 	'special-createitem' => 'Crea un element nou',
 	'wikibase-createitem-fieldset' => 'Crea un element nou',
+	'wikibase-createitem-site' => 'Nom de la primera pàgina enllaçada',
 	'wikibase-createitem-page' => 'Nom de la primera pàgina enllaçada',
+	'wikibase-createitem-add-sitelink-failed' => "No s'ha pogut desar l'enllaç de pàgina web.",
 	'wikibase-createentity-label' => 'Etiqueta:',
 	'wikibase-createentity-description' => 'Descripció:',
 	'wikibase-createentity-submit' => 'Crea',
+	'special-setlabel' => 'Defineix una etiqueta',
+	'wikibase-setlabel-introfull' => "S'està definint l'etiqueta a $2 gràcies a [[$1]]",
 	'wikibase-setlabel-id' => 'ID',
+	'wikibase-setlabel-language' => 'Llengua',
+	'wikibase-setlabel-label' => 'Etiqueta',
+	'wikibase-setlabel-submit' => "Desa l'etiqueta",
+	'wikibase-entitieswithoutlabel-label-language' => 'Llengua:',
+	'wikibase-entitieswithoutlabel-submit' => 'Cerca',
+	'wikibase-entitieswithoutlabel-invalid-language' => '" $1 " no és un codi d\'idioma vàlid.',
 	'wikibase-restoreold' => 'restaura',
+	'wikibase-item-summary-wbeditentity' => 'Crea un element nou',
+	'wikibase-item-summary-wbsetlabel-set' => "Canvia l'etiqueta [$2]",
+	'wikibase-item-summary-wbsetlabel-remove' => "Esborra l'etiqueta [$2]",
+	'wikibase-item-summary-wbsetdescription-set' => 'Canvia la descripció [$2]',
+	'wikibase-item-summary-wbsetdescription-remove' => 'Esborra la descripció [$2]',
+	'wikibase-item-summary-wbsetsitelink-set' => "Afegeix l'enllaç específic de la pàgina web [$2]",
+	'wikibase-item-summary-wbsetsitelink-remove' => "Esborra l'enllaç específic de la pàgina web [$2]",
+	'wikibase-item-summary-wbsetaliases-set' => 'Defineix $1 àlies a [$2]', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-add-remove' => 'Afegeix i esborra $2 àlies a $1', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-add' => 'Afegeix $1 àlies a $2', # Fuzzy
+	'wikibase-item-summary-wbsetaliases-remove' => 'Esborra $2  àlies a $1', # Fuzzy
+	'content-model-1001' => 'Element de Wikibase',
+	'right-item-override' => 'Sobreescriu un element',
+	'right-item-create' => 'Crear un element nou',
+	'right-item-remove' => 'Esborrar un element',
+	'right-alias-add' => 'Afegir un àlies',
+	'right-alias-set' => 'Definir un àlies',
+	'right-alias-remove' => 'Esborrar un àlies',
+	'right-sitelink-remove' => "Esborrar l'enllaç d'una pàgina web",
+	'right-sitelink-update' => "Actualitzar l'enllaç d'una pàgina web",
+	'right-linktitles-update' => "Actualitzar un títol d'enllaç",
+	'right-label-remove' => 'Esborrar una etiqueta',
+	'right-label-update' => 'Actualitzar una etiqueta',
+	'right-description-remove' => 'Esborrar una descripció',
+	'right-description-update' => 'Actualitzar una descripció',
 );
 
 /** German (Deutsch)
@@ -2030,10 +2065,26 @@ $messages['gl'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => 'Engado {{plural:$1|un pseudónimo|pseudónimos}} en [$2]',
 	'wikibase-item-summary-wbsetaliases-remove' => 'Elimino {{plural:$1|un pseudónimo|pseudónimos}} en [$2]',
 	'wikibase-item-summary-wblinktitles-connect' => 'Conecto [$2↔$3] {{plural:$1|unha páxina|páxinas}}',
+	'wikibase-item-summary-wbcreateclaim-value' => 'Creo {{plural:$1|unha afirmación con valor|afirmacións con valor}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => 'Creo {{plural:$1|unha afirmación sen valor|afirmacións sen valor}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => 'Creo {{plural:$1|unha afirmación con algún valor|afirmacións con algún valor}}',
 	'wikibase-item-summary-special-create-item' => 'Creo un elemento en [$2] {{plural:$1|cun valor|con valores}}',
 	'wikibase-item-summary-special-create-property' => 'Creo unha propiedade en [$2] {{plural:$1|cun valor|con valores}}',
 	'wikibase-item-summary-special-create-query' => 'Creo unha pescuda en [$2] {{plural:$1|cun valor|con valores}}',
 	'content-model-1001' => 'Elemento de Wikibase',
+	'right-item-override' => 'Sobrescribir un elemento',
+	'right-item-create' => 'Crear un elemento',
+	'right-item-remove' => 'Eliminar un elemento',
+	'right-alias-add' => 'Engadir un pseudónimo',
+	'right-alias-set' => 'Establecer un pseudónimo',
+	'right-alias-remove' => 'Eliminar un pseudónimo',
+	'right-sitelink-remove' => 'Eliminar unha ligazón do sitio',
+	'right-sitelink-update' => 'Actualizar unha ligazón do sitio',
+	'right-linktitles-update' => 'Actualizar un título de ligazón',
+	'right-label-remove' => 'Eliminar unha etiqueta',
+	'right-label-update' => 'Actualizar unha etiqueta',
+	'right-description-remove' => 'Eliminar unha descrición',
+	'right-description-update' => 'Actualizar unha descrición',
 );
 
 /** Swiss German (Alemannisch)
@@ -2721,7 +2772,6 @@ $messages['is'] = array(
 	'wikibase-entitieswithoutlabel-label-language' => 'Tungumál:',
 	'wikibase-entitieswithoutlabel-submit' => 'Finna',
 	'wikibase-entitieswithoutlabel-invalid-language' => '„$1” er ógildur tungumálakóði.',
-	'wikibase-self-conflict' => 'Gögnunum var breytt eftir að þú byrjaðir að breyta síðunni.',
 	'wikibase-restoreold' => 'endursetja',
 	'wikibase-restore-summary' => 'Endurvekja útgáfu $1 eftir [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Bein breyting er óvirk í nafnrými $1',
@@ -3757,7 +3807,6 @@ $messages['nb'] = array(
 	'wikibase-entitieswithoutlabel-submit' => 'Søk',
 	'wikibase-entitieswithoutlabel-invalid-language' => '«$1» er ikke en gyldig språkkode.',
 	'wikibase-api-patch-incomplete' => 'Den genererte patchen ble ufullstendig.',
-	'wikibase-self-conflict' => 'Data ble endret av deg selv etter du startet å redigere.',
 	'wikibase-restoreold' => 'tilbakestill',
 	'wikibase-restore-summary' => 'Legg tilbake versjonen $1 av [[Special:Contributions/$2|$2]]',
 	'wikibase-no-direct-editing' => 'Direkteredigering er avslått i navnerommet $1',
@@ -5304,9 +5353,9 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-wbsetaliases-add' => '設置[$2]的{{plural:$1|别名}}',
 	'wikibase-item-summary-wbsetaliases-remove' => '移除[$2]的{{plural:$1|别名}}',
 	'wikibase-item-summary-wblinktitles-connect' => '連接[$2↔$3]{{plural:$1|頁面}}',
-	'wikibase-item-summary-wbcreateclaim-value' => '創建{{plural:$1|數值聲稱}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-novalue' => '創建{{plural:$1|無數值聲稱}}', # Fuzzy
-	'wikibase-item-summary-wbcreateclaim-somevalue' => '創建{{plural:$1|半數值聲稱}}', # Fuzzy
+	'wikibase-item-summary-wbcreateclaim-value' => '已創建{{plural:$1|數值聲稱}}',
+	'wikibase-item-summary-wbcreateclaim-novalue' => '已創建{{plural:$1|無數值聲稱}}',
+	'wikibase-item-summary-wbcreateclaim-somevalue' => '已創建{{plural:$1|半數值聲稱}}',
 	'wikibase-item-summary-special-create-item' => '創建含{{plural:$1|數值}}的[$2]項目',
 	'wikibase-item-summary-special-create-property' => '創建含{{plural:$1|數值}}的[$2]屬性',
 	'wikibase-item-summary-special-create-query' => '創建含{{plural:$1|數值}}的[$2]查詢',
