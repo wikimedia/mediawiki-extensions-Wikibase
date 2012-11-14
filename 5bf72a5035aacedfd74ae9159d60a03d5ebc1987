@@ -16,6 +16,23 @@
       "revId": "5bf72a5035aacedfd74ae9159d60a03d5ebc1987",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADY3////g\u003d",
+        "filename": "lib/resources/wikibase.store/wikibase.Api.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-14T13:10:46Z",
+      "side": 1,
+      "message": "I think this is then obsolet..",
+      "revId": "5bf72a5035aacedfd74ae9159d60a03d5ebc1987",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
