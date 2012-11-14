@@ -440,7 +440,7 @@ class ApiEditEntity extends ApiModifyEntity {
 		return array(
 			'api.php?action=wbeditentity&data={}&format=jsonfm'
 			=> 'Set an empty JSON structure for the entity, it will be extended with an id and the structure cleansed and completed. Report it as pretty printed json format.',
-			'api.php?action=wbeditentity&data={"label":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
+			'api.php?action=wbeditentity&data={"labels":{"de":{"language":"de","value":"de-value"},"en":{"language":"en","value":"en-value"}}}'
 			=> 'Set a more complete JSON structure for the entity, it will be extended with an id and the structure cleansed and completed.',
 		);
 	}
