@@ -158,4 +158,81 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
 		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
 	}
+
+	public function provideConflictDetection() {
+		$cases = array();
+
+		// #0: adding a label where there was none before
+		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$current = $base;
+
+		$new = $base->copy();
+		$new->setLabel( 'en', 'TEST' );
+
+		$cases[] = array(
+			$base,
+			$current,
+			$new,
+			0 // there should eb no conflicts.
+		);
+
+		// #1: adding an alias where there was none before
+		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$current = $base;
+
+		$new = $base->copy();
+		$new->addAliases( 'en', array( 'TEST' ) );
+
+		$cases[] = array(
+			$base,
+			$current,
+			$new,
+			0 // there should eb no conflicts.
+		);
+
+		// #2: adding an alias where there already was one before
+		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base->addAliases( 'en', array( 'Foo' ) );
+		$current = $base;
+
+		$new = $base->copy();
+		$new->addAliases( 'en', array( 'Bar' ) );
+
+		$cases[] = array(
+			$base,
+			$current,
+			$new,
+			0 // there should be no conflicts.
+		);
+
+		// #3: adding an alias where there already was one in another language
+		$base = $this->newEntity( \Wikibase\Item::ENTITY_TYPE );
+		$base->addAliases( 'en', array( 'Foo' ) );
+		$current = $base;
+
+		$new = $base->copy();
+		$new->addAliases( 'de', array( 'Bar' ) );
+
+		$cases[] = array(
+			$base,
+			$current,
+			$new,
+			0 // there should be no conflicts.
+		);
+
+		return $cases;
+	}
+
+	/**
+	 *
+	 * @dataProvider provideConflictDetection
+	 */
+	public function testConflictDetection( Entity $base, Entity $current, Entity $new, $expectedConflicts ) {
+		$patch = $base->getDiff( $new ); // diff from base to new
+
+		$cleanPatch = $patch->getApplicableDiff( $current->toArray() );
+		$conflicts = $patch->count() - $cleanPatch->count();
+
+		$this->assertEquals( $expectedConflicts, $conflicts, "check number of conflicts detected" );
+	}
 }
