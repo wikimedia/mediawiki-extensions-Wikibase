@@ -16,6 +16,24 @@
       "revId": "12bc108d34284db0974a30937f84c559fd6f5793",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADYn///64\u003d",
+        "filename": "repo/includes/api/ApiCreateClaim.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-14T12:52:17Z",
+      "side": 1,
+      "message": "so I can use $this-\u003eloadEntityContent.",
+      "parentUuid": "AAADO3////M\u003d",
+      "revId": "12bc108d34284db0974a30937f84c559fd6f5793",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
