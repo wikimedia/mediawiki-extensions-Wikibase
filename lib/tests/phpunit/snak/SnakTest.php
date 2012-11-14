@@ -100,4 +100,30 @@ class SnakTest extends \MediaWikiTestCase {
 		$this->assertEquals( $hash, $snak->getHash() );
 	}
 
+	/**
+	 * @dataProvider snakProvider
+	 * @param Snak $snak
+	 */
+	public function testEquals( Snak $snak ) {
+		$this->assertTrue( $snak->equals( $snak ) );
+		$this->assertFalse( $snak->equals( '~=[,,_,,]:3' ) );
+	}
+
+	public function testEqualsMoar() {
+		$id42 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 );
+
+		$snak = new \Wikibase\PropertyNoValueSnak( $id42 );
+
+		$this->assertFalse( $snak->equals( new \Wikibase\PropertySomeValueSnak( $id42 ) ) );
+
+		$this->assertFalse( $snak->equals( new \Wikibase\PropertyValueSnak(
+			$id42,
+			new \DataValues\StringValue( 'Ohi there!' )
+		) ) );
+
+		$id43 = new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 43 );
+
+		$this->assertFalse( $snak->equals( new \Wikibase\PropertyNoValueSnak( $id43 ) ) );
+	}
+
 }

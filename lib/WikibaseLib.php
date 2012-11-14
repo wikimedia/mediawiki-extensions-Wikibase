@@ -86,7 +86,6 @@ $wgAutoloadClasses['Wikibase\ByPropertyIdArray'] 	= $dir . 'includes/ByPropertyI
 $wgAutoloadClasses['Wikibase\ChangeHandler'] 		= $dir . 'includes/ChangeHandler.php';
 $wgAutoloadClasses['Wikibase\ChangeNotifier'] 		= $dir . 'includes/ChangeNotifier.php';
 $wgAutoloadClasses['Wikibase\ChangesTable'] 		= $dir . 'includes/ChangesTable.php';
-$wgAutoloadClasses['Wikibase\Comparable'] 			= $dir . 'includes/Comparable.php';
 $wgAutoloadClasses['Wikibase\DiffView'] 			= $dir . 'includes/DiffView.php';
 $wgAutoloadClasses['Wikibase\HashableObjectStorage']= $dir . 'includes/HashableObjectStorage.php';
 $wgAutoloadClasses['Wikibase\HashArray'] 			= $dir . 'includes/HashArray.php';
