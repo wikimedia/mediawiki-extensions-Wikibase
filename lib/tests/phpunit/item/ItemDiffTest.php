@@ -38,18 +38,10 @@ use Wikibase\ItemObject;
 
 class ItemDiffTest extends EntityDiffTest {
 
-	private function flatten( array $array ) {
-		$return = array();
-		array_walk_recursive( $array, function( $a, $b ) use ( &$return ) {
-				$return[$b] = $a; }
-		);
-		return $return;
-	}
-
 	public function provideApplyData() {
-		$originalTests = array();
-		$originalTests[] = parent::generateApplyData( "Item" );
+		$originalTests = parent::generateApplyData( \Wikibase\Item::ENTITY_TYPE );
 		$tests = array();
+
 		// add link ------------------------------
 		$a = ItemObject::newEmpty();
 		$a->addSiteLink( SiteLink::newFromText( 'enwiki', 'Test' ) );
@@ -78,7 +70,7 @@ class ItemDiffTest extends EntityDiffTest {
 
 		$tests[] = array( $a, $b );
 
-		return $this->flatten ( array_merge( $originalTests, $tests ) );
+		return array_merge( $originalTests, $tests );
 	}
 
 	/**

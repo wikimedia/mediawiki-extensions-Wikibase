@@ -35,16 +35,19 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 
 	private function newEntity ( $entityType ) {
 		switch ( $entityType ) {
-			case "Item":
+			case \Wikibase\Item::ENTITY_TYPE:
 				$entity = \Wikibase\ItemObject::newEmpty();
 				break;
-			case "Property":
+			case \Wikibase\Property::ENTITY_TYPE:
 				$entity = \Wikibase\PropertyObject::newEmpty();
 				break;
-			case "Query":
+			case \Wikibase\Query::ENTITY_TYPE:
 				$entity =\Wikibase\QueryObject::newEmpty();
 				break;
+			default:
+				throw new \MWException( "unknown entity type: $entityType" );
 		}
+
 		return $entity;
 	}
 
@@ -155,5 +158,4 @@ abstract class EntityDiffTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $a->getDescriptions(), $b->getDescriptions() );
 		$this->assertArrayEquals( $a->getAllAliases(), $b->getAllAliases() );
 	}
-
 }
