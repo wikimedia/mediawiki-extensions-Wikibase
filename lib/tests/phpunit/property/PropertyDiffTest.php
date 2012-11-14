@@ -35,7 +35,7 @@ use \Wikibase\Entity;
 
 class PropertyDiffTest extends EntityDiffTest {
 	public function provideApplyData() {
-		return parent::generateApplyData( "Property" );
+		return parent::generateApplyData( \Wikibase\Property::ENTITY_TYPE );
 	}
 
 	/**
