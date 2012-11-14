@@ -130,6 +130,7 @@ final class RepoHooks {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'Autocomment',
+			'FuzzyCompare',
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
