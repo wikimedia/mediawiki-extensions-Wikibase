@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADYn///7U\u003d",
+        "filename": "repo/Wikibase.i18n.alias.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-14T12:47:34Z",
+      "side": 1,
+      "message": "Can\u0027t we keep the old name as an alias? I.e. use:\n\n       \u0027NewItem\u0027 \u003d\u003e array( \u0027NewItem\u0027, \u0027CreateItem\u0027 ),",
+      "revId": "15408f901b968e0775c9e1abee96394ccdc39bc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADYn///7Y\u003d",
+        "filename": "repo/includes/Autocomment.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-14T12:47:34Z",
+      "side": 1,
+      "message": "These names could be a bit clearer. e.g.:\n\nlist( $model, $messageRoot ) \u003d $hookArgs;",
+      "revId": "15408f901b968e0775c9e1abee96394ccdc39bc8",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
