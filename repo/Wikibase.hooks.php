@@ -135,6 +135,7 @@ final class RepoHooks {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'Autocomment',
+			'FuzzyComparer',
 			'EditEntity',
 			'EntityLoader',
 			'ItemMove',
@@ -704,10 +705,10 @@ final class RepoHooks {
 			return true;
 		}
 
-		global $wgTitle;
-
 		// $wgTitle is temporarily set to special pages Title in case of special page inclusion! Therefore we can
 		// just check whether the page is a special page and if not, disable the behavior.
+		global $wgTitle;
+
 		if( $wgTitle === null || !$wgTitle->isSpecialPage() ) {
 			// no special page, we don't handle this for now
 			// NOTE: If we want to handle this, messages would have to be generated in sites language instead of
