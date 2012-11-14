@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Entity extends Comparable, ClaimAggregate, \Serializable {
+interface Entity extends \Comparable, ClaimAggregate, \Serializable {
 
 	/**
 	 * Get an array representing the Entity.

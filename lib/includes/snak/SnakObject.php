@@ -1,6 +1,7 @@
 <?php
 
 namespace Wikibase;
+use Comparable;
 
 /**
  * Base class for snaks.
@@ -29,7 +30,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class SnakObject implements Snak {
+abstract class SnakObject implements Snak, Comparable {
 
 	/**
 	 * @see Snak::getHash
@@ -40,6 +41,23 @@ abstract class SnakObject implements Snak {
 	 */
 	public function getHash() {
 		return sha1( serialize( $this ) );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		if ( is_object( $target ) && ( $target instanceof Snak ) ) {
+			return $this->getHash() === $target->getHash();
+		}
+
+		return false;
 	}
 
 }
