@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use MWException, Title, WikiPage;
+use MWException, Title, WikiPage, Revision;
 
 /**
  * Factory for EntityContent objects.
@@ -30,13 +30,6 @@ use MWException, Title, WikiPage;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class EntityContentFactory {
-
-	// TODO: move to sane place
-	protected static $typeMap = array(
-		Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
-		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
-		Query::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_QUERY,
-	);
 
 	/**
 	 * @since 0.2
@@ -81,6 +74,60 @@ class EntityContentFactory {
 	}
 
 	/**
+	 * Get the items corresponding to the provided language and label pair.
+	 * A description can also be provided, in which case only the item with
+	 * that description will be returned (as only element in the array).
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $language
+	 * @param string $label
+	 * @param string|null $description
+	 * @param string|null $entityType
+	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
+	 *
+	 * @return EntityContent[]
+	 */
+	public function getFromLabel( $language, $label, $description = null, $entityType = null, $fuzzySearch = false ) {
+		$entityIds = StoreFactory::getStore()->newTermCache()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
+		$entities = array();
+
+		foreach ( $entityIds as $entityId ) {
+			list( $type, $id ) = $entityId;
+			$entity = self::getFromId( new EntityId( $type, $id ) );
+
+			if ( $entity !== null ) {
+				$entities[] = $entity;
+			}
+		}
+
+		return $entities;
+	}
+
+	/**
+	 * Get the entity content for the entity with the provided id
+	 * if it's available to the specified audience.
+	 * If the specified audience does not have the ability to view this
+	 * revision, if there is no such item, null will be returned.
+	 *
+	 * @since 0.2
+	 *
+	 * @param EntityId $id
+	 *
+	 * @param integer $audience: one of:
+	 *      Revision::FOR_PUBLIC       to be displayed to all users
+	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
+	 *      Revision::RAW              get the text regardless of permissions
+	 *
+	 * @return EntityContent|null
+	 */
+	public function getFromId( EntityId $id, $audience = Revision::FOR_PUBLIC ) {
+		// TODO: since we already did the trouble of getting a WikiPage here,
+		// we probably want to keep a copy of it in the Content object.
+		return $this->getWikiPageForId( $id )->getContent( $audience );
+	}
+
+	/**
 	 * Returns the Title object for the item with provided id.
 	 *
 	 * @since 0.3
@@ -111,29 +158,6 @@ class EntityContentFactory {
 	}
 
 	/**
-	 * Get the entity content for the entity with the provided id
-	 * if it's available to the specified audience.
-	 * If the specified audience does not have the ability to view this
-	 * revision, if there is no such item, null will be returned.
-	 *
-	 * @since 0.3
-	 *
-	 * @param EntityId $id
-	 *
-	 * @param $audience Integer: one of:
-	 *      Revision::FOR_PUBLIC       to be displayed to all users
-	 *      Revision::FOR_THIS_USER    to be displayed to $wgUser
-	 *      Revision::RAW              get the text regardless of permissions
-	 *
-	 * @return EntityContent|null
-	 */
-	public function getFromId( EntityId $id, $audience = \Revision::FOR_PUBLIC ) {
-		// TODO: since we already did the trouble of getting a WikiPage here,
-		// we probably want to keep a copy of it in the Content object.
-		return $this->getWikiPageForId( $id )->getContent( $audience );
-	}
-
-	/**
 	 * Get the entity content with the provided revision id, or null if there is no such entity content.
 	 *
 	 * Note that this returns an old content that may not be valid anymore.
@@ -154,35 +178,11 @@ class EntityContentFactory {
 		return $revision->getContent();
 	}
 
-	/**
-	 * Get the items corresponding to the provided language and label pair.
-	 * A description can also be provided, in which case only the item with
-	 * that description will be returned (as only element in the array).
-	 *
-	 * @since 0.2
-	 *
-	 * @param string $language
-	 * @param string $label
-	 * @param string|null $description
-	 * @param string|null $entityType
-	 * @param bool $fuzzySearch if false, only exact matches are returned, otherwise more relaxed search . Defaults to false.
-	 *
-	 * @return EntityContent[]
-	 */
-	public function getFromLabel( $language, $label, $description = null, $entityType = null, $fuzzySearch = false ) {
-		$entityIds = StoreFactory::getStore()->newTermCache()->getEntityIdsForLabel( $label, $language, $description, $entityType, $fuzzySearch );
-		$entities = array();
-
-		foreach ( $entityIds as $entityId ) {
-			list( $type, $id ) = $entityId;
-			$entity = self::getFromId( new EntityId( $type, $id ) );
-
-			if ( $entity !== null ) {
-				$entities[] = $entity;
-			}
-		}
-
-		return $entities;
-	}
+	// TODO: move to sane place
+	protected static $typeMap = array(
+		Item::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_ITEM,
+		Property::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_PROPERTY,
+		Query::ENTITY_TYPE => CONTENT_MODEL_WIKIBASE_QUERY,
+	);
 
 }

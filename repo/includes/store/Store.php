@@ -74,11 +74,12 @@ interface Store {
 	public function newIdGenerator();
 
 	/**
-	 * Return a new EntityPerPage
+	 * Return a new EntityPerPage.
 	 *
 	 * @since 0.3
 	 *
 	 * @return EntityPerPage
 	 */
 	public function newEntityPerPage();
+
 }

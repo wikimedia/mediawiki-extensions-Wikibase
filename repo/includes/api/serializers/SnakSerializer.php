@@ -52,6 +52,8 @@ class SnakSerializer extends ApiSerializerObject {
 
 		$serialization['property'] = $snak->getPropertyId()->getPrefixedId();
 
+		// TODO: we might want to include the data type of the property here as well
+
 		if ( $snak->getType() === 'value' ) {
 			/**
 			 * @var PropertyValueSnak $snak

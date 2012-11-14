@@ -2,6 +2,7 @@
 
 namespace Wikibase;
 use DataTypes\DataType;
+use DataValues\DataValue;
 use MWException;
 
 /**
@@ -190,6 +191,17 @@ class PropertyObject extends EntityObject implements Property {
 	}
 
 	/**
+	 * @since 0.3
+	 *
+	 * @param string $dataTypeId
+	 *
+	 * @return Property
+	 */
+	public static function newFromType( $dataTypeId ) {
+		return self::newFromArray( array( 'datatype' => $dataTypeId ) );
+	}
+
+	/**
 	 * @see ClaimListAccess::addClaim
 	 *
 	 * @since 0.2
@@ -333,6 +345,19 @@ class PropertyObject extends EntityObject implements Property {
 		if (  $wipeExisting || !array_key_exists( 'claims', $this->data ) ) {
 			$this->data['claims'] = array();
 		}
+	}
+
+	/**
+	 * @see Property::newDataValue
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $rawDataValue
+	 *
+	 * @return DataValue
+	 */
+	public function newDataValue( $rawDataValue ) {
+		return \DataValues\DataValueFactory::singleton()->newDataValue( $this->getDataType()->getDataValueType(), $rawDataValue );
 	}
 
 }
