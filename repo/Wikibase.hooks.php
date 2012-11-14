@@ -130,6 +130,7 @@ final class RepoHooks {
 		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'Autocomment',
+			//'FuzzyCompare', // This is missing score for the moment
 			'ItemMove',
 			'ItemContentDiffView',
 			'ItemMove',
