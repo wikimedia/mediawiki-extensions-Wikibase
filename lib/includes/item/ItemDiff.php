@@ -35,7 +35,7 @@ use Diff\MapDiff;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig
  */
-class ItemDiff extends EntityDiffObject {
+class ItemDiff extends EntityDiffObject implements \Immutable {
 
 	/**
 	 * Creates a new ItemDiff representing the difference between $oldItem and $newItem
@@ -140,7 +140,5 @@ class ItemDiff extends EntityDiffObject {
 	public function getView() {
 		return new ItemDiffView( array(), $this );
 	}
-
-
 
 }

@@ -92,7 +92,6 @@ $wgAutoloadClasses['Wikibase\HashableObjectStorage']= $dir . 'includes/HashableO
 $wgAutoloadClasses['Wikibase\HashArray'] 			= $dir . 'includes/HashArray.php';
 $wgAutoloadClasses['Wikibase\Template'] 			= $dir . 'includes/TemplateStore.php';
 $wgAutoloadClasses['Wikibase\TemplateStore'] 		= $dir . 'includes/TemplateStore.php';
-$wgAutoloadClasses['Wikibase\Immutable'] 			= $dir . 'includes/Immutable.php';
 $wgAutoloadClasses['Wikibase\MapHasher'] 			= $dir . 'includes/MapHasher.php';
 $wgAutoloadClasses['Wikibase\MapValueHasher'] 		= $dir . 'includes/MapValueHasher.php';
 $wgAutoloadClasses['Wikibase\Reference'] 			= $dir . 'includes/Reference.php';
