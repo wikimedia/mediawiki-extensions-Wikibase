@@ -304,7 +304,7 @@ final class ClientHooks {
 			$titleText
 		);
 		if ( $itemId !== false ) {
-			$itemByTitle = Settings::get( 'repoBase' ) . $globalId . '/' . $oldTitle->getDBkey();
+			$itemByTitle = ClientUtils::baseUrl() . $globalId . '/' . $oldTitle->getDBkey();
 			$out = $movePage->getOutput();
 			$out->addModules( 'ext.wikibaseclient.page-move' );
 			$out->addHTML(
