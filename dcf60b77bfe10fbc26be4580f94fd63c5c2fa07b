@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH///Rc\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-15T13:39:30Z",
+      "side": 1,
+      "message": "This deletes all external changes? That does not seem correct...",
+      "revId": "dcf60b77bfe10fbc26be4580f94fd63c5c2fa07b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
