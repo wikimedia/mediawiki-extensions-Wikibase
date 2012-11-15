@@ -21,10 +21,13 @@ use Wikibase\Settings, Wikibase\EntityId;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.3
  *
  * @ingroup WikibaseLib
  * @ingroup Test
+ *
+ * @group Wikibase
+ * @group WikibaseLib
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -66,6 +69,12 @@ class EntityIdTest extends \MediaWikiTestCase {
 		return $argLists;
 	}
 
+	/**
+	 * @dataProvider constructorProvider
+	 *
+	 * @param string $type
+	 * @param integer $number
+	 */
 	public function testConstructor( $type, $number ) {
 		$id = new EntityId( $type, $number );
 
@@ -89,10 +98,10 @@ class EntityIdTest extends \MediaWikiTestCase {
 	 * @param array $constructorArgs
 	 */
 	public function testIsPrefixedId( EntityId $id, array $constructorArgs ) {
-		$this->asserTrue( EntityId::isPrefixedId( $id->getPrefixedId() ) );
-		$this->asserFalse( EntityId::isPrefixedId( $id->getNumericId() ) );
-		$this->asserFalse( EntityId::isPrefixedId( $id->getPrefix() ) );
-		$this->asserFalse( EntityId::isPrefixedId( $id->getEntityType() ) );
+		$this->assertTrue( EntityId::isPrefixedId( $id->getPrefixedId() ) );
+		$this->assertFalse( EntityId::isPrefixedId( $id->getNumericId() ) );
+		$this->assertFalse( EntityId::isPrefixedId( $id->getPrefix() ) );
+		$this->assertFalse( EntityId::isPrefixedId( $id->getEntityType() ) );
 	}
 
 	/**
@@ -111,6 +120,50 @@ class EntityIdTest extends \MediaWikiTestCase {
 	 */
 	public function testGetNumericId( EntityId $id, array $constructorArgs ) {
 		$this->assertEquals( $constructorArgs[1], $id->getNumericId() );
+	}
+
+	public function equalityProvider() {
+		$argLists = array();
+
+		$types = array(
+			\Wikibase\Item::ENTITY_TYPE,
+			\Wikibase\Property::ENTITY_TYPE,
+			\Wikibase\Query::ENTITY_TYPE
+		);
+
+		foreach ( array_values( $types ) as $type ) {
+			$id = new EntityId( $type, 42 );
+
+			foreach ( array( 1, 42, 9001 ) as $numericId ) {
+				foreach ( $types as $secondType ) {
+					$secondId = new EntityId( $secondType, $numericId );
+
+					$matches = $type === $secondType && $numericId === 42;
+
+					$argLists[] = array( $id, $secondId, $matches );
+				}
+			}
+		}
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider equalityProvider
+	 */
+	public function testEquals( EntityId $id0, EntityId $id1, $expectedEquals ) {
+		$this->assertEquals( $expectedEquals, $id0->equals( $id1 ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 * @param \Wikibase\EntityId $id
+	 * @param array $constructorArgs
+	 */
+	public function testEqualsSimple( EntityId $id, array $constructorArgs ) {
+		$this->assertTrue( $id->equals( $id ) );
+		$this->assertFalse( $id->equals( $id->getNumericId() ) );
+		$this->assertFalse( $id->equals( $id->getEntityType() ) );
 	}
 
 }
