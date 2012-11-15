@@ -181,7 +181,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		$params = $this->extractRequestParams();
 
 		$baseRevisionId = isset( $params['baserevid'] ) ? intval( $params['baserevid'] ) : null;
-		$entityTitle = EntityContentFactory::singleton()->getTitleForId( EntityId::newFromPrefixedId( $params['id'] ) );
+		$entityTitle = EntityContentFactory::singleton()->getTitleForId( EntityId::newFromPrefixedId( $params['entity'] ) );
 
 		return $entityTitle === null ? null : $this->loadEntityContent( $entityTitle, $baseRevisionId );
 	}
@@ -229,7 +229,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 */
 	public function getAllowedParams() {
 		return array(
-			'id' => array(
+			'entity' => array(
 				ApiBase::PARAM_TYPE => 'string',
 				ApiBase::PARAM_REQUIRED => true,
 			),
@@ -261,7 +261,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 */
 	public function getParamDescription() {
 		return array(
-			'id' => 'Id of the entity you are adding the statement to',
+			'entity' => 'Id of the entity you are adding the statement to',
 			'property' => 'Id of the property when creating a claim with a snak consisting of a property',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
 			'snaktype' => 'The type of the snak',
