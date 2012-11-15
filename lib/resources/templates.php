@@ -85,7 +85,7 @@ HTML;
 
 	$templates['wb-editsection'] =
 <<<HTML
-<$1 class="editsection">$2</$1>
+<$1 class="wb-editsection">$2</$1>
 HTML;
 
 	$templates['wb-toolbar'] =
@@ -120,7 +120,7 @@ HTML;
 		<col class="wb-sitelinks-sitename" />
 		<col class="wb-sitelinks-siteid" />
 		<col class="wb-sitelinks-link" />
-		<col class="editsection" />
+		<col class="wb-editsection" />
 	</colgroup>
 	<thead>$1</thead>
 	<tbody>$2</tbody>

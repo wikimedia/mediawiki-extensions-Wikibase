@@ -70,7 +70,7 @@
 }
 
 /* toolbar container */
-.wb-entitypage .editsection {
+.wb-entitypage .wb-editsection {
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -131,7 +131,7 @@ label and its toolbar */
 	margin: .3em .3em .13em 10px; /* h1 natively has 0.17em bottom padding to avoid clipping */
 }
 
-.wb-firstHeading .editsection {
+.wb-firstHeading .wb-editsection {
 	/* this nodes font size will affect the toolbar padding which is specified in em; therefore, the
 	font size should be the same as on every other toolbar container node */
 	font-size: 100%;
@@ -140,7 +140,7 @@ label and its toolbar */
 /* vertical positioning */
 /* the following lines are used to vertically position the toolbar on the baseline of the heading
 (label) which has a bigger font size */
-.wb-firstHeading .editsection {
+.wb-firstHeading .wb-editsection {
 	line-height: 188%;
 	top: .3em; /* even out margin of label container in view mode */
 }
@@ -177,7 +177,7 @@ label and its toolbar */
 	line-height: 2; /* force height to be able to align toolbar */
 }
 
-.wb-description .editsection {
+.wb-description .wb-editsection {
 	top: 0.1em; /* see padding-top of editablevalue container */
 	line-height: 2;
 }
@@ -250,7 +250,7 @@ toolbar; furthermore, the PropertyEditTool toolbar (which is displayed only when
 aliases) shall be vertically be aligned to the baseline of the first row of aliases (just like the
 EditableValue's "edit" button when aliases exist) */
 
-.wb-aliases .editsection {
+.wb-aliases .wb-editsection {
 	/* aliases PropertyEditTool toolbar should be on the same vertical level than its label since
 	it is only displayed when there are no aliases (other PropertyEditToolbars appear below the last
 	editable value */
@@ -340,7 +340,7 @@ table.wb-sitelinks .wb-sitelinks-link {
 }
 
 /* the right column of the site links table (...-toolbarparent) should be treated as "action" column */
-table.wb-sitelinks .editsection {
+table.wb-sitelinks .wb-editsection {
 	width: 18em;
 	position: static; /* clear absolute positioning */
 	float: none; /* overwrite edit section's float: right */
@@ -350,15 +350,15 @@ table.wb-sitelinks .editsection {
 	                applying margin to the edit section cell should not have any effect at all */
 }
 
-table.wb-sitelinks .editsection .wb-ui-toolbar {
+table.wb-sitelinks .wb-editsection .wb-ui-toolbar {
 	width: 18em; /* additionally assign width to toolbar to enforce width in no-JS version */
 }
 
-table.wb-sitelinks .editsection .wb-ui-toolbar .wb-ui-toolbar-group {
+table.wb-sitelinks .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group {
 	margin-left: 1px; /* even out table cell's right border */
 }
 
-table.wb-sitelinks .editsection .wb-ui-toolbar .wb-ui-toolbar-group .wb-ui-toolbar-group {
+table.wb-sitelinks .wb-editsection .wb-ui-toolbar .wb-ui-toolbar-group .wb-ui-toolbar-group {
 	margin-left: 0; /* do not apply margin to nested toolbar groups */
 }
 
