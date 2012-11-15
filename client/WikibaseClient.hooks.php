@@ -297,14 +297,15 @@ final class ClientHooks {
 	 */
 	public static function onSpecialMovepageAfterMove( \MovePageForm $movePage, \Title &$oldTitle, \Title &$newTitle ) {
 		$siteLinkCache = ClientStoreFactory::getStore()->newSiteLinkCache();
-		$titleText = $oldTitle->getText();
 		$globalId = Settings::get( 'siteGlobalID' );
 		$itemId = $siteLinkCache->getItemIdForLink(
 			$globalId,
-			$titleText
+			$oldTitle->getText()
 		);
+
 		if ( $itemId !== false ) {
-			$itemByTitle = Settings::get( 'repoBase' ) . $globalId . '/' . $oldTitle->getDBkey();
+			$itemByTitle = 'Special:ItemByTitle/' . $globalId . '/' . $oldTitle->getDBkey();
+			$itemByTitleLink = ClientUtils::baseUrl() . $itemByTitle;
 			$out = $movePage->getOutput();
 			$out->addModules( 'ext.wikibaseclient.page-move' );
 			$out->addHTML(
@@ -312,7 +313,7 @@ final class ClientHooks {
 					'div',
 					array( 'id' => 'wbc-after-page-move',
 							'class' => 'plainlinks' ),
-					wfMessage( 'wbc-after-page-move', $itemByTitle )->parse()
+					wfMessage( 'wbc-after-page-move', $itemByTitleLink )->parse()
 				)
 			);
 		}

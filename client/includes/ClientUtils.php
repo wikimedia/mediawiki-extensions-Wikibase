@@ -38,4 +38,27 @@ final class ClientUtils {
 		$baseUrl = rtrim( $baseUrl, '/' );
 		return $baseUrl . '/';
 	}
+
+	/**
+	 * @since 0.3
+	 *
+	 * @param string $target
+	 * @param string $text
+	 * @param array $attribs
+	 *
+	 * @return string
+	 */
+	public static function repoLink( $target, $text, $attribs = array() ) {
+		$url = self::baseUrl() . $target;
+
+		$class = 'plainlinks';
+		if ( array_key_exists( 'class', $attribs ) ) {
+			$class .= ' ' . $attribs['class'];
+		}
+
+		$attribs['class'] = $class;
+		$attribs['href'] = $url;
+
+		return \Html::rawElement( 'a', $attribs, $text );
+	}
 }

@@ -38,7 +38,7 @@ class ExternalChangesList {
 		$line = '';
 
 		if ( in_array( $changeType, array( 'remove', 'restore' ) ) ) {
-			$deletionLog = self::repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
+			$deletionLog = ClientUtils::repoLink( 'Special:Log/delete', wfMessage( 'dellogpage' )->text() );
 			$line .= wfMessage( 'parentheses' )->rawParams( $deletionLog );
 		} else {
 
@@ -161,29 +161,6 @@ class ExternalChangesList {
 	/**
 	 * @since 0.2
 	 *
-	 * @param string $target
-	 * @param string $text
-	 * @param array $attribs
-	 *
-	 * @return string
-	 */
-	protected static function repoLink( $target, $text, $attribs = array() ) {
-		$url = ClientUtils::baseUrl() . $target;
-
-		$class = 'plainlinks';
-		if ( array_key_exists( 'class', $attribs ) ) {
-			$class .= ' ' . $attribs['class'];
-		}
-
-		$attribs['class'] = $class;
-		$attribs['href'] = $url;
-
-		return \Html::rawElement( 'a', $attribs, $text );
-	}
-
-	/**
-	 * @since 0.2
-	 *
 	 * @param string $userName
 	 *
 	 * @return string
@@ -193,7 +170,7 @@ class ExternalChangesList {
 		$attribs = array(
 			 'class' => 'mw-userlink'
 		);
-		return self::repoLink( $link, $userName, $attribs );
+		return ClientUtils::repoLink( $link, $userName, $attribs );
 	}
 
 	/**
@@ -209,7 +186,7 @@ class ExternalChangesList {
 		if ( $text === null ) {
 			$text = wfMessage( 'contribslink' );
 		}
-		return self::repoLink( $link, $text );
+		return ClientUtils::repoLink( $link, $text );
 	}
 
 	/**
@@ -222,7 +199,7 @@ class ExternalChangesList {
 	protected static function userTalkLink( $userName ) {
 		$link = "User_talk:$userName";
 		$text = wfMessage( 'talkpagelinktext' )->escaped();
-		return self::repoLink( $link, $text );
+		return ClientUtils::repoLink( $link, $text );
 	}
 
 	/**
@@ -240,7 +217,7 @@ class ExternalChangesList {
 			return false;
 		}
 
-		return self::repoLink( $entityText, $entityId, array( 'class' => 'wb-entity-link' ) );
+		return ClientUtils::repoLink( $entityText, $entityId, array( 'class' => 'wb-entity-link' ) );
 	}
 
 	/**
