@@ -27,15 +27,6 @@
 	dv.UnknownValue = dv.util.inherit( PARENT, constructor, {
 
 		/**
-		 * @see dv.DataValue.getType
-		 *
-		 * @since 0.1
-		 */
-		getType: function() {
-			return 'unknown';
-		},
-
-		/**
 		 * @see dv.DataValue.getSortKey
 		 *
 		 * @since 0.1
@@ -84,5 +75,9 @@
 	dv.UnknownValue.newFromJSON = function( json ) {
 		return new dv.UnknownValue( json );
 	};
+
+	dv.UnknownValue.TYPE = 'unknown';
+
+	dv.registerDataValue( dv.UnknownValue );
 
 }( dataValues, jQuery ) );

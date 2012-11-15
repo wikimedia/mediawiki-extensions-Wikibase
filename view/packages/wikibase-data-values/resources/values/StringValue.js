@@ -28,15 +28,6 @@ var PARENT = dv.DataValue,
 dv.StringValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
-	 * @see dv.DataValue.getType
-	 *
-	 * @since 0.1
-	 */
-	getType: function() {
-		return 'string';
-	},
-
-	/**
 	 * @see dv.DataValue.getSortKey
 	 *
 	 * @since 0.1
@@ -85,5 +76,9 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 dv.StringValue.newFromJSON = function( json ) {
 	return new dv.StringValue( json );
 };
+
+dv.StringValue.TYPE = 'string';
+
+dv.registerDataValue( dv.StringValue );
 
 }( dataValues, jQuery ) );
