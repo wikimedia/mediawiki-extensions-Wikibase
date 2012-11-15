@@ -4,7 +4,6 @@
  *
  * @licence GNU GPL v2+
  *
- * @author Daniel Werner
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 ( function( dv, $, undefined ) {
@@ -17,7 +16,7 @@ var PARENT = dv.DataValue,
 	};
 
 /**
- * Constructor for creating a data value representing a string.
+ * Constructor for creating a data value representing a boolean.
  *
  * @constructor
  * @extends dv.DataValue
@@ -25,7 +24,7 @@ var PARENT = dv.DataValue,
  *
  * @param {String} value
  */
-dv.StringValue = dv.util.inherit( PARENT, constructor, {
+dv.BoolValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
 	 * @see dv.DataValue.getType
@@ -33,7 +32,7 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 	 * @since 0.1
 	 */
 	getType: function() {
-		return 'string';
+		return 'bool';
 	},
 
 	/**
@@ -41,10 +40,10 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return Number
 	 */
 	getSortKey: function() {
-		return this._value;
+		return this._value ? 1 : 0;
 	},
 
 	/**
@@ -64,11 +63,11 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 	 * @since 0.1
 	 */
 	equals: function( value ) {
-		if ( !( value instanceof dv.StringValue ) ) {
+		if ( !( value instanceof dv.BoolValue ) ) {
 			return false;
 		}
 
-		return this.getValue() === value.getValue();
+		return this.getValue() == value.getValue();
 	},
 
 	/**
@@ -82,8 +81,8 @@ dv.StringValue = dv.util.inherit( PARENT, constructor, {
 
 } );
 
-dv.StringValue.newFromJSON = function( json ) {
-	return new dv.StringValue( json );
+dv.BoolValue.newFromJSON = function( json ) {
+	return new dv.BoolValue( json );
 };
 
 }( dataValues, jQuery ) );

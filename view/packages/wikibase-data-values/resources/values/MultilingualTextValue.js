@@ -10,6 +10,7 @@
 
 var PARENT = dv.DataValue,
 	constructor = function( monoLingualValues ) {
+		// TODO: validate
 		this._texts = monoLingualValues;
 	};
 

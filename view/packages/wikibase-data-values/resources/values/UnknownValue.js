@@ -11,6 +11,7 @@
 
 	var PARENT = dv.DataValue,
 		constructor = function( value ) {
+			// TODO: validate
 			this._value = value;
 		};
 

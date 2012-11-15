@@ -10,6 +10,7 @@
 
 var PARENT = dv.DataValue,
 	constructor = function( languageCode, text ) {
+		// TODO: validate
 		this._languageCode = languageCode;
 		this._text = text;
 	};
