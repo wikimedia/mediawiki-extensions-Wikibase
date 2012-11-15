@@ -263,6 +263,22 @@ describe "Check functionality of client-repo connection" do
     end
   end
 
+  context "client-repo moving article" do
+    it "should move article & check invitation to update the item" do
+      visit_page(ClientLoginPage) do |page|
+        page.login_with(CLIENT_ADMIN_USERNAME, CLIENT_ADMIN_PASSWORD)
+      end
+      on_page(ClientMoveArticlePage) do |page|
+        page.move_article(article_title_a, "moved")
+        page.updateLink
+      end
+      on_page(ItemPage) do |page|
+        page.wait_for_entity_to_load
+        page.entityLabelSpan.should == article_title_a
+      end
+    end
+  end
+
   context "client-repo removing the sitelinks from the repo and checking that they're gone on the client" do
     it "should remove all sitelinks" do
       on_page(ItemPage) do |page|
@@ -283,7 +299,10 @@ describe "Check functionality of client-repo connection" do
   end
 
   after :all do
-    # tear down: unwatch article, logout on repo & client
+    # tear down: move back, unwatch article, logout on repo & client
+    on_page(ClientMoveArticlePage) do |page|
+      page.move_article("moved", article_title_a)
+    end
     visit_page(RepoLoginPage) do |page|
       page.logout_user
     end
