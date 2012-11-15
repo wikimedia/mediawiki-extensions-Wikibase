@@ -70,13 +70,28 @@ class SpecialEntitiesWithoutLabel extends SpecialWikibaseQueryPage {
 		}
 
 		$output->addHTML(
-			Html::openElement( 'form', array( 'action' => $this->getTitle()->getLocalURL() ) ) .
+			Html::openElement(
+				'form',
+				array(
+					'action' => $this->getTitle()->getLocalURL(),
+					'name' => 'entitieswithoutlabel',
+					'id' => 'wb-entitieswithoutlabel-form'
+				)
+			) .
 			Html::openElement( 'fieldset' ) .
 			Html::element( 'legend', array(), $this->msg( 'wikibase-entitieswithoutlabel-legend' )->text() ) .
 			Html::openElement( 'p' ) .
 			Html::element( 'label', array( 'for' => 'language' ), $this->msg( 'wikibase-entitieswithoutlabel-label-language' )->text() )  . ' ' .
 			Html::input( 'language', $this->language ) .
-			Xml::submitButton( $this->msg( 'wikibase-entitieswithoutlabel-submit' )->text() ) .
+			Html::input(
+				'submit',
+				$this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
+				'submit',
+				array(
+					'id' => 'wikibase-entitieswithoutlabel-submit',
+					'class' => 'wb-input-button'
+				)
+			) .
 			Html::closeElement( 'p' ) .
 			Html::closeElement( 'fieldset' ) .
 			Html::closeElement( 'form' )
