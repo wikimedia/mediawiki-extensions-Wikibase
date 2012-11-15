@@ -46,7 +46,7 @@ use MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class EntityId implements \Immutable {
+class EntityId implements \Immutable, \Comparable {
 
 	/**
 	 * The type of the entity to which the ID belongs.
@@ -239,6 +239,21 @@ class EntityId implements \Immutable {
 	public static function isPrefixedId( $id ) {
 		$parts = self::getIdParts( $id );
 		return ( isset( $parts[1] ) && $parts[1] !== '' );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $target
+	 *
+	 * @return boolean
+	 */
+	public function equals( $target ) {
+		return $target instanceof EntityId
+			&& $target->getNumericId() === $this->numericId
+			&& $target->getEntityType() === $this->entityType;
 	}
 
 }
