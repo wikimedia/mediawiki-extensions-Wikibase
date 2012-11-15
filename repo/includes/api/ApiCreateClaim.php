@@ -197,7 +197,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$propertyId = EntityId::newFromPrefixedId( $params['property'] );
 
-		if ( $propertyId !== Property::ENTITY_TYPE ) {
+		if ( $propertyId->getEntityType() !== Property::ENTITY_TYPE ) {
 			throw new MWException( 'Expected an EntityId of a property' );
 		}
 
