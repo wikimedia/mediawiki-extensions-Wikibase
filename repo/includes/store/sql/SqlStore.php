@@ -67,6 +67,7 @@ class SqlStore implements Store {
 	public function clear() {
 		$this->newSiteLinkCache()->clear();
 		$this->newTermCache()->clear();
+		$this->newEntityPerPage()->clear();
 	}
 
 	/**
