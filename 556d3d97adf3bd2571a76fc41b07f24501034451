@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH///LI\u003d",
+        "filename": "repo/tests/selenium/special/entities_without_label_spec.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-15T16:10:33Z",
+      "side": 1,
+      "message": "you should use a random label and description here like in other tests; it doesn\u0027t make sense to have a specific label here, this just causes problems as you have to remove the item before each testrun",
+      "revId": "556d3d97adf3bd2571a76fc41b07f24501034451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH///L0\u003d",
+        "filename": "repo/tests/selenium/special/entities_without_label_spec.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-15T16:10:33Z",
+      "side": 1,
+      "message": "you should use testdata (especially sitelinks) which are not used in any other test, otherwise there will be conflicts with those tests when all tests are executed",
+      "revId": "556d3d97adf3bd2571a76fc41b07f24501034451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH///LQ\u003d",
+        "filename": "repo/tests/selenium/special/entities_without_label_spec.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-15T16:10:33Z",
+      "side": 1,
+      "message": "space",
+      "revId": "556d3d97adf3bd2571a76fc41b07f24501034451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH///LE\u003d",
+        "filename": "repo/tests/selenium/special/entities_without_label_spec.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-15T16:10:33Z",
+      "side": 1,
+      "message": "update description: no fr sitelink is added in this step",
+      "revId": "556d3d97adf3bd2571a76fc41b07f24501034451",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
