@@ -165,8 +165,10 @@ $messages['fa'] = array(
 
 /** Finnish (suomi)
  * @author Stryn
+ * @author VezonThunder
  */
 $messages['fi'] = array(
+	'wbc-desc' => 'Wikibase-laajennuksen asiakasohjelma',
 	'wbc-comment-langlinks-update' => 'Kielilinkit päivitetty',
 	'wbc-editlinks' => 'Muokkaa linkkejä',
 	'wbc-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
@@ -200,6 +202,7 @@ $messages['frp'] = array(
  */
 $messages['gl'] = array(
 	'wbc-desc' => 'Cliente para a extensión Wikibase',
+	'wbc-after-page-move' => 'Tamén pode [$1 actualizar] o elemento de Wikidata asociado para manter as ligazóns lingüísticas na páxina trasladada.',
 	'wbc-comment-langlinks-delete' => 'Borrouse un elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas.',
 	'wbc-comment-langlinks-remove' => 'Esta páxina foi desligada do elemento de Wikidata asociado. Elimináronse as ligazóns lingüísticas',
 	'wbc-comment-langlinks-restore' => 'Restaurouse un elemento de Wikidata asociado. Recuperáronse as ligazóns lingüísticas',
@@ -250,6 +253,19 @@ $messages['ia'] = array(
 	'wbc-desc' => 'Cliente pro le extension Wikibase',
 	'wbc-editlinks' => 'Modificar ligamines',
 	'wbc-editlinkstitle' => 'Modificar ligamines interlingua',
+);
+
+/** Iloko (Ilokano)
+ * @author Lam-ang
+ */
+$messages['ilo'] = array(
+	'wbc-desc' => 'Kliente para iti Wikibase a pagpaatiddog',
+	'wbc-comment-langlinks-delete' => 'Ti mainaig a banag ti Wikidata ket naikkaten. Dagiti silpo ti pagsasao ket naikkaten.',
+	'wbc-comment-langlinks-remove' => 'Daytoy a panid ket naikkat ti silpona manipud ti Wikidata a banag. Ti silpo ti pagsasao ket naikkaten',
+	'wbc-comment-langlinks-restore' => 'Ti mainaig a banag ti Wikidata ket naisubli ti pannakaikkatna. Dagiti silpo ti pagsasao ket naipasubli',
+	'wbc-comment-langlinks-update' => 'Naipabaro dagiti silpo ti pagsasao',
+	'wbc-editlinks' => 'Nurnosen dagiti silpo',
+	'wbc-editlinkstitle' => 'Urnosen dagiti sangkapagsasaoan a silpo',
 );
 
 /** Icelandic (íslenska)

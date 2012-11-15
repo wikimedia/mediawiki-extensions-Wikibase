@@ -202,6 +202,18 @@ $messages['ia'] = array(
 	'wikibaselib-desc' => 'Contine functionalitate commun pro le extensiones Wikibase e Wikibase Client',
 );
 
+/** Iloko (Ilokano)
+ * @author Lam-ang
+ */
+$messages['ilo'] = array(
+	'wikibaselib-desc' => 'Agtengngel kadagiti sapasap a pamay-an para kadagiti Wikibase ken Wikibase a kliente a pagpaatiddog',
+	'wikibaselib-entity-item' => 'banag',
+	'wikibaselib-entity-property' => 'tagikua',
+	'wikibaselib-entity-query' => 'panagbiruk',
+	'datatypes-type-wikibase-item' => 'Banag',
+	'datatypes-type-commonsMedia' => 'Midia a papeles ti Commons',
+);
+
 /** Icelandic (íslenska)
  * @author Snævar
  */
