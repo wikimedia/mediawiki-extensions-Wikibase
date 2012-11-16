@@ -223,7 +223,7 @@ class EntityId implements \Immutable, \Comparable {
 			$regex = '/^(' . implode( '|', $prefixes ) . '|)(\d+)(#.*|)$/';
 		}
 
-		preg_match( $regex, $id, $matches );
+		preg_match( $regex, strtolower( $id ), $matches );
 
 		return $matches;
 	}

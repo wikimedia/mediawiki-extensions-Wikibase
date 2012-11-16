@@ -42,9 +42,12 @@ class EntityIdTest extends \MediaWikiTestCase {
 
 		foreach ( $prefixes as $prefix ) {
 			foreach ( $numbers as $num ) {
+				$upperPrefix = strtoupper( $prefix );
 				$data[] = array( "{$prefix}{$num}", array( "{$prefix}{$num}", $prefix, $num ) );
+				$data[] = array( "{$upperPrefix}{$num}", array( "{$prefix}{$num}", $prefix, $num ) );
 			}
 		}
+
 		return $data;
 	}
 
