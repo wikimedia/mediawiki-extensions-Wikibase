@@ -141,13 +141,11 @@ class ApiGetClaims extends Api {
 		$claimGuid = null;
 
 		if ( isset( $params['entity'] ) && isset( $params['key'] ) ) {
-			$keyParts = explode( '#', $params['key'] );
+			list( $entityId, $claimGuid ) = $this->parseClaimKey( $params['key'] );
 
-			if ( $keyParts[0] !== $params['entity'] ) {
+			if ( $entityId !== $params['entity'] ) {
 				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'getclaims-id-mismatch' );
 			}
-
-			$entityId = $keyParts[0];
 		}
 		else if ( isset( $params['entity'] ) ) {
 			$entityId = $params['entity'];
