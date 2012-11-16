@@ -48,7 +48,7 @@ describe "Check edit-conflicts" do
       end
     end
 
-    it "should login as user 2 (anon), change and description" do
+    it "should login as user 2 (anon), change description" do
       visit_page(RepoLoginPage) do |page|
         page.logout_user
       end
@@ -79,30 +79,6 @@ describe "Check edit-conflicts" do
       end
     end
 
-    it "should complain about edit conflict when adding sitelink" do
-      on_page(ItemPage) do |page|
-        page.add_sitelinks([sitelinks])
-        page.wbErrorDiv?.should be_true
-        page.wbErrorDetailsLink?.should be_true
-        page.wbErrorDetailsLink
-        page.wbErrorDetailsDiv?.should be_true
-        page.wbErrorDetailsDiv_element.text.should == edit_conflict_msg
-        page.cancelSitelinkLink
-      end
-    end
-
-    it "should complain about edit conflict when adding alias" do
-      on_page(ItemPage) do |page|
-        page.add_aliases([alias_a])
-        page.wbErrorDiv?.should be_true
-        page.wbErrorDetailsLink?.should be_true
-        page.wbErrorDetailsLink
-        page.wbErrorDetailsDiv?.should be_true
-        page.wbErrorDetailsDiv_element.text.should == edit_conflict_msg
-        page.cancelAliases
-      end
-    end
-
     it "should complain about edit conflict when changing description" do
       on_page(ItemPage) do |page|
         page.entityDescriptionSpan.should == description_user2
@@ -120,7 +96,15 @@ describe "Check edit-conflicts" do
       end
     end
 
-    it "should complain about edit conflict when editing label" do
+    it "should be possible to add sitelink" do
+      on_page(ItemPage) do |page|
+        page.add_sitelinks([sitelinks])
+        page.wbErrorDiv?.should be_false
+        page.count_existing_sitelinks.should == 1
+      end
+    end
+
+    it "should be possible to change label" do
       on_page(ItemPage) do |page|
         page.entityLabelSpan.should == label
         page.editLabelLink
@@ -128,16 +112,22 @@ describe "Check edit-conflicts" do
         page.saveLabelLink
         ajax_wait
         page.wait_for_api_callback
-        page.wbErrorDiv?.should be_true
-        page.wbErrorDetailsLink?.should be_true
-        page.wbErrorDetailsLink
-        page.wbErrorDetailsDiv?.should be_true
-        page.wbErrorDetailsDiv_element.text.should == edit_conflict_msg
-        page.cancelLabelLink
+        page.wbErrorDiv?.should be_false
+        page.entityLabelSpan.should == label_user1
       end
     end
 
-    it "should be possible to edit description after a reload" do
+    it "should be possible to add aliases" do
+      on_page(ItemPage) do |page|
+        page.add_aliases([alias_a])
+        page.wbErrorDiv?.should be_false
+        page.count_existing_aliases.should == 1
+      end
+    end
+  end
+
+  context "check normal behaviour" do
+    it "should be possible to edit description again after a reload" do
       on_page(ItemPage) do |page|
         page.navigate_to_item
         page.wait_for_entity_to_load
@@ -147,36 +137,8 @@ describe "Check edit-conflicts" do
         page.saveDescriptionLink
         ajax_wait
         page.wait_for_api_callback
+        page.wbErrorDiv?.should be_false
         page.entityDescriptionSpan.should == description_user1
-      end
-    end
-
-    it "should be possible to to edit label after a reload" do
-      on_page(ItemPage) do |page|
-        page.entityLabelSpan.should == label
-        page.editLabelLink
-        page.labelInputField = label_user1
-        page.saveLabelLink
-        ajax_wait
-        page.wait_for_api_callback
-        page.entityLabelSpan.should == label_user1
-      end
-    end
-
-    it "should be possible to add alias after a reload" do
-      on_page(ItemPage) do |page|
-        page.add_aliases([alias_a])
-        @browser.refresh
-        page.wait_for_entity_to_load
-        page.get_nth_alias(1).text.should == alias_a
-      end
-    end
-
-    it "should be possible to add sitelink after a reload" do
-      on_page(ItemPage) do |page|
-        page.add_sitelinks([sitelinks])
-        page.wait_for_entity_to_load
-        page.get_number_of_sitelinks_from_counter.should == 1
       end
     end
   end
