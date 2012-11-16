@@ -210,6 +210,7 @@ final class LibHooks {
 				'tests/qunit/templates.tests.js',
 				'tests/qunit/wikibase.tests.js',
 				'tests/qunit/wikibase.Site.tests.js',
+				'tests/qunit/wikibase.store/wikibase.Api.tests.js',
 				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
 				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
 				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
@@ -249,6 +250,7 @@ final class LibHooks {
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
 				'wikibase',
+				'wikibase.store',
 				'wikibase.utilities',
 				'wikibase.utilities.jQuery',
 				'wikibase.ui.Toolbar',
