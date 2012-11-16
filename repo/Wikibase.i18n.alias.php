@@ -78,6 +78,7 @@ $specialPageAliases['mk'] = array(
 	'ItemDisambiguation' => array( 'ПредметПоЕтикета' ),
 	'ListDatatypes' => array( 'СписокПодаточниТипови' ),
 	'SetLabel' => array( 'ЗадајЕтикета' ),
+	'EntitiesWithoutLabel' => array( 'ЕдинициБезЕтикета' ),
 );
 
 /** Dutch (Nederlands) */

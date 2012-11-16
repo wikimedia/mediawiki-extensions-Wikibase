@@ -137,8 +137,10 @@ $messages['fa'] = array(
 
 /** Finnish (suomi)
  * @author Stryn
+ * @author VezonThunder
  */
 $messages['fi'] = array(
+	'wikibaselib-desc' => 'Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta',
 	'wikibaselib-entity-item' => 'kohde',
 	'wikibaselib-entity-property' => 'ominaisuus',
 	'wikibaselib-entity-query' => 'kysely',

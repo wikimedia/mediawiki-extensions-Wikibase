@@ -98,6 +98,7 @@ $messages['ca'] = array(
  */
 $messages['de'] = array(
 	'wbc-desc' => 'Ermöglicht einen Client für die Erweiterung Wikibase',
+	'wbc-after-page-move' => 'Du kannst auch das zugeordnete Wikidata-Element [$1 aktualisieren], um Sprachlinks von verschobenen Seiten zu verwalten.',
 	'wbc-comment-langlinks-delete' => 'Zugeordnetes Wikidata-Element gelöscht. Sprachlinks entfernt.',
 	'wbc-comment-langlinks-remove' => 'Diese Seite wurde vom Wikidata-Element entlinkt. Sprachlinks entfernt.',
 	'wbc-comment-langlinks-restore' => 'Zugeordnetes Wikidata-Element wiederhergestellt. Sprachlinks wiederhergestellt.',
@@ -141,6 +142,7 @@ $messages['eo'] = array(
  */
 $messages['es'] = array(
 	'wbc-desc' => 'Cliente para la extensión Wikibase',
+	'wbc-after-page-move' => 'También puedes [$1 actualizar] el elemento Wikidata asociado para mantener los vínculos de idioma en la página que se ha movido.',
 	'wbc-comment-langlinks-delete' => 'Se ha borrado un elemento asociado a Wikidata. Se han eliminado los enlaces lingüísticos.',
 	'wbc-comment-langlinks-remove' => 'Esta página ha sido desenlazada de un elemento de Wikidata. Se han eliminado los enlaces lingüísticos',
 	'wbc-comment-langlinks-restore' => 'Se ha restaurado un elemento asociado a Wikidata. Se han restaurado los enlaces de idioma',
@@ -169,6 +171,10 @@ $messages['fa'] = array(
  */
 $messages['fi'] = array(
 	'wbc-desc' => 'Wikibase-laajennuksen asiakasohjelma',
+	'wbc-after-page-move' => 'Voit myös [$1 päivittää] sivuun liittyvän Wikidatan kohteen säilyttääksesi kielilinkit siirretyllä sivulla.',
+	'wbc-comment-langlinks-delete' => 'Sivuun liittyvä Wikidatan kohde poistettu. Kielilinkit poistettu.',
+	'wbc-comment-langlinks-remove' => 'Sivu ei ole enää kytketty Wikidatan kohteeseen. Kielilinkit poistettu.',
+	'wbc-comment-langlinks-restore' => 'Sivuun liittyvä Wikidatan kohde palautettu. Kielilinkit palautettu.',
 	'wbc-comment-langlinks-update' => 'Kielilinkit päivitetty',
 	'wbc-editlinks' => 'Muokkaa linkkejä',
 	'wbc-editlinkstitle' => 'Muokkaa kieltenvälisiä linkkejä',
@@ -283,9 +289,11 @@ $messages['is'] = array(
 
 /** Italian (italiano)
  * @author Beta16
+ * @author Sannita
  */
 $messages['it'] = array(
 	'wbc-desc' => "Client per l'estensione Wikibase",
+	'wbc-after-page-move' => "Puoi anche [$1 aggiornare] l'elemento associato su Wikidata per trasferire gli interlink sulla nuova pagina.",
 	'wbc-comment-langlinks-delete' => "L'elemento di Wikidata associato è stato cancellato. I collegamenti interlinguistici sono stati rimossi.",
 	'wbc-comment-langlinks-remove' => "Questa pagina è stata scollegata dall'elemento di Wikidata. I collegamenti interlinguistici sono stati rimossi.",
 	'wbc-comment-langlinks-restore' => "La cancellazione dell'elemento di Wikidata associato è stata annullata. I collegamenti interlinguistici sono stati ripristinati.",
@@ -299,6 +307,7 @@ $messages['it'] = array(
  */
 $messages['ja'] = array(
 	'wbc-desc' => 'Wikibase 拡張機能のクライアント',
+	'wbc-after-page-move' => '移動されたページにある言語リンクを保守するために、関連付けられたウィキデータ項目を[$1 更新]することもできます。',
 	'wbc-comment-langlinks-delete' => '関連付けられたウィキデータ項目は削除されました。言語リンクを除去しました。',
 	'wbc-comment-langlinks-remove' => 'このページはウィキデータ項目からリンク解除されました。言語リンクを除去しました',
 	'wbc-comment-langlinks-restore' => '関連付けられたウィキデータ項目が復元されました。言語リンクを復元しました。',
@@ -355,6 +364,7 @@ $messages['lb'] = array(
  */
 $messages['mk'] = array(
 	'wbc-desc' => 'Клиент за додатокот „Викибаза“',
+	'wbc-after-page-move' => 'Можете и да го [$1 подновите] поврзаниот предмет на Википодатоци за да ги одржите јазичните врски на преместената страница.',
 	'wbc-comment-langlinks-delete' => 'Здружениот предмет од Википодатоците е избришан. Јазичните врски се избришани.',
 	'wbc-comment-langlinks-remove' => 'На оваа страница ѝ е раскината врската со елементот од Википодатоците. Јазичните врски се отстранети.',
 	'wbc-comment-langlinks-restore' => 'Здружениот предмет од Википодатоците е повратен. Јазичните врски се повратени.',
@@ -535,6 +545,7 @@ $messages['tl'] = array(
  */
 $messages['vi'] = array(
 	'wbc-desc' => 'Trình khách của phần mở rộng Wikibase',
+	'wbc-after-page-move' => 'Bạn cũng có thể [$1 cập nhật] khoản mục Wikidata liên kết để duy trì các liên kết ngôn ngữ trên trang được di chuyển.',
 	'wbc-comment-langlinks-delete' => 'Đã xóa khoản mục liên kết Wikidata. Đã dời các liên kết ngôn ngữ.',
 	'wbc-comment-langlinks-remove' => 'Đã gỡ liên kết đến khoản mục Wikidata khỏi trang này. Đã dời các liên kết ngôn ngữ.',
 	'wbc-comment-langlinks-restore' => 'Đã phục hồi khoản mục liên kết Wikidata. Đã phục hồi các liên kết ngôn ngữ.',
