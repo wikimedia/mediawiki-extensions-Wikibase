@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//+cs\u003d",
+        "filename": "lib/tests/phpunit/property/PropertyObjectTest.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-16T18:09:52Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this test be generic for all kinds of entities?",
+      "revId": "066f47309e7ad9665b375ce5c444115a28cdf29c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//+cY\u003d",
+        "filename": "repo/includes/api/ApiGetClaims.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-16T18:09:52Z",
+      "side": 1,
+      "message": "Why not use parseClaimKey here?",
+      "revId": "066f47309e7ad9665b375ce5c444115a28cdf29c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//+b4\u003d",
+        "filename": "repo/includes/api/serializers/ClaimSerializer.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-16T18:09:52Z",
+      "side": 1,
+      "message": "Still want a better name for that...",
+      "revId": "066f47309e7ad9665b375ce5c444115a28cdf29c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
