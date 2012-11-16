@@ -560,4 +560,16 @@ abstract class EntityObjectTest extends \MediaWikiTestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param Entity $entity
+	 */
+	public function testHasClaims( Entity $entity ) {
+		$has = $entity->hasClaims();
+		$this->assertInternalType( 'boolean', $has );
+
+		$this->assertEquals( count( $entity->getClaims() ) !== 0, $has );
+	}
+
 }
