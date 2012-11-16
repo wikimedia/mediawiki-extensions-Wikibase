@@ -32,42 +32,20 @@ use \Wikibase\ItemObject;
  *
  * @group Wikibase
  * @group SpecialPage
+ * @group WikibaseSpecialPage
  *
  * @licence GNU GPL v2+
  * @author Daniel Kinzler
  */
-class SpecialEntityDataTest extends \MediaWikiTestCase {
+class SpecialEntityDataTest extends SpecialPageTestBase {
 
 	protected function saveItem( Item $item ) {
 		$content = ItemContent::newFromItem( $item );
 		$content->save( "testing", null, EDIT_NEW );
 	}
 
-	protected function makeSpecialPage() {
-		$page = new \SpecialEntityData();
-		return $page;
-	}
-
-	protected function executeSpecialPage( $sub = '', \WebRequest $request = null ) {
-		if ( !$request ) {
-			$request = new \FauxRequest();
-		}
-
-		$page = $this->makeSpecialPage();
-
-		$page->getContext()->setRequest( $request );
-
-		ob_start();
-		$page->execute( $sub );
-
-		if ( $page->getOutput()->isDisabled() ) {
-			$text = ob_get_contents();
-		} else {
-			$text = $page->getOutput()->getHTML();
-		}
-
-		ob_end_clean();
-		return $text;
+	protected function newSpecialPage() {
+		return new \SpecialEntityData();
 	}
 
 	//TODO: test other formats and other entity types.
@@ -77,8 +55,10 @@ class SpecialEntityDataTest extends \MediaWikiTestCase {
 		$item->setLabel( 'en', 'Raarrr' );
 		$this->saveItem( $item );
 
-		$output = $this->executeSpecialPage( $item->getId()->getPrefixedId() );
+		list( $output, $re ) = $this->executeSpecialPage( $item->getId()->getPrefixedId() );
 		$this->assertNotEmpty( $output, "is output empty?" );
+
+		//TODO: check response headers
 
 		$data = json_decode( $output, true );
 		$this->assertNotEmpty( $output, "json deserialization ok?" );

@@ -28,10 +28,27 @@ namespace Wikibase\Test;
  *
  * @group Wikibase
  * @group SpecialPage
+ * @group WikibaseSpecialPage
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class SpecialItemByTitleTest extends SpecialPageTestBase {
+
+	protected function newSpecialPage() {
+		return new \SpecialItemByTitle();
+	}
+
+	public function testExecute() {
+		//TODO: Actually verify that the output is correct.
+		//      Currently this just tests that there is no fatal error.
+
+		list( $output, ) = $this->executeSpecialPage( '' );
+		$this->assertTrue( true, 'Calling execute without any subpage value' );
+
+		list( $output, ) = $this->executeSpecialPage( 'en/oHai' );
+		$this->assertTrue( true, 'Calling execute with a subpage value' ); //TODO: assert output
+	}
 
 }
