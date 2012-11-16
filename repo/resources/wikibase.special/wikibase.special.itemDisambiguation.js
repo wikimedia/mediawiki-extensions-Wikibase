@@ -12,20 +12,21 @@
 	'use strict';
 
 	$( document ).ready( function() {
-		if( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemDisambiguation' )  || ( $.uls === undefined ) ) {
-			return; // not the right special page or ULS dependency unavailable
+		if( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemDisambiguation' ) ) {
+			return; // not the right special page
 		}
 
-		// TODO/FIXME: this should rather use wb.PropertyEditTool.EditableSiteLink fir mimicking the exact same behavior
-
-		var langList = new Array();
-		var languages = $.uls.data.getAutonyms();
-		$.each( languages, function( key, value ) {
-			langList.push( {
-				'label': value + ' (' + key + ')',
-				'value': value + ' (' + key + ')'
+		// TODO: Migth want to use the siteselector jquery widget or some other suggester derivate
+		var langList = [];
+		if ( $.uls !== undefined ) {
+			var languages = $.uls.data.getAutonyms();
+			$.each( languages, function( key, value ) {
+				langList.push( {
+					'label': value + ' (' + key + ')',
+					'value': value + ' (' + key + ')'
+				} );
 			} );
-		} );
+		}
 		$( '#wb-itemdisambiguation-languagename' ).suggester( { "source": langList } );
 
 		// On submit, replace human readable value like "English (en)" with actual language name ("en")
