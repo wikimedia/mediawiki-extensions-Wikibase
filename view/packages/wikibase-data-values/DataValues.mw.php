@@ -115,6 +115,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function ( array &$testModules, \Resou
 
 	$testModules['qunit']['ext.dataValues.values'] = $moduleTemplate + array(
 		'scripts' => array(
+			'tests/qunit/values/BoolValue.tests.js',
 			'tests/qunit/values/MonolingualTextValue.tests.js',
 			'tests/qunit/values/MultilingualTextValue.tests.js',
 			'tests/qunit/values/StringValue.tests.js',
