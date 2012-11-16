@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//+aM\u003d",
+        "filename": "repo/includes/specials/SpecialCreateEntity.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-16T18:31:37Z",
+      "side": 1,
+      "message": "Please use Utils::squashWhitespace. That\u0027s the normalization we use before storing the input, so it should also be used here.",
+      "revId": "106d2cae416c93b820358ae35b019acd63905fcc",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
