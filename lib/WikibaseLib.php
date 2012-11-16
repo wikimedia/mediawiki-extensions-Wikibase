@@ -210,7 +210,6 @@ $wgDataTypes['wikibase-item'] = array(
 
 // Hooks
 $wgHooks['WikibaseDefaultSettings'][]				= 'Wikibase\LibHooks::onWikibaseDefaultSettings';
-$wgHooks['LoadExtensionSchemaUpdates'][] 			= 'Wikibase\LibHooks::onSchemaUpdate';
 $wgHooks['UnitTestsList'][]							= 'Wikibase\LibHooks::registerPhpUnitTests';
 $wgHooks['ResourceLoaderTestModules'][]				= 'Wikibase\LibHooks::registerQUnitTests';
 

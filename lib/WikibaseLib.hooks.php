@@ -78,41 +78,6 @@ final class LibHooks {
 	}
 
 	/**
-	 * Schema update to set up the needed database tables.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
-	 *
-	 * @since 0.1
-	 *
-	 * @param DatabaseUpdater $updater
-	 *
-	 * @return boolean
-	 */
-	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
-		$type = $updater->getDB()->getType();
-
-		if ( $type === 'mysql' || $type === 'sqlite' /* || $type === 'postgres' */ ) {
-			// TODO: move to core
-			$updater->addExtensionField(
-				'sites',
-				'site_source',
-				__DIR__ . '/sql/DropSites.sql'
-			);
-
-			$updater->addExtensionTable(
-				'site_identifiers',
-				__DIR__ . '/sql/AddSitesTable.sql'
-			);
-
-			$updater->addExtensionUpdate( array( '\Wikibase\Utils::insertDefaultSites' ) );
-		}
-		else {
-			wfWarn( "Database type '$type' is not supported by Wikibase." );
-		}
-
-		return true;
-	}
-
-	/**
 	 * Hook to add PHPUnit test cases.
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
 	 *
