@@ -86,7 +86,8 @@ class QueryHandler extends EntityHandler {
 	 * @return QueryContent
 	 */
 	public function unserializeContent( $blob, $format = null ) {
-		return QueryContent::newFromArray( $this->unserializedData( $blob, $format ) );
+		$entity = EntityFactory::singleton()->newFromBlob( Query::ENTITY_TYPE, $blob, $format );
+		return QueryContent::newFromQuery( $entity );
 	}
 
 	/**

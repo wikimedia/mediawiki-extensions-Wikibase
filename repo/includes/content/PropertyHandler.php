@@ -97,7 +97,8 @@ class PropertyHandler extends EntityHandler {
 	 * @return PropertyContent
 	 */
 	public function unserializeContent( $blob, $format = null ) {
-		return PropertyContent::newFromArray( $this->unserializedData( $blob, $format ) );
+		$entity = EntityFactory::singleton()->newFromBlob( Property::ENTITY_TYPE, $blob, $format );
+		return PropertyContent::newFromProperty( $entity );
 	}
 
 	/**

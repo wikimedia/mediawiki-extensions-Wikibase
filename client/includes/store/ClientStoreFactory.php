@@ -44,6 +44,14 @@ class ClientStoreFactory {
 		global $wgWBClientStores;
 		$store = $store === false || !array_key_exists( $store, $wgWBClientStores ) ? Settings::get( 'defaultClientStore' ) : $store;
 
+		if ( !$store ) {
+			if ( Settings::get( 'repoDatabase' ) ) {
+				$store = 'DirectSqlStore';
+			} else {
+				$store = 'CachingSqlStore';
+			}
+		}
+
 		$class = $wgWBClientStores[$store];
 
 		return $class::singleton();

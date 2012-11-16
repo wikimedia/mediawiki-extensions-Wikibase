@@ -28,7 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface EntityCache {
+interface EntityCache extends EntityLookup {
 
 	/**
 	 * Updates the entity cache using the provided entity.
@@ -41,7 +41,7 @@ interface EntityCache {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function updateEntity( Entity $entity );
+	public function updateEntity( Entity $entity ); //FIXME: record revision ID!
 
 	/**
 	 * Adds the provided entity to the cache.
@@ -55,7 +55,7 @@ interface EntityCache {
 	 *
 	 * @return boolean Success indicator
 	 */
-	public function addEntity( Entity $entity );
+	public function addEntity( Entity $entity ); //FIXME: record revision ID!
 
 	/**
 	 * Returns if there currently is an entry in the cache for the provided entity.
@@ -80,29 +80,17 @@ interface EntityCache {
 	public function deleteEntity( EntityId $id );
 
 	/**
-	 * Returns the entity with provided type and entity id or false is there is no such
-	 * entity in the cache.
-	 *
-	 * @since 0.1
-	 *
-	 * @param string $entityType
-	 * @param integer $entityId
-	 *
-	 * @return boolean|Entity
-	 */
-	public function getEntity( $entityType, $entityId );
-
-	/**
 	 * Returns the item with provided item id or false is there is no such
 	 * item in the cache.
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $itemId
+	 * @param EntityId $entityId  The entity's ID
+	 * @param bool|int $revision  The desired Revision
 	 *
 	 * @return boolean|Item
 	 */
-	public function getItem( $itemId );
+	public function getItem( EntityID $entityId, $revision = false  );
 
 	/**
 	 * Clears the entity cache table

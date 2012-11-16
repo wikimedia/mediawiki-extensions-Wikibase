@@ -76,7 +76,7 @@ abstract class EntityHandler extends \ContentHandler {
 	 * @return string
 	 */
 	public function getDefaultFormat() {
-		return Settings::get( 'serializationFormat' );
+		return EntityFactory::singleton()->getDefaultFormat();
 	}
 
 	/**

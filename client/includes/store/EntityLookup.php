@@ -1,10 +1,9 @@
 <?php
 
 namespace Wikibase;
-use Title;
 
 /**
- * Handler updates to the entity cache.
+ * Contains methods for interaction with an entity store.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,44 +27,22 @@ use Title;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
-class EntityCacheUpdater {
+interface EntityLookup {
 
 	/**
-	 * Update the entity cache to reflect the provided change.
+	 * Returns the entity with the provided id or null is there is no such
+	 * entity. If a $revision is given, the requested revision of the entity is loaded.
+	 * The the revision does not belong to the given entity, null is returned.
 	 *
 	 * @since 0.1
 	 *
-	 * @param EntityChange $change
+	 * @param EntityID $entityId
+	 * @param int|bool $revision
+	 *
+	 * @return Entity|null
 	 */
-	public function handleChange( EntityChange $change ) {
-		list( , $updateType ) = explode( '~', $change->getType() );
+	public function getEntity( EntityID $entityId, $revision = false );
 
-		/**
-		 * @var Entity $entity
-		 */
-		$entity = $change->getEntity();
-		$id = $change->getEntityId();
-
-		$store = ClientStoreFactory::getStore();
-		$entityCache = $store->newEntityLookup(); //TODO: make sure we get an EntityCache instance
-
-		switch ( $updateType ) {
-			case 'remove':
-				$entityCache->deleteEntity( $id );
-				break;
-			case 'add':
-				if ( $entityCache->hasEntity( $entity->getId() ) === false ) {
-					$entityCache->addEntity( $entity );
-					break;
-				}
-				// Else fall through to 'update' case.
-			case 'update':
-				$entityCache->updateEntity( $entity );
-				break;
-			case 'restore':
-				$entityCache->updateEntity( $entity );
-				break;
-		}
-	}
 }

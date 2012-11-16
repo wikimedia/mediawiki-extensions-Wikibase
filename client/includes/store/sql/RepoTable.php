@@ -41,9 +41,9 @@ abstract class RepoTable {
 	 *
 	 * @param string $table
 	 */
-	public function __construct( $table ) {
+	public function __construct( $table, $repoDb ) {
 		$this->table = $table;
-		$this->repoDb = Settings::get( 'changesDatabase' );
+		$this->repoDb = $repoDb;
 		$this->lb = wfGetLB( $this->repoDb );
 	}
 

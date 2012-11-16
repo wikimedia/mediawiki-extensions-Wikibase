@@ -83,7 +83,8 @@ class ItemHandler extends EntityHandler {
 	 * @return ItemContent
 	 */
 	public function unserializeContent( $blob, $format = null ) {
-		return ItemContent::newFromArray( $this->unserializedData( $blob, $format ) );
+		$entity = EntityFactory::singleton()->newFromBlob( Item::ENTITY_TYPE, $blob, $format );
+		return ItemContent::newFromItem( $entity );
 	}
 
 	/**

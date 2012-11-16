@@ -69,7 +69,7 @@ return call_user_func( function() {
 
 		'wikibase.store' => $moduleTemplate + array(
 			'scripts' => array(
-				'wikibase.store/wikibase.EntityStore.js',
+				'wikibase.store/wikibase.EntityRepo.js',
 				'wikibase.store/wikibase.Api.js',
 			),
 			'dependencies' => array(
