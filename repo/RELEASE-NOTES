@@ -10,6 +10,9 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 * Added Special:ListDatatypes
 * Added Special:NewProperty
+* Added wbcreateclaim API module
+* Added wbgetclaims API module
+* Claims are now included in the output of EntitySerializer, thus are now present in the wbgetentities API module
 
 === Version 0.2 ===
 (???)
