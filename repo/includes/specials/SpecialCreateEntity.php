@@ -2,6 +2,7 @@
 
 use Wikibase\EntityContent;
 use Wikibase\Autocomment;
+use Wikibase\Utils;
 
 /**
  * Page for creating new Wikibase entities.
@@ -132,7 +133,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * @return bool
 	 */
 	protected function hasSufficientArguments() {
-		return $this->label !== '' || $this->description !== '';
+		return Utils::squashWhitespace( $this->label ) !== '' || Utils::squashWhitespace( $this->description ) !== '';
 	}
 
 	/**
