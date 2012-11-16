@@ -69,6 +69,14 @@ $messages['diq'] = array(
 	'version-datavalues' => 'ErcayêMelumati',
 );
 
+/** Lower Sorbian (dolnoserbski)
+ * @author Michawiki
+ */
+$messages['dsb'] = array(
+	'datavalues-desc' => 'Zběrka objektow, kótarež pśedstajaju wšake typy gódnotow',
+	'version-datavalues' => 'Datowe gódnoty',
+);
+
 /** Spanish (español)
  * @author Armando-Martin
  */
