@@ -118,6 +118,7 @@ $wgHooks['ResourceLoaderTestModules'][] = function ( array &$testModules, \Resou
 			'tests/qunit/values/MonolingualTextValue.tests.js',
 			'tests/qunit/values/MultilingualTextValue.tests.js',
 			'tests/qunit/values/StringValue.tests.js',
+			'tests/qunit/values/UnknownValue.tests.js',
 		),
 		'dependencies' => array(
 			'ext.dataValues.tests',

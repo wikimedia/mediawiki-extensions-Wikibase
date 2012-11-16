@@ -1,0 +1,60 @@
+/**
+ * @since 0.1
+ * @file
+ * @ingroup DataValues
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
+( function( dv, $, QUnit, undefined ) {
+	'use strict';
+
+	var PARENT = dv.tests.DataValueTest,
+		constructor = function() {
+		};
+
+	/**
+	 * Constructor for creating a test object for the unknown DataValue.
+	 *
+	 * @constructor
+	 * @extends dv.tests.DataValueTest
+	 * @since 0.1
+	 */
+	dv.tests.UnknownValueTest = dv.util.inherit( PARENT, constructor, {
+
+		/**
+		 * @see dv.tests.DataValueTest.getObject
+		 */
+		getObject: function() {
+			return dv.UnknownValue;
+		},
+
+		/**
+		 * @see dv.tests.DataValueTest.getConstructorArguments
+		 */
+		getConstructorArguments: function() {
+			return [
+				[ '' ],
+				[ 'foo' ],
+				[ ' foo bar baz foo bar baz. foo bar baz ' ],
+				[ 0 ],
+				[ 42 ],
+				[ -4.2 ]
+				[ { 'a': 'b' } ],
+				[ [ 'foo', 9001, { 'bar': 'baz', 5: 5 } ] ],
+				[ new Date() ],
+				[ false ],
+				[ true ],
+				[ null ],
+				[ [] ],
+				[ {} ]
+			];
+		}
+
+	} );
+
+	var test = new dv.tests.UnknownValueTest();
+
+	test.runTests( 'dataValues.UnknownValue' );
+
+}( dataValues, jQuery, QUnit ) );

@@ -54,9 +54,11 @@ return call_user_func( function() {
 
 		'dataValues.values' => $moduleTemplate + array(
 			'scripts' => array(
-				'values/StringValue.js',
+				// Note: the order here is relevant, scripts should be places after the ones they depend on
 				'values/MonolingualTextValue.js',
 				'values/MultilingualTextValue.js',
+				'values/StringValue.js',
+				'values/UnknownValue.js',
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',

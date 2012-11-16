@@ -111,6 +111,20 @@ class UnknownValue extends DataValueObject {
 	}
 
 	/**
+	 * @see Comparable::equals
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $value
+	 *
+	 * @return boolean
+	 */
+	public function equals( $value ) {
+		return $value === $this ||
+			( is_object( $value ) && get_class( $value ) == get_called_class() && $value->getValue() === $this->getValue() );
+	}
+
+	/**
 	 * Constructs a new instance of the DataValue from the provided data.
 	 * This can round-trip with @see getArrayValue
 	 *
