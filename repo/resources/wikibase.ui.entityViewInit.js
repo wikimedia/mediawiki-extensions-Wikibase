@@ -16,9 +16,9 @@
 	$( document ).ready( function() {
 		// remove HTML edit links with links to special pages
 		// for site-links we don't want to remove the table cell representing the edit section
-		$( 'td.editsection' ).empty();
+		$( 'td.wb-editsection' ).empty();
 		// for all other values we remove the whole edit section
-		$( 'span.editsection' ).remove();
+		$( 'span.wb-editsection' ).remove();
 
 		// remove all infos about empty values which are displayed in non-JS
 		$( '.wb-value-empty' ).empty().removeClass( 'wb-value-empty' );
