@@ -32,7 +32,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Property extends Entity, ClaimListAccess {
+interface Property extends Entity {
 
 	const ENTITY_TYPE = 'property';
 
@@ -63,15 +63,6 @@ interface Property extends Entity, ClaimListAccess {
 	 * @param string $dataTypeId
 	 */
 	public function setDataTypeById( $dataTypeId );
-
-	/**
-	 * Convenience function to check if the property contains any claims.
-	 *
-	 * @since 0.2
-	 *
-	 * @return boolean
-	 */
-	public function hasClaims();
 
 	/**
 	 * Factory for creating new DataValue objects for the property.

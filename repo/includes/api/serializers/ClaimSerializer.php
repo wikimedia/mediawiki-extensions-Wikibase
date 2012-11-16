@@ -32,6 +32,42 @@ use MWException;
 class ClaimSerializer extends ApiSerializerObject {
 
 	/**
+	 * @since 0.3
+	 *
+	 * @var string[]
+	 */
+	protected static $rankMap = array(
+		Statement::RANK_DEPRECATED => 'deprecated',
+		Statement::RANK_NORMAL => 'normal',
+		Statement::RANK_PREFERRED => 'preferred',
+	);
+
+	/**
+	 * Returns the available ranks in serialized form.
+	 *
+	 * @since 0.3
+	 *
+	 * @return string[]
+	 */
+	public static function getRanks() {
+		return array_values( self::$rankMap );
+	}
+
+	/**
+	 * Unserializes the rank and returns an element from the Statement::RANK_ enum.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $serializedRank
+	 *
+	 * @return integer
+	 */
+	public static function unserializeRank( $serializedRank ) {
+		$ranks = array_flip( self::$rankMap );
+		return $ranks[$serializedRank];
+	}
+
+	/**
 	 * @see ApiSerializer::getSerialized
 	 *
 	 * @since 0.2
@@ -57,7 +93,7 @@ class ClaimSerializer extends ApiSerializerObject {
 		$serialization['type'] = $claim instanceof Statement ? 'statement' : 'claim';
 
 		if ( $claim instanceof Statement ) {
-			$serialization['rank'] = $claim->getRank();
+			$serialization['rank'] = self::$rankMap[ $claim->getRank() ];
 
 			$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->getResult(), $this->options );
 			$serialization['references'] = $snaksSerializer->getSerialized( $claim->getReferences() );

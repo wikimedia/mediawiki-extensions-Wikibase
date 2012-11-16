@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Item extends Entity, StatementListAccess, StatementAggregate {
+interface Item extends Entity {
 
 	const ENTITY_TYPE = 'item';
 
@@ -78,22 +78,5 @@ interface Item extends Entity, StatementListAccess, StatementAggregate {
 	 */
 	public function getSiteLink( $siteId );
 
-	/**
-	 * Sets the statements that make up this item.
-	 *
-	 * @since 0.2
-	 *
-	 * @param Statements $statements
-	 */
-	public function setStatements( Statements $statements );
-
-	/**
-	 * Convenience function to check if the item contains any statements.
-	 *
-	 * @since 0.2
-	 *
-	 * @return boolean
-	 */
-	public function hasStatements();
 
 }

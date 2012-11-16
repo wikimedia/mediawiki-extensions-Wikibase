@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Entity extends \Comparable, ClaimAggregate, \Serializable {
+interface Entity extends \Comparable, ClaimAggregate, \Serializable, ClaimListAccess {
 
 	/**
 	 * Get an array representing the Entity.
@@ -306,5 +306,14 @@ interface Entity extends \Comparable, ClaimAggregate, \Serializable {
 	 * @return Term[]
 	 */
 	public function getTerms();
+
+	/**
+	 * Convenience function to check if the entity contains any claims.
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims();
 
 }
