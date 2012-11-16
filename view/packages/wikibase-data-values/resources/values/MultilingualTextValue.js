@@ -27,17 +27,6 @@ var PARENT = dv.DataValue,
 dv.MultilingualTextValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
-	 * @see dv.DataValue.getType
-	 *
-	 * @since 0.1
-	 *
-	 * @return String
-	 */
-	getType: function() {
-		return 'multilingualtext';
-	},
-
-	/**
 	 * @see dv.DataValue.getSortKey
 	 *
 	 * @since 0.1
@@ -104,5 +93,21 @@ dv.MultilingualTextValue = dv.util.inherit( PARENT, constructor, {
 	}
 
 } );
+
+dv.MultilingualTextValue.newFromJSON = function( json ) {
+	var monolingualValues = [];
+
+	for ( var languageCode in json ) {
+		if ( json.hasOwnProperty( languageCode ) ) {
+			monolingualValues.push( new dv.MonolingualTextValue( languageCode, json[languageCode] ) );
+		}
+	}
+
+	return new dv.MultilingualTextValue( monolingualValues );
+};
+
+dv.MultilingualTextValue.TYPE = 'multilingualtext';
+
+dv.registerDataValue( dv.MultilingualTextValue );
 
 }( dataValues, jQuery ) );

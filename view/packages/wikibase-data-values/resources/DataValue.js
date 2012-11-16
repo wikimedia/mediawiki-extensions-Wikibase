@@ -28,15 +28,6 @@ dv.DataValue.prototype = {
 	getValue: dv.util.abstractMember,
 
 	/**
-	 * Returns the type identifier for this data value.
-	 *
-	 * @since 0.1
-	 *
-	 * @return String
-	 */
-	getType: dv.util.abstractMember,
-
-	/**
 	 * Returns a key that can be used for sorting the data value.
 	 * Can be either numeric or a string.
 	 *
@@ -67,7 +58,19 @@ dv.DataValue.prototype = {
 	 *
 	 * @return Boolean
 	 */
-	equals: dv.util.abstractMember
+	equals: dv.util.abstractMember,
+
+	/**
+	 * Returns the type identifier for this data value.
+	 *
+	 * @since 0.1
+	 *
+	 * @return String
+	 */
+	getType: function() {
+		return this.constructor.TYPE;
+	}
+
 };
 
 }( dataValues, jQuery ) );

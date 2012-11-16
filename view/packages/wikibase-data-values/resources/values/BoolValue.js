@@ -27,15 +27,6 @@ var PARENT = dv.DataValue,
 dv.BoolValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
-	 * @see dv.DataValue.getType
-	 *
-	 * @since 0.1
-	 */
-	getType: function() {
-		return 'bool';
-	},
-
-	/**
 	 * @see dv.DataValue.getSortKey
 	 *
 	 * @since 0.1
@@ -84,5 +75,9 @@ dv.BoolValue = dv.util.inherit( PARENT, constructor, {
 dv.BoolValue.newFromJSON = function( json ) {
 	return new dv.BoolValue( json );
 };
+
+dv.BoolValue.TYPE = 'bool';
+
+dv.registerDataValue( dv.BoolValue );
 
 }( dataValues, jQuery ) );

@@ -29,17 +29,6 @@ var PARENT = dv.DataValue,
 dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 
 	/**
-	 * @see dv.DataValue.getType
-	 *
-	 * @since 0.1
-	 *
-	 * @return String
-	 */
-	getType: function() {
-		return 'monolingualtext';
-	},
-
-	/**
 	 * @see dv.DataValue.getSortKey
 	 *
 	 * @since 0.1
@@ -80,7 +69,10 @@ dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 	 * @since 0.1
 	 */
 	toJSON: function() {
-		return this._text;
+		return {
+			'text': this._text,
+			'language': this._languageCode
+		};
 	},
 
 	/**
@@ -106,5 +98,13 @@ dv.MonolingualTextValue = dv.util.inherit( PARENT, constructor, {
 	}
 
 } );
+
+dv.MonolingualTextValue.newFromJSON = function( json ) {
+	return new dv.MonolingualTextValue( json['language'], json['text'] );
+};
+
+dv.MonolingualTextValue.TYPE = 'monolingualtext';
+
+dv.registerDataValue( dv.MonolingualTextValue );
 
 }( dataValues, jQuery ) );

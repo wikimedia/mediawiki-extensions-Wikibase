@@ -56,7 +56,7 @@ class DataValueFactory {
 		}
 
 		foreach ( $GLOBALS['wgDataValues'] as $type => $class ) {
-			$instance->registerFormat( $type, $class );
+			$instance->registerDataValue( $type, $class );
 		}
 
 		return $instance;
@@ -74,7 +74,7 @@ class DataValueFactory {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function registerFormat( $dataValueType, $class ) {
+	public function registerDataValue( $dataValueType, $class ) {
 		if ( !is_string( $dataValueType ) ) {
 			throw new InvalidArgumentException( 'Data value types can only be of type string' );
 		}

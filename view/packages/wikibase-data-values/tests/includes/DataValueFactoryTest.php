@@ -53,15 +53,15 @@ class DataValuesFactoryTest extends \MediaWikiTestCase {
 		return new DataValueFactory();
 	}
 
-	public function testRegisterFormat() {
+	public function testRegisterDataValue() {
 		$factory = $this->getNewInstance();
 
-		$factory->registerFormat( 'string', 'DataValues\StringValue' );
-		$factory->registerFormat( 'number', 'DataValues\NumberValue' );
+		$factory->registerDataValue( 'string', 'DataValues\StringValue' );
+		$factory->registerDataValue( 'number', 'DataValues\NumberValue' );
 
 		$this->assertArrayEquals( array( 'string', 'number' ), $factory->getDataValues() );
 
-		$factory->registerFormat( 'number', 'DataValues\StringValue' );
+		$factory->registerDataValue( 'number', 'DataValues\StringValue' );
 
 		$this->assertInstanceOf( 'DataValues\StringValue', $factory->newDataValue( 'number', '42' ) );
 	}
@@ -80,7 +80,7 @@ class DataValuesFactoryTest extends \MediaWikiTestCase {
 		);
 
 		foreach ( $dataValues as $dataValueType => $dataValueClass ) {
-			$factory->registerFormat( $dataValueType, $dataValueClass );
+			$factory->registerDataValue( $dataValueType, $dataValueClass );
 		}
 
 		foreach ( $factory->getDataValues() as $dataValueType ) {
