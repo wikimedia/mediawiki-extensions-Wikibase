@@ -12,8 +12,8 @@
 	'use strict';
 
 	$( document ).ready( function() {
-		if( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemByTitle' ) || ( $.uls === undefined ) ) {
-			return; // not the right special page or ULS dependency unavailable
+		if( ( mw.config.get( 'wgCanonicalSpecialPageName' ) !== 'ItemByTitle' ) ) {
+			return; // not the right special page
 		}
 
 		// this will build a drop-down for the language selection:
@@ -22,7 +22,7 @@
 			var site = wb.getSite( siteId );
 			siteList.push( {
 				'label': site.getName() + ' (' + site.getId() + ')',
-				'value': site.getName() + ' (' + site.getId() + ')',
+				'value': site.getName() + ' (' + site.getId() + ')'
 			} );
 		}
 		$( '#wb-itembytitle-sitename' ).suggester( { "source": siteList } );
