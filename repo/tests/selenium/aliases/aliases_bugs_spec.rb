@@ -49,6 +49,29 @@ describe "Check for bugs" do
     end
   end
 
+  context "bug: zombie alias appearing again after beeing removed (bug 42101)" do
+    it "should check that alias does not get readded when removed" do
+      visit_page(CreateItemPage) do |page|
+        page.create_new_item(generate_random_string(10), generate_random_string(20))
+      end
+      on_page(ItemPage) do |page|
+        page.navigate_to_item
+        page.wait_for_entity_to_load
+        page.add_aliases(['zombie'])
+        @browser.refresh
+        page.wait_for_entity_to_load
+        page.count_existing_aliases.should == 1
+        page.editAliases
+        page.aliasesInputFirstRemove
+        page.saveAliases
+        ajax_wait
+        page.wait_for_api_callback
+        page.add_aliases(['12345'])
+        page.count_existing_aliases.should == 1
+      end
+    end
+  end
+
   after :all do
     # tear down
   end
