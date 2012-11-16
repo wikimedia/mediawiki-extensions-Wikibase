@@ -16,6 +16,24 @@
       "revId": "8bf629f982edee6f2788c907ab0ec892cf596e93",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//+Y0\u003d",
+        "filename": "repo/includes/api/serializers/EntitySerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-16T19:05:17Z",
+      "side": 1,
+      "message": "I\u0027d rather not rely on array() \u003d\u003d false even if it where possible to use that here, which it is not, since the values can be of any type here, including being 0, false or \u0027\u0027, which should all not be omitted.",
+      "parentUuid": "AAADZH//+Z4\u003d",
+      "revId": "8bf629f982edee6f2788c907ab0ec892cf596e93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
