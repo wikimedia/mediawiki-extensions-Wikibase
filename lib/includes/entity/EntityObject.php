@@ -48,6 +48,13 @@ abstract class EntityObject implements Entity {
 	protected $id = false;
 
 	/**
+	 * @since 0.3
+	 *
+	 * @var Claims|null
+	 */
+	protected $claims;
+
+	/**
 	 * Constructor.
 	 * Do not use to construct new stuff from outside of this class, use the static newFoobar methods.
 	 * In other words: treat as protected (which it was, but now cannot be since we derive from Content).
@@ -122,6 +129,13 @@ abstract class EntityObject implements Entity {
 		// Compatibility with 0.1 and 0.2 serializations.
 		if ( is_int( $this->id ) ) {
 			$this->id = new EntityId( $this->getType(), $this->id );
+		}
+
+		// Compatibility with 0.2 and 0.3 ItemObjects.
+		// (statements key got renamed to claims)
+		if ( array_key_exists( 'statements', $this->data ) ) {
+			$this->data['claims'] = $this->data['statements'];
+			unset( $this->data['statements'] );
 		}
 	}
 
@@ -429,7 +443,7 @@ abstract class EntityObject implements Entity {
 	 * @since 0.1
 	 */
 	protected function cleanStructure( $wipeExisting = false ) {
-		foreach ( array( 'label', 'description', 'aliases' ) as $field ) {
+		foreach ( array( 'label', 'description', 'aliases', 'claims' ) as $field ) {
 			if ( $wipeExisting || !array_key_exists( $field, $this->data ) ) {
 				$this->data[$field] = array();
 			}
@@ -462,6 +476,10 @@ abstract class EntityObject implements Entity {
 				wfProfileOut( __METHOD__ );
 				return false;
 			}
+		}
+
+		if ( $this->hasClaims() ) {
+			return false;
 		}
 
 		wfProfileOut( __METHOD__ );
@@ -565,6 +583,8 @@ abstract class EntityObject implements Entity {
 		else {
 			$this->data['entity'] = $this->getPrefixedId();
 		}
+
+		$this->data['claims'] = $this->getStubbedClaims( $this->data['claims'] );
 	}
 
 	/**
@@ -610,6 +630,116 @@ abstract class EntityObject implements Entity {
 		}
 
 		return $terms;
+	}
+
+	/**
+	 * @see ClaimListAccess::addClaim
+	 *
+	 * @since 0.3
+	 *
+	 * @param Claim $claim
+	 */
+	public function addClaim( Claim $claim ) {
+		$this->unstubClaims();
+		$this->claims->addClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimListAccess::hasClaim
+	 *
+	 * @since 0.3
+	 *
+	 * @param Claim $claim
+	 *
+	 * @return boolean
+	 */
+	public function hasClaim( Claim $claim ) {
+		$this->unstubClaims();
+		return $this->claims->hasClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimListAccess::removeClaim
+	 *
+	 * @since 0.3
+	 *
+	 * @param Claim $claim
+	 */
+	public function removeClaim( Claim $claim ) {
+		$this->unstubClaims();
+		$this->claims->removeClaim( $claim );
+	}
+
+	/**
+	 * @see ClaimAggregate::getClaims
+	 *
+	 * @since 0.3
+	 *
+	 * @return Claims
+	 */
+	public function getClaims() {
+		$this->unstubClaims();
+		return clone $this->claims;
+	}
+
+	/**
+	 * Unsturbs the statements from the JSON into the $statements field
+	 * if this field is not already set.
+	 *
+	 * @since 0.3
+	 *
+	 * @return Claims
+	 */
+	protected function unstubClaims() {
+		if ( $this->claims === null ) {
+			$this->claims = new ClaimList();
+
+			foreach ( $this->data['claims'] as $statementSerialization ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$this->claims->addClaim( unserialize( $statementSerialization ) );
+			}
+		}
+	}
+
+	/**
+	 * Takes the claims element of the $data array of an item and writes the claims to it as stubs.
+	 *
+	 * @since 0.3
+	 *
+	 * @param Claim[] $claims
+	 *
+	 * @return array
+	 */
+	protected function getStubbedClaims( array $claims ) {
+		if ( $this->claims !== null ) {
+			$claims = array();
+
+			foreach ( $this->claims as $claim ) {
+				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
+				$claims[] = serialize( $claim );
+			}
+		}
+
+		return $claims;
+	}
+
+	/**
+	 * @see Entity::hasClaims
+	 *
+	 * On top of being a convenience function, this implementation allows for doing
+	 * the check without forcing an unstub in contrast to count( $this->getClaims() ).
+	 *
+	 * @since 0.2
+	 *
+	 * @return boolean
+	 */
+	public function hasClaims() {
+		if ( $this->claims === null ) {
+			return $this->data['claims'] !== array();
+		}
+		else {
+			return count( $this->claims ) > 0;
+		}
 	}
 
 }

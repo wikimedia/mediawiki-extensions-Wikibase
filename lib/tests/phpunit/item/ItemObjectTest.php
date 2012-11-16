@@ -169,56 +169,12 @@ class ItemObjectTest extends EntityObjectTest {
 		 * @var Item $item;
 		 */
 		$item = $item->copy();
-		$item->addStatement( new \Wikibase\StatementObject(
+		$item->addClaim( new \Wikibase\StatementObject(
 			new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) )
 		) );
 		$items[] = $item;
 
 		return $this->arrayWrap( $items );
-	}
-
-	/**
-	 * @dataProvider itemProvider
-	 *
-	 * @param Item $item
-	 */
-	public function testHasStatements( Item $item ) {
-		$has = $item->hasStatements();
-		$this->assertInternalType( 'boolean', $has );
-
-		$this->assertEquals( count( $item->getStatements() ) !== 0, $has );
-	}
-
-	/**
-	 * @dataProvider itemProvider
-	 *
-	 * @param Item $item
-	 */
-	public function testGetClaims( Item $item ) {
-		$claims = $item->getClaims();
-		$this->assertInstanceOf( '\Wikibase\Claims', $claims );
-
-		$statements = $item->getStatements();
-
-//		$statements = array_filter(
-//			iterator_to_array( $statements ),
-//			function( Statement $statement ) {
-//				return $statement->getRank() === Statement::RANK_NORMAL;
-//			}
-//		);
-
-		$this->assertEquals(
-			count( $statements ),
-			count( $claims ),
-			'The length of the lists returned by getClaims and getStatements does not match'
-		);
-
-		/**
-		 * @var Statement $statement
-		 */
-		foreach ( $statements as $statement ) {
-			$this->assertTrue( $claims->hasClaim( $statement ) );
-		}
 	}
 
 }

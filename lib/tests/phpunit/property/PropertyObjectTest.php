@@ -143,7 +143,7 @@ class PropertyObjectTest extends EntityObjectTest {
 	 *
 	 * @param Property $property
 	 */
-	public function testHasStatements( Property $property ) {
+	public function testHasClaims( Property $property ) {
 		$has = $property->hasClaims();
 		$this->assertInternalType( 'boolean', $has );
 

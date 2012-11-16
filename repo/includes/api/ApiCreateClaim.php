@@ -4,7 +4,9 @@ namespace Wikibase;
 use ApiBase, MWException;
 
 /**
- * API module for creating statements.
+ * API module for creating claims.
+ *
+ * TODO: high level tests
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,27 +32,6 @@ use ApiBase, MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ApiCreateClaim extends Api implements ApiAutocomment {
-
-	/**
-	 * @see  ApiAutocomment::getTextForComment()
-	 */
-	public function getTextForComment( array $params, $plural = 1 ) {
-		return Autocomment::formatAutoComment(
-			'wbcreateclaim-' . $params['snaktype'],
-			array(
-				/*plural */ (int)isset( $params['value'] ) + (int)isset( $params['property'] )
-			)
-		);
-	}
-
-	/**
-	 * @see  ApiAutocomment::getTextForSummary()
-	 */
-	public function getTextForSummary( array $params ) {
-		return Autocomment::formatAutoSummary(
-			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
-		);
-	}
 
 	/**
 	 * @see ApiBase::execute
@@ -261,8 +242,8 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 */
 	public function getParamDescription() {
 		return array(
-			'entity' => 'Id of the entity you are adding the statement to',
-			'property' => 'Id of the property when creating a claim with a snak consisting of a property',
+			'entity' => 'Id of the entity you are adding the claim to',
+			'property' => 'Id of the property when creating a claim with a PropertySnak',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
 			'snaktype' => 'The type of the snak',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
@@ -318,6 +299,27 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	 */
 	public function getVersion() {
 		return __CLASS__ . '-' . WB_VERSION;
+	}
+
+	/**
+	 * @see  ApiAutocomment::getTextForComment()
+	 */
+	public function getTextForComment( array $params, $plural = 1 ) {
+		return Autocomment::formatAutoComment(
+			'wbcreateclaim-' . $params['snaktype'],
+			array(
+				/*plural */ (int)isset( $params['value'] ) + (int)isset( $params['property'] )
+			)
+		);
+	}
+
+	/**
+	 * @see  ApiAutocomment::getTextForSummary()
+	 */
+	public function getTextForSummary( array $params ) {
+		return Autocomment::formatAutoSummary(
+			Autocomment::pickValuesFromParams( $params, 'property', 'value' )
+		);
 	}
 
 }
