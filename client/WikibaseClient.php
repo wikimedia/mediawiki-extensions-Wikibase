@@ -63,12 +63,15 @@ $wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
 $wgAutoloadClasses['Wikibase\ClientStoreFactory'] 	= $dir . 'includes/store/ClientStoreFactory.php';
 $wgAutoloadClasses['Wikibase\EntityCache'] 			= $dir . 'includes/store/EntityCache.php';
+$wgAutoloadClasses['Wikibase\EntityLookup'] 		= $dir . 'includes/store/EntityLookup.php';
 
 // includes/store/sql
-$wgAutoloadClasses['Wikibase\ClientSqlStore'] 		= $dir . 'includes/store/sql/ClientSqlStore.php';
+$wgAutoloadClasses['Wikibase\CachingSqlStore'] 		= $dir . 'includes/store/sql/CachingSqlStore.php';
+$wgAutoloadClasses['Wikibase\DirectSqlStore'] 		= $dir . 'includes/store/sql/DirectSqlStore.php';
 $wgAutoloadClasses['Wikibase\EntityCacheTable'] 	= $dir . 'includes/store/sql/EntityCacheTable.php';
 $wgAutoloadClasses['Wikibase\RepoTable'] 			= $dir . 'includes/store/sql/RepoTable.php';
 $wgAutoloadClasses['Wikibase\SiteLinkRemoteTable']	= $dir . 'includes/store/sql/SiteLinkRemoteTable.php';
+$wgAutoloadClasses['Wikibase\WikiPageEntityLookup'] = $dir . 'includes/store/sql/WikiPageEntityLookup.php';
 
 // Hooks
 $wgHooks['UnitTestsList'][] 				= '\Wikibase\ClientHooks::registerUnitTests';
@@ -96,4 +99,5 @@ $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWiki
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
 
 $wgWBClientStores = array();
-$wgWBClientStores['sqlstore'] = 'Wikibase\ClientSqlStore';
+$wgWBClientStores['CachingSqlStore'] = 'Wikibase\CachingSqlStore';
+$wgWBClientStores['DirectSqlStore'] = 'Wikibase\DirectSqlStore';

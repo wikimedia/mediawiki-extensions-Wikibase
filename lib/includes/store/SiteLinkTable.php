@@ -31,7 +31,7 @@ use MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class SiteLinkTable implements SiteLinkCache {
+class SiteLinkTable extends \DBAccessBase implements SiteLinkCache {
 
 	/**
 	 * @since 0.1
@@ -41,12 +41,25 @@ class SiteLinkTable implements SiteLinkCache {
 	protected $table;
 
 	/**
+	 * @since 0.3
+	 *
+	 * @var bool
+	 */
+	protected $readonly;
+
+	/**
 	 * @since 0.1
 	 *
-	 * @param string $table
+	 * @param string $table The table to use for the sitelinks
+	 * @param string|bool $wiki Thich wiki's database to connec to.
+	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
+	 * @param bool $readonly Whether the table can be modified. Defaults to $wiki, because
+	 *        only the local wiki's database should normally be modified.
 	 */
-	public function __construct( $table ) {
+	public function __construct( $table, $wiki = false, $readonly = null ) {
 		$this->table = $table;
+		$this->wiki = $wiki;
+		$this->readonly = $readonly === null ? $wiki : $readonly;
 	}
 
 	/**
@@ -66,17 +79,19 @@ class SiteLinkTable implements SiteLinkCache {
 			return false;
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = $this->getConnection( DB_MASTER );
 	
 		$success = $this->deleteLinksOfItem( $item->getId(), $function );
 
 		if ( !$success ) {
+			$this->releaseConnection( $dbw );
 			return false;
 		}
 
 		$siteLinks = $item->getSiteLinks();
 
 		if ( empty( $siteLinks ) ) {
+			$this->releaseConnection( $dbw );
 			return true;
 		}
 
@@ -107,6 +122,7 @@ class SiteLinkTable implements SiteLinkCache {
 			$dbw->commit( __METHOD__ );
 		}
 
+		$this->releaseConnection( $dbw );
 		return $success;
 	}
 
@@ -121,11 +137,16 @@ class SiteLinkTable implements SiteLinkCache {
 	 * @return boolean Success indicator
 	 */
 	public function deleteLinksOfItem( EntityId $itemId, $function = null ) {
-		return wfGetDB( DB_MASTER )->delete(
+		$dbw = wfGetDB( DB_MASTER );
+
+		$ok = $dbw->delete(
 			$this->table,
 			array( 'ips_item_id' => $itemId->getNumericId() ),
 			is_null( $function ) ? __METHOD__ : $function
 		);
+
+		$this->releaseConnection( $dbw );
+		return $ok;
 	}
 
 	/**
@@ -139,7 +160,9 @@ class SiteLinkTable implements SiteLinkCache {
 	 * @return integer|boolean
 	 */
 	public function getItemIdForLink( $globalSiteId, $pageTitle ) {
-		$result = wfGetDB( DB_SLAVE )->selectRow(
+		$db = $this->getConnection( DB_SLAVE );
+
+		$result = $db->selectRow(
 			$this->table,
 			array( 'ips_item_id' ),
 			array(
@@ -148,6 +171,7 @@ class SiteLinkTable implements SiteLinkCache {
 			)
 		);
 
+		$this->releaseConnection( $db );
 		return $result === false ? false : (int)$result->ips_item_id;
 	}
 
@@ -167,7 +191,7 @@ class SiteLinkTable implements SiteLinkCache {
 			return array();
 		}
 
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = $this->getConnection( DB_SLAVE );
 
 		$anyOfTheLinks = '';
 
@@ -210,6 +234,7 @@ class SiteLinkTable implements SiteLinkCache {
 			);
 		}
 
+		$this->releaseConnection( $dbr );
 		return $conflicts;
 	}
 
@@ -221,7 +246,12 @@ class SiteLinkTable implements SiteLinkCache {
 	 * @return boolean Success indicator
 	 */
 	public function clear() {
-		return wfGetDB( DB_MASTER )->delete( $this->table, '*', __METHOD__ );
+		$dbw = $this->getConnection( DB_MASTER );
+
+		$ok = $dbw->delete( $this->table, '*', __METHOD__ );
+
+		$this->releaseConnection( $dbw );
+		return $ok;
 	}
 
 	/**
@@ -236,7 +266,7 @@ class SiteLinkTable implements SiteLinkCache {
 	 * @return integer
 	 */
 	public function countLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = $this->getConnection( DB_SLAVE );
 
 		$conditions = array();
 
@@ -252,12 +282,15 @@ class SiteLinkTable implements SiteLinkCache {
 			$conditions['ips_site_page'] = $pageNames;
 		}
 
-		return $dbr->selectRow(
+		$res = $dbr->selectRow(
 			$this->table,
 			array( 'COUNT(*) AS rowcount' ),
 			$conditions,
 			__METHOD__
 		)->rowcount;
+
+		$this->releaseConnection( $dbr );
+		return $res;
 	}
 
 	/**
@@ -272,7 +305,7 @@ class SiteLinkTable implements SiteLinkCache {
 	 * @return array[]
 	 */
 	public function getLinks( array $itemIds, array $siteIds = array(), array $pageNames = array() ) {
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = $this->getConnection( DB_SLAVE );
 
 		$conditions = array();
 
@@ -309,6 +342,7 @@ class SiteLinkTable implements SiteLinkCache {
 			);
 		}
 
+		$this->releaseConnection( $dbr );
 		return $siteLinks;
 	}
 

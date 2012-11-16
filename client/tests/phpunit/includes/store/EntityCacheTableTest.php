@@ -31,7 +31,7 @@ use \Wikibase\Entity;
  * @group Database
  * @group Wikibase
  * @group WikibaseClient
- * @group WikibaseEntityCache
+ * @group WikibaseEntityLookup
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -89,7 +89,8 @@ class EntityCacheTableTest extends \ORMTableTest {
 		$this->assertTrue( $table->addEntity( $entity ) );
 		$this->assertTrue( $table->hasEntity( $entity->getId() ) );
 
-		$obtainedEntity = $table->getEntity( $entity->getType(), $entity->getId()->getNumericId() );
+		//TODO: test with revision ID
+		$obtainedEntity = $table->getEntity( $entity->getId() );
 
 		$this->assertTrue( $entity->getDiff( $obtainedEntity )->isEmpty() );
 
@@ -103,13 +104,15 @@ class EntityCacheTableTest extends \ORMTableTest {
 
 		$this->assertTrue( $entity->getDiff( $obtainedEntity )->isEmpty() );
 
-		$this->testDeleteEntity( $entity );
+		$this->assertDeleteEntity( $entity );
 	}
 
 	/**
 	 * @param \Wikibase\Entity $entity
+	 * @todo: make this a separate test case, depending on testAddEntity.
+	 *       For some reason, passing the parameter doesn't work if we do that...
 	 */
-	protected function testDeleteEntity( Entity $entity ) {
+	protected function assertDeleteEntity( Entity $entity ) {
 		$this->assertTrue( $this->getTable()->deleteEntity( $entity->getId() ) );
 		$this->assertFalse( $this->getTable()->hasEntity( $entity->getId() ) );
 		$this->assertTrue( $this->getTable()->deleteEntity( $entity->getId() ) );
@@ -129,7 +132,8 @@ class EntityCacheTableTest extends \ORMTableTest {
 
 		$this->assertTrue( $table->updateEntity( $entity ) );
 
-		$obtainedEntity = $table->getEntity( $entity->getType(), $entity->getId()->getNumericId() );
+		//TODO: provide revision ID?!
+		$obtainedEntity = $table->getEntity( $entity->getId() );
 
 		$this->assertTrue( $entity->getDiff( $obtainedEntity )->isEmpty() );
 	}

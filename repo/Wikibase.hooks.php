@@ -441,9 +441,6 @@ final class RepoHooks {
 		$settings = array_merge(
 			$settings,
 			array(
-				// alternative: application/vnd.php.serialized
-				'serializationFormat' => CONTENT_FORMAT_JSON,
-
 				// Defaults to turn on deletion of empty items
 				// set to true will always delete empty items
 				'apiDeleteEmpty' => false,

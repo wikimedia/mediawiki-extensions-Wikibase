@@ -152,7 +152,7 @@ class SiteLinkRemoteTable extends RepoTable implements SiteLinkLookup {
 			$conditions['ips_site_page'] = $pageNames;
 		}
 
-		return $dbr->selectRow(
+		$count = $dbr->selectRow(
 			$this->table,
 			array( 'COUNT(*) AS rowcount' ),
 			$conditions,
@@ -160,6 +160,7 @@ class SiteLinkRemoteTable extends RepoTable implements SiteLinkLookup {
 		)->rowcount;
 
 		$this->lb->reuseConnection( $dbr );
+		return $count;
 	}
 
 	/**
