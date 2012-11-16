@@ -22,6 +22,15 @@ describe "Check CreateItem special page" do
         page.createEntityDescriptionField?.should be_true
       end
     end
+    it "should fail to create item with only spaces in label or description" do
+      visit_page(CreateItemPage) do |page|
+        page.createEntityLabelField = '  '
+        page.createEntityDescriptionField = ' '
+        page.createEntitySubmit
+        page.createEntityLabelField?.should be_true
+        page.createEntityDescriptionField?.should be_true
+      end
+    end
     it "should create a new item with label and description" do
       label = generate_random_string(10)
       description = generate_random_string(20)

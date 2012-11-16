@@ -132,7 +132,7 @@ abstract class SpecialCreateEntity extends SpecialWikibasePage {
 	 * @return bool
 	 */
 	protected function hasSufficientArguments() {
-		return $this->label !== '' || $this->description !== '';
+		return trim( $this->label ) !== '' || trim( $this->description ) !== '';
 	}
 
 	/**
