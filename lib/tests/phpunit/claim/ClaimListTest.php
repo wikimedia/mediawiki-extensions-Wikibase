@@ -130,13 +130,22 @@ class ClaimListTest extends \MediaWikiTestCase {
 		$elements = $this->getElementInstances();
 		$element = array_shift( $elements );
 
-		if ( !$array->hasClaim( $element ) ) {
-			++$elementCount;
-		}
+		++$elementCount;
 
 		$array->addClaim( $element );
 
 		$this->assertEquals( $elementCount, count( $array ) );
+	}
+
+	public function testDuplicateClaims() {
+		$firstClaim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) ) );
+		$secondClaim = new ClaimObject( new \Wikibase\PropertyNoValueSnak( new \Wikibase\EntityId( \Wikibase\Property::ENTITY_TYPE, 42 ) ) );
+
+		$list = new ClaimList();
+		$this->assertTrue( $list->addElement( $firstClaim ), 'Adding the first element should work' );
+		$this->assertTrue( $list->addElement( $secondClaim ), 'Adding a duplicate element should work' );
+
+		$this->assertEquals( 2, count( $list->getArrayCopy() ), 'Adding two duplicates to an empty list should result in a count of two' );
 	}
 
 }
