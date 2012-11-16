@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//+Z4\u003d",
+        "filename": "repo/includes/api/serializers/EntitySerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 2
+      },
+      "writtenOn": "2012-11-16T18:34:11Z",
+      "side": 1,
+      "message": "Is there a reason to not just call array_filter( $serialization ) without the callback? Even array(0) and array(\"\") should return true.",
+      "revId": "8bf629f982edee6f2788c907ab0ec892cf596e93",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
