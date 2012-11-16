@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//+nk\u003d",
+        "filename": "repo/includes/api/ApiGetEntities.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-16T12:10:54Z",
+      "side": 1,
+      "message": "hm?",
+      "revId": "389c927c3c69627649533ea79e9d6a00bdc6ffc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//+n0\u003d",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-16T12:10:54Z",
+      "side": 1,
+      "message": "ws",
+      "revId": "389c927c3c69627649533ea79e9d6a00bdc6ffc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//+ns\u003d",
+        "filename": "repo/includes/specials/SpecialEntityData.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-16T12:10:54Z",
+      "side": 1,
+      "message": "Pretty print json?",
+      "revId": "389c927c3c69627649533ea79e9d6a00bdc6ffc2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
