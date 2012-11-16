@@ -79,4 +79,15 @@ interface ClaimListAccess {
 	 */
 	public function removeClaimWithGuid( $claimGuid );
 
+	/**
+	 * Returns the claim with the provided GUID or null if there is no such claim.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 *
+	 * @return Claim|null
+	 */
+	public function getClaimWithGuid( $claimGuid );
+
 }
