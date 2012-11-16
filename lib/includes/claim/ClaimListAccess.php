@@ -51,12 +51,32 @@ interface ClaimListAccess {
 	public function hasClaim( Claim $claim );
 
 	/**
-	 * Removes the claim with the same hash as the provided reference if such a claim exists in the list.
+	 * Removes the claim with the same hash as the provided claim if such a claim exists in the list.
 	 *
 	 * @since 0.2
 	 *
 	 * @param Claim $claim
 	 */
 	public function removeClaim( Claim $claim );
+
+	/**
+	 * Returns if the list contains a claim with the the provided GUID.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 *
+	 * @return boolean
+	 */
+	public function hasClaimWithGuid( $claimGuid );
+
+	/**
+	 * Removes the claim with the provided GUID if such a claim exists in the list.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 */
+	public function removeClaimWithGuid( $claimGuid );
 
 }

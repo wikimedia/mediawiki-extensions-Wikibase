@@ -176,15 +176,16 @@ $wgAutoloadClasses['Wikibase\SiteLinkLookup'] 			= $dir . 'includes/store/SiteLi
 $wgAutoloadClasses['Wikibase\SiteLinkTable'] 			= $dir . 'includes/store/SiteLinkTable.php';
 
 // tests
-$wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/HashArrayTest.php';
-$wgAutoloadClasses['Wikibase\Test\TemplateTest'] 		= $dir . 'tests/phpunit/TemplateTest.php';
-$wgAutoloadClasses['Wikibase\Test\TemplateStoreTest'] 	= $dir . 'tests/phpunit/TemplateStoreTest.php';
-$wgAutoloadClasses['Wikibase\Test\ChangeRowTest']		= $dir . 'tests/phpunit/changes/ChangeRowTest.php';
-$wgAutoloadClasses['Wikibase\Test\EntityChangeTest']	= $dir . 'tests/phpunit/changes/EntityChangeTest.php';
+$wgAutoloadClasses['Wikibase\Test\HashArrayTest'] 			= $dir . 'tests/phpunit/hasharray/HashArrayTest.php';
+$wgAutoloadClasses['Wikibase\Test\HashArrayElement'] 		= $dir . 'tests/phpunit/hasharray/HashArrayElement.php';
+$wgAutoloadClasses['Wikibase\Test\TemplateTest'] 			= $dir . 'tests/phpunit/TemplateTest.php';
+$wgAutoloadClasses['Wikibase\Test\TemplateStoreTest'] 		= $dir . 'tests/phpunit/TemplateStoreTest.php';
+$wgAutoloadClasses['Wikibase\Test\ChangeRowTest']			= $dir . 'tests/phpunit/changes/ChangeRowTest.php';
+$wgAutoloadClasses['Wikibase\Test\EntityChangeTest']		= $dir . 'tests/phpunit/changes/EntityChangeTest.php';
 $wgAutoloadClasses['Wikibase\Test\TestChanges']				= $dir . 'tests/phpunit/changes/TestChanges.php';
 $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/item/TestItems.php';
 $wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/entity/EntityObjectTest.php';
-$wgAutoloadClasses['Wikibase\Test\EntityDiffTest'] 		= $dir . 'tests/phpunit/entity/EntityDiffTest.php';
+$wgAutoloadClasses['Wikibase\Test\EntityDiffTest'] 			= $dir . 'tests/phpunit/entity/EntityDiffTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityRefreshTest'] 		= $dir . 'tests/phpunit/changes/EntityRefreshTest.php';
 $wgAutoloadClasses['Wikibase\Test\PropertySnakObjectTest'] 	= $dir . 'tests/phpunit/snak/PropertySnakObjectTest.php';
 $wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/snak/SnakObjectTest.php';
