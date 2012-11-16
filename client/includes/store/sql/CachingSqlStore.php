@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClientSqlStore implements ClientStore {
+class CachingSqlStore implements ClientStore {
 
 	/**
 	 * @see Store::singleton
@@ -56,11 +56,11 @@ class ClientSqlStore implements ClientStore {
 	 * @return SiteLinkRemoteTable
 	 */
 	public function newSiteLinkTable() {
-		return new SiteLinkRemoteTable( 'wb_items_per_site' );
+		return new SiteLinkTable( 'wbc_items_per_site' );
 	}
 
 	/**
-	 * @see Store::newEntityCache
+	 * Returns a new EntityCache instance
 	 *
 	 * @since 0.1
 	 *
@@ -68,6 +68,19 @@ class ClientSqlStore implements ClientStore {
 	 */
 	public function newEntityCache() {
 		return new EntityCacheTable();
+	}
+
+	/**
+	 * returns newEntityCache().
+	 *
+	 * @see Store::newEntityLookup
+	 *
+	 * @since 0.1
+	 *
+	 * @return EntityCache
+	 */
+	public function newEntityLookup() {
+		return $this->newEntityCache();
 	}
 
 	/**

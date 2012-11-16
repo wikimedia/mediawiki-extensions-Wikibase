@@ -29,6 +29,9 @@ final class LibHooks {
 		$settings = array_merge(
 			$settings,
 			array(
+				// alternative: application/vnd.php.serialized
+				'serializationFormat' => CONTENT_FORMAT_JSON,
+
 				'pollDefaultInterval' => 1,
 				'pollDefaultLimit' => 100,
 				'pollContinueInterval' => 0,

@@ -29,6 +29,7 @@ use ORMTable;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class EntityCacheTable extends ORMTable implements EntityCache {
 
@@ -85,6 +86,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 * @return boolean Success indicator
 	 */
 	public function updateEntity( Entity $entity ) {
+		//FIXME: record revision ID!
 		$cachedEntity = $this->newRowFromEntity( $entity );
 		$currentId = $this->getCacheIdForEntity( $entity->getId() );
 
@@ -169,6 +171,7 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 * @return CachedEntity
 	 */
 	protected function newRowFromEntity( Entity $entity ) {
+		//FIXME: record revision ID!
 		return $this->newRow( array(
 			'entity_id' => $entity->getId()->getNumericId(),
 			'entity_type' => $entity->getType(),
@@ -177,22 +180,29 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	}
 
 	/**
-	 * @see EntityCache::getEntity
+	 * @see   EntityCache::getEntity
 	 *
 	 * @since 0.1
 	 *
-	 * @param string $entityType
-	 * @param integer $entityId
+	 * @param EntityId $entityId  The entity's ID
+	 * @param bool|int $revision  The desired Revision
 	 *
-	 * @return boolean|Entity
+	 * @return null|Entity
 	 */
-	public function getEntity( $entityType, $entityId ) {
-		$cachedEntity = $this->selectRow( null, array(
-			'entity_type' => $entityType,
-			'entity_id' => $entityId,
-		) );
+	public function getEntity( EntityID $entityId, $revision = false ) {
+		$where = array(
+			'entity_type' => $entityId->getEntityType(),
+			'entity_id' => $entityId->getNumericId(),
+		);
 
-		return $cachedEntity === false ? $cachedEntity : $cachedEntity->getEntity();
+		if ( $revision !== false ) {
+			//FIXME: this field does not yet exist in the database!
+			$where['entity_revision'] = $revision;
+		}
+
+		$cachedEntity = $this->selectRow( null, $where );
+
+		return $cachedEntity === false ? null : $cachedEntity->getEntity();
 	}
 
 	/**
@@ -200,12 +210,13 @@ class EntityCacheTable extends ORMTable implements EntityCache {
 	 *
 	 * @since 0.1
 	 *
-	 * @param integer $itemId
+	 * @param EntityId $entityId  The entity's ID
+	 * @param bool|int $revision  The desired Revision
 	 *
 	 * @return boolean|Item
 	 */
-	public function getItem( $itemId ) {
-		return $this->getEntity( Item::ENTITY_TYPE, $itemId );
+	public function getItem( EntityID $entityId, $revision = false  ) {
+		return $this->getEntity( $entityId, $revision );
 	}
 
 	/**

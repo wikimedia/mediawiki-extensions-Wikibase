@@ -4,6 +4,7 @@ namespace Wikibase\Test;
 use Wikibase\EntityCacheUpdater;
 use Wikibase\EntityChange;
 use Wikibase\Item;
+use Wikibase\Settings;
 
 /**
  * Tests for the Wikibase\EntityCacheUpdater class.
@@ -57,6 +58,11 @@ class EntityCacheUpdaterTest extends \MediaWikiTestCase {
 	 * Data provider refuses to work for some reason o_O
 	 */
 	public function testHandleChange( /* EntityChange $change, Item $sourceItem, Item $targetItem */ ) {
+		if ( Settings::get( 'repoDatabase' ) ) {
+			$this->markTestSkipped( "Can't test EntityCacheUpdater if local caching is not configured."
+				. "\nThe repoDatabase setting instructs WikibaseClient to access the repo database directly.");
+		}
+
 		foreach ( $this->handleChangeProvider() as $argList ) {
 			list( $change, , ) = $argList;
 

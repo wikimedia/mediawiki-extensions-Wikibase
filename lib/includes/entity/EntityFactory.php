@@ -87,20 +87,116 @@ class EntityFactory {
 	/**
 	 * Creates a new empty entity of the given type.
 	 *
-	 * @param String $type the entity type, use the XXX::ENTITY_TYPE constants.
+	 * @since 0.3
 	 *
-	 * @return Entity the new, empty entity
-	 * @throws \MWException if $type is not a valid entity type
+	 * @param String $entityType The type of the desired new entity.
+	 *
+	 * @throws MWException if the given entity type is not known.
+	 * @return Entity The new Entity object.
 	 */
-	public function newEmpty( $type ) {
-		if ( !$this->isEntityType( $type ) ) {
-			throw new \MWException( "Not an entity type: $type" );
+	public function newEmpty( $entityType ) {
+		return $this->newFromArray( $entityType, array() );
+	}
+
+	/**
+	 * Creates a new entity of the desired type, using the given data array
+	 * to initialize the entity.
+	 *
+	 * @param String $entityType The type of the desired new entity.
+	 * @param array $data A structure of nested arrays representing the entity.
+	 *
+	 * @since 0.3
+	 *
+	 * @throws MWException if the given entity type is not known.
+	 * @return Entity The new Entity object.
+	 */
+	public function newFromArray( $entityType, array $data ) {
+		if ( !$this->isEntityType( $entityType ) ) {
+			throw new MWException( "Unknown entity type: $entityType" );
 		}
 
-		$class = self::$typeMap[ $type ];
+		$class = self::$typeMap[ $entityType ];
+		$entity = new $class( $data );
 
-		$obj = call_user_func( array( $class, 'newEmpty' ) );
-		return $obj;
+		return $entity;
+	}
+
+	/**
+	 * Creates a new Entity object of the desired type from the given serialized representation.
+	 *
+	 * @param String $entityType The type of the desired new entity.
+	 * @param String $blob The serialized representation of the entity
+	 * @param String|null $format The serialization format
+	 *
+	 * @since 0.3
+	 *
+	 * @throws MWException if the given entity type or serialization format is not known.
+	 * @throws \MWContentSerializationException if the given blob was malformed.
+	 *
+	 * @return Entity The new Entity object.
+	 */
+	public function newFromBlob( $entityType, $blob, $format ) {
+		$data = $this->unserializedData( $blob, $format );
+
+		return $this->newFromArray( $entityType, $data );
+	}
+
+	/**
+	 * Decodes the given blob into a structure of nested arrays using the
+	 * given serialization format.
+	 *
+	 * Currently, two formats are supported: CONTENT_FORMAT_SERIALIZED, CONTENT_FORMAT_JSON.
+	 *
+	 * @param String $blob The data to decode
+	 * @param String|null $format The data format (if null, getDefaultFormat()
+	 * is used to determine it).
+	 *
+	 * @return array The deserialized data structure
+	 *
+	 * @throws MWException if an unsupported format is requested
+	 * @throws \MWContentSerializationException If serialization fails.
+	 */
+	public function unserializedData( $blob, $format = null ) {
+		if ( is_null( $format ) ) {
+			$format = $this->getDefaultFormat();
+		}
+
+		switch ( $format ) {
+			case CONTENT_FORMAT_SERIALIZED:
+				$data = unserialize( $blob ); //FIXME: suppress notice on failed serialization!
+				break;
+			case CONTENT_FORMAT_JSON:
+				$data = json_decode( $blob, true ); //FIXME: suppress notice on failed serialization!
+				break;
+			default:
+				throw new MWException( "serialization format $format is not supported for Wikibase content model" );
+				break;
+		}
+
+		if ( $data === false || $data === null ) {
+			throw new \MWContentSerializationException( 'failed to deserialize' );
+		}
+
+		if ( is_object( $data ) ) {
+			// force to array representation (at least on the top level)
+			$data = get_object_vars( $data );
+		}
+
+		if ( !is_array( $data ) ) {
+			throw new \MWContentSerializationException( 'failed to deserialize: not an array.' );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Returns the default serialization format for entities, as defined by the
+	 * 'serializationFormat' setting.
+	 *
+	 * @return string
+	 */
+	public function getDefaultFormat() {
+		return Settings::get( 'serializationFormat' );
 	}
 
 }
