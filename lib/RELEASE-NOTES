@@ -12,6 +12,10 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Implemented proper serialization in EntityObject
 * Improved Change classes
 * Added countLinks and getLinks in SiteLinkLookup
+* Removed Statements, StatementList, StatementListAccess and StatementsAggregate and replace usages by corresponding Claim classes
+* Claims can now be looked up by GUID in any ClaimListAccess
+* HashArray now supports driving classes that accept duplicates
+* Hashable, Copyable, Immutable and Comparable have been removed in favour of the same interfaces in DataValues
 
 === Version 0.2 ===
 (???)

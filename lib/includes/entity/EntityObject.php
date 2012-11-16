@@ -697,6 +697,20 @@ abstract class EntityObject implements Entity {
 	}
 
 	/**
+	 * @see ClaimListAccess::getClaimWithGuid
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 *
+	 * @return Claim|null
+	 */
+	public function getClaimWithGuid( $claimGuid ) {
+		$this->unstubClaims();
+		$this->claims->getClaimWithGuid( $claimGuid );
+	}
+
+	/**
 	 * @see ClaimAggregate::getClaims
 	 *
 	 * @since 0.3
