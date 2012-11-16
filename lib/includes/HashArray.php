@@ -2,15 +2,12 @@
 
 namespace Wikibase;
 use Hashable;
+use GenericArrayObject;
 
 /**
  * Generic array object with lookups based on hashes of the elements.
  *
- * Elements need to implement Hashable and Immutable.
- *
- * Only a single element per hash can exist in the list. If the hash
- * of an element being added already exists in the list, the element
- * does not get added.
+ * Elements need to implement Hashable.
  *
  * Note that by default the getHash method uses @see MapValueHashesr
  * which returns a hash based on the contents of the list, regardless
@@ -19,6 +16,11 @@ use Hashable;
  * Also note that if the Hashable elements are mutable, any modifications
  * made to them via their mutator methods will not cause an update of
  * their associated hash in this array.
+ *
+ * When acceptDuplicates is set to true, multiple elements with the same
+ * hash can reside in the HashArray. Lookup by such a non-unique hash will
+ * return only the first element and deletion will also delete only
+ * the first such element.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,16 +45,25 @@ use Hashable;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class HashArray extends \GenericArrayObject implements \Hashable {
+abstract class HashArray extends GenericArrayObject implements \Hashable {
 
 	/**
 	 * Maps element hashes to their offsets.
 	 *
 	 * @since 0.1
 	 *
-	 * @var array [ element hash (string) => element offset (string|int) ]
+	 * @var array [ element hash (string) => array [ element offset (string|int) ] | element offset (string|int) ]
 	 */
 	protected $offsetHashes = array();
+
+	/**
+	 * If duplicate values (based on hash) should be accepted or not.
+	 *
+	 * @since 0.3
+	 *
+	 * @var boolean
+	 */
+	protected $acceptDuplicates = false;
 
 	/**
 	 * @see GenericArrayObject::preSetElement
@@ -67,11 +78,23 @@ abstract class HashArray extends \GenericArrayObject implements \Hashable {
 	protected function preSetElement( $index, $hashable ) {
 		$hash = $hashable->getHash();
 
-		if ( $this->hasElementHash( $hash ) ) {
+		$hasHash = $this->hasElementHash( $hash );
+
+		if ( !$this->acceptDuplicates && $hasHash ) {
 			return false;
 		}
 		else {
-			$this->offsetHashes[$hash] = $index;
+			if ( $hasHash ) {
+				if ( !is_array( $this->offsetHashes[$hash] ) ) {
+					$this->offsetHashes[$hash] = array( $this->offsetHashes[$hash] );
+				}
+
+				$this->offsetHashes[$hash][] = $index;
+			}
+			else {
+				$this->offsetHashes[$hash] = $index;
+			}
+
 			return true;
 		}
 	}
@@ -122,7 +145,13 @@ abstract class HashArray extends \GenericArrayObject implements \Hashable {
 	 */
 	public function removeByElementHash( $elementHash ) {
 		if ( $this->hasElementHash( $elementHash ) ) {
-			$this->offsetUnset( $this->offsetHashes[$elementHash] );
+			$offset = $this->offsetHashes[$elementHash];
+
+			if ( is_array( $offset ) ) {
+				$offset = reset( $offset );
+			}
+
+			$this->offsetUnset( $offset );
 		}
 	}
 
@@ -136,13 +165,15 @@ abstract class HashArray extends \GenericArrayObject implements \Hashable {
 	 * @return boolean Indicates if the element was added or not.
 	 */
 	public function addElement( Hashable $element ) {
-		if ( $this->hasElementHash( $element->getHash() ) ) {
-			return false;
-		}
-		else {
+		// TODO: this duplicates logic of preSetElement
+		// Probably best update setElement in GenericArrayObject to return boolean it got from preSetElement
+		$append = $this->acceptDuplicates || !$this->hasElementHash( $element->getHash() );
+
+		if ( $append ) {
 			$this->append( $element );
-			return true;
 		}
+
+		return $append;
 	}
 
 	/**
@@ -156,7 +187,13 @@ abstract class HashArray extends \GenericArrayObject implements \Hashable {
 	 */
 	public function getByElementHash( $elementHash ) {
 		if ( $this->hasElementHash( $elementHash ) ) {
-			return $this->offsetGet( $this->offsetHashes[$elementHash] );
+			$offset = $this->offsetHashes[$elementHash];
+
+			if ( is_array( $offset ) ) {
+				$offset = reset( $offset );
+			}
+
+			return $this->offsetGet( $offset );
 		}
 		else {
 			return false;
@@ -177,7 +214,19 @@ abstract class HashArray extends \GenericArrayObject implements \Hashable {
 			/**
 			 * @var Hashable $element
 			 */
-			unset( $this->offsetHashes[$element->getHash()] );
+			if ( is_array( $this->offsetHashes[$element->getHash()] )
+				&& count( $this->offsetHashes[$element->getHash()] ) > 1 ) {
+
+				$this->offsetHashes[$element->getHash()] = array_filter(
+					$this->offsetHashes[$element->getHash()],
+					function( $value ) use ( $index ) {
+						return $value !== $index;
+					}
+				);
+			}
+			else {
+				unset( $this->offsetHashes[$element->getHash()] );
+			}
 
 			parent::offsetUnset( $index );
 		}
@@ -188,7 +237,7 @@ abstract class HashArray extends \GenericArrayObject implements \Hashable {
 	 *
 	 * @since 0.1
 	 *
-	 * @internal param \Wikibase\MapHasher $mapHasher
+	 * @internal param MapHasher $mapHasher
 	 *
 	 * @return string
 	 */
@@ -203,6 +252,29 @@ abstract class HashArray extends \GenericArrayObject implements \Hashable {
 		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
 
 		return $hasher->hash( $this );
+	}
+
+	/**
+	 * Removes duplicates bases on hash value.
+	 *
+	 * @since 0.3
+	 */
+	public function removeDuplicates() {
+		$knownHashes = array();
+
+		/**
+		 * @var Hashable $hashable
+		 */
+		foreach ( iterator_to_array( $this ) as $hashable ) {
+			$hash = $hashable->getHash();
+
+			if ( in_array( $hash, $knownHashes ) ) {
+				$this->removeByElementHash( $hash );
+			}
+			else {
+				$knownHashes[] = $hash;
+			}
+		}
 	}
 
 }

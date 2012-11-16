@@ -6,10 +6,10 @@ namespace Wikibase;
  * Implementation of the Claims interface.
  * @see Claims
  *
- * Note that this implementation is based on SplObjectStorage and
- * is not enforcing the type of objects set via it's native methods.
- * Therefore one can add non-Reference-implementing objects when
- * not sticking to the methods of the Claims interface.
+ * A claim (identified using it's GUID) can only be added once.
+ *
+ * TODO: if it turns out we do not need efficient lookups by guid after all
+ * we can switch back to extending the simpler HashableObjectStorage.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,21 +34,54 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimList extends HashableObjectStorage implements Claims {
+class ClaimList extends HashArray implements Claims {
 
 	/**
-	 * @see References::addClaim
+	 * Maps claim GUIDs to their offsets.
+	 *
+	 * @since 0.1
+	 *
+	 * @var array [ element hash (string) => element offset (string|int) ]
+	 */
+	protected $guidIndex = array();
+
+	/**
+	 * Constructor.
+	 * @see GenericArrayObject::__construct
+	 *
+	 * @since 0.3
+	 *
+	 * @param null|array $input
+	 */
+	public function __construct( $input = null ) {
+		$this->acceptDuplicates = true;
+		parent::__construct( $input );
+	}
+
+	/**
+	 * @see GenericArrayObject::getObjectType
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function getObjectType() {
+		return '\Wikibase\Claim';
+	}
+
+	/**
+	 * @see ClaimListAccess::addClaim
 	 *
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
 	 */
 	public function addClaim( Claim $claim ) {
-		$this->attach( $claim );
+		$this->append( $claim );
 	}
 
 	/**
-	 * @see References::hasClaim
+	 * @see ClaimListAccess::hasClaim
 	 *
 	 * @since 0.1
 	 *
@@ -57,18 +90,99 @@ class ClaimList extends HashableObjectStorage implements Claims {
 	 * @return boolean
 	 */
 	public function hasClaim( Claim $claim ) {
-		return $this->contains( $claim );
+		return $this->hasElement( $claim );
 	}
 
 	/**
-	 * @see References::removeClaim
+	 * @see ClaimListAccess::removeClaim
 	 *
 	 * @since 0.1
 	 *
 	 * @param Claim $claim
 	 */
 	public function removeClaim( Claim $claim ) {
-		$this->detach( $claim );
+		$this->removeElement( $claim );
+	}
+
+	/**
+	 * @see ClaimListAccess::hasClaimWithGuid
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 *
+	 * @return boolean
+	 */
+	public function hasClaimWithGuid( $claimGuid ) {
+		return array_key_exists( $claimGuid, $this->guidIndex );
+	}
+
+	/**
+	 * @see ClaimListAccess::removeClaimWithGuid
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 */
+	public function removeClaimWithGuid( $claimGuid ) {
+		$this->offsetUnset( $this->guidIndex[$claimGuid] );
+	}
+
+	/**
+	 * @see ClaimListAccess::getClaimWithGuid
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 *
+	 * @return Claim|null
+	 */
+	public function getClaimWithGuid( $claimGuid ) {
+		if ( $this->hasClaimWithGuid( $claimGuid ) ) {
+			return $this->offsetGet( $this->guidIndex[$claimGuid] );
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * @see GenericArrayObject::preSetElement
+	 *
+	 * @since 0.3
+	 *
+	 * @param int|string $index
+	 * @param Claim $claim
+	 *
+	 * @return boolean
+	 */
+	protected function preSetElement( $index, $claim ) {
+		$shouldSet = parent::preSetElement( $index, $claim );
+
+		if ( $shouldSet ) {
+			$this->guidIndex[$claim->getGuid()] = $index;
+		}
+
+		return $shouldSet;
+	}
+
+	/**
+	 * @see ArrayObject::offsetUnset()
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $index
+	 */
+	public function offsetUnset( $index ) {
+		/**
+		 * @var Claim $claim
+		 */
+		$claim = $this->offsetGet( $index );
+
+		if ( $claim !== false ) {
+			unset( $this->guidIndex[$claim->getGuid()] );
+			parent::offsetUnset( $index );
+		}
 	}
 
 }

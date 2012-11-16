@@ -106,6 +106,9 @@ final class LibHooks {
 			'entity/EntityFactory',
 			'entity/EntityId',
 
+			'hasharray/HashArrayWithoutDuplicates',
+			'hasharray/HashArrayWithDuplicates',
+
 			'item/ItemDiff',
 			'item/ItemMultilangTexts',
 			'item/ItemNewEmpty',
