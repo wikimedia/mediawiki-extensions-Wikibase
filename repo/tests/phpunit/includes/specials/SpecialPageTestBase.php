@@ -28,6 +28,7 @@ namespace Wikibase\Test;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 
@@ -35,16 +36,41 @@ abstract class SpecialPageTestBase extends \MediaWikiTestCase {
 		$this->assertInstanceOf( 'SpecialPage', new \SpecialItemDisambiguation() );
 	}
 
-	public function testExecute() {
-		$instance = new \SpecialItemDisambiguation();
-		$instance->execute( '' );
+	/**
+	 * Returns a new instance of the special page under test.
+	 *
+	 * @return \SpecialPage
+	 */
+	protected abstract function newSpecialPage();
 
-		$this->assertTrue( true, 'Calling execute without any subpage value' );
+	/**
+	 * @param string      $sub The subpage parameter to call the page with
+	 * @param \WebRequest $request Web request that may contain URL parameters, etc
+	 *
+	 * @return array array( String, \WebResponse ) containing the output generated
+	 *         by the special page.
+	 */
+	protected function executeSpecialPage( $sub = '', \WebRequest $request = null ) {
+		if ( !$request ) {
+			$request = new \FauxRequest();
+		}
 
-		$instance = new \SpecialItemDisambiguation();
-		$instance->execute( 'en/oHai' );
+		$response = $request->response();
 
-		$this->assertTrue( true, 'Calling execute with a subpage value' );
+		$page = $this->newSpecialPage();
+		$page->getContext()->setRequest( $request );
+
+		ob_start();
+		$page->execute( $sub );
+
+		if ( $page->getOutput()->isDisabled() ) {
+			$text = ob_get_contents();
+		} else {
+			$text = $page->getOutput()->getHTML();
+		}
+
+		ob_end_clean();
+		return array( $text, $response );
 	}
 
 }

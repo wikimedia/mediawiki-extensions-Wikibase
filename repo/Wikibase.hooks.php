@@ -170,6 +170,7 @@ final class RepoHooks {
 			'specials/SpecialCreateItem',
 			'specials/SpecialItemDisambiguation',
 			'specials/SpecialItemByTitle',
+			'specials/SpecialEntityData',
 
 			'store/IdGenerator',
 			'store/StoreFactory',
