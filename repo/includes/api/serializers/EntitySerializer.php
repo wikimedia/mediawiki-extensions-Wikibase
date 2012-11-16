@@ -6,8 +6,6 @@ use ApiResult, MWException;
 /**
  * API serializer for entities.
  *
- * TODO: support entity type specific stuff
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -91,7 +89,17 @@ class EntitySerializer extends ApiSerializerObject {
 			}
 		}
 
-		return array_merge( $serialization, $this->getEntityTypeSpecificSerialization( $entity ) );
+		$serialization = array_merge( $serialization, $this->getEntityTypeSpecificSerialization( $entity ) );
+
+		// Omit empty arrays from the result
+		$serialization = array_filter(
+			$serialization,
+			function( $value ) {
+				return $value !== array();
+			}
+		);
+
+		return $serialization;
 	}
 
 	/**
