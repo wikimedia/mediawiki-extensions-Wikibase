@@ -20,12 +20,6 @@ use Wikibase\LibHooks;
  */
 class LibHooksTest extends \MediaWikiTestCase {
 
-	public function testOnSchemaUpdate() {
-		$updater = \DatabaseUpdater::newForDb( wfGetDB( DB_MASTER ) );
-
-		$this->assertTrue( LibHooks::onSchemaUpdate( $updater ) );
-	}
-
 	public function testRegisterPhpUnitTests() {
 		$files = array();
 
