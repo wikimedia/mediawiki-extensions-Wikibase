@@ -54,11 +54,39 @@ $specialPageAliases['diq'] = array(
 	'ItemDisambiguation' => array( 'EtiketêLeti' ),
 );
 
+/** Spanish (español) */
+$specialPageAliases['es'] = array(
+	'EntityData' => array( 'DatosDeEntidad' ),
+	'CreateItem' => array( 'CrearElemento' ),
+	'NewProperty' => array( 'NuevaPropiedad' ),
+	'ItemByTitle' => array( 'ElementoPorTítulo' ),
+	'ItemDisambiguation' => array( 'DesambiguaciónDeElementos' ),
+	'ListDatatypes' => array( 'ListarTiposDeDatos' ),
+	'SetLabel' => array( 'AsignarEtiqueta' ),
+	'EntitiesWithoutLabel' => array( 'EntidadesSinEtiqueta' ),
+);
+
 /** Icelandic (íslenska) */
 $specialPageAliases['is'] = array(
 	'CreateItem' => array( 'Búa_til_hlut' ),
+	'NewProperty' => array( 'Ný_staðhæfing' ),
 	'ItemByTitle' => array( 'Hlutur_eftir_nafni' ),
 	'ItemDisambiguation' => array( 'Hlutur_eftir_merkimiða' ),
+	'ListDatatypes' => array( 'Gagnagerðir' ),
+	'SetLabel' => array( 'Setja_merkimiða' ),
+	'EntitiesWithoutLabel' => array( 'Færslur_án_merkimiða' ),
+);
+
+/** Italian (italiano) */
+$specialPageAliases['it'] = array(
+	'EntityData' => array( 'DatiEntità' ),
+	'CreateItem' => array( 'CreaElemento' ),
+	'NewProperty' => array( 'NuovaProprietà' ),
+	'ItemByTitle' => array( 'ElementiPerTitolo' ),
+	'ItemDisambiguation' => array( 'ElementiDisambigui' ),
+	'ListDatatypes' => array( 'ElencaTipiDati' ),
+	'SetLabel' => array( 'ImpostaEtichetta' ),
+	'EntitiesWithoutLabel' => array( 'EntitàSenzaEtichetta' ),
 );
 
 /** Korean (한국어) */

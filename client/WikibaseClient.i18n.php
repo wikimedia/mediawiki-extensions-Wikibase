@@ -328,6 +328,7 @@ $messages['ka'] = array(
  */
 $messages['ko'] = array(
 	'wbc-desc' => '위키베이스 확장 기능을 위한 클라이언트',
+	'wbc-after-page-move' => '또한 이동한 문서에 언어 링크를 유지하기 위해 관련된 위키데이터 항목을 [$1 업데이트]할 수 있습니다.',
 	'wbc-comment-langlinks-delete' => '연결한 위키데이터 항목을 삭제했습니다. 언어 링크를 제거했습니다.',
 	'wbc-comment-langlinks-remove' => '이 문서는 위키데이터 항목에 연결하지 않았습니다. 언어 링크를 제거했습니다',
 	'wbc-comment-langlinks-restore' => '연결한 위키데이터 항목을 복구했습니다. 언어 링크를 복구했습니다',
