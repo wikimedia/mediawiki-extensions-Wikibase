@@ -42,7 +42,7 @@ dv.BoolValue = dv.util.inherit( PARENT, constructor, {
 	 *
 	 * @since 0.1
 	 *
-	 * @return String
+	 * @return Boolean
 	 */
 	getValue: function() {
 		return this._value;
