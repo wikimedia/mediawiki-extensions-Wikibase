@@ -51,6 +51,10 @@
 		/**
 		 * @see dv.DataValue.equals
 		 *
+		 * Since the type of value is not known, it's not possible to perform
+		 * an always correct and always meaningful comparison. Therefore false
+		 * negatives might be returned.
+		 *
 		 * @since 0.1
 		 */
 		equals: function( value ) {
