@@ -175,4 +175,10 @@ abstract class EntityHandlerTest extends \MediaWikiTestCase {
 		$this->assertEquals( $wgLang->getCode(), $handler->getPageViewLanguage( $title )->getCode() );
 	}
 
+	public function testLocalizedModelName() {
+		$name = ContentHandler::getLocalizedName( $this->getModelId() );
+
+		$this->assertNotEquals( $this->getModelId(), $name, "localization of model name" );
+	}
+
 }

@@ -232,7 +232,9 @@ to find out where it went.',
 	'wikibase-item-summary-special-create-query' => 'Created a [$2] query with {{plural:$1|value|values}}',
 
 	//content model names
-	'content-model-1001' => 'Wikibase item',
+	'content-model-wikibase-item' => 'Wikibase item',
+	'content-model-wikibase-property' => 'Wikibase property',
+	'content-model-wikibase-query' => 'Wikibase query',
 
 	// User rights
 	'right-item-override' => 'Override an item',
