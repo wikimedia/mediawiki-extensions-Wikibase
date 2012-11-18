@@ -231,6 +231,7 @@ $messages['gsw'] = array(
  */
 $messages['he'] = array(
 	'wbc-desc' => 'לקוח להרחבה Wikibase',
+	'wbc-after-page-move' => 'אפשר גם [$1 לעדכן] את הפריט המשויך בוויקיפדיה כדי לתחזק את קישורי השפה בדף שהועבר.',
 	'wbc-comment-langlinks-delete' => 'הפריט המשויך בוויקינתונים נמחק. קישורי שפה הוסרו.',
 	'wbc-comment-langlinks-remove' => 'הקישור של הדף הזה לפריט בוויקינתונים בוטל. קישורי השפה הוסרו.',
 	'wbc-comment-langlinks-restore' => 'הפריט המשויך בוויקינתונים שחזר. קישורי השפה שוחזרו',
@@ -266,6 +267,7 @@ $messages['ia'] = array(
  */
 $messages['ilo'] = array(
 	'wbc-desc' => 'Kliente para iti Wikibase a pagpaatiddog',
+	'wbc-after-page-move' => 'Mabalinmo pay a [$1 pabaruen] ti mainaig a banag ti Wikidata tapno mataripatu dagiti silpo ti pagsasao ti naiyalis a panid.',
 	'wbc-comment-langlinks-delete' => 'Ti mainaig a banag ti Wikidata ket naikkaten. Dagiti silpo ti pagsasao ket naikkaten.',
 	'wbc-comment-langlinks-remove' => 'Daytoy a panid ket naikkat ti silpona manipud ti Wikidata a banag. Ti silpo ti pagsasao ket naikkaten',
 	'wbc-comment-langlinks-restore' => 'Ti mainaig a banag ti Wikidata ket naisubli ti pannakaikkatna. Dagiti silpo ti pagsasao ket naipasubli',
