@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//9L4\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-19T12:49:56Z",
+      "side": 1,
+      "message": "This is redundant to the check in line 164. The check that used to be done here was replaced by the block in line 166. This if statement can just go, i guess.",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Lw\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-19T12:49:56Z",
+      "side": 1,
+      "message": "This check will fail if the sitelink was removed! You\u0027ll have to look at the SiteLinkDiff first.",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Ls\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-19T12:49:56Z",
+      "side": 1,
+      "message": "Does that include additions and removals? If yes, it would probably be best to run this loop somewhere around line 186, look for all changes to a sitelink with \"our\" globalId, and then add the old, new or both targets to $pagesToUpdate.",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Lk\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-19T12:49:56Z",
+      "side": 1,
+      "message": "Wouldn\u0027t setMetadataFromRecentChange make more sense? RC has all the info we need, no?",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Lo\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-19T12:49:56Z",
+      "side": 1,
+      "message": "That\u0027s NOT the same as the bot flag entered in RectentChanges: users with the \"bot\" right MAY mark their edits as bot edits. Not all their edits are so flagged.",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
