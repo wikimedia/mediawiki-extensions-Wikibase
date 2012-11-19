@@ -79,10 +79,12 @@ $messages['br'] = array(
 /** Catalan (català)
  * @author Arnaugir
  * @author Grondin
+ * @author Vriullop
  * @author Àlex
  */
 $messages['ca'] = array(
 	'wbc-desc' => "Client per l'extensió Wikibase",
+	'wbc-after-page-move' => "Podeu també [$1 actualitzar] l'element associat de Wikidata per a mantenir els enllaços d'idioma a la pàgina moguda.",
 	'wbc-comment-langlinks-delete' => "Element associat de Wikidata suprimit. Enllaços d'idiomes eliminats.",
 	'wbc-comment-langlinks-remove' => "S'ha desenllaçat aquesta pàgina de l'article de Wikidata. Els enllaços d'idioma s'han eliminat.",
 	'wbc-comment-langlinks-restore' => "Element associat de Wikidata recuperat. Enllaços d'idioma restaurats.",
@@ -187,6 +189,7 @@ $messages['fi'] = array(
  */
 $messages['fr'] = array(
 	'wbc-desc' => 'Client pour l’extension Wikibase',
+	'wbc-after-page-move' => "Vous pouvez aussi [$1 mettre à jour] l'élément Wikidata associé pour conserver les liens de langue sur la page déplacée.",
 	'wbc-comment-langlinks-delete' => 'Élément Wikidata associé supprimé. Liens de langue supprimés.',
 	'wbc-comment-langlinks-remove' => "Cette page a été déliée de l'élément Wikidata. Liens de langue supprimés",
 	'wbc-comment-langlinks-restore' => 'Élément Wikidata associé restauré. Liens de langue rétablis',
