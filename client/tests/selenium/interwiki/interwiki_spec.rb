@@ -14,6 +14,7 @@ nell_zhaf = "{{noexternallanglinks:zh|af}}"
 nell_afzh = "{{noexternallanglinks:af|zh}}"
 nell_itzhaf = "{{noexternallanglinks:it|zh|af}}"
 nell_none = "{{noexternallanglinks}}"
+local_langlink = "[[af:Jimmy Carter]]"
 item_description = "It's an American musician and singer-songwriter."
 item_sitelinks = [["en", "Jimi Hendrix"], ["de", "Jimi Hendrix"], ["af", "Jimi Hendrix"], ["zh", "Jimi Hendrix"], ["it", "Jimi Hendrix"]]
 
@@ -101,6 +102,23 @@ describe "Check client interwiki links" do
         page.interwiki_it?.should be_false
         page.interwiki_af?.should be_false
         page.interwiki_zh?.should be_false
+      end
+    end
+
+    context "Check supression of duplicate links" do
+      it "should check that local link overrides repo link" do
+        on_page(ClientPage) do |page|
+          page.change_article(article_title, article_text + local_langlink)
+          page.clientArticleTitle.should == article_title
+          page.count_interwiki_links.should == item_sitelinks.count - 1
+          page.interwiki_de?.should be_true
+          page.interwiki_it?.should be_true
+          page.interwiki_af?.should be_true
+          page.interwiki_zh?.should be_true
+          page.clientEditLinksLink?.should be_true
+          page.interwiki_af
+          page.clientArticleTitle.should == "Jimmy Carter"
+        end
       end
     end
   end

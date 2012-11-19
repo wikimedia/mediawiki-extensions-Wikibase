@@ -454,15 +454,21 @@ final class ClientHooks {
 				// get interwiki lang links from local wikitext
 				$localLinks = $parserOutput->getLanguageLinks();
 
-				// clear links from parser output and then we repopulate them
-				$parserOutput->setLanguageLinks( array() );
+				// building array with language codes from local links
+				$localLinkCodes = array();
+				foreach ( $localLinks as $localLink ) {
+					$matches = array();
+					preg_match( "/([^:]*):/", $localLink, $matches );
+					$localLinkCodes[] = $matches[1];
+				}
 
-				// merge the local and repo language links and remove duplicates
-				$langLinks = array_unique( array_merge( $repoLinkItems, $localLinks ) );
-
-				// add language links to the sidebar
-				foreach( $langLinks as $langLink ) {
-					$parserOutput->addLanguageLink( $langLink );
+				// use the local links as default and add missing links from the repo
+				foreach ( $repoLinkItems as $repoLink ) {
+					$matches = array();
+					preg_match( "/([^:]*):/", $repoLink, $matches );
+					if ( !in_array( $matches[1], $localLinkCodes ) ) {
+						$parserOutput->addLanguageLink( $repoLink );
+					}
 				}
 			}
 
