@@ -41,8 +41,7 @@ return call_user_func( function() {
 			'dependencies' => array(
 				'wikibase.common',
 				'wikibase.sites',
-				'wikibase.templates',
-				'jquery.uls'
+				'wikibase.templates'
 			),
 			'messages' => array(
 				'special-createitem',
@@ -71,7 +70,8 @@ return call_user_func( function() {
 				'wikibase.store/wikibase.Api.js',
 			),
 			'dependencies' => array(
-				'wikibase.datamodel'
+				'wikibase.datamodel',
+				'jquery.json'
 			)
 		),
 
