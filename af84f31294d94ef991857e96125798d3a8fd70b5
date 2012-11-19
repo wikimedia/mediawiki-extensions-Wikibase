@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//9Dw\u003d",
+        "filename": "lib/tests/qunit/wikibase.datamodel/Wikibase.snak.tests.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 167
+      },
+      "writtenOn": "2012-11-19T16:14:47Z",
+      "side": 1,
+      "message": "Could give some more info like: \u0027Snak type \"\u0027 + snak.TYPE + \u0027\" was set correctly\u0027",
+      "revId": "af84f31294d94ef991857e96125798d3a8fd70b5",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
