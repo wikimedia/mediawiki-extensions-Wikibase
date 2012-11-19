@@ -149,15 +149,6 @@ final class RepoHooks {
 			'api/ApiSetSiteLink',
 			'api/ApiLinkTitles',
 
-			'api/serializers/ApiSerializationOptions',
-			'api/serializers/ApiSerializer',
-			'api/serializers/ByPropertyListSerializer',
-			'api/serializers/ClaimSerializer',
-			'api/serializers/ClaimsSerializer',
-			'api/serializers/ItemSerializer',
-			'api/serializers/PropertySerializer',
-			'api/serializers/SnakSerializer',
-
 			'content/EntityContentFactory',
 			'content/EntityHandler',
 			'content/ItemContent',
