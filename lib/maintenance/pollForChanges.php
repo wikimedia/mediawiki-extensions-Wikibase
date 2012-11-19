@@ -99,6 +99,8 @@ class PollForChanges extends \Maintenance {
 
 		$this->addOption( 'rebuild', "Rebuild client data" );
 
+		$this->addOption( 'jobqueue', "Use the job queue" );
+
 		parent::__construct();
 	}
 
@@ -117,8 +119,9 @@ class PollForChanges extends \Maintenance {
 		$this->pollLimit = (int)$this->getOption( 'polllimit', Settings::get( 'pollDefaultLimit' ) );
 		$this->sleepInterval = (int)$this->getOption( 'sleepinterval', Settings::get( 'pollDefaultInterval' ) ) * 1000;
 		$this->continueInterval = (int)$this->getOption( 'continueinterval', Settings::get( 'pollContinueInterval' ) ) * 1000;
-
 		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
+
+		$this->jobQueue = $this->hasOption( 'jobqueue' );
 
 		// Make sure this script only runs once
 		$pidfile = Utils::makePidFilename( 'WBpollForChanges', wfWikiID() );
@@ -201,7 +204,7 @@ class PollForChanges extends \Maintenance {
 					}
 				}
 
-				ChangeHandler::singleton()->handleChanges( $changes );
+				ChangeHandler::singleton()->handleChanges( $changes, $this->jobQueue );
 			}
 			catch ( \Exception $ex ) {
 				$ids = array_map( function( Change $change ) { return $change->getId(); }, $changes );

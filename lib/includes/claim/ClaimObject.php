@@ -170,7 +170,6 @@ class ClaimObject implements Claim {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * @see Claim::toArray
 	 *
 	 * @since 0.3
