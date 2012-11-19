@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//9Ig\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-19T14:32:43Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "AAADZH//9L4\u003d",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//9Lw\u003d",
         "filename": "client/WikibaseClient.hooks.php",
         "patchSetId": 19
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-19T12:49:56Z",
       "side": 1,
       "message": "This check will fail if the sitelink was removed! You\u0027ll have to look at the SiteLinkDiff first.",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Ik\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-19T14:32:43Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "AAADZH//9Lw\u003d",
       "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//9Io\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-19T14:32:43Z",
+      "side": 1,
+      "message": "no.  a change is just changing the value of an existing site link. (e.g. [[enwiki:New Amsterdam]] \u003d\u003e [[enwiki:New York City]])\n\na change can occur in a batch with other stuff, which is why if/else is not appropriate here and we need to check for each change type.",
+      "parentUuid": "AAADZH//9Ls\u003d",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//9Lk\u003d",
         "filename": "lib/includes/changes/EntityChange.php",
         "patchSetId": 19
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//9IU\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-19T14:32:43Z",
+      "side": 1,
+      "message": "you suggest we use the RecentChange_save hook instead of ArticleDeleteComplete, NewRevisionFromEditComplete etc.?  That could work and would give us access to the $bot information.  I don\u0027t see a good way to get the bot information from NewRevisionFromEditComplete.",
+      "parentUuid": "AAADZH//9Lk\u003d",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//9Lo\u003d",
         "filename": "lib/includes/changes/EntityChange.php",
         "patchSetId": 19
@@ -81,6 +153,24 @@
       "writtenOn": "2012-11-19T12:49:56Z",
       "side": 1,
       "message": "That\u0027s NOT the same as the bot flag entered in RectentChanges: users with the \"bot\" right MAY mark their edits as bot edits. Not all their edits are so flagged.",
+      "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9IQ\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 19
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-19T14:32:43Z",
+      "side": 1,
+      "message": "makes sense, and see comment above.",
+      "parentUuid": "AAADZH//9Lo\u003d",
       "revId": "46bf4c102ef131666566addc7b5c77748e7bfa6b",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
