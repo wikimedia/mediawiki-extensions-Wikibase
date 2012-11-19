@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Claim extends \Hashable {
+interface Claim extends \Hashable, \Serializable {
 
 	/**
 	 * Returns the value snak.

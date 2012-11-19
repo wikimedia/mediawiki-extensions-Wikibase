@@ -142,4 +142,17 @@ class StatementObjectTest extends ClaimObjectTest {
 		);
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testToArrayRoundrip( Claim $claim ) {
+		$data = $claim->toArray();
+
+		$this->assertInternalType( 'array', $data );
+
+		$copy = StatementObject::newFromArray( $data );
+
+		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'toArray newFromArray roundtrip should not affect hash' );
+	}
+
 }

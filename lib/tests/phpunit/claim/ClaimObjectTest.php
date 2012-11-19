@@ -160,4 +160,26 @@ class ClaimObjectTest extends \MediaWikiTestCase {
 		$this->assertEquals( $guid, $claim->getGuid() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSerialize( Claim $claim ) {
+		$copy = unserialize( serialize( $claim ) );
+
+		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'Serialization roundtrip should not affect hash' );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testToArrayRoundrip( Claim $claim ) {
+		$data = $claim->toArray();
+
+		$this->assertInternalType( 'array', $data );
+
+		$copy = ClaimObject::newFromArray( $data );
+
+		$this->assertEquals( $claim->getHash(), $copy->getHash(), 'toArray newFromArray roundtrip should not affect hash' );
+	}
+
 }

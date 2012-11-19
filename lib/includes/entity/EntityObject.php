@@ -734,9 +734,8 @@ abstract class EntityObject implements Entity {
 		if ( $this->claims === null ) {
 			$this->claims = new ClaimList();
 
-			foreach ( $this->data['claims'] as $statementSerialization ) {
-				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
-				$this->claims->addClaim( unserialize( $statementSerialization ) );
+			foreach ( $this->data['claims'] as $claimSerialization ) {
+				$this->claims->addClaim( ClaimObject::newFromArray( $claimSerialization ) );
 			}
 		}
 	}
@@ -754,9 +753,11 @@ abstract class EntityObject implements Entity {
 		if ( $this->claims !== null ) {
 			$claims = array();
 
+			/**
+			 * @var Claim $claim
+			 */
 			foreach ( $this->claims as $claim ) {
-				// TODO: right now using PHP serialization as the final JSON structure has not been decided upon yet
-				$claims[] = serialize( $claim );
+				$claims[] = $claim->toArray();
 			}
 		}
 
