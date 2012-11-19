@@ -154,10 +154,11 @@ final class ClientHooks {
 	 * @since 0.1
 	 *
 	 * @param Change $change
+	 * @param bool $runJobs
 	 *
 	 * @return bool
 	 */
-	public static function onWikibasePollHandle( Change $change ) {
+	public static function onWikibasePollHandle( Change $change, $runJobs ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( ! ( $change instanceof EntityChange ) ) {
@@ -242,7 +243,7 @@ final class ClientHooks {
 			} else {
 				// handle item deletion or restore
 				if ( in_array( $change->getChangeType(), array( 'restore', 'remove' ) ) ) {
-					$siteLink = $item->getSiteLink( $siteGlobalId );
+					$siteLink = $change->getEntity()->getSiteLink( $siteGlobalId );
 
 					if ( $siteLink !== null ) {
 						$page = $siteLink->getPage();
@@ -252,7 +253,7 @@ final class ClientHooks {
 			}
 
 			foreach ( array_unique( $pagesToUpdate ) as $page ) {
-				self::updatePage( $page, $change, false );
+				self::updatePage( $page, $change, $runJobs );
 			}
 		}
 
@@ -270,7 +271,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	protected static function updatePage( $titleText, Change $change ) {
+	protected static function updatePage( $titleText, Change $change, $runJobs ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$title = \Title::newFromText( $titleText );
@@ -280,32 +281,13 @@ final class ClientHooks {
 			return false;
 		}
 
-		$title->invalidateCache();
+		$job = new UpdatePageJob( $title, array( 'changeId' => $change->getId() ) );
 
-		if ( Settings::get( 'injectRecentChanges' )  === false ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return true;
+		if ( $runJobs === true ) {
+			$job->run();
+		} else {
+			\Job::batchInsert( array( $job ) );
 		}
-
-		$rcinfo = $change->getMetadata();
-
-		if ( ! is_array( $rcinfo ) ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return false;
-		}
-
-		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		$fields['entity_type'] = $change->getEntityType();
-		unset( $fields['info'] );
-
-		$params = array(
-			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
-		);
-
-		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
-
-		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
-		$rc->save();
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;

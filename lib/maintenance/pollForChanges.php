@@ -99,6 +99,8 @@ class PollForChanges extends \Maintenance {
 
 		$this->addOption( 'rebuild', "Rebuild client data" );
 
+		$this->addOption( 'runjobs', "Run the jobs" );
+
 		parent::__construct();
 	}
 
@@ -119,6 +121,11 @@ class PollForChanges extends \Maintenance {
 		$this->continueInterval = (int)$this->getOption( 'continueinterval', Settings::get( 'pollContinueInterval' ) ) * 1000;
 
 		$this->startTime = (int)strtotime( $this->getOption( 'since', 0 ) );
+
+		$this->runJobs = false;
+		if ( $this->getOption( 'runjobs' ) ) {
+			$this->runJobs = true;
+		}
 
 		// Make sure this script only runs once
 		$pidfileName = 'WBpollForChanges_' . wfWikiID() . ".pid";
@@ -217,7 +224,7 @@ class PollForChanges extends \Maintenance {
 					}
 				}
 
-				ChangeHandler::singleton()->handleChanges( $changes );
+				ChangeHandler::singleton()->handleChanges( $changes, $this->runJob );
 			}
 			catch ( \Exception $ex ) {
 				$ids = array_map( function( Change $change ) { return $change->getId(); }, $changes );
