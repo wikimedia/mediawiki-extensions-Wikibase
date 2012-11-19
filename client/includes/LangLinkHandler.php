@@ -72,16 +72,14 @@ class LangLinkHandler {
 
 		// use repoLinks in only the namespaces specified in settings
 		if ( in_array( $title->getNamespace(), Settings::get( 'namespaces' ) ) ) {
-                	$nel = self::getNoExternalLangLinks( $parser->getOutput() );
+			$nel = self::getNoExternalLangLinks( $parser->getOutput() );
 
-                	// unsets all the repolinks
-                	if( array_key_exists( '*', $nel ) ) {
+			// unsets all the repolinks
+			if( array_key_exists( '*', $nel ) ) {
 				return false;
 			}
-
 			return true;
 		}
-
 		return false;
 	}
 
