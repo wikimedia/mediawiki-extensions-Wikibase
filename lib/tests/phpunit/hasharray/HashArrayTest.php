@@ -56,6 +56,8 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 	 * @param \Wikibase\HashArray $array
 	 */
 	public function testHasElement( HashArray $array ) {
+		$array->removeDuplicates();
+
 		/**
 		 * @var Hashable $hashable
 		 */
@@ -76,6 +78,8 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 	 * @param \Wikibase\HashArray $array
 	 */
 	public function testRemoveElement( HashArray $array ) {
+		$array->removeDuplicates();
+
 		$elementCount = $array->count();
 
 		/**
@@ -101,51 +105,6 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 		$array->removeByElementHash( $element->getHash() );
 
 		$this->assertTrue( true );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param \Wikibase\HashArray $array
-	 */
-	public function testAddElement( HashArray $array ) {
-		$elementCount = $array->count();
-
-		$elements = $this->elementInstancesProvider();
-		$element = array_shift( $elements );
-		$element = $element[0][0];
-
-		if ( !$array->hasElement( $element ) ) {
-			++$elementCount;
-		}
-
-		$this->assertEquals( !$array->hasElement( $element ), $array->addElement( $element ) );
-
-		$this->assertEquals( $elementCount, $array->count() );
-
-		$this->assertFalse( $array->addElement( $element ) );
-
-		$this->assertEquals( $elementCount, $array->count() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 *
-	 * @param \Wikibase\HashArray $array
-	 */
-	public function testGetHash( HashArray $array ) {
-		$hash = $array->getHash();
-
-		$this->assertEquals( $hash, $array->getHash() );
-
-		$elements = $this->elementInstancesProvider();
-		$element = array_shift( $elements );
-		$element = $element[0][0];
-
-		$hasElement = $array->hasElement( $element );
-		$array->addElement( $element );
-
-		$this->assertTrue( ( $hash === $array->getHash() ) === $hasElement );
 	}
 
 }

@@ -28,7 +28,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Claims extends ClaimListAccess, \Traversable, \Countable, \Serializable {
+interface Claims extends ClaimListAccess, \Traversable, \Countable, \Serializable, \Hashable {
 
 	/**
 	 * Removes duplicates bases on hash value.
