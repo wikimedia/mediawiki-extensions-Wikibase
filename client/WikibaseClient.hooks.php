@@ -215,11 +215,13 @@ final class ClientHooks {
 								}
 
 								if ( !is_null( $newTitle ) ) {
-									$pagesToUpdate[$newPage] = $newTitle->getText();
+									$pagesToUpdate[] = $newTitle->getText();
 								}
 							} else {
 								// some other site link has changed
-								$pagesToUpdate[] = $page;
+								if ( !is_null( $title ) ) {
+									$pagesToUpdate[] = $title->getText();
+								}
 							}
 						}
 					}
@@ -249,7 +251,7 @@ final class ClientHooks {
 			}
 
 			foreach ( array_unique( $pagesToUpdate ) as $page ) {
-				self::updatePage( $page, $change, false );
+				self::updatePage( $page, $change );
 			}
 		}
 
@@ -277,32 +279,9 @@ final class ClientHooks {
 			return false;
 		}
 
-		$title->invalidateCache();
-
-		if ( Settings::get( 'injectRecentChanges' )  === false ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return true;
-		}
-
-		$rcinfo = $change->getMetadata();
-
-		if ( ! is_array( $rcinfo ) ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return false;
-		}
-
-		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		$fields['entity_type'] = $change->getEntityType();
-		unset( $fields['info'] );
-
-		$params = array(
-			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
-		);
-
-		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
-
-		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
-		$rc->save();
+		$jobs = array();
+		$jobs[] = new UpdatePageJob( $title, array( 'changeId' => $change->getId() ) );
+		\Job::batchInsert( $jobs );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
