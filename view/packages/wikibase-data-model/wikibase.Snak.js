@@ -41,4 +41,23 @@ wb.Snak.prototype = {
 	}
 };
 
+/**
+ * Creates a new Snak object from a given JSON structure.
+ *
+ * @param {String} json
+ * @return {wb.Snak}
+ */
+wb.Snak.newFromJSON = function( json ) {
+	switch( json.snaktype ) {
+		case 'value':
+			return new wb.PropertyValueSnak( json.property, json.value );
+		case 'novalue':
+			return new wb.PropertyNoValueSnak( json.property, json.value );
+		case 'somevalue':
+			return new wb.PropertySomeValueSnak( json.property, json.value );
+		default:
+			return null;
+	}
+};
+
 }( wikibase, jQuery ) );
