@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//9Q8\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-19T09:50:14Z",
+      "side": 1,
+      "message": "Dangerous if line 165-169 is changed",
+      "revId": "e0b50b27d52af7527949c8e63d760f2fe174b2a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Qs\u003d",
+        "filename": "lib/includes/changes/EntityChange.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-19T09:50:14Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "e0b50b27d52af7527949c8e63d760f2fe174b2a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Qw\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-19T09:50:14Z",
+      "side": 1,
+      "message": "$user?",
+      "revId": "e0b50b27d52af7527949c8e63d760f2fe174b2a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
