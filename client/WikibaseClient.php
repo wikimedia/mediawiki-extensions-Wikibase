@@ -56,6 +56,7 @@ $wgAutoloadClasses['Wikibase\ExternalRecentChange']	= $dir . 'includes/ExternalR
 $wgAutoloadClasses['Wikibase\LangLinkHandler'] 		= $dir . 'includes/LangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\NoLangLinkHandler'] 	= $dir . 'includes/NoLangLinkHandler.php';
 $wgAutoloadClasses['Wikibase\SortUtils']		= $dir . 'includes/SortUtils.php';
+$wgAutoloadClasses['Wikibase\UpdatePageJob']	= $dir . 'includes/UpdatePageJob.php';
 
 // includes/store
 $wgAutoloadClasses['Wikibase\ClientStore'] 			= $dir . 'includes/store/ClientStore.php';
@@ -85,6 +86,8 @@ $wgHooks['WikibasePollHandle'][]                        = '\Wikibase\ClientHooks
 $wgHooks['WikibaseDefaultSettings'][]                   = '\Wikibase\ClientHooks::onWikibaseDefaultSettings';
 $wgHooks['WikibaseDeleteData'][]			            = '\Wikibase\ClientHooks::onWikibaseDeleteData';
 $wgHooks['WikibaseRebuildData'][]			            = '\Wikibase\ClientHooks::onWikibaseRebuildData';
+
+$wgJobClasses['updatePage']			= 'Wikibase\UpdatePageJob';
 
 // Resource loader modules
 $wgResourceModules = array_merge( $wgResourceModules, include( "$dir/resources/Resources.php" ) );
