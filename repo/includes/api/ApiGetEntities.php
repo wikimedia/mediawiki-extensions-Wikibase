@@ -185,11 +185,8 @@ class ApiGetEntities extends Api {
 
 					if ( $revision !== null ) {
 						$res->addValue( $entityPath, 'lastrevid', intval( $revision->getId() ) );
-						$res->addValue( $entityPath, 'touched', $revision->getTimestamp( TS_ISO_8601 ) ); //FIXME: format is broken, "touched" is misleading!
-						$res->addValue( $entityPath, 'length', intval( $revision->getSize() ) );
+						$res->addValue( $entityPath, 'modified', wfTimestamp( TS_ISO_8601, $revision->getTimestamp() ) );
 					}
-
-					$res->addValue( $entityPath, 'count', intval( $page->getCount() ) );
 				}
 
 				$entity = $entityContent->getEntity();

@@ -83,15 +83,11 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 		$this->assertSuccess( $res, 'entities', $id, 'lastrevid' );
 		$this->assertTrue( is_integer( $res['entities'][$id]['lastrevid'] ) );
 		$this->assertTrue( 0 < $res['entities'][$id]['lastrevid'] );
-		$this->assertSuccess( $res, 'entities', $id, 'touched' );
-		$this->assertTrue( is_string( $res['entities'][$id]['touched'] ) );
-		$this->assertTrue( 0 < strlen( $res['entities'][$id]['touched'] ) );
-		$this->assertSuccess( $res, 'entities', $id, 'length' );
-		$this->assertTrue( is_integer( $res['entities'][$id]['length'] ) );
-		$this->assertTrue( 0 < $res['entities'][$id]['length'] );
-		$this->assertSuccess( $res, 'entities', $id, 'count' );
-		$this->assertTrue( is_integer( $res['entities'][$id]['count'] ) );
-		$this->assertTrue( 0 <= $res['entities'][$id]['count'] );
+		$this->assertSuccess( $res, 'entities', $id, 'modified' );
+		$this->assertTrue( is_string( $res['entities'][$id]['modified'] ) );
+		$this->assertTrue( 0 < strlen( $res['entities'][$id]['modified'] ) );
+		$this->assertRegExp( '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z$/',
+			$res['entities'][$id]['modified'], "should be in ISO 8601 format" );
 
 		// check with numeric ID (B/C mode)
 		$numId = preg_replace( '/^[a-z]*/', '', $id );
