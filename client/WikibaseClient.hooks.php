@@ -154,10 +154,11 @@ final class ClientHooks {
 	 * @since 0.1
 	 *
 	 * @param Change $change
+	 * @param bool $runJobs
 	 *
 	 * @return bool
 	 */
-	public static function onWikibasePollHandle( Change $change ) {
+	public static function onWikibasePollHandle( Change $change, $jobQueue ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		if ( ! ( $change instanceof EntityChange ) ) {
@@ -218,7 +219,7 @@ final class ClientHooks {
 		// sitelinks could in theory be handled without re-parsing the page, but
 		// would still need to purge the squid cache.
 		foreach ( array_unique( $pagesToUpdate ) as $page ) {
-			self::updatePage( $page, $change, false );
+			self::updatePage( $page, $change, $jobQueue );
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
@@ -252,7 +253,7 @@ final class ClientHooks {
 	 *
 	 * @return bool
 	 */
-	protected static function updatePage( $titleText, Change $change ) {
+	protected static function updatePage( $titleText, Change $change, $jobQueue ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		$title = \Title::newFromText( $titleText );
@@ -262,33 +263,13 @@ final class ClientHooks {
 			return false;
 		}
 
-		$title->invalidateCache();
-		$title->purgeSquid();
+		$job = new UpdatePageJob( $title, array( 'changeId' => $change->getId() ) );
 
-		if ( Settings::get( 'injectRecentChanges' )  === false ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return true;
+		if ( $jobQueue === true ) {
+			\Job::batchInsert( array( $job ) );
+		} else {
+			$job->run();
 		}
-
-		$rcinfo = $change->getMetadata();
-
-		if ( ! is_array( $rcinfo ) ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return false;
-		}
-
-		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		$fields['entity_type'] = $change->getEntityType();
-		unset( $fields['info'] );
-
-		$params = array(
-			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
-		);
-
-		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
-
-		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
-		$rc->save();
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
