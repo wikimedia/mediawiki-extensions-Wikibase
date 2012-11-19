@@ -138,18 +138,6 @@ class PropertyObjectTest extends EntityObjectTest {
 		return $this->arrayWrap( $objects );
 	}
 
-	/**
-	 * @dataProvider itemProvider
-	 *
-	 * @param Property $property
-	 */
-	public function testHasClaims( Property $property ) {
-		$has = $property->hasClaims();
-		$this->assertInternalType( 'boolean', $has );
-
-		$this->assertEquals( count( $property->getClaims() ) !== 0, $has );
-	}
-
 	public function newDataValueProvider() {
 		$argLists = array();
 
