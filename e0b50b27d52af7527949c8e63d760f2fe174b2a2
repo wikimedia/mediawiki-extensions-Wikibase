@@ -50,6 +50,24 @@
       "revId": "e0b50b27d52af7527949c8e63d760f2fe174b2a2",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Qk\u003d",
+        "filename": "repo/Wikibase.hooks.php",
+        "patchSetId": 17
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-19T09:51:37Z",
+      "side": 1,
+      "message": "My bad, .. line above.. ;)",
+      "parentUuid": "AAADZH//9Qw\u003d",
+      "revId": "e0b50b27d52af7527949c8e63d760f2fe174b2a2",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
     }
   ]
 }
