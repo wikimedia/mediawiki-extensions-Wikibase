@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//9IA\u003d",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.Claim.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-19T14:47:50Z",
+      "side": 1,
+      "message": "forgot to add yourself as author",
+      "revId": "12ea8788034d247a2e926af96b67ce3a1407697c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9H4\u003d",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.Statement.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 174
+      },
+      "writtenOn": "2012-11-19T14:47:50Z",
+      "side": 1,
+      "message": "You should perhaps leave the newFromJson here but forward it to the claimes one, making sure the type is set.",
+      "revId": "12ea8788034d247a2e926af96b67ce3a1407697c",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
