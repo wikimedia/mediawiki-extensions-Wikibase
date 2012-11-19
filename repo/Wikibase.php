@@ -115,17 +115,19 @@ $wgAutoloadClasses['Wikibase\SubmitQueryAction'] 		= $dir . 'includes/actions/Ed
 // includes/api
 $wgAutoloadClasses['Wikibase\Api'] 						= $dir . 'includes/api/Api.php';
 $wgAutoloadClasses['Wikibase\ApiAutocomment'] 			= $dir . 'includes/api/ApiAutocomment.php';
-$wgAutoloadClasses['Wikibase\ApiGetEntities'] 			= $dir . 'includes/api/ApiGetEntities.php';
 $wgAutoloadClasses['Wikibase\ApiCreateClaim'] 			= $dir . 'includes/api/ApiCreateClaim.php';
+$wgAutoloadClasses['Wikibase\ApiEditEntity'] 			= $dir . 'includes/api/ApiEditEntity.php';
+$wgAutoloadClasses['Wikibase\ApiGetClaims'] 			= $dir . 'includes/api/ApiGetClaims.php';
+$wgAutoloadClasses['Wikibase\ApiGetEntities'] 			= $dir . 'includes/api/ApiGetEntities.php';
+$wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
 $wgAutoloadClasses['Wikibase\ApiModifyEntity'] 			= $dir . 'includes/api/ApiModifyEntity.php';
 $wgAutoloadClasses['Wikibase\ApiModifyLangAttribute'] 	= $dir . 'includes/api/ApiModifyLangAttribute.php';
-$wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
-$wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
-$wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
-$wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
-$wgAutoloadClasses['Wikibase\ApiEditEntity'] 			= $dir . 'includes/api/ApiEditEntity.php';
-$wgAutoloadClasses['Wikibase\ApiLinkTitles'] 			= $dir . 'includes/api/ApiLinkTitles.php';
 $wgAutoloadClasses['Wikibase\ApiSearchEntities'] 		= $dir . 'includes/api/ApiSearchEntities.php';
+$wgAutoloadClasses['Wikibase\ApiSetAliases'] 			= $dir . 'includes/api/ApiSetAliases.php';
+$wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSetDescription.php';
+$wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
+$wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
+
 
 // includes/api/serializers
 $wgAutoloadClasses['Wikibase\ApiSerializationOptions'] 	= $dir . 'includes/api/serializers/ApiSerializationOptions.php';
@@ -203,6 +205,7 @@ $wgAutoloadClasses['Wikibase\Test\SpecialPageTestBase'] 	= $dir . 'tests/phpunit
 // API module registration
 $wgAPIModules['wbgetentities'] 						= 'Wikibase\ApiGetEntities';
 $wgAPIModules['wbcreateclaim'] 						= 'Wikibase\ApiCreateClaim';
+$wgAPIModules['wbgetclaims'] 						= 'Wikibase\ApiGetClaims';
 $wgAPIModules['wbsetlabel'] 						= 'Wikibase\ApiSetLabel';
 $wgAPIModules['wbsetdescription'] 					= 'Wikibase\ApiSetDescription';
 $wgAPIModules['wbsetsitelink'] 						= 'Wikibase\ApiSetSiteLink';

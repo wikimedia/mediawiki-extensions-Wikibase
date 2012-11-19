@@ -56,8 +56,9 @@ class ApiGetClaims extends Api {
 	 * @param Claim[] $claims
 	 */
 	protected function outputClaims( array $claims ) {
+		// TODO: hold into account props parameter
 		$serializer = new ClaimsSerializer( $this->getResult() );
-		$serializedClaims = $serializer->getSerialized( $claims );
+		$serializedClaims = $serializer->getSerialized( new ClaimList( $claims ) );
 
 		$this->getResult()->addValue(
 			null,
@@ -93,12 +94,31 @@ class ApiGetClaims extends Api {
 	 */
 	protected function getClaims( Entity $entity, $claimGuid ) {
 		if ( $claimGuid !== null ) {
-			// TODO
+			return $entity->hasClaimWithGuid( $claimGuid ) ?
+				$entity->getClaimWithGuid( $claimGuid ) : array();
 		}
 
-		// TODO
+		$claims = array();
+		$params = $this->extractRequestParams();
 
-		return $entity->getClaims();
+		// TODO: we probably need this elswhere, so make filter methods in Claim
+		$rank = isset( $params['rank'] ) ? ClaimSerializer::unserializeRank( $params['rank'] ) : false;
+		$propertyId = isset( $params['property'] ) ? $params['property'] : false;
+
+		/**
+		 * @var Claim $claim
+		 */
+		foreach ( $entity->getClaims() as $claim ) {
+			$rankIsOk = $rank === false
+				|| ( $claim instanceof Statement && $claim->getRank() === $rank );
+
+			if ( $rankIsOk
+				&& ( $propertyId === false || $propertyId === $claim->getPropertyId() ) ) {
+				$claims[] = $claim;
+			}
+		}
+
+		return $claims;
 	}
 
 	/**
@@ -181,16 +201,13 @@ class ApiGetClaims extends Api {
 				ApiBase::PARAM_TYPE => 'string',
 			),
 			'rank' => array(
-				ApiBase::PARAM_TYPE => 'string',
-				ApiBase::PARAM_REQUIRED => ClaimSerializer::getRanks(),
+				ApiBase::PARAM_TYPE => ClaimSerializer::getRanks(),
 			),
 			'props' => array(
 				ApiBase::PARAM_TYPE => array(
 					'references',
 				),
-				ApiBase::PARAM_DFLT => array(
-					'references',
-				),
+				ApiBase::PARAM_DFLT => 'references',
 			),
 			'token' => null,
 			'baserevid' => array(
