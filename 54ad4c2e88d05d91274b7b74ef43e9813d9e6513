@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//9Kk\u003d",
+        "filename": "lib/resources/wikibase.datamodel/wikibase.Statement.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-19T13:20:19Z",
+      "side": 1,
+      "message": "References are lists of Snak[]",
+      "revId": "54ad4c2e88d05d91274b7b74ef43e9813d9e6513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//9Ko\u003d",
+        "filename": "lib/resources/wikibase.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-19T13:20:19Z",
+      "side": 1,
+      "message": "entities have claims, not statements",
+      "revId": "54ad4c2e88d05d91274b7b74ef43e9813d9e6513",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
