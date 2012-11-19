@@ -9,7 +9,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-( function( wb,$, QUnit, undefined ) {
+( function( wb, dv, $, QUnit, undefined ) {
 	'use strict';
 
 	QUnit.module( 'wikibase.datamodel.claim.js', QUnit.newMwEnvironment() );
@@ -18,6 +18,14 @@
 		var argumentLists = [
 			{
 				mainSnak: new wb.PropertyNoValueSnak( 42 ),
+				qualifiers: []
+			},
+			{
+				mainSnak: new wb.PropertySomeValueSnak( 9001 ),
+				qualifiers: []
+			},
+			{
+				mainSnak: new wb.PropertyValueSnak( 23, new dv.StringValue( '~=[,,_,,]:3' ) ),
 				qualifiers: []
 			}
 		];
@@ -28,6 +36,7 @@
 				constructorArguments.qualifiers
 			);
 
+			// TODO: replace with comparison function implemented in snak
 			assert.strictEqual(
 				claim.getMainSnak().getPropertyId(),
 				constructorArguments.mainSnak.getPropertyId(),
@@ -39,8 +48,36 @@
 				constructorArguments.mainSnak.TYPE,
 				'Main snak type is correct'
 			);
+
+			// TODO: test qualifiers
 		} );
 
 	} );
 
-}( wikibase, jQuery, QUnit ) );
+	QUnit.test( 'setMainSnak and getMainSnak', function( assert ) {
+		var claim = new wb.Claim( new wb.PropertyNoValueSnak( 42 ), [] ),
+			snaks = [
+				new wb.PropertyNoValueSnak( 9001 ),
+				new wb.PropertySomeValueSnak( 42 ),
+				new wb.PropertyValueSnak( 23, new dv.StringValue( '~=[,,_,,]:3' ) )
+			];
+
+		$.each( snaks, function( i, snak ) {
+			claim.setMainSnak( snak );
+
+			// TODO: replace with comparison function implemented in snak
+			assert.strictEqual(
+				claim.getMainSnak().getPropertyId(),
+				snak.getPropertyId(),
+				'Main snak property id is correct'
+			);
+
+			assert.strictEqual(
+				claim.getMainSnak().TYPE,
+				snak.TYPE,
+				'Main snak type is correct'
+			);
+		} );
+	} );
+
+}( wikibase, dataValues, jQuery, QUnit ) );
