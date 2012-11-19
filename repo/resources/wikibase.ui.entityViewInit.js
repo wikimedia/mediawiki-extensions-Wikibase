@@ -74,9 +74,9 @@
 			} );
 
 			if ( entityJSON.claims !== undefined ) {
-				$.each( entityJSON.claims, function( propertyId, statements ) {
-					$.each( statements, function( i, statement ) {
-						wb.entity.statements.push( wb.Statement.newFromJSON( statement ) );
+				$.each( entityJSON.claims, function( propertyId, claims ) {
+					$.each( claims, function( i, claim ) {
+						wb.entity.claims.push( wb.Claim.newFromJSON( claim ) );
 					} );
 				} );
 			}
