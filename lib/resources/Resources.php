@@ -55,6 +55,7 @@ return call_user_func( function() {
 				'wikibase.datamodel/wikibase.PropertyValueSnak.js',
 				'wikibase.datamodel/wikibase.PropertySomeValueSnak.js',
 				'wikibase.datamodel/wikibase.PropertyNoValueSnak.js',
+				'wikibase.datamodel/wikibase.Reference.js',
 				'wikibase.datamodel/wikibase.Claim.js',
 				'wikibase.datamodel/wikibase.Statement.js',
 			),

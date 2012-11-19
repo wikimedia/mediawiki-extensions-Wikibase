@@ -176,6 +176,7 @@ final class LibHooks {
 				'tests/qunit/wikibase.tests.js',
 
 				'tests/qunit/wikibase.datamodel/Wikibase.claim.tests.js',
+				'tests/qunit/wikibase.datamodel/Wikibase.reference.tests.js',
 				'tests/qunit/wikibase.datamodel/Wikibase.snak.tests.js',
 
 				'tests/qunit/wikibase.Site.tests.js',
