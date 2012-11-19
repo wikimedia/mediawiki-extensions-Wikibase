@@ -70,4 +70,36 @@ wb.Claim.prototype = {
 	}
 };
 
+/**
+ * Creates a new Claim object from a given JSON structure.
+ *
+ * @param {String} json
+ * @return {wb.Claim}
+ */
+wb.Claim.newFromJSON = function( json ) {
+	var mainSnak = wb.Snak.newFromJSON( json.mainsnak ),
+		qualifiers = [],
+		references = [],
+		isStatement = json.type !== undefined && json.type === 'statement';
+
+	if ( json.qualifiers !== undefined ) {
+		$.each( json.qualifiers, function( i, qualifier ) {
+			qualifiers.push( wb.Snak.newFromJSON( qualifier ) );
+		} );
+	}
+
+	if ( isStatement && json.references !== undefined ) {
+		$.each( json.references, function( i, reference ) {
+			references.push( wb.Snak.newFromJSON( reference ) );
+		} );
+	}
+
+	if ( isStatement ) {
+		return new wb.Statement( mainSnak, qualifiers, references );
+	}
+	else {
+		return new wb.Claim( mainSnak, qualifiers );
+	}
+};
+
 }( wikibase, jQuery ) );
