@@ -422,14 +422,34 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbUserCanEdit', $entity->userCanEdit( $wgUser, false ) ); //TODO: make this a per-entity info
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
-		// hand over the entity's ID to JS
-		$out->addJsConfigVars( 'wbEntityId', $entity->getEntity()->getPrefixedId() );
 		$out->addJsConfigVars( 'wbEntityType', static::VIEW_TYPE ); //TODO: use $entity->getEntity()->getType after prefixes got removed there
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
+		// entity specific data
+		$out->addJsConfigVars( 'wbEntityId', $entity->getEntity()->getPrefixedId() );
+
+		$serializationOptions = new EntitySerializationOptions();
+		$serializationOptions->setProps( array(
+			'labels',
+			'descriptions',
+			'aliases',
+			'claims',
+			'sitelinks'
+		) );
+		$dummyApiResult = new \ApiResult( new \ApiMain() );
+		$serializer = new EntitySerializer( $dummyApiResult, $serializationOptions );
+		if ( $entity->getEntity()->getType() === 'item' ) {
+			$serializer = new ItemSerializer( $dummyApiResult, $serializationOptions );
+		} else if ( $entity->getEntity()->getType() === 'property' ) {
+			$serializer = new PropertySerializer( $dummyApiResult, $serializationOptions );
+		}
+		$out->addJsConfigVars(
+			'wbEntity',
+			\FormatJson::encode( $serializer->getSerialized( $entity->getEntity() ) )
+		);
+
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 	}
-
 
 	/**
 	 * Returns a new view which is suited to render different variations of EntityContent.

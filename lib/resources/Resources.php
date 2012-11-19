@@ -60,6 +60,7 @@ return call_user_func( function() {
 			),
 			'dependencies' => array(
 				'wikibase',
+				'wikibase.utilities',
 				'dataValues' // DataValues extension
 			)
 		),
