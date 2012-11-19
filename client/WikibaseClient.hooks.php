@@ -199,13 +199,13 @@ final class ClientHooks {
 					// site link added
 					if ( !empty( $siteLinkAdditions ) ) {
 						if ( !is_null( $title ) ) {
-							$pagesToUpdate[$page] = array( $title, false );
+							$pagesToUpdate[] = $title->getText();
 						}
 					}
 
 					if ( !empty( $siteLinkRemovals ) ) {
 						if ( !is_null( $title ) ) {
-							$pagesToUpdate[$page] = array( $title, false );
+							$pagesToUpdate[] = $title->getText();
 						}
 					}
 
@@ -218,18 +218,16 @@ final class ClientHooks {
 								$newTitle = $change->getNewTitle( $siteGlobalId );
 
 								if ( !is_null( $oldTitle ) ) {
-									$oldPage = $oldTitle->getText();
-									$pagesToUpdate[$oldPage] = array( $oldTitle, true );
+									$pagesToUpdate[] = $oldTitle->getText();
 								}
 
 								if ( !is_null( $newTitle ) ) {
-									$newPage = $newTitle->getText();
-									$pagesToUpdate[$newPage] = array( $newTitle, false );
+									$pagesToUpdate[] = $newTitle->getText();
 								}
 							} else {
 								// some other site link has changed
 								if ( !is_null( $title ) ) {
-									$pagesToUpdate[$page] = array( $title, false );
+									$pagesToUpdate[] = $title->getText();
 								}
 							}
 						}
@@ -242,7 +240,7 @@ final class ClientHooks {
 						$oldPage = $siteLinkRemoved->getOldValue();
 						$oldTitle = \Title::newFromText( $oldPage );
 						if ( !is_null( $oldTitle ) ) {
-							$pagesToUpdate[$oldPage] = array( $oldTitle, true );
+							$pagesToUpdate[] = $oldTitle->getText();
 						}
 					}
 				}
@@ -257,14 +255,14 @@ final class ClientHooks {
 						$page = $siteLink->getPage();
 						$title = \Title::newFromText( $page );
 						if ( !is_null( $title ) ) {
-							$pagesToUpdate[$page] = array( $title, false );
+							$pagesToUpdate[] = $title->getText();
 						}
 					}
 				}
 			}
 
-			foreach ( $pagesToUpdate as $page => $value ) {
-				self::updatePage( $value[0], $change, $value[1] );
+			foreach ( array_unique( $pagesToUpdate ) as $page ) {
+				self::updatePage( $page, $change );
 			}
 		}
 
@@ -279,44 +277,22 @@ final class ClientHooks {
 	 *
 	 * @param \Title $title  The Title of the page to update
 	 * @param Change $change The Change that caused the update
-	 * @param bool $gone If set, indicates that the change's entity no longer refers to the given page.
 	 *
 	 * @return bool
 	 */
-	protected static function updatePage( \Title $title, Change $change, $gone = false ) {
+	protected static function updatePage( $titleText, Change $change ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
+
+		$title = \Title::newFromText( $titleText );
 
 		if ( !$title->exists() ) {
 			wfProfileOut( "Wikibase-" . __METHOD__ );
 			return false;
 		}
 
-		$title->invalidateCache();
-
-		if ( Settings::get( 'injectRecentChanges' )  === false ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return true;
-		}
-
-		$rcinfo = $change->getMetadata();
-
-		if ( ! is_array( $rcinfo ) ) {
-			wfProfileOut( "Wikibase-" . __METHOD__ );
-			return false;
-		}
-
-		$fields = $change->getFields(); //@todo: Fixme: add getFields() to the interface, or provide getters!
-		$fields['entity_type'] = $change->getEntityType();
-		unset( $fields['info'] );
-
-		$params = array(
-			'wikibase-repo-change' => array_merge( $fields, $rcinfo )
-		);
-
-		$rc = ExternalRecentChange::newFromAttribs( $params, $title );
-
-		// todo: avoid reporting the same change multiple times when re-playing repo changes! how?!
-		$rc->save();
+		$jobs = array();
+		$jobs[] = new UpdatePageJob( $title, array( 'changeId' => $change->getId() ) );
+		\Job::batchInsert( $jobs );
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
 		return true;
