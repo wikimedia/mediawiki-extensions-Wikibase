@@ -56,7 +56,9 @@
 			}
 		} );
 
-		if( mw.config.get( 'wbEntityId' ) !== null ) {
+		if( mw.config.get( 'wbEntity' ) !== null ) {
+			var entityJSON = $.evalJSON( mw.config.get( 'wbEntity' ) );
+
 			// if there are no aliases yet, the DOM structure for creating new ones is created manually since it is not
 			// needed for running the page without JS
 			$( '.wb-aliases-empty' )
@@ -70,6 +72,14 @@
 			.each( function() {
 				new wb.ui.AliasesEditTool( this );
 			} );
+
+			if ( entityJSON.claims !== undefined ) {
+				$.each( entityJSON.claims, function( propertyId, statements ) {
+					$.each( statements, function( i, statement ) {
+						wb.entity.statements.push( wb.Statement.newFromJSON( statement ) );
+					} );
+				} );
+			}
 
 			// removing site links heading to rebuild it with value counter
 			$( '.wb-sitelinks-heading' ).remove();

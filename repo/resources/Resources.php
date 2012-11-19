@@ -42,7 +42,9 @@ return call_user_func( function() {
 				'wikibase.ui.entityViewInit.js' // should probably be adjusted for more modularity
 			),
 			'dependencies' => array(
-				'wikibase.ui.PropertyEditTool'
+				'wikibase.ui.PropertyEditTool',
+				'wikibase.datamodel',
+				'jquery.json'
 			),
 			'messages' => array(
 				'wikibase-sitelinks',
