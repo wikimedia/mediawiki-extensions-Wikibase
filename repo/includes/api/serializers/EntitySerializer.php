@@ -86,6 +86,10 @@ class EntitySerializer extends ApiSerializerObject {
 				case 'labels':
 					$serialization['labels'] = $this->getLabelsSerialization( $entity );
 					break;
+				case 'claims':
+					$claimsSerializer = new ClaimsSerializer( $this->getResult(), $this->options );
+					$serialization['claims'] = $claimsSerializer->getSerialized( $entity->getClaims() );
+					break;
 			}
 		}
 
