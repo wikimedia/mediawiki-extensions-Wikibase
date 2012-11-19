@@ -54,7 +54,7 @@ wb.Claim.prototype = {
 	/**
 	 * Returns all qualifiers as an array of Snaks.
 	 *
-	 * @return {wb.Snak[]}
+	 * @return wb.Snak[]
 	 */
 	getQualifiers: function() {
 		return this._qualifiers;
@@ -63,7 +63,7 @@ wb.Claim.prototype = {
 	/**
 	 * Overwrites the current set of qualifiers.
 	 *
-	 * @param qualifiers
+	 * @param {wb.Snak[]} qualifiers
 	 */
 	setQualifiers: function( qualifiers ) {
 		this._qualifiers = qualifiers;
