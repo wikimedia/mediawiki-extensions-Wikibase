@@ -174,8 +174,13 @@ final class LibHooks {
 			'scripts' => array(
 				'tests/qunit/templates.tests.js',
 				'tests/qunit/wikibase.tests.js',
+
+				'tests/qunit/wikibase.datamodel/Wikibase.claim.tests.js',
+
 				'tests/qunit/wikibase.Site.tests.js',
+
 				'tests/qunit/wikibase.store/wikibase.Api.tests.js',
+
 				'tests/qunit/wikibase.ui.AliasesEditTool.tests.js',
 				'tests/qunit/wikibase.ui.DescriptionEditTool.tests.js',
 				'tests/qunit/wikibase.ui.LabelEditTool.tests.js',
@@ -197,6 +202,7 @@ final class LibHooks {
 				'tests/qunit/wikibase.ui.Toolbar.Label.tests.js',
 				'tests/qunit/wikibase.ui.Toolbar.Button.tests.js',
 				'tests/qunit/wikibase.ui.Tooltip.tests.js',
+
 				'tests/qunit/wikibase.utilities/wikibase.utilities.inherit.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.newExtension.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.ObservableObject.tests.js',
@@ -208,9 +214,11 @@ final class LibHooks {
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.inputAutoExpand.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.tagadata.tests.js',
 				'tests/qunit/wikibase.utilities/wikibase.utilities.jQuery.ui.eachchange.tests.js',
+
 				'tests/qunit/jquery.ui/jquery.ui.suggester.tests.js',
 				'tests/qunit/jquery.ui/jquery.ui.entityselector.tests.js',
-				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js'
+				'tests/qunit/jquery.wikibase/jquery.wikibase.siteselector.tests.js',
+
 			),
 			'dependencies' => array(
 				'wikibase.tests.qunit.testrunner',
