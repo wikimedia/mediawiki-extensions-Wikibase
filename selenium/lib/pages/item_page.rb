@@ -29,4 +29,8 @@ class ItemPage < EntityPage
     @@item_id
   end
 
+  def get_item_url
+    @@item_url
+  end
+
 end
