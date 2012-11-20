@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//73w\u003d",
+        "filename": "client/WikibaseClient.hooks.php",
+        "patchSetId": 28
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-20T21:10:41Z",
+      "side": 1,
+      "message": "needs a todo here.  it reports as true even if there is no sitelink to this client, but other sitelinks are being added or changed.  should incorporate more of the logic from above and be put in another class, as it\u0027s not a hook.",
+      "revId": "7ee54de292db431bb77e7a3e7242ce8f995cf047",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
