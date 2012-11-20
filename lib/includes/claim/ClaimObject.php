@@ -120,7 +120,10 @@ class ClaimObject implements Claim {
 	 * @return string
 	 */
 	public function getHash() {
-		return sha1( $this->mainSnak->getHash() . $this->qualifiers->getHash() );
+		return sha1(
+			$this->mainSnak->getHash()
+				. $this->qualifiers->getHash()
+		);
 	}
 
 	/**
@@ -164,6 +167,69 @@ class ClaimObject implements Claim {
 		}
 
 		$this->guid = $guid;
+	}
+
+	/**
+	 * @see Claim::toArray
+	 *
+	 * @since 0.3
+	 *
+	 * @return array
+	 */
+	public function toArray() { // TODO: interface
+		return array(
+			'm' => serialize( $this->mainSnak ), // TODO
+			'q' => serialize( $this->qualifiers ), // TODO
+			'g' => $this->getGuid(),
+		);
+	}
+
+	/**
+	 * Constructs a new Claim from an array in the same format as Claim::toArray returns.
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $data
+	 *
+	 * @return Claim
+	 */
+	public static function newFromArray( array $data ) {
+		if ( array_key_exists( 'rank', $data ) ) {
+			return StatementObject::newFromArray( $data );
+		}
+
+		$claim = new static( unserialize( $data['m'] ), unserialize( $data['q'] ) ); // TODO
+		$claim->setGuid( $data['g'] );
+
+		return $claim;
+	}
+
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function serialize() {
+		return json_encode( $this->toArray() );
+	}
+
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $serialization
+	 *
+	 * @return Claim
+	 */
+	public function unserialize( $serialization ) {
+		$instance = static::newFromArray( json_decode( $serialization, true ) );
+
+		$this->setMainSnak( $instance->getMainSnak() );
+		$this->setQualifiers( $instance->getQualifiers() );
+		$this->setGuid( $instance->getGuid() );
 	}
 
 }
