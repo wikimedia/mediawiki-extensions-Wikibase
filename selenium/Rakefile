@@ -163,6 +163,11 @@ RSpec::Core::RakeTask.new(:entities_without_label) do |spec|
   spec.pattern = '../repo/tests/selenium/special/entities_without_label_spec.rb'
 end
 
+RSpec::Core::RakeTask.new(:set_label) do |spec|
+  spec.ruby_opts = "-I lib:spec"
+  spec.pattern = '../repo/tests/selenium/special/set_label_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:create_item) do |spec|
   spec.ruby_opts = "-I lib:spec"
   spec.pattern = '../repo/tests/selenium/special/create_item_spec.rb'
