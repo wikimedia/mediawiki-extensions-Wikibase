@@ -99,8 +99,8 @@ class ApiGetEntities extends Api {
 		$options->setProps( $props );
 		$options->setUseKeys( $this->getUsekeys() );
 
-		$entitySerializer = new EntitySerializer( $this->getResult(), $options );
-		$itemSerializer = new ItemSerializer( $this->getResult(), $options );
+		$entitySerializer = new EntitySerializer( $options );
+		$itemSerializer = new ItemSerializer( $options );
 
 		// loop over all items
 		foreach ( $params['ids'] as $entityId ) {

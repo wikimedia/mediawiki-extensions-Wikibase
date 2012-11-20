@@ -403,30 +403,32 @@ abstract class EntityView extends \ContextSource {
 	 * @since 0.1
 	 *
 	 * @param \OutputPage    $out the OutputPage to add to
-	 * @param EntityContent  $entity the entity for which we want to add the JS config
+	 * @param EntityContent  $entityContent the entity for which we want to add the JS config
 	 * @param string         $langCode the language used for showing the entity.
 	 * @param bool           $editableView whether entities on this page should be editable.
 	 *                       This is independent of user permissions.
 	 *
 	 * @todo: fixme: currently, only one entity can be shown per page, because the entity's id is in a global JS config variable.
 	 */
-	public static function registerJsConfigVars( OutputPage $out, EntityContent $entity, $langCode, $editableView = false  ) {
+	public static function registerJsConfigVars( OutputPage $out, EntityContent $entityContent, $langCode, $editableView = false  ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
 		global $wgUser;
 
 		//TODO: replace wbUserIsBlocked this with more useful info (which groups would be required to edit? compare wgRestrictionEdit and wgRestrictionCreate)
-		$out->addJsConfigVars( 'wbUserIsBlocked', $wgUser->isBlockedFrom( $entity->getTitle() ) ); //NOTE: deprecated
+		$out->addJsConfigVars( 'wbUserIsBlocked', $wgUser->isBlockedFrom( $entityContent->getTitle() ) ); //NOTE: deprecated
 
 		// tell JS whether the user can edit
-		$out->addJsConfigVars( 'wbUserCanEdit', $entity->userCanEdit( $wgUser, false ) ); //TODO: make this a per-entity info
+		$out->addJsConfigVars( 'wbUserCanEdit', $entityContent->userCanEdit( $wgUser, false ) ); //TODO: make this a per-entity info
 		$out->addJsConfigVars( 'wbIsEditView', $editableView );  //NOTE: page-wide property, independent of user permissions
 
 		$out->addJsConfigVars( 'wbEntityType', static::VIEW_TYPE ); //TODO: use $entity->getEntity()->getType after prefixes got removed there
 		$out->addJsConfigVars( 'wbDataLangName', Utils::fetchLanguageName( $langCode ) );
 
+		$entity = $entityContent->getEntity();
+
 		// entity specific data
-		$out->addJsConfigVars( 'wbEntityId', $entity->getEntity()->getPrefixedId() );
+		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
 
 		$serializationOptions = new EntitySerializationOptions();
 		$serializationOptions->setProps( array(
@@ -436,16 +438,12 @@ abstract class EntityView extends \ContextSource {
 			'claims',
 			'sitelinks'
 		) );
-		$dummyApiResult = new \ApiResult( new \ApiMain() );
-		$serializer = new EntitySerializer( $dummyApiResult, $serializationOptions );
-		if ( $entity->getEntity()->getType() === 'item' ) {
-			$serializer = new ItemSerializer( $dummyApiResult, $serializationOptions );
-		} else if ( $entity->getEntity()->getType() === 'property' ) {
-			$serializer = new PropertySerializer( $dummyApiResult, $serializationOptions );
-		}
+
+		$serializer = EntitySerializer::newForEntity( $entity, $serializationOptions );
+
 		$out->addJsConfigVars(
 			'wbEntity',
-			\FormatJson::encode( $serializer->getSerialized( $entity->getEntity() ) )
+			\FormatJson::encode( $serializer->getSerialized( $entity ) )
 		);
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );

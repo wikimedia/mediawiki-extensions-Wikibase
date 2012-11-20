@@ -45,7 +45,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 
 		$claim = $this->addClaim();
 
-		$serializer = new ClaimSerializer( $this->getResult() );
+		$serializer = new ClaimSerializer();
 		$serializedClaim = $serializer->getSerialized( $claim );
 
 		$this->getResult()->addValue(

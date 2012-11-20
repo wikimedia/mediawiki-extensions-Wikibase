@@ -178,47 +178,19 @@ class SpecialEntityData extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Creates an Serializer suitable for serializing the given type of entity.
-	 *
-	 * @todo: factor this out into a generic factory class.
-	 *
-	 * @param String    $entityType  The type of entity to be serialized, use Xyz::ENTITY_TYPE.
-	 * @param ApiResult $res     The ApiResult to use for serialization.
-	 * @param Boolean   $useKeys Whether the serializer can use string keys in arrays for
-	 *                  quick access. Compare \Wikibase\Api::usekeys().
-	 *
-	 * @return Wikibase\EntitySerializer
-	 */
-	protected function getEntitySerializer( $entityType, ApiResult $res, $useKeys ) {
-		//XXX: couldn't find a factory for creating the appropriate serializer...
-
-		$opt = new \Wikibase\EntitySerializationOptions();
-		$opt->setUseKeys( $useKeys );
-		$opt->setProps( self::$fieldsToShow );
-
-		if ( $entityType === \Wikibase\Item::ENTITY_TYPE ) {
-			return new \Wikibase\ItemSerializer( $res, $opt );
-		} elseif ( $entityType === \Wikibase\Property::ENTITY_TYPE ) {
-			return new \Wikibase\PropertySerializer( $res, $opt );
-		} else {
-			return new \Wikibase\EntitySerializer( $res, $opt );
-		}
-	}
-
-	/**
 	 * Pushes the given $entity into the ApiResult held by the ApiMain module
 	 * returned by getApiMain(). Calling $printer->execute() later will output this
 	 * result, if $printer was generated from that same ApiMain module, as
 	 * createApiPrinter() does.
 	 *
-	 * @param Wikibase\EntityContent $entity The entity to convert ot an ApiResult
+	 * @param Wikibase\EntityContent $entityContent The entity to convert ot an ApiResult
 	 * @param ApiFormatBase $printer The output printer that will be used for serialization.
 	 *   Used to provide context for generating the ApiResult, and may also be manipulated
 	 *   to fine-tune the output.
 	 *
 	 * @return ApiResult
 	 */
-	protected function generateApiResult( EntityContent $entity, ApiFormatBase $printer ) {
+	protected function generateApiResult( EntityContent $entityContent, ApiFormatBase $printer ) {
 		wfProfileIn( __METHOD__ );
 
 		$format = strtolower( $printer->getFormat() ); //XXX: hack!
@@ -239,8 +211,13 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$printer->setRootElement( $entityKey );
 		}
 
-		$serializer = $this->getEntitySerializer( $entity->getEntity()->getType(), $res, $useKeys );
-		$arr = $serializer->getSerialized( $entity->getEntity() );
+		$opt = new \Wikibase\EntitySerializationOptions();
+		$opt->setUseKeys( $useKeys );
+		$opt->setProps( self::$fieldsToShow );
+
+		$serializer = \Wikibase\EntitySerializer::newForEntity( $entityContent->getEntity(), $opt );
+
+		$arr = $serializer->getSerialized( $entityContent->getEntity() );
 
 		// we want the entity to *be* the result, not *in* the result
 		foreach ( $arr as $key => $value ) {
@@ -248,7 +225,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		}
 
 		// inject revision info
-		$page = $entity->getWikiPage();
+		$page = $entityContent->getWikiPage();
 		$revision = $page->getRevision(); //FIXME: this is WRONG if a specific revision was requested! remember to change this!
 
 		$res->addValue( $basePath , 'revision', intval( $revision->getId() ) );

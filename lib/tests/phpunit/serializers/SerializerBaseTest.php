@@ -56,7 +56,7 @@ abstract class SerializerBaseTest extends \MediaWikiTestCase {
 	 */
 	protected function getInstance() {
 		$class = $this->getClass();
-		return new $class( new \ApiResult( new \ApiMain() ) );
+		return new $class();
 	}
 
 	/**

@@ -84,10 +84,10 @@ class ClaimSerializer extends SerializerObject {
 
 		$serialization['id'] = $claim->getGuid();
 
-		$snakSerializer = new SnakSerializer( $this->getResult(), $this->options );
+		$snakSerializer = new SnakSerializer( $this->options );
 		$serialization['mainsnak'] = $snakSerializer->getSerialized( $claim->getMainSnak() );
 
-		$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $snakSerializer, $this->getResult(), $this->options );
+		$snaksSerializer = new ByPropertyListSerializer( 'qualifier', $snakSerializer, $this->options );
 		$serialization['qualifiers'] = $snaksSerializer->getSerialized( $claim->getQualifiers() );
 
 		$serialization['type'] = $claim instanceof Statement ? 'statement' : 'claim';
@@ -95,7 +95,7 @@ class ClaimSerializer extends SerializerObject {
 		if ( $claim instanceof Statement ) {
 			$serialization['rank'] = self::$rankMap[ $claim->getRank() ];
 
-			$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->getResult(), $this->options );
+			$snaksSerializer = new ByPropertyListSerializer( 'reference', $snakSerializer, $this->options );
 			$serialization['references'] = $snaksSerializer->getSerialized( $claim->getReferences() );
 		}
 
