@@ -123,6 +123,15 @@ final class LibHooks {
 			'reference/ReferenceList',
 			'reference/ReferenceObject',
 
+			'serializers/ApiSerializationOptions',
+			'serializers/ApiSerializer',
+			'serializers/ByPropertyListSerializer',
+			'serializers/ClaimSerializer',
+			'serializers/ClaimsSerializer',
+			'serializers/ItemSerializer',
+			'serializers/PropertySerializer',
+			'serializers/SnakSerializer',
+			
 			'snak/PropertyValueSnak',
 			'snak/SnakList',
 			'snak/Snak',

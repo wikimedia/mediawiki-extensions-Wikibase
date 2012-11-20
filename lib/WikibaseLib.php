@@ -135,15 +135,19 @@ $wgAutoloadClasses['Wikibase\ItemDiff'] 			= $dir . 'includes/item/ItemDiff.php'
 $wgAutoloadClasses['Wikibase\ItemDiffView'] 		= $dir . 'includes/item/ItemDiffView.php';
 $wgAutoloadClasses['Wikibase\ItemObject'] 			= $dir . 'includes/item/ItemObject.php';
 
+// includes/modules
+$wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesModule.php';
+$wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/TemplateModule.php';
+
 // includes/property
-$wgAutoloadClasses['Wikibase\Property'] 			= $dir . 'includes/property/Property.php';
-$wgAutoloadClasses['Wikibase\PropertyDiff'] 		= $dir . 'includes/property/PropertyDiff.php';
-$wgAutoloadClasses['Wikibase\PropertyDiffView'] 	= $dir . 'includes/property/PropertyDiffView.php';
-$wgAutoloadClasses['Wikibase\PropertyObject'] 		= $dir . 'includes/property/PropertyObject.php';
+$wgAutoloadClasses['Wikibase\Property'] 				= $dir . 'includes/property/Property.php';
+$wgAutoloadClasses['Wikibase\PropertyDiff'] 			= $dir . 'includes/property/PropertyDiff.php';
+$wgAutoloadClasses['Wikibase\PropertyDiffView'] 		= $dir . 'includes/property/PropertyDiffView.php';
+$wgAutoloadClasses['Wikibase\PropertyObject'] 			= $dir . 'includes/property/PropertyObject.php';
 
 // includes/query
-$wgAutoloadClasses['Wikibase\Query'] 				= $dir . 'includes/query/Query.php';
-$wgAutoloadClasses['Wikibase\QueryObject'] 			= $dir . 'includes/query/QueryObject.php';
+$wgAutoloadClasses['Wikibase\Query'] 					= $dir . 'includes/query/Query.php';
+$wgAutoloadClasses['Wikibase\QueryObject'] 				= $dir . 'includes/query/QueryObject.php';
 
 // includes/reference
 $wgAutoloadClasses['Wikibase\Reference'] 				= $dir . 'includes/reference/Reference.php';
@@ -151,9 +155,18 @@ $wgAutoloadClasses['Wikibase\ReferenceList'] 			= $dir . 'includes/reference/Ref
 $wgAutoloadClasses['Wikibase\ReferenceObject'] 			= $dir . 'includes/reference/ReferenceObject.php';
 $wgAutoloadClasses['Wikibase\References'] 				= $dir . 'includes/reference/References.php';
 
-// includes/modules
-$wgAutoloadClasses['Wikibase\SitesModule'] 				= $dir . 'includes/modules/SitesModule.php';
-$wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/TemplateModule.php';
+// includes/api/serializers
+$wgAutoloadClasses['Wikibase\ApiSerializationOptions'] 	= $dir . 'includes/serializers/ApiSerializationOptions.php';
+$wgAutoloadClasses['Wikibase\EntitySerializationOptions']	= $dir . 'includes/serializers/ApiSerializationOptions.php';
+$wgAutoloadClasses['Wikibase\ApiSerializer'] 			= $dir . 'includes/serializers/ApiSerializer.php';
+$wgAutoloadClasses['Wikibase\ApiSerializerObject'] 		= $dir . 'includes/serializers/ApiSerializerObject.php';
+$wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/serializers/ByPropertyListSerializer.php';
+$wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/serializers/ClaimSerializer.php';
+$wgAutoloadClasses['Wikibase\ClaimsSerializer'] 		= $dir . 'includes/serializers/ClaimsSerializer.php';
+$wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/serializers/EntitySerializer.php';
+$wgAutoloadClasses['Wikibase\ItemSerializer'] 			= $dir . 'includes/serializers/ItemSerializer.php';
+$wgAutoloadClasses['Wikibase\PropertySerializer'] 		= $dir . 'includes/serializers/PropertySerializer.php';
+$wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/serializers/SnakSerializer.php';
 
 // includes/snak
 $wgAutoloadClasses['Wikibase\PropertyNoValueSnak'] 		= $dir . 'includes/snak/PropertyNoValueSnak.php';
@@ -189,6 +202,8 @@ $wgAutoloadClasses['Wikibase\Test\EntityDiffTest'] 			= $dir . 'tests/phpunit/en
 $wgAutoloadClasses['Wikibase\Test\EntityRefreshTest'] 		= $dir . 'tests/phpunit/changes/EntityRefreshTest.php';
 $wgAutoloadClasses['Wikibase\Test\PropertySnakObjectTest'] 	= $dir . 'tests/phpunit/snak/PropertySnakObjectTest.php';
 $wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/snak/SnakObjectTest.php';
+$wgAutoloadClasses['Wikibase\Test\ApiSerializerBaseTest'] 	= $dir . 'tests/phpunit/serializers/ApiSerializerBaseTest.php';
+$wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpunit/serializers/EntitySerializerBaseTest.php';
 
 foreach ( array(
 			  'Settings',

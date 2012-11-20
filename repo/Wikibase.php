@@ -128,20 +128,6 @@ $wgAutoloadClasses['Wikibase\ApiSetDescription'] 		= $dir . 'includes/api/ApiSet
 $wgAutoloadClasses['Wikibase\ApiSetLabel'] 				= $dir . 'includes/api/ApiSetLabel.php';
 $wgAutoloadClasses['Wikibase\ApiSetSiteLink'] 			= $dir . 'includes/api/ApiSetSiteLink.php';
 
-
-// includes/api/serializers
-$wgAutoloadClasses['Wikibase\ApiSerializationOptions'] 	= $dir . 'includes/api/serializers/ApiSerializationOptions.php';
-$wgAutoloadClasses['Wikibase\EntitySerializationOptions']	= $dir . 'includes/api/serializers/ApiSerializationOptions.php';
-$wgAutoloadClasses['Wikibase\ApiSerializer'] 			= $dir . 'includes/api/serializers/ApiSerializer.php';
-$wgAutoloadClasses['Wikibase\ApiSerializerObject'] 		= $dir . 'includes/api/serializers/ApiSerializerObject.php';
-$wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/api/serializers/ByPropertyListSerializer.php';
-$wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/api/serializers/ClaimSerializer.php';
-$wgAutoloadClasses['Wikibase\ClaimsSerializer'] 		= $dir . 'includes/api/serializers/ClaimsSerializer.php';
-$wgAutoloadClasses['Wikibase\EntitySerializer'] 		= $dir . 'includes/api/serializers/EntitySerializer.php';
-$wgAutoloadClasses['Wikibase\ItemSerializer'] 			= $dir . 'includes/api/serializers/ItemSerializer.php';
-$wgAutoloadClasses['Wikibase\PropertySerializer'] 		= $dir . 'includes/api/serializers/PropertySerializer.php';
-$wgAutoloadClasses['Wikibase\SnakSerializer'] 			= $dir . 'includes/api/serializers/SnakSerializer.php';
-
 // includes/content
 $wgAutoloadClasses['Wikibase\EntityContent'] 			= $dir . 'includes/content/EntityContent.php';
 $wgAutoloadClasses['Wikibase\EntityContentFactory'] 	= $dir . 'includes/content/EntityContentFactory.php';
@@ -194,8 +180,6 @@ $wgAutoloadClasses['Wikibase\RebuildEntityPerPage'] 	= $dir . 'maintenance/rebui
 // tests
 $wgAutoloadClasses['Wikibase\Test\TestItemContents'] 		= $dir . 'tests/phpunit/TestItemContents.php';
 $wgAutoloadClasses['Wikibase\Test\ActionTestCase'] 			= $dir . 'tests/phpunit/includes/actions/ActionTestCase.php';
-$wgAutoloadClasses['Wikibase\Test\ApiSerializerBaseTest'] 	= $dir . 'tests/phpunit/includes/api/serializers/ApiSerializerBaseTest.php';
-$wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpunit/includes/api/serializers/EntitySerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\ApiModifyItemBase'] 		= $dir . 'tests/phpunit/includes/api/ApiModifyItemBase.php';
 $wgAutoloadClasses['Wikibase\Test\ApiLangAttributeBase'] 	= $dir . 'tests/phpunit/includes/api/ApiLangAttributeBase.php';
 $wgAutoloadClasses['Wikibase\Test\EntityContentTest'] 		= $dir . 'tests/phpunit/includes/content/EntityContentTest.php';
