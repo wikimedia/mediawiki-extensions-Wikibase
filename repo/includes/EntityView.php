@@ -431,13 +431,7 @@ abstract class EntityView extends \ContextSource {
 		$out->addJsConfigVars( 'wbEntityId', $entity->getPrefixedId() );
 
 		$serializationOptions = new EntitySerializationOptions();
-		$serializationOptions->setProps( array(
-			'labels',
-			'descriptions',
-			'aliases',
-			'claims',
-			'sitelinks'
-		) );
+		$serializationOptions->addProp( 'sitelinks' );
 
 		$serializer = EntitySerializer::newForEntity( $entity, $serializationOptions );
 

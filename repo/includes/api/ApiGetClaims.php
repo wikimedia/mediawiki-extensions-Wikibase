@@ -142,7 +142,7 @@ class ApiGetClaims extends Api {
 		$claimGuid = null;
 
 		if ( isset( $params['entity'] ) && isset( $params['key'] ) ) {
-			list( $entityId, $claimGuid ) = $this->parseClaimKey( $params['key'] );
+			list( $entityId, $claimGuid ) = ClaimObject::parseKey( $params['key'] );
 
 			if ( $entityId !== $params['entity'] ) {
 				$this->dieUsage( 'If both entity id and claim key are provided they need to point to the same entity', 'getclaims-id-mismatch' );
@@ -152,33 +152,10 @@ class ApiGetClaims extends Api {
 			$entityId = $params['entity'];
 		}
 		else {
-			list( $entityId, $claimGuid ) = $this->parseClaimKey( $params['key'] );
+			list( $entityId, $claimGuid ) = ClaimObject::parseKey( $params['key'] );
 		}
 
 		return array( $entityId, $claimGuid );
-	}
-
-	/**
-	 * Parses a claim key to prefixed entity id and claim GUID.
-	 * Note: might be moved out of API.
-	 *
-	 * @since 0.3
-	 *
-	 * @param string $claimKey
-	 *
-	 * @return array
-	 * First element is a prefixed entity id
-	 * Second element is either null or a claim GUID
-	 * @throws MWException
-	 */
-	protected function parseClaimKey( $claimKey ) {
-		$keyParts = explode( '#', $claimKey );
-
-		if ( count( $keyParts ) !== 2 ) {
-			throw new MWException( 'A claim key should have a single # in it' );
-		}
-
-		return $keyParts;
 	}
 
 	/**
