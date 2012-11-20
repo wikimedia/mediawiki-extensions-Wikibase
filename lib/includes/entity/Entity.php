@@ -316,4 +316,16 @@ interface Entity extends \Comparable, ClaimAggregate, \Serializable, ClaimListAc
 	 */
 	public function hasClaims();
 
+	/**
+	 * Returns a key identifying the claim composed of the prefixed entity id
+	 * and the claims GUID.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 *
+	 * @return string
+	 */
+	public function createClaimKey( $claimGuid );
+
 }

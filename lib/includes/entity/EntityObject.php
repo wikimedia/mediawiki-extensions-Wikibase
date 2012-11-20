@@ -783,4 +783,17 @@ abstract class EntityObject implements Entity {
 		}
 	}
 
+	/**
+	 * @see Entity::createClaimKey
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimGuid
+	 *
+	 * @return string
+	 */
+	public function createClaimKey( $claimGuid ) {
+		return $this->getPrefixedId() . '$' . $claimGuid;
+	}
+
 }
