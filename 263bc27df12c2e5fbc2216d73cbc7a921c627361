@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//8W4\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T11:47:00Z",
+      "side": 1,
+      "message": "Checking and escaping must be done inside the function that constructs the SQL statement. Trusting the function parameters to be safe is asking for trouble.",
+      "parentUuid": "AAADZH//8XY\u003d",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//8X4\u003d",
         "filename": "repo/maintenance/pruneChanges.php",
         "patchSetId": 1
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "Again, nope, but can move it to Utils.",
       "parentUuid": "AAADZH//8X4\u003d",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//8Wo\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T11:47:00Z",
+      "side": 1,
+      "message": "I\u0027m not even sure we need the PID dance here, this script may run a few minutes, but it\u0027s not persistent. The database should perform the appropriate locking, so no problem if the script runs twice.",
+      "parentUuid": "AAADZH//8XU\u003d",
       "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
