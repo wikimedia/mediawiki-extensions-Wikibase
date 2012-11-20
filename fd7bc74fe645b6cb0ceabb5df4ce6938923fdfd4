@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//8QI\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T15:02:22Z",
+      "side": 1,
+      "message": "Default value should be documented.",
+      "revId": "fd7bc74fe645b6cb0ceabb5df4ce6938923fdfd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//8QM\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T15:02:22Z",
+      "side": 1,
+      "message": "Perhaps it should actually exit here :)",
+      "revId": "fd7bc74fe645b6cb0ceabb5df4ce6938923fdfd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//8Q8\u003d",
         "filename": "repo/maintenance/pruneChanges.php",
         "patchSetId": 4
@@ -30,6 +64,23 @@
       "writtenOn": "2012-11-20T14:38:10Z",
       "side": 1,
       "message": "space please :)",
+      "revId": "fd7bc74fe645b6cb0ceabb5df4ce6938923fdfd4",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//8QE\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T15:02:22Z",
+      "side": 1,
+      "message": "Using MySQL date functions doesn\u0027t seem portable, and probably doesn\u0027t use the database index.",
       "revId": "fd7bc74fe645b6cb0ceabb5df4ce6938923fdfd4",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
