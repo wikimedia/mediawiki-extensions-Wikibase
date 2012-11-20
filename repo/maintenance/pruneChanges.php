@@ -4,7 +4,7 @@ namespace Wikibase;
 use Maintenance, Exception;
 
 /**
- * Prune the Wikibase changes table to a maxium number of entries.
+ * Prune the Wikibase changes table to a maximum number of entries.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,14 +28,14 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * Prune the Wikibase changes table to a maxium number of entries.
+ * Prune the Wikibase changes table to a maximum number of entries.
  *
  * @ingroup Maintenance
  */
 class PruneChanges extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Prune the Wikibase changes table to a maxium number of entries";
+		$this->mDescription = "Prune the Wikibase changes table to a maximum number of entries";
 
 		$this->addOption( 'number-of-days', 'Number of days to keep entries in the table after the '
 						. 'maintenance script has been run (default: 7)', false, true, 'n' );
