@@ -27,6 +27,7 @@ $messages['en'] = array(
 	'wbc-comment-langlinks-update' => 'Language links updated',
 	'wbc-editlinks' => 'Edit links',
 	'wbc-editlinkstitle' => 'Edit interlanguage links',
+	'wbc-rc-hide-wikidata' => '$1 Wikidata',
 );
 
 /** Message documentation (Message documentation)
@@ -44,6 +45,8 @@ $messages['qqq'] = array(
 	'wbc-editlinks' => '[[Image:InterlanguageLinks-Sidebar-Monobook.png|right]]
 	This is a link to the page on Wikidata where interlanguage links of the current page can be edited. See the image on the right for how it looks.',
 	'wbc-editlinkstitle' => 'This is the text on a link in the sidebar that opens a wizzard to edit interlanguage links.',
+	'wbc-rc-hide-wikidata' => 'This refers to a toggle to hide or show edits (revisions) that come from Wikidata. If set to "hide", it hides edits made to the connected item in the Wikidata repository.
+* Parameter $1 is a link with the text {{msg-mw|show}} or {{msg-mw|hide}}',
 );
 
 /** Asturian (asturianu)

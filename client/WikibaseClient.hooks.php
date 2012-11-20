@@ -339,7 +339,7 @@ final class ClientHooks {
 		\FormOptions $opts, array &$query_options, array &$fields ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		if ( Settings::get( 'showExternalRecentChanges' ) === false ) {
+		if ( Settings::get( 'showExternalRecentChanges' ) === false || $opts->getValue( 'hidewikidata' ) === true ) {
 			$conds[] = 'rc_type != ' . RC_EXTERNAL;
 		}
 
@@ -596,6 +596,17 @@ final class ClientHooks {
 		}
 
 		wfProfileOut( "Wikibase-" . __METHOD__ );
+		return true;
+	}
+
+	/**
+	 * Adds a toggle for showing/hiding Wikidata entries in recent changes
+	 *
+	 * @param \SpecialRecentChanges $special
+	 * @param array &$filters
+	 */
+	public static function onSpecialRecentChangesFilters( $special, &$filters ) {
+		$filters['hidewikidata'] = array( 'msg' => 'wbc-rc-hide-wikidata', 'default' => true );
 		return true;
 	}
 
