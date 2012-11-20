@@ -162,4 +162,23 @@ class SnakListTest extends HashArrayTest {
 		$this->assertEquals( $elementCount, $array->count() );
 	}
 
+	/**
+	 * @dataProvider snakProvider
+	 * @param SnakList $snaks
+	 */
+	public function testToArrayRoundtrip( SnakList $snaks ) {
+		$serialization = serialize( $snaks->toArray() );
+		$array = $snaks->toArray();
+
+		$this->assertInternalType( 'array', $array, 'toArray should return array' );
+
+		foreach ( array( $array, unserialize( $serialization ) ) as $data ) {
+			$copy = \Wikibase\SnakObject::newFromArray( $data );
+
+			$this->assertInstanceOf( '\Wikibase\Snaks', $copy, 'newFromArray should return object implementing Snaks' );
+
+			$this->assertTrue( $snaks->equals( $copy ), 'getArray newFromArray roundtrip should work' );
+		}
+	}
+
 }

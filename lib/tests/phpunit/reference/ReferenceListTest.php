@@ -137,4 +137,46 @@ class ReferenceListTest extends \MediaWikiTestCase {
 		$this->assertEquals( $elementCount, count( $array ) );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 * @param ReferenceList $references
+	 */
+	public function testToArrayRoundtrip( ReferenceList $references ) {
+		$serialization = serialize( $references->toArray() );
+		$array = $references->toArray();
+
+		$this->assertInternalType( 'array', $array, 'toArray should return array' );
+
+		foreach ( array( $array, unserialize( $serialization ) ) as $data ) {
+			$copy = \Wikibase\ReferenceList::newFromArray( $data );
+
+			$this->assertInstanceOf( '\Wikibase\References', $copy, 'newFromArray should return object implementing Snak' );
+
+			$this->assertTrue( $references->equals( $copy ), 'getArray newFromArray roundtrip should work' );
+		}
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\ReferenceList $array
+	 */
+	public function testEquals( ReferenceList $array ) {
+		$this->assertTrue( $array->equals( $array ) );
+		$this->assertFalse( $array->equals( 42 ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\ReferenceList $array
+	 */
+	public function testGetHash( ReferenceList $array ) {
+		$this->assertInternalType( 'string', $array->getValueHash() );
+
+		$copy = ReferenceList::newFromArray( $array->toArray() );
+
+		$this->assertEquals( $array->getValueHash(), $copy->getValueHash() );
+	}
+
 }
