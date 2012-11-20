@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ApiSerializerObject;
+use Wikibase\SerializerObject;
 
 /**
- * Base class for tests that test classes deriving from Wikibase\ApiSerializerObject.
+ * Base class for tests that test classes deriving from Wikibase\SerializerObject.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ use Wikibase\ApiSerializerObject;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ApiSerializerBaseTest extends \MediaWikiTestCase {
+abstract class SerializerBaseTest extends \MediaWikiTestCase {
 
 	/**
 	 * @since 0.2
@@ -52,7 +52,7 @@ abstract class ApiSerializerBaseTest extends \MediaWikiTestCase {
 	/**
 	 * @since 0.2
 	 *
-	 * @return ApiSerializerObject
+	 * @return SerializerObject
 	 */
 	protected function getInstance() {
 		$class = $this->getClass();
@@ -64,7 +64,7 @@ abstract class ApiSerializerBaseTest extends \MediaWikiTestCase {
 	 *
 	 * @since 0.2
 	 */
-	public function testGetSerializedValid( $input, array $expected = null, \Wikibase\ApiSerializationOptions $options = null ) {
+	public function testGetSerializedValid( $input, array $expected = null, \Wikibase\SerializationOptions $options = null ) {
 		$serializer = $this->getInstance();
 
 		if ( $options !== null ) {

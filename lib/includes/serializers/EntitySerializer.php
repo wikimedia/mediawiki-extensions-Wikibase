@@ -30,7 +30,7 @@ use ApiResult, MWException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class EntitySerializer extends ApiSerializerObject {
+class EntitySerializer extends SerializerObject {
 
 	/**
 	 * @see ApiSerializerObject::$options

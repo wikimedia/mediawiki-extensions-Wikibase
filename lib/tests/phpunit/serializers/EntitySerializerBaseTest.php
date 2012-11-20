@@ -33,7 +33,7 @@ use Wikibase\Entity;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class EntitySerializerBaseTest extends ApiSerializerBaseTest {
+abstract class EntitySerializerBaseTest extends SerializerBaseTest {
 
 	/**
 	 * @since 0.2

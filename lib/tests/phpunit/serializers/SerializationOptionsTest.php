@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ApiSerializationOptions;
+use Wikibase\SerializationOptions;
 
 /**
- * Tests for the Wikibase\ApiSerializationOptions class.
+ * Tests for the Wikibase\SerializationOptions class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,10 +33,10 @@ use Wikibase\ApiSerializationOptions;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiSerializationOptionsTest extends \MediaWikiTestCase {
+class SerializationOptionsTest extends \MediaWikiTestCase {
 
 	public function testConstructor() {
-		new ApiSerializationOptions();
+		new SerializationOptions();
 		$this->assertTrue( true );
 	}
 

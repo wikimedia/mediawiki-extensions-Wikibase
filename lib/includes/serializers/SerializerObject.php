@@ -29,7 +29,7 @@ use ApiResult, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class ApiSerializerObject implements ApiSerializer {
+abstract class SerializerObject implements Serializer {
 
 	/**
 	 * The options to use during serialization.
@@ -45,7 +45,7 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @var ApiSerializationOptions
+	 * @var SerializationOptions
 	 */
 	protected $options;
 
@@ -55,13 +55,13 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 * @since 0.2
 	 *
 	 * @param ApiResult $apiResult
-	 * @param ApiSerializationOptions|null $options
+	 * @param SerializationOptions|null $options
 	 */
-	public function __construct( ApiResult $apiResult, ApiSerializationOptions $options = null ) {
+	public function __construct( ApiResult $apiResult, SerializationOptions $options = null ) {
 		$this->apiResult = $apiResult;
 
 		if ( $options === null ) {
-			$options = new ApiSerializationOptions();
+			$options = new SerializationOptions();
 		}
 
 		$this->options = $options;
@@ -72,9 +72,9 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @param ApiSerializationOptions $options
+	 * @param SerializationOptions $options
 	 */
-	public final function setOptions( ApiSerializationOptions $options ) {
+	public final function setOptions( SerializationOptions $options ) {
 		$this->options = $options;
 	}
 
@@ -106,7 +106,7 @@ abstract class ApiSerializerObject implements ApiSerializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @return ApiSerializationOptions
+	 * @return SerializationOptions
 	 */
 	protected final function getOptions() {
 		return $this->options;

@@ -123,8 +123,8 @@ final class LibHooks {
 			'reference/ReferenceList',
 			'reference/ReferenceObject',
 
-			'serializers/ApiSerializationOptions',
-			'serializers/ApiSerializer',
+			'serializers/SerializationOptions',
+			'serializers/Serializer',
 			'serializers/ByPropertyListSerializer',
 			'serializers/ClaimSerializer',
 			'serializers/ClaimsSerializer',

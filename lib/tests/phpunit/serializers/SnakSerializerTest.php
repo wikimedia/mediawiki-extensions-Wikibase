@@ -32,10 +32,10 @@ namespace Wikibase\Test;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SnakSerializerTest extends ApiSerializerBaseTest {
+class SnakSerializerTest extends SerializerBaseTest {
 
 	/**
-	 * @see ApiSerializerBaseTest::getClass
+	 * @see SerializerBaseTest::getClass
 	 *
 	 * @since 0.2
 	 *
@@ -46,7 +46,7 @@ class SnakSerializerTest extends ApiSerializerBaseTest {
 	}
 
 	/**
-	 * @see ApiSerializerBaseTest::validProvider
+	 * @see SerializerBaseTest::validProvider
 	 *
 	 * @since 0.2
 	 *

@@ -36,7 +36,7 @@ use Wikibase\ItemObject, Wikibase\Item;
 class ItemSerializerTest extends EntitySerializerBaseTest {
 
 	/**
-	 * @see ApiSerializerBaseTest::getClass
+	 * @see SerializerBaseTest::getClass
 	 *
 	 * @since 0.2
 	 *
@@ -60,7 +60,7 @@ class ItemSerializerTest extends EntitySerializerBaseTest {
 	}
 
 	/**
-	 * @see ApiSerializerBaseTest::validProvider
+	 * @see SerializerBaseTest::validProvider
 	 *
 	 * @since 0.2
 	 *

@@ -33,10 +33,10 @@ use Wikibase\Statement;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimSerializerTest extends ApiSerializerBaseTest {
+class ClaimSerializerTest extends SerializerBaseTest {
 
 	/**
-	 * @see ApiSerializerBaseTest::getClass
+	 * @see SerializerBaseTest::getClass
 	 *
 	 * @since 0.2
 	 *
@@ -47,7 +47,7 @@ class ClaimSerializerTest extends ApiSerializerBaseTest {
 	}
 
 	/**
-	 * @see ApiSerializerBaseTest::validProvider
+	 * @see SerializerBaseTest::validProvider
 	 *
 	 * @since 0.2
 	 *

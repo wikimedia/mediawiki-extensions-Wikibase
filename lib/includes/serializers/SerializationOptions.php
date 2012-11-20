@@ -4,7 +4,7 @@ namespace Wikibase;
 use MWException;
 
 /**
- * Options for ApiSerializer objects.
+ * Options for Serializer objects.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiSerializationOptions {
+class SerializationOptions {
 
 
 
@@ -61,7 +61,7 @@ class ApiSerializationOptions {
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntitySerializationOptions extends ApiSerializationOptions {
+class EntitySerializationOptions extends SerializationOptions {
 
 	const SORT_ASC = 'ascending';
 	const SORT_DESC = 'descending';

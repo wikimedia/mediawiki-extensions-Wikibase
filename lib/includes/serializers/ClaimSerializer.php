@@ -29,7 +29,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimSerializer extends ApiSerializerObject {
+class ClaimSerializer extends SerializerObject {
 
 	/**
 	 * @since 0.3
