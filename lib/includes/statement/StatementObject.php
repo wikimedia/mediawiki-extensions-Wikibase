@@ -141,7 +141,7 @@ class StatementObject extends ClaimObject implements Statement {
 		$data = parent::toArray();
 
 		$data['rank'] = $this->rank;
-		$data['refs'] = serialize( $this->references ); // TODO
+		$data['refs'] = $this->references->toArray();
 
 		return $data;
 	}
@@ -165,7 +165,7 @@ class StatementObject extends ClaimObject implements Statement {
 		$statement = parent::newFromArray( $data );
 
 		$statement->setRank( $rank );
-		$statement->setReferences( unserialize( $data['refs'] ) ); // TODO
+		$statement->setReferences( ReferenceList::newFromArray( $data['refs'] ) );
 
 		return $statement;
 	}

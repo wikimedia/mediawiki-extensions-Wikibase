@@ -71,4 +71,43 @@ class ReferenceList extends \SplObjectStorage implements References {
 		$this->detach( $reference );
 	}
 
+	/**
+	 * @see References::toArray
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function toArray() {
+		$references = array();
+
+		/**
+		 * @var Reference $reference
+		 */
+		foreach ( $this as $reference ) {
+			$references[] = $reference->getSnaks()->toArray();
+		}
+
+		return $references;
+	}
+
+	/**
+	 * Factory for constructing a ReferenceList from its array representation.
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $data
+	 *
+	 * @return References
+	 */
+	public static function newFromArray( array $data ) {
+		$references = array();
+
+		foreach ( $data as $snaks ) {
+			$snaks[] = new ReferenceObject( SnakList::newFromArray( $snaks ) );
+		}
+
+		return new static( $references );
+	}
+
 }

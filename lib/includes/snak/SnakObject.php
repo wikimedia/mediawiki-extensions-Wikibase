@@ -124,24 +124,13 @@ abstract class SnakObject implements Snak {
 	}
 
 	/**
-	 * @see Snak::getSerialization
-	 *
-	 * @since 0.3
-	 *
-	 * @return string
-	 */
-	public final function getSerialization() {
-		return json_encode( $this->getSerializationData() );
-	}
-
-	/**
-	 * Returns the data needed by @see getSerialization in an array.
+	 * @see Snak::toArray
 	 *
 	 * @since 0.3
 	 *
 	 * @return array
 	 */
-	protected function getSerializationData() {
+	public function toArray() {
 		$data = array();
 
 		$data[] = $this->getType();
@@ -151,9 +140,9 @@ abstract class SnakObject implements Snak {
 	}
 
 	/**
-	 * Factory for constructing Snak objects from internal serialization.
+	 * Factory for constructing Snak objects from their array representation.
 	 *
-	 * Expected format is a json_encoded array with
+	 * The array should have the following format:
 	 * - snak type (string)
 	 * - property id (int)
 	 * [
@@ -163,13 +152,11 @@ abstract class SnakObject implements Snak {
 	 *
 	 * @since 0.3
 	 *
-	 * @param string $serialization
+	 * @param array $data
 	 *
 	 * @return Snak
 	 */
-	public static function newFromSerialization( $serialization ) {
-		$data = json_decode( $serialization, true );
-
+	public static function newFromArray( array $data ) {
 		$snakJar = array(
 			'value' => '\Wikibase\PropertyValueSnak',
 			'novalue' => '\Wikibase\PropertyNoValueSnak',

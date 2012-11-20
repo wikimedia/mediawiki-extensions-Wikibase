@@ -95,4 +95,19 @@ interface Claim extends \Hashable, \Serializable {
 	 */
 	public function setGuid( $guid );
 
+	/**
+	 * Returns an array representing the claim.
+	 * Roundtrips with ClaimObject::newFromArray
+	 *
+	 * This method can be used for serialization when passing the array to for
+	 * instance json_encode which created behaviour similar to
+	 * @see Serializable::serialize but different in that it uses the
+	 * type identifiers rather then class names.
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function toArray();
+
 }

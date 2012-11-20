@@ -130,16 +130,18 @@ class SnakTest extends \MediaWikiTestCase {
 	 * @dataProvider snakProvider
 	 * @param Snak $snak
 	 */
-	public function testGetSerialization( Snak $snak ) {
-		$serialization = $snak->getSerialization();
+	public function testToArray( Snak $snak ) {
+		$serialization = serialize( $snak->toArray() );
 
 		$this->assertInternalType( 'string', $serialization, 'getSerialization should return string' );
 
-		$copy = \Wikibase\SnakObject::newFromSerialization( $serialization );
+		foreach ( array( $snak->toArray(), unserialize( $serialization ) ) as $data ) {
+			$copy = \Wikibase\SnakObject::newFromArray( $data );
 
-		$this->assertInstanceOf( '\Wikibase\Snak', $copy, 'newFromSerialization should return object implementing Snak' );
+			$this->assertInstanceOf( '\Wikibase\Snak', $copy, 'newFromSerialization should return object implementing Snak' );
 
-		$this->assertTrue( $snak->equals( $copy ), 'getSerialization newFromSerialization roundtrip should work' );
+			$this->assertTrue( $snak->equals( $copy ), 'getSerialization newFromSerialization roundtrip should work' );
+		}
 	}
 
 }
