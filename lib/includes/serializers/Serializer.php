@@ -4,10 +4,13 @@ namespace Wikibase;
 use ApiResult, MWException;
 
 /**
- * Interface for serializers that take an object and transform it into API output.
- * Note: the term "serialize" is use loosely here. Internal objects are turned into API structures.
- *
- * If an unserializer is available, you can roundtrip via ApiUnserializer::getUnserialized
+ * Interface for objects that can transform variables of a certain type into an array
+ * of primitive value or nested arrays. This output can then be fed to a serialization
+ * function such as json_encode() or serialize(). The format used is suitable for
+ * exposure to the outside world, so can be used in APIs, be put into pages as
+ * JSON blobs to be used by widgets or by an exporter. The formats are not optimized
+ * for conciseness and can contain a lot of redundant info, and are thus often not
+ * ideal for serialization for internal storage.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +35,7 @@ use ApiResult, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface ApiSerializer {
+interface Serializer {
 
 	/**
 	 * Turns the provided object to API output and returns this serialization.
@@ -50,9 +53,9 @@ interface ApiSerializer {
 	 *
 	 * @since 0.2
 	 *
-	 * @param ApiSerializationOptions $options
+	 * @param SerializationOptions $options
 	 */
-	public function setOptions( ApiSerializationOptions $options );
+	public function setOptions( SerializationOptions $options );
 
 	/**
 	 * Sets the ApiResult to use during serialization.

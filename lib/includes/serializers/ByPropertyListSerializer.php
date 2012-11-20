@@ -30,7 +30,7 @@ use Traversable, ApiResult, MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ByPropertyListSerializer extends ApiSerializerObject {
+class ByPropertyListSerializer extends SerializerObject {
 
 	/**
 	 * @since 0.2
@@ -42,7 +42,7 @@ class ByPropertyListSerializer extends ApiSerializerObject {
 	/**
 	 * @since 0.2
 	 *
-	 * @var ApiSerializer
+	 * @var Serializer
 	 */
 	protected $elementSerializer;
 
@@ -52,11 +52,11 @@ class ByPropertyListSerializer extends ApiSerializerObject {
 	 * @since 0.2
 	 *
 	 * @param string $elementName
-	 * @param ApiSerializer $elementSerializer
+	 * @param Serializer $elementSerializer
 	 * @param ApiResult $apiResult
-	 * @param ApiSerializationOptions|null $options
+	 * @param SerializationOptions|null $options
 	 */
-	public function __construct( $elementName, ApiSerializer $elementSerializer, ApiResult $apiResult, ApiSerializationOptions $options = null ) {
+	public function __construct( $elementName, Serializer $elementSerializer, ApiResult $apiResult, SerializationOptions $options = null ) {
 		parent::__construct( $apiResult, $options );
 
 		$this->elementName = $elementName;

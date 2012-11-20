@@ -16,6 +16,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Claims can now be looked up by GUID in any ClaimListAccess
 * HashArray now supports driving classes that accept duplicates
 * Hashable, Copyable, Immutable and Comparable have been removed in favour of the same interfaces in DataValues
+* Moved the ApiSerializers of Wikibase Repo into WikibaseLib and removed API specific logic and naming
 
 === Version 0.2 ===
 (???)

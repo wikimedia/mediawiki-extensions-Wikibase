@@ -1,10 +1,10 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ApiSerializer;
+use Wikibase\Serializer;
 
 /**
- * Tests for the Wikibase\ApiSerializer implementing classes.
+ * Tests for the Wikibase\Serializer implementing classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ use Wikibase\ApiSerializer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ApiSerializerTest extends \MediaWikiTestCase {
+class SerializerTest extends \MediaWikiTestCase {
 
 	public function apiSerializerProvider() {
 		$serializers = array();
@@ -51,18 +51,18 @@ class ApiSerializerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider apiSerializerProvider
-	 * @param ApiSerializer $serializer
+	 * @param Serializer $serializer
 	 */
-	public function testSetOptions( ApiSerializer $serializer ) {
-		$serializer->setOptions( new \Wikibase\ApiSerializationOptions() );
+	public function testSetOptions( Serializer $serializer ) {
+		$serializer->setOptions( new \Wikibase\SerializationOptions() );
 		$this->assertTrue( true );
 	}
 
 	/**
 	 * @dataProvider apiSerializerProvider
-	 * @param ApiSerializer $serializer
+	 * @param Serializer $serializer
 	 */
-	public function testSetApiResult( ApiSerializer $serializer ) {
+	public function testSetApiResult( Serializer $serializer ) {
 		$serializer->setApiResult( new \ApiResult( new \ApiMain() ) );
 		$this->assertTrue( true );
 	}

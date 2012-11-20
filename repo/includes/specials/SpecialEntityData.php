@@ -178,7 +178,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	}
 
 	/**
-	 * Creates an ApiSerializer suitable for serializing the given type of entity.
+	 * Creates an Serializer suitable for serializing the given type of entity.
 	 *
 	 * @todo: factor this out into a generic factory class.
 	 *

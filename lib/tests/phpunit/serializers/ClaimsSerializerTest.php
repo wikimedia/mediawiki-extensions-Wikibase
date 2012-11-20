@@ -37,10 +37,10 @@ use Wikibase\StatementObject;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ClaimsSerializerTest extends ApiSerializerBaseTest {
+class ClaimsSerializerTest extends SerializerBaseTest {
 
 	/**
-	 * @see ApiSerializerBaseTest::getClass
+	 * @see SerializerBaseTest::getClass
 	 *
 	 * @since 0.2
 	 *
@@ -51,7 +51,7 @@ class ClaimsSerializerTest extends ApiSerializerBaseTest {
 	}
 
 	/**
-	 * @see ApiSerializerBaseTest::validProvider
+	 * @see SerializerBaseTest::validProvider
 	 *
 	 * @since 0.2
 	 *

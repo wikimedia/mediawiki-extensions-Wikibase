@@ -156,10 +156,10 @@ $wgAutoloadClasses['Wikibase\ReferenceObject'] 			= $dir . 'includes/reference/R
 $wgAutoloadClasses['Wikibase\References'] 				= $dir . 'includes/reference/References.php';
 
 // includes/api/serializers
-$wgAutoloadClasses['Wikibase\ApiSerializationOptions'] 	= $dir . 'includes/serializers/ApiSerializationOptions.php';
-$wgAutoloadClasses['Wikibase\EntitySerializationOptions']	= $dir . 'includes/serializers/ApiSerializationOptions.php';
-$wgAutoloadClasses['Wikibase\ApiSerializer'] 			= $dir . 'includes/serializers/ApiSerializer.php';
-$wgAutoloadClasses['Wikibase\ApiSerializerObject'] 		= $dir . 'includes/serializers/ApiSerializerObject.php';
+$wgAutoloadClasses['Wikibase\SerializationOptions'] 	= $dir . 'includes/serializers/SerializationOptions.php';
+$wgAutoloadClasses['Wikibase\EntitySerializationOptions']	= $dir . 'includes/serializers/SerializationOptions.php';
+$wgAutoloadClasses['Wikibase\Serializer'] 				= $dir . 'includes/serializers/Serializer.php';
+$wgAutoloadClasses['Wikibase\SerializerObject'] 		= $dir . 'includes/serializers/SerializerObject.php';
 $wgAutoloadClasses['Wikibase\ByPropertyListSerializer'] = $dir . 'includes/serializers/ByPropertyListSerializer.php';
 $wgAutoloadClasses['Wikibase\ClaimSerializer'] 			= $dir . 'includes/serializers/ClaimSerializer.php';
 $wgAutoloadClasses['Wikibase\ClaimsSerializer'] 		= $dir . 'includes/serializers/ClaimsSerializer.php';
@@ -202,7 +202,7 @@ $wgAutoloadClasses['Wikibase\Test\EntityDiffTest'] 			= $dir . 'tests/phpunit/en
 $wgAutoloadClasses['Wikibase\Test\EntityRefreshTest'] 		= $dir . 'tests/phpunit/changes/EntityRefreshTest.php';
 $wgAutoloadClasses['Wikibase\Test\PropertySnakObjectTest'] 	= $dir . 'tests/phpunit/snak/PropertySnakObjectTest.php';
 $wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/snak/SnakObjectTest.php';
-$wgAutoloadClasses['Wikibase\Test\ApiSerializerBaseTest'] 	= $dir . 'tests/phpunit/serializers/ApiSerializerBaseTest.php';
+$wgAutoloadClasses['Wikibase\Test\SerializerBaseTest'] 		= $dir . 'tests/phpunit/serializers/SerializerBaseTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntitySerializerBaseTest']= $dir . 'tests/phpunit/serializers/EntitySerializerBaseTest.php';
 
 foreach ( array(
