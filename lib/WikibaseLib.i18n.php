@@ -86,6 +86,15 @@ $messages['de'] = array(
 	'datatypes-type-commonsMedia' => 'Mediendatei auf Commons',
 );
 
+/** Zazaki (Zazaki)
+ * @author Erdemaslancan
+ */
+$messages['diq'] = array(
+	'wikibaselib-entity-item' => 'çêki',
+	'wikibaselib-entity-query' => 'persen',
+	'datatypes-type-wikibase-item' => 'Çêki',
+);
+
 /** Lower Sorbian (dolnoserbski)
  * @author Michawiki
  */

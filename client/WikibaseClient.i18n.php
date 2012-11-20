@@ -110,12 +110,14 @@ $messages['de'] = array(
 	'wbc-comment-langlinks-update' => 'Sprachlinks aktualisiert',
 	'wbc-editlinks' => 'Links bearbeiten',
 	'wbc-editlinkstitle' => 'Links auf Artikel in anderen Sprachen bearbeiten',
+	'wbc-rc-hide-wikidata' => 'Wikidata $1',
 );
 
 /** Zazaki (Zazaki)
  * @author Erdemaslancan
  */
 $messages['diq'] = array(
+	'wbc-comment-langlinks-update' => 'Linka zıwani rocaniyaya',
 	'wbc-editlinks' => 'Gri bıvurnê',
 );
 

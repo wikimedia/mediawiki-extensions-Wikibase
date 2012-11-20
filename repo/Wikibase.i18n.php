@@ -556,19 +556,19 @@ Parameters:
 * $1 is the number of values set (that is 0 - zero);
 * $2 is the language code of the entity page during creation.',
 	'content-model-wikibase-item' => 'The name for Wikibase item content model, used when describing what type of content a page contains.',
-	'right-item-override' => '{{doc-right|item-override}}',
+	'right-item-override' => '{{doc-right|item-override}}', # Fuzzy
 	'right-item-create' => '{{doc-right|item-create}}', # Fuzzy
-	'right-item-remove' => '{{doc-right|item-remove}}',
-	'right-alias-add' => '{{doc-right|alias-add}}',
+	'right-item-remove' => '{{doc-right|item-remove}}', # Fuzzy
+	'right-alias-add' => '{{doc-right|alias-add}}', # Fuzzy
 	'right-alias-set' => '{{doc-right|alias-set}}', # Fuzzy
-	'right-alias-remove' => '{{doc-right|alias-remove}}',
+	'right-alias-remove' => '{{doc-right|alias-remove}}', # Fuzzy
 	'right-sitelink-remove' => '{{doc-right|sitelink-remove}}', # Fuzzy
-	'right-sitelink-update' => '{{doc-right|sitelink-update}}',
+	'right-sitelink-update' => '{{doc-right|sitelink-update}}', # Fuzzy
 	'right-linktitles-update' => '{{doc-right|linktitles-update}}', # Fuzzy
-	'right-label-remove' => '{{doc-right|label-remove}}',
+	'right-label-remove' => '{{doc-right|label-remove}}', # Fuzzy
 	'right-label-update' => '{{doc-right|label-update}}', # Fuzzy
-	'right-description-remove' => '{{doc-right|description-remove}}',
-	'right-description-update' => '{{doc-right|description-update}}',
+	'right-description-remove' => '{{doc-right|description-remove}}', # Fuzzy
+	'right-description-update' => '{{doc-right|description-update}}', # Fuzzy
 );
 
 /** Achinese (Acèh)
@@ -786,19 +786,19 @@ $messages['ca'] = array(
 	'wikibase-item-summary-wbsetaliases-add-remove' => 'Afegeix i esborra $2 àlies a $1', # Fuzzy
 	'wikibase-item-summary-wbsetaliases-add' => 'Afegeix $1 àlies a $2', # Fuzzy
 	'wikibase-item-summary-wbsetaliases-remove' => 'Esborra $2  àlies a $1', # Fuzzy
-	'right-item-override' => 'Sobreescriu un element',
+	'right-item-override' => 'Sobreescriu un element', # Fuzzy
 	'right-item-create' => 'Crear un element nou', # Fuzzy
-	'right-item-remove' => 'Esborrar un element',
-	'right-alias-add' => 'Afegir un àlies',
+	'right-item-remove' => 'Esborrar un element', # Fuzzy
+	'right-alias-add' => 'Afegir un àlies', # Fuzzy
 	'right-alias-set' => 'Definir un àlies', # Fuzzy
-	'right-alias-remove' => 'Esborrar un àlies',
+	'right-alias-remove' => 'Esborrar un àlies', # Fuzzy
 	'right-sitelink-remove' => "Esborrar l'enllaç d'una pàgina web", # Fuzzy
-	'right-sitelink-update' => "Actualitzar l'enllaç d'una pàgina web",
+	'right-sitelink-update' => "Actualitzar l'enllaç d'una pàgina web", # Fuzzy
 	'right-linktitles-update' => "Actualitzar un títol d'enllaç", # Fuzzy
-	'right-label-remove' => 'Esborrar una etiqueta',
+	'right-label-remove' => 'Esborrar una etiqueta', # Fuzzy
 	'right-label-update' => 'Actualitzar una etiqueta', # Fuzzy
-	'right-description-remove' => 'Esborrar una descripció',
-	'right-description-update' => 'Actualitzar una descripció',
+	'right-description-remove' => 'Esborrar una descripció', # Fuzzy
+	'right-description-update' => 'Actualitzar una descripció', # Fuzzy
 );
 
 /** German (Deutsch)
@@ -963,16 +963,16 @@ Du kannst die <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPA
 	'content-model-wikibase-property' => 'Wikibase-Eigenschaft',
 	'content-model-wikibase-query' => 'Wikibase-Abfrage',
 	'right-item-override' => 'Datenobjekte überschreiben',
-	'right-item-create' => 'Datenobjekte erstellen', # Fuzzy
+	'right-item-create' => 'Datenobjekte erstellen',
 	'right-item-remove' => 'Datenobjekte entfernen',
 	'right-alias-add' => 'Aliasse hinzufügen',
-	'right-alias-set' => 'Aliasse festlegen', # Fuzzy
+	'right-alias-set' => 'Aliasse festlegen',
 	'right-alias-remove' => 'Aliasse entfernen',
-	'right-sitelink-remove' => 'Websitelinks entfernen', # Fuzzy
+	'right-sitelink-remove' => 'Websitelinks entfernen',
 	'right-sitelink-update' => 'Websitelinks aktualisieren',
-	'right-linktitles-update' => 'Linktitel aktualisieren', # Fuzzy
+	'right-linktitles-update' => 'Linktitel aktualisieren',
 	'right-label-remove' => 'Bezeichnungen entfernen',
-	'right-label-update' => 'Bezeichnungen aktualisieren', # Fuzzy
+	'right-label-update' => 'Bezeichnungen aktualisieren',
 	'right-description-remove' => 'Beschreibungen entfernen',
 	'right-description-update' => 'Beschreibungen aktualisieren',
 );
@@ -1038,6 +1038,14 @@ $messages['diq'] = array(
 	'wikibase-itemdisambiguation-lookup-language' => 'Zıwan:',
 	'wikibase-itemdisambiguation-lookup-label' => 'Etiket:',
 	'wikibase-itemdisambiguation-submit' => 'Cı geyre',
+	'wikibase-createentity-label' => 'Etiket:',
+	'wikibase-createentity-description' => 'Şınasiyen:',
+	'wikibase-createentity-submit' => 'Vıraze',
+	'wikibase-setlabel-id' => 'ID',
+	'wikibase-setlabel-language' => 'Zıwan',
+	'wikibase-setlabel-label' => 'Etiket',
+	'wikibase-entitieswithoutlabel-label-language' => 'Zıwan:',
+	'wikibase-entitieswithoutlabel-submit' => 'Bıvin',
 	'wikibase-restoreold' => 'reset kerê',
 );
 
@@ -1471,19 +1479,19 @@ $messages['es'] = array(
 	'wikibase-item-summary-special-create-property' => 'Se ha creado una propiedad de [$2] con {{plural:$1|valor|valores}}',
 	'wikibase-item-summary-special-create-query' => 'Se ha creado una consulta en [$2] con {{plural:$1|valor|valores}}',
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
-	'right-item-override' => 'Sobreescribir un elemento',
+	'right-item-override' => 'Sobreescribir un elemento', # Fuzzy
 	'right-item-create' => 'Crear un elemento', # Fuzzy
-	'right-item-remove' => 'Eliminar un elemento',
-	'right-alias-add' => 'Añadir un alias',
+	'right-item-remove' => 'Eliminar un elemento', # Fuzzy
+	'right-alias-add' => 'Añadir un alias', # Fuzzy
 	'right-alias-set' => 'Establecer un alias o pseudónimo', # Fuzzy
-	'right-alias-remove' => 'Quitar un alias',
+	'right-alias-remove' => 'Quitar un alias', # Fuzzy
 	'right-sitelink-remove' => 'Quitar un enlace de sitio', # Fuzzy
-	'right-sitelink-update' => 'Actualizar un enlace de sitio',
+	'right-sitelink-update' => 'Actualizar un enlace de sitio', # Fuzzy
 	'right-linktitles-update' => 'Actualizar un título de enlace', # Fuzzy
-	'right-label-remove' => 'Quitar una etiqueta',
+	'right-label-remove' => 'Quitar una etiqueta', # Fuzzy
 	'right-label-update' => 'Actualizar una etiqueta', # Fuzzy
-	'right-description-remove' => 'Quitar una descripción',
-	'right-description-update' => 'Actualizar una descripción',
+	'right-description-remove' => 'Quitar una descripción', # Fuzzy
+	'right-description-update' => 'Actualizar una descripción', # Fuzzy
 );
 
 /** Estonian (eesti)
@@ -1745,13 +1753,13 @@ Voit <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-wbsetdescription-remove' => 'Poistettu [$2]-kuvaus',
 	'wikibase-item-summary-wbsetsitelink-set' => 'Lisätty sivustokohtainen [$2]-linkki',
 	'wikibase-item-summary-wbsetsitelink-remove' => 'Poistettu sivustokohtainen [$2]-linkki',
-	'right-item-override' => 'Korvata kohteen',
-	'right-alias-add' => 'Lisätä alias',
-	'right-alias-remove' => 'Poistaa alias',
-	'right-label-remove' => 'Poistaa otsikko',
+	'right-item-override' => 'Korvata kohteen', # Fuzzy
+	'right-alias-add' => 'Lisätä alias', # Fuzzy
+	'right-alias-remove' => 'Poistaa alias', # Fuzzy
+	'right-label-remove' => 'Poistaa otsikko', # Fuzzy
 	'right-label-update' => 'Päivittää otsikko', # Fuzzy
-	'right-description-remove' => 'Poistaa kuvaus',
-	'right-description-update' => 'Päivittää kuvaus',
+	'right-description-remove' => 'Poistaa kuvaus', # Fuzzy
+	'right-description-update' => 'Päivittää kuvaus', # Fuzzy
 );
 
 /** French (français)
@@ -1924,18 +1932,18 @@ $messages['fr'] = array(
 	'content-model-wikibase-item' => 'Élément Wikibase',
 	'content-model-wikibase-property' => 'Propriété de Wikibase',
 	'content-model-wikibase-query' => 'Requête de Wikibase',
-	'right-item-override' => 'Remplacer un élément',
-	'right-item-create' => 'Créer un nouvel élément', # Fuzzy
-	'right-item-remove' => 'Supprimer un élément',
+	'right-item-override' => 'Remplacer les éléments',
+	'right-item-create' => 'Créer des éléments',
+	'right-item-remove' => 'Supprimer les éléments',
 	'right-alias-add' => 'Ajouter des alias',
-	'right-alias-set' => 'Modifier des alias', # Fuzzy
-	'right-alias-remove' => 'Retirer des alias',
-	'right-sitelink-remove' => 'Supprimer une liaison de sites', # Fuzzy
-	'right-sitelink-update' => 'Mettre à jour une liaison de sites',
-	'right-linktitles-update' => 'Mettre à jour un titre de lien', # Fuzzy
-	'right-label-remove' => 'Supprimer une étiquette',
-	'right-label-update' => 'Mettre à jour une étiquette', # Fuzzy
-	'right-description-remove' => 'Retirer des descriptions',
+	'right-alias-set' => 'Modifier des alias',
+	'right-alias-remove' => 'Supprimer des alias',
+	'right-sitelink-remove' => 'Supprimer des liens de site',
+	'right-sitelink-update' => 'Mettre à jour des liens de site',
+	'right-linktitles-update' => 'Mettre à jour des titres de lien',
+	'right-label-remove' => 'Supprimer des étiquettes',
+	'right-label-update' => 'Mettre à jour des étiquettes',
+	'right-description-remove' => 'Supprimer des descriptions',
 	'right-description-update' => 'Modifier des descriptions',
 );
 
@@ -2159,19 +2167,19 @@ $messages['gl'] = array(
 	'content-model-wikibase-item' => 'Elemento de Wikibase',
 	'content-model-wikibase-property' => 'Propiedade de Wikibase',
 	'content-model-wikibase-query' => 'Consulta de Wikibase',
-	'right-item-override' => 'Sobrescribir un elemento',
+	'right-item-override' => 'Sobrescribir un elemento', # Fuzzy
 	'right-item-create' => 'Crear un elemento', # Fuzzy
-	'right-item-remove' => 'Eliminar un elemento',
-	'right-alias-add' => 'Engadir un pseudónimo',
+	'right-item-remove' => 'Eliminar un elemento', # Fuzzy
+	'right-alias-add' => 'Engadir un pseudónimo', # Fuzzy
 	'right-alias-set' => 'Establecer un pseudónimo', # Fuzzy
-	'right-alias-remove' => 'Eliminar un pseudónimo',
+	'right-alias-remove' => 'Eliminar un pseudónimo', # Fuzzy
 	'right-sitelink-remove' => 'Eliminar unha ligazón do sitio', # Fuzzy
-	'right-sitelink-update' => 'Actualizar unha ligazón do sitio',
+	'right-sitelink-update' => 'Actualizar unha ligazón do sitio', # Fuzzy
 	'right-linktitles-update' => 'Actualizar un título de ligazón', # Fuzzy
-	'right-label-remove' => 'Eliminar unha etiqueta',
+	'right-label-remove' => 'Eliminar unha etiqueta', # Fuzzy
 	'right-label-update' => 'Actualizar unha etiqueta', # Fuzzy
-	'right-description-remove' => 'Eliminar unha descrición',
-	'right-description-update' => 'Actualizar unha descrición',
+	'right-description-remove' => 'Eliminar unha descrición', # Fuzzy
+	'right-description-update' => 'Actualizar unha descrición', # Fuzzy
 );
 
 /** Swiss German (Alemannisch)
@@ -2348,16 +2356,16 @@ $messages['he'] = array(
 	'wikibase-item-summary-special-create-property' => 'נוצר מאפיין תחת [$2] עם {{plural:$1|ערך|ערכים}}',
 	'wikibase-item-summary-special-create-query' => 'נוצרה שאילתה תחת [$2] עם {{plural:$1|ערך|ערכים}}',
 	'right-item-create' => 'יצירת פריט', # Fuzzy
-	'right-item-remove' => 'הסרת פריט',
-	'right-alias-add' => 'הוספת כינוי',
-	'right-alias-remove' => 'הסרת כינוי',
+	'right-item-remove' => 'הסרת פריט', # Fuzzy
+	'right-alias-add' => 'הוספת כינוי', # Fuzzy
+	'right-alias-remove' => 'הסרת כינוי', # Fuzzy
 	'right-sitelink-remove' => 'הסרת קישור אתר', # Fuzzy
-	'right-sitelink-update' => 'עדכון קישור אתר',
+	'right-sitelink-update' => 'עדכון קישור אתר', # Fuzzy
 	'right-linktitles-update' => 'עדכון כותרת קישור', # Fuzzy
-	'right-label-remove' => 'הסרת תווית',
+	'right-label-remove' => 'הסרת תווית', # Fuzzy
 	'right-label-update' => 'עדכון תווית', # Fuzzy
-	'right-description-remove' => 'הסרת תיאור',
-	'right-description-update' => 'עדכון תיאור',
+	'right-description-remove' => 'הסרת תיאור', # Fuzzy
+	'right-description-update' => 'עדכון תיאור', # Fuzzy
 );
 
 /** Croatian (hrvatski)
@@ -2744,19 +2752,19 @@ tapno birukem ti napananda.',
 	'wikibase-item-summary-special-create-item' => 'Nagpartuat ti [$2] ti banag iti {{plural:$1|a pateg|a patpateg}}',
 	'wikibase-item-summary-special-create-property' => 'Nagpartuat ti [$2] a tagikua iti {{plural:$1|a pateg|a patpateg}}',
 	'wikibase-item-summary-special-create-query' => 'Nagpartuat ti [$2] ti panagbiruk iti {{plural:$1|a pateg|a patpateg}}',
-	'right-item-override' => 'Baliwan ti maysa a banag',
+	'right-item-override' => 'Baliwan ti maysa a banag', # Fuzzy
 	'right-item-create' => 'Agpartuat ti maysa a banag', # Fuzzy
-	'right-item-remove' => 'Agikkat ti maysa a banag',
-	'right-alias-add' => 'Agnayon ti sabali a nagan',
+	'right-item-remove' => 'Agikkat ti maysa a banag', # Fuzzy
+	'right-alias-add' => 'Agnayon ti sabali a nagan', # Fuzzy
 	'right-alias-set' => 'Agikabil ti sabali a nagan', # Fuzzy
-	'right-alias-remove' => 'Ikkaten ti maysa a banag',
+	'right-alias-remove' => 'Ikkaten ti maysa a banag', # Fuzzy
 	'right-sitelink-remove' => 'Ikkaten ti maysa a silpo ti sitio', # Fuzzy
-	'right-sitelink-update' => 'Pabaruen ti maysa asilpo ti sitio',
+	'right-sitelink-update' => 'Pabaruen ti maysa asilpo ti sitio', # Fuzzy
 	'right-linktitles-update' => 'Pabaruen ti maysa a silpo ti titulo', # Fuzzy
-	'right-label-remove' => 'Ikkaten ti maysa nga etiketa',
+	'right-label-remove' => 'Ikkaten ti maysa nga etiketa', # Fuzzy
 	'right-label-update' => 'Pabaruen ti maysa nga etiketa', # Fuzzy
-	'right-description-remove' => 'Ikkaten ti maysa a deskripsion',
-	'right-description-update' => 'Pabaruen ti maysa a deskripsion',
+	'right-description-remove' => 'Ikkaten ti maysa a deskripsion', # Fuzzy
+	'right-description-update' => 'Pabaruen ti maysa a deskripsion', # Fuzzy
 );
 
 /** Icelandic (íslenska)
@@ -2906,15 +2914,15 @@ $messages['is'] = array(
 	'wikibase-item-summary-special-create-property' => 'Bjó til [$2] eiginleika með {{plural:$1|gildi|gildum}}',
 	'content-model-wikibase-item' => 'Wikibase hlutur',
 	'right-item-create' => 'Búa til hlut', # Fuzzy
-	'right-item-remove' => 'Fjarlægja hlut',
-	'right-alias-add' => 'Bæta við samnefni',
-	'right-alias-remove' => 'Fjarlægja samnefni',
+	'right-item-remove' => 'Fjarlægja hlut', # Fuzzy
+	'right-alias-add' => 'Bæta við samnefni', # Fuzzy
+	'right-alias-remove' => 'Fjarlægja samnefni', # Fuzzy
 	'right-sitelink-remove' => 'Fjarlægja vefsvæðistengil', # Fuzzy
-	'right-sitelink-update' => 'Uppfæra vefsvæðistengil',
-	'right-label-remove' => 'Fjarlægja merkimiða',
+	'right-sitelink-update' => 'Uppfæra vefsvæðistengil', # Fuzzy
+	'right-label-remove' => 'Fjarlægja merkimiða', # Fuzzy
 	'right-label-update' => 'Uppfæra merkimiða', # Fuzzy
-	'right-description-remove' => 'Fjarlægja lýsingu',
-	'right-description-update' => 'Uppfæra lýsingu',
+	'right-description-remove' => 'Fjarlægja lýsingu', # Fuzzy
+	'right-description-update' => 'Uppfæra lýsingu', # Fuzzy
 );
 
 /** Italian (italiano)
@@ -3082,20 +3090,20 @@ Puoi <span class="plainlinks">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}
 	'wikibase-item-summary-special-create-query' => "Creata un'interrogazione [$2] con {{plural:$1|valore|valori}}",
 	'content-model-wikibase-item' => 'Elemento Wikibase',
 	'content-model-wikibase-property' => 'Proprietà Wikibase',
-	'content-model-wikibase-query' => 'Query Wikibase',
-	'right-item-override' => 'Sovrascrive un elemento',
-	'right-item-create' => 'Crea un elemento', # Fuzzy
-	'right-item-remove' => 'Rimuove un elemento',
-	'right-alias-add' => 'Aggiunge un alias',
-	'right-alias-set' => 'Imposta un alias', # Fuzzy
-	'right-alias-remove' => 'Rimuove un alias',
-	'right-sitelink-remove' => 'Rimuove un link di lingua', # Fuzzy
-	'right-sitelink-update' => 'Aggiorna un link di lingua',
-	'right-linktitles-update' => 'Aggiorna un link del titolo', # Fuzzy
-	'right-label-remove' => "Rimuove un'etichetta",
-	'right-label-update' => "Aggiorna un'etichetta", # Fuzzy
-	'right-description-remove' => 'Rimuove una descrizione',
-	'right-description-update' => 'Aggiorna una descrizione',
+	'content-model-wikibase-query' => 'Interrogazione Wikibase',
+	'right-item-override' => 'Sovrascrive elementi',
+	'right-item-create' => 'Crea elementi',
+	'right-item-remove' => 'Rimuove elementi',
+	'right-alias-add' => 'Aggiunge alias',
+	'right-alias-set' => 'Imposta alias',
+	'right-alias-remove' => 'Rimuove alias',
+	'right-sitelink-remove' => 'Rimuove link di lingua',
+	'right-sitelink-update' => 'Aggiorna link di lingua',
+	'right-linktitles-update' => 'Aggiorna link del titolo',
+	'right-label-remove' => 'Rimuove etichette',
+	'right-label-update' => 'Aggiorna etichette',
+	'right-description-remove' => 'Rimuove descrizioni',
+	'right-description-update' => 'Aggiorna descrizioni',
 );
 
 /** Japanese (日本語)
@@ -3229,16 +3237,16 @@ $messages['ja'] = array(
 	'content-model-wikibase-property' => 'ウィキベース プロパティ',
 	'content-model-wikibase-query' => 'ウィキベース クエリ',
 	'right-item-override' => '項目を上書き',
-	'right-item-create' => '項目を作成', # Fuzzy
+	'right-item-create' => '項目を作成',
 	'right-item-remove' => '項目を除去',
 	'right-alias-add' => '別名を追加',
-	'right-alias-set' => '別名を設定', # Fuzzy
+	'right-alias-set' => '別名を設定',
 	'right-alias-remove' => '別名を除去',
-	'right-sitelink-remove' => 'サイトリンクを除去', # Fuzzy
+	'right-sitelink-remove' => 'サイトリンクを除去',
 	'right-sitelink-update' => 'サイトリンクを更新',
-	'right-linktitles-update' => 'リンクタイトルを更新', # Fuzzy
+	'right-linktitles-update' => 'リンクタイトルを更新',
 	'right-label-remove' => 'ラベルを除去',
-	'right-label-update' => 'ラベルを更新', # Fuzzy
+	'right-label-update' => 'ラベルを更新',
 	'right-description-remove' => '説明を除去',
 	'right-description-update' => '説明を更新',
 );
@@ -3423,17 +3431,20 @@ $messages['ko'] = array(
 	'wikibase-item-summary-special-create-item' => '{{plural:$1|값}}으로 [$2] 항목 만듦',
 	'wikibase-item-summary-special-create-property' => '{{plural:$1|값}}으로 [$2] 속성 만듦',
 	'wikibase-item-summary-special-create-query' => '{{plural:$1|값}}으로 [$2] 쿼리 만듦',
+	'content-model-wikibase-item' => '위키베이스 항목',
+	'content-model-wikibase-property' => '위키베이스 속성',
+	'content-model-wikibase-query' => '위키베이스 쿼리',
 	'right-item-override' => '항목 덮어쓰기',
-	'right-item-create' => '항목 만들기', # Fuzzy
+	'right-item-create' => '항목 만들기',
 	'right-item-remove' => '항목 제거',
 	'right-alias-add' => '별명 추가',
-	'right-alias-set' => '별명 설정', # Fuzzy
+	'right-alias-set' => '별명 설정',
 	'right-alias-remove' => '별명 제거',
-	'right-sitelink-remove' => '사이트 링크 제거', # Fuzzy
+	'right-sitelink-remove' => '사이트 링크 제거',
 	'right-sitelink-update' => '사이트 링크 업데이트',
-	'right-linktitles-update' => '링크 제목 업데이트', # Fuzzy
+	'right-linktitles-update' => '링크 제목 업데이트',
 	'right-label-remove' => '레이블 제거',
-	'right-label-update' => '레이블 업데이트', # Fuzzy
+	'right-label-update' => '레이블 업데이트',
 	'right-description-remove' => '설명 제거',
 	'right-description-update' => '설명 업데이트',
 );
@@ -3683,16 +3694,16 @@ $messages['mk'] = array(
 	'content-model-wikibase-property' => 'Својство од Викибазата',
 	'content-model-wikibase-query' => 'Барање за Викибазата',
 	'right-item-override' => 'Презапишување врз предмети',
-	'right-item-create' => 'Создавање на предмети', # Fuzzy
+	'right-item-create' => 'Создавање на предмети',
 	'right-item-remove' => 'Остранување на предмети',
 	'right-alias-add' => 'Додавање на алијаси',
-	'right-alias-set' => 'Задавање на алијаси', # Fuzzy
+	'right-alias-set' => 'Задавање на алијаси',
 	'right-alias-remove' => 'Отстранување на алијаси',
-	'right-sitelink-remove' => 'Отстранување на надв. врски', # Fuzzy
-	'right-sitelink-update' => 'Поднова на надв. врски',
-	'right-linktitles-update' => 'Измена на наслови на врски', # Fuzzy
+	'right-sitelink-remove' => 'Отстранување на врски до мреж. места',
+	'right-sitelink-update' => 'Измена на надв. врски',
+	'right-linktitles-update' => 'Измена на наслови на врски',
 	'right-label-remove' => 'Отстранување на етикети',
-	'right-label-update' => 'Измена на етикети', # Fuzzy
+	'right-label-update' => 'Измена на етикети',
 	'right-description-remove' => 'Отстранување на описи',
 	'right-description-update' => 'Измена на описи',
 );
@@ -3996,19 +4007,19 @@ for å finne ut hva som har skjedd.',
 	'wikibase-item-summary-special-create-property' => 'Opprettet en [$2] egenskap med {{plural:$1|verdi|verdiene}}',
 	'wikibase-item-summary-special-create-query' => 'Opprettet et [$2] søk med {{plural:$1|verdi|verdiene}}',
 	'content-model-wikibase-item' => 'Wikibase datasett',
-	'right-item-override' => 'Overstyre et objekt',
+	'right-item-override' => 'Overstyre et objekt', # Fuzzy
 	'right-item-create' => 'Opprette et objekt', # Fuzzy
-	'right-item-remove' => 'Fjerne et objekt',
-	'right-alias-add' => 'Legge til et alias',
+	'right-item-remove' => 'Fjerne et objekt', # Fuzzy
+	'right-alias-add' => 'Legge til et alias', # Fuzzy
 	'right-alias-set' => 'Sette et alias', # Fuzzy
-	'right-alias-remove' => 'Fjerne et alias',
+	'right-alias-remove' => 'Fjerne et alias', # Fuzzy
 	'right-sitelink-remove' => 'Fjerne en nettstedslenke', # Fuzzy
-	'right-sitelink-update' => 'Oppdatere en nettstedslenke',
+	'right-sitelink-update' => 'Oppdatere en nettstedslenke', # Fuzzy
 	'right-linktitles-update' => 'Oppdatere en lenketittel', # Fuzzy
-	'right-label-remove' => 'Fjerne en etikett',
+	'right-label-remove' => 'Fjerne en etikett', # Fuzzy
 	'right-label-update' => 'Oppdatere en etikett', # Fuzzy
-	'right-description-remove' => 'Fjerne en beskrivelse',
-	'right-description-update' => 'Oppdatere en beskrivelse',
+	'right-description-remove' => 'Fjerne en beskrivelse', # Fuzzy
+	'right-description-update' => 'Oppdatere en beskrivelse', # Fuzzy
 );
 
 /** Dutch (Nederlands)
@@ -4286,6 +4297,7 @@ $messages['pl'] = array(
 	'wikibase-sitelinks-sitename-columnheading' => 'Język',
 	'wikibase-sitelinks-siteid-columnheading' => 'Kod',
 	'wikibase-sitelinks-link-columnheading' => 'Powiązany artykuł',
+	'wikibase-sitelinks-empty' => 'Brak odnośników do tego elementu.',
 	'wikibase-sitelinks-input-help-message' => 'Podaj link do strony związanej z tą rzeczą.',
 	'wikibase-remove' => 'usuń',
 	'wikibase-undo-title' => 'Cofanie edycji "$1"',
@@ -4713,17 +4725,17 @@ $messages['ru'] = array(
 	'wikibase-noentity-createone' => 'Вы также можете [[$1|создать его]].',
 	'wikibase-item-summary-wbeditentity' => 'Новый элемент создан',
 	'right-item-create' => 'создание элементов (объектов)', # Fuzzy
-	'right-item-remove' => 'удаление элементов (объектов)',
-	'right-alias-add' => 'добавление альтернативных названий (псевдонимов, синонимов)',
+	'right-item-remove' => 'удаление элементов (объектов)', # Fuzzy
+	'right-alias-add' => 'добавление альтернативных названий (псевдонимов, синонимов)', # Fuzzy
 	'right-alias-set' => 'установка альтернативных названий (псевдонимов, синонимов)', # Fuzzy
-	'right-alias-remove' => 'удаление альтернативных названий (псевдонимов, синонимов)',
+	'right-alias-remove' => 'удаление альтернативных названий (псевдонимов, синонимов)', # Fuzzy
 	'right-sitelink-remove' => 'удаление ссылок', # Fuzzy
-	'right-sitelink-update' => 'обновление ссылок',
+	'right-sitelink-update' => 'обновление ссылок', # Fuzzy
 	'right-linktitles-update' => 'обновление заголовков ссылок', # Fuzzy
-	'right-label-remove' => 'удаление названий',
+	'right-label-remove' => 'удаление названий', # Fuzzy
 	'right-label-update' => 'обновление названий', # Fuzzy
-	'right-description-remove' => 'удаление описаний',
-	'right-description-update' => 'обновление описаний',
+	'right-description-remove' => 'удаление описаний', # Fuzzy
+	'right-description-update' => 'обновление описаний', # Fuzzy
 );
 
 /** Sinhala (සිංහල)
@@ -4866,6 +4878,7 @@ $messages['te'] = array(
 	'wikibase-save' => 'భద్రపరచు',
 	'wikibase-cancel' => 'రద్దుచేయి',
 	'wikibase-add' => 'చేర్చు',
+	'wikibase-sitelink-page-edit-placeholder' => 'వ్యాసం',
 	'wikibase-sitelinks-sitename-columnheading' => 'భాష',
 	'wikibase-remove' => 'తొలగించు',
 	'wikibase-propertyedittool-counter' => '($1 {{PLURAL:$1|పద్దు|పద్దులు}})',
@@ -5237,19 +5250,19 @@ $messages['vi'] = array(
 	'content-model-wikibase-item' => 'khoản mục Wikibase',
 	'content-model-wikibase-property' => 'thuộc tính Wikibase',
 	'content-model-wikibase-query' => 'truy vấn Wikibase',
-	'right-item-override' => 'Ghi đè một khoản mục',
+	'right-item-override' => 'Ghi đè một khoản mục', # Fuzzy
 	'right-item-create' => 'Tạo một khoản mục', # Fuzzy
-	'right-item-remove' => 'Loại bỏ một khoản mục',
-	'right-alias-add' => 'Thêm một tên khác',
+	'right-item-remove' => 'Loại bỏ một khoản mục', # Fuzzy
+	'right-alias-add' => 'Thêm một tên khác', # Fuzzy
 	'right-alias-set' => 'Đặt một tên khác', # Fuzzy
-	'right-alias-remove' => 'Loại bỏ một tên khác',
+	'right-alias-remove' => 'Loại bỏ một tên khác', # Fuzzy
 	'right-sitelink-remove' => 'Loại bỏ một liên kết site', # Fuzzy
-	'right-sitelink-update' => 'Cập nhật một liên kết site',
+	'right-sitelink-update' => 'Cập nhật một liên kết site', # Fuzzy
 	'right-linktitles-update' => 'Cập nhật một tên liên kết', # Fuzzy
-	'right-label-remove' => 'Loại bỏ một nhãn',
+	'right-label-remove' => 'Loại bỏ một nhãn', # Fuzzy
 	'right-label-update' => 'Cập nhật một nhãn', # Fuzzy
-	'right-description-remove' => 'Loại bỏ một lời miêu tả',
-	'right-description-update' => 'Cập nhật một lời miêu tả',
+	'right-description-remove' => 'Loại bỏ một lời miêu tả', # Fuzzy
+	'right-description-update' => 'Cập nhật một lời miêu tả', # Fuzzy
 );
 
 /** Yiddish (ייִדיש)
@@ -5547,17 +5560,17 @@ $messages['zh-hant'] = array(
 	'wikibase-item-summary-special-create-item' => '創建含{{plural:$1|數值}}的[$2]項目',
 	'wikibase-item-summary-special-create-property' => '創建含{{plural:$1|數值}}的[$2]屬性',
 	'wikibase-item-summary-special-create-query' => '創建含{{plural:$1|數值}}的[$2]查詢',
-	'right-item-override' => '覆蓋項目',
+	'right-item-override' => '覆蓋項目', # Fuzzy
 	'right-item-create' => '創建項目', # Fuzzy
-	'right-item-remove' => '刪除項目',
-	'right-alias-add' => '新增別名',
+	'right-item-remove' => '刪除項目', # Fuzzy
+	'right-alias-add' => '新增別名', # Fuzzy
 	'right-alias-set' => '設置別名', # Fuzzy
-	'right-alias-remove' => '刪除別名',
+	'right-alias-remove' => '刪除別名', # Fuzzy
 	'right-sitelink-remove' => '刪除維基項目連結', # Fuzzy
-	'right-sitelink-update' => '更新維基項目連結',
+	'right-sitelink-update' => '更新維基項目連結', # Fuzzy
 	'right-linktitles-update' => '更新連結標題', # Fuzzy
-	'right-label-remove' => '移除標籤',
+	'right-label-remove' => '移除標籤', # Fuzzy
 	'right-label-update' => '更新標籤', # Fuzzy
-	'right-description-remove' => '移除說明',
-	'right-description-update' => '更新說明',
+	'right-description-remove' => '移除說明', # Fuzzy
+	'right-description-update' => '更新說明', # Fuzzy
 );
