@@ -4,7 +4,7 @@ namespace Wikibase;
 use Maintenance, Exception;
 
 /**
- * Prune the Wikibase changes table to a maxium number of entries.
+ * Prune the Wikibase changes table to a maximum number of entries.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
