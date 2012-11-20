@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//8WA\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T12:21:11Z",
+      "side": 1,
+      "message": "The Mantra is: validate as early as possible, escape as late as possible. Always do both. Escaping early actually makes code unsafe, brittle and confusing. \n\nSome code may assume some things to already be escaped, but not others. Double-escaping may happen, and escaping may be forgotten. \n\nSo, please: validate and sanitize early, but please ALWAYS escape and check when generating SQL statements, HTML output, command line calls, etc.\n\nFor an integer is\u0027t a bit redundant, escaping just means \"make sure that it really is an int\". For strings, there\u0027s an actual difference that is important to observe.\n\nAnyway: A function should not trust its input. Not for something critical like building SQL statements, anyway.",
+      "parentUuid": "AAADZH//8WU\u003d",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//8X4\u003d",
         "filename": "repo/maintenance/pruneChanges.php",
         "patchSetId": 1
