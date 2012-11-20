@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//8UQ\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 172
+      },
+      "writtenOn": "2012-11-20T13:28:39Z",
+      "side": 1,
+      "message": "It\u0027s from pollForChanges! I recognize the comment :P",
+      "parentUuid": "AAADZH//8XM\u003d",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//8Xw\u003d",
         "filename": "repo/maintenance/pruneChanges.php",
         "patchSetId": 1
