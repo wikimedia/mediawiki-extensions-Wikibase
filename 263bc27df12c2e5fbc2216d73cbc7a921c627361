@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//8WU\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 178
+      },
+      "writtenOn": "2012-11-20T12:14:25Z",
+      "side": 1,
+      "message": "I can add it here if you think it increases security, but in my opinion dangerous vars should be laundered as soon as possible. The reason is that any var that is dirty will taint anything it comes in contact with, so late whitewashing does not make the overall code safe.",
+      "parentUuid": "AAADZH//8W4\u003d",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//8X4\u003d",
         "filename": "repo/maintenance/pruneChanges.php",
         "patchSetId": 1
