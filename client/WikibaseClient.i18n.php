@@ -28,6 +28,7 @@ $messages['en'] = array(
 	'wbc-editlinks' => 'Edit links',
 	'wbc-editlinkstitle' => 'Edit interlanguage links',
 	'wbc-rc-hide-wikidata' => '$1 Wikidata',
+	'wbc-rc-show-wikidata-pref' => 'Show Wikidata edits in recent changes',
 );
 
 /** Message documentation (Message documentation)
