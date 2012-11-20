@@ -37,7 +37,7 @@ use DataValues\StringValue;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyValueSnakTest extends PropertySnakObjectTest {
+class PropertyValueSnakTest extends SnakObjectTest {
 
 	public function constructorProvider() {
 		$argLists = array(

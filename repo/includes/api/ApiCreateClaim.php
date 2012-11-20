@@ -149,7 +149,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 		}
 
 		if ( !isset( $params['property'] ) ) {
-			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a PropertySnak', 'claim-property-id-missing' );
+			$this->dieUsage( 'A property ID needs to be provided when creating a claim with a Snak', 'claim-property-id-missing' );
 		}
 	}
 
@@ -243,7 +243,7 @@ class ApiCreateClaim extends Api implements ApiAutocomment {
 	public function getParamDescription() {
 		return array(
 			'entity' => 'Id of the entity you are adding the claim to',
-			'property' => 'Id of the property when creating a claim with a PropertySnak',
+			'property' => 'Id of the property when creating a claim with a Snak',
 			'value' => 'Value of the snak when creating a claim with a snak that has a value',
 			'snaktype' => 'The type of the snak',
 			'token' => 'An "edittoken" token previously obtained through the token module (prop=info).',
