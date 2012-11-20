@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase\Test;
-use Wikibase\ByPropertyIdArray, Wikibase\EntityId, Wikibase\Property, Wikibase\PropertySnak;
+use Wikibase\ByPropertyIdArray, Wikibase\EntityId, Wikibase\Property, Wikibase\Snak;
 
 /**
  * Tests for the Wikibase\ByPropertyIdArray class.
@@ -68,7 +68,7 @@ class ByPropertyIdArrayTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider listProvider
-	 * @param PropertySnak[] $objects
+	 * @param Snak[] $objects
 	 */
 	public function testGetIds( array $objects ) {
 		$indexedArray = new ByPropertyIdArray( $objects );

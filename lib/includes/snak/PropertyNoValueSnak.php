@@ -29,7 +29,7 @@ namespace Wikibase;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyNoValueSnak extends PropertySnakObject {
+class PropertyNoValueSnak extends SnakObject {
 
 	/**
 	 * @see Snak::getType

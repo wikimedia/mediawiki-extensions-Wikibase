@@ -158,7 +158,6 @@ $wgAutoloadClasses['Wikibase\TemplateModule'] 			= $dir . 'includes/modules/Temp
 // includes/snak
 $wgAutoloadClasses['Wikibase\PropertyNoValueSnak'] 		= $dir . 'includes/snak/PropertyNoValueSnak.php';
 $wgAutoloadClasses['Wikibase\PropertySnak'] 			= $dir . 'includes/snak/PropertySnak.php';
-$wgAutoloadClasses['Wikibase\PropertySnakObject'] 		= $dir . 'includes/snak/PropertySnakObject.php';
 $wgAutoloadClasses['Wikibase\PropertyValueSnak'] 		= $dir . 'includes/snak/PropertyValueSnak.php';
 $wgAutoloadClasses['Wikibase\PropertySomeValueSnak'] 	= $dir . 'includes/snak/PropertySomeValueSnak.php';
 $wgAutoloadClasses['Wikibase\Snak'] 					= $dir . 'includes/snak/Snak.php';
@@ -187,7 +186,6 @@ $wgAutoloadClasses['Wikibase\Test\TestItems'] 				= $dir . 'tests/phpunit/item/T
 $wgAutoloadClasses['Wikibase\Test\EntityObjectTest'] 		= $dir . 'tests/phpunit/entity/EntityObjectTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityDiffTest'] 			= $dir . 'tests/phpunit/entity/EntityDiffTest.php';
 $wgAutoloadClasses['Wikibase\Test\EntityRefreshTest'] 		= $dir . 'tests/phpunit/changes/EntityRefreshTest.php';
-$wgAutoloadClasses['Wikibase\Test\PropertySnakObjectTest'] 	= $dir . 'tests/phpunit/snak/PropertySnakObjectTest.php';
 $wgAutoloadClasses['Wikibase\Test\SnakObjectTest'] 			= $dir . 'tests/phpunit/snak/SnakObjectTest.php';
 
 foreach ( array(
