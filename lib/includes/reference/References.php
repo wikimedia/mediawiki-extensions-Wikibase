@@ -59,6 +59,16 @@ interface References extends \Traversable, \Countable, \Serializable {
 	 */
 	public function removeReference( Reference $reference );
 
+	/**
+	 * Returns an array representing the references.
+	 * Roundtrips with ReferenceList::newFromArray
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function toArray();
+
 }
 
 //interface HashedReferences extends References {

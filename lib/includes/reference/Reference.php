@@ -34,4 +34,6 @@ interface Reference extends \Hashable {
 	 */
 	public function setSnaks( Snaks $propertySnaks );
 
+
+
 }

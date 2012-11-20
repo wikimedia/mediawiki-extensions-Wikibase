@@ -94,14 +94,14 @@ class PropertyValueSnak extends SnakObject {
 	}
 
 	/**
-	 * @see SnakObject::getSerializationData
+	 * @see Snak::toArray
 	 *
 	 * @since 0.3
 	 *
 	 * @return array
 	 */
-	protected function getSerializationData() {
-		$data = parent::getSerializationData();
+	public function toArray() {
+		$data = parent::toArray();
 
 		$data[] = $this->dataValue->getType();
 		$data[] = $this->dataValue->getArrayValue();

@@ -50,16 +50,18 @@ interface Snak extends \Serializable, \Hashable, \Immutable, \Comparable {
 	public function getType();
 
 	/**
-	 * Returns a string with serialization of the Snak.
-	 * Unserialization can be done via SnakObject::newFromSerialization
+	 * Returns an array representing the snak.
+	 * Roundtrips with SnakObject::newFromArray
 	 *
-	 * This method is similar to @see Serializable::serialize but different
-	 * in that it uses the snak type identifier rather then it's class name.
+	 * This method can be used for serialization when passing the array to for
+	 * instance json_encode which created behaviour similar to
+	 * @see Serializable::serialize but different in that it uses the
+	 * snak type identifier rather then it's class name.
 	 *
 	 * @since 0.3
 	 *
 	 * @return string
 	 */
-	public function getSerialization();
+	public function toArray();
 
 }

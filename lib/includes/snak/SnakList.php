@@ -116,4 +116,43 @@ class SnakList extends HashArray implements Snaks {
 		return $this->getByElementHash( $snakHash );
 	}
 
+	/**
+	 * @see Snaks::toArray
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function toArray() {
+		$snaks = array();
+
+		/**
+		 * @var Snak $snak
+		 */
+		foreach ( $this as $snak ) {
+			$snaks[] = $snak->toArray();
+		}
+
+		return $snaks;
+	}
+
+	/**
+	 * Factory for constructing a SnakList from its array representation.
+	 *
+	 * @since 0.3
+	 *
+	 * @param array $data
+	 *
+	 * @return Snaks
+	 */
+	public static function newFromArray( array $data ) {
+		$snaks = array();
+
+		foreach ( $data as $snak ) {
+			$snaks[] = SnakObject::newFromArray( $snak );
+		}
+
+		return new static( $snaks );
+	}
+
 }
