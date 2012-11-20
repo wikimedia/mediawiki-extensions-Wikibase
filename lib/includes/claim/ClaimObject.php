@@ -176,10 +176,10 @@ class ClaimObject implements Claim {
 	 *
 	 * @return array
 	 */
-	public function toArray() { // TODO: interface
+	public function toArray() {
 		return array(
-			'm' => $this->mainSnak->getSerialization(),
-			'q' => serialize( $this->qualifiers ), // TODO
+			'm' => $this->mainSnak->toArray(),
+			'q' => $this->qualifiers->toArray(),
 			'g' => $this->getGuid(),
 		);
 	}
@@ -194,13 +194,19 @@ class ClaimObject implements Claim {
 	 * @return Claim
 	 */
 	public static function newFromArray( array $data ) {
+		if ( !is_array( $data ) ) {
+			$data = json_decode( $data );
+			$data = (array)$data;
+		}
+
 		if ( array_key_exists( 'rank', $data ) ) {
 			return StatementObject::newFromArray( $data );
 		}
 
-		$mainSnak = SnakObject::newFromSerialization( $data['m'] );
+		$mainSnak = SnakObject::newFromArray( $data['m'] );
+		$qualifiers = SnakList::newFromArray( $data['q'] );
 
-		$claim = new static( $mainSnak, unserialize( $data['q'] ) ); // TODO
+		$claim = new static( $mainSnak, $qualifiers );
 		$claim->setGuid( $data['g'] );
 
 		return $claim;
