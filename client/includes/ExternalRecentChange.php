@@ -30,7 +30,7 @@ class ExternalRecentChange {
 			$isBot = $changeInfo['rc_bot'];
 		}
 
-        $this->mAttribs = array(
+		$this->mAttribs = array(
 			'rc_namespace'  => $title->getNamespace(),
 			'rc_title'      => $title->getDBkey(),
 			'rc_user' => \User::newFromId( 0 ),
