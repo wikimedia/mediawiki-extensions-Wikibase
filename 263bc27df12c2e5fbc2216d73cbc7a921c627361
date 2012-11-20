@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//8YE\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T11:27:18Z",
+      "side": 1,
+      "message": "Inverse logic? The check below should *not* be done if --force is given, right?",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//8X0\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T11:27:18Z",
+      "side": 1,
+      "message": "Would be nice to factor this out into a utility class, so we don\u0027t have code duplication between this, pollForChanges, and whatever else we may need.",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//8Xw\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T11:27:18Z",
+      "side": 1,
+      "message": "SQL injection here, $numDays needs to be checked. \n\nCasting to int should do the trick, but we should then at least check that it\u0027s \u003e0. Otherwise, a simple typo can cause the table to be emptied  and all change records to be lost.",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//8X4\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2012-11-20T11:27:18Z",
+      "side": 1,
+      "message": "Same as in pollForChanges, right? I guess we could put this into Utils, or make MaintenanceUtils or some such.",
+      "revId": "263bc27df12c2e5fbc2216d73cbc7a921c627361",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
