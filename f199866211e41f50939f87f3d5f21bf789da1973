@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//8Oc\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-20T15:26:45Z",
+      "side": 1,
+      "message": "maxium?",
+      "revId": "f199866211e41f50939f87f3d5f21bf789da1973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//8Oo\u003d",
+        "filename": "repo/maintenance/pruneChanges.php",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2012-11-20T15:26:45Z",
+      "side": 1,
+      "message": "maxium?",
+      "revId": "f199866211e41f50939f87f3d5f21bf789da1973",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
