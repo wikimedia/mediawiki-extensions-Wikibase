@@ -40,8 +40,11 @@ var dataValues = new( function( $, undefined ) {
 	 *
 	 * @since 0.1
 	 *
+	 * @throws {Error} If the a unknown data value type is given.
+	 *
 	 * @param {String} dataValueType
 	 * @param {*} data
+	 * @return dv.DataValue
 	 */
 	this.newDataValue = function( dataValueType, data ) {
 		return getDataValueConstructor( dataValueType ).newFromJSON( data );
