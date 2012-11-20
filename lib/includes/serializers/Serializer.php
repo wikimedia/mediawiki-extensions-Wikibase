@@ -1,7 +1,7 @@
 <?php
 
 namespace Wikibase;
-use ApiResult, MWException;
+use MWException;
 
 /**
  * Interface for objects that can transform variables of a certain type into an array
@@ -27,7 +27,7 @@ use ApiResult, MWException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.2
+ * @since 0.3
  *
  * @file
  * @ingroup Wikibase
@@ -40,7 +40,7 @@ interface Serializer {
 	/**
 	 * Turns the provided object to API output and returns this serialization.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
 	 * @param mixed $object
 	 *
@@ -51,19 +51,20 @@ interface Serializer {
 	/**
 	 * Sets the options to use during serialization.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
 	 * @param SerializationOptions $options
 	 */
 	public function setOptions( SerializationOptions $options );
 
 	/**
-	 * Sets the ApiResult to use during serialization.
+	 * Returns the ApiResult to use during serialization.
+	 * Modification of options via this getter is allowed.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
-	 * @param ApiResult $apiResult
+	 * @return SerializationOptions
 	 */
-	public function setApiResult( ApiResult $apiResult );
+	public function getOptions();
 
 }

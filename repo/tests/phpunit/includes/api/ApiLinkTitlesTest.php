@@ -153,7 +153,6 @@ class ApiLinkTitlesTest extends ApiModifyItemBase {
 			}
 
 			// check the response -------------------------------
-			$this->assertSuccess( $res, 'entity', 'sitelinks', 0 );
 			$this->assertEquals( \Wikibase\Item::ENTITY_TYPE,  $res['entity']['type'] );
 			if ( $handle ) {
 				$this->assertEquals( 1, count( $res['entity']['sitelinks'] ), "expected exactly one sitelinks structure" );

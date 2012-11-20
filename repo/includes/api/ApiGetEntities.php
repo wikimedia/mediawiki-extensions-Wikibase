@@ -93,29 +93,15 @@ class ApiGetEntities extends Api {
 		else {
 			$props = $params['props'];
 		}
-		$options = new EntitySerializationOptions();
-		$options->setLanguages( $params['languages'] );
-		$options->setSortDirection( $params['dir'] );
-		$options->setProps( $props );
-		$options->setUseKeys( $this->getUsekeys() );
 
-		$entitySerializer = new EntitySerializer( $this->getResult(), $options );
-		$itemSerializer = new ItemSerializer( $this->getResult(), $options );
-
-		// loop over all items
 		foreach ( $params['ids'] as $entityId ) {
-			switch ( EntityId::newFromPrefixedId( $entityId )->getEntityType() ) {
-				case Item::ENTITY_TYPE:
-					$this->handleEntity( $entityId, $params, $props, $itemSerializer );
-					break;
-				default:
-					$this->handleEntity( $entityId, $params, $props, $entitySerializer );
-			}
+			$this->handleEntity( $entityId, $params, $props );
 		}
 
-		if ( !$this->getUsekeys() ) {
+		if ( $this->getResult()->getIsRawMode() ) {
 			$this->getResult()->setIndexedTagName_internal( array( 'entities' ), 'entity' );
 		}
+
 		$success = true;
 
 		$this->getResult()->addValue(
@@ -135,14 +121,12 @@ class ApiGetEntities extends Api {
 	 * @param string $id
 	 * @param array $params
 	 * @param array $props
-	 * @param EntitySerializer $entitySerializer
 	 *
 	 * @throws MWException
 	 */
-	protected function handleEntity( $id, array $params, array $props, EntitySerializer $entitySerializer ) {
+	protected function handleEntity( $id, array $params, array $props ) {
 		wfProfileIn( "Wikibase-" . __METHOD__ );
 
-		$entityFactory = EntityFactory::singleton();
 		$entityContentFactory = EntityContentFactory::singleton();
 
 		$res = $this->getResult();
@@ -161,6 +145,7 @@ class ApiGetEntities extends Api {
 			$page = $entityContentFactory->getWikiPageForId( $id );
 
 			if ( $page->exists() ) {
+
 				// as long as getWikiPageForId only returns ids for legal items this holds
 				/**
 				 * @var $entityContent EntityContent
@@ -190,6 +175,15 @@ class ApiGetEntities extends Api {
 				}
 
 				$entity = $entityContent->getEntity();
+
+				$options = new EntitySerializationOptions();
+				$options->setLanguages( $params['languages'] );
+				$options->setSortDirection( $params['dir'] );
+				$options->setProps( $props );
+				$options->setIndexTags( $this->getResult()->getIsRawMode() );
+
+				$entitySerializer = EntitySerializer::newForEntity( $entity, $options );
+
 				$entitySerialization = $entitySerializer->getSerialized( $entity );
 
 				foreach ( $entitySerialization as $key => $value ) {
@@ -224,8 +218,8 @@ class ApiGetEntities extends Api {
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'props' => array(
-				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls', 'statements' ),
-				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|statements',
+				ApiBase::PARAM_TYPE => array( 'info', 'sitelinks', 'aliases', 'labels', 'descriptions', 'sitelinks/urls', 'claims' ),
+				ApiBase::PARAM_DFLT => 'info|sitelinks|aliases|labels|descriptions|claims',
 				ApiBase::PARAM_ISMULTI => true,
 			),
 			'sort' => array(

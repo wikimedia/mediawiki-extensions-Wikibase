@@ -68,7 +68,7 @@ class ClaimsSerializerTest extends SerializerBaseTest {
 			new StatementObject( new PropertyNoValueSnak( $propertyId ) ),
 		);
 
-		$claimSerializer = new \Wikibase\ClaimSerializer( new \ApiResult( new \ApiMain() ) );
+		$claimSerializer = new \Wikibase\ClaimSerializer();
 
 		$validArgs[] = array(
 			new \Wikibase\ClaimList( $claims ),
