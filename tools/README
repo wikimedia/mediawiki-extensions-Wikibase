@@ -1,0 +1,23 @@
+The tools folder of Wikibase has scripts for running runJobs.php as a daemon process.
+
+To use these on an Ubuntu setup:
+
+1) create a config file in /etc/wikibase.conf and include your MW install directory, such as:
+
+MW_INSTALL_DIR="/var/www/common/wikidata-client"
+
+2) jobs-run.sh should be put in /usr/local/bin
+
+3) jobrunner goes in /etc/init.d
+
+The jobs-run.sh can be put somewhere else that is accessible in $PATH and then
+adjust the jobrunner (in init.d) accordingly.
+
+CREDITS
+
+These are simplified scripts for running the jobs. The scripts are based on the jobrunner scripts
+used by the Wikimedia Foundation.
+
+The original job runner scripts can be found in the modules/mediawiki_new folder of the puppet repo:
+
+https://gerrit.wikimedia.org/r/gitweb?p=operations/puppet.git;a=tree;h=HEAD;hb=HEAD

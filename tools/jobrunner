@@ -1,0 +1,52 @@
+#!/bin/bash
+
+. /lib/lsb/init-functions
+
+source /etc/wikibase.conf
+
+test -x /usr/bin/php || exit 0
+
+case "$1" in
+	start)
+		log_daemon_msg "Starting MediaWiki job runner"
+		touch $JR_PID_FILE $JR_LOGFILE
+		chown $JR_USER:$JR_USER $JR_PID_FILE $JR_LOGFILE
+		echo "starting job runner" >> $JR_LOGFILE
+		start-stop-daemon --start --background --quiet \
+			--chuid $JR_USER --nicelevel 20 \
+			--make-pidfile --pidfile $JR_PID_FILE \
+			--startas $JR_SCRIPT \
+			-- -t $JR_TIMEOUT
+		log_end_msg $?
+		;;
+	stop)
+		log_daemon_msg "Stopping MediaWiki job runner"
+		start-stop-daemon --stop --quiet --pidfile $JR_PID_FILE --retry 60
+		log_end_msg $?
+		;;
+	restart|force-reload)
+		log_daemon_msg "Restarting MediaWiki job runner"
+		start-stop-daemon --stop --quiet --pidfile $JR_PID_FILE --retry 60
+		start-stop-daemon --start --background --quiet \
+			--chuid $JR_USER --nicelevel 20 \
+			--make-pidfile --pidfile $JR_PID_FILE \
+			--startas $JR_SCRIPT \
+			-- -t $JR_TIMEOUT
+		log_end_msg $?
+		;;
+	graceful|reload)
+		log_daemon_msg "Gracefully restarting MediaWiki job runner"
+		start-stop-daemon --stop --signal HUP --quiet --pidfile $JR_PID_FILE --retry 60
+		start-stop-daemon --start --background --quiet \
+			--chuid $JR_USER --nicelevel 20 \
+			--make-pidfile --pidfile $JR_PID_FILE \
+			--startas $JR_SCRIPT \
+		log_end_msg $?
+		;;
+	*)
+		log_action_msg "Usage: /etc/init.d/jobrunner {start|stop|restart|reload|force-reload|graceful}"
+		exit 2
+		;;
+esac
+
+exit 0
