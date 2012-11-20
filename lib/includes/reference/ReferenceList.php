@@ -110,4 +110,46 @@ class ReferenceList extends \SplObjectStorage implements References {
 		return new static( $references );
 	}
 
+	/**
+	 * The hash is purely valuer based. Order of the elements in the array is not held into account.
+	 *
+	 * Note: we cannot implement Hashable interface by having this be getHash since PHP 5.4
+	 * introduced a similarly named method in SplObjectStorage.
+	 *
+	 * @since 0.3
+	 *
+	 * @internal param MapHasher $mapHasher
+	 *
+	 * @return string
+	 */
+	public function getValueHash() {
+		// We cannot have this as optional arg, because then we're no longer
+		// implementing the Hashable interface properly according to PHP...
+		$args = func_get_args();
+
+		/**
+		 * @var MapHasher $hasher
+		 */
+		$hasher = array_key_exists( 0, $args ) ? $args[0] : new MapValueHasher();
+
+		return $hasher->hash( $this );
+	}
+
+	/**
+	 * @see Comparable::equals
+	 *
+	 * The comparison is done purely value based, ignoring the order of the elements in the array.
+	 *
+	 * @since 0.3
+	 *
+	 * @param mixed $mixed
+	 *
+	 * @return boolean
+	 */
+	public function equals( $mixed ) {
+		return is_object( $mixed )
+			&& $mixed instanceof ReferenceList
+			&& $this->getValueHash() === $mixed->getValueHash();
+	}
+
 }

@@ -155,6 +155,7 @@ abstract class SnakObject implements Snak {
 	 * @param array $data
 	 *
 	 * @return Snak
+	 * @throws MWException
 	 */
 	public static function newFromArray( array $data ) {
 		$snakJar = array(
@@ -163,18 +164,28 @@ abstract class SnakObject implements Snak {
 			'somevalue' => '\Wikibase\PropertySomeValueSnak',
 		);
 
-		$reflector = new \ReflectionClass( $snakJar[array_shift( $data )] );
-
-		$data[0] = new EntityId( Property::ENTITY_TYPE, $data[0] );
-
-		if ( count( $data ) > 1 ) {
-			$data[1] = \DataValues\DataValueFactory::singleton()->newDataValue( $data[1], $data[2] );
-			unset( $data[2] );
+		if ( count( $data ) < 2 ) {
+			throw new MWException( __METHOD__ . ' got an array with to few elements' );
 		}
 
-		$instance = $reflector->newInstanceArgs( $data );
+		$snakType = array_shift( $data );
 
-		return $instance;
+		if ( !array_key_exists( $snakType, $snakJar ) ) {
+			throw new MWException( 'Cannot construct a snak from array with unknown snak type "' . $snakType . '"' );
+		}
+
+		$snakClass = $snakJar[$snakType];
+		$data[0] = new EntityId( Property::ENTITY_TYPE, $data[0] );
+
+		if ( $snakType === 'value' ) {
+			return new $snakClass(
+				$data[0],
+				\DataValues\DataValueFactory::singleton()->newDataValue( $data[1], $data[2] )
+			);
+		}
+		else {
+			return new $snakClass( $data[0] );
+		}
 	}
 
 }

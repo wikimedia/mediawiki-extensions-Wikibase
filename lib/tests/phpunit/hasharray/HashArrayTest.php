@@ -107,4 +107,14 @@ abstract class HashArrayTest extends \GenericArrayObjectTest {
 		$this->assertTrue( true );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @param \Wikibase\HashArray $array
+	 */
+	public function testEquals( HashArray $array ) {
+		$this->assertTrue( $array->equals( $array ) );
+		$this->assertFalse( $array->equals( 42 ) );
+	}
+
 }
