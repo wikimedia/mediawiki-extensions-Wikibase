@@ -103,11 +103,19 @@ class EntitySerializationOptions extends SerializationOptions {
 	/**
 	 * The optional properties of the entity that should be included in the serialization.
 	 *
+	 * TODO: include all props by default, so callers don't have to go specify the
+	 * whole list (inc entity type specific props) all the time.
+	 *
 	 * @since 0.2
 	 *
 	 * @var array of string
 	 */
-	protected $props = array();
+	protected $props = array(
+		'aliases',
+		'descriptions',
+		'labels',
+		'claims',
+	);
 
 	/**
 	 * The language codes of the languages for which internationalized data (ie descriptions) should be returned.
@@ -187,6 +195,15 @@ class EntitySerializationOptions extends SerializationOptions {
 	 */
 	public function getProps() {
 		return $this->props;
+	}
+
+	/**
+	 * Adds a prop to the list of optionally included elements of the entity.
+	 *
+	 * @since 0.3
+	 */
+	public function addProp( $name ) {
+		$this->props[] = $name;
 	}
 
 	/**

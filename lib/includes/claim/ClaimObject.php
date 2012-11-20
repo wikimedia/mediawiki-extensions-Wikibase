@@ -166,4 +166,26 @@ class ClaimObject implements Claim {
 		$this->guid = $guid;
 	}
 
+	/**
+	 * Parses a claim key to prefixed entity id and claim GUID.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $claimKey
+	 *
+	 * @return array
+	 * First element is a prefixed entity id
+	 * Second element is either null or a claim GUID
+	 * @throws MWException
+	 */
+	public static function parseKey( $claimKey ) {
+		$keyParts = explode( '$', $claimKey );
+
+		if ( count( $keyParts ) !== 2 ) {
+			throw new MWException( 'A claim key should have a single $ in it' );
+		}
+
+		return $keyParts;
+	}
+
 }
