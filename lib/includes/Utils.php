@@ -505,4 +505,97 @@ final class Utils {
 		return $ns < 100;
 	}
 
+	/**
+	 * Check the given PID to see if it is alive
+	 *
+	 * @since 0.3
+	 *
+	 * @param int $pid the process identifier to check
+	 *
+	 * @return boolean true if the process exist
+	 */
+	public static function isPidAlive( $pid ) {
+		// Are we anything but Windows, i.e. some kind of Unix?
+		if ( strtoupper( substr( PHP_OS, 0, 3 ) ) !== 'WIN' ) {
+			return !!posix_getsid( $pid );
+		}
+		// Welcome to Redmond
+		else {
+			$processes = explode( "\n", shell_exec( "tasklist.exe" ) );
+			if ( $processes !== false && count( $processes ) > 0 ) {
+				foreach( $processes as $process ) {
+					if( strlen( $process ) > 0
+						&& ( strpos( "Image Name", $process ) === 0
+						|| strpos( "===", $process ) === 0 ) ) {
+						continue;
+					}
+					$matches = false;
+					preg_match( "/^(\D*)(\d+).*$/", $process, $matches );
+					$processid = 0;
+					if ( $matches !== false && count ($matches) > 1 ) {
+						$processid = $matches[ 2 ];
+					}
+					if ( $processid === $pid ) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Check if the task is already running
+	 *
+	 * Note that this method creates the file if it is missing.
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $pidfile the place where the pid is stored
+	 * @param boolean $force make the function skip the test and always return true
+	 *
+	 * @return boolean true if the process exist
+	 */
+	public static function isAlreadyRunning( $pidfile, $force = false ) {
+		if ( $force === true ) {
+			file_put_contents( $pidfile, getmypid() );
+			return true;
+		}
+		else {
+			// check if the process still exist and is alive
+			if ( file_exists( $pidfile ) ) {
+				$pid = file_get_contents( $pidfile );
+				if ( Utils::isPidAlive( $pid ) === true ) {
+					return false;
+				}
+			}
+			file_put_contents( $pidfile, getmypid() );
+			return true;
+		}
+	}
+
+	/**
+	 * Create a pid file name
+	 *
+	 * @since 0.3
+	 *
+	 * @param string $module a context for this pid file, prepended to the name
+	 * @param string $wikiId a context for this pid file, appended to the name
+	 *
+	 * @return boolean true if the process exist
+	 */
+	public static function makePidFilename( $module, $wikiId ) {
+		// Build the filename
+		$pidfileName = preg_replace('/[^a-z0-9]/i', '', $module ) . '_' . preg_replace('/[^a-z0-9]/i', '', $wikiId ) . '.pid';
+		// Let's see if we have a /var/run directory and if we can write to it (i.e. we're root)
+		if ( is_dir( '/var/run/' ) && is_writable( '/var/run/' ) ) {
+			$pidfile = '/var/run/' . $pidfileName;
+		}
+		// else use the temporary directory
+		else {
+			$pidfilePath = str_replace( '\\', '/', sys_get_temp_dir() );
+			$pidfile = $pidfilePath . '/' . $pidfileName;
+		}
+		return $pidfile;
+	}
 }
