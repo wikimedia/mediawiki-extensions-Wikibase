@@ -31,7 +31,7 @@ use MWException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyValueSnak extends PropertySnakObject {
+class PropertyValueSnak extends SnakObject {
 
 	/**
 	 * @since 0.1
@@ -91,6 +91,22 @@ class PropertyValueSnak extends PropertySnakObject {
 			new EntityId( Property::ENTITY_TYPE, $propertyId ),
 			$dataValue
 		);
+	}
+
+	/**
+	 * @see SnakObject::getSerializationData
+	 *
+	 * @since 0.3
+	 *
+	 * @return array
+	 */
+	protected function getSerializationData() {
+		$data = parent::getSerializationData();
+
+		$data[] = $this->dataValue->getType();
+		$data[] = $this->dataValue->getArrayValue();
+
+		return $data;
 	}
 
 	/**

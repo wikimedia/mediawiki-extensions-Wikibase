@@ -130,4 +130,13 @@ abstract class SnakObjectTest extends \MediaWikiTestCase {
 		$this->assertEquals( $hash, $omnomnom->getHash() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetPropertyId( Snak $omnomnom ) {
+		$id = $omnomnom->getPropertyId();
+		$this->assertInstanceOf( '\Wikibase\EntityId', $id );
+		$this->assertEquals( $id, $omnomnom->getPropertyId() );
+	}
+
 }

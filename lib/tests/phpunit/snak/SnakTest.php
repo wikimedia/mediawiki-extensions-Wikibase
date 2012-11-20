@@ -126,4 +126,20 @@ class SnakTest extends \MediaWikiTestCase {
 		$this->assertFalse( $snak->equals( new \Wikibase\PropertyNoValueSnak( $id43 ) ) );
 	}
 
+	/**
+	 * @dataProvider snakProvider
+	 * @param Snak $snak
+	 */
+	public function testGetSerialization( Snak $snak ) {
+		$serialization = $snak->getSerialization();
+
+		$this->assertInternalType( 'string', $serialization, 'getSerialization should return string' );
+
+		$copy = \Wikibase\SnakObject::newFromSerialization( $serialization );
+
+		$this->assertInstanceOf( '\Wikibase\Snak', $copy, 'newFromSerialization should return object implementing Snak' );
+
+		$this->assertTrue( $snak->equals( $copy ), 'getSerialization newFromSerialization roundtrip should work' );
+	}
+
 }

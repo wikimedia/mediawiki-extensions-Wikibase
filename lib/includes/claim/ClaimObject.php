@@ -61,7 +61,7 @@ class ClaimObject implements Claim {
 	 * @since 0.1
 	 *
 	 * @param Snak $mainSnak
-	 * @param null|Snaks $qualifiers All elements in the Snaks object must be PropertySnak objects
+	 * @param null|Snaks $qualifiers
 	 */
 	public function __construct( Snak $mainSnak, Snaks $qualifiers = null ) {
 		$this->mainSnak = $mainSnak;
@@ -178,7 +178,7 @@ class ClaimObject implements Claim {
 	 */
 	public function toArray() { // TODO: interface
 		return array(
-			'm' => serialize( $this->mainSnak ), // TODO
+			'm' => $this->mainSnak->getSerialization(),
 			'q' => serialize( $this->qualifiers ), // TODO
 			'g' => $this->getGuid(),
 		);
@@ -198,7 +198,9 @@ class ClaimObject implements Claim {
 			return StatementObject::newFromArray( $data );
 		}
 
-		$claim = new static( unserialize( $data['m'] ), unserialize( $data['q'] ) ); // TODO
+		$mainSnak = SnakObject::newFromSerialization( $data['m'] );
+
+		$claim = new static( $mainSnak, unserialize( $data['q'] ) ); // TODO
 		$claim->setGuid( $data['g'] );
 
 		return $claim;

@@ -49,4 +49,17 @@ interface Snak extends \Serializable, \Hashable, \Immutable, \Comparable {
 	 */
 	public function getType();
 
+	/**
+	 * Returns a string with serialization of the Snak.
+	 * Unserialization can be done via SnakObject::newFromSerialization
+	 *
+	 * This method is similar to @see Serializable::serialize but different
+	 * in that it uses the snak type identifier rather then it's class name.
+	 *
+	 * @since 0.3
+	 *
+	 * @return string
+	 */
+	public function getSerialization();
+
 }
