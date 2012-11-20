@@ -31,7 +31,40 @@ use MWException;
  */
 class SerializationOptions {
 
+	/**
+	 * @since 0.3
+	 * @var boolean
+	 */
+	protected $indexTags = false;
 
+	/**
+	 * Sets if tags should be indexed.
+	 * The MediaWiki API needs this when building API results in formats such as XML.
+	 *
+	 * @since 0.3
+	 *
+	 * @param boolean $indexTags
+	 *
+	 * @throws MWException
+	 */
+	public function setIndexTags( $indexTags ) {
+		if ( !is_bool( $indexTags ) ) {
+			throw new MWException( 'Expected boolean, got something else' );
+		}
+
+		$this->indexTags = $indexTags;
+	}
+
+	/**
+	 * Returns if tags should be indexed.
+	 *
+	 * @since 0.3
+	 *
+	 * @return boolean
+	 */
+	public function shouldIndexTags() {
+		return $this->indexTags;
+	}
 
 }
 
@@ -66,15 +99,6 @@ class EntitySerializationOptions extends SerializationOptions {
 	const SORT_ASC = 'ascending';
 	const SORT_DESC = 'descending';
 	const SORT_NONE = 'none';
-
-	/**
-	 * If keys should be used in the serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @var boolean
-	 */
-	protected $useKeys = true;
 
 	/**
 	 * The optional properties of the entity that should be included in the serialization.
@@ -117,6 +141,7 @@ class EntitySerializationOptions extends SerializationOptions {
 	 * Sets if keys should be used in the serialization.
 	 *
 	 * @since 0.2
+	 * @deprecated
 	 *
 	 * @param boolean $useKeys
 	 *
@@ -127,18 +152,19 @@ class EntitySerializationOptions extends SerializationOptions {
 			throw new MWException( __METHOD__ . ' expects a boolean' );
 		}
 
-		$this->useKeys = $useKeys;
+		$this->indexTags = $useKeys;
 	}
 
 	/**
 	 * Returns if keys should be used in the serialization.
 	 *
 	 * @since 0.2
+	 * @deprecated
 	 *
 	 * @return boolean
 	 */
 	public function shouldUseKeys() {
-		return $this->useKeys;
+		return !$this->indexTags;
 	}
 
 	/**

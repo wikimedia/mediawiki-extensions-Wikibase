@@ -47,7 +47,6 @@ use ApiTestCase;
  */
 class ApiGetEntitiesTest extends ApiModifyItemBase {
 
-
 	/**
 	 * @dataProvider provideItemHandles
 	 */
@@ -173,7 +172,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 	 * @group API
 	 */
 	public function testGetEntitiesByBadId( ) {
-		$badid =  123456789;
+		$badid = 'q123456789';
 		list( $res,, ) = $this->doApiRequest( array(
 			'action' => 'wbgetentities',
 			'ids' => $badid,
@@ -500,7 +499,7 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			foreach ( array( 'sitelinks' => 'site', 'alias' => false, 'labels' => 'language', 'descriptions' => 'language' ) as $prop => $field) {
 				if ( array_key_exists( $prop, $res['entities'][$n] ) ) {
 					foreach ( $res['entities'][$n][$prop] as $key => $value ) {
-						$this->assertTrue( is_integer( $key ) );
+						$this->assertTrue( is_string( $key ) );
 						if ( $field !== false ) {
 							$this->assertArrayHasKey( $field, $value );
 							$this->assertTrue( is_string( $value[$field] ) );
@@ -516,10 +515,30 @@ class ApiGetEntitiesTest extends ApiModifyItemBase {
 			'xmlfm', 'yaml', 'yamlfm', 'rawfm', 'txt', 'txtfm', 'dbg', 'dbgfm',
 			'dump', 'dumpfm', 'none', );
 		$calls = array();
+
 		foreach ( $formats as $format ) {
-			$calls[] = array( $format, \Wikibase\Api::usekeys( $format ) );
+			$calls[] = array( $format, self::usekeys( $format ) );
 		}
+
 		return $calls;
+	}
+
+	protected static function usekeys( $format ) {
+		static $withKeys = false;
+
+		if ( $withKeys === false ) {
+			// Which formats to inject keys into, undefined entries are interpreted as true
+			// TODO: This array must be patched if awailable formats that does NOT support
+			// usekeys are added, changed or removed.
+			$withKeys = array(
+				'wddx' => false,
+				'wddxfm' => false,
+				'xml' => false,
+				'xmlfm' => false,
+			);
+		}
+
+		return isset( $withKeys[$format] ) ? $withKeys[$format] : true;
 	}
 
 }

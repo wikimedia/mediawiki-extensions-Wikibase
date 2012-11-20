@@ -21,7 +21,7 @@ use ApiResult, MWException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.2
+ * @since 0.3
  *
  * @file
  * @ingroup Wikibase
@@ -32,18 +32,9 @@ use ApiResult, MWException;
 abstract class SerializerObject implements Serializer {
 
 	/**
-	 * The options to use during serialization.
-	 *
-	 * @since 0.2
-	 *
-	 * @var ApiResult
-	 */
-	private $apiResult;
-
-	/**
 	 * The ApiResult to use during serialization.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
 	 * @var SerializationOptions
 	 */
@@ -52,14 +43,12 @@ abstract class SerializerObject implements Serializer {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
 	 * @param ApiResult $apiResult
 	 * @param SerializationOptions|null $options
 	 */
-	public function __construct( ApiResult $apiResult, SerializationOptions $options = null ) {
-		$this->apiResult = $apiResult;
-
+	public function __construct( SerializationOptions $options = null ) {
 		if ( $options === null ) {
 			$options = new SerializationOptions();
 		}
@@ -70,7 +59,7 @@ abstract class SerializerObject implements Serializer {
 	/**
 	 * @see ApiSerializer::setOptions
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
 	 * @param SerializationOptions $options
 	 */
@@ -79,36 +68,29 @@ abstract class SerializerObject implements Serializer {
 	}
 
 	/**
-	 * @see ApiSerializer::setApiResult
+	 * In case the array contains indexed values (in addition to named),
+	 * give all indexed values the given tag name. This function MUST be
+	 * called on every array that has numerical indexes.
 	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
-	 * @param ApiResult $apiResult
+	 * @param array $array
+	 * @param string $tag
 	 */
-	public final function setApiResult( ApiResult $apiResult ) {
-		$this->apiResult = $apiResult;
+	protected function setIndexedTagName( array &$array, $tag ) {
+		if ( $this->options->shouldIndexTags() ) {
+			$array['_element'] = $tag;
+		}
 	}
 
 	/**
-	 * Returns the ApiResult to use during serialization.
+	 * @see ApiSerializer::getOptions
 	 *
-	 * @since 0.2
-	 *
-	 * @return ApiResult
-	 * @throws MWException
-	 */
-	protected final function getResult() {
-		return $this->apiResult;
-	}
-
-	/**
-	 * Returns the ApiResult to use during serialization.
-	 *
-	 * @since 0.2
+	 * @since 0.3
 	 *
 	 * @return SerializationOptions
 	 */
-	protected final function getOptions() {
+	public final function getOptions() {
 		return $this->options;
 	}
 

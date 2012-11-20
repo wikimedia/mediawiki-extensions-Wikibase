@@ -46,8 +46,8 @@ class ClaimsSerializer extends SerializerObject {
 			throw new MWException( 'ClaimsSerializer can only serialize Claims objects' );
 		}
 
-		$claimSerializer = new ClaimSerializer( $this->getResult(), $this->options );
-		$serializer = new ByPropertyListSerializer( 'claim', $claimSerializer, $this->getResult(), $this->options );
+		$claimSerializer = new ClaimSerializer( $this->options );
+		$serializer = new ByPropertyListSerializer( 'claim', $claimSerializer, $this->options );
 
 		return $serializer->getSerialized( $claims );
 	}

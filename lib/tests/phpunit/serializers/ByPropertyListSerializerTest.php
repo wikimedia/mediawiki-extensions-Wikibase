@@ -52,8 +52,8 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 	 * @return ByPropertyListSerializer
 	 */
 	protected function getInstance() {
-		$snakSetailizer = new \Wikibase\SnakSerializer( new \ApiResult( new \ApiMain() ) );
-		return new ByPropertyListSerializer( 'test', $snakSetailizer, new \ApiResult( new \ApiMain() ) );
+		$snakSetailizer = new \Wikibase\SnakSerializer();
+		return new ByPropertyListSerializer( 'test', $snakSetailizer );
 	}
 
 	/**

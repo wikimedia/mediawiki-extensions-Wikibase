@@ -57,7 +57,8 @@ class ApiGetClaims extends Api {
 	 */
 	protected function outputClaims( array $claims ) {
 		// TODO: hold into account props parameter
-		$serializer = new ClaimsSerializer( $this->getResult() );
+		$serializer = new ClaimsSerializer();
+		$serializer->getOptions()->setIndexTags( $this->getResult()->getIsRawMode() );
 		$serializedClaims = $serializer->getSerialized( new ClaimList( $claims ) );
 
 		$this->getResult()->addValue(

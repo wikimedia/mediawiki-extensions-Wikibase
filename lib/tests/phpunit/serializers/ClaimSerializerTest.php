@@ -118,7 +118,7 @@ class ClaimSerializerTest extends SerializerBaseTest {
 
 		$statement->setRank( $rank );
 
-		$serializer = new \Wikibase\ClaimSerializer( new \ApiResult( new \ApiMain() ) );
+		$serializer = new \Wikibase\ClaimSerializer();
 
 		$serialization = $serializer->getSerialized( $statement );
 
