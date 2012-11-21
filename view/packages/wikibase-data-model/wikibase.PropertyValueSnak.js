@@ -28,11 +28,6 @@ var PARENT = wb.Snak,
  */
 wb.PropertyValueSnak = wb.utilities.inherit( PARENT, constructor, {
 	/**
-	 * @see wb.Snak.TYPE
-	 */
-	TYPE: 'value',
-
-	/**
 	 * @type dv.DataValue
 	 */
 	_value: null,
@@ -56,5 +51,10 @@ wb.PropertyValueSnak = wb.utilities.inherit( PARENT, constructor, {
 		return json;
 	}
 } );
+
+/**
+ * @see wb.Snak.TYPE
+ */
+wb.PropertyValueSnak.TYPE = 'value';
 
 }( wikibase, dataValues, jQuery ) );
