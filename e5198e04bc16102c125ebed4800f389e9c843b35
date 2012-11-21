@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7d4\u003d",
+        "filename": "repo/includes/store/sql/SqlStore.php",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-21T11:16:42Z",
+      "side": 1,
+      "message": "Now we have the stuff twice - once above this line and once below",
+      "revId": "e5198e04bc16102c125ebed4800f389e9c843b35",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
