@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "AAADZH//7go\u003d",
+        "filename": "lib/includes/serializers/EntitySerializer.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-21T10:45:59Z",
+      "side": 1,
+      "message": "baaaaaaaaaaaah baaaaaaaaaaaaaaaaaah meeeeeeeeeeeeeeeeh meeeeeeeeeeeeeeh",
+      "parentUuid": "AAADZH//7hw\u003d",
+      "revId": "880768aec7536cf383bc68dec6ff51dbd404e8b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "AAADZH//7iE\u003d",
         "filename": "lib/includes/serializers/SerializerObject.php",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2012-11-21T10:34:39Z",
       "side": 1,
       "message": "Not sure if this is a good idea. This implements knowledge about how a later encapsulating class will parse its internal data.",
+      "revId": "880768aec7536cf383bc68dec6ff51dbd404e8b7",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7gk\u003d",
+        "filename": "lib/includes/serializers/SerializerObject.php",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 44
+      },
+      "writtenOn": "2012-11-21T10:45:59Z",
+      "side": 1,
+      "message": "Agree it\u0027s not ideal. Don\u0027t have a better idea though, so please suggest one :)",
+      "parentUuid": "AAADZH//7iE\u003d",
       "revId": "880768aec7536cf383bc68dec6ff51dbd404e8b7",
       "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
       "unresolved": false
