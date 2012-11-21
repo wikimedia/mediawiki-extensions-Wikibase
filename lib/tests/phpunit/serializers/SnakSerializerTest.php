@@ -80,7 +80,7 @@ class SnakSerializerTest extends SerializerBaseTest {
 			array(
 				'snaktype' => 'value',
 				'property' => 'p42',
-				'value' => $dataValue->getArrayValue(),
+				'datavalue' => $dataValue->toArray(),
 			)
 		);
 

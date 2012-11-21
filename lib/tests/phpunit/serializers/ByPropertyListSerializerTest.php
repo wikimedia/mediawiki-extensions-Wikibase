@@ -101,7 +101,7 @@ class ByPropertyListSerializerTest extends SerializerBaseTest {
 					1 => array(
 						'snaktype' => 'value',
 						'property' => 'p2',
-						'value' => $dataValue0->getArrayValue(),
+						'datavalue' => $dataValue0->toArray(),
 					),
 				),
 			),

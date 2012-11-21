@@ -58,7 +58,7 @@ class SnakSerializer extends SerializerObject {
 			/**
 			 * @var PropertyValueSnak $snak
 			 */
-			$serialization['value'] = $snak->getDataValue()->getArrayValue();
+			$serialization['datavalue'] = $snak->getDataValue()->toArray();
 		}
 
 		return $serialization;
