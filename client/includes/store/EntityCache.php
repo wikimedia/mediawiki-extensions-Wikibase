@@ -62,11 +62,11 @@ interface EntityCache {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Entity $entity
+	 * @param EntityId $id
 	 *
 	 * @return boolean
 	 */
-	public function hasEntity( Entity $entity );
+	public function hasEntity( EntityId $id );
 
 	/**
 	 * Removes the provided entity from the cache (if present).
