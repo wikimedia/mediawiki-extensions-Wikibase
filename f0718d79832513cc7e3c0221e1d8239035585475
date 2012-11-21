@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAADZH//7fk\u003d",
+        "filename": "repo/tests/selenium/special/set_label_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-21T11:03:26Z",
+      "side": 1,
+      "message": "there is a config var for the id prefix: please use ITEM_ID_PREFIX",
+      "revId": "f0718d79832513cc7e3c0221e1d8239035585475",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAADZH//7fo\u003d",
+        "filename": "repo/tests/selenium/special/set_label_spec.rb",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 170
+      },
+      "writtenOn": "2012-11-21T11:03:26Z",
+      "side": 1,
+      "message": "there is a config var for the id prefix: please use ITEM_ID_PREFIX",
+      "revId": "f0718d79832513cc7e3c0221e1d8239035585475",
+      "serverId": "e9e9afe9-4712-486d-8885-f54b72dd1951",
+      "unresolved": false
+    }
+  ]
+}
